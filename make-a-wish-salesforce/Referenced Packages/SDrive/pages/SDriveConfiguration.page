@@ -1,0 +1,729 @@
+<apex:page controller="cg.SDriveConfigurationController" id="page" action="{!validate}">
+
+ <apex:form rendered="{!!isAdmin}">
+    <apex:pageBlock >
+        <apex:PageMessage summary="Content cannot be displayed: You do not have sufficient privileges to access the S-Drive Configuration Page. Please contact your administrator for further information" severity="warning" strength="3"/>
+        <apex:pageBlockButtons >
+            <apex:commandButton action="{!goToHomePage}" value="Go to Home Page"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+</apex:form>
+ 
+<apex:form id="formElement" rendered="{!isAdmin}"> 
+   <apex:actionFunction name="enableVersion" action="{!enableVersion}">
+   </apex:actionFunction>
+    <apex:pageBlock title="S-Drive Configuration" mode="detail" id="pageBlockElement">  
+        <apex:pageBlockButtons id="pblockButtons">
+        
+            <apex:commandButton action="{!save}" onclick="disablePicklists();" value="Save" disabled="{!!bIsShowSaveButton}"/>
+                 
+            <apex:commandButton action="{!goToHomePage}" value="Cancel"/>       
+        </apex:pageBlockButtons>
+        <apex:PageMessages />
+        <apex:PageMessage summary="You have successfully saved configuration changes!!! " severity="confirm" strength="3" rendered="{!bIsShowSuccessMessage}" />
+        <apex:pageBlockSection columns="2" collapsible="true">
+             <apex:facet name="header">
+                <span style="color:black">S-Drive System Information</span>
+            </apex:facet>
+             
+            <apex:pageBlockSectionItem helpText="Bucket name.">
+                <apex:outputLabel value="Bucket Name"/>
+                <apex:inputTextarea value="{!sBucketNameValue}" readonly="true" cols="40" rows="1" style="background-color: #D1D1BC"/>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem helpText="You can update Amazon S3 Credentials and Bucket Name.">   
+                <apex:outputLabel value="Update Amazon S3 Credentials and Bucket Name"/>         
+                <apex:commandlink target="_self" value="Click here to update" action="{!URLFOR($Page.SDriveManualAuthorization)}" />
+            </apex:pageBlockSectionItem> 
+            
+            <apex:pageBlockSectionItem helpText="Information about S-Drive account, its organizations, usage and billing.">   
+                <apex:outputLabel value="S-Drive Account, Usage and Billing Information"/>         
+                <apex:commandlink value="Click here to access S-Drive Portal" title="https://portal.sdriveapp.com" action="https://portal.sdriveapp.com" target="_blank"/>
+            </apex:pageBlockSectionItem>
+            
+            
+         </apex:pageBlockSection>
+            
+        <apex:pageBlockSection columns="2" collapsible="true" id="generalSettingsBlockSection"> 
+            <apex:facet name="header">
+                <span style="color:black">General Settings</span>
+            </apex:facet>
+            
+             
+            <apex:pageBlockSectionItem id="enableDownloadManagerBlockItem" helpText="Enable/Disable Download Manager. This setting is for S-Drive Folders.">
+                <apex:outputLabel value="Enable Download Manager"/> 
+                <!--<apex:inputCheckbox id="enableDownloadManagerCheckbox" value="{!bIsEnableDownloadManager}" selected="{!bIsEnableDownloadManager}" onclick="changeChecksumField(this,'{!$Component.enableChecksumBlockItem.enableChecksumCheckbox}')"/>-->
+                <apex:inputCheckbox id="enableDownloadManagerCheckbox" value="{!bIsEnableDownloadManager}" selected="{!bIsEnableDownloadManager}" />
+            </apex:pageBlockSectionItem>
+             
+             <!--
+            <apex:pageBlockSectionItem id="enableChecksumBlockItem" helpText="Enable/Disable checksum verification for downloads via the download manager.">
+                <apex:outputLabel value="Enable Checksum Verification"/> 
+                <apex:inputCheckbox id="enableChecksumCheckbox" value="{!bIsEnableChecksum}" selected="{!bIsEnableChecksum}"/>
+            </apex:pageBlockSectionItem>
+             -->
+
+            <apex:pageBlockSectionItem id="enableChecksumBlockItem" helpText="This feature has been deprecated. It will be removed next release." >
+                <apex:outputLabel value="Enable Checksum Verification"/> 
+                <apex:inputCheckbox id="enableChecksumCheckbox"  disabled="true" />
+            </apex:pageBlockSectionItem>
+                
+            <apex:pageBlockSectionItem helpText="Embed email thread ID in case emails.">
+                <apex:outputLabel value="Embed Thread Id In Case Emails"/> 
+                <apex:inputCheckbox value="{!bIsCheckedEmbedThreadIdInCaseEmail}" selected="{!bIsCheckedEmbedThreadIdInCaseEmail}"/>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem helpText="User profiles that are specifically for portal users. Types can be 'Standard', 'Partner', 'High Volume Portal', 'Customer Portal User', 'Customer Portal Manager' and must be separated by comma.">
+                <apex:outputLabel value="Restricted Portal User Profiles"/> 
+                <apex:inputText value="{!sRestrictedPortalUserTypes}"/>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem helpText="Reply-to address for case related emails sent out via S-Drive. Usually this email address is the general support email address.">
+                <apex:outputLabel value="Case Email Reply-To Address"/> 
+                <apex:inputText value="{!sCaseEmailReplyToAddress}"/>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem id="customEmailBlockItem" helpText="Write a custom email footer you want to be displayed, if you do not a custom email footer to be displayed, left this box empty.">
+                <apex:pageBlockSectionItem id="customEmailSubBlockItem">
+                    <apex:outputLabel value="Custom Email Footer (Uncheck to use default email footer)"/>
+                    <apex:inputCheckbox id="emailFooterCheckBox" value="{!bIsCheckedCustomEmailFooter}" selected="{!bIsCheckedCustomEmailFooter}" onclick="changeFont(this,'{!$Component.emailFooterText}','emailFooter');"/>
+                </apex:pageBlockSectionItem>
+                <apex:inputText id="emailFooterText" value="{!sCustomEmailFooterValue}"/>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem id="maxFileSizeBlockItem" helpText="Maximum file size(in MBs).">
+                <apex:pageBlockSectionItem id="maxFileSizeSubBlockItem"> 
+                    <apex:outputLabel value="Max File Size in MBs (Uncheck to remove file size limit)"/>  
+                    <apex:inputCheckbox id="maxFileSizeCheckBox" value="{!bIsCheckMaxFileSize}" selected="{!bIsCheckMaxFileSize}" onclick="changeFont(this,'{!$Component.maxFileSizeText}','maxFileSize');"/>
+                </apex:pageBlockSectionItem>
+                <apex:inputText id="maxFileSizeText" value="{!sMaxFileSizeValue}"/>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem id="emailExpirationBlockItem" helpText="Select the expiration time of email in which attachments are send.Uncheck the checkbox for unlimited expiration time. Note that Expiration Time can be at most 3 digits long.">
+                <apex:pageBlockSectionItem id="emailExpirationSubBlockItem">
+                    <apex:outputLabel value="Default Email Expiration Time"/>
+                    <apex:inputCheckbox id="emailExpirationCheckBox" value="{!bIsCheckedEmailExpiration}" selected="{!bIsCheckedEmailExpiration}" onclick="changeFont(this,'{!$Component.emailExpirationSubBlockItem2.emailExpirationInputText}','emailExpiration');"/>
+                </apex:pageBlockSectionItem>  
+                
+                <apex:pageBlockSectionItem id="emailExpirationSubBlockItem2">
+                    <apex:inputText id="emailExpirationInputText" value="{!emailExpirationTime}" size="6"/>
+                    <apex:selectList id="emailExpirationSelectlist" value="{!selectedDateTime}" styleclass="std" size="1">
+                        <apex:selectOptions value="{!dateList}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem id="uploadManagerBlockItem" helpText="Default upload manager for the whole organization. This can be overridden by 'enableJavaUpload' and 'useUploadAsPopup' attachment component attributes for individual S-Drive Attachments.">
+                <apex:pageBlockSectionItem id="uploadManagerSubBlockItem">
+                    <apex:outputLabel value="Default Upload Manager"/>
+                </apex:pageBlockSectionItem>
+                <!-- SA - Flash is deprecated in 1.27 -->
+                <apex:pageBlockSectionItem id="uploadManagerSubBlockItem2">
+                    <apex:selectList value="{!selectedUploadWidget}" styleclass="std" size="1">
+                        <apex:selectOption itemValue="html" itemLabel="Html"/>
+                       
+                        <apex:selectOption itemValue="java" itemLabel="Java"/>
+                        <apex:selectOption itemValue="htmlpopup" itemLabel="Html with Popup"/>
+                       
+                        <apex:selectOption itemValue="javapopup" itemLabel="Java with Popup"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem id="allowOnlyModifyAllTopLevelBlockItem" helpText="Only allow users with Modify All permission to create items at the top level. This setting is for S-Drive Folders.">
+                <apex:outputLabel value="Only Allow Users with Modify All Permissions to Create Items at the Top Level"/> 
+                <apex:inputCheckbox id="allowOnlyModifyAllTopLevelCheckbox" value="{!bIsAllowedOnlyModifyAllTopLevel}" selected="{!bIsAllowedOnlyModifyAllTopLevel}" />
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem id="disableCopyUrlSDriveTabManagerBlockItem" helpText="Disable Copy URL item menu action on S-Drive tab. Uncheck to enable.">
+                <apex:outputLabel value="Disable Copy URL on S-Drive Tab"/> 
+                <apex:inputCheckbox id="disableCopyUrlSDriveTabCheckbox" value="{!bIsDisableCopyUrlSDriveTab}" selected="{!bIsDisableCopyUrlSDriveTab}" />
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem id="enableEmailSDriveTabManagerBlockItem" helpText="Enable Email icon on S-Drive tab. Uncheck to disable. You can also disable email feature for portal users if it is enabled for internal users.">
+                <apex:outputPanel >
+                    <apex:outputLabel value="Enable Email on S-Drive Tab"/> 
+                    <apex:inputCheckbox id="enableEmailSDriveTabCheckbox" value="{!bIsEnableEmailSDriveTab}" selected="{!bIsEnableEmailSDriveTab}" onclick="changeFont(this,'{!$Component.disableEmailSDriveTabPortalCheckbox}','');" />
+                </apex:outputPanel>
+                <apex:outputPanel >
+                    <apex:outputLabel value="disable for portal users"/> 
+                    <apex:inputCheckbox id="disableEmailSDriveTabPortalCheckbox" value="{!bIsDisableEmailSDriveTabPortal}" selected="{!bIsDisableEmailSDriveTabPortal}" />
+                </apex:outputPanel>
+            </apex:pageBlockSectionItem>
+            
+             <apex:pageBlockSectionItem id="enableAttachmentSync" helpText="Sync Salesforce Attachments with S-Drive. Attachment Sync service listens to any Salesforce attachment and saves it to S-Drive.">
+                <apex:outputLabel value="Sync Salesforce Attachments with S-Drive"/> 
+                 <apex:commandButton value="Configure AttachmentSync" action="{!goAttachmentSyncPage}" />
+                <!--<apex:commandlink value="Click here to configure Sync" action="{!URLFOR($Page.AttachmentSyncPage)}" target="_blank"/>-->
+              </apex:pageBlockSectionItem>
+                       
+                                  
+              
+             
+             <apex:pageBlockSectionItem id="enableVersionUploadBlockItem" helpText="Enable Version Upload.">
+                <apex:outputLabel value="Enable Version Upload"/> 
+                <!--<apex:inputCheckbox id="enableVersioningCheckbox" value="{!bIsEnableVersionUpload}" disabled="{!bIsEnableVersionUpload}" />-->
+                <apex:commandButton value="{!versionButtonValue}"  disabled="{!bIsEnableVersionUpload}" onClick="warningUser(); return false;"  /> 
+            </apex:pageBlockSectionItem>
+                    
+            
+            
+            
+           
+            
+            <apex:pageBlockSectionItem helpText="You can update S-Drive objects new fields." rendered="{!bIsUpgrated}">   
+                <apex:outputLabel value="Update S-Drive objects to set new fields"/>         
+                <apex:commandlink target="_self" value="Click here to update S-Drive objects" action="{!URLFOR($Page.UpdateSDriveObjectsPage)}" />
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem id="enableS3TransferAccelerationBlockItem" helpText="Amazon S3 Transfer Acceleration enables fast, easy and secure transfers of files over long distances (E.g. across countries or continents) between your client and an S3 bucket. You can use S3 Transfer Acceleration for both downloads and uploads. Only HTML5 Upload Manager supports S3 Transfer Acceleration for uploads. Note that, when using Amazon S3 Trasfer Acceleration, additional charges may apply for transfers where Transfer Acceleration can potentially improve upload performance. For more, you can refer latest S-Drive User Guide at https://www.sdriveapp.com/documentation/">
+                <apex:outputLabel value="Enable Amazon S3 Transfer Acceleration"/> 
+                <apex:inputCheckbox value="{!isS3TransferAccelerationEnabled}" onclick="saveS3TransferAcceleration()"/>  
+            </apex:pageBlockSectionItem>
+            <apex:actionFunction name="saveS3TransferAcceleration" action="{!saveS3TransferAcceleration}"/>
+             
+            <apex:pageBlockSectionItem id="selectedElementHiddenBlockItem">
+               <apex:inputHidden id="selectedItemHiddenField"  value="{!defaulValuesListLength}"/>               
+            </apex:pageBlockSectionItem>
+            
+            <script>       
+                
+                function warningUser()
+                {
+                    var r = confirm("Are you sure you want to enable versioning on your S-Drive bucket? Once versioning is enabled, it should not be unversioned or suspended. Once you version-enable a bucket, it can never return to an unversioned state.");
+                    if (r == true) 
+                    {
+                        enableVersion();
+                    } 
+
+                }     
+                
+                if(document.getElementById('{!$Component.customEmailBlockItem.customEmailSubBlockItem.emailFooterCheckBox}').checked)
+                {
+                     document.getElementById('{!$Component.customEmailBlockItem.emailFooterText}').disabled = false;
+                }
+                else
+                {
+                     document.getElementById('{!$Component.customEmailBlockItem.emailFooterText}').disabled = true;
+                     document.getElementById('{!$Component.customEmailBlockItem.emailFooterText}').value = "Default Email Footer";
+                }  
+                
+                if(document.getElementById('{!$Component.maxFileSizeBlockItem.maxFileSizeSubBlockItem.maxFileSizeCheckBox}').checked)
+                {
+                     document.getElementById('{!$Component.maxFileSizeBlockItem.maxFileSizeText}').disabled = false;
+                }
+                else
+                {
+                     document.getElementById('{!$Component.maxFileSizeBlockItem.maxFileSizeText}').disabled = true;
+                     document.getElementById('{!$Component.maxFileSizeBlockItem.maxFileSizeText}').value="Unlimited File Size";
+                }
+                
+                /*
+                if(document.getElementById('{!$Component.enableDownloadManagerBlockItem.enableDownloadManagerCheckbox}').checked)
+                {
+                    document.getElementById('{!$Component.enableChecksumBlockItem.enableChecksumCheckbox}').disabled = false;
+                }
+                else
+                {
+                    document.getElementById('{!$Component.enableChecksumBlockItem.enableChecksumCheckbox}').checked = false;
+                    document.getElementById('{!$Component.enableChecksumBlockItem.enableChecksumCheckbox}').disabled = true;
+                }
+                */
+                
+                if(document.getElementById('{!$Component.emailExpirationBlockItem.emailExpirationSubBlockItem.emailExpirationCheckBox}').checked)
+                {
+                    document.getElementById('{!$Component.emailExpirationBlockItem.emailExpirationSubBlockItem2.emailExpirationInputText}').disabled = false;
+                    document.getElementById('{!$Component.emailExpirationBlockItem.emailExpirationSubBlockItem2.emailExpirationSelectlist}').disabled = false; 
+                }
+                else
+                {
+                    document.getElementById('{!$Component.emailExpirationBlockItem.emailExpirationSubBlockItem2.emailExpirationInputText}').disabled = true;
+                    document.getElementById('{!$Component.emailExpirationBlockItem.emailExpirationSubBlockItem2.emailExpirationSelectlist}').disabled = true;
+                    document.getElementById('{!$Component.emailExpirationBlockItem.emailExpirationSubBlockItem2.emailExpirationInputText}').value = 'Unlimited';
+                }
+                                                
+             </script>
+            <br/>
+
+        </apex:pageBlockSection>
+           
+          
+        <apex:pageBlockSection id="pageSectionElement" columns="1">
+            <apex:facet name="header">
+                <span style="color:black">Field Display Settings by Object Type</span>
+            </apex:facet> 
+            <apex:selectList id="objectSelectList" styleclass="std" size="1" onChange="callValidateObject()">
+                <apex:selectOptions value="{!dropDownList}"/>
+            </apex:selectList>
+                   
+            <apex:actionStatus startText="Processing..." id="transferStatus" startStyle="font-weight:bold;color:red;"/>
+            
+            <apex:panelGrid columns="4" id="gridElement">
+                <apex:outputLabel value="Available Fields"/> 
+                <br/>
+                <apex:outputLabel value="Selected Fields"/> 
+                <br/>
+                <apex:selectList id="availableSelectList"  multiselect="true" style="width:180px" size="10">
+                    <apex:selectOptions value="{!availableSelectList}"/>
+                </apex:selectList>
+                
+                <apex:panelGroup >
+                     <br/>
+                     <apex:image id="addButton" onmouseover="lightUp(this,'add')" onmouseout="toNormal(this,'add')" value="{!URLFOR($Resource.cg__SDrivePicklistButtons,'addButtonNormal.png')}" onclick="transfer('availableSelectList');" />
+                     <br/>
+                     <br/>
+                     <apex:image id="removeButton" onmouseover="lightUp(this,'remove')" onmouseout="toNormal(this,'remove')" value="{!URLFOR($Resource.cg__SDrivePicklistButtons,'removeButtonNormal.png')}" onclick="transfer('selectedSelectList');"/>
+                </apex:panelGroup>
+                <apex:selectList id="selectedSelectList" multiselect="true" style="width:180px" size="10">
+                      <apex:selectOptions value="{!selectedSelectList}"/>
+                </apex:selectList>
+                <apex:panelGroup >  
+                    <br/>
+                    <apex:image id="upButton" onmouseover="lightUp(this,'up')" onmouseout="toNormal(this,'up')" value="{!URLFOR($Resource.cg__SDrivePicklistButtons,'upButtonNormal.png')}" onclick="move('up')"/>
+                    <br/>
+                    <br/>
+                    <apex:image id="downButton" onmouseover="lightUp(this,'down')" onmouseout="toNormal(this,'down')" value="{!URLFOR($Resource.cg__SDrivePicklistButtons,'downButtonNormal.png')}" onclick="move('down')"/>
+                </apex:panelGroup> 
+                <apex:inputHidden id="hiddenSelectedValue" value="{!selectedValues}"/>   
+                <apex:inputHidden id="defaulValuesListLength"  value="{!defaulValuesListLength}" />               
+            </apex:panelGrid> 
+        </apex:pageBlockSection>
+        
+        <!-- CloudFront cancelled
+        <apex:actionFunction name="changeTextStatus" action="{!enableText}" rerender="AWSCloudFrontDomainName,AWSCloudFrontKeyPairId,AWSCloudFrontPrivateKey,cloudFrontSection"/>   
+        <apex:pageBlockSection id="cloudFrontSection" columns="2">
+        <apex:facet name="header">
+                <span style="color:black">Amazon CloudFront Settings</span>
+            </apex:facet> 
+            
+             <apex:pageBlockSectionItem helpText="Amazon CloudFront is a global content delivery network (CDN) service. CloudFront delivers your content through a worldwide network of data centers called edge locations. When a user requests content that you're serving with CloudFront, the user is routed to the edge location that provides the lowest latency (time delay), so content is delivered with the best possible performance. If the content is already in the edge location with the lowest latency, CloudFront delivers it immediately. If the content is not currently in that edge location, CloudFront retrieves it from an Amazon S3 bucket that you have identified as the source for the definitive version of your content. When using Amazon S3 Trasfer Acceleration, additional charges may apply for your Amazon Account. To set up Amazon CloudFront, you can refer latest S-Drive User Guide at https://www.sdriveapp.com/documentation/">
+                   <apex:outputLabel value="What is Amazon CloudFont" />
+                        <apex:inputCheckbox rendered="false"/>    
+             </apex:pageBlockSectionItem>
+             
+             <apex:pageBlockSectionItem rendered="{!AWSCloudFrontPrivateKey==''}">
+                    
+             </apex:pageBlockSectionItem>
+             
+             <apex:pageBlockSectionItem rendered="{!AWSCloudFrontPrivateKey!=''}" helpText="Click on the URL to enter new private key.">   
+                <apex:outputLabel value="Update Private Key"/>         
+                <apex:commandlink target="_self" value="Click here to update" onclick="window.open('/apex/cg__SDriveManualAuthorization?update=pk')" rerender="nothing"/>
+            </apex:pageBlockSectionItem> 
+            
+             <apex:pageBlockSectionItem helpText="Click on the checkbox to enable Amazon CloudFront. Before enabling CloudFront, you must create a CloudFront distribution for your bucket using AWS Management Console. For more, please refer latest S-Drive User Guide at https://www.sdriveapp.com/documentation/ " rendered="{!NOT(isAWSCloudFrontEnabled)}">
+                        <apex:outputLabel value="I have configured Amazon CloudFront Settings for my bucket using AWS Management Console"/>
+                    
+                        <apex:inputCheckbox id="enableAWSCloudFrontCheckbox" value="{!isAWSCloudFrontEnabled}"  onclick="changeTextStatus();"/> 
+                       
+             </apex:pageBlockSectionItem>
+             
+             <apex:pageBlockSectionItem helpText="Disable Amazon CloudFront." rendered="{!(isAWSCloudFrontEnabled)}">
+                        
+                        <apex:outputLabel value="Disable Amazon CloudFront" />
+                        <apex:inputCheckbox id="enableAWSCloudFrontCheckbox2" value="{!isAWSCloudFrontEnabled}"  onclick="changeTextStatus();"/> 
+                       
+             </apex:pageBlockSectionItem>
+              
+             <apex:pageBlockSectionItem helpText="Amazon CloudFront Distribution Domain Name. E.g:d111111abcdef8.cloudfront.net. You can obtain the domain name from Amazon CloudFront Distribution Settings.">
+                   <apex:outputLabel value="Domain Name"/>    
+                   <apex:inputText disabled="{!NOT(isAWSCloudFrontEnabled)}"  id="AWSCloudFrontDomainName" value="{!AWSCloudFrontDomainName}" style="width:40%"/>  
+             </apex:pageBlockSectionItem>
+            
+           
+             <apex:pageBlockSectionItem helpText="Amazon CloudFront Key-Pair-Id. E.g: APKA9ONS7QCOWEXAMPLE. You can obtain the Key-Pair-Id from AWS Management Console.">
+                    <apex:outputLabel value="Key-Pair-Id" />  
+                    <apex:inputText disabled="{!NOT(isAWSCloudFrontEnabled)}" id="AWSCloudFrontKeyPairId" value="{!AWSCloudFrontKeyPairId}" style="width:40%" />
+             </apex:pageBlockSectionItem>
+             
+           <apex:pageBlockSectionItem rendered="{!AWSCloudFrontPrivateKey==''}" helpText="Amazon CloudFront Private Key. You can obtain the Private Key from AWS Management Console.">
+                    <apex:outputLabel value="Private Key" />    
+                    <apex:inputTextArea rows="4" disabled="{!NOT(isAWSCloudFrontEnabled)}" id="AWSCloudFrontPrivateKey" value="{!AWSCloudFrontPrivateKey}"  style="width:40%;background-color:{!IF(isAWSCloudFrontEnabled && AWSCloudFrontPrivateKey!='','#D1D1BC','')}"/>
+             </apex:pageBlockSectionItem>
+       </apex:pageBlockSection> 
+       -->
+    </apex:pageBlock>
+    <apex:actionFunction action="{!refreshPicklistNotSave}" name="rerenderPicklistNotSave" immediate="true" rerender="gridElement"  status="transferStatus" oncomplete="checkFor38Char()">
+        <apex:param name="firstParam" assignTo="{!selectedValue}" value=""/>
+    </apex:actionFunction>
+        
+    <apex:actionFunction action="{!refreshPicklistAndSave}" name="rerenderPicklistAndSave" immediate="true" rerender="gridElement"  status="transferStatus" oncomplete="checkFor38Char()">
+        <apex:param name="firstParam" assignTo="{!nameAndValues}" value=""/>
+        <apex:param name="secondParam" assignTo="{!selectedValue}" value=""/>
+    </apex:actionFunction>
+    
+    <apex:actionFunction action="{!validateObject}" name="validateObject" immediate="true" rerender="objectValidationPanel"  status="transferStatus" oncomplete="validateSelectedObject()">
+        <apex:param name="firstParam" assignTo="{!selectedValue}" value=""/>
+    </apex:actionFunction>
+    
+</apex:form>
+
+<apex:outputPanel id="objectValidationPanel" layout="block">
+<script type="text/javascript">
+var selectedObjectIsValid = {!isValidObject};
+</script>
+</apex:outputPanel>
+   
+<script type="text/javascript">
+var deletedIndexes = new Array();
+var deleledIndexesIndex = 0;
+var deletedValues = new Array();
+var deletedValuesIndex = 0;
+var upOrDownItems = new Array();
+var upOrDownItemsIndex = 0;
+var previousSelectedLabel = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}')[document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}').selectedIndex].innerHTML;
+var previousSelectedValue = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}').value;
+var isChangeHappened = false;
+//var enableChecksumValue = document.getElementById('{!$Component.formElement.pageBlockElement.generalSettingsBlockSection.enableChecksumBlockItem.enableChecksumCheckbox}').checked;
+var moreThan38Char = false; 
+
+if(previousSelectedValue.length > 35)
+{
+    window.alert('Selected object\'s (' + previousSelectedLabel +') API Name length is more than 35 characters.In order to configure fields to display,you need to rename the API Name of the object and try again.');
+    document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.availableSelectList}').disabled = true;
+    document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}').disabled = true;
+}
+
+function callValidateObject()
+{
+    validateObject(document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}').value);
+}
+
+function validateSelectedObject()
+{
+    if (selectedObjectIsValid)
+    {
+        changeOrSave();
+    }
+    else
+    {
+        alert('Please select an object that is configured as an S-Drive File object.\nObject should have fields that are configured to hold File data.');
+        document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}').value = previousSelectedValue;
+        changeOrSave();
+    }
+}
+
+function checkFor38Char()
+{
+  if(previousSelectedValue.length > 35)
+  { 
+    window.alert('Selected object\'s (' + previousSelectedLabel +') API Name length is more than 35 characters.In order to configure fields to display,you need to rename the API Name of the object and try again.');
+    document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.availableSelectList}').disabled = true;
+    document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}').disabled = true;
+  }
+}
+
+function changeFont(input, textid, option)
+ {
+      if(input.checked)
+      {
+            document.getElementById(textid).disabled = false;
+            input.selected = true;
+            document.getElementById(textid).value = '';
+            if(option == 'emailExpiration')
+            {
+                 document.getElementById('{!$Component.formElement.pageBlockElement.generalSettingsBlockSection.emailExpirationBlockItem.emailExpirationSubBlockItem2.emailExpirationSelectlist}').disabled = false;          
+            }
+      }     
+      else  
+      {
+            document.getElementById(textid).disabled = true;
+            input.selected = false;
+            if(option == "emailFooter")
+            {
+                document.getElementById(textid).value='Default Email Footer';
+            }
+            else if(option == 'maxFileSize')
+            {
+                document.getElementById(textid).value='Unlimited File Size';
+            }
+            else
+            {
+                document.getElementById(textid).value='Unlimited';
+                document.getElementById('{!$Component.formElement.pageBlockElement.generalSettingsBlockSection.emailExpirationBlockItem.emailExpirationSubBlockItem2.emailExpirationSelectlist}').disabled = true;              }
+            }
+ }
+
+function transfer(addOrRemove)
+{ 
+   isChangeHappened = true;
+   var index;
+   var tempList;
+   if(addOrRemove == 'availableSelectList')
+   {
+      tempList = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.availableSelectList}');
+   }
+   else
+   {
+      tempList = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}');
+   }
+   for(index = 0; index < tempList.options.length ; index++)
+   {
+      if(tempList.options[index].selected)
+        {
+            saveDeletedIndexes(index);
+            saveDeletedValues(tempList.options[index]);
+        }
+   }     
+   deleteFromList(addOrRemove);
+   transferToList(addOrRemove);
+   deletedIndexes = new Array();
+   deleledIndexesIndex = 0;
+   deletedValues = new Array();
+   deletedValuesIndex = 0;
+}  
+
+function disablePicklists()
+{
+    saveArrayTiHiddenField();
+    document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.availableSelectList}').disabled = true;
+    document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}').disabled = true;
+}
+
+function transferToList(addOrRemove)
+{
+ var tempIndex;
+ var toList;
+ if(addOrRemove == 'selectedSelectList')
+ {
+      var tempList = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.availableSelectList}');
+      var availableListIndex = tempList.options.length;
+      for(tempIndex = 0; tempIndex < deletedValuesIndex ; tempIndex++ , availableListIndex++)
+      {
+           tempList.options[availableListIndex] = deletedValues[tempIndex];
+      }
+ }
+  else
+  {
+      var tempList = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}');
+            var selectedListIndex = tempList.options.length;
+            for(tempIndex = 0; tempIndex < deletedValuesIndex ; tempIndex++ , selectedListIndex++)
+            {
+                  tempList.options[selectedListIndex] = deletedValues[tempIndex];
+            }
+  }
+}
+
+
+
+function saveDeletedIndexes(deletedIndex)
+{
+    deletedIndexes[deleledIndexesIndex] = deletedIndex ;
+    deleledIndexesIndex++;
+}
+
+
+function saveDeletedValues(deletedValue)
+{
+    deletedValues[deletedValuesIndex] = deletedValue;
+    deletedValuesIndex++;
+}
+
+function deleteFromList(addOrRemove)
+{
+  var tempIndex;
+  var tempList;
+   if(addOrRemove == 'availableSelectList')
+   {
+      tempList = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.availableSelectList}');
+   }
+   else
+   {
+      tempList = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}');
+   }
+  for(tempIndex = 0; tempIndex < deletedIndexes.length ; tempIndex++)
+  {
+      var temp = deletedIndexes[tempIndex];
+      tempList.options[temp - tempIndex] = null;
+  }
+}      
+
+
+
+function move(direction)
+{
+  isChangeHappened = true;
+  var index;
+  var tempList = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}');
+  for(index = 0; index < tempList.options.length ; index++)
+   {
+      if(tempList.options[index].selected)
+      {
+           upOrDownItems[upOrDownItemsIndex] = index;
+           upOrDownItemsIndex++;
+      }
+       
+   }
+   if(direction == 'up')
+   {
+      upMove();
+   }
+   else
+   { 
+     downMove();
+   }
+ 
+}
+
+
+
+function upMove()
+{
+  var index;
+  var tempList = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}');
+  for(index = 0;index < upOrDownItemsIndex;index++)
+  {
+     var indexToBeChanged = upOrDownItems[index];
+     if(indexToBeChanged == document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.defaulValuesListLength}').value)
+     {
+         break;
+     }
+     var tempItem1 = tempList.options[indexToBeChanged];
+     var tempItem2 = tempList.options[indexToBeChanged - 1];
+     tempList.options[indexToBeChanged - 1] = new Option(tempItem1.text,tempItem1.value);
+     tempList.options[indexToBeChanged - 1].selected = true;
+     tempList.options[indexToBeChanged] = new Option(tempItem2.text,tempItem2.value);
+  }
+  upOrDownItemsIndex = 0;
+  upOrDownItems = new Array();
+  
+}
+
+
+function downMove()
+{
+  var index;
+  var tempList = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}');
+  for(index = upOrDownItemsIndex-1;index >= 0;index--)
+  {
+     var indexToBeChanged = upOrDownItems[index];
+     if(indexToBeChanged == tempList.options.length - 1)
+     {
+         break;
+     }
+     var tempItem1 = tempList.options[indexToBeChanged];
+     var tempItem2 = tempList.options[indexToBeChanged + 1];
+     tempList.options[indexToBeChanged + 1] = new Option(tempItem1.text,tempItem1.value);
+     tempList.options[indexToBeChanged + 1].selected = true;
+     tempList.options[indexToBeChanged] = new Option(tempItem2.text,tempItem2.value);
+  }
+  upOrDownItemsIndex = 0;
+  upOrDownItems = new Array();
+}            
+
+function saveArrayTiHiddenField()
+{
+    var tempList = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}');
+    var tempIndex = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.defaulValuesListLength}').value;
+    var hiddenSelectedValue = "";
+    for(tempIndex = 0;tempIndex < tempList.options.length;tempIndex++)
+    {
+        hiddenSelectedValue += tempList.options[tempIndex].value + "," ;
+    }
+    hiddenSelectedValue  = hiddenSelectedValue.substring(0,hiddenSelectedValue.length - 1);
+    document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.hiddenSelectedValue}').value = hiddenSelectedValue;
+}
+
+
+function changeOrSave()
+{   
+    var selectedIndex = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}').selectedIndex;
+    var selectedLabel = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}')[selectedIndex].innerHTML;
+    var selectedValueTemp = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}').value;
+    
+    document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.availableSelectList}').disabled = false;
+    document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}').disabled = false;
+    if(isChangeHappened && previousSelectedValue.length <= 35)
+    {
+        if(confirm("Save customizations for \"" + previousSelectedLabel + "\" before switching to \"" + selectedLabel + "\"?"))
+        {           
+              saveArrayTiHiddenField();
+              var tempSelectedValues = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.hiddenSelectedValue}').value;                   
+              rerenderPicklistAndSave(previousSelectedValue + ":" + tempSelectedValues , document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}').value);
+        }
+        else
+        {
+              rerenderPicklistNotSave(document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}').value);
+        }
+    }
+    else
+    {
+       if(selectedValueTemp.length > 35)
+        {   
+            window.alert('Selected object\'s (' + selectedLabel +') API Name length is more than 35 characters.In order to configure fields to display,you need to rename the API Name of the object and try again.');
+            document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.availableSelectList}').disabled = true;
+            document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.selectedSelectList}').disabled = true;
+        }
+        else
+        {
+            rerenderPicklistNotSave(document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}').value);
+        }
+    }           
+    isChangeHappened = false;       
+    previousSelectedLabel = selectedLabel;
+    previousSelectedValue = document.getElementById('{!$Component.formElement.pageBlockElement.pageSectionElement.objectSelectList}').value;
+    
+    moreThan38Char = false;
+    
+}
+
+
+
+function lightUp(imageElement,whichButton)
+{   
+    if(whichButton == 'up')
+    {
+        imageElement.src = "{!URLFOR($Resource.SDrivePicklistButtons,"upButtonLighted.png")}"
+    }   
+    else if(whichButton == 'down')
+    {
+        imageElement.src = "{!URLFOR($Resource.SDrivePicklistButtons,'downButtonLighted.png')}";
+    }
+    else if(whichButton == "add")
+    {
+        imageElement.src = "{!URLFOR($Resource.SDrivePicklistButtons,'addButtonLighted.png')}";
+    }
+    else
+    {
+        imageElement.src = "{!URLFOR($Resource.SDrivePicklistButtons,'removeButtonLighted.png')}";
+    }
+}
+
+
+function toNormal(imageElement,whichButton)
+{
+    if(whichButton == "up")
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,'upButtonNormal.png')}";
+    }   
+    else if(whichButton == 'down')
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,'downButtonNormal.png')}";
+    }
+    else if(whichButton == "add")
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,'addButtonNormal.png')}";
+    }
+    else
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,'removeButtonNormal.png')}";
+    }
+}
+
+/*
+function changeChecksumField(enableDownloadManeger, enableChecksum)
+{
+    if(enableDownloadManeger.checked)
+    {
+        document.getElementById(enableChecksum).disabled  = false;
+        document.getElementById(enableChecksum).checked = enableChecksumValue;
+    }
+    else
+    {
+        document.getElementById(enableChecksum).checked = false;
+        document.getElementById(enableChecksum).disabled = true;
+    }
+} 
+*/
+</script >
+  
+</apex:page>

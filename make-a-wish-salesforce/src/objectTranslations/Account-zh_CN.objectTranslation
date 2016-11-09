@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <help><!-- In terms of number of days --></help>
+        <label><!-- Alert for Unassigned Wishes --></label>
+        <name>Alert_for_Unassigned_Wishes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Chapter Id --></label>
+        <name>Chapter_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Do Not Contact Notes --></label>
+        <name>Do_Not_Contact_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Do Not Contact --></label>
+        <name>Do_Not_Contact__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Emergency Contact Phone --></label>
+        <name>Emergency_Contact_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Emergency Contact --></label>
+        <name>Emergency_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Intake Manager --></label>
+        <name>Intake_Manager__c</name>
+        <relationshipLabel><!-- Accounts (Intake Manager) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- National Medical Advisor Email --></label>
+        <name>MAC_Email_del__c</name>
+    </fields>
+    <fields>
+        <label><!-- Primary Contact --></label>
+        <name>Primary_Contact__c</name>
+        <relationshipLabel><!-- Accounts (Primary Contact) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Relationship type --></label>
+        <name>Relationship_type__c</name>
+        <picklistValues>
+            <masterLabel>Aunt</masterLabel>
+            <translation><!-- Aunt --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Brother</masterLabel>
+            <translation><!-- Brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cousin</masterLabel>
+            <translation><!-- Cousin --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Coworker</masterLabel>
+            <translation><!-- Coworker --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Daughter</masterLabel>
+            <translation><!-- Daughter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Employee</masterLabel>
+            <translation><!-- Employee --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Employer</masterLabel>
+            <translation><!-- Employer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family</masterLabel>
+            <translation><!-- Family --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Father</masterLabel>
+            <translation><!-- Father --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Friend</masterLabel>
+            <translation><!-- Friend --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandchild</masterLabel>
+            <translation><!-- Grandchild --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Granddaughter</masterLabel>
+            <translation><!-- Granddaughter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandfather</masterLabel>
+            <translation><!-- Grandfather --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandmother</masterLabel>
+            <translation><!-- Grandmother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandparent</masterLabel>
+            <translation><!-- Grandparent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Grandson</masterLabel>
+            <translation><!-- Grandson --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Guardian</masterLabel>
+            <translation><!-- Guardian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Half-brother</masterLabel>
+            <translation><!-- Half-brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Half-sister</masterLabel>
+            <translation><!-- Half-sister --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Husband</masterLabel>
+            <translation><!-- Husband --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mother</masterLabel>
+            <translation><!-- Mother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partner</masterLabel>
+            <translation><!-- Partner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sister</masterLabel>
+            <translation><!-- Sister --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Son</masterLabel>
+            <translation><!-- Son --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Step-brother</masterLabel>
+            <translation><!-- Step-brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Step-father</masterLabel>
+            <translation><!-- Step-father --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Step-mother</masterLabel>
+            <translation><!-- Step-mother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Step-sister</masterLabel>
+            <translation><!-- Step-sister --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Uncle</masterLabel>
+            <translation><!-- Uncle --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wife</masterLabel>
+            <translation><!-- Wife --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Manager --></label>
+        <name>Volunteer_Manager__c</name>
+        <relationshipLabel><!-- Accounts (Volunteer Manager) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Wish Manager --></label>
+        <name>Wish_Manager__c</name>
+        <relationshipLabel><!-- Accounts (Wish Manager) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- DEPRECATED - First Donation Date --></label>
+        <name>npe01__FirstDonationDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- DEPRECATED - Last Donation Date --></label>
+        <name>npe01__LastDonationDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- DEPRECATED - Lifetime Donation Amount --></label>
+        <name>npe01__LifetimeDonationHistory_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- DEPRECATED - Lifetime Donation Number --></label>
+        <name>npe01__LifetimeDonationHistory_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Primary Contact --></label>
+        <name>npe01__One2OneContact__c</name>
+        <relationshipLabel><!-- Account --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- _SYSTEM: IsIndividual --></label>
+        <name>npe01__SYSTEMIsIndividual__c</name>
+    </fields>
+    <fields>
+        <help><!-- System field: do not use or change. --></help>
+        <label><!-- _SYSTEM: AccountType --></label>
+        <name>npe01__SYSTEM_AccountType__c</name>
+    </fields>
+    <fields>
+        <label><!-- Average Gift --></label>
+        <name>npo02__AverageAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Gift Year Total --></label>
+        <name>npo02__Best_Gift_Year_Total__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Gift Year --></label>
+        <name>npo02__Best_Gift_Year__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Gift Date --></label>
+        <name>npo02__FirstCloseDate__c</name>
+    </fields>
+    <fields>
+        <help><!-- For Household Accounts, uses fields of non-excluded, ordered related Contacts. Generated automatically. --></help>
+        <label><!-- Formal Greeting --></label>
+        <name>npo02__Formal_Greeting__c</name>
+    </fields>
+    <fields>
+        <label><!-- Household Phone --></label>
+        <name>npo02__HouseholdPhone__c</name>
+    </fields>
+    <fields>
+        <help><!-- For Household Accounts, uses fields of non-excluded, ordered related Contacts. Generated automatically. --></help>
+        <label><!-- Informal Greeting --></label>
+        <name>npo02__Informal_Greeting__c</name>
+    </fields>
+    <fields>
+        <label><!-- Largest Gift --></label>
+        <name>npo02__LargestAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Gift Date --></label>
+        <name>npo02__LastCloseDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Membership Amount --></label>
+        <name>npo02__LastMembershipAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Membership Date --></label>
+        <name>npo02__LastMembershipDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Membership Level --></label>
+        <name>npo02__LastMembershipLevel__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Membership Origin --></label>
+        <name>npo02__LastMembershipOrigin__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Gift Amount --></label>
+        <name>npo02__LastOppAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Membership End Date --></label>
+        <name>npo02__MembershipEndDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Membership Join Date --></label>
+        <name>npo02__MembershipJoinDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Number of Gifts --></label>
+        <name>npo02__NumberOfClosedOpps__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Memberships --></label>
+        <name>npo02__NumberOfMembershipOpps__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Gifts Two Years Ago --></label>
+        <name>npo02__OppAmount2YearsAgo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Gifts Last N Days --></label>
+        <name>npo02__OppAmountLastNDays__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Gifts Last Year --></label>
+        <name>npo02__OppAmountLastYear__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Gifts This Year --></label>
+        <name>npo02__OppAmountThisYear__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Gifts Two Years Ago --></label>
+        <name>npo02__OppsClosed2YearsAgo__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Gifts Last N Days --></label>
+        <name>npo02__OppsClosedLastNDays__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Gifts Last Year --></label>
+        <name>npo02__OppsClosedLastYear__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Gifts This Year --></label>
+        <name>npo02__OppsClosedThisYear__c</name>
+    </fields>
+    <fields>
+        <help><!-- For Household Accounts, specifies which name related fields should not be automatically populated by the Householding code. --></help>
+        <label><!-- _SYSTEM: CUSTOM NAMING --></label>
+        <name>npo02__SYSTEM_CUSTOM_NAMING__c</name>
+        <picklistValues>
+            <masterLabel>Formal_Greeting__c</masterLabel>
+            <translation><!-- Formal_Greeting__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Informal_Greeting__c</masterLabel>
+            <translation><!-- Informal_Greeting__c --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Name</masterLabel>
+            <translation><!-- Name --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Smallest Gift --></label>
+        <name>npo02__SmallestAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Membership Amount --></label>
+        <name>npo02__TotalMembershipOppAmount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Gifts --></label>
+        <name>npo02__TotalOppAmount__c</name>
+    </fields>
+    <fields>
+        <help><!-- The batch this Account was created in. --></help>
+        <label><!-- Batch --></label>
+        <name>npsp__Batch__c</name>
+        <relationshipLabel><!-- Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- The general program area(s) that this organization funds. --></help>
+        <label><!-- Funding Focus --></label>
+        <name>npsp__Funding_Focus__c</name>
+        <picklistValues>
+            <masterLabel>Animal Welfare</masterLabel>
+            <translation><!-- Animal Welfare --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arts and Culture</masterLabel>
+            <translation><!-- Arts and Culture --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Capacity Building</masterLabel>
+            <translation><!-- Capacity Building --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Education</masterLabel>
+            <translation><!-- Education --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Environmental</masterLabel>
+            <translation><!-- Environmental --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health Services</masterLabel>
+            <translation><!-- Health Services --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Human Services</masterLabel>
+            <translation><!-- Human Services --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Indicates that this organization is a grant making organization. Can apply to foundations, government agencies, corporations, etc. --></help>
+        <label><!-- Grantmaker --></label>
+        <name>npsp__Grantmaker__c</name>
+    </fields>
+    <fields>
+        <help><!-- The name of the company&apos;s matching gift administrator. --></help>
+        <label><!-- Matching Gift Administrator Name --></label>
+        <name>npsp__Matching_Gift_Administrator_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- The maximum amount the company will match on any single gift. --></help>
+        <label><!-- Matching Gift Amount Max --></label>
+        <name>npsp__Matching_Gift_Amount_Max__c</name>
+    </fields>
+    <fields>
+        <help><!-- The smallest gift the company will match. --></help>
+        <label><!-- Matching Gift Amount Min --></label>
+        <name>npsp__Matching_Gift_Amount_Min__c</name>
+    </fields>
+    <fields>
+        <help><!-- The maximum amount the company will match each year for an employee. --></help>
+        <label><!-- Matching Gift Annual Employee Max --></label>
+        <name>npsp__Matching_Gift_Annual_Employee_Max__c</name>
+    </fields>
+    <fields>
+        <help><!-- Additional notes about the company&apos;s matching gift program. --></help>
+        <label><!-- Matching Gift Comments --></label>
+        <name>npsp__Matching_Gift_Comments__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is this a company that offers matching gifts? --></help>
+        <label><!-- Matching Gift Company --></label>
+        <name>npsp__Matching_Gift_Company__c</name>
+    </fields>
+    <fields>
+        <help><!-- Email of the company&apos;s matching gift administrator. --></help>
+        <label><!-- Matching Gift Email --></label>
+        <name>npsp__Matching_Gift_Email__c</name>
+    </fields>
+    <fields>
+        <help><!-- The date when the matching gift information was last updated. --></help>
+        <label><!-- Matching Gift Info Updated --></label>
+        <name>npsp__Matching_Gift_Info_Updated__c</name>
+    </fields>
+    <fields>
+        <help><!-- The portion of a gift the company will match. --></help>
+        <label><!-- Matching Gift Percent --></label>
+        <name>npsp__Matching_Gift_Percent__c</name>
+    </fields>
+    <fields>
+        <help><!-- Phone for the matching gift administration office. --></help>
+        <label><!-- Matching Gift Phone --></label>
+        <name>npsp__Matching_Gift_Phone__c</name>
+    </fields>
+    <fields>
+        <help><!-- Any restrictions on how old gifts can be to be eligible for matching. --></help>
+        <label><!-- Matching Gift Request Deadline --></label>
+        <name>npsp__Matching_Gift_Request_Deadline__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: The number of years for which this Household has had a Member. --></help>
+        <label><!-- Membership Span --></label>
+        <name>npsp__Membership_Span__c</name>
+    </fields>
+    <fields>
+        <help><!-- Formula: Current, expired, or grace period.  Default grace period set in Household Settings. --></help>
+        <label><!-- Membership Status --></label>
+        <name>npsp__Membership_Status__c</name>
+    </fields>
+    <fields>
+        <help><!-- for Household Accounts, the number of Contacts in the Household. --></help>
+        <label><!-- Number of Household Members --></label>
+        <name>npsp__Number_of_Household_Members__c</name>
+    </fields>
+    <layouts>
+        <layout>Chapters</layout>
+        <sections>
+            <label><!-- Address --></label>
+            <section>Address</section>
+        </sections>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- New Donation --></label>
+        <name>New_Donation</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Grant --></label>
+        <name>New_Grant</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Major Gift --></label>
+        <name>New_Major_Gift</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Matching Donation --></label>
+        <name>New_Matching_Donation</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- New Membership --></label>
+        <name>New_Membership</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- Chapter --></label>
+        <name>Chapter</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Household Account --></label>
+        <name>HH_Account</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Organization --></label>
+        <name>Organization</name>
+    </recordTypes>
+    <webLinks>
+        <label><!-- LOOP --></label>
+        <name>Loop__LOOP</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- LOOP_Merge --></label>
+        <name>Loop__LOOP_Merge</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- LOOPlus --></label>
+        <name>Loop__LOOPlus</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Mass_LOOP_Merge --></label>
+        <name>Loop__Mass_LOOP_Merge</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Mass_LOOPlus --></label>
+        <name>Loop__Mass_LOOPlus</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_with_DocuSign --></label>
+        <name>dsfs__Send_with_DocuSign</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Verify_with_DNB --></label>
+        <name>dsfs__Verify_with_DNB</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Manage_Household --></label>
+        <name>npsp__Manage_Household</name>
+    </webLinks>
+</CustomObjectTranslation>

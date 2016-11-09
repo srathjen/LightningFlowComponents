@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Chapter Action Track</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Chapter Action Tracks</value>
+    </caseValues>
+    <fields>
+        <label><!-- Assigned To --></label>
+        <name>Assigned_To__c</name>
+        <picklistValues>
+            <masterLabel>Volunteer Manager</masterLabel>
+            <translation><!-- Volunteer Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Coordinator</masterLabel>
+            <translation><!-- Wish Coordinator --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Granter</masterLabel>
+            <translation><!-- Wish Granter --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Case Type/Stage --></label>
+        <name>Case_Type_Stage__c</name>
+        <picklistValues>
+            <masterLabel>Wish Assist</masterLabel>
+            <translation><!-- Wish Assist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Determination</masterLabel>
+            <translation><!-- Wish Determination --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Effect</masterLabel>
+            <translation><!-- Wish Effect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Grant</masterLabel>
+            <translation><!-- Wish Grant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Planning &amp; Anticipation</masterLabel>
+            <translation><!-- Wish Planning &amp; Anticipation --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Chapter Name --></label>
+        <name>Chapter_Name__c</name>
+        <relationshipLabel><!-- Chapter Action Tracks --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Due Date --></label>
+        <name>Due_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recurring Frequency --></label>
+        <name>Recurring_Frequency__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recurring --></label>
+        <name>Recurring__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sort Order --></label>
+        <name>Sort_Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Task Name --></label>
+        <name>Task_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish type --></label>
+        <name>Wish_type__c</name>
+        <picklistValues>
+            <masterLabel>Cruise</masterLabel>
+            <translation><!-- Cruise --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Disney</masterLabel>
+            <translation><!-- Disney --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GKTW</masterLabel>
+            <translation><!-- GKTW --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>International Travel</masterLabel>
+            <translation><!-- International Travel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Standard</masterLabel>
+            <translation><!-- Standard --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Chapter Action Track Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

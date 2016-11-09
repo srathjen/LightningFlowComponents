@@ -1,0 +1,5 @@
+<design:component label="Drawloop - Run DDP">
+    <design:attribute name="title" label="Title" description="Component Title" />
+    <design:attribute name="startExpanded" label="Start Expanded" description="Option to start Run DDP in expanded state." />
+    <design:attribute name="ddpLabel" label="DDP Label" description="Option to change the label of the DDP object."/>
+</design:component>

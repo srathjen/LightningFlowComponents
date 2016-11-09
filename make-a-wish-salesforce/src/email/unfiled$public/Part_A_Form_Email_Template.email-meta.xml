@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>It will be used to send an email to Treating Medical Professional for reviewing Part A Form.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Make_a_Wish_America</letterhead>
+    <name>Part A Form Email Template</name>
+    <style>freeForm</style>
+    <subject>Your patient has been referred for a wish!</subject>
+    <textOnly>Hi {!Lead.Treating_Medical_Professional_First_Name__c},
+
+Enclosed in this email is a URL link that will allow you to access the referral information for your patient, {!Contact.First_Last_Initial__c}. The password to this encrypted form is included below.
+
+Please be sure to provide a response to each of the included questions so we can confirm whether {!Contact.First_Last_Initial__c}. meets Make-A-Wish’s medical eligibility criteria. Thanks to the support of you and other medical professionals around the country, we continue to come closer each year to our vision of making every eligible child’s wish come true. Thank you for taking the time to help us share the power of a wish®.
+
+Please review the Diagnosis Verification and submit.
+
+Password: {!Lead.Part_A_Form_Password__c}
+
+Thanks,
+
+{!Lead.ChapterName__c}</textOnly>
+    <type>html</type>
+</EmailTemplate>

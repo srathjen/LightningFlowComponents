@@ -1,0 +1,330 @@
+<apex:page showHeader="false"  sidebar="false" controller="cg.MobileSDriveController"  action="{!loadFiles}" >
+<apex:styleSheet value="{!URLFOR($Resource.cg__MobileStyle)}" />
+<apex:styleSheet value="{!URLFOR($Resource.cg__MobileListPageStyle)}" />
+<body>  
+<div class="container oneStyle oneOne tablet" >
+<div class="viewport "  style="left: -250px;">
+<section class="stage panelSlide oneAccess" >
+<div class="center oneCenterStage"> 
+<div class="content" >
+<div class="active oneContent">
+<div  class="oneAlohaPage">
+<div id="hed" class="headClass">
+  &nbsp;   &nbsp; 
+   <span class="headimageSpan">
+    <div class="small forceEntityIcon headiconStyle" id="listimage">
+     <apex:image width="30"  url="{!URLFOR($Resource.cg__MobileSDriveLogo)}"/>
+    </div>
+   </span>
+   <span class="header-label"> 
+    <div id="listtitle" class="headlabelDiv">
+    <apex:outputText styleClass="header-label headLabel"  value="{!titleAT}"/>
+    </div>
+   </span>
+ </div>
+ 
+<apex:outputPanel style="height:100%;font-size: 14px;" rendered="{!NOT(fileAccessible)}">
+<br/>
+You do not have permissions to access related object data! 
+</apex:outputPanel>
+
+<apex:form rendered="{!NOT(hasFiles)}" styleClass="emptyformStyle">
+<div class="forceRelatedList uiAbstractList showEmptyContent" role="undefined" >
+<!---->
+<div class="listContent">
+<ul class="forceRelatedList" >
+<!---->
+</ul>
+<div class="emptyListContent">
+<div class="emptyListMessage">
+There are no records in this list.
+</div>
+</div>
+</div>
+<!---->
+</div>
+
+</apex:form>
+<apex:form id="mainForm" rendered="{!(hasFiles&&fileAccessible)}" styleClass="formStyle">
+
+<br/>
+  <apex:outputPanel id="searchPanel">
+      <div class="searchBoxWrapper">
+            <apex:inputText id="inputBoxSearch" styleClass="inputBoxSearchStyle" value="{!searchKeyword}" onfocus="onClickSearchTextBox()" onblur="onClickEsleware('notForce')" onkeypress="return handleKeysOnSearchTextBox(event)"/>
+            <apex:image id="searchIcon" value="{!$Resource.cg__SearchIcon}" styleClass="searchbox_submit" onclick="handleEmptySearchKey()"/>
+      </div>
+      <br/>
+      <br/>
+      <div align="left" class="searchResult">
+        <apex:outputText value="No Results Found!" styleClass="searchnotFound" rendered="{!(isSearchInProgress) && NOT(isSearchResultsFound) }"/>
+        <apex:outputText value="{!searchResultCount} Result(s) Found"  styleClass="searchFound"  rendered="{!(isSearchInProgress) && isSearchResultsFound}"/>
+     </div>
+    <apex:actionFunction action="{!searchKeywordResult}" rerender="FileList,searchPanel,showhidebuttonPanel,navigatePanel" name="searchFileList" status="processStatus"/> 
+    <script>
+         if(document.getElementById('{!$Component.inputBoxSearch}').value == null || 
+            document.getElementById('{!$Component.inputBoxSearch}').value == '')
+         {
+             document.getElementById('{!$Component.inputBoxSearch}').value = 'Search';
+         }
+   </script> 
+ </apex:outputPanel>
+ 
+<apex:pageBlock id="FileList" >   
+ <apex:outputPanel layout="block"  styleClass="folderlistPanel" rendered="{!showHomeFolder}">
+   <b><apex:commandLink id="homeLink" style="font-size: 14px;"  styleClass="breadCrumbStyle" value="Home" action="{!changeFolder}" reRender="FileList,searchPanel,showhidebuttonPanel,navigatePanel"  rendered="{!showHomeFolder && NOT(isSearchInProgress && isSearchResultsFound)}" status="processStatus"/></b>
+   <b><apex:commandLink id="homeLinkWhileSearching"  style="font-size: 14px;"  styleClass="breadCrumbStyle" value="Back to Home" action="{!changeFolder}" reRender="FileList,searchPanel,showhidebuttonPanel,navigatePanel"  rendered="{!isSearchInProgress && isSearchResultsFound}" status="processStatus"/> 
+       <apex:repeat value="{!folderHistoryStack}" var="folder" id="breadCrumbRepeater" rendered="{!NOT(isSearchInProgress && isSearchResultsFound)}">
+          &nbsp;<apex:outputLabel styleClass="slashStyle">/</apex:outputLabel> &nbsp; <apex:commandLink value="{!folder.Name}" style="font-size: 14px;"  styleClass="breadCrumbStyle" action="{!changeFolder}" reRender="FileList,searchPanel,showhidebuttonPanel,navigatePanel" status="processStatus">
+                <apex:param name="folderId" value="{!folder.Id}" />
+                <apex:param name="folderName" value="{!folder.Name}" />
+            </apex:commandLink>
+        </apex:repeat></b>
+ </apex:outputPanel>
+  &nbsp; &nbsp;
+  <apex:outputPanel id="showhidebuttonPanel" rendered="{!currentFolderId!=null&&NOT(isSearchInProgress && isSearchResultsFound)}">
+  <button  class="selectButton"  title=" Show/Hide Current Folder Details " accesskey="" type="button" onclick="showhideRecord();" >
+       
+         <apex:actionFunction name="showhideRecord" action="{!initFolderRecord}" reRender="FileList,navigatePanel" status="processStatus"/>
+         <span class=" label bBody truncate" dir="ltr">{!IF(isHide,'Hide Details','Show Details')}</span>
+  </button> 
+   </apex:outputPanel> 
+<br/>
+ <apex:outputPanel layout="block"  rendered="{!showPages||hasFiles}" style="padding-top: 5px;float: right;" >
+      &nbsp; &nbsp;
+      <apex:outputPanel ><b>Total Items:</b> {!totalItems}&nbsp;&nbsp;</apex:outputPanel>
+</apex:outputPanel> 
+
+<div id="foldetail">
+ <apex:outputPanel id="folderdetailPanel" >
+    <apex:pageBlockSection columns="1">
+      <apex:repeat value="{!folderconfiguredFields}" var="field" id="customFieldRepeater">
+       <apex:pageBlockSectionItem dataStyle="border-color:#cfd4d9;background-color:#fof1f2;text-align: left; font-family:inherit;">
+          <apex:outputPanel style=" float:left;width:50%;" >
+           <div style="padding-bottom: 5px;">
+            <apex:outputText styleClass="folderfieldLabel" value="{!field.fieldLabel}" title="{!field.fieldLabel}" />   
+           </div>
+             <apex:outputText styleClass="dateStyle" value="{!formattedCreDate}" rendered="{!field.fieldId=='CreatedDate'}" />       
+             <apex:outputField value="{!folderFile.file[field.fieldId]}" rendered="{!field.fieldId!='CreatedDate'}" />
+             <br/>
+             <br/>
+           </apex:outputPanel>
+        </apex:pageBlockSectionItem>   
+      </apex:repeat>   
+   </apex:pageBlockSection>
+ <br/>
+
+ </apex:outputPanel>
+</div> 
+ <apex:outputPanel >
+      <apex:pageBlockTable value="{!files}" var="rec" headerClass="TableTitle" id="pblock" styleClass="filesTable">
+         <apex:column >
+           <apex:actionSupport action="{!goFileRecordPage}" event="onclick" rerender="FileList,searchPanel,showhidebuttonPanel,navigatePanel" status="processStatus">
+             <apex:param name="selId" value="{!rec.Id}" assignTo="{!selectedId}" />
+             <apex:param name="selType" value="{!rec.ContentType}" assignTo="{!selectedType}" />
+             <apex:param name="selName" value="{!rec.fileName}" assignTo="{!selectedName}" />
+           </apex:actionSupport>  
+           <apex:image title="{!rec.contentType}" width="60" height="60" url="{!URLFOR($Resource.cg__SDriveMobileFileIcons, rec.iconName)}" />
+          </apex:column> 
+          <apex:column >
+              <apex:actionSupport action="{!goFileRecordPage}" event="onclick" rerender="FileList,searchPanel,showhidebuttonPanel,navigatePanel" status="processStatus" >
+               <apex:param name="selId" value="{!rec.Id}" assignTo="{!selectedId}" />
+               <apex:param name="selType" value="{!rec.ContentType}" assignTo="{!selectedType}" />
+               <apex:param name="selName" value="{!rec.fileName}" assignTo="{!selectedName}" />
+              </apex:actionSupport>  
+              <apex:outputLabel styleClass="fileName" value="{!rec.fileName}"></apex:outputLabel> 
+                  <br/>
+              <apex:outputLabel styleClass="fileDateSize" value="{!rec.formattedCreatedDate} "></apex:outputLabel>
+               <b class="dot">.</b>
+              <apex:outputLabel styleClass="fileDateSize" value=" {!rec.fileSize}"></apex:outputLabel>
+           </apex:column>         
+    </apex:pageBlockTable>
+</apex:outputPanel>
+
+</apex:pageBlock>
+ <script>
+ function handleEmptySearchKey()
+  {
+    String.prototype.trim = function () {
+     return this.replace(/^\s*/, "").replace(/\s*$/, "");
+        }   
+      var searchKey = document.getElementById('{!$Component.inputBoxSearch}').value;
+      var trimmedKey = searchKey.trim();
+      if(trimmedKey == "")
+      { 
+          //window.alert("Search Keyword cannot be empty");
+          displayYUISimpleDialog("Search keyword cannot be empty!");
+      } 
+      else if(trimmedKey.length == 1 || trimmedKey.replace(/[*?]/g, "").length < 2)
+      {
+        //window.alert("Search Keyword must be longer than one character");
+        displayYUISimpleDialog("Search keyword must be longer than one character!");
+      }
+      else
+      {
+          searchFileList();
+      }
+  }
+  
+  function onClickSearchTextBox(e)
+  {
+     if(document.getElementById('{!$Component.inputBoxSearch}').value == "Search")
+     {
+         document.getElementById('{!$Component.inputBoxSearch}').value = "";
+     }
+  }
+  
+  function onClickEsleware(toForce)
+  {
+     if(toForce == "notForce")
+     {
+      if(document.getElementById('{!$Component.inputBoxSearch}').value == null || 
+            document.getElementById('{!$Component.inputBoxSearch}').value == '')
+         {
+             document.getElementById('{!$Component.inputBoxSearch}').value = 'Search';
+         }
+     }
+     else
+     {
+         document.getElementById('{!$Component.inputBoxSearch}').value = 'Search';
+     }
+  }
+  
+  function handleKeysOnSearchTextBox(ev)
+  {
+   if (window.event && window.event.keyCode == 13 || ev.which == 13) 
+   {
+      handleEmptySearchKey();
+      return false;
+   } 
+   else
+   {
+        return true;
+   }
+  }
+</script>
+  <apex:pageMessages />
+    <style> 
+.searchBoxWrapper
+{
+    width:149px; /*follow your image's size*/
+    height:28px;/*follow your image's size*/
+    background-image:url('{!$Resource.cg__SearchBox}');
+    background-repeat:no-repeat; 
+    padding:0px;
+    margin:0px;
+    position:relative; 
+    float:right;
+   
+}
+.inputBoxSearchStyle
+{
+    text-align: center;
+    border:0px;
+    background-color:transparent; 
+    position:absolute;
+    top:4px;
+    left:9px;
+    width:93px;
+    height:15px;    
+    font-weight: 300;
+    color: #7e7f80; 
+    font-family: 'ProximaNovaSoft-Regular'; 
+    font-size: 14px;   
+}
+.searchbox_submit {
+    border:0px; 
+    background-color:transparent; 
+    position:absolute;
+    top:4px;
+    left:125px;
+    width:16px;
+    height:20px;
+    cursor: pointer; cursor: hand;
+}
+  
+ </style>
+  <apex:outputPanel id="navigatePanel" >
+<apex:outputPanel rendered="{!isPreviousPage}"> 
+<div  id="previous" style="display:block;float: left;padding-left: 5px;" class="label pullLabel">
+<apex:commandLink action="{!navigateToPageLess}" value="Previous" status="loadingStatus" style="  text-decoration: none; font-size:14px; "  reRender="FileList,showhidebuttonPanel,navigatePanel">
+</apex:commandLink>
+</div>
+</apex:outputPanel>
+<apex:outputPanel rendered="{!isNextPage}"> 
+<div  id="next" style="display:block;float: right;padding-right: 5px;" class="label pullLabel">
+<apex:commandLink action="{!navigateToPageMore}" value="Next" status="loadingStatus" style="  text-decoration: none; font-size:14px; "  reRender="FileList,showhidebuttonPanel,navigatePanel">
+</apex:commandLink>
+</div>
+</apex:outputPanel>
+<br/>
+<div class="pullToRefresh pullDown" style=" float: center;  text-align: center;  text-decoration: none;">
+<!--span class="pullDownIcon"-->
+<apex:actionStatus id="loadingStatus"  >
+        <apex:facet name="start" >      
+          <div class=" indicator hideEl forceLoadingIndicator " style="display:block" role="alert"><img class="loading large uiImage" style="border:0" alt="Loading" src="/auraFW/resources/aura/s.gif" /></div>
+          <br/>
+        </apex:facet>
+         <apex:facet name="stop">    
+          <div class=" indicator hideEl forceLoadingIndicator " style="display:none" role="alert"><img class="loading large uiImage" style="border:0" alt="Loading" src="/auraFW/resources/aura/s.gif" /></div>
+          <br/>
+        </apex:facet>
+    </apex:actionStatus>
+<!--span class="subtitle"/-->
+<apex:outputPanel rendered="{!(showPages||hasFiles)&&isMore}"> 
+<div  id="showmore" style="display:block" class="label pullLabel">
+<apex:commandLink action="{!navigateToPageMore}" status="loadingStatus" style="  text-decoration: none; font-size:14px; "  reRender="FileList,showhidebuttonPanel,navigatePanel">
+Click to Show More
+</apex:commandLink>
+</div>
+<br/>
+</apex:outputPanel> 
+<!--
+<apex:outputPanel rendered="{!(showPages||hasFiles)&&isLess}"> 
+  <div id="showless" style="display:block" class="label pullLabel">
+<apex:commandLink action="{!navigateToPageLess}"  status="loadingStatus" style="  text-decoration: none; font-size:14px; "  reRender="FileList,showhidebuttonPanel,navigatePanel">
+Click to Show Less
+</apex:commandLink> 
+</div>
+<br/>
+</apex:outputPanel>
+--> 
+
+
+
+</div>
+
+ </apex:outputPanel>
+ </apex:form>
+<script type="text/javascript">
+           function displayForm()
+           {
+            document.getElementById(('{!$Component.mainForm}')).style.display = "block";
+           }
+           function nondisplayForm()
+           {
+            document.getElementById(('{!$Component.mainForm}')).style.display = "none";
+           }
+      </script>
+<apex:actionStatus id="processStatus" onstart="nondisplayForm()" onstop="displayForm()" >
+        <apex:facet name="start" >
+           <br/>
+           <br/>
+           <div class=" indicator hideEl forceLoadingIndicator " style="display:block" role="alert"><img class="loading large uiImage" style="border:0" alt="Loading" src="/auraFW/resources/aura/s.gif" /></div>
+           <br/>
+          
+        </apex:facet>
+         <apex:facet name="stop">
+           <br/>
+           <div class=" indicator hideEl forceLoadingIndicator " style="display:none" role="alert"><img class="loading large uiImage" style="border:0" alt="Loading" src="/auraFW/resources/aura/s.gif" /></div>
+           <br/>
+        </apex:facet>
+    </apex:actionStatus>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</body>     
+</apex:page>

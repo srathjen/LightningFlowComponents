@@ -1,0 +1,25 @@
+<aura:component controller="Loop.SupportSidebarController">
+    <aura:attribute name="orgId" type="String"/>
+    <aura:attribute name="emailBody" type="String" default=""/>
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    
+    <div class="slds">
+        <div class="slds-grid">
+            <div class="slds-col">
+                <Loop:Svg id="buttonToggle" xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/custom-sprite/svg/symbols.svg#custom71" class="slds-icon__container slds-icon__container--square slds-icon-action-description slds-icon slds-icon--medium"/>
+                <h1 class="slds-text-heading--medium slds-m-bottom--medium slds-m-left--small iconFloat slds-word-wrap" style="vertical-align: top;">Support</h1>
+                <h2 class="slds-text-heading--small slds-m-bottom--small slds-word-wrap">Need Help?</h2>
+                <a href="https://help.nintex.com/en-us/docgen/docservices/Default.htm#cshid=9003" target="_blank" style="text-decoration: underline;">Support Site</a><br/>
+                <Loop:Button label="Log a Case" class="slds-m-top--small slds-button slds-button--brand" onclick="{!c.openCase}" disabled="{!v.emailBody == ''}"/><br/>
+                <Loop:Button label="Grant Login Access" class="slds-m-top--small slds-button slds-button--brand" onclick="{!c.loginAccess}"/>
+                <div class="slds-m-top--medium slds-word-wrap">Your organization Id is:<br/>{!v.orgId}</div>
+                <hr/>
+                <h2 class="slds-text-heading--small slds-m-bottom--small slds-word-wrap">Support Contacts</h2>
+                <div class="slds-m-bottom--small slds-word-wrap"><b>Email: </b>ddpsupport@nintex.com</div>
+                <div class="slds-m-right--xx-small slds-m-bottom--small slds-word-wrap slds-float--left"><b>Phone: </b></div>
+                <div class="slds-m-bottom--small slds-word-wrap" style="margin-left: 52px;">(US):  949.242.0455 opt 2 <br/>(UK): +44 203 318 3234 opt 2 <br/>(AU): +61 2 8417 2058 opt 2</div>
+                <div class="slds-float--left"><b>Support Hours:</b>  M-F, 6am - 5pm PT<br/>Extended hours available on request.</div>
+            </div>
+        </div>
+    </div>
+</aura:component>

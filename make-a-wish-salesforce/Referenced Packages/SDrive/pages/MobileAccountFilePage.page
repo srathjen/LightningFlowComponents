@@ -1,0 +1,12 @@
+<apex:page standardController="Account" tabStyle="Account" showHeader="false"  sidebar="false" extensions="cg.AccountEmailExtension">
+<c:FileComponent customObjectName="Account"
+customObjectFileName="AccountFile__c"
+fileNamespacePrefix="cg__"
+objectNamespacePrefix=""
+relationshipName="Account__r"
+privateEnabled="true"
+objectId="{!Account.Id}"
+defaultEmailAddress="{!defaultAccountEmail}"
+title="Account Files"
+/>
+</apex:page>

@@ -1,0 +1,6 @@
+<apex:page controller="cg.SDriveErrorPageController">
+  <h1>Error occured</h1>
+  <apex:pageBlock >
+    <apex:outputText id="msg" value="{!errorMessage}"></apex:outputText>
+  </apex:pageBlock>
+</apex:page>

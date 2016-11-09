@@ -1,0 +1,1166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Wish</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Wishes</value>
+    </caseValues>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Access</value>
+        </caseValues>
+        <name>case_access</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Access Level</value>
+        </caseValues>
+        <name>case_access_level</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Account</value>
+        </caseValues>
+        <name>case_account</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Alert</value>
+        </caseValues>
+        <name>case_alert</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Article</value>
+        </caseValues>
+        <name>case_article</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Article ID</value>
+        </caseValues>
+        <name>case_article_id</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Asset</value>
+        </caseValues>
+        <name>case_asset</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Assignment Rule</value>
+        </caseValues>
+        <name>case_assignment_rule</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Capture</value>
+        </caseValues>
+        <name>case_capture</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Capture Information</value>
+        </caseValues>
+        <name>case_capture_information</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Capture Page</value>
+        </caseValues>
+        <name>case_capture_page</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Close</value>
+        </caseValues>
+        <name>case_close</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Closed</value>
+        </caseValues>
+        <name>case_closed</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Closure</value>
+        </caseValues>
+        <name>case_closure</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Comment</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Comments</value>
+        </caseValues>
+        <name>case_comment</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Comment ID</value>
+        </caseValues>
+        <name>case_comment_id</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Comment Information</value>
+        </caseValues>
+        <name>case_comment_information</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Company</value>
+        </caseValues>
+        <name>case_company</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Contact</value>
+        </caseValues>
+        <name>case_contact</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Contact Role</value>
+        </caseValues>
+        <name>case_contact_role</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Created Date</value>
+        </caseValues>
+        <name>case_created_date</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Creator</value>
+        </caseValues>
+        <name>case_creator</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Currency</value>
+        </caseValues>
+        <name>case_currency</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Custom Field</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Custom Fields</value>
+        </caseValues>
+        <name>case_custom_field</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Description</value>
+        </caseValues>
+        <name>case_description</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Detail</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Details</value>
+        </caseValues>
+        <name>case_detail</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Detail Link</value>
+        </caseValues>
+        <name>case_detail_link</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Division</value>
+        </caseValues>
+        <name>case_division</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Edit</value>
+        </caseValues>
+        <name>case_edit</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Email</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Emails</value>
+        </caseValues>
+        <name>case_email</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Feed</value>
+        </caseValues>
+        <name>case_feed</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Field</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Fields</value>
+        </caseValues>
+        <name>case_field</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish History</value>
+        </caseValues>
+        <name>case_history</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish History ID</value>
+        </caseValues>
+        <name>case_history_id</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish History Info</value>
+        </caseValues>
+        <name>case_history_info</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish History Owner</value>
+        </caseValues>
+        <name>case_history_owner</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish History Report</value>
+        </caseValues>
+        <name>case_history_report</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish History Status</value>
+        </caseValues>
+        <name>case_history_status</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish ID</value>
+        </caseValues>
+        <name>case_id</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Information</value>
+        </caseValues>
+        <name>case_information</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Last Modified</value>
+        </caseValues>
+        <name>case_last_modified</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Lifecycle</value>
+        </caseValues>
+        <name>case_lifecycle</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Lifecycle Report</value>
+        </caseValues>
+        <name>case_lifecycle_report</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish List</value>
+        </caseValues>
+        <name>case_list</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Milestone</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Milestones</value>
+        </caseValues>
+        <name>case_milestone</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Name</value>
+        </caseValues>
+        <name>case_name</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Number</value>
+        </caseValues>
+        <name>case_number</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Origin</value>
+        </caseValues>
+        <name>case_origin</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Owner</value>
+        </caseValues>
+        <name>case_owner</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Owner Alias</value>
+        </caseValues>
+        <name>case_owner_alias</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Owner Role</value>
+        </caseValues>
+        <name>case_owner_role</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Phone</value>
+        </caseValues>
+        <name>case_phone</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Picklist</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Picklists</value>
+        </caseValues>
+        <name>case_picklist</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Priority</value>
+        </caseValues>
+        <name>case_priority</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Queue</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Queues</value>
+        </caseValues>
+        <name>case_queue</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Reason</value>
+        </caseValues>
+        <name>case_reason</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Record Type</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Record Types</value>
+        </caseValues>
+        <name>case_record_type</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Record Type ID</value>
+        </caseValues>
+        <name>case_record_type_id</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Report</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Reports</value>
+        </caseValues>
+        <name>case_report</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Solution</value>
+        </caseValues>
+        <name>case_solution</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Solution ID</value>
+        </caseValues>
+        <name>case_solution_id</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Splash Page</value>
+        </caseValues>
+        <name>case_splash_page</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Stage ID</value>
+        </caseValues>
+        <name>case_stage_id</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Status</value>
+        </caseValues>
+        <name>case_status</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Subject</value>
+        </caseValues>
+        <name>case_subject</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Team</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Teams</value>
+        </caseValues>
+        <name>case_team</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Team Member</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Team Members</value>
+        </caseValues>
+        <name>case_team_member</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Team Member Role</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Team Member Roles</value>
+        </caseValues>
+        <name>case_team_member_role</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Team Record</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Team Records</value>
+        </caseValues>
+        <name>case_team_record</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Type</value>
+        </caseValues>
+        <name>case_type</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish View</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Views</value>
+        </caseValues>
+        <name>case_view</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wishes Detail Page</value>
+        </caseValues>
+        <name>cases_detail_page</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wishes Tab</value>
+        </caseValues>
+        <name>cases_tab</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Related Wish</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Related Wishes</value>
+        </caseValues>
+        <name>child_case</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Wish Note</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Wish Notes</value>
+        </caseValues>
+        <name>feed_filter_case_note</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Parent Wish</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Parent Wishes</value>
+        </caseValues>
+        <name>parent_case</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Parent Wish ID</value>
+        </caseValues>
+        <name>parent_case_id</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Write Wish Note</value>
+        </caseValues>
+        <name>publisher_private_answer</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>View Wish Details</value>
+        </caseValues>
+        <name>publisher_view_details</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <label><!-- Additional Requests --></label>
+        <name>Additional_Requests__c</name>
+    </fields>
+    <fields>
+        <label><!-- All participants reside with wish child --></label>
+        <name>All_requested_wish_participants_reside_w__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Is there anything on your family’s calendar (upcoming medical treatments, school or work commitments,
+planned vacations, etc.) that might impact your ability to participate in a wish? --></help>
+        <label><!-- Any impact your ability to join wish --></label>
+        <name>Any_impact_your_ability_to_join_wish__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Does your automobile insurance provide coverage while using a rental car? --></help>
+        <label><!-- Automobile insurance provide coverage --></label>
+        <name>Automobile_insurance_provide_coverage__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Availability Time Period 2 --></label>
+        <name>Availability2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Availability Time Period 3 --></label>
+        <name>Availability3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Availability Time Period 1 --></label>
+        <name>Availability_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Birthdate --></label>
+        <name>Birthdate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bringing Own Wheel Chair --></label>
+        <name>Bringing_Own_Wheel_Chair__c</name>
+    </fields>
+    <fields>
+        <label><!-- Case Comment --></label>
+        <name>Case_Comment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Case Member Count --></label>
+        <name>Case_Member_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Chapter Medical Advisor Phone --></label>
+        <name>Chapter_Medical_Advisor_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Chapter Name --></label>
+        <name>Chapter_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Chapter Email --></label>
+        <name>Hidden_Chapter_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Chapter Name --></label>
+        <name>Hidden_Chapter_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Chapter Phone --></label>
+        <name>Hidden_Chapter_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Lead Id --></label>
+        <name>Hidden_Lead_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Lead Name --></label>
+        <name>Hidden_Lead_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Primary Diagnosis --></label>
+        <name>Hidden_Primary_Diagnosis__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Secondary Diagnosis 1 --></label>
+        <name>Hidden_Secondary_Diagnosis_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Secondary Diagnosis 2 --></label>
+        <name>Hidden_Secondary_Diagnosis_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Secondary Diagnosis 3 --></label>
+        <name>Hidden_Secondary_Diagnosis_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Secondary Diagnosis --></label>
+        <name>Hidden_Secondary_Diagnosis__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Why do you feel --></label>
+        <name>Hidden_Why_do_you_feel__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Wish Child City --></label>
+        <name>Hidden_Wish_Child_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Wish Child Country Code --></label>
+        <name>Hidden_Wish_Child_Country_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Wish Child Full Name --></label>
+        <name>Hidden_Wish_Child_Full_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Wish Child Postalcode --></label>
+        <name>Hidden_Wish_Child_Postalcode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Wish Child StateCode --></label>
+        <name>Hidden_Wish_Child_StateCode__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Wish Child Street --></label>
+        <name>Hidden_Wish_Child_Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsLocked --></label>
+        <name>IsLocked__c</name>
+    </fields>
+    <fields>
+        <label><!-- Lead --></label>
+        <name>Lead__c</name>
+        <relationshipLabel><!-- Cases --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Chapter Medical Advisor --></label>
+        <name>Local_MCA_Team__c</name>
+        <relationshipLabel><!-- Cases --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Chapter Medical Advisor Email --></label>
+        <name>MAC_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medical Condition --></label>
+        <name>Medical_Condition__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rush Explanation --></label>
+        <name>Rush_Explanation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rush Timeframe --></label>
+        <name>Rush_Timeframe__c</name>
+        <picklistValues>
+            <masterLabel>0-30 days</masterLabel>
+            <translation><!-- 0-30 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>31-90 days</masterLabel>
+            <translation><!-- 31-90 days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>91+</masterLabel>
+            <translation><!-- 91+ --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ASAP</masterLabel>
+            <translation><!-- ASAP --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Rush --></label>
+        <name>Rush__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sub Status --></label>
+        <name>Sub_Status__c</name>
+        <picklistValues>
+            <masterLabel>Abandoned</masterLabel>
+            <translation><!-- Abandoned --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Age Expiration</masterLabel>
+            <translation><!-- Age Expiration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Assign in Portal</masterLabel>
+            <translation><!-- Assign in Portal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deceased</masterLabel>
+            <translation><!-- Deceased --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Elective</masterLabel>
+            <translation><!-- Elective --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Delay</masterLabel>
+            <translation><!-- Family Delay --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Delay Closing</masterLabel>
+            <translation><!-- Family Delay Closing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Loss of Contact</masterLabel>
+            <translation><!-- Loss of Contact --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical</masterLabel>
+            <translation><!-- Medical --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Moved</masterLabel>
+            <translation><!-- Moved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non-Viewable</masterLabel>
+            <translation><!-- Non-Viewable --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Refused</masterLabel>
+            <translation><!-- Refused --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Total Hour Spent Hidden --></label>
+        <name>Total_Hour_Spent_Hidden__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Hour Spent --></label>
+        <name>Total_Hour_Spent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Manager Name --></label>
+        <name>VOlunteer_Manager_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Manager Email --></label>
+        <name>Volunteer_Manager_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish type --></label>
+        <name>Wish_type__c</name>
+        <picklistValues>
+            <masterLabel>Cruise</masterLabel>
+            <translation><!-- Cruise --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Disney</masterLabel>
+            <translation><!-- Disney --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>GKTW</masterLabel>
+            <translation><!-- GKTW --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>International Travel</masterLabel>
+            <translation><!-- International Travel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Standard</masterLabel>
+            <translation><!-- Standard --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- isApprove --></label>
+        <name>isApprove__c</name>
+    </fields>
+    <fields>
+        <label><!-- isEmail --></label>
+        <name>isEmail__c</name>
+    </fields>
+    <fields>
+        <label><!-- isNational --></label>
+        <name>isNational__c</name>
+    </fields>
+    <layouts>
+        <layout>Child Wishes</layout>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Parent Wishes</layout>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- DEV &amp; QA --></label>
+            <section>DEV &amp; QA</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Determination</layout>
+        <sections>
+            <label><!-- Driver Details --></label>
+            <section>Driver Details</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Information --></label>
+            <section>Medical Information</section>
+        </sections>
+        <sections>
+            <label><!-- Travel Information --></label>
+            <section>Travel Information</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Details --></label>
+            <section>Wish Details</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- NewChildCase --></label>
+        <name>NewChildCase</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- SendEmail --></label>
+        <name>SendEmail</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- Diagnosis Verification Review --></label>
+        <name>Diagnosis_Verification_Review</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Wish --></label>
+        <name>Wish</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Wish Assist --></label>
+        <name>Wish_Assist</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Wish Determination --></label>
+        <name>Wish_Determination</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Wish Effect --></label>
+        <name>Wish_Effect</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Wish Granted --></label>
+        <name>Wish_Granted</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Wish Planning &amp; Anticipation --></label>
+        <name>Wish_Planning_Anticipation</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You should enter value for sub status when status having values as Ready to Assign --></errorMessage>
+        <name>Case_Ready_to_Assign_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please enter values to &apos;Rush Explanation &amp; Rush Timeframe&apos;  fields in order  to check Rush. --></errorMessage>
+        <name>Case_Rush_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You don&apos;t have access to close the wish --></errorMessage>
+        <name>Restrict_Wish_Close</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Avis --></label>
+        <name>Avis</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DailyWISH --></label>
+        <name>DailyWISH</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GKTW_Reservations --></label>
+        <name>GKTW_Reservations</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GKTW_Wish_Granting_Orgs --></label>
+        <name>GKTW_Wish_Granting_Orgs</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- LOOP --></label>
+        <name>Loop__LOOP</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- LOOP_Merge --></label>
+        <name>Loop__LOOP_Merge</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- LOOPlus --></label>
+        <name>Loop__LOOPlus</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Mass_LOOP_Merge --></label>
+        <name>Loop__Mass_LOOP_Merge</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Mass_LOOPlus --></label>
+        <name>Loop__Mass_LOOPlus</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Make_A_Wish --></label>
+        <name>Make_A_Wish</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Medical_Eligibility_Review --></label>
+        <name>Medical_Eligibility_Review</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Smart_Travelers_Enrollment_Program --></label>
+        <name>Smart_Travelers_Enrollment_Program</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- State_Dep_t_Travel_Warning_List --></label>
+        <name>State_Dep_t_Travel_Warning_List</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Wish_Bank --></label>
+        <name>Wish_Bank</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_with_DocuSign --></label>
+        <name>dsfs__Send_with_DocuSign</name>
+    </webLinks>
+    <workflowTasks>
+        <name>Birthday_Task</name>
+        <subject><!-- Wish Child Birthday Reminder --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

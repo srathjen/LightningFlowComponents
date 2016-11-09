@@ -1,0 +1,12 @@
+<apex:page standardController="Contact" tabStyle="Contact" showHeader="false"  sidebar="false">
+<c:FileComponent customObjectName="Contact"
+customObjectFileName="ContactFile__c"
+fileNamespacePrefix="cg__"
+objectNamespacePrefix=""
+relationshipName="Contact__r"
+privateEnabled="true"
+objectId="{!Contact.Id}"
+defaultEmailAddress="{!Contact.Email}" 
+title="Contact Files"
+/>
+</apex:page>

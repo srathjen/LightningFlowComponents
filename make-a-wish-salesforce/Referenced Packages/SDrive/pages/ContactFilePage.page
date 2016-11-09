@@ -1,0 +1,12 @@
+<apex:page standardController="Contact" tabStyle="Contact">
+  <social:profileViewer entityId="{!Contact.Id}" />
+  <apex:detail inlineEdit="true" relatedList="true" showChatter="true"/>
+  <c:AttachmentComponent title="Contact Files"
+    customObjectName="Contact" customObjectFileName="ContactFile__c"
+    fileNamespacePrefix="cg__"
+    relationshipName="Contact__r"
+    legacyIdSupport="true"
+    objectId="{!Contact.Id}"
+    inline="true"
+    defaultEmailAddress="{!Contact.Email}" />
+</apex:page>

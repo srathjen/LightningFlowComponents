@@ -1,0 +1,118 @@
+<apex:page action="{!attachmentSyncConfController}" controller="cg.AttachmentSyncPageController">
+<apex:form rendered="{!!isAdmin}">
+    <apex:pageBlock >
+        <apex:PageMessage summary="Content cannot be displayed: You do not have sufficient privileges to access the S-Drive Attachment Sync Page. Please contact your administrator for further information." severity="warning" strength="3"/>
+        <apex:pageBlockButtons >
+            <apex:commandButton action="{!goToHomePage}" value="Go to Home Page"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+</apex:form>
+<apex:form id="theform" rendered="{!isAdmin}" >
+
+<c:WaitingComponent />
+
+<apex:outputPanel layout="block" id="syncSettings" >
+ <apex:pageBlock rendered="{!allObjectsLoaded}"> 
+    <apex:pageMessages />
+    <apex:pageBlockButtons >
+        <apex:commandButton value="Save" action="{!save}" />
+        <apex:commandButton value="Cancel" action="{!Cancel}"/>
+    </apex:pageBlockButtons>
+    
+    <apex:pageBlockSection columns="1">
+      <apex:facet name="header">
+        <span style="color:black">Synced Objects</span>
+      </apex:facet>
+      
+        <apex:pageBlockTable value="{!objectSettings}" var="rec">
+        <apex:column headerValue="Object" style="font-size : 12px;font-weight:bold">
+        <apex:outputLabel value="{!rec.objectLabel}"></apex:outputLabel>
+        </apex:column>
+        <apex:column headerValue="Object File">
+         <apex:selectList id="objectSelectList" size="1"  value="{!rec.attachmentSync.cg__File_Object_Name__c}" >
+         <apex:selectOptions value="{!rec.objectlist}"/>
+         </apex:selectList>
+        </apex:column>
+        <apex:column headerValue="Enabled">
+         <apex:inputField value="{!rec.attachmentSync.cg__Enabled__c}"/>
+        </apex:column>
+        </apex:pageBlockTable>
+     </apex:pageBlockSection>
+    
+     <apex:pageBlockSection columns="1" >
+         <apex:facet name="header">
+            <span style="color:black">General Settings</span>
+         </apex:facet>
+         <apex:pageBlockSectionItem helpText="Upload email attachments of Email Message records into S-Drive.">
+           <apex:outputLabel value="Enable To Handle Email Attachments"></apex:outputLabel>
+          <apex:inputCheckbox id="enableEmailAttachCheckbox" value="{!isEnableEmailAttachment}"  />
+          </apex:pageBlockSectionItem>
+          
+          <apex:pageBlockSectionItem helpText="Delete Salesforce attachments after S-Drive Attachment Sync is completed.">
+           <apex:outputLabel value="Enable To Delete Attachments After Upload"></apex:outputLabel>
+          <apex:inputCheckbox id="enabledeleteAttachCheckbox" value="{!isEnableDeleteAttachment}"  />
+          </apex:pageBlockSectionItem>
+      
+      </apex:pageBlockSection>
+      
+
+ </apex:pageBlock>
+
+ <apex:pageBlock rendered="{!allObjectsLoaded}">
+   
+   <apex:pageBlockSection columns="1" >
+     <apex:facet name="header">
+        <span style="color:black">Sync Status</span>
+     </apex:facet>
+     
+     <apex:pageBlockSectionItem helpText="It shows failed attachment sync count. You can retry the attachment sync by clicking RETRY button. To see more details about failed attachment sync, You should look AttachmentSync object!">
+         <apex:outputLabel value="Failed Sync"></apex:outputLabel>
+         <apex:outputLabel style="color: red;" value="Failed sync count: {!unSuccessSyncCount}"></apex:outputLabel>
+      </apex:pageBlockSectionItem>
+      <apex:pageBlockSectionItem >
+         <apex:outputpanel style=" padding-left: 350px;">
+             <apex:commandButton value=" Retry "  rendered="{!unSuccessSync}" action="{!retry}" rerender="syncSettings"/>
+          </apex:outputpanel>
+       </apex:pageBlockSectionItem>
+       <apex:pageBlockSectionItem helpText="It shows in progress attachment sync count.  To see more details about in progress attachment sync, You should look AttachmentSync object!">
+           <apex:outputLabel value="In Progress Sync"></apex:outputLabel>
+           <apex:outputLabel style="color: burlywood;" value="In progress sync count: {!processingSyncCount }"></apex:outputLabel>
+       </apex:pageBlockSectionItem>
+
+       <apex:actionStatus id="refreshstatus" layout="block">
+         <apex:facet name="stop">
+           <apex:outputpanel style=" padding-left: 400px;">
+             <apex:commandButton action="{!refresh}"  value=" Refresh Sync Status " rerender="syncSettings" status="refreshstatus"></apex:commandButton>
+           </apex:outputpanel>
+          </apex:facet>
+         <apex:facet name="start">
+          <apex:outputpanel style=" padding-left: 400px;">
+            <apex:outputLabel style="color: cornflowerblue;font-weight: 600" value="Refreshing..."></apex:outputLabel>
+           </apex:outputpanel>
+          </apex:facet>
+         </apex:actionStatus>
+         
+      </apex:pageBlockSection>
+ </apex:pageBlock>
+ 
+</apex:outputPanel> 
+
+ <apex:actionFunction action="{!loadConfiguration}" name="loadConfiguration" rerender="syncSettings,jsBlock">
+ </apex:actionFunction>
+
+</apex:form> 
+
+<apex:outputPanel id="jsBlock" layout="block">
+    <apex:outputPanel rendered="{!NOT(allObjectsLoaded)}">
+        <script type="text/javascript">
+            lockScreenAndUpdateMessage(true,'{!JSENCODE(loadingMessage)}');
+            loadConfiguration();
+        </script>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!allObjectsLoaded}">
+        <script type="text/javascript">
+              lockScreenAndUpdateMessage(false,'{!JSENCODE(loadingMessage)}');
+        </script>
+    </apex:outputPanel> 
+</apex:outputPanel>
+</apex:page>

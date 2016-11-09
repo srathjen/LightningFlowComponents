@@ -1,0 +1,12 @@
+<apex:page standardController="Case" tabStyle="Case" showHeader="false"  sidebar="false" extensions="cg.CaseEmailExtension">
+<c:FileComponent customObjectName="Case"
+customObjectFileName="CaseFile__c"
+fileNamespacePrefix="cg__"
+objectNamespacePrefix=""
+relationshipName="Case__r"
+privateEnabled="true"
+objectId="{!Case.Id}"
+defaultEmailAddress="{!defaultCaseEmail}"
+title="Case Files"
+/>
+</apex:page>

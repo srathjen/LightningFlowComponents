@@ -1,0 +1,11 @@
+<apex:page standardController="Opportunity" extensions="cg.OpportunityEmailExtension" tabStyle="Opportunity">
+  <apex:detail inlineEdit="true" relatedList="true" showChatter="true"/>
+  <c:AttachmentComponent title="Opportunity Files"
+    customObjectName="Opportunity" customObjectFileName="OpportunityFile__c"
+    fileNamespacePrefix="cg__"
+    relationshipName="Opportunity__r"
+    legacyIdSupport="true"
+    objectId="{!Opportunity.Id}"
+    inline="true"
+    defaultEmailAddress="{!defaultOpportunityEmail}" />
+</apex:page>

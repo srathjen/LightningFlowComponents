@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Network xmlns="http://soap.sforce.com/2006/04/metadata">
+    <allowMembersToFlag>false</allowMembersToFlag>
+    <branding>
+        <loginFooterText>salesforce.com</loginFooterText>
+        <loginLogo>Communities_Shared_Document_Folder1/maw_logo_blue_small_png.png</loginLogo>
+        <pageFooter>SharedDocuments/mawa_active_footer_static.html</pageFooter>
+        <pageHeader>SharedDocuments/mawa_active_header_static.html</pageHeader>
+        <primaryColor>#1797C0</primaryColor>
+        <primaryComplementColor>#FFFFFF</primaryComplementColor>
+        <quaternaryColor>#FFFFFF</quaternaryColor>
+        <quaternaryComplementColor>#222222</quaternaryComplementColor>
+        <secondaryColor>#51606E</secondaryColor>
+        <tertiaryColor>#DDE4E9</tertiaryColor>
+        <tertiaryComplementColor>#222222</tertiaryComplementColor>
+        <zeronaryColor>#51606E</zeronaryColor>
+        <zeronaryComplementColor>#FFFFFF</zeronaryComplementColor>
+    </branding>
+    <changePasswordTemplate>Automated_Volunteer_Templates/Communities_Reset_Password_Email_Template</changePasswordTemplate>
+    <emailSenderAddress>vennila@mstsolutions.com</emailSenderAddress>
+    <emailSenderName>Volunteer Portal</emailSenderName>
+    <enableGuestChatter>false</enableGuestChatter>
+    <enableInvitation>false</enableInvitation>
+    <enableKnowledgeable>false</enableKnowledgeable>
+    <enableNicknameDisplay>false</enableNicknameDisplay>
+    <enablePrivateMessages>false</enablePrivateMessages>
+    <enableReputation>false</enableReputation>
+    <forgotPasswordTemplate>Automated_Volunteer_Templates/Communities_Volunteer_Forgot_Password_Email_Template</forgotPasswordTemplate>
+    <networkMemberGroups>
+        <profile>Admin</profile>
+        <profile>Customer Community Plus Login User</profile>
+        <profile>Prospective Volunteer</profile>
+        <profile>Customer Community Plus User</profile>
+        <profile>Active Volunteer</profile>
+    </networkMemberGroups>
+    <picassoSite>Wish_Volunteer_Community_C</picassoSite>
+    <selfRegProfile>prospective volunteer</selfRegProfile>
+    <selfRegistration>true</selfRegistration>
+    <sendWelcomeEmail>true</sendWelcomeEmail>
+    <site>Wish_Volunteer_Community</site>
+    <status>Live</status>
+    <tabs>
+        <customTab>dsfs__DocuSign_Status__c</customTab>
+        <defaultTab>Chatter</defaultTab>
+        <standardTab>Chatter</standardTab>
+    </tabs>
+    <welcomeTemplate>Automated_Volunteer_Templates/Communities_New_Prospective_Volunteer_Welcome_Email_Template</welcomeTemplate>
+</Network>

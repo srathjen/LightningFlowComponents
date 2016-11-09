@@ -1,0 +1,20 @@
+<aura:component >
+    <!--Required attributes-->
+    <aura:attribute name="label" type="string" default="" required="true" description="Pill label."/>
+    <aura:attribute name="id" type="string" default="" required="true" description="Pill id."/>
+    <aura:attribute name="pillClass" type="string" default="slds-pill" description="Pill class style, you can also make it a badge by adding 'slds-badge'."/>
+        
+    <!--Optional attributes-->
+    <aura:attribute name="svgLink" type="string" default="/resource/Loop__SalesforceLightning/assets/icons/utility-sprite/svg/symbols.svg#close"/>
+    <aura:attribute name="svgClass" type="string" default="slds-button__icon"/>
+    
+    <!--Registered events-->
+    <aura:registerEvent name="removePill" type="Loop:removePill"/>
+    
+    <div class="drawloop">
+        <span class="{!v.pillClass}">
+            <span class="slds-pill__label pillLabel">{!v.label}</span>
+            <Loop:Button class="slds-button slds-button--icon-bare slds-pill__remove button-left" svgXlinkHref="{!v.svgLink}" svgClass="{!v.svgClass}" onclick="{!c.removePill}"/>
+        </span>
+    </div>
+</aura:component>

@@ -1,0 +1,257 @@
+<apex:page sidebar="true" controller="cg.SDriveBasicActivationController" action="{!validateActivation}" id="activationPage">
+<apex:styleSheet value="{!URLFOR($Resource.cg__YuiScripts, 'assets/skins/sam/skin.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.cg__YuiScripts,'menu/assets/skins/sam/menu.css')} "/>
+ 
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts, 'yahoo-dom-event/yahoo-dom-event.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts, 'container/container-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts, 'animation/animation-min.js')}" />
+
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'yahoo/yahoo-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'event/event-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'connection/connection_core-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'menu/menu-min.js')}" />
+ 
+<apex:includeScript value="/soap/ajax/15.0/connection.js"/>
+<apex:includeScript value="/soap/ajax/15.0/apex.js"/> 
+
+<apex:form rendered="{!!isAdmin}">
+    <apex:pageBlock >
+        <apex:PageMessage summary="Content cannot be displayed: You do not have sufficient privileges to access the S-Drive Activation Page. Please contact your administrator for further information" severity="warning" strength="3"/>
+        <apex:pageBlockButtons >
+            <apex:commandButton action="{!goToHomePage}" value="Go to Home Page"/>
+        </apex:pageBlockButtons>
+    </apex:pageBlock>
+</apex:form>
+
+<apex:form id="activationForm" rendered="{!isAdmin}">
+      <apex:actionFunction action="{!configureS3Credentials}" name="configureS3Credentials" />
+      
+      <apex:actionFunction action="{!configureS3EndPoint}" name="configureS3EndPoint" oncomplete="configureS3BucketName();" />
+      <apex:actionFunction action="{!configureS3BucketName}" name="configureS3BucketName" />
+      <apex:pageBlock id="welcomeProduct" title="Welcome to S-Drive">
+          <table>
+          <td width="150">
+          <apex:image url="{!$Resource.cg__SDriveLogo}" style="width: 250px;" />
+          </td>
+          <td width="600">
+          <br />
+          Thank you for installing S-Drive.
+          </td>
+          </table>
+       </apex:pageBlock>
+       
+       <apex:pageBlock id="configureRemoteSitesOk" title="Step 1: Configure Remote Sites" rendered="{!configurationOk}">
+            <font color="green"><strong>Your remote site settings are configured correctly.</strong></font>
+       </apex:pageBlock>
+       
+       <apex:pageBlock id="configureRemoteSitesFailed" title="Step 1: Configure Remote Sites" rendered="{!configurationFailed}">
+            <font color="red"><strong>You haven't configured your Remote Sites Settings.</strong></font><p />
+            Go to <strong>Setup -> Administration Setup -> Security Controls -> Remote Site Settings</strong> and add the following remote site:
+            <ul>
+                <li>https://s3.amazonaws.com</li>
+            </ul>
+            See Installation Guide on the following page <a href="https://sdriveapp.com/documentation/" target="_blank">Support Documentation</a>
+       </apex:pageBlock>
+       
+       <apex:pageBlock title="Step 2: Configure Amazon S3 Credentials" rendered="{!s3CredentialsFailed&&configurationFailed}">
+        <font color="red"><strong>You have to complete Step 1.</strong></font>
+       </apex:pageBlock>
+       
+       <apex:pageBlock id="configureS3CredentialsOk" title="Step 2: Configure Amazon S3 Credentials" rendered="{!s3CredentialsOk}">
+            <font color="green"><strong>Amazon S3 Credentials are configured correctly.</strong></font>
+            <apex:pageBlockSection id="okSection">
+            <apex:pageBlockSectionItem helpText="Your Amazon S3 Account's Access Key">
+              <apex:outputLabel value="Access Key" /><apex:inputText size="40" id="accessKey" value="{!formAccessKey}" disabled="true" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem helpText="Your Amazon S3 Account's Secret Key">
+              <apex:outputLabel value="Secret Key" /><apex:inputText size="40" id="secretKey" value="{!formSecretKey}" disabled="true" />
+            </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+       </apex:pageBlock>
+       
+       <apex:pageBlock id="configureS3CredentialsFailed" title="Step 2: Configure Amazon S3 Credentials" rendered="{!configurationOk&&s3CredentialsFailed}">
+       <apex:pageMessages />
+        <apex:pageBlockSection id="failedSection">
+        <apex:pageBlockSectionItem helpText="Your Amazon S3 Account's Access Key">
+          <apex:outputLabel value="Access Key" /><apex:inputText size="40" id="accessKey" value="{!formAccessKey}" />
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem helpText="Your Amazon S3 Account's Secret Key">
+          <apex:outputLabel value="Secret Key" /><apex:inputSecret size="40" id="secretKey" value="{!formSecretKey}" />
+        </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Configure Amazon S3 Credentials" id="configureCredentialsButton" onclick="javascript:configureS3Credentials();return false;"></apex:commandButton>
+        </apex:pageBlockButtons>
+       </apex:pageBlock>
+        
+        <apex:pageBlock title="Step 3: Configure Amazon S3 Bucket Name" rendered="{!s3CredentialsFailed&&s3BucketNameFailed}">
+        <font style="color: red"><strong>You have to complete Step 2.</strong></font>
+       </apex:pageBlock>
+        <apex:pageBlock id="configureS3BucketNameOk" title="Step 3: Configure Amazon S3 Bucket Name" rendered="{!s3BucketNameOk}">
+        <font color="green"><strong>Amazon S3 Bucket Name is configured correctly.</strong></font>
+        <apex:pageBlockSection id="failedSection">
+            <apex:pageBlockSectionItem helpText="Your Amazon S3 Account's Bucket Name" id="bucketSectionItem">
+              <apex:outputLabel value="Bucket Name" />
+                <apex:inputText size="40" id="bucketName" value="{!formBucketName}" disabled="true" />
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+       </apex:pageBlock>
+       
+       <apex:pageBlock id="configureS3BucketNameFailed" title="Step 3: Configure Amazon S3 Bucket Name" rendered="{!s3BucketNameFailed&&s3CredentialsOk}">
+       <apex:pageMessages />
+        <apex:pageBlockSection id="failedSection">
+           <apex:actionStatus id="workingStatus" layout="block">
+             <apex:facet name="stop">
+                <apex:selectRadio layout="pageDirection" value="{!bucketOption}">      
+                   <apex:selectOptions value="{!bucketOptions}"/>
+                   <apex:actionSupport event="onchange" reRender="failedSection" status="workingStatus"/>
+                </apex:selectRadio>
+              </apex:facet>
+              <apex:facet name="start">
+               <apex:outputpanel style=" padding-left: 400px;" >
+                 <apex:outputLabel style="color: burlywood;font-weight: 600;" value="Processing..."></apex:outputLabel>
+               </apex:outputpanel>
+              </apex:facet>
+            </apex:actionStatus>
+              <br/>
+            <apex:pageBlockSectionItem rendered="{!IF(bucketOption=='use'&&(userHasBuckets),true,false)}" helpText="Your Amazon S3 Account's Bucket Name" id="bucketSectionItem1">
+              <apex:outputLabel value="Bucket Name" />
+              <apex:selectList id="bucketSelectList" rendered="{!userHasBuckets}" value="{!bucketNames}" multiselect="false" size="1">
+                  <apex:selectOptions value="{!items}"/>
+               </apex:selectList>
+            </apex:pageBlockSectionItem>    
+            <apex:pageBlockSectionItem rendered="{!IF(bucketOption=='use'&&NOT(userHasBuckets),true,false)}" helpText="Your Amazon S3 Account's Bucket Name" id="bucketSectionItem3">
+               <apex:pageMessage summary="There is no any S3 bucket. You should create new bucket." severity="warning" strength="3" />
+             </apex:pageBlockSectionItem>    
+            <apex:pageBlockSectionItem rendered="{!IF(bucketOption=='create',true,false)}" helpText="Your Amazon S3 Account's Bucket Name" id="bucketSectionItem2">
+               <apex:outputLabel value="Bucket Name" />
+               <apex:inputText size="40" id="bucketName" value="{!formBucketName}" />
+           </apex:pageBlockSectionItem>
+           
+             <apex:pageBlockSectionItem rendered="{!IF(bucketOption=='create',true,false)}"  id="bucketSectionItem2_2">
+               <apex:outputLabel value="Region Name" />
+               <apex:selectList id="regionSelectList" value="{!s3EndPoint}" multiselect="false" size="1">
+                  <apex:selectOptions value="{!regionItems}"/>
+               </apex:selectList>
+               
+           </apex:pageBlockSectionItem>
+           
+        </apex:pageBlockSection>
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Configure Amazon S3 Bucket Name" id="configureBucketButton" onclick="javascript:validateBucketName();return false;"></apex:commandButton>
+        </apex:pageBlockButtons>
+       </apex:pageBlock>
+       
+       <apex:pageBlock id="activateYourProductOk" title="Step 4: S-Drive Authorization" >
+        <table>
+            <tr>
+                <td>
+                  <apex:outputLabel value=" In order to start using S-Drive you need to create a free S-Drive account and authorize S-Drive to access your Salesforce organization on " />
+                    
+                    <a  href="https://portal.sdriveapp.com" target="_blank" style="text-decoration: none;font-weight: 600;color: #1797c0;" >https://portal.sdriveapp.com</a>
+                    <br />
+                   See S-Drive Portal Guide on the following page <a href="https://sdriveapp.com/documentation/" target="_blank">Support Documentation</a>
+                </td>
+            </tr>        
+        </table>
+       </apex:pageBlock>
+</apex:form>
+<script>
+
+    // Create a namespace for our custom functions
+    YAHOO.namespace("cyangate.com");
+
+function validateBucketName()
+{   
+    var sb;
+    var nb;
+    if(document.getElementById('{!$Component.activationPage.activationForm.configureS3BucketNameFailed.failedSection.bucketSectionItem1.bucketSelectList}'))
+    {
+       sb = document.getElementById('{!$Component.activationPage.activationForm.configureS3BucketNameFailed.failedSection.bucketSectionItem1.bucketSelectList}').value;
+       console.log('Bucket: ' + sb);
+    }
+    
+    if(document.getElementById('{!$Component.activationPage.activationForm.configureS3BucketNameFailed.failedSection.bucketSectionItem2.bucketName}'))
+    {
+        nb = document.getElementById('{!$Component.activationPage.activationForm.configureS3BucketNameFailed.failedSection.bucketSectionItem2.bucketName}').value;
+        console.log('Bucket: ' + nb);
+    }
+    
+    var b;
+    
+    if((!sb)||sb=='')
+    {
+        if((!nb)||nb=='')
+        {
+            b = '';
+        }
+        else
+        {
+            b = nb;
+        }
+       
+    }
+    else
+    {
+        b = sb; 
+    }
+    
+    
+    var domain = new RegExp(/^[a-z0-9][a-z0-9\.\-]{1,61}[a-z0-9]$/);
+    var ipAddress = new RegExp(/(\d+\.){3}\d+/);
+    var dots = new RegExp(/\.\./);
+    
+    if(b.match(domain) && !b.match(ipAddress) && !b.match(dots))
+    {
+        //configureS3BucketName();
+        configureS3EndPoint();
+    }
+    else
+    {
+        displayYUISimpleDialog('The given bucket name is Non-DNS-Compliant! Please refer to <a href="http://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html">Amazon documents</a> for bucket name restrictions.');
+    }
+}
+
+function displayYUISimpleDialog(message)
+{
+    var handleOK = function()
+    {
+        this.hide();
+    };
+    
+    YAHOO.cyangate.com.errorDialog = 
+        new YAHOO.widget.SimpleDialog("errorDialog", 
+             { width: "300px",
+               fixedcenter: true,
+               visible: true,
+               modal: true,
+               draggable: true,
+               close: false,
+               hideaftersubmit: true,
+               zIndex: 100,
+               text: message,
+               icon: YAHOO.widget.SimpleDialog.ICON_WARN,
+               constraintoviewport: true,
+               buttons: [{text:"OK", handler:handleOK, isDefault:true }]
+             } );
+    YAHOO.cyangate.com.errorDialog.render(document.body);
+    YAHOO.cyangate.com.errorDialog.show();
+}
+
+    // Function called when the DOM is ready to create the dialog,
+    // render the dialog into the document body, add our dialog skin
+    // css to the body tag, and wire up the buttons on our dialog    
+    YAHOO.cyangate.com.init = function() {
+        document.body.className = document.body.className + " yui-skin-sam";
+    }
+    
+    // Add the init method to the window.load event
+    YAHOO.util.Event.addListener(window, "load", YAHOO.cyangate.com.init);
+
+</script>
+<style type="text/css">
+    .pbTitle {
+        white-space: nowrap
+    }
+</style>
+</apex:page>

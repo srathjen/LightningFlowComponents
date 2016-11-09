@@ -1,0 +1,1 @@
+<apex:page standardController="npsp__General_Accounting_Unit__c" extensions="npsp.ALLO_RollupBTN_CTRL" action="{!buttonClick}" />

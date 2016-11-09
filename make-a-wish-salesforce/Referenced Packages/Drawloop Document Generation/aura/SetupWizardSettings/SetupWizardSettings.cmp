@@ -1,0 +1,50 @@
+<aura:component controller="Loop.EditionController">
+    <aura:attribute name="sessionId" type="string" required="true"/>
+    <aura:attribute name="subdomain" type="string" default=""/>
+
+	<!-- Internal Attributes -->
+    <aura:attribute name="isMass" type="boolean" default="false" access="private"/>
+    
+    <aura:registerEvent name="showError" type="Loop:showError"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+    <aura:method name="save" action="{!c.save}" access="Public"/>
+
+    <div class="slds">
+        <div class="border slds-m-bottom--medium">
+            <Loop:EnableDisableOAuth aura:id="oAuth"/>
+        </div>
+        <aura:if isTrue="{!v.subdomain != ''}">
+            <div class="border slds-m-bottom--medium">
+                <div class="slds-text-heading--small slds-m-bottom--small" title="Setup Wizard">Drawloop Subdomain</div>
+                <div class="slds-text-body--regular">
+                    This option allows you to change which Drawloop instance your org is using.
+                </div>
+                <div class="slds-form-element slds-m-right--small slds-p-top--small" style="position:relative; width:78px;">
+                    <ui:inputSelect class="slds-select slds-col" change="{!c.subdomainChange}">
+                        <ui:inputSelectOption text="apps" label="Default" value="{!v.subdomain == 'Default'}"/>
+                        <ui:inputSelectOption text="na1" label="NA1" value="{!v.subdomain == 'na1'}"/>
+                        <ui:inputSelectOption text="na2" label="NA2" value="{!v.subdomain == 'na2'}"/>
+                        <aura:if isTrue="{!v.subdomain == 'previous'}">
+                            <ui:inputSelectOption text="previous" label="Previous" value="{!v.subdomain == 'previous'}"/>
+                        </aura:if>
+                    </ui:inputSelect>
+                </div>
+            </div>
+        </aura:if>
+        <aura:if isTrue="{!v.isMass}">
+            <div class="border slds-m-bottom--medium">
+                <Loop:SetupWizardSettingsMassReports />
+            </div>
+            <aura:set attribute="else">
+                <div class="border slds-theme--shade slds-m-bottom--medium">
+                    <div class="slds-text-heading--small slds-m-bottom--small" title="Setup Wizard">Mass DDPs via Reports
+                        <Loop:HelpLink helpTopic="http://help.nintex.com/en-us/docgen/docservices/Default.htm#cshid=9017" style="height: 14px;width: 14px;margin-top: 4px;"/>
+                    </div>
+                    Add the Mass DDPs add-on to your subscription to use this feature.
+                </div>
+            </aura:set>
+        </aura:if>
+    </div>
+</aura:component>

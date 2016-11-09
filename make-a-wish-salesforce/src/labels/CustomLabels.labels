@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Active_Volunteer_Profile</fullName>
+        <categories>It holds the Id of Active Volunteer Profile</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Active Volunteer Profile</shortDescription>
+        <value>00e36000000HIwk</value>
+    </labels>
+    <labels>
+        <fullName>B_C_No_of_days_for_expiration</fullName>
+        <categories>It holds the expiration duration for Background check.</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>B/C No of days for expiration</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>COI_no_of_expiration_days</fullName>
+        <categories>It holds the expiration duration for COI</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>COI no of expiration days</shortDescription>
+        <value>30</value>
+    </labels>
+    <labels>
+        <fullName>Instance_Url</fullName>
+        <categories>It will hold the instance url</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Instance Url</shortDescription>
+        <value>https://na30.salesforce.com</value>
+    </labels>
+    <labels>
+        <fullName>Prospective_Volunteer</fullName>
+        <categories>It holds the id of Prospective Volunteer community profile</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Prospective Volunteer Profile</shortDescription>
+        <value>00e36000000HIwl</value>
+    </labels>
+    <labels>
+        <fullName>Prospective_Volunteer_Profile</fullName>
+        <categories>It holds the site guest user profile id</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Prospective Volunteer Profile</shortDescription>
+        <value>00e36000000HVbO</value>
+    </labels>
+    <labels>
+        <fullName>Site_Url</fullName>
+        <categories>It holds the volunteer portal url.</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Site Url</shortDescription>
+        <value>https://make-a-wish.force.com</value>
+    </labels>
+</CustomLabels>

@@ -1,0 +1,12 @@
+<apex:page standardController="Opportunity" tabStyle="Opportunity" showHeader="false"  sidebar="false" extensions="cg.OpportunityEmailExtension">
+<c:FileComponent customObjectName="Opportunity"
+customObjectFileName="OpportunityFile__c"
+fileNamespacePrefix="cg__"
+objectNamespacePrefix=""
+relationshipName="Opportunity__r"
+privateEnabled="true"
+objectId="{!Opportunity.Id}"
+defaultEmailAddress="{!defaultOpportunityEmail}"
+title="Opportunity Files"
+/>
+</apex:page>

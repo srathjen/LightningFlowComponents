@@ -1,0 +1,40 @@
+<apex:page controller="cg.AdvancedSearchPageController" action="{!buildFirstObjectFiles}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+        $("form").bind("keypress", function(e) {
+            if (e.keyCode == 13) {
+                return false;
+            }
+        });
+    });
+</script>
+    <apex:pageBlock title="S-Drive Advanced Search" id="advancedSearch">
+        <apex:form id="formTest" >
+            <div id="downloadArea" style="display:none"></div>
+            <label style="font-weight:bold" > Object:&nbsp; </label>
+            <apex:SelectList label="Object" id="objectList" value="{!selectedSDriveObject}" size="1" style="width:12%">
+                <apex:actionSupport event="onchange" action="{!buildObjectFiles}" reRender="objectFileList, objectCustomFields"/>
+                <apex:selectOptions value="{!sDriveObjects}"></apex:selectOptions>
+            </apex:SelectList>
+            &nbsp;  
+            <label style="font-weight:bold" > Object Files:&nbsp; </label>
+            <apex:SelectList label="Object Files" id="objectFileList" value="{!selectedObjectFile}" size="1" style="width:12%">
+                <apex:selectOptions value="{!selectedObjectFiles}"></apex:selectOptions>
+            </apex:SelectList> 
+            &nbsp;
+            <label style="font-weight:bold" > Parent Object Field:&nbsp; </label>
+            <apex:SelectList label="Optional Field" id="objectCustomFields" value="{!selectedCustomField}" size="1" style="width:12%">
+                <apex:selectOptions value="{!selectedCustomFields}"></apex:selectOptions>
+            </apex:SelectList> 
+            &nbsp;
+            <label style="font-weight:bold" > Search Keyword:&nbsp; </label>
+            <apex:inputText label="Search Keyword" value="{!searchCriteria}" id="searchCriteria"   html-placeholder="Type a Keyword" style="width:10%"/>
+            &nbsp;
+ 
+            <c:AdvancedSearchComponent searchCriteria="{!searchCriteria}" customField="{!selectedCustomField}" customObjectName="{!selectedSDriveObject}" customObjectFileName="{!customObjectNameWithoutPrefix}" fileNamespacePrefix="{!fileNamePrefix}" objectNamespacePrefix="{!objPre}" relationshipName="{!relationshipNameFromMasterField}" orderBy="{!orderBy}"/>
+            <!-- <c:ObjectSearchComponent searchCriteria="{!searchCriteria}" customField="" customObjectName="Case" customObjectFileName="CaseFile__c" fileNamespacePrefix="cg__" objectNamespacePrefix="" relationshipName="Case__r"/> -->
+
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>
