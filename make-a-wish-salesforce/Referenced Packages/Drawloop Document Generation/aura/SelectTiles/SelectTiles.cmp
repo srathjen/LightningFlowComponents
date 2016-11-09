@@ -5,9 +5,8 @@
     <aura:attribute name="recordType" type="string" default="" description="Record type (Opportunity, Account, etc.)."/>
     
     <!--Required attributes for attachments-->
-    <aura:attribute name="attachmentAllowed" type="boolean" default="false"/>
-    <aura:attribute name="attachmentRequired" type="boolean" default="false"/>
-    <aura:attribute name="hasAdhocApexClass" type="boolean" default="false"/>
+    <aura:attribute name="attachmentAllowed" type="Boolean" default="false"/>
+    <aura:attribute name="attachmentRequired" type="Boolean" default="false"/>
     <aura:attribute name="attachments" type="List" default="[]"/>
     
     <!--Optional attributes (regardless of attachments)-->
@@ -17,7 +16,6 @@
     <aura:attribute name="displaySvg" type="boolean" default="false"/>
     <aura:attribute name="objectName" type="string" default="" description="Name of the starting object"/>
     <aura:attribute name="ddpLabel" type="string" default="DDP"/>
-    <aura:attribute name="context" type="string" default="DEFAULT" description="Accepts DEFAULT, TEST, and UTILITYBAR to display the appropriate steps to run in different contexts."/>
     
     <!--Internal attributes-->
     <aura:attribute name="performOnLoad" type="boolean" default="true"/>
@@ -28,9 +26,6 @@
     <aura:attribute name="clickedTile" type="object" default="" description="Information regarding currently clicked Tile.cmp."/>
     <aura:attribute name="errorTitle" type="string" default="Unable to load tile."/>
     <aura:attribute name="errorMessages" type="List"/>
-    <aura:attribute name="ddpId" type="string"/>
-    <aura:attribute name="showTestFeaturesAsDelivery" type="boolean" default="false"/>
-    <aura:attribute name="testFeaturesAsDelivery" type="string" default="" description="Id of the delivery that 'Download (Test)' will mimic for PDF Stamps and Create/Edit Records behavior."/>
     
     <!--Handled events-->
     <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
@@ -39,7 +34,6 @@
     
     <!--Registered events-->
     <aura:registerEvent name="ddpSelected" type="Loop:ddpSelected"/>
-    <aura:registerEvent name="recordSelected" type="Loop:recordSelected"/>
     <aura:registerEvent name="contactSelected" type="Loop:contactSelected"/>
     <aura:registerEvent name="documentSelected" type="Loop:documentSelected"/>
     <aura:registerEvent name="deliveryOptionSelected" type="Loop:deliveryOptionSelected"/>
@@ -70,38 +64,10 @@
     </aura:if>
     <div aura:id="selectTiles" class="slds" onclick="{!c.selectTilesClicked}">
         <ul class="slds-list--vertical slds-has-cards slds-has-cards--space slds-has-list-interactions" style="padding: .5rem 1rem; background-color: #EEF1F6;">
-            <aura:if isTrue="{!v.context == 'TEST' &amp;&amp; v.recordType == 'delivery'}">
-                <div onclick="{!c.selectDownloadTest}" class="downloadTest">
-                    <Loop:Card aura:id="downloadTest" styleClass="tile" badge="TEST" isSelectable="true">
-                        <!-- TODO: Use custom labels instead of strings -->
-                        <div id="header" style='margin-left:-4px; margin-top:-10px;'>Download</div>
-                        <div>
-                            <aura:if isTrue="{!v.showTestFeaturesAsDelivery}">
-                                <div id="main" class="slds-text-body--small" style='margin-left:20px; margin-right:20px; font-weight:bold;'>Include Create/Edit Record changes and PDF Stamps as configured for the following Delivery Option:
-                                </div>
-                            </aura:if>
-                        </div>
-                        <div>
-                            <aura:if isTrue="{!v.showTestFeaturesAsDelivery}">
-                                <div id="footer" style='margin-left:5px; padding-bottom:8px'>
-                                    <div class="slds-form-element slds-m-right--small">
-                                        <ui:inputSelect class="slds-select slds-col" change="{!c.selectTestFeaturesAsDelivery}">
-                                            <ui:inputSelectOption text="" label="--None--" value="true"/>
-                                            <aura:iteration items="{!v.filteredRecords}" var="record">
-                                                <ui:inputSelectOption text="{!record.Id}" label="{!record.Name}"/>
-                                            </aura:iteration>
-                                        </ui:inputSelect>
-                                    </div>
-                                </div>
-                            </aura:if>
-                        </div>
-                    </Loop:Card>
-                </div>
-            </aura:if>
             <aura:iteration items="{!v.filteredRecords}" var="record">
                 <Loop:Tile aura:id="tile" id="{!record.Id}" type="{!v.recordType}" record="{!record}" svgClass="{!v.svgClass}" svgLink="{!v.svgLink}" displaySvg="{!v.displaySvg}" selectedContact="{!v.recordId}" isMultiSelect="{!v.isMultiSelect}" objectName="{!v.objectName}"/>
             </aura:iteration>
-            <aura:if isTrue="{!v.attachmentAllowed || v.attachmentRequired || v.hasAdhocApexClass}">
+            <aura:if isTrue="{!v.attachmentAllowed || v.attachmentRequired}">
                 <Loop:AttachmentsTile aura:id="attachmentsTile" required="{!v.attachmentRequired}" attachments="{!v.attachments}" ddpLabel="{!v.ddpLabel}"/>
             </aura:if>
         </ul>

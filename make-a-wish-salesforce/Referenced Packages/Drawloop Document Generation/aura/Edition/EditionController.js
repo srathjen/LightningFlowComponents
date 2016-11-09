@@ -18,7 +18,7 @@
                     component.set("v.connectedAppsEnabled", parsedResponse.connectedAppsEnabled);
                     
                     if (isAuthorized) {
-                        helper.load(component);
+                        helper.load(component, component.get("v.sessionId"), component.get("v.loopUrl"));
                     }
                     else {
             			component.set("v.isLoading", false);
@@ -29,9 +29,10 @@
                 }
             }
             else {
-                helper.fireErrorEvent(component, "An unexpected error has occurred. Please contact Drawloop Support if this error persists.");
+                helper.fireErrorEvent(component, '');
             }
         });
+        
         $A.enqueueAction(checkAuthentication);
     },
     startOAuth : function(component, event, helper) {
@@ -68,9 +69,6 @@
                 var parsedResponse = JSON.parse(response.getReturnValue());
                 if (parsedResponse.isSuccess) {
                     moveToNextStep.setParams({success: true}).fire();
-                    component.getEvent('updateIsStandard').setParams({
-                        isStandard: isStandard
-                    }).fire();
                 }
                 else {
                     moveToNextStep.setParams({success: false}).fire();
@@ -97,11 +95,24 @@
         helper.clearServices(component);
         component.set("v.isStandard", !isStandard);
     },
-    redirectPage : function(component, event) {
-        var redirectEvent = component.getEvent("redirectPage");
-        redirectEvent.setParams({
-            'buttonName' : 'purchaseForm'
-        });
-        redirectEvent.fire();
+    toggleStandardScheduledDdp : function(component) {
+        var scheduledDdp = component.get("v.standardScheduledDdp");
+        component.set("v.standardScheduledDdp", !scheduledDdp);
+    },
+    toggleBusinessScheduledDdp : function(component) {
+        var scheduledDdp = component.get("v.businessScheduledDdp");
+        component.set("v.businessScheduledDdp", !scheduledDdp);
+    },
+    toggleWorkflowDdp : function(component) {
+        var workflowDdp = component.get("v.workflowDdp");
+        component.set("v.workflowDdp", !workflowDdp);
+    },
+    toggleComponentLibrary : function(component) {
+        var componentLibrary = component.get("v.componentLibrary");
+        component.set("v.componentLibrary", !componentLibrary);
+    },
+    toggleMassDdp : function(component) {
+        var massDdp = component.get("v.massDdp");
+        component.set("v.massDdp", !massDdp);
     }
 })

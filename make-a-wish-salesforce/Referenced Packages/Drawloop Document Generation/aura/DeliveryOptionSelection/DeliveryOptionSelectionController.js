@@ -12,8 +12,6 @@
         
         var selectedDeliveryOptionId = component.get("v.selectedDeliveryOptionId");
         
-        component.set('v.ddpId', ddpId);
-        
         var action = component.get("c.getDeliveryOptions");
         action.setParams({
             recordId : recordId,

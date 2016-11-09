@@ -2,30 +2,18 @@
     init : function(component, event, helper) {
         if (!helper.isLockerServiceActive()) {
             component.set('v.lockerServiceActive', false);
-            //check context
-            var availableContexts = ['DEFAULT', 'TEST', 'UTILITYBAR'];
-            if (availableContexts.indexOf(component.get("v.context")) < 0) {
-                component.set("v.context", 'DEFAULT');
-            }
-            //TEST mode: automatically set ddpId and title
-            if (component.get('v.context') === 'TEST') {
-                component.set('v.ddpId', component.get('v.recordId'));
-                component.set('v.recordId', '');
-                component.set('v.title', 'Test Document Package')
-            }
+            
             //expandDdps
             if (component.get("v.startExpanded")) {
-                helper.expandAndLoad(component);
+                helper.expandAndLoadDdps(component);
             }
             //Set ContactId if running from Contact
             if (component.get('v.recordId').substring(0, 3) === '003') {
                 component.set('v.contactId', component.get('v.recordId'));
             }
             //Exposing run test for use
-            var action = component.get('c.initialLoadData');
+            var action = component.get('c.initalLoadData');
             action.setParams({
-                context : component.get('v.context'),
-                ddpId : component.get('v.ddpId'),
                 recordId : component.get('v.recordId')
             });
             action.setCallback(this, function(response) {
@@ -33,22 +21,6 @@
                     var parsedResponse = JSON.parse(response.getReturnValue());
                     component.set("v.runTestAvailable", parsedResponse.testAvailable);
                     component.set("v.objectName", parsedResponse.objectName);
-                    helper.fetchPreOAuthData(component);
-                    if (component.get("v.context") === "TEST") {
-                        if (parsedResponse.hasDocuments) {
-                            helper.updateRunButtonStatus(component);
-                            component.set("v.objectPluralLabel", parsedResponse.objectPluralLabel);
-                            component.set('v.contactRequired', parsedResponse.contactRequired);
-                            component.set('v.attachmentAllowed', parsedResponse.attachmentAllowed);
-                            component.set('v.attachmentRequired', parsedResponse.attachmentRequired);
-                            component.set('v.hasAdhocApexClass', parsedResponse.hasAdhocApexClass);
-                            component.set('v.documentNextButtonDisabled', parsedResponse.attachmentRequired);
-                            component.set('v.displayDocumentSection', parsedResponse.hasOptionalDocuments || parsedResponse.attachmentRequired || parsedResponse.attachmentAllowed || parsedResponse.hasAdhocApexClass);
-                            helper.expandAndLoad(component);
-                        } else {
-                            component.set('v.hasDocuments', false);
-                        }
-                    }
                 } else {
                     $A.util.addClass(component.find("runDdpContainer"), "hidden");
                     component.set("v.errorMessage", "An unexpected error has occurred. Please contact Drawloop Support if this issue persists.");
@@ -59,43 +31,7 @@
         }
     },
     handleClickSelectDdp : function(component, event, helper) {
-        helper.expandAndLoad(component);
-    },
-    handleRecordSelected : function(component, event, helper) {
-        var id = event.getParam("id");
-        var name = event.getParam("name");
-        if (!component.get("v.recordId") || component.get("v.recordId") != id) {
-            // Reset accordions so Document Selection accordion is only displayed (conditionally) after it has been (re)evaluated.
-            var secondaryAccordionSectionsLoadingRow = component.find('secondaryAccordionSectionsLoadingRow');
-            if (secondaryAccordionSectionsLoadingRow) {
-                secondaryAccordionSectionsLoadingRow.getElement().hidden = false;
-            }
-            var secondaryAccordionSections = component.find('secondaryAccordionSections');
-            if (secondaryAccordionSections) {
-                secondaryAccordionSections.getElement().hidden = true;
-            }
-            
-            // Disable Record accordion
-            helper.toggleAccordionsDisabled(component, true);
-            
-            //reset previous selection data
-            helper.resetSelections(component);
-            
-            component.set('v.recordId', id);
-            component.find("documentSelect-component").load(component.get("v.ddpId"), id, component.get("v.attachmentAllowed"), component.get("v.attachmentRequired"), component.get("v.hasAdhocApexClass"), component.get("v.contactId"));
-            component.find("deliverySelect-component").load(component.get("v.ddpId"), id, component.get('v.contactId'));
-            
-            component.find('recordAccordionSection').setBadge(name);
-            component.find('documentAccordionSection').setBadge('');
-            component.find('deliveryAccordionSection').setBadge('');
-            
-            //If there isn't a contact selected (which happens on initial load), it will toggle to the contact accordion, and load fresh data.
-            component.find("contactSelect-component").load(component.get("v.recordId"), component.get('v.contactRequired'));
-            if (!component.get('v.contactId')) {
-                component.find('contactAccordionSection').setBadge('');
-            }
-        }
-        helper.toggleNextSection(component);
+        helper.expandAndLoadDdps(component);
     },
     handleDdpSelected : function(component, event, helper) {
         var id = event.getParam("id");
@@ -121,17 +57,15 @@
             var attachmentAllowed = event.getParam("attachmentAllowed");
             var attachmentRequired = event.getParam("attachmentRequired");
             var hasOptionalDocuments = event.getParam("hasOptionalDocuments");
-            var hasAdhocApexClass = event.getParam("hasAdhocApexClass");
             
             component.set('v.ddpId', id);
             component.set('v.contactRequired', contactRequired);
             component.set('v.attachmentAllowed', attachmentAllowed);
             component.set('v.attachmentRequired', attachmentRequired);
             component.set('v.documentNextButtonDisabled', attachmentRequired);
-            component.set('v.hasAdhocApexClass', hasAdhocApexClass);
-            component.set('v.displayDocumentSection', hasOptionalDocuments || attachmentRequired || attachmentAllowed || hasAdhocApexClass);
+            component.set('v.displayDocumentSection', hasOptionalDocuments || attachmentRequired || attachmentAllowed);
             
-            component.find("documentSelect-component").load(id, component.get("v.recordId"), attachmentAllowed, attachmentRequired, hasAdhocApexClass, component.get("v.contactId"));
+            component.find("documentSelect-component").load(id, component.get("v.recordId"), attachmentAllowed, attachmentRequired);
             component.find("deliverySelect-component").load(id, component.get("v.recordId"), component.get('v.contactId'));
             
             component.find('ddpAccordionSection').setBadge(name);
@@ -143,7 +77,7 @@
             if (!component.get('v.contactId')) {
                 component.find('contactAccordionSection').setBadge('');
             }
-
+    
             helper.updateRunButtonStatus(component);
             helper.fetchPreOAuthData(component);
         }
@@ -188,7 +122,7 @@
         var ids = event.getParam("ids");
         component.set('v.documentIds', ids);
         if (component.get('v.attachmentRequired')) {
-            if (component.get("v.attachments").length > 0) {
+            if (component.get("v.attachmentIds").length > 0) {
                 component.find('documentAccordionSection').setBadge('SELECTED');
             } else {
                 component.find('documentAccordionSection').setBadge('');
@@ -222,14 +156,14 @@
     saveAttachments : function(component, event, helper) {
         var selectedAttachments = event.getParam('selectedAttachments');
         component.find('documentSelect-component').storeAttachments(selectedAttachments);
-        helper.storeAttachments(component, selectedAttachments);
+        helper.storeAttachmentIds(component, selectedAttachments);
     },
     updateRemoveAttachment : function(component, event, helper) {
         var removeAttachmentId = event.getParam('removeAttachmentId');
         var remainingAttachments = event.getParam('remainingAttachments');
         
         component.find('selectAttachmentTiles').updateDeselectedAttachments(removeAttachmentId, remainingAttachments);
-        helper.storeAttachments(component, remainingAttachments);
+        helper.storeAttachmentIds(component, remainingAttachments);
     },
     completedOptionalDocumentSelection : function(component, event, helper) {
         helper.toggleSections(component, 'deliveryAccordionSection');
@@ -246,13 +180,11 @@
         var reminderFrequency = event.getParam("reminderFrequency");
         var expireAfter = event.getParam("expireAfter");
         var expireWarn = event.getParam("expireWarn");
-        var testFeaturesAsDelivery = event.getParam("testFeaturesAsDelivery");
         
         component.set('v.deliveryOptionId', id);
         component.set('v.deliveryOptionType', deliveryType);
         component.set('v.attachToRecord', attachToRecord);
         component.set('v.selectedContentLibrary', selectedContentLibrary);
-        component.set('v.testFeaturesAsDelivery', testFeaturesAsDelivery);
         
         //email data
         component.set('v.emailSubject', emailSubject);
@@ -276,7 +208,7 @@
     },
     collapseOtherAccordionSections : function(component, event, helper) {
         var selectedAccordionSection = event.getParams().selectedAccordionSection;
-        var accordionSections = ['recordAccordionSection', 'ddpAccordionSection', 'contactAccordionSection', 'documentAccordionSection', 'deliveryAccordionSection'];
+        var accordionSections = ['ddpAccordionSection', 'contactAccordionSection', 'documentAccordionSection', 'deliveryAccordionSection'];
         for (var i = 0; i < accordionSections.length; i++) {
             var sectionName = accordionSections[i];
             var accordionSection = component.find(sectionName);
@@ -302,7 +234,6 @@
     handleOAuthSuccessful : function(component, event, helper) {
         if (event.getParam("authorizingUser")) {
             component.set("v.needsAuthentication", false);
-            helper.updateRunButtonLabel(component);
             helper.runDdp(component);
         }
     },
@@ -338,11 +269,7 @@
         // Enable all accordion sections
         helper.toggleAccordionsDisabled(component, false);
         // Reload DDPs
-        if (component.get('v.context') === 'DEFAULT') {
-            component.find("ddpSelect-component").load(component.get("v.recordId"), "", "", "");
-        } else if (component.get('v.context') === 'TEST') {
-            component.find("recordSelect-component").load(component.get("v.ddpId"), component.get("v.ddpLabel"), component.get("v.objectName"), component.get("v.objectPluralLabel"));
-        }
+        component.find("ddpSelect-component").load(component.get("v.recordId"), "", "", "", component.get("v.ddpLabel"));
         // Reset Success Message
         component.find('previewFiles').showSuccess('');
         component.find('previewFiles').set('v.isSuccess', false);
@@ -437,8 +364,5 @@
     },
     continueDelivery : function(component, event, helper) {
         helper.toggleModifyButtons(component, event.getParam("disableModify"));
-    },
-    refresh : function() {
-        window.location.reload();
     }
 })

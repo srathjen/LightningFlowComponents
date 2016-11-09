@@ -15,7 +15,7 @@
                 <members>Loop__DDP_Admin_for_Office_oauth</members>
                 <name>Module</name>
             </types>
-            <version>97.0</version>
+            <version>91.0</version>
         </module>
     </modules>
     <namespacePrefix>Loop</namespacePrefix>

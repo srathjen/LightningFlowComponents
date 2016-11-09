@@ -15,7 +15,7 @@
                 <members>Loop__LOOP_D6t_Services_oauth</members>
                 <name>Module</name>
             </types>
-            <version>131.0</version>
+            <version>125.0</version>
         </module>
     </modules>
     <namespacePrefix>Loop</namespacePrefix>

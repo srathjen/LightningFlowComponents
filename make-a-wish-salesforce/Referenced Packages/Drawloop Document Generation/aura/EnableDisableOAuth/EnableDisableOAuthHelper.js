@@ -1,15 +1,16 @@
 ({
-    toggleOAuthButtons : function(component) {
-        if (component.get('v.oAuthEnabled')) {
-            $A.util.addClass(component.find('enabledButton'), 'slds-button--brand');
-            $A.util.removeClass(component.find('disabledButton'), 'slds-button--brand');
-            component.find('enabledButton').getElement().disabled = true;
-            component.find('disabledButton').getElement().disabled = false;
-        } else {
-            $A.util.addClass(component.find('disabledButton'), 'slds-button--brand');
-            $A.util.removeClass(component.find('enabledButton'), 'slds-button--brand');
-            component.find('disabledButton').getElement().disabled = true;
-            component.find('enabledButton').getElement().disabled = false;
-        }
+ 	enable : function(cmp, selection, disable) {
+        var button = cmp.find(selection);
+        var element = button.getElement().childNodes[0];
+       	element.removeAttribute('disabled', 'disabled');
+        $A.util.removeClass(element, 'slds-button--brand');
+        button.set("v.label", selection);
+    },
+    disable : function(cmp, selection) {
+        var button = cmp.find(selection);
+        var element = button.getElement().childNodes[0];
+        element.setAttribute('disabled', 'disabled');
+        $A.util.addClass(element, 'slds-button--brand');
+        button.set("v.label", selection + "d");
     }
 })

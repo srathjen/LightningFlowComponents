@@ -1122,12 +1122,6 @@
     </types>
     <types>
         <members>DocuSign_Images</members>
-        <members>DocuSign_Images/AppIcon.png</members>
-        <members>DocuSign_Images/AppIcon_32px.png</members>
-        <members>DocuSign_Images/DS_64x64.png</members>
-        <members>DocuSign_Images/DocuSignForSalesforceLogo2011PNG.png</members>
-        <members>DocuSign_Images/NextStepsSignCompleteSmall_png.png</members>
-        <members>DocuSign_Images/docusign_for_salesforce_logo.png</members>
         <name>Document</name>
     </types>
     <types>

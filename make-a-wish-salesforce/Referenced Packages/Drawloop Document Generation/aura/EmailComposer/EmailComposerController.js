@@ -202,12 +202,12 @@
     },
     showCc : function(component) {
         component.set('v.displayCc', true);
-        var paddingRight = parseInt(component.find('to').getElement().style.paddingRight, 10);
+        var paddingRight = parseInt(component.find('to').getElement().style.paddingRight);
         component.find('to').getElement().style.paddingRight = (paddingRight - 20) + 'px';
     },
     showBcc : function(component) {
         component.set('v.displayBcc', true);
-        var paddingRight = parseInt(component.find('to').getElement().style.paddingRight, 10);
+        var paddingRight = parseInt(component.find('to').getElement().style.paddingRight);
         component.find('to').getElement().style.paddingRight = (paddingRight - 20) + 'px';
     },
     removeSender : function(component) {

@@ -48,10 +48,10 @@
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <deprecated>false</deprecated>
-    <enableActivities>false</enableActivities>
+    <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
-    <enableHistory>false</enableHistory>
+    <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
@@ -67,6 +67,7 @@
         <relationshipLabel>File Activities</relationshipLabel>
         <relationshipName>File_Activities</relationshipName>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -77,6 +78,7 @@
         <label>Activity Type</label>
         <length>255</length>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -87,6 +89,7 @@
         <externalId>false</externalId>
         <label>Additional Details</label>
         <length>32768</length>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -101,6 +104,7 @@
         <relationshipLabel>File Activities</relationshipLabel>
         <relationshipName>File_Activities</relationshipName>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -114,6 +118,7 @@
         <relationshipLabel>File Activities</relationshipLabel>
         <relationshipName>File_Activities</relationshipName>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -127,6 +132,7 @@
         <relationshipLabel>File Activities</relationshipLabel>
         <relationshipName>File_Activities</relationshipName>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -140,6 +146,7 @@
         <relationshipLabel>File Activities</relationshipLabel>
         <relationshipName>File_Activities</relationshipName>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -147,6 +154,7 @@
     <nameField>
         <displayFormat>{YYYY}{MM}{DD}-{000000}</displayFormat>
         <label>File Tracking Number</label>
+        <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>File Activities</pluralLabel>

@@ -1,17 +1,14 @@
 ({
     onInit : function(component, event, helper) {
         var records = component.get("v.records");
-        var recordType = component.get("v.recordType");
         if (records && records.length) {
         	var maxRecords = 50;
             if (records.length > maxRecords) {
                 component.set("v.maxRecordsExceeded", true);
+                var recordType = component.get("v.recordType");
                 var text;
                 if (recordType === "ddp") {
                     text = "ddps";
-                }
-                else if (recordType === "record") {
-                    text = "records";
                 }
                 else if (recordType === "contact") {
                     text = "contacts";
@@ -25,7 +22,7 @@
                 
                 component.set("v.warningMessage", "The search returned more than the maximum number of " + text + ": " + maxRecords + ". Please refine your search criteria.");
             }
-
+            
             var filteredRecords = [];
             for (var i = 0; i < maxRecords && records[i]; i++) {
                 filteredRecords.push(records[i]);
@@ -33,35 +30,12 @@
             
             component.set("v.filteredRecords", filteredRecords);
         }
-        
-        if (component.get('v.context') === 'TEST' && recordType === 'delivery') {
-            var action = component.get('c.showTestFeaturesAsDelivery');
-            action.setParams({
-                ddpId : component.get('v.ddpId')
-            });
-            action.setCallback(this, function(response) {
-                if (response.getState() === "SUCCESS") {
-                    var parsedResponse = JSON.parse(response.getReturnValue());
-                    if (parsedResponse.isSuccess) {
-                        component.set('v.showTestFeaturesAsDelivery', parsedResponse.showTestFeaturesAsDelivery);
-                    }
-                    else {
-                        helper.fireErrorEvent(component, parsedResponse.errorMessage);
-                    }
-                }
-                else {
-                    helper.fireErrorEvent(component, "An unexpected error has occurred. Please contact Drawloop Support if this error persists.");
-                }
-            });
-            $A.enqueueAction(action);
-        }
     },
     handleTileClicked : function(component, event) {
         var clickedTile = {
             tileGlobalId: event.getParam("globalId"),
             id: event.getParam("id"),
             name: event.getParam("name"),
-            deliveryType: event.getParam("deliveryType"),
             attachToRecord: event.getParam("attachToRecord"),
             selectedContentLibrary: event.getParam("selectedContentLibrary"),
             emailSubject: event.getParam("emailSubject"),
@@ -69,8 +43,7 @@
             reminderDelay: event.getParam("reminderDelay"),
             reminderFrequency: event.getParam("reminderFrequency"),
             expireAfter: event.getParam("expireAfter"),
-            expireWarn : event.getParam("expireWarn"),
-            jsonAttachment: event.getParam("jsonAttachment")
+            expireWarn : event.getParam("expireWarn")
         };
         
         component.set("v.clickedTile", clickedTile);
@@ -106,7 +79,6 @@
             else {
                 //Handle UI
                 var tiles = component.find("tile");
-                //If tiles has more than one tile, tiles.length works.
                 if (tiles.length) {
                     for (var j = 0; j < tiles.length; j++) {
                         if (tiles[j].getGlobalId() === tileGlobalId) {
@@ -117,28 +89,10 @@
                         }
                     }
                 }
-                //If there is only one tile in tiles, we still need to check to ensure the tileGobalId matches.
-                //If we are using Test Download it wont, so we should close it.
-                else if (tiles.getGlobalId() === tileGlobalId) {
+                else {
                     $A.getComponent(tileGlobalId).open();
                 }
-                else {
-                    $A.getComponent(tiles.getGlobalId()).close();
-                }
 
-                if (component.get("v.context") === 'TEST' && component.get("v.recordType") === 'delivery') {
-                    var downloadTestBody = component.find("downloadTest").find("cardBody");
-                    var downloadTestCheck = component.find("downloadTest").find("check-background");
-                    if (tileGlobalId === 'downloadTest') {
-                        $A.util.addClass(downloadTestBody, "is-selected");
-                        $A.util.addClass(downloadTestCheck, "check-is-selected");
-                    }
-                    else {
-                        $A.util.removeClass(downloadTestBody, "is-selected");
-                        $A.util.removeClass(downloadTestCheck, "check-is-selected");
-                    }
-                }
-                
                 //Handle data
                 selectedTiles = [clickedTile];
             }
@@ -147,20 +101,6 @@
             
             component.set("v.clickedTile", "");
         }
-    },
-    selectDownloadTest : function(component, event) {
-        var clickedTile = {
-            tileGlobalId: 'downloadTest',
-            id: 'download',
-            name: 'Download (Test)',
-            deliveryType: 'Download',
-            testFeaturesAsDelivery: component.get('v.testFeaturesAsDelivery')
-        };
-        component.set('v.clickedTile', clickedTile);
-    },
-    selectTestFeaturesAsDelivery : function(component, event) {
-        var testFeaturesAsDelivery = event.source.get('v.value');
-        component.set('v.testFeaturesAsDelivery', testFeaturesAsDelivery);
     },
     onRecordsChange : function(component, event) {
         component.set("v.filteredRecords", component.get("v.records"));

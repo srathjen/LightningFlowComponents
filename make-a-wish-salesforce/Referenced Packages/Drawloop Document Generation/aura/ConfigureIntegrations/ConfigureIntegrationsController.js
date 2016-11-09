@@ -155,7 +155,7 @@
                     }
                 }
             } else {
-                helper.fireErrorEvent(component, 'An unexpected error has occurred. Please contact Drawloop Support if this error persists.');
+                helper.handleErrorResponse(response);
             }
 
             var integrationsList = component.find('integrationsList');
@@ -197,7 +197,10 @@
             helper.upsertIntegrationInfos(component, type, values);
         }
         else {
-            helper.fireErrorEvent(component, event.getParam("errorDescription"));
+            var errorDescription = event.getParam("errorDescription");
+            component.getEvent('showError').setParams({
+                message: errorDescription
+            }).fire();
         }
     }
 })

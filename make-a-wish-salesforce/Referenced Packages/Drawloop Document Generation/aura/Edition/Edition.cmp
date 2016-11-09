@@ -1,7 +1,6 @@
 <aura:component controller="Loop.EditionController">
     <!--Required attributes-->
     <aura:attribute name="sessionId" type="string" required="true"/>
-    <aura:attribute name="services" type="Map" required="true" description="Contains isStandard, add-ons, allowedLicenses, usedLicenses etc."/>
     
     <!--Optional attributes-->
     <aura:attribute name="loopUrl" type="string" default=""/>
@@ -13,10 +12,10 @@
     <aura:attribute name="disableAll" type="boolean" default="false" access="private"/>
     <aura:attribute name="oAuthUrl" type="string" default="" access="private"/>
     <aura:attribute name="findSubOptionUrl" type="string" default="" access="private"/>
-    <aura:attribute name="isTrial" type="boolean" default="false"/>
+    <aura:attribute name="isTrial" type="boolean" default="false" access="private"/>
     <aura:attribute name="hasContract" type="boolean" required="false"/>
     <aura:attribute name="isSandbox" type="boolean" default="false" access="private"/>
-    <aura:attribute name="isStandard" type="boolean" default="false"/>
+    <aura:attribute name="isStandard" type="boolean" default="false" access="private"/>
     <aura:attribute name="serviceLevel" type="string" default="LP+ Standard" access="private"/>
     <aura:attribute name="standardScheduledDdp" type="boolean" default="false" access="private"/>
     <aura:attribute name="businessScheduledDdp" type="boolean" default="false" access="private"/>
@@ -33,20 +32,16 @@
     <aura:registerEvent name="moveToNextStep" type="Loop:moveToNextStep"/>
     <aura:registerEvent name="showError" type="Loop:showError"/>
     <aura:registerEvent name="disableSave" type="Loop:disableSave"/>
-    <aura:registerEvent name="updateIsStandard" type="Loop:updateIsStandard"/>
-    <aura:registerEvent name="redirectPage" type="Loop:redirectPage"/>
     
     <!--Methods-->
     <aura:method name="save" action="{!c.save}"/>
     
     <div class="slds">
         <aura:if isTrue="{!v.isLoading}">
-            <div aura:id="loading" class="loading-container" style="min-width:60rem;height:40rem;">
-                <div class="slds-grid slds-grid--align-center" style="width:100%;height:100%;">
-                    <div id="spinner-container" class="slds-align-middle">
-                        <div style="width:80px;">
-                            <img src="/resource/Loop__SalesforceLightning/assets/images/spinners/slds_spinner_brand.gif" alt="Loading..." />
-                        </div>
+            <div class="slds-grid slds-grid--align-center slds-grid--vertical-align-center inherit-min-height">
+                <div class="slds-spinner-container">
+                    <div style="width:80px;">
+                        <img src="/resource/Loop__SalesforceLightning/assets/images/spinners/slds_spinner_brand.gif" alt="Loading..." />
                     </div>
                 </div>
             </div>
@@ -57,7 +52,7 @@
                         <button class="slds-button slds-button--brand" onclick="{!c.startOAuth}">Authorize Drawloop Document Generation</button>
                     </div>
                     <aura:set attribute="else">
-                        <div aura:id="pageContent" class="slds">
+                        <div aura:id="pageContent" class="slds" style="min-width:600px;">
                             <aura:if isTrue="{!v.isTrial}">
                                 <div class="slds-box slds-box--x-small slds-theme--shade slds-m-bottom--large">Your subscription is a trial.</div>
                             </aura:if>
@@ -67,90 +62,123 @@
                                 <div class="slds-m-bottom--large">
                                     <button type="button" id="findSubOptions" class="slds-button slds-button--brand" onclick="{!c.startOAuth}">Find Subscription Options</button>
                                 </div>
-                                <aura:set attribute="else">
-                                    <aura:if isTrue="{!v.hasContract &amp;&amp; !v.isStandard}">
-                                        <div class="slds-box slds-box--x-small slds-theme--shade slds-m-bottom--large">
-                                            <span class="slds-icon_container">
-                                                <Loop:Svg class="slds-icon slds-icon--small slds-icon-text-default slds-m-right--small" display="true" xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/utility-sprite/svg/symbols.svg#lock"/>
-                                            </span>
-                                            You have purchased Nintex Drawloop. To update this page, contact your account executive.
-                                        </div>
-                                    </aura:if>
-                                    <aura:if isTrue="{!v.hasContract &amp;&amp; v.isStandard}">
-                                        <div class="slds-box slds-box--x-small slds-theme--shade slds-m-bottom--large">
-                                            <span class="slds-icon_container">
-                                                <Loop:Svg class="slds-icon slds-icon--small slds-icon-text-default slds-m-right--small" display="true" xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/utility-sprite/svg/symbols.svg#lock"/>
-                                            </span>
-                                            You have purchased Standard Edition. You can upgrade to Business Edition, add user licenses, or both.
-                                            <div class="slds-m-top--x-small slds-m-left--x-large">
-                                                <button class="slds-button slds-button--brand" onclick="{!c.redirectPage}">Upgrade License</button>
-                                            </div>
-                                        </div>
-                                    </aura:if>
-                                    <aura:if isTrue="{!!v.hasContract}">
-                                        <div class="slds-box slds-box--x-small slds-theme--shade slds-m-bottom--large">
-                                            <span class="slds-icon_container">
-                                                <Loop:Svg class="slds-icon slds-icon--small slds-icon-text-default slds-m-right--small" display="true" xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/utility-sprite/svg/symbols.svg#clock"/>
-                                            </span>
-                                            Purchase the app, select an edition, and add user licenses.
-                                            <div class="slds-m-top--x-small slds-m-left--x-large">
-                                                <button class="slds-button slds-button--brand" onclick="{!c.redirectPage}">Purchase Nintex Drawloop</button>
-                                            </div>
-                                        </div>
-                                    </aura:if>
-                                </aura:set>
+                            </aura:if>
+                            <aura:if isTrue="{!v.hasContract &amp;&amp; !v.isSandbox}">
+                                <div class="slds-box slds-box--x-small slds-theme--shade slds-m-bottom--large">
+                                    <span class="slds-icon_container">
+                                        <Loop:Svg class="slds-icon slds-icon--small slds-icon-text-default slds-m-right--small" display="true" xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/utility-sprite/svg/symbols.svg#lock"/>
+                                    </span>You can only edit these options while using a trial license or sandbox. If you have questions or would like to update your licensed add-ons, please reach out to your account executive.
+                                </div>
                             </aura:if>
                             <div class="slds-text-heading--medium">Options</div>
-                            <div class="slds-text-body--regular slds-m-top--medium slds-m-bottom--small">Select an edition. For more information, see <a href="http://www.drawloop.com/pricing/salesforce-app/" target="_blank">comparison of edition options</a>.</div>
-                            <div class="slds-grid">
+                            <div class="slds-text-body--regular">Select an edition and any add-ons. For more information, see <a href="http://www.drawloop.com/pricing/salesforce-app/" target="_blank">comparison of edition options</a>.</div>
+                            <div class="slds-grid slds-m-top--x-large">
                                 <div id="business-container" class="slds-col slds-size--1-of-2">
-                                    <div class="slds-m-right--large">
-                                        <div class="slds-text-heading--medium slds-m-bottom--medium">Business</div>
-                                        <div class="slds-text-body--regular slds-m-bottom--medium" style="min-height:84px;">
-                                            Automated document services that allow you to create, deliver, and store DDPs in Salesforce plus advanced enterprise features.
+                                    <div id="business-header-container">
+                                        <div id="business-header-text" class="slds-m-left--medium">
+                                            <div class="slds-text-heading--medium">Business</div>
                                         </div>
-                                        <div style="text-align:center;">
-                                            <aura:if isTrue="{!!v.isStandard}">
-                                                <button type="button" class="slds-button slds-button--brand" style="white-space:nowrap;" disabled="{!v.disableAll}" onclick="{!c.toggleServiceLevel}">
-                                                    <span class="slds-m-right--x-small">
-                                                        <Loop:Svg class="slds-icon slds-icon__container slds-icon--x-small" xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/action-sprite/svg/symbols.svg#check"/>
-                                                    </span>
-                                                    <span>Business Enabled</span>
-                                                </button>
-                                                <aura:set attribute="else">
-                                                    <button type="button" class="slds-button slds-button--neutral" style="white-space:nowrap;" disabled="{!v.disableAll}" onclick="{!c.toggleServiceLevel}">
-                                                        <span>Enable Business</span>
-                                                    </button>
-                                                </aura:set>
-                                            </aura:if>
+                                    </div>
+                                    <div id="business-body-container" class="slds-p-left--large slds-p-top--medium slds-p-right--large">
+                                        <div id="business-body-text-container">
+                                            <div class="slds-text-body--regular">Automated document services that allow you to create, deliver, and store DDPs in Salesforce plus advanced enterprise features.</div>
                                         </div>
-                                        <div class="slds-small-size--1-of-1 slds-medium-size--6-of-8 slds-large-size--6-of-12 slds-container--center slds-m-top--small">
-                                            <div class="slds-text-body--regular">To add or update add-ons, contact a sales executive.</div>
-                                            <div class="slds-text-body--regular"><b>Email: </b><a href="mailto:sales@drawloop.com?subject=Add%2Don%20Request" style="color: #0070d2;">sales@drawloop.com</a></div>
-                                            <div class="slds-text-body--regular"><b>Call: </b>(949) 242-0455 and select option 1</div>
+                                        <div id="business-body-input-container">
+                                            <div id="business-body-buffer" class="business-body-buffer"/>
+                                            <div id="business-body-checkboxes" class="slds-grid slds-m-bottom--small">
+                                                <div class="checkbox-group nowrap">
+                                                    <div class="slds-form-element">
+                                                        <div class="form-element__control">
+                                                            <label class="slds-checkbox">
+                                                                <input type="checkbox" onclick="{!c.toggleBusinessScheduledDdp}" disabled="{!v.isStandard || v.disableAll}" checked="{!v.businessScheduledDdp}"/>
+                                                                <span class="slds-checkbox--faux"/>
+                                                                <span class="slds-form-element__label">Scheduled DDPs</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-form-element">
+                                                        <div class="form-element__control">
+                                                            <label class="slds-checkbox">
+                                                                <input type="checkbox" onclick="{!c.toggleWorkflowDdp}" disabled="{!v.isStandard || v.disableAll}" checked="{!v.workflowDdp}"/>
+                                                                <span class="slds-checkbox--faux"/>
+                                                                <span class="slds-form-element__label">Workflow/Apex DDPs</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-form-element">
+                                                        <div class="form-element__control">
+                                                            <label class="slds-checkbox">
+                                                                <input type="checkbox" onclick="{!c.toggleComponentLibrary}" disabled="{!v.isStandard || v.disableAll}" checked="{!v.componentLibrary}"/>
+                                                                <span class="slds-checkbox--faux"/>
+                                                                <span class="slds-form-element__label">Component Library</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="slds-form-element">
+                                                        <div class="form-element__control">
+                                                            <label class="slds-checkbox">
+                                                                <input type="checkbox" onclick="{!c.toggleMassDdp}" disabled="{!v.isStandard || v.disableAll}" checked="{!v.massDdp}"/>
+                                                                <span class="slds-checkbox--faux"/>
+                                                                <span class="slds-form-element__label">Mass DDPs</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <aura:if isTrue="{!!v.isStandard}">
+                                                        <button type="button" class="slds-button slds-button--brand slds-m-top--small" style="white-space:nowrap;" disabled="{!v.disableAll}" onclick="{!c.toggleServiceLevel}">
+                                                            <span class="slds-m-right--x-small">
+                                                                <Loop:Svg class="slds-icon slds-icon__container slds-icon--small" xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/action-sprite/svg/symbols.svg#check"/>
+                                                            </span>
+                                                            <span>Business Enabled</span>
+                                                        </button>
+                                                        <aura:set attribute="else">
+                                                            <button type="button" class="slds-button slds-button--neutral slds-m-top--small" style="white-space:nowrap;" disabled="{!v.disableAll}" onclick="{!c.toggleServiceLevel}">
+                                                                <span>Enable Business</span>
+                                                            </button>
+                                                        </aura:set>
+                                                    </aura:if>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="standard-container" class="slds-col slds-size--1-of-2 border-left">
-                                    <div class="slds-m-left--x-large">
-                                        <div id="standard-header-text" class="slds-text-heading--medium slds-m-bottom--medium">Standard</div>
-                                        <h2 class="slds-text-body--regular slds-m-bottom--medium" style="min-height:84px;">
-                                            Automated document services that allow you to create, deliver, and store DDPs in Salesforce.
-                                        </h2>
-                                        <div style="text-align:center;">
-                                            <aura:if isTrue="{!v.isStandard}">
-                                                <button type="button" class="slds-button slds-button--brand" style="white-space:nowrap;" disabled="{!v.disableAll}" onclick="{!c.toggleServiceLevel}">
-                                                    <span class="slds-m-right--x-small">
-                                                        <Loop:Svg class="slds-icon slds-icon__container slds-icon--small" xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/action-sprite/svg/symbols.svg#check"/>
-                                                    </span>
-                                                    <span>Standard Enabled</span>
-                                                </button>
-                                                <aura:set attribute="else">
-                                                    <button type="button" class="slds-button slds-button--neutral" style="white-space:nowrap;" disabled="{!v.disableAll}" onclick="{!c.toggleServiceLevel}">
-                                                        <span>Enable Standard</span>
-                                                    </button>
-                                                </aura:set>
-                                            </aura:if>
+                                <div id="standard-container" class="slds-col slds-size--1-of-2">
+                                    <div id="standard-header-container" class="slds-m-left--medium">
+                                        <div id="standard-header-text" class="slds-text-heading--medium">Standard</div>
+                                    </div>
+                                    <div id="standard-body-container" class="slds-p-left--large slds-p-top--medium slds-p-right--large border-left">
+                                        <div id="standard-body-text">
+                                            <div class="slds-text-body--regular">Automated document services that allow you to create, deliver, and store DDPs in Salesforce.</div>
+                                        </div>
+                                        <div id="standard-body-input-container">
+                                            <div id="standard-body-buffer" class="standard-body-buffer"/>
+                                            <div id="standard-body-checkbox" class="slds-grid slds-m-bottom--small">
+                                                <div class="checkbox-group nowrap">
+                                                    <div class="slds-form--stacked">
+                                                        <div class="slds-form-element">
+                                                            <div class="slds-form-element__control">
+                                                                <label class="slds-checkbox">
+                                                                    <input type="checkbox" onclick="{!c.toggleStandardScheduledDdp}" disabled="{!!v.isStandard || v.disableAll}" checked="{!v.standardScheduledDdp}"/>
+                                                                    <span class="slds-checkbox--faux"></span>
+                                                                    <span class="slds-form-element__label">Scheduled DDPs</span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <aura:if isTrue="{!v.isStandard}">
+                                                        <button type="button" class="slds-button slds-button--brand slds-m-top--small" style="white-space:nowrap;" disabled="{!v.disableAll}" onclick="{!c.toggleServiceLevel}">
+                                                            <span class="slds-m-right--x-small">
+                                                                <Loop:Svg class="slds-icon slds-icon__container slds-icon--small" xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/action-sprite/svg/symbols.svg#check"/>
+                                                            </span>
+                                                            <span>Standard Enabled</span>
+                                                        </button>
+                                                        <aura:set attribute="else">
+                                                            <button type="button" class="slds-button slds-button--neutral slds-m-top--small" style="white-space:nowrap;" disabled="{!v.disableAll}" onclick="{!c.toggleServiceLevel}">
+                                                                <span>Enable Standard</span>
+                                                            </button>
+                                                        </aura:set>
+                                                    </aura:if>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

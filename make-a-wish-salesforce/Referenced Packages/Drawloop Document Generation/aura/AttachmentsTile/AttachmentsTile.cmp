@@ -24,7 +24,7 @@
     	<aura:attribute name="selectedAttachments" type="List" default="[]" description="List of attachments to attach to DDP."/>
     </aura:method>
     
-    <li class="slds-box tile-background drawloop">
+    <li class="slds-box tile-background">
         <div aura:id="errorContainer" class="hidden">
             <div class="slds-grid">
                 <div class="slds-col slds-text-body--regular container-left-margin" style="color: #52628e;">Attachments</div>
@@ -53,7 +53,7 @@
                         <aura:iteration items="{!v.selectedAttachments}" var="attachment">
                             <!--The Pill components have the same 'id' values as the Tile components,-->
                             <!--but the Pill component doesn't store the 'id' as an html attribute, whereas the Tile component does.-->
-                            <Loop:Pill label="{!attachment.Name}" svgClass="slds-button__icon removePill" id="{!v.globalIdTag + attachment.Id}" pillClass="slds-badge blue-color"/>
+                            <Loop:Pill label="{!attachment.Name}" svgClass="slds-button__icon icon-white" id="{!v.globalIdTag + attachment.Id}" pillClass="slds-pill slds-badge blue-color"/>
                         </aura:iteration>
                     </div>
                 </div>

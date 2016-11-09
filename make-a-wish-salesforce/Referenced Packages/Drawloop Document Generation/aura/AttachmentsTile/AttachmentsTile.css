@@ -1,4 +1,4 @@
-.THIS.drawloop.tile-background {
+.THIS.tile-background {
     padding: .5rem;
     margin-top: 8px;
     background-color: #FFFFFF;
@@ -23,10 +23,4 @@
 .THIS .gray-badge {
     background-color: #eaedf4;
     color: #005fb2;
-}
-.THIS .drawloop .removePill {
-    fill: #fff;
-    height: 11px;
-    width: 11px;
-    left: 2px;
 }

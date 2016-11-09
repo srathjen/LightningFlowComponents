@@ -131,11 +131,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>DSProSFPassword__c</field>
+                <field>DSProSFUsername__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>DSProSFUsername__c</field>
+                <field>DSProSFPassword__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>

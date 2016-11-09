@@ -2,14 +2,11 @@
     <aura:handler name="init" value="this" action="{!c.onInit}"/>
     <ltng:require scripts="/resource/Loop__Scripts/jquery-2.1.4.js,/resource/Loop__Scripts/process-ddp.js"/>
     
-    <aura:attribute name="ddpLabel" type="string" default="DDP"/>
-
-    <!-- Internal Attributes -->
     <aura:attribute name="containerId" type="string" access="private" description="Randomized 'id' value."/>
     <aura:attribute name="hasErrored" type="boolean" access="private" default="false" description="'True' when error has occured."/>
     <aura:attribute name="formattedRecipients" type="string" access="private" default="[]" description="List of key-value pairs for E-Sign recipients. Used inside proess-ddp.js."/>
-    <aura:attribute name="isSandbox" type="boolean" default="false" access="private"/>
-
+    <aura:attribute name="ddpLabel" type="string" default="DDP"/>
+    
     <aura:method name="start" action="{!c.start}">
         <aura:attribute name="parameters" type="Object" description="Instance of ProcessDdpParameters."/>
         <!--Passing in recipients this way is easier than trying to make eSignRecipients part of 'parameters'.-->

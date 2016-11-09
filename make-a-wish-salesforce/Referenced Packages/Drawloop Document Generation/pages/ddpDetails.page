@@ -4,7 +4,6 @@
         <div class="slds" style="text-align: center; margin-top: 144px; font-size: 1.125rem; color: rgb(84, 105, 141);">This page isn't available in Salesforce Lightning Experience or Salesforce1.</div>
     </apex:outputPanel>
     <apex:outputPanel rendered="{!!useLightningExperience}" >
-        <apex:stylesheet value="{!URLFOR($Resource.Loop__SalesforceLightning, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
         <apex:stylesheet value="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
         <style>
             div.fixed-table-container-inner table tr.odd { background: #EEE; }
@@ -117,35 +116,7 @@
             }
             tr.selected { background-color: #7FCEFF; }
             #fileOptionsDialog {
-            	width: 300px;
-            }
-            .testDdpContainer {
-            	display: inline-block;
-            	margin-left: 4px;
-            }
-            .testDdp {
-                font-weight: 300;
-            }
-            .testButton {
-                margin-left: 53px;
-            }
-            .testDdpSvg {
-                vertical-align: middle;
-                background-color: #FF7900;
-                border-radius: .125rem;
-                display: inline-block;
-                margin-right: .75rem;
-                margin-left: .75rem;
-                width: 1.5rem;
-                height: 1.5rem;
-            }
-            .icon {
-                width: 1rem;
-                height: 1rem;
-                margin-left: 5px;
-                /* These are necessary to vertically align the icon in the middle across all browsers and devicees. */
-                vertical-align: top;
-                margin-top: 3px;
+                width: 300px;
             }
         </style>
         <script src="{!URLFOR($Resource.Scripts, 'jquery-code.js')}"></script>
@@ -163,7 +134,6 @@
                 jQuery('[id$="_ddpDetail"] div.pbSubheader:contains(Email Report To)').next().remove();
                 jQuery('[id$="_ddpDetail"] div.pbSubheader:contains(Email Report To)').remove();
                 
-                moveTestButtonIntoButtonSection();
                 moveVfFormIntoDetail();
                 
                 jQuery.notifie({
@@ -193,16 +163,6 @@
                         .attr('href', 'https://appexchange.salesforce.com/listingDetail?listingId=a0N300000016Zn3EAE&tab=g')
                         .attr('target', '_blank')
                 );
-            }
-            
-            function moveTestButtonIntoButtonSection() {
-                var $testButton = jQuery('[id$=":testDdp"]');
-                if ($testButton) {
-                    var $buttonSection = jQuery('#topButtonRowapage_ddpDetail');
-                    if ($buttonSection && $buttonSection.length) {
-                        $buttonSection.append($testButton);
-                    }
-                }
             }
             
             function moveVfFormIntoDetail() {
@@ -395,29 +355,6 @@
             <apex:outputPanel id="newVersionMessagePanel" layout="block" style="height: 45px;">
                 <apex:pageMessage id="newVersionMsg" rendered="{!newerLDSVersionExists}" severity="info" strength="2"
                     title="A newer version of Drawloop Document Generation is available to be installed from the AppExchange." />
-            </apex:outputPanel>
-            
-            <apex:outputPanel id="testDdp" styleClass="slds testDdpContainer" layout="block" rendered="{!showLightningTest}">
-                <div class="slds-card" style="padding: 5px;">
-                    <div class="testDdpSvg">
-                        <svg id="drawloop" class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
-                            <defs>
-                                <style>.cls-1{fill:#fff;}</style>
-                            </defs>
-                            <title>drawloop</title>
-                            <path id="cog" class="cls-1" d="M71.298,46H67.71741a25.691,25.691,0,0,0-1.40509-3.52478l2.4679-2.4711a0.47083,0.47083,0,0,0,0-.66267l-6.474-6.4748a0.46873,0.46873,0,0,0-.66113-0.0004L59.37567,35.2701A24.71492,24.71492,0,0,0,56,33.79535V30.4259A0.74994,0.74994,0,0,0,55.26288,30h-9.1557C45.85,30,46,30.16895,46,30.4259V33.787a9.21047,9.21047,0,0,0-3.66324,1.4505l-2.462-2.3717a0.52508,0.52508,0,0,0-.70611,0l-6.49652,6.474a0.469,0.469,0,0,0-.01126.66107l2.40355,2.41565A26.49247,26.49247,0,0,0,33.62378,46H30.04315C29.786,46,30,46.19751,30,46.45465v9.15564C30,55.86743,29.786,56,30.04315,56h3.73773a23.86277,23.86277,0,0,0,1.42432,3.33667l-2.5556,2.575a0.48075,0.48075,0,0,0,0,.67079l6.474,6.47886a0.46889,0.46889,0,0,0,.66107.00243L42.605,66.42505A23.93867,23.93867,0,0,0,46,67.73456v3.61151C46,71.60321,45.85,72,46.10718,72h9.1557A0.95946,0.95946,0,0,0,56,71.34607V67.72644a21.04842,21.04842,0,0,0,3.11121-1.33105l-0.06308.00647,2.63066,2.66437a0.44878,0.44878,0,0,0,.64428,0l6.46557-6.474a0.4689,0.4689,0,0,0-.00421-0.66107l-2.614-2.65088A23.0322,23.0322,0,0,0,67.56018,56H71.298A0.67581,0.67581,0,0,0,72,55.61029V46.45465A0.71983,0.71983,0,0,0,71.298,46ZM50.67059,59.45636A8.57034,8.57034,0,1,1,59.24084,50.886,8.57039,8.57039,0,0,1,50.67059,59.45636Z"/>
-                            <path id="form" class="cls-1" d="M39.173,0H4.70575A4.839,4.839,0,0,0,0,4.65765V53.84113C0,56.31061,2.23627,58,4.70575,58H25.94647C25.43042,58,25,56.61383,25,55.61035V46.45447A2.50228,2.50228,0,0,1,25.3573,45H9V40H28.11609a5.472,5.472,0,0,1,1.37183-4.2778L34.18134,31H9V27H40v1.476a8.23742,8.23742,0,0,1,1.24533-.02881A5.49757,5.49757,0,0,1,46.10712,25H49V10.43146ZM40,18H9V14H40v4Z"/>   
-                        </svg>
-                    </div>
-                    <span class="testDdp">
-                        Test DDP
-                    </span>
-                    <apex:outputLink onclick="window.open('/apex/loop__ddpTest?id={!id}&loopUrl={!loopUrl}','','width=353,height=700,scrollbars=yes'); return false;" target="_blank" styleClass="testButton">
-                        <span class="slds-button slds-button--neutral">
-                            Select Record
-                        </span>
-                    </apex:outputLink>
-                </div>
             </apex:outputPanel>
             
             <apex:detail id="ddpDetail" inlineEdit="true" oncomplete="window.location.reload();" relatedList="true" subject="{!ddp.Id}" title="true" />

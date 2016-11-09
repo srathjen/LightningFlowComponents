@@ -4,13 +4,6 @@
         if (component.get("v.record.Id") === component.get("v.selectedContact")) {
             helper.openTile(component);
         }
-        if (type === 'attachment' && component.get('v.record').FileNames != null) {
-            var fileNames = component.get('v.record').FileNames;
-            if (fileNames.length > 1) {
-                component.set('v.fileNamesLabel', 'File Names:');
-            }
-            component.set('v.fileNames', fileNames.join(', '));
-        }
         if (type === "delivery") {
             var record = component.get("v.record");
             
@@ -79,7 +72,6 @@
             globalId: component.getGlobalId(),
             id: component.get("v.id"),
             name: component.get("v.record.Name"),
-            deliveryType: component.get("v.record.DeliveryType"),
             attachToRecord: component.get("v.attachToRecord"),
             selectedContentLibrary: component.get("v.selectedLibraryId"),
             emailSubject: component.get("v.emailSubject"),
@@ -203,11 +195,6 @@
     },
     forcedSelect : function(component, event, helper) {
         helper.addClickedStyle(component);
-    },
-    exposeMoreInformation : function(component, event, helper) {
-        $A.util.addClass(component.find("moreInfoButton"), "hidden");
-        $A.util.removeClass(component.find("additionallAttachmentInfo"), "hidden");
-        event.stopPropagation();
     },
     attachCheckboxClicked : function(component, event, helper) {
         var tileClicked = component.getEvent("tileClicked");

@@ -19,16 +19,13 @@
     <aura:attribute name="alertText" type="string" default="" access="private"/>
     <aura:attribute name="sampleDdpObjects" type="List" default="" access="private"/>
     <aura:attribute name="layoutButtonObjects" type="List" default="" access="private"/>
-    <aura:attribute name="services" type="Map" access="private" description="Contains isStandard, add-ons, allowedLicenses, usedLicenses etc."/>
     <aura:attribute name="helpLink" type="string" default="" access="private"/>
-    <aura:attribute name="isStandard" type="boolean" default="false" access="private"/>
     
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
     <aura:handler name="salesPathSelected" event="Loop:salesPathSelected" action="{!c.changeStep}"/>
     <aura:handler name="moveToNextStep" event="Loop:moveToNextStep" action="{!c.moveToNextStep}"/>
     <aura:handler name="showError" event="Loop:showError" action="{!c.showError}"/>
     <aura:handler name="setSampleObjects" event="Loop:setSampleObjects" action="{!c.setSampleObjects}"/>
-    <aura:handler name="updateIsStandard" event="Loop:updateIsStandard" action="{!c.updateIsStandard}"/>
     <aura:registerEvent name="showError" type="Loop:showError"/>
     <div class="slds" style="height:100%;">
         <div aura:id="pageContent" class="content-container">
@@ -64,7 +61,7 @@
                                     <Loop:SetupWizardSplash />
                                 </aura:if>
                                 <aura:if isTrue="{!v.step == 'Edition'}">
-                                    <Loop:Edition aura:id="edition" sessionId="{!v.sessionId}" loopUrl="{!v.loopUrl}" services="{!v.services}" isStandard="{!v.isStandard}"/>
+                                    <Loop:Edition aura:id="edition" sessionId="{!v.sessionId}" loopUrl="{!v.loopUrl}"/>
                                 </aura:if>
                                 <aura:if isTrue="{!v.step == 'Users'}">
                                     <Loop:SetupWizardUsers aura:id="setupUsers"/>

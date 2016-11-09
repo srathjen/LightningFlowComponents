@@ -17,7 +17,6 @@
         <backgroundColor>#FFFFFF</backgroundColor>
         <height>100</height>
         <horizontalAlignment>Left</horizontalAlignment>
-        <logo>NPSP_Documents/Sample_Letterhead_Logo.png</logo>
         <verticalAlignment>Top</verticalAlignment>
     </header>
     <middleLine>

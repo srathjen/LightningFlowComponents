@@ -22,8 +22,6 @@
     <aura:attribute name="selectedLibraryId" type="string" default=""/>
     <aura:attribute name="libraries" type="list" default="[]"/>
     <aura:attribute name="selectedContact" type="string" default=""/>
-    <aura:attribute name="fileNamesLabel" type="string" default="File Name:" access="private"/>
-    <aura:attribute name="fileNames" type="string" default="" access="private"/>
 	
     <!--Email attributes-->
     <aura:attribute name="emailSubject" type="string" default=""/>
@@ -89,22 +87,10 @@
                                     <dt><span title="{!v.record.Email}">{!v.record.Email}</span></dt>
                                 </aura:if>
                             </aura:if>
-                            <aura:if isTrue="{!v.type == 'ddp' || v.type == 'record' || v.type == 'document' || v.type == 'attachment' || v.type == 'delivery'}">
+                            <aura:if isTrue="{!v.type == 'ddp' || v.type == 'document' || v.type == 'attachment' || v.type == 'delivery'}">
                                 <aura:if isTrue="{!v.record.Description}">
                                     <dt><span title="{!v.record.Description}">{!v.record.Description}</span></dt>
                                 </aura:if>
-                            </aura:if>
-                            <aura:if isTrue="{!v.type == 'attachment' &amp;&amp; v.record.CaseNumber != null}">
-                                <dt><span class="slds-m-right--x-small">Type:</span><span title="{!v.record.Type}">{!v.record.Type}</span></dt>
-                                <dt><span class="slds-m-right--x-small">Case Number:</span><span title="{!v.record.CaseNumber}">{!v.record.CaseNumber}</span></dt>
-                                <button aura:id="moreInfoButton" class="slds-button" onclick="{!c.exposeMoreInformation}">More Information</button>
-                                <div aura:id="additionallAttachmentInfo" class="hidden">
-                                    <dt><span class="slds-m-right--x-small">Case Status:</span><span title="{!v.record.Status}">{!v.record.Status}</span></dt>
-                                    <dt><span class="slds-m-right--x-small">Case Subject:</span><span title="{!v.record.Subject}">{!v.record.Subject}</span></dt>
-                                    <aura:if isTrue="{!v.record.FileNames != null &amp;&amp; !empty(v.record.FileNames)}">
-                                        <dt><span class="slds-m-right--x-small">{!v.fileNamesLabel}</span><span>{!v.fileNames}</span></dt>
-                                    </aura:if>
-                                </div>
                             </aura:if>
                             <aura:if isTrue="{!v.type == 'delivery'}">
                                 <aura:if isTrue="{!v.record.AllowAttachToRecord &amp;&amp; !v.record.RequireAttachToRecord}">

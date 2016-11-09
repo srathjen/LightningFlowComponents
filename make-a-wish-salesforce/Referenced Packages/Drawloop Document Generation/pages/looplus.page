@@ -712,22 +712,6 @@
                         }
                     }
                 }
-                function setDefaultRecipient(recipientId, signerRecipientValue, isHost) {
-                    var $select = !isHost ?
-                            jQuery('#' + recipientId + '-recipientSelect') :
-                            jQuery('#' + recipientId + '-recipientHostSelect');
-                    $select.val(signerRecipientValue);
-                    // If the recipient is not defaulted via Apex, we still may be updating the default value via javascript (after)
-                    // If this is the case, we need to make sure the apex:inputHidden is set with that value.
-                    if (!signerRecipientValue && $select.val().trim()) {
-                        if (!isHost) {
-                            $select.parent().find('[id$=":recipientValue"]').val($select.val());
-                        }
-                        else {
-                            $select.parent().find('[id$=":recipientHostValue"]').val($select.val());
-                        }
-                    }
-                }
             </script>
         </apex:outputPanel>
     </head>
@@ -814,7 +798,7 @@
                                 <li id="cp">
                                     <div>
                                         <span class="block">
-                                            <label for="contactpick">{!IF(ddpLabel='',$Label.DDP_Select_Contact,SUBSTITUTE($Label.DDP_Select_Contact,'DDP',ddpLabel))}</label>
+                                            <label for="contactpick">{!IF(ddpLabel='',$Label.loop__DDP_Select_Contact,SUBSTITUTE($Label.loop__DDP_Select_Contact,'DDP',ddpLabel))}</label>
                                         </span>
                                         <apex:outputPanel layout="block" >
                                             <apex:outputPanel rendered="{!useContactSearch}" >
@@ -964,7 +948,7 @@
                         <apex:outputPanel id="delivPanel">
                             <ol class="slds-list--ordered" start="{!1+IF(showContactSel, 1, 0)+IF(showDdpUl, 1, 0)+IF(showEnclosures, 1, 0)+IF(showImportSelection, 1, 0)}">
                                 <li class="delivli">
-                                    <div>{!IF(ddpLabel='',$Label.DDP_Delivery,SUBSTITUTE($Label.DDP_Delivery,'DDP',ddpLabel))}</div>
+                                    <div>{!IF(ddpLabel='',$Label.loop__DDP_Delivery,SUBSTITUTE($Label.loop__DDP_Delivery,'DDP',ddpLabel))}</div>
                                     <div id="delivdiv2">
                                         <apex:selectRadio value="{!selectedDelivery}" id="delivery" layout="pageDirection">
                                             <apex:selectOptions value="{!deliveries}" />
@@ -983,7 +967,7 @@
                                         <apex:outputPanel id="workspacePanel" layout="block">
                                             <apex:outputPanel rendered="{!showWorkspaceSelect}">
                                                 <table><tbody><tr><td>
-                                                    <span style="margin-left: 5px;">{!$Label.DDP_Select_Library} </span>
+                                                    <span style="margin-left: 5px;">{!$Label.loop__DDP_Select_Library} </span>
                                                     <apex:selectList size="1" value="{!workspaceId}" styleClass="slds-select">
                                                         <apex:selectOptions value="{!workspaces}" />
                                                     </apex:selectList>
@@ -1015,7 +999,7 @@
                             <apex:outputPanel rendered="{!showEsignRecipients}">
                                 <ol class="slds-list--ordered" start="{!2+IF(showContactSel, 1, 0)+IF(showDdpUl, 1, 0)+IF(showEnclosures, 1, 0)+IF(showImportSelection, 1, 0)}">
                                     <li class="delivli" id="dsli3" style="list-style-type: decimal;">
-                                        <div>{!cOption.r.RecordType.Name} {!$ObjectType.dsRecipient__c.labelplural}:</div>
+                                        <div>{!cOption.r.RecordType.Name} {!$ObjectType.Loop__dsRecipient__c.labelplural}:</div>
                                         <apex:outputPanel id="dsCreds" layout="block" rendered="{!(cOption.r.RecordType.DeveloperName == 'DocuSign')}" styleClass="dslogin {!IF(OR(showDsAccountIds,showDsun,showDspass), '', 'invisible')}" style="{!IF(useLightningExperience, 'width: 400px;', '')}" >
                                             <input type="hidden" name="dsacct" value="{!dsacct}" />
                                             <input type="hidden" name="dsun" value="{!dsun}" />
@@ -1083,14 +1067,14 @@
                                                     </script>
                                                 </apex:outputPanel>
                                                 <apex:outputPanel rendered="{!NOT(OR(r.signer.isText, r.signer.isUserLookup, r.signer.isContactLookup, r.signer.isNameEmail))}" id="showDD">
-                                                    <select id="{!r.r.Id}-recipientSelect" onchange="jQuery(this).parent().find('[id$=\':recipientValue\']').val(this.value);" class="slds-select">
+                                                    <select id="recipientSelect" onchange="jQuery(this).parent().find('[id$=\':recipientValue\']').val(this.value);" class="slds-select">
                                                         <apex:repeat value="{!r.signer.signers}" var="opt">
                                                             <option value="{!opt.value}">{!opt.label}</option>
                                                         </apex:repeat>
                                                     </select>
                                                     <apex:inputHidden id="recipientValue" value="{!r.signer.recipientValue}" />
                                                     <input type="hidden" name="{!r.r.Id}_recipient" value="{!r.signer.recipientValue}" />
-                                                    <script>setDefaultRecipient('{!JSENCODE(r.r.Id)}', '{!JSENCODE(r.signer.recipientValue)}', false);</script>
+                                                    <script>jQuery('#recipientSelect').val('{!JSENCODE(r.signer.recipientValue)}')</script>
                                                 </apex:outputPanel>
                                                 <apex:outputPanel rendered="{!OR(r.signer.isNameEmail,BEGINS(r.r.Loop__StaticName__c, '!'),r.r.Loop__dsStaticRecipient__c='Dynamic Name-Email')}">
                                                     <input type="hidden" name="{!r.r.Id}_recipient_name" value="{!r.signer.staticName}" />
@@ -1135,14 +1119,14 @@
                                                         </script>
                                                     </apex:outputPanel>
                                                     <apex:outputPanel rendered="{!NOT(OR(r.host.isText, r.host.isUserLookup, r.host.isContactLookup, r.host.isNameEmail))}" id="showHostDD">
-                                                        <select id="{!r.r.Id}-recipientHostSelect" onchange="jQuery(this).parent().find('[id$=\':recipientHostValue\']').val(this.value);" class="slds-select">
+                                                        <select id="recipientHostSelect" onchange="jQuery(this).parent().find('[id$=\':recipientHostValue\']').val(this.value);" class="slds-select">
                                                             <apex:repeat value="{!r.host.signers}" var="opt">
                                                                 <option value="{!opt.value}">{!opt.label}</option>
                                                             </apex:repeat>
                                                         </select>
                                                         <apex:inputHidden id="recipientHostValue" value="{!r.host.recipientValue}" />
                                                         <input type="hidden" name="{!r.r.Id}_host" value="{!r.host.recipientValue}" />
-                                                        <script>setDefaultRecipient('{!JSENCODE(r.r.Id)}', '{!JSENCODE(r.host.recipientValue)}', true);</script>
+                                                        <script>jQuery('#recipientHostSelect').val('{!JSENCODE(r.host.recipientValue)}')</script>
                                                     </apex:outputPanel>
                                                     <apex:outputPanel rendered="{!OR(r.host.isNameEmail,BEGINS(r.r.Loop__Host_Static_Name__c, '!'),r.r.Loop__Specified_Host__c='Dynamic Name-Email')}">
                                                         <input type="hidden" name="{!r.r.Id}_host_name" value="{!r.host.staticName}" />

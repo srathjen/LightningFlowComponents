@@ -48,10 +48,10 @@
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <deploymentStatus>Deployed</deploymentStatus>
     <deprecated>false</deprecated>
-    <enableActivities>false</enableActivities>
+    <enableActivities>true</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>false</enableFeeds>
-    <enableHistory>false</enableHistory>
+    <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
@@ -67,6 +67,7 @@
         <relationshipName>Case_Files</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
@@ -78,6 +79,7 @@
         <label>Content Type</label>
         <length>255</length>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -88,6 +90,7 @@
         <externalId>false</externalId>
         <label>Description</label>
         <length>32000</length>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
@@ -99,6 +102,7 @@
         <label>File Name</label>
         <length>255</length>
         <required>true</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -117,6 +121,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>File Size</label>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -129,6 +134,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
@@ -139,6 +145,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Is Latest Version</label>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -149,6 +156,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
         <label>Key</label>
         <length>255</length>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -161,6 +169,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
@@ -173,6 +182,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
         <label>Parent Folder Id</label>
         <length>255</length>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -184,6 +194,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
         <description>Determines if the file can be accessed by portal users. If &apos;private&apos;, it is not accessible by portal users.</description>
         <externalId>false</externalId>
         <label>Private</label>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -194,6 +205,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
         <label>Version Description</label>
         <length>255</length>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -205,6 +217,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
         <label>Version Id</label>
         <length>255</length>
         <required>false</required>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -215,6 +228,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>WIP</label>
+        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -222,6 +236,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
     <nameField>
         <displayFormat>{YYYY}{MM}-{0}</displayFormat>
         <label>Case File Name</label>
+        <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Case Files</pluralLabel>

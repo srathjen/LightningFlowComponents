@@ -1,24 +1,38 @@
 ({
-    doInit : function(component, event, helper) {
-        var action = component.get('c.currentOrgOAuthSetting');
+    doInit : function(cmp, event, helper) {
+        var action = cmp.get("c.currentOrgOAuthSetting");
         action.setCallback(this, function(response) {
             var retVal = response.getReturnValue();
-            component.set('v.oAuthEnabled', retVal);
-            helper.toggleOAuthButtons(component);
+            if (retVal) {
+                helper.disable(cmp, 'Enable');
+                helper.enable(cmp, 'Disable');
+                cmp.set("v.oAuthEnabled", true);
+        	} else {
+                helper.disable(cmp, 'Disable');
+                helper.enable(cmp, 'Enable');
+                cmp.set("v.oAuthEnabled", false);
+        	}
         });
         $A.enqueueAction(action);
     },
-    onChange : function(component, event, helper) {
-        var currentSelection = event.currentTarget.id;
-        component.set('v.oAuthEnabled', currentSelection === 'enable');
-        helper.toggleOAuthButtons(component);
+    onChange : function(cmp, event, helper) {
+        var button = event.target.getAttribute("data-data");
+        if (button === 'Enable') {
+            cmp.set("v.oAuthEnabled", true);
+            helper.disable(cmp, 'Enable');
+        	helper.enable(cmp, 'Disable');
+        } else {
+            cmp.set("v.oAuthEnabled", false);
+            helper.disable(cmp, 'Disable');
+            helper.enable(cmp, 'Enable');
+        }
     },
-    save : function(component, event, helper) {
-        var selection = component.get('v.oAuthEnabled');
-        var action = component.get('c.enableDisableOrgOAuth');
-        action.setParams({ 'selection' : selection });
+    save : function(cmp, event, helper) {
+        var selection = cmp.get("v.oAuthEnabled");
+        var action = cmp.get("c.enableDisableOrgOAuth");
+        action.setParams({ "selection" : selection });
         action.setCallback(this, function(response) {
-            var moveToNextStep = component.getEvent('moveToNextStep');
+            var moveToNextStep = cmp.getEvent("moveToNextStep");
             moveToNextStep.setParams({success: true}).fire();
         });
         $A.enqueueAction(action);

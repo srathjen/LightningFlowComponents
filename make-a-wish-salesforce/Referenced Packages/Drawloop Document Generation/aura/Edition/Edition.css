@@ -7,9 +7,26 @@
 .THIS.slds .slds-grid .slds-col .slds-button .hidden {
     display: none;
 }
+.THIS .business-body-buffer {
+    height: 38px;
+}
+.THIS .standard-body-buffer {
+    height: 122px;
+}
+.THIS .slds-checkbox {
+    cursor: pointer;
+}
 .THIS .slds-button {
     cursor: pointer;
 }
 .THIS .hidden {
     display: none;
+}
+.THIS .nowrap {
+    white-space: nowrap;
+}
+.THIS .checkbox-group {
+    margin-left: auto;
+    margin-right: auto;
+    width: 180px;
 }

@@ -11,58 +11,26 @@
             
             var getCustomizeApplication = component.get("c.getCustomizeApplication");
             getCustomizeApplication.setCallback(this, function(response) {
-                if (response.getState() === "SUCCESS") {
-                    var parsedResponse = JSON.parse(response.getReturnValue());
-                    if (parsedResponse.isSuccess) {
-                        if (!parsedResponse.customizeApplication) {
-                            component.set('v.alertText', 'You need the Customize Application permission to complete the setup and start generating documents. Contact your system administrator, or continue and complete steps that require this permission later.');
-                            component.set('v.customizeApplication', false);
-                        }
-                    }
-                    else {
-                        component.getEvent('showError').setParams({
-                            message: parsedResponse.errorMessage
-                        }).fire();
-                        
-                        component.set('v.customizeApplication', false);
-                    }
-                }
-                else {
+                var state = response.getState();
+                if (state !== "SUCCESS") {
                     component.getEvent('showError').setParams({
-                        message: 'An unexpected error has occurred. Please contact Drawloop Support if this error persists.'
+                        message: 'An unexpected error has occurred.'
                     }).fire();
-                    
+                    component.set('v.customizeApplication', false);
+                } else if (response.getReturnValue() !== true) {
+                    component.set('v.alertText', 'You need the Customize Application permission to complete the setup and start generating documents. Contact your system administrator, or continue and complete steps that require this permission later.');
                     component.set('v.customizeApplication', false);
                 }
             });
             $A.enqueueAction(getCustomizeApplication);
-
-            var fetchServices = component.get("c.fetchServices");
-            fetchServices.setParams({
-                passedSessionId: component.get("v.sessionId"),
-                location: '',
-                domain: component.get("v.loopUrl")
-            });
-            fetchServices.setCallback(this, function(response) {
-                if (response.getState() === 'SUCCESS') {
-                    var parsedResponse = JSON.parse(response.getReturnValue());
-                    component.set("v.services", parsedResponse);
-                    
-                    if (parsedResponse.hasContract) {
-                        component.set("v.purchaseLabel", 'Upgrade');
-                    }
-                    helper.loadDdpAdminSplash(component, parsedResponse);
-                }
-            });
-            $A.enqueueAction(fetchServices);
         }
         else {
             $A.util.addClass(component.find('pageContent'), 'hidden');
             $A.util.removeClass(component.find('lockerServiceMessage'), 'hidden');
         }
     },
-    toggle : function(component, event, helper) {
-        var label = event.currentTarget.getAttribute("id");
+	toggle : function(component, event, helper) {
+        var label = event.target.getAttribute("id");
         var iconDiv;
         var element = component.find(label + "-Node");
         if (label !== null && label.indexOf("-icon") > -1) {
@@ -86,29 +54,22 @@
     click : function(component, event, helper){
         component.set('v.alertText', '');
         component.set('v.disableSave', false);
-        var id = event.currentTarget.id;
-        var label = event.currentTarget.title;
+        var id = event.target.getAttribute("id");
         component.set("v.step", id);
         switch(id) {
-            case "basicButtons":
-            case "editionSection":
-            case "purchaseForm":
+            case "classicExperienceButtons":
+            case "edition":
             case "settings":
             case "testUserConfiguration":
             case "userPermissions":
             case "sampleDdps":
                 component.set("v.saveVisible", true);
                 break;
-            case "ddpAdmin":
-                helper.loadDdpAdminSplash(component, component.get("v.services"));
-                break;
             default:
                 component.set("v.saveVisible", false);
                 break;
         }
-        helper.updateSaveButtonText(component, id);
-        helper.isSelected(component, id);
-        helper.updateBreadcrumb(component, id, label);
+        helper.isSelected(component, event);
     },
     search : function(component, event, helper) {
         helper.searchHelper(component);
@@ -116,7 +77,7 @@
     save : function(component, event, helper) {
         component.set('v.alertText', '');
         component.set('v.busy', true);
-        if (component.get("v.step") === "editionSection") {
+        if (component.get("v.step") === "edition") {
             var edition = component.find("editionComponent");
             edition.save();
         }
@@ -134,7 +95,7 @@
             var pauseToEdit = component.find("pauseToEdit");
             pauseToEdit.save();
         }
-        else if (component.get("v.step") === "basicButtons") {
+        else if (component.get("v.step") === "classicExperienceButtons") {
             var classicButtons = component.find("classicButtons");
             classicButtons.save();
         }
@@ -142,23 +103,18 @@
             var sampleDdps = component.find('sampleDdpsComponent');
             sampleDdps.save();
         }
-        else if (component.get('v.step') === 'purchaseForm') {
-            var purchaseForm = component.find('purchaseFormComponent');
-            purchaseForm.submit();
-        }
     },
-    redirectButtons : function(component, event, helper) {
-        var id = event.getParam("buttonName");
-
-        helper.toggleBranch(component, id);
-        component.set("v.step", id);
-        $A.util.addClass(component.find(id), "slds-is-selected");
-
-        component.set("v.saveVisible", id === "basicButtons" || id === "purchaseForm");
-
-        helper.updateSaveButtonText(component, id);
-        var label = component.find(id).getElement().title;
-        helper.updateBreadcrumb(component, id, label);
+    redirectButtons : function(component, event) {
+        var label = event.getParam("buttonName");
+        if (label) {
+            component.set("v.step", label);
+            $A.util.addClass(component.find(label), "slds-is-selected");
+            $A.util.removeClass(component.find("buttonToggle-Node"), "slds-collapsed");
+            $A.util.addClass(component.find("buttonToggle-icon"), "icon-on");
+        }
+        if (label === "classicExperienceButtons") {
+            component.set("v.saveVisible", true);
+        }
     },
     hideSpinner : function(component) {
         document.getElementById("spinner").style.display = 'none';
@@ -166,8 +122,7 @@
     },
     actionComplete : function(component, event) {
         if (event.getParam('success')) {
-            var successMessage = event.getParam('successMessage') ? event.getParam('successMessage') : 'Save successful!';
-            component.set('v.alertText', successMessage);
+	        component.set('v.alertText', 'Save successful!');
         }
         component.set('v.busy', false);
     },
@@ -178,12 +133,6 @@
         errorPrompt.showError(title, message);
     },
     disableSave : function(component, event) {
-        component.set("v.disableSave", true);
-    },
-    enableSave : function(component, event) {
-        component.set("v.disableSave", false);
-    },
-    updateIsStandard : function(component, event) {
-        component.set("v.isStandard", event.getParam('isStandard'));
+		component.set("v.disableSave", true);
     }
 })

@@ -4,7 +4,6 @@
         downloadUrl += '&sessionId=' + encodeURIComponent('{!JSENCODE(sessionId)}');
         downloadUrl += '&location=' + encodeURIComponent('{!JSENCODE(location)}');
         downloadUrl += '&userId=' + '{!userId}';
-        downloadUrl += '&sandbox=' + '{!sandbox}';
         
         window.location = downloadUrl;
     </script>

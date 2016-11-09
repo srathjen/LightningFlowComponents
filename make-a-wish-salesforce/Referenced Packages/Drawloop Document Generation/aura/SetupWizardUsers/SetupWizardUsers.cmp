@@ -7,7 +7,6 @@
     <aura:attribute name="usedLicenses" type="integer" default="0" access="private"/>
     <aura:attribute name="allowedLicenses" type="integer" default="0" access="private"/>
     <aura:attribute name="tooManyUsers" type="boolean" default="false" access="private"/>
-    <aura:attribute name="hasContract" type="boolean" default="false"/>
     
     <aura:attribute name="allProfiles" type="List" default="[]" access="private" description="List of all ProfileData. Immutable."/>
     <aura:attribute name="selectedProfile" type="Object" access="private" description="Id of currently selected ProfileData."/>
@@ -31,7 +30,6 @@
     <aura:method name="save" action="{!c.save}"/>
     <aura:registerEvent name="moveToNextStep" type="Loop:moveToNextStep"/>
     <aura:registerEvent name="showError" type="Loop:showError"/>
-    <aura:registerEvent name="redirectPage" type="Loop:redirectPage"/>
     
     <div class="slds">
         <div aura:id="loading" class="loading-container" style="min-width:60rem;height:40rem;">
@@ -149,16 +147,13 @@
                     </button>
                 </div>
                 <div id="staging-lists-column-container" class="slds-size--1-of-4 slds-grid--vertical slds-p-bottom--small" style="height:100%;">
-                    <div class="slds-form-element slds-m-bottom--small" style="height:15%;">
+                    <div class="slds-form-element" style="height:15%;">
                         <div class="slds-form-element__label" style="font-size:16px;" aria-label="select-2">Provisioned Users</div>
                         <div class="slds-form-element__controller slds-box slds-box--x-small slds-theme--shade">
                             <p>{!v.provisionedUsersText}</p>
-                            <aura:if isTrue="{! !v.isSandbox}">
-                            	<button class="slds-button" style="line-height:1rem;" onclick="{!c.redirectPage}">{!v.hasContract ? 'Purchase User Licenses' : 'Purchase Nintex Drawloop'}</button>
-                            </aura:if>
                         </div>
                     </div>
-                    <div class="slds-form-element slds-m-bottom--x-small">
+                    <div class="slds-form-element slds-m-bottom--small">
                         <div class="slds-form-element__label">Admin</div>
                         <div class="slds-form-element__controller slds-picklist slds-picklist--multi">
                             <ul id="ddpAdminsList" class="slds-picklist__options slds-picklist__options--multi shown" style="width:inherit;">

@@ -19,6 +19,7 @@
         </summaryFilterItems>
         <summaryForeignKey>Opportunity.AccountId</summaryForeignKey>
         <summaryOperation>min</summaryOperation>
+        <trackHistory>false</trackHistory>
         <type>Summary</type>
     </fields>
     <fields>
@@ -40,6 +41,7 @@
         </summaryFilterItems>
         <summaryForeignKey>Opportunity.AccountId</summaryForeignKey>
         <summaryOperation>max</summaryOperation>
+        <trackHistory>false</trackHistory>
         <type>Summary</type>
     </fields>
     <fields>
@@ -56,6 +58,7 @@
         </summaryFilterItems>
         <summaryForeignKey>Opportunity.AccountId</summaryForeignKey>
         <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
         <type>Summary</type>
     </fields>
     <fields>
@@ -76,6 +79,7 @@
         </summaryFilterItems>
         <summaryForeignKey>Opportunity.AccountId</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
         <type>Summary</type>
     </fields>
     <fields>
@@ -90,6 +94,7 @@
         <relationshipName>Organizations</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -100,6 +105,7 @@
         <externalId>false</externalId>
         <label>_SYSTEM: IsIndividual</label>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -112,6 +118,7 @@
         <length>100</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>

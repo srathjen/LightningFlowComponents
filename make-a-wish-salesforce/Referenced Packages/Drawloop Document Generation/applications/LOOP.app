@@ -15,5 +15,7 @@
     <tab>standard-Case</tab>
     <tab>standard-report</tab>
     <tab>Document_Request__c</tab>
+    <tab>Travel_Data__c</tab>
     <tab>dsfs__DocuSignAccountConfiguration__c</tab>
+    <tab>Awards_Recognition__c</tab>
 </CustomApplication>

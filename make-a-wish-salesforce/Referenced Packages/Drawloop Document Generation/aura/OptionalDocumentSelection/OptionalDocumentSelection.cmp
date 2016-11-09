@@ -6,12 +6,10 @@
     <aura:attribute name="records" type="List" description="List of TileData."/>
     <aura:attribute name="attachmentAllowed" type="boolean" default="false"/>
     <aura:attribute name="attachmentRequired" type="boolean" default="false"/>
-    <aura:attribute name="hasAdhocApexClass" type="boolean" default="false"/>
     <aura:attribute name="attachments" type="List" description="List of TileData."/>
     <aura:attribute name="hasErrorOccurred" type="boolean" default="false"/>
     <aura:attribute name="errorMessage" type="string" default="" description="Error message to display to user."/>
     <aura:attribute name="nextButtonDisabled" type="boolean" default="true"/>
-    <aura:attribute name="searchString" type="string" default=""/>
     
     <!--Handled events-->
     <aura:handler name="error" event="Loop:error" action="{!c.handleError}"/>
@@ -27,8 +25,6 @@
         <aura:attribute name="recordId" type="string" required="true"/>
         <aura:attribute name="attachmentAllowed" type="boolean" default="false" required="true"/>
         <aura:attribute name="attachmentRequired" type="boolean" default="false" required="true"/>
-        <aura:attribute name="hasAdhocApexClass" type="boolean" default="false"/>
-        <aura:attribute name="contactId" type="string" default=""/>
     </aura:method>
     <aura:method name="search" action="{!c.search}">
         <aura:attribute name="searchString" type="String"/>
@@ -48,7 +44,7 @@
                 <aura:set attribute="else">
                     <div class="slds-scrollable--y" style="max-height: 400px;">
                         <Loop:SelectTiles aura:id="documentTiles" recordType="document" records="{!v.records}" isMultiSelect="true" attachmentAllowed="{!v.attachmentAllowed}"
-                                       attachmentRequired="{!v.attachmentRequired}" hasAdhocApexClass="{!v.hasAdhocApexClass}" attachments="{!v.attachments}" ddpLabel="{!v.ddpLabel}"/>
+                                       attachmentRequired="{!v.attachmentRequired}" attachments="{!v.attachments}" ddpLabel="{!v.ddpLabel}"/>
                     </div>
                     <div aura:id="documentNextButton" class="border-top button-padding next-button">
                         <button class="slds-button slds-button--brand" disabled="{!v.nextButtonDisabled}" onclick="{!c.completedOptionalDocumentSelection}">Next</button>

@@ -2,8 +2,6 @@
     <!--Optional attributes-->
     <aura:attribute name="selectedDeliveryOptionId" type="string" default="" description="Comes from url parameter(?)"/>
     <aura:attribute name="objectName" type="string" default="" description="Name of the starting object"/>
-    <aura:attribute name="context" type="string" default="DEFAULT" description="Accepts DEFAULT, TEST, and UTILITYBAR to display the appropriate steps to run in different contexts."/>
-    <aura:attribute name="ddpId" type="string"/>
     
     <!--Internal attributes-->
     <aura:attribute name="loading" type="boolean" default="false" access="private"/>
@@ -47,7 +45,7 @@
                         <div aura:id="slideContainer" class="slds-grid slide-transition" style="width:200%; overflow:hidden;">
                             <div class="slds-col" style="width:50%; background-color: #eef1f6;">
                                 <div aura:id="tileContainer" class="height-transition">
-                                	<Loop:SelectTiles aura:id="deliveryTiles" recordType="delivery" records="{!v.records}" isMultiSelect="false" objectName="{!v.objectName}" context="{!v.context}" ddpId="{!v.ddpId}"/>
+                                	<Loop:SelectTiles aura:id="deliveryTiles" recordType="delivery" records="{!v.records}" isMultiSelect="false" objectName="{!v.objectName}"/>
                                 </div>
                             </div>
                             <div class="slds-col" style="width:50%; background-color: #eef1f6; overflow:hidden;">

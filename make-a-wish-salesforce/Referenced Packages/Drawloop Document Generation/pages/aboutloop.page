@@ -67,8 +67,7 @@
                         	isLightning: isLightning, 
                         	sessionId: '{!sessionId}', 
                         	loopUrl: '{!JSENCODE($Request.loopUrl)}', 
-                        	apiUrl: '{!JSENCODE($Request.apiUrl)}',
-                        	isTest: '{!JSENCODE($Request.isTest)}'
+                        	apiUrl: '{!JSENCODE($Request.apiUrl)}'
                     }, "lightning", function() {
                         var spinner = document.getElementById('spinner');
                         spinner.parentNode.removeChild(spinner);

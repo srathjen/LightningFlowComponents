@@ -18,8 +18,6 @@
         <members>ConfigureIntegrationsTest</members>
         <members>ContactSelectionController</members>
         <members>ContactSelectionControllerTest</members>
-        <members>DdpAdhocFiles</members>
-        <members>DdpAdhocFilesTest</members>
         <members>DdpButtonWizardExtTest</members>
         <members>DdpCloneTest</members>
         <members>DdpDetailsExtTest</members>
@@ -101,13 +99,9 @@
         <members>ProcessDdpController</members>
         <members>ProcessDdpControllerTest</members>
         <members>ProcessDdpParameters</members>
-        <members>PurchaseFormController</members>
-        <members>PurchaseFormControllerTest</members>
         <members>RecipientExtTest</members>
         <members>RecipientFieldExt</members>
         <members>RecipientFieldExtTest</members>
-        <members>RecordSelectionController</members>
-        <members>RecordSelectionControllerTest</members>
         <members>RelationshipExtTest</members>
         <members>RestFieldTaggerSectionsController</members>
         <members>RestFieldTaggerSectionsControllerTest</members>
@@ -253,11 +247,9 @@
         <members>AttachmentsTile</members>
         <members>AuthorizeLoopServices</members>
         <members>Button</members>
-        <members>Card</members>
         <members>ConfigureIntegrations</members>
         <members>ContactSelection</members>
         <members>CustomTile</members>
-        <members>DdpAdhocTile</members>
         <members>DdpAdmin</members>
         <members>DdpAdminApp</members>
         <members>DdpAdminSplash</members>
@@ -284,10 +276,8 @@
         <members>PreviewFiles</members>
         <members>ProcessDdp</members>
         <members>Prompt</members>
-        <members>PurchaseForm</members>
         <members>RecipientGroup</members>
         <members>RecipientSelector</members>
-        <members>RecordSelection</members>
         <members>RunDdp</members>
         <members>RunDdpApp</members>
         <members>RunDdpSvg</members>
@@ -332,7 +322,6 @@
         <members>editSlideDocuSignReminders</members>
         <members>editSlideEmail</members>
         <members>enableModifyButtons</members>
-        <members>enableSave</members>
         <members>error</members>
         <members>exposeAndLoadAttachments</members>
         <members>exposeSecondaryAccordionSections</members>
@@ -348,7 +337,6 @@
         <members>recipientGroupClicked</members>
         <members>recipientSelected</members>
         <members>recipientSelectorClicked</members>
-        <members>recordSelected</members>
         <members>redirectPage</members>
         <members>removeAttachment</members>
         <members>removePill</members>
@@ -362,7 +350,6 @@
         <members>storeRecipientInfo</members>
         <members>tileClicked</members>
         <members>updateESignRecipientsList</members>
-        <members>updateIsStandard</members>
         <members>updateSlideDocuSignReminders</members>
         <members>updateSlideEmail</members>
         <name>AuraDefinitionBundle</name>

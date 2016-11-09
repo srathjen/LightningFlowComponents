@@ -626,12 +626,5 @@
         });
         
         $A.enqueueAction(action);
-	},
-    redirectPage : function(component, event) {
-        var redirectEvent = component.getEvent("redirectPage");
-        redirectEvent.setParams({
-            'buttonName' : 'purchaseForm'
-        });
-        redirectEvent.fire();
-    }
+	}
 })

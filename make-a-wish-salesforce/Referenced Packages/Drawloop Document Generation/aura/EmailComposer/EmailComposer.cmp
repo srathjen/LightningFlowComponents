@@ -141,7 +141,7 @@
                     </aura:if>
                     <div class="slds-m-top--small">
                         <aura:iteration items="{!v.emailAttachments}" var="attachment" indexVar="i">
-                            <Loop:Pill label="{!attachment.Name}" id="{!i}" svgClass="slds-button__icon icon-white" pillClass="slds-badge blue-color"/>
+                            <Loop:Pill label="{!attachment.Name}" id="{!i}" svgClass="slds-button__icon icon-white" pillClass="slds-pill slds-badge blue-color"/>
                         </aura:iteration>
                     </div>
                     <div class="slds-m-top--small" style="text-align: right;">
