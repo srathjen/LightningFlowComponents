@@ -73,7 +73,9 @@ public class VolunteerActiveTraining_AC {
    // It will check the registered program on Volunteer Orientatoin and Training, If training is available then it will display
    // the registered training in a separate block. 
     public Boolean checkRegisteredProgram() {
-       List<Volunteer_Orientation_Training__c> exVolList = [SELECT Id, Orientation_Training__c, Volunteer__c, Volunteer_Attendance__c FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId AND Type__c = 'Training' AND Volunteer_Attendance__c = 'Registered'];
+       List<Volunteer_Orientation_Training__c> exVolList = [SELECT Id, Orientation_Training__c, Volunteer__c, Volunteer_Attendance__c 
+                                                            FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId 
+                                                            AND Type__c = 'Training' AND Volunteer_Attendance__c = 'Registered' AND Orientation_Training__c != Null];
         if(exVolList.size() > 0) {
             checkExistProgram = false;
         } else {

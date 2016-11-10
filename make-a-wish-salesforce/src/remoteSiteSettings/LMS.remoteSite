@@ -3,5 +3,5 @@
     <description>LMS Integration</description>
     <disableProtocolSecurity>false</disableProtocolSecurity>
     <isActive>true</isActive>
-    <url>https://mawa-exceed-lms-api-qa.cloudhub.io</url>
+    <url>https://mawa-exceed-lms-api-dev.cloudhub.io</url>
 </RemoteSiteSetting>

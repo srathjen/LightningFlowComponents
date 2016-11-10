@@ -1,0 +1,524 @@
+<apex:page standardController="case" extensions="WishChildForm_AC"  standardStylesheets="false" showHeader="false" sidebar="false" docType="html-5.0">
+    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/> 
+    <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap.min.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap-theme.min.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/ng_responsive_tables.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap.min.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/ng_responsive_tables.js')}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
+    <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/datepicker.min.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap-datepicker.min.js')}"/>
+    
+    <style>
+        .dateFormat{display:none !important}
+        @media (max-width: 480px) {
+        .header-logo{height:60px !important;margin-left:21% !important;}
+        }
+        .form-control {height:28px}
+        .top-space1 { margin-top:50px; } 
+        .padding-space {padding:0px 20px 20px 20px}
+        .text-imp {text-transform: none; font-size: 17px; font-weight: 600; color:#0C0C0C; font-family: "futura-pt", "Century Gothic", Arial, sans-serif;}
+        .text-nimp {text-transform: none; font-size: 14px; color:#0C0C0C; font-family: "futura-pt", "Century Gothic", Arial, sans-serif;}
+        .lineHeight {line-heigth:34px}
+        .fl {float:left}
+        .mg-lft {margin-left:10px}
+        .mg-top{margin-top:10px}
+        
+        .mg-btm {margin-bottom:10px}
+        .finalbtm{width:100%; border-bottom:5px solid black; margin:50px 0px 20px 0px; margin-bottom:100px}
+        .clr-left {clear:left}
+        .clr-right {clear:right}
+        .date-picker {width:73% !important; margin-right:11px;float: left;}
+        .parent-info{border:1px solid #ccc; padding:10px; margin-top:20px;}
+        .hr-left {width:40%; float:left; border:1px solid #000;}
+        .hr-right{width:40%; float:right; border:1px solid #000;}
+        .multiSelectPicklistCell {line-height:0px; height:100px}
+        .pg-tbl-height {height: 70px;}
+        .global-header {height:150px; padding:20px; font-size:30px; border-bottom:5px solid black;font-family: "futura-pt", "Century Gothic", Arial, sans-serif; font-weight: bold;}
+        .container-bottom-line {margin-bottom: 50px;border-bottom: 5px solid black;}
+        
+        .container-top-bottom-line {margin-bottom: 50px;border-bottom: 5px solid black;}
+        .container-body {border-bottom: 5px solid black;border-top: 5px solid black;padding: 40px; margin-bottom: 75px;}
+        .header-padding{padding: 0px 15px 0px 15px;}
+        .button-block{width:100%;margin-top:30px }
+        .header-text {font-size:30px;font-family: "futura-pt", "Century Gothic", Arial, sans-serif; font-weight: bold;}
+        .mg-rt {margin-right:10px}
+        .top-space { margin-top:20px; } 
+        .clear-left {clear:left}
+        .pad15 {padding: 15px;}
+        .hr-left {width:30%; color:#ddd; border:0 none; height:2px; background-color:#ddd;margin-top:50px}
+        .hr-right {width:30%; color:#ddd; border:0 none; height:2px; background-color:#ddd;margin-top:50px}
+        .parent-sign {border-top:2px solid #ddd;padding: 10px;margin-top:65px}
+        .text-bold{font-size:20px; font-weight:bold}
+        .line-heightt{height:55px;}
+        .tbl-medical {width:300px}
+        .tbl-dropdown {width: 118px;}
+   </style>
+    <script type="text/javascript">
+    $(function(){
+        $('.signNwBlck').hide();
+        $('table.responsive').ngResponsiveTables({
+            smallPaddingCharNo: 13,
+            mediumPaddingCharNo: 18,
+            largePaddingCharNo: 30
+        });
+        $('.signNw').click(function(){
+        $('.signNwBlck').show();
+        });
+    });
+    
+    
+    function ClickToValidate(){       
+        
+           var runBool = true;
+           $('.required').each(function(){
+               if($(this).val() == '' || $(this).val() == null ){
+                   runBool = false;
+                   alert("Please fill all required fields");
+                   return false;
+               }
+                  
+           });
+           if(!runBool){
+              return false;
+              }
+           else{
+              return true;
+              }
+        }
+    
+    
+    </script>
+    <apex:form >       
+        <apex:pageblock id="membAdd">
+          <apex:pageMessages />
+            <div class="container">
+                <div class="row header-padding">
+                    <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/MakeAWishAmerica.PNG')}" style="height:80px"/>
+                    <center><p class="header-text">WISH INFORMATION FORM</p></center>
+                </div>
+                <div class="container-body">
+                    <div class="row top-space">
+                        <div class="row">
+                            <div class="col-lg-2 text-imp lineHeight">Wish Child's Name:</div>
+                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.FirstName__c}" html-placeholder="FirstName" styleClass="form-control"/></div>
+                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.Middle_Name__c}"  html-placeholder="MiddleName" styleClass="form-control"/></div>
+                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.LastName__c}" styleClass="form-control required" html-placeholder="LastName" style="border-left:5px solid red"/></div>
+                        </div>
+                    </div>
+                    <center><p class="text-bold top-space">Scheduling the Wish</p></center>
+                    <center><p>Please indicate three time periods in which your family will have the greatest availability for fulfillment of the wish.</p></center>
+                    
+                    <div class="row top-space">
+                     <div class="col-lg-4">
+                        <apex:selectlist value="{!availableMonth1}" size="1">
+                           <apex:selectoptions value="{!Months}" />
+                        </apex:selectList>
+                        /
+                        <apex:selectlist value="{!availableYear1}" size="1">
+                           <apex:selectoptions value="{!Year}" />
+                        </apex:selectList>
+                        
+                        </div>
+                        <div class="col-lg-4"> 
+                        <apex:selectlist value="{!availableMonth2}" size="1">
+                           <apex:selectoptions value="{!Months}" />
+                        </apex:selectList>
+                        /
+                        <apex:selectlist value="{!availableYear2}" size="1">
+                           <apex:selectoptions value="{!Year}" />
+                        </apex:selectList></div>
+                        <div class="col-lg-4">
+                        <apex:selectlist value="{!availableMonth3}" size="1">
+                           <apex:selectoptions value="{!Months}" />
+                        </apex:selectList>
+                        /
+                        <apex:selectlist value="{!availableYear3}" size="1">
+                           <apex:selectoptions value="{!Year}" />
+                        </apex:selectList></div>
+                    </div>
+                    
+                    <div class="row top-space">
+                        Is there anything on your family’s calendar (upcoming medical treatments, school or work commitments, planned vacations, etc.) that might impact your ability to participate in a wish?
+                        <apex:inputField value="{!currWishChild.Any_impact_your_ability_to_join_wish__c}" styleClass="form-control" /> <br/>
+                        If Yes, Please enter details below <br/>
+                        <apex:inputField value="{!currWishChild.Details_about_Impact__c}" styleClass="form-control"/> <br/>
+                        <center><p class="text-bold top-space">Driver Identification Information</p>
+                            Many wishes involve the use of a rental vehicle. For this reason, please indicate a preferred and potential driver who may be driving during the course of the wish.<br/>
+                            <I> <b>Please submit a photocopy of valid driver’s license(s).</b></I> <br/></center>
+                    </div>
+                    
+                    <div class="row top-space">
+                        <div class="row top-space">
+                        
+                           <table class="responsive table-striped">
+                            <tbody>
+                                <tr>
+                                    
+                                    <th>Driver Name</th>
+                                    <th>Valid D.L #</th>
+                                    <th>State</th>
+                                    <th>Expiration Date</th>
+                                     <th>Remove</th>
+                                </tr>
+                                  <apex:variable value="{!0}" var="part"/>
+                                    <apex:repeat value="{!driverWrapperCls}" var="driverContact">
+                                        <tr>
+                                            <td class="mobiltxt"></td>
+                                            <td> 
+                                           <apex:selectList value="{!driverContact.driverName}" multiselect="false" size="1" styleClass="form-control required" style="border-left:5px solid red">
+                                               <apex:selectOption itemlabel="Please Select" itemValue=""/>
+                                               <apex:selectOptions value="{!driverNameList}" />
+                                           </apex:selectList> </td>
+                                        
+                                            <td><apex:inputText value="{!driverContact.licenseNum}" styleClass="form-control" /></td>
+                                            <td>
+                                             <apex:selectList value="{!driverContact.state}" size="1" multiselect="false" styleClass="form-control">
+                                                 <apex:selectoptions value="{!states}" />
+                                             </apex:selectList>
+                                            </td>
+                                         
+                                            <td><apex:inputText value="{!driverContact.expirationDate}" styleClass="form-control date-input" id="date-input" style="height:30px;"/></td>
+                                              <td><apex:commandLink id="link"  action="{!removeDriver}" immediate="true" reRender="membAdd">
+                                                <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/Remove.png')}" style="height:32px"></apex:image>
+                                                <apex:param name="driver" value="{!part}"/>
+                                                </apex:commandLink>
+                                                <apex:variable var="part" value="{!part+1}"/> 
+                                            </td>
+                                         
+                                          </tr>   
+                                        
+                                    </apex:repeat>
+                                
+                            </tbody>
+                         </table>
+                        
+                      
+                          
+                         
+                        </div>
+                        
+                        <apex:commandLink value="Add Row"  action="{!addDriver}" reRender="membAdd"  styleClass="btn btn-default pull-left"/> <br/> 
+                        
+                        <div class="row top-space">
+                            <div class="form-group col-md-3">
+                                <label for="FirstName">Do you have current automobile insurance?<br/></label>
+                                <apex:inputField value="{!currWishChild.Have_current_automobile_insurance__c}" styleClass="form-control"  />
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <label for="FirstName"> Does your automobile insurance provide coverage while using a rental car?</label>
+                                <apex:inputField value="{!currWishChild.Automobile_insurance_provide_coverage__c}" styleClass="form-control"  />
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <label for="FirstName">Is your family comfortable driving a rental vehicle, if one were recommended for the wish?</label>
+                                <apex:inputField value="{!currWishChild.Is_your_family_comfortable_in_rendal_car__c}" styleClass="form-control"  />
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <label for="FirstName"> Is a wheelchair accessible vehicle needed?</label>
+                                <apex:inputField value="{!currWishChild.Is_a_wheelchair_accessible_vehicle_neede__c}" styleClass="form-control"  />
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row top-spac">
+                        <b>Medical Information</b> <br/>
+                        Please fill out entirely if any requested participant has medical needs. Specific details can be listed within “additional requests”. <br/>
+                        
+                        <table class="responsive table-striped">
+                            <tbody>
+                                <tr>
+                                    <th class="mobiltxt" colspan="2">Medical Information</th>
+                                    <th>Medical Questions</th>
+                                    <th>Yes/No</th>
+                                    <th>Notes</th>
+                                    <th>Participant Name</th>
+                                </tr>
+                                <tr>
+                                    <td class="mobiltxt"></td>
+                                    <td class="tbl-medical col-md-12"> Does any requested participant have special dietary restrictions? If yes, please note. </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_dietary_restrictions__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Participant_dietary_restrictions_Note__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftDietaryNameList}" rightOriginalvalue="{!righttDietaryNameList}" currString="{!currrentDietaryNameList}"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="mobiltxt"></td>
+                                    <td class="tbl-medical"> Does any requested participant require a wheelchair?If yes, please describe wheelchair size. </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_require_a_wheelchair__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Participant_require_a_wheelchair_Note__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftWCNamesList}" rightOriginalvalue="{!rightWCNamesList}" currString="{!currentWCNamesList}" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="mobiltxt"></td>
+                                    <td class="tbl-medical"> Will your family bring your own wheelchair? </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Will_your_family_bring_wheelchair__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Will_your_family_bring_wheelchair_Note__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftOwnWheelChairList}" rightOriginalvalue="{!rightOwnWheelChairList}" currString="{!currentOwnWheelChairList}" /></td>
+                                   
+                                </tr>
+                                <tr>
+                                    <td class="mobiltxt"></td>
+                                    <td class="tbl-medical"> Is the wheelchair collapsible? </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Is_the_wheelchair_collapsible__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Is_the_wheelchair_collapsible_Note__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftWCCollapsibleList}" rightOriginalvalue="{!rightWCCollapsibleList}" currString="{!currentWCCollapsibleList}" /></td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="mobiltxt"></td>
+                                    <td class="tbl-medical"> Is the wheelchair power? If yes, please note battery type. </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Is_the_wheelchair_power__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Is_the_wheelchair_power_Note__c}" styleClass="form-control" /> </td>
+                                   <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftWCPowerList}" rightOriginalvalue="{!rightWCPowerList}" currString="{!currentWCPowerList}" /></td>
+                                   
+                                </tr>
+                                <tr>
+                                    <td class="mobiltxt"></td>
+                                    <td class="tbl-medical"> Does any requested participant require oxygen?If yes, please describe how often. </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_require_oxygen_how_often__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Participant_require_oxygen_Note__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftOxygenNamesList}" rightOriginalvalue="{!rightOxygenNamesList}" currString="{!currentOxygenNamesList}" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="mobiltxt"></td>
+                                    <td class="tbl-medical"> Does any medication require refrigeration? </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Medication_require_refrigeration__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Medication_require_refrigeration_Note__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftMedicationList}" rightOriginalvalue="{!rightMedicationList}" currString="{!currentMedicationList}" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="mobiltxt"></td>
+                                    <td class="tbl-medical">Does the wish child currently receive nursing care? If yes, please list the # of hours, agency and phone number. </td>
+                                   <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Wish_child_receive_nursing_care__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Wish_child_receive_nursing_care_Note__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftAllergyNamesList}" rightOriginalvalue="{!rightAllergyNamesList}" currString="{!currentAllergyNamesList}" /></td>
+                                </tr>
+                                <tr>
+                                    <td class="mobiltxt"></td>
+                                    <td class="tbl-medical"> Does any requested participant have allergies to food or materials? If yes, please note who and what allergy. </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_have_allergies_to_food__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Participant_have_allergies_to_food_Note__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftNursingCareList}" rightOriginalvalue="{!rightNursingCareList}" currString="{!currentNursingCareList}" /></td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="mobiltxt"></td>
+                                    <td class="tbl-medical">Does any requested participant require any other medical supplies? If yes, please detail who and what is required. </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_require_medical_supplies__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Participant_require_medical_suppliesNote__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftOtherNeedsList}" rightOriginalvalue="{!righttOtherNeedsList}" currString="{!currentOtherNeedsList}" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
+                        <b>Additional Requests: </b> Any additional requests are at the discretion of the chapter office. If medical
+                        supplies are requested, please detail the relevant model number, manufacturer, size, dimensions, and
+                        any other pertinent information if needed during travel. <br/>
+                        
+                        <apex:inputField value="{!currWishChild.Additional_Requests__c}"  styleClass="form-control"/>
+                        
+                        <br/>
+                        <br/>
+                        <b>Travel Information</b><br/>
+                        Please fill out entirely if the requested wish is a travel wish.<br/>
+                        
+                        <table class="responsive table-striped">
+                            <tbody>
+                                <tr>
+                                    <th class="mobiltxt" colspan="2">Travel Information</th>
+                                    <th>Travel Questions</th>
+                                    <th>Yes/No</th>
+                                    <th>Notes</th>
+                                </tr>
+                                <tr>
+                                    <td class="tbl-medical"> Has your family flown before? </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Has_your_family_flown_before__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Has_your_family_flown_before_Note__c}" styleClass="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td class="tbl-medical"> Will an interpreter be needed? </td>
+                                   <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Will_an_interpreter_be_needed__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Will_an_interpreter_be_needed_Note__c}" styleClass="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td class="tbl-medical">Will a rental car seat(s) be needed?If yes, please note how many/what type. </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Will_a_rental_car_seat_s_be_needed__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Will_a_rental_car_seat_s_be_needed_Note__c}" styleClass="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td class="tbl-medical">Are all requested participants able to sit up during takeoff/landing on airplane? If no, please note who cannot </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Sit_up_takeoff_landing_on_airplane__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Sit_up_takeoff_landing_on_airplane_Note__c}" styleClass="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td class="tbl-medical"> Will a rental stroller be needed? If yes, what type? </td>
+                                   <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Will_a_rental_stroller_be_needed__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Will_a_rental_stroller_be_needed_Note__c}" styleClass="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td class="tbl-medical">Will handicap accessible accommodations be required? </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Handicap_accommodations_be_required__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Handicap_accommodations_be_required_No__c}" styleClass="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td class="tbl-medical"> Does each requested participant have valid passports? </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_have_valid_passports__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Participant_have_valid_passports_Note__c}" styleClass="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td class="tbl-medical"> Does each requested participant (18 and over) have a valid.U.S. federal or state-issued photo ID?If yes, please provide a copy of a valid ID for each individual </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Does_participant_have_valid_photo_ID__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Participant_have_valid_photo_ID_Note__c}" styleClass="form-control" /> </td>
+                                </tr>
+                                <tr>
+                                    <td class="tbl-medical">Does your family have a valid major credit card?Typically, a hotel will request a credit card for incidentals that may occur during a stay. If you do not have a credit
+                                        card, other arrangements can be made; however, Make-AWish does need to know ahead of time.</td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Does_your_family_have_a_credit_card__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Does_your_family_have_a_credit_card_Note__c}" styleClass="form-control" /> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="button-block">
+                        <center> 
+                            <apex:Commandbutton value="Back"  action="{!BackToWFF}" styleClass="btn btn-default mg-rt" immediate="true"/>
+                            <apex:Commandbutton value="Save & Exit"  action="{!WishInfoSave}" onclick="return ClickToValidate();" styleClass="btn btn-default mg-rt"/>
+                            <span Class="btn btn-default mg-rt signNw">Sign Now</span>
+                            <apex:Commandbutton value="Send for Signature" action="{!sendpdftoEmail}" styleClass="btn btn-default mg-rt"/>
+                            <apex:Commandbutton value="Generate PDF" action="{!generatePDF}" styleClass="btn btn-default mg-rt"/>
+                            <apex:Commandbutton value="Cancel"  action="{!cancelfunction}" styleClass="btn btn-default" immediate="true"/>
+                        </center>
+                    </div>
+                    
+                    
+<apex:outputPanel layout="block" styleclass="signNwBlck">
+    
+      <apex:stylesheet value="{!URLFOR($Resource.slds120,'assets/styles/salesforce-lightning-design-system.css')}"/> 
+        <script src="{!URLFOR($Resource.sPad,'')}"/>
+        <script src="{!URLFOR($Resource.slds120,'')}"></script>
+        <script>
+            var signaturePad;
+            var canvas;
+            var recId = '{!$CurrentPage.parameters.Id}'
+            var signatureData;
+            Sfdc.canvas.publisher.subscribe({name: "publisher.showPanel",
+                onData:function(e) {
+                    Sfdc.canvas.publisher.publish({name:"publisher.setValidForSubmit", payload:"true"});
+            }});
+        
+            Sfdc.canvas.publisher.subscribe({ 
+                name:"publisher.post",
+                onData: function(e){
+                    uploadSignature();
+                }    
+            })
+            function onLoad(){
+                canvas = document.getElementById('sPad');
+                resizeCanvas();
+                signaturePad = new SignaturePad(canvas);
+            }    
+            function sPadClear(){
+                signaturePad.clear();
+            }
+    
+            function uploadSignature(){
+    
+                signatureData = signaturePad.toDataURL().replace(/^data:image\/(png|jpg);base64,/, "");
+    
+                Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.WishChildForm_AC.uploadSignature}',signatureData, caseId,
+                            function(result, event){
+                                if(!!result && event.status){
+                                    var res = JSON.parse(result);
+                                    if(res.success){
+                                    }else{
+                                        alert('Error:' +  res.message);
+                                    }    
+                                }else {
+                                    alert('Error in calling controller to upload signature');
+                                }
+                                Sfdc.canvas.publisher.publish({name:"publisher.close",payload:{refresh:"true"}});
+                        },{escape: false});
+                    
+            }
+        
+            function resizeCanvas() {
+                var ratio =  Math.max(window.devicePixelRatio || 1, 1);
+                canvas.width = canvas.offsetWidth * ratio;
+                canvas.height = canvas.offsetHeight * ratio;
+                canvas.getContext("2d").scale(ratio, ratio);
+            }
+        </script>    
+            
+        <style>
+            .sPad{
+                width: 100%;
+                height: 90vh;
+                background-color: white;
+           
+            }
+        </style>
+        
+        <body onload="onLoad();">
+            <div class="slds-grid slds-m-around--small slds-grid--vertical">
+                    <span class="slds-col slds-m-bottom--small slds-button slds-button--neutral" onclick="sPadClear();return false;">Clear</span>
+                    <span class="slds-col slds-m-bottom--small slds-button slds-button--neutral" onclick="uploadSignature();return false;">Save</span>
+                <div class="slds-col slds-col-rule--top slds-col-rule--right slds-col-rule--bottom slds-col-rule--left">
+                    <canvas class="sPad" id="sPad"/>
+                </div>
+            </div>
+        </body>
+</apex:outputPanel>
+                </div>
+            </div>
+            <script>
+            $(".date-input").datepicker({
+                autoclose: true,
+            });
+             $(".date-input1").datepicker({
+                autoclose: true,
+            });
+            
+            function formatDate(date) {
+            var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+            
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+            
+            return [month,day,year].join('/');
+            }
+            
+            var date = formatDate($(".date-input").val());
+            $(".date-input").val(date);
+            $(document).ready(function() {
+                $('.monthYear').keyup(function(event) {
+                    var x = event.which || event.keyCode;
+                    var number = $(this).val();
+                    var digits = (""+number).split("");
+                    if( number.length == 2 ){
+                        var pattern = /(0[1-9]|1[012])/;
+                        pattern.test(number);
+                        if(!pattern.test(number)){
+                            $(this).val(digits[0]);
+                            alert('Please enter correct month');
+                            }
+                    }
+                    if( number.length == 3 ){
+                        if(x != 191){
+                            $(this).val(digits[0]+''+digits[1]);
+                            alert('Please enter correct symbol');
+                        }    
+                    }
+
+                    
+                });
+            });
+            </script>
+        </apex:pageblock>
+    </apex:form>
+</apex:page>

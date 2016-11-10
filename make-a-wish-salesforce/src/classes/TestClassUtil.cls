@@ -74,6 +74,19 @@ public class TestClassUtil{
         
     }
     
+      public static Id createArizonaChapter(){
+            Constant_AC  constant = new Constant_AC();
+            Id ChapterRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
+            
+            Account newchapterAccount = new Account();
+            newchapterAccount .Name = 'Arizona - Chapter';
+            newchapterAccount.RecordTypeId = ChapterRecordTypeId;
+            
+            
+            insert newchapterAccount;
+            return newchapterAccount.id;
+            
+        }
     
     public static void createOrganizationAccount(Integer count){
         Constant_AC  constant = new Constant_AC();
@@ -995,7 +1008,7 @@ public class TestClassUtil{
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Case newParentWish = new Case();
         newParentWish.RecordTypeId = parentWishRecordTypeId;
-        newParentWish.Chapter_Name__c = '';
+        newParentWish.ChapterName__c = Null;
         newParentWish.Subject = 'Parent Wish';
         insert newParentWish;
         return newParentWish;
@@ -1018,7 +1031,7 @@ public class TestClassUtil{
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Case newWishDeterminatonWish = new Case();
         newWishDeterminatonWish.RecordTypeId = wishDeterminationRecordTypeId;
-        newWishDeterminatonWish.Chapter_Name__c = 'Arizona - Chapter';
+        newWishDeterminatonWish.ChapterName__c = createArizonaChapter();
         newWishDeterminatonWish.Subject = 'Wish Determination';
         newWishDeterminatonWish.Wish_Type__c = 'Standard';
         return newWishDeterminatonWish;

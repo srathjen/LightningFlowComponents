@@ -118,6 +118,17 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Date_Cancelled__c</fullName>
+        <externalId>false</externalId>
+        <formula>if( ISPICKVAL(Volunteer_Attendance__c,&apos;Cancelled&apos;), TODAY() ,null)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Date Cancelled</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Date__c</fullName>
         <description>It will be used to store the orientation and training date</description>
         <externalId>false</externalId>

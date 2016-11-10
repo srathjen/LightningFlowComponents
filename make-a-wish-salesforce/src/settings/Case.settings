@@ -22,22 +22,12 @@
         <routingAddresses>
             <addressType>EmailToCase</addressType>
             <caseOrigin>Email</caseOrigin>
-            <casePriority>Low</casePriority>
-            <createTask>true</createTask>
-            <emailAddress>wvcsupport@wish.org</emailAddress>
-            <routingName>Make - A - Wish America</routingName>
-            <saveEmailHeaders>false</saveEmailHeaders>
-            <taskStatus>Not Started</taskStatus>
-        </routingAddresses>
-        <routingAddresses>
-            <addressType>EmailToCase</addressType>
-            <caseOrigin>Email</caseOrigin>
-            <casePriority>Low</casePriority>
+            <casePriority>Medium</casePriority>
             <createTask>true</createTask>
             <emailAddress>mawamericaprod@gmail.com</emailAddress>
             <routingName>Make - A - Wish America</routingName>
             <saveEmailHeaders>false</saveEmailHeaders>
-            <taskStatus>Not Started</taskStatus>
+            <taskStatus>In Progress</taskStatus>
         </routingAddresses>
         <unauthorizedSenderAction>Discard</unauthorizedSenderAction>
     </emailToCase>

@@ -118,6 +118,56 @@
             <field>Zip__c</field>
             <table>Contact.Volunteer_Opportunities__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Volunteer_Role__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Preferred_Phone__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>npe01__AlternateEmail__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>npe01__Preferred_Email__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Hidden_Email__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RecordType</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Phone</field>
+            <table>Contact</table>
+        </columns>
         <masterLabel>Volunteer Contacts</masterLabel>
+    </sections>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Wish Child Name</displayNameOverride>
+            <field>Wish__c.Contact</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Household Account Name</displayNameOverride>
+            <field>Wish__c.Account</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <masterLabel>Volunteer Opportunities (Volunteer Name)</masterLabel>
     </sections>
 </ReportType>

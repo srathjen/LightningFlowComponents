@@ -3,7 +3,6 @@
     <allowMembersToFlag>false</allowMembersToFlag>
     <branding>
         <loginFooterText>salesforce.com</loginFooterText>
-        <loginLogo>Communities_Shared_Document_Folder1/maw_logo_blue_small_png.png</loginLogo>
         <pageFooter>SharedDocuments/mawa_active_footer_static.html</pageFooter>
         <pageHeader>SharedDocuments/mawa_active_header_static.html</pageHeader>
         <primaryColor>#1797C0</primaryColor>

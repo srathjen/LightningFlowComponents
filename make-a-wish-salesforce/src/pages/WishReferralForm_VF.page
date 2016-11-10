@@ -1,5 +1,7 @@
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" docType="html-5.0">
     <apex:stylesheet value="{!URLFOR($Resource.prospective_assets, 'web/css/chosen.min.css')}"/>
+    <!-- STAGING URL -->
+    <apex:includeScript value="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"/>
     <style>
         .dateOnlyInput input {width:100% !important;}
         #datePicker,.dateFormat {display:none !important;}
@@ -10,9 +12,9 @@
         .shownOnYes.fam-aware-overlay::after {content:""; position:absolute; top:0; left:0; background:rgba(255,255,255,0.8); min-width:100%; min-height:100%}
         .shownOnYes.fam-aware-overlay:hover::after {content:"Please answer the required fields above to proceed"; position:absolute; top:0; left:0; color:#666; line-height:5rem; text-align:center}
         .repeatMedProf label{padding-right:10px;}
-        
+
         .displayBlock {display:block}
-        
+
         .ui-autocomplete-loading {
         background: transparent url("{!URLFOR($Resource.WishReferralStyle, 'WishReferralStyle/img/loader-circle-blue.gif')}") right .5rem center no-repeat !important;
         background-size:2rem 2rem !important;
@@ -20,7 +22,7 @@
         .placeHolder {
         font-style: italic;
         }
-        
+
         .vfHelpText a            {position:relative;}
         .vfHelpText a span       {display: none;}
         .vfHelpText a:hover span {display: block;
@@ -31,7 +33,7 @@
         background-color:#FEFDB9;
         color:black;
         }
-        
+
         .pop-wrap {
         position:fixed;
         top: 20%;
@@ -40,7 +42,7 @@
         width:90%;
         max-width:35rem;
         }
-        
+
         .custPopup{
         font-family:"arial", helvetica, sans-serif;
         position: relative;
@@ -52,10 +54,10 @@
         padding:1rem;
         width: 100%;
         }
-        
+
         .pop-wrap-main-message {top: 1%}
         .custPopup-main-message{top: 0; padding:0 1rem 0;}
-        
+
         .popupBackground{
         position: fixed;
         background: rgba(0,0,0,.4);
@@ -65,14 +67,14 @@
         left: 0;
         z-index: 9998;
         }
-        
+
         .labelCol{width:180px;}
-        
+
         .modal-content {
         border:1px solid #006bb6;
         border-radius:0
         }
-        
+
         .r2c {position:relative; padding:1rem; width:100%}
         .r2c input {
         margin-right:1rem;
@@ -96,20 +98,20 @@
         font-size:.7rem;
         text-transform:capitalize
         }
-        
+
         /* autocomplete drop-down */
         .ui-widget-content li {padding-left:.5rem}
         input[id*='diagnosisTextId'][disabled=""],input[id*='searchDiagnosisId'][disabled=""] {background:#eee; color:#bbb; cursor:not-allowed}
-        
+
         /* .field-word-seperator {position:relative; display:block; border-top:1px solid #ccc; color:#ccc; width:100%; margin-top:1rem}
         .field-word-seperator::after {content:"OR"; background:#fff; position:absolute; left:0; top:1rem; width:100%; text-align:center;} */
-        
+
         .field-word-seperator {font-family:arial; font-size:.7rem; position:relative; display:block; border-top:1px dashed #ccc; color:#ccc; width:100%}
         .field-word-seperator::after {content:"OR"; background:#fff; padding:0 1rem; position:absolute; left:43%; top:-.6rem; text-align:center; z-index:1}
         .form-group-seperator {margin-bottom:2rem}
         .age-text {position: absolute; bottom: .6rem; right: 2rem}
     </style>
-    <body>        
+    <body>
         <apex:form id="frm" styleClass="portal inquiry">
             <apex:pagemessages id="msg"/>
             <apex:outputpanel rendered="{!displayAckMsg == false}" id="panel">
@@ -146,10 +148,10 @@
                         </div>
                     </div>
                 </fieldset>
-                
+
                 <!--- For Yes Family Aware -->
                 <div class="shownOnYes fam-aware-overlay">
-                    
+
                     <!-- referrer info -->
                     <fieldset>
                         <legend>Referrer Information</legend>
@@ -196,12 +198,12 @@
                             </div>
                         </div>
                     </fieldset>
-                    
+
                     <!-- wish child info -->
                     <fieldset>
                         <legend>Wish Child Information</legend>
                         <div class="childToRepeat">
-                            
+
                             <div class="form-group row fullname">
                                 <div class="col-md-3"><label aria-labelledby="first_name">Name</label></div>
                                 <div class="col-xs-8 col-md-4">
@@ -250,7 +252,7 @@
                             </div>
                         </div>
                     </fieldset>
-                    
+
                     <apex:outputPanel id="family">
                         <!-- family info -->
                         <fieldset>
@@ -312,7 +314,7 @@
                                 </div>
                             </div>
                             <apex:outputPanel id="rr">
-                                <apex:actionRegion > 
+                                <apex:actionRegion >
                                     <div class="form-group row">
                                         <div class="col-md-3"><label>Number of Siblings</label></div>
                                         <div class="col-md-6">
@@ -338,11 +340,11 @@
                                             </apex:dataTable>
                                         </div>
                                     </div>
-                                </apex:actionRegion> 
+                                </apex:actionRegion>
                             </apex:outputPanel>
                         </fieldset>
                     </apex:outputPanel>
-                    
+
                     <!-- medical and physician info -->
                     <fieldset>
                         <legend>Medical Information</legend>
@@ -381,10 +383,10 @@
                             </div>
                         </div>
                     </fieldset>
-                    
+
                     <fieldset>
                         <legend>Physician Information</legend>
-                        
+
                         <div class="form-group row repeatMedProf">
                             <div class="col-md-12 offset-md-6">
                                 <label class="c-input c-checkbox">
@@ -394,7 +396,7 @@
                                 </label>
                             </div>
                         </div>
-                        
+
                         <div class="medToRepeat">
                             <div class="form-group row">
                                 <div class="col-md-3"><label>Name</label></div>
@@ -446,17 +448,17 @@
                         <apex:commandbutton value="Submit" action="{!createLead}" styleClass="col-xs-12 col-sm-12 col-md-4 col-md-push-8 push-md-8 btn-md submit"/>
                     </fieldset>
                 </div>
-                
+
             </apex:outputpanel>
             <apex:outputpanel rendered="{!displayAckMsg == True}">
                 <!-- <apex:outputpanel> -->
                 <div class="col-sm-12">
-                    <p>Thank you for submitting a referral. Chapter staff will be in contact soon if additional information is required. <a href="http://wish.org/">Click Here</a> to return to Wish.org</p>
+                 <center>   <p>Thank you for submitting a referral. Chapter staff will be in contact soon if additional information is required. <a href="http://wish.org/">Click Here</a> to return to Wish.org</p></center>
                 </div>
             </apex:outputpanel>
             <apex:inputText value="{!currLead.Relationship_to_child__c}" styleClass="Relchild sr-only" />
         </apex:form>
-        
+
         <!-- modal start -->
         <div class="modal fade" id="warningModal" data-target="#warningModal">
             <div class="modal-dialog">
@@ -471,18 +473,18 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="modal fade" id="age13under-modal" data-target="#age13under-modal" data-backdrop="static" 
+
+        <div class="modal fade" id="age13under-modal" data-target="#age13under-modal" data-backdrop="static"
    data-keyboard="false">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        
+
                         <div class="container">
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
@@ -492,44 +494,58 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
         <!-- / modal end -->
-        
+
+        <!-- //DATA COLLECTOR -->
+        <script language="javascript" type="text/livescript">
+        var _mawData = {
+            "form":{
+                "fID":"Wish Referral"
+            },
+            "pageCat":{
+                "pageId":"Wish Refferal Form" // TODO: replace with human-readable name of page e.g. Referral Form, Referral Form Thank You Page
+            },
+            "siteId":"100-000", // TODO: replace with chapter office ID. e.g. 001-000
+            "ThirdPartyId":"SalesForce Referral"
+        }
+        </script>
+        <script>_satellite.pageBottom();</script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js" integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE=" crossorigin="anonymous"></script>
         <!-- fallbacks -->
         <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.min.js')}"><\/script>')</script>
         <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/bootstrap.min.js')}"><\/script>')</script>
-        
+
         <!-- bootstrap -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
         <!-- bootstrap css fallback (appends to head) -->
         <script>$.each(document.styleSheets, function(i,sheet){ if(sheet.href=='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css') {var rules = sheet.rules ? sheet.rules : sheet.cssRules; if (rules.length == 0) { $('<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css" />').appendTo('head');} } });</script>
-        
+
         <!-- chosen select -->
-            <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
-        
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
+
         <!-- masked input -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jq.maskedinput.min.js')}" type="text/javascript"></script>
-        
+
         <!-- validate forms -->
             <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
         <!-- validate form (additional methods) -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
-        
+
         <script>
             (function ($, root, undefined) {
                 // prepend meta/link tags before VF head output
-                $('head').prepend('<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta http-equiv="content-type" content="text/html; charset=utf-8" /><meta name="HandheldFriendly" content="True" /><meta name="MobileOptimized" content="480" /><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" /><meta http-equiv="cleartype" content="on" />');
-                $('style').before('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous"><link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/><link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.prospective_assets, 'web/css/core.css')}" media="all">');
+                $('head').prepend('<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta http-equiv="content-type" content="text/html; charset=utf-8" /><title>Wish Referral Form | Make-A-Wish \u00AE</title><meta name="HandheldFriendly" content="True" /><meta name="MobileOptimized" content="480" /><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" /><meta http-equiv="cleartype" content="on" />');
+                $('head').append('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous"><link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/><link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.prospective_assets, "web/css/core.css")}" media="all">');
             })(jQuery);
         </script>
-        
+
         <!-- diagnosis/ICD, form validation, form ui interactions -->
         <script>
         // ICD Code and Diagnosis Functionality
@@ -539,7 +555,7 @@
             var queryTerm;
             var sdi = $('[id$=searchDiagnosisId]');
             var dti = $('[id$=diagnosisTextId]');
-            
+
             dti.autocomplete({
                 minLength: 2,
                 source: function(request, response) {
@@ -578,7 +594,7 @@
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -593,7 +609,7 @@
                     sdi.prop('disabled',false);
                     sdi.text('');
                 }
-                
+
             });
             sdi.keyup(function(){
                 if($(this).val() == '')
@@ -618,7 +634,7 @@
                     $tgt.addClass('placeHolder');
                 }
             });
-            
+
             sdi.autocomplete({
                 minLength: 2,
                 source: function(request, response) {
@@ -650,7 +666,7 @@
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -658,7 +674,7 @@
                 .append( entry )
                 .appendTo( ul );
             };
-            
+
             // Add or remove placeholder values
             sdi.val(PLACEHOLDER);
             sdi.on("focus",  function(event){
@@ -677,7 +693,7 @@
             });
         }
         ICDdiagnoisisFields();
-        
+
         // unwrap/remove table from radio fields and rebuild for responsiveness
         $('.r2c fieldset table tr td').children().unwrap().unwrap().unwrap().unwrap().unwrap();
         $('.r2c input:first').clone().prependTo('.r2c label:first');
@@ -690,7 +706,7 @@
         // make labels responsive
         $('.r2c label').addClass('col-xs-12 col-md-6');
         $('.r2c label input').attr('name','r2c-radio');
-        
+
         // format phone/date fields
         // target desktop
         if (window.matchMedia("(min-width: 47.5rem)").matches) {
@@ -699,7 +715,7 @@
         $(".phonemask").attr('type','tel');
         $("[id$=wcdob]").removeAttr('onfocus').mask("99/99/9999",{placeholder:"mm/dd/yyyy"});
         $("[id$=email],[id$=pemailaddress],[id$=mpemail]").attr('type','email');
-        
+
         $('document').ready(function(){
             // show/hide and field copy logic
             function showHideAgeCheckCloneFields() {
@@ -709,7 +725,7 @@
                 var medicalProviders = ["Nurse Practitioner","Physician Assistant","Physician"];
                 var childAgesEligible = ['2.5','3','4','5','6','7','8','9','10','11','12','13'];
                 var fieldClasses = ['firstname','lastname','phonechk','email','city','state-chk','address','postalcode','family-aware-chk','medprovider','r2c-manual-input','wcgender','wcage','wcdob','wcreceivedwish','language','siblings-chk','icd','pdiagnosis','facility','urgency'];
-                
+
                 // To display error message when no is selected in is family aware input field
                 $('.familyAware').on('change',function(){
                     if($(this).val() == 'No') {
@@ -727,7 +743,7 @@
                                 $(this).next('.familyAwareError').text(familyAwareError);
                             }
                         }
-                        
+
                         else {
                             $('.familyAwareError').css('display','none');
                         }
@@ -748,7 +764,7 @@
                             $('.familyAwareError').css('display','none');
                         }
                 });
-                
+
                 //showing the check box used to replicate the value
                 $('.medProvCat').on('change',function(){
                     //var medLabel = $.inArray(labelName,labels);
@@ -761,7 +777,7 @@
                         $('.repeatMedProf').css('display','none');
                     }
                 });
-                
+
                 //Replicating referrer value to medical professional
                 $('.repeatMedProf').on('change',function() {
                     checkVisible = $('.repeatMedProf input').is(':checked');
@@ -780,7 +796,7 @@
                         });
                     }
                 });
-                
+
                 //Replicating referrer value to child information
                 function childRepeat(){
                     var radioSelfSel = $('.radioSection input:checked').parent().text();
@@ -793,7 +809,7 @@
                     }
                 }
                 $('.refToRepeat :input').on('keyup', childRepeat);
-                
+
                 //Replicating referrer value to parent information
                 function parentRepeat(){
                     var radioSelfSel = $('.radioSection input:checked').parent().text();
@@ -809,9 +825,9 @@
                         $('.ppostalcode').val($('.rpostalcode').val());
                     }
                 }
-                
+
                 $('.refToParent :input').on('keyup',parentRepeat);
-                
+
                 //To display number of sibling field
                 $('[id$=nSib]').on('change',function(){
                     if($(this).val() != "" && $(this).val() != "0") {
@@ -821,7 +837,7 @@
                         $('.sibInfo').css('display','none');
                     }
                 });
-                
+
                 //Common deleting other than self or parent/ gaurdian
                 function clearFuncSelf() {
                     $('.wcfirstname').val($('.rfirstname').val());
@@ -832,14 +848,14 @@
                     if($('.wclastname').val() == $('.rlastname').val()) {
                         $('.wclastname').val('');
                     }
-                    
+
                     /*$('.refToRepeat :input').each(function(){
                     if($('.childToRepeat .'+this.className).val() == $(this).val()) {
                         $('.childToRepeat .'+this.className).val('');
                     }
                 });*/
                 }
-                
+
                 function clearFuncParent() {
                     $('.pfirstname').val($('.rfirstname').val());
                     $('.plastname').val($('.rlastname').val());
@@ -847,7 +863,7 @@
                     $('.pemailaddress').val($('.remail').val());
                     $('.pcity').val($('.rcity').val());
                     $('.ppostalcode').val($('.rpostalcode').val());
-                    
+
                     if($('.pfirstname').val() == $('.rfirstname').val()) {
                         $('.pfirstname').val('');
                     }
@@ -866,35 +882,35 @@
                     if($('.ppostalcode').val() == $('.rpostalcode').val()) {
                         $('.ppostalcode').val('');
                     }
-                    
+
                     /* $('.refToParent :input').each(function(){
                     if($('.parentToRepeat .'+this.className).val() == $(this).val()) {
                         $('.parentToRepeat .'+this.className).val('');
                     }
                 }); */
                 }
-                
+
                 // reset aware-of-referral and field validation
                 function resetCommonFields(){
                     var validationSelectId = ['[id$=aware-of-referral],[id$=wcage],[id$=wcreceivedwish],[id$=plang],[id$=nSib],[id$=urgency]'];
-                    
+
                     // reset form validation
                     $('form[id$=frm]').validate().resetForm();
-                    
+
                     // reset form validation classes/rules
                     function resetFormValidationClasses() {
                         $('input,select')
                         .removeClass('firstname lastname phonechk email city state-chk address postalcode family-aware-chk medprovider r2c-manual-input wcgender wcage wcdob wcreceivedwish language siblings-chk icd pdiagnosis facility urgency')
                         .removeAttr('aria-required aria-describedby');
-                        
+
                         // remove form validation rules
                         $('select[id$=aware-of-referral],input[id$=medprov],input[id$=rfirstname],input[id$=frm\\:pfirstname],input[id$=wcfirstname]input,[id$=mpfirstname],input[id$=rlastname],input[id$=frm\\:plastname],input[id$=wclastname],input[id$=mplastname],input[id$=rphone],input[id$=pphonenumber],input[id$=mpphone],input[id$=remail],input[id$=pemailaddress],input[id$=pcity],input[id$=ppostalcode],select[id$=p-state],input[id$=wcdob],select[id$=wcgender],input[id$=paddress],select[id$=plang],input[id$=searchDiagnosisId],input[id$=mphospitalname]').each(function(){
                             $(this).rules('remove');
                         });
-                        
+
                     }
                     resetFormValidationClasses();
-                    
+
                     // reset select element
                     function resetSelect(){
                         var options = document.querySelectorAll('select option');
@@ -902,30 +918,30 @@
                             options[i].selected = options[i].defaultSelected;
                         }
                     } resetSelect(validationSelectId);
-                    
+
                     //reset aware-of-referral field upon selection
                     $('[id$=aware-of-referral]').parent().parent().css('display','block');
                     $('[id$=aware-of-referral]').prop('selectedIndex',0);
-                    
+
                     //reset state error
                     var stateParents = $( '[id$=p-state]' ).parents().parents();
                     $(stateParents).removeClass( "has-error" ).children('.col-md-3').children('label').css('color','');
                     $(stateParents).children('.col-md-6').children(".chosen-container-single").children( ".chosen-single" ).css('border','');
                     $(stateParents).children('.col-md-6').children( ".help-block" ).remove();
-                    
+
                 }
-                
+
                 //To show corresponding sections and to perform some dependent actions
                 $('.radioClickable input').click(function(){
                     var labelNameRadio = $('.radioSection input:checked').parent().text();
                     var labelsAvailable = $.inArray(labelNameRadio,rerender);
-                    
+
                     resetCommonFields();
                     // hidden but still validates based off birthdate selection
                     $('[id$=wcage]').parents('.form-group').addClass('sr-only');
                     $('.shownOnYes').addClass('fam-aware-overlay');
                     dateLogic();
-                    
+
                     if(labelNameRadio != ''){
                         $('.Relchild').val(labelNameRadio);
                     }
@@ -933,13 +949,13 @@
                         $('.referrerInfo').css('display','block');
                         $('.medicalProvider,.other').css('display','none');
                         //$('.familyAwareError').css('display','block');
-                        
+
                         if(labelsAvailable == -1 || labelsAvailable == 2){
                             clearFuncSelf();
                             clearFuncParent();
                         }
                     }
-                    
+
                     if(labelNameRadio == ' Medical Professional') {
                         $('.medProvCat').val('');
                         $('.referrerInfo,.medicalProvider').css('display','block');
@@ -959,18 +975,18 @@
                         $('[id$=plang]').addClass('language');
                         $('[id$=searchDiagnosisId]').addClass('pdiagnosis');
                         $('[id$=mphospitalname]').addClass('facility');
-                        
+
                         formValidationRules();
-                        
+
                         clearFuncSelf();
                         clearFuncParent();
                         //dateLogic();
-                    } 
-                    
+                    }
+
                     else if (labelNameRadio == ' Other') {
                         $('.other input').val('');
                         $('.referrerInfo,.other').css('display','block');
-                        $('.medicalProvider').css('display','none');                        
+                        $('.medicalProvider').css('display','none');
                         // add classes for validation
                         $('[id$=aware-of-referral]').addClass('family-aware-chk');
                         $('[id$=r2cManualInput]').addClass('r2c-manual-input');
@@ -980,10 +996,10 @@
                         $('[id$=remail]').addClass('email');
                         $('[id$=rcity]').addClass('city');
                         $('[id$=rpostalcode]').addClass('postalcode');
-                        
+
                         formValidationRules();
                         $('[id$=wcage]').parents('.form-group').removeClass('sr-only');
-                        
+
                         clearFuncSelf();
                         clearFuncParent();
                     }
@@ -1003,17 +1019,17 @@
                             $('[id$=plang]').addClass('language');
                             $('[id$=searchDiagnosisId]').addClass('pdiagnosis');
                             $('[id$=mphospitalname]').addClass('facility');
-                            
+
                             if (labelNameRadio == ' Self' || labelNameRadio == ' Family Member/Relative'){
                                 $('[id$=aware-of-referral]').addClass('family-aware-chk');
-                            } 
-                            
+                            }
+
                             if(labelNameRadio == ' Self') {
                                 childRepeat();
                                 ageCheck();
                                 clearFuncParent();
                             }
-                            
+
                             else if (labelNameRadio == ' Parent/Guardian') {
                                 $('.shownOnYes').removeClass('fam-aware-overlay');
                                 $('[id$=aware-of-referral]').parent().parent().css('display','none');
@@ -1025,7 +1041,7 @@
                             //dateLogic();
                         }
                 });
-                
+
                 function ageCheck(){
                     var childAge = $('.childAge').val();
                     var selectedRel = $('.radioSection input:checked').parent().text();
@@ -1035,7 +1051,7 @@
                         $('#age13under-modal').modal('show');
                     }
                 }
-                
+
                 $('.childAge').on('change',function(){
                     var ageVal = $('age-text').text();
                     if($(this).val() == 'Under 2.5' || $(this).val() == '18 & Above') {
@@ -1043,7 +1059,7 @@
                         $('.alertMsg').text('To be eligible, children must be older than 2 ½ years old and younger than 18 years old.');
                         //ageMessage.insertAfter('[id$=wcage]');
                         $('#warningModal').modal('show');
-                    }  
+                    }
                     if ($('select.childAge option:nth-child(20)').length > 0) {
                         $('select.childAge option:last-child').remove();
                     }
@@ -1051,22 +1067,22 @@
                         $("[id$=wcdob]").val('');
                         $('.age-text').fadeOut(300, function() { $(this).remove(); });
                         $("[id$=wcdob]").unmask();
-                        $("[id$=wcdob]").mask("99/99/9999", {  
+                        $("[id$=wcdob]").mask("99/99/9999", {  
                             placeholder: "mm/dd/yyyy",
                         });
                     }
                     ageCheck();
                 });
-                
-                
+
+
                 function dateLogic() {
                     $('[id$=wcdob]').on('keyup', function() {
                         var wcAge = $("[id$=wcage]");
                         var wcDob = $('[id$=wcdob]');
                         // vars required for years calculation
-                        var wcDobInput = $("[id$=wcdob]").val();  
-                        var birthday = new Date(wcDobInput);  
-                        var today = new Date();  
+                        var wcDobInput = $("[id$=wcdob]").val();  
+                        var birthday = new Date(wcDobInput);  
+                        var today = new Date();  
                         var years = today.getFullYear() - birthday.getFullYear();
                         // vars required for keyup functions
                         var wcDobVal = $(this).val();
@@ -1080,40 +1096,40 @@
                                 timer = setTimeout(callback, ms);
                             };
                         })();
-                        
+
                         function ageValidate() {
                             // Reset birthday to the current year.
                             birthday.setFullYear(today.getFullYear());
-                            
+
                             // If the user's birthday has not occurred yet this year, subtract 1.
-                            if (today < birthday) {    
-                                years--;  
+                            if (today < birthday) {    
+                                years--;  
                             }
-                            
+
                             // check if last dynamic option is added and remove
                             if ($('select.childAge option:nth-child(20)').length > 0) {
                                 $('select.childAge option:last-child').remove();
                             }
-                            
+
                             function ageAlert() {
-                                $('.alertMsg').text('To be eligible, children must be older than 2 ½ years old and younger than 18 years old.'); 
+                                $('.alertMsg').text('To be eligible, children must be older than 2 ½ years old and younger than 18 years old.'); 
                                 $('#warningModal').modal('show');
                             }
-                            
+
                             // remove prev age
                             $('.age-text').remove();
-                            
+
                             // automatically change select to corresponding option of dob input...
                             // necessary for value to register with backend validation
-                            if (years > -1 && years < 2.5) {   
+                            if (years > -1 && years < 2.5) {   
                                 $(wcAge).prop('selectedIndex', 1);
                                 $('<span class="text-muted age-text">Under 2 1/2 years old</span>').insertAfter(wcDob);
                                 ageAlert()
-                            } else if (years >= 18) {      
+                            } else if (years >= 18) {      
                                 $(wcAge).prop('selectedIndex', 18);
                                 $('<span class="text-muted age-text">Over 18 years old</span>').insertAfter(wcDob);
                                 ageAlert()
-                            } else if (years > 2.5 && years < 18) {      
+                            } else if (years > 2.5 && years < 18) {      
                                 $(wcAge).prop('selectedIndex', 0);
                                 $(wcAge).append('<option value="' + years + '" selected="selected">' + years + '</option>'); //add
                                 $('<span class="text-muted age-text">' + years + ' years old</span>').insertAfter(wcDob);
@@ -1130,33 +1146,33 @@
                                     $("[id$=wcdob]").val('');
                                     $('.age-text').fadeOut(300, function() { $(this).remove(); });
                                     $("[id$=wcdob]").unmask();
-                                    $("[id$=wcdob]").mask("99/99/9999", {  
+                                    $("[id$=wcdob]").mask("99/99/9999", {  
                                         placeholder: "mm/dd/yyyy",
                                     });
                                 }, 1000);
                             }
                         }
-                        
+
                         // filter m/d/y before calculating and printing age
                         while (letterFormat !== -1) {
                             count++;
                             letterFormat = wcDobVal.indexOf(letters, letterFormat + 1);
                         }
-                        // Only run when mm/dd/yyyy format is cleared from input    
-                        if (count === 0) {   
+                        // Only run when mm/dd/yyyy format is cleared from input
+                        if (count === 0) {   
                             // console.log('ageValidate has run');
-                            ageValidate();    
+                            ageValidate();    
                         }
                     }); //dateLogic on keyup end
                 }
-                
-                
+
+
             } showHideAgeCheckCloneFields();
-            
+
             //$('form[id$=frm]').removeAttr('novalidate');
             // hide form security from bots (suck it bots)
             $('.fs').hide();
-            
+
             // form validation defaults
             $.validator.setDefaults({
                 submitHandler: function () {
@@ -1167,7 +1183,7 @@
                     } else {
                         // alert("Dev message: Hidden inputs were NOT triggered. Form will now submit. This message will be removed before production deployment.");
                         if ($(form).valid()){
-                            form.submit(); 
+                            form.submit();
                             return false; // prevent normal form posting
                         }
                     }
@@ -1183,7 +1199,7 @@
                     error.addClass( "help-block" );
                     // Add `has-feedback` class to the parent div.form-group in order to add icons to inputs
                     element.parents( ".col-sm-6" ).addClass( "has-feedback" );
-                    
+
                     if ( element.prop( "type" ) === "radio" ) {
                         error.insertBefore( element.parents('.r2c') );
                     } else if ( element.hasClass("c-select") ){
@@ -1212,7 +1228,7 @@
                     $(elementParents).children( ".help-block" ).remove();
                 }
             });
-            
+
             function formValidationRules() {
                 // add validation rules for common fields
                 $("input.firstname").each(function(){
@@ -1290,7 +1306,7 @@
                         }
                     });
                 });
-                
+
                 // add rules for all other fields
                 $("input.r2c-radio").rules("add", {
                     required: true,
@@ -1406,7 +1422,7 @@
             // always require this field
             $('.r2c').children('label').children('input').addClass('r2c-radio');
             formValidationRules();
-            
+
             // chosen.js - state select
             $('select.state option:first').remove(); // remove first
             //$('.chosen').chosen({disable_search: true, placeholder_text_single: "Please Select", width:"100%"});
@@ -1418,7 +1434,7 @@
                 $(stateParents).children('.col-md-6').children(".chosen-container-single").children( ".chosen-single" ).css('border','');
                 $(stateParents).children('.col-md-6').children( ".help-block" ).remove();
             });
-            
+
             // inputs: numbers only
             $(".numbers-only").keydown(function (e) {
                 // Allow: backspace, delete, tab, escape, enter and .
@@ -1439,7 +1455,7 @@
                     e.preventDefault();
                 }
             });
-            
+
         });
         </script>
     </body>

@@ -21,10 +21,12 @@ public class VolunteerWorkItems_AC {
     public Boolean isReferesh{get;set;} 
     public Boolean wishTab{get;set;}
     public Boolean nonWishTab{get;set;}
-    Public Map<Id,String> recordVisibilityMap {get;set;}
-    
-    
-    
+    Public Map<Id,Boolean> recordVisibilityMap {get;set;}
+    Public Map<Id,Boolean> rejectedOpportunitiesMap {get;set;}
+    public List<Volunteer_Opportunity__c> closedVolunteerWishList;
+    public List<Volunteer_Opportunity__c> closedVolunteerNonWishList; 
+    public boolean isWishClosed{get;set;}
+    public boolean isWishNotClose{get;set;}
     //Used to get record type Id for wish and non wish events
     Constant_AC  constant = new Constant_Ac(); 
     public Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
@@ -33,8 +35,10 @@ public class VolunteerWorkItems_AC {
     Public Id nonWishRT = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.nonWishRT).getRecordTypeId();
     //Used to get the current logged in user related contact and used to get all chapters of the volunteer user.
     public VolunteerWorkItems_AC() {
-        recordVisibilityMap = new Map<Id,String>();
-        
+      isWishClosed = false;
+      isWishNotClose = true;
+        recordVisibilityMap = new Map<Id,Boolean>();
+        rejectedOpportunitiesMap = new Map<Id,Boolean>();
         wishTab = true;
         nonWishTab = true;
         volunteerChaptersSet = new Set<Id>();
@@ -49,18 +53,32 @@ public class VolunteerWorkItems_AC {
         }
     }    
     
+    public void CurrentWish(){
+      
+      isWishClosed = false;
+      isWishNotClose = true;
+    }
+    
+    public void HistoricalWish(){
+        isWishClosed = true;
+        isWishNotClose = false;
+        
+          
+    
+    }
     // This method is used to display all wish events which are assigned to current logged in Volunteer    
     public List<Volunteer_Opportunity__c> getVolunteerAssignedWishEvents() {
-        assignedWishQueryString = 'SELECT Chapter_Name__c, Wish__c,Approval_Status__c,';
+        assignedWishQueryString = 'SELECT Chapter_Name__c, Wish__c,IsApproved__c,isRejected__c,Wish__r.isClosed,';
         for(Schema.FieldSetMember nonWishEventField :SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsWish.getFields()) {
             assignedWishQueryString +=  nonWishEventField.getFieldPath()+',';
         }
         assignedWishQueryString = assignedWishQueryString.removeEnd(',');
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND Approval_Status__c != \'Rejected\' AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId';
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = False';
         volunteerWishEventsList = Database.query(assignedWishQueryString);
         if(volunteerWishEventsList.size() > 0) {
             for(Volunteer_Opportunity__c checkApprovalStatus : volunteerWishEventsList) {
-                recordVisibilityMap.put(checkApprovalStatus.Id, checkApprovalStatus.Approval_Status__c);
+                recordVisibilityMap.put(checkApprovalStatus.Id, checkApprovalStatus.IsApproved__c);
+                rejectedOpportunitiesMap.put(checkApprovalStatus.Id, checkApprovalStatus.isRejected__c);
             }
             
         }
@@ -69,24 +87,20 @@ public class VolunteerWorkItems_AC {
     
     // This method is used to display all wish and non wish events which are assigned to current logged in Volunteer
     public List<Volunteer_Opportunity__c> getVolunteerAssignedNonWishEvents() {
-        System.debug('>>>>>>>>bbbb>>>>>>>>>>>');
-        
-        assignedWishQueryString = 'SELECT Chapter_Name__c,Approval_Status__c,';
+        assignedWishQueryString = 'SELECT Chapter_Name__c,IsApproved__c,isRejected__c,';
         for(Schema.FieldSetMember nonWishEventField :SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsNonWish.getFields()) {
             assignedWishQueryString += nonWishEventField.getFieldPath()+',';
         }
         assignedWishQueryString = assignedWishQueryString.removeEnd(',');
         //assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.RecordTypeId =: nonWishRT ';
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Approval_Status__c != \'Rejected\' AND Volunteer_Name__c =: userRelatedContactId';
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId';
         volunteerNonWishEventsList = Database.query(assignedWishQueryString );
-        System.debug('>>>>>>>>>>>>>>>>>>>'+volunteerNonWishEventsList);
-        if(volunteerNonWishEventsList.size() > 0) {
-            System.debug('>>>>>>>>>>>>>>>>>>>'+volunteerNonWishEventsList);
+        if(volunteerWishEventsList.size() > 0) {
             for(Volunteer_Opportunity__c checkApprovalStatus : volunteerNonWishEventsList) {
-                System.debug('>>>>>>>checkApprovalStatus>>>>>>>>>>>>'+checkApprovalStatus);
-                recordVisibilityMap.put(checkApprovalStatus.Id, checkApprovalStatus.Approval_Status__c);
+                recordVisibilityMap.put(checkApprovalStatus.Id, checkApprovalStatus.IsApproved__c);
+                rejectedOpportunitiesMap.put(checkApprovalStatus.Id, checkApprovalStatus.isRejected__c);
             }
-            System.debug('>>>>>>>>recordVisibilityMap>>>>>>>>>>>'+recordVisibilityMap);
+            
         }
         
         return volunteerNonWishEventsList;
@@ -135,6 +149,32 @@ reqired volunteers and registered volunteers count.*/
             }
         }
         return nonWishOpportunitiesMap.values();
+    }
+    
+    //This method is used to display the current volunteer closed wish records.
+     public List<Volunteer_Opportunity__c> getClosedWish(){
+        closedVolunteerWishList = new List<Volunteer_Opportunity__c>();
+        String closedWishQueryString = 'SELECT Wish__r.isClosed,Wish__r.CaseNumber,';
+            for(Schema.FieldSetMember closedWishField : SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsClosedWish.getFields()){
+              closedWishQueryString += closedWishField.getFieldPath()+',';
+            } 
+        closedWishQueryString = closedWishQueryString .removeEnd(',');
+        closedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = true';
+        closedVolunteerWishList =  Database.query(closedWishQueryString);
+        return closedVolunteerWishList;
+    }
+    //This method is used to display the current volunteer closed Non Wish Event records.
+    public List<Volunteer_Opportunity__c> getClosedNonWishEvents(){
+        Date today = Date.Valueof(System.today());
+        closedVolunteerNonWishList = new List<Volunteer_Opportunity__c>();
+        String closedNonWishQueryString = 'SELECT Non_Wish_Event__r.Event_Date__c,Non_Wish_Event__r.Name,';
+            for(Schema.FieldSetMember closedNonWishField : SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsClosedNonWish.getFields()){
+              closedNonWishQueryString += closedNonWishField.getFieldPath()+',';
+            } 
+        closedNonWishQueryString = closedNonWishQueryString .removeEnd(',');
+        closedNonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.Event_Date__c > today';
+        closedVolunteerNonWishList =  Database.query(closedNonWishQueryString );
+        return closedVolunteerNonWishList ;
     }
     
     //This method is used to display all wish volunteer opportunities for volunteers based on their chapters and used to display total number of 
@@ -186,7 +226,9 @@ reqired volunteers and registered volunteers count.*/
         List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists =[SELECT Id, Role__c, Chapter_Name__r.Name, RecordtypeId, Wish__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Wish__c =: volunteerOpportunity.get(0).Wish__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null];
         
         if(volunteerOpportunityDuplicateLists.size()>0){
-            ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are not currently eligible to sign up for this volunteer opportunity. Please contact your chapter for more information on how to become eligible.');
+            /*Below three line changes are related to WVC-443 (11-09-2016)*/
+            //ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are not currently eligible to sign up for this volunteer opportunity. Please contact your chapter for more information on how to become eligible.');
+            ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are already registered for this opportunity.');
             ApexPages.addMessage(mymsg);
         } else {
             Boolean updateRecord;

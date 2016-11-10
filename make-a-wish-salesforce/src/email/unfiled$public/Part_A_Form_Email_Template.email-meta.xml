@@ -9,16 +9,11 @@
     <subject>Your patient has been referred for a wish!</subject>
     <textOnly>Hi {!Lead.Treating_Medical_Professional_First_Name__c},
 
-Enclosed in this email is a URL link that will allow you to access the referral information for your patient, {!Contact.First_Last_Initial__c}. The password to this encrypted form is included below.
+Please Review the Diagnosis Verification and submit.
 
-Please be sure to provide a response to each of the included questions so we can confirm whether {!Contact.First_Last_Initial__c}. meets Make-A-Wish’s medical eligibility criteria. Thanks to the support of you and other medical professionals around the country, we continue to come closer each year to our vision of making every eligible child’s wish come true. Thank you for taking the time to help us share the power of a wish®.
+Password : {!Lead.Part_A_Form_Password__c}
 
-Please review the Diagnosis Verification and submit.
-
-Password: {!Lead.Part_A_Form_Password__c}
-
-Thanks,
-
-{!Lead.ChapterName__c}</textOnly>
+Thanks
+Make A Wish America</textOnly>
     <type>html</type>
 </EmailTemplate>

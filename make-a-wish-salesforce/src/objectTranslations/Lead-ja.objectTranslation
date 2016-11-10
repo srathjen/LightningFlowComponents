@@ -677,6 +677,10 @@
             <translation><!-- No Response --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Pending Diagnosis Verification</masterLabel>
+            <translation><!-- Pending Diagnosis Verification --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Previous Wish</masterLabel>
             <translation><!-- Previous Wish --></translation>
         </picklistValues>
@@ -1060,16 +1064,12 @@
             <section>Qualifying Medical Professional</section>
         </sections>
         <sections>
-            <label><!-- Referral Source Information --></label>
-            <section>Referral Source Information</section>
+            <label><!-- Referral Section --></label>
+            <section>Referral Section</section>
         </sections>
         <sections>
             <label><!-- Referring Medical Professional --></label>
             <section>Referring Medical Professional</section>
-        </sections>
-        <sections>
-            <label><!-- To be removed --></label>
-            <section>To be removed</section>
         </sections>
     </layouts>
     <validationRules>

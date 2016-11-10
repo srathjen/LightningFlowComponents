@@ -100,8 +100,6 @@
         <columns>NAME</columns>
         <columns>Chapter__c</columns>
         <columns>Office__c</columns>
-        <columns>External_Id__c</columns>
-        <columns>LAST_UPDATE</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -110,8 +108,6 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>Zip Code</pluralLabel>
-    <searchLayouts>
-        <customTabListAdditionalFields>Chapter__c</customTabListAdditionalFields>
-    </searchLayouts>
+    <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
 </CustomObject>

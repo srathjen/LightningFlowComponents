@@ -27,7 +27,7 @@ public class CaseTrigger_AT_Test {
         Case newWishDeterminatonWish = new Case();
         newWishDeterminatonWish.RecordTypeId = wishDeterminationRecordTypeId;
         newWishDeterminatonWish.ParentId = parentCase.Id;
-        newWishDeterminatonWish.Chapter_Name__c = 'Arizona - Chapter';
+        newWishDeterminatonWish.ChapterName__c = TestClassUtil.createArizonaChapter();
         newWishDeterminatonWish.Subject = 'Wish Determination';
         newWishDeterminatonWish.Wish_Type__c = 'Standard';
         newWishDeterminatonWish.ContactId = wishChild.Id;
@@ -116,7 +116,7 @@ public class CaseTrigger_AT_Test {
             Contact wishChild = [SELECT Id,ACcountId FROM Contact WHERE RecordTypeId  = :wishChildRecordTypeId];
             Case updateparentCase = new Case();
             updateparentCase.Id = parentCase.Id;
-            updateparentCase.Chapter_Name__c = 'Make-A-Wish Arizona';
+            updateparentCase.ChapterName__c = TestClassUtil.createchapterAccount().id;
             updateparentCase.Status = 'Ready to Assign';
             updateparentCase.Volunteer_Manager_Name__c = 'testmawa Manager';
             updateparentCase.Volunteer_Manager_Email__c =  'testmawa@gmail.com';
@@ -288,7 +288,7 @@ public class CaseTrigger_AT_Test {
       PartACase.Sub_Status__c = 'Abandoned';
       insert PartACase; 
      
-      update PartACase;
+     // update PartACase;
     
     }
     
@@ -312,5 +312,10 @@ public class CaseTrigger_AT_Test {
       PartACase.Sub_status__c = 'Abandoned';
       update PartACase;
     
+    }
+    
+    @isTest static void UpdateWishRecordIdentifier(){
+       Constant_AC  constant = new Constant_Ac();    
+       Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId(); 
     }
 }

@@ -160,5 +160,4 @@ public class ContactTriggerHandler{
      if(newTaskList.size() > 0)
          insert newTaskList;
    }
-
 }

@@ -145,6 +145,11 @@
                 <default>false</default>
                 <closed>false</closed>
             </picklistValues>
+            <picklistValues>
+                <fullName>Abandoned</fullName>
+                <default>false</default>
+                <closed>true</closed>
+            </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <type>Picklist</type>
@@ -224,6 +229,10 @@
         </picklistValues>
         <picklistValues>
             <picklist>Status</picklist>
+            <values>
+                <fullName>Abandoned</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Completed</fullName>
                 <default>false</default>
@@ -482,6 +491,10 @@
         </picklistValues>
         <picklistValues>
             <picklist>Status</picklist>
+            <values>
+                <fullName>Abandoned</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Approved</fullName>
                 <default>false</default>
@@ -765,6 +778,10 @@
         <picklistValues>
             <picklist>Status</picklist>
             <values>
+                <fullName>Abandoned</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Approved</fullName>
                 <default>false</default>
             </values>
@@ -820,5 +837,589 @@
             </values>
         </picklistValues>
     </recordTypes>
+    <recordTypes>
+        <fullName>Wish_Granted</fullName>
+        <active>true</active>
+        <description>Wish Granted RecordType</description>
+        <label>Wish Granted</label>
+        <picklistValues>
+            <picklist>Available_Time1__c</picklist>
+            <values>
+                <fullName>11%3A00AM - 2%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00PM - 5%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00AM - 11%3A00AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Preference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Available_Time2__c</picklist>
+            <values>
+                <fullName>11%3A00AM - 2%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00PM - 5%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00AM - 11%3A00AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Preference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Available_Time3__c</picklist>
+            <values>
+                <fullName>11%3A00AM - 2%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00PM - 5%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00AM - 11%3A00AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Preference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Confirmed_Time__c</picklist>
+            <values>
+                <fullName>1%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A00%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A30%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A00%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A30%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A00%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A30%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A30%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A00%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A30%3AAM</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Priority</picklist>
+            <values>
+                <fullName>High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Normal</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Abandoned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Declined</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Started</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Rescheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting on someone else</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Quote</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Wish_Planning_Anticipation</fullName>
+        <active>true</active>
+        <description>Wish Planning &amp; Anticipation type tasks</description>
+        <label>Wish Planning &amp; Anticipation</label>
+        <picklistValues>
+            <picklist>Available_Time1__c</picklist>
+            <values>
+                <fullName>11%3A00AM - 2%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00PM - 5%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00AM - 11%3A00AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Preference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Available_Time2__c</picklist>
+            <values>
+                <fullName>11%3A00AM - 2%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00PM - 5%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00AM - 11%3A00AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Preference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Available_Time3__c</picklist>
+            <values>
+                <fullName>11%3A00AM - 2%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00PM - 5%3A00PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00AM - 11%3A00AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>No Preference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Confirmed_Time__c</picklist>
+            <values>
+                <fullName>1%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A00%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A30%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A00%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A30%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A30%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A00%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A00%3APM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A30%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A30%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A00%3AAM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A30%3AAM</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Priority</picklist>
+            <values>
+                <fullName>High</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Normal</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status</picklist>
+            <values>
+                <fullName>Abandoned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Declined</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Deferred</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Started</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Rescheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Waiting on someone else</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Subject</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Letter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Send Quote</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Call</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
     <sharingModel>Private</sharingModel>
+    <webLinks>
+        <fullName>Task_List</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <linkType>url</linkType>
+        <masterLabel>Task List</masterLabel>
+        <openType>replace</openType>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+        <url>/007?id={!Case.Id}&amp;rlid=RelatedActivityList</url>
+    </webLinks>
 </CustomObject>

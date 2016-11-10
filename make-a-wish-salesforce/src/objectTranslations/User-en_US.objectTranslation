@@ -21,6 +21,10 @@
         <name>I_am_over_18_years_old__c</name>
     </fields>
     <fields>
+        <label><!-- Inactive Date --></label>
+        <name>Inactive_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- LMS Id --></label>
         <name>LMS_Id__c</name>
     </fields>
@@ -44,6 +48,10 @@
     <fields>
         <label><!-- DocuSign API UserName --></label>
         <name>Loop__dsToken__c</name>
+    </fields>
+    <fields>
+        <label><!-- Year of Inactive --></label>
+        <name>Year_of_Inactive__c</name>
     </fields>
     <fields>
         <label><!-- DSProSFMembershipStatus --></label>

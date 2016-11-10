@@ -95,4 +95,37 @@ Public class UserTriggerHandler{
            
     }
     
+    @future
+    public static void updateUser(Set<Id> inactiveUserIdSet){
+      List<Case> caseList = new List<Case>();
+      List<Case> dbcaseList = new List<Case>();
+      Map<Id,String> caseTeamMemberMap = new Map<Id,String>();
+       for(CaseTeamMember dbCaseTeamMember : [SELECT Id,MemberId,Member.FirstName,Member.LastName,ParentId,TeamRoleId,TeamRole.Name FROM CaseTeamMember  WHERE TeamRole.Name =: 'Wish Granter' AND MemberId IN: inactiveUserIdSet]){
+                 
+                 caseTeamMemberMap.put(dbCaseTeamMember.ParentId,dbCaseTeamMember.Member.FirstName+ ' '+' ' +dbCaseTeamMember.Member.LastName);
+         }
+         for(Case dbCase : [SELECT Id,isEmailWishGranter__c ,InActiveWishGranter__c  From Case WHERE Id IN:caseTeamMemberMap.KeySet()]){
+             if(dbCase.isEmailWishGranter__c  == True &&  dbCase.InActiveWishGranter__c != null){
+                 case newCase = new case();
+                 newCase.Id =dbCase.Id;
+                 newcase.isEmailWishGranter__c = false;
+                 newcase.InActiveWishGranter__c = null;
+                 dbcaseList.add(newCase);
+             }
+         }
+         if(dbcaseList.size() > 0 )
+         update dbcaseList;
+         
+         for(Id caseIds : caseTeamMemberMap.KeySet()){
+              
+              case newCase = new case();
+              newCase.Id =caseIds;
+              newcase.isEmailWishGranter__c = true;
+              newcase.InActiveWishGranter__c = caseTeamMemberMap.get(caseIds);
+              caseList.add(newCase); 
+         }
+         
+         if(caseList.size() > 0)
+         update caseList;
+    }
 }

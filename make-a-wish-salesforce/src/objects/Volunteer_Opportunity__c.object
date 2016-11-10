@@ -58,6 +58,126 @@
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>ReadWrite</externalSharingModel>
     <fieldSets>
+        <fullName>MyAssignmentsClosedNonWish</fullName>
+        <description>This field set used in MyAssignment_VF page to display the vlounteer closed Non Wish &amp; Event.</description>
+        <displayedFields>
+            <field>Id</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Event_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Role__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Event_Date__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>NWE_Start_Time__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>NWE_End_Time__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>NWE_City__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>NWE_Zip__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>NWE_Volunteer_Opportunity_Notes__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>MyAssignmentsClosedNonWish</label>
+    </fieldSets>
+    <fieldSets>
+        <fullName>MyAssignmentsClosedWish</fullName>
+        <description>This field set used in MyAssignment_VF page to display the vlounteer closed wishes.</description>
+        <displayedFields>
+            <field>Id</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Wish__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Role__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>About_Me__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Medical_Condition__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Hobbies__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Waiting_Since__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Language__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Age__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Gender__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>City__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Zip__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Non_Verbal__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>MyAssignmentsClosedWish</label>
+    </fieldSets>
+    <fieldSets>
         <fullName>MyAssignmentsNonWish</fullName>
         <description>This field set used in MyAssignment_VF page</description>
         <displayedFields>
@@ -313,40 +433,6 @@
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Approval_Status__c</fullName>
-        <description>It is used to identify the status of the record</description>
-        <externalId>false</externalId>
-        <label>Approval Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Initiated</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rejection Notification</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Not Assigned</fullName>
-                <default>true</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Picklist</type>
     </fields>
     <fields>
         <fullName>Chapter_Name__c</fullName>
@@ -606,7 +692,6 @@
         <defaultValue>false</defaultValue>
         <description>This field is used when the to identify whether the volunteer opportunity is active or not.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Check this box if the volunteer has been removed from opportunity.</inlineHelpText>
         <label>Inactive</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -1716,48 +1801,13 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
         <description>This record type would associate the volunteer to non wish and event</description>
         <label>Non Wish &amp; Event</label>
         <picklistValues>
-            <picklist>Approval_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initiated</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Not Assigned</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejection Notification</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>Reason_Inactive__c</picklist>
-            <values>
-                <fullName>Deceased</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Inactivated</fullName>
-                <default>false</default>
-            </values>
             <values>
                 <fullName>Moved</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Non-responsive</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Requested</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1866,48 +1916,13 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
         <description>This record type would associate the volunteer to the wish</description>
         <label>Wish</label>
         <picklistValues>
-            <picklist>Approval_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Initiated</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Not Assigned</fullName>
-                <default>true</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejection Notification</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>Reason_Inactive__c</picklist>
-            <values>
-                <fullName>Deceased</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Inactivated</fullName>
-                <default>false</default>
-            </values>
             <values>
                 <fullName>Moved</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Non-responsive</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Requested</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

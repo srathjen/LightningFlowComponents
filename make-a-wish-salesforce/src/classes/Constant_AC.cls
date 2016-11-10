@@ -34,8 +34,13 @@ Public Class Constant_AC {
     public String classOfferingRecordTypeId;
     public String partARecordTypeId;
     public String travelAlgmRT;
+    public String budgetingRt;
+    public String financeRt;
+    public String wishGrantTaskRT;
     
     public Constant_AC() {
+        budgetingRt = 'Budgeting';
+        financeRt = 'Finance';
         contactWishChildRT = 'Wish Child';
         wishDeterminationRT = 'Wish Determination';
         wishPlanningAnticipationRT = 'Wish Planning & Anticipation';
@@ -64,5 +69,6 @@ Public Class Constant_AC {
         classOfferingRecordTypeId = 'Virtual - Self Paced';
         partARecordTypeId = 'Diagnosis Verification Review';
         travelAlgmRT = 'Travel Algorithm';
+        wishGrantTaskRT = 'Wish Granted';
     }
 }

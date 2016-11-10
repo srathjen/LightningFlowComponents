@@ -5,24 +5,6 @@
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
         <label>Information</label>
-        <layoutColumns>
-            <layoutItems>
-                <field>Question__c</field>
-            </layoutItems>
-            <layoutItems>
-                <field>Step_By_Step__c</field>
-            </layoutItems>
-            <layoutItems>
-                <field>Role__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <style>OneColumn</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>true</customLabel>
-        <detailHeading>true</detailHeading>
-        <editHeading>true</editHeading>
-        <label>Additional Resources</label>
         <layoutColumns/>
         <style>OneColumn</style>
     </layoutSections>

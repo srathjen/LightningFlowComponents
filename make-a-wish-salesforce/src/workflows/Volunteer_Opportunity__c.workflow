@@ -88,48 +88,12 @@
         <operation>Literal</operation>
         <protected>false</protected>
     </fieldUpdates>
-    <fieldUpdates>
-        <fullName>Volunteer_Opportunity_Approval_Initiated</fullName>
-        <description>Volunteer Opportunity Approval Process initiated</description>
-        <field>Approval_Status__c</field>
-        <literalValue>Initiated</literalValue>
-        <name>Volunteer Opportunity:Approval Initiated</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Literal</operation>
-        <protected>false</protected>
-    </fieldUpdates>
-    <fieldUpdates>
-        <fullName>Volunteer_Opportunity_Approved</fullName>
-        <description>Volunteer Opportunity is approved for volunteer</description>
-        <field>Approval_Status__c</field>
-        <literalValue>Approved</literalValue>
-        <name>Volunteer Opportunity : Approved</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Literal</operation>
-        <protected>false</protected>
-    </fieldUpdates>
-    <fieldUpdates>
-        <fullName>Volunteer_Opportunity_MyAssignment_Rem</fullName>
-        <description>Used to remove the view access of rejected record under my assignment tab for volunteer</description>
-        <field>Approval_Status__c</field>
-        <literalValue>Rejected</literalValue>
-        <name>Volunteer Opportunity : MyAssignment Rem</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Literal</operation>
-        <protected>false</protected>
-    </fieldUpdates>
-    <fieldUpdates>
-        <fullName>Volunteer_Opportunity_Rejection_Period</fullName>
-        <description>Volunteer opportunity not approved for volunteers</description>
-        <field>Approval_Status__c</field>
-        <literalValue>Rejection Notification</literalValue>
-        <name>Volunteer Opportunity : Rejection Period</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Literal</operation>
-        <protected>false</protected>
-    </fieldUpdates>
     <rules>
         <fullName>Volunteer Opportunity %3A MyAssignment Removal</fullName>
+        <actions>
+            <name>VolunteerOpportunity_Uncheck_IsApprove</name>
+            <type>FieldUpdate</type>
+        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Volunteer_Opportunity__c.isRejected__c</field>
@@ -139,10 +103,6 @@
         <description>Used to remove volunteer opportunities rejected record from Volunteer My Assignment after 30 days</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
-            <actions>
-                <name>Volunteer_Opportunity_MyAssignment_Rem</name>
-                <type>FieldUpdate</type>
-            </actions>
             <timeLength>30</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>

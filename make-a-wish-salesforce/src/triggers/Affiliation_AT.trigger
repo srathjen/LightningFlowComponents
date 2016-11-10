@@ -6,10 +6,11 @@ Description : Updating Primary as True when affiliation record is creating for c
 and used to add user to chatter group when the user becomes active for the chapter
 ***************************************************************************************/
 
-trigger Affiliation_AT on npe5__Affiliation__c (Before Insert,Before Update,After Update) {
+trigger Affiliation_AT on npe5__Affiliation__c (Before Insert,Before Update,After Update,After Insert) {
     
     Set<Id> contactIds = new Set<Id>();
     Map<String,Integer> contactsMap = new Map<String,Integer>();
+    Map<id,String> contactMap=new Map<id,String>();
     
    // Whenever first Affiliation record is fallon under contact, assigning that record as primary.
     if(Trigger.isBefore && Trigger.isInsert) 
@@ -76,5 +77,16 @@ trigger Affiliation_AT on npe5__Affiliation__c (Before Insert,Before Update,Afte
         if(affilationsList.size()>0 && volunteerContactIdsSet.size()>0 && affiliationsIdsSet.size()>0) {
             AffiliationTriggerHandler.addUserToChaptterGroup(volunteerContactIdsSet,affiliationsIdsSet);
         }
+    }
+    if(Trigger.isAfter){
+        for(npe5__Affiliation__c currRec:trigger.new){
+            if(trigger.isinsert || currRec.npe5__Status__c!=trigger.oldMap.get(currRec.id).npe5__Status__c){
+                contactMap.put(currRec.npe5__Contact__c,currRec.npe5__Status__c);
+            }
+        }
+        if(contactMap != null && contactMap.size() >0){
+            AffiliationTriggerHandler.updateContact(contactMap);
+        }
+ 
     }
 }

@@ -48,6 +48,35 @@
         <template>Automated_Volunteer_Templates/Volunteer_Application_Incompleted_Email_Template</template>
     </alerts>
     <fieldUpdates>
+        <fullName>Recall_Update_Contact_Info</fullName>
+        <description>This field update is used to update when the IsRecall Contact info field</description>
+        <field>IsRecall_Contact_Info__c</field>
+        <literalValue>1</literalValue>
+        <name>Recall Update Contact Info</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reject_Update_Contact_Info</fullName>
+        <description>This field update is used to update when the IsReject Contact info field</description>
+        <field>IsRejected_Contact_Info__c</field>
+        <literalValue>1</literalValue>
+        <name>Reject Update Contact Info</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Contact_Info</fullName>
+        <field>IsContactInfoUpdated__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Contact Info</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Update_Is_Application</fullName>
         <description>This field update is used when the user approve the volunteer contact record.</description>
         <field>is_Application__c</field>

@@ -5,7 +5,7 @@
     relationshipName="Case__r"
     legacyIdSupport="true"
     objectId="{!Case.Id}"
-    privateEnabled="true"
+    privateEnabled="false"
     inline="true"
     enableAttachFromSDriveFolders="false"
     defaultEmailAddress="{!defaultCaseEmail}"/>

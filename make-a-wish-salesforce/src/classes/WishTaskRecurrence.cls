@@ -6,7 +6,7 @@ global class WishTaskRecurrence implements Database.Batchable<sObject> {
     
     global Database.QueryLocator start(Database.BatchableContext BC) {
         
-        String query = 'SELECT Id, RecordTypeId, ContactId, Wish_type__c, Chapter_Name__c,Subject, Status FROM Case  WHERE isClosed = false AND RecordTypeId !=: parentWishRecordTypeId and Wish_type__c != NULL';
+        String query = 'SELECT Id, RecordTypeId, ContactId, Wish_type__c, ChapterName__r.Name,Subject, Status FROM Case  WHERE isClosed = false AND RecordTypeId !=: parentWishRecordTypeId and Wish_type__c != NULL';
         return Database.getQueryLocator(query);
     }
     
@@ -30,7 +30,7 @@ global class WishTaskRecurrence implements Database.Batchable<sObject> {
             If(closedRecurrenceTasksMap.containskey(recurrenceCases.Id)) {
                 wishTypeNamesSet.add(recurrenceCases.Wish_Type__c);
                 caseWithClosedTasks.add(recurrenceCases);
-                wishChaptersSet.add(recurrenceCases.Chapter_Name__c);
+                wishChaptersSet.add(recurrenceCases.ChapterName__r.Name);
             }
         }
         
@@ -52,7 +52,7 @@ global class WishTaskRecurrence implements Database.Batchable<sObject> {
                         for(Chapter_Action_Track__c chapterActionTrack : actionTrackMap.get(test)) {
                             
                             if(recurrenceTaskCasesMap.get(recTasks.WhatId).Subject == chapterActionTrack.Case_Type_Stage__c && recTasks.Subject == chapterActionTrack.Task_Name__c 
-                               && System.today().daysBetween(Date.valueOf(recTasks.CreatedDate)+1)/chapterActionTrack.Recurring_Frequency__c == 1 && chapterActionTrack.Recurring__c == true && chapterActionTrack.Chapter_Name__r.Name ==recurrenceTaskCasesMap.get(recTasks.WhatId).Chapter_Name__c){
+                               && System.today().daysBetween(Date.valueOf(recTasks.CreatedDate)+1)/chapterActionTrack.Recurring_Frequency__c == 1 && chapterActionTrack.Recurring__c == true && chapterActionTrack.Chapter_Name__r.Name ==recurrenceTaskCasesMap.get(recTasks.WhatId).ChapterName__r.Name){
                                    Task newTask = new Task();
                                    newTask.ActivityDate = System.today()+Integer.valueOf(chapterActionTrack.Due_Date__c);
                                    newTask.WhatId = recTasks.WhatId;

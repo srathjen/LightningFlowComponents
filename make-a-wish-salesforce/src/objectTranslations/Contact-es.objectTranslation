@@ -17,6 +17,10 @@
         <name>Actor_Actress__c</name>
     </fields>
     <fields>
+        <label><!-- is Adult Emergency Contact --></label>
+        <name>Adult_Emergency_Contact__c</name>
+    </fields>
+    <fields>
         <label><!-- Already wish granted by MAW/Other Org --></label>
         <name>Already_wish_granted_by_MAW_Other_Org__c</name>
         <picklistValues>
@@ -277,6 +281,34 @@
         <name>Color__c</name>
     </fields>
     <fields>
+        <label><!-- Communication --></label>
+        <name>Communication__c</name>
+        <picklistValues>
+            <masterLabel>Appropriate for chronological age</masterLabel>
+            <translation><!-- Appropriate for chronological age --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Concrete Operational (7-11 year old) stage</masterLabel>
+            <translation><!-- Concrete Operational (7-11 year old) stage --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Formal Operational (11+ year old) stage</masterLabel>
+            <translation><!-- Formal Operational (11+ year old) stage --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non-Verbal</masterLabel>
+            <translation><!-- Non-Verbal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Preoperational (2-7 year old) stage</masterLabel>
+            <translation><!-- Preoperational (2-7 year old) stage --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sensorimotor (0-2 year old) stage</masterLabel>
+            <translation><!-- Sensorimotor (0-2 year old) stage --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Account Name --></label>
         <name>Contact_Account_Name__c</name>
     </fields>
@@ -287,6 +319,14 @@
     <fields>
         <label><!-- Current Age --></label>
         <name>Current_Age__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date of Wish Assigned --></label>
+        <name>Date_of_Wish_Assigned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date of last engagement --></label>
+        <name>Date_of_last_engagement__c</name>
     </fields>
     <fields>
         <label><!-- Department --></label>
@@ -349,8 +389,16 @@
         <name>Employer__c</name>
     </fields>
     <fields>
+        <label><!-- Expiration Date --></label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- First + Last Initial --></label>
         <name>First_Last_Initial__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Recipient Name --></label>
+        <name>First_Recipient_Name__c</name>
     </fields>
     <fields>
         <label><!-- Food --></label>
@@ -377,6 +425,18 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Country --></label>
+        <name>Hidden_Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Hidden_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Name --></label>
+        <name>Hidden_First_Name__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Is We Need To Expedite The Proces --></label>
         <name>Hidden_Is_We_Need_To_Expedite_The_Proces__c</name>
         <picklistValues>
@@ -387,6 +447,34 @@
             <masterLabel>Yes</masterLabel>
             <translation><!-- Yes --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Last Name --></label>
+        <name>Hidden_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phone --></label>
+        <name>Hidden_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- State --></label>
+        <name>Hidden_State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Status --></label>
+        <name>Hidden_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Street --></label>
+        <name>Hidden_Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- Zip Code --></label>
+        <name>Hidden_Zip_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- City --></label>
+        <name>Hidden_city__c</name>
     </fields>
     <fields>
         <label><!-- Hobby --></label>
@@ -445,6 +533,12 @@
         </picklistValues>
     </fields>
     <fields>
+        <help><!-- If already wish granted, please indicate the organization&apos;s name, the wish,
+and the date it was or will be granted. --></help>
+        <label><!-- If yes,Enter Org.Name,Wish&amp; Date it was --></label>
+        <name>If_yes_Enter_Org_Name_Wish_Date_it_was__c</name>
+    </fields>
+    <fields>
         <label><!-- Would your company be interested MAW --></label>
         <name>Interested_involved_with_Make_A_Wish__c</name>
         <picklistValues>
@@ -455,6 +549,38 @@
             <masterLabel>Yes</masterLabel>
             <translation><!-- Yes --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- IsContactInfoUpdated --></label>
+        <name>IsContactInfoUpdated__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsFirstParentGuardian --></label>
+        <name>IsFirstParentGuardian__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsParentGuardian --></label>
+        <name>IsParentGuardian__c</name>
+        <picklistValues>
+            <masterLabel>ParentGuardian</masterLabel>
+            <translation><!-- ParentGuardian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Participant</masterLabel>
+            <translation><!-- Participant --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- IsRecall Contact Info --></label>
+        <name>IsRecall_Contact_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsRejected Contact Info --></label>
+        <name>IsRejected_Contact_Info__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsSigned --></label>
+        <name>IsSigned__c</name>
     </fields>
     <fields>
         <label><!-- Language Notes --></label>
@@ -557,6 +683,10 @@
         <name>Medical_Condition__c</name>
     </fields>
     <fields>
+        <label><!-- Medical Needs --></label>
+        <name>Medical_Needs__c</name>
+    </fields>
+    <fields>
         <label><!-- Middle Name --></label>
         <name>Middle_Name__c</name>
     </fields>
@@ -593,12 +723,20 @@
         <name>Number_of_wishes_granted__c</name>
     </fields>
     <fields>
-        <label><!-- Other --></label>
+        <label><!-- Old &amp; Update Contact Values --></label>
+        <name>Old_Update_Contact_Values__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Favorites --></label>
         <name>Other__c</name>
     </fields>
     <fields>
         <label><!-- Parent/Guardian Name --></label>
         <name>Parent_Guardian_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent/Legal Guardian --></label>
+        <name>Parent_Legal_Guardian__c</name>
     </fields>
     <fields>
         <label><!-- Diagnosis Verification Received --></label>
@@ -842,6 +980,18 @@
         <name>Reason_for_Publicity_Candidate__c</name>
     </fields>
     <fields>
+        <label><!-- Recent Task Completed Date --></label>
+        <name>Recent_Task_Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recently Completed Training Date --></label>
+        <name>Recently_Completed_Training_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recipient Email --></label>
+        <name>Recipient_Email__c</name>
+    </fields>
+    <fields>
         <label><!-- Referral Age --></label>
         <name>Referral_Age__c</name>
     </fields>
@@ -889,6 +1039,10 @@
             <translation><!-- Friend --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Gaurdian</masterLabel>
+            <translation><!-- Gaurdian --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Granddaugther</masterLabel>
             <translation><!-- Granddaugther --></translation>
         </picklistValues>
@@ -903,10 +1057,6 @@
         <picklistValues>
             <masterLabel>Grandson</masterLabel>
             <translation><!-- Grandson --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Guardian</masterLabel>
-            <translation><!-- Guardian --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Half Brother</masterLabel>
@@ -925,8 +1075,8 @@
             <translation><!-- Mother --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Neighbour</masterLabel>
-            <translation><!-- Neighbour --></translation>
+            <masterLabel>Neighbor</masterLabel>
+            <translation><!-- Neighbor --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Partner</masterLabel>
@@ -966,8 +1116,24 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Relationship to Wish Child --></label>
+        <name>Relationship_to_Wish_Child__c</name>
+    </fields>
+    <fields>
+        <label><!-- Residing with Wish child --></label>
+        <name>Residing_with_Wish_child__c</name>
+    </fields>
+    <fields>
         <label><!-- Restaurant --></label>
         <name>Restaurant__c</name>
+    </fields>
+    <fields>
+        <label><!-- Second Recipient Email --></label>
+        <name>Second_Recipient_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Second Recipient Name --></label>
+        <name>Second_Recipient_Name__c</name>
     </fields>
     <fields>
         <label><!-- Sibling Age --></label>
@@ -1412,8 +1578,16 @@ provide contact information for each site on which you are active. --></help>
         <name>T_Shirt_Size__c</name>
     </fields>
     <fields>
-        <label><!-- Travel Recommendation --></label>
-        <name>Travel_Recommendation__c</name>
+        <label><!-- This is my wish because… --></label>
+        <name>This_is_my_wish_because__c</name>
+    </fields>
+    <fields>
+        <label><!-- Timesheet Date --></label>
+        <name>Timesheet_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- To me,the most important part of my wish --></label>
+        <name>To_me_the_most_important_part_of_my_wish__c</name>
     </fields>
     <fields>
         <label><!-- Understand --></label>
@@ -1486,6 +1660,10 @@ provide contact information for each site on which you are active. --></help>
             <masterLabel>Vietnamese</masterLabel>
             <translation><!-- Vietnamese --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Valid D.L # --></label>
+        <name>Valid_D_L__c</name>
     </fields>
     <fields>
         <label><!-- Volunteer Role --></label>
@@ -1596,9 +1774,25 @@ provide contact information for each site on which you are active. --></help>
         <name>When_I_m_with_my_friends_I_like_to__c</name>
     </fields>
     <fields>
+        <label><!-- When I think about my wish, I imagine…. --></label>
+        <name>When_I_think_about_my_wish_I_imagine__c</name>
+    </fields>
+    <fields>
+        <label><!-- When thinking,some of my wish ideas were --></label>
+        <name>When_thinking_some_of_my_wish_ideas_were__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish Child Id Hidden --></label>
         <name>Wish_Child_Id_Hidden__c</name>
         <relationshipLabel><!-- Contacts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Wish Family Type --></label>
+        <name>Wish_Family_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Liability IsSigned. --></label>
+        <name>Wish_Liability_IsSigned__c</name>
     </fields>
     <fields>
         <label><!-- Work Phone --></label>
@@ -1675,6 +1869,10 @@ provide contact information for each site on which you are active. --></help>
             <masterLabel>Vietnamese</masterLabel>
             <translation><!-- Vietnamese --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Year --></label>
+        <name>Year__c</name>
     </fields>
     <fields>
         <label><!-- Zip --></label>
@@ -2251,6 +2449,10 @@ provide contact information for each site on which you are active. --></help>
             <section>Contact Information</section>
         </sections>
         <sections>
+            <label><!-- Date of Last Engagement --></label>
+            <section>Date of Last Engagement</section>
+        </sections>
+        <sections>
             <label><!-- Dev &amp; QA Fields --></label>
             <section>Dev &amp; QA Fields</section>
         </sections>
@@ -2261,6 +2463,10 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Employment Information --></label>
             <section>Employment Information</section>
+        </sections>
+        <sections>
+            <label><!-- Engagement Details --></label>
+            <section>Engagement Details</section>
         </sections>
         <sections>
             <label><!-- Language Skills --></label>
@@ -2294,6 +2500,10 @@ provide contact information for each site on which you are active. --></help>
             <section>Contact Information</section>
         </sections>
         <sections>
+            <label><!-- Dev &amp; QA --></label>
+            <section>Dev &amp; QA</section>
+        </sections>
+        <sections>
             <label><!-- Household Address --></label>
             <section>Household Address</section>
         </sections>
@@ -2315,6 +2525,10 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Contact Details --></label>
             <section>Contact Details</section>
+        </sections>
+        <sections>
+            <label><!-- DEV &amp; QA fields --></label>
+            <section>DEV &amp; QA fields</section>
         </sections>
         <sections>
             <label><!-- Household Address --></label>

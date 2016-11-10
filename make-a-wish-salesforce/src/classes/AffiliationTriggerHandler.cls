@@ -49,4 +49,13 @@ public class AffiliationTriggerHandler {
             Insert chatterGroupMembersList; // adding members to the group.
         }
     }
+    //used to update the status field in contact for reporting purpose
+    public static void updateContact(Map<id,String>contactMap){
+        List<Contact> conList=[SELECT id,Hidden_Status__c from contact where id IN:contactMap.keyset()];
+       for(Contact currContact:conList){
+           currContact.Hidden_Status__c=contactMap.get(currContact.id);
+       } 
+       update conList;
+        
+    }
 }

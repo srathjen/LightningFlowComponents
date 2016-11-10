@@ -30,6 +30,10 @@
         <name>Completed_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Date Cancelled --></label>
+        <name>Date_Cancelled__c</name>
+    </fields>
+    <fields>
         <label><!-- Date --></label>
         <name>Date__c</name>
     </fields>

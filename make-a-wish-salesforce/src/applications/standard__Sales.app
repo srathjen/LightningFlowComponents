@@ -10,5 +10,17 @@
     <tab>Volunteer_Opportunity__c</tab>
     <tab>standard-report</tab>
     <tab>standard-Dashboard</tab>
+    <tab>In_Kind_Donation_Reimbursement__c</tab>
+    <tab>Wish_Expense_Type__c</tab>
+    <tab>Wish_Expense_Transaction_Code__c</tab>
+    <tab>cg__S3Config__c</tab>
+    <tab>In_Kind_Donation_Reimbursement_File__c</tab>
+    <tab>Wish_Expense_Type_Tempate__c</tab>
+    <tab>Wish_Expense__c</tab>
+    <tab>Lead_File__c</tab>
+    <tab>Medical_Questions__c</tab>
+    <tab>Travel_Data__c</tab>
     <tab>dsfs__DocuSignAccountConfiguration__c</tab>
+    <tab>cg__CaseFile__c</tab>
+    <tab>Awards_Recognition__c</tab>
 </CustomApplication>

@@ -193,7 +193,7 @@ Public Class WishReferralForm_AC
                                                     (MailingCity = :currLead.City AND MailingState = :currLead.State 
                                                     AND MailingPostalCode = :currLead.PostalCode))) limit 1];
                                                     
-                    List<Lead> leadDupCheck = [SELECT id, OwnerId, ChapterName__c FROM Lead WHERE (LastName = :currLead.LastName AND 
+                    List<Lead> leadDupCheck = [SELECT id, OwnerId, ChapterName__c, Status FROM Lead WHERE (LastName = :currLead.LastName AND 
                                                FirstName = :currLead.FirstName AND DOB__c = :currLead.DOB__c) AND
                                                ((Phone = :currLead.Phone OR Email = :currLead.Email OR 
                                                (City = :currLead.City AND State = :currLead.State 
@@ -207,23 +207,30 @@ Public Class WishReferralForm_AC
                         updateLead.status = 'Duplicate';
                         update updateLead;
                         
-                        Task newTask = WishReferralForm_AC.createTask(contactDupCheck[0].id,contactDupCheck[0].ownerId,contactDupCheck[0].accountId);
+                        Task newTask = WishReferralForm_AC.createTask(contactDupCheck[0].id,contactDupCheck[0].ownerId,contactDupCheck[0].accountId, 'Duplicate Inquiry/Referral Submitted');
                         if(newTask.id != Null)
                             redirection = true;
                     }
                     else if(contactDupCheck.size() > 0)
                     {
-                      Task newTask = WishReferralForm_AC.createTask(contactDupCheck[0].id,contactDupCheck[0].ownerId,contactDupCheck[0].accountId);
+                      Task newTask = WishReferralForm_AC.createTask(contactDupCheck[0].id,contactDupCheck[0].ownerId,contactDupCheck[0].accountId, 'Duplicate Inquiry/Referral Submitted');
                       if(newTask.id != Null)
                             redirection = true;
                     }
-                    else if(leadDupCheck.size() > 0)
-                    {
-                       Task newTask = WishReferralForm_AC.createTask(leadDupCheck[0].id,leadDupCheck[0].ownerId,leadDupCheck[0].ChapterName__c);
-                       if(newTask.id != Null)
-                            redirection = true;
+                   else if(leadDupCheck.size() > 0)
+                   {
+                       if(leadDupCheck[0].Status == 'Referred') {
+                           Task newTask = WishReferralForm_AC.createTask(leadDupCheck[0].id,leadDupCheck[0].ownerId,leadDupCheck[0].ChapterName__c, 'Duplicate Referral Submitted');
+                           if(newTask.id != Null)
+                               redirection = true;
+                       } else if(leadDupCheck[0].Status == 'Inquiry') {
+                           Task newTask = WishReferralForm_AC.createTask(leadDupCheck[0].id,leadDupCheck[0].ownerId,leadDupCheck[0].ChapterName__c, 'Duplicate Inquiry Submitted');
+                           if(newTask.id != Null)
+                               redirection = true;
+                       }
                        
-                    }
+                       
+                   }
                     else
                     {
                     
@@ -433,16 +440,16 @@ Public Class WishReferralForm_AC
    
    // Creating Task 
    
-   private static Task createTask(Id whoId,Id ownerId,Id whatId)
+   private static Task createTask(Id whoId,Id ownerId,Id whatId, String subject)
    {  
               Constant_AC constant = new Constant_AC();
               Id taskRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
               Task newTask = new Task();
-              newTask.Subject = 'RFI Lead';
+              newTask.Subject = subject;
               newTask.OwnerId = UserInfo.getUserId();
               newTask.whoId = whoId;
               newTask.Status = 'Not Started';
-              newTask.activityDate = Date.Today() + 5;
+              newTask.activityDate = Date.Today() + 10;
               if(ownerId != Null)
                  newTask.OwnerId = ownerId;
              

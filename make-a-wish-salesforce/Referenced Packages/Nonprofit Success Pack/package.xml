@@ -91,6 +91,8 @@
         <members>ERR_AsyncErrors</members>
         <members>ERR_AsyncErrors_SCHED</members>
         <members>ERR_AsyncErrors_TEST</members>
+        <members>ERR_ExceptionHandler</members>
+        <members>ERR_ExceptionHandler_TEST</members>
         <members>ERR_Handler</members>
         <members>ERR_Handler_API</members>
         <members>ERR_Handler_CTRL_TEST</members>
@@ -278,6 +280,7 @@
         <members>STG_PageHeader</members>
         <members>UTIL_JobProgress</members>
         <members>UTIL_JobProgressLightning</members>
+        <members>UTIL_NavigateBack</members>
         <members>UTIL_PageMessages</members>
         <members>UTIL_SoqlListView</members>
         <members>UTIL_Typeahead</members>
@@ -953,6 +956,8 @@
         <members>engagementPlanCantEdit</members>
         <members>engagementPlanNoLookups</members>
         <members>engagementPlanTwoLookups</members>
+        <members>exceptionRequiredField</members>
+        <members>exceptionValidationRule</members>
         <members>flsError</members>
         <members>healthButtonRun</members>
         <members>healthDetailsAccOne2OneNoContacts</members>
@@ -1183,6 +1188,7 @@
         <members>pmtWizardWarning</members>
         <members>pmtWizardWriteoffDate</members>
         <members>pmtWizardWriteoffMessage</members>
+        <members>pscDeleteRow</members>
         <members>pscManageSoftCreditsAdd</members>
         <members>pscManageSoftCreditsAmount</members>
         <members>pscManageSoftCreditsAmountMissing</members>

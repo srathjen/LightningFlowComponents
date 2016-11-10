@@ -68,12 +68,16 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         
         Boolean flag;
         for(Lead newLead : Trigger.new){
+            if(newLead.Status == 'Referred'){
+                newLead.Referred_Date__c = System.today();
+            }
             
-            if((newLead.Status == 'Pending Diagnosis Verification') && trigger.oldMap.get(newLead.id).Status == 'Referred'){
+            if((newLead.Sub_Status__c == 'Pending Diagnosis Verification') && trigger.oldMap.get(newLead.id).Sub_Status__c != 'Pending Diagnosis Verification'){
                 newLead.Part_A_Sent__c = System.today();
             }
             
-            if((newLead.Status == 'Eligibility Review') || (newLead.Status == 'Qualified') && trigger.oldMap.get(newLead.id).Status == 'Pending Diagnosis Verification'){
+          
+            if((newLead.Status == 'Eligibility Review') || (newLead.Status == 'Qualified') && trigger.oldMap.get(newLead.id).Status == 'Referred'){
                 newLead.Part_A_Received__c = System.today();
             }
             
@@ -197,10 +201,16 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
        for(Lead newLead : Trigger.new)
        {
            Task newTask = new Task();
-           newTask.subject = 'New Lead Created';
+           if(newLead.status == 'Inquiry') {
+               newTask.subject = 'New Inquiry Submitted';
+               newTask.ActivityDate = Date.Today().addDays(30);
+           }
+           if(newLead.status == 'Referred') {
+               newTask.subject = 'New Referral Submitted';
+               newTask.ActivityDate = Date.Today().addDays(10);
+           }
            newTask.ownerId = newLead.OwnerId;
            newTask.whoId = newLead.id;
-           newTask.ActivityDate = Date.Today().addDays(30);
            newTask.priority = 'Normal';
            newTaskList.add(newTask);
        }

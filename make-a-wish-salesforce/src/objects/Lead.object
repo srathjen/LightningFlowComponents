@@ -1063,7 +1063,7 @@
         <fullName>Chapter_Name__c</fullName>
         <description>This Field hold the name of the state.</description>
         <externalId>false</externalId>
-        <formula>State</formula>
+        <formula>&apos;Make-A-Wish &apos;+State</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Chapter Name</label>
         <required>false</required>
@@ -2551,12 +2551,10 @@
             <picklistValues>
                 <fullName>Local</fullName>
                 <default>false</default>
-                <controllingFieldValues>Eligibility Review</controllingFieldValues>
             </picklistValues>
             <picklistValues>
                 <fullName>National</fullName>
                 <default>false</default>
-                <controllingFieldValues>Eligibility Review</controllingFieldValues>
             </picklistValues>
             <picklistValues>
                 <fullName>Medical</fullName>
@@ -2577,6 +2575,11 @@
                 <fullName>No Response</fullName>
                 <default>false</default>
                 <controllingFieldValues>DNQ</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Diagnosis Verification</fullName>
+                <default>false</default>
+                <controllingFieldValues>Referred</controllingFieldValues>
             </picklistValues>
             <sorted>false</sorted>
         </picklist>
@@ -3371,24 +3374,6 @@
         </sharedTo>
     </listViews>
     <listViews>
-        <fullName>Medical_UAT_Leads</fullName>
-        <columns>FULL_NAME</columns>
-        <columns>LEAD.COMPANY</columns>
-        <columns>LEAD.STATE_CODE</columns>
-        <columns>LEAD.EMAIL</columns>
-        <columns>LEAD.STATUS</columns>
-        <columns>LEAD.CREATED_DATE</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <columns>LEAD.UNREAD</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>LEAD.CREATED_DATE</field>
-            <operation>equals</operation>
-            <value>11/1/2016 12:00 AM</value>
-        </filters>
-        <label>Medical UAT Leads</label>
-    </listViews>
-    <listViews>
         <fullName>Metro_New_York_Western_New_York_Lead</fullName>
         <filterScope>Everything</filterScope>
         <filters>
@@ -3398,7 +3383,7 @@
         </filters>
         <label>Metro New York &amp; Western New York</label>
         <sharedTo>
-            <group>Metro_New_York_Western_New_York</group>
+            <group>Metro_New_York_West_New_York</group>
         </sharedTo>
     </listViews>
     <listViews>
@@ -3442,7 +3427,7 @@
         </filters>
         <label>Mid-Atlantic</label>
         <sharedTo>
-            <group>Mid_Atlantic</group>
+            <group>MidAtlantic</group>
         </sharedTo>
     </listViews>
     <listViews>
@@ -3464,7 +3449,7 @@
         </filters>
         <label>Mid-South</label>
         <sharedTo>
-            <group>Mid_South</group>
+            <group>MidSouth</group>
         </sharedTo>
     </listViews>
     <listViews>
@@ -3813,7 +3798,7 @@
         </filters>
         <label>Orange County &amp; the Inland Empire</label>
         <sharedTo>
-            <group>Orange_County_the_Inland_Empire</group>
+            <group>Orange_Country_Inland_Empire</group>
         </sharedTo>
     </listViews>
     <listViews>
@@ -3877,23 +3862,6 @@
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Recently_Created_Leads</fullName>
-        <columns>FULL_NAME</columns>
-        <columns>LEAD.STATE_CODE</columns>
-        <columns>LEAD.EMAIL</columns>
-        <columns>LEAD.STATUS</columns>
-        <columns>Sub_Status__c</columns>
-        <columns>LEAD.CREATED_DATE</columns>
-        <columns>Treating_Medical_Professional_Last_Name__c</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>LEAD.CREATED_DATE</field>
-            <operation>equals</operation>
-            <value>TODAY</value>
-        </filters>
-        <label>Recently Created Leads</label>
     </listViews>
     <listViews>
         <fullName>Rio_Grande_Valley_Lead</fullName>
@@ -4091,7 +4059,7 @@
         </filters>
         <label>Tri-Counties</label>
         <sharedTo>
-            <group>Tri_Counties</group>
+            <group>TriCounties</group>
         </sharedTo>
     </listViews>
     <listViews>

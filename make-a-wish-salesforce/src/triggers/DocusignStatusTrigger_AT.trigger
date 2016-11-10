@@ -100,7 +100,7 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (after update) {
     List<Approval.ProcessSubmitRequest> approvalReqList=new List<Approval.ProcessSubmitRequest>();
     for(dsfs__DocuSign_Status__c dsts:Trigger.new)
     {
-        if(dsts.dsfs__Envelope_Status__c == 'Completed'&& dsts.isConflict__c == false && dsts.dsfs__Lead__c == Null){
+        if(dsts.dsfs__Envelope_Status__c == 'Completed'&& dsts.isConflict__c == false && dsts.dsfs__Lead__c == Null && dsts.dsfs__Case__c == Null){
           
             Approval.ProcessSubmitRequest approvalreq = new Approval.ProcessSubmitRequest();
             approvalreq.setComments('Submitting request for approval.');

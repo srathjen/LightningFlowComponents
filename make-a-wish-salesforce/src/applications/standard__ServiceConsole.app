@@ -174,8 +174,48 @@
     <tab>standard-Lead</tab>
     <tab>standard-Knowledge</tab>
     <tab>standard-LiveAgent</tab>
+    <tab>In_Kind_Donation_Reimbursement__c</tab>
+    <tab>Wish_Expense_Type__c</tab>
+    <tab>Wish_Expense_Transaction_Code__c</tab>
+    <tab>cg__S3Config__c</tab>
+    <tab>In_Kind_Donation_Reimbursement_File__c</tab>
+    <tab>Wish_Expense_Type_Tempate__c</tab>
+    <tab>Wish_Expense__c</tab>
+    <tab>Lead_File__c</tab>
+    <tab>Travel_Data__c</tab>
     <tab>dsfs__DocuSignAccountConfiguration__c</tab>
+    <tab>Awards_Recognition__c</tab>
     <workspaceMappings>
+        <mapping>
+            <tab>Awards_Recognition__c</tab>
+        </mapping>
+        <mapping>
+            <tab>In_Kind_Donation_Reimbursement_File__c</tab>
+        </mapping>
+        <mapping>
+            <tab>In_Kind_Donation_Reimbursement__c</tab>
+        </mapping>
+        <mapping>
+            <tab>Lead_File__c</tab>
+        </mapping>
+        <mapping>
+            <tab>Travel_Data__c</tab>
+        </mapping>
+        <mapping>
+            <tab>Wish_Expense_Transaction_Code__c</tab>
+        </mapping>
+        <mapping>
+            <tab>Wish_Expense_Type_Tempate__c</tab>
+        </mapping>
+        <mapping>
+            <tab>Wish_Expense_Type__c</tab>
+        </mapping>
+        <mapping>
+            <tab>Wish_Expense__c</tab>
+        </mapping>
+        <mapping>
+            <tab>cg__S3Config__c</tab>
+        </mapping>
         <mapping>
             <tab>dsfs__DocuSignAccountConfiguration__c</tab>
         </mapping>

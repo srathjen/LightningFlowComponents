@@ -10,6 +10,19 @@
         <name>Chapter_Id__c</name>
     </fields>
     <fields>
+        <label><!-- Chapter Name --></label>
+        <name>Chapter_Name__c</name>
+        <relationshipLabel><!-- Accounts --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Company Contact --></label>
+        <name>Company_Contact__c</name>
+    </fields>
+    <fields>
+        <label><!-- Department/Division --></label>
+        <name>Department_Division__c</name>
+    </fields>
+    <fields>
         <label><!-- Do Not Contact Notes --></label>
         <name>Do_Not_Contact_Notes__c</name>
     </fields>
@@ -30,6 +43,10 @@
         <name>Email__c</name>
     </fields>
     <fields>
+        <label><!-- Emergency Contact Middle Name --></label>
+        <name>Emergency_Contact_Middle_Name__c</name>
+    </fields>
+    <fields>
         <label><!-- Emergency Contact Phone --></label>
         <name>Emergency_Contact_Phone__c</name>
     </fields>
@@ -38,13 +55,37 @@
         <name>Emergency_Contact__c</name>
     </fields>
     <fields>
+        <label><!-- In-Kind Approval Status --></label>
+        <name>In_Kind_Approval_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Intake Manager --></label>
         <name>Intake_Manager__c</name>
         <relationshipLabel><!-- Accounts (Intake Manager) --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- Is Approved --></label>
+        <name>Is_Approved__c</name>
+    </fields>
+    <fields>
+        <label><!-- MAC Email --></label>
+        <name>MAC_Email__c</name>
+    </fields>
+    <fields>
         <label><!-- National Medical Advisor Email --></label>
         <name>MAC_Email_del__c</name>
+    </fields>
+    <fields>
+        <label><!-- Notes --></label>
+        <name>Notes__c</name>
     </fields>
     <fields>
         <label><!-- Primary Contact --></label>
@@ -179,6 +220,15 @@
         <label><!-- Volunteer Manager --></label>
         <name>Volunteer_Manager__c</name>
         <relationshipLabel><!-- Accounts (Volunteer Manager) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Wish Co-ordinator Hidden Email --></label>
+        <name>Wish_Co_ordinator_Hidden_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Co-ordinator --></label>
+        <name>Wish_Co_ordinator__c</name>
+        <relationshipLabel><!-- Accounts (Wish Co-ordinator) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Wish Manager --></label>
@@ -479,6 +529,24 @@
             <section>Fields</section>
         </sections>
     </layouts>
+    <layouts>
+        <layout>In Kind Donors</layout>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>InKind</layout>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- New Account --></label>
+        <name>CreateInKindDonorAccount</name>
+    </quickActions>
     <quickActions>
         <label><!-- New Donation --></label>
         <name>New_Donation</name>
@@ -506,6 +574,10 @@
     <recordTypes>
         <label><!-- Household Account --></label>
         <name>HH_Account</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- In Kind Donors --></label>
+        <name>In_Kind_Donors</name>
     </recordTypes>
     <recordTypes>
         <label><!-- Organization --></label>

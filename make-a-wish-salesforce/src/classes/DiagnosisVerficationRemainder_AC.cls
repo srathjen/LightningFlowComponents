@@ -35,7 +35,7 @@ global class DiagnosisVerficationRemainder_AC implements Database.Batchable<sObj
               }
           }
           
-          else if(currLead.Status == 'Pending Diagnosis Verification')
+          else if(currLead.Sub_Status__c == 'Pending Diagnosis Verification')
           {
             if((currLead.Part_A_Sent__c).addDays(7) == Date.Today())
             {

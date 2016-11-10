@@ -58,6 +58,10 @@
         <name>Due_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Months --></label>
+        <name>Months__c</name>
+    </fields>
+    <fields>
         <label><!-- Recurring Frequency --></label>
         <name>Recurring_Frequency__c</name>
     </fields>
@@ -74,27 +78,51 @@
         <name>Task_Name__c</name>
     </fields>
     <fields>
+        <label><!-- Weeks --></label>
+        <name>Weeks__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish type --></label>
         <name>Wish_type__c</name>
         <picklistValues>
-            <masterLabel>Cruise</masterLabel>
-            <translation><!-- Cruise --></translation>
+            <masterLabel>Cruise - Celebrity/Royal</masterLabel>
+            <translation><!-- Cruise - Celebrity/Royal --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Disney</masterLabel>
-            <translation><!-- Disney --></translation>
+            <masterLabel>Cruise - Disney</masterLabel>
+            <translation><!-- Cruise - Disney --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>GKTW</masterLabel>
-            <translation><!-- GKTW --></translation>
+            <masterLabel>Cruise - Other</masterLabel>
+            <translation><!-- Cruise - Other --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>International Travel</masterLabel>
-            <translation><!-- International Travel --></translation>
+            <masterLabel>Disney World</masterLabel>
+            <translation><!-- Disney World --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Shopping Spree - Local and Travel</masterLabel>
+            <translation><!-- Shopping Spree - Local and Travel --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Standard</masterLabel>
             <translation><!-- Standard --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Travel - Hawai</masterLabel>
+            <translation><!-- Travel - Hawai --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Travel - International</masterLabel>
+            <translation><!-- Travel - International --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Travel - Other</masterLabel>
+            <translation><!-- Travel - Other --></translation>
         </picklistValues>
     </fields>
     <layouts>

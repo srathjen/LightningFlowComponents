@@ -86,7 +86,7 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
     {
         Set<Id> rejectedIds = new Set<Id>();
         set<Id> approvedVolunteerIds = new Set<Id>();
-
+        Map<Id,Background_check__c>   expirationDateMap = new Map<Id,Background_check__c>(); 
         for(Background_check__c dbBackgroundCheckRec : trigger.new)
         {
             if(dbBackgroundCheckRec.Status__c == 'Approved' && dbBackgroundCheckRec.Status__c != Null && trigger.oldmap.get(dbBackgroundCheckRec.Id).Status__c != 'Approved')
@@ -96,6 +96,11 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
             if((dbBackgroundCheckRec.Status__c == 'Rejected') && (Trigger.oldMap.get(dbBackgroundCheckRec.id).Status__c != 'Rejected') && dbBackgroundCheckRec.Status__c != Null)
             {
                 rejectedIds.add(dbBackgroundCheckRec.Volunteer__c);
+            }
+            
+            if(dbBackgroundCheckRec.Date__c != Null && Trigger.oldMap.get(dbBackgroundCheckRec.id).Date__c <> dbBackgroundCheckRec.Date__c)
+            {
+                 expirationDateMap.put(dbBackgroundCheckRec.Volunteer__c,dbBackgroundCheckRec);
             }
         }
 
@@ -107,6 +112,10 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
         if(approvedVolunteerIds.size() > 0)
         {
             BackGroundCheckTriggerHandler.UpdateAffiliationStatusToPending(approvedVolunteerIds);
+        }
+        if(expirationDateMap.size() > 0)
+        {
+            BackGroundCheckTriggerHandler.UpdateVolunteerExpirationDate(expirationDateMap);
         }
 
     }

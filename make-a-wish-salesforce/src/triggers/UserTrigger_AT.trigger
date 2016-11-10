@@ -27,4 +27,18 @@ trigger UserTrigger_AT on User (after insert,after update) {
         if(prospectiveUserMap.size() > 0)
             userHandlerIns.UpdateVolunteerInfo(prospectiveUserMap);
     }
+    
+    if(Trigger.isAfter && Trigger.isUpdate){
+        Set<Id> inActiveUserIdSet = new Set<Id>();
+      
+         for(User newUser : Trigger.new){
+             if(newUser.IsActive == false && trigger.oldMap.get(newUser.Id).IsActive == TRue){
+                 inActiveUserIdSet.add(newUser.Id);
+             }
+         }
+        
+        if(inActiveUserIdSet.size() > 0)
+        UserTriggerHandler.updateUser(inActiveUserIdSet);
+         
+    }
 }

@@ -1,5 +1,4 @@
 /*************************************************************************************************
-CreatedBy: Kanagaraj & Kesav Kumar
 Author   : MST Solutions
 CreatedDate : 05/27/2016
 Description : 1. This VolunteerOpportunityTriggerHandler is used to invoke the apporval process when the volunteer contact name is entered into the volunteer contact field.
@@ -83,17 +82,38 @@ Public class VolunteerOpportunityTriggerHandler
         Map<Id,User> volunteerContactMap = new Map<Id,User>();
         Set<Id> volunteerSet = new Set<Id>();
         Set<Id> VoluteerNameSet = new Set<Id>();
+        Set<Id> wishAssignedSet = new Set<Id>();
         CaseTeamRole caseRoleID = [SELECT id,Name from CaseTeamRole WHERE Name =: 'Wish Granter' Limit 1];
         Set<Id> wishIds = new Set<Id>();
         Map<Id,Set<String>> wishMembersMap = new Map<Id,Set<String>>();
         Map<Id,Id> volunteerUserMap = new Map<Id, Id>();
+        Map<Id,Set<Id>> wishUserMap = new Map<Id,Set<Id>>(); //Used to hold wish related contact and user for contact access to volunteers
+        Map<Id,Id> wishRelatedContactMap = new Map<Id,Id>();
+        Constant_AC  constant = new Constant_AC();
+        List<Contact> updateContactList = new List<Contact>();
+        
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
         for(Volunteer_Opportunity__c newVolunteerRole : recordsForCreatingCaseTeams)
         {
             roleName.add(newVolunteerRole.Role__c);
             VoluteerNameSet.add(newVolunteerRole.Volunteer_Name__c);
             wishIds.add(newVolunteerRole.wish__c);
+            if(wishUserMap.containsKey(newVolunteerRole.wish__c)) {
+                wishUserMap.get(newVolunteerRole.wish__c).add(newVolunteerRole.Volunteer_Name__c);
+            } else {
+                wishUserMap.put(newVolunteerRole.wish__c, new Set<Id>{newVolunteerRole.Volunteer_Name__c});
+            }
+            
+            Contact updateContact = new Contact();
+            updateContact.id = newVolunteerRole.Volunteer_Name__c;
+            updateContact.Date_of_last_engagement__c  = Date.Today();
+            updateContactList.add(updateContact);
+            
         }
         
+        for(Case getRelatedContact : [SELECT Id, ContactId FROM Case WHERE Id IN : wishUserMap.keySet()]) {
+            wishRelatedContactMap.put(getRelatedContact.Id, getRelatedContact.ContactId);
+        }
         for(User contactUser : [SELECT Id, ContactId FROM User WHERE ContactId IN : VoluteerNameSet]) {
             volunteerUserMap.put(contactUser.ContactId, contactUser.Id);
         }
@@ -122,6 +142,7 @@ Public class VolunteerOpportunityTriggerHandler
                     newCaseTeamMembers.MemberId = newVolunteerRole.Volunteer_Name__c;
                     if(volunteerUserMap.containsKey(newVolunteerRole.Volunteer_Name__c)) {
                         newCaseTeamMembers.MemberId = volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c);
+                        wishAssignedSet.add(newCaseTeamMembers.MemberId);
                     }
                     
                     If(teamMemberRoleMap.containsKey(newVolunteerRole.Role__c)){
@@ -142,10 +163,36 @@ Public class VolunteerOpportunityTriggerHandler
                     }
                 }
             }
-        }  
+        } 
+        
+        if(updateContactList.size() > 0)
+            update updateContactList;
+     
+        
         if(CaseTeamMemberList.size() > 0)
-        {
+        {//wishRelatedContactMap, wishUserMap
             insert CaseTeamMemberList;
+            if(wishUserMap.size() > 0) {
+                List<ContactShare> contactToShareList = new List<ContactShare>();
+                for(Id caseId : wishUserMap.keySet()) {
+                    if(wishUserMap.containsKey(caseId)) {
+                        for(Id userId : wishUserMap.get(caseId)) {
+                            ContactShare shareContact = new ContactShare();
+                            shareContact.ContactAccessLevel = 'Read';
+                            if(wishRelatedContactMap.containsKey(caseId)) {
+                                shareContact.ContactId = wishRelatedContactMap.get(caseId);
+                            }
+                            if(volunteerUserMap.containsKey(userId)) {
+                                shareContact.UserOrGroupId = volunteerUserMap.get(userId);
+                            }
+                            contactToShareList.add(shareContact);
+                        }
+                    }
+                }
+                if(contactToShareList.size() > 0) {
+                    insert contactToShareList;
+                }
+            }        
         }
         List<Case> updateCaseList = new List<Case>();
         if(updateCaseMemberCount.size() > 0)

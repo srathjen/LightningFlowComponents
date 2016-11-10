@@ -62,6 +62,10 @@
                 <behavior>Edit</behavior>
                 <field>Private__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>File_Path__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

@@ -112,6 +112,14 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Inactive_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Inactive Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>LMS_Id__c</fullName>
         <description>This field is used to store the LMS Id for the Volunteers</description>
         <externalId>false</externalId>
@@ -180,6 +188,16 @@
         <fullName>ManagerId</fullName>
         <trackFeedHistory>true</trackFeedHistory>
         <type>Hierarchy</type>
+    </fields>
+    <fields>
+        <fullName>Year_of_Inactive__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(YEAR(Inactive_Date__c ))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Year of Inactive</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>dsfs__DSProSFMembershipStatus__c</fullName>
@@ -256,7 +274,6 @@
         <columns>CORE.USER_ROLE.NAME</columns>
         <columns>CORE.USERS.ACTIVE</columns>
         <columns>CORE.PROFILE.NAME</columns>
-        <columns>CORE.USERS.EMAIL</columns>
         <filterScope>Everything</filterScope>
         <label>All Users</label>
     </listViews>

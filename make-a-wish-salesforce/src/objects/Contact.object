@@ -109,7 +109,7 @@
     </compactLayouts>
     <enableFeeds>true</enableFeeds>
     <enableHistory>false</enableHistory>
-    <externalSharingModel>Read</externalSharingModel>
+    <externalSharingModel>Private</externalSharingModel>
     <fieldSets>
         <fullName>npsp__BDE_Entry_FS</fullName>
         <availableFields>
@@ -1675,6 +1675,15 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Adult_Emergency_Contact__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>It will define that this contact is Adult&apos;s emergency contact or not.</description>
+        <externalId>false</externalId>
+        <label>is Adult Emergency Contact</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Already_wish_granted_by_MAW_Other_Org__c</fullName>
         <description>Prior Wish Granted details</description>
         <externalId>false</externalId>
@@ -2430,6 +2439,44 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Communication__c</fullName>
+        <description>It will hold which type of communication can understand by child and this field will mapped from lead at the time of conversion</description>
+        <externalId>false</externalId>
+        <label>Communication</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Non-Verbal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Appropriate for chronological age</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sensorimotor (0-2 year old) stage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Preoperational (2-7 year old) stage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Concrete Operational (7-11 year old) stage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Formal Operational (11+ year old) stage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
         <fullName>Contact_Account_Name__c</fullName>
         <description>It will be used as a hidden field to store the contact&apos;s account name</description>
         <externalId>false</externalId>
@@ -2466,6 +2513,23 @@
         <scale>0</scale>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date_of_Wish_Assigned__c</fullName>
+        <description>Used to get the date of the wish that assigned to the volunteer</description>
+        <externalId>false</externalId>
+        <label>Date of Wish Assigned</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_of_last_engagement__c</fullName>
+        <externalId>false</externalId>
+        <label>Date of last engagement</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>Department</fullName>
@@ -2595,6 +2659,15 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Expiration_Date__c</fullName>
+        <description>It holds the License Expiration Date details.</description>
+        <externalId>false</externalId>
+        <label>Expiration Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Fax</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
@@ -2605,6 +2678,17 @@
         <formula>FirstName+&apos; &apos;+LEFT(LastName,1)</formula>
         <label>First + Last Initial</label>
         <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>First_Recipient_Name__c</fullName>
+        <description>This field will capture the mane of the 1st recipient</description>
+        <externalId>false</externalId>
+        <label>First Recipient Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -2663,6 +2747,37 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
+        <fullName>Hidden_Country__c</fullName>
+        <externalId>false</externalId>
+        <label>Country</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Email__c</fullName>
+        <description>This field is used as hidden to update the contact email from volunteer portal</description>
+        <externalId>false</externalId>
+        <label>Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_First_Name__c</fullName>
+        <description>This field is used as hidden to update the contact first name from volunteer portal</description>
+        <externalId>false</externalId>
+        <label>First Name</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_Is_We_Need_To_Expedite_The_Proces__c</fullName>
         <description>This field is used to send the email to the wish child owner based on the value.</description>
         <externalId>false</externalId>
@@ -2681,6 +2796,80 @@
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Hidden_Last_Name__c</fullName>
+        <description>This field is used as hidden to update the contact last name from volunteer portal</description>
+        <externalId>false</externalId>
+        <label>Last Name</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Phone__c</fullName>
+        <description>This field is used as hidden to update the contact phone from volunteer portal</description>
+        <externalId>false</externalId>
+        <label>Phone</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Hidden_State__c</fullName>
+        <externalId>false</externalId>
+        <label>State</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Status__c</fullName>
+        <description>It store the Affiliation Object  Status field value</description>
+        <externalId>false</externalId>
+        <label>Hidden Status</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Street__c</fullName>
+        <description>This field is used as hidden to update the contact Street from volunteer portal</description>
+        <externalId>false</externalId>
+        <label>Street</label>
+        <length>40</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Zip_Code__c</fullName>
+        <description>This field is used as hidden to update the contact Zip Code from volunteer portal</description>
+        <externalId>false</externalId>
+        <label>Zip Code</label>
+        <length>10</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_city__c</fullName>
+        <description>This field is used as hidden to update the contact city from volunteer portal</description>
+        <externalId>false</externalId>
+        <label>City</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Hobby__c</fullName>
@@ -2774,6 +2963,19 @@
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>If_yes_Enter_Org_Name_Wish_Date_it_was__c</fullName>
+        <description>If already wish granted, please indicate the organization&apos;s name, the wish,
+and the date it was or will be granted.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If already wish granted, please indicate the organization&apos;s name, the wish,
+and the date it was or will be granted.</inlineHelpText>
+        <label>If yes,Enter Org.Name,Wish&amp; Date it was</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
         <fullName>Interested_involved_with_Make_A_Wish__c</fullName>
         <description>It holds whether the user is interested and would be involved in Make-A-Wish?</description>
         <externalId>false</externalId>
@@ -2792,6 +2994,70 @@
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>IsContactInfoUpdated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>IsContactInfoUpdated</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsFirstParentGuardian__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This is Hidden field is used to Identify the first Parent Guardian to sign the docusign document.</description>
+        <externalId>false</externalId>
+        <label>IsFirstParentGuardian</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsParentGuardian__c</fullName>
+        <description>This check box is used to check parent guardian is signed or not. in docusign document.</description>
+        <externalId>false</externalId>
+        <label>IsParentGuardian</label>
+        <picklist>
+            <picklistValues>
+                <fullName>ParentGuardian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Participant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>IsRecall_Contact_Info__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used for update contact info approval process.</description>
+        <externalId>false</externalId>
+        <label>IsRecall Contact Info</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsRejected_Contact_Info__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used for update contact info approval process.</description>
+        <externalId>false</externalId>
+        <label>IsRejected Contact Info</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsSigned__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used as hidden to check the wish family contact has signed or not in the docusign document.</description>
+        <externalId>false</externalId>
+        <label>IsSigned</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Jigsaw</fullName>
@@ -2977,6 +3243,15 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Medical_Needs__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>It will define that wish participant requires medical needs or not.</description>
+        <externalId>false</externalId>
+        <label>Medical Needs</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Middle_Name__c</fullName>
         <description>It will hold the value of middle name.</description>
         <externalId>false</externalId>
@@ -3073,6 +3348,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Old_Update_Contact_Values__c</fullName>
+        <description>This field is used to trace the old and update values for the contact record</description>
+        <externalId>false</externalId>
+        <label>Old &amp; Update Contact Values</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
         <fullName>OtherAddress</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
@@ -3084,7 +3369,7 @@
         <fullName>Other__c</fullName>
         <description>It will capture the extra favorites of wish child</description>
         <externalId>false</externalId>
-        <label>Other</label>
+        <label>Other Favorites</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3106,6 +3391,15 @@
         <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Parent_Legal_Guardian__c</fullName>
+        <description>This field will used to store all related contact  in the relationship object record of the wish child</description>
+        <externalId>false</externalId>
+        <label>Parent/Legal Guardian</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Part_A_Received__c</fullName>
@@ -3284,6 +3578,7 @@
                 <fullName>Nurse Practitioner</fullName>
                 <default>false</default>
             </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
@@ -3481,6 +3776,34 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Recent_Task_Completed_Date__c</fullName>
+        <description>Used to hold the value of recent task completed date</description>
+        <externalId>false</externalId>
+        <label>Recent Task Completed Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Recently_Completed_Training_Date__c</fullName>
+        <description>Used to hold the recently completed training date</description>
+        <externalId>false</externalId>
+        <label>Recently Completed Training Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Recipient_Email__c</fullName>
+        <description>Test</description>
+        <externalId>false</externalId>
+        <label>Recipient Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Referral_Age__c</fullName>
         <description>It holds the details of Referral age (birthday date - leadcreationdate)</description>
         <externalId>false</externalId>
@@ -3512,15 +3835,15 @@ null)</formula>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
+                <fullName>Gaurdian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
                 <fullName>Sister</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
                 <fullName>Brother</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Guardian</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -3584,7 +3907,7 @@ null)</formula>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Neighbour</fullName>
+                <fullName>Neighbor</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -3626,15 +3949,56 @@ null)</formula>
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>Relationship_to_Wish_Child__c</fullName>
+        <description>It will capture Adult Emergency Contact Relationship to Wish Child</description>
+        <externalId>false</externalId>
+        <label>Relationship to Wish Child</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>ReportsToId</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Residing_with_Wish_child__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>It will indicate that participant is residing with wish child or not.</description>
+        <externalId>false</externalId>
+        <label>Residing with Wish child</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Restaurant__c</fullName>
         <description>It will hold the Restaurant details.</description>
         <externalId>false</externalId>
         <label>Restaurant</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Second_Recipient_Email__c</fullName>
+        <description>This field is used to capture the second recipient email for getting signature for wish receipt form</description>
+        <externalId>false</externalId>
+        <label>Second Recipient Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Second_Recipient_Name__c</fullName>
+        <description>This field is used to capture the name of the second recipient</description>
+        <externalId>false</externalId>
+        <label>Second Recipient Name</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4184,14 +4548,33 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>This_is_my_wish_because__c</fullName>
+        <description>It capture the Wish reason of a Wish Child.</description>
+        <externalId>false</externalId>
+        <label>This is my wish because…</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Timesheet_Date__c</fullName>
+        <description>Used to get the time sheet date</description>
+        <externalId>false</externalId>
+        <label>Timesheet Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Title</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
-        <fullName>Travel_Recommendation__c</fullName>
-        <description>It holds the travel recommendation for wish child</description>
+        <fullName>To_me_the_most_important_part_of_my_wish__c</fullName>
+        <description>It capture the Most Important part of Wish of the Wish Child.</description>
         <externalId>false</externalId>
-        <label>Travel Recommendation</label>
+        <label>To me,the most important part of my wish</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
@@ -4277,6 +4660,17 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <trackFeedHistory>false</trackFeedHistory>
         <type>MultiselectPicklist</type>
         <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Valid_D_L__c</fullName>
+        <description>License Number details</description>
+        <externalId>false</externalId>
+        <label>Valid D.L #</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Volunteer_Role__c</fullName>
@@ -4435,6 +4829,25 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>When_I_think_about_my_wish_I_imagine__c</fullName>
+        <description>It capture the Imagination details of Wish, when Wish Child think about it.</description>
+        <externalId>false</externalId>
+        <label>When I think about my wish, I imagine….</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>When_thinking_some_of_my_wish_ideas_were__c</fullName>
+        <description>It capture the details, what Wish Child thinks about some wish ideas.</description>
+        <externalId>false</externalId>
+        <label>When thinking,some of my wish ideas were</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Wish_Child_Id_Hidden__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>This field holds the ID of the Wish Child</description>
@@ -4446,6 +4859,25 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Wish_Family_Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Wish Family Type</label>
+        <length>200</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Wish_Liability_IsSigned__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This hidden check box is used to Identify who are all signed the wish liability form.</description>
+        <externalId>false</externalId>
+        <label>Wish Liability IsSigned.</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Work_Phone__c</fullName>
@@ -4536,6 +4968,16 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <trackFeedHistory>false</trackFeedHistory>
         <type>MultiselectPicklist</type>
         <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Year__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(YEAR(DATEVALUE( CreatedDate )))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Year</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Zip_Employer__c</fullName>
@@ -5858,14 +6300,30 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <label>New Last Week</label>
     </listViews>
     <listViews>
-        <fullName>New_Today</fullName>
+        <fullName>NewThisWeek</fullName>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CONTACT.CREATED_DATE</field>
             <operation>equals</operation>
-            <value>TODAY</value>
+            <value>THIS_WEEK</value>
         </filters>
-        <label>New Today</label>
+        <label>New This Week</label>
+    </listViews>
+    <listViews>
+        <fullName>Volunteer_Contacts</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>CONTACT.TITLE</columns>
+        <columns>CONTACT.PHONE1</columns>
+        <columns>CONTACT.EMAIL</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CONTACT.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Contact.Volunteer_Contact</value>
+        </filters>
+        <label>Volunteer Contacts</label>
     </listViews>
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
     <recordTypes>
@@ -6074,6 +6532,33 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Communication__c</picklist>
+            <values>
+                <fullName>Appropriate for chronological age</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Concrete Operational %287-11 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Operational %2811%2B year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Verbal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preoperational %282-7 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sensorimotor %280-2 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Emergency_Contact_Relationship__c</picklist>
             <values>
                 <fullName>Child</fullName>
@@ -6169,6 +6654,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IsParentGuardian__c</picklist>
+            <values>
+                <fullName>ParentGuardian</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Participant</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -6529,10 +7025,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Guardian</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Half Brother</fullName>
                 <default>false</default>
             </values>
@@ -6546,10 +7038,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Mother</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Neighbour</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -7498,6 +7986,33 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Communication__c</picklist>
+            <values>
+                <fullName>Appropriate for chronological age</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Concrete Operational %287-11 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Operational %2811%2B year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Verbal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preoperational %282-7 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sensorimotor %280-2 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Emergency_Contact_Relationship__c</picklist>
             <values>
                 <fullName>Child</fullName>
@@ -7593,6 +8108,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IsParentGuardian__c</picklist>
+            <values>
+                <fullName>ParentGuardian</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Participant</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -7953,10 +8479,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Guardian</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Half Brother</fullName>
                 <default>false</default>
             </values>
@@ -7970,10 +8492,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Mother</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Neighbour</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -8969,6 +9487,33 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Communication__c</picklist>
+            <values>
+                <fullName>Appropriate for chronological age</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Concrete Operational %287-11 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Operational %2811%2B year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Verbal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preoperational %282-7 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sensorimotor %280-2 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Emergency_Contact_Relationship__c</picklist>
             <values>
                 <fullName>Child</fullName>
@@ -9064,6 +9609,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IsParentGuardian__c</picklist>
+            <values>
+                <fullName>ParentGuardian</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Participant</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -9424,10 +9980,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Guardian</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Half Brother</fullName>
                 <default>false</default>
             </values>
@@ -9441,10 +9993,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Mother</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Neighbour</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -10440,6 +10988,33 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Communication__c</picklist>
+            <values>
+                <fullName>Appropriate for chronological age</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Concrete Operational %287-11 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Operational %2811%2B year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Verbal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preoperational %282-7 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sensorimotor %280-2 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Emergency_Contact_Relationship__c</picklist>
             <values>
                 <fullName>Child</fullName>
@@ -10535,6 +11110,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IsParentGuardian__c</picklist>
+            <values>
+                <fullName>ParentGuardian</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Participant</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -10647,17 +11233,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Prof%2E</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Non_Verbal__c</picklist>
-            <values>
-                <fullName>No</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -10906,10 +11481,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Guardian</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Half Brother</fullName>
                 <default>false</default>
             </values>
@@ -10923,10 +11494,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Mother</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Neighbour</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -11922,6 +12489,33 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Communication__c</picklist>
+            <values>
+                <fullName>Appropriate for chronological age</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Concrete Operational %287-11 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Formal Operational %2811%2B year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Verbal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Preoperational %282-7 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sensorimotor %280-2 year old%29 stage</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Emergency_Contact_Relationship__c</picklist>
             <values>
                 <fullName>Child</fullName>
@@ -12017,6 +12611,17 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>IsParentGuardian__c</picklist>
+            <values>
+                <fullName>ParentGuardian</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Participant</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -12377,10 +12982,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
-                <fullName>Guardian</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Half Brother</fullName>
                 <default>false</default>
             </values>
@@ -12394,10 +12995,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Mother</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Neighbour</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -13203,10 +13800,9 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <lookupDialogsAdditionalFields>CONTACT.PHONE1</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>CONTACT.PHONE3</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>CONTACT.EMAIL</lookupDialogsAdditionalFields>
-        <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_STREET</lookupDialogsAdditionalFields>
-        <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_CITY</lookupDialogsAdditionalFields>
-        <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_STATE</lookupDialogsAdditionalFields>
-        <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_ZIP</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Work_Phone__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Interested_involved_with_Make_A_Wish__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Write__c</lookupDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>FULL_NAME</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE1</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE4</lookupPhoneDialogsAdditionalFields>
@@ -13219,12 +13815,11 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <searchResultsAdditionalFields>CONTACT.PHONE3</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTACT.PHONE1</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTACT.EMAIL</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>CONTACT.ADDRESS2_STREET</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>CONTACT.ADDRESS2_CITY</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>CONTACT.ADDRESS2_STATE</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>CONTACT.ADDRESS2_ZIP</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Work_Phone__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Interested_involved_with_Make_A_Wish__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Write__c</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Read</sharingModel>
+    <sharingModel>Private</sharingModel>
     <validationRules>
         <fullName>Contact_Birthdate_Validation</fullName>
         <active>false</active>

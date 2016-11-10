@@ -186,7 +186,7 @@ Public class PartAFormWrapper
      Public List<SelectOption> getventilatorList() {
      
          List<SelectOption> options = new List<SelectOption>();
-         options.add(new SelectOption('','Please Select That All Apply',true));
+         options.add(new SelectOption('','Please Select',true));
          options.add(new SelectOption('I am the treating provider for the ventilator','I am the treating provider for the ventilator'));
          options.add(new SelectOption('I am not the treating provider for the ventilator','I am not the treating provider for the ventilator'));
          return options;

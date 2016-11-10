@@ -25,12 +25,19 @@
         <value>30</value>
     </labels>
     <labels>
+        <fullName>Inkind_Reimbursement_Id</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Inkind&amp;Reimbursement Id</shortDescription>
+        <value>01I</value>
+    </labels>
+    <labels>
         <fullName>Instance_Url</fullName>
         <categories>It will hold the instance url</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Instance Url</shortDescription>
-        <value>https://na30.salesforce.com</value>
+        <value>https://cs52.salesforce.com</value>
     </labels>
     <labels>
         <fullName>Prospective_Volunteer</fullName>
@@ -54,6 +61,6 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Site Url</shortDescription>
-        <value>https://make-a-wish.force.com</value>
+        <value>https://mstdev-make-a-wish.cs52.force.com</value>
     </labels>
 </CustomLabels>

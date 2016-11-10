@@ -12,8 +12,8 @@ global class UpdateWishAssignmentBatch_AC implements Database.Batchable<sObject>
          Constant_AC  constant = new Constant_Ac();  
          integer d = 2;  
          Id parentWishRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
-         String query = 'SELECT Id,CaseNumber,isEmail__c,CreatedDate,Chapter_Name__c, Case_Member_Count__c FROM CASE WHERE ((Case_Member_Count__c < '+d+' OR Case_Member_Count__c = Null) ' + 
-                         ' OR (RecordTypeId = \''+parentWishRT+'\')) AND Chapter_Name__c != Null';
+         String query = 'SELECT Id,CaseNumber,isEmail__c,CreatedDate,ChapterName__c, ChapterName__r.Name,Case_Member_Count__c FROM CASE WHERE ((Case_Member_Count__c < '+d+' OR Case_Member_Count__c = Null) ' + 
+                         ' OR (RecordTypeId = \''+parentWishRT+'\')) AND ChapterName__c != Null';
                         
          System.debug('Query+++++++++++++++++++++++++++ ' + query);
          return Database.getQueryLocator(query);
@@ -27,10 +27,10 @@ global class UpdateWishAssignmentBatch_AC implements Database.Batchable<sObject>
         
         for(Case currCase : scope)
         {
-             if(currCase.Chapter_Name__c != Null)
+             if(currCase.ChapterName__c != Null)
                 {
                    caseIds.add(currCase.id);
-                   chapterNamesSet.add(currCase.Chapter_Name__c);
+                   chapterNamesSet.add(currCase.ChapterName__r.Name);
                 }
         }
         
@@ -86,28 +86,24 @@ global class UpdateWishAssignmentBatch_AC implements Database.Batchable<sObject>
             
             if(flag == True)
             {
-                System.debug('chapterMap.containsKey(currCase.chapter_name__c)++++++++++++++++++++++++++++ ' + chapterMap.containsKey(currCase.chapter_name__c));
-                if(chapterMap.containsKey(currCase.chapter_name__c))
+                
+                if(chapterMap.containsKey(currCase.chaptername__r.Name))
                 {
                    Date currDate;
-                   
-                   System.debug('chapterMap.get(currCase.chapter_name__c).Alert_for_Unassigned_Wishes__c+++++++++++++++++++++++ ' + chapterMap.get(currCase.chapter_name__c).Alert_for_Unassigned_Wishes__c);
-                   System.debug('chapterMap.get(currCase.chapter_name__c).id+++++++++++++++++++++++ ' + chapterMap.get(currCase.chapter_name__c).id);
-                  if(chapterMap.get(currCase.chapter_name__c).Alert_for_Unassigned_Wishes__c != Null)
+                  if(chapterMap.get(currCase.chaptername__r.Name).Alert_for_Unassigned_Wishes__c != Null)
                   { 
                        Date currentDate = Date.valueOf(currCase.CreatedDate);
                        currDate = date.newinstance(currentDate.year(), currentDate.month(), currentDate.day());
                       
-                       currDate =  (Date.valueOf(currDate)).addDays(integer.valueOf(chapterMap.get(currCase.chapter_name__c).Alert_for_Unassigned_Wishes__c));
+                       currDate =  (Date.valueOf(currDate)).addDays(integer.valueOf(chapterMap.get(currCase.chaptername__r.Name).Alert_for_Unassigned_Wishes__c));
                   }
-                  System.debug('currDate ++++++++++++++++++++++++++++++++++++++++++++++++++ ' + currDate);
-                  System.debug('todayDate++++++++++++++++++++++++++++++++++++++++++++++++++ ' + todayDate);
+                 
                    if(currDate == todayDate)
                    {
                        Case newCase = new Case();
                        newCase.id = currCase.id;
-                       newCase.VOlunteer_Manager_Name__c = chapterMap.get(currCase.chapter_name__c).Volunteer_Manager__r.Name;
-                       newCase.Volunteer_Manager_Email__c = chapterMap.get(currCase.chapter_name__c).Volunteer_Manager__r.Email;
+                       newCase.VOlunteer_Manager_Name__c = chapterMap.get(currCase.chaptername__r.Name).Volunteer_Manager__r.Name;
+                       newCase.Volunteer_Manager_Email__c = chapterMap.get(currCase.chaptername__r.Name).Volunteer_Manager__r.Email;
                        newCase.isEmail__c = True;
                        updateCaseList.add(newCase);
                    }

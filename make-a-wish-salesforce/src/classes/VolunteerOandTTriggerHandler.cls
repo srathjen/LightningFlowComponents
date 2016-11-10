@@ -166,6 +166,7 @@ Public class VolunteerOandTTriggerHandler
                Contact updatecon = new Contact();
                updateCon.id = currContactId;
                updateCon.Last_Continuing_Edu_Date__c= Date.Today();
+               updateCon.Date_of_last_engagement__c = Date.Today();
                if(activeContactIdsSet.size() > 0)
                {
                  if(activeContactIdsSet.contains(currContactId))

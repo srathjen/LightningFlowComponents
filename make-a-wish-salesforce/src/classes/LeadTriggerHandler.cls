@@ -246,7 +246,11 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     if(conMap.containsKey(convertLeads.getcontactId()))
                     {
                         newcase.ownerId = conMap.get(convertLeads.getcontactId()).ownerId;
-                        newCase.Chapter_Name__c = conMap.get(convertLeads.getcontactId()).chapter_Name__c;
+                       //newCase.Chapter_Name__c = conMap.get(convertLeads.getcontactId()).chapter_Name__c;
+                        newCase.ChapterName__c = LeadMap.get(convertLeads.getLeadId()).chapterName__c;
+                        newCase.Hidden_Primary_Diagnosis__c = LeadMap.get(convertLeads.getLeadId()).Primary_Diagnosis__c;
+                        
+                        System.debug('Parent Wishes 123' + LeadMap.get(convertLeads.getLeadId()).chapterName__c);
                     }
                     newcase.AccountId = convertLeads.getAccountId();
                     
@@ -558,9 +562,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
                     newRelationShip.npe4__Contact__c = convertedConId;
                     newRelationShip.npe4__Type__c = 'Medical Professional';
-                    
                     newRelationShip.Qualifying_Medical_Professional__c = true;
-                    
                     newRelationShip.npe4__RelatedContact__c = proccessSameContact.Id;
                     newRelationShip.npe4__Status__c = 'Active';
                     relationList.add(newRelationShip);
@@ -819,7 +821,6 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             case newcase = new case();
             newCase.status = 'Open';
             newCase.origin = 'Email';
-            newCase.Subject = 'Medical Eligibility Review';
             newCase.recordTypeId = partARecordTypeId;
             newCase.OwnerId = processLead.OwnerId;
             newCase.Lead__c = processLead.id;

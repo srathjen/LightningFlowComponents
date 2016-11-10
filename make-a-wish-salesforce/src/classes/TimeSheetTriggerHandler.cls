@@ -182,4 +182,56 @@ public class TimeSheetTriggerHandler{
         
         update nonwishMap.values();
     }
+  /*  public Static void findRecentTimeSheetDate(Map<Id,Time_sheet__c> timeSheetMap){ 
+        System.debug('>>>>>>>timeSheetMap'+timeSheetMap);
+        Id volunteerUserId = userInfo.getUserId();
+        List<Contact> volunteerInfoUpdate = new List<Contact>();
+        Set<Id> volunteerIdsSet = new Set<Id>();
+        Constant_AC  constant = new Constant_AC();
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        
+        for(Time_sheet__c getVolunteerInfo : [SELECT Id, Volunteer_Opportunity__r.Volunteer_Name__c FROM Time_sheet__c WHERE Id IN : timeSheetMap.keySet()]) {
+            volunteerIdsSet.add(getVolunteerInfo.Volunteer_Opportunity__r.Volunteer_Name__c);
+        }
+        
+        Map<Id,Date> volunteerRecentDateMap = new Map<Id, Date>();
+        for(AggregateResult getRecentTimeSheet : [SELECT MAX(Date__c) maxTimeDate, Volunteer_Opportunity__r.Volunteer_Name__c volunteerName FROM Time_sheet__c WHERE Volunteer_Opportunity__r.Volunteer_Name__c IN : volunteerIdsSet GROUP BY Volunteer_Opportunity__r.Volunteer_Name__c]) {
+            volunteerRecentDateMap.put((Id)getRecentTimeSheet.get('volunteerName'), (Date)getRecentTimeSheet.get('maxTimeDate'));
+        }
+        for(Contact updateTimeSheetInfo : [SELECT Id, Timesheet_Date__c, RecordTypeId FROM Contact WHERE RecordTypeId =: volunteerRecordTypeId]) {
+            if(volunteerRecentDateMap.containsKey(updateTimeSheetInfo.Id)) {
+                updateTimeSheetInfo.Timesheet_Date__c = volunteerRecentDateMap.get(updateTimeSheetInfo.Id);
+                volunteerInfoUpdate.add(updateTimeSheetInfo);
+            }
+             
+        }
+        if(volunteerInfoUpdate.size() > 0) {
+            update volunteerInfoUpdate;
+        }
+    } */
+    
+     public Static void findRecentTimeSheetDate(Set<Id> timeSheetIds){ 
+      
+      //  Id volunteerUserId = userInfo.getUserId();
+        List<Contact> volunteerInfoUpdate = new List<Contact>();
+     
+        
+       for(Time_sheet__c currRec : [SELECT Id,Date__c,Volunteer_Opportunity__r.Volunteer_Name__c,
+                                             Volunteer_Opportunity__r.Volunteer_Name__r.Date_of_last_engagement__c 
+                                             FROM Time_sheet__c WHERE Id IN : timeSheetIds]) {
+            if(currRec.Volunteer_Opportunity__r.Volunteer_Name__r.Date_of_last_engagement__c== Null || currRec.Volunteer_Opportunity__r.Volunteer_Name__r.Date_of_last_engagement__c < currRec.Date__c)  
+            {                               
+                Contact updateContact = new Contact();
+                updateContact.id = currRec.Volunteer_Opportunity__r.Volunteer_Name__c;
+                updateContact.Date_of_last_engagement__c = currRec.Date__c;
+                volunteerInfoUpdate.add(updateContact);
+                
+            }
+        }
+                if(volunteerInfoUpdate.size() > 0)
+                  update volunteerInfoUpdate;
+      
+    }
+    
+  
 }

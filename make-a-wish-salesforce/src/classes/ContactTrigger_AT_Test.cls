@@ -108,4 +108,100 @@ public class ContactTrigger_AT_Test{
          update dbContact;
        }
      }
+     
+     public testmethod static void updatewishChildContactInfo(){
+         
+        Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
+        
+        Contact updateCon = new Contact();
+        updateCon.Hidden_First_Name__c  = 'Chandra';
+        updateCon.Hidden_Last_Name__c  = 'Sekar';
+        updateCon.Hidden_Phone__c = '8056913402';
+        updateCon.Hidden_Email__c  = 'testmst@gmail.com';
+        updateCon.Hidden_Street__c = 'North Street';
+        updateCon.Hidden_city__c = 'Chennai';
+        updateCon.Hidden_State__c = 'Alabama';
+        updateCon.Hidden_Country__c =  'United States';
+        updateCon.Hidden_Zip_Code__c = '621010';
+        updateCon.IsContactInfoUpdated__c = true;
+        updateCon.Id = childCon.Id;
+        update updateCon;
+     }
+     
+      public testmethod static void RecallWishChildContactInfo(){
+         
+        Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
+        Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
+        npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);
+        
+        Contact updateConFamily = new Contact();
+        updateConFamily.Hidden_First_Name__c  = 'Chandra';
+        updateConFamily.Hidden_Last_Name__c  = 'Sekar';
+        updateConFamily.Hidden_Phone__c = '8056913402';
+        updateConFamily.Hidden_Email__c  = 'testmst@gmail.com';
+        updateConFamily.Hidden_Street__c = 'North Street';
+        updateConFamily.Hidden_city__c = 'Chennai';
+        updateConFamily.Hidden_State__c = 'Alabama';
+        updateConFamily.Hidden_Country__c =  'United States';
+        updateConFamily.Hidden_Zip_Code__c = '621010';
+        updateConFamily.IsContactInfoUpdated__c = true;
+        updateConFamily.Id = childFamily.Id;
+        update updateConFamily;
+        
+        
+        Contact updateCon = new Contact();
+        updateCon.Email = 'kanagu431@gmail.com';
+        updateCon.IsContactInfoUpdated__c = true;
+        updateCon.Id = childCon.Id;
+        update updateCon;
+     }
+     
+     public testmethod static void updatewishChildRecall(){
+         
+        Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
+        Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
+        npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);
+        
+        Contact updateCon = new Contact();
+        updateCon.Hidden_First_Name__c  = 'Chandra';
+        updateCon.Hidden_Last_Name__c  = 'Sekar';
+        updateCon.Hidden_Phone__c = '8056913402';
+        updateCon.Hidden_Email__c  = 'testmst@gmail.com';
+        updateCon.Hidden_Street__c = 'North Street';
+        updateCon.Hidden_city__c = 'Chennai';
+        updateCon.Hidden_State__c = 'Alabama';
+        updateCon.Hidden_Country__c =  'United States';
+        updateCon.Hidden_Zip_Code__c = '621010';
+        updateCon.IsRejected_Contact_Info__c = true;
+        updateCon.Id = childCon.Id;
+        update updateCon;
+     }
+     
+      public testmethod static void RecallWishFamilyContactInfo(){
+         
+        Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
+        Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
+        npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);
+        
+        Contact updateConFamily = new Contact();
+        updateConFamily.Hidden_First_Name__c  = 'Chandra';
+        updateConFamily.Hidden_Last_Name__c  = 'Sekar';
+        updateConFamily.Hidden_Phone__c = '8056913402';
+        updateConFamily.Hidden_Email__c  = 'testmst@gmail.com';
+        updateConFamily.Hidden_Street__c = 'North Street';
+        updateConFamily.Hidden_city__c = 'Chennai';
+        updateConFamily.Hidden_State__c = 'Alabama';
+        updateConFamily.Hidden_Country__c =  'United States';
+        updateConFamily.Hidden_Zip_Code__c = '621010';
+        updateConFamily.IsContactInfoUpdated__c = true;
+        updateConFamily.Id = childFamily.Id;
+        update updateConFamily;
+        
+        
+        Contact updateCon = new Contact();
+        updateCon.Email = 'kanagu431@gmail.com';
+        updateCon.IsRejected_Contact_Info__c = true;
+        updateCon.Id = childCon.Id;
+        update updateCon;
+     }
 }

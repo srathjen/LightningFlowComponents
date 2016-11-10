@@ -32,7 +32,6 @@
             </section>
         </div>
     </footer>
-    
     <!-- core js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
@@ -43,7 +42,7 @@
     <script>$.each(document.styleSheets, function(i,sheet){ if(sheet.href=='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css') {var rules = sheet.rules ? sheet.rules : sheet.cssRules; if (rules.length == 0) { $('<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css" />').appendTo('head');} } });</script>
     <!-- validate forms -->
     <script src="{!URLFOR($Resource.prospective_assets,'web/js/jquery.validate.min.js')}"></script>
-    
+
     <script src="https://use.fontawesome.com/56a1d2ef02.js"></script>
     <script>
         (function ($, root, undefined) {
@@ -54,7 +53,7 @@
             //   'use strict';
             //   $("span > footer, span > section, span > header").unwrap();
             //}unwrapParent();
-            
+
             // write current year
             var currYear = new Date().getFullYear();
             $(".current-year").text(currYear);

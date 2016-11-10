@@ -9,7 +9,8 @@ public class UserTrigger_AT_Test {
     
    /*This method is used to create a system Addmin user records*/
     @testSetup static void setup(){   
-     OrientationandTrainingUtil.createrSystemAdminUser();
+         OrientationandTrainingUtil.createrSystemAdminUser();
+     
      }
      /*This method is used to create a prospectiv user records*/
      
@@ -38,5 +39,40 @@ public class UserTrigger_AT_Test {
          Test.StopTest();
          }
      }
+     
+     public testmethod static void updateUser(){
+            system.RunAs( new user(ID = UserInfo.getUserID())){
+            Account chapterAcc = OrientationandTrainingUtil.createVolunteerAccount();
+            Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+            Contact chapterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAcc.Id);
+            Contact chaptercontact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
+            Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon(); 
+            case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+            
+            case updatecase = new Case();
+            updatecase.isEmailWishGranter__c = true;
+            updatecase.InActiveWishGranter__c = 'test';
+            updatecase.Id = parentCase.Id;
+            update updateCase;
+            
+            //CaseTeamRole caseRole = OrientationandTrainingUtil.CreateCaseTeamRole();
+            CaseTeamRole role = [SELECT Id,Name FROM CaseTeamRole WHERE Name =: 'Wish Granter'];
+            User ArizonaVolunterrUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(chapterCon.Id);
+            User AlabamaVolunterrUser = OrientationandTrainingUtil.createVolunteerUser(chaptercontact .Id);
+            CaseTeamMember ArizonacasTemMember = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,ArizonaVolunterrUser.Id,role.Id);
+            CaseTeamMember AlabamacasTemMember = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,AlabamaVolunterrUser.Id,role.Id);
+            User queryAlabamaUser = [SELECT Id,IsActive from User WHERE Id =:AlabamaVolunterrUser.Id];
+            
+            user updateUser = new User();
+            updateUser.Id = queryAlabamaUser.Id;
+            updateUser.IsActive = false;
+            update updateUser;
+            }
+           
+           
+           
+     }
+     
+     
 
    }

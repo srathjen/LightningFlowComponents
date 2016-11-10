@@ -122,6 +122,15 @@
         <description>It holds the Chapter Name</description>
         <externalId>false</externalId>
         <label>Chapter Name</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Account.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Chapter</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
         <referenceTo>Account</referenceTo>
         <relationshipLabel>Chapter Action Tracks</relationshipLabel>
         <relationshipName>Chapter_Action_Tracks</relationshipName>
@@ -136,7 +145,19 @@
         <externalId>false</externalId>
         <label>Due Date</label>
         <precision>4</precision>
-        <required>true</required>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Months__c</fullName>
+        <externalId>false</externalId>
+        <label>Months</label>
+        <precision>3</precision>
+        <required>false</required>
         <scale>0</scale>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -192,29 +213,62 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Weeks__c</fullName>
+        <description>It holds week number for the task</description>
+        <externalId>false</externalId>
+        <label>Weeks</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Wish_type__c</fullName>
         <description>it holds the details of types of wish</description>
         <externalId>false</externalId>
         <label>Wish type</label>
         <picklist>
             <picklistValues>
-                <fullName>Cruise</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Disney</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>GKTW</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>International Travel</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
                 <fullName>Standard</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disney World</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Shopping Spree - Local and Travel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Travel - International</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cruise - Celebrity/Royal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cruise - Disney</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cruise - Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Travel - Hawai</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Travel - Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
                 <default>false</default>
             </picklistValues>
             <restrictedPicklist>true</restrictedPicklist>
@@ -228,15 +282,13 @@
     <label>Chapter Action Track</label>
     <listViews>
         <fullName>All</fullName>
-        <columns>Task_Name__c</columns>
         <columns>NAME</columns>
-        <columns>Assigned_To__c</columns>
-        <columns>Case_Type_Stage__c</columns>
+        <columns>Task_Name__c</columns>
         <columns>Chapter_Name__c</columns>
-        <columns>Due_Date__c</columns>
-        <columns>Recurring__c</columns>
         <columns>Sort_Order__c</columns>
         <columns>Wish_type__c</columns>
+        <columns>Months__c</columns>
+        <columns>Weeks__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

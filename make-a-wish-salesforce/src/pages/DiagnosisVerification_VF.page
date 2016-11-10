@@ -1,5 +1,5 @@
-<apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">  
-    
+<apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
+
     <style>
         .hideRow {display: none}
         .displayNone {display:none;}
@@ -8,7 +8,7 @@
         .vfHelpText a            {position:relative;}
         .vfHelpText a span       {display: none;}
         .vfHelpText a:hover span {display: block;position:absolute;right:-15em; width:15em;z-index:100;border:1px solid #006bb;background-color:#FEFDB9;color:black;}
-        
+
         .fadein-alert {-webkit-animation: fadein-alert .5s forwards; -moz-animation: fadein-alert .5s forwards; -o-animation: fadein-alert .5s forwards; animation: fadein-alert .5s forwards}
         .fadein {-webkit-animation: fadein .5s forwards; -moz-animation: fadein .5s forwards; -o-animation: fadein .5s forwards; animation: fadein .5s forwards}
         /* fadein-alert keyframes */
@@ -16,13 +16,13 @@
         @-webkit-keyframes fadein-alert {from {opacity:0; background: #ffbe00} to {opacity:1; background: transparent}}
         @-o-keyframes fadein-alert      {from {opacity:0; background: #ffbe00} to {opacity:1; background: transparent}}
         @keyframes fadein-alert         {from {opacity:0; background: #ffbe00} to {opacity:1; background: transparent}}
-        
+
         /* fadein keyframes */
         @-moz-keyframes fadein    {from {opacity:0; margin-top:-1rem} to {opacity:1; margin-top:0rem}}
         @-webkit-keyframes fadein {from {opacity:0; margin-top:-1rem} to {opacity:1; margin-top:0rem}}
         @-o-keyframes fadein      {from {opacity:0; margin-top:-1rem} to {opacity:1; margin-top:0rem}}
         @keyframes fadein         {from {opacity:0; margin-top:-1rem} to {opacity:1; margin-top:0rem}}
-        
+
         .statement-desc-patient {padding-top:1rem; padding-right:0}
         .ui-autocomplete {overflow-y: scroll; max-height:270px;}
         .ui-autocomplete-loading {
@@ -35,7 +35,7 @@
         .travel-wrap .form-group, .travel-wrap .form-check-label {margin-bottom:.5rem;}
         .travel-wrap label {display:block}
         .travel-wrap label + span {display:block; margin-bottom:1rem}
-        
+
         /* input.upload {background:#e9f3f9; border:1px solid #75b2d9;} */
         /* autocomplete drop-down */
         .ui-widget-content li {padding-left:.5rem}
@@ -44,12 +44,12 @@
         .field-word-seperator::after {content:"OR"; background:#fff; padding:0 1rem; position:absolute; left:43%; top:-.6rem; text-align:center; z-index:1}
         .form-group-seperator {margin-bottom:2rem}
         .no-diag {cursor:pointer; text-decoration: underline; color:#006bb6 !important}
-        
+
         .icd, .seperator-top {position:relative; border:#ccc dashed 1px; border-bottom:none; border-left:none; border-right:none}
         .icd legend {margin-top:1rem}
-        
-        .ques-complete {background:#e9f3f9; border:1px dotted #75b2d9;}     
-        .close-sd {position:absolute; top:1rem; right:1rem; color:#ccc; cursor:pointer}     
+
+        .ques-complete {background:#e9f3f9; border:1px dotted #75b2d9;}
+        .close-sd {position:absolute; top:1rem; right:1rem; color:#ccc; cursor:pointer}
         .close-sd:hover {color:#747678}
         .sweet-alert button.cancel {background:#006bb6}
         .sweet-alert button.cancel:hover {background:#006bb6; opacity:.9}
@@ -66,7 +66,7 @@
                     <nav class="col-xs-3 col-xs-offset-9 pre-nav" role="top_menubar"></nav>
                 </div>
                 <div class="row">
-                    <apex:outputLink styleClass="center-block maw-logo" value=""><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></apex:outputLink>    
+                    <apex:outputLink styleClass="center-block maw-logo" value=""><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></apex:outputLink>
                 </div>
                 <nav class="navbar navbar-dark sub-nav">
                     <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
@@ -74,21 +74,21 @@
                 </nav>
             </header>
         </span>
-        
+
         <main role="main" class="container">
             <div class="row">
                 <h1 class="col-md-12">Diagnosis Verification</h1>
             </div>
             <div class="row">
                 <section class="col-md-8">
-                    
+
                     <apex:pageMessages id="myMsg" />
-                    
+
                     <apex:form enctype="multipart/form-data" id="id1">
                         <!-- Part A from verificaton section -->
                         <apex:outputPanel id="credentialDetails">
                             <apex:pageBlock rendered="{!!login}" >
-                                
+
                                 <fieldset>
                                     <legend>Login</legend>
                                     <div class="form-group row">
@@ -101,20 +101,20 @@
                                 <fieldset class="footer">
                                     <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-4 col-md-push-8 btn-md" id="submit_password" value="View Form" action="{!submit}" rerender="credentialDetails,details,myMsg,uiStates,hide-SSbtn,findAndReplace"/>
                                 </fieldset>
-                                
+
                             </apex:pageBlock>
                         </apex:outputPanel>
-                        
+
                         <apex:outputPanel id="details">
                             <!-- Part A from detail section -->
-                            
+
                             <!-- <apex:pageblock > -->
                             <apex:pageblock rendered="{!login}">
-                                
+
                                 <apex:outputPanel id="wishStatusCheck">
                                     <input type="hidden" value="{!wishStatus}" class="wish"/>
                                 </apex:outputPanel>
-                                
+
                                 <fieldset>
                                     <legend>Child Information</legend>
                                     <div class="form-group row">
@@ -145,7 +145,7 @@
                                 <!-- provider -->
                                 <fieldset>
                                     <legend>Provider Information</legend>
-                                    
+
                                     <div class="form-group row">
                                         <div class="col-md-3"><label>Name</label></div>
                                         <div class="col-md-6">
@@ -156,9 +156,9 @@
                                         <div class="col-md-3"><label class="sr-only">Last Name</label></div>
                                         <div class="col-md-6">
                                             <apex:inputText value="{!wrapCls.treatingLName}" styleClass="form-control" html-placeholder="Last Name"/>
-                                        </div>  
+                                        </div>
                                     </div>
-                                    
+
                                     <div class="form-group row">
                                         <div class="col-md-3"><label>Phone</label></div>
                                         <div class="col-md-6">
@@ -171,7 +171,7 @@
                                             <apex:inputText value="{!wrapCls.treatingEmail}" id="pemail" styleClass="form-control" html-placeholder="your_email@domain.com"/>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="form-group row seperator-top" style="padding-top:1rem">
                                         <label class="col-md-12">Hospital or Treatment Facility</label>
                                         <div class="col-md-6">
@@ -179,7 +179,7 @@
                                             <input type="hidden" class="wish-Status" value="{!wishStatus}"/>
                                         </div>
                                     </div>
-                                    
+
                                     <apex:actionRegion >
                                         <div class="form-group row">
                                             <label class="col-md-12">I am recognized by my state to practice as a</label>
@@ -190,7 +190,7 @@
                                             </div>
                                         </div>
                                     </apex:actionRegion>
-                                    
+
                                     <apex:actionRegion >
                                         <div class="form-group row">
                                             <label class="col-md-12">I have direct knowledge of this patient's condition and I am part of the treating healthcare team</label>
@@ -205,7 +205,7 @@
                                 <!-- about -->
                                 <fieldset>
                                     <legend>About {!currLead.FirstName} {!currLead.LastName}</legend>
-                                    
+
                                     <apex:actionRegion >
                                         <div class="form-group row">
                                             <div class="col-md-12"><label>Is {!currLead.FirstName} {!currLead.LastName} in a comatose or vegetative state?</label></div>
@@ -218,8 +218,8 @@
                                             </div>
                                         </div>
                                     </apex:actionRegion>
-                                    
-                                    
+
+
                                     <apex:actionRegion >
                                         <apex:outputPanel id="radioButtonBlock">
                                             <div class="form-group row">
@@ -241,29 +241,29 @@
                                                 </div>
                                             </div>
                                             <script>
-                                            var sdp = '.statement-desc-patient ';
-                                            var sdpI = '.statement-desc-patient input:nth-child';
-                                            var sdpL = '.statement-desc-patient label:nth-child';
-                                            // remove generated table for clean markup/prep styling
-                                            $(sdp+'td').children().unwrap().unwrap().unwrap().unwrap().unwrap();
-                                            $(sdpI+'(0)').clone().prependTo(sdpL+'(1)');
-                                            $(sdpI+'(2)').clone().prependTo(sdpL+'(3)');
-                                            $(sdpI+'(4)').clone().prependTo(sdpL+'(5)');
-                                            $(sdpI+'(6)').clone().prependTo(sdpL+'(7)');
-                                            $(sdpI+'(8)').clone().prependTo(sdpL+'(9)');
-                                            $(sdpI+'(10)').clone().prependTo(sdpL+'(11)');
-                                            $(sdpI+'(12)').clone().prependTo(sdpL+'(13)');
-                                            $(sdpI+'(14)').clone().prependTo(sdpL+'(15)');
-                                            $(sdpI+'(16)').clone().prependTo(sdpL+'(17)');
-                                            // remove original inputs
-                                            $(sdp+'>input').remove();
-                                            $(sdp+'label').addClass('form-check-label');
-                                            $(sdp+'input').addClass('form-check-input');
-                                            </script>                                        
+                                            // var sdp = '.statement-desc-patient ';
+                                            // var sdpI = '.statement-desc-patient input:nth-child';
+                                            // var sdpL = '.statement-desc-patient label:nth-child';
+                                            // // remove generated table for clean markup/prep styling
+                                            // $(sdp+'td').children().unwrap().unwrap().unwrap().unwrap().unwrap();
+                                            // $(sdpI+'(0)').clone().prependTo(sdpL+'(1)');
+                                            // $(sdpI+'(2)').clone().prependTo(sdpL+'(3)');
+                                            // $(sdpI+'(4)').clone().prependTo(sdpL+'(5)');
+                                            // $(sdpI+'(6)').clone().prependTo(sdpL+'(7)');
+                                            // $(sdpI+'(8)').clone().prependTo(sdpL+'(9)');
+                                            // $(sdpI+'(10)').clone().prependTo(sdpL+'(11)');
+                                            // $(sdpI+'(12)').clone().prependTo(sdpL+'(13)');
+                                            // $(sdpI+'(14)').clone().prependTo(sdpL+'(15)');
+                                            // $(sdpI+'(16)').clone().prependTo(sdpL+'(17)');
+                                            // // remove original inputs
+                                            // $(sdp+'>input').remove();
+                                            // $(sdp+'label').addClass('form-check-label');
+                                            // $(sdp+'input').addClass('form-check-input');
+                                            </script>
                                         </apex:outputPanel>
                                     </apex:actionRegion>
                                 </fieldset>
-                                
+
                                 <!-------------------------- Primary Diagnosis Block Starts ---------------------------->
                                 <div class="step-two fadein-alert">
                                     <fieldset>
@@ -280,7 +280,7 @@
                                                 <div class="col-md-3"></div>
                                                 <div class="col-md-6"><span class="field-word-seperator"></span></div>
                                             </div>
-                                            
+
                                             <div class="form-group form-group-seperator row primaryDiagnosis">
                                                 <div class="col-md-3"><label>Diagnosis</label></div>
                                                 <div class="col-md-6">
@@ -291,9 +291,9 @@
                                         </apex:actionRegion>
                                         <apex:actionRegion >
                                             <apex:outputPanel id="primaryMedicalQuestionBlock">
-                                                
+
                                                 <apex:outputPanel rendered="{!wrapCls.displayMedicalQuestion}">
-                                                    
+
                                                     <apex:variable value="{!1}" var="rowNum"/>
                                                     <apex:repeat value="{!medicalPicklistValWrapper}" var="mq">
                                                         <apex:outputPanel rendered="{!AND(mq.order == 1, medicalPicklistValWrapper.size > 0)}" styleClass="pd-MqList">
@@ -322,11 +322,11 @@
                                                                         </div>
                                                                     </apex:outputPanel>
                                                                 </apex:outputPanel>
-                                                                
+
                                                             </div>
                                                             <apex:variable var="rowNum" value="{!rowNum + 1}"/>
                                                         </apex:outputPanel>
-                                                        
+
                                                     </apex:repeat>
                                                     <script>
                                                     if($('.searchDiagnosisId').val() != 'Total Parenteral Nutrition') {
@@ -337,7 +337,7 @@
                                                                 $(this).show();
                                                         });
                                                     }
-                                                    
+
                                                     </script>
                                                     <apex:actionFunction name="checkNxtQtn" action="{!groupQuestions}" reRender="wishStatusCheck,eligible,notEligible,popup,nextQtn,otherDiagnosis,medicalQuestionDiagnosis1Block,oDscript,btn-eligible,btn-notEliglible,btn-script,uiState">
                                                         <apex:param name="listOfCheckbox" assignTo="{!wrapCls.ansForQes}" value=""/>
@@ -346,8 +346,8 @@
                                             </apex:outputPanel>
                                         </apex:actionRegion>
                                         <!-------------------------- Primary Diagnosis Block Ends ---------------------------->
-                                        
-                                        
+
+
                                         <!-------------------------- Secondary Diagnosis1 Block Starts ---------------------------->
                                         <apex:actionRegion >
                                             <apex:outputPanel id="otherDiagnosis">
@@ -358,7 +358,7 @@
                                                             <div class="col-md-12">
                                                                 <label>Are there other diagnosis that would contribute to {!currLead.FirstName} {!currLead.LastName}'s eligibility for a wish?</label>
                                                             </div>
-                                                        </div>  
+                                                        </div>
                                                         <div class="form-group row">
                                                             <div class="col-md-3"><label>ICD Code</label></div>
                                                             <div class="col-md-6">
@@ -382,11 +382,11 @@
                                                                 <div class="col-md-12">
                                                                     <input type="button" onclick="al(this.id);" class="col-xs-12 col-sm-12 col-md-4 col-md-push-3 btn-md" value="No other Diagnosis"/>
                                                                 </div>
-                                                            </div> 
+                                                            </div>
                                                         </fieldset>
                                                     </div>
                                                 </apex:outputPanel>
-                                            </apex:outputPanel> 
+                                            </apex:outputPanel>
                                         </apex:actionRegion>
                                         <apex:actionRegion >
                                             <apex:outputPanel id="medicalQuestionDiagnosis1Block">
@@ -440,8 +440,8 @@
                                             </apex:outputPanel>
                                         </apex:actionRegion>
                                         <!-------------------------- Secondary Diagnosis1 Block Ends ---------------------------->
-                                        
-                                        
+
+
                                         <!-------------------------- Secondary Diagnosis2 Block Starts ---------------------------->
                                         <apex:outputPanel id="otherDiagnosis1">
                                             <apex:outputPanel rendered="{!wrapCls.otherDiagnosis1}">
@@ -474,7 +474,7 @@
                                                                 <div class="col-md-12">
                                                                     <input type="button" onclick="al(this.id);" class="col-xs-12 col-sm-12 col-md-4 col-md-push-3 btn-md" value="No other Diagnosis"/>
                                                                 </div>
-                                                            </div>  
+                                                            </div>
                                                         </fieldset>
                                                     </apex:actionRegion>
                                                 </div>
@@ -532,8 +532,8 @@
                                             </apex:outputPanel>
                                         </apex:actionRegion>
                                         <!-------------------------- Secondary Diagnosis2 Block Ends ---------------------------->
-                                        
-                                        
+
+
                                         <!-------------------------- Secondary Diagnosis3 Block Starts ---------------------------->
                                         <apex:outputPanel id="otherDiagnosis2">
                                             <apex:outputPanel rendered="{!wrapCls.otherDiagnosis2}">
@@ -541,7 +541,7 @@
                                                     <legend>Secondary Diagnosis 3</legend>
                                                     <div class="form-group row">
                                                         <div class="col-md-12"><label>Are there other diagnosis that would contribute to {!currLead.FirstName} {!currLead.LastName}'s eligibility for a wish?</label></div>
-                                                    </div>   
+                                                    </div>
                                                     <apex:actionRegion immediate="true">
                                                         <div class="form-group row">
                                                             <div class="col-md-3"><label>ICD Code</label></div>
@@ -566,7 +566,7 @@
                                                                 <div class="col-md-12">
                                                                     <input type="button" onclick="al(this.id);" class="col-xs-12 col-sm-12 col-md-4 col-md-push-3 btn-md" value="No other Diagnosis"/>
                                                                 </div>
-                                                            </div>  
+                                                            </div>
                                                         </fieldset>
                                                     </apex:actionRegion>
                                                 </div>
@@ -624,8 +624,8 @@
                                             </apex:outputPanel>
                                         </apex:actionRegion>
                                         <!-------------------------- Secondary Diagnosis3 Block Ends ---------------------------->
-                                        
-                                        
+
+
                                         <!-------------------------- Secondary Diagnosis4 Block Starts ---------------------------->
                                         <apex:outputPanel id="otherDiagnosis3">
                                             <apex:outputPanel rendered="{!wrapCls.otherDiagnosis3}">
@@ -660,7 +660,7 @@
                                                                 <div class="col-md-12">
                                                                     <input type="button" onclick="al(this.id);" class="col-xs-12 col-sm-12 col-md-4 col-md-push-3 btn-md" value="No other Diagnosis"/>
                                                                 </div>
-                                                            </div>  
+                                                            </div>
                                                         </fieldset>
                                                     </apex:actionRegion>
                                                 </div>
@@ -718,8 +718,8 @@
                                             </apex:outputPanel>
                                         </apex:actionRegion>
                                         <!-------------------------- Secondary Diagnosis4 Block Ends ---------------------------->
-                                        
-                                        
+
+
                                         <!-------------------------- Wish Eligible Section Block Starts ---------------------------->
                                         <apex:actionRegion >
                                             <apex:outputPanel id="eligible" layout="block">
@@ -729,7 +729,7 @@
                                             </apex:outputPanel>
                                         </apex:actionRegion>
                                         <!-------------------------- Wish Eligible Section Block Ends ---------------------------->
-                                        
+
                                         <div class="seperator-top" style="padding-top:1rem">
                                             <apex:actionRegion >
                                                 <div class="form-group row">
@@ -740,16 +740,16 @@
                                                             <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
                                                             <apex:selectOption itemLabel="No" itemValue="No"/>
                                                             <apex:selectOption itemLabel="Not Sure" itemValue="Not Sure"/>
-                                                        </apex:selectList>   
-                                                    </div>                                                
+                                                        </apex:selectList>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group row expedite-explain fadein-alert">
                                                     <div class="col-md-12"><label>Please explain</label></div>
                                                     <div class="col-md-6"><apex:inputTextarea styleClass="form-control plz-Exp" html-maxlength="10000" value="{!wrapCls.plzExplain}" /></div>
                                                 </div>
                                             </apex:actionRegion>
-                                            
-                                            
+
+
                                             <apex:actionRegion >
                                                 <div class="form-group row">
                                                     <div class="col-md-12"><label>Do you expect this child's condition will significantly deteriorate in the next 3-6 months? </label></div>
@@ -759,7 +759,7 @@
                                                             <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
                                                             <apex:selectOption itemLabel="No" itemValue="No"/>
                                                             <apex:selectOption itemLabel="Not Sure" itemValue="Not Sure"/>
-                                                        </apex:selectList>   
+                                                        </apex:selectList>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row condition-deteriorate-explain">
@@ -767,44 +767,44 @@
                                                     <div class="col-md-6"><apex:inputTextarea styleClass="form-control fadein-alert detex" html-maxlength="10000" value="{!explainDeteriorate}" /></div>
                                                 </div>
                                             </apex:actionRegion>
-                                            
+
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>In order to facilitate communication, please select all that apply to {!currLead.FirstName} {!currLead.LastName}</label></div>
                                                 <div class="col-md-6">
                                                     <apex:selectList value="{!communicationList}" multiselect="true" size="5" styleClass="form-control multi-lvl-one chosen multiCom">
                                                         <apex:selectOptions value="{!Communications}" />
-                                                    </apex:selectList>  
-                                                </div>                                                
-                                            </div>  
+                                                    </apex:selectList>
+                                                </div>
+                                            </div>
                                         </div>
-                                        
-                                        
+
+
                                         <apex:actionRegion >
                                             <apex:actionFunction name="notEligibleFunc" action="{!notEligibleWish}" reRender="notEligible,wishStatusCheck,btn-eligible,btn-notEliglible,eligible"/>
                                         </apex:actionRegion>
-                                        
+
                                         <apex:actionRegion >
                                             <apex:actionFunction name="saveMedInfo" action="{!SaveMedicalInfo}"/>
                                         </apex:actionRegion>
-                                        
-                                        
+
+
                                         <apex:actionRegion >
                                             <apex:actionFunction name="changeWishStatus" action="{!wishStatus}" reRender="notEligible,wishStatusCheck,eligible">
                                             </apex:actionFunction>
                                         </apex:actionRegion>
-                                        
+
                                         <apex:actionRegion >
                                             <apex:actionFunction name="epysyFunc" action="{!epilepsy}" reRender="otherDiagnosis,wishStatusCheck,eligible,otherDiagnosis1,oDscript,btn-eligible,btn-notEliglible,">
                                                 <apex:param name="epysyclass" assignto="{!epilepsyClass}" value=""/>
                                                 <apex:param name="epysyVal" assignto="{!epilepsyVal}" value=""/>
                                             </apex:actionFunction>
                                         </apex:actionRegion>
-                                        
+
                                         <!-------------------------- Wish Attachment Section Starts ---------------------------->
                                         <apex:actionRegion >
                                             <apex:outputPanel id="notEligible">
                                                 <apex:outputPanel rendered="{!wrapCls.notEligibleForWish}">
-                                                    
+
                                                     <div class="form-group row">
                                                         <div class="col-md-12"><label>Why do you feel {!currLead.FirstName} {!currLead.LastName} would be eligible for a wish?</label></div>
                                                         <div class="col-md-6">
@@ -819,7 +819,7 @@
                                                         <div class="col-md-12"><label>Medical Summary</label></div>
                                                         <div class="col-md-6">
                                                             <apex:inputFile value="{!newAttachment.body}" filename="{!newAttachment.name}" id="file" styleClass="form-control upload"/>
-                                                        </div> 
+                                                        </div>
                                                     </div>
                                                     <!--<span class="text-muted">{!medicalFileNames}</span>
                                                     <apex:outputPanel rendered="{!medicalSummaryDownloadPath != null}">
@@ -841,10 +841,10 @@
                                                     </apex:outputPanel>
                                                 </apex:outputPanel>
                                             </apex:outputPanel>
-                                        </apex:actionRegion> 
+                                        </apex:actionRegion>
                                         <!-------------------------- Wish Attachment Section Starts ---------------------------->
                                     </fieldset>
-                                    
+
                                     <!-------------------------- Travel Algorith Section Starts ---------------------------->
                                     <fieldset>
                                         <legend>Current conditions</legend>
@@ -852,7 +852,7 @@
                                         <div class="travel-wrap">
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Does {!currLead.FirstName} {!currLead.LastName} have any of the following conditions?</label> <span class="text-muted">(Please select all that apply)</span></div>
-                                            </div> 
+                                            </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label class="form-check-label">
                                                     <apex:inputCheckbox value="{!wrapcls.iamNotSure}" />I am not sure</label>
@@ -868,14 +868,14 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.airborne}"/>Airborne Viral Infections of High Mortality</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">    
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.surgeryinTwoMonths}" />Surgery in the past 2 months</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.pneumothorax}"/>Pneumothorax</label> 
+                                                    <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.pneumothorax}"/>Pneumothorax</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -893,12 +893,12 @@
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">   
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.oxygen}"/>Oxygen dependence at sea level</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">    
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.seaLevel}"/>Oxygen requirement >4L/min at sea level</label>
                                                 </div>
@@ -908,12 +908,12 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.longTermOxygen}"/>Long-term oxygen within last 6 months</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">    
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.respiratoryIllness}"/>Hospitalization for acute respiratory illness in the past 6 weeks</label>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox />Pulmonary hypertension</label>
@@ -928,7 +928,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            
+
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label class="form-check-label">
                                                     <apex:inputcheckbox value="{!wrapCls.ventilator}"/>Ventilator Dependence</label>
@@ -938,9 +938,9 @@
                                                         <apex:selectOptions value="{!wrapcls.ventilatorList}" />
                                                     </apex:selectList>
                                                 </div>
-                                            </div>    
-                                            
-                                            <div class="form-group row">    
+                                            </div>
+
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.angina}" />Chest Pain/Angina</label>
                                                 </div>
@@ -949,8 +949,8 @@
                                                         <apex:selectOptions value="{!wrapCls.anginaList}" />
                                                     </apex:selectList>
                                                 </div>
-                                            </div>    
-                                            <div class="form-group row">    
+                                            </div>
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.arrhythmia}" />Arrhythmia</label>
                                                 </div>
@@ -959,8 +959,8 @@
                                                         <apex:selectOptions value="{!wrapCls.ArrhythmiaList}" />
                                                     </apex:selectList>
                                                 </div>
-                                            </div> 
-                                            <div class="form-group row">    
+                                            </div>
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.heartFailure}" />Acute Heart Failure</label>
                                                 </div>
@@ -970,18 +970,18 @@
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">    
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.chronicHeartFailure}" />Chronic Heart Failure</label>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <apex:selectList value="{!wrapCls.chronicHeartFailureString}" styleclass="form-control multi" size="4" multiselect="true">
                                                         <apex:selectOptions value="{!wrapCls.chronicHeartFailureList}" />
-                                                    </apex:selectList>                                                      
+                                                    </apex:selectList>
                                                 </div>
                                             </div>
-                                            
-                                            <div class="form-group row">   
+
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.congenitalHeartDisease}" />Cyanotic Congenital Heart Disease</label>
                                                 </div>
@@ -991,12 +991,12 @@
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">    
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputCheckbox value="{!wrapCls.uncontrolledHypertension}" />Severe Uncontrolled Hypertension</label>
                                                 </div>
-                                            </div> 
-                                            
+                                            </div>
+
                                             <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.acuteoRChronicHepatitis}"/>Acute or Chronic Hepatitis</label>
@@ -1007,24 +1007,24 @@
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">    
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.portalHypertension}"/>Portal Hypertension</label>
                                                 </div>
-                                            </div> 
-                                            <div class="form-group row">   
+                                            </div>
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.heptopulmonarySyndrome}"/>Heptopulmonary Syndrome</label>
                                                 </div>
                                             </div>
-                                            
-                                            <div class="form-group row">   
+
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox />Chronic liver disease</label>
                                                 </div>
                                             </div>
-                                            
-                                            
+
+
                                             <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.liverDisease}"/>End Stage Liver Disease</label>
@@ -1034,7 +1034,7 @@
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.esophagealVarices}"/>Esophageal varices or history of</label>
                                                 </div>
-                                            </div>  
+                                            </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label">
@@ -1043,15 +1043,15 @@
                                                 <div class="col-md-6">
                                                     <apex:selectList value="{!wrapCls.pulmonaryHypertensionString}" styleclass="form-control c-select" size="1">
                                                         <apex:selectOptions value="{!wrapcls.pulmonaryHypertensionValues}"/>
-                                                    </apex:selectList> 
+                                                    </apex:selectList>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">    
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.intracranialPressure}"/>Increased Intracranial Pressure</label>
                                                 </div>
-                                            </div> 
-                                            <div class="form-group row">    
+                                            </div>
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.strokes}"/>Transient Ischemic Attacks or Strokes</label>
                                                 </div>
@@ -1060,9 +1060,9 @@
                                                         <apex:selectOptions value="{!wrapCls.StrokeValues}"/>
                                                     </apex:selectList>
                                                 </div>
-                                            </div>    
-                                            
-                                            <div class="form-group row">    
+                                            </div>
+
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.convulsiveDisorder}"/>Unstable or uncontrolled epilepsy, seizure disorder, convulsive disorder</label>
                                                 </div>
@@ -1077,17 +1077,17 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.panicDisorder}"/>Panic Disorder</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">    
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapcls.majorbleeding}"/>Major bleeding</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">    
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!wrapCls.symptomaticAnemia}" />Symptomatic Anemia</label>
                                                 </div>
                                             </div>
-                                            <div class="form-group row">    
+                                            <div class="form-group row">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputCheckbox value="{!wrapcls.sickleCellAnemia}" />Sickle Cell Anemia</label>
                                                 </div>
@@ -1100,10 +1100,10 @@
                                         </div>
                                     </fieldset>
                                     <!-------------------------- Travel Algorith Section Ends ---------------------------->
-                                    
-                                    
+
+
                                     <!-------------------------- Button block Starts ---------------------------->
-                                    
+
                                     <fieldset class="footer row">
                                         <div class="col-md-12">
                                             <apex:commandButton value="Save" style="border-right:1px solid #fff" styleClass="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md" action="{!SaveMedicalInfo1}"/>
@@ -1112,7 +1112,7 @@
                                     </fieldset>
                                 </div>
                                 <!-------------------------- Button block Ends ---------------------------->
-                                
+
                                 <apex:outputPanel id="popup">
                                     <apex:stylesheet value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.css')}"/>
                                     <apex:includeScript value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.js')}"/>
@@ -1129,14 +1129,14 @@
                                             closeOnCancel: true
                                         },
                                              function(isConfirm) {
-                                                 if (isConfirm) {        
+                                                 if (isConfirm) {
                                                      notEligibleFunc();
-                                                 } 
+                                                 }
                                              });
                                     }
                                     </script>
-                                </apex:outputPanel>  
-                                
+                                </apex:outputPanel>
+
                                 <apex:outputPanel id="uiStates">
                                     <script>
                                     function uiStates(){
@@ -1160,7 +1160,7 @@
                                         $(sdp+'>input').remove();
                                         $(sdp+'label').addClass('form-check-label');
                                         $(sdp+'input').addClass('form-check-input');
-                                        
+
                                         // travel section
                                         function travelLogic() {
                                             function cbLogic() {
@@ -1169,13 +1169,13 @@
                                                 var noneApply = $('.travel-wrap > div:last-child > div:nth-child(1) input');
                                                 var notSureMsg = $(notSure).parent().parent().children('span');
                                                 var noneApplyMsg = $(noneApply).parent().parent().children('span');
-                                                
+
                                                 function disabledMsg() {
                                                     $(notSure).add(noneApply).prop('disabled', true)
                                                     .parent().css('color', '#ccc')
                                                     .parent().append('<span class="text-muted">(Please uncheck current selections to enable this option)</span>');
                                                 }
-                                                
+
                                                 // add/remove message for "not sure" checkbox if other checkboxes are checked/unchecked
                                                 if ($(allCb).is(':checked') && $(notSure).is(':checked') == false && $(noneApply).is(':checked') == false) {
                                                     if ($(notSureMsg).add(noneApplyMsg).length === 0) {
@@ -1196,17 +1196,17 @@
                                                 }
                                             }
                                             cbLogic(); // show saved checked on pageload
-                                            
+
                                             // on checkbox change
                                             $('.travel-wrap > div > div:nth-child(1) input').change(function() {
                                                 var target = $(this).parents('.col-md-12').next();
                                                 var isChecked = $(this).is(':checked');
                                                 var tgtHiddenSibSel = $(target).children('select');
-                                                
+
                                                 $(target).toggleClass('sr-only');
                                                 $(target).find('.chosen-choices').trigger('click');
                                                 cbLogic();
-                                                
+
                                                 // reset select
                                                 if (!isChecked && !$(tgtHiddenSibSel).attr('multiple')) {
                                                     // single select
@@ -1216,9 +1216,9 @@
                                                     $(tgtHiddenSibSel).prop('selectedIndex', -1);
                                                     $(tgtHiddenSibSel).trigger('chosen:updated');
                                                 }
-                                                
+
                                             });
-                                            
+
                                             // show saved checkbox children
                                             $('.travel-wrap > div > div:nth-child(1) input').each(function() {
                                                 var tgtHiddenSib = $(this).parents('.col-md-12').next();
@@ -1231,28 +1231,28 @@
                                             });
                                         }
                                         travelLogic();
-                                        
-                                        
+
+
                                         $("[id$=pemail]").attr('type','email');
-                                        
+
                                         if (window.matchMedia("(min-width: 47.5rem)").matches) {
                                             $(".phonemask").mask("(999) 999-9999").attr('maxlength','15');
-                                        }  
+                                        }
                                         $('.multi-lvl-one').chosen({placeholder_text_multiple: "Please Select All That Apply", width:"100%"});
                                         $('.multi').chosen({placeholder_text_multiple: "Please Select All That Apply", width:"calc(100% - 2rem)"});
-                                        
+
                                         // hide/show step-two depending if input is checked
                                         if ($('.statement-desc-patient label input[type=radio]:checked').size() > 0){
                                             $('.step-two').prop('hidden', false);
                                         } else {
                                             $('.step-two').prop('hidden', true);
                                         }
-                                        
+
                                         // unhide all other questions after initial first questions are answered
                                         $('.statement-desc-patient label').click(function(){
                                             $('.step-two').prop('hidden', false);
                                         });
-                                        
+
                                         // hide expedite explain textbox onload
                                         $('.expedite-explain').prop('hidden', true);
                                         // show/hide expedite explain textbox
@@ -1262,7 +1262,7 @@
                                             } else if(this.value == 'No' || this.value == 'Not Sure') {
                                                 $('.plz-Exp').val("");
                                                 $('.expedite-explain').prop('hidden', true);
-                                                
+
                                             }
                                         });
                                         //display expedite explain if there is a value in expediteprocess on page load
@@ -1271,7 +1271,7 @@
                                                 $('.expedite-explain').prop('hidden', false);
                                             }
                                         }
-                                        
+
                                         // hide condition deteriorate explain textbox onload
                                         $('.condition-deteriorate-explain').prop('hidden', true);
                                         // show/hide condition deteriorate textbox
@@ -1281,7 +1281,7 @@
                                             } else if(this.value == 'No' || this.value == 'Not Sure') {
                                                 $('.detex').val("");
                                                 $('.condition-deteriorate-explain').prop('hidden', true);
-                                                
+
                                             }
                                         });
                                         //display condition-deteriorate-explain if there is a value in conditiondeteriorate on page load
@@ -1290,19 +1290,19 @@
                                                 $('.condition-deteriorate-explain').prop('hidden', false);
                                             }
                                         }
-                                        
+
                                         medQues();
                                     } uiStates();
                                     </script>
-                                </apex:outputPanel>                          
-                                
+                                </apex:outputPanel>
+
                             </apex:pageblock>
                         </apex:outputPanel>
                     </apex:form>
                 </section>
             </div>
         </main>
-        
+
         <span>
             <footer class="container-fluid">
                 <div class="container">
@@ -1327,49 +1327,49 @@
                 </div>
             </footer>
         </span>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
         <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js" integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE=" crossorigin="anonymous"></script>
         <!-- fallbacks -->
         <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.min.js')}"><\/script>')</script>
         <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/bootstrap.min.js')}"><\/script>')</script>
-        
+
         <!-- bootstrap -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min.js" integrity="sha384-ux8v3A6CPtOTqOzMKiuo3d/DomGaaClxFYdCu2HPMBEkf6x2xiDyJ7gkXU0MWwaD" crossorigin="anonymous"></script>
         <!-- bootstrap css fallback (appends to head) -->
         <script>$.each(document.styleSheets, function(i,sheet){ if(sheet.href=='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css') {var rules = sheet.rules ? sheet.rules : sheet.cssRules; if (rules.length == 0) { $('<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css" />').appendTo('head');} } });</script>
-        
+
         <!-- chosen select -->
             <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
-        
+
         <!-- masked input -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jq.maskedinput.min.js')}"></script>
-        
+
         <!-- validate forms -->
             <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
         <!-- validate form (additional methods) -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
-        
+
         <script>
             (function ($, root, undefined) {
                 // prepend meta/link tags before VF head output
                 $('head').prepend('<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta http-equiv="content-type" content="text/html; charset=utf-8" /><meta name="HandheldFriendly" content="True" /><meta name="MobileOptimized" content="480" /><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" /><meta http-equiv="cleartype" content="on" />');
-                $('style').before('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous" /><link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/><link rel="stylesheet" href="{!URLFOR($Resource.prospective_assets, 'web/css/chosen.min.css')}"/><link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.prospective_assets, 'web/css/core.css')}" media="all">');        
-                
+                $('style').before('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous" /><link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/><link rel="stylesheet" href="{!URLFOR($Resource.prospective_assets, 'web/css/chosen.min.css')}"/><link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.prospective_assets, 'web/css/core.css')}" media="all">');
+
             })(jQuery);
         </script>
-        
+
         <apex:outputPanel id="hide-SSbtn">
             <script>
-            
+
             // $('#SS-btn').hide();
             /*function buttonVisibility() {
                 if(($('.multiCom').val() == '') || ($('.exped-Process').val() == '') || ($('.detor-Proc').val() == '') || ($('.StateRecPick').val() == '') || ($('.VegetativePick').val() == '') || ($('.HealthCarePick').val() == '')) {
                         $('#SS-btn').hide();
                         $('#SR-btn').show();
-                        
-                    } 
+
+                    }
                     else {
                         $('#SS-btn').show();
                         $('#SR-btn').hide();
@@ -1379,15 +1379,15 @@
                 buttonVisibility();
                 $('.exped-Process,.detor-Proc,.multiCom,.StateRecPick,.HealthCarePick,.VegetativePick').on('change',buttonVisibility);
             });*/
-           
-            
+
+
             </script>
         </apex:outputPanel>
-        
+
         <apex:outputPanel id="findAndReplace">
             <script>
             //Find and Replace with Child Name
-            
+
             $(".malignantQues label, .otherDiagQues label, .otherDiagQues2 label, .otherDiagQues3 label, .otherDiagQues4 label").each(function(){
                 var text = $(this).text();
                 $(this).text(text.replace("[child's name]","{!currLead.FirstName} {!currLead.LastName}"));
@@ -1402,22 +1402,22 @@
             });
             </script>
         </apex:outputPanel>
-        
+
         <script>
-        
+
         /* Diagnosis Auto Complete Box*/
         var listOfQues = '';
-        
+
         $(document).delegate('.StateRecPick','change',function(event){
             if(this.value == 'None'){
-                
-                
+
+
                 swal({
                     title: "",
                     text: "This form is required to be completed by a state recognized physician, nurse practioner or physician assistant.",
                     showCancelButton: true,
                     confirmButtonColor: "#747678",
-                    cancelButtonText: "Change Selection & Continue",  
+                    cancelButtonText: "Change Selection & Continue",
                     confirmButtonText: "Cancel Submission",
                     closeOnConfirm: false,
                     closeOnCancel: true
@@ -1431,7 +1431,7 @@
                      });
             }
         });
-        
+
         function HealthCareTeam(healthcareTeam1) {
             if(healthcareTeam1 == 'No') {
                 swal({
@@ -1439,7 +1439,7 @@
                     text: "This form should be completed by someone with direct knowledge of the patient's condition and who is part of the treating healthcare team.",
                     showCancelButton: true,
                     confirmButtonColor: "#747678",
-                    cancelButtonText: "Change Selection & Continue",  
+                    cancelButtonText: "Change Selection & Continue",
                     confirmButtonText: "Cancel Submission",
                     closeOnConfirm: false,
                     closeOnCancel: true
@@ -1453,7 +1453,7 @@
                      });
             }
         }
-        
+
         function Comatose(comatose) {
             if(comatose == 'Yes') {
                 swal({
@@ -1461,7 +1461,7 @@
                     text: "Submissions should not be made for children in a comatose or vegatative state.",
                     showCancelButton: true,
                     confirmButtonColor: "#747678",
-                    cancelButtonText: "Change Selection & Continue",  
+                    cancelButtonText: "Change Selection & Continue",
                     confirmButtonText: "Cancel Submission",
                     closeOnConfirm: false,
                     closeOnCancel: true
@@ -1475,20 +1475,20 @@
                      });
             }
         }
-        
-        
+
+
         function warningBeforeClose(functionClassName) {
-            
-            swal({   title: "",   
-                  text: "Based on the responses provided, you are unable or ineligible to complete this form. Please contact chapter staff if you have any additional questions.",   
+
+            swal({   title: "",
+                  text: "Based on the responses provided, you are unable or ineligible to complete this form. Please contact chapter staff if you have any additional questions.",
                   showCancelButton: true,
-                  cancelButtonText: "Return to form & change response",  
+                  cancelButtonText: "Return to form & change response",
                   confirmButtonText: "Quit form",
                   confirmButtonColor: "#747678",
                   closeOnConfirm: true,
                   closeOnCancel: true
-                 }, function(isConfirm){   
-                     if (isConfirm) {        
+                 }, function(isConfirm){
+                     if (isConfirm) {
                          window.top.close();
                      } else {
                          $(functionClassName).prop('selectedIndex', 0);
@@ -1499,26 +1499,26 @@
             start(Patient);
         }
         </script>
-        
-        <script>      
-        
-        /* Medical Question Picklist Values Scripts*/  
-        
-        
+
+        <script>
+
+        /* Medical Question Picklist Values Scripts*/
+
+
         /******************* Primary Diagnosis Script Starts ****************************/
-        
+
         $(document).delegate('.diagnosisTextId','focus',function(event){
             PrimaryDiagnosis();
         });
         $(document).delegate('.searchDiagnosisId','focus',function(event){
             PrimaryDiagnosis();
         });
-        
+
         function PrimaryDiagnosis() {
             var PLACEHOLDER;
             var eventObjects;
             var queryTerm;
-            
+
             $('[id$=diagnosisTextId]').autocomplete({
                 minLength: 2,
                 source: function(request, response) {
@@ -1544,21 +1544,21 @@
                     $('[id$=shortTextId]').html( 'Description: '+ ui.item.Short_Description__c).text();
                     //uiStates();
                     if(typeof descName != 'undefined'){
-                        $('[id$=searchDiagnosisId]').val( ui.item.Condition_Description__r.Name);  
+                        $('[id$=searchDiagnosisId]').val( ui.item.Condition_Description__r.Name);
                         var ss = $('.searchDiagnosisId').html(ui.item.Condition_Description__r.Name).text();
                         $('[id$=searchDiagnosisId]').val( ss);
                         $('[id$=searchDiagnosisId]').prop('disabled',true);
                         checkEligible();
                     } else {
                         checkEligible();
-                        
+
                     }
                     return false;
                 },
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -1571,11 +1571,11 @@
                 {
                     $('[id$=searchDiagnosisId]').val('');
                     $('[id$=searchDiagnosisId]').prop('disabled',false);
-                    $('[id$=shortTextId]').text( ''); 
+                    $('[id$=shortTextId]').text( '');
                 }
-                
-            }); 
-            
+
+            });
+
             // Add or remove placeholder values
             $('[id$=diagnosisTextId]').val(PLACEHOLDER);
             $('[id$=diagnosisTextId]').on("focus",  function(event){
@@ -1592,7 +1592,7 @@
                     $tgt.addClass('placeHolder');
                 }
             });
-            
+
             $('[id$=searchDiagnosisId]').autocomplete({
                 minLength: 2,
                 source: function(request, response) {
@@ -1613,20 +1613,20 @@
                 select: function( event, ui ) {
                     $('[id$=diagnosisTextId]').val('');
                     $('[id$=diagnosisTextId]').prop('disabled',false);
-                    
-                    
-                    $('[id$=searchDiagnosisId]').val(ui.item.Name);  
-                    
-                    
-                    
-                    
+
+
+                    $('[id$=searchDiagnosisId]').val(ui.item.Name);
+
+
+
+
                     $('[id$=searchDiagnosisId]').val( ui.item.Name);
                     var descName = ui.item.Code_To_Use__c;
                     var ss1 = $('.searchDiagnosisId').html(ui.item.Name).text();
-                    $('[id$=searchDiagnosisId]').val(ss1);  
+                    $('[id$=searchDiagnosisId]').val(ss1);
                     //uiStates();
                     if(typeof descName != 'undefined'){
-                        
+
                         $('[id$=diagnosisTextId]').val( ui.item.Code_To_Use__c);
                         $('[id$=diagnosisTextId]').prop('disabled',true);
                         checkEligible();
@@ -1635,12 +1635,12 @@
                     }
                     return false;
                 },
-                
-                
+
+
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -1648,7 +1648,7 @@
                 .append( entry )
                 .appendTo( ul );
             };
-            
+
             // Add or remove placeholder values
             $('[id$=searchDiagnosisId]').val(PLACEHOLDER);
             $('[id$=searchDiagnosisId]').on("focus",  function(event){
@@ -1666,22 +1666,22 @@
                 }
             });
         }
-        
-        
+
+
         /******************* Secoundary Diagnosis1 Script Starts ****************************/
-        
+
         $(document).delegate('.diagnosisTextId1','focus',function(event){
             SecoundaryDiagnosis1();
         });
         $(document).delegate('.searchDiagnosisId1','focus',function(event){
             SecoundaryDiagnosis1();
         });
-        
+
         function SecoundaryDiagnosis1() {
             var PLACEHOLDER;
             var eventObjects;
             var queryTerm;
-            
+
             $('[id$=diagnosisTextId1]').autocomplete({
                 minLength: 2,
                 source: function(request, response) {
@@ -1707,7 +1707,7 @@
                     var descName = ui.item.Condition_Description__c;
                     //uiStates();
                     if(typeof descName != 'undefined'){
-                        $('[id$=searchDiagnosisId1]').val( ui.item.Condition_Description__r.Name);  
+                        $('[id$=searchDiagnosisId1]').val( ui.item.Condition_Description__r.Name);
                         var ss = $('.searchDiagnosisId1').html(ui.item.Condition_Description__r.Name).text();
                         $('[id$=searchDiagnosisId1]').val( ss);
                         $('[id$=searchDiagnosisId1]').prop('disabled',true);
@@ -1720,7 +1720,7 @@
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -1733,11 +1733,11 @@
                 {
                     $('[id$=searchDiagnosisId1]').val('');
                     $('[id$=searchDiagnosisId1]').prop('disabled',false);
-                    $('[id$=shortTextId1]').text( ''); 
+                    $('[id$=shortTextId1]').text( '');
                 }
-                
-            }); 
-            
+
+            });
+
             // Add or remove placeholder values
             $('[id$=diagnosisTextId1]').val(PLACEHOLDER);
             $('[id$=diagnosisTextId1]').on("focus",  function(event){
@@ -1753,8 +1753,8 @@
                     $tgt.val(PLACEHOLDER);
                     $tgt.addClass('placeHolder');
                 }
-            });       
-            
+            });
+
             $('[id$=searchDiagnosisId1]').autocomplete({
                 minLength: 2,
                 source: function(request, response) {
@@ -1779,28 +1779,28 @@
                     var descName = ui.item.Code_To_Use__c;
                     //uiStates();
                     var ss1 = $('.searchDiagnosisId1').html(ui.item.Name).text();
-                    $('[id$=searchDiagnosisId1]').val(ss1); 
+                    $('[id$=searchDiagnosisId1]').val(ss1);
                     if(typeof descName != 'undefined'){
-                        
-                        
-                        
+
+
+
                         $('[id$=diagnosisTextId1]').val( ui.item.Code_To_Use__c);
                         $('[id$=diagnosisTextId1]').prop('disabled',true);
-                        
-                        
-                        
+
+
+
                         checkEligible1();
                     } else {
-                        checkEligible1();    
+                        checkEligible1();
                     }
                     return false;
                 },
-                
-                
+
+
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -1808,7 +1808,7 @@
                 .append( entry )
                 .appendTo( ul );
             };
-            
+
             // Add or remove placeholder values
             $('[id$=searchDiagnosisId1]').val(PLACEHOLDER);
             $('[id$=searchDiagnosisId1]').on("focus",  function(event){
@@ -1826,22 +1826,22 @@
                 }
             });
         }
-        
-        
+
+
         /******************* Secoundary Diagnosis2 Script Starts ****************************/
-        
+
         $(document).delegate('.diagnosisTextId2','focus',function(event){
             SecondaryDiagnosis2();
         });
         $(document).delegate('.searchDiagnosisId2','focus',function(event){
             SecondaryDiagnosis2();
         });
-        
+
         function SecondaryDiagnosis2() {
             var PLACEHOLDER;
             var eventObjects;
             var queryTerm;
-            
+
             $('[id$=diagnosisTextId2]').autocomplete({
                 minLength: 2,
                 source: function(request, response) {
@@ -1863,11 +1863,11 @@
                     $('[id$=searchDiagnosisId2]').val('');
                     $('[id$=searchDiagnosisId2]').prop('disabled',false);
                     $('[id$=diagnosisTextId2]').val( ui.item.Name);
-                    $('[id$=shortTextId2]').html( 'Description: '+ ui.item.Short_Description__c).text(); 
+                    $('[id$=shortTextId2]').html( 'Description: '+ ui.item.Short_Description__c).text();
                     var descName = ui.item.Condition_Description__c;
                     //uiStates();
                     if(typeof descName != 'undefined'){
-                        $('[id$=searchDiagnosisId2]').val( ui.item.Condition_Description__r.Name);  
+                        $('[id$=searchDiagnosisId2]').val( ui.item.Condition_Description__r.Name);
                         var ss = $('.searchDiagnosisId2').html(ui.item.Condition_Description__r.Name).text();
                         $('[id$=searchDiagnosisId2]').val( ss);
                         $('[id$=searchDiagnosisId2]').prop('disabled',true);
@@ -1880,7 +1880,7 @@
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -1893,11 +1893,11 @@
                 {
                     $('[id$=searchDiagnosisId2]').val('');
                     $('[id$=searchDiagnosisId2]').prop('disabled',false);
-                    $('[id$=shortTextId2]').text( ''); 
+                    $('[id$=shortTextId2]').text( '');
                 }
-                
-            }); 
-            
+
+            });
+
             // Add or remove placeholder values
             $('[id$=diagnosisTextId2]').val(PLACEHOLDER);
             $('[id$=diagnosisTextId2]').on("focus",  function(event){
@@ -1914,8 +1914,8 @@
                     $tgt.addClass('placeHolder');
                 }
             });
-            
-            
+
+
             $('[id$=searchDiagnosisId2]').autocomplete({
                 minLength: 2,
                 source: function(request, response) {
@@ -1943,23 +1943,23 @@
                     var descName = ui.item.Code_To_Use__c;
                     //uiStates();
                     var ss1 = $('.searchDiagnosisId2').html(ui.item.Name).text();
-                    $('[id$=searchDiagnosisId2]').val(ss1);   
+                    $('[id$=searchDiagnosisId2]').val(ss1);
                     if(typeof descName != 'undefined'){
-                        
+
                         $('[id$=diagnosisTextId2]').val( ui.item.Code_To_Use__c);
                         $('[id$=diagnosisTextId2]').prop('disabled',true);
                         checkEligible2();
                     } else {
-                        checkEligible2();    
+                        checkEligible2();
                     }
                     return false;
                 },
-                
-                
+
+
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -1967,7 +1967,7 @@
                 .append( entry )
                 .appendTo( ul );
             };
-            
+
             // Add or remove placeholder values
             $('[id$=searchDiagnosisId2]').val(PLACEHOLDER);
             $('[id$=searchDiagnosisId2]').on("focus",  function(event){
@@ -1985,17 +1985,17 @@
                 }
             });
         }
-        
-        
+
+
         /******************* Secoundary Diagnosis3 Script Starts ****************************/
-        
+
         $(document).delegate('.diagnosisTextId3','focus',function(event){
             SecondaryDiagnosis3();
         });
         $(document).delegate('.searchDiagnosisId3','focus',function(event){
             SecondaryDiagnosis3();
         });
-        
+
         function SecondaryDiagnosis3(){
             var PLACEHOLDER;
             var eventObjects;
@@ -2025,7 +2025,7 @@
                     var descName = ui.item.Condition_Description__c;
                     //uiStates();
                     if(typeof descName != 'undefined'){
-                        $('[id$=searchDiagnosisId3]').val( ui.item.Condition_Description__r.Name);  
+                        $('[id$=searchDiagnosisId3]').val( ui.item.Condition_Description__r.Name);
                         var ss = $('.searchDiagnosisId3').html(ui.item.Condition_Description__r.Name).text();
                         $('[id$=searchDiagnosisId3]').val( ss);
                         $('[id$=searchDiagnosisId3]').prop('disabled',true);
@@ -2038,7 +2038,7 @@
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -2051,11 +2051,11 @@
                 {
                     $('[id$=searchDiagnosisId3]').val('');
                     $('[id$=searchDiagnosisId3]').prop('disabled',false);
-                    $('[id$=shortTextId3]').text( ''); 
+                    $('[id$=shortTextId3]').text( '');
                 }
-                
-            }); 
-            
+
+            });
+
             // Add or remove placeholder values
             $('[id$=diagnosisTextId3]').val(PLACEHOLDER);
             $('[id$=diagnosisTextId3]').on("focus",  function(event){
@@ -2072,7 +2072,7 @@
                     $tgt.addClass('placeHolder');
                 }
             });
-            
+
             $('[id$=searchDiagnosisId3]').autocomplete({
                 minLength: 2,
                 source: function(request, response) {
@@ -2102,20 +2102,20 @@
                     var ss1 = $('.searchDiagnosisId3').html(ui.item.Name).text();
                     $('[id$=searchDiagnosisId3]').val(ss1);
                     if(typeof descName != 'undefined'){
-                        
-                        
+
+
                         $('[id$=diagnosisTextId3]').val( ui.item.Code_To_Use__c);
                         $('[id$=diagnosisTextId3]').prop('disabled',true);
                         checkEligible3();
                     } else {
-                        checkEligible3();    
+                        checkEligible3();
                     }
                     return false;
                 },
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -2123,7 +2123,7 @@
                 .append( entry )
                 .appendTo( ul );
             };
-            
+
             // Add or remove placeholder values
             $('[id$=searchDiagnosisId3]').val(PLACEHOLDER);
             $('[id$=searchDiagnosisId3]').on("focus",  function(event){
@@ -2139,11 +2139,11 @@
                     $tgt.val(PLACEHOLDER);
                     $tgt.addClass('placeHolder');
                 }
-            });    
+            });
         }
-        
+
         /******************* Secoundary Diagnosis4 Script Starts ****************************/
-        
+
         $(document).delegate('.diagnosisTextId4','focus',function(event){
             SecondaryDiagnosis4();
         });
@@ -2179,12 +2179,12 @@
                     var descName = ui.item.Condition_Description__c;
                     //uiStates();
                     if(typeof descName != 'undefined'){
-                        
-                        $('[id$=searchDiagnosisId4]').val( ui.item.Condition_Description__r.Name);  
+
+                        $('[id$=searchDiagnosisId4]').val( ui.item.Condition_Description__r.Name);
                         var ss = $('.searchDiagnosisId4').html(ui.item.Condition_Description__r.Name).text();
                         $('[id$=searchDiagnosisId4]').val(ss);
                         $('[id$=searchDiagnosisId4]').prop('disabled',true);
-                        
+
                         checkEligible4();
                     } else {
                         checkEligible4();
@@ -2194,7 +2194,7 @@
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -2207,10 +2207,10 @@
                 {
                     $('[id$=searchDiagnosisId4]').val('');
                     $('[id$=searchDiagnosisId4]').prop('disabled',false);
-                    $('[id$=shortTextId4]').text( ''); 
+                    $('[id$=shortTextId4]').text( '');
                 }
-                
-            }); 
+
+            });
             // Add or remove placeholder values
             $('[id$=diagnosisTextId4]').val(PLACEHOLDER);
             $('[id$=diagnosisTextId4]').on("focus",  function(event){
@@ -2254,22 +2254,22 @@
                     var descName = ui.item.Code_To_Use__c;
                     //uiStates();
                     var ss1 = $('.searchDiagnosisId4').html(ui.item.Name).text();
-                    $('[id$=searchDiagnosisId4]').val(ss1);   
-                    
+                    $('[id$=searchDiagnosisId4]').val(ss1);
+
                     if(typeof descName != 'undefined'){
-                        
+
                         $('[id$=diagnosisTextId4]').val( ui.item.Code_To_Use__c);
                         $('[id$=diagnosisTextId4]').prop('disabled',true);
                         checkEligible4();
                     } else {
-                        checkEligible4();    
+                        checkEligible4();
                     }
                     return false;
                 },
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-                
+
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -2277,7 +2277,7 @@
                 .append( entry )
                 .appendTo( ul );
             };
-            
+
             // Add or remove placeholder values
             $('[id$=searchDiagnosisId4]').val(PLACEHOLDER);
             $('[id$=searchDiagnosisId4]').on("focus",  function(event){
@@ -2295,10 +2295,10 @@
                 }
             });
         }
-        
-        
+
+
         /******************* Medical Question general Script Starts ****************************/
-        
+
         $(document).delegate('.SS-btn','click',function(){
             if($('.wish').val() == 'Qualified' || $('.wish').val() == 'Not Qualified') {
                 saveMedInfo();
@@ -2311,16 +2311,16 @@
                     timer: 3000
                 })
             }
-            
+
         });
-        
-        
+
+
         $(document).delegate('.malignant','change',function(event){
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {
                 checkNxtQtn('ShowNext');
             } else if(this.value == 'Yes' || this.value == 'Hypertrophic Cardiomyopathy' || this.value == 'Restrictive Cardiomyopathy') {
                 checkNxtQtn('Yes');
-            } else if ( this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures' || this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures' 
+            } else if ( this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures' || this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures'
                        || this.value == 'Generalized idiopathic epilepsy and epileptic syndromes' || this.value == 'Lennox-Gastaut Syndrome' || this.value == 'Epileptic Spasms'){
                 $(".epilepsyRadio").show();
             } else if(this.value == 'None of these describe child'){
@@ -2328,25 +2328,25 @@
                 checkNxtQtn('ShowNext');
             } else if(this.value == 'No' || this.value == 'All other types of Cardiomyopathy' || this.value == 'I don\'t know' || this.value == 'None of these describe child'
                       || this.value == 'Short-term bridge' || this.value == 'Long-term therapy' || this.value == 'Hb-C' || this.value == 'Hb-SS' || this.value == 'Sickle-Cell Thalassemia' || this.value == 'Other Sickle-Cell Disorder') {
-                
+
                 if( $(this).parents('.pd-MqList').next().hasClass('pd-MqList')) {
                     $(this).parents('.pd-MqList').next('.pd-MqList').show();
                     changeWishStatus();
                 } else {
                     checkNxtQtn('ShowNext');
                 }
-                
+
             }
             event.stopImmediatePropagation();
             return false;
         });
-        
+
         $(document).delegate('.othPick','change',function(event){
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {
                 checkNxtQtn1('ShowNext');
             } else if(this.value == 'Yes' || this.value == 'Hypertrophic Cardiomyopathy' || this.value == 'Restrictive Cardiomyopathy') {
                 checkNxtQtn1('Yes');
-            } else if ( this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures' || this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures' 
+            } else if ( this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures' || this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures'
                        || this.value == 'Generalized idiopathic epilepsy and epileptic syndromes' || this.value == 'Lennox-Gastaut Syndrome' || this.value == 'Epileptic Spasms'){
                 $(".epilepsyRadio1").show();
             } else if(this.value == 'None of these describe child'){
@@ -2354,25 +2354,25 @@
                 checkNxtQtn1('ShowNext');
             } else if(this.value == 'No' || this.value == 'All other types of Cardiomyopathy' || this.value == 'I don\'t know' || this.value == 'None of these describe child'
                       || this.value == 'Short-term bridge' || this.value == 'Long-term therapy' || this.value == 'Hb-C' || this.value == 'Hb-SS' || this.value == 'Sickle-Cell Thalassemia' || this.value == 'Other Sickle-Cell Disorder') {
-                
+
                 if( $(this).parents('.par-Med').next().hasClass('par-Med')) {
                     $(this).parents('.par-Med').next('.par-Med').show();
                     changeWishStatus();
                 } else {
                     checkNxtQtn1('ShowNext');
                 }
-                
+
             }
             event.stopImmediatePropagation();
             return false;
         });
-        
+
         $(document).delegate('.othPick2','change',function(event){
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {
                 checkNxtQtn2('ShowNext');
             } else if(this.value == 'Yes' || this.value == 'Hypertrophic Cardiomyopathy' || this.value == 'Restrictive Cardiomyopathy') {
                 checkNxtQtn2('Yes');
-            } else if ( this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures' || this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures' 
+            } else if ( this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures' || this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures'
                        || this.value == 'Generalized idiopathic epilepsy and epileptic syndromes' || this.value == 'Lennox-Gastaut Syndrome' || this.value == 'Epileptic Spasms'){
                 $(".epilepsyRadio2").show();
             } else if(this.value == 'None of these describe child'){
@@ -2380,25 +2380,25 @@
                 checkNxtQtn2('ShowNext');
             } else if(this.value == 'No' || this.value == 'All other types of Cardiomyopathy' || this.value == 'I don\'t know' || this.value == 'None of these describe child'
                       || this.value == 'Short-term bridge' || this.value == 'Long-term therapy' || this.value == 'Hb-C' || this.value == 'Hb-SS' || this.value == 'Sickle-Cell Thalassemia' || this.value == 'Other Sickle-Cell Disorder') {
-                
+
                 if( $(this).parents('.par-Med1').next().hasClass('par-Med1')) {
                     $(this).parents('.par-Med1').next('.par-Med1').show();
                     changeWishStatus();
                 } else {
                     checkNxtQtn2('ShowNext');
                 }
-                
+
             }
             event.stopImmediatePropagation();
             return false;
         });
-        
+
         $(document).delegate('.othPick3','change',function(event){
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {
                 checkNxtQtn3('ShowNext');
             } else if(this.value == 'Yes' || this.value == 'Hypertrophic Cardiomyopathy' || this.value == 'Restrictive Cardiomyopathy') {
                 checkNxtQtn3('Yes');
-            } else if ( this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures' || this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures' 
+            } else if ( this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures' || this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures'
                        || this.value == 'Generalized idiopathic epilepsy and epileptic syndromes' || this.value == 'Lennox-Gastaut Syndrome' || this.value == 'Epileptic Spasms'){
                 $(".epilepsyRadio3").show();
             } else if(this.value == 'None of these describe child'){
@@ -2406,25 +2406,25 @@
                 checkNxtQtn3('ShowNext');
             } else if(this.value == 'No' || this.value == 'All other types of Cardiomyopathy' || this.value == 'I don\'t know' || this.value == 'None of these describe child'
                       || this.value == 'Short-term bridge' || this.value == 'Long-term therapy' || this.value == 'Hb-C' || this.value == 'Hb-SS' || this.value == 'Sickle-Cell Thalassemia' || this.value == 'Other Sickle-Cell Disorder') {
-                
+
                 if( $(this).parents('.par-Med2').next().hasClass('par-Med2')) {
                     $(this).parents('.par-Med2').next('.par-Med2').show();
                     changeWishStatus();
                 } else {
                     checkNxtQtn3('ShowNext');
                 }
-                
+
             }
             event.stopImmediatePropagation();
             return false;
         });
-        
+
         $(document).delegate('.othPick4','change',function(event){
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {
                 checkNxtQtn4('ShowNext');
             } else if(this.value == 'Yes' || this.value == 'Hypertrophic Cardiomyopathy' || this.value == 'Restrictive Cardiomyopathy') {
                 checkNxtQtn4('Yes');
-            } else if ( this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures' || this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures' 
+            } else if ( this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures' || this.value == 'Localization-related (focal) (partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures'
                        || this.value == 'Generalized idiopathic epilepsy and epileptic syndromes' || this.value == 'Lennox-Gastaut Syndrome' || this.value == 'Epileptic Spasms'){
                 $(".epilepsyRadio4").show();
             } else if(this.value == 'None of these describe child'){
@@ -2438,14 +2438,14 @@
                 } else {
                     checkNxtQtn4('ShowNext');
                 }
-                
+
             }
             event.stopImmediatePropagation();
             return false;
         });
-        
+
         /******************* Epilepsy Script Starts ****************************/
-        
+
         $(document).delegate('.epilepsyRadio','change',function(event){
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {
                 checkNxtQtn('ShowNext');
@@ -2459,7 +2459,7 @@
             event.stopImmediatePropagation();
             return false;
         });
-        
+
         $(document).delegate('.epilepsyRadio1','change',function(event){
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {
                 checkNxtQtn1('ShowNext');
@@ -2473,7 +2473,7 @@
             event.stopImmediatePropagation();
             return false;
         });
-        
+
         $(document).delegate('.epilepsyRadio2','change',function(event){
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {
                 checkNxtQtn2('ShowNext');
@@ -2487,7 +2487,7 @@
             event.stopImmediatePropagation();
             return false;
         });
-        
+
         $(document).delegate('.epilepsyRadio3','change',function(event){
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {
                 checkNxtQtn3('ShowNext');
@@ -2501,7 +2501,7 @@
             event.stopImmediatePropagation();
             return false;
         });
-        
+
         $(document).delegate('.epilepsyRadio4','change',function(event){
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {
                 checkNxtQtn4('ShowNext');
@@ -2515,8 +2515,8 @@
             event.stopImmediatePropagation();
             return false;
         });
-        
-        // medical questions (refractory dermatopolymyositis) show/hide 
+
+        // medical questions (refractory dermatopolymyositis) show/hide
         function medQues() {
             // secondary diagnosis 1
             var medSelect1sd1 = $('.showRowd1').children('.col-md-6').children('select');
@@ -2530,7 +2530,7 @@
             // secondary diagnosis 4
             var medSelect1sd4 = $('.showRowOthddd1').children('.col-md-6').children('select');
             var medSelect2sd4 = $('.showRowOthddd2').children('.col-md-6').children('select');
-            
+
             // secondary diagnosis 1
             $(medSelect1sd1).on('change', function(){
                 if (this.value == "No"){
@@ -2546,7 +2546,7 @@
                     $('.showRowd3').prop('hidden', true);
                 }
             });
-            
+
             // secondary diagnosis 2
             $(medSelect1sd2).on('change', function(){
                 if (this.value == "No"){
@@ -2562,7 +2562,7 @@
                     $('.showRowOthd3').prop('hidden', true);
                 }
             });
-            
+
             // secondary diagnosis 3
             $(medSelect1sd3).on('change', function(){
                 if (this.value == "No"){
@@ -2578,7 +2578,7 @@
                     $('.showRowOthdd3').prop('hidden', true);
                 }
             });
-            
+
             // secondary diagnosis 4
             $(medSelect1sd4).on('change', function(){
                 if (this.value == "No"){
@@ -2594,7 +2594,7 @@
                     $('.showRowOthddd3').prop('hidden', true);
                 }
             });
-            
+
         } medQues();
         </script>
     </body>

@@ -516,7 +516,6 @@
         <columns>RECORDTYPE</columns>
         <columns>Chapter_Name__c</columns>
         <columns>Volunteer_Role__c</columns>
-        <columns>Prompt_upon_Login__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

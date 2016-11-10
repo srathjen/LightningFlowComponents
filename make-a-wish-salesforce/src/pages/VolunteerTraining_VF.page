@@ -1,36 +1,40 @@
 <apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" controller="VolunteerTraining_AC" title="Make-A-Wish Communities | Training">
-    <head>
-        <apex:include pageName="prospective_head" id="phead" />
-        <script type="text/javascript">
-        function openLMS(ssoLink,courseLink) {
-            newwindow = window.open( ssoLink ,'openLMS');
-            setTimeout(
-                function(){
-                    window.newwindow.close();
-                    setTimeout(
-                        function(){
-                            window.open(courseLink, '_blank');
-                        }, 1);
-                    
-                }, 10);
-        }
-        
-        </script>
-    </head>
-    <style>
+    <apex:include pageName="prospective_head" id="phead"/>
+    <apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
+    <style type="text/css">
+        body > main {margin-bottom:4em; margin-bottom:4rem;}
+        .vcpactivelogin .table-maw {border:1px solid #e2e2e2; width:99%; margin:0}
+        .vcpactivelogin .table-maw td {vertical-align:middle}
+        .pad {overflow-x:auto}
+        table.dataTable thead .sorting, table.table thead th {padding-right:1rem}
         .messageCell h4{color:#066cb6}
-        .table-wrap {overflow-x:auto}
+        .dataTables_info {margin-bottom: 2rem; font-size: .75rem;}
+        .messageCell h4 {color: #066cb6}
+        .table-wrap {overflow-x: auto}
     </style>
+    <script type="text/javascript">
+        function openLMS(ssoLink, courseLink) {
+            newwindow = window.open(ssoLink, 'openLMS');
+            setTimeout(function () {
+                window.newwindow.close();
+                setTimeout(function () {
+                    window.open(courseLink, '_blank');
+                }, 1);
+
+            }, 10);
+        }
+    </script>
+
     <body class="vcp vcpactivelogin">
-        <apex:include pageName="prospective_header" id="pheader" />
-        
+        <apex:include pageName="prospective_header" id="pheader"/>
+
         <main role="main" class="container">
             <div class="row">
                 <section class="col-md-12">
                     <div class="row">
                         <h1 class="col-md-12">Training</h1>
                     </div>
-                    
+
                     <nav>
                         <ul class="step">
                             <li><a href="/VolunteerOrientation_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Orientation</a></li>
@@ -44,144 +48,146 @@
                             </apex:outputpanel>
                         </ul>
                     </nav>
-                    
+
                     <apex:form id="frm1" styleClass="col-md-12">
                         <div class="messages"><apex:pagemessages /></div>
-                        
-                        <apex:pageBlock title="Training Details">
-                            <apex:outputPanel rendered="{!(isTrainingExist == True)}"> 
-                                
-                                <p>You have registered for a volunteer training. 
-                                    Once you complete the training,you will receive an email and will be able to access the entire volunteer community.If you need to change your training day/time please cancel your existing registration and register for a new training.</p>
+
+                        <apex:pageBlock title="Available Training Details">
+                            <apex:outputPanel rendered="{!(isTrainingExist == True)}">
+                                <p>You have registered for a volunteer training. Once you complete the training,you will receive an email and will be able to access the entire volunteer community. If you need to change your training day/time please cancel your existing registration
+                                    and register for a new training.</p>
                             </apex:outputPanel>
-                            <apex:outputPanel rendered="{!(isCancelled == True)}"> 
+                            <apex:outputPanel rendered="{!(isCancelled == True)}">
                                 <h3>Cancelled</h3>
                                 <p>You have successfully cancelled for a registered Volunteer Training program</p>
                             </apex:outputPanel>
                             <apex:outputPanel rendered="{!If(checkExistProgram == true, false,true)}">
-                                
-                                <p> <strong>Registered Training Details </strong> </p>
                                 <div class="table-wrap">
                                     <table id="dataTab1" class="table table-maw table-hover">
-                                    <thead class="thead-default">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Chapter Name</th>
-                                            <th>Date</th>
-                                            <th>Start Time</th>
-                                            <th>End Time</th>
-                                            <th>Location</th>
-                                            <th>Max Capacity</th>
-                                            <th>Available Seats</th>
-                                            <th>Record Type</th>
-                                            <th>Action</th>
-                                            <th>LMS</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                    <tbody>
-                                        <apex:repeat value="{!TrainingRecordList}" var="training">
-                                           <apex:outputPanel rendered="{!(AND(training.volOppSize>0,training.status == 'Registered'))}">
-                                                <tr>
-                                                    <td>{!training.orientationName}</td>
-                                                    <td>{!training.chapterName}</td>
-                                                    <td>
-                                                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!training.orientationDate}" /></apex:outputText>
-                                                    </td>
-                                                    <td>{!training.startTime}</td>
-                                                    <td>{!training.endTime}</td>
-                                                    <td>{!training.location}</td>
-                                                    <td>{!training.maxCapacity}</td>
-                                                    <td>{!training.avilableSheets}</td>
-                                                    <td>{!training.recordType}</td>
-                                                    <td>   
-                                                        <apex:commandLink action="{!Cancel}">Cancel
-                                                            <apex:param name="trainingId" value="{!training.recordId}" assignTo="{!trainingId}"/>
-                                                        </apex:commandLink> 
-                                                    </td>
-                                                    <td>
-                                                        <apex:commandLink action="{!viewLMS}" oncomplete="openLMS('{!ssoURL}','{!courseURL}');"
-                                                                          rendered="{!(training.recordtypeId== classOffereningRecordtypeId)}">View Training 
-                                                            <apex:param name="lMSCourseId" value="{!training.courseId}" assignTo="{!lMSCourseId}"/>
-                                                        </apex:commandLink>
-                                                    </td>
-                                                </tr>
-                                            </apex:outputPanel>
-                                        </apex:repeat>
-                                    </tbody>
-                                </table>
+                                        <thead class="thead-default">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Chapter Name</th>
+                                                <th>Date</th>
+                                                <th>Start Time</th>
+                                                <th>End Time</th>
+                                                <th>Location</th>
+                                                <th>Max Capacity</th>
+                                                <th>Available Seats</th>
+                                                <th>Record Type</th>
+                                                <th>Action</th>
+                                                <th>LMS</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <apex:repeat value="{!TrainingRecordList}" var="training">
+                                                <apex:outputPanel rendered="{!(AND(training.volOppSize>0,training.status == 'Registered'))}">
+                                                    <tr>
+                                                        <td>{!training.orientationName}</td>
+                                                        <td>{!training.chapterName}</td>
+                                                        <td>
+                                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!training.orientationDate}"/></apex:outputText>
+                                                        </td>
+                                                        <td>{!training.startTime}</td>
+                                                        <td>{!training.endTime}</td>
+                                                        <td>{!training.location}</td>
+                                                        <td>{!training.maxCapacity}</td>
+                                                        <td>{!training.avilableSheets}</td>
+                                                        <td>{!training.recordType}</td>
+                                                        <td>
+                                                            <apex:commandLink action="{!Cancel}">Cancel
+                                                                <apex:param name="trainingId" value="{!training.recordId}" assignTo="{!trainingId}"/>
+                                                            </apex:commandLink>
+                                                        </td>
+                                                        <td>
+                                                            <apex:commandLink action="{!viewLMS}" oncomplete="openLMS('{!ssoURL}','{!courseURL}');" rendered="{!(training.recordtypeId== classOffereningRecordtypeId)}">View Training
+                                                                <apex:param name="lMSCourseId" value="{!training.courseId}" assignTo="{!lMSCourseId}"/>
+                                                            </apex:commandLink>
+                                                        </td>
+                                                    </tr>
+                                                </apex:outputPanel>
+                                            </apex:repeat>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </apex:outputPanel>
-                            
+
                             <apex:outputPanel id="myPanel">
-                                <p> <strong>Available Training Details </strong> </p>
                                 <div class="table-wrap">
                                     <table id="dataTab2" class="table table-maw table-hover">
-                                    <thead class="thead-default">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Chapter Name</th>
-                                            <th>Date</th>
-                                            <th>Start Time</th>
-                                            <th>End Time</th>
-                                            <th>Location</th>
-                                            <th>Max Capacity</th>
-                                            <th>Available Seats</th>
-                                            <th>Record Type</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                    <tbody>
-                                        <apex:repeat value="{!TrainingRecordList}" var="training">
-                                            
-                                             <apex:outputPanel rendered="{!OR(AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}">
-                                                <tr>
-                                                    
-                                                    <td>{!training.orientationName}</td>
-                                                    <td>{!training.chapterName}</td>
-                                                    <td>
-                                                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!training.orientationDate}" /></apex:outputText>
-                                                    </td>
-                                                    <td>{!training.startTime}</td>
-                                                    <td>{!training.endTime}</td>
-                                                    <td>{!training.location}</td>
-                                                    <td>{!training.maxCapacity}</td>
-                                                    <td>{!training.avilableSheets}</td>
-                                                    <td>{!training.recordType}</td>
-                                                    <td>   
-                                                        <apex:commandLink action="{!Register}">Register
-                                                            <apex:param name="trainingId" value="{!training.recordId}" assignTo="{!trainingId}"/>
-                                                        </apex:commandLink> 
-                                                    </td>
-                                                </tr>
-                                            </apex:outputPanel>
-                                        </apex:repeat>
-                                    </tbody>
-                                </table>
+                                        <thead class="thead-default">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Chapter Name</th>
+                                                <th>Date</th>
+                                                <th>Start Time</th>
+                                                <th>End Time</th>
+                                                <th>Location</th>
+                                                <th>Max Capacity</th>
+                                                <th>Available Seats</th>
+                                                <th>Record Type</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <apex:repeat value="{!TrainingRecordList}" var="training">
+
+                                                <apex:outputPanel rendered="{!OR(AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}">
+                                                    <tr>
+
+                                                        <td>{!training.orientationName}</td>
+                                                        <td>{!training.chapterName}</td>
+                                                        <td>
+                                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!training.orientationDate}"/></apex:outputText>
+                                                        </td>
+                                                        <td>{!training.startTime}</td>
+                                                        <td>{!training.endTime}</td>
+                                                        <td>{!training.location}</td>
+                                                        <td>{!training.maxCapacity}</td>
+                                                        <td>{!training.avilableSheets}</td>
+                                                        <td>{!training.recordType}</td>
+                                                        <td>
+                                                            <apex:commandLink action="{!Register}">Register
+                                                                <apex:param name="trainingId" value="{!training.recordId}" assignTo="{!trainingId}"/>
+                                                            </apex:commandLink>
+                                                        </td>
+                                                    </tr>
+                                                </apex:outputPanel>
+                                            </apex:repeat>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </apex:outputPanel>
                         </apex:pageBlock>
                         <div class="row">
                             <div class="col-md-12">
                                 <h3>Additional Information</h3>
-                                <apex:outputText value="{!orientationContent}" escape="false" />
+                                <p><apex:outputText value="{!orientationContent}" escape="false"/></p>
                             </div>
-                        </div> 
-                    </apex:form> 
-                    
+                        </div>
+                    </apex:form>
+
                 </section>
             </div>
         </main>
-        <apex:include pageName="prospective_footer" id="pfooter" />
+        <apex:include pageName="prospective_footer" id="pfooter"/>
+        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <!-- fallback -->
+        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, ' web/js/jquery.dataTables.min.js ')}"><\/script>')</script>
+
         <script src="https://files-stackablejs.netdna-ssl.com/stacktable.min.js"></script>
         <!-- fallback -->
-            <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/stacktable.min.js')}"><\/script>')</script>        
-        
+        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, ' web/js/stacktable.min.js ')}"><\/script>')</script>
+
         <script>
-        $(document).ready(function() {
-            $('#dataTab1, #dataTab2').stacktable({myClass:'mobile-table'});
-        });
-        </script>
+          $(document).ready(function () {
+              $('#dataTab1,#dataTab2').DataTable({"paging": false, "searching": false});
+              $('#dataTab1, #dataTab2').stacktable({myClass: 'mobile-table'});
+              $('.sorting_asc, .sorting').removeAttr('style');
+              $('table.mobile-table.dataTable').css('border-collapse', 'collapse');
+          });
+      </script>
     </body>
 </apex:page>

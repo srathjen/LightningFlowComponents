@@ -69,6 +69,14 @@
                 <behavior>Edit</behavior>
                 <field>Wish_Manager__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Chapter_Id__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Department_Division__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -263,6 +271,20 @@
     <relatedLists>
         <fields>NAME</fields>
         <relatedList>Office__c.Chapter__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>CASES.CASE_NUMBER</fields>
+        <fields>CASES.SUBJECT</fields>
+        <fields>CASES.CREATED_DATE</fields>
+        <fields>CASES.PRIORITY</fields>
+        <relatedList>Case.ChapterName__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>Award_Name__c</fields>
+        <fields>Award_Type__c</fields>
+        <fields>Date_Field__c</fields>
+        <fields>Volunteer_Contact__c</fields>
+        <relatedList>Awards_Recognition__c.Chapter_Name__c</relatedList>
     </relatedLists>
     <relatedObjects>ParentId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>

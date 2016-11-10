@@ -7,9 +7,9 @@
                 <apex:outputLink value="/secur/logout.jsp">Log Out</apex:outputLink>
             </nav>
         </div>
-        
+
         <div class="row">
-            <apex:outputLink styleClass="center-block maw-logo" value="VolunteerLanding_VF"><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></apex:outputLink>    
+            <apex:outputLink styleClass="center-block maw-logo" value="VolunteerLanding_VF"><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></apex:outputLink>
         </div>
         <nav class="navbar navbar-dark sub-nav">
             <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
@@ -18,12 +18,12 @@
             <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
                 <ul class="active-user-main">
                     <li><a href="/VolunteerAssignmentOpportunities_VF">Volunteer Opportunities</a></li>
-                    <li><a href="/MyAssignment_VF">My Assignment</a></li>
+                    <li><a href="/MyAssignment_VF">My Assignments</a></li>
                 </ul>
                 <ul class="active-user-subnav">
                     <li><a href="/VolunteerProfile_VF">Profile</a></li>
                     <li><a href="/_ui/knowledge/ui/KnowledgeHome">Resources</a></li>
-                    <li><a href="/_ui/core/chatter/ui/ChatterPage">Chatter</a></li>     
+                    <li><a href="/_ui/core/chatter/ui/ChatterPage">Chatter</a></li>
                 </ul>
             </div>
         </nav>

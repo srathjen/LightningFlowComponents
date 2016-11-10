@@ -19,7 +19,8 @@ public class VolunteerProfile_AC{
     public list<Background_check__c> backgroundCheckList{get;set;}
     public list<Conflict_Of_Interest__c> coiList{get;set;}
     Public list<classofferingwrapper> orientationList{get;set;}
-    public list<classofferingwrapper> trainingList{get;set;}  
+    public list<classofferingwrapper> trainingList{get;set;}
+    public list<Awards_Recognition__c> awardsRecognitionList{get;set;}  
     public Map<string,integer> birthMonthMap = new Map<string,integer>();
     public list<string> raceEthinicityList{get;set;}
     public list<String> professionalSkillsList{get;set;}
@@ -33,6 +34,8 @@ public class VolunteerProfile_AC{
     Public Map<String, String> mailingCountriesMap = new Map<String,String>();
     Public Map<String, String> mailingStatesMap = new Map<String,String>();
     public boolean isDisabled;
+    public boolean isAwardEmpty{get;set;}    
+          
     
     // Initialyzing variables.
     public VolunteerProfile_AC(){
@@ -43,6 +46,7 @@ public class VolunteerProfile_AC{
         emergencyInfoSave = true;
         emergencyInfoEdit = false;
         isDisabled = true;
+        isAwardEmpty = false;
         langToRead = new List<String>();
         langToSpeak = new List<String>();
         langToWrite = new List<String>();
@@ -193,6 +197,10 @@ public class VolunteerProfile_AC{
                     raceEthinicityList.add(mwa);
                 }
             }
+            
+        //Used to display volunteer award details       
+        awardsRecognitionList = [SELECT Award_Name__c,Chapter_Name__r.Name,Comment__c,Date_Field__c FROM Awards_Recognition__c WHERE Volunteer_Contact__c =: userIns.ContactId ];
+      
     
     
     }
@@ -658,7 +666,8 @@ public class VolunteerProfile_AC{
         emergencyInfoEdit = false;
     }
     
-    
+   
+   
     public class classofferingwrapper
     {
         public string orientationName{get;set;}
