@@ -60,6 +60,10 @@
                 <behavior>Edit</behavior>
                 <field>Wish_Owner__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Is_Attached__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -85,10 +89,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Volunteer_Name__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Date_of_Submission__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
@@ -125,6 +125,10 @@
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Status__c</field>
+            </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Acknowledge__c</field>
@@ -244,7 +248,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h5B000000IlT1</masterLabel>
+        <masterLabel>00h5B000000Eblo</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

@@ -922,15 +922,7 @@
         <fullName>LeadSource</fullName>
         <picklist>
             <picklistValues>
-                <fullName>Online</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
                 <fullName>Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Phone</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -938,7 +930,15 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
+                <fullName>Online</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
                 <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phone</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>

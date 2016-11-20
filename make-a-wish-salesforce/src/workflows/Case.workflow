@@ -8,7 +8,7 @@
             <field>Hidden_Wish_Owner_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <senderAddress>wvcsupport@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Case_Budget_Approval_Template</template>
     </alerts>
@@ -48,7 +48,7 @@
             <recipient>Wish Granter Mentor</recipient>
             <type>caseTeam</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Case_Abandoned_Wish_Template</template>
     </alerts>
@@ -59,7 +59,7 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Case_Budget_Approval_Template</template>
     </alerts>
@@ -71,9 +71,9 @@
             <field>Hidden_Wish_Owner_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Budget_Approval_Template</template>
+        <template>unfiled$public/Case_Budget_Submitted_Template</template>
     </alerts>
     <alerts>
         <fullName>Case_Send_Email_to_Wish_Granter_Alert</fullName>
@@ -83,9 +83,19 @@
             <recipient>Wish Granter</recipient>
             <type>caseTeam</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Case_Send_Email_to_Wish_Granter_Alert</template>
+    </alerts>
+    <alerts>
+        <fullName>Case_Send_an_Email_Alert_to_Case_Owner_for_On_Hold_Status</fullName>
+        <description>Case : Send an Email Alert to Case Owner for On Hold Status</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Case_Email_Notification_to_Case_Owner_for_Hold_Status</template>
     </alerts>
     <alerts>
         <fullName>Case_Unassigned_Wish_Email_Alert</fullName>
@@ -95,7 +105,7 @@
             <field>Volunteer_Manager_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Case_Unassigned_Email_Template</template>
     </alerts>
@@ -107,20 +117,19 @@
             <recipient>Wish Granter</recipient>
             <type>caseTeam</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Case_Email_alert_to_wish_granters</template>
     </alerts>
     <alerts>
         <fullName>Reminder_to_enter_the_Wish_Presentation_Date</fullName>
-        <description>Reminder_to_enter_the_Wish_Presentation_Date</description>
+        <description>Reminder to enter the Wish Presentation Date</description>
         <protected>false</protected>
         <recipients>
             <recipient>Wish Granter</recipient>
             <type>caseTeam</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
+        <senderType>CurrentUser</senderType>
         <template>unfiled$public/Test_Email_Templete</template>
     </alerts>
     <alerts>
@@ -131,7 +140,7 @@
             <field>MAC_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Communication_with_the_Local_Medical_Advisor_Council</template>
     </alerts>
@@ -143,7 +152,7 @@
             <field>MAC_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Case_Reply_Email_template_to_MAC_Team</template>
     </alerts>
@@ -183,7 +192,7 @@
             <recipient>Wish Granter Mentor</recipient>
             <type>caseTeam</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Case_Abandoned_Wish_Template</template>
     </alerts>
@@ -192,9 +201,38 @@
         <description>Wish Family Form Not Submitted Alert</description>
         <protected>false</protected>
         <recipients>
-            <type>owner</type>
+            <recipient>Airport Greeter</recipient>
+            <type>caseTeam</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <recipients>
+            <recipient>Celebrity Host</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Translator &amp; Interpreter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Volunteer Manager</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Assist Phone Greeter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Coordinator</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Granter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Granter Mentor</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Wish_Family_Form_Not_Submitted_Template</template>
     </alerts>
@@ -203,9 +241,38 @@
         <description>Wish:Interview 21 days alert</description>
         <protected>false</protected>
         <recipients>
-            <type>owner</type>
+            <recipient>Airport Greeter</recipient>
+            <type>caseTeam</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <recipients>
+            <recipient>Celebrity Host</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Translator &amp; Interpreter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Volunteer Manager</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Assist Phone Greeter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Coordinator</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Granter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Granter Mentor</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Wish_Interview_21_Days_Template</template>
     </alerts>
@@ -214,9 +281,38 @@
         <description>Wish Interview Date Not Set After 21 Days Email Alert</description>
         <protected>false</protected>
         <recipients>
-            <type>owner</type>
+            <recipient>Airport Greeter</recipient>
+            <type>caseTeam</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <recipients>
+            <recipient>Celebrity Host</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Translator &amp; Interpreter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Volunteer Manager</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Assist Phone Greeter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Coordinator</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Granter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Granter Mentor</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Wish_Interview_21_Days_Template</template>
     </alerts>
@@ -228,8 +324,7 @@
             <field>Dev_Staff_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
+        <senderType>CurrentUser</senderType>
         <template>unfiled$public/Test_Email_Templete</template>
     </alerts>
     <alerts>
@@ -239,8 +334,7 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
+        <senderType>CurrentUser</senderType>
         <template>unfiled$public/Test_Email_Templete</template>
     </alerts>
     <fieldUpdates>
@@ -281,6 +375,7 @@
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
     </fieldUpdates>
     <fieldUpdates>
         <fullName>UpdateStatusDate</fullName>
@@ -329,16 +424,6 @@
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
-    </fieldUpdates>
-    <fieldUpdates>
-        <fullName>isEmailWishGranterUpdate</fullName>
-        <field>isEmailWishGranter__c</field>
-        <literalValue>0</literalValue>
-        <name>isEmailWishGranterUpdate</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Literal</operation>
-        <protected>false</protected>
-        <reevaluateOnChange>true</reevaluateOnChange>
     </fieldUpdates>
     <rules>
         <fullName>Case %3A Abandoned Wish Rule</fullName>
@@ -397,6 +482,11 @@
             <operation>equals</operation>
             <value>Submitted</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish</value>
+        </criteriaItems>
         <description>This rule will fire when the budget is submitted for approval process.</description>
         <triggerType>onAllChanges</triggerType>
     </rules>
@@ -413,6 +503,31 @@
         <active>true</active>
         <formula>OR(AND(isEmail__c  = TRUE,ISCHANGED(isEmail__c)),AND(ISCHANGED(isNational__c), isNational__c = TRUE))</formula>
         <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Case%3A On Hold Email Notification for Wish Owner</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>On Hold</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish</value>
+        </criteriaItems>
+        <description>Send an email alert to the wish owner 6 months after the Hold Date</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Case_Send_an_Email_Alert_to_Case_Owner_for_On_Hold_Status</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Case.Hold_Date__c</offsetFromField>
+            <timeLength>180</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
     </rules>
     <rules>
         <fullName>Case%3A Wish Granted Task Open Alert</fullName>
@@ -455,12 +570,31 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
+        <fullName>InActive Wish Granter Alert Workflow Rule</fullName>
+        <actions>
+            <name>Case_Send_Email_to_Wish_Granter_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.isEmailWishGranter__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.InActiveWishGranter__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>This Email alert is used to send an email to wish granters.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
         <fullName>Reminder to enter the Wish Presentation Date</fullName>
         <actions>
             <name>Reminder_to_enter_the_Wish_Presentation_Date</name>
             <type>Alert</type>
         </actions>
-        <active>false</active>
+        <active>true</active>
         <criteriaItems>
             <field>Case.Interview_Date_Not_Set__c</field>
             <operation>equals</operation>
@@ -513,8 +647,9 @@
         <criteriaItems>
             <field>Case.InActiveWishGranter__c</field>
             <operation>notEqual</operation>
+            <value>null</value>
         </criteriaItems>
-        <description>This Email alert is used to send an email to wish granters.</description>
+        <description>This Email alert is used to send an email to wish granters</description>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -558,8 +693,8 @@
                 <type>Alert</type>
             </actions>
             <offsetFromField>Case.Interview_date__c</offsetFromField>
-            <timeLength>9</timeLength>
-            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+            <timeLength>1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
     </rules>
     <rules>
@@ -580,6 +715,26 @@
         </criteriaItems>
         <description>Send a auto email when Wish Presentation Set is checked and Wish Presentation Date is entered.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Wish not closed</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Case.IsClosed</field>
+            <operation>notEqual</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Send email to wish owner when case not closed after 90 days from wish end date.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Wish_not_closed_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Case.End_Date__c</offsetFromField>
+            <timeLength>91</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
     </rules>
     <rules>
         <fullName>Wish not closed in a specific time</fullName>
@@ -640,10 +795,6 @@
     </rules>
     <rules>
         <fullName>Wish%3AConcept approval</fullName>
-        <actions>
-            <name>Wish_concept_approval1</name>
-            <type>Task</type>
-        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Case.Update_Wish_Child_Form_Info__c</field>
@@ -755,16 +906,6 @@
         <protected>false</protected>
         <status>Not Started</status>
         <subject>Wish concept approval</subject>
-    </tasks>
-    <tasks>
-        <fullName>Wish_concept_approval1</fullName>
-        <assignedToType>owner</assignedToType>
-        <dueDateOffset>1</dueDateOffset>
-        <notifyAssignee>false</notifyAssignee>
-        <priority>Normal</priority>
-        <protected>false</protected>
-        <status>Not Started</status>
-        <subject>Wish concept approval1</subject>
     </tasks>
     <tasks>
         <fullName>Wish_not_closed</fullName>

@@ -43,7 +43,7 @@
         this.toggleSections(component, nextSection);
     },
     toggleSections : function(component, selectedSectionName) {
-        var accordionSections = ['ddpAccordionSection', 'contactAccordionSection', 'documentAccordionSection', 'deliveryAccordionSection'];
+        var accordionSections = ['ddpAccordionSection', 'recordAccordionSection', 'contactAccordionSection', 'documentAccordionSection', 'deliveryAccordionSection'];
         for (var i = 0; i < accordionSections.length; i++) {
             var sectionName = accordionSections[i];
             var accordionSection = component.find(sectionName);
@@ -55,6 +55,15 @@
                 }
             }
         }
+    },
+    updateRunButtonLabel : function (component) {
+        //Update button labels
+        var actionLabel = component.get('v.context') === 'TEST' ? 'Test' : 'Run';
+        var runButtonLabel = component.get('v.needsAuthentication')
+        	? 'Authorize & ' + actionLabel
+        	: actionLabel + ' ' + component.get('v.ddpLabel');
+        
+        component.set('v.runButtonLabel', runButtonLabel);
     },
     updateRunButtonStatus : function(component) {
         var ddpSelected = !!component.get('v.ddpId');
@@ -85,7 +94,7 @@
         
         var attachmentSatisfied = true;
         if (component.get("v.attachmentRequired")) {
-            if (component.get("v.attachmentIds").length > 0) {
+            if (component.get("v.attachments").length > 0) {
                 attachmentSatisfied = true;
             }
             else {
@@ -95,10 +104,10 @@
         var runEnabled = ddpSelected && contactSatisfied && deliveryOptionSelected && attachmentSatisfied && recipientsSatisfied;
         component.set('v.runDisabled', !runEnabled);
     },
-    expandAndLoadDdps : function(component) {
+    expandAndLoad : function(component) {
         //disable 'Select DDP' button if it exists, it exists when !v.startExpanded
         var selectDdpButton = component.find('selectDdpButton');
-        if (!component.get("v.startExpanded")) {
+        if (!component.get("v.startExpanded") && component.get("v.context") !== 'TEST') {
 	        selectDdpButton.getElement().disabled = true;
         }
         
@@ -114,21 +123,25 @@
                     $A.util.removeClass(component.find("errorContainer"), "hidden");
                 } else {
                     //hide 'Select DDP' button if it exists, it exists when !v.startExpanded
-                    if (!component.get("v.startExpanded")) {
+                    if (!component.get("v.startExpanded") && component.get("v.context") !== 'TEST') {
                         selectDdpButton.getElement().style.display = 'none';
                     }
                     
                     //expose hidden elements
                     $A.util.removeClass(component.find("runDdpContainer"), "hidden");
                     $A.util.removeClass(component.find("runDdpButton"), "hidden");
-                    $A.util.removeClass(component.find("footer"), "hidden");
                     
-                    //expandDdps
-                    this.toggleSections(component, 'ddpAccordionSection');
-                    
-                    //TODO:
-                    //the values being passed below need to be updated if there are any filters or pre-selected options.
-                    component.find("ddpSelect-component").load(component.get("v.recordId"), "", "", "", component.get("v.ddpLabel"));
+                    //expand sections
+                    if (component.get("v.context") === 'DEFAULT' || component.get("v.context") === 'UTILITYBAR') {
+                        this.toggleSections(component, 'ddpAccordionSection');
+                        //TODO:
+                        //the values being passed below need to be updated if there are any filters or pre-selected options.
+                        component.find("ddpSelect-component").load(component.get("v.recordId"), "", "", "", component.get("v.ddpLabel"));
+                    }
+                    if (component.get("v.context") === 'TEST' || component.get("v.context") === 'UTILITYBAR') {
+                        this.toggleSections(component, 'recordAccordionSection');
+                        component.find("recordSelect-component").load(component.get("v.ddpId"), component.get("v.ddpLabel"), component.get("v.objectName"), component.get("v.objectPluralLabel"));
+                    }
                 }
             }
         });
@@ -145,13 +158,14 @@
                 if (parsedResponse.isSuccess) {
                     component.set("v.needsAuthentication", parsedResponse.needsAuthentication);
                     component.set("v.oAuthUrl", parsedResponse.oAuthUrl);
+                    this.updateRunButtonLabel(component);
                 }
             }
         });
         $A.enqueueAction(action);
     },
 	authorizeLoopServices : function(component) {
-        function onResponseMessage(event) {
+        var onResponseMessage = $A.getCallback(function(event) {
             var subdomain = window.location.hostname.split('.')[0];
             if (event.origin.indexOf(subdomain) && event.origin.indexOf('visual.force.com')) {
                 if (event.data.message === 'authorizeUser') {
@@ -160,8 +174,8 @@
                     oAuthSuccessfulEvent.fire();
                 }
             }
-        }
-        
+        });
+
         if (window.addEventListener) {
             window.addEventListener('message', onResponseMessage);
         }
@@ -180,7 +194,13 @@
         
         // Reset final message
         component.set('v.finalMessage', '');
-
+        
+        var attachments = component.get("v.attachments");
+        var attachmentAdhocStrings = [];
+        for (var i = 0; i < attachments.length; i++) {
+            attachmentAdhocStrings.push(attachments[i].AdhocAttachment);
+        }
+        
         var action = component.get("c.prepRunDdp");
         action.setParams({
             ddpId: component.get("v.ddpId"),
@@ -189,7 +209,7 @@
             documentIds: component.get("v.documentIds"),
             deliveryOptionId: component.get("v.deliveryOptionId"),
             deliveryType: component.get("v.deliveryOptionType"),
-            attachmentIds: component.get("v.attachmentIds"),
+            attachments: attachmentAdhocStrings,
             usePreview: component.get("v.isTest"),
             workspaceId: component.get("v.selectedContentLibrary"),
             attachToRecord: component.get("v.attachToRecord"),
@@ -197,9 +217,10 @@
             reminderFrequency: component.get("v.reminderFrequency"),
             expireAfter: component.get("v.expireAfter"),
             expireWarn: component.get("v.expireWarn"),
-            workspaceId: component.get("v.selectedContentLibrary"),
             emailSubject: component.get("v.emailSubject"),
-            emailText: component.get("v.emailText")
+            emailText: component.get("v.emailText"),
+            testFeaturesAsDelivery: component.get("v.testFeaturesAsDelivery"),
+            loopUrl: component.get('v.loopUrl')
         });
         action.setCallback(this, function(response) {
             if (response.getState() === "SUCCESS") {
@@ -228,23 +249,27 @@
     },
     resetDdpData : function(component) {
         //badges are being set in AccordionSection component's setBadge function
-        
-        //DDP
-        component.set('v.ddpId', '');
         this.resetSelections(component);
-        component.find("ddpSelect-component").clearTiles();
+        //DDP and Record
+        if (component.get('v.context') === "DEFAULT") {
+            component.set('v.ddpId', '');
+            component.find("ddpSelect-component").clearTiles();
+            this.toggleSections(component, 'ddpAccordionSection');
+        } else if (component.get('v.context') === "TEST") {
+            component.set('v.recordId', '');
+            component.find("recordSelect-component").clearTiles();
+            this.toggleSections(component, 'recordAccordionSection');
+        }
         
         //Contact
         component.set('v.contactId', '');
-        
-        this.toggleSections(component, 'ddpAccordionSection');
     },
     resetSelections : function(component) {
         //Documents
         component.set('v.documentIds', []);
         
         //Attachments
-        component.set('v.attachmentIds', []);
+        component.set('v.attachments', []);
         
         //Delivery Options
         component.set('v.deliveryOptionId', '');
@@ -256,10 +281,12 @@
         component.set('v.errorMessage', '');
         
         //Display Document Section
-        component.set('v.displayDocumentSection', false);
+        if (component.get('v.context') !== 'TEST') {
+            component.set('v.displayDocumentSection', false);
+        }
     },
     toggleAccordionsDisabled : function(component, disable) {
-        var accordionSections = ['ddpAccordionSection', 'contactAccordionSection', 'documentAccordionSection', 'deliveryAccordionSection'];
+        var accordionSections = ['recordAccordionSection', 'ddpAccordionSection', 'contactAccordionSection', 'documentAccordionSection', 'deliveryAccordionSection'];
         for (var i = 0; i < accordionSections.length; i++) {
             var sectionName = accordionSections[i];
             var accordionSection = component.find(sectionName);
@@ -273,15 +300,15 @@
         component.find('modifyButton').getElement().disabled = disable;
         component.find('rerunButton').getElement().disabled = disable;
     },
-    storeAttachmentIds : function(component, selectedAttachments) {
-        var attachmentIds = [];
+    storeAttachments : function(component, selectedAttachments) {
+        var attachments = [];
         for (var i = 0; i < selectedAttachments.length; i++) {
-            attachmentIds.push(selectedAttachments[i].Id);
+            attachments.push(selectedAttachments[i]);
         }
-        component.set('v.attachmentIds', attachmentIds);
+        component.set('v.attachments', attachments);
         var optionalDocumentSelection = component.find('documentSelect-component');
         
-        if (attachmentIds.length > 0) {
+        if (attachments.length > 0) {
             component.find('documentAccordionSection').setBadge('SELECTED');
             optionalDocumentSelection.documentNextButtonDisabled(false);
         } else {

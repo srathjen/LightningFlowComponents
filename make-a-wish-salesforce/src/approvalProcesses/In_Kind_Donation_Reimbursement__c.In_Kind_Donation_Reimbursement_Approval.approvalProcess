@@ -10,6 +10,8 @@
         <field>Owner</field>
         <field>RecordType</field>
         <field>Attachments__c</field>
+        <field>Address_Line_1_del__c</field>
+        <field>City_del__c</field>
     </approvalPageFields>
     <approvalStep>
         <allowDelegate>false</allowDelegate>
@@ -42,12 +44,6 @@
     </entryCriteria>
     <finalApprovalRecordLock>true</finalApprovalRecordLock>
     <finalRejectionRecordLock>false</finalRejectionRecordLock>
-    <initialSubmissionActions>
-        <action>
-            <name>Date_of_Submission</name>
-            <type>FieldUpdate</type>
-        </action>
-    </initialSubmissionActions>
     <label>In Kind Donation&amp;Reimbursement Approval</label>
     <recordEditability>AdminOrCurrentApprover</recordEditability>
     <showApprovalHistory>false</showApprovalHistory>

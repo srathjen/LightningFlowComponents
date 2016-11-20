@@ -5,19 +5,17 @@ Date        : 4/10/2016
 Description : This trigger us used to fetch the associated case owner,case owner's manager and current loged in user details
 ****************************************************************************************************/
 trigger InKindDonationReimbursement_AT on In_Kind_Donation_Reimbursement__c (before insert,before update) {
+     
     List<Contact> volunteerContactList = new List<Contact>();
     List<User> volunteerUserList = new List<User>();
-    Id reImbursementRtId = Schema.Sobjecttype.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get('Reimbursement').getRecordTypeId();
+    Constant_AC newConstant =  new Constant_AC();
+    Id reImbursementRtId = Schema.Sobjecttype.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get(newConstant.Reimbursement).getRecordTypeId();
     if(trigger.isBefore && trigger.isInsert){
-        
         list<User> userList = [SELECT Id,ContactId,Contact.Name,Contact.FirstName,Contact.LastName,City,State,Street,Country,PostalCode FROM User WHERE Id =: UserInfo.getUserId() AND ContactId != Null limit 1];
-        Id inKindRtId = Schema.Sobjecttype.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get('In Kind Donation').getRecordTypeId();
-        
         set<string> wishIdsSet = new set<string>();
         map<id,id> wishOwnerMap = new map<id,id>();
         map<id,id> wishManagerMap = new map<id,id>();
-        
-        
+        Id inKindRtId = Schema.Sobjecttype.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get(newConstant.InKind).getRecordTypeId();
         for(In_Kind_Donation_Reimbursement__c newRecord : trigger.new){
             if(newRecord.Wish__c != Null ){
                 wishIdsSet.add(newRecord.Wish__c);

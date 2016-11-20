@@ -44,7 +44,7 @@
             </thead>
             <tbody>
                 <aura:iteration items="{!v.objectGroups}" var="group">
-                    <tr class="{!group.isGroup ? 'slds-hint-parent pointer' : 'rowHidden'}" id="{!group.obj}" onclick="{!c.toggleGroup}" data-expanded="{!group.isExpanded}" data-is-group="{!group.isGroup}">
+                    <tr aura:id="row" class="{!group.isGroup ? 'slds-hint-parent pointer' : 'rowHidden'}" id="{!group.obj}" onclick="{!c.toggleGroup}" data-expanded="{!group.isExpanded}" data-is-group="{!group.isGroup}">
                         <td style="{!group.isGroup ? '' : 'border: 0;'}">
                             <aura:if isTrue="{!group.multiple}">
                                 <div class="{!group.isExpanded ? 'divHidden' : ''}" style="text-align: right;">
@@ -68,7 +68,7 @@
                         <td style="{!group.isGroup ? '' : 'border: 0;'}"><span class="slds-truncate">{!group.page}</span></td>
                     </tr>
                 </aura:iteration>
-                <tr class="slds-hint-parent" aura:id="customObjectRow">
+                <tr aura:id="customObjectRow" class="slds-hint-parent rowHidden">
                     <td>
                         <label class="slds-form-element__label" style="margin-right: 0;">Custom Object</label>
                     </td>

@@ -25,13 +25,6 @@
         <value>30</value>
     </labels>
     <labels>
-        <fullName>Inkind_Reimbursement_Id</fullName>
-        <language>en_US</language>
-        <protected>false</protected>
-        <shortDescription>Inkind&amp;Reimbursement Id</shortDescription>
-        <value>01I</value>
-    </labels>
-    <labels>
         <fullName>Instance_Url</fullName>
         <categories>It will hold the instance url</categories>
         <language>en_US</language>
@@ -61,6 +54,6 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Site Url</shortDescription>
-        <value>https://mstdev-make-a-wish.cs52.force.com</value>
+        <value>https://qa-make-a-wish.cs52.force.com</value>
     </labels>
 </CustomLabels>

@@ -39,19 +39,22 @@ public class WishBudgetForm_AC{
     public Date AntWishDate{get; set;}
     public Integer NoOfWishParts{get; set;}
     public Boolean isbudgetApprovalExist{get; set;}
-    
+    Id RecentApproverID;
     public WishBudgetForm_AC(ApexPages.StandardController controller) {
+        RecentApproverID=null;
+        UserIdentiy=false;
         isbudgetApprovalExist= false;
         caseApproverStatus = '';
         disableTcode = true;
         pageBlockMode ='detail';
         caseId = ApexPages.currentPage().getParameters().get('CaseId');
+        System.debug('The parameter value is++++++++++'+caseId );
         retURLRecordId = caseId;
         
         Constant_AC  constant = new Constant_Ac();    
         Id wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
         system.debug('Wish P and A RecordTypeID :' + CaseId + '-' + wishPlanningRecordTypeId );
-        getPlanningAnticipationCase = [SELECT Id, ParentId, Budget_Approval_Status__c FROM Case WHERE ParentId =: CaseId AND RecordTypeId =: wishPlanningRecordTypeId order by Createddate desc];
+        getPlanningAnticipationCase = [SELECT Id, ParentId,Parent.Budget_Submitted_Date__c, Budget_Approval_Status__c FROM Case WHERE ParentId =: CaseId AND RecordTypeId =: wishPlanningRecordTypeId order by Createddate desc];
         system.debug('Wish P and A RecordTypeID 1:' + getPlanningAnticipationCase );
         recordId = getPlanningAnticipationCase.get(0).Id;
         caseApproverStatus = getPlanningAnticipationCase.get(0).Budget_Approval_Status__c;
@@ -63,6 +66,7 @@ public class WishBudgetForm_AC{
         
         //To check whether budget approval form is approved
         List<Case> caseList = [SELECT Id,Contact.FirstName,Contact.LastName, Contact.Middle_Name__c, Anticipated_Start_Date__c, isApprove__c,ChapterName__r.Name,Wish_Type__c FROM Case WHERE Id =: caseId];
+        
         if(caseList.size() > 0) {
             wishChapterName = caseList.get(0).ChapterName__r.Name;
             antiWishType = caseList.get(0).Wish_Type__c;
@@ -103,22 +107,21 @@ public class WishBudgetForm_AC{
         if(useriden !=null){
             User userdata=useriden[0];
             
-            //string userName=UserInfo.getName();
-            //|| userName =='' || caseApproverStatus =='')
-           
-            //System.debug('Login Profiel Name is:' + strApprovalName );
-            if( caseApproverStatus =='Initiated'){
-                String strAppvalName = aSW.approvals[0].listOfSteps[0].OriginalActor.Name;
-               if( userdata.Profile.Name == 'System Administrator' || userdata.Name == strAppvalName ){
-                                              
-                    UserIdentiy=false;
-                }
-                else{
-                    UserIdentiy=true;
+            if( caseApproverStatus == 'Submitted'){
+               
+                //String strAppvalName = aSW.approvals[0].listOfSteps[0].OriginalActor.Name;
+                //Id strAppvalName = aSW.approvals[0].listOfSteps[0].ActorId;
+                if(RecentApproverID!= null)
+                {
+                   //if(userdata.Id == strAppvalName ){
+                   if(userdata.Id == RecentApproverID){
+                        UserIdentiy=false;
+                    }
+                    else{
+                        UserIdentiy=true;
+                    }
                 } 
-            
-            }
-            
+            } 
          }
     }
     
@@ -144,8 +147,9 @@ public class WishBudgetForm_AC{
             }
         }
         
-        System.debug('wishExpenseList Size 2.2:' + caseId);
+        System.debug('wishExpenseList Size 2.2:' + TransCodesWrap);
         
+         System.debug('wishExpenseList Size 1:' + caseId);
         wishExpenseList =  [SELECT Id, Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name, 
                             Wish_Expense_Transaction_Code__c,
                             Wish_Expense_Transaction_Code__r.Name,
@@ -187,7 +191,7 @@ public class WishBudgetForm_AC{
         }
     }
     
-    public string transCodeid {get;set;}
+   /* public string transCodeid {get;set;}
     public string expenseTypekey {get;set;}
     public void RemoveWrapper() {
         integer index = -1;
@@ -203,7 +207,7 @@ public class WishBudgetForm_AC{
             }
         }
         wrappers.remove(index );
-    }
+    } */
     
     public List<SelectOption> getWishExpenceTypes() {    
         List<SelectOption> options =  new List<SelectOption>();    
@@ -244,7 +248,9 @@ public class WishBudgetForm_AC{
     public Void addExpenseType() {
         if(newExpenseType != null) {
             wishExpenseTypes.add(newExpenseType);
+            System.debug('Test add expence 1:' + newExpenseType );
             List<Wish_Expense_Transaction_Code__c> transListType = TransCodesWrap.get(newExpenseType);
+            System.debug('Test add expence 1:' + TransCodesWrap);
             Wish_Expense__c curExpense=new Wish_Expense__c();
             curExpense.Wish_Expense_Transaction_Code__c = TransCodesWrap.get(newExpenseType).get(0).Id;
             for(Wish_Expense_Transaction_Code__c trans: transListType){
@@ -277,6 +283,7 @@ public class WishBudgetForm_AC{
     {
         List<Wish_Expense_Transaction_Code__c> transListT;
         for(Wish_Expense_Type_Tempate__c template : [SELECT Id, Name, Wish_Expense_Type__r.Name from Wish_Expense_Type_Tempate__c where Wish_Type__c =: wishType]){
+        
             wishExpenseTypes.add(template.Wish_Expense_Type__r.Name);
             Wish_Expense__c curExpense = new Wish_Expense__c();
             curExpense.Wish_Expense_Transaction_Code__c =TransCodesWrap.get(template.Wish_Expense_Type__r.Name).get(0).Id;
@@ -379,7 +386,7 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
         System.debug('>>>>>>>>>>approverId>>>>>>>>>>>>>>>'+approverId);
         List<Wish_Expense__c> recordApprovalStatusUpdateList = new List<Wish_Expense__c>();
         for(Wish_Expense__c updateWishExpenseStatus : [SELECT Id, Case__c, Budget_Approval_Status__c,Projected_Approval_Status__c, Wish_Expense_Approval_Status__c FROM Wish_Expense__c WHERE Case__c =: caseId]) {
-            updateWishExpenseStatus.Wish_Expense_Approval_Status__c = 'Initiated';
+            //updateWishExpenseStatus.Wish_Expense_Approval_Status__c = 'Initiated';
             if(updateWishExpenseStatus.Budget_Approval_Status__c != 'Approved' ){
                updateWishExpenseStatus.Budget_Approval_Status__c = 'Submitted';
             }
@@ -408,6 +415,14 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
             req.setSkipEntryCriteria(true);
             Approval.ProcessResult result = Approval.process(req);
             displayPopup = true;
+            
+            if(getPlanningAnticipationCase.get(0).Parent.Budget_Submitted_Date__c == Null)
+            {
+                    Case updateCase = new Case();
+                    updateCase.id = getPlanningAnticipationCase.get(0).ParentId;
+                    updateCase.Budget_Submitted_Date__c = Date.Today();
+                    update updateCase;
+            }
         }        
     }
     
@@ -668,6 +683,7 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
                         aSWr.workItemReassignLink =  ORG_LNK+'/'+sWI.Id+'/e?et=REASSIGN&retURL=/'+retURLRecordId;
                         recallApprovalProcessLink =  ORG_LNK +'/'+sWI.Id+'/e?et=REMOVE&retURL=/'+retURLRecordId;
                         isSubmitForApproval = false;
+                        RecentApproverID =sWI.OriginalActorId;
                     }
                     
                 }

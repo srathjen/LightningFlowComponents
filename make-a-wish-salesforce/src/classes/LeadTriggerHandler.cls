@@ -270,6 +270,14 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     }
                     newcase.Status = 'Qualified';
                     newcase.Origin = 'Web';
+                    if(LeadMap.get(convertLeads.getLeadId()).Referred_Date__c != null)
+                      newCase.Referral_Date__c = LeadMap.get(convertLeads.getLeadId()).Referred_Date__c;
+                    if(LeadMap.get(convertLeads.getLeadId()).Inquiry_Date__c!= null)
+                      newCase.Inquiry_Date__c= LeadMap.get(convertLeads.getLeadId()).Inquiry_Date__c;
+                      newCase.diagnosis_verificaion_receive_date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Received__c;
+                      newCase.diagnosis_verificaion_sent_date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Sent__c;
+                    
+                    
                     caseList.add(newcase);
                 }
             }

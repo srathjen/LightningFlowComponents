@@ -32,16 +32,40 @@
             <name>myRule_1</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>formula_myRule_1</leftValueReference>
-                <operator>EqualTo</operator>
+                <processMetadataValues>
+                    <name>inputDataType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>leftHandSideType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>operatorDataType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>rightHandSideType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <leftValueReference>myVariable_current.cg__Content_Type__c</leftValueReference>
+                <operator>NotEqualTo</operator>
                 <rightValue>
-                    <booleanValue>true</booleanValue>
+                    <stringValue>Folder</stringValue>
                 </rightValue>
             </conditions>
             <connector>
                 <targetReference>myRule_1_A1</targetReference>
             </connector>
-            <label>No Criteria Required</label>
+            <label>Content Type Criteria Required</label>
         </rules>
     </decisions>
     <description>Fill Case fields in Case File records</description>
@@ -101,11 +125,17 @@
         <expression>TEXT({!myVariable_current.cg__Case__c.Wish_Type__c} )</expression>
     </formulas>
     <formulas>
-        <name>formula_myRule_1</name>
-        <dataType>Boolean</dataType>
-        <expression>true</expression>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>[cg__CaseFile__c].cg__Case__c.Hidden_Primary_Diagnosis__c </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_7_myRule_1_A1_Primary_Diagnosis_c</name>
+        <dataType>String</dataType>
+        <expression>{!myVariable_current.cg__Case__c.Hidden_Primary_Diagnosis__c}</expression>
     </formulas>
-    <interviewLabel>Case_Fields_Tagging_on_Case_File-1_cg__CaseFile__c</interviewLabel>
+    <interviewLabel>Case_Fields_Tagging_on_Case_File-9_cg__CaseFile__c</interviewLabel>
     <label>Case Fields Tagging on Case File</label>
     <processMetadataValues>
         <name>ObjectType</name>
@@ -136,7 +166,7 @@
         <processMetadataValues>
             <name>evaluationType</name>
             <value>
-                <stringValue>always</stringValue>
+                <stringValue>criteria</stringValue>
             </value>
         </processMetadataValues>
         <processMetadataValues>
@@ -166,6 +196,49 @@
             <operator>EqualTo</operator>
             <value>
                 <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>inputDataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Content Type</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>operatorDataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>cg__Content_Type__c</field>
+            <operator>NotEqualTo</operator>
+            <value>
+                <stringValue>Folder</stringValue>
             </value>
         </filters>
         <inputAssignments>
@@ -256,6 +329,36 @@
             <field>Gender__c</field>
             <value>
                 <elementReference>formula_4_myRule_1_A1_Gender_c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>String</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Primary Diagnosis</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Formula</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>Primary_Diagnosis__c</field>
+            <value>
+                <elementReference>formula_7_myRule_1_A1_Primary_Diagnosis_c</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>

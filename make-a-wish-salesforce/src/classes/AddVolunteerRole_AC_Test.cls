@@ -2,7 +2,7 @@
 Author      : MST Solutions
 CreatedBy   : Kanagaraj
 Date        : 28/06/2016
-Description : AddVolunteerRole_AC_Test is used to increase the code coverage for AddVolunteerRole_AC controller.
+Description : AddVolunteerRole_AC_Test is used to increase the code coverage for Application_AC controller.
 *****************************************************************************************************/
 @isTest
 public class AddVolunteerRole_AC_Test{

@@ -329,6 +329,10 @@
         <name>Date_of_last_engagement__c</name>
     </fields>
     <fields>
+        <label><!-- Deceased Date --></label>
+        <name>Deceased_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- Department --></label>
         <name>Department__c</name>
     </fields>
@@ -453,6 +457,10 @@
         <name>Hidden_Last_Name__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Minor Participant --></label>
+        <name>Hidden_Minor_Participant__c</name>
+    </fields>
+    <fields>
         <label><!-- Phone --></label>
         <name>Hidden_Phone__c</name>
     </fields>
@@ -463,6 +471,34 @@
     <fields>
         <label><!-- Hidden Status --></label>
         <name>Hidden_Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Current</masterLabel>
+            <translation><!-- Current --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Declined</masterLabel>
+            <translation><!-- Declined --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Former</masterLabel>
+            <translation><!-- Former --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prospective</masterLabel>
+            <translation><!-- Prospective --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Street --></label>
@@ -663,6 +699,29 @@ and the date it was or will be granted. --></help>
         <name>Last_Continuing_Edu_Date__c</name>
     </fields>
     <fields>
+        <name>LeadSource</name>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fax</masterLabel>
+            <translation><!-- Fax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Online</masterLabel>
+            <translation><!-- Online --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Lead Created Date --></label>
         <name>Lead_Created_Date__c</name>
     </fields>
@@ -715,6 +774,10 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Number of Assignments --></label>
+        <name>Number_of_Assignments__c</name>
+    </fields>
+    <fields>
         <label><!-- Number of Active Wishes --></label>
         <name>Number_of_wishes_active__c</name>
     </fields>
@@ -745,6 +808,10 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Diagnosis Verification Sent --></label>
         <name>Part_A_Sent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Participant --></label>
+        <name>Participant__c</name>
     </fields>
     <fields>
         <label><!-- Pet/Animal --></label>
@@ -988,7 +1055,7 @@ and the date it was or will be granted. --></help>
         <name>Recently_Completed_Training_Date__c</name>
     </fields>
     <fields>
-        <label><!-- Recipient Email --></label>
+        <label><!-- First Recipient Email --></label>
         <name>Recipient_Email__c</name>
     </fields>
     <fields>
@@ -1039,10 +1106,6 @@ and the date it was or will be granted. --></help>
             <translation><!-- Friend --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Gaurdian</masterLabel>
-            <translation><!-- Gaurdian --></translation>
-        </picklistValues>
-        <picklistValues>
             <masterLabel>Granddaugther</masterLabel>
             <translation><!-- Granddaugther --></translation>
         </picklistValues>
@@ -1057,6 +1120,10 @@ and the date it was or will be granted. --></help>
         <picklistValues>
             <masterLabel>Grandson</masterLabel>
             <translation><!-- Grandson --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Guardian</masterLabel>
+            <translation><!-- Guardian --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Half Brother</masterLabel>
@@ -1075,8 +1142,8 @@ and the date it was or will be granted. --></help>
             <translation><!-- Mother --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Neighbor</masterLabel>
-            <translation><!-- Neighbor --></translation>
+            <masterLabel>Neighbour</masterLabel>
+            <translation><!-- Neighbour --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Partner</masterLabel>
@@ -1875,6 +1942,10 @@ provide contact information for each site on which you are active. --></help>
         <name>Year__c</name>
     </fields>
     <fields>
+        <label><!-- Year of Last Enagement --></label>
+        <name>Year_of_Last_Enagement__c</name>
+    </fields>
+    <fields>
         <label><!-- Zip --></label>
         <name>Zip_Employer__c</name>
     </fields>
@@ -2449,10 +2520,6 @@ provide contact information for each site on which you are active. --></help>
             <section>Contact Information</section>
         </sections>
         <sections>
-            <label><!-- Date of Last Engagement --></label>
-            <section>Date of Last Engagement</section>
-        </sections>
-        <sections>
             <label><!-- Dev &amp; QA Fields --></label>
             <section>Dev &amp; QA Fields</section>
         </sections>
@@ -2525,10 +2592,6 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Contact Details --></label>
             <section>Contact Details</section>
-        </sections>
-        <sections>
-            <label><!-- DEV &amp; QA fields --></label>
-            <section>DEV &amp; QA fields</section>
         </sections>
         <sections>
             <label><!-- Household Address --></label>

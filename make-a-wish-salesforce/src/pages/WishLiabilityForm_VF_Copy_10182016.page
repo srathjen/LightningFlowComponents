@@ -1,0 +1,257 @@
+<apex:page sidebar="false" applyBodyTag="false" showHeader="false" standardController="Case" extensions="WishLiabilityForm_AC">
+
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+@page {
+    size: landscape; /*landscape orientation*/
+    /*page numbers in the bottom center of each page in the pdf document*/
+    @bottom-center {
+        content: "Page " counter(page) " of " counter(pages);
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 80%;
+    }
+    /*placeholders for other content areas*/
+    @bottom-right {
+        content: "Bottom Right";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 80%;
+    }
+    @bottom-left {
+        content: "Bottom Left";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 80%;
+    }
+    @top-right {
+        content: "Top Right";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 80%;
+    }
+    @top-center {
+        content: "Top Center";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 80%;
+    }
+    @top-left {
+        content: "Top Left";
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 80%;
+    }
+
+}
+    @media (max-width: 480px) {.header-logo{height:60px !important;margin-left:21% !important;} }
+    .container{padding:0.01em 16px; width:100%;}
+    .paragraph{min-width:400px;margin-left:15%;margin-right:15%;}
+    .text-imp {text-transform: none; font-size: 17px; font-weight: 600; color:#0C0C0C; font-family: "futura-pt", "Century Gothic", Arial, sans-serif;}
+     table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    th, td {
+        text-align: left;
+        padding: 10px;
+    }
+    
+    tr:nth-child(even){background-color: white}
+    
+   .pop-wrap, .pop-wrap-main-message {
+    position:fixed;
+    top: 20%;
+    left: 50%;
+    z-index: 9999;
+    width:100%;
+    max-width:600px;
+    }
+            
+    .custPopup, .custPopup-main-message{
+    font-family:"arial", helvetica, sans-serif;
+    position: relative;
+    background: white;
+    border: 1px solid #006bb6;
+    border-radius: .25rem;
+    top: -20%;
+    left: -50%;
+    padding:1rem;
+    width: 100%;
+    }
+    
+    .pop-wrap-main-message {top: 1%}
+    .custPopup-main-message{top: 0; padding:0 1rem 0;}
+    
+    .popupBackground{
+    position: fixed;
+    background: rgba(0,0,0,.4);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 9998;
+  }
+
+  </style>
+    <apex:form style="margin: 10px;">
+     
+        <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/MakeAWishAmerica.PNG')}" style="width:22%;margin-left:20%;" styleClass="header-logo"/>
+        <div class="row header-padding">         
+            <div style="font-size:20px !important; margin-bottom:1px; margin-right: auto;text-transform:uppercase; text-align:center; width:100%;"><span class="text-imp">LIABILITY RELEASE AND <br/> AUTHORIZATION RE:MEDICAL<br/> <u>INFORMATION AND PUBLICITY</u></span></div>
+        </div>
+            <body>
+               <div class="paragraph"> <p>The undersigned have requested that the Make-A-Wish Foundation of  as well as the Make-A-Wish Foundation of America, all licensed chapters and
+                  affiliates thereof, and their respective volunteers, officers, directors, employees and
+                  agents (collectively, "Make-A-Wish"), fulfill a wish (the “Wish”) for
+                 {!currentCase.Contact.Name}  ("Wish Child"). The Wish Child and the following
+                 people (collectively, “Participants”) have requested that Make-A-Wish allow them to
+                 participate in the Wish: (indicate names of potential wish participants)</p>
+                 
+                 <p>
+                     <div style="border-bottom:1px solid #000 !important; border:none;margin-top:3%;">{!Name}</div>
+                     <div style="border-bottom:1px solid #000 !important; border:none;margin-top:3%;"></div>
+                     <div style="border-bottom:1px solid #000 !important; border:none;margin-top:3%"></div>
+                </p>
+               </div>
+               <div class="paragraph">
+                <center><span class="text-imp"><u>Liability Release</u></span></center>
+               <p>
+                    Participants, and the parents or legal guardians of the Wish Child and any
+                    minor Participants, are signing this Liability Release and Authorization Re: Medical
+                    Information and Publicity (“Release and Authorization”) to bind themselves, their
+                    minor children, their heirs, successors, assigns and estates to the conditions
+                    described herein.
+                    Liability Release
+                    Participants understand that involvement in the Wish may entail risk of
+                    injury or harm to the Participants and agree that this risk is fully assumed by the
+                    Participants. In addition, and in consideration of Make-A-Wish considering the
+                    Wish and, if it so determines, granting the Wish, the Participants hereby release
+                    and agree to hold Make-A-Wish harmless for, from and against any and all liability,
+                    damages and claims (“Claims”) of any kind, known and unknown, which may be
+                    connected with, result from, or arise out of the consideration, preparation,
+                    fulfillment or participation in the Wish. This includes, but is not limited to, Claims
+                    involving economic loss, illness or medical condition, accidental injury or death.
+                 
+                 </p>
+            </div>
+            <div class="paragraph">
+                    <center><span class="text-imp"><u>Authorization re: Medical Information</u></span></center>
+                    <p>The parents or legal guardians of Wish Child: (1) grant Make-A-Wish
+                    permission to obtain all medical information about Wish Child that Make-A-Wish
+                    deems necessary for consideration or fulfillment of the Wish; (2) authorize all
+                    healthcare providers, including Wish Child’s primary physician, to provide Make-AWish
+                    with all such information regarding Wish Child; and (3) agree to sign any
+                    additional medical authorization forms that may be required by Wish Child’s
+                    healthcare provider(s).</p><br/>
+
+                    <center><span class="text-imp"><u>Publicity Authorization</u></span></center>
+                    <p>Participants understand and agree that fulfillment of the Wish may result in
+                    publicity, whether or not Make-A-Wish actively takes steps to publicize the Wish.
+                    However, to the extent Make-A-Wish has control over the matter, Wish Child’s
+                    parents or guardians are asked to choose between the following two alternatives.
+                    [Note: By signing this Release and Authorization, all other Participants (or their
+                    parents/guardians if under the age of 18) agree to be bound by the “publicity option”
+                    chosen by Wish Child’s parents or legal guardians.]
+                    </p>
+
+            </div>
+
+
+            <div class="paragraph">
+            
+                    <p><span style="height: 25px; !important;color:white;padding-left:1em !important">\cb_1_yes1\</span><span class="text-imp">OPTION 1 [Publicity O.K.]:</span> Participants authorize Make-A-Wish to
+                    publicize the Wish and to use Participants’ names, likenesses and other information
+                    about Participants and the Wish (including Wish Child’s medical condition), whether
+                    embodied in photographs, videotapes, recordings or any other format (collectively,
+                    “Information”), for purposes of promotion, publication, commercial advertising, or
+                    any other purpose whatsoever, now or at any time in the future. Participants
+                    understand and agree that Make-A-Wish may use any such Information: (1) in all
+                    manner and media whatsoever, whether now known or hereafter invented, including
+                    electronic and print media and the Internet; (2) with or without Participants’ names;
+                    (3) without the payment of royalties or other compensation to anyone; and (4)
+                    without the need to notify them or to seek further approval before doing so.</p>
+             </div>
+            <div class="paragraph">
+                <p>Initials of Wish Child’s parents/<br/></p>
+                <p>guardians if authorizing publicity:<div style="border-bottom:1px solid #000 !important;margin-right:3%; margin-top: -2%; border:none;margin-bottom:0%;min-width:80%;float:right"><span style="height: 25px; !important;color:white;padding-left:1em !important">~sinitial1</span></div></p>
+            </div>
+
+             <div class="paragraph" style="margin-top:5%">
+                    <p><span style="height: 25px; !important;color:white;padding-left:1em !important">\cb_1_yes2 \</span><span class="text-imp">OPTION 2 [Prefer no publicity]:</span> Participants request that information
+                    about their involvement in the Wish not be actively publicized by Make-A-Wish to
+                    the electronic or print news media, posted on the Internet, or used in Make-A-Wish
+                    “collateral” such as newsletters, brochures, annual reports, etc. However, each
+                    Participant understands and agrees: (1) that information regarding the Wish and
+                    Participants will necessarily be discussed with and disclosed to those involved in the
+                    wish process; (2) that Make-A-Wish may publicly describe and promote the Wish
+                    generally, without specifically identifying Participants; and (3) that even if Make-AWish
+                    does not actively publicize the Wish, the general public and media may obtain
+                    information concerning Participants’ involvement in the Wish from other sources.</p>
+             </div>
+
+             <div class="paragraph">
+                <p>Initials of Wish Child’s parents/guardians <br/></p>
+                <p>if prefer Wish not be actively publicized:<div style="border-bottom:1px solid #000 !important; border:none;margin-top: -2%;margin-bottom:0%;min-width:80%;float:right"><span style="height: 25px; !important;color:white;padding-left:1em !important">~sinitial1</span></div></p>
+            </div>
+        <br/>
+            <div class="paragraph">
+                       <p> Participants acknowledge reading and understanding this Release and
+                    Authorization. For the Wish Child and any minor Participants, the signature of
+                    their parent or guardian is on behalf of the parent/guardian and on behalf of the
+                    minor. Participants agree that this Release and Authorization fully and accurately
+                    expresses their understanding and has not been modified orally or in writing.</p>
+            </div>
+            <div class="paragraph">
+                
+                <table align="center" style="border: 0px solid;width:700px !important;">
+                    <tr><td><div style="border-bottom:1px solid #000 !important;margin-top:4%; border:none;min-width:100%;float:left"></div><br/>Date</td>
+                        <td><div style="border-bottom:1px solid #000 !important;margin-top:1%;border:none;min-width:100%;float:left"></div><br/>Parent/Legal Guardian of Wish Child</td>
+                    </tr>
+                    <tr><td><div style="border-bottom:1px solid #000 !important;margin-top:4%; border:none;min-width:100%;float:left"></div><br/>Date</td>
+                        <td><div style="border-bottom:1px solid #000 !important;margin-top:1%; border:none;min-width:100%;float:left"></div><br/>Parent/Legal Guardian of Wish Child</td>
+                    </tr>
+                    <tr><td><div style="border-bottom:1px solid #000 !important;margin-top:4%; border:none;min-width:100%;float:left"></div><br/>Date</td>
+                        <td><div style="border-bottom:1px solid #000 !important;margin-top:1%; border:none;min-width:100%;float:left"></div><br/>Other Adult Participant (if any)</td>
+                    </tr>
+                    <tr><td><div style="border-bottom:1px solid #000 !important;margin-top:4%; border:none;min-width:100%;float:left"></div><br/>Date</td>
+                        <td><div style="border-bottom:1px solid #000 !important;margin-top:1%; border:none;min-width:100%;float:left"></div><br/>Other Adult Participant (if any)</td>
+                    </tr>
+                    <tr><td><div style="border-bottom:1px solid #000 !important;margin-top:4%; border:none;min-width:100%;float:left"></div><br/>Date</td>
+                        <td><div style="border-bottom:1px solid #000 !important;margin-top:1%; border:none;min-width:100%;float:left"></div><br/>Other Adult Participant (if any)</td>
+                    </tr>
+                    <tr><td><div style="border-bottom:1px solid #000 !important;margin-top:4%; border:none;min-width:100%;float:left"></div><br/>Date</td>
+                        <td><div style="border-bottom:1px solid #000 !important;margin-top:1%; border:none;min-width:100%;float:left"></div><br/>Parent/Legal Guardian of Other Minor Participant (if any)</td>
+                    </tr>
+                    <tr><td><div style="border-bottom:1px solid #000 !important;margin-top:1%; border:none;min-width:100%;float:left"></div><br/>Date</td>
+                        <td><div style="border-bottom:1px solid #000 !important;margin-top:1%; border:none;min-width:100%;float:left"></div><br/>Parent/Legal Guardian of Other Minor Participant (if any)</td>
+                    </tr>
+                    
+                </table>
+              
+            <table align="center" style="border: 0px solid;width:700px !important;">
+           
+             <apex:variable var="i" value="{!1}"/> 
+                   <apex:repeat value="{!listofSenderName}" var="name">
+                        
+                        <tr>
+                          
+                            <td>Signature : <span style="height: 25px; !important;color:white;padding-left:1em !important">~s{!i}</span></td>                            
+                                               
+                        </tr>
+                       <tr>
+                       <td>Date : <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                                                <apex:param value="{!NOW()}" />
+                                                                    </apex:outputText></td> 
+                       <td>{!name}</td>         
+                       </tr> 
+                       
+                     <apex:variable var="i" value="{!i+1}"/>
+                 </apex:repeat> 
+            </table>
+              
+            </div>                  
+
+            </body>
+ 
+ 
+    </apex:form>
+
+</apex:page>

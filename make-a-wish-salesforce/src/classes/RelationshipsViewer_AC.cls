@@ -128,8 +128,7 @@ public class RelationshipsViewer_AC{
         String oldCountry;
         String newPostalCode;
         String oldPostalCode;
-        string contactInfo = 'Following contact information(s) have been updated by the volunteer :' + '<Br/>';
-        
+        string contactInfo ='' ;
         Map<Id,Contact> updateContactMap = new Map<Id,Contact>();
         List<Task> demogarphicTaskList = new List<Task>();
         isSave = false;
@@ -155,7 +154,7 @@ public class RelationshipsViewer_AC{
                        (oldwishChildCon.MailingPostalCode != newWishChildCon.MailingPostalCode))
                         system.debug('@@@@@@@ oldWishChildCon @@@@@@@@@'+oldwishChildCon);
                     
-                    contactInfo  =  contactInfo +'<Br/>' + 'Name :'+' '+ '  '+oldwishChildCon.Name+ '  '+' ; '+'<Br/>';
+                    contactInfo  =  'Following wish child information(s) have been updated by the volunteer :' + '<Br/>' + 'Name :'+' '+ '  '+oldwishChildCon.Name+ '  '+' ; '+'<Br/>';
                     if(oldwishChildCon.Phone != newWishChildCon.Phone){
                         newWishChildCon .Hidden_Phone__c  = oldwishChildCon.Phone;
                         
@@ -183,7 +182,7 @@ public class RelationshipsViewer_AC{
                             contactInfo  = contactInfo+'<Br/>'+ 'Old Email Value:'+ ' '+ oldEmail +'<Br/>' +' New Email Value:' + ' '+ newEmail+ '; '+'<Br/>';
                         else{
                             if(newWishChildCon .Hidden_Email__c != Null)
-                                contactInfo  = contactInfo+'<Br/>' +'New Phone Value :' +' '+ newEmail+';' + '<Br/>';
+                                contactInfo  = contactInfo+'<Br/>' +'New Email Value :' +' '+ newEmail+';' + '<Br/>';
                         }
                         updateContactMap.put(newWishChildCon.Id,newWishChildCon);
                     } 
@@ -257,7 +256,7 @@ public class RelationshipsViewer_AC{
                             contactInfo  = contactInfo+'<Br/>'+ 'Old Zip Code Value:'+' '+ '  '+oldPostalCode +'<Br/>'+' New Zip Code Value:' +' '+'  '+newPostalCode + '; '+'<Br/>';
                         else{
                             if(newWishChildCon .Hidden_Zip_Code__c != Null)
-                                contactInfo =contactInfo+'<Br/>' +' New Zip Code Value:'+' '+newPostalCode +';'+'<Br/>';
+                                contactInfo =contactInfo+'<Br/>' +' New Zip Code Value:'+' '+newPostalCode +';'+'<Br/>'+'<Br/>';
                         }
                         updateContactMap.put(newWishChildCon.Id,newWishChildCon);  
                     }
@@ -266,19 +265,23 @@ public class RelationshipsViewer_AC{
             }
             
         }
+       
+           
         if(dbRelatedContactList != Null && dbRelatedContactList.size() > 0){
+        if(contactInfo != '')
+           contactInfo = contactInfo+'<Br/>'+'<Br/>'+'Following Related Contact information(s) have been updated by the volunteer :' + '<Br/>';
+           else
+           contactInfo = 'Following Related Contact information(s) have been updated by the volunteer :';
             for(Contact oldwishChildCon : clonedFamilyContactList){
                 
                 for(Contact newWishChildCon : dbRelatedContactList ){
-                    
+                   contactInfo = contactInfo +'<Br/>'+contactInfo+'<Br/>' + 'Name :'+' '+'  '+newWishChildCon.FirstName+'  '+'  '+newWishChildCon.LastName+'  '+' ; '+'<Br/>';
                     if(oldwishChildCon.Id == newWishChildCon.Id){
                         
                         if((oldwishChildCon.Phone != newWishChildCon.Phone) || (oldwishChildCon.Email != newWishChildCon.Email) || (oldwishChildCon.MailingStreet !=newWishChildCon.MailingStreet) ||
                            (oldwishChildCon.MailingCity != newWishChildCon.MailingCity) ||  (oldwishChildCon.MailingState!= newWishChildCon.MailingState)  || (oldwishChildCon.MailingCountry!= newWishChildCon.MailingCountry) ||
                            (oldwishChildCon.MailingPostalCode != newWishChildCon.MailingPostalCode))
-                            
-                            contactInfo  = contactInfo+'<Br/>' + 'Name :'+' '+'  '+newWishChildCon.FirstName+'  '+'  '+newWishChildCon.LastName+'  '+' ; '+'<Br/>';
-                        
+                         
                         if(oldwishChildCon.Phone != newWishChildCon.Phone){
                             newWishChildCon .Hidden_Phone__c  = oldwishChildCon.Phone;
                             

@@ -9,7 +9,7 @@
         </div>
         
         <div class="row">
-            <apex:outputLink styleClass="center-block maw-logo" value="VolunteerLanding_VF"><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></apex:outputLink>    
+            <apex:outputLink styleClass="center-block maw-logo" value=""><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></apex:outputLink>    
         </div>
         
       

@@ -6,7 +6,7 @@ Description : This UserTrigger_AT is used to create a public group and public gr
               user record is created.
 *************************************************************************************************/
 
-trigger UserTrigger_AT on User (after insert,after update) {
+trigger UserTrigger_AT on User (after insert,after update,before update) {
     List<User> newUserList = new List<User>();
     Map<Id,User> prospectiveUserMap = new Map<Id,User>();
     
@@ -41,4 +41,21 @@ trigger UserTrigger_AT on User (after insert,after update) {
         UserTriggerHandler.updateUser(inActiveUserIdSet);
          
     }
+    
+     Set<Id> UserIdSet=new Set<Id>();
+     if(Trigger.isbefore && Trigger.isUpdate){
+        Set<Id> inActiveCommunityUserIdSet = new Set<Id>();
+      
+         for(User newUser : Trigger.new){
+             if(newUser.IsActive == false && trigger.oldMap.get(newUser.Id).IsActive == TRue ){
+                
+                newUser.Inactive_Date__c=system.Today();
+             }
+             if(newUser.IsActive == true && trigger.oldMap.get(newUser.Id).IsActive == False ){
+              
+                newUser.Inactive_Date__c=null;
+             }
+            
+         }
+     }   
 }

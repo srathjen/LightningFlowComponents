@@ -28,19 +28,37 @@ public class WishJourneyController{
     public boolean completed{get;set;} 
     public boolean closed{get;set;}
     
+    public integer referredDays{get;set;}
+    public integer qualifiedDays{get;set;}
+    public integer determinationDays{get;set;}
+    public integer anticipationDays{get;set;}
+    public integer effectDays{get;set;}
     
     public WishJourneyController(ApexPages.StandardController stdController) 
     {
         currCase = (Case)stdController.getRecord();
         currCase = [SELECT Id,RecordType.name,Contact.FirstName,Contact.LastName,status,Days_in_stage__c,Rush__c, 
+                    End_Date__c, Parent.End_Date__c, Referral_Date__c, Parent.Referral_Date__c,
+                    Qualified_Date__c, Parent.Qualified_Date__c,Anticipated_Wish_Date__c,
+                    Parent.Anticipated_Wish_Date__c,Wish_Determined_Date__c, Parent.Wish_Determined_Date__c,
                     Parent.Rush__c,contactId FROM CASE WHERE Id = :currCase.id];
+                    
+                    
+                    
         caseWithStatusMap = new Map<string, string>();
         recordTypeWithDaysMap = new Map<string, string>();
         caseRecTypeAndIds = new Map<string, string>();
         mapofCaseRecordTypeIDandName = new Map<String,String>();
         String objectAPIName = 'Case' ; //any object api to which dynamically retriving the record type infos
         Schema.DescribeSObjectResult sobjectResult = Schema.getGlobalDescribe().get(objectAPIName).getDescribe();
-        List<Schema.RecordTypeInfo> recordTypeInfo = sobjectResult.getRecordTypeInfos();        
+        List<Schema.RecordTypeInfo> recordTypeInfo = sobjectResult.getRecordTypeInfos();
+        referredDays =0;
+        qualifiedDays =0;
+        determinationDays = 0;
+        anticipationDays =0;
+        effectDays =0;
+        
+                
         for(Schema.RecordTypeInfo info : recordTypeInfo)
         {
             mapofCaseRecordTypeIDandName.put(info.getRecordTypeId(), info.getName());
@@ -49,6 +67,8 @@ public class WishJourneyController{
         if(currCase != Null)
         {
            caseWithStatusMap.put(currCase.Recordtype.Name,currcase.status);
+           Date currDate = Date.Today();
+           
            if(String.valueOf(currCase.Days_in_stage__c) != Null)
                recordTypeWithDaysMap.put(currCase.Recordtype.Name,String.valueOf(currCase.Days_in_stage__c));
            
@@ -56,10 +76,38 @@ public class WishJourneyController{
            {
                rushWish = currCase.Rush__c;
                parentCaseID = currCase.id;
+               if(currCase.Referral_Date__c != Null)
+                   referredDays = (currCase.Referral_Date__c).daysBetween(currDate);
+               if(currCase.Qualified_Date__c!= Null)
+                   qualifiedDays =(currCase.Qualified_Date__c).daysBetween(currDate);
+               if(currCase.Wish_Determined_Date__c!= Null)
+                   determinationDays = (currCase.Wish_Determined_Date__c).daysBetween(currDate);
+               if(currCase.Anticipated_Wish_Date__c!= Null)
+                   anticipationDays =(currDate).daysBetween(currCase.Anticipated_Wish_Date__c);
+              if(currCase.End_Date__c!= Null)
+               effectDays =(currCase.End_Date__c).daysBetween(currDate);
+               
            }
            else if(currCase.ParentId != Null)
            {
+           
                rushWish = currCase.Parent.Rush__c;
+               
+            if(currCase.Parent.Referral_Date__c!= Null)
+               referredDays = (currCase.Parent.Referral_Date__c).daysBetween(currDate);
+               
+           if(currCase.Parent.Qualified_Date__c!= Null)
+               qualifiedDays =(currCase.Parent.Qualified_Date__c).daysBetween(currDate);
+               
+            if(currCase.Parent.Wish_Determined_Date__c!= Null)
+               determinationDays = (currCase.Parent.Wish_Determined_Date__c).daysBetween(currDate);
+
+            if(currCase.Parent.Anticipated_Wish_Date__c!= Null)
+               anticipationDays =(currDate).daysBetween(currCase.Parent.Anticipated_Wish_Date__c);
+               
+            if(currCase.Parent.End_Date__c!= Null)
+               effectDays =(currCase.Parent.End_Date__c).daysBetween(currDate);
+               
                parentCaseID = currCase.ParentId;
            }
                
@@ -136,17 +184,17 @@ public class WishJourneyController{
        {
           caseWithStatusMap.put('Wish Determination','Not Started');
        }
-       if(!caseWithStatusMap.containsKey('Wish Effect'))
+       if(!caseWithStatusMap.containsKey('Wish Impact'))
        {
-          caseWithStatusMap.put('Wish Effect','Not Started');
+          caseWithStatusMap.put('Wish Impact','Not Started');
        }
-       if(!caseWithStatusMap.containsKey('Wish Granted'))
+       if(!caseWithStatusMap.containsKey('Wish Granting'))
        {
-          caseWithStatusMap.put('Wish Granted','Not Started');
+          caseWithStatusMap.put('Wish Granting','Not Started');
        }
-       if(!caseWithStatusMap.containsKey('Wish Planning & Anticipation'))
+       if(!caseWithStatusMap.containsKey('Wish Planning'))
        {
-          caseWithStatusMap.put('Wish Planning & Anticipation','Not Started');
+          caseWithStatusMap.put('Wish Planning','Not Started');
        }
        
         if(caseRecTypeAndIds.containsKey('Wish'))
@@ -155,12 +203,12 @@ public class WishJourneyController{
              assitId = caseRecTypeAndIds.get('Wish Assist');
          if(caseRecTypeAndIds.containsKey('Wish Determination'))
              determinationId = caseRecTypeAndIds.get('Wish Determination');
-         if(caseRecTypeAndIds.containsKey('Wish Effect'))
-             effectId = caseRecTypeAndIds.get('Wish Effect');  
-         if(caseRecTypeAndIds.containsKey('Wish Granted'))
-             grantId= caseRecTypeAndIds.get('Wish Granted');  
-         if(caseRecTypeAndIds.containsKey('Wish Planning & Anticipation'))
-             anticipationId = caseRecTypeAndIds.get('Wish Planning & Anticipation'); 
+         if(caseRecTypeAndIds.containsKey('Wish Impact'))
+             effectId = caseRecTypeAndIds.get('Wish Impact');  
+         if(caseRecTypeAndIds.containsKey('Wish Granting'))
+             grantId= caseRecTypeAndIds.get('Wish Granting');  
+         if(caseRecTypeAndIds.containsKey('Wish Planning'))
+             anticipationId = caseRecTypeAndIds.get('Wish Planning'); 
       
        if(!recordTypeWithDaysMap.containsKey('Wish'))
        {
@@ -174,19 +222,19 @@ public class WishJourneyController{
        {
           recordTypeWithDaysMap.put('Wish Determination','');
        }
-       if(!recordTypeWithDaysMap.containsKey('Wish Effect'))
+       if(!recordTypeWithDaysMap.containsKey('Wish Impact'))
        {
-          recordTypeWithDaysMap.put('Wish Effect','');
+          recordTypeWithDaysMap.put('Wish Impact','');
        }
-       if(!recordTypeWithDaysMap.containsKey('Wish Granted'))
+       if(!recordTypeWithDaysMap.containsKey('Wish Granting'))
        {
-          recordTypeWithDaysMap.put('Wish Granted','');
+          recordTypeWithDaysMap.put('Wish Granting','');
        }
-       if(!recordTypeWithDaysMap.containsKey('Wish Planning & Anticipation'))
+       if(!recordTypeWithDaysMap.containsKey('Wish Planning'))
        {
-          recordTypeWithDaysMap.put('Wish Planning & Anticipation','');
+          recordTypeWithDaysMap.put('Wish Planning','');
        }
      }
-  
+   
    
 }

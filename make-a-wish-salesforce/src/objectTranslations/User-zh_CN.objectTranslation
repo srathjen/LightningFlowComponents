@@ -25,6 +25,10 @@
         <name>Inactive_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Is Inactive --></label>
+        <name>Is_Inactive__c</name>
+    </fields>
+    <fields>
         <label><!-- LMS Id --></label>
         <name>LMS_Id__c</name>
     </fields>
@@ -48,6 +52,14 @@
     <fields>
         <label><!-- DocuSign API UserName --></label>
         <name>Loop__dsToken__c</name>
+    </fields>
+    <fields>
+        <label><!-- Month Of Inactive --></label>
+        <name>Month_Of_Inactive__c</name>
+    </fields>
+    <fields>
+        <label><!-- Today Date --></label>
+        <name>Today_Date__c</name>
     </fields>
     <fields>
         <label><!-- Year of Inactive --></label>

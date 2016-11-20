@@ -116,7 +116,7 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Wish__c</field>
+            <field>Name__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -433,6 +433,40 @@
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Approval_Status__c</fullName>
+        <description>It is used to identify the status of the record</description>
+        <externalId>false</externalId>
+        <label>Approval Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Initiated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejection Notification</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Assigned</fullName>
+                <default>true</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
     </fields>
     <fields>
         <fullName>Chapter_Name__c</fullName>
@@ -1801,13 +1835,48 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
         <description>This record type would associate the volunteer to non wish and event</description>
         <label>Non Wish &amp; Event</label>
         <picklistValues>
+            <picklist>Approval_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initiated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Assigned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejection Notification</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Reason_Inactive__c</picklist>
+            <values>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactivated</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Moved</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Non-responsive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1916,13 +1985,48 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
         <description>This record type would associate the volunteer to the wish</description>
         <label>Wish</label>
         <picklistValues>
+            <picklist>Approval_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initiated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Assigned</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejection Notification</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Reason_Inactive__c</picklist>
+            <values>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactivated</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Moved</fullName>
                 <default>false</default>
             </values>
             <values>
                 <fullName>Non-responsive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

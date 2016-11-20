@@ -8,15 +8,26 @@
         
         var ddpId = event.getParam("arguments").ddpId;
         var recordId = event.getParam("arguments").recordId;
+        var contactId = event.getParam("arguments").contactId;
+        var hasAdhocApexClass = event.getParam("arguments").hasAdhocApexClass;
+        var attachmentAllowed = event.getParam("arguments").attachmentAllowed;
+        var attachmentRequired = event.getParam("arguments").attachmentRequired;
+        var searchString = component.get("v.searchString");
         
-        component.set("v.attachmentAllowed",  event.getParam("arguments").attachmentAllowed);
-        component.set("v.attachmentRequired",  event.getParam("arguments").attachmentRequired);
-        component.set("v.nextButtonDisabled", event.getParam("arguments").attachmentRequired);
+        component.set("v.attachmentAllowed", attachmentAllowed);
+        component.set("v.attachmentRequired", attachmentRequired);
+        component.set("v.hasAdhocApexClass", hasAdhocApexClass);
+        component.set("v.nextButtonDisabled", attachmentRequired);
         
         var action = component.get("c.getOptionalDocuments");
         action.setParams({
             ddpId : ddpId,
-            recordId : recordId
+            recordId : recordId,
+            contactId : contactId,
+            searchString : searchString,
+            attachmentAllowed : attachmentAllowed,
+            attachmentRequired : attachmentRequired,
+            hasAdhocApexClass : hasAdhocApexClass
         });
         action.setCallback(this, function(response) {
             if (response.getState() === "SUCCESS") {
@@ -48,7 +59,7 @@
         var searchString = event.getParams().arguments.searchString;
         component.find('documentTiles').search(searchString);
     },
-    handleErrorEvent : function(component, event) {
+    handleError : function(component, event) {
         component.set("v.hasErrorOccurred", true);
         component.set("v.errorMessage", event.getParam("message"));
         event.stopPropagation();

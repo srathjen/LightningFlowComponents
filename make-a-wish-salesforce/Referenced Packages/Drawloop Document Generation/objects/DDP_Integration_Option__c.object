@@ -131,6 +131,10 @@
                 <fullName>Office 365</fullName>
                 <default>false</default>
             </picklistValues>
+            <picklistValues>
+                <fullName>SFTP</fullName>
+                <default>false</default>
+            </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
@@ -916,19 +920,24 @@
         <fullName>Storage_Location__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
-        <formula>CASE( 
-    Attach_As__c , 
-    &quot;FTP&quot; , FTP__c , 
-    &quot;SFTP&quot; , FTP__c , 
-    &quot;Content&quot;,  Content_Workspace__c ,
-    &quot;Content - User Selected&quot;,  Content_Workspace__c,
-    &quot;Box&quot; ,         IF(  ISBLANK( Storage_Folder__c )  , &quot;Root&quot;, Storage_Folder__c ) &amp; &quot; [&quot; &amp; HYPERLINK(&quot;/apex/loop__ddpEdit?type=storageFolder&amp;cioId=&quot; &amp; Id , &quot;Change&quot; , &quot;_self&quot; ) &amp; &quot;]&quot; ,
-    &quot;LOOP Storage&quot;, IF(  ISBLANK( Storage_Folder__c )  , &quot;Root&quot;, Storage_Folder__c ) &amp; &quot; [&quot; &amp; HYPERLINK(&quot;/apex/loop__ddpEdit?type=storageFolder&amp;cioId=&quot; &amp; Id , &quot;Change&quot; , &quot;_self&quot; ) &amp; &quot;]&quot; ,
-    &quot;SpringCM&quot;,     IF(  ISBLANK( Storage_Folder__c )  , &quot;Root&quot;, Storage_Folder__c ) &amp; &quot; [&quot; &amp; HYPERLINK(&quot;/apex/loop__ddpEdit?type=storageFolder&amp;cioId=&quot; &amp; Id , &quot;Change&quot; , &quot;_self&quot; ) &amp; &quot;]&quot; ,
-    &quot;Office 365&quot;,   IF(  ISBLANK( Storage_Folder__c )  , &quot;Root&quot;, Storage_Folder__c ) &amp; &quot; [&quot; &amp; HYPERLINK(&quot;/apex/loop__ddpEdit?type=storageFolder&amp;cioId=&quot; &amp; Id , &quot;Change&quot; , &quot;_self&quot; ) &amp; &quot;]&quot; ,
-    &quot;Veeva Vault&quot;, &quot;Vault Options [&quot; &amp; HYPERLINK(&quot;/apex/loop__ddpEdit?type=storageData&amp;cioId=&quot; &amp; Id, &quot;Change&quot;, &quot;_self&quot;) &amp; &quot;]&quot;,
-    &quot;&quot;
+        <formula>IF(
+    OR(ISPICKVAL(Attach_As__c,&quot;FTP&quot;),ISPICKVAL(Attach_As__c,&quot;SFTP&quot;)),
+    FTP__c,
+    IF(
+        OR(ISPICKVAL(Attach_As__c,&quot;Content&quot;),ISPICKVAL(Attach_As__c,&quot;Content - User Selected&quot;)),
+        Content_Workspace__c,
+        IF(
+            ISPICKVAL(Attach_As__c,&quot;Veeva Vault&quot;),
+            &quot;Vault Options [&quot; &amp; HYPERLINK(&quot;/apex/loop__ddpEdit?type=storageData&amp;cioId=&quot; &amp; Id, &quot;Change&quot;, &quot;_self&quot;) &amp; &quot;]&quot;,
+            IF(
+                NOT(ISBLANK(TEXT(Attach_As__c))),
+                IF(ISBLANK( Storage_Folder__c ), &quot;Root&quot;, Storage_Folder__c ) &amp; &quot; [&quot; &amp; HYPERLINK(&quot;/apex/loop__ddpEdit?type=storageFolder&amp;cioId=&quot; &amp; Id , &quot;Change&quot; , &quot;_self&quot; ) &amp; &quot;]&quot;,
+                &quot;&quot;
+            )
+        )
+    )
 )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Storage Location</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -1191,6 +1200,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>SFTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>SpringCM</fullName>
                 <default>false</default>
             </values>
@@ -1344,6 +1357,10 @@
             </values>
             <values>
                 <fullName>Content - User Selected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFTP</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1504,6 +1521,10 @@
             </values>
             <values>
                 <fullName>Office 365</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFTP</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -1683,6 +1704,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>SFTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>SpringCM</fullName>
                 <default>false</default>
             </values>
@@ -1859,6 +1884,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>SFTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>SpringCM</fullName>
                 <default>false</default>
             </values>
@@ -2032,6 +2061,10 @@
             </values>
             <values>
                 <fullName>Office 365</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFTP</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -2267,6 +2300,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>SFTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>SpringCM</fullName>
                 <default>false</default>
             </values>
@@ -2440,6 +2477,10 @@
             </values>
             <values>
                 <fullName>Office 365</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFTP</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -2779,6 +2820,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>SFTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>SpringCM</fullName>
                 <default>false</default>
             </values>
@@ -2955,6 +3000,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>SFTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>SpringCM</fullName>
                 <default>false</default>
             </values>
@@ -3128,6 +3177,10 @@
             </values>
             <values>
                 <fullName>Office 365</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFTP</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -3367,6 +3420,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>SFTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>SpringCM</fullName>
                 <default>false</default>
             </values>
@@ -3584,6 +3641,10 @@
             </values>
             <values>
                 <fullName>Office 365</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SFTP</fullName>
                 <default>false</default>
             </values>
             <values>

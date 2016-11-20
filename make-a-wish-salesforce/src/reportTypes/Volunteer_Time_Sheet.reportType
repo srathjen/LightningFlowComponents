@@ -51,6 +51,16 @@
             <field>Id</field>
             <table>Time_sheet__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Year__c</field>
+            <table>Time_sheet__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Volunteer_Opportunity__c.Volunteer_Name__c.Contact_Account_Name__c</field>
+            <table>Time_sheet__c</table>
+        </columns>
         <masterLabel>Time sheet</masterLabel>
     </sections>
     <sections>
@@ -99,6 +109,7 @@
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Wish Number</displayNameOverride>
             <field>Volunteer_Opportunity__c.Wish__c</field>
             <table>Time_sheet__c</table>
         </columns>

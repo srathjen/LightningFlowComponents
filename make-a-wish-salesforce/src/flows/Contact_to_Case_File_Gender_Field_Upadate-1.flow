@@ -94,6 +94,37 @@
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
+            <conditions>
+                <processMetadataValues>
+                    <name>inputDataType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>leftHandSideType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>operatorDataType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <processMetadataValues>
+                    <name>rightHandSideType</name>
+                    <value>
+                        <stringValue>String</stringValue>
+                    </value>
+                </processMetadataValues>
+                <leftValueReference>myVariable_current.RecordType.Name</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Wish Child</stringValue>
+                </rightValue>
+            </conditions>
             <connector>
                 <targetReference>myRule_1_A1</targetReference>
             </connector>
@@ -101,7 +132,7 @@
         </rules>
     </decisions>
     <description>When contact gender changed on contact record all corresponding case - case file gender field update</description>
-    <interviewLabel>Contact_to_Case_File_Gender_Field_Upadate-1_Contact</interviewLabel>
+    <interviewLabel>Contact_to_Case_File_Gender_Field_Upadate-6_Contact</interviewLabel>
     <label>Contact to Case File Gender Field Upadate</label>
     <processMetadataValues>
         <name>ObjectType</name>
@@ -132,7 +163,7 @@
         <processMetadataValues>
             <name>evaluationType</name>
             <value>
-                <stringValue>criteria</stringValue>
+                <stringValue>always</stringValue>
             </value>
         </processMetadataValues>
         <processMetadataValues>
@@ -144,11 +175,11 @@
         <processMetadataValues>
             <name>reference</name>
             <value>
-                <stringValue>[Contact].Cases__r</stringValue>
+                <stringValue>[Contact].Cases</stringValue>
             </value>
         </processMetadataValues>
         <name>myRule_1_A1</name>
-        <label>Update Hidden gender on Case</label>
+        <label>Update Hidden Gender Field on Case</label>
         <locationX>100</locationX>
         <locationY>200</locationY>
         <filters>
@@ -158,53 +189,10 @@
                     <booleanValue>true</booleanValue>
                 </value>
             </processMetadataValues>
-            <field>Local_MCA_Team__c</field>
+            <field>ContactId</field>
             <operator>EqualTo</operator>
             <value>
                 <elementReference>myVariable_current.Id</elementReference>
-            </value>
-        </filters>
-        <filters>
-            <processMetadataValues>
-                <name>implicit</name>
-                <value>
-                    <booleanValue>false</booleanValue>
-                </value>
-            </processMetadataValues>
-            <processMetadataValues>
-                <name>inputDataType</name>
-                <value>
-                    <stringValue>ID</stringValue>
-                </value>
-            </processMetadataValues>
-            <processMetadataValues>
-                <name>leftHandSideLabel</name>
-                <value>
-                    <stringValue>Wish Record Type</stringValue>
-                </value>
-            </processMetadataValues>
-            <processMetadataValues>
-                <name>leftHandSideType</name>
-                <value>
-                    <stringValue>ID</stringValue>
-                </value>
-            </processMetadataValues>
-            <processMetadataValues>
-                <name>operatorDataType</name>
-                <value>
-                    <stringValue>String</stringValue>
-                </value>
-            </processMetadataValues>
-            <processMetadataValues>
-                <name>rightHandSideType</name>
-                <value>
-                    <stringValue>ID</stringValue>
-                </value>
-            </processMetadataValues>
-            <field>RecordTypeId</field>
-            <operator>EqualTo</operator>
-            <value>
-                <stringValue>01236000000xW2mAAE</stringValue>
             </value>
         </filters>
         <inputAssignments>

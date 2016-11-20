@@ -16,10 +16,6 @@
                 <field>dsRoutingOrder__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
-                <field>dsType__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>dsAllowAccessCode__c</field>
             </layoutItems>
@@ -72,10 +68,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>SigningOrder__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>dsRoleName__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -160,7 +152,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hC000000IjrTa</masterLabel>
+        <masterLabel>00h5B000000EeTh</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

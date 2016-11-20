@@ -13,13 +13,9 @@
     <!--Registered events-->
     <aura:registerEvent name="recipientSelected" type="Loop:recipientSelected"/>
     
-    <!--Methods-->
-    <aura:method name="openLookupMenu" action="{!c.openLookupMenu}"/>
-    <aura:method name="closeLookupMenu" action="{!c.closeLookupMenu}"/>
-    
 	<div class="slds">
         <div class="slds-form-element">
-            <div id="searchStringInput" class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right" style="height:34px;" onclick="{!c.openLookupMenu}">
+            <div aura:id="lookupButton" id="searchStringInput" class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right" style="height:34px;" onclick="{!c.openLookupMenu}">
                 <Loop:Svg class="{!v.svgClass + ' lookup-left-icon'}" xlinkHref="{!v.svgLink}"/>
                 <input aura:id="searchString" class="slds-input" style="min-height:34px; height:34px; padding-left:40px;"
                        value="{!v.searchString}" oninput="{!c.updateSearchString}" onkeydown="{!c.search}" onblur="{!c.blurLookupMenu}"

@@ -32,6 +32,10 @@
             <name>UpdateIsApprove</name>
             <type>FieldUpdate</type>
         </action>
+        <action>
+            <name>Volunteer_Opportunity_Approved</name>
+            <type>FieldUpdate</type>
+        </action>
     </finalApprovalActions>
     <finalApprovalRecordLock>false</finalApprovalRecordLock>
     <finalRejectionActions>
@@ -39,9 +43,25 @@
             <name>Update_Rejected_Field</name>
             <type>FieldUpdate</type>
         </action>
+        <action>
+            <name>Volunteer_Opportunity_Rejection_Period</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>VolunteerOpportunity_Uncheck_IsApprove</name>
+            <type>FieldUpdate</type>
+        </action>
     </finalRejectionActions>
     <finalRejectionRecordLock>false</finalRejectionRecordLock>
     <initialSubmissionActions>
+        <action>
+            <name>Uncheck_Rejected</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Volunteer_Opportunity_Approval_Initiated</name>
+            <type>FieldUpdate</type>
+        </action>
         <action>
             <name>VolunteerOpportunity_Uncheck_IsApprove</name>
             <type>FieldUpdate</type>

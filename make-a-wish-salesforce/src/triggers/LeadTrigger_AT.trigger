@@ -20,6 +20,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
            if(newLead.Status == 'Inquiry')
           { 
                boolean referred = true;
+               newLead.Inquiry_Date__c = Date.Today();
               
                if(newLead.City == Null || newLead.StateCode == Null || newLead.PostalCode == Null || newLead.Street == Null)
                   referred = false;
@@ -44,8 +45,16 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
            if(newLead.RFI_Form_Info_Hidden__c==Null && newLead.Override_Dupe_Check__c == false && (newLead.Status == 'Inquiry' || newLead.Status == 'Referred')){
                 newLeadList.add(newLead);
             }
+            
+            if(newLead.Status == 'Referred')
+            {
+                newLead.Inquiry_Date__c = Date.Today();
+                newLead.Referred_Date__c= Date.Today();
+            }
          
         }
+        
+       
         if(newLeadList.size() > 0){
            LeadTriggerHandler.findDuplicateRecords(newLeadList);
         }
@@ -68,17 +77,17 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         
         Boolean flag;
         for(Lead newLead : Trigger.new){
-            if(newLead.Status == 'Referred'){
-                newLead.Referred_Date__c = System.today();
+            if(newLead.Status == 'Referred' && Trigger.oldMap.get(newLead.id).status == 'Inquiry'){
+                newLead.Referred_Date__c = Date.today();
             }
             
             if((newLead.Sub_Status__c == 'Pending Diagnosis Verification') && trigger.oldMap.get(newLead.id).Sub_Status__c != 'Pending Diagnosis Verification'){
-                newLead.Part_A_Sent__c = System.today();
+                newLead.Part_A_Sent__c = Date.today();
             }
             
           
             if((newLead.Status == 'Eligibility Review') || (newLead.Status == 'Qualified') && trigger.oldMap.get(newLead.id).Status == 'Referred'){
-                newLead.Part_A_Received__c = System.today();
+                newLead.Part_A_Received__c = Date.today();
             }
             
             

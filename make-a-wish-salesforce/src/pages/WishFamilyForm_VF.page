@@ -78,7 +78,17 @@
             border-bottom: 0px solid black !important;
             border-top: 0px solid black  !important;
     }
-        
+        .sideNav {
+        	position: fixed;
+            z-index: 99;
+            top: 70px;
+            left: 5px;
+        }
+        .sideNav .navMenu {font-weight : 900;color:#0076d2;text-decoration:none;}
+        .sideNav a {
+        	text-decoration : none !important;
+        }
+        header,main {max-width : 1000px !important;}
     </style>
     <script>
     
@@ -234,10 +244,18 @@
                   
            });
            if(!runBool){
+           
+              validateEmail();
               return false;
               }
            else{
+               var isEmail = validateEmail();
+              if(!isEmail)
+              {
+              return false
+              }else{
               return true;
+              }
               }
         }
     
@@ -272,7 +290,38 @@
        <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
        <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />             
        <main role="main" class="container">
-    
+		<div class="sideNav">
+            <a data-toggle="collapse" href="#childForm">
+                [+]                       
+            </a>
+            <a class="navMenu" href="{!childForm}">WishChild Form</a>
+            <div id="childForm" class="panel-collapse collapse">
+                <a href="#mainSec">Main Section</a><br/> 
+                <a href="#myFav">My Favourites</a><br/> 
+                <a href="#otherFav">Other Favourites</a>                    
+            </div>
+            <br/>
+            <a data-toggle="collapse" href="#familyForm">
+                [+]                       
+            </a>
+            <a class="navMenu" href="{!familyForm}">WishFamily Form</a>
+            <div id="familyForm" class="panel-collapse collapse">
+                <a href="#parentInfo">Gaurdian information</a><br/> 
+                <a href="#reqSign">Required Signatures</a><br/> 
+                <a href="#participantsInfo">Participants Info</a>                     
+            </div>
+            <br/>
+            <a data-toggle="collapse" href="#infoForm">
+                [+]                       
+            </a>
+            <a class="navMenu" href="{!infoForm}">WishInformation Form</a>
+            <div id="infoForm" class="panel-collapse collapse">
+                <a href="#schedule">Scheduling</a><br/> 
+                <a href="#driverInfo">Driver Information</a><br/> 
+                <a href="#medInfo">Medical Information</a><br/> 
+                <a href="#travelInfo">Travel Information</a>                     
+            </div>
+                </div>    
     <apex:form id="frm">       
         <apex:pageblock id="membAdd">
           
@@ -285,7 +334,7 @@
                     <center><p class="header-text">WISH FAMILY FORM</p></center>
                 </div> -->
                 <div class="container-body">
-                    <div class="row top-space">
+                    <div class="row top-space" id="parentInfo">
                         <div class="row">
                             <div class="col-lg-2 text-imp lineHeight">Wish Child Name:</div>
                             <div class="col-lg-3"><apex:inputText value="{!currWishChild.FirstName__c}" html-placeholder="FirstName" styleClass="form-control" style="border-left:5px solid red"/></div>
@@ -381,7 +430,7 @@
                                 <apex:inputfield value="{!currWishChild.Social_Media_Link__c}"   styleClass="form-control" />
                             </p>    
                        </div>
-                      <div class="row top-space pad15">
+                      <div class="row top-space pad15" id="reqSign">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <p class="assistance" style="margin-left:39%">Required Signatures</p>
@@ -433,7 +482,7 @@
                         <b>NOTE:</b> Make-A-Wish cannot guarantee the participation of any
                         individual(s) listed below. <br/>
                         
-                         <div class="row top-space pad15">
+                         <div class="row top-space pad15" id="participantsInfo">
                             <table class="responsive table-striped">
                                 <tbody>
                                     <tr>
@@ -533,8 +582,8 @@
                         <div class="col-sm-12">
                             <div class="text-center">
                                 <apex:Commandbutton value="Back" action="{!BackToWCF}" styleClass="btn btn-default mg-rt" immediate="true"/>
-                                <apex:Commandbutton value="Save & Exit" action="{!SaveandExit}" styleClass="btn btn-default mg-rt phonecheck" onclick="return ClickToValidate(),validateEmail();"/>
-                                <apex:Commandbutton value="Next" action="{!WFFNext}" styleClass="btn btn-default mg-rt phonecheck" onclick="return ClickToValidate(),validateEmail();"/>
+                                <apex:Commandbutton value="Save & Exit" action="{!SaveandExit}" styleClass="btn btn-default mg-rt phonecheck" onclick="return ClickToValidate();"/>
+                                <apex:Commandbutton value="Next" action="{!WFFNext}" styleClass="btn btn-default mg-rt phonecheck" onclick="return ClickToValidate();"/>
                                 <apex:Commandbutton value="Cancel" action="{!cancelfunction}" styleClass="btn btn-default" immediate="true"/>
                             </div>
                         </div>

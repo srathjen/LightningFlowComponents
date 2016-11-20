@@ -2,14 +2,19 @@ public with sharing class CustomApprovalProcessController {
     
     
     //Properties Declaration
-    transient public ApprovalList aSW {get; private set;}
-    private Id recordId;
-    private Id retURLRecordId;
-    private String ORG_LNK;
+    transient public ApprovalList aSW {get;set;}
+    public Id recordId {get;set;}
+    public Id retURLRecordId {get;set;}
+    public String ORG_LNK;
     
     //Properties Construnctor
     public CustomApprovalProcessController(ApexPages.StandardController controller) {
-        retURLRecordId = recordId = ApexPages.currentPage().getParameters().get('caseId');
+        if(retURLRecordId == null && recordId == null) {
+            retURLRecordId = recordId = ApexPages.currentPage().getParameters().get('caseId');
+        }
+        System.debug('>>>>>>>>>>>>>>>>>>>>>>>Custom COntroller'+retURLRecordId);
+        System.debug('>>>>>>>>>>>>>>>>>>>>>>>recordId'+recordId);
+        //retURLRecordId = recordId = ApexPages.currentPage().getParameters().get('caseId');
         ORG_LNK = 'https://'+URL.getSalesforceBaseUrl().getHost();
         if(!String.isBlank(recordID)){
             aSW = new ApprovalList();
@@ -55,7 +60,7 @@ public with sharing class CustomApprovalProcessController {
         approvalResultForObject.recallApprovalProcessLink = recallApprovalProcessLink;
         return approvalResultForObject;
     }
-    private Map<Id,ProcessInstance> getProcessHistory(Id objectId){
+    public Map<Id,ProcessInstance> getProcessHistory(Id objectId){
         return new Map<Id,ProcessInstance>([SELECT Id, (SELECT ID, ProcessNodeId,
                                                         StepStatus,Comments,TargetObjectId,ActorId,CreatedById,IsDeleted,IsPending
                                                         ,OriginalActorId,ProcessInstanceId,RemindersSent,CreatedDate, Actor.Name,

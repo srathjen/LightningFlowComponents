@@ -84,6 +84,9 @@
             {
                  background: rgba(251,199,44,.2);
             }
+            .disable_a_href{
+                pointer-events: none;
+            }
     </style>
      <style type="text/css">
         .custPopup{
@@ -118,10 +121,20 @@
         $(document).ready(function(){
             var userident = document.getElementById("Pge:newExpense:userInfo").value;
             var typeExpand= document.getElementById("Pge:newExpense:WEtypeExpand").value;
+           
             if(userident !=null ){
-               
-                $("#wishexpense").find("input, select, button, textarea").attr("disabled",userident);
+                if(userident == 'true'){
+                     
+                    $("#wishexpense").find("input, select, button, textarea").attr("disabled",true);
+                    $("#wishexpense").find(".addExpenseClass").addClass("disable_a_href");
+                    <!-- $("#wishexpense").find("a").addClass("disable_a_href"); -->
+                }
+                else{
+                    $("#wishexpense").find("input, select, button, textarea").attr("disabled",false);
+                    <!-- $("#wishexpense").find("a").removeClass("disable_a_href"); -->
+                }
             }
+            
             if(typeExpand !=null ){
                $('.'+ typeExpand).toggle(100);;
             }
@@ -279,7 +292,7 @@
     
     <apex:pagemessages />
     <div class="slds">
-        <div id="wishexpense" class="slds-card slds-m-horizontal--large " >
+        <div id="wishexpense1" class="slds-card slds-m-horizontal--large " >
             <div style="float:left;width: 50%" >Wish Child Name : {!childName } </div>
             <div style="float:left;width: 50%" >Chapter Name : {!wishChapterName }  </div>
             <br />
@@ -298,7 +311,7 @@
         <body>
             <apex:inputhidden id="userInfo" value="{!UserIdentiy}"/>
             <apex:inputhidden id="WEtypeExpand" value="{!WEtypeExpand}"/>
-            <div id="wishexpense" class="slds-card slds-m-horizontal--large slds-card--empty font-size-x-small" style="font-size:12px !important">
+            <div id="wishexpense" class="slds-card slds-m-horizontal--large slds-card--empty font-size-x-small" style="Overflow:auto;font-size:12px !important">
                 <div class="slds-card__header slds-grid ">
                     <div class="col-lg-2">
                         <apex:selectList id="WishExpenceType" value="{!newExpenseType}" size="1"  styleClass="form-control col-lg-2 new-expType">
@@ -343,20 +356,20 @@
                                 <th class="slds-text-heading--label" scope="col" Style="width:40px">%Diff(P-A)</th >
                                 <th class="slds-text-heading--label slds-cell-wrap" scope="col" Style="width:40px"></th >
                             </tr>
-                            <apex:actionFunction name="deleteRecord" action="{!RemoveWrapper}" rerender="Block">
+                            <!-- <apex:actionFunction name="deleteRecord" action="{!RemoveWrapper}" rerender="Block">
                                 <apex:param name="p1" assignTo="{!transCodeid}" value="transCodeid" />
                                 <apex:param name="p2" assignTo="{!expenseTypekey}" value="expenseTypekey" />
-                            </apex:actionFunction>  
+                            </apex:actionFunction>  --> 
                             <apex:variable value="{!0}" var="cnt"/>
                             <apex:variable value="{!0}" var="cntTemp"/> 
                             <apex:repeat value="{!wishExpenseTypes}" var="expenseType"> 
                                 <tr id="{!cntTemp}" class="clickable" data-toggle="collapse" data-target=".{!cntTemp}collapsed">
                                     <td  align="left" >
-                                        <apex:commandLink action="{!addExpense}"><apex:image value="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png" style="height:20px"/>
+                                        <apex:commandLink styleClass="addExpenseClass" action="{!addExpense}"><apex:image value="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png" style="height:20px"/>
                                             <apex:param name="expenseType" value="{!expenseType}" assignTo="{!expenseType}"/>
                                             <apex:param name="typeExpand" value="{!cntTemp}collapsed" assignTo="{!WEtypeExpand}"/>
                                         </apex:commandLink>
-                                        <a  class="accordion-toggle" data-toggle="collapse" href="#expenseBlock{!cntTemp}" >{!expenseType}</a>
+                                        <a   class="accordion-toggle" data-toggle="collapse" href="#expenseBlock{!cntTemp}" >{!expenseType}</a>
                                     </td>
                                     <td colspan="6"></td>
                                     <apex:outputpanel rendered="{!(SumExpensewrappers[expenseType]) != null}" >

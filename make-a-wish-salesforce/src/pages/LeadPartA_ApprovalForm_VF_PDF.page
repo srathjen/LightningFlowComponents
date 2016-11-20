@@ -91,7 +91,7 @@
                         <td class="texDec">{!currLead.I_m_Part_of_The_Treating_HealthCare_Team__c }</td>
                     </tr>
                     <tr>
-                        <td class="texDec">Is QA 2607 QA2607 in a comatose or vegetative state? :</td>
+                        <td class="texDec">Is {!currLead.FirstName} {!currLead.LastName} in a comatose or vegetative state? :</td>
                         <td class="texDec">{!currLead.Is_in_a_Comatose_Vegetative_State__c}</td>
                     </tr>
                     

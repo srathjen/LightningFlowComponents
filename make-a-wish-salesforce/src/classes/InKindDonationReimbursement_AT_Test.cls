@@ -1,29 +1,49 @@
+/***************************************************************************************************
+Author      : MST Solutions
+CreatedBy   : Chandrasekar
+Date        : 4/10/2016
+Description : This class is used to make sure the unit test and functionality for the InKindDonationReimbursement_AT
+****************************************************************************************************/
 @isTest
 public class InKindDonationReimbursement_AT_Test {
+    
     @testSetup static void methodName() {
+        User systemAdminUser = OrientationandTrainingUtil.createrSystemAdminUser();
+        user currentUserRec = new User();
+        currentUserRec.Id = UserInfo.getUserId();
+        currentUserRec.ManagerId = systemAdminUser.Id;
+        update currentUserRec;
+    }
+    //this method used to create the inkind record
+    static testMethod void InsertInkindRecord(){
         Account voluntterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         Contact volunterrContct = OrientationandTrainingUtil.createVolunteerContact(voluntterAccount.id);
-        OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterrContct.id);
-        
-    }
-    static testMethod void createInkindRecord(){
-        User dbUser = [SELECT Id,UserRoleId,UserName,ProfileId,Email,FirstName,LastName,isActive From User WHERE FirstName =: 'Jonathan' Limit 1];
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        In_Kind_Donation_Reimbursement__c  InkindRec = OrientationandTrainingUtil.CreateInkindRecord(wish.Id);
+        User dbUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterrContct.id);
         system.RunAs(dbUser){
             Test.StartTest();
-            OrientationandTrainingUtil.CreateInkindRecord();
-            
+            OrientationandTrainingUtil.CreateReimbursRecord();
             Test.StopTest();
         }
     }
-        
-        static testMethod void createReimbursementRecord(){
-            User dbUser = [SELECT Id,UserRoleId,UserName,ProfileId,Email,FirstName,LastName,isActive From User WHERE FirstName =: 'Jonathan' Limit 1];
-            system.RunAs(dbUser){
-                Test.StartTest();
-                OrientationandTrainingUtil.createReImbursementRecord();
-                Test.StopTest();
-            }
-            
+    
+    //This method is used to update the inkind record  
+    static testMethod void updateInkindRecord(){
+        Account voluntterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunterrContct = OrientationandTrainingUtil.createVolunteerContact(voluntterAccount.id);
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        In_Kind_Donation_Reimbursement__c  InkindRec = OrientationandTrainingUtil.CreateInkindRecord(wish.Id);
+        User dbUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterrContct.id);
+        system.RunAs(dbUser){
+            Test.StartTest();
+            In_Kind_Donation_Reimbursement__c dbInKindRec = OrientationandTrainingUtil.CreateReimbursRecordwithFalse();
+            dbInKindRec.Make_check_payable_to_me__c = true;
+            update dbInKindRec ;
+            Test.StopTest();
         }
-        
     }
+    
+}

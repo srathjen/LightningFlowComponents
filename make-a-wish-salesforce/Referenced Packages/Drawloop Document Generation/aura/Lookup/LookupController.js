@@ -2,6 +2,23 @@
     openLookupMenu : function(component) {
         component.set("v.recordsFound", []);
         $A.util.addClass(component.find("lookupMenu"), "show");
+        
+        var lookupMenuElement = component.find("lookupMenu").getElement();
+        
+        //Within the RunDdp context:
+        //Can't pop out the dropdown menu due to `overflow-y: auto;` on AccordionSection.cmp. Instead, use `position:fixed;` and insta-snap the menu to where it's suppose to be.
+        var buttonBoundingRect = component.find('lookupButton').getElement().getBoundingClientRect();
+        var width = buttonBoundingRect.width;
+        var left = buttonBoundingRect.left;
+        var top = buttonBoundingRect.top + buttonBoundingRect.height;
+        
+        //This won't work on the SF1 app. Mobile browsers read 'position:fixed' as 'position:absolute'.
+        //We need to either figure out a solution without using 'position:fixed' or rework things inside AccordionSection.cmp.
+        lookupMenuElement.hidden = false;
+        lookupMenuElement.style.position = 'fixed';
+        lookupMenuElement.style.width = width + 'px';
+        lookupMenuElement.style.left = left + 'px';
+        lookupMenuElement.style.top = top + 'px';
     },
     closeLookupMenu : function(component, event, helper) {
         helper.closeLookupMenu(component);
@@ -53,11 +70,10 @@
                 }
                 
                 $A.util.addClass(component.find("searchResultsLoading"), 'hidden');
-                var searchResults = component.find("searchResults");
                 if (searchResults) {
-                    for (var i = 0; i < searchResults.length; i++) {
+                    for (var j = 0; j < searchResults.length; j++) {
                         //If .find() returns a list, for some reason, the elements in the list don't have a .getElement() function. Hence we use .removeClass here
-                        $A.util.removeClass(searchResults[i], "hidden");
+                        $A.util.removeClass(searchResults[j], "hidden");
                     }
                 }
             });

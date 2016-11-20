@@ -15,7 +15,7 @@ other medical professionals around the country, we continue to come closer each
 year to our vision of making every eligible child’s wish come true. Thank you
 for taking the time to help us&nbsp;<i>share the power of a wish<sup>®</sup>.<br>
 </i></span><span style="font-size: 12pt; line-height: 107%;"><br>
-</span><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Century Gothic&quot;, sans-serif;">Please review the&nbsp;</span><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Century Gothic&quot;,sans-serif"><a href="https://fullcopy-wish.cs52.force.com/DiagnosisVerification_VF?leadId={!Lead.Id}">Diagnosis
+</span><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Century Gothic&quot;, sans-serif;">Please review the&nbsp;</span><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Century Gothic&quot;,sans-serif"><a href="https://qa-wish.cs52.force.com/DiagnosisVerification_VF?leadId={!Lead.Id}">Diagnosis
 Verification</a></span><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Century Gothic&quot;, sans-serif;">&nbsp;and submit.</span><span style="font-size: 12pt; line-height: 107%;"><br>
 <br>
 </span><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Century Gothic&quot;, sans-serif;">Password: {!Lead.Part_A_Form_Password__c}</span><span style="font-size: 12pt; line-height: 107%;"><br>

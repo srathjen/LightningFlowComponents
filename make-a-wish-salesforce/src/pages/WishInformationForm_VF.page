@@ -83,7 +83,6 @@
     border: 1px solid #888;
     width: 830px;
 }
-
  </style>
  
   <style type="text/css">
@@ -135,7 +134,17 @@
             }
             
             .labelCol{width:180px;}
-                    
+            .sideNav {
+        	position: fixed;
+            z-index: 99;
+            top: 70px;
+            left: 5px;
+        }
+        .sideNav .navMenu {font-weight : 900;color:#0076d2;text-decoration:none;}
+        .sideNav a {
+        	text-decoration : none !important;
+        }
+        header,main {max-width : 1000px !important;}        
         </style>
     <script type="text/javascript">
     function formatDate(date) {
@@ -246,7 +255,38 @@
       <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
       <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />             
       <main role="main" class="container">
-      
+      <div class="sideNav">
+          <a data-toggle="collapse" href="#childForm">
+                [+]                       
+            </a>
+            <a class="navMenu" href="{!childForm}">WishChild Form</a>
+            <div id="childForm" class="panel-collapse collapse">
+                <a href="#mainSec">Main Section</a><br/> 
+                <a href="#myFav">My Favourites</a><br/> 
+                <a href="#otherFav">Other Favourites</a>                    
+            </div>
+            <br/>
+            <a data-toggle="collapse" href="#familyForm">
+                [+]                       
+            </a>
+            <a class="navMenu" href="{!familyForm}">WishFamily Form</a>
+            <div id="familyForm" class="panel-collapse collapse">
+                <a href="#parentInfo">Gaurdian information</a><br/> 
+                <a href="#reqSign">Required Signatures</a><br/> 
+                <a href="#participantsInfo">Participants Info</a>                     
+            </div>
+            <br/>
+            <a data-toggle="collapse" href="#infoForm">
+                [+]                       
+            </a>
+            <a class="navMenu" href="{!infoForm}">WishInformation Form</a>
+            <div id="infoForm" class="panel-collapse collapse">
+                <a href="#schedule">Scheduling</a><br/> 
+                <a href="#driverInfo">Driver Information</a><br/> 
+                <a href="#medInfo">Medical Information</a><br/> 
+                <a href="#travelInfo">Travel Information</a>                     
+            </div>
+           </div>    
     <apex:form id="formId">
      
     <div id='test123'>
@@ -272,7 +312,7 @@
                     <center><p class="header-text">WISH INFORMATION FORM</p></center>
                 </div>-->
                 <div class="container-body">
-                    <div class="row top-space">
+                    <div class="row top-space" id="schedule">
                         <div class="row">
                             <div class="col-lg-2 text-imp lineHeight">Wish Child's Name:</div>
                             <div class="col-lg-3"><apex:inputField value="{!currWishChild.FirstName__c}" html-placeholder="FirstName" styleClass="form-control"/></div>
@@ -324,7 +364,7 @@
                             <I> <b>Please submit a photocopy of valid driver’s license(s).</b></I> <br/></center>
                     </div>
                     
-                    <div class="row top-space">
+                    <div class="row top-space" id="driverInfo">
                         <div class="row top-space">
                         
                            <table class="responsive table-striped">
@@ -400,7 +440,7 @@
                         </div>
                     </div>
                     
-                    <div class="row top-spac">
+                    <div class="row top-spac" id="medInfo">
                         <b>Medical Information</b> <br/>
                         Please fill out entirely if any requested participant has medical needs. Specific details can be listed within “additional requests”. <br/>
                         
@@ -499,7 +539,7 @@
                         
                         <br/>
                         <br/>
-                        <b>Travel Information</b><br/>
+                        <b id="travelInfo">Travel Information</b><br/>
                         Please fill out entirely if the requested wish is a travel wish.<br/>
                         
                         <table class="responsive table-striped">

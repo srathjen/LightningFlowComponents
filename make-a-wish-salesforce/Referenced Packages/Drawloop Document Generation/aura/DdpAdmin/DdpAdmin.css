@@ -61,7 +61,10 @@
     border-bottom: 0px;
 }
 .THIS .indent {
-    text-indent: 25px;
+    text-indent: 32px;
+}
+.THIS .indent-edition {
+    text-indent: 50px;
 }
 .THIS .border {
     padding: 1rem;
@@ -69,6 +72,19 @@
 }
 .THIS .hidden {
     display: none;
+}
+.THIS .override-focus-outline:focus {
+    outline: auto 0px
+}
+.THIS .override-tree-item-hover:hover {
+    background: none;
+    box-shadow: #0070d2 4px 0 0 inset;
+    cursor: pointer;
+}
+.THIS .override-tree-item-focus:focus {
+    background: #f0f8fc;
+    box-shadow: #0070d2 4px 0 0 inset;
+    cursor: pointer;
 }
 .THIS .column-container {
 	vertical-align: top;
@@ -102,4 +118,20 @@
 .THIS .content-footer {
 	height: 84px;
 	background-color: #f4f6f9;
+}
+.THIS .breadcrumb {
+    text-decoration: none;
+    display: block;
+    padding: 0 .5rem;
+}
+.THIS .breadcrumb-font {
+    font-size: .75rem;
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: .0625rem;
+}
+.THIS .edition-height {
+    display: flex;
+    line-height: 34px;
+    cursor: pointer;
 }

@@ -127,13 +127,13 @@ public class DiagnosisVerification_AC {
                                                                          FROM Diagnosis_Verification__c WHERE Lead__c =: wrapCls.leadId];
             if(diagnosisVerificationList.size() > 0 ) {
                 if(currLead.PD_ICD_Code__c != null || currLead.PD_Condition_Description__c != null) {
-                    if(currLead.SD1_ICD_Code__c == null && currLead.SD1_Condition_Description__c == null) {
+                    if(currLead.SD1_ICD_Code__c == null && currLead.SD1_Condition_Description__c == null && currLead.RFI_Form_Info_Hidden__c != 'Qualified') {
                         wrapCls.otherDiagnosis = true;
-                    } else if(currLead.SD2_ICD_Code__c == null && currLead.SD2_Condition_Description__c == null) {
+                    } else if(currLead.SD2_ICD_Code__c == null && currLead.SD2_Condition_Description__c == null && currLead.RFI_Form_Info_Hidden__c != 'Qualified') {
                         wrapCls.otherDiagnosis1 = true;
-                    } else if(currLead.SD3_ICD_Code__c == null && currLead.SD3_Condition_Description__c == null) {
+                    } else if(currLead.SD3_ICD_Code__c == null && currLead.SD3_Condition_Description__c == null && currLead.RFI_Form_Info_Hidden__c != 'Qualified') {
                         wrapCls.otherDiagnosis2 = true;
-                    } else if(currLead.SD4_ICD_Code__c == null && currLead.SD4_Condition_Description__c == null) {
+                    } else if(currLead.SD4_ICD_Code__c == null && currLead.SD4_Condition_Description__c == null && currLead.RFI_Form_Info_Hidden__c != 'Qualified') {
                         wrapCls.otherDiagnosis4 = true;
                     }
                 }
@@ -959,6 +959,10 @@ public class DiagnosisVerification_AC {
             }
         }
         currLead.Ventilator__c = wrapCls.ventilatorText;
+        if(wrapCls.ventilatorText != null) {
+            travelValuesSet.add(wrapCls.ventilatorText);
+        }
+        
         currLead.lung_disease__c='';
         if(wrapCls.lungDiseaseString!= Null)
         {

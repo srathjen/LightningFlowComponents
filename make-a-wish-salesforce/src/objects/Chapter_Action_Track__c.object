@@ -122,15 +122,6 @@
         <description>It holds the Chapter Name</description>
         <externalId>false</externalId>
         <label>Chapter Name</label>
-        <lookupFilter>
-            <active>true</active>
-            <filterItems>
-                <field>Account.RecordTypeId</field>
-                <operation>equals</operation>
-                <value>Chapter</value>
-            </filterItems>
-            <isOptional>false</isOptional>
-        </lookupFilter>
         <referenceTo>Account</referenceTo>
         <relationshipLabel>Chapter Action Tracks</relationshipLabel>
         <relationshipName>Chapter_Action_Tracks</relationshipName>
@@ -214,7 +205,6 @@
     </fields>
     <fields>
         <fullName>Weeks__c</fullName>
-        <description>It holds week number for the task</description>
         <externalId>false</externalId>
         <label>Weeks</label>
         <precision>5</precision>
@@ -232,15 +222,11 @@
         <label>Wish type</label>
         <picklist>
             <picklistValues>
-                <fullName>Standard</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
                 <fullName>Disney World</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Shopping Spree - Local and Travel</fullName>
+                <fullName>Shopping Spree - Local</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -265,6 +251,10 @@
             </picklistValues>
             <picklistValues>
                 <fullName>Travel - Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Shopping Spree - Travel</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>

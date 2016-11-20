@@ -16,54 +16,36 @@
         }
         return query;
     },
-    load : function(component, sessionId, location) {
+    load : function(component) {
         component.set("v.isLoading", true);
-        
-        var fetchServices = component.get("c.fetchServices");
-        fetchServices.setParams({
-            sessionId: sessionId,
-            location: location ? location : "",
-            domain: component.get("v.loopUrl")
-        });
-        fetchServices.setCallback(this, function(response) {
-            if (response.getState() === "SUCCESS") {
-                var parsedResponse = JSON.parse(response.getReturnValue());
-                if (parsedResponse.isSuccess) {
-                    component.set("v.isTrial", parsedResponse.isTrial);
-                    component.set("v.isSandbox", parsedResponse.isSandbox);
-                    component.set("v.hasContract", parsedResponse.hasContract);
-                    
-                    var isStandard = parsedResponse.isStandard;
-                    this.clearServices(component);
-                    component.set("v.isStandard", isStandard);
-                    
-                    if (isStandard) {
-                        component.set("v.standardScheduledDdp", parsedResponse.scheduledDdp);
-                    }
-                    else {
-                        component.set("v.businessScheduledDdp", parsedResponse.scheduledDdp);
-                        component.set("v.workflowDdp", parsedResponse.workflowApexDdp);
-                        component.set("v.componentLibrary", parsedResponse.componentLibrary);
-                        component.set("v.massDdp", parsedResponse.massDdp);
-                    }
-                    
-            		component.set("v.isLoading", false);
-                }
-                else {
-                    this.fireErrorEvent(component, parsedResponse.errorMessage);
-                }
-                
-                if (parsedResponse.hasContract && !parsedResponse.isSandbox) {
-                    this.disableAll(component);
-                	component.set("v.isLoading", false);
-                }
+        var services = component.get("v.services");
+        if (services.isSuccess) {
+            component.set("v.isTrial", services.isTrial);
+            component.set("v.isSandbox", services.isSandbox);
+            component.set("v.hasContract", services.hasContract);
+            
+            this.clearServices(component);
+            
+            if (component.get('v.isStandard')) {
+                component.set("v.standardScheduledDdp", services.scheduledDdp);
             }
             else {
-                this.fireErrorEvent(component, '');
+                component.set("v.businessScheduledDdp", services.scheduledDdp);
+                component.set("v.workflowDdp", services.workflowApexDdp);
+                component.set("v.componentLibrary", services.componentLibrary);
+                component.set("v.massDdp", services.massDdp);
             }
-        });
+            
+            component.set("v.isLoading", false);
+        }
+        else {
+            this.fireErrorEvent(component, services.errorMessage);
+        }
         
-        $A.enqueueAction(fetchServices);
+        if (services.hasContract && !services.isSandbox) {
+            this.disableAll(component);
+            component.set("v.isLoading", false);
+        }
     },
     disableAll : function(component) {
         component.set("v.disableAll", true);

@@ -146,11 +146,6 @@
         <name>Projected_In_Kind__c</name>
     </fields>
     <fields>
-        <label><!-- Select Approver --></label>
-        <name>Select_Approver__c</name>
-        <relationshipLabel><!-- Wish Expenses --></relationshipLabel>
-    </fields>
-    <fields>
         <label><!-- Transaction Types --></label>
         <name>Transaction_Types__c</name>
         <picklistValues>
@@ -174,32 +169,8 @@
             <translation><!-- Approved --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Budget Approved</masterLabel>
-            <translation><!-- Budget Approved --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Budget Rejected</masterLabel>
-            <translation><!-- Budget Rejected --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Budget Submitted</masterLabel>
-            <translation><!-- Budget Submitted --></translation>
-        </picklistValues>
-        <picklistValues>
             <masterLabel>Initiated</masterLabel>
             <translation><!-- Initiated --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Projected Approved</masterLabel>
-            <translation><!-- Projected Approved --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Projected Rejected</masterLabel>
-            <translation><!-- Projected Rejected --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Projected Submitted</masterLabel>
-            <translation><!-- Projected Submitted --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Rejected</masterLabel>

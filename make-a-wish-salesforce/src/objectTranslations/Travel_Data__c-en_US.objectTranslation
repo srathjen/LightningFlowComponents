@@ -200,17 +200,6 @@
         </sections>
     </layouts>
     <layouts>
-        <layout>Dates</layout>
-        <sections>
-            <label><!-- Custom Links --></label>
-            <section>Custom Links</section>
-        </sections>
-        <sections>
-            <label><!-- Fields --></label>
-            <section>Fields</section>
-        </sections>
-    </layouts>
-    <layouts>
         <layout>Flight</layout>
         <sections>
             <label><!-- Custom Links --></label>

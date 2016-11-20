@@ -68,6 +68,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Dev_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>Dev Id</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Group1__c</fullName>
         <defaultValue>false</defaultValue>
         <description>It hold the details about Group1.</description>

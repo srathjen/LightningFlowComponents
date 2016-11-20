@@ -1408,7 +1408,7 @@
         /* Diagnosis Auto Complete Box*/
         var listOfQues = '';
 
-        $(document).delegate('.StateRecPick','change',function(event){
+        /*$(document).delegate('.StateRecPick','change',function(event){
             if(this.value == 'None'){
 
 
@@ -1430,7 +1430,7 @@
                          }
                      });
             }
-        });
+        });*/
 
         function HealthCareTeam(healthcareTeam1) {
             if(healthcareTeam1 == 'No') {

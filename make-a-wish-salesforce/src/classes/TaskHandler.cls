@@ -8,61 +8,61 @@ public class TaskHandler {
     
     // This method is used to create task after closing related task
     /*public static void CreateNextTask(List<Task> statusUpdatedTaskList, Set<Id> taskRelatedCaseIdsSet) {
-        Constant_AC  constant = new Constant_Ac(); 
-        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
-        Id wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
-        
-        Set<String> taskParentDetailsSet = new  Set<String>();
-        Map<Id,String> idsTaskNamesMap = new Map<Id,String>();
-        
-        Map<Id,Case> recurrenceTaskCasesMap = new Map<Id,Case>();
-        
-        for(Case getRelatedCase : [SELECT Id, RecordTypeId, ContactId, Wish_type__c, Chapter_Name__c,Subject, Status FROM Case WHERE isClosed = false AND Id IN : taskRelatedCaseIdsSet]) {
-            recurrenceTaskCasesMap.put(getRelatedCase.Id, getRelatedCase);
-        }
-        
-        Map<String,List<Task>> taskDetailsMap = new Map<String,List<Task>>();
-        for(Task taskDetails : statusUpdatedTaskList) {
-            if(taskDetails.WhatId != Null) {
-                if(recurrenceTaskCasesMap.containsKey(taskDetails.WhatId)) {
-                    if(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c != null) {
-                        if(taskDetailsMap.containsKey(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c)) {
-                            taskDetailsMap.get(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c).add(taskDetails);
-                        } else {
-                            taskDetailsMap.put(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c, new List<Task>{taskDetails});
-                        }
-                    } 
-                }
-            }
-        } 
-        List<Task> newTaskList = new List<Task>();
-        Set<Id> newTaskCreatedWishesIdsSet = new Set<Id>();
-        Map<String,Chapter_Action_Track__c> chapterDetailsMap = new Map<String,Chapter_Action_Track__c>();
-        for(Chapter_Action_Track__c chapterActionList : [SELECT Id,Task_Name__c,Assigned_To__c, Recurring_Frequency__c,Recurring__c,Wish_Type__c,Chapter_Name__r.Name,Case_Type_Stage__c,Sort_Order__c,Due_Date__c FROM Chapter_Action_Track__c WHERE Wish_Type__c IN :taskDetailsMap.keySet() ORDER BY Sort_Order__c ASC]) {
-            for(String wishTypes : taskDetailsMap.keySet()) {
-                if(taskDetailsMap.containsKey(wishTypes)) {
-                    for(Task createNextTask : taskDetailsMap.get(wishTypes)) {
-                        if(recurrenceTaskCasesMap.get(createNextTask.WhatId).Wish_type__c == wishTypes && recurrenceTaskCasesMap.get(createNextTask.WhatId).Subject == chapterActionList.Case_Type_Stage__c && recurrenceTaskCasesMap.get(createNextTask.WhatId).Chapter_Name__c == chapterActionList.Chapter_Name__r.Name) {
-                            if(createNextTask.Sort_Order__c < chapterActionList.Sort_Order__c && !newTaskCreatedWishesIdsSet.contains(createNextTask.WhatId)) {
-                                newTaskCreatedWishesIdsSet.add(createNextTask.WhatId);
-                                Task newTask = new Task();
-                                newTask.WhatId = createNextTask.WhatId;
-                                newTask.WhoId = createNextTask.WhoId;
-                                newTask.Subject = chapterActionList.Task_Name__c;
-                                newTask.ActivityDate = System.today() + Integer.valueOf(chapterActionList.Due_Date__c);
-                                newTask.Sort_Order__c = chapterActionList.Sort_Order__c;
-                                newTask.TaskVolunteerRole__c = chapterActionList.Assigned_To__c;
-                                newTaskList.add(newTask);
-                            } 
-                        } 
-                    }
-                }
-            }
-        }
-        if(newTaskList.size()>0) {
-            insert newTaskList;
-        }
-    }*/
+Constant_AC  constant = new Constant_Ac(); 
+Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+Id wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+
+Set<String> taskParentDetailsSet = new  Set<String>();
+Map<Id,String> idsTaskNamesMap = new Map<Id,String>();
+
+Map<Id,Case> recurrenceTaskCasesMap = new Map<Id,Case>();
+
+for(Case getRelatedCase : [SELECT Id, RecordTypeId, ContactId, Wish_type__c, Chapter_Name__c,Subject, Status FROM Case WHERE isClosed = false AND Id IN : taskRelatedCaseIdsSet]) {
+recurrenceTaskCasesMap.put(getRelatedCase.Id, getRelatedCase);
+}
+
+Map<String,List<Task>> taskDetailsMap = new Map<String,List<Task>>();
+for(Task taskDetails : statusUpdatedTaskList) {
+if(taskDetails.WhatId != Null) {
+if(recurrenceTaskCasesMap.containsKey(taskDetails.WhatId)) {
+if(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c != null) {
+if(taskDetailsMap.containsKey(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c)) {
+taskDetailsMap.get(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c).add(taskDetails);
+} else {
+taskDetailsMap.put(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c, new List<Task>{taskDetails});
+}
+} 
+}
+}
+} 
+List<Task> newTaskList = new List<Task>();
+Set<Id> newTaskCreatedWishesIdsSet = new Set<Id>();
+Map<String,Chapter_Action_Track__c> chapterDetailsMap = new Map<String,Chapter_Action_Track__c>();
+for(Chapter_Action_Track__c chapterActionList : [SELECT Id,Task_Name__c,Assigned_To__c, Recurring_Frequency__c,Recurring__c,Wish_Type__c,Chapter_Name__r.Name,Case_Type_Stage__c,Sort_Order__c,Due_Date__c FROM Chapter_Action_Track__c WHERE Wish_Type__c IN :taskDetailsMap.keySet() ORDER BY Sort_Order__c ASC]) {
+for(String wishTypes : taskDetailsMap.keySet()) {
+if(taskDetailsMap.containsKey(wishTypes)) {
+for(Task createNextTask : taskDetailsMap.get(wishTypes)) {
+if(recurrenceTaskCasesMap.get(createNextTask.WhatId).Wish_type__c == wishTypes && recurrenceTaskCasesMap.get(createNextTask.WhatId).Subject == chapterActionList.Case_Type_Stage__c && recurrenceTaskCasesMap.get(createNextTask.WhatId).Chapter_Name__c == chapterActionList.Chapter_Name__r.Name) {
+if(createNextTask.Sort_Order__c < chapterActionList.Sort_Order__c && !newTaskCreatedWishesIdsSet.contains(createNextTask.WhatId)) {
+newTaskCreatedWishesIdsSet.add(createNextTask.WhatId);
+Task newTask = new Task();
+newTask.WhatId = createNextTask.WhatId;
+newTask.WhoId = createNextTask.WhoId;
+newTask.Subject = chapterActionList.Task_Name__c;
+newTask.ActivityDate = System.today() + Integer.valueOf(chapterActionList.Due_Date__c);
+newTask.Sort_Order__c = chapterActionList.Sort_Order__c;
+newTask.TaskVolunteerRole__c = chapterActionList.Assigned_To__c;
+newTaskList.add(newTask);
+} 
+} 
+}
+}
+}
+}
+if(newTaskList.size()>0) {
+insert newTaskList;
+}
+}*/
     
     // This method is used to assign the 'Birthday Remainder Task' to primary volunteer
     public static void BirthdayTaskPrimaryVolunteerAssign(List<Task> birthdayTasksList, Set<Id> taskRelatedContactIdsSet) {
@@ -205,7 +205,7 @@ public class TaskHandler {
                 updateStatus.Status__c = 'Pending Training';
                 updateVolunteerRoleStatus.add(updateStatus);
             }
-           
+            
             if(currRole.Chapter_Role__r.Background_Check_Required__c == TRUE)
                 bgRequiredvolIdsSet.add(currRole.Volunteer_Name__c);
             chapterRoleSet.add(currRole.Chapter_Role__c);
@@ -244,14 +244,14 @@ public class TaskHandler {
                 currAffiliation.npe5__Status__c = 'Pending';
             }
             if(volunteerChapterRoleMap.containsKey(currRec.npe5__Contact__c)){
-            for(String currChapterRole : volunteerChapterRoleMap.get(currRec.npe5__Contact__c))
-            {
-                if(chapterRoleOandTsSet.contains(currChapterRole))
+                for(String currChapterRole : volunteerChapterRoleMap.get(currRec.npe5__Contact__c))
                 {
-                    currAffiliation.npe5__Status__c = 'Pending';
+                    if(chapterRoleOandTsSet.contains(currChapterRole))
+                    {
+                        currAffiliation.npe5__Status__c = 'Pending';
+                    }
+                    
                 }
-                
-            }
             }
             
             if(currAffiliation.npe5__Status__c == 'Active')
@@ -262,7 +262,7 @@ public class TaskHandler {
         }
         
         if(updateVolunteerRoleStatus.size() > 0)
-           update updateVolunteerRoleStatus;
+            update updateVolunteerRoleStatus;
         
         if(updateAffliationList.size() > 0)
         {
@@ -286,7 +286,7 @@ public class TaskHandler {
         }
     }
     /* This method is used to fetch the values from associated contact of task and assign with the 
-       corresponding task fields to merge with email template */
+corresponding task fields to merge with email template */
     public static void updateTaskEmailMergeFields(Set<id> volunteerConatctIdsSet,list<Task> updatedTaskList){
         Map<Id,Contact> contactInfoMap = new Map<Id,Contact>();
         
@@ -325,7 +325,7 @@ public class TaskHandler {
         Id defaultRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
         List<Task> newRecTaskList = new List<Task>();
         Map<Id,Case> parentCaseMap = new Map<Id,Case>([SELECT Id,Status,ParentId FROM Case WHERE RecordTypeId = :parentWishRecordTypeId AND Id IN :checkinTaskIdSet]);
-      
+        
         for(Task recCheckinTask : createCheckinTaskList) {
             if((parentCaseMap.containsKey(recCheckinTask.WhatId) && (parentCaseMap.get(recCheckinTask.WhatId).Status != 'Granted'))) {
                 Task newSubTask = new Task();
@@ -383,13 +383,13 @@ public class TaskHandler {
         }
     }
     
-    
+    //Below method is for sprint 12
     public static void createUploadTaskForWishOwner(Map<id,id> createUploadTaskWishMap){
         Constant_AC  constant = new Constant_Ac();    
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Id defaultRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
         List<Task> newRecTaskList = new List<Task>();
-      
+        
         Map<Id,String> wishContactIdMap = new Map<Id,String>();
         
         for(Case getChildInfo : [SELECT Id, Contact.Name FROM Case WHERE Id IN : createUploadTaskWishMap.keySet() AND RecordTypeId =:parentWishRecordTypeId]) {
@@ -412,11 +412,11 @@ public class TaskHandler {
             insert newRecTaskList;
         }
     }
-    
+    //Below method is for sprint 12
     Public static void checkWishGrantTask(Set<Id> wishGrantTaskWhatIdSet) {
         System.debug('checkWishGrantTask>>>>>>>');
         Constant_AC  constant = new Constant_Ac(); 
-        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantTaskRT).getRecordTypeId();
+        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         List<Case> wishGrankClosedWishList = new List<Case>();
         Map<Id,Case> parentWishMap = new Map<Id,Case>([SELECT Id, isWishGrantTasksClosed__c FROM Case WHERE Id IN : wishGrantTaskWhatIdSet AND RecordTypeId =: parentWishRecordTypeId]);
@@ -425,15 +425,7 @@ public class TaskHandler {
         
         System.debug('wishGrantTaskWhatIdSet>>>>>'+wishGrantTaskWhatIdSet);
         for(AggregateResult agg : [SELECT count(Id) recCount, WhatId parentWishId FROM Task WHERE WhatId IN : wishGrantTaskWhatIdSet  AND isClosed = FALSE GROUP BY WhatId]) {
-            /*System.debug('Record Exist>>>>>>>');
-            if(agg.get('recCount') == 0) {
-                System.debug('Count Zero>>>>>>>');
-                Id parentRecId = (ID)agg.get('recCount');
-                if(parentWishMap.containsKey(parentRecId)) {
-                    parentWishMap.get(parentRecId).isWishGrantTasksClosed__c = true;
-                    wishGrankClosedWishList.add(parentWishMap.get(parentRecId));
-                }
-            }*/
+            
             if(parentWishMap.containsKey((ID)agg.get('parentWishId'))) {
                 childTaskExistParentIdSet.add(parentWishMap.get((ID)agg.get('parentWishId')).Id);
             }
@@ -456,95 +448,117 @@ public class TaskHandler {
         }
     }
     
+    //Below method is for sprint 12
     public static void checkFollowUpTask(Map<Id, Task> followUpTaskMap, Set<Id> followUpTaskOwnerId) {
-        
+        System.debug('>>>>followUpTaskMap'+followUpTaskMap);
         Set<Id> communityUserIdSet = new Set<Id>();
         Set<Id> openTaskIdSet = new Set<Id>();
-        for(User communityUser : [SELECT Id, ContactId FROM User WHERE ContactId != null AND Id IN :followUpTaskOwnerId]) {
-            communityUserIdSet.add(communityUser.Id);
+        
+        
+        /*for(User communityUser : [SELECT Id, ContactId FROM User WHERE ContactId != null AND Id IN :followUpTaskOwnerId]) {
+communityUserIdSet.add(communityUser.Id);
+}*/
+        
+        Set<Id> ownerIdSet = new Set<Id>();
+        for(CaseTeamMember caseTeamMem : [SELECT ParentId, MemberId, TeamRoleId, TeamRole.Name FROM CaseTeamMember WHERE TeamRole.Name = 'Wish Granter' AND ParentId IN : followUpTaskMap.keySet()]) {
+            ownerIdSet.add(caseTeamMem.MemberId);
         }
         
-        for(Task existingTask : [SELECT Id, WhatId, OwnerId FROM Task WHERE WhatId IN : followUpTaskMap.keySet() AND isClosed = false]) {
-            if(communityUserIdSet.contains(existingTask.OwnerId)) {
-                openTaskIdSet.add(existingTask.WhatId);
-            }
+        System.debug('ownerIdSet>>>>>>>>>'+ownerIdSet);
+        for(Task existingTask : [SELECT Id, WhatId, OwnerId FROM Task WHERE WhatId IN : followUpTaskMap.keySet() AND isClosed = false AND OwnerId IN : ownerIdSet]) {
+            openTaskIdSet.add(existingTask.WhatId);
         }
-        
+        System.debug('openTaskIdSet>>>>>>>>>'+ownerIdSet);
         for(Task checkOpenTask : followUpTaskMap.values()) {
             if(openTaskIdSet.contains(checkOpenTask.WhatId)) {
                 checkOpenTask.addError('Please close other follow up task before closing this task');
             }
         }
     }
-    
-   public static void updateVolunteerRecord(Map<Id,Task> taskMap,Set<Id> ownerIds, Set<Id> caseIds)
-   {
-       Map<Id,User> volunteerMap = new Map<Id,User>();
-       Map<Id, Set<Id>> caseTeamMemberMap = new Map<Id, Set<Id>>();
-       List<Contact> updateContactList = new List<Contact>();
-           for(CaseTeamMember currMemb : [SELECT id,ParentId,MemberId FROM CaseTeamMember WHERE ParentId = :caseIds AND TeamRole.Name = 'Wish Granter'])
-           {
-             ownerIds.add(currMemb.MemberId);
-                if(!caseTeamMemberMap.containsKey(currMemb.ParentId))
-                {
-                     caseTeamMemberMap.put(currMemb.ParentId, new set<Id>{currMemb.memberid});
-                     
-                }
-                else
-                {
-                     caseTeamMemberMap.get(currMemb.ParentId).add(currMemb.memberid);
-                }
+    //Below method is for sprint 12
+    public static void updateVolunteerRecord(Map<Id,Task> taskMap,Set<Id> ownerIds, Set<Id> caseIds)
+    {
+        Map<Id,User> volunteerMap = new Map<Id,User>();
+        Map<Id, Set<Id>> caseTeamMemberMap = new Map<Id, Set<Id>>();
+        List<Contact> updateContactList = new List<Contact>();
+        for(CaseTeamMember currMemb : [SELECT id,ParentId,MemberId FROM CaseTeamMember WHERE ParentId = :caseIds AND TeamRole.Name = 'Wish Granter'])
+        {
+            ownerIds.add(currMemb.MemberId);
+            if(!caseTeamMemberMap.containsKey(currMemb.ParentId))
+            {
+                caseTeamMemberMap.put(currMemb.ParentId, new set<Id>{currMemb.memberid});
+                
             }
-           
-           
-           for(User currVol : [SELECT Id,ContactId,Contact.Date_of_last_engagement__c  FROM User WHERE Id IN :ownerIds AND Profile.Name = 'Active Volunteer'])
-           {
-              volunteerMap.put(currVol.id,currVol);
-           }
-           
-           for(Task currTask : taskMap.values())
-           {
-            
-               if(caseTeamMemberMap.containsKey(currTask.whatId))
-               {
-                   for(Id currId : caseTeamMemberMap.get(currTask.whatId))
-                   {
-                       if(volunteerMap.containsKey(currId))
-                       {
-                               if(volunteerMap.get(currId).Contact.Date_of_last_engagement__c == Null || volunteerMap.get(currId).Contact.Date_of_last_engagement__c < Date.Today())
-                                {
-                                   Contact updateContact = new Contact();
-                                   updateContact.id = volunteerMap.get(currId).ContactId;
-                                   updateContact.Date_of_last_engagement__c = Date.Today();
-                                   updateContactList.add(updateContact);
-                                }
-                       }
-                   }
-               }
-             
-            
-            }
-       
-          if(updateContactList.size() > 0)
-            update updateContactList;
-     
-   }
-    
-    public static void colseTaskValidation(List<Task> validationTaskList) {
-        
-        System.debug('colseTaskValidation>>>>>>>');
-        Constant_AC  constant = new Constant_Ac(); 
-        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantTaskRT).getRecordTypeId();
-        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
-        
-        Set<Id> conceptTaskParentSet = new Set<Id>();
-        List<Task> conceptTask = new List<Task>();
-        for(Task checkSubject : validationTaskList) {
-            if(checkSubject.subject == 'Wish concept approval1') {
-                conceptTaskParentSet.add(checkSubject.WhatId);
-                conceptTask.add(checkSubject);
+            else
+            {
+                caseTeamMemberMap.get(currMemb.ParentId).add(currMemb.memberid);
             }
         }
+        
+        
+        for(User currVol : [SELECT Id,ContactId,Contact.Date_of_last_engagement__c  FROM User WHERE Id IN :ownerIds AND Profile.Name = 'Active Volunteer'])
+        {
+            volunteerMap.put(currVol.id,currVol);
+        }
+        
+        for(Task currTask : taskMap.values())
+        {
+            
+            if(caseTeamMemberMap.containsKey(currTask.whatId))
+            {
+                for(Id currId : caseTeamMemberMap.get(currTask.whatId))
+                {
+                    if(volunteerMap.containsKey(currId))
+                    {
+                        if(volunteerMap.get(currId).Contact.Date_of_last_engagement__c == Null || volunteerMap.get(currId).Contact.Date_of_last_engagement__c < Date.Today())
+                        {
+                            Contact updateContact = new Contact();
+                            updateContact.id = volunteerMap.get(currId).ContactId;
+                            updateContact.Date_of_last_engagement__c = Date.Today();
+                            updateContactList.add(updateContact);
+                        }
+                    }
+                }
+            }
+            
+            
+        }
+        
+        if(updateContactList.size() > 0)
+            update updateContactList;
+        
+    }
+    
+    //Below method is for sprint 12
+    public static void colseTaskValidation(List<Task> validationTaskList) {
+        
+        //Used to get recordTypeId 
+        Constant_AC  constant = new Constant_Ac(); 
+        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        
+        Set<Id> conceptTaskParentSet = new Set<Id>(); //Holds parent Id for Concept Task
+        Set<Id> wishNotClosedParentIdSet = new Set<Id>(); //Holds parent Id for Wish Not Closed Task
+        Set<Id> presentationParentIdSet = new Set<Id>(); //Holds parent Id for Presentation Close Task
+        List<Task> conceptTask = new List<Task>(); // Holds Concept Task List 
+        List<Task> wishPresentationTaskList = new List<Task>(); // Holds Presentation Date Task List 
+        List<Task> wishNotClosedTaskList = new List<Task>(); // Holds Wish Not Closed Task List 
+        
+        
+        //Used to split task based on subject
+        for(Task checkSubject : validationTaskList) {
+            if(checkSubject.subject == 'Wish concept approval') {
+                conceptTaskParentSet.add(checkSubject.WhatId);
+                conceptTask.add(checkSubject);
+            } else if(checkSubject.subject == 'Wish Presentation not set') {
+                wishPresentationTaskList.add(checkSubject);
+                presentationParentIdSet.add(checkSubject.WhatId);
+            } else if (checkSubject.subject == 'Wish not closed') {
+                wishNotClosedParentIdSet.add(checkSubject.WhatId);
+                wishNotClosedTaskList.add(checkSubject);
+            }
+        }
+        
         
         if(conceptTaskParentSet.size() > 0) {
             Map<Id, Case> conceptApprovalMap = new Map<Id, Case>();
@@ -554,19 +568,93 @@ public class TaskHandler {
             }
             if(conceptApprovalMap.size() > 0) {
                 for(Task throwError : conceptTask) {
-                    System.debug('FB>>>>>>>>');
                     if(conceptApprovalMap.containsKey(throwError.WhatId)) {
-                        System.debug('FB>>>>>>>>1');
-                        System.debug(conceptApprovalMap.get(throwError.WhatId).Status);
-                        System.debug(conceptApprovalMap.get(throwError.WhatId).Sub_Status__c);
                         if(conceptApprovalMap.get(throwError.WhatId).Status != 'Wish Determined' && conceptApprovalMap.get(throwError.WhatId).Sub_Status__c != 'Within Policy') {
-                            System.debug('FB2>>>>>>>>');
                             throwError.addError('Wish Determination is not within the policy');
                         }
                     }
                 }
             }
         }
+        
+        if(presentationParentIdSet.size() > 0) {
+            Map<Id, Date> presentationCaseMap = new Map<Id, Date>();
+            for(Case parentCasePresentationDateCheck : [SELECT Id, Presentation_Date__c, RecordTypeId FROM Case WHERE Id IN : presentationParentIdSet AND Presentation_Date__c = null AND RecordTypeId =: parentWishRecordTypeId]) {
+                presentationCaseMap.put(parentCasePresentationDateCheck.Id, parentCasePresentationDateCheck.Presentation_Date__c);
+            }
+            
+            if(presentationCaseMap.size() > 0) {
+                for(Task presentationValidate : wishPresentationTaskList) {
+                    if(presentationCaseMap.containsKey(presentationValidate.WhatId)) {
+                        presentationValidate.addError('Please enter presentation date before closing this task');
+                    }
+                }
+            }
+        }
+        
+        if(wishNotClosedParentIdSet.size() > 0 ) {
+            Set<Id> openCaseIdSet = new Set<Id>();
+            for(Case wishStatusCheck : [SELECT Id, Status, RecordTypeId FROM Case WHERE Id IN : wishNotClosedParentIdSet AND (Status != 'Completed' OR Status != 'Closed') AND RecordTypeId =: parentWishRecordTypeId]) {
+                openCaseIdSet.add(wishStatusCheck.Id);
+            }
+            
+            if(openCaseIdSet.size() > 0) {
+                for(Task preventTaskClose : wishNotClosedTaskList) {
+                    if(openCaseIdSet.contains(preventTaskClose.WhatId)) {
+                        preventTaskClose.addError('Please close the wish before closing this task');
+                    }
+                }
+            }
+        }
+    }
+    
+    //Below method is for sprint 12 ticket
+    public static void autoCloseTask(List<Task> closeTaskList, Set<Id> closeTaskParentIdsSet) {
+        Constant_AC  constant = new Constant_Ac(); 
+        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        
+        Set<Id> caseTeamMemberSet = new Set<Id>();
+        
+        for(CaseTeamMember caseTeamMem : [SELECT ParentId, MemberId, TeamRoleId, TeamRole.Name FROM CaseTeamMember WHERE TeamRole.Name = 'Wish Granter' AND ParentId IN : closeTaskParentIdsSet]) {
+            caseTeamMemberSet.add(caseTeamMem.MemberId);
+        }
+        
+        if(closeTaskParentIdsSet.size() > 0) {
+            System.debug('>>>>>>>');
+            Map<Id, Integer> taskCount = new Map<Id, Integer>();
+            for(AggregateResult aggr : [SELECT Count(Id) recCount,  WhatId parentRecId FROM Task WHERE WhatId IN : closeTaskParentIdsSet AND Subject != 'Volunteer wish follow-up activities not complete' AND status != 'Completed' AND OwnerId IN : caseTeamMemberSet  GROUP BY WhatId] ) {
+                taskCount.put((Id)aggr.get('parentRecId'), (Integer)aggr.get('recCount'));
+            }
+            
+            Set<Id> closeFolowupTaskIdSet = new Set<Id>();
+            for(Id parentId : closeTaskParentIdsSet) {
+                System.debug('********');
+                System.debug('&&&&&&&&&>>>>'+taskCount);
+                if(!taskCount.containsKey(parentId)) {
+                    System.debug('%%%%%%%%%%%%>>>>>>>>');
+                    closeFolowupTaskIdSet.add(parentId);
+                }
+            }
+            
+            if(closeFolowupTaskIdSet.size() > 0) {
+                System.debug('<<<<<<<<<<<<<<<');
+                List<Task> closeFolowUpTaskList = new List<Task>();
+                for(Task closeFollowUpTask : [SELECT Id FROM Task WHERE WhatId IN : closeFolowupTaskIdSet AND Subject = 'Volunteer wish follow-up activities not complete']) {
+                    closeFollowUpTask.Status = 'Completed';
+                    closeFolowUpTaskList.add(closeFollowUpTask);
+                }
+                if(closeFolowUpTaskList.size() > 0) {
+                    update closeFolowUpTaskList;
+                }
+            }
+            
+            
+        }
+        
+        
+        
+        
     }
     
 }

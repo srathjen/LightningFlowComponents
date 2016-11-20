@@ -6,6 +6,7 @@
                 var parsedResponse = JSON.parse(response.getReturnValue());
                 if (parsedResponse.isSuccess) {
                     component.set("v.containerId", parsedResponse.containerId);
+                    component.set("v.isSandbox", parsedResponse.isSandbox);
                 }
                 else {
             		$A.util.addClass(component.find("panel-progress"), "hidden");
@@ -136,6 +137,7 @@
                             isLightning:			true,
                             componentId: 			globalId,
                             userId:             	parsedResponse.userId,
+                            sandbox:                component.get('v.isSandbox'),
                             ddpLabel:				component.get("v.ddpLabel")
                         });
                         
@@ -156,7 +158,8 @@
                             emailParams:					serializedEmailData,
                             usePreview:                     parameters.usePreview,
                             showAllData: 					parameters.showAllData ? parameters.showAllData : '',
-                            progress: 						parameters.processingText ? parameters.processionText : ''
+                            progress: 						parameters.processingText ? parameters.processionText : '',
+                            testFeaturesAsDelivery:			parameters.testFeaturesAsDelivery
                         }, styleUrl);
                     }
                     else {

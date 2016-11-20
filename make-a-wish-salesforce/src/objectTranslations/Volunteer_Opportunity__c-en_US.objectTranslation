@@ -17,6 +17,30 @@
         <name>Age__c</name>
     </fields>
     <fields>
+        <label><!-- Approval Status --></label>
+        <name>Approval_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Initiated</masterLabel>
+            <translation><!-- Initiated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Assigned</masterLabel>
+            <translation><!-- Not Assigned --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejection Notification</masterLabel>
+            <translation><!-- Rejection Notification --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Chapter Name --></label>
         <name>Chapter_Name__c</name>
         <relationshipLabel><!-- Volunteer Opportunities --></relationshipLabel>

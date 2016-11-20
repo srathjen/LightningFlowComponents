@@ -57,7 +57,7 @@
                             ddps: item.name,
                             businessUsers: buString,
                             isGroup: false,
-                            index: (parseInt(j) + 1)
+                            index: (parseInt(j, 10) + 1)
                         });
                     }
                 }        
@@ -117,35 +117,43 @@
         while((el = el.parentElement) && el.nodeName !== name);
         return el;
     },
-    expandGroup : function(row, industry) {
-		row.setAttribute('data-expanded', 'true');
+    expandGroup : function(component, selectedRow) {
+		selectedRow.setAttribute('data-expanded', 'true');
 
         // Update icon
-        var div = row.childNodes[0].childNodes[0];
+        var div = selectedRow.childNodes[0].childNodes[0];
+        var divNextSibling = selectedRow.childNodes[0].childNodes[1];
         $A.util.addClass(div, 'divHidden');
-        $A.util.removeClass(div.nextSibling, 'divHidden');
+        $A.util.removeClass(divNextSibling, 'divHidden');
         
         // Update rows
-        while(row.nextSibling && row.nextSibling.id === industry) {
-            $A.util.removeClass(row.nextSibling, 'rowHidden');
-            $A.util.addClass(row.nextSibling, 'slds-hint-parent');
-            row = row.nextSibling;
+        var rows = component.find('row');
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i].getElement();
+            if (row.getAttribute('data-is-group') === "false" && row.id === selectedRow.id) {
+                $A.util.removeClass(row, 'rowHidden');
+                $A.util.addClass(row, 'slds-hint-parent');
+            }
         }
     },
-    retractGroup : function(row, industry) {
-		row.setAttribute('data-expanded', 'false');
+    retractGroup : function(component, selectedRow) {
+        selectedRow.setAttribute('data-expanded', 'false');
 
         // Update icon
-        var div = row.childNodes[0].childNodes[1];
+        var div = selectedRow.childNodes[0].childNodes[1];
+        var divPreviousSibling = selectedRow.childNodes[0].childNodes[0];
         $A.util.addClass(div, 'divHidden');
-        $A.util.removeClass(div.previousSibling, 'divHidden');
-
+        $A.util.removeClass(divPreviousSibling, 'divHidden');
+        
         // Update rows
-        while(row.nextSibling && row.nextSibling.id === industry) {
-            $A.util.removeClass(row.nextSibling, 'slds-hint-parent');
-            $A.util.addClass(row.nextSibling, 'rowHidden');
-            row = row.nextSibling;
-        }        
+        var rows = component.find('row');
+        for (var i = 0; i < rows.length; i++) {
+            var row = rows[i].getElement();
+            if (row.getAttribute('data-is-group') === "false" && row.id === selectedRow.id) {
+                $A.util.addClass(row, 'rowHidden');
+                $A.util.removeClass(row, 'slds-hint-parent');
+            }
+        }     
     },
     escapeRegExp : function(str) {
     	return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");

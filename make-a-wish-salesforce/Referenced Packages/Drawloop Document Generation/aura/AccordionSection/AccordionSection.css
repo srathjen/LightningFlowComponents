@@ -1,6 +1,9 @@
 .THIS .section-header {
     height: 36px;
 	top: 2px;
+    position: relative;
+    width: 100%;
+    pointer-events: none;
 }
 .THIS .section-header-label {
     position: absolute;

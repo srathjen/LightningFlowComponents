@@ -1,0 +1,42 @@
+<apex:page sidebar="false"  standardController="Case" extensions="WishLiabilityMinorParticipant_AC" >
+<apex:form >
+<apex:pageMessages id="showmsg13"/> 
+    <apex:pageBlock id="membAdd" >                  
+        
+            <apex:pageBlockTable value="{!addContactEmailList}" var="memb" rendered="{!inPutMode}">
+           <!-- <apex:variable value="{!0}" var="cnt"/>
+      <apex:column headervalue="Action">
+          <apex:commandlink value="Remove" action="{!removeContact}" immediate="true">
+              Pass the row number to the controller so that we know which row to remove 
+              <apex:param name="index" value="{!cnt}"/>
+          </apex:commandlink> 
+          <apex:variable var="cnt" value="{!cnt+1}"/>              
+      </apex:column>  -->
+                <apex:column headerValue="Member Name">
+                    <apex:inputField value="{!memb.FirstName}"/>
+                </apex:column>
+                <apex:column headerValue="Email">
+                    <apex:inputField value="{!memb.Email}"/>
+                </apex:column>
+             </apex:pageBlockTable> 
+            <br/> <center><apex:commandButton value="Add Row" action="{!AddRow}" reRender="membAdd" rendered="{!inPutMode}"/> &nbsp;     
+        <apex:commandButton value="Save" action="{!SaveContact}" rendered="{!inPutMode}"/>  &nbsp;
+        <apex:commandButton value="Preview" action="{!preview}" rendered="{!inPutMode}"/> &nbsp;
+        <apex:commandButton value="Cancel" action="{!cancel}" rendered="{!inPutMode}"/>  </center>    
+          
+       
+            <apex:pageBlockTable value="{!addContactEmailList}" var="memb" rendered="{!outPutMode}">
+          
+                <apex:column headerValue="Member Name">
+                    <apex:outputField value="{!memb.FirstName}"/>
+                </apex:column>
+                <apex:column headerValue="Email">
+                    <apex:outputField value="{!memb.Email}"/>
+                </apex:column>
+             </apex:pageBlockTable> 
+            
+          <center> <apex:commandButton value="Send for Signature" action="{!SendtoEmail}" rendered="{!outPutMode}"/> 
+            <apex:commandButton value="Cancel" action="{!cancel}" rendered="{!outPutMode}"/>  </center>    
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

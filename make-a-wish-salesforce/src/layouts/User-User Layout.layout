@@ -26,10 +26,6 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Inactive_Date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>dsfs__DSProSFPassword__c</field>
             </layoutItems>
             <layoutItems>
@@ -38,11 +34,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Loop__dsPassword__c</field>
+                <field>Loop__dsToken__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Loop__dsToken__c</field>
+                <field>Loop__dsPassword__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>

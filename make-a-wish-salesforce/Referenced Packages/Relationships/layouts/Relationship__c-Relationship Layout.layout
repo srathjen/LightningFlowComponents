@@ -41,6 +41,14 @@
                 <behavior>Edit</behavior>
                 <field>Qualifying_Medical_Professional__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Medical_Needs__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Residing_with_Wish_child__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>

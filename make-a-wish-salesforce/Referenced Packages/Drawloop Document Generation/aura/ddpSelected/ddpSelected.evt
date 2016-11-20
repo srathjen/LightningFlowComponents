@@ -5,4 +5,5 @@
     <aura:attribute name="attachmentAllowed" type="boolean" default="false" description="True if attachments are allowed for the selected DDP."/>
     <aura:attribute name="attachmentRequired" type="boolean" default="false" description="True if attachments are required for the selected DDP."/>
     <aura:attribute name="hasOptionalDocuments" type="boolean" default="false" description="True if the selected DDP has optional documents."/>
+    <aura:attribute name="hasAdhocApexClass" type="boolean" default="false" description="True if there is a custom class in the AdHoc_Apex_Class__c field in the DDP."/>
 </aura:event>

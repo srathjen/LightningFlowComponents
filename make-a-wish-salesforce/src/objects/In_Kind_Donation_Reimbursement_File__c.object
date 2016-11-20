@@ -211,7 +211,7 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
     </listViews>
     <nameField>
         <displayFormat>IKDF-{0000}</displayFormat>
-        <label>In Kind Donation &amp; Reimbursement File Name</label>
+        <label>In Kind Donation &amp; Reimbursement File Na</label>
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>

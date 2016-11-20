@@ -9,7 +9,7 @@
     </style>
     <script>
         function openFieldTagger() {
-            openIntegration('{!JSENCODE(URLFOR($Page.Loop__fieldTagger, relObj.Loop__DDP__c, [id=relObj.Loop__DDP__c]))}', 'height=675,width=840,location=no,resizable=yes,toolbar=no,status=no,menubar=no,scrollbars=1', 1);
+            openIntegration('{!JSENCODE(URLFOR($Page.fieldTagger, relObj.DDP__c, [id=relObj.DDP__c]))}', 'height=675,width=840,location=no,resizable=yes,toolbar=no,status=no,menubar=no,scrollbars=1', 1);
         }
     </script>
     <apex:sectionHeader title="{!$ObjectType.Loop__Related_Object__c.label} Edit" subtitle="{!IF(relObj.Id=='','New '&$ObjectType.Loop__Related_Object__c.label,relObj.Name)}" help="http://support.drawloop.com/salesforce/looplus/basic/related-objects/" />

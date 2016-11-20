@@ -6,18 +6,45 @@
             var complete = component.get("v.complete");
             var action = component.get("c.getCustomizeApplication");
             action.setCallback(this, function(response) {
-                var state = response.getState();
-                if (state !== "SUCCESS") {
+                if (response.getState() === "SUCCESS") {
+                    var parsedResponse = JSON.parse(response.getReturnValue());
+                    if (parsedResponse.isSuccess) {
+                        if (!parsedResponse.customizeApplication) {
+                            component.set('v.alertText', 'You need the Customize Application permission to complete the setup and start generating documents. Contact your system administrator, or continue and complete steps that require this permission later.');
+                            component.set('v.customizeApplication', false);
+                        }
+                    }
+                    else {
+                        component.getEvent('showError').setParams({
+                            message: parsedResponse.errorMessage
+                        }).fire();
+                        
+                        component.set('v.customizeApplication', false);
+                    }
+                }
+                else {
                     component.getEvent('showError').setParams({
-                        message: 'An unexpected error has occurred.'
+                        message: 'An unexpected error has occurred. Please contact Drawloop Support if this error persists.'
                     }).fire();
-                    component.set('v.customizeApplication', false);
-                } else if (response.getReturnValue() !== true) {
-                    component.set('v.alertText', 'You need the Customize Application permission to complete the setup and start generating documents. Contact your system administrator, or continue and complete steps that require this permission later.');
+                    
                     component.set('v.customizeApplication', false);
                 }
             });
             $A.enqueueAction(action);
+            
+            var fetchServices = component.get("c.fetchServices");
+            fetchServices.setParams({
+                passedSessionId: component.get("v.sessionId"),
+                location: '',
+                domain: component.get("v.loopUrl")
+            });
+            fetchServices.setCallback(this, function(response) {
+                if (response.getState() === 'SUCCESS') {
+                    var parsedResponse = JSON.parse(response.getReturnValue());
+                    component.set("v.services", parsedResponse);
+                }
+            });
+            $A.enqueueAction(fetchServices);
         }
         else {
             $A.util.addClass(component.find('pageContent'), 'hidden');
@@ -113,5 +140,8 @@
         var title = event.getParam('title');
         var message = event.getParam('message');
         errorPrompt.showError(title, message);
+    },
+     updateIsStandard : function(component, event) {
+        component.set("v.isStandard", event.getParam('isStandard'));
     }
 })

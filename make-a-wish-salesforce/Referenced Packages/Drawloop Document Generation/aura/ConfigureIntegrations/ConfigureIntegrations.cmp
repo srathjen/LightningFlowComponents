@@ -41,7 +41,7 @@
         <Loop:Modal title="{!v.selectedIntegration}">
             <form class="slds-form--stacked">
                 <aura:if isTrue="{!v.showFields}">
-                    <div class="slds-modal__content slds-p-around--medium">
+                    <div class="slds-modal__content slds-p-around--medium" style="border-radius:0;">
                         <aura:if isTrue="{!v.errors.length > 0}">
                             <Loop:Toast toastClass="slds-notify slds-notify--toast slds-theme--error" 
                                      toastMessage="Review the errors on this page."

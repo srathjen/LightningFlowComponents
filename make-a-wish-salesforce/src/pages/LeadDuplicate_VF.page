@@ -9,8 +9,78 @@
     <apex:pagemessages />
 
     <apex:includeScript value="{!URLFOR($Resource.CumulusStaticResources, '/npsp-slds/modal.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/> 
     <apex:stylesheet value="{!URLFOR($Resource.CumulusStaticResources, '/npsp-slds/npsp-common.css')}" />
     <apex:stylesheet value="{!URLFOR($Resource.SLDS, '/0_12_2/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+
+    <script>
+    $(function(){
+        
+       
+    
+     $('.family').click(function() { 
+     
+         if($(this).prop("checked") == true){
+                $('.familyRadio').attr('disabled', true);
+            }
+            else if($(this).prop("checked") == false){
+                $('.familyRadio').attr('disabled', false);
+            }
+      
+            
+        });
+        
+      $('.medical').click(function() { 
+      
+        if($(this).prop("checked") == true){
+                $('.medicalRadio').attr('disabled', true);
+            }
+            else if($(this).prop("checked") == false){
+                $('.medicalRadio').attr('disabled', false);
+            }
+      
+  
+     });
+     
+      
+     
+       $('.existingMedical').click(function() { 
+      
+        if($(this).prop("checked") == true){
+                $('.existingRadio').attr('disabled', true);
+            }
+            else if($(this).prop("checked") == false){
+                $('.existingRadio').attr('disabled', false);
+            }
+      
+  
+     });
+     
+  });
+  
+  
+   function validateRadio(){
+          
+          if($('.medical').prop("checked") == false || $('.family').prop("checked") == false || $('.existingMedical').prop("checked") == false){
+          var isBool =false;              
+                   
+                  if($('.medicalRadio').is(':checked') && $('.familyRadio').is(':checked') && $('.existingRadio').is(':checked')){
+                      isBool = true;                    
+                  }
+                  else{
+                      alert('Please Select altleast Medical/Family Contact to Diagnosis Verification...');
+                      isBool = false;
+                  }
+                   
+          }
+     return isBool;
+     
+    }
+        
+  
+  
+    </script>
+
 
     <div class="slds">
         
@@ -85,10 +155,42 @@
             <apex:form id="frm">
             <apex:outputpanel rendered="{!isFamilyInfo == false}">
              <apex:actionRegion >
+             <!----------------------------------------SELECTED LEADS------------------------------------------------------->
+              <div class="slds-card slds-m-horizontal--large {!cardClass}">
+                <div class="slds-card__header slds-grid slds-grid--align-spread">
+                        <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Selected Lead</h2>
+                 </div>
+                <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal dupHasRes">
+                            <thead>
+                                <tr>
+                                        <th class="slds-text-heading--label" scope="col">Name</th>
+                                        <th class="slds-text-heading--label" scope="col">Email</th>
+                                        <th class="slds-text-heading--label" scope="col">Phone</th>
+                                        <th class="slds-text-heading--label" scope="col">DOB</th>
+                                        <th class="slds-text-heading--label" scope="col">Chapter Name</th>
+                                    </tr>
+                            </thead>
+                            <tbody>
+                            <apex:repeat value="{!masterLeadList}" var="masterRecord">
+                                <tr>
+                                    <td class="slds-row-select"><apex:outputText value="{!masterRecord.Name}"/></td>
+                                    <td class="slds-row-select"><apex:outputText value="{!masterRecord.Email}"/></td>
+                                    <td class="slds-row-select"><apex:outputText value="{!masterRecord.Phone}"/></td>
+                                    <td class="slds-row-select"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!masterRecord.DOB__c}" /></apex:outputText></td>
+                                    <td class="slds-row-select"><apex:outputText value="{!masterRecord.ChapterName__r.Name}"/></td>
+                                </tr>
+                            </apex:repeat>
+                            </tbody>
+                        </table>
+                    </div>
+             
+             
+             <!----------------------------------------SELECTED LEADS------------------------------------------------------->
+             
                 <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
                         <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Leads</h2>
-                        <p><apex:inputCheckbox value="{!noDuplicate}"/> &nbsp;&nbsp;  No Duplicate Found </p>
+                        <p style="margin: 5px 0 0 60%;"><apex:inputCheckbox value="{!noDuplicate}"/> &nbsp;&nbsp;  No Duplicate Found </p>
                      
                         <apex:commandButton action="{!nextStep}" rendered="{!hasResults}" value="Next" styleClass="slds-button slds-button--neutral" /> 
                     </div>
@@ -243,9 +345,10 @@
                  
               
               
-                <Center> <apex:commandbutton value="Send Diagnosis Verification" action="{!ContinuePartAForm}"/> </center> <br/>
+                <Center> <apex:commandbutton value="Send Diagnosis Verification" action="{!ContinuePartAForm}" Onclick="return validateRadio();" /> </center> <br/>
                 
-                <apex:outputpanel rendered="{!dupParentContactList.size > 0}">
+                <apex:outputpanel rendered="{!dupParentContactList.size > 0}">                
+                
                 <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
                         <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Wish Family Contacts</h2>
@@ -268,9 +371,11 @@
                                         <th class="slds-text-heading--label" scope="col">Phone</th>
                                         <th class="slds-text-heading--label" scope="col">Email</th>
                                         <th class="slds-text-heading--label" scope="col">Select Contact</th>
+                                        <th class="slds-text-heading--label" scope="col">Not Allow Duplicate</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                     
                                     <apex:repeat value="{!dupParentContactList}" var="con">
                                         <tr>
                                               <td>
@@ -296,18 +401,24 @@
                                                     <apex:outputText value="{!con.Email}"/>
                                                 
                                                </td>
-                                               <td>
+                                               <td style="border-right: 1px solid #d8dde6;">
                                                   
-                                                    <input type="radio" name="contact" id="{!con.id}" VALUE="{!con.id}" onclick="changeValue(this,'{!$Component.contactValue}');"/>
+                                                    <input type="radio" name="contact" id="{!con.id}" VALUE="{!con.id}" onclick="changeValue(this,'{!$Component.contactValue}');" class="familyRadio"  />
                                                       
                                                     
                                                </td>
                                         </tr>
-                                    </apex:repeat>
+                                        
+                                     
+                                    </apex:repeat>    
+                                                                      
                                     <apex:inputhidden id="contactValue" value="{!contactId}"/>
                                     
                                 </tbody>
                             </table>
+                            <div style="float: right; margin-top: -5%;  margin-right: 7%;">
+                            <apex:inputCheckbox label="" onclick="" styleClass="family"/>
+                            </div>
                         </apex:outputText>
                     </div>
                 </div>
@@ -333,9 +444,9 @@
                                         <th class="slds-text-heading--label" scope="col">First Name</th>
                                         <th class="slds-text-heading--label" scope="col">Last Name</th>
                                         <th class="slds-text-heading--label" scope="col">Phone</th>
-                                        <th class="slds-text-heading--label" scope="col">Email</th>
-                                        
+                                        <th class="slds-text-heading--label" scope="col">Email</th>                                        
                                        <th class="slds-text-heading--label" scope="col">Select Contact</th>
+                                       <th class="slds-text-heading--label" scope="col">Not Allow Duplicate</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -365,8 +476,8 @@
                                                 
                                                </td>
                                              
-                                               <td>
-                                                    <input type="radio" name="medical" id="{!con.id}" VALUE="{!con.id}" onclick="medicalValue(this,'{!$Component.medicalValue}');"/>
+                                               <td style="border-right: 1px solid #d8dde6;">
+                                                    <input type="radio" name="medical" id="{!con.id}" VALUE="{!con.id}" onclick="medicalValue(this,'{!$Component.medicalValue}');" class="medicalRadio"/>
                                                    
                                                </td>
                                         </tr>
@@ -374,6 +485,9 @@
                                      <apex:inputhidden value="{!medicalConId}" id="medicalValue" />
                                 </tbody>
                             </table>
+                            <div style="float: right; margin-top: -5%;  margin-right: 7%;">
+                            <apex:inputCheckbox label="" onclick="" styleClass="medical" />
+                            </div>
                         </apex:outputText>
                     </div>
                 </div>
@@ -402,6 +516,7 @@
                                         <th class="slds-text-heading--label" scope="col">Phone</th>
                                         <th class="slds-text-heading--label" scope="col">Email</th>
                                         <th class="slds-text-heading--label" scope="col">Select Contact</th>
+                                        <th class="slds-text-heading--label" scope="col">Not Allow Duplicate</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -430,8 +545,8 @@
                                                     <apex:outputText value="{!treatingContact.Email}"/>
                                                 
                                                </td>
-                                               <td>
-                                                    <input type="radio" name="treating" id="{!treatingContact.id}" VALUE="{!treatingContact.id}" onclick="treatingValue(this,'{!$Component.treatingValue}');"/>
+                                               <td style="border-right: 1px solid #d8dde6;">
+                                                    <input type="radio" name="treating" class="existingRadio" id="{!treatingContact.id}" VALUE="{!treatingContact.id}" onclick="treatingValue(this,'{!$Component.treatingValue}');"/>
                                                     
                                                </td>
                                         </tr>
@@ -439,6 +554,11 @@
                                     <apex:inputhidden value="{!treatingContactId}" id="treatingValue" />
                                 </tbody>
                             </table>
+                            
+                             <div style="float: right; margin-top: -5%;  margin-right: 7%;">
+                            <apex:inputCheckbox label="" onclick="" styleClass="existingMedical"/>
+                            </div>
+                            
                         </apex:outputText>
                     </div>
                 </div>

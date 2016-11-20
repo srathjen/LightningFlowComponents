@@ -6,7 +6,7 @@ Description : DocusignStatusTrigger_AT  is used when the docusign status record 
 is completed then it will create a new conflict of interest records.
 *****************************************************************************************************/
 
-Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (after update) {
+Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update) {
     List<Contact> contactList = New List<Contact>();
     List<Contact> confilictContactList = New List<Contact>(); 
     List<Conflict_Of_Interest__c> conflictList = New List<Conflict_Of_Interest__c>();
@@ -33,7 +33,8 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (after update) {
             newconflict.Active__c = true;
             conflictList.add(newconflict); 
             volunteercontactIdSet.add(dsts.Docusign_Hidden_Contact__c);
-            system.debug('newconflict id'+dsts.Id+'||'+newconflict.Id);
+            system.debug('newconflict id'+dsts.Id+'||'+newconflict.Id
+                        );
         }
         if(dsts.dsfs__Envelope_Status__c == 'Completed' && Trigger.oldMap.get(dsts.id).dsfs__Envelope_Status__c  != 'Completed' && dsts.dsfs__Lead__c != Null)
         {
@@ -56,7 +57,7 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (after update) {
         leadList.add(dbLead);
         }
         if(leadList.size() > 0){
-        if(!Test.isRunningTest())
+       
          update leadList;
        }
     }
@@ -64,13 +65,13 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (after update) {
     {
         Insert conflictList;
         List<Conflict_Of_Interest__c> dbconflictRec = [SELECT Id,Name,Expiration_Date__c,Signed_Date__c,Volunteer_Contact__c,Active__c FROM  Conflict_Of_Interest__c WHERE Volunteer_Contact__c  IN: volunteercontactIdSet  AND Active__c = TRUE Order by CreatedDate DESC];
-         if(!Test.isRunningTest()){
+         
         if(dbconflictRec[1].Id != Null){
             dbconflictRec[1].Active__c = FALSE;
             
             update dbconflictRec;
         } 
-        }
+        
         if(dbconflictRec.size() > 1){
         if(dbconflictRec[0].Id != Null){
             for(dsfs__DocuSign_Status__c dsts:Trigger.new){
@@ -84,7 +85,7 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (after update) {
                 
                  
             }
-            if(!Test.isRunningTest())
+            
             update confilictContactList ;
         }
        }

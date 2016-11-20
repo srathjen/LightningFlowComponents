@@ -201,6 +201,7 @@ Public class VolunteerOpportunityTriggerHandler
             {
                 Case updatCase = new Case();
                 updatCase.id = getCase.id;
+                updatCase.Assigned_Date__c = Date.Today();
                 
                 if(getCase.Case_Member_Count__c  == Null){
                     updatCase.Case_Member_Count__c = 0 + ((updateCaseMemberCount.get(getCase.id)).size());
@@ -452,7 +453,17 @@ Public class VolunteerOpportunityTriggerHandler
        if(dbVolConList.size() > 0) 
        update  dbVolConList;
     }
-    
+    /***************** Number Of Assignment ***********/
+    public static void Updatecontacts(Set <ID> volunteerOppName){
+            List<Contact> conList=new List<Contact>();
+                    for(Contact  Con:[SELECT Id,Number_of_Assignments__c,Name,(select id,Volunteer_Name__c from Volunteer_Opportunities__r where Volunteer_Name__c IN:volunteerOppName) FROM Contact  WHERE ID IN:volunteerOppName]){
+                    Contact cont=new Contact();
+                    cont.Number_of_Assignments__c=Con.Volunteer_Opportunities__r.size();
+                    cont.id=Con.Id;
+                    conList.add(cont);
+                }
+                update conList;
+    }
     
     
 }

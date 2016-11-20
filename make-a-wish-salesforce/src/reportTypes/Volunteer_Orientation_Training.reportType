@@ -169,6 +169,7 @@
     <sections>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <displayNameOverride>Offering Type</displayNameOverride>
             <field>Class_Offering__c.RecordType</field>
             <table>Volunteer_Orientation_Training__c</table>
         </columns>

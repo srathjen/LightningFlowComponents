@@ -1,6 +1,7 @@
 <aura:component >
     <aura:attribute name="status" type="string" default="warning" description="Valid values: 'warning', 'error'."/>
     <aura:attribute name="message" type="string" default="" required="true"/>
+    <aura:attribute name="message2" type="string" default="" description="This provides a secondary message below the main message. Use it to give context or additional information."/>
 	
     <div class="slds">
         <ul class="slds-list--vertical slds-has-cards slds-has-cards--space slds-has-list-interactions" style="padding: .5rem 1rem; background-color: #eef1f6;">
@@ -21,6 +22,11 @@
                         </aura:if>
                         <div class="notify__content" style="text-align: center;">
                             <h2 class="slds-text-heading--small">{!v.message}</h2>
+                            <aura:if isTrue="{! !empty(v.message2)}">
+                                <br/>
+                                <br/>
+                                <h2 class="slds-text-heading--small">{!v.message2}</h2>
+                            </aura:if>  
                         </div>
                     </div>
                 </div>

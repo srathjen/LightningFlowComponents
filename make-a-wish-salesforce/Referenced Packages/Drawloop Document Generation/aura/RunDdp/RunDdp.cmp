@@ -2,28 +2,32 @@
     <aura:attribute name="title" type="string" default="Drawloop" access="global"/>
     <aura:attribute name="startExpanded" type="boolean" default="false" access="global"/>
     <aura:attribute name="ddpLabel" type="string" default="DDP" access="global"/>
+    <aura:attribute name="runButtonLabel" type="string" default="Run DDP" access="global"/>
     
     <!--Optional attributes-->
     <aura:attribute name="ddpId" type="string"/>
     <aura:attribute name="contactId" type="string"/>
     <aura:attribute name="documentIds" type="List"/>
     <aura:attribute name="deliveryOptionId" type="string"/>
-    <aura:attribute name="attachmentIds" type="List"/>
+    <aura:attribute name="attachments" type="List" description="List of Adhoc.DocumentTileData"/>
     <aura:attribute name="recordId" type="string"/>
     
     <!--Internal attributes-->
     <aura:attribute name="lockerServiceActive" type="boolean" default="true" access="private"/>
     <aura:attribute name="globalId" type="string" default="" access="private"/>
+    <aura:attribute name="context" type="string" default="DEFAULT" description="Accepts DEFAULT, TEST, and UTILITYBAR to display the appropriate steps to run in different contexts."/>
     <aura:attribute name="runTestAvailable" type="boolean" default="false" access="private"/>
-    <aura:attribute name="isTest" type="boolean" default="false" access="private"/>
+    <aura:attribute name="isTest" type="boolean" default="false"/>
     <aura:attribute name="attachToRecord" type="boolean" default="false" access="private"/>
     <aura:attribute name="selectedContentLibrary" type="string" default="" description="The Id for the selected content library folder the user wants to attach the final output to."/>
     <aura:attribute name="downloadLinks" type="List" default="[]" description="Each element should contain a '.name', '.link' and '.fileType'."/>
     <aura:attribute name="deliveryOptionType" type="string" access="private"/>
    	<aura:attribute name="objectName" type="string" default="" description="Name of the starting object"/>
+    <aura:attribute name="objectPluralLabel" type="string" default="" description="Plural label of the starting object"/>
     <aura:attribute name="contactRequired" type="boolean" default="false" access="private"/>
     <aura:attribute name="attachmentAllowed" type="boolean" default="false" access="private"/>
     <aura:attribute name="attachmentRequired" type="boolean" default="false" access="private"/>
+    <aura:attribute name="hasAdhocApexClass" type="boolean" default="false" access="private"/>
     <aura:attribute name="runDisabled" type="boolean" default="true" access="private"/>
     <aura:attribute name="ddpFinished" type="boolean" default="false" access="private"/>
     <aura:attribute name="errorMessage" type="string" default="" access="private"/>
@@ -32,6 +36,9 @@
     <aura:attribute name="documentNextButtonDisabled" type="boolean" default="true" access="private" description="If the user has fulfilled the necessary selections for attachments or optional documents, this will be false."/>
     <aura:attribute name="currentESignRecipients" type="List" default="[]" description="List of current E-Sign recipients."/>
     <aura:attribute name="finalMessage" type="string" default="" access="private" description="Message to display to user after DDP has finished."/>
+    <aura:attribute name="testFeaturesAsDelivery" type="string" default="" description="Id of the delivery that 'Download (Test)' will mimic for PDF Stamps and Create/Edit Records behavior."/>
+    <aura:attribute name="loopUrl" type="string" default="" description="Control what endpoint requests are sent to using: Staging, Previous, etc."/>
+    <aura:attribute name="hasDocuments" type="boolean" default="true" description="If a DDP in the TEST context has no documents, hide everything and show a toast."/>
     
      <!--Email attributes-->
     <aura:attribute name="emailSubject" type="string" default=""/>
@@ -49,6 +56,7 @@
     
     <!--Handled events-->
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+    <aura:handler name="recordSelected" event="Loop:recordSelected" action="{!c.handleRecordSelected}"/>
     <aura:handler name="ddpSelected" event="Loop:ddpSelected" action="{!c.handleDdpSelected}"/>
     <aura:handler name="contactSelected" event="Loop:contactSelected" action="{!c.handleContactSelected}"/>
     <aura:handler name="documentSelected" event="Loop:documentSelected" action="{!c.handleDocumentSelected}"/>
@@ -91,7 +99,12 @@
                                 <span class="component-header-label">{!v.title}</span>
                             </h2>
                         </div>
-                        <aura:if isTrue="{!!v.lockerServiceActive &amp;&amp; !v.startExpanded}">
+                        <aura:if isTrue="{!v.context == 'TEST'}">
+                            <div class="slds-col--bump-left">
+                                <button class="slds-button slds-button--neutral" onclick="{!c.refresh}">Refresh</button>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!!v.lockerServiceActive &amp;&amp; !v.startExpanded &amp;&amp; v.context != 'TEST'}">
                             <div class="slds-col--bump-left">
                                 <button aura:id="selectDdpButton" class="slds-button slds-button--neutral" onclick="{!c.handleClickSelectDdp}">{!'Select ' + v.ddpLabel}</button>
                             </div>
@@ -99,33 +112,53 @@
                     </div>
                 </div>
             </div>
-            <div aura:id="runDdpContainer" class="hidden" style="background: #fff;">
-                <div aura:id="runDdp">
-                    <Loop:AccordionSection aura:id="ddpAccordionSection" sectionName="ddpAccordionSection" label="{!v.ddpLabel}">
-                        <Loop:DdpSelection aura:id="ddpSelect-component" recordId="{!v.recordId}" selectedDdp="{!v.ddpId}" ddpLabel="{!v.ddpLabel}"/>
-                    </Loop:AccordionSection>
-                    <aura:if isTrue="{!!!v.ddpId}">
-                        <Loop:LoadingTile aura:id="secondaryAccordionSectionsLoadingRow" class="top-border"/>
-                        <div aura:id="secondaryAccordionSections" hidden="true">
-                            <Loop:AccordionSection aura:id="contactAccordionSection" sectionName="contactAccordionSection" label="Contact" required="{!v.contactRequired}">
-                                <Loop:ContactSelection aura:id="contactSelect-component" contactId="{!v.contactId}"/>
+            <aura:if isTrue="{!v.hasDocuments}">
+                <div aura:id="runDdpContainer" class="hidden" style="background: #fff;">
+                    <div aura:id="runDdp">
+                        <aura:if isTrue="{!v.context == 'TEST' || v.context == 'UTILITYBAR'}">
+                            <Loop:AccordionSection aura:id="recordAccordionSection" sectionName="recordAccordionSection" label="Record">
+                                <Loop:RecordSelection aura:id="recordSelect-component" recordId="{!v.recordId}" selectedDdp="{!v.ddpId}" objectName="{!v.objectName}" objectPluralLabel="{!v.objectPluralLabel}" ddpLabel="{!v.ddpLabel}"/>
                             </Loop:AccordionSection>
-                            <Loop:AccordionSection aura:id="documentAccordionSection" sectionName="documentAccordionSection" label="Document Selection" required="{!v.attachmentRequired}">
-                                <Loop:HorizontalSlider aura:id="optionalDocumentSlider">
-                                    <Loop:OptionalDocumentSelection aura:id="documentSelect-component" ddpLabel="{!v.ddpLabel}"/>
-                                    <Loop:SelectAttachmentTiles aura:id="selectAttachmentTiles"/>
-                                </Loop:HorizontalSlider>
+                        </aura:if>
+                        <aura:if isTrue="{!v.context == 'DEFAULT' || v.context == 'UTILITYBAR'}">
+                            <Loop:AccordionSection aura:id="ddpAccordionSection" sectionName="ddpAccordionSection" label="{!v.ddpLabel}">
+                                <Loop:DdpSelection aura:id="ddpSelect-component" recordId="{!v.recordId}" selectedDdp="{!v.ddpId}" ddpLabel="{!v.ddpLabel}"/>
                             </Loop:AccordionSection>
-                            <Loop:AccordionSection aura:id="deliveryAccordionSection" sectionName="deliveryAccordionSection" label="Delivery Option" required="true">
-                            	<Loop:DeliveryOptionSelection aura:id="deliverySelect-component" objectName="{!v.objectName}"/>
-                            </Loop:AccordionSection>
-                        </div>
-                    </aura:if>
+                        </aura:if>
+                        <aura:if isTrue="{!!!v.ddpId &amp;&amp; !!v.recordId}">
+                            <Loop:LoadingTile aura:id="secondaryAccordionSectionsLoadingRow" class="top-border"/>
+                            <div aura:id="secondaryAccordionSections" hidden="true">
+                                <Loop:AccordionSection aura:id="contactAccordionSection" sectionName="contactAccordionSection" label="Contact" required="{!v.contactRequired}">
+                                    <Loop:ContactSelection aura:id="contactSelect-component" contactId="{!v.contactId}"/>
+                                </Loop:AccordionSection>
+                                <Loop:AccordionSection aura:id="documentAccordionSection" sectionName="documentAccordionSection" label="Document Selection" required="{!v.attachmentRequired}">
+                                    <Loop:HorizontalSlider aura:id="optionalDocumentSlider">
+                                        <Loop:OptionalDocumentSelection aura:id="documentSelect-component" ddpLabel="{!v.ddpLabel}"/>
+                                        <Loop:SelectAttachmentTiles aura:id="selectAttachmentTiles"/>
+                                    </Loop:HorizontalSlider>
+                                </Loop:AccordionSection>
+                                <Loop:AccordionSection aura:id="deliveryAccordionSection" sectionName="deliveryAccordionSection" label="Delivery Option" required="true">
+                                    <Loop:DeliveryOptionSelection aura:id="deliverySelect-component" objectName="{!v.objectName}" context="{!v.context}"/>
+                                </Loop:AccordionSection>
+                            </div>
+                        </aura:if>
+                    </div>
                 </div>
-            </div>
+                <aura:set attribute="else">
+                    <div class="slds-m-horizontal--small" style="margin-bottom:4px;">
+                        <div class="slds-notify slds-theme--success toast-style" style="background-color:#4F6A92;">
+                            <div class="slds-notify__content slds-grid">
+                                <div class="slds-col slds-align-middle">
+                                    <h2 class="slds-text-heading--small">To test a Document Package, the "Select File" section must contain at least one document.</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aura:set>
+            </aura:if>
             <div class="slds-grid">
                 <div aura:id="errorContainer" class="slds-grid--align-center slds-grid--vertical-align-center error-text border-top hidden" style="background: #fff;">
-                    <Loop:CustomTile status="error" message="{!v.errorMessage}"/>
+                    <Loop:CustomTile status="error" message="{!v.errorMessage}" message2="{!v.context == 'TEST' ? 'If you have made any recent modifications, try refreshing the component and run again.' : ''}"/>
                 </div>
             </div>
             <aura:if isTrue="{!v.lockerServiceActive}">
@@ -162,7 +195,7 @@
                 </aura:if>
                 <div class="button-padding">
                     <Loop:Button class="slds-button slds-button--neutral" onclick="{!c.handleRunTestClick}" visible="{!v.runTestAvailable}" label="{!v.needsAuthentication ? 'Authorize &amp; Test' : 'Run Test'}" disabled="{!v.runDisabled}"/>
-                    <Loop:Button class="slds-button slds-button--brand slds-m-left--x-small" onclick="{!c.handleRunDdpClick}" visible="true" label="{!v.needsAuthentication ? 'Authorize &amp; Run' : 'Run ' + v.ddpLabel}" disabled="{!v.runDisabled}"/>
+                    <Loop:Button class="slds-button slds-button--brand slds-m-left--x-small" onclick="{!c.handleRunDdpClick}" visible="true" label="{!v.runButtonLabel}" disabled="{!v.runDisabled}"/>
                 </div>
             </div>
         </div>

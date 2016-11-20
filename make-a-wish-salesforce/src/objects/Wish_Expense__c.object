@@ -135,7 +135,6 @@
                 <fullName>Rejected</fullName>
                 <default>false</default>
             </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
@@ -317,7 +316,6 @@
                 <fullName>Rejected</fullName>
                 <default>false</default>
             </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
@@ -350,18 +348,6 @@
         <type>Currency</type>
     </fields>
     <fields>
-        <fullName>Select_Approver__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <externalId>false</externalId>
-        <label>Select Approver</label>
-        <referenceTo>User</referenceTo>
-        <relationshipName>Wish_Expenses</relationshipName>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
-    </fields>
-    <fields>
         <fullName>Transaction_Types__c</fullName>
         <externalId>false</externalId>
         <label>Transaction Types</label>
@@ -374,7 +360,6 @@
                 <fullName>Finance</fullName>
                 <default>false</default>
             </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
@@ -388,7 +373,7 @@
         <description>It will capture transaction  information</description>
         <externalId>true</externalId>
         <label>Transaction #</label>
-        <length>90</length>
+        <length>10</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -401,6 +386,10 @@
         <label>Wish Expense Approval Status</label>
         <picklist>
             <picklistValues>
+                <fullName>Initiated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
                 <fullName>Approved</fullName>
                 <default>false</default>
             </picklistValues>
@@ -408,35 +397,6 @@
                 <fullName>Rejected</fullName>
                 <default>false</default>
             </picklistValues>
-            <picklistValues>
-                <fullName>Initiated</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Budget Submitted</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Budget Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Budget Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Projected Submitted</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Projected Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Projected Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
@@ -458,26 +418,6 @@
         <type>Lookup</type>
     </fields>
     <label>Wish Expense</label>
-    <listViews>
-        <fullName>All</fullName>
-        <columns>NAME</columns>
-        <columns>Account_Description__c</columns>
-        <columns>Account_Number__c</columns>
-        <columns>Case__c</columns>
-        <columns>Expense__c</columns>
-        <columns>Wish_Expense_Transaction_Code__c</columns>
-        <columns>Transaction__c</columns>
-        <columns>RECORDTYPE</columns>
-        <columns>Actual_Cash__c</columns>
-        <columns>Actual_In_Kind__c</columns>
-        <columns>Budget_Cash__c</columns>
-        <columns>Budget_In_Kind__c</columns>
-        <columns>FE_Posted_Cash__c</columns>
-        <columns>FE_Posted_In_Kind__c</columns>
-        <columns>LAST_UPDATE</columns>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-    </listViews>
     <nameField>
         <displayFormat>WE-{00000}</displayFormat>
         <label>Wish Expense Number</label>
@@ -490,36 +430,6 @@
         <fullName>Budgeting</fullName>
         <active>true</active>
         <label>Budgeting</label>
-        <picklistValues>
-            <picklist>Account_Description__c</picklist>
-            <values>
-                <fullName>Direct Wish Cash Expense</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct Wish In-kind Expense</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct Wish In-kind Service</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Budget_Approval_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Submitted</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
         <picklistValues>
             <picklist>Chapter_From__c</picklist>
             <values>
@@ -547,21 +457,6 @@
             </values>
             <values>
                 <fullName>New York</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Projected_Approval_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Submitted</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -608,21 +503,6 @@
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>Budget_Approval_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Submitted</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>Chapter_From__c</picklist>
             <values>
                 <fullName>Chicago</fullName>
@@ -649,21 +529,6 @@
             </values>
             <values>
                 <fullName>New York</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Projected_Approval_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Submitted</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -681,6 +546,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Initiated</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Rejected</fullName>
                 <default>false</default>
             </values>
@@ -690,36 +559,6 @@
         <fullName>Wish_Expense_Record_Type</fullName>
         <active>true</active>
         <label>Wish Expense Record Type</label>
-        <picklistValues>
-            <picklist>Account_Description__c</picklist>
-            <values>
-                <fullName>Direct Wish Cash Expense</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct Wish In-kind Expense</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct Wish In-kind Service</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Budget_Approval_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Submitted</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
         <picklistValues>
             <picklist>Chapter_From__c</picklist>
             <values>
@@ -747,21 +586,6 @@
             </values>
             <values>
                 <fullName>New York</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>Projected_Approval_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Submitted</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

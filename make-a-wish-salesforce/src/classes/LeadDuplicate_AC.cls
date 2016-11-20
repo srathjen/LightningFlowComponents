@@ -29,6 +29,9 @@ Public Class LeadDuplicate_AC
    Id wishChild;
    public boolean hideTreatingSection{get;set;}
    
+   
+   public List<Lead> masterLeadList {get;set;}
+   
    // Standard set controller for displaying matching duplicates.
    public LeadDuplicate_AC(ApexPages.StandardSetController controller)
    {
@@ -53,11 +56,13 @@ Public Class LeadDuplicate_AC
        {
         // Querying current lead info.
          currLead = [SELECT Id, FirstName,Name,Of_Times_Email_Sent__c,LastName,Parent_Last_Name__c,Parent_First_Name__c, 
-                     Email, DOB__c ,Phone,chapterName__c, 
+                     Email, DOB__c ,Phone,chapterName__c,chapterName__r.Name, 
                      City, State, Street, PostalCode, Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
                      Medical_Professional_Phone__c, Medical_Professional_Email__c, Treating_Medical_Professional_First_Name__c,
                      Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Phone__c, Treating_Medical_Professional_Email__c FROM Lead
                      WHERE id = :currId limit 1];
+         masterLeadList = new List<Lead>();
+         masterLeadList.add(currLead); 
        }
        else
        {
@@ -302,16 +307,17 @@ Public Class LeadDuplicate_AC
        
        boolean flag=true; 
         // Check we have atleast 2 and not more than 3 records selected for merge. If not throw an error. 
-        if (mergeCandidates.size() <=1) {
+        if (mergeCandidates.size() <1) {
             flag=false;
-            ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'Please select atleast two leads for merging'));
+            ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'Please select a lead for merging'));
             return;
           
         }
         
-        if (mergeCandidates.size() >3 ) {
+        if (mergeCandidates.size() >2 ) {
             flag=false;
             ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'You can not merge more than 3 leads at a time'));
+           //ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'You can not merge more than 3 leads at a time'));
             return;
            
         }

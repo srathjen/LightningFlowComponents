@@ -66,6 +66,6 @@
         </action>
     </initialSubmissionActions>
     <label>Account:In Kind Donors Approval</label>
-    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <recordEditability>AdminOnly</recordEditability>
     <showApprovalHistory>true</showApprovalHistory>
 </ApprovalProcess>

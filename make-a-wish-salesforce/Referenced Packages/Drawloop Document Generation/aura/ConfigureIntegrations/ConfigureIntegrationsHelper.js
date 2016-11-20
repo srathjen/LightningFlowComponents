@@ -1,4 +1,11 @@
 ({
+    fireErrorEvent : function(component, message) {
+        var errorEvent = component.getEvent('showError');
+        errorEvent.setParams({
+            message: message
+        });
+        errorEvent.fire();
+    },
     getAvailableIntegrations : function(component) {
         var action = component.get("c.getIntegrationInfos");
         action.setCallback(this, function(response) {
@@ -143,14 +150,6 @@
         el.href = url;
         return el;
     },
-    handleErrorResponse : function(response) {
-        var errors = response.getError();
-        if (errors && errors[0] && errors[0].message) {
-            console.log("Error message: " + errors[0].message);
-        } else {
-            console.log("Unknown error");
-        }
-    },
     getSitePaths : function(paths) {
         var sitePaths = [];
         try {
@@ -224,24 +223,22 @@
             valuesJson: JSON.stringify(values)
         });
         action.setCallback(this, function(response) {
-            var state = response.getState();
-            if (state === "SUCCESS") {
-                this.hideModal(component);
-                this.getAvailableIntegrations(component);
-                component.find("selectedOption").set("v.value", "");
-                this.resetFields(component);
-                var integrationsList = component.find('integrationsList');
-                integrationsList.refreshList();
-            } else if (state === "ERROR") {
-                var responseErrors = response.getError();
-                var errors = [];
-                for (var i in responseErrors) {
-                    var error = responseErrors[i];
-                    if (error.fieldErrors && error.fieldErrors.Name && error.fieldErrors.Name.length && error.fieldErrors.Name[0].message) {
-                        errors.push(error.fieldErrors.Name[0].message);
-                    }
+            if (response.getState() === "SUCCESS") {
+                var parsedResponse = JSON.parse(response.getReturnValue());
+                if (parsedResponse.isSuccess) {
+                    this.hideModal(component);
+                    this.getAvailableIntegrations(component);
+                    component.find("selectedOption").set("v.value", "");
+                    this.resetFields(component);
+                    var integrationsList = component.find('integrationsList');
+                    integrationsList.refreshList();
                 }
-                component.set("v.errors", errors);
+                else {
+                    this.fireErrorEvent(component, parsedResponse.errorMessage);
+                }
+            }
+            else {
+                this.fireErrorEvent(component, 'An unexpected error has occurred. Please contact Drawloop Support if this error persists.');
             }
             component.set("v.modalBusy", false);
         });
@@ -290,9 +287,7 @@
                 }
             }
             else {
-                component.getEvent('showError').setParams({
-                    message: 'There was a problem initiating OAuth.'
-                }).fire();
+                this.fireErrorEvent(component, 'There was a problem initiating OAuth.');
             }
             
             component.set("v.modalBusy", false);

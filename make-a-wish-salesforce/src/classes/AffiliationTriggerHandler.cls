@@ -17,8 +17,8 @@ public class AffiliationTriggerHandler {
         List<CollaborationGroupMember> chatterGroupMembersList = new List<CollaborationGroupMember>();
         
         for(npe5__Affiliation__c getChapters : [SELECT Id, npe5__Organization__r.Name, npe5__Contact__c FROM npe5__Affiliation__c WHERE npe5__Contact__c IN : volunteerContactIdsSet AND Id IN : affiliationsIdsSet]) {
-            if(!chapterNamesSet.contains(getChapters.npe5__Organization__r.Name)) {
-                chapterNamesSet.add(getChapters.npe5__Organization__r.Name);
+            if(!chapterNamesSet.contains(getChapters.npe5__Organization__r.Name.removeStart('Make-A-Wish')+'- Chapter')) {
+                chapterNamesSet.add(getChapters.npe5__Organization__r.Name.removeStart('Make-A-Wish')+'- Chapter');
             }
             volunteerChaptersMap.put(getChapters.npe5__Contact__c, getChapters.npe5__Organization__r.Name);
         }
@@ -51,7 +51,7 @@ public class AffiliationTriggerHandler {
     }
     //used to update the status field in contact for reporting purpose
     public static void updateContact(Map<id,String>contactMap){
-        List<Contact> conList=[SELECT id,Hidden_Status__c from contact where id IN:contactMap.keyset()];
+        List<Contact> conList=[SELECT id,Hidden_Status__c  from contact where id IN:contactMap.keyset()];
        for(Contact currContact:conList){
            currContact.Hidden_Status__c=contactMap.get(currContact.id);
        } 

@@ -73,7 +73,7 @@
         <layoutColumns>
             <layoutItems>
                 <height>200</height>
-                <page>WishRelatedLinks</page>
+                <page>WishRelatedLinks_VF</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>false</showScrollbars>
                 <width>100%</width>

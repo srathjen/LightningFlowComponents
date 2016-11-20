@@ -209,12 +209,12 @@
         <fullName>All</fullName>
         <columns>NAME</columns>
         <columns>Chapter__c</columns>
-        <columns>Office_Id__c</columns>
         <columns>Address_1__c</columns>
         <columns>Address_2__c</columns>
         <columns>City__c</columns>
         <columns>Country__c</columns>
         <columns>State__c</columns>
+        <columns>LAST_UPDATE</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

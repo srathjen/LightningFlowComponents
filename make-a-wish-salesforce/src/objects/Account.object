@@ -85,7 +85,7 @@
         <label>DEPRICATED: Account Compact Layout</label>
     </compactLayouts>
     <enableFeeds>true</enableFeeds>
-    <enableHistory>true</enableHistory>
+    <enableHistory>false</enableHistory>
     <externalSharingModel>Private</externalSharingModel>
     <fieldSets>
         <fullName>npsp__BDE_Entry_FS</fullName>
@@ -885,21 +885,12 @@
     <fields>
         <fullName>AccountNumber</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>AccountSource</fullName>
         <picklist>
             <picklistValues>
-                <fullName>Online</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
                 <fullName>Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Phone</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -907,13 +898,20 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
+                <fullName>Online</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
                 <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phone</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Picklist</type>
     </fields>
     <fields>
@@ -926,19 +924,16 @@
         <required>false</required>
         <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
     </fields>
     <fields>
         <fullName>AnnualRevenue</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>BillingAddress</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>Chapter_Id__c</fullName>
@@ -949,7 +944,6 @@
         <length>10</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>true</unique>
     </fields>
@@ -961,7 +955,6 @@
         <label>Chapter Name</label>
         <lookupFilter>
             <active>false</active>
-            <booleanFilter>(1 AND 2 AND 3) OR (4 AND 2)</booleanFilter>
             <filterItems>
                 <field>$Profile.Name</field>
                 <operation>equals</operation>
@@ -979,17 +972,16 @@
             </filterItems>
             <filterItems>
                 <field>$Profile.Name</field>
-                <operation>notEqual</operation>
+                <operation>equals</operation>
                 <value>Active Volunteer</value>
             </filterItems>
-            <isOptional>false</isOptional>
+            <isOptional>true</isOptional>
         </lookupFilter>
         <referenceTo>Account</referenceTo>
         <relationshipLabel>Accounts</relationshipLabel>
         <relationshipName>Accounts</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -1000,7 +992,6 @@
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -1011,14 +1002,12 @@
         <length>20</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
         <fullName>Description</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>Do_Not_Contact_Notes__c</fullName>
@@ -1027,7 +1016,6 @@
         <length>100</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -1049,7 +1037,6 @@
         </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Picklist</type>
     </fields>
     <fields>
@@ -1059,7 +1046,6 @@
         <label>Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Email</type>
         <unique>false</unique>
     </fields>
@@ -1071,7 +1057,6 @@
         <length>100</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -1082,7 +1067,6 @@
         <label>Emergency Contact Phone</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Phone</type>
     </fields>
     <fields>
@@ -1093,14 +1077,12 @@
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
         <fullName>Fax</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>In_Kind_Approval_Status__c</fullName>
@@ -1119,7 +1101,6 @@
         </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Picklist</type>
     </fields>
     <fields>
@@ -1256,7 +1237,6 @@
             <sorted>false</sorted>
         </picklist>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Picklist</type>
     </fields>
     <fields>
@@ -1269,7 +1249,6 @@
         <relationshipName>Intake_Manager</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -1282,13 +1261,11 @@
         <externalId>false</externalId>
         <label>Is Approved</label>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Jigsaw</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>MAC_Email__c</fullName>
@@ -1297,7 +1274,6 @@
         <label>MAC Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Email</type>
         <unique>false</unique>
     </fields>
@@ -1305,17 +1281,15 @@
         <fullName>MAC_Email_del__c</fullName>
         <description>This filed is used to store the value of MAC Email.</description>
         <externalId>false</externalId>
-        <label>National Medical Advisor Email</label>
+        <label>MAC Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Email</type>
         <unique>false</unique>
     </fields>
     <fields>
         <fullName>Name</fullName>
         <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>Notes__c</fullName>
@@ -1325,19 +1299,16 @@
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
         <fullName>NumberOfEmployees</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>OwnerId</fullName>
         <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>true</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -1362,19 +1333,41 @@
             <sorted>false</sorted>
         </picklist>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>ParentId</fullName>
+        <lookupFilter>
+            <active>true</active>
+            <booleanFilter>(1 AND 2 AND 3) OR (4 AND 2)</booleanFilter>
+            <filterItems>
+                <field>$Profile.Name</field>
+                <operation>equals</operation>
+                <value>Active Volunteer</value>
+            </filterItems>
+            <filterItems>
+                <field>Account.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Chapter</value>
+            </filterItems>
+            <filterItems>
+                <field>$User.Account_Name__c</field>
+                <operation>equals</operation>
+                <valueField>Account.Name</valueField>
+            </filterItems>
+            <filterItems>
+                <field>$Profile.Name</field>
+                <operation>notEqual</operation>
+                <value>Active Volunteer</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Hierarchy</type>
     </fields>
     <fields>
         <fullName>Phone</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>Primary_Contact__c</fullName>
@@ -1386,7 +1379,6 @@
         <relationshipName>Accounts3</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -1407,7 +1399,6 @@
             <sorted>false</sorted>
         </picklist>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Picklist</type>
     </fields>
     <fields>
@@ -1536,68 +1527,41 @@
                 <fullName>Grandparent</fullName>
                 <default>false</default>
             </picklistValues>
-            <picklistValues>
-                <fullName>Child</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Other</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Parent</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Spouse</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>ShippingAddress</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>Sic</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>SicDesc</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>Site</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>TickerSymbol</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>Type</fullName>
         <picklist>
             <picklistValues>
-                <fullName>Prospect</fullName>
+                <fullName>Airline</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Customer - Direct</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Customer - Channel</fullName>
+                <fullName>Animal</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -1605,23 +1569,7 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Installation Partner</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Technology Partner</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Other</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Individual</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Household</fullName>
+                <fullName>Construction/Contractor</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -1629,7 +1577,71 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
+                <fullName>Customer - Channel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Customer - Direct</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Food/Beverage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foundation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Furniture</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
                 <fullName>Government</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ground Transportation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Household</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Individual</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Installation Partner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Lodging</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Luggage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medical Equipment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Miscellaneous</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Music</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -1637,13 +1649,48 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Foundation</fullName>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Parking</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Party Supplies</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Playset/house</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pool/Spa</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prospect</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Retail</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Technology Partner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Theme Park/Activity</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vehicle Refurbishment/Mechanical</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Picklist</type>
     </fields>
     <fields>
@@ -1656,13 +1703,11 @@
         <relationshipName>Accounts1</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Website</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
     </fields>
     <fields>
         <fullName>Wish_Co_ordinator_Hidden_Email__c</fullName>
@@ -1671,7 +1716,6 @@
         <label>Wish Co-ordinator Hidden Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Email</type>
         <unique>false</unique>
     </fields>
@@ -1685,7 +1729,6 @@
         <relationshipName>Accounts4</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -1698,7 +1741,6 @@
         <relationshipName>Accounts</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -1720,7 +1762,6 @@
         </summaryFilterItems>
         <summaryForeignKey>Opportunity.AccountId</summaryForeignKey>
         <summaryOperation>min</summaryOperation>
-        <trackHistory>false</trackHistory>
         <type>Summary</type>
     </fields>
     <fields>
@@ -1742,7 +1783,6 @@
         </summaryFilterItems>
         <summaryForeignKey>Opportunity.AccountId</summaryForeignKey>
         <summaryOperation>max</summaryOperation>
-        <trackHistory>false</trackHistory>
         <type>Summary</type>
     </fields>
     <fields>
@@ -1759,7 +1799,6 @@
         </summaryFilterItems>
         <summaryForeignKey>Opportunity.AccountId</summaryForeignKey>
         <summaryOperation>sum</summaryOperation>
-        <trackHistory>false</trackHistory>
         <type>Summary</type>
     </fields>
     <fields>
@@ -1780,7 +1819,6 @@
         </summaryFilterItems>
         <summaryForeignKey>Opportunity.AccountId</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
-        <trackHistory>false</trackHistory>
         <type>Summary</type>
     </fields>
     <fields>
@@ -1795,7 +1833,6 @@
         <relationshipName>Organizations</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -1806,7 +1843,6 @@
         <externalId>false</externalId>
         <label>_SYSTEM: IsIndividual</label>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -1819,7 +1855,6 @@
         <length>100</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -1834,7 +1869,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -1846,7 +1880,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -1857,7 +1890,6 @@
         <length>4</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -1869,7 +1901,6 @@
         <label>First Gift Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
     <fields>
@@ -1880,7 +1911,6 @@
         <label>Formal Greeting</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>TextArea</type>
     </fields>
     <fields>
@@ -1890,7 +1920,6 @@
         <label>Household Phone</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Phone</type>
     </fields>
     <fields>
@@ -1901,7 +1930,6 @@
         <label>Informal Greeting</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>TextArea</type>
     </fields>
     <fields>
@@ -1915,7 +1943,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -1926,7 +1953,6 @@
         <label>Last Gift Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
     <fields>
@@ -1940,7 +1966,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -1951,7 +1976,6 @@
         <label>Last Membership Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
     <fields>
@@ -1963,7 +1987,6 @@
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -1976,7 +1999,6 @@
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -1991,7 +2013,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -2002,7 +2023,6 @@
         <label>Membership End Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
     <fields>
@@ -2013,7 +2033,6 @@
         <label>Membership Join Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
     <fields>
@@ -2027,7 +2046,6 @@
         <required>false</required>
         <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -2042,7 +2060,6 @@
         <required>false</required>
         <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -2057,7 +2074,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -2071,7 +2087,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -2085,7 +2100,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -2099,7 +2113,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -2113,7 +2126,6 @@
         <required>false</required>
         <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -2128,7 +2140,6 @@
         <required>false</required>
         <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -2143,7 +2154,6 @@
         <required>false</required>
         <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -2158,7 +2168,6 @@
         <required>false</required>
         <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -2185,7 +2194,6 @@
         </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>MultiselectPicklist</type>
         <visibleLines>3</visibleLines>
     </fields>
@@ -2200,7 +2208,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -2214,7 +2221,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -2228,7 +2234,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -2243,7 +2248,6 @@
         <relationshipName>Accounts</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Lookup</type>
     </fields>
     <fields>
@@ -2286,7 +2290,6 @@
         </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>MultiselectPicklist</type>
         <visibleLines>4</visibleLines>
     </fields>
@@ -2299,7 +2302,6 @@
         <inlineHelpText>Indicates that this organization is a grant making organization. Can apply to foundations, government agencies, corporations, etc.</inlineHelpText>
         <label>Grantmaker</label>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -2312,7 +2314,6 @@
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -2327,7 +2328,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -2341,7 +2341,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -2355,7 +2354,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Currency</type>
     </fields>
     <fields>
@@ -2367,7 +2365,6 @@
         <label>Matching Gift Comments</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
     </fields>
@@ -2380,7 +2377,6 @@
         <inlineHelpText>Is this a company that offers matching gifts?</inlineHelpText>
         <label>Matching Gift Company</label>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -2392,7 +2388,6 @@
         <label>Matching Gift Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Email</type>
         <unique>false</unique>
     </fields>
@@ -2405,7 +2400,6 @@
         <label>Matching Gift Info Updated</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Date</type>
     </fields>
     <fields>
@@ -2419,7 +2413,6 @@
         <required>false</required>
         <scale>2</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Percent</type>
     </fields>
     <fields>
@@ -2431,7 +2424,6 @@
         <label>Matching Gift Phone</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Phone</type>
     </fields>
     <fields>
@@ -2444,7 +2436,6 @@
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -2460,7 +2451,6 @@
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
-        <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -2475,7 +2465,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <inlineHelpText>Formula: Current, expired, or grace period.  Default grace period set in Household Settings.</inlineHelpText>
         <label>Membership Status</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -2489,7 +2478,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <required>false</required>
         <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -2504,6 +2492,9 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <columns>ACCOUNT.RECORDTYPE</columns>
         <filterScope>Everything</filterScope>
         <label>All Accounts</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
     </listViews>
     <listViews>
         <fullName>Chapter_Account</fullName>
@@ -2532,8 +2523,8 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <columns>ACCOUNT.ADDRESS1_STATE_CODE</columns>
         <columns>ACCOUNT.PHONE1</columns>
         <columns>ACCOUNT.TYPE</columns>
-        <columns>CORE.USERS.ALIAS</columns>
         <columns>Chapter_Id__c</columns>
+        <columns>CORE.USERS.ALIAS</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>ACCOUNT.RECORDTYPE</field>
@@ -2541,23 +2532,9 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             <value>Account.Chapter</value>
         </filters>
         <label>Chapter Accounts</label>
-    </listViews>
-    <listViews>
-        <fullName>Household_Accounts</fullName>
-        <columns>ACCOUNT.NAME</columns>
-        <columns>npo02__Formal_Greeting__c</columns>
-        <columns>npo02__Informal_Greeting__c</columns>
-        <columns>npo02__TotalOppAmount__c</columns>
-        <columns>npo02__AverageAmount__c</columns>
-        <columns>npo02__Best_Gift_Year__c</columns>
-        <columns>npo02__HouseholdPhone__c</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>ACCOUNT.RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Account.HH_Account</value>
-        </filters>
-        <label>Household Accounts</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
     </listViews>
     <listViews>
         <fullName>In_Kind_Donors</fullName>
@@ -2587,6 +2564,9 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <fullName>MyOrganizations</fullName>
         <filterScope>Mine</filterScope>
         <label>My Organizations</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
     </listViews>
     <listViews>
         <fullName>NewLastWeek</fullName>
@@ -2597,6 +2577,9 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             <value>LAST_WEEK</value>
         </filters>
         <label>New Last Week</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
     </listViews>
     <listViews>
         <fullName>NewThisWeek</fullName>
@@ -2607,6 +2590,9 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             <value>THIS_WEEK</value>
         </filters>
         <label>New This Week</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
     </listViews>
     <listViews>
         <fullName>Organization_Accounts</fullName>
@@ -2617,9 +2603,11 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             <value>Account.Organization</value>
         </filters>
         <label>Organization Accounts</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
     </listViews>
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
-    <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <recordTypes>
         <fullName>Chapter</fullName>
         <active>true</active>
@@ -2640,17 +2628,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>Yes</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>In_Kind_Approval_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -3016,17 +2993,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>Yes</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>In_Kind_Approval_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -3680,6 +3646,89 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Type</picklist>
+            <values>
+                <fullName>Airline</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Animal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Construction%2FContractor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Food%2FBeverage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Furniture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Ground Transportation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Lodging</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Luggage</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medical Equipment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Miscellaneous</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Music</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Parking</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Party Supplies</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playset%2Fhouse</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pool%2FSpa</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Retail</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Theme Park%2FActivity</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Vehicle Refurbishment%2FMechanical</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>npo02__SYSTEM_CUSTOM_NAMING__c</picklist>
             <values>
                 <fullName>Formal_Greeting%5F%5Fc</fullName>
@@ -3735,17 +3784,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             <picklist>AccountSource</picklist>
             <values>
                 <fullName>Other</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>In_Kind_Approval_Status__c</picklist>
-            <values>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Rejected</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

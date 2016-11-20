@@ -217,8 +217,8 @@ individual(s) listed below.</p>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.relationship}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.dob}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.tshirtSize}</td>
-                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.medicalNeeds}</td>
-                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.residingWishMedical}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"><apex:inputCheckbox value="{!wishFamilContact.medicalNeeds}"/></td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"><apex:inputcheckbox value="{!wishFamilContact.residingWishMedical}"/></td>
               
             </tr>
         </apex:repeat>  

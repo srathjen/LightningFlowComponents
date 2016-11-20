@@ -17,7 +17,7 @@
     <masterLabel>Wish Referral Form</masterLabel>
     <requireHttps>false</requireHttps>
     <requireInsecurePortalAccess>false</requireInsecurePortalAccess>
-    <siteAdmin>vennila@mstsolutions.com.dev</siteAdmin>
+    <siteAdmin>sathiskumar.s_maw@mstsolutions.com</siteAdmin>
     <siteTemplate>SiteTemplate</siteTemplate>
     <siteType>Visualforce</siteType>
     <subdomain>wish</subdomain>

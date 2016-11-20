@@ -6,14 +6,12 @@ global class VolunteerInterviewRecurrenceTask_AC implements Database.Batchable<s
     public Id wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
     
     global Database.QueryLocator start(Database.BatchableContext BC) {
-        System.debug('>>>>>>>>RecurrenceTaskInitiated>>>>>>>>>');
         Date checkin  = System.today().addDays(-30);
-        String query = 'SELECT Id,ContactId, CheckedInFamily__c FROM Case WHERE RecordTypeId =: parentWishRecordTypeId AND CheckedInFamily__c != null AND CheckedInFamily__c =: checkin';
+        String query = 'SELECT Id, CheckedInFamily__c FROM Case WHERE RecordTypeId =: parentWishRecordTypeId AND CheckedInFamily__c != null AND CheckedInFamily__c =: checkin';
         return Database.getQueryLocator(query);
     }
     
     global void execute(Database.BatchableContext BC, List<Case> caseList) {
-        System.debug('CaseList>>>>>>>>>>>>>>>>'+CaseList);
         Map<Id, Id> caseTeamMemberMap = new Map<Id, Id>();
         Set<Id> idForCaseTeamMemberSet = new Set<Id>();
         Map<Id,Case> recurrenceTaskMap = new Map<Id,Case>();

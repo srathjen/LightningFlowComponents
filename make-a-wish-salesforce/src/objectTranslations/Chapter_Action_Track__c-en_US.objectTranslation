@@ -105,12 +105,12 @@
             <translation><!-- Other --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Shopping Spree - Local and Travel</masterLabel>
-            <translation><!-- Shopping Spree - Local and Travel --></translation>
+            <masterLabel>Shopping Spree - Local</masterLabel>
+            <translation><!-- Shopping Spree - Local --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Standard</masterLabel>
-            <translation><!-- Standard --></translation>
+            <masterLabel>Shopping Spree - Travel</masterLabel>
+            <translation><!-- Shopping Spree - Travel --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Travel - Hawai</masterLabel>

@@ -37,16 +37,20 @@ Public Class Constant_AC {
     public String budgetingRt;
     public String financeRt;
     public String wishGrantTaskRT;
+    public String InKind;
+    public String Reimbursement;
+    public String diagnosisRT;
     
     public Constant_AC() {
+        diagnosisRT = 'Diagnosis Verification Review';
         budgetingRt = 'Budgeting';
         financeRt = 'Finance';
         contactWishChildRT = 'Wish Child';
         wishDeterminationRT = 'Wish Determination';
-        wishPlanningAnticipationRT = 'Wish Planning & Anticipation';
+        wishPlanningAnticipationRT = 'Wish Planning';
         wishAssistRT = 'Wish Assist';
-        wishGrantRT = 'Wish Granted';
-        wishEffectRT = 'Wish Effect';
+        wishGrantRT = 'Wish Granting';
+        wishEffectRT = 'Wish Impact';
         wishFamilyRT = 'Wish Family';
         parentWishRT = 'Wish';
         MedicalProfessionalRT = 'Medical Professional';
@@ -70,5 +74,7 @@ Public Class Constant_AC {
         partARecordTypeId = 'Diagnosis Verification Review';
         travelAlgmRT = 'Travel Algorithm';
         wishGrantTaskRT = 'Wish Granted';
+        InKind = 'In-Kind Donation';
+        Reimbursement = 'Reimbursement';
     }
 }

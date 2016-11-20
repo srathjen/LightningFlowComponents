@@ -76,8 +76,8 @@ public class VolunteerTraining_AC {
     // the registered training in a separate block. 
     public Boolean CheckRegisteredProgram() {
         List<Volunteer_Orientation_Training__c> exVolList = [SELECT Id, Orientation_Training__c, Volunteer__c, Volunteer_Attendance__c 
-                                                             FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId 
-                                                             AND Type__c = 'Training' AND Volunteer_Attendance__c = 'Registered' AND Orientation_Training__c != Null];
+                                                            FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId 
+                                                            AND Type__c = 'Training' AND Volunteer_Attendance__c = 'Registered' AND Orientation_Training__c != Null];
         if(exVolList.size() > 0) {
             checkExistProgram = false;
         } else {

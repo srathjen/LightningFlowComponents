@@ -1240,6 +1240,7 @@
             <picklistValues>
                 <fullName>Chronological age</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
             </picklistValues>
             <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
@@ -1290,6 +1291,14 @@
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
         <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DNQ_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>DNQ Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>DOB__c</fullName>
@@ -1469,7 +1478,19 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>None</fullName>
+                <fullName>Nurse</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social Worker</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Child Life Specialist</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
@@ -1646,6 +1667,15 @@
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>Inquiry_Date__c</fullName>
+        <description>It holds the Date of Inquriy form submitted.</description>
+        <externalId>false</externalId>
+        <label>Inquiry Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Is_We_Need_To_Expedite_The_Process__c</fullName>
         <description>It will hold detail about is there is any medical reason for expedite the process</description>
         <externalId>false</externalId>
@@ -1701,15 +1731,7 @@
         <fullName>LeadSource</fullName>
         <picklist>
             <picklistValues>
-                <fullName>Online</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
                 <fullName>Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Phone</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -1717,7 +1739,15 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
+                <fullName>Online</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
                 <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phone</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
@@ -2551,10 +2581,12 @@
             <picklistValues>
                 <fullName>Local</fullName>
                 <default>false</default>
+                <controllingFieldValues>Eligibility Review</controllingFieldValues>
             </picklistValues>
             <picklistValues>
                 <fullName>National</fullName>
                 <default>false</default>
+                <controllingFieldValues>Eligibility Review</controllingFieldValues>
             </picklistValues>
             <picklistValues>
                 <fullName>Medical</fullName>
@@ -2710,7 +2742,7 @@
         <fullName>Treating_Medical_Professional_Email__c</fullName>
         <description>This field will hold the Treating Medical Professional Email Address</description>
         <externalId>false</externalId>
-        <label>Qualifying Medical Professional Email</label>
+        <label>Treating Medical Professional Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Email</type>
@@ -2720,7 +2752,7 @@
         <fullName>Treating_Medical_Professional_Fax__c</fullName>
         <description>This field will hold the Treating Medical Professional  Fax number</description>
         <externalId>false</externalId>
-        <label>Qualifying Medical Professional Fax</label>
+        <label>Treating Medical Professional Fax</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Phone</type>
@@ -2729,7 +2761,7 @@
         <fullName>Treating_Medical_Professional_First_Name__c</fullName>
         <description>This field will hold the Treating Medical Professional First Name</description>
         <externalId>false</externalId>
-        <label>Qualifying Medical Professional First</label>
+        <label>Treating Medical Professional First Name</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2740,7 +2772,7 @@
         <fullName>Treating_Medical_Professional_Last_Name__c</fullName>
         <description>This field will hold the details about Treating Medical Professional Name</description>
         <externalId>false</externalId>
-        <label>Qualifying Medical Professional Last</label>
+        <label>Treating Medical Professional Last Name</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2751,7 +2783,7 @@
         <fullName>Treating_Medical_Professional_Phone__c</fullName>
         <description>This field will hold the Treating Medical Professional Phone number</description>
         <externalId>false</externalId>
-        <label>Qualifying Medical Professional Phone</label>
+        <label>Treating Medical Professional Phone</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Phone</type>
@@ -3383,7 +3415,7 @@
         </filters>
         <label>Metro New York &amp; Western New York</label>
         <sharedTo>
-            <group>Metro_New_York_West_New_York</group>
+            <group>Metro_New_York_Western_New_York</group>
         </sharedTo>
     </listViews>
     <listViews>
@@ -3427,7 +3459,7 @@
         </filters>
         <label>Mid-Atlantic</label>
         <sharedTo>
-            <group>MidAtlantic</group>
+            <group>Mid_Atlantic</group>
         </sharedTo>
     </listViews>
     <listViews>
@@ -3449,7 +3481,7 @@
         </filters>
         <label>Mid-South</label>
         <sharedTo>
-            <group>MidSouth</group>
+            <group>Mid_South</group>
         </sharedTo>
     </listViews>
     <listViews>
@@ -3798,7 +3830,7 @@
         </filters>
         <label>Orange County &amp; the Inland Empire</label>
         <sharedTo>
-            <group>Orange_Country_Inland_Empire</group>
+            <group>Orange_County_the_Inland_Empire</group>
         </sharedTo>
     </listViews>
     <listViews>
@@ -3862,6 +3894,23 @@
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Recently_Created_Leads</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.STATE_CODE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>LEAD.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>LAST_N_DAYS:3</value>
+        </filters>
+        <label>Recently Created Leads</label>
     </listViews>
     <listViews>
         <fullName>Rio_Grande_Valley_Lead</fullName>
@@ -4059,7 +4108,7 @@
         </filters>
         <label>Tri-Counties</label>
         <sharedTo>
-            <group>TriCounties</group>
+            <group>Tri_Counties</group>
         </sharedTo>
     </listViews>
     <listViews>
@@ -4161,9 +4210,9 @@
         <lookupPhoneDialogsAdditionalFields>LEAD.PHONE</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>LEAD.MOBILE_PHONE</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>00N3600000OtT92</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>00N3600000POLjb</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>00N3600000OtT9A</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>00N3600000OtT9D</lookupPhoneDialogsAdditionalFields>
-        <lookupPhoneDialogsAdditionalFields>00N3600000POLjb</lookupPhoneDialogsAdditionalFields>
         <searchResultsAdditionalFields>FULL_NAME</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>LEAD.TITLE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>LEAD.COMPANY</searchResultsAdditionalFields>

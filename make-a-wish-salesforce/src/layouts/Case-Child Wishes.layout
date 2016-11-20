@@ -75,36 +75,24 @@
                 <field>Total_Hour_Spent_Hidden__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Qualified_Date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Description__c</field>
+                <behavior>Edit</behavior>
+                <field>Ready_to_Assign_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Unique_Wish_Record_Identifier__c</field>
+                <field>Concept_Approval_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>ChapterName__c</field>
+                <field>Hold_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Option2__c</field>
+                <field>Inactive_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Envelop_Id__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Hidden_Referral_date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Hidden_Diagn_Verifi_Received_Date__c</field>
+                <field>Completed_Date__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -179,10 +167,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Comments</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Hidden_Name_List__c</field>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
@@ -312,12 +296,11 @@
     </relatedContent>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
-        <fields>TASK.WHO_NAME</fields>
-        <fields>ACTIVITY.TASK</fields>
         <fields>TASK.DUE_DATE</fields>
         <fields>TASK.STATUS</fields>
         <fields>TASK.PRIORITY</fields>
         <fields>CORE.USERS.FULL_NAME</fields>
+        <fields>ACTIVITY.TASK</fields>
         <relatedList>RelatedActivityList</relatedList>
     </relatedLists>
     <relatedLists>
@@ -347,10 +330,6 @@
         <fields>Actor</fields>
         <fields>Comments</fields>
         <relatedList>RelatedProcessHistoryList</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Travel_Data__c.parent_wish__c</relatedList>
     </relatedLists>
     <relatedObjects>ContactId</relatedObjects>
     <relatedObjects>AccountId</relatedObjects>

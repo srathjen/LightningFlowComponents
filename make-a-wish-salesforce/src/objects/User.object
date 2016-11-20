@@ -120,6 +120,14 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Is_Inactive__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(IsActive==True,False,True)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Inactive</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>LMS_Id__c</fullName>
         <description>This field is used to store the LMS Id for the Volunteers</description>
         <externalId>false</externalId>
@@ -188,6 +196,25 @@
         <fullName>ManagerId</fullName>
         <trackFeedHistory>true</trackFeedHistory>
         <type>Hierarchy</type>
+    </fields>
+    <fields>
+        <fullName>Month_Of_Inactive__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(MONTH(Inactive_Date__c ),1,&quot;January&quot;,2,&quot;FEBRUARY&quot;,3,&quot;MARCH&quot;,4,&quot;APRIL&quot;,5,&quot;MAY&quot;,6,&quot;JUNE&quot;,7,&quot;JULY&quot;,8,&quot;AUGUST&quot;,9,&quot;SEPTEMBER&quot;,10,&quot;OCTOBER&quot;,11,&quot;NOVEMBER&quot;,12,&quot;DECEMBER&quot;,null)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Month Of Inactive</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Today_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>TODAY()</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Today Date</label>
+        <required>false</required>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>Year_of_Inactive__c</fullName>

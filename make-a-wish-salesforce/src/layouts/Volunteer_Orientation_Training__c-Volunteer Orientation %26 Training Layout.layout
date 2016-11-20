@@ -38,10 +38,6 @@
                 <behavior>Required</behavior>
                 <field>Class_Offering__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Date_Cancelled__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns/>
         <style>TwoColumnsTopToBottom</style>

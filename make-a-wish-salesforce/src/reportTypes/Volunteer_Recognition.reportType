@@ -96,6 +96,11 @@
             <field>Volunteer_Contact__c.Name</field>
             <table>Awards_Recognition__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Volunteer_Contact__c.Contact_Account_Name__c</field>
+            <table>Awards_Recognition__c</table>
+        </columns>
         <masterLabel>Awards &amp; Recognitions</masterLabel>
     </sections>
 </ReportType>

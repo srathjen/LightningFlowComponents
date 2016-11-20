@@ -61,12 +61,12 @@ public class LMSHttpRequest {
                 request.setBody(requestPayLoad);                     
                 Http http = new Http();
                 HTTPResponse response;
-               try{
+                try{
                     response = http.send(request); 
                     System.debug('The response is + '+response.getBody());
                     currLMSUserResponse = LMSUserResponse.parse(response.getBody());
                     System.debug('lMSSSOResponse+++++++++++'+currLMSUserResponse);
-                   /* if(currVolunteerUser.LMS_Id__c != String.valueOf(currLMSUserResponse.id) || currVolunteerUser.LMS_Login__c !=  String.valueOf(currLMSUserResponse.login) || currVolunteerUser.LMS_User_Code__c != String.valueOf(currLMSUserResponse.code) ){
+                    /*if(currVolunteerUser.LMS_Id__c != String.valueOf(currLMSUserResponse.id) || currVolunteerUser.LMS_Login__c !=  String.valueOf(currLMSUserResponse.login) || currVolunteerUser.LMS_User_Code__c != String.valueOf(currLMSUserResponse.code) ){
                         currVolunteerUser.LMS_Id__c = String.valueOf(currLMSUserResponse.id);
                         currVolunteerUser.LMS_Login__c = String.valueOf(currLMSUserResponse.login);
                         currVolunteerUser.LMS_User_Code__c = String.valueOf(currLMSUserResponse.code);

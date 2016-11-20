@@ -230,10 +230,6 @@
         <picklistValues>
             <picklist>Status</picklist>
             <values>
-                <fullName>Abandoned</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Completed</fullName>
                 <default>false</default>
             </values>
@@ -778,10 +774,6 @@
         <picklistValues>
             <picklist>Status</picklist>
             <values>
-                <fullName>Abandoned</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Approved</fullName>
                 <default>false</default>
             </values>
@@ -838,10 +830,10 @@
         </picklistValues>
     </recordTypes>
     <recordTypes>
-        <fullName>Wish_Granted</fullName>
+        <fullName>Wish_Granting</fullName>
         <active>true</active>
         <description>Wish Granted RecordType</description>
-        <label>Wish Granted</label>
+        <label>Wish Granting</label>
         <picklistValues>
             <picklist>Available_Time1__c</picklist>
             <values>
@@ -1124,10 +1116,10 @@
         </picklistValues>
     </recordTypes>
     <recordTypes>
-        <fullName>Wish_Planning_Anticipation</fullName>
+        <fullName>Wish_Planning</fullName>
         <active>true</active>
         <description>Wish Planning &amp; Anticipation type tasks</description>
-        <label>Wish Planning &amp; Anticipation</label>
+        <label>Wish Planning</label>
         <picklistValues>
             <picklist>Available_Time1__c</picklist>
             <values>
@@ -1410,16 +1402,4 @@
         </picklistValues>
     </recordTypes>
     <sharingModel>Private</sharingModel>
-    <webLinks>
-        <fullName>Task_List</fullName>
-        <availability>online</availability>
-        <displayType>massActionButton</displayType>
-        <encodingKey>UTF-8</encodingKey>
-        <linkType>url</linkType>
-        <masterLabel>Task List</masterLabel>
-        <openType>replace</openType>
-        <protected>false</protected>
-        <requireRowSelection>true</requireRowSelection>
-        <url>/007?id={!Case.Id}&amp;rlid=RelatedActivityList</url>
-    </webLinks>
 </CustomObject>

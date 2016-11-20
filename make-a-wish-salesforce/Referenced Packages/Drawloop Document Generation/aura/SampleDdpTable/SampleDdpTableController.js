@@ -1,15 +1,14 @@
 ({
     toggleGroup : function(component, event, helper) {
-        var row = event.target.closest('tr');
-        // Only continue to expand/collapse row if it is a group (header)
-        var isGroup = row.getAttribute('data-is-group');
+        var selectedRow = event.currentTarget;
+
+        var isGroup = selectedRow.getAttribute('data-is-group');
         if (isGroup === 'true') {
-            var industry = row.getAttribute('id');
-            var expanded = row.getAttribute('data-expanded');
+            var expanded = selectedRow.getAttribute('data-expanded');
             if (expanded === 'false') {
-                helper.expandGroup(row, industry);
+                helper.expandGroup(component, selectedRow);
             } else {
-                helper.retractGroup(row, industry);
+                helper.retractGroup(component, selectedRow);
             }
         }
     },
@@ -21,7 +20,7 @@
 
         var selectedCountString = component.find("selectedCount").getElement().innerHTML;
         var selectedMatches = selectedCountString.match(/ \((\d+)\)/i);
-        var selectedCount = (selectedMatches && selectedMatches.length === 2) ? parseInt(selectedMatches[1]) : 0;
+        var selectedCount = (selectedMatches && selectedMatches.length === 2) ? parseInt(selectedMatches[1], 10) : 0;
         
         if (isGroup) {
             for (var i = 0; i < groupCheckboxes.length; i++) {

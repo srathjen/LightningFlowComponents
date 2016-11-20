@@ -2440,7 +2440,7 @@
     </fields>
     <fields>
         <fullName>Communication__c</fullName>
-        <description>It will hold which type of communication can understand by child and this field will mapped from lead at the time of conversion</description>
+        <description>It will hold which type of communication can understand by child and this field mapped from lead at the time of lead conversion.</description>
         <externalId>false</externalId>
         <label>Communication</label>
         <picklist>
@@ -2527,6 +2527,14 @@
         <fullName>Date_of_last_engagement__c</fullName>
         <externalId>false</externalId>
         <label>Date of last engagement</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Deceased_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Deceased Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Date</type>
@@ -2809,6 +2817,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Minor_Participant__c</fullName>
+        <description>This hidden field is used to store the minor participant name and email value from WishLiabilityMinorParticipant_VF page.</description>
+        <externalId>false</externalId>
+        <label>Hidden Minor Participant</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
         <fullName>Hidden_Phone__c</fullName>
         <description>This field is used as hidden to update the contact phone from volunteer portal</description>
         <externalId>false</externalId>
@@ -2832,11 +2850,40 @@
         <description>It store the Affiliation Object  Status field value</description>
         <externalId>false</externalId>
         <label>Hidden Status</label>
-        <length>50</length>
+        <picklist>
+            <picklistValues>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Declined</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Prospective</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Former</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Current</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Picklist</type>
     </fields>
     <fields>
         <fullName>Hidden_Street__c</fullName>
@@ -3174,15 +3221,7 @@ and the date it was or will be granted.</inlineHelpText>
         <fullName>LeadSource</fullName>
         <picklist>
             <picklistValues>
-                <fullName>Online</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
                 <fullName>Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Phone</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -3190,7 +3229,15 @@ and the date it was or will be granted.</inlineHelpText>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
+                <fullName>Online</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
                 <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phone</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
@@ -3324,6 +3371,17 @@ and the date it was or will be granted.</inlineHelpText>
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>Number_of_Assignments__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Assignments</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Number_of_wishes_active__c</fullName>
         <description>It will capture the information, number of active case related to the each contacts</description>
         <externalId>false</externalId>
@@ -3418,6 +3476,15 @@ and the date it was or will be granted.</inlineHelpText>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Participant__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>It will indicate that record is Wish Participant record or not</description>
+        <externalId>false</externalId>
+        <label>Participant</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Pet_Animal__c</fullName>
@@ -3578,7 +3645,6 @@ and the date it was or will be granted.</inlineHelpText>
                 <fullName>Nurse Practitioner</fullName>
                 <default>false</default>
             </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
@@ -3797,7 +3863,7 @@ and the date it was or will be granted.</inlineHelpText>
         <fullName>Recipient_Email__c</fullName>
         <description>Test</description>
         <externalId>false</externalId>
-        <label>Recipient Email</label>
+        <label>First Recipient Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Email</type>
@@ -3835,15 +3901,15 @@ null)</formula>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Gaurdian</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
                 <fullName>Sister</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
                 <fullName>Brother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Guardian</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -3907,7 +3973,7 @@ null)</formula>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Neighbor</fullName>
+                <fullName>Neighbour</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -4975,6 +5041,16 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <formula>TEXT(YEAR(DATEVALUE( CreatedDate )))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Year</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Year_of_Last_Enagement__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT(YEAR( Date_of_last_engagement__c ))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Year of Last Enagement</label>
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
@@ -6309,22 +6385,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         </filters>
         <label>New This Week</label>
     </listViews>
-    <listViews>
-        <fullName>Volunteer_Contacts</fullName>
-        <columns>FULL_NAME</columns>
-        <columns>ACCOUNT.NAME</columns>
-        <columns>CONTACT.TITLE</columns>
-        <columns>CONTACT.PHONE1</columns>
-        <columns>CONTACT.EMAIL</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>CONTACT.RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Contact.Volunteer_Contact</value>
-        </filters>
-        <label>Volunteer Contacts</label>
-    </listViews>
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
     <recordTypes>
         <fullName>Board_Member</fullName>
@@ -6654,17 +6714,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Yes</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
-            <picklist>IsParentGuardian__c</picklist>
-            <values>
-                <fullName>ParentGuardian</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Participant</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -7025,6 +7074,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Guardian</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Half Brother</fullName>
                 <default>false</default>
             </values>
@@ -7038,6 +7091,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Mother</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neighbour</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -8112,17 +8169,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>IsParentGuardian__c</picklist>
-            <values>
-                <fullName>ParentGuardian</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Participant</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>Language__c</picklist>
             <values>
                 <fullName>American Sign Language</fullName>
@@ -8479,6 +8525,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Guardian</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Half Brother</fullName>
                 <default>false</default>
             </values>
@@ -8492,6 +8542,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Mother</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neighbour</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -9613,17 +9667,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>IsParentGuardian__c</picklist>
-            <values>
-                <fullName>ParentGuardian</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Participant</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>Language__c</picklist>
             <values>
                 <fullName>American Sign Language</fullName>
@@ -9980,6 +10023,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Guardian</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Half Brother</fullName>
                 <default>false</default>
             </values>
@@ -9993,6 +10040,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Mother</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neighbour</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -11114,17 +11165,6 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
         </picklistValues>
         <picklistValues>
-            <picklist>IsParentGuardian__c</picklist>
-            <values>
-                <fullName>ParentGuardian</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Participant</fullName>
-                <default>false</default>
-            </values>
-        </picklistValues>
-        <picklistValues>
             <picklist>Language__c</picklist>
             <values>
                 <fullName>American Sign Language</fullName>
@@ -11481,6 +11521,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Guardian</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Half Brother</fullName>
                 <default>false</default>
             </values>
@@ -11494,6 +11538,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Mother</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neighbour</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -12982,6 +13030,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Guardian</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Half Brother</fullName>
                 <default>false</default>
             </values>
@@ -12995,6 +13047,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
             </values>
             <values>
                 <fullName>Mother</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Neighbour</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -13800,9 +13856,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <lookupDialogsAdditionalFields>CONTACT.PHONE1</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>CONTACT.PHONE3</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>CONTACT.EMAIL</lookupDialogsAdditionalFields>
-        <lookupDialogsAdditionalFields>Work_Phone__c</lookupDialogsAdditionalFields>
-        <lookupDialogsAdditionalFields>Interested_involved_with_Make_A_Wish__c</lookupDialogsAdditionalFields>
-        <lookupDialogsAdditionalFields>Write__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_STREET</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_CITY</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_STATE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>CONTACT.ADDRESS2_ZIP</lookupDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>FULL_NAME</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE1</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CONTACT.PHONE4</lookupPhoneDialogsAdditionalFields>
@@ -13815,9 +13872,10 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <searchResultsAdditionalFields>CONTACT.PHONE3</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTACT.PHONE1</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CONTACT.EMAIL</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Work_Phone__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Interested_involved_with_Make_A_Wish__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Write__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTACT.ADDRESS2_STREET</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTACT.ADDRESS2_CITY</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTACT.ADDRESS2_STATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CONTACT.ADDRESS2_ZIP</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
     <validationRules>

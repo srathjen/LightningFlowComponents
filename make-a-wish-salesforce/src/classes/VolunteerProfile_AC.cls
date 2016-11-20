@@ -199,7 +199,7 @@ public class VolunteerProfile_AC{
             }
             
         //Used to display volunteer award details       
-        awardsRecognitionList = [SELECT Award_Name__c,Chapter_Name__r.Name,Comment__c,Date_Field__c FROM Awards_Recognition__c WHERE Volunteer_Contact__c =: userIns.ContactId ];
+        awardsRecognitionList = [SELECT Award_Name__c,Award_Type__c,Chapter_Name__r.Name,Comment__c,Date_Field__c FROM Awards_Recognition__c WHERE Volunteer_Contact__c =: userIns.ContactId ];
       
     
     

@@ -1,4 +1,12 @@
-trigger DocusignRecipientTrigger_AT on dsfs__DocuSign_Recipient_Status__c (After update) {
+/***************************************************************************************************
+Author      : MST Solutions
+CreatedBy   : Kanagaraj
+Date        : 11/15/2016
+Description : DocusignRecipientTrigger_AT is used to update the publicity field from contact when the ParentGuardian are signed the docusign document.
+*****************************************************************************************************/
+
+
+Trigger DocusignRecipientTrigger_AT on dsfs__DocuSign_Recipient_Status__c (After update) {
     
     if(Trigger.isAfter && Trigger.isUpdate){
         Set<Id> dsfsStatusSet = new Set<Id>();

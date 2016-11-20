@@ -211,19 +211,22 @@ public class AWSFilePath_AC{
     
     //This method is used to populate child related information in case file.
     public static void  populateRelatedInfo(Set<Id> casFileIdSet, List<cg__CaseFile__c> caseFileList){
+        System.debug('>>>Function Initiated>>');
         Constant_AC  constant = new Constant_Ac();    
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         
         Map<Id,Case> caseInfoMap = new Map<Id, Case>();
         
-        for(Case caseInfo : [SELECT Id, Contact.Name, Contact.Gender__c, Contact.Current_Age__c, Wish_Type__c, Start_Date__c FROM Case WHERE Id IN : casFileIdSet AND RecordTypeId =: parentWishRecordTypeId]) {
+        for(Case caseInfo : [SELECT Id, Contact.Name, Contact.Gender__c, Contact.Current_Age__c, Wish_Type__c, Start_Date__c, Hidden_Primary_Diagnosis__c FROM Case WHERE Id IN : casFileIdSet AND RecordTypeId =: parentWishRecordTypeId]) {
             caseInfoMap.put(caseInfo.Id, caseInfo);
         }
-        
+        System.debug('>>>caseInfoMap>>'+caseInfoMap);
         for(cg__CaseFile__c populateChildInfo : caseFileList) {
+            System.debug('RecIt>>>>>>>>');
             if(caseInfoMap.containsKey(populateChildInfo.cg__Case__c)) {
+                System.debug('Contains Key>>>>>>>>');
                 populateChildInfo.Age__c = String.valueOf(caseInfoMap.get(populateChildInfo.cg__Case__c).Contact.Current_Age__c);
-                //populateChildInfo.Primary_Diagnosis__c = caseInfoMap.get(populateChildInfo.cg__Case__c).Hidden_Primary_Diagnosis__c;
+                populateChildInfo.Primary_Diagnosis__c = caseInfoMap.get(populateChildInfo.cg__Case__c).Hidden_Primary_Diagnosis__c;
                 populateChildInfo.Gender__c = caseInfoMap.get(populateChildInfo.cg__Case__c).Contact.Gender__c;
                 populateChildInfo.Wish_Type__c = caseInfoMap.get(populateChildInfo.cg__Case__c).Wish_Type__c;
                 populateChildInfo.Child_Name__c = caseInfoMap.get(populateChildInfo.cg__Case__c).Contact.Name;

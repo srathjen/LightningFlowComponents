@@ -15,12 +15,12 @@
     <aura:registerEvent name="recipientSelected" type="Loop:recipientSelected"/>
     
     <div class="slds-picklist" aria-expanded="true">
-        <button class="slds-button slds-button--neutral slds-picklist__label" style="width: 100%;" onclick="{!c.toggleDropdown}">
+        <button aura:id="dropdownButton" class="slds-button slds-button--neutral slds-picklist__label" style="width: 100%;" onclick="{!c.toggleDropdown}">
             <Loop:Svg class="{!v.svgClass}" xlinkHref="{!v.svgLink}"/>
             <span aura:id="selectedValue" class="slds-truncate left-margin">--None--</span>
             <Loop:Svg class="slds-icon icon-right" xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/utility-sprite/svg/symbols.svg#down"/>
         </button>
-        <div aura:id="dropdown" class="slds-dropdown slds-dropdown--left slds-dropdown--menu" hidden="true" style="width:100%; max-width:100%;">
+        <div aura:id="dropdownMenu" class="slds-dropdown slds-dropdown--left slds-dropdown--menu" hidden="true" style="position:absolute; width:100%; max-width:100%;">
             <ul class="slds-dropdown__list slds-dropdown--length-5" role="menu">
                 <aura:iteration items="{!v.dropdownList}" var="option" indexVar="index">
                     <li aura:id="dropdownItem" id="{!option.Id}" class="slds-dropdown__item" onclick="{!c.optionClicked}">

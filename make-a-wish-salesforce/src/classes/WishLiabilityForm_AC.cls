@@ -1,3 +1,11 @@
+/*****************************************************************************
+Created by: Kanagaraj
+Author : MST Solutions
+CreateDate : 10/05/2016
+Description : WishLiabilityForm_AC is used to send the WishLiability Form for Users to sign that liability form.
+******************************************************************************/
+
+
 public class WishLiabilityForm_AC
 {
    public Id caseId;
@@ -29,6 +37,7 @@ public class WishLiabilityForm_AC
     public String roleName{get;set;}
     public List<String> SignNowList{get;set;}
     public boolean isFirstParentSendEmail{get;set;}
+    
     public WishLiabilityForm_AC(ApexPages.StandardController controller) {
         relationShipList = new list<npe4__Relationship__c>();
         contactEmailList = new List<String>();
@@ -73,25 +82,38 @@ public class WishLiabilityForm_AC
             If(currentRelation.npe4__RelatedContact__r.IsParentGuardian__c == 'ParentGuardian' && currentRelation .npe4__RelatedContact__r.Wish_Liability_IsSigned__c == false ){
            
             contactEmailList.add(currentRelation.npe4__RelatedContact__r.Email);
-            emailMap.put(currentRelation.npe4__RelatedContact__r.Name,currentRelation.npe4__RelatedContact__r.Email);
-                if(currentRelation.npe4__RelatedContact__r.IsFirstParentGuardian__c == false)
+            if(emailMap.containsKey(currentRelation.npe4__RelatedContact__r.Name)){
+                String name = currentRelation.npe4__RelatedContact__r.Name+' ';
+                emailMap.put(name,currentRelation.npe4__RelatedContact__r.Email);
+            }
+            else
+                emailMap.put(currentRelation.npe4__RelatedContact__r.Name,currentRelation.npe4__RelatedContact__r.Email);
+            
+            if(currentRelation.npe4__RelatedContact__r.IsFirstParentGuardian__c == false)
                 isFirstParentSendEmail = true;    
             }
             if(currentRelation.npe4__RelatedContact__r.IsParentGuardian__c == 'Participant' && currentRelation .npe4__RelatedContact__r.Wish_Liability_IsSigned__c == false ){
             
             contactEmailList.add(currentRelation.npe4__RelatedContact__r.Email);
-            emailMap.put(currentRelation.npe4__RelatedContact__r.Name,currentRelation.npe4__RelatedContact__r.Email);
+             if(emailMap.containsKey(currentRelation.npe4__RelatedContact__r.Name)){
+                String name = currentRelation.npe4__RelatedContact__r.Name+' ';
+                emailMap.put(name,currentRelation.npe4__RelatedContact__r.Email);
+            }
+            else
+                emailMap.put(currentRelation.npe4__RelatedContact__r.Name,currentRelation.npe4__RelatedContact__r.Email);
             
             }
             
             SignNowList.add(currentRelation.npe4__RelatedContact__r.Name);
        }
    }
+   /*This method is used to fetch the multiple email address to send the liability form.*/
     public pageReference multiEmail(){
     if(emailMap.size()> 0 ){
         displayPopup = true;
         multiPickoptions = new List<SelectOption>();
             for(String currString : emailMap.keySet()){
+                system.debug('@@@@ currString @@@@@'+currString);
                 multiPickoptions.add(new SelectOption(currString,currString ));
             }
         }
@@ -103,15 +125,21 @@ public class WishLiabilityForm_AC
      return null;
      }
      
-     
+     /*This method is used to fetch the multiple email address to send the liability form.*/
     public pagereference sendpdftoEmail (){
         displayPopup = false;
         String queryName;
         Set<String> senderNameSet = new Set<String>();
           for(String processEmailList :emailList ){
-                 senderNameSet.add(processEmailList);
+                 if(senderNameSet.contains(processEmailList )){
+                     processEmailList = processEmailList+' ';
+                     senderNameSet.add(processEmailList);
+                  }
+                 else
+                     senderNameSet.add(processEmailList);
                  
            }
+           system.debug('####senderNameSet####'+senderNameSet);
            for(String currString : emailMap.keySet()){
                 if(senderNameset.Contains(currString)){
                 sendEmailMap.put(currString,emailMap.get(currString));
@@ -163,7 +191,7 @@ public class WishLiabilityForm_AC
         acctPage.setRedirect(true);
         return acctPage;
     }
-     
+     /*This method is used to send the document to the selected email address*/
      @future(Callout = true)   
      public Static void CallOuttoDocusign(Map<String,String>emailMap,String caseId,Id WishChildId,boolean isParent){
      
@@ -171,12 +199,17 @@ public class WishLiabilityForm_AC
          
          Map<String,npe4__Relationship__c> recipientMap = new Map<String,npe4__Relationship__c>();
          for(npe4__Relationship__c dbRelationShip : [SELECT ID,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.IsParentGuardian__c FROM npe4__Relationship__c WHERE 
-              npe4__RelatedContact__r.Email IN:emailMap.Values() AND npe4__Contact__c =: WishChildId AND npe4__RelatedContact__r.IsParentGuardian__c != Null])
+              npe4__RelatedContact__r.Name IN:emailMap.keySet() AND npe4__Contact__c =: WishChildId AND npe4__RelatedContact__r.IsParentGuardian__c != Null])
            {
+               if(recipientMap.containsKey(dbRelationShip.npe4__RelatedContact__r.Name)){
+                   String name = dbRelationShip.npe4__RelatedContact__r.Name+' ';
+                   recipientMap.put(name,dbRelationShip);
+               }
+               else
                recipientMap.put(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip);
-               system.debug('@@@@@@@@ recipientMap @@@@@@@@'+recipientMap);
+                system.debug('@@@@@@@@ recipientMapInside @@@@@@@@'+recipientMap.values());
            }
-           
+           system.debug('@@@@@@@@ recipientMapEmail @@@@@@@@'+recipientMap.values());
           Pagereference PDF = Page.WishLiabilitySignNow;
                 PDF.setRedirect(false);
                 PDF.getParameters().put('Id',caseId);
@@ -402,12 +435,12 @@ public class WishLiabilityForm_AC
                        update finalList ;
                     }catch(Exception e){
                         
-                        system.debug(' @@@ Exception @@@@'+e.getMessage());
+                       
                     }
                }
                
       
-      
+      /*This method is used to Identify the users who are all going to sign the document*/
        public pageReference SignNowmultiEmail(){
          if(emailMap.Size() > 0){
              displaySignNowPopup = true;
@@ -707,6 +740,7 @@ public class WishLiabilityForm_AC
        }
       return null;
      }          
+      /*This method is used Sign the document by the selected user. */
      public Pagereference SubmitAndSign(){
      
         
@@ -772,25 +806,7 @@ public class WishLiabilityForm_AC
                    newCase.LiabilitySignerMapKeyPair__c = sign;
                    newCase.Wish_Liability_Envolep__c = envelopeId;
                    update newCase;
-                  /*for(npe4__Relationship__c nper : [SELECT ID,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.Wish_Liability_IsSigned__c ,npe4__RelatedContact__r.IsParentGuardian__c,npe4__RelatedContact__r.IsFirstParentGuardian__c FROM npe4__Relationship__c WHERE 
-                                       npe4__Contact__c =: wishChildId  AND npe4__RelatedContact__r.Name  =:SingerName]){
-                          if(nper.npe4__RelatedContact__r.IsFirstParentGuardian__c == false && nper.npe4__RelatedContact__r.IsParentGuardian__c == 'Participant'){
-                          Contact wishFamilyCon = new Contact();
-                          wishFamilyCon.Id = nper.npe4__RelatedContact__c;
-                          nper.npe4__RelatedContact__r.IsFirstParentGuardian__c = true;
-                          wishFamilyCon.Wish_Liability_IsSigned__c = true;
-                          relationShipList.add(wishFamilyCon);
-                          }
-                          else{
-                          Contact wishFamilyCon = new Contact();
-                          wishFamilyCon.Id = nper.npe4__RelatedContact__c;
-                          wishFamilyCon.Wish_Liability_IsSigned__c = true;
-                          relationShipList.add(wishFamilyCon);
-                          }
-                    }
-                    
-                    update relationShipList;*/
-                
+                  
                 PageReference reference=new PageReference((String) results.get('url'));
                 reference.setRedirect(true);
                 return reference;

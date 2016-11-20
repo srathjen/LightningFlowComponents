@@ -11,7 +11,7 @@ global class wishFollowUpTaskAlert_AC implements Database.Batchable<sObject> {
     global Database.QueryLocator start(Database.BatchableContext BC) {
     System.debug('>>>>>>>>>>');
         Date reqDateCalc = System.Today().addDays(16);
-        String query = 'SELECT Id, RecordTypeId, Status FROM Case  WHERE isClosed = false AND RecordTypeId =: parentWishRecordTypeId AND End_Date__c != NULL AND End_Date__c =: reqDateCalc';
+        String query = 'SELECT Id, RecordTypeId, Status, OwnerId FROM Case  WHERE Status != \'completed\' AND RecordTypeId =: parentWishRecordTypeId AND End_Date__c != NULL AND End_Date__c =: reqDateCalc';
         return Database.getQueryLocator(query);
     }
     
@@ -23,7 +23,8 @@ global class wishFollowUpTaskAlert_AC implements Database.Batchable<sObject> {
             wishOwnerMap.put(getCaseId.Id, getCaseId.OwnerId);
         }
         
-        for(CaseTeamMember caseMember : [SELECT Id, MemberId, ParentId FROM CaseTeamMember WHERE ParentId IN : parentCaseIds]) {
+        System.debug('parentCaseIds>>>>'+parentCaseIds);
+        for(CaseTeamMember caseMember : [SELECT Id, MemberId, ParentId, TeamRole.Name FROM CaseTeamMember WHERE ParentId IN : parentCaseIds AND TeamRole.Name = 'Wish Granter']) {
             userIdsSet.add(caseMember.MemberId);
         }
         

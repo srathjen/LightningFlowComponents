@@ -118,11 +118,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>DefaultGroupNotificationFrequency</field>
-            <table>User</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Department</field>
             <table>User</table>
         </columns>
@@ -149,11 +144,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>dsfs__DSProSFPassword__c</field>
-            <table>User</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>dsfs__DSProSFUsername__c</field>
             <table>User</table>
         </columns>
         <columns>
@@ -204,11 +194,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Inactive_Date__c</field>
-            <table>User</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>FirstName</field>
             <table>User</table>
         </columns>
         <columns>
@@ -454,6 +439,26 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Contact.Chapter_Name__c</field>
+            <table>User</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Contact.Contact_Account_Name__c</field>
+            <table>User</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Is_Inactive__c</field>
+            <table>User</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Month_Of_Inactive__c</field>
+            <table>User</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Today_Date__c</field>
             <table>User</table>
         </columns>
         <masterLabel>Users</masterLabel>

@@ -21,11 +21,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Hidden_Wish_Fmaily_Contact_Email__c</field>
+                <field>Hidden_Wish_Fmaily_Contact_Name__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Hidden_Wish_Fmaily_Contact_Name__c</field>
+                <field>Hidden_Wish_Fmaily_Contact_Email__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -593,7 +593,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h5B000000IlT2</masterLabel>
+        <masterLabel>00h5B000000EbHx</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

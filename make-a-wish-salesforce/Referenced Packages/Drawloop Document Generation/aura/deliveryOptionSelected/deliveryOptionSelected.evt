@@ -10,4 +10,5 @@
     <aura:attribute name="reminderFrequency" type="decimal" default="0" description="DocuSign expiration and reminder settings from DS deliveries."/>
     <aura:attribute name="expireAfter" type="decimal" default="0" description="DocuSign expiration and reminder settings from DS deliveries."/>
     <aura:attribute name="expireWarn" type="decimal" default="0" description="DocuSign expiration and reminder settings from DS deliveries."/>
+    <aura:attribute name="testFeaturesAsDelivery" type="string" default="" description="Id of the delivery that 'Download (Test)' will mimic for PDF Stamps and Create/Edit Records behavior."/>
 </aura:event>

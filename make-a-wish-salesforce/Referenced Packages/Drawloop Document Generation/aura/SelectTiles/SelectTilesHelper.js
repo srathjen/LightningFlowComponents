@@ -1,10 +1,33 @@
 ({
+    fireErrorEvent : function(component, message) {
+        var errorEvent = component.getEvent("error");
+        errorEvent.setParams({
+            message: message
+        });
+        errorEvent.fire();
+    },
     recordSelected : function(component) {
         var records = component.get("v.records");
 		var recordType = component.get("v.recordType").toLowerCase();
         var selectedRecords = component.get("v.selectedTiles");
         
         switch (recordType) {
+            case "record":
+                var selectedRecord = selectedRecords[0];
+                var records = component.get("v.records");
+                for (var i = 0; i < records.length; i++) {
+                    if (records[i].Id === selectedRecord.id) {
+                        var record = records[i];
+                        var recordSelected = component.getEvent("recordSelected");
+                        recordSelected.setParams({
+                            id: selectedRecord.id,
+                            name: selectedRecord.name
+                        });
+                        recordSelected.fire();
+                        break;
+                    }
+                }
+                break;
             case "ddp":
                 var selectedDdp = selectedRecords[0];
                 for (var i = 0; i < records.length; i++) {
@@ -17,7 +40,8 @@
                             contactRequired: ddpRecord.ContactRequired,
                             attachmentAllowed: ddpRecord.AttachmentAllowed,
                             attachmentRequired: ddpRecord.AttachmentRequired,
-                            hasOptionalDocuments: ddpRecord.HasOptionalDocuments
+                            hasOptionalDocuments: ddpRecord.HasOptionalDocuments,
+                            hasAdhocApexClass: ddpRecord.HasAdhocApexClass
                         });
                         ddpSelected.fire();
                         break;
@@ -47,28 +71,23 @@
                 event.fire();
                 break;
             case "delivery":
-                var selectedDelivery = selectedRecords[0];
-                for (var k = 0; k < records.length; k++) {
-                    if (records[k].Id === selectedDelivery.id) {
-                        var clickedTile = component.get("v.clickedTile");
-                        var deliveryOptionSelected = component.getEvent("deliveryOptionSelected");
-                        deliveryOptionSelected.setParams({
-                            id: selectedDelivery.id,
-                            name: selectedDelivery.name,
-                            deliveryType: records[k].DeliveryType,
-                            attachToRecord: clickedTile.attachToRecord,
-                            selectedContentLibrary: clickedTile.selectedContentLibrary,
-                            emailSubject: clickedTile.emailSubject,
-                            emailBody: clickedTile.emailBody,
-                            reminderDelay: clickedTile.reminderDelay,
-                            reminderFrequency: clickedTile.reminderFrequency,
-                            expireAfter: clickedTile.expireAfter,
-                            expireWarn: clickedTile.expireWarn
-                        });
-                        deliveryOptionSelected.fire();
-                        break;
-                    }
-                }
+                var clickedTile = component.get("v.clickedTile");
+                var deliveryOptionSelected = component.getEvent("deliveryOptionSelected");
+                deliveryOptionSelected.setParams({
+                    id: clickedTile.id,
+                    name: clickedTile.name,
+                    deliveryType: clickedTile.deliveryType,
+                    attachToRecord: clickedTile.attachToRecord,
+                    selectedContentLibrary: clickedTile.selectedContentLibrary,
+                    emailSubject: clickedTile.emailSubject,
+                    emailBody: clickedTile.emailBody,
+                    reminderDelay: clickedTile.reminderDelay,
+                    reminderFrequency: clickedTile.reminderFrequency,
+                    expireAfter: clickedTile.expireAfter,
+                    expireWarn: clickedTile.expireWarn,
+                    testFeaturesAsDelivery: clickedTile.testFeaturesAsDelivery
+                });
+                deliveryOptionSelected.fire();
                 break;
             default:
                 break;

@@ -195,4 +195,16 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
         }
         
     }
+    if(trigger.isafter && (trigger.isinsert || trigger.isupdate)){
+        Set<ID> volunteerOppName=new Set<ID>();
+        for(Volunteer_Opportunity__c currRec:trigger.new){
+            if(currRec.IsApproved__c==true && (trigger.isinsert || trigger.oldMap.get(currRec.id).IsApproved__c == false)){
+                volunteerOppName.add(currRec.Volunteer_Name__c);
+            }
+        }
+        if(volunteerOppName.size() > 0){
+            VolunteerOpportunityTriggerHandler.Updatecontacts(volunteerOppName);
+        }
+   }
+   
 }

@@ -27,10 +27,6 @@
                 <field>OwnerId</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>RecordTypeId</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Required</behavior>
                 <field>Documentation__c</field>
             </layoutItems>
@@ -120,11 +116,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Country__c</field>
+                <field>Login_users_Zip__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Login_users_Zip__c</field>
+                <field>Country__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>
@@ -196,7 +192,7 @@
         <label>Attachments</label>
         <layoutColumns>
             <layoutItems>
-                <height>200</height>
+                <height>500</height>
                 <page>S_DriveAttachment_VF</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>true</showScrollbars>
@@ -211,7 +207,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h5B000000InSZ</masterLabel>
+        <masterLabel>00h5B000000Eci7</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

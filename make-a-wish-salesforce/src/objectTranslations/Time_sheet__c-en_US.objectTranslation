@@ -25,6 +25,10 @@
         <name>Volunteer_Opportunity__c</name>
         <relationshipLabel><!-- Time sheet --></relationshipLabel>
     </fields>
+    <fields>
+        <label><!-- Year --></label>
+        <name>Year__c</name>
+    </fields>
     <layouts>
         <layout>Time sheet Layout</layout>
         <sections>

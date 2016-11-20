@@ -89,15 +89,6 @@
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <label>Wish Expense Transaction Code</label>
-    <listViews>
-        <fullName>All</fullName>
-        <columns>Wish_Expense_Type__c</columns>
-        <columns>NAME</columns>
-        <columns>Is_Active__c</columns>
-        <columns>External_Id__c</columns>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-    </listViews>
     <nameField>
         <label>Wish Expense Transaction Code Name</label>
         <type>Text</type>

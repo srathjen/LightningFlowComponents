@@ -23,6 +23,16 @@
         <protected>false</protected>
     </fieldUpdates>
     <fieldUpdates>
+        <fullName>Is_Approved_Field_Update</fullName>
+        <description>This field update is used to update the is approved field in in kind donors record</description>
+        <field>Is_Approved__c</field>
+        <literalValue>1</literalValue>
+        <name>Is Approved Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Update_In_Kind_Approval_Status</fullName>
         <description>Used to update in kind account status</description>
         <field>In_Kind_Approval_Status__c</field>

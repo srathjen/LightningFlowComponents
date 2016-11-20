@@ -126,7 +126,7 @@ questionList.add(currRec);
             '"recipients": {'+
             '    "signers" : [{'+
             '      "email": "'+currLead.Treating_Medical_Professional_Email__c+'",'+
-            '      "name": "'+currLead.Treating_Medical_Professional_Last_Name__c+' '+currLead.Treating_Medical_Professional_First_Name__c+'",'+
+            '      "name": "'+currLead.Treating_Medical_Professional_First_Name__c+' '+currLead.Treating_Medical_Professional_Last_Name__c+'",'+
             '      "recipientId":"1",'+
             '      "clientUserId":"1",'+
             '      "tabs": {'+
@@ -179,7 +179,7 @@ questionList.add(currRec);
             string jsonPayload;
             system.debug('URL.getSalesforceBaseUrl().toExternalForm()'+URL.getSalesforceBaseUrl().toExternalForm());
             jsonPayload = '{'+
-                '    "userName": "'+currLead.Treating_Medical_Professional_Last_Name__c+' '+currLead.Treating_Medical_Professional_First_Name__c+'",'+
+                '    "userName": "'+ currLead.Treating_Medical_Professional_First_Name__c+' '+currLead.Treating_Medical_Professional_Last_Name__c+'",'+ 
                 '    "email": "'+currLead.Treating_Medical_Professional_Email__c+'",'+
                 '    "recipientId": "1",'+
                 '    "clientUserId": "1",'+

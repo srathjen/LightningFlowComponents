@@ -1,267 +1,289 @@
-<apex:page controller="RelationshipsViewer_AC" sidebar="false" standardStylesheets="false" title="Make-A-Wish Communities | Relationships Viewer" applyBodyTag="false" docType="html-5.0" >
-   
-<apex:form Id="bb">
-        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
-        <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap.min.js')}"/>
-        <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap.min.js')}"/>
-        
-        <apex:stylesheet value="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
-        <apex:includeScript value="//code.jquery.com/jquery-2.1.4.js"/>
-        <apex:includeScript value="//code.jquery.com/ui/1.11.4/jquery-ui.js"/>
-        
-        
-        <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/page.css')}" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
-        <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap-theme.min.css')}" />
-        
-        <head>
-            <apex:include pageName="prospective_head" id="phead" />
-             <apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
-            <style type="text/css">
-                body > main {margin-bottom:4em; margin-bottom:4rem;}
-                .vcpactivelogin .table-maw td {vertical-align:middle}
-                .pad {overflow-x:auto}
-                table.dataTable thead .sorting, table.table thead th {padding-right:1rem}
-                .messageCell h4{color:#066cb6};
-                
-            </style>
-            
-           
-        </head>
-        <body class="vcp vcpactivelogin full registered profile">
-            <main role="main" class="container" style="margin-left:3%;">
-            
-            <!--apex:form Id="bb" -->
-            
-                <div class="container">
-                    <div class="row">
-                        <section class="col-md-12">  
-                             
-                            <apex:OutputPanel rendered="{!outPutMode}">         
-                                <h2>Wish Child Contacts</h2>
-                                <table id="dataTab1" class="display table table-maw table-hover">
-                                    <thead class="thead-default">
-                                        <tr>
-                                            <th>FirstName</th>
-                                            <th>LastName</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>Street</th>
-                                            <th>City</th>
-                                            <th>State</th>
-                                            <th>Country</th>
-                                            <th>PostalCode</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <apex:repeat value="{!contactList}" var="item">
-                                            <tr>
-                                                <td><apex:OutPutText value="{!item.FirstName}"/></td>
-                                                <td><apex:OutPutText value="{!item.LastName}"/></td>
-                                                <td><apex:outputText value="{!item.Phone}"/></td>
-                                                <td><apex:outputText value="{!item.Email}"/></td>
-                                                <td><apex:outputText value="{!item.MailingStreet}"/></td>
-                                                <td><apex:outputText value="{!item.MailingCity}"/></td>
-                                                <td><apex:outputText value="{!item.MailingState}"/></td>
-                                                <td><apex:outputText value="{!item.MailingCountry}"/></td>
-                                                <td ><apex:outputText value="{!item.MailingPostalCode}"/></td>
-                                            </tr>        
-                                        </apex:repeat>
-                                    </tbody>
-                                </table>
-                                <br/><br/><br/>
-                                <apex:outputPanel rendered="{!isWishFamily}" >
-                                    <div class='pageHead'>
-                                        
-                                        <h2>Related Contacts</h2>
-                                    </div>
-                                    <table id="dataTab1" class="display table table-maw table-hover">
-                                        <thead class="thead-default">
-                                            <tr>
-                                                <th>FirstName</th>
-                                                <th>LastName</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Street</th>
-                                                <th>City</th>
-                                                <th>State</th>
-                                                <th>Country</th>
-                                                <th>PostalCode</th>
-                                                <th>Type</th>           
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <apex:repeat value="{!dbRelationshipList}" var="item">
-                                                <tr>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.FirstName}" /></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.LastName}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.Phone}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.Email}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingStreet}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingCity}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingState}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingCountry}"/></td>
-                                                    <td ><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingPostalCode}"/></td>
-                                                    <td ><apex:OutPutText value="{!item.npe4__Type__c}"/></td>
-                                                </tr>
-                                            </apex:repeat>
-                                        </tbody>
-                                    </table>
-                                    
-                                    
-                                    
-                                    
-                                </apex:OutputPanel>
-                              
-                                <center> <apex:commandButton value="Update"   action="{!UpdateContactInfo}" style="width:120px;height:30px;" reRender="bb" oncomplete="tableSort();"/></center>
-                                
-                            </apex:OutputPanel>
-                            
-                            <apex:outputPanel rendered="{!inputMode}">
-                                <apex:pageMessages ></apex:pageMessages>
-                                <apex:outputPanel >
-                                    <div class='pageHead'>
-                                        <div>
-                                            <h2>Wish Child Contacts</h2>
-                                        </div>  
-                                        <div>
-                                            <table id="dataTab1" class="display table table-maw table-hover">
-                                                <thead class="thead-default">
-                                                    
-                                                    <tr>
-                                                        <th> FirstName </th>
-                                                        <th> LastName </th>
-                                                        <th>Phone</th>
-                                                        <th>Email</th>
-                                                        <th>Street</th>
-                                                        <th>City</th>
-                                                        <th>State</th>
-                                                        <th>Country</th>
-                                                        <th>Zip Code</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <apex:repeat value="{!wishChildContactList}" var="item">
-                                                        <tr>
-                                                            <td><apex:OutPutText value="{!item.FirstName}" /></td>
-                                                            <td><apex:OutPutText value="{!item.LastName}"/></td>
-                                                            <td><apex:InputText value="{!item.Phone}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:InputText value="{!item.Email}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:InputText value="{!item.MailingStreet}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:InputText value="{!item.MailingCity}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:selectList value="{!item.mailingstate}" multiselect="false" styleClass="form-control" Size="1" style="height: inherit;width: inherit;"><apex:selectOptions value="{!States}" /></apex:selectList></td>
-                                                            <td><apex:InputText value="{!item.MailingCountry}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td ><apex:InputText value="{!item.MailingPostalCode}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                        </tr>
-                                                    </apex:repeat>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </apex:outputPanel>
-                                <br/>
-                                <apex:outputPanel rendered="{!isWishFamily}" >
-                                    <div class='pageHead'>
-                                        <div>
-                                            <h2>Related Contacts</h2>
-                                        </div>  
-                                        <div>
-                                            <table id="dataTab1" class="display table table-maw table-hover">
-                                                <thead class="thead-default">
-                                                    <tr>
-                                                        <th> FirstName </th>
-                                                        <th> LastName </th>
-                                                        <th >Phone</th>
-                                                        <th >Email</th>
-                                                        <th >Street</th>
-                                                        <th >City</th>
-                                                        <th >State</th>
-                                                        <th >Country</th>
-                                                        <th >Zip Code</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <apex:repeat value="{!clonedFamilyContactList}" var="item">
-                                                        <tr>
-                                                            <td><apex:OutPutText value="{!item.FirstName}"/></td>
-                                                            <td><apex:OutPutText value="{!item.LastName}"/></td>
-                                                            <td><apex:InputText value="{!item.Phone}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:InputText value="{!item.Email}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:InputText value="{!item.MailingStreet}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:InputText value="{!item.MailingCity}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td>
-                                                                <!--<apex:InputText list="{!States}" value="{!item.mailingstate}"/> -->
-                                                                <apex:selectList value="{!item.mailingstate}" multiselect="false" Size="1" styleClass="form-control" style="height: inherit;width: inherit;" ><apex:selectOptions value="{!States}" /></apex:selectList>
-                                                            </td>
-                                                            <td><apex:InputText value="{!item.MailingCountry}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td ><apex:InputText value="{!item.MailingPostalCode}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                        </tr>
-                                                    </apex:repeat>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </apex:outputPanel>
-                                <br/>
-                                <center><apex:commandButton value="Save" rendered="{!isSave}" action="{!SaveUpdatedContact}" style="width:120px;height:30px;" reRender="bb" oncomplete="tableSort();"/>
-                                    <apex:commandButton value="Cancel" action="{!close}" style="width:120px;height:30px;"  reRender="bb" oncomplete="tableSort();"/></center>
-                                
-                            </apex:outputPanel>
-                        </section>
-                    </div>
-                </div>
-                 <!--/apex:form-->
-            </main>
-        </body>
-      <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-        <!-- fallback -->
-        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.dataTables.min.js')}"><\/script>')</script>
-        
-        <script src="https://files-stackablejs.netdna-ssl.com/stacktable.min.js"></script>
-        <!-- fallback -->
-        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/stacktable.min.js')}"><\/script>')</script>
-        
-        <script>        
-        $.noConflict();
-        jQuery( document ).ready(function( $ ) {
-            $('#dataTab1,dataTab2').DataTable({
-                "paging": false,
-                "searching": false,
-                 responsive: true
-            });
-            $('#dataTab1,dataTab2').stacktable({myClass:'mobile-table'});
-            $('.sorting_asc, .sorting').removeAttr('style');
-            $('table.mobile-table.dataTable').css('border-collapse','collapse');
-            
-        });
-        
-        
-       
-        j$ = jQuery.noConflict();
-        
-        
-        function tableSort(){
+<apex:page controller="RelationshipsViewer_AC" sidebar="false" standardStylesheets="false" title="Make-A-Wish Communities | Relationships Viewer" docType="html-5.0">
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script> 
+<apex:includeScript value="{!URLFOR($Resource.CumulusStaticResources, '/npsp-slds/modal.js')}"/>
+<apex:stylesheet value="{!URLFOR($Resource.CumulusStaticResources, '/npsp-slds/npsp-common.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.SLDS, '/0_12_2/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+<style>
+ .popupModal{
+ background-color: black;
+ opacity: 0.20;
+ filter: alpha(opacity=15);
+ position: absolute;
+ width: 100%;
+ height: 100%;
+ top: 0;
+ left: 0;
+ z-index: 9998;
+} 
+.popup{
+position: fixed;
+    top: 20%;
+    width: 50%;
+    left: 25%;
+    right: 25%;
+    margin-right: 25%;
+    z-index: 9999;
+}
+.pageHead{padding: 10px; margin-top:20px}
+.pageHead h2{padding: 15px;background-color: #c3d0cd;}
+.childContacts td, .ralatedCont td, .ralatedCont th, .childContacts th{padding:5px}
+.chlidContacts tr, .ralatedCont tr{border-bottom: 1px solid #c3d0cd;}
+.chlidContacts tbody tr:hover, .ralatedCont tbody tr:hover{background-color: #c3d0cd;}
+</style>
 
-       
-        j$('#dataTab1,dataTab2').DataTable({
-                "paging": false,
-                "searching": false,
-                 responsive: true
-            });
-            
-       j$('#dataTab1,dataTab2').stacktable({myClass:'mobile-table'});
-       j$('.sorting_asc, .sorting').removeAttr('style');
-       j$('table.mobile-table.dataTable').css('border-collapse','collapse');   
-         
+    <div class="slds">
+        
+        <style type="text/css">
+            .slds .slds-tabs--path__stage {
+                /* fix weird issue where check icon was not aligning properly */
+                margin-top: -0.5rem;
+            }
+            .slds-tabs--path * {
+                cursor: default !important;
+            }
+            .lookupHoverDetail {
+                /* hide those ugly hover dialogs that come with using apex:outputField with lookups */
+                display: none !important;
+            }
+            .kill-white-space {
+                /* some visualforce elements inject extra tags and linebreaks,
+                   causing unwanted spaces to appear in output. this fixes that */
+                display: inline-flex;
+            }
+        </style>
+
+         <style type="text/css">
+
+         .mybutton {
+           display: inline-block;
+           position: relative;
+           margin: 10px;
+           padding: 0 20px;
+           text-align: center;
+          text-decoration: none;
+           font: bold 12px/25px Arial, sans-serif;
+           box-shadow:#000 4px 4px 5px;
+                }
+        .custPopup{
+            background-color: white;
+            border: 1px solid#E5c130;
+            border-radius: 4px;
+             z-index: 9999;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+            /* These are the 3 css properties you will need to change so the popup 
+            displays in the center of the screen. First set the width. Then set 
+            margin-left to negative half of what the width is. You can add 
+            the height property for a fixed size pop up if you want.*/
+            width: 500px;
+            margin-left: -250px;
+            top:100px;
         }
-        
-        
-       
-        
-        </script>
- 
-   
+        .popupBackground{
+            background-color:black;
+            opacity: 0.20;
+            filter: alpha(opacity = 20);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
+        .fixedtdWidth td{
+        width:25%!important;
+        }
+        .dupHasRes { table-layout: fixed; }
+        table td { overflow: hidden; }
+    </style>
     
-                 </apex:form>    
+    
+    
+   
+    <apex:form Id="bb" >
+         <apex:OutputPanel rendered="{!outPutMode}">
+         <div class='pageHead'>
+         <div>
+          <h2>Wish Child Contacts</h2>
+        <table class='childContacts'>
+        <thead>
+        <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>PostalCode</th>
+        <th></th>
+        <th></th>
+        </tr>
+        </thead>
+        <tbody>
+         <apex:repeat value="{!contactList}" var="item">
+         <tr>
+         <td><apex:OutPutText value="{!item.FirstName}"/></td>
+         <td><apex:OutPutText value="{!item.LastName}"/></td>
+         <td><apex:outputText value="{!item.Phone}"/></td>
+         <td><apex:outputText value="{!item.Email}"/></td>
+         <td><apex:outputText value="{!item.MailingStreet}"/></td>
+         <td><apex:outputText value="{!item.MailingCity}"/></td>
+         <td><apex:outputText value="{!item.MailingState}"/></td>
+         <td><apex:outputText value="{!item.MailingCountry}"/></td>
+         <td ><apex:outputText value="{!item.MailingPostalCode}"/></td>
+         <td></td>
+         
+         </tr>
+         </apex:repeat>
+        </tbody>
+       </table>
+       </div>
+        </div>
+        <apex:outputPanel rendered="{!isWishFamily}" >
+         <div class='pageHead'>
+         <div>
+           <h2>Related Contacts</h2>
+        <table class='ralatedCont'>
+        <thead>
+        <tr>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Street</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Country</th>
+        <th>PostalCode</th>
+        <th>Type</th>
+        <th></th>
+        <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <apex:repeat value="{!dbRelationshipList}" var="item">
+         <tr>
+         <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.FirstName}"/></td>
+         <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.LastName}"/></td>
+         <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.Phone}"/></td>
+         <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.Email}"/></td>
+         <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingStreet}"/></td>
+         <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingCity}"/></td>
+         <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingState}"/></td>
+         <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingCountry}"/></td>
+         <td ><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingPostalCode}"/></td>
+         <td ><apex:OutPutText value="{!item.npe4__Type__c}"/></td>
+        </tr>
+         </apex:repeat>
+        </tbody>
+       </table>
+       </div>
+        </div>
+        </apex:OutputPanel>
+       <center> <apex:commandButton value="Update" action="{!UpdateContactInfo}" reRender="bb"/></center>
+       
+        </apex:OutputPanel>
+        
+       <apex:outputPanel rendered="{!inputMode}">
+        <apex:pageMessages ></apex:pageMessages>
+       <apex:outputPanel >
+       <div class='pageHead'>
+        <div >
+            <h2>Wish Child Contacts</h2>
+        </div>  
+        <div>
+        <table class='childContacts'>
+        <thead>
+        <tr>
+        <th> FirstName </th>
+        <th> LastName </th>
+        <th >Phone</th>
+        <th >Email</th>
+        <th >Street</th>
+        <th >City</th>
+        <th >State</th>
+        <th >Country</th>
+        <th >Zip Code</th>
+        </tr>
+        </thead>
+        <tbody>
+         <apex:repeat value="{!wishChildContactList}" var="item">
+         <tr>
+         <td><apex:OutPutText value="{!item.FirstName}"/></td>
+         <td><apex:OutPutText value="{!item.LastName}"/></td>
+         <td><apex:InputText value="{!item.Phone}"/></td>
+         <td><apex:InputText value="{!item.Email}"/></td>
+         <td><apex:InputText value="{!item.MailingStreet}"/></td>
+         <td><apex:InputText value="{!item.MailingCity}"/></td>
+         <td>
+         <apex:selectList value="{!item.mailingstate}" multiselect="false" Size="1" >
+            <apex:selectOptions value="{!States}" />
+            </apex:selectList>
+         </td>
+         <td><apex:InputText value="{!item.MailingCountry}"/></td>
+         <td ><apex:InputText value="{!item.MailingPostalCode}"/></td>
+         
+         </tr>
+         </apex:repeat>
+        </tbody>
+       </table>
+       </div>
+       </div>
+        </apex:outputPanel>
+        
+       <apex:outputPanel rendered="{!isWishFamily}" >
+       <div class='pageHead'>
+        <div>
+            <h2>Related Contacts</h2>
+        </div>  
+        <div>
+        <table class='ralatedCont'>
+        <thead>
+        <tr>
+        <th> FirstName </th>
+        <th> LastName </th>
+        <th >Phone</th>
+        <th >Email</th>
+        <th >Street</th>
+        <th >City</th>
+        <th >State</th>
+        <th >Country</th>
+        <th >Zip Code</th>
+        
+        </tr>
+        </thead>
+        <tbody>
+         <apex:repeat value="{!clonedFamilyContactList}" var="item">
+         <tr>
+         <td><apex:OutPutText value="{!item.FirstName}"/></td>
+         <td><apex:OutPutText value="{!item.LastName}"/></td>
+         <td><apex:InputText value="{!item.Phone}"/></td>
+         <td><apex:InputText value="{!item.Email}"/></td>
+         <td><apex:InputText value="{!item.MailingStreet}"/></td>
+         <td><apex:InputText value="{!item.MailingCity}"/></td>
+         <td>
+         <!--<apex:InputText list="{!States}" value="{!item.mailingstate}"/> -->
+           <apex:selectList value="{!item.mailingstate}" multiselect="false" Size="1" >
+            <apex:selectOptions value="{!States}" />
+            </apex:selectList>
+         </td>
+         <td><apex:InputText value="{!item.MailingCountry}"/></td>
+         <td ><apex:InputText value="{!item.MailingPostalCode}"/></td>
+        </tr>
+         </apex:repeat>
+        </tbody>
+       </table>
+       </div>
+       </div>
+       </apex:outputPanel>
+       <center><apex:commandButton value="Save" rendered="{!isSave}" action="{!SaveUpdatedContact}" reRender="bb"/>
+       <apex:commandButton value="Cancel" action="{!close}" reRender="bb"/></center>
+      
+     </apex:outputPanel>
+ </apex:form>
+      </div>
 </apex:page>

@@ -372,14 +372,14 @@
     </fields>
     <fields>
         <fullName>Reservation_Name__c</fullName>
+        <description>This field is used to capture reservation name</description>
         <externalId>false</externalId>
         <label>Reservation Name</label>
-        <precision>18</precision>
+        <length>255</length>
         <required>false</required>
-        <scale>0</scale>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Number</type>
+        <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>

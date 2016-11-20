@@ -10,7 +10,7 @@ global class batch_FillWishPresentationDate  implements Database.Batchable<sObje
    
     global void execute(Database.BatchableContext BC, List<Case> scope) 
     {
-    
+    System.debug('>>>>>>scope>>>'+scope);
         List<Task> createTaskList = new List<Task>();
       
         Map<Id,Case> updateGrantedCaseMap = new Map<Id,Case>();
@@ -20,17 +20,18 @@ global class batch_FillWishPresentationDate  implements Database.Batchable<sObje
            date wishPresentationTaskDate=currCase.Parent.Anticipated_Start_Date__c + 15;
            if(wishPresentationDate == Date.Today())
            {
-              
+              System.debug('>>>>>>>1');
                   Case toUpdate = new Case();
                   toupdate.id = currCase.Id;
                   toUpdate.Interview_Date_Not_Set__c = True;
                   updateGrantedCaseMap.put(toUpdate.Id,toUpdate);
            }
           if(wishPresentationTaskDate == date.Today()){
+              System.debug('>>>>>>>2');
              Task newTask=new Task();
                newTask.subject='Wish Presentation not set';
                newTask.ownerid=currCase.ownerid;
-               newTask.Whatid=currCase.id;
+               newTask.Whatid=currCase.Parent.id;
                newTask.ActivityDate=Date.Today()+1;
                createTaskList.add(newTask);
                
@@ -42,6 +43,7 @@ global class batch_FillWishPresentationDate  implements Database.Batchable<sObje
             update updateGrantedCaseMap.values();
         }
         if(createTaskList.size() > 0){
+            System.debug('>>>>>>3');
             insert createTaskList;
         }
     }   

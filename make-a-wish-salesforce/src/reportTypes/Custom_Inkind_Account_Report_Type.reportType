@@ -588,12 +588,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Chapter_Name__c</field>
+            <field>Emergency_Contact_Middle_Name__c</field>
             <table>Account</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Emergency_Contact_Middle_Name__c</field>
+            <field>Chapter_Name__c</field>
             <table>Account</table>
         </columns>
         <columns>

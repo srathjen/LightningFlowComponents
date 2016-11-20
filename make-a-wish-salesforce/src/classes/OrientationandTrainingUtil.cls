@@ -12,7 +12,7 @@ public class OrientationandTrainingUtil{
         return newchapterAccount;
     }
     
-     public static id CreateAlabamaAccount(){
+    public static id CreateAlabamaAccount(){
         Constant_AC  constant = new Constant_AC();
         Id ChapterRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
         Account newchapterAccount = new Account();
@@ -29,7 +29,7 @@ public class OrientationandTrainingUtil{
         Account newchapterAccount = new Account();
         newchapterAccount .Name = 'InKind Account';
         newchapterAccount.RecordTypeId = inKindDonorsAccountRTId;
-        insert newchapterAccount;
+        //insert newchapterAccount;
         return newchapterAccount;
     }
     
@@ -147,6 +147,7 @@ insert newChapter;*/
         return newAccount;
     }
     
+    
     public static Account createVolunteerAccountWithWishCoordinatior(Id wishCoordinator){
         Constant_AC constant = new Constant_AC();
         String chapterRT= Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.ChapterRT).getRecordTypeId();
@@ -156,6 +157,7 @@ insert newChapter;*/
         newAccount.Wish_Co_ordinator__c = wishCoordinator;
         insert newAccount;
         return newAccount;
+        
     }
     
     
@@ -491,13 +493,29 @@ insert newChapter;*/
         newParentWish.RecordTypeId = parentWishRecordTypeId;
         newParentWish.ChapterName__c = CreateAlabamaAccount();
         newParentWish.Subject = 'Parent Wish';
+        newParentWish.Interview_date__c = System.today();
+        newParentWish.Wish_Type__c = 'Disney World';
         newParentWish.ContactId = wishChildId;
         insert newParentWish;
         return newParentWish;
     }
-    
-    public static case createWishDeterminationCase(Id wishChildId, Id parentCaseId) {
+    //This method used to crate parentcase without value for interview date  
+    public static case CreateParentCaseWithoutInterviewDate( Id wishChildId) {
         Constant_AC  constant = new Constant_Ac();    
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        Case newParentWish = new Case();
+        newParentWish.RecordTypeId = parentWishRecordTypeId;
+        newParentWish.ChapterName__c = CreateAlabamaAccount();
+        newParentWish.Subject = 'Parent Wish';
+        newParentWish.Wish_Type__c = 'Disney World';
+        newParentWish.ContactId = wishChildId;
+        insert newParentWish;
+        return newParentWish;
+    }
+    //This method used to crate wishdetermination case with the past created date value  
+    public static case createWishDeterminationCaseWithOldDate(Id wishChildId, Id parentCaseId) {
+        Constant_AC  constant = new Constant_Ac();   
+        Contact newCon = CreateWishChild(); 
         Id determinationtWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         
         Case newDeterminationtWish = new Case();
@@ -505,6 +523,27 @@ insert newChapter;*/
         newDeterminationtWish.ChapterName__c = CreateAlabamaAccount();
         newDeterminationtWish.Subject = 'Parent Wish';
         newDeterminationtWish.ContactId = wishChildId;
+        newDeterminationtWish.ParentId = CreateParentCaseWithoutInterviewDate(newCon.Id).Id;
+        
+        insert newDeterminationtWish;
+        Datetime oldDate = Datetime.now().addDays(-21);
+        Test.setCreatedDate(newDeterminationtWish.id, oldDate);
+        
+        return newDeterminationtWish;
+        
+    }
+    
+    public static case createWishDeterminationCase(Id wishChildId, Id parentCaseId) {
+        Constant_AC  constant = new Constant_Ac();   
+        Contact newCon = CreateWishChild(); 
+        Id determinationtWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        
+        Case newDeterminationtWish = new Case();
+        newDeterminationtWish.RecordTypeId = determinationtWishRecordTypeId;
+        newDeterminationtWish.ChapterName__c = CreateAlabamaAccount();
+        newDeterminationtWish.Subject = 'Parent Wish';
+        newDeterminationtWish.ContactId = wishChildId;
+        newDeterminationtWish.ParentId = CreateParentCaseWithoutInterviewDate(newCon.Id).Id;
         insert newDeterminationtWish;
         return newDeterminationtWish;
         
@@ -518,6 +557,7 @@ insert newChapter;*/
         newPlanningtWish.RecordTypeId = planningWishRecordTypeId;
         newPlanningtWish.ChapterName__c = CreateAlabamaAccount();
         newPlanningtWish.Subject = 'Wish Planning & Anticipation';
+        newPlanningtWish.ParentId = parentCaseId;
         newPlanningtWish.ContactId = wishChildId;
         insert newPlanningtWish;
         return newPlanningtWish;
@@ -753,7 +793,8 @@ insert newChapter;*/
                               ProfileId = pf.Id,
                               isActive = true,
                               State = 'Arizona',
-                              UserRoleId = newUserRole.Id);
+                              UserRoleId = newUserRole.Id
+                             );
         insert tuser;
         
         return tuser;
@@ -815,20 +856,27 @@ insert newChapter;*/
         newChapterAction.Sort_Order__c = 1;
         newChapterAction.Wish_type__c = 'Standard';
         newChapterAction.Recurring__c = true;
+        newChapterAction.Wish_Type__c = 'Disney World';
         newChapterAction.Recurring_Frequency__c = 1;
+        newChapterAction.Months__c = 2;
+        newChapterAction.Weeks__c = 2;
         return newChapterAction;
     }
     
-    public static Chapter_Action_Track__c duplicateChapterActionTrack() {
+    
+    public static Chapter_Action_Track__c otherActionTrack() {
         Chapter_Action_Track__c newChapterAction = new Chapter_Action_Track__c();
         newChapterAction.Assigned_To__c = 'Volunteer Manager';
-        newChapterAction.Case_Type_Stage__c = 'Wish Planning & Anticipation';
+        newChapterAction.Case_Type_Stage__c = 'Wish Determination';
         newChapterAction.Due_Date__c = 10;
         newChapterAction.Task_Name__c = 'Planning';
         newChapterAction.Sort_Order__c = 1;
         newChapterAction.Wish_type__c = 'Standard';
         newChapterAction.Recurring__c = true;
-        newChapterAction.Recurring_Frequency__c = 10;
+        newChapterAction.Wish_Type__c = 'Other';
+        newChapterAction.Recurring_Frequency__c = 1;
+        newChapterAction.Months__c = 2;
+        newChapterAction.Weeks__c = 2;
         return newChapterAction;
     }
     
@@ -1106,6 +1154,7 @@ insert newChapter;*/
         wishFamilyCon.MailingPostalCode  = '6201717';
         wishFamilyCon.MailingCountryCode = 'US';
         wishFamilyCon.RecordTypeId = wishFamilyRecordTypeId ;
+        wishFamilyCon.IsParentGuardian__c  = 'ParentGuardian';
         insert wishFamilyCon ;
         return wishFamilyCon ;
         
@@ -1181,23 +1230,18 @@ insert newChapter;*/
         dsfs.dsfs__Lead__c= LeadId;
         dsfs.isConflict__c = false;
         dsfs.dsfs__Envelope_Status__c  = 'Sent';
-        
         Insert dsfs;
         return dsfs;
     }
     
     public static case CreatePartAWish(Id LeadId){
-        
         case newPartACase= new Case();
         newPartACase.Origin = 'Email';
         newPartACase.Lead__c = LeadId;
         newPartACase.Status = 'Open';
-        
         insert newPartACase;
         return newPartACase;
     }
-    
-    
     public static case CreatePartAWishRec(){
         Constant_AC  constant = new Constant_Ac(); 
         Id partARecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get(constant.partARecordTypeId).getRecordTypeId();   
@@ -1211,7 +1255,6 @@ insert newChapter;*/
     public static Account MakeAWishAmericaAcc(){
         Constant_AC  constant = new Constant_AC();
         Id ChapterRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
-        
         Account newchapterAccount = new Account();
         newchapterAccount .Name = 'Make-A-Wish America';
         newchapterAccount.RecordTypeId = ChapterRecordTypeId;
@@ -1236,9 +1279,10 @@ newLeadFile.Parent__c = LeadId;
 //newLeadFile.WIP__c = 
 insert newLeadFile;
 retrun newLeadFile;*/
-    
+    //This method is used to create reimbursement record with record type of reimbursement
     public static In_Kind_Donation_Reimbursement__c createReImbursementRecord(){
-        Id inKindRtId = Schema.Sobjecttype.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get('In Kind Donation').getRecordTypeId();
+        Constant_AC newConstant =  new Constant_AC();
+        Id inKindRtId = Schema.Sobjecttype.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get(newConstant.InKind).getRecordTypeId();
         Id reImbursementRtId = Schema.Sobjecttype.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get('Reimbursement').getRecordTypeId();
         In_Kind_Donation_Reimbursement__c newReimbursement = new In_Kind_Donation_Reimbursement__c();
         Contact newContact = CreateWishChild();
@@ -1294,7 +1338,6 @@ retrun newLeadFile;*/
     }
     
     public static npe4__Relationship__c CreateRelationshipRec(Id wishChildId,Id wishFamilyId){
-        
         npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
         newRelationShip.npe4__Contact__c = wishChildId;
         newRelationShip.npe4__RelatedContact__c = wishFamilyId;
@@ -1302,11 +1345,9 @@ retrun newLeadFile;*/
         newRelationShip.npe4__Type__c = 'Father';
         insert newRelationShip;
         return newRelationShip;
-        
     }
     
     public static CaseTeamRole CreateCaseTeamRole(){
-        
         CaseTeamRole  newRole = new CaseTeamRole();
         newRole.Name = 'Wish Granter';
         newRole.PreferencesVisibleInCSP = true;
@@ -1314,22 +1355,56 @@ retrun newLeadFile;*/
         insert newRole;
         return newRole;
     }     
-    
-    public static In_Kind_Donation_Reimbursement__c CreateInkindRecord(){
-        Id inkindgRecordTypeId = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get('In Kind Donation').getRecordTypeId();
+    //This method is used to create test record with inkind record type
+    public static In_Kind_Donation_Reimbursement__c CreateInkindRecord(Id ParentId){
+        Constant_AC newConstant =  new Constant_AC();
+        Id inkindgRecordTypeId = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get(newConstant.InKind).getRecordTypeId();
         In_Kind_Donation_Reimbursement__c newinkind = new In_Kind_Donation_Reimbursement__c();
         newinkind.Date_of_Gift__c = system.today()+2;
         newinkind.Gift_Type__c = 'Goods';
         newinkind.Gift_Value__c = 123456;
         newinkind.Documentation__c = 'Not available';
         newinkind.RecordTypeId = inkindgRecordTypeId;
+        newinkind.Make_check_payable_to_me__c = true;
+        newinkind.Wish__c = ParentId;
         insert newinkind;
         return newinkind;
         
     }
-    
-   public static In_Kind_Donation_Reimbursement__c CreateReimbursRecord(){
-        Id reimbursementRecordTypeId = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get('Reimbursement').getRecordTypeId();
+    //This method is used to create inkind  record without any attachment
+    public static In_Kind_Donation_Reimbursement__c CreateInkindRecord(){
+        Constant_AC newConstant =  new Constant_AC();
+        Id inkindgRecordTypeId = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get(newConstant.InKind).getRecordTypeId();
+        In_Kind_Donation_Reimbursement__c newinkindRecord = new In_Kind_Donation_Reimbursement__c();
+        newinkindRecord.Date_of_Gift__c = system.today()+2;
+        newinkindRecord.Gift_Type__c = 'Goods';
+        newinkindRecord.Gift_Value__c = 123456;
+        newinkindRecord.Documentation__c = 'Not available';
+        newinkindRecord.RecordTypeId = inkindgRecordTypeId;
+        newinkindRecord.Make_check_payable_to_me__c = true;
+        insert newinkindRecord;
+        return newinkindRecord;
+        
+    }
+    //This method is used to create inkind  record without any attachment
+    public static In_Kind_Donation_Reimbursement__c CreateInkindRecordWithOutAttachment(){
+        Constant_AC newConstant =  new Constant_AC();
+        Id inkindgRecordTypeId = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get(newConstant.InKind).getRecordTypeId();
+        In_Kind_Donation_Reimbursement__c newinkindRecord = new In_Kind_Donation_Reimbursement__c();
+        newinkindRecord.Date_of_Gift__c = system.today()+2;
+        newinkindRecord.Gift_Type__c = 'Goods';
+        newinkindRecord.Gift_Value__c = 123456;
+        newinkindRecord.Documentation__c = 'Will Attach';
+        newinkindRecord.RecordTypeId = inkindgRecordTypeId;
+        newinkindRecord.Make_check_payable_to_me__c = true;
+        insert newinkindRecord;
+        return newinkindRecord;
+        
+    }
+    //This method is used to create reimbursement record with make check payable field valu as true 
+    public static In_Kind_Donation_Reimbursement__c CreateReimbursRecord(){
+        Constant_AC newConstant =  new Constant_AC();
+        Id reimbursementRecordTypeId = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get(newConstant.Reimbursement).getRecordTypeId();
         In_Kind_Donation_Reimbursement__c newReimbursement = new In_Kind_Donation_Reimbursement__c();
         newReimbursement.Documentation__c = 'Not available';
         newReimbursement.RecordTypeId = reimbursementRecordTypeId;
@@ -1337,25 +1412,35 @@ retrun newLeadFile;*/
         insert newReimbursement;
         return newReimbursement;
         
+    } 
+    //This method is used to create reimbursement record without any attachment 
+    public static In_Kind_Donation_Reimbursement__c CreateReimbursRecordWithOutAttachment(){
+        Constant_AC newConstant =  new Constant_AC();
+        Id reimbursementRecordTypeId = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get(newConstant.Reimbursement).getRecordTypeId();
+        In_Kind_Donation_Reimbursement__c newReimbursement = new In_Kind_Donation_Reimbursement__c();
+        newReimbursement.Documentation__c = 'Will Attach';
+        newReimbursement.RecordTypeId = reimbursementRecordTypeId;
+        newReimbursement.Make_check_payable_to_me__c = true;
+        insert newReimbursement;
+        return newReimbursement;
+        
+    } 
+    
+    //This method is used to create reimbursement record with make check payable field valu as false 
+    public static In_Kind_Donation_Reimbursement__c CreateReimbursRecordwithFalse(){
+        Constant_AC newConstant =  new Constant_AC();
+        Id reimbursementRecordTypeId = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get(newConstant.Reimbursement).getRecordTypeId();
+        In_Kind_Donation_Reimbursement__c newReimbursement = new In_Kind_Donation_Reimbursement__c();
+        newReimbursement.Documentation__c = 'Not available';
+        newReimbursement.RecordTypeId = reimbursementRecordTypeId;
+        newReimbursement.Make_check_payable_to_me__c = false;
+        insert newReimbursement;
+        return newReimbursement;
+        
     }  
     
-    public static In_Kind_Donation_Reimbursement_File__c CreateInkindFileRecord(){
-        In_Kind_Donation_Reimbursement_File__c newInReimFile = new In_Kind_Donation_Reimbursement_File__c ();
-        In_Kind_Donation_Reimbursement__c parentId = CreateInkindRecord();
-        newInReimFile.Parent__c = parentId.id ;
-        insert newInReimFile;
-        return newInReimFile;
-        
-    }
-     public static In_Kind_Donation_Reimbursement_File__c CreateReimburseFileRecord(){
-        In_Kind_Donation_Reimbursement_File__c newReimburseFile = new In_Kind_Donation_Reimbursement_File__c ();
-        In_Kind_Donation_Reimbursement__c parentId = CreateReimbursRecord();
-        newReimburseFile.Parent__c = parentId.id ;
-        insert newReimburseFile;
-        return newReimburseFile;
-        
-    }
-      public static CaseTeamMember createWishTeamMember(Id parentId, Id wishId) {
+    
+    public static CaseTeamMember createWishTeamMember(Id parentId, Id wishId) {
         CaseTeamMember caseMember = new CaseTeamMember();
         caseMember.ParentId = parentId;
         caseMember.memberId = wishId;
@@ -1365,9 +1450,7 @@ retrun newLeadFile;*/
     }
     
     
-      public static User createVolunteerUser(Id contactId){ 
-        
-        
+    public static User createVolunteerUser(Id contactId){ 
         Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
         
         User newProspectiveVolunteerUser = new User(  firstname = 'Jonathan1',lastName = 'Edwards1',email = 'jonathan@gmail1.com',Username = 'joathanedwards1@gmail.com',
@@ -1386,15 +1469,191 @@ retrun newLeadFile;*/
         insert newLeadFile;
         return newLeadFile;
     }
-       public static dsfs__DocuSign_Status__c createDocusignStatuswithCon(Id contactId){
-        
+    public static dsfs__DocuSign_Status__c createDocusignStatuswithCon(Id contactId){
         dsfs__DocuSign_Status__c dsfs= NEW dsfs__DocuSign_Status__c();
         dsfs.dsfs__DocuSign_Envelope_ID__c = '0F31B5A9-DB3A-4D31-8D69-9DE86F2010A8';
         dsfs.dsfs__Contact__c = contactId;
         dsfs.dsfs__Envelope_Status__c  = 'Sent';
-        
         Insert dsfs;
         return dsfs;
     }
     
+    public static Wish_Expense__c createWishExpenceRecord(Id parentCaseId) {
+        Wish_Expense__c newExpence = new Wish_Expense__c();
+        newExpence.Case__c = parentCaseId;
+        return newExpence;
+    }
+    
+    public Static Wish_Child_Form__c createWishChildForm(Id ParentWishId){
+        Wish_Child_Form__c newChildForm = new Wish_Child_Form__c();
+        newChildForm.Actor_Actress__c = 'James';
+        newChildForm.Additional_Requests__c = 'test';
+        newChildForm.Already_wish_granted_by_MAW_Other_Org__c = 'Yes';
+        newChildForm.Any_impact_your_ability_to_join_wish__c = 'Yes';
+        newChildForm.Automobile_insurance_provide_coverage__c = 'Yes';
+        newChildForm.Availability_Time_Period_1__c =' Apr/2019';
+        newChildForm.Hidden_Wish_Fmaily_Contact_Email__c = 'Vennila  Paramasivam - mcavennila@gmail.com, chandrasekar - chandru@mstsolutions.com';
+        newChildForm.Hidden_Contact_Name__c = 'Vennila Paramasivam';
+        newChildForm.Hidden_Wish_Fmaily_Contact_Name__c = 'Vennila Paramasivam, chandrasekar ';
+        newChildForm.Case__c = ParentWishId;
+        newChildForm.Wish_Family_Contact__c = 'Vennila | | Paramasivam | Spouse | 8220708920 | 8220708920 | 8220708920 | mcavennila@gmail.com | 2016-11-6';
+        newChildForm.Participant_Contacts__c = 'Vennila | | karur | Child | 2016-11-01 00:00:00 | asdfasdfdsafasfdsa@12gmail.com | 12 | true | true sathis Kumar | | def | Friend | - | vi@gmail.com | | false | false';
+        newChildForm.Driver_Name__c = 'Vennila karur |';
+        newChildForm.Driver_Details__c = 'Vennila karur | Tamil Nadu | Alabama | 2016-10-12';
+        newChildForm.Availability_Time_Period_2__c = 'Feb/2016';
+        newChildForm.Availability_Time_Period_3__c = 'Feb/2018';
+        newChildForm.Participant_Name_for_Dietary_Restriction__c = 'test';
+        newChildForm.Requested_Participant_Name_forWheelchair__c = 'test';
+        newChildForm.Requested_Participant_Name_for_OtherNeed__c= 'test';
+        newChildForm.Requested_Participant_Name_for_Oxygen__c = 'test';
+        newChildForm.Requested_Participant_Name_for_Allergies__c = 'test';
+        newChildForm.Bringing_Own_Wheel_Chair__c = 'test';
+        newChildForm.Name_of_wheelchair_collapsible__c = 'test;test';
+        newChildForm.Pariticipant_name_havingWheelchair_Power__c = 'test;test';
+        newChildForm.Medication_require_refrigeration_name__c = 'test;test';
+        newChildForm.Names_for_receiving_nursing_care__c = 'test;test';
+        //Insert  newChildForm;
+        return newChildForm;
+        
+    }
+    
+    public Static npe4__Relationship__c relationshipChild(Id FamilyContactId,id ChildContactid){
+        npe4__Relationship__c newRelationForm = new npe4__Relationship__c();
+        newRelationForm.npe4__Contact__c = ChildContactid;
+        newRelationForm.npe4__RelatedContact__c = FamilyContactId;
+        newRelationForm.Wish_Family_participants__c = 'Parent/Guardian';
+        Insert  newRelationForm;
+        return newRelationForm;
+    }
+    
+    public static List<WishDeterminationSubCaseTaskList__c> createDeterminationTask(Integer n){
+        List<WishDeterminationSubCaseTaskList__c> wishDeterminationTaskList = new List<WishDeterminationSubCaseTaskList__c>();
+        
+        for(Integer i=1; i<n; i++) {
+            if(i==1) {
+                WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
+                wishDetermination.Name = 'Task'+i;
+                wishDetermination.Due_Date__c = 100 + i;
+                wishDetermination.Task_Subject__c = 'Contact Wish Partner & coordinate for wish visit';
+                wishDeterminationTaskList.add(wishDetermination);
+            } else if(i==2) {
+                WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
+                wishDetermination.Name = 'Task'+i;
+                wishDetermination.Due_Date__c = 100 + i;
+                wishDetermination.Task_Subject__c = 'Contact Wish Family to Schedule Initial Visit (interview)';
+                wishDeterminationTaskList.add(wishDetermination);
+            } else if(i==3) {
+                WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
+                wishDetermination.Name = 'Task'+i;
+                wishDetermination.Due_Date__c = 100 + i;
+                wishDetermination.Task_Subject__c = 'Enter interview date';
+                wishDeterminationTaskList.add(wishDetermination);
+            } else if(i==4) {
+                WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
+                wishDetermination.Name = 'Task'+i;
+                wishDetermination.Due_Date__c = 100 + i;
+                wishDetermination.Task_Subject__c = 'Procure Icebreaker Gift';
+                wishDeterminationTaskList.add(wishDetermination);
+            } else if(i==5) {
+                WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
+                wishDetermination.Name = 'Task'+i;
+                wishDetermination.Due_Date__c = 100 + i;
+                wishDetermination.Task_Subject__c = 'Conduct Interview';
+                wishDeterminationTaskList.add(wishDetermination);
+            } else if(i==6) {
+                WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
+                wishDetermination.Name = 'Task'+i;
+                wishDetermination.Due_Date__c = 100 + i;
+                wishDetermination.Task_Subject__c = 'Complete /upload wish family packet';
+                wishDeterminationTaskList.add(wishDetermination);
+            } else if(i==7) {
+                WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
+                wishDetermination.Name = 'Task'+i;
+                wishDetermination.Due_Date__c = 100 + i;
+                wishDetermination.Task_Subject__c = 'Submit wish family packet to chapter approval';
+                wishDeterminationTaskList.add(wishDetermination);
+            } else if(i==8) {
+                WishDeterminationSubCaseTaskList__c wishDetermination = new WishDeterminationSubCaseTaskList__c();
+                wishDetermination.Name = 'Task'+i;
+                wishDetermination.Due_Date__c = 100 + i;
+                wishDetermination.Task_Subject__c = 'Check in with the family every 30 days';
+                wishDeterminationTaskList.add(wishDetermination);
+            }
+            i++;
+            
+        }
+        insert wishDeterminationTaskList;
+        return wishDeterminationTaskList;
+    }
+    
+    public Static Case createParentCase(){
+        Case newCase = new Case();
+        return newCase;
+    }
+    
+    
+    public static List<contact> CreateWishFamilyList(integer count){
+        Constant_AC  constant = new Constant_AC();
+        Id wishFamilyRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
+        List<Contact> wishFamilyConList = new List<Contact>();
+        for(integer I = 0;i<=count;i++){
+            
+            Contact wishFamilyCon = new Contact();
+            wishFamilyCon.FirstName = 'MAWAFirstName';
+            wishFamilyCon.LastName = 'MAWALastName'+i;
+            wishFamilyCon.Email = 'kanagaraj@mstsolutions.com';
+            wishFamilyCon.Phone = '9600467559';
+            wishFamilyCon.MailingStreet ='KuttaiKarai Street';
+            wishFamilyCon.MailingCity = 'Trichy';
+            wishFamilyCon.MailingStateCode = 'AZ';
+            wishFamilyCon.MailingPostalCode  = '6201717';
+            wishFamilyCon.MailingCountryCode = 'US';
+            if(I == 0){
+                wishFamilyCon.IsParentGuardian__c = 'ParentGuardian';
+                wishFamilyCon.Wish_Liability_IsSigned__c = false;
+            }
+            wishFamilyCon.IsParentGuardian__c = 'Participant';
+            wishFamilyCon.RecordTypeId = wishFamilyRecordTypeId ;
+            wishFamilyConList.add(wishFamilyCon);
+            
+        }
+        return wishFamilyConList;
+        
+    }
+    
+    public Static List<npe4__Relationship__c> relationshipChildList(List<Contact> FamilyContactIdList,id ChildContactid,Integer count){
+        List<npe4__Relationship__c> relationShipList = new List<npe4__Relationship__c>();
+        for(Integer i = 0; i<=count; i++){
+            npe4__Relationship__c newRelationForm = new npe4__Relationship__c();
+            newRelationForm.npe4__Contact__c = ChildContactid;
+            newRelationForm.npe4__RelatedContact__c = FamilyContactIdList.get(i).Id;
+            newRelationForm.Wish_Family_participants__c = 'Parent/Guardian';
+            relationShipList.add(newRelationForm);
+        }
+        
+        return relationShipList;
+    }
+    
+    public static dsfs__DocuSign_Status__c createDocusignStatuswithCase(Id caseId){
+        
+        dsfs__DocuSign_Status__c dsfs= NEW dsfs__DocuSign_Status__c();
+        dsfs.dsfs__DocuSign_Envelope_ID__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
+        dsfs.dsfs__Case__c = caseId;
+        dsfs.isConflict__c = false;
+        dsfs.dsfs__Envelope_Status__c  = 'Sent';
+        insert dsfs;
+        return dsfs;
+    }
+    
+    public Static dsfs__DocuSign_Recipient_Status__c CreatedsfsRec(Id dsfsStatusId){
+        dsfs__DocuSign_Recipient_Status__c newdsfs = new dsfs__DocuSign_Recipient_Status__c();
+        newdsfs.dsfs__Parent_Status_Record__c = dsfsStatusId;
+        newdsfs.dsfs__DocuSign_Recipient_Email__c =  'testmawa@gmail.com';
+        newdsfs.Name = 'MAWAFirstName'+' '+'MAWALastName';
+        newdsfs.dsfs__DocuSign_Recipient_Id__c = '98D97010-2A0B-4714-B9AE-494B74BD287F';
+        newdsfs.dsfs__Envelope_Id__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
+        insert newdsfs;
+        return newdsfs;
+        
+    }
 }

@@ -74,19 +74,23 @@
         <label>Wish Type</label>
         <picklist>
             <picklistValues>
+                <fullName>Values</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
                 <fullName>Animal</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Celebrity- Domestic Travel</fullName>
+                <fullName>Celebrity - Domestic Travel</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Celebrity- Local</fullName>
+                <fullName>Celebrity - Local</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Celebrity-International Travel</fullName>
+                <fullName>Celebrity - International Travel</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -98,19 +102,19 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Cruise – Celebrity/Royal</fullName>
+                <fullName>Cruise - Celebrity/Royal</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Cruise – Disney</fullName>
+                <fullName>Cruise - Disney</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Cruise – Other</fullName>
+                <fullName>Cruise - Other</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Disney – Aulani</fullName>
+                <fullName>Disney - Aulani</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -170,11 +174,11 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Shopping Spree – Local</fullName>
+                <fullName>Shopping Spree - Local</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Shopping Spree – Travel</fullName>
+                <fullName>Shopping Spree - Travel</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -210,18 +214,29 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Travel – Hawai</fullName>
+                <fullName>Travel - International</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Travel – International</fullName>
+                <fullName>Travel - Other</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Travel – Other</fullName>
+                <fullName>Travel - Hawai</fullName>
                 <default>false</default>
             </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
+            <picklistValues>
+                <fullName>Celebrity- Domestic Travel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Celebrity- Local</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Celebrity-International Travel</fullName>
+                <default>false</default>
+            </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
@@ -229,11 +244,6 @@
         <type>Picklist</type>
     </fields>
     <label>Wish Expense Type Tempate</label>
-    <listViews>
-        <fullName>All</fullName>
-        <filterScope>Everything</filterScope>
-        <label>All</label>
-    </listViews>
     <nameField>
         <displayFormat>{00000}</displayFormat>
         <label>Wish Expense Type Tempate Name</label>

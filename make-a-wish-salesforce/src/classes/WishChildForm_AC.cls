@@ -105,6 +105,9 @@ Public Class WishChildForm_AC
     public String envelopeId;
     public Map<String,String> signersKeyPairMap;
     
+    public string childForm {get;set;}
+    public string familyForm {get;set;}
+    public string infoForm {get;set;}
     public WishChildForm_AC(Apexpages.StandardController control)
     {
     system.debug('@@CONSTRUCTOT@@@');
@@ -156,6 +159,9 @@ Public Class WishChildForm_AC
         selectedMailMap = new Map<String,String>();
         SignNowList = new List<String>();
         caseId = Apexpages.currentPage().getParameters().get('Id');
+        childForm = '/apex/WishChildForm_VF?id='+caseId;
+        familyForm = '/apex/WishFamilyForm_VF?id='+caseId;
+        infoForm = '/apex/WishInformationForm_VF?id='+caseId;
         currCase = [SELECT id,Hidden_Email_List__c,ContactId,Contact.FirstName,Contact.LastName, Contact.Middle_Name__c,
                     Contact.Diagnosis__c , Contact.Email, Contact.MobilePhone, Contact.Gender__C,
                     Contact.BirthDate, Contact.T_Shirt_Size__c
@@ -167,9 +173,10 @@ Public Class WishChildForm_AC
             system.debug('@@@@@@@@@@@ listofSenderName  @@@@@@@@@@@@@@'+listofSenderName );
             
             }
-           
+           system.debug('@@@@@@@@@@@ caseId  @@@@@@@@@@@@@@'+caseId );
           for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
                                                            Case__c =: caseId]){
+            system.debug('3##333333 listofSenderName '+wishChildForm );                                   
                     if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != Null) {                                     
                     for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c .split(',')){
                        SignNowList.add(keys.trim());
@@ -1373,13 +1380,7 @@ Public Class WishChildForm_AC
          multiPickoptions = new List<SelectOption>();
          Set<String> nameSet = new Set<String>();
          Map<String,String> processedNameMap = new Map<String,String>();
-            /* for( npe4__Relationship__c nper : [SELECT ID,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.IsSigned__c,npe4__RelatedContact__r.IsParentGuardian__c FROM npe4__Relationship__c WHERE 
-                                           npe4__Contact__c =: wishChildId  AND npe4__RelatedContact__r.IsParentGuardian__c = 'ParentGuardian']){
-               if(nper.Id != NUll && nper.npe4__RelatedContact__r.IsSigned__c == false){                        
-                selectedMailMap.put(nper.npe4__RelatedContact__r.Name,nper.npe4__RelatedContact__r.Email);
-                }
-             }*/
-             
+          
           for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
                                                            Case__c =: caseId]){
                     if(wishChildForm.Hidden_Contact_Name__c != Null) {                                     
@@ -1390,19 +1391,29 @@ Public Class WishChildForm_AC
                     }
           }
            
-          for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
-                                                           Case__c =: caseId]){ 
+          Wish_Child_Form__c wishChildForm = [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
+                                                           Case__c =: caseId];
             for(String key : wishChildForm.Hidden_Wish_Fmaily_Contact_Email__c.split(',')){
                    String keys = key.split('-')[0];
                    keys = keys.replaceAll('  ',' ');
                    String value = key.split('-')[1];
-                   processedNameMap.put(keys.trim(),value.trim());
+                   if(processedNameMap.containsKey(keys)){
+                      keys = keys+' ';
+                      processedNameMap.put(keys,value);
+                   }
+                   processedNameMap.put(keys,value);
                } 
-          }
+           system.debug('@@@@@@@@ processedNameMap @@@@@@@@@@'+processedNameMap);
           if(processedNameMap.size() > 0){
               for(String name : processedNameMap.KeySet()){
                     if(!nameSet.contains(name)){
                      name = name.replaceAll('  ',' ');
+                    if(selectedMailMap.containsKey(name)){
+                        name = name+' ';
+                        selectedMailMap.put(name,processedNameMap.get(name));
+                     system.debug('@@@@@@@@ selectedMailMap111 @@@@@@@@@@'+selectedMailMap);
+                    }
+                    else
                     selectedMailMap.put(name,processedNameMap.get(name));
                     system.debug('@@@@@@@@ selectedMailMap @@@@@@@@@@'+selectedMailMap);
                     }
@@ -1434,7 +1445,12 @@ Public Class WishChildForm_AC
            displayPopup = false;
            Set<String> senderNameSet = new Set<String>();
                 for(String processEmailList :emailList ){
-                 senderNameSet.add(processEmailList);
+                 if(senderNameSet.contains(processEmailList )){
+                 
+                     processEmailList = processEmailList+' ';
+                     senderNameSet.add(processEmailList);
+                 }
+                     senderNameSet.add(processEmailList);
                    system.debug('@@@@@@@ ENTER INTO SENDPDFTOEMAIL @@@@@@@@@'+senderNameSet);
                 }
                 for(String currString : selectedMailMap.keySet()){
@@ -1480,9 +1496,11 @@ Public Class WishChildForm_AC
     public static void callouttoDocusing(map<String,String>sendEmailMap,String caseId,Id wishChildId ){
         List<Contact> relationShipList = new List<Contact>();
             Pagereference PDF = Page.SendPDF;
+            String documentPDF;
             PDF.setRedirect(false);
             PDF.getParameters().put('Id',caseId);
-            String documentPDF = EncodingUtil.base64Encode(PDF.getContentAsPDF());
+            If(!Test.isrunningtest())
+            documentPDF = EncodingUtil.base64Encode(PDF.getContentAsPDF());
             system.debug(PDF+'base64 value '+documentPDF);
             String recipients = '';
             Integer i = 1;
@@ -1709,6 +1727,10 @@ Public Class WishChildForm_AC
     
     public pagereference submitforApproval()
     {
+          List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: caseId AND Status =: 'Pending' ];
+          If(approvalIns.size() > 0){
+             displayError();
+          }
            isInformation = True;
            saveContact();
            Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
@@ -1721,6 +1743,11 @@ Public Class WishChildForm_AC
             PageReference reference=new PageReference('/'+caseId);
             reference.setRedirect(true);     
             return reference;
+    }
+    public pagereference displayError(){
+             
+             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,' This record is already in approval process'));
+             return null;
     }
     
     public class DriverWrapper

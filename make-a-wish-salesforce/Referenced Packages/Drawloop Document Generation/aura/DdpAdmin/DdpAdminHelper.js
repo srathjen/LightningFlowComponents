@@ -20,9 +20,7 @@
                 $A.util.addClass(br, "slds-collapsed");
                 $A.util.removeClass(icon, "icon-on");
             }
-            var branchItems = ["classicExperienceButtons", "buttonWizard", 
-                               "edition", "thirdpartyIntegrations", "jobQueueStatus", "settings", "sampleDdps", 
-                               "testUserConfiguration", "userPermissions"];
+            var branchItems = component.get('v.branches');
             for (var j = 0; j < branchItems.length; j++) {
                 document.getElementById(branchItems[j]).setAttribute("data-hidden", "false");
             }
@@ -121,7 +119,7 @@
         var re = new RegExp(escapedSearchString, 'i');
         
         if (buttonCount > 0 && buttonHeader === 0) {
-            var buttonItems = [{option:"classic experience buttons", element:"classicExperienceButtons"}, 
+            var buttonItems = [{option:"basic buttons", element:"basicButtons"}, 
                                {option:"button wizard", element:"buttonWizard"}];
             for (var i = 0; i < buttonItems.length; i++) {
                 var buttonElement = document.getElementById(buttonItems[i].element);
@@ -137,7 +135,7 @@
             }
         }
         if (configCount > 0 && configHeader === 0) {
-            var configItems = [{option:"edition", element:"edition"},
+            var configItems = [{option:"edition", element:"editionSection"},
                                {option:"third-party integrations", element:"thirdpartyIntegrations"},
                                {option:"job queue status", element:"jobQueueStatus"},
                                {option:"settings", element:"settings"},
@@ -172,23 +170,60 @@
             }
         }
     },
-    toggleBranch : function(component, branchName) {
-        var element = component.find(branchName);
-        $A.util.toggleClass(element, "slds-collapsed");
-    },
-    isSelected : function(component, event) {
-        var elements = document.getElementsByClassName('slds-is-selected');
-        var id = event.target.getAttribute("id");
-        if (!elements) {
-            return;
+    toggleBranch : function(component, step) {
+        if (step === 'purchaseForm') {
+        	$A.util.removeClass(component.find("edition-Node"), "slds-collapsed");
+        	$A.util.addClass(component.find("edition-icon"), "icon-on");
+            $A.util.removeClass(component.find("configuration-Node"), "slds-collapsed");
+        	$A.util.addClass(component.find("configuration-icon"), "icon-on");    
+        } else {
+            $A.util.removeClass(component.find("buttonToggle-Node"), "slds-collapsed");
+        	$A.util.addClass(component.find("buttonToggle-icon"), "icon-on");
         }
-        for ( var i = 0; i < elements.length; i++) {
-            var element = elements[i].getAttribute("id")
-            $A.util.removeClass(component.find(element), "slds-is-selected");
+    },
+    isSelected : function(component, id) {
+        var branches = component.get('v.branches');
+        for (var i = 0; i < branches.length; i++) {
+            $A.util.removeClass(component.find(branches[i]), "slds-is-selected");
         }
         $A.util.addClass(component.find(id), "slds-is-selected");
     },
     escapeRegExp : function(str) {
     	return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-	}
+	},
+    loadDdpAdminSplash : function(component, services) {
+        if (services.isSuccess) {
+            component.find("ddpAdminSplash").load(services.hasContract, services.usedLicenses, services.daysRemainingInTrial, services.allowedLicenses);   
+        }
+    },
+    updateSaveButtonText : function(component, id) {
+        if (id === 'purchaseForm') {
+            component.set("v.saveButtonLabel", 'Submit');
+        } else {
+            component.set("v.saveButtonLabel", 'Save');
+        }
+    },
+    updateBreadcrumb : function(component, id, label) {
+        var parentSectionName;
+        switch(id) {
+            case "basicButtons":
+            case "buttonWizard":
+                parentSectionName = 'Classic Experience Buttons';
+                break;
+            case "editionSection":
+            case "purchaseForm":
+            case "thirdpartyIntegrations":
+            case "jobQueueStatus":
+            case "settings":
+            case "sampleDdps":
+                parentSectionName = 'Configuration';
+                break;
+            case "testUserConfiguration":
+            case "userPermissions":
+                parentSectionName = 'Users';
+                break;
+        }
+        component.set("v.sectionLabel", label);
+        component.set("v.parentSectionLabel", parentSectionName);
+    }
 })

@@ -17,6 +17,9 @@
 .THIS .iconFloat {
     display: inline-block;
 }
-.THIS .iconBackground {
+.THIS .button-icon-color {
     background: #edb566;
+}
+.THIS .license-icon-color {
+    background: #e9637e;
 }

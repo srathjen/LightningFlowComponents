@@ -11,7 +11,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
     if(Trigger.isUpdate && Trigger.isAfter){
 
         Id taskInterviewRecordType = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantTaskRT).getRecordTypeId();
+        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
         List<Task> statusUpdatedTaskList = new List<Task>();
         Set<Id> taskRelatedCaseIdsSet = new Set<Id>();
         set<Id> volunteerContactSet = new Set<Id>();
@@ -25,12 +25,12 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         String chapterNameDetails;
         List<Task> createCheckinTaskList = new List<Task>();
         Set<Id> checkinTaskIdSet = new Set<Id>();
-        
+        Set<Id> completedTaskParentIdSet = new Set<Id>();
         Map<Id,Task> taskMap = new Map<Id,Task>();
         Set<Id> taskOwnerIds = new Set<Id>();
         Set<Id> caseIds = new Set<Id>();
         Map<Id,Task> followUpTaskMap = new Map<Id,Task>();
-        
+        List<Task> validateTaskList = new List<Task>();
         Set<Id> followUpTaskOwnerIdSet = new Set<Id>();
         for(Task updatedTask : Trigger.New) {
             if(updatedTask.Status == 'Completed' && updatedTask.isRecurrenceTask__c == false) {
@@ -53,8 +53,11 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                     
                 }
             }
-            
-            
+            if(updatedTask.status=='Completed' && updatedTask.Subject != 'Volunteer wish follow-up activities not complete') {
+                validateTaskList.add(updatedTask);
+                completedTaskParentIdSet.add(updatedTask.WhatId);
+                
+            }
             if(updatedTask.Status == 'Completed' && Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.RecordTypeId == wishGrantTaskRT) {
                 wishGrantTaskWhatIdSet.add(updatedTask.WhatId);
             }
@@ -80,7 +83,6 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             if((updatedTask.Status == 'Declined') && updatedTask.RecordTypeId ==taskInterviewRecordType ){
                 declinedTaskVolunteerIds.add(updatedTask.WhoId);
             }
-            
              if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Review photos/videos')) {
                  System.debug('Photo OwnerId>>>>>>>>>'+updatedTask.OwnerId);
                  System.debug('Photo WhatId>>>>>>>>>'+updatedTask.WhatId);
@@ -92,7 +94,6 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             }
             
         }
-        
         if(taskMap.size() > 0)
         {
            TaskHandler.updateVolunteerRecord(taskMap,taskOwnerIds,caseIds);
@@ -120,9 +121,12 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         if(flightBookTaskMap.size() > 0 || budgetBookTaskMap.size() > 0 || passportRequestMap.size() > 0) {
             TaskHandler.sneakPeekTask(flightBookTaskMap,budgetBookTaskMap, passportRequestMap);
         }
-        
         if(uploadParentTaskIdMap.size() > 0) {
             TaskHandler.createUploadTaskForWishOwner(uploadParentTaskIdMap);
+        }
+        
+        if(validateTaskList.size() > 0 && completedTaskParentIdSet.size() > 0) {
+            TaskHandler.autoCloseTask(validateTaskList,completedTaskParentIdSet);
         }
     }
     
@@ -176,11 +180,11 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         Set<Id> checkInTaskParentIdsSet = new Set<Id>();
         Map<Id,id> caseInfoMap=new Map<Id,id>();
         List<Task> validateTaskList = new List<Task>();
-        
+        Set<Id> completedTaskParentIdSet = new Set<Id>();
         for(Task currRec : Trigger.new){ 
-            /*if(currRec.Subject == 'Check in with the family every 30 days' && currRec.Status == 'Completed') {
+            if(currRec.Subject == 'Check in with the family every 30 days' && currRec.Status == 'Completed') {
                 checkInTaskParentIdsSet.add(currRec.WhatId);
-            }*/
+            }
             string id = currRec.WhoId;
             if(currRec.Confirmed_Date__c != Null && Trigger.oldMap.get(currRec.id).Confirmed_Date__c  == Null)
                 currRec.Status = 'Scheduled';
@@ -217,10 +221,10 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             if(currRec.status=='Completed') {
                 validateTaskList.add(currRec);
                 
+                
             }
             
         }
-        
         if(validateTaskList.size() > 0) {
             TaskHandler.colseTaskValidation(validateTaskList);
         }
