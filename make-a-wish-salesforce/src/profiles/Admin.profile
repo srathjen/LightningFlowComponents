@@ -10595,10 +10595,7 @@
         <enabled>true</enabled>
         <name>ManageRoles</name>
     </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ManageSandboxes</name>
-    </userPermissions>
+
     <userPermissions>
         <enabled>true</enabled>
         <name>ManageSearchPromotionRules</name>
