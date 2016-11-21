@@ -9156,10 +9156,6 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>WishLiabilityForm_VF_Copy_10182016</apexPage>
-        <enabled>false</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>WishLiabilityMiniorForm</apexPage>
         <enabled>false</enabled>
     </pageAccesses>

@@ -549,7 +549,6 @@
         <relatedList>Volunteer_Opportunity__c.Wish__c</relatedList>
     </relatedLists>
     <relatedLists>
-        <customButtons>Task.Task_List</customButtons>
         <fields>TASK.SUBJECT</fields>
         <fields>TASK.WHO_NAME</fields>
         <fields>ACTIVITY.TASK</fields>

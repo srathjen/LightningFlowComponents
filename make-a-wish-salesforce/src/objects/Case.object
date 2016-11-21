@@ -5520,7 +5520,6 @@ arrangements/unique circumstances for any requested wish participant not residin
         <lookupPhoneDialogsAdditionalFields>NAME</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>ACCOUNT.NAME</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>CASES.STATUS</lookupPhoneDialogsAdditionalFields>
-        <lookupPhoneDialogsAdditionalFields>00N5B000000IDF9</lookupPhoneDialogsAdditionalFields>
         <searchResultsAdditionalFields>CASES.CASE_NUMBER</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CASES.SUBJECT</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CASES.STATUS</searchResultsAdditionalFields>

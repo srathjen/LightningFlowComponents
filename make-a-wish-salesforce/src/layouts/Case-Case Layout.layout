@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <customButtons>Email_to_the_MAC_team</customButtons>
     <customButtons>dsfs__Send_with_DocuSign</customButtons>
     <emailDefault>false</emailDefault>
     <excludeButtons>Submit</excludeButtons>

@@ -128,10 +128,6 @@
                 <field>Wish_Receipt_Items__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Parent_Guardian_Name__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Option2__c</field>
             </layoutItems>

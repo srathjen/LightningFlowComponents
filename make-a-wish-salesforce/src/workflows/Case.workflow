@@ -201,10 +201,6 @@
         <description>Wish Family Form Not Submitted Alert</description>
         <protected>false</protected>
         <recipients>
-            <recipient>Airport Greeter</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
             <recipient>Celebrity Host</recipient>
             <type>caseTeam</type>
         </recipients>
@@ -240,10 +236,6 @@
         <fullName>Wish_Interview_21_days_alert</fullName>
         <description>Wish:Interview 21 days alert</description>
         <protected>false</protected>
-        <recipients>
-            <recipient>Airport Greeter</recipient>
-            <type>caseTeam</type>
-        </recipients>
         <recipients>
             <recipient>Celebrity Host</recipient>
             <type>caseTeam</type>

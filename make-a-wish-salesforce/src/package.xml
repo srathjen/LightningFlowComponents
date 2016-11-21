@@ -131,17 +131,17 @@
     <types>
         <members>NPSP3_Grants_Management_Dashboard</members>
         <members>NPSP3_Grants_Management_Dashboard/NPSP3_Grants_Management_Dashboard</members>
-        <members>NPSP3_Donor_Management_Dashboard</members>
-        <members>NPSP3_Donor_Management_Dashboard/NPSP3_Campaign_Metrics</members>
-        <members>NPSP3_Donor_Management_Dashboard/NPSP3_Donation_Forecasting_Dashboard</members>
         <members>CompanyDashboards</members>
         <members>CompanyDashboards/AdoptionDashboard</members>
         <members>CompanyDashboards/CompanyPerformanceDashboard</members>
         <members>CompanyDashboards/Sample_Dashboard</members>
-        <members>Chapter_Dashboard_Sample</members>
-        <members>Chapter_Dashboard_Sample/Sample_Dashboard_1</members>
         <members>NPSP3_Membership_Management_Dashboard</members>
         <members>NPSP3_Membership_Management_Dashboard/NPSP3_Membership_Dashboard</members>
+        <members>NPSP3_Donor_Management_Dashboard</members>
+        <members>NPSP3_Donor_Management_Dashboard/NPSP3_Campaign_Metrics</members>
+        <members>NPSP3_Donor_Management_Dashboard/NPSP3_Donation_Forecasting_Dashboard</members>
+        <members>Chapter_Dashboard_Sample</members>
+        <members>Chapter_Dashboard_Sample/Sample_Dashboard_1</members>
         <name>Dashboard</name>
     </types>
     <types>
@@ -149,11 +149,6 @@
         <name>DataCategoryGroup</name>
     </types>
     <types>
-        <members>Communities_Shared_Document_Folder1</members>
-        <members>Communities_Shared_Document_Folder1/maw_logo_blue_small_png.png</members>
-        <members>Communities_Shared_Document_Folder1/mawa_image_png1.png</members>
-        <members>Salesforce1_Branding_Resources</members>
-        <members>Salesforce1_Branding_Resources/logo_maw_blue_png.png</members>
         <members>Communities_Shared_Document_Folder</members>
         <members>Communities_Shared_Document_Folder/make_a_wish_logo_png.png</members>
         <members>Communities_Shared_Document_Folder/mawa_image_png.png</members>
@@ -169,6 +164,11 @@
         <members>SharedDocuments/MAWALogo.png</members>
         <members>SharedDocuments/Trans.png</members>
         <members>SharedDocuments/transparent.png</members>
+        <members>Communities_Shared_Document_Folder1</members>
+        <members>Communities_Shared_Document_Folder1/maw_logo_blue_small_png.png</members>
+        <members>Communities_Shared_Document_Folder1/mawa_image_png1.png</members>
+        <members>Salesforce1_Branding_Resources</members>
+        <members>Salesforce1_Branding_Resources/logo_maw_blue_png.png</members>
         <members>Loop__LOOP_Files</members>
         <members>Loop__LOOP_Files/CABGBBABA2d52642a689946ca9f696e8a8d9ae69d.txt</members>
         <members>Loop__LOOP_Files/CABGBBACAa46e77caad7b427982d011b96e2b32c6.doc</members>
@@ -200,7 +200,6 @@
         <members>Automated_Volunteer_Templates/Volunteer_Application_Approved_Email_Template</members>
         <members>Automated_Volunteer_Templates/Volunteer_Application_Completed_Email_Template</members>
         <members>Automated_Volunteer_Templates/Volunteer_Application_Incompleted_Email_Template</members>
-        <members>unfiled$public</members>
         <members>unfiled$public/Account_In_Kind_Donors_Approval_Email_Template</members>
         <members>unfiled$public/Case_Abandoned_Wish_Template</members>
         <members>unfiled$public/Case_Budget_Approval_Template</members>
@@ -293,7 +292,8 @@
         <name>RemoteSiteSetting</name>
     </types>
     <types>
-        <members>unfiled$public</members>
+        <members>Volunteer_Community_Report_Folder</members>
+        <members>Volunteer_Community_Report_Folder/Inkind_Donation_Account_Report</members>
         <members>unfiled$public/New_Volunteers_This_Month_By_Chapter</members>
         <members>unfiled$public/New_Wishes_This_Month</members>
         <members>unfiled$public/SampleReportActiveUsers</members>
@@ -330,8 +330,6 @@
         <members>unfiled$public/Unassigned_Wish_Opportunities</members>
         <members>unfiled$public/Volunteer_Info_With_Wish_Details</members>
         <members>Volunteer_Reports</members>
-        <members>Finance_Reports_Folder</members>
-        <members>Finance_Reports_Folder/Potential_Pending_Wish_Liability_Report</members>
         <members>National_Reports</members>
         <members>National_Reports/Active_Non_Wish_Granters</members>
         <members>National_Reports/Active_Wish_Granter</members>
@@ -343,6 +341,20 @@
         <members>National_Reports/Volunteer_Time_Contribution</members>
         <members>National_Reports/Volunteer_Training</members>
         <members>National_Reports/Volunteers_by_language_and_role</members>
+        <members>Finance_Reports_Folder</members>
+        <members>Finance_Reports_Folder/Potential_Pending_Wish_Liability_Report</members>
+        <members>NPSP3_Grants_Management_Reports</members>
+        <members>NPSP3_Grants_Management_Reports/NPSP3_Grant_Pipeline_Planning</members>
+        <members>NPSP3_Grants_Management_Reports/NPSP3_Institutional_Fundraising_Goal_this_year</members>
+        <members>NPSP3_Grants_Management_Reports/NPSP3_Organizations_with_Grants</members>
+        <members>NPSP3_Grants_Management_Reports/NPSP3_Total_Grants_Received</members>
+        <members>NPSP3_Grants_Management_Reports/NPSP3_Total_Grants_Received_This_Year</members>
+        <members>NPSP3_Membership_Management_Reports</members>
+        <members>NPSP3_Membership_Management_Reports/NPSP3_Current_Membership</members>
+        <members>NPSP3_Membership_Management_Reports/NPSP3_Lapsed_Membership_Report</members>
+        <members>NPSP3_Membership_Management_Reports/NPSP3_Membership_End_Dates_by_Month</members>
+        <members>NPSP3_Membership_Management_Reports/NPSP3_New_Members</members>
+        <members>NPSP3_Membership_Management_Reports/NPSP3_Renewing_Members</members>
         <members>Chapter_Reports</members>
         <members>Chapter_Reports/Background_Check_Expiration_Date</members>
         <members>Chapter_Reports/COI_Expiration_Date</members>
@@ -395,20 +407,6 @@
         <members>NPSP3_Donor_Management_Reports/NPSP3_TotalGifts_by_Household_State</members>
         <members>NPSP3_Donor_Management_Reports/NPSP3_TotalGifts_by_Household_Zip</members>
         <members>NPSP3_Donor_Management_Reports/NPSP3_TOTALGIFTS_by_Household_Zip_This_Year</members>
-        <members>NPSP3_Membership_Management_Reports</members>
-        <members>NPSP3_Membership_Management_Reports/NPSP3_Current_Membership</members>
-        <members>NPSP3_Membership_Management_Reports/NPSP3_Lapsed_Membership_Report</members>
-        <members>NPSP3_Membership_Management_Reports/NPSP3_Membership_End_Dates_by_Month</members>
-        <members>NPSP3_Membership_Management_Reports/NPSP3_New_Members</members>
-        <members>NPSP3_Membership_Management_Reports/NPSP3_Renewing_Members</members>
-        <members>Volunteer_Community_Report_Folder</members>
-        <members>Volunteer_Community_Report_Folder/Inkind_Donation_Account_Report</members>
-        <members>NPSP3_Grants_Management_Reports</members>
-        <members>NPSP3_Grants_Management_Reports/NPSP3_Grant_Pipeline_Planning</members>
-        <members>NPSP3_Grants_Management_Reports/NPSP3_Institutional_Fundraising_Goal_this_year</members>
-        <members>NPSP3_Grants_Management_Reports/NPSP3_Organizations_with_Grants</members>
-        <members>NPSP3_Grants_Management_Reports/NPSP3_Total_Grants_Received</members>
-        <members>NPSP3_Grants_Management_Reports/NPSP3_Total_Grants_Received_This_Year</members>
         <name>Report</name>
     </types>
     <types>

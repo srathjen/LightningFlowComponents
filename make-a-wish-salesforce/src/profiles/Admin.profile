@@ -9670,10 +9670,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>WishLiabilityForm_VF_Copy_10182016</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>WishLiabilityMiniorForm</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -10599,10 +10595,7 @@
         <enabled>true</enabled>
         <name>ManageRoles</name>
     </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ManageSandboxes</name>
-    </userPermissions>
+
     <userPermissions>
         <enabled>true</enabled>
         <name>ManageSearchPromotionRules</name>
