@@ -85,8 +85,10 @@ public class CaseTriggerHandler {
             }
             increment=increment+1;
             s= increment.format();
+            System.debug('parentWishes.Unique_Wish_Record_Identifier__c+++++++++++++'+parentWishes.Unique_Wish_Record_Identifier__c);
         } 
         System.debug('Parent Wishes 1.8:' + lstParentWishes);
+      
         update lstParentWishes;
        
     } 

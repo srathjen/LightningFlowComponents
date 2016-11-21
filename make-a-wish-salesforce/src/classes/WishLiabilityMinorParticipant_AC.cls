@@ -1,3 +1,10 @@
+/*****************************************************************************
+Created by: Kanagaraj
+Author : MST Solutions
+CreateDate : 11/15/2016
+Description : WishLiabilityForm_AC is used to send the WishLiability Form for Parent/Guardian of Minor participant  to sign that liability form.
+******************************************************************************/
+
 public class WishLiabilityMinorParticipant_AC{
     
     public Case currentParentCase{get;set;}

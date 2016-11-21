@@ -89,7 +89,8 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
             if((newLead.Status == 'Eligibility Review') || (newLead.Status == 'Qualified') && trigger.oldMap.get(newLead.id).Status == 'Referred'){
                 newLead.Part_A_Received__c = Date.today();
             }
-            
+            if(newLead.Status == 'Eligibility Review' && newLead.Sub_Status__c == 'Pending Diagnosis Verification')
+            newLead.Sub_Status__c = Null;
             
             if(newLead.Treating_Medical_Professional_Email__c != trigger.oldmap.get(newLead.id).Treating_Medical_Professional_Email__c)
             {

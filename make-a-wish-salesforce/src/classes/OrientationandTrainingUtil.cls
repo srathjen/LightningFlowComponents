@@ -499,6 +499,20 @@ insert newChapter;*/
         insert newParentWish;
         return newParentWish;
     }
+    public static case CreateParentCaseWithAnticipatedStartDate( Id wishChildId) {
+        Constant_AC  constant = new Constant_Ac();    
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        Case newParentWish = new Case();
+        newParentWish.RecordTypeId = parentWishRecordTypeId;
+        newParentWish.ChapterName__c = CreateAlabamaAccount();
+        newParentWish.Subject = 'Parent Wish';
+        newParentWish.Interview_date__c = System.today();
+        newParentWish.Anticipated_Start_Date__c = System.today()-23;
+        newParentWish.Wish_Type__c = 'Disney World';
+        newParentWish.ContactId = wishChildId;
+        insert newParentWish;
+        return newParentWish;
+    }
     //This method used to crate parentcase without value for interview date  
     public static case CreateParentCaseWithoutInterviewDate( Id wishChildId) {
         Constant_AC  constant = new Constant_Ac();    
@@ -794,6 +808,40 @@ insert newChapter;*/
                               isActive = true,
                               State = 'Arizona',
                               UserRoleId = newUserRole.Id
+                             );
+        insert tuser;
+        
+        return tuser;
+        
+    }
+    
+    public static user createrSystemAdminUserwithMgr(){
+        UserRole newUserRole = new UserRole();
+        newUserRole.Name  = 'Make A Wish Alabama';
+        Insert newUserRole;
+        Profile pf = [SELECT Id FROM Profile WHERE Name = 'System Administrator'];
+        User user1 = createrSystemAdminUser();
+        
+        String orgId = UserInfo.getOrganizationId();
+        String dateString = String.valueof(Datetime.now()).replace(' ','').replace(':','').replace('-','');
+        
+        Integer randomInt = Integer.valueOf(math.rint(math.random()*1000000));
+        String uniqueName = orgId + dateString + randomInt;
+        
+        User tuser = new User(  firstname = 'Test FirstName',
+                              lastName = 'Test LastName',
+                              email = 'testmawa@gmail.com',
+                              Username = uniqueName + '@test' + orgId + '.org',
+                              EmailEncodingKey = 'ISO-8859-1',
+                              Alias = uniqueName.substring(18, 23),
+                              TimeZoneSidKey = 'America/Los_Angeles',
+                              LocaleSidKey = 'en_US',
+                              LanguageLocaleKey = 'en_US',
+                              ProfileId = pf.Id,
+                              isActive = true,
+                              State = 'Arizona',
+                              UserRoleId = newUserRole.Id,
+                              ManagerId = user1.id
                              );
         insert tuser;
         
@@ -1316,6 +1364,18 @@ retrun newLeadFile;*/
         return checkinTask;
     }
     
+    //Used to create sneak Peek booked task for wish child family.
+    public static Task createSneakPeek(Id parentWishId) {
+        Task checkinTask = new Task();
+        checkinTask.ActivityDate = System.today() + 30;
+        checkinTask.Subject = 'Sneak Peek Letter';
+        checkinTask.Status = 'Not Started';
+        checkinTask.WhatId = parentWishId;
+        insert checkinTask;
+        return checkinTask;
+    }
+    
+    
     //Used to create Budget task for wish child family.
     public static Task createBudgetTask(Id parentWishId) {
         Task checkinTask = new Task();
@@ -1326,6 +1386,28 @@ retrun newLeadFile;*/
         insert checkinTask;
         return checkinTask;
     }
+        //Used to create followup activities task
+        public static Task createFollupActivitiesTask(Id ParentWishId, Id OwnerId) {
+            Task checkinTask = new Task();
+            checkinTask.ActivityDate = System.today() + 30;
+            checkinTask.Subject = 'Volunteer wish follow-up activities not complete';
+            checkinTask.Status = 'Not Started';
+            checkinTask.WhatId = parentWishId;
+            checkinTask.OwnerId = OwnerId;
+            insert checkinTask;
+            return checkinTask;
+        }
+            
+            //Used to create followup activities task
+        public static Task reviewPhotos(Id ParentWishId) {
+            Task checkinTask = new Task();
+            checkinTask.ActivityDate = System.today() + 30;
+            checkinTask.Subject = 'Review photos/videos';
+            checkinTask.Status = 'Not Started';
+            checkinTask.WhatId = parentWishId;
+            insert checkinTask;
+            return checkinTask;
+        }
     
     public static Task passportRequestTask(Id parentWishId) {
         Task checkinTask = new Task();
@@ -1336,6 +1418,31 @@ retrun newLeadFile;*/
         insert checkinTask;
         return checkinTask;
     }
+    
+    //Wish Presentation Date not set
+    public static Task presentationTask(Id parentWishId) {
+        Task checkinTask = new Task();
+        checkinTask.ActivityDate = System.today() + 30;
+        checkinTask.Subject = 'wish presentation date entered';
+        checkinTask.Status = 'Not Started';
+        checkinTask.WhatId = parentWishId;
+        insert checkinTask;
+        return checkinTask;
+    }
+    //Wish granted Task
+    public static Task wishGrantedTask(Id parentWishId) {
+        Constant_AC  constant = new Constant_Ac(); 
+        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+        Task checkinTask = new Task();
+        checkinTask.ActivityDate = System.today() + 30;
+        checkinTask.Subject = 'Granted Task';
+        checkinTask.Status = 'Not Started';
+        checkinTask.WhatId = parentWishId;
+        checkinTask.RecordTypeId = wishGrantTaskRT;
+        insert checkinTask;
+        return checkinTask;
+    }
+    
     
     public static npe4__Relationship__c CreateRelationshipRec(Id wishChildId,Id wishFamilyId){
         npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
@@ -1469,6 +1576,26 @@ retrun newLeadFile;*/
         insert newLeadFile;
         return newLeadFile;
     }
+    
+    public static cg__CaseFile__c createCaseFileRecord(Id caseId) {
+        cg__CaseFile__c newCaseFile = new cg__CaseFile__c();
+        newCaseFile.cg__File_Name__c = 'MedicalSummary.txt';
+        newCaseFile.cg__Case__c = caseId;
+        newCaseFile.cg__Content_Type__c = 'text/plain';
+        insert newCaseFile;
+        return newCaseFile;
+    }
+    
+     public static cg__contactFile__c createContactFileRecord(Id contactId) {
+        cg__ContactFile__c newContactFile = new cg__ContactFile__c();
+        newContactFile.cg__File_Name__c = 'MedicalSummary.txt';
+        newContactFile.cg__Contact__c = contactId;
+        newContactFile.cg__Content_Type__c = 'text/plain';
+        insert newContactFile;
+        return newContactFile;
+    }
+    
+    
     public static dsfs__DocuSign_Status__c createDocusignStatuswithCon(Id contactId){
         dsfs__DocuSign_Status__c dsfs= NEW dsfs__DocuSign_Status__c();
         dsfs.dsfs__DocuSign_Envelope_ID__c = '0F31B5A9-DB3A-4D31-8D69-9DE86F2010A8';
@@ -1656,4 +1783,65 @@ retrun newLeadFile;*/
         return newdsfs;
         
     }
+    
+    //Wish concept approval task creation
+    public static Task wishConceptApproval(Id parentWishId) {
+        Task concept = new Task();
+        concept.ActivityDate = System.today() + 30;
+        concept.Subject = 'Wish concept approval';
+        concept.Status = 'Not Started';
+        concept.WhatId = parentWishId;
+        insert concept;
+        return concept;
+    }
+    
+    //Wish presentation not set
+    public static Task wishPresentationNotSet(Id parentWishId) {
+        Task presentation = new Task();
+        presentation.ActivityDate = System.today() + 30;
+        presentation.Subject = 'Wish Presentation not set';
+        presentation.Status = 'Not Started';
+        presentation.WhatId = parentWishId;
+        insert presentation;
+        return presentation;
+    }
+    
+    //Wish not closed
+    public static Task wishNotClosed(Id parentWishId) {
+        Task notClosed = new Task();
+        notClosed.ActivityDate = System.today() + 30;
+        notClosed.Subject = 'Wish not closed';
+        notClosed.Status = 'Not Started';
+        notClosed.WhatId = parentWishId;
+        insert notClosed;
+        return notClosed;
+    }
+    
+   public static cg__accountFile__c createAccountFileRecord(Id accountId) {
+        cg__AccountFile__c newAccountFile = new cg__AccountFile__c();
+        newAccountFile.cg__File_Name__c = 'MedicalSummary.txt';
+        newAccountFile.cg__Account__c = accountId;
+        newAccountFile.cg__Content_Type__c = 'text/plain';
+        insert newAccountFile;
+        return newAccountFile;
+    }
+    
+    public static Background_check__c createBackgroundRecord(Id volunteerId) {
+        Background_check__c newBackground = new Background_check__c();
+        newBackground.Volunteer__c = volunteerId;
+        newBackground.Resided_in_US_for_past_7_years__c = 'Yes';
+        insert newBackground;
+        return newBackground;
+    }
+    
+    public static Background_Check_File__c createBackgroundFileRecord(Id backgrounId) {
+        Background_Check_File__c newBackground = new Background_Check_File__c();
+        newBackground.Parent__c = backgrounId;
+        newBackground.File_Name__c = 'MedicalSummary.txt';
+        newBackground.Content_Type__c = 'text/plain';
+        insert newBackground;
+        return newBackground;
+    }
+        
+        
 }

@@ -12,7 +12,7 @@
           </apex:commandlink> 
           <apex:variable var="cnt" value="{!cnt+1}"/>              
       </apex:column>  -->
-                <apex:column headerValue="Member Name">
+                <apex:column headerValue="Parent/Guardian of Minor participant">
                     <apex:inputField value="{!memb.FirstName}"/>
                 </apex:column>
                 <apex:column headerValue="Email">
@@ -27,7 +27,7 @@
        
             <apex:pageBlockTable value="{!addContactEmailList}" var="memb" rendered="{!outPutMode}">
           
-                <apex:column headerValue="Member Name">
+                <apex:column headerValue="Parent/Guardian of Minor participant">
                     <apex:outputField value="{!memb.FirstName}"/>
                 </apex:column>
                 <apex:column headerValue="Email">

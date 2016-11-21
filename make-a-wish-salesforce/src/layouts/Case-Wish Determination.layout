@@ -266,7 +266,12 @@
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
         <label>Driver Details</label>
-        <layoutColumns/>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Unique_Wish_Record_Identifier__c</field>
+            </layoutItems>
+        </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>

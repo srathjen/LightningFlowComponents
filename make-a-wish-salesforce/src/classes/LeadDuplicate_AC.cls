@@ -245,6 +245,7 @@ Public Class LeadDuplicate_AC
             }
             
             System.debug('mergeIds+++++++++++++++++++++++++++++ ' + mergeIds);
+            mergeIds.add(MasterLeadList[0].Id);
        
             loadMergeCandidates(mergeIds);
       }
@@ -314,8 +315,9 @@ Public Class LeadDuplicate_AC
           
         }
         
-        if (mergeCandidates.size() >2 ) {
+        if (mergeCandidates.size() > 3 ) {
             flag=false;
+            
             ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'You can not merge more than 3 leads at a time'));
            //ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'You can not merge more than 3 leads at a time'));
             return;

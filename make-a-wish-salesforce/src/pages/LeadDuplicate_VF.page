@@ -4,7 +4,7 @@
     recordSetVar="cons"
     showHeader="true"
     sidebar="false"
-    standardStylesheets="false">
+    standardStylesheets="false" cache="false">
     
     <apex:pagemessages />
 
@@ -22,6 +22,10 @@
      
          if($(this).prop("checked") == true){
                 $('.familyRadio').attr('disabled', true);
+                $('.familyRadio').each(function(){                
+                    $(this).prop('checked', false);                
+                });
+                
             }
             else if($(this).prop("checked") == false){
                 $('.familyRadio').attr('disabled', false);
@@ -34,6 +38,9 @@
       
         if($(this).prop("checked") == true){
                 $('.medicalRadio').attr('disabled', true);
+                $('.medicalRadio').each(function(){                
+                    $(this).prop('checked', false);                
+                });
             }
             else if($(this).prop("checked") == false){
                 $('.medicalRadio').attr('disabled', false);
@@ -48,6 +55,10 @@
       
         if($(this).prop("checked") == true){
                 $('.existingRadio').attr('disabled', true);
+                  $('.existingRadio').each(function(){                
+                    $(this).prop('checked', false);                
+                    });
+                
             }
             else if($(this).prop("checked") == false){
                 $('.existingRadio').attr('disabled', false);
@@ -177,7 +188,7 @@
                                     <td class="slds-row-select"><apex:outputText value="{!masterRecord.Email}"/></td>
                                     <td class="slds-row-select"><apex:outputText value="{!masterRecord.Phone}"/></td>
                                     <td class="slds-row-select"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!masterRecord.DOB__c}" /></apex:outputText></td>
-                                    <td class="slds-row-select"><apex:outputText value="{!masterRecord.ChapterName__r.Name}"/></td>
+                                    <td class="slds-row-select"><apex:outputText value="{!masterRecord.chapterName__r.Name}"/></td>
                                 </tr>
                             </apex:repeat>
                             </tbody>
@@ -190,7 +201,7 @@
                 <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
                         <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Leads</h2>
-                        <p style="margin: 5px 0 0 60%;"><apex:inputCheckbox value="{!noDuplicate}"/> &nbsp;&nbsp;  No Duplicate Found </p>
+                        <p style="margin: 5px 0 0 60%;"><apex:inputCheckbox value="{!noDuplicate}"/> &nbsp;&nbsp;  Create New Record </p>
                      
                         <apex:commandButton action="{!nextStep}" rendered="{!hasResults}" value="Next" styleClass="slds-button slds-button--neutral" /> 
                     </div>
@@ -375,8 +386,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                     
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td rowspan="8"> <div style="float:left; margin-top: 0%;  position:absolute; margin-left: 6%;">
+                                                        <apex:inputCheckbox label="" onclick="" styleClass="family"/>
+                                                        </div>
+                                    </td>
+                               </tr>
                                     <apex:repeat value="{!dupParentContactList}" var="con">
+                                    
+                                    
                                         <tr>
                                               <td>
                                                     <a href="{!URLFOR($Action.Contact.View, con.Id)}" class="slds-truncate">
@@ -415,10 +439,7 @@
                                     <apex:inputhidden id="contactValue" value="{!contactId}"/>
                                     
                                 </tbody>
-                            </table>
-                            <div style="float: right; margin-top: -5%;  margin-right: 7%;">
-                            <apex:inputCheckbox label="" onclick="" styleClass="family"/>
-                            </div>
+                            </table>                           
                         </apex:outputText>
                     </div>
                 </div>
@@ -449,7 +470,21 @@
                                        <th class="slds-text-heading--label" scope="col">Not Allow Duplicate</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody>  
+                                
+                                 <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td rowspan="8"> <div style="float:left; margin-top: 0%;  position:absolute; margin-left: 6%;">
+                                                       <apex:inputCheckbox label="" onclick="" styleClass="medical" />
+                                                     </div>
+                                    </td>
+                               </tr>
+                                                                     
                                     <apex:repeat value="{!dupMedicalContactList}" var="con">
                                         <tr>
                                               <td>
@@ -483,10 +518,11 @@
                                         </tr>
                                     </apex:repeat>
                                      <apex:inputhidden value="{!medicalConId}" id="medicalValue" />
-                                </tbody>
+                                     
+                                  </tbody>
                             </table>
-                            <div style="float: right; margin-top: -5%;  margin-right: 7%;">
-                            <apex:inputCheckbox label="" onclick="" styleClass="medical" />
+                            <div style="float:left; margin-top: -6%;  margin-right: 7%; position:absolute; margin-left: 87%;">
+                            
                             </div>
                         </apex:outputText>
                     </div>
@@ -520,6 +556,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                
+                                 <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td rowspan="8"> <div style="float:left; margin-top: 0%;  position:absolute; margin-left: 6%;">
+                                                       <apex:inputCheckbox label="" onclick="" styleClass="existingMedical"/>
+                                                     </div>
+                                    </td>
+                                 </tr>
+                                          
                                     <apex:repeat value="{!dupTreatingContactList}" var="treatingContact">
                                         <tr>
                                               <td>
@@ -555,8 +605,8 @@
                                 </tbody>
                             </table>
                             
-                             <div style="float: right; margin-top: -5%;  margin-right: 7%;">
-                            <apex:inputCheckbox label="" onclick="" styleClass="existingMedical"/>
+                            <div style="float:left; margin-top: -6%;  margin-right: 7%; position:absolute; margin-left: 87%;">
+                            
                             </div>
                             
                         </apex:outputText>
@@ -588,6 +638,7 @@
                                                 <th class="slds-size--1-of-3 slds-cell-wrap">
                                                     <span class="slds-text-heading--small">
                                                         <apex:outputText value="{!col.value}"/>
+                                                        
                                                     </span>
                                                     <span class="slds-text-body--small kill-white-space">
                                                         (<apex:commandLink action="{!selectDefaultRecord}" value="select all"><apex:param name="recordId" value="{!col.objId}"/></apex:commandLink>)
@@ -607,6 +658,7 @@
                                                 <apex:inputHidden id="winner" value="{!row.selectedValue}"/>
                                                 <apex:outputText value="{!row.fieldLabel}"/>
                                             </th>
+                                            
                                             <apex:repeat var="col" value="{!row.values}">
                                                 <th class="slds-form-element__control slds-size--1-of-3 slds-cell-wrap">
                                                     <label class="slds-radio">

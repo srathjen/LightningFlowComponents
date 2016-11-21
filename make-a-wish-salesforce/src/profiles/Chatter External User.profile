@@ -60,6 +60,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>AccountFile_AT_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>AccountTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -124,6 +128,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>CaseFile_AT_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>CaseTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -137,14 +145,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>ChangePasswordControllerTest</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterActionTrackHandler</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>ChapterActionTrack_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -189,6 +189,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>Constant_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ContactFile_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -496,6 +500,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>VolunteerActivities_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>VolunteerInterviewRecurrenceTask_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -624,6 +632,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>WishFollowUpTaskAlert_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>WishJourneyController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -641,6 +653,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>WishLiabilityMinorParticipant_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WishLiabilityMinorParticipant_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -672,6 +688,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>batch_FillPresentationDateSchedule_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>batch_FillWishInterviewDate</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -685,6 +705,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>batch_FillWishPresentationDate</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>batch_FillWishPresentationDate_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>

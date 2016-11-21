@@ -1,20 +1,12 @@
-<!-- /*****************************************************************************************************************
-Author      : MST Solutions
-CreatedBy   : Chandrasekar Nallusamy
-Date        : 7/4/2016
-Description :
-1. This visualforce page going to used by active community volunteer to update their profile and view the
-registered and completed orientation and training records
-******************************************************************************************************************* -->
-
 <apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" controller="VolunteerProfile_AC" title="Make-A-Wish Communities | Profile">
     <apex:include pageName="prospective_head" id="phead" />
     <style>
         .table-wrap {overflow-x:auto}
         form > span > fieldset {padding-left:0; padding-right:0; margin-left:.5rem}
-        form > span > fieldset > .col-md-6, form > span > fieldset > .col-md-12 {padding-left:0 !important; padding-right:0 !important;}
         /* smallest input wraps and year input wrap */
-        .col-xs-4.col-sm-3, .col-xs-6.col-sm-3.col-md-3:nth-child(3) {padding-left:0 !important}
+        form > span > fieldset > .col-md-6, form > span > fieldset > .col-md-12, .col-xs-4.col-sm-3, .col-xs-6.col-sm-3.col-md-3:nth-child(3), fieldset > .col-xs-12.col-sm-6 {padding-left:0 !important}
+        .p-info.col-md-2 input {margin:2rem auto}
+        .p-info-btn {font-family:'FuturaStd-Bold', Century Gothic, Arial, sans-serif; border: none; text-transform: uppercase; font-size: .85rem; border-bottom: 2px solid #333; color: #fff; height: 3.75rem;}
 
     </style>
 
@@ -28,12 +20,11 @@ registered and completed orientation and training records
 
                         <h1>Profile</h1>
 
-                        <apex:outputPanel rendered="{!PersonalInfoSave}">
+                        <apex:outputPanel rendered="{!PersonalInfoSave}" styleClass="p-info-btn-base">
                             <!-- --------------------- Contact Details in Output Mode------------------------ -->
 
 
                             <fieldset class="saved">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
                                     <legend>Your Information</legend>
 
                                     <div class="col-md-12">
@@ -81,12 +72,10 @@ registered and completed orientation and training records
                                             <span class="col-xs-6 col-sm-6 text-muted">Expires:&nbsp;<apex:outputField value="{!coiList[0].Expiration_Date__c}" rendered="{!if(coiList.size != 0, true,false)}"/></span>
                                         </div>
                                     </div>
-                                </div>
 
                                 <!-- ---------------------- Additional Details ----------------------- -->
 
 
-                                <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="col-md-12">
                                         <h3 class="row col-xs-12 col-sm-12 col-md-12">Additional Details</h3>
                                     </div>
@@ -139,14 +128,12 @@ registered and completed orientation and training records
                                         </div>
                                     </div>
 
-                                </div>
                             </fieldset>
 
                             <!-- ---------------------- Professional Skills ----------------------- -->
 
 
                             <fieldset class="saved">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
                                     <legend>Professional Skills</legend>
 
                                     <div class="col-xs-12 col-sm-6">
@@ -161,11 +148,9 @@ registered and completed orientation and training records
                                         </div>
                                     </div>
 
-                                </div>
                             </fieldset>
 
                             <fieldset class="saved">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
                                     <legend>Language Skills</legend>
 
                                     <div class="col-xs-12 col-sm-6">
@@ -195,28 +180,27 @@ registered and completed orientation and training records
                                         </div>
                                     </div>
 
-                                </div>
                             </fieldset>
 
 
                             <fieldset class="footer">
                                 <div class="form-group row">
-                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-4 col-md-push-10">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit" value="edit" action="{!EditPersonalInfo}" reRender="formId,uiStates"/>
+                                    <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-4 col-md-push-10 p-info">
+                                      <!-- rerender="formId, uiStates" removed and placed in javascript for compatibility with tether and validation -->
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit p-info-btn" value="edit" action="{!EditPersonalInfo}" reRender="formId, uiStates"/>
                                     </div>
                                 </div>
                             </fieldset>
 
                         </apex:outputPanel>
 
-                        <apex:outputPanel rendered="{!PersonalInfoEdit}">
+                        <apex:outputPanel rendered="{!PersonalInfoEdit}" styleClass="pie">
 
                             <!-- ---------------------------   Contact Information - input  ---------------------------- -->
 
                             <fieldset>
                                 <legend>Your Information<span>Please fill the fields below.</span></legend>
-
-                                <!-- <div class="col-xs-12 col-sm-12 col-md-12" style="padding:0"> -->
+                                <div class="row">
                                     <div class="col-md-12">
                                         <h3>Primary Details</h3>
                                     </div>
@@ -227,33 +211,33 @@ registered and completed orientation and training records
                                                 <apex:outputLabel >Name</apex:outputLabel>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control name-group f-firstname" html-placeholder="Name" maxlength="50" value="{!contactInstance[0].Name}"/>
+                                                <apex:inputText styleClass="form-control name-group firstname" html-placeholder="Name" maxlength="50" value="{!contactInstance[0].Name}"/>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label for="preferredphonenumber" aria-labelledby="Preferred Phone Number">Phone Number</label>
-                                            </div>
+                                          <div class="col-sm-3">
+                                                <apex:outputLabel for="preferredphonenumber" html-aria-labelledby="Preferred Phone Number">Phone Number</apex:outputLabel>
+                                              </div>
                                             <div class="col-xs-8 col-sm-6">
-                                                <apex:inputText styleClass="form-control f-phone" maxlength="10" id="preferredphonenumber" html-placeholder="(000) 000-0000" value="{!contactInstance[0].HomePhone}"  />
+                                                <apex:inputText styleClass="form-control f-phone phonechk" maxlength="10" id="preferredphonenumber" html-placeholder="(000) 000-0000" value="{!contactInstance[0].HomePhone}"  />
                                             </div>
                                             <label for="preferredphone" class="sr-only">Preferred Phone Number Type</label>
                                             <div class="col-xs-4 col-sm-3">
-                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list" id="preferredphonetype" value="{!contactInstance[0].Preferred_Phone_Types__c}" />
+                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required" id="preferredphonetype" value="{!contactInstance[0].Preferred_Phone_Types__c}" />
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <div class="col-sm-3">
+                                          <div class="col-sm-3">
                                                 <apex:outputLabel for="emailaddress">Email Address</apex:outputLabel>
-                                            </div>
+                                              </div>
                                             <div class="col-xs-8 col-sm-6">
-                                                <apex:inputText styleClass="form-control f-emailaddress" id="emailaddress" maxlength="50" html-placeholder="your_email@domain.com" value="{!contactInstance[0].Email}" />
+                                                <apex:inputText styleClass="form-control email" id="emailaddress" maxlength="50" html-placeholder="your_email@domain.com" value="{!contactInstance[0].Email}" />
                                             </div>
                                             <div class="col-xs-4 col-sm-3">
                                                 <apex:outputLabel for="prefemailaddresstype" styleClass="col-sm-3 sr-only">Preferred Email Address Type</apex:outputLabel>
-                                                <apex:inputField styleClass="form-control sm-list c-select f-emailaddresstype" id="prefemailaddresstype" value="{!contactInstance[0].npe01__Preferred_Email__c}" />
+                                                <apex:inputField styleClass="form-control sm-list c-select f-emailaddresstype required" id="prefemailaddresstype" value="{!contactInstance[0].npe01__Preferred_Email__c}" />
                                             </div>
                                         </div>
 
@@ -262,7 +246,7 @@ registered and completed orientation and training records
                                                 <apex:outputLabel for="address">Street</apex:outputLabel>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control f-address" id="address" html-placeholder="0000 NE 00 Ave"  value="{!contactInstance[0].MailingStreet}"  />
+                                                <apex:inputText styleClass="form-control address" id="address" html-placeholder="0000 NE 00 Ave"  value="{!contactInstance[0].MailingStreet}"  />
                                             </div>
                                         </div>
 
@@ -271,7 +255,7 @@ registered and completed orientation and training records
                                                 <apex:outputLabel for="city">City</apex:outputLabel>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control f-city" id="city" html-placeholder="City" maxlength="23" value="{!contactInstance[0].MailingCity}"  />
+                                                <apex:inputText styleClass="form-control city" id="city" html-placeholder="City" maxlength="23" value="{!contactInstance[0].MailingCity}"  />
                                             </div>
                                         </div>
 
@@ -280,18 +264,16 @@ registered and completed orientation and training records
                                                 <apex:outputLabel for="state">State</apex:outputLabel>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:selectList styleClass="form-control f-state c-select" size="1" id="state" multiselect="false" value="{!contactInstance[0].mailingstate}" >
+                                                <apex:selectList styleClass="form-control f-state c-select" size="1" id="state" multiselect="false" value="{!contactInstance[0].mailingstate}">
                                                     <apex:selectOptions value="{!States}" />
                                                 </apex:selectList>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <apex:outputLabel for="zipcode">Postal Code</apex:outputLabel>
-                                            </div>
+                                                <apex:outputLabel styleClass="col-sm-3" for="zipcode">Postal Code</apex:outputLabel>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control f-zipcode numbers-only" id="zipcode" html-placeholder="00000" maxlength="5" value="{!contactInstance[0].mailingpostalcode}"  />
+                                                <apex:inputText styleClass="form-control postalcode numbers-only" id="zipcode" html-placeholder="00000" maxlength="5" value="{!contactInstance[0].mailingpostalcode}"  />
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -299,16 +281,14 @@ registered and completed orientation and training records
                                                 <apex:outputLabel for="county2">County</apex:outputLabel>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control f-county2" html-placeholder="County" value="{!contactInstance[0].County__c}"/>
+                                                <apex:inputText styleClass="form-control county2" html-placeholder="County" value="{!contactInstance[0].County__c}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <label for="birthmonth">Birth Date</label>
-                                            </div>
+                                                <apex:outputLabel styleClass="col-sm-3" for="birthmonth">Birth Date</apex:outputLabel>
                                             <div class="col-xs-12 col-sm-6 col-md-6">
                                                 <!-- <apex:inputText styleClass="form-control col-xs-12 col-sm-12 col-md-12" html-placeholder="Month" maxlength="9" value="{!contactInstance[0].Birth_Month__c}"/> -->
-                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 col-md-12 c-select bmonth" id="birthmonth" value="{!contactInstance[0].Birth_Month__c}"/>
+                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 col-md-12 c-select bmonth required" id="birthmonth" value="{!contactInstance[0].Birth_Month__c}"/>
                                             </div>
                                         </div>
 
@@ -318,7 +298,7 @@ registered and completed orientation and training records
                                             </div>
                                             <div class="col-xs-6 col-sm-3 col-md-3 bday-wrap">
                                                 <!-- <apex:inputText styleClass="form-control numbers-only" maxlength="2" html-placeholder="Day" value="{!contactInstance[0].Birth_Day__c}" /> -->
-                                                <apex:inputField styleClass="form-control c-select bday" id="birthday" value="{!contactInstance[0].Birth_Day__c}"/>
+                                                <apex:inputField styleClass="form-control c-select bday required" id="birthday" value="{!contactInstance[0].Birth_Day__c}"/>
                                             </div>
                                             <div class="col-xs-6 col-sm-3 col-md-3">
                                                 <label for="birthyear" class="col-sm-3 sr-only" aria-label="birthday">Birth Year</label>
@@ -331,33 +311,32 @@ registered and completed orientation and training records
                                         </div>
 
                                     </div>
+
+                                    <!-- column 2 -->
                                     <div class="col-xs-12 col-sm-12 col-md-6">
                                         <div class="form-group row">
                                             <apex:outputLabel styleClass="col-sm-3">Background Check</apex:outputLabel>
                                             <div class="col-sm-6">
-                                                <span class="col-xs-6 col-sm-6 text-muted">Expires:&nbsp;<apex:outputField styleClass="form-control c-select f-bgcheck" value="{!backgroundCheckList[0].Date__c}" rendered="{!if(backgroundCheckList.size != 0, true,false)}"/></span>
+                                                <span class="text-muted">Expires:&nbsp;<apex:outputField styleClass="form-control c-select f-bgcheck" value="{!backgroundCheckList[0].Date__c}" rendered="{!if(backgroundCheckList.size != 0, true,false)}"/></span>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <apex:outputLabel styleClass="col-sm-3">Conflict of Interest</apex:outputLabel>
                                             <div class="col-sm-6">
-                                                <span class="col-xs-6 col-sm-6 text-muted">Expires:&nbsp;<apex:outputField styleClass="form-control c-select" value="{!coiList[0].Expiration_Date__c}" rendered="{!if(coiList.size != 0, true,false)}"/></span>
+                                                <span class="text-muted">Expires:&nbsp;<apex:outputField styleClass="form-control c-select" value="{!coiList[0].Expiration_Date__c}" rendered="{!if(coiList.size != 0, true,false)}"/></span>
                                             </div>
                                         </div>
                                     </div>
-                                <!-- </div> -->
-
+                                </div>
                                 <!-- ----------------------------- Additional details - input ------------------------------ -->
-
-
-                                <!-- <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:2rem; padding:0"> -->
-                                    <div class="col-md-12">
-                                        <h3>Additional Details <span class="text-muted">optional</span></h3>
-                                    </div>
+                                <div class="row">
+                                    <h3 class="col-md-12">Additional Details <span class="text-muted">optional</span></h3>
 
                                     <div class="col-xs-12 col-sm-12 col-md-6">
                                         <div class="form-group row">
-                                            <apex:outputLabel for="homephonenumber" styleClass="col-sm-3">Alternate Phone</apex:outputLabel>
+                                          <div class="col-sm-3">
+                                            <apex:outputLabel for="homephonenumber">Alternate Phone</apex:outputLabel>
+                                          </div>
                                             <div class="col-xs-8 col-sm-6">
                                                 <apex:inputText styleClass="form-control f-phone" maxlength="10" id="homephonenumber" html-placeholder="(000) 000-0000" value="{!contactInstance[0].MobilePhone}" />
                                             </div>
@@ -373,7 +352,7 @@ registered and completed orientation and training records
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-sm-3"><apex:outputLabel for="faxphonenumber">Fax Number</apex:outputLabel></div>
+                                            <apex:outputLabel styleClass="col-sm-3" for="faxphonenumber">Fax Number</apex:outputLabel>
                                             <div class="col-sm-6">
                                                 <apex:inputText styleClass="form-control f-phone" maxlength="10" id="faxphonenumber" html-placeholder="(000) 000-0000" value="{!contactInstance[0].Fax}" />
                                             </div>
@@ -445,6 +424,7 @@ registered and completed orientation and training records
                                     <!-- column 2 (additonal details continued) -->
 
                                     <div class="col-xs-12 col-sm-12 col-md-6">
+
                                         <div class="form-group row">
                                             <div class="col-sm-3">
                                                 <apex:outputLabel >Gender</apex:outputLabel>
@@ -457,9 +437,7 @@ registered and completed orientation and training records
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="col-sm-3">
-                                                <apex:outputLabel >Race/Ethnicity</apex:outputLabel>
-                                            </div>
+                                                <apex:outputLabel styleClass="col-sm-3">Race / Ethnicity</apex:outputLabel>
                                             <div class="col-sm-6">
                                                 <!--  <apex:inputText styleClass="form-control f-race-eth" maxlength="50" html-placeholder="Race / Ethnicity" value="{!contactInstance[0].Race_Ethnicity__c}"/> -->
                                                 <apex:selectList id="race" styleClass="form-control c-select multi lang" size="1" multiselect="true" value="{!raceEthinicityList}">
@@ -468,8 +446,7 @@ registered and completed orientation and training records
                                             </div>
                                         </div>
                                     </div>
-
-                                <!-- </div> -->
+                                  </div>
                             </fieldset>
 
                             <!-- ------------------------------ Professional Skills - input ------------------------------- -->
@@ -506,7 +483,7 @@ registered and completed orientation and training records
                                     <div class="form-group row">
                                         <div class="col-sm-3"><apex:outputLabel for="lang">Language</apex:outputLabel></div>
                                         <div class="col-sm-6">
-                                            <apex:selectList styleClass="form-control c-select multi lang" value="{!languagesList}" size="1" id="lang" multiselect="true">
+                                            <apex:selectList styleClass="form-control c-select multi lang language" value="{!languagesList}" size="1" id="lang" multiselect="true">
                                                 <apex:selectOptions value="{!Languages}" />
                                             </apex:selectList>
                                         </div>
@@ -523,7 +500,7 @@ registered and completed orientation and training records
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label for="read">Read</label></div>
                                         <div class="col-sm-6">
-                                            <apex:selectList styleClass="form-control c-select multi" id="read" multiselect="true" value="{!langToRead}" >
+                                            <apex:selectList styleClass="form-control c-select multi language" id="read" multiselect="true" value="{!langToRead}">
                                                 <apex:selectOptions value="{!Languages}" />
                                             </apex:selectList>
                                         </div>
@@ -531,7 +508,7 @@ registered and completed orientation and training records
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label for="write">Write</label></div>
                                         <div class="col-sm-6">
-                                            <apex:selectList styleClass="form-control c-select multi" id="write" multiselect="true" value="{!langToWrite}" >
+                                            <apex:selectList styleClass="form-control c-select multi language" id="write" multiselect="true" value="{!langToWrite}">
                                                 <apex:selectOptions value="{!Languages}" />
                                             </apex:selectList>
                                         </div>
@@ -539,7 +516,7 @@ registered and completed orientation and training records
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label for="speak">Speak</label></div>
                                         <div class="col-sm-6">
-                                            <apex:selectList styleClass="form-control c-select multi" id="speak" multiselect="true" value="{!langToSpeak}" >
+                                            <apex:selectList styleClass="form-control c-select multi language" id="speak" multiselect="true" value="{!langToSpeak}">
                                                 <apex:selectOptions value="{!Languages}" />
                                             </apex:selectList>
                                         </div>
@@ -547,7 +524,7 @@ registered and completed orientation and training records
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label for="understand">Understand</label></div>
                                         <div class="col-sm-6">
-                                            <apex:selectList styleClass="form-control c-select multi" id="understand" multiselect="true" value="{!langToUndetstand}" >
+                                            <apex:selectList styleClass="form-control c-select multi language" id="understand" multiselect="true" value="{!langToUndetstand}">
                                                 <apex:selectOptions value="{!Languages}" />
                                             </apex:selectList>
                                         </div>
@@ -558,21 +535,22 @@ registered and completed orientation and training records
                             <fieldset class="footer">
                                 <div class="form-group row">
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-6 col-md-push-10">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Save" action="{!SavePersonalInfo}" reRender="formId"/>
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-p-save" value="Save" action="{!SavePersonalInfo}" />
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-pull-2 col-md-push-6">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel" action="{!CancelPersonalInfo}" reRender="formId" immediate="true" />
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel" action="{!CancelPersonalInfo}" reRender="formId,uiStates" immediate="true" />
                                     </div>
+                                    <!-- <input type="submit" value="submit" class="btn-p-save" /> -->
                                 </div>
                             </fieldset>
-                        </apex:outputPanel>                        
-                        
-                        
+                        </apex:outputPanel>
+
+
                          <!-- --------------------------- Award and Recognition ---------------------------- -->
                            <apex:pageBlock rendered="{!awardsRecognitionList.size!=0}">
                             <fieldset class="footer">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
-                                    <legend>Award and Recognition</legend> 
+                                    <legend>Awards and Recognition</legend>
+
                                    <div class="col-xs-12 col-sm-12 col-md-12">
                                             <div class="row table-wrap">
                                                 <apex:pageblocktable value="{!awardsRecognitionList}" styleClass="table table-maw" var="award" id="dataTab1">
@@ -585,71 +563,70 @@ registered and completed orientation and training records
                                                         </apex:outputText>
                                                    </apex:Column>
                                                 </apex:pageblocktable>
-                                               
+
                                             </div>
-                                        </div>
                                         </div>
                             </fieldset>
                         </apex:pageBlock>
                         <!-- ---------------------- Award and Recognition ----------------------- -->
-                        
-                        
-                        
 
                         <apex:pageBlock >
 
                             <!-- --------------------------- Orientation and Training ---------------------------- -->
 
 
-                            <fieldset class="footer">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
+                            <fieldset class="saved">
+
                                     <legend>Class History</legend>
 
+                                    <h3>Orientation Details</h3>
                                     <div class="col-xs-12 col-sm-12 col-md-12">
-                                        <h3>Orientation Details</h3>
-                                        <div class="col-xs-12 col-sm-12 col-md-12">
-                                            <div class="row table-wrap">
-                                                <apex:pageblocktable value="{!orientationList}" styleClass="table table-maw" var="a" id="dataTab1" rendered="{!orientationList.size>0}">
-                                                    <apex:column headervalue="Name" value="{!a.OrientationName}"/>
-                                                    <apex:column headervalue="Chapter Name" value="{!a.chapterName}"/>
+                                        <div class="row table-wrap">
+                                            <apex:pageblocktable value="{!orientationList}" styleClass="table table-maw" var="a" id="dataTab1" rendered="{!orientationList.size>0}">
+                                                <apex:column headervalue="Name" value="{!a.OrientationName}"/>
+                                                <apex:column headervalue="Chapter Name" value="{!a.chapterName}"/>
 
-                                                    <apex:column headervalue="Date">
-                                                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
-                                                        <apex:param value="{!a.orientationDate}" />
-                                                        </apex:outputText>
-                                                   </apex:Column>
-                                                    <apex:column headervalue="Start Time" value="{!a.startTime}"/>
-                                                    <apex:column headervalue="End Time" value="{!a.endTime}"/>
-                                                    <apex:column headervalue="Location" value="{!a.location}"/>
-                                                    <apex:column headerValue="Record Type" value="{!a.recordTypeName}"/>
-                                                    <apex:column headerValue="Action" value="{!a.attendance}"/>
-                                                </apex:pageblocktable>
-                                                <apex:outputText rendered="{!orientationList.size ==0}"><p>No Orientation Records Found</p></apex:outputText>
-                                            </div>
-                                        </div>
-
-                                        <h3><a href="/VolunteerActiveTraining_VF">Training Details</a></h3>
-                                        <div class="col-xs-12 col-sm-12 col-md-12">
-                                            <div class="row table-wrap">
-                                                <apex:pageblocktable value="{!trainingList}" styleClass="table table-maw" var="a" id="dataTab2" rendered="{!trainingList.size>0}">
-                                                     <apex:column headervalue="Name" value="{!a.OrientationName}"/>
-                                                    <apex:column headervalue="Chapter Name" value="{!a.chapterName}"/>
-
-                                                   <apex:column headervalue="Date">
-                                                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
-                                                        <apex:param value="{!a.orientationDate}" />
-                                                        </apex:outputText>
-                                                   </apex:Column>
-                                                    <apex:column headervalue="Start Time" value="{!a.startTime}"/>
-                                                    <apex:column headervalue="End Time"  value="{!a.endTime}"/>
-                                                    <apex:column headervalue="Location"  value="{!a.location}"/>
-                                                    <apex:column headerValue="Record Type" value="{!a.recordTypeName}"/>
-                                                    <apex:column headerValue="Action" value="{!a.attendance}"/>
-                                                </apex:pageblocktable>
-                                                <apex:outputText rendered="{!trainingList.size ==0}"><span class="text-muted">No training records found</span></apex:outputText>
-                                            </div>
+                                                <apex:column headervalue="Date">
+                                                    <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                                    <apex:param value="{!a.orientationDate}" />
+                                                    </apex:outputText>
+                                               </apex:Column>
+                                                <apex:column headervalue="Start Time" value="{!a.startTime}"/>
+                                                <apex:column headervalue="End Time" value="{!a.endTime}"/>
+                                                <apex:column headervalue="Location" value="{!a.location}"/>
+                                                <apex:column headerValue="Record Type" value="{!a.recordTypeName}"/>
+                                                <apex:column headerValue="Action" value="{!a.attendance}"/>
+                                            </apex:pageblocktable>
+                                            <apex:outputText rendered="{!orientationList.size ==0}"><span class="text-muted">No Orientation Records Found</span></apex:outputText>
                                         </div>
                                     </div>
+
+                                    <h3>Training Details</h3>
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="row table-wrap">
+                                            <apex:pageblocktable value="{!trainingList}" styleClass="table table-maw" var="a" id="dataTab2" rendered="{!trainingList.size>0}">
+                                                 <apex:column headervalue="Name" value="{!a.OrientationName}"/>
+                                                <apex:column headervalue="Chapter Name" value="{!a.chapterName}"/>
+
+                                               <apex:column headervalue="Date">
+                                                    <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                                    <apex:param value="{!a.orientationDate}" />
+                                                    </apex:outputText>
+                                               </apex:Column>
+                                                <apex:column headervalue="Start Time" value="{!a.startTime}"/>
+                                                <apex:column headervalue="End Time"  value="{!a.endTime}"/>
+                                                <apex:column headervalue="Location"  value="{!a.location}"/>
+                                                <apex:column headerValue="Record Type" value="{!a.recordTypeName}"/>
+                                                <apex:column headerValue="Action" value="{!a.attendance}"/>
+                                            </apex:pageblocktable>
+                                            <apex:outputText rendered="{!trainingList.size ==0}"><span class="text-muted">No training records found</span></apex:outputText>
+                                        </div>
+                                    </div>
+
+                            </fieldset>
+                            <fieldset class="footer">
+                                <div class="form-group row">
+                                        <input type="button" class="col-xs-12 col-sm-5 col-md-2 col-sm-push-4 col-md-push-10 btn-md" onclick="location.href='/VolunteerActiveTraining_VF';" value="Trainings" />
                                 </div>
                             </fieldset>
                         </apex:pageBlock>
@@ -659,7 +636,6 @@ registered and completed orientation and training records
 
 
                             <fieldset class="saved">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
                                     <legend>Employment</legend>
 
                                     <div class="col-xs-12 col-sm-6">
@@ -695,17 +671,16 @@ registered and completed orientation and training records
                                             <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField value="{!contactInstance[0].May_We_Contact_You_at_Work__c}"/></span>
                                         </div>
                                         <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-10 col-sm-10">WOULD YOU LIKE TO SHARE THE POWER OF A WISH<sup>®</sup> AT WORK BY LEARNING MORE ABOUT OUR WISHMAKERS AT WORK<sup>®</sup> PROGRAM? </apex:outputLabel>
+                                            <apex:outputLabel styleClass="col-xs-10 col-sm-10">Would you like to share the power of a wish<sup>®</sup> at work by learning more about our wishmakers at work<sup>®</sup> program? </apex:outputLabel>
                                             <span class="col-xs-2 col-sm-2 text-muted"><apex:outputField value="{!contactInstance[0].Interested_involved_with_Make_A_Wish__c}"/></span>
                                         </div>
                                     </div>
-                                </div>
                             </fieldset>
 
                             <fieldset class="footer">
                                 <div class="form-group row">
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-4 col-md-push-10">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit" value="edit" action="{!EditEmployeeInfo}" reRender="formId"/>
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit" value="edit" action="{!EditEmployeeInfo}" reRender="formId,uiStates"/>
                                     </div>
                                 </div>
                             </fieldset>
@@ -720,18 +695,14 @@ registered and completed orientation and training records
 
                                 <div class="col-xs-12 col-sm-12 col-md-6">
                                     <div class="form-group row">
-                                        <div class="col-sm-3">
-                                            <apex:outputLabel >Employer Name</apex:outputLabel>
-                                        </div>
+                                            <apex:outputLabel styleClass="col-sm-3">Employer Name</apex:outputLabel>
                                         <div class="col-sm-6">
                                             <apex:inputText styleClass="form-control name-group f-empname" maxlength="50" html-placeholder="Name" value="{!contactInstance[0].Employer__c}"/>
                                         </div>
                                     </div>
 
                                     <div class="form-group row">
-                                        <div class="col-sm-3">
-                                            <apex:outputLabel for="empphonenumber">Phone Number</apex:outputLabel>
-                                        </div>
+                                            <apex:outputLabel styleClass="col-sm-3" for="empphonenumber">Phone Number</apex:outputLabel>
                                         <div class="col-sm-6">
                                             <apex:inputText styleClass="form-control f-phone" id="empphonenumber" maxlength="10" html-placeholder="000-000-0000" value="{!contactInstance[0].Work_Phone__c}"/>
                                         </div>
@@ -767,9 +738,7 @@ registered and completed orientation and training records
                                     </div>
 
                                     <div class="form-group row">
-                                        <div class="col-sm-3">
-                                            <apex:outputLabel for="emppostalcode">Postal Code</apex:outputLabel>
-                                        </div>
+                                            <apex:outputLabel styleClass="col-sm-3" for="emppostalcode">Postal Code</apex:outputLabel>
                                         <div class="col-sm-6">
                                             <apex:inputText styleClass="form-control f-emppostalcode numbers-only" maxlength="5" id="emppostalcode" html-placeholder="00000" value="{!contactInstance[0].Zip_emp__c}" />
                                         </div>
@@ -784,15 +753,17 @@ registered and completed orientation and training records
                                             <label for="employer-maywecontact" aria-labelledby="Company Interest in Make-A-Wish">May we contact your work?</label>
                                         </div>
                                         <div class="col-sm-3">
-                                            <apex:selectList styleClass="form-control c-select sm-list emp" id="employer-maywecontact" value="{!contactInstance[0].May_We_Contact_You_at_Work__c}" size="1" multiselect="false" >
+                                            <apex:selectList styleClass="form-control c-select sm-list emp" id="employer-maywecontact" value="{!contactInstance[0].May_We_Contact_You_at_Work__c}" size="1" multiselect="false">
                                                 <apex:selectOptions value="{!ConatctAtWork}" />
                                             </apex:selectList>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="employer-company-interest" class="col-sm-9" aria-labelledby="Company Interest in Make-A-Wish">WOULD YOU LIKE TO SHARE THE POWER OF A WISH<sup>®</sup> AT WORK BY LEARNING MORE ABOUT OUR WISHMAKERS AT WORK<sup>®</sup> PROGRAM?</label>
+                                      <div class="col-sm-9">
+                                        <label for="employer-company-interest" aria-labelledby="Company Interest in Make-A-Wish">Would you like to share the power of a wish<sup>®</sup> at work by learning more about our wishmakers at work<sup>®</sup> program? </label>
+                                      </div>
                                         <div class="col-sm-3">
-                                            <apex:selectList styleClass="form-control c-select sm-list emp" id="employer-company-interest" value="{!contactInstance[0].Interested_involved_with_Make_A_Wish__c}" size="1" multiselect="false" >
+                                            <apex:selectList styleClass="form-control c-select sm-list emp" id="employer-company-interest" value="{!contactInstance[0].Interested_involved_with_Make_A_Wish__c}" size="1" multiselect="false">
                                                 <apex:selectOptions value="{!Make_A_Wish}" />
                                             </apex:selectList>
                                         </div>
@@ -804,10 +775,10 @@ registered and completed orientation and training records
                             <fieldset class="footer">
                                 <div class="form-group row">
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-6 col-md-push-10">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Save" action="{!SaveEmployeeInfo}" reRender="formId"/>
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Save" action="{!SaveEmployeeInfo}" reRender="formId,uiStates"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-pull-2 col-md-push-6">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel" action="{!CancelEmpInfo}" reRender="formId" immediate="true"/>
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel" action="{!CancelEmpInfo}" reRender="formId,uiStates" immediate="true"/>
                                     </div>
                                 </div>
                             </fieldset>
@@ -818,7 +789,6 @@ registered and completed orientation and training records
 
 
                             <fieldset class="saved">
-                                <div class="col-xs-12 col-sm-12 col-md-12">
                                     <legend>Emergency Contact</legend>
                                     <div class="col-xs-12 col-sm-6">
                                         <div class="row">
@@ -834,13 +804,12 @@ registered and completed orientation and training records
                                             <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Emergency_Contact_Phone__c}"/></span>
                                         </div>
                                     </div>
-                                </div>
                             </fieldset>
 
                             <fieldset class="footer">
                                 <div class="form-group row">
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-4 col-md-push-10">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit" value="edit" action="{!EditEmergencyInfo}" reRender="formId"/>
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md edit" value="edit" action="{!EditEmergencyInfo}" reRender="formId,uiStates"/>
                                     </div>
                                 </div>
                             </fieldset>
@@ -856,14 +825,14 @@ registered and completed orientation and training records
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label for="e-contact" aria-labelledby="Emergency Contact Name">Contact Name</label></div>
                                         <div class="col-sm-6">
-                                            <apex:inputText styleClass="form-control" id="e-contact" maxlength="50" value="{!contactInstance[0].Emergency_Contact__c}" html-placeholder="First and Last Name" />
+                                            <apex:inputText styleClass="form-control fullname" id="e-contact" maxlength="50" value="{!contactInstance[0].Emergency_Contact__c}" html-placeholder="First and Last Name" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label for="e-relationship" aria-labelledby="Emergency Contact Relationship">Relationship</label></div>
                                         <div class="col-sm-6">
                                             <!-- <apex:inputText styleClass="form-control c-select sm-list ec" maxlength="30" id="e-relationship" value="{!contactInstance[0].Relationship__c}" /> -->
-                                            <apex:selectList styleClass="form-control c-select sm-list ec" size="1" id="relationship" multiselect="false" value="{!contactInstance[0].Emergency_Contact_Relationship__c}">
+                                            <apex:selectList styleClass="form-control c-select sm-list ec relationship" size="1" id="relationship" multiselect="false" value="{!contactInstance[0].Emergency_Contact_Relationship__c}">
                                                 <apex:selectOptions value="{!RelationShip}" />
                                             </apex:selectList>
                                         </div>
@@ -871,7 +840,7 @@ registered and completed orientation and training records
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label for="e-contact-phone" aria-labelledby="Emergency Contact Phone">Contact Phone</label></div>
                                         <div class="col-sm-6">
-                                            <apex:inputText styleClass="form-control f-phone" id="e-contact-phone" maxlength="10" value="{!contactInstance[0].Emergency_Contact_Phone__c}" html-placeholder="(000) 000-0000" />
+                                            <apex:inputText styleClass="form-control f-phone phonechk" id="e-contact-phone" maxlength="10" value="{!contactInstance[0].Emergency_Contact_Phone__c}" html-placeholder="(000) 000-0000" />
                                         </div>
                                     </div>
                                 </div>
@@ -880,10 +849,10 @@ registered and completed orientation and training records
                             <fieldset class="footer">
                                 <div class="form-group row">
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-6 col-md-push-10">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Save" action="{!SaveEmergencyInfo}" reRender="formId"/>
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-e-save" value="Save" action="{!SaveEmergencyInfo}"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-4 col-md-2 col-sm-pull-2 col-md-push-6">
-                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel" action="{!CancelEmergencyInfo}" reRender="formId" immediate="true"/>
+                                        <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md" value="Cancel" action="{!CancelEmergencyInfo}" reRender="formId,uiStates" immediate="true"/>
                                     </div>
                                 </div>
                             </fieldset>
@@ -899,35 +868,61 @@ registered and completed orientation and training records
         <!-- <script src="https://files-stackablejs.netdna-ssl.com/stacktable.min.js"></script> -->
         <!-- fallback -->
         <!-- <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/stacktable.min.js')}"><\/script>')</script> -->
-
-        <!-- chosen select-->
-        <!-- <script src="{!URLFOR($Resource.ux_chosen,'chosen.jquery.min.js')}" type="text/javascript"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.min.js" integrity="sha256-sLYUdmo3eloR4ytzZ+7OJsswEB3fuvUGehbzGBOoy+8=" crossorigin="anonymous"></script>
-
-        <!-- masked input -->
-        <script src="{!URLFOR($Resource.prospective_assets,'web/js/jq.maskedinput.min.js')}" type="text/javascript"></script>
         <script>
           $('head').prepend('<title>Profile - Communities | Make-A-Wish\u00AE America</title>');
         </script>
+        <!-- chosen select-->
+        <!-- <script src="{!URLFOR($Resource.ux_chosen,'chosen.jquery.min.js')}" type="text/javascript"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.min.js" integrity="sha256-sLYUdmo3eloR4ytzZ+7OJsswEB3fuvUGehbzGBOoy+8=" crossorigin="anonymous"></script>
+        <!-- masked input -->
+        <script src="{!URLFOR($Resource.prospective_assets,'web/js/jq.maskedinput.min.js')}" type="text/javascript"></script>
+        <!-- validate forms -->
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
+        <!-- validate form (additional methods) -->
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
+
         <apex:outputPanel id="uiStates">
           <script>
-            // format phone/date fields
-            // target desktop
-            if (window.matchMedia("(min-width: 47.5rem)").matches) {
-                $(".f-phone").mask("(999) 999-9999").attr('maxlength','15');
-            }
+          // format phone/date fields
+          // target desktop
+          if (window.matchMedia("(min-width: 47.5rem)").matches) {
+              $(".f-phone").mask("(999) 999-9999").attr('maxlength','15');
 
-            // fire x amount of times
-            function setIntervalX(callback, delay, repetitions) {
-                var x = 0;
-                var intervalID = window.setInterval(function () {
-                    callback();
-                    if (++x === repetitions) {
-                        window.clearInterval(intervalID);
-                    }
-                }, delay);
-            }
+              // tethered personal edit button
 
+              $(document).ready(function(){
+                $('.p-info').css({padding:'0', width:'9.8rem'});
+                new Tether({
+                  element: '.p-info',
+                  target: '.p-info-btn-base',
+                  attachment: 'bottom right',
+                  targetAttachment: 'bottom right',
+                  targetModifier: 'visible'
+                });
+              });
+              $('.p-info-btn').on('click', function(){
+                setIntervalX(function () {
+                  init();
+                  // taken from already rendered button in order to control submit (rerender="formId, uiStates").
+                  return A4J.AJAX.Submit('j_id0:formId',event,{'similarityGroupingId':'j_id0:formId:j_id187','html5Validate':true,'parameters':{'j_id0:formId:j_id187':'j_id0:formId:j_id187'} } );
+                }, 50, 2);
+                // $('.p-info-btn-base').hide();
+                // $('.pie').show();
+              });
+          }
+
+          // fire x amount of times
+          function setIntervalX(callback, delay, repetitions) {
+              var x = 0;
+              var intervalID = window.setInterval(function () {
+                  callback();
+                  if (++x === repetitions) {
+                      window.clearInterval(intervalID);
+                  }
+              }, delay);
+          }
+
+          function init(){
             $(".f-phone").attr('type','tel');
 
             //$(".f-phone").mask("(999) 999-9999");
@@ -939,30 +934,30 @@ registered and completed orientation and training records
                 $(".bday option:first, #j_id0\\:formId\\:birthday option:first").remove();
                 $(".bday, #j_id0\\:formId\\:birthday").prepend('<option disabled="disabled" selected="selected">Day</option>');
                 $(".bday, #j_id0\\:formId\\:birthday").addClass('c-select');
-                $(".bday, #j_id0\\:formId\\:birthday").trigger("chosen:updated");
+                //$(".bday, #j_id0\\:formId\\:birthday").trigger("chosen:updated");
             }
-
-            $('.bday-wrap').find('select').addClass('form-control col-xs-12 col-sm-12 c-select bday');
-
+            setIntervalX(function () {
+              $('.bday-wrap').find('select').addClass('form-control col-xs-12 col-sm-12 c-select bday required');
+            }, 50, 5);
             $('.bmonth, #j_id0\\:formId\\:birthmonth').on('change', function() {
-              console.log('bmonth trigger');
-                setTimeout(function() {
-
+                //setTimeout(function() {
                     //formatBirthday();
-                }, 200);
+                //}, 200);
 
                 setIntervalX(function () {
-                  $("#j_id0\\:formId\\:birthday").chosen({disable_search:"true", placeholder_text_single: "Day", width:"100%"});
-
+                  //$("#j_id0\\:formId\\:birthday").chosen({disable_search:"true", placeholder_text_single: "Day", width:"100%"});
+                  $('.bday-wrap').find('select').addClass('form-control col-xs-12 col-sm-12 c-select bday required');
                   formatBirthday();
                 }, 50, 2);
             });
 
-            //$("select.title").prepend('<option disabled="disabled" selected="selected">Please select a Title</option>');
-            $(".bmonth option:first").remove();
-            $(".bmonth").prepend('<option disabled="disabled">Month</option>');
-            formatBirthday();
+            //$(".bmonth option:first").remove();
+            //$(".bmonth").prepend('<option disabled="disabled">Month</option>');
 
+            if ($(".bday option") == "" ){
+              formatBirthday()
+            }
+            $(".bday, #j_id0\\:formId\\:birthday").addClass('c-select required');
             // Birth year
             //if ($('.byear option:selected') ==''){
             //  $(".byear").prepend('<option disabled="disabled" selected="selected">Year</option>');
@@ -970,8 +965,8 @@ registered and completed orientation and training records
             //  $(".byear").prepend('<option disabled="disabled">Year</option>');
             //}
             $(".bmonth").chosen({disable_search:"true", placeholder_text_single: "Month", width:"100%"});
-            $(".bday").chosen({disable_search:"true", placeholder_text_single: "Day", width:"100%"});
-            $(".byear").chosen({disable_search:"true", placeholder_text_single: "Year", width:"100%"});
+            //$(".bday").chosen({disable_search:"true", placeholder_text_single: "Day", width:"100%"});
+            //$(".byear").chosen({disable_search:"true", placeholder_text_single: "Year", width:"100%"});
 
             // Employement
             //if ($('.emp option:selected') ==''){
@@ -989,12 +984,13 @@ registered and completed orientation and training records
             //}
 
             // State
-            //if ((".f-state option:selected") ==''){
+            // if ((".f-state option:selected") == ''){
             //    $('.f-state option:selected').remove(); // remove first op
             //    $(".f-state").prepend('<option disabled="disabled" selected="selected">Please select a State</option>');
-            //} else {
+            // } else {
             //    $(".f-state").prepend('<option disabled="disabled">Please select a State</option>');
-            //}
+            // }
+
             $(".f-state").chosen({
                 no_results_text: "State not found",
                 placeholder_text_single: "Please select a State",
@@ -1017,9 +1013,10 @@ registered and completed orientation and training records
                 $('.lang').on('change', function() {
                     if($(this).val() != null){
                         if ($(this).val().indexOf('Other') != -1){
-                            $('.lang-note').attr('placeholder', "Please specify other languages");
+                            $('.lang-note').attr('placeholder', "Please specify other language(s)").addClass('required');
                         } else {
-                            $('.lang-note').attr('placeholder', "Additional details (Optional)").val('');
+                            $('.lang-note').attr('placeholder', "Additional details (Optional)").val('').removeClass('required');
+                            $('.lang-note').valid();
                         }
                     }
                 });
@@ -1045,10 +1042,6 @@ registered and completed orientation and training records
                     }
                 }
             }
-
-            // persist chosen.js selects - necessary for when the form saves
-            // window.setInterval(function() {
-            // }, 500);
 
             // remove chosen "x" button on ios and android
             if ( navigator.userAgent.match(/iPad/i) != null || navigator.userAgent.match(/Android/i) != null || navigator.userAgent.match(/iPhone/i) != null ) {
@@ -1088,32 +1081,225 @@ registered and completed orientation and training records
                         // Allow: Ctrl+X
                         (e.keyCode == 88 && e.ctrlKey === true) ||
                         // Allow: home, end, left, right
-                        (e.keyCode >= 35 && e.keyCode <= 39)) {
+                        (e.keyCode>= 35 && e.keyCode <= 39)) {
                         // let it happen, don't do anything
                         return;
                     }
                     // Ensure that it is a number and stop the keypress
-                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode> 57)) && (e.keyCode < 96 || e.keyCode> 105)) {
                         e.preventDefault();
                     }
                 });
             }
 
-            //$(".edit").on('click', function(){
-                // setTimeout(function() {
-                //  console.log("Test");
-                //  $(".f-phone").mask("(999) 999-9999");
-                //  numOnly();
-                //}, 1500);
+            $(".f-phone").mask("(999) 999-9999");
+            numOnly();
+            langNotes();
 
-                //setIntervalX(function () {
-                //    console.log("Test");
-                    $(".f-phone").mask("(999) 999-9999");
-                    numOnly();
-                    langNotes();
-                //}, 500, 3);
-            //});
+            // form validation defaults
+            $.validator.setDefaults({
+              // required for chosen.js
+              ignore: ":hidden:not(.c-select)"
+            });
+            $.validator.addMethod("fullname", function (value) {
+              return /\w+\s+\w+/.test(value);
+            });
+            // validation rules and methods
+            $('form').validate({
+                errorElement: "em",
+                errorPlacement: function ( error, element ) {
+                    // Add the `help-block` class to the error element
+                    error.addClass( "help-block" );
+                    // Add `has-feedback` class to the parent div.form-group in order to add icons to inputs
+                    element.parents( ".col-sm-6" ).addClass( "has-feedback" );
 
+                    if (element.hasClass("c-select") ){
+                        var selectParent = $( element ).parents(".col-sm-6").children(".chosen-container");
+                        error.insertAfter( selectParent );
+                    } else {
+                        error.insertAfter( element );
+                    }
+                },
+                highlight: function ( element, errorClass, validClass ) {
+                    var elementParents = $( element ).parents( ".col-sm-6, .col-sm-3, .col-xs-6 span" );
+                    // non-div-wrapped label
+                    $(elementParents).removeClass( "has-success" ).addClass( "has-error" ).prev('label').css('color','red');
+                    // div wrapped label
+                    $(elementParents).removeClass( "has-success" ).addClass( "has-error" ).prev('div').children('label').css('color','red');
+                    $(elementParents).children(".chosen-container").children('.chosen-choices, .chosen-single').css('border','1px solid red');
+                    $(elementParents).children( "input, select, textarea" ).css('border','1px solid red');
+                    $(elementParents).children('label').css('border','1px solid red');
+                },
+                unhighlight: function ( element, errorClass, validClass ) {
+                    var elementParents = $( element ).parents( ".col-sm-6, .col-sm-3, .col-xs-6 span" );
+                    $(elementParents).removeClass( "has-error" ).prev( "label" ).css('color','');
+                    $(elementParents).removeClass( "has-error" ).prev('div').children( "label" ).css('color','');
+                    $(elementParents).children(".chosen-container").children('.chosen-choices, .chosen-single').css('border','');
+                    $(elementParents).children( "input, select, label, textarea" ).css('border','');
+                    $(elementParents).children( ".help-block" ).remove();
+                }
+            });
+
+            function formValidationRules() {
+                // add validation rules for common fields
+                $("input.firstname").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        minlength: 2,
+                        maxlength: 40,
+                        messages: {
+                            required: "Oops! Please enter a first name",
+                            minlength: "Oops! Your first name must have more than 2 letters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+                });
+                $("input.lastname").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        minlength: 2,
+                        maxlength: 40,
+                        messages: {
+                            required: "Oops! Please enter a last name",
+                            minlength: "Oops! Your first name must have more than 2 letters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+                });
+                $("input.phonechk").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        phoneUS: true,
+                        minlength: 10,
+                        maxlength: 15,
+                        messages: {
+                            required: "Oops! Please enter a phone number",
+                            //phoneUS: "Oops! Must be a valid US number",
+                            number: "Only numbers are accepted",
+                            minlength: "Opps! Please enter at least 10 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+                });
+                $("input.email").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        email: true,
+                        messages: {
+                            required: "Oops! Please enter a valid email address",
+                            email: "Oops! You've entered an invalid email address"
+                        }
+                    });
+                });
+                $("input.city").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 22,
+                        messages: {
+                            required: "Oops! Please enter a US city",
+                            minlength: "Oops! Please enter at least 3 characters",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+                });
+                $("input.postalcode").each(function(){
+                    $(this).rules("add", {
+                        required: true,
+                        digits: true,
+                        minlength: 5,
+                        maxlength: 9,
+                        messages: {
+                            required: "Oops! Please enter a valid US postal code",
+                            digits: "Oops! Please only enter digits",
+                            minlength: "Oops! Please enter a minimum of 5 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+                });
+                $('.language').each(function(){
+                  $(this).chosen().change(function(){
+                      $(this).valid();
+                  });
+                  $(this).rules("add", {
+                    required: true,
+                    messages: {
+                      required: "Oops! Please select a language"
+                    }
+                  });
+                });
+
+                // add rules for all other fields
+                $("input.address").rules("add", {
+                    required: true,
+                    minlength: 5,
+                    maxlength: 40,
+                    messages: {
+                        required: "Oops! Please enter an address",
+                        minlength: "Oops! Please enter a minimum of 5 characters",
+                        maxlength: "We're sorry, you've reached the maximum allowed characters"
+                    }
+                });
+                $("select.f-state").on('change',function(){
+                  $(this).chosen().change(function(){
+                      $(this).valid();
+                  });
+                  $(this).rules("add", {
+                      required: true,
+                      messages: {
+                          required: "Oops! Please select a state"
+                      }
+                  });
+                });
+                $("select.relationship").on('change',function(){
+                  $(this).chosen().change(function(){
+                      $(this).valid();
+                  });
+                  $(this).rules("add", {
+                      required: true,
+                      messages: {
+                          required: "Oops! Please select the relationship"
+                      }
+                  });
+                })
+                $(".fullname").rules("add", {
+                  required: true,
+                  fullname: true,
+                  minlength: 5,
+                  maxlength: 40,
+                  messages: {
+                    required: "Oops! Please enter a first and last name",
+                    fullname: "Oops! Please also enter a last name",
+                    minlength: "Oops! The full name must have more than 4 letters",
+                    maxlength: "We're sorry, you've reached the maximum allowed characters"
+                  }
+              });
+            }
+            formValidationRules();
+            // trigger validation
+            // personal save btn
+            $('.btn-p-save').on('click', function() {
+              if ($('form').valid()){
+                $('form').submit();
+                console.log('personal form submitted');
+                // taken from rendered button in order to control submit (rerender="formId, uiStates")
+                return A4J.AJAX.Submit('j_id0:formId',event,{'similarityGroupingId':'j_id0:formId:j_id320','html5Validate':true,'parameters':{'j_id0:formId:j_id320':'j_id0:formId:j_id320'} } );
+                // $('pie').hide();
+                // $('.p-info-btn-base').show();
+                //return false; // prevent normal form posting
+              }
+            });
+            // emergency save btn
+            $('.btn-e-save').on('click', function() {
+              if ($('form').valid()){
+                $('form').submit();
+                console.log('emergecy Form submitted');
+                // taken from rendered button in order to control submit (rerender="formId, uiStates")
+                return A4J.AJAX.Submit('j_id0:formId',event,{'similarityGroupingId':'j_id0:formId:j_id466','html5Validate':true,'parameters':{'j_id0:formId:j_id466':'j_id0:formId:j_id466'} } );
+                //return false; // prevent normal form posting
+              }
+            });
+          } init();
 
           </script>
         </apex:outputPanel>

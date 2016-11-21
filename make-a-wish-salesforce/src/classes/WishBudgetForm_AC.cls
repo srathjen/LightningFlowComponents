@@ -114,7 +114,7 @@ public class WishBudgetForm_AC{
                 if(RecentApproverID!= null)
                 {
                    //if(userdata.Id == strAppvalName ){
-                   if(userdata.Id == RecentApproverID){
+                   if(userdata.Profile.Name == 'System Administrator' || userdata.Id == RecentApproverID){
                         UserIdentiy=false;
                     }
                     else{
