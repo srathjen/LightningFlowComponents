@@ -4,10 +4,10 @@ global class DiagnosisVerficationRemainder_AC implements Database.Batchable<sObj
          String ReferredStatus = 'Referred';
          String partAStatus = 'Pending Diagnosis Verification';
          
-         String query = 'SELECT Id, Status, OwnerId, Referred_Date__c, Part_A_Sent__c, Treating_Medical_Professional_Email__c  FROM Lead WHERE ((Status = \''+partAStatus+'\') ' +
+         String query = 'SELECT Id, Status, Sub_Status__c, OwnerId, Referred_Date__c, Part_A_Sent__c, Treating_Medical_Professional_Email__c  FROM Lead WHERE ((Status = \''+partAStatus+'\') ' +
                          ' OR (Status = \''+ReferredStatus+'\'))';
                         
-         System.debug('Query+++++++++++++++++++++++++++ ' + query);
+         
          return Database.getQueryLocator(query);
     }
    
@@ -37,6 +37,7 @@ global class DiagnosisVerficationRemainder_AC implements Database.Batchable<sObj
           
           else if(currLead.Sub_Status__c == 'Pending Diagnosis Verification')
           {
+              
             if((currLead.Part_A_Sent__c).addDays(7) == Date.Today())
             {
                  Task newTask = new Task();

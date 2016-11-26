@@ -601,11 +601,11 @@ Public Class WishChildForm_AC
                {
                   currValue+= currRec.FirstName + ' | ';
                   if(FamilyContactEmail != Null && FamilyContactEmail != '')
-                  FamilyContactEmail = FamilyContactEmail + ','+currRec.FirstName;
+                  FamilyContactEmail +=','+currRec.FirstName;
                   else
                   FamilyContactEmail = currRec.FirstName;
                   if(FamilyContactName != Null && FamilyContactName != '')
-                  FamilyContactName = FamilyContactName + ','+currRec.FirstName;
+                  FamilyContactName +=','+currRec.FirstName;
                   else
                   FamilyContactName = currRec.FirstName;
                }
@@ -616,11 +616,11 @@ Public Class WishChildForm_AC
                {
                   currValue+= currRec.MiddleName+ ' | ';
                   if(FamilyContactEmail  != Null)
-                  FamilyContactEmail = FamilyContactEmail+' '+currRec.MiddleName;
+                  FamilyContactEmail +=' '+currRec.MiddleName;
                   else
                   FamilyContactEmail = currRec.MiddleName;
                   if(FamilyContactName  != Null)
-                  FamilyContactName = FamilyContactName+ ' '+currRec.MiddleName;
+                  FamilyContactName +=' '+currRec.MiddleName;
                   else
                   FamilyContactName = currRec.MiddleName;
                }
@@ -631,12 +631,12 @@ Public Class WishChildForm_AC
                {
                   currValue+= currRec.lastName+ ' | ';
                   if(FamilyContactEmail != Null)
-                  FamilyContactEmail = FamilyContactEmail + ' ' +currRec.lastName;
+                  FamilyContactEmail +=' ' +currRec.lastName;
                   else
                   FamilyContactEmail = currRec.lastName;
                   
                   if(FamilyContactName != Null)
-                  FamilyContactName = FamilyContactName+ ' '+currRec.lastName;
+                  FamilyContactName +=' '+currRec.lastName;
                   else
                   FamilyContactName = currRec.lastName;
                }
@@ -677,7 +677,7 @@ Public Class WishChildForm_AC
                {
                   currValue+= currRec.Email+ ' | ';
                   if(FamilyContactEmail != Null)
-                  FamilyContactEmail = FamilyContactEmail+ ' - '+currRec.Email;
+                  FamilyContactEmail +=' - '+currRec.Email;
                   else
                   FamilyContactEmail = currRec.Email;
                }
@@ -1086,17 +1086,17 @@ Public Class WishChildForm_AC
 
           Set<String> nameSet = new Set<String>();
          Map<String,String> processedNameMap = new Map<String,String>();
-            /* for( npe4__Relationship__c nper : [SELECT ID,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.IsSigned__c,npe4__RelatedContact__r.IsParentGuardian__c FROM npe4__Relationship__c WHERE 
-                                           npe4__Contact__c =: wishChildId  AND npe4__RelatedContact__r.IsParentGuardian__c = 'ParentGuardian']){
-               if(nper.Id != NUll && nper.npe4__RelatedContact__r.IsSigned__c == false){                        
-                selectedMailMap.put(nper.npe4__RelatedContact__r.Name,nper.npe4__RelatedContact__r.Email);
-                }
-             }*/
-             
+           
           for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
                                                            Case__c =: caseId]){
                      if(wishChildForm.Hidden_Contact_Name__c != Null) {                                     
                         for(String keys : wishChildForm.Hidden_Contact_Name__c.split(',')){
+                           if(nameSet.contains(keys )){
+                              keys = keys+' ';
+                              nameSet.add(keys);
+                              
+                           }
+                           else
                            nameSet.add(keys.trim());
                         } 
                     
@@ -1109,7 +1109,12 @@ Public Class WishChildForm_AC
                    String keys = key.split('-')[0];
                    keys = keys.replaceAll('  ',' ');
                    String value = key.split('-')[1];
-                   processedNameMap.put(keys.trim(),value.trim());
+                   if(processedNameMap.containsKey(keys)){
+                       keys = keys+' ';
+                       processedNameMap.put(keys,value);
+                       }
+                   else
+                   processedNameMap.put(keys,value);
                } 
           }
           if(processedNameMap.size() > 0){
@@ -1317,8 +1322,7 @@ Public Class WishChildForm_AC
             string jsonPayload;
             system.debug('URL.getSalesforceBaseUrl().toExternalForm()'+URL.getSalesforceBaseUrl().toExternalForm());
             String baseUrl = URL.getSalesforceBaseUrl().toExternalForm();
-            system.debug('@@@@@@@@@@@@@@@ signersKeyPairMap @@@@@@@@@@@@'+signersKeyPairMap); 
-            system.debug('@@@@@@@@@@@@@@@ signersKeyPairMap @@@@@@@@@@@@'+SignNowName); 
+            
             jsonPayload = '{'+
                 '    "userName": "'+SignNowName+'",'+
                 '    "email": "kanagaraj@mstsolutions.com",'+
@@ -1328,10 +1332,10 @@ Public Class WishChildForm_AC
                 '   "returnUrl": "'+baseUrl +'/apex/WishInformationForm_VF?Id='+CaseId+'"'+   
                 '}'; 
                 
-            system.debug('@@@@@@@@@@@@@@@ jsonPayload @@@@@@@@@@@@'+jsonPayload ); 
+            
             request.setBody(jsonPayload);
             response = httprequest.send(request);  
-            system.debug('@@@@@@@@@@@@@@@ response @@@@@@@@@@@@'+response);
+            
             Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
                   //signersKeyPairMap.remove(SignNowName);
                   String sign;
@@ -1385,7 +1389,7 @@ Public Class WishChildForm_AC
                                                            Case__c =: caseId]){
                     if(wishChildForm.Hidden_Contact_Name__c != Null) {                                     
                     for(String keys : wishChildForm.Hidden_Contact_Name__c.split(',')){
-                       nameSet.add(keys.trim());
+                       nameSet.add(keys);
                     } 
                     
                     }
@@ -1440,7 +1444,7 @@ Public Class WishChildForm_AC
      
     }
    public pageReference sendpdftoEmail (){
-     system.debug('@@@@@@@ ENTER INTO SENDPDFTOEMAIL @@@@@@@@@'+sendEmailMap);
+     
      System.debug('EmailList++++++++++++++++++++++++++++++++++++ ' + emailList);
            displayPopup = false;
            Set<String> senderNameSet = new Set<String>();
@@ -1451,13 +1455,12 @@ Public Class WishChildForm_AC
                      senderNameSet.add(processEmailList);
                  }
                      senderNameSet.add(processEmailList);
-                   system.debug('@@@@@@@ ENTER INTO SENDPDFTOEMAIL @@@@@@@@@'+senderNameSet);
+                   
                 }
                 for(String currString : selectedMailMap.keySet()){
                 
                  if(senderNameset.Contains(currString)){
                  sendEmailMap.put(currString,selectedMailMap.get(currString));
-                 system.debug('@@@@@@@ sendEmailMap @@@@@@@@@'+sendEmailMap);
                  
                  }
                 }
@@ -1622,18 +1625,7 @@ Public Class WishChildForm_AC
                             status = (String) results.get('errorCode');
                     
                     }
-                   
-                   /*for(npe4__Relationship__c nper : [SELECT ID,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.IsSigned__c FROM npe4__Relationship__c WHERE 
-                                       npe4__Contact__c =: wishChildId  AND npe4__RelatedContact__r.Email IN:sendEmailMap.values()]){
-                          
-                          Contact wishFamilyCon = new Contact();
-                          wishFamilyCon.Id = nper.npe4__RelatedContact__c;
-                          wishFamilyCon.IsSigned__c = true;
-                          relationShipList.add(wishFamilyCon);
-                    }
-                    
-                    update relationShipList;*/
-                   
+ 
                    for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
                                                            Case__c =: caseId]){
                        
@@ -1645,9 +1637,7 @@ Public Class WishChildForm_AC
                    }
                     
                 }catch(Exception e){
-                    
-                    
-                    
+                 
                 }
                 
     }

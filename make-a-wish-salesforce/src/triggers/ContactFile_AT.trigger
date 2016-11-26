@@ -3,5 +3,6 @@ trigger ContactFile_AT on cg__ContactFile__c (After insert) {
     for(cg__ContactFile__c con: Trigger.new){
         contactIds.add(con.Id);
     }
-    AWSFilePath_AC.updateContactFilePath(contactIds);
+    if(contactIds.size() >0)
+        AWSFilePath_AC.updateContactFilePath(contactIds);
 }

@@ -12,7 +12,7 @@ public class batch_FillWishInterviewDate_Test {
          Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithoutInterviewDate(wishChild.id);
         list<Case> wishDetermination = new list<Case>();
-        wishDetermination.add( OrientationandTrainingUtil.createWishDeterminationCaseWithOldDate(wishChild.id,parentCase.Id));
+        wishDetermination.add( OrientationandTrainingUtil.createWishDeterminationCase(wishChild.id,parentCase.Id));
         Test.startTest();
         // Schedule the test job        
         String jobId = System.schedule('batch_FillWishInterviewDate_Test',CRON_EXP, new batch_FillWishInterviewDateSchedule_AC());

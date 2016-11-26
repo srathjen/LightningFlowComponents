@@ -1,12 +1,12 @@
   <style>
     /* Custom MAWA styles */
-    body {font-size:100%;}
+    body {font-size:80%;}
     body > span main {font-size:75%; margin-bottom:em; margin-bottom:5rem;}
     .container{background:none; width:auto;}
     body > span header {height:auto;}
     body > span header ul li {margin-left:auto;}
     .vcpactivelogin .table-maw td {vertical-align:middle;}
-
+	.calendarHeader {display:none !important}
     main {overflow-x:auto; min-height:40rem}
     #contentWrapper {min-width:100%}
     /* remove sidebar */
@@ -67,15 +67,16 @@
           </div>
 
           <div class="row">
-              <a href="VolunteerLanding_VF" class="center-block maw-logo"><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></a>
+              <a href="/VolunteerLanding_VF" class="center-block maw-logo"><span class="sr-only" aria-label="Make-A-Wish">Make-A-Wish&reg;</span></a>
           </div>
           <nav class="navbar navbar-dark sub-nav">
               <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">&#9776;</button>
               <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
-                  <ul class="active-user-main">
-                      <li><a href="/VolunteerAssignmentOpportunities_VF">Volunteer Opportunities</a></li>
+                  <ul class="active-user-main" style="width:52%">
+						<li><a href="/VolunteerActivities_VF">My Tasks</a></li>
                       <li><a href="/MyAssignment_VF">My Assignments</a></li>
-                      <li><a href="/VolunteerActivities_VF">My Tasks</a></li>
+					  <li><a href="/VolunteerAssignmentOpportunities_VF">Volunteer Opportunities</a></li>
+                      
                   </ul>
                   <ul class="active-user-subnav">
                       <li><a href="/VolunteerProfile_VF">Profile</a></li>

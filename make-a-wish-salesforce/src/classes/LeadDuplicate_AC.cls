@@ -110,7 +110,7 @@ Public Class LeadDuplicate_AC
                       AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND 
                       ((State = :currLead.State AND City = :currLead.City 
                       AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND
-                      (LastName = :currLead.LastName OR FirstName = :currLead.FirstName))) AND isConverted = false];
+                      (LastName = :currLead.LastName OR FirstName = :currLead.FirstName))) AND Id != :MasterLeadList[0].Id AND isConverted = false];
         }
        
        if(wrapperList.size() <= 0)
@@ -239,6 +239,7 @@ Public Class LeadDuplicate_AC
       {
           set<Id> mergeIds = new set<Id>(); 
             for (leadWrapper c : wrapperList) {
+            System.debug('c++++++++++++++++++++++++++++++++++++++ ' + c);
                 if (c.selected) {
                     mergeIds.add(c.currentLead.Id);
                 }
@@ -246,6 +247,7 @@ Public Class LeadDuplicate_AC
             
             System.debug('mergeIds+++++++++++++++++++++++++++++ ' + mergeIds);
             mergeIds.add(MasterLeadList[0].Id);
+            System.debug('mergeIds1++++++++++++++++++++++++++++++++++++++ ' + mergeIds);
        
             loadMergeCandidates(mergeIds);
       }
@@ -307,8 +309,9 @@ Public Class LeadDuplicate_AC
     {
        
        boolean flag=true; 
+       System.debug('mergeCandidates+++++++++++++++++++++++++++++ ' + mergeCandidates);
         // Check we have atleast 2 and not more than 3 records selected for merge. If not throw an error. 
-        if (mergeCandidates.size() <1) {
+        if (mergeCandidates.size() <=1) {
             flag=false;
             ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'Please select a lead for merging'));
             return;
@@ -318,7 +321,7 @@ Public Class LeadDuplicate_AC
         if (mergeCandidates.size() > 3 ) {
             flag=false;
             
-            ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'You can not merge more than 3 leads at a time'));
+            ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'Please select 2 leads for merging'));
            //ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'You can not merge more than 3 leads at a time'));
             return;
            

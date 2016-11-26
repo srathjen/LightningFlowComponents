@@ -13,7 +13,7 @@ global class VolunteerInterviewTaskRest_AC
         Id  interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
        
           taskList  =        [SELECT id,Available_Date1__c, Available_Date2__c, Available_Date3__c,  Available_Time1__c,venue__c,
-                             Available_Time2__c, Available_Time3__c, Chapter_Name__c, Subject, Status,
+                             Available_Time2__c, Available_Time3__c, Subject, Status,
                              Confirmed_Time__c, Confirmed_Date__c, Availability_Time_Other1__c,Availability_Time_Other2__c,
                              Availability_Time_Other3__c FROM Task 
                              WHERE 

@@ -1,6 +1,6 @@
-<!-----------------------------------------------------------------------------------------------------------------------------------
+<!-- *******************************************************************************************************************************************
 Description : This page is used to display the volunteer opportunity recordes which is opened to the volunteer based on the volunteer chapter.
-------------------------------------------------------------------------------------------------------------------------------------->
+************************************************************************************************************************************************ -->
 <apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" controller="VolunteerWorkItems_AC" id="VolunteerWorkItems">
     <head>
         <apex:include pageName="prospective_head" id="phead" />
@@ -9,8 +9,10 @@ Description : This page is used to display the volunteer opportunity recordes wh
             body > main {margin-bottom:4em; margin-bottom:4rem;}
             body > span main section header {height:auto;}
             body > span main section header ul li {margin-left:auto;}
+            .vcpactivelogin.full form {overflow-x: auto;}
+            .vcpactivelogin .table-maw th {padding-right: 1rem;}
             .vcpactivelogin .table-maw td {vertical-align:middle}
-            .messageCell h4{color:#066cb6};
+            .messageCell h4{color:#066cb6}
         </style>
     </head>
     <body class="vcp vcpactivelogin full registered profile">
@@ -21,11 +23,11 @@ Description : This page is used to display the volunteer opportunity recordes wh
                     <h1>Volunteer Opportunities</h1>
                     <apex:form id="formId">
                         <apex:pageMessages id="mymsg" />
-                        
+
                         <div class="pad">
                             <apex:tabPanel switchType="client" selectedTab="MyAssignment" id="theTabPanel">
-                                
-                                <!------------------ This block used to  display all open wish volunteer opportunities ---->
+
+                                <!-- This block used to  display all open wish volunteer opportunities -->
                                 <apex:tab label="Wishes" name="MyAssignment" id="tabOne" rendered="{!wishTab}">
                                     <table id="dataTab1" class="display table table-maw table-hover">
                                         <thead class="thead-default">
@@ -40,7 +42,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                 <th>Registered Volunteer</th>
                                             </tr>
                                         </thead>
-                                        
+
                                         <tbody>
                                             <apex:repeat value="{!WishEvents}" var="con1">
                                                 <tr>
@@ -62,7 +64,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                                 </apex:outputText>
                                                             </td>
                                                         </apex:outputpanel>
-                                                        
+
                                                     </apex:repeat>
                                                     <td style='text-align: center;'>{!con1.wishOpportunitiesCount}</td>
                                                     <td style='text-align: center;'>{!con1.registeredWishOpportunitiesCount}</td>
@@ -71,9 +73,9 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                         </tbody>
                                     </table>
                                 </apex:tab>
-                                
-                                <!------------------ This block used to display all open non wish volunteer opportunities ---->
-                                
+
+                                <!-- This block used to display all open non wish volunteer opportunities -->
+
                                 <apex:tab label="Non-Wish and Events" name="NewVolunteerOpportunities" id="tabTwo" rendered="{!nonWishTab}">
                                     <table id="dataTab2" class="display table table-maw table-hover">
                                         <thead class="thead-default">
@@ -102,7 +104,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                         <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'Event Date' }">
                                                             <td>{!con.nonWishOpportunities[fieldValue]}</td>
                                                         </apex:outputpanel>
-                                                        
+
                                                         <apex:outputpanel rendered="{!fieldValue.label  == 'Event Date'}">
                                                             <td>
                                                                  <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
@@ -128,13 +130,18 @@ Description : This page is used to display the volunteer opportunity recordes wh
             </div>
         </main>
         <apex:include pageName="prospective_footer" id="pfooter" />
-        
+
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <!-- fallback -->
+        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, "web/js/jquery.dataTables.min.js")}"><\/script>')</script>
         <script src="https://files-stackablejs.netdna-ssl.com/stacktable.min.js"></script>
-        
+        <!-- fallback -->
+        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, "web/js/stacktable.min.js")}"><\/script>')</script>
+
         <script>
         $.noConflict();
         jQuery( document ).ready(function( $ ) {
+            $('head').prepend('<title>Volunteer Opportunities - Communities | Make-A-Wish\u00AE America</title>');
             $('#dataTab1,#dataTab2').DataTable({
               "paging": false,
               "searching": false

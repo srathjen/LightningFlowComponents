@@ -44,10 +44,10 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 newContact.BirthDate = dtConverted ;
             }
         }
-        if(contactList.size() > 0){
+        /*if(contactList.size() > 0){
             ContactTriggerHandler handlerIns = new ContactTriggerHandler();
             handlerIns.updateAccountName(contactList);
-        }
+        }*/
     }
     // Birthdate concatenation at before update.
     if(Trigger.isBefore && Trigger.isUpdate){
@@ -380,6 +380,7 @@ insert lstContactFile;
                                                                  contact con = new contact();
                                                                  con.id = newRelationShip.npe4__Contact__c;
                                                                  con.Recipient_Email__c = m1.get(temp).Email;
+                                                                 //con.First_Recipient_Name__c = m1.get(temp).Name;
                                                                  updateEmailContact.add(con);
                                                              }
                                                              else if(m1.containsKey(temp1)){
@@ -387,6 +388,7 @@ insert lstContactFile;
                                                                  contact con = new contact();
                                                                  con.id = newRelationShip.npe4__Contact__c;
                                                                  con.second_Recipient_Email__c = m1.get(temp1).Email;
+                                                                // con.Second_Recipient_Name__c = m1.get(temp1).Name;
                                                                  updateEmailContact.add(con);
                                                              }
                                                              

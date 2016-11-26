@@ -212,13 +212,15 @@ public class VolunteerActivities_AC {
         List<Task> closeActivities = Database.Query('SELECT Id, Subject, ActivityDate, Status FROM Task WHERE Status = \'Completed\' AND OwnerId =:volunteerUserId');
         return closeActivities;
     }*/
-	
-    public Void closeTask() {
+    
+    public PageReference closeTask() {
         List<Task> taskList = [SELECT Id FROM Task WHERE Id =: taskId];
         if(taskList.size() > 0) {
             taskList[0].Status = 'Completed';
             update taskList;
         }
+        PageReference pg = new PageReference('/VolunteerActivities_VF');
+        return pg;
     }
     public class OpenActivitiesWrapper {
         public Task volunteerTask {get; set;}

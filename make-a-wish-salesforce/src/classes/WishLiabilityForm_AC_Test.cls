@@ -71,7 +71,10 @@ public class WishLiabilityForm_AC_Test {
       wishLiabilityIns.isFirstParentSendEmail = false;
       wishLiabilityIns.isFirstParent = false;
       wishLiabilityIns.multiEmail();
-      //wishLiabilityIns.sendpdftoEmail();
+      List<String>  emailList = new List<String>{'MAWAFirstName MAWALastName0','MAWAFirstName MAWALastName1','MAWAFirstName MAWALastName2'};
+      wishLiabilityIns.emailList = emailList;
+      wishLiabilityIns.sendpdftoEmail();
+      
       Map<String,String> sendEmailMap = new Map<String,String>();
           sendEmailMap.put('MAWAFirstName MAWALastName0', 'vennila@mstsolutions.com');
           sendEmailMap.put('MAWAFirstName MAWALastName1', 'kesavkumar@mstsolutions.com');
@@ -92,7 +95,7 @@ public class WishLiabilityForm_AC_Test {
       List<Contact> WishFamilyContactList = OrientationandTrainingUtil.CreateWishFamilyList(3);
       insert WishFamilyContactList;
       List<npe4__Relationship__c> npe4RelationShipList = OrientationandTrainingUtil.relationshipChildList(WishFamilyContactList,wishChild.Id,3);
-      //insert npe4RelationShipList;
+      insert npe4RelationShipList;
       case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
       wish.Hidden_Email_List__c = 'MAWAFirstName MAWALastName1,MAWAFirstName MAWALastName2';
       wish.Hidden_Name_List__c = 'kesavkumar@mstsolutions.com,kanagaraj@mstsolutions.com';
@@ -104,8 +107,7 @@ public class WishLiabilityForm_AC_Test {
       Test.setCurrentPage(pageRef);
       WishLiabilityForm_AC wishLiabilityIns = new WishLiabilityForm_AC(sc);
       wishLiabilityIns.multiEmail();
-     
-      //wishLiabilityIns.sendpdftoEmail();
+      
       Map<String,String> sendEmailMap = new Map<String,String>();
           sendEmailMap.put('MAWAFirstName MAWALastName0', 'vennila@mstsolutions.com');
           sendEmailMap.put('MAWAFirstName MAWALastName1', 'kesavkumar@mstsolutions.com');

@@ -16,13 +16,12 @@ public class VolunteerOpportunityTrigger_AT_Test {
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Role__c  roleName = OrientationandTrainingUtil.createRole();
         Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
-        List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,3);
+        List<Volunteer_Opportunity__c> wishVolunteerOpportunityList = OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,VolunteerContact.Id,3);
         List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
         for(Volunteer_Opportunity__c processVolOpportunities : wishVolunteerOpportunityList){
             processVolOpportunities.Volunteer_Name__c = VolunteerContact.Id;
             processVolOpportunities.IsApproved__c = false;
             volunteerOpportunityList.add(processVolOpportunities);
-            
         }
         update volunteerOpportunityList;
         return volunteerOpportunityList;
@@ -30,7 +29,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
     
     public testmethod static void updateVolunteerOpportunity(){
         List<Volunteer_Opportunity__c> volOppList  = VolunteerOpportunityTrigger_AT_Test.SubmittoApproval();
-         List<Volunteer_Opportunity__c> updateVOlOpportunity = new  List<Volunteer_Opportunity__c>();
+        List<Volunteer_Opportunity__c> updateVOlOpportunity = new  List<Volunteer_Opportunity__c>();
         for(Volunteer_Opportunity__c currOpp : volOppList){
             currOpp.IsApproved__c = False;
             updateVOlOpportunity.add(currOpp);
@@ -48,7 +47,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
         Role__c  roleName = OrientationandTrainingUtil.createRole();
         Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
         System.RunAs(new User(Id = UserInfo.getUserId())){
-            List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,1);
+            List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,VolunteerContact.Id,1);
             Volunteer_Opportunity__c updateVolOpportunity = new Volunteer_Opportunity__c();
             updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
             updateVolOpportunity.IsApproved__c = true;
@@ -91,7 +90,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
         Role__c  roleName = OrientationandTrainingUtil.createRole();
         Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
         System.RunAs(new User(Id = UserInfo.getUserId())){
-            List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,1);
+            List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,VolunteerContact.Id,1);
             Volunteer_Opportunity__c updateVolOpportunity = new Volunteer_Opportunity__c();
             updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
             updateVolOpportunity.IsApproved__c = true;

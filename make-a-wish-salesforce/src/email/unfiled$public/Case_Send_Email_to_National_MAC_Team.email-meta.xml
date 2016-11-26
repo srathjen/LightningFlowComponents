@@ -17,7 +17,7 @@ The wish below was referred and reviewed at the chapter level for medical eligib
 
 Wish Child Name: {!Case.Hidden_Lead_Name__c}
 
-Primary Diagnosis: {!Case.Hidden_Primary_Diagnosis__c}
+Primary Diagnosis: {!Case.Hidden_Primary_Diagnosis_del__c}
 
 Additional Diagnosis (if applicable):
 
@@ -35,6 +35,14 @@ Notes from referring medical professional (if applicable):
 
 
 Chapter Level Eligibility Review Notes:  {!Case.Case_Comment__c}
+
+
+
+The below are attachments links, You can download by clicking the links.
+
+
+
+{!Case.Medical_Summary_Attachments__c}
 
 
 

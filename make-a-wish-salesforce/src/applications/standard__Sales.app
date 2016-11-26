@@ -16,4 +16,5 @@
     <tab>dsfs__DocuSignAccountConfiguration__c</tab>
     <tab>cg__CaseFile__c</tab>
     <tab>Awards_Recognition__c</tab>
+    <tab>Background_Check_File__c</tab>
 </CustomApplication>

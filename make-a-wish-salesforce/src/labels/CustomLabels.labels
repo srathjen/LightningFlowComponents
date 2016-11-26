@@ -33,6 +33,22 @@
         <value>https://cs52.salesforce.com</value>
     </labels>
     <labels>
+        <fullName>Local_Email_Template_ID</fullName>
+        <categories>Local MAC Team Email Template ID</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Local Email Template ID</shortDescription>
+        <value>00X5B000000QG2B</value>
+    </labels>
+    <labels>
+        <fullName>National_Email_Template_ID</fullName>
+        <categories>National Email template Id</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>National Email Template ID</shortDescription>
+        <value>00X5B000000QG2A</value>
+    </labels>
+    <labels>
         <fullName>Prospective_Volunteer</fullName>
         <categories>It holds the id of Prospective Volunteer community profile</categories>
         <language>en_US</language>

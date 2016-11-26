@@ -48,7 +48,7 @@ public class WishJourneyController_Test {
     
     public static testMethod void caseWitEscalated() {
         Constant_AC newConstant = new Constant_AC();
-        String wishRecTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(newConstant.wishImapctRT).getRecordTypeId();
+        String wishRecTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(newConstant.wishEffectRT).getRecordTypeId();
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Escalated';
         currentCase.Origin = 'Email';
@@ -75,6 +75,7 @@ public class WishJourneyController_Test {
     public static testMethod void caseWitReadytoAssign() {
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Ready to Assign';
+        currentCase.Sub_Status__c = 'Test';
         currentCase.Origin = 'Email';
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
@@ -84,6 +85,7 @@ public class WishJourneyController_Test {
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Wish Determined';
         currentCase.Origin = 'Email';
+        currentCase.Meet_PWL_Criteria__c = 'Test';
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
     }
@@ -97,9 +99,15 @@ public class WishJourneyController_Test {
     }
     
     public static testMethod void caseWitWishCompleted() {
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
+        newLead.Part_A_Received__c = System.today();
+        insert newLead;
+        
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Completed';
         currentCase.Origin = 'Email';
+        currentCase.Lead__c = newLead.Id;
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
     }

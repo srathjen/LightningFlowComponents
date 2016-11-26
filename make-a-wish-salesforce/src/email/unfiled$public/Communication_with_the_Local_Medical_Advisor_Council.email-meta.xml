@@ -9,7 +9,7 @@
     <textOnly>Hello,
 
 Wish Child Name: {!Case.Lead_Name__c}
-Primary Diagnosis : {!Case.00N3600000POLiX}
+Primary Diagnosis : {!Case.Hidden_Primary_Diagnosis_del__c}
 Secondary Diagnosis : {!Case.Hidden_Secondary_Diagnosis__c} , {!Case.Hidden_Secondary_Diagnosis_one__c}{!Case.Hidden_Secondary_Diagnosis_2__c}{!Case.Hidden_Secondary_Diagnosis_Three__c}
 Wish do you feel  {!Case.Wish_Child_Name__c} would be eligible wish? : {!Case.Hidden_Why_do_you_feel__c}</textOnly>
     <type>html</type>

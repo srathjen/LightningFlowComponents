@@ -1402,4 +1402,22 @@
         </picklistValues>
     </recordTypes>
     <sharingModel>Private</sharingModel>
+    <webLinks>
+        <fullName>Close_Task</fullName>
+        <availability>online</availability>
+        <description>Javascript button to close task</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Close Task</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/connection.js&quot;)} 
+
+
+var p = new sforce.SObject(&quot;Task&quot;); 
+p.Id = &quot;{!Task.Id}&quot;;
+p.Status = &quot;Completed&quot;;
+result = sforce.connection.update([p]); 
+location.reload(true);</url>
+    </webLinks>
 </CustomObject>

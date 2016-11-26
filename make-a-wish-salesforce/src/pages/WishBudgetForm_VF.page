@@ -293,8 +293,8 @@
     <apex:pagemessages />
     <div class="slds">
         <div id="wishexpense1" class="slds-card slds-m-horizontal--large " >
-            <div style="float:left;width: 50%" >Wish Child Name : {!childName } </div>
-            <div style="float:left;width: 50%" >Chapter Name : {!wishChapterName }  </div>
+            <div style="float:left;width: 40%" >Wish Child Name : {!childName } </div>
+            <div style="float:left;width: 60%" >Chapter Name : {!wishChapterName }  </div>
             <br />
             <div style="float:left;width: 40%" >Number of wish participants : {!NoOfWishParts }  </div>
             <div style="float:left;width: 40%" >Anticipated Wish Date :
@@ -364,14 +364,13 @@
                             <apex:variable value="{!0}" var="cntTemp"/> 
                             <apex:repeat value="{!wishExpenseTypes}" var="expenseType"> 
                                 <tr id="{!cntTemp}" class="clickable" data-toggle="collapse" data-target=".{!cntTemp}collapsed">
-                                    <td  align="left" >
+                                    <td  align="left" colspan="7">
                                         <apex:commandLink styleClass="addExpenseClass" action="{!addExpense}"><apex:image value="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png" style="height:20px"/>
                                             <apex:param name="expenseType" value="{!expenseType}" assignTo="{!expenseType}"/>
                                             <apex:param name="typeExpand" value="{!cntTemp}collapsed" assignTo="{!WEtypeExpand}"/>
                                         </apex:commandLink>
                                         <a   class="accordion-toggle" data-toggle="collapse" href="#expenseBlock{!cntTemp}" >{!expenseType}</a>
                                     </td>
-                                    <td colspan="6"></td>
                                     <apex:outputpanel rendered="{!(SumExpensewrappers[expenseType]) != null}" >
                                         <td class="slds-text-align--right tdBudget" Style="width:40px"><b>${!SumExpensewrappers[expenseType].sumbudgetCash}</b></td>
                                         <td class="slds-text-align--right tdBudget" Style="width:40px"><b>${!SumExpensewrappers[expenseType].sumbudgetInKind}</b></td>

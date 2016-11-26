@@ -16,13 +16,16 @@ public class Application_AC_Test{
          User currentVoulnteerUser;
          System.RunAs(new User(Id = UserInfo.getUserId())){
             currentVoulnteerUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(volunteerContact.Id);
+            
         }
             OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
             OrientationandTrainingUtil.insertDocusignSetting();
             OrientationandTrainingUtil.createDynamicContent();
        
         system.RunAs(currentVoulnteerUser){
-           
+           list<Contact> conList = new list<Contact>();
+           conList = [select id from contact];
+           system.assertEquals(currentVoulnteerUser.ContactId,volunteerContact.Id);
             PageReference pageRef = Page.Application_VF; 
             Test.StartTest();
             Test.setCurrentPage(pageRef);
@@ -66,10 +69,19 @@ public class Application_AC_Test{
            User currentVoulnteerUser;
            System.RunAs(new User(Id = UserInfo.getUserId())){
             currentVoulnteerUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(volunteerContact.Id);
+           /* contactShare currContactSharing = new contactShare();
+            currContactSharing.ContactId = volunteerContact.Id;
+            currContactSharing.UserOrGroupId = currentVoulnteerUser.id;
+            currContactSharing.ContactAccessLevel = 'Read';
+            currContactSharing.RowCause = Schema.contactshare.RowCause.Manual;
+            insert currContactSharing;*/
         }
             OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
             OrientationandTrainingUtil.insertDocusignSetting();
             OrientationandTrainingUtil.createDynamicContent();
+            
+           
+            
           system.RunAs(currentVoulnteerUser){
             PageReference pageRef = Page.Application_VF; 
             Test.setCurrentPage(pageRef);

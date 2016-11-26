@@ -85,6 +85,11 @@ public class BackgroundCheck_AC{
             newBGTask.RecordTypeId = taskRecordTypeId;
             insert newBGTask;
             
+            Contact updateContact = new Contact();
+            updateContact.id = currUser.contactId;
+            updateContact.Onboarding_Status__c = 'Background Check';
+            update updateContact;
+            
             PageReference pageRef = new PageReference('/apex/BackgroundCheck_VF?bgRequired='+bgTabPermission+'&trainingRequired='+trainingTabVisible);
             pageRef.setRedirect(true);
             return pageRef;

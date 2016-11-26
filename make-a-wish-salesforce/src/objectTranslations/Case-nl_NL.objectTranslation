@@ -366,6 +366,18 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Hidden Chapter Email --></label>
+        <name>Hidden_Chapter_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Chapter Name --></label>
+        <name>Hidden_Chapter_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Chapter Phone --></label>
+        <name>Hidden_Chapter_Phone__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Contact Gender --></label>
         <name>Hidden_Contact_Gender__c</name>
     </fields>
@@ -390,8 +402,32 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Hidden_Primary_Diagnosis__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Primary Diagnosis. --></label>
+        <name>Hidden_Primary_Diagnosis_del__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Referral date --></label>
         <name>Hidden_Referral_date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Secondary Diagnosis 1 --></label>
+        <name>Hidden_Secondary_Diagnosis_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Secondary Diagnosis 2 --></label>
+        <name>Hidden_Secondary_Diagnosis_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Secondary Diagnosis 3 --></label>
+        <name>Hidden_Secondary_Diagnosis_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Secondary Diagnosis --></label>
+        <name>Hidden_Secondary_Diagnosis__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Why do you feel --></label>
+        <name>Hidden_Why_do_you_feel__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Wish Child City --></label>
@@ -554,6 +590,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Medical Condition --></label>
         <name>Medical_Condition__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medical Summary Attachments --></label>
+        <name>Medical_Summary_Attachments__c</name>
     </fields>
     <fields>
         <label><!-- Medication require refrigeration? Note --></label>
@@ -921,8 +961,12 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Approved - National Staff --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Budget Approval</masterLabel>
-            <translation><!-- Budget Approval --></translation>
+            <masterLabel>Budget Approval - Approved</masterLabel>
+            <translation><!-- Budget Approval - Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Budget Approval - Submitted</masterLabel>
+            <translation><!-- Budget Approval - Submitted --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Closed</masterLabel>
@@ -1530,6 +1574,33 @@ arrangements/unique circumstances for any requested wish participant not residin
         </sections>
     </layouts>
     <layouts>
+        <layout>Parent Wishes</layout>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- DEV &amp; QA --></label>
+            <section>DEV &amp; QA</section>
+        </sections>
+        <sections>
+            <label><!-- Finance --></label>
+            <section>Finance</section>
+        </sections>
+        <sections>
+            <label><!-- Important Date Section --></label>
+            <section>Important Date Section</section>
+        </sections>
+        <sections>
+            <label><!-- Progress Bar --></label>
+            <section>Progress Bar</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Related Forms --></label>
+            <section>Wish Related Forms</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Volunteer Parent Wishes</layout>
         <sections>
             <label><!-- Attachments --></label>
@@ -1576,6 +1647,21 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sections>
             <label><!-- Wish Status Bar --></label>
             <section>Wish Status Bar</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Granted</layout>
+        <sections>
+            <label><!-- Progress Bar --></label>
+            <section>Progress Bar</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Presentation  Details --></label>
+            <section>Wish Presentation  Details</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Related Forms --></label>
+            <section>Wish Related Forms</section>
         </sections>
     </layouts>
     <layouts>

@@ -12,8 +12,9 @@
 Please review this wish with your medical expertise. Is there enough information provided to make a determination of eligibility? If so, can you give us your opinion? If not, what additional information would be helpful? Simply reply to this email and your notes will be added to the record.
 
 Wish Child Name:  {!Case.Hidden_Lead_Name__c}
-Primary Diagnosis:  {!Case.Hidden_Primary_Diagnosis__c}
+Primary Diagnosis:  {!Case.Hidden_Primary_Diagnosis_del__c}
 Additional Diagnosis (if applicable):
+
 {!Case.Hidden_Secondary_Diagnosis__c}
 
 {!Case.Hidden_Secondary_Diagnosis_1__c}
@@ -21,12 +22,19 @@ Additional Diagnosis (if applicable):
 {!Case.Hidden_Secondary_Diagnosis_2__c}
 
 {!Case.Hidden_Secondary_Diagnosis_3__c}
-
 Notes from referring medical professional (if applicable):
 
 {!Case.Hidden_Why_do_you_feel__c}
 
 Thanks to the support of you and other medical professionals around the country, we continue to come closer each year to our vision of making every eligible child’s wish come true.  Thank you for taking the time to help us share the power of a wish®.
+
+
+
+The below are attachments links, You can download by clicking the links.
+
+
+
+{!Case.Medical_Summary_Attachments__c}
 
 Thanks,
 

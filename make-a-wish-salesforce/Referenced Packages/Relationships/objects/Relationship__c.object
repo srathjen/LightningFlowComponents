@@ -182,15 +182,7 @@ TEXT(Contact__r.Salutation) + &quot; &quot; + Contact__r.FirstName + &quot; &quo
         <label>Type</label>
         <picklist>
             <picklistValues>
-                <fullName>Friend</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Family</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Coworker</fullName>
+                <fullName>Mother</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -198,23 +190,55 @@ TEXT(Contact__r.Salutation) + &quot; &quot; + Contact__r.FirstName + &quot; &quo
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Mother</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
                 <fullName>Parent</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Son</fullName>
+                <fullName>Guardian</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Daughter</fullName>
+                <fullName>Sister</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Child</fullName>
+                <fullName>Brother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sibling</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandmother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandfather</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Stepmother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Stepfather</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Step Sister</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Step Brother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Half Sister</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Half Brother</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -223,6 +247,10 @@ TEXT(Contact__r.Salutation) + &quot; &quot; + Contact__r.FirstName + &quot; &quo
             </picklistValues>
             <picklistValues>
                 <fullName>Uncle</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cousin</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -238,19 +266,27 @@ TEXT(Contact__r.Salutation) + &quot; &quot; + Contact__r.FirstName + &quot; &quo
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Cousin</fullName>
+                <fullName>Friend</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Grandmother</fullName>
+                <fullName>Neighbor</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Grandfather</fullName>
+                <fullName>Family</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Grandparent</fullName>
+                <fullName>Coworker</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Son</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Daughter</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -262,15 +298,15 @@ TEXT(Contact__r.Salutation) + &quot; &quot; + Contact__r.FirstName + &quot; &quo
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Grandchild</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
                 <fullName>Employer</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
                 <fullName>Employee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medical Professional</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>

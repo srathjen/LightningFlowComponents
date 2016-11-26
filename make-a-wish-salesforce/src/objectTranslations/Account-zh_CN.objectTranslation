@@ -230,11 +230,7 @@
         <name>Is_Approved__c</name>
     </fields>
     <fields>
-        <label><!-- MAC Email --></label>
-        <name>MAC_Email__c</name>
-    </fields>
-    <fields>
-        <label><!-- MAC Email --></label>
+        <label><!-- National Medical Advisor Email --></label>
         <name>MAC_Email_del__c</name>
     </fields>
     <fields>

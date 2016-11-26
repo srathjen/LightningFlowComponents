@@ -73,8 +73,8 @@ public class VolunteerOrientation_AC{
     // the registered orientation in a separate block. 
     public Boolean checkRegisteredProgram() {
         List<Volunteer_Orientation_Training__c> exVolList = [SELECT Id, Orientation_Training__c, Volunteer__c, Volunteer_Attendance__c 
-                                                            FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId AND 
-                                                            Type__c = 'Orientation' AND Volunteer_Attendance__c = 'Registered' AND Orientation_Training__c != Null ];
+                                                            FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId 
+                                                            AND Type__c = 'Orientation' AND Volunteer_Attendance__c = 'Registered' AND Orientation_Training__c != Null];
         if(exVolList.size() > 0) {
             checkExistProgram = false;
         } else {
@@ -321,13 +321,19 @@ public class VolunteerOrientation_AC{
                                 System.debug('ex'+ex.getmessage());
                             }
 
-
+                       
                                             
                         checkRegisteredProgram();
+                        
+                        
                     }
                 }
             }
         }
+        Contact currContact = new Contact();
+        currContact.id = userRelatedContactId ;
+        currContact.Onboarding_Status__c = 'Orientation';
+        update currContact;
         PageReference pg = new PageReference('/VolunteerOrientation_AC');
         // return pg;
     }

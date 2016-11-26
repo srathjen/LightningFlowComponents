@@ -13,7 +13,7 @@ public class ContactTriggerHandler{
     Id volunteerOpportunityWishRecTypeId = Schema.SObjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
     public Map<string,integer> birthMonthMap = new Map<string,integer>();
    
-    // Updating contact's account Id based on the current logged in user role.
+   /* // Updating contact's account Id based on the current logged in user role.
     public void updateAccountName(List<Contact> contactList){
         
         Set<String> chapterNameSet = new Set<String>();
@@ -38,7 +38,7 @@ public class ContactTriggerHandler{
             }
         }
         
-    }
+    }*/
     
   
    
@@ -160,5 +160,4 @@ public class ContactTriggerHandler{
      if(newTaskList.size() > 0)
          insert newTaskList;
    }
-
 }

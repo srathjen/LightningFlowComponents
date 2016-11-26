@@ -1,7 +1,7 @@
 <!-- ************************************************************************************************************************************
 Description : This page is used to display volunteer Open and Closed task list
 ************************************************************************************************************************************** -->
-<apex:page controller="VolunteerActivities_AC" sidebar="false" showHeader="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false">
+<apex:page controller="VolunteerActivities_AC" sidebar="false" showHeader="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="false">
     <apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
     <apex:include pageName="prospective_head" id="phead" />
     <style type="text/css">
@@ -72,13 +72,16 @@ Description : This page is used to display volunteer Open and Closed task list
                                             </thead>
                                             <tbody>
                                                 <apex:repeat value="{!OpenActivities}" var="openAct">
+                                                    
                                                     <tr>
                                                         <td>
                                                             <a href="/{!openAct.volunteerTask.Id}" target="_blank" style="color:#066cb6; text-decoration: underline;margin-right:3px">View</a>|
                                                             <!--<a href="/{!openAct.volunteerTask.Id}" target="_blank" style="color:#066cb6; text-decoration: underline; margin-left:2px">Close</a>-->
-                                                            <apex:commandLink style="color:#066cb6; text-decoration: underline; margin-left:2px" value="Close" action="{!closeTask}">
+                                                            <!--<apex:commandLink style="color:#066cb6; text-decoration: underline; margin-left:2px" value="Close" action="{!closeTask}" onclick="return TaskCloseAlert();" reRender="None">
                                                                 <apex:param name="nickName" value="{!openAct.volunteerTask.Id}" assignTo="{!taskId}"/>
-                                                            </apex:commandLink>
+                                                            </apex:commandLink>-->
+                                                            <a data-p1="{!openAct.volunteerTask.Id}" href="javascript:;" style="color:#066cb6; text-decoration: underline; margin-left:2px" class="cls1">Close</a>
+                                                            
                                                         </td>
                                                         <td>{!openAct.nameField}</td>
                                                         <td>{!openAct.volunteerTask.Subject}</td>
@@ -93,6 +96,9 @@ Description : This page is used to display volunteer Open and Closed task list
                                                 </apex:repeat>
                                             </tbody>
                                         </table>
+                                        <apex:actionFunction name="closeTask" action="{!closeTask}" reRender="None">
+                                            <apex:param name="taskId1" value="{!taskId}" assignTo="{!taskId}"/>
+                                        </apex:actionFunction>
                                     </apex:pageBlock>
                                 </div>
                                 
@@ -141,7 +147,8 @@ Description : This page is used to display volunteer Open and Closed task list
         </main>
         <apex:include pageName="prospective_footer" id="pfooter" />
         
-        
+        <apex:stylesheet value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.css')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.js')}"/>
         <!-------------- Style and Script section starts -------------->
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <!-- fallback -->
@@ -188,6 +195,30 @@ Description : This page is used to display volunteer Open and Closed task list
                 $('.closedActivities').show();
             });
         });
+        
+        $(document).delegate('.cls1','click',function(){
+            var $this = $(this);
+            var da1 = $this.data('p1');
+            swal({
+                title: "",
+                text: "Are you sure to close the task?",
+                showCancelButton: true,
+                type: 'info',
+                confirmButtonColor: "#006bb6",
+                cancelButtonColor: "#006bb6",
+                confirmButtonText: "Ok",
+                cancelButtonText: "Cancel",
+                closeOnConfirm: false,
+                closeOnCancel: true
+            },
+                 function(isConfirm) {
+                     if (isConfirm) {
+                         closeTask(da1);
+                     } else {
+                         
+                     }
+                 });
+        });   
         </script>
     </body>
 </apex:page>

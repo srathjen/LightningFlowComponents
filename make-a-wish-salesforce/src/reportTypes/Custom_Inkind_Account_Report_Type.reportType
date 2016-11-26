@@ -583,11 +583,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>MAC_Email__c</field>
-            <table>Account</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Emergency_Contact_Middle_Name__c</field>
             <table>Account</table>
         </columns>

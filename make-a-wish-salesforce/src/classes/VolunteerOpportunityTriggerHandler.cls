@@ -19,19 +19,14 @@ Public class VolunteerOpportunityTriggerHandler
     Public Static Void SubmitforApprovalProcess(List<Volunteer_Opportunity__c> recordsForApprovalProcess, Set<Id> chapterIdsSet)
     {
         List<Approval.ProcessSubmitRequest> approvalReqList=new List<Approval.ProcessSubmitRequest>();
-        Map<String,Id> chaptersNameMap = new Map<String,Id>();
-        Set<String> chaptersName = new Set<String>();
-        Map<String,Id> nationalStaffsMap = new Map<String,Id>();
-        for(Account getAccountName : [SELECT Id, Name FROM Account WHERE Id IN : chapterIdsSet]) {
-            if(!chaptersNameMap.containsKey(getAccountName.Id)) {
-                if(getAccountName.Name.contains('Make-A-Wish ')) {
-                    string filteredName = getAccountName.Name.split('Make-A-Wish ')[1];
-                    chaptersName.add(filteredName+' - Chapter');
-                    chaptersNameMap.put(getAccountName.Name,getAccountName.Id);
-                }
-            }
+       
+        Map<Id,Id> volunteerManagerIdsMap = new Map<Id,Id>();
+        
+        for(Account getAccountName : [SELECT Id, Name, volunteer_manager__c FROM Account WHERE Id IN : chapterIdsSet]) {
+            volunteerManagerIdsMap.put(getAccountName.id,getAccountName.volunteer_manager__c);
+           
         }
-        for(User getNationalStaffId : [SELECT Id, Name, UserRole.Name FROM User WHERE UserRole.Name IN : chaptersName AND IsActive = true LIMIT 1]) {
+      /* for(User getNationalStaffId : [SELECT Id, Name, UserRole.Name FROM User WHERE UserRole.Name IN : chaptersName AND IsActive = true LIMIT 1]) {
             if(!nationalStaffsMap.containsKey(getNationalStaffId.UserRole.Name)) {
                 if(getNationalStaffId.UserRole.Name.contains('Chapter')) {
                     String chapterRec = getNationalStaffId.UserRole.Name.split(' - Chapter')[0];
@@ -41,19 +36,22 @@ Public class VolunteerOpportunityTriggerHandler
                 }
                 
             }
-        }
+        }*/
         //Default user not give by client so we assign it to active user
-        User userns = [SELECT Id,username, profile.Name FROM User WHERE profile.Name = 'System Administrator' AND IsActive = true LIMIT 1];
+       // User userns = [SELECT Id,username, profile.Name FROM User WHERE profile.Name = 'System Administrator' AND IsActive = true LIMIT 1];
         for(Volunteer_Opportunity__c newVolunteerRole : recordsForApprovalProcess)
         {
             Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
             //req1.setSubmitterId(user1.Id);
             req.setComments('Submitting request for approval.');
             req.setObjectId(newVolunteerRole.id);
-            if(nationalStaffsMap.containsKey(newVolunteerRole.Chapter_Name__c)) {
-                req.setNextApproverIds(new Id[] {nationalStaffsMap.get(newVolunteerRole.Chapter_Name__c)});
+            if(volunteerManagerIdsMap.containsKey(newVolunteerRole.Chapter_Name__c)) {
+               if(volunteerManagerIdsMap.get(newVolunteerRole.Chapter_Name__c) != Null)
+                    req.setNextApproverIds(new Id[] {volunteerManagerIdsMap.get(newVolunteerRole.Chapter_Name__c)});
+               else
+                    req.setNextApproverIds(new Id[] {userInfo.getUserId()});
             } else {
-                req.setNextApproverIds(new Id[] {userns.Id});
+                req.setNextApproverIds(new Id[] {userInfo.getUserId()});
             }
             req.setProcessDefinitionNameOrId('Volunteer_Role_Approval_Process');
             req.setSkipEntryCriteria(true);
@@ -184,8 +182,9 @@ Public class VolunteerOpportunityTriggerHandler
                             }
                             if(volunteerUserMap.containsKey(userId)) {
                                 shareContact.UserOrGroupId = volunteerUserMap.get(userId);
+                                contactToShareList.add(shareContact);
                             }
-                            contactToShareList.add(shareContact);
+                            
                         }
                     }
                 }

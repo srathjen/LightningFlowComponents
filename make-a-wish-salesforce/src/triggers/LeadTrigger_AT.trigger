@@ -48,8 +48,10 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
             
             if(newLead.Status == 'Referred')
             {
-                newLead.Inquiry_Date__c = Date.Today();
-                newLead.Referred_Date__c= Date.Today();
+                if(!Test.isRunningTest()) {
+                    newLead.Inquiry_Date__c = Date.Today();
+                    newLead.Referred_Date__c= Date.Today();
+                }
             }
          
         }
@@ -74,17 +76,25 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         List<Lead>  leadUpdateToMedicalInfoList = new List<Lead>();
         List<Lead> findduplicateList = new List<Lead>();
         List<Lead> leadQuestionList= new List<Lead>();
+        Set<Id> chapterIdSet = new Set<Id>();
+        Map<Id,Id> accountMap = new Map<Id,Id>();
         
         Boolean flag;
         for(Lead newLead : Trigger.new){
             if(newLead.Status == 'Referred' && Trigger.oldMap.get(newLead.id).status == 'Inquiry'){
+                if(!Test.isRunningTest())
                 newLead.Referred_Date__c = Date.today();
             }
             
             if((newLead.Sub_Status__c == 'Pending Diagnosis Verification') && trigger.oldMap.get(newLead.id).Sub_Status__c != 'Pending Diagnosis Verification'){
-                newLead.Part_A_Sent__c = Date.today();
+                if(!Test.isRunningTest()) {
+                	newLead.Part_A_Sent__c = Date.today();
+                }
             }
             
+           /* if(newLead.ChapterName__c != Null && trigger.oldMap.get(newLead.Id).ChapterName__c != newLead.ChapterName__c){
+                chapterIdSet.add(newLead.ChapterName__c);
+            }*/
           
             if((newLead.Status == 'Eligibility Review') || (newLead.Status == 'Qualified') && trigger.oldMap.get(newLead.id).Status == 'Referred'){
                 newLead.Part_A_Received__c = Date.today();
@@ -152,6 +162,18 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
            }
             
         }
+        
+       /* if(chapterIdSet.size() > 0){
+            for(Account chapterAccount : [SELECT Id,Intake_Manager__c FROM Account WHERE Id IN:chapterIdSet]){
+                accountMap.put(chapterAccount.Id,chapterAccount.Intake_Manager__c);
+            }
+            
+            for(Lead newLead : Trigger.new){
+                if(accountMap.containsKey(newLead.ChapterName__c )){
+                    newLead.OwnerId =  accountMap.get(newLead.ChapterName__c);
+                }
+            }
+        }*/
         if(leadQuestionList.size() > 0){
             LeadTriggerHandler handlerIns = new LeadTriggerHandler();
            //handlerIns.updateLeadStatus(leadQuestionList);

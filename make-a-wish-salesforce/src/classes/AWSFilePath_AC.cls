@@ -143,7 +143,17 @@ public class AWSFilePath_AC{
                 requestParametersList.add(new Map<String,String>{'response-content-disposition'=>'attachment;filename=' + dbbcFileRec.File_Name__c});
             }
         }
-        bcFilePaths= cg.SDriveTools.getAttachmentURLs(fileParentIds, fileRecordIds, (365 * 24 * 60 * 60), requestParametersList);
+        
+        
+         if(!Test.isRunningTest())
+                //Used to get the file path of the attachment stored in Amazon
+                bcFilePaths= cg.SDriveTools.getAttachmentURLs(fileParentIds, fileRecordIds, (365 * 24 * 60 * 60), requestParametersList);
+            else
+                bcFilePaths = new List<String>{'https://s3-us-west-2.amazonaws.com/mawafilesfullcopy/00Q5B000001s3bt/a1U5B0000000Df1UAE/MedicalSummaryReport.txt?response-content-disposition=attachment&filename=MedicalSummaryReport.txt&AWSAccessKeyId=AKIAIEYUJRAAMNE7W7NA&Expires=1509032442&Signature=Yx0UX2ADZxo9GbbDFH+q7opBzwU='};
+                   
+                    
+                    
+        
         System.debug('bcFilePaths>>>>'+bcFilePaths);
         system.debug('S drive File Paths 1 : '+ bcFilePaths );
         

@@ -34,7 +34,6 @@ public class WishLiabilityForm_AC
     public String documentPDF;
     public String envelopeId;
     public Map<String,String> signersKeyPairMap{get;set;}
-    public String roleName{get;set;}
     public List<String> SignNowList{get;set;}
     public boolean isFirstParentSendEmail{get;set;}
     
@@ -76,7 +75,7 @@ public class WishLiabilityForm_AC
              }
              
             else{
-                Name = Name +','+ '  '+currentRelation.npe4__RelatedContact__r.Name;
+                Name +=+','+ '  '+currentRelation.npe4__RelatedContact__r.Name;
             }
             
             If(currentRelation.npe4__RelatedContact__r.IsParentGuardian__c == 'ParentGuardian' && currentRelation .npe4__RelatedContact__r.Wish_Liability_IsSigned__c == false ){
@@ -161,7 +160,7 @@ public class WishLiabilityForm_AC
                      queryName = currString;
                      }
                      else
-                     queryName = queryName + ', '+currString;
+                     queryName +=+ ', '+currString;
                 }
             }
             
@@ -201,19 +200,23 @@ public class WishLiabilityForm_AC
          for(npe4__Relationship__c dbRelationShip : [SELECT ID,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.IsParentGuardian__c FROM npe4__Relationship__c WHERE 
               npe4__RelatedContact__r.Name IN:emailMap.keySet() AND npe4__Contact__c =: WishChildId AND npe4__RelatedContact__r.IsParentGuardian__c != Null])
            {
-               if(recipientMap.containsKey(dbRelationShip.npe4__RelatedContact__r.Name)){
-                   String name = dbRelationShip.npe4__RelatedContact__r.Name+' ';
-                   recipientMap.put(name,dbRelationShip);
-               }
-               else
-               recipientMap.put(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip);
-                system.debug('@@@@@@@@ recipientMapInside @@@@@@@@'+recipientMap.values());
+               if(emailMap.containsKey(dbRelationShip.npe4__RelatedContact__r.Name) && emailMap.get(dbRelationShip.npe4__RelatedContact__r.Name) == dbRelationShip.npe4__RelatedContact__r.Email){
+                   if(recipientMap.containsKey(dbRelationShip.npe4__RelatedContact__r.Name)){
+                       String name = dbRelationShip.npe4__RelatedContact__r.Name+' ';
+                       recipientMap.put(name,dbRelationShip);
+                   }
+                   else
+                   recipientMap.put(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip);
+                   
+                }
            }
-           system.debug('@@@@@@@@ recipientMapEmail @@@@@@@@'+recipientMap.values());
+           
           Pagereference PDF = Page.WishLiabilitySignNow;
+                String documentPDF;
                 PDF.setRedirect(false);
                 PDF.getParameters().put('Id',caseId);
-                String documentPDF = EncodingUtil.base64Encode(PDF.getContentAsPDF());
+                if(!Test.isRunningTest())
+                documentPDF = EncodingUtil.base64Encode(PDF.getContentAsPDF());
                 system.debug(PDF+'base64 value '+documentPDF);
                 String recipients = '';
                 Integer i = 1;
@@ -269,11 +272,11 @@ public class WishLiabilityForm_AC
                         '                }],'+
                         '     "radioGroupTabs": [{'+
                         '                    "groupName": "Radio Group 1",'+
-                        '                    "required": "false",'+
+                        '                    "required": "true",'+
                         '                    "radios": [{'+
                         '                    "anchorString": "~FirstRadio",'+
-                        '                    "anchorXOffset": "10",'+
-                        '                    "anchorYOffset": "24",'+
+                        '                    "anchorXOffset": "0",'+
+                        '                    "anchorYOffset": "0",'+
                         '                    "anchorIgnoreIfNotPresent": "false",' +
                         '                    "anchorUnits": "inches",'+
                         '                    "required": "false",'+
@@ -282,8 +285,8 @@ public class WishLiabilityForm_AC
                         '                    "xPosition": "300",'+
                         '                    "yPosition": "75"},{'+
                         '                    "anchorString": "~secondRadio",'+
-                        '                    "anchorXOffset": "5",'+
-                        '                    "anchorYOffset": "20",'+
+                        '                    "anchorXOffset": "0",'+
+                        '                    "anchorYOffset": "0",'+
                         '                    "anchorIgnoreIfNotPresent": "false",' +
                         '                    "anchorUnits": "inches",'+
                         '                    "required": "false",'+
@@ -301,6 +304,7 @@ public class WishLiabilityForm_AC
                         '                    "anchorXOffset": "0",' +
                         '                    "anchorYOffset": "0.2",' +
                         '                    "name"       : "FirstInitial",'+
+                        '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option1__c","writeBack":"true","allowSenderToEdit":"true"},'+
                         '                    "anchorIgnoreIfNotPresent": "false",' +
                         '                    "anchorUnits": "inches"},{'+
                         '                    "anchorString": "~initial2",' +
@@ -308,6 +312,7 @@ public class WishLiabilityForm_AC
                         '                    "conditionalParentLabel":"Radio Group 1",'+
                         '                    "conditionalParentValue" :"twoRadio",'+
                         '                    "name"       : "SecondInitial",'+
+                        '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option2__c","writeBack":"true","allowSenderToEdit":"true"},'+
                         '                    "anchorXOffset": "0",' +
                         '                    "anchorYOffset": "0.2",' +
                         '                    "anchorIgnoreIfNotPresent": "false",' +
@@ -530,7 +535,7 @@ public class WishLiabilityForm_AC
                         '                }],'+
                         '     "radioGroupTabs": [{'+
                         '                    "groupName": "Radio Group 1",'+
-                        '                    "required": "false",'+
+                        '                    "required": "true",'+
                         '                    "radios": [{'+
                         '                    "anchorString": "~FirstRadio",'+
                         '                    "anchorXOffset": "0",'+
@@ -562,13 +567,13 @@ public class WishLiabilityForm_AC
                         '                    "anchorXOffset": "0",' +
                         '                    "anchorYOffset": "0.2",' +
                         '                    "name"       : "FirstInitial",'+
-                        '                     "mergeField" : {"configurationType":"Salesforce","path":"case.Option1__c","writeBack":"true","allowSenderToEdit":"true"},'+
+                        '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option1__c","writeBack":"true","allowSenderToEdit":"true"},'+
                         '                    "anchorIgnoreIfNotPresent": "false",' +
                         '                    "anchorUnits": "inches"},{'+
                         '                    "anchorString": "~initial2",' +
                         '                    "optional"    :  "false",' +
                         '                    "conditionalParentLabel":"Radio Group 1",'+
-                        '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option1__c","writeBack":"true","allowSenderToEdit":"true"},'+
+                        '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option2__c","writeBack":"true","allowSenderToEdit":"true"},'+
                         '                    "conditionalParentValue" :"twoRadio",'+
                         '                    "name"       : "SecondInitial",'+
                         '                    "anchorXOffset": "0",' +

@@ -73,6 +73,10 @@ public class Application_AC{
         }
         else{
             
+            system.debug('@@@@@ Hi @@@@@'+volunteerRecordTypeId);
+            system.debug('@@@@@ Hi @@@@@'+contactId);
+            
+            system.debug('++++++++++' + [select id, recordTypeId from contact where id =: contactId]);
             currentVolunteer= [SELECT id,Title,RecordTypeId,FirstName,Middle_Name__c,LastName,State_Employer__c,Nickname__c,Birth_Month__c,Birth_Day__c,HomePhone,Alternate_Phone_Type__c,Preferred_Phone_Types__c,MobilePhone,
                     OtherPhone,Email,I_m_on_LinkedIn__c,How_did_you_hear_about_Make_A_Wish__c,MailingStreet,MailingCity,mailingstatecode,MailingCountrycode,MailingPostalCode,
                    Employer__c,Position__c,Street_Employer__c,City_Employer__c,Zip_Employer__c,May_We_Contact_You_at_Work__c,Interested_involved_with_Make_A_Wish__c,
@@ -423,7 +427,7 @@ public class Application_AC{
             '"recipients": {'+
             '    "signers" : [{'+
             '      "email": "'+currentVolunteer.email+'",'+
-            '      "name": "'+currentVolunteer.LastName+'",'+
+            '      "name": "'+currentVolunteer.FirstName+' '+currentVolunteer.LastName+'",'+
             '      "recipientId":"1",'+
             '      "clientUserId":"1",'+
             '      "tabs": {'+
@@ -476,7 +480,7 @@ public class Application_AC{
             string jsonPayload;
             system.debug('URL.getSalesforceBaseUrl().toExternalForm()'+URL.getSalesforceBaseUrl().toExternalForm());
             jsonPayload = '{'+
-                '    "userName": "'+currentVolunteer.LastName+'",'+
+                '    "userName": "'+currentVolunteer.FirstName+' '+currentVolunteer.LastName+'",'+
                 '    "email": "'+currentVolunteer.email+'",'+
                 '    "recipientId": "1",'+
                 '    "clientUserId": "1",'+
@@ -497,6 +501,7 @@ public class Application_AC{
                 system.debug('@@@@@@@ DOCUSIGN APPLICATION @@@@@@@@'+dsfs);
                 if(dsfs.id != Null){
                     currentVolunteer.is_Application__c = 'Submit';
+                    currentVolunteer.onboarding_status__c = 'Application';
                     if(!Test.isRunningTest())
                     update currentVolunteer;
                   

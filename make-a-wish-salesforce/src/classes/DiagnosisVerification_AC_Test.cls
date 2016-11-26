@@ -220,6 +220,18 @@ public class DiagnosisVerification_AC_Test{
         diagosis.updateLeadDetails();
         //diagosis.medicalWrapper.MediacalQuestions();
         diagosis.docusignRedirect();
+        PartAFormWrapper s = new PartAFormWrapper();
+        s.getchronicHeartFailureList();
+        s.getcongenitalHeartDiseaseList();
+        s.getconvulsiveDisorderList();
+        s.getStrokeValues();
+        s.getPulmonaryHypertensionValues();
+        s.getHepatitisValues();
+        s.getheartFailureList();
+        s.getArrhythmiaList();
+        s.getanginaList();
+        s.getventilatorList();
+        s.getLungDiseaseList();
          
         
      }

@@ -111,6 +111,11 @@
             <field>npe5__Contact__c.Gender__c</field>
             <table>npe5__Affiliation__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>npe5__Contact__c.Onboarding_Status__c</field>
+            <table>npe5__Affiliation__c</table>
+        </columns>
         <masterLabel>Affiliations</masterLabel>
     </sections>
     <sections>

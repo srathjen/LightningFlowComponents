@@ -142,7 +142,11 @@
         <description>This support process used to assign with parent wishes</description>
         <isActive>true</isActive>
         <values>
-            <fullName>Budget Approval</fullName>
+            <fullName>Budget Approval - Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Budget Approval - Submitted</fullName>
             <default>false</default>
         </values>
         <values>
@@ -1151,6 +1155,45 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>Hidden_Chapter_Email__c</fullName>
+        <description>This field is used to store the chapter email.</description>
+        <externalId>false</externalId>
+        <formula>Account.Email__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Chapter Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Chapter_Name__c</fullName>
+        <description>This Hidden field is used to store the Chapter Name value.</description>
+        <externalId>false</externalId>
+        <formula>Account.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Chapter Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Chapter_Phone__c</fullName>
+        <description>This field is used to store the chapter phone value</description>
+        <externalId>false</externalId>
+        <formula>Account.Phone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Chapter Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_Contact_Gender__c</fullName>
         <externalId>false</externalId>
         <label>Hidden Contact Gender</label>
@@ -1223,6 +1266,18 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Primary_Diagnosis_del__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead__r.PD_Condition_Description__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Primary Diagnosis.</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_Referral_date__c</fullName>
         <externalId>false</externalId>
         <formula>Lead__r.Referred_Date__c</formula>
@@ -1232,6 +1287,68 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Hidden_Secondary_Diagnosis_1__c</fullName>
+        <description>This field is used to store the SD2 Condition Description Value.</description>
+        <externalId>false</externalId>
+        <formula>Lead__r.SD2_Condition_Description__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Secondary Diagnosis 1</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Secondary_Diagnosis_2__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead__r.SD3_Condition_Description__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Secondary Diagnosis 2</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Secondary_Diagnosis_3__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead__r.SD4_Condition_Description__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Secondary Diagnosis 3</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Secondary_Diagnosis__c</fullName>
+        <description>This field is used to store the SD2 Condition Description Value</description>
+        <externalId>false</externalId>
+        <formula>Lead__r.SD1_Condition_Description__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Secondary Diagnosis</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Why_do_you_feel__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead__r.Why_do_you_feel_would_be_eligible_Wish__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Why do you feel</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Hidden_Wish_Child_City__c</fullName>
@@ -1655,6 +1772,18 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Medical_Summary_Attachments__c</fullName>
+        <description>This field is used to capture the associated lead attachment links</description>
+        <externalId>false</externalId>
+        <label>Medical Summary Attachments</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
         <fullName>Medication_require_refrigeration_Note__c</fullName>
         <description>It  capture the detailed information about medication require refrigeration</description>
         <externalId>false</externalId>
@@ -1712,7 +1841,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
                 <fullName>No</fullName>
                 <default>false</default>
             </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
@@ -2457,6 +2585,16 @@ on airplane</description>
         <fullName>Status</fullName>
         <picklist>
             <picklistValues>
+                <fullName>Budget Approval - Submitted</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Budget Approval - Approved</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
                 <fullName>Qualified</fullName>
                 <default>false</default>
                 <closed>false</closed>
@@ -2473,11 +2611,6 @@ on airplane</description>
             </picklistValues>
             <picklistValues>
                 <fullName>Wish Determined</fullName>
-                <default>false</default>
-                <closed>false</closed>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Budget Approval</fullName>
                 <default>false</default>
                 <closed>false</closed>
             </picklistValues>
@@ -2700,12 +2833,12 @@ on airplane</description>
             <picklistValues>
                 <fullName>Submitted</fullName>
                 <default>false</default>
-                <controllingFieldValues>Budget Approval</controllingFieldValues>
+                <controllingFieldValues>Budget Approval - Submitted</controllingFieldValues>
             </picklistValues>
             <picklistValues>
                 <fullName>Approved</fullName>
                 <default>false</default>
-                <controllingFieldValues>Budget Approval</controllingFieldValues>
+                <controllingFieldValues>Budget Approval - Submitted</controllingFieldValues>
             </picklistValues>
             <sorted>false</sorted>
         </picklist>
@@ -5626,7 +5759,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
     </validationRules>
     <validationRules>
         <fullName>Referral_date_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK( Hidden_Referral_date__c ))</errorConditionFormula>
         <errorMessage>Referral date should not be Blank.</errorMessage>
     </validationRules>
@@ -5932,7 +6065,7 @@ alert(&apos;Please Select Chapter Medical Advisor&apos;)
 } else if(caseStatus == &quot;Escalated&quot;){ 
 alert(&apos;The case is transferred to National MAC team &apos;) 
 } else{ 
-var resultEmailProcess = sforce.apex.execute(&quot;SendEmailToMacTeam_AC&quot;,&quot;sendEmailToMac&quot;,{caseOwnerId:&quot;{!Case.Local_MCA_TeamId__c}&quot;, leadId:&quot;{!Case.LeadId__c}&quot;, caseId:&quot;{!Case.Id}&quot;, caseStatus:&quot;Local&quot;}); 
+var resultEmailProcess = sforce.apex.execute(&quot;SendEmailToMacTeam_AC&quot;,&quot;sendEmailToMac&quot;,{caseOwnerId:&quot;{!Case.Local_MCA_TeamId__c}&quot;, leadId:&quot;{!Case.LeadId__c}&quot;, caseId:&quot;{!Case.Id}&quot;, caseStatus:&quot;Local&quot;, Email:&quot;{!Case.MAC_Email__c}&quot;}); 
 if(resultEmailProcess == &apos;Sucess&apos;) { 
 alert(&apos;Email sucessfully sent&apos;); 
 var record = new sforce.SObject(&quot;Case&quot;); 

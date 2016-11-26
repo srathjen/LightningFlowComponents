@@ -54,9 +54,10 @@ Public class UserTriggerHandler{
     }*/
     
     /* Update Volunteer Contact Details based on the User record details*/
-    public void UpdateVolunteerInfo(Map<Id,User> prospectiveUserMap){
+    public static void UpdateVolunteerInfo(Map<Id,User> prospectiveUserMap){
        List<Contact> updateContactList = new List<Contact>();
        List<npe5__Affiliation__c> updateAffiliationList = new List<npe5__Affiliation__c>();
+       List<ContactShare> contactSharingList = new List<ContactShare>();
         System.debug('prospectiveUserMap>>>>>>>>>>>>>>>'+prospectiveUserMap);
        
        for(Contact currRec : [SELECT id,MailingState,MailingPostalCode, MailingCity,Account.Volunteer_Manager__c, HomePhone FROM Contact WHERE Id IN :prospectiveUserMap.keySet()])
@@ -76,10 +77,21 @@ Public class UserTriggerHandler{
                    updateContact.OwnerId = currRec.Account.Volunteer_Manager__c;
                }
                updateContactList.add(updateContact);
+               
+               contactShare currContactSharing = new contactShare();
+               currContactSharing.ContactId = currRec.id;
+               currContactSharing.UserOrGroupId = prospectiveUserMap.get(currRec.id).id;
+               currContactSharing.ContactAccessLevel = 'Edit';
+               currContactSharing.RowCause = Schema.contactshare.RowCause.Manual;
+               contactSharingList.add(currContactSharing);
            }
+           
+           
        }
        if(updateContactList.size() > 0)
            update updateContactList;
+       if(contactSharingList.size() >0)
+           insert contactSharingList;
            
        // Updating the Affiliation Record status As Prospective.    
        for(npe5__Affiliation__c currRec : [SELECT id, npe5__Status__c FROM npe5__Affiliation__c  WHERE npe5__Contact__c IN :prospectiveUserMap.keySet() AND npe5__Status__c = 'Current'])

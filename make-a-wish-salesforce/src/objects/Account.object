@@ -1268,20 +1268,10 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
-        <fullName>MAC_Email__c</fullName>
-        <description>This filed is used to store the value of MAC Email.</description>
-        <externalId>false</externalId>
-        <label>MAC Email</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <type>Email</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>MAC_Email_del__c</fullName>
         <description>This filed is used to store the value of MAC Email.</description>
         <externalId>false</externalId>
-        <label>MAC Email</label>
+        <label>National Medical Advisor Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Email</type>

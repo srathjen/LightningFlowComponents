@@ -155,6 +155,34 @@
         }
         .dupHasRes { table-layout: fixed; }
         table td { overflow: hidden; }
+        
+      .slds .slds-checkbox .slds-checkbox--faux {
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+        border: 2px solid #2196F3;
+        border-radius: 2px;
+        background: white;
+        -webkit-transition: border 0.1s linear,background-color 0.1s linear;
+        transition: border 0.1s linear,background-color 0.1s linear;
+    }
+    .slds input[type="checkbox"]{
+    
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+        border: 2px solid #2196F3 !important;
+        border-radius: 2px;
+        background: white;
+        -webkit-transition: border 0.1s linear,background-color 0.1s linear;
+        transition: border 0.1s linear,background-color 0.1s linear;
+    
+    
+    }
     </style>
 
        
@@ -188,7 +216,7 @@
                                     <td class="slds-row-select"><apex:outputText value="{!masterRecord.Email}"/></td>
                                     <td class="slds-row-select"><apex:outputText value="{!masterRecord.Phone}"/></td>
                                     <td class="slds-row-select"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!masterRecord.DOB__c}" /></apex:outputText></td>
-                                    <td class="slds-row-select"><apex:outputText value="{!masterRecord.chapterName__r.Name}"/></td>
+                                    <td class="slds-row-select"><apex:outputText value="{!masterRecord.ChapterName__r.Name}"/></td>
                                 </tr>
                             </apex:repeat>
                             </tbody>
@@ -201,7 +229,7 @@
                 <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
                         <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Leads</h2>
-                        <p style="margin: 5px 0 0 60%;"><apex:inputCheckbox value="{!noDuplicate}"/> &nbsp;&nbsp;  Create New Record </p>
+                        <p style="margin: 5px 0 0 60%;"><apex:inputCheckbox value="{!noDuplicate}" style="border:10px solid black;" styleClass="slds-checkbox" /> &nbsp;&nbsp;  No Duplicate Found </p>
                      
                         <apex:commandButton action="{!nextStep}" rendered="{!hasResults}" value="Next" styleClass="slds-button slds-button--neutral" /> 
                     </div>
@@ -382,7 +410,7 @@
                                         <th class="slds-text-heading--label" scope="col">Phone</th>
                                         <th class="slds-text-heading--label" scope="col">Email</th>
                                         <th class="slds-text-heading--label" scope="col">Select Contact</th>
-                                        <th class="slds-text-heading--label" scope="col">Not Allow Duplicate</th>
+                                        <th class="slds-text-heading--label" scope="col">Create New Record</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -467,7 +495,7 @@
                                         <th class="slds-text-heading--label" scope="col">Phone</th>
                                         <th class="slds-text-heading--label" scope="col">Email</th>                                        
                                        <th class="slds-text-heading--label" scope="col">Select Contact</th>
-                                       <th class="slds-text-heading--label" scope="col">Not Allow Duplicate</th>
+                                       <th class="slds-text-heading--label" scope="col">Create New Record</th>
                                     </tr>
                                 </thead>
                                 <tbody>  
@@ -552,7 +580,7 @@
                                         <th class="slds-text-heading--label" scope="col">Phone</th>
                                         <th class="slds-text-heading--label" scope="col">Email</th>
                                         <th class="slds-text-heading--label" scope="col">Select Contact</th>
-                                        <th class="slds-text-heading--label" scope="col">Not Allow Duplicate</th>
+                                        <th class="slds-text-heading--label" scope="col">Create New Record</th>
                                     </tr>
                                 </thead>
                                 <tbody>

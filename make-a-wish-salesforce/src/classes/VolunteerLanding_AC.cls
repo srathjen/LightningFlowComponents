@@ -152,7 +152,7 @@ public class VolunteerLanding_AC {
           System.debug('nCOIDays +++++++++++++++++++++ ' + nCOIDays);
         }
         
-       if(currVolBGCheck.size() > 0 && conflictIns.size() > 0)
+     /*  if(currVolBGCheck.size() > 0 && conflictIns.size() > 0)
         {
         
             System.debug('1+++++++++++++++++++++ ' );
@@ -169,7 +169,7 @@ public class VolunteerLanding_AC {
                 flagForCOICancel = true;
             }
             
-           if(currVolBGCheck[0].Date__c >= Date.Today()  && currVolBGCheck[0].Date__c < Date.Today().addDays(bcDays))
+           else if(currVolBGCheck[0].Date__c >= Date.Today()  && currVolBGCheck[0].Date__c < Date.Today().addDays(bcDays))
             {
               displayPopup = True;
               flagForCancel = true;
@@ -194,16 +194,16 @@ public class VolunteerLanding_AC {
               flagForCancel = true;
              
             }
-        }
+        } */
         if(conflictIns.size() > 0 && myId == Null)
         {
         
-            if(conflictIns[0].Expiration_Date__c == Date.Today() && myId == Null)
-            {
-               flagForCOICancel= true;
-               displayPopupconflict = True;
+            If(conflictIns[0].Expiration_Date__c >= Date.Today()  && conflictIns[0].Expiration_Date__c < Date.Today().addDays(coiDays) && myId == Null){
+                displayPopupconflict = true;
+                flagForCOICancel = true;
             }
-            if(conflictIns[0].Expiration_Date__c < Date.Today() && myId == Null)
+        
+            else if(conflictIns[0].Expiration_Date__c < Date.Today() && myId == Null)
             {
                displayPopupconflict = True;
                flagForCOICancel = false;
@@ -211,15 +211,16 @@ public class VolunteerLanding_AC {
             }
         }
         
-        if(currVolBGCheck.size() > 0)
+        if(currVolBGCheck.size() > 0 && displayPopupconflict != True)
         {
         
-            if(currVolBGCheck[0].Date__c == Date.Today())
+           if(currVolBGCheck[0].Date__c >= Date.Today()  && currVolBGCheck[0].Date__c < Date.Today().addDays(bcDays))
             {
-               flagForCancel = true;
-               displayPopup = True;
+              displayPopup = True;
+              flagForCancel = true;
+             
             }
-            if(currVolBGCheck[0].Date__c < Date.Today())
+            else if(currVolBGCheck[0].Date__c < Date.Today())
             {
                displayPopup = True;
                flagForCancel = false;
@@ -227,7 +228,7 @@ public class VolunteerLanding_AC {
             }
         }
         
-        if(currVolBGCheck.size() > 1)
+        if(currVolBGCheck.size() > 1 && displayPopupconflict != True && displayPopup != True)
         {
             if(currVolBGCheck[0].status__c != 'Approved' && currVolBGCheck[1].date__c < Date.Today())
             {
@@ -249,7 +250,7 @@ public class VolunteerLanding_AC {
         
         List<Broadcast__c> recentBroadCastList = [SELECT id,Name, Broadcast_Message__c FROM Broadcast__c WHERE Name NOT IN :broadCastsNameSet AND (Date__c < :Date.Today().addDays(30)) AND Chapter_Name__c = :primaryChapter.npe5__Organization__c limit 1];
        
-        if(recentBroadCastList.size() > 0)
+        if(recentBroadCastList.size() > 0 && displayPopupconflict != true && displayPopup != true)
         {
           broadCaseMsg = recentBroadCastList[0].Broadcast_Message__c;
           broadCastName = recentBroadCastList[0].Name;
@@ -289,7 +290,8 @@ public class VolunteerLanding_AC {
                            FROM Class_Offering__c WHERE Chapter_Role_O_T__r.Orientation_Training__c NOT IN :orientationIds 
                            AND Chapter_Role_O_T__r.Orientation_Training__r.Prompt_upon_Login__c = True 
                            AND Chapter_Role_O_T__r.Orientation_Training__r.RecordType.Name = 'Training' 
-                           AND Chapter_Role_O_T__r.chapter_Role__c IN :chapterRoles   limit 1];
+                           AND Chapter_Role_O_T__r.chapter_Role__c IN :chapterRoles AND Date__c > :Date.Today() AND 
+                           max_capacity__c > 0 limit 1];
        
        List<Class_Offering__c> registeredClassOff = [SELECT id,Orientation_and_Training__c,Date__c,Chapter_Role_O_T__c,Chapter_Role_O_T__r.Orientation_Training__c,
                                                      Start_Time__c,End_Time__c FROM Class_Offering__c WHERE 
@@ -298,13 +300,13 @@ public class VolunteerLanding_AC {
                                                      Chapter_Role_O_T__r.Orientation_Training__r.RecordType.Name = 'Training' 
                                                      AND Chapter_Role_O_T__r.chapter_Role__c IN :chapterRoles limit 1];
        
-       if(registeredClassOff.size() > 0)
+       if(registeredClassOff.size() > 0 && displayPopupconflict != true && displayPopup != true  && blockNewBG != True)
        {
            displayTrainingAck = True;
        
        }
        
-       else if(diplayClassOffRec.size() > 0)
+       else if(diplayClassOffRec.size() > 0 && displayPopupconflict != true && displayPopup != true && blockNewBG != True)
        {
            trainingName = diplayClassOffRec[0].Orientation_and_Training__c;
            displayTrainingDetails = True;
@@ -375,6 +377,10 @@ public class VolunteerLanding_AC {
       else
       {
          blockNewBG = true;
+         displayPopupconflict = false;
+         displayPopup = false;
+         
+         
       }
       
     }

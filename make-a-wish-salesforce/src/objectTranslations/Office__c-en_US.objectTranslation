@@ -50,6 +50,10 @@
         <name>Phone_Number__c</name>
     </fields>
     <fields>
+        <label><!-- Referral Email --></label>
+        <name>Referral_Email_Address__c</name>
+    </fields>
+    <fields>
         <label><!-- State --></label>
         <name>State__c</name>
     </fields>

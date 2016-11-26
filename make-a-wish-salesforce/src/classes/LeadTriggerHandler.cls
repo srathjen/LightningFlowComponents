@@ -23,7 +23,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
     Map<String,Account> medicalAccountMap = new Map<String,Account>();
     List<Lead>convertedLeadList = new List<Lead>();
     
-   /*Convert the lead records when it is approved.*/
+    /*Convert the lead records when it is approved.*/
     public void onAfterUpdate(List<Lead> newLeads){
         
         Map<Id,Lead> convertedAccountMap = new Map<Id,Lead>();
@@ -36,7 +36,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         Set<Id> accountIds = new Set<Id>();
         List<Case>caseList = new List<Case>();
         List<cg__ContactFile__c> ConFileList = new List<cg__ContactFile__c>();
-                
+        
         List<npe4__Relationship__c> wishFamilyRelationList = new List<npe4__Relationship__c>();
         List<Contact> siblingList = new List<Contact>();
         LeadStatus convertStatus = [select MasterLabel from LeadStatus where IsConverted = true limit 1];
@@ -67,8 +67,8 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         }
         System.debug('Lead Convertion start1:');
         if (!leadConverts.isEmpty()) {
-         System.debug('Lead Convertion start2:');
-
+            System.debug('Lead Convertion start2:');
+            
             List<Database.LeadConvertResult> lcr = Database.convertLead(leadConverts);
             //List<String> SiblingList = new List<String>();
             Map<Id,Lead> convertedLeadMap = new Map<Id,Lead>();
@@ -246,7 +246,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     if(conMap.containsKey(convertLeads.getcontactId()))
                     {
                         newcase.ownerId = conMap.get(convertLeads.getcontactId()).ownerId;
-                       //newCase.Chapter_Name__c = conMap.get(convertLeads.getcontactId()).chapter_Name__c;
+                        //newCase.Chapter_Name__c = conMap.get(convertLeads.getcontactId()).chapter_Name__c;
                         newCase.ChapterName__c = LeadMap.get(convertLeads.getLeadId()).chapterName__c;
                         newCase.Hidden_Primary_Diagnosis__c = LeadMap.get(convertLeads.getLeadId()).Primary_Diagnosis__c;
                         
@@ -271,11 +271,11 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newcase.Status = 'Qualified';
                     newcase.Origin = 'Web';
                     if(LeadMap.get(convertLeads.getLeadId()).Referred_Date__c != null)
-                      newCase.Referral_Date__c = LeadMap.get(convertLeads.getLeadId()).Referred_Date__c;
+                        newCase.Referral_Date__c = LeadMap.get(convertLeads.getLeadId()).Referred_Date__c;
                     if(LeadMap.get(convertLeads.getLeadId()).Inquiry_Date__c!= null)
-                      newCase.Inquiry_Date__c= LeadMap.get(convertLeads.getLeadId()).Inquiry_Date__c;
-                      newCase.diagnosis_verificaion_receive_date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Received__c;
-                      newCase.diagnosis_verificaion_sent_date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Sent__c;
+                        newCase.Inquiry_Date__c= LeadMap.get(convertLeads.getLeadId()).Inquiry_Date__c;
+                    newCase.diagnosis_verificaion_receive_date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Received__c;
+                    newCase.diagnosis_verificaion_sent_date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Sent__c;
                     
                     
                     caseList.add(newcase);
@@ -303,31 +303,31 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             
             Map<Id, Id> docFolderContactsMAP = new Map<Id, Id>();
             for(cg__ContactFile__c contactFile: [SELECT Id, cg__Contact__c from cg__ContactFile__c where cg__File_Name__c =: 'Documents' and cg__Contact__c in: conId]){
-                  docFolderContactsMAP.put(contactFile.cg__Contact__c, contactFile.Id);                                              
+                docFolderContactsMAP.put(contactFile.cg__Contact__c, contactFile.Id);                                              
             }                                                
             
             for(Lead_File__c leadFile: [SELECT Id, Content_Type__c, Description__c, File_Name__c, File_Size__c,
                                         Is_Latest_Version__c, Key__c, Parent__c, Parent_Folder_Id__c, Private__c, Version_Description__c,
                                         Version_Id__c, WIP__c from Lead_File__c where Parent__c in: convertedLeadIds]){
-               
-                cg__ContactFile__c cFile=new cg__ContactFile__c();
-                
-                cFile.cg__Contact__c = leadFamilyMap.get(leadFile.Parent__c).ConvertedContactId;
-                cFile.cg__Content_Type__c = leadFile.Content_Type__c;
-                cFile.cg__Description__c = leadFile.Description__c;
-                cFile.cg__File_Name__c = leadFile.File_Name__c;
-                //cFile.cg__File_Size__c = leadFile.File_Size__c;
-                cFile.cg__Is_Latest_Version__c =  leadFile.Is_Latest_Version__c;
-                cFile.cg__Key__c = leadFile.Key__c;
-                cFile.cg__Parent_Folder_Id__c = docFolderContactsMAP.get(leadFamilyMap.get(leadFile.Parent__c).ConvertedContactId);
-                cFile.cg__Private__c = leadFile.Private__c;
-                cFile.cg__Version_Description__c = leadFile.Version_Description__c;
-                cFile.cg__Version_Id__c = leadFile.Version_Id__c;
-                cFile.cg__WIP__c = leadFile.WIP__c;
-                
-                ConFileList.add(cFile); 
-               
-            }
+                                            
+                                            cg__ContactFile__c cFile=new cg__ContactFile__c();
+                                            
+                                            cFile.cg__Contact__c = leadFamilyMap.get(leadFile.Parent__c).ConvertedContactId;
+                                            cFile.cg__Content_Type__c = leadFile.Content_Type__c;
+                                            cFile.cg__Description__c = leadFile.Description__c;
+                                            cFile.cg__File_Name__c = leadFile.File_Name__c;
+                                            //cFile.cg__File_Size__c = leadFile.File_Size__c;
+                                            cFile.cg__Is_Latest_Version__c =  leadFile.Is_Latest_Version__c;
+                                            cFile.cg__Key__c = leadFile.Key__c;
+                                            cFile.cg__Parent_Folder_Id__c = docFolderContactsMAP.get(leadFamilyMap.get(leadFile.Parent__c).ConvertedContactId);
+                                            cFile.cg__Private__c = leadFile.Private__c;
+                                            cFile.cg__Version_Description__c = leadFile.Version_Description__c;
+                                            cFile.cg__Version_Id__c = leadFile.Version_Id__c;
+                                            cFile.cg__WIP__c = leadFile.WIP__c;
+                                            
+                                            ConFileList.add(cFile); 
+                                            
+                                        }
         } 
         
         if(ConFileList.size() > 0)
@@ -409,10 +409,10 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 
                 if(!medicalAccountMap.containsKey(processconvertedLeads.Hospital_Treatment_Facility_Treating__c)){
                     if(processconvertedLeads.Hospital_Treatment_Facility_Treating__c != Null){
-                    Account newAccount = new Account();
-                    newAccount.Name = processconvertedLeads.Hospital_Treatment_Facility_Treating__c;
-                    newAccount.RecordTypeId = organizationRecordTypeId;
-                    newAccountMap.put(newAccount.Name,newAccount);
+                        Account newAccount = new Account();
+                        newAccount.Name = processconvertedLeads.Hospital_Treatment_Facility_Treating__c;
+                        newAccount.RecordTypeId = organizationRecordTypeId;
+                        newAccountMap.put(newAccount.Name,newAccount);
                     }
                 }
                 
@@ -428,7 +428,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         }
         
     }
-     public void dupeCheckonContact(List<Lead>convertedLeadList)
+    public void dupeCheckonContact(List<Lead>convertedLeadList)
     {
         Set<String> qualifyFirstNameSet = new Set<String>();
         Set<String> qualifyLastNameSet = new Set<String>();
@@ -777,33 +777,33 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         
         for(Lead newLead : leadList)
         {  
-        
-           if(newLead.id == Null)
-           {
-             if(exFNamesSet.contains(newLead.FirstName+'-'+newLead.chapterName__c) && exLNamesSet.contains(newLead.LastName+'-'+newLead.chapterName__c) && 
-                exbDaysSet.contains(newLead.Dob__c) && ((exAddressSet.contains(newLead.City+'-'+newLead.State+'-'+newLead.PostalCode+'-'+newLead.chapterName__c))
-                || exPhoneSet.contains(newLead.Phone+'-'+newLead.chapterName__c) 
-                || exemailsSet.contains(newLead.Email+'-'+newLead.chapterName__c)))
-              {
-                newLead.addError('There might be a duplicate Wish Child. If you want to create a record, Please choose No Duplicate Found field.');
-              }
-           }
+            
+            if(newLead.id == Null)
+            {
+                if(exFNamesSet.contains(newLead.FirstName+'-'+newLead.chapterName__c) && exLNamesSet.contains(newLead.LastName+'-'+newLead.chapterName__c) && 
+                   exbDaysSet.contains(newLead.Dob__c) && ((exAddressSet.contains(newLead.City+'-'+newLead.State+'-'+newLead.PostalCode+'-'+newLead.chapterName__c))
+                                                           || exPhoneSet.contains(newLead.Phone+'-'+newLead.chapterName__c) 
+                                                           || exemailsSet.contains(newLead.Email+'-'+newLead.chapterName__c)))
+                {
+                    newLead.addError('There might be a duplicate Wish Child. If you want to create a record, Please choose No Duplicate Found field.');
+                }
+            }
             
             else if(newLead.id != Null && exFNamesSet.contains(newLead.FirstName+'-'+newLead.chapterName__c) &&  (exLNamesSet.contains(newLead.LastName+'-'+newLead.chapterName__c)))
             {
-               newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
+                newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
             }
             else if(newLead.id != Null && ((exFNamesSet.contains(newLead.FirstName+'-'+newLead.chapterName__c) ||  exLNamesSet.contains(newLead.LastName+'-'+newLead.chapterName__c)) 
-                    && ((exAddressSet.contains(newLead.City+'-'+newLead.State+'-'+newLead.PostalCode+'-'+newLead.chapterName__c) 
-                         || exPhoneSet.contains(newLead.Phone+'-'+newLead.chapterName__c) || exemailsSet.contains(newLead.Email+'-'+newLead.chapterName__c)))))
+                                           && ((exAddressSet.contains(newLead.City+'-'+newLead.State+'-'+newLead.PostalCode+'-'+newLead.chapterName__c) 
+                                                || exPhoneSet.contains(newLead.Phone+'-'+newLead.chapterName__c) || exemailsSet.contains(newLead.Email+'-'+newLead.chapterName__c)))))
             {
                 newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
             }
             
             else if(newLead.id != Null && (exbDaysSet.contains(newLead.Dob__c) &&  ((exAddressSet.contains(newLead.City+'-'+newLead.State+'-'+newLead.PostalCode+'-'+newLead.chapterName__c) 
-                                                              || exPhoneSet.contains(newLead.Phone+'-'+newLead.chapterName__c) || exemailsSet.contains(newLead.Email+'-'+newLead.chapterName__c)))))
+                                                                                     || exPhoneSet.contains(newLead.Phone+'-'+newLead.chapterName__c) || exemailsSet.contains(newLead.Email+'-'+newLead.chapterName__c)))))
             {
-               newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
+                newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
             }
             else if(newLead.id != Null && ((exbDaysSet.contains(newLead.Dob__c) && exLNamesSet.contains(newLead.LastName+'-'+newLead.chapterName__c))))
             { 
@@ -812,12 +812,10 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             
             else if(newLead.id != Null && (exbDaysSet.contains(newLead.Dob__c) && exFNamesSet.contains(newLead.FirstName+'-'+newLead.chapterName__c)))
             {
-               newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
+                newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
             }
         }
-        
     } 
-    
     
     public void CreateNewCase(List<Lead> LeadList){
         List<Case> newCaseList = new List<Case>();
@@ -825,7 +823,6 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         set<Id> accountIdSet = new Set<Id>();
         
         for(Lead processLead : LeadList){
-            
             case newcase = new case();
             newCase.status = 'Open';
             newCase.origin = 'Email';
@@ -858,7 +855,6 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         Lead newLead = new Lead();
         for(Lead processMedicalQuestion :medicalList){
             String medicalQuestion = processMedicalQuestion.Medical_Questions__c;
-            
             if(medicalQuestion.contains('Yes')){
                 System.debug('Yes>>>>>>>>>');
                 processMedicalQuestion.RFI_Form_Info_Hidden__c = 'Qualified';
@@ -870,8 +866,43 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 updateLeadList.add(processMedicalQuestion);
             }
         }
+    }
+    //This method is used to update case with lead attachment file link in medical summary attchments field
+    public void updatecaseMedicalSummaryAttachments(set<id> leadFileIds){
+        Constant_AC  constant = new Constant_Ac();    
+        Id partARecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get(constant.partARecordTypeId).getRecordTypeId();
+        list<Lead_File__c> newLeadFileList = new list<Lead_File__c>();
+        list<case> updatedcaseList = new list<Case>();
+        Map<Id, List<Lead_File__c>> leadFileListMap = new Map<Id, List<Lead_File__c>>();
+        for(Lead_File__c currentLeadFile : [SELECT ID,File_Name__c,Parent__c,File_Path__c FROM Lead_File__c WHERE ID IN:leadFileIds]){
+            if(leadFileListMap.containsKey(currentLeadFile.Parent__c)) {
+                leadFileListMap.get(currentLeadFile.Parent__c).add(currentLeadFile);
+            } else {
+                leadFileListMap.put(currentLeadFile.Parent__c, new List<Lead_File__c>{currentLeadFile});
+            }
+        }
         
+        System.debug('>>>>>>>>>>Sample Data Check>>>>>'+leadFileListMap);
         
+        if(leadFileListMap.size() > 0 ){
+            for(Case currentCase : [SELECT ID,Lead__c,Medical_Summary_Attachments__c,RecordTypeId FROM Case WHERE RecordTypeId =:partARecordTypeId]){
+                if(leadFileListMap.containsKey(currentCase.Lead__c)){
+                    for(Lead_File__c getDownloadLink : leadFileListMap.get(currentCase.Lead__c)) {
+                        if(currentCase.Medical_Summary_Attachments__c == Null){
+                            system.debug('######## getDownloadLink.File_Path__c' +  getDownloadLink.File_Path__c);
+                            currentCase.Medical_Summary_Attachments__c =  '<a href=' + getDownloadLink.File_Path__c + '>' + getDownloadLink.File_Name__c + '</a> <br/>';
+                            updatedcaseList.add(currentCase);
+                        } else if(currentCase.Medical_Summary_Attachments__c != Null){
+                            currentCase.Medical_Summary_Attachments__c += '<a href=' + getDownloadLink.File_Path__c + '>' + getDownloadLink.File_Name__c + '</a> <br/>';
+                            updatedcaseList.add(currentCase);
+                        }
+                    }
+                }
+            }
+            if(updatedcaseList.size() > 0){
+                update updatedcaseList;
+            }
+        }
     }
     
 }

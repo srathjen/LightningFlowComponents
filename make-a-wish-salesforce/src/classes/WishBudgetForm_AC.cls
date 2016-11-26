@@ -359,9 +359,9 @@ public class WishBudgetForm_AC{
                     userIdsSet.add(getGroupUsers.UserOrGroupId);
                 }
             } 
-            userList = [SELECT Id, Name, Profile.Name, UserRole.Name FROM User WHERE Id IN : userIdsSet AND Profile.Name != 'Active Volunteer'];
+            userList = [SELECT Id, Name, Profile.Name, UserRole.Name FROM User WHERE Id IN : userIdsSet AND Profile.Name != 'Active Volunteer' AND IsActive=true];
         } else {
-            userList = [SELECT Id, Name, Profile.Name, UserRole.Name FROM User WHERE UserRole.Name = 'National Staff' OR Profile.Name = 'System Administrator'];
+            userList = [SELECT Id, Name, Profile.Name, UserRole.Name FROM User WHERE (UserRole.Name = 'National Staff' OR Profile.Name = 'System Administrator') AND IsActive=true];
         }
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Select Approver'));

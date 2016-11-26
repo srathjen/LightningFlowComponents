@@ -59,6 +59,10 @@
                 <behavior>Edit</behavior>
                 <field>Chapter__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Referral_Email_Address__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

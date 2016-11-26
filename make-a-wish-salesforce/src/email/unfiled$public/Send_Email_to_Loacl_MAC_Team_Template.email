@@ -1,6 +1,50 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="arial">Hello {!Case.Local_MCA_Team__c},<br></font><font face="arial"><br>This patient</font><span style="font-family: arial;">&nbsp;has been referred for a wish!<br></span><span style="font-family: arial;"><br>Please review this wish with your medical expertise.<br><ul><li>Is there enough information provided to make a determination of eligibility?</li><li>If so, can you give us your opinion?</li><li>If not, what additional information would be helpful?</li></ul>Simply reply to this email and your notes will be added to the record.<br></span><span style="font-family: arial;"><br>Wish Child Name: &nbsp;{!Case.Hidden_Lead_Name__c}</span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="arial">Primary Diagnosis: &nbsp;{!Case.Hidden_Primary_Diagnosis__c}</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="arial">Additional Diagnosis (if applicable):</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="arial">{!Case.Hidden_Secondary_Diagnosis__c}</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="arial">{!Case.Hidden_Secondary_Diagnosis_1__c}</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="arial">{!Case.Hidden_Secondary_Diagnosis_2__c}</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="arial">{!Case.Hidden_Secondary_Diagnosis_3__c}</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="arial">Notes from referring medical professional (if applicable):&nbsp;</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="arial">{!Case.Hidden_Why_do_you_feel__c}<br></font><span style="font-family: arial;"><br>Thanks to the support of you and other medical professionals around the country, we continue to come closer each year to our vision of making every eligible child’s wish come true. &nbsp;Thank you for taking the time to help us <i>share the power of a</i></span><i><font face="Century Gothic, sans-serif"><span style="font-size: 14.6667px;">&nbsp;</span></font><span style="font-family: arial;">wish</span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 11pt; vertical-align: super;">®</span></i><span style="font-family: arial;">.</span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><span style="font-family: arial;"><br>Thanks,<br></span><span style="font-family: arial;"><br>{!Case.Hidden_Chapter_Name__c}</span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="arial">{!Case.Hidden_Chapter_Phone__c}</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="arial">{!Case.Hidden_Chapter_Email__c}</font></p>]]></td>
+<![CDATA[<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">Hello {!Case.Local_MCA_Team__c},<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Please review this wish with your medical expertise. Is there
+enough information provided to make a determination of eligibility? If so, can
+you give us your opinion? If not, what additional information would be helpful?
+Simply reply to this email and your notes will be added to the record.<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Wish Child Name: &nbsp;{!Case.Hidden_Lead_Name__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Primary Diagnosis: &nbsp;{!Case.Hidden_Primary_Diagnosis_del__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Additional Diagnosis (if applicable):&nbsp;</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">{!Case.Hidden_Secondary_Diagnosis__c}<o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">{!Case.Hidden_Secondary_Diagnosis_1__c}<o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">{!Case.Hidden_Secondary_Diagnosis_2__c}<o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">{!Case.Hidden_Secondary_Diagnosis_3__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Notes from referring medical professional (if applicable):&nbsp;</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">{!Case.Hidden_Why_do_you_feel__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Thanks to the support of you and other medical professionals
+around the country, we continue to come closer each year to our vision of
+making every eligible child’s wish come true. &nbsp;Thank you for taking the
+time to help us share the power of a wish®.</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">The below are attachments links, You can download by clicking the links.</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br></span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="Century Gothic, sans-serif">{!Case.Medical_Summary_Attachments__c}</font><br><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Thanks,</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">{!Case.Hidden_Chapter_Name__c}<o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">{!Case.Hidden_Chapter_Phone__c}<o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">{!Case.Hidden_Chapter_Email__c}<o:p></o:p></span></p>]]></td>
 </tr>
 </table>

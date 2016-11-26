@@ -79,14 +79,14 @@
             border-top: 0px solid black  !important;
     }
         .sideNav {
-        	position: fixed;
+            position: fixed;
             z-index: 99;
-            top: 70px;
+            top: 160px;
             left: 5px;
         }
         .sideNav .navMenu {font-weight : 900;color:#0076d2;text-decoration:none;}
         .sideNav a {
-        	text-decoration : none !important;
+            text-decoration : none !important;
         }
         header,main {max-width : 1000px !important;}
     </style>
@@ -290,37 +290,38 @@
        <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
        <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />             
        <main role="main" class="container">
-		<div class="sideNav">
-            <a data-toggle="collapse" href="#childForm">
+        <div class="sideNav">
+            <!--<a data-toggle="collapse" href="#childForm">
                 [+]                       
-            </a>
-            <a class="navMenu" href="{!childForm}">WishChild Form</a>
-            <div id="childForm" class="panel-collapse collapse">
+            </a>-->
+            <a class="navMenu" href="{!childForm}">Wish Child Form</a>
+            <!--<div id="childForm" class="panel-collapse collapse">
                 <a href="#mainSec">Main Section</a><br/> 
                 <a href="#myFav">My Favourites</a><br/> 
                 <a href="#otherFav">Other Favourites</a>                    
-            </div>
+            </div>-->
             <br/>
             <a data-toggle="collapse" href="#familyForm">
                 [+]                       
             </a>
-            <a class="navMenu" href="{!familyForm}">WishFamily Form</a>
+            <a class="navMenu" href="{!familyForm}">Wish Family Form</a>
             <div id="familyForm" class="panel-collapse collapse">
-                <a href="#parentInfo">Gaurdian information</a><br/> 
+           
+                <a href="#parentInfo"> Parent/Legal Guardian</a><br/> 
                 <a href="#reqSign">Required Signatures</a><br/> 
                 <a href="#participantsInfo">Participants Info</a>                     
             </div>
             <br/>
-            <a data-toggle="collapse" href="#infoForm">
+          <!--  <a data-toggle="collapse" href="#infoForm">
                 [+]                       
-            </a>
-            <a class="navMenu" href="{!infoForm}">WishInformation Form</a>
-            <div id="infoForm" class="panel-collapse collapse">
+            </a>-->
+            <a class="navMenu" href="{!infoForm}">Wish Information Form</a>
+           <!-- <div id="infoForm" class="panel-collapse collapse">
                 <a href="#schedule">Scheduling</a><br/> 
                 <a href="#driverInfo">Driver Information</a><br/> 
                 <a href="#medInfo">Medical Information</a><br/> 
                 <a href="#travelInfo">Travel Information</a>                     
-            </div>
+            </div>-->
                 </div>    
     <apex:form id="frm">       
         <apex:pageblock id="membAdd">
@@ -612,6 +613,13 @@
                $(this).val(date);
             }
             
+            });
+             $(window).scroll(function (event) {
+            var scroll = $(window).scrollTop();
+            if( scroll > 2800 )
+                $('.sideNav').css('top','10px');
+                else
+                $('.sideNav').css('top','160px');
             });
            
             </script> 

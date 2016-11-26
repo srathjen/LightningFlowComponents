@@ -91,9 +91,9 @@
                 <apex:outputPanel rendered="{!(caseWithStatusMap['Wish'] == 'Completed' || caseWithStatusMap['Wish'] == 'Closed')}">
                     <li class="completed completedReferral">
                         <div class="step">
-                           <!-- <span class="title">Qualification</span> -->
-                            <apex:outputLink target="_top" value="/{!currCase.id}"><span class="title">Qualification</span></apex:outputLink>
-                            <!--<span class="title">Case</span>-->
+                          <span class="title">Qualification</span> 
+                             <!-- <apex:outputLink target="_top" value="/{!currCase.id}"><span class="title">Qualification</span></apex:outputLink>-->
+                             <!--<span class="title">Case</span>-->
                             <apex:outputPanel rendered="{!wishId != null}">
                                 <a href="/{!wishId}" target="_parent">
                                     <div class="bar" style="margin-right: 2% !important;">
@@ -118,9 +118,9 @@
                 <apex:outputPanel rendered="{!(caseWithStatusMap['Wish'] == 'New' || caseWithStatusMap['Wish'] == 'Qualified' || caseWithStatusMap['Wish'] == 'Granted' || caseWithStatusMap['Wish'] == 'Ready to Assign' || caseWithStatusMap['Wish'] == 'Wish Determined' || caseWithStatusMap['Wish'] == 'On Hold')}">
                     <li class="in-progress referredDays">
                         <div class="step">
-                           <!-- <span class="title">Qualification</span>-->
-                              <apex:outputLink target="_top" value="/{!currCase.id}"><span class="title">Qualification</span></apex:outputLink>
-                            <!--<span class="title">Case</span>-->
+                           <span class="title">Qualification</span> 
+                             <!-- <apex:outputLink target="_top" value="/{!currCase.id}"><span class="title">Qualification</span></apex:outputLink>-->
+                             <!--<span class="title">Case</span>-->
                               <apex:outputPanel rendered="{!wishId!= null}">
                                 <a href="/{!wishId}" target="_parent">
                                     <div class="bar">     
@@ -141,7 +141,9 @@
                  <apex:outputPanel rendered="{!(caseWithStatusMap['Wish'] == 'Inactive')}">
                     <li class="inactive">
                         <div class="step">
-                         <apex:outputLink target="_top"  value="/{!currCase.id}"><span class="title">Qualification</span></apex:outputLink>
+                         <span class="title">Qualification</span> 
+                             <!-- <apex:outputLink target="_top" value="/{!currCase.id}"><span class="title">Qualification</span></apex:outputLink>-->
+                          
                            <!-- <span class="title">Qualification</span>-->
                             <!--<span class="title">Case</span>-->
                               <apex:outputPanel rendered="{!wishId!= null}">

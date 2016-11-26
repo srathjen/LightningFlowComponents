@@ -13,15 +13,13 @@ public class CaseTriggerHandler {
     
     public static void UpdateWishRecordIdentifier(Set<Id> ParentIdsSet, Set<Id> chapterIds, Id recTypeId){
         Integer increment;
-        //date FYDate = Date.today();
+        boolean IsFYChanged =false;
         Datetime  FYDate = Datetime.now();
         String dateOutput = FYDate.format('yy');
         Integer FYYear=integer.valueof(dateOutput);
-        System.debug('Parent Wishes 1:'+ ParentIdsSet + ' - ' + chapterIds + ' - ' + recTypeId);
         Map<String,office__c> accountOfficeMap = new Map<String,office__c>();
         Set<Id> accountId = new Set<Id>();
         List<Period> financialPeriod = [SELECT StartDate, EndDate,IsForecastPeriod,Type FROM Period WHERE Type = 'Year' AND StartDate <= TODAY AND EndDate >= TODAY];
-        boolean IsFYChanged =false;
         if(financialPeriod.size()>0){
             if( (Date.today() >= financialPeriod[0].StartDate && Date.today() <= financialPeriod[0].EndDate) && (Date.today().addDays(-1)  >= financialPeriod[0].StartDate && Date.today().addDays(-1) <= financialPeriod[0].EndDate)){
                 IsFYChanged = true;
@@ -29,21 +27,13 @@ public class CaseTriggerHandler {
             FYDate  = datetime.newInstance(financialPeriod[0].EndDate.year(), financialPeriod[0].EndDate.month(),financialPeriod[0].EndDate.day()); 
             FYYear = integer.valueof(FYDate.format('yy'));
         }
-        
-        //for(Account currAccount : [SELECT ID FROM Account WHERE Name in : chapterIds]){
-        //    accountId.add(currAccount.id);     
-        //}
-        //System.debug('Parent Wishes 1.2:'+ accountId);
-        
         for(office__c currOffice : [SELECT Office_Id__c, Chapter__r.name,Chapter__c  FROM Office__c WHERE Chapter__c in : chapterIds]){
             accountOfficeMap.put(currOffice.Chapter__r.Name,currOffice );
         }
-        System.debug('Parent Wishes 1.3:'+ accountOfficeMap);
         List<Case> lstParentWishes=[SELECT Id, RecordTypeId, Unique_Wish_Record_Identifier__c,Fund_Id__c, ChapterName__c,ChapterName__r.Name  FROM Case WHERE Id In: ParentIdsSet and RecordTypeId =: recTypeId Order BY CreatedDate desc];
         List<Case> lstParentWisheRecordTypes = [SELECT Id, Unique_Wish_Record_Identifier__c, ChapterName__c,ChapterName__r.Name FROM Case WHERE RecordTypeId =: recTypeId and  Unique_Wish_Record_Identifier__c !=null Order BY CreatedDate desc Limit 2];
-        
-        System.debug('Parent Wishes 1.4:' + lstParentWishes);
-        System.debug('Parent Wishes 1.5:' + lstParentWisheRecordTypes );
+        System.debug('Parent Wishes 1:' + lstParentWishes);
+        System.debug('Parent Wishes 2:' + lstParentWisheRecordTypes );
         if(IsFYChanged){
             if(lstParentWisheRecordTypes.size()>0 && lstParentWisheRecordTypes[0].Unique_Wish_Record_Identifier__c != Null){
                 String wishRecordIdentifier=lstParentWisheRecordTypes[0].Unique_Wish_Record_Identifier__c;
@@ -51,46 +41,29 @@ public class CaseTriggerHandler {
                 increment = Integer.valueOf(wishRecordIdentifier) +1;
             }
             else{
-                increment = 1;
+                increment = 10001;
             }
         }
         else
         {
-            increment = 1;
+            increment = 10001;
         }
-        
-        String s = increment.format();
-        System.debug('Parent Wishes 1.6:' + s);
-        
         for(Case parentWishes: lstParentWishes){
-            if(s.length()==4){
-                s='0' + s;
-            } else if(s.length()==3){
-                s='00' + s;
-            } else if(s.length()==2){
-                s='000' + s;
-            } else if(s.length()==1){
-                s='0000' + s;
-            }
-            
             String temp = accountOfficeMap.containskey(parentWishes.ChapterName__r.Name) ? accountOfficeMap.get(parentWishes.ChapterName__r.Name).Office_Id__c : Null;
-            System.debug('Parent Wishes 1.7:' + temp );
             if(temp!=Null)
             {
-                parentWishes.Unique_Wish_Record_Identifier__c = temp.left(3) + '-' + FYYear + '-' + s;
-                if(parentWishes.Fund_Id__c ==null){
-                    parentWishes.Fund_Id__c = temp.left(3) + '-' + FYYear  + '-' + s;
+                if(parentWishes.Unique_Wish_Record_Identifier__c == null){
+                    parentWishes.Unique_Wish_Record_Identifier__c = temp.left(3) + '-' + FYYear + '-' + increment ;
                 }
-                
+                if(parentWishes.Fund_Id__c == null){
+                    parentWishes.Fund_Id__c = temp.left(3) + '-' + FYYear  + '-' + increment ;
+                }
             }
             increment=increment+1;
-            s= increment.format();
-            System.debug('parentWishes.Unique_Wish_Record_Identifier__c+++++++++++++'+parentWishes.Unique_Wish_Record_Identifier__c);
-        } 
-        System.debug('Parent Wishes 1.8:' + lstParentWishes);
-      
-        update lstParentWishes;
-       
+        }
+        System.debug('Parent Wishes 3:' + lstParentWishes);
+        if(lstParentWishes.size() > 0)
+            update lstParentWishes;   
     } 
     
     /* Used to create action track for different stages based on Chapter and used to pull Case team members to child wishes*/
@@ -193,7 +166,7 @@ public class CaseTriggerHandler {
     }
     
     //Used to submit parent wish for approval once the required volunteer assigend to Wish
-    public static void submitForApproval(List<Case> wishListForApproval) {
+   public static void submitForApproval(List<Case> wishListForApproval) {
         List<Approval.ProcessSubmitRequest> approvalRequestList = new List<Approval.ProcessSubmitRequest>();
         for(Case wishForApproval : wishListForApproval) {
             Approval.ProcessSubmitRequest approvalRequest = new Approval.ProcessSubmitRequest();
@@ -208,7 +181,7 @@ public class CaseTriggerHandler {
         }
     }
     // When the case status is updated the corresponding lead status should be update.
-    public static void UpdateLeadStatus(List<Case> caseList){
+   /* public static void UpdateLeadStatus(List<Case> caseList){
         Map<Id,Case> caseMap = new Map<Id,Case>();
         List<Lead> updateLeadList = new List<Lead>();
         for(Case processdbcaseList : caseList){
@@ -247,7 +220,7 @@ public class CaseTriggerHandler {
         
         if(updateLeadList.size() > 0)
             update updateLeadList;
-    }
+    }*/
     
     public static void CheckBudgetActuals(List<Case> budgetCases) {
        Set<Id> ActualsMatch = new Set<Id>();
@@ -413,8 +386,10 @@ public class CaseTriggerHandler {
                     totalFEInkind = totalFEInkind + expenseSatus.FE_Posted_In_Kind__c;
                 }
             }
-            if( totalActCash != totalFECash || totalActInKind !=totalFEInkind ){
-                ActualsMatch.add(IdStatus);
+            if(totalFECash + totalFEInkind >0){
+                if( totalActCash != totalFECash || totalActInKind !=totalFEInkind ){
+                    ActualsMatch.add(IdStatus);
+                }
             }
             totalActCash =0;
             totalActInKind =0;
@@ -1161,15 +1136,47 @@ public class CaseTriggerHandler {
      
      }
     
-    public static void sendEmailToNationalMACTeam(List<Case> diagnosisCaseList) {
+    public Static void sendEmailToNationalMACTeam(List<Case> diagnosisCaseList) {
+        Set<Id> leadIdSet = new Set<Id>();
+        Map<Id, List<Attachment>> docusignAttachmentMap = new Map<Id, List<Attachment>>();
+        Map<Id, Id> caseLeadMap = new map<Id, Id>();
+        Set<Id> parentAttachmentIdSet = new Set<Id>();
+        List<Case> diagnosisVerificationList = new List<Case>();
         for(Case diagnosisCase : diagnosisCaseList) {
-            SendEmailToMacTeam_AC.sendEmailToMac(diagnosisCase.Local_MCA_Team__c,diagnosisCase.Lead__c,diagnosisCase.Id,'National');
+            //SendEmailToMacTeam_AC.sendEmailToMac(diagnosisCase.Local_MCA_Team__c,diagnosisCase.Lead__c,diagnosisCase.Id,'National', diagnosisCase.MAC_Email__c);
+            caseLeadMap.put(diagnosisCase.Id, diagnosisCase.Lead__c);
+            leadIdSet.add(diagnosisCase.Lead__c);
+            diagnosisVerificationList.add(diagnosisCase);
+        }
+        
+        if(leadIdSet.Size() > 0) {
+            
+            for(dsfs__DocuSign_Status__c docusignStatusCheck : [SELECT Id, dsfs__Envelope_Status__c, dsfs__Lead__c FROM dsfs__DocuSign_Status__c WHERE dsfs__Envelope_Status__c = 'Completed' AND dsfs__Lead__c IN :  leadIdSet]) {
+                parentAttachmentIdSet.add(docusignStatusCheck.Id);
+            }
+            
+            if(parentAttachmentIdSet.Size() > 0) {
+                for(Attachment attachmentInfo : [select Name, ParentId, Body, BodyLength from Attachment where ParentId IN : parentAttachmentIdSet]) {
+                    if(docusignAttachmentMap.containsKey(attachmentInfo.ParentId)) {
+                        docusignAttachmentMap.get(attachmentInfo.ParentId).add(attachmentInfo);
+                    } else {
+                        docusignAttachmentMap.put(attachmentInfo.ParentId, new list<Attachment>{attachmentInfo});
+                    }
+                }
+            }
+            
+            if(diagnosisVerificationList.size() > 0) {
+                for(Case diagnosisVerificationCase : diagnosisVerificationList) {
+                    SendEmailToMacTeam_AC.sendEmail(docusignAttachmentMap, 'National', diagnosisVerificationCase.Local_MCA_Team__c, diagnosisVerificationCase.MAC_Email__c, diagnosisVerificationCase.Id);
+                }
+            }
+            
         }
     }
     
     /* This  CreateSubCases() is used to create planning and Granting and Impact sub cases and update the parent case owner and
        close the wish determination sub case.*/
-    public static void CreateSubCases(List<Case> parentCaseList){
+  /*  public static void CreateSubCases(List<Case> parentCaseList){
         Set<Id> caseId = new Set<Id>();
         Set<Id> accountId = new Set<Id>();
         Map<Id,Account> accountMap = new Map<Id,Account>();
@@ -1184,6 +1191,44 @@ public class CaseTriggerHandler {
         }
         
         for(Case processParentList : parentCaseList);
+    }*/
+    
+    public static void updateChildCase(List<Case> parentCaseList){
+     Map<Id,Case> parentCaseMap = new Map<Id,Case>();
+     Map<Id,Case> updateChildCaseMap = new Map<Id,Case>();
+     List<Case> insertchildCaseList = new List<Case>();
+     Constant_AC  constant = new Constant_Ac();    
+     String wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+     String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+     String wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+     String wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+     String wishEffectRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishEffectRT).getRecordTypeId();
+   
+        for(Case processParentCase : parentCaseList){
+            parentCaseMap.put(processParentCase.Id,processParentCase); 
+        }
+        
+        for(Case dbParentCase : [SELECT Id,OwnerId,Status,ParentId,RecordTypeId from Case WHERE ParentId =: parentCaseMap.keySet() AND RecordTypeId  =: wishDeterminationRecordTypeId ]){
+          if(parentCaseMap.containsKey(dbParentCase.ParentId)){
+           dbParentCase.OwnerId = parentCaseMap.get(dbParentCase.ParentId).OwnerId;
+           dbParentCase.Status = 'Closed';  
+           updateChildCaseMap.put(dbParentCase.Id,dbParentCase);
+          }
+        }
+        if(updateChildCaseMap.size() > 0)
+        update updateChildCaseMap.values();
+        
+        for(Case ProcessChilldCaseId : updateChildCaseMap.values()){
+        Case newPlanningWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Planning', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishPlanningRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
+        insertchildCaseList.add(newPlanningWish); 
+        Case newGrantingWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Granting', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishGrantRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
+        insertchildCaseList.add(newGrantingWish); 
+        Case newImpactWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Impact', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishEffectRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
+        insertchildCaseList.add(newImpactWish); 
+        }
+        
+        if(insertchildCaseList.size() > 0)
+        insert insertchildCaseList;
     }
     
 }

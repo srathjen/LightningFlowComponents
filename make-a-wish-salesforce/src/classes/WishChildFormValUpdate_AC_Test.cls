@@ -46,7 +46,9 @@ public class WishChildFormValUpdate_AC_Test {
         newWish.Case_Team_Member2__c = 'Member 2';
         newWish.Wish_Determination_Case_Id__c = wihdetermination.id;
         insert newWish;
+        Test.startTest();
         WishChildFormValUpdate_AC.UpdateWishChildandWishFamily(caseDetails);
+        Test.stopTest();
         
         
     }

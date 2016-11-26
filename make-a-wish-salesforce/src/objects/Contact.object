@@ -3416,6 +3416,38 @@ and the date it was or will be granted.</inlineHelpText>
         <visibleLines>25</visibleLines>
     </fields>
     <fields>
+        <fullName>Onboarding_Status__c</fullName>
+        <description>It will indicate which level volunteer now.</description>
+        <externalId>false</externalId>
+        <label>Onboarding Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Orientation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Application</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Interview</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Background Check</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Training</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
         <fullName>OtherAddress</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>

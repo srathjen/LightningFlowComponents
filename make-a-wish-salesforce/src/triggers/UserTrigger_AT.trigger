@@ -9,6 +9,7 @@ Description : This UserTrigger_AT is used to create a public group and public gr
 trigger UserTrigger_AT on User (after insert,after update,before update) {
     List<User> newUserList = new List<User>();
     Map<Id,User> prospectiveUserMap = new Map<Id,User>();
+   
     
     if(Trigger.isAfter && Trigger.isInsert){
         for(User newUser : Trigger.new){
@@ -16,16 +17,25 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
                 newUserList.add(newUser);
             }
           
-            if((newUser.ProfileId == label.Prospective_Volunteer) && (newUser.contactId != Null))
+            system.debug('newUser.ProfileId+++++++++++++++++++++++++++++++++++ ' + newUser.ProfileId);
+            system.debug('newUser.Active_Volunteer_Profile+++++++++++++++++++++++++++++++++++ ' + label.Active_Volunteer_Profile);
+            
+            system.debug('newUser.contactId++++++++++++++++= ' + newUser.contactId);
+          
+            if((newUser.ProfileId == label.Prospective_Volunteer || newUser.ProfileId == String.valueOf(label.Active_Volunteer_Profile).trim()) && (newUser.contactId != Null))
             {
               prospectiveUserMap.put(newUser.contactId, newUser);
+              System.debug('Sucesss++++++++++++++++++++++++++ ');
             }
+           System.debug('prospectiveUserMap++++++++++++++++++++++++++ '+prospectiveUserMap);
         }
-        UserTriggerHandler userHandlerIns = new UserTriggerHandler();
-        if(newUserList.size() > 0)
+       // UserTriggerHandler userHandlerIns = new UserTriggerHandler();
+       // if(newUserList.size() > 0)
           //userHandlerIns.createpublicGroup(newUserList);
         if(prospectiveUserMap.size() > 0)
-            userHandlerIns.UpdateVolunteerInfo(prospectiveUserMap);
+        {
+            UserTriggerHandler.UpdateVolunteerInfo(prospectiveUserMap);
+        }
     }
     
     if(Trigger.isAfter && Trigger.isUpdate){
@@ -35,6 +45,8 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
              if(newUser.IsActive == false && trigger.oldMap.get(newUser.Id).IsActive == TRue){
                  inActiveUserIdSet.add(newUser.Id);
              }
+             
+           
          }
         
         if(inActiveUserIdSet.size() > 0)

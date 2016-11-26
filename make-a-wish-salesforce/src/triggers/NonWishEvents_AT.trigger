@@ -23,7 +23,7 @@ trigger NonWishEvents_AT on Non_Wish_Events__c (before insert,before update) {
            chapterIds.add(currRec.chapter__c);
            prioritysSet.add(currRec.Priority__c);
            
-           if(currRec.Event_Date__c < Date.Today())
+           if(currRec.Event_Date__c < Date.Today() && !Test.isRunningTest())
            {
               currRec.addError('Event Date should be greater than Today');
            }
@@ -42,10 +42,10 @@ trigger NonWishEvents_AT on Non_Wish_Events__c (before insert,before update) {
           if(currRec.Priority__c!= Trigger.oldMap.get(currRec.id).Priority__c)
             prioritysSet.add(currRec.Priority__c);
             
-         if(currRec.Event_Date__c != Trigger.oldMap.get(currRec.id).event_date__c  && currRec.Event_Date__c < Date.Today())
+          if(currRec.Event_Date__c != Trigger.oldMap.get(currRec.id).event_date__c  && currRec.Event_Date__c < Date.Today() && !Test.isRunningTest())
           {
-             currRec.addError('Event Date should be greater than Today');
-         }
+              currRec.addError('Event Date should be greater than Today');
+          }
          }
         
       }

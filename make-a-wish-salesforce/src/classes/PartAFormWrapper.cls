@@ -48,11 +48,11 @@ Public class PartAFormWrapper
     public Boolean otherDiagnosis2 {get;set;}
     public Boolean otherDiagnosis3 {get;set;}
     public Boolean otherDiagnosis4 {get;set;}
-    public Boolean parentNutrition {get;set;}
-    public String yesNoPickListVal {get;set;}
-    public String yesNoOtherPickListVal {get;set;}
-    public String cardioPckListVal {get;set;}
-    public String convulsionsPicklistVal {get;set;}
+    //public Boolean parentNutrition {get;set;}
+    //public String yesNoPickListVal {get;set;}
+    //public String yesNoOtherPickListVal {get;set;}
+    //public String cardioPckListVal {get;set;}
+    //public String convulsionsPicklistVal {get;set;}
     public String healthCareWork{get;set;}
     public String vegetativeState{get;set;}
     public String treatingFName{get;set;}

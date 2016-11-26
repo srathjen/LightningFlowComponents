@@ -200,6 +200,11 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
         <type>Checkbox</type>
     </fields>
     <label>Background Check File</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
     <nameField>
         <displayFormat>A-{0000}&quot;</displayFormat>
         <label>Background Check File Number</label>

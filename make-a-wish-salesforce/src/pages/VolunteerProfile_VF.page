@@ -1294,7 +1294,7 @@
               if ($('form').valid()){
                 $('form').submit();
                 console.log('emergecy Form submitted');
-                // taken from rendered button in order to control submit (rerender="formId, uiStates")
+                // taken from rendered button in order to control submit (rerender="formIds, uiStates")
                 return A4J.AJAX.Submit('j_id0:formId',event,{'similarityGroupingId':'j_id0:formId:j_id466','html5Validate':true,'parameters':{'j_id0:formId:j_id466':'j_id0:formId:j_id466'} } );
                 //return false; // prevent normal form posting
               }

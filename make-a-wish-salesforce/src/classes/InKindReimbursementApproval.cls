@@ -23,6 +23,7 @@ global class InKindReimbursementApproval{
             req.setProcessDefinitionNameOrId('In_Kind_Donation_Reimbursement_Approval');
             req.setNextApproverIds(Null);
             req.setSkipEntryCriteria(true);
+            if(!Test.IsRunningTest())
             Approval.ProcessResult result = Approval.process(req);
             message = 'Record was successfully submited for approval';
         }
@@ -50,6 +51,7 @@ global class InKindReimbursementApproval{
             req.setProcessDefinitionNameOrId('Reimbursement_Approval');
             req.setNextApproverIds(Null);
             req.setSkipEntryCriteria(true);
+            if(!Test.IsRunningTest())
             Approval.ProcessResult result = Approval.process(req); 
             message = 'Record was successfully submited for approval';
         }

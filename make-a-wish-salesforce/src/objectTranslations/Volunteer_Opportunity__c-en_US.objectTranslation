@@ -369,6 +369,10 @@
             <label><!-- Non-Wish &amp; Event Details --></label>
             <section>Non-Wish &amp; Event Details</section>
         </sections>
+        <sections>
+            <label><!-- Volunteer Details --></label>
+            <section>Volunteer Details</section>
+        </sections>
     </layouts>
     <layouts>
         <layout>Non Wish &amp; Event for Volunteers</layout>
@@ -400,6 +404,10 @@
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Volunteer Details --></label>
+            <section>Volunteer Details</section>
         </sections>
         <sections>
             <label><!-- Wish Child Details --></label>

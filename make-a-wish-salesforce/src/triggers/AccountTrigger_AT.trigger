@@ -6,51 +6,38 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         string userId = UserInfo.getUserId();
         string contactId;
         list<User> userList = [SELECT Id,ContactId FROM User WHERE Id =: userId AND ContactId != Null limit 1];
-        if(userList.Size() == 1)
-            contactId = userList[0].ContactId;
         list<Contact> contactList;
+        if(userList.Size() == 1){
+            contactId = userList[0].ContactId;
+            contactList = [SELECT ID,AccountId,Account.Wish_Co_ordinator__c FROM Contact WHERE ID =: contactId AND Account.Wish_Co_ordinator__c != Null];
+        }
         set<id> chapterAccountIdsSet = new set<id>();
         map<id,string> chapterMap = new map<id,string>();
         Id inKindDonorsAccountRecordTypeId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
-        if(contactId != Null){
-            contactList = [SELECT ID,AccountId,Account.Wish_Co_ordinator__c FROM Contact WHERE ID =: contactId AND Account.Wish_Co_ordinator__c != Null];
-            for(Account currentAccount : Trigger.new){
-                 
-                if(currentAccount.RecordTypeId == inKindDonorsAccountRecordTypeId && contactList[0].Account.Wish_Co_ordinator__c!= Null){
-                    currentAccount.Chapter_Name__c = contactList[0].AccountId;
-                }
-                else{
-                    
-                     currentAccount.addError('There is no approver for this account.');
-                }
+        for(Account currentAccount : Trigger.new){
+            if(contactId != Null){
+                currentAccount.Chapter_Name__c = contactList[0].AccountId;
             }
-        }
-        
-        for(Account inKindAccount : trigger.new){
-            if(inKindAccount.RecordTypeId == inKindDonorsAccountRecordTypeId && inKindAccount.Chapter_Name__c != Null){
-            
-                chapterAccountIdsSet.add(inKindAccount.Chapter_Name__c);
-            }
-            
-            if(chapterAccountIdsSet.size() > 0){
-                for(Account chapterAccount : [SELECT Id,Wish_Co_ordinator__c,Wish_Co_ordinator__r.Email FROM Account WHERE Id IN: chapterAccountIdsSet AND Wish_Co_ordinator__c != Null]){
-                    chapterMap.put(chapterAccount.Id,chapterAccount.Wish_Co_ordinator__r.Email);
-                }
-            }
-        }
-        
-        for(Account inKindAccount : trigger.new){
-           if(inKindAccount.RecordTypeId == inKindDonorsAccountRecordTypeId ){
-            if(inKindAccount.Chapter_Name__c != Null && chapterMap.containsKey(inKindAccount.Chapter_Name__c )){
-                
-                inKindAccount.Wish_Co_ordinator_Hidden_Email__c = chapterMap.get(inKindAccount.Chapter_Name__c);
+            if(currentAccount.RecordTypeId == inKindDonorsAccountRecordTypeId && currentAccount.Chapter_Name__c != Null){
                
-            }
-              else
-                inKindAccount.addError('There is no approver for this account.');
-           } 
+                chapterAccountIdsSet.add(currentAccount.Chapter_Name__c);
+            } 
         }
+        if(chapterAccountIdsSet.size() > 0){
+            for(Account chapterAccount : [SELECT Id,Wish_Co_ordinator__c,Wish_Co_ordinator__r.Email FROM Account WHERE Id IN: chapterAccountIdsSet AND Wish_Co_ordinator__c != Null]){
+                chapterMap.put(chapterAccount.Id,chapterAccount.Wish_Co_ordinator__r.Email);
+            }
+        }
+        
+        for(Account inKindAccount : trigger.new){
+            if(inKindAccount.RecordTypeId == inKindDonorsAccountRecordTypeId && inKindAccount.Chapter_Name__c != Null && chapterMap.containsKey(inKindAccount.Chapter_Name__c)){
+                inKindAccount.Wish_Co_ordinator_Hidden_Email__c = chapterMap.get(inKindAccount.Chapter_Name__c);
+            }
+        }
+        
     }
+    
+    
     
     //After insert trigger to fire the approval process once inkind donor account is created
     if(trigger.isAfter && trigger.isInsert){
@@ -78,23 +65,14 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
             inKindDonorAccountWithChildRecords.add(inKindRecordCheck.In_Kind_Donor_Name__c);
         }
         for(Account inKindAccount : trigger.new){
-            System.debug('????????????2????????????');
-            /*if(volunteerManagersMap.containsKey(inKindAccount.Chapter_Name__c) && !inKindDonorAccountWithChildRecords.contains(inKindAccount.Id) && !String.isEmpty(volunteerManagersMap.get(inKindAccount.Chapter_Name__c))) {
-                Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
-                req.setComments('Submitting request for approval');
-                req.setObjectId(inKindAccount.id);
-                req.setProcessDefinitionNameOrId('Account_In_Kind_Donors_Approval');
-                req.setNextApproverIds(new Id[]{volunteerManagersMap.get(inKindAccount.Chapter_Name__c)});
-                req.setSkipEntryCriteria(true);
-                Approval.ProcessResult result = Approval.process(req);
-            } else*/ if(chaptterMap.containsKey(inKindAccount.Chapter_Name__c) && !String.isEmpty(chaptterMap.get(inKindAccount.Chapter_Name__c))){
+            if(chaptterMap.containsKey(inKindAccount.Chapter_Name__c) && !String.isEmpty(chaptterMap.get(inKindAccount.Chapter_Name__c))){
                 Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
                 req.setComments('Submitting request for approval');
                 req.setObjectId(inKindAccount.id);
                 req.setProcessDefinitionNameOrId('Account_In_Kind_Donors_Approval');
                 req.setNextApproverIds(new Id[]{chaptterMap.get(inKindAccount.Chapter_Name__c)});
                 req.setSkipEntryCriteria(true);
-              //  Approval.ProcessResult result = Approval.process(req);
+                Approval.ProcessResult result = Approval.process(req);
             }
         }
     }

@@ -21,6 +21,15 @@ public class OrientationandTrainingUtil{
         insert newchapterAccount;
         return newchapterAccount.id;
     }
+    public static account CreateAmericaAccount(){
+        Constant_AC  constant = new Constant_AC();
+        Id ChapterRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
+        Account newchapterAccount = new Account();
+        newchapterAccount.Name = 'Make-A-Wish America';
+        newchapterAccount.RecordTypeId = ChapterRecordTypeId;
+        insert newchapterAccount;
+        return newchapterAccount;
+    }
     
     public static Account inKindAccount(){
         Constant_AC  constant = new Constant_AC();
@@ -486,6 +495,24 @@ insert newChapter;*/
         insert newSetting;
         return newSetting;
     }
+    
+    public static Case CreateDiagnosisNewCase(){
+        Constant_AC  constant = new Constant_Ac();
+         Account chapterAccount = createchapterAccount();
+        Lead newLead = createTestLeadRec(chapterAccount.Id);
+         Contact newContact = CreateMedicalProfContact();
+        Id diagnosisVerificationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.partARecordTypeId).getRecordTypeId();
+        Case newDiagnosis = new Case();
+        newDiagnosis.Lead__c = newLead.id;
+        newDiagnosis.Local_MCA_Team__c = newContact.id;
+        newDiagnosis.MAC_Email__c = 'chandrasekar@mstsolutions.com';
+        newDiagnosis.RecordTypeId = diagnosisVerificationRecordTypeId;
+        insert newDiagnosis;
+        return newDiagnosis;
+        
+    }
+    
+    
     public static case CreateParentCase( Id wishChildId) {
         Constant_AC  constant = new Constant_Ac();    
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
@@ -601,6 +628,7 @@ insert newChapter;*/
         newGrantWish.ChapterName__c = CreateAlabamaAccount();
         newGrantWish.Subject = 'Wish Grant';
         newGrantWish.ContactId = wishChildId;
+        newGrantWish.ParentId = parentCaseId;
         insert newGrantWish;
         return newGrantWish;
         
@@ -719,7 +747,7 @@ insert newChapter;*/
         
     }
     
-    public static List<Volunteer_Opportunity__c> NewWishVolunteerOpportunityList(Id chapterId, Id roleId, Id wishId,Integer count) {
+    public static List<Volunteer_Opportunity__c> NewWishVolunteerOpportunityList(Id chapterId, Id roleId, Id wishId,Id volContactId, Integer count) {
         Constant_AC  constant = new Constant_Ac();    
         Id wishVolunteerOpportunityRecordTypeId = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
         List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
@@ -729,6 +757,7 @@ insert newChapter;*/
             newWishOpportunity.Wish__c = wishId;
             newWishOpportunity.Chapter_Name__c = chapterId;
             newWishOpportunity.IsApproved__c = false;
+            newWishOpportunity.Volunteer_Name__c = volContactId;
             newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
             volunteerOpportunityList.add(newWishOpportunity);
             insert newWishOpportunity;
@@ -737,7 +766,7 @@ insert newChapter;*/
         
     }
     
-    public static List<Volunteer_Opportunity__c> NewnonWishVolunteerOpportunityList(Id chapterId, Id roleId, Id nonWishId,Integer count) {
+    public static List<Volunteer_Opportunity__c> NewnonWishVolunteerOpportunityList(Id chapterId, Id roleId, Id nonWishId,Id VolContactId,Integer count) {
         Constant_AC  constant = new Constant_Ac();    
         Id wishVolunteerOpportunityRecordTypeId = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
         List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
@@ -747,6 +776,7 @@ insert newChapter;*/
             newWishOpportunity.Non_Wish_Event__c = nonWishId;
             newWishOpportunity.Chapter_Name__c = chapterId;
             newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
+            newWishOpportunity.Volunteer_Name__c = VolContactId;
             volunteerOpportunityList.add(newWishOpportunity);
             insert newWishOpportunity;
         }
@@ -1386,28 +1416,28 @@ retrun newLeadFile;*/
         insert checkinTask;
         return checkinTask;
     }
-        //Used to create followup activities task
-        public static Task createFollupActivitiesTask(Id ParentWishId, Id OwnerId) {
-            Task checkinTask = new Task();
-            checkinTask.ActivityDate = System.today() + 30;
-            checkinTask.Subject = 'Volunteer wish follow-up activities not complete';
-            checkinTask.Status = 'Not Started';
-            checkinTask.WhatId = parentWishId;
-            checkinTask.OwnerId = OwnerId;
-            insert checkinTask;
-            return checkinTask;
-        }
-            
-            //Used to create followup activities task
-        public static Task reviewPhotos(Id ParentWishId) {
-            Task checkinTask = new Task();
-            checkinTask.ActivityDate = System.today() + 30;
-            checkinTask.Subject = 'Review photos/videos';
-            checkinTask.Status = 'Not Started';
-            checkinTask.WhatId = parentWishId;
-            insert checkinTask;
-            return checkinTask;
-        }
+    //Used to create followup activities task
+    public static Task createFollupActivitiesTask(Id ParentWishId, Id OwnerId) {
+        Task checkinTask = new Task();
+        checkinTask.ActivityDate = System.today() + 30;
+        checkinTask.Subject = 'Volunteer wish follow-up activities not complete';
+        checkinTask.Status = 'Not Started';
+        checkinTask.WhatId = parentWishId;
+        checkinTask.OwnerId = OwnerId;
+        insert checkinTask;
+        return checkinTask;
+    }
+    
+    //Used to create followup activities task
+    public static Task reviewPhotos(Id ParentWishId) {
+        Task checkinTask = new Task();
+        checkinTask.ActivityDate = System.today() + 30;
+        checkinTask.Subject = 'Review photos/videos';
+        checkinTask.Status = 'Not Started';
+        checkinTask.WhatId = parentWishId;
+        insert checkinTask;
+        return checkinTask;
+    }
     
     public static Task passportRequestTask(Id parentWishId) {
         Task checkinTask = new Task();
@@ -1586,7 +1616,7 @@ retrun newLeadFile;*/
         return newCaseFile;
     }
     
-     public static cg__contactFile__c createContactFileRecord(Id contactId) {
+    public static cg__contactFile__c createContactFileRecord(Id contactId) {
         cg__ContactFile__c newContactFile = new cg__ContactFile__c();
         newContactFile.cg__File_Name__c = 'MedicalSummary.txt';
         newContactFile.cg__Contact__c = contactId;
@@ -1817,7 +1847,7 @@ retrun newLeadFile;*/
         return notClosed;
     }
     
-   public static cg__accountFile__c createAccountFileRecord(Id accountId) {
+    public static cg__accountFile__c createAccountFileRecord(Id accountId) {
         cg__AccountFile__c newAccountFile = new cg__AccountFile__c();
         newAccountFile.cg__File_Name__c = 'MedicalSummary.txt';
         newAccountFile.cg__Account__c = accountId;
@@ -1842,6 +1872,40 @@ retrun newLeadFile;*/
         insert newBackground;
         return newBackground;
     }
+    
+    public static  Wish_Expense_Type__c CreateWishExpenseTypeRecord(){
         
+        Wish_Expense_Type__c  currType= new  Wish_Expense_Type__c();
+        currType.Name='Airfare';
+        return currType;
+    }  
+    
+    public static Wish_Expense_Transaction_Code__c CreateWishExpenseTransactionCodeRecord( ID wishtypeId){
         
+        Wish_Expense_Transaction_Code__c  currtransactionCode= new Wish_Expense_Transaction_Code__c();
+        currtransactionCode.Name='Airfare Other';
+        currtransactionCode.Wish_Expense_Type__c=wishtypeId;
+        currtransactionCode.Is_Active__c=true;
+        return currtransactionCode;
+    } 
+    
+    public static dsfs__DocuSign_Status__c CreateDocusignRecord(){
+        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
+        dsfs__DocuSign_Status__c newDocusign = new dsfs__DocuSign_Status__c();
+        newDocusign.dsfs__Lead__c = newLead.Id;
+        newDocusign.dsfs__Envelope_Status__c = 'Completed';
+        insert newDocusign;
+        return newDocusign;
+    }
+    
+    public static void CreateAttachmentRecord(){
+        dsfs__DocuSign_Status__c newDocusign = CreateDocusignRecord();
+        Attachment newAttachment =  new Attachment();
+        newAttachment.ParentId = newDocusign.id;
+        newAttachment.Name = 'Attachment1';
+        newAttachment.Body = blob.valueOf('Hi Welcome to body text');
+        insert newAttachment;
+        
+    }
 }

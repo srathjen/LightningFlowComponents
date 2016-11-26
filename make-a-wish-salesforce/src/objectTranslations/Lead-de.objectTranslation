@@ -1272,6 +1272,10 @@
             <section>Important Date</section>
         </sections>
         <sections>
+            <label><!-- Inquiry/Referral --></label>
+            <section>Inquiry/Referral</section>
+        </sections>
+        <sections>
             <label><!-- Medical Information --></label>
             <section>Medical Information</section>
         </sections>
@@ -1284,8 +1288,8 @@
             <section>Qualifying Medical Professional</section>
         </sections>
         <sections>
-            <label><!-- Referral Section --></label>
-            <section>Referral Section</section>
+            <label><!-- Referral Source Information --></label>
+            <section>Referral Source Information</section>
         </sections>
         <sections>
             <label><!-- Referring Medical Professional --></label>

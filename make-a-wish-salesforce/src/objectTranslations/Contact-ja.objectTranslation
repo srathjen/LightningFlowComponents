@@ -790,6 +790,30 @@ and the date it was or will be granted. --></help>
         <name>Old_Update_Contact_Values__c</name>
     </fields>
     <fields>
+        <label><!-- Onboarding Status --></label>
+        <name>Onboarding_Status__c</name>
+        <picklistValues>
+            <masterLabel>Application</masterLabel>
+            <translation><!-- Application --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Background Check</masterLabel>
+            <translation><!-- Background Check --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Interview</masterLabel>
+            <translation><!-- Interview --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Orientation</masterLabel>
+            <translation><!-- Orientation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Training</masterLabel>
+            <translation><!-- Training --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Other Favorites --></label>
         <name>Other__c</name>
     </fields>
@@ -2463,6 +2487,10 @@ provide contact information for each site on which you are active. --></help>
     <layouts>
         <layout>Board Member</layout>
         <sections>
+            <label><!-- Board Member Details --></label>
+            <section>Board Member Details</section>
+        </sections>
+        <sections>
             <label><!-- Contact Information --></label>
             <section>Contact Information</section>
         </sections>
@@ -2573,6 +2601,14 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Household Address --></label>
             <section>Household Address</section>
+        </sections>
+        <sections>
+            <label><!-- Language &amp; Communication --></label>
+            <section>Language &amp; Communication</section>
+        </sections>
+        <sections>
+            <label><!-- Publicity --></label>
+            <section>Publicity</section>
         </sections>
         <sections>
             <label><!-- WIsh Child Details --></label>

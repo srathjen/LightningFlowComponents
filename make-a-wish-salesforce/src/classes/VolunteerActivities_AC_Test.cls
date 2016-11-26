@@ -14,7 +14,7 @@ public class VolunteerActivities_AC_Test {
     
     //Wish open activities
     static testMethod void openWishActivities() {
-        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null LIMIT 1];
+        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Task newTask = OrientationandTrainingUtil.wishPresentationNotSet(parentCase.Id);
@@ -35,7 +35,7 @@ public class VolunteerActivities_AC_Test {
         Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
         Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
         
-        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null LIMIT 1];
+        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Volunteer_Opportunity__c newWishOpportunity =  new Volunteer_Opportunity__c();
@@ -61,7 +61,7 @@ public class VolunteerActivities_AC_Test {
         Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
         Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
         
-        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null LIMIT 1];
+        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Non_Wish_Events__c newWishOpportunity =  new Non_Wish_Events__c();
@@ -91,7 +91,7 @@ public class VolunteerActivities_AC_Test {
         Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
         Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
         
-        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null LIMIT 1];
+        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Non_Wish_Events__c newWishOpportunity =  new Non_Wish_Events__c();
@@ -114,7 +114,7 @@ public class VolunteerActivities_AC_Test {
     
     /* Completed Block */
     static testMethod void openWishActivities1() {
-        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null LIMIT 1];
+        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         parentCase.Presentation_Date__c = System.today();
@@ -137,7 +137,7 @@ public class VolunteerActivities_AC_Test {
         Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
         Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
         
-        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null LIMIT 1];
+        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Volunteer_Opportunity__c newWishOpportunity =  new Volunteer_Opportunity__c();
@@ -163,7 +163,7 @@ public class VolunteerActivities_AC_Test {
         Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
         Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
         
-        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null LIMIT 1];
+        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Non_Wish_Events__c newWishOpportunity =  new Non_Wish_Events__c();
@@ -193,7 +193,7 @@ public class VolunteerActivities_AC_Test {
         Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
         Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
         
-        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null LIMIT 1];
+        User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Non_Wish_Events__c newWishOpportunity =  new Non_Wish_Events__c();

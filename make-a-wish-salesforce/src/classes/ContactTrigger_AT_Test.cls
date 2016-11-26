@@ -146,14 +146,14 @@ public class ContactTrigger_AT_Test{
         updateConFamily.Hidden_Zip_Code__c = '621010';
         updateConFamily.IsContactInfoUpdated__c = true;
         updateConFamily.Id = childFamily.Id;
-        update updateConFamily;
+       // update updateConFamily;
         
         
         Contact updateCon = new Contact();
         updateCon.Email = 'kanagu431@gmail.com';
         updateCon.IsContactInfoUpdated__c = true;
         updateCon.Id = childCon.Id;
-        update updateCon;
+        //update updateCon;
      }
      
      public testmethod static void updatewishChildRecall(){

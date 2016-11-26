@@ -213,8 +213,8 @@ public class TimeSheetTriggerHandler{
      public Static void findRecentTimeSheetDate(Set<Id> timeSheetIds){ 
       
       //  Id volunteerUserId = userInfo.getUserId();
-        List<Contact> volunteerInfoUpdate = new List<Contact>();
-     
+        //List<Contact> volunteerInfoUpdate = new List<Contact>();
+        Map<Id,Contact> volunteerInfoUpdateMap = new Map<Id,Contact>();
         
        for(Time_sheet__c currRec : [SELECT Id,Date__c,Volunteer_Opportunity__r.Volunteer_Name__c,
                                              Volunteer_Opportunity__r.Volunteer_Name__r.Date_of_last_engagement__c 
@@ -224,12 +224,13 @@ public class TimeSheetTriggerHandler{
                 Contact updateContact = new Contact();
                 updateContact.id = currRec.Volunteer_Opportunity__r.Volunteer_Name__c;
                 updateContact.Date_of_last_engagement__c = currRec.Date__c;
-                volunteerInfoUpdate.add(updateContact);
+                //volunteerInfoUpdate.add(updateContact);
+                volunteerInfoUpdateMap.put(updateContact.Id,updateContact);
                 
             }
         }
-                if(volunteerInfoUpdate.size() > 0)
-                  update volunteerInfoUpdate;
+                if(volunteerInfoUpdateMap.size() > 0)
+                  update volunteerInfoUpdateMap.Values();
       
     }
     

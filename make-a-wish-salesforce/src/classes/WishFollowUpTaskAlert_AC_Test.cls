@@ -14,7 +14,7 @@ public class WishFollowUpTaskAlert_AC_Test {
     
     //This method is used to create volunteer follwup task activities not completed task if there is any open task for volunteer user
     static testMethod void wishRecurrenceMethod() {
-        List<User> volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null LIMIT 1];
+        List<User> volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Date reqDateCalc = System.Today().addDays(16);

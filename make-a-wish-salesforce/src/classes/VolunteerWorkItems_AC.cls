@@ -43,9 +43,12 @@ public class VolunteerWorkItems_AC {
         nonWishTab = true;
         volunteerChaptersSet = new Set<Id>();
         Id currentUserId = userInfo.getUserId();
+       
         List<User> getUserRelatedContact = [SELECT Id, ContactId FROM User WHERE Id =:currentUserId LIMIT 1];
         userRelatedContactId = getUserRelatedContact.get(0).ContactId;
+        system.debug('@@@@@@ userRelatedContactId @@@@@@@'+userRelatedContactId);
         chaptersList = [SELECT Id,npe5__Primary__c, npe5__Organization__c, npe5__Contact__c FROM npe5__Affiliation__c WHERE npe5__Contact__c =: userRelatedContactId];
+        system.debug('@@@@@@ chaptersList @@@@@@@'+chaptersList);
         if(chaptersList.size()>0) {
             for(npe5__Affiliation__c getChapterName : chaptersList) {
                 volunteerChaptersSet.add(getChapterName.npe5__Organization__c);
@@ -223,8 +226,8 @@ reqired volunteers and registered volunteers count.*/
         wishTab = false;
         nonWishTab = false;
         List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Wish__c, Role__c, Chapter_Name__r.Name, RecordTypeId, OwnerId, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId  AND Reason_Inactive__c =: Null LIMIT 1];
-        List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists =[SELECT Id, Role__c, Chapter_Name__r.Name, RecordtypeId, Wish__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Wish__c =: volunteerOpportunity.get(0).Wish__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null];
-        
+        system.debug('@@@@@@@@@@ volunteerOpportunity @@@@@@@@@@@@@@@'+volunteerOpportunity);
+        List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Wish__c,Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Wish__c =: volunteerOpportunity.get(0).Wish__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null];
         if(volunteerOpportunityDuplicateLists.size()>0){
             /*Below three line changes are related to WVC-443 (11-09-2016)*/
             //ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are not currently eligible to sign up for this volunteer opportunity. Please contact your chapter for more information on how to become eligible.');
@@ -296,7 +299,7 @@ reqired volunteers and registered volunteers count.*/
         Boolean isRequired = false;
         Boolean allowRegister = false;
         List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordTypeId, OwnerId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId AND Reason_Inactive__c =: Null LIMIT 1];
-        List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists =[SELECT Id, Role__c, Chapter_Name__r.Name, RecordtypeId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null ];
+        List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordtypeId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null ];
         if(volunteerOpportunityDuplicateLists.size()>0) {
             ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are already registered for this opportunity.');
             ApexPages.addMessage(mymsg);
