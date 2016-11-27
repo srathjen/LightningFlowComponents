@@ -1,0 +1,12 @@
+<apex:page standardController="Account" extensions="cg.AccountEmailExtension" tabStyle="Account">
+  <social:profileViewer entityId="{!Account.Id}"/>
+  <apex:detail inlineEdit="true" relatedList="true" showChatter="true"/>
+  <c:AttachmentComponent title="Account Files"
+    customObjectName="Account" customObjectFileName="AccountFile__c"
+    fileNamespacePrefix="cg__"
+    relationshipName="Account__r"
+    legacyIdSupport="true"
+    objectId="{!Account.Id}"
+    inline="true"
+    defaultEmailAddress="{!defaultAccountEmail}" />
+</apex:page>

@@ -84,9 +84,8 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                 declinedTaskVolunteerIds.add(updatedTask.WhoId);
             }
              if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Review photos/videos')) {
-                 System.debug('Photo OwnerId>>>>>>>>>'+updatedTask.OwnerId);
-                 System.debug('Photo WhatId>>>>>>>>>'+updatedTask.WhatId);
-                //uploadParentTaskIdMap.put(updatedTask.WhatId,updatedTask.OwnerId);
+                 
+                uploadParentTaskIdMap.put(updatedTask.WhatId,updatedTask.OwnerId);
             }
             
             if(followUpTaskMap.size() > 0) {

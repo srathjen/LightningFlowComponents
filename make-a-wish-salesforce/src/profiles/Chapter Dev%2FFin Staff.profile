@@ -488,6 +488,14 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>UpdateWishAssignmentBatchSchedule_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>UpdateWishAssignmentBatchTest_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>UpdateWishAssignmentBatch_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>

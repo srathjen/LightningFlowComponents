@@ -36,6 +36,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
             //  WishesTriggerHelperClass.updateDateReceived(null,trigger.new);
             for(Case newCase : trigger.new){
                 wishOwnerIdSet.add(newCase.OwnerId);
+               
             }
             
             if(wishOwnerIdSet.size() > 0){
@@ -63,9 +64,13 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
             // WishesTriggerHelperClass.updateDateReceived(trigger.oldMap,trigger.newMap.values());
             Set<Id> parentWishIdsSet = new Set<Id>();
             for(Case currentCase : Trigger.new)
-            {
+            {  
                 
+                 if(currentCase.ownerId == null)
+                     currentCase.Ownerid = Userinfo.getUserId();
+                     
                 wishOwnerIdSet.add(currentCase.OwnerId);
+                
                 if((currentCase.Status == 'Ready to Assign') && trigger.oldmap.get(currentCase.id).Status !=  'Ready to Assign' && currentCase.RecordTypeId == parentWishRecordTypeId){
                     caseMap.Put(currentCase.ChapterName__c,currentCase);
                     currentCase.Ready_to_Assign_Date__c = Date.Today();
@@ -162,7 +167,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 {
                     wishChildInfoMap.put(currentCase.id,currentCase);
                 } 
-                if(currentCase.Interview_date__c < System.today()) {
+                if(currentCase.Interview_date__c < System.today() && Trigger.oldMap.get(currentCase.id).interview_date__c != currentCase.Interview_Date__c) {
                     currentCase.Interview_date__c.addError('Interview Date should be in future');
                 }
             }
@@ -178,8 +183,11 @@ wishOwnerIdSet.add(newCase.OwnerId);
             }
             for(Case newCase : trigger.new){
                 if(wishOwnerMap.containsKey(newCase.OwnerId)){
+                   if(wishOwnerMap.get(newCase.OwnerId).ManagerId != Null)
+                   {
                     newCase.Hidden_Wish_Owner_Manager__c  = wishOwnerMap.get(newCase.OwnerId).Manager.Name;
                     newCase.Hidden_Wish_Owner_Email__c = wishOwnerMap.get(newCase.OwnerId).Manager.Email;
+                   }
                 }
             }
             
@@ -190,11 +198,13 @@ wishOwnerIdSet.add(newCase.OwnerId);
             
             for(Case currentCase : Trigger.new){
                 if(managerUserMap.containsKey(currentCase.ChapterName__c) && currentCase.Sub_Status__c != 'Within Policy'){
-                    currentCase.OwnerId = managerUserMap.get(currentCase.ChapterName__c).Volunteer_Manager__c;
+                   if(managerUserMap.get(currentCase.ChapterName__c).Volunteer_Manager__c != Null)
+                        currentCase.OwnerId = managerUserMap.get(currentCase.ChapterName__c).Volunteer_Manager__c;
                 }
                 
                 if(managerUserMap.containsKey(currentCase.ChapterName__c) && currentCase.RecordTypeId == parentWishRecordTypeId && currentCase.Status == 'Wish Determined' && currentCase.Sub_Status__c == 'Within Policy' && currentCase.Wish_Type__c != Null ){
-                    currentCase.OwnerId = managerUserMap.get(currentCase.ChapterName__c).Wish_Co_ordinator__c ;
+                   if(managerUserMap.get(currentCase.ChapterName__c).Wish_Co_ordinator__c != Null)
+                        currentCase.OwnerId = managerUserMap.get(currentCase.ChapterName__c).Wish_Co_ordinator__c ;
                 }
             }
             
@@ -675,8 +685,8 @@ email = dbAccountList[0].MAC_Email_del__c;
             INSERT volunteerOppList;
         }
         
-       // if(updateChildCaseList.size() > 0)
-        //    CaseTriggerHandler.updateChildCase(updateChildCaseList);
+        if(updateChildCaseList.size() > 0)
+            CaseTriggerHandler.updateChildCase(updateChildCaseList);
         //if(approvalReqList.size() > 0)
         // List<Approval.ProcessResult> resultList = Approval.process(approvalReqList);
         

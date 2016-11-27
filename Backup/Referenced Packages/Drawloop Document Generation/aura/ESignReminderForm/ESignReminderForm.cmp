@@ -1,0 +1,36 @@
+<aura:component >
+    <aura:attribute name="id" type="string"/>
+    <aura:attribute name="reminderDelay" type="decimal" default="" access="private"/>
+    <aura:attribute name="daysTillSigningExpires" type="decimal" default="" access="private"/>
+    <aura:attribute name="reminderFrequency" type="decimal" default="" access="private"/>
+    <aura:attribute name="warnOfExpiration" type="decimal" default="" access="private"/>
+    
+    <aura:registerEvent name="saveSlideDocuSignReminders" type="Loop:saveSlideDocuSignReminders"/>
+    <aura:registerEvent name="cancelSlide" type="Loop:hideSlideContent"/>
+    
+    <aura:method name="setValues" action="{!c.setValues}">
+        <aura:attribute name="id" type="string"/>
+        <aura:attribute name="reminderDelay" type="decimal" default="0"/>
+        <aura:attribute name="daysTillSigningExpires" type="decimal" default="0"/>
+        <aura:attribute name="reminderFrequency" type="decimal" default="0"/>
+        <aura:attribute name="warnOfExpiration" type="decimal" default="0"/>
+    </aura:method>
+    
+    <div class="slds reminder-height">
+        <h2 class="slds-text-heading--small slds-m-bottom--medium">Edit Reminders and Expirations</h2>
+        <div class="slds-grid">
+            <div class="slds-col--padded">
+                <ui:inputText aura:id="reminderDelay" label="Reminder Delay" value="{!v.reminderDelay}" class="slds-m-bottom--large max-width"/>
+                <ui:inputText aura:id="warnOfExpiration" label="Warn of Expiration" value="{!v.warnOfExpiration}" class="slds-m-bottom--large max-width"/>
+            </div>
+            <div class="slds-col--padded">
+                <ui:inputText aura:id="reminderFrequency" label="Reminder Frequency" value="{!v.reminderFrequency}" class="slds-m-bottom--large max-width" labelClass="no-wrap"/>
+                <ui:inputText aura:id="daysTillSigningExpires" label="Days Till Signing Expires" value="{!v.daysTillSigningExpires}" class="slds-m-bottom--large max-width" labelClass="no-wrap"/>
+            </div>
+        </div>
+        <div aura:id="contentButtons" style="text-align:right;">
+            <button class="slds-button slds-button--neutral" onclick="{!c.cancel}">Cancel</button>
+            <button class="slds-button slds-button--brand" onclick="{!c.saveSettings}">Save</button>
+        </div>
+    </div>
+</aura:component>

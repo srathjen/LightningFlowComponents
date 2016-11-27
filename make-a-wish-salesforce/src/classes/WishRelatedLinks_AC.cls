@@ -35,13 +35,10 @@ public class WishRelatedLinks_AC {
         
         }
         
-       querychildCase = [SELECT Id,CaseNumber,ParentId FROM Case WHERE ParentId =:currentCaseRec.Id AND RecordTypeId =: wishGrantRecordTypeId AND ParentId != Null limit 1];
+       querychildCase = [SELECT Id,CaseNumber,ParentId,AccountId,ContactId FROM Case WHERE ParentId =:currentCaseRec.Id AND RecordTypeId =: wishGrantRecordTypeId AND ParentId != Null limit 1];
         if(!querychildCase.isEmpty() && querychildCase[0].Id != Null){
-        WishReceipt = '/apex/DDP_VF_Copy?caseId='+querychildCase[0].Id;
+        WishReceipt = '/apex/loop__looplus?eid='+querychildCase[0].Id+'&accountId='+querychildCase[0].AccountId+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false;
         }
-        
-        
-        
-        
-  }
+      
+  }                                                         
 }

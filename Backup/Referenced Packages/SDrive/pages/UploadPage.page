@@ -1,0 +1,342 @@
+<apex:page sidebar="true" showHeader="true" controller="cg.SDriveController" action="{!validate}">
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'yahoo/yahoo-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'event/event-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'connection/connection_core-min.js')}" />
+
+<script language="Javascript">
+    YAHOO.namespace("cyangate.com");        
+</script>    
+<apex:pageBlock rendered="{!$Request.enableJavaUpload == 'y'}">
+<apex:includeScript value="{!$Resource.cg__AppletScript}"/>
+<script>
+    var attributes = {code:'com.cyangate.sdrive.uploadmanager.UploadManager.class',
+    codebase:'{!protocol}://s3.amazonaws.com/s-drive/SDriveUploadManager-{!versionNumber}.jar/',
+    archive:'{!protocol}://s3.amazonaws.com/s-drive/SDriveUploadManager-{!versionNumber}.jar',
+    width:1000, height:500, MAYSCRIPT:true, id:'uploadApplet'} ;
+    var parameters = {sessionId:'{!sessionId}',serverUrl:'{!apiServerUrl29}',customObjectFileName:'{!JSENCODE($Request.customObjectFileName)}',relationshipName:'{!JSENCODE($Request.relationshipName)}',namespacePrefix:'{!JSENCODE($Request.namespacePrefix)}',privateEnabled:'{!JSENCODE($Request.privateEnabled)}',shareEnabled:'{!JSENCODE($Request.shareEnabled)}',debug:'{!JSENCODE($Request.debug)}',allowedFileExtensions:'{!JSENCODE($Request.allowedFileExtensions)}',currentFolderId:'{!JSENCODE($Request.currentFolderId)}',useUploadAsPopup:'{!JSENCODE($Request.useUploadAsPopup)}',objectId:'{!JSENCODE($Request.objectId)}',returnUrl:'{!JSENCODE($Request.returnUrl)}',multipartUploadThresholdSize:'{!JSENCODE(multipartUploadThresholdSize)}'};
+    var version = '1.6';
+    if(!navigator.javaEnabled())
+    {
+        document.write('Your browser\'s Java plugin is not enabled. Please enable the plugin and try again!<br />');
+        document.write('Refer to <a href="http://java.com/en/download/help/enable_browser.xml" target="_blank">http://java.com/en/download/help/enable_browser.xml</a> for more information.');    
+    }
+    deployJava.runApplet(attributes, parameters, version);
+</script>
+<div align="right"><a href="{!SUBSTITUTE($CurrentPage.URL, 'enableJavaUpload=y', 'enableJavaUpload=n')}">Switch to Flash Upload</a></div>
+</apex:pageBlock>
+<apex:pageBlock rendered="{!($Request.enableJavaUpload == 'n' || $Request.enableJavaUpload == '')}">
+<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
+   id="AttachmentUpload" width="100%" height="500"
+   codebase="{!protocol}://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab">
+<param name="movie" value="{!protocol}://s3.amazonaws.com/s-drive/AttachmentUpload_{!versionNumber}.swf" />
+<param name="quality" value="high" />
+<param name="play" value="true" />
+<param name="bgcolor" value="#f3f3ec" />
+<param name="allowScriptAccess" value="always" />
+<param name="flashvars" value="session_id={!sessionId}&server_url={!apiServerUrl18}&objectId={!$Request.objectId}&customObjectFileName={!$Request.customObjectFileName}&relationshipName={!$Request.relationshipName}&namespacePrefix={!$Request.namespacePrefix}&returnUrl={!$Request.returnUrl}&privateEnabled={!$Request.privateEnabled}&shareEnabled={!$Request.shareEnabled}&allowedFileExtensions={!$Request.allowedFileExtensions}&currentFolderId={!$Request.currentFolderId}&useUploadAsPopup={!$Request.useUploadAsPopup}" />
+<embed id="AttachmentUpload" src="{!protocol}://s3.amazonaws.com/s-drive/AttachmentUpload_{!versionNumber}.swf" play="true" bgcolor="#f3f3ec"
+  width="100%" height="500" name="AttachmentUpload" align="middle" 
+  loop="false" flashvars="session_id={!sessionId}&server_url={!apiServerUrl18}&objectId={!$Request.objectId}&customObjectFileName={!$Request.customObjectFileName}&relationshipName={!$Request.relationshipName}&namespacePrefix={!$Request.namespacePrefix}&returnUrl={!$Request.returnUrl}&privateEnabled={!$Request.privateEnabled}&shareEnabled={!$Request.shareEnabled}&allowedFileExtensions={!$Request.allowedFileExtensions}&currentFolderId={!$Request.currentFolderId}&useUploadAsPopup={!$Request.useUploadAsPopup}"
+  allowScriptAccess="always" type="application/x-shockwave-flash"
+pluginspage="http://www.adobe.com/go/getflashplayer">
+</embed>
+</object>
+<div align="right"><a title="Use Java Upload Widget for large file uploads" href="{!SUBSTITUTE($CurrentPage.URL, 'enableJavaUpload=n', 'enableJavaUpload=y')}">Switch to Java Upload</a></div>
+</apex:pageBlock>
+<script language="JavaScript" type="text/javascript">
+var inProgress = false;
+var newFileExists = false;
+var wipFile = '';
+var parentFolder = '';
+var jsonWsUrl='{!URLFOR($Page.cg__JsonWebService)}';
+var pingTimer;
+
+function pingSalesforce()
+{
+    if(pingTimer == null)
+    {
+        pingTimer = setTimeout("pingSalesforce()",300000);
+    }
+    else
+    {
+        //ajax call to JSONWS to ping. Response callback defined here
+        var queryString = jsonWsUrl;
+        if (queryString.indexOf('?') >= 0)
+        {
+            queryString += '&';
+        }
+        else
+        {
+            queryString += '?';
+        }
+        queryString += 'core.apexpages.devmode.url=1&className=S3Helper&methodName=salesforceSessionIsValid';
+        
+        var  AjaxObject = 
+        {
+            handleSuccess:function(o)
+            {
+                if(o.responseText != '"OK"')
+                {
+                    alert('Error occured: ' + o.responseText);
+                }
+                else
+                {
+                    pingTimer = setTimeout("pingSalesforce()",300000);
+                }
+                return;
+            },
+    
+            handleFailure:function(o)
+            {
+                alert('S-Drive Upload Manager detected that the Salesforce session is not valid anymore. Please keep the Salesforce session open while the upload is in progress!');
+                return;
+            },
+    
+            startRequest:function() 
+            {
+               YAHOO.util.Connect.asyncRequest('GET', queryString, callback, null);
+            }
+        };
+    
+        var callback =
+        {
+            success:AjaxObject.handleSuccess,
+            failure:AjaxObject.handleFailure,
+            scope: AjaxObject
+        };
+    
+        AjaxObject.startRequest();
+    }
+}
+pingSalesforce();
+
+function renewSession()
+{
+    //ajax call to JSONWS to ping. Response callback defined here
+    var queryString = jsonWsUrl;
+    if (queryString.indexOf('?') >= 0)
+    {
+        queryString += '&';
+    }
+    else
+    {
+        queryString += '?';
+    }
+    queryString += 'core.apexpages.devmode.url=1&className=S3Helper&methodName=renewSession';
+    
+    var  AjaxObject = 
+    {
+        handleSuccess:function(o)
+        {
+            var newSessionId = o.responseText.replace(/\"/g,'');
+            document.uploadApplet.renewSession(newSessionId,'{!apiServerUrl29}');
+            return;
+        },
+
+        handleFailure:function(o)
+        {
+            alert('S-Drive Upload Manager detected that the Salesforce session is not valid anymore. Please keep the Salesforce session open while the upload is in progress!');
+            return;
+        },
+
+        startRequest:function() 
+        {
+           YAHOO.util.Connect.asyncRequest('GET', queryString, callback, null);
+        }
+    };
+
+    var callback =
+    {
+        success:AjaxObject.handleSuccess,
+        failure:AjaxObject.handleFailure,
+        scope: AjaxObject
+    };
+
+    AjaxObject.startRequest();
+}
+
+window.onbeforeunload = function (evt)
+{
+    if (inProgress)
+    {
+        var message = "Upload in Progress!"
+        if (typeof evt == 'undefined') {//IE 
+            evt = window.event; 
+        } 
+        if (evt) { 
+            evt.returnValue = message; 
+        } 
+        return message; 
+    }  
+}
+
+window.onunload = function ()
+{   
+    if (inProgress && wipFile != '')
+    {
+        // delete WIP file from Salesforce
+        var args = '{"parameters":[{"isArray":true,"name":"ids","value":["' + wipFile+ '"]},' +
+                   '{"isArray":false,"name":"objectId","value":"{!JSENCODE($Request.objectId)}"},' +
+                   '{"isArray":false,"name":"customObjectFileName","value":"{!JSENCODE($Request.customObjectFileName)}"}]},' +
+                   '{"isArray":false,"name":"namespacePrefix","value":"{!JSENCODE($Request.namespacePrefix)}"}]}';
+        var queryString = jsonWsUrl;
+        if (queryString.indexOf('?') >= 0)
+        {
+            queryString += '&';
+        }
+        else
+        {
+            queryString += '?';
+        }
+        queryString += 'core.apexpages.devmode.url=1&className=S3Helper&methodName=deleteCustomObjectFiles&args=' + args;
+
+        var  AjaxObject = 
+        {
+            handleSuccess:function(o)
+            {
+                return;
+            },
+    
+            handleFailure:function(o)
+            {
+                return;
+            },
+    
+            startRequest:function() 
+            {
+               YAHOO.util.Connect.asyncRequest('GET', queryString, callback, null);
+            }
+        };
+    
+        var callback =
+        {
+            success:AjaxObject.handleSuccess,
+            failure:AjaxObject.handleFailure,
+            scope: AjaxObject
+        };
+    
+        AjaxObject.startRequest();
+    }
+    else
+    {
+        return;
+    }
+}
+
+function setUploadInProgress(uploadInProgress)
+{
+  inProgress = uploadInProgress;
+}
+
+function setWIPFile(WIPFile)
+{
+  wipFile = WIPFile;
+}
+
+function setNewFileExists(newFile)
+{
+    newFileExists = newFile;
+}
+
+function getMyApp(appName) {
+    if (navigator.appName.indexOf ("Microsoft") !=-1) {
+        if(document[appName]) {
+            return document[appName];
+        }
+        else {
+            return window[appName];
+        }
+    } else {
+        return document[appName];
+    }
+}
+
+function callJsonWs(className, methodName, args, token)
+{
+    //call web service here.
+    //alert(args);
+    var queryString = jsonWsUrl;
+        if (queryString.indexOf('?') >= 0)
+        {
+            queryString += '&';
+        }
+        else
+        {
+            queryString += '?';
+        }
+    queryString += 'core.apexpages.devmode.url=1&className=' + className + '&methodName=' + methodName + '&args=' + args;
+    
+    var  AjaxObject = 
+    {
+
+        handleSuccess:function(o)
+        {
+            //alert('Response:  ' + o + ' /nresponseTest: ' + o.responseText);
+            try
+            {
+                getMyApp("AttachmentUpload").successCallback(o.responseText, token);
+            }
+            catch (err)
+             {
+                 alert("Error while processing data: " + err);
+             }
+        },
+
+        handleFailure:function(o)
+        {
+            try
+            {
+                getMyApp("AttachmentUpload").failureCallback(o.statusText, token);
+            }
+            catch (err)
+             {
+                 alert("Error while processing data: " + err);
+             }
+        },
+
+        startRequest:function() 
+        {
+            // instead of this, use execute Method
+           YAHOO.util.Connect.asyncRequest('GET', queryString, callback, null);
+           
+        }
+    };
+
+    var callback =
+    {
+        success:AjaxObject.handleSuccess,
+        failure:AjaxObject.handleFailure,
+        scope: AjaxObject
+    };
+
+    AjaxObject.startRequest(); 
+}
+
+function uploadCompleted()
+{
+    if ('{!JSENCODE($Request.insideSdriveIframe)}'=='y')
+    {
+         parent.uploadCompleted();   
+    }
+    else
+    {
+        window.location.href = decodeURIComponent('{!JSENCODE($Request.returnUrl)}');
+    }
+}
+
+function uploadWidgetCompleted()
+{
+    
+    if ('{!JSENCODE($Request.insideSdriveIframe)}'=='y')
+    {
+         parent.uploadCompleted();   
+    }
+    else
+    {
+        window.close();
+    }
+}
+
+var parentWin = window.opener; 
+</script>
+</apex:page>

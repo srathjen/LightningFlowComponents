@@ -1,0 +1,22 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<p class="MsoNormal" style="margin-bottom: 12pt; background-image: initial; background-attachment: initial; background-color: white; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"><font color="#333333">Hi&nbsp;{!Background_check__c.Volunteer__c},</font><br></span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"><br><font color="#333333"><span style="line-height: 15pt;">Thank you so much for your dedication to&nbsp;</span></font></span><font face="Century Gothic, sans-serif" style="font-size: 12pt;">Make-A-Wish</font><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif; line-height: 17.12px; vertical-align: super;"><font size="1">®</font></span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"><font color="#333333"><span style="line-height: 15pt;">. Our
+records indicate&nbsp;that your criminal background check has expired. If you are
+still interested in volunteering with Make-A-Wish,&nbsp;please log in to
+the&nbsp;</span></font></span><span style="color: rgb(0, 0, 0); line-height: 15pt; font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"><span style="color:blue"><a href="https://make-a-wish.force.com">Make-A-Wish Volunteer Center</a></span>&nbsp;</span><span style="color: rgb(51, 51, 51); line-height: 15pt; font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">to initiate your
+background check. If the required information has not been completed by
+{!Background_check__c.Date__c + 7}, we will mark you as “<b>INACTIVE”&nbsp;</b>and
+any current assignments will be re-assigned to an active volunteer.<br></span><span style="color: rgb(51, 51, 51); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 15pt;"><br>We are grateful for your continued support of our mission and
+the children we serve!<br></span><span style="color: rgb(51, 51, 51); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 15pt;"><br>Thanks,<br></span><span style="color: rgb(51, 51, 51); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 15pt;"><br>{!Background_check__c.Account_Name__c}<br></span><span style="color: rgb(51, 51, 51); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Background_check__c.Account_Phone__c}<br></span><span style="color: rgb(51, 51, 51); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Background_check__c.Account_Email__c}</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: 15pt; background-image: initial; background-attachment: initial; background-color: white; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><br></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><span style="font-size:10.5pt;line-height:107%;font-family:&quot;Arial&quot;,sans-serif;
+mso-fareast-font-family:&quot;Times New Roman&quot;;color:#333333">&nbsp;</span></p><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><div><div id="_com_1" class="msocomtxt" language="JavaScript">
+
+<p class="MsoCommentText"><o:p>&nbsp;</o:p></p>
+
+<!--[if !supportAnnotations]--></div>
+
+<!--[endif]--></div>
+
+</div>]]></td>
+</tr>
+</table>

@@ -1,0 +1,223 @@
+<apex:page sidebar="false" showHeader="false" controller="cg.ShareController" action="{!listSharings}" >
+<apex:styleSheet value="{!URLFOR($Resource.cg__YuiScripts, 'assets/skins/sam/skin.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.cg__YuiScripts,'treeview/assets/css/folders/tree.css')} "/>
+<apex:stylesheet value="{!URLFOR($Resource.cg__YuiScripts,'container/assets/skins/sam/container.css')} "/>
+<apex:stylesheet value="{!URLFOR($Resource.cg__YuiScripts,'resize/assets/skins/sam/resize.css')} "/>
+<apex:stylesheet value="{!URLFOR($Resource.cg__YuiScripts,'menu/assets/skins/sam/menu.css')} "/>
+
+
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'yahoo-dom-event/yahoo-dom-event.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'element/element-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'dragdrop/dragdrop-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'resize/resize-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'container/container-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts, 'animation/animation-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'treeview/treeview-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'json/json-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'progressbar/progressbar-min.js')}" />
+
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'yahoo/yahoo-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'event/event-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'connection/connection_core-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'container/container_core-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'menu/menu-min.js')}" />
+
+
+<apex:includeScript value="/soap/ajax/15.0/connection.js"/>
+<apex:includeScript value="/soap/ajax/15.0/apex.js"/>
+<script>
+    
+    // Create a namespace for our custom functions
+    YAHOO.namespace("cyangate.com");
+    
+    YAHOO.cyangate.com.hideEditSharePanel = function()
+    {
+        YAHOO.cyangate.com.editSharePanel.hide();
+    }   
+    
+    YAHOO.cyangate.com.showEditSharePanel = function()
+    {
+        document.getElementById("editSharePanel").style.display = "block";
+        YAHOO.cyangate.com.editSharePanel.show();
+    }
+    
+    YAHOO.cyangate.com.hideConfirmDeleteSharePanel = function()
+    {
+        YAHOO.cyangate.com.confirmDeleteSharePanel.hide();
+    }   
+    
+    YAHOO.cyangate.com.showConfirmDeleteSharePanel = function()
+    {
+        document.getElementById("confirmDeleteSharePanel").style.display = "block";
+        YAHOO.cyangate.com.confirmDeleteSharePanel.show();
+    } 
+    
+    // Function called when the DOM is ready to create the dialog,
+    // render the dialog into the document body, add our dialog skin
+    // css to the body tag, and wire up the buttons on our dialog    
+    YAHOO.cyangate.com.init = function()
+    {
+        document.body.className = document.body.className + " yui-skin-sam";
+        
+        YAHOO.cyangate.com.editSharePanel = new YAHOO.widget.Panel(
+            "editSharePanel",  // The id of our dialog container
+            { 
+                    width           :   '450px',    
+                    visible         :   false,  // Should be invisible when rendered
+                    draggable       :   true,   // Make the dialog draggable
+                    close           :   false,  // Don't include a close title button
+                    modal           :   true,   // Make it modal
+                    fixedCenter     :   true,   // Keep centered if window is scrolled
+                    zindex          :   50,     // Make sure it's on top of everything
+                    
+                    // This line adds the appear/vanish fade effect
+                    effect          :   {
+                                          effect:YAHOO.widget.ContainerEffect.FADE,
+                                          duration:0.35
+                                        } 
+            }
+         );
+         YAHOO.cyangate.com.confirmDeleteSharePanel = new YAHOO.widget.Panel(
+            "confirmDeleteSharePanel",  // The id of our dialog container
+            { 
+                    width           :   '400px',    
+                    visible         :   false,  // Should be invisible when rendered
+                    draggable       :   true,   // Make the dialog draggable
+                    close           :   false,  // Don't include a close title button
+                    modal           :   true,   // Make it modal
+                    fixedCenter     :   true,   // Keep centered if window is scrolled
+                    zindex          :   50,     // Make sure it's on top of everything
+                    
+                    // This line adds the appear/vanish fade effect
+                    effect          :   {
+                                          effect:YAHOO.widget.ContainerEffect.FADE,
+                                          duration:0.35
+                                        } 
+            }
+         );
+         
+         // Render the dialog to the document.body level of the DOM
+        YAHOO.cyangate.com.editSharePanel.render(document.body);
+        YAHOO.cyangate.com.confirmDeleteSharePanel.render(document.body);
+    }
+    
+    // Add the init method to the window.load event
+    YAHOO.util.Event.addListener(window, "load", YAHOO.cyangate.com.init);
+</script>
+
+<apex:actionStatus id="processStatus" startText="Processing..." startStyle="color:red;font-size:14px;" />
+
+<div id="editSharePanel" style="display: none" width="100%">
+    <div class="hd">
+        <apex:outputText value="Edit Share" />
+    </div>  
+    <div class="bd">
+        <apex:pageBlock id="editSharePanelPB">
+            <apex:form >
+                <apex:actionRegion >
+                    <apex:pageMessages />
+                    <apex:pageBlockSection columns="1" rendered="{!updateAllowed}">
+                            <apex:selectList label="Access Level" value="{!editedShareAccessLevel}"
+                                multiselect="false" size="1">
+                                <apex:selectOptions value="{!accessOptions}"/>
+                            </apex:selectList>
+                    </apex:pageBlockSection>
+                    <div style="text-align: right;">
+                        <apex:commandButton value="Save" 
+                            oncomplete="YAHOO.cyangate.com.hideEditSharePanel();" action="{!saveEditedSharing}" 
+                            rerender="sharePanelPB" rendered="{!updateAllowed}" status="processStatus" />
+                        <apex:commandButton value="Close" immediate="true" 
+                            oncomplete="YAHOO.cyangate.com.hideEditSharePanel();"/>
+                    </div>
+                </apex:actionRegion>
+            </apex:form>
+        </apex:pageBlock>
+    </div>  
+</div>
+<div id="confirmDeleteSharePanel" style="display: none" width="100%">
+    <div class="hd">
+        <apex:outputText value="Delete Share" />
+    </div>  
+    <div class="bd">
+        <apex:pageBlock id="confirmDeleteSharePanelPB">
+            <apex:form >
+                <apex:actionRegion >
+                    <apex:pageMessages />
+                    <apex:pageBlockSection columns="1">
+                        Are you sure?
+                    </apex:pageBlockSection>
+                    <div style="text-align: right;">
+                        <apex:actionStatus id="deleteStatus">
+                            <apex:facet name="stop">
+                                <apex:commandButton value="Yes" 
+                                    oncomplete="YAHOO.cyangate.com.hideConfirmDeleteSharePanel();"
+                                    immediate="true" action="{!deleteSharing}"
+                                    rerender="sharePanelPB" status="deleteStatus" />
+                            </apex:facet>
+                            <apex:facet name="start">
+                                <apex:commandButton value="Processing..." disabled="true" status="deleteStatus" />
+                            </apex:facet>
+                        </apex:actionStatus>
+                        <apex:commandButton value="Cancel"
+                            immediate="true" oncomplete="YAHOO.cyangate.com.hideConfirmDeleteSharePanel();"/>
+                    </div>
+                </apex:actionRegion>
+            </apex:form>
+       </apex:pageBlock>
+    </div>  
+</div>
+<div class="bd" id="sharePanelDiv">
+    <apex:pageBlock id="sharePanelPB">
+        <h2>{!currentItemInfo['File_Name__c']}</h2>
+        <apex:form id="shareForm">
+            <apex:actionRegion >
+                <apex:pageMessages />
+                <div id="currentSharePanelPBS" style="overflow:auto; height:340px;margin: 0 2px" >
+                     <apex:pageBlockTable value="{!shareObjects}" var="item">
+                        <apex:column width="60">
+                            <apex:facet name="header">Action</apex:facet>
+                            <apex:outputPanel rendered="{!(item.reason == 'Manual Sharing') && isAdminOrOwner}" layout="inline">
+                                <apex:commandLink value="Edit" action="{!editSharing}"
+                                    reRender="editSharePanelPB"
+                                    onComplete="YAHOO.cyangate.com.showEditSharePanel();"
+                                    status="processStatus">
+                                    <apex:param name="shareId" value="{!item.Id}" />
+                                </apex:commandLink>
+                                &nbsp;|&nbsp;
+                                <apex:commandLink value="Del" action="{!displayDeleteShareConfirmation}"
+                                    reRender="confirmDeleteSharePanelPB"
+                                    onComplete="YAHOO.cyangate.com.showConfirmDeleteSharePanel();">
+                                    <apex:param name="shareId" value="{!item.Id}" />
+                                </apex:commandLink>
+                            </apex:outputPanel>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Type</apex:facet>
+                            <apex:outputText value="{!item.type}"/>
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Name</apex:facet>
+                            <apex:outputLink value="{!item.linkUrl}" rendered="{!NOT(ISBLANK(item.linkUrl))}" target="shareItemDetails"> 
+                                <apex:outputText value="{!item.name}" />
+                            </apex:outputLink>
+                            <apex:outputText value="{!item.name}" rendered="{!ISBLANK(item.linkUrl)}" />
+                        </apex:column>
+                        <apex:column >
+                            <apex:facet name="header">Access Level</apex:facet>
+                            <apex:outputText value="{!item.accessLevel}"/>
+                        </apex:column>  
+                        <apex:column >
+                            <apex:facet name="header">Reason</apex:facet>
+                            <apex:outputText value="{!item.reason}" />
+                        </apex:column>
+                    </apex:pageBlockTable>
+                </div>
+                <div style="text-align: right;">
+                    <apex:commandButton id="renameButton" value="New Share" action="{!addNewSharePage}" rendered="{!isAdminOrOwner}"/>
+                    <input class="btn" type="button" value="Close" onclick="parent.YAHOO.cyangate.com.hideSharePanel();"/>
+                </div>
+            </apex:actionRegion>
+        </apex:form>
+    </apex:pageBlock>
+</div>
+</apex:page>

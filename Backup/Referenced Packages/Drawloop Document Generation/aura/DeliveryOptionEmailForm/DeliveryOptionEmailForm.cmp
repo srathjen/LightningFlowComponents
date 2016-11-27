@@ -1,0 +1,31 @@
+<aura:component >
+    <aura:attribute name="id" type="string"/>
+    <aura:attribute name="isHtmlEmail" type="boolean" access="private"/>
+    <aura:attribute name="emailSubject" type="string" access="private"/>
+    <aura:attribute name="emailBody" type="string" access="private"/>
+    
+    <aura:registerEvent name="saveSlideEmail" type="Loop:saveSlideEmail"/>
+    <aura:registerEvent name="cancelSlide" type="Loop:hideSlideContent"/>
+    
+    <aura:method name="setValues" action="{!c.setValues}">
+        <aura:attribute name="id" type="string"/>
+        <aura:attribute name="isHtmlEmail" type="boolean" required="true" access="private"/>
+        <aura:attribute name="emailSubject" type="string" access="private"/>
+        <aura:attribute name="emailBody" type="string" access="private"/>
+    </aura:method>
+    
+    <div aura:id="emailFormContainer" class="slds">
+        <h2 class="slds-text-heading--small slds-m-bottom--medium">Edit Email</h2>
+        <ui:inputText aura:id="emailSubject" label="Subject" value="{!v.emailSubject}" placeholder="Add a subject" class="slds-m-bottom--large max-width"/>
+        <aura:if isTrue="{!!v.isHtmlEmail}">
+            <ui:inputTextArea aura:id="emailBody" label="Body" class="input-text-size" value="{!v.emailBody}" placeholder="Add a body" resizable="false"/>
+            <aura:set attribute="else">
+                <ui:inputRichText aura:id="emailRichText" label="Body" height="250px" value="{!v.emailBody}"/>
+            </aura:set>
+        </aura:if>
+        <div aura:id="contentButtons" style="text-align:right; padding-top: 10px;">
+            <button class="slds-button slds-button--neutral" onclick="{!c.cancel}">Cancel</button>
+            <button class="slds-button slds-button--brand" onclick="{!c.saveSlideEmail}">Save</button>
+        </div>
+    </div>
+</aura:component>

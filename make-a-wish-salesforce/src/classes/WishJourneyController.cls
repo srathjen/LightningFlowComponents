@@ -1,3 +1,6 @@
+/*****************************************************************
+Description : It will display the Wish and Child Wish status along with period of time.
+*****************************************************************/
 public class WishJourneyController{
     public Case currCase{get;set;}
     String wishRecTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get('Wish').getRecordTypeId();
@@ -33,13 +36,19 @@ public class WishJourneyController{
     public integer determinationDays{get;set;}
     public integer anticipationDays{get;set;}
     public integer effectDays{get;set;}
+    public string contactFName{get;set;}
+    public string contactLName{get;set;}
+    public string contactId{get;set;}
+    
+    public boolean blkGrantingOver{get;set;}
     
     public WishJourneyController(ApexPages.StandardController stdController) 
     {
         currCase = (Case)stdController.getRecord();
         currCase = [SELECT Id,RecordType.name,Contact.FirstName,Contact.LastName,status,Days_in_stage__c,Rush__c, 
                     End_Date__c, Parent.End_Date__c, Referral_Date__c, Parent.Referral_Date__c,
-                    Qualified_Date__c, Parent.Qualified_Date__c,Anticipated_Wish_Date__c,
+                    Qualified_Date__c, Parent.Qualified_Date__c,Anticipated_Wish_Date__c,Parent.ContactId,
+                    parent.Contact.FirstName,Parent.Contact.LastName,Anticipated_Start_Date__c,Parent.Anticipated_Start_Date__c,
                     Parent.Anticipated_Wish_Date__c,Wish_Determined_Date__c, Parent.Wish_Determined_Date__c,
                     Parent.Rush__c,contactId FROM CASE WHERE Id = :currCase.id];
                     
@@ -82,10 +91,25 @@ public class WishJourneyController{
                    qualifiedDays =(currCase.Qualified_Date__c).daysBetween(currDate);
                if(currCase.Wish_Determined_Date__c!= Null)
                    determinationDays = (currCase.Wish_Determined_Date__c).daysBetween(currDate);
-               if(currCase.Anticipated_Wish_Date__c!= Null)
-                   anticipationDays =(currDate).daysBetween(currCase.Anticipated_Wish_Date__c);
+               if(currCase.Anticipated_Start_Date__c!= Null)
+               {
+                   anticipationDays =(currDate).daysBetween(currCase.Anticipated_Start_Date__c);
+                   blkGrantingOver = true;
+               }
+               if(currCase.Anticipated_Start_Date__c == Null || currCase.Anticipated_Start_Date__c > Date.Today())
+               {
+                   blkGrantingOver = false;
+               }
+             
               if(currCase.End_Date__c!= Null)
                effectDays =(currCase.End_Date__c).daysBetween(currDate);
+               
+               if(currCase.ContactId != Null)
+               {
+                   contactFName = currCase.Contact.FirstName;
+                   contactLName = currCase.Contact.LastName;
+                   contactId = currCase.ContactId;
+               }
                
            }
            else if(currCase.ParentId != Null)
@@ -102,13 +126,27 @@ public class WishJourneyController{
             if(currCase.Parent.Wish_Determined_Date__c!= Null)
                determinationDays = (currCase.Parent.Wish_Determined_Date__c).daysBetween(currDate);
 
-            if(currCase.Parent.Anticipated_Wish_Date__c!= Null)
-               anticipationDays =(currDate).daysBetween(currCase.Parent.Anticipated_Wish_Date__c);
+            if(currCase.Parent.Anticipated_Start_Date__c!= Null)
+            {
+               anticipationDays =(currDate).daysBetween(currCase.Parent.Anticipated_Start_Date__c);
+               blkGrantingOver = true;
+            } 
+            if(currCase.Parent.Anticipated_Start_Date__c== Null || currCase.Parent.Anticipated_Start_Date__c> Date.Today())
+            {
+                   blkGrantingOver = false;
+            }
                
             if(currCase.Parent.End_Date__c!= Null)
                effectDays =(currCase.Parent.End_Date__c).daysBetween(currDate);
                
                parentCaseID = currCase.ParentId;
+               
+               if(currCase.Parent.ContactId != Null)
+               {
+                   contactFName = currCase.Parent.Contact.FirstName;
+                   contactLName = currCase.Parent.Contact.LastName;
+                   contactId = currCase.Parent.ContactId;
+               }
            }
                
             if(!caseRecTypeAndIds.containsKey(CurrCase.recordType.Name))
@@ -146,12 +184,10 @@ public class WishJourneyController{
     
      public void getCases()
      {
-        if(currCase.ContactId != Null)
-        {
-           
-          
+       
            for(Case getCase : [SELECT Id,RecordType.name,status,Days_in_stage__c,Rush__c, Parent.Rush__c,
-                               Contact.FirstName,Contact.LastName,contactId FROM CASE WHERE (ParentId = :parentCaseID or id = :parentCaseID )])
+                               Contact.FirstName,Contact.LastName,contactId FROM CASE WHERE ((ParentId = :parentCaseID AND parentId != Null ) 
+                               or id = :parentCaseID )])
            {
              if(!caseWithStatusMap.containsKey(getCase.RecordType.name))
              {
@@ -170,7 +206,7 @@ public class WishJourneyController{
             }
            }
            
-        }
+     
      
        if(!caseWithStatusMap.containsKey('Wish'))
        {

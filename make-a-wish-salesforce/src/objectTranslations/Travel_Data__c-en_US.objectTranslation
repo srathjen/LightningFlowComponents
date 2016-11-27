@@ -107,6 +107,14 @@
     <fields>
         <label><!-- Kitchen needed? --></label>
         <name>Kitchen_needed__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Notes --></label>

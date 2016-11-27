@@ -1,0 +1,396 @@
+<apex:page id="addNewSharePage" sidebar="false" showHeader="false" controller="cg.ShareController">
+<apex:styleSheet value="{!URLFOR($Resource.cg__YuiScripts, 'assets/skins/sam/skin.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.cg__YuiScripts,'treeview/assets/css/folders/tree.css')} "/>
+<apex:stylesheet value="{!URLFOR($Resource.cg__YuiScripts,'container/assets/skins/sam/container.css')} "/>
+<apex:stylesheet value="{!URLFOR($Resource.cg__YuiScripts,'resize/assets/skins/sam/resize.css')} "/>
+<apex:stylesheet value="{!URLFOR($Resource.cg__YuiScripts,'menu/assets/skins/sam/menu.css')} "/>
+
+
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'yahoo-dom-event/yahoo-dom-event.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'element/element-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'dragdrop/dragdrop-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'resize/resize-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'container/container-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts, 'animation/animation-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'treeview/treeview-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'json/json-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'progressbar/progressbar-min.js')}" />
+
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'yahoo/yahoo-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'event/event-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'connection/connection_core-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'container/container_core-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'menu/menu-min.js')}" />
+
+<apex:includeScript value="/soap/ajax/15.0/connection.js"/>
+<apex:includeScript value="/soap/ajax/15.0/apex.js"/>
+
+<apex:actionStatus startText="Processing..." id="processStatus" startStyle="font-weight:bold;color:red;"/>
+<script>
+
+// Create a namespace for our custom functions
+    YAHOO.namespace("cyangate.com");
+
+var deletedIndexes = new Array();
+var deleledIndexesIndex = 0;
+var deletedValues = new Array();
+var deletedValuesIndex = 0;
+
+
+YAHOO.util.Event.onDOMReady(function()
+{
+    document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.selectGroup}').value = 'Public Groups';
+    loadGroupElements();
+});
+
+function transfer(addOrRemove)
+{
+    var index;
+    var tempList;
+    if(addOrRemove == 'availableSelectList')
+    {
+        tempList = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.availableSelectList}');
+    }
+    else
+    {
+        tempList = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.selectedSelectList}');
+    }
+   
+    for(index = 0; index < tempList.options.length; index++)
+    {
+        if(tempList.options[index].selected)
+        {
+            saveDeletedIndexes(index);
+            saveDeletedValues(tempList.options[index]);
+        }
+   }
+        
+   deleteFromList(addOrRemove);
+   transferToList(addOrRemove);
+   deletedIndexes = new Array();
+   deleledIndexesIndex = 0;
+   deletedValues = new Array();
+   deletedValuesIndex = 0;
+}
+
+function transferToList(addOrRemove)
+{
+    var tempIndex;
+    var toList;
+    if(addOrRemove == 'selectedSelectList')
+    {
+        var tempList = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.availableSelectList}');
+        var availableListIndex = tempList.options.length;
+        for(tempIndex = 0; tempIndex < deletedValuesIndex; tempIndex++, availableListIndex++)
+        {
+            tempList.options[availableListIndex] = deletedValues[tempIndex];
+        }
+    }
+    else
+    {
+        var tempList = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.selectedSelectList}');
+        var selectedListIndex = tempList.options.length;
+        for(tempIndex = 0; tempIndex < deletedValuesIndex; tempIndex++, selectedListIndex++)
+        {
+            tempList.options[selectedListIndex] = deletedValues[tempIndex];
+        }
+    }
+}
+
+function saveDeletedIndexes(deletedIndex)
+{
+    deletedIndexes[deleledIndexesIndex] = deletedIndex;
+    deleledIndexesIndex++;
+}
+
+function saveDeletedValues(deletedValue)
+{
+    deletedValues[deletedValuesIndex] = deletedValue;
+    deletedValuesIndex++;
+}
+
+function deleteFromList(addOrRemove)
+{
+    var tempIndex;
+    var tempList;
+    if(addOrRemove == 'availableSelectList')
+    {
+        tempList = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.availableSelectList}');
+    }
+    else
+    {
+        tempList = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.selectedSelectList}');
+    }
+  
+    for(tempIndex = 0; tempIndex < deletedIndexes.length ; tempIndex++)
+    {
+        var temp = deletedIndexes[tempIndex];
+        tempList.options[temp - tempIndex] = null;
+    }
+}
+
+function loadGroupElements()
+{
+    var selectedValueTemp = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.selectGroup}').value;
+        
+    document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.availableSelectList}').disabled = false;
+    document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.selectedSelectList}').disabled = false;
+    
+    loadAvailableSelectList(selectedValueTemp);
+}
+
+function populateValues()
+{
+    saveArrayToHiddenField();
+    var selectGroupValue = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.selectGroup}').value;
+    var selectedSelectListValues = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.hiddenSelectedValue}').value;
+    var selectedAccessLevelValue = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.selectedAccessLevel}').value;
+    var fileId = '{!JSENCODE(fileIdParam)}';
+
+    //alert('SELECT GROUP VALUE: ' + selectGroupValue);
+    //alert('SELECTED SELECT LIST VALUES: ' + selectedSelectListValues);
+    //alert('SELECTED ACCESS LEVEL VALUE: ' + selectedAccessLevelValue);
+        
+    if(selectedSelectListValues == '' || selectedAccessLevelValue == '')
+    {   
+        var handleNotSelected = function()
+        {
+            this.hide();
+        };
+         
+        YAHOO.cyangate.com.notSelectedDialog = 
+            new YAHOO.widget.SimpleDialog("notSelectedDialog", 
+                 { width: "300px",
+                   fixedcenter: true,
+                   visible: true,
+                   draggable: true,
+                   close: false,
+                   hideaftersubmit: true,
+                   zIndex: 50,
+                   text: "You need to select users/groups to share with!",
+                   icon: YAHOO.widget.SimpleDialog.ICON_WARN,
+                   constraintoviewport: true,
+                   buttons: [ { text:"OK", handler:handleNotSelected, isDefault:true }]
+                 } );
+        YAHOO.cyangate.com.notSelectedDialog.setHeader("Warning!");
+        YAHOO.cyangate.com.notSelectedDialog.render(document.body);
+        YAHOO.cyangate.com.notSelectedDialog.show();
+    }
+    else
+    {
+        document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.availableSelectList}').disabled = true;
+        document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.selectedSelectList}').disabled = true;
+    
+        var handleOK = function()
+        {
+            reloadAddNewSharingPage();
+            this.hide();
+        };
+    
+        Visualforce.remoting.Manager.invokeAction(
+                    'cg.ShareController.addSharing',
+                    fileId, selectedSelectListValues, selectedAccessLevelValue,
+                    function(addSharingResult, event){
+                        if(event.status)
+                        {
+                           reloadSharingList(); 
+                        }
+                        else
+                        {
+                            YAHOO.cyangate.com.errorDialog = 
+                                    new YAHOO.widget.SimpleDialog("errorDialog", 
+                                         { width: "300px",
+                                           fixedcenter: true,
+                                           visible: true,
+                                           draggable: true,
+                                           close: false,
+                                           hideaftersubmit: true,
+                                           zIndex: 50,
+                                           text: "An error occurred while sharing item: " + event.message,
+                                           icon: YAHOO.widget.SimpleDialog.ICON_WARN,
+                                           constraintoviewport: true,
+                                           buttons: [ { text:"OK", handler:handleOK, isDefault:true }]
+                                         } );
+                                YAHOO.cyangate.com.errorDialog.setHeader("Warning!");
+                                YAHOO.cyangate.com.errorDialog.render(document.body);
+                                YAHOO.cyangate.com.errorDialog.show();
+                        }
+                    },
+                    {escape: true}
+                );
+        //saveSharing(selectGroupValue, selectedSelectListValues, selectedAccessLevelValue);
+    }
+}
+
+function saveArrayToHiddenField()
+{
+    var tempList = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.selectedSelectList}');
+    var tempIndex = document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.defaultValuesListLength}').value;
+    var hiddenSelectedValue = "";
+    
+    for(tempIndex = 0; tempIndex < tempList.options.length; tempIndex++)
+    {
+        hiddenSelectedValue += tempList.options[tempIndex].value + "," ;
+    }
+    
+    hiddenSelectedValue  = hiddenSelectedValue.substring(0,hiddenSelectedValue.length - 1);
+    document.getElementById('{!$Component.addNewSharePage.addNewSharePanelPB.addNewShareForm.addNewSharePanelPBS.hiddenSelectedValue}').value = hiddenSelectedValue;
+}
+
+function lightUp(imageElement,whichButton)
+{   
+    if(whichButton == 'up')
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,"upButtonLighted.png")}"
+    }   
+    else if(whichButton == 'down')
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,'downButtonLighted.png')}";
+    }
+    else if(whichButton == "add")
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,'addButtonLighted.png')}";
+    }
+    else
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,'removeButtonLighted.png')}";
+    }
+}
+
+
+function toNormal(imageElement,whichButton)
+{
+    if(whichButton == "up")
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,'upButtonNormal.png')}";
+    }   
+    else if(whichButton == 'down')
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,'downButtonNormal.png')}";
+    }
+    else if(whichButton == "add")
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,'addButtonNormal.png')}";
+    }
+    else
+    {
+        imageElement.src = "{!URLFOR($Resource.cg__SDrivePicklistButtons,'removeButtonNormal.png')}";
+    }
+}
+
+YAHOO.cyangate.com.init = function()
+{
+    document.body.className = document.body.className + " yui-skin-sam";
+}
+
+// Add the init method to the window.load event
+YAHOO.util.Event.addListener(window, "load", YAHOO.cyangate.com.init);
+</script>
+<div id="addNewSharePanel" width="100%">
+    <div class="hd">
+        <apex:outputText value="Add New Share" />
+    </div>  
+    <div class="bd">
+        <apex:pageBlock id="addNewSharePanelPB">
+            <apex:form id="addNewShareForm" >
+                
+                <apex:actionStatus startText="Processing..." id="transferStatus" startStyle="font-weight:bold;color:red;"/>
+                
+                <apex:actionFunction name="reloadSharingList" action="{!listSharingsPage}" status="transferStatus" />
+                <apex:actionFunction name="reloadAddNewSharingPage" action="{!addNewSharePage}" status="transferStatus" />            
+                <apex:actionFunction name="loadAvailableSelectList" action="{!loadGroupElements}" 
+                    immediate="true" reRender="gridElement"  status="transferStatus">
+                    <apex:param name="firstParam" assignTo="{!selectedShareGroup}" value=""/>
+                </apex:actionFunction>
+                            
+                <apex:actionRegion >
+                    <apex:pageMessages />
+                    <apex:pageBlockSection columns="1" id="addNewSharePanelPBS">
+                            <apex:outputPanel >
+                                Search: <apex:selectList id="selectGroup"
+                                    multiselect="false" size="1" onchange="loadGroupElements();" >
+                                    <apex:selectOptions value="{!shareGroups}"/>
+                                </apex:selectList> for: <apex:inputText onkeypress="return searchOnEnter(event);" size="20" id="criteria" value="{!searchCriteria}" /> 
+                                <apex:commandButton value="Find" action="{!findElement}" reRender="gridElement">
+                                </apex:commandButton>
+                                <apex:actionFunction action="{!findElement}" name="findElements"
+                                    reRender="gridElement" status="transferStatus"/>
+                                    <script>
+                                        function searchOnEnter(ev)
+                                        {
+                                            if (window.event && window.event.keyCode == 13 || ev.which == 13)
+                                            {
+                                                findElements();
+                                                return false;
+                                            }
+                                            else
+                                            {
+                                                return true;
+                                            }
+                                        }
+                                    </script>
+                            </apex:outputPanel>  
+                            <apex:outputPanel id="gridElement">
+                                <apex:outputPanel rendered="{!availableSelectList.size > 100}">
+                                    <apex:outputLabel style="font-weight:bold;color:red;" value="Only the first 100 records are being displayed. Please refine your criteria to narrow down your results." />
+                                </apex:outputPanel>                                              
+                                <apex:panelGrid columns="4">
+                                    <apex:outputLabel value="Available"/>
+                                    <br/>
+                                    <apex:outputLabel value="Share With"/>
+                                    <br/>
+                                    <div id="test" style="overflow:auto;width:180px;">
+                                    <apex:selectList id="availableSelectList"
+                                        multiselect="true" size="10">
+                                        <apex:selectOptions value="{!availableSelectList}" />
+                                    </apex:selectList>
+                                    </div>
+                                    <apex:panelGroup >
+                                         <br/>
+                                         <apex:image id="addButton" onmouseover="lightUp(this,'add')" 
+                                             onmouseout="toNormal(this,'add')" 
+                                             value="{!URLFOR($Resource.cg__SDrivePicklistButtons,'addButtonNormal.png')}" 
+                                             onclick="transfer('availableSelectList');" />
+                                         <br/>
+                                         <br/>
+                                         <apex:image id="removeButton" onmouseover="lightUp(this,'remove')"
+                                             onmouseout="toNormal(this,'remove')"
+                                             value="{!URLFOR($Resource.cg__SDrivePicklistButtons,'removeButtonNormal.png')}"
+                                             onclick="transfer('selectedSelectList');"/>
+                                    </apex:panelGroup>
+                                    <apex:selectList id="selectedSelectList"
+                                        multiselect="true" size="10">
+                                          <apex:selectOptions value="{!selectedSelectList}"/>
+                                    </apex:selectList>
+                                    <apex:inputHidden id="hiddenSelectedValue" value="{!selectedValues}"/>   
+                                    <apex:inputHidden id="defaultValuesListLength"  value="{!defaultValuesListLength}" />
+                                </apex:panelGrid>
+                            </apex:outputPanel>
+                            <apex:selectList id="selectedAccessLevel" value="{!selectedAccessLevel}" 
+                                required="true" label="Access Level"
+                                multiselect="false" size="1">
+                                <apex:selectOptions value="{!accessOptions}"/>
+                            </apex:selectList>
+                           
+                    </apex:pageBlockSection>
+                    <div style="text-align: right;">
+                        <apex:commandButton value="Save" onclick="javascript:populateValues();return false;" status="processStatus" />
+                        <apex:commandButton value="Cancel" immediate="true" action="{!listSharingsPage}"/>
+                        <apex:commandButton value="Close" immediate="true" 
+                            oncomplete="parent.YAHOO.cyangate.com.hideSharePanel();"/>
+                    </div>
+                </apex:actionRegion>
+            </apex:form>
+        </apex:pageBlock>
+    </div>  
+</div>
+ <style>
+#addNewSharePanel .bd
+{
+    overflow:auto;
+}
+#addNewSharePanel.show-scrollbars .underlay {
+    overflow: visible;
+}
+ </style>
+</apex:page>

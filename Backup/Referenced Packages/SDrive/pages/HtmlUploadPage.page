@@ -1,0 +1,26 @@
+<apex:page controller="cg.HtmlUploadPageController" showHeader="true" sidebar="true" standardStylesheets="false" applyHtmlTag="true" applyBodyTag="true" docType="html">       
+<html>
+    <head>
+        <meta charset="utf-8" />
+      
+        <title>
+            S-Drive Upload Page
+        </title>
+    </head>
+<body> 
+    <c:HtmlUploadComponent objectId="{!objectId}"
+    customObjectFileName="{!customObjectFileName}"
+    fileNamespacePrefix="{!fileNamespacePrefix}"
+    relationshipName="{!relationshipName}"
+    privateEnabled="{!privateEnabled}"
+    currentFolderId="{!currentFolderId}"
+    allowedFileExtensions="{!allowedFileExtensions}"
+    debug="false"
+    isUsePopup="{!useUploadAsPopup}"
+    returnUrl="{!returnUrl}" 
+    IdToUploadNewVersion="{!IdToUploadNewVersion}"
+    isNewVersionUpload="{!isNewVersionUpload}"
+    />
+</body>
+</html>
+</apex:page>

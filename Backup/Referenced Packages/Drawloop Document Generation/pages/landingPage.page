@@ -1,0 +1,156 @@
+<apex:page sidebar="false" showHeader="false" controller="Loop.LandingPageController" title="Drawloop Document Generation" applyHtmlTag="false">
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    
+    <apex:stylesheet value="{!URLFOR($Resource.Loop__SalesforceLightning, 'assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+    <script type="text/javascript">
+        function getParams(url) {
+            var i = url.indexOf('?'),
+                tmp = i === -1 ? url : url.substring(i + 1),
+                qs = {},
+                sections = tmp.split('&');
+            for (var i = 0; i < sections.length; i++) {
+                if (!sections[i]) continue;
+                var pair = sections[i].split('=');
+                if (pair[0] in qs) {
+                    qs[pair[0]] = (qs[pair[0]] || '') + ',' + decodeURIComponent(pair[1] || '');
+                } else {
+                    qs[pair[0]] = decodeURIComponent(pair[1] || '');
+                }
+            }
+            return qs;
+        }
+        
+        if ("{!JSENCODE(pageParent)}" == "ddpMigration") {
+            if ({!isOAuthSuccess}) {
+                window.opener.passInTargetOrgVals("{!JSENCODE(sessionId)}", "{!JSENCODE(location)}", "{!JSENCODE(username)}", true);
+            }
+            else {
+                window.opener.passInTargetOrgVals("{!JSENCODE(error)}", "{!JSENCODE(errorDescription)}", "", false);
+            }
+            window.close();
+        }
+        else if ("{!JSENCODE(pageParent)}" == "edition" || "{!JSENCODE(pageParent)}" == "layoutButton" || "{!JSENCODE(pageParent)}" == "sampleDdp") {
+            var event = window.opener.$A.get("e.Loop:oAuthSuccessful");
+            event.setParams({
+                sessionId : "{!JSENCODE(sessionId)}",
+                location : "{!JSENCODE(location)}"
+            });
+            event.fire();
+            window.close();
+        }
+        else if ("{!JSENCODE(pageParent)}" == "authorizeLoop") {
+            try {
+                // Most places in the package we use 'c' for namespace such as 'c:Component...' because it is automatically updated upon uploading the package.
+                // It seems that string references, like the one below, are not automatically replaced. So we must use 'Loop' namespace here.
+                var event = window.opener.$A.get("e.Loop:oAuthSuccessful");
+                event.setParams({
+                    authorizingUser : "{!JSENCODE(authorizingUser)}"
+                });
+                event.fire();
+                window.close();
+            } catch (ex) {
+                try {
+                    var parentSubdomain = '{!JSENCODE(parentSubdomain)}';
+                    if (parentSubdomain) {
+                        var parentUrl = 'https://' + parentSubdomain + '.force.com';
+                        window.opener.postMessage({message: 'authorizeUser', user: '{!JSENCODE(authorizingUser)}'}, parentUrl);
+                        window.close();
+                    } else {
+                        window.openerEventFailed = true;
+                    }
+                } catch (ex) {
+                    window.openerEventFailed = true;
+                }
+            }
+        }
+        else if ("{!JSENCODE(pageParent)}" == "o365") {
+            var event = window.opener.$A.get("e.Loop:office365OAuthCompleted");
+            event.setParams({
+                isSuccess : "{!isSuccess}",
+                errorCode : "{!JSENCODE(errorCode)}",
+                errorId : "{!JSENCODE(errorId)}",
+                errorDescription : "{!JSENCODE(errorDescription)}"
+            });
+            event.fire();
+            window.close();
+        }
+        else {
+            var params = getParams(window.location.href)
+            if ('callback' in params) {
+                var opener = window.opener;
+                if (opener.$A) {
+                    var callbackEvent = opener.$A.get("e.Loop:" + params.callback);
+                    callbackEvent.setParams({
+                        result : this.getParams(window.location.href)
+                    });
+                    callbackEvent.fire();
+                }
+            } else {
+                var errorCode = '';
+                var errorId = '';
+                var errorDescription ='';
+                // Update this piece to use the above params var
+                var query = window.location.search.substring(1);
+                if (query) {
+                    var params = query.split('&');
+                    for (var i = 0; i < params.length; i++) {
+                        var parts = params[i].split('=');
+                        if (parts[0].toLowerCase() == 'errorcode') {
+                            errorCode = decodeURIComponent(parts[1]);
+                        }
+                        else if (parts[0].toLowerCase() == 'errorid') {
+                            errorId = decodeURIComponent(parts[1]);
+                        }
+                            else if (parts[0].toLowerCase() == 'errordescription') {
+                                errorDescription = decodeURIComponent(parts[1]);
+                            }
+                    }
+                }
+                if (window.opener && window.opener.handleOAuthResult) {
+                    //Came from classic
+                    window.opener.handleOAuthResult((!errorCode).toString(), errorCode, errorId);
+                }
+                else {
+                    //Came from lightning
+                    var event = window.opener.$A.get("e.Loop:boxOAuthSuccessful");
+                    if (errorCode) {
+                        event.setParams({
+                            errorCode : errorCode,
+                            errorId : errorId,
+                            errorDescription : errorDescription
+                        });
+                    }
+                    event.fire();
+                }
+            }
+            window.close();
+        }
+    </script>
+    <div id="loadingDiv">
+        Loading...
+    </div>
+    
+    <div id="errorMessageDiv" class="slds" style="display: none;">
+        <div class="slds-notify_container">
+            <div class="slds-notify slds-notify--toast" role="alert">
+                <span class="slds-assistive-text">Error</span>
+                <div class="slds-notify__content slds-grid">
+                    <svg aria-hidden="true" class="slds-icon slds-icon--small slds-m-right--small slds-col slds-no-flex">
+                        <use xlink:href="{!URLFOR($Resource.SalesforceLightning, 'assets/icons/utility-sprite/svg/symbols.svg#note')}"></use>
+                    </svg>
+                    <div class="slds-col slds-align-middle">
+                        <h2 class="slds-text-heading--small">Authorization successful.</h2>
+                        <p>However, we were unable to update the parent page. Close this window and reload the parent page to continue.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    	if (window.openerEventFailed) {
+            document.getElementById('loadingDiv').hidden = true;
+            document.getElementById('errorMessageDiv').style.display = 'block';
+        }
+    </script>
+</html>
+</apex:page>

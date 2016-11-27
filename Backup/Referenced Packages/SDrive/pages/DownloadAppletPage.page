@@ -1,0 +1,112 @@
+<apex:page showHeader="false" sidebar="false" controller="cg.DownloadAppletPageController">
+<apex:includeScript value="{!$Resource.cg__AppletScript}"/>
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'yahoo/yahoo-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'event/event-min.js')}" />
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts,'connection/connection_core-min.js')}" />
+<script language="Javascript"> 
+var firstLoad = true;
+function chrome_popups_permitted()
+ {
+     if(window.innerHeight != 0) 
+     { 
+      return true;
+     } 
+     else
+     {
+      return false;
+      }
+ }
+ 
+ var jsonWsUrl='{!URLFOR($Page.cg__JsonWebService)}';
+ var pingTimer;
+ function pingSalesforce()
+ {
+    if(pingTimer == null)
+    {
+        pingTimer = setTimeout("pingSalesforce()",300000);
+    }
+    else
+    {
+        //ajax call to JSONWS to ping. Response callback defined here
+        var queryString = jsonWsUrl;
+        if (queryString.indexOf('?') >= 0)
+        {
+            queryString += '&';
+        }
+        else
+        {
+            queryString += '?';
+        }
+        queryString += 'core.apexpages.devmode.url=1&className=S3Helper&methodName=salesforceSessionIsValid';
+
+        var  AjaxObject = 
+        {
+            handleSuccess:function(o)
+            {
+                if(o.responseText != '"OK"')
+                {
+                    alert('Error occured: ' + o.responseText);
+                }
+                else
+                {
+                    pingTimer = setTimeout("pingSalesforce()",300000);
+                }
+                return;
+            },
+    
+            handleFailure:function(o)
+            {
+                alert('S-Drive Download Manager detected that the Salesforce session is not valid anymore. Please keep the Salesforce session open while the download is in progress!');
+                return;
+            },
+    
+            startRequest:function() 
+            {
+               YAHOO.util.Connect.asyncRequest('GET', queryString, callback, null);
+            }
+        };
+    
+        var callback =
+        {
+            success:AjaxObject.handleSuccess,
+            failure:AjaxObject.handleFailure,
+            scope: AjaxObject
+        };
+    
+        AjaxObject.startRequest();
+    }
+ }
+ pingSalesforce();
+ 
+ function addNewDownloads(selectedIdNamePairs, objectId)
+ {    
+    selectedDownloadUrlsRetrieval(selectedIdNamePairs, objectId); 
+ }
+ 
+    var attributes = {code:'com.cyangate.sdrive.downloadmanager.DownloadManager.class',
+        archive:'https://s3.amazonaws.com/s-drive/SDriveDownloadManager-{!versionNumber}.jar',
+        width:640, height:480, MAYSCRIPT:true, id:'downloadApplet'} ;
+    //removed enableChecksum
+    var parameters = {selectedDownloadUrls:'{!JSENCODE(selectedDownloadUrls)}',jsonWsUrl:'{!URLFOR($Page.cg__JsonWebService)}',fileIdField:'{!JSENCODE(fileIdField)}'};
+    var version = '1.6' ;
+    deployJava.runApplet(attributes, parameters, version); 
+</script>
+<apex:form >
+<apex:actionFunction name="selectedDownloadUrlsRetrieval" action="{!retrieveSelectedDownloadUrls}" rerender="addNewDownloads">
+  <apex:param id="selectedIdNamePairs" name="selectedIdNamePairs" assignTo="{!selectedIdNamePairsAT}" value="" />
+  <apex:param name="objectId" assignTo="{!objectIdAT}" value="" />
+</apex:actionFunction>
+</apex:form>
+<apex:outputPanel id="addNewDownloads">
+<script>
+    if(!firstLoad)
+    {
+        document.getElementById('downloadApplet').addNewDownloads('{!JSENCODE(selectedDownloadUrls)}');
+    }
+    else
+    {
+        firstLoad = false;
+    }
+</script>
+</apex:outputPanel>
+</apex:page>

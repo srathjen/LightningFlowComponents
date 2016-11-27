@@ -1,0 +1,463 @@
+<apex:page controller="cg.EmailController" id="pg">
+<apex:styleSheet value="{!URLFOR($Resource.cg__YuiScripts, 'assets/skins/sam/skin.css')}" />
+<apex:stylesheet value="{!URLFOR($Resource.cg__YuiScripts,'container/assets/skins/sam/container.css')} "/>
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts, 'yahoo-dom-event/yahoo-dom-event.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts, 'container/container-min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.cg__YuiScripts, 'animation/animation-min.js')}"/> 
+<style>
+.processStyle
+ {
+     color: red;
+     font-weight: bold;
+ }
+</style>
+<apex:form id="frm">
+<apex:actionFunction name="sendEmail" action="{!sendEmail}"/>
+<apex:pageMessages />
+<apex:pageBlock id="pb">
+    <apex:pageBlockButtons >
+        <apex:commandButton value="Send" onclick="validateFields();return false;" />
+        <apex:commandButton rendered="{!NOT(isCustomerPortalUser)}" value="Select Template" onclick="YAHOO.force.com.displayTemplateSelector();return false;"/>
+        <apex:commandButton rendered="{!(customObjectFileName != 'S3Object__c'||isMobile) && ISBLANK(objectIds)}" value="Close" id="cancelButton" onclick="javascript:emailCompleted();return false;" />
+        <apex:outputPanel rendered="{!customObjectFileName == 'S3Object__c'&&NOT(isMobile)}">
+            <input class="btn" type="button" value="Close" onclick="parent.YAHOO.cyangate.com.hideEmailPanel();"/>
+        </apex:outputPanel>
+    </apex:pageBlockButtons>
+    <apex:pageBlockSection columns="1" collapsible="false" id="pbSection">
+        <apex:pageBlockSectionItem id="emailFormatSection" rendered="{!emailTemplateType != 'html'}">
+            <apex:outputLabel >
+                Email Format
+            </apex:outputLabel>
+            <apex:outputPanel >
+                <b> 
+                  &nbsp;
+                 <apex:outputText rendered="{!config.format = 'Text'}">Text-Only &nbsp;</apex:outputText>
+                 <apex:commandLink action="{!switchEmailFormat}" rendered="{!config.format = 'Text'}">[Switch to HTML]</apex:commandLink> 
+
+                 <apex:outputText rendered="{!config.format = 'HTML'}">HTML &nbsp;</apex:outputText>
+                 <apex:commandLink action="{!switchEmailFormat}" rendered="{!config.format = 'HTML'}">[Switch to Text-Only]</apex:commandLink>
+                </b>  
+            </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem id="toSection" rendered="{!NOT(isCustomerPortalUser)}">
+            <apex:outputLabel >To</apex:outputLabel>
+            <apex:outputPanel id="to">
+                 <apex:inputText id="targetObject" value="{!config.contactName}" onchange="clearToField();return false;" title="Please select a contact using lookup button"/>
+                 <apex:inputHidden id="targetObject_lkid" value="{!config.targetObjectId}"/>
+                 <apex:image url="/s.gif" alt="Lookup (New Window)" styleClass="lookupIcon" 
+                    onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" 
+                    onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" 
+                    onclick="YAHOO.force.com.displayContactSelector('{!$Component.targetObject}',document.getElementById('{!$Component.targetObject}').value);"
+                    title="Lookup (New Window)"/>
+            </apex:outputPanel>                  
+        </apex:pageBlockSectionItem>
+        
+        <!-- SA- Removed && customObjectFileName != 'S3Object__c' -->
+        <apex:pageBlockSectionItem rendered="{!NOT(ISBLANK(objectId))}">
+            <apex:outputLabel >Related To</apex:outputLabel>
+            <apex:outputText value="{!relatedToDisplayValue}"/>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem >
+                <apex:outputPanel >
+                    <apex:outputLabel rendered="{!NOT(isCustomerPortalUser)}">Additional To</apex:outputLabel>
+                    <apex:outputLabel rendered="{!isCustomerPortalUser}">To</apex:outputLabel>
+                </apex:outputPanel> 
+                <apex:outputPanel >
+                    <apex:inputTextarea value="{!config.additionalTo}" rows="1" cols="65" id="additionalTo"/>
+                    <apex:image url="/s.gif" alt="Lookup (New Window)" styleClass="lookupIcon" 
+                        onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" 
+                        onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" 
+                        onclick="YAHOO.force.com.displayContactSelector('{!$Component.additionalTo}');"
+                        title="Lookup (New Window)" rendered="{!NOT(isCustomerPortalUser)}"/>                
+                </apex:outputPanel>        
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem >
+            <apex:outputLabel >CC</apex:outputLabel>
+            <apex:outputPanel >
+                <apex:inputTextarea value="{!config.ccAddress}" rows="1" cols="65" id="ccAddress"/>
+                <apex:image url="/s.gif" alt="Lookup (New Window)" styleClass="lookupIcon" 
+                    onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" 
+                    onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" 
+                    onclick="YAHOO.force.com.displayContactSelector('{!$Component.ccAddress}');"
+                    title="Lookup (New Window)" rendered="{!NOT(isCustomerPortalUser)}"/>                 
+            </apex:outputPanel>                  
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem >
+            <apex:outputLabel >BCC</apex:outputLabel>
+            <apex:outputPanel >
+                <apex:inputTextarea value="{!config.bccAddress}" rows="1" cols="65" id="bccAddress"/>
+                <apex:image url="/s.gif" alt="Lookup (New Window)" styleClass="lookupIcon" 
+                    onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" 
+                    onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" 
+                    onclick="YAHOO.force.com.displayContactSelector('{!$Component.bccAddress}');"
+                    title="Lookup (New Window)" rendered="{!NOT(isCustomerPortalUser)}"/>                 
+            </apex:outputPanel>                  
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem id="emailSubject">
+            <apex:outputLabel >Subject</apex:outputLabel>
+            
+            <apex:outputPanel id="subjectPanel" layout="block" styleClass="requiredInput">
+                <div class="requiredBlock"></div>
+                <apex:inputText id="subjectIT" value="{!config.subject}" size="70" required="false" label="Subject"/>
+            </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem id="emailBody">
+            <apex:outputLabel >Body</apex:outputLabel>
+            <apex:outputPanel layout="block">
+                <apex:inputTextarea id="bodyITA" required="false" label="Email Body" rows="10" cols="65" richText="{!config.format = 'HTML'}" value="{!emailBody}">
+                </apex:inputTextarea>
+            </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem id="attachmentExpiration">
+            <apex:outputLabel >Attachment Expiration</apex:outputLabel>
+            <apex:outputPanel layout="block" styleClass="requiredInput">
+             
+                <apex:inputCheckbox id="neverExpiresCheck" value="{!neverExpires}" selected="{!neverExpires}"
+                    onchange="return toggleVisibility('{!$Component.pg.frm.pb.pbSection.attachmentExpiration.expOptions}');" />
+                <apex:outputLabel value="Never Expires" />&nbsp;
+               <apex:outputPanel id="expOptions" style="{!if(neverExpires,'display:none','display:inline')}">
+                    <apex:inputText id="expirationTimeIT" value="{!expirationTime}" size="3"/>
+                     <apex:selectList size="1" value="{!expirationLabel}">
+                         <apex:selectOptions value="{!expItems}"/>
+                     </apex:selectList>
+                 </apex:outputPanel>
+            </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+                
+        <apex:pageBlockSectionItem id="emailAttachments">
+            <apex:outputLabel id="attachmentsLabel">{!selectedEmailAttachments.size} attachment(s)</apex:outputLabel>
+            <apex:outputPanel layout="block" id="attachmentsBlock">
+                <button type="button" onclick="return toggleVisibility('{!$Component.pg.frm.pb.pbSection.emailAttachments.attachmentList}');">Details<img src="{!URLFOR($Resource.DownArrow)}" /></button><br />
+                <apex:outputPanel layout="block" id="attachmentList">
+                    <apex:actionStatus id="processStatus" startStyleClass="processStyle">
+                        <apex:facet name="start">
+                            Removing...<br/>
+                        </apex:facet>
+                    </apex:actionStatus>
+                    <apex:actionFunction name="removeAttachment" action="{!removeAttachment}" reRender="attachmentsLabel,attachmentsBlock" status="processStatus">
+                        <apex:param name="attachmentId" assignTo="{!attachmentIdToRemove}" value=""/>
+                    </apex:actionFunction>
+                    <apex:repeat var="att" value="{!selectedEmailAttachments}">
+                        <apex:outputText value="{!att.name} - {!att.size} "/>&nbsp;
+                        <apex:image url="{!URLFOR($Resource.cg__RemoveButton)}" style="cursor:hand;cursor:pointer" width="14" height="14" title="Remove"
+                        onclick="removeAttachment('{!att.id}');return false;" /><br />
+                    </apex:repeat>
+                </apex:outputPanel>
+            </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem id="signatureSelection" rendered="{!NOT(isCustomerPortalUser)}">
+            <apex:outputLabel ></apex:outputLabel>
+            <apex:outputPanel layout="block">
+                <apex:inputCheckbox value="{!useSignature}" 
+                    title="You can configure your email signature from your Salesforce.com account settings. (Setup -> Email -> My Email Settings)" />
+                <apex:outputLabel value="Use Email Signature" title="You can configure your email signature from your Salesforce.com account settings. (Setup -> Email -> My Email Settings)"/>
+            </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+        
+    </apex:pageBlockSection>
+</apex:pageBlock>
+
+<!--  Template Selector Section -->
+<div id="templatePanel" style="display:none">
+<div class="hd">
+    <apex:outputText value="Select Email Template" />
+  </div> 
+<apex:actionFunction name="searchTemplates" action="{!searchTemplates}" rerender="templateBlock" status="templateStatus">
+<apex:param name="folderId" value="" assignTo="{!selectedFolderID}" />
+</apex:actionFunction>
+<apex:pageBlock id="templateBlock">
+<div id="templatePanel" style="width:610px;height:350px;overflow-x:hidden;overflow-y:auto" >
+    <apex:pageBlockSection columns="1">
+        <apex:pageBlockSectionItem >
+            <apex:outputLabel >
+                Folder
+            </apex:outputLabel>
+            <apex:outputPanel >
+                <apex:selectList value="{!selectedFolderID}" size="1" multiselect="false" onchange="searchTemplates(this.options[this.selectedIndex].value);">
+                    <apex:selectOption itemValue="{!$Organization.Id}" itemLabel="Unfiled Public Email Templates"/>
+                    <apex:selectOption itemValue="{!$User.Id}" itemLabel="My Personal Email Templates"/>
+                    <apex:selectOptions value="{!folders}"/>
+                </apex:selectList>&nbsp;
+                <apex:outputPanel style="color:red;">
+                    <apex:actionStatus startText="Loading..." id="templateStatus" />
+              </apex:outputPanel>
+      </apex:outputPanel>
+        </apex:pageBlockSectionItem>
+    </apex:pageBlockSection>
+    <apex:pageBlockTable value="{!templateList}" var="template" width="100%">
+          <apex:column headerValue="Name"> 
+            <apex:commandLink value="{!template.Name}" action="{!selectEmailTemplate}">
+                <apex:param name="templateId" value="{!template.id}" assignTo="{!emailTemplateID}" />
+                <apex:param name="templateType" value="{!template.templateType}" assignTo="{!emailTemplateType}" />
+            </apex:commandLink>
+          </apex:column>
+          <apex:column value="{!template.TemplateType}"/>
+          <apex:column value="{!template.description}"/>
+    </apex:pageBlockTable>
+  </div>
+</apex:pageBlock>
+</div>
+</apex:form>
+
+<!-- Contact Selector  -->
+<div id="contactPanel" style="display:none">
+<div class="hd">
+    <apex:outputText value="Search Contacts" />
+  </div> 
+<apex:form >
+<apex:actionFunction name="performContactSearch" action="{!performContactSearch}" rerender="contactSection" 
+    oncomplete="YAHOO.force.com.contactDialog.show();" status="searchStatus">
+    <apex:param name="searchString" assignTo="{!searchString}" value=""/>
+</apex:actionFunction>
+<apex:pageBlock id="contactSection">
+    <div id="scrollContactSection"  style="width:610px;height:350px;overflow-x:hidden;overflow-y:auto">
+      <apex:outputPanel id="top">
+       <apex:outputLabel value="Search" style="font-weight:Bold;padding-right:10px;" for="txtSearch"/>
+       <apex:inputText id="txtSearch" value="{!searchString}" onkeypress="return noenter(event, this.value);" />
+         <span style="padding-left:5px">
+            <apex:commandButton id="btnGo" value="Go" action="{!performContactSearch}" rerender="contactSection" status="searchStatus">
+            </apex:commandButton>&nbsp;
+            <apex:outputPanel style="color:red;">
+                <apex:actionStatus startText="Loading..." id="searchStatus" />
+          </apex:outputPanel>
+         </span>
+     </apex:outputPanel>
+     <apex:pageBlockTable value="{!contacts}" var="a" id="tblResults"> 
+       <apex:column >
+         <apex:facet name="header">
+           <apex:outputPanel >Name</apex:outputPanel>
+         </apex:facet>
+          <apex:outputLink onclick="contactPicked('{!JSENCODE(a.email)}','{!JSENCODE(a.id)}','{!JSENCODE(a.name)}');return false;" rendered="{!NOT(ISNULL(a.email))}">{!a.Name}</apex:outputLink>     
+       </apex:column>
+       <apex:column >
+         <apex:facet name="header">
+           <apex:outputPanel >E-mail</apex:outputPanel>
+         </apex:facet>
+          <apex:outputLink onclick="contactPicked('{!JSENCODE(a.email)}','{!JSENCODE(a.id)}','{!JSENCODE(a.name)}');return false;" rendered="{!NOT(ISNULL(a.email))}">{!a.Email}</apex:outputLink>     
+       </apex:column>
+     </apex:pageBlockTable>
+     </div>
+</apex:pageBlock>
+</apex:form>
+</div>
+
+<script type="text/javascript">
+    // gloabl Variable
+    var contactLookupID;
+    var contactLooUpValue;
+    
+    function noenter(ev, val)  {
+        if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+            performContactSearch(val);
+            return false;
+         } else {
+              return true;
+         }
+    }
+    function contactPicked(emailID, id, name) {
+        if(contactLooUpValue == undefined) {
+            var emailValue = document.getElementById(contactLookupID).value;
+            if(emailValue != '') {
+                emailValue = emailValue + ',';
+            }
+            emailValue = emailValue + emailID;
+            document.getElementById(contactLookupID).value = emailValue;            
+        } else {
+            document.getElementById(contactLookupID + '_lkid').value = id;
+            document.getElementById(contactLookupID).value = name;
+        }
+        YAHOO.force.com.hidecontactSelector();
+    }       
+// Create a namespace for our custom functions
+  YAHOO.namespace("force.com");
+  // Function called when we want to show the dialog
+  YAHOO.force.com.displayTemplateSelector = function() {
+      document.getElementById("templatePanel").style.display = "block";
+      YAHOO.force.com.templateDialog.center();
+      YAHOO.force.com.templateDialog.show();
+  }
+  // Function called when we want to hide the dialog
+  YAHOO.force.com.hideTemplateSelector = function() {
+      YAHOO.force.com.templateDialog.hide();
+  }
+  // Contact Selector
+  YAHOO.force.com.displayContactSelector = function(elementID, searchString) {
+      contactLookupID = elementID;
+      contactLooUpValue = searchString;
+      performContactSearch(searchString);
+      document.getElementById("contactPanel").style.display = "block";
+      YAHOO.force.com.contactDialog.center();
+  }
+  // Function called when we want to hide the dialog
+  YAHOO.force.com.hidecontactSelector = function() {
+      YAHOO.force.com.contactDialog.hide();
+  }  
+  // Function called when the DOM is ready to create the dialog,
+  // render the dialog into the document body, add our dialog skin
+  // css to the body tag, and wire up the buttons on our dialog    
+  YAHOO.force.com.init = function() {
+      document.body.className = document.body.className + " yui-skin-sam";
+      YAHOO.force.com.templateDialog = new YAHOO.widget.Panel(
+          "templatePanel",  // The id of our dialog container 
+          { 
+                  width           :   650,    // You can play with this until it’s right
+                  height          :   400,
+                  iframe          :   true,
+                  visible         :   false,  // Should be invisible when rendered
+                  draggable       :   true,   // Make the dialog draggable
+                  close           :   true,  // include a close title button
+                  modal           :   true,   // Make it modal
+                  fixedCenter     :   false,   // Keep centered if window is scrolled
+                  zindex          :   100,     // Make sure it’s on top of everything
+          }
+       );
+      YAHOO.force.com.contactDialog = new YAHOO.widget.Panel(
+          "contactPanel",  // The id of our dialog container 
+          { 
+                  width           :   650,    // You can play with this until it’s right
+                  height          :   400,
+                  iframe          :   true,
+                  visible         :   false,  // Should be invisible when rendered
+                  draggable       :   true,   // Make the dialog draggable
+                  close           :   true,  // include a close title button
+                  modal           :   true,   // Make it modal
+                  fixedCenter     :   false,   // Keep centered if window is scrolled
+                  zindex          :   100     // Make sure it’s on top of everything
+          }
+       );
+      // Render the dialog to the document.body level of the DOM
+       YAHOO.force.com.templateDialog.render(document.body);
+       YAHOO.force.com.contactDialog.render(document.body);
+  }
+  // Add the init method to the window.load event
+  YAHOO.util.Event.addListener(window, "load", YAHOO.force.com.init);
+  
+  function emailCompleted()
+  {
+    window.location.href = decodeURIComponent('{!JSENCODE($Request.returnUrl)}');
+  }    
+  
+  function toggleVisibility(elementId)
+  {
+    var e = document.getElementById(elementId);
+
+    if(e != null)
+    {
+        e.style.display = (e.style.display == "none" ? "inline" : "none");
+    }
+    return false;
+  }
+  
+  function clearToField()
+  {
+     //var emailSubjectValue = document.getElementById('{!$Component.pg.frm.pb.pbSection.toSection.targetObject_lkid}').value; 
+     //alert(emailSubjectValue);
+     document.getElementById('{!$Component.pg.frm.pb.pbSection.toSection.targetObject_lkid}').value = '';
+  }  
+  
+  function validateFields()
+  {  
+       var emailSubjectValue = document.getElementById('{!$Component.pg.frm.pb.pbSection.emailSubject.subjectIT}').value;
+
+       if(emailSubjectValue == null || emailSubjectValue.trim() == '')
+       {
+           var handleOK = function()
+            {
+                this.hide();
+                return false;
+            };
+            
+            YAHOO.force.com.errorDialog = 
+                new YAHOO.widget.SimpleDialog("errorDialog", 
+                     { width: "300px",
+                       fixedcenter: true,
+                       visible: true,
+                       modal: true,
+                       draggable: true,
+                       close: false,
+                       hideaftersubmit: true,
+                       zIndex: 100,
+                       text: "Email should have a subject!",
+                       icon: YAHOO.widget.SimpleDialog.ICON_WARN,
+                       constraintoviewport: true,
+                       buttons: [{text:"OK", handler:handleOK, isDefault:true }]
+                     } );
+            YAHOO.force.com.errorDialog.render(document.body);
+            YAHOO.force.com.errorDialog.show();
+            return;
+       }
+       
+       var textId = '{!$Component.pg.frm.pb.pbSection.attachmentExpiration.expirationTimeIT}';
+       var textIdText = document.getElementById(textId).value;
+       var validChars = "0123456789";
+       var isNumber=true;
+       var c;
+       var neverExpires = '{!$Component.pg.frm.pb.pbSection.attachmentExpiration.neverExpiresCheck}';
+       var neverExpiresValue = document.getElementById(neverExpires).checked;
+  
+       if(neverExpiresValue == false)
+       {
+           if(textIdText == null || textIdText == '' || textIdText == '0')
+           {
+               isNumber = false;
+           }
+           else
+           {
+               for (i = 0; i < textIdText.length && isNumber == true; i++)
+               {
+                   c = textIdText.charAt(i);
+                   if (validChars.indexOf(c) == -1)
+                   {
+                     isNumber = false;
+                   }
+               }
+           }
+       }
+       
+       if (isNumber == false)
+       {
+            var handleOK = function()
+            {
+                this.hide();
+                return false;
+            };
+            
+            YAHOO.force.com.errorDialog = 
+                new YAHOO.widget.SimpleDialog("errorDialog", 
+                     { width: "300px",
+                       fixedcenter: true,
+                       visible: true,
+                       modal: true,
+                       draggable: true,
+                       close: false,
+                       hideaftersubmit: true,
+                       zIndex: 100,
+                       text: "E-mail attachment expiration must use just numbers (e.g. 50)!",
+                       icon: YAHOO.widget.SimpleDialog.ICON_WARN,
+                       constraintoviewport: true,
+                       buttons: [{text:"OK", handler:handleOK, isDefault:true }]
+                     } );
+            YAHOO.force.com.errorDialog.render(document.body);
+            YAHOO.force.com.errorDialog.show();
+            return;
+        }
+        else
+        {
+            sendEmail();
+        }
+   }
+   
+   YAHOO.util.Event.onDOMReady(function(){
+       toggleVisibility('{!$Component.pg.frm.pb.pbSection.emailAttachments.attachmentList}');
+    });
+    
+</script>
+</apex:page>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Case : Budget Approval Template</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Make_a_Wish_America</letterhead>
+    <name>Case : Budget Approval Template</name>
+    <style>freeForm</style>
+    <subject>Budget form</subject>
+    <textOnly>Hi
+
+The following budget form has been assigned to you please review the form. https://c.cs52.visual.force.com/apex/WishBudgetForm_VF?CaseId={!Case.Id}</textOnly>
+    <type>html</type>
+</EmailTemplate>

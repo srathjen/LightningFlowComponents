@@ -1084,20 +1084,15 @@ Public Class WishChildForm_AC
         multiPickoptions = new List<SelectOption>();
          if(emailMap.size() > 0){
 
-          Set<String> nameSet = new Set<String>();
+          Map<String,String> nameMap = new Map<String,String>();
          Map<String,String> processedNameMap = new Map<String,String>();
            
           for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
                                                            Case__c =: caseId]){
                      if(wishChildForm.Hidden_Contact_Name__c != Null) {                                     
                         for(String keys : wishChildForm.Hidden_Contact_Name__c.split(',')){
-                           if(nameSet.contains(keys )){
-                              keys = keys+' ';
-                              nameSet.add(keys);
-                              
-                           }
-                           else
-                           nameSet.add(keys.trim());
+                           nameMap.put(keys.trim(),'abc');
+                           system.debug('##### nameMap ####'+nameMap);
                         } 
                     
                     }
@@ -1109,18 +1104,16 @@ Public Class WishChildForm_AC
                    String keys = key.split('-')[0];
                    keys = keys.replaceAll('  ',' ');
                    String value = key.split('-')[1];
-                   if(processedNameMap.containsKey(keys)){
-                       keys = keys+' ';
-                       processedNameMap.put(keys,value);
-                       }
-                   else
-                   processedNameMap.put(keys,value);
+                  processedNameMap.put(keys.trim(),value);
                } 
           }
           if(processedNameMap.size() > 0){
               for(String name : processedNameMap.KeySet()){
-                    if(!nameSet.contains(name)){
+              system.debug('##### nameMap ####'+nameMap);
+              system.debug('##### Name ####'+Name);
+                    if(!nameMap.containsKey(name)){
                     selectedMailMap.put(name,processedNameMap.get(name));
+                     system.debug('##### selectedMailMap ####'+selectedMailMap);
                     }
               }
           }
@@ -1271,7 +1264,8 @@ Public Class WishChildForm_AC
   
         displaySignNowPopup = true;
            for(String currString : selectedMailMap.keySet()){
-               multiPickoptions.add(new SelectOption(currString,currString ));
+               
+              multiPickoptions.add(new SelectOption(currString,currString ));
            }
        
        
@@ -1389,7 +1383,7 @@ Public Class WishChildForm_AC
                                                            Case__c =: caseId]){
                     if(wishChildForm.Hidden_Contact_Name__c != Null) {                                     
                     for(String keys : wishChildForm.Hidden_Contact_Name__c.split(',')){
-                       nameSet.add(keys);
+                       nameSet.add(keys.trim());
                     } 
                     
                     }
@@ -1401,11 +1395,7 @@ Public Class WishChildForm_AC
                    String keys = key.split('-')[0];
                    keys = keys.replaceAll('  ',' ');
                    String value = key.split('-')[1];
-                   if(processedNameMap.containsKey(keys)){
-                      keys = keys+' ';
-                      processedNameMap.put(keys,value);
-                   }
-                   processedNameMap.put(keys,value);
+                   processedNameMap.put(keys.trim(),value);
                } 
            system.debug('@@@@@@@@ processedNameMap @@@@@@@@@@'+processedNameMap);
           if(processedNameMap.size() > 0){
@@ -1631,6 +1621,9 @@ Public Class WishChildForm_AC
                        
                        Wish_Child_Form__c  updateWishChild = new Wish_Child_Form__c ();
                        updateWishChild.Id = wishChildForm.Id;
+                       if(wishChildForm.Hidden_Contact_Name__c != Null)
+                       updateWishChild.Hidden_Contact_Name__c=wishChildForm.Hidden_Contact_Name__c+','+ ContactName;
+                       else
                        updateWishChild.Hidden_Contact_Name__c = ContactName;
                        update updateWishChild ;
                        System.debug('@@@@@@@@@@@ wishChildForm @@@@@@@@@@@@@@'+wishChildForm);

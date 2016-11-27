@@ -312,14 +312,24 @@
     </fields>
     <fields>
         <fullName>Kitchen_needed__c</fullName>
+        <description>It will store the details about Kitchen request</description>
         <externalId>false</externalId>
         <label>Kitchen needed?</label>
-        <length>255</length>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Picklist</type>
     </fields>
     <fields>
         <fullName>Notes__c</fullName>
@@ -527,41 +537,129 @@
         <fullName>Activities_Excursions</fullName>
         <active>true</active>
         <label>Activities/Excursions</label>
+        <picklistValues>
+            <picklist>Kitchen_needed__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>Cruise</fullName>
         <active>true</active>
         <label>Cruise</label>
+        <picklistValues>
+            <picklist>Kitchen_needed__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>Flight</fullName>
         <active>true</active>
         <label>Flight</label>
+        <picklistValues>
+            <picklist>Kitchen_needed__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>Ground_Transportation</fullName>
         <active>true</active>
         <label>Ground Transportation</label>
+        <picklistValues>
+            <picklist>Kitchen_needed__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>Limousine</fullName>
         <active>true</active>
         <label>Limousine</label>
+        <picklistValues>
+            <picklist>Kitchen_needed__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>Lodging</fullName>
         <active>true</active>
         <label>Lodging</label>
+        <picklistValues>
+            <picklist>Kitchen_needed__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>Medical_Needs</fullName>
         <active>true</active>
         <label>Medical Needs</label>
+        <picklistValues>
+            <picklist>Kitchen_needed__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>Rental_Car</fullName>
         <active>true</active>
         <label>Rental Car</label>
+        <picklistValues>
+            <picklist>Kitchen_needed__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
