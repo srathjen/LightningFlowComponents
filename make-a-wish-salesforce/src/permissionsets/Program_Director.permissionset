@@ -9312,5 +9312,5 @@
         <tab>standard-UserProvisioningRequest</tab>
         <visibility>None</visibility>
     </tabSettings>
-
+    <userLicense>Salesforce</userLicense>
 </PermissionSet>

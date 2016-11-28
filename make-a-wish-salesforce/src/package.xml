@@ -445,4 +445,5 @@
         <name>Workflow</name>
     </types>
     <version>37.0</version>
+	<!-- Complete list of components --> 
 </Package>
