@@ -60,7 +60,7 @@
     <fields>
         <fullName>AvailableSeats__c</fullName>
         <externalId>false</externalId>
-        <formula>max_capacity__c -  Registered_Seats__c</formula>
+        <formula>IF( max_capacity__c = 0,0, max_capacity__c -  Registered_Seats__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Available Seats</label>
         <precision>18</precision>
@@ -489,11 +489,6 @@
         <columns>Registered_Seats__c</columns>
         <columns>Location__c</columns>
         <filterScope>Everything</filterScope>
-        <filters>
-            <field>Chapter__c</field>
-            <operation>contains</operation>
-            <value>central new york</value>
-        </filters>
         <label>Central New York</label>
     </listViews>
     <nameField>

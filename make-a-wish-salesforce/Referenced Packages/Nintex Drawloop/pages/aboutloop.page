@@ -1,0 +1,80 @@
+<apex:page sidebar="false" setup="false" controller="Loop.aboutLoop" id="aPage" title="Drawloop Document Generation Admin" showHeader="true" tabStyle="DDP_Admin__tab" action="{!onload}">
+    <apex:form id="tsoResetLinkForm">
+        <apex:commandLink action="{!resetDdpFilesUpdate}" value="TSO Reset" style="display: none;" id="tsoResetLink" />
+    </apex:form>
+    <html style="height:100%;">
+        <head>
+            <style type="text/css">
+                .spinner-container {
+                    width: 100px;
+                    height: 100px;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    margin: auto;
+                }
+            </style>            
+            <script>
+                var isLightning = {!$User.UIThemeDisplayed == "Theme4d"};
+
+                // Highlight DDP tab
+                if (!isLightning && {!cameFromDdpTab}) {
+                    // "Drawloop Admin" tab, comment is here so we don't miss this in a Find
+                    var ddpAdminTab = document.getElementsByClassName('wt-Drawloop-Admin');
+                    ddpAdminTab[0].classList.remove('zen-active');
+                    ddpAdminTab[0].classList.remove('brandPrimaryBgr');
+                    ddpAdminTab[0].classList.remove('primaryPalette');
+                    var ddpTab = document.getElementsByClassName('wt-DDP');
+                    ddpTab[0].classList.add('zen-active');
+                    ddpTab[0].classList.add('brandPrimaryBgr');
+                    ddpTab[0].classList.add('primaryPalette');
+                }
+                
+                if ({!cameFromDdpTab} && {!setupWizardComplete} && !!'{!ddpListViewId}' && window.sforce && sforce.one && sforce.one.navigateToList) {
+                    sforce.one.navigateToList('{!ddpListViewId}', null, 'Loop__DDP__c');
+                }
+                
+                if (!isLightning && document.getElementsByClassName('noSidebarCell')) {
+                    document.getElementsByClassName('noSidebarCell')[0].style.padding = 0;
+                    document.getElementById('bodyTable').style.padding = 0;
+                }
+            </script>
+        </head>
+        <body style="padding:0; margin:0; height:100%;" >
+            <apex:includeScript value="/lightning/lightning.out.js" />
+            <apex:includeLightning />
+            <div id="spinner" style="height:150px;">
+                <div class="slds spinner-container">
+                    <img src="/resource/Loop__SalesforceLightning/assets/images/spinners/slds_spinner_brand.gif" alt="Loading..." style="width: 5rem;"/>
+                </div>
+            </div>
+            <div id="lightning" style="height:100%;"/>
+            <script>
+                var appName;
+                var componentName;
+                if ({!!setupWizardComplete} || {!$Request.setupWizard == 'true'}) {
+                    appName = 'Loop:SetupWizardApp';
+                    componentName = 'Loop:SetupWizard';
+                } else {
+                    appName = 'Loop:DdpAdminApp';
+                    componentName = 'Loop:DdpAdmin';
+                }
+                    
+                $Lightning.use(appName, function() {
+                    $Lightning.createComponent(componentName, {
+                        	isLightning: isLightning, 
+                        	sessionId: '{!sessionId}', 
+                        	loopUrl: '{!JSENCODE($Request.loopUrl)}', 
+                        	apiUrl: '{!JSENCODE($Request.apiUrl)}',
+                        	isTest: '{!JSENCODE($Request.isTest)}'
+                    }, "lightning", function() {
+                        var spinner = document.getElementById('spinner');
+                        spinner.parentNode.removeChild(spinner);
+                    });
+                });
+            </script>
+        </body>
+    </html>
+</apex:page>

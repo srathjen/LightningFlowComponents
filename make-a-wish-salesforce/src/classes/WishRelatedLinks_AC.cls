@@ -9,6 +9,8 @@ public class WishRelatedLinks_AC {
     public String absentParentForm{get;set;}
     public String celebrityForm{get;set;}
     public String singleForm{get;set;} 
+    public String wishClearence{get;set;}
+    public String ChildMedicalForm{get;set;}
     public List<case> querychildCase;  
     
     public WishRelatedLinks_AC(ApexPages.StandardController controller) {
@@ -32,6 +34,9 @@ public class WishRelatedLinks_AC {
         absentParentForm = '/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
         celebrityForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
         singleForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
+        wishClearence = '/apex/WishClearanceSendNow_VF?id='+currentCaseRec.Id; 
+        ChildMedicalForm = '/apex/WishChildSummary_VF?id='+currentCaseRec.Id; 
+        
         
         }
         

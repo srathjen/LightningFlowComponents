@@ -20,7 +20,7 @@ public class BackgroundCheck_AC_Test{
     }
     //This method is used to test the functionality by using specific user    
     public static testMethod void createVolunteerCommunityUser(){
-        User dbUser = [SELECT Id,UserRoleId,UserName,ProfileId,Email,FirstName,LastName,isActive From User WHERE Email =:'jonathan@gmail.com' Limit 1];
+        User dbUser = [SELECT Id,UserRoleId,UserName,ProfileId,Email,FirstName,LastName,isActive From User WHERE Email =:'jonathanEdwards@gmail.com' Limit 1];
         
         system.RunAs(dbUser){
             Test.StartTest();
@@ -31,7 +31,7 @@ public class BackgroundCheck_AC_Test{
     }
     
     public static testMethod void createVolunteerCommunityUserBackCheck(){
-        User dbUser = [SELECT Id,UserRoleId,UserName,ProfileId,Email,FirstName,LastName,isActive From User WHERE Email =:'jonathan@gmail.com' Limit 1];
+        User dbUser = [SELECT Id,UserRoleId,UserName,ProfileId,Email,FirstName,LastName,isActive From User WHERE Email =:'jonathanEdwards@gmail.com' Limit 1];
         system.RunAs(dbUser){
             Test.StartTest();
             Background_check__c backgroundCheck = [SELECT ID,Resided_in_US_for_past_7_years__c FROM Background_check__c limit 1];

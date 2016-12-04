@@ -75,10 +75,25 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                     caseMap.Put(currentCase.ChapterName__c,currentCase);
                     currentCase.Ready_to_Assign_Date__c = Date.Today();
                 }
-                
+                if((currentCase.Appropriate_Comments__c != trigger.oldMap.get(currentCase.Id).Appropriate_Comments__c ||  currentCase.Please_Explain__c != trigger.oldMap.get(currentCase.Id).Please_Explain__c) && currentCase.RecordTypeId == parentWishRecordTypeId){
+                        currentCase.Wish_Clearance_Received_Date__c = system.today();
+                 }
+                 if((!(currentCase.Appropriate_Comments__c != trigger.oldMap.get(currentCase.Id).Appropriate_Comments__c) ||(currentCase.Please_Explain__c != trigger.oldMap.get(currentCase.Id).Please_Explain__c)) && currentCase.RecordTypeId == parentWishRecordTypeId && 
+                      currentCase.Emergency_Number__c != trigger.oldMap.get(currentCase.Id).Emergency_Number__c ){
+                        currentCase.Child_s_Medical_Summary_received_date__c = system.today();
+                 }
+                 if(currentCase.Comments__c != trigger.oldMap.get(currentCase.Id).Comments__c)
+                    currentCase.Air_Travel_Details__c = 'This wish does not involve air trave';
+                 if(currentCase.Comment_1__c != trigger.oldMap.get(currentCase.Id).Comment_1__c)  
+                    currentCase.Air_Travel_Details__c = 'I am fully aware of the medical research regarding air travel and feel it is appropriate for this child. I will make any necessary adjustments to the medical treatment plan prior to their travel dates';
+                 if(currentCase.Comment_2__c != trigger.oldMap.get(currentCase.Id).Comment_2__c)  
+                    currentCase.Air_Travel_Details__c = 'I do not support air travel for this child';
                 if(currentCase.RecordTypeId == parentWishRecordTypeId && currentCase.Status == 'Wish Determined' && currentCase.Sub_Status__c == 'Within Policy' && currentCase.Wish_Type__c == Null)
                     currentCase.Wish_Type__c.addError('Please Enter the value for Wish Type'); 
-                
+                if(currentCase.Appropriate_Comments__c != trigger.oldMap.get(currentCase.Id).Appropriate_Comments__c)
+                  currentCase.Wish_Clearance__c = 'Appropriate';
+                if(currentCase.Please_Explain__c != trigger.oldMap.get(currentCase.Id).Please_Explain__c )
+                currentCase.Wish_Clearance__c = 'Not Appropriate';
                 if(currentCase.RecordTypeId == parentWishRecordTypeId && currentCase.Status == 'Wish Determined' && currentCase.Sub_Status__c == 'Within Policy' && currentCase.Wish_Type__c != Null){
                     
                     caseMap.Put(currentCase.ChapterName__c,currentCase);
@@ -170,6 +185,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 if(currentCase.Interview_date__c < System.today() && Trigger.oldMap.get(currentCase.id).interview_date__c != currentCase.Interview_Date__c) {
                     currentCase.Interview_date__c.addError('Interview Date should be in future');
                 }
+               
             }
             
             /*  for(Case newCase : trigger.new){
@@ -460,11 +476,23 @@ email = dbAccountList[0].MAC_Email_del__c;
             {
                 UpdateAllOpenTasks.put(caseMemberCheck.id,CaseMemberCheck);
             }
+           
             
-            if(CaseMemberCheck.Interview_date__c != null && Trigger.oldMap.get(CaseMemberCheck.id).Interview_date__c != CaseMemberCheck.Interview_date__c && CaseMemberCheck.RecordTypeid == parentWishRecordTypeId) {
-                System.debug('>>>>>>>>>>UpdateInterviewDate1');
+            //1.Used to update "Wish Determination" task due date when "Interview Date" field is updated
+            //2.Used to Close & Open "Enter Interview" task based on interview date entered and cleard 
+            if(CaseMemberCheck.Interview_date__c != null && Trigger.oldMap.get(CaseMemberCheck.id).Interview_date__c == null && CaseMemberCheck.RecordTypeid == parentWishRecordTypeId) {
+                interViewCloseTaskIdsSet.add(caseMemberCheck.Id);
+                interviewTaskParentIdMap.put(caseMemberCheck.Id,caseMemberCheck);
+                dueDateMap.put(CaseMemberCheck.Id,CaseMemberCheck.Interview_date__c);
+            } else if(CaseMemberCheck.Interview_date__c == null && Trigger.oldMap.get(CaseMemberCheck.id).Interview_date__c != null && CaseMemberCheck.RecordTypeid == parentWishRecordTypeId) {
+                dueDateMap.put(CaseMemberCheck.Id,CaseMemberCheck.Interview_date__c);
+                interViewOpenTaskIdsSet.add(caseMemberCheck.Id);
+                interviewTaskParentIdMap.put(caseMemberCheck.Id,caseMemberCheck);
+            } else if(CaseMemberCheck.Interview_date__c != null && Trigger.oldMap.get(CaseMemberCheck.id).Interview_date__c != null && Trigger.oldMap.get(CaseMemberCheck.id).Interview_date__c != CaseMemberCheck.Interview_date__c &&  CaseMemberCheck.RecordTypeid == parentWishRecordTypeId) {
                 dueDateMap.put(CaseMemberCheck.Id,CaseMemberCheck.Interview_date__c);
             }
+            
+            
             
             //Used to remove the access for Volunteer user to Wish, when the parent wish is completed.
             if((CaseMemberCheck.Status == 'Completed' || CaseMemberCheck.Status == 'Granted' || CaseMemberCheck.Status == 'Closed')  && Trigger.oldMap.get(CaseMemberCheck.Id).Status != CaseMemberCheck.Status) {
@@ -472,18 +500,7 @@ email = dbAccountList[0].MAC_Email_del__c;
                 revokingContactIdSet.add(CaseMemberCheck.ContactId);
             }
             
-            if(CaseMemberCheck.Interview_date__c != null && Trigger.oldMap.get(CaseMemberCheck.id).Interview_date__c == null && CaseMemberCheck.RecordTypeid == parentWishRecordTypeId)
-            {
-                
-                interViewCloseTaskIdsSet.add(caseMemberCheck.Id);
-                interviewTaskParentIdMap.put(caseMemberCheck.Id,caseMemberCheck);
-            }
             
-            if(CaseMemberCheck.Interview_date__c == null && Trigger.oldMap.get(CaseMemberCheck.id).Interview_date__c != null && CaseMemberCheck.RecordTypeid == parentWishRecordTypeId) {
-                System.debug('>>>>>>>>>>UpdateInterviewDate3');
-                interViewOpenTaskIdsSet.add(caseMemberCheck.Id);
-                interviewTaskParentIdMap.put(caseMemberCheck.Id,caseMemberCheck);
-            }
             
             // Wish Granted task
             
@@ -689,6 +706,19 @@ email = dbAccountList[0].MAC_Email_del__c;
             CaseTriggerHandler.updateChildCase(updateChildCaseList);
         //if(approvalReqList.size() > 0)
         // List<Approval.ProcessResult> resultList = Approval.process(approvalReqList);
+       /*@@@@@@@ Change Volunteer Opportunity Satus as Completed @@@@@@@@@@@@*/
+        List<Id> completedCaseIdList=new List<Id>();
+        for(Case currRec:trigger.new){
+            if( (currRec.Status == 'Completed' || currRec.Status == 'Closed') && (trigger.oldMap.get(currRec.id).Status != 'Completed' || trigger.oldMap.get(currRec.id).Status != 'Closed')){
+                completedCaseIdList.add(currRec.id);
+           }
+        }
+     if(completedCaseIdList.size() > 0 && completedCaseIdList != Null){
+         CaseTriggerHandler.updateVolunteerOpportunityStatus(completedCaseIdList);
+     }
+    
         
     }
+    
+    
 }

@@ -38,7 +38,7 @@
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <timeFrameFilter>
-        <dateColumn>User$LastLoginDate</dateColumn>
-        <interval>INTERVAL_CURFY</interval>
+        <dateColumn>User*User$Inactive_Date__c</dateColumn>
+        <interval>INTERVAL_CURRENTQ</interval>
     </timeFrameFilter>
 </Report>

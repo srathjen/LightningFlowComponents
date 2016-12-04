@@ -54,6 +54,10 @@
         <name>Loop__dsToken__c</name>
     </fields>
     <fields>
+        <label><!-- Migrated User --></label>
+        <name>Migrated_User__c</name>
+    </fields>
+    <fields>
         <label><!-- Month Of Inactive --></label>
         <name>Month_Of_Inactive__c</name>
     </fields>

@@ -2,25 +2,14 @@ trigger CaseFile_AT on cg__CaseFile__c (before insert,after insert) {
     
     if(Trigger.isAfter && Trigger.isInsert) {
         List<Id> CaseIds = new List<Id>();
+        Set<Id> caseIdsSet = new Set<Id>();
         for(cg__CaseFile__c acc: Trigger.new){
             CaseIds.add(acc.Id);
+            if(acc.cg__Content_Type__c != 'Folder') {
+                caseIdsSet.add(acc.Id);
+            }
         }
-        AWSFilePath_AC.updateCaseFilePath(CaseIds);
-        AWSFilePath_AC.createAttachmentReviewTask(Trigger.newMap);
+        AWSFilePath_AC.UpdateCaseFilePath(CaseIds);
+        AWSFilePath_AC.createAttachmentReviewTask(caseIdsSet);
     }
-    
-    /*if(Trigger.isBefore && Trigger.isInsert) {
-        
-        Set<Id> parentCaseIdSet = new Set<Id>();
-        List<cg__CaseFile__c> caseFileList = new List<cg__CaseFile__c>();
-        for(cg__CaseFile__c newCaseFile : Trigger.New) {
-            parentCaseIdSet.add(newCaseFile.cg__Case__c);
-            caseFileList.add(newCaseFile);
-        }
-        
-        if(parentCaseIdSet.size() > 0 && caseFileList.size() > 0) {
-            AWSFilePath_AC.populateRelatedInfo(parentCaseIdSet,caseFileList);
-        }
-        
-    }*/
 }

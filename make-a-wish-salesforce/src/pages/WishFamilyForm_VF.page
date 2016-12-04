@@ -81,7 +81,7 @@
         .sideNav {
             position: fixed;
             z-index: 99;
-            top: 160px;
+            top: 140px;
             left: 5px;
         }
         .sideNav .navMenu {font-weight : 900;color:#0076d2;text-decoration:none;}
@@ -90,8 +90,69 @@
         }
         header,main {max-width : 1000px !important;}
     </style>
+     <style type="text/css">
+            .vfHelpText a            {position:relative;}
+            .vfHelpText a span       {display: none;}
+            .vfHelpText a:hover span {display: block;
+            position:absolute;
+            right:-15em; width:15em;
+            z-index:100;
+            border:1px solid #006bb;
+            background-color:#FEFDB9;
+            color:black;
+            }
+            
+            .pop-wrap, .pop-wrap-main-message {
+            position:fixed;
+            top: 20%;
+            left: 50%;
+            z-index: 9999;
+            width:90%;
+            max-width:35rem;
+            }
+            
+            .custPopup, .custPopup-main-message{
+            font-family:"arial", helvetica, sans-serif;
+            position: relative;
+            background: white;
+            border: 1px solid #006bb6;
+            border-radius: .25rem;
+            top: -20%;
+            left: -50%;
+            padding:1rem;
+            width: 100%;
+            height: auto;
+            padding: 5% 15% 15% 10%;
+            }
+            
+            .pop-wrap-main-message {top: 1%}
+            .custPopup-main-message{top: 0; padding:0 1rem 0;}
+            
+            .popupBackground{
+            position: fixed;
+            background: rgba(0,0,0,.4);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+            }
+            
+            .labelCol{width:180px;}
+            .sideNav {
+            position: fixed;
+            z-index: 99;
+            top: 140px;
+            left: 5px;
+        }
+        .sideNav .navMenu {font-weight : 900;color:#0076d2;text-decoration:none;}
+        .sideNav a {
+            text-decoration : none !important;
+        }
+        header,main {max-width : 1000px !important;}        
+        </style>
     <script>
-    
+     var listSize;    
     function formatDate(date) {
             var d = new Date(date),
             month = '' + (d.getMonth() + 1),
@@ -190,7 +251,7 @@
                  }
             }
             
-            var c = $(".c").val();
+            var d = $(".c").val();
             
             if(validate(d)){
                 alert('Please Enter Valid Telephone Number');
@@ -211,10 +272,8 @@
             }
             
               
-        });
-        
-        
-        
+        });      
+       
         
         function validate(a)
         {
@@ -230,33 +289,74 @@
                    return true;
             }
         }
+        
+          $('.style1').change(function(){
+            
+            if( $(this).val() == 'No'){
+                $('.Yes').removeClass('required');
+                $('.Yes').css('border', '1px #ccc solid');
+               
+            }
+            else if($(this).val() == null || $(this).val() == "" ){
+                $('.Yes').removeClass('required');
+                $('.Yes').css('border', '1px #ccc solid');
+            
+            }
+            else if($(this).val() == 'Yes' && ($('.Yes').val() == null || $('.Yes').val() == "")){                   
+                $('.Yes').addClass('required');
+                $('.Yes').css('border', '2px red solid');
+                
+            }
+    
+        });                
+        
     });
     
      function ClickToValidate(){       
         
-           var runBool = true;
+           var runBool = true; 
+           
+           
+           
+             if( $('.style1').val() == 'No'){
+             
+                $('.Yes').removeClass('required');
+                $('.Yes').css('border', '1px #ccc solid');
+               
+            }
+            else if($('.style1').val() == null || $('.style1').val() == "" ){
+                
+                $('.Yes').removeClass('required');
+                $('.Yes').css('border', '1px #ccc solid');
+            
+            }
+            
+            
+           
            $('.required').each(function(){
                if($(this).val() == '' || $(this).val() == null ){
+                   $('.Yes').css('border', '2px red solid');
                    runBool = false;
-                   alert("Please fill all required fields");
+                   alert("Please fill all required fields");                   
                    return false;
                }
                   
            });
-           if(!runBool){
            
-              validateEmail();
-              return false;
+           if(!runBool){
+                  validateEmail();              
+                  $('.Yes').css('border', '2px red solid');
+                  return false;
               }
-           else{
+           else{               
                var isEmail = validateEmail();
-              if(!isEmail)
-              {
-              return false
-              }else{
-              return true;
-              }
-              }
+                  if(!isEmail){
+                     return false
+                  }
+                  else{
+                      return true;
+                  }
+           }
         }
     
        
@@ -270,7 +370,10 @@
             if($(this).val()!= '' && $(this).val()!= null){
                 if (!filter.test($(this).val())) {
                     isBool = false;
-                    alert('Please Enter Valid Email-'+$(this).val());  
+                    alert('Please Enter Valid Email-'+$(this).val());
+                    if($('.Yes').val() == "" || $('.Yes').val() == null){
+                        $('.Yes').css('border', '2px red solid');
+                    }
                 }
             }
             
@@ -279,9 +382,77 @@
             return false;
            }
            else{
-           return true;
+             var n = validatePhone();                
+              if(!n){
+              
+              return false;
+              }
+              else{            
+                  
+               $('.Yes').css('border', '1px #ccc solid');
+               return true;
+               }
         }
       }
+     
+     function validatePhone() {
+       
+        var bool = false;
+        for(var i=0; i<=listSize; i++){
+            if($('.home'+i).val().length < 1 && $('.mobile'+i).val().length < 1 &&  $('.work'+i).val().length <1 && !bool)
+                bool = true;
+            }  
+        if(bool){
+            alert("Please fill any One of the Telephone Number");
+            return false;
+        }
+        else {
+        var d = DynamicSelect();        
+            if(!d){
+            return false;
+            }
+            else{
+            return true;
+            }
+        }
+        
+     }
+     
+     
+     function DynamicSelect(){
+        var bool = true;
+             $(".dynamicclass option:selected").each(function () {
+                    var $this = $(this);
+                    var selText;
+                    if ($this.length) {
+                        selText = $this.text();
+                        }
+                        if($(".dynamicclass").val() != null){
+                            if(selText == 'Other' && $('.race').val().length<1){                         
+                                    bool = false;
+                            }
+                           else{
+                            bool =true;                     
+                            }
+                    }
+                    else{
+                    bool =true;                     
+                    }
+                });
+                
+                if(!bool){                                       
+                 $('.race').addClass('required');
+                 $('.race').css('border', '2px red solid');
+                return false;
+                }
+                else{
+                $('.race').removeClass('required');
+                $('.race').css('border', '2px #ccc solid');
+                return true;
+                }
+        
+        
+        }
      
     </script>
     
@@ -293,7 +464,7 @@
         <div class="sideNav">
             <!--<a data-toggle="collapse" href="#childForm">
                 [+]                       
-            </a>-->
+            </a>--> 
             <a class="navMenu" href="{!childForm}">Wish Child Form</a>
             <!--<div id="childForm" class="panel-collapse collapse">
                 <a href="#mainSec">Main Section</a><br/> 
@@ -325,10 +496,10 @@
                 </div>    
     <apex:form id="frm">       
         <apex:pageblock id="membAdd">
-          
+             <apex:pageMessages />
             <div class="container"> 
              <div class="alert alert-danger">
-                    <strong><apex:pageMessages /></strong>
+                   
               </div>
                <!-- <div class="row header-padding">
                     <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/MakeAWishAmerica.PNG')}" styleClass="header-logo"/>
@@ -371,19 +542,19 @@
                                   
                                     <div class="form-group col-sm-4">
                                         <label for="email">Home Telephone:</label>
-                                        <apex:inputText value="{!wishFamilContact.homeTelephone}"  styleClass="form-control numeric a home{!cnt} required" style="border-left:5px solid red"/>
+                                        <apex:inputText value="{!wishFamilContact.homeTelephone}"  styleClass="form-control numeric a home{!cnt} homePhone" style="border-left:1px solid #dcdcdc"/>
                                     </div>
 
                                     <div class="row"> 
                                     <div class="form-group col-sm-4">
                                         <label for="email">Work Telephone:</label>
-                                        <apex:inputText value="{!wishFamilContact.workTelephone}"  styleClass="form-control numeric b work{!cnt} required" style="border-left:5px solid red"/>
+                                        <apex:inputText value="{!wishFamilContact.workTelephone}"  styleClass="form-control numeric b work{!cnt} workPhone" style="border-left:1px solid #dcdcdc"/>
                                     </div>
                                     </div>
                                     
                                     <div class="form-group col-sm-4">
                                         <label for="email">Mobile Telephone :</label>
-                                        <apex:inputText value="{!wishFamilContact.mobileTelephone}" styleClass="form-control numeric c mobile{!cnt} required" style="border-left:5px solid red"/>
+                                        <apex:inputText value="{!wishFamilContact.mobileTelephone}" styleClass="form-control numeric c mobile{!cnt} mobilePhone" style="border-left:1px solid #dcdcdc"/>
                                     </div>
                                     <div class="form-group col-sm-4">
                                         <label for="email">Email:</label>
@@ -405,6 +576,9 @@
                                             <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/Remove.png')}" style="height:32px"></apex:image>Remove Contact
                                             <apex:param name="index" value="{!cnt}"/>
                                         </apex:commandlink>
+                                         <script type="text/javascript">
+                                            listSize = {!cnt};
+                                         </script>
                                         <apex:variable var="cnt" value="{!cnt+1}"/>
                                     </div>
                                 </div>
@@ -419,9 +593,9 @@
                      <div class="row pad-clear">
                             <p>
                                 <b>Prior Wish: </b>Has your child ever had a wish granted or been considered by Make-A-Wish® or any other
-                                wish-granting organization? <apex:inputField value="{!currWishChild.Already_wish_granted_by_MAW_Other_Org__c}" styleClass="form-control"/> <br/>
+                                wish-granting organization? <apex:inputField value="{!currWishChild.Already_wish_granted_by_MAW_Other_Org__c}" styleClass="form-control style1"/> <br/>
                                 *If yes, please indicate the organizations name, the wish, and the date it was or will be granted. 
-                                <apex:inputField value="{!currWishChild.If_yes_Enter_Org_Name_Wish_Date_it_wa__c}"   styleClass="form-control" /> <br/>
+                                <apex:inputField value="{!currWishChild.If_yes_Enter_Org_Name_Wish_Date_it_wa__c}"   styleClass="form-control Yes required" /> <br/>
                                 
                                 <center><i>A wish with another organization may not be pursued prior to completion of a Make-A-Wish experience. </i></center>
                             </p>
@@ -518,8 +692,21 @@
                                            </td>
                                             <td><apex:inputText value="{!wishFamilContact.Email}" styleClass="form-control emailValue" /></td>
                                             <td><apex:inputText value="{!wishFamilContact.tshirtSize}" styleClass="form-control" /></td>
-                                            <td><apex:inputCheckbox value="{!wishFamilContact.medicalNeeds}" /></td>
-                                            <td><apex:inputcheckbox value="{!wishFamilContact.residingWishMedical}" /></td>
+                                            <td> <apex:selectList value="{!wishFamilContact.medicalNeeds}" multiselect="false" size="1" styleClass="form-control partRelation{!part} required" style="border-left:5px solid red">
+                                                    <apex:selectOption itemlabel="Please Select" itemValue=""/>
+                                                    <apex:selectOption itemlabel="Yes" itemValue="Yes"/>
+                                                    <apex:selectOption itemlabel="No" itemValue="Nno"/>
+                                                </apex:selectList>
+                                            </td>
+                                            <td> <apex:selectList value="{!wishFamilContact.residingWishMedical}" multiselect="false" size="1" styleClass="form-control partRelation{!part} required" style="border-left:5px solid red">
+                                                    <apex:selectOption itemlabel="Please Select" itemValue=""/>
+                                                    <apex:selectOption itemlabel="Yes" itemValue="Yes"/>
+                                                    <apex:selectOption itemlabel="No" itemValue="Nno"/>
+                                                </apex:selectList>
+                                            </td>
+                                          
+                                          <!--  <td><apex:inputCheckbox value="{!wishFamilContact.medicalNeeds}" /></td>
+                                            <td><apex:inputcheckbox value="{!wishFamilContact.residingWishMedical}" /></td>-->
                                             
                                             <td><apex:commandLink id="link"  action="{!removeParticipants}" immediate="true" reRender="membAdd">
                                                 <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/Remove.png')}" style="height:32px"></apex:image>
@@ -533,12 +720,13 @@
                                 </tbody>
                             </table>
                         </div>
+                        
                          <apex:commandLink value="Add Row"  action="{!addParticipants}" reRender="membAdd"  styleClass="btn btn-default pull-left"/> <br/> 
              
                         <div class="row top-space1">
-                            
+                        <p><label><b>Non-Participating Adult Emergency Contact</b></label></p>
                             <div class="form-group col-md-4">
-                                <label for="email">Adult Emergency Contact:</label>
+                                <label for="email">First Name</label>
                                 <apex:inputField value="{!currWishChild.Emergency_First_Name__c}" html-placeholder="First Name" styleClass="form-control required" style="border-left:5px solid red"/>
                             </div>
                             
@@ -556,7 +744,7 @@
                                 <apex:inputField value="{!currWishChild.Emergency_Mobilephone__c}" styleClass="form-control numeric d required" style="border-left:5px solid red"/>
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="email">Relationship to WishChild :</label>
+                                <label for="email">Relationship to Wish Child :</label>
                                  <apex:selectList value="{!currWishChild.Emergency_Relationship__c}" multiselect="false" size="1" styleClass="form-control required" style="border-left:5px solid red">
                                            <apex:selectOption itemlabel="Please Select" itemValue=""/>
                                            <apex:selectOptions value="{!Relationships}" />
@@ -574,7 +762,7 @@
                             Please select one or more of the choices as appropriate. <br/>
                             <apex:inputField value="{!currWishChild.Race_Ethnicity__c}" styleClass="form-control dynamicclass"/>
                             If Other,
-                             <apex:inputField value="{!currWishChild.Race_Ethnicity_Details__c}" styleClass="form-control dynamicclass" />
+                             <apex:inputField value="{!currWishChild.Race_Ethnicity_Details__c}" styleClass="form-control dynamicclass race" />
                         </p>
                    
                 
@@ -583,16 +771,18 @@
                         <div class="col-sm-12">
                             <div class="text-center">
                                 <apex:Commandbutton value="Back" action="{!BackToWCF}" styleClass="btn btn-default mg-rt" immediate="true"/>
-                                <apex:Commandbutton value="Save & Exit" action="{!SaveandExit}" styleClass="btn btn-default mg-rt phonecheck" onclick="return ClickToValidate();"/>
+                                <apex:Commandbutton value="Save" action="{!SaveandwishFamilyExit}" styleClass="btn btn-default mg-rt phonecheck" onclick="return ClickToValidate();"/>
                                 <apex:Commandbutton value="Next" action="{!WFFNext}" styleClass="btn btn-default mg-rt phonecheck" onclick="return ClickToValidate();"/>
-                                <apex:Commandbutton value="Cancel" action="{!cancelfunction}" styleClass="btn btn-default" immediate="true"/>
+                                 <apex:Commandbutton value="Exit" action="{!cancelfunction}" style="margin-left: 10px;" reRender="popup"  styleClass="btn btn-default" immediate="true"/>
                             </div>
                         </div>
                 </div>
             </div>
           </div>  
             <script type="text/javascript">
+            
             $(function(){
+           
                 $('table.responsive').ngResponsiveTables({
                     smallPaddingCharNo: 13,
                     mediumPaddingCharNo: 18,
@@ -614,16 +804,31 @@
             }
             
             });
-             $(window).scroll(function (event) {
-            var scroll = $(window).scrollTop();
-            if( scroll > 2800 )
-                $('.sideNav').css('top','10px');
-                else
-                $('.sideNav').css('top','160px');
-            });
            
             </script> 
         </apex:pageblock>
+      
+  <apex:outputPanel id="popup">
+   <apex:outputPanel rendered="{!displayPopup }">
+       
+    <div class="pop-wrap">
+        <div class="custPopup">
+         <apex:pageMessages id="showmsg13"/> 
+            <div class="container">
+                <div class="row">
+                    <div class="row" style="padding:10px">
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
+                        <apex:commandButton value="Save and Exit" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!SavewithExit}" style="height: 2.75rem;margin-top: 3% !important;width: 150px !important;"/>
+                        <apex:commandButton value="Exit without Saving" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!exitWithOutSave}"  style="height: 2.75rem; margin-left: 5%;margin-top: 3% !important;width: 185px !important;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</apex:outputPanel>
+</apex:outputPanel>
+   
     </apex:form>
      
    </main>

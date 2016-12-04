@@ -1255,6 +1255,14 @@
         <fullName>IsCustomerPortal</fullName>
     </fields>
     <fields>
+        <fullName>Is_Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Onboarded on SF</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Is_Approved__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field is used to identify the whether the in kind donors account approved or not.</description>
@@ -1295,6 +1303,14 @@
     <fields>
         <fullName>NumberOfEmployees</fullName>
         <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Onboarded_on_SF__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Onboarded on SF</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>OwnerId</fullName>
@@ -1390,6 +1406,17 @@
         </picklist>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Referral_Form_Password__c</fullName>
+        <description>Use for to open Wish referral form</description>
+        <externalId>false</externalId>
+        <label>Referral Form Password</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Relationship_type__c</fullName>

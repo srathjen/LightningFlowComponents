@@ -68,6 +68,10 @@
                 <behavior>Edit</behavior>
                 <field>Race_Ethnicity_Details__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Hidden_Medical_Physician__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

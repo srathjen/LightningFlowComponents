@@ -475,7 +475,6 @@ communityUserIdSet.add(communityUser.Id);
             }
         }
     }
-    //Below method is for sprint 12
     public static void updateVolunteerRecord(Map<Id,Task> taskMap,Set<Id> ownerIds, Set<Id> caseIds)
     {
         Map<Id,User> volunteerMap = new Map<Id,User>();
@@ -529,7 +528,6 @@ communityUserIdSet.add(communityUser.Id);
         
     }
     
-    //Below method is for sprint 12
     public static void colseTaskValidation(List<Task> validationTaskList) {
         
         //Used to get recordTypeId 

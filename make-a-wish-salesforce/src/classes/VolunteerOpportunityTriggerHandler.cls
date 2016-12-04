@@ -2,9 +2,9 @@
 Author   : MST Solutions
 CreatedDate : 05/27/2016
 Description : 1. This VolunteerOpportunityTriggerHandler is used to invoke the apporval process when the volunteer contact name is entered into the volunteer contact field.
-              2. And also it is used to update count of the no.of volunteer opportunities that are registered for the corresponding NonWish & Event. 
-              3. And it is used to update count of the number of volunteer opportunities that are created for the corresponding NonWish & Event.
-              4. And also it is used when the chapter staff is approved then the volunteer contact is added in to the coressponding case team.
+2. And also it is used to update count of the no.of volunteer opportunities that are registered for the corresponding NonWish & Event. 
+3. And it is used to update count of the number of volunteer opportunities that are created for the corresponding NonWish & Event.
+4. And also it is used when the chapter staff is approved then the volunteer contact is added in to the coressponding case team.
 *************************************************************************************************/
 
 Public class VolunteerOpportunityTriggerHandler 
@@ -19,26 +19,26 @@ Public class VolunteerOpportunityTriggerHandler
     Public Static Void SubmitforApprovalProcess(List<Volunteer_Opportunity__c> recordsForApprovalProcess, Set<Id> chapterIdsSet)
     {
         List<Approval.ProcessSubmitRequest> approvalReqList=new List<Approval.ProcessSubmitRequest>();
-       
+        
         Map<Id,Id> volunteerManagerIdsMap = new Map<Id,Id>();
         
         for(Account getAccountName : [SELECT Id, Name, volunteer_manager__c FROM Account WHERE Id IN : chapterIdsSet]) {
             volunteerManagerIdsMap.put(getAccountName.id,getAccountName.volunteer_manager__c);
-           
+            
         }
-      /* for(User getNationalStaffId : [SELECT Id, Name, UserRole.Name FROM User WHERE UserRole.Name IN : chaptersName AND IsActive = true LIMIT 1]) {
-            if(!nationalStaffsMap.containsKey(getNationalStaffId.UserRole.Name)) {
-                if(getNationalStaffId.UserRole.Name.contains('Chapter')) {
-                    String chapterRec = getNationalStaffId.UserRole.Name.split(' - Chapter')[0];
-                    if(chaptersNameMap.containsKey('Make-A-Wish '+chapterRec)) {
-                        nationalStaffsMap.put(chaptersNameMap.get('Make-A-Wish '+chapterRec), getNationalStaffId.Id);
-                    }
-                }
-                
-            }
-        }*/
+        /* for(User getNationalStaffId : [SELECT Id, Name, UserRole.Name FROM User WHERE UserRole.Name IN : chaptersName AND IsActive = true LIMIT 1]) {
+if(!nationalStaffsMap.containsKey(getNationalStaffId.UserRole.Name)) {
+if(getNationalStaffId.UserRole.Name.contains('Chapter')) {
+String chapterRec = getNationalStaffId.UserRole.Name.split(' - Chapter')[0];
+if(chaptersNameMap.containsKey('Make-A-Wish '+chapterRec)) {
+nationalStaffsMap.put(chaptersNameMap.get('Make-A-Wish '+chapterRec), getNationalStaffId.Id);
+}
+}
+
+}
+}*/
         //Default user not give by client so we assign it to active user
-       // User userns = [SELECT Id,username, profile.Name FROM User WHERE profile.Name = 'System Administrator' AND IsActive = true LIMIT 1];
+        // User userns = [SELECT Id,username, profile.Name FROM User WHERE profile.Name = 'System Administrator' AND IsActive = true LIMIT 1];
         for(Volunteer_Opportunity__c newVolunteerRole : recordsForApprovalProcess)
         {
             Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
@@ -46,9 +46,9 @@ Public class VolunteerOpportunityTriggerHandler
             req.setComments('Submitting request for approval.');
             req.setObjectId(newVolunteerRole.id);
             if(volunteerManagerIdsMap.containsKey(newVolunteerRole.Chapter_Name__c)) {
-               if(volunteerManagerIdsMap.get(newVolunteerRole.Chapter_Name__c) != Null)
+                if(volunteerManagerIdsMap.get(newVolunteerRole.Chapter_Name__c) != Null)
                     req.setNextApproverIds(new Id[] {volunteerManagerIdsMap.get(newVolunteerRole.Chapter_Name__c)});
-               else
+                else
                     req.setNextApproverIds(new Id[] {userInfo.getUserId()});
             } else {
                 req.setNextApproverIds(new Id[] {userInfo.getUserId()});
@@ -69,7 +69,7 @@ Public class VolunteerOpportunityTriggerHandler
         }
     }
     /*CreateCaseTeamMembers() is used to add the volunteers to case team member when the approver approve the 
-      volunteer opportunity record.*/ 
+volunteer opportunity record.*/ 
     Public Static Void CreateCaseTeamMembers(List<Volunteer_Opportunity__c> recordsForCreatingCaseTeams)
     {
         List<Volunteer_Opportunity__c> VolunteerRoleList = new List<Volunteer_Opportunity__c>();
@@ -77,6 +77,7 @@ Public class VolunteerOpportunityTriggerHandler
         Set<Id> dbVolunteerSet = new Set<Id>();
         Map<Id,Set<CaseTeamMember>> updateCaseMemberCount = new Map<Id,Set<CaseTeamMember>>();
         Map<String,CaseTeamRole > teamMemberRoleMap = new Map<String,CaseTeamRole>();
+        // Map<String,Role__c > teamMemberRoleMap = new Map<String,Role__c>();
         Map<Id,User> volunteerContactMap = new Map<Id,User>();
         Set<Id> volunteerSet = new Set<Id>();
         Set<Id> VoluteerNameSet = new Set<Id>();
@@ -116,10 +117,15 @@ Public class VolunteerOpportunityTriggerHandler
             volunteerUserMap.put(contactUser.ContactId, contactUser.Id);
         }
         
-        for(CaseTeamRole  caseTem : [SELECT id,Name from CaseTeamRole WHERE Name IN: roleName]){
+        for(CaseTeamRole  caseTem : [SELECT id,Name from CaseTeamRole]){
             teamMemberRoleMap.put(caseTem.Name,caseTem);
         }
-        for(CaseTeamMember dbcaseTeamMember : [SELECT id,MemberId, ParentId  FROM CaseTeamMember WHERE ParentId IN :wishIds AND MemberId IN: VoluteerNameSet]){
+        system.debug('>>>>>>> roleName' + roleName);
+        system.debug('>>>>>>> teamMemberRoleMap Key set' +teamMemberRoleMap.keySet());
+        /* for(Role__c caseTeamRole : [SELECT Id,Name From Role__c WHERE Name IN: roleName]){
+teamMemberRoleMap.put(caseTeamRole.Name, caseTeamRole);
+}*/
+        for(CaseTeamMember dbcaseTeamMember : [SELECT id,MemberId, ParentId  FROM CaseTeamMember WHERE ParentId IN :wishIds]){
             
             if(wishMembersMap.containsKey(dbcaseTeamMember.parentId))
                 wishMembersMap.get(dbcaseTeamMember.parentId).add(dbcaseTeamMember.MemberId);
@@ -127,26 +133,35 @@ Public class VolunteerOpportunityTriggerHandler
                 wishMembersMap.put(dbcaseTeamMember.parentId,new Set<String>{dbcaseTeamMember.MemberId});
         }
         
+        
         for(Volunteer_Opportunity__c newVolunteerRole : recordsForCreatingCaseTeams)
         {
             if(newVolunteerRole.Volunteer_Name__c != null && newVolunteerRole.wish__c != null){
-                if(wishMembersMap.containsKey(newVolunteerRole.wish__c)){
-                    if((wishMembersMap.get(newVolunteerRole.wish__c)).contains(newVolunteerRole.Volunteer_Name__c))
-                        newVolunteerRole.addError('This Member Already in case Team');
-                }
-                else{
+                
+                if(!wishMembersMap.containsKey(newVolunteerRole.wish__c) || (wishMembersMap.containsKey(newVolunteerRole.wish__c) && volunteerUserMap.containsKey(newVolunteerRole.Volunteer_Name__c) && !wishMembersMap.get(newVolunteerRole.wish__c).contains(volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c))))
+                {
+                    system.debug('++++++' + wishMembersMap.containsKey(newVolunteerRole.wish__c));
+                    system.debug('------' + wishMembersMap.get(newVolunteerRole.wish__c));
+                    system.debug('======' + newVolunteerRole.Volunteer_Name__c);
                     CaseTeamMember newCaseTeamMembers = new CaseTeamMember();
                     newCaseTeamMembers.ParentId = newVolunteerRole.Wish__c;
                     newCaseTeamMembers.MemberId = newVolunteerRole.Volunteer_Name__c;
+                    // newCaseTeamMembers.TeamRoleId = newVolunteerRole.Role__c;
                     if(volunteerUserMap.containsKey(newVolunteerRole.Volunteer_Name__c)) {
+                        
                         newCaseTeamMembers.MemberId = volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c);
                         wishAssignedSet.add(newCaseTeamMembers.MemberId);
                     }
-                    
+                    system.debug('>>>>>>>>>>> Before caseteamroleassigned');
+                    system.debug('>>>>>>>>>>> newVolunteerRole.Role__c' + newVolunteerRole.Role__c);
+
                     If(teamMemberRoleMap.containsKey(newVolunteerRole.Role__c)){
+                       system.debug('>>>>>>>>>> inside for caseteamroleassigned');
                         newCaseTeamMembers.TeamRoleId = teamMemberRoleMap.get(newVolunteerRole.Role__c).id;
+                        system.debug('>>>>>>>> newCaseTeamMembers.TeamRoleId' +  newCaseTeamMembers.TeamRoleId);
                     }
                     else{
+                         system.debug('>>>>> inside else caseteamroleassigned');
                         newCaseTeamMembers.TeamRoleId = caseRoleID.id;
                     }
                     CaseTeamMemberList.add(newCaseTeamMembers);
@@ -159,13 +174,19 @@ Public class VolunteerOpportunityTriggerHandler
                         updateCaseMemberCount.put(newVolunteerRole.Wish__c, new Set<CaseTeamMember>{newCaseTeamMembers});
                         
                     }
+                } else {
+                    system.debug('++++++' + wishMembersMap.containsKey(newVolunteerRole.wish__c));
+                    system.debug('------' + wishMembersMap.get(newVolunteerRole.wish__c));
+                    system.debug('======' + newVolunteerRole.Volunteer_Name__c);
+                    
                 }
+                
             }
         } 
         
         if(updateContactList.size() > 0)
             update updateContactList;
-     
+        
         
         if(CaseTeamMemberList.size() > 0)
         {//wishRelatedContactMap, wishUserMap
@@ -217,7 +238,7 @@ Public class VolunteerOpportunityTriggerHandler
     
     /*This updateVolunteerRegisterdCount() is used to update count of the number of volunteer opportunities that are registered for the corresponding NonWish & Event .*/
     public static void UpdateVolunteerRegisterdCount(List<Volunteer_Opportunity__c> nonWishListtoupdatecount){
-    system.debug('@@@@@@@ UpdateVolunteerRegisterdCount CALLED  @@@@@@@@@'+nonWishListtoupdatecount);
+        system.debug('@@@@@@@ UpdateVolunteerRegisterdCount CALLED  @@@@@@@@@'+nonWishListtoupdatecount);
         Set<Id> chapterRoleIdSet = new Set<Id>();
         Set<Id> NonWishEventIdSet = new Set<Id>();
         Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
@@ -298,91 +319,89 @@ Public class VolunteerOpportunityTriggerHandler
         }
     }
     
-    public static void updateVolunteerWishGrantedCount(List<Volunteer_Opportunity__c> volOpportunities){
-    Constant_AC  constant = new Constant_AC();
-    Id volunteerRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
-        Set<Id> volContactId = new Set<Id>();
-        Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
-        List<Contact> volunteerContactList = new List<Contact>();
-        for(Volunteer_Opportunity__c  dbVolOpp : volOpportunities){
-            
-            volContactId.add(dbVolOpp.Volunteer_Name__c);
-        }
-        List<AggregateResult> groupedResults = [SELECT Volunteer_Name__c volCount, Count(Id)aver  FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c  IN: volContactId AND Wish__c != Null AND Wish__r.Status = 'Granted' GROUP BY Volunteer_Name__c ];
+    /* public static void updateVolunteerWishGrantedCount(List<Volunteer_Opportunity__c> volOpportunities){
+Constant_AC  constant = new Constant_AC();
+Id volunteerRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+Set<Id> volContactId = new Set<Id>();
+Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
+List<Contact> volunteerContactList = new List<Contact>();
+for(Volunteer_Opportunity__c  dbVolOpp : volOpportunities){
+
+volContactId.add(dbVolOpp.Volunteer_Name__c);
+}
+List<AggregateResult> groupedResults = [SELECT Volunteer_Name__c volCount, Count(Id)aver  FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c  IN: volContactId AND Wish__c != Null AND Wish__r.Status = 'Granted' GROUP BY Volunteer_Name__c ];
+
+if(!groupedResults.isEmpty()){
+for(AggregateResult arr : groupedResults){
+volunteercountMap.put((ID)arr.get('volCount'),(integer)arr.get('aver'));
+
+}
+}
+
+if(volunteercountMap.size() > 0){
+for(Contact dbVolunteerContact : [SELECT Id,Number_of_wishes_granted__c,RecordTypeId FROM Contact where Id IN:volunteercountMap.KeySet() AND RecordTypeId =: volunteerRecordTypeId ]){
+if(volunteercountMap.containsKey(dbVolunteerContact.Id)){
+dbVolunteerContact.Number_of_wishes_granted__c  = volunteercountMap.get(dbVolunteerContact.Id);
+volunteerContactList.add(dbVolunteerContact);
+}
+}
+}
+
+else{
+for(Contact dbVolunteerContact : [SELECT Id,Number_of_wishes_granted__c FROM Contact where Id IN: volContactId]){
+if(volContactId.contains(dbVolunteerContact.Id)){
+dbVolunteerContact.Number_of_wishes_granted__c  = 0;
+volunteerContactList.add(dbVolunteerContact);
+}
+}
+}
+if(volunteerContactList.size() > 0)
+update volunteerContactList;
+}*/
+    
+    
+   /* public static void updateVolunteerWishAssignedCount(Set<Id> wishIdSet){
         
+        Constant_AC  constant = new Constant_AC();
+        Id volunteerRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        List<Contact> updateContactList = new List<Contact>();
+        Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
+        Map<Id,Id> sobjectMap = new Map<Id,Id>();
+        List<AggregateResult> groupedResults = [SELECT Wish__c volCount, Count_Distinct(Wish__r.Id)aver  FROM Volunteer_Opportunity__c WHERE Wish__c  IN: wishIdSet AND Wish__c != Null GROUP BY Wish__c ];
         if(!groupedResults.isEmpty()){
             for(AggregateResult arr : groupedResults){
                 volunteercountMap.put((ID)arr.get('volCount'),(integer)arr.get('aver'));
                 
-            }
+            } 
         }
+        for(Volunteer_Opportunity__c  dbVoluOpportunity : [SELECT Id,Wish__c,Volunteer_Name__c,IsApproved__c From Volunteer_Opportunity__c WHERE Wish__c IN: volunteercountMap.KeySet() AND IsApproved__c =: TRUE]){
+            sobjectMap.put(dbVoluOpportunity.Volunteer_Name__c,dbVoluOpportunity.Wish__c); 
+        } 
         
-        if(volunteercountMap.size() > 0){
-            for(Contact dbVolunteerContact : [SELECT Id,Number_of_wishes_granted__c,RecordTypeId FROM Contact where Id IN:volunteercountMap.KeySet() AND RecordTypeId =: volunteerRecordTypeId ]){
-                if(volunteercountMap.containsKey(dbVolunteerContact.Id)){
-                    dbVolunteerContact.Number_of_wishes_granted__c  = volunteercountMap.get(dbVolunteerContact.Id);
-                    volunteerContactList.add(dbVolunteerContact);
+        for(Contact dbVolunteerCon : [SELECT Id,Number_of_wishes_active__c,RecordTypeId FROM Contact where Id IN: sobjectMap.KeySet() AND RecordTypeId =: volunteerRecordTypeId]){
+            if(sobjectMap.containsKey(dbVolunteerCon.Id)){
+                Contact newCon = new Contact();
+                newCon.Id = dbVolunteerCon.Id;
+                if(volunteercountMap.containsKey(sobjectMap.get(dbVolunteerCon.Id))){
+                    if(dbVolunteerCon.Number_of_wishes_active__c != Null && Integer.valueOf(dbVolunteerCon.Number_of_wishes_active__c) > 0 ){
+                        newCon.Number_of_wishes_active__c =Integer.valueOf(dbVolunteerCon.Number_of_wishes_active__c) + Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
+                        
+                    }else{
+                        newCon.Number_of_wishes_active__c =  Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
+                        system.debug('@@@@@@@@@@ ELSE IF newCon.Number_of_wishes_active__c @@@@@@@@@@@'+ newCon.Number_of_wishes_active__c);
+                    }
+                    updateContactList.add(newCon);
                 }
             }
-        }
-        
-        else{
-            for(Contact dbVolunteerContact : [SELECT Id,Number_of_wishes_granted__c FROM Contact where Id IN: volContactId]){
-                if(volContactId.contains(dbVolunteerContact.Id)){
-                    dbVolunteerContact.Number_of_wishes_granted__c  = 0;
-                    volunteerContactList.add(dbVolunteerContact);
-                }
-            }
-        }
-        if(volunteerContactList.size() > 0)
-        update volunteerContactList;
+        }  
+        if(updateContactList.size() > 0)
+            update updateContactList;
     }
-    
-    
-    public static void updateVolunteerWishAssignedCount(List<Volunteer_Opportunity__c> volOpportunities){
-    Constant_AC  constant = new Constant_AC();
-    Id volunteerRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
-        Set<Id> volContactId = new Set<Id>();
-        Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
-        List<Contact> volunteerContactList = new List<Contact>();
-        for(Volunteer_Opportunity__c  dbVolOpp : volOpportunities){
-            
-            volContactId.add(dbVolOpp.Volunteer_Name__c);
-        }
-        List<AggregateResult> groupedResults = [SELECT Volunteer_Name__c volCount, Count(Id)aver  FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c  IN: volContactId  AND Wish__r.IsClosed = false AND  Wish__r.Status != 'Granted' AND Wish__c != Null GROUP BY Volunteer_Name__c ];
-        
-        if(!groupedResults.isEmpty()){
-            for(AggregateResult arr : groupedResults){
-                volunteercountMap.put((ID)arr.get('volCount'),(integer)arr.get('aver'));
-                
-            }
-        }
-        
-        if(volunteercountMap.size() > 0){
-            for(Contact dbVolunteerContact : [SELECT Id,Number_of_wishes_active__c,RecordTypeId FROM Contact where Id IN:volunteercountMap.KeySet() AND RecordTypeId =: volunteerRecordTypeId ]){
-                if(volunteercountMap.containsKey(dbVolunteerContact.Id)){
-                    dbVolunteerContact.Number_of_wishes_active__c= volunteercountMap.get(dbVolunteerContact.Id);
-                    volunteerContactList.add(dbVolunteerContact);
-                }
-            }
-        }
-        
-        else{
-            for(Contact dbVolunteerContact : [SELECT Id,Number_of_wishes_active__c FROM Contact where Id IN: volContactId]){
-                if(volContactId.contains(dbVolunteerContact.Id)){
-                    dbVolunteerContact.Number_of_wishes_active__c= 0;
-                    volunteerContactList.add(dbVolunteerContact);
-                }
-            }
-        }
-        if(volunteerContactList.size() > 0)
-        update volunteerContactList;
-    }
-       
+    */
     public static void CreateNewVolunteerOpportunity(List<Volunteer_Opportunity__c > volunteerOpportunityList){
-         Constant_AC  constant = new Constant_Ac(); 
-          Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
-          Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
+        Constant_AC  constant = new Constant_Ac(); 
+        Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
+        Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
         List<Volunteer_Opportunity__c> createNewVolunteerOpportunityList = new List<Volunteer_Opportunity__c>();
         Set<Id> wishIdSet = new Set<Id>();
         List<CaseTeamMember> removeCaseTeamMemberList = new List<CaseTeamMember>();
@@ -404,21 +423,21 @@ Public class VolunteerOpportunityTriggerHandler
             }
             createNewVolunteerOpportunityList.add(newVolOpportunity);
             system.debug('########## createNewVolunteerOpportunityList @@@@@@@@'+createNewVolunteerOpportunityList);
-         }
-           
+        }
+        
+        
+        for(CaseTeamMember dbcaseTeamMember : [SELECT id,MemberId, ParentId  FROM CaseTeamMember WHERE ParentId IN : wishIdSet AND MemberId != Null]){
             
-         for(CaseTeamMember dbcaseTeamMember : [SELECT id,MemberId, ParentId  FROM CaseTeamMember WHERE ParentId IN : wishIdSet AND MemberId != Null]){
-               
-                 removeCaseTeamMemberList.add(dbcaseTeamMember);
-                    
-            }
-            if(removeCaseTeamMemberList.size() > 0)
+            removeCaseTeamMemberList.add(dbcaseTeamMember);
+            
+        }
+        if(removeCaseTeamMemberList.size() > 0)
             delete removeCaseTeamMemberList;
-            
-             if(createNewVolunteerOpportunityList.size() > 0)
+        
+        if(createNewVolunteerOpportunityList.size() > 0)
             insert createNewVolunteerOpportunityList;
-            
-            
+        
+        
     }
     
     public void updateUserRoleId(Set<Id> updateUserSet,Set<Id> volcontactIds){
@@ -434,34 +453,34 @@ Public class VolunteerOpportunityTriggerHandler
         }
         
         for(User dbVolUser : [SELECT Id,ContactId,Hidden_Role_Name_Id__c FROM User WHERE ContactId IN: volcontactIds ]){
-        if(dbVolUser.Hidden_Role_Name_Id__c != Null  && dbVolUser.Hidden_Role_Name_Id__c != ''){
-            system.debug('@@@@@@@@ roleInUser @@@@@@@@@'+dbVolUser);
-            roleInUser = dbVolUser.Hidden_Role_Name_Id__c ;
-            system.debug('@@@@@@@@ roleInUser @@@@@@@@@'+roleInUser);
-            if(roleInUser.contains(roleIdinVolOpp)){
-            system.debug('@@@@@@@@ roleInUser IF @@@@@@@@@'+roleInUser);
-                roleInUser.remove(roleIdinVolOpp);
-                string s2 = roleInUser.remove(roleIdinVolOpp);
-               dbVolUser.Hidden_Role_Name_Id__c  = s2;
-               system.debug('@@@@@@@@ s2 @@@@@@@@@'+s2); 
-                dbVolConList.add(dbVolUser);
+            if(dbVolUser.Hidden_Role_Name_Id__c != Null  && dbVolUser.Hidden_Role_Name_Id__c != ''){
+                system.debug('@@@@@@@@ roleInUser @@@@@@@@@'+dbVolUser);
+                roleInUser = dbVolUser.Hidden_Role_Name_Id__c ;
+                system.debug('@@@@@@@@ roleInUser @@@@@@@@@'+roleInUser);
+                if(roleInUser.contains(roleIdinVolOpp)){
+                    system.debug('@@@@@@@@ roleInUser IF @@@@@@@@@'+roleInUser);
+                    roleInUser.remove(roleIdinVolOpp);
+                    string s2 = roleInUser.remove(roleIdinVolOpp);
+                    dbVolUser.Hidden_Role_Name_Id__c  = s2;
+                    system.debug('@@@@@@@@ s2 @@@@@@@@@'+s2); 
+                    dbVolConList.add(dbVolUser);
+                }
             }
-       }
-       }
-       
-       if(dbVolConList.size() > 0) 
-       update  dbVolConList;
+        }
+        
+        if(dbVolConList.size() > 0) 
+            update  dbVolConList;
     }
     /***************** Number Of Assignment ***********/
     public static void Updatecontacts(Set <ID> volunteerOppName){
-            List<Contact> conList=new List<Contact>();
-                    for(Contact  Con:[SELECT Id,Number_of_Assignments__c,Name,(select id,Volunteer_Name__c from Volunteer_Opportunities__r where Volunteer_Name__c IN:volunteerOppName) FROM Contact  WHERE ID IN:volunteerOppName]){
-                    Contact cont=new Contact();
-                    cont.Number_of_Assignments__c=Con.Volunteer_Opportunities__r.size();
-                    cont.id=Con.Id;
-                    conList.add(cont);
-                }
-                update conList;
+        List<Contact> conList=new List<Contact>();
+        for(Contact  Con:[SELECT Id,Number_of_Assignments__c,Name,(select id,Volunteer_Name__c from Volunteer_Opportunities__r where Volunteer_Name__c IN:volunteerOppName) FROM Contact  WHERE ID IN:volunteerOppName]){
+            Contact cont=new Contact();
+            cont.Number_of_Assignments__c=Con.Volunteer_Opportunities__r.size();
+            cont.id=Con.Id;
+            conList.add(cont);
+        }
+        update conList;
     }
     
     

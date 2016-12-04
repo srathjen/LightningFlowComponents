@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Contact Constituent Code</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Contact Constituent Codes</value>
+    </caseValues>
+    <fields>
+        <label><!-- Affiliation --></label>
+        <name>Affiliation__c</name>
+        <relationshipLabel><!-- Contact Constituent Codes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Constituent Code --></label>
+        <name>Constituent_Code__c</name>
+        <relationshipLabel><!-- Contact Constituent Codes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>Hidden_Contact__c</name>
+        <relationshipLabel><!-- Contact Constituent Codes --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Contact Constituent Code Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

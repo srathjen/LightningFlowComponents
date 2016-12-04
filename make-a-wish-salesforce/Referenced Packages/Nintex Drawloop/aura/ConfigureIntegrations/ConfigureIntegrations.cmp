@@ -1,0 +1,130 @@
+<aura:component controller="Loop.ConfigureIntegrations">
+	<aura:attribute name="sessionId" type="String" required="true" description="This should be passed in from the parent-visualforce page."/>
+    <aura:attribute name="loopUrl" type="string" default=""/>
+    <aura:attribute name="customizeApplication" type="Boolean" default="true" required="true"/>
+    <aura:attribute name="availableIntegrations" type="String[]"/>
+    <aura:attribute name="selectedIntegration" type="String"/>
+    <aura:attribute name="showFields" type="Boolean"/>
+    <aura:attribute name="boxError" type="String" default=""/>
+    <aura:attribute name="boxOAuthUrl" type="String" access="Private"/>
+    <aura:attribute name="sitePaths" type="String[]"/>
+    <aura:attribute name="errors" type="List"/>
+    <aura:attribute name="modalBusy" type="Boolean" default="false"/>
+    <aura:attribute name="saveButtonText" type="String" default="Save"/>
+    <aura:handler name="init" value="{!this}" action="{!c.initializeIntegrations}"/>
+    <aura:handler name="deleteIntegration" event="Loop:deleteIntegration" action="{!c.integrationDeleted}"/>
+    <aura:handler name="editIntegration" event="Loop:editIntegration" action="{!c.editIntegration}"/>
+    <aura:handler name="hideModal" event="Loop:hideModal" action="{!c.hideModal}"/>
+    <aura:handler event="Loop:boxOAuthSuccessful" action="{!c.handleBoxOAuthSuccessful}"/>
+    <aura:handler event="Loop:office365OAuthCompleted" action="{!c.handleOffice365OAuthCompleted}"/>
+    <aura:registerEvent name="showError" type="Loop:showError"/>
+    <div class="slds">
+        <aura:if isTrue="{!v.customizeApplication}">
+            <div class="slds-grid" style="margin-bottom: 25px;">
+                <div class="slds-col slds-size--1-of-3">
+                    <ui:inputSelect aura:id="selectedOption" label="Add Service:" change="{!c.changeSelectedOption}" class="slds-select">
+                        <ui:inputSelectOption aura:id="defaultOption" text="" label="Please select" value="true"/>
+                        <aura:iteration items="{!v.availableIntegrations}" var="option">
+                            <ui:inputSelectOption text="{!option}" label="{!option}"/>
+                        </aura:iteration>
+                    </ui:inputSelect>
+                </div>
+                <div class="slds-col slds-size--2-of-3"/>
+            </div>
+            <Loop:IntegrationsList aura:id="integrationsList"/>
+            <aura:set attribute="else">
+                <Loop:Toast toastClass="slds-notify slds-notify--toast slds-theme--warning" 
+                         toastMessage="You must have the Customize Application permission to add third-party integrations."
+                         toastStyle="margin: 0;"/>
+            </aura:set>
+        </aura:if>
+        <Loop:Modal title="{!v.selectedIntegration}">
+            <form class="slds-form--stacked">
+                <aura:if isTrue="{!v.showFields}">
+                    <div class="slds-modal__content slds-p-around--medium" style="border-radius:0;">
+                        <aura:if isTrue="{!v.errors.length > 0}">
+                            <Loop:Toast toastClass="slds-notify slds-notify--toast slds-theme--error" 
+                                     toastMessage="Review the errors on this page."
+                                     svgXlinkHref="/resource/Loop__SalesforceLightning/assets/icons/utility-sprite/svg/symbols.svg#warning"
+                                     messages="{!v.errors}"/>
+                        </aura:if>
+                        <ui:inputText aura:id="id" class="hidden"/>
+                        <aura:if isTrue="{!v.selectedIntegration == 'Office 365'}">
+                            <div class="slds-form-element slds-is-required">
+                                <label class="slds-form-element__label">Name</label>
+                                <ui:inputText aura:id="name" class="slds-input" keyup="{!c.saveIntegration}"/>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!v.selectedIntegration == 'Lob' || v.selectedIntegration == 'e-SignLive' || v.selectedIntegration == 'DocuSign'}">
+                            <div class="slds-form-element slds-is-required">
+                                <label class="slds-form-element__label">{!v.selectedIntegration == 'DocuSign' ? 'Account Id' : 'API Key'}</label>
+                                <ui:inputText aura:id="apiKey" class="slds-input" keyup="{!c.saveIntegration}"/>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!v.selectedIntegration != 'Box'}">
+                            <div class="slds-form-element slds-is-required">
+                                <label class="slds-form-element__label">{!v.selectedIntegration == 'Office 365' ? 'Site URL' : 'Base URL'}</label>
+                                <ui:inputText aura:id="baseUrl" class="slds-input" placeholder="{!v.selectedIntegration == 'Office 365' ? 'https://[sitename].sharepoint.com' : ''}" keyup="{!c.saveIntegration}"/>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!v.selectedIntegration == 'DDP API'}">
+                            <div class="slds-form-element slds-is-required">
+                                <label class="slds-form-element__label">Tag Source URL</label>
+                                <ui:inputText aura:id="tagSourceUrl" class="slds-input" keyup="{!c.saveIntegration}"/>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!v.selectedIntegration == 'Office 365'}">
+                            <div class="slds-form-element slds-is-required">
+                                <label class="slds-form-element__label" aria-describedby="infoPopover">Site Paths</label>
+                                <Loop:Svg mouseOver="this.nextSibling.setAttribute('aria-hidden', 'false');" mouseOut="this.nextSibling.setAttribute('aria-hidden', 'true');" xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/utility-sprite/svg/symbols.svg#info" class="slds-icon slds-icon-text-default slds-icon--x-small"/>
+                                <div id="infoPopover" class="slds-popover slds-popover--tooltip slds-nubbin--left" aria-hidden="true" role="dialog" style="position: absolute; top: -7px; left: 100px;">
+                                    <div class="slds-popover__body">Use '/' for the Root directory.</div>
+                                </div>
+                                <div aura:id="pathsContainer">
+                                    <aura:iteration items="{!v.sitePaths}" var="path" indexVar="index">
+                                        <div class="slds-grid" style="margin-bottom: 5px;">
+                                            <ui:inputText aura:id="pathId" class="hidden" value=""/>
+                                            <div class="slds-col" style="width: 50%;">
+                                                <ui:inputText aura:id="path" class="slds-input inputText-sitePath" placeholder="/sites/[collectionname]" keyup="{!c.saveIntegration}" value="{!path}"/>
+                                            </div>
+                                            <div class="slds-col--padded" style="width: 60%;padding-top: 9px;" id="{!index}">
+                                                <aura:if isTrue="{!v.sitePaths.length > 1}">
+                                                    <div onclick="{!c.removeSitePath}" style="width: 16px;">
+                                                        <Loop:Button class="slds-button cursorPointerWhileDisabled"
+                                                                  label=""
+                                                                  svgXlinkHref="/resource/Loop__SalesforceLightning/assets/icons/action-sprite/svg/symbols.svg#remove"
+                                                                  svgClass="slds-icon slds-icon-text-default slds-icon--x-small"
+                                                                  disabled="true"
+                                                                  />
+                                                    </div>
+                                                </aura:if>
+                                            </div>
+                                        </div>
+                                    </aura:iteration>
+                                </div>
+                                <ui:outputURL label="+ add site path" click="{!c.addSitePath}"/>
+                            </div>
+                        </aura:if>
+                        <aura:if isTrue="{!v.selectedIntegration == 'Box'}">
+                            <div class="slds-form-element slds-is-required">
+                                <ui:outputText aura:id="boxText" value="{!'Click ' + '\'' + v.saveButtonText + '\'' + ' to add Box as an integration.'}"/>
+                                <aura:if isTrue="{!v.boxError != ''}">
+                                	<ul class="slds-list--dotted">
+                                    	<li>{!v.boxError}</li>
+                                    </ul>
+                                </aura:if>
+                            </div>
+                        </aura:if>
+                    </div>
+                </aura:if>
+            </form>
+            <div class="slds-modal__footer">
+                <div class="slds-x-small-buttons--horizontal">
+                    <button onclick="{!c.hideModal}" class="slds-button slds-button--neutral" disabled="{!v.modalBusy}">Cancel</button>
+                    <button onclick="{!c.saveIntegration}" class="slds-button slds-button--brand slds-m-left--x-small" disabled="{!v.modalBusy}">{!v.saveButtonText}</button>
+                    <Loop:Spinner class="slds-spinner--small" visible="{!v.modalBusy}"/>
+                </div>
+            </div>
+        </Loop:Modal>
+    </div>
+</aura:component>

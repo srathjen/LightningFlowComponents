@@ -13,4 +13,5 @@
     <tab>Travel_Data__c</tab>
     <tab>dsfs__DocuSignAccountConfiguration__c</tab>
     <tab>Awards_Recognition__c</tab>
+    <tab>Constituent_Code__c</tab>
 </CustomApplication>

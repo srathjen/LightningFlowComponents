@@ -54,8 +54,12 @@
         <relationshipLabel><!-- Chapter Action Tracks --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Due Date --></label>
-        <name>Due_Date__c</name>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Due Days --></label>
+        <name>Due_Days__c</name>
     </fields>
     <fields>
         <label><!-- Months --></label>
@@ -132,5 +136,27 @@
             <section>Custom Links</section>
         </sections>
     </layouts>
+    <layouts>
+        <layout>Wish Determination</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Planning</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Wish Determination --></label>
+        <name>Wish_Determination</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Wish Planning --></label>
+        <name>Wish_Planning</name>
+    </recordTypes>
     <startsWith>Consonant</startsWith>
 </CustomObjectTranslation>

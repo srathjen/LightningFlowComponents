@@ -982,7 +982,7 @@ public class TestClassUtil{
         Chapter_Action_Track__c newChapterAction = new Chapter_Action_Track__c();
         newChapterAction.Assigned_To__c = 'Volunteer Manager';
         newChapterAction.Case_Type_Stage__c = 'Wish Determination';
-        newChapterAction.Due_Date__c = 10;
+        
         newChapterAction.Task_Name__c = 'Planning';
         newChapterAction.Sort_Order__c = 1;
         newChapterAction.Wish_type__c = 'Standard';
@@ -996,7 +996,7 @@ public class TestClassUtil{
         newChapterAction.Task_Name__c = 'Planning';
         newChapterAction.Assigned_To__c = 'Volunteer Manager';
         newChapterAction.Case_Type_Stage__c = 'Wish Determination';
-        newChapterAction.Due_Date__c = 10;
+        
         newChapterAction.Wish_type__c = 'Standard';
         newChapterAction.Recurring__c = true;
         newChapterAction.Recurring_Frequency__c = 1;

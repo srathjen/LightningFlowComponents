@@ -277,7 +277,21 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newCase.diagnosis_verificaion_receive_date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Received__c;
                     newCase.diagnosis_verificaion_sent_date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Sent__c;
                     
-                    
+                    if(LeadMap.get(convertLeads.getLeadId()).PD_Condition_Description__c != null) {
+                        newCase.Hidden_All_Primary__c  = LeadMap.get(convertLeads.getLeadId()).PD_Condition_Description__c +'\n';
+                    }
+                    if(LeadMap.get(convertLeads.getLeadId()).SD1_Condition_Description__c != null) {
+                        newCase.Hidden_All_Primary__c  += LeadMap.get(convertLeads.getLeadId()).SD1_Condition_Description__c +'\n';
+                    }
+                    if(LeadMap.get(convertLeads.getLeadId()).SD2_Condition_Description__c != null) {
+                        newCase.Hidden_All_Primary__c  += LeadMap.get(convertLeads.getLeadId()).SD2_Condition_Description__c +'\n';
+                    }
+                    if(LeadMap.get(convertLeads.getLeadId()).SD3_Condition_Description__c != null) {
+                        newCase.Hidden_All_Primary__c  += LeadMap.get(convertLeads.getLeadId()).SD3_Condition_Description__c+'\n';
+                    }
+                    if(LeadMap.get(convertLeads.getLeadId()).SD4_Condition_Description__c != null) {
+                        newCase.Hidden_All_Primary__c  += LeadMap.get(convertLeads.getLeadId()).SD4_Condition_Description__c;
+                    }
                     caseList.add(newcase);
                 }
             }
@@ -621,10 +635,15 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
     public static void UpdateChatperName(Set<String> postalCodesSet,List<Lead> updateChapterOnLeadList)
     {
         Map<String,String> zipCodeChapterMap = new Map<String,String>();
-        for(Zip_Code__c currZipCode :  [SELECT id, Name,Office__r.Chapter__c FROM Zip_Code__c WHERE Name IN :postalCodesSet])
+        
+        
+        for(Zip_Code__c currZipCode :  [SELECT id, Name,Office__r.Chapter__c, Office__r.Referral_Email_Address__c FROM Zip_Code__c WHERE Name IN :postalCodesSet])
         {
             zipCodeChapterMap.put(currZipCode.Name,currZipCode.Office__r.Chapter__c);
+            
         }
+        
+        
         
         for(Lead currLead : updateChapterOnLeadList)
         {
@@ -635,6 +654,49 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             else
             {
                 currLead.ChapterName__c = Null;
+            }
+        }
+        
+    }
+    
+    
+    public static void UpdateChatperfields(Set<String> postalCodesSet,List<Lead> updateChapterOnLeadList)
+    {
+        Map<String,String> zipCodeChapterMap = new Map<String,String>();
+        Map<String,String> zipCodeReferralMap = new Map<String,String>();
+        Map<String,Boolean> chapterActiveMap = new Map<String,Boolean>();
+        System.debug('Postal Codes >>>>>>>>> 1' + postalCodesSet );
+        System.debug('Postal Codes >>>>>>>>> 2' + updateChapterOnLeadList);
+        
+        for(Zip_Code__c currZipCode :  [SELECT id, Name,Office__r.Chapter__c, Office__r.Referral_Email_Address__c FROM Zip_Code__c WHERE Name IN :postalCodesSet])
+        {
+            zipCodeChapterMap.put(currZipCode.Name,currZipCode.Office__r.Chapter__c);
+            zipCodeReferralMap.put(currZipCode.Name,currZipCode.Office__r.Referral_Email_Address__c);
+        }
+        
+        for(Account accdata: [select Id, Onboarded_on_SF__c from Account where id in : zipCodeChapterMap.values()]){
+            chapterActiveMap.put(accdata.Id, accdata.Onboarded_on_SF__c);
+        }
+        
+        for(Lead currLead : updateChapterOnLeadList)
+        {
+            if(zipCodeReferralMap.containsKey(currLead.PostalCode))
+            {
+               currLead.Office_Referral_Email__c= zipCodeReferralMap.get(currLead.PostalCode);
+               
+            }
+            else  if(zipCodeReferralMap.containsKey(currLead.Referrer_Zip__c))
+            {
+                 currLead.Office_Referral_Email__c= zipCodeReferralMap.get(currLead.Referrer_Zip__c);
+               
+            }
+            else
+            {
+                currLead.Office_Referral_Email__c= Null;
+            }
+            
+            if(chapterActiveMap.containsKey(currLead.ChapterName__c)){
+                currLead.Is_Chapter_Active__c=chapterActiveMap.get(currLead.ChapterName__c);
             }
         }
         
@@ -904,5 +966,5 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             }
         }
     }
-    
+   
 }

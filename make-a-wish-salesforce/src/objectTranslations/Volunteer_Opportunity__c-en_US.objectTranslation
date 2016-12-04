@@ -136,7 +136,7 @@
         <name>Language__c</name>
     </fields>
     <fields>
-        <label><!-- Medical Condition --></label>
+        <label><!-- Primary Diagnosis --></label>
         <name>Medical_Condition__c</name>
     </fields>
     <fields>
@@ -235,6 +235,26 @@
     <fields>
         <label><!-- Role --></label>
         <name>Role__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inactive</masterLabel>
+            <translation><!-- Inactive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Total Hours --></label>

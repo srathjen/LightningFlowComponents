@@ -130,6 +130,8 @@ public class ContactTrigger_AT_Test{
      
       public testmethod static void RecallWishChildContactInfo(){
          
+        Constituent_Code__c  constiuentcodeParent=OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  constiuentcodeWishChild=OrientationandTrainingUtil.createWishChildContituentCode();
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);
@@ -146,18 +148,20 @@ public class ContactTrigger_AT_Test{
         updateConFamily.Hidden_Zip_Code__c = '621010';
         updateConFamily.IsContactInfoUpdated__c = true;
         updateConFamily.Id = childFamily.Id;
-       // update updateConFamily;
+        update updateConFamily;
         
         
         Contact updateCon = new Contact();
         updateCon.Email = 'kanagu431@gmail.com';
         updateCon.IsContactInfoUpdated__c = true;
         updateCon.Id = childCon.Id;
-        //update updateCon;
+        update updateCon;
      }
      
      public testmethod static void updatewishChildRecall(){
          
+        Constituent_Code__c  constiuentcodeParent=OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  constiuentcodeWishChild=OrientationandTrainingUtil.createWishChildContituentCode();
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);
@@ -178,7 +182,9 @@ public class ContactTrigger_AT_Test{
      }
      
       public testmethod static void RecallWishFamilyContactInfo(){
-         
+        
+        Constituent_Code__c  constiuentcodeParent=OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  constiuentcodeWishChild=OrientationandTrainingUtil.createWishChildContituentCode(); 
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);

@@ -762,11 +762,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Medical_Condition__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Medical_Needs__c</field>
             <table>Contact</table>
         </columns>

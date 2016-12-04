@@ -4,6 +4,18 @@
         <field>Contact$Name</field>
     </columns>
     <columns>
+        <field>Contact$MobilePhone</field>
+    </columns>
+    <columns>
+        <field>Contact$HomePhone</field>
+    </columns>
+    <columns>
+        <field>Contact$npe01__HomeEmail__c</field>
+    </columns>
+    <columns>
+        <field>Contact$npe01__AlternateEmail__c</field>
+    </columns>
+    <columns>
         <field>Contact$Language__c</field>
     </columns>
     <columns>

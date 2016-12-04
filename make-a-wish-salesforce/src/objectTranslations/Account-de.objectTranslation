@@ -226,6 +226,10 @@
         <relationshipLabel><!-- Accounts (Intake Manager) --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- Onboarded on SF --></label>
+        <name>Is_Active__c</name>
+    </fields>
+    <fields>
         <label><!-- Is Approved --></label>
         <name>Is_Approved__c</name>
     </fields>
@@ -236,6 +240,10 @@
     <fields>
         <label><!-- Notes --></label>
         <name>Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Onboarded on SF --></label>
+        <name>Onboarded_on_SF__c</name>
     </fields>
     <fields>
         <name>Ownership</name>
@@ -275,6 +283,10 @@
             <masterLabel>Warm</masterLabel>
             <translation><!-- Warm --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Referral Form Password --></label>
+        <name>Referral_Form_Password__c</name>
     </fields>
     <fields>
         <label><!-- Relationship type --></label>

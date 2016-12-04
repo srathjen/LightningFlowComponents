@@ -17,16 +17,19 @@ public Id partARecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName()
         for(CaseComment newComment : trigger.new){
             if(newComment.createdById== UserInfo.getUserId()){
               caseCommentMap.put(newComment.ParentId,newComment);  
-            }    
+            } 
+            System.debug('************ dbCase.Case_Comment__c '+partARecordTypeId );   
         }
         
         for(Case dbCase : [SELECT Id,CaseNumber,Case_Comment__c,MAC_Email__c,RecordTypeId from Case WHERE Id IN:caseCommentMap.KeySet() AND RecordTypeId =: partARecordTypeId]){
+          System.debug('************'+dbCase );
            if(caseCommentMap.containsKey(dbCase.Id)){
                  dbCase.Case_Comment__c  = caseCommentMap.get(dbCase.Id).Commentbody;
+                System.debug('************ dbCase.Case_Comment__c '+dbCase.Case_Comment__c);
                 caseList.add(dbCase);
         }
     }
         if(caseList.size() > 0)
-        update caseList;
+            update caseList;
    }
 }

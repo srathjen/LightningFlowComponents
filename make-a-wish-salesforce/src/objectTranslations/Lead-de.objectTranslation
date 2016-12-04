@@ -414,6 +414,10 @@
         <name>Inquiry_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Is Chapter Active --></label>
+        <name>Is_Chapter_Active__c</name>
+    </fields>
+    <fields>
         <label><!-- Is We Need To Expedite The Process? --></label>
         <name>Is_We_Need_To_Expedite_The_Process__c</name>
         <picklistValues>
@@ -630,6 +634,10 @@
         <name>Of_Times_Email_Sent__c</name>
     </fields>
     <fields>
+        <label><!-- Office Referral Email --></label>
+        <name>Office_Referral_Email__c</name>
+    </fields>
+    <fields>
         <label><!-- Other Relationship To Child --></label>
         <name>Other_Relationship_To_Child__c</name>
     </fields>
@@ -676,6 +684,10 @@
     <fields>
         <label><!-- Please Explain Expedite --></label>
         <name>Please_Explain__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preferred Name --></label>
+        <name>Preferred_Name__c</name>
     </fields>
     <fields>
         <label><!-- PrimaryDiagnosis Condition Description --></label>
@@ -1024,7 +1036,7 @@
         <name>Ventilator__c</name>
     </fields>
     <fields>
-        <label><!-- What is the family’s primary spoken lang --></label>
+        <label><!-- Family Primary Language --></label>
         <name>What_is_the_family_s_primary_spoken_lang__c</name>
         <picklistValues>
             <masterLabel>American Sign Language</masterLabel>

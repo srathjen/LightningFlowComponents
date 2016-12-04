@@ -64,6 +64,8 @@ public class DocusignStatusTrigger_AT_Test{
     public testmethod static void convertlead(){
         
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+        Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
         insert newLead;
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatus(newLead.Id);

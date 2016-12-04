@@ -192,6 +192,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>ContactConstituentCodeTrigger_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>ContactFile_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -269,6 +273,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>InKindReimbursementApproval_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>InactiveVolunteerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -417,6 +425,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>PartAFormWrapper</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>RecursiveTriggerHandler</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -584,6 +596,14 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>VolunteerTaskTransfer_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VolunteerTaskTransfer_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>VolunteerTraining_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -632,6 +652,22 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>WishChildSummary_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WishChildSummary_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WishClearanceSendNow_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WishClearanceSendNow_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>WishFollowUpTaskAlert_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -660,6 +696,14 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>WishReferralFormOut_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WishReferralFormOut_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>WishReferralForm_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -673,6 +717,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>WishRelatedLinks_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WrapperDocuSign</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -709,6 +757,18 @@
     </classAccesses>
     <classAccesses>
         <apexClass>batch_UpdateVolunteerLastEngageTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>batch_changeVolunOppSatus</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>batch_changeVolunOppSatusSchedule_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>batch_changeVolunOppSatus_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -821,6 +881,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Is_Active__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Account.Is_Approved__c</field>
         <readable>false</readable>
@@ -843,6 +908,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Account.NumberOfEmployees</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Onboarded_on_SF__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -869,6 +939,11 @@
         <editable>false</editable>
         <field>Account.Rating</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Referral_Form_Password__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -1607,6 +1682,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case.Air_Travel_Details__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.All_requested_wish_participants_reside_w__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1623,6 +1703,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case.Any_impact_your_ability_to_join_wish__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Appropriate_Comments__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1707,6 +1792,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case.Child_MedicalSummary_LastModifiedDate__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Child_Wish_Clearance_Last_Modified_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.Child_s_Medical_Summary_Form__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -1737,7 +1832,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case.Comment_1__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Comment_2__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.Comment_for_PWL_Not_Met__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Comments__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1831,6 +1941,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Date_of_last_visit_treatment__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Case.Days_In_Stage__c</field>
         <readable>false</readable>
@@ -1873,6 +1988,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case.Driver_Names__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Emergency_Number__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1948,6 +2068,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case.Have_current_automobile_insurance__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Hidden_All_Primary__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2341,6 +2466,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Please_Explain__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Case.Potential_Driver_Expiration_Date__c</field>
         <readable>false</readable>
@@ -2622,6 +2752,21 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case.Wish_Clearance_Received_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Wish_Clearance_Sent_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Wish_Clearance__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.Wish_Complexity__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2702,6 +2847,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case.hidden_medical_physician__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.isApprove__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2732,6 +2882,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case.wish_involves_air_travel__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Chapter_Action_Track__c.Assigned_To__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2746,9 +2901,14 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Chapter_Action_Track__c.Due_Date__c</field>
-        <readable>true</readable>
+        <editable>false</editable>
+        <field>Chapter_Action_Track__c.Description__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Chapter_Action_Track__c.Due_Days__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -3282,6 +3442,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Hidden_Medical_Physician_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Hidden_Medical_Physician__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Hidden_Minor_Participant__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -3333,6 +3503,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.How_did_you_know_MAWA_Other_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.ICD_10_Code__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3422,11 +3597,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Contact.Medical_Condition__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Contact.Medical_Needs__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -3434,6 +3604,11 @@
         <editable>true</editable>
         <field>Contact.Middle_Name__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Migrated_Record__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -3667,6 +3842,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Short_Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Sibling_Age__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -3843,12 +4023,12 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Year__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Year_of_Last_Enagement__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -4294,6 +4474,11 @@
         <editable>true</editable>
         <field>Contact.npsp__is_Address_Override__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact_Constituent_Code__c.Hidden_Contact__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -5292,6 +5477,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead.Is_Chapter_Active__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.Is_We_Need_To_Expedite_The_Process__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -5417,6 +5607,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead.Office_Referral_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead.Other_Relationship_To_Child__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -5478,6 +5673,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Please_Explain__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Preferred_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7113,7 +7313,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Time_sheet__c.Year__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -7387,6 +7587,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>User.Migrated_User__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>User.Month_Of_Inactive__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7643,6 +7848,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Volunteer_Opportunity__c.Role__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Volunteer_Opportunity__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -8654,6 +8864,14 @@
         <layout>Chapter_Action_Track__c-Chapter Action Track Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Chapter_Action_Track__c-Wish Determination</layout>
+        <recordType>Chapter_Action_Track__c.Wish_Determination</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Chapter_Action_Track__c-Wish Planning</layout>
+        <recordType>Chapter_Action_Track__c.Wish_Planning</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Chapter_Role_O_T__c-O%26T Role Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -8684,6 +8902,9 @@
         <layout>Conflict_Of_Interest__c-Conflict Of Interest Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Constituent_Code__c-Constituent Code Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Contact-Board Member</layout>
         <recordType>Contact.Board_Member</recordType>
     </layoutAssignments>
@@ -8702,6 +8923,9 @@
     <layoutAssignments>
         <layout>Contact-Wish Family</layout>
         <recordType>Contact.Wish_Family</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Contact_Constituent_Code__c-Contact Constituent Code Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Contract-Contract Layout</layout>
@@ -9329,6 +9553,10 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>VolunteerTaskTransfer_VF</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>VolunteerTraining_VF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
@@ -9342,6 +9570,14 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishChildForm_VF</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>WishChildSummary_VF</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>WishClearanceSendNow_VF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -9386,6 +9622,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishLiabilitySignNow</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>WishReferralFormOut_VF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -9478,6 +9718,16 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Case.Wish_Planning_Anticipation</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Chapter_Action_Track__c.Wish_Determination</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Chapter_Action_Track__c.Wish_Planning</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
@@ -9738,6 +9988,14 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Conflict_Of_Interest__c</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Constituent_Code__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Contact_Constituent_Code__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>

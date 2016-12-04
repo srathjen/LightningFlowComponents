@@ -25,9 +25,9 @@
             <casePriority>Medium</casePriority>
             <createTask>true</createTask>
             <emailAddress>mawoffshore@gmail.com</emailAddress>
-            <routingName>Make - A - Wish America</routingName>
+            <routingName>Make-A-Wish America</routingName>
             <saveEmailHeaders>false</saveEmailHeaders>
-            <taskStatus>In Progress</taskStatus>
+            <taskStatus>Not Started</taskStatus>
         </routingAddresses>
         <unauthorizedSenderAction>Discard</unauthorizedSenderAction>
     </emailToCase>

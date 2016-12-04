@@ -117,6 +117,8 @@ public class LeadTrigger_AT_Test{
      public testmethod static void UpdateStatusAsQualified(){ 
         
          Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+         Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+         Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
          Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
          Account alabamaAccountRec = OrientationandTrainingUtil.AlabamaAccount();
          Office__c  officeRec = OrientationandTrainingUtil.createOffice(alabamaAccountRec .Id);
@@ -137,6 +139,8 @@ public class LeadTrigger_AT_Test{
    public testmethod static void CreateNewContactRecord(){ 
         
          Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+         Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+         Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
          Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
          Account alabamaAccountRec = OrientationandTrainingUtil.AlabamaAccount();
          Office__c  officeRec = OrientationandTrainingUtil.createOffice(alabamaAccountRec .Id);
@@ -160,6 +164,8 @@ public class LeadTrigger_AT_Test{
      public testmethod static void CreateNewSameContactRecord(){ 
         
          Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+         Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+         Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
          Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
          Account alabamaAccountRec = OrientationandTrainingUtil.AlabamaAccount();
          Office__c  officeRec = OrientationandTrainingUtil.createOffice(alabamaAccountRec .Id);
@@ -188,6 +194,8 @@ public class LeadTrigger_AT_Test{
      public testmethod static void CreateRelationShipRecord(){ 
         
          Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+         Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+         Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
          Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
          Contact trateProfContact = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
          Contact medicalProfContact = OrientationandTrainingUtil.CreateMedicalProfContact();

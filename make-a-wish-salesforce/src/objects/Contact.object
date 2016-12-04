@@ -2560,7 +2560,7 @@
         <fullName>Diagnosis__c</fullName>
         <description>It will have Wish Child&apos;s Medical Condition details</description>
         <externalId>false</externalId>
-        <label>Diagnosis</label>
+        <label>Primary Diagnosis</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2817,6 +2817,27 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Medical_Physician_Email__c</fullName>
+        <description>This field is used to store the medical professional email address for docusign purpose.</description>
+        <externalId>false</externalId>
+        <label>Hidden Medical Physician Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Medical_Physician__c</fullName>
+        <description>This field is used to store the treating medical professional name for docusign purpose.</description>
+        <externalId>false</externalId>
+        <label>Hidden Medical Physician</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_Minor_Participant__c</fullName>
         <description>This hidden field is used to store the minor participant name and email value from WishLiabilityMinorParticipant_VF page.</description>
         <externalId>false</externalId>
@@ -2983,6 +3004,17 @@
         <description>Volunteer can enter MAWA details and how they came to know about MAWA.</description>
         <externalId>false</externalId>
         <label>How did you know MAWA (Other Notes)</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ICD_10_Code__c</fullName>
+        <description>This field will hold the ICD-10 code.</description>
+        <externalId>false</externalId>
+        <label>ICD-10 Code</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3279,17 +3311,6 @@ and the date it was or will be granted.</inlineHelpText>
         <type>Picklist</type>
     </fields>
     <fields>
-        <fullName>Medical_Condition__c</fullName>
-        <description>It will capture the medical condition of the wish child</description>
-        <externalId>false</externalId>
-        <label>Medical Condition</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>Medical_Needs__c</fullName>
         <defaultValue>false</defaultValue>
         <description>It will define that wish participant requires medical needs or not.</description>
@@ -3308,6 +3329,14 @@ and the date it was or will be granted.</inlineHelpText>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Migrated Record</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>MobilePhone</fullName>
@@ -4098,6 +4127,17 @@ null)</formula>
         <externalId>false</externalId>
         <label>Second Recipient Name</label>
         <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Short_Description__c</fullName>
+        <description>It holds the short description of ICD code.</description>
+        <externalId>false</externalId>
+        <label>Short Description</label>
+        <length>250</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>

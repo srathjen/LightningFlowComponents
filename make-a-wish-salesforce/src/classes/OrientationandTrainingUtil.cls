@@ -155,8 +155,29 @@ insert newChapter;*/
         insert newAccount;
         return newAccount;
     }
+    public static Account createVolunteerAccountwithVolunteerManager(){
+        Constant_AC constant = new Constant_AC();
+        String chapterRT= Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.ChapterRT).getRecordTypeId();
+        Account newAccount = new Account();
+        newAccount.Name = 'Make-A-Wish Alabama';
+        newAccount.RecordTypeId = chapterRT;
+       newAccount.Volunteer_Manager__c=createUser().Id;
+        insert newAccount;
+        return newAccount;
+    }
     
-    
+     public static User createUser(){ 
+        
+        
+        Profile volunteerSystemAdministrator = [SELECT Id FROM Profile WHERE Name = 'System Administrator'];
+        
+        User newPvolunteerSystemAdministratorUser = new User(  firstname = 'Jon',lastName = 'Edwards',email = 'jon@gmail.com',Username = 'jon@gmail.com',
+                                                    EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
+                                                    LanguageLocaleKey = 'en_US',ProfileId = volunteerSystemAdministrator.Id,isActive = true,Statecode = 'AZ');
+        insert newPvolunteerSystemAdministratorUser ;
+        return newPvolunteerSystemAdministratorUser ;
+        
+    }
     public static Account createVolunteerAccountWithWishCoordinatior(Id wishCoordinator){
         Constant_AC constant = new Constant_AC();
         String chapterRT= Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.ChapterRT).getRecordTypeId();
@@ -347,7 +368,7 @@ insert newChapter;*/
         
         Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
         
-        User newProspectiveVolunteerUser = new User(  firstname = 'Jonathan',lastName = 'Edwards',email = 'jonathan@gmail.com',Username = 'joathanedwards@gmail.com',
+        User newProspectiveVolunteerUser = new User(  firstname = 'Jonathanan',lastName = 'Edward',email = 'jonathanEdwards@gmail.com',Username = 'joathanedwards@gmail.com',
                                                     EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
                                                     LanguageLocaleKey = 'en_US',ProfileId = volunteerProspectiveProfile.Id,ContactId = contactId,isActive = true,Statecode = 'AZ');
         insert newProspectiveVolunteerUser;
@@ -526,6 +547,22 @@ insert newChapter;*/
         insert newParentWish;
         return newParentWish;
     }
+    
+    public static case CreateParentCaseWithTravel( Id wishChildId) {
+        Constant_AC  constant = new Constant_Ac();    
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        Case newParentWish = new Case();
+        newParentWish.RecordTypeId = parentWishRecordTypeId;
+        newParentWish.ChapterName__c = CreateAlabamaAccount();
+        newParentWish.Subject = 'Parent Wish';
+        newParentWish.Interview_date__c = System.today();
+        newParentWish.Wish_Type__c = 'Disney World';
+        newParentWish.ContactId = wishChildId;
+        newParentWish.wish_involves_air_travel__c = 'Yes';
+        insert newParentWish;
+        return newParentWish;
+    }
+    
     public static case CreateParentCaseWithAnticipatedStartDate( Id wishChildId) {
         Constant_AC  constant = new Constant_Ac();    
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
@@ -675,7 +712,17 @@ insert newChapter;*/
         insert newEvent;
         return newEvent;
     }
-    
+     public static Non_Wish_Events__c CreateEventinPastDate(Id ChapterId) {
+        Constant_AC  constant = new Constant_Ac();    
+        Id EventRecTypeId = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.events).getRecordTypeId();
+        Non_Wish_Events__c newEvent = new Non_Wish_Events__c();
+        newEvent.Event_Name__c = 'Send Off';
+        newEvent.Event_Date__c = System.Today()-5;
+        newEvent.Event_Text__c = 'Sending Wish Child';
+        newEvent.RecordTypeId =  EventRecTypeId;
+        insert newEvent;
+        return newEvent;
+    }
     public static Non_Wish_Events__c CreateEventRec(Id chaterRoleId,Id chaterId) {
         Constant_AC  constant = new Constant_Ac();    
         Id EventRecTypeId = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.events).getRecordTypeId();
@@ -747,7 +794,7 @@ insert newChapter;*/
         
     }
     
-    public static List<Volunteer_Opportunity__c> NewWishVolunteerOpportunityList(Id chapterId, Id roleId, Id wishId,Id volContactId, Integer count) {
+    public static List<Volunteer_Opportunity__c> NewWishVolunteerOpportunityList(Id chapterId, Id roleId, Id wishId,Integer count) {
         Constant_AC  constant = new Constant_Ac();    
         Id wishVolunteerOpportunityRecordTypeId = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
         List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
@@ -757,7 +804,6 @@ insert newChapter;*/
             newWishOpportunity.Wish__c = wishId;
             newWishOpportunity.Chapter_Name__c = chapterId;
             newWishOpportunity.IsApproved__c = false;
-            newWishOpportunity.Volunteer_Name__c = volContactId;
             newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
             volunteerOpportunityList.add(newWishOpportunity);
             insert newWishOpportunity;
@@ -766,7 +812,7 @@ insert newChapter;*/
         
     }
     
-    public static List<Volunteer_Opportunity__c> NewnonWishVolunteerOpportunityList(Id chapterId, Id roleId, Id nonWishId,Id VolContactId,Integer count) {
+    public static List<Volunteer_Opportunity__c> NewnonWishVolunteerOpportunityList(Id chapterId, Id roleId, Id nonWishId,Integer count) {
         Constant_AC  constant = new Constant_Ac();    
         Id wishVolunteerOpportunityRecordTypeId = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
         List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
@@ -776,7 +822,6 @@ insert newChapter;*/
             newWishOpportunity.Non_Wish_Event__c = nonWishId;
             newWishOpportunity.Chapter_Name__c = chapterId;
             newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
-            newWishOpportunity.Volunteer_Name__c = VolContactId;
             volunteerOpportunityList.add(newWishOpportunity);
             insert newWishOpportunity;
         }
@@ -929,7 +974,7 @@ insert newChapter;*/
         Chapter_Action_Track__c newChapterAction = new Chapter_Action_Track__c();
         newChapterAction.Assigned_To__c = 'Volunteer Manager';
         newChapterAction.Case_Type_Stage__c = 'Wish Determination';
-        newChapterAction.Due_Date__c = 10;
+        
         newChapterAction.Task_Name__c = 'Planning';
         newChapterAction.Sort_Order__c = 1;
         newChapterAction.Wish_type__c = 'Standard';
@@ -946,7 +991,7 @@ insert newChapter;*/
         Chapter_Action_Track__c newChapterAction = new Chapter_Action_Track__c();
         newChapterAction.Assigned_To__c = 'Volunteer Manager';
         newChapterAction.Case_Type_Stage__c = 'Wish Determination';
-        newChapterAction.Due_Date__c = 10;
+        
         newChapterAction.Task_Name__c = 'Planning';
         newChapterAction.Sort_Order__c = 1;
         newChapterAction.Wish_type__c = 'Standard';
@@ -1237,7 +1282,19 @@ insert newChapter;*/
         return wishFamilyCon ;
         
     }
-    
+    public static Constituent_Code__c createWishChildContituentCode(){
+        Constituent_Code__c  cc = new Constituent_Code__c ();
+        cc.Name='Wish Child';
+        Insert cc;
+        return cc;
+    }
+    public static Constituent_Code__c createWishParentGuardiansContituentCode(){
+        Constituent_Code__c  cc = new Constituent_Code__c ();
+        cc.Name='Wish Parent/Guardians';
+        Insert cc;
+        return cc;
+    }
+    //public static npe5__Affiliation__c 
     public static contact CreateWishChildCon(){
         
         Constant_AC  constant = new Constant_AC();
@@ -1908,4 +1965,14 @@ retrun newLeadFile;*/
         insert newAttachment;
         
     }
+     public static Volunteer_Opportunity__c NewnonWishVolunteerOpportunity(Id chapterId,Id contactId) {
+        Constant_AC  constant = new Constant_Ac();    
+        Id wishVolunteerOpportunityRecordTypeId = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
+            Volunteer_Opportunity__c newWishOpportunity =  new Volunteer_Opportunity__c();
+            newWishOpportunity.Chapter_Name__c = chapterId;
+            newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
+            newWishOpportunity.Volunteer_Name__c=contactId;
+            insert newWishOpportunity;
+            return newWishOpportunity;
+       }
 }

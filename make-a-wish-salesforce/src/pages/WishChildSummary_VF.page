@@ -1,0 +1,19 @@
+<apex:page sidebar="false" applyBodyTag="false" cache="false" standardController="case" extensions="WishChildSummary_AC">
+
+  
+  <apex:form id="MedicalSummary">
+  <apex:messages />
+  <apex:pageBlock title="Medical Summary">
+      <apex:pageBlockSection title="Wish Clearence From Details" columns="2">
+     <apex:outputField label="Medical Professional Name" value="{!currentParentCase.Contact.Hidden_Medical_Physician__c}" />
+     <apex:outputField label="Medical Professional Email" value="{!currentParentCase.Contact.Hidden_Medical_Physician_Email__c }" style="display:none" />
+   </apex:pageBlockSection>
+  
+  </apex:pageBlock>
+  <center>
+    <apex:commandButton value="Send Now" action="{!SendtoDocuSign}"/>
+    <apex:commandButton value="Cancel" action="{!Cancel}" />
+  </center>
+  </apex:form>
+ 
+</apex:page>

@@ -137,7 +137,7 @@
             .sideNav {
             position: fixed;
             z-index: 99;
-            top: 160px;
+            top: 140px;
             left: 5px;
         }
         .sideNav .navMenu {font-weight : 900;color:#0076d2;text-decoration:none;}
@@ -225,9 +225,28 @@
             $('#test123').css('display','none');
         });
         //--------------------------------
+        
+        
+         $('.style1').change(function(){
+    
 
+            if( $(this).val() == 'Yes'){
+                $('.Yes').addClass('required');
+                $('.Yes').css('border', '2px red solid');
+            }
+            else if($(this).val() == 'No'){
+           
+                 $('.Yes').removeClass('required');
+                 $('.Yes').css('border', '1px #ccc solid');
+            }
+    
+    
     });
 
+
+    });
+    
+   
     </script>
     <script type="text/javascript">
      function ClickToValidate(){       
@@ -237,6 +256,7 @@
                if($(this).val() == '' || $(this).val() == null ){
                    runBool = false;
                    alert("Please fill all required fields");
+                   $('.Yes').css('border', '2px red solid');
                    return false;
                }
                   
@@ -245,6 +265,7 @@
               return false;
               }
            else{
+              $('.Yes').css('border', '1px #ccc solid');
               return true;
               }
         }
@@ -356,9 +377,9 @@
                     
                     <div class="row top-space">
                         Is there anything on your family’s calendar (upcoming medical treatments, school or work commitments, planned vacations, etc.) that might impact your ability to participate in a wish?
-                        <apex:inputField value="{!currWishChild.Any_impact_your_ability_to_join_wish__c}" styleClass="form-control" /> <br/>
+                        <apex:inputField value="{!currWishChild.Any_impact_your_ability_to_join_wish__c}" styleClass="form-control style1" /> <br/>
                         If Yes, Please enter details below <br/>
-                        <apex:inputField value="{!currWishChild.Details_about_Impact__c}" styleClass="form-control"/> <br/>
+                        <apex:inputField value="{!currWishChild.Details_about_Impact__c}" styleClass="form-control Yes"/> <br/>
                         <center><p class="text-bold top-space">Driver Identification Information</p>
                             Many wishes involve the use of a rental vehicle. For this reason, please indicate a preferred and potential driver who may be driving during the course of the wish.<br/>
                             <I> <b>Please submit a photocopy of valid driver’s license(s).</b></I> <br/></center>
@@ -535,7 +556,7 @@
                         supplies are requested, please detail the relevant model number, manufacturer, size, dimensions, and
                         any other pertinent information if needed during travel. <br/>
                         
-                        <apex:inputField value="{!currWishChild.Additional_Requests__c}"  styleClass="form-control"/>
+                        <apex:inputField value="{!currWishChild.Additional_Requests__c}"  styleClass="form-control style1" />
                         
                         <br/>
                         <br/>
@@ -610,12 +631,12 @@
                     <div class="button-block">
                         <center> 
                             <apex:Commandbutton value="Back"  action="{!BackToWFF}" styleClass="btn btn-default mg-rt" immediate="true"/>
-                            <apex:Commandbutton value="Save & Exit"  action="{!WishInfoSave}"  Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
+                            <apex:Commandbutton value="Save"  action="{!WishInfoSave}"  Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Sign Now" action="{!SignNowmultiEmail}" Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Submit for Approval" action="{!submitforApproval}"  Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Send for Signature" action="{!multiEmail}" reRender="popup,popup1,displayError1" styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Generate PDF" action="{!generatePDF}" styleClass="btn btn-default mg-rt"/>
-                            <apex:Commandbutton value="Cancel"  action="{!cancelfunction}" styleClass="btn btn-default" immediate="true"/>
+                            <apex:Commandbutton value="Exit"  action="{!cancelfunction}" reRender="btpopup" styleClass="btn btn-default" immediate="true"/>
                             
                         </center>
                     </div>
@@ -690,13 +711,7 @@
                     
                 });
             });*/
-            $(window).scroll(function (event) {
-            var scroll = $(window).scrollTop();
-            if( scroll > 2800 )
-                $('.sideNav').css('top','10px');
-                else
-                $('.sideNav').css('top','160px');
-            });
+    
             </script>
            
   </apex:pageblock>
@@ -781,7 +796,26 @@
     </div>
 </apex:outputPanel>
 </apex:outputPanel>
- 
+  <apex:outputPanel id="btpopup">
+   <apex:outputPanel rendered="{!displayPopup }">
+       
+    <div class="pop-wrap">
+        <div class="custPopup">
+        
+            <div class="container">
+                <div class="row">
+                    <div class="row" style="padding:10px">
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
+                        <apex:commandButton value="Save and Exit" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!WishInfoWithSave}" style="height: 2.75rem;margin-top: 3% !important;width: 150px !important;"/>
+                        <apex:commandButton value="Exit without Saving" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!exitWithOutSave}"  style="height: 2.75rem; margin-left: 5%;margin-top: 3% !important;width: 185px !important;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</apex:outputPanel>
+</apex:outputPanel>
  
     </apex:form>
      </main>

@@ -3,7 +3,7 @@ Author      : MST Solutions
 Date        : 10/4/2016
 Description : This class is used to generate file path for the attachment that stored in SDrive for object
 *******************************************************************************************************************/
-public class AWSFilePath_AC{
+public without sharing class AWSFilePath_AC{
     
     @future
     public static void UpdateAccountFilePath(List<Id> fileRecordIds){
@@ -68,11 +68,6 @@ public class AWSFilePath_AC{
             else
                 contactFilePaths = new List<String>{'https://s3-us-west-2.amazonaws.com/mawafilesfullcopy/00Q5B000001s3bt/a1U5B0000000Df1UAE/MedicalSummaryReport.txt?response-content-disposition=attachment&filename=MedicalSummaryReport.txt&AWSAccessKeyId=AKIAIEYUJRAAMNE7W7NA&Expires=1509032442&Signature=Yx0UX2ADZxo9GbbDFH+q7opBzwU='};
                     
-                    
-                    
-                    
-                    
-                    
                     }
         System.debug('contactFilePaths>>>>'+contactFilePaths);
         system.debug('S drive File Paths 1 : '+ contactFilePaths );
@@ -111,8 +106,6 @@ public class AWSFilePath_AC{
         else
             caseFilePaths = new List<String>{'https://s3-us-west-2.amazonaws.com/mawafilesfullcopy/00Q5B000001s3bt/a1U5B0000000Df1UAE/MedicalSummaryReport.txt?response-content-disposition=attachment&filename=MedicalSummaryReport.txt&AWSAccessKeyId=AKIAIEYUJRAAMNE7W7NA&Expires=1509032442&Signature=Yx0UX2ADZxo9GbbDFH+q7opBzwU='};
                 
-                
-                
                 System.debug('caseFilePaths>>>>'+caseFilePaths);
         system.debug('S drive File Paths 1 : '+ caseFilePaths );
         
@@ -145,16 +138,16 @@ public class AWSFilePath_AC{
         }
         
         
-         if(!Test.isRunningTest())
-                //Used to get the file path of the attachment stored in Amazon
-                bcFilePaths= cg.SDriveTools.getAttachmentURLs(fileParentIds, fileRecordIds, (365 * 24 * 60 * 60), requestParametersList);
-            else
-                bcFilePaths = new List<String>{'https://s3-us-west-2.amazonaws.com/mawafilesfullcopy/00Q5B000001s3bt/a1U5B0000000Df1UAE/MedicalSummaryReport.txt?response-content-disposition=attachment&filename=MedicalSummaryReport.txt&AWSAccessKeyId=AKIAIEYUJRAAMNE7W7NA&Expires=1509032442&Signature=Yx0UX2ADZxo9GbbDFH+q7opBzwU='};
-                   
-                    
-                    
-        
-        System.debug('bcFilePaths>>>>'+bcFilePaths);
+        if(!Test.isRunningTest())
+            //Used to get the file path of the attachment stored in Amazon
+            bcFilePaths= cg.SDriveTools.getAttachmentURLs(fileParentIds, fileRecordIds, (365 * 24 * 60 * 60), requestParametersList);
+        else
+            bcFilePaths = new List<String>{'https://s3-us-west-2.amazonaws.com/mawafilesfullcopy/00Q5B000001s3bt/a1U5B0000000Df1UAE/MedicalSummaryReport.txt?response-content-disposition=attachment&filename=MedicalSummaryReport.txt&AWSAccessKeyId=AKIAIEYUJRAAMNE7W7NA&Expires=1509032442&Signature=Yx0UX2ADZxo9GbbDFH+q7opBzwU='};
+                
+                
+                
+                
+                System.debug('bcFilePaths>>>>'+bcFilePaths);
         system.debug('S drive File Paths 1 : '+ bcFilePaths );
         
         for(Background_Check_File__c bcFileRec : bcFiles){
@@ -202,36 +195,40 @@ It will update the file path to lead file record that created during attachment 
     }
     
     //This method is used to create a task for chapter staff to review attachments whenever file is uploaded by volunter for wish
-    public static void  createAttachmentReviewTask(Map<Id, cg__CaseFile__c> caseFileMap){
-        
+    @future(callout=true)
+    public static void  createAttachmentReviewTask(Set<Id> caseFileIdsSet){
         Constant_AC  constant = new Constant_Ac();    
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Set<Id> caseIdsSet = new Set<Id>();
-        Set<Id> caseFileIdSet = new Set<Id>();
         Map<Id,Id> caseOwnerMap = new Map<Id, Id>();
-        
-        List<cg__CaseFile__c> caseFileList = [SELECT Id,cg__Case__c, cg__Case__r.RecordTypeId FROM cg__CaseFile__c WHERE cg__Case__r.RecordTypeId =: parentWishRecordTypeId AND Id IN : caseFileMap.keySet()];
-        
+        Id contactId;
+        List<cg__CaseFile__c> caseFileList = [SELECT Id,cg__Case__c, cg__Case__r.RecordTypeId FROM cg__CaseFile__c WHERE cg__Case__r.RecordTypeId =: parentWishRecordTypeId AND Id IN : caseFileIdsSet];
         if(caseFileList.size() > 0) {
             for(cg__CaseFile__c caseFile : caseFileList) {
+                contactId = caseFile.cg__Case__c;
                 caseIdsSet.add(caseFile.cg__Case__c);
-                caseFileIdSet.add(caseFile.Id);
             }  
         }
-        
         if(caseIdsSet.size() > 0) {
             for(Case caseOwner : [SELECT Id, RecordTypeId, OwnerId FROM Case WHERE RecordTypeId =: parentWishRecordTypeId AND Id IN : caseIdsSet]) {
                 caseOwnerMap.put(caseOwner.Id, caseOwner.OwnerId);
             }
         }
-        
         Set<Id> reviewPhotosSet = new Set<Id>();
-        if(caseIdsSet.size() > 0) {
-            for(Task getTask : [SELECT Id, WhatId FROM Task WHERE WhatId IN : caseIdsSet AND Subject = 'Review photos/videos']) {
-                reviewPhotosSet.add(getTask.WhatId);
+        List<Task> tskList = new List<Task>();
+        if(contactId != null) {
+            String jsonbody = VolunteerInterviewTask_AC.getClassOfferingRecList(contactId);
+            List<Task> newTaskList;
+            if(!Test.isRunningTest())     
+                newTaskList =  (List<Task>) JSON.deserialize(jsonbody, List<Task>.class);
+            else
+                newTaskList = new list<task>();
+            if(newTaskList.size() > 0 ) {
+                for(Task getTask : newTaskList) {
+                    reviewPhotosSet.add(getTask.WhatId);
+                }
             }
         }
-        
         List<Task> reviewTaskList = new List<Task>();
         for(cg__CaseFile__c createTask : caseFileList) {
             if(!reviewPhotosSet.contains(createTask.cg__Case__c)) {
@@ -249,5 +246,4 @@ It will update the file path to lead file record that created during attachment 
             insert reviewTaskList;
         }        
     }
-    
 }

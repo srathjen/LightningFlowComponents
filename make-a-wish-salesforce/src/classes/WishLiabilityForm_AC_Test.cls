@@ -9,6 +9,8 @@ public class WishLiabilityForm_AC_Test {
     /*This method is used to cover the code coverage of Constructor method*/
     static testMethod void CalltheConstructorMethod(){ 
       Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
+      Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+      Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
       Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
       List<Contact> WishFamilyContactList = OrientationandTrainingUtil.CreateWishFamilyList(3);
       insert WishFamilyContactList;
@@ -32,6 +34,8 @@ public class WishLiabilityForm_AC_Test {
     /*This method is used to cover the code coverage of Constructor else condition method*/
     static testMethod void CalltheConstructorMethodError(){ 
       Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
+      Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+      Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
       Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
       Contact WishFamilyContact = OrientationandTrainingUtil.CreateWishFamily();
      
@@ -53,6 +57,8 @@ public class WishLiabilityForm_AC_Test {
    /*This method is used to cover the code coverage of multiEmail() and CallOuttoDocusign() method.*/
     static testMethod void SendDocusigntoEmail(){ 
       Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
+      Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+      Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
       Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
       List<Contact> WishFamilyContactList = OrientationandTrainingUtil.CreateWishFamilyList(3);
       insert WishFamilyContactList;
@@ -91,6 +97,8 @@ public class WishLiabilityForm_AC_Test {
      /*This method is used to cover the code coverage of multiEmail() else condition.*/
      static testMethod void SendDocusigntoEmailError(){ 
       Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
+      Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+      Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
       Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
       List<Contact> WishFamilyContactList = OrientationandTrainingUtil.CreateWishFamilyList(3);
       insert WishFamilyContactList;
@@ -125,7 +133,9 @@ public class WishLiabilityForm_AC_Test {
     /*This method is used to cover the code coverage of SignNowmultiEmail() and SubmitAndSign() method.*/
     static testMethod void SignDocusignNow(){
         
-         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
+      Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
+      Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+      Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
       Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
       List<Contact> WishFamilyContactList = OrientationandTrainingUtil.CreateWishFamilyList(3);
       insert WishFamilyContactList;

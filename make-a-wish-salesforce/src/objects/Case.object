@@ -282,6 +282,31 @@
         <visibleLines>3</visibleLines>
     </fields>
     <fields>
+        <fullName>Air_Travel_Details__c</fullName>
+        <externalId>false</externalId>
+        <label>Air Travel Details</label>
+        <picklist>
+            <picklistValues>
+                <fullName>This wish does not involve air travel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>I am fully aware of the medical research regarding air travel and feel it is appropriate for this child. I will make any necessary adjustments to the medical treatment plan prior to their travel dates</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>I do not support air travel for this child</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
         <fullName>All_requested_wish_participants_reside_w__c</fullName>
         <description>It describes whether all requested wish participants resides with wish child?</description>
         <externalId>false</externalId>
@@ -347,6 +372,16 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Appropriate_Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Appropriate Comments</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>AssetId</fullName>
@@ -576,6 +611,26 @@ for fulfilment  the wish.</description>
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Child_MedicalSummary_LastModifiedDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Child Medical Summary Last Modified Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Child_Wish_Clearance_Last_Modified_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Child Wish Clearance Last Modified Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Child_s_Medical_Summary_Form__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
@@ -620,6 +675,26 @@ for fulfilment  the wish.</description>
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Comment_1__c</fullName>
+        <externalId>false</externalId>
+        <label>Comment</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Comment_2__c</fullName>
+        <externalId>false</externalId>
+        <label>Comment</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Comment_for_PWL_Not_Met__c</fullName>
         <description>This field is used to capture the detail notes about the PWL</description>
         <externalId>false</externalId>
@@ -633,6 +708,16 @@ for fulfilment  the wish.</description>
     <fields>
         <fullName>Comments</fullName>
         <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Comment</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Communication_Profile__c</fullName>
@@ -790,7 +875,7 @@ for fulfilment  the wish.</description>
     <fields>
         <fullName>Date_Received_for_Wish_Safety_Authorizat__c</fullName>
         <externalId>false</externalId>
-        <label>Date - Safety Authorization Part B Form</label>
+        <label>Date - Safety Auth Wish Clearance Form</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -831,6 +916,16 @@ for fulfilment  the wish.</description>
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Date_of_last_visit_treatment__c</fullName>
+        <externalId>false</externalId>
+        <label>Date of Last Visit/Treatment</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Days_In_Stage__c</fullName>
         <externalId>false</externalId>
         <formula>Today() -  Status_Date__c</formula>
@@ -855,7 +950,7 @@ for fulfilment  the wish.</description>
         <externalId>false</externalId>
         <formula>Contact.LastName + &apos; &apos; +Contact.FirstName + &apos; &apos; + IF(!ISNULL(Contact.Birthdate),(TEXT(MONTH(Contact.Birthdate)) &amp; &quot;-&quot; &amp; TEXT(DAY(Contact.Birthdate)) &amp; &quot;-&quot; &amp; TEXT(YEAR(Contact.Birthdate))), &apos;&apos;)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Description</label>
+        <label>RE-FE Description</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -952,6 +1047,16 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Emergency_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Emergency Number</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
     </fields>
     <fields>
         <fullName>End_Date__c</fullName>
@@ -1153,6 +1258,17 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Hidden_All_Primary__c</fullName>
+        <externalId>false</externalId>
+        <label>Hidden All Primary</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
     </fields>
     <fields>
         <fullName>Hidden_Chapter_Email__c</fullName>
@@ -1762,9 +1878,9 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <fullName>Medical_Condition__c</fullName>
         <externalId>false</externalId>
-        <formula>Contact.Medical_Condition__c</formula>
+        <formula>Contact.Diagnosis__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Medical Condition</label>
+        <label>Primary Diagnosis</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -2203,6 +2319,16 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Please_Explain__c</fullName>
+        <externalId>false</externalId>
+        <label>Please Explain</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Potential_Driver_Expiration_Date__c</fullName>
@@ -3181,6 +3307,47 @@ on airplane</description>
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Wish_Clearance_Received_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Wish Clearance Received Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Wish_Clearance_Sent_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Wish Clearance Sent Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Wish_Clearance__c</fullName>
+        <externalId>false</externalId>
+        <label>Wish Clearance</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Appropriate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Appropriate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
         <fullName>Wish_Complexity__c</fullName>
         <description>Wish Complexity should be rated on a scale of 1 to 9 (9 being the highest). Wish Type, Family Dynamics &amp; Medical Condition needs to be considered for determining the wish complexity.</description>
         <externalId>false</externalId>
@@ -3324,7 +3491,7 @@ on airplane</description>
         <fullName>Wish_Safety_Authorization_Part_B_Form__c</fullName>
         <defaultValue>false</defaultValue>
         <externalId>false</externalId>
-        <label>Wish Safety Authorization Part B Form</label>
+        <label>Wish Safety Auth Wish Clearance Form</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -3333,7 +3500,7 @@ on airplane</description>
     <fields>
         <fullName>Wish_Type__c</fullName>
         <externalId>false</externalId>
-        <label>Wish Type</label>
+        <label>Wish National Type</label>
         <picklist>
             <picklistValues>
                 <fullName>Animal</fullName>
@@ -3568,6 +3735,18 @@ If yes,  # of hours, agency and phone number information</description>
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>hidden_medical_physician__c</fullName>
+        <externalId>false</externalId>
+        <label>hidden medical physician</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>isApprove__c</fullName>
         <defaultValue>false</defaultValue>
         <description>It is used to identify whether the wish is approved or not</description>
@@ -3634,6 +3813,27 @@ arrangements/unique circumstances for any requested wish participant not residin
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>wish_involves_air_travel__c</fullName>
+        <externalId>false</externalId>
+        <label>Wish Involves Air Travel</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
     </fields>
     <listViews>
         <fullName>Alabama_Case</fullName>
@@ -4444,6 +4644,21 @@ arrangements/unique circumstances for any requested wish participant not residin
         <description>It will display the child and  parent related information.</description>
         <label>Wish</label>
         <picklistValues>
+            <picklist>Air_Travel_Details__c</picklist>
+            <values>
+                <fullName>I am fully aware of the medical research regarding air travel and feel it is appropriate for this child%2E I will make any necessary adjustments to the medical treatment plan prior to their travel dates</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>I do not support air travel for this child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>This wish does not involve air travel</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>All_requested_wish_participants_reside_w__c</picklist>
             <values>
                 <fullName>No</fullName>
@@ -4669,6 +4884,56 @@ arrangements/unique circumstances for any requested wish participant not residin
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Wish_Clearance__c</picklist>
+            <values>
+                <fullName>Appropriate</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Appropriate</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Wish_Complexity__c</picklist>
+            <values>
+                <fullName>1</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Wish_Type__c</picklist>
             <values>
                 <fullName>Animal</fullName>
@@ -4816,6 +5081,17 @@ arrangements/unique circumstances for any requested wish participant not residin
             </values>
             <values>
                 <fullName>Travel - Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>wish_involves_air_travel__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -5759,7 +6035,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
     </validationRules>
     <validationRules>
         <fullName>Referral_date_Validation</fullName>
-        <active>false</active>
+        <active>true</active>
         <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK( Hidden_Referral_date__c ))</errorConditionFormula>
         <errorMessage>Referral date should not be Blank.</errorMessage>
     </validationRules>

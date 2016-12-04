@@ -15,6 +15,9 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
     {
         List<Lead> newLeadList = new List<Lead>();
         LeadTriggerHandler handlerIns = new LeadTriggerHandler();
+        List<Lead> updateChapterOnLeadList = new List<Lead>();
+        Set<String> postalCodesSet = new Set<String>();
+        
         for(Lead newLead : Trigger.new){
             newLead.Part_A_Form_Password__c= handlerIns.getRandom();
            if(newLead.Status == 'Inquiry')
@@ -53,10 +56,22 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                     newLead.Referred_Date__c= Date.Today();
                 }
             }
+            
+            if(newLead.PostalCode != Null ){
+               postalCodesSet.add(newLead.PostalCode);
+               updateChapterOnLeadList.add(newLead);
+             }
+             else{
+               postalCodesSet.add(newLead.Referrer_Zip__c);
+               updateChapterOnLeadList.add(newLead);
+             }
          
         }
         
-       
+        if(postalCodesSet.size() > 0)
+        {
+           LeadTriggerHandler.UpdateChatperfields(postalCodesSet,updateChapterOnLeadList);
+        }
         if(newLeadList.size() > 0){
            LeadTriggerHandler.findDuplicateRecords(newLeadList);
         }
@@ -88,7 +103,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
             
             if((newLead.Sub_Status__c == 'Pending Diagnosis Verification') && trigger.oldMap.get(newLead.id).Sub_Status__c != 'Pending Diagnosis Verification'){
                 if(!Test.isRunningTest()) {
-                	newLead.Part_A_Sent__c = Date.today();
+                    newLead.Part_A_Sent__c = Date.today();
                 }
             }
             

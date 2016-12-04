@@ -25,7 +25,13 @@ Description : WishChildForm_AC_Test is used to increase the code coverage for Wi
         
         WishChildForm_AC wishChildIns = new WishChildForm_AC(sc);
         wishChildIns.saveContact();
-        wishChildIns.SaveandExit();
+       // wishChildIns.removeFamily();
+         wishChildIns.SaveandwishFamilyExit();
+         wishChildIns.SaveandwishChildExit();
+         wishChildIns.exitWithOutSave();
+         wishChildIns.displayError();
+         wishChildIns.WishInfoWithSave();
+        wishChildIns.SavewithExit();
         wishChildIns.WishInfoSave();
         wishChildIns.WCFNext();
         wishChildIns.WFFNext();

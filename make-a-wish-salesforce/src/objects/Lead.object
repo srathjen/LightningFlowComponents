@@ -1676,6 +1676,14 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Is_Chapter_Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Is Chapter Active</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Is_We_Need_To_Expedite_The_Process__c</fullName>
         <description>It will hold detail about is there is any medical reason for expedite the process</description>
         <externalId>false</externalId>
@@ -2054,6 +2062,15 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Office_Referral_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Office Referral Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Other_Relationship_To_Child__c</fullName>
         <description>It will hold the value of Other Relationship to child.</description>
         <externalId>false</externalId>
@@ -2184,6 +2201,16 @@
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Preferred_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Preferred Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>PrimaryDiagnosis_Condition_Description__c</fullName>
@@ -2826,7 +2853,7 @@
         <fullName>What_is_the_family_s_primary_spoken_lang__c</fullName>
         <description>Primary language of the wish family.</description>
         <externalId>false</externalId>
-        <label>What is the family’s primary spoken lang</label>
+        <label>Family Primary Language</label>
         <picklist>
             <picklistValues>
                 <fullName>American Sign Language</fullName>

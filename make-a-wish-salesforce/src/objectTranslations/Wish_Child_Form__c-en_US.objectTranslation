@@ -185,6 +185,10 @@
             <translation><!-- Friend --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Grandparent</masterLabel>
+            <translation><!-- Grandparent --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Neighbour</masterLabel>
             <translation><!-- Neighbour --></translation>
         </picklistValues>

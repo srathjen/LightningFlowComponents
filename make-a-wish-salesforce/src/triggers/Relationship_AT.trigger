@@ -20,14 +20,41 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert) {
     }
     if(trigger.isInsert && trigger.isAfter){
         Id contactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Wish Child').getRecordTypeId();
+         Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Wish Family').getRecordTypeId();
+        Id medicalProfRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Medical Professional').getRecordTypeId();
         list<Contact> contactList = new list<Contact>();
         list<Contact> updatedConList = new list<Contact>();
         set<string> relationshipIdsSet = new set<string>();
+        Map<id,Contact> medicalProfContactMap = new Map<id,Contact>();
+        set<id> relatedContactId = new set<id>();
+        List<contact> updateChildContactList = new List<contact>();
         map<string,list<npe4__Relationship__c>> relationshipMap = new map<string,list<npe4__Relationship__c>>();
         for(npe4__Relationship__c newRecord :trigger.new){
             if(newRecord.npe4__Contact__c != Null && newRecord.Wish_Family_participants__c == 'Parent/Guardian'){
                 relationshipIdsSet.add(newRecord.id);
             }
+            
+             if(newRecord.npe4__Contact__c != Null && newRecord.npe4__Type__c== 'Medical Professional' && newRecord.Qualifying_Medical_Professional__c == true && newRecord.npe4__Status__c == 'Active'){
+               relatedContactId.add(newRecord.npe4__RelatedContact__c);
+            }
+        }
+        
+        if(relatedContactId.size() > 0){
+            
+            for(Contact dbWishChildCon : [SELECT Id,Name,Email,RecordTypeId FROM Contact WHERE Id In:relatedContactId AND RecordTypeId =: medicalProfRecordTypeId ]){
+                medicalProfContactMap.put(dbWishChildCon.Id,dbWishChildCon);
+            }
+        }
+        if(medicalProfContactMap.size() > 0){
+           for(npe4__Relationship__c newRecord :trigger.new){
+               if(medicalProfContactMap.containsKey(newRecord.npe4__RelatedContact__c)){
+                   contact newContact = new Contact();
+                   newContact.Id = newRecord.npe4__Contact__c;
+                   newContact.Hidden_Medical_Physician__c = medicalProfContactMap.get(newRecord.npe4__RelatedContact__c).Name;
+                   newContact.Hidden_Medical_Physician_Email__c = medicalProfContactMap.get(newRecord .npe4__RelatedContact__c).Email;
+                   updateChildContactList.add(newContact); 
+               }
+           }
         }
         for(npe4__Relationship__c currrentRlationShip : [SELECT ID,npe4__Contact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__c,Wish_Family_participants__c FROM npe4__Relationship__c 
                                                          WHERE ID IN:relationshipIdsSet AND Wish_Family_participants__c = 'Parent/Guardian']){
@@ -76,6 +103,9 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert) {
         if(updatedConList.size()>0){
             update updatedConList;
         }
+        
+        if(updateChildContactList.size() > 0)
+         update updateChildContactList;
         
     }
     

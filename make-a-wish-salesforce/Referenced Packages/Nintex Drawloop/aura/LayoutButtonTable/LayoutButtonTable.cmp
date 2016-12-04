@@ -1,0 +1,105 @@
+<aura:component controller="Loop.LayoutButtonController">
+    <!--Required attributes-->
+    <aura:attribute name="sessionId" type="string" required="true"/>
+    <aura:attribute name="apiUrl" type="string" default=""/>
+    
+    <!--Internal attributes-->
+    <aura:attribute name="searchText" type="string"/>
+    <aura:attribute name="allObjectGroups" type="List" access="private"/>
+    <aura:attribute name="objectGroups" type="List" access="private"/>
+    <aura:attribute name="layoutMetadata" type="string" access="private"/>
+    <aura:attribute name="noRecords" type="boolean" default="false" access="private"/>
+    <aura:attribute name="availableCustomObjects" type="Map" access="private"/>
+    <aura:attribute name="customObjectSelectOptions" type="List" default="[]" access="private"/>
+    <aura:attribute name="isTableLoading" type="boolean" default="true" access="private"/>
+    <aura:attribute name="enabledCount" type="string" default="" access="private"/>
+    
+    <!--Methods-->
+    <aura:method name="save" action="{!c.save}"/>
+    
+    <!--Handled events-->
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+    
+    <!--Registered events-->
+    <aura:registerEvent name="moveToNextStep" type="Loop:moveToNextStep"/>
+    <aura:registerEvent name="showError" type="Loop:showError"/>
+    <aura:registerEvent name="setSampleObjects" type="Loop:setSampleObjects"/>
+    
+    <div class="slds">
+        <table class="slds-table slds-table--bordered slds-no-row-hover custom-changes">
+            <thead>
+                <tr class="slds-text-heading--label">
+                    <th class="slds-cell-shrink" scope="col"/>
+                    <th class="slds-is-sortable" scope="col">
+                        <span class="slds-truncate">Object</span>
+                        <Loop:Button class="slds-button slds-button--icon-bare"
+                                  label=""
+                                  svgXlinkHref="/resource/Loop__SalesforceLightning/assets/icons/utility-sprite/svg/symbols.svg#arrowdown"
+                                  svgClass="slds-button__icon slds-button__icon--small"
+                                  />
+                    </th>
+                    <th scope="col"><span class="slds-truncate">{!'Enabled' + v.enabledCount}</span></th>
+                    <th scope="col"><span class="slds-truncate">Classic Page Layout</span></th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.objectGroups}" var="group">
+                    <tr aura:id="row" class="{!group.isGroup ? 'slds-hint-parent pointer' : 'rowHidden'}" id="{!group.obj}" onclick="{!c.toggleGroup}" data-expanded="{!group.isExpanded}" data-is-group="{!group.isGroup}">
+                        <td style="{!group.isGroup ? '' : 'border: 0;'}">
+                            <aura:if isTrue="{!group.multiple}">
+                                <div class="{!group.isExpanded ? 'divHidden' : ''}" style="text-align: right;">
+                                    <Loop:Svg class="slds-button__icon slds-button__icon--small" 
+                                           xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/utility-sprite/svg/symbols.svg#add" />
+                                </div>
+                                <div class="{!group.isExpanded ? '' : 'divHidden'}" style="text-align: right;">
+                                    <Loop:Svg class="slds-button__icon slds-button__icon--small" 
+                                           xlinkHref="/resource/Loop__SalesforceLightning/assets/icons/utility-sprite/svg/symbols.svg#dash" />
+                                </div>
+                            </aura:if>
+                        </td>
+                        <td style="{!group.isGroup ? '' : 'border: 0;'}">{!group.isGroup ? group.obj : ''}</td>
+                        <td style="{!group.isGroup ? '' : 'border: 0;'}">
+                            <label class="{!'slds-checkbox' + (group.tristate ? ' tristate' : '')}" id="{!group.id}">
+                                <ui:inputCheckbox class="{!group.objClass}" click="{!c.updateCheckboxes}" value="{!group.enabled}"/>
+                                <span class="slds-checkbox--faux"></span>
+                                <span class="slds-form-element__label slds-assistive-text"></span>
+                            </label>
+                        </td>
+                        <td style="{!group.isGroup ? '' : 'border: 0;'}"><span class="slds-truncate">{!group.page}</span></td>
+                    </tr>
+                </aura:iteration>
+                <tr aura:id="customObjectRow" class="slds-hint-parent rowHidden">
+                    <td>
+                        <label class="slds-form-element__label" style="margin-right: 0;">Custom Object</label>
+                    </td>
+                    <td>
+                        <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                                <div class="slds-select_container">
+                                    <ui:inputSelect aura:id="customObjectSelect" class="slds-select dynamic">
+                                        <aura:iteration items="{!v.customObjectSelectOptions}" var="option">
+                                            <ui:inputSelectOption label="{!option.label}" text="{!option.text}"/>
+                                        </aura:iteration>
+                                    </ui:inputSelect>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <ui:outputURL aura:id="addButtonLink" value="" click="{!c.createButton}" label="Add button to selected object"/>
+                        <div aura:id="addButtonSpinner" class="slds-spinner" style="width: 20px;height: 20px;left: 16px;display: none;">
+                            <img alt="Loading..." src="/resource/Loop__SalesforceLightning/assets/images/spinners/slds_spinner.gif"/>
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+                <aura:if isTrue="{!v.isTableLoading}">
+                    <tr aura:id="noRecordRow"><td colspan="7" style="text-align: center;">
+                        <Loop:Spinner class="slds-spinner--small" visible="true" useGraySpinner="true"/>
+                        <span style="color:grey; margin-left:10px;">Loading records...</span></td>
+                    </tr>
+                </aura:if>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

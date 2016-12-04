@@ -17,4 +17,5 @@
     <tab>cg__CaseFile__c</tab>
     <tab>Awards_Recognition__c</tab>
     <tab>Background_Check_File__c</tab>
+    <tab>Constituent_Code__c</tab>
 </CustomApplication>

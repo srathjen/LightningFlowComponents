@@ -161,12 +161,12 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
            VolunteerOpportunityTriggerHandler.UpdateVolunteerRegisterdCount(nonWishListtoupdatecount);
            
         }
-        if(updateWishGrantedList.size() > 0){
+       /* if(updateWishGrantedList.size() > 0){
         VolunteerOpportunityTriggerHandler.updateVolunteerWishGrantedCount(updateWishGrantedList);
-        }
-        if(updateWishGrantedList.size() > 0){
+        }*/
+        /*if(updateWishGrantedList.size() > 0){
         VolunteerOpportunityTriggerHandler.updateVolunteerWishAssignedCount(updateWishGrantedList);
-        }
+        }*/
         
     }
     

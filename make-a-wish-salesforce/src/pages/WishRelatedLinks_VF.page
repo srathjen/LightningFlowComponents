@@ -13,6 +13,8 @@
               <div style="margin-left:57%; margin-top: -2%;"><apex:outputLink target="_blank" value="{!absentParentForm}">Absent Form</apex:outputLink></div>
               <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!celebrityForm}">Celebrity Form</apex:outputLink></div> 
               <div style="margin-left:57%; margin-top: -2%;"><apex:outputLink target="_blank" value="{!singleForm}">Single Parent Form</apex:outputLink></div>
+              <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!wishClearence}">Wish Clearance</apex:outputLink></div> 
+              <!--<div style="margin-left:57%; margin-top: -2%;"><apex:outputLink target="_blank" value="{!ChildMedicalForm }">Child Medical Summary</apex:outputLink></div>-->
              </apex:outputPanel>
              
              

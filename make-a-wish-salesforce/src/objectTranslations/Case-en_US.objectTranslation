@@ -29,6 +29,22 @@
         <name>Additional_Requests__c</name>
     </fields>
     <fields>
+        <label><!-- Air Travel Details --></label>
+        <name>Air_Travel_Details__c</name>
+        <picklistValues>
+            <masterLabel>I am fully aware of the medical research regarding air travel and feel it is appropriate for this child. I will make any necessary adjustments to the medical treatment plan prior to their travel dates</masterLabel>
+            <translation><!-- I am fully aware of the medical research regarding air travel and feel it is appropriate for this child. I will make any necessary adjustments to the medical treatment plan prior to their travel dates --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>I do not support air travel for this child</masterLabel>
+            <translation><!-- I do not support air travel for this child --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>This wish does not involve air travel</masterLabel>
+            <translation><!-- This wish does not involve air travel --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- All participants reside with wish child --></label>
         <name>All_requested_wish_participants_reside_w__c</name>
         <picklistValues>
@@ -61,6 +77,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <masterLabel>Yes</masterLabel>
             <translation><!-- Yes --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Appropriate Comments --></label>
+        <name>Appropriate_Comments__c</name>
     </fields>
     <fields>
         <label><!-- Assigned Date --></label>
@@ -145,6 +165,14 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>CheckedInFamily__c</name>
     </fields>
     <fields>
+        <label><!-- Child Medical Summary Last Modified Date --></label>
+        <name>Child_MedicalSummary_LastModifiedDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Child Wish Clearance Last Modified Date --></label>
+        <name>Child_Wish_Clearance_Last_Modified_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- Child’s Medical Summary Form --></label>
         <name>Child_s_Medical_Summary_Form__c</name>
     </fields>
@@ -161,8 +189,20 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Closed_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Comment --></label>
+        <name>Comment_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comment --></label>
+        <name>Comment_2__c</name>
+    </fields>
+    <fields>
         <label><!-- Comment for PWL Not Met --></label>
         <name>Comment_for_PWL_Not_Met__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comment --></label>
+        <name>Comments__c</name>
     </fields>
     <fields>
         <label><!-- Communication Profile --></label>
@@ -217,7 +257,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Date_Received_for_Visas__c</name>
     </fields>
     <fields>
-        <label><!-- Date - Safety Authorization Part B Form --></label>
+        <label><!-- Date - Safety Auth Wish Clearance Form --></label>
         <name>Date_Received_for_Wish_Safety_Authorizat__c</name>
     </fields>
     <fields>
@@ -233,11 +273,15 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Date_Wish_Information_Form__c</name>
     </fields>
     <fields>
+        <label><!-- Date of Last Visit/Treatment --></label>
+        <name>Date_of_last_visit_treatment__c</name>
+    </fields>
+    <fields>
         <label><!-- Days In Stage --></label>
         <name>Days_In_Stage__c</name>
     </fields>
     <fields>
-        <label><!-- Description --></label>
+        <label><!-- RE-FE Description --></label>
         <name>Description__c</name>
     </fields>
     <fields>
@@ -279,6 +323,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Driver Names --></label>
         <name>Driver_Names__c</name>
+    </fields>
+    <fields>
+        <label><!-- Emergency Number --></label>
+        <name>Emergency_Number__c</name>
     </fields>
     <fields>
         <label><!-- End Date --></label>
@@ -364,6 +412,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <masterLabel>Yes</masterLabel>
             <translation><!-- Yes --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hidden All Primary --></label>
+        <name>Hidden_All_Primary__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Chapter Email --></label>
@@ -588,7 +640,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>MY_WISH_IS_TO__c</name>
     </fields>
     <fields>
-        <label><!-- Medical Condition --></label>
+        <label><!-- Primary Diagnosis --></label>
         <name>Medical_Condition__c</name>
     </fields>
     <fields>
@@ -782,6 +834,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Passports --></label>
         <name>Passports__c</name>
+    </fields>
+    <fields>
+        <label><!-- Please Explain --></label>
+        <name>Please_Explain__c</name>
     </fields>
     <fields>
         <label><!-- Potential Driver Expiration Date --></label>
@@ -1269,6 +1325,26 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Wish_Child_Form__c</name>
     </fields>
     <fields>
+        <label><!-- Wish Clearance Received Date --></label>
+        <name>Wish_Clearance_Received_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Clearance Sent Date --></label>
+        <name>Wish_Clearance_Sent_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Clearance --></label>
+        <name>Wish_Clearance__c</name>
+        <picklistValues>
+            <masterLabel>Appropriate</masterLabel>
+            <translation><!-- Appropriate --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Appropriate</masterLabel>
+            <translation><!-- Not Appropriate --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <help><!-- Wish Complexity should be rated on a scale of 1 to 9 (9 being the highest). Wish Type, Family Dynamics &amp; Medical Condition needs to be considered for determining the wish complexity. --></help>
         <label><!-- Wish Complexity --></label>
         <name>Wish_Complexity__c</name>
@@ -1342,11 +1418,11 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Wish_Receipt_Items__c</name>
     </fields>
     <fields>
-        <label><!-- Wish Safety Authorization Part B Form --></label>
+        <label><!-- Wish Safety Auth Wish Clearance Form --></label>
         <name>Wish_Safety_Authorization_Part_B_Form__c</name>
     </fields>
     <fields>
-        <label><!-- Wish Type --></label>
+        <label><!-- Wish National Type --></label>
         <name>Wish_Type__c</name>
         <picklistValues>
             <masterLabel>Animal</masterLabel>
@@ -1534,6 +1610,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>diagnosis_verificaion_sent_date__c</name>
     </fields>
     <fields>
+        <label><!-- hidden medical physician --></label>
+        <name>hidden_medical_physician__c</name>
+    </fields>
+    <fields>
         <label><!-- isApprove --></label>
         <name>isApprove__c</name>
     </fields>
@@ -1558,6 +1638,18 @@ planned vacations, etc.) that might impact your ability to participate in a wish
 arrangements/unique circumstances for any requested wish participant not residing with the wish child. --></help>
         <label><!-- living arrangements/unique circumstances --></label>
         <name>living_arrangements_unique_circumstances__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Involves Air Travel --></label>
+        <name>wish_involves_air_travel__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
     </fields>
     <layouts>
         <layout>Child Wishes</layout>
@@ -1714,6 +1806,10 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sections>
             <label><!-- Important Date Section --></label>
             <section>Important Date Section</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Section --></label>
+            <section>Medical Section</section>
         </sections>
         <sections>
             <label><!-- Wish Related Forms --></label>

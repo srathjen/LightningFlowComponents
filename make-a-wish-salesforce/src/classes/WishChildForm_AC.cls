@@ -108,6 +108,7 @@ Public Class WishChildForm_AC
     public string childForm {get;set;}
     public string familyForm {get;set;}
     public string infoForm {get;set;}
+    
     public WishChildForm_AC(Apexpages.StandardController control)
     {
     system.debug('@@CONSTRUCTOT@@@');
@@ -506,14 +507,14 @@ Public Class WishChildForm_AC
                  
                 
                   if(currList.size() > 7 && currList[7].trim() == '-')  
-                    wrapCls.medicalNeeds = false;
+                    wrapCls.medicalNeeds = Null;
                   else
-                    wrapCls.medicalNeeds =  Boolean.ValueOf(currList[7].trim());
+                    wrapCls.medicalNeeds =  (currList[7].trim());
                     
                 if(currList.size() > 8 && currList[8].trim() == '-')
-                     wrapCls.residingWishMedical = false;
+                     wrapCls.residingWishMedical = Null;
                   else 
-                     wrapCls.residingWishMedical =  Boolean.valueOf(currList[8].trim()); 
+                     wrapCls.residingWishMedical =  currList[8].trim(); 
                      
                 //  wrapCls.dob =  Date.valueOf(currString.split('|')[4]);
                   wishParticipantList.add(wrapCls);
@@ -885,14 +886,39 @@ Public Class WishChildForm_AC
     }    
     
     
-  Public PageReference SaveandExit()
+  Public PageReference SaveandwishFamilyExit()
     {
         
         try
         {
             saveContact();
-            PageReference reference=new PageReference('/'+caseId);
-            reference.setRedirect(true);     
+            caseId =  ApexPages.currentPage().getParameters().get('Id');
+            PageReference reference=new PageReference('/apex/WishFamilyForm_VF?Id='+caseId);
+            reference.setRedirect(true);  
+            return reference;
+        }
+        
+        Catch(DMLException e)
+        {
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
+            ApexPages.addMessage(myMsg);
+            return null;
+        }
+        
+        return null;
+        
+    }
+    
+    
+    Public PageReference SaveandwishChildExit()
+    {
+        
+        try
+        {
+            saveContact();
+            caseId =  ApexPages.currentPage().getParameters().get('Id');
+            PageReference reference=new PageReference('/apex/WishChildForm_VF?Id='+caseId);
+            reference.setRedirect(true);  
             return reference;
         }
         
@@ -914,9 +940,15 @@ Public Class WishChildForm_AC
         {
             isInformation = True;
             saveContact();
-            PageReference reference=new PageReference('/'+caseId);
+            caseId =  ApexPages.currentPage().getParameters().get('Id');
+            PageReference reference=new PageReference('/apex/WishInformationForm_VF?Id='+caseId);
             reference.setRedirect(true);     
-            return reference;
+          
+            
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.severity.CONFIRM,'You Have Successfully Saved Your Information');
+            ApexPages.addMessage(myMsg);
+             return reference;
+          
         }
         
         Catch(DMLException e)
@@ -1006,11 +1038,65 @@ Public Class WishChildForm_AC
   // Back to Case Detail page.
     Public PageReference cancelfunction()
     {
+        displayPopup = true;
+       
+        return null;
+    }
+    
+    Public PageReference SavewithExit()
+    {
+        
+        try
+        {
+        saveContact();
         String caseId =  ApexPages.currentPage().getParameters().get('Id');
         PageReference reference=new PageReference('/'+caseId );
         reference.setRedirect(true);     
         return reference;
+        }
         
+        Catch(DMLException e)
+        {
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
+            ApexPages.addMessage(myMsg);
+            return null;
+        }
+        
+        return null;
+        
+    }
+    
+     Public PageReference WishInfoWithSave()
+    {
+        
+        try
+        {
+            isInformation = True;
+            saveContact();
+            
+            
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.severity.CONFIRM,'You Have Successfully Saved Your Information');
+            ApexPages.addMessage(myMsg);
+            return null;
+          
+        }
+        
+        Catch(DMLException e)
+        {
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
+            ApexPages.addMessage(myMsg);
+            return null;
+        }
+        
+        return null;
+        
+    }
+    
+    public PageReference  exitWithOutSave(){
+     String caseId =  ApexPages.currentPage().getParameters().get('Id');
+        PageReference reference=new PageReference('/'+caseId );
+        reference.setRedirect(true);     
+        return reference;
     }
     
  public class WrapperClass {
@@ -1024,8 +1110,8 @@ Public Class WishChildForm_AC
     public string workTelephone{get;set;}
     public string homeTelephone{get;set;}
     public String tshirtSize{get;set;}
-    public Boolean medicalNeeds{get;set;}
-    public Boolean residingWishMedical{get;set;}
+    public String medicalNeeds{get;set;}
+    public String residingWishMedical{get;set;}
  }
  
  

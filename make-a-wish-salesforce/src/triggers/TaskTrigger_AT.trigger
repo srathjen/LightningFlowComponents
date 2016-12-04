@@ -44,14 +44,17 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             }
             
             if(updatedTask.Status == 'Completed' && Trigger.oldMap.get(updatedTask.id).Status != 'Completed')
-            {
-                if(String.valueOf(updatedTask.whatId).startsWith('500'))
-                {
-                    taskMap.put(updatedTask.id,updatedTask);
-                    taskOwnerIds.add(updatedTask.OwnerId);
-                    caseIds.add(updatedTask.whatId);
-                    
+            {	
+                if(updatedTask.whatId != null) {
+                    if(String.valueOf(updatedTask.whatId).startsWith('500'))
+                    {
+                        taskMap.put(updatedTask.id,updatedTask);
+                        taskOwnerIds.add(updatedTask.OwnerId);
+                        caseIds.add(updatedTask.whatId);
+                        
+                    }
                 }
+                
             }
             if(updatedTask.status=='Completed' && updatedTask.Subject != 'Volunteer wish follow-up activities not complete') {
                 validateTaskList.add(updatedTask);

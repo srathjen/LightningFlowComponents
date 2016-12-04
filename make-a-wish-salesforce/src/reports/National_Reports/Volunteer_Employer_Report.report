@@ -7,7 +7,7 @@
         <field>npe5__Affiliation__c$npe5__Contact__c.Email</field>
     </columns>
     <columns>
-        <field>npe5__Affiliation__c$npe5__Contact__c.Chapter_Name__c</field>
+        <field>npe5__Affiliation__c$npe5__Contact__c.Contact_Account_Name__c</field>
     </columns>
     <columns>
         <field>npe5__Affiliation__c$npe5__Contact__c.Hidden_Phone__c</field>

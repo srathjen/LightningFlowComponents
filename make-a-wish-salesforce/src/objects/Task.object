@@ -1420,4 +1420,23 @@ p.Status = &quot;Completed&quot;;
 result = sforce.connection.update([p]); 
 location.reload(true);</url>
     </webLinks>
+    <webLinks>
+        <fullName>Transfer_Task</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <hasMenubar>false</hasMenubar>
+        <hasScrollbars>true</hasScrollbars>
+        <hasToolbar>false</hasToolbar>
+        <height>350</height>
+        <isResizable>true</isResizable>
+        <linkType>page</linkType>
+        <masterLabel>Transfer Task</masterLabel>
+        <openType>newWindow</openType>
+        <page>VolunteerTaskTransfer_VF</page>
+        <position>topLeft</position>
+        <protected>false</protected>
+        <showsLocation>false</showsLocation>
+        <showsStatus>false</showsStatus>
+        <width>500</width>
+    </webLinks>
 </CustomObject>

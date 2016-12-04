@@ -10,6 +10,9 @@
         <field>FK_NAME</field>
     </columns>
     <columns>
+        <field>FK_$Contact.Contact_Account_Name__c</field>
+    </columns>
+    <columns>
         <field>FK_$Contact.Language_Notes__c</field>
     </columns>
     <columns>

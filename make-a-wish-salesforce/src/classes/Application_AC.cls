@@ -187,25 +187,30 @@ public class Application_AC{
         }
         if(currentVolunteer.is_Application__c == 'Approved' && showEdit ==false)
         {
-            editMode=true;
-            isSigned = True;
+              editMode=true;
+           //  showEdit = true;
+             isSigned = True;
         }
         if(currentVolunteer.is_Application__c == 'Rejected' && showEdit ==false)
         {
-            editMode=true;
+          //  editMode=true;
+            showEdit = true;
         }
         if(currentVolunteer.is_Application__c == 'Submit' && showEdit ==false)
         {
-            editMode=true;
+           // editMode=true;
+           showEdit = true;
         }
         if(currentVolunteer.is_Application__c == 'Partial Submit' && showEdit ==false)
         {
-            editMode=true;
+            //editMode=true;
+            showEdit = true;
         }
         
         if(currentVolunteer.is_Application__c == 'Fully Submit' && showEdit ==false)
         {
-            editMode=true;
+           // editMode=true;
+           showEdit = true;
             showSubmitandSign = True;
         }
         
@@ -362,14 +367,15 @@ public class Application_AC{
             }
             
             update currentVolunteer;
-            pr = new PageReference('/apex/Application_VF?showeditMode=false'+'&bgRequired='+bgTabPermission+'&trainingRequired='+trainingTabVisible);
-            pr.setRedirect(true);
+            pr = new PageReference('/apex/Application_VF?showeditMode=true'+'&bgRequired='+bgTabPermission+'&trainingRequired='+trainingTabVisible);
+            pr.setRedirect(true); 
+            
         }
         catch(Exception  e){
             system.debug('Error Message==>'+e);
         }
         
-        return Pr;
+        return pr;
     }
       
    /*This SubmitAndSign() method is used when the volunteer fill all the required field then it will redirect docusign page

@@ -79,13 +79,13 @@
                                                 <th>Max Capacity</th>
                                                 <th>Available Seats</th>
                                                 <th>Action</th>
-                                                <th>LMS</th>
+                                                <th>Link</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
                                             <apex:repeat value="{!TrainingRecordList}" var="training">
-                                                <apex:outputPanel rendered="{!(OR(AND(training.volOppSize == 0,training.status == 'Registered'),AND(training.volOppSize>0,training.status == 'Registered')))}">
+                                                <apex:outputPanel rendered="{!(OR(AND(training.volOppSize == 0,training.status == 'Registered'),AND(training.volOppSize < 0,training.status == 'Registered'),AND(training.volOppSize>0,training.status == 'Registered')))}">
                                                 <!--<apex:outputPanel rendered="{!(AND(training.volOppSize>0,training.status == 'Registered'))}">-->
                                                     <tr>
                                                         <td>{!training.orientationName}</td>
@@ -106,7 +106,7 @@
                                                             </apex:commandLink>
                                                         </td>
                                                         <td>
-                                                            <apex:commandLink action="{!viewLMS}" oncomplete="openLMS('{!ssoURL}','{!courseURL}');" rendered="{!(training.recordtypeId== classOffereningRecordtypeId)}">View Training
+                                                            <apex:commandLink action="{!viewLMS}" oncomplete="openLMS('{!ssoURL}','{!courseURL}');" rendered="{!(training.recordtypeId== classOffereningRecordtypeId)}">Start Course
                                                                 <apex:param name="lMSCourseId" value="{!training.courseId}" assignTo="{!lMSCourseId}"/>
                                                             </apex:commandLink>
                                                         </td>
@@ -116,8 +116,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                            </apex:outputPanel>
-                            
+                            </apex:outputPanel>                            
                             <apex:outputPanel id="myPanel">
                             
                                 <div class="table-wrap">
@@ -141,7 +140,7 @@
                                             <apex:repeat value="{!TrainingRecordList}" var="training">
 
                                                 <!--<apex:outputPanel rendered="{!OR(AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}">-->
-                                                <apex:outputPanel rendered="{!OR(AND(training.avilableSheets == 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}">
+                                                <apex:outputPanel rendered="{!OR(AND(training.avilableSheets == 0, training.volOppSize == 0),AND(training.avilableSheets < 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}">
                                                     <tr>
 
                                                         <td>{!training.orientationName}</td>

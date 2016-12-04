@@ -38,8 +38,8 @@ public class ContactTriggerHandler{
             }
         }
         
-    }*/
-    
+    }
+    */
   
    
     /*This method is used to update Affiliation object status to 'Pending'.*/
@@ -160,4 +160,72 @@ public class ContactTriggerHandler{
      if(newTaskList.size() > 0)
          insert newTaskList;
    }
+    public static void createConstituentContactCode(Set<Id> wishChildContactId,String ConCodeName){
+    
+         Map<Id,Id> affConIdMap=new Map<Id,Id>();
+         for(npe5__Affiliation__c affCurrRec:[SELECT id,npe5__Contact__c FROM npe5__Affiliation__c WHERE npe5__Contact__c IN:wishChildContactId]){
+             affConIdMap.put(affCurrRec.npe5__Contact__c ,affCurrRec.id);
+             
+         }
+         if(affConIdMap.size() > 0 && affConIdMap!= Null){
+             Contact_Constituent_Code__c CCC;
+             List<Contact_Constituent_Code__c> contactConCodeList=new List<Contact_Constituent_Code__c>();
+             list<Constituent_Code__c> consList = new list<Constituent_Code__c>();
+             consList = [SELECT id FROM Constituent_Code__c WHERE Name =:ConCodeName LIMIT 1];
+           //  Id constituentContactId=[SELECT id FROM Constituent_Code__c WHERE Name =:ConCodeName LIMIT 1].Id;
+             for(Id conId:affConIdMap.keyset()){
+                 CCC=new Contact_Constituent_Code__c();
+                 CCC.Affiliation__c=affConIdMap.get(conId);
+                 if(!consList.isEmpty())
+                 CCC.Constituent_Code__c = consList[0].Id;
+                 CCC.Hidden_Contact__c=conId;
+                 contactConCodeList.add(CCC);
+                 
+             }
+             if(contactConCodeList.Size() > 0 && contactConCodeList!=Null){
+                 Insert contactConCodeList;
+             }
+         }
+   
+    }
+    public static void createAffiliation(Map<Id,Id> wishFamilycontactAndAccountId){
+        npe5__Affiliation__c aff;
+        set<Id> conId=new Set<Id>();
+        List<npe5__Affiliation__c > affList =new List<npe5__Affiliation__c>();
+        for(Id currRec:wishFamilycontactAndAccountId.keySet()){
+            aff = new npe5__Affiliation__c ();
+            aff.npe5__Contact__c=currRec;
+            aff.npe5__Organization__c=wishFamilycontactAndAccountId.get(currRec);
+            affList.add(aff);
+            conId.add(currRec);
+        }
+        if(affList.size() > 0){
+            Insert affList;
+            createConstituentContactCode(conId,'Wish Parent/Guardians');
+        }
+    }
+    public static void updateMedicalProfConatctInfo(set<Id> MedicalProfContactSet){
+       Map<Id,npe4__Relationship__c > childContactMap = new Map<Id,npe4__Relationship__c >();
+       List<Contact> updateChildContactList = new List<Contact>();
+       Constant_AC  constant = new Constant_AC();
+       Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+       for(npe4__Relationship__c dbMedicalRelationShipRec : [SELECT Id,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__Contact__c,npe4__Type__c,Qualifying_Medical_Professional__c,npe4__Status__c FROM npe4__Relationship__c 
+                                                             WHERE npe4__RelatedContact__c IN:MedicalProfContactSet AND Qualifying_Medical_Professional__c =: TRUE AND npe4__Status__c =: 'Active']){
+                                                             
+           childContactMap.put(dbMedicalRelationShipRec.npe4__Contact__c,dbMedicalRelationShipRec);
+       }
+       
+       for(Contact dbChildContact : [SELECT Id,Hidden_Medical_Physician__c,Hidden_Medical_Physician_Email__c,RecordTypeId FROM Contact WHERE Id IN:childContactMap.KeySet() AND RecordTypeId =: wichChildRecordTypeId]){
+               if(childContactMap.containsKey(dbChildContact.Id)){
+                   
+                   contact updateChildContact = new contact();
+                   updateChildContact.Id = dbChildContact.Id;
+                   updateChildContact.Hidden_Medical_Physician__c = childContactMap.get(dbChildContact.Id).npe4__RelatedContact__r.Name;
+                   updateChildContact.Hidden_Medical_Physician_Email__c = childContactMap.get(dbChildContact.Id).npe4__RelatedContact__r.Email;
+                   updateChildContactList.add(updateChildContact);
+               }
+       }
+       if(updateChildContactList.size() > 0)
+       Update updateChildContactList;
+    }
 }

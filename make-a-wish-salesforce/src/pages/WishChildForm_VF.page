@@ -29,7 +29,7 @@
             position: fixed;
         font-weight:bold;
             z-index: 99;
-            top: 160px;
+            top: 140px;
             left: 5px;
         }
         .sideNav .navMenu {font-weight : 900;color:#0076d2;text-decoration:none;}
@@ -38,6 +38,67 @@
         }
         header,main {max-width : 1000px !important;}
     </style>
+      <style type="text/css">
+            .vfHelpText a            {position:relative;}
+            .vfHelpText a span       {display: none;}
+            .vfHelpText a:hover span {display: block;
+            position:absolute;
+            right:-15em; width:15em;
+            z-index:100;
+            border:1px solid #006bb;
+            background-color:#FEFDB9;
+            color:black;
+            }
+            
+            .pop-wrap, .pop-wrap-main-message {
+            position:fixed;
+            top: 20%;
+            left: 50%;
+            z-index: 9999;
+            width:90%;
+            max-width:35rem;
+            }
+            
+            .custPopup, .custPopup-main-message{
+            font-family:"arial", helvetica, sans-serif;
+            position: relative;
+            background: white;
+            border: 1px solid #006bb6;
+            border-radius: .25rem;
+            top: -20%;
+            left: -50%;
+            padding:1rem;
+            width: 100%;
+            height: auto;
+            padding: 5% 15% 15% 10%;
+            }
+            
+            .pop-wrap-main-message {top: 1%}
+            .custPopup-main-message{top: 0; padding:0 1rem 0;}
+            
+            .popupBackground{
+            position: fixed;
+            background: rgba(0,0,0,.4);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+            }
+            
+            .labelCol{width:180px;}
+            .sideNav {
+            position: fixed;
+            z-index: 99;
+            top: 140px;
+            left: 5px;
+        }
+        .sideNav .navMenu {font-weight : 900;color:#0076d2;text-decoration:none;}
+        .sideNav a {
+            text-decoration : none !important;
+        }
+        header,main {max-width : 1000px !important;}        
+        </style>
     
     <script>
     $(document).ready(function(){
@@ -127,7 +188,9 @@
                    <div id="childForm" class="panel-collapse collapse">
                        <a href="#mainSec">Main Section</a><br/> 
                        <a href="#myFav">My Favorites</a><br/> 
-                       <a href="#otherFav">Other Favourites</a>                     
+                       <a href="#otherFav">Other Favourites</a><br/>  
+                       <a href="#MyWish">My Wish</a> 
+                                          
                    </div>
                     <br/>
                    <!--<a data-toggle="collapse" href="#familyForm">
@@ -153,12 +216,11 @@
                 </div>
     <apex:form >
         <!------------------ Wish Child Form Starts ------------------------>
+      
         <apex:pageblock >
-            
+            <apex:pageMessages />
             <div class="container">
-                <div class="alert alert-danger">
-                    <strong><apex:pageMessages /></strong>
-                </div>
+                
               <!--  <div class="row header-padding">
                     <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/MakeAWishAmerica.PNG')}" styleClass="header-logo"/>
                     <center><p class="header-text">WISH CHILD FORM</p></center>
@@ -210,15 +272,15 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Primary Address">Wish Child’s Primary Address:</label>
-                                <apex:inputField value="{!currWishChild.Primary_Address__c}" styleClass="form-control"/>
+                                <apex:inputField value="{!currWishChild.Primary_Address__c}" styleClass="form-control required" style="border-left:5px solid red"/>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Mobile">Wish Child’s Mobile Telephone, if applicable:</label>
-                                <apex:inputField value="{!currWishChild.mobilePhone__c}" styleClass="form-control numeric a required" style="border-left:5px solid red"/>
+                                <apex:inputField value="{!currWishChild.mobilePhone__c}" styleClass="form-control numeric a" />
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="Email">Wish Child’s Email, if applicable:</label>
-                                <apex:inputField value="{!currWishChild.Email__c}" styleClass="form-control required" style="border-left:5px solid red"/>
+                                <apex:inputField value="{!currWishChild.Email__c}" styleClass="form-control" />
                             </div>
                               <div class="form-group col-md-4">
                                 <label for="Gender">Wish Child T-Shirt Size:</label>
@@ -329,6 +391,14 @@
                                 <label for="ThinkingWish">When thinking about a wish, some of my wish ideas were…</label>
                                 <apex:inputField value="{!currWishChild.When_thinking_some_of_my_wish_ideas_were__c}" styleClass="form-control" />
                             </div>
+                        </div>  
+                           <!------------------------------- My Wish DETAILS -------------------------------->  
+                        <div class="row top-space" id="MyWish">
+                            <div class="form-group">
+                                <span class="text-imp fl col-lg-12">My Wish:</span>
+                            </div>
+                        </div>
+                        <div class="row top-space">    
                             <div class="form-group col-sm-6">
                                 <label for="WishTo">MY WISH IS TO…</label>
                                 <apex:inputField value="{!currWishChild.MY_WISH_IS_TO__c}" styleClass="form-control" />
@@ -350,28 +420,32 @@
                                 <label for="WishNotes">Wish Notes…</label>
                                 <apex:inputField value="{!currWishChild.Wish_Notes__c}" styleClass="form-control" />
                             </div>
-                              <div class="form-group col-sm-6">
-                                <label for="WishTo">Wish Type</label>
-                                <apex:inputField value="{!currWishChild.WishType__c}" styleClass="form-control" />
-                            </div>
+                             
                         </div>
+                    </div>
+             
+             
                     
                     <div class="row" style="margin-left:25%;">
                         <div class="col-sm-12">
                             <div class="text-center">
-                                 <apex:Commandbutton value="Save & Exit" action="{!SaveandExit}" Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="btn btn-default mg-rt phonecheck" />
+                                 <apex:Commandbutton value="Save" action="{!SaveandwishChildExit}" Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="btn btn-default mg-rt phonecheck" />
                                  <apex:Commandbutton value="Next" action="{!WCFNext}" Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="btn btn-default mg-rt phonecheck" />
-                                  <apex:Commandbutton value="Cancel" action="{!cancelfunction}" style="margin-left: 10px;" styleClass="btn btn-default" immediate="true"/>
+                                  <apex:Commandbutton value="Exit" action="{!cancelfunction}" style="margin-left: 10px;" reRender="popup"  styleClass="btn btn-default" immediate="true"/>
                                </div>
                         </div>
                     </div>
                 </div>
             </div>
-          </div>  
+            
            <script>
             $(".date-input").datepicker({
                 autoclose: true,
                 endDate: '+0d'
+            });
+            $('#childForm a').click(function(){
+                $('#childForm a').css('font-size','1rem');
+                $(this).css('font-size','1.2rem');
             });
             function formatDate(date) {
             var d = new Date(date),
@@ -389,17 +463,31 @@
                var date = formatDate($(".date-input").val());
                $(".date-input").val(date);
             }
-            
-            $(window).scroll(function (event) {
-            var scroll = $(window).scrollTop();
-            if( scroll > 1200 )
-                $('.sideNav').css('top','10px');
-                else
-                $('.sideNav').css('top','160px');
-            });
            
           </script>
         </apex:pageblock>
+        
+<apex:outputPanel id="popup">
+   <apex:outputPanel rendered="{!displayPopup }">
+       
+    <div class="pop-wrap">
+        <div class="custPopup">
+         <apex:pageMessages id="showmsg13"/> 
+            <div class="container">
+                <div class="row">
+                    <div class="row" style="padding:10px">
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
+                        <apex:commandButton value="Save and Exit" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!SavewithExit}" style="height: 2.75rem;margin-top: 3% !important;width: 150px !important;"/>
+                        <apex:commandButton value="Exit without Saving" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!exitWithOutSave}"  style="height: 2.75rem; margin-left: 5%;margin-top: 3% !important;width: 185px !important;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</apex:outputPanel>
+</apex:outputPanel>
+   
     </apex:form>
        </main>
     </body>

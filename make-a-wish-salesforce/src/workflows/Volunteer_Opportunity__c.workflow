@@ -89,6 +89,15 @@
         <protected>false</protected>
     </fieldUpdates>
     <fieldUpdates>
+        <fullName>Volunteer_Opportunity</fullName>
+        <field>Status__c</field>
+        <literalValue>Pending</literalValue>
+        <name>VolunteerOpportunity:ChangeStatusPending</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Volunteer_Opportunity_Approval_Initiated</fullName>
         <description>Volunteer Opportunity Approval Process initiated</description>
         <field>Approval_Status__c</field>
@@ -104,6 +113,24 @@
         <field>Approval_Status__c</field>
         <literalValue>Approved</literalValue>
         <name>Volunteer Opportunity : Approved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Volunteer_Opportunity_ChangeStatusApprov</fullName>
+        <field>Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>VolunteerOpportunity:ChangeStatusApprove</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Volunteer_Opportunity_ChangeStatusInacti</fullName>
+        <field>Status__c</field>
+        <literalValue>Inactive</literalValue>
+        <name>Volunteer Opportunity:ChangeStatusInacti</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
@@ -190,5 +217,23 @@
         <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
         <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null,IsApproved__c  = false, isRejected__c = true, ISCHANGED(isRejected__c))</formula>
         <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Volunteer Opportunity%3AChangeStatusInactiveWorkflowRule</fullName>
+        <actions>
+            <name>Volunteer_Opportunity_ChangeStatusInacti</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Volunteer_Opportunity__c.Reason_Inactive__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Opportunity__c.Inactive__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
 </Workflow>

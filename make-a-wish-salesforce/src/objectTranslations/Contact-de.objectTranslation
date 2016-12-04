@@ -337,7 +337,7 @@
         <name>Department__c</name>
     </fields>
     <fields>
-        <label><!-- Diagnosis --></label>
+        <label><!-- Primary Diagnosis --></label>
         <name>Diagnosis__c</name>
     </fields>
     <fields>
@@ -457,6 +457,14 @@
         <name>Hidden_Last_Name__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Medical Physician Email --></label>
+        <name>Hidden_Medical_Physician_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Medical Physician --></label>
+        <name>Hidden_Medical_Physician__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Minor Participant --></label>
         <name>Hidden_Minor_Participant__c</name>
     </fields>
@@ -555,6 +563,10 @@
     <fields>
         <label><!-- How did you know MAWA (Other Notes) --></label>
         <name>How_did_you_know_MAWA_Other_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- ICD-10 Code --></label>
+        <name>ICD_10_Code__c</name>
     </fields>
     <fields>
         <label><!-- I’m on LinkedIn --></label>
@@ -738,16 +750,16 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Medical Condition --></label>
-        <name>Medical_Condition__c</name>
-    </fields>
-    <fields>
         <label><!-- Medical Needs --></label>
         <name>Medical_Needs__c</name>
     </fields>
     <fields>
         <label><!-- Middle Name --></label>
         <name>Middle_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
     </fields>
     <fields>
         <label><!-- Movie --></label>
@@ -1225,6 +1237,10 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Second Recipient Name --></label>
         <name>Second_Recipient_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Short Description --></label>
+        <name>Short_Description__c</name>
     </fields>
     <fields>
         <label><!-- Sibling Age --></label>

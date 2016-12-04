@@ -7,7 +7,7 @@
         <field>LAST_NAME</field>
     </columns>
     <columns>
-        <field>Contact.Chapter_Name__c</field>
+        <field>ACCOUNT.NAME</field>
     </columns>
     <columns>
         <field>Contact.Volunteer_Since__c</field>

@@ -12,20 +12,25 @@ public class TimeSheetTrigger_AT_Test {
       public testmethod static void InsertWishTimeSheet(){
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();   
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild(); 
-        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
+        Contact volunteerCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        Contact volunteerConOne = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Role__c  roleName = OrientationandTrainingUtil.createRole();
         Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
-        List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,volunteerContact.Id,2);
-        OrientationandTrainingUtil.crateWishTimeSheet(wishVolunteerOpportunityList);
-        OrientationandTrainingUtil.crateWishTimeSheet(wishVolunteerOpportunityList );
+        List<Volunteer_Opportunity__c> updateWishVolOppList = new List<Volunteer_Opportunity__c>();
+        List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,2);
+        wishVolunteerOpportunityList[0].Volunteer_Name__c = volunteerCon.Id;
+        wishVolunteerOpportunityList[1].Volunteer_Name__c = volunteerConOne.Id;
+        update wishVolunteerOpportunityList;
+        OrientationandTrainingUtil.crateWishTimeSheet(updateWishVolOppList);
+        OrientationandTrainingUtil.crateWishTimeSheet(updateWishVolOppList);
         List<Time_sheet__c> updateTimeSheetList = new List<Time_sheet__c>();
         List<Time_sheet__c> timeSheetList = [SELECT Id,Volunteer_Opportunity__c,Volunteer_Opportunity__r.Wish__c,Hours_spent__c  FROM Time_sheet__c WHERE Volunteer_Opportunity__r.Wish__c =: parentCase.Id];
         for(Time_sheet__c processTimeSheetRec : timeSheetList){
-            Time_sheet__c timeSheetInst = new Time_sheet__c();
-            timeSheetInst.id = processTimeSheetRec.Id;
-            timeSheetInst.Hours_spent__c = 10.30;
-            updateTimeSheetList.add(timeSheetInst);
+            Time_sheet__c  updateSheet = new Time_sheet__c ();
+            updateSheet.Id = processTimeSheetRec.id;
+            updateSheet.Hours_spent__c = 10.30;
+            updateTimeSheetList.add(updateSheet);
         }
         
         update updateTimeSheetList;
@@ -36,21 +41,23 @@ public class TimeSheetTrigger_AT_Test {
       /*Create Non Wish Volunteer Opportunity time sheet*/
        public testmethod static void InsertNonWishTimeSheet(){
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();   
-        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
+        Contact volunteerCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
         Non_Wish_Events__c nonWishEventId = OrientationandTrainingUtil.CreateEvent(chapterAccount.Id);
         Role__c  roleName = OrientationandTrainingUtil.createRole();
         Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
-        List<Volunteer_Opportunity__c> nonWishVolunteerOpportunityList =OrientationandTrainingUtil.NewnonWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,nonWishEventId.id,volunteerContact.Id,1);
-        OrientationandTrainingUtil.crateNonWishTimeSheet(nonWishVolunteerOpportunityList,2);
-        OrientationandTrainingUtil.crateNonWishTimeSheet(nonWishVolunteerOpportunityList,2);
+        List<Volunteer_Opportunity__c> nonWishVolunteerOpportunityList =OrientationandTrainingUtil.NewnonWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,nonWishEventId.id,1);
+        nonWishVolunteerOpportunityList[0].Volunteer_Name__c = volunteerCon.Id;
+        update nonWishVolunteerOpportunityList;
+        OrientationandTrainingUtil.crateNonWishTimeSheet(nonWishVolunteerOpportunityList,1);
+        OrientationandTrainingUtil.crateNonWishTimeSheet(nonWishVolunteerOpportunityList,1);
        
         List<Time_sheet__c> updateTimeSheetList = new List<Time_sheet__c>();
         List<Time_sheet__c> timeSheetList = [SELECT Id,Volunteer_Opportunity__c,Volunteer_Opportunity__r.Non_Wish_Event__c,Hours_spent__c  FROM Time_sheet__c WHERE Volunteer_Opportunity__r.Wish__c =: nonWishEventId.Id];
         for(Time_sheet__c processTimeSheetRec : timeSheetList){
-            Time_sheet__c timeSheetInst = new Time_sheet__c();
-            timeSheetInst.id = processTimeSheetRec.Id;
-            timeSheetInst.Hours_spent__c = 10.45;
-            updateTimeSheetList.add(timeSheetInst);
+            Time_sheet__c  updateSheet = new Time_sheet__c ();
+            updateSheet.Id = processTimeSheetRec.id;
+            updateSheet.Hours_spent__c = 10.30;
+            updateTimeSheetList.add(updateSheet);
         }
         
         update updateTimeSheetList;

@@ -127,6 +127,18 @@
                 <behavior>Readonly</behavior>
                 <field>Hidden_Diagn_Verifi_Received_Date__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>hidden_medical_physician__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Comment_1__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Comment_2__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -236,6 +248,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Hidden_Name_List__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Hidden_All_Primary__c</field>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>

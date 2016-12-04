@@ -11,7 +11,7 @@ Volunteers added to Parent Wish.
 
 public class CaseTriggerHandler {
     
-    public static void UpdateWishRecordIdentifier(Set<Id> ParentIdsSet, Set<Id> chapterIds, Id recTypeId){
+  public static void UpdateWishRecordIdentifier(Set<Id> ParentIdsSet, Set<Id> chapterIds, Id recTypeId){
         Integer increment;
         boolean IsFYChanged =false;
         Datetime  FYDate = Datetime.now();
@@ -63,7 +63,7 @@ public class CaseTriggerHandler {
         }
         System.debug('Parent Wishes 3:' + lstParentWishes);
         if(lstParentWishes.size() > 0)
-            update lstParentWishes;   
+            update lstParentWishes;
     } 
     
     /* Used to create action track for different stages based on Chapter and used to pull Case team members to child wishes*/
@@ -353,7 +353,7 @@ public class CaseTriggerHandler {
         }
         system.debug('budget Info 1: ' + budgetIds);
         Map<Id, List<Wish_Expense__c>> wishExpenseListbyId= new Map<Id, List<Wish_Expense__c>>();
-        List<Wish_Expense__c> wishExpenseList = [SELECT Id, Actual_Cash__c,Actual_In_Kind__c,FE_Posted_Cash__c, FE_Posted_In_Kind__c, Case__c FROM Wish_Expense__c WHERE Case__c In: budgetIds];
+        List<Wish_Expense__c> wishExpenseList = [SELECT Id, Budget_Cash__c, Budget_In_Kind__c, Actual_Cash__c,Actual_In_Kind__c,FE_Posted_Cash__c, FE_Posted_In_Kind__c, Case__c FROM Wish_Expense__c WHERE Case__c In: budgetIds];
         system.debug('budget Info 2: ' + wishExpenseList );
         for(Id caseId : budgetIds){
            for(Wish_Expense__c wishExpense : wishExpenseList ){
@@ -366,6 +366,8 @@ public class CaseTriggerHandler {
                }
            } 
         }
+        decimal totalBudCash=0;
+        decimal totalBudInKind=0;
         decimal totalActCash=0;
         decimal totalActInKind=0;
         decimal totalFECash=0;
@@ -373,6 +375,12 @@ public class CaseTriggerHandler {
         system.debug('budget Info 3: ' + wishExpenseListbyId);
         for(Id IdStatus : wishExpenseListbyId.keySet()){
             for(Wish_Expense__c expenseSatus : wishExpenseListbyId.get(IdStatus)){
+                if(expenseSatus.Budget_Cash__c!= null){
+                    totalBudCash= totalBudCash+ expenseSatus.Budget_Cash__c;
+                }
+                if(expenseSatus.Budget_In_Kind__c!= null){
+                    totalBudInKind= totalBudInKind+ expenseSatus.Budget_In_Kind__c;
+                }
                 if(expenseSatus.Actual_Cash__c != null){
                     totalActCash = totalActCash + expenseSatus.Actual_Cash__c;
                 }
@@ -386,16 +394,17 @@ public class CaseTriggerHandler {
                     totalFEInkind = totalFEInkind + expenseSatus.FE_Posted_In_Kind__c;
                 }
             }
-            if(totalFECash + totalFEInkind >0){
-                if( totalActCash != totalFECash || totalActInKind !=totalFEInkind ){
+            if(totalBudCash + totalBudInKind > 0 ){
+                if( (totalActCash + totalActInKind  == 0 || totalFECash + totalFEInkind ==0) || (totalActCash != totalFECash || totalActInKind !=totalFEInkind )){
                     ActualsMatch.add(IdStatus);
                 }
             }
+            totalBudCash =0;
+            totalBudInKind =0;
             totalActCash =0;
             totalActInKind =0;
             totalFECash =0;
             totalFEInkind =0;
-            
         }
         
         system.debug('budget Info 5: ' + ActualsMatch);
@@ -459,38 +468,52 @@ public class CaseTriggerHandler {
     
     public static void UpdateVolunteerWishGranted(Set<Id> wishIds)
     {
-        
+         Constant_AC  constant = new Constant_AC();
+        Id volunteerRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
         List<Contact> updateContactList = new List<Contact>();
-        for(Volunteer_Opportunity__c currVolOpp : [SELECT id,Volunteer_Name__c, Volunteer_Name__r.Number_of_wishes_active__c,
-                                                   Volunteer_Name__r.Number_of_wishes_granted__c FROM Volunteer_Opportunity__c WHERE Wish__c IN :wishIds AND Volunteer_Name__c != Null])
-        {
-            
-            if(currVolOpp.Volunteer_Name__c != Null)
-            {
+        Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
+        Map<Id,Id> sobjectMap = new Map<Id,Id>();
+          List<AggregateResult> groupedResults = [SELECT Wish__c volCount, Count_Distinct(Wish__r.Id)aver  FROM Volunteer_Opportunity__c WHERE Wish__c  IN: wishIds AND Wish__c != Null GROUP BY Wish__c ];
+         if(!groupedResults.isEmpty()){
+            for(AggregateResult arr : groupedResults){
+                volunteercountMap.put((ID)arr.get('volCount'),(integer)arr.get('aver'));
                 
-                Contact updateContact = new Contact();
-                updateContact.id = currVolOpp.Volunteer_Name__c;
-                if(currVolOpp.Volunteer_Name__r.Number_of_wishes_active__c > 0)
-                    updateContact.Number_of_wishes_active__c = currVolOpp.Volunteer_Name__r.Number_of_wishes_active__c - 1;
-                if(currVolOpp.Volunteer_Name__r.Number_of_wishes_granted__c > 0)
-                    updateContact.Number_of_wishes_granted__c = currVolOpp.Volunteer_Name__r.Number_of_wishes_granted__c + 1;
-                else
-                   updateContact.Number_of_wishes_granted__c = 1;
-                updateContactList.add(updateContact);
-            }
-            
+            } 
         }
-        if(updateContactList.size() > 0)
-            Update updateContactList;
+        for(Volunteer_Opportunity__c  dbVoluOpportunity : [SELECT Id,Wish__c,Volunteer_Name__c,Wish__r.Status From Volunteer_Opportunity__c WHERE Wish__c IN: volunteercountMap.KeySet() AND Wish__r.Status =: 'Granted']){
+            sobjectMap.put(dbVoluOpportunity.Volunteer_Name__c,dbVoluOpportunity.Wish__c); 
+        } 
         
+        for(Contact dbVolunteerCon : [SELECT Id,Number_of_wishes_granted__c,Number_of_wishes_active__c,RecordTypeId FROM Contact where Id IN: sobjectMap.KeySet() AND RecordTypeId =: volunteerRecordTypeId]){
+            if(sobjectMap.containsKey(dbVolunteerCon.Id)){
+                Contact newCon = new Contact();
+                newCon.Id = dbVolunteerCon.Id;
+                if(volunteercountMap.containsKey(sobjectMap.get(dbVolunteerCon.Id))){
+                if(dbVolunteerCon.Number_of_wishes_granted__c!= Null && Integer.valueOf(dbVolunteerCon.Number_of_wishes_granted__c) > 0 ){
+                newCon.Number_of_wishes_granted__c=Integer.valueOf(dbVolunteerCon.Number_of_wishes_granted__c) + Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
+                newCon.Number_of_wishes_active__c =Integer.valueOf(dbVolunteerCon.Number_of_wishes_active__c) - Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
+                }else{
+                newCon.Number_of_wishes_granted__c=  Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
+                newCon.Number_of_wishes_active__c =Integer.valueOf(dbVolunteerCon.Number_of_wishes_active__c) - Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
+                system.debug('@@@@@@@@@@ ELSE IF newCon.Number_of_wishes_active__c @@@@@@@@@@@'+ newCon.Number_of_wishes_granted__c);
+                }
+                updateContactList.add(newCon);
+               }
+            }
+        }  
+        if(updateContactList.size() > 0)
+        update updateContactList;
     }
     
+    //1.Used to create list of task for volunteers when the wish determination case is created.
+    //2.Based on "Wish Planning" recordtype, we are pulling the list of task which are stored under Chapter Action Track" object.
+    //3.Task are assigned to the volunteer user who got initially approved for the case with the "Wish Granter" role.
     public static void wishDeterminationSubCaseTaskCreation(List<Case> caseList, Set<Id> caseIds) {
         
         Constant_AC  constant = new Constant_Ac();    
         Id defaultRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
+        Id determinationChapterActionRT = Schema.Sobjecttype.Chapter_Action_Track__c.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         
-        System.debug('>>>>>>>>>>wishDeterminationSubCaseTaskCreation>>>>>>');
         Map<Id, Id> caseTeamMemberMap = new Map<Id, Id>();
         List<Task> wishDeterminationTaskList = new List<Task>();
         
@@ -501,31 +524,30 @@ public class CaseTriggerHandler {
             } 
         }
         
-        List<WishDeterminationSubCaseTaskList__c> subTaskList = WishDeterminationSubCaseTaskList__c.getAll().values();
-        System.debug('>>>>>>>>subTaskList>>>>>>>>>'+subTaskList);
-        
+        //Used get all chapter action track for wish determination case
+        List<Chapter_Action_Track__c> subTaskList = [SELECT Id, Task_Name__c, Description__c, Due_Days__c, Sort_Order__c FROM Chapter_Action_Track__c WHERE RecordtypeId =: determinationChapterActionRT];
         if(subTaskList.size() > 0) {
             for(Case createTasks : caseList) {
-                for(WishDeterminationSubCaseTaskList__c createSubTask : subTaskList) {
+                for(Chapter_Action_Track__c createSubTask : subTaskList) {
                     Task newSubTask = new Task();
-                    newSubTask.Subject = createSubTask.Task_Subject__c;
-                    newSubTask.ActivityDate = System.Today() + Integer.valueOf(createSubTask.Due_Date__c);
+                    newSubTask.Subject = createSubTask.Task_Name__c;
+                    if(createSubTask.Due_Days__c != null) {
+                        newSubTask.ActivityDate = Date.Today() + Integer.valueOf(createSubTask.Due_Days__c);
+                    }
                     newSubTask.WhatId = createTasks.ParentId;
                     newSubTask.RecordTypeId = defaultRecordTypeId;
                     newSubTask.WhoId = createTasks.ContactId;
+                    newSubTask.Description = createSubTask.Description__c;
                     if(caseTeamMemberMap.containsKey(createTasks.ParentId)) {
                         newSubTask.OwnerId = caseTeamMemberMap.get(createTasks.ParentId);
                     }
                     wishDeterminationTaskList.add(newSubTask);
                 }
             }
-            
-            System.debug('>>>>>>>>>>>>>wishDeterminationTaskList>>>>>>>>>>>>>'+wishDeterminationTaskList);
             if(wishDeterminationTaskList.size() > 0) {
                 insert wishDeterminationTaskList;
             }
         }
-        
     }
     
     // Used to create interview task
@@ -651,21 +673,45 @@ public class CaseTriggerHandler {
     }
     
     
-    //Used to update wish determination Open activities due dates
+    //1.If interview date is changed then the "Wish Determination" Task due dates are updated with new interview date
     public static void updateDeterminationTaskDueDates(Map<Id,Date> dueDateMap) {
         List<Task> updateDueDates = new List<Task>();
         Set<Id> checkInDupRecord = new Set<Id>();
         for(Task closeTask : [SELECT Id, Status,Subject, WhatId FROM Task WHERE WhatId IN : dueDateMap.keySet() AND Status != 'Completed']) {
             
             if(closeTask.Status != 'Completed') {
-                if(closeTask.Subject == 'Procure Icebreaker Gift' || closeTask.Subject == 'Conduct Interview') {
-                    closeTask.ActivityDate = dueDateMap.get(closeTask.WhatId);
+                if(closeTask.Subject == 'Procure Icebreaker Gift' || closeTask.Subject == 'Conduct initial wish visit') {
+                    if(dueDateMap.get(closeTask.WhatId) != null ) {
+                        closeTask.ActivityDate = dueDateMap.get(closeTask.WhatId);
+                    } else {
+                        closeTask.ActivityDate = null;
+                    }
                 }
-                if(closeTask.Subject == 'Complete/upload wish family packet' || closeTask.Subject == 'Submit wish family packet to chapter approval') {
-                    closeTask.ActivityDate = dueDateMap.get(closeTask.WhatId) + 5;
+                if(closeTask.Subject == 'Confirm wish visit with wish family') {
+                    if(dueDateMap.get(closeTask.WhatId) != null ) {
+                        closeTask.ActivityDate = dueDateMap.get(closeTask.WhatId).addDays(-2);
+                    } else {
+                        closeTask.ActivityDate = null;
+                    }
+                }
+                if(closeTask.Subject == 'Complete/upload wish family packet') {
+                    if(dueDateMap.get(closeTask.WhatId) != null ) {
+                        closeTask.ActivityDate = dueDateMap.get(closeTask.WhatId) + 5;
+                    } else {
+                        closeTask.ActivityDate = null;
+                    }
+                }
+                if(closeTask.Subject == 'Submit wish family packet to chapter approval') {
+                    if(dueDateMap.get(closeTask.WhatId) != null ) {
+                        closeTask.ActivityDate = dueDateMap.get(closeTask.WhatId) + 2;
+                    } else {
+                        closeTask.ActivityDate = null;
+                    }
                 }
                 if(closeTask.Subject == 'Check in with the family every 30 days') {
-                    closeTask.ActivityDate = dueDateMap.get(closeTask.WhatId) + 30;
+                    if(dueDateMap.get(closeTask.WhatId) != null ) {
+                        closeTask.ActivityDate = dueDateMap.get(closeTask.WhatId) + 30;
+                    }
                 }
             } else if(closeTask.Status == 'Completed' && closeTask.Subject == 'Check in with the family every 30 days') {
                 checkInDupRecord.add(closeTask.Id);
@@ -1230,5 +1276,18 @@ public class CaseTriggerHandler {
         if(insertchildCaseList.size() > 0)
         insert insertchildCaseList;
     }
+    /***Change the Volunteer Opportunity Status as Completed when the wish wish status as completed or closed ********/
+    public static void updateVolunteerOpportunityStatus(List<Id> caseId){
+         Constant_AC  constant = new Constant_Ac(); 
+         List<Volunteer_Opportunity__c> volunteerOppList = new List<Volunteer_Opportunity__c >(); 
+         Id wishVolunteerOpportunity = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
+         for(Volunteer_Opportunity__c currRec:[SELECT id,Status__c from Volunteer_Opportunity__c where Wish__c IN:caseId and RecordTypeId=:wishVolunteerOpportunity]){
+             currRec.Status__c='Completed';
+             volunteerOppList.add(currRec);
+         }
+         if(volunteerOppList.size() > 0 && volunteerOppList != Null){
+         Update volunteerOppList;
+         }
     
+    }
 }

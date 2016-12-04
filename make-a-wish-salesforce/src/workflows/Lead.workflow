@@ -23,6 +23,21 @@
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Lead_Email_Notification_for_Lead_Owner</template>
     </alerts>
+    <alerts>
+        <fullName>Send_Email_to_Office_Referrar_email_with_Wish_Referral_Form</fullName>
+        <description>Send Email to Office Referrar email with Wish Referral Form</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>furqan_maw@mstsolutions.com</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>sailappa_maw@mstsolutions.com</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Send_Wish_Referral_Form_to_Non_Active_Chapter_Office</template>
+    </alerts>
     <rules>
         <fullName>Lead%3A Email Notification for Lead Owner</fullName>
         <actions>

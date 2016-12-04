@@ -55,7 +55,12 @@
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
         <label>Wish Status Bar</label>
-        <layoutColumns/>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Hidden_All_Primary__c</field>
+            </layoutItems>
+        </layoutColumns>
         <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
@@ -111,6 +116,18 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Medical_Summary_Attachments__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>hidden_medical_physician__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Comment_1__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Comment_2__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

@@ -99,18 +99,19 @@ public class WishJourneyController_Test {
     }
     
     public static testMethod void caseWitWishCompleted() {
-        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
-        newLead.Part_A_Received__c = System.today();
-        insert newLead;
-        
+        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+        Lead currLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
+        currLead.Part_A_Received__c = Date.today();
+        currLead.Referred_Date__c = Date.today();
+        insert currLead;
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Completed';
         currentCase.Origin = 'Email';
-        currentCase.Lead__c = newLead.Id;
+        currentCase.Lead__c = currLead.Id;
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
     }
+
     
     public static testMethod void caseWitWishClosed() {
         Case currentCase = OrientationandTrainingUtil.createParentCase();

@@ -15,6 +15,8 @@ public class Relationship_AT_Test {
     // Method to invoke Contact Parent Guardian
     static testMethod void relatedContactParentGuardian()
     {
+        Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
         Contact contactWishParent =  OrientationandTrainingUtil.CreateWishFamily();
         
@@ -31,6 +33,8 @@ public class Relationship_AT_Test {
     // Method to invoke Contact Participant Guardian
     static testMethod void relatedContactParticipantGuardian()
     {
+        Constituent_Code__c  constituntId=OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  constituntParentId=OrientationandTrainingUtil.createWishChildContituentCode();
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
         Contact contactWishParent =  OrientationandTrainingUtil.CreateWishFamily();
         
@@ -45,6 +49,8 @@ public class Relationship_AT_Test {
     // Method to invoke Contact Parent/Legal Guardian
     static testMethod void relatedContactParentOrLegalGuardian()
     {
+        Constituent_Code__c  constituntId=OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  constituntParentId=OrientationandTrainingUtil.createWishChildContituentCode();
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
         Contact contactWishParent =  OrientationandTrainingUtil.CreateWishFamily();
         

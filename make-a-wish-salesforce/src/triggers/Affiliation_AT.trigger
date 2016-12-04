@@ -66,17 +66,32 @@ trigger Affiliation_AT on npe5__Affiliation__c (Before Insert,Before Update,Afte
         List<npe5__Affiliation__c> affilationsList = new List<npe5__Affiliation__c>();
         Set<Id> affiliationsIdsSet = new Set<Id>();
         Set<Id> volunteerContactIdsSet = new Set<Id>();
+        Set<id> VolunteerOppIdSet=new Set<id>();
         for(npe5__Affiliation__c modifiedAffiliation : Trigger.New) {
             if(modifiedAffiliation.npe5__Status__c == 'Active' && Trigger.oldMap.get(modifiedAffiliation.Id).npe5__Status__c != modifiedAffiliation.npe5__Status__c) {
                 volunteerContactIdsSet.add(modifiedAffiliation.npe5__Contact__c);
                 affilationsList.add(modifiedAffiliation);
                 affiliationsIdsSet.add(modifiedAffiliation.Id);
             }
+             if(modifiedAffiliation.npe5__Status__c== 'Inactive' && trigger.oldMap.get(modifiedAffiliation.id).npe5__Status__c != 'Inactive'){
+                VolunteerOppIdSet.add(modifiedAffiliation.npe5__Contact__c);//npe5__Contact__c,currRec.npe5__Status__c);
+        }
         }
         
         if(affilationsList.size()>0 && volunteerContactIdsSet.size()>0 && affiliationsIdsSet.size()>0) {
             AffiliationTriggerHandler.addUserToChaptterGroup(volunteerContactIdsSet,affiliationsIdsSet);
         }
+         
+      
+      if(VolunteerOppIdSet.size() > 0 && VolunteerOppIdSet != Null){
+            System.Debug('Trigger List @@@@@@@@@@*******');
+          if(!Test.isRunningTest()) {
+              InactiveVolunteerHandler.createTaskforVolunteerManager(VolunteerOppIdSet);
+          }
+          
+             
+        }
+        
     }
     if(Trigger.isAfter){
         for(npe5__Affiliation__c currRec:trigger.new){

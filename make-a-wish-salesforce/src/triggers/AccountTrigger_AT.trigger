@@ -1,6 +1,10 @@
+/***************************************************************************************************
+Author      : MST Solutions
+Date        : 10/15/2016
+Description : AccountTrigger_AT is used to assign the chapter account name for inkind account when volunteer creates inkind account.
+After insert In-Kind account it is automatically send for approval to wish co-ordinator of the associated chapter
+*****************************************************************************************************/
 trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
-    
-    
     //Before insert update wish co-ordinator email value to the hidden field to send emai alert
     if(trigger.isBefore && trigger.isInsert){
         string userId = UserInfo.getUserId();
@@ -9,7 +13,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         list<Contact> contactList;
         if(userList.Size() == 1){
             contactId = userList[0].ContactId;
-            contactList = [SELECT ID,AccountId,Account.Wish_Co_ordinator__c FROM Contact WHERE ID =: contactId AND Account.Wish_Co_ordinator__c != Null];
+            contactList = [SELECT ID,AccountId,Account.Wish_Co_ordinator__c FROM Contact WHERE ID =: contactId];
         }
         set<id> chapterAccountIdsSet = new set<id>();
         map<id,string> chapterMap = new map<id,string>();
@@ -19,7 +23,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
                 currentAccount.Chapter_Name__c = contactList[0].AccountId;
             }
             if(currentAccount.RecordTypeId == inKindDonorsAccountRecordTypeId && currentAccount.Chapter_Name__c != Null){
-               
+                
                 chapterAccountIdsSet.add(currentAccount.Chapter_Name__c);
             } 
         }
@@ -37,8 +41,6 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         
     }
     
-    
-    
     //After insert trigger to fire the approval process once inkind donor account is created
     if(trigger.isAfter && trigger.isInsert){
         Set<Id> chaptterAccountIdSet = new Set<Id> ();
@@ -55,7 +57,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         }
         if(chaptterAccountIdSet.size() > 0){
             
-            for(Account daAccount : [SELECT Id,Wish_Co_ordinator__c, Volunteer_Manager__c FROM Account WHERE Id IN: chaptterAccountIdSet]){
+            for(Account daAccount : [SELECT Id,Wish_Co_ordinator__c, Volunteer_Manager__c,RecordTypeId  FROM Account WHERE Id IN: chaptterAccountIdSet AND RecordTypeId =: inKindDonorsAccountRTId ]){
                 chaptterMap.put(daAccount.Id,daAccount.Wish_Co_ordinator__c);
                 volunteerManagersMap.put(daAccount.Id,daAccount.Volunteer_Manager__c);
             }
@@ -64,6 +66,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         for(In_Kind_Donation_Reimbursement__c inKindRecordCheck : [SELECT Id, In_Kind_Donor_Name__c FROM In_Kind_Donation_Reimbursement__c WHERE In_Kind_Donor_Name__c IN :inKindDonorAccountSet]) {
             inKindDonorAccountWithChildRecords.add(inKindRecordCheck.In_Kind_Donor_Name__c);
         }
+         if(chaptterMap.size() > 0){
         for(Account inKindAccount : trigger.new){
             if(chaptterMap.containsKey(inKindAccount.Chapter_Name__c) && !String.isEmpty(chaptterMap.get(inKindAccount.Chapter_Name__c))){
                 Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
@@ -74,6 +77,11 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
                 req.setSkipEntryCriteria(true);
                 Approval.ProcessResult result = Approval.process(req);
             }
+            else{
+                inKindAccount.addError('There is no Wis Co-ordinator to approve this record');
+                
+            }
+        }
         }
     }
     

@@ -48,7 +48,7 @@ public class UserTrigger_AT_Test {
             Contact chaptercontact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
             Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon(); 
             case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-            
+            Account chapterAccountWithVolunteerManager=OrientationandTrainingUtil.createVolunteerAccountwithVolunteerManager();
             case updatecase = new Case();
             updatecase.isEmailWishGranter__c = true;
             updatecase.InActiveWishGranter__c = 'test';
@@ -62,7 +62,7 @@ public class UserTrigger_AT_Test {
             CaseTeamMember ArizonacasTemMember = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,ArizonaVolunterrUser.Id,role.Id);
             CaseTeamMember AlabamacasTemMember = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,AlabamaVolunterrUser.Id,role.Id);
             User queryAlabamaUser = [SELECT Id,IsActive from User WHERE Id =:AlabamaVolunterrUser.Id];
-            
+            Volunteer_Opportunity__c volunteerOpportunityRec= OrientationandTrainingUtil.NewnonWishVolunteerOpportunity(chapterAccountWithVolunteerManager.Id,chaptercontact.Id);
             user updateUser = new User();
             updateUser.Id = queryAlabamaUser.Id;
             updateUser.IsActive = false;
