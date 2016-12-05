@@ -171,9 +171,10 @@ insert newChapter;*/
         
         Profile volunteerSystemAdministrator = [SELECT Id FROM Profile WHERE Name = 'System Administrator'];
         
-        User newPvolunteerSystemAdministratorUser = new User(  firstname = 'Jon',lastName = 'Edwards',email = 'jon@gmail.com',Username = 'jon@gmail.com',
+        User newPvolunteerSystemAdministratorUser = new User(  firstname = 'Jon',lastName = 'Edwards',email = 'jon@gmail.com',Username = 'joncena123p0@gmail.com',
                                                     EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
                                                     LanguageLocaleKey = 'en_US',ProfileId = volunteerSystemAdministrator.Id,isActive = true,Statecode = 'AZ');
+        
         insert newPvolunteerSystemAdministratorUser ;
         return newPvolunteerSystemAdministratorUser ;
         
