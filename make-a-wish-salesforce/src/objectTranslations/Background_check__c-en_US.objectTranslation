@@ -37,8 +37,16 @@
         <name>Date__c</name>
     </fields>
     <fields>
+        <label><!-- From Mulesoft --></label>
+        <name>From_Mulesoft__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Volunteer Contact Email --></label>
         <name>Hidden_Volunteer_Contact_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
     </fields>
     <fields>
         <label><!-- Requested By --></label>

@@ -7,13 +7,13 @@ public class WishClearanceSendNow_AC{
     
     public WishClearanceSendNow_AC(ApexPages.StandardController controller){
         
-        currentParentCase = [SELECT Id,ContactId,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
+        currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
         
     }
     
     public void SendtoDocuSign(){
         
-        if(currentParentCase.wish_involves_air_travel__c == Null){
+        if(currentParentCase.wish_involves_air_travel__c == Null ||currentParentCase.Description == Null ){
             DisplayErrorMessage();
         }
         else{
@@ -122,7 +122,10 @@ public class WishClearanceSendNow_AC{
     }
     
     public pagereference DisplayErrorMessage(){
+        if(currentParentCase.wish_involves_air_travel__c == Null)
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Please Select Wish Involves Air Travel'));
+        if(currentParentCase.Description == Null )
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Please give the value to Description'));
         return null;
     }
 }

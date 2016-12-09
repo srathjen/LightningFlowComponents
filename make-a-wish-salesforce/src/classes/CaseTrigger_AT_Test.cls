@@ -188,7 +188,12 @@ public class CaseTrigger_AT_Test {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         update ChapterAccount;
+        Regions__c regionRec = OrientationandTrainingUtil.createRegion(chapterAccount.Id);
+        insert regionRec;
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        wishChild.Region_Chapter__c = ChapterAccount.Id;
+        wishChild.Region_Code__c =regionRec.Id;
+        update wishChild; 
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         parentCase.Status = 'Ready To Assign';

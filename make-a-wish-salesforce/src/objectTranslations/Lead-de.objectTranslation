@@ -185,6 +185,10 @@
         <name>Diagnosis_Pending_Days__c</name>
     </fields>
     <fields>
+        <label><!-- From Mulesoft --></label>
+        <name>From_Mulesoft__c</name>
+    </fields>
+    <fields>
         <label><!-- Gender --></label>
         <name>Gender__c</name>
         <picklistValues>
@@ -569,6 +573,10 @@
         <name>Middle_Name__c</name>
     </fields>
     <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
+    </fields>
+    <fields>
         <label><!-- TPNMonth --></label>
         <name>Month__c</name>
         <picklistValues>
@@ -771,6 +779,11 @@
     <fields>
         <label><!-- Referrer Zip --></label>
         <name>Referrer_Zip__c</name>
+    </fields>
+    <fields>
+        <label><!-- Region Code --></label>
+        <name>Region_Code__c</name>
+        <relationshipLabel><!-- Leads --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Relationship to child --></label>

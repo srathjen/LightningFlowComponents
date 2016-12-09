@@ -21,24 +21,24 @@
         <name>Address_Line_1_del__c</name>
     </fields>
     <fields>
-        <label><!-- Amount2 --></label>
-        <name>Ammount2__c</name>
+        <label><!-- Amount 2 --></label>
+        <name>Ammount_2__c</name>
     </fields>
     <fields>
-        <label><!-- Amount1 --></label>
-        <name>Amount1__c</name>
+        <label><!-- Amount 1 --></label>
+        <name>Amount_1__c</name>
     </fields>
     <fields>
-        <label><!-- Amount3 --></label>
-        <name>Amount3__c</name>
+        <label><!-- Amount 3 --></label>
+        <name>Amount_3__c</name>
     </fields>
     <fields>
-        <label><!-- Amount4 --></label>
-        <name>Amount4__c</name>
+        <label><!-- Amount 4 --></label>
+        <name>Amount_4__c</name>
     </fields>
     <fields>
-        <label><!-- Amount5 --></label>
-        <name>Amount5__c</name>
+        <label><!-- Amount 5 --></label>
+        <name>Amount_5__c</name>
     </fields>
     <fields>
         <label><!-- Appeal --></label>
@@ -91,6 +91,26 @@
     <fields>
         <label><!-- Date of request --></label>
         <name>Date_of_request__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description 1 --></label>
+        <name>Description_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description 2 --></label>
+        <name>Description_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description 3 --></label>
+        <name>Description_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description 4 --></label>
+        <name>Description_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description 5 --></label>
+        <name>Description_5__c</name>
     </fields>
     <fields>
         <label><!-- Documentation --></label>
@@ -208,6 +228,10 @@
     <fields>
         <label><!-- Reference --></label>
         <name>Reference__c</name>
+    </fields>
+    <fields>
+        <label><!-- Region Code --></label>
+        <name>Region_Code__c</name>
     </fields>
     <fields>
         <label><!-- State --></label>
@@ -440,6 +464,26 @@
     <fields>
         <label><!-- Unique Wish Identifier --></label>
         <name>Unique_Wish_Identifier__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vendor 1 --></label>
+        <name>Vendor_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vendor 2 --></label>
+        <name>Vendor_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vendor 3 --></label>
+        <name>Vendor_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vendor 4 --></label>
+        <name>Vendor_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Vendor 5 --></label>
+        <name>Vendor_5__c</name>
     </fields>
     <fields>
         <label><!-- Volunteer Name --></label>
@@ -749,6 +793,10 @@
     </layouts>
     <layouts>
         <layout>Reimbursement</layout>
+        <sections>
+            <label><!-- Attachment information --></label>
+            <section>Attachment information</section>
+        </sections>
         <sections>
             <label><!-- Attachments --></label>
             <section>Attachments</section>

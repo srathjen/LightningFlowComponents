@@ -1,10 +1,16 @@
-trigger Relationship_AT on npe4__Relationship__c (after insert,before insert) {
+trigger Relationship_AT on npe4__Relationship__c (after insert,before insert) 
+{
 
-    if(trigger.isBefore && Trigger.isInsert){
+    if(trigger.isBefore && Trigger.isInsert)
+    {
         Set<Id> relatedContactId = new Set<Id>();
         
-        for(npe4__Relationship__c newRecord :trigger.new){
+        for(npe4__Relationship__c newRecord :trigger.new)
+        {
+          if(newRecord.Migrated_Record__c == false)
+          {
            relatedContactId.add(newRecord.npe4__RelatedContact__c);
+          }
         }
         
         Map<Id,Contact> relatedConMap = new Map<Id,Contact>([SELECT Id,Name,IsParentGuardian__c FROM Contact WHERE Id IN:relatedContactId AND (IsParentGuardian__c = 'ParentGuardian' OR IsParentGuardian__c = 'Participant')]);
@@ -18,7 +24,8 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert) {
             }
         }
     }
-    if(trigger.isInsert && trigger.isAfter){
+    if(trigger.isInsert && trigger.isAfter)
+    {
         Id contactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Wish Child').getRecordTypeId();
          Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Wish Family').getRecordTypeId();
         Id medicalProfRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Medical Professional').getRecordTypeId();
@@ -27,15 +34,20 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert) {
         set<string> relationshipIdsSet = new set<string>();
         Map<id,Contact> medicalProfContactMap = new Map<id,Contact>();
         set<id> relatedContactId = new set<id>();
+        Map<Id,Contact> updateChildContactMap = new Map<Id,Contact>();
         List<contact> updateChildContactList = new List<contact>();
         map<string,list<npe4__Relationship__c>> relationshipMap = new map<string,list<npe4__Relationship__c>>();
-        for(npe4__Relationship__c newRecord :trigger.new){
+        for(npe4__Relationship__c newRecord :trigger.new)
+        {
+           if(newRecord.Migrated_Record__c == false)
+           {
             if(newRecord.npe4__Contact__c != Null && newRecord.Wish_Family_participants__c == 'Parent/Guardian'){
                 relationshipIdsSet.add(newRecord.id);
             }
             
              if(newRecord.npe4__Contact__c != Null && newRecord.npe4__Type__c== 'Medical Professional' && newRecord.Qualifying_Medical_Professional__c == true && newRecord.npe4__Status__c == 'Active'){
                relatedContactId.add(newRecord.npe4__RelatedContact__c);
+            }
             }
         }
         
@@ -52,7 +64,8 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert) {
                    newContact.Id = newRecord.npe4__Contact__c;
                    newContact.Hidden_Medical_Physician__c = medicalProfContactMap.get(newRecord.npe4__RelatedContact__c).Name;
                    newContact.Hidden_Medical_Physician_Email__c = medicalProfContactMap.get(newRecord .npe4__RelatedContact__c).Email;
-                   updateChildContactList.add(newContact); 
+                   //updateChildContactList.add(newContact); 
+                   updateChildContactMap.put(newContact.Id,newContact);
                }
            }
         }
@@ -83,7 +96,7 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert) {
                 else{
                     parentGuardianNames =  upadteContact.Parent_Legal_Guardian__c;
                     if(!parentGuardianNames.contains(currRecoed.npe4__RelatedContact__r.Name))
-                        upadteContact.Parent_Legal_Guardian__c = upadteContact.Parent_Legal_Guardian__c + ',' + currRecoed.npe4__RelatedContact__r.Name;
+                        upadteContact.Parent_Legal_Guardian__c = upadteContact.Parent_Legal_Guardian__c + ','+' ' + currRecoed.npe4__RelatedContact__r.Name;
                 }
                 system.debug('upadteContact.Recipient_Email__c'+ upadteContact.Recipient_Email__c);
                 if( String.isBlank(upadteContact.Recipient_Email__c) && String.isBlank(upadteContact.First_Recipient_Name__c) ) {
@@ -104,8 +117,12 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert) {
             update updatedConList;
         }
         
-        if(updateChildContactList.size() > 0)
-         update updateChildContactList;
+        if(updateChildContactMap.size() > 0)
+        {
+         update updateChildContactMap.values();
+         System.debug('updateChildContactList++++++++++++++++++++++++++++ ' + updateChildContactList);
+         
+        }
         
     }
     

@@ -16,8 +16,10 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
     public Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
     public Id wishFamilyRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
     public Id organizationRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.OrganizationRT).getRecordTypeId();
+    public Id HouseholdRT=Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.HouseholdRT).getRecordTypeId();
     public Id parentwishRecTypeId= Schema.SObjectType.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
     public Id partARecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get(constant.partARecordTypeId).getRecordTypeId();
+    public Id chapterecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
     public boolean falg = true;
     Map<String,Account> newAccountMap = new Map<String,Account>();
     Map<String,Account> medicalAccountMap = new Map<String,Account>();
@@ -140,13 +142,15 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 }
             }
             
-            for(Account conAccount : [SELECT Id,Name FROM Account Where Id IN: accountIds]){
+            for(Account conAccount : [SELECT Id,Name,RecordTypeId FROM Account Where Id IN: accountIds]){
                 if(convertedAccountMap.containsKey(conAccount .Id)){
                     if(convertedAccountMap.get(conAccount.Id).FirstName == Null){
                         conAccount.Name = convertedAccountMap.get(conAccount.Id).LastName + ' '+ ' & '+' ' +'Family Household';
+                        conAccount.RecordTypeId=HouseholdRT;
                     }
                     else{
                         conAccount.Name = convertedAccountMap.get(conAccount.Id).FirstName + ' ' +convertedAccountMap.get(conAccount.Id).LastName + ' '+ ' & '+' ' +'Family Household';
+                        conAccount.RecordTypeId=HouseholdRT;
                     }
                     updateAcccountList.add(conAccount );
                 }
@@ -682,13 +686,13 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         {
             if(zipCodeReferralMap.containsKey(currLead.PostalCode))
             {
-               currLead.Office_Referral_Email__c= zipCodeReferralMap.get(currLead.PostalCode);
-               
+                currLead.Office_Referral_Email__c= zipCodeReferralMap.get(currLead.PostalCode);
+                
             }
             else  if(zipCodeReferralMap.containsKey(currLead.Referrer_Zip__c))
             {
-                 currLead.Office_Referral_Email__c= zipCodeReferralMap.get(currLead.Referrer_Zip__c);
-               
+                currLead.Office_Referral_Email__c= zipCodeReferralMap.get(currLead.Referrer_Zip__c);
+                
             }
             else
             {
@@ -883,15 +887,28 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         List<Case> newCaseList = new List<Case>();
         Map<Id,String> accountEmailMap = new Map<Id,String>();
         set<Id> accountIdSet = new Set<Id>();
-        
+        Map<Id,String> emailMap = new Map<Id,String>();
+        for(Lead process : LeadList){
+            accountIdSet.add(process.ChapterName__c);
+        }
+        if(accountIdSet.size() > 0){
+            for(Account dbChapterAcc : [SELECT Id,MAC_Email_del__c,RecordTypeId FROM Account WHERE Id IN:accountIdSet AND RecordTypeId =: chapterecordTypeId]){
+                emailMap.put(dbChapterAcc.Id,dbChapterAcc.MAC_Email_del__c);
+            }
+        }
         for(Lead processLead : LeadList){
             case newcase = new case();
-            newCase.status = 'Open';
+            newCase.status = 'New';
             newCase.origin = 'Email';
+            newCase.Local_MCA_Team__c = label.ContactIdValue;
             newCase.recordTypeId = partARecordTypeId;
             newCase.OwnerId = processLead.OwnerId;
+            if(emailMap.containsKey(processLead.ChapterName__c)){
+                newCase.MAC_Email__c = emailMap.get(processLead.ChapterName__c);
+            }
             newCase.Lead__c = processLead.id;
             newCase.AccountId = processLead.ChapterName__c;
+            newCase.ChapterName__c = processLead.ChapterName__c;
             newCaseList.add(newcase);
         }
         
@@ -966,5 +983,50 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             }
         }
     }
-   
+    
+    /*public static void LeadRegionValidation(Map<Id, Lead> leadRegionCodeValidationMap){
+        
+        Map<Id,Id> defaultRegionLeadMap = new Map<Id, Id>();
+        Set<Id> defualtRegionChapterSet = new Set<Id>();
+        for(Lead regionCheck : leadRegionCodeValidationMap.values()) {
+            defualtRegionChapterSet.add(regionCheck.ChapterName__c);
+            defaultRegionLeadMap.put(regionCheck.ChapterName__c, regionCheck.Id);
+        }
+        
+        Set<Id> chapterRegionSet = new Set<Id>();
+        if(defualtRegionChapterSet.size() > 0) {
+            for(AggregateResult aggr : [SELECT Count(Id) cnt ,Chapter_Name__c cName FROM Regions__c WHERE Chapter_Name__c != null AND Chapter_Name__c IN : defualtRegionChapterSet GROUP BY Chapter_Name__c]) {
+                chapterRegionSet.add((Id)aggr.get('cName'));
+            }
+            
+            if(chapterRegionSet.size() > 0) {
+                for(Lead inValidRegion : leadRegionCodeValidationMap.values()) {
+                    if(!chapterRegionSet.contains(inValidRegion.ChapterName__c) && defaultRegionLeadMap.containsKey(inValidRegion.ChapterName__c)) {
+                        if(leadRegionCodeValidationMap.containsKey(defaultRegionLeadMap.get(inValidRegion.ChapterName__c))) {
+                            leadRegionCodeValidationMap.get(defaultRegionLeadMap.get(inValidRegion.ChapterName__c)).addError('Please select region that belongs to chapter'); 
+                        }
+                    }
+                }
+            }
+        }
+    }*/
+    
+    public static void populateRegionCode(Map<Id, Lead> leadMap, Set<Id> leadChapterSet) {
+        
+        Set<Id> chapterRegionSet = new Set<Id>();
+        Set<Id> defaultchapterRegionSet = new Set<Id>();
+        for(AggregateResult aggr : [SELECT Count(Id) cnt ,Chapter_Name__c cName FROM Regions__c WHERE Chapter_Name__c != null AND Chapter_Name__c IN : leadChapterSet GROUP BY Chapter_Name__c]) {
+            chapterRegionSet.add((Id)aggr.get('cName'));
+        }
+        
+        List<Regions__c> regionCodeList = [SELECT Id, Chapter_Name__c FROM Regions__c WHERE Chapter_Name__c = null LIMIT 1];
+        
+        for(Lead leadUpdate : leadMap.values()) {
+            if(!chapterRegionSet.contains(leadUpdate.ChapterName__c)) {
+                if(regionCodeList.size() > 0) {
+                    leadUpdate.Region_Code__c = regionCodeList.get(0).Id;
+                }
+            }
+        }
+    }
 }

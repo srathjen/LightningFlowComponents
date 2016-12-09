@@ -449,6 +449,10 @@
         <name>Food__c</name>
     </fields>
     <fields>
+        <label><!-- From Mulesoft --></label>
+        <name>From_Mulesoft__c</name>
+    </fields>
+    <fields>
         <label><!-- Game --></label>
         <name>Game__c</name>
     </fields>
@@ -922,6 +926,10 @@ and the date it was or will be granted. --></help>
         <name>Primary_Address__c</name>
     </fields>
     <fields>
+        <label><!-- Primary Diagnosis Condition Description --></label>
+        <name>Primary_Diagnosis_Condition_Description__c</name>
+    </fields>
+    <fields>
         <label><!-- Professional Skills (Other Notes) --></label>
         <name>Professional_Skills_Other_Notes__c</name>
     </fields>
@@ -1005,6 +1013,10 @@ and the date it was or will be granted. --></help>
             <masterLabel>Yes</masterLabel>
             <translation><!-- Yes --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- RE Record Id --></label>
+        <name>RE_Record_Id__c</name>
     </fields>
     <fields>
         <label><!-- Race/Ethnicity Details --></label>
@@ -1139,6 +1151,16 @@ and the date it was or will be granted. --></help>
         <name>Referral_Age__c</name>
     </fields>
     <fields>
+        <label><!-- Region Chapter --></label>
+        <name>Region_Chapter__c</name>
+        <relationshipLabel><!-- Contacts (Region Chapter) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Region Code --></label>
+        <name>Region_Code__c</name>
+        <relationshipLabel><!-- Contacts --></relationshipLabel>
+    </fields>
+    <fields>
         <label><!-- Relationship --></label>
         <name>Relationship__c</name>
         <picklistValues>
@@ -1269,6 +1291,38 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Restaurant --></label>
         <name>Restaurant__c</name>
+    </fields>
+    <fields>
+        <label><!-- SD1 Condition Description --></label>
+        <name>SD1_Condition_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- SD1 ICD Code --></label>
+        <name>SD1_ICD_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SD2 Condition Description --></label>
+        <name>SD2_Condition_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- SD2 ICD Code --></label>
+        <name>SD2_ICD_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SD3 Condition Description --></label>
+        <name>SD3_Condition_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- SD3 ICD Code --></label>
+        <name>SD3_ICD_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- SD4 Condition Description --></label>
+        <name>SD4_Condition_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- SD4 ICD Code --></label>
+        <name>SD4_ICD_Code__c</name>
     </fields>
     <fields>
         <label><!-- Second Recipient Email --></label>
@@ -2655,16 +2709,12 @@ provide contact information for each site on which you are active. --></help>
             <section>Dev &amp; QA</section>
         </sections>
         <sections>
+            <label><!-- Diagnosis Verification --></label>
+            <section>Diagnosis Verification</section>
+        </sections>
+        <sections>
             <label><!-- Household Address --></label>
             <section>Household Address</section>
-        </sections>
-        <sections>
-            <label><!-- Language &amp; Communication --></label>
-            <section>Language &amp; Communication</section>
-        </sections>
-        <sections>
-            <label><!-- Publicity --></label>
-            <section>Publicity</section>
         </sections>
         <sections>
             <label><!-- WIsh Child Details --></label>
@@ -2710,6 +2760,10 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Wish Family --></label>
         <name>Wish_Family</name>
     </recordTypes>
+    <validationRules>
+        <errorMessage><!-- You should select only chapter account --></errorMessage>
+        <name>Contact_Account_Lookup_Validation</name>
+    </validationRules>
     <validationRules>
         <errorMessage><!-- Birthdate should not be greater than today --></errorMessage>
         <name>Contact_Birthdate_Validation</name>

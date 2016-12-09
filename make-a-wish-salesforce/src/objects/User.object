@@ -93,6 +93,14 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>From_Mulesoft__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>From Mulesoft</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Hidden_Role_Name_Id__c</fullName>
         <description>This field is used to store the role name for back end purpose.</description>
         <externalId>false</externalId>

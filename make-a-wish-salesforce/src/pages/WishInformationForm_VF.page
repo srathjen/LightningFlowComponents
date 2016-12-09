@@ -796,8 +796,8 @@
     </div>
 </apex:outputPanel>
 </apex:outputPanel>
-  <apex:outputPanel id="btpopup">
-   <apex:outputPanel rendered="{!displayPopup }">
+ <apex:outputPanel id="btpopup">
+   <apex:outputPanel rendered="{!displayExitPopup}">
        
     <div class="pop-wrap">
         <div class="custPopup">
@@ -816,6 +816,7 @@
     </div>
 </apex:outputPanel>
 </apex:outputPanel>
+ 
  
     </apex:form>
      </main>

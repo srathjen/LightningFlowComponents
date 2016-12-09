@@ -25,8 +25,10 @@ trigger EmailTrigger_AT on EmailMessage (After insert) {
            }
             
             for(EmailMessage newMessage : trigger.new){
+            System.debug('newMessage.ParentId********'+newMessage.ParentId+'newMessage.FromAddress*****'+newMessage.FromAddress);
              if(caseMap.containsKey(newMessage.ParentId )){
-                 if(caseMap.get(newMessage.ParentId).MAC_Email__c == newMessage.FromAddress ){
+                // if(caseMap.get(newMessage.ParentId).MAC_Email__c == newMessage.FromAddress )
+                 {
                      CaseComment newComment = new CaseComment();
                      newComment.CommentBody = newMessage.TextBody;
                      newComment.ParentId = newMessage.ParentId;

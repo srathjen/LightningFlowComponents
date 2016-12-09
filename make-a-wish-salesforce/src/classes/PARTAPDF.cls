@@ -1,17 +1,17 @@
 public class PARTAPDF
 {
     public string leadId{get;set;}
-    //public string travelAlg{get;set;}
-    //**public list<labelwrapper> wrapList{get;set;}
+    public string travelAlg{get;set;}
+    public list<labelwrapper> wrapList{get;set;}
     public Lead currLead {get;set;}
     public String currentCondition {get;set;}
     public List<Diagnosis_Verification__c> questionList {get;set;}
     public PARTAPDF(ApexPages.StandardController controller) {
         if(ApexPages.currentPage().getParameters().get('Id') != Null)
             leadId =  ApexPages.currentPage().getParameters().get('Id');
-        //currLead = (Lead)controller.getRecord();
-        //leadId = currLead.Id;
-        //**wrapList = new list<labelwrapper>();
+        currLead = (Lead)controller.getRecord();
+        leadId = currLead.Id;
+        wrapList = new list<labelwrapper>();
         
         if(leadId != Null)
         {
@@ -25,7 +25,23 @@ public class PARTAPDF
                         Is_We_Need_To_Expedite_The_Process__c,Please_Explain__c,Will_Child_s_Condition_Deteriorate__c,Communication__c,I_am_Recognized_To_Practice_As_a__c,I_m_Part_of_The_Treating_HealthCare_Team__c ,Is_in_a_Comatose_Vegetative_State__c
                         from Lead WHERE id = :leadId limit 1];
             
-            
+            System.debug('------currLead--------'+currLead);
+            if(currLead.Medical_Questions__c != Null)
+            {
+                for(String currString : currLead.Medical_Questions__c.split('<br>'))
+                {
+                    
+                    String [] labelString = currString.split(':');
+                    if(labelString.size() == 2)
+                    {
+                        labelwrapper currWrap = new labelwrapper();
+                        currWrap.label = labelString[0];
+                        currWrap.value = labelString[1];
+                        wrapList.add(currWrap);
+                    }
+                    
+                }
+            }
             
             if((!String.isEmpty(currLead.Current_Condition__c)) && currLead.Current_Condition__c.contains(';')) {
                 Integer i = 0;
@@ -38,7 +54,8 @@ public class PARTAPDF
                 }
             }
             
-            
+            /*questionList = [SELECT Id, ICD_Code__c, Primary_Diagnosis__c, Lead__c, Medical_Question__c, Medical_Question_Answer__c, Medical_Question__r.Question__c,
+Epilepsy_Value__c FROM Diagnosis_Verification__c WHERE Lead__c =:  leadId];*/
             
             for(Diagnosis_Verification__c medicQues : [SELECT Id, ICD_Code__c, Primary_Diagnosis__c, Lead__c, Medical_Question__c, Medical_Question_Answer__c, Medical_Question__r.Question__c,
                                                        Epilepsy_Value__c FROM Diagnosis_Verification__c WHERE Lead__c =:  leadId]) {
@@ -48,7 +65,14 @@ public class PARTAPDF
                                                            questionList.add(medicQues);
                                                            
                                                        }
-            
+            /*  {
+if((currRec.medical_question__r.name).contains('name'))
+{
+// currRec.medical_question__r.name.replaceAll('name',currLead.Name);
+
+}
+questionList.add(currRec);
+} */
             
         }
         
@@ -114,7 +138,18 @@ public class PARTAPDF
             '                    "anchorUnits": "inches"'+
             '                }]'+
             '            }'+
-            '    }]'+
+            '    }],'+
+            '                "dateSignedTabs": [{'+
+            '                      "anchorString": "~date",'+
+            '                       "anchorXOffset": "0",'+
+            '                       "fontSize":      "Size14",'+
+            '                       "fontColor":     "Black",'+
+            '                        "anchorYOffset": "0",'+
+            '                        "anchorIgnoreIfNotPresent": "false",'+
+            '                        "xPosition": "100",'+
+            '                        "yPosition": "72",'+
+            '                        "anchorUnits": "inches"'+
+            '                    }]'+
             '  }'+
             '}';
         
@@ -155,7 +190,7 @@ public class PARTAPDF
             string jsonPayload;
             system.debug('URL.getSalesforceBaseUrl().toExternalForm()'+URL.getSalesforceBaseUrl().toExternalForm());
             jsonPayload = '{'+
-                '    "userName": "'+ currLead.Treating_Medical_Professional_First_Name__c+' '+currLead.Treating_Medical_Professional_Last_Name__c+'",'+ 
+                '    "userName": "'+currLead.Treating_Medical_Professional_First_Name__c+' '+currLead.Treating_Medical_Professional_Last_Name__c+'",'+
                 '    "email": "'+currLead.Treating_Medical_Professional_Email__c+'",'+
                 '    "recipientId": "1",'+
                 '    "clientUserId": "1",'+
@@ -192,11 +227,11 @@ public class PARTAPDF
         reference.setRedirect(true);
         return reference;
     }
-    /*public class labelwrapper
+    public class labelwrapper
     {
         public string label{get;set;}
         public string value{get;set;}
         
-    }*/
+    }
     
 }

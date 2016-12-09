@@ -523,6 +523,36 @@ for fulfilment  the wish.</description>
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Budget_Status__c</fullName>
+        <description>This will indicate whether budget is approved or pending.</description>
+        <externalId>false</externalId>
+        <label>Budget Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
         <fullName>Budget_Submitted_Date__c</fullName>
         <externalId>false</externalId>
         <label>Budget Submitted Date</label>
@@ -643,10 +673,10 @@ for fulfilment  the wish.</description>
     <fields>
         <fullName>Child_s_Medical_Summary_received_date__c</fullName>
         <externalId>false</externalId>
-        <label>Child&apos;s Medical Summary received date</label>
+        <label>Child&apos;s Medical Summary Received Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
@@ -1135,6 +1165,16 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>From_Mulesoft__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>From Mulesoft</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Fund_Id__c</fullName>
@@ -1681,6 +1721,18 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Is_Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This is a flag to be set by MuleSoft for records created as part of the migration process</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Record was created by MuleSoft as part of the chapter on-boarding process</inlineHelpText>
+        <label>Is Migrated Record</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Is_a_wheelchair_accessible_vehicle_neede__c</fullName>
         <description>It  display the details about  wheelchair accessible vehicle needed or not</description>
         <externalId>false</externalId>
@@ -1856,7 +1908,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>MAC_Email__c</fullName>
         <description>This field is used to store the MAC email values from Account.</description>
         <externalId>false</externalId>
-        <label>Chapter Medical Advisor Email</label>
+        <label>Medical Advisor Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1964,6 +2016,16 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Migrated Record</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Name_of_Location__c</fullName>
@@ -2465,6 +2527,36 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>Projected_Status__c</fullName>
+        <description>This will indicate whether projected is approved or pending.</description>
+        <externalId>false</externalId>
+        <label>Projected Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
         <fullName>Qualified_Date__c</fullName>
         <description>Lead conversion date</description>
         <externalId>false</externalId>
@@ -2957,14 +3049,12 @@ on airplane</description>
                 <controllingFieldValues>Wish Determined</controllingFieldValues>
             </picklistValues>
             <picklistValues>
-                <fullName>Submitted</fullName>
-                <default>false</default>
-                <controllingFieldValues>Budget Approval - Submitted</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
                 <fullName>Approved</fullName>
                 <default>false</default>
-                <controllingFieldValues>Budget Approval - Submitted</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submitted</fullName>
+                <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
         </picklist>
@@ -3086,7 +3176,7 @@ on airplane</description>
         <caseSensitive>false</caseSensitive>
         <externalId>true</externalId>
         <label>Unique Wish Record Identifier</label>
-        <length>14</length>
+        <length>20</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -3312,7 +3402,7 @@ on airplane</description>
         <label>Wish Clearance Received Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
@@ -4860,10 +4950,6 @@ arrangements/unique circumstances for any requested wish participant not residin
                 <default>false</default>
             </values>
             <values>
-                <fullName>Submitted</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Within Policy</fullName>
                 <default>false</default>
             </values>
@@ -5997,7 +6083,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
     </validationRules>
     <validationRules>
         <fullName>Diagnosis_Verification_Received_Date</fullName>
-        <active>true</active>
+        <active>false</active>
         <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK(Hidden_Diagn_Verifi_Received_Date__c))</errorConditionFormula>
         <errorMessage>Diagnosis Verification Received Date should not be Blank.</errorMessage>
     </validationRules>
@@ -6035,7 +6121,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
     </validationRules>
     <validationRules>
         <fullName>Referral_date_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK( Hidden_Referral_date__c ))</errorConditionFormula>
         <errorMessage>Referral date should not be Blank.</errorMessage>
     </validationRules>
@@ -6330,28 +6416,20 @@ else
         <masterLabel>Send Email to Chapter Medical Advisor</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/connection.js&quot;)} 
-{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/apex.js&quot;)} 
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/30.0/apex.js&quot;)}
 
-
-var localTeam = &quot;{!Case.Local_MCA_Team__c}&quot; 
-var caseStatus = &quot;{!Case.Status}&quot; 
-if(localTeam.length &lt; 1){ 
-alert(&apos;Please Select Chapter Medical Advisor&apos;) 
-} else if(caseStatus == &quot;Escalated&quot;){ 
-alert(&apos;The case is transferred to National MAC team &apos;) 
-} else{ 
+var caseStatus = &quot;{!Case.Status}&quot;
+if(caseStatus == &quot;Escalated&quot;){
+alert(&apos;The case is transferred to National MAC team &apos;)
+} else{
+var record = new sforce.SObject(&quot;Case&quot;);
 var resultEmailProcess = sforce.apex.execute(&quot;SendEmailToMacTeam_AC&quot;,&quot;sendEmailToMac&quot;,{caseOwnerId:&quot;{!Case.Local_MCA_TeamId__c}&quot;, leadId:&quot;{!Case.LeadId__c}&quot;, caseId:&quot;{!Case.Id}&quot;, caseStatus:&quot;Local&quot;, Email:&quot;{!Case.MAC_Email__c}&quot;}); 
-if(resultEmailProcess == &apos;Sucess&apos;) { 
-alert(&apos;Email sucessfully sent&apos;); 
-var record = new sforce.SObject(&quot;Case&quot;); 
-record.Id = &quot;{!Case.Id}&quot; 
-record.Status = &apos;In Progress&apos;; 
-var result = sforce.connection.update([record]); 
-window.location.reload(); 
-} else { 
-alert(&apos;Email not sent&apos;); 
-} 
+record.Id = &quot;{!Case.Id}&quot;
+record.Status = &apos;Open&apos;;
+var result = sforce.connection.update([record]);
+window.location.reload();
+alert(&apos;Email sucessfully sent&apos;);
 }</url>
     </webLinks>
     <webLinks>

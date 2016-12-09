@@ -121,6 +121,11 @@
         <name>Notes__c</name>
     </fields>
     <fields>
+        <label><!-- Parent Wish --></label>
+        <name>Parent_Wish__c</name>
+        <relationshipLabel><!-- Travel Data --></relationshipLabel>
+    </fields>
+    <fields>
         <label><!-- Phone Number --></label>
         <name>Phone_Number__c</name>
     </fields>
@@ -179,11 +184,6 @@
     <fields>
         <label><!-- # of Rooms --></label>
         <name>of_Rooms__c</name>
-    </fields>
-    <fields>
-        <label><!-- parent wish --></label>
-        <name>parent_wish__c</name>
-        <relationshipLabel><!-- Travel Data --></relationshipLabel>
     </fields>
     <layouts>
         <layout>Activities/Excursions</layout>

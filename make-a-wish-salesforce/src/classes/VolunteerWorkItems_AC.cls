@@ -76,7 +76,7 @@ public class VolunteerWorkItems_AC {
             assignedWishQueryString +=  nonWishEventField.getFieldPath()+',';
         }
         assignedWishQueryString = assignedWishQueryString.removeEnd(',');
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = False';
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = False AND Wish__r.Status != \'completed\'';
         volunteerWishEventsList = Database.query(assignedWishQueryString);
         if(volunteerWishEventsList.size() > 0) {
             for(Volunteer_Opportunity__c checkApprovalStatus : volunteerWishEventsList) {
@@ -91,14 +91,15 @@ public class VolunteerWorkItems_AC {
     // This method is used to display all wish and non wish events which are assigned to current logged in Volunteer
     public List<Volunteer_Opportunity__c> getVolunteerAssignedNonWishEvents() {
         assignedWishQueryString = 'SELECT Chapter_Name__c,IsApproved__c,isRejected__c,';
+        Date today = Date.today();
         for(Schema.FieldSetMember nonWishEventField :SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsNonWish.getFields()) {
             assignedWishQueryString += nonWishEventField.getFieldPath()+',';
         }
         assignedWishQueryString = assignedWishQueryString.removeEnd(',');
-        //assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.RecordTypeId =: nonWishRT ';
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId';
+        //assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.RecordTypeId =: nonWishRT AND Non_Wish_Event__r.Event_Date__c < today';
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.Event_Date__c >: today';
         volunteerNonWishEventsList = Database.query(assignedWishQueryString );
-        if(volunteerWishEventsList.size() > 0) {
+        if(volunteerNonWishEventsList.size() > 0) {
             for(Volunteer_Opportunity__c checkApprovalStatus : volunteerNonWishEventsList) {
                 recordVisibilityMap.put(checkApprovalStatus.Id, checkApprovalStatus.IsApproved__c);
                 rejectedOpportunitiesMap.put(checkApprovalStatus.Id, checkApprovalStatus.isRejected__c);
@@ -162,20 +163,20 @@ reqired volunteers and registered volunteers count.*/
               closedWishQueryString += closedWishField.getFieldPath()+',';
             } 
         closedWishQueryString = closedWishQueryString .removeEnd(',');
-        closedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = true';
+        closedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND (Wish__r.isClosed = true OR Wish__r.Status = \'completed\')';
         closedVolunteerWishList =  Database.query(closedWishQueryString);
         return closedVolunteerWishList;
     }
     //This method is used to display the current volunteer closed Non Wish Event records.
     public List<Volunteer_Opportunity__c> getClosedNonWishEvents(){
-        Date today = Date.Valueof(System.today());
+        Date today = Date.today();
         closedVolunteerNonWishList = new List<Volunteer_Opportunity__c>();
         String closedNonWishQueryString = 'SELECT Non_Wish_Event__r.Event_Date__c,Non_Wish_Event__r.Name,';
             for(Schema.FieldSetMember closedNonWishField : SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsClosedNonWish.getFields()){
               closedNonWishQueryString += closedNonWishField.getFieldPath()+',';
             } 
         closedNonWishQueryString = closedNonWishQueryString .removeEnd(',');
-        closedNonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.Event_Date__c > today';
+        closedNonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.Event_Date__c <: today';
         closedVolunteerNonWishList =  Database.query(closedNonWishQueryString );
         return closedVolunteerNonWishList ;
     }

@@ -14,12 +14,16 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update) {
     Set<Id> leadIdSet = new Set<Id>();
     List<Lead> leadList = new List<Lead>();
     set<Id> volunteercontactIdSet = new Set<Id>();
-   
+    Set<Id> parentWishIdSet = new Set<Id>();
     Set<Id> dstsIds = new Set<Id>();
     
     for(dsfs__DocuSign_Status__c dsts:Trigger.new)
     {
-    
+        if(dsts.dsfs__Envelope_Status__c == 'Completed' && Trigger.oldMap.get(dsts.id).dsfs__Envelope_Status__c  != 'Completed' && dsts.dsfs__Case__c != Null){
+            if(dsts.dsfs__Subject__c == 'Wish Child Summary Form'){
+                parentWishIdSet.add(dsts.dsfs__Case__c);
+            }
+        }
         system.debug('@@@@@@@@@@@ dsts @@@@@@@@@@@@@'+dsts);
         if(dsts.dsfs__Envelope_Status__c == 'Completed' && Trigger.oldMap.get(dsts.id).dsfs__Envelope_Status__c  != 'Completed')
         {
@@ -89,6 +93,14 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update) {
             update confilictContactList ;
         }
        }
+    }
+    if(parentWishIdSet.size() > 0){
+        Map<Id,Case> updatechildSummaryMap = new Map<Id,Case>();
+        for(Case dbCase : [SELECT Id,Child_s_Medical_Summary_received_date__c FROM Case WHERE Id IN: parentWishIdSet]){
+            dbCase.Child_s_Medical_Summary_received_date__c = system.today();
+            updatechildSummaryMap.put(dbCase.Id,dbCase);
+        }
+        update updatechildSummaryMap.values();
     }
     
     Map<Id,dsfs__DocuSign_Status__c> dstsStatusRecMap = new  Map<Id,dsfs__DocuSign_Status__c>();

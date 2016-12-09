@@ -5,8 +5,37 @@ Description : This class is used to send email with medical summary report & med
 *******************************************************************************************************************/
 global class SendEmailToMacTeam_AC {
     
+
+    webservice  static String UpdateEmail(Id chapterAccountId,Id caseId){
+        Map<Id,String> accountMap = new Map<Id,String>();
+        List<Case> partAcaseList = new List<Case>();
+       
+        for(Account chapterAccount : [SELECT Id,MAC_Email__c FROM Account WHERE Id =: chapterAccountId AND MAC_Email__c  != Null]){
+        accountMap.put(chapterAccount.Id,chapterAccount.MAC_Email__c );
+        }
+        
+        if(accountMap.size() > 0){
+            for(Case partACase : [SELECT Id,AccountId,MAC_Email__c FROM Case WHERE Id =: caseId]){
+                if(accountMap.containsKey(partACase.AccountId)){
+                  case newCase = new Case();
+                   newCase.Id = partACase.Id; 
+                   newCase.MAC_Email__c = accountMap.get(partACase.AccountId); 
+                   partAcaseList.add(newCase);
+                }
+            }
+        }  
+        if(partAcaseList.size() > 0)
+        update partAcaseList;
+        system.debug('####### MAC EMAIL ######'+partAcaseList);
+       return partAcaseList[0].MAC_Email__c ;   
+    }
     
     webservice static String sendEmailToMac(Id caseOwnerId, Id leadId, Id caseId, String caseStatus, string Email) {
+        //Id OrgId = '0D25B00000000cF';
+        String organizationWideLabel=System.Label.OrganizationWideEmail;        
+        ORGWIDEEMAILADDRESS  OrgId = [SELECT id,Address FROM ORGWIDEEMAILADDRESS WHERE Address =: organizationWideLabel LIMIT 1];       
+      
+                
         string nationalTeamTemplateID = Label.National_Email_Template_ID;
         string localTeamTemplateId = Label.Local_Email_Template_ID;
         list<String> emailSet = new list<String>();
@@ -19,6 +48,7 @@ global class SendEmailToMacTeam_AC {
             emailMessage.setTemplateId(nationalTeamTemplateID); //Replace this using custom setting
             
         }
+        emailMessage.setOrgWideEmailAddressId(OrgId.id);
         emailMessage.setTargetObjectId(caseOwnerId);
         emailMessage.setTreatTargetObjectAsRecipient(False);
         emailMessage.setToAddresses(emailSet); 
@@ -37,19 +67,17 @@ global class SendEmailToMacTeam_AC {
         }
         emailMessage.setFileAttachments(fileAttachments);
         emailMessage.setSaveAsActivity(false);
-        if(!Test.isRunningTest())
-            Messaging.sendEmail(new Messaging.SingleEmailMessage[] { emailMessage });
+        Messaging.sendEmail(new Messaging.SingleEmailMessage[] { emailMessage });
         return 'Sucess';
     }
     
     
     public static void sendEmail (Map<Id,List<Attachment>> docusignAttachmentMap, String sendToTeam, Id targetObjectId, String emailTo, Id caseId) {
-        System.debug('>>>>>>docusignAttachmentMap>>>>>>'+docusignAttachmentMap);
-        System.debug('>>>>>>sendToTeam>>>>>>'+sendToTeam);
-        System.debug('>>>>>>targetObjectId>>>>>>'+targetObjectId);
-        System.debug('>>>>>>emailTo>>>>>>'+emailTo);
-        System.debug('>>>>>>caseId>>>>>>'+caseId);
-        
+       
+        //Id OrgId = '0D25B00000000cF';
+         String organizationWideLabel=System.Label.OrganizationWideEmail;
+         ORGWIDEEMAILADDRESS  OrgId = [SELECT id,Address FROM ORGWIDEEMAILADDRESS WHERE Address =: organizationWideLabel LIMIT 1]; 
+         
         string nationalTeamTemplateID = Label.National_Email_Template_ID;
         string localTeamTemplateId = Label.Local_Email_Template_ID;
         list<String> emailSet = new list<String>();
@@ -64,7 +92,8 @@ global class SendEmailToMacTeam_AC {
         }
         emailMessage.setTargetObjectId(targetObjectId);
         emailMessage.setTreatTargetObjectAsRecipient(False);
-        emailMessage.setToAddresses(emailSet); 
+        emailMessage.setToAddresses(emailSet);
+        emailMessage.setOrgWideEmailAddressId(OrgId.id);
         emailMessage.setwhatId(caseId);
         List<Messaging.Emailfileattachment> fileAttachments = new List<Messaging.Emailfileattachment>();
         if(docusignAttachmentMap.containsKey(caseId)) {
@@ -77,7 +106,6 @@ global class SendEmailToMacTeam_AC {
         }
         emailMessage.setFileAttachments(fileAttachments);
         emailMessage.setSaveAsActivity(false);
-        if(!Test.isRunningTest())
-            Messaging.sendEmail(new Messaging.SingleEmailMessage[] { emailMessage });
+       Messaging.sendEmail(new Messaging.SingleEmailMessage[] { emailMessage });
     }
 }

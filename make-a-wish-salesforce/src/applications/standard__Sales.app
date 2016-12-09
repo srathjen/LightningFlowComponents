@@ -18,4 +18,5 @@
     <tab>Awards_Recognition__c</tab>
     <tab>Background_Check_File__c</tab>
     <tab>Constituent_Code__c</tab>
+    <tab>Regions__c</tab>
 </CustomApplication>

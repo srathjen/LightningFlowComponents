@@ -28,11 +28,11 @@
         <description>Send Email to Office Referrar email with Wish Referral Form</description>
         <protected>false</protected>
         <recipients>
-            <recipient>furqan_maw@mstsolutions.com</recipient>
+            <recipient>sailappa_maw@mstsolutions.com</recipient>
             <type>user</type>
         </recipients>
         <recipients>
-            <recipient>sailappa_maw@mstsolutions.com</recipient>
+            <recipient>sathiskumar.s_maw@mstsolutions.com</recipient>
             <type>user</type>
         </recipients>
         <senderType>CurrentUser</senderType>

@@ -137,6 +137,15 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>From_Mulesoft__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>From Mulesoft</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Hidden_Volunteer_Contact_Email__c</fullName>
         <description>This field is used as hidden field to store volunteer contact email in Background Check.</description>
         <externalId>false</externalId>
@@ -146,6 +155,15 @@
         <trackTrending>false</trackTrending>
         <type>Email</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Migrated Record</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Requested_By__c</fullName>

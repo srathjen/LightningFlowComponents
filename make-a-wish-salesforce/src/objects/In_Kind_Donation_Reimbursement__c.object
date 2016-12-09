@@ -92,10 +92,10 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Ammount2__c</fullName>
+        <fullName>Ammount_2__c</fullName>
         <description>This will capture amount 2</description>
         <externalId>false</externalId>
-        <label>Amount2</label>
+        <label>Amount 2</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -104,10 +104,10 @@
         <type>Currency</type>
     </fields>
     <fields>
-        <fullName>Amount1__c</fullName>
+        <fullName>Amount_1__c</fullName>
         <description>This will capture the amount 1</description>
         <externalId>false</externalId>
-        <label>Amount1</label>
+        <label>Amount 1</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -116,10 +116,10 @@
         <type>Currency</type>
     </fields>
     <fields>
-        <fullName>Amount3__c</fullName>
+        <fullName>Amount_3__c</fullName>
         <description>This will capture the amount 3</description>
         <externalId>false</externalId>
-        <label>Amount3</label>
+        <label>Amount 3</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -128,10 +128,10 @@
         <type>Currency</type>
     </fields>
     <fields>
-        <fullName>Amount4__c</fullName>
+        <fullName>Amount_4__c</fullName>
         <description>This will capture amount 4</description>
         <externalId>false</externalId>
-        <label>Amount4</label>
+        <label>Amount 4</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -140,10 +140,10 @@
         <type>Currency</type>
     </fields>
     <fields>
-        <fullName>Amount5__c</fullName>
+        <fullName>Amount_5__c</fullName>
         <description>This will capture amount 5</description>
         <externalId>false</externalId>
-        <label>Amount5</label>
+        <label>Amount 5</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -302,6 +302,66 @@
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Description_1__c</fullName>
+        <description>This will capture the expense1 description</description>
+        <externalId>false</externalId>
+        <label>Description 1</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description_2__c</fullName>
+        <description>This will capture the expense2 description</description>
+        <externalId>false</externalId>
+        <label>Description 2</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description_3__c</fullName>
+        <description>This will capture the expense3 description</description>
+        <externalId>false</externalId>
+        <label>Description 3</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description_4__c</fullName>
+        <description>This will capture expense4 description</description>
+        <externalId>false</externalId>
+        <label>Description 4</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description_5__c</fullName>
+        <description>This will capture expense5 description</description>
+        <externalId>false</externalId>
+        <label>Description 5</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Documentation__c</fullName>
@@ -598,6 +658,18 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Region_Code__c</fullName>
+        <externalId>false</externalId>
+        <formula>Wish__r.Contact.Region_Code__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Region Code</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>State__c</fullName>
         <description>This field will pull state from account</description>
         <externalId>false</externalId>
@@ -854,7 +926,7 @@
         <fullName>Total_Reimbursement_Amount__c</fullName>
         <description>This field will gives the sum of all amount field value</description>
         <externalId>false</externalId>
-        <formula>Amount1__c  +  Ammount2__c  +  Amount3__c  +  Amount4__c  +  Amount5__c</formula>
+        <formula>Amount_1__c  +  Ammount_2__c  +  Amount_3__c  +  Amount_4__c  +  Amount_5__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Total Reimbursement Amount</label>
         <precision>18</precision>
@@ -871,6 +943,66 @@
         <formula>Wish__r.Unique_Wish_Record_Identifier__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Unique Wish Identifier</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Vendor_1__c</fullName>
+        <description>This field is used to get 1st  vendor details.</description>
+        <externalId>false</externalId>
+        <label>Vendor 1</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Vendor_2__c</fullName>
+        <description>This field is used to get 2nd vendor details</description>
+        <externalId>false</externalId>
+        <label>Vendor 2</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Vendor_3__c</fullName>
+        <description>This field is used to get 3rd vendor details</description>
+        <externalId>false</externalId>
+        <label>Vendor 3</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Vendor_4__c</fullName>
+        <description>This field is used to get 4th vendor details</description>
+        <externalId>false</externalId>
+        <label>Vendor 4</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Vendor_5__c</fullName>
+        <description>This field is used to get 5th vendor details</description>
+        <externalId>false</externalId>
+        <label>Vendor 5</label>
+        <length>255</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>

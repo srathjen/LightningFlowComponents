@@ -70,25 +70,22 @@
   });
   
   
-   function validateRadio(){
+    function validateRadio(){
+          var isbool = true;
+          var x = $('.overallcheck').length;
+          var a = $('.overallcheck:checked').length;
+          var b = $('.overallRadio:checked').length;
+          if(a ==0 && b == 0)
+            isbool = false;
+          else if(a > 0 && x != a || b > 0 && x !=b )
+            isbool = false;
           
-          if($('.medical').prop("checked") == false || $('.family').prop("checked") == false || $('.existingMedical').prop("checked") == false){
-          var isBool =false;              
-                   
-                  if($('.medicalRadio').is(':checked') && $('.familyRadio').is(':checked') && $('.existingRadio').is(':checked')){
-                      isBool = true;                    
-                  }
-                  else{
-                      alert('Please Select altleast Medical/Family Contact to Diagnosis Verification...');
-                      isBool = false;
-                  }
-                   
-          }
-     return isBool;
+          if(!isbool)
+             alert('Please select atleast one Wish Family/Medical Professional to Diagnosis Verification…');
+         return isbool;
      
     }
         
-  
   
     </script>
 
@@ -186,7 +183,7 @@
     </style>
 
        
-
+        
           <apex:outputText rendered="{!step == 2}">
             <apex:variable var="hasResults" value="{!dupLeadList.size > 0}"/>
             <apex:variable var="cardClass" value="{!IF(hasResults, '', 'slds-card--empty')}"/>
@@ -255,8 +252,7 @@
                                 <tbody>
                                 
                                     <apex:repeat value="{!dupLeadList}" var="item">
-                                        <tr>
-                                          
+                                        <tr>                                          
                                             <td class="slds-row-select">
                                                <apex:outputPanel rendered="{!(currLead.ChapterName__c == item.currentLead.ChapterName__c)}">
                                                 <label class="slds-checkbox">
@@ -302,6 +298,7 @@
                 </div>
                 </apex:actionRegion>
               </apex:outputpanel>  
+             
                <apex:outputpanel rendered="{!(isFamilyInfo == false && dupContactList.size > 0)}">
                  <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
@@ -384,9 +381,9 @@
                  
               
               
-                <Center> <apex:commandbutton value="Send Diagnosis Verification" action="{!ContinuePartAForm}" Onclick="return validateRadio();" /> </center> <br/>
-                
-                <apex:outputpanel rendered="{!dupParentContactList.size > 0}">                
+                <Center> <apex:commandbutton value="Send Diagnosis Verification" action="{!ContinuePartAForm}" onClick="return validateRadio();" /> </center> <br/>
+               
+                <apex:outputpanel rendered="{!dupParentContactList.size > 0 && hasResults}">                
                 
                 <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
@@ -394,14 +391,15 @@
                        
                     </div>
                     <div class="slds-card__body">
-                        <apex:outputText rendered="{!NOT(hasResults)}">
+                      <apex:outputText rendered="{!AND(dupParentContactList.Size<0,NOT(hasResults))}">
+                        <!--apex:outputText rendered="{!NOT(hasResults)}"-->
                         <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
                             <apex:outputText value="{!$Label.npe01__Contact_Merge_Error_Confirm_Message_Nothing_Found}"/>
                         </h3>
                         </apex:outputText>
                         <apex:outputText rendered="{!hasResults}">
 
-                            <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal dupHasRes">
+                            <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal dupHasRes ">
                                 <thead>
                                     <tr>
                                         <th>Action</th>
@@ -410,22 +408,22 @@
                                         <th class="slds-text-heading--label" scope="col">Phone</th>
                                         <th class="slds-text-heading--label" scope="col">Email</th>
                                         <th class="slds-text-heading--label" scope="col">Select Contact</th>
-                                        <th class="slds-text-heading--label" scope="col">Create New Record</th>
+                                        <th class="slds-text-heading--label" scope="col" rowspan="4">Create New Record</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                <tr>
+                                <tbody>    
+                                
+                                <tr style="border: 0.1px solid #c1c1c1;">
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td rowspan="8"> <div style="float:left; margin-top: 0%;  position:absolute; margin-left: 6%;">
-                                                        <apex:inputCheckbox label="" onclick="" styleClass="family"/>
-                                                        </div>
-                                    </td>
+                                    <td> <div style="float:left; margin-top: 1%;  position:absolute; margin-left: 6%;">
+                                    <apex:inputCheckbox label="" onclick="" styleClass="family overallcheck"/></div></td>
                                </tr>
+                                                           
                                     <apex:repeat value="{!dupParentContactList}" var="con">
                                     
                                     
@@ -455,14 +453,15 @@
                                                </td>
                                                <td style="border-right: 1px solid #d8dde6;">
                                                   
-                                                    <input type="radio" name="contact" id="{!con.id}" VALUE="{!con.id}" onclick="changeValue(this,'{!$Component.contactValue}');" class="familyRadio"  />
+                                                    <input type="radio" name="contact" id="{!con.id}" VALUE="{!con.id}" onclick="changeValue(this,'{!$Component.contactValue}');" class="familyRadio overallRadio"  />
                                                       
                                                     
                                                </td>
                                         </tr>
                                         
                                      
-                                    </apex:repeat>    
+                                    </apex:repeat>   
+                                 
                                                                       
                                     <apex:inputhidden id="contactValue" value="{!contactId}"/>
                                     
@@ -472,14 +471,17 @@
                     </div>
                 </div>
                </apex:outputpanel>
-               <apex:outputpanel rendered="{!dupMedicalContactList.size > 0}" >
+               
+               <apex:outputpanel rendered="{!dupMedicalContactList.size > 0 && hasResults}" >
                  <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
                         <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Medical Professional Contacts</h2>
                        
                     </div>
                     <div class="slds-card__body">
-                        <apex:outputText rendered="{!NOT(hasResults)}">
+                     
+                        <apex:outputText rendered="{!AND(dupMedicalContactList.Size<0,NOT(hasResults))}">
+                        <!--apex:outputText rendered="{!NOT(hasResults)}"-->
                         <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
                             <apex:outputText value="{!$Label.npe01__Contact_Merge_Error_Confirm_Message_Nothing_Found}"/>
                         </h3>
@@ -495,20 +497,20 @@
                                         <th class="slds-text-heading--label" scope="col">Phone</th>
                                         <th class="slds-text-heading--label" scope="col">Email</th>                                        
                                        <th class="slds-text-heading--label" scope="col">Select Contact</th>
-                                       <th class="slds-text-heading--label" scope="col">Create New Record</th>
+                                       <th class="slds-text-heading--label" scope="col" rowspan="4">Create New Record</th>
                                     </tr>
                                 </thead>
                                 <tbody>  
                                 
-                                 <tr>
+                                 <tr style="border: 0.1px solid #c1c1c1;">
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td rowspan="8"> <div style="float:left; margin-top: 0%;  position:absolute; margin-left: 6%;">
-                                                       <apex:inputCheckbox label="" onclick="" styleClass="medical" />
+                                    <td> <div style="float:left; margin-top: 1%;  position:absolute; margin-left: 6%;">
+                                                       <apex:inputCheckbox label="" onclick="" styleClass="medical overallcheck" />
                                                      </div>
                                     </td>
                                </tr>
@@ -540,7 +542,7 @@
                                                </td>
                                              
                                                <td style="border-right: 1px solid #d8dde6;">
-                                                    <input type="radio" name="medical" id="{!con.id}" VALUE="{!con.id}" onclick="medicalValue(this,'{!$Component.medicalValue}');" class="medicalRadio"/>
+                                                    <input type="radio" name="medical" id="{!con.id}" VALUE="{!con.id}" onclick="medicalValue(this,'{!$Component.medicalValue}');" class="medicalRadio overallRadio"/>
                                                    
                                                </td>
                                         </tr>
@@ -558,18 +560,21 @@
               </apex:outputpanel>
               
                 <apex:outputpanel rendered="{!(hideTreatingSection == false && dupTreatingContactList.size > 0)}">
+                
                  <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
                         <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Treating Medical Professional Contacts</h2>
                        
                     </div>
                     <div class="slds-card__body">
-                        <apex:outputText rendered="{!NOT(hasResults)}">
+                        <!--apex:outputText rendered="{!NOT(hasResults)}"-->
+                        <apex:outputText rendered="{!AND(dupTreatingContactList.Size<0,NOT(hasResults))}">
                         <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
                             <apex:outputText value="{!$Label.npe01__Contact_Merge_Error_Confirm_Message_Nothing_Found}"/>
                         </h3>
                         </apex:outputText>
-                        <apex:outputText rendered="{!hasResults}">
+                        <apex:outputText rendered="{!OR(dupTreatingContactList.Size>0,hasResults)}">
+                         <!--apex:outputText rendered="{!hasResults}"-->
 
                             <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal dupHasRes">
                                 <thead>
@@ -580,20 +585,20 @@
                                         <th class="slds-text-heading--label" scope="col">Phone</th>
                                         <th class="slds-text-heading--label" scope="col">Email</th>
                                         <th class="slds-text-heading--label" scope="col">Select Contact</th>
-                                        <th class="slds-text-heading--label" scope="col">Create New Record</th>
+                                        <th class="slds-text-heading--label" scope="col" rowspan="4">Create New Record</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 
-                                 <tr>
+                                 <tr style="border: 0.1px solid #c1c1c1;">
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td rowspan="8"> <div style="float:left; margin-top: 0%;  position:absolute; margin-left: 6%;">
-                                                       <apex:inputCheckbox label="" onclick="" styleClass="existingMedical"/>
+                                    <td><div style="float:left; margin-top: 1%;  position:absolute; margin-left: 6%;">
+                                                       <apex:inputCheckbox label="" onclick="" styleClass="existingMedical overallcheck"/>
                                                      </div>
                                     </td>
                                  </tr>
@@ -624,7 +629,7 @@
                                                 
                                                </td>
                                                <td style="border-right: 1px solid #d8dde6;">
-                                                    <input type="radio" name="treating" class="existingRadio" id="{!treatingContact.id}" VALUE="{!treatingContact.id}" onclick="treatingValue(this,'{!$Component.treatingValue}');"/>
+                                                    <input type="radio" name="treating" class="existingRadio overallRadio" id="{!treatingContact.id}" VALUE="{!treatingContact.id}" onclick="treatingValue(this,'{!$Component.treatingValue}');"/>
                                                     
                                                </td>
                                         </tr>
@@ -651,7 +656,7 @@
             <apex:form id="mergeForm" styleClass="slds-form">
                 <div class="slds-card slds-m-horizontal--large slds-m-bottom--large hide-when-modal-open">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
-                        <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Selected Contacts</h2>
+                        <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Selected Leads</h2>
                         <button type="button" class="slds-button slds-button--brand" data-toggle="modal" data-target="merge_warning_modal">Merge</button>
                     </div>
                     <div class="slds-card__body">

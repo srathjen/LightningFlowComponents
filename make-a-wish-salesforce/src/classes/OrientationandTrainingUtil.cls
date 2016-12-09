@@ -12,6 +12,16 @@ public class OrientationandTrainingUtil{
         return newchapterAccount;
     }
     
+     public static Account HouseHoldAccount(){
+        Constant_AC  constant = new Constant_AC();
+        Id houseHoldRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.HouseholdRT).getRecordTypeId();
+        Account houseHoldAccount = new Account();
+        houseHoldAccount.Name = 'TestHouseHoldAccount';
+        houseHoldAccount.RecordTypeId = houseHoldRecordTypeId;
+        insert houseHoldAccount;
+        return houseHoldAccount;
+    }
+    
     public static id CreateAlabamaAccount(){
         Constant_AC  constant = new Constant_AC();
         Id ChapterRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
@@ -171,10 +181,9 @@ insert newChapter;*/
         
         Profile volunteerSystemAdministrator = [SELECT Id FROM Profile WHERE Name = 'System Administrator'];
         
-        User newPvolunteerSystemAdministratorUser = new User(  firstname = 'Jon',lastName = 'Edwards',email = 'jon@gmail.com',Username = 'joncena123p0@gmail.com',
+         User newPvolunteerSystemAdministratorUser = new User(  firstname = 'Jon',lastName = 'Edwards',email = 'jon@gmail.com',Username = 'joncena123p0@gmail.com',
                                                     EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
                                                     LanguageLocaleKey = 'en_US',ProfileId = volunteerSystemAdministrator.Id,isActive = true,Statecode = 'AZ');
-        
         insert newPvolunteerSystemAdministratorUser ;
         return newPvolunteerSystemAdministratorUser ;
         
@@ -1976,4 +1985,25 @@ retrun newLeadFile;*/
             insert newWishOpportunity;
             return newWishOpportunity;
        }
+       
+      public static Regions__c createRegion(Id AccountId)
+      {
+         Regions__c newRegion = new Regions__c();
+         newRegion.Name = 'Alabama';
+         newRegion.Chapter_Name__c = AccountId;
+         
+         return newRegion;
+         
+      }
+      
+      public Static Turnon_Household_Trigger__c insertTurnonHouseHoldAccountSetting(){
+        Turnon_Household_Trigger__c  turnOnHouseHold = new Turnon_Household_Trigger__c ();
+        turnOnHouseHold.Name = 'HouseHold Account';
+        turnOnHouseHold.Activate_AddFlagonHouseHoldAccount_Tgr__c = True;
+        
+        insert turnOnHouseHold;
+        return turnOnHouseHold;
+        
+    }
+      
 }

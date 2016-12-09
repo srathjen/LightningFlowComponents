@@ -13,6 +13,10 @@
         <name>Account_Phone__c</name>
     </fields>
     <fields>
+        <label><!-- From Mulesoft --></label>
+        <name>From_Mulesoft__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Role Name Id --></label>
         <name>Hidden_Role_Name_Id__c</name>
     </fields>

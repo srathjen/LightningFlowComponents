@@ -867,6 +867,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Account.From_Mulesoft__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Account.In_Kind_Approval_Status__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -897,7 +902,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Account.MAC_Email__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Account.MAC_Email_del__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.Migrated_Record__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1482,7 +1497,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Background_check__c.From_Mulesoft__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Background_check__c.Hidden_Volunteer_Contact_Email__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Background_check__c.Migrated_Record__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1762,6 +1787,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Case.Budget_Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Case.Budget_Submitted_Date__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -2032,6 +2062,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Case.From_Mulesoft__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Case.Fund_Id__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -2247,6 +2282,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Case.Is_Migrated_Record__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Case.Is_a_wheelchair_accessible_vehicle_neede__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -2338,6 +2378,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Case.Meet_PWL_Criteria__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Migrated_Record__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2519,6 +2564,11 @@
         <editable>true</editable>
         <field>Case.Priority</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Projected_Status__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -3397,6 +3447,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.From_Mulesoft__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Contact.Game__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -3737,6 +3792,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.Primary_Diagnosis_Condition_Description__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Contact.Professional_Skills_Other_Notes__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -3763,6 +3823,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Publicity_OK__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Record_Id__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3807,6 +3872,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.Region_Chapter__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Region_Code__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Contact.Relationship__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -3828,6 +3903,46 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Restaurant__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.SD1_Condition_Description__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.SD1_ICD_Code__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.SD2_Condition_Description__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.SD2_ICD_Code__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.SD3_Condition_Description__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.SD3_ICD_Code__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.SD4_Condition_Description__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.SD4_ICD_Code__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5017,27 +5132,27 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>In_Kind_Donation_Reimbursement__c.Ammount2__c</field>
+        <field>In_Kind_Donation_Reimbursement__c.Ammount_2__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>In_Kind_Donation_Reimbursement__c.Amount1__c</field>
+        <field>In_Kind_Donation_Reimbursement__c.Amount_1__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>In_Kind_Donation_Reimbursement__c.Amount3__c</field>
+        <field>In_Kind_Donation_Reimbursement__c.Amount_3__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>In_Kind_Donation_Reimbursement__c.Amount4__c</field>
+        <field>In_Kind_Donation_Reimbursement__c.Amount_4__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>In_Kind_Donation_Reimbursement__c.Amount5__c</field>
+        <field>In_Kind_Donation_Reimbursement__c.Amount_5__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5088,6 +5203,31 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>In_Kind_Donation_Reimbursement__c.Date_of_request__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Description_1__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Description_2__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Description_3__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Description_4__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Description_5__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5197,6 +5337,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Region_Code__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>In_Kind_Donation_Reimbursement__c.State__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -5218,6 +5363,31 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>In_Kind_Donation_Reimbursement__c.Unique_Wish_Identifier__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Vendor_1__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Vendor_2__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Vendor_3__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Vendor_4__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Vendor_5__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5393,6 +5563,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Lead.Fax</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.From_Mulesoft__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5576,6 +5751,11 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Migrated_Record__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Lead.MobilePhone</field>
         <readable>true</readable>
@@ -5748,6 +5928,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Lead.Referrer_Zip__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Region_Code__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -6138,6 +6323,16 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Non_Wish_Events__c.Event_Text__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Non_Wish_Events__c.From_Mulesoft__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Non_Wish_Events__c.Migrated_Record__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -6802,6 +6997,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Regions__c.Chapter_Name__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Role__c.Description__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -7302,12 +7502,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Time_sheet__c.From_Mulesoft__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Time_sheet__c.Hours_Hidden__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Time_sheet__c.Hours_spent__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Time_sheet__c.Migrated_Record__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7537,6 +7747,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>User.From_Mulesoft__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>User.Hidden_Role_Name_Id__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -7702,7 +7917,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Volunteer_Opportunity__c.External_Id__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Volunteer_Opportunity__c.First_L_I__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Volunteer_Opportunity__c.From_Mulesoft__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7778,6 +8003,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Volunteer_Opportunity__c.Medical_Condition__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Volunteer_Opportunity__c.Migrated_Record__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7942,7 +8172,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Volunteer_Orientation_Training__c.From_Mulesoft__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Volunteer_Orientation_Training__c.LMS_Enrollment_Id__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -9031,6 +9271,9 @@
         <layout>Refer_a_Child__kav-Refer a Child Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Regions__c-Regions Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Role__c-Role Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -9207,6 +9450,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>ChangePassword</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>CommunitiesChatter_VF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -9821,6 +10068,10 @@
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>Communities_Chatter</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Condition_Description__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
@@ -9870,6 +10121,10 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Orientation_Training__c</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>Regions__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>

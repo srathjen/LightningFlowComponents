@@ -109,6 +109,11 @@
             <operation>equals</operation>
             <value>Completed</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This workflow will fire when the orientation is completed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
@@ -128,6 +133,11 @@
             <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
             <operation>equals</operation>
             <value>Registered</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
         </criteriaItems>
         <description>This workflow will fire when the orientation is registered</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -149,6 +159,11 @@
             <operation>equals</operation>
             <value>Cancelled</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This workflow will fire when the training is cancelled</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
@@ -169,6 +184,11 @@
             <operation>equals</operation>
             <value>Completed</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This workflow will fire when the training is completed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
@@ -188,6 +208,11 @@
             <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
             <operation>equals</operation>
             <value>Registered</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
         </criteriaItems>
         <description>This workflow will fire when the training is registered</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

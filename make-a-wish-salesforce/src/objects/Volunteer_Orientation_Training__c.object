@@ -154,16 +154,35 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>LMS_Enrollment_Id__c</fullName>
-        <description>This Field holds the enroll id from the LMS</description>
+        <fullName>From_Mulesoft__c</fullName>
+        <defaultValue>false</defaultValue>
         <externalId>false</externalId>
+        <label>From Mulesoft</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LMS_Enrollment_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>This Field holds the enroll id from the LMS</description>
+        <externalId>true</externalId>
         <label>LMS Enrollment Id</label>
-        <length>255</length>
+        <length>50</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
-        <unique>false</unique>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Migrated Record</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Orientation_Training_Hidden__c</fullName>

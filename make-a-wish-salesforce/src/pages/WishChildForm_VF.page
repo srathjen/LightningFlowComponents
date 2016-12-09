@@ -178,6 +178,8 @@
        
        <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
        <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" /> 
+      
+                
               
                 <main role="main" class="container">
                     <div class="sideNav">
@@ -218,6 +220,15 @@
         <!------------------ Wish Child Form Starts ------------------------>
       
         <apex:pageblock >
+         <div class="row" style="margin-left:25%;">
+                        <div class="col-sm-12">
+                            <div class="text-center">
+                                 <apex:Commandbutton value="Save" action="{!SaveandwishChildExit}" Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="btn btn-default mg-rt phonecheck" />
+                                 <apex:Commandbutton value="Next" action="{!WCFNext}" Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="btn btn-default mg-rt phonecheck" />
+                                  <apex:Commandbutton value="Exit" action="{!cancelfunction}" style="margin-left: 10px;" reRender="popup"  styleClass="btn btn-default" immediate="true"/>
+                               </div>
+                        </div>
+                    </div>
             <apex:pageMessages />
             <div class="container">
                 

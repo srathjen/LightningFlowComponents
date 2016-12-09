@@ -42,8 +42,16 @@
         <name>End_Time__c</name>
     </fields>
     <fields>
+        <label><!-- From Mulesoft --></label>
+        <name>From_Mulesoft__c</name>
+    </fields>
+    <fields>
         <label><!-- LMS Enrollment Id --></label>
         <name>LMS_Enrollment_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
     </fields>
     <fields>
         <label><!-- Orientation &amp; Training Hidden --></label>

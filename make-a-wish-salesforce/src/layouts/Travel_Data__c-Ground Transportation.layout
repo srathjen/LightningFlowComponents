@@ -13,7 +13,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>parent_wish__c</field>
+                <field>Parent_Wish__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

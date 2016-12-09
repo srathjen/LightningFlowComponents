@@ -11,7 +11,7 @@ Volunteers added to Parent Wish.
 
 public class CaseTriggerHandler {
     
-  public static void UpdateWishRecordIdentifier(Set<Id> ParentIdsSet, Set<Id> chapterIds, Id recTypeId){
+    public static void UpdateWishRecordIdentifier(Set<Id> ParentIdsSet, Set<Id> chapterIds, Id recTypeId){
         Integer increment;
         boolean IsFYChanged =false;
         Datetime  FYDate = Datetime.now();
@@ -31,7 +31,7 @@ public class CaseTriggerHandler {
             accountOfficeMap.put(currOffice.Chapter__r.Name,currOffice );
         }
         List<Case> lstParentWishes=[SELECT Id, RecordTypeId, Unique_Wish_Record_Identifier__c,Fund_Id__c, ChapterName__c,ChapterName__r.Name  FROM Case WHERE Id In: ParentIdsSet and RecordTypeId =: recTypeId Order BY CreatedDate desc];
-        List<Case> lstParentWisheRecordTypes = [SELECT Id, Unique_Wish_Record_Identifier__c, ChapterName__c,ChapterName__r.Name FROM Case WHERE RecordTypeId =: recTypeId and  Unique_Wish_Record_Identifier__c !=null Order BY CreatedDate desc Limit 2];
+        List<Case> lstParentWisheRecordTypes = [SELECT Id, Unique_Wish_Record_Identifier__c, ChapterName__c,ChapterName__r.Name FROM Case WHERE RecordTypeId =: recTypeId and  Unique_Wish_Record_Identifier__c !=null and Is_Migrated_Record__c = false Order BY CreatedDate desc Limit 2];
         System.debug('Parent Wishes 1:' + lstParentWishes);
         System.debug('Parent Wishes 2:' + lstParentWisheRecordTypes );
         if(IsFYChanged){
@@ -107,41 +107,41 @@ public class CaseTriggerHandler {
             }
         }
         /*if(caseChapterIdsMap.size()>0) {
-            List<Task> newTaskList = new List<Task>();
-            Map<String,List<Chapter_Action_Track__c>> chapterActionTracksMap = new Map<string, List<Chapter_Action_Track__c>>();
-            
-            //Used to get chapter action details based on wish chapter
-            for(Chapter_Action_Track__c chapterActions : [SELECT Id, Wish_Type__c, Assigned_To__c ,Due_Date__c,Recurring__c, Recurring_Frequency__c, Name, Chapter_Name__r.Name, Case_Type_Stage__c,Sort_Order__c,Task_Name__c FROM Chapter_Action_Track__c WHERE Chapter_Name__r.Name IN : chaptersWishMap.keySet() ORDER BY Sort_Order__c ASC]) {
-                if(chapterActionTracksMap.containsKey(chapterActions.Wish_type__c)) {
-                    chapterActionTracksMap.get(chapterActions.Wish_type__c).add(chapterActions);
-                } else {
-                    chapterActionTracksMap.put(chapterActions.Wish_type__c, new List<Chapter_Action_Track__c>{chapterActions});
-                }
-                
-            }
-            
-            List<Task> taskList = new List<Task>();
-            //Used to create new task for wish by looking into chapter action track object based on wish chapter, wish type and wish stage
-            for(Case createTasks : caseChapterIdsMap.values()) {
-                if(chapterActionTracksMap.containsKey(createTasks.Wish_type__c)) {
-                    for(Chapter_Action_Track__c actionTrack : chapterActionTracksMap.get(createTasks.Wish_type__c)) {
-                        if(createTasks.Wish_type__c == actionTrack.Wish_type__c && createTasks.Subject == actionTrack.Case_Type_Stage__c && createTasks.ChapterName__r.Name== actionTrack.Chapter_Name__r.Name && actionTrack.Sort_Order__c == 1) {
-                            Task newTask = new Task();
-                            newTask.WhatId = createTasks.Id;
-                            newTask.WhoId = createTasks.ContactId;
-                            newTask.Subject = actionTrack.Task_Name__c;
-                            newTask.ActivityDate = System.today() + Integer.valueOf(actionTrack.Due_Date__c);
-                            newTask.Sort_Order__c = actionTrack.Sort_Order__c;
-                            newTask.TaskVolunteerRole__c = actionTrack.Assigned_To__c;
-                            taskList.add(newTask);
-                        }
-                    } 
-                }
-            }
-            if(taskList.size()>0) {
-                //insert taskList;
-            }
-        }*/
+List<Task> newTaskList = new List<Task>();
+Map<String,List<Chapter_Action_Track__c>> chapterActionTracksMap = new Map<string, List<Chapter_Action_Track__c>>();
+
+//Used to get chapter action details based on wish chapter
+for(Chapter_Action_Track__c chapterActions : [SELECT Id, Wish_Type__c, Assigned_To__c ,Due_Date__c,Recurring__c, Recurring_Frequency__c, Name, Chapter_Name__r.Name, Case_Type_Stage__c,Sort_Order__c,Task_Name__c FROM Chapter_Action_Track__c WHERE Chapter_Name__r.Name IN : chaptersWishMap.keySet() ORDER BY Sort_Order__c ASC]) {
+if(chapterActionTracksMap.containsKey(chapterActions.Wish_type__c)) {
+chapterActionTracksMap.get(chapterActions.Wish_type__c).add(chapterActions);
+} else {
+chapterActionTracksMap.put(chapterActions.Wish_type__c, new List<Chapter_Action_Track__c>{chapterActions});
+}
+
+}
+
+List<Task> taskList = new List<Task>();
+//Used to create new task for wish by looking into chapter action track object based on wish chapter, wish type and wish stage
+for(Case createTasks : caseChapterIdsMap.values()) {
+if(chapterActionTracksMap.containsKey(createTasks.Wish_type__c)) {
+for(Chapter_Action_Track__c actionTrack : chapterActionTracksMap.get(createTasks.Wish_type__c)) {
+if(createTasks.Wish_type__c == actionTrack.Wish_type__c && createTasks.Subject == actionTrack.Case_Type_Stage__c && createTasks.ChapterName__r.Name== actionTrack.Chapter_Name__r.Name && actionTrack.Sort_Order__c == 1) {
+Task newTask = new Task();
+newTask.WhatId = createTasks.Id;
+newTask.WhoId = createTasks.ContactId;
+newTask.Subject = actionTrack.Task_Name__c;
+newTask.ActivityDate = System.today() + Integer.valueOf(actionTrack.Due_Date__c);
+newTask.Sort_Order__c = actionTrack.Sort_Order__c;
+newTask.TaskVolunteerRole__c = actionTrack.Assigned_To__c;
+taskList.add(newTask);
+}
+} 
+}
+}
+if(taskList.size()>0) {
+//insert taskList;
+}
+}*/
     }    
     
     //Used to create child wish for Parent wish
@@ -166,7 +166,7 @@ public class CaseTriggerHandler {
     }
     
     //Used to submit parent wish for approval once the required volunteer assigend to Wish
-   public static void submitForApproval(List<Case> wishListForApproval) {
+    public static void submitForApproval(List<Case> wishListForApproval) {
         List<Approval.ProcessSubmitRequest> approvalRequestList = new List<Approval.ProcessSubmitRequest>();
         for(Case wishForApproval : wishListForApproval) {
             Approval.ProcessSubmitRequest approvalRequest = new Approval.ProcessSubmitRequest();
@@ -181,17 +181,18 @@ public class CaseTriggerHandler {
         }
     }
     // When the case status is updated the corresponding lead status should be update.
-   /* public static void UpdateLeadStatus(List<Case> caseList){
+    public static void UpdateLeadStatus(List<Case> caseList){
         Map<Id,Case> caseMap = new Map<Id,Case>();
         List<Lead> updateLeadList = new List<Lead>();
         for(Case processdbcaseList : caseList){
-            caseMap.Put(processdbcaseList.Lead__c,processdbcaseList);
+            if(processdbcaseList.Status == 'Open' || processdbcaseList.Status == 'Escalated')
+                caseMap.Put(processdbcaseList.Lead__c,processdbcaseList);
             system.debug('@@@@@ caseMap @@@@@@@'+caseMap.Values());
         }
         
         if(caseMap.size() > 0){
-            for(Lead dbLeads: [SELECT Id,Status,Sub_Status__c  FROM Lead WHERE Id in: caseMap.KeySet()]){
-                if(caseMap.get(dbLeads.Id).Status == 'In progress')
+            for(Lead dbLeads: [SELECT Id,Status,Sub_Status__c,IsConverted FROM Lead WHERE Id in: caseMap.KeySet() AND IsConverted = False]){
+                if(caseMap.get(dbLeads.Id).Status == 'Open')
                 {
                     dbLeads.Sub_Status__c = 'Local';
                 }
@@ -202,15 +203,15 @@ public class CaseTriggerHandler {
                     dbLeads.Sub_Status__c = 'National';
                 }
                 
-                if(caseMap.get(dbLeads.Id).Status == 'Medical Eligible')
-                {
-                    dbLeads.Status = 'Qualified';
-                }
-                
-                if(caseMap.get(dbLeads.Id).Status == 'Denied')
-                {
-                    dbLeads.Status = 'DNQ';
-                }
+                /* if(caseMap.get(dbLeads.Id).Status == 'Medical Eligible')
+{
+dbLeads.Status = 'Qualified';
+}
+
+if(caseMap.get(dbLeads.Id).Status == 'Denied')
+{
+dbLeads.Status = 'DNQ';
+}*/
                 
                 updateLeadList.add(dbLeads);
                 system.debug('@@@@@ updateLeadList @@@@@@@'+updateLeadList);
@@ -220,10 +221,10 @@ public class CaseTriggerHandler {
         
         if(updateLeadList.size() > 0)
             update updateLeadList;
-    }*/
+    }
     
     public static void CheckBudgetActuals(List<Case> budgetCases) {
-       Set<Id> ActualsMatch = new Set<Id>();
+        Set<Id> ActualsMatch = new Set<Id>();
         Set<Id> budgetIds=new Set<Id>();
         Map<Id, List<String>> pandaCase =new Map<Id, List<String>>();
         Constant_AC  constant = new Constant_Ac();
@@ -237,13 +238,13 @@ public class CaseTriggerHandler {
         system.debug('P&A Case data 1.3 :'+ budgetCases);
         String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         List<case> PandACaseList= [SELECT Id,ParentId, Absent_Parent_Form__c,Child_s_Medical_Summary_Form__c,Communication_Profile__c,Date_Liability_Release_Authorization__c,
-                 Date_Received_for_Absent_Parent_Form__c,Date_Received_for_Child_s_Medical_Summar__c,Date_Received_for_Communication_Profile__c,
-                 Date_Received_for_Entertainment_Sports__c,Date_Received_for_Guardianship_Document__c,Date_Received_for_Passports__c,
-                 Date_Received_for_Single_Parent_Form__c,Date_Received_for_Visas__c,Date_Received_for_Wish_Safety_Authorizat__c,Date_Wish_Child_Form__c,
-                 Date_Wish_Family_Form__c,Date_Wish_Information_Form__c,Entertainment_Sports_Wish_LOU__c,Guardianship_Document__c,
-                 Liability_Release_and_Authorization__c,Passports__c,Single_Parent_Form__c,Visas__c,Wish_Child_Form__c,Wish_Family_Form__c,
-                 Wish_Information_Form__c,Wish_Safety_Authorization_Part_B_Form__c 
-                 FROM Case WHERE ParentId IN : budgetIds and RecordTypeId =: wishPlanningRecordTypeId];
+                                   Date_Received_for_Absent_Parent_Form__c,Date_Received_for_Child_s_Medical_Summar__c,Date_Received_for_Communication_Profile__c,
+                                   Date_Received_for_Entertainment_Sports__c,Date_Received_for_Guardianship_Document__c,Date_Received_for_Passports__c,
+                                   Date_Received_for_Single_Parent_Form__c,Date_Received_for_Visas__c,Date_Received_for_Wish_Safety_Authorizat__c,Date_Wish_Child_Form__c,
+                                   Date_Wish_Family_Form__c,Date_Wish_Information_Form__c,Entertainment_Sports_Wish_LOU__c,Guardianship_Document__c,
+                                   Liability_Release_and_Authorization__c,Passports__c,Single_Parent_Form__c,Visas__c,Wish_Child_Form__c,Wish_Family_Form__c,
+                                   Wish_Information_Form__c,Wish_Safety_Authorization_Part_B_Form__c 
+                                   FROM Case WHERE ParentId IN : budgetIds and RecordTypeId =: wishPlanningRecordTypeId];
         system.debug('P&A Case data 1 :'+ PandACaseList);
         for(Case panda : PandACaseList){
             if(panda.Absent_Parent_Form__c == true && panda.Date_Received_for_Absent_Parent_Form__c == null){
@@ -356,15 +357,15 @@ public class CaseTriggerHandler {
         List<Wish_Expense__c> wishExpenseList = [SELECT Id, Budget_Cash__c, Budget_In_Kind__c, Actual_Cash__c,Actual_In_Kind__c,FE_Posted_Cash__c, FE_Posted_In_Kind__c, Case__c FROM Wish_Expense__c WHERE Case__c In: budgetIds];
         system.debug('budget Info 2: ' + wishExpenseList );
         for(Id caseId : budgetIds){
-           for(Wish_Expense__c wishExpense : wishExpenseList ){
-               if( caseId == wishExpense.Case__c){
-                   if(!wishExpenseListbyId.containsKey(caseId)){
+            for(Wish_Expense__c wishExpense : wishExpenseList ){
+                if( caseId == wishExpense.Case__c){
+                    if(!wishExpenseListbyId.containsKey(caseId)){
                         wishExpenseListbyId.put(caseId, new List<Wish_Expense__c>{wishExpense });    
-                   }else{
+                    }else{
                         wishExpenseListbyId.get(caseId).add(wishExpense ); 
-                   } 
-               }
-           } 
+                    } 
+                }
+            } 
         }
         decimal totalBudCash=0;
         decimal totalBudInKind=0;
@@ -425,85 +426,103 @@ public class CaseTriggerHandler {
     public static void matchBudgetData(Set<Id> approvedBudgetIdsSet, Map<Id, String> approvedBudgetStatus) {
         List<Wish_Expense__c> wishExpenseUpdateList = new List<Wish_Expense__c>();
         Map<Id,Case> updateCaseMap = new Map<Id,Case>();
+        List<Case> casebudgetapprovals = new List<Case>();
+        Set<Id> approvedCaseIds = new Set<Id>();
+        String budgetStatus='';
+        String projectedStatus='';
         String caseApproveStatus;
         for(Wish_Expense__c updateRecord : [SELECT Id, Wish_Expense_Approval_Status__c,Budget_Approval_Status__c, Projected_Approval_Status__c,  
                                             Budget_Cash__c, Budget_In_Kind__c, Projected_Cash__c, Projected_In_Kind__c, Actual_Cash__c,
                                             Actual_In_Kind__c,Case__c, Case__r.Budget_Approved_Date__c FROM Wish_Expense__c WHERE Case__c =: approvedBudgetStatus.keySet()]) {
-            caseApproveStatus = approvedBudgetStatus.get(updateRecord.Case__c) ;
-            if(caseApproveStatus == 'Approved'){
-                if(updateRecord.Budget_Approval_Status__c == 'Submitted'){
-                    updateRecord.Budget_Approval_Status__c = 'Approved';
-                    if(updateRecord.Projected_Cash__c == 0) {
-                        updateRecord.Projected_Cash__c = updateRecord.Budget_Cash__c;
-                    }
-                    if(updateRecord.Projected_In_Kind__c == 0) {
-                        updateRecord.Projected_In_Kind__c = updateRecord.Budget_In_Kind__c;
-                    }
-                  
-                 
-                    
-                }
-                 if(updateRecord.Case__r.Budget_Approved_Date__c == Null)
-                  {
-                    Case updateCase = new Case();
-                    updateCase.id = updateRecord.Case__c;
-                    updateCase.Budget_Approved_Date__c = Date.Today();
-                    updateCaseMap.put(updateRecord.Case__c,updateCase);
-                    
-                  }
-                if(updateRecord.Projected_Approval_Status__c == 'Submitted'){
-                    updateRecord.Projected_Approval_Status__c = 'Approved';
-                }
-            }
-            wishExpenseUpdateList.add(updateRecord);
-        }
-        
+                                                caseApproveStatus = approvedBudgetStatus.get(updateRecord.Case__c) ;
+                                                
+                                                if(caseApproveStatus == 'Approved'){
+                                                    if(updateRecord.Budget_Approval_Status__c == 'Submitted'){
+                                                        updateRecord.Budget_Approval_Status__c = 'Approved';
+                                                        budgetStatus='Approved';
+                                                        if(updateRecord.Projected_Cash__c == 0) {
+                                                            updateRecord.Projected_Cash__c = updateRecord.Budget_Cash__c;
+                                                        }
+                                                        if(updateRecord.Projected_In_Kind__c == 0) {
+                                                            updateRecord.Projected_In_Kind__c = updateRecord.Budget_In_Kind__c;
+                                                        }
+                                                    }
+                                                    if(updateRecord.Case__r.Budget_Approved_Date__c == Null)
+                                                    {
+                                                        Case updateCase = new Case();
+                                                        updateCase.id = updateRecord.Case__c;
+                                                        updateCase.Budget_Approved_Date__c = Date.Today();
+                                                        updateCaseMap.put(updateRecord.Case__c,updateCase);
+                                                        
+                                                    }
+                                                    if(updateRecord.Projected_Approval_Status__c == 'Submitted'){
+                                                        updateRecord.Projected_Approval_Status__c = 'Approved';
+                                                        projectedStatus= 'Approved';
+                                                    }
+                                                }
+                                                wishExpenseUpdateList.add(updateRecord);
+                                                if(!approvedCaseIds.contains(updateRecord.Case__c)){
+                                                    approvedCaseIds.add(updateRecord.Case__c);
+                                                }
+                                            }
         if(wishExpenseUpdateList.size() > 0) {
             Update wishExpenseUpdateList;
         }
-        
         if(updateCaseMap.size() >0)
             update updateCaseMap.values();
+        
+        if(budgetStatus=='Approved' || projectedStatus== 'Approved'){
+            for(Id tempId : approvedCaseIds ){
+                Case approvedCase = new Case();
+                approvedCase.Id= tempId;
+                if(budgetStatus=='Approved')
+                    approvedCase.Budget_Status__c=budgetStatus;
+                if(projectedStatus== 'Approved')
+                    approvedCase.Projected_Status__c=projectedStatus; 
+                casebudgetapprovals.add(approvedCase);       
+            }
+            update casebudgetapprovals;
+        }
     }
     
-    public static void UpdateVolunteerWishGranted(Set<Id> wishIds)
-    {
-         Constant_AC  constant = new Constant_AC();
-        Id volunteerRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
-        List<Contact> updateContactList = new List<Contact>();
-        Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
-        Map<Id,Id> sobjectMap = new Map<Id,Id>();
-          List<AggregateResult> groupedResults = [SELECT Wish__c volCount, Count_Distinct(Wish__r.Id)aver  FROM Volunteer_Opportunity__c WHERE Wish__c  IN: wishIds AND Wish__c != Null GROUP BY Wish__c ];
-         if(!groupedResults.isEmpty()){
-            for(AggregateResult arr : groupedResults){
-                volunteercountMap.put((ID)arr.get('volCount'),(integer)arr.get('aver'));
-                
-            } 
-        }
-        for(Volunteer_Opportunity__c  dbVoluOpportunity : [SELECT Id,Wish__c,Volunteer_Name__c,Wish__r.Status From Volunteer_Opportunity__c WHERE Wish__c IN: volunteercountMap.KeySet() AND Wish__r.Status =: 'Granted']){
-            sobjectMap.put(dbVoluOpportunity.Volunteer_Name__c,dbVoluOpportunity.Wish__c); 
-        } 
-        
-        for(Contact dbVolunteerCon : [SELECT Id,Number_of_wishes_granted__c,Number_of_wishes_active__c,RecordTypeId FROM Contact where Id IN: sobjectMap.KeySet() AND RecordTypeId =: volunteerRecordTypeId]){
-            if(sobjectMap.containsKey(dbVolunteerCon.Id)){
-                Contact newCon = new Contact();
-                newCon.Id = dbVolunteerCon.Id;
-                if(volunteercountMap.containsKey(sobjectMap.get(dbVolunteerCon.Id))){
-                if(dbVolunteerCon.Number_of_wishes_granted__c!= Null && Integer.valueOf(dbVolunteerCon.Number_of_wishes_granted__c) > 0 ){
-                newCon.Number_of_wishes_granted__c=Integer.valueOf(dbVolunteerCon.Number_of_wishes_granted__c) + Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
-                newCon.Number_of_wishes_active__c =Integer.valueOf(dbVolunteerCon.Number_of_wishes_active__c) - Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
-                }else{
-                newCon.Number_of_wishes_granted__c=  Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
-                newCon.Number_of_wishes_active__c =Integer.valueOf(dbVolunteerCon.Number_of_wishes_active__c) - Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
-                system.debug('@@@@@@@@@@ ELSE IF newCon.Number_of_wishes_active__c @@@@@@@@@@@'+ newCon.Number_of_wishes_granted__c);
-                }
-                updateContactList.add(newCon);
-               }
-            }
-        }  
-        if(updateContactList.size() > 0)
-        update updateContactList;
-    }
+    /* public static void UpdateVolunteerWishGranted(Set<Id> wishIds)
+{
+Constant_AC  constant = new Constant_AC();
+Id volunteerRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+List<Contact> updateContactList = new List<Contact>();
+Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
+Map<Id,Id> sobjectMap = new Map<Id,Id>();
+List<AggregateResult> groupedResults = [SELECT Wish__c volCount, Count_Distinct(Wish__r.Id)aver  FROM Volunteer_Opportunity__c WHERE Wish__c  IN: wishIds AND Wish__c != Null GROUP BY Wish__c ];
+if(!groupedResults.isEmpty()){
+for(AggregateResult arr : groupedResults){
+volunteercountMap.put((ID)arr.get('volCount'),(integer)arr.get('aver'));
+
+} 
+}
+for(Volunteer_Opportunity__c  dbVoluOpportunity : [SELECT Id,Wish__c,Volunteer_Name__c,Wish__r.Status From Volunteer_Opportunity__c WHERE Wish__c IN: volunteercountMap.KeySet() AND Wish__r.Status =: 'Granted']){
+sobjectMap.put(dbVoluOpportunity.Volunteer_Name__c,dbVoluOpportunity.Wish__c); 
+} 
+
+for(Contact dbVolunteerCon : [SELECT Id,Number_of_wishes_granted__c,Number_of_wishes_active__c,RecordTypeId FROM Contact where Id IN: sobjectMap.KeySet() AND RecordTypeId =: volunteerRecordTypeId]){
+if(sobjectMap.containsKey(dbVolunteerCon.Id)){
+Contact newCon = new Contact();
+newCon.Id = dbVolunteerCon.Id;
+if(volunteercountMap.containsKey(sobjectMap.get(dbVolunteerCon.Id))){
+if(dbVolunteerCon.Number_of_wishes_granted__c!= Null && Integer.valueOf(dbVolunteerCon.Number_of_wishes_granted__c) > 0 ){
+newCon.Number_of_wishes_granted__c=Integer.valueOf(dbVolunteerCon.Number_of_wishes_granted__c) + Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
+newCon.Number_of_wishes_active__c =Integer.valueOf(dbVolunteerCon.Number_of_wishes_active__c) - Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
+}else{
+newCon.Number_of_wishes_granted__c=  Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
+newCon.Number_of_wishes_active__c =Integer.valueOf(dbVolunteerCon.Number_of_wishes_active__c) - Integer.valueOf(volunteercountMap.get(sobjectMap.get(dbVolunteerCon.Id)));
+system.debug('@@@@@@@@@@ ELSE IF newCon.Number_of_wishes_active__c @@@@@@@@@@@'+ newCon.Number_of_wishes_granted__c);
+}
+updateContactList.add(newCon);
+}
+}
+}  
+if(updateContactList.size() > 0)
+update updateContactList;
+}*/
     
     //1.Used to create list of task for volunteers when the wish determination case is created.
     //2.Based on "Wish Planning" recordtype, we are pulling the list of task which are stored under Chapter Action Track" object.
@@ -604,7 +623,7 @@ public class CaseTriggerHandler {
         for(WishGrantedSubCaseTaskList__c createSubTask : WishGrantedSubCaseTaskList__c.getAll().values()) {
             wishGrantedTaskDetailsMap.put(createSubTask.Task_Subject__c, createSubTask);
         }
-       
+        
         for(CaseTeamMember caseTeamMem : [SELECT Id, ParentId, MemberId, TeamRoleId  FROM CaseTeamMember WHERE ParentId IN : interviewTaskParentIdMap.keySet() AND TeamRole.Name = 'Wish Granter' ORDER BY CreatedDate DESC]) {
             if(!caseTeamMemberMap.containsKey(caseTeamMem.ParentId)) {
                 caseTeamMemberMap.put(caseTeamMem.ParentId,caseTeamMem.MemberId);
@@ -788,7 +807,7 @@ public class CaseTriggerHandler {
                             if(dayCalc != null) {
                                 todayDate = System.today().addDays(dayCalc);
                             } else {
-                              todayDate = System.today();  
+                                todayDate = System.today();  
                             }
                             if(currCase.Parent.Anticipated_Start_Date__c > todayDate.addmonths(months))
                             {
@@ -841,12 +860,12 @@ public class CaseTriggerHandler {
                         } else {
                             dayCalc = Weeks * 7;
                         }
-                       
+                        
                         if(currActionTrack.Months__c != null && currActionTrack.Months__c != 0 && currCase.Parent.Anticipated_Start_Date__c != null) {
                             if(dayCalc != null) {
                                 todayDate = System.today().addDays(dayCalc);
                             } else {
-                              todayDate = System.today();  
+                                todayDate = System.today();  
                             }
                             if(currCase.Parent.Anticipated_Start_Date__c > todayDate.addmonths(months))
                             {
@@ -1156,11 +1175,11 @@ public class CaseTriggerHandler {
             update closeTaskList;
         }
     }
-   
-     public static void updateLeadStatus(set<string> updatedApprovedLeadInfoSet, set<string> updatedDnqLeadInfoSet){
-     
-     list<Lead> UpadtedLeadListInfo = new list<Lead>();
-     for(Lead currentLead: [SELECT ID,Status,isConverted FROm Lead Where (ID IN:updatedApprovedLeadInfoSet OR ID IN:updatedDnqLeadInfoSet) and isConverted =: False]){
+    
+    public static void updateLeadStatus(set<string> updatedApprovedLeadInfoSet, set<string> updatedDnqLeadInfoSet){
+        
+        list<Lead> UpadtedLeadListInfo = new list<Lead>();
+        for(Lead currentLead: [SELECT ID,Status,isConverted FROm Lead Where (ID IN:updatedApprovedLeadInfoSet OR ID IN:updatedDnqLeadInfoSet) and isConverted =: False]){
             
             if(updatedApprovedLeadInfoSet.contains(currentLead.Id)){
                 currentLead.Status  = 'Qualified';
@@ -1169,18 +1188,18 @@ public class CaseTriggerHandler {
             else if(updatedDnqLeadInfoSet.contains(currentLead.Id)){
                 currentLead.Status  = 'DNQ';
                 currentLead.DNQ_Date__c = Date.Today();
-                 system.debug('################ Inside updatedDnqLeadInfoSet');
-            
+                system.debug('################ Inside updatedDnqLeadInfoSet');
+                
             }
             UpadtedLeadListInfo.add(currentLead);
+            
+        }
+        if(UpadtedLeadListInfo.size()>0){
+            
+            Update UpadtedLeadListInfo;
+        }
         
     }
-     if(UpadtedLeadListInfo.size()>0){
-     
-         Update UpadtedLeadListInfo;
-     }
-     
-     }
     
     public Static void sendEmailToNationalMACTeam(List<Case> diagnosisCaseList) {
         Set<Id> leadIdSet = new Set<Id>();
@@ -1221,73 +1240,204 @@ public class CaseTriggerHandler {
     }
     
     /* This  CreateSubCases() is used to create planning and Granting and Impact sub cases and update the parent case owner and
-       close the wish determination sub case.*/
-  /*  public static void CreateSubCases(List<Case> parentCaseList){
-        Set<Id> caseId = new Set<Id>();
-        Set<Id> accountId = new Set<Id>();
-        Map<Id,Account> accountMap = new Map<Id,Account>();
-        for(Case processParentList : parentCaseList){
-            caseId.add(processParentList.Id);
-            if(processParentList.ChapterName__c != Null)
-            accountId.add(processParentList.ChapterName__c);
-        } 
-        
-        for(Account dbChapterAccount : [SELECT Id,Name,Wish_Co_ordinator__c From Account WHERE Id IN:accountId]){
-            accountMap.Put(dbChapterAccount.Id,dbChapterAccount);
-        }
-        
-        for(Case processParentList : parentCaseList);
-    }*/
+close the wish determination sub case.*/
+    /*  public static void CreateSubCases(List<Case> parentCaseList){
+Set<Id> caseId = new Set<Id>();
+Set<Id> accountId = new Set<Id>();
+Map<Id,Account> accountMap = new Map<Id,Account>();
+for(Case processParentList : parentCaseList){
+caseId.add(processParentList.Id);
+if(processParentList.ChapterName__c != Null)
+accountId.add(processParentList.ChapterName__c);
+} 
+
+for(Account dbChapterAccount : [SELECT Id,Name,Wish_Co_ordinator__c From Account WHERE Id IN:accountId]){
+accountMap.Put(dbChapterAccount.Id,dbChapterAccount);
+}
+
+for(Case processParentList : parentCaseList);
+}*/
     
     public static void updateChildCase(List<Case> parentCaseList){
-     Map<Id,Case> parentCaseMap = new Map<Id,Case>();
-     Map<Id,Case> updateChildCaseMap = new Map<Id,Case>();
-     List<Case> insertchildCaseList = new List<Case>();
-     Constant_AC  constant = new Constant_Ac();    
-     String wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
-     String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
-     String wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
-     String wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
-     String wishEffectRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishEffectRT).getRecordTypeId();
-   
+        Map<Id,Case> parentCaseMap = new Map<Id,Case>();
+        Map<Id,Case> updateChildCaseMap = new Map<Id,Case>();
+        List<Case> insertchildCaseList = new List<Case>();
+        Constant_AC  constant = new Constant_Ac();    
+        String wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        String wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+        String wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+        String wishEffectRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishEffectRT).getRecordTypeId();
+        
         for(Case processParentCase : parentCaseList){
             parentCaseMap.put(processParentCase.Id,processParentCase); 
         }
         
-        for(Case dbParentCase : [SELECT Id,OwnerId,Status,ParentId,RecordTypeId from Case WHERE ParentId =: parentCaseMap.keySet() AND RecordTypeId  =: wishDeterminationRecordTypeId ]){
-          if(parentCaseMap.containsKey(dbParentCase.ParentId)){
-           dbParentCase.OwnerId = parentCaseMap.get(dbParentCase.ParentId).OwnerId;
-           dbParentCase.Status = 'Closed';  
-           updateChildCaseMap.put(dbParentCase.Id,dbParentCase);
-          }
+        for(Case dbParentCase : [SELECT Id,OwnerId,Status,ParentId,RecordTypeId from Case WHERE ParentId =: parentCaseMap.keySet() AND RecordTypeId  =: wishDeterminationRecordTypeId AND isClosed = false]){
+            if(parentCaseMap.containsKey(dbParentCase.ParentId)){
+                dbParentCase.OwnerId = parentCaseMap.get(dbParentCase.ParentId).OwnerId;
+                dbParentCase.Status = 'Closed';  
+                updateChildCaseMap.put(dbParentCase.Id,dbParentCase);
+            }
         }
         if(updateChildCaseMap.size() > 0)
-        update updateChildCaseMap.values();
+            update updateChildCaseMap.values();
         
         for(Case ProcessChilldCaseId : updateChildCaseMap.values()){
-        Case newPlanningWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Planning', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishPlanningRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
-        insertchildCaseList.add(newPlanningWish); 
-        Case newGrantingWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Granting', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishGrantRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
-        insertchildCaseList.add(newGrantingWish); 
-        Case newImpactWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Impact', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishEffectRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
-        insertchildCaseList.add(newImpactWish); 
+            Case newPlanningWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Planning', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishPlanningRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
+            insertchildCaseList.add(newPlanningWish); 
+            Case newGrantingWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Granting', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishGrantRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
+            insertchildCaseList.add(newGrantingWish); 
+            Case newImpactWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Impact', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishEffectRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
+            insertchildCaseList.add(newImpactWish); 
         }
         
         if(insertchildCaseList.size() > 0)
-        insert insertchildCaseList;
+            insert insertchildCaseList;
     }
     /***Change the Volunteer Opportunity Status as Completed when the wish wish status as completed or closed ********/
     public static void updateVolunteerOpportunityStatus(List<Id> caseId){
-         Constant_AC  constant = new Constant_Ac(); 
-         List<Volunteer_Opportunity__c> volunteerOppList = new List<Volunteer_Opportunity__c >(); 
-         Id wishVolunteerOpportunity = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
-         for(Volunteer_Opportunity__c currRec:[SELECT id,Status__c from Volunteer_Opportunity__c where Wish__c IN:caseId and RecordTypeId=:wishVolunteerOpportunity]){
-             currRec.Status__c='Completed';
-             volunteerOppList.add(currRec);
-         }
-         if(volunteerOppList.size() > 0 && volunteerOppList != Null){
-         Update volunteerOppList;
-         }
-    
+        Constant_AC  constant = new Constant_Ac(); 
+        List<Volunteer_Opportunity__c> volunteerOppList = new List<Volunteer_Opportunity__c >(); 
+        Id wishVolunteerOpportunity = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
+        for(Volunteer_Opportunity__c currRec:[SELECT id,Status__c from Volunteer_Opportunity__c where Wish__c IN:caseId and RecordTypeId=:wishVolunteerOpportunity]){
+            currRec.Status__c='Completed';
+            volunteerOppList.add(currRec);
+        }
+        if(volunteerOppList.size() > 0 && volunteerOppList != Null){
+            Update volunteerOppList;
+        }
+        
     }
+    
+    public static void grantedWishCount(set<Id> wishIdsSet){
+        string key;
+        set<string> parentWishIdsSet = new set<string>();
+        Map<Id,Integer> volunteerWithCount = new Map<id,Integer>();
+        list<Contact> updateGrantedWishCount = new list<Contact>();
+        set<Id> volunteerNameSet = new set<Id>();
+        for(Volunteer_Opportunity__c currentVolOpp : [SELECT ID,Wish__c,Wish__r.Status,Volunteer_Name__c,IsApproved__c FROM Volunteer_Opportunity__c WHERE IsApproved__c = True AND Wish__r.Status = 'Granted']){
+            key = currentVolOpp.Wish__c + '_' + currentVolOpp.Volunteer_Name__c; 
+            system.debug('###### parentWishIdsSet' + parentWishIdsSet);
+            if(!parentWishIdsSet.contains(key)){
+                system.debug('Inside 1st If --- volunteerNameSet' + volunteerNameSet);
+                parentWishIdsSet.add(key);
+                if(volunteerNameSet.contains(currentVolOpp.Volunteer_Name__c)){
+                    system.debug('Inside 2nd If');
+                    volunteerWithCount.put(currentVolOpp.Volunteer_Name__c,volunteerWithCount.get(currentVolOpp.Volunteer_Name__c)+1);
+                }
+                else{
+                    system.debug('Inside else');
+                    volunteerWithCount.put(currentVolOpp.Volunteer_Name__c,1);
+                    volunteerNameSet.add(currentVolOpp.Volunteer_Name__c);
+                }
+            }
+        }
+        system.debug('######## volunteerWithCount ' + volunteerWithCount);
+        for(Contact volunteerContact : [SELECT ID,Number_of_wishes_active__c,Number_of_wishes_granted__c From Contact WHERE ID IN: volunteerWithCount.keySet()]){
+            if(volunteerWithCount.containsKey(volunteerContact.Id)){
+                system.debug('#### Number_of_wishes_active__c *****'+  volunteerWithCount.get(volunteerContact.Id));         
+                system.debug('#### Number_of_wishes_active__c *****'+  volunteerContact.Number_of_wishes_active__c);         
+                volunteerContact.Number_of_wishes_granted__c = volunteerWithCount.get(volunteerContact.Id);
+                if(volunteerContact.Number_of_wishes_active__c > 0)
+                    volunteerContact.Number_of_wishes_active__c -= volunteerWithCount.get(volunteerContact.Id);
+                Integer count = Integer.valueOf( volunteerContact.Number_of_wishes_active__c);
+                if(count < 0)
+                    volunteerContact.Number_of_wishes_active__c = 0;
+                updateGrantedWishCount.add(volunteerContact);
+            }
+        }
+        system.debug('#### updateGrantedWishCount *****'+ updateGrantedWishCount);
+        if(updateGrantedWishCount.size() > 0){
+            Update updateGrantedWishCount;
+        }
+    }
+    
+    public static void wishChildRegionValidation(Map<Id, Case> parentCaseMap, Set<Id> contactSet) {
+        Constant_AC  constant = new Constant_AC();
+        Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+        
+        Set<Id> wishChildWithNoRegion = new Set<Id>();
+        if(contactSet.size() > 0) {
+            for(Contact wishChild : [SELECT Id, Region_Code__c FROM Contact WHERE RecordTypeId =: wichChildRecordTypeId AND Id IN : contactSet]) {
+                if(wishChild.Region_Code__c == null) {
+                    wishChildWithNoRegion.add(wishChild.Id);
+                }
+            }
+            System.debug('>>>>wishChildWithNoRegion>>>>'+wishChildWithNoRegion);
+            if(wishChildWithNoRegion.size() > 0) {
+                for(Case parentCase : parentCaseMap.values()) {
+                    if(wishChildWithNoRegion.contains(parentCase.ContactId)) {
+                        parentCase.addError('Please enter region for wish child');
+                    }
+                }
+            }
+        }
+    }
+    
+    public static void wishClearanceTask(Map<Id, Case> wishClearanceMap, Set<Id> newWishClearanceSet, Set<Id> newMedicalSummarySet, Set<Id> newMedicalWishClearanceSet) {
+        
+        Set<Task> taskToUpdateList = new Set<Task>();
+        
+        Map<String, Task> taskToUpdateMap = new Map<String, Task>();
+        for(Task checkClearanceTask : [SELECT Id, Subject, WhatId, OwnerId, ActivityDate FROM Task WHERE status != 'Completed' AND WhatId IN : wishClearanceMap.keySet() AND (Subject = 'New wish clearance needed' OR Subject = 'New medical summary needed'  OR Subject = 'New wish clearance needed')]) {
+            taskToUpdateMap.put(checkClearanceTask.WhatId+'-'+checkClearanceTask.Subject, checkClearanceTask);
+        }
+        if(newWishClearanceSet.size() > 0) {
+            for(Id newWishClearanceTask : newWishClearanceSet) {
+                if(taskToUpdateMap.containsKey(newWishClearanceTask+'-'+'New wish clearance needed')) {
+                    taskToUpdateMap.get(newWishClearanceTask+'-'+'New wish clearance needed').ActivityDate = Date.today()+3;
+                    taskToUpdateList.add(taskToUpdateMap.get(newWishClearanceTask+'-'+'New wish clearance needed'));
+                } else {
+                    Task newTask = new Task();
+                    newTask.ActivityDate = Date.today() + 3;
+                    newTask.OwnerId = wishClearanceMap.get(newWishClearanceTask).OwnerId;
+                    newTask.Subject = 'New wish clearance needed';
+                    newTask.WhatId = newWishClearanceTask;
+                    taskToUpdateList.add(newTask);
+                }
+            }
+        }
+        
+        
+        if(newMedicalWishClearanceSet.size() > 0) {
+            for(Id newWishClearanceTask : newMedicalWishClearanceSet) {
+                if(taskToUpdateMap.containsKey(newWishClearanceTask+'-'+'New medical summary needed')) {
+                    taskToUpdateMap.get(newWishClearanceTask+'-'+'New medical summary needed').ActivityDate = Date.today()+3;
+                    taskToUpdateList.add(taskToUpdateMap.get(newWishClearanceTask+'-'+'New medical summary needed'));
+                } else {
+                    Task newTask = new Task();
+                    newTask.ActivityDate = Date.today() + 3;
+                    newTask.OwnerId = wishClearanceMap.get(newWishClearanceTask).OwnerId;
+                    newTask.Subject = 'New medical summary needed';
+                    newTask.WhatId = newWishClearanceTask;
+                    taskToUpdateList.add(newTask);
+                }
+            }
+        }
+        
+        if(newMedicalSummarySet.size() > 0) {
+            for(Id newWishClearanceTask : newMedicalSummarySet) {
+                if(taskToUpdateMap.containsKey(newWishClearanceTask+'-'+'New wish clearance needed')) {
+                    taskToUpdateMap.get(newWishClearanceTask+'-'+'New wish clearance needed').ActivityDate = Date.today()+3;
+                    taskToUpdateList.add(taskToUpdateMap.get(newWishClearanceTask+'-'+'New wish clearance needed'));
+                } else {
+                    Task newTask = new Task();
+                    newTask.ActivityDate = Date.today() + 3;
+                    newTask.OwnerId = wishClearanceMap.get(newWishClearanceTask).OwnerId;
+                    newTask.Subject = 'New wish clearance needed';
+                    newTask.WhatId = newWishClearanceTask;
+                    taskToUpdateList.add(newTask);
+                }
+            }
+        }
+        
+        
+        if(taskToUpdateList.size() > 0) {
+            List<Task> newTaskList = new List<Task>();
+            newTaskList.addAll(taskToUpdateList);
+            upsert newTaskList;
+        }
+    }
+    
 }

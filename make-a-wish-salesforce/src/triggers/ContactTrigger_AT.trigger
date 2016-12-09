@@ -6,7 +6,7 @@ Description : ContactTrigger_AT is used to assign the account Name for Volunteer
 Updating Affiliation status based on the application status.
 *****************************************************************************************************/
 
-trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,After update,After delete) {
+trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,After update,After delete, Before delete) {
     
     Constant_AC  constant = new Constant_AC();
     Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
@@ -47,6 +47,12 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                     newContact.BirthDate = dtConverted ;
                 }
             }
+            
+            if(newContact.Migrated_Record__c == True)
+            {
+                newContact.MailingCountry = 'United States';
+                newContact.OtherCountry = 'United States';
+            }
         }
     }
     // Birthdate concatenation at before update.
@@ -59,6 +65,13 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         
         for(Contact newContact : Trigger.new)
         { 
+        
+            if(newContact.Migrated_Record__c == True)
+            {
+                newContact.MailingCountry = 'United States';
+                newContact.OtherCountry = 'United States';
+            }
+        
             if(newContact.migrated_record__c != True)
             {
                 
@@ -307,25 +320,25 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
     
     if(Trigger.isAfter && Trigger.isInsert)
     {
-        set<Id> conIdSet = new set<Id>();
+        Map<Id,Id> conIdMap = new Map<Id,Id>();
         Map<Id,Id> contactAccountIdMap = new Map<Id,Id>();
         for(Contact conCurrRec: trigger.new)
         {
             if(conCurrRec.migrated_record__c != True)
             {
                 if(conCurrRec.RecordTypeId == wichChildRecordTypeId  && (conCurrRec.ICD_10_Code__c != Null || conCurrRec.Diagnosis__c != Null || conCurrRec.Short_Description__c != Null || conCurrRec.Non_Verbal__c != Null ) ){
-                    conIdSet.add(conCurrRec.Id);    
+                    conIdMap.put(conCurrRec.AccountId,conCurrRec.Id);    
                 }
                 if(conCurrRec.RecordTypeId == familyContactRecordTypeId ){
-                    contactAccountIdMap .put(conCurrRec.Id,conCurrRec.AccountId);    
+                    contactAccountIdMap .put(conCurrRec.AccountId,conCurrRec.Id);   
                 }
             }
         }
-        if(conIdSet.size() > 0){
-            ContactTriggerHandler.createConstituentContactCode(conIdSet,'Wish Child');
+        if(conIdMap.size() > 0){
+            ContactTriggerHandler.createConstituentContactCode(conIdMap,'Wish Child');
         }
         if(contactAccountIdMap .size() > 0){
-           ContactTriggerHandler.createAffiliation(contactAccountIdMap );
+          ContactTriggerHandler.createConstituentContactCode(contactAccountIdMap ,'Wish Parent/Guardians');
         }
     }
     
@@ -337,7 +350,8 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         set<Id> volunteercontactSet = new Set<Id>();
         Map<Id,Contact> volunteerContactMap = new Map<Id,Contact>();
         Set<Id> rejectedApplicationIds = new Set<Id>();
-        list<Contact> updateEmailContact = new list<Contact>();
+        Map<Id,Contact> updateEmailContactMap = new Map<Id,Contact>();
+        //list<Contact> updateEmailContact = new list<Contact>();
         Set<String> zipCodesSet = new Set<String>();
         Map<Id,Contact> contactMap = new Map<Id, Contact>();
         set<string> contactIdsForEmailChange = new set<string>();
@@ -355,11 +369,13 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 {
                     rejectedApplicationIds.add(newContact.id);
                 }
-                if(newContact.recordTypeId == MedicalProfContactRecordTypeId  &&(newContact.Name!= trigger.oldMap.get(newContact.Id).Name||
+                
+                if(newContact.recordTypeId == MedicalProfContactRecordTypeId  &&(newContact.Name != trigger.oldMap.get(newContact.Id).Name||
                     newContact.Email!= trigger.oldMap.get(newContact.Id).Email)){
                    
                     MedicalProfContactSet.add(newContact.Id);
                 }
+                
                 if((newContact.recordTypeId == volunteerRecordTypeId) && newContact.Volunteer_Role__c != Null && (newContact.Volunteer_Role__c != Trigger.oldMap.get(newContact.id).Volunteer_Role__c))
                 {
                     volunteerContactMap.put(newContact.id, newContact);
@@ -403,7 +419,8 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                                                                  con.id = newRelationShip.npe4__Contact__c;
                                                                  con.Recipient_Email__c = m1.get(temp).Email;
                                                                  //con.First_Recipient_Name__c = m1.get(temp).Name;
-                                                                 updateEmailContact.add(con);
+                                                                 //updateEmailContact.add(con);
+                                                                 updateEmailContactMap.put(con.Id,con);
                                                              }
                                                              else if(m1.containsKey(temp1)){
                                                                  
@@ -411,7 +428,8 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                                                                  con.id = newRelationShip.npe4__Contact__c;
                                                                  con.second_Recipient_Email__c = m1.get(temp1).Email;
                                                                  // con.Second_Recipient_Name__c = m1.get(temp1).Name;
-                                                                 updateEmailContact.add(con);
+                                                                 //updateEmailContact.add(con);
+                                                                 updateEmailContactMap.put(con.Id,con);
                                                              }
                                                              
                                                          }
@@ -419,8 +437,8 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         }
         
         
-            if(updateEmailContact.size()>0){
-                Update updateEmailContact;
+            if(updateEmailContactMap.size()>0){
+                Update updateEmailContactMap.Values();
             }
             
             

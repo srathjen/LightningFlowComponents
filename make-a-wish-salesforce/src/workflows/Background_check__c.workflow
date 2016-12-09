@@ -84,6 +84,11 @@
             <operation>equals</operation>
             <value>Approved,Approved w/ Conditions</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This workflow will fire when the background check status is completed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>

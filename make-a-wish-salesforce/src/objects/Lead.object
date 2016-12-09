@@ -1347,6 +1347,14 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
+        <fullName>From_Mulesoft__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>From Mulesoft</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Gender__c</fullName>
         <description>This field holds the Gender information of the Wish Kid</description>
         <externalId>false</externalId>
@@ -1958,6 +1966,14 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Migrated Record</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>MobilePhone</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
@@ -2385,6 +2401,34 @@
         <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Region_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>It holds the region for chapter</description>
+        <externalId>false</externalId>
+        <label>Region Code</label>
+        <lookupFilter>
+            <active>true</active>
+            <booleanFilter>1 OR 2</booleanFilter>
+            <filterItems>
+                <field>$Source.ChapterName__c</field>
+                <operation>equals</operation>
+                <valueField>Regions__c.Chapter_Name__c</valueField>
+            </filterItems>
+            <filterItems>
+                <field>Regions__c.Chapter_Name__c</field>
+                <operation>equals</operation>
+                <value></value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Regions__c</referenceTo>
+        <relationshipLabel>Leads</relationshipLabel>
+        <relationshipName>Leads</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Relationship_to_child__c</fullName>

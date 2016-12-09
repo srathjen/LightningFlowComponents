@@ -432,7 +432,7 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>Travel_Data__c.parent_wish__c</relatedList>
+        <relatedList>Travel_Data__c.Parent_Wish__c</relatedList>
     </relatedLists>
     <relatedObjects>ContactId</relatedObjects>
     <relatedObjects>AccountId</relatedObjects>

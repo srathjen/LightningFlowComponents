@@ -17,11 +17,13 @@ public class AffiliationTriggerHandler {
         List<CollaborationGroupMember> chatterGroupMembersList = new List<CollaborationGroupMember>();
         
         for(npe5__Affiliation__c getChapters : [SELECT Id, npe5__Organization__r.Name, npe5__Contact__c FROM npe5__Affiliation__c WHERE npe5__Contact__c IN : volunteerContactIdsSet AND Id IN : affiliationsIdsSet]) {
-            if(!chapterNamesSet.contains(getChapters.npe5__Organization__r.Name.removeStart('Make-A-Wish')+'- Chapter')) {
-                chapterNamesSet.add(getChapters.npe5__Organization__r.Name.removeStart('Make-A-Wish')+'- Chapter');
+            if(!chapterNamesSet.contains(getChapters.npe5__Organization__r.Name)) {
+                chapterNamesSet.add(String.valueOf(getChapters.npe5__Organization__r.Name).removeStart('Make-A-Wish '));
             }
-            volunteerChaptersMap.put(getChapters.npe5__Contact__c, getChapters.npe5__Organization__r.Name);
+            volunteerChaptersMap.put(getChapters.npe5__Contact__c, String.valueOf(getChapters.npe5__Organization__r.Name).removeStart('Make-A-Wish '));
         }
+        
+        System.debug('ChapterName Set'+ chapterNamesSet);
         // Used to get volunteer user id and volunteer contact id
         for(User relatedUsers : [SELECT Id, ContactId FROM User WHERE ContactId IN : volunteerContactIdsSet]) {
             volunteerUsersMap.put(relatedUsers.ContactId ,relatedUsers.Id);
@@ -32,6 +34,7 @@ public class AffiliationTriggerHandler {
                 chatterGroupNameIdsMap.put(getgroupId.Name,getgroupId.Id);
             }
         }
+        System.debug('chatterGroupNameIdsMap>>>'+chatterGroupNameIdsMap);
         Set<String> chatterGroupsMembersSet = new Set<String>();
         for(CollaborationGroupMember chatterGroupMemberExistCheck : [SELECT Id, MemberId, CollaborationGroupId FROM CollaborationGroupMember WHERE MemberId IN : volunteerUsersMap.values()])  {
             chatterGroupsMembersSet.add(chatterGroupMemberExistCheck.CollaborationGroupId+'-'+chatterGroupMemberExistCheck.MemberId);
@@ -45,8 +48,9 @@ public class AffiliationTriggerHandler {
             }            
         }
         if(chatterGroupMembersList.size()>0) {
-           if(!Test.isRunningTest())
-            Insert chatterGroupMembersList; // adding members to the group.
+            if(!Test.isRunningTest()) {
+                insert chatterGroupMembersList; // adding members to the group.
+            }
         }
     }
     //used to update the status field in contact for reporting purpose

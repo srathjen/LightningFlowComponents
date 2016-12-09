@@ -78,6 +78,10 @@
         <name>Emergency_Contact__c</name>
     </fields>
     <fields>
+        <label><!-- From Mulesoft --></label>
+        <name>From_Mulesoft__c</name>
+    </fields>
+    <fields>
         <label><!-- In-Kind Approval Status --></label>
         <name>In_Kind_Approval_Status__c</name>
         <picklistValues>
@@ -234,8 +238,16 @@
         <name>Is_Approved__c</name>
     </fields>
     <fields>
-        <label><!-- National Medical Advisor Email --></label>
+        <label><!-- MAC Email --></label>
+        <name>MAC_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medical Advisor Email --></label>
         <name>MAC_Email_del__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
     </fields>
     <fields>
         <label><!-- Notes --></label>

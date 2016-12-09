@@ -341,6 +341,20 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Parent_Wish__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent Wish</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Travel Data</relationshipLabel>
+        <relationshipName>Travel_Data</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
         <fullName>Phone_Number__c</fullName>
         <externalId>false</externalId>
         <label>Phone Number</label>
@@ -505,20 +519,6 @@
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>parent_wish__c</fullName>
-        <externalId>false</externalId>
-        <label>parent wish</label>
-        <referenceTo>Case</referenceTo>
-        <relationshipLabel>Travel Data</relationshipLabel>
-        <relationshipName>Travel_Data</relationshipName>
-        <relationshipOrder>0</relationshipOrder>
-        <reparentableMasterDetail>false</reparentableMasterDetail>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>MasterDetail</type>
-        <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <label>Travel Data</label>
     <listViews>

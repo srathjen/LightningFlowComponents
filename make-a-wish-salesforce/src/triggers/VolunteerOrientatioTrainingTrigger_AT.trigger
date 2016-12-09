@@ -15,10 +15,13 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         Set<Id> volnteerContactIdSet = new Set<Id>();
         for(Volunteer_Orientation_Training__c newVOL : Trigger.new)
         {
+          if(newVol.Migrated_Record__c == false)
+          {
             if(newVOL.Volunteer_Attendance__c != Null && newVOL.Volunteer_Attendance__c == 'Completed' && newVol.Type__c == 'Training')
             {
                 volnteerContactIdSet.add(newVOL.Volunteer__c);
             }
+          }
             
         }
         
@@ -30,37 +33,48 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
     
    
     //This is used to map the acount name,phone,email values and merge those field in email template to send an email when volunteer reigster,cancel or completed the orientation and training
-    if((trigger.isBefore && Trigger.isInsert) ||(trigger.isBefore  && trigger.isUpdate)){
+    if((trigger.isBefore && Trigger.isInsert) ||(trigger.isBefore  && trigger.isUpdate))
+    {
         set<string> volOTSet = new set<string>();
         set<Id> oriandTrainingSet = new set<Id>();
         Map<Id,Contact> contactInfoMap = new Map<Id,Contact>();
         Map<Id,Volunteer_Orientation_Training__c> volOriandTraingInfoMap = new Map<Id,Volunteer_Orientation_Training__c>();
         list<Contact> contacttList = new list<Contact>();
-        for(Volunteer_Orientation_Training__c currRec : Trigger.new){
-            if(currRec.Volunteer__c != Null){
-                volOTSet.add(currRec.Volunteer__c);
-            }
-            if(currRec.Orientation_Training__c != Null){
-                oriandTrainingSet.add(currRec.Id);
+        for(Volunteer_Orientation_Training__c currRec : Trigger.new)
+        {
+           if(currRec.Migrated_Record__c == false)
+           {
+                if(currRec.Volunteer__c != Null){
+                    volOTSet.add(currRec.Volunteer__c);
+                }
+                if(currRec.Orientation_Training__c != Null){
+                    oriandTrainingSet.add(currRec.Id);
+                }
             }
         }
         
         
-        for(Contact getContactInfo : [SELECT ID, Name, Account.Name, Account.Phone,Email,Account.Email__c FROM contact where id IN:volOTSet]) {
+        for(Contact getContactInfo : [SELECT ID, Name, Account.Name, Account.Phone,Email,Account.Email__c FROM contact where id IN:volOTSet]) 
+        {
             if(!contactInfoMap.containsKey(getContactInfo.Id)) {
                 contactInfoMap.put(getContactInfo.Id, getContactInfo);
             }
+        
         }
         
       for(Volunteer_Orientation_Training__c currRec : Trigger.new){
+          if(currRec.Migrated_Record__c == false)
+          {
             if(currRec.Volunteer__c != Null && contactInfoMap.containsKey(currRec.Volunteer__c)){
                 currRec.Account_Name__c = contactInfoMap.get(currRec.Volunteer__c).Account.Name;
                 currRec.Account_Phone__c = contactInfoMap.get(currRec.Volunteer__c).Account.Phone;
                 currRec.VolunteerHidden_Email__c =  contactInfoMap.get(currRec.Volunteer__c).Email;
                 currRec.Account_Email__c =  contactInfoMap.get(currRec.Volunteer__c).Account.Email__c;
             }
+          }
+             
         }
         
-         }
+   }
     
 }

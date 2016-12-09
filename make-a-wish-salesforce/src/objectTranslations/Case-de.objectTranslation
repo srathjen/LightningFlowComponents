@@ -140,6 +140,26 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Budget_Approved_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Budget Status --></label>
+        <name>Budget_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Budget Submitted Date --></label>
         <name>Budget_Submitted_Date__c</name>
     </fields>
@@ -177,7 +197,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Child_s_Medical_Summary_Form__c</name>
     </fields>
     <fields>
-        <label><!-- Child&apos;s Medical Summary received date --></label>
+        <label><!-- Child&apos;s Medical Summary Received Date --></label>
         <name>Child_s_Medical_Summary_received_date__c</name>
     </fields>
     <fields>
@@ -355,6 +375,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Form Tracking Notes --></label>
         <name>Form_Tracking_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- From Mulesoft --></label>
+        <name>From_Mulesoft__c</name>
     </fields>
     <fields>
         <label><!-- Fund Id --></label>
@@ -554,6 +578,11 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>IsLocked__c</name>
     </fields>
     <fields>
+        <help><!-- Record was created by MuleSoft as part of the chapter on-boarding process --></help>
+        <label><!-- Is Migrated Record --></label>
+        <name>Is_Migrated_Record__c</name>
+    </fields>
+    <fields>
         <label><!-- Is a wheelchair accessible vehicle neede --></label>
         <name>Is_a_wheelchair_accessible_vehicle_neede__c</name>
         <picklistValues>
@@ -632,7 +661,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Location_Address__c</name>
     </fields>
     <fields>
-        <label><!-- Chapter Medical Advisor Email --></label>
+        <label><!-- Medical Advisor Email --></label>
         <name>MAC_Email__c</name>
     </fields>
     <fields>
@@ -678,6 +707,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <masterLabel>Yes</masterLabel>
             <translation><!-- Yes --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
     </fields>
     <fields>
         <label><!-- Name of Location --></label>
@@ -889,6 +922,26 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <picklistValues>
             <masterLabel>Medium</masterLabel>
             <translation><!-- Medium --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Projected Status --></label>
+        <name>Projected_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -1659,13 +1712,6 @@ arrangements/unique circumstances for any requested wish participant not residin
         </sections>
     </layouts>
     <layouts>
-        <layout>Diagnosis Verification Review</layout>
-        <sections>
-            <label><!-- Wish Status Bar --></label>
-            <section>Wish Status Bar</section>
-        </sections>
-    </layouts>
-    <layouts>
         <layout>Parent Wishes</layout>
         <sections>
             <label><!-- Attachments --></label>
@@ -2043,6 +2089,10 @@ arrangements/unique circumstances for any requested wish participant not residin
     <workflowTasks>
         <name>Budget_needs_to_be_revised</name>
         <subject><!-- Budget needs to be revised --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Follow_up_on_wish_clearance</name>
+        <subject><!-- Follow-up on wish clearance --></subject>
     </workflowTasks>
     <workflowTasks>
         <name>Interview_date_not_set</name>

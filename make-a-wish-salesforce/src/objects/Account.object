@@ -1085,6 +1085,14 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
+        <fullName>From_Mulesoft__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>From Mulesoft</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>In_Kind_Approval_Status__c</fullName>
         <externalId>false</externalId>
         <label>In-Kind Approval Status</label>
@@ -1276,14 +1284,33 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
-        <fullName>MAC_Email_del__c</fullName>
+        <fullName>MAC_Email__c</fullName>
         <description>This filed is used to store the value of MAC Email.</description>
         <externalId>false</externalId>
-        <label>National Medical Advisor Email</label>
+        <label>MAC Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Email</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MAC_Email_del__c</fullName>
+        <description>This filed is used to store the value of MAC Email.</description>
+        <externalId>false</externalId>
+        <label>Medical Advisor Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Created from external system.</description>
+        <externalId>false</externalId>
+        <label>Migrated Record</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Name</fullName>

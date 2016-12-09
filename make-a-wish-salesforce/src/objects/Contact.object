@@ -2712,6 +2712,14 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>From_Mulesoft__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>From Mulesoft</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Game__c</fullName>
         <description>It will capture the wish child favorite game details</description>
         <externalId>false</externalId>
@@ -3625,6 +3633,17 @@ and the date it was or will be granted.</inlineHelpText>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Primary_Diagnosis_Condition_Description__c</fullName>
+        <description>Used to hold the Primary diagnosis condition description from lead record during conversion</description>
+        <externalId>false</externalId>
+        <label>Primary Diagnosis Condition Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Professional_Skills_Other_Notes__c</fullName>
         <description>If volunteer know any extra Professional Skills, they can note it here.</description>
         <externalId>false</externalId>
@@ -3753,6 +3772,18 @@ and the date it was or will be granted.</inlineHelpText>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>RE_Record_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Primary key of the RE Record table for upsert and uniqueness purposes.</description>
+        <externalId>true</externalId>
+        <label>RE Record Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>true</unique>
     </fields>
     <fields>
         <fullName>Race_Ethnicity_Details__c</fullName>
@@ -3948,6 +3979,46 @@ null)</formula>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Region_Chapter__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Region Chapter</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Contacts (Region Chapter)</relationshipLabel>
+        <relationshipName>Contacts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Region_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>It holds the region code for chapter</description>
+        <externalId>false</externalId>
+        <label>Region Code</label>
+        <lookupFilter>
+            <active>true</active>
+            <booleanFilter>1 OR 2</booleanFilter>
+            <filterItems>
+                <field>$Source.Region_Chapter__c</field>
+                <operation>equals</operation>
+                <valueField>Regions__c.Chapter_Name__c</valueField>
+            </filterItems>
+            <filterItems>
+                <field>Regions__c.Chapter_Name__c</field>
+                <operation>equals</operation>
+                <value></value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Regions__c</referenceTo>
+        <relationshipLabel>Contacts</relationshipLabel>
+        <relationshipName>Contacts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
+    </fields>
+    <fields>
         <fullName>Relationship__c</fullName>
         <description>It will hold the relationship infromation</description>
         <externalId>false</externalId>
@@ -4105,6 +4176,86 @@ null)</formula>
         <description>It will hold the Restaurant details.</description>
         <externalId>false</externalId>
         <label>Restaurant</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SD1_Condition_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>SD1 Condition Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SD1_ICD_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>SD1 ICD Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SD2_Condition_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>SD2 Condition Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SD2_ICD_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>SD2 ICD Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SD3_Condition_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>SD3 Condition Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SD3_ICD_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>SD3 ICD Code</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SD4_Condition_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>SD4 Condition Description</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SD4_ICD_Code__c</fullName>
+        <externalId>false</externalId>
+        <label>SD4 ICD Code</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -13950,6 +14101,14 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <searchResultsAdditionalFields>CONTACT.ADDRESS2_ZIP</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>Contact_Account_Lookup_Validation</fullName>
+        <active>true</active>
+        <description>This validation will fire when volunteer contact created are updated if account lookup is not chapter account</description>
+        <errorConditionFormula>AND(RecordType.DeveloperName = &apos;Volunteer_Contact&apos;, NOT(Account.RecordType.DeveloperName = &apos;Chapter&apos;))</errorConditionFormula>
+        <errorDisplayField>AccountId</errorDisplayField>
+        <errorMessage>You should select only chapter account</errorMessage>
+    </validationRules>
     <validationRules>
         <fullName>Contact_Birthdate_Validation</fullName>
         <active>false</active>

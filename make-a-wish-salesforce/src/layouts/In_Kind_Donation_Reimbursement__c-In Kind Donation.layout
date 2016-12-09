@@ -64,6 +64,10 @@
                 <behavior>Edit</behavior>
                 <field>Is_Attached__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Region_Code__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

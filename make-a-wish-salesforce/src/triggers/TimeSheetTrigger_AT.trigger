@@ -9,11 +9,16 @@ Trigger TimeSheetTrigger_AT on Time_sheet__c (before insert,before update, After
     List<Time_sheet__c> timeSheetList = new List<Time_sheet__c>();
     Set<Id> timeSheetIds = new Set<Id>();
     
-    if(Trigger.isBefore && Trigger.isInsert){
-        for(Time_sheet__c  newTimeSheetEntry : Trigger.new){
+    if(Trigger.isBefore && Trigger.isInsert)
+    {
+        for(Time_sheet__c  newTimeSheetEntry : Trigger.new)
+        {
+          if(newTimeSheetEntry.migrated_record__c == false)
+          {
             if(newTimeSheetEntry.Hours_spent__c > 0){
                 timeSheetList.add(newTimeSheetEntry);
             }
+          }
         }
         if(timeSheetList.size () > 0){
             TimeSheetTriggerHandler timesheetIns = new TimeSheetTriggerHandler();
@@ -22,9 +27,12 @@ Trigger TimeSheetTrigger_AT on Time_sheet__c (before insert,before update, After
     }
     if(Trigger.isBefore && Trigger.isupdate){
         for(Time_sheet__c  newTimeSheetEntry : Trigger.new){
+           if(newTimeSheetEntry.Migrated_Record__c == false)
+           {
             if((newTimeSheetEntry.Hours_spent__c) >0 && (newTimeSheetEntry.Hours_spent__c != trigger.oldmap.get(newTimeSheetEntry.id).Hours_spent__c)){
                 timeSheetList.add(newTimeSheetEntry);
             }
+           }
         }
         if(timeSheetList.size () > 0){
             TimeSheetTriggerHandler timesheetIns = new TimeSheetTriggerHandler();
@@ -34,6 +42,8 @@ Trigger TimeSheetTrigger_AT on Time_sheet__c (before insert,before update, After
     if(Trigger.isAfter && Trigger.isInsert){
      
         for(Time_sheet__c  newTimeSheetEntry : Trigger.new){
+          if(newTimeSheetEntry.Migrated_Record__c == false)
+          {
             if(newTimeSheetEntry.Hours_spent__c > 0){
                 timeSheetList.add(newTimeSheetEntry);
             }
@@ -42,6 +52,7 @@ Trigger TimeSheetTrigger_AT on Time_sheet__c (before insert,before update, After
             {
                timeSheetIds.add(newTimeSheetEntry.id);
             }
+          }
         }
         if(timeSheetList.size () > 0){
             TimeSheetTriggerHandler timesheetIns = new TimeSheetTriggerHandler();
@@ -52,12 +63,15 @@ Trigger TimeSheetTrigger_AT on Time_sheet__c (before insert,before update, After
     if(Trigger.isAfter && Trigger.isUpdate){
       
         for(Time_sheet__c  newTimeSheetEntry : Trigger.new){
+         if(newTimeSheetEntry.migrated_record__c == false)
+         {
             if(newTimeSheetEntry.Hours_Hidden__c!= trigger.oldmap.get(newTimeSheetEntry.Id).Hours_Hidden__c){
                 timeSheetList.add(newTimeSheetEntry);
                 
             }
             if(newTimeSheetEntry.Date__c != Trigger.oldMap.get(newTimeSheetEntry.id).Date__c && newTimeSheetEntry.Date__c != Null)
                timeSheetIds.add(newTimeSheetEntry.id);
+          }
         }
         if(timeSheetList.size () > 0){
             TimeSheetTriggerHandler timesheetIns = new TimeSheetTriggerHandler();

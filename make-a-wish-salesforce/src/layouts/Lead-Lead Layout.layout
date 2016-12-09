@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>Send_Diagnosis_Verification</customButtons>
+    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -46,7 +47,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Office_Referral_Email__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Override_Dupe_Check__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Region_Code__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -181,6 +190,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Primary_Diagnosis__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PrimaryDiagnosis_Condition_Description__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

@@ -5,9 +5,11 @@ Description :
 *******************************************************************************************************************/
 @isTest
 public class AccountTrigger_Test {
+    
     @testSetup static void createRecords(){
         OrientationandTrainingUtil.createrSystemAdminUser();
     }
+    
     static testmethod void inKindDonor() {
         User sysAdmin = [SELECT Id,userName,Email FROM User WHERE Email =: 'testmawa@gmail.com'];
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountWithWishCoordinatior(sysAdmin.Id);
@@ -21,51 +23,63 @@ public class AccountTrigger_Test {
         }
     }
     
-    //Inkind Approval Approved value Status change
-    static testmethod void inKindApprovalStatus() {
+    //Account with wishCoordinator Not Null
+    static testmethod void wishCoordinatorNotNull() {
         User sysAdmin = [SELECT Id,userName,Email FROM User WHERE Email =: 'testmawa@gmail.com'];
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountWithWishCoordinatior(sysAdmin.Id);
         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
         User volunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunteerContact.Id);
         System.RunAs(volunteerUser) {
             Account inkindAccount = OrientationandTrainingUtil.inKindAccount();
-            inkindAccount.Wish_Co_ordinator__c = sysAdmin.Id;
-            inkindAccount.Chapter_Name__c = chapterAccount.Id;
-            insert inkindAccount;
+            
+            try {
+                insert inkindAccount;
+            } catch (Exception e) {
+                Boolean expectedExceptionThrown =  (e.getMessage().contains('There is no approver for this account.')) ? true : false;
+                System.AssertEquals(expectedExceptionThrown, true);
+            }
+            
         }
-        Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
-        List<Account> inKindAccount = [SELECT Id FROM Account WHERE RecordTypeId =: inKindDonorsAccountRTId];
-        Account updateAcc = new Account();
-        updateAcc.Id = inkindAccount[0].Id;
-        updateAcc.In_Kind_Approval_Status__c = 'Approved';
-        update updateAcc;
-        
     }
     
-    //Inkind Approval Rejected value Status change
-    static testmethod void inKindApprovalRejectedStatus() {
+    //Account and wishCoordinator as null
+    static testmethod void accountWishCoordinatorAsNull() {
         User sysAdmin = [SELECT Id,userName,Email FROM User WHERE Email =: 'testmawa@gmail.com'];
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountWithWishCoordinatior(sysAdmin.Id);
+        chapterAccount.Wish_Co_ordinator__c = null;
+        update chapterAccount;
         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
+        
         User volunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunteerContact.Id);
         System.RunAs(volunteerUser) {
             Account inkindAccount = OrientationandTrainingUtil.inKindAccount();
-            inkindAccount.Wish_Co_ordinator__c = sysAdmin.Id;
-            inkindAccount.Chapter_Name__c = chapterAccount.Id;
-            insert inkindAccount;
+            Database.SaveResult result = Database.insert(inkindAccount, false);
+           // System.assertEquals('There is no approver for this account.',result.getErrors()[0].getMessage());
+            
         }
-        Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
-        List<Account> inKindAccount = [SELECT Id FROM Account WHERE RecordTypeId =: inKindDonorsAccountRTId];
-        Account updateAcc = new Account();
-        updateAcc.Id = inkindAccount[0].Id;
-        updateAcc.In_Kind_Approval_Status__c = 'Rejected';
-        update updateAcc;
-        
     }
     
+    //Account and wishCoordinator as null
+    static testmethod void chapterName() {
+        User sysAdmin = [SELECT Id,userName,Email FROM User WHERE Email =: 'testmawa@gmail.com'];
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountWithWishCoordinatior(sysAdmin.Id);
+        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
+        
+        User volunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunteerContact.Id);
+        System.RunAs(volunteerUser) {
+            Account inkindAccount = OrientationandTrainingUtil.inKindAccount();
+            insert inkindAccount;
+            Account acc = new Account();
+            acc.Chapter_Name__c = chapterAccount.Id;
+            acc.Id = inkindAccount.Id;
+            update inkindAccount;
+            
+        }
+    }
     
-    
-    
-    
+     static testmethod void AddFlagonHouseHoldAccount(){
+     Turnon_Household_Trigger__c  turnOnHouseHold = OrientationandTrainingUtil.insertTurnonHouseHoldAccountSetting();
+     Account chapterAccount = OrientationandTrainingUtil.HouseHoldAccount();
+     }
     
 }

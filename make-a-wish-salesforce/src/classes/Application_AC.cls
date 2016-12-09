@@ -377,8 +377,7 @@ public class Application_AC{
         
         return pr;
     }
-      
-   /*This SubmitAndSign() method is used when the volunteer fill all the required field then it will redirect docusign page
+    /*This SubmitAndSign() method is used when the volunteer fill all the required field then it will redirect docusign page
      Once the user sign the document then it create new conflict of interest record and it will redirect to the application_VF page*/
    public Pagereference SubmitAndSign(){
      
@@ -526,6 +525,7 @@ public class Application_AC{
         return null;
         }
     }
+    
     
     /*The current volunteer contact can edit their details using this EditRec().*/
     public PageReference EditRec(){

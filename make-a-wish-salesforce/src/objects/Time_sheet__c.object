@@ -67,6 +67,14 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>From_Mulesoft__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>From Mulesoft</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Hours_Hidden__c</fullName>
         <description>This field is used as hidden field to store the hours value.</description>
         <externalId>false</externalId>
@@ -89,6 +97,14 @@
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Migrated Record</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Volunteer_Opportunity__c</fullName>
@@ -142,14 +158,14 @@
         <fullName>Date_Validation</fullName>
         <active>true</active>
         <description>Date Validation is used to restrict enter the date from the future date.</description>
-        <errorConditionFormula>Date__c &gt;  TODAY()</errorConditionFormula>
+        <errorConditionFormula>Date__c &gt;  TODAY()&amp;&amp; (Migrated_Record__c=false)</errorConditionFormula>
         <errorDisplayField>Date__c</errorDisplayField>
         <errorMessage>The Date should not be future date.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Time_Validation</fullName>
         <active>true</active>
-        <errorConditionFormula>Hours_spent__c &gt; 24</errorConditionFormula>
+        <errorConditionFormula>Hours_spent__c &gt; 24 &amp;&amp;  Migrated_Record__c = false</errorConditionFormula>
         <errorMessage>Hours should be with in 24 hours.</errorMessage>
     </validationRules>
     <webLinks>

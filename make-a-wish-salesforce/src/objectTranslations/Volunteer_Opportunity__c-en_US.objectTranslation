@@ -76,8 +76,16 @@
         <relationshipLabel><!-- Volunteer Opportunities --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
         <label><!-- First + L.I. --></label>
         <name>First_L_I__c</name>
+    </fields>
+    <fields>
+        <label><!-- From Mulesoft --></label>
+        <name>From_Mulesoft__c</name>
     </fields>
     <fields>
         <label><!-- Gender --></label>
@@ -138,6 +146,10 @@
     <fields>
         <label><!-- Primary Diagnosis --></label>
         <name>Medical_Condition__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
     </fields>
     <fields>
         <label><!-- City --></label>

@@ -13,12 +13,20 @@
         <name>Date__c</name>
     </fields>
     <fields>
+        <label><!-- From Mulesoft --></label>
+        <name>From_Mulesoft__c</name>
+    </fields>
+    <fields>
         <label><!-- Hours Hidden --></label>
         <name>Hours_Hidden__c</name>
     </fields>
     <fields>
         <label><!-- Hours spent --></label>
         <name>Hours_spent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
     </fields>
     <fields>
         <label><!-- Volunteer Opportunity --></label>

@@ -281,7 +281,7 @@
                                                 <apex:outputLabel for="county2">County</apex:outputLabel>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control county2" html-placeholder="County" value="{!contactInstance[0].County__c}"/>
+                                                <apex:inputText styleClass="form-control county2 required" html-placeholder="County" value="{!contactInstance[0].County__c}"/>
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -900,11 +900,17 @@
                   targetModifier: 'visible'
                 });
               });
+
               $('.p-info-btn').on('click', function(){
                 setIntervalX(function () {
                   init();
                   // taken from already rendered button in order to control submit (rerender="formId, uiStates").
-                  return A4J.AJAX.Submit('j_id0:formId',event,{'similarityGroupingId':'j_id0:formId:j_id187','html5Validate':true,'parameters':{'j_id0:formId:j_id187':'j_id0:formId:j_id187'} } );
+                  return A4J.AJAX.Submit('j_id0:formId',event,{
+                    'similarityGroupingId':'j_id0:formId:j_id187',
+                    'html5Validate':true,
+                    'parameters':{'j_id0:formId:j_id187':'j_id0:formId:j_id187'}
+                  });
+
                 }, 50, 2);
                 // $('.p-info-btn-base').hide();
                 // $('.pie').show();
@@ -1283,20 +1289,35 @@
                 $('form').submit();
                 console.log('personal form submitted');
                 // taken from rendered button in order to control submit (rerender="formId, uiStates")
-                return A4J.AJAX.Submit('j_id0:formId',event,{'similarityGroupingId':'j_id0:formId:j_id320','html5Validate':true,'parameters':{'j_id0:formId:j_id320':'j_id0:formId:j_id320'} } );
-                // $('pie').hide();
-                // $('.p-info-btn-base').show();
-                //return false; // prevent normal form posting
+                setTimeout(func, 2000);
+                function func() {
+                  return A4J.AJAX.Submit('j_id0:formId',event,{
+                    'similarityGroupingId':'j_id0:formId:j_id320',
+                    'html5Validate':true,
+                    'parameters':{'j_id0:formId:j_id320':'j_id0:formId:j_id320'}
+                  });
+                  // $('pie').hide();
+                  // $('.p-info-btn-base').show();
+                  //return false; // prevent normal form posting
+                }
               }
             });
+
             // emergency save btn
             $('.btn-e-save').on('click', function() {
               if ($('form').valid()){
                 $('form').submit();
                 console.log('emergecy Form submitted');
-                // taken from rendered button in order to control submit (rerender="formIds, uiStates")
-                return A4J.AJAX.Submit('j_id0:formId',event,{'similarityGroupingId':'j_id0:formId:j_id466','html5Validate':true,'parameters':{'j_id0:formId:j_id466':'j_id0:formId:j_id466'} } );
-                //return false; // prevent normal form posting
+                // taken from rendered button in order to control submit (rerender="formId, uiStates")
+                setTimeout(func, 2000);
+                function func() {
+                  return A4J.AJAX.Submit('j_id0:formId',event,{
+                    'similarityGroupingId':'j_id0:formId:j_id466',
+                    'html5Validate':true,
+                    'parameters':{'j_id0:formId:j_id466':'j_id0:formId:j_id466'}
+                  });
+                  //return false; // prevent normal form posting
+                }
               }
             });
           } init();

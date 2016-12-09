@@ -76,6 +76,14 @@
         <name>Event_Text__c</name>
     </fields>
     <fields>
+        <label><!-- From Mulesoft --></label>
+        <name>From_Mulesoft__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
+    </fields>
+    <fields>
         <label><!-- Non Wish/ Event Title --></label>
         <name>Non_Wish_Event_Title__c</name>
     </fields>

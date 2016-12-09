@@ -143,7 +143,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                         <table id="dataTab1" class="display table table-maw table-hover" width="100%">
                                             <thead class="thead-default">
                                                 <tr>
-                                                    <th>Assignment</th>
+                                                    
                                                     <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsClosedWish}" var="fieldValue">
                                                         <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
                                                             <th>{!fieldValue.label}</th>
@@ -171,7 +171,6 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                         <table id="dataTab2" class="display table table-maw table-hover" width="100%">
                                             <thead class="thead-default">
                                                 <tr>
-                                                    <th>Assignment</th>
                                                     <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsClosedNonWish}" var="fieldValue">
                                                         <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
                                                             <th>{!fieldValue.label}</th>

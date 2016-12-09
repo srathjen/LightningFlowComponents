@@ -101,13 +101,14 @@ Public Class WishChildForm_AC
     public boolean displaySignNowPopup {get;set;}
     public boolean displayError{get;set;}
     public List<String> SignNowList{get;set;}
-    
+    public boolean displayExitPopup{get;set;} 
     public String envelopeId;
     public Map<String,String> signersKeyPairMap;
     
     public string childForm {get;set;}
     public string familyForm {get;set;}
     public string infoForm {get;set;}
+   
     
     public WishChildForm_AC(Apexpages.StandardController control)
     {
@@ -1038,7 +1039,7 @@ Public Class WishChildForm_AC
   // Back to Case Detail page.
     Public PageReference cancelfunction()
     {
-        displayPopup = true;
+        displayExitPopup = true;
        
         return null;
     }
@@ -1070,9 +1071,14 @@ Public Class WishChildForm_AC
     {
         
         try
-        {
-            isInformation = True;
+        {   isInformation = True;
             saveContact();
+            if(displayExitPopup == true){
+            String caseId =  ApexPages.currentPage().getParameters().get('Id');
+            PageReference reference=new PageReference('/'+caseId );
+            reference.setRedirect(true);     
+            return reference;
+            }
             
             
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.severity.CONFIRM,'You Have Successfully Saved Your Information');
