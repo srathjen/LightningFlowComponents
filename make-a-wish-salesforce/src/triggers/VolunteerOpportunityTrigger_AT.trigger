@@ -84,10 +84,13 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
         List<Volunteer_Opportunity__c> updateWishGrantedList = new List<Volunteer_Opportunity__c>();
         Set<Id> updateUserSet = new Set<Id>();
         Set<Id> volconId= new Set<Id>();
+        List<Volunteer_Opportunity__c> rejectedVolunteerOpportunitiesList = new List<Volunteer_Opportunity__c>();
         
         for(Volunteer_Opportunity__c currRec : Trigger.new)
         { 
-            
+            if(currRec.isRejected__c == true && currRec.isRejected__c != Trigger.oldMap.get(currRec.Id).isRejected__c) {
+                rejectedVolunteerOpportunitiesList.add(currRec);
+            }
             if(currRec.Migrated_Record__c == false)
             {
                 if(currRec.IsApproved__c == False &&  (currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Volunteer_Name__c== Null)&& (currRec.Wish__c != Null && currRec.Reason_Inactive__c == Null))
@@ -144,6 +147,9 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
             }
         }
         
+        if(rejectedVolunteerOpportunitiesList.size() > 0) {
+            VolunteerOpportunityTriggerHandler.CreateVolunteerOpportunityRecord(rejectedVolunteerOpportunitiesList);
+        }
         if(volunteerIdsSet.size() > 0){
             VolunteerOpportunityTriggerHandler.ActiveWishCount(volunteerIdsSet);
         }

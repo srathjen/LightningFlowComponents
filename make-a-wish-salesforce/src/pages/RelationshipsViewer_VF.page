@@ -38,7 +38,8 @@
                     <div class="row">
                         <section class="col-md-12">  
                              
-                            <apex:OutputPanel rendered="{!outPutMode}">         
+                            <apex:OutputPanel rendered="{!outPutMode}">   
+                            <apex:pagemessages />      
                                 <h2>Wish Child Contacts</h2>
                                 <table id="dataTab1" class="display table table-maw table-hover" style="border:1px solid rgba(128, 128, 128, 0.5);">
                                     <thead class="thead-default">

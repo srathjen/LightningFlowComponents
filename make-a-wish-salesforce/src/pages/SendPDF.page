@@ -168,14 +168,7 @@
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
             
           </div>
-           <div style="margin:5px 0 30px 0;">
-            <div style="margin-bottom:5px !important;"><b>Wish Type...</b></div>
-            <div style="width:100%;border-bottom:1px solid #000 !important; font-style:underline; border:none;">{!currWishChild.WishType__c}</div>
-           <!--  <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div>
-            <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
-          </div>
+           
       </div>
       <div style="clear:both"></div>
       </div>
@@ -199,7 +192,7 @@
           <div style="width:24%;float:left;margin:0 10px 0 0" type="text"><div class="{!IF(currWishChild.LastName__c==null,'newfont','oldfont')}" style="border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.LastName__c==null,'-',currWishChild.LastName__c)}</div><div style="font-size:14px;font-style:italic;">Last</div></div>
       </div>
    
-     <apex:repeat value="{!wishFamilyWrapList}" var="wishFamilContact">
+     <apex:repeat value="{!wcfUtil.wishFamilyWrapList}" var="wishFamilContact">
       
       <div style="margin-top:50px;">
           <div style="width:24%;float:left;margin:0 10px 0 0" type="text"><strong>Parent/Legal Guardian:</strong></div>
@@ -288,11 +281,11 @@ benefits.</li>
               <div style="margin-bottom:30px; display:block;clear:both;"><div style="width:100%;border-bottom:1px solid #000 !important; border:none;" type="text"></div><div style="font-size:14px;font-style:italic;">Parent/Legal Guardian Signature : <span style="padding-left:70px;">Date</span></div></div>
           </div>
      </apex:repeat>  -->   
-          listofSenderName
+          wcfUtil.listofSenderName
             <table style="min-width:720px;hight:130px;border=5px solid red;style:width:100%;">
            
              <apex:variable var="i" value="{!1}"/> 
-                   <apex:repeat value="{!listofSenderName}" var="name">
+                   <apex:repeat value="{!wcfUtil.listofSenderName}" var="name">
                         
                         <tr style="width:80%;!important;border-bottom:1px solid black;">
                         <td style="width:60%;;border: 0px solid black;valign:bottom;height:40px">Signature : <span style="height: 25px; !important;color:white;padding-left:1em !important">~s{!i}</span></td>                            
@@ -312,8 +305,8 @@ benefits.</li>
         <div style="clear:both"></div>
         <p style="text-align:center;padding:0;margin:0 0 10px 0;">Names of Make-A-Wish representatives assisting in the completion of this form.</p>
         
-          <div class="{!IF(caseTeamMemberNo1==null,'newfont','oldfont')}"  style="margin-bottom:10px; display:block;float:left;width:48%;margin:3% 3% 0 0;"><div style="width:100%;border-bottom:1px solid #000 !important; border:none;" type="text">{!if(caseTeamMemberNo1==null,'-',caseTeamMemberNo1)}</div></div>
-          <div class="{!IF(caseTeamMemberNo2==null,'newfont','oldfont')}"  style="margin-bottom:10px; display:block;float:left;width:48%;margin:3% 0 0 0;"><div style="width:100%;border-bottom:1px solid #000 !important; border:none;" type="text">{!if(caseTeamMemberNo2==null,'-',caseTeamMemberNo2)}</div></div>
+          <div class="{!IF(wcfUtil.caseTeamMemberNo1==null,'newfont','oldfont')}"  style="margin-bottom:10px; display:block;float:left;width:48%;margin:3% 3% 0 0;"><div style="width:100%;border-bottom:1px solid #000 !important; border:none;" type="text">{!if(wcfUtil.caseTeamMemberNo1==null,'-',wcfUtil.caseTeamMemberNo1)}</div></div>
+          <div class="{!IF(wcfUtil.caseTeamMemberNo2==null,'newfont','oldfont')}"  style="margin-bottom:10px; display:block;float:left;width:48%;margin:3% 0 0 0;"><div style="width:100%;border-bottom:1px solid #000 !important; border:none;" type="text">{!if(wcfUtil.caseTeamMemberNo2==null,'-',wcfUtil.caseTeamMemberNo2)}</div></div>
       
         <div style="clear:both"></div>
           </div>
@@ -343,7 +336,7 @@ individual(s) listed below.</p>
                 <td style="width:10%;background:#bfbfbf; padding:0 5px;text-align:center;border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;">Residing With Wish Child</td>
             </tr>
        
-        <apex:repeat value="{!wishParticipantList}" var="wishFamilContact">
+        <apex:repeat value="{!wcfUtil.wishParticipantList}" var="wishFamilContact">
          
             <tr>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">{!wishFamilContact.FirstName}</td>
@@ -437,7 +430,7 @@ individual(s) listed below.</p>
                
             </tr>
        
-        <apex:repeat value="{!driverWrapperCls}" var="detail">
+        <apex:repeat value="{!wcfUtil.driverWrapperCls}" var="detail">
          
             <tr>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">{!detail.driverName}</td>

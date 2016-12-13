@@ -10,6 +10,7 @@ public class ContactTriggerHandler{
     Constant_AC  constant = new Constant_AC();
     Id ChapterRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
     Id WishRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+   // Public 
     Id volunteerOpportunityWishRecTypeId = Schema.SObjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
     public Map<string,integer> birthMonthMap = new Map<string,integer>();
     
@@ -132,6 +133,7 @@ public class ContactTriggerHandler{
         if(newTaskList.size() > 0)
             insert newTaskList;
     }
+     
     public static void createConstituentContactCode(Map<Id,Id> accountAndContactId,String ConCodeName){
         
         Map<Id,Id> affAccountIdMap=new Map<Id,Id>();
@@ -186,4 +188,5 @@ public class ContactTriggerHandler{
         if(updateChildContactList.size() > 0)
             Update updateChildContactList;
     }
+   
 }

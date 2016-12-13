@@ -18,6 +18,11 @@
         @media (max-width: 480px) {
         .header-logo{height:60px !important;margin-left:21% !important;}
         }
+         @media (max-width: 768px) {
+         .custMenu{width:100% !important;font-size:large !important;text-align:left !important};
+      }
+      .custMenu:hover{background:#ffffff;color:#000000;border:solid 1px #2184cc}
+      .clearBoth{clear:both};
         .form-control {height:inherit; !important}
         .top-space1 { margin-top:50px; } 
         .padding-space {padding:0px 20px 20px 20px}
@@ -144,7 +149,13 @@
         .sideNav a {
             text-decoration : none !important;
         }
-        header,main {max-width : 1000px !important;}        
+        header,main {max-width : 1000px !important;}  
+        .active {
+        font-weight:600;
+        font-size: 18px;
+       -webkit-animation:fade-in 1s infinite;
+       
+        }      
         </style>
     <script type="text/javascript">
     function formatDate(date) {
@@ -187,6 +198,14 @@
         $(document).mouseup(function() {
             drawLine = false;
         });
+        
+        
+        $('.collapse a').click(function() { 
+           $('.active').removeClass('active');
+           $('.'+$(this).attr('class')).addClass('active');                      
+       });
+        
+        
 
         //ctx.clearRect(0, 0, theCanvas.width, theCanvas.height);
         //$('.test').css('display','none');
@@ -275,12 +294,12 @@
         
       <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
       <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />             
-      <main role="main" class="container">
+      <main role="main" class="container clearBoth">
       <div class="sideNav">
           <!--<a data-toggle="collapse" href="#childForm">
                 [+]                       
             </a>-->
-            <a class="navMenu" href="{!childForm}">Wish Child Form</a>
+            <a class="navMenu" href="{!wcfUtil.childForm}">Wish Child Form</a>
            <!-- <div id="childForm" class="panel-collapse collapse">
                 <a href="#mainSec">Main Section</a><br/> 
                 <a href="#myFav">My Favourites</a><br/> 
@@ -290,7 +309,7 @@
            <!-- <a data-toggle="collapse" href="#familyForm">
                 [+]                       
             </a>-->
-            <a class="navMenu" href="{!familyForm}">Wish Family Form</a>
+            <a class="navMenu" href="{!wcfUtil.familyForm}">Wish Family Form</a>
             <!--<div id="familyForm" class="panel-collapse collapse">
                 <a href="#parentInfo">Gaurdian information</a><br/> 
                 <a href="#reqSign">Required Signatures</a><br/> 
@@ -300,12 +319,13 @@
             <a data-toggle="collapse" href="#infoForm">
                 [+]                       
             </a>
-            <a class="navMenu" href="{!infoForm}">Wish Information Form</a>
+            <a class="navMenu" href="{!wcfUtil.infoForm}">Wish Information Form</a>
             <div id="infoForm" class="panel-collapse collapse">
-                <a href="#schedule">Scheduling</a><br/> 
-                <a href="#driverInfo">Driver Information</a><br/> 
-                <a href="#medInfo">Medical Information</a><br/> 
-                <a href="#travelInfo">Travel Information</a>                     
+                <a href="#schedule" class="schedule">Scheduling</a><br/> 
+                <a href="#driverInfo" class="driverInfo">Driver Information</a><br/> 
+                <a href="#medInfo" class="medInfo">Medical Information</a><br/> 
+                <a href="#travelInfo" class="travelInfo">Travel Information</a><br/>
+                <a href="#reqSign" class="reqSign">Required Signatures</a>                      
             </div>
            </div>    
     <apex:form id="formId">
@@ -325,7 +345,21 @@
     </div>       
         <apex:pageblock id="membAdd">
             <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/> 
-
+         
+         <div class="button-block">
+                        <center> 
+                            <apex:Commandbutton value="Back"  action="{!BackToWFF}" styleClass="btn btn-default mg-rt" immediate="true"/>
+                            <apex:Commandbutton value="Save"  action="{!WishInfoSave}"  Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
+                            <apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
+                            <apex:Commandbutton value="Submit for Approval" action="{!submitforApproval}"  Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
+                            <apex:Commandbutton value="Send for Signature" action="{!multiEmail}" reRender="popup,popup1,displayError1" styleClass="btn btn-default mg-rt"/>
+                            <apex:Commandbutton value="Generate PDF" action="{!generatePDF}" styleClass="btn btn-default mg-rt"/>
+                            <apex:Commandbutton value="Exit"  action="{!cancelfunction}" reRender="btpopup" styleClass="btn btn-default" immediate="true"/>
+                            
+                        </center>
+                    </div>
+                 
+         
           <apex:pageMessages />
             <div class="container">
               <!--  <div class="row header-padding">
@@ -346,32 +380,32 @@
                     
                     <div class="row top-space">
                      <div class="col-lg-4">
-                        <apex:selectlist value="{!availableMonth1}" size="1">
-                           <apex:selectoptions value="{!Months}" />
+                        <apex:selectlist value="{!wcfUtil.availableMonth1}" size="1">
+                           <apex:selectoptions value="{!wcfUtil.Months}" />
                         </apex:selectList>
                         /
-                        <apex:selectlist value="{!availableYear1}" size="1">
-                           <apex:selectoptions value="{!Year}" />
+                        <apex:selectlist value="{!wcfUtil.availableYear1}" size="1">
+                           <apex:selectoptions value="{!wcfUtil.Year}" />
                         </apex:selectList>
                         <span style="margin-left:20%;">OR</span>
                         </div>
                         <div class="col-lg-4"> 
-                        <apex:selectlist value="{!availableMonth2}" size="1">
-                           <apex:selectoptions value="{!Months}" />
+                        <apex:selectlist value="{!wcfUtil.availableMonth2}" size="1">
+                           <apex:selectoptions value="{!wcfUtil.Months}" />
                         </apex:selectList>
                         /
-                        <apex:selectlist value="{!availableYear2}" size="1">
-                           <apex:selectoptions value="{!Year}" />
+                        <apex:selectlist value="{!wcfUtil.availableYear2}" size="1">
+                           <apex:selectoptions value="{!wcfUtil.Year}" />
                         </apex:selectList>
                         <span style="margin-left:20%;">OR</span>
                         </div>
                         <div class="col-lg-4">
-                        <apex:selectlist value="{!availableMonth3}" size="1">
-                           <apex:selectoptions value="{!Months}" />
+                        <apex:selectlist value="{!wcfUtil.availableMonth3}" size="1">
+                           <apex:selectoptions value="{!wcfUtil.Months}" />
                         </apex:selectList>
                         /
-                        <apex:selectlist value="{!availableYear3}" size="1">
-                           <apex:selectoptions value="{!Year}" />
+                        <apex:selectlist value="{!wcfUtil.availableYear3}" size="1">
+                           <apex:selectoptions value="{!wcfUtil.Year}" />
                         </apex:selectList></div>
                     </div>
                     
@@ -393,30 +427,40 @@
                                 <tr>
                                     
                                     <th>Driver Name</th>
-                                    <th>Valid D.L #</th>
+                                    <th>Valid Driver's License#</th>
                                     <th>State</th>
                                     <th>Expiration Date</th>
-                                     <th>Remove</th>
+                                    <th>Type</th>
+                                    <th>Remove</th>
                                 </tr>
                                   <apex:variable value="{!0}" var="part"/>
-                                    <apex:repeat value="{!driverWrapperCls}" var="driverContact">
+                                    <apex:repeat value="{!wcfUtil.driverWrapperCls}" var="driverContact">
                                         <tr>
                                             <td class="mobiltxt"></td>
                                             <td> 
                                            <apex:selectList value="{!driverContact.driverName}" multiselect="false" size="1" styleClass="form-control required" style="border-left:5px solid red">
                                                <apex:selectOption itemlabel="Please Select" itemValue=""/>
-                                               <apex:selectOptions value="{!driverNameList}" />
+                                               <apex:selectOptions value="{!wcfUtil.driverNameList}" />
                                            </apex:selectList> </td>
                                         
                                             <td><apex:inputText value="{!driverContact.licenseNum}" styleClass="form-control" /></td>
                                             <td>
                                              <apex:selectList value="{!driverContact.state}" size="1" multiselect="false" styleClass="form-control">
-                                                 <apex:selectoptions value="{!states}" />
+                                                 <apex:selectoptions value="{!wcfUtil.states}" />
                                              </apex:selectList>
                                             </td>
                                          
                                             <td><apex:inputText value="{!driverContact.expirationDate}" styleClass="form-control date-input" id="date-input" style="height:30px;"/></td>
-                                              <td><apex:commandLink id="link"  action="{!removeDriver}" immediate="true" reRender="membAdd">
+                                            
+                                            <td>
+                                             <apex:selectList value="{!driverContact.type}" size="1" multiselect="false" styleClass="form-control">
+                                                 <apex:selectOption itemlabel="Please Select" itemValue=""/>
+                                                 <apex:selectOption itemlabel="Potential" itemValue="Potential"/>
+                                                 <apex:selectOption itemlabel="Preferred" itemValue="Preferred"/>
+                                             </apex:selectList>
+                                            </td>
+                                            
+                                            <td><apex:commandLink id="link"  action="{!removeDriver}" immediate="true" reRender="membAdd">
                                                 <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/Remove.png')}" style="height:32px"></apex:image>
                                                 <apex:param name="driver" value="{!part}"/>
                                                 </apex:commandLink>
@@ -471,83 +515,99 @@
                                     <th class="mobiltxt" colspan="2">Medical Information</th>
                                     <th>Medical Questions</th>
                                     <th>Yes/No</th>
-                                    <th>Notes</th>
                                     <th>Participant Name</th>
+                                    <th> Details</th>
+                                    <th>Notes</th>
                                 </tr>
                                 <tr>
                                     <td class="mobiltxt"></td>
                                    <!-- <td class="tbl-medical col-md-12"> Does any requested participant have special dietary restrictions? If yes, please note. </td>-->
                                     <td class="tbl-medical"> Does any requested participant have special dietary restrictions? If yes, please note. </td>
                                     <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_dietary_restrictions__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftDietaryNameList}" rightOriginalvalue="{!wcfUtil.righttDietaryNameList}" currString="{!wcfUtil.currrentDietaryNameList}"/></td>
+                                    <td></td>
                                     <td> <apex:inputField value="{!currWishChild.Participant_dietary_restrictions_Note__c}" styleClass="form-control" /> </td>
-                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftDietaryNameList}" rightOriginalvalue="{!righttDietaryNameList}" currString="{!currrentDietaryNameList}"/></td>
+                                    
                                 </tr>
                                 <tr>
                                     <td class="mobiltxt"></td>
                                     <td class="tbl-medical"> Does any requested participant require a wheelchair?If yes, please describe wheelchair size. </td>
                                     <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_require_a_wheelchair__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftWCNamesList}" rightOriginalvalue="{!wcfUtil.rightWCNamesList}" currString="{!wcfUtil.currentWCNamesList}" /></td>
+                                    <td> <apex:inputField value="{!currWishChild.Participant_require_a_wheelchair_Details__c}" styleClass="form-control" /> </td>
                                     <td> <apex:inputField value="{!currWishChild.Participant_require_a_wheelchair_Note__c}" styleClass="form-control" /> </td>
-                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftWCNamesList}" rightOriginalvalue="{!rightWCNamesList}" currString="{!currentWCNamesList}" /></td>
                                 </tr>
                                 <tr>
                                     <td class="mobiltxt"></td>
                                     <td class="tbl-medical"> Will your family bring your own wheelchair? </td>
                                     <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Will_your_family_bring_wheelchair__c}" styleClass="form-control" /> </td>
-                                    <td> <apex:inputField value="{!currWishChild.Will_your_family_bring_wheelchair_Note__c}" styleClass="form-control" /> </td>
-                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftOwnWheelChairList}" rightOriginalvalue="{!rightOwnWheelChairList}" currString="{!currentOwnWheelChairList}" /></td>
-                                   
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftOwnWheelChairList}" rightOriginalvalue="{!wcfUtil.rightOwnWheelChairList}" currString="{!wcfUtil.currentOwnWheelChairList}" /></td>
+                                   <td></td>
+                                   <td> <apex:inputField value="{!currWishChild.Will_your_family_bring_wheelchair_Note__c}" styleClass="form-control" /> </td>
                                 </tr>
                                 <tr>
                                     <td class="mobiltxt"></td>
                                     <td class="tbl-medical"> Is the wheelchair collapsible? </td>
                                     <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Is_the_wheelchair_collapsible__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftWCCollapsibleList}" rightOriginalvalue="{!wcfUtil.rightWCCollapsibleList}" currString="{!wcfUtil.currentWCCollapsibleList}" /></td>
+                                    <td></td>
                                     <td> <apex:inputField value="{!currWishChild.Is_the_wheelchair_collapsible_Note__c}" styleClass="form-control" /> </td>
-                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftWCCollapsibleList}" rightOriginalvalue="{!rightWCCollapsibleList}" currString="{!currentWCCollapsibleList}" /></td>
-                                    
                                 </tr>
                                 <tr>
                                     <td class="mobiltxt"></td>
                                     <td class="tbl-medical"> Is the wheelchair power? If yes, please note battery type. </td>
                                     <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Is_the_wheelchair_power__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftWCPowerList}" rightOriginalvalue="{!wcfUtil.rightWCPowerList}" currString="{!wcfUtil.currentWCPowerList}" /></td>
+                                    <td></td>
                                     <td> <apex:inputField value="{!currWishChild.Is_the_wheelchair_power_Note__c}" styleClass="form-control" /> </td>
-                                   <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftWCPowerList}" rightOriginalvalue="{!rightWCPowerList}" currString="{!currentWCPowerList}" /></td>
+                                   
                                    
                                 </tr>
                                 <tr>
                                     <td class="mobiltxt"></td>
                                     <td class="tbl-medical"> Does any requested participant require oxygen?If yes, please describe how often. </td>
                                     <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_require_oxygen_how_often__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftOxygenNamesList}" rightOriginalvalue="{!wcfUtil.rightOxygenNamesList}" currString="{!wcfUtil.currentOxygenNamesList}" /></td>
+                                    <td></td>
                                     <td> <apex:inputField value="{!currWishChild.Participant_require_oxygen_Note__c}" styleClass="form-control" /> </td>
-                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftOxygenNamesList}" rightOriginalvalue="{!rightOxygenNamesList}" currString="{!currentOxygenNamesList}" /></td>
+                                    
                                 </tr>
                                 <tr>
                                     <td class="mobiltxt"></td>
                                     <td class="tbl-medical"> Does any medication require refrigeration? </td>
                                     <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Medication_require_refrigeration__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftMedicationList}" rightOriginalvalue="{!wcfUtil.rightMedicationList}" currString="{!wcfUtil.currentMedicationList}" /></td>
+                                    <td></td>
                                     <td> <apex:inputField value="{!currWishChild.Medication_require_refrigeration_Note__c}" styleClass="form-control" /> </td>
-                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftMedicationList}" rightOriginalvalue="{!rightMedicationList}" currString="{!currentMedicationList}" /></td>
+                                    
                                 </tr>
                                 <tr>
                                     <td class="mobiltxt"></td>
                                     <td class="tbl-medical">Does the wish child currently receive nursing care? If yes, please list the # of hours, agency and phone number. </td>
                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Wish_child_receive_nursing_care__c}" styleClass="form-control" /> </td>
-                                    <td> <apex:inputField value="{!currWishChild.Wish_child_receive_nursing_care_Note__c}" styleClass="form-control" /> </td>
-                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftAllergyNamesList}" rightOriginalvalue="{!rightAllergyNamesList}" currString="{!currentAllergyNamesList}" /></td>
+                                   <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftAllergyNamesList}" rightOriginalvalue="{!wcfUtil.rightAllergyNamesList}" currString="{!wcfUtil.currentAllergyNamesList}" /></td>
+                                   <td></td>
+                                   <td> <apex:inputField value="{!currWishChild.Wish_child_receive_nursing_care_Note__c}" styleClass="form-control" /> </td>
+                                    
                                 </tr>
                                 <tr>
                                     <td class="mobiltxt"></td>
                                     <td class="tbl-medical"> Does any requested participant have allergies to food or materials? If yes, please note who and what allergy. </td>
                                     <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_have_allergies_to_food__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftNursingCareList}" rightOriginalvalue="{!wcfUtil.rightNursingCareList}" currString="{!wcfUtil.currentNursingCareList}" /></td>
+                                    <td></td>
                                     <td> <apex:inputField value="{!currWishChild.Participant_have_allergies_to_food_Note__c}" styleClass="form-control" /> </td>
-                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftNursingCareList}" rightOriginalvalue="{!rightNursingCareList}" currString="{!currentNursingCareList}" /></td>
+                                    
                                 </tr>
                                 
                                 <tr>
                                     <td class="mobiltxt"></td>
                                     <td class="tbl-medical">Does any requested participant require any other medical supplies? If yes, please detail who and what is required. </td>
                                     <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_require_medical_supplies__c}" styleClass="form-control" /> </td>
+                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftOtherNeedsList}" rightOriginalvalue="{!wcfUtil.righttOtherNeedsList}" currString="{!wcfUtil.currentOtherNeedsList}" /></td>
+                                    <td></td>
                                     <td> <apex:inputField value="{!currWishChild.Participant_require_medical_suppliesNote__c}" styleClass="form-control" /> </td>
-                                    <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!leftOtherNeedsList}" rightOriginalvalue="{!righttOtherNeedsList}" currString="{!currentOtherNeedsList}" /></td>
+                                    
                                 </tr>
                             </tbody>
                         </table>
@@ -619,6 +679,42 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="row top-space pad15" id="reqSign">
+                        <br/>
+                        <br/>
+                        <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <p class="assistance" style="margin-left:39%">Required Signatures</p>
+                                    <p>
+                                        <b>I understand and agree:</b>
+                                    </p>
+                                    <p>
+                                        <b>1. That no promises or assurances whatsoever have been made to me by any
+                                            representative of Make-A-Wish regarding the requested wish;</b>
+                                    </p>
+                                    <p>
+                                        <b> 2. That the granting of any wish and the participation of any person in the wish is
+                                            contingent upon approval by Make-A-Wish and the child’s physician, as well as full
+                                            compliance with all conditions, qualifications, and restrictions designated by
+                                            Make-A-Wish;</b>
+                                    </p>
+                                    <p>
+                                        <b>3. That all individuals with parental or custodial rights for the child must approve
+                                            the wish before it is granted and must sign all necessary documents; and</b>
+                                    </p>
+                                    <p>
+                                        <b> 4. That the receipt of a wish may impact the eligibility for public assistance and/or
+                                            benefits.</b>
+                                    </p>
+                                    
+                                    <p>
+                                        <b>I promise that the information provided by me is true and complete to the best of my
+                                            knowledge.</b>  
+                                    </p> 
+                                
+                                </div>
+                            </div>
+                           </div>
                     </div>
                     
                     <apex:actionFunction name="intiateMulti" action="{!multiEmail}" reRender="popup"/>
@@ -632,7 +728,7 @@
                         <center> 
                             <apex:Commandbutton value="Back"  action="{!BackToWFF}" styleClass="btn btn-default mg-rt" immediate="true"/>
                             <apex:Commandbutton value="Save"  action="{!WishInfoSave}"  Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
-                            <apex:Commandbutton value="Sign Now" action="{!SignNowmultiEmail}" Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
+                            <apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Submit for Approval" action="{!submitforApproval}"  Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Send for Signature" action="{!multiEmail}" reRender="popup,popup1,displayError1" styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Generate PDF" action="{!generatePDF}" styleClass="btn btn-default mg-rt"/>
@@ -716,7 +812,7 @@
            
   </apex:pageblock>
   <apex:outputPanel id="popup">
-   <apex:outputPanel rendered="{!displayPopup }">
+   <apex:outputPanel rendered="{!wcfUtil.displayPopup }">
        
     <div class="pop-wrap">
         <div class="custPopup">
@@ -732,8 +828,8 @@
                     </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                         
-                            <apex:selectList value="{!emailList}" label="Select Multi Email List" multiselect="true" size="5" styleClass="form-control multi-lvl-one chosen multiCom" style="height:1%; font-size:85%">
-                                <apex:selectOptions value="{!multiPickoptions}" />
+                            <apex:selectList value="{!wcfUtil.emailList}" label="Select Multi Email List" multiselect="true" size="5" styleClass="form-control multi-lvl-one chosen multiCom" style="height:1%; font-size:85%">
+                                <apex:selectOptions value="{!wcfUtil.multiPickoptions}" />
                             </apex:selectList>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
@@ -749,7 +845,7 @@
 </apex:outputPanel>
    
    <apex:outputPanel id="SignNowpopup">
-   <apex:outputPanel rendered="{!displaySignNowPopup }">
+   <apex:outputPanel rendered="{!wcfUtil.displaySignNowPopup }">
        
     <div class="pop-wrap">
         <div class="custPopup">
@@ -763,8 +859,8 @@
                    
                     </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
-                            <apex:selectList value="{!SignNowName}" label="Choose One" multiselect="false" size="1" styleClass="form-control" style="height:1%; font-size:85%">
-                                <apex:selectOptions value="{!multiPickoptions}" />
+                            <apex:selectList value="{!wcfUtil.SignNowName}" label="Choose One" multiselect="false" size="1" styleClass="form-control" style="height:1%; font-size:85%">
+                                <apex:selectOptions value="{!wcfUtil.multiPickoptions}" />
                             </apex:selectList>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
@@ -780,7 +876,7 @@
 </apex:outputPanel>
  
  <apex:outputPanel id="displayError1">
-   <apex:outputPanel rendered="{!displayError}">
+   <apex:outputPanel rendered="{!wcfUtil.displayError}">
        
           <div class="row" style="padding:10px">
            <div class="col-xs-12 col-sm-12 col-md-12">
@@ -796,8 +892,8 @@
     </div>
 </apex:outputPanel>
 </apex:outputPanel>
- <apex:outputPanel id="btpopup">
-   <apex:outputPanel rendered="{!displayExitPopup}">
+  <apex:outputPanel id="btpopup">
+   <apex:outputPanel rendered="{!wcfUtil.displayExitPopup}">
        
     <div class="pop-wrap">
         <div class="custPopup">
@@ -816,8 +912,28 @@
     </div>
 </apex:outputPanel>
 </apex:outputPanel>
- 
- 
+  <apex:outputPanel id="btpopup1">
+   <apex:outputPanel rendered="{!wcfUtil.confirmSignNow}">
+       
+    <div class="pop-wrap">
+        <div class="custPopup">
+        
+            <div class="container">
+                <div class="row">
+                    <div class="row" style="padding:10px">
+                    <center><span style="font-family:arial, helvetica, sans-serif;font-weight:600;font-size:26px;">Are you sure?</span>                                           
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
+                          <apex:commandButton value="Yes" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!SignNowmultiEmail}" style="height: 2.75rem;margin-top: 3% !important;width: 150px !important;"/>
+                          <apex:commandButton value="No" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}"  style="height: 2.75rem; margin-left: 5%;margin-top: 3% !important;width: 185px !important;"/>
+                        </div>
+                     </center>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</apex:outputPanel>
+</apex:outputPanel>
     </apex:form>
      </main>
     </body>

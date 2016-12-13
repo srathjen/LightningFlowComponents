@@ -236,6 +236,40 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Drop_off_Date__c</fullName>
+        <description>This field is used to capture the drop of date</description>
+        <externalId>false</externalId>
+        <label>Drop off Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Drop_off_Location__c</fullName>
+        <description>This field is used to capture the drop of location</description>
+        <externalId>false</externalId>
+        <label>Drop off Location</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Drop_off_Time__c</fullName>
+        <description>This field is used to capture the drop off time</description>
+        <externalId>false</externalId>
+        <label>Drop off Time</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>End_Time__c</fullName>
         <externalId>false</externalId>
         <label>End Time</label>
@@ -376,6 +410,18 @@
         <fullName>Pick_up_Time__c</fullName>
         <externalId>false</externalId>
         <label>Pick up Time</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Pick_up_location__c</fullName>
+        <description>This filed used to capture the pick up location</description>
+        <externalId>false</externalId>
+        <label>Pick up location</label>
         <length>255</length>
         <required>false</required>
         <trackHistory>false</trackHistory>

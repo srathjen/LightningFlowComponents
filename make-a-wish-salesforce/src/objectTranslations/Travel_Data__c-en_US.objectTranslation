@@ -77,6 +77,18 @@
         <name>Destination__c</name>
     </fields>
     <fields>
+        <label><!-- Drop off Date --></label>
+        <name>Drop_off_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Drop off Location --></label>
+        <name>Drop_off_Location__c</name>
+    </fields>
+    <fields>
+        <label><!-- Drop off Time --></label>
+        <name>Drop_off_Time__c</name>
+    </fields>
+    <fields>
         <label><!-- End Time --></label>
         <name>End_Time__c</name>
     </fields>
@@ -136,6 +148,10 @@
     <fields>
         <label><!-- Pick up Time --></label>
         <name>Pick_up_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Pick up location --></label>
+        <name>Pick_up_location__c</name>
     </fields>
     <fields>
         <label><!-- Preferred Driver --></label>

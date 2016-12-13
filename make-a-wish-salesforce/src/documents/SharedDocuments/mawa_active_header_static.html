@@ -1,7 +1,7 @@
   <style>
     /* Custom MAWA styles */
     body {font-size:80%;}
-    body > span main {font-size:75%; margin-bottom:em; margin-bottom:5rem;}
+    body > span main {margin-bottom:em; margin-bottom:5rem;}
     .container{background:none; width:auto;}
     body > span header {height:auto;}
     body > span header ul li {margin-left:auto;}
@@ -43,8 +43,9 @@
       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0089e9', endColorstr='#006bb6',GradientType=0 )
     }
     /* chatter right sidebar*/
-    .chatterTab .recommend .recBox .recElement img, .chatterTab .zen img.chatter-followIcon {display:none;} /* remove images */
+    .chatterTab .recommend .recBox .recElement img, .chatterTab .zen img.chatter-followIcon, .rightContent .recElement .thumbnail {display:none;} /* remove images */
     .chatterTab .recommend .recBox .zen .zen-mediaExt {display:inline} /* follow link */
+    .rightContent .recommend .recBox .recElement .recInfo {padding-left:0}
 
     .chatterTab .zen img.chatter-followIcon, .groupmembership .nonmember img,
     .userProfilePage .leftContent .guestBadge, .userProfilePage .leftContent .guestGroupBadge {background: none}
@@ -73,10 +74,9 @@
               <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">&#9776;</button>
               <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
                   <ul class="active-user-main" style="width:52%">
-						<li><a href="/VolunteerActivities_VF">My Tasks</a></li>
-                      <li><a href="/MyAssignment_VF">My Assignments</a></li>
-					  <li><a href="/VolunteerAssignmentOpportunities_VF">Volunteer Opportunities</a></li>
-                      
+                    <li style="float:left;"><a href="/VolunteerAssignmentOpportunities_VF">Volunteer Opportunities</a></li>
+                    <li style="float:left;"><a href="/MyAssignment_VF" >My Assignments</a></li>
+                    <li style="margin-right:15px;"><a href="/VolunteerActivities_VF">My Tasks</a></li>
                   </ul>
                   <ul class="active-user-subnav">
                       <li><a href="/VolunteerProfile_VF">Profile</a></li>

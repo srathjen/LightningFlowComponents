@@ -146,14 +146,6 @@
                 <field>Interview_Date_Not_Set__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Hidden_Referral_date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Hidden_Diagn_Verifi_Received_Date__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Hidden_Contact_Gender__c</field>
             </layoutItems>

@@ -94,6 +94,10 @@
         <relationshipLabel><!-- Wish Child Form --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- City --></label>
+        <name>City__c</name>
+    </fields>
+    <fields>
         <label><!-- Class in School --></label>
         <name>ClassinSchool__c</name>
     </fields>
@@ -428,6 +432,10 @@ and the date it was or will be granted. --></help>
         <name>Participant_Name_for_Dietary_Restriction__c</name>
     </fields>
     <fields>
+        <label><!-- Participant Names --></label>
+        <name>Participant_Names__c</name>
+    </fields>
+    <fields>
         <label><!-- Participant dietary restrictions? Note --></label>
         <name>Participant_dietary_restrictions_Note__c</name>
     </fields>
@@ -478,6 +486,10 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Participant have valid photo ID_Note --></label>
         <name>Participant_have_valid_photo_ID_Note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Participant require a wheelchair Details --></label>
+        <name>Participant_require_a_wheelchair_Details__c</name>
     </fields>
     <fields>
         <label><!-- Participant_require_a_wheelchair_Note__c --></label>
@@ -662,6 +674,14 @@ provide contact information for each site on which you are active. --></help>
         <name>Sport_Athlete__c</name>
     </fields>
     <fields>
+        <label><!-- State --></label>
+        <name>State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Street --></label>
+        <name>Street__c</name>
+    </fields>
+    <fields>
         <label><!-- TV Show --></label>
         <name>TVShow__c</name>
     </fields>
@@ -796,6 +816,10 @@ provide contact information for each site on which you are active. --></help>
             <masterLabel>Yes</masterLabel>
             <translation><!-- Yes --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Zip Code --></label>
+        <name>Zip_Code__c</name>
     </fields>
     <fields>
         <label><!-- Mobile --></label>

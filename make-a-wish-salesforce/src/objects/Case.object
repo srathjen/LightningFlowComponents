@@ -282,6 +282,23 @@
         <visibleLines>3</visibleLines>
     </fields>
     <fields>
+        <fullName>Age__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( NOT( ISBLANK( Birthdate__c) ) ,
+  IF( DATE( 2000 , MONTH( Birthdate__c) , DAY( Birthdate__c) ) &lt;= DATE( 2000 , MONTH( TODAY() ) , DAY( TODAY() ) ),
+     YEAR (Today()) - YEAR ( Birthdate__c),
+     YEAR (Today()) - YEAR ( Birthdate__c) -1 ),
+  null)</formula>
+        <label>Age</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Air_Travel_Details__c</fullName>
         <externalId>false</externalId>
         <label>Air Travel Details</label>
@@ -523,6 +540,30 @@ for fulfilment  the wish.</description>
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Budget_Cash__c</fullName>
+        <description>This field contains sum of Budget cash from wish expense.</description>
+        <externalId>false</externalId>
+        <label>Budget Cash</label>
+        <summarizedField>Wish_Expense__c.Budget_Cash__c</summarizedField>
+        <summaryForeignKey>Wish_Expense__c.Case__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Budget_Inkind__c</fullName>
+        <description>This field contains the sum of budget inkind from wish expense.</description>
+        <externalId>false</externalId>
+        <label>Budget Inkind</label>
+        <summarizedField>Wish_Expense__c.Budget_In_Kind__c</summarizedField>
+        <summaryForeignKey>Wish_Expense__c.Case__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
         <fullName>Budget_Status__c</fullName>
         <description>This will indicate whether budget is approved or pending.</description>
         <externalId>false</externalId>
@@ -561,6 +602,21 @@ for fulfilment  the wish.</description>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Budget_Total__c</fullName>
+        <description>The total Budget for wish</description>
+        <externalId>false</externalId>
+        <formula>Budget_Cash__c   +   Budget_Inkind__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Budget Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>BusinessHoursId</fullName>
@@ -1362,17 +1418,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Hidden_Diagn_Verifi_Received_Date__c</fullName>
-        <externalId>false</externalId>
-        <formula>Lead__r.Part_A_Received__c</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Hidden Diagn Verifi Received Date</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Date</type>
-    </fields>
-    <fields>
         <fullName>Hidden_Email_List__c</fullName>
         <description>This field is used to store the list of email values from Wish Information form.</description>
         <externalId>false</externalId>
@@ -1432,17 +1477,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Hidden_Referral_date__c</fullName>
-        <externalId>false</externalId>
-        <formula>Lead__r.Referred_Date__c</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Hidden Referral date</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Date</type>
     </fields>
     <fields>
         <fullName>Hidden_Secondary_Diagnosis_1__c</fullName>
@@ -2626,6 +2660,19 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Region__c</fullName>
+        <description>Wish child region</description>
+        <externalId>false</externalId>
+        <formula>Contact.Region_Code__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Requested_Participant_Name_forWheelchair__c</fullName>
         <description>it describes the requested participant name for wheelchair</description>
         <externalId>false</externalId>
@@ -3521,6 +3568,41 @@ on airplane</description>
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Wish_Granter_1_Cell__c</fullName>
+        <description>This field is used to get wish granter 1 cell</description>
+        <externalId>false</externalId>
+        <label>Wish Granter 1 Cell</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Wish_Granter_1__c</fullName>
+        <description>This field is used to get wish granter 1</description>
+        <externalId>false</externalId>
+        <label>Wish Granter 1</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Wish_Granter_2_Cell__c</fullName>
+        <description>This field is used to get wish granter 2 cell</description>
+        <externalId>false</externalId>
+        <label>Wish Granter 2 Cell</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
         <fullName>Wish_Information_Form__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Indicate that Wish Information Form is received or not.</description>
@@ -3783,6 +3865,19 @@ If yes,  # of hours, agency and phone number information</description>
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>Wish_granter_2__c</fullName>
+        <description>This field is used to get wish granter 2</description>
+        <externalId>false</externalId>
+        <label>Wish granter 2</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Wish_participant_have_medical_needs__c</fullName>
         <description>It will capture the &quot;Does a requested wish participant have medical needs?&quot; or not</description>
         <externalId>false</externalId>
@@ -3966,6 +4061,39 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Budget_Pending_Wishes</fullName>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>Budget_Status__c</columns>
+        <columns>Projected_Status__c</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CASES.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Budget_Status__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>Budget_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Approved</value>
+        </filters>
+        <filters>
+            <field>Projected_Status__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>Projected_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Approved</value>
+        </filters>
+        <label>Budget Pending Wishes</label>
     </listViews>
     <listViews>
         <fullName>Central_California_Case</fullName>
@@ -6083,8 +6211,9 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
     </validationRules>
     <validationRules>
         <fullName>Diagnosis_Verification_Received_Date</fullName>
-        <active>false</active>
-        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK(Hidden_Diagn_Verifi_Received_Date__c))</errorConditionFormula>
+        <active>true</active>
+        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK( diagnosis_verificaion_receive_date__c ))</errorConditionFormula>
+        <errorDisplayField>Absent_Parent_Form__c</errorDisplayField>
         <errorMessage>Diagnosis Verification Received Date should not be Blank.</errorMessage>
     </validationRules>
     <validationRules>
@@ -6121,8 +6250,8 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
     </validationRules>
     <validationRules>
         <fullName>Referral_date_Validation</fullName>
-        <active>false</active>
-        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK( Hidden_Referral_date__c ))</errorConditionFormula>
+        <active>true</active>
+        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK(Referral_Date__c))</errorConditionFormula>
         <errorMessage>Referral date should not be Blank.</errorMessage>
     </validationRules>
     <validationRules>
@@ -6158,7 +6287,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
     </validationRules>
     <validationRules>
         <fullName>Wish_Completed_Status_Validation</fullName>
-        <active>false</active>
+        <active>true</active>
         <description>There should be value on End Date when wish status is Completed.</description>
         <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK(End_Date__c))</errorConditionFormula>
         <errorDisplayField>End_Date__c</errorDisplayField>

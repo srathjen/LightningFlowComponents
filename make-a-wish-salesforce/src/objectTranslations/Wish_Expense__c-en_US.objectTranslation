@@ -61,6 +61,10 @@
         <name>Budget_In_Kind__c</name>
     </fields>
     <fields>
+        <label><!-- Budget Total --></label>
+        <name>Budget_Total__c</name>
+    </fields>
+    <fields>
         <label><!-- Case --></label>
         <name>Case__c</name>
         <relationshipLabel><!-- Wish Expenses --></relationshipLabel>

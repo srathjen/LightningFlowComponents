@@ -2,8 +2,8 @@
     <apex:form >
         
              <apex:outputPanel rendered="{!WishFamilyForm != Null}">
-             <div style="margin-left:10%"><apex:outputLink target="_blank" value="{!WishFamilyForm}"> Wish Family Form </apex:outputLink></div> 
-              <div style="margin-left:57%; margin-top: -2%;"><apex:outputLink target="_blank" value="{!LiabilityFrom}">Liability And Publicity Release Form</apex:outputLink></div>
+             <div style="margin-left:10%"><apex:outputLink target="_blank" value="{!WishFamilyForm}"> Wish Family Packet </apex:outputLink></div> 
+              <div style="margin-left:57%; margin-top: -1%;"><apex:outputLink target="_blank" value="{!LiabilityFrom}">Liability And Publicity Release Form</apex:outputLink></div>
               <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!contactInfo}">Update Contact Info</apex:outputLink></div> 
               
               <apex:outputPanel rendered="{!WishReceipt != Null}">
@@ -15,6 +15,9 @@
               <div style="margin-left:57%; margin-top: -2%;"><apex:outputLink target="_blank" value="{!singleForm}">Single Parent Form</apex:outputLink></div>
               <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!wishClearence}">Wish Clearance</apex:outputLink></div> 
               <div style="margin-left:57%; margin-top: -2%;"><apex:outputLink target="_blank" value="{!ChildMedicalForm }">Child Medical Summary</apex:outputLink></div>
+              <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!ShoppingSpree}">Itinerary</apex:outputLink></div>
+
+             
              </apex:outputPanel>
              
              

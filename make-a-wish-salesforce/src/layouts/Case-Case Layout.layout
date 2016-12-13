@@ -120,14 +120,6 @@
                 <field>Envelop_Id__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Hidden_Referral_date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Hidden_Diagn_Verifi_Received_Date__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>hidden_medical_physician__c</field>
             </layoutItems>

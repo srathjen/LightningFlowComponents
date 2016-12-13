@@ -114,7 +114,7 @@ public class WishBudgetForm_AC{
                 if(RecentApproverID!= null)
                 {
                    //if(userdata.Id == strAppvalName ){
-                   if(userdata.Profile.Name == 'System Administrator' || userdata.Id == RecentApproverID){
+                   if(userdata.Id == RecentApproverID){
                         UserIdentiy=false;
                     }
                     else{
@@ -251,6 +251,7 @@ public class WishBudgetForm_AC{
             System.debug('Test add expence 1:' + newExpenseType );
             List<Wish_Expense_Transaction_Code__c> transListType = TransCodesWrap.get(newExpenseType);
             System.debug('Test add expence 1:' + TransCodesWrap);
+            
             Wish_Expense__c curExpense=new Wish_Expense__c();
             curExpense.Wish_Expense_Transaction_Code__c = TransCodesWrap.get(newExpenseType).get(0).Id;
             for(Wish_Expense_Transaction_Code__c trans: transListType){
@@ -310,7 +311,17 @@ public class WishBudgetForm_AC{
     
     public PageReference addExpense() {
     //WEtypeExpand='1collapsed';
+    system.debug('Tansaction Code 1:' + TransCodesWrap);
+    system.debug('Tansaction Code 1:' + expenseType);
         List<Wish_Expense_Transaction_Code__c> transListW= TransCodesWrap.get(expenseType);
+        if(transListW == null){
+             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.severity.ERROR, 'There is no active transaction code is available for ' + expenseType + '.' );
+             
+             ApexPages.addMessage(myMsg);
+            //Apexpages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'There is no active transaction code is available for ' + expenseType + '.'));
+            return null;
+        }
+        system.debug('Tansaction Code 1:' + transListW);
         Wish_Expense__c curExpense = new Wish_Expense__c();
         system.debug('Tansaction Code 1:' + TransCodesWrap.get(expenseType).get(0).Id);
         curExpense.RecordTypeid = budgetingRecordTypeId;
@@ -345,9 +356,7 @@ public class WishBudgetForm_AC{
         return pageRef ;
              
     }
-    
-    
-    
+ 
     public List<SelectOption> getUserListForApproval() {
         Set<Id> userIdsSet = new Set<Id>();
         Set<Id> userDupCheck = new Set<Id>();
@@ -381,22 +390,35 @@ public class WishBudgetForm_AC{
 assign Budget Cash and Budget InKind to Projected Cash and Projected InKind before records goes for approval. Once the form is submitted for approval 
 them we will make all fields as Read Only except T-Code and Projected fields.*/
     public void submitForApproval() {
-       
+        List<Case> casebudgetapprovals = new List<Case>();
+        Set<Id> approvedCaseIds = new Set<Id>();
+        String budgetStatus='';
+        String projectedStatus='';
         saveWishExpenses();
         System.debug('>>>>>>>>>>approverId>>>>>>>>>>>>>>>'+approverId);
         List<Wish_Expense__c> recordApprovalStatusUpdateList = new List<Wish_Expense__c>();
         for(Wish_Expense__c updateWishExpenseStatus : [SELECT Id, Case__c, Budget_Approval_Status__c,Projected_Approval_Status__c, Wish_Expense_Approval_Status__c FROM Wish_Expense__c WHERE Case__c =: caseId]) {
             //updateWishExpenseStatus.Wish_Expense_Approval_Status__c = 'Initiated';
-            if(updateWishExpenseStatus.Budget_Approval_Status__c != 'Approved' ){
-               updateWishExpenseStatus.Budget_Approval_Status__c = 'Submitted';
+            if(updateWishExpenseStatus.Budget_Approval_Status__c == 'Approved'){
+                budgetStatus= 'Approved';
             }
+            else if(updateWishExpenseStatus.Budget_Approval_Status__c != 'Approved' ){
+               updateWishExpenseStatus.Budget_Approval_Status__c = 'Submitted';
+               if(budgetStatus!= 'Approved'){
+                   budgetStatus= 'Submitted';
+               }
+            }
+           
              if((isbudgetApprovalExist == true && updateWishExpenseStatus.Budget_Approval_Status__c == 'Submitted') || updateWishExpenseStatus.Budget_Approval_Status__c == 'Approved' ){
                 if(updateWishExpenseStatus.Projected_Approval_Status__c != 'Approved'){
                    updateWishExpenseStatus.Projected_Approval_Status__c= 'Submitted';
+                   projectedStatus= 'Submitted';
                 }
             }
-            
             recordApprovalStatusUpdateList.add(updateWishExpenseStatus);
+            if(!approvedCaseIds.contains(updateWishExpenseStatus.Case__c)){
+                approvedCaseIds.add(updateWishExpenseStatus.Case__c);
+            }
         }
         system.debug('Wish P and A recordApprovalStatusUpdateList: - ' + recordApprovalStatusUpdateList);
         
@@ -405,6 +427,7 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
 
             update recordApprovalStatusUpdateList;
         }
+        
         if(approverId != null && getPlanningAnticipationCase.get(0).Id != null) {
            
             Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
@@ -415,14 +438,29 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
             req.setSkipEntryCriteria(true);
             Approval.ProcessResult result = Approval.process(req);
             displayPopup = true;
+           
             
-            if(getPlanningAnticipationCase.get(0).Parent.Budget_Submitted_Date__c == Null)
-            {
-                    Case updateCase = new Case();
-                    updateCase.id = getPlanningAnticipationCase.get(0).ParentId;
-                    updateCase.Budget_Submitted_Date__c = Date.Today();
-                    update updateCase;
+        }
+        
+        if(getPlanningAnticipationCase.get(0).Parent.Budget_Submitted_Date__c == Null)
+        {
+                Case updateCase = new Case();
+                updateCase.id = getPlanningAnticipationCase.get(0).ParentId;
+                updateCase.Budget_Submitted_Date__c = Date.Today();
+                update updateCase;
+        }
+        
+        if(budgetStatus=='Submitted' || projectedStatus== 'Submitted'){
+            for(Id tempId : approvedCaseIds ){
+                Case approvedCase = new Case();
+                approvedCase.Id= tempId;
+                if(budgetStatus=='Submitted')
+                    approvedCase.Budget_Status__c=budgetStatus;
+                if(projectedStatus== 'Submitted')
+                   approvedCase.Projected_Status__c=projectedStatus; 
+                casebudgetapprovals.add(approvedCase);       
             }
+            update casebudgetapprovals;
         }        
     }
     
@@ -454,6 +492,7 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
             {
                 expense.RecordTypeid = budgetingRecordTypeId;
             }
+            
             expense.Case__c =caseId;
             
             expense.Wish_Expense_Transaction_Code__c =wrapper.Wish_Expense_Transaction_Code__c ;

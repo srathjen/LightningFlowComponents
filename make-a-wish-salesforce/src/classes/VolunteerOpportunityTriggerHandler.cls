@@ -505,6 +505,31 @@ update volunteerContactList;
         }
         
     }
-    
+    public static void CreateVolunteerOpportunityRecord(List<Volunteer_Opportunity__c> rejectedVolunteerOpportunitiesList){
+        
+        List<Volunteer_Opportunity__c> updateList = new List<Volunteer_Opportunity__c>();
+        List<Volunteer_Opportunity__c> newVolOppList = new List<Volunteer_Opportunity__c>();
+        for(Volunteer_Opportunity__c newVolOpp : rejectedVolunteerOpportunitiesList) {
+            Volunteer_Opportunity__c newOpp = new Volunteer_Opportunity__c();
+            newOpp.Wish__c = newVolOpp.Wish__c;
+            newOpp.Chapter_Role_Opportunity__c = newVolOpp.Chapter_Role_Opportunity__c;
+            newOpp.Chapter_Name__c = newVolOpp.Chapter_Name__c;
+            newOpp.RecordTypeId = newVolOpp.RecordTypeId;
+            newVolOppList.add(newOpp);
+            
+            Volunteer_Opportunity__c updateVolOpp = new Volunteer_Opportunity__c();
+            updateVolOpp.id = newVolOpp.Id;
+            updateVolOpp.Inactive__c = true;
+            updateVolOpp.Reason_Inactive__c = 'Moved';
+            updateList.add(updateVolOpp);
+        }
+        
+        if(newVolOppList.size() > 0) {
+            insert newVolOppList;
+        }
+        if(updateList.size() > 0) {
+            update updateList;
+        }
+    }
     
 }

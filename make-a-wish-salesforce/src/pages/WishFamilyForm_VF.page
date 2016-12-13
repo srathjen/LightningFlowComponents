@@ -18,6 +18,10 @@
         .multiSelectPicklistCell {height:56px !important; width:45px !important; margin-left:41%;}
         .header-logo{height:60px !important;margin-left: 55px !important;}
         }
+         @media (max-width: 768px) {
+         .custMenu{width:100% !important;font-size:large !important;text-align:left !important};
+      }
+      .custMenu:hover{background:#ffffff;color:#000000;border:solid 1px #2184cc}
         @media all and (max-width: 960px) and (min-width: 520px), (min-width: 480px) {
         table.responsive,
         table.responsive thead,
@@ -89,6 +93,7 @@
             text-decoration : none !important;
         }
         header,main {max-width : 1000px !important;}
+      
     </style>
      <style type="text/css">
             .vfHelpText a            {position:relative;}
@@ -149,7 +154,15 @@
         .sideNav a {
             text-decoration : none !important;
         }
-        header,main {max-width : 1000px !important;}        
+        
+       .active {
+            font-weight:600;
+            font-size: 18px;
+        }
+        
+        header,main {max-width : 1000px !important;}    
+        .bold { font-weight: bold;
+                font-size: 18px; }    
         </style>
     <script>
      var listSize;    
@@ -166,6 +179,13 @@
             }
     
     $(document).ready(function(){
+    
+     $('.collapse a').click(function() { 
+           $('.active').removeClass('active');
+           $('.'+$(this).attr('class')).addClass('active');            
+       });
+        
+       
         
        
         $(".numeric").keyup(function(){
@@ -189,6 +209,7 @@
             }
    
         });
+        
         $(".phonecheck").click(function(){
             
             var x = $(".a").val();
@@ -312,30 +333,37 @@
         
     });
     
+    
+    
      function ClickToValidate(){       
         
            var runBool = true; 
            
-           
-           
-             if( $('.style1').val() == 'No'){
-             
+             if( $('.style1').val() == 'No'){                 
                 $('.Yes').removeClass('required');
                 $('.Yes').css('border', '1px #ccc solid');
+                runBool = true; 
                
             }
-            else if($('.style1').val() == null || $('.style1').val() == "" ){
-                
+            else if($('.style1').val() == null || $('.style1').val() == "" ){                
                 $('.Yes').removeClass('required');
                 $('.Yes').css('border', '1px #ccc solid');
+                runBool = true; 
             
             }
+            else if($('.style1').val() == 'Yes' && ($('.Yes').val() == null || $('.Yes').val() == null)){                
+                $('.Yes').addClass('required');
+                $('.Yes').css('border', '1px #ccc solid');
+                runBool = false;
+            
+            }
+            
             
             
            
            $('.required').each(function(){
                if($(this).val() == '' || $(this).val() == null ){
-                   $('.Yes').css('border', '2px red solid');
+                   $('.Yes').css('border', '1px #ccc solid');
                    runBool = false;
                    alert("Please fill all required fields");                   
                    return false;
@@ -345,7 +373,7 @@
            
            if(!runBool){
                   validateEmail();              
-                  $('.Yes').css('border', '2px red solid');
+                  $('.Yes').css('border', '1px #ccc solid');
                   return false;
               }
            else{               
@@ -429,14 +457,14 @@
                         }
                         if($(".dynamicclass").val() != null){
                             if(selText == 'Other' && $('.race').val().length<1){                         
-                                    bool = false;
+                                    bool = false;                                    
                             }
                            else{
-                            bool =true;                     
+                            bool =true;                                              
                             }
                     }
                     else{
-                    bool =true;                     
+                    bool =true;   
                     }
                 });
                 
@@ -453,6 +481,7 @@
         
         
         }
+        
      
     </script>
     
@@ -460,12 +489,13 @@
        
        <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
        <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />             
+       <div style='clear:both'></div>
        <main role="main" class="container">
         <div class="sideNav">
             <!--<a data-toggle="collapse" href="#childForm">
                 [+]                       
             </a>--> 
-            <a class="navMenu" href="{!childForm}">Wish Child Form</a>
+            <a class="navMenu" href="{!wcfUtil.childForm}">Wish Child Form</a>
             <!--<div id="childForm" class="panel-collapse collapse">
                 <a href="#mainSec">Main Section</a><br/> 
                 <a href="#myFav">My Favourites</a><br/> 
@@ -475,18 +505,18 @@
             <a data-toggle="collapse" href="#familyForm">
                 [+]                       
             </a>
-            <a class="navMenu" href="{!familyForm}">Wish Family Form</a>
+            <a class="navMenu" id="navMenu1" href="{!wcfUtil.familyForm}">Wish Family Form</a>
             <div id="familyForm" class="panel-collapse collapse">
            
-                <a href="#parentInfo"> Parent/Legal Guardian</a><br/> 
-                <a href="#reqSign">Required Signatures</a><br/> 
-                <a href="#participantsInfo">Participants Info</a>                     
+                <a href="#parentInfo" class='parentInfo'> Parent/Legal Guardian</a><br/> 
+                <a href="#reqSign" class='reqSign'>Prior Wish</a><br/> 
+                <a href="#participantsInfo" class='participantsInfo'>Participants Info</a>                     
             </div>
             <br/>
           <!--  <a data-toggle="collapse" href="#infoForm">
                 [+]                       
             </a>-->
-            <a class="navMenu" href="{!infoForm}">Wish Information Form</a>
+            <a class="navMenu" href="{!wcfUtil.infoForm}">Wish Information Form</a>
            <!-- <div id="infoForm" class="panel-collapse collapse">
                 <a href="#schedule">Scheduling</a><br/> 
                 <a href="#driverInfo">Driver Information</a><br/> 
@@ -496,6 +526,16 @@
                 </div>    
     <apex:form id="frm">       
         <apex:pageblock id="membAdd">
+        <div class="row" style="margin-left: 25%;">
+                        <div class="col-sm-12">
+                            <div class="text-center">
+                                <apex:Commandbutton value="Back" action="{!BackToWCF}" styleClass="btn btn-default mg-rt" immediate="true"/>
+                                <apex:Commandbutton value="Save" action="{!SaveandwishFamilyExit}" styleClass="btn btn-default mg-rt phonecheck" onclick="return ClickToValidate();"/>
+                                <apex:Commandbutton value="Next" action="{!WFFNext}" styleClass="btn btn-default mg-rt phonecheck" onclick="return ClickToValidate();"/>
+                                 <apex:Commandbutton value="Exit" action="{!cancelfunction}" style="margin-left: 10px;" reRender="popup"  styleClass="btn btn-default" immediate="true"/>
+                            </div>
+                        </div>
+                </div>
              <apex:pageMessages />
             <div class="container"> 
              <div class="alert alert-danger">
@@ -516,7 +556,7 @@
                         <apex:outputpanel >
                         <div class="parent-info">
                             <apex:variable value="{!0}" var="cnt"/>
-                            <apex:repeat value="{!wishFamilyWrapList}" var="wishFamilContact">
+                            <apex:repeat value="{!wcfUtil.wishFamilyWrapList}" var="wishFamilContact">
                                 <div class="row top-space">
                                     <div class="form-group col-sm-4">
                                         <label for="email">Parent/Legal Guardian:</label>
@@ -534,7 +574,7 @@
                                         <label for="email">Relationship :</label>
                                         <apex:selectList value="{!wishFamilContact.Relationship}" multiselect="false" size="1" styleClass="form-control relation{!cnt} required" style="border-left:5px solid red">
                                            <apex:selectOption itemlabel="Please Select" itemValue=""/>
-                                           <apex:selectOptions value="{!Relationships}" />
+                                           <apex:selectOptions value="{!wcfUtil.ParentGuardianRelationships}" />
                                         </apex:selectList>
                                        
                                     </div>
@@ -589,7 +629,7 @@
                       </apex:outputpanel>
                           <apex:commandLink value="Add Family" action="{!addFamily}" reRender="membAdd"   styleClass="btn btn-default pull-left top-space"/>     
                     </div>
-                    
+                     <div class="row top-space pad15" id="reqSign">
                      <div class="row pad-clear">
                             <p>
                                 <b>Prior Wish: </b>Has your child ever had a wish granted or been considered by Make-A-Wish® or any other
@@ -605,47 +645,14 @@
                                 <apex:inputfield value="{!currWishChild.Social_Media_Link__c}"   styleClass="form-control" />
                             </p>    
                        </div>
-                      <div class="row top-space pad15" id="reqSign">
-                            <div class="panel panel-default">
-                                <div class="panel-body">
-                                    <p class="assistance" style="margin-left:39%">Required Signatures</p>
-                                    <p>
-                                        <b>I understand and agree:</b>
-                                    </p>
-                                    <p>
-                                        <b>1. That no promises or assurances whatsoever have been made to me by any
-                                            representative of Make-A-Wish regarding the requested wish;</b>
-                                    </p>
-                                    <p>
-                                        <b> 2. That the granting of any wish and the participation of any person in the wish is
-                                            contingent upon approval by Make-A-Wish and the child’s physician, as well as full
-                                            compliance with all conditions, qualifications, and restrictions designated by
-                                            Make-A-Wish;</b>
-                                    </p>
-                                    <p>
-                                        <b>3. That all individuals with parental or custodial rights for the child must approve
-                                            the wish before it is granted and must sign all necessary documents; and</b>
-                                    </p>
-                                    <p>
-                                        <b> 4. That the receipt of a wish may impact the eligibility for public assistance and/or
-                                            benefits.</b>
-                                    </p>
-                                    
-                                    <p>
-                                        <b>I promise that the information provided by me is true and complete to the best of my
-                                            knowledge.</b>  
-                                    </p> 
-                                
-                                </div>
-                            </div>
-                        </div>  
-                        
+                     </div>
+                       
                          <div class="row top-space pad15">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <center><p class="assistance">Names of Make-A-Wish representatives assisting in the completion of this form.</p></center>
-                                    <U class="pull-left" style="font-size:19px"><apex:inputText value="{!caseTeamMemberNo1}" /></U>  
-                                    <U class="pull-right" style="font-size:19px"><apex:inputText value="{!caseTeamMemberNo2}" /></U> 
+                                    <U class="pull-left" style="font-size:19px"><apex:inputText value="{!wcfUtil.caseTeamMemberNo1}" /></U>  
+                                    <U class="pull-right" style="font-size:19px"><apex:inputText value="{!wcfUtil.caseTeamMemberNo2}" /></U> 
                                 </div>
                             </div>
                         </div>
@@ -656,12 +663,20 @@
                         wish participants and relevant information.<br/> 
                         <b>NOTE:</b> Make-A-Wish cannot guarantee the participation of any
                         individual(s) listed below. <br/>
-                        
+                       
+                       <div style="float:right;margin-right: 26%;margin-top: 10px;" >
+                         <apex:inputCheckbox value="{!wcfUtil.sameParentGuardian}" style="display:inline !important;position:relative;z-index:9999;">
+                              <apex:actionSupport action="{!SameAsFamily}" event="onchange" />
+                         </apex:inputCheckbox> <span style="font-weight:bold;">Same as Parent/Guardian</span>
+                       </div>
+                          
                          <div class="row top-space pad15" id="participantsInfo">
+                          <div style="float:right;margin-right: 62%;margin-top: 10px;">
+                          </div>
                             <table class="responsive table-striped">
                                 <tbody>
                                     <tr>
-                                        <th class="mobiltxt" colspan="2">Participants Info:</th>
+                                        <th>Participants Info:</th>
                                         <th>First Name</th>
                                         <th>Middle Name</th>
                                         <th>Last Name</th>
@@ -673,16 +688,16 @@
                                         <th>Residing with Wish Child</th>
                                         <th>Remove</th>
                                     </tr>
-                                    <apex:variable value="{!0}" var="part"/>
-                                    <apex:repeat value="{!wishParticipantList}" var="wishFamilContact">
-                                        <tr>
+                                    <apex:variable value="{!0}" var="part"/>                                    
+                                    <apex:repeat value="{!wcfUtil.wishParticipantList}" var="wishFamilContact" id="participant">
+                                        <tr>                                          
                                             <td class="mobiltxt"></td>
                                             <td><apex:inputText value="{!wishFamilContact.FirstName}" styleClass="form-control partFName{!part} required" style="border-left:5px solid red"/></td>
                                             <td><apex:inputText value="{!wishFamilContact.MiddleName}" styleClass="form-control" /></td>
                                             <td><apex:inputText value="{!wishFamilContact.LastName}" styleClass="form-control partLName{!part} required"  style="border-left:5px solid red"/></td>
                                             <td> <apex:selectList value="{!wishFamilContact.relationship}" multiselect="false" size="1" styleClass="form-control partRelation{!part} required" style="border-left:5px solid red">
                                                 <apex:selectOption itemlabel="Please Select" itemValue=""/>
-                                                <apex:selectOptions value="{!Relationships}" />
+                                                <apex:selectOptions value="{!wcfUtil.ParticipantRelationships}" />
                                                 </apex:selectList>
                                             </td>                          
                                             <td>
@@ -721,7 +736,7 @@
                             </table>
                         </div>
                         
-                         <apex:commandLink value="Add Row"  action="{!addParticipants}" reRender="membAdd"  styleClass="btn btn-default pull-left"/> <br/> 
+                         <apex:commandLink value="Add Participants"  action="{!addParticipants}" reRender="membAdd"  styleClass="btn btn-default pull-left"/> <br/> 
              
                         <div class="row top-space1">
                         <p><label><b>Non-Participating Adult Emergency Contact</b></label></p>
@@ -747,7 +762,7 @@
                                 <label for="email">Relationship to Wish Child :</label>
                                  <apex:selectList value="{!currWishChild.Emergency_Relationship__c}" multiselect="false" size="1" styleClass="form-control required" style="border-left:5px solid red">
                                            <apex:selectOption itemlabel="Please Select" itemValue=""/>
-                                           <apex:selectOptions value="{!Relationships}" />
+                                           <apex:selectOptions value="{!wcfUtil.Relationships}" />
                                  </apex:selectList>
                               
                             </div>
@@ -809,7 +824,7 @@
         </apex:pageblock>
       
   <apex:outputPanel id="popup">
-   <apex:outputPanel rendered="{!displayPopup }">
+   <apex:outputPanel rendered="{!wcfUtil.displayExitPopup}">
        
     <div class="pop-wrap">
         <div class="custPopup">

@@ -63,7 +63,7 @@ insert newChapter;*/
     public static Role__c createRole()
     {
         Role__c newRole = new Role__c();
-        newRole.Name = 'Wish Granting';
+        newRole.Name = 'Wish Granter';
         newRole.isWishRole__c = true;
         insert newRole;
         return newRole;
@@ -553,7 +553,10 @@ insert newChapter;*/
         newParentWish.Subject = 'Parent Wish';
         newParentWish.Interview_date__c = System.today();
         newParentWish.Wish_Type__c = 'Disney World';
+        newParentWish.Start_Date__c = System.today();
+        newParentWish.End_Date__c = System.today();
         newParentWish.ContactId = wishChildId;
+        newParentWish.Anticipated_Start_Date__c = System.today();
         insert newParentWish;
         return newParentWish;
     }
@@ -569,6 +572,7 @@ insert newChapter;*/
         newParentWish.Wish_Type__c = 'Disney World';
         newParentWish.ContactId = wishChildId;
         newParentWish.wish_involves_air_travel__c = 'Yes';
+        newParentWish.Start_Date__c = System.today();
         insert newParentWish;
         return newParentWish;
     }

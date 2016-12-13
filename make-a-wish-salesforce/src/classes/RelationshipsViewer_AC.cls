@@ -412,7 +412,6 @@ public class RelationshipsViewer_AC{
             newTask.OwnerId = parentWish.OwnerId;
             newTask.ActivityDate = System.today() + 1;
             newTask.Subject = 'Review contact information updated by the volunteer';
-            newTask.Description = contactInfo;
             demogarphicTaskList.add(newTask);
             
             
@@ -421,13 +420,12 @@ public class RelationshipsViewer_AC{
             newContactTask.OwnerId = parentWish.OwnerId;
             newContactTask.ActivityDate = System.today() + 1;
             newContactTask .Subject = 'Review contact information updated by the volunteer';
-            newContactTask.Description = contactInfo;
             demogarphicTaskList.add(newContactTask );
             
             insert   demogarphicTaskList;     
             
         }
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Thank you for updating the contact details. The updates would be reflected on the record once the chapter staff approves your changes.'));
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Thank you for updating the contact information! Your changes have been recorded and sent to the Chapter Staff for approval.'));
         if(contactList.size()>0){
             contactList[0].Old_Update_Contact_Values__c = contactInfo;
             update contactList;

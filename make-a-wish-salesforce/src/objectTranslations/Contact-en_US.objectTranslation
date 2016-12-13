@@ -385,6 +385,18 @@
         <name>Do_Not_Contact_Notes__c</name>
     </fields>
     <fields>
+        <label><!-- Driver Type --></label>
+        <name>Driver_Type__c</name>
+        <picklistValues>
+            <masterLabel>Potential</masterLabel>
+            <translation><!-- Potential --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Preferred</masterLabel>
+            <translation><!-- Preferred --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Electronics/Games that I like to play --></label>
         <name>Electronics_Games_that_I_like_to_play__c</name>
     </fields>
@@ -796,6 +808,14 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Medical Needs --></label>
         <name>Medical_Needs__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Middle Name --></label>
@@ -1287,6 +1307,14 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Residing with Wish child --></label>
         <name>Residing_with_Wish_child__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Restaurant --></label>

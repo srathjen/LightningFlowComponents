@@ -165,21 +165,7 @@ if(taskList.size()>0) {
         }
     }
     
-    //Used to submit parent wish for approval once the required volunteer assigend to Wish
-    public static void submitForApproval(List<Case> wishListForApproval) {
-        List<Approval.ProcessSubmitRequest> approvalRequestList = new List<Approval.ProcessSubmitRequest>();
-        for(Case wishForApproval : wishListForApproval) {
-            Approval.ProcessSubmitRequest approvalRequest = new Approval.ProcessSubmitRequest();
-            approvalRequest.setComments('Parent Wish Approval');
-            approvalRequest.setObjectId(wishForApproval.id);
-            approvalRequest.setProcessDefinitionNameOrId('Wish_Approval');
-            approvalRequest.setSkipEntryCriteria(true);
-            approvalRequestList.add(approvalRequest);
-        }
-        if(approvalRequestList.size()>0) {
-            List<Approval.ProcessResult> resultList = Approval.process(approvalRequestList);
-        }
-    }
+   
     // When the case status is updated the corresponding lead status should be update.
     public static void UpdateLeadStatus(List<Case> caseList){
         Map<Id,Case> caseMap = new Map<Id,Case>();
@@ -1273,7 +1259,7 @@ for(Case processParentList : parentCaseList);
             parentCaseMap.put(processParentCase.Id,processParentCase); 
         }
         
-        for(Case dbParentCase : [SELECT Id,OwnerId,Status,ParentId,RecordTypeId from Case WHERE ParentId =: parentCaseMap.keySet() AND RecordTypeId  =: wishDeterminationRecordTypeId AND isClosed = false]){
+        for(Case dbParentCase : [SELECT Id,OwnerId,Status,ParentId,AccountId,RecordTypeId from Case WHERE ParentId =: parentCaseMap.keySet() AND RecordTypeId  =: wishDeterminationRecordTypeId AND isClosed = false]){
             if(parentCaseMap.containsKey(dbParentCase.ParentId)){
                 dbParentCase.OwnerId = parentCaseMap.get(dbParentCase.ParentId).OwnerId;
                 dbParentCase.Status = 'Closed';  
@@ -1284,7 +1270,7 @@ for(Case processParentList : parentCaseList);
             update updateChildCaseMap.values();
         
         for(Case ProcessChilldCaseId : updateChildCaseMap.values()){
-            Case newPlanningWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Planning', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishPlanningRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
+            Case newPlanningWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c,Wish_Type__c ='Standard', Subject = 'Wish Planning',ParentId = ProcessChilldCaseId.ParentId,AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishPlanningRecordTypeId,OwnerId = ProcessChilldCaseId.OwnerId);
             insertchildCaseList.add(newPlanningWish); 
             Case newGrantingWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Granting', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishGrantRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
             insertchildCaseList.add(newGrantingWish); 
@@ -1377,10 +1363,10 @@ for(Case processParentList : parentCaseList);
     
     public static void wishClearanceTask(Map<Id, Case> wishClearanceMap, Set<Id> newWishClearanceSet, Set<Id> newMedicalSummarySet, Set<Id> newMedicalWishClearanceSet) {
         
-        Set<Task> taskToUpdateList = new Set<Task>();
-        
+        List<Task> taskToUpdateList = new List<Task>();
+        Set<Task> newTaskSet = new Set<Task>();
         Map<String, Task> taskToUpdateMap = new Map<String, Task>();
-        for(Task checkClearanceTask : [SELECT Id, Subject, WhatId, OwnerId, ActivityDate FROM Task WHERE status != 'Completed' AND WhatId IN : wishClearanceMap.keySet() AND (Subject = 'New wish clearance needed' OR Subject = 'New medical summary needed'  OR Subject = 'New wish clearance needed')]) {
+        for(Task checkClearanceTask : [SELECT Id, Subject, WhatId, OwnerId, ActivityDate FROM Task WHERE isClosed = false AND WhatId IN : wishClearanceMap.keySet() AND (Subject = 'New wish clearance needed' OR Subject = 'New medical summary needed'  OR Subject = 'New wish clearance needed')]) {
             taskToUpdateMap.put(checkClearanceTask.WhatId+'-'+checkClearanceTask.Subject, checkClearanceTask);
         }
         if(newWishClearanceSet.size() > 0) {
@@ -1400,12 +1386,15 @@ for(Case processParentList : parentCaseList);
         }
         
         
-        if(newMedicalWishClearanceSet.size() > 0) {
-            for(Id newWishClearanceTask : newMedicalWishClearanceSet) {
+        if(newMedicalSummarySet.size() > 0) {
+            System.debug('newMedicalSummarySet>>>Function');
+            for(Id newWishClearanceTask : newMedicalSummarySet) {
                 if(taskToUpdateMap.containsKey(newWishClearanceTask+'-'+'New medical summary needed')) {
+                     System.debug('Old>>>>>>');
                     taskToUpdateMap.get(newWishClearanceTask+'-'+'New medical summary needed').ActivityDate = Date.today()+3;
                     taskToUpdateList.add(taskToUpdateMap.get(newWishClearanceTask+'-'+'New medical summary needed'));
                 } else {
+                    System.debug('New Task Creation>>>>>>');
                     Task newTask = new Task();
                     newTask.ActivityDate = Date.today() + 3;
                     newTask.OwnerId = wishClearanceMap.get(newWishClearanceTask).OwnerId;
@@ -1416,8 +1405,8 @@ for(Case processParentList : parentCaseList);
             }
         }
         
-        if(newMedicalSummarySet.size() > 0) {
-            for(Id newWishClearanceTask : newMedicalSummarySet) {
+        if(newMedicalWishClearanceSet.size() > 0) {
+            for(Id newWishClearanceTask : newMedicalWishClearanceSet) {
                 if(taskToUpdateMap.containsKey(newWishClearanceTask+'-'+'New wish clearance needed')) {
                     taskToUpdateMap.get(newWishClearanceTask+'-'+'New wish clearance needed').ActivityDate = Date.today()+3;
                     taskToUpdateList.add(taskToUpdateMap.get(newWishClearanceTask+'-'+'New wish clearance needed'));
@@ -1434,9 +1423,15 @@ for(Case processParentList : parentCaseList);
         
         
         if(taskToUpdateList.size() > 0) {
-            List<Task> newTaskList = new List<Task>();
-            newTaskList.addAll(taskToUpdateList);
-            upsert newTaskList;
+            newTaskSet.addAll(taskToUpdateList);
+            if(newTaskSet.size() > 0) {
+                taskToUpdateList.clear();
+                taskToUpdateList.addAll(newTaskSet);
+                if(taskToUpdateList.size() > 0) {
+                    upsert taskToUpdateList;
+                }
+            }
+            
         }
     }
     

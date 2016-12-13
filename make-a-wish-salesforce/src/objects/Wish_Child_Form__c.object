@@ -71,7 +71,27 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>City__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Street__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Driver_Details__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Zip_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>State__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -316,6 +336,21 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>State__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Street__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Zip_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Driver_Name__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
@@ -327,6 +362,11 @@
         </displayedFields>
         <displayedFields>
             <field>Wish_Determination_Case_Id__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>City__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -866,6 +906,11 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>Participant_require_a_wheelchair_Details__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Availability_Time_Period_3__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
@@ -1158,6 +1203,17 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>City__c</fullName>
+        <description>It will hold wish child&apos;s city detail.</description>
+        <externalId>false</externalId>
+        <label>City</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>ClassinSchool__c</fullName>
@@ -1803,6 +1859,15 @@ and the date it was or will be granted.</inlineHelpText>
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Participant_Names__c</fullName>
+        <description>This filed is used to capture the participant names</description>
+        <externalId>false</externalId>
+        <label>Participant Names</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Participant_dietary_restrictions_Note__c</fullName>
         <externalId>false</externalId>
         <label>Participant dietary restrictions? Note</label>
@@ -1890,6 +1955,15 @@ and the date it was or will be granted.</inlineHelpText>
         <fullName>Participant_have_valid_photo_ID_Note__c</fullName>
         <externalId>false</externalId>
         <label>Participant have valid photo ID_Note</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Participant_require_a_wheelchair_Details__c</fullName>
+        <defaultValue>&apos;test&apos;</defaultValue>
+        <externalId>false</externalId>
+        <label>Participant require a wheelchair Details</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>TextArea</type>
@@ -2252,6 +2326,28 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>State__c</fullName>
+        <description>It will hold wish child&apos;s state detail</description>
+        <externalId>false</externalId>
+        <label>State</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Street__c</fullName>
+        <description>it will hold child&apos;s address details(about street)</description>
+        <externalId>false</externalId>
+        <label>Street</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>TVShow__c</fullName>
         <description>Wish child&apos;s Favorite TV Show</description>
         <externalId>false</externalId>
@@ -2517,6 +2613,17 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Zip_Code__c</fullName>
+        <description>It will hold wish child zip code detail.</description>
+        <externalId>false</externalId>
+        <label>Zip Code</label>
+        <length>6</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>mobilePhone__c</fullName>

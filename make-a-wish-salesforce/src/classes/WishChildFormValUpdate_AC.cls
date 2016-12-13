@@ -58,7 +58,7 @@ Public Class WishChildFormValUpdate_AC
        for(Wish_Child_Form__c currWishChildform : [SELECT id,Case__c,When_thinking_some_of_my_wish_ideas_were__c,MY_WISH_IS_TO__c,This_is_my_wish_because__c,
                                                    To_me_the_most_important_part_of_my_wish__c, When_I_think_about_my_wish_I_imagine__c, Wish_Notes__c,
                                                    Availability_Time_Period_1__c,Availability_Time_Period_2__c,Availability_Time_Period_3__c, 
-                                                   Any_impact_your_ability_to_join_wish__c,Details_about_Impact__c,
+                                                   Any_impact_your_ability_to_join_wish__c,Details_about_Impact__c,Street__c,
                                                    Have_current_automobile_insurance__c,Automobile_insurance_provide_coverage__c,Is_your_family_comfortable_in_rendal_car__c,
                                                    Is_a_wheelchair_accessible_vehicle_neede__c,Participant_dietary_restrictions__c,Participant_dietary_restrictions_Note__c,
                                                    Participant_require_a_wheelchair__c,Participant_require_a_wheelchair_Note__c,Will_your_family_bring_wheelchair__c,
@@ -165,6 +165,7 @@ Public Class WishChildFormValUpdate_AC
             String wishFamilyDT = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
             Set<Id> caseIds = new Set<Id>();
             caseIds.addAll(newWishMap.keySet());
+            Set<String> contactIds = new Set<String>();
      
             List<Case> updateWishDeterminationCaseList = WishChildFormValUpdate_AC.updateWishdetails(newWishMap);
      
@@ -184,7 +185,7 @@ Public Class WishChildFormValUpdate_AC
              Set<String> lastNamesSet = new Set<String>();
              Set<String> relationshipsSet = new Set<String>();
              Set<Id> wishChildIds = new Set<Id>();
-             Map<String,DriverWrapper> driverWrapperClsMap = new Map<String,DriverWrapper>();
+             Map<String,WishChildFormUtil.DriverWrapper> driverWrapperClsMap = new Map<String,WishChildFormUtil.DriverWrapper>();
              
               for(Wish_Child_Form__c currWishChildform : wishChildList)
               {
@@ -231,6 +232,15 @@ Public Class WishChildFormValUpdate_AC
                      currContact.Electronics_Games_that_I_like_to_play__c = currWishChildForm.Electronics_Games_that_I_like_to_play__c;
                      currContact.When_I_m_with_my_family_I_like_to__c = currWishChildForm.When_I_m_with_my_family_I_like_to__c;
                      currContact.When_I_m_with_my_friends_I_like_to__c = currWishChildForm.When_I_m_with_my_friends_I_like_to__c;
+                     if(currWishChildForm.Street__c != Null)
+                         currContact.MailingStreet = currWishChildForm.Street__c;
+                     if(currWishChildForm.City__c != Null)
+                         currContact.MailingCity = currWishChildForm.City__c;
+                     if(currWishChildForm.State__c != Null)
+                         currContact.MailingState = currWishChildForm.State__c;
+                     if(currWishChildForm.Zip_code__c != Null)
+                         currContact.MailingPostalcode = currWishChildForm.Zip_code__c;
+                     
                      updateWishChildContact.add(currContact);
                  }
                  
@@ -247,165 +257,121 @@ Public Class WishChildFormValUpdate_AC
              
                  
                  if(currWishChildForm.Wish_Family_Contact__c != Null)
-                 {
-                     for(String currString  : (currWishChildForm.Wish_Family_Contact__c).split('<br>'))
-                     {
+                  {
+                      String jsonString = currWishChildForm.Wish_Family_Contact__c;
+                      JsonString = jsonString.replace('&quot;', '"');
+                      List<WishChildFormUtil.WrapperClass> wrapFamilyList = (List<WishChildFormUtil.WrapperClass>) System.JSON.deserialize(jsonString, List<WishChildFormUtil.WrapperClass>.class);
+                 
+                      for(WishChildFormUtil.WrapperClass  currRec : wrapFamilyList)
+                      {
                         Contact newContact = new Contact();
                         newContact.RecordTypeId = wishFamilyDT;
                         newContact.Wish_Child_Id_Hidden__c = currWishChildForm.case__r.contactId;
-                        List<String> currList = currString.split('\\|');
-                        if(currList[0] != '-')
-                        {
-                           newContact.FirstName = currList[0].trim();  
-                           firstNamesSet.add(newContact.FirstName);
-                        }
-                        if(currList[1] != '-')
-                        {
-                           newContact.Middle_Name__c = currList[1];  
-                           
-                        }
-                        if(currList[2] != '-')
-                        {
-                           newContact.LastName = currList[2].trim(); 
-                           lastNamesSet.add(newContact.lastName); 
-                        }
-                       
-                        if(currList[3] != '-')
-                        {
-                           newContact.Relationship_to_Wish_Child__c = currList[3].trim(); 
-                           relationshipsSet.add(newContact.Relationship_to_Wish_Child__c); 
-                        }
-                        if(currList[4] != '-')
-                        {
-                           newContact.HomePhone = currList[4];  
-                        }
-                        if(currList[5] != '-')
-                        {
-                           newContact.Work_Phone__c = currList[5];  
-                        }
-                        if(currList[6] != '-')
-                        {
-                           newContact.MobilePhone = currList[6];  
-                        }
-                        if(currList[7] != '-')
-                        {
-                           newContact.Email = currList[7];  
-                        }
-                        if(currList[8] != '-' && currList[8] != Null)
-                        {
-                           newContact.BirthDate = Date.valueOf(currList[8].trim());  
-                        }
-                         newContact.IsParentGuardian__c = 'ParentGuardian';
-                        createNewWishFamily.put(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c,newContact);
-                     }
+                        
+                            newContact.FirstName = (currRec.FirstName!=Null)?currRec.FirstName:'';
+                            newContact.Middle_Name__c = (currRec.MiddleName!=Null)?currRec.MiddleName:'';
+                            newContact.LastName =  (currRec.lastName!=Null)?currRec.lastName:'';
+                            newContact.Relationship_to_Wish_Child__c = (currRec.Relationship!=Null)?currRec.Relationship:'';
+                            newContact.HomePhone = (currRec.homeTelephone!=Null)?currRec.homeTelephone:'';
+                            newContact.Work_Phone__c = (currRec.workTelephone!=Null)?currRec.workTelephone:'';
+                            newContact.MobilePhone = (currRec.mobileTelephone!=Null)?currRec.mobileTelephone:'';
+                            newContact.Email =  (currRec.Email!=Null)?currRec.Email:'';
+                            newContact.BirthDate = (currRec.dob!=Null)?Date.valueOf(currRec.dob):currRec.dob;
+                            newContact.IsParentGuardian__c = 'ParentGuardian';
+                            if(currRec.relId != Null)
+                            {
+                              newContact.id = currRec.RelId;
+                                  contactIds.add(newContact.Id);
+                              System.debug('currRec.RelId;+++++++++++++++++++++++++++++++++++++ ' +currRec.RelId);
+                            }
+                              
+                            createNewWishFamily.put(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c,newContact);
+                            
+                        
+                        
+                      }
                  }
                  
                  
                if(currWishChildForm.Driver_Details__c!= Null)
                 {
                     
-                   for(String currString : (currWishChildForm.Driver_Details__c).split('<br>'))
-                   {
-                       DriverWrapper wrapCls = new DriverWrapper();
-                     
-                      List<String> currList = currString.split('\\|');
+                     String jsonString = currWishChildForm.Driver_Details__c;
+                     JsonString = jsonString.replace('&quot;', '"');
+                     List<WishChildFormUtil.DriverWrapper> wrapDriverList = (List<WishChildFormUtil.DriverWrapper>) System.JSON.deserialize(jsonString, List<WishChildFormUtil.DriverWrapper>.class);
                     
-                     if((currList[0]).trim() != '-')
-                        wrapCls.driverName =  (currList[0]).trim();
-                     else
-                        wrapCls.driverName = '';
                         
-                     if(currList.size() > 1 && currList[1].trim() != '-')  
-                         wrapCls.licenseNum =  currList[1].trim();
-                     else
-                         wrapCls.licenseNum = '';
-                      
-                      if(currList.size() > 2 && currList[2].trim() != '-')    
-                        wrapCls.state =  currList[2].trim();
-                      else
-                        wrapCls.state = '';
-                       
-                      if(currList.size() > 3 && currList[3].trim() != '-')
+                      for(WishChildFormUtil.DriverWrapper currRec : wrapDriverList)
                       {
-                          
-                          wrapCls.expirationDate = Date.valueOf(currList[3].trim());//currList[3].trim();
+                                WishChildFormUtil.DriverWrapper wrapCls = new WishChildFormUtil.DriverWrapper();
+                                wrapCls.driverName  = (currRec.driverName!=Null)?currRec.driverName :'';
+                                wrapCls.licenseNum  = (currRec.licenseNum !=Null)?currRec.licenseNum :'';
+                                wrapCls.state  = (currRec.state !=Null)?currRec.state :'';
+                                wrapCls.expirationDate  = (currRec.expirationDate!=Null)?Date.valueOf(currRec.expirationDate):Null;
+                                wrapCls.type =  (currRec.type!=Null)?currRec.type:'';
+                                driverWrapperClsMap.put(wrapCls.driverName,wrapCls);
                       }
-                      else
-                          wrapCls.expirationDate = Null;
-                          
-                     
-                       driverWrapperClsMap.put(wrapCls.driverName,wrapCls);
-                   }
-                }
+                    
+                  
+                 }
                  
                  if(currWishChildForm.Participant_Contacts__c != Null)
                  {
-                     for(String currString  : (currWishChildForm.Participant_Contacts__c).split('<br>'))
-                     {
+                      String jsonString = currWishChildForm.Participant_Contacts__c;
+                      JsonString = jsonString.replace('&quot;', '"');
+                      List<WishChildFormUtil.WrapperClass> wrapParticipantsList = (List<WishChildFormUtil.WrapperClass>) System.JSON.deserialize(jsonString, List<WishChildFormUtil.WrapperClass>.class);
+                      for(WishChildFormUtil.WrapperClass  currRec : wrapParticipantsList )
+                      {
+                      
                         Contact newContact = new Contact();
                         newContact.RecordTypeId = wishFamilyDT;
                         newContact.Wish_Child_Id_Hidden__c = currWishChildForm.case__r.contactId;
-                        List<String> currList = currString.split('\\|');
                         
-                        System.debug('currList >>>>>>>>'+currList);
-                        
-                        if(currList[0] != '-')
-                        {
-                           newContact.FirstName = currList[0].trim();  
-                           firstNamesSet.add(newContact.FirstName);
-                        }
-                        if(currList[1] != '-')
-                        {
-                           newContact.Middle_Name__c = currList[1];  
-                        }
-                        if(currList[2] != '-')
-                        {
-                           newContact.LastName = currList[2].trim();  
-                           lastNamesSet.add(newContact.lastName); 
-                        }
-                       
-                        if(currList[3] != '-')
-                        {
-                           newContact.Relationship_to_Wish_Child__c = currList[3].trim();  
+                        newContact.FirstName = (currRec.FirstName!=Null)?currRec.FirstName:'';
+                        if(newContact.FirstName !='')
+                            firstNamesSet.add(newContact.FirstName);
+                        newContact.Middle_Name__c = (currRec.MiddleName!=Null)?currRec.MiddleName:'';
+                        newContact.LastName = (currRec.lastName!=Null)?currRec.lastName:'';
+                        if(newContact.lastName != '')
+                            lastNamesSet.add(newContact.lastName); 
+                        newContact.Relationship_to_Wish_Child__c =  (currRec.Relationship!=Null)?currRec.Relationship:'';
+                        if(newContact.Relationship_to_Wish_Child__c != '')
                            relationshipsSet.add(newContact.Relationship_to_Wish_Child__c); 
-                        }
-                        if(currList[4] != Null)
-                        {
-                          if(currList[4].trim() != '-')
-                              newContact.BirthDate = Date.ValueOf(currList[4]);  
-                        }
                         
-                        /*Edit*/
-                        if(currList[5] != Null)
-                        {
-                          if(currList[5].trim() != '-')
-                              newContact.Email= currList[5];  
-                        }
-                        /*Edit*/
-                        
-                        if(currList[6] != '-')
-                        {
-                           newContact.T_Shirt_Size__c = currList[6];  
-                        }
-                        if(currList[7] != '-')
-                        {
-                           newContact.Medical_Needs__c = boolean.valueOf(currList[7]);  
-                        }
-                        if(currList[8] != '-')
-                        {
-                           newContact.Residing_with_Wish_child__c = boolean.valueOf(currList[8]); 
-                        }
-                        
+                         newContact.BirthDate = (currRec.dob !=Null)?Date.valueOf(currRec.dob):currRec.dob;
+                         newContact.Email = (currRec.Email!=Null)?currRec.Email:'';
+                         newContact.T_Shirt_Size__c = (currRec.tshirtSize!=Null)?currRec.tshirtSize:'';
+                         newContact.Medical_Needs__c = currRec.medicalNeeds;
+                         newContact.Residing_with_Wish_child__c = currRec.residingWishMedical;
+                         newContact.IsParentGuardian__c = 'Participant';
                         if(driverWrapperClsMap.containsKey(newContact.FirstName+' '+newContact.LastName))
                         {
                            newContact.MailingState = driverWrapperClsMap.get(newContact.FirstName+' '+newContact.LastName).State;
                            newContact.Valid_D_L__c = driverWrapperClsMap.get(newContact.FirstName+' '+newContact.LastName).licenseNum;
                            newContact.Expiration_Date__c = driverWrapperClsMap.get(newContact.FirstName+' '+newContact.LastName).expirationDate;
+                           newContact.Driver_Type__c = driverWrapperClsMap.get(newContact.FirstName+' '+newContact.LastName).type;
                         }
                         
-                          newContact.IsParentGuardian__c = 'Participant';//fullcopy-wish.cs52.force.com/wishreferralform_vf
-                          createNewWishFamily.put(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c,newContact);
-                     }
+                        if(createNewWishFamily.containsKey(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c))
+                        {
+                            newContact.id = createNewWishFamily.get(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c).id;
+                            System.debug('currRec.RelId;+++++++++++++++++++++++++++++++++++++ ' +newContact.id);
+                            newContact.IsParentGuardian__c = 'both';
+                            if(newContact.id != Null)
+                                contactIds.add(newContact.Id);
+                        }
+                            
+                            createNewWishFamily.put(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c,newContact);
+                  
+                 
+                      }
+                 
+                 
+                 
+                 
+                 
+                 
+                    
                  }
                  
               }
@@ -417,11 +383,15 @@ Public Class WishChildFormValUpdate_AC
               
                Map<String, Contact> existingContactMap = new Map<String, Contact>();
                Map<String,String> existingRelationMap = new Map<String,String>();
-              for(Contact exContact : [SELECT ID,firstname, lastname, Relationship_to_Wish_Child__c from Contact WHERE firstName IN :firstNamesSet AND
-                                      LastName IN :lastNamesSet AND Relationship_to_Wish_Child__c IN :relationshipsSet])
+               
+               Map<Id, Contact> existingContacts = new Map<Id, Contact>();
+               
+              for(Contact exContact : [SELECT ID,firstname, lastname, Relationship_to_Wish_Child__c from Contact WHERE (firstName IN :firstNamesSet AND
+                                      LastName IN :lastNamesSet AND Relationship_to_Wish_Child__c IN :relationshipsSet)])
               {
               
                   existingContactMap.put(exContact.firstname+'-'+exContact.lastname+'-'+exContact.Relationship_to_Wish_Child__c,exContact);
+                
               }
               
               System.debug('existingContactMap+++++++++++++++++++++++++++++++++ ' + existingContactMap);
@@ -429,11 +399,13 @@ Public Class WishChildFormValUpdate_AC
               Map<String,Contact> toUpdateContact = new Map<String,Contact>();  
               for(Contact currCon : createNewWishFamily.values())
               {
-                 System.debug('existingContactMap++++++++++++++++++++++++++++++++++++++ ' + existingContactMap);
+                 System.debug('currCon ++++++++++++++++++++++++++++++++++++++ ' + currCon.id);
                 if(existingContactMap.containsKey(currCon.firstName+'-'+currCon.lastname+'-'+currCon.Relationship_to_Wish_Child__c))
                 {
                     currCon.id = existingContactMap.get(currCon.firstName+'-'+currCon.lastname+'-'+currCon.Relationship_to_Wish_Child__c).id;
                 }
+                
+                
                  toUpdateContact.put(currCon.firstName+'-'+currCon.lastname+'-'+currCon.Relationship_to_Wish_Child__c,currCon); 
               }
               
@@ -441,7 +413,10 @@ Public Class WishChildFormValUpdate_AC
               if(updateWishDeterminationCaseList.size() > 0)
                  update updateWishDeterminationCaseList;
               if(toUpdateContact.size() > 0)
+              {
                 Upsert toUpdateContact.values();
+                System.debug('toUpdateContact++++++++++++++++++++++++++++++++++ ' +toUpdateContact);
+              }
               if(updateWishFamilyAccount.size() > 0)
                 update updateWishFamilyAccount;
               if(updateWishChildContact.size() > 0)  
@@ -505,6 +480,7 @@ Public Class WishChildFormValUpdate_AC
        public String licenseNum{get;set;}
        public string state{get;set;}
        public Date expirationDate{get;set;}
+       public string type{get;set;}
     }   
       
      

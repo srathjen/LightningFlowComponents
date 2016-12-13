@@ -67,7 +67,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                             <apex:outputpanel rendered="{!fieldValue.label = 'Record ID' }">
                                                                 <td>
                                                                     <!--<a href="/{!con1.Id}">View</a>-->
-                                                                    <apex:outputText id="rejected" rendered="{!recordVisibilityMap[con1[fieldValue]] == true && rejectedOpportunitiesMap[con1[fieldValue]] == true}">Not Approved</apex:outputText>
+                                                                    <apex:outputText id="rejected" rendered="{!rejectedOpportunitiesMap[con1[fieldValue]] == true}">Not Approved</apex:outputText>
                                                                     <apex:outputText id="pending" rendered="{!recordVisibilityMap[con1[fieldValue]] == false && rejectedOpportunitiesMap[con1[fieldValue]] == false}">Pending Approval</apex:outputText>
                                                                     <apex:outputLink value="/{!con1.Id}" id="approved" rendered="{!recordVisibilityMap[con1[fieldValue]] == true && rejectedOpportunitiesMap[con1[fieldValue]] == false && con1.Role__c != 'Wish Granter'}">View</apex:outputLink>
                                                                     <apex:outputLink value="/{!con1.Wish__c}" id="approved1" rendered="{!recordVisibilityMap[con1[fieldValue]] == true && rejectedOpportunitiesMap[con1[fieldValue]] == false && con1.Role__c == 'Wish Granter'}">View</apex:outputLink>
@@ -113,7 +113,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                             <apex:outputpanel rendered="{!fieldValue.label = 'Record ID' }">
                                                                 <td>
                                                                     <!--<a href="/{!con1.Id}">View</a>-->
-                                                                    <apex:outputText id="rejected" rendered="{!recordVisibilityMap[con1[fieldValue]] == true && rejectedOpportunitiesMap[con1[fieldValue]] == true}">Not Approved</apex:outputText>
+                                                                    <apex:outputText id="rejected" rendered="{!rejectedOpportunitiesMap[con1[fieldValue]] == true}">Not Approved</apex:outputText>
                                                                     <apex:outputText id="pending" rendered="{!recordVisibilityMap[con1[fieldValue]] == false && rejectedOpportunitiesMap[con1[fieldValue]] == false}">Pending Approval</apex:outputText>
                                                                     <apex:outputLink value="/{!con1.Id}" id="approved" rendered="{!recordVisibilityMap[con1[fieldValue]] == true && rejectedOpportunitiesMap[con1[fieldValue]] == false}">View</apex:outputLink>
 

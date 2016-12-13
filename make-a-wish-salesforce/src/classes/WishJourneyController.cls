@@ -93,7 +93,7 @@ public class WishJourneyController{
                    determinationDays = (currCase.Wish_Determined_Date__c).daysBetween(currDate);
                if(currCase.Anticipated_Start_Date__c!= Null)
                {
-                   anticipationDays =(currDate).daysBetween(currCase.Anticipated_Start_Date__c);
+                   anticipationDays =(currCase.Anticipated_Start_Date__c).daysBetween(currDate);
                    blkGrantingOver = true;
                }
                if(currCase.Anticipated_Start_Date__c == Null || currCase.Anticipated_Start_Date__c > Date.Today())
@@ -128,7 +128,7 @@ public class WishJourneyController{
 
             if(currCase.Parent.Anticipated_Start_Date__c!= Null)
             {
-               anticipationDays =(currDate).daysBetween(currCase.Parent.Anticipated_Start_Date__c);
+               anticipationDays =(currCase.Parent.Anticipated_Start_Date__c).daysBetween(currDate);
                blkGrantingOver = true;
             } 
             if(currCase.Parent.Anticipated_Start_Date__c== Null || currCase.Parent.Anticipated_Start_Date__c> Date.Today())

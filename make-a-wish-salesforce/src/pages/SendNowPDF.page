@@ -51,6 +51,7 @@
           </div>
           <div style="clear:both"></div>
           <div style="margin:20px 0 30px 0;">
+          <div style="font-weight:bold; margin-bottom:15px;">Other Favorites:</div>
             <div style="margin-bottom:15px;">When I'm outside, I like to...</div>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.When_I_m_outside_I_like_to__c}</div>
           </div>
@@ -94,10 +95,7 @@
             <div style="margin-bottom:15px;">Wish Notes...</div>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.Wish_Notes__c}</div>
           </div>
-           <div style="margin:20px 0 30px 0;">
-            <div style="margin-bottom:15px;">Wish Type...</div>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.WishType__c}</div>
-          </div>
+           
       </div>
       <div style="clear:both"></div>
       </div>
@@ -111,7 +109,7 @@
           <div style="width:24%;float:left;margin:0 10px 0 0" type="text"><div style="border-bottom:1px solid #000 !important; border:none;">{!currWishChild.LastName__c}</div><div style="font-size:14px;font-style:italic;">Last</div></div>
       </div>
    
-     <apex:repeat value="{!wishFamilyWrapList}" var="wishFamilContact">
+     <apex:repeat value="{!wcfUtil.wishFamilyWrapList}" var="wishFamilContact">
       <div style="margin-top:50px;">
           <div style="width:25%;float:left;margin:0 10px 0 0" type="text"><strong>Parent/Legal Guardian:</strong></div>
           <div style="width:23%;float:left;margin:0 10px 0 0" type="text"><div style="border-bottom:1px solid #000 !important; border:none;">{!wishFamilContact.firstName}</div><div style="font-size:14px;font-style:italic;">First</div></div>
@@ -187,8 +185,8 @@ benefits.</li>
         </div>
         <div style="clear:both"></div>
         <p style="text-align:center;padding:0;margin:0 0 10px 0;">Names of Make-A-Wish representatives assisting in the completion of this form.</p>
-           <div style="margin-bottom:10px; display:block;float:left;width:48%;margin:0 3% 0 0;"><div style="width:100%;border-bottom:1px solid #000 !important; border:none;" type="text">{!caseTeamMemberNo1}</div></div>
-           <div style="margin-bottom:10px; display:block;float:left;width:48%;"><div style="width:100%;border-bottom:1px solid #000 !important; border:none;" type="text">{!caseTeamMemberNo2}</div></div>
+           <div style="margin-bottom:10px; display:block;float:left;width:48%;margin:0 3% 0 0;"><div style="width:100%;border-bottom:1px solid #000 !important; border:none;" type="text">{!wcfUtil.caseTeamMemberNo1}</div></div>
+           <div style="margin-bottom:10px; display:block;float:left;width:48%;"><div style="width:100%;border-bottom:1px solid #000 !important; border:none;" type="text">{!wcfUtil.caseTeamMemberNo2}</div></div>
         <div style="clear:both"></div>
           </div>
           <p>Requested Wish Participants, as indicated by the wish child. Please list legal names of all requested wish participants and relevant information. NOTE: Make-A-Wish cannot guarantee the participation of any
@@ -208,7 +206,7 @@ individual(s) listed below.</p>
                 <td style="width:10%;background:#bfbfbf; padding:0 5px;text-align:center;border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;">Residing With Wish Child</td>
             </tr>
        
-        <apex:repeat value="{!wishParticipantList}" var="wishFamilContact">
+        <apex:repeat value="{!wcfUtil.wishParticipantList}" var="wishFamilContact">
          
             <tr>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">{!wishFamilContact.FirstName}</td>
@@ -217,8 +215,8 @@ individual(s) listed below.</p>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.relationship}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.dob}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.tshirtSize}</td>
-                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"><apex:inputCheckbox value="{!wishFamilContact.medicalNeeds}"/></td>
-                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"><apex:inputcheckbox value="{!wishFamilContact.residingWishMedical}"/></td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.medicalNeeds}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.residingWishMedical}</td>
               
             </tr>
         </apex:repeat>  

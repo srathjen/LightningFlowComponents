@@ -1,4 +1,5 @@
 <apex:page standardController="case" extensions="WishChildForm_AC"  standardStylesheets="false" title="Make-A-Wish Communities | Wish Child Form" showHeader="false" sidebar="false" docType="html-5.0">
+    
     <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/> 
    <!--<apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap.min.css')}" />-->
     <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap-theme.min.css')}" />
@@ -15,6 +16,11 @@
         @media (max-width: 480px) {
         .header-logo{height:60px !important;margin-left:21% !important;}
         }
+         @media (max-width: 768px) {
+         .custMenu{width:100% !important;font-size:large !important;text-align:left !important};
+      }
+      .custMenu:hover{background:#ffffff;color:#000000;border:solid 1px #2184cc}
+      .clearBoth{clear:both};
         .alert {
         padding: 0px!important;
         border: 0px solid transparent!important;
@@ -97,7 +103,17 @@
         .sideNav a {
             text-decoration : none !important;
         }
-        header,main {max-width : 1000px !important;}        
+        header,main {max-width : 1000px !important;} 
+        
+        
+        .active {
+        font-weight:600;
+        font-size: 18px;
+       -webkit-animation:fade-in 1s infinite;
+       
+        }  
+        
+               
         </style>
     
     <script>
@@ -109,6 +125,12 @@
                 alert('Please Enter Valid Phone Number');
             }
         });
+        
+        
+         $('.collapse a').click(function() { 
+           $('.active').removeClass('active');
+           $('.'+$(this).attr('class')).addClass('active');                      
+       });
         
          $(".phonecheck").click(function(){
             
@@ -178,27 +200,25 @@
        
        <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
        <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" /> 
-      
-                
               
-                <main role="main" class="container">
+                <main role="main" class="container clearBoth">
                     <div class="sideNav">
                    <a data-toggle="collapse" href="#childForm">
                        [+]      
                     </a>
-                    <a class="navMenu" href="{!childForm}">Wish Child Form</a>
-                   <div id="childForm" class="panel-collapse collapse">
-                       <a href="#mainSec">Main Section</a><br/> 
-                       <a href="#myFav">My Favorites</a><br/> 
-                       <a href="#otherFav">Other Favourites</a><br/>  
-                       <a href="#MyWish">My Wish</a> 
+                    <a class="navMenu" href="{!wcfUtil.childForm}">Wish Child Form</a>
+                    <div id="childForm" class="panel-collapse collapse">
+                       <a href="#mainSec" class="mainSec">Main Section</a><br/> 
+                       <a href="#myFav" class="myFav">My Favorites</a><br/> 
+                       <a href="#otherFav" class="otherFav">Other Favourites</a><br/>  
+                       <a href="#MyWish" class="MyWish">My Wish</a> 
                                           
                    </div>
                     <br/>
                    <!--<a data-toggle="collapse" href="#familyForm">
                        [+]                     
                     </a>-->
-                    <a class="navMenu" href="{!familyForm}">Wish Family Form</a>
+                    <a class="navMenu" href="{!wcfUtil.familyForm}">Wish Family Form</a>
                   <!-- <div id="familyForm" class="panel-collapse collapse">
                        <a href="#parentInfo">Gaurdian information</a><br/> 
                        <a href="#reqSign">Required Signatures</a><br/> 
@@ -208,7 +228,7 @@
                     <!--<a data-toggle="collapse" href="#infoForm">
                        [+]                       
                     </a>-->
-                    <a class="navMenu" href="{!infoForm}">Wish Information Form</a>
+                    <a class="navMenu" href="{!wcfUtil.infoForm}">Wish Information Form</a>
                   <!-- <div id="infoForm" class="panel-collapse collapse">
                        <a href="#schedule">Scheduling</a><br/> 
                        <a href="#driverInfo">Driver Information</a><br/> 
@@ -220,7 +240,7 @@
         <!------------------ Wish Child Form Starts ------------------------>
       
         <apex:pageblock >
-         <div class="row" style="margin-left:25%;">
+        <div class="row" style="margin-left:25%;">
                         <div class="col-sm-12">
                             <div class="text-center">
                                  <apex:Commandbutton value="Save" action="{!SaveandwishChildExit}" Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="btn btn-default mg-rt phonecheck" />
@@ -281,10 +301,10 @@
                                 <label for="Medical Condition">Wish Child’s Diagnosis:</label>
                                 <apex:inputField value="{!currWishChild.Diagnosis__c}" styleClass="form-control required" style="border-left:5px solid red"/>
                             </div>
-                            <div class="form-group col-md-6">
+                         <!--   <div class="form-group col-md-6">
                                 <label for="Primary Address">Wish Child’s Primary Address:</label>
                                 <apex:inputField value="{!currWishChild.Primary_Address__c}" styleClass="form-control required" style="border-left:5px solid red"/>
-                            </div>
+                            </div> -->
                             <div class="form-group col-md-6">
                                 <label for="Mobile">Wish Child’s Mobile Telephone, if applicable:</label>
                                 <apex:inputField value="{!currWishChild.mobilePhone__c}" styleClass="form-control numeric a" />
@@ -298,6 +318,38 @@
                                 <apex:inputField value="{!currWishChild.T_Shirt_Size__c}" styleClass="form-control required" style="border-left:5px solid red"/>
                             </div>
                         </div>
+                        
+                        
+                        
+                        <!-------------------------------Address Details ---------------------------------->
+                         <div class="row top-space" id="myFav">
+                            <div class="form-group">
+                                 <span class="text-imp fl col-lg-12">Primary Address:</span>
+                            </div>
+                        </div>
+                         <div class="row top-space">
+                         <div class="form-group col-sm-3">
+                                <label for="Street">Street:</label>
+                                <apex:inputField value="{!currWishChild.Street__c}" styleClass="form-control"/>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="City">City:</label>
+                                <apex:inputField value="{!currWishChild.City__c}" styleClass="form-control"/>
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="State">State:</label>
+                                <apex:selectList value="{!currWishChild.State__c}" size="1" multiselect="false" styleClass="form-control">
+                                                 <apex:selectoptions value="{!wcfUtil.states}" />
+                                </apex:selectList>
+                               
+                            </div>
+                            <div class="form-group col-sm-3">
+                                <label for="Zip">Zip:</label>
+                                <apex:inputField value="{!currWishChild.Zip_Code__c}" styleClass="form-control"/>
+                            </div>
+                        
+                         </div>
+                        
                         <!------------------------------- FAVORITE DETAILS -------------------------------->
                         <div class="row top-space" id="myFav">
                             <div class="form-group">
@@ -435,8 +487,6 @@
                         </div>
                     </div>
              
-             
-                    
                     <div class="row" style="margin-left:25%;">
                         <div class="col-sm-12">
                             <div class="text-center">
@@ -479,7 +529,7 @@
         </apex:pageblock>
         
 <apex:outputPanel id="popup">
-   <apex:outputPanel rendered="{!displayPopup }">
+   <apex:outputPanel rendered="{!wcfUtil.displayExitPopup}">
        
     <div class="pop-wrap">
         <div class="custPopup">

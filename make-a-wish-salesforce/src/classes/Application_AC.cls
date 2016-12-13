@@ -42,12 +42,14 @@ public class Application_AC{
     public Set<String> roleNameSet{get;set;}
     public boolean bgTabPermission{get;set;}
     public boolean trainingTabVisible{get;set;}
+    public Boolean displaySignNowPopup{get;set;}
     
     /*It will fetch the current volunteer details and display this information into Application_VF page. */ 
     public Application_AC(){
         List<User> userIns =  [SELECT Id, ContactId FROM User WHERE Id =: userInfo.getUserId()];
         contactId  = userIns[0].contactId;
         showSubmitandSign  = false;
+        displaySignNowPopup = false;
         String myId = ApexPages.currentPage().getParameters().get('event');
         Boolean showEdit = false;
         volRoles = new List<String>();
@@ -181,39 +183,20 @@ public class Application_AC{
             
            
         } 
-        if((myId != Null || currentVolunteer.is_Application__c == 'Complete') && showEdit ==false){
-            isSigned = true;
-            editMode=true;
-        }
-        if(currentVolunteer.is_Application__c == 'Approved' && showEdit ==false)
+        
+        if(currentVolunteer.is_Application__c == 'Submit' || currentVolunteer.is_Application__c == 'Complete' || currentVolunteer.is_Application__c == 'Approved')
         {
-              editMode=true;
-           //  showEdit = true;
-             isSigned = True;
-        }
-        if(currentVolunteer.is_Application__c == 'Rejected' && showEdit ==false)
-        {
-          //  editMode=true;
-            showEdit = true;
-        }
-        if(currentVolunteer.is_Application__c == 'Submit' && showEdit ==false)
-        {
-           // editMode=true;
-           showEdit = true;
-        }
-        if(currentVolunteer.is_Application__c == 'Partial Submit' && showEdit ==false)
-        {
-            //editMode=true;
-            showEdit = true;
+           isSigned=True;
+           editMode = True;
         }
         
-        if(currentVolunteer.is_Application__c == 'Fully Submit' && showEdit ==false)
+        else if(currentVolunteer.is_Application__c == 'Fully Submit' || currentVolunteer.is_Application__c == 'Partial Submit' || currentVolunteer.is_Application__c == 'Rejected')
         {
-           // editMode=true;
-           showEdit = true;
-            showSubmitandSign = True;
+          isSigned = false;
+          editMode = false;
+          saveMode = True;
         }
-        
+          
         if(currentVolunteer.is_Application__c == '' || currentVolunteer.is_Application__c == Null || showEdit ==True){
             saveMode = true;
         }
@@ -323,7 +306,7 @@ public class Application_AC{
        
         try{
         
-             if(currentVolunteer.LastName == Null || currentVolunteer.Email == Null || currentVolunteer.Title == Null || currentVolunteer.FirstName == Null || currentVolunteer.Birth_Month__c == Null
+            /* if(currentVolunteer.LastName == Null || currentVolunteer.Email == Null || currentVolunteer.Title == Null || currentVolunteer.FirstName == Null || currentVolunteer.Birth_Month__c == Null
                || currentVolunteer.Birth_Day__c == Null || currentVolunteer.Preferred_Phone_Types__c == Null || currentVolunteer.HomePhone == Null || currentVolunteer.HomePhone == '' || currentVolunteer.I_m_on_LinkedIn__c == NULL || currentVolunteer.How_did_you_hear_about_Make_A_Wish__c == NULL || currentVolunteer.MailingStreet == NULL || currentVolunteer.MailingCity == NULL 
                || currentVolunteer.county__c == NULL || currentVolunteer.MailingPostalCode == NULL|| currentVolunteer.mailingstatecode == NULL || currentVolunteer.Emergency_Contact__c == NULL || currentVolunteer.Emergency_Contact_Relationship__c == NULL 
                || currentVolunteer.Emergency_Contact_Phone__c == NULL || currentVolunteer.Read__c == NULL || currentVolunteer.Write__c == NULL || currentVolunteer.Speak__c == NULL || currentVolunteer.Understand__c == NULL ||   
@@ -336,7 +319,7 @@ public class Application_AC{
             
                 currentVolunteer.is_Application__c = 'Fully Submit';
                
-            }
+            }*/
             
             if(currentVolunteer.Preferred_Phone_Types__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
                 currentVolunteer.HomePhone = currentVolunteer.HomePhone;
@@ -367,26 +350,39 @@ public class Application_AC{
             }
             
             update currentVolunteer;
-            pr = new PageReference('/apex/Application_VF?showeditMode=true'+'&bgRequired='+bgTabPermission+'&trainingRequired='+trainingTabVisible);
-            pr.setRedirect(true); 
+            if(!displaySignNowPopup){
+                pr = new PageReference('/apex/Application_VF?showeditMode=true'+'&bgRequired='+bgTabPermission+'&trainingRequired='+trainingTabVisible);
+                pr.setRedirect(true); 
+                return pr;
+            }
             
         }
         catch(Exception  e){
             system.debug('Error Message==>'+e);
         }
         
-        return pr;
+        return null;
     }
-    /*This SubmitAndSign() method is used when the volunteer fill all the required field then it will redirect docusign page
-     Once the user sign the document then it create new conflict of interest record and it will redirect to the application_VF page*/
-   public Pagereference SubmitAndSign(){
-     
-      List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentVolunteer.Id AND Status =: 'Pending' ];
+    
+    public pageReference confirmSign(){
+     List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentVolunteer.Id AND Status =: 'Pending' ];
           If(approvalIns.size() > 0){
              ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,' This record is already in approval process'));
-             return null;
+             
         }
         else{
+        displaySignNowPopup = true;
+        saveRec();
+        }
+        return null;
+    }
+      
+   /*This SubmitAndSign() method is used when the volunteer fill all the required field then it will redirect docusign page
+     Once the user sign the document then it create new conflict of interest record and it will redirect to the application_VF page*/
+   public Pagereference SubmitAndSign(){
+      
+     
+       
         String account;
         String UserName;
         String Password;
@@ -520,12 +516,9 @@ public class Application_AC{
                 
             }
         }
-       
-     
-        return null;
-        }
+       return null;
+        
     }
-    
     
     /*The current volunteer contact can edit their details using this EditRec().*/
     public PageReference EditRec(){
@@ -728,5 +721,8 @@ public class Application_AC{
        public string roleDescription{get;set;}
     }
       
-       
+    public void hidePopup()
+    {
+      displaySignNowPopup  = false;
+    }   
 }

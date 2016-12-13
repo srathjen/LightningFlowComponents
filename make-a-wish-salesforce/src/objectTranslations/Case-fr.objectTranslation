@@ -29,6 +29,10 @@
         <name>Additional_Requests__c</name>
     </fields>
     <fields>
+        <label><!-- Age --></label>
+        <name>Age__c</name>
+    </fields>
+    <fields>
         <label><!-- Air Travel Details --></label>
         <name>Air_Travel_Details__c</name>
         <picklistValues>
@@ -140,6 +144,14 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Budget_Approved_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Budget Cash --></label>
+        <name>Budget_Cash__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget Inkind --></label>
+        <name>Budget_Inkind__c</name>
+    </fields>
+    <fields>
         <label><!-- Budget Status --></label>
         <name>Budget_Status__c</name>
         <picklistValues>
@@ -162,6 +174,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Budget Submitted Date --></label>
         <name>Budget_Submitted_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Budget Total --></label>
+        <name>Budget_Total__c</name>
     </fields>
     <fields>
         <label><!-- Case Comment --></label>
@@ -458,10 +474,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Hidden_Contact_Gender__c</name>
     </fields>
     <fields>
-        <label><!-- Hidden Diagn Verifi Received Date --></label>
-        <name>Hidden_Diagn_Verifi_Received_Date__c</name>
-    </fields>
-    <fields>
         <label><!-- Hidden Email List --></label>
         <name>Hidden_Email_List__c</name>
     </fields>
@@ -480,10 +492,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Hidden Primary Diagnosis. --></label>
         <name>Hidden_Primary_Diagnosis_del__c</name>
-    </fields>
-    <fields>
-        <label><!-- Hidden Referral date --></label>
-        <name>Hidden_Referral_date__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Secondary Diagnosis 1 --></label>
@@ -980,6 +988,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Referral_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Region --></label>
+        <name>Region__c</name>
+    </fields>
+    <fields>
         <label><!-- Requested Participant Name forWheelchair --></label>
         <name>Requested_Participant_Name_forWheelchair__c</name>
     </fields>
@@ -1451,6 +1463,18 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Wish_Family_Form__c</name>
     </fields>
     <fields>
+        <label><!-- Wish Granter 1 Cell --></label>
+        <name>Wish_Granter_1_Cell__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Granter 1 --></label>
+        <name>Wish_Granter_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Granter 2 Cell --></label>
+        <name>Wish_Granter_2_Cell__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish Information Form --></label>
         <name>Wish_Information_Form__c</name>
     </fields>
@@ -1643,6 +1667,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Wish granter 2 --></label>
+        <name>Wish_granter_2__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish participant have medical needs --></label>
         <name>Wish_participant_have_medical_needs__c</name>
         <picklistValues>
@@ -1751,6 +1779,10 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sections>
             <label><!-- Important Date Section --></label>
             <section>Important Date Section</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Related Forms --></label>
+            <section>Wish Related Forms</section>
         </sections>
         <sections>
             <label><!-- Wish Status Bar --></label>

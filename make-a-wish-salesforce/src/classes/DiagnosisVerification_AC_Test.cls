@@ -1,24 +1,35 @@
 @isTest
 public class DiagnosisVerification_AC_Test{
-
-  
-     public static testMethod void testmethodone(){
-       
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Condition_Description__c newdesc = OrientationandTrainingUtil.createConditionDesCription();
-         insert newdesc;
-         Medical_Questions__c mediQues = OrientationandTrainingUtil.CreateMedicalQuestion(newdesc.Id);
-         insert mediQues;
+    
+    
+    public static testMethod void testmethodone(){
+        
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Condition_Description__c newdesc = OrientationandTrainingUtil.createConditionDesCription();
+        insert newdesc;
+        Medical_Questions__c mediQues = OrientationandTrainingUtil.CreateMedicalQuestion(newdesc.Id);
+        mediQues.Epilepsy_picklist__c = 'Test1,Test2';
+        insert mediQues;
         ICD_Codes__c  icdCode = OrientationandTrainingUtil.createICDCode(newdesc.Id);
         insert icdCode;
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
-         newLead.PD_ICD_Code__c = 'C00';
+        newLead.PD_ICD_Code__c = 'C00';
+        newLead.Current_Condition__c = 'Test1;Test2;Test3;';
+        newLead.Current_Condition_Label__c = 'Test1;Test2;Test3;';
         newLead.PD_Condition_Description__c = 'Malignant Melanoma';
         insert newLead;
+        Lead_File__c newFile = new Lead_File__c();
+        newFile.Parent__c = newLead.Id;
+        newFile.Description__c = 'SampleDesc';
+        newFile.File_Path__c = 'TestPath';
+        newFile.File_Name__c = 'File';
+        insert newFile;
+        
         Diagnosis_Verification__c  diagVerification = OrientationandTrainingUtil.createDiagnosis(newLead.Id, mediQues.Id);
         insert diagVerification;
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
+        Apexpages.currentpage().getparameters().put('identifyFieldValue' , 'ICD');
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);
         DiagnosisVerification_AC diagosis = new DiagnosisVerification_AC();
         diagosis.epilepsyVal = 'test';
@@ -29,32 +40,32 @@ public class DiagnosisVerification_AC_Test{
         diagosis.wrapCls.describePatient = '1';
         diagosis.init();
         diagosis.submit();
-         DiagnosisVerification_AC.medicalWrapper testIns = new DiagnosisVerification_AC.medicalWrapper(mediQues, 'Malignant Melanoma', 'C00', 1);
-         
-         diagosis.wrapCls.selectedPrimaryDiagnosis = 'Malignant Melanoma';
+        DiagnosisVerification_AC.medicalWrapper testIns = new DiagnosisVerification_AC.medicalWrapper(mediQues, 'Malignant Melanoma', 'C00', 1);
+        
+        diagosis.wrapCls.selectedPrimaryDiagnosis = 'Malignant Melanoma';
         diagosis.primaryDiagnosisEligibility();
-         
+        
         diagosis.changePatientValue();
         diagosis.notEligibleWish();
-         diagosis.wrapCls.diagnosisFilterVal1 = 'Malignant Melanoma';
+        diagosis.wrapCls.diagnosisFilterVal1 = 'Malignant Melanoma';
         diagosis.otherDiagnosisEligibilityCondition1();
-         diagosis.wrapCls.diagnosisFilterVal2 = 'Malignant Melanoma';
+        diagosis.wrapCls.diagnosisFilterVal2 = 'Malignant Melanoma';
         diagosis.otherDiagnosisEligibilityCondition2();
         diagosis.vegitativeId();
-         diagosis.wrapCls.diagnosisFilterVal3 = 'Malignant Melanoma';
+        diagosis.wrapCls.diagnosisFilterVal3 = 'Malignant Melanoma';
         diagosis.otherDiagnosisEligibilityCondition3(); 
-         diagosis.wrapCls.diagnosisFilterVal4 = 'Malignant Melanoma';
+        diagosis.wrapCls.diagnosisFilterVal4 = 'Malignant Melanoma';
         diagosis.otherDiagnosisEligibilityCondition4();
-         diagosis.wrapCls.ansForQes = 'Yes';
+        diagosis.wrapCls.ansForQes = 'Yes';
         diagosis.groupQuestions();
-         diagosis.wrapCls.ansForQes1 = 'Yes';
+        diagosis.wrapCls.ansForQes1 = 'Yes';
         diagosis.groupQuestions1();
-         diagosis.wrapCls.ansForQes2 = 'Yes';
+        diagosis.wrapCls.ansForQes2 = 'Yes';
         diagosis.groupQuestions2();
-         diagosis.wrapCls.ansForQes3 = 'Yes';
+        diagosis.wrapCls.ansForQes3 = 'Yes';
         diagosis.groupQuestions3();
-         diagosis.wrapCls.ansForQes4 = 'Yes';
-         diagosis.groupQuestions4();
+        diagosis.wrapCls.ansForQes4 = 'Yes';
+        diagosis.groupQuestions4();
         diagosis.getPickListYesNo();
         diagosis.getStateRecognizationPicklistValues();
         diagosis.getPickListYesNoDontno();
@@ -71,29 +82,30 @@ public class DiagnosisVerification_AC_Test{
         diagosis.updateLeadDetails();
         //diagosis.medicalWrapper.MediacalQuestions();
         diagosis.docusignRedirect();
-         
         
-     }
+        
+    }
     
     public static testMethod void testmethodone2(){
-       
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Condition_Description__c newdesc = OrientationandTrainingUtil.createConditionDesCription();
-         insert newdesc;
-         Medical_Questions__c mediQues = OrientationandTrainingUtil.CreateMedicalQuestion(newdesc.Id);
-         insert mediQues;
+        
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Condition_Description__c newdesc = OrientationandTrainingUtil.createConditionDesCription();
+        insert newdesc;
+        Medical_Questions__c mediQues = OrientationandTrainingUtil.CreateMedicalQuestion(newdesc.Id);
+        insert mediQues;
         ICD_Codes__c  icdCode = OrientationandTrainingUtil.createICDCode(newdesc.Id);
         insert icdCode;
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
         newLead.PD_ICD_Code__c = 'C00';
         newLead.PD_Condition_Description__c = 'Malignant Melanoma';
-         newLead.SD2_ICD_Code__c = '';
+        newLead.SD2_ICD_Code__c = '';
         newLead.SD2_Condition_Description__c = '';
         insert newLead;
         Diagnosis_Verification__c  diagVerification = OrientationandTrainingUtil.createDiagnosis(newLead.Id, mediQues.Id);
         insert diagVerification;
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
+        Apexpages.currentpage().getparameters().put('identifyFieldValue' , 'PCD');
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);
         DiagnosisVerification_AC diagosis = new DiagnosisVerification_AC();
         diagosis.epilepsyVal = 'test';
@@ -104,30 +116,30 @@ public class DiagnosisVerification_AC_Test{
         diagosis.wrapCls.describePatient = '1';
         diagosis.init();
         diagosis.submit();
-         diagosis.wrapCls.selectedPrimaryDiagnosis = 'Malignant Melanoma';
+        diagosis.wrapCls.selectedPrimaryDiagnosis = 'Malignant Melanoma';
         diagosis.primaryDiagnosisEligibility();
-         
+        
         diagosis.changePatientValue();
         diagosis.notEligibleWish();
-         diagosis.wrapCls.diagnosisFilterVal1 = 'Malignant Melanoma';
+        diagosis.wrapCls.diagnosisFilterVal1 = 'Malignant Melanoma';
         diagosis.otherDiagnosisEligibilityCondition1();
-         diagosis.wrapCls.diagnosisFilterVal2 = 'Malignant Melanoma';
+        diagosis.wrapCls.diagnosisFilterVal2 = 'Malignant Melanoma';
         diagosis.otherDiagnosisEligibilityCondition2();
         diagosis.vegitativeId();
-         diagosis.wrapCls.diagnosisFilterVal3 = 'Malignant Melanoma';
+        diagosis.wrapCls.diagnosisFilterVal3 = 'Malignant Melanoma';
         diagosis.otherDiagnosisEligibilityCondition3(); 
-         diagosis.wrapCls.diagnosisFilterVal4 = 'Malignant Melanoma';
+        diagosis.wrapCls.diagnosisFilterVal4 = 'Malignant Melanoma';
         diagosis.otherDiagnosisEligibilityCondition4();
         diagosis.wrapCls.ansForQes = 'No';
         diagosis.groupQuestions();
-         diagosis.wrapCls.ansForQes1 = 'No';
+        diagosis.wrapCls.ansForQes1 = 'No';
         diagosis.groupQuestions1();
-         diagosis.wrapCls.ansForQes2 = 'No';
+        diagosis.wrapCls.ansForQes2 = 'No';
         diagosis.groupQuestions2();
-         diagosis.wrapCls.ansForQes3 = 'No';
+        diagosis.wrapCls.ansForQes3 = 'No';
         diagosis.groupQuestions3();
-         diagosis.wrapCls.ansForQes4 = 'No';
-         diagosis.groupQuestions4();
+        diagosis.wrapCls.ansForQes4 = 'No';
+        diagosis.groupQuestions4();
         diagosis.getPickListYesNo();
         diagosis.getStateRecognizationPicklistValues();
         diagosis.getPickListYesNoDontno();
@@ -154,21 +166,23 @@ public class DiagnosisVerification_AC_Test{
         DiagnosisVerification_AC.searchDiagnosis1(searchTerm);
         DiagnosisVerification_AC.searchCondition(searchTerm);
         
-     }
+    }
     
     public static testMethod void testmethodone1(){
-       
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Condition_Description__c newdesc = OrientationandTrainingUtil.createConditionDesCription();
-         insert newdesc;
-         Medical_Questions__c mediQues = OrientationandTrainingUtil.CreateMedicalQuestion(newdesc.Id);
-         //insert mediQues;
+        
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Condition_Description__c newdesc = OrientationandTrainingUtil.createConditionDesCription();
+        newdesc.Name = 'Cardiomyopathy1';
+        insert newdesc;
+        Medical_Questions__c mediQues = OrientationandTrainingUtil.CreateMedicalQuestion(newdesc.Id);
+        //insert mediQues;
         ICD_Codes__c  icdCode = OrientationandTrainingUtil.createICDCode(newdesc.Id);
+        icdCode.Group1__c = true;
         insert icdCode;
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
         newLead.PD_ICD_Code__c = 'C00';
         newLead.PD_Condition_Description__c = 'Malignant Melanoma';
-         newLead.SD3_ICD_Code__c = '';
+        newLead.SD3_ICD_Code__c = '';
         newLead.SD3_Condition_Description__c = '';
         
         insert newLead;
@@ -176,6 +190,7 @@ public class DiagnosisVerification_AC_Test{
         insert diagVerification;
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
+        Apexpages.currentpage().getparameters().put('identifyFieldValue' , 'ICD');
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);
         DiagnosisVerification_AC diagosis = new DiagnosisVerification_AC();
         diagosis.epilepsyVal = 'test';
@@ -186,19 +201,19 @@ public class DiagnosisVerification_AC_Test{
         diagosis.wrapCls.describePatient = '1';
         diagosis.init();
         diagosis.submit();
-         diagosis.wrapCls.selectedPrimaryDiagnosis = 'Test';
+        diagosis.wrapCls.selectedPrimaryDiagnosis = 'Test';
         diagosis.primaryDiagnosisEligibility();
-         
+        
         diagosis.changePatientValue();
         diagosis.notEligibleWish();
-         diagosis.wrapCls.diagnosisFilterVal1 = 'Test';
+        diagosis.wrapCls.diagnosisFilterVal1 = 'Test';
         diagosis.otherDiagnosisEligibilityCondition1();
-         diagosis.wrapCls.diagnosisFilterVal2 = 'Test';
+        diagosis.wrapCls.diagnosisFilterVal2 = 'Test';
         diagosis.otherDiagnosisEligibilityCondition2();
         diagosis.vegitativeId();
-         diagosis.wrapCls.diagnosisFilterVal3 = 'Test';
+        diagosis.wrapCls.diagnosisFilterVal3 = 'Test';
         diagosis.otherDiagnosisEligibilityCondition3(); 
-         diagosis.wrapCls.diagnosisFilterVal4 = 'Test';
+        diagosis.wrapCls.diagnosisFilterVal4 = 'Test';
         diagosis.otherDiagnosisEligibilityCondition4();
         diagosis.groupQuestions();
         diagosis.groupQuestions1();
@@ -232,8 +247,8 @@ public class DiagnosisVerification_AC_Test{
         s.getanginaList();
         s.getventilatorList();
         s.getLungDiseaseList();
-         
         
-     }
-
+        
+    }
+    
 }

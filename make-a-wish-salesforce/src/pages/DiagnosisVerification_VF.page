@@ -285,7 +285,9 @@
                                                 <div class="col-md-3"><label>Diagnosis</label></div>
                                                 <div class="col-md-6">
                                                     <apex:inputText id="searchDiagnosisId" value="{!wrapCls.selectedPrimaryDiagnosis}" styleClass="placeHolder form-control cdICD searchDiagnosisId" onchange="checkEligible();" html-placeholder="example: Malignant Neoplasm" />
-                                                    <apex:actionfunction action="{!primaryDiagnosisEligibility}" name="checkEligible" reRender="wishStatusCheck,eligible,notEligible,popup,nextQtn,pullNextQtn,primaryMedicalQuestionBlock,otherDiagnosis,oDscript,btn-eligible,btn-notEliglible,btn-script,findAndReplace"/>
+                                                    <apex:actionfunction action="{!primaryDiagnosisEligibility}" name="checkEligible" reRender="wishStatusCheck,eligible,notEligible,popup,nextQtn,pullNextQtn,primaryMedicalQuestionBlock,otherDiagnosis,oDscript,btn-eligible,btn-notEliglible,btn-script,findAndReplace">
+                                                        <apex:param name="identifyFieldValue" value="" />
+                                                    </apex:actionfunction>
                                                 </div>
                                             </div>
                                         </apex:actionRegion>
@@ -374,7 +376,9 @@
                                                             <div class="col-md-3"><label>Diagnosis</label></div>
                                                             <div class="col-md-6">
                                                                 <apex:inputText id="searchDiagnosisId1" value="{!wrapCls.diagnosisFilterVal1}" styleClass="placeHolder SC1 form-control searchDiagnosisId1" onchange="checkEligible1();" html-placeholder="example: Malignant Neoplasm" />
-                                                                <apex:actionfunction action="{!otherDiagnosisEligibilityCondition1}" name="checkEligible1" reRender="wishStatusCheck,findAndReplace,eligible,notEligible,otherDiagnosis1,nextQtn,medicalQuestionDiagnosis1Block,btn-eligible,btn-notEliglible,btn-script"/>
+                                                                <apex:actionfunction action="{!otherDiagnosisEligibilityCondition1}" name="checkEligible1" reRender="wishStatusCheck,findAndReplace,eligible,notEligible,otherDiagnosis1,nextQtn,medicalQuestionDiagnosis1Block,btn-eligible,btn-notEliglible,btn-script">
+                                                                <apex:param name="identifyFieldValue" value="" />
+                                                                </apex:actionfunction>
                                                             </div>
                                                         </div>
                                                         <fieldset>
@@ -466,7 +470,9 @@
                                                             <div class="col-md-3"><label>Diagnosis</label></div>
                                                             <div class="col-md-6">
                                                                 <apex:inputText id="searchDiagnosisId2" value="{!wrapCls.diagnosisFilterVal2}" styleClass="placeHolder SC2 form-control searchDiagnosisId2" onchange="checkEligible2();" html-placeholder="example: Malignant Neoplasm" />
-                                                                <apex:actionfunction action="{!otherDiagnosisEligibilityCondition2}" name="checkEligible2" reRender="wishStatusCheck,findAndReplace,eligible,notEligible,otherDiagnosis2,nextQtn,medicalQuestionDiagnosis2Block,btn-eligible,btn-notEliglible,btn-script" />
+                                                                <apex:actionfunction action="{!otherDiagnosisEligibilityCondition2}" name="checkEligible2" reRender="wishStatusCheck,findAndReplace,eligible,notEligible,otherDiagnosis2,nextQtn,medicalQuestionDiagnosis2Block,btn-eligible,btn-notEliglible,btn-script" >
+                                                                    <apex:param name="identifyFieldValue" value="" />
+                                                                </apex:actionfunction>
                                                             </div>
                                                         </div>
                                                         <fieldset>
@@ -558,7 +564,9 @@
                                                             <div class="col-md-3"><label>Diagnosis</label></div>
                                                             <div class="col-md-6">
                                                                 <apex:inputText id="searchDiagnosisId3" value="{!wrapCls.diagnosisFilterVal3}" styleClass="placeHolder SC3 form-control searchDiagnosisId3" onchange="checkEligible3();" html-placeholder="example: Malignant Neoplasm" />
-                                                                <apex:actionfunction action="{!otherDiagnosisEligibilityCondition3}" name="checkEligible3" reRender="findAndReplace,wishStatusCheck,eligible,notEligible,otherDiagnosis3,nextQtn,medicalQuestionDiagnosis3Block,btn-eligible,btn-notEliglible,btn-script" />
+                                                                <apex:actionfunction action="{!otherDiagnosisEligibilityCondition3}" name="checkEligible3" reRender="findAndReplace,wishStatusCheck,eligible,notEligible,otherDiagnosis3,nextQtn,medicalQuestionDiagnosis3Block,btn-eligible,btn-notEliglible,btn-script" >
+                                                                    <apex:param name="identifyFieldValue" value="" />
+                                                                </apex:actionfunction>
                                                             </div>
                                                         </div>
                                                         <fieldset>
@@ -652,7 +660,9 @@
                                                             <div class="col-md-3"><label>Diagnosis</label></div>
                                                             <div class="col-md-6">
                                                                 <apex:inputText id="searchDiagnosisId4" value="{!wrapCls.diagnosisFilterVal4}" styleClass="placeHolder SC4 form-control searchDiagnosisId4" onchange="checkEligible1();" html-placeholder="example: Malignant Neoplasm" />
-                                                                <apex:actionfunction action="{!otherDiagnosisEligibilityCondition4}" name="checkEligible4" reRender="findAndReplace,wishStatusCheck,eligible,notEligible,otherDiagnosis4,nextQtn,medicalQuestionDiagnosis4Block,btn-eligible,btn-notEliglible,btn-script" />
+                                                                <apex:actionfunction action="{!otherDiagnosisEligibilityCondition4}" name="checkEligible4" reRender="findAndReplace,wishStatusCheck,eligible,notEligible,otherDiagnosis4,nextQtn,medicalQuestionDiagnosis4Block,btn-eligible,btn-notEliglible,btn-script" >
+                                                                    <apex:param name="identifyFieldValue" value="" />
+                                                                </apex:actionfunction>
                                                             </div>
                                                         </div>
                                                         <fieldset>
@@ -1548,9 +1558,9 @@
                         var ss = $('.searchDiagnosisId').html(ui.item.Condition_Description__r.Name).text();
                         $('[id$=searchDiagnosisId]').val( ss);
                         $('[id$=searchDiagnosisId]').prop('disabled',true);
-                        checkEligible();
+                        checkEligible('ICD');
                     } else {
-                        checkEligible();
+                        checkEligible('ICD');
 
                     }
                     return false;
@@ -1629,9 +1639,9 @@
 
                         $('[id$=diagnosisTextId]').val( ui.item.Code_To_Use__c);
                         $('[id$=diagnosisTextId]').prop('disabled',true);
-                        checkEligible();
+                        checkEligible('PCD');
                     } else {
-                        checkEligible();
+                        checkEligible('PCD');
                     }
                     return false;
                 },
@@ -1711,9 +1721,9 @@
                         var ss = $('.searchDiagnosisId1').html(ui.item.Condition_Description__r.Name).text();
                         $('[id$=searchDiagnosisId1]').val( ss);
                         $('[id$=searchDiagnosisId1]').prop('disabled',true);
-                        checkEligible1();
+                        checkEligible1('ICD');
                     } else {
-                        checkEligible1();
+                        checkEligible1('ICD');
                     }
                     return false;
                 },
@@ -1789,9 +1799,9 @@
 
 
 
-                        checkEligible1();
+                        checkEligible1('PCD');
                     } else {
-                        checkEligible1();
+                        checkEligible1('PCD');
                     }
                     return false;
                 },
@@ -1871,9 +1881,9 @@
                         var ss = $('.searchDiagnosisId2').html(ui.item.Condition_Description__r.Name).text();
                         $('[id$=searchDiagnosisId2]').val( ss);
                         $('[id$=searchDiagnosisId2]').prop('disabled',true);
-                        checkEligible2();
+                        checkEligible2('ICD');
                     } else {
-                        checkEligible2();
+                        checkEligible2('ICD');
                     }
                     return false;
                 },
@@ -1948,9 +1958,9 @@
 
                         $('[id$=diagnosisTextId2]').val( ui.item.Code_To_Use__c);
                         $('[id$=diagnosisTextId2]').prop('disabled',true);
-                        checkEligible2();
+                        checkEligible2('PCD');
                     } else {
-                        checkEligible2();
+                        checkEligible2('PCD');
                     }
                     return false;
                 },
@@ -2029,9 +2039,9 @@
                         var ss = $('.searchDiagnosisId3').html(ui.item.Condition_Description__r.Name).text();
                         $('[id$=searchDiagnosisId3]').val( ss);
                         $('[id$=searchDiagnosisId3]').prop('disabled',true);
-                        checkEligible3();
+                        checkEligible3('ICD');
                     } else {
-                        checkEligible3();
+                        checkEligible3('ICD');
                     }
                     return false;
                 },
@@ -2106,9 +2116,9 @@
 
                         $('[id$=diagnosisTextId3]').val( ui.item.Code_To_Use__c);
                         $('[id$=diagnosisTextId3]').prop('disabled',true);
-                        checkEligible3();
+                        checkEligible3('PCD');
                     } else {
-                        checkEligible3();
+                        checkEligible3('PCD');
                     }
                     return false;
                 },
@@ -2185,9 +2195,9 @@
                         $('[id$=searchDiagnosisId4]').val(ss);
                         $('[id$=searchDiagnosisId4]').prop('disabled',true);
 
-                        checkEligible4();
+                        checkEligible4('ICD');
                     } else {
-                        checkEligible4();
+                        checkEligible4('ICD');
                     }
                     return false;
                 },
@@ -2260,9 +2270,9 @@
 
                         $('[id$=diagnosisTextId4]').val( ui.item.Code_To_Use__c);
                         $('[id$=diagnosisTextId4]').prop('disabled',true);
-                        checkEligible4();
+                        checkEligible4('PCD');
                     } else {
-                        checkEligible4();
+                        checkEligible4('PCD');
                     }
                     return false;
                 },

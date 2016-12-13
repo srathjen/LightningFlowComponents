@@ -109,7 +109,7 @@ Public Class WishReferralForm_AC
        } 
        if(flag == True)
        {
-                if(currLead.Postalcode!= Null)
+                if(currLead.Postalcode!= Null && currLead.Postalcode !='')
                     zipCode = currLead.Postalcode;
                 else
                     zipCode = currLead.Referrer_Zip__c;

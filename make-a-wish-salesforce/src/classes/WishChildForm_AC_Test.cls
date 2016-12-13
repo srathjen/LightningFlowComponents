@@ -16,15 +16,16 @@ Description : WishChildForm_AC_Test is used to increase the code coverage for Wi
       wish.Hidden_Email_List__c = 'Chandru,Kesav,Mariyappan';
       update wish;
       Wish_Child_Form__c wishChildFormIns = OrientationandTrainingUtil.createWishChildForm(wish.Id);
-      wishChildFormIns.Participant_Contacts__c = 'Vennila | | karur | Child | 2016-11-01 00:00:00 | asdfasdfdsafasfdsa@12gmail.com | 12 | true | true sathis Kumar | | def | Friend | - | vi@gmail.com | | false | false';
-      Insert  wishChildFormIns;
+     Insert  wishChildFormIns;
         ApexPages.StandardController sc = new ApexPages.StandardController(wish);
         PageReference pageRef = Page.WishChildForm_VF;
         pageRef.getParameters().put('id', String.valueOf(wish.Id));
         Test.setCurrentPage(pageRef);
         
         WishChildForm_AC wishChildIns = new WishChildForm_AC(sc);
+        WishChildFormUtil util = new WishChildFormUtil();
         wishChildIns.saveContact();
+        
        // wishChildIns.removeFamily();
          wishChildIns.SaveandwishFamilyExit();
          wishChildIns.SaveandwishChildExit();
@@ -41,14 +42,14 @@ Description : WishChildForm_AC_Test is used to increase the code coverage for Wi
         wishChildIns.addParticipants();
         wishChildIns.BackToWFF();
         wishChildIns.cancelfunction();
-        wishChildIns.downLoadAsPdf();
-        wishChildIns.getMonths();
-        wishChildIns.Cancel();
-        wishChildIns.getYear();
-        wishChildIns.getWishChildFields();
-        wishChildIns.getRelationships();
+       // wishChildIns.downLoadAsPdf();
+        util.getMonths();
+        wishChildIns.CancelFunction();
+        util.getYear();
+        util.getWishChildFields();
+        util.getRelationships();
         wishChildIns.generatePDF();
-        wishChildIns.getStates();
+        util.getStates();
         wishChildIns.forceDownloadPDF();
         wishChildIns.submitforApproval();
         System.AssertEquals(wish.Id,wishChildFormIns.Case__c);
@@ -63,7 +64,6 @@ Description : WishChildForm_AC_Test is used to increase the code coverage for Wi
           wish.Hidden_Email_List__c = 'Chandru,Kesav,Mariyappan';
           update wish;
           Wish_Child_Form__c wishChildFormIns = OrientationandTrainingUtil.createWishChildForm(wish.Id);
-          wishChildFormIns.Participant_Contacts__c = 'Vennila | | karur | Child | 2016-11-01 00:00:00 | asdfasdfdsafasfdsa@12gmail.com | 12 | true | true sathis Kumar | | def | Friend | - | vi@gmail.com | | false | false';
           Insert  wishChildFormIns;
           OrientationandTrainingUtil.insertDocusignSetting();
           ApexPages.StandardController sc = new ApexPages.StandardController(wish);
@@ -88,7 +88,6 @@ Description : WishChildForm_AC_Test is used to increase the code coverage for Wi
           wish.Hidden_Email_List__c = 'Chandru,Kesav,Mariyappan';
           update wish;
           Wish_Child_Form__c wishChildFormIns = OrientationandTrainingUtil.createWishChildForm(wish.Id);
-          wishChildFormIns.Participant_Contacts__c = 'Vennila | | karur | Child | 2016-11-01 00:00:00 | asdfasdfdsafasfdsa@12gmail.com | 12 | true | true sathis Kumar | | def | Friend | - | vi@gmail.com | | false | false';
           Insert  wishChildFormIns;
           OrientationandTrainingUtil.insertDocusignSetting();
           ApexPages.StandardController sc = new ApexPages.StandardController(wish);
@@ -96,7 +95,8 @@ Description : WishChildForm_AC_Test is used to increase the code coverage for Wi
           pageRef.getParameters().put('id', String.valueOf(wish.Id));
           Test.setCurrentPage(pageRef);
           WishChildForm_AC wishChildIns = new WishChildForm_AC(sc);
-          wishChildIns.emailList.add('Vennila Paramasivam');
+          WishChildFormUtil util = new WishChildFormUtil();
+          util.emailList.add('Vennila Paramasivam');
           
           wishChildIns.multiEmail();
           wishChildIns.sendpdftoEmail();

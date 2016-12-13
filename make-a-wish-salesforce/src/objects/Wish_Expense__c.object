@@ -56,7 +56,7 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>ReadWrite</externalSharingModel>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
     <fields>
         <fullName>Account_Description__c</fullName>
         <description>It will capture detail description of the account</description>
@@ -167,18 +167,32 @@
         <type>Currency</type>
     </fields>
     <fields>
+        <fullName>Budget_Total__c</fullName>
+        <externalId>false</externalId>
+        <formula>Budget_Cash__c +  Budget_In_Kind__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Budget Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
         <fullName>Case__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
         <description>It will look up to the case record</description>
         <externalId>false</externalId>
         <label>Case</label>
         <referenceTo>Case</referenceTo>
         <relationshipLabel>Wish Expenses</relationshipLabel>
         <relationshipName>Wish_Expenses</relationshipName>
-        <required>false</required>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Lookup</type>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
         <fullName>Chapter_From__c</fullName>
@@ -617,5 +631,5 @@
         </picklistValues>
     </recordTypes>
     <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
 </CustomObject>

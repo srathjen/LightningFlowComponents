@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <customButtons>Update_Contact_Info</customButtons>
     <emailDefault>false</emailDefault>
+    <excludeButtons>Clone</excludeButtons>
     <feedLayout>
         <autocollapsePublisher>false</autocollapsePublisher>
         <compactFeed>false</compactFeed>
@@ -113,6 +113,18 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Driver_Names__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Budget_Status__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Projected_Status__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Region__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -541,6 +553,14 @@
                 <behavior>Edit</behavior>
                 <field>InActiveWishGranter__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Wish_Granter_1__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Wish_Granter_1_Cell__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -554,6 +574,14 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Envelop_Id__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Wish_granter_2__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Wish_Granter_2_Cell__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -732,6 +760,10 @@
         <fields>Actor</fields>
         <fields>Comments</fields>
         <relatedList>RelatedProcessHistoryList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Travel_Data__c.Parent_Wish__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
