@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <customButtons>npe4__Relationships_Viewer</customButtons>
     <excludeButtons>Clone</excludeButtons>
+    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>DisableCustomerPortal</excludeButtons>
     <excludeButtons>DisablePartnerPortal</excludeButtons>
     <excludeButtons>DisablePrmSuperUser</excludeButtons>
@@ -9,7 +9,6 @@
     <excludeButtons>EnablePrmSuperUser</excludeButtons>
     <excludeButtons>EnableSelfService</excludeButtons>
     <excludeButtons>RequestUpdate</excludeButtons>
-    <excludeButtons>RequestUseSfdc</excludeButtons>
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <excludeButtons>ViewPartnerPortalUser</excludeButtons>
@@ -424,6 +423,10 @@
         <fields>Completed_Date__c</fields>
         <fields>Type__c</fields>
         <fields>Volunteer_Attendance__c</fields>
+        <fields>Date__c</fields>
+        <fields>Start_Time__c</fields>
+        <fields>End_Time__c</fields>
+        <fields>Class_Offering__c</fields>
         <relatedList>Volunteer_Orientation_Training__c.Volunteer__c</relatedList>
     </relatedLists>
     <relatedLists>

@@ -20,6 +20,8 @@ public class WishLiabilityForm_AC_Test {
       wish.Hidden_Email_List__c = 'MAWAFirstName MAWALastName1,MAWAFirstName MAWALastName2';
       wish.Hidden_Name_List__c = 'kesavkumar@mstsolutions.com,kanagaraj@mstsolutions.com';
       update wish;
+      Wish_Child_Form__c childForm  = OrientationandTrainingUtil.createWishChildForm(wish.Id);
+      insert childForm; 
       OrientationandTrainingUtil.insertDocusignSetting();
       ApexPages.StandardController sc = new ApexPages.StandardController(wish);
       PageReference pageRef = Page.WishLiabilityForm_VF;
@@ -45,6 +47,8 @@ public class WishLiabilityForm_AC_Test {
       wish.Hidden_Email_List__c = 'MAWAFirstName MAWALastName1,MAWAFirstName MAWALastName2';
       wish.Hidden_Name_List__c = 'kesavkumar@mstsolutions.com,kanagaraj@mstsolutions.com';
       update wish;
+      Wish_Child_Form__c childForm  = OrientationandTrainingUtil.createWishChildForm(wish.Id);
+      insert childForm; 
       OrientationandTrainingUtil.insertDocusignSetting();
       ApexPages.StandardController sc = new ApexPages.StandardController(wish);
       PageReference pageRef = Page.WishLiabilityForm_VF;
@@ -68,6 +72,8 @@ public class WishLiabilityForm_AC_Test {
       wish.Hidden_Email_List__c = 'MAWAFirstName MAWALastName1,MAWAFirstName MAWALastName2';
       wish.Hidden_Name_List__c = 'kesavkumar@mstsolutions.com,kanagaraj@mstsolutions.com';
       update wish;
+      Wish_Child_Form__c childForm  = OrientationandTrainingUtil.createWishChildForm(wish.Id);
+      insert childForm; 
       OrientationandTrainingUtil.insertDocusignSetting();
       ApexPages.StandardController sc = new ApexPages.StandardController(wish);
       PageReference pageRef = Page.WishLiabilityForm_VF;
@@ -88,7 +94,7 @@ public class WishLiabilityForm_AC_Test {
       
           Test.StartTest();
           Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
-          WishLiabilityForm_AC.CallOuttoDocusign(sendEmailMap,wish.Id,wishChild.Id,true);
+          WishLiabilityForm_AC.CallOuttoDocusign(sendEmailMap,wish.Id);
           wishLiabilityIns.redirect();
           Test.StopTest();
     system.AssertEquals(wishChild.Id,wish.ContactId);
@@ -108,6 +114,8 @@ public class WishLiabilityForm_AC_Test {
       wish.Hidden_Email_List__c = 'MAWAFirstName MAWALastName1,MAWAFirstName MAWALastName2';
       wish.Hidden_Name_List__c = 'kesavkumar@mstsolutions.com,kanagaraj@mstsolutions.com';
       update wish;
+      Wish_Child_Form__c childForm  = OrientationandTrainingUtil.createWishChildForm(wish.Id);
+      insert childForm; 
       OrientationandTrainingUtil.insertDocusignSetting();
       ApexPages.StandardController sc = new ApexPages.StandardController(wish);
       PageReference pageRef = Page.WishLiabilityForm_VF;
@@ -123,7 +131,7 @@ public class WishLiabilityForm_AC_Test {
       
           Test.StartTest();
           Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
-          WishLiabilityForm_AC.CallOuttoDocusign(sendEmailMap,wish.Id,wishChild.Id,true);
+          WishLiabilityForm_AC.CallOuttoDocusign(sendEmailMap,wish.Id);
           wishLiabilityIns.redirect();
           Test.StopTest();
     system.AssertEquals(wishChild.Id,wish.ContactId);
@@ -146,6 +154,9 @@ public class WishLiabilityForm_AC_Test {
       wish.Hidden_Name_List__c = 'kesavkumar@mstsolutions.com,kanagaraj@mstsolutions.com';
       update wish;
       OrientationandTrainingUtil.insertDocusignSetting();
+      Wish_Child_Form__c childForm  = OrientationandTrainingUtil.createWishChildForm(wish.Id);
+      insert childForm;  
+      
       ApexPages.StandardController sc = new ApexPages.StandardController(wish);
       PageReference pageRef = Page.WishLiabilityForm_VF;
       pageRef.getParameters().put('id',String.valueOf(wish.Id));

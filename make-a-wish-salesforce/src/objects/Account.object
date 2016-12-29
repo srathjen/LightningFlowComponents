@@ -1081,6 +1081,19 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>External RE record Id for upserting</description>
+        <externalId>true</externalId>
+        <inlineHelpText>External RE record Id for upserting</inlineHelpText>
+        <label>External Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
         <fullName>Fax</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
@@ -1596,6 +1609,19 @@
     <fields>
         <fullName>TickerSymbol</fullName>
         <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>Transaction_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This filed will be a lookup to the Wish Expense Transaction Code object</description>
+        <externalId>false</externalId>
+        <label>Transaction Code</label>
+        <referenceTo>Wish_Expense_Transaction_Code__c</referenceTo>
+        <relationshipLabel>Accounts</relationshipLabel>
+        <relationshipName>Accounts</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Type</fullName>
@@ -2581,6 +2607,26 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         </sharedTo>
     </listViews>
     <listViews>
+        <fullName>Household_Accounts</fullName>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>npo02__Formal_Greeting__c</columns>
+        <columns>npo02__Informal_Greeting__c</columns>
+        <columns>npo02__TotalOppAmount__c</columns>
+        <columns>npo02__AverageAmount__c</columns>
+        <columns>npo02__Best_Gift_Year__c</columns>
+        <columns>npo02__HouseholdPhone__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ACCOUNT.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Account.HH_Account</value>
+        </filters>
+        <label>Household Accounts</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
         <fullName>In_Kind_Donors</fullName>
         <columns>ACCOUNT.NAME</columns>
         <columns>ACCOUNT.SITE</columns>
@@ -2597,6 +2643,54 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <label>In Kind Donors</label>
         <sharedTo>
             <allCustomerPortalUsers></allCustomerPortalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>In_Kind_Donors_Food_Beverage</fullName>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>ACCOUNT.TYPE</columns>
+        <columns>ACCOUNT.ADDRESS1_STATE_CODE</columns>
+        <columns>ACCOUNT.ADDRESS1_ZIP</columns>
+        <columns>ACCOUNT.PHONE1</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ACCOUNT.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Account.In_Kind_Donors</value>
+        </filters>
+        <filters>
+            <field>ACCOUNT.TYPE</field>
+            <operation>equals</operation>
+            <value>Food/Beverage</value>
+        </filters>
+        <filters>
+            <field>Is_Approved__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>In-Kind Donors - Food/Beverage</label>
+        <sharedTo>
+            <allCustomerPortalUsers></allCustomerPortalUsers>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Migration</fullName>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>ACCOUNT.ACCOUNT_NUMBER</columns>
+        <columns>ACCOUNT.RECORDTYPE</columns>
+        <columns>CREATEDBY_USER.ALIAS</columns>
+        <columns>ACCOUNT.CREATED_DATE</columns>
+        <columns>ACCOUNT.LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATEDBY_USER.ALIAS</field>
+            <operation>equals</operation>
+            <value>iuser</value>
+        </filters>
+        <label>Migration</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
         </sharedTo>
     </listViews>
     <listViews>

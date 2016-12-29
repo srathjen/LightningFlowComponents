@@ -151,13 +151,13 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                    updateChapterOnLeadList.add(newLead);
                 }
               
-               if(newLead.ICD_10_Code__c != Null && newLead.ICD_10_Code__c != Trigger.oldMap.get(newLead.id).ICD_10_Code__C)
+               if(newLead.PD_ICD_Code__c != Null && newLead.PD_ICD_Code__c != Trigger.oldMap.get(newLead.id).PD_ICD_Code__c)
                {
-                   icdCodesSet.add(newLead.ICD_10_Code__c);
+                   icdCodesSet.add(newLead.PD_ICD_Code__c);
                    leadUpdateToMedicalInfoList.add(newLead);
                    
                }
-               else if(newLead.ICD_10_Code__C == Null)
+               else if(newLead.PD_ICD_Code__c == Null)
                {
                   newLead.Short_Description__c = '';
                   newLead.Long_Description__c = '';
@@ -165,19 +165,20 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                   newLead.MAW_Name__c = '';
                }
                
-               if(newLead.Primary_Diagnosis__c != Null && newLead.Primary_Diagnosis__c != Trigger.oldMap.get(newLead.id).Primary_Diagnosis__c)
+               if(newLead.PD_Condition_Description__c  != Null && newLead.PD_Condition_Description__c  != Trigger.oldMap.get(newLead.id).PD_Condition_Description__c )
                {
-                   conditionDescriptionsSet.add(newLead.Primary_Diagnosis__c);
+                   conditionDescriptionsSet.add(newLead.PD_Condition_Description__c );
                    leadUpdateToMedicalInfoList.add(newLead);
                    
                }
-               else if(newLead.Primary_Diagnosis__c == Null && newLead.Primary_Diagnosis__c != Trigger.oldMap.get(newLead.id).Primary_Diagnosis__c)
+               else if(newLead.PD_Condition_Description__c  == Null && newLead.PD_Condition_Description__c  != Trigger.oldMap.get(newLead.id).PD_Condition_Description__c )
                {
                  newLead.MAW_Name__c = '';
                }
                
                if(newLead.Status == 'Eligibility Review' && trigger.oldMap.get(newLead.Id).Status != 'Eligibility Review'){
                    leadList.add(newLead);
+                   system.debug('@@@@@ LeadList @@@@@'+leadList);
                }
            } 
             //Regions for chapters
@@ -214,7 +215,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
           LeadTriggerHandler.ToUpdateMedicalInfo(conditionDescriptionsSet,icdCodesSet,leadUpdateToMedicalInfoList);
         }
         if(leadList.size() > 0){
-            
+            system.debug('@@@@@ LeadList @@@@@'+leadList);
             LeadTriggerHandler handlerIns = new LeadTriggerHandler();
             handlerIns.CreateNewCase(leadList);
         }
@@ -222,7 +223,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         if(findduplicateList.size() > 0)
         {
         
-           LeadTriggerHandler.findDuplicateRecords(findduplicateList);
+          // LeadTriggerHandler.findDuplicateRecords(findduplicateList);
         }
         
         

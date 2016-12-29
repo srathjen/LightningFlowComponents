@@ -17,6 +17,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
     public static String wishAssistRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishAssistRT).getRecordTypeId();
     public static String wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
     public static String wishEffectRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishEffectRT).getRecordTypeId();
+   
     public Id partARecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get(constant.partARecordTypeId).getRecordTypeId();
     public Id volunteerOppWishRecordTypeId = Schema.SObjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get('Wish').getRecordTypeId();
     public static Id diagnosisVerificationRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.diagnosisRT).getRecordTypeId();
@@ -128,6 +129,10 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                         if(currentCase.Budget_Approved_Date__c != Null)
                             currentCase.Status = 'Budget Approval - Approved';
                         
+                    }
+                    
+                     if((currentCase.Status == 'Budget Approval - Submitted' && trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted') || (currentCase.Status == 'Budget Approval - Approved' && trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved')){
+                         currentCase.Sub_Status__c = Null;
                     }
                     
                     if(currentCase.Status == 'Escalated' && currentCase.RecordTypeId == partARecordTypeId && trigger.oldMap.get(currentCase.id).Status != 'Escalated'){
@@ -317,7 +322,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
               if(newWish.isClosed != True && newWish.Status != 'Completed')
               {
                 parentIdsSet.add(newWish.ParentId);
-                wishChapterIdsMap.put(newWish.AccountId, newWish);
+                wishChapterIdsMap.put(newWish.Id, newWish);
                 wishType = constant.wishDeterminationRT;
                 wishDeterminationSubCaseList.add(newWish);
                 wishDeterminationSubCaseIds.add(newWish.ParentId);
@@ -330,7 +335,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 wishTypeSet.add(newWish.Wish_Type__c);
                 wishPlaningAnticipationSubCaseMap.put(newWish.Id, newWish);
                 parentIdsSet.add(newWish.ParentId);
-                wishChapterIdsMap.put(newWish.AccountId, newWish);
+                wishChapterIdsMap.put(newWish.Id, newWish);
                 wishType = constant.wishPlanningAnticipationRT;
               }
             } 
@@ -338,7 +343,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
               if(newWish.isClosed != True && newWish.Status != 'Completed')
               {
                 parentIdsSet.add(newWish.ParentId);
-                wishChapterIdsMap.put(newWish.AccountId, newWish);
+                wishChapterIdsMap.put(newWish.Id, newWish);
                 wishType = constant.wishAssistRT;
               }
             } 
@@ -347,10 +352,21 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
              if(newWish.isClosed != True && newWish.Status != 'Completed')
              {
                 parentIdsSet.add(newWish.ParentId);
-                wishChapterIdsMap.put(newWish.AccountId, newWish);
+                wishChapterIdsMap.put(newWish.Id, newWish);
                 wishType = constant.wishGrantRT;
                 wishGrantedSubCaseList.add(newWish);
                 wishGrantedSubCaseIdSet.add(newWish.ParentId);
+             }
+            } 
+           else if(newWish.RecordTypeId == wishEffectRecordTypeId) {
+            
+             if(newWish.isClosed != True && newWish.Status != 'Completed')
+             {
+                parentIdsSet.add(newWish.ParentId);
+                wishChapterIdsMap.put(newWish.Id, newWish);
+                wishType = constant.wishGrantRT;
+               /* wishGrantedSubCaseList.add(newWish);
+                wishGrantedSubCaseIdSet.add(newWish.ParentId);*/
              }
             } 
             else if(newWish.RecordTypeId == parentWishRecordTypeId ){
@@ -394,7 +410,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         if (parentIdsSet.size()>0 && chapterNames.size()>0){
             CaseTriggerHandler.UpdateWishRecordIdentifier(parentIdsSet,chapterNames,parentWishRecordTypeId);
         } 
-        if(wishChapterIdsMap.size()>0 && parentIdsSet.size()>0 && wishType != null) {
+        if(wishChapterIdsMap.size()>0 && parentIdsSet.size()>0) {
             CaseTriggerHandler.createActionTracks(wishType,wishChapterIdsMap,parentIdsSet);
         }
         
@@ -461,6 +477,12 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         Set<Id> newMedicalWishClearanceSet = new Set<Id>();
         Map<Id, Case> wishClearanceMap = new Map<Id, Case>();
         List<Case> childCreationWishList = new List<Case>();
+        Map<Id, String> wishReceiptMap = new Map<Id, String>();
+        Constant_AC cons = new Constant_AC();
+        list<Case> wishReceiptCaseList = new list<Case>();
+        String parentRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(cons.parentWishRT).getRecordTypeId();
+        String grantingWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(cons.wishGrantRT).getRecordTypeId();
+
         for(Case caseMemberCheck : Trigger.New) {
             
             if(caseMemberCheck.Migrated_Record__c == false)
@@ -471,6 +493,12 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 caseIdsMap.put(caseMemberCheck.Id, caseMemberCheck);
                 newWishTypeSet.add(caseMemberCheck.Wish_Type__c);
             }
+                
+                if(caseMemberCheck.RecordTypeId == grantingWishRecordTypeId && caseMemberCheck.Wish_Receipt_Items__c != Null && 
+                   caseMemberCheck.Wish_Receipt_Items__c != trigger.oldMap.get(caseMemberCheck.id).Wish_Receipt_Items__c){
+                       wishReceiptMap.put(caseMemberCheck.ParentId, caseMemberCheck.Wish_Receipt_Items__c);
+                    
+                }
            
             
             if(caseMemberCheck.Status == 'Escalated' && caseMemberCheck.RecordTypeId == diagnosisVerificationRT && caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status && caseMemberCheck.MAC_Email__c != Null) {
@@ -677,7 +705,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         }
         
         
-        /*-----------------------------------  Volunteer Opportunity creation under the parent case when status is changed as Ready To Assign ------------------ */
+        // Volunteer Opportunity creation under the parent case when status is changed as Ready To Assign ------------------ */
         if(caseMap.size()>0){
             for(Chapter_Role__c currentChapterRole :[SELECT ID,Chapter_Name__c,Chapter_Name__r.Name,Role_Name__r.Name FROM Chapter_Role__c WHERE Role_Name__r.Name =: 'Wish Granter' AND Chapter_Name__c IN: caseMap.keySet()]){
                 chapterRoleMap.put(currentChapterRole.Chapter_Name__c,currentChapterRole);
@@ -713,6 +741,20 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 newCon.Publicity_OK__c = 'YES';
                 updateWishchildList.add(newCon);
             }
+        }
+        
+        if(wishReceiptMap.size() > 0){
+            for(Case currentCase :[SELECT Id,Wish_Receipt_Items__c FROM Case WHERE ID IN: wishReceiptMap.keySet()]){
+                if(wishReceiptMap.containsKey(currentCase.id)){
+                    currentCase.Wish_Receipt_Items__c = wishReceiptMap.get(currentCase.id);
+                    wishReceiptCaseList.add(currentCase);
+                }
+            }
+        }
+        
+        if(wishReceiptCaseList.size() > 0){
+            update wishReceiptCaseList;
+            
         }
         if(updateWishchildList.size() > 0){
             update updateWishchildList;

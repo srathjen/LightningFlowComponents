@@ -155,7 +155,8 @@
         font-size: 18px;
        -webkit-animation:fade-in 1s infinite;
        
-        }      
+        }  
+          
         </style>
     <script type="text/javascript">
     function formatDate(date) {
@@ -172,11 +173,9 @@
             }
             
     $(function(){
-        
+        $(".readonly").attr('readonly', 'readonly');
         var drawLine = false; 
-
         var theCanvas,ctx, canvasOffset;
-
         $(document).delegate('#signWorkArea', "mousemove", function(e){
             if (drawLine === true) {
                 console.log('x');
@@ -261,7 +260,58 @@
     
     
     });
-
+    
+    
+    
+    
+    $('.wheelchairpicklist').change(function(){
+    
+            var isBool = false;
+                
+                if($(this).val().length > 0){
+                   
+                   if($(this).val() == 'Yes'){ 
+                        alert('If yes, please describe wheelchair Size [ H ___ W ___ and D___ ] ');
+                        $('.wheelchairtext').addClass('required');
+                        isBool = false;
+                        }
+                    else if($(this).val() == 'No'){
+                        isBool = true; 
+                        $('.wheelchairtext').removeClass('required');
+                        }
+                  }
+                  else{ 
+                  isBool = true; 
+                  $('.wheelchairtext').removeClass('required');
+                 }
+                        
+      });
+      
+      
+      $('.oxygenpicklist').change(function(){
+    
+            var isBool = false;
+                
+                if($(this).val().length > 0){
+                   
+                   if($(this).val() == 'Yes'){ 
+                        alert('If yes, please describe how often [ ___ daytime ___ nighttime ___ 24 hours ]');
+                        $('.oxygennotes').addClass('required');
+                        isBool = false;
+                        }
+                    else if($(this).val() == 'No'){
+                        isBool = true; 
+                        $('.oxygennotes').removeClass('required');
+                        }
+                  }
+                  else{ 
+                  isBool = true; 
+                  $('.oxygennotes').removeClass('required');
+                 }
+                        
+      });
+      
+ 
 
     });
     
@@ -275,7 +325,15 @@
                if($(this).val() == '' || $(this).val() == null ){
                    runBool = false;
                    alert("Please fill all required fields");
-                   $('.Yes').css('border', '2px red solid');
+                   if($('.Yes').val().length == 0 && $('.style1').val() == 'Yes')
+                      $('.Yes').css('border', '2px red solid');
+                      
+                  if($('.wheelchairtext').val().length == 0 && $('.wheelchairpicklist').val() == 'Yes')                      
+                      $('.wheelchairtext').css('border', '2px red solid');
+                      
+                  if($('.oxygennotes').val().length == 0 && $('.oxygenpicklist').val() == 'Yes')
+                      $('.oxygennotes').css('border', '2px red solid');
+                      
                    return false;
                }
                   
@@ -285,6 +343,8 @@
               }
            else{
               $('.Yes').css('border', '1px #ccc solid');
+              $('.wheelchairtext').css('border', '2px #ccc solid');
+              $('.oxygennotes').css('border', '2px #ccc solid');
               return true;
               }
         }
@@ -293,7 +353,8 @@
       <body class="vcp vcpactivelogin full registered profile">  
         
       <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
-      <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />             
+      <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />
+      <div style="width:60%;height:100px;margin-left:25%;margin-right:25%;"><apex:include pageName="active_header_progress_bar" id="pheaderprog" rendered="{!if($Profile.Name<>"Active Volunteer",true,true)}" /></div>
       <main role="main" class="container clearBoth">
       <div class="sideNav">
           <!--<a data-toggle="collapse" href="#childForm">
@@ -368,12 +429,13 @@
                 </div>-->
                 <div class="container-body">
                     <div class="row top-space" id="schedule">
-                        <div class="row">
+                       <div class="row">
                             <div class="col-lg-2 text-imp lineHeight">Wish Child's Name:</div>
-                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.FirstName__c}" html-placeholder="FirstName" styleClass="form-control"/></div>
-                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.Middle_Name__c}"  html-placeholder="MiddleName" styleClass="form-control"/></div>
-                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.LastName__c}" styleClass="form-control required" html-placeholder="LastName" style="border-left:5px solid red"/></div>
+                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.FirstName__c}" html-placeholder="FirstName" styleClass="form-control required readonly" style="border-left:5px solid red"/></div>
+                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.Middle_Name__c}"  html-placeholder="MiddleName" styleClass="form-control readonly"/></div>
+                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.LastName__c}" styleClass="form-control required readonly" html-placeholder="LastName" style="border-left:5px solid red"/></div>
                         </div>
+                       
                     </div>
                     <center><p class="text-bold top-space">Scheduling the Wish</p></center>
                     <center><p>Please indicate three time periods in which your family will have the greatest availability for fulfillment of the wish.</p></center>
@@ -532,9 +594,9 @@
                                 <tr>
                                     <td class="mobiltxt"></td>
                                     <td class="tbl-medical"> Does any requested participant require a wheelchair?If yes, please describe wheelchair size. </td>
-                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_require_a_wheelchair__c}" styleClass="form-control" /> </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_require_a_wheelchair__c}" styleClass="form-control wheelchairpicklist" /> </td>
                                     <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftWCNamesList}" rightOriginalvalue="{!wcfUtil.rightWCNamesList}" currString="{!wcfUtil.currentWCNamesList}" /></td>
-                                    <td> <apex:inputField value="{!currWishChild.Participant_require_a_wheelchair_Details__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Participant_require_a_wheelchair_Details__c}" styleClass="form-control wheelchairtext" /> </td>
                                     <td> <apex:inputField value="{!currWishChild.Participant_require_a_wheelchair_Note__c}" styleClass="form-control" /> </td>
                                 </tr>
                                 <tr>
@@ -566,10 +628,10 @@
                                 <tr>
                                     <td class="mobiltxt"></td>
                                     <td class="tbl-medical"> Does any requested participant require oxygen?If yes, please describe how often. </td>
-                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_require_oxygen_how_often__c}" styleClass="form-control" /> </td>
+                                    <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_require_oxygen_how_often__c}" styleClass="form-control oxygenpicklist" /> </td>
                                     <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftOxygenNamesList}" rightOriginalvalue="{!wcfUtil.rightOxygenNamesList}" currString="{!wcfUtil.currentOxygenNamesList}" /></td>
-                                    <td></td>
-                                    <td> <apex:inputField value="{!currWishChild.Participant_require_oxygen_Note__c}" styleClass="form-control" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.oxygen_Details__c}" styleClass="form-control wheelchairtext" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Participant_require_oxygen_Note__c}" styleClass="form-control oxygennotes" /> </td>
                                     
                                 </tr>
                                 <tr>

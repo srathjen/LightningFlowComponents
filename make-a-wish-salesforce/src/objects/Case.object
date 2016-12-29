@@ -142,6 +142,10 @@
         <description>This support process used to assign with parent wishes</description>
         <isActive>true</isActive>
         <values>
+            <fullName>Budget Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
             <fullName>Budget Approval - Approved</fullName>
             <default>false</default>
         </values>
@@ -684,6 +688,19 @@ for fulfilment  the wish.</description>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Chapter_Name__c</fullName>
+        <description>This field holds the state name</description>
+        <externalId>false</externalId>
+        <label>Chapter Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>CheckedInFamily__c</fullName>
@@ -1418,11 +1435,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Diagn_Verifi_Received_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead__r.Part_A_Received__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Diagn Verifi Received Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Hidden_Email_List__c</fullName>
         <description>This field is used to store the list of email values from Wish Information form.</description>
         <externalId>false</externalId>
         <label>Hidden Email List</label>
-        <length>80</length>
+        <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1443,7 +1471,21 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Lead_Name__c</fullName>
+        <description>This field is used to store the Lead Name</description>
+        <externalId>false</externalId>
+        <formula>Lead__r.FirstName+ &apos; &apos;+ &apos; &apos;+Lead__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Lead Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_Name_List__c</fullName>
+        <description>This field is used to store the parent guardian and participant values.</description>
         <externalId>false</externalId>
         <label>Hidden Name List</label>
         <length>32768</length>
@@ -1477,6 +1519,17 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Referral_date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Lead__r.Referred_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Referral date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>Hidden_Secondary_Diagnosis_1__c</fullName>
@@ -4159,6 +4212,23 @@ arrangements/unique circumstances for any requested wish participant not residin
         </sharedTo>
     </listViews>
     <listViews>
+        <fullName>Diagnosis_Verification_Review</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CASES.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.Diagnosis_Verification_Review</value>
+        </filters>
+        <label>Diagnosis Verification Review</label>
+    </listViews>
+    <listViews>
         <fullName>East_Tennessee_Case</fullName>
         <filterScope>Queue</filterScope>
         <label>East Tennessee</label>
@@ -4399,6 +4469,27 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Migration</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>CASES.RECORDTYPE</columns>
+        <columns>PARENT.CASE_NUMBER</columns>
+        <columns>CREATEDBY_USER.ALIAS</columns>
+        <columns>Fund_Id__c</columns>
+        <columns>Migrated_Record__c</columns>
+        <columns>From_Mulesoft__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATEDBY_USER.ALIAS</field>
+            <operation>equals</operation>
+            <value>iuser</value>
+        </filters>
+        <label>Migration</label>
     </listViews>
     <listViews>
         <fullName>Minnesota_Case</fullName>
@@ -4686,6 +4777,91 @@ arrangements/unique circumstances for any requested wish participant not residin
         </sharedTo>
     </listViews>
     <listViews>
+        <fullName>Wish_Assist</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CASES.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.Wish_Assist</value>
+        </filters>
+        <label>Wish Assist</label>
+    </listViews>
+    <listViews>
+        <fullName>Wish_Determination</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CASES.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.Wish_Determination</value>
+        </filters>
+        <label>Wish Determination</label>
+    </listViews>
+    <listViews>
+        <fullName>Wish_Effect</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CASES.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.Wish_Effect</value>
+        </filters>
+        <label>Wish Effect</label>
+    </listViews>
+    <listViews>
+        <fullName>Wish_Granted</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CASES.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.Wish_Granted</value>
+        </filters>
+        <label>Wish Granted</label>
+    </listViews>
+    <listViews>
+        <fullName>Wish_Planning</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CASES.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.Wish_Planning_Anticipation</value>
+        </filters>
+        <label>Wish Planning</label>
+    </listViews>
+    <listViews>
         <fullName>Wyoming_Case</fullName>
         <filterScope>Queue</filterScope>
         <label>Wyoming</label>
@@ -4693,6 +4869,23 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>parent_Wish</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CASES.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.Wish</value>
+        </filters>
+        <label>parent Wish</label>
     </listViews>
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
     <recordTypeTrackHistory>true</recordTypeTrackHistory>
@@ -4726,6 +4919,17 @@ arrangements/unique circumstances for any requested wish participant not residin
         </picklistValues>
         <picklistValues>
             <picklist>Automobile_insurance_provide_coverage__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Have_current_automobile_insurance__c</picklist>
             <values>
                 <fullName>No</fullName>
                 <default>false</default>
@@ -4921,6 +5125,17 @@ arrangements/unique circumstances for any requested wish participant not residin
             </values>
             <values>
                 <fullName>Submitted</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Have_current_automobile_insurance__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -5350,6 +5565,17 @@ arrangements/unique circumstances for any requested wish participant not residin
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Have_current_automobile_insurance__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Origin</picklist>
             <values>
                 <fullName>Email</fullName>
@@ -5509,6 +5735,17 @@ arrangements/unique circumstances for any requested wish participant not residin
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Have_current_automobile_insurance__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Origin</picklist>
             <values>
                 <fullName>Email</fullName>
@@ -5627,6 +5864,149 @@ arrangements/unique circumstances for any requested wish participant not residin
                 <default>false</default>
             </values>
         </picklistValues>
+        <picklistValues>
+            <picklist>Wish_Type__c</picklist>
+            <values>
+                <fullName>Animal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Celebrity - Domestic Travel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Celebrity - Local</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Computer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cruise - Celebrity%2FRoyal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cruise - Disney</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Cruise - Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disney - Aulani</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disney World</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Disneyland</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Electronics International - Sports</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medical Bed%2FChair%2FWheelchair</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Motor Vehicle Customization</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Motorized Vehicle</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Musical Instrument%2FMusic Related</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Party</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Philanthropic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Playhouse%2FPlayset</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Room Redecoration%2FFurniture</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shopping Spree - Local</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Shopping Spree - Travel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spa%2FHot Tub</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sports%2FCamping Equipment</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sports-Domestic Travel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sports-International Travel</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sports-Local</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Swimming Pool</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Toys%2FBooks</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Trailer%2FCamper</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Travel - Hawai</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Travel - International</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Travel - Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>Wish_Effect</fullName>
@@ -5658,6 +6038,17 @@ arrangements/unique circumstances for any requested wish participant not residin
         </picklistValues>
         <picklistValues>
             <picklist>Automobile_insurance_provide_coverage__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Have_current_automobile_insurance__c</picklist>
             <values>
                 <fullName>No</fullName>
                 <default>false</default>
@@ -5838,6 +6229,17 @@ arrangements/unique circumstances for any requested wish participant not residin
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Have_current_automobile_insurance__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Origin</picklist>
             <values>
                 <fullName>Email</fullName>
@@ -6004,6 +6406,17 @@ arrangements/unique circumstances for any requested wish participant not residin
             </values>
             <values>
                 <fullName>Submitted</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Have_current_automobile_insurance__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -6426,6 +6839,18 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <url>window.open(&apos;/00O5B000000OCcn&apos;,&apos;_blank&apos;);</url>
     </webLinks>
     <webLinks>
+        <fullName>InKind_Donors_Report</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <encodingKey>UTF-8</encodingKey>
+        <height>600</height>
+        <linkType>url</linkType>
+        <masterLabel>InKind Donors Report</masterLabel>
+        <openType>noSidebar</openType>
+        <protected>false</protected>
+        <url>https://cs18.salesforce.com/00O11000000eIhB</url>
+    </webLinks>
+    <webLinks>
         <fullName>Loop__LOOP</fullName>
         <availability>online</availability>
         <displayType>button</displayType>
@@ -6516,6 +6941,33 @@ else
         <showsLocation>false</showsLocation>
         <showsStatus>false</showsStatus>
         <url>https://www.wish.org</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Medical_Eligibility_Review</fullName>
+        <availability>online</availability>
+        <description>This Button is used to when the button click then email should sent to MAC team.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Medical Eligibility Review</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/29.0/connection.js&quot;)} 
+var record = new sforce.SObject(&quot;Case&quot;); 
+record.Id = &quot;{!Case.Id}&quot;; 
+var localTeam = &quot;{!Case.Local_MCA_Team__c}&quot; 
+var caseStatus = &quot;{!Case.Status}&quot; 
+if(localTeam.length &lt; 1){ 
+alert(&apos;Please Select Medical Eligibility Reviewer&apos;) 
+} 
+else if(caseStatus == &quot;Escalated&quot;){ 
+alert(&apos;The case is transferred to National MAC team &apos;) 
+} 
+else{ 
+record.isEmail__c = true; 
+var result = sforce.connection.update([record]); 
+alert(&apos;Email has been sent!&apos;); 
+window.location.reload(); 
+}</url>
     </webLinks>
     <webLinks>
         <fullName>Publicity_Form</fullName>

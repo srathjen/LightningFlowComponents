@@ -34,7 +34,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Address_Line1__c</field>
+                <field>Street__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
@@ -47,6 +47,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Zip__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Email__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
@@ -67,6 +71,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Region_Code__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Approval_Date__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -97,6 +105,10 @@
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>Documentation__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>vounteer_Name__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -171,7 +183,7 @@
         <label>Attachments</label>
         <layoutColumns>
             <layoutItems>
-                <height>300</height>
+                <height>500</height>
                 <page>S_DriveAttachment_VF</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>true</showScrollbars>
@@ -252,7 +264,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h5B000000Eblo</masterLabel>
+        <masterLabel>00h36000004nAAv</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

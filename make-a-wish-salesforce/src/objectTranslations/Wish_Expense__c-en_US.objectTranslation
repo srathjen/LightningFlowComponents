@@ -186,6 +186,26 @@
         <name>Wish_Expense_Transaction_Code__c</name>
         <relationshipLabel><!-- Wish Expenses --></relationshipLabel>
     </fields>
+    <fields>
+        <label><!-- Wish Expense Type --></label>
+        <name>Wish_Expense_Type__c</name>
+        <picklistValues>
+            <masterLabel>Airfare</masterLabel>
+            <translation><!-- Airfare --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Car Rental</masterLabel>
+            <translation><!-- Car Rental --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hotel</masterLabel>
+            <translation><!-- Hotel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+    </fields>
     <layouts>
         <layout>Wish Expense Layout</layout>
         <sections>

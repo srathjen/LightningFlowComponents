@@ -15,7 +15,7 @@ global class InKindReimbursementApproval{
             message = 'This record already in approval process,you can not submit once again';
         }
         else if(( inkindList[0].Documentation__c == 'Will Attach' && attchmentList.size() >0 ) || (inkindList[0].Documentation__c == 'Not available' &&  attchmentList.size() >0) ||
-           (inkindList[0].Documentation__c == 'Not available' &&  attchmentList.size() == 0) )
+           (inkindList[0].Documentation__c == 'Not available' &&  attchmentList.size() == 0) || ( inkindList[0].Documentation__c == 'Attached' && attchmentList.size() >0 ) )
         {
             Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
             req.setComments('Submitting request for approval');
@@ -27,7 +27,7 @@ global class InKindReimbursementApproval{
             Approval.ProcessResult result = Approval.process(req);
             message = 'Record was successfully submited for approval';
         }
-        else if(inkindList[0].Documentation__c == 'Will Attach' && attchmentList.size() == 0){
+        else if((inkindList[0].Documentation__c == 'Will Attach' || inkindList[0].Documentation__c == 'Attached' ) && attchmentList.size() == 0){
             message = 'Please Attach all in-kind related receipts or documentation below or select Documentation Not available.';
         }
         return message;
@@ -43,7 +43,7 @@ global class InKindReimbursementApproval{
             message = 'This record already in approval process,you can not submit once again';
         }
         else if(( inkindList[0].Documentation__c == 'Will Attach' && attchmentList.size() >0 ) || (inkindList[0].Documentation__c == 'Not available' &&  attchmentList.size() >0) ||
-           (inkindList[0].Documentation__c == 'Not available' &&  attchmentList.size() == 0) )
+           (inkindList[0].Documentation__c == 'Not available' &&  attchmentList.size() == 0) || ( inkindList[0].Documentation__c == 'Attached' && attchmentList.size() >0 ) )
         {
             Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
             req.setComments('Submitting request for approval');
@@ -55,7 +55,7 @@ global class InKindReimbursementApproval{
             Approval.ProcessResult result = Approval.process(req); 
             message = 'Record was successfully submited for approval';
         }
-        else if(inkindList[0].Documentation__c == 'Will Attach' && attchmentList.size() == 0){
+        else if((inkindList[0].Documentation__c == 'Will Attach' || inkindList[0].Documentation__c == 'Attached' ) && attchmentList.size() == 0){
             message = 'Please Attach all in-kind related receipts or documentation below or select Documentation Not available.';
         }
         return message;

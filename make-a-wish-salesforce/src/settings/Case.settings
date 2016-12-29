@@ -16,7 +16,7 @@
         <enableOnDemandEmailToCase>true</enableOnDemandEmailToCase>
         <enableThreadIDInBody>true</enableThreadIDInBody>
         <enableThreadIDInSubject>true</enableThreadIDInSubject>
-        <notifyOwnerOnNewCaseEmail>false</notifyOwnerOnNewCaseEmail>
+        <notifyOwnerOnNewCaseEmail>true</notifyOwnerOnNewCaseEmail>
         <overEmailLimitAction>Bounce</overEmailLimitAction>
         <preQuoteSignature>false</preQuoteSignature>
         <routingAddresses>
@@ -24,17 +24,7 @@
             <caseOrigin>Email</caseOrigin>
             <casePriority>Medium</casePriority>
             <createTask>true</createTask>
-            <emailAddress>makeawishqa@gmail.com</emailAddress>
-            <routingName>Make-A-Wish America</routingName>
-            <saveEmailHeaders>false</saveEmailHeaders>
-            <taskStatus>Not Started</taskStatus>
-        </routingAddresses>
-        <routingAddresses>
-            <addressType>EmailToCase</addressType>
-            <caseOrigin>Email</caseOrigin>
-            <casePriority>Medium</casePriority>
-            <createTask>true</createTask>
-            <emailAddress>mawoffshore@gmail.com</emailAddress>
+            <emailAddress>wvcfullcopy@gmail.com</emailAddress>
             <routingName>Make-A-Wish America</routingName>
             <saveEmailHeaders>false</saveEmailHeaders>
             <taskStatus>Not Started</taskStatus>

@@ -21,15 +21,7 @@
             <type>caseTeam</type>
         </recipients>
         <recipients>
-            <recipient>Airport Greeter (Wish Closed)</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
             <recipient>Celebrity Host</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Celebrity Host (Wish Closed)</recipient>
             <type>caseTeam</type>
         </recipients>
         <recipients>
@@ -37,15 +29,7 @@
             <type>caseTeam</type>
         </recipients>
         <recipients>
-            <recipient>Translator &amp; Interpreter (Wish Closed)</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
             <recipient>Volunteer Manager</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Volunteer Manager (Wish Closed)</recipient>
             <type>caseTeam</type>
         </recipients>
         <recipients>
@@ -53,15 +37,7 @@
             <type>caseTeam</type>
         </recipients>
         <recipients>
-            <recipient>Wish Assist Phone Greeter (Wish Closed)</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
             <recipient>Wish Coordinator</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Coordinator (Wish Closed)</recipient>
             <type>caseTeam</type>
         </recipients>
         <recipients>
@@ -69,15 +45,7 @@
             <type>caseTeam</type>
         </recipients>
         <recipients>
-            <recipient>Wish Granter (Wish Closed)</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
             <recipient>Wish Granter Mentor</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Granter Mentor (Wish Closed)</recipient>
             <type>caseTeam</type>
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
@@ -120,16 +88,6 @@
         <template>unfiled$public/Case_Send_Email_to_Wish_Granter_Alert</template>
     </alerts>
     <alerts>
-        <fullName>Case_Send_an_Email_Alert_to_Case_Owner_for_On_Hold_Status</fullName>
-        <description>Case : Send an Email Alert to Case Owner for On Hold Status</description>
-        <protected>false</protected>
-        <recipients>
-            <type>owner</type>
-        </recipients>
-        <senderType>CurrentUser</senderType>
-        <template>unfiled$public/Case_Email_Notification_to_Case_Owner_for_Hold_Status</template>
-    </alerts>
-    <alerts>
         <fullName>Case_Unassigned_Wish_Email_Alert</fullName>
         <description>Case : Unassigned Wish Email Alert</description>
         <protected>false</protected>
@@ -142,27 +100,16 @@
         <template>unfiled$public/Case_Unassigned_Email_Template</template>
     </alerts>
     <alerts>
-        <fullName>Email_Alert_To_Wish_Granter</fullName>
-        <description>Case:Send email to both wish granters assigned to wish if 14 days from wish end date and wish granted tasks are open</description>
+        <fullName>National_MAC_Team_Email_Alert</fullName>
+        <description>National MAC Team Email Alert.</description>
         <protected>false</protected>
         <recipients>
-            <recipient>Wish Granter</recipient>
-            <type>caseTeam</type>
+            <field>MAC_Email__c</field>
+            <type>email</type>
         </recipients>
-        <senderAddress>wvc@wish.org</senderAddress>
+        <senderAddress>mawamericaprod@gmail.com</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Email_alert_to_wish_granters</template>
-    </alerts>
-    <alerts>
-        <fullName>Reminder_to_enter_the_Wish_Presentation_Date</fullName>
-        <description>Reminder to enter the Wish Presentation Date</description>
-        <protected>false</protected>
-        <recipients>
-            <recipient>Wish Granter</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <senderType>CurrentUser</senderType>
-        <template>unfiled$public/Test_Email_Templete</template>
+        <template>unfiled$public/Case_Send_Email_to_National_MAC_Team</template>
     </alerts>
     <alerts>
         <fullName>Send_Email_to_MAC_Team</fullName>
@@ -175,13 +122,13 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderAddress>mawoffshore@gmail.com</senderAddress>
+        <senderAddress>wvcsupport@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Communication_with_the_Local_Medical_Advisor_Council</template>
+        <template>unfiled$public/Send_Email_to_Loacl_MAC_Team_Template</template>
     </alerts>
     <alerts>
-        <fullName>Send_Reply_email_to_MAC_team_alert</fullName>
-        <description>Send Reply email to MAC team alert</description>
+        <fullName>Send_Reply_email_to_MAC_team</fullName>
+        <description>Send Reply email to MAC team</description>
         <protected>false</protected>
         <recipients>
             <field>MAC_Email__c</field>
@@ -190,84 +137,24 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderAddress>mawoffshore@gmail.com</senderAddress>
+        <senderAddress>wvcsupport@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Reply_Email_template_to_MAC_Team</template>
+        <template>unfiled$public/Send_Reply_Email_Template</template>
     </alerts>
     <alerts>
         <fullName>Wish_Family_Form_Not_Submitted_Alert</fullName>
         <description>Wish Family Form Not Submitted Alert</description>
         <protected>false</protected>
         <recipients>
-            <recipient>Celebrity Host</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Translator &amp; Interpreter</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Volunteer Manager</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Assist Phone Greeter</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Coordinator</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Granter</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Granter Mentor</recipient>
-            <type>caseTeam</type>
+            <type>accountOwner</type>
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Wish_Family_Form_Not_Submitted_Template</template>
     </alerts>
     <alerts>
-        <fullName>Wish_Interview_21_days_alert</fullName>
-        <description>Wish:Interview 21 days alert</description>
-        <protected>false</protected>
-        <recipients>
-            <recipient>Celebrity Host</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Translator &amp; Interpreter</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Volunteer Manager</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Assist Phone Greeter</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Coordinator</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Granter</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Granter Mentor</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <senderAddress>wvc@wish.org</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Wish_Interview_21_Days_Template</template>
-    </alerts>
-    <alerts>
         <fullName>Wish_Interview_Date_Not_Set_After_21_Days_Email_Alert</fullName>
+        <ccEmails>chandrasekar@mstsolutions.com</ccEmails>
         <description>Wish Interview Date Not Set After 21 Days Email Alert</description>
         <protected>false</protected>
         <recipients>
@@ -305,27 +192,6 @@
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Wish_Interview_21_Days_Template</template>
-    </alerts>
-    <alerts>
-        <fullName>Wish_Presentation_Set_is_checked</fullName>
-        <description>Wish Presentation Set is checked</description>
-        <protected>false</protected>
-        <recipients>
-            <field>Dev_Staff_Email__c</field>
-            <type>email</type>
-        </recipients>
-        <senderType>CurrentUser</senderType>
-        <template>unfiled$public/Test_Email_Templete</template>
-    </alerts>
-    <alerts>
-        <fullName>Wish_not_closed_Email_Alert</fullName>
-        <description>Wish not closed-Email Alert</description>
-        <protected>false</protected>
-        <recipients>
-            <type>owner</type>
-        </recipients>
-        <senderType>CurrentUser</senderType>
-        <template>unfiled$public/Test_Email_Templete</template>
     </alerts>
     <fieldUpdates>
         <fullName>Case_Budget_Approved</fullName>
@@ -395,7 +261,6 @@
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
-        <reevaluateOnChange>true</reevaluateOnChange>
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Update_isEmail</fullName>
@@ -403,6 +268,16 @@
         <field>isEmail__c</field>
         <literalValue>0</literalValue>
         <name>Update isEmail</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_is_National_in_Case</fullName>
+        <description>This field update is used to when the IsNational check box is selected in case. it update as false.</description>
+        <field>isNational__c</field>
+        <literalValue>0</literalValue>
+        <name>Update is National in Case</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
@@ -458,26 +333,6 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Case%3A Budget is submitted</fullName>
-        <actions>
-            <name>Case_Budget_Submitted_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <active>false</active>
-        <criteriaItems>
-            <field>Case.Budget_Approval_Status__c</field>
-            <operation>equals</operation>
-            <value>Submitted</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish</value>
-        </criteriaItems>
-        <description>This rule will fire when the budget is submitted for approval process.</description>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
         <fullName>Case%3A Email to MAC Team</fullName>
         <actions>
             <name>Send_Email_to_MAC_Team</name>
@@ -488,62 +343,8 @@
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
-        <formula>OR(AND(isEmail__c  = TRUE,ISCHANGED(isEmail__c)),AND(ISCHANGED(isNational__c), isNational__c = TRUE))</formula>
+        <formula>AND(isEmail__c  = TRUE,ISCHANGED(isEmail__c))</formula>
         <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
-        <fullName>Case%3A On Hold Email Notification for Wish Owner</fullName>
-        <active>true</active>
-        <criteriaItems>
-            <field>Case.Status</field>
-            <operation>equals</operation>
-            <value>On Hold</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Contact.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <description>Send an email alert to the wish owner 6 months after the Hold Date</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Case_Send_an_Email_Alert_to_Case_Owner_for_On_Hold_Status</name>
-                <type>Alert</type>
-            </actions>
-            <offsetFromField>Case.Hold_Date__c</offsetFromField>
-            <timeLength>180</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
-        <fullName>Case%3A Wish Granted Task Open Alert</fullName>
-        <active>true</active>
-        <criteriaItems>
-            <field>Case.End_Date__c</field>
-            <operation>notEqual</operation>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.isWishGrantTasksClosed__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <description>Send email to both wish granters assigned to wish if 14 days from wish end date and wish granted tasks are open</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Email_Alert_To_Wish_Granter</name>
-                <type>Alert</type>
-            </actions>
-            <offsetFromField>Case.End_Date__c</offsetFromField>
-            <timeLength>14</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
     </rules>
     <rules>
         <fullName>Case%3ABirthday Task</fullName>
@@ -562,74 +363,24 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
-        <fullName>Case%3AWish Wish clearance Follow-up</fullName>
-        <active>true</active>
-        <criteriaItems>
-            <field>Case.Wish_Clearance_Sent_Date__c</field>
-            <operation>notEqual</operation>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Wish_Clearance_Received_Date__c</field>
-            <operation>equals</operation>
-        </criteriaItems>
-        <description>Create task for chapter staff after 14 days from Wish clearance sent and Wish clearance rec&apos;d date is null</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Follow_up_on_wish_clearance</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Case.Wish_Clearance_Sent_Date__c</offsetFromField>
-            <timeLength>14</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
-        <fullName>InActive Wish Granter Alert Workflow Rule</fullName>
+        <fullName>Send Email to National Team</fullName>
         <actions>
-            <name>Case_Send_Email_to_Wish_Granter_Alert</name>
+            <name>National_MAC_Team_Email_Alert</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>Update_is_National_in_Case</name>
+            <type>FieldUpdate</type>
+        </actions>
         <active>true</active>
-        <criteriaItems>
-            <field>Case.isEmailWishGranter__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.InActiveWishGranter__c</field>
-            <operation>notEqual</operation>
-        </criteriaItems>
-        <description>This Email alert is used to send an email to wish granters.</description>
+        <description>This rule will fire when the isNational check box is checked.</description>
+        <formula>AND(isNational__c = TRUE,ISCHANGED(isNational__c))</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
-        <fullName>Reminder to enter the Wish Presentation Date</fullName>
+        <fullName>Send Reply email to MAC team</fullName>
         <actions>
-            <name>Reminder_to_enter_the_Wish_Presentation_Date</name>
-            <type>Alert</type>
-        </actions>
-        <active>true</active>
-        <criteriaItems>
-            <field>Case.Interview_Date_Not_Set__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish Granted</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Presentation_Date__c</field>
-            <operation>equals</operation>
-        </criteriaItems>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>Send reply email to MAC team</fullName>
-        <actions>
-            <name>Send_Reply_email_to_MAC_team_alert</name>
+            <name>Send_Reply_email_to_MAC_team</name>
             <type>Alert</type>
         </actions>
         <active>true</active>
@@ -665,7 +416,7 @@
             <value>null</value>
         </criteriaItems>
         <description>This Email alert is used to send an email to wish granters</description>
-        <triggerType>onAllChanges</triggerType>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
         <fullName>Wish Close</fullName>
@@ -683,11 +434,6 @@
             <field>Case.IsClosed</field>
             <operation>equals</operation>
             <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
         </criteriaItems>
         <description>Used update isApprove Field when the child case is closed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -718,83 +464,6 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
-        <fullName>Wish Presentation Set is checked</fullName>
-        <actions>
-            <name>Wish_Presentation_Set_is_checked</name>
-            <type>Alert</type>
-        </actions>
-        <active>true</active>
-        <criteriaItems>
-            <field>Case.Presentation_Date__c</field>
-            <operation>notEqual</operation>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Wish_Presentation_Set__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <description>Send a auto email when Wish Presentation Set is checked and Wish Presentation Date is entered.</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-    </rules>
-    <rules>
-        <fullName>Wish not closed</fullName>
-        <active>false</active>
-        <criteriaItems>
-            <field>Case.IsClosed</field>
-            <operation>notEqual</operation>
-            <value>True</value>
-        </criteriaItems>
-        <description>Send email to wish owner when case not closed after 90 days from wish end date.</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Wish_not_closed_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <offsetFromField>Case.End_Date__c</offsetFromField>
-            <timeLength>91</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
-        <fullName>Wish not closed in a specific time</fullName>
-        <active>true</active>
-        <criteriaItems>
-            <field>Case.Status</field>
-            <operation>notEqual</operation>
-            <value>Completed</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.End_Date__c</field>
-            <operation>notEqual</operation>
-        </criteriaItems>
-        <description>This workflow will fire if the case not closed after 90 days from the case end date</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Wish_not_closed</name>
-                <type>Task</type>
-            </actions>
-            <offsetFromField>Case.End_Date__c</offsetFromField>
-            <timeLength>31</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Wish_not_closed_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <offsetFromField>Case.End_Date__c</offsetFromField>
-            <timeLength>91</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
         <fullName>Wish%3A Task For Family Form Not Submitted</fullName>
         <active>true</active>
         <criteriaItems>
@@ -819,35 +488,6 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
-        <fullName>Wish%3AConcept approval</fullName>
-        <active>true</active>
-        <criteriaItems>
-            <field>Case.Update_Wish_Child_Form_Info__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Status</field>
-            <operation>notEqual</operation>
-            <value>Wish Determined</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Sub_Status__c</field>
-            <operation>notEqual</operation>
-            <value>Within Policy</value>
-        </criteriaItems>
-        <description>Generates task 5 days from when wish family packet is accepted and wish status not equal to Wish Determined - Within policy</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Wish_concept_approval</name>
-                <type>Task</type>
-            </actions>
-            <timeLength>5</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
         <fullName>Wish%3AInterview Date Not Set After 21 Days</fullName>
         <actions>
             <name>Wish_Interview_Date_Not_Set_After_21_Days_Email_Alert</name>
@@ -867,11 +507,6 @@
             <field>Case.Interview_Date_Not_Set__c</field>
             <operation>equals</operation>
             <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
         </criteriaItems>
         <description>This workflow will fire if the interview date is not yet set after 21 days from the case created date</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -908,17 +543,6 @@
         <subject>Budget needs to be revised</subject>
     </tasks>
     <tasks>
-        <fullName>Follow_up_on_wish_clearance</fullName>
-        <assignedToType>owner</assignedToType>
-        <dueDateOffset>17</dueDateOffset>
-        <notifyAssignee>false</notifyAssignee>
-        <offsetFromField>Case.Wish_Clearance_Sent_Date__c</offsetFromField>
-        <priority>Normal</priority>
-        <protected>false</protected>
-        <status>Not Started</status>
-        <subject>Follow-up on wish clearance</subject>
-    </tasks>
-    <tasks>
         <fullName>Interview_date_not_set</fullName>
         <assignedToType>owner</assignedToType>
         <dueDateOffset>3</dueDateOffset>
@@ -937,26 +561,5 @@
         <protected>false</protected>
         <status>Not Started</status>
         <subject>Wish Family Packet not submitted</subject>
-    </tasks>
-    <tasks>
-        <fullName>Wish_concept_approval</fullName>
-        <assignedToType>owner</assignedToType>
-        <dueDateOffset>6</dueDateOffset>
-        <notifyAssignee>false</notifyAssignee>
-        <priority>Normal</priority>
-        <protected>false</protected>
-        <status>Not Started</status>
-        <subject>Wish concept approval</subject>
-    </tasks>
-    <tasks>
-        <fullName>Wish_not_closed</fullName>
-        <assignedToType>owner</assignedToType>
-        <dueDateOffset>32</dueDateOffset>
-        <notifyAssignee>false</notifyAssignee>
-        <offsetFromField>Case.End_Date__c</offsetFromField>
-        <priority>Normal</priority>
-        <protected>false</protected>
-        <status>Not Started</status>
-        <subject>Wish not closed</subject>
     </tasks>
 </Workflow>

@@ -2,6 +2,10 @@
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>Wish_Expense</customButtons>
     <emailDefault>false</emailDefault>
+    <excludeButtons>ChangeOwnerOne</excludeButtons>
+    <excludeButtons>ChangeRecordType</excludeButtons>
+    <excludeButtons>Clone</excludeButtons>
+    <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <feedLayout>
         <autocollapsePublisher>false</autocollapsePublisher>
@@ -134,14 +138,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>hidden_medical_physician__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Comment_1__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Comment_2__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -396,14 +392,6 @@
                 <behavior>Edit</behavior>
                 <field>Form_Tracking_Notes__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Hidden_Wish_Owner_Email__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Hidden_Wish_Owner_Manager__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
@@ -517,7 +505,7 @@
     <showRunAssignmentRulesCheckbox>true</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>true</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h36000003nmFR</masterLabel>
+        <masterLabel>00h5B000000Iqiw</masterLabel>
         <sizeX>3</sizeX>
         <sizeY>4</sizeY>
         <summaryLayoutItems>

@@ -7,7 +7,7 @@ Description : TBD
 trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Insert,Before Update,After Insert,After Update,After delete) {
     
     if(Trigger.isBefore && Trigger.isUpdate){
-        List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
+        
         Set<Id> volunteerContactIdSet = new set<Id>();
         Map<Id,String> volunteerContactMap = new Map<Id,String>();
         for(Volunteer_Opportunity__c currRec : Trigger.new)
@@ -22,10 +22,10 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
                 if(currRec.Reason_Inactive__c != Null){
                     currRec.Inactive__c = True;
                 }
-                if(currRec.IsApproved__c == True && currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Reason_Inactive__c == Null  && currRec.Reason_Inactive__c != Null){
+             /*   if(currRec.IsApproved__c == True && currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Reason_Inactive__c == Null  && currRec.Reason_Inactive__c != Null){
                     volunteerOpportunityList.add(currRec);
                     System.debug('>>>>>>>1111111>>>>>'+currRec.Hidden_Volunteer_Contact_Email__c);
-                }
+                } */
             }
         }
         
@@ -43,10 +43,10 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
                 }
             }
         }
-        if(volunteerOpportunityList.size() > 0){
+      /*  if(volunteerOpportunityList.size() > 0){
             system.debug('@@@@@@@@ createNewVolunteerOpportunityList @@@@@@@@'+volunteerOpportunityList);
             VolunteerOpportunityTriggerHandler.CreateNewVolunteerOpportunity(volunteerOpportunityList);
-        }
+        } */
     }
     
     
@@ -71,6 +71,7 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
     if(Trigger.isAfter && Trigger.isUpdate)
     {
         
+        List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
         Set<Id> chapterIdsSet = new Set<Id>();
         Set<Id> VolunteerwishIdSet = new Set<Id>();
         set<Id> volunteerIdsSet = new set<Id>();
@@ -99,6 +100,11 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
                     recordsForApprovalProcess.add(currRec); 
                     chapterIdsSet.add(currRec.Chapter_Name__c);
                 } 
+                
+                if(currRec.IsApproved__c == True && currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Reason_Inactive__c == Null  && currRec.Reason_Inactive__c != Null){
+                    volunteerOpportunityList.add(currRec);
+                    System.debug('>>>>>>>1111111>>>>>'+currRec.Hidden_Volunteer_Contact_Email__c);
+                }
                 else if(currRec.IsApproved__c == False &&  (currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Volunteer_Name__c== Null)&& (currRec.Wish__c == Null) && (currRec.Non_Wish_Event__c != Null && currRec.Reason_Inactive__c == Null)){
                     
                     recordsForApprovalProcess.add(currRec); 
@@ -145,6 +151,11 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
                     volunteerIdsSet.add(currRec.Volunteer_Name__c);
                 }
             }
+        }
+        
+        if(volunteerOpportunityList.size() > 0){
+            system.debug('@@@@@@@@ createNewVolunteerOpportunityList @@@@@@@@'+volunteerOpportunityList);
+            VolunteerOpportunityTriggerHandler.CreateNewVolunteerOpportunity(volunteerOpportunityList);
         }
         
         if(rejectedVolunteerOpportunitiesList.size() > 0) {

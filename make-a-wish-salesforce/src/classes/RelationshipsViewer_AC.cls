@@ -25,6 +25,8 @@ public class RelationshipsViewer_AC{
     public boolean isSave{get;set;}
     public boolean isWishFamily{get;set;}
     
+    public List<contact> originalWishChildList{get;set;}
+    
     public RelationshipsViewer_AC(){
         outPutMode = true;
         Constant_AC  constant = new Constant_AC();
@@ -43,8 +45,33 @@ public class RelationshipsViewer_AC{
                 dbRelationshipList  = [SELECT Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__Type__c, npe4__RelatedContact__r.RecordTypeId,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.FirstName,npe4__RelatedContact__r.LastName,npe4__RelatedContact__r.Phone,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.MailingCity,npe4__RelatedContact__r.MailingStreet,npe4__RelatedContact__r.MailingState,
                                        npe4__RelatedContact__r.MailingCountry,npe4__RelatedContact__r.MailingPostalCode FROM npe4__Relationship__c WHERE npe4__Contact__c =: contactList[0].Id AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId ];
                 
+             
+             if(contactList.size() > 0)
+             {
+                originalWishChildList = new List<Contact>();
+                
+                for(contact con : contactList){
+                    
+                    Contact childContact = new Contact();
+                    childContact.FirstName = con.FirstName;
+                    childContact.LastName=  con.LastName;
+                    childContact.Phone =con.Phone;
+                    childContact.Email = con.Email;
+                    childContact.MailingStreet = con.MailingStreet;
+                    childContact.MailingCity= con.MailingCity;
+                    childContact.MailingState = con.MailingState;
+                    childContact.MailingCountry= con.MailingCountry;
+                    childContact.MailingPostalCode = con.MailingPostalCode;
+                    childContact.Id = con.id;
+                    originalWishChildList.add(childContact);
+                    
+                }
+             }      
+                
+                
                 if(dbRelationshipList.size() > 0){
                     isWishFamily = true;
+                    
                     
                     dbRelatedContactList = new List<Contact>();
                     for(npe4__Relationship__c  dbRelatedWishFamily : dbRelationshipList){
@@ -85,7 +112,7 @@ public class RelationshipsViewer_AC{
         isSave = true;
         
         wishChildContactList = new List<Contact>();
-        wishChildContactList = contactList.deepClone(true,false,false);
+        wishChildContactList = originalWishChildList.deepClone(true,false,false);
         
         if(dbRelatedContactList != Null  && dbRelatedContactList.size() > 0  ){
             
@@ -134,7 +161,7 @@ public class RelationshipsViewer_AC{
         List<Task> demogarphicTaskList = new List<Task>();
         isSave = false;
         
-        List<ProcessInstanceWorkitem> piwi = [SELECT Id, ProcessInstanceId, ProcessInstance.TargetObjectId FROM ProcessInstanceWorkitem WHERE ProcessInstance.TargetObjectId =: parentWish.ContactId];
+        List<ProcessInstanceWorkitem> piwi = [SELECT Id, ProcessInstanceId,ProcessInstance.Status,ProcessInstance.TargetObjectId FROM ProcessInstanceWorkitem WHERE ProcessInstance.TargetObjectId =: parentWish.ContactId AND  ProcessInstance.Status =: 'Pending'];
         if(piwi.size() > 0){
             Approval.ProcessWorkitemRequest req1 = new Approval.ProcessWorkitemRequest();
             req1.setAction('Removed');        
@@ -145,18 +172,22 @@ public class RelationshipsViewer_AC{
         
         for(Contact oldwishChildCon : wishChildContactList){
             
-            for(Contact newWishChildCon : contactList){
+            for(Contact newWishChildCon : originalWishChildList){
 
                 
-                if(oldwishChildCon.Id == newWishChildCon.Id){
+              if(oldwishChildCon.Id == newWishChildCon.Id){
+              
+                  System.debug('oldwishChildCon.Id+++++++++++++++++++++++++++++++++++ ' + originalWishChildList);
+                  System.debug('contactList+++++++++++++++++++++++++++++++++++ ' + contactList);
+                  System.debug('wishChildContactList+++++++++++++++++++++++++++++++++++ ' + wishChildContactList);
                     
                     if((oldwishChildCon.Phone != newWishChildCon.Phone) || (oldwishChildCon.Email != newWishChildCon.Email) || (oldwishChildCon.MailingStreet !=newWishChildCon.MailingStreet) ||
                        (oldwishChildCon.MailingCity != newWishChildCon.MailingCity) ||  (oldwishChildCon.MailingState!= newWishChildCon.MailingState)  || (oldwishChildCon.MailingCountry!= newWishChildCon.MailingCountry) ||
                        (oldwishChildCon.MailingPostalCode != newWishChildCon.MailingPostalCode)){
-                        system.debug('@@@@@@@ oldWishChildCon @@@@@@@@@'+oldwishChildCon);
+                        system.debug('@@@@@@@ newWishChildCon @@@@@@@@@'+newWishChildCon.FirstName);
                     
-                    contactInfo  =  contactInfo +'<Br/>' + 'Name :'+' '+ '  '+oldwishChildCon.Name+ '  '+' ; '+'<Br/><Br/>';
-                    if(newWishChildCon.Phone != Null && oldwishChildCon.Phone != newWishChildCon.Phone){
+                    contactInfo  =  contactInfo +'<Br/>' + 'Name :'+' '+ '  '+newWishChildCon.FirstName+' '+newWishChildCon.LastName+ '  '+' ; '+'<Br/><Br/>';
+                    if( oldwishChildCon.Phone != newWishChildCon.Phone){
                         newWishChildCon .Hidden_Phone__c  = oldwishChildCon.Phone;
                         
                         if(newWishChildCon.Phone != Null)
@@ -169,8 +200,10 @@ public class RelationshipsViewer_AC{
                             if((!String.isBlank(newPhone )) && String.isBlank(oldphone))
                                 contactInfo += '<Br/>'+'New Phone Value :'+' '+ newPhone + '; '+'<Br/>';
                         }
+                         updateContactMap.put(newWishChildCon.Id,newWishChildCon);
+                          system.debug('@@@@@@@ updateContactMap@@@@@@@@@'+updateContactMap.Values());
                     }
-                        updateContactMap.put(newWishChildCon.Id,newWishChildCon);
+                       
                      
                        }
                     if(oldwishChildCon.Email != newWishChildCon.Email){
@@ -202,6 +235,7 @@ public class RelationshipsViewer_AC{
                                 contactInfo  += '<Br/>'+'New Street Value:'+' '+ newStreet+';' + '<Br/>';
                         }
                         updateContactMap.put(newWishChildCon.Id,newWishChildCon);
+                        System.debug('oldwishChildCon.Id+++++++++++++++++++++++++++++++++++ ' + newWishChildCon.Id);
                     } 
                     if(oldwishChildCon.MailingCity != newWishChildCon.MailingCity){
                         newWishChildCon .Hidden_city__c = oldwishChildCon.MailingCity;
@@ -230,6 +264,8 @@ public class RelationshipsViewer_AC{
                             if((!String.isBlank(newState)) &&  String.isBlank(oldState))
                                 contactInfo += '<Br/>'+'New State Value:'+' '+'  '+newState+';' + '<Br/>';
                         }
+                        updateContactMap.put(newWishChildCon.Id,newWishChildCon);
+
                     }   
                     if(oldwishChildCon.MailingCountry!= newWishChildCon.MailingCountry){
                         newWishChildCon .Hidden_Country__c = oldwishChildCon.MailingCountry;
@@ -263,11 +299,13 @@ public class RelationshipsViewer_AC{
                         }
                         updateContactMap.put(newWishChildCon.Id,newWishChildCon);  
                     }
-                }
+               }
                 
             }
             
         }
+        System.debug('updateContactMap++++++++++++++++++++++++++++++ ' + updateContactMap);
+        
         if(dbRelatedContactList != Null && dbRelatedContactList.size() > 0){
             for(Contact oldwishChildCon : clonedFamilyContactList){
                 
@@ -397,24 +435,18 @@ public class RelationshipsViewer_AC{
         }
         
         if(updateContactMap.size() > 0){
-            update updateContactMap.Values();
             
+            update updateContactMap.Values();
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Thank you for updating the contact information! Your changes have been recorded and sent to the Chapter Staff for approval.'));
             Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
-            //req.setComments(contactInfo);
+            req.setComments('Review contact information updated by the volunteer');
             req.setObjectId(parentWish.ContactId);
             req.setProcessDefinitionNameOrId('Update_Contact_Info_Process');
             req.setSkipEntryCriteria(true);
             req.setNextApproverIds(new Id[]{parentWish.OwnerId});
             Approval.ProcessResult result = Approval.process(req);
             
-            Task newTask = new Task();
-            newTask.WhatId = parentWish.Id;
-            newTask.OwnerId = parentWish.OwnerId;
-            newTask.ActivityDate = System.today() + 1;
-            newTask.Subject = 'Review contact information updated by the volunteer';
-            demogarphicTaskList.add(newTask);
-            
-            
+           
             Task newContactTask = new Task();
             newContactTask.WhoId = parentWish.ContactId;
             newContactTask.OwnerId = parentWish.OwnerId;
@@ -425,10 +457,11 @@ public class RelationshipsViewer_AC{
             insert   demogarphicTaskList;     
             
         }
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Thank you for updating the contact information! Your changes have been recorded and sent to the Chapter Staff for approval.'));
+        
         if(contactList.size()>0){
             contactList[0].Old_Update_Contact_Values__c = contactInfo;
             update contactList;
+            
         }
         
         return null;     

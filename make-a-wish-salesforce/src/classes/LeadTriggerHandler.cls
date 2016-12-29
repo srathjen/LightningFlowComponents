@@ -202,40 +202,117 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 if(leadFamilyMap.containsKey(convertLeads.getLeadId())){
                     if(leadFamilyMap.get(convertLeads.getLeadId()).Sibling_Detail__c != Null){
                         if(leadFamilyMap.get(convertLeads.getLeadId()).Sibling_Detail__c.contains('<br>')){
-                            system.debug('@@@@@@ Sibilingdetails @@@@@@'+leadFamilyMap.get(convertLeads.getLeadId()).Sibling_Detail__c);
+                            system.debug('@@@@@@ ENTER INTO SIBLING DETAILS @@@@@@'+leadFamilyMap.get(convertLeads.getLeadId()).Sibling_Detail__c);    
                             for(String currsiblings : leadFamilyMap.get(convertLeads.getLeadId()).Sibling_Detail__c.split('<br>')){
-                                
-                                if(currsiblings.contains('|')){
+                                 system.debug('@@@@@@ ENTER INTO SIBLING DETAILS1 @@@@@@'+currsiblings);    
+                                if(currsiblings.contains('|') ){
+                                    system.debug('@@@@@@ ENTER INTO SIBLING DETAILS2 @@@@@@'+currsiblings);    
                                     List<String>siblingdetails = currsiblings.split('\\|');
-                                    if(siblingdetails.size() == 3){ 
+                                    if(siblingdetails.size() == 3){
+                                       
                                         Contact newFamily = new Contact();
-                                        newFamily .FirstName = siblingdetails [0];
-                                        newFamily .lastName = siblingdetails [1];
-                                        newFamily.Sibling_Age__c = siblingdetails[2];
+                                        newFamily.FirstName = siblingdetails [0].trim();
+                                        newFamily.lastName = siblingdetails [1].trim();
+                                        newFamily.Sibling_Age__c = siblingdetails [2].trim();
                                         newFamily.Wish_Child_Id_Hidden__c = convertLeads.getcontactId();
                                         newFamily.RecordTypeId = wishFamilyRecordTypeId;
                                         newFamily.AccountId = convertLeads.getAccountId();
-                                        siblingList.add(newFamily);    
-                                        system.debug('!!!!!!! MorethanOneSibling 4 !!!!!!'+siblingList);
+                                       
+                                        if((newFamily.FirstName.isAlpha() || newFamily.FirstName.isAlphaSpace()) && (newFamily.LastName.isAlpha() || newFamily.LastName.isAlphaSpace()) && (newFamily.Sibling_Age__c.isNumeric())){
+                                            siblingList.add(newFamily);
+                                            
+                                        }
                                         
-                                    }
+                                        if((newFamily.FirstName.isAlpha() || newFamily.FirstName.isAlphaSpace())&& (newFamily.LastName.contains('-')) && (newFamily.Sibling_Age__c.isNumeric())){
+                                            newFamily.LastName = 'Unknown';
+                                            siblingList.add(newFamily);
+                                            
+                                        }
+                                        
+                                        if((newFamily.FirstName.contains('-'))&& (newFamily.LastName.isAlpha() || newFamily.LastName.isAlphaSpace()) && (newFamily.Sibling_Age__c.isNumeric())){
+                                            newFamily.FirstName = '';
+                                            siblingList.add(newFamily);
+                                             
+                                        }
+                                        
+                                        if((newFamily.FirstName.isAlpha() || newFamily.FirstName.isAlphaSpace()) && (newFamily.LastName.isAlpha() || newFamily.LastName.isAlphaSpace()) && (newFamily.Sibling_Age__c.contains('-'))){
+                                            newFamily.Sibling_Age__c = Null;
+                                            siblingList.add(newFamily);
+                                            
+                                        }
+                                        
+                                        if((newFamily.FirstName.contains('-')) && (newFamily.LastName.isAlpha() || newFamily.LastName.isAlphaSpace()) && (newFamily.Sibling_Age__c.contains('-'))){
+                                            newFamily.FirstName = '';
+                                            newFamily.Sibling_Age__c = Null;
+                                            siblingList.add(newFamily);
+                                            
+                                        }
+                                        
+                                        if((newFamily.FirstName.isAlpha() || newFamily.FirstName.isAlphaSpace()) && (newFamily.LastName.containsOnly('-'))  && (newFamily.Sibling_Age__c.contains('-'))){
+                                            
+                                            newFamily.LastName = 'Unknown';
+                                            newFamily.Sibling_Age__c = Null;
+                                            siblingList.add(newFamily);
+                                           
+                                        }
+                                            
+                                        }
+                                        
+                                    
                                 }
                             }
                             
                         }
                         else if(leadFamilyMap.get(convertLeads.getLeadId()).Sibling_Detail__c.contains('|')){
                             list<String> siblingdetails = leadFamilyMap.get(convertLeads.getLeadId()).Sibling_Detail__c.split('\\|');
-                            system.debug('@@@@@@ Sibilingdetails @@@@@@'+siblingdetails);
+                            
                             if(siblingdetails .size() == 3){
+                           
                                 Contact newFamily = new Contact();
-                                newFamily .FirstName = siblingdetails [0];
-                                newFamily .lastName = siblingdetails [1];
-                                newFamily.Sibling_Age__c = siblingdetails[2];
+                                newFamily .FirstName = siblingdetails [0].trim();
+                                newFamily .lastName = siblingdetails [1].trim();
+                                newFamily.Sibling_Age__c = siblingdetails[2].trim();
                                 newFamily.Wish_Child_Id_Hidden__c = convertLeads.getcontactId();
                                 newFamily.RecordTypeId = wishFamilyRecordTypeId;
                                 newFamily.AccountId = convertLeads.getAccountId();
-                                siblingList.add(newFamily);
                                 
+                                         if((newFamily.FirstName.isAlpha() || newFamily.FirstName.isAlphaSpace()) && (newFamily.LastName.isAlpha() || newFamily.LastName.isAlphaSpace()) && (newFamily.Sibling_Age__c.isNumeric())){
+                                            siblingList.add(newFamily);
+                                            
+                                        }
+                                        
+                                        if((newFamily.FirstName.isAlpha() || newFamily.FirstName.isAlphaSpace())&& (newFamily.LastName.contains('-')) && (newFamily.Sibling_Age__c.isNumeric())){
+                                            newFamily.LastName = 'Unknown';
+                                            siblingList.add(newFamily);
+                                            
+                                        }
+                                        
+                                        if((newFamily.FirstName.contains('-'))&& (newFamily.LastName.isAlpha() || newFamily.LastName.isAlphaSpace()) && (newFamily.Sibling_Age__c.isNumeric())){
+                                            newFamily.FirstName = '';
+                                            siblingList.add(newFamily);
+                                             
+                                        }
+                                        
+                                        if((newFamily.FirstName.isAlpha() || newFamily.FirstName.isAlphaSpace()) && (newFamily.LastName.isAlpha() || newFamily.LastName.isAlphaSpace()) && (newFamily.Sibling_Age__c.contains('-'))){
+                                            newFamily.Sibling_Age__c = Null;
+                                            siblingList.add(newFamily);
+                                            
+                                        }
+                                        
+                                        if((newFamily.FirstName.contains('-')) && (newFamily.LastName.isAlpha() || newFamily.LastName.isAlphaSpace()) && (newFamily.Sibling_Age__c.contains('-'))){
+                                            newFamily.FirstName = '';
+                                            newFamily.Sibling_Age__c = Null;
+                                            siblingList.add(newFamily);
+                                            
+                                        }
+                                        
+                                        if((newFamily.FirstName.isAlpha() || newFamily.FirstName.isAlphaSpace()) && (newFamily.LastName.containsOnly('-'))  && (newFamily.Sibling_Age__c.contains('-'))){
+                                            
+                                            newFamily.LastName = 'Unknown';
+                                            newFamily.Sibling_Age__c = Null;
+                                            siblingList.add(newFamily);
+                                           
+                                        }
                             }
                         }
                         
@@ -252,7 +329,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                         newcase.ownerId = conMap.get(convertLeads.getcontactId()).ownerId;
                         //newCase.Chapter_Name__c = conMap.get(convertLeads.getcontactId()).chapter_Name__c;
                         newCase.ChapterName__c = LeadMap.get(convertLeads.getLeadId()).chapterName__c;
-                        newCase.Hidden_Primary_Diagnosis__c = LeadMap.get(convertLeads.getLeadId()).Primary_Diagnosis__c;
+                        newCase.Hidden_Primary_Diagnosis__c = LeadMap.get(convertLeads.getLeadId()).PD_Condition_Description__c ;
                         
                         System.debug('Parent Wishes 123' + LeadMap.get(convertLeads.getLeadId()).chapterName__c);
                     }
@@ -337,7 +414,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                             //cFile.cg__File_Size__c = leadFile.File_Size__c;
                                             cFile.cg__Is_Latest_Version__c =  leadFile.Is_Latest_Version__c;
                                             cFile.cg__Key__c = leadFile.Key__c;
-                                            cFile.cg__Parent_Folder_Id__c = docFolderContactsMAP.get(leadFamilyMap.get(leadFile.Parent__c).ConvertedContactId);
+                                            //cFile.cg__Parent_Folder_Id__c = docFolderContactsMAP.get(leadFamilyMap.get(leadFile.Parent__c).ConvertedContactId);
                                             cFile.cg__Private__c = leadFile.Private__c;
                                             cFile.cg__Version_Description__c = leadFile.Version_Description__c;
                                             cFile.cg__Version_Id__c = leadFile.Version_Id__c;
@@ -353,6 +430,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             insert ConFileList;
         }
         if(siblingList.size() > 0)
+        system.debug('@@@@@@@@ SiblingList @@@@@@'+SiblingList );
             insert siblingList;
         
         if(siblingList.size() > 0){
@@ -376,7 +454,10 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         if(caseList.size() > 0)
             insert caseList;
         if(relationShipList.size() > 0)
+        {
+            System.debug('relationShipList++++++++++++++++++++++++++++++++++++++ ' + relationShipList);
             insert relationShipList;
+        }
         if(rushReminderList.size() > 0)
             insert rushReminderList;
         if(leadIdSet.size() > 0){
@@ -719,15 +800,15 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             }
             for(Lead currLead : leadUpdateToMedicalInfoList)
             {
-                if(icdCodesMap.containsKey(currLead.ICD_10_Code__c))
+                if(icdCodesMap.containsKey(currLead.PD_ICD_Code__c ))
                 {
-                    currLead.Short_Description__c = icdCodesMap.get(currLead.ICD_10_Code__c).Short_Description__c;
-                    currLead.Long_Description__c = icdCodesMap.get(currLead.ICD_10_Code__c).Long_Description__c;
-                    currLead.Group_1__c  = icdCodesMap.get(currLead.ICD_10_Code__c).Group1__c ;
-                    if(icdCodesMap.get(currLead.ICD_10_Code__c).Condition_Description__c != Null)
+                    currLead.Short_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Short_Description__c;
+                    currLead.Long_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Long_Description__c;
+                    currLead.Group_1__c  = icdCodesMap.get(currLead.PD_ICD_Code__c).Group1__c ;
+                    if(icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__c != Null)
                     {
-                        currLead.Primary_Diagnosis__c = icdCodesMap.get(currLead.ICD_10_Code__c).Condition_Description__r.Name;
-                        currLead.Childs_Qualifying_Diagnosis__c = icdCodesMap.get(currLead.ICD_10_Code__c).Condition_Description__r.Code_to_Use__c;
+                        currLead.PD_Condition_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Name;
+                        currLead.Childs_Qualifying_Diagnosis__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Code_to_Use__c;
                     }
                 }
             }
@@ -741,9 +822,9 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             }
             for(Lead currLead : leadUpdateToMedicalInfoList)
             {
-                if(descriptionMap.containsKey(currLead.Primary_Diagnosis__c))
+                if(descriptionMap.containsKey(currLead.PD_Condition_Description__c))
                 {
-                    currLead.Maw_Name__c = descriptionMap.get(currLead.Primary_Diagnosis__c).MAW_Name__c;
+                    currLead.Maw_Name__c = descriptionMap.get(currLead.PD_Condition_Description__c).MAW_Name__c;
                     
                 }
             }
@@ -806,7 +887,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                            WHERE (LastName IN :leadLNamesSet OR FirstName IN :leadFNamesSet OR DOB__c IN :leadbDaysSet
                                   OR Phone IN :phoneSet OR Email IN :emailsSet OR (State IN :stateSet AND Postalcode IN :zipCodesSet AND city IN :citySet)) 
                            AND ChapterName__c IN :chaptersSet
-                           AND Id NOT IN :leadIds])
+                           AND Id NOT IN :leadIds AND isConverted = false])
         {
             if(exLead.FirstName != Null)
                 exFNamesSet.add(exLead.FirstName+'-'+exLead.chapterName__c);
@@ -900,7 +981,6 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             case newcase = new case();
             newCase.status = 'New';
             newCase.origin = 'Email';
-            newCase.Local_MCA_Team__c = label.ContactIdValue;
             newCase.recordTypeId = partARecordTypeId;
             newCase.OwnerId = processLead.OwnerId;
             if(emailMap.containsKey(processLead.ChapterName__c)){

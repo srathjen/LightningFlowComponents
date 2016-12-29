@@ -581,7 +581,7 @@
         <name>How_did_you_know_MAWA_Other_Notes__c</name>
     </fields>
     <fields>
-        <label><!-- ICD-10 Code --></label>
+        <label><!-- Primary ICD-10 Code --></label>
         <name>ICD_10_Code__c</name>
     </fields>
     <fields>
@@ -766,6 +766,10 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Medical Condition --></label>
+        <name>Medical_Condition__c</name>
+    </fields>
+    <fields>
         <label><!-- Medical Needs --></label>
         <name>Medical_Needs__c</name>
         <picklistValues>
@@ -870,10 +874,6 @@ and the date it was or will be granted. --></help>
         <name>Part_A_Sent__c</name>
     </fields>
     <fields>
-        <label><!-- Participant --></label>
-        <name>Participant__c</name>
-    </fields>
-    <fields>
         <label><!-- Pet/Animal --></label>
         <name>Pet_Animal__c</name>
     </fields>
@@ -906,7 +906,7 @@ and the date it was or will be granted. --></help>
         <name>Primary_Address__c</name>
     </fields>
     <fields>
-        <label><!-- Primary Diagnosis Condition Description --></label>
+        <label><!-- Primary Condition Description --></label>
         <name>Primary_Diagnosis_Condition_Description__c</name>
     </fields>
     <fields>
@@ -1281,35 +1281,35 @@ and the date it was or will be granted. --></help>
         <name>Restaurant__c</name>
     </fields>
     <fields>
-        <label><!-- SD1 Condition Description --></label>
+        <label><!-- Secondary Diagnosis 1 Cond Description --></label>
         <name>SD1_Condition_Description__c</name>
     </fields>
     <fields>
-        <label><!-- SD1 ICD Code --></label>
+        <label><!-- Secondary Diagnosis 1 ICD-10 Code --></label>
         <name>SD1_ICD_Code__c</name>
     </fields>
     <fields>
-        <label><!-- SD2 Condition Description --></label>
+        <label><!-- Secondary Diagnosis 2 Cond Description --></label>
         <name>SD2_Condition_Description__c</name>
     </fields>
     <fields>
-        <label><!-- SD2 ICD Code --></label>
+        <label><!-- Secondary Diagnosis 2 ICD-10 Code --></label>
         <name>SD2_ICD_Code__c</name>
     </fields>
     <fields>
-        <label><!-- SD3 Condition Description --></label>
+        <label><!-- Secondary Diagnosis 3 Cond Description --></label>
         <name>SD3_Condition_Description__c</name>
     </fields>
     <fields>
-        <label><!-- SD3 ICD Code --></label>
+        <label><!-- Secondary Diagnosis 3 ICD-10 Code --></label>
         <name>SD3_ICD_Code__c</name>
     </fields>
     <fields>
-        <label><!-- SD4 Condition Description --></label>
+        <label><!-- Secondary Diagnosis 4 Cond Description --></label>
         <name>SD4_Condition_Description__c</name>
     </fields>
     <fields>
-        <label><!-- SD4 ICD Code --></label>
+        <label><!-- Secondary Diagnosis 4 ICD-10 Code --></label>
         <name>SD4_ICD_Code__c</name>
     </fields>
     <fields>
@@ -1777,6 +1777,15 @@ provide contact information for each site on which you are active. --></help>
     <fields>
         <label><!-- To me,the most important part of my wish --></label>
         <name>To_me_the_most_important_part_of_my_wish__c</name>
+    </fields>
+    <fields>
+        <label><!-- Travel Recommendation --></label>
+        <name>Travel_Recommendation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treatment Subspecialty --></label>
+        <name>Treatment_Subspecialty__c</name>
+        <relationshipLabel><!-- Contacts --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Understand --></label>
@@ -2624,6 +2633,10 @@ provide contact information for each site on which you are active. --></help>
             <section>Contact Details</section>
         </sections>
         <sections>
+            <label><!-- Dev &amp; QA Fields --></label>
+            <section>Dev &amp; QA Fields</section>
+        </sections>
+        <sections>
             <label><!-- Household Address --></label>
             <section>Household Address</section>
         </sections>
@@ -2677,10 +2690,6 @@ provide contact information for each site on which you are active. --></help>
             <label><!-- Volunteer Details --></label>
             <section>Volunteer Details</section>
         </sections>
-        <sections>
-            <label><!-- Volunteer Opportunities --></label>
-            <section>Volunteer Opportunities</section>
-        </sections>
     </layouts>
     <layouts>
         <layout>Wish Child</layout>
@@ -2697,12 +2706,12 @@ provide contact information for each site on which you are active. --></help>
             <section>Dev &amp; QA</section>
         </sections>
         <sections>
-            <label><!-- Diagnosis Verification --></label>
-            <section>Diagnosis Verification</section>
-        </sections>
-        <sections>
             <label><!-- Household Address --></label>
             <section>Household Address</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Information Section --></label>
+            <section>Medical Information Section</section>
         </sections>
         <sections>
             <label><!-- WIsh Child Details --></label>
@@ -2722,6 +2731,10 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Contact Details --></label>
             <section>Contact Details</section>
+        </sections>
+        <sections>
+            <label><!-- Dev &amp; QA Fields --></label>
+            <section>Dev &amp; QA Fields</section>
         </sections>
         <sections>
             <label><!-- Household Address --></label>

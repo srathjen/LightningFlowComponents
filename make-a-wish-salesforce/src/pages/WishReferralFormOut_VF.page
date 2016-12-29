@@ -167,7 +167,7 @@
                                 ICD-10 Code:
                             </td>
                             <td>
-                                {!currLead.ICD_10_Code__c }
+                                {!currLead.PD_ICD_Code__c }
                             </td>
                         </tr>
                         <tr>

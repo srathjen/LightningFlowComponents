@@ -58,6 +58,10 @@
         <name>Description__c</name>
     </fields>
     <fields>
+        <label><!-- Due Date --></label>
+        <name>Due_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- Due Days --></label>
         <name>Due_Days__c</name>
     </fields>

@@ -44,7 +44,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                 </div>
                             </div>
                             <div class="tab-panel-wrap">
-                                <button type="button" class="btn btn-current w-event">Wish Event</button>
+                                <button type="button" class="btn btn-current w-event">Wish</button>
                                 <button type="button" class="btn n-event">Non-Wish and Events</button>
                                 <div class="openActivities">
                                     <div class="Curr-WishEvent">

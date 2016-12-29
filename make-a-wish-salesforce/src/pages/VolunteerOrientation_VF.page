@@ -59,7 +59,7 @@
                     <apex:form id="frm1" styleClass="col-md-12">
                         <div class="messages"><apex:pagemessages /></div>
 
-                        <apex:pageBlock title="Available Orientation Details">
+                        <apex:pageBlock > <!-- title="Available Orientation Details" -->
                             <apex:outputPanel rendered="{!(isOrientationExist == True)}">
                                 <h3>Registered</h3>
                                 <p>You have registered for a volunteer orientation. Once you complete the orientation, you will receive an email  to continue the application process. If you need to change your orientation day/time please cancel your existing registration and register for a new orientation.</p>
@@ -71,21 +71,22 @@
 
 
                             <apex:outputPanel rendered="{!If(checkExistProgram == true, false,true)}">
+                               <h2>Registered Orientation Details</h2>
                                 <div class="table-wrap">
                                     <table id="dataTab1" class="table table-maw table-hover">
                                         <thead class="thead-default">
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Chapter Name</th>
+                                                <th>Type</th>
                                                 <th>Date</th>
                                                 <th>Start Time</th>
                                                 <th>End Time</th>
                                                 <th>Location</th>
                                                 <th>Max Capacity</th>
                                                 <th>Available Seats</th>
-                                                <th>Record Type</th>
                                                 <th>Action</th>
-                                                <th>LMS</th>
+                                                <th>Link</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -94,6 +95,7 @@
                                                     <tr>
                                                         <td>{!training.orientationName}</td>
                                                         <td>{!training.chapterName}</td>
+                                                        <td>{!training.recordType}</td>
                                                         <td>
                                                             <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!training.orientationDate}" /></apex:outputText>
                                                         </td>
@@ -102,7 +104,6 @@
                                                         <td>{!training.location}</td>
                                                         <td>{!training.maxCapacity}</td>
                                                         <td>{!training.avilableSheets}</td>
-                                                        <td>{!training.recordType}</td>
                                                         <td>
                                                             <apex:commandLink action="{!Cancel}">Cancel
                                                                 <apex:param name="trainingId" value="{!training.recordId}" assignTo="{!trainingId}"/>
@@ -110,7 +111,7 @@
                                                         </td>
                                                         <td>
                                                             <apex:commandLink action="{!viewLMS}" oncomplete="openLMS('{!ssoURL}','{!courseURL}');"
-                                                                              rendered="{!(training.recordtypeId == classOffereningRecordtypeId)}">View Orientation
+                                                                              rendered="{!(training.recordtypeId == classOffereningRecordtypeId)}">Start Course
                                                                 <apex:param name="lMSCourseId" value="{!training.courseId}" assignTo="{!lMSCourseId}"/>
                                                             </apex:commandLink>
                                                         </td>
@@ -123,19 +124,20 @@
                             </apex:outputPanel>
 
                             <apex:outputPanel id="myPanel">
+                             <h2>Available Orientation Details</h2>
                                 <div class="table-wrap">
                                     <table id="dataTab2" class="table table-maw table-hover">
                                         <thead class="thead-default">
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Chapter Name</th>
+                                                <th>Type</th>
                                                 <th>Date</th>
                                                 <th>Start Time</th>
                                                 <th>End Time</th>
                                                 <th>Location</th>
                                                 <th>Max Capacity</th>
                                                 <th>Available Seats</th>
-                                                <th>Record Type</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -143,10 +145,12 @@
                                         <tbody>
                                             <apex:repeat value="{!OrientationRecordList}" var="training">
 
-                                                <apex:outputPanel rendered="{!OR(AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}">
+                                               <!-- <apex:outputPanel rendered="{!OR(AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}"> -->
+                                                    <apex:outputPanel rendered="{!OR(AND(training.volOppSize == 0),AND(training.volOppSize > 0,training.status == 'Cancelled'))}">
                                                     <tr>
                                                         <td>{!training.orientationName}</td>
                                                         <td>{!training.chapterName}</td>
+                                                        <td>{!training.recordType}</td>
                                                         <td>
                                                             <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!training.orientationDate}" /></apex:outputText>
                                                         </td>
@@ -155,7 +159,7 @@
                                                         <td>{!training.location}</td>
                                                         <td>{!training.maxCapacity}</td>
                                                         <td>{!training.avilableSheets}</td>
-                                                        <td>{!training.recordType}</td>
+                                                        
                                                         <td>
                                                             <apex:commandLink action="{!Register}">Register
                                                                 <apex:param name="trainingId" value="{!training.recordId}" assignTo="{!trainingId}"/>

@@ -497,7 +497,7 @@ public class Application_AC{
             system.debug('@@@@@@@ DOCUSIGN APPLICATION @@@@@@@@'+results.get('url'));
                 dsfs__DocuSign_Status__c dsfs= NEW dsfs__DocuSign_Status__c();
                 dsfs.dsfs__DocuSign_Envelope_ID__c = env;
-                dsfs.dsfs__Contact__c = currentVolunteer.id;
+                dsfs.Docusign_Hidden_Contact__c = currentVolunteer.id;
                 Insert dsfs;  
                 system.debug('@@@@@@@ DOCUSIGN APPLICATION @@@@@@@@'+dsfs);
                 if(dsfs.id != Null){

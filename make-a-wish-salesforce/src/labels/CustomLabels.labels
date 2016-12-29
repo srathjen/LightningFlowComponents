@@ -30,14 +30,14 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Child Medical Summary</shortDescription>
-        <value>564f7df6-9788-446e-828e-703073f5a53b</value>
+        <value>94179D57-4235-4622-87CE-08BBD63151AD</value>
     </labels>
     <labels>
         <fullName>ContactIdValue</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>ContactIdValue</shortDescription>
-        <value>0035B0000063iaG</value>
+        <value>0033600000Z3S0Z</value>
     </labels>
     <labels>
         <fullName>Instance_Url</fullName>
@@ -45,7 +45,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Instance Url</shortDescription>
-        <value>https://cs52.salesforce.com</value>
+        <value>https://na30.salesforce.com</value>
     </labels>
     <labels>
         <fullName>Local_Email_Template_ID</fullName>
@@ -53,7 +53,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Local Email Template ID</shortDescription>
-        <value>00X5B000000QG2B</value>
+        <value>00X36000001Ilh9</value>
     </labels>
     <labels>
         <fullName>National_Email_Template_ID</fullName>
@@ -61,14 +61,14 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>National Email Template ID</shortDescription>
-        <value>00X5B000000QG2A</value>
+        <value>00X36000001Ilh8</value>
     </labels>
     <labels>
         <fullName>OrganizationWideEmail</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>OrganizationWideEmail</shortDescription>
-        <value>makeawishqa@gmail.com</value>
+        <value>wvcsupport@wish.org</value>
     </labels>
     <labels>
         <fullName>Prospective_Volunteer</fullName>
@@ -87,19 +87,33 @@
         <value>00e36000000HVbO</value>
     </labels>
     <labels>
+        <fullName>Shopping_Spree_DDP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Shopping_Spree_DDP</shortDescription>
+        <value>a1i5B000000bKzt</value>
+    </labels>
+    <labels>
         <fullName>Site_Url</fullName>
         <categories>It holds the volunteer portal url.</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Site Url</shortDescription>
-        <value>https://qa-make-a-wish.cs52.force.com</value>
+        <value>http://make-a-wish.force.com/</value>
     </labels>
     <labels>
         <fullName>WishClearence</fullName>
         <categories>Docusign Wish Clearence Template Id</categories>
         <language>en_US</language>
         <protected>false</protected>
-        <shortDescription>Wish Clearance</shortDescription>
-        <value>77d555ac-ee64-460b-9378-1b2e851e4258</value>
+        <shortDescription>Wish Clearence</shortDescription>
+        <value>ECC3FACE-46C8-4174-9765-660797AAEA45</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Receipt_DDP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Receipt DDP</shortDescription>
+        <value>a1i5B000000XrpY</value>
     </labels>
 </CustomLabels>

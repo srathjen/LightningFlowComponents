@@ -162,7 +162,13 @@
         
         header,main {max-width : 1000px !important;}    
         .bold { font-weight: bold;
-                font-size: 18px; }    
+                font-size: 18px; }  
+                
+                
+      .activeClassCommunity{background:#2184cc !important;color:#000000 !important;border:solid 1px #2184cc !important;}
+      .custMenuCommunity{margin:1px;border:solid 1px #2184cc;float: left;width: 23%;color: #ffffff;font-size:small; background: #c7c7c7;padding: 6px;text-align: center;user-select: none;cursor: pointer;}
+      
+                  
         </style>
     <script>
      var listSize;    
@@ -178,8 +184,8 @@
             return [month,day,year].join('/');
             }
     
-    $(document).ready(function(){
-    
+    $(document).ready(function(){ 
+     $(".readonly").attr('readonly', 'readonly');
      $('.collapse a').click(function() { 
            $('.active').removeClass('active');
            $('.'+$(this).attr('class')).addClass('active');            
@@ -479,7 +485,6 @@
                 return true;
                 }
         
-        
         }
         
      
@@ -488,7 +493,8 @@
     <body class="vcp vcpactivelogin full registered profile"> 
        
        <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
-       <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />             
+       <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />
+       <div style="width:60%;height:100px;margin-left:25%;margin-right:25%;"><apex:include pageName="active_header_progress_bar" id="pheaderprog" rendered="{!if($Profile.Name<>"Active Volunteer",true,true)}" /></div>
        <div style='clear:both'></div>
        <main role="main" class="container">
         <div class="sideNav">
@@ -549,9 +555,9 @@
                     <div class="row top-space" id="parentInfo">
                         <div class="row">
                             <div class="col-lg-2 text-imp lineHeight">Wish Child Name:</div>
-                            <div class="col-lg-3"><apex:inputText value="{!currWishChild.FirstName__c}" html-placeholder="FirstName" styleClass="form-control" style="border-left:5px solid red"/></div>
-                            <div class="col-lg-3"><apex:inputText value="{!currWishChild.Middle_Name__c}"  html-placeholder="MiddleName" styleClass="form-control"/></div>
-                            <div class="col-lg-3"><apex:inputText value="{!currWishChild.LastName__c}" styleClass="form-control" html-placeholder="LastName" style="border-left:5px solid red"/></div>
+                            <div class="col-lg-3"><apex:inputText value="{!currWishChild.FirstName__c}" html-placeholder="FirstName" styleClass="form-control readonly" style="border-left:5px solid red;" /></div>
+                            <div class="col-lg-3"><apex:inputText value="{!currWishChild.Middle_Name__c}"  html-placeholder="MiddleName" styleClass="form-control readonly"/></div>
+                            <div class="col-lg-3"><apex:inputText value="{!currWishChild.LastName__c}" styleClass="form-control readonly" html-placeholder="LastName" style="border-left:5px solid red"/></div>
                         </div>
                         <apex:outputpanel >
                         <div class="parent-info">

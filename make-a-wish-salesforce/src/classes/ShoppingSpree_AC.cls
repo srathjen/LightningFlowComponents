@@ -19,7 +19,8 @@ public ShoppingSpree_AC(ApexPages.StandardController controller) {
          userDetailList = [SELECT Id , Name, contactId,contact.phone,contact.Name FROM USER WHERE Id IN: teamMemberSet];
          system.debug('userDetailList@@@@@@@@@@@@ ' + userDetailList );
          caseId = ApexPages.CurrentPage().getparameters().get('id');
-         ddpId = 'a1k5B000000ChJa';
+         //ddpId = 'a1k5B000000ChJa';
+         ddpId = Label.Shopping_Spree_DDP;
          ShoppingSpree = '/apex/loop__looplus?eid='+caseId +'&sidebar='+false+'&hidecontact='+true+'&hideddp='+true+'&ddpIds='+ddpId+'&autorun='+true;
              
         

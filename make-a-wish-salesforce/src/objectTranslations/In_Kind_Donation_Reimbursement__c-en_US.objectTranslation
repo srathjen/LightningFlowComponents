@@ -21,8 +21,28 @@
         <name>Address_Line_1_del__c</name>
     </fields>
     <fields>
+        <label><!-- Amount2 --></label>
+        <name>Ammount2__c</name>
+    </fields>
+    <fields>
         <label><!-- Amount 2 --></label>
         <name>Ammount_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount1 --></label>
+        <name>Amount1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount3 --></label>
+        <name>Amount3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount4 --></label>
+        <name>Amount4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Amount5 --></label>
+        <name>Amount5__c</name>
     </fields>
     <fields>
         <label><!-- Amount 1 --></label>
@@ -43,6 +63,10 @@
     <fields>
         <label><!-- Appeal --></label>
         <name>Appeal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approval Date --></label>
+        <name>Approval_Date__c</name>
     </fields>
     <fields>
         <label><!-- Attachments --></label>
@@ -116,6 +140,10 @@
         <label><!-- Documentation --></label>
         <name>Documentation__c</name>
         <picklistValues>
+            <masterLabel>Attached</masterLabel>
+            <translation><!-- Attached --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Not available</masterLabel>
             <translation><!-- Not available --></translation>
         </picklistValues>
@@ -123,6 +151,10 @@
             <masterLabel>Will Attach</masterLabel>
             <translation><!-- Will Attach --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Email__c</name>
     </fields>
     <fields>
         <label><!-- Expense1 Description --></label>
@@ -458,6 +490,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Street Name --></label>
+        <name>Street__c</name>
+    </fields>
+    <fields>
         <label><!-- Total Reimbursement Amount --></label>
         <name>Total_Reimbursement_Amount__c</name>
     </fields>
@@ -772,6 +808,11 @@
             <translation><!-- Wyoming --></translation>
         </picklistValues>
     </fields>
+    <fields>
+        <label><!-- Volunteer Name --></label>
+        <name>vounteer_Name__c</name>
+        <relationshipLabel><!-- In-Kind Donation &amp; Reimbursement --></relationshipLabel>
+    </fields>
     <layouts>
         <layout>In Kind Donation</layout>
         <sections>
@@ -869,6 +910,10 @@
         <name>Reimbursement</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Please enter either the Account Name or Volunteer Name. --></errorMessage>
+        <name>IKR_AccountName_VolunteerName_Validation</name>
+    </validationRules>
     <validationRules>
         <errorMessage><!-- You should enter the reason for changing the gift value --></errorMessage>
         <name>InKind_Gift_Value_Change_Validation</name>

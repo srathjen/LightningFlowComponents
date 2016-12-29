@@ -60,7 +60,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Chapter Name</th>
-                                            <th>Record Type</th>
+                                            <th>Type</th>
                                             <th>Date</th>
                                             <th>Start Time</th>
                                             <th>End Time</th>
@@ -74,8 +74,8 @@
 
                                     <tbody>
                                         <apex:repeat value="{!TrainingRecordList}" var="training">
-                                            <!--<apex:outputPanel rendered="{!(AND(training.volOppSize>0,training.status == 'Registered'))}">-->
-                                            <apex:outputPanel rendered="{!OR(AND(training.volOppSize>0,training.status == 'Registered'),AND(training.volOppSize < 0,training.status == 'Registered'),AND(training.volOppSize == 0,training.status == 'Registered'))}">
+                                            <apex:outputPanel rendered="{!(AND(training.volOppSize>0,training.status == 'Registered'))}">
+                                          <!--  <apex:outputPanel rendered="{!OR(AND(training.volOppSize>0,training.status == 'Registered'),AND(training.volOppSize < 0,training.status == 'Registered'),AND(training.volOppSize == 0,training.status == 'Registered'))}"> -->
                                                 <tr>
                                                     <td>{!training.orientationName}</td>
                                                     <td>{!training.chapterName}</td>
@@ -95,7 +95,7 @@
                                                         </apex:commandLink>
                                                     </td>
                                                     <td>
-                                                        <apex:commandLink action="{!viewLMS}" oncomplete="openLMS('{!ssoURL}','{!courseURL}');" rendered="{!(training.recordtypeId== classOffereningRecordtypeId)}">View Training
+                                                        <apex:commandLink action="{!viewLMS}" oncomplete="openLMS('{!ssoURL}','{!courseURL}');" rendered="{!(training.recordtypeId== classOffereningRecordtypeId)}">Start Course
                                                             <apex:param name="lMSCourseId" value="{!training.courseId}" assignTo="{!lMSCourseId}"/>
                                                         </apex:commandLink>
                                                     </td>
@@ -128,7 +128,8 @@
                                     <tbody>
                                         <apex:repeat value="{!TrainingRecordList}" var="training">
                                             <!--<apex:outputPanel rendered="{!OR(AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}">-->
-                                             <apex:outputPanel rendered="{!OR(AND(training.avilableSheets < 0, training.volOppSize == 0),AND(training.avilableSheets == 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}">
+                                            <!-- <apex:outputPanel rendered="{!OR(AND(training.avilableSheets < 0, training.volOppSize == 0),AND(training.avilableSheets == 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}"> -->
+                                               <apex:outputPanel rendered="{!OR(AND(training.volOppSize == 0),AND(training.volOppSize > 0,training.status == 'Cancelled'))}">
                                                 <tr>
                                                     <td>{!training.orientationName}</td>
                                                     <td>{!training.recordType}</td>

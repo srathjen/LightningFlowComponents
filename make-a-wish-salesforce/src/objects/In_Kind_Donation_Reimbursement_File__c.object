@@ -89,6 +89,17 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>File_Path__c</fullName>
+        <description>AWS File URl</description>
+        <externalId>false</externalId>
+        <label>File Path</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
         <fullName>File_Size__c</fullName>
         <externalId>false</externalId>
         <formula>IF(File_Size_in_Bytes__c &gt; 1024,

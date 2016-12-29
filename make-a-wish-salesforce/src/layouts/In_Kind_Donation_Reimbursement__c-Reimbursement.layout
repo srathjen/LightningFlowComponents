@@ -260,7 +260,7 @@
         <label>Attachments</label>
         <layoutColumns>
             <layoutItems>
-                <height>300</height>
+                <height>500</height>
                 <page>S_DriveAttachment_VF</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>true</showScrollbars>
@@ -305,7 +305,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h5B000000Eblp</masterLabel>
+        <masterLabel>00h5B000000Insb</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

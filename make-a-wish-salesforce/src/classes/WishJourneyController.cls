@@ -31,6 +31,17 @@ public class WishJourneyController{
     public boolean completed{get;set;} 
     public boolean closed{get;set;}
     
+    
+    public boolean isSubmitted{get;set;} 
+    public boolean determined{get;set;} 
+    public boolean approved{get;set;}
+    public boolean design{get;set;}
+    public boolean scheduled{get;set;} 
+    public boolean interview{get;set;} 
+    public boolean assign{get;set;} 
+   
+    
+    
     public integer referredDays{get;set;}
     public integer qualifiedDays{get;set;}
     public integer determinationDays{get;set;}
@@ -46,7 +57,7 @@ public class WishJourneyController{
     {
         currCase = (Case)stdController.getRecord();
         currCase = [SELECT Id,RecordType.name,Contact.FirstName,Contact.LastName,status,Days_in_stage__c,Rush__c, 
-                    End_Date__c, Parent.End_Date__c, Referral_Date__c, Parent.Referral_Date__c,
+                    End_Date__c, Parent.End_Date__c, Referral_Date__c, Parent.Referral_Date__c, parent.status,
                     Qualified_Date__c, Parent.Qualified_Date__c,Anticipated_Wish_Date__c,Parent.ContactId,
                     parent.Contact.FirstName,Parent.Contact.LastName,Anticipated_Start_Date__c,Parent.Anticipated_Start_Date__c,
                     Parent.Anticipated_Wish_Date__c,Wish_Determined_Date__c, Parent.Wish_Determined_Date__c,
@@ -155,28 +166,91 @@ public class WishJourneyController{
             }
             
             
-            if(currCase.Status == 'Inactive')
+         /*   if(currCase.Status == 'Inactive' && currCase.RecordTypeId == wishRecTypeId)
                 inActive = True;
-            if(currCase.Status == 'On Hold')
+            else if(currCase.Parent.Status == 'Inactive' && currCase.RecordTypeId != wishRecTypeId)
+                inActive = True;
+                
+            if(currCase.Status == 'On Hold' && currCase.RecordTypeId == wishRecTypeId)
                 onHold = True;
-            if(currCase.status == 'Escalated')
+            else if(currCase.Parent.Status == 'On Hold' && currCase.RecordTypeId != wishRecTypeId)
+                onHold = True;
+                    
+            if(currCase.status == 'Escalated' && currCase.RecordTypeId == wishRecTypeId)
                 escalated=True;
-            if(currCase.status == 'Granted')
+            else if(currCase.Parent.Status == 'Escalated' && currCase.RecordTypeId != wishRecTypeId)
+                escalated = True;    
+                
+            if(currCase.status == 'Granted' && currCase.RecordTypeId == wishRecTypeId)
                 granted = True;
-            if(currCase.status == 'Qualified')
+            else if(currCase.Parent.Status == 'Granted' && currCase.RecordTypeId != wishRecTypeId)
+                granted = True;    
+                
+            if(currCase.status == 'Qualified' && currCase.RecordTypeId == wishRecTypeId)
                 qualified = True;
-            if(currCase.status == 'Ready to Assign')
+            else if(currCase.Parent.Status == 'Qualified' && currCase.RecordTypeId != wishRecTypeId)
+                qualified = True;  
+                
+            if(currCase.status == 'Ready to Assign' && currCase.RecordTypeId == wishRecTypeId)
                 readytoAssign = True;
-            if(currCase.status == 'Wish Determined')
-                wishDetermined = True;    
-            if(currCase.status == 'New')
+            else if(currCase.Parent.Status == 'Ready to Assign' && currCase.RecordTypeId != wishRecTypeId)
+                readytoAssign = True;    
+                
+            if(currCase.status == 'Wish Determined' && currCase.RecordTypeId == wishRecTypeId)
+                wishDetermined = True; 
+            else if(currCase.Parent.Status == 'Wish Determined' && currCase.RecordTypeId != wishRecTypeId)
+                wishDetermined = True;
+                   
+            if(currCase.status == 'New' && currCase.RecordTypeId == wishRecTypeId)
                 newStatus = True; 
-            if(currCase.status == 'Completed')
+            else if(currCase.Parent.Status == 'New' && currCase.RecordTypeId != wishRecTypeId)
+                newStatus = True;     
+                
+            if(currCase.status == 'Completed' && currCase.RecordTypeId == wishRecTypeId)
                 completed = True; 
-            if(currCase.status == 'Closed')
-                closed = True;            
+            else if(currCase.Parent.Status == 'Completed' && currCase.RecordTypeId != wishRecTypeId)
+                completed = True;       
+                
+            if(currCase.status == 'Closed' && currCase.RecordTypeId == wishRecTypeId)
+                closed = True;  
+            else if(currCase.Parent.Status == 'Closed' && currCase.RecordTypeId != wishRecTypeId)
+                closed = True; 
+                      
+             if(currCase.status == 'Budget Approval - Submitted' && currCase.RecordTypeId == wishRecTypeId)
+                isSubmitted = True; 
+             else if(currCase.Parent.Status == 'Budget Approval - Submitted' && currCase.RecordTypeId != wishRecTypeId)
+                isSubmitted = True;
+                              
+             if(currCase.status == 'Budget Approval - Approved' && currCase.RecordTypeId == wishRecTypeId)
+                approved = True; 
+             else if(currCase.Parent.Status == 'Budget Approval - Approved' && currCase.RecordTypeId != wishRecTypeId)
+                approved = True;
+                      
+             if(currCase.status == 'Wish Design' && currCase.RecordTypeId == wishRecTypeId)
+                design = True;  
+             else if(currCase.Parent.Status == 'Wish Design' && currCase.RecordTypeId != wishRecTypeId)
+                design = True; 
                  
-
+             if(currCase.status == 'Wish Scheduled' && currCase.RecordTypeId == wishRecTypeId)
+                scheduled = True;
+             else if(currCase.Parent.Status == 'Wish Scheduled' && currCase.RecordTypeId != wishRecTypeId)
+                scheduled = True;   
+                       
+             if(currCase.status == 'Ready to Interview' && currCase.RecordTypeId == wishRecTypeId)
+                interview = True;
+             else if(currCase.Parent.Status == 'Ready to Interview' && currCase.RecordTypeId != wishRecTypeId)
+                interview = True;
+                   
+             if(currCase.status == 'Ready to Assign' && currCase.RecordTypeId == wishRecTypeId)
+                assign = True;    
+             else if(currCase.Parent.Status == 'Ready to Assign' && currCase.RecordTypeId != wishRecTypeId)
+                assign = True;
+                               
+             if(currCase.status == 'Wish Determined' && currCase.RecordTypeId == wishRecTypeId) 
+                 determined = True;                 
+             else if(currCase.Parent.Status == 'Wish Determined' && currCase.RecordTypeId != wishRecTypeId)
+                 determined = True;   */                       
+                 
         }
         
         getCases();

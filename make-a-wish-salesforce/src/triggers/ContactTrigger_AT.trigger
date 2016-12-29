@@ -322,6 +322,8 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
     {
         Map<Id,Id> conIdMap = new Map<Id,Id>();
         Map<Id,Id> contactAccountIdMap = new Map<Id,Id>();
+        Set<Id> newWishChildContactSet = new Set<Id>();
+       
         for(Contact conCurrRec: trigger.new)
         {
             if(conCurrRec.migrated_record__c != True)
@@ -332,8 +334,14 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 if(conCurrRec.RecordTypeId == familyContactRecordTypeId ){
                     contactAccountIdMap .put(conCurrRec.AccountId,conCurrRec.Id);   
                 }
+                
+                if(conCurrRec.RecordTypeId == wichChildRecordTypeId) {
+                    newWishChildContactSet.add(conCurrRec.Id);
+                }
+                
             }
         }
+        
         if(conIdMap.size() > 0){
             ContactTriggerHandler.createConstituentContactCode(conIdMap,'Wish Child');
         }
@@ -356,7 +364,10 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         Map<Id,Contact> contactMap = new Map<Id, Contact>();
         set<string> contactIdsForEmailChange = new set<string>();
         map<string,contact> m1 = new map<string,contact>();
+        map<string,Contact> updateUserInfo = new map<string,Contact>();
+        Map<Id, Contact> contactOldMap = new Map<Id, Contact>();
         Set<Id>  MedicalProfContactSet = new Set<Id>();
+        Contact updatedCon;
         for(Contact newContact : trigger.new)
         {
             if(newContact.migrated_record__c != True)
@@ -396,6 +407,11 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                     
                 }
             } 
+            if((newContact.RecordTypeId == volunteerRecordTypeId) && (newContact.FirstName != Null && trigger.oldMap.get(newContact.id).FirstName != newContact.FirstName) || (newContact.LastName != Null && trigger.oldMap.get(newContact.id).LastName != newContact.LastName) || (newContact.MobilePhone!= Null && trigger.oldMap.get(newContact.id).MobilePhone!= newContact.MobilePhone) || (newContact.Email != Null && trigger.oldMap.get(newContact.id).Email != newContact.Email)){
+               
+               updateUserInfo.put(newContact.id,newContact);
+               contactOldMap.put(newContact.id, Trigger.oldMap.get(newContact.id));
+            }
         }
          if(RecursiveTriggerHandler.isFirstTime){
             RecursiveTriggerHandler.isFirstTime = false;
@@ -405,9 +421,9 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
             string temp;
             string temp1;
            
-            for(npe4__Relationship__c newRelationShip : [SELECT ID,Name,Wish_Family_participants__c,npe4__RelatedContact__c,npe4__RelatedContact__r.LastName,npe4__RelatedContact__r.FirstName,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__Contact__c,
+            for(npe4__Relationship__c newRelationShip : [SELECT ID,Name,Parent_Legal_Guardian__c,npe4__RelatedContact__c,npe4__RelatedContact__r.LastName,npe4__RelatedContact__r.FirstName,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__Contact__c,
                                                          npe4__Contact__r.Recipient_Email__c,npe4__Contact__r.Second_Recipient_Email__c,npe4__Contact__r.First_Recipient_Name__c,
-                                                         npe4__Contact__r.Second_Recipient_Name__c FROM npe4__Relationship__c WHERE Wish_Family_participants__c =: 'Parent/Guardian'
+                                                         npe4__Contact__r.Second_Recipient_Name__c FROM npe4__Relationship__c WHERE Parent_Legal_Guardian__c =: true
                                                          AND npe4__RelatedContact__c IN:contactIdsForEmailChange]){
                                                              
                                                              
@@ -460,6 +476,9 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         if(MedicalProfContactSet.size() > 0)
         ContactTriggerHandler.updateMedicalProfConatctInfo(MedicalProfContactSet);
         
+        if(updateUserInfo.size() > 0){
+           ContactTriggerHandler.updateUserDetails(updateUserInfo,contactOldMap);
+        }
     }
     
     

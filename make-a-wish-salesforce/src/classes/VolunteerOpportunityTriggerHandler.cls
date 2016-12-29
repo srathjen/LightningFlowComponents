@@ -384,11 +384,16 @@ update volunteerContactList;
         List<Volunteer_Opportunity__c> createNewVolunteerOpportunityList = new List<Volunteer_Opportunity__c>();
         Set<Id> wishIdSet = new Set<Id>();
         List<CaseTeamMember> removeCaseTeamMemberList = new List<CaseTeamMember>();
-        for(Volunteer_Opportunity__c  processVolOpportunity : volunteerOpportunityList){
+        Set<Id> volunteerNamesSet = new Set<Id>();
+        
+        for(Volunteer_Opportunity__c  processVolOpportunity : volunteerOpportunityList)
+        {
             Volunteer_Opportunity__c newVolOpportunity = new Volunteer_Opportunity__c();
             newVolOpportunity.Chapter_Name__c = processVolOpportunity.Chapter_Name__c;
             newVolOpportunity.Chapter_Role_Opportunity__c = processVolOpportunity.Chapter_Role_Opportunity__c;
             newVolOpportunity.Date_Time__c = processVolOpportunity.Date_Time__c;
+            volunteerNamesSet.add(processVolOpportunity.Volunteer_Name__c);
+            
             if(processVolOpportunity.Non_Wish_Event__c != null){
                 newVolOpportunity.Non_Wish_Event__c = processVolOpportunity.Non_Wish_Event__c;
                 newVolOpportunity.RecordTypeId = nonWishEvents;
@@ -404,8 +409,16 @@ update volunteerContactList;
             system.debug('########## createNewVolunteerOpportunityList @@@@@@@@'+createNewVolunteerOpportunityList);
         }
         
+        Set<Id> userIds = new Set<Id>();
+        if(volunteerNamesSet.size() > 0)
+        {
+            for(User currUser : [SELECT id FROM User WHERE contactId IN :volunteerNamesSet])
+            {
+               userIds.add(currUser.id); 
+            }
+        }
         
-        for(CaseTeamMember dbcaseTeamMember : [SELECT id,MemberId, ParentId  FROM CaseTeamMember WHERE ParentId IN : wishIdSet AND MemberId != Null]){
+        for(CaseTeamMember dbcaseTeamMember : [SELECT id,MemberId, ParentId  FROM CaseTeamMember WHERE ParentId IN : wishIdSet AND MemberId IN :userIds]){
             
             removeCaseTeamMemberList.add(dbcaseTeamMember);
             

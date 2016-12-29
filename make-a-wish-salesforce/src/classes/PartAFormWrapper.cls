@@ -1,6 +1,6 @@
 Public class PartAFormWrapper
 {
-  
+    
     public Id leadId {get;set;}
     public List<Lead> leadDetails {get;set;}
     public String recognizationPickValSelected { get; set; }
@@ -48,11 +48,11 @@ Public class PartAFormWrapper
     public Boolean otherDiagnosis2 {get;set;}
     public Boolean otherDiagnosis3 {get;set;}
     public Boolean otherDiagnosis4 {get;set;}
-    //public Boolean parentNutrition {get;set;}
-    //public String yesNoPickListVal {get;set;}
-    //public String yesNoOtherPickListVal {get;set;}
-    //public String cardioPckListVal {get;set;}
-    //public String convulsionsPicklistVal {get;set;}
+    public Boolean parentNutrition {get;set;}
+    public String yesNoPickListVal {get;set;}
+    public String yesNoOtherPickListVal {get;set;}
+    public String cardioPckListVal {get;set;}
+    public String convulsionsPicklistVal {get;set;}
     public String healthCareWork{get;set;}
     public String vegetativeState{get;set;}
     public String treatingFName{get;set;}
@@ -70,7 +70,7 @@ Public class PartAFormWrapper
     public Date dateOfBirth {get;set;}
     public String age {get;set;}
     public String gender {get;set;}
-   
+    
     public boolean infectious{get;set;}
     public boolean airborne{get;set;}
     public boolean pneumothorax{Get;set;}
@@ -158,56 +158,57 @@ Public class PartAFormWrapper
         iamNotSure = false;
         ventilatorText = '';
         
-    
+        
         
     }
     
     
     
     public List<SelectOption> getLungDiseaseList() {
-    
-         List<SelectOption> options = new List<SelectOption>();
-         options.add(new SelectOption('','Please Select That All Apply',true));
-         options.add(new SelectOption('Vital Capacity less than one liter','Vital Capacity less than one liter'));
-         options.add(new SelectOption('current or frequent hypoxemia','current or frequent hypoxemia'));
-         options.add(new SelectOption('current or frequent hypercapnia','current or frequent hypercapnia'));
-         options.add(new SelectOption('FEV1 less than 50% predicted','FEV1 less than 50% predicted'));
-         options.add(new SelectOption('Required long-term oxygen in the past 6 months','Required long-term oxygen in the past 6 months'));
-         options.add(new SelectOption('I do not know','I do not know'));
-         options.add(new SelectOption('Not Applicable','Not Applicable'));
-         return options;
-    
+        
+        List<SelectOption> options = new List<SelectOption>();
+        options.add(new SelectOption('','Please Select That All Apply',true));
+        options.add(new SelectOption('Vital capacity less than 1 liter or less than 20 ml/kg','Vital capacity less than 1 liter or less than 20 ml/kg'));
+        options.add(new SelectOption('current or frequent hypoxemia','current or frequent hypoxemia'));
+        options.add(new SelectOption('current or frequent hypercapnia','current or frequent hypercapnia'));
+        options.add(new SelectOption('FEV1 less than 50% predicted','FEV1 less than 50% predicted'));
+        options.add(new SelectOption('Required long-term oxygen in the past 6 months','Required long-term oxygen in the past 6 months'));
+        options.add(new SelectOption('Oxygen dependence at sea level','Oxygen dependence at sea level'));
+        options.add(new SelectOption('I do not know','I do not know'));
+        options.add(new SelectOption('Not Applicable','Not Applicable'));
+        return options;
+        
     }
     
     
-  
     
     
-     Public List<SelectOption> getventilatorList() {
-     
-         List<SelectOption> options = new List<SelectOption>();
-         options.add(new SelectOption('','Please Select',true));
-         options.add(new SelectOption('I am the treating provider for the ventilator','I am the treating provider for the ventilator'));
-         options.add(new SelectOption('I am not the treating provider for the ventilator','I am not the treating provider for the ventilator'));
-         return options;
-     }
     
-     public List<SelectOption> getanginaList() {
-         List<SelectOption> options = new List<SelectOption>();
-         options.add(new SelectOption('','Please Select That All Apply',true));
-         options.add(new SelectOption('CCS Class III','CCS Class III'));
-         options.add(new SelectOption('CCS Class IV','CCS Class IV'));
-         options.add(new SelectOption('Chest pain with everyday living activities with moderate limitations','Chest pain with everyday living activities with moderate limitations'));
-         options.add(new SelectOption('Chest pain on minimal exertion with no change to symptoms or medication in the last 6 weeks','Chest pain on minimal exertion with no change to symptoms or medication in the last 6 weeks'));
-         options.add(new SelectOption('Is unable to perform any activity without chest pain or is experiencing chest pain at rest and/or severe limitation','Is unable to perform any activity without chest pain or is experiencing chest pain at rest and/or severe limitation'));
-         options.add(new SelectOption('Chest pain at rest','Chest pain at rest'));
-         options.add(new SelectOption('Change in symptoms and/or medication in the past 6 weeks','Change in symptoms and/or medication in the past 6 weeks'));
-         options.add(new SelectOption('I do not know','I do not know'));
-         options.add(new SelectOption('Not Applicable','Not Applicable'));
-         return options;
-     }
+    Public List<SelectOption> getventilatorList() {
+        
+        List<SelectOption> options = new List<SelectOption>();
+        options.add(new SelectOption('','Please Select',true));
+        options.add(new SelectOption('I am the treating provider for the ventilator','I am the treating provider for the ventilator'));
+        options.add(new SelectOption('I am not the treating provider for the ventilator','I am not the treating provider for the ventilator'));
+        return options;
+    }
     
-     public List<SelectOption> getArrhythmiaList() {
+    public List<SelectOption> getanginaList() {
+        List<SelectOption> options = new List<SelectOption>();
+        options.add(new SelectOption('','Please Select That All Apply',true));
+        options.add(new SelectOption('CCS Class III','CCS Class III'));
+        options.add(new SelectOption('CCS Class IV','CCS Class IV'));
+        options.add(new SelectOption('Chest pain with everyday living activities with moderate limitations','Chest pain with everyday living activities with moderate limitations'));
+        options.add(new SelectOption('Chest pain on minimal exertion with no change to symptoms or medication in the last 6 weeks','Chest pain on minimal exertion with no change to symptoms or medication in the last 6 weeks'));
+        options.add(new SelectOption('Is unable to perform any activity without chest pain or is experiencing chest pain at rest and/or severe limitation','Is unable to perform any activity without chest pain or is experiencing chest pain at rest and/or severe limitation'));
+        options.add(new SelectOption('Chest pain at rest','Chest pain at rest'));
+        options.add(new SelectOption('Change in symptoms and/or medication in the past 6 weeks','Change in symptoms and/or medication in the past 6 weeks'));
+        options.add(new SelectOption('I do not know','I do not know'));
+        options.add(new SelectOption('Not Applicable','Not Applicable'));
+        return options;
+    }
+    
+    public List<SelectOption> getArrhythmiaList() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Please Select That All Apply',true));
         options.add(new SelectOption('Unstable arrhythmia','Unstable arrhythmia'));
@@ -218,59 +219,59 @@ Public class PartAFormWrapper
         options.add(new SelectOption('Valve disease of functional class IV or is experiencing chest pain or syncope','Valve disease of functional class IV or is experiencing chest pain or syncope'));
         options.add(new SelectOption('Pacemaker placement more less than one week ago','Pacemaker placement more less than one week ago'));
         options.add(new SelectOption('I do not know','I do not know'));
-         options.add(new SelectOption('Not Applicable','Not Applicable'));
+        options.add(new SelectOption('Not Applicable','Not Applicable'));
         return options;
-     }  
-     
-   
-     public List<SelectOption> getheartFailureList() {
+    }  
+    
+    
+    public List<SelectOption> getheartFailureList() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Please Select That All Apply',true));
         options.add(new SelectOption('Hospitalized or treated for pleural effusion in past 6 weeks','Hospitalized or treated for pleural effusion in past 6 weeks'));
         options.add(new SelectOption('Hospitalized or treated for dyspnea in past 6 weeks','Hospitalized or treated for dyspnea in past 6 weeks'));
         options.add(new SelectOption('I do not know','I do not know'));
-         options.add(new SelectOption('Not Applicable','Not Applicable'));
+        options.add(new SelectOption('Not Applicable','Not Applicable'));
         return options;
-     }  
-     
+    }  
     
     
-     public List<SelectOption> getHepatitisValues() {
+    
+    public List<SelectOption> getHepatitisValues() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Please Select'));
         options.add(new SelectOption('Impaired gas exchange', 'Impaired gas exchange')); 
         options.add(new SelectOption('Not Applicable', 'Not Applicable')); 
         return options;
-     }  
-     
-     public List<SelectOption> getPulmonaryHypertensionValues() {
+    }  
+    
+    public List<SelectOption> getPulmonaryHypertensionValues() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Please Select'));
         options.add(new SelectOption('with intrapulmonary shunting', 'with intrapulmonary shunting')); 
         options.add(new SelectOption('without intrapulmonary shunting', 'without intrapulmonary shunting')); 
         return options;
-     }  
-     
-     public List<SelectOption> getStrokeValues() {
+    }  
+    
+    public List<SelectOption> getStrokeValues() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Please Select'));
         options.add(new SelectOption('Frequent or crescendo transient ischemic attacks or strokes', 'Frequent or crescendo transient ischemic attacks or strokes')); 
         options.add(new SelectOption('Not Applicable', 'Not Applicable')); 
         return options;
-     }  
-     
-   
-     public List<SelectOption> getconvulsiveDisorderList() {
+    }  
+    
+    
+    public List<SelectOption> getconvulsiveDisorderList() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Please Select That All Apply',true));
-        options.add(new SelectOption('Has frequent, uncontrolled, prolonged, generalized seizures that last greater than five minutes without cessation after abortive seizure medication treatment', 'Has frequent, uncontrolled, prolonged, generalized seizures that last greater than five minutes without cessation after abortive seizure medication treatment')); 
+        options.add(new SelectOption('Currently, frequent uncontrolled, prolonged, generalized seizures that last >5min without cessation after abortive seizure medication treatmentut cessation after abortive seizure medication treatment', 'Currently, frequent uncontrolled, prolonged, generalized seizures that last >5min without cessation after abortive seizure medication treatment')); 
         options.add(new SelectOption('Has had a seizure in the last 24 hours', 'Has had a seizure in the last 24 hours')); 
         options.add(new SelectOption('I do not know','I do not know'));
-         options.add(new SelectOption('Not Applicable','Not Applicable')); 
+        options.add(new SelectOption('Not Applicable','Not Applicable')); 
         return options;
-     }  
-     
-     public List<SelectOption> getcongenitalHeartDiseaseList() {
+    }  
+    
+    public List<SelectOption> getcongenitalHeartDiseaseList() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Please Select That All Apply',true));
         options.add(new SelectOption('NYHA class IV', 'NYHA class IV')); 
@@ -279,11 +280,11 @@ Public class PartAFormWrapper
         options.add(new SelectOption('Change in symptoms and/or medication in the past 6 weeks', 'Change in symptoms and/or medication in the past 6 weeks')); 
         options.add(new SelectOption('Dyspnea on exertion', 'Dyspnea on exertion')); 
         options.add(new SelectOption('I do not know','I do not know'));
-         options.add(new SelectOption('Not Applicable','Not Applicable')); 
+        options.add(new SelectOption('Not Applicable','Not Applicable')); 
         return options;
-     }  
-     
-      public List<SelectOption> getchronicHeartFailureList() {
+    }  
+    
+    public List<SelectOption> getchronicHeartFailureList() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Please Select That All Apply',true));
         options.add(new SelectOption('NYHA Class IV','NYHA Class IV'));
@@ -294,8 +295,8 @@ Public class PartAFormWrapper
         options.add(new SelectOption('Is dyspnea at rest','Is dyspnea at rest'));
         options.add(new SelectOption('Has a change in symptoms and/or medication in the past 6 weeks','Has a change in symptoms and/or medication in the past 6 weeks'));
         options.add(new SelectOption('I do not know','I do not know'));
-         options.add(new SelectOption('Not Applicable','Not Applicable'));
+        options.add(new SelectOption('Not Applicable','Not Applicable'));
         return options;
-     }  
-
+    }  
+    
 }

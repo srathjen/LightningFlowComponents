@@ -1,19 +1,28 @@
 <apex:page controller="WishReferralForm_AC" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" docType="html-5.0">
 <apex:stylesheet value="{!URLFOR($Resource.prospective_assets, 'web/css/chosen.min.css')}"/>
-
-    <!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
     <apex:includeScript value="https://code.jquery.com/jquery-2.2.4.min.js" />
-
+    <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, "web/js/jquery.min.js")}"><\/script>')</script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
     <script>
             // prepend meta/link tags before VF head output
-            $('head').prepend('<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta http-equiv="content-type" content="text/html; charset=utf-8" /><title>Wish Referral Form | Make-A-Wish \u00AE</title><meta name="HandheldFriendly" content="True" /><meta name="MobileOptimized" content="480" /><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" /><meta http-equiv="cleartype" content="on" />');
-            $('head').append('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous"><link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/><link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.prospective_assets, "web/css/core.css")}" media="all">');
+            $('head').prepend('<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta http-equiv="content-type" content="text/html; charset=utf-8" /><title>Wish Referral Form | Make-A-Wish \u00AE</title><meta name="HandheldFriendly" content="True" /><meta name="MobileOptimized" content="480" /><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" /><meta http-equiv="cleartype" content="on" id="cleartype" />');
+            $('head').append('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous"><link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/><link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.prospective_assets, "web/css/core.css")}" media="all" id="corecss">');
     </script>
-
-    <!-- STAGING URL -->
-    <apex:includeScript value="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"/>
+    <!-- iframe resize -->
+    <script type="text/javascript">
+    function iframe_resize(){
+      var body = document.body,
+      html = document.documentElement,
+      height = Math.max(body.scrollHeight, body.offsetHeight,
+        html.clientHeight, html.scrollHeight, html.offsetHeight);
+        if (parent.postMessage) {
+          parent.postMessage(height, "*");
+        }
+      body.scrollTop = document.documentElement.scrollTop = 0;
+    }
+    </script>
     <style>
-        .dateOnlyInput input{width:100%!important}#datePicker,.dateFormat{display:none!important}.date-input{background-color:initial}.ui-autocomplete{overflow-y:scroll;max-height:270px}.displayNone,.medicalProvider,.other,.repeatMedProf,.shownOnSiblingsYes,.sibInfo{display:none}.shownOnYes{position:relative}.shownOnYes.fam-aware-overlay::after{content:"";position:absolute;top:0;left:0;background:rgba(255,255,255,.8);min-width:100%;min-height:100%;z-index:2}.shownOnYes.fam-aware-overlay:hover::after{content:"Please answer the required fields above to proceed";position:absolute;top:0;left:0;color:#666;line-height:5rem;text-align:center}.repeatMedProf label{padding-right:10px}.displayBlock{display:block}.ui-autocomplete-loading{background:url("{!URLFOR($Resource.WishReferralStyle, 'WishReferralStyle/img/loader-circle-blue.gif')}") right .5rem center no-repeat!important;background-size:2rem 2rem!important}.placeHolder{font-style:italic}.vfHelpText a{position:relative}.vfHelpText a span{display:none}.vfHelpText a:hover span{display:block;position:absolute;right:-15em;width:15em;z-index:100;border:1px solid;background-color:#FEFDB9;color:#000}.pop-wrap{position:fixed;top:20%;left:50%;z-index:9999;width:90%;max-width:35rem}.custPopup{font-family:arial,helvetica,sans-serif;position:relative;background:#fff;border:1px solid #006bb6;border-radius:.25rem;top:-20%;left:-50%;padding:1rem;width:100%}.pop-wrap-main-message{top:1%}.custPopup-main-message{top:0;padding:0 1rem}.popupBackground{position:fixed;background:rgba(0,0,0,.4);width:100%;height:100%;top:0;left:0;z-index:9998}.labelCol{width:180px}.field-word-seperator,.r2c{position:relative;width:100%}.modal-content{border:1px solid #006bb6;border-radius:0}.r2c{padding:1rem}.r2c input{margin-right:1rem}.r2c label{font-family:FuturaStd-Book,"Century Gothic",Arial,sans-serif;float:left;background:#fff;background:-moz-linear-gradient(top,rgba(255,255,255,1) 0,rgba(243,243,243,1) 100%);background:-webkit-linear-gradient(top,rgba(255,255,255,1) 0,rgba(243,243,243,1) 100%);background:linear-gradient(to bottom,rgba(255,255,255,1) 0,rgba(243,243,243,1) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f3f3', GradientType=0 );border:.1rem solid #ccc;border-radius:.2rem;box-shadow:.05rem .05rem .1rem #ccc;height:2rem;padding:.5rem;margin-bottom:.2rem;font-size:.7rem;text-transform:capitalize}.ui-widget-content li{padding-left:.5rem}input[id*=diagnosisTextId][disabled=""],input[id*=searchDiagnosisId][disabled=""]{background:#eee;color:#bbb;cursor:not-allowed}.field-word-seperator{font-family:arial;font-size:.7rem;display:block;border-top:1px dotted #747678;;color:#747678;}.field-word-seperator::after{content:"OR";background:#fff;padding:0 1rem;position:absolute;left:43%;top:-.6rem;text-align:center;z-index:1}.form-group-seperator{margin-bottom:2rem}.age-text{position:absolute;bottom:.6rem;right:2rem;.modal-dialog{position:fixed;top:5%;left:-50%;right:-50%}}
+        .dateOnlyInput input{width:100%!important}#datePicker,.dateFormat{display:none!important}.date-input{background-color:initial}.ui-autocomplete{overflow-y:scroll;max-height:270px}.displayNone,.medicalProvider,.other,.repeatMedProf,.shownOnSiblingsYes,.sibInfo{display:none}.shownOnYes{position:relative}.shownOnYes.fam-aware-overlay::after{content:"";position:absolute;top:0;left:0;background:rgba(255,255,255,.8);min-width:100%;min-height:100%;z-index:2}.shownOnYes.fam-aware-overlay:hover::after{content:"Please answer the required fields above to proceed";position:absolute;top:0;left:0;color:#666;line-height:5rem;text-align:center}.repeatMedProf label{padding-right:10px}.displayBlock{display:block}.ui-autocomplete-loading{background:url("{!URLFOR($Resource.WishReferralStyle, 'WishReferralStyle/img/loader-circle-blue.gif')}") right .5rem center no-repeat!important;background-size:2rem 2rem!important}.placeHolder{font-style:italic}.vfHelpText a{position:relative}.vfHelpText a span{display:none}.vfHelpText a:hover span{display:block;position:absolute;right:-15em;width:15em;z-index:100;border:1px solid;background-color:#FEFDB9;color:#000}.pop-wrap{position:fixed;top:20%;left:50%;z-index:9999;width:90%;max-width:35rem}.custPopup{font-family:arial,helvetica,sans-serif;position:relative;background:#fff;border:1px solid #006bb6;border-radius:.25rem;top:-20%;left:-50%;padding:1rem;width:100%}.pop-wrap-main-message{top:1%}.custPopup-main-message{top:0;padding:0 1rem}.popupBackground{position:fixed;background:rgba(0,0,0,.4);width:100%;height:100%;top:0;left:0;z-index:9998}.labelCol{width:180px}.field-word-seperator,.r2c{position:relative;width:100%}.modal-content{border:1px solid #006bb6;border-radius:0}.r2c{padding:1rem}.r2c input{margin-right:1rem}.r2c label{font-family:FuturaStd-Book,"Century Gothic",Arial,sans-serif;float:left;background:#fff;background:-moz-linear-gradient(top,rgba(255,255,255,1) 0,rgba(243,243,243,1) 100%);background:-webkit-linear-gradient(top,rgba(255,255,255,1) 0,rgba(243,243,243,1) 100%);background:linear-gradient(to bottom,rgba(255,255,255,1) 0,rgba(243,243,243,1) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f3f3', GradientType=0 );border:.1rem solid #ccc;border-radius:.2rem;box-shadow:.05rem .05rem .1rem #ccc;height:2rem;padding:.5rem;margin-bottom:.2rem;font-size:.7rem;text-transform:capitalize}.ui-widget-content li{padding-left:.5rem}input[id*=diagnosisTextId][disabled=""],input[id*=searchDiagnosisId][disabled=""]{background:#eee;color:#bbb;cursor:not-allowed}.field-word-seperator{font-family:arial;font-size:.7rem;display:block;border-top:1px dotted #747678;;color:#747678;}.field-word-seperator::after{content:"OR";background:#fff;padding:0 1rem;position:absolute;left:43%;top:-.6rem;text-align:center;z-index:1}.form-group-seperator{margin-bottom:2rem}.age-text{position:absolute;bottom:.6rem;right:2rem}.modal-dialog{position:fixed;top:5%;left:-50%;right:-50%}.table tr:nth-child(1) td{border-top:none}
     </style>
     <body>
         <apex:form id="frm" styleClass="portal inquiry">
@@ -229,9 +238,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group row sibInfo">
-                                        <label class="col-md-12">Sibling Information</label>
+                                        <apex:outputPanel id="table">
+                                        <apex:outputPanel rendered="{!currLead.of_Siblings__c != '0' && currLead.of_Siblings__c != '' && currLead.of_Siblings__c != 'Unknown'}">
+                                          <label class="col-md-12">Sibling Information</label>
+                                        </apex:outputPanel>
+
+
                                         <div class="col-md-12 sib-tablewrap">
-                                            <apex:dataTable value="{!SiblingList}" var="currsibling" id="table" styleClass="table table-maw table-hover">
+                                            <apex:dataTable value="{!SiblingList}" var="currsibling"  styleClass="table table-maw table-hover">
                                                 <apex:column >
                                                     <apex:inputText value="{!currsibling.fName}" styleClass="form-control" html-placeholder="First Name" id="psibfirstname" />
                                                 </apex:column>
@@ -243,6 +257,8 @@
                                                 </apex:column>
                                             </apex:dataTable>
                                         </div>
+                                       </apex:outputPanel>
+
                                     </div>
                                 </apex:actionRegion>
                             </apex:outputPanel>
@@ -404,7 +420,6 @@
             </div>
         </div>
         <!-- / modal end -->
-
         <!-- //DATA COLLECTOR -->
         <script language="javascript" type="text/livescript">
           function getQueryVariable(variable){
@@ -418,43 +433,27 @@
           }
           var _mawData = [{
               "form":{"fID":"Wish Referral"},
-              "pageCat":{"pageId":"Wish Referral Form"},
+              "pageCat":{"hierarchy":"Refer a Child:Referral Inquiry Form", "pageId":"Wish Referral Form"},
+              "pageCat":{"hierarchy":"Refer a Child:Referral Inquiry Form:Thank You","pageId":"Thank You"},
               "siteId": getQueryVariable('chid'),
               "ThirdPartyId":"SalesForce Referral"
           }];
           for (var i=0;i<_mawData.length;i++) {
             var obj = _mawData[i];
-            $('<meta name="ref-chid" content=" '+ obj.siteId +' "><meta name="ref-mawsite" content="salesforce">').insertAfter('style'); // places meta tags directly above wish satellite scripts
+            $('<meta name="ref-chid" content=" '+ obj.siteId +' "><meta name="ref-mawsite" content="salesforce">').insertAfter('#cleartype');
           }
         </script>
+        <!-- STAGING URL -->
+        <script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script>
         <script>_satellite.pageBottom();</script>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script> -->
-        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js" integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE=" crossorigin="anonymous"></script>
         <!-- fallbacks -->
-        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, "web/js/jquery.min.js")}"><\/script>')</script>
         <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, "web/js/bootstrap.min.js")}"><\/script>')</script>
         <!-- bootstrap -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
         <!-- bootstrap css fallback (appends to head) -->
         <script>$.each(document.styleSheets, function(i,sheet){ if(sheet.href=='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css') {var rules = sheet.rules ? sheet.rules : sheet.cssRules; if (rules.length == 0) { $('<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css" />').appendTo('head');} } });</script>
-        <!-- iframe resize -->
-        <script type="text/javascript">
-        function iframe_resize(){
-          var body = document.body,
-          html = document.documentElement,
-          height = Math.max(body.scrollHeight, body.offsetHeight,
-            html.clientHeight, html.scrollHeight, html.offsetHeight);
-            if (parent.postMessage) {
-              parent.postMessage(height, "*");
-            }
-          body.scrollTop = document.documentElement.scrollTop = 0;
-        }
-        $('.submitBtn').click(function(){
-            $('.searchDiagnosisId').val($('.pdiagnosis').val());
-            $('.diagnosisFilter').val($('.diagnosisText').val());
-        });
-        </script>
+
         <!-- chosen select -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
         <!-- masked input -->

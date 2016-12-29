@@ -342,6 +342,29 @@
         <label>All</label>
     </listViews>
     <listViews>
+        <fullName>Arizona_Non_Wish_Events</fullName>
+        <columns>NAME</columns>
+        <columns>Chapter__c</columns>
+        <columns>Event_Name__c</columns>
+        <columns>Priority__c</columns>
+        <columns>Event_Date__c</columns>
+        <columns>End_Time__c</columns>
+        <columns>OWNER.FIRST_NAME</columns>
+        <columns>CREATEDBY_USER</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Chapter__c</field>
+            <operation>contains</operation>
+            <value>Arizona</value>
+        </filters>
+        <label>Arizona - Non-Wish &amp; Events</label>
+        <sharedTo>
+            <group>Arizona</group>
+            <group>National_Office</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
         <fullName>Greater_Bay_Area_Non_Wish_Events</fullName>
         <columns>NAME</columns>
         <columns>Chapter__c</columns>

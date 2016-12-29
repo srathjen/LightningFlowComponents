@@ -316,11 +316,6 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Volunteer_Notes__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
             <field>Event_Date__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
@@ -342,6 +337,11 @@
         </displayedFields>
         <displayedFields>
             <field>NWE_Zip__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>NWE_Volunteer_Opportunity_Notes__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -1287,6 +1287,18 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Wish_Child__c</fullName>
+        <externalId>false</externalId>
+        <formula>Wish__r.Contact.Hidden_First_Name__c &amp; &quot; &quot; &amp; Wish__r.Contact.Hidden_Last_Name__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Wish Child</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Wish__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>It holds the  related Case</description>
@@ -1603,6 +1615,23 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
         </sharedTo>
     </listViews>
     <listViews>
+        <fullName>Migration</fullName>
+        <columns>NAME</columns>
+        <columns>Chapter_Name__c</columns>
+        <columns>From_Mulesoft__c</columns>
+        <columns>Volunteer_Name__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Migrated_Record__c</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATEDBY_USER.ALIAS</field>
+            <operation>equals</operation>
+            <value>iuser</value>
+        </filters>
+        <label>Migration</label>
+    </listViews>
+    <listViews>
         <fullName>Minnesota_Volunteer_Opportunity</fullName>
         <filterScope>Queue</filterScope>
         <label>Minnesota</label>
@@ -1682,6 +1711,21 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Non_Wish_Event</fullName>
+        <columns>NAME</columns>
+        <columns>Date_Time__c</columns>
+        <columns>NWE_Date__c</columns>
+        <columns>NWE_End_Time__c</columns>
+        <columns>NWE_Start_Time__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Volunteer_Opportunity__c.Non_Wish_Event</value>
+        </filters>
+        <label>Non Wish &amp; Event</label>
     </listViews>
     <listViews>
         <fullName>North_Dakota_Volunteer_Opportunity</fullName>
@@ -1871,6 +1915,17 @@ IF(INCLUDES( Non_Wish_Event__r.Day_of_The_Week__c   , &quot;Saturday&quot;), &qu
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Wish</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Volunteer_Opportunity__c.Wish</value>
+        </filters>
+        <label>Wish</label>
     </listViews>
     <listViews>
         <fullName>Wyoming_Volunteer_Opportunity</fullName>

@@ -73,6 +73,30 @@ public class UserTrigger_AT_Test {
            
      }
      
-     
-
-   }
+    public testmethod static void Test_AddInternalUserToChatterGroup() {
+        system.RunAs( new user(ID = UserInfo.getUserID())){
+            CollaborationGroup newGroup = OrientationandTrainingUtil.createCollaborationGroup('Alabama');
+            UserRole newUserRole = new UserRole();
+            newUserRole.Name  = 'Alabama - Chapter';
+            Insert newUserRole;
+            User newUser = OrientationandTrainingUtil.createUserWithRole(newUserRole.Id);
+        }
+    }
+    
+    public testmethod static void Test_RemoveInternalUserToChatterGroup() {
+        system.RunAs( new user(ID = UserInfo.getUserID())){
+            CollaborationGroup newGroup = OrientationandTrainingUtil.createCollaborationGroup('Alabama');
+            CollaborationGroup newGroup1 = OrientationandTrainingUtil.createCollaborationGroup('Arizona');
+            UserRole newUserRole = new UserRole();
+            newUserRole.Name  = 'Alabama - Chapter';
+            Insert newUserRole;
+            UserRole newUserRole1 = new UserRole();
+            newUserRole1.Name  = 'Arizona - Chapter';
+            Insert newUserRole1;
+            User newUser = OrientationandTrainingUtil.createUserWithRole(newUserRole.Id);
+            newUser.UserRoleId = newUserRole1.Id;
+            update newUser;
+        }
+    }
+    
+}

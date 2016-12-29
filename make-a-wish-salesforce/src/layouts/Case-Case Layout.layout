@@ -5,7 +5,7 @@
     <excludeButtons>Submit</excludeButtons>
     <feedLayout>
         <autocollapsePublisher>false</autocollapsePublisher>
-        <compactFeed>true</compactFeed>
+        <compactFeed>false</compactFeed>
         <feedFilterPosition>LeftFixed</feedFilterPosition>
         <feedFilters>
             <feedFilterType>AllUpdates</feedFilterType>
@@ -28,7 +28,7 @@
         </feedFilters>
         <fullWidthFeed>false</fullWidthFeed>
         <hideSidebar>true</hideSidebar>
-        <highlightExternalFeedItems>true</highlightExternalFeedItems>
+        <highlightExternalFeedItems>false</highlightExternalFeedItems>
         <rightComponents>
             <componentType>HelpAndToolLinks</componentType>
         </rightComponents>
@@ -47,7 +47,7 @@
         <rightComponents>
             <componentType>CustomButtons</componentType>
         </rightComponents>
-        <useInlineFiltersInConsole>true</useInlineFiltersInConsole>
+        <useInlineFiltersInConsole>false</useInlineFiltersInConsole>
     </feedLayout>
     <layoutSections>
         <customLabel>false</customLabel>
@@ -411,6 +411,9 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Confirmation__c</fields>
+        <fields>Reservation_Name__c</fields>
+        <fields>RECORDTYPE</fields>
         <relatedList>Travel_Data__c.Parent_Wish__c</relatedList>
     </relatedLists>
     <relatedObjects>ContactId</relatedObjects>

@@ -138,6 +138,11 @@
         <visibleLines>3</visibleLines>
     </fields>
     <label>Diagnosis Verification</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
     <nameField>
         <displayFormat>DV-{000}</displayFormat>
         <label>Diagnosis Verification Name</label>

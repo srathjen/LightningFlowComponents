@@ -214,10 +214,6 @@
         <name>Heart_Failure__c</name>
     </fields>
     <fields>
-        <label><!-- Hidden Primary Diagnosis --></label>
-        <name>Hidden_Primary_Diagnosis__c</name>
-    </fields>
-    <fields>
         <label><!-- Hidden Question1 --></label>
         <name>Hidden_Question1__c</name>
     </fields>
@@ -228,10 +224,6 @@
     <fields>
         <label><!-- Hospital/Treatment Facility --></label>
         <name>Hospital_Treatment_Facility__c</name>
-    </fields>
-    <fields>
-        <label><!-- ICD-10 Code --></label>
-        <name>ICD_10_Code__c</name>
     </fields>
     <fields>
         <label><!-- I am Recognized To Practice As a --></label>
@@ -654,11 +646,11 @@
         <name>Override_Dupe_Check__c</name>
     </fields>
     <fields>
-        <label><!-- PD Condition Description --></label>
+        <label><!-- Primary Diagnosis --></label>
         <name>PD_Condition_Description__c</name>
     </fields>
     <fields>
-        <label><!-- PD ICD Code --></label>
+        <label><!-- Primary ICD-10 Code --></label>
         <name>PD_ICD_Code__c</name>
     </fields>
     <fields>
@@ -696,14 +688,6 @@
     <fields>
         <label><!-- Preferred Name --></label>
         <name>Preferred_Name__c</name>
-    </fields>
-    <fields>
-        <label><!-- PrimaryDiagnosis Condition Description --></label>
-        <name>PrimaryDiagnosis_Condition_Description__c</name>
-    </fields>
-    <fields>
-        <label><!-- Primary Diagnosis --></label>
-        <name>Primary_Diagnosis__c</name>
     </fields>
     <fields>
         <label><!-- Provider Signature --></label>
@@ -820,35 +804,35 @@
         <name>Risk_of_complications_premature_death__c</name>
     </fields>
     <fields>
-        <label><!-- SD1 Condition Description --></label>
+        <label><!-- Secondary Diagnosis 1 Cond Description --></label>
         <name>SD1_Condition_Description__c</name>
     </fields>
     <fields>
-        <label><!-- SD1 ICD Code --></label>
+        <label><!-- Secondary Diagnosis 1 ICD-10 Code --></label>
         <name>SD1_ICD_Code__c</name>
     </fields>
     <fields>
-        <label><!-- SD2 Condition Description --></label>
+        <label><!-- Secondary Diagnosis 2 Cond Description --></label>
         <name>SD2_Condition_Description__c</name>
     </fields>
     <fields>
-        <label><!-- SD2 ICD Code --></label>
+        <label><!-- Secondary Diagnosis 2 ICD-10 Code --></label>
         <name>SD2_ICD_Code__c</name>
     </fields>
     <fields>
-        <label><!-- SD3 Condition Description --></label>
+        <label><!-- Secondary Diagnosis 3 Cond Description --></label>
         <name>SD3_Condition_Description__c</name>
     </fields>
     <fields>
-        <label><!-- SD3 ICD Code --></label>
+        <label><!-- Secondary Diagnosis 3 ICD-10 Code --></label>
         <name>SD3_ICD_Code__c</name>
     </fields>
     <fields>
-        <label><!-- SD4 Condition Description --></label>
+        <label><!-- Secondary Diagnosis 4 Cond Description --></label>
         <name>SD4_Condition_Description__c</name>
     </fields>
     <fields>
-        <label><!-- SD4 ICD Code --></label>
+        <label><!-- Secondary Diagnosis 4 ICD-10 Code --></label>
         <name>SD4_ICD_Code__c</name>
     </fields>
     <fields>
@@ -1033,6 +1017,11 @@
     <fields>
         <label><!-- Treating Medical Professional Phone --></label>
         <name>Treating_Medical_Professional_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Treatment Subspecialty --></label>
+        <name>Treatment_Subspecialty__c</name>
+        <relationshipLabel><!-- Leads --></relationshipLabel>
     </fields>
     <fields>
         <help><!-- Wish Child  has a conditions for which curative treatment may be feasible but can fail (e.g., cancer, irreversible organ failure, treatment failure does not include non-compliance) --></help>
@@ -1273,6 +1262,10 @@
             <masterLabel>9</masterLabel>
             <translation><!-- 9 --></translation>
         </picklistValues>
+        <picklistValues>
+            <masterLabel>Unknown</masterLabel>
+            <translation><!-- Unknown --></translation>
+        </picklistValues>
     </fields>
     <layouts>
         <layout>Lead Layout</layout>
@@ -1303,10 +1296,6 @@
         <sections>
             <label><!-- Medical Information --></label>
             <section>Medical Information</section>
-        </sections>
-        <sections>
-            <label><!-- Other Notes/Comments About Wish Child --></label>
-            <section>Other Notes/Comments About Wish Child</section>
         </sections>
         <sections>
             <label><!-- Qualifying Medical Professional --></label>

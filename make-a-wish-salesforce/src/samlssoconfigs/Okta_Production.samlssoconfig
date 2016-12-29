@@ -6,10 +6,10 @@
     <loginUrl>https://makeawish.okta.com/app/salesforce/exk865hdrw54w4InN0x7/sso/saml</loginUrl>
     <logoutUrl>https://makeawish.okta.com</logoutUrl>
     <name>Okta Production</name>
-    <oauthTokenEndpoint>https://test.salesforce.com/services/oauth2/token?so=00D5B000000D8cR</oauthTokenEndpoint>
+    <oauthTokenEndpoint>https://test.salesforce.com/services/oauth2/token?so=00DQ000000EeKyV</oauthTokenEndpoint>
     <redirectBinding>false</redirectBinding>
     <requestSignatureMethod>0</requestSignatureMethod>
-    <salesforceLoginUrl>https://test.salesforce.com?so=00D5B000000D8cR</salesforceLoginUrl>
+    <salesforceLoginUrl>https://test.salesforce.com?so=00DQ000000EeKyV</salesforceLoginUrl>
     <samlEntityId>https://saml.salesforce.com</samlEntityId>
     <samlVersion>SAML2_0</samlVersion>
     <userProvisioning>false</userProvisioning>

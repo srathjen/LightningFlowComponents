@@ -379,6 +379,10 @@
         <name>Waiting_Since__c</name>
     </fields>
     <fields>
+        <label><!-- Wish Child --></label>
+        <name>Wish_Child__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish --></label>
         <name>Wish__c</name>
         <relationshipLabel><!-- Volunteer Opportunities --></relationshipLabel>

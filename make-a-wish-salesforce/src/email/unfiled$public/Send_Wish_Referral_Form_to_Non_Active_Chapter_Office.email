@@ -1,184 +1,122 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" align="center" style="margin-bottom:0in;margin-bottom:.0001pt;
-text-align:center;line-height:normal"><span style="font-size: 18pt; font-family: Arial, sans-serif;">Make-A-Wish
+<![CDATA[<p align="center" style="margin: 0px; text-align: center; line-height: normal;"><span style='margin: 0px; color: black; font-family: "Arial",sans-serif; font-size: 18pt;'>Make-A-Wish
 Foundation<sup>®</sup>&nbsp;<br>
 Online Wish Referral (Advice)&nbsp;<br>
-From wish.org</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">&nbsp;<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">The following
+From wish.org</span></p>
+
+<p style="margin: 0px; line-height: normal;"><span style='margin: 0px; color: black; font-family: "Arial",sans-serif; font-size: 12pt;'>&nbsp;</span></p>
+
+<p style="margin: 0px; line-height: normal;"><span style='margin: 0px; color: black; font-family: "Arial",sans-serif; font-size: 12pt;'>The following
 information was submitted via md.wish.org, the Make-A-Wish Foundation's online
 referral site.<br>
 <b>This referral was sent to&nbsp;</b>{!Lead.Office_Referral_Email__c}<br>
-<b>at&nbsp;{!Lead.ChapterName__c}</b><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">&nbsp;<o:p></o:p></span></p><table class="MsoNormalTable" border="0" cellpadding="0" width="720" style="width:7.5in;
- mso-cellspacing:1.5pt;mso-yfti-tbllook:1184;mso-padding-alt:0in 0in 0in 0in">
- <tbody><tr>
-  <td nowrap="" colspan="2" style="padding:.75pt .75pt .75pt .75pt">
-  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal"><b><span style="font-size: 12pt; font-family: Arial, sans-serif;">Referrer Information<o:p></o:p></span></b></p>
-  <table class="MsoTableGrid" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
-   mso-yfti-tbllook:1184;mso-padding-alt:0in 5.4pt 0in 5.4pt">
+<b>at&nbsp;{!Lead.ChapterName__c}</b></span></p>
+
+<p style="margin: 0px; line-height: normal;"><span style='margin: 0px; color: black; font-family: "Arial",sans-serif; font-size: 12pt;'>&nbsp;</span></p>
+
+<table width="720" style="margin: 0px; width: 7.5in;" border="0" cellpadding="0">
+ <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes">
+  <td nowrap="" style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); background-color: transparent;" colspan="2">
+  <p style="margin: 0px; line-height: normal;"><b><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Referrer Information</span></b></p>
+  <table style="margin: 0px; border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0">
    <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;height:13.35pt">
-    <td width="177" valign="top" style="width:132.45pt;border:solid windowtext 1.0pt;
-    mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;
-    height:13.35pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">Date Submitted:<o:p></o:p></span></p>
+    <td width="177" valign="top" style="margin: 0px; padding: 0in 5.4pt; border: 1px solid rgb(0, 0, 0); border-image: none; width: 132.45pt; height: 13.35pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Date Submitted:</span></p>
     </td>
-    <td width="272" valign="top" style="width:204.2pt;border:solid windowtext 1.0pt;
-    border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-    solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;height:13.35pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;, serif;">{!Lead.CreatedDate}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p>
+    <td width="492" valign="top" style="border-width: 1px 1px 1px 0px; border-style: solid solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 368.75pt; height: 13.35pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>{!Lead.CreatedDate}</span></p>
     </td>
    </tr>
    <tr style="mso-yfti-irow:1;height:14.1pt">
-    <td width="177" valign="top" style="width:132.45pt;border:solid windowtext 1.0pt;
-    border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:
-    solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;height:14.1pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">Name:<o:p></o:p></span></p>
+    <td width="177" valign="top" style="border-width: 0px 1px 1px; border-style: none solid solid; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 132.45pt; height: 14.1pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Name:</span></p>
     </td>
-    <td width="272" valign="top" style="width:204.2pt;border-top:none;border-left:
-    none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-    mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-    mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;
-    height:14.1pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;, serif;">{!Lead.Referrer_FirstName__c}&nbsp;{!Lead.Referrer_Last_Name__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p>
+    <td width="492" valign="top" style="border-width: 0px 1px 1px 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; width: 368.75pt; height: 14.1pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>{!Lead.Referrer_FirstName__c}&nbsp;{!Lead.Referrer_Last_Name__c}</span></p>
     </td>
    </tr>
    <tr style="mso-yfti-irow:2;height:13.35pt">
-    <td width="177" valign="top" style="width:132.45pt;border:solid windowtext 1.0pt;
-    border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:
-    solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;height:13.35pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">Phone:<o:p></o:p></span></p>
+    <td width="177" valign="top" style="border-width: 0px 1px 1px; border-style: none solid solid; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 132.45pt; height: 13.35pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Phone:</span></p>
     </td>
-    <td width="272" valign="top" style="width:204.2pt;border-top:none;border-left:
-    none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-    mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-    mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;
-    height:13.35pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;, serif;">{!Lead.Referrer_Phone__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p>
+    <td width="492" valign="top" style="border-width: 0px 1px 1px 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; width: 368.75pt; height: 13.35pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>{!Lead.Referrer_Phone__c}</span></p>
     </td>
    </tr>
    <tr style="mso-yfti-irow:3;height:14.1pt">
-    <td width="177" valign="top" style="width:132.45pt;border:solid windowtext 1.0pt;
-    border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:
-    solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;height:14.1pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">Email:<o:p></o:p></span></p>
+    <td width="177" valign="top" style="border-width: 0px 1px 1px; border-style: none solid solid; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 132.45pt; height: 14.1pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Email:</span></p>
     </td>
-    <td width="272" valign="top" style="width:204.2pt;border-top:none;border-left:
-    none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-    mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-    mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;
-    height:14.1pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;, serif;">{!Lead.Referrer_Email__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p>
+    <td width="492" valign="top" style="border-width: 0px 1px 1px 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; width: 368.75pt; height: 14.1pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>{!Lead.Referrer_Email__c}</span></p>
     </td>
    </tr>
    <tr style="mso-yfti-irow:4;height:13.35pt">
-    <td width="177" valign="top" style="width:132.45pt;border:solid windowtext 1.0pt;
-    border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:
-    solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;height:13.35pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">Relationship to
-    child:<o:p></o:p></span></p>
+    <td width="177" valign="top" style="border-width: 0px 1px 1px; border-style: none solid solid; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 132.45pt; height: 13.35pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Relationship to child:</span></p>
     </td>
-    <td width="272" valign="top" style="width:204.2pt;border-top:none;border-left:
-    none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-    mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-    mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;
-    height:13.35pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;, serif;">{!Lead.Relationship_to_child__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p>
+    <td width="492" valign="top" style="border-width: 0px 1px 1px 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; width: 368.75pt; height: 13.35pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>{!Lead.Relationship_to_child__c}</span></p>
     </td>
    </tr>
    <tr style="mso-yfti-irow:5;mso-yfti-lastrow:yes;height:13.35pt">
-    <td width="177" valign="top" style="width:132.45pt;border:solid windowtext 1.0pt;
-    border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:
-    solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;height:13.35pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">Form:<o:p></o:p></span></p>
+    <td width="177" valign="top" style="border-width: 0px 1px 1px; border-style: none solid solid; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 132.45pt; height: 13.35pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Form:</span></p>
     </td>
-    <td width="272" valign="top" style="width:204.2pt;border-top:none;border-left:
-    none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-    mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-    mso-border-alt:solid windowtext .5pt;padding:0in 5.4pt 0in 5.4pt;
-    height:13.35pt">
-    <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;
-    line-height:normal"><span style="font-size: 12pt; font-family: &quot;Times New Roman&quot;, serif;"><a href="https://c.cs52.visual.force.com/apex/WishReferralFormOut_VF?LeadId=%7b!Lead.Id%7d"><span style="font-family:&quot;Arial&quot;,sans-serif;color:blue">Wish Referral Form</span></a></span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p>
+    <td width="492" valign="top" style="border-width: 0px 1px 1px 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; width: 368.75pt; height: 13.35pt; background-color: transparent;">
+    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'><a href="http://wish.force.com/WishReferralFormOut_VF?LeadId={!Lead.Id}"><span style="margin: 0px; color: blue;">Wish Referral Form</span></a></span></p>
     </td>
    </tr>
   </tbody></table>
   </td>
  </tr>
- <tr>
-  <td nowrap="" style="padding:.75pt .75pt .75pt .75pt"></td>
-  <td nowrap="" style="padding:.75pt .75pt .75pt .75pt"></td>
+ <tr style="mso-yfti-irow:1">
+  <td nowrap="" style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); background-color: transparent;"></td>
+  <td nowrap="" style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); background-color: transparent;"></td>
  </tr>
- <tr>
-  <td colspan="2" style="padding:.75pt .75pt .75pt .75pt">
-  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal"><span style="font-family: Arial, sans-serif; font-size: 12pt;">Yes, I have discussed
-  a referral to the Make-A-Wish Foundation with this family/child and have
-  received their permission to share the following information.</span></p>
+ <tr style="mso-yfti-irow:2">
+  <td style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); background-color: transparent;" colspan="2">
+  <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Yes, I have discussed a referral
+  to the Make-A-Wish Foundation with this family/child and have received their
+  permission to share the following information.</span></p>
   </td>
  </tr>
- <tr>
-  <td width="19%" nowrap="" style="width:19.0%;padding:.75pt .75pt .75pt .75pt">
-  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">&nbsp;<o:p></o:p></span></p>
+ <tr style="mso-yfti-irow:3">
+  <td width="19%" nowrap="" style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); width: 19%; background-color: transparent;">
+  <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>&nbsp;</span></p>
   </td>
-  <td width="81%" nowrap="" style="width:81.0%;padding:.75pt .75pt .75pt .75pt">
-  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">&nbsp;<o:p></o:p></span></p>
+  <td width="81%" nowrap="" style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); width: 81%; background-color: transparent;">
+  <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>&nbsp;</span></p>
   </td>
  </tr>
- <tr>
-  <td nowrap="" colspan="2" style="padding:.75pt .75pt .75pt .75pt">
-  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal"><b><span style="font-size: 12pt; font-family: Arial, sans-serif;">Child Information</span></b><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p>
+ <tr style="mso-yfti-irow:4">
+  <td nowrap="" style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); background-color: transparent;" colspan="2">
+  <p style="margin: 0px; line-height: normal;"><b><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Child Information</span></b></p>
   </td>
  </tr>
- <tr>
-  <td colspan="2" style="padding:.75pt .75pt .75pt .75pt">
-  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-  normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">Click on the Wish
-  Referral Form to view the referral details.<br>
+ <tr style="mso-yfti-irow:5;mso-yfti-lastrow:yes">
+  <td style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); background-color: transparent;" colspan="2">
+  <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Click on the Wish Referral Form to
+  view the referral details.<br>
   The Form is encrypted and requires a password to open. Please contact Mission
-  Resources (<a href="mailto:missionresources@wish.org"><span style="color:
-  blue">missionresources@wish.org</span></a>) at the National Office, if you
-  have any questions.&nbsp;<o:p></o:p></span></p>
+  Resources (<a><span style="margin: 0px; color: blue;">missionresources@wish.org</span></a>) at the National Office, if you
+  have any questions.&nbsp;</span></p>
   </td>
  </tr>
-</tbody></table><div class="MsoNormal" align="center" style="margin-bottom:0in;margin-bottom:.0001pt;
-text-align:center;line-height:normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">
+</tbody></table>
 
-<hr size="1" width="100%" align="center">
+<div align="center" style="margin: 0px; text-align: center; line-height: normal;"><span style='margin: 0px; color: black; font-family: "Arial",sans-serif; font-size: 12pt;'>
 
-</span></div><p class="MsoNormal" align="center" style="font-size: 12pt; text-align: center;">
+<hr width="100%" size="1" align="center">
 
+</span></div>
 
-
-
-
-
-
-
-
-
-
-</p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
-normal"><span style="font-size: 12pt; font-family: Arial, sans-serif;">The information
-contained herein is being provided to the Make-A-Wish Foundation for the sole
-purpose of determining whether the identified child is medically eligible for a
-wish. Such information is strictly confidential and may not be shared with
-anyone other than authorized Make-A-Wish representatives.</span><o:p></o:p></p>]]></td>
+<span style='margin: 0px; color: black; font-family: "Arial",sans-serif; font-size: 12pt;'>The information contained herein is being
+provided to the Make-A-Wish Foundation for the sole purpose of determining
+whether the identified child is medically eligible for a wish. Such information
+is strictly confidential and may not be shared with anyone other than
+authorized Make-A-Wish representatives.</span>]]></td>
 </tr>
 </table>

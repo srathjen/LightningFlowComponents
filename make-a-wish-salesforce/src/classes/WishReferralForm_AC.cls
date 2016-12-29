@@ -5,7 +5,7 @@ Created Date : 04/08/2016
 Description : It will capture the lead from Referral form.
 ***********************************************************/
 
-Public Class WishReferralForm_AC
+global Class WishReferralForm_AC
 {
    Public Lead currLead{get;set;}
    public string diagnosisFilter{get;set;}
@@ -39,9 +39,13 @@ Public Class WishReferralForm_AC
       if(currLead.Relationship_to_child__c != Null)
           currLead.Relationship_to_child__c = currLead.Relationship_to_child__c.trim();
        currLead.Country = 'United States';
-       currLead.ICD_10_Code__c = diagnosisFilter;
-       currLead.Primary_Diagnosis__c = selectedDiagnosis;
-       currLead.Company = 'MST';
+      /* currLead.ICD_10_Code__c = diagnosisFilter;
+       currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
+      
+       currLead.PD_ICD_Code__c = diagnosisFilter;
+       currLead.PD_Condition_Description__c = selectedDiagnosis;
+       
+       currLead.Company = 'Make A Wish America';
        currLead.LastName = lastName;
        String zipCode='';
        String label = '';
@@ -49,7 +53,7 @@ Public Class WishReferralForm_AC
        CurrLead.State = currState;
      
        
-       
+       System.debug('diagnosisFilter++++++++++++++++++++++ ' + diagnosisFilter); 
        System.debug('selectedDiagnosis++++++++++++++++++++++ ' + selectedDiagnosis);
        
        if(currLead.Has_this_child_ever_received_prior_wish__c != Null)
@@ -78,8 +82,8 @@ Public Class WishReferralForm_AC
     
  
      
-      if(currLead.Of_Siblings__c != Null)
-       {
+     /* if(currLead.Of_Siblings__c != Null && currLead.Of_Siblings__c != 'Unknown')
+       {    if(currLead.Relationship_To_Child__c == 'Parent/Guardian' || currLead.Relationship_To_Child__c == 'Self'){
            if(currList.size() == integer.valueOf(currLead.Of_Siblings__c))
            {
                for(integer i=0;i<integer.valueOf(currLead.Of_Siblings__c);i++)
@@ -95,8 +99,10 @@ Public Class WishReferralForm_AC
                }
            
            }
-       }
-       System.debug('flag+++++++++++++++++++++++++++++' +flag);
+           }
+       }*/
+       
+     
      if(flag == false)
        {
          if(label != '')
@@ -114,11 +120,11 @@ Public Class WishReferralForm_AC
                 else
                     zipCode = currLead.Referrer_Zip__c;
                     
-           if(currLead.ICD_10_Code__c != Null)
+           if(currLead.PD_ICD_Code__c != Null)
            {
                 List<ICD_Codes__c> icdCodeRecList = [SELECT Id, Long_Description__c, Short_Description__c, Condition_Description__r.MAW_Name__c,Group1__c,
                                                     Condition_Description__c, Condition_Description__r.Code_to_Use__c
-                                                    FROM ICD_Codes__c WHERE Name = :currLead.ICD_10_Code__c limit 1];
+                                                    FROM ICD_Codes__c WHERE Name = :currLead.PD_ICD_Code__c limit 1];
                                                     
                if(icdCodeRecList.size() > 0)
                {
@@ -130,10 +136,10 @@ Public Class WishReferralForm_AC
                }                           
            }
            
-           if(currLead.Primary_Diagnosis__c != Null)
+           if(currLead.PD_Condition_Description__c != Null)
            {
                 List<Condition_Description__c> descriptionList = [SELECT Id, Maw_Name__c
-                                                    FROM Condition_Description__c WHERE Name = :currLead.Primary_Diagnosis__c limit 1];
+                                                    FROM Condition_Description__c WHERE Name = :currLead.PD_Condition_Description__c limit 1];
                                                     
                if(descriptionList.size() > 0)
                {
@@ -150,18 +156,30 @@ Public Class WishReferralForm_AC
                    {
                     currLead.Sibling_Detail__c='';
                    }
-                   if(currVal.fName != Null)
+                   if(currVal.fName != Null && currVal.fName != '')
                    {
                       currLead.Sibling_Detail__c+= currVal.fName+' | ';
                    }
-                   if(currVal.lName!= Null)
+                   else
+                   {
+                     currLead.Sibling_Detail__c+= '-'+' | ';  
+                   }
+                   if(currVal.lName!= Null && currVal.lName != '')
                    {
                       currLead.Sibling_Detail__c+=currVal.lName+' | ';
                    }
-                   if(currVal.age!= Null)
+                   else
+                   {
+                       currLead.Sibling_Detail__c+= '-'+' | ';  
+                   }
+                   if(currVal.age!= Null && currVal.age != '')
                    {
                       currLead.Sibling_Detail__c+=currVal.age+'<br>';
                    }
+                   else
+                   {
+                       currLead.Sibling_Detail__c+= '-'+'<br>';  
+                   }  
                 }
               }  
               
@@ -183,6 +201,17 @@ Public Class WishReferralForm_AC
                    if(findChapterviaZipCode[0].Office__r.chapter__r.Intake_Manager__c != Null)
                         currLead.OwnerId =  findChapterviaZipCode[0].Office__r.chapter__r.Intake_Manager__c;
                   }
+                }
+                else
+                {
+                     List<Account> currAccount = [SELECT id,Intake_Manager__c FROM Account Where Name = 'Make-A-Wish America' limit 1];
+                     if(currAccount.size() > 0)
+                     {
+                         currLead.chapterName__c = currAccount[0].id;
+                         if(currAccount[0].Intake_Manager__c != Null)
+                             currLead.OwnerId = currAccount[0].Intake_Manager__c;
+                     }
+                
                 }
                try
                {
@@ -281,14 +310,14 @@ Public Class WishReferralForm_AC
    
    // Auto Complete the ICD Code values.
     @RemoteAction
-    public static List<ICD_Codes__c> searchDiagnosis(String searchTerm) {
+    global static List<ICD_Codes__c> searchDiagnosis(String searchTerm) {
         List<ICD_Codes__c> icdCodes = Database.query('Select Id, Name,Condition_Description__c, Condition_Description__r.Name, Short_Description__c from ICD_Codes__c where Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\'');
         return icdCodes;
     } 
     
   // Auto Complete the Dianosis field value.
     @RemoteAction
-    public static List<Condition_Description__c> searchCondition(String searchTerm) {
+    global static List<Condition_Description__c> searchCondition(String searchTerm) {
         List<Condition_Description__c> conditionDescriptions = Database.query('Select Id, Name, Code_To_Use__c from Condition_Description__c where Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\'');
         if(!(conditionDescriptions.size() > 0))
         {
@@ -341,7 +370,7 @@ Public Class WishReferralForm_AC
           copyReferrerInfo=false;
         }
        
-         if(currLead.of_Siblings__c != Null && currLead.of_Siblings__c != '0')
+         if(currLead.of_Siblings__c != Null && currLead.of_Siblings__c != '0' && currLead.Of_Siblings__c != 'Unknown')
          {
            
              getSiblingList();
@@ -387,7 +416,7 @@ Public Class WishReferralForm_AC
    {
      currList = new List<siblingWrapper>();
      System.debug('currLead.of_Siblings__c++++++++++++++++++++++++++++ ' +currLead.of_Siblings__c);
-     if(currLead.of_Siblings__c != Null)
+     if(currLead.of_Siblings__c != Null && currLead.Of_Siblings__c != 'Unknown')
      {
        for(integer i=0;i<integer.valueOf(currLead.of_Siblings__c);i++)
        {

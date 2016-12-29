@@ -20,7 +20,7 @@ Public Class WishReferralFormOut_AC
        currLead = new Lead();
        List<Lead> leaddata=[Select Id, Referrer_FirstName__c, Referrer_Last_Name__c,Title, Hospital_Treatment_Facility_Treating__c, Referrer_Phone__c, Referrer_Email__c,
                             FirstName, Child_Middle_Initial__c, LastName, DOB__c, PostalCode, Gender__c, Parent_First_Name__c, Parent_Last_Name__c, Phone, 
-                            Childs_Qualifying_Diagnosis__c, ICD_10_Code__c, Treating_Medical_Professional_First_Name__c, Treating_Medical_Professional_Last_Name__c,
+                            Childs_Qualifying_Diagnosis__c, PD_ICD_Code__c, Treating_Medical_Professional_First_Name__c, Treating_Medical_Professional_Last_Name__c,
                             Medical_Professional_Phone__c, Treating_Medical_Professional_Fax__c, Treating_Medical_Professional_Email__c, ChapterName__r.Id   from Lead where Id =: leadId];
        accontId= leaddata[0].ChapterName__r.Id;                           
        currLead = leaddata[0];

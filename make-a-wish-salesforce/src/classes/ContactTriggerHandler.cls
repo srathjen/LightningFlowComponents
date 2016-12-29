@@ -10,7 +10,7 @@ public class ContactTriggerHandler{
     Constant_AC  constant = new Constant_AC();
     Id ChapterRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
     Id WishRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
-   // Public 
+    // Public 
     Id volunteerOpportunityWishRecTypeId = Schema.SObjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
     public Map<string,integer> birthMonthMap = new Map<string,integer>();
     
@@ -133,7 +133,7 @@ public class ContactTriggerHandler{
         if(newTaskList.size() > 0)
             insert newTaskList;
     }
-     
+    
     public static void createConstituentContactCode(Map<Id,Id> accountAndContactId,String ConCodeName){
         
         Map<Id,Id> affAccountIdMap=new Map<Id,Id>();
@@ -162,7 +162,7 @@ public class ContactTriggerHandler{
         }
         
     }
-   
+    
     
     public static void updateMedicalProfConatctInfo(set<Id> MedicalProfContactSet){
         Map<Id,npe4__Relationship__c > childContactMap = new Map<Id,npe4__Relationship__c >();
@@ -188,5 +188,28 @@ public class ContactTriggerHandler{
         if(updateChildContactList.size() > 0)
             Update updateChildContactList;
     }
+    // Updating User information when volunteer contact details updated.
    
+    
+    public static void updateUserDetails(map<String,Contact> contactDetails, Map<Id,Contact> oldMap){
+        User updateUser;
+        List<User> updateUserList=new List<User>();
+        for(User currRecUser:[SELECT id,ContactId,FirstName,LastName,Email,Phone FROM User WHERE contactId IN:contactDetails.keyset()]){
+            updateUser=new User();
+            updateUser.id=currRecUser.id;
+            if(contactDetails.get(currRecUser.ContactId).FirstName != oldMap.get(currRecUser.ContactId).FirstName)
+                updateUser.FirstName=contactDetails.get(currRecUser.ContactId).FirstName;
+            if(contactDetails.get(currRecUser.ContactId).LastName != oldMap.get(currRecUser.ContactId).LastName)
+                updateUser.LastName=contactDetails.get(currRecUser.ContactId).LastName;
+            if(contactDetails.get(currRecUser.ContactId).Email != oldMap.get(currRecUser.ContactId).Email)
+                updateUser.Email=contactDetails.get(currRecUser.ContactId).Email;
+            if(contactDetails.get(currRecUser.ContactId).MobilePhone!= oldMap.get(currRecUser.ContactId).MobilePhone)
+                updateUser.Phone=contactDetails.get(currRecUser.ContactId).MobilePhone;
+            
+            updateUserList.add(updateUser);
+        }
+        
+        if(updateUserList.size() > 0)
+            update updateUserList;
+    }
 }

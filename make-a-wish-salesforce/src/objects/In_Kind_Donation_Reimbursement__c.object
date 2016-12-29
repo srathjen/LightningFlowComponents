@@ -92,10 +92,70 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Ammount2__c</fullName>
+        <description>This will capture amount 2</description>
+        <externalId>false</externalId>
+        <label>Amount2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
         <fullName>Ammount_2__c</fullName>
         <description>This will capture amount 2</description>
         <externalId>false</externalId>
         <label>Amount 2</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount1__c</fullName>
+        <description>This will capture the amount 1</description>
+        <externalId>false</externalId>
+        <label>Amount1</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount3__c</fullName>
+        <description>This will capture the amount 3</description>
+        <externalId>false</externalId>
+        <label>Amount3</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount4__c</fullName>
+        <description>This will capture amount 4</description>
+        <externalId>false</externalId>
+        <label>Amount4</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Amount5__c</fullName>
+        <description>This will capture amount 5</description>
+        <externalId>false</externalId>
+        <label>Amount5</label>
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
@@ -164,6 +224,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Approval_Date__c</fullName>
+        <description>This filed will update when the record is gets approved</description>
+        <externalId>false</externalId>
+        <label>Approval Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Attachments__c</fullName>
         <description>This field is used to identify the attachments available or not</description>
         <externalId>false</externalId>
@@ -221,7 +291,7 @@
         <fullName>City__c</fullName>
         <description>This field will pull city from account</description>
         <externalId>false</externalId>
-        <formula>In_Kind_Donor_Name__r.BillingCity</formula>
+        <formula>IF(! ISBLANK(In_Kind_Donor_Name__c ), In_Kind_Donor_Name__r.BillingCity , vounteer_Name__r.MailingCity)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>City</label>
         <required>false</required>
@@ -377,12 +447,29 @@
                 <fullName>Will Attach</fullName>
                 <default>false</default>
             </picklistValues>
+            <picklistValues>
+                <fullName>Attached</fullName>
+                <default>false</default>
+            </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Email__c</fullName>
+        <description>It will display the email value based on the account and volunteer contact</description>
+        <externalId>false</externalId>
+        <formula>IF(! ISBLANK(In_Kind_Donor_Name__c ),  In_Kind_Donor_Name__r.Email__c ,  vounteer_Name__r.Email )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Expense1_Description__c</fullName>
@@ -625,7 +712,8 @@
         <fullName>Phone_Number__c</fullName>
         <description>This field will pull phone from the account</description>
         <externalId>false</externalId>
-        <formula>In_Kind_Donor_Name__r.Phone</formula>
+        <formula>IF(! ISBLANK(In_Kind_Donor_Name__c ), In_Kind_Donor_Name__r.Phone
+ , vounteer_Name__r.MobilePhone)</formula>
         <label>Phone Number</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -673,7 +761,8 @@
         <fullName>State__c</fullName>
         <description>This field will pull state from account</description>
         <externalId>false</externalId>
-        <formula>In_Kind_Donor_Name__r.BillingState</formula>
+        <formula>IF(! ISBLANK(In_Kind_Donor_Name__c ), In_Kind_Donor_Name__r.BillingState
+ , vounteer_Name__r.MailingState)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>State</label>
         <required>false</required>
@@ -923,6 +1012,19 @@
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>Street__c</fullName>
+        <description>This filed will display street value based on the account and  volunteer</description>
+        <externalId>false</externalId>
+        <formula>IF(! ISBLANK(In_Kind_Donor_Name__c ), In_Kind_Donor_Name__r.BillingStreet, vounteer_Name__r.MailingStreet)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Street Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Total_Reimbursement_Amount__c</fullName>
         <description>This field will gives the sum of all amount field value</description>
         <externalId>false</externalId>
@@ -1086,7 +1188,8 @@
         <fullName>Zip__c</fullName>
         <description>This field will pull the zip from account</description>
         <externalId>false</externalId>
-        <formula>In_Kind_Donor_Name__r.BillingPostalCode</formula>
+        <formula>IF(! ISBLANK(In_Kind_Donor_Name__c ), In_Kind_Donor_Name__r.BillingPostalCode
+ , vounteer_Name__r.MailingPostalCode)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Zip</label>
         <required>false</required>
@@ -1373,6 +1476,28 @@
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
+    <fields>
+        <fullName>vounteer_Name__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Volunteer Name</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Contact.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Volunteer Contact</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>In-Kind Donation &amp; Reimbursement</relationshipLabel>
+        <relationshipName>In_Kind_Donation_Reimbursement</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
     <label>In-Kind Donation &amp; Reimbursement</label>
     <nameField>
         <displayFormat>IKR-{0000}</displayFormat>
@@ -1407,6 +1532,10 @@
         </picklistValues>
         <picklistValues>
             <picklist>Documentation__c</picklist>
+            <values>
+                <fullName>Attached</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Not available</fullName>
                 <default>false</default>
@@ -1942,6 +2071,10 @@
         <picklistValues>
             <picklist>Documentation__c</picklist>
             <values>
+                <fullName>Attached</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Not available</fullName>
                 <default>false</default>
             </values>
@@ -2452,6 +2585,14 @@
     </recordTypes>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>IKR_AccountName_VolunteerName_Validation</fullName>
+        <active>true</active>
+        <description>This validation will fire if user enter values for both In-Kind Donor Name and Volunteer Name</description>
+        <errorConditionFormula>AND(!ISBLANK( In_Kind_Donor_Name__c ), !ISBLANK(vounteer_Name__c))</errorConditionFormula>
+        <errorDisplayField>In_Kind_Donor_Name__c</errorDisplayField>
+        <errorMessage>Please enter either the Account Name or Volunteer Name.</errorMessage>
+    </validationRules>
     <validationRules>
         <fullName>InKind_Gift_Value_Change_Validation</fullName>
         <active>true</active>

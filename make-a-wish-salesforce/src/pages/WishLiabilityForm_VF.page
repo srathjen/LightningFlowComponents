@@ -3,6 +3,18 @@
     <!--<apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap.min.css')}" />
     <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap-theme.min.css')}" />
     <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap.min.js')}"/>-->
+    <style>
+    .custPopup, .custPopup-main-message{
+            left: -32% !important;
+            padding: 2.5rem;
+            width: 70% !important;
+    
+    }
+    
+    .errorMessage{
+        font-size: 18px;
+    }
+    </style>
     <apex:form >
      <apex:pageMessages id="showmsg"/> 
     <div class="container"> 
@@ -142,7 +154,7 @@
                         <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
                         <apex:commandButton value="Send" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!sendpdftoEmail}" style="height: 2.75rem;"/>
                         <apex:commandButton value="Cancel" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}"  style="height: 2.75rem; margin-left: 5%;"/>
-                        <apex:commandButton value="Ok" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!redirect}" rendered="{!isRedriect = true }" style="height: 2.75rem; margin-left: 5%;"/>
+                      
                         </div>
                     </div>
                 </div>
@@ -160,7 +172,7 @@
                 <div class="row">
                     <div class="row" style="padding:10px">
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                    Please select the users to Sign.
+                      Please select the users to Sign.
                     </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <apex:selectList value="{!SingerName}" multiselect="false" size="1" styleClass="form-control multi-lvl-one chosen multiCom" style="height:1%; font-size:85%">
@@ -168,7 +180,7 @@
                             </apex:selectList>
                         </div>
                         <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
-                        <apex:commandButton value="Ok" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!SubmitAndSign}" style="height: 2.75rem; margin-left: 5%;"/>
+                       <apex:commandButton value="Ok" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!SubmitAndSign}" style="height: 2.75rem; margin-left: 5%;"/>
                         <apex:commandButton value="Cancel" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}"  style="height: 2.75rem; margin-left: 5%;"/>
                         </div>
                     </div>
@@ -186,9 +198,27 @@
            <div class="col-xs-12 col-sm-12 col-md-12">
     <div class="pop-wrap">
         <div class="custPopup">
-         <apex:pageMessages id="showmsg1"/> 
          
-          <center> <apex:commandButton value="Ok" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}"  style="margin-left: 40%;margin-top: 3% !important; height:2.15rem !important;width:90px !important;"/></center>
+         <center> <span class="errorMessage"><b>Already an email sent to specified address</b></span></center>
+           <apex:commandButton value="Ok" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}"  style="margin-left: 40%;margin-top: 3% !important; height:2.15rem !important;width:90px !important;"/>
+         
+          </div>
+          </div>
+        </div>
+    </div>
+</apex:outputPanel>
+</apex:outputPanel>
+
+<apex:outputPanel id="displayError2">
+   <apex:outputPanel rendered="{!SignNowdisplayError}">
+       
+          <div class="row" style="padding:10px">
+           <div class="col-xs-12 col-sm-12 col-md-12">
+    <div class="pop-wrap">
+        <div class="custPopup">
+         
+       <center> <b><span class="errorMessage">There is no user to sign </span></b></center>
+           <apex:commandButton value="Ok" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}"  style="margin-left: 40%;margin-top: 3% !important; height:2.15rem !important;width:90px !important;"/>
          
           </div>
           </div>

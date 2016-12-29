@@ -1413,17 +1413,6 @@
         <visibleLines>3</visibleLines>
     </fields>
     <fields>
-        <fullName>Hidden_Primary_Diagnosis__c</fullName>
-        <description>This field is used as hidden to store thePrimary Diagnosis value from the partA form.</description>
-        <externalId>false</externalId>
-        <label>Hidden Primary Diagnosis</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>Hidden_Question1__c</fullName>
         <description>This field is used to store the value of question value from PartA form</description>
         <externalId>false</externalId>
@@ -1450,17 +1439,6 @@
         <description>This field will hold the details of the Hospital/Treatment Facility for the Wish Kid</description>
         <externalId>false</externalId>
         <label>Hospital/Treatment Facility</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>ICD_10_Code__c</fullName>
-        <description>This field will hold the ICD-10 code.</description>
-        <externalId>false</externalId>
-        <label>ICD-10 Code</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2115,7 +2093,7 @@
         <fullName>PD_Condition_Description__c</fullName>
         <description>This filed is used to store the condition description from PartA from.</description>
         <externalId>false</externalId>
-        <label>PD Condition Description</label>
+        <label>Primary Diagnosis</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2126,7 +2104,7 @@
         <fullName>PD_ICD_Code__c</fullName>
         <description>This field is used to store the ICD code value from PartA form.</description>
         <externalId>false</externalId>
-        <label>PD ICD Code</label>
+        <label>Primary ICD-10 Code</label>
         <length>30</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2222,28 +2200,6 @@
         <fullName>Preferred_Name__c</fullName>
         <externalId>false</externalId>
         <label>Preferred Name</label>
-        <length>100</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>PrimaryDiagnosis_Condition_Description__c</fullName>
-        <description>It contains the condition description for the Primary diagnosis</description>
-        <externalId>false</externalId>
-        <label>PrimaryDiagnosis Condition Description</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Primary_Diagnosis__c</fullName>
-        <description>It will capture the wish Primary Diagnosis  detail</description>
-        <externalId>false</externalId>
-        <label>Primary Diagnosis</label>
         <length>100</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2486,7 +2442,7 @@
         <fullName>SD1_Condition_Description__c</fullName>
         <description>It holds the condition description for Secoundary Diagnosis 1</description>
         <externalId>false</externalId>
-        <label>SD1 Condition Description</label>
+        <label>Secondary Diagnosis 1 Cond Description</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>TextArea</type>
@@ -2495,7 +2451,7 @@
         <fullName>SD1_ICD_Code__c</fullName>
         <description>It contains ICD code for Secondary Diagnosis 1</description>
         <externalId>false</externalId>
-        <label>SD1 ICD Code</label>
+        <label>Secondary Diagnosis 1 ICD-10 Code</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2506,7 +2462,7 @@
         <fullName>SD2_Condition_Description__c</fullName>
         <description>It holds the condition description for Secoundary Diagnosis 2</description>
         <externalId>false</externalId>
-        <label>SD2 Condition Description</label>
+        <label>Secondary Diagnosis 2 Cond Description</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>TextArea</type>
@@ -2515,7 +2471,7 @@
         <fullName>SD2_ICD_Code__c</fullName>
         <description>It contains ICD code for Secondary Diagnosis 2</description>
         <externalId>false</externalId>
-        <label>SD2 ICD Code</label>
+        <label>Secondary Diagnosis 2 ICD-10 Code</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2526,7 +2482,7 @@
         <fullName>SD3_Condition_Description__c</fullName>
         <description>It holds the condition description for Secoundary Diagnosis 3</description>
         <externalId>false</externalId>
-        <label>SD3 Condition Description</label>
+        <label>Secondary Diagnosis 3 Cond Description</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>TextArea</type>
@@ -2535,7 +2491,7 @@
         <fullName>SD3_ICD_Code__c</fullName>
         <description>It contains ICD code for Secondary Diagnosis 3</description>
         <externalId>false</externalId>
-        <label>SD3 ICD Code</label>
+        <label>Secondary Diagnosis 3 ICD-10 Code</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2546,7 +2502,7 @@
         <fullName>SD4_Condition_Description__c</fullName>
         <description>It holds the condition description for Secondary Diagnosis 4</description>
         <externalId>false</externalId>
-        <label>SD4 Condition Description</label>
+        <label>Secondary Diagnosis 4 Cond Description</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>TextArea</type>
@@ -2555,7 +2511,7 @@
         <fullName>SD4_ICD_Code__c</fullName>
         <description>It contains ICD code for Secondary Diagnosis 4</description>
         <externalId>false</externalId>
-        <label>SD4 ICD Code</label>
+        <label>Secondary Diagnosis 4 ICD-10 Code</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2858,6 +2814,19 @@
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Treatment_Subspecialty__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>This field is used to display treatment  subspecialty from condition description object</description>
+        <externalId>false</externalId>
+        <label>Treatment Subspecialty</label>
+        <referenceTo>Condition_Description__c</referenceTo>
+        <relationshipLabel>Leads</relationshipLabel>
+        <relationshipName>Leads</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Treatment_may_be_feasible_but_can_fail__c</fullName>
@@ -3181,6 +3150,10 @@
         <label># of Siblings</label>
         <picklist>
             <picklistValues>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
                 <fullName>0</fullName>
                 <default>false</default>
             </picklistValues>
@@ -3256,6 +3229,19 @@
             <operation>notContain</operation>
             <value>closed</value>
         </filters>
+        <label>All Open Leads</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Open_Leads</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATE_CODE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>LEAD.UNREAD</columns>
+        <filterScope>Everything</filterScope>
         <label>All Open Leads</label>
     </listViews>
     <listViews>
@@ -3475,6 +3461,24 @@
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Medical_UAT_Leads</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATE_CODE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>LEAD.UNREAD</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>LEAD.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>11/1/2016 12:00 AM</value>
+        </filters>
+        <label>Medical UAT Leads</label>
     </listViews>
     <listViews>
         <fullName>Metro_New_York_Western_New_York_Lead</fullName>
@@ -3967,6 +3971,24 @@
         </sharedTo>
     </listViews>
     <listViews>
+        <fullName>Recent_Created_Leads</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>Gender__c</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>Any_medical_reason_for_moving_quickly__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>LEAD.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>LAST_N_DAYS:10</value>
+        </filters>
+        <label>Recently Created Leads</label>
+    </listViews>
+    <listViews>
         <fullName>Recently_Created_Leads</fullName>
         <columns>FULL_NAME</columns>
         <columns>LEAD.STATE_CODE</columns>
@@ -4160,6 +4182,24 @@
         </sharedTo>
     </listViews>
     <listViews>
+        <fullName>Today_Leads</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATE_CODE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>LEAD.UNREAD</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>LEAD.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>YESTERDAY</value>
+        </filters>
+        <label>Today Leads</label>
+    </listViews>
+    <listViews>
         <fullName>TodaysLeads</fullName>
         <filterScope>Everything</filterScope>
         <filters>
@@ -4280,10 +4320,10 @@
         <lookupPhoneDialogsAdditionalFields>LEAD.COMPANY</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>LEAD.PHONE</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>LEAD.MOBILE_PHONE</lookupPhoneDialogsAdditionalFields>
-        <lookupPhoneDialogsAdditionalFields>00N3600000OtT92</lookupPhoneDialogsAdditionalFields>
-        <lookupPhoneDialogsAdditionalFields>00N3600000POLjb</lookupPhoneDialogsAdditionalFields>
-        <lookupPhoneDialogsAdditionalFields>00N3600000OtT9A</lookupPhoneDialogsAdditionalFields>
-        <lookupPhoneDialogsAdditionalFields>00N3600000OtT9D</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Medical_Professional_Phone__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Referrer_Phone__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Treating_Medical_Professional_Fax__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Treating_Medical_Professional_Phone__c</lookupPhoneDialogsAdditionalFields>
         <searchResultsAdditionalFields>FULL_NAME</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>LEAD.TITLE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>LEAD.COMPANY</searchResultsAdditionalFields>
@@ -4407,8 +4447,7 @@
         <fullName>Lead_Primary_Diagnosis_Validation</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Referred status, Primary Diagnosis is mandatory</description>
-        <errorConditionFormula>Primary_Diagnosis__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null)</errorConditionFormula>
-        <errorDisplayField>Primary_Diagnosis__c</errorDisplayField>
+        <errorConditionFormula>PD_Condition_Description__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null)</errorConditionFormula>
         <errorMessage>Please Enter Primary Diagnosis</errorMessage>
     </validationRules>
     <validationRules>
@@ -4603,42 +4642,53 @@ if(leadStatus != &quot;Referred&quot;)
 }
 else
 {
-   if(priorWish.search(&quot;yes&quot;) &gt;= 0) {
-    alert(&quot;Diagnosis verification cannot be sent as this child has received prior wish.&quot;);
-}
-  else if(TretMedProfEmail.length &lt; 1){
-    alert(&quot;Please provide Qualifying Medical Professional Email.&quot;);
-}
- else
-{
-  var dupe = sforce.apex.execute(&quot;LeadWishFamilyDupe&quot;,&quot;FindFamilyContactDupe&quot;,  {leadId:&apos;{!Lead.Id}&apos;});  
-  if(dupe != null &amp;&amp; dupe!=&apos;&apos; &amp;&amp; confirm(dupe)){
-       window.location.href = &apos;/apex/LeadDuplicate_VF?id={!Lead.Id}&amp;wishFamily=true&apos;;
-   }
-else if(dupe == null || dupe ==&apos;&apos;)
-   {
-     if (confirm(&quot;Are you sure you want to submit  Diagnosis Verification?&quot;) == true)  { 
+    var leadDupe = sforce.apex.execute(&quot;LeadWishFamilyDupe&quot;,&quot;FindLeadDupe&quot;,  {leadId:&apos;{!Lead.Id}&apos;});
+    if(leadDupe != null &amp;&amp; leadDupe != &apos;&apos; &amp;&amp; confirm(leadDupe))
+	{
+	   window.location.href = &apos;/apex/LeadDuplicate_VF?id={!Lead.Id}&apos;;
+	}
+    else if(leadDupe == null || leadDupe == &apos;&apos; )
+	{
 	
-	// make the fields change
-        l.Id = &quot;{! Lead.Id }&quot;;
-	l.Sub_Status__c=&quot;Pending Diagnosis Verification&quot;;
-	l.Of_Times_Email_Sent__c= &quot;{! IF(ISBLANK(Lead.Of_Times_Email_Sent__c), 0,  Lead.Of_Times_Email_Sent__c ) }&quot;;
-        l.Of_Times_Email_Sent__c= parseInt(l.Of_Times_Email_Sent__c)+1; ;
-       
-        
-	// save the change
-	sforce.connection.update([l]);
- 
-        alert(&quot;Diagnosis Verification sent successfully.&quot;);
+		if(priorWish.search(&quot;yes&quot;) &gt;= 0) 
+		{
+			alert(&quot;Diagnosis verification cannot be sent as this child has received prior wish.&quot;);
+		}
+		else if(TretMedProfEmail.length &lt; 1)
+		{
+			alert(&quot;Please provide Qualifying Medical Professional Email.&quot;);
+		}
+		else
+		{
+			var dupe = sforce.apex.execute(&quot;LeadWishFamilyDupe&quot;,&quot;FindFamilyContactDupe&quot;,  {leadId:&apos;{!Lead.Id}&apos;});  
+			if(dupe != null &amp;&amp; dupe!=&apos;&apos; &amp;&amp; confirm(dupe)){
+				window.location.href = &apos;/apex/LeadDuplicate_VF?id={!Lead.Id}&amp;wishFamily=true&apos;;
+			}
+			else if(dupe == null || dupe ==&apos;&apos;)
+			{
+				if (confirm(&quot;Are you sure you want to submit  Diagnosis Verification?&quot;) == true)  
+				{ 
 
-	//refresh the page
-	window.location.reload();
+					// make the fields change
+					l.Id = &quot;{! Lead.Id }&quot;;
+					l.Sub_Status__c=&quot;Pending Diagnosis Verification&quot;;
+					l.Of_Times_Email_Sent__c= &quot;{! IF(ISBLANK(Lead.Of_Times_Email_Sent__c), 0,  Lead.Of_Times_Email_Sent__c ) }&quot;;
+					l.Of_Times_Email_Sent__c= parseInt(l.Of_Times_Email_Sent__c)+1; ;
+
+
+					// save the change
+					sforce.connection.update([l]);
+
+					alert(&quot;Diagnosis Verification sent successfully.&quot;);
+
+					//refresh the page
+					window.location.reload();
+				}
+			}
+
+
+		}
    }
-}
-
-     
-}
-
 
 }</url>
     </webLinks>

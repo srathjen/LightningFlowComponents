@@ -55,8 +55,9 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         Set<Id> inKindDonorAccountSet = new Set<Id>();
         Map<Id,Id> chaptterMap = new Map<Id,Id>();
         Map<Id,Id> volunteerManagersMap = new map<Id,Id>();
+        Constant_AC cons = new Constant_AC();
         Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
-        
+        Id chapterAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(cons.chapterRT).getRecordTypeId();
         for(Account inKindAccount : trigger.new)
         {
             if(inKindAccount.Migrated_Record__c != True)
@@ -71,7 +72,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         if(chaptterAccountIdSet.size() > 0)
         {
             
-            for(Account daAccount : [SELECT Id,Wish_Co_ordinator__c, Volunteer_Manager__c,RecordTypeId  FROM Account WHERE Id IN: chaptterAccountIdSet AND RecordTypeId =: inKindDonorsAccountRTId ]){
+            for(Account daAccount : [SELECT Id,Wish_Co_ordinator__c, Volunteer_Manager__c,RecordTypeId  FROM Account WHERE Id IN: chaptterAccountIdSet AND RecordTypeId =: chapterAccountRTId ]){
                 chaptterMap.put(daAccount.Id,daAccount.Wish_Co_ordinator__c);
                 volunteerManagersMap.put(daAccount.Id,daAccount.Volunteer_Manager__c);
             }

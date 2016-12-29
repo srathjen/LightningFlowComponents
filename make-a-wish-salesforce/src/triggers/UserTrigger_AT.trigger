@@ -9,29 +9,24 @@ Description : This UserTrigger_AT is used to create a public group and public gr
 trigger UserTrigger_AT on User (after insert,after update,before update) {
     List<User> newUserList = new List<User>();
     Map<Id,User> prospectiveUserMap = new Map<Id,User>();
-   
     
     if(Trigger.isAfter && Trigger.isInsert){
+        Map<Id, Id> newUserRoleIdMap = new Map<Id, Id>(); // Used to hold the new user role Id
         for(User newUser : Trigger.new){
-        
            if(newUser.Migrated_User__c == false)
            {
                 if(newUser.State != null){
                     newUserList.add(newUser);
                 }
-              
-                system.debug('newUser.ProfileId+++++++++++++++++++++++++++++++++++ ' + newUser.ProfileId);
-                system.debug('newUser.Active_Volunteer_Profile+++++++++++++++++++++++++++++++++++ ' + label.Active_Volunteer_Profile);
-                
-                system.debug('newUser.contactId++++++++++++++++= ' + newUser.contactId);
-              
                 if((newUser.ProfileId == label.Prospective_Volunteer || newUser.ProfileId == String.valueOf(label.Active_Volunteer_Profile).trim()) && (newUser.contactId != Null))
                 {
                   prospectiveUserMap.put(newUser.contactId, newUser);
-                  System.debug('Sucesss++++++++++++++++++++++++++ ');
+                }
+
+                if(newUser.UserRoleId != null) {
+                    newUserRoleIdMap.put(newUser.Id, newUser.UserRoleId);
                 }
              }
-           System.debug('prospectiveUserMap++++++++++++++++++++++++++ '+prospectiveUserMap);
         }
        // UserTriggerHandler userHandlerIns = new UserTriggerHandler();
        // if(newUserList.size() > 0)
@@ -40,12 +35,21 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
         {
             UserTriggerHandler.UpdateVolunteerInfo(prospectiveUserMap);
         }
+
+        //Used to add new user to chatter group based on their role name
+        if(newUserRoleIdMap.size() > 0 ) {
+            System.debug('newUserRoleIdMap>>>>>>>>>'+newUserRoleIdMap);
+            UserTriggerHandler.AddInternalUserToChatterGroup(newUserRoleIdMap);
+        }
     }
     
     if(Trigger.isAfter && Trigger.isUpdate)
     {
         Set<Id> inActiveUserIdSet = new Set<Id>();
         Set<Id> inactiveUserSet=new Set<Id>();
+        Map<Id, Id> newUserRoleIdMap = new Map<Id, Id>(); // Used to hold the new user role Id
+        Map<Id, Id> oldUserRoleIdMap = new Map<Id, Id>(); // Used to hold the new user role Id
+
          for(User newUser : Trigger.new)
          {
              if(newUser.Migrated_User__c == false)
@@ -57,6 +61,12 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
                     inactiveUserSet.add(newUser .ContactId);
                   } 
              }
+
+            if(newUser.UserRoleId != null && Trigger.oldMap.get(newUser.Id).UserRoleId != newUser.UserRoleId) {
+                newUserRoleIdMap.put(newUser.Id, newUser.UserRoleId);
+                oldUserRoleIdMap.put(newUser.Id, Trigger.oldMap.get(newUser.Id).UserRoleId);
+            }
+
           }
          
         
@@ -64,9 +74,19 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
             UserTriggerHandler.updateUser(inActiveUserIdSet);
         
          if(inactiveUserSet.size() > 0 && inactiveUserSet != Null){
-            System.Debug('Trigger List @@@@@@@@@@*******');
             InactiveVolunteerHandler.createTaskforVolunteerManager(inactiveUserSet);
          }
+
+         //Used to add new user to chatter group based on their role name
+        if(newUserRoleIdMap.size() > 0 ) {
+            System.debug('newUserRoleIdMap>>>>>>>>>'+newUserRoleIdMap);
+            UserTriggerHandler.AddInternalUserToChatterGroup(newUserRoleIdMap);
+        }
+
+        if(oldUserRoleIdMap.size() > 0 ) {
+            System.debug('oldUserRoleIdMap>>>>>>>>>'+oldUserRoleIdMap);
+            UserTriggerHandler.RemoveInternalUserToChatterGroup(oldUserRoleIdMap);
+        }
          
     }
     

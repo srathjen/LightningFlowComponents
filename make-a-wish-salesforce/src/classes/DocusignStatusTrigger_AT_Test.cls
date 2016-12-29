@@ -45,10 +45,11 @@ public class DocusignStatusTrigger_AT_Test{
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id); 
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatuswithCon(VolunteerContact.Id);
-        
+        upsert dsfs;
         dsfs__DocuSign_Status__c dbdsfs = new dsfs__DocuSign_Status__c ();
         dbdsfs.dsfs__Envelope_Status__c  = 'Completed';
         dbdsfs.Id = dsfs.Id;
+        dbdsfs.Docusign_Hidden_Contact__c  = volunteerContact.id;
         dbdsfs.isConflict__c =  false;
         update dbdsfs;
         
@@ -69,6 +70,7 @@ public class DocusignStatusTrigger_AT_Test{
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
         insert newLead;
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatus(newLead.Id);
+        
         
         Lead updateLead = new Lead();
         updateLead.Status = 'Referred';

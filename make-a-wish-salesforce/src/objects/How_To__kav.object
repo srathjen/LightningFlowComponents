@@ -22,6 +22,56 @@
     <deploymentStatus>InDevelopment</deploymentStatus>
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
+    <fields>
+        <fullName>Question__c</fullName>
+        <externalId>false</externalId>
+        <label>Question</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Role__c</fullName>
+        <externalId>false</externalId>
+        <label>Role</label>
+        <picklist>
+            <picklistValues>
+                <fullName>All</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wish Granter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Speaker&apos;s Bureau</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Celebrity Host</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Event Volunteers</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>MultiselectPicklist</type>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Step_By_Step__c</fullName>
+        <externalId>false</externalId>
+        <label>Step-By-Step</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
     <label>How-To</label>
     <pluralLabel>How-Tos</pluralLabel>
 </CustomObject>

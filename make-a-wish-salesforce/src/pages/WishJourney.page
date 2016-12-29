@@ -60,7 +60,9 @@
         width: 135px;
         text-align:center;
             }
-           
+        .onholdwrap {
+            display: inline-table;
+        }
 
     </style>
     <div class="progress-wrap">     
@@ -71,6 +73,16 @@
                 <apex:outputpanel rendered="{!parentCaseID != null}"><a href="/{!contactId}" target="_parent"><span class="fnamechildwrap">{!contactFName}</span> <span class="snamechildwrap">{!contactLName}</span></a> </apex:outputPanel>
                 <apex:outputpanel rendered="{!parentCaseID == null}"><a href="/{!contactId}" target="_parent"><span class="fnamechildwrap">{!contactFName}</span> <span class="snamechildwrap">{!contactLName}</span></a> </apex:outputPanel>
                 <apex:outputPanel rendered="{!rushwish == true}"><span class="rushwrap"></span></apex:outputPanel>
+              
+                <apex:outputPanel rendered="{!(currCase.RecordType.Name == 'Wish')}">
+                  <span class="onholdwrap">{!currCase.Status}</span>
+                </apex:outputpanel>
+                
+                <apex:outputPanel rendered="{!(currCase.RecordTypeId != 'Wish')}">
+                  <span class="onholdwrap">{!currCase.Parent.Status}</span>
+                </apex:outputpanel>
+              
+              <!--
                 <apex:outputPanel rendered="{!onHold == true}"><span class="onholdwrap">On Hold</span></apex:outputPanel>              
                 <apex:outputPanel rendered="{!escalated== true}"><span class="inactivewrap">Escalated</span></apex:outputPanel>
                 <apex:outputPanel rendered="{!granted == true}"><span class="onholdwrap">Granted</span></apex:outputPanel>                
@@ -79,7 +91,16 @@
                 <apex:outputPanel rendered="{!wishDetermined == true}"><span class="grantedwrap">Wish Determined</span></apex:outputPanel>
                 <apex:outputPanel rendered="{!newStatus == true}"><span class="onholdwrap">New</span></apex:outputPanel>
                 <apex:outputPanel rendered="{!completed == true}"><span class="onholdwrap">Completed</span></apex:outputPanel>
-                 <apex:outputPanel rendered="{!closed == true}"><span class="onholdwrap">Closed</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!closed == true}"><span class="onholdwrap">Closed</span></apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!isSubmitted == true}"><span class="onholdwrap">Budget Approval - Submitted</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!approved == true}"><span class="onholdwrap">Budget Approval - Approved</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!design == true}"><span class="grantedwrap">Wish Design</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!scheduled == true}"><span class="onholdwrap">Wish Scheduled</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!interview == true}"><span class="onholdwrap">Ready to Interview</span></apex:outputPanel>
+                <apex:outputPanel rendered="{!inActive == true}"><span class="onholdwrap">inActive </span></apex:outputPanel>
+               <apex:outputPanel rendered="{!closed == true}"><span class="onholdwrap">Wish Scheduled</span></apex:outputPanel>-->
+           
             </div>          
           
         </div>

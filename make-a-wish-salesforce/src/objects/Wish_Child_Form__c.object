@@ -351,6 +351,11 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>oxygen_Details__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Driver_Name__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
@@ -1577,9 +1582,10 @@
         <description>This field is used to store the wish family contact name and email address from the wish family form.</description>
         <externalId>false</externalId>
         <label>Hidden Wish Fmaily Contact Email</label>
-        <required>false</required>
+        <length>131072</length>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>20</visibleLines>
     </fields>
     <fields>
         <fullName>Hidden_Wish_Fmaily_Contact_Name__c</fullName>
@@ -1849,6 +1855,26 @@ and the date it was or will be granted.</inlineHelpText>
         <trackTrending>false</trackTrending>
         <type>Html</type>
         <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Participant_Details__c</fullName>
+        <description>This field is used to store the participant name and email values from the wish child form.</description>
+        <externalId>false</externalId>
+        <label>Participant Details</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Participant_Name__c</fullName>
+        <description>This field is used to store the participant name with out their email address.</description>
+        <externalId>false</externalId>
+        <label>Participant Name</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
     </fields>
     <fields>
         <fullName>Participant_Name_for_Dietary_Restriction__c</fullName>
@@ -2633,6 +2659,14 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>oxygen_Details__c</fullName>
+        <externalId>false</externalId>
+        <label>oxygen Details</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <label>Wish Child Form</label>
     <nameField>

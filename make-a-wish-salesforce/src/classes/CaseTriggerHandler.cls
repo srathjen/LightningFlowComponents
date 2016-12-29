@@ -70,6 +70,7 @@ public class CaseTriggerHandler {
     public static void createActionTracks(String caseType, Map<Id, Case> caseChapterIdsMap, Set<Id> parentWishIdsSet) {
         Constant_AC  constant = new Constant_Ac();    
         Id wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Map<String, Case> chaptersWishMap = new Map<String, Case>();
         if(parentWishIdsSet.size()>0){
             Map<Id, List<CaseTeamMember>> parentCaseMembersMap = new Map<Id, List<CaseTeamMember>>();
@@ -87,18 +88,18 @@ public class CaseTriggerHandler {
             
             //Used to include the parent wish case team members to child wish case team
             for(Case addTeamMember : caseChapterIdsMap.values()) {
-                chaptersWishMap.put(addTeamMember.ChapterName__r.Name, addTeamMember);
+                chaptersWishMap.put(addTeamMember.ParentId, addTeamMember);
                 if(parentCaseMembersMap.containsKey(addTeamMember.ParentId)) {
                     for(CaseTeamMember createWishTeamMember : parentCaseMembersMap.get(addTeamMember.ParentId)){
                         CaseTeamMember addWishTeamMember = new CaseTeamMember(MemberId = createWishTeamMember.MemberId,TeamRoleId = createWishTeamMember.TeamRoleId,ParentId = addTeamMember.Id);
                         childWishTeamMembersList.add(addWishTeamMember);
                     }
                 }
-                if(addTeamMember.RecordTypeId == wishDeterminationRecordTypeId) {
-                    if(wishDeterminationCases.containsKey(addTeamMember.ChapterName__r.Name)) {
-                        wishDeterminationCases.get(addTeamMember.ChapterName__r.Name).add(addTeamMember);
+                if(addTeamMember.RecordTypeId != parentWishRecordTypeId) {
+                    if(wishDeterminationCases.containsKey(addTeamMember.Id)) {
+                        wishDeterminationCases.get(addTeamMember.Id).add(addTeamMember);
                     } else {
-                        wishDeterminationCases.put(addTeamMember.ChapterName__r.Name, new List<Case>{addTeamMember});
+                        wishDeterminationCases.put(addTeamMember.Id, new List<Case>{addTeamMember});
                     }
                 }
             }

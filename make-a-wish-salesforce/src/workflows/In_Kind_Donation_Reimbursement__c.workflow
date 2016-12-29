@@ -20,4 +20,13 @@
         <operation>Formula</operation>
         <protected>false</protected>
     </fieldUpdates>
+    <fieldUpdates>
+        <fullName>In_Kind_Approved_Date</fullName>
+        <field>Approval_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>In-Kind Approved Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
 </Workflow>

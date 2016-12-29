@@ -69,10 +69,7 @@ public class AccountTrigger_Test {
         System.RunAs(volunteerUser) {
             Account inkindAccount = OrientationandTrainingUtil.inKindAccount();
             insert inkindAccount;
-            Account acc = new Account();
-            acc.Chapter_Name__c = chapterAccount.Id;
-            acc.Id = inkindAccount.Id;
-            update inkindAccount;
+            
             
         }
     }

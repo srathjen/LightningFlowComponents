@@ -40,7 +40,7 @@
         /* autocomplete drop-down */
         .ui-widget-content li {padding-left:.5rem}
         input[id*='diagnosisTextId'][disabled=""],input[id*='searchDiagnosisId'][disabled=""] {background:#eee; color:#bbb; cursor:not-allowed}
-        .field-word-seperator {font-family:arial; font-size:.7rem; position:relative; display:block; border-top:1px dashed #ccc; color:#ccc; width:100%}
+        .field-word-seperator {font-family:arial; font-size:.7rem; position:relative; display:block; border-top:1px dotted #55595c; color:#55595c; width:100%}
         .field-word-seperator::after {content:"OR"; background:#fff; padding:0 1rem; position:absolute; left:43%; top:-.6rem; text-align:center; z-index:1}
         .form-group-seperator {margin-bottom:2rem}
         .no-diag {cursor:pointer; text-decoration: underline; color:#006bb6 !important}
@@ -54,11 +54,6 @@
         .sweet-alert button.cancel {background:#006bb6}
         .sweet-alert button.cancel:hover {background:#006bb6; opacity:.9}
     </style>
-    <script>
-    	$( document ).ready(function() {
-            location.reload();
-        });
-    </script>
     <body class="vcp">
         <span>
             <header role="main-header" class="container">
@@ -226,13 +221,13 @@
                                                 <div class="col-md-12"><label>Please choose the one statement that best describes your patient:</label></div>
                                                 <div class="col-md-12 statement-desc-patient">
                                                     <apex:selectRadio value="{!wrapCls.describePatient}" layout="pageDirection" id="describePatient" label="Please describe about patient" onchange="doMore(this.value);" styleClass="StatementPat">
-                                                        <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} responds to standard treatment with approximates normal health (e.g., diabetes, asthma, uncomplicated epilepsy)" itemValue="7"/>
+                                                        <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} responds to standard treatment which approximates normal health (e.g., diabetes, asthma, uncomplicated epilepsy)" itemValue="7"/>
                                                         <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a non-progressive condition that may have a risk of complications and/or risk of a shortened life expectancy (e.g., cerebral palsy, quadriplegia, hemophilia)" itemValue="6"/>
-                                                        <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition for which curative treatment may be feasible but can fail - treatment failure does not include non-compliance (e.g., cancer, irreversible organ failure)" itemValue="2"/>
+                                                        <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition for which curative treatment may be feasible but can fail; non-compliance is not included as a treatment failure. (e.g., cancer, irreversible organ failure)" itemValue="2"/>
                                                         <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition where a significantly shortened life expectancy is probable, but frequent and/or long periods of intensive treatment may prolong and allow participation in normal activities (e.g., cystic fibrosis, solid organ transplant)" itemValue="3"/>
                                                         <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment resistant epilepsy, metabolic disease)" itemValue="4"/>
                                                         <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has an irreversible but non-progressive condition with severe disability and is experiencing multiple health complications that increase the probability of a significantly shortened life expectancy (e.g., anoxic brain injury, severe cerebral palsy)" itemValue="5"/>
-                                                        <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition for which there is no reasonable hope of cure and from which children or young people will ultimately die prematurely (e.g., Duchenne muscular dystrophy or neurodegenerative disease)" itemValue="1"/>
+                                                        <apex:selectOption itemLabel="{!currLead.FirstName} {!currLead.LastName} has a condition for which there is no reasonable hope of cure and from which children or young people will experience a significantly shortened life expectancy (e.g., Duchenne muscular dystrophy or neurodegenerative disease)" itemValue="1"/>
                                                         <apex:selectOption itemLabel="None of these statements describe {!currLead.FirstName} {!currLead.LastName}" itemValue="8"/>
                                                         <apex:actionFunction name="start" action="{!changePatientValue}" reRender="">
                                                             <apex:param name="perfId" assignto="{!selectedItemValue}" value="{!wrapCls.describePatient}"/>
@@ -269,25 +264,24 @@
                                     <fieldset>
                                         <apex:actionRegion >
                                             <legend>Primary Diagnosis</legend>
-                                            <div class="form-group row">
-                                                <div class="col-md-3"><label>ICD Code</label></div>
-                                                <div class="col-md-6">
-                                                    <apex:inputText id="diagnosisTextId" value="{!wrapCls.diagnosisFilter}" styleClass="placeHolder pdICD form-control diagnosisTextId" html-placeholder="example: C00" />
-                                                    <apex:outputText id="shortTextId" styleClass="shortTextId text-muted" escape="false"/>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <div class="col-md-3"></div>
-                                                <div class="col-md-6"><span class="field-word-seperator"></span></div>
-                                            </div>
-
-                                            <div class="form-group form-group-seperator row primaryDiagnosis">
+                                            <div class="form-group row primaryDiagnosis">
                                                 <div class="col-md-3"><label>Diagnosis</label></div>
                                                 <div class="col-md-6">
                                                     <apex:inputText id="searchDiagnosisId" value="{!wrapCls.selectedPrimaryDiagnosis}" styleClass="placeHolder form-control cdICD searchDiagnosisId" onchange="checkEligible();" html-placeholder="example: Malignant Neoplasm" />
                                                     <apex:actionfunction action="{!primaryDiagnosisEligibility}" name="checkEligible" reRender="wishStatusCheck,eligible,notEligible,popup,nextQtn,pullNextQtn,primaryMedicalQuestionBlock,otherDiagnosis,oDscript,btn-eligible,btn-notEliglible,btn-script,findAndReplace">
                                                         <apex:param name="identifyFieldValue" value="" />
                                                     </apex:actionfunction>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div class="col-md-3"></div>
+                                                <div class="col-md-6"><span class="field-word-seperator"></span></div>
+                                            </div>
+                                            <div class="form-group form-group-seperator row">
+                                                <div class="col-md-3"><label>ICD Code</label></div>
+                                                <div class="col-md-6">
+                                                    <apex:inputText id="diagnosisTextId" value="{!wrapCls.diagnosisFilter}" styleClass="placeHolder pdICD form-control diagnosisTextId" html-placeholder="example: C00" />
+                                                    <apex:outputText id="shortTextId" styleClass="shortTextId text-muted" escape="false"/>
                                                 </div>
                                             </div>
                                         </apex:actionRegion>
@@ -361,33 +355,33 @@
                                                                 <label>Are there other diagnosis that would contribute to {!currLead.FirstName} {!currLead.LastName}'s eligibility for a wish?</label>
                                                             </div>
                                                         </div>
+                                                        <div class="form-group row primaryDiagnosis">
+                                                          <div class="col-md-3"><label>Diagnosis</label></div>
+                                                          <div class="col-md-6">
+                                                              <apex:inputText id="searchDiagnosisId1" value="{!wrapCls.diagnosisFilterVal1}" styleClass="placeHolder SC1 form-control searchDiagnosisId1" onchange="checkEligible1();" html-placeholder="example: Malignant Neoplasm" />
+                                                              <apex:actionfunction action="{!otherDiagnosisEligibilityCondition1}" name="checkEligible1" reRender="wishStatusCheck,findAndReplace,eligible,notEligible,otherDiagnosis1,nextQtn,medicalQuestionDiagnosis1Block,btn-eligible,btn-notEliglible,btn-script">
+                                                                  <apex:param name="identifyFieldValue" value="" />
+                                                              </apex:actionfunction>
+                                                          </div>
+                                                        </div>
                                                         <div class="form-group row">
+                                                            <div class="col-md-3"></div>
+                                                            <div class="col-md-6"><span class="field-word-seperator"></span></div>
+                                                        </div>
+                                                        <div class="form-group form-group-seperator row">
                                                             <div class="col-md-3"><label>ICD Code</label></div>
                                                             <div class="col-md-6">
                                                                 <apex:inputText id="diagnosisTextId1" value="{!wrapCls.diagnosisFilter1}" styleClass="placeHolder SI1 form-control diagnosisTextId1" html-placeholder="example: C00" />
                                                                 <apex:outputText id="shortTextId1" styleClass="text-muted"/>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row">
-                                                            <div class="col-md-3"></div>
-                                                            <div class="col-md-6"><span class="field-word-seperator"></span></div>
-                                                        </div>
-                                                        <div class="form-group form-group-seperator row primaryDiagnosis">
-                                                            <div class="col-md-3"><label>Diagnosis</label></div>
-                                                            <div class="col-md-6">
-                                                                <apex:inputText id="searchDiagnosisId1" value="{!wrapCls.diagnosisFilterVal1}" styleClass="placeHolder SC1 form-control searchDiagnosisId1" onchange="checkEligible1();" html-placeholder="example: Malignant Neoplasm" />
-                                                                <apex:actionfunction action="{!otherDiagnosisEligibilityCondition1}" name="checkEligible1" reRender="wishStatusCheck,findAndReplace,eligible,notEligible,otherDiagnosis1,nextQtn,medicalQuestionDiagnosis1Block,btn-eligible,btn-notEliglible,btn-script">
-                                                                <apex:param name="identifyFieldValue" value="" />
-                                                                </apex:actionfunction>
-                                                            </div>
-                                                        </div>
                                                         <fieldset>
-                                                            <div class="form-group row">
-                                                                <div class="col-md-12">
-                                                                    <input type="button" onclick="al(this.id);" class="col-xs-12 col-sm-12 col-md-4 col-md-push-3 btn-md" value="No other Diagnosis"/>
-                                                                </div>
+                                                          <div class="form-group row">
+                                                            <div class="col-md-12">
+                                                              <input type="button" onclick="al(this.id);" class="col-xs-12 col-sm-12 col-md-4 col-md-push-3 btn-md" value="No other Diagnosis"/>
                                                             </div>
-                                                        </fieldset>
+                                                          </div>
+                                                      </fieldset>
                                                     </div>
                                                 </apex:outputPanel>
                                             </apex:outputPanel>
@@ -455,24 +449,24 @@
                                                         <div class="col-md-12"><label>Are there other diagnosis that would contribute to {!currLead.FirstName} {!currLead.LastName}'s eligibility for a wish?</label></div>
                                                     </div>
                                                     <apex:actionRegion immediate="true">
-                                                        <div class="form-group row">
-                                                            <div class="col-md-3"><label>ICD Code</label></div>
-                                                            <div class="col-md-6">
-                                                                <apex:inputText id="diagnosisTextId2" value="{!wrapCls.diagnosisFilter2}" styleClass="placeHolder SI2 form-control diagnosisTextId2" html-placeholder="example: C00" />
-                                                                <apex:outputText id="shortTextId2" styleClass="text-muted"/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <div class="col-md-3"></div>
-                                                            <div class="col-md-6"><span class="field-word-seperator"></span></div>
-                                                        </div>
-                                                        <div class="form-group form-group-seperator row primaryDiagnosis">
+                                                        <div class="form-group row primaryDiagnosis">
                                                             <div class="col-md-3"><label>Diagnosis</label></div>
                                                             <div class="col-md-6">
                                                                 <apex:inputText id="searchDiagnosisId2" value="{!wrapCls.diagnosisFilterVal2}" styleClass="placeHolder SC2 form-control searchDiagnosisId2" onchange="checkEligible2();" html-placeholder="example: Malignant Neoplasm" />
                                                                 <apex:actionfunction action="{!otherDiagnosisEligibilityCondition2}" name="checkEligible2" reRender="wishStatusCheck,findAndReplace,eligible,notEligible,otherDiagnosis2,nextQtn,medicalQuestionDiagnosis2Block,btn-eligible,btn-notEliglible,btn-script" >
                                                                     <apex:param name="identifyFieldValue" value="" />
                                                                 </apex:actionfunction>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-md-3"></div>
+                                                            <div class="col-md-6"><span class="field-word-seperator"></span></div>
+                                                        </div>
+                                                        <div class="form-group form-group-seperator row">
+                                                            <div class="col-md-3"><label>ICD Code</label></div>
+                                                            <div class="col-md-6">
+                                                                <apex:inputText id="diagnosisTextId2" value="{!wrapCls.diagnosisFilter2}" styleClass="placeHolder SI2 form-control diagnosisTextId2" html-placeholder="example: C00" />
+                                                                <apex:outputText id="shortTextId2" styleClass="text-muted"/>
                                                             </div>
                                                         </div>
                                                         <fieldset>
@@ -549,24 +543,24 @@
                                                         <div class="col-md-12"><label>Are there other diagnosis that would contribute to {!currLead.FirstName} {!currLead.LastName}'s eligibility for a wish?</label></div>
                                                     </div>
                                                     <apex:actionRegion immediate="true">
-                                                        <div class="form-group row">
-                                                            <div class="col-md-3"><label>ICD Code</label></div>
-                                                            <div class="col-md-6">
-                                                                <apex:inputText id="diagnosisTextId3" value="{!wrapCls.diagnosisFilter3}" styleClass="placeHolder SI3 form-control diagnosisTextId3" html-placeholder="example: C00" />
-                                                                <apex:outputText id="shortTextId3" styleClass="text-muted"/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <div class="col-md-3"></div>
-                                                            <div class="col-md-6"><span class="field-word-seperator"></span></div>
-                                                        </div>
-                                                        <div class="form-group form-group-seperator row primaryDiagnosis">
+                                                        <div class="form-group row primaryDiagnosis">
                                                             <div class="col-md-3"><label>Diagnosis</label></div>
                                                             <div class="col-md-6">
                                                                 <apex:inputText id="searchDiagnosisId3" value="{!wrapCls.diagnosisFilterVal3}" styleClass="placeHolder SC3 form-control searchDiagnosisId3" onchange="checkEligible3();" html-placeholder="example: Malignant Neoplasm" />
                                                                 <apex:actionfunction action="{!otherDiagnosisEligibilityCondition3}" name="checkEligible3" reRender="findAndReplace,wishStatusCheck,eligible,notEligible,otherDiagnosis3,nextQtn,medicalQuestionDiagnosis3Block,btn-eligible,btn-notEliglible,btn-script" >
                                                                     <apex:param name="identifyFieldValue" value="" />
                                                                 </apex:actionfunction>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <div class="col-md-3"></div>
+                                                            <div class="col-md-6"><span class="field-word-seperator"></span></div>
+                                                        </div>
+                                                        <div class="form-group form-group-seperator row">
+                                                            <div class="col-md-3"><label>ICD Code</label></div>
+                                                            <div class="col-md-6">
+                                                                <apex:inputText id="diagnosisTextId3" value="{!wrapCls.diagnosisFilter3}" styleClass="placeHolder SI3 form-control diagnosisTextId3" html-placeholder="example: C00" />
+                                                                <apex:outputText id="shortTextId3" styleClass="text-muted"/>
                                                             </div>
                                                         </div>
                                                         <fieldset>
@@ -645,24 +639,24 @@
                                                         </div>
                                                     </div>
                                                     <apex:actionRegion >
-                                                        <div class="form-group row">
-                                                            <div class="col-md-3"><label>ICD Code</label></div>
+                                                        <div class="form-group row primaryDiagnosis">
+                                                            <div class="col-md-3"><label>Diagnosis</label></div>
                                                             <div class="col-md-6">
-                                                                <apex:inputText id="diagnosisTextId4" value="{!wrapCls.diagnosisFilter4}" styleClass="placeHolder SI4 form-control diagnosisTextId4" html-placeholder="example: C00" />
-                                                                <apex:outputText id="shortTextId4" styleClass="text-muted"/>
+                                                                <apex:inputText id="searchDiagnosisId4" value="{!wrapCls.diagnosisFilterVal4}" styleClass="placeHolder SC4 form-control searchDiagnosisId4" onchange="checkEligible1();" html-placeholder="example: Malignant Neoplasm" />
+                                                                <apex:actionfunction action="{!otherDiagnosisEligibilityCondition4}" name="checkEligible4" reRender="findAndReplace,wishStatusCheck,eligible,notEligible,otherDiagnosis4,nextQtn,medicalQuestionDiagnosis4Block,btn-eligible,btn-notEliglible,btn-script">
+                                                                    <apex:param name="identifyFieldValue" value="" />
+                                                                </apex:actionfunction>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <div class="col-md-3"></div>
                                                             <div class="col-md-6"><span class="field-word-seperator"></span></div>
                                                         </div>
-                                                        <div class="form-group form-group-seperator row primaryDiagnosis">
-                                                            <div class="col-md-3"><label>Diagnosis</label></div>
+                                                        <div class="form-group form-group-seperator row">
+                                                            <div class="col-md-3"><label>ICD Code</label></div>
                                                             <div class="col-md-6">
-                                                                <apex:inputText id="searchDiagnosisId4" value="{!wrapCls.diagnosisFilterVal4}" styleClass="placeHolder SC4 form-control searchDiagnosisId4" onchange="checkEligible1();" html-placeholder="example: Malignant Neoplasm" />
-                                                                <apex:actionfunction action="{!otherDiagnosisEligibilityCondition4}" name="checkEligible4" reRender="findAndReplace,wishStatusCheck,eligible,notEligible,otherDiagnosis4,nextQtn,medicalQuestionDiagnosis4Block,btn-eligible,btn-notEliglible,btn-script" >
-                                                                    <apex:param name="identifyFieldValue" value="" />
-                                                                </apex:actionfunction>
+                                                                <apex:inputText id="diagnosisTextId4" value="{!wrapCls.diagnosisFilter4}" styleClass="placeHolder SI4 form-control diagnosisTextId4" html-placeholder="example: C00" />
+                                                                <apex:outputText id="shortTextId4" styleClass="text-muted"/>
                                                             </div>
                                                         </div>
                                                         <fieldset>
@@ -1130,7 +1124,7 @@
                                     function al(buttonId) {
                                         swal({
                                             title: "Are you sure?",
-                                            text: " All relevant diagnosis should be entered.",
+                                            text: " All relevant diagnoses should be entered.",
                                             showCancelButton: true,
                                             confirmButtonColor: '#006bb6',
                                             confirmButtonText: 'Confirm',
@@ -1182,8 +1176,8 @@
 
                                                 function disabledMsg() {
                                                     $(notSure).add(noneApply).prop('disabled', true)
-                                                    .parent().css('color', '#ccc')
-                                                    .parent().append('<span class="text-muted">(Please uncheck current selections to enable this option)</span>');
+                                                      .parent().css('color', '#ccc')
+                                                      .parent().append('<span class="text-muted">(Please uncheck current selections to enable this option)</span>');
                                                 }
 
                                                 // add/remove message for "not sure" checkbox if other checkboxes are checked/unchecked
@@ -1351,21 +1345,30 @@
         <script>$.each(document.styleSheets, function(i,sheet){ if(sheet.href=='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css') {var rules = sheet.rules ? sheet.rules : sheet.cssRules; if (rules.length == 0) { $('<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css" />').appendTo('head');} } });</script>
 
         <!-- chosen select -->
-            <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
-
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
         <!-- masked input -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jq.maskedinput.min.js')}"></script>
-
         <!-- validate forms -->
-            <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
         <!-- validate form (additional methods) -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
+        <script>
 
+        </script>
         <script>
             (function ($, root, undefined) {
                 // prepend meta/link tags before VF head output
                 $('head').prepend('<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta http-equiv="content-type" content="text/html; charset=utf-8" /><meta name="HandheldFriendly" content="True" /><meta name="MobileOptimized" content="480" /><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" /><meta http-equiv="cleartype" content="on" />');
                 $('style').before('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous" /><link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/><link rel="stylesheet" href="{!URLFOR($Resource.prospective_assets, 'web/css/chosen.min.css')}"/><link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.prospective_assets, 'web/css/core.css')}" media="all">');
+
+                $(document).ready(function() {
+                  $(window).keydown(function(event){
+                    if(event.keyCode == 13) {
+                      event.preventDefault();
+                      return false;
+                    }
+                  });
+                });
 
             })(jQuery);
         </script>
@@ -1414,14 +1417,11 @@
         </apex:outputPanel>
 
         <script>
-
         /* Diagnosis Auto Complete Box*/
         var listOfQues = '';
 
         /*$(document).delegate('.StateRecPick','change',function(event){
             if(this.value == 'None'){
-
-
                 swal({
                     title: "",
                     text: "This form is required to be completed by a state recognized physician, nurse practioner or physician assistant.",
@@ -1463,7 +1463,6 @@
                      });
             }
         }
-
         function Comatose(comatose) {
             if(comatose == 'Yes') {
                 swal({
@@ -1485,8 +1484,6 @@
                      });
             }
         }
-
-
         function warningBeforeClose(functionClassName) {
 
             swal({   title: "",
@@ -1511,9 +1508,7 @@
         </script>
 
         <script>
-
         /* Medical Question Picklist Values Scripts*/
-
 
         /******************* Primary Diagnosis Script Starts ****************************/
 
@@ -1624,13 +1619,7 @@
                     $('[id$=diagnosisTextId]').val('');
                     $('[id$=diagnosisTextId]').prop('disabled',false);
 
-
                     $('[id$=searchDiagnosisId]').val(ui.item.Name);
-
-
-
-
-                    $('[id$=searchDiagnosisId]').val( ui.item.Name);
                     var descName = ui.item.Code_To_Use__c;
                     var ss1 = $('.searchDiagnosisId').html(ui.item.Name).text();
                     $('[id$=searchDiagnosisId]').val(ss1);
@@ -1791,26 +1780,17 @@
                     var ss1 = $('.searchDiagnosisId1').html(ui.item.Name).text();
                     $('[id$=searchDiagnosisId1]').val(ss1);
                     if(typeof descName != 'undefined'){
-
-
-
                         $('[id$=diagnosisTextId1]').val( ui.item.Code_To_Use__c);
                         $('[id$=diagnosisTextId1]').prop('disabled',true);
-
-
-
                         checkEligible1('PCD');
                     } else {
                         checkEligible1('PCD');
                     }
                     return false;
                 },
-
-
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
-
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
                 return $( "<li></li>" )
@@ -2323,7 +2303,6 @@
             }
 
         });
-
 
         $(document).delegate('.malignant','change',function(event){
             if(($(".statement-desc-patient input[type=radio]:checked").val()) > 5 ) {

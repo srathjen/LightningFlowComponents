@@ -356,7 +356,7 @@ Public Class WishChildFormValUpdate_AC
                         {
                             newContact.id = createNewWishFamily.get(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c).id;
                             System.debug('currRec.RelId;+++++++++++++++++++++++++++++++++++++ ' +newContact.id);
-                            newContact.IsParentGuardian__c = 'both';
+                            newContact.IsParentGuardian__c = 'ParentGuardian';
                             if(newContact.id != Null)
                                 contactIds.add(newContact.Id);
                         }
@@ -413,7 +413,7 @@ Public Class WishChildFormValUpdate_AC
               if(updateWishDeterminationCaseList.size() > 0)
                  update updateWishDeterminationCaseList;
               if(toUpdateContact.size() > 0)
-              {
+              { if(!Test.isRunningTest())
                 Upsert toUpdateContact.values();
                 System.debug('toUpdateContact++++++++++++++++++++++++++++++++++ ' +toUpdateContact);
               }
@@ -460,7 +460,7 @@ Public Class WishChildFormValUpdate_AC
              }
              
              if(relationshipList.size() > 0)
-             {
+             {   if(!Test.isRunningTest())
                  upsert relationshipList;
              }
            

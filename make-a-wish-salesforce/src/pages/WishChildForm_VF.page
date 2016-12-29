@@ -112,13 +112,16 @@
        -webkit-animation:fade-in 1s infinite;
        
         }  
-        
+      .activeClassCommunity{background:#2184cc !important;color:#000000 !important;border:solid 1px #2184cc !important;}
+      .custMenuCommunity{margin:1px;border:solid 1px #2184cc;float: left;width: 23%;color: #ffffff;font-size:small; background: #c7c7c7;padding: 6px;text-align: center;user-select: none;cursor: pointer;}
+     
                
         </style>
     
     <script>
-    $(document).ready(function(){
-      
+    
+   $(document).ready(function(){   
+    
         $(".numeric").keyup(function(){
             var x = $(".a").val();
             if(validate(x)){
@@ -199,8 +202,8 @@
     <body class="vcp vcpactivelogin full registered profile">
        
        <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
-       <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" /> 
-              
+       <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />
+       <div style="width:60%;height:100px;margin-left:25%;margin-right:25%;"><apex:include pageName="active_header_progress_bar" id="pheaderprog" rendered="{!if($Profile.Name<>"Active Volunteer",true,true)}" /></div>      
                 <main role="main" class="container clearBoth">
                     <div class="sideNav">
                    <a data-toggle="collapse" href="#childForm">
@@ -249,7 +252,7 @@
                                </div>
                         </div>
                     </div>
-            <apex:pageMessages />
+            
             <div class="container">
                 
               <!--  <div class="row header-padding">
@@ -548,7 +551,27 @@
     </div>
 </apex:outputPanel>
 </apex:outputPanel>
-   
+ 
+ <apex:outputPanel id="popup1">
+   <apex:outputPanel rendered="{!wcfUtil.approvalError}">
+       
+    <div class="pop-wrap">
+        <div class="custPopup">
+         <apex:pageMessages /> 
+            <div class="container">
+                <div class="row">
+                    <div class="row" style="padding:10px">
+                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
+                        
+                        <apex:commandButton value="OK" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!ExitwithApprovalError}"  style="height: 2.75rem; margin-left: 5%;margin-top: 3% !important;width: 185px !important;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</apex:outputPanel>
+</apex:outputPanel>
     </apex:form>
        </main>
     </body>

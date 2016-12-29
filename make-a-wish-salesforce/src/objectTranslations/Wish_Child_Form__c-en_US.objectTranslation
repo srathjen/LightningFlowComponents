@@ -428,6 +428,14 @@ and the date it was or will be granted. --></help>
         <name>Participant_Contacts__c</name>
     </fields>
     <fields>
+        <label><!-- Participant Details --></label>
+        <name>Participant_Details__c</name>
+    </fields>
+    <fields>
+        <label><!-- Participant Name --></label>
+        <name>Participant_Name__c</name>
+    </fields>
+    <fields>
         <label><!-- Participant_Name_for_Dietary_Restriction --></label>
         <name>Participant_Name_for_Dietary_Restriction__c</name>
     </fields>
@@ -824,6 +832,10 @@ provide contact information for each site on which you are active. --></help>
     <fields>
         <label><!-- Mobile --></label>
         <name>mobilePhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- oxygen Details --></label>
+        <name>oxygen_Details__c</name>
     </fields>
     <layouts>
         <layout>Wish Child Form Layout</layout>

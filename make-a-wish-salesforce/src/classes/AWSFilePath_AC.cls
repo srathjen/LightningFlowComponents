@@ -162,6 +162,46 @@ public without sharing class AWSFilePath_AC{
         system.debug('S drive File Paths 3 : '+ bcFiles); 
     }
     
+    @future
+    public static void  UpdateInKindDonReimburFilePath(List<Id> fileRecordIds){
+        List<String> drFilePaths;
+        List<Id> fileParentIds=new List<Id>();
+        List<Map<String,String>> requestParametersList = new  List<Map<String,String>>();
+        
+        List<In_Kind_Donation_Reimbursement_File__c> drFiles = [Select Id, Parent__c, File_Name__c, File_Path__c from In_Kind_Donation_Reimbursement_File__c where In_Kind_Donation_Reimbursement_File__c.Content_Type__c !='Folder' and  In_Kind_Donation_Reimbursement_File__c.Id in: fileRecordIds];
+        
+        if(drFiles.size() > 0){
+            for(In_Kind_Donation_Reimbursement_File__c dbdrFileRec : drFiles){
+                fileParentIds.add(dbdrFileRec.Parent__c);
+                requestParametersList.add(new Map<String,String>{'response-content-disposition'=>'attachment;filename=' + dbdrFileRec.File_Name__c});
+            }
+        }
+        
+        
+        if(!Test.isRunningTest())
+            //Used to get the file path of the attachment stored in Amazon
+            drFilePaths= cg.SDriveTools.getAttachmentURLs(fileParentIds, fileRecordIds, (365 * 24 * 60 * 60), requestParametersList);
+        else
+            drFilePaths= new List<String>{'https://s3-us-west-2.amazonaws.com/mawafilesfullcopy/00Q5B000001s3bt/a1U5B0000000Df1UAE/MedicalSummaryReport.txt?response-content-disposition=attachment&filename=MedicalSummaryReport.txt&AWSAccessKeyId=AKIAIEYUJRAAMNE7W7NA&Expires=1509032442&Signature=Yx0UX2ADZxo9GbbDFH+q7opBzwU='};
+                
+                
+                
+                
+                System.debug('bcFilePaths>>>>'+drFilePaths);
+        system.debug('S drive File Paths 1 : '+ drFilePaths);
+        
+        for(In_Kind_Donation_Reimbursement_File__c drFileRec : drFiles){
+            for(String str : drFilePaths){
+                if(str.contains(drFileRec.Id)){
+                    drFileRec.File_Path__c=str;
+                }
+            }
+        }
+        system.debug('S drive File Paths 2 : '+ drFiles);
+        update drFiles;
+        system.debug('S drive File Paths 3 : '+ drFiles); 
+    }
+    
     /*This method is used to create file path for the attachment that stored to SDrive from the Lead record.
 It will update the file path to lead file record that created during attachment upload*/
     @future

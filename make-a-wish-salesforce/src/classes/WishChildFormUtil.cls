@@ -102,9 +102,8 @@ Public Class WishChildFormUtil
     public string childForm {get;set;}
     public string familyForm {get;set;}
     public string infoForm {get;set;}
-    
     public boolean sameParentGuardian{get;set;}
-
+    public boolean approvalError{get;set;}
     
     public WishChildFormUtil()
     {

@@ -13,7 +13,7 @@ The wish has been closed.
 
 {!Case.Hidden_Wish_Child_Full_Name__c}
 {!Case.CaseNumber}
-{!Case.00N3600000MqwNn}
+{!Case.Chapter_Name__c}
 {!Case.Hidden_Wish_Child_Street__c}
 {!Case.Hidden_Wish_Child_City__c}
 {!Case.Hidden_Wish_Child_StateCode__c}

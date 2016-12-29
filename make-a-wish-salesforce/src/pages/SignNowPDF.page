@@ -86,6 +86,7 @@
               <div style="margin-bottom:30px;display:block;clear:both;"><span style="width:32%; float:left;">Other</span><div class="{!IF(currWishChild.ClassinSchool__c==null,'newfont','oldfont')}" style="width:65%; margin:3px 0 0 0; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.ClassinSchool__c==null,'-',currWishChild.ClassinSchool__c)}</div></div>
           </div>
           <div style="clear:both"></div>
+          <div style="font-weight:bold; margin-bottom:15px;">My Favorites:</div>
           <div style="margin:5px 0 30px 0;">
             <div style="margin-bottom:5px !important;"><b>When I'm outside, I like to...</b></div>
             <div style="width:100%;border-bottom:1px solid #000 !important; margin:5px 0 0 0; border:none;">{!currWishChild.When_I_m_outside_I_like_to__c}</div>
@@ -127,6 +128,8 @@
             <br/>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
           </div>
+          
+          <div style="font-weight:bold; margin-bottom:15px;"> Other Favorites:</div>
           <div style="margin:5px 0 30px 0;">
             <div style="margin-bottom:5px !important; font-weight: bold;"><b>MY WISH IS TO...</b></div>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.MY_WISH_IS_TO__c}</div>
@@ -168,7 +171,14 @@
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
             
           </div>
-           
+           <div style="margin:5px 0 30px 0;">
+            <div style="margin-bottom:5px !important;"><b>Wish Type...</b></div>
+            <div style="width:100%;border-bottom:1px solid #000 !important; font-style:underline; border:none;">{!currWishChild.WishType__c}</div>
+           <!--  <br/>
+            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div>
+            <br/>
+            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
+          </div>
       </div>
       <div style="clear:both"></div>
       </div>
@@ -483,54 +493,63 @@ individual(s) listed below.</p>
             <tr>
                 <td style="width:45%;background:#bfbfbf; padding:0 5px;text-align:center;border:1px solid #000;">Medical Questions</td>
                 <td style="width:6%;background:#bfbfbf; padding:0 5px;text-align:center;border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;">Yes/No</td>
+                <td style="width:6%;background:#bfbfbf; padding:0 5px;text-align:center;border:1px solid #000;border-left:0;">Details</td>
                 <td style="width:6%;background:#bfbfbf; padding:0 5px;text-align:center;border:1px solid #000;border-left:0;">Notes</td>
                 <td style="width:30%;background:#bfbfbf; padding:0 5px;text-align:center;border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;">Participant Name</td>
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Does any requested participant have special dietary restrictions? If yes, please note.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_dietary_restrictions__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"></td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_dietary_restrictions_Note__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_Name_for_Dietary_Restriction__c}</td>
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Does any requested participant require a wheelchair? If yes, please describe wheelchair size.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_require_a_wheelchair__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_require_a_wheelchair_Details__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_require_a_wheelchair_Note__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Requested_Participant_Name_forWheelchair__c}</td>
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Will your family bring your own wheelchair?</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_your_family_bring_wheelchair__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"></td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_your_family_bring_wheelchair_Note__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Bringing_Own_Wheel_Chair__c}</td>
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Is the wheelchair collapsible?</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Is_the_wheelchair_collapsible__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"></td>                
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Is_the_wheelchair_collapsible_Note__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Name_of_wheelchair_collapsible__c}</td>
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Is the wheelchair power? If yes, please note battery type.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Is_the_wheelchair_power__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"></td>                
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Is_the_wheelchair_power_Note__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Pariticipant_name_havingWheelchair_Power__c}</td>
             </tr>
              <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Does any requested participant require oxygen? If yes, please describe how often.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_require_oxygen_how_often__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"></td>               
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_require_oxygen_Note__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Requested_Participant_Name_for_Oxygen__c}</td>
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Does any medication require refrigeration?</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Medication_require_refrigeration__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"></td>                
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Medication_require_refrigeration_Note__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Medication_require_refrigeration_name__c}</td>
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Does the wish child currently receive nursing care? If yes, please list the # of hours, agency and phone number.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Wish_child_receive_nursing_care__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"></td>               
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Wish_child_receive_nursing_care_Note__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Names_for_receiving_nursing_care__c}</td>
                
@@ -539,12 +558,14 @@ individual(s) listed below.</p>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Does any requested participant have allergies to food or materials? If yes, please note who and what allergy.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_have_allergies_to_food__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"></td>                
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_have_allergies_to_food_Note__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Requested_Participant_Name_for_Allergies__c}</td>
             </tr>
              <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Does any requested participant require any other medical supplies? If yes, please detail who and what is required.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_require_medical_supplies__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"></td>                
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_require_medical_suppliesNote__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Requested_Participant_Name_for_OtherNeed__c}
                 

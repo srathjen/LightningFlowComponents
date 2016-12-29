@@ -103,11 +103,15 @@ public class WishJourneyController_Test {
         Lead currLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
         currLead.Part_A_Received__c = Date.today();
         currLead.Referred_Date__c = Date.today();
+        currLead.Part_A_Received__c = Date.today();
         insert currLead;
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Completed';
         currentCase.Origin = 'Email';
+        currentCase.diagnosis_verificaion_receive_date__c = Date.today();
         currentCase.Lead__c = currLead.Id;
+        currentCase.End_Date__c = Date.today().addDays(6);
+        currentCase.Referral_Date__c = Date.today().addDays(6);
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
     }

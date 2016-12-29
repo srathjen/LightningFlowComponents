@@ -60,8 +60,7 @@
     <fields>
         <fullName>AvailableSeats__c</fullName>
         <externalId>false</externalId>
-        <formula>IF( max_capacity__c = 0,0, max_capacity__c -  Registered_Seats__c)</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <formula>IF( max_capacity__c &lt; Registered_Seats__c,0, max_capacity__c -  Registered_Seats__c)</formula>
         <label>Available Seats</label>
         <precision>18</precision>
         <required>false</required>
@@ -477,6 +476,20 @@
         <unique>false</unique>
     </fields>
     <label>Class Offering</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Orientation_and_Training__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Date__c</columns>
+        <columns>Start_Time__c</columns>
+        <columns>End_Time__c</columns>
+        <columns>max_capacity__c</columns>
+        <columns>Registered_Seats__c</columns>
+        <columns>Location__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
     <listViews>
         <fullName>Central_New_York</fullName>
         <columns>NAME</columns>

@@ -140,4 +140,73 @@ Public class UserTriggerHandler{
          if(caseList.size() > 0)
          update caseList;
     }
+    
+    //Used to add Salesforce internal user to chatter group based on their Role
+    @future
+    public static void AddInternalUserToChatterGroup(Map<Id,Id> newUserRoleIdMap) {
+      
+      Set<String> userRoleName = new Set<String>(); //Used to hold chapter name after removal of '- Chapter' form Name
+      Map<Id, String> groupInfoMap = new Map<Id, String>(); // Used to hold the group Id and Name
+      Map<String, Id> chatterGroupNameIdsMap = new Map<String, Id>(); //Used to hold Group Name and Group Id
+      List<CollaborationGroupMember> chatterGroupMembersList = new List<CollaborationGroupMember>();
+
+      for(UserRole getUserRoleName : [SELECT Id, Name FROM UserRole WHERE Id IN : newUserRoleIdMap.values()]) {
+          if(getUserRoleName.Name.contains(' - Chapter')) {
+              userRoleName.add(getUserRoleName.Name.remove(' - Chapter'));
+              groupInfoMap.put(getUserRoleName.Id, getUserRoleName.Name.remove(' - Chapter'));
+          }
+      }
+      
+      if(userRoleName.size() > 0) {
+          for(CollaborationGroup getgroupInfo : [SELECT Id, Name FROM CollaborationGroup WHERE Name IN : userRoleName]) {
+              chatterGroupNameIdsMap.put(getgroupInfo.Name,getgroupInfo.Id);
+          }
+
+          for(Id newUserId : newUserRoleIdMap.KeySet()) {
+              if(groupInfoMap.containsKey(newUserRoleIdMap.get(newUserId))) {
+                  CollaborationGroupMember newCollaborationMemberGroup = new CollaborationGroupMember ();
+                  newCollaborationMemberGroup.MemberId = newUserId;
+                  newCollaborationMemberGroup.CollaborationGroupId = chatterGroupNameIdsMap.get(groupInfoMap.get(newUserRoleIdMap.get(newUserId)));
+                  chatterGroupMembersList.add(newCollaborationMemberGroup);
+              }
+          }
+      }
+
+      if(chatterGroupMembersList.size() > 0) {
+        insert chatterGroupMembersList;
+      }
+    }
+
+
+    @future
+    public static void RemoveInternalUserToChatterGroup(Map<Id,Id> oldUserRoleIdMap) {
+      Set<String> userRoleName = new Set<String>(); //Used to hold chapter name after removal of '- Chapter' form Name
+      List<CollaborationGroupMember> chatterGroupMembersList = new List<CollaborationGroupMember>();
+      Map<String, Id> userRoleNameIdMap = new Map<String, Id>();
+      
+      for(UserRole getUserRoleName : [SELECT Id, Name FROM UserRole WHERE Id IN : oldUserRoleIdMap.values()]) {
+          if(getUserRoleName.Name.contains(' - Chapter')) {
+              userRoleName.add(getUserRoleName.Name.remove(' - Chapter'));
+              userRoleNameIdMap.put(getUserRoleName.Name.remove(' - Chapter'), getUserRoleName.Id);
+          }
+      }
+
+      Map<Id, String> roleChapterMap = new map<Id, String>();
+      if(userRoleName.size() > 0) {
+          for(CollaborationGroup getgroupInfo : [SELECT Id, Name FROM CollaborationGroup WHERE Name IN : userRoleName]) {
+              roleChapterMap.put(getgroupInfo.Id, getgroupInfo.Name);
+          }
+
+          for(CollaborationGroupMember chatterInfo : [SELECT Id, MemberId, CollaborationGroupId FROM CollaborationGroupMember WHERE MemberId IN : oldUserRoleIdMap.KeySet()]) {
+              if(userRoleNameIdMap.get(roleChapterMap.get(chatterInfo.CollaborationGroupId)) == oldUserRoleIdMap.get(chatterInfo.MemberId)) {
+                  chatterGroupMembersList.add(chatterInfo);
+              }
+          }
+
+          if(chatterGroupMembersList.size() > 0) {
+            delete chatterGroupMembersList;
+          }
+      }
+
+    }
 }

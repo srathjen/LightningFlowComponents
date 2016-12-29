@@ -208,6 +208,16 @@
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>Chapter_Name__c</fullName>
+        <description>It holds the name of the chapter</description>
+        <externalId>false</externalId>
+        <label>Chapter Name</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Confirmed_Date__c</fullName>
         <description>Interviewer can set the interview confirmed date to volunteer</description>
         <externalId>false</externalId>

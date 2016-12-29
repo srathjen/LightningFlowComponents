@@ -188,6 +188,21 @@ insert newChapter;*/
         return newPvolunteerSystemAdministratorUser ;
         
     }
+    
+    public static User createUserWithRole(Id roleId){ 
+        
+        
+        Profile volunteerSystemAdministrator = [SELECT Id FROM Profile WHERE Name = 'System Administrator'];
+        
+         User newPvolunteerSystemAdministratorUser = new User(  firstname = 'JonJesu',lastName = 'EdwardsJo',email = 'jonemail@gma111il.com',Username = 'jonsamp0@gma11il.com',
+                                                    EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
+                                                    LanguageLocaleKey = 'en_US', UserRoleId = roleId, ProfileId = volunteerSystemAdministrator.Id,isActive = true,Statecode = 'AZ');
+        insert newPvolunteerSystemAdministratorUser ;
+        return newPvolunteerSystemAdministratorUser ;
+        
+    }
+    
+    
     public static Account createVolunteerAccountWithWishCoordinatior(Id wishCoordinator){
         Constant_AC constant = new Constant_AC();
         String chapterRT= Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.ChapterRT).getRecordTypeId();
@@ -1178,7 +1193,7 @@ insert newChapter;*/
         newLead.Referrer_City__c = 'Trichy';
         newLead.Referrer_Zip__c = '6210';
         newLead.Sibling_Detail__c = 'aa | aaab | 14 bbb | bbbc | 15';
-        newLead.Primary_Diagnosis__c = 'Test Diagnosis';
+        newLead.PD_Condition_Description__c = 'Test Diagnosis';
         newLead.Parent_First_Name__c = 'MAWAFirstName';
         newLead.Parent_Last_Name__c = 'MAWALastName';
         newLead.Medical_Professional_First_Name__c = 'moss';
@@ -1193,7 +1208,7 @@ insert newChapter;*/
         newLead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
         newLead.is_Family_Aware_of_Referral__c = 'Yes';
         newLead.Medical_Questions__c = 'Test Diagnosis';
-        newLead.ICD_10_Code__c = 'C12.0';
+        newLead.PD_ICD_Code__c  = 'C12.0';
         newLead.Lung_Disease__c = 'Test1;Test2';
         newLead.Angina__c = 'Test1;Test2';
         newLead.Ventilator__c = 'Test1;Test2';
@@ -1365,7 +1380,7 @@ insert newChapter;*/
         //newDiagVf.Medical_Question__c = medicalconId;
         newDiagVf.Medical_Question_Answer__c = 'TEST';
         newDiagVf.Order__c = 2;
-        newDiagVf.Primary_Diagnosis__c = 'test';
+        newDiagVf.Primary_Diagnosis__c= 'test';
         newDiagVf.Reason_for_Need__c = 'test';
         
         return newDiagVf ;
@@ -1724,10 +1739,13 @@ retrun newLeadFile;*/
         newChildForm.Hidden_Contact_Name__c = 'Vennila Paramasivam';
         newChildForm.Hidden_Wish_Fmaily_Contact_Name__c = 'Vennila Paramasivam, chandrasekar ';
         newChildForm.Case__c = ParentWishId;
-        newChildForm.Wish_Family_Contact__c = 'Vennila | | Paramasivam | Spouse | 8220708920 | 8220708920 | 8220708920 | mcavennila@gmail.com | 2016-11-6';
-        newChildForm.Participant_Contacts__c = 'Vennila | | karur | Child | 2016-11-01 00:00:00 | asdfasdfdsafasfdsa@12gmail.com | 12 | true | true sathis Kumar | | def | Friend | - | vi@gmail.com | | false | false';
+        newChildForm.Wish_Family_Contact__c = '[{"workTelephone":"","tshirtSize":null,"residingWishMedical":null,"relId":"0035B000004R9vwQAC","relationship":"Father","mobileTelephone":"(878) 787-8787","MiddleName":"","medicalNeeds":null,"lastName":"Test12","homeTelephone":"","firstName":"Test12","Email":"kanagaraj@mstsolutions.com","dob":"2016-11-29"},{"workTelephone":"","tshirtSize":null,"residingWishMedical":null,"relId":"0035B000004R9vuQAC","relationship":"Mother","mobileTelephone":"(878) 787-8787","MiddleName":"","medicalNeeds":null,"lastName":"TestPL1","homeTelephone":"","firstName":"TestPF1","Email":"kanagu431@gmail.com","dob":"2016-11-28"}]';
+        newChildForm.Participant_Contacts__c = '[{"workTelephone":null,"tshirtSize":"","residingWishMedical":"Yes","relId":null,"relationship":"Father","mobileTelephone":null,"MiddleName":"","medicalNeeds":"Yes","lastName":"Test12","homeTelephone":null,"firstName":"Test12","Email":"kanagaraj@mstsolutions.com","dob":null},{"workTelephone":null,"tshirtSize":"","residingWishMedical":"Yes","relId":null,"relationship":"Mother","mobileTelephone":null,"MiddleName":"","medicalNeeds":"Yes","lastName":"TestPL1","homeTelephone":null,"firstName":"TestPF1","Email":"kanagu431@gmail.com","dob":null}]';
+
+        //newChildForm.Wish_Family_Contact__c = 'Vennila | | Paramasivam | Spouse | 8220708920 | 8220708920 | 8220708920 | mcavennila@gmail.com | 2016-11-6';
+        //newChildForm.Participant_Contacts__c = 'Vennila | | karur | Child | 2016-11-01 00:00:00 | asdfasdfdsafasfdsa@12gmail.com | 12 | true | true sathis Kumar | | def | Friend | - | vi@gmail.com | | false | false';
         newChildForm.Driver_Name__c = 'Vennila karur |';
-        newChildForm.Driver_Details__c = 'Vennila karur | Tamil Nadu | Alabama | 2016-10-12';
+        newChildForm.Driver_Details__c = '[{"type":"Potential","state":"Alaska","licenseNum":"Tamil Nadu","expirationDate":"2017-01-04","driverName":"Test12 Test12"}]';
         newChildForm.Availability_Time_Period_2__c = 'Feb/2016';
         newChildForm.Availability_Time_Period_3__c = 'Feb/2018';
         newChildForm.Participant_Name_for_Dietary_Restriction__c = 'test';
@@ -1740,6 +1758,10 @@ retrun newLeadFile;*/
         newChildForm.Pariticipant_name_havingWheelchair_Power__c = 'test;test';
         newChildForm.Medication_require_refrigeration_name__c = 'test;test';
         newChildForm.Names_for_receiving_nursing_care__c = 'test;test';
+        newChildForm.Participant_Details__c  = 'Participant Participant2-joserathi@mstsolutions.com-26';
+        newChildForm.Participant_Name__c = 'Participant Participant2-26';
+        newChildForm.Hidden_Wish_Fmaily_Contact_Name__c= 'Parent1 Parent2,parent3 parent4';
+        newChildForm.Hidden_Wish_Fmaily_Contact_Email__c = 'Parent1 Parent2-kanagu431@gmail.com,parent3 parent4-kanagaraj@mstsolutions.com';
         //Insert  newChildForm;
         return newChildForm;
         
@@ -1749,7 +1771,7 @@ retrun newLeadFile;*/
         npe4__Relationship__c newRelationForm = new npe4__Relationship__c();
         newRelationForm.npe4__Contact__c = ChildContactid;
         newRelationForm.npe4__RelatedContact__c = FamilyContactId;
-        newRelationForm.Wish_Family_participants__c = 'Parent/Guardian';
+        newRelationForm.Parent_Legal_Guardian__c = true;
         Insert  newRelationForm;
         return newRelationForm;
     }
@@ -1838,7 +1860,7 @@ retrun newLeadFile;*/
             wishFamilyCon.MailingCountryCode = 'US';
             if(I == 0){
                 wishFamilyCon.IsParentGuardian__c = 'ParentGuardian';
-                wishFamilyCon.Wish_Liability_IsSigned__c = false;
+                
             }
             wishFamilyCon.IsParentGuardian__c = 'Participant';
             wishFamilyCon.RecordTypeId = wishFamilyRecordTypeId ;
@@ -1855,7 +1877,7 @@ retrun newLeadFile;*/
             npe4__Relationship__c newRelationForm = new npe4__Relationship__c();
             newRelationForm.npe4__Contact__c = ChildContactid;
             newRelationForm.npe4__RelatedContact__c = FamilyContactIdList.get(i).Id;
-            newRelationForm.Wish_Family_participants__c = 'Parent/Guardian';
+            newRelationForm.Parent_Legal_Guardian__c = true;
             relationShipList.add(newRelationForm);
         }
         
@@ -1944,6 +1966,15 @@ retrun newLeadFile;*/
         return newBackground;
     }
     
+    public static In_Kind_Donation_Reimbursement_File__c  createInkindDonaReimbFileRecord(Id ikdrId) {
+        In_Kind_Donation_Reimbursement_File__c  newikdrFile = new In_Kind_Donation_Reimbursement_File__c  ();
+        newikdrFile.Parent__c = ikdrId;
+        newikdrFile.File_Name__c = 'MedicalSummary.txt';
+        newikdrFile.Content_Type__c = 'text/plain';
+        insert newikdrFile;
+        return newikdrFile;
+    }
+    
     public static  Wish_Expense_Type__c CreateWishExpenseTypeRecord(){
         
         Wish_Expense_Type__c  currType= new  Wish_Expense_Type__c();
@@ -2008,6 +2039,16 @@ retrun newLeadFile;*/
         insert turnOnHouseHold;
         return turnOnHouseHold;
         
+    }
+    public static npe4__Relationship__c CreateMedicalProfessionalRelationshipRec(Id wishChildId,Id medicalProfessionalId){
+        npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
+        newRelationShip.npe4__Contact__c = wishChildId;
+        newRelationShip.npe4__RelatedContact__c = medicalProfessionalId;
+        newRelationShip.npe4__Status__c = 'Active';
+        newRelationShip.npe4__Type__c = 'Medical Professional';
+        newRelationShip.Qualifying_Medical_Professional__c =TRUE; 
+        insert newRelationShip;
+        return newRelationShip;
     }
       
 }

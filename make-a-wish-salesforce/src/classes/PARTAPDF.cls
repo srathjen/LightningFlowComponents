@@ -7,17 +7,18 @@ public class PARTAPDF
     public String currentCondition {get;set;}
     public List<Diagnosis_Verification__c> questionList {get;set;}
     public PARTAPDF(ApexPages.StandardController controller) {
+    System.debug('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>0');
         if(ApexPages.currentPage().getParameters().get('Id') != Null)
             leadId =  ApexPages.currentPage().getParameters().get('Id');
-        currLead = (Lead)controller.getRecord();
-        leadId = currLead.Id;
+        
         wrapList = new list<labelwrapper>();
         
         if(leadId != Null)
         {
+        
             questionList = new List<Diagnosis_Verification__c>(); 
             System.debug('>>>>>>>>>>!!!!!!!!!!!!!!!!!!!!!!!!!');
-            currLead = [SELECT id,Email,FirstName,Please_Explain_Deteriorate__c,Medical_Questions__c,Child_Age__c,Current_Condition__c,
+            currLead = [SELECT id,Email,FirstName,Current_Condition_Label__c,Please_Explain_Deteriorate__c,Medical_Questions__c,Child_Age__c,Current_Condition__c,
                         DOB__c,Child_Middle_Initial__c,LastName,Gender__c,Parent_First_Name__c,
                         Parent_Last_Name__c,Treating_Medical_Professional_First_Name__c,Treating_Medical_Professional_Last_Name__c,
                         Treating_Medical_Professional_Phone__c,Treating_Medical_Professional_Email__c,
@@ -43,7 +44,9 @@ public class PARTAPDF
                 }
             }
             
-            if((!String.isEmpty(currLead.Current_Condition__c)) && currLead.Current_Condition__c.contains(';')) {
+                
+            
+            /*if((!String.isEmpty(currLead.Current_Condition__c)) && currLead.Current_Condition__c.contains(';')) {
                 Integer i = 0;
                 currentCondition = '';
                 for(String currentSplitString : currLead.Current_Condition__c.split(';')) {
@@ -52,7 +55,19 @@ public class PARTAPDF
                         i++;
                     }
                 }
+            }*/
+            
+            if((!String.isEmpty(currLead.Current_Condition_Label__c)) && currLead.Current_Condition_Label__c.contains(';')) {
+                Integer i = 0;
+                currentCondition = '';
+                for(String currentSplitString : currLead.Current_Condition_Label__c.split(';')) {
+                    if(!String.isEmpty(currentSplitString)) {
+                        currentCondition += i+1 +'. '+ currentSplitString + '\n';
+                        i++;
+                    }
+                }
             }
+            
             
             /*questionList = [SELECT Id, ICD_Code__c, Primary_Diagnosis__c, Lead__c, Medical_Question__c, Medical_Question_Answer__c, Medical_Question__r.Question__c,
 Epilepsy_Value__c FROM Diagnosis_Verification__c WHERE Lead__c =:  leadId];*/
@@ -79,6 +94,7 @@ questionList.add(currRec);
     }
     
     public pageReference SubmitSign(){
+    System.debug('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>2');
         String account;
         String UserName;
         String Password;
@@ -87,7 +103,7 @@ questionList.add(currRec);
         
         Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
         //String currentRequestURL = URL.getSalesforceBaseUrl().toExternalForm();
-        String currentRequestURL =   'https://fullcopy-wish.cs52.force.com';
+        String currentRequestURL =   'http://mstdevenv-wish.cs61.force.com';
         for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
             UserName = credentialIns.name;
             account  = credentialIns.account__c;
@@ -115,7 +131,7 @@ questionList.add(currRec);
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
             '  "emailBlurb":"Test Email Body",'+
-            '  "emailSubject": "Test Email Subject",'+
+            '  "emailSubject": "Diagnosis Verification Form",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+
             '      "name": "document.pdf",'+
@@ -222,7 +238,7 @@ questionList.add(currRec);
     }
     
     public pageReference cancel(){
-        String currentRequestURL =   'https://fullcopy-wish.cs52.force.com/';
+        String currentRequestURL =   'http://mstdevenv-wish.cs61.force.com/';
         PageReference reference=new PageReference(currentRequestURL +'/LeadPartA_ApprovalFormClone_VF_V1?leadid='+currLead.id);
         reference.setRedirect(true);
         return reference;

@@ -78,6 +78,11 @@
         <name>Emergency_Contact__c</name>
     </fields>
     <fields>
+        <help><!-- External RE record Id for upserting --></help>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
         <label><!-- From Mulesoft --></label>
         <name>From_Mulesoft__c</name>
     </fields>
@@ -423,6 +428,11 @@
             <masterLabel>Wife</masterLabel>
             <translation><!-- Wife --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Transaction Code --></label>
+        <name>Transaction_Code__c</name>
+        <relationshipLabel><!-- Accounts --></relationshipLabel>
     </fields>
     <fields>
         <name>Type</name>
@@ -883,6 +893,17 @@
             <section>Fields</section>
         </sections>
     </layouts>
+    <layouts>
+        <layout>InKind</layout>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- New Account --></label>
+        <name>CreateInKindDonorAccount</name>
+    </quickActions>
     <quickActions>
         <label><!-- New Donation --></label>
         <name>New_Donation</name>

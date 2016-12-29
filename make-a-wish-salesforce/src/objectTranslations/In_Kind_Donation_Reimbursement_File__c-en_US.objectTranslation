@@ -21,6 +21,10 @@
         <name>File_Name__c</name>
     </fields>
     <fields>
+        <label><!-- File Path --></label>
+        <name>File_Path__c</name>
+    </fields>
+    <fields>
         <label><!-- File Size --></label>
         <name>File_Size__c</name>
     </fields>

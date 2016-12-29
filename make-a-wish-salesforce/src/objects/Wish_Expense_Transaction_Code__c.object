@@ -89,6 +89,22 @@
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <label>Wish Expense Transaction Code</label>
+    <listViews>
+        <fullName>Migration</fullName>
+        <columns>NAME</columns>
+        <columns>External_Id__c</columns>
+        <columns>Is_Active__c</columns>
+        <columns>Wish_Expense_Type__c</columns>
+        <columns>CREATEDBY_USER.ALIAS</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CREATEDBY_USER.ALIAS</field>
+            <operation>equals</operation>
+            <value>iuser</value>
+        </filters>
+        <label>Migration</label>
+    </listViews>
     <nameField>
         <label>Wish Expense Transaction Code Name</label>
         <type>Text</type>

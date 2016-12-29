@@ -9,9 +9,12 @@
         <field>Name</field>
         <field>Owner</field>
         <field>RecordType</field>
-        <field>Attachments__c</field>
-        <field>Address_Line_1_del__c</field>
-        <field>City_del__c</field>
+        <field>Wish__c</field>
+        <field>In_Kind_Donor_Name__c</field>
+        <field>Date_of_Gift__c</field>
+        <field>Gift_Type__c</field>
+        <field>Gift_Value__c</field>
+        <field>Documentation__c</field>
     </approvalPageFields>
     <approvalStep>
         <allowDelegate>false</allowDelegate>
@@ -39,9 +42,15 @@
         <criteriaItems>
             <field>In_Kind_Donation_Reimbursement__c.RecordType</field>
             <operation>equals</operation>
-            <value>In Kind Donation</value>
+            <value>In-Kind Donation</value>
         </criteriaItems>
     </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>In_Kind_Approved_Date</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalApprovalActions>
     <finalApprovalRecordLock>true</finalApprovalRecordLock>
     <finalRejectionRecordLock>false</finalRejectionRecordLock>
     <label>In Kind Donation&amp;Reimbursement Approval</label>

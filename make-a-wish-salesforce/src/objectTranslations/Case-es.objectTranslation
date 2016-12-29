@@ -197,6 +197,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Chapter_Medical_Advisor_Phone__c</name>
     </fields>
     <fields>
+        <label><!-- Chapter Name --></label>
+        <name>Chapter_Name__c</name>
+    </fields>
+    <fields>
         <label><!-- CheckedInFamily --></label>
         <name>CheckedInFamily__c</name>
     </fields>
@@ -474,12 +478,20 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Hidden_Contact_Gender__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Diagn Verifi Received Date --></label>
+        <name>Hidden_Diagn_Verifi_Received_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Email List --></label>
         <name>Hidden_Email_List__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Lead Id --></label>
         <name>Hidden_Lead_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Lead Name --></label>
+        <name>Hidden_Lead_Name__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Name List --></label>
@@ -492,6 +504,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Hidden Primary Diagnosis. --></label>
         <name>Hidden_Primary_Diagnosis_del__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Referral date --></label>
+        <name>Hidden_Referral_date__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Secondary Diagnosis 1 --></label>
@@ -1781,6 +1797,10 @@ arrangements/unique circumstances for any requested wish participant not residin
             <section>Important Date Section</section>
         </sections>
         <sections>
+            <label><!-- To be removed --></label>
+            <section>To be removed</section>
+        </sections>
+        <sections>
             <label><!-- Wish Related Forms --></label>
             <section>Wish Related Forms</section>
         </sections>
@@ -1817,6 +1837,17 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sections>
             <label><!-- Wish Status Bar --></label>
             <section>Wish Status Bar</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Effect</layout>
+        <sections>
+            <label><!-- Progress Bar --></label>
+            <section>Progress Bar</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Summary --></label>
+            <section>Wish Summary</section>
         </sections>
     </layouts>
     <layouts>
@@ -1868,6 +1899,17 @@ arrangements/unique circumstances for any requested wish participant not residin
         </sections>
     </layouts>
     <layouts>
+        <layout>Wish Planning &amp; Anticipation</layout>
+        <sections>
+            <label><!-- Required Forms --></label>
+            <section>Required Forms</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Progress --></label>
+            <section>Wish Progress</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Wishes</layout>
         <sections>
             <label><!-- Attachments --></label>
@@ -1888,6 +1930,10 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sections>
             <label><!-- Medical Section --></label>
             <section>Medical Section</section>
+        </sections>
+        <sections>
+            <label><!-- To be removed --></label>
+            <section>To be removed</section>
         </sections>
         <sections>
             <label><!-- Wish Related Forms --></label>
@@ -2047,6 +2093,10 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>InKind_Donation_Report</name>
     </webLinks>
     <webLinks>
+        <label><!-- InKind_Donors_Report --></label>
+        <name>InKind_Donors_Report</name>
+    </webLinks>
+    <webLinks>
         <label><!-- LOOP --></label>
         <name>Loop__LOOP</name>
     </webLinks>
@@ -2069,6 +2119,10 @@ arrangements/unique circumstances for any requested wish participant not residin
     <webLinks>
         <label><!-- Make_A_Wish --></label>
         <name>Make_A_Wish</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Medical_Eligibility_Review --></label>
+        <name>Medical_Eligibility_Review</name>
     </webLinks>
     <webLinks>
         <label><!-- Publicity_Form --></label>
@@ -2123,23 +2177,11 @@ arrangements/unique circumstances for any requested wish participant not residin
         <subject><!-- Budget needs to be revised --></subject>
     </workflowTasks>
     <workflowTasks>
-        <name>Follow_up_on_wish_clearance</name>
-        <subject><!-- Follow-up on wish clearance --></subject>
-    </workflowTasks>
-    <workflowTasks>
         <name>Interview_date_not_set</name>
         <subject><!-- Interview date not set --></subject>
     </workflowTasks>
     <workflowTasks>
         <name>Wish_Family_Packet_not_submitted</name>
         <subject><!-- Wish Family Packet not submitted --></subject>
-    </workflowTasks>
-    <workflowTasks>
-        <name>Wish_concept_approval</name>
-        <subject><!-- Wish concept approval --></subject>
-    </workflowTasks>
-    <workflowTasks>
-        <name>Wish_not_closed</name>
-        <subject><!-- Wish not closed --></subject>
     </workflowTasks>
 </CustomObjectTranslation>

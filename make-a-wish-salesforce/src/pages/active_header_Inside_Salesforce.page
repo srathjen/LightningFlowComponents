@@ -3,6 +3,8 @@
       <style>
       .custMenu{margin:1px;border:solid 1px #2184cc;float: left;width: 33%;color: #ffffff;font-size: x-large; background: #c7c7c7;;padding: 6px;text-align: center;user-select: none;cursor: pointer;}
       .activeClass{background:#2184cc !important;color:#000000 !important;border:solid 1px #2184cc !important;}
+      .activeClassCommunity{background:#2184cc !important;color:#000000 !important;border:solid 1px #2184cc !important;}
+      .custMenuCommunity{margin:1px;border:solid 1px #2184cc;float: left;width: 23%;color: #ffffff;font-size:small; background: #c7c7c7;padding: 6px;text-align: center;user-select: none;cursor: pointer;}
       </style>
       <script>
      
@@ -34,16 +36,15 @@
         </div>
         
       
-        <nav class="navbar">
-             <div class='custMenu' id='WishChildForm_VF' onclick='redir("WishChildForm_VF");'>Wish Child Form</div>
+        <nav class="navbar navbar-dark sub-nav">
+            <!-- <div class='custMenu' id='WishChildForm_VF' onclick='redir("WishChildForm_VF");'>Wish Child Form</div>
              <div class='custMenu' id='WishFamilyForm_VF' onclick='redir("WishFamilyForm_VF");'>Wish Family Form</div>
-             <div class='custMenu' id='WishInformationForm_VF' onclick='redir("WishInformationForm_VF");'>Wish Information Form</div>
-             <!--<span style="color:white;margin:0 15% 0 40%;font-size: x-large;">{!LEFT(LEFT($CurrentPage.Name,LEN($CurrentPage.Name)-3),4)} {!LEFT(RIGHT($CurrentPage.Name,LEN($CurrentPage.Name)-4),LEN(RIGHT($CurrentPage.Name,LEN($CurrentPage.Name)-4))-7)} {!Right(LEFT($CurrentPage.Name,LEN($CurrentPage.Name)-3),4)}</span>
-           <!-- <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
+             <div class='custMenu' id='WishInformationForm_VF' onclick='redir("WishInformationForm_VF");'>Wish Information Form</div>-->
+             <span style="color:white;margin:0 15% 0 40%;font-size: x-large;">{!LEFT(LEFT($CurrentPage.Name,LEN($CurrentPage.Name)-3),4)} {!LEFT(RIGHT($CurrentPage.Name,LEN($CurrentPage.Name)-4),LEN(RIGHT($CurrentPage.Name,LEN($CurrentPage.Name)-4))-7)} {!Right(LEFT($CurrentPage.Name,LEN($CurrentPage.Name)-3),4)}</span>
+            <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">
                 &#9776;
-                
             </button>
-            <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
+           <!-- <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
                 <ul class="active-user-main">
                     <li><a href="/VolunteerAssignmentOpportunities_VF">Volunteer Opportunities</a></li>
                     <li><a href="/MyAssignment_VF">My Assignment</a></li>

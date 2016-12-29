@@ -13,23 +13,27 @@ public class WishRelatedLinks_AC {
     public String ChildMedicalForm{get;set;}
     public String ShoppingSpree{get;set;}
     public List<case> querychildCase;  
-    Public string ddpId;//'a1k5B000000CgLU';
+    Public string ddpId{get;set;}
     
     public WishRelatedLinks_AC(ApexPages.StandardController controller) {
-     ddpId = 'a1k5B000000CgLU';
+    
      Constant_AC  constant = new Constant_Ac();    
      String wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
      String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
      String wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
      querychildCase = new List<Case>();
-   
-        
-        currentCaseRec= (Case)controller.getRecord();
-      
+     currentCaseRec= (Case)controller.getRecord();
+     //ddpId = 'a1k5B000000CgLU';
+     ddpId = Label.Wish_Receipt_DDP;
+
+     List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentCaseRec.Id AND Status =: 'Pending' AND ProcessDefinition.Name =: 'Wish Child Form Approval Process']; 
       
         system.debug('@@@@ currentCaseRec @@@@@@@'+currentCaseRec);
         if(currentCaseRec.RecordTypeId == parentWishRecordTypeId ){
+       
+        
         WishFamilyForm = '/apex/WishChildForm_VF?id='+currentCaseRec.Id;
+        
         contactInfo = '/apex/RelationshipsViewer_VF?recId='+currentCaseRec.Id;
         LiabilityFrom = '/apex/WishLiabilityForm_VF?id='+currentCaseRec.Id;
         miniorParticipant = '/apex/WishLiabilityMinorParticipant_VF?id='+currentCaseRec.Id;
@@ -40,14 +44,17 @@ public class WishRelatedLinks_AC {
         ChildMedicalForm = '/apex/WishChildSummary_VF?id='+currentCaseRec.Id;
         ShoppingSpree =  '/apex/Itinerary_VF?id='+currentCaseRec.Id;
         
-        
-        
         }
         
-       querychildCase = [SELECT Id,CaseNumber,ParentId,AccountId,ContactId FROM Case WHERE ParentId =:currentCaseRec.Id AND RecordTypeId =: wishGrantRecordTypeId AND ParentId != Null limit 1];
+       querychildCase = [SELECT Id,CaseNumber,ParentId,Parent.AccountId,Parent.ContactId FROM Case WHERE ParentId =:currentCaseRec.Id AND RecordTypeId =: wishGrantRecordTypeId AND ParentId != Null limit 1];
         if(!querychildCase.isEmpty() && querychildCase[0].Id != Null){
-        WishReceipt = '/apex/loop__looplus?eid='+querychildCase[0].Id+'&accountId='+querychildCase[0].AccountId+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+ddpId;
+        WishReceipt = '/apex/loop__looplus?eid='+querychildCase[0].ParentId+'&accountId='+querychildCase[0].Parent.AccountId+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+ddpId;
         }
       
-  }                                                         
+  }     
+  
+    public pageReference DisplayError(){
+      ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,' This record is already in approval process'));
+      return null;
+    }                                                    
 }

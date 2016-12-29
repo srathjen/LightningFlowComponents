@@ -7,7 +7,7 @@ public class DiagnosisVerficationRemainder_ACTest
    
     }
     static testmethod  void createLeadRecords()
-    {	
+    {   
         Lead currLead = new Lead();
         currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
         currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
@@ -41,8 +41,8 @@ public class DiagnosisVerficationRemainder_ACTest
         currLead.Treating_Medical_Professional_Phone__c = '8220708921';
         currLead.Treating_Medical_Professional_Email__c= 'mcavennila@gmail.com';
         currLead.Any_medical_reason_for_moving_quickly__c= 'yes';
-        currLead.Primary_Diagnosis__c = 'c00';
-        currLead.Icd_10_code__c = 'c00';
+        currLead.PD_Condition_Description__c  = 'c00';
+        currLead.PD_ICD_Code__c = 'c00';
         currLead.RFI_Form_Info_Hidden__c = 'Referred';
         currLead.Company = 'MST';
         currLead.Status = 'Referred';
@@ -115,8 +115,8 @@ public class DiagnosisVerficationRemainder_ACTest
         currLead.Treating_Medical_Professional_Phone__c = '8220708921';
         currLead.Treating_Medical_Professional_Email__c= 'mcavennila@gmail.com';
         currLead.Any_medical_reason_for_moving_quickly__c= 'yes';
-        currLead.Primary_Diagnosis__c = 'c00';
-        currLead.Icd_10_code__c = 'c00';
+        currLead.PD_Condition_Description__c  = 'c00';
+        currLead.PD_ICD_Code__c = 'c00';
         //currLead.RFI_Form_Info_Hidden__c = 'Referred';
         currLead.Company = 'MST';
         currLead.Sub_Status__c = 'Pending Diagnosis Verification';

@@ -11,6 +11,11 @@
         <visible>false</visible>
     </applicationVisibilities>
     <applicationVisibilities>
+        <application>Wish_Volunteer_Center</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
         <application>standard__AppLauncher</application>
         <default>false</default>
         <visible>true</visible>
@@ -80,6 +85,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>AffiliationTrigger_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Affiliation_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -145,6 +154,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>ChangePasswordControllerTest</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ChapterActionTrackHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ChapterActionTrack_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -240,6 +257,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>DocusignStatusTriggerHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>DocusignStatusTrigger_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -264,7 +285,15 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>InKindDonationReimbursementFile_AT_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>InKindDonationReimbursement_AT_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>InKindDonorsAccount_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -544,6 +573,10 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>VolunteerInterviewRecurrenceTask_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>VolunteerInterviewTaskRest_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -601,6 +634,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>VolunteerProfile_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VolunteerRecordSharing_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -733,6 +770,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>WrapperDocuSign</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ZVFSignaturePadController</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -874,6 +915,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.External_Id__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Account.Fax</field>
         <readable>true</readable>
@@ -1002,6 +1048,11 @@
         <editable>false</editable>
         <field>Account.TickerSymbol</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Transaction_Code__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -1850,6 +1901,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case.Chapter_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.CheckedInFamily__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2164,6 +2220,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Hidden_Diagn_Verifi_Received_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Case.Hidden_Email_List__c</field>
         <readable>true</readable>
@@ -2171,6 +2232,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case.Hidden_Lead_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Hidden_Lead_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2186,6 +2252,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Case.Hidden_Primary_Diagnosis_del__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Hidden_Referral_date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3004,6 +3075,11 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Chapter_Action_Track__c.Due_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Chapter_Action_Track__c.Due_Days__c</field>
         <readable>false</readable>
@@ -3705,6 +3781,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Medical_Condition__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Medical_Needs__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -3801,11 +3882,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Part_A_Sent__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Contact.Participant__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -4101,6 +4177,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.To_me_the_most_important_part_of_my_wish__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Travel_Recommendation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Treatment_Subspecialty__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -4970,6 +5056,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Event.Chapter_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Event.Confirmed_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -5064,6 +5155,36 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>FAQ__kav.Attachment__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>FAQ__kav.Description__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>FAQ__kav.Role__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>How_To__kav.Question__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>How_To__kav.Role__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>How_To__kav.Step_By_Step__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>ICD_Codes__c.Condition_Description__c</field>
         <readable>true</readable>
@@ -5121,6 +5242,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>In_Kind_Donation_Reimbursement_File__c.File_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement_File__c.File_Path__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5185,7 +5311,32 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Ammount2__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>In_Kind_Donation_Reimbursement__c.Ammount_2__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Amount1__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Amount3__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Amount4__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Amount5__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5211,6 +5362,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>In_Kind_Donation_Reimbursement__c.Appeal__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Approval_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5286,6 +5442,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>In_Kind_Donation_Reimbursement__c.Documentation__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Email__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5410,6 +5571,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>In_Kind_Donation_Reimbursement__c.Street__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>In_Kind_Donation_Reimbursement__c.Total_Reimbursement_Amount__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -5481,6 +5647,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>In_Kind_Donation_Reimbursement__c.login_users_State__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement__c.vounteer_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5655,11 +5826,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Lead.Hidden_Primary_Diagnosis__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Lead.Hidden_Question1__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -5671,11 +5837,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Hospital_Treatment_Facility__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Lead.ICD_10_Code__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5915,16 +6076,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Lead.PrimaryDiagnosis_Condition_Description__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Lead.Primary_Diagnosis__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Lead.Provider_Signature__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6116,6 +6267,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Treating_Medical_Professional_Phone__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Treatment_Subspecialty__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7029,6 +7185,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Policy_and_Procedure__kav.Role__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Product2.Description</field>
         <readable>true</readable>
@@ -7052,6 +7213,26 @@
         <editable>true</editable>
         <field>Regions__c.Chapter_Name__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Resource__kav.Attachment__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Resource__kav.Description__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Resource__kav.Role__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Resource__kav.Video__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -7399,6 +7580,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Standards_of_Use__kav.Role__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Task.Account_Email__c</field>
         <readable>true</readable>
@@ -7461,6 +7647,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Task.Available_Time3__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Task.Chapter_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -8194,6 +8385,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Volunteer_Opportunity__c.Wish_Child__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Volunteer_Opportunity__c.Wish__c</field>
         <readable>true</readable>
@@ -8665,6 +8861,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Wish_Child_Form__c.Participant_Details__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Child_Form__c.Participant_Name__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Wish_Child_Form__c.Participant_Name_for_Dietary_Restriction__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -8709,9 +8915,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Wish_Child_Form__c.Participant_require_a_wheelchair_Details__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -9000,6 +9206,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Wish_Child_Form__c.oxygen_Details__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Wish_Expense_Transaction_Code__c.External_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9131,6 +9342,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Wish_Expense__c.Wish_Expense_Transaction_Code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Expense__c.Wish_Expense_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -9304,6 +9520,9 @@
         <layout>Event__c-Event Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>FAQ__kav-FAQ Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>FeedItem-Feed Item Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -9390,6 +9609,9 @@
         <recordType>Orientation_Training__c.Training</recordType>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Policy_and_Procedure__kav-Policy and Procedure Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Pricebook2-Price Book Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -9405,6 +9627,9 @@
         <layout>Regions__c-Regions Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Resource__kav-Resources Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Role__c-Role Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -9415,6 +9640,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Solution-Solution Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Standards_of_Use__kav-Standards of Use Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Task-Interview Layout</layout>
@@ -9572,7 +9800,7 @@
     <objectPermissions>
         <allowCreate>false</allowCreate>
         <allowDelete>false</allowDelete>
-        <allowEdit>true</allowEdit>
+        <allowEdit>false</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>false</modifyAllRecords>
         <object>Case</object>
@@ -9772,6 +10000,14 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>IdeasHome</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>InKindDonorsAccount_VF</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>InKindDonors_VF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -9991,8 +10227,12 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>WishRelatedLinks_VF</apexPage>
+        <apexPage>WishRelatedLinks</apexPage>
         <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>WishRelatedLinks_VF</apexPage>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>active_header</apexPage>
@@ -10000,6 +10240,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>active_header_Inside_Salesforce</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>active_header_progress_bar</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -10220,7 +10464,6 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
-        <personAccountDefault>true</personAccountDefault>
         <recordType>Task.Background_Check</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
@@ -10362,6 +10605,10 @@
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
+        <tab>Diagnosis_Verification__c</tab>
+        <visibility>DefaultOn</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
         <tab>Dynamic_Content__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
@@ -10448,6 +10695,10 @@
     <tabVisibilities>
         <tab>cg__CaseFile__c</tab>
         <visibility>DefaultOff</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>cg__S3Config__c</tab>
+        <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>dsfs__DocuSignAccountConfiguration__c</tab>
