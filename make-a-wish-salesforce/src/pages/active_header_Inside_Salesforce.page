@@ -8,10 +8,10 @@
       </style>
       <script>
      
-       var locurl = window.location.href;
-       console.log(locurl);
-       var y = locurl.split('id=')[1];
-       var pageName= ["WishChildForm_VF", "WishFamilyForm_VF", "WishInformationForm_VF"];
+       var locurl = window.location.href;           
+       var y = locurl.split('=')[1];
+
+       var pageName= ["WishChildForm_VF", "WishFamilyForm_VF", "WishInformationForm_VF"];       
        window.onload = function(){
            for (var i = 0; i < pageName.length; i++) {
               if(locurl.indexOf(pageName[i]) >= 0)
@@ -20,6 +20,7 @@
        }
        
        function redir(v){
+              
            window.location='/apex/'+v+'?id='+y;
        }
        

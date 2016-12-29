@@ -47,7 +47,7 @@
     </entryCriteria>
     <finalApprovalActions>
         <action>
-            <name>In_Kind_Approved_Date</name>
+            <name>Update_Approved_Date_on_Reimbursement</name>
             <type>FieldUpdate</type>
         </action>
     </finalApprovalActions>

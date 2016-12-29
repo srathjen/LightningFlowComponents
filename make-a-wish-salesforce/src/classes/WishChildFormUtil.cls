@@ -103,13 +103,16 @@ Public Class WishChildFormUtil
     public string familyForm {get;set;}
     public string infoForm {get;set;}
     public boolean sameParentGuardian{get;set;}
+    public boolean isChildPart{get;set;}
     public boolean approvalError{get;set;}
+    
     
     public WishChildFormUtil()
     {
          wishChildList = new list<Wish_Child_Form__c >();
         emailList = new List<String>();
         sameParentGuardian = false;
+        isChildPart = false;
         isInformation = false;
         driverNameList = new List<SelectOption>();
           /***********************************************************************/
@@ -156,7 +159,7 @@ Public Class WishChildFormUtil
         familyForm = '/apex/WishFamilyForm_VF?id='+caseId;
         infoForm = '/apex/WishInformationForm_VF?id='+caseId;
         Boolean isWishFamilyAvailable = false;
-        signersKeyPairMap = new Map<String,String>();
+        signersKeyPairMap = new Map<String,String>();       
     
     }
     
@@ -184,6 +187,8 @@ Public Class WishChildFormUtil
         public String medicalNeeds{get;set;}
         public String residingWishMedical{get;set;}
         public String relId{get;set;}
+        public boolean sameParentGuardianFlag {get;set;}
+        public boolean isChildParticipants {get; set;}
     }
  
    /*To display the state value of current logged in volunteer contact in community.*/

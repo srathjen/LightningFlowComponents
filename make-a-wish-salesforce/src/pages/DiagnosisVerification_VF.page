@@ -2440,7 +2440,7 @@
                 checkNxtQtn('ShowNext');
             } else if(this.value == 'Intractable with status epilepticus' && $(".statement-desc-patient input[type=radio]:checked").val() <= 5) {
                 checkNxtQtn('Yes');
-            }  else if(this.value == 'Not Intractable') {
+            }  else if(this.value == 'Not Intractable' || this.value == '1' || this.value == '2' || this.value == '3' || this.value == '4' || this.value == '5' || this.value == '6'|| this.value == '7' || this.value == '8' || this.value == '9' || this.value == '10' || this.value == '11' || this.value == '12') {
                 checkNxtQtn('No');
             } else {
                 checkNxtQtn(this.value);
@@ -2454,7 +2454,7 @@
                 checkNxtQtn1('ShowNext');
             } else if(this.value == 'Intractable with status epilepticus' && $(".statement-desc-patient input[type=radio]:checked").val() <= 5) {
                 checkNxtQtn1('Yes');
-            }  else if(this.value == 'Not Intractable') {
+             }  else if(this.value == 'Not Intractable' || this.value == '1' || this.value == '2' || this.value == '3' || this.value == '4' || this.value == '5' || this.value == '6'|| this.value == '7' || this.value == '8' || this.value == '9' || this.value == '10' || this.value == '11' || this.value == '12' || this.value == 'Short-term bridge' || this.value == 'Long-term therapy' || this.value == "I don't know") {
                 checkNxtQtn1('No');
             } else {
                 checkNxtQtn1(this.value);
@@ -2468,7 +2468,7 @@
                 checkNxtQtn2('ShowNext');
             } else if(this.value == 'Intractable with status epilepticus' && $(".statement-desc-patient input[type=radio]:checked").val() <= 5) {
                 checkNxtQtn2('Yes');
-            }  else if(this.value == 'Not Intractable') {
+            }  else if(this.value == 'Not Intractable' || this.value == '1' || this.value == '2' || this.value == '3' || this.value == '4' || this.value == '5' || this.value == '6'|| this.value == '7' || this.value == '8' || this.value == '9' || this.value == '10' || this.value == '11' || this.value == '12' || this.value == 'Short-term bridge' || this.value == 'Long-term therapy' || this.value == "I don't know") {
                 checkNxtQtn2('No');
             } else {
                 checkNxtQtn2(this.value);
@@ -2482,7 +2482,7 @@
                 checkNxtQtn3('ShowNext');
             } else if(this.value == 'Intractable with status epilepticus' && $(".statement-desc-patient input[type=radio]:checked").val() <= 5) {
                 checkNxtQtn3('Yes');
-            }  else if(this.value == 'Not Intractable') {
+            }  else if(this.value == 'Not Intractable' || this.value == '1' || this.value == '2' || this.value == '3' || this.value == '4' || this.value == '5' || this.value == '6'|| this.value == '7' || this.value == '8' || this.value == '9' || this.value == '10' || this.value == '11' || this.value == '12' || this.value == 'Short-term bridge' || this.value == 'Long-term therapy' || this.value == "I don't know") {
                 checkNxtQtn3('No');
             } else {
                 checkNxtQtn3(this.value);
@@ -2496,8 +2496,8 @@
                 checkNxtQtn4('ShowNext');
             } else if(this.value == 'Intractable with status epilepticus' && $(".statement-desc-patient input[type=radio]:checked").val() <= 5) {
                 checkNxtQtn4('Yes');
-            }  else if(this.value == 'Not Intractable') {
-                checkNxtQtn4(this.value);
+            }  else if(this.value == 'Not Intractable' || this.value == '1' || this.value == '2' || this.value == '3' || this.value == '4' || this.value == '5' || this.value == '6'|| this.value == '7' || this.value == '8' || this.value == '9' || this.value == '10' || this.value == '11' || this.value == '12' || this.value == 'Short-term bridge' || this.value == 'Long-term therapy' || this.value == "I don't know") {
+                checkNxtQtn4('No');
             } else {
                 checkNxtQtn4(this.value);
             }

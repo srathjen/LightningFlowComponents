@@ -58,9 +58,9 @@ public class WishJourneyController{
         currCase = (Case)stdController.getRecord();
         currCase = [SELECT Id,RecordType.name,Contact.FirstName,Contact.LastName,status,Days_in_stage__c,Rush__c, 
                     End_Date__c, Parent.End_Date__c, Referral_Date__c, Parent.Referral_Date__c, parent.status,
-                    Qualified_Date__c, Parent.Qualified_Date__c,Anticipated_Wish_Date__c,Parent.ContactId,
+                    Qualified_Date__c, Parent.Qualified_Date__c,Parent.ContactId,
                     parent.Contact.FirstName,Parent.Contact.LastName,Anticipated_Start_Date__c,Parent.Anticipated_Start_Date__c,
-                    Parent.Anticipated_Wish_Date__c,Wish_Determined_Date__c, Parent.Wish_Determined_Date__c,
+                    Wish_Determined_Date__c, Parent.Wish_Determined_Date__c,
                     Parent.Rush__c,contactId FROM CASE WHERE Id = :currCase.id];
                     
                     

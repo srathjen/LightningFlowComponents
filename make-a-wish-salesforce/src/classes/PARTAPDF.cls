@@ -223,7 +223,9 @@ questionList.add(currRec);
                 dsfs__DocuSign_Status__c dsfs= NEW dsfs__DocuSign_Status__c();
                 dsfs.dsfs__DocuSign_Envelope_ID__c = env;
                 dsfs.dsfs__Lead__c= currLead.Id;
+                system.debug('@@@@@@@ dsfs @@@@@@@@'+dsfs );
                 Insert dsfs;  
+                 
                 
                 
                 

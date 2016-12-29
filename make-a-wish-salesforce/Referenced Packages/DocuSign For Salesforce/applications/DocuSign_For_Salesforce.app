@@ -10,9 +10,5 @@
     <tab>standard-Contact</tab>
     <tab>standard-Lead</tab>
     <tab>standard-Contract</tab>
-    <tab>In_Kind_Donation_Reimbursement_File__c</tab>
-    <tab>Travel_Data__c</tab>
     <tab>DocuSignAccountConfiguration__c</tab>
-    <tab>Awards_Recognition__c</tab>
-    <tab>Constituent_Code__c</tab>
 </CustomApplication>

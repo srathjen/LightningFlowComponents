@@ -13,7 +13,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Role__c</field>
+                <field>Constituent_Code__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -22,10 +22,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Primary__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Region_Code__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -40,6 +36,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>EndDate__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Region_Code__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>

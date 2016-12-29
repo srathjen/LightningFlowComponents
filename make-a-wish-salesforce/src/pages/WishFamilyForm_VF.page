@@ -167,7 +167,7 @@
                 
       .activeClassCommunity{background:#2184cc !important;color:#000000 !important;border:solid 1px #2184cc !important;}
       .custMenuCommunity{margin:1px;border:solid 1px #2184cc;float: left;width: 23%;color: #ffffff;font-size:small; background: #c7c7c7;padding: 6px;text-align: center;user-select: none;cursor: pointer;}
-      
+      .col-lg-3 { width: 25%;height: 38px; }
                   
         </style>
     <script>
@@ -185,7 +185,7 @@
             }
     
     $(document).ready(function(){ 
-     $(".readonly").attr('readonly', 'readonly');
+    $(".readonly").attr('readonly', 'readonly');
      $('.collapse a').click(function() { 
            $('.active').removeClass('active');
            $('.'+$(this).attr('class')).addClass('active');            
@@ -538,7 +538,7 @@
                                 <apex:Commandbutton value="Back" action="{!BackToWCF}" styleClass="btn btn-default mg-rt" immediate="true"/>
                                 <apex:Commandbutton value="Save" action="{!SaveandwishFamilyExit}" styleClass="btn btn-default mg-rt phonecheck" onclick="return ClickToValidate();"/>
                                 <apex:Commandbutton value="Next" action="{!WFFNext}" styleClass="btn btn-default mg-rt phonecheck" onclick="return ClickToValidate();"/>
-                                 <apex:Commandbutton value="Exit" action="{!cancelfunction}" style="margin-left: 10px;" reRender="popup"  styleClass="btn btn-default" immediate="true"/>
+                                <apex:Commandbutton value="Exit" action="{!cancelfunction}" style="margin-left: 10px;" reRender="popup"  styleClass="btn btn-default" immediate="true"/>
                             </div>
                         </div>
                 </div>
@@ -670,10 +670,10 @@
                         <b>NOTE:</b> Make-A-Wish cannot guarantee the participation of any
                         individual(s) listed below. <br/>
                        
-                       <div style="float:right;margin-right: 26%;margin-top: 10px;" >
+                       <div style="float:left;margin-right: 26%;margin-top: 10px;" >
                          <apex:inputCheckbox value="{!wcfUtil.sameParentGuardian}" style="display:inline !important;position:relative;z-index:9999;">
                               <apex:actionSupport action="{!SameAsFamily}" event="onchange" />
-                         </apex:inputCheckbox> <span style="font-weight:bold;">Same as Parent/Guardian</span>
+                         </apex:inputCheckbox> <span style="font-weight:bold;">Check here to add all Parent/Guardians to participant list</span>
                        </div>
                           
                          <div class="row top-space pad15" id="participantsInfo">
@@ -708,7 +708,7 @@
                                             </td>                          
                                             <td>
                                                 <div class="input-group"><label class="input-group-addon btn" for="date"><span class="fa fa-calendar open-datetimepicker"></span></label>
-                                                    <apex:inputText value="{!wishFamilContact.dob}" styleClass="form-control date-input" id="date-input" style="height: 38px;"/>
+                                                    <apex:inputText value="{!wishFamilContact.dob}" styleClass="form-control date-input required" id="date-input" style="border-left:5px solid red;height: 38px;"/>
                                                 </div>
                                            </td>
                                             <td><apex:inputText value="{!wishFamilContact.Email}" styleClass="form-control emailValue" /></td>

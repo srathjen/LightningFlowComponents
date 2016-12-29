@@ -156,7 +156,7 @@
        -webkit-animation:fade-in 1s infinite;
        
         }  
-          
+         .col-lg-3 { width: 25%;height: 38px; } 
         </style>
     <script type="text/javascript">
     function formatDate(date) {
@@ -429,13 +429,15 @@
                 </div>-->
                 <div class="container-body">
                     <div class="row top-space" id="schedule">
-                       <div class="row">
+                        <div class="row">
                             <div class="col-lg-2 text-imp lineHeight">Wish Child's Name:</div>
-                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.FirstName__c}" html-placeholder="FirstName" styleClass="form-control required readonly" style="border-left:5px solid red"/></div>
+                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.FirstName__c}" html-placeholder="FirstName" styleClass="form-control readonly"/></div>
                             <div class="col-lg-3"><apex:inputField value="{!currWishChild.Middle_Name__c}"  html-placeholder="MiddleName" styleClass="form-control readonly"/></div>
                             <div class="col-lg-3"><apex:inputField value="{!currWishChild.LastName__c}" styleClass="form-control required readonly" html-placeholder="LastName" style="border-left:5px solid red"/></div>
-                        </div>
-                       
+                        </div>                      
+                        
+                        
+                        
                     </div>
                     <center><p class="text-bold top-space">Scheduling the Wish</p></center>
                     <center><p>Please indicate three time periods in which your family will have the greatest availability for fulfillment of the wish.</p></center>
@@ -630,8 +632,8 @@
                                     <td class="tbl-medical"> Does any requested participant require oxygen?If yes, please describe how often. </td>
                                     <td class="tbl-dropdown"> <apex:inputField value="{!currWishChild.Participant_require_oxygen_how_often__c}" styleClass="form-control oxygenpicklist" /> </td>
                                     <td> <c:MultiSelectPicklistComponent leftoriginalvalue="{!wcfUtil.leftOxygenNamesList}" rightOriginalvalue="{!wcfUtil.rightOxygenNamesList}" currString="{!wcfUtil.currentOxygenNamesList}" /></td>
-                                    <td> <apex:inputField value="{!currWishChild.oxygen_Details__c}" styleClass="form-control wheelchairtext" /> </td>
-                                    <td> <apex:inputField value="{!currWishChild.Participant_require_oxygen_Note__c}" styleClass="form-control oxygennotes" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.oxygen_Details__c}" styleClass="form-control oxygennotes" /> </td>
+                                    <td> <apex:inputField value="{!currWishChild.Participant_require_oxygen_Note__c}" styleClass="form-control" /> </td>
                                     
                                 </tr>
                                 <tr>

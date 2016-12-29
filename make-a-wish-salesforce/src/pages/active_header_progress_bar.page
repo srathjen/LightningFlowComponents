@@ -17,8 +17,9 @@
            }
        }
        
-       function redir(v){
-           window.location='/apex/'+v+'?id='+y;
+       function redir(v){                  
+           var b = locurl.split('=')[1];         
+           window.location='/apex/'+v+'?id='+b;
        }
        
       </script>

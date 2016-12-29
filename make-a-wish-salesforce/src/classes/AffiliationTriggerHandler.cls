@@ -54,10 +54,58 @@ public class AffiliationTriggerHandler {
         }
     }
     //used to update the status field in contact for reporting purpose
-    public static void updateContact(Map<id,String>contactMap){
-        List<Contact> conList=[SELECT id,Hidden_Status__c  from contact where id IN:contactMap.keyset()];
-       for(Contact currContact:conList){
-           currContact.Hidden_Status__c=contactMap.get(currContact.id);
+    public static void updateContact(Map<id,npe5__Affiliation__c> contactMap, Set<Id> affiliationIds){
+       
+        Constant_AC  constant = new Constant_AC();
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+        Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
+        Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
+        Id boardMemberRT = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.boardMemberRT).getRecordTypeId();
+        Id chapterRT = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
+        
+       List<Contact> conList=[SELECT id,Hidden_Status__c, RecordTypeId, RecordType.Name  from contact where id IN :contactMap.keyset()];
+       Map<Id,Account> accountMap = new Map<Id,Account>([SELECT id,recordtypeid FROM Account WHERE Id IN :affiliationIds]);
+       
+       Map<String,integer> recordTypeOrder = new Map<String, integer>();
+       recordTypeOrder.put('Board Member',1);
+       recordTypeOrder.put('Volunteer',2);
+       recordTypeOrder.put('Medical Professional',3);
+       recordTypeOrder.put('Wish Child',4);
+       recordTypeOrder.put('Wish Family',5);
+       
+       
+       Map<String,String> recordTypeNames = new Map<String, String>();
+       recordTypeNames.Put(volunteerRecordTypeId,'Volunteer');
+       recordTypeNames.Put(wichChildRecordTypeId,'Wish Child');
+       recordTypeNames.Put(familyContactRecordTypeId,'Wish Family');
+       recordTypeNames.Put(MedicalProfContactRecordTypeId ,'Medical Professional');
+       recordTypeNames.Put(boardMemberRT,'Board Member');
+       
+       Map<String,String> recordTypes = new Map<String, String>();
+       recordTypes.put('Volunteer',volunteerRecordTypeId);
+       recordTypes.put('Wish Child',wichChildRecordTypeId);
+       recordTypes.put('Wish Family',familyContactRecordTypeId);
+       recordTypes.put('Medical Professional',MedicalProfContactRecordTypeId );
+       recordTypes.put('Board Member',boardMemberRT);
+       
+       
+       
+       for(Contact currContact : conList){
+           npe5__Affiliation__c currAffiliation =  contactMap.get(currContact.id);
+           currContact.Hidden_Status__c=currAffiliation.npe5__Status__c;
+           
+           if(currAffiliation.Constituent_code__c != Null && recordTypeNames.containsKey(currContact.recordTypeId))
+           {
+               if(currAffiliation.Constituent_code__c != recordTypeNames.get(currContact.recordTypeId))
+               {
+                 if(recordTypeOrder.get(currAffiliation.Constituent_code__c) < recordTypeOrder.get(recordTypeNames.get(currContact.recordTypeId)))
+                 {
+                   if(recordTypes.containsKey(currAffiliation.Constituent_code__c) && accountMap.get(currAffiliation.npe5__Organization__c).recordTypeId == chapterRT)
+                      currContact.RecordTypeId =recordTypes.get(currAffiliation.Constituent_code__c);  
+                 }
+               }
+           }
        } 
        update conList;
         

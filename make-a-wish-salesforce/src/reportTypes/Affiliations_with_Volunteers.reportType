@@ -93,11 +93,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>npe5__Contact__c.Chapter_Name__c</field>
-            <table>npe5__Affiliation__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>npe5__Contact__c.Current_Age__c</field>
             <table>npe5__Affiliation__c</table>
         </columns>

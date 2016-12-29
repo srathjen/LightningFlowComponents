@@ -97,6 +97,10 @@
         <name>End_date__c</name>
     </fields>
     <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
         <label><!-- Flight ID --></label>
         <name>Flight_ID__c</name>
     </fields>

@@ -17,10 +17,10 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert)
         
         for(npe4__Relationship__c newRecord :trigger.new){
             if(relatedConMap.containsKey(newRecord.npe4__RelatedContact__c) && relatedConMap.get(newRecord.npe4__RelatedContact__c).IsParentGuardian__c ==  'ParentGuardian'){
-                newRecord.Wish_Family_participants__c = 'Parent/Guardian';
+                newRecord.Parent_Legal_Guardian__c = true;
             }
             if(relatedConMap.containsKey(newRecord.npe4__RelatedContact__c) && relatedConMap.get(newRecord.npe4__RelatedContact__c).IsParentGuardian__c ==  'Participant'){
-                newRecord.Wish_Family_participants__c = 'Participants';
+                newRecord.Wish_Participant__c = true;
             }
         }
     }
@@ -41,7 +41,7 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert)
         {
            if(newRecord.Migrated_Record__c == false)
            {
-            if(newRecord.npe4__Contact__c != Null && newRecord.Wish_Family_participants__c == 'Parent/Guardian'){
+            if(newRecord.npe4__Contact__c != Null && newRecord.Parent_Legal_Guardian__c == true){
                 relationshipIdsSet.add(newRecord.id);
             }
             
@@ -69,8 +69,8 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert)
                }
            }
         }
-        for(npe4__Relationship__c currrentRlationShip : [SELECT ID,npe4__Contact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__c,Wish_Family_participants__c FROM npe4__Relationship__c 
-                                                         WHERE ID IN:relationshipIdsSet AND Wish_Family_participants__c = 'Parent/Guardian']){
+        for(npe4__Relationship__c currrentRlationShip : [SELECT ID,npe4__Contact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__c,Parent_Legal_Guardian__c FROM npe4__Relationship__c 
+                                                         WHERE ID IN:relationshipIdsSet AND Parent_Legal_Guardian__c =: true]){
                                                              if(relationshipMap.containsKey(currrentRlationShip.npe4__Contact__c)){
                                                                  relationshipMap.get(currrentRlationShip.npe4__Contact__c).add(currrentRlationShip);
                                                              }else{

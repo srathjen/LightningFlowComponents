@@ -1725,6 +1725,7 @@
     </fields>
     <fields>
         <fullName>Alternate_Phone__c</fullName>
+        <description>It store the alternate phone number.</description>
         <externalId>false</externalId>
         <label>Alternate Phone</label>
         <required>false</required>
@@ -2395,17 +2396,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Chapter_Name__c</fullName>
-        <description>It will hold the value of Chapter name</description>
-        <externalId>false</externalId>
-        <label>Chapter Name</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>City_Employer__c</fullName>
         <description>It will hold the city value of the employer</description>
         <externalId>false</externalId>
@@ -2525,6 +2515,7 @@
     </fields>
     <fields>
         <fullName>Date_of_last_engagement__c</fullName>
+        <description>It capture the volunteer last engagement  date.</description>
         <externalId>false</externalId>
         <label>Date of last engagement</label>
         <required>false</required>
@@ -2533,6 +2524,7 @@
     </fields>
     <fields>
         <fullName>Deceased_Date__c</fullName>
+        <description>It capture the Deceased date.</description>
         <externalId>false</externalId>
         <label>Deceased Date</label>
         <required>false</required>
@@ -2696,6 +2688,17 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
         <fullName>Fax</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
@@ -2734,6 +2737,7 @@
     <fields>
         <fullName>From_Mulesoft__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>It indicated the record is created by manually or from mulesoft.</description>
         <externalId>false</externalId>
         <label>From Mulesoft</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2784,6 +2788,7 @@
     </fields>
     <fields>
         <fullName>Hidden_Country__c</fullName>
+        <description>This field is used as hidden to update the contact country  from volunteer portal</description>
         <externalId>false</externalId>
         <label>Country</label>
         <length>20</length>
@@ -3105,6 +3110,7 @@ and the date it was or will be granted.</inlineHelpText>
     <fields>
         <fullName>IsContactInfoUpdated__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>This field is used for update contact info approval process.</description>
         <externalId>false</externalId>
         <label>IsContactInfoUpdated</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3383,6 +3389,7 @@ and the date it was or will be granted.</inlineHelpText>
     <fields>
         <fullName>Migrated_Record__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>It indicated the record is created by manually or from mulesoft.</description>
         <externalId>false</externalId>
         <label>Migrated Record</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3451,6 +3458,7 @@ and the date it was or will be granted.</inlineHelpText>
     </fields>
     <fields>
         <fullName>Number_of_Assignments__c</fullName>
+        <description>It hold the number of assignments for each contact.</description>
         <externalId>false</externalId>
         <label>Number of Assignments</label>
         <precision>18</precision>
@@ -3492,7 +3500,7 @@ and the date it was or will be granted.</inlineHelpText>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Html</type>
-        <visibleLines>25</visibleLines>
+        <visibleLines>10</visibleLines>
     </fields>
     <fields>
         <fullName>Onboarding_Status__c</fullName>
@@ -3629,7 +3637,7 @@ and the date it was or will be granted.</inlineHelpText>
         <fullName>Preferred_Phone_Types__c</fullName>
         <description>It holds the details of preferred phone types</description>
         <externalId>false</externalId>
-        <label>Type</label>
+        <label>Preferred Phone Type</label>
         <picklist>
             <picklistValues>
                 <fullName>Home</fullName>
@@ -3637,6 +3645,10 @@ and the date it was or will be granted.</inlineHelpText>
             </picklistValues>
             <picklistValues>
                 <fullName>Mobile</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
                 <default>false</default>
             </picklistValues>
             <sorted>false</sorted>
@@ -3809,10 +3821,9 @@ and the date it was or will be granted.</inlineHelpText>
     <fields>
         <fullName>RE_Record_Id__c</fullName>
         <caseSensitive>false</caseSensitive>
-        <description>Primary key of the RE Record table for upsert and uniqueness purposes.</description>
         <externalId>true</externalId>
-        <label>RE Record Id</label>
-        <length>20</length>
+        <label>RE_Record_Id</label>
+        <length>50</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
@@ -4013,7 +4024,8 @@ null)</formula>
     </fields>
     <fields>
         <fullName>Region_Chapter__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <description>It holds the contact region chapter</description>
         <externalId>false</externalId>
         <label>Region Chapter</label>
         <referenceTo>Account</referenceTo>
@@ -4028,6 +4040,8 @@ null)</formula>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>It holds the region code for chapter</description>
         <externalId>false</externalId>
+        <inlineHelpText>1.Please select All fields Radio Button to search Region Code based on Name in Search Dialogue box.
+2.Region Chapter needs to be filled in order to see the Region Code based on Chapters.</inlineHelpText>
         <label>Region Code</label>
         <lookupFilter>
             <active>true</active>
@@ -4228,6 +4242,7 @@ null)</formula>
     </fields>
     <fields>
         <fullName>SD1_Condition_Description__c</fullName>
+        <description>It holds the condition description for Secoundary Diagnosis 1.</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 1 Cond Description</label>
         <length>255</length>
@@ -4248,6 +4263,7 @@ null)</formula>
     </fields>
     <fields>
         <fullName>SD2_Condition_Description__c</fullName>
+        <description>It holds the condition description for Secoundary Diagnosis 2.</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 2 Cond Description</label>
         <length>255</length>
@@ -4258,6 +4274,7 @@ null)</formula>
     </fields>
     <fields>
         <fullName>SD2_ICD_Code__c</fullName>
+        <description>It contains ICD code for Secondary Diagnosis 2.</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 2 ICD-10 Code</label>
         <length>255</length>
@@ -4268,6 +4285,7 @@ null)</formula>
     </fields>
     <fields>
         <fullName>SD3_Condition_Description__c</fullName>
+        <description>It holds the condition description for Secoundary Diagnosis 3.</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 3 Cond Description</label>
         <length>255</length>
@@ -4278,6 +4296,7 @@ null)</formula>
     </fields>
     <fields>
         <fullName>SD3_ICD_Code__c</fullName>
+        <description>It contains ICD code for Secondary Diagnosis 3.</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 3 ICD-10 Code</label>
         <length>255</length>
@@ -4288,6 +4307,7 @@ null)</formula>
     </fields>
     <fields>
         <fullName>SD4_Condition_Description__c</fullName>
+        <description>It holds the condition description for Secoundary Diagnosis 4.</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 4 Cond Description</label>
         <length>255</length>
@@ -4298,6 +4318,7 @@ null)</formula>
     </fields>
     <fields>
         <fullName>SD4_ICD_Code__c</fullName>
+        <description>It contains ICD code for Secondary Diagnosis 4.</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 4 ICD-10 Code</label>
         <length>255</length>
@@ -4340,6 +4361,7 @@ null)</formula>
     </fields>
     <fields>
         <fullName>Sibling_Age__c</fullName>
+        <description>It hold the age of the Sibling.</description>
         <externalId>false</externalId>
         <label>Sibling Age</label>
         <length>10</length>
@@ -5218,6 +5240,7 @@ provide contact information for each site on which you are active.</inlineHelpTe
     </fields>
     <fields>
         <fullName>Wish_Family_Type__c</fullName>
+        <description>It store the wish family type.</description>
         <externalId>false</externalId>
         <label>Wish Family Type</label>
         <length>200</length>
@@ -5327,6 +5350,7 @@ provide contact information for each site on which you are active.</inlineHelpTe
     </fields>
     <fields>
         <fullName>Year__c</fullName>
+        <description>This field is used for volunteer reports.</description>
         <externalId>false</externalId>
         <formula>TEXT(YEAR(DATEVALUE( CreatedDate )))</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -14392,7 +14416,7 @@ npo02__Household__r.npo02__TotalOppAmount__c)</formula>
         <fullName>Contact_Account_Lookup_Validation</fullName>
         <active>true</active>
         <description>This validation will fire when volunteer contact created are updated if account lookup is not chapter account</description>
-        <errorConditionFormula>AND(RecordType.DeveloperName = &apos;Volunteer_Contact&apos;, NOT(Account.RecordType.DeveloperName = &apos;Chapter&apos;))</errorConditionFormula>
+        <errorConditionFormula>AND(RecordType.DeveloperName = &apos;Volunteer_Contact&apos;, NOT(Account.RecordType.DeveloperName = &apos;Chapter&apos;), ISNEW())</errorConditionFormula>
         <errorDisplayField>AccountId</errorDisplayField>
         <errorMessage>You should select only chapter account</errorMessage>
     </validationRules>

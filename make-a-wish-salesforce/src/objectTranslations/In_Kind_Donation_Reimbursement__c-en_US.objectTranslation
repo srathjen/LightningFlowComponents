@@ -21,28 +21,12 @@
         <name>Address_Line_1_del__c</name>
     </fields>
     <fields>
-        <label><!-- Amount2 --></label>
-        <name>Ammount2__c</name>
+        <label><!-- Adjustment Comments --></label>
+        <name>Adjustment_Comments__c</name>
     </fields>
     <fields>
         <label><!-- Amount 2 --></label>
         <name>Ammount_2__c</name>
-    </fields>
-    <fields>
-        <label><!-- Amount1 --></label>
-        <name>Amount1__c</name>
-    </fields>
-    <fields>
-        <label><!-- Amount3 --></label>
-        <name>Amount3__c</name>
-    </fields>
-    <fields>
-        <label><!-- Amount4 --></label>
-        <name>Amount4__c</name>
-    </fields>
-    <fields>
-        <label><!-- Amount5 --></label>
-        <name>Amount5__c</name>
     </fields>
     <fields>
         <label><!-- Amount 1 --></label>
@@ -67,6 +51,14 @@
     <fields>
         <label><!-- Approval Date --></label>
         <name>Approval_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved By --></label>
+        <name>Approved_By__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved Date --></label>
+        <name>Approved_Date__c</name>
     </fields>
     <fields>
         <label><!-- Attachments --></label>
@@ -144,8 +136,8 @@
             <translation><!-- Attached --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Not available</masterLabel>
-            <translation><!-- Not available --></translation>
+            <masterLabel>Not Available</masterLabel>
+            <translation><!-- Not Available --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Will Attach</masterLabel>
@@ -201,7 +193,8 @@
         <name>Gift_Value__c</name>
     </fields>
     <fields>
-        <label><!-- In-Kind Donor Name --></label>
+        <help><!-- If donation made by a business, please add business name here. If this is a personal donation please add your name below in the &apos;Volunteer Donor&apos; field. --></help>
+        <label><!-- Business Donor --></label>
         <lookupFilter>
             <errorMessage><!-- you can choose only inkind account --></errorMessage>
         </lookupFilter>
@@ -809,7 +802,8 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Volunteer Name --></label>
+        <help><!-- If this donation was made personally, please add your name here. --></help>
+        <label><!-- Volunteer Donor --></label>
         <name>vounteer_Name__c</name>
         <relationshipLabel><!-- In-Kind Donation &amp; Reimbursement --></relationshipLabel>
     </fields>
@@ -851,8 +845,8 @@
             <section>Expense Description Section</section>
         </sections>
         <sections>
-            <label><!-- Payable Information Section --></label>
-            <section>Payable Information Section</section>
+            <label><!-- Payment Mailing Address --></label>
+            <section>Payment Mailing Address</section>
         </sections>
     </layouts>
     <layouts>
@@ -897,8 +891,8 @@
             <section>Expense Description Section</section>
         </sections>
         <sections>
-            <label><!-- Payable Information Section --></label>
-            <section>Payable Information Section</section>
+            <label><!-- Payment Mailing Address --></label>
+            <section>Payment Mailing Address</section>
         </sections>
     </layouts>
     <recordTypes>
@@ -911,8 +905,12 @@
     </recordTypes>
     <startsWith>Consonant</startsWith>
     <validationRules>
-        <errorMessage><!-- Please enter either the Account Name or Volunteer Name. --></errorMessage>
+        <errorMessage><!-- Please enter either the Business Donor or Volunteer Donor. --></errorMessage>
         <name>IKR_AccountName_VolunteerName_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You do not have access to edit the approved record --></errorMessage>
+        <name>IKR_Editing_Approved_Record_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- You should enter the reason for changing the gift value --></errorMessage>

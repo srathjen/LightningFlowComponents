@@ -119,6 +119,7 @@
     </fields>
     <fields>
         <fullName>Date_Cancelled__c</fullName>
+        <description>It will display the training cancelled date.</description>
         <externalId>false</externalId>
         <formula>if( ISPICKVAL(Volunteer_Attendance__c,&apos;Cancelled&apos;), TODAY() ,null)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -156,6 +157,7 @@
     <fields>
         <fullName>From_Mulesoft__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>It indicated the record is created by manually or from mulesoft.</description>
         <externalId>false</externalId>
         <label>From Mulesoft</label>
         <trackHistory>false</trackHistory>
@@ -178,6 +180,7 @@
     <fields>
         <fullName>Migrated_Record__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>It indicated the record is created by manually or from mulesoft.</description>
         <externalId>false</externalId>
         <label>Migrated Record</label>
         <trackHistory>false</trackHistory>

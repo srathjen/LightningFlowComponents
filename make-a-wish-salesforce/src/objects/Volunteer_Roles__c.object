@@ -59,6 +59,7 @@
     <externalSharingModel>ReadWrite</externalSharingModel>
     <fields>
         <fullName>Chapter_Name__c</fullName>
+        <description>It store the chapter name.</description>
         <externalId>false</externalId>
         <formula>Chapter_Role__r.Chapter_Name__r.Name</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -85,6 +86,7 @@
     </fields>
     <fields>
         <fullName>Role_Name__c</fullName>
+        <description>This field store the role name.</description>
         <externalId>false</externalId>
         <formula>Chapter_Role__r.Role_Name__r.Name</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -145,6 +147,7 @@
     </fields>
     <fields>
         <fullName>isWishRole__c</fullName>
+        <description>This field is used to store the wish role.</description>
         <externalId>false</externalId>
         <formula>Chapter_Role__r.Role_Name__r.isWishRole__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>

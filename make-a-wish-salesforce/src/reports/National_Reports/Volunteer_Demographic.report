@@ -4,9 +4,6 @@
         <field>npe5__Affiliation__c$npe5__Contact__c.Name</field>
     </columns>
     <columns>
-        <field>npe5__Affiliation__c$npe5__Contact__c.Chapter_Name__c</field>
-    </columns>
-    <columns>
         <field>npe5__Affiliation__c$npe5__Contact__c.Current_Age__c</field>
     </columns>
     <columns>

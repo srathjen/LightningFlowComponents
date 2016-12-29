@@ -187,12 +187,11 @@
         <fullName>Confirmation__c</fullName>
         <externalId>false</externalId>
         <label>Confirmation #</label>
-        <precision>18</precision>
+        <length>20</length>
         <required>false</required>
-        <scale>0</scale>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Number</type>
+        <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
@@ -290,6 +289,18 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>External_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>External Id</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
         <fullName>Flight_ID__c</fullName>
         <externalId>false</externalId>
         <label>Flight ID</label>
@@ -305,12 +316,11 @@
         <fullName>Flight__c</fullName>
         <externalId>false</externalId>
         <label>Flight #</label>
-        <precision>18</precision>
+        <length>50</length>
         <required>false</required>
-        <scale>0</scale>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Number</type>
+        <type>Text</type>
         <unique>false</unique>
     </fields>
     <fields>
@@ -573,7 +583,7 @@
         <label>All</label>
     </listViews>
     <nameField>
-        <label>Travel Data Name</label>
+        <label>Travel Data ID</label>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>

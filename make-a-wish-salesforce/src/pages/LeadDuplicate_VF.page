@@ -81,7 +81,7 @@
             isbool = false;
           
           if(!isbool)
-             alert('Please select atleast one Wish Family/Medical Professional to Diagnosis Verification…');
+             alert('Please select atleast one Wish Family/Medical Professional to Diagnosis Verification.');
          return isbool;
      
     }
@@ -351,7 +351,7 @@
                                                 
                                                </td>
                                                 <td>
-                                                    <apex:outputText value="{!con.Chapter_Name__c}"/>
+                                                    <apex:outputText value="{!con.Region_Chapter__r.Name}"/>
                                                 
                                                </td>
                                         </tr>
@@ -366,7 +366,7 @@
               <apex:outputpanel rendered="{!isFamilyInfo == True}">
               
               
-                <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPartASuccess}"/>
+               <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPartASuccess}"/>
                     <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPartASuccess}">
                     <Center>   Diagnosis Verification Sent Successfully!
                         <br/>
@@ -652,8 +652,18 @@
             </apex:form>
          </apex:outputText>
           <apex:outputText id="contactMerge" rendered="{!step == 3}">
-
             <apex:form id="mergeForm" styleClass="slds-form">
+             <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayLeadDupPopup}"/>
+                    <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayLeadDupPopup}">
+                    <Center>There were more duplicate Wish Child records. Do you want to continue merging the records?
+                        <br/>
+                        <br/>
+                        <br/>
+                        <apex:commandButton value="Yes" action="{!isYes}"/>  &nbsp;&nbsp;&nbsp;
+                        <apex:commandButton value="No" action="{!isNo}"/>
+                   </center>
+                       
+               </apex:outputPanel>
                 <div class="slds-card slds-m-horizontal--large slds-m-bottom--large hide-when-modal-open">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
                         <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Selected Leads</h2>

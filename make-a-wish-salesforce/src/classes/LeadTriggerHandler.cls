@@ -84,7 +84,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             
             for(Lead convertedLeads : [SELECT Id,Name,DOB__c,FirstName,LastName,createdDate,Sibling_Detail__c,Medical_Provider_Category__c,ChapterName__r.Name,ChapterName__c,ConvertedContactId,ConvertedAccountId,
                                        Parent_First_Name__c,Parent_Last_Name__c,Email,Phone,City,CountryCode,PostalCode,StateCode,Street,Treating_Medical_Professional_Contact_Id__c,Medical_Professional_ContactId__c,Wish_Family_ContactId__c FROM Lead WHERE Id IN: convertedLeadIds]){
-                                           leadFamilyMap .put(convertedLeads.Id,convertedLeads);
+                                           leadFamilyMap.put(convertedLeads.Id,convertedLeads);
                                            convertedLeadMap .put(convertedLeads.ConvertedContactId,convertedLeads);
                                            convertedAccountMap .put(convertedLeads.ConvertedAccountId,convertedLeads);
                                            chapterIdSet.add(convertedLeads.ChapterName__c);
@@ -163,7 +163,8 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     con.Lead_Created_Date__c = Date.valueOf(convertedLeadMap.get(con.Id).createdDate);
                     con.Birthdate = convertedLeadMap.get(con.Id).DOB__c;
                     con.RecordTypeId = wishChildRecordTypeId;
-                    con.Chapter_Name__c = convertedLeadMap.get(con.Id).ChapterName__r.Name;
+                    
+                    con.Region_Chapter__c =  convertedLeadMap.get(con.Id).ChapterName__c;
                     conMap.put(con.Id,con);
                     
                     cg__ContactFile__c picFolder =new cg__ContactFile__c();
@@ -217,6 +218,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                         newFamily.Wish_Child_Id_Hidden__c = convertLeads.getcontactId();
                                         newFamily.RecordTypeId = wishFamilyRecordTypeId;
                                         newFamily.AccountId = convertLeads.getAccountId();
+                                        newFamily.Region_Chapter__c = leadFamilyMap.get(convertLeads.getLeadId()).ChapterName__c;
                                        
                                         if((newFamily.FirstName.isAlpha() || newFamily.FirstName.isAlphaSpace()) && (newFamily.LastName.isAlpha() || newFamily.LastName.isAlphaSpace()) && (newFamily.Sibling_Age__c.isNumeric())){
                                             siblingList.add(newFamily);
@@ -275,7 +277,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                 newFamily.Wish_Child_Id_Hidden__c = convertLeads.getcontactId();
                                 newFamily.RecordTypeId = wishFamilyRecordTypeId;
                                 newFamily.AccountId = convertLeads.getAccountId();
-                                
+                                newFamily.Region_Chapter__c = leadFamilyMap.get(convertLeads.getLeadId()).ChapterName__c;
                                          if((newFamily.FirstName.isAlpha() || newFamily.FirstName.isAlphaSpace()) && (newFamily.LastName.isAlpha() || newFamily.LastName.isAlphaSpace()) && (newFamily.Sibling_Age__c.isNumeric())){
                                             siblingList.add(newFamily);
                                             
@@ -327,7 +329,6 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     if(conMap.containsKey(convertLeads.getcontactId()))
                     {
                         newcase.ownerId = conMap.get(convertLeads.getcontactId()).ownerId;
-                        //newCase.Chapter_Name__c = conMap.get(convertLeads.getcontactId()).chapter_Name__c;
                         newCase.ChapterName__c = LeadMap.get(convertLeads.getLeadId()).chapterName__c;
                         newCase.Hidden_Primary_Diagnosis__c = LeadMap.get(convertLeads.getLeadId()).PD_Condition_Description__c ;
                         
@@ -472,7 +473,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         for(Lead  processconvertedLeads : [SELECT ID,Name,Hospital_Treatment_Facility__c,Medical_Provider_Category__c,Hospital_Treatment_Facility_Treating__c,Medical_Professional_Last_Name__c,Medical_Professional_Phone__c,
                                            Medical_Professional_Email__c,Medical_Professional_First_Name__c,Treating_Medical_Professional_First_Name__c,Treating_Medical_Professional_Last_Name__c,
                                            Treating_Medical_Professional_Phone__c,Treating_Medical_Professional_Email__c,ConvertedContactId,ConvertedAccountId,Parent_First_Name__c,Parent_Last_Name__c,Email,Phone,CountryCode,  
-                                           Street,StateCode,City,PostalCode,Wish_Family_ContactId__c,Treating_Medical_Professional_Contact_Id__c,Medical_Professional_ContactId__c FROM Lead WHERE Id IN:convertedLeadIds ]){
+                                           Street,StateCode,City,PostalCode,Wish_Family_ContactId__c,ChapterName__c,Treating_Medical_Professional_Contact_Id__c,Medical_Professional_ContactId__c FROM Lead WHERE Id IN:convertedLeadIds ]){
                                                
                                                medicalfacilytySet.add(processconvertedLeads.Hospital_Treatment_Facility__c);
                                                treatingfacilytySet.add(processconvertedLeads.Hospital_Treatment_Facility_Treating__c);
@@ -483,7 +484,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             
         }
         
-        for(Lead  processconvertedLeads :  [SELECT ID,Name,Hospital_Treatment_Facility__c,Hospital_Treatment_Facility_Treating__c FROM Lead WHERE Id IN:convertedLeadIds]){
+        for(Lead  processconvertedLeads :  [SELECT ID,Name,Hospital_Treatment_Facility__c,Hospital_Treatment_Facility_Treating__c,ChapterName__c FROM Lead WHERE Id IN:convertedLeadIds]){
             
             if(processconvertedLeads.Hospital_Treatment_Facility__c != processconvertedLeads.Hospital_Treatment_Facility_Treating__c){
                 if(processconvertedLeads.Hospital_Treatment_Facility__c != Null){
@@ -547,6 +548,8 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         List<Contact> qualifyingContact = new List<Contact>();
         List<Contact> WishFamilyContactList = new List<Contact>();
         List<npe4__Relationship__c> relationList = new List<npe4__Relationship__c>();
+        List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
+        
         Id convertedConId;
         for(Lead processConvertedLead : convertedLeadList){
             convertedConId = processConvertedLead.ConvertedContactId;
@@ -594,6 +597,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 newWishFamily.Wish_Child_Id_Hidden__c = processConvertedLead .ConvertedContactId;
                 newWishFamily.AccountId = processConvertedLead.ConvertedAccountId;
                 newWishFamily.RecordTypeId = wishFamilyRecordTypeId;
+                newWishFamily.Region_Chapter__c = processConvertedLead.ChapterName__c;
                 WishFamilyContactList.add(newWishFamily);
             }
             if(WishFamilyContactList.size() > 0){
@@ -607,6 +611,14 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newRelationShip.npe4__RelatedContact__c = processFamilyContact.Wish_Child_Id_Hidden__c;
                     newRelationShip.npe4__Status__c = 'Active';
                     relationList.add(newRelationShip);
+                    
+                    
+                    npe5__Affiliation__c newAff = new npe5__Affiliation__c();
+                    newAff.npe5__Contact__c = processFamilyContact .Id;
+                    newAff.npe5__Organization__c = processFamilyContact.AccountId;
+                    newAff.npe5__StartDate__c = Date.Today();
+                    newAff.npe5__Status__c = 'Current';
+                    affiliationList.add(newAff);
                 }
                 
             }
@@ -625,12 +637,16 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 newMedicalcon.Email = processConvertedLead.Treating_Medical_Professional_Email__c;
                 newMedicalcon.Provider_Type__c  = processConvertedLead.Medical_Provider_Category__c;
                 newMedicalcon.RecordTypeId = medicalProfessionalRecordTypeId;
+                newMedicalcon.Region_Chapter__c = processConvertedLead.ChapterName__c;
+                
                 newSameContact.add(newMedicalcon);
             }
             
             
             if(newSameContact .size() > 0){
                 insert newSameContact ;
+                
+                
                 for(Contact proccessSameContact : newSameContact ){
                     npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
                     newRelationShip.npe4__Contact__c = convertedConId;
@@ -640,6 +656,13 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newRelationShip.npe4__RelatedContact__c = proccessSameContact.Id;
                     newRelationShip.npe4__Status__c = 'Active';
                     relationList.add(newRelationShip);
+                    
+                    npe5__Affiliation__c newAff = new npe5__Affiliation__c();
+                    newAff.npe5__Contact__c = proccessSameContact.Id;
+                    newAff.npe5__Organization__c = proccessSameContact.AccountId;
+                    newAff.npe5__StartDate__c = Date.Today();
+                    newAff.npe5__Status__c = 'Current';
+                    affiliationList.add(newAff);
                     
                 }
                 
@@ -659,12 +682,16 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 newMedicalcon.Email = processConvertedLead.Treating_Medical_Professional_Email__c;
                 newMedicalcon.Provider_Type__c  = processConvertedLead.Medical_Provider_Category__c;
                 newMedicalcon.RecordTypeId = medicalProfessionalRecordTypeId;
+                newMedicalcon.Region_Chapter__c = processConvertedLead.ChapterName__c;
+                
                 referringContact.add(newMedicalcon);
             }
             
             
             if(referringContact .size() > 0){
                 insert referringContact ;
+                
+                
                 for(Contact proccessSameContact : referringContact ){
                     npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
                     newRelationShip.npe4__Contact__c = convertedConId;
@@ -673,6 +700,13 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newRelationShip.npe4__RelatedContact__c = proccessSameContact.Id;
                     newRelationShip.npe4__Status__c = 'Active';
                     relationList.add(newRelationShip);
+                    
+                    npe5__Affiliation__c newAff = new npe5__Affiliation__c();
+                    newAff.npe5__Contact__c = proccessSameContact.Id;
+                    newAff.npe5__Organization__c = proccessSameContact.AccountId;
+                    newAff.npe5__StartDate__c = Date.Today();
+                    newAff.npe5__Status__c = 'Current';
+                    affiliationList.add(newAff);
                     
                 }
                 
@@ -696,12 +730,15 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 newMedicalcon.Email = processConvertedLead.Medical_Professional_Email__c;
                 newMedicalcon.Provider_Type__c  = processConvertedLead.Medical_Provider_Category__c;
                 newMedicalcon.RecordTypeId = medicalProfessionalRecordTypeId;
+                newMedicalcon.Region_Chapter__c = processConvertedLead.ChapterName__c;
+               
                 qualifyingContact.add(newMedicalcon);
             }
             
             
             if(qualifyingContact.size() > 0){
                 insert qualifyingContact;
+                
                 for(Contact proccessSameContact : qualifyingContact ){
                     npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
                     newRelationShip.npe4__Contact__c = convertedConId;
@@ -710,12 +747,22 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newRelationShip.npe4__RelatedContact__c = proccessSameContact.Id;
                     newRelationShip.npe4__Status__c = 'Active';
                     relationList.add(newRelationShip);
+                    
+                    npe5__Affiliation__c newAff = new npe5__Affiliation__c();
+                    newAff.npe5__Contact__c = proccessSameContact.Id;
+                    newAff.npe5__Organization__c = proccessSameContact.AccountId;
+                    newAff.npe5__StartDate__c = Date.Today();
+                    newAff.npe5__Status__c = 'Current';
+                    affiliationList.add(newAff);
                 }
                 
             }
         } 
         if(relationList.size() > 0)
             insert relationList;
+            
+        if(affiliationList.size() > 0)
+            insert affiliationList;
     }
     public static void UpdateChatperName(Set<String> postalCodesSet,List<Lead> updateChapterOnLeadList)
     {
@@ -902,24 +949,24 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             if(exLead.Email != Null)
                 exemailsSet.add(exLead.Email+'-'+exLead.chapterName__c);
         }
-        for(Contact exContact : [SELECT Id, LastName,AccountId, FirstName, Email, Phone, BirthDate, chapter_Name__C,
+        for(Contact exContact : [SELECT Id, LastName,AccountId, FirstName, Email, Phone, BirthDate,Region_Chapter__r.Name,
                                  MailingCity, MailingState, MailingPostalCode 
                                  FROM Contact WHERE (LastName IN :leadLNamesSet OR FirstName IN :leadFNamesSet OR BirthDate IN :leadbDaysSet
                                                      OR ((MailingState IN :stateSet AND MailingPostalCode IN :zipCodesSet AND MailingCity IN :citySet) OR 
-                                                         Phone IN :phoneSet OR Email IN :emailsSet)) AND chapter_Name__C = :chaptersSet])
+                                                         Phone IN :phoneSet OR Email IN :emailsSet)) AND Region_Chapter__r.Name =: chaptersSet])
         {
             if(exContact.FirstName != Null)
-                exFNamesSet.add(exContact.FirstName+'-'+exContact.chapter_Name__c);
+                exFNamesSet.add(exContact.FirstName+'-'+exContact.Region_Chapter__r.Name);
             if(exContact.LastName != Null)
-                exLNamesSet.add(exContact.LastName+'-'+exContact.chapter_Name__c);
+                exLNamesSet.add(exContact.LastName+'-'+exContact.Region_Chapter__r.Name);
             if(exContact.BirthDate != Null)
                 exbDaysSet.add(exContact.BirthDate);
             if(exContact.MailingCity != Null && exContact.MailingState != Null && exContact.MailingPostalCode != Null)
-                exAddressSet.add(exContact.MailingCity+'-'+exContact.MailingState+'-'+exContact.MailingPostalCode+'-'+exContact.chapter_Name__c);
+                exAddressSet.add(exContact.MailingCity+'-'+exContact.MailingState+'-'+exContact.MailingPostalCode+'-'+exContact.Region_Chapter__r.Name);
             if(exContact.phone != Null)
-                exPhoneSet.add(exContact.phone+'-'+exContact.chapter_Name__C);
+                exPhoneSet.add(exContact.phone+'-'+exContact.Region_Chapter__r.Name);
             if(exContact.Email != Null)
-                exemailsSet.add(exContact.Email+'-'+exContact.chapter_Name__C);
+                exemailsSet.add(exContact.Email+'-'+exContact.Region_Chapter__r.Name);
         }
         
         for(Lead newLead : leadList)
@@ -966,6 +1013,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
     
     public void CreateNewCase(List<Lead> LeadList){
         List<Case> newCaseList = new List<Case>();
+        
         Map<Id,String> accountEmailMap = new Map<Id,String>();
         set<Id> accountIdSet = new Set<Id>();
         Map<Id,String> emailMap = new Map<Id,String>();
@@ -981,6 +1029,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             case newcase = new case();
             newCase.status = 'New';
             newCase.origin = 'Email';
+            newCase.Subject = 'Eligibility Review';
             newCase.recordTypeId = partARecordTypeId;
             newCase.OwnerId = processLead.OwnerId;
             if(emailMap.containsKey(processLead.ChapterName__c)){

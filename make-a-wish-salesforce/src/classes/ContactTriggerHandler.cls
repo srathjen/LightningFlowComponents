@@ -8,6 +8,7 @@ Description : 1. ContactTriggerHandler is used to assign the account Name for Vo
 *****************************************************************************************************/
 public class ContactTriggerHandler{
     Constant_AC  constant = new Constant_AC();
+    
     Id ChapterRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
     Id WishRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
     // Public 
@@ -134,35 +135,71 @@ public class ContactTriggerHandler{
             insert newTaskList;
     }
     
-    public static void createConstituentContactCode(Map<Id,Id> accountAndContactId,String ConCodeName){
+    public static void CreateAffliation(List<Contact> ContactList)
+    {
+        Constant_AC  constant = new Constant_AC();
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+        Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
+        Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
+        List<npe5__Affiliation__c> affDbList=new List<npe5__Affiliation__c>();
+        npe5__Affiliation__c aff; 
+        List<npe5__Affiliation__c> UdateAff =new List<npe5__Affiliation__c>();
+        set<Id> contactIds =new set<Id>();
         
-        Map<Id,Id> affAccountIdMap=new Map<Id,Id>();
-        for(npe5__Affiliation__c affCurrRec:[SELECT id,npe5__Organization__c FROM npe5__Affiliation__c WHERE npe5__Organization__c IN: accountAndContactId.keyset()]){
-            affAccountIdMap.put(affCurrRec.npe5__Organization__c,affCurrRec.id);
-            
-        }
-        if(affAccountIdMap.size() > 0 ){
-            Contact_Constituent_Code__c CCC;
-            List<Contact_Constituent_Code__c> contactConCodeList=new List<Contact_Constituent_Code__c>();
-            list<Constituent_Code__c> consList = new list<Constituent_Code__c>();
-            consList = [SELECT id FROM Constituent_Code__c WHERE Name =:ConCodeName LIMIT 1];
-            //  Id constituentContactId=[SELECT id FROM Constituent_Code__c WHERE Name =:ConCodeName LIMIT 1].Id;
-            for(Id accId: affAccountIdMap.keyset()){
-                CCC=new Contact_Constituent_Code__c();
-                CCC.Affiliation__c=affAccountIdMap.get(accId);
-                if(!consList.isEmpty())
-                    CCC.Constituent_Code__c = consList[0].Id;
-                CCC.Hidden_Contact__c=accountAndContactId.get(accId);
-                contactConCodeList.add(CCC);
-                
+           for(Contact con:ContactList)
+           {
+               if((con.RecordTypeId == MedicalProfContactRecordTypeId) || con.RecordTypeId == familyContactRecordTypeId || con.RecordTypeId == wichChildRecordTypeId){
+                   aff =new npe5__Affiliation__c();
+                  if(con.Region_Chapter__c != Null)
+                  {
+                       aff.npe5__Organization__c=con.Region_Chapter__c;
+                       aff.npe5__Contact__c=con.id;
+                       if(con.RecordTypeId == familyContactRecordTypeId )
+                        {
+                           aff.Constituent_Code__c='Wish Family';
+                        }
+                       else if(con.RecordTypeId == wichChildRecordTypeId)
+                       {
+                           aff.Constituent_Code__c='Wish Child';
+                       }
+                       
+                       if(con.RecordTypeId == MedicalProfContactRecordTypeId  )
+                       {
+                           aff.Constituent_Code__c='Medical Professional';
+                       }
+                       affDbList.add(aff);
+                  }
+               
+               }
             }
-            if(contactConCodeList.Size() > 0 && contactConCodeList!=Null){
-                Insert contactConCodeList;
+           if(affDbList.size() > 0)
+            {
+               Insert affDbList;
             }
-        }
-        
+       
     }
     
+    public static void updateAffiliation(map<id,contact> contactMap){
+        npe5__Affiliation__c aff; 
+        List<npe5__Affiliation__c> UdateAff =new List<npe5__Affiliation__c>();
+        Constant_AC  constant = new Constant_AC();
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Id boardMemberRT = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.boardMemberRT).getRecordTypeId();
+       
+        for(npe5__Affiliation__c curraff:[SELECT id,Constituent_Code__c,npe5__Contact__c,npe5__Contact__r.recordtypeid FROM npe5__Affiliation__c  WHERE npe5__Contact__c in:contactMap.keyset()]){
+            aff=new npe5__Affiliation__c();
+            aff.id=curraff.id;
+            if(currAff.npe5__Contact__r.recordtypeid == volunteerRecordTypeId)
+                aff.Constituent_Code__c='Volunteer';
+            else if(currAff.npe5__Contact__r.recordtypeid == boardMemberRT)
+                aff.Constituent_Code__c='Board Member';
+            UdateAff.add(aff);
+        }
+        if(UdateAff.size() > 0){
+            update UdateAff;
+        }
+    }
     
     public static void updateMedicalProfConatctInfo(set<Id> MedicalProfContactSet){
         Map<Id,npe4__Relationship__c > childContactMap = new Map<Id,npe4__Relationship__c >();

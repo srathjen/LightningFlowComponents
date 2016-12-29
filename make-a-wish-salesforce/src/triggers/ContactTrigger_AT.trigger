@@ -13,6 +13,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
     Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
     Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
     Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
+    Id boardMemberRT = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.boardMemberRT).getRecordTypeId();
     List<Contact> contactList= new List<Contact>();
     Set<Id> volunteerIdSet = new Set<Id>();
     Map<String, String> monthValMap = new Map<String, String>();
@@ -320,34 +321,33 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
     
     if(Trigger.isAfter && Trigger.isInsert)
     {
-        Map<Id,Id> conIdMap = new Map<Id,Id>();
-        Map<Id,Id> contactAccountIdMap = new Map<Id,Id>();
-        Set<Id> newWishChildContactSet = new Set<Id>();
-       
+        List<Contact> conList = new List<Contact>();
+        Map<Id,Contact> contactAccountIdMap = new Map<Id,Contact>();
+      
         for(Contact conCurrRec: trigger.new)
         {
             if(conCurrRec.migrated_record__c != True)
             {
-                if(conCurrRec.RecordTypeId == wichChildRecordTypeId  && (conCurrRec.ICD_10_Code__c != Null || conCurrRec.Diagnosis__c != Null || conCurrRec.Short_Description__c != Null || conCurrRec.Non_Verbal__c != Null ) ){
-                    conIdMap.put(conCurrRec.AccountId,conCurrRec.Id);    
+               
+                if(conCurrRec.RecordTypeId == volunteerRecordTypeId || conCurrRec.RecordTypeId == boardMemberRT)
+                {
+                    contactAccountIdMap.put(conCurrRec.id,conCurrRec);
                 }
-                if(conCurrRec.RecordTypeId == familyContactRecordTypeId ){
-                    contactAccountIdMap .put(conCurrRec.AccountId,conCurrRec.Id);   
-                }
-                
-                if(conCurrRec.RecordTypeId == wichChildRecordTypeId) {
-                    newWishChildContactSet.add(conCurrRec.Id);
+                else
+                {
+                  conList.Add(conCurrRec);
                 }
                 
             }
         }
         
-        if(conIdMap.size() > 0){
-            ContactTriggerHandler.createConstituentContactCode(conIdMap,'Wish Child');
+        if(conList.size() > 0){
+            ContactTriggerHandler.CreateAffliation(conList);
         }
-        if(contactAccountIdMap .size() > 0){
-          ContactTriggerHandler.createConstituentContactCode(contactAccountIdMap ,'Wish Parent/Guardians');
+        if(contactAccountIdMap.size() > 0){
+            ContactTriggerHandler.updateAffiliation(contactAccountIdMap);
         }
+       
     }
     
     

@@ -265,10 +265,6 @@
         <name>Cake_Candy__c</name>
     </fields>
     <fields>
-        <label><!-- Chapter Name --></label>
-        <name>Chapter_Name__c</name>
-    </fields>
-    <fields>
         <label><!-- City --></label>
         <name>City_Employer__c</name>
     </fields>
@@ -407,6 +403,10 @@
     <fields>
         <label><!-- Expiration Date --></label>
         <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
     </fields>
     <fields>
         <label><!-- First + Last Initial --></label>
@@ -886,7 +886,7 @@ and the date it was or will be granted. --></help>
         <name>Preferred_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Type --></label>
+        <label><!-- Preferred Phone Type --></label>
         <name>Preferred_Phone_Types__c</name>
         <picklistValues>
             <masterLabel>Home</masterLabel>
@@ -895,6 +895,10 @@ and the date it was or will be granted. --></help>
         <picklistValues>
             <masterLabel>Mobile</masterLabel>
             <translation><!-- Mobile --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -995,7 +999,7 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- RE Record Id --></label>
+        <label><!-- RE_Record_Id --></label>
         <name>RE_Record_Id__c</name>
     </fields>
     <fields>
@@ -1136,6 +1140,8 @@ and the date it was or will be granted. --></help>
         <relationshipLabel><!-- Contacts (Region Chapter) --></relationshipLabel>
     </fields>
     <fields>
+        <help><!-- 1.Please select All fields Radio Button to search Region Code based on Name in Search Dialogue box.
+2.Region Chapter needs to be filled in order to see the Region Code based on Chapters. --></help>
         <label><!-- Region Code --></label>
         <name>Region_Code__c</name>
         <relationshipLabel><!-- Contacts --></relationshipLabel>
@@ -2690,6 +2696,10 @@ provide contact information for each site on which you are active. --></help>
             <label><!-- Volunteer Details --></label>
             <section>Volunteer Details</section>
         </sections>
+        <sections>
+            <label><!-- Volunteer Role --></label>
+            <section>Volunteer Role</section>
+        </sections>
     </layouts>
     <layouts>
         <layout>Wish Child</layout>
@@ -2714,6 +2724,18 @@ provide contact information for each site on which you are active. --></help>
             <section>Medical Information Section</section>
         </sections>
         <sections>
+            <label><!-- Race/Ethnicity --></label>
+            <section>Race/Ethnicity</section>
+        </sections>
+        <sections>
+            <label><!-- Treatment Subspeciality --></label>
+            <section>Treatment Subspeciality</section>
+        </sections>
+        <sections>
+            <label><!-- Updated Contact Values --></label>
+            <section>Updated Contact Values</section>
+        </sections>
+        <sections>
             <label><!-- WIsh Child Details --></label>
             <section>WIsh Child Details</section>
         </sections>
@@ -2735,6 +2757,10 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Dev &amp; QA Fields --></label>
             <section>Dev &amp; QA Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Employment Information --></label>
+            <section>Employment Information</section>
         </sections>
         <sections>
             <label><!-- Household Address --></label>

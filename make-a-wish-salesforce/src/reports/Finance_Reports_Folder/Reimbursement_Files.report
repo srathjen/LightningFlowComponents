@@ -4,6 +4,9 @@
         <field>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r$Name</field>
     </columns>
     <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Name</field>
+    </columns>
+    <columns>
         <field>Case.In_Kind_Donation_Reimbursement__r$Fund_ID__c</field>
     </columns>
     <columns>
@@ -46,6 +49,36 @@
         <field>Case.In_Kind_Donation_Reimbursement__r$Description_2__c</field>
     </columns>
     <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Vendor_3__c</field>
+    </columns>
+    <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Description_3__c</field>
+    </columns>
+    <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Vendor_4__c</field>
+    </columns>
+    <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Amount_4__c</field>
+    </columns>
+    <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Description_4__c</field>
+    </columns>
+    <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Vendor_5__c</field>
+    </columns>
+    <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Amount_5__c</field>
+    </columns>
+    <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Description_5__c</field>
+    </columns>
+    <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Approved_Date__c</field>
+    </columns>
+    <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Approved_By__c</field>
+    </columns>
+    <columns>
         <field>Case.In_Kind_Donation_Reimbursement__r$Total_Reimbursement_Amount__c</field>
     </columns>
     <columns>
@@ -60,6 +93,11 @@
             <column>Case.In_Kind_Donation_Reimbursement__r$RecordType</column>
             <operator>equals</operator>
             <value>In_Kind_Donation_Reimbursement__c.Reimbursement</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.In_Kind_Donation_Reimbursement__r$Approved_Date__c</column>
+            <operator>notEqual</operator>
+            <value></value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
@@ -83,8 +121,6 @@
     <showDetails>true</showDetails>
     <timeFrameFilter>
         <dateColumn>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r$CreatedDate</dateColumn>
-        <endDate>2016-12-16</endDate>
-        <interval>INTERVAL_CUSTOM</interval>
-        <startDate>2016-12-16</startDate>
+        <interval>INTERVAL_CURFY</interval>
     </timeFrameFilter>
 </Report>

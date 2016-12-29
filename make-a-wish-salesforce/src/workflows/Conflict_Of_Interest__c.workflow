@@ -80,7 +80,7 @@
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
-        <description>Evaluate the rule when a record is created, and any time it&apos;s edited to subsequently meet criteria</description>
+        <description>We are sending email notification for volunteer reminding  COI  Expiring.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>

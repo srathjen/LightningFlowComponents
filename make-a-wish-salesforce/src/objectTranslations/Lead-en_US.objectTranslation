@@ -197,6 +197,14 @@
         <name>Diagnosis_Pending_Days__c</name>
     </fields>
     <fields>
+        <label><!-- Dup Check --></label>
+        <name>Dup_Check__c</name>
+        <picklistValues>
+            <masterLabel>Block Lead Dup</masterLabel>
+            <translation><!-- Block Lead Dup --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- From Mulesoft --></label>
         <name>From_Mulesoft__c</name>
     </fields>

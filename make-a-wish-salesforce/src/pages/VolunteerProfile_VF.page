@@ -33,11 +33,16 @@
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="row">
                                             <apex:outputLabel styleClass="col-xs-6 col-sm-6">Name: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Name}"/></span>
+                                            <span class="col-xs-6 col-sm-6 text-muted">
+                                                    <apex:outputField value="{!contactInstance[0].FirstName}"/> &nbsp;
+                                                    <apex:outputField value="{!contactInstance[0].Middle_Name__c}"/> &nbsp;
+                                                    <apex:outputField value="{!contactInstance[0].LastName}"/>
+                                            
+                                            </span>
                                         </div>
                                         <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Phone: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].HomePhone}"/> (<apex:outputField value="{!contactInstance[0].Preferred_Phone_Types__c}"/>)</span>
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Mobile Phone: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].MobilePhone}"/></span>
                                         </div>
 
                                         <div class="row">
@@ -82,12 +87,16 @@
 
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                         <div class="row">
-                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Alternate Phone: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].MobilePhone}"/>(<apex:outputField value="{!contactInstance[0].Alternate_Phone_Type__c}"/>) </span>
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Home Phone: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].HomePhone}"/></span>
                                         </div>
                                         <div class="row">
                                             <apex:outputLabel styleClass="col-xs-6 col-sm-6">Other Phone: </apex:outputLabel>
                                             <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].OtherPhone}"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Preferred Phone Type: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Preferred_Phone_Types__c}"/></span>
                                         </div>
                                         <div class="row">
                                             <apex:outputLabel styleClass="col-xs-6 col-sm-6">Fax: </apex:outputLabel>
@@ -208,24 +217,42 @@
 
                                         <div class="form-group row">
                                             <div class="col-sm-3">
-                                                <apex:outputLabel >Name</apex:outputLabel>
+                                                <apex:outputLabel >First Name</apex:outputLabel>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control name-group firstname" html-placeholder="Name" maxlength="50" value="{!contactInstance[0].Name}"/>
+                                                <apex:inputText styleClass="form-control name-group firstname" html-placeholder="FirstName" maxlength="50" value="{!contactInstance[0].FirstName}"/>
+                                            </div>
+                                        </div>
+                                        
+                                       <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <apex:outputLabel >Last Name</apex:outputLabel>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <apex:inputText styleClass="form-control name-group lastname" html-placeholder="LastName" maxlength="50" value="{!contactInstance[0].LastName}"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group row">
+                                            <div class="col-sm-3">
+                                                <apex:outputLabel >Middle Name</apex:outputLabel>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                 <apex:inputText styleclass="form-control" maxlength="50" id="middleinitial" html-placeholder="Middle Name (Optional)" value="{!contactInstance[0].Middle_Name__c}" />
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                           <div class="col-sm-3">
-                                                <apex:outputLabel for="preferredphonenumber" html-aria-labelledby="Preferred Phone Number">Phone Number</apex:outputLabel>
+                                                <apex:outputLabel for="preferredphonenumber" html-aria-labelledby="Preferred Phone Number">Mobile Phone</apex:outputLabel>
                                               </div>
                                             <div class="col-xs-8 col-sm-6">
-                                                <apex:inputText styleClass="form-control f-phone phonechk" maxlength="10" id="preferredphonenumber" html-placeholder="(000) 000-0000" value="{!contactInstance[0].HomePhone}"  />
+                                                <apex:inputText styleClass="form-control f-phone phonechk" maxlength="10" id="preferredphonenumber" html-placeholder="(000) 000-0000" value="{!contactInstance[0].MobilePhone}"  />
                                             </div>
                                             <label for="preferredphone" class="sr-only">Preferred Phone Number Type</label>
-                                            <div class="col-xs-4 col-sm-3">
+                                           <!-- <div class="col-xs-4 col-sm-3">
                                                 <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required" id="preferredphonetype" value="{!contactInstance[0].Preferred_Phone_Types__c}" />
-                                            </div>
+                                            </div> -->
                                         </div>
 
                                         <div class="form-group row">
@@ -335,21 +362,27 @@
                                     <div class="col-xs-12 col-sm-12 col-md-6">
                                         <div class="form-group row">
                                           <div class="col-sm-3">
-                                            <apex:outputLabel for="homephonenumber">Alternate Phone</apex:outputLabel>
+                                            <apex:outputLabel for="homephonenumber">Home Phone</apex:outputLabel>
                                           </div>
                                             <div class="col-xs-8 col-sm-6">
-                                                <apex:inputText styleClass="form-control f-phone" maxlength="10" id="homephonenumber" html-placeholder="(000) 000-0000" value="{!contactInstance[0].MobilePhone}" />
+                                                <apex:inputText styleClass="form-control f-phone" maxlength="10" id="homephonenumber" html-placeholder="(000) 000-0000" value="{!contactInstance[0].HomePhone}" />
                                             </div>
-                                            <label for="preferredphone" class="sr-only">Alternate Phone Number Type</label>
+                                           <!-- <label for="preferredphone" class="sr-only">Alternate Phone Number Type</label>
                                             <div class="col-xs-4 col-sm-3">
                                                 <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list" id="alternatephonetype" value="{!contactInstance[0].Alternate_Phone_Type__c }" />
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="form-group row">
                                             <apex:outputLabel for="mobilephonenumber" styleClass="col-sm-3">Other Phone</apex:outputLabel>
                                             <div class="col-sm-6">
                                                 <apex:inputText styleClass="form-control f-phone" maxlength="10" id="mobilephonenumber" html-placeholder="(000) 000-0000" value="{!contactInstance[0].OtherPhone}" />
                                             </div>
+                                        </div>
+                                        <div class="form-group row">
+                                           <apex:outputLabel for="PreferredPhone" styleClass="col-sm-3">Preferred Phone Type</apex:outputLabel>
+                                           <div class="col-sm-6">
+                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required" id="preferredphonetype" value="{!contactInstance[0].Preferred_Phone_Types__c}" />
+                                           </div>
                                         </div>
                                         <div class="form-group row">
                                             <apex:outputLabel styleClass="col-sm-3" for="faxphonenumber">Fax Number</apex:outputLabel>

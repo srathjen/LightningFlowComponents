@@ -103,6 +103,11 @@
         <columns>Role_Name__c</columns>
         <columns>Background_Check_Required__c</columns>
         <filterScope>Everything</filterScope>
+        <filters>
+            <field>Chapter_Name__c</field>
+            <operation>equals</operation>
+            <value>Make-A-Wish Arizona</value>
+        </filters>
         <label>All</label>
     </listViews>
     <nameField>

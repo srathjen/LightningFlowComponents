@@ -1285,6 +1285,7 @@
     </fields>
     <fields>
         <fullName>Current_Condition__c</fullName>
+        <description>It Store the travel recommendation detail.</description>
         <externalId>false</externalId>
         <label>Travel Recommendation</label>
         <length>131000</length>
@@ -1294,6 +1295,7 @@
     </fields>
     <fields>
         <fullName>DNQ_Date__c</fullName>
+        <description>It Capture the DNQ Date</description>
         <externalId>false</externalId>
         <label>DNQ Date</label>
         <required>false</required>
@@ -1339,6 +1341,23 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
+        <fullName>Dup_Check__c</fullName>
+        <description>This hidden field used in lead duplicate page.</description>
+        <externalId>false</externalId>
+        <label>Dup Check</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Block Lead Dup</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
         <fullName>Email</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
@@ -1349,6 +1368,7 @@
     <fields>
         <fullName>From_Mulesoft__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>It indicated the record is created by manually or from mulesoft.</description>
         <externalId>false</externalId>
         <label>From Mulesoft</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1762,6 +1782,7 @@
     </fields>
     <fields>
         <fullName>Lung_Disease__c</fullName>
+        <description>It Hold the Lung Disease Details.</description>
         <externalId>false</externalId>
         <label>Lung Disease</label>
         <length>32768</length>
@@ -1946,6 +1967,7 @@
     <fields>
         <fullName>Migrated_Record__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>It indicated the record is created by manually or from mulesoft.</description>
         <externalId>false</externalId>
         <label>Migrated Record</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2022,6 +2044,7 @@
     </fields>
     <fields>
         <fullName>Non_Verbal__c</fullName>
+        <description>This field is indicate the communication is Non-Verbal or Not.</description>
         <externalId>false</externalId>
         <formula>IF(INCLUDES(Communication__c, &apos;Non-Verbal&apos;), &apos;Yes&apos;, &apos;No&apos;)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -2046,6 +2069,7 @@
     </fields>
     <fields>
         <fullName>Of_Times_Email_Sent__c</fullName>
+        <description>It hold the Number of time email is sent.</description>
         <externalId>false</externalId>
         <label># Of Times Email Sent</label>
         <precision>2</precision>
@@ -2057,6 +2081,7 @@
     </fields>
     <fields>
         <fullName>Office_Referral_Email__c</fullName>
+        <description>This Field is store the Office Referral email Address.</description>
         <externalId>false</externalId>
         <label>Office Referral Email</label>
         <required>false</required>
@@ -2146,6 +2171,7 @@
     </fields>
     <fields>
         <fullName>Part_A_Form_Password__c</fullName>
+        <description>It hold the Diagnosis Verification Password.</description>
         <externalId>false</externalId>
         <label>Diagnosis Verification Form Password</label>
         <length>6</length>
@@ -2198,6 +2224,7 @@
     </fields>
     <fields>
         <fullName>Preferred_Name__c</fullName>
+        <description>This Field is Store the preferred Name</description>
         <externalId>false</externalId>
         <label>Preferred Name</label>
         <length>100</length>
@@ -4635,19 +4662,52 @@ var l = new sforce.SObject(&quot;Lead&quot;);
 var priorWish=&quot;{! Lead.Has_this_child_ever_received_prior_wish__c }&quot;
 priorWish=priorWish.toLowerCase();
 var leadStatus = &quot;{! Lead.Status}&quot;;
+var dupStatus = &quot;{!Lead.Dup_Check__c}&quot;;
+var leadSubStatus = &quot;{!Lead.Sub_Status__c}&quot;;
 var TretMedProfEmail = &quot;{! Lead.Treating_Medical_Professional_Email__c}&quot;;
+
+if(leadSubStatus == &apos;Pending Diagnosis Verification&apos;)
+{
+             if (confirm(&quot;Are you sure you want to submit  Diagnosis Verification?&quot;) == true)  
+				{ 
+
+					// make the fields change
+					l.Id = &quot;{! Lead.Id }&quot;;
+					l.Sub_Status__c=&quot;Pending Diagnosis Verification&quot;;
+					l.Of_Times_Email_Sent__c= &quot;{! IF(ISBLANK(Lead.Of_Times_Email_Sent__c), 0,  Lead.Of_Times_Email_Sent__c ) }&quot;;
+					l.Of_Times_Email_Sent__c= parseInt(l.Of_Times_Email_Sent__c)+1; ;
+
+
+					// save the change
+					sforce.connection.update([l]);
+
+					alert(&quot;Diagnosis Verification sent successfully.&quot;);
+
+					//refresh the page
+					window.location.reload();
+				}
+}
+else if(leadSubStatus != &apos;Pending Diagnosis Verification&apos;)
+{
+
 if(leadStatus != &quot;Referred&quot;)
 {
     alert(&quot;Diagnosis verification cannot be sent when lead in &quot; + leadStatus + &quot; status.&quot;);
 }
 else
 {
-    var leadDupe = sforce.apex.execute(&quot;LeadWishFamilyDupe&quot;,&quot;FindLeadDupe&quot;,  {leadId:&apos;{!Lead.Id}&apos;});
-    if(leadDupe != null &amp;&amp; leadDupe != &apos;&apos; &amp;&amp; confirm(leadDupe))
-	{
-	   window.location.href = &apos;/apex/LeadDuplicate_VF?id={!Lead.Id}&apos;;
-	}
-    else if(leadDupe == null || leadDupe == &apos;&apos; )
+   
+    var leadDupe =&apos;&apos;; 
+	      
+	leadDupe = sforce.apex.execute(&quot;LeadWishFamilyDupe&quot;,&quot;FindLeadDupe&quot;,  {leadId:&apos;{!Lead.Id}&apos;});
+             
+		if(leadDupe != null &amp;&amp; leadDupe != &apos;&apos; &amp;&amp; dupStatus != &apos;Block Lead Dup&apos;)  
+		{
+		  if(confirm(leadDupe))
+		     window.location.href = &apos;/apex/LeadDuplicate_VF?id={!Lead.Id}&apos;;
+		}
+	
+    else if(leadDupe == null || leadDupe == &apos;&apos; || dupStatus == &apos;Block Lead Dup&apos;)
 	{
 	
 		if(priorWish.search(&quot;yes&quot;) &gt;= 0) 
@@ -4690,6 +4750,7 @@ else
 		}
    }
 
+}
 }</url>
     </webLinks>
     <webLinks>

@@ -94,13 +94,19 @@ trigger Affiliation_AT on npe5__Affiliation__c (Before Insert,Before Update,Afte
         
     }
     if(Trigger.isAfter){
-        for(npe5__Affiliation__c currRec:trigger.new){
-            if(trigger.isinsert || currRec.npe5__Status__c!=trigger.oldMap.get(currRec.id).npe5__Status__c){
-                contactMap.put(currRec.npe5__Contact__c,currRec.npe5__Status__c);
+        Map<id,npe5__Affiliation__c> affiliationMap = new Map<id,npe5__Affiliation__c>();
+        Set<Id> affiliationIds = new Set<Id>();
+        
+        for(npe5__Affiliation__c currRec : trigger.new){
+            if(trigger.isinsert || currRec.npe5__Status__c!=trigger.oldMap.get(currRec.id).npe5__Status__c 
+                || currRec.Constituent_code__c != trigger.oldMap.get(currRec.id).Constituent_code__c){
+                affiliationMap.put(currRec.npe5__Contact__c,currRec);
+                affiliationIds.add(currRec.npe5__Organization__c);
             }
         }
-        if(contactMap != null && contactMap.size() >0){
-            AffiliationTriggerHandler.updateContact(contactMap);
+        if(affiliationMap.size() >0)
+        {
+            AffiliationTriggerHandler.updateContact(affiliationMap,affiliationIds);
         }
  
     }

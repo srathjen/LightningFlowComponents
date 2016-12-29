@@ -28,7 +28,7 @@ global class InKindReimbursementApproval{
             message = 'Record was successfully submited for approval';
         }
         else if((inkindList[0].Documentation__c == 'Will Attach' || inkindList[0].Documentation__c == 'Attached' ) && attchmentList.size() == 0){
-            message = 'Please Attach all in-kind related receipts or documentation below or select Documentation Not available.';
+            message = 'Please attach all In-kind receipts or documentation below or select Documentation as Not Available.';
         }
         return message;
     }
@@ -56,7 +56,7 @@ global class InKindReimbursementApproval{
             message = 'Record was successfully submited for approval';
         }
         else if((inkindList[0].Documentation__c == 'Will Attach' || inkindList[0].Documentation__c == 'Attached' ) && attchmentList.size() == 0){
-            message = 'Please Attach all in-kind related receipts or documentation below or select Documentation Not available.';
+            message = 'Please attach all In-kind receipts or documentation below or select Documentation as Not Available.';
         }
         return message;
         

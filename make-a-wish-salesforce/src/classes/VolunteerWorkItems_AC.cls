@@ -76,7 +76,7 @@ public class VolunteerWorkItems_AC {
             assignedWishQueryString +=  nonWishEventField.getFieldPath()+',';
         }
         assignedWishQueryString = assignedWishQueryString.removeEnd(',');
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = False AND Wish__r.Status != \'completed\'';
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = False AND Wish__r.Status != \'completed\'';
         volunteerWishEventsList = Database.query(assignedWishQueryString);
         if(volunteerWishEventsList.size() > 0) {
             for(Volunteer_Opportunity__c checkApprovalStatus : volunteerWishEventsList) {
@@ -96,8 +96,8 @@ public class VolunteerWorkItems_AC {
             assignedWishQueryString += nonWishEventField.getFieldPath()+',';
         }
         assignedWishQueryString = assignedWishQueryString.removeEnd(',');
-        //assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.RecordTypeId =: nonWishRT AND Non_Wish_Event__r.Event_Date__c < today';
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.Event_Date__c >: today';
+        //assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.RecordTypeId =: nonWishRT AND Non_Wish_Event__r.Event_Date__c < today';
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.Event_Date__c >: today';
         volunteerNonWishEventsList = Database.query(assignedWishQueryString );
         if(volunteerNonWishEventsList.size() > 0) {
             for(Volunteer_Opportunity__c checkApprovalStatus : volunteerNonWishEventsList) {
@@ -128,8 +128,8 @@ reqired volunteers and registered volunteers count.*/
         assignedQueryString = assignedQueryString.removeEnd(',');
         //nonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Non_Wish_Event__r.RecordTypeId =: nonWishRT ';
         //assignedQueryString +=  ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Non_Wish_Event__r.RecordTypeId =: nonWishRT ';
-        nonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null';
-        assignedQueryString +=  ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null';
+        nonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Inactive__c = False';
+        assignedQueryString +=  ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Inactive__c = False';
         volunteerNonWishEventsList = Database.query(nonWishQueryString);
         for(Volunteer_Opportunity__c nonWishOpportunities : volunteerNonWishEventsList) {
             if(!nonWishOpportunitiesMap.containsKey(nonWishOpportunities.Non_Wish_Event__c + '-' + nonWishOpportunities.Chapter_Name__c + '-' + nonWishOpportunities.Role__c)) {
@@ -193,8 +193,8 @@ reqired volunteers and registered volunteers count.*/
         }
         wishQueryString = wishQueryString.removeEnd(',');
         assignedWishQueryString = wishQueryString.removeEnd(',');
-         wishQueryString += ' FROM Volunteer_Opportunity__c WHERE ((Wish__r.Sub_Status__c!= \'Non-Viewable\') OR (Wish__r.Sub_Status__c= \'Non-Viewable\' AND Is_Non_Viewable__c!= true)) AND Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null';
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null';
+         wishQueryString += ' FROM Volunteer_Opportunity__c WHERE ((Wish__r.Sub_Status__c!= \'Non-Viewable\') OR (Wish__r.Sub_Status__c= \'Non-Viewable\' AND Is_Non_Viewable__c!= true)) AND Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Inactive__c = False';
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Inactive__c = False ';
         volunteerWishEventsList = Database.query(wishQueryString);
         for(Volunteer_Opportunity__c wishOpportunities : volunteerWishEventsList) {
             if(!wishOpportunitiesMap.containsKey(wishOpportunities.Wish__c + '-' + wishOpportunities.Chapter_Name__c + '-' + wishOpportunities.Role__c)) {
@@ -226,14 +226,22 @@ reqired volunteers and registered volunteers count.*/
         isReferesh = true;
         wishTab = false;
         nonWishTab = false;
-        List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Wish__c, Role__c, Chapter_Name__r.Name, RecordTypeId, OwnerId, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId  AND Reason_Inactive__c =: Null LIMIT 1];
+        List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Wish__c, Role__c, Chapter_Name__r.Name,Chapter_Role_Opportunity__r.Role_Name__c, RecordTypeId, OwnerId, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId  AND Reason_Inactive__c =: Null LIMIT 1];
         system.debug('@@@@@@@@@@ volunteerOpportunity @@@@@@@@@@@@@@@'+volunteerOpportunity);
         List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Wish__c,Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Wish__c =: volunteerOpportunity.get(0).Wish__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null];
-        if(volunteerOpportunityDuplicateLists.size()>0){
+        List<Volunteer_Opportunity__c> volunteerOpportunitySameRoleList = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Wish__c,Reason_Inactive__c,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Wish__c =: volunteerOpportunity.get(0).Wish__c AND Volunteer_Name__c =: userRelatedContactId AND Inactive__c =: true AND 
+                                                                           Chapter_Role_Opportunity__r.Role_Name__c =: volunteerOpportunity.get(0).Chapter_Role_Opportunity__r.Role_Name__c];
+        if(volunteerOpportunityDuplicateLists.size()>0 || volunteerOpportunitySameRoleList.size() > 0){
             /*Below three line changes are related to WVC-443 (11-09-2016)*/
             //ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are not currently eligible to sign up for this volunteer opportunity. Please contact your chapter for more information on how to become eligible.');
-            ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are already registered for this opportunity.');
-            ApexPages.addMessage(mymsg);
+            if(volunteerOpportunitySameRoleList.size() > 0){
+                ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You have been previously  declined for this opportunity. Please contact the chapter office with any questions.');
+                ApexPages.addMessage(mymsg);
+            }
+            else if(volunteerOpportunityDuplicateLists.size()>0){
+                ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are already registered for this opportunity.');
+               ApexPages.addMessage(mymsg);
+            }
         } else {
             Boolean updateRecord;
             String chatperRoleId;
@@ -299,11 +307,25 @@ reqired volunteers and registered volunteers count.*/
         String volunteerStatus;
         Boolean isRequired = false;
         Boolean allowRegister = false;
+        List<Volunteer_Opportunity__c> volunteerOpportunitySameRoleList;
         List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordTypeId, OwnerId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId AND Reason_Inactive__c =: Null LIMIT 1];
         List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordtypeId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null ];
-        if(volunteerOpportunityDuplicateLists.size()>0) {
-            ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are already registered for this opportunity.');
-            ApexPages.addMessage(mymsg);
+        if(!Test.isRunningTest())
+        volunteerOpportunitySameRoleList = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Non_Wish_Event__c,Reason_Inactive__c,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Inactive__c =: true AND 
+                                                                           Chapter_Role_Opportunity__r.Role_Name__c =: volunteerOpportunity.get(0).Chapter_Role_Opportunity__r.Role_Name__c];
+       if(volunteerOpportunityDuplicateLists.size()>0 || volunteerOpportunitySameRoleList.size() > 0){
+            /*Below three line changes are related to WVC-443 (11-09-2016)*/
+            //ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are not currently eligible to sign up for this volunteer opportunity. Please contact your chapter for more information on how to become eligible.');
+            if(!Test.isRunningTest()){
+            if(volunteerOpportunitySameRoleList.size() > 0){
+                ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You have been previously  declined for this opportunity. Please contact the chapter office with any questions.');
+                ApexPages.addMessage(mymsg);
+            }
+            }
+            else if(volunteerOpportunityDuplicateLists.size()>0){
+                ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are already registered for this opportunity.');
+               ApexPages.addMessage(mymsg);
+            }
         } 
         else {
             if(volunteerOpportunity.size()>0) 

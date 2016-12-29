@@ -59,6 +59,7 @@
     <externalSharingModel>ReadWrite</externalSharingModel>
     <fields>
         <fullName>AvailableSeats__c</fullName>
+        <description>It hold the number of available seats.</description>
         <externalId>false</externalId>
         <formula>IF( max_capacity__c &lt; Registered_Seats__c,0, max_capacity__c -  Registered_Seats__c)</formula>
         <label>Available Seats</label>
@@ -83,6 +84,7 @@
     </fields>
     <fields>
         <fullName>Chapter__c</fullName>
+        <description>It capture the chapter name.</description>
         <externalId>false</externalId>
         <formula>Chapter_Role_O_T__r.Chapter_Name__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -269,6 +271,7 @@
     </fields>
     <fields>
         <fullName>Orientation_and_Training__c</fullName>
+        <description>It hold the orientation and training name.</description>
         <externalId>false</externalId>
         <formula>Chapter_Role_O_T__r.Orientation_Training__r.Name</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>

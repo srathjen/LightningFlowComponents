@@ -53,12 +53,12 @@
                 <field>Phone_Number__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Region_Code__c</field>
+                <behavior>Edit</behavior>
+                <field>Approved_Date__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Approval_Date__c</field>
+                <behavior>Readonly</behavior>
+                <field>Region_Code__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -85,6 +85,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>vounteer_Name__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Adjustment_Comments__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>

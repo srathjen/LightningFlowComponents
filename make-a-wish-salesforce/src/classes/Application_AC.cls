@@ -60,9 +60,13 @@ public class Application_AC{
         languagesList  = new List<String>();
         howKnowAbtMAWA = new List<String>();
         professionalSkillsList = new List<String>();
+        String signingStatus = '';
         
         if(ApexPages.currentPage().getParameters().get('showeditMode') != Null)
                 showEdit = Boolean.valueOf(ApexPages.currentPage().getParameters().get('showeditMode'));
+                
+        if(ApexPages.currentPage().getParameters().get('event') != Null)
+                signingStatus = ApexPages.currentPage().getParameters().get('event');
                 
            // Based on the parameter value, It would display Background tab.
         if(ApexPages.currentPage().getParameters().get('bgRequired') != Null)
@@ -79,7 +83,7 @@ public class Application_AC{
             system.debug('@@@@@ Hi @@@@@'+contactId);
             
             system.debug('++++++++++' + [select id, recordTypeId from contact where id =: contactId]);
-            currentVolunteer= [SELECT id,Title,RecordTypeId,FirstName,Middle_Name__c,LastName,State_Employer__c,Nickname__c,Birth_Month__c,Birth_Day__c,HomePhone,Alternate_Phone_Type__c,Preferred_Phone_Types__c,MobilePhone,
+            currentVolunteer= [SELECT id,Title,RecordTypeId,FirstName,Middle_Name__c,LastName,State_Employer__c,Preferred_Name__c,Birth_Month__c,Birth_Day__c,HomePhone,Alternate_Phone_Type__c,Preferred_Phone_Types__c,MobilePhone,
                     OtherPhone,Email,I_m_on_LinkedIn__c,How_did_you_hear_about_Make_A_Wish__c,MailingStreet,MailingCity,mailingstatecode,MailingCountrycode,MailingPostalCode,
                    Employer__c,Position__c,Street_Employer__c,City_Employer__c,Zip_Employer__c,May_We_Contact_You_at_Work__c,Interested_involved_with_Make_A_Wish__c,
                    Emergency_Contact__c,Emergency_Contact_Phone__c,Professional_Skills__c,Language__c,Language_Notes__c,Read__c,Write__c,Speak__c,Understand__c,
@@ -96,6 +100,34 @@ public class Application_AC{
             currentVolunteer.Birth_Month__c = currentVolunteer.Birth_Month__c;
             if(currentVolunteer.Birth_Day__c  != Null)
             currentVolunteer.Birth_Day__c = currentVolunteer.Birth_Day__c;
+            
+         /*   if(currentVolunteer.Preferred_Phone_Types__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
+                currentVolunteer.HomePhone =   currentVolunteer.HomePhone;
+                currentVolunteer.MobilePhone  = currentVolunteer.MobilePhone ;
+                
+            }
+            if(currentVolunteer.Preferred_Phone_Types__c == 'Mobile' && currentVolunteer.Alternate_Phone_Type__c == 'Home'){
+                String mobileNo = currentVolunteer.MobilePhone;
+                currentVolunteer.MobilePhone = currentVolunteer.HomePhone;
+                currentVolunteer.HomePhone = mobileNo;
+              
+            }
+            
+            
+            if(currentVolunteer.Preferred_Phone_Types__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Home'){
+                currentVolunteer.HomePhone = currentVolunteer.HomePhone;
+                currentVolunteer.MobilePhone = currentVolunteer.OtherPhone;
+             
+                
+            }
+            
+             if(currentVolunteer.Preferred_Phone_Types__c == 'Mobile' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
+                currentVolunteer.HomePhone = currentVolunteer.OtherPhone;
+                currentVolunteer.MobilePhone = currentVolunteer.MobilePhone;
+                
+            } */
+            
+            
             if(currentVolunteer.volunteer_role__c != Null)
             {
                 for(String role : currentVolunteer.volunteer_role__c.split(';'))
@@ -184,13 +216,13 @@ public class Application_AC{
            
         } 
         
-        if(currentVolunteer.is_Application__c == 'Submit' || currentVolunteer.is_Application__c == 'Complete' || currentVolunteer.is_Application__c == 'Approved')
+        if(signingStatus == 'signing_complete' || currentVolunteer.is_Application__c == 'Complete' || currentVolunteer.is_Application__c == 'Approved')
         {
            isSigned=True;
            editMode = True;
         }
         
-        else if(currentVolunteer.is_Application__c == 'Fully Submit' || currentVolunteer.is_Application__c == 'Partial Submit' || currentVolunteer.is_Application__c == 'Rejected')
+        else if(currentVolunteer.is_Application__c == 'Submit' || currentVolunteer.is_Application__c == 'Fully Submit' || currentVolunteer.is_Application__c == 'Partial Submit' || currentVolunteer.is_Application__c == 'Rejected')
         {
           isSigned = false;
           editMode = false;
@@ -321,17 +353,15 @@ public class Application_AC{
                
             }*/
             
-            if(currentVolunteer.Preferred_Phone_Types__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
-                currentVolunteer.HomePhone = currentVolunteer.HomePhone;
+          /*  if(currentVolunteer.Preferred_Phone_Types__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
+                currentVolunteer.HomePhone =   currentVolunteer.HomePhone;
                 currentVolunteer.MobilePhone  = currentVolunteer.MobilePhone ;
-                if(currentVolunteer.OtherPhone != Null)
                 currentVolunteer.OtherPhone = Null;
             }
             if(currentVolunteer.Preferred_Phone_Types__c == 'Mobile' && currentVolunteer.Alternate_Phone_Type__c == 'Home'){
                 String mobileNo = currentVolunteer.MobilePhone;
                 currentVolunteer.MobilePhone = currentVolunteer.HomePhone;
                 currentVolunteer.HomePhone = mobileNo;
-                if(currentVolunteer.OtherPhone != Null)
                 currentVolunteer.OtherPhone = Null;
             }
             
@@ -339,15 +369,16 @@ public class Application_AC{
             if(currentVolunteer.Preferred_Phone_Types__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Home'){
                 currentVolunteer.HomePhone = currentVolunteer.HomePhone;
                 currentVolunteer.OtherPhone = currentVolunteer.MobilePhone;
-                //currentVolunteer.MobilePhone = Null;
+                currentVolunteer.MobilePhone = Null;
                 
             }
             
              if(currentVolunteer.Preferred_Phone_Types__c == 'Mobile' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
-                currentVolunteer.MobilePhone = currentVolunteer.MobilePhone ;
+                currentVolunteer.HomePhone = currentVolunteer.HomePhone;
+                currentVolunteer.MobilePhone = currentVolunteer.MobilePhone;
                 currentVolunteer.OtherPhone = currentVolunteer.HomePhone;
-                //currentVolunteer.HomePhone = Null;
-            }
+                currentVolunteer.HomePhone = Null;
+            } */
             
             update currentVolunteer;
             if(!displaySignNowPopup){

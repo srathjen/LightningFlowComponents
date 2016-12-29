@@ -127,10 +127,12 @@
         $(document).ready(function(){
             var userident = document.getElementById("Pge:newExpense:userInfo").value;
             var typeExpand= document.getElementById("Pge:newExpense:WEtypeExpand").value;
-           
+            var isSubmitted= document.getElementById("Pge:newExpense:isSubmitted").value;
+            if(isSubmitted == 'false'){
+                alert("This budget is currently pending approval and no changes can be made. The submitter can recall the approval request if changes need to be made.");
+            }
             if(userident !=null ){
                 if(userident == 'true'){
-                    alert(userident);
                     $("#wishexpense").find("input, select, button, textarea").attr("disabled",true);
                     $("#wishexpense").find(".addExpenseClass").addClass("disable_a_href");
                     <!-- $("#wishexpense").find("a").addClass("disable_a_href"); -->
@@ -167,6 +169,7 @@
                    selectedDesc= '7000';
                    if(bcash !=null){
                        bcash.readOnly =false;
+                       bcash.value='';
                    }
                     if(binkind !=null){
                        binkind.readOnly =true;
@@ -174,9 +177,11 @@
                    }
                    if(pcash !=null){
                        pcash.readOnly =false;
+                       pcash.value='';
                    }
                    if(acash !=null){
                        acash.readOnly =false;
+                       acash.value='';
                    }
                    
                    if(pinkind !=null){
@@ -189,17 +194,20 @@
                        ainkind.value='';
                    }
                 }
-                else if(desc == 'Direct Wish In-kind Expense'){
+                else if(desc == 'Direct Wish In-Kind Goods'){
                    selectedDesc= '7300';
                    if(binkind !=null){
                        binkind.readOnly =false;
+                       binkind.value='';
                    }
                    if(pinkind !=null){
                        pinkind.readOnly =false;
+                       pinkind.value='';
                    }
                    
                    if(ainkind !=null){
                        ainkind.readOnly =false;
+                       ainkind.value='';
                    }
                    
                    if(bcash !=null){
@@ -221,13 +229,16 @@
                    selectedDesc= '7350';
                    if(binkind !=null){
                        binkind.readOnly =false;
+                       binkind.value='';
                    }
                    if(pinkind !=null){
                        pinkind.readOnly =false;
+                       pinkind.value='';
                    }
                    
                    if(ainkind !=null){
                        ainkind.readOnly =false;
+                       ainkind.value='';
                    }
                    
                    if(bcash !=null){
@@ -305,7 +316,7 @@
             <div style="float:left;width: 60%" >Chapter Name : {!wishChapterName }  </div>
             <br />
             <div style="float:left;width: 40%" >Number of wish participants : {!NoOfWishParts }  </div>
-            <div style="float:left;width: 40%" >Anticipated Wish Date :
+            <div style="float:left;width: 40%" >Anticipated Start Date :
                 <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
                         <apex:param value="{! AntWishDate}"/>
                 </apex:outputText>   </div>
@@ -318,6 +329,7 @@
         <apex:form id="newExpense">
         <body>
             <apex:inputhidden id="userInfo" value="{!UserIdentiy}"/>
+            <apex:inputhidden id="isSubmitted" value="{!approvalBtnVisibility}"/>
             <apex:inputhidden id="WEtypeExpand" value="{!WEtypeExpand}"/>
             <div id="wishexpense" class="slds-card slds-m-horizontal--large slds-card--empty font-size-x-small"  style="Overflow:auto;font-size:12px !important">
                 <div class="slds-card__header slds-grid ">
@@ -373,10 +385,10 @@
                             <apex:repeat value="{!wishExpenseTypes}" var="expenseType"> 
                                 <tr id="{!cntTemp}" class="clickable" data-toggle="collapse" data-target=".{!cntTemp}collapsed">
                                     <td  align="left" colspan="7" >
-                                        <apex:commandLink styleClass="addExpenseClass" action="{!addExpense}"><apex:image value="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png" style="height:20px"/>
+                                        <!--<apex:commandLink styleClass="addExpenseClass" action="{!addExpense}"><apex:image value="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png" style="height:20px"/>
                                             <apex:param name="expenseType" value="{!expenseType}" assignTo="{!expenseType}"/>
                                             <apex:param name="typeExpand" value="{!cntTemp}collapsed" assignTo="{!WEtypeExpand}"/>
-                                        </apex:commandLink>
+                                        </apex:commandLink> -->
                                         <a   class="accordion-toggle" data-toggle="collapse" href="#expenseBlock{!cntTemp}" >{!expenseType}</a>
                                     </td>
                                     
@@ -488,7 +500,7 @@
                                                 </td>        
                                             </apex:outputPanel>
                                              <apex:outputPanel rendered="{!If(isbudgetApprovalExist == true,true,false)}">
-                                                <td class="slds-cell-wrap slds-text-align--right tdBudget" style="width:40px"><apex:outputText value="{!expense.Budget_Cash__c}"/></td>
+                                                <td class="slds-cell-wrap slds-text-align--right tdBudget" style="width:40px"><apex:outputField value="{!expense.Budget_Cash__c}"/></td>
                                             </apex:outputPanel>
                                             
                                             <!-- Budget Inkind -->
@@ -511,7 +523,7 @@
                                             <apex:outputPanel rendered="{!If((isbudgetApprovalExist == false || (expense.Budget_Approval_Status__c == 'Approved' && expense.Projected_Approval_Status__c == 'Approved')),true,false)}">
                                                 <td class="slds-cell-wrap slds-text-align--right tdProjected" style="width:40px">
                                                    <apex:outputPanel >
-                                                            <apex:OutPutText value="{!expense.Projected_Cash__c}" />
+                                                            <apex:outputField value="{!expense.Projected_Cash__c}" />
                                                     </apex:outputPanel>
                                                 </td>       
                                             </apex:outputPanel>
@@ -525,7 +537,7 @@
                                                         </apex:actionRegion>
                                                     </apex:outputPanel>
                                                     <apex:outputPanel rendered="{!If(expense.Account_Description__c  != 'Direct Wish Cash Expense',true,false)}">
-                                                            <apex:OutPutText value="{!expense.Projected_Cash__c}" />
+                                                            <apex:outputField value="{!expense.Projected_Cash__c}" />
                                                     </apex:outputPanel>
                                                 </td>       
                                             </apex:outputPanel>
@@ -539,7 +551,7 @@
                                             <apex:outputPanel rendered="{!If((isbudgetApprovalExist == false || (expense.Budget_Approval_Status__c == 'Approved' && expense.Projected_Approval_Status__c == 'Approved')),true,false)}">
                                                  <td class="slds-cell-wrap slds-text-align--right tdProjected" style="width:40px">
                                                     <apex:outputPanel >
-                                                         <apex:OutPutText value="{!expense.Projected_In_Kind__c}" />  
+                                                         <apex:outputField value="{!expense.Projected_In_Kind__c}" />  
                                                     </apex:outputPanel>
                                                  </td>       
                                             </apex:outputPanel>
@@ -553,7 +565,7 @@
                                                         </apex:actionRegion>
                                                     </apex:outputPanel>
                                                     <apex:outputPanel rendered="{!If(expense.Account_Description__c  == 'Direct Wish Cash Expense',true,false)}">
-                                                         <apex:OutPutText value="{!expense.Projected_In_Kind__c}" />                                                          
+                                                         <apex:outputField value="{!expense.Projected_In_Kind__c}" />                                                          
                                                     </apex:outputPanel>
                                                  </td>       
                                             </apex:outputPanel>
@@ -570,7 +582,7 @@
                                             </apex:outputPanel>
                                             <apex:outputPanel rendered="{!If(isbudgetApprovalExist == false,true,false)}">
                                                 <td class="slds-text-align--right tdBudget" style="width:40px">
-                                                    <apex:OutPutText value="{!expense.Actual_Cash__c}" />
+                                                    <apex:outputField value="{!expense.Actual_Cash__c}" />
                                                 </td>       
                                             </apex:outputPanel>
                                             <apex:outputPanel rendered="{!If(expense.Budget_Approval_Status__c == 'Approved',true,false)}">
@@ -583,7 +595,7 @@
                                                         </apex:actionRegion>
                                                     </apex:outputPanel>
                                                      <apex:outputPanel rendered="{!If(expense.Account_Description__c  != 'Direct Wish Cash Expense',true,false)}">
-                                                            <apex:OutPutText value="{!expense.Actual_Cash__c}" />
+                                                            <apex:outputField value="{!expense.Actual_Cash__c}" />
                                                     </apex:outputPanel>
                                                  </td>       
                                             </apex:outputPanel>
@@ -596,7 +608,7 @@
                                             </apex:outputPanel>
                                             <apex:outputPanel rendered="{!If(isbudgetApprovalExist == false,true,false)}">
                                                 <td class="slds-text-align--right tdBudget" style="width:40px">
-                                                    <apex:OutPutText value="{!expense.Actual_In_Kind__c}" />
+                                                    <apex:outputField value="{!expense.Actual_In_Kind__c}" />
                                                 </td>       
                                             </apex:outputPanel>
                                             <apex:outputPanel rendered="{!If(expense.Budget_Approval_Status__c == 'Approved',true,false)}">
@@ -647,6 +659,14 @@
                                     </tr> 
                                     <apex:variable var="cnt" value="{!cnt+1}"/>
                                 </apex:repeat>
+                                <tr Class="collapse  budgets {!cntTemp}collapsed">
+                                    <td colspan="18">
+                                        <apex:commandLink styleClass="addExpenseClass" action="{!addExpense}"><apex:image value="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png" style="height:20px" title="Add New Transaction"/>
+                                            <apex:param name="expenseType" value="{!expenseType}" assignTo="{!expenseType}"/>
+                                            <apex:param name="typeExpand" value="{!cntTemp}collapsed" assignTo="{!WEtypeExpand}"/>
+                                        </apex:commandLink>
+                                    </td>
+                                </tr>
                                 <apex:variable var="cnt" value="{!0}"/>
                                 <apex:variable var="cntTemp" value="{!cntTemp+1}"/>
                             </apex:repeat>

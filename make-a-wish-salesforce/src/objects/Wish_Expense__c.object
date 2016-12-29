@@ -68,7 +68,7 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Direct Wish In-kind Expense</fullName>
+                <fullName>Direct Wish In-Kind Goods</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -498,10 +498,6 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Direct Wish In-kind Expense</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Direct Wish In-kind Service</fullName>
                 <default>false</default>
             </values>
@@ -619,10 +615,6 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Direct Wish In-kind Expense</fullName>
-                <default>false</default>
-            </values>
-            <values>
                 <fullName>Direct Wish In-kind Service</fullName>
                 <default>false</default>
             </values>
@@ -737,10 +729,6 @@
             <picklist>Account_Description__c</picklist>
             <values>
                 <fullName>Direct Wish Cash Expense</fullName>
-                <default>false</default>
-            </values>
-            <values>
-                <fullName>Direct Wish In-kind Expense</fullName>
                 <default>false</default>
             </values>
             <values>

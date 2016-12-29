@@ -92,7 +92,7 @@ public class VolunteerWorkItems_AC_Test {
         
         user currUser = [SELECT Id,UserName FROM User WHERE UserName =:'joathanedwards@gmail.com'];
         Non_Wish_Events__c dbNonWish = [SELECT Id,Event_Text__c  FROM Non_Wish_Events__c WHERE Event_Text__c = 'Sending Wish Child'];
-        Volunteer_Opportunity__c dbOpp = [SELECT Id,Non_Wish_Event__C FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__C =: dbNonWish.Id Limit 1];
+        Volunteer_Opportunity__c dbOpp = [SELECT Id,Chapter_Name__r.Name,Non_Wish_Event__C,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__C =: dbNonWish.Id Limit 1];
         System.RunAs(currUser) {
             PageReference pageref = Page.MyAssignment_VF;
             Test.setCurrentPageReference(pageref);

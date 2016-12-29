@@ -392,6 +392,7 @@ public class DiagnosisVerification_AC {
     // If primary diagonis has group1 record and the medical question is satisfied the condition then the wish would consider as eligible. If not, then submitter would be asked for secoundary diagnosis and verification process will occur similar to the previous one.
     public void primaryDiagnosisEligibility() {
         identifyICDPCD = Apexpages.currentPage().getParameters().get('identifyFieldValue');
+        System.debug('The value is+++'+identifyICDPCD);
         medicalPicklistValWrapper.clear();
         if(!String.isEmpty(identifyICDPCD) && identifyICDPCD == 'ICD') {
             List<ICD_Codes__c> icdConditionDescriptionCheck = [SELECT Id, Condition_Description__c, Condition_Description__r.Name, Group1__c FROM ICD_Codes__c WHERE Name =: wrapCls.diagnosisFilter];
@@ -412,21 +413,20 @@ public class DiagnosisVerification_AC {
     // Other diagnosis condition1 eligibility check
     public void otherDiagnosisEligibilityCondition1() {
         medicalPicklistOtherWrapper1.clear();
-        if(!String.isEmpty(wrapCls.diagnosisFilterVal1)) {
-            List<ICD_Codes__c> icdConditionDescriptionCheck = [SELECT Id, Condition_Description__c, Group1__c FROM ICD_Codes__c WHERE Condition_Description__r.Name =: wrapCls.diagnosisFilterVal1];
+        identifyICDPCD = Apexpages.currentPage().getParameters().get('identifyFieldValue');
+       
+        if(!String.isEmpty(identifyICDPCD) && identifyICDPCD == 'ICD') {
+            List<ICD_Codes__c> icdConditionDescriptionCheck = [SELECT Id, Condition_Description__c, Condition_Description__r.Name, Group1__c FROM ICD_Codes__c WHERE Name =: wrapCls.diagnosisFilter1];
             if(icdConditionDescriptionCheck.size() > 0) {
-                MediacalQuestions(wrapCls.diagnosisFilterVal1+'_'+(icdConditionDescriptionCheck[0]).Group1__c, null, wrapCls.diagnosisFilter1, 2,identifyICDPCD);
-            } else if(icdConditionDescriptionCheck.size() == 0) {               
-                List<Condition_Description__c> conditionDescriptionCheck = [SELECT Id,Group1__c, Name FROM Condition_Description__c WHERE Name =: wrapCls.diagnosisFilterVal1];
-                if(conditionDescriptionCheck.size() > 0) {                      
-                    MediacalQuestions(wrapCls.diagnosisFilterVal1+'_'+conditionDescriptionCheck[0].Group1__c, null,wrapCls.diagnosisFilter1, 2,identifyICDPCD);
-                } else if(conditionDescriptionCheck.size() == 0) {                       
-                    wrapCls.otherDiagnosis1 = true;
-                    wrapCls.eligibleForWish = false;
-                }
+                MediacalQuestions(icdConditionDescriptionCheck[0].Condition_Description__r.Name+'_'+(icdConditionDescriptionCheck[0]).Group1__c, null, wrapCls.diagnosisFilter1, 2,identifyICDPCD);
             }
+        } else if(!String.isEmpty(identifyICDPCD) && identifyICDPCD == 'PCD'){
+            List<Condition_Description__c> conditionDescriptionCheck = [SELECT Id,Group1__c, Name FROM Condition_Description__c WHERE Name =: wrapCls.diagnosisFilterVal1];
+                if(conditionDescriptionCheck.size() > 0) {
+                    MediacalQuestions(wrapCls.diagnosisFilterVal1+'_'+conditionDescriptionCheck[0].Group1__c, null,wrapCls.diagnosisFilter1, 2,identifyICDPCD);
+                }
         } else {
-            wrapCls.otherDiagnosis1 = true;
+            wrapCls.otherDiagnosis = true;
             wrapCls.eligibleForWish = false;
         }
     }
@@ -434,21 +434,20 @@ public class DiagnosisVerification_AC {
     // Other diagnosis condition2 eligibility check
     public void otherDiagnosisEligibilityCondition2() {
         medicalPicklistOtherWrapper2.clear();
-        if(!String.isEmpty(wrapCls.diagnosisFilterVal2)) {
-            List<ICD_Codes__c> icdConditionDescriptionCheck = [SELECT Id, Condition_Description__c, Group1__c FROM ICD_Codes__c WHERE Condition_Description__r.Name =: wrapCls.diagnosisFilterVal2];
-            if(icdConditionDescriptionCheck.size() > 0) {               
-                MediacalQuestions(wrapCls.diagnosisFilterVal2+'_'+(icdConditionDescriptionCheck[0]).Group1__c, null, wrapCls.diagnosisFilter2, 3,identifyICDPCD);
-            } else if(icdConditionDescriptionCheck.size() == 0) {              
-                List<Condition_Description__c> conditionDescriptionCheck = [SELECT Id,Group1__c, Name FROM Condition_Description__c WHERE Name =: wrapCls.diagnosisFilterVal2];
-                if(conditionDescriptionCheck.size() > 0) {         
-                    MediacalQuestions(wrapCls.diagnosisFilterVal2+'_'+conditionDescriptionCheck[0].Group1__c, null,wrapCls.diagnosisFilter2, 3,identifyICDPCD);
-                } else if(conditionDescriptionCheck.size() == 0) {
-                    wrapCls.otherDiagnosis2 = true;
-                    wrapCls.eligibleForWish = false;
-                }
+        identifyICDPCD = Apexpages.currentPage().getParameters().get('identifyFieldValue');
+       
+        if(!String.isEmpty(identifyICDPCD) && identifyICDPCD == 'ICD') {
+            List<ICD_Codes__c> icdConditionDescriptionCheck = [SELECT Id, Condition_Description__c, Condition_Description__r.Name, Group1__c FROM ICD_Codes__c WHERE Name =: wrapCls.diagnosisFilter2];
+            if(icdConditionDescriptionCheck.size() > 0) {
+                MediacalQuestions(icdConditionDescriptionCheck[0].Condition_Description__r.Name+'_'+(icdConditionDescriptionCheck[0]).Group1__c, null, wrapCls.diagnosisFilter2, 3,identifyICDPCD);
             }
+        } else if(!String.isEmpty(identifyICDPCD) && identifyICDPCD == 'PCD'){
+            List<Condition_Description__c> conditionDescriptionCheck = [SELECT Id,Group1__c, Name FROM Condition_Description__c WHERE Name =: wrapCls.diagnosisFilterVal2];
+                if(conditionDescriptionCheck.size() > 0) {
+                    MediacalQuestions(wrapCls.diagnosisFilterVal2+'_'+conditionDescriptionCheck[0].Group1__c, null,wrapCls.diagnosisFilter2, 3,identifyICDPCD);
+                }
         } else {
-            wrapCls.otherDiagnosis2 = true;
+            wrapCls.otherDiagnosis = true;
             wrapCls.eligibleForWish = false;
         }
     }
@@ -456,21 +455,20 @@ public class DiagnosisVerification_AC {
     // Other diagnosis condition3 eligibility check
     public void otherDiagnosisEligibilityCondition3() {
         medicalPicklistOtherWrapper3.clear();
-        if(!String.isEmpty(wrapCls.diagnosisFilterVal3)) {
-            List<ICD_Codes__c> icdConditionDescriptionCheck = [SELECT Id, Condition_Description__c, Group1__c FROM ICD_Codes__c WHERE Condition_Description__r.Name =: wrapCls.diagnosisFilterVal3];
+        identifyICDPCD = Apexpages.currentPage().getParameters().get('identifyFieldValue');
+       
+        if(!String.isEmpty(identifyICDPCD) && identifyICDPCD == 'ICD') {
+            List<ICD_Codes__c> icdConditionDescriptionCheck = [SELECT Id, Condition_Description__c, Condition_Description__r.Name, Group1__c FROM ICD_Codes__c WHERE Name =: wrapCls.diagnosisFilter3];
             if(icdConditionDescriptionCheck.size() > 0) {
-                MediacalQuestions(wrapCls.diagnosisFilterVal3+'_'+(icdConditionDescriptionCheck[0]).Group1__c, null, wrapCls.diagnosisFilter3, 4,identifyICDPCD);
-            } else if(icdConditionDescriptionCheck.size() == 0) {
-                List<Condition_Description__c> conditionDescriptionCheck = [SELECT Id,Group1__c, Name FROM Condition_Description__c WHERE Name =: wrapCls.diagnosisFilterVal3];
+                MediacalQuestions(icdConditionDescriptionCheck[0].Condition_Description__r.Name+'_'+(icdConditionDescriptionCheck[0]).Group1__c, null, wrapCls.diagnosisFilter3, 4,identifyICDPCD);
+            }
+        } else if(!String.isEmpty(identifyICDPCD) && identifyICDPCD == 'PCD'){
+            List<Condition_Description__c> conditionDescriptionCheck = [SELECT Id,Group1__c, Name FROM Condition_Description__c WHERE Name =: wrapCls.diagnosisFilterVal3];
                 if(conditionDescriptionCheck.size() > 0) {
                     MediacalQuestions(wrapCls.diagnosisFilterVal3+'_'+conditionDescriptionCheck[0].Group1__c, null,wrapCls.diagnosisFilter3, 4,identifyICDPCD);
-                } else if(conditionDescriptionCheck.size() == 0) {
-                    wrapCls.otherDiagnosis3 = true;
-                    wrapCls.eligibleForWish = false;
                 }
-            }
         } else {
-            wrapCls.otherDiagnosis3 = true;
+            wrapCls.otherDiagnosis = true;
             wrapCls.eligibleForWish = false;
         }
     }
@@ -479,21 +477,20 @@ public class DiagnosisVerification_AC {
     // Other diagnosis condition4 eligibility check
     public void otherDiagnosisEligibilityCondition4() {
         medicalPicklistOtherWrapper4.clear();
-        if(!String.isEmpty(wrapCls.diagnosisFilterVal4)) {
-            List<ICD_Codes__c> icdConditionDescriptionCheck = [SELECT Id, Condition_Description__c, Group1__c FROM ICD_Codes__c WHERE Condition_Description__r.Name =: wrapCls.diagnosisFilterVal4];
+        identifyICDPCD = Apexpages.currentPage().getParameters().get('identifyFieldValue');
+       
+        if(!String.isEmpty(identifyICDPCD) && identifyICDPCD == 'ICD') {
+            List<ICD_Codes__c> icdConditionDescriptionCheck = [SELECT Id, Condition_Description__c, Condition_Description__r.Name, Group1__c FROM ICD_Codes__c WHERE Name =: wrapCls.diagnosisFilter4];
             if(icdConditionDescriptionCheck.size() > 0) {
-                MediacalQuestions(wrapCls.diagnosisFilterVal4+'_'+(icdConditionDescriptionCheck[0]).Group1__c, null, wrapCls.diagnosisFilter4, 5,identifyICDPCD);
-            } else if(icdConditionDescriptionCheck.size() == 0) {
-                List<Condition_Description__c> conditionDescriptionCheck = [SELECT Id,Group1__c, Name FROM Condition_Description__c WHERE Name =: wrapCls.diagnosisFilterVal4];
+                MediacalQuestions(icdConditionDescriptionCheck[0].Condition_Description__r.Name+'_'+(icdConditionDescriptionCheck[0]).Group1__c, null, wrapCls.diagnosisFilter4, 5,identifyICDPCD);
+            }
+        } else if(!String.isEmpty(identifyICDPCD) && identifyICDPCD == 'PCD'){
+            List<Condition_Description__c> conditionDescriptionCheck = [SELECT Id,Group1__c, Name FROM Condition_Description__c WHERE Name =: wrapCls.diagnosisFilterVal4];
                 if(conditionDescriptionCheck.size() > 0) {
                     MediacalQuestions(wrapCls.diagnosisFilterVal4+'_'+conditionDescriptionCheck[0].Group1__c, null,wrapCls.diagnosisFilter4, 5,identifyICDPCD);
-                } else if(conditionDescriptionCheck.size() == 0) {
-                    wrapCls.notEligibleForWish = true;
-                    wrapCls.eligibleForWish = false;
                 }
-            }
         } else {
-            wrapCls.notEligibleForWish = true;
+            wrapCls.otherDiagnosis = true;
             wrapCls.eligibleForWish = false;
         }
     }
@@ -604,7 +601,7 @@ public class DiagnosisVerification_AC {
                     wrapCls.displayMedicalQuestion4 = true;
                 }
                 
-            } else if(medicalQuestionsList.size() > 0  && (conditionDescriptionName.split('_')[0] == 'Intractable Epileptic Spasms' && conditionDescriptionName.split('_')[0] == 'Intractable Epileptic Spasms with status epilepticus' ||conditionDescriptionName.split('_')[0] == 'Cardiomyopathy' || conditionDescriptionName.split('_')[0] == 'Epilepsy' || conditionDescriptionName.split('_')[0] == 'Hypertrophic Cardiomyopathy' || conditionDescriptionName.split('_')[0] == '  Restrictive CardioMyopathy' || conditionDescriptionName.split('_')[0] == 'Arrhythmogenic Right Ventricular Cardiomyopathy (ARVC)' || conditionDescriptionName.split('_')[0] == 'Right Ventricular Cardiomyopathy' || conditionDescriptionName.split('_')[0] == 'Ventricular Cardiomyopathy' || conditionDescriptionName.split('_')[0] == 'Intractable Epilepsy' || conditionDescriptionName.split('_')[0] == 'Intractable Epilepsy, complex, symptomatic' || conditionDescriptionName.split('_')[0] == 'Intractable Epilepsy, simple, symptomatic' || conditionDescriptionName.split('_')[0] == 'Epilepsy - Refractory')) {
+            } else if(medicalQuestionsList.size() > 0  && (conditionDescriptionName.split('_')[0] == 'Intractable Epileptic Spasms' && conditionDescriptionName.split('_')[0] == 'Intractable Epileptic Spasms with status epilepticus' ||conditionDescriptionName.split('_')[0] == 'Cardiomyopathy' || conditionDescriptionName.split('_')[0] == 'Epilepsy' || conditionDescriptionName.split('_')[0] == 'Hypertrophic Cardiomyopathy' || conditionDescriptionName.split('_')[0] == '	Restrictive CardioMyopathy' || conditionDescriptionName.split('_')[0] == 'Arrhythmogenic Right Ventricular Cardiomyopathy (ARVC)' || conditionDescriptionName.split('_')[0] == 'Right Ventricular Cardiomyopathy' || conditionDescriptionName.split('_')[0] == 'Ventricular Cardiomyopathy' || conditionDescriptionName.split('_')[0] == 'Intractable Epilepsy' || conditionDescriptionName.split('_')[0] == 'Intractable Epilepsy, complex, symptomatic' || conditionDescriptionName.split('_')[0] == 'Intractable Epilepsy, simple, symptomatic' || conditionDescriptionName.split('_')[0] == 'Epilepsy - Refractory')) {
                 if(conditionDescriptionName.split('_')[1] == 'true') {
                     System.debug('Eligible for Wish>>>>>>>>>>>');
                     wrapCls.eligibleForWish = true;
@@ -656,25 +653,11 @@ public class DiagnosisVerification_AC {
             }
             
         } else if(blockValue == 'PCD') {
-            wishStatus = '';
-            if(conditionDescriptionName.split('_')[1] == 'true') {
-                wrapCls.eligibleForWish = true;
-                wrapCls.notEligibleForWish = false;
-                if(order == 1) {
-                    wrapCls.displayMedicalQuestion = false;
-                } else if(order == 2) {
-                    wrapCls.displayMedicalQuestion2 = false;
-                } else if(order == 3) {
-                    wrapCls.displayMedicalQuestion2 = false;
-                } else if(order == 4) {
-                    wrapCls.displayMedicalQuestion3 = false;
-                } else if(order == 5) {
-                    wrapCls.displayMedicalQuestion4 = false;
-                }
-                
-            } else if(medicalQuestionsList.size() > 0) {
-                wrapCls.eligibleForWish = true;
-                wrapCls.notEligibleForWish = false;
+            System.debug('ICD>>>>>>>>>>>>>>'+medicalQuestionsList.size());
+             wishStatus = '';
+            if((medicalQuestionsList.size() > 0) && (conditionDescriptionName.split('_')[0] != 'Intractable Epileptic Spasms' && conditionDescriptionName.split('_')[0] != 'Intractable Epileptic Spasms with status epilepticus' && conditionDescriptionName.split('_')[0] != 'Cardiomyopathy' && conditionDescriptionName.split('_')[0] != 'Epilepsy' && conditionDescriptionName.split('_')[0] != 'Hypertrophic Cardiomyopathy' && conditionDescriptionName.split('_')[0] != 'Restrictive CardioMyopathy' && conditionDescriptionName.split('_')[0] != 'Arrhythmogenic Right Ventricular Cardiomyopathy (ARVC)' && conditionDescriptionName.split('_')[0] != 'Right Ventricular Cardiomyopathy' && conditionDescriptionName.split('_')[0] != 'Ventricular Cardiomyopathy' && conditionDescriptionName.split('_')[0] != 'Intractable Epilepsy' && conditionDescriptionName.split('_')[0] != 'Intractable Epilepsy, complex, symptomatic' && conditionDescriptionName.split('_')[0] != 'Intractable Epilepsy, simple, symptomatic' && conditionDescriptionName.split('_')[0] != 'Epilepsy - Refractory')) {
+                System.debug('Not Group1 Record>>>>');
+                wrapCls.eligibleForWish = false;
                 if(order == 1) {
                     wrapCls.displayMedicalQuestion = true;
                 } else if(order == 2) {
@@ -686,19 +669,55 @@ public class DiagnosisVerification_AC {
                 } else if(order == 5) {
                     wrapCls.displayMedicalQuestion4 = true;
                 }
-            } else {
-                wrapCls.eligibleForWish = true;
-                wrapCls.notEligibleForWish = false;
-                if(order == 1) {
-                    wrapCls.otherDiagnosis = true;
-                } else if(order == 2) {
-                    wrapCls.otherDiagnosis1 = true;
-                } else if(order == 3) {
-                    wrapCls.otherDiagnosis2 = true;
-                } else if(order == 4) {
-                    wrapCls.otherDiagnosis3 = true;
-                } else if(order == 5) {
-                    wrapCls.notEligibleForWish = true;
+                
+            } else if(medicalQuestionsList.size() > 0  && (conditionDescriptionName.split('_')[0] == 'Intractable Epileptic Spasms' && conditionDescriptionName.split('_')[0] == 'Intractable Epileptic Spasms with status epilepticus' ||conditionDescriptionName.split('_')[0] == 'Cardiomyopathy' || conditionDescriptionName.split('_')[0] == 'Epilepsy' || conditionDescriptionName.split('_')[0] == 'Hypertrophic Cardiomyopathy' || conditionDescriptionName.split('_')[0] == '	Restrictive CardioMyopathy' || conditionDescriptionName.split('_')[0] == 'Arrhythmogenic Right Ventricular Cardiomyopathy (ARVC)' || conditionDescriptionName.split('_')[0] == 'Right Ventricular Cardiomyopathy' || conditionDescriptionName.split('_')[0] == 'Ventricular Cardiomyopathy' || conditionDescriptionName.split('_')[0] == 'Intractable Epilepsy' || conditionDescriptionName.split('_')[0] == 'Intractable Epilepsy, complex, symptomatic' || conditionDescriptionName.split('_')[0] == 'Intractable Epilepsy, simple, symptomatic' || conditionDescriptionName.split('_')[0] == 'Epilepsy - Refractory')) {
+                if(conditionDescriptionName.split('_')[1] == 'true') {
+                    System.debug('Eligible for Wish>>>>>>>>>>>');
+                    wrapCls.eligibleForWish = true;
+                    wrapCls.notEligibleForWish = false;
+                    if(order == 1) {
+                        wrapCls.displayMedicalQuestion = false;
+                    } else if(order == 2) {
+                        wrapCls.displayMedicalQuestion1 = false;
+                    } else if(order == 3) {
+                        wrapCls.displayMedicalQuestion2 = false;
+                    } else if(order == 4) {
+                        wrapCls.displayMedicalQuestion3 = false;
+                    } else if(order == 5) {
+                        wrapCls.displayMedicalQuestion4 = false;
+                    }
+                } else if(conditionDescriptionName.split('_')[1] != 'true') {
+                    System.debug('Not Eligible for Wish>>>>>>>>>>>');
+                    wrapCls.eligibleForWish = false;
+                    if(order == 1) {
+                        wrapCls.displayMedicalQuestion = true;
+                    } else if(order == 2) {
+                        wrapCls.displayMedicalQuestion1 = true;
+                    } else if(order == 3) {
+                        wrapCls.displayMedicalQuestion2 = true;
+                    } else if(order == 4) {
+                        wrapCls.displayMedicalQuestion3 = true;
+                    } else if(order == 5) {
+                        wrapCls.displayMedicalQuestion4 = true;
+                    }
+                } else if(medicalQuestionsList.size() == 0 && conditionDescriptionName.split('_')[1] == 'true') {
+                    System.debug('Medical Question 0>>>>>>>>>>>');
+                    wrapCls.eligibleForWish = true;
+                    wrapCls.notEligibleForWish = false;
+                } else {
+                    System.debug('No Eligible Records>>>>>>');
+                    wrapCls.eligibleForWish = false;
+                    if(order == 1) {
+                        wrapCls.otherDiagnosis = true;
+                    } else if(order == 2) {
+                        wrapCls.otherDiagnosis1 = true;
+                    } else if(order == 3) {
+                        wrapCls.otherDiagnosis2 = true;
+                    } else if(order == 4) {
+                        wrapCls.otherDiagnosis3 = true;
+                    } else if(order == 5) {
+                        wrapCls.otherDiagnosis4 = true;
+                    }
                 }
             }
         }

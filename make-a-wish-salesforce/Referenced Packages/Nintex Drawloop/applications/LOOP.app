@@ -15,6 +15,5 @@
     <tab>standard-Case</tab>
     <tab>standard-report</tab>
     <tab>Document_Request__c</tab>
-    <tab>Awards_Recognition__c</tab>
-    <tab>Constituent_Code__c</tab>
+    <tab>dsfs__DocuSignAccountConfiguration__c</tab>
 </CustomApplication>

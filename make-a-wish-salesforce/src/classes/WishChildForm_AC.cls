@@ -13,9 +13,13 @@ Public Class WishChildForm_AC
      public Case currCase{get;set;}
      public Wish_Child_Form__c currWishChild{get;set;}
      Public Id currentPageId;
+     public Boolean isChildPart = false;
+
     public WishChildForm_AC(Apexpages.StandardController control)
     {
-        wcfUtil = new WishChildFormUtil();
+      isChildPart = false ;       
+      wcfUtil = new WishChildFormUtil();
+
         currentPageId =  ApexPages.currentPage().getParameters().get('id');
          List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentPageId AND Status =: 'Pending' AND ProcessDefinition.Name =: 'Wish Child Form Approval Process'];
           If(approvalIns.size() > 0){
@@ -263,15 +267,44 @@ Public Class WishChildForm_AC
             
             
            // Wish Participants Parser---------------------------------------------  
-            if(currWishChild.Participant_Contacts__c != Null)
-            {
             
+            if(currWishChild.Participant_Contacts__c != Null)
+            {              
               String jsonString = currWishChild.Participant_Contacts__c;
               JsonString = jsonString.replace('&quot;', '"');
               List<WishChildFormUtil.WrapperClass> wrapParticipantsList = (List<WishChildFormUtil.WrapperClass>) System.JSON.deserialize(jsonString, List<WishChildFormUtil.WrapperClass>.class);
-              System.debug('WishChildFormUtil.WrapperClass: '+wrapParticipantsList);
-              ParticipantsMapping(wrapParticipantsList);
+              System.debug('******jsonString:***** '+jsonString);
+             
+              List<Case> childAsPartList = new List<Case>();
+              childAsPartList = [SELECT Contact.FirstName,Contact.LastName,Contact.Middle_Name__c,Contact.Email, Contact.MobilePhone,Contact.BirthDate, Contact.T_Shirt_Size__c FROM Case WHERE Id = :currCase.id limit 1 ] ;        
+             System.debug('childAsPartList - '+childAsPartList);
+              Integer count = 0;
+              for( Case childCase:childAsPartList)
+              {    
+                  isChildPart = true;
+                  WishChildFormUtil.WrapperClass childParticipantsWrap = new WishChildFormUtil.WrapperClass();
+                  childParticipantsWrap.firstName = childCase.Contact.FirstName;
+                  childParticipantsWrap.LastName = childCase.Contact.LastName;
+                  childParticipantsWrap.MiddleName = childCase.Contact.Middle_Name__c;               
+                  childParticipantsWrap.Email = childCase.Contact.Email;   
+                  childParticipantsWrap.dob = childCase.Contact.BirthDate;   
+                  childParticipantsWrap.tshirtSize = childCase.Contact.T_Shirt_Size__c; 
+                  childParticipantsWrap.isChildParticipants = isChildPart ;  
+                  wrapParticipantsList.add(childParticipantsWrap);     
+                 System.debug('New childParticipantsWrap');
+              if(count != 1 && wrapParticipantsList.get(wrapParticipantsList.size() - 1).FirstName == childCase.Contact.FirstName 
+                      && wrapParticipantsList.get(wrapParticipantsList.size() - 1).LastName == childCase.Contact.LastName 
+                      && wrapParticipantsList.get(wrapParticipantsList.size() - 1).MiddleName == childCase.Contact.Middle_Name__c 
+                      && wrapParticipantsList.get(wrapParticipantsList.size() - 1).Email == childCase.Contact.Email 
+                      && wrapParticipantsList.get(wrapParticipantsList.size() - 1).dob == childCase.Contact.BirthDate)
+                {  
+                  wrapParticipantsList.remove(wrapParticipantsList.size() - 1);   
+                }
+                count = count + 1;
+              }              
+              ParticipantsMapping(wrapParticipantsList);  
             }
+
        }
             
        
@@ -279,18 +312,20 @@ Public Class WishChildForm_AC
         {
            wcfUtil.wishFamilyWrapList.add(new WishChildFormUtil.WrapperClass());
         }
-        if(wcfUtil.wishParticipantList.size() == 0)
+        if(wcfUtil.wishParticipantList.size() == 0)           
            wcfUtil.wishParticipantList.add(new WishChildFormUtil.WrapperClass()); 
         if(wcfUtil.driverWrapperCls.size() == 0)
             wcfUtil.driverWrapperCls.add(new WishChildFormUtil.DriverWrapper());  
             
-           }   
-                       
+           } 
+             
+        System.debug('Anydatatype_msg');               
     }
     
     
     public void init()
     {
+
                  currWishChild.FirstName__c =  currCase.Contact.FirstName;
                  currWishChild.LastName__c  =  currCase.Contact.LastName;
                  currWishChild.Middle_Name__c =  CurrCase.Contact.Middle_Name__c;
@@ -322,14 +357,47 @@ Public Class WishChildForm_AC
                         wrapCls.relId = currRel.npe4__RelatedContact__c;
                         wcfUtil.wishFamilyWrapList.add(wrapCls); 
                          
-                   }
+                   }                  
                    
+
                   if(wcfUtil.wishFamilyWrapList.size() > 0)
                   {
                       String JSONString = JSON.serialize(wcfUtil.wishFamilyWrapList);
                       currWishChild.Wish_Family_Contact__c = JSONString;
                       
                   }
+              
+              List<WishChildFormUtil.WrapperClass> wrapParticipantsList = new  List<WishChildFormUtil.WrapperClass>();
+              List<Case> childAsPartList = new List<Case>();
+              childAsPartList = [SELECT Contact.FirstName,Contact.LastName,Contact.Middle_Name__c,Contact.Email, Contact.MobilePhone,Contact.BirthDate, Contact.T_Shirt_Size__c FROM Case WHERE Id = :currCase.id limit 1 ] ;        
+              System.debug('isChildPart 3'+isChildPart);
+              Integer count = 0;
+              for( Case childCase:childAsPartList)
+                {
+                    if(count != 1)
+                    {
+                    isChildPart = true;
+                    WishChildFormUtil.WrapperClass childParticipantsWrap = new WishChildFormUtil.WrapperClass();
+                    childParticipantsWrap.firstName = childCase.Contact.FirstName;
+                    childParticipantsWrap.LastName = childCase.Contact.LastName;
+                    childParticipantsWrap.MiddleName = childCase.Contact.Middle_Name__c;               
+                    childParticipantsWrap.Email = childCase.Contact.Email;   
+                    childParticipantsWrap.dob = childCase.Contact.BirthDate;   
+                    childParticipantsWrap.tshirtSize = childCase.Contact.T_Shirt_Size__c; 
+                    childParticipantsWrap.isChildParticipants = isChildPart ;
+                    System.debug('isChildPart 4'+isChildPart);
+                    wrapParticipantsList.add(childParticipantsWrap);
+                  }
+                  count = count + 1;
+                }          
+
+                if(wrapParticipantsList.size() > 0)   
+                {
+                    
+                    ParticipantsMapping(wrapParticipantsList);
+                }
+
+
 
     }
     
@@ -397,10 +465,11 @@ Public Class WishChildForm_AC
         }
         if(wcfUtil.wishParticipantList.size() > 0)
         {
+
                    currWishChild.Participant_Contacts__c= '';
                    currWishChild.Participant_Name__c = '';
                    currWishChild.Participant_Details__c = '';
-                   String JSONString = JSON.serialize(wcfUtil.wishParticipantList);
+                   String JSONString = JSON.serialize(wcfUtil.wishParticipantList);                   
                    currWishChild.Participant_Contacts__c= JSONString;
                    currWishChild.Participant_Names__c = '';
                    Integer age;
@@ -436,7 +505,7 @@ Public Class WishChildForm_AC
                     currWishChild.Participant_Names__c = currWishChild.Participant_Names__c.removeEnd(',');
                   
                   if(currWishChild.Participant_Details__c  != Null)
-                  currWishChild.Participant_Details__c = currWishChild.Participant_Details__c.removeEnd(',');
+                   currWishChild.Participant_Details__c = currWishChild.Participant_Details__c.removeEnd(',');
                    currWishChild.Participant_Details__c = currWishChild.Participant_Details__c.removeEnd('-');
                    currWishChild.Participant_Name__c = currWishChild.Participant_Name__c.removeEnd(',');
         }
@@ -643,16 +712,44 @@ Public Class WishChildForm_AC
         
         return null;
         
-    } 
-    
+    }
+     
+  public Boolean isChecked = false;
   public void SameAsFamily()
   {
-        //wcfUtil.wishParticipantList.clear();        
-        ParticipantsMapping(wcfUtil.wishFamilyWrapList);               
+          
+        if(wcfUtil.sameParentGuardian)
+        {   isChecked = true;
+            ParticipantsMapping(wcfUtil.wishFamilyWrapList);        
+        } 
+        else
+        {
+             RemovesameParentGuardian();
+        }
+        
+                    
   } 
+  
+  public void RemovesameParentGuardian()
+  {  
+   
+    for(Integer i =0;i < wcfUtil.wishParticipantList.size(); i++)
+    {
+    
+        if(wcfUtil.wishParticipantList.get(i).sameParentGuardianFlag)
+       {
+            wcfUtil.wishParticipantList.remove(i);
+       }
+       
+    }  
+  
+  }
+  
   
   Public void ParticipantsMapping(List<WishChildFormUtil.WrapperClass> participantsList)
   {
+    System.debug('wcfUtil.wishChildList - *)()( -'+wcfUtil.wishChildList);
+
               for(WishChildFormUtil.WrapperClass  currRec : participantsList)
               {
             
@@ -666,6 +763,8 @@ Public Class WishChildForm_AC
                         wrapCls.residingWishMedical =currRec.residingWishMedical;
                         wrapCls.Email =  (currRec.Email!=Null)?currRec.Email:'';
                         wrapCls.tshirtSize =  (currRec.tshirtSize!=Null)?currRec.tshirtSize:'';
+                        wrapCls.sameParentGuardianFlag = isChecked;
+                        wrapCls.isChildParticipants = isChildPart;
                         wcfUtil.wishParticipantList.add(wrapCls);
                         
                          String Name = wrapCls.FirstName+' ' +wrapCls.lastName;
@@ -1250,7 +1349,7 @@ Public Class WishChildForm_AC
         String Password;
         String IntegratorKey;
         String endPointURL;
-        map<Id,Contact> relationShipMap = new Map<Id,Contact>();
+       
         //List<Contact> relationShipList = new List<Contact>();
         Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
         
@@ -1307,19 +1406,7 @@ Public Class WishChildForm_AC
                    newCase.SignerMapKeyPair__c = sign;
                    newCase.Envelop_Id__c = wcfUtil.envelopeId;
                    update newCase;
-                   system.debug('############ newCase ##############'+newCase);
-                  for(npe4__Relationship__c nper : [SELECT ID,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.IsSigned__c FROM npe4__Relationship__c WHERE 
-                                       npe4__Contact__c =: wcfUtil.wishChildId  AND npe4__RelatedContact__r.Name  =:wcfUtil.SignNowName]){
-                          
-                          Contact wishFamilyCon = new Contact();
-                          wishFamilyCon.Id = nper.npe4__RelatedContact__c;
-                          wishFamilyCon.IsSigned__c = true;
-                          relationShipMap.put(wishFamilyCon.Id,wishFamilyCon);
-                          //relationShipList.add(wishFamilyCon);
-                    }
-                    
-                    update relationShipMap.Values();
-                
+                   
                 PageReference reference=new PageReference((String) results.get('url'));
                 reference.setRedirect(true);
                 return reference;

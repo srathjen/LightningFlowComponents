@@ -438,11 +438,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Contact.Chapter_Name__c</field>
-            <table>User</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Contact.Contact_Account_Name__c</field>
             <table>User</table>
         </columns>

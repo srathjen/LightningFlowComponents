@@ -69,6 +69,7 @@
     </fields>
     <fields>
         <fullName>Application_Overview__c</fullName>
+        <description>It store the application details.</description>
         <externalId>false</externalId>
         <label>Application Overview</label>
         <length>32768</length>

@@ -13,9 +13,5 @@
     <tab>Contact_Merge</tab>
     <tab>NPSP_Settings</tab>
     <tab>NPSP_Resources</tab>
-    <tab>In_Kind_Donation_Reimbursement_File__c</tab>
-    <tab>Travel_Data__c</tab>
     <tab>dsfs__DocuSignAccountConfiguration__c</tab>
-    <tab>Awards_Recognition__c</tab>
-    <tab>Constituent_Code__c</tab>
 </CustomApplication>

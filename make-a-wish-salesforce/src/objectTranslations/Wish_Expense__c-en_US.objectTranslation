@@ -16,8 +16,8 @@
             <translation><!-- Direct Wish Cash Expense --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Direct Wish In-kind Expense</masterLabel>
-            <translation><!-- Direct Wish In-kind Expense --></translation>
+            <masterLabel>Direct Wish In-Kind Goods</masterLabel>
+            <translation><!-- Direct Wish In-Kind Goods --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Direct Wish In-kind Service</masterLabel>

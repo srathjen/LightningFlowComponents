@@ -6,7 +6,7 @@
     <description>In-Kind Donation Reimbursement Files</description>
     <join>
         <join>
-            <outerJoin>false</outerJoin>
+            <outerJoin>true</outerJoin>
             <relationship>In_Kind_Donation_Reimbursement_Files__r</relationship>
         </join>
         <outerJoin>false</outerJoin>
@@ -1136,11 +1136,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Anticipated_Wish_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Assigned_Date__c</field>
             <table>Case</table>
         </columns>
@@ -1449,37 +1444,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Address_Line1__c</field>
-            <table>Case.In_Kind_Donation_Reimbursement__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Address_Line_1_del__c</field>
-            <table>Case.In_Kind_Donation_Reimbursement__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Ammount2__c</field>
-            <table>Case.In_Kind_Donation_Reimbursement__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Amount1__c</field>
-            <table>Case.In_Kind_Donation_Reimbursement__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Amount3__c</field>
-            <table>Case.In_Kind_Donation_Reimbursement__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Amount4__c</field>
-            <table>Case.In_Kind_Donation_Reimbursement__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Amount5__c</field>
             <table>Case.In_Kind_Donation_Reimbursement__r</table>
         </columns>
         <columns>
@@ -1770,6 +1735,16 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Vendor_5__c</field>
+            <table>Case.In_Kind_Donation_Reimbursement__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Approved_Date__c</field>
+            <table>Case.In_Kind_Donation_Reimbursement__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Approved_By__c</field>
             <table>Case.In_Kind_Donation_Reimbursement__r</table>
         </columns>
         <masterLabel>In-Kind Donation &amp; Reimbursement</masterLabel>

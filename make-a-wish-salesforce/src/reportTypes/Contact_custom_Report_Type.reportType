@@ -798,11 +798,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Chapter_Name__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Class_in_School__c</field>
             <table>Contact</table>
         </columns>

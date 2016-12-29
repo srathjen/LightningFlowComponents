@@ -82,7 +82,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         }
        
         if(newLeadList.size() > 0){
-           LeadTriggerHandler.findDuplicateRecords(newLeadList);
+         //  LeadTriggerHandler.findDuplicateRecords(newLeadList);
         }
     }
     

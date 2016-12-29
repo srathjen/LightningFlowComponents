@@ -218,7 +218,7 @@ public class RelationshipsViewer_AC{
                             contactInfo += '<Br/>'+ 'Old Email Value:'+ ' '+ oldEmail +'<Br/>' +' New Email Value:' + ' '+ newEmail+ '; '+'<Br/>';
                         else{
                             if((!String.isBlank(newEmail)) && String.isBlank(oldEmail))
-                                contactInfo  += '<Br/>' +'New Phone Value :' +' '+ newEmail+';' + '<Br/>';
+                                contactInfo  += '<Br/>' +'New Email Value :' +' '+ newEmail+';' + '<Br/>';
                         }
                         updateContactMap.put(newWishChildCon.Id,newWishChildCon);
                     } 

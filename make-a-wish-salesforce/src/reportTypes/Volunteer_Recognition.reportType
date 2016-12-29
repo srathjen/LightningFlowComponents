@@ -73,11 +73,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Volunteer_Contact__c.Chapter_Name__c</field>
-            <table>Awards_Recognition__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Volunteer_Contact__c.Email</field>
             <table>Awards_Recognition__c</table>
         </columns>

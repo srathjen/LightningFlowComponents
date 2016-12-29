@@ -136,7 +136,7 @@ p.saved{padding:1rem !important}
                                             <label for="nickname" class="sr-only" aria-label="nickname">Nickname</label>
                                         </div>
                                         <div class="col-sm-6 nickname">
-                                            <apex:inputText styleClass="form-control name-group f-nickname" maxlength="50" id="nickname" html-placeholder="Nickame (Optional)" value="{!currentVolunteer.Nickname__c}" />
+                                            <apex:inputText styleClass="form-control name-group f-nickname" maxlength="50" id="nickname" html-placeholder="Nickame (Optional)" value="{!currentVolunteer.Preferred_Name__c}" />
                                         </div>
                                         <div class="col-sm-3 sr-only"><i class="text-muted">Optional</i></div>
                                     </div>
@@ -195,133 +195,65 @@ p.saved{padding:1rem !important}
                                             <apex:inputText styleClass="form-control name-group postalcode numbers-only" maxlength="5" id="postalcode" html-placeholder="00000" value="{!currentVolunteer.MailingPostalCode}"  />
                                         </div>
                                     </div>
-
-                                    <apex:outputPanel rendered="{!if(currentVolunteer.Preferred_Phone_Types__c = Null,true,false)}">
-                                    <div class="form-group row">
-                                        <label for="preferredphonenumber" class="col-sm-3" aria-labelledby="Preferred Phone Number">Preferred Phone Number</label>
+                                    
+                                     <div class="form-group row">
+                                        <label for="preferredphonenumber" class="col-sm-3" aria-labelledby="Preferred Phone Number">Mobile Phone</label>
                                         <div class="col-xs-8 col-sm-6">
-                                            <apex:inputText styleClass="form-control f-phone phonechk" maxlength="28" id="preferredphonenumber1" html-placeholder="(000) 000-0000" value="{!currentVolunteer.HomePhone}"  />
+                                            <apex:inputText styleClass="form-control f-phone phonechk" maxlength="28" id="preferredphonenumber1" html-placeholder="(000) 000-0000" value="{!currentVolunteer.MobilePhone}"  />
                                         </div>
 
-                                        <div class="col-xs-4 col-sm-3">
+                                       <!-- <div class="col-xs-4 col-sm-3">
                                             <label for="preferredphone" class="sr-only">Preferred Phone Number Type</label>
                                             <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list required"  value="{!currentVolunteer.Preferred_Phone_Types__c}"  size="1" id="preferdPhone1" multiselect="false" >
                                                 <apex:selectOptions value="{!PreferedPhoneType}" />
                                             </apex:selectList>
-                                        </div>
+                                        </div> -->
                                     </div>
-                                    </apex:outputPanel>
 
-                                    <apex:outputPanel rendered="{!if(currentVolunteer.Preferred_Phone_Types__c = 'Home',true,false)}">
-                                      <div class="form-group row">
-                                          <label for="preferredphonenumber" class="col-sm-3" aria-labelledby="Preferred Phone Number">Preferred Phone Number</label>
+                                     <div class="form-group row">
+                                          <label for="altphonenumber" class="col-sm-3" aria-labelledby="Alternate Phone Number">Home Phone</label>
                                           <div class="col-xs-8 col-sm-6">
-                                              <apex:inputText styleClass="form-control f-phone phonechk" maxlength="28" id="preferredphonenumber" html-placeholder="(000) 000-0000" value="{!currentVolunteer.HomePhone}"  />
+                                              <apex:inputText styleClass="form-control f-phone" maxlength="28" id="altphonenumber1" html-placeholder="(000) 000-0000" value="{!currentVolunteer.homePhone}" />
                                           </div>
 
-                                          <div class="col-xs-4 col-sm-3">
-                                              <label for="preferredphone" class="sr-only">Preferred Phone Number Type</label>
-                                              <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list required"  value="{!currentVolunteer.Preferred_Phone_Types__c}"  size="1" id="preferdPhone" multiselect="false" >
-                                                  <apex:selectOptions value="{!PreferedPhoneType}" />
-                                              </apex:selectList>
-                                          </div>
-                                      </div>
-                                    </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!currentVolunteer.Preferred_Phone_Types__c = 'Mobile' && currentVolunteer.OtherPhone != Null}">
-                                      <div class="form-group row">
-                                          <label for="preferredphonenumber" class="col-sm-3" aria-labelledby="Preferred Phone Number">Preferred Phone Number</label>
-                                          <div class="col-xs-8 col-sm-6">
-                                              <apex:inputText styleClass="form-control f-phone phonechk" maxlength="28" id="preferredphonenumberHome" html-placeholder="(000) 000-0000" value="{!currentVolunteer.OtherPhone}"  />
-                                          </div>
-
-                                          <div class="col-xs-4 col-sm-3">
-                                              <label for="preferredphone" class="sr-only">Preferred Phone Number Type</label>
-                                              <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list required"  value="{!currentVolunteer.Preferred_Phone_Types__c}"  size="1" id="preferdPhoneHome" multiselect="false" >
-                                                  <apex:selectOptions value="{!PreferedPhoneType}" />
-                                              </apex:selectList>
-                                          </div>
-                                      </div>
-                                    </apex:outputPanel>
-
-                                    <apex:outputPanel rendered="{!currentVolunteer.Preferred_Phone_Types__c = 'Mobile' && currentVolunteer.OtherPhone = Null}">
-                                      <div class="form-group row">
-                                          <label for="preferredphonenumber" class="col-sm-3" aria-labelledby="Preferred Phone Number">Preferred Phone Number</label>
-                                          <div class="col-xs-8 col-sm-6">
-                                              <apex:inputText styleClass="form-control f-phone phonechk" maxlength="28" id="preferredphonenumberHome1" html-placeholder="(000) 000-0000" value="{!currentVolunteer.HomePhone}"  />
-                                          </div>
-
-                                          <div class="col-xs-4 col-sm-3">
-                                              <label for="preferredphone" class="sr-only">Preferred Phone Number Type</label>
-                                              <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list required"  value="{!currentVolunteer.Preferred_Phone_Types__c}"  size="1" id="preferdPhoneHome1" multiselect="false" >
-                                                  <apex:selectOptions value="{!PreferedPhoneType}" />
-                                              </apex:selectList>
-                                          </div>
-                                      </div>
-                                    </apex:outputPanel>
-
-
-                                    <apex:OutputPanel rendered="{!if(currentVolunteer.Alternate_Phone_Type__c = Null,true,false)}">
-                                      <div class="form-group row">
-                                          <label for="altphonenumber" class="col-sm-3" aria-labelledby="Alternate Phone Number">Alternate Phone Number</label>
-                                          <div class="col-xs-8 col-sm-6">
-                                              <apex:inputText styleClass="form-control f-phone" maxlength="28" id="altphonenumber1" html-placeholder="(000) 000-0000" value="{!currentVolunteer.MobilePhone}" />
-                                          </div>
-
-                                          <div class="col-xs-4 col-sm-3">
+                                        <!--  <div class="col-xs-4 col-sm-3">
                                               <label for="altphone" class="sr-only">Alternate Phone Number Type</label>
                                               <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list"  value="{!currentVolunteer.Alternate_Phone_Type__c}"  size="1" id="altPhone1" multiselect="false">
                                                   <apex:selectOptions value="{!AlternatePhoneType}" />
                                               </apex:selectList>
-                                          </div>
+                                          </div> -->
                                       </div>
-                                   </apex:OutputPanel>
-
-                                    <apex:OutputPanel rendered="{!if(currentVolunteer.Alternate_Phone_Type__c = 'Mobile',true,false)}">
-                                      <div class="form-group row">
-                                          <label for="altphonenumber" class="col-sm-3" aria-labelledby="Alternate Phone Number">Alternate Phone Number</label>
+                                    
+                                    <div class="form-group row">
+                                          <label for="altphonenumber" class="col-sm-3" aria-labelledby="Other Phone Number">Other Phone</label>
                                           <div class="col-xs-8 col-sm-6">
-                                              <apex:inputText styleClass="form-control f-phone" maxlength="28" id="altphonenumber" html-placeholder="(000) 000-0000" value="{!currentVolunteer.MobilePhone}" />
+                                              <apex:inputText styleClass="form-control f-phone" maxlength="28" id="altphonenumber2" html-placeholder="(000) 000-0000" value="{!currentVolunteer.OtherPhone}" />
                                           </div>
 
-                                          <div class="col-xs-4 col-sm-3">
+                                        <!--  <div class="col-xs-4 col-sm-3">
                                               <label for="altphone" class="sr-only">Alternate Phone Number Type</label>
-                                              <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list"  value="{!currentVolunteer.Alternate_Phone_Type__c}"  size="1" id="altPhone" multiselect="false">
+                                              <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list"  value="{!currentVolunteer.Alternate_Phone_Type__c}"  size="1" id="altPhone1" multiselect="false">
                                                   <apex:selectOptions value="{!AlternatePhoneType}" />
                                               </apex:selectList>
-                                          </div>
+                                          </div> -->
                                       </div>
-                                   </apex:OutputPanel>
-                                   <apex:OutputPanel rendered="{!currentVolunteer.Alternate_Phone_Type__c = 'Home' && currentVolunteer.OtherPhone != Null}">
-                                      <div class="form-group row">
-                                          <label for="altphonenumber" class="col-sm-3" aria-labelledby="Alternate Phone Number">Alternate Phone Number</label>
-                                          <div class="col-xs-8 col-sm-6">
-                                              <apex:inputText styleClass="form-control f-phone" maxlength="28" id="altphonenumbermobile" html-placeholder="(000) 000-0000" value="{!currentVolunteer.OtherPhone}" />
-                                          </div>
+                                   
+                                     <div class="form-group row">
+                                        <label for="preferredphonetype" class="col-sm-3" aria-labelledby="Preferred Phone Type">Preferred Phone Type</label>
+                                        <div class="col-xs-8 col-sm-6">
+                                             <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list required"  value="{!currentVolunteer.Preferred_Phone_Types__c}"  size="1" id="preferdPhone1" multiselect="false" >
+                                                <apex:selectOptions value="{!PreferedPhoneType}" />
+                                            </apex:selectList>
+                                        </div>
 
-                                          <div class="col-xs-4 col-sm-3">
-                                              <label for="altphone" class="sr-only">Alternate Phone Number Type</label>
-                                              <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list"  value="{!currentVolunteer.Alternate_Phone_Type__c}"  size="1" id="altPhonemobile" multiselect="false">
-                                                  <apex:selectOptions value="{!AlternatePhoneType}" />
-                                              </apex:selectList>
-                                          </div>
-                                      </div>
-                                   </apex:OutputPanel>
-
-                                   <apex:OutputPanel rendered="{!currentVolunteer.Alternate_Phone_Type__c = 'Home' && currentVolunteer.OtherPhone = Null}">
-                                      <div class="form-group row">
-                                          <label for="altphonenumber" class="col-sm-3" aria-labelledby="Alternate Phone Number">Alternate Phone Number</label>
-                                          <div class="col-xs-8 col-sm-6">
-                                              <apex:inputText styleClass="form-control f-phone" maxlength="28" id="altphonenumbermobile1" html-placeholder="(000) 000-0000" value="{!currentVolunteer.MobilePhone}" />
-                                          </div>
-
-                                          <div class="col-xs-4 col-sm-3">
-                                              <label for="altphone" class="sr-only">Alternate Phone Number Type</label>
-                                              <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list"  value="{!currentVolunteer.Alternate_Phone_Type__c}"  size="1" id="altPhonemobile1" multiselect="false">
-                                                  <apex:selectOptions value="{!AlternatePhoneType}" />
-                                              </apex:selectList>
-                                          </div>
-                                      </div>
-                                   </apex:OutputPanel>
+                                       <!-- <div class="col-xs-4 col-sm-3">
+                                            <label for="preferredphone" class="sr-only">Preferred Phone Number Type</label>
+                                            <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list required"  value="{!currentVolunteer.Preferred_Phone_Types__c}"  size="1" id="preferdPhone1" multiselect="false" >
+                                                <apex:selectOptions value="{!PreferedPhoneType}" />
+                                            </apex:selectList>
+                                        </div> -->
+                                     </div>
+                                   
 
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label for="emailaddress" aria-labelledby="email_address">Email Address</label></div>
@@ -587,7 +519,7 @@ p.saved{padding:1rem !important}
                                         <label class="col-xs-6 col-sm-6">Last Name: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.LastName}" /></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Nick Name: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Nickname__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Nick Name: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Preferred_Name__c}" /></span>
                                     </div>
                                     <div class="row">
                                         <label class="col-xs-6 col-sm-6">Birth Month: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Birth_Month__c}" /></span>
@@ -612,56 +544,72 @@ p.saved{padding:1rem !important}
                                     <div class="row">
                                         <label class="col-xs-6 col-sm-6">County: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.County__c}" /></span>
                                     </div>
-                                    <apex:outputPanel rendered="{!if(currentVolunteer.Preferred_Phone_Types__c = Null,true,false)}">
+                                    
+                                    <div class="row">
+                                        <label class="col-xs-6 col-sm-6">Mobile Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MobilePhone}" /></span>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <label class="col-xs-6 col-sm-6">Home Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.HomePhone}" /></span>
+                                    </div>
+                                
+                                    <div class="row">
+                                        <label class="col-xs-6 col-sm-6">Other Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.OtherPhone}" /></span>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <label class="col-xs-6 col-sm-6">Preferred Phone Type: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Preferred_Phone_Types__c}" /></span>
+                                    </div>
+                                    
+                                    
+                                  <!-- <apex:outputpanel rendered="{!(currentVolunteer.Preferred_Phone_Types__c =='Home') &&  (currentVolunteer.Alternate_Phone_Type__c == 'Mobile' || currentVolunteer.Alternate_Phone_Type__c == 'Home')}"> 
                                     <div class="row">
                                         <label class="col-xs-6 col-sm-6">Preferred Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.HomePhone}" /></span>
                                     </div>
-                                    </apex:outputPanel>
-
-                                    <apex:outputPanel rendered="{!if(currentVolunteer.Preferred_Phone_Types__c = 'Home',true,false)}">
+                                   </apex:outputpanel>
+                                  
+                                   <apex:outputpanel rendered="{!(currentVolunteer.Preferred_Phone_Types__c =='Mobile') &&  (currentVolunteer.Alternate_Phone_Type__c == 'Mobile' || currentVolunteer.Alternate_Phone_Type__c == 'Home')}"> 
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Preferred Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.HomePhone}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Preferred Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MobilePhone}" /></span>
                                     </div>
-                                    </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!currentVolunteer.Preferred_Phone_Types__c = 'Mobile' && currentVolunteer.OtherPhone != Null}">
-                                    <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Preferred Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.otherPhone}" /></span>
-                                    </div>
-                                    </apex:outputPanel>
-
-                                    <apex:outputPanel rendered="{!currentVolunteer.Preferred_Phone_Types__c = 'Mobile' && currentVolunteer.OtherPhone = Null}">
-                                    <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Preferred Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.HomePhone}" /></span>
-                                    </div>
-                                    </apex:outputPanel>
-
-                                    <div class="row">
+                                    
+                                   </apex:outputpanel>
+                                   
+                                   <div class="row">
                                         <label class="col-xs-6 col-sm-6">Preferred Phone Types: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Preferred_Phone_Types__c}" /></span>
                                     </div>
-
-                                     <apex:outputPanel rendered="{!if(currentVolunteer.Alternate_Phone_Type__c = Null,true,false)}">
+                               
+                                  <apex:outputpanel rendered="{!(currentVolunteer.Alternate_Phone_Type__c =='Mobile') &&  (currentVolunteer.Preferred_Phone_Types__c == 'Home')}"> 
                                     <div class="row">
                                         <label class="col-xs-6 col-sm-6">Alternate Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MobilePhone}" /></span>
                                     </div>
-                                    </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!if(currentVolunteer.Alternate_Phone_Type__c = 'Mobile',true,false)}">
-                                    <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Alternate Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MobilePhone}" /></span>
+                                  </apex:outputpanel> 
+                                  
+                                  <apex:outputpanel rendered="{!(currentVolunteer.Alternate_Phone_Type__c =='Home') &&  (currentVolunteer.Preferred_Phone_Types__c == 'Mobile')}"> 
+                                   <div class="row">
+                                        <label class="col-xs-6 col-sm-6">Alternate Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.HomePhone}" /></span>
                                     </div>
-                                    </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!currentVolunteer.Alternate_Phone_Type__c = 'Home' &&  currentVolunteer.otherPhone != Null}">
-                                    <div class="row">
+                                  </apex:outputpanel> 
+                                  
+                                  <apex:outputpanel rendered="{!(currentVolunteer.Alternate_Phone_Type__c =='Home') &&  (currentVolunteer.Preferred_Phone_Types__c == 'Home')}"> 
+                                   <div class="row">
                                         <label class="col-xs-6 col-sm-6">Alternate Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.OtherPhone}" /></span>
                                     </div>
-                                    </apex:outputPanel>
-                                    <apex:outputPanel rendered="{!currentVolunteer.Alternate_Phone_Type__c = 'Home' &&  currentVolunteer.otherPhone = Null }">
-                                    <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Alternate Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MobilePhone}" /></span>
+                                  </apex:outputpanel> 
+                                  
+                                   <apex:outputpanel rendered="{!(currentVolunteer.Alternate_Phone_Type__c =='Mobile') &&  (currentVolunteer.Preferred_Phone_Types__c == 'Mobile')}"> 
+                                   <div class="row">
+                                        <label class="col-xs-6 col-sm-6">Alternate Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.OtherPhone}" /></span>
                                     </div>
-                                    </apex:outputPanel>
+                                  </apex:outputpanel> 
+                                    
+                                    
                                     <div class="row">
                                         <label class="col-xs-6 col-sm-6">Alternate Phone Types: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Alternate_Phone_Type__c}" /></span>
-                                    </div>
+                                    </div> -->
+                                    
+
+                                    
                                     <div class="row">
                                         <label class="col-xs-6 col-sm-6">Email: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Email}" /></span>
                                     </div>

@@ -90,6 +90,7 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
         for(Volunteer_Opportunity__c currRec : Trigger.new)
         { 
             if(currRec.isRejected__c == true && currRec.isRejected__c != Trigger.oldMap.get(currRec.Id).isRejected__c) {
+                if(RecursiveTriggerHandler.isFirstTime == true)
                 rejectedVolunteerOpportunitiesList.add(currRec);
             }
             if(currRec.Migrated_Record__c == false)

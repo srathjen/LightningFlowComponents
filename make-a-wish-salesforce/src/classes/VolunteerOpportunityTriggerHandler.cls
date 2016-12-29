@@ -519,7 +519,7 @@ update volunteerContactList;
         
     }
     public static void CreateVolunteerOpportunityRecord(List<Volunteer_Opportunity__c> rejectedVolunteerOpportunitiesList){
-        
+         RecursiveTriggerHandler.isFirstTime = false;
         List<Volunteer_Opportunity__c> updateList = new List<Volunteer_Opportunity__c>();
         List<Volunteer_Opportunity__c> newVolOppList = new List<Volunteer_Opportunity__c>();
         for(Volunteer_Opportunity__c newVolOpp : rejectedVolunteerOpportunitiesList) {
@@ -529,7 +529,8 @@ update volunteerContactList;
             newOpp.Chapter_Name__c = newVolOpp.Chapter_Name__c;
             newOpp.RecordTypeId = newVolOpp.RecordTypeId;
             newVolOppList.add(newOpp);
-            
+            system.debug('@@@@@ newVolOppList @@@@@@@'+newVolOppList.Size());
+            system.debug('@@@@@ newVolOppList @@@@@@@'+newVolOppList);
             Volunteer_Opportunity__c updateVolOpp = new Volunteer_Opportunity__c();
             updateVolOpp.id = newVolOpp.Id;
             updateVolOpp.Inactive__c = true;

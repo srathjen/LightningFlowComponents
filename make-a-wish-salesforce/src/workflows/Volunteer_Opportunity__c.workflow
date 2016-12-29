@@ -60,6 +60,7 @@
     </fieldUpdates>
     <fieldUpdates>
         <fullName>UpdateIsApprove</fullName>
+        <description>This field update is used to check the IsApproved field.</description>
         <field>IsApproved__c</field>
         <literalValue>1</literalValue>
         <name>UpdateIsApprove</name>
@@ -70,6 +71,7 @@
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Update_Rejected_Field</fullName>
+        <description>Check the isRejected field when the user Reject the Volunteer Role Approval Process.</description>
         <field>isRejected__c</field>
         <literalValue>1</literalValue>
         <name>Update Rejected Field</name>
@@ -90,6 +92,7 @@
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Volunteer_Opportunity</fullName>
+        <description>This field update is used to update the Status field as Pending  When the volunteer registers for the Volunteer Opportunity from the community.</description>
         <field>Status__c</field>
         <literalValue>Pending</literalValue>
         <name>VolunteerOpportunity:ChangeStatusPending</name>
@@ -119,6 +122,7 @@
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Volunteer_Opportunity_ChangeStatusApprov</fullName>
+        <description>This field update is used to update the Status field as Approved When the volunteer opportunity is approved by the chapter staff.</description>
         <field>Status__c</field>
         <literalValue>Approved</literalValue>
         <name>VolunteerOpportunity:ChangeStatusApprove</name>
@@ -128,6 +132,7 @@
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Volunteer_Opportunity_ChangeStatusInacti</fullName>
+        <description>This field update is used to set the status field value is Inactive when the user enter the reason for inactive.</description>
         <field>Status__c</field>
         <literalValue>Inactive</literalValue>
         <name>Volunteer Opportunity:ChangeStatusInacti</name>
@@ -234,6 +239,7 @@
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
+        <description>This workflow rule fire when inactive check box is checked and user enter the reason for inactive.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
 </Workflow>

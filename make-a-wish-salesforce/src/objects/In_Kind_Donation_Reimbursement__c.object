@@ -92,16 +92,14 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Ammount2__c</fullName>
-        <description>This will capture amount 2</description>
+        <fullName>Adjustment_Comments__c</fullName>
+        <description>This field is used to capture the adjustment_comments</description>
         <externalId>false</externalId>
-        <label>Amount2</label>
-        <precision>18</precision>
+        <label>Adjustment Comments</label>
         <required>false</required>
-        <scale>2</scale>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Currency</type>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Ammount_2__c</fullName>
@@ -111,55 +109,7 @@
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Currency</type>
-    </fields>
-    <fields>
-        <fullName>Amount1__c</fullName>
-        <description>This will capture the amount 1</description>
-        <externalId>false</externalId>
-        <label>Amount1</label>
-        <precision>18</precision>
-        <required>false</required>
-        <scale>2</scale>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Currency</type>
-    </fields>
-    <fields>
-        <fullName>Amount3__c</fullName>
-        <description>This will capture the amount 3</description>
-        <externalId>false</externalId>
-        <label>Amount3</label>
-        <precision>18</precision>
-        <required>false</required>
-        <scale>2</scale>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Currency</type>
-    </fields>
-    <fields>
-        <fullName>Amount4__c</fullName>
-        <description>This will capture amount 4</description>
-        <externalId>false</externalId>
-        <label>Amount4</label>
-        <precision>18</precision>
-        <required>false</required>
-        <scale>2</scale>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Currency</type>
-    </fields>
-    <fields>
-        <fullName>Amount5__c</fullName>
-        <description>This will capture amount 5</description>
-        <externalId>false</externalId>
-        <label>Amount5</label>
-        <precision>18</precision>
-        <required>false</required>
-        <scale>2</scale>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Currency</type>
     </fields>
@@ -171,7 +121,7 @@
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Currency</type>
     </fields>
@@ -183,7 +133,7 @@
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Currency</type>
     </fields>
@@ -195,7 +145,7 @@
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Currency</type>
     </fields>
@@ -207,7 +157,7 @@
         <precision>18</precision>
         <required>false</required>
         <scale>2</scale>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Currency</type>
     </fields>
@@ -228,6 +178,28 @@
         <description>This filed will update when the record is gets approved</description>
         <externalId>false</externalId>
         <label>Approval Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Approved_By__c</fullName>
+        <description>stores the approved by information when wish owner or wish owner&apos;s manager approved</description>
+        <externalId>false</externalId>
+        <label>Approved By</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Approved_Date__c</fullName>
+        <description>stores the approved date when wish owner or wish owner&apos;s manager approved</description>
+        <externalId>false</externalId>
+        <label>Approved Date</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -349,7 +321,7 @@
         <externalId>false</externalId>
         <label>Date of Gift</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
     </fields>
@@ -380,7 +352,7 @@
         <label>Description 1</label>
         <length>255</length>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -392,7 +364,7 @@
         <label>Description 2</label>
         <length>255</length>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -404,7 +376,7 @@
         <label>Description 3</label>
         <length>255</length>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -416,7 +388,7 @@
         <label>Description 4</label>
         <length>255</length>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -428,7 +400,7 @@
         <label>Description 5</label>
         <length>255</length>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -440,7 +412,7 @@
         <label>Documentation</label>
         <picklist>
             <picklistValues>
-                <fullName>Not available</fullName>
+                <fullName>Not Available</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -551,7 +523,7 @@
         <label>Gift Subtype</label>
         <length>255</length>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -573,7 +545,7 @@
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
     </fields>
@@ -594,7 +566,8 @@
         <fullName>In_Kind_Donor_Name__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
-        <label>In-Kind Donor Name</label>
+        <inlineHelpText>If donation made by a business, please add business name here. If this is a personal donation please add your name below in the &apos;Volunteer Donor&apos; field.</inlineHelpText>
+        <label>Business Donor</label>
         <lookupFilter>
             <active>true</active>
             <errorMessage>you can choose only inkind account</errorMessage>
@@ -609,7 +582,7 @@
         <relationshipLabel>In-Kind Donation &amp; Reimbursement</relationshipLabel>
         <relationshipName>In_Kind_Donation_Reimbursement</relationshipName>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -728,7 +701,7 @@
         <label>Reason for Gift Value Change</label>
         <length>255</length>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -740,7 +713,7 @@
         <label>Reference</label>
         <length>255</length>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
@@ -1167,7 +1140,7 @@
         <referenceTo>Case</referenceTo>
         <relationshipName>In_Kind_Donation_Reimbursement</relationshipName>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -1480,7 +1453,8 @@
         <fullName>vounteer_Name__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
-        <label>Volunteer Name</label>
+        <inlineHelpText>If this donation was made personally, please add your name here.</inlineHelpText>
+        <label>Volunteer Donor</label>
         <lookupFilter>
             <active>true</active>
             <filterItems>
@@ -1494,7 +1468,7 @@
         <relationshipLabel>In-Kind Donation &amp; Reimbursement</relationshipLabel>
         <relationshipName>In_Kind_Donation_Reimbursement</relationshipName>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
     </fields>
@@ -1537,7 +1511,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Not available</fullName>
+                <fullName>Not Available</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -2075,7 +2049,7 @@
                 <default>false</default>
             </values>
             <values>
-                <fullName>Not available</fullName>
+                <fullName>Not Available</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -2591,7 +2565,14 @@
         <description>This validation will fire if user enter values for both In-Kind Donor Name and Volunteer Name</description>
         <errorConditionFormula>AND(!ISBLANK( In_Kind_Donor_Name__c ), !ISBLANK(vounteer_Name__c))</errorConditionFormula>
         <errorDisplayField>In_Kind_Donor_Name__c</errorDisplayField>
-        <errorMessage>Please enter either the Account Name or Volunteer Name.</errorMessage>
+        <errorMessage>Please enter either the Business Donor or Volunteer Donor.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>IKR_Editing_Approved_Record_Validation</fullName>
+        <active>true</active>
+        <description>This validation will fire after the record is approved and try to edit the record</description>
+        <errorConditionFormula>OR(AND((!ISBLANK(PRIORVALUE(Approved_Date__c))), ISBLANK( Approved_Date__c)),AND($Profile.Name = &apos;System Administrator&apos;, !ISBLANK( Approved_Date__c)))</errorConditionFormula>
+        <errorMessage>You do not have access to edit the approved record</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>InKind_Gift_Value_Change_Validation</fullName>
@@ -2631,6 +2612,9 @@
         <protected>false</protected>
         <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)}
 {!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)}
+if(!{!ISNULL( In_Kind_Donation_Reimbursement__c.Wish__c )}){
+
+
 
 if(&apos;{!In_Kind_Donation_Reimbursement__c.RecordType}&apos; == &apos;In-Kind Donation&apos;){
   var dupe = sforce.apex.execute(&quot;InKindReimbursementApproval&quot;, &quot;submitApproval&quot;,{inKindId :&apos;{!In_Kind_Donation_Reimbursement__c.Id}&apos;});  
@@ -2642,6 +2626,13 @@ else if(&apos;{!In_Kind_Donation_Reimbursement__c.RecordType}&apos; == &apos;Rei
             var dupe1 = sforce.apex.execute(&quot;InKindReimbursementApproval&quot;, &quot;submitReimbursementApproval&quot;,{inKindId :&apos;{!In_Kind_Donation_Reimbursement__c.Id}&apos;}); 
             alert(dupe1);
             window.location.reload();
-        }</url>
+        }
+}
+
+else
+{
+   alert(&apos;Please enter the Wish number in order to submit for approval&apos;);
+
+}</url>
     </webLinks>
 </CustomObject>

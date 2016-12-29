@@ -25,6 +25,9 @@ public class CaseTriggerHandler_Test {
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
         System.assertEquals('There should be value on Date - Absent Parent Form when wish status is Completed.',result.getErrors()[0].getMessage());
+
+
+
      }
      Static testmethod void UpdateStatusasCompleted1()
      {
@@ -345,5 +348,153 @@ public class CaseTriggerHandler_Test {
         parentCase.Anticipated_Start_Date__c = Null;
         update parentCase;
      }
+
+    Static testmethod void grantPermissionOnCase() {
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
+        parentCase.ContactId = wishChild.id;
+        insert parentCase;
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        User volunterUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterCon.id);
+        
+        Volunteer_Opportunity__c volOpp = new Volunteer_Opportunity__c();
+        volOpp.Wish__c = parentCase.Id;
+        volOpp.Volunteer_Name__c = volunterCon.Id;
+        volOpp.IsApproved__c = true;
+        insert volOpp;
+        
+        parentCase.Status = 'Granted';
+        update parentCase;
+    }
+    
+    Static testmethod void changeOwner() {
+        Constant_AC  constant = new Constant_Ac();    
+        Id wishDeterminationRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        User volunterUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterCon.id);
+        
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
+        parentCase.ContactId = wishChild.Id;
+        insert parentCase;
+        List<CaseTeamRole> caseTeamRole = [SELECT Id FROM CaseTeamRole WHERE Name = 'Wish Granter' LIMIT 1];
+        
+        CaseTeamMember caseTeamMem = new CaseTeamMember();
+        caseTeamMem.ParentId = parentCase.Id;
+        caseTeamMem.TeamRoleId = caseTeamRole[0].Id;
+        caseTeamMem.MemberId = volunterUser.Id;
+        insert caseTeamMem;
+        Case childCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
+        childCase.RecordTypeId = wishDeterminationRT;
+        childCase.ParentId = parentCase.Id;
+        insert childCase;
+        parentCase.OwnerId = volunterUser.Id;
+        update parentCase;
+    }
+
+    //Eligibility Review Case Creation
+    Static testmethod void EligibilityReviewCase() {
+        Case parentCase = OrientationandTrainingUtil.createEligibilityReviewCase();
+    }
+    
+    //Create Sub Cases
+    Static testmethod void CreateSubCases() {
+        Constant_AC  constant = new Constant_Ac();    
+        Id wishDeterminationRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
+        parentCase.ContactId = wishChild.Id;
+        insert parentCase;
+        Case childCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
+        childCase.RecordTypeId = wishDeterminationRT;
+        childCase.ParentId = parentCase.Id;
+        insert childCase;
+        parentCase.Status = 'Wish Determined';
+        parentCase.Sub_Status__c = 'Within Policy';
+        update parentCase;
+               
+    }
+    
+    //Volunteer Opportunity Creation
+    Static testmethod void VolunteerOppCreation() {
+        RecursiveTriggerHandler.isFirstTime = true;
+        Role__c newWishGranter = new Role__c();
+        newWishGranter.Name = 'Wish Granter';
+        insert newWishGranter;
+        Regions__c newRegion = new Regions__c();
+        newRegion.Name = 'Default';
+        insert newRegion;
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Chapter_Role__c newRole = new Chapter_Role__c();
+        newRole.Chapter_Name__c = chapterAccount.Id;
+        newRole.Role_Name__c = newWishGranter.Id;
+        insert newRole;
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        wishChild.Region_Code__c = newRegion.Id;
+        update wishChild;
+        Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
+        parentCase.ContactId = wishChild.Id;
+        parentCase.AccountId = chapterAccount.Id;
+        parentCase.Status = 'Qualified';
+        insert parentCase;
+        Case updateParentCase = new Case();
+        updateParentCase.Id = parentCase.Id;
+        updateParentCase.Status = 'Ready to Assign';
+        updateParentCase.Sub_Status__c = 'Assign in Portal';
+        update updateParentCase;
+    }
+    
+    //Presentation Task
+    Static testmethod void PresentationTask() {
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
+        parentCase.ContactId = wishChild.Id;
+        parentCase.AccountId = chapterAccount.Id;
+        parentCase.Status = 'Qualified';
+        insert parentCase;
+        Case updateParentCase = new Case();
+        updateParentCase.Id = parentCase.Id;
+        updateParentCase.End_Date__c = Date.today()+10;
+        update updateParentCase;
+    }
+    
+    //Medical Summary Task
+    Static testmethod void MedicalSummaryTask() {
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
+        parentCase.ContactId = wishChild.Id;
+        parentCase.AccountId = chapterAccount.Id;
+        parentCase.Start_Date__c = System.today();
+        parentCase.Status = 'Qualified';
+        insert parentCase;
+        Case updateParentCase = new Case();
+        updateParentCase.Id = parentCase.Id;
+        updateParentCase.Start_Date__c = null;
+        updateParentCase.Wish_Type__c = 'Cruise - Celebrity/Royal';
+        update updateParentCase;
+    }
+    
+    //Abondend Case
+    Static testmethod void WishAbondend()
+    {
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
+        parentCase.ContactId = wishChild.Id;
+        parentCase.AccountId = chapterAccount.Id;
+        parentCase.Start_Date__c = System.today();
+        parentCase.Status = 'Qualified';
+        insert parentCase;
+        Case updateParentCase = new Case();
+        updateParentCase.Id = parentCase.Id;
+        updateParentCase.Sub_Status__c = 'Abandoned';
+        updateParentCase.Status = 'Closed';
+        update updateParentCase;
+    }
+    
      
  }

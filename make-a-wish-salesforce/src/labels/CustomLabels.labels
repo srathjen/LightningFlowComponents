@@ -37,7 +37,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>ContactIdValue</shortDescription>
-        <value>0033600000Z3S0Z</value>
+        <value>003Q00000164SBK</value>
     </labels>
     <labels>
         <fullName>Instance_Url</fullName>
@@ -45,7 +45,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Instance Url</shortDescription>
-        <value>https://na30.salesforce.com</value>
+        <value>https://cs3.salesforce.com</value>
     </labels>
     <labels>
         <fullName>Local_Email_Template_ID</fullName>
@@ -99,7 +99,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Site Url</shortDescription>
-        <value>http://make-a-wish.force.com/</value>
+        <value>https://qa-make-a-wish.cs3.force.com</value>
     </labels>
     <labels>
         <fullName>WishClearence</fullName>

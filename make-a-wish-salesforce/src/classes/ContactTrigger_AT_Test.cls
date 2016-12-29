@@ -123,8 +123,7 @@ public class ContactTrigger_AT_Test{
           newAcc.Name = 'Test';
           insert newAcc; 
           
-          Constituent_Code__c newCode = new Constituent_Code__c(Name = 'Wish Child');
-          insert newCode;
+         Account chapterAcc=OrientationandTrainingUtil.createchapterAccount();
            
           Contact newCon = new Contact();
           newCon.LastName = 'Test';
@@ -133,6 +132,7 @@ public class ContactTrigger_AT_Test{
           newCon.Short_Description__c  = 'Test';
           newCon.Non_Verbal__c  = 'No';
           newCon.accountid = newAcc.id;
+          newCon.Region_Chapter__c=chapterAcc.Id;
           newCon.recordTypeId = wichChildRecordTypeId;
           insert newCon;
      }
@@ -146,8 +146,7 @@ public class ContactTrigger_AT_Test{
           newAcc.Name = 'Test';
           insert newAcc; 
           
-          Constituent_Code__c newCode = new Constituent_Code__c(Name = 'Wish Child');
-          insert newCode;
+         
            
           Contact newCon = new Contact();
           newCon.LastName = 'Test';
@@ -180,8 +179,7 @@ public class ContactTrigger_AT_Test{
      
       public testmethod static void RecallWishFamilyContactInfo(){
         
-        Constituent_Code__c  constiuentcodeParent=OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  constiuentcodeWishChild=OrientationandTrainingUtil.createWishChildContituentCode(); 
+        
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);
@@ -255,11 +253,12 @@ public class ContactTrigger_AT_Test{
           update UpdateMedicalProfessional;
      }
      
+     public testmethod static void createwishfamilyContact(){
+         Contact wishChildFamily = OrientationandTrainingUtil.CreateWishFamily();
+     }
      
       public testmethod static void RecallWishChildContactInfo(){
-         
-        Constituent_Code__c  constiuentcodeParent=OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  constiuentcodeWishChild=OrientationandTrainingUtil.createWishChildContituentCode();
+       
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);
@@ -288,8 +287,7 @@ public class ContactTrigger_AT_Test{
      
       public testmethod static void updatewishChildRecall(){
          
-        Constituent_Code__c  constiuentcodeParent=OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  constiuentcodeWishChild=OrientationandTrainingUtil.createWishChildContituentCode();
+       
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);

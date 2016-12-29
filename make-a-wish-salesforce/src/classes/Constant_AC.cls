@@ -41,6 +41,7 @@ Public Class Constant_AC {
     public String Reimbursement;
     public String diagnosisRT;
     public String wishImapctRT;
+    public String boardMemberRT;
     
     public Constant_AC() {
         diagnosisRT = 'Diagnosis Verification Review';
@@ -78,5 +79,6 @@ Public Class Constant_AC {
         InKind = 'In-Kind Donation';
         Reimbursement = 'Reimbursement';
         wishImapctRT = 'Wish_Effect';
+        boardMemberRT = 'Board Member';
     }
 }

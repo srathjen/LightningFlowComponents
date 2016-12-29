@@ -39,6 +39,7 @@ public class WishBudgetForm_AC{
     public Date AntWishDate{get; set;}
     public Integer NoOfWishParts{get; set;}
     public Boolean isbudgetApprovalExist{get; set;}
+    public set<Id> participentSet;
     Id RecentApproverID;
     public WishBudgetForm_AC(ApexPages.StandardController controller) {
         RecentApproverID=null;
@@ -50,7 +51,7 @@ public class WishBudgetForm_AC{
         caseId = ApexPages.currentPage().getParameters().get('CaseId');
         System.debug('The parameter value is++++++++++'+caseId );
         retURLRecordId = caseId;
-        
+        participentSet = new Set<Id>();
         Constant_AC  constant = new Constant_Ac();    
         Id wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
         system.debug('Wish P and A RecordTypeID :' + CaseId + '-' + wishPlanningRecordTypeId );
@@ -78,15 +79,31 @@ public class WishBudgetForm_AC{
            
         }
         
-        List<Wish_Child_Form__c> childPartic = [SELECT Id, Participant_Contacts__c FROM Wish_Child_Form__c WHERE Case__c =: caseId];
+      if(caseList[0].ContactId != Null){
+          for(npe4__Relationship__c currrentRlationShip : [SELECT ID,npe4__Contact__c,npe4__RelatedContact__c,Wish_Participant__c FROM npe4__Relationship__c 
+                                                             WHERE npe4__Contact__c =:caseList[0].ContactId AND Wish_Participant__c =: true]){
+                       
+                       participentSet.add(currrentRlationShip.npe4__RelatedContact__c);
+             
+             }
+             
+            if(participentSet.size() > 0){
+                NoOfWishParts = participentSet.size();
+            }
+         
+      }    
+      
+      /*List<Wish_Child_Form__c> childPartic = [SELECT Id, Participant_Contacts__c FROM Wish_Child_Form__c WHERE Case__c =: caseId];*/
         
-        if(childPartic != null & childPartic.size() >0 ){
+       /* if(childPartic != null & childPartic.size() >0 ){
             if(childPartic[0].Participant_Contacts__c != Null)
             {
                String[] currString = childPartic[0].Participant_Contacts__c.split('<br>'); 
                NoOfWishParts =  currString.size();              
             }
-        }
+        }*/
+        
+       
         
         // wishExpense= new Map<String,expensewrapper>();
         wishExpensewrap=new Map<String,List<Wish_Expense__c>>();
@@ -361,14 +378,15 @@ public class WishBudgetForm_AC{
         Set<Id> userIdsSet = new Set<Id>();
         Set<Id> userDupCheck = new Set<Id>();
         String userType = Schema.SObjectType.User.getKeyPrefix();
+        String chapterGroup;
         if(wishChapterName != null) {
-            wishChapterName = wishChapterName.removeStart('Make-A-Wish ');
-            for(GroupMember getGroupUsers : [Select Id, UserOrGroupId From GroupMember Where Group.Name =: wishChapterName]) {
+            chapterGroup = wishChapterName.removeStart('Make-A-Wish ');
+            for(GroupMember getGroupUsers : [Select Id, UserOrGroupId From GroupMember Where Group.Name =: chapterGroup]) {
                 if(((String)getGroupUsers.UserOrGroupId).startsWith(userType)) {
                     userIdsSet.add(getGroupUsers.UserOrGroupId);
                 }
-            } 
-            userList = [SELECT Id, Name, Profile.Name, UserRole.Name FROM User WHERE Id IN : userIdsSet AND Profile.Name != 'Active Volunteer' AND IsActive=true];
+            }
+            userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE ((Id IN : userIdsSet AND Profile.Name != 'Active Volunteer') OR UserRole.Name = 'National Staff' ) AND IsActive=true  ];
         } else {
             userList = [SELECT Id, Name, Profile.Name, UserRole.Name FROM User WHERE (UserRole.Name = 'National Staff' OR Profile.Name = 'System Administrator') AND IsActive=true];
         }
@@ -381,8 +399,6 @@ public class WishBudgetForm_AC{
                 options.add(new SelectOption(approvalUser.Id,approvalUser.Name));
             }
         }
-
-        
         return options;
     }
     

@@ -139,6 +139,7 @@
     <fields>
         <fullName>From_Mulesoft__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>It indicated the record is created by manually or from mulesoft.</description>
         <externalId>false</externalId>
         <label>From Mulesoft</label>
         <trackHistory>false</trackHistory>
@@ -159,6 +160,7 @@
     <fields>
         <fullName>Migrated_Record__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>It indicated the record is created by manually or from mulesoft.</description>
         <externalId>false</externalId>
         <label>Migrated Record</label>
         <trackHistory>false</trackHistory>

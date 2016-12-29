@@ -45,6 +45,8 @@ public class DocusignStatusTrigger_AT_Test{
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id); 
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatuswithCon(VolunteerContact.Id);
+        dsfs.dsfs__Contact__c = VolunteerContact.id;
+        dsfs.dsfs__Subject__c = 'Diagnosis Verification Form';
         upsert dsfs;
         dsfs__DocuSign_Status__c dbdsfs = new dsfs__DocuSign_Status__c ();
         dbdsfs.dsfs__Envelope_Status__c  = 'Completed';
@@ -65,8 +67,7 @@ public class DocusignStatusTrigger_AT_Test{
     public testmethod static void convertlead(){
         
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-        Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
+        
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
         insert newLead;
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatus(newLead.Id);
@@ -109,7 +110,17 @@ public class DocusignStatusTrigger_AT_Test{
         dbdsfs.dsfs__Lead__c = newLead.id;
         update dbdsfs;
         
-        
-        
-    }  
+    } 
+    
+    public testmethod static void updateDocusignStatus(){
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact wishChildContact = OrientationandTrainingUtil.CreateWishChild(); 
+       
+        dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.CreateDocusignRecord();
+        Attachment attch = OrientationandTrainingUtil.CreateAttachmentRecordWishChild( dsfs.id);
+        dsfs.dsfs__Subject__c = 'Diagnosis Verification Form';
+        dsfs.dsfs__Contact__c = wishChildContact.id;
+        update dsfs;
+         
+    }
 }

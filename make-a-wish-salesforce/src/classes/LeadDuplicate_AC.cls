@@ -23,6 +23,8 @@ Public Class LeadDuplicate_AC
    public string medicalConId{get;set;}
    public boolean displayPartASuccess{get;set;}
    public boolean noDuplicate{Get;set;}
+   public string masterLeadId;
+   public boolean displayLeadDupPopup{get;set;}
    
    Id wishFamilyRT;
    Id medicalProfessionalRT;
@@ -40,6 +42,7 @@ Public Class LeadDuplicate_AC
        step = 2;
        isFamilyInfo = false;
        noDuplicate = false;
+       displayLeadDupPopup = false;
        hideTreatingSection = false; 
         Constant_AC  constant = new Constant_Ac(); 
         wishFamilyRT = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
@@ -135,7 +138,7 @@ Public Class LeadDuplicate_AC
         if(currLead.id != Null)
         {
           dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
-                         MailingState, MailingPostalCode,chapter_Name__c FROM Contact
+                         MailingState, MailingPostalCode,Region_Chapter__r.Name FROM Contact
                          WHERE ((LastName = :currLead.LastName AND FirstName = :currLead.FirstName) OR
                          (LastName = :currLead.LastName AND ((MailingState = :currLead.State AND MailingCity = :currLead.City 
                          AND MailingPostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) 
@@ -230,6 +233,7 @@ Public Class LeadDuplicate_AC
          Lead updateLead = new Lead();
          updateLead.id = currLead.id;
          updateLead.Override_Dupe_Check__c = True;
+         updateLead.Dup_Check__c = 'Block Lead Dup';
          update updateLead;
          PageReference reference=new PageReference('/'+currLead.id);
          reference.setRedirect(true);
@@ -683,8 +687,42 @@ Public Class LeadDuplicate_AC
                 }
                 
                 duplicateMerge_AC.mergeContacts((lead)master, losers);
+                masterLeadId = master.id;
+                Lead currLead = [SELECT id,FirstName,Name, LastName, Email, Phone, City, DOB__c,State, PostalCode,
+                                 ChapterName__r.name,ChapterName__c FROM  Lead WHERE Id = :master.id limit 1];
+                // Checking duplicates again.
+             System.debug('currLead++++++++++++++++++++++++= ' + currLead);     
+             List<Lead>   duplicateLeadList = [SELECT id, FirstName,Name, LastName, Email, Phone, City, DOB__c,State, PostalCode,
+                                              ChapterName__r.name,ChapterName__c  FROM Lead
+                                              WHERE ((LastName = :currLead.LastName AND FirstName = :currLead.FirstName) OR
+                                              (LastName = :currLead.LastName AND ((State = :currLead.State AND City = :currLead.City 
+                                              AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) 
+                                              OR (FirstName = :currLead.FirstName
+                                              AND ((State = :currLead.State AND City = :currLead.City 
+                                              AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND 
+                                              ((State = :currLead.State AND City = :currLead.City 
+                                              AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND
+                                              (LastName = :currLead.LastName OR FirstName = :currLead.FirstName))) AND Id != :currLead.Id AND isConverted = false
+                                              AND ChapterName__c =:currLead.ChapterName__c];
+                
+             System.debug('duplicateLeadList++++++++++++++++++++++++= ' + duplicateLeadList);        
+                
+             if(duplicateLeadList.size() > 0)
+              {
+                displayLeadDupPopup = true;
+              }
+              else
+              {
+                   Lead updateLead = new Lead();
+                   updateLead.id = masterLeadId;
+                   updateLead.Dup_Check__c = 'Block Lead Dup';
+                   update updateLead;
+                   return new PageReference('/' + updateLead.id); 
+                 
+              }   
+                
                 // Update the master with the selected values
-                return new PageReference('/' + master.id);
+               
             } catch (Exception e) {
                 Database.rollback(sp);
                 ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, label.npe01.Contact_Merge_Error_Merge_Failed + ' Error: ' + e));
@@ -699,4 +737,21 @@ Public Class LeadDuplicate_AC
      public List<Schema.FieldSetMember> getMergeFields() {
         return SObjectType.Lead.FieldSets.Merge_Fields.getFields();
     }
+    
+    
+   Public PageReference isYes()
+   {
+      PageReference pr = new PageReference('/apex/LeadDuplicate_VF?id='+masterLeadId);
+      pr.setRedirect(true); 
+      return pr;
+   }
+   
+   Public PageReference isNo()
+   {
+       Lead updateLead = new Lead();
+       updateLead.id = masterLeadId;
+       updateLead.Dup_Check__c = 'Block Lead Dup';
+       update updateLead;
+       return new PageReference('/' + updateLead.id);   
+   }
 }

@@ -48,7 +48,7 @@ and attached with the docusign under the volunteer conatct related list.
                 </tr>
                 <tr>
                     <td>LastName : <apex:outputfield value="{!Contact.LastName}" /></td>
-                    <td>Nickname : <apex:outputfield value="{!Contact.Nickname__c}" /></td>
+                    <td>Nickname : <apex:outputfield value="{!Contact.Preferred_Name__c}" /></td>
                 </tr>
                  <tr><td colspan='2' class='splitRow'></td></tr>
                  <tr>
@@ -69,17 +69,18 @@ and attached with the docusign under the volunteer conatct related list.
                 </tr>
                 <tr><td colspan='2' class='splitRow'></td></tr>
                  <tr>
-                    <td>Preferred Phone: <apex:outputfield value="{!Contact.HomePhone}" ></apex:outputfield></td> 
-                    <td>Type: <apex:outputfield value="{!Contact.Preferred_Phone_Types__c}" ></apex:outputfield></td>
+                    <td>Mobile Phone: <apex:outputfield value="{!Contact.MobilePhone}" ></apex:outputfield></td> 
+                    <td>Preferred Phone Type: <apex:outputfield value="{!Contact.Preferred_Phone_Types__c}" ></apex:outputfield></td>
                     </tr>
                     <tr>
-                   <td>Alternate Phone:<apex:outputfield value="{!Contact.MobilePhone}" ></apex:outputfield></td>
-                     <td>Type:  <apex:outputfield value="{!Contact.Alternate_Phone_Type__c}" ></apex:outputfield></td>
+                       <td>Home Phone:<apex:outputfield value="{!Contact.HomePhone}" ></apex:outputfield></td>
+                       <td></td>
                     </tr>
                     <tr>
-                    <td></td>
+                      <td>Other Phone:<apex:outputfield value="{!Contact.OtherPhone}" ></apex:outputfield></td>
+                      <td></td>
                      
-                </tr>
+                     </tr>
                 
                 <tr><td colspan='2' class='splitRow' ></td></tr>
                 <tr>
@@ -142,11 +143,16 @@ and attached with the docusign under the volunteer conatct related list.
                 <tr>
                     <td>Professional Skills: <apex:outputfield value="{!Contact.Professional_Skills__c}" /></td>
                 </tr>
-                <tr> <td class='secEnd'></td></tr>
                 <tr class='th'><td colspan='2' style='padding: 5px'>Volunteer Opportunities</td></tr>
                 <tr>
-                    <td>Volunteer Opportunities: <apex:outputfield value="{!Contact.Volunteer_Role__c}" /></td>
+                    <td>Volunteer Roles: <apex:outputfield value="{!Contact.Volunteer_Role__c}" /></td>
                 </tr>
+                
+                <tr> <td class='secEnd'></td></tr>
+               <!-- <tr class='th'><td colspan='2' style='padding: 5px'>Volunteer Opportunities</td></tr>
+                <tr>
+                    <td>Volunteer Opportunities: <apex:outputfield value="{!Contact.Volunteer_Role__c}" /></td>
+                </tr> -->
                 <tr> <td class='secEnd'></td></tr>
                 <tr>
                 <td>SIGNATURE</td>

@@ -576,6 +576,34 @@ insert newChapter;*/
         return newParentWish;
     }
     
+    public static case CreateParentCaseWithStatus() {
+        Constant_AC  constant = new Constant_Ac();    
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        Case newParentWish = new Case();
+        newParentWish.RecordTypeId = parentWishRecordTypeId;
+        newParentWish.ChapterName__c = CreateAlabamaAccount();
+        newParentWish.Subject = 'Parent Wish';
+        newParentWish.Interview_date__c = System.today();
+        newParentWish.Status = 'Completed';
+        newParentWish.Wish_Type__c = 'Disney World';
+        newParentWish.Start_Date__c = System.today();
+        newParentWish.End_Date__c = System.today();
+        newParentWish.Referral_Date__c = Date.today();
+        newParentWish.diagnosis_verificaion_receive_date__c = System.today();
+        newParentWish.Anticipated_Start_Date__c = System.today();
+        return newParentWish;
+    }
+    
+    public static case createEligibilityReviewCase() {
+        Constant_AC  constant = new Constant_Ac();    
+        Id eligibilityRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.partARecordTypeId).getRecordTypeId();
+        Case newParentWish = new Case();
+        newParentWish.RecordTypeId = eligibilityRT;
+        newParentWish.Subject = 'Eligibility Review';
+        insert newParentWish;
+        return newParentWish;
+    }
+    
     public static case CreateParentCaseWithTravel( Id wishChildId) {
         Constant_AC  constant = new Constant_Ac();    
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
@@ -1307,6 +1335,7 @@ insert newChapter;*/
         wishFamilyCon.MailingCountryCode = 'US';
         wishFamilyCon.RecordTypeId = wishFamilyRecordTypeId ;
         wishFamilyCon.IsParentGuardian__c  = 'ParentGuardian';
+        wishFamilyCon.Region_Chapter__c=createchapterAccount().id;
         insert wishFamilyCon ;
         return wishFamilyCon ;
         
@@ -2001,13 +2030,24 @@ retrun newLeadFile;*/
         return newDocusign;
     }
     
-    public static void CreateAttachmentRecord(){
+    public static Attachment CreateAttachmentRecord(){
         dsfs__DocuSign_Status__c newDocusign = CreateDocusignRecord();
         Attachment newAttachment =  new Attachment();
         newAttachment.ParentId = newDocusign.id;
         newAttachment.Name = 'Attachment1';
         newAttachment.Body = blob.valueOf('Hi Welcome to body text');
         insert newAttachment;
+        return newAttachment;
+        
+    }
+    
+    public static Attachment CreateAttachmentRecordWishChild(Id ParentId){
+        Attachment newAttachment =  new Attachment();
+        newAttachment.ParentId = ParentId;
+        newAttachment.Name = 'Attachment1';
+        newAttachment.Body = blob.valueOf('Hi Welcome to body text');
+        insert newAttachment;
+        return newAttachment;
         
     }
      public static Volunteer_Opportunity__c NewnonWishVolunteerOpportunity(Id chapterId,Id contactId) {

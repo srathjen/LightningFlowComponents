@@ -40,7 +40,25 @@ public class InKindDonationReimbursement_AT_Test {
         system.RunAs(dbUser){
             Test.StartTest();
             In_Kind_Donation_Reimbursement__c dbInKindRec = OrientationandTrainingUtil.CreateReimbursRecordwithFalse();
-            dbInKindRec.Make_check_payable_to_me__c = true;
+            //dbInKindRec.Make_check_payable_to_me__c = true;
+            update dbInKindRec ;
+            Test.StopTest();
+        }
+    }
+    
+    static testMethod void updateInkindRecordWithCase(){
+        Account voluntterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunterrContct = OrientationandTrainingUtil.createVolunteerContact(voluntterAccount.id);
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        In_Kind_Donation_Reimbursement__c  InkindRec = OrientationandTrainingUtil.CreateInkindRecord();
+        InkindRec.Wish__c = wish.id;
+        update InkindRec;
+        User dbUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterrContct.id);
+        system.RunAs(dbUser){
+            Test.StartTest();
+            In_Kind_Donation_Reimbursement__c dbInKindRec = OrientationandTrainingUtil.CreateReimbursRecordwithFalse();
+            //dbInKindRec.Make_check_payable_to_me__c = true;
             update dbInKindRec ;
             Test.StopTest();
         }

@@ -421,7 +421,7 @@ public class CaseTrigger_AT_Test {
         Test.stopTest();
         
     }
-    @isTest static void PartACasestatusAsApproved(){
+    /*@isTest static void PartACasestatusAsApproved(){
         
         Constant_AC  constant = new Constant_Ac(); 
         Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
@@ -438,12 +438,14 @@ public class CaseTrigger_AT_Test {
         PartACase.Local_MCA_Team__c = dbMedicalCon.Id;
         PartACase.Lead__c = newLead.Id;
         insert PartACase; 
-        
+        Test.stopTest();
+        Test.startTest();
         PartACase.Status = 'Approved - Chapter Staff';
         update PartACase;
         Test.stopTest();
         
-    }
+        
+    }*/
     
     
     @isTest static void PartACasestatusAsDNQ(){
@@ -522,6 +524,17 @@ public class CaseTrigger_AT_Test {
         update anticipationCase;
         
     }
+
+     Static testmethod void CreateDiagnosisVerificationReview()
+     {
+        Case caseDiagnosis = new Case();
+        caseDiagnosis.subject = 'Test Eligibility Review';
+        caseDiagnosis.RecordTypeId = '01236000000OJntAAG';
+        caseDiagnosis.Status = 'New';
+        caseDiagnosis.Origin = 'Email';
+        insert caseDiagnosis;
+       
+     }
     
     
 }

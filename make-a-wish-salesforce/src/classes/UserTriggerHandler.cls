@@ -173,7 +173,8 @@ Public class UserTriggerHandler{
       }
 
       if(chatterGroupMembersList.size() > 0) {
-        insert chatterGroupMembersList;
+         if(!Test.isRunningTest())
+            insert chatterGroupMembersList;
       }
     }
 

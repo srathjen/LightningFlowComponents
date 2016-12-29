@@ -74,7 +74,10 @@ public class WishLiabilityForm_AC
             if(childForm.Hidden_Wish_Fmaily_Contact_Name__c != Null){
                  
                 for(String processSignNowList : childForm.Hidden_Wish_Fmaily_Contact_Name__c.split(',')){
-                   
+                   if(Name == Null || Name == '')
+                    Name = processSignNowList;
+                    else
+                    Name+=','+' '+processSignNowList;
                    
                     if(!holdEmailNameSet.contains(processSignNowList )){
                       
@@ -88,12 +91,17 @@ public class WishLiabilityForm_AC
             if(childForm.Participant_Name__c != Null){
                 
                 for(String processSignNowList : childForm.Participant_Name__c.split(',')){
-                       String name = processSignNowList.split('-')[0];
+                       String displayname = processSignNowList.split('-')[0];
                        String age = processSignNowList.split('-')[1];
                        
-                    if(!holdEmailNameSet.contains(name)){ 
+                       if(Name == Null || Name == '')
+                        Name = displayname;
+                        else
+                        Name+=','+' '+displayname;
+                        
+                    if(!holdEmailNameSet.contains(displayname)){ 
                        if(Integer.valueof(age) >= 18)
-                          signNowemailMap.put(name,'abc@gmail.com');
+                          signNowemailMap.put(displayname,'abc@gmail.com');
                           
                     }
                 

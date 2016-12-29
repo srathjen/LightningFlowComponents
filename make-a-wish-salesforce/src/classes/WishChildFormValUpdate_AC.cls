@@ -7,7 +7,7 @@ Public Class WishChildFormValUpdate_AC
        List<task>  taskList=new List<task>();
        Map<String,Wish_Child_Form__c> wishFormDetailsMap = new Map<String,Wish_Child_Form__c>();
        for(Wish_Child_Form__c currWishChildform : [SELECT id,WishType__c,Case_Team_Member1__c, Case_Team_Member2__c,
-                                                   Driver_Name__c,case__c FROM Wish_Child_Form__c WHERE 
+                                                   Driver_Name__c,case__c,Case__r.ChapterName__c FROM Wish_Child_Form__c WHERE 
                                                    Case__c IN : newCaseDetails.keySet()])
        {
             wishFormDetailsMap.put(currWishChildform.case__c, currWishChildForm);
@@ -55,7 +55,7 @@ Public Class WishChildFormValUpdate_AC
     {
        System.debug('wishChildFormMap0++++++++++++++++++++++++== ');
        Map<String,Wish_Child_Form__c> wishChildFormMap = new Map<String,Wish_Child_Form__c>();
-       for(Wish_Child_Form__c currWishChildform : [SELECT id,Case__c,When_thinking_some_of_my_wish_ideas_were__c,MY_WISH_IS_TO__c,This_is_my_wish_because__c,
+       for(Wish_Child_Form__c currWishChildform : [SELECT id,Case__c,Case__r.ChapterName__c,When_thinking_some_of_my_wish_ideas_were__c,MY_WISH_IS_TO__c,This_is_my_wish_because__c,
                                                    To_me_the_most_important_part_of_my_wish__c, When_I_think_about_my_wish_I_imagine__c, Wish_Notes__c,
                                                    Availability_Time_Period_1__c,Availability_Time_Period_2__c,Availability_Time_Period_3__c, 
                                                    Any_impact_your_ability_to_join_wish__c,Details_about_Impact__c,Street__c,
@@ -165,6 +165,7 @@ Public Class WishChildFormValUpdate_AC
             String wishFamilyDT = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
             Set<Id> caseIds = new Set<Id>();
             caseIds.addAll(newWishMap.keySet());
+            Id ChapterAccId;
             Set<String> contactIds = new Set<String>();
      
             List<Case> updateWishDeterminationCaseList = WishChildFormValUpdate_AC.updateWishdetails(newWishMap);
@@ -175,16 +176,18 @@ Public Class WishChildFormValUpdate_AC
                 wishChildQuery+= f.getFieldPath() + ', ';
             }
            
-             wishChildQuery+= ' Case__r.ContactId, Case__r.Contact.AccountId from Wish_Child_Form__c' + ' WHERE Case__c = :'+'caseIds'+ ' lIMIT 1';
+             wishChildQuery+= ' Case__r.ContactId,Case__r.ChapterName__c,Case__r.Contact.AccountId from Wish_Child_Form__c' + ' WHERE Case__c = :'+'caseIds'+ ' lIMIT 1';
              List<Wish_Child_Form__c> wishChildList = Database.Query(wishChildQuery);
          
              List<Contact> updateWishChildContact = new List<Contact>();
              List<Account> updateWishFamilyAccount = new List<Account>();
              Map<String,Contact> createNewWishFamily = new Map<String,Contact>();
+             Map<String,Contact> sameFamilyMap = new Map<String,Contact>();
              Set<String> firstNamesSet = new Set<String>();
              Set<String> lastNamesSet = new Set<String>();
              Set<String> relationshipsSet = new Set<String>();
              Set<Id> wishChildIds = new Set<Id>();
+            
              Map<String,WishChildFormUtil.DriverWrapper> driverWrapperClsMap = new Map<String,WishChildFormUtil.DriverWrapper>();
              
               for(Wish_Child_Form__c currWishChildform : wishChildList)
@@ -232,6 +235,8 @@ Public Class WishChildFormValUpdate_AC
                      currContact.Electronics_Games_that_I_like_to_play__c = currWishChildForm.Electronics_Games_that_I_like_to_play__c;
                      currContact.When_I_m_with_my_family_I_like_to__c = currWishChildForm.When_I_m_with_my_family_I_like_to__c;
                      currContact.When_I_m_with_my_friends_I_like_to__c = currWishChildForm.When_I_m_with_my_friends_I_like_to__c;
+                     currContact.Region_Chapter__c = currWishChildForm.Case__r.ChapterName__c;
+                     ChapterAccId = currWishChildForm.Case__r.ChapterName__c;
                      if(currWishChildForm.Street__c != Null)
                          currContact.MailingStreet = currWishChildForm.Street__c;
                      if(currWishChildForm.City__c != Null)
@@ -278,6 +283,7 @@ Public Class WishChildFormValUpdate_AC
                             newContact.Email =  (currRec.Email!=Null)?currRec.Email:'';
                             newContact.BirthDate = (currRec.dob!=Null)?Date.valueOf(currRec.dob):currRec.dob;
                             newContact.IsParentGuardian__c = 'ParentGuardian';
+                            newContact.Region_Chapter__c = ChapterAccId;
                             if(currRec.relId != Null)
                             {
                               newContact.id = currRec.RelId;
@@ -344,6 +350,7 @@ Public Class WishChildFormValUpdate_AC
                          newContact.Medical_Needs__c = currRec.medicalNeeds;
                          newContact.Residing_with_Wish_child__c = currRec.residingWishMedical;
                          newContact.IsParentGuardian__c = 'Participant';
+                         newContact.Region_Chapter__c = ChapterAccId;
                         if(driverWrapperClsMap.containsKey(newContact.FirstName+' '+newContact.LastName))
                         {
                            newContact.MailingState = driverWrapperClsMap.get(newContact.FirstName+' '+newContact.LastName).State;
@@ -355,8 +362,10 @@ Public Class WishChildFormValUpdate_AC
                         if(createNewWishFamily.containsKey(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c))
                         {
                             newContact.id = createNewWishFamily.get(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c).id;
+                            sameFamilyMap.put(newContact.FirstName+'-'+newContact.lastName,newContact);
                             System.debug('currRec.RelId;+++++++++++++++++++++++++++++++++++++ ' +newContact.id);
                             newContact.IsParentGuardian__c = 'ParentGuardian';
+                           newContact.Region_Chapter__c = ChapterAccId;
                             if(newContact.id != Null)
                                 contactIds.add(newContact.Id);
                         }
@@ -443,12 +452,33 @@ Public Class WishChildFormValUpdate_AC
                 newRelation.npe4__Type__c  = newContact.Relationship_to_Wish_Child__c;
                 newRelation.Medical_Needs__c = newContact.Medical_Needs__c;
                 newRelation.Residing_with_Wish_child__c = newContact.Residing_with_Wish_child__c;
-              
+                String name = newContact.FirstName+'-'+newContact.LastName;
+                System.debug('-----name ----- ' +newRelation);
+                if(sameFamilyMap.containsKey(name)){
+                    newRelation.Parent_Legal_Guardian__c = true;
+                    newRelation.Wish_Participant__c = true;
+                }
+                else{
+                if(newContact.IsParentGuardian__c == 'ParentGuardian'){
+                        newRelation.Parent_Legal_Guardian__c = true;
+                }
+                if(newContact.IsParentGuardian__c == 'Participant'){
+                        newRelation.Wish_Participant__c = true;
+                         Date dt = Date.Valueof(newContact.Birthdate);
+                         Integer days = dt.daysBetween(Date.Today());
+                         integer age = Integer.valueOf(days/365);
+                         if(age < 18){
+                             newRelation.Under_18__c = true;
+                         }
+    
+                }
+              }  
                 if(existingRelationMap.containsKey(newContact.Wish_Child_Id_Hidden__c+'-'+newContact.id))
                 {
                   newRelation.id = existingRelationMap.get(newContact.Wish_Child_Id_Hidden__c+'-'+newContact.id);
                
                 }
+                
                 else
                 {
                      newRelation.npe4__Contact__c  = newContact.Wish_Child_Id_Hidden__c;

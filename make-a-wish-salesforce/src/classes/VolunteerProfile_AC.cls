@@ -45,6 +45,33 @@ public class VolunteerProfile_AC{
         employeeInfoEdit = false;
         emergencyInfoSave = true;
         emergencyInfoEdit = false;
+        
+         if(ApexPages.currentPage().getParameters().get('PersonalInfo') != Null)
+                PersonalInfoSave= Boolean.valueOf(ApexPages.currentPage().getParameters().get('PersonalInfo'));
+        
+         if(PersonalInfoSave == false)
+             personalInfoEdit = true;
+         else
+             PersonalInfoSave = true;
+         
+         if(ApexPages.currentPage().getParameters().get('employeeInfo') != Null)
+                employeeInfoSave = Boolean.valueOf(ApexPages.currentPage().getParameters().get('employeeInfo'));
+        
+         if(employeeInfoSave == false)
+             employeeInfoEdit = true;
+         else
+             employeeInfoSave = true;
+             
+         if(ApexPages.currentPage().getParameters().get('emergencyInfo') != Null)
+                emergencyInfoSave = Boolean.valueOf(ApexPages.currentPage().getParameters().get('emergencyInfo'));
+        
+         if(emergencyInfoSave == false)
+             emergencyInfoEdit = true;
+         else
+             emergencyInfoSave = true;    
+            
+         
+        
         isDisabled = true;
         isAwardEmpty = false;
         langToRead = new List<String>();
@@ -67,6 +94,9 @@ public class VolunteerProfile_AC{
         birthMonthMap.put('October',10);
         birthMonthMap.put('November',11);
         birthMonthMap.put('December',12);
+        
+        
+        
         
         orientationList = new List<classofferingwrapper>();
         trainingList = new list<classofferingwrapper>();
@@ -119,7 +149,6 @@ public class VolunteerProfile_AC{
                            Emergency_Contact__c,Emergency_Contact_Phone__c,npe01__Primary_Address_Type__c,Read__c, Write__c,Understand__c, Speak__c, Language_Notes__c,otherPhone,Alternate_Phone_Type__c,
                            OtherCountryCode,OtherStateCode,OtherCity,Professional_Skills_Other_Notes__c,OtherCountry,OtherStreet,OtherPostalCode,OtherState FROM Contact WHERE Id =: userIns.ContactId];
       
-           
           
           if(contactInstance[0].read__c!= Null)
             {
@@ -421,12 +450,11 @@ public class VolunteerProfile_AC{
     
     
     // It will update personal information in volunteer contact record then will display output mode of Personal information.
-    public void SavePersonalInfo(){
+    public PageReference SavePersonalInfo(){
         
         string birthMonth;
         string birthDay;
         string birthYear;
-        
          if(raceEthinicityList != Null)
             {
                
@@ -498,7 +526,7 @@ public class VolunteerProfile_AC{
                 contactInstance[0].Professional_Skills__c= skill.removeEnd(';');
             }
             
-            if(contactInstance[0].Preferred_Phone_Types__c == 'Home' && contactInstance[0].Alternate_Phone_Type__c == 'Mobile'){
+        /*    if(contactInstance[0].Preferred_Phone_Types__c == 'Home' && contactInstance[0].Alternate_Phone_Type__c == 'Mobile'){
                 contactInstance[0].HomePhone = contactInstance[0].HomePhone;
                 contactInstance[0].MobilePhone  = contactInstance[0].MobilePhone ;
                 if(contactInstance[0].OtherPhone != Null)
@@ -539,7 +567,7 @@ public class VolunteerProfile_AC{
                 contactInstance[0].MobilePhone = contactInstance[0].MobilePhone ;
                 contactInstance[0].OtherPhone = contactInstance[0].HomePhone;
                 contactInstance[0].HomePhone = Null;
-            }
+            } */
            
         if((contactInstance[0].Name== Null || contactInstance[0].Name == '') || (contactInstance[0].Email == Null || contactInstance[0].Email == '')
            || (contactInstance[0].Birth_Month__c == Null || contactInstance[0].Birth_Month__c == '') || (contactInstance[0].Birth_Day__c == '' || contactInstance[0].Birth_Day__c == '') ||
@@ -568,7 +596,7 @@ public class VolunteerProfile_AC{
                 String s = birthYear+'-'+birthMonth+'-'+birthDay;
                 if(!(contactInstance[0].Birth_Year__c.isNumeric())){
                     ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,'The value for Birth Year should be number'));
-                    return;
+                    return null;
                 }else {
                     contactInstance[0].Birthdate = Date.valueOf(s);
                 }
@@ -587,50 +615,65 @@ public class VolunteerProfile_AC{
             PersonalInfoSave = true;
             PersonalInfoEdit = false;
            try{
-            update contactInstance;
+              update contactInstance[0];
+              PageReference pr = new PageReference('/apex/VolunteerProfile_VF?PersonalInfo='+PersonalInfoSave+'&employeeInfo='+employeeInfoSave+'&emergencyInfo='+emergencyInfoSave);
+              pr.setRedirect(true); 
+              return pr;
+            
             }
            catch(Exception ex){
            }
                
         }
-      }  
+      } 
+      return null; 
     }
     
     // It will display personal information as Edit mode.
-    public void EditPersonalInfo(){
-        PersonalInfoSave = false;
-        PersonalInfoEdit = true;
+    public PageReference EditPersonalInfo(){
+       PersonalInfoSave = false;
+       PageReference pr = new PageReference('/apex/VolunteerProfile_VF?PersonalInfo='+PersonalInfoSave+'&employeeInfo='+employeeInfoSave+'&emergencyInfo='+emergencyInfoSave);
+       pr.setRedirect(true); 
+       return pr;
     }
     
     // Cancel Functionality for Personal info section.
     public pageReference CancelPersonalInfo(){
-        pageReference  pr;
-        PersonalInfoSave = true;
-        PersonalInfoEdit = false;
-        pr = new PageReference('/VolunteerProfile_VF');
-        return pr;
+       PersonalInfoSave = true;
+       PageReference pr = new PageReference('/apex/VolunteerProfile_VF?PersonalInfo='+PersonalInfoSave+'&employeeInfo='+employeeInfoSave+'&emergencyInfo='+emergencyInfoSave);
+       pr.setRedirect(true); 
+       return pr;
     }
     
     // update employee details in volunteer contact and display employee section as output mode.
-    public void SaveEmployeeInfo(){
+    public PageReference SaveEmployeeInfo(){
         
         employeeInfoSave = true;
         employeeInfoEdit = false;
         system.debug('!!!!!!!!!!!!!! contactInstance'+ contactInstance);
-        update contactInstance;
+        update contactInstance[0];
+        PageReference pr = new PageReference('/apex/VolunteerProfile_VF?PersonalInfo='+PersonalInfoSave+'&employeeInfo='+employeeInfoSave+'&emergencyInfo='+emergencyInfoSave);
+        pr.setRedirect(true); 
+        return pr;
         
     }
     
     // Will Display Employee section as input mode.
-    public void EditEmployeeInfo(){
+    public PageReference EditEmployeeInfo(){
         employeeInfoSave = false;
         employeeInfoEdit = true;
+        PageReference pr = new PageReference('/apex/VolunteerProfile_VF?PersonalInfo='+PersonalInfoSave+'&employeeInfo='+employeeInfoSave+'&emergencyInfo='+emergencyInfoSave);
+        pr.setRedirect(true); 
+        return pr;
     }
     
     // Cancel Functionality for employee info section.
-    public void CancelEmpInfo(){
+    public PageReference CancelEmpInfo(){
         employeeInfoSave = true;
         employeeInfoEdit = false;
+        PageReference pr = new PageReference('/apex/VolunteerProfile_VF?PersonalInfo='+PersonalInfoSave+'&employeeInfo='+employeeInfoSave+'&emergencyInfo='+emergencyInfoSave);
+        pr.setRedirect(true); 
+        return pr;
     }
     
     // Update Emergency Details and Display Emergency Info as output mode.
@@ -649,21 +692,30 @@ public class VolunteerProfile_AC{
         {
             emergencyInfoSave = true;
             emergencyInfoEdit = false;
-            update contactInstance;
+            update contactInstance[0];
+            PageReference pr = new PageReference('/apex/VolunteerProfile_VF?PersonalInfo='+PersonalInfoSave+'&employeeInfo='+employeeInfoSave+'&emergencyInfo='+emergencyInfoSave);
+            pr.setRedirect(true); 
+            return pr;
         }
          return null;
     }
     
     // Display Emergency info as a input mode.
-    public void EditEmergencyInfo(){
+    public PageReference  EditEmergencyInfo(){
         emergencyInfoSave = false;
         emergencyInfoEdit = true;
+        PageReference pr = new PageReference('/apex/VolunteerProfile_VF?PersonalInfo='+PersonalInfoSave+'&employeeInfo='+employeeInfoSave+'&emergencyInfo='+emergencyInfoSave);
+        pr.setRedirect(true); 
+        return pr;
     }
     
     // Cancel Functionality for Emergency info section.
-    public void CancelEmergencyInfo(){
+    public PageReference CancelEmergencyInfo(){
         emergencyInfoSave = true;
         emergencyInfoEdit = false;
+        PageReference pr = new PageReference('/apex/VolunteerProfile_VF?PersonalInfo='+PersonalInfoSave+'&employeeInfo='+employeeInfoSave+'&emergencyInfo='+emergencyInfoSave);
+        pr.setRedirect(true); 
+        return pr;
     }
     
    

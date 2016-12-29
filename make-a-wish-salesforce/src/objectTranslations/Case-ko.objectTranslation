@@ -65,10 +65,6 @@
         <name>Anticipated_Start_Date__c</name>
     </fields>
     <fields>
-        <label><!-- Anticipated Wish Date --></label>
-        <name>Anticipated_Wish_Date__c</name>
-    </fields>
-    <fields>
         <help><!-- Is there anything on your family’s calendar (upcoming medical treatments, school or work commitments,
 planned vacations, etc.) that might impact your ability to participate in a wish? --></help>
         <label><!-- Any impact your ability to join wish --></label>

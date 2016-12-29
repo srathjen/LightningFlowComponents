@@ -69,6 +69,7 @@
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Update_Contact_Info</fullName>
+        <description>Used to check the IsContactInfoUpdated field.</description>
         <field>IsContactInfoUpdated__c</field>
         <literalValue>1</literalValue>
         <name>Update Contact Info</name>
@@ -90,6 +91,7 @@
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Update_Is_Application_Rejected</fullName>
+        <description>This field update  is used to update the IsApplication as the Rejected if the user Reject the Volunteer Contact Process.</description>
         <field>is_Application__c</field>
         <literalValue>Rejected</literalValue>
         <name>Update Is Application Rejected</name>

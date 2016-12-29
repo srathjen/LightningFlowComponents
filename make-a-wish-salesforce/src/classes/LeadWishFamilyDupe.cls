@@ -141,32 +141,32 @@ global class LeadWishFamilyDupe {
             
            if(newLead.id != Null && exFNamesSet.contains(newLead.FirstName+'-'+newLead.chapterName__c) &&  (exLNamesSet.contains(newLead.LastName+'-'+newLead.chapterName__c)))
             {
-                     return 'There might be a duplicate Wish Child. Please click [OK] to review the duplicates.';
+                  return 'There might be a duplicate Wish Child. Please click [OK] to review the duplicates.';
                 //newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
             }
             else if(newLead.id != Null && ((exFNamesSet.contains(newLead.FirstName+'-'+newLead.chapterName__c) ||  exLNamesSet.contains(newLead.LastName+'-'+newLead.chapterName__c)) 
                                            && ((exAddressSet.contains(newLead.City+'-'+newLead.State+'-'+newLead.PostalCode+'-'+newLead.chapterName__c) 
                                                 || exPhoneSet.contains(newLead.Phone+'-'+newLead.chapterName__c) || exemailsSet.contains(newLead.Email+'-'+newLead.chapterName__c)))))
             {
-                     return 'There might be a duplicate Wish Child. Please click [OK] to review the duplicates.';
+                  return 'There might be a duplicate Wish Child. Please click [OK] to review the duplicates.';
                 //newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
             }
             
             else if(newLead.id != Null && (exbDaysSet.contains(newLead.Dob__c) &&  ((exAddressSet.contains(newLead.City+'-'+newLead.State+'-'+newLead.PostalCode+'-'+newLead.chapterName__c) 
                                                                                      || exPhoneSet.contains(newLead.Phone+'-'+newLead.chapterName__c) || exemailsSet.contains(newLead.Email+'-'+newLead.chapterName__c)))))
             {    
-                 return 'There might be a duplicate Wish Child. Please click [OK] to review the duplicates.';
+                  return 'There might be a duplicate Wish Child. Please click [OK] to review the duplicates.';
                 //newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
             }
             else if(newLead.id != Null && ((exbDaysSet.contains(newLead.Dob__c) && exLNamesSet.contains(newLead.LastName+'-'+newLead.chapterName__c))))
             { 
-                return 'There might be a duplicate Wish Child. Please click [OK] to review the duplicates.';
+                  return 'There might be a duplicate Wish Child. Please click [OK] to review the duplicates.';
                // newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
             }
             
             else if(newLead.id != Null && (exbDaysSet.contains(newLead.Dob__c) && exFNamesSet.contains(newLead.FirstName+'-'+newLead.chapterName__c)))
             {
-               return 'There might be a duplicate Wish Child. Please click [OK] to review the duplicates.';
+                  return 'There might be a duplicate Wish Child. Please click [OK] to review the duplicates.';
                // newLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'>here </a> to review the duplicates.',false); 
             }
       
