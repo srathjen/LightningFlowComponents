@@ -1,14 +1,14 @@
 <apex:page >
     <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"/>
     <script>
-    var popUp = window.open('/servlet/networks/switch?networkId=0DB36000000CbeW', '_blank');
-    if (popUp == null || typeof(popUp) =='undefined') { 	
-        alert('Please disable your pop-up blocker under the browser setting and click the "Chatter Tab" again.'); 
-        window.history.back();
-    } 
-    else { 	
-        window.history.back();
-        popUp.focus();
-    }
+    $( document ).ready(function() {
+        var popUp = window.open('/servlet/networks/switch?networkId=0DB36000000CbeW', '_blank');
+        if (popUp == null || typeof(popUp) == 'undefined') {
+            alert('Please check on "Always allow pop-ups for this domain" radio button in the URL bar & click on Chatter Tab again.');
+        } else {
+            location.href = document.referrer;
+            popUp.focus();
+        }
+    });
     </script>    
 </apex:page>

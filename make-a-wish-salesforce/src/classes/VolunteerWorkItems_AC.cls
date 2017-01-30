@@ -299,6 +299,7 @@ reqired volunteers and registered volunteers count.*/
     
     // This method is used for volunteers to register on non wish events if they have any one Non wish role and used to restrict volunteers to register on similar volunteer opportunities
     public void RegisterNonWishEvents() {
+    system.debug('@@@@@ ERROR @@@@@@');
         isReferesh = true;
         wishTab = false;
         nonWishTab = false;
@@ -308,7 +309,7 @@ reqired volunteers and registered volunteers count.*/
         Boolean isRequired = false;
         Boolean allowRegister = false;
         List<Volunteer_Opportunity__c> volunteerOpportunitySameRoleList;
-        List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordTypeId, OwnerId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId AND Reason_Inactive__c =: Null LIMIT 1];
+        List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordTypeId,Chapter_Role_Opportunity__r.Role_Name__c, OwnerId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId AND Reason_Inactive__c =: Null LIMIT 1];
         List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordtypeId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null ];
         if(!Test.isRunningTest())
         volunteerOpportunitySameRoleList = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Non_Wish_Event__c,Reason_Inactive__c,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Inactive__c =: true AND 
@@ -316,14 +317,16 @@ reqired volunteers and registered volunteers count.*/
        if(volunteerOpportunityDuplicateLists.size()>0 || volunteerOpportunitySameRoleList.size() > 0){
             /*Below three line changes are related to WVC-443 (11-09-2016)*/
             //ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are not currently eligible to sign up for this volunteer opportunity. Please contact your chapter for more information on how to become eligible.');
-            if(!Test.isRunningTest()){
-            if(volunteerOpportunitySameRoleList.size() > 0){
+            
+            if(!Test.isRunningTest() && volunteerOpportunitySameRoleList.size() > 0){
                 ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You have been previously  declined for this opportunity. Please contact the chapter office with any questions.');
                 ApexPages.addMessage(mymsg);
             }
-            }
+           
             else if(volunteerOpportunityDuplicateLists.size()>0){
+             
                 ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are already registered for this opportunity.');
+             system.debug('@@@@@ ERROR @@@@@@'+mymsg );
                ApexPages.addMessage(mymsg);
             }
         } 
@@ -383,6 +386,12 @@ reqired volunteers and registered volunteers count.*/
     {
         pageReference pr;
         pr = new PageReference('/VolunteerAssignmentOpportunities_VF');
+        return pr;
+    }
+    public pageReference RedirecttoVolOpportunity()
+    {
+        pageReference pr;
+        pr = new PageReference('/'+volunteerOpportunityRecordId);
         return pr;
     }
     

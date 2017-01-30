@@ -70,19 +70,21 @@
   });
   
   
-    function validateRadio(){
-          var isbool = true;
-          var x = $('.overallcheck').length;
-          var a = $('.overallcheck:checked').length;
-          var b = $('.overallRadio:checked').length;
-          if(a ==0 && b == 0)
-            isbool = false;
-          else if(a > 0 && x != a || b > 0 && x !=b )
-            isbool = false;
-          
-          if(!isbool)
-             alert('Please select atleast one Wish Family/Medical Professional to Diagnosis Verification.');
-         return isbool;
+    function validateRadio(){    
+     var clsName;
+     var bool = true;
+     $('.TotalBox').each(function(){
+      clsName = $(this).attr('class').split('_')[1];
+
+      if(!$('.'+clsName+'mycheck').is(':checked') && !$('.'+clsName+'Radio').is(':checked'))
+        bool = false;
+     });
+    
+    if(!bool)
+       alert('Please select atleast one Wish Family/Medical Professional to Diagnosis Verification.');
+    
+    
+    return bool;     
      
     }
         
@@ -185,7 +187,7 @@
        
         
           <apex:outputText rendered="{!step == 2}">
-            <apex:variable var="hasResults" value="{!dupLeadList.size > 0}"/>
+            <apex:variable var="hasResults" value="{!(dupLeadList.size > 0 || dupContactList.size > 0)}"/>
             <apex:variable var="cardClass" value="{!IF(hasResults, '', 'slds-card--empty')}"/>
 
             <apex:form id="frm">
@@ -383,7 +385,7 @@
               
                 <Center> <apex:commandbutton value="Send Diagnosis Verification" action="{!ContinuePartAForm}" onClick="return validateRadio();" /> </center> <br/>
                
-                <apex:outputpanel rendered="{!dupParentContactList.size > 0 && hasResults}">                
+                <apex:outputpanel rendered="{!dupParentContactList.size > 0 && hasResults}" StyleClass="TotalBox is_family">                
                 
                 <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
@@ -421,7 +423,7 @@
                                     <td></td>
                                     <td></td>
                                     <td> <div style="float:left; margin-top: 1%;  position:absolute; margin-left: 6%;">
-                                    <apex:inputCheckbox label="" onclick="" styleClass="family overallcheck"/></div></td>
+                                    <apex:inputCheckbox label="" onclick="" styleClass="family familymycheck overallcheck"/></div></td>
                                </tr>
                                                            
                                     <apex:repeat value="{!dupParentContactList}" var="con">
@@ -472,7 +474,7 @@
                 </div>
                </apex:outputpanel>
                
-               <apex:outputpanel rendered="{!dupMedicalContactList.size > 0 && hasResults}" >
+               <apex:outputpanel rendered="{!dupMedicalContactList.size > 0 && hasResults}" StyleClass ="TotalBox is_medical">
                  <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
                         <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Medical Professional Contacts</h2>
@@ -510,7 +512,7 @@
                                     <td></td>
                                     <td></td>
                                     <td> <div style="float:left; margin-top: 1%;  position:absolute; margin-left: 6%;">
-                                                       <apex:inputCheckbox label="" onclick="" styleClass="medical overallcheck" />
+                                                       <apex:inputCheckbox label="" onclick="" styleClass="medical medicalmycheck overallcheck" />
                                                      </div>
                                     </td>
                                </tr>
@@ -559,7 +561,7 @@
                 </div>
               </apex:outputpanel>
               
-                <apex:outputpanel rendered="{!(hideTreatingSection == false && dupTreatingContactList.size > 0)}">
+                <apex:outputpanel rendered="{!(hideTreatingSection == false && dupTreatingContactList.size > 0)}" StyleClass ="TotalBox is_treating">
                 
                  <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
@@ -598,7 +600,7 @@
                                     <td></td>
                                     <td></td>
                                     <td><div style="float:left; margin-top: 1%;  position:absolute; margin-left: 6%;">
-                                                       <apex:inputCheckbox label="" onclick="" styleClass="existingMedical overallcheck"/>
+                                                       <apex:inputCheckbox label="" onclick="" styleClass="existingMedical treatingmycheck overallcheck"/>
                                                      </div>
                                     </td>
                                  </tr>
@@ -629,7 +631,7 @@
                                                 
                                                </td>
                                                <td style="border-right: 1px solid #d8dde6;">
-                                                    <input type="radio" name="treating" class="existingRadio overallRadio" id="{!treatingContact.id}" VALUE="{!treatingContact.id}" onclick="treatingValue(this,'{!$Component.treatingValue}');"/>
+                                                    <input type="radio" name="treating" class="existingRadio treatingRadio  overallRadio" id="{!treatingContact.id}" VALUE="{!treatingContact.id}" onclick="treatingValue(this,'{!$Component.treatingValue}');"/>
                                                     
                                                </td>
                                         </tr>

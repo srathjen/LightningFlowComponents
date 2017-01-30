@@ -41,7 +41,7 @@ global class LeadWishFamilyDupe {
                                AND Email = :currLead.Email)  OR (((MailingStreet = :currLead.Street AND MailingState = :currLead.State 
                                AND MailingPostalCode = :currLead.PostalCode 
                                AND MailingCity = :currLead.City) OR (Email = :currLead.Email) )
-                               AND Phone = :currLead.Email))) AND RecordTypeId = :wishFamilyRT];  
+                               AND Phone = :currLead.Phone))) AND RecordTypeId = :wishFamilyRT];  
            
                               
           if((dupMedicalContacts.size() > 0 || dupTreatingContacts.size() >0) && dupFamilyContacts.size() > 0) 
@@ -135,6 +135,25 @@ global class LeadWishFamilyDupe {
                 exemailsSet.add(exLead.Email+'-'+exLead.chapterName__c);
         }
     
+        for(Contact exContact : [SELECT Id, LastName,AccountId, FirstName, Email, Phone, BirthDate,Region_Chapter__r.Name,
+                                 MailingCity, MailingState, MailingPostalCode 
+                                 FROM Contact WHERE (LastName IN :leadLNamesSet OR FirstName IN :leadFNamesSet OR BirthDate IN :leadbDaysSet
+                                                     OR ((MailingState IN :stateSet AND MailingPostalCode IN :zipCodesSet AND MailingCity IN :citySet) OR 
+                                                         Phone IN :phoneSet OR Email IN :emailsSet)) AND Region_Chapter__c =: chaptersSet])
+        {
+            if(exContact.FirstName != Null)
+                exFNamesSet.add(exContact.FirstName+'-'+exContact.Region_Chapter__c);
+            if(exContact.LastName != Null)
+                exLNamesSet.add(exContact.LastName+'-'+exContact.Region_Chapter__c);
+            if(exContact.BirthDate != Null)
+                exbDaysSet.add(exContact.BirthDate);
+            if(exContact.MailingCity != Null && exContact.MailingState != Null && exContact.MailingPostalCode != Null)
+                exAddressSet.add(exContact.MailingCity+'-'+exContact.MailingState+'-'+exContact.MailingPostalCode+'-'+exContact.Region_Chapter__c);
+            if(exContact.phone != Null)
+                exPhoneSet.add(exContact.phone+'-'+exContact.Region_Chapter__c);
+            if(exContact.Email != Null)
+                exemailsSet.add(exContact.Email+'-'+exContact.Region_Chapter__c);
+        }
         
         for(Lead newLead : leadList)
         {  

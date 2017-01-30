@@ -532,11 +532,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>IsFirstParentGuardian__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>IsParentGuardian__c</field>
             <table>Contact</table>
         </columns>
@@ -548,11 +543,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>IsRejected_Contact_Info__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>IsSigned__c</field>
             <table>Contact</table>
         </columns>
         <columns>

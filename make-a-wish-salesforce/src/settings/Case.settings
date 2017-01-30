@@ -6,7 +6,7 @@
         <displayFormat>Default</displayFormat>
         <feedItemType>EmailMessageEvent</feedItemType>
     </caseFeedItemSettings>
-    <closeCaseThroughStatusChange>false</closeCaseThroughStatusChange>
+    <closeCaseThroughStatusChange>true</closeCaseThroughStatusChange>
     <defaultCaseOwner>ngillam@wish.org</defaultCaseOwner>
     <defaultCaseOwnerType>User</defaultCaseOwnerType>
     <defaultCaseUser>ngillam@wish.org</defaultCaseUser>
@@ -25,6 +25,8 @@
             <casePriority>Medium</casePriority>
             <createTask>true</createTask>
             <emailAddress>wvcfullcopy@gmail.com</emailAddress>
+            <emailServicesAddress>wvcfullcopy@2af56ntdmo3e5mbmdgbvxb0j5owq8l41t0k5873rp7vi61496r.36-orf0eai.na30.case.salesforce.com</emailServicesAddress>
+            <isVerified>false</isVerified>
             <routingName>Make-A-Wish America</routingName>
             <saveEmailHeaders>false</saveEmailHeaders>
             <taskStatus>Not Started</taskStatus>
@@ -44,6 +46,7 @@
     <notifyDefaultCaseOwner>false</notifyDefaultCaseOwner>
     <notifyOwnerOnCaseComment>false</notifyOwnerOnCaseComment>
     <notifyOwnerOnCaseOwnerChange>false</notifyOwnerOnCaseOwnerChange>
+    <showFewerCloseActions>false</showFewerCloseActions>
     <useSystemEmailAddress>false</useSystemEmailAddress>
     <webToCase>
         <enableWebToCase>false</enableWebToCase>

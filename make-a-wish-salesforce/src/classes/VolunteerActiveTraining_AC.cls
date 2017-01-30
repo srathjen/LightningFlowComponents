@@ -221,7 +221,7 @@ public class VolunteerActiveTraining_AC {
                         if( ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.Start_Time__c))) >= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)))) && ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.Start_Time__c))) >= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c)))) 
                            || ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.End_Time__c))) <= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)))) && ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.End_Time__c))) <= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c))))) {
                                checkExistingCanceledRecords.get(0).Volunteer_Attendance__c = 'Registered';
-                               
+                               checkExistingCanceledRecords.get(0).class_offering__c = trainingId;
                                updateList.add(checkExistingCanceledRecords[0]);
                                
                                
@@ -240,6 +240,7 @@ public class VolunteerActiveTraining_AC {
                     
                 } else {
                     checkExistingCanceledRecords.get(0).Volunteer_Attendance__c = 'Registered';
+                    checkExistingCanceledRecords.get(0).class_offering__c = trainingId;
                     update checkExistingCanceledRecords;
                     isCancelled = false;
                     isTrainingExist = true;

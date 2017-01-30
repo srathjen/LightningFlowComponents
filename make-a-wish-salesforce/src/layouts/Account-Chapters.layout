@@ -60,10 +60,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Wish_Manager__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Department_Division__c</field>
             </layoutItems>
             <layoutItems>
@@ -190,13 +186,13 @@
     </layoutSections>
     <quickActionList>
         <quickActionListItems>
+            <quickActionName>Account.npsp__Quick_Organization_Update</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
             <quickActionName>FeedItem.TextPost</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>npsp__NewContact</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
-            <quickActionName>Account.npsp__Quick_Organization_Update</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>Account.npsp__New_Affiliation</quickActionName>

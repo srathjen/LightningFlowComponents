@@ -9,6 +9,10 @@
         <value>FE_Database_Chapter_Mapping</value>
     </caseValues>
     <fields>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
         <label><!-- Chapter Id --></label>
         <name>Chapter_Id__c</name>
     </fields>

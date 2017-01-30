@@ -289,6 +289,8 @@ Public Class LeadDuplicate_AC
       else if(hideTreatingSection == True)
           updateLead.Treating_Medical_Professional_Contact_Id__c = medicalConId;
       updateLead.Wish_Family_ContactId__c = contactId;
+      updateLead.Contact_Dup_Check__c = 'Block Contact Dup';
+      updateLead.Dup_Check__c = 'Block Lead Dup';
       Update updateLead;
       displayPartASuccess = True;
       

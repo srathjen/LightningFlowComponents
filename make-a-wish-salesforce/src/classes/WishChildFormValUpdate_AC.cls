@@ -237,6 +237,7 @@ Public Class WishChildFormValUpdate_AC
                      currContact.When_I_m_with_my_friends_I_like_to__c = currWishChildForm.When_I_m_with_my_friends_I_like_to__c;
                      currContact.Region_Chapter__c = currWishChildForm.Case__r.ChapterName__c;
                      ChapterAccId = currWishChildForm.Case__r.ChapterName__c;
+                     currContact.Parent_Legal_Guardian__c = currWishChildForm.Hidden_Wish_Fmaily_Contact_Name__c;
                      if(currWishChildForm.Street__c != Null)
                          currContact.MailingStreet = currWishChildForm.Street__c;
                      if(currWishChildForm.City__c != Null)
@@ -252,10 +253,14 @@ Public Class WishChildFormValUpdate_AC
                  if(currWishChildForm.Case__r.Contact.AccountId != Null)
                  {
                      updateAccount.id = currWishChildForm.Case__r.Contact.AccountId;
+                     if(currWishChildForm.Emergency_First_Name__c != Null && currWishChildForm.Emergency_Last_Name__c != Null)
                      updateAccount.Emergency_Contact__c = currWishChildForm.Emergency_First_Name__c+' '+currWishChildForm.Emergency_Last_Name__c;
+                     if(currWishChildForm.Emergency_First_Name__c != Null && currWishChildForm.Emergency_Last_Name__c != Null && currWishChildForm.Emergency_Middle_Name__c != Null)
+                     updateAccount.Emergency_Contact__c = currWishChildForm.Emergency_First_Name__c+' '+currWishChildForm.Emergency_Middle_Name__c+' '+currWishChildForm.Emergency_Last_Name__c;
                      updateAccount.Emergency_Contact_Phone__c = currWishChildForm.Emergency_Mobilephone__c;
                      updateAccount.Relationship_type__c = currWishChildForm.Emergency_Relationship__c;
                      updateAccount.Emergency_Contact_Middle_Name__c = currWishChildForm.Emergency_Middle_Name__c;
+                     updateAccount.Emergency_Contact_Email__c = currWishChildForm.Emergency_Email__c; 
                      updateWishFamilyAccount.add(updateAccount);
                  }
                  
@@ -271,12 +276,13 @@ Public Class WishChildFormValUpdate_AC
                       {
                         Contact newContact = new Contact();
                         newContact.RecordTypeId = wishFamilyDT;
-                        newContact.Wish_Child_Id_Hidden__c = currWishChildForm.case__r.contactId;
+                        //newContact.Wish_Child_Id_Hidden__c = currWishChildForm.case__r.contactId;
+                         newContact.Hidden_Wish_Child_Id__c = currWishChildForm.case__r.contactId;
                         
                             newContact.FirstName = (currRec.FirstName!=Null)?currRec.FirstName:'';
                             newContact.Middle_Name__c = (currRec.MiddleName!=Null)?currRec.MiddleName:'';
                             newContact.LastName =  (currRec.lastName!=Null)?currRec.lastName:'';
-                            newContact.Relationship_to_Wish_Child__c = (currRec.Relationship!=Null)?currRec.Relationship:'';
+                            newContact.Relationship__c = (currRec.Relationship!=Null)?currRec.Relationship:'';
                             newContact.HomePhone = (currRec.homeTelephone!=Null)?currRec.homeTelephone:'';
                             newContact.Work_Phone__c = (currRec.workTelephone!=Null)?currRec.workTelephone:'';
                             newContact.MobilePhone = (currRec.mobileTelephone!=Null)?currRec.mobileTelephone:'';
@@ -291,7 +297,7 @@ Public Class WishChildFormValUpdate_AC
                               System.debug('currRec.RelId;+++++++++++++++++++++++++++++++++++++ ' +currRec.RelId);
                             }
                               
-                            createNewWishFamily.put(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c,newContact);
+                            createNewWishFamily.put(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship__c,newContact);
                             
                         
                         
@@ -331,8 +337,9 @@ Public Class WishChildFormValUpdate_AC
                       
                         Contact newContact = new Contact();
                         newContact.RecordTypeId = wishFamilyDT;
-                        newContact.Wish_Child_Id_Hidden__c = currWishChildForm.case__r.contactId;
-                        
+                       // newContact.Wish_Child_Id_Hidden__c = currWishChildForm.case__r.contactId;
+                        newContact.Hidden_Wish_Child_Id__c = currWishChildForm.case__r.contactId;
+                     
                         newContact.FirstName = (currRec.FirstName!=Null)?currRec.FirstName:'';
                         if(newContact.FirstName !='')
                             firstNamesSet.add(newContact.FirstName);
@@ -340,9 +347,9 @@ Public Class WishChildFormValUpdate_AC
                         newContact.LastName = (currRec.lastName!=Null)?currRec.lastName:'';
                         if(newContact.lastName != '')
                             lastNamesSet.add(newContact.lastName); 
-                        newContact.Relationship_to_Wish_Child__c =  (currRec.Relationship!=Null)?currRec.Relationship:'';
-                        if(newContact.Relationship_to_Wish_Child__c != '')
-                           relationshipsSet.add(newContact.Relationship_to_Wish_Child__c); 
+                        newContact.Relationship__c =  (currRec.Relationship!=Null)?currRec.Relationship:'';
+                        if(newContact.Relationship__c != '')
+                           relationshipsSet.add(newContact.Relationship__c); 
                         
                          newContact.BirthDate = (currRec.dob !=Null)?Date.valueOf(currRec.dob):currRec.dob;
                          newContact.Email = (currRec.Email!=Null)?currRec.Email:'';
@@ -359,9 +366,9 @@ Public Class WishChildFormValUpdate_AC
                            newContact.Driver_Type__c = driverWrapperClsMap.get(newContact.FirstName+' '+newContact.LastName).type;
                         }
                         
-                        if(createNewWishFamily.containsKey(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c))
+                        if(createNewWishFamily.containsKey(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship__c))
                         {
-                            newContact.id = createNewWishFamily.get(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c).id;
+                            newContact.id = createNewWishFamily.get(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship__c).id;
                             sameFamilyMap.put(newContact.FirstName+'-'+newContact.lastName,newContact);
                             System.debug('currRec.RelId;+++++++++++++++++++++++++++++++++++++ ' +newContact.id);
                             newContact.IsParentGuardian__c = 'ParentGuardian';
@@ -370,7 +377,7 @@ Public Class WishChildFormValUpdate_AC
                                 contactIds.add(newContact.Id);
                         }
                             
-                            createNewWishFamily.put(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship_to_Wish_Child__c,newContact);
+                            createNewWishFamily.put(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Relationship__c,newContact);
                   
                  
                       }
@@ -395,11 +402,11 @@ Public Class WishChildFormValUpdate_AC
                
                Map<Id, Contact> existingContacts = new Map<Id, Contact>();
                
-              for(Contact exContact : [SELECT ID,firstname, lastname, Relationship_to_Wish_Child__c from Contact WHERE (firstName IN :firstNamesSet AND
-                                      LastName IN :lastNamesSet AND Relationship_to_Wish_Child__c IN :relationshipsSet)])
+              for(Contact exContact : [SELECT ID,firstname, lastname, Relationship__c from Contact WHERE (firstName IN :firstNamesSet AND
+                                      LastName IN :lastNamesSet AND Relationship__c IN :relationshipsSet)])
               {
               
-                  existingContactMap.put(exContact.firstname+'-'+exContact.lastname+'-'+exContact.Relationship_to_Wish_Child__c,exContact);
+                  existingContactMap.put(exContact.firstname+'-'+exContact.lastname+'-'+exContact.Relationship__c,exContact);
                 
               }
               
@@ -409,13 +416,14 @@ Public Class WishChildFormValUpdate_AC
               for(Contact currCon : createNewWishFamily.values())
               {
                  System.debug('currCon ++++++++++++++++++++++++++++++++++++++ ' + currCon.id);
-                if(existingContactMap.containsKey(currCon.firstName+'-'+currCon.lastname+'-'+currCon.Relationship_to_Wish_Child__c))
+                 System.debug('currCon ++++++++++++++++++++++++++++++++++++++ ' + currCon.Wish_Child_Id_Hidden__c); 
+                if(existingContactMap.containsKey(currCon.firstName+'-'+currCon.lastname+'-'+currCon.Relationship__c))
                 {
-                    currCon.id = existingContactMap.get(currCon.firstName+'-'+currCon.lastname+'-'+currCon.Relationship_to_Wish_Child__c).id;
+                   // currCon.id = existingContactMap.get(currCon.firstName+'-'+currCon.lastname+'-'+currCon.Relationship__c).id;
                 }
                 
                 
-                 toUpdateContact.put(currCon.firstName+'-'+currCon.lastname+'-'+currCon.Relationship_to_Wish_Child__c,currCon); 
+                 toUpdateContact.put(currCon.firstName+'-'+currCon.lastname+'-'+currCon.Relationship__c,currCon); 
               }
               
               
@@ -449,7 +457,7 @@ Public Class WishChildFormValUpdate_AC
              {
                 npe4__Relationship__c newRelation = new npe4__Relationship__c();
                
-                newRelation.npe4__Type__c  = newContact.Relationship_to_Wish_Child__c;
+                newRelation.npe4__Type__c  = newContact.Relationship__c;
                 newRelation.Medical_Needs__c = newContact.Medical_Needs__c;
                 newRelation.Residing_with_Wish_child__c = newContact.Residing_with_Wish_child__c;
                 String name = newContact.FirstName+'-'+newContact.LastName;
@@ -473,15 +481,16 @@ Public Class WishChildFormValUpdate_AC
     
                 }
               }  
-                if(existingRelationMap.containsKey(newContact.Wish_Child_Id_Hidden__c+'-'+newContact.id))
+                if(existingRelationMap.containsKey(newContact.Hidden_Wish_Child_Id__c+'-'+newContact.id))
                 {
-                  newRelation.id = existingRelationMap.get(newContact.Wish_Child_Id_Hidden__c+'-'+newContact.id);
+                  newRelation.id = existingRelationMap.get(newContact.Hidden_Wish_Child_Id__c+'-'+newContact.id);
                
                 }
                 
                 else
                 {
-                     newRelation.npe4__Contact__c  = newContact.Wish_Child_Id_Hidden__c;
+                   System.debug('newContact.Hidden_Wish_Child_Id__c++++++++++++++++++++++++++= ' + newContact.Hidden_Wish_Child_Id__c);
+                     newRelation.npe4__Contact__c  = newContact.Hidden_Wish_Child_Id__c;
                      newRelation.npe4__RelatedContact__c  = newContact.id;
                 }
                   

@@ -24,8 +24,8 @@ public class WishChildSummary_AC_Test {
     }*/
     
     public static testMethod void createParentCaseWithTravel(){
-        Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
+       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
         Case caseId = OrientationandTrainingUtil.CreateParentCaseWithTravel(contactWishChild.Id);
         OrientationandTrainingUtil.insertDocusignSetting();

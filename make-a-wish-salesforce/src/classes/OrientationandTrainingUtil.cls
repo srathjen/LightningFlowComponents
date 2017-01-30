@@ -12,7 +12,7 @@ public class OrientationandTrainingUtil{
         return newchapterAccount;
     }
     
-     public static Account HouseHoldAccount(){
+    public static Account HouseHoldAccount(){
         Constant_AC  constant = new Constant_AC();
         Id houseHoldRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.HouseholdRT).getRecordTypeId();
         Account houseHoldAccount = new Account();
@@ -49,6 +49,16 @@ public class OrientationandTrainingUtil{
         newchapterAccount .Name = 'InKind Account';
         newchapterAccount.RecordTypeId = inKindDonorsAccountRTId;
         //insert newchapterAccount;
+        return newchapterAccount;
+    }
+    
+    public static Account inKindAccountWithStatus(){
+        Constant_AC  constant = new Constant_AC();
+        Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
+        Account newchapterAccount = new Account();
+        newchapterAccount .Name = 'InKind Account';
+        newchapterAccount.RecordTypeId = inKindDonorsAccountRTId;
+        insert newchapterAccount;
         return newchapterAccount;
     }
     
@@ -171,19 +181,19 @@ insert newChapter;*/
         Account newAccount = new Account();
         newAccount.Name = 'Make-A-Wish Alabama';
         newAccount.RecordTypeId = chapterRT;
-       newAccount.Volunteer_Manager__c=createUser().Id;
+        newAccount.Volunteer_Manager__c=createUser().Id;
         insert newAccount;
         return newAccount;
     }
     
-     public static User createUser(){ 
+    public static User createUser(){ 
         
         
         Profile volunteerSystemAdministrator = [SELECT Id FROM Profile WHERE Name = 'System Administrator'];
         
-         User newPvolunteerSystemAdministratorUser = new User(  firstname = 'Jon',lastName = 'Edwards',email = 'jon@gmail.com',Username = 'joncena123p0@gmail.com',
-                                                    EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
-                                                    LanguageLocaleKey = 'en_US',ProfileId = volunteerSystemAdministrator.Id,isActive = true,Statecode = 'AZ');
+        User newPvolunteerSystemAdministratorUser = new User(  firstname = 'Jon',lastName = 'Edwards',email = 'jon@gmail.com',Username = 'joncena123p0@gmail.com',
+                                                             EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
+                                                             LanguageLocaleKey = 'en_US',ProfileId = volunteerSystemAdministrator.Id,isActive = true,Statecode = 'AZ');
         insert newPvolunteerSystemAdministratorUser ;
         return newPvolunteerSystemAdministratorUser ;
         
@@ -194,9 +204,9 @@ insert newChapter;*/
         
         Profile volunteerSystemAdministrator = [SELECT Id FROM Profile WHERE Name = 'System Administrator'];
         
-         User newPvolunteerSystemAdministratorUser = new User(  firstname = 'JonJesu',lastName = 'EdwardsJo',email = 'jonemail@gma111il.com',Username = 'jonsamp0@gma11il.com',
-                                                    EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
-                                                    LanguageLocaleKey = 'en_US', UserRoleId = roleId, ProfileId = volunteerSystemAdministrator.Id,isActive = true,Statecode = 'AZ');
+        User newPvolunteerSystemAdministratorUser = new User(  firstname = 'JonJesu',lastName = 'EdwardsJo',email = 'jonemail@gma111il.com',Username = 'jonsamp0@gma11il.com',
+                                                             EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
+                                                             LanguageLocaleKey = 'en_US', UserRoleId = roleId, ProfileId = volunteerSystemAdministrator.Id,isActive = true,Statecode = 'AZ');
         insert newPvolunteerSystemAdministratorUser ;
         return newPvolunteerSystemAdministratorUser ;
         
@@ -391,11 +401,13 @@ insert newChapter;*/
     public static User createProspectiveVolunteerUser(Id contactId){ 
         
         
-        Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
+        //  Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
+        
+        String prospectiveProfileId = label.Prospective_Volunteer;
         
         User newProspectiveVolunteerUser = new User(  firstname = 'Jonathanan',lastName = 'Edward',email = 'jonathanEdwards@gmail.com',Username = 'joathanedwards@gmail.com',
                                                     EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
-                                                    LanguageLocaleKey = 'en_US',ProfileId = volunteerProspectiveProfile.Id,ContactId = contactId,isActive = true,Statecode = 'AZ');
+                                                    LanguageLocaleKey = 'en_US',ProfileId = prospectiveProfileId,ContactId = contactId,isActive = true,Statecode = 'AZ');
         insert newProspectiveVolunteerUser;
         return newProspectiveVolunteerUser;
         
@@ -404,21 +416,25 @@ insert newChapter;*/
     public static User createUserWithOutContact(){ 
         
         
-        Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
+        //Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
+        String prospectiveProfileId = label.Prospective_Volunteer;
         
         User newProspectiveVolunteerUser = new User(  firstname = 'Jonathan',lastName = 'Edwards',email = 'jonathan@gmail.com',Username = 'joathanedwards@gmail.com',
                                                     EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
-                                                    LanguageLocaleKey = 'en_US',ProfileId = volunteerProspectiveProfile.Id,isActive = true,Statecode = 'AZ');
+                                                    LanguageLocaleKey = 'en_US',ProfileId = prospectiveProfileId,isActive = true,Statecode = 'AZ');
         insert newProspectiveVolunteerUser;
         return newProspectiveVolunteerUser;
         
     }
     
     public static User CreateActiveVolunteerUser(Id contactId){ 
-        Profile volunteerActiveProfile = [SELECT Id FROM Profile WHERE Name = 'Active Volunteer'];
+        //Profile volunteerActiveProfile = [SELECT Id FROM Profile WHERE Name = 'Active Volunteer'];
+        
+        String activeProfileId = label.Active_Volunteer_Profile;
+        
         User newActiveVolunteerUser = new User(  firstname = 'Jonathan',lastName = 'Edwards',email = 'jonathan@gmail.com',Username = 'joathanedwards@gmail.com',
                                                EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
-                                               LanguageLocaleKey = 'en_US',ProfileId = volunteerActiveProfile .Id,ContactId = contactId,isActive = true);
+                                               LanguageLocaleKey = 'en_US',ProfileId = activeProfileId ,ContactId = contactId,isActive = true);
         insert newActiveVolunteerUser;
         return newActiveVolunteerUser;
     }
@@ -544,9 +560,9 @@ insert newChapter;*/
     
     public static Case CreateDiagnosisNewCase(){
         Constant_AC  constant = new Constant_Ac();
-         Account chapterAccount = createchapterAccount();
+        Account chapterAccount = createchapterAccount();
         Lead newLead = createTestLeadRec(chapterAccount.Id);
-         Contact newContact = CreateMedicalProfContact();
+        Contact newContact = CreateMedicalProfContact();
         Id diagnosisVerificationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.partARecordTypeId).getRecordTypeId();
         Case newDiagnosis = new Case();
         newDiagnosis.Lead__c = newLead.id;
@@ -769,7 +785,7 @@ insert newChapter;*/
         insert newEvent;
         return newEvent;
     }
-     public static Non_Wish_Events__c CreateEventinPastDate(Id ChapterId) {
+    public static Non_Wish_Events__c CreateEventinPastDate(Id ChapterId) {
         Constant_AC  constant = new Constant_Ac();    
         Id EventRecTypeId = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.events).getRecordTypeId();
         Non_Wish_Events__c newEvent = new Non_Wish_Events__c();
@@ -1340,18 +1356,39 @@ insert newChapter;*/
         return wishFamilyCon ;
         
     }
-    public static Constituent_Code__c createWishChildContituentCode(){
-        Constituent_Code__c  cc = new Constituent_Code__c ();
-        cc.Name='Wish Child';
-        Insert cc;
-        return cc;
+    
+    public static contact CreateWishFamilyForRelationship(){
+        Constant_AC  constant = new Constant_AC();
+        Id wishFamilyRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
+        Contact wishFamilyCon = new Contact();
+        wishFamilyCon.FirstName = 'MAWAFirstName';
+        wishFamilyCon.LastName = 'MAWALastName';
+        wishFamilyCon.Email = 'testmawa@gmail.com';
+        wishFamilyCon.Phone = '9600467559';
+        wishFamilyCon.MailingStreet ='KuttaiKarai Street';
+        wishFamilyCon.MailingCity = 'Trichy';
+        wishFamilyCon.MailingStateCode = 'AZ';
+        wishFamilyCon.MailingPostalCode  = '6201717';
+        wishFamilyCon.MailingCountryCode = 'US';
+        wishFamilyCon.RecordTypeId = wishFamilyRecordTypeId ;
+        wishFamilyCon.Region_Chapter__c=createchapterAccount().id;
+        insert wishFamilyCon ;
+        return wishFamilyCon ;
+        
     }
-    public static Constituent_Code__c createWishParentGuardiansContituentCode(){
-        Constituent_Code__c  cc = new Constituent_Code__c ();
-        cc.Name='Wish Parent/Guardians';
-        Insert cc;
-        return cc;
-    }
+    
+       public static Constituent_Code__c createWishChildContituentCode(){
+Constituent_Code__c  cc = new Constituent_Code__c ();
+cc.Name='Wish Child';
+Insert cc;
+return cc;
+}
+/*public static Constituent_Code__c createWishParentGuardiansContituentCode(){
+Constituent_Code__c  cc = new Constituent_Code__c ();
+cc.Name='Wish Parent/Guardians';
+Insert cc;
+return cc;
+}*/
     //public static npe5__Affiliation__c 
     public static contact CreateWishChildCon(){
         
@@ -1703,11 +1740,13 @@ retrun newLeadFile;*/
     
     
     public static User createVolunteerUser(Id contactId){ 
-        Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
+        //Profile volunteerProspectiveProfile = [SELECT Id FROM Profile WHERE Name = 'Prospective Volunteer'];
+        
+        String profileId  = label.Prospective_Volunteer;
         
         User newProspectiveVolunteerUser = new User(  firstname = 'Jonathan1',lastName = 'Edwards1',email = 'jonathan@gmail1.com',Username = 'joathanedwards1@gmail.com',
                                                     EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
-                                                    LanguageLocaleKey = 'en_US',ProfileId = volunteerProspectiveProfile.Id,ContactId = contactId,isActive = true,Statecode = 'AZ');
+                                                    LanguageLocaleKey = 'en_US',ProfileId = profileId ,ContactId = contactId,isActive = true,Statecode = 'AZ');
         insert newProspectiveVolunteerUser;
         return newProspectiveVolunteerUser;
         
@@ -1770,7 +1809,7 @@ retrun newLeadFile;*/
         newChildForm.Case__c = ParentWishId;
         newChildForm.Wish_Family_Contact__c = '[{"workTelephone":"","tshirtSize":null,"residingWishMedical":null,"relId":"0035B000004R9vwQAC","relationship":"Father","mobileTelephone":"(878) 787-8787","MiddleName":"","medicalNeeds":null,"lastName":"Test12","homeTelephone":"","firstName":"Test12","Email":"kanagaraj@mstsolutions.com","dob":"2016-11-29"},{"workTelephone":"","tshirtSize":null,"residingWishMedical":null,"relId":"0035B000004R9vuQAC","relationship":"Mother","mobileTelephone":"(878) 787-8787","MiddleName":"","medicalNeeds":null,"lastName":"TestPL1","homeTelephone":"","firstName":"TestPF1","Email":"kanagu431@gmail.com","dob":"2016-11-28"}]';
         newChildForm.Participant_Contacts__c = '[{"workTelephone":null,"tshirtSize":"","residingWishMedical":"Yes","relId":null,"relationship":"Father","mobileTelephone":null,"MiddleName":"","medicalNeeds":"Yes","lastName":"Test12","homeTelephone":null,"firstName":"Test12","Email":"kanagaraj@mstsolutions.com","dob":null},{"workTelephone":null,"tshirtSize":"","residingWishMedical":"Yes","relId":null,"relationship":"Mother","mobileTelephone":null,"MiddleName":"","medicalNeeds":"Yes","lastName":"TestPL1","homeTelephone":null,"firstName":"TestPF1","Email":"kanagu431@gmail.com","dob":null}]';
-
+        
         //newChildForm.Wish_Family_Contact__c = 'Vennila | | Paramasivam | Spouse | 8220708920 | 8220708920 | 8220708920 | mcavennila@gmail.com | 2016-11-6';
         //newChildForm.Participant_Contacts__c = 'Vennila | | karur | Child | 2016-11-01 00:00:00 | asdfasdfdsafasfdsa@12gmail.com | 12 | true | true sathis Kumar | | def | Friend | - | vi@gmail.com | | false | false';
         newChildForm.Driver_Name__c = 'Vennila karur |';
@@ -1801,6 +1840,18 @@ retrun newLeadFile;*/
         newRelationForm.npe4__Contact__c = ChildContactid;
         newRelationForm.npe4__RelatedContact__c = FamilyContactId;
         newRelationForm.Parent_Legal_Guardian__c = true;
+        Insert  newRelationForm;
+        return newRelationForm;
+    }
+    
+    public Static npe4__Relationship__c relationshipChildWithFalse(Id FamilyContactId,id ChildContactid){
+        npe4__Relationship__c newRelationForm = new npe4__Relationship__c();
+        newRelationForm.npe4__Contact__c = ChildContactid;
+        newRelationForm.npe4__RelatedContact__c = FamilyContactId;
+        newRelationForm.Parent_Legal_Guardian__c = false;
+        newRelationForm.npe4__Type__c = 'Medical Professional';
+        newRelationForm.Qualifying_Medical_Professional__c = true;
+        newRelationForm.npe4__Status__c = 'Active';
         Insert  newRelationForm;
         return newRelationForm;
     }
@@ -2050,32 +2101,29 @@ retrun newLeadFile;*/
         return newAttachment;
         
     }
-     public static Volunteer_Opportunity__c NewnonWishVolunteerOpportunity(Id chapterId,Id contactId) {
+    public static Volunteer_Opportunity__c NewnonWishVolunteerOpportunity(Id chapterId,Id contactId) {
         Constant_AC  constant = new Constant_Ac();    
         Id wishVolunteerOpportunityRecordTypeId = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
-            Volunteer_Opportunity__c newWishOpportunity =  new Volunteer_Opportunity__c();
-            newWishOpportunity.Chapter_Name__c = chapterId;
-            newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
-            newWishOpportunity.Volunteer_Name__c=contactId;
-            insert newWishOpportunity;
-            return newWishOpportunity;
-       }
-       
-      public static Regions__c createRegion(Id AccountId)
-      {
-         Regions__c newRegion = new Regions__c();
-         newRegion.Name = 'Alabama';
-         newRegion.Chapter_Name__c = AccountId;
-         
-         return newRegion;
-         
-      }
-      
-      public Static Turnon_Household_Trigger__c insertTurnonHouseHoldAccountSetting(){
+        Volunteer_Opportunity__c newWishOpportunity =  new Volunteer_Opportunity__c();
+        newWishOpportunity.Chapter_Name__c = chapterId;
+        newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
+        newWishOpportunity.Volunteer_Name__c=contactId;
+        insert newWishOpportunity;
+        return newWishOpportunity;
+    }
+    
+    public static Regions__c createRegion(Id AccountId)
+    {
+        Regions__c newRegion = new Regions__c();
+        newRegion.Name = 'Alabama';
+        newRegion.Chapter_Name__c = AccountId;
+        return newRegion;
+    }
+    
+    public Static Turnon_Household_Trigger__c insertTurnonHouseHoldAccountSetting(){
         Turnon_Household_Trigger__c  turnOnHouseHold = new Turnon_Household_Trigger__c ();
         turnOnHouseHold.Name = 'HouseHold Account';
         turnOnHouseHold.Activate_AddFlagonHouseHoldAccount_Tgr__c = True;
-        
         insert turnOnHouseHold;
         return turnOnHouseHold;
         
@@ -2090,5 +2138,5 @@ retrun newLeadFile;*/
         insert newRelationShip;
         return newRelationShip;
     }
-      
+    
 }

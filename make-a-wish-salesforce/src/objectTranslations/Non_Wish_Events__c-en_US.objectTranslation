@@ -55,6 +55,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
         <label><!-- End Time --></label>
         <name>End_Time__c</name>
     </fields>
@@ -74,6 +78,10 @@
     <fields>
         <label><!-- Event Text --></label>
         <name>Event_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Event URL --></label>
+        <name>Event_URL__c</name>
     </fields>
     <fields>
         <label><!-- From Mulesoft --></label>

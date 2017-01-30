@@ -350,6 +350,13 @@ public class CaseTriggerHandler_Test {
      }
 
     Static testmethod void grantPermissionOnCase() {
+        UserSetting__c settings = new UserSetting__c();
+        settings.Name = 'Update Abandoned Wishes';
+        settings.Abandon_the_Granted_case__c = true;
+        settings.All_Closed_Cases_except_Abandoned__c = true;
+        settings.Edit_Abandoned_Cases__c = true;
+        settings.SetupOwnerId = userinfo.getUserid();
+        insert settings;
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
         parentCase.ContactId = wishChild.id;
@@ -369,6 +376,13 @@ public class CaseTriggerHandler_Test {
     }
     
     Static testmethod void changeOwner() {
+        UserSetting__c settings = new UserSetting__c();
+        settings.Name = 'Update Abandoned Wishes';
+        settings.Abandon_the_Granted_case__c = true;
+        settings.All_Closed_Cases_except_Abandoned__c = true;
+        settings.Edit_Abandoned_Cases__c = true;
+        settings.SetupOwnerId = userinfo.getUserid();
+        insert settings;
         Constant_AC  constant = new Constant_Ac();    
         Id wishDeterminationRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
@@ -401,6 +415,15 @@ public class CaseTriggerHandler_Test {
     
     //Create Sub Cases
     Static testmethod void CreateSubCases() {
+        
+        UserSetting__c settings = new UserSetting__c();
+        settings.Name = 'Update Abandoned Wishes';
+        settings.Abandon_the_Granted_case__c = true;
+        settings.All_Closed_Cases_except_Abandoned__c = true;
+        settings.Edit_Abandoned_Cases__c = true;
+        settings.SetupOwnerId = userinfo.getUserid();
+        insert settings;
+        
         Constant_AC  constant = new Constant_Ac();    
         Id wishDeterminationRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();

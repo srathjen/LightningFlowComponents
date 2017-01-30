@@ -178,9 +178,9 @@
                         
                        <tr style="width:80%;!important;border-bottom:1px solid black;">
                            
-                            <td style="width:60%;;border: 0px solid black;valign:bottom;height:40px">Signature : <span style="height: 25px; !important;color:white;padding-left:1em !important">~s1</span></td>                            
+                            <td style="width:40%;;border: 0px solid black;valign:bottom;height:40px">Signature : <span style="height: 25px; !important;color:white;padding-left:1em !important">~s1</span>Date     :  <span style="height: 25px;color:block;padding-left:1em !important">~date</span></td>                            
                             
-                            <td style="width:40%;border: 0px solid black;valign:center;height:40px"> Date     :  <span style="height: 25px;color:white;padding-left:1em !important">~date</span></td>
+                           
                             
                         </tr>
                        

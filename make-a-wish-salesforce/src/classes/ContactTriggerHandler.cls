@@ -137,6 +137,7 @@ public class ContactTriggerHandler{
     
     public static void CreateAffliation(List<Contact> ContactList)
     {
+        RecursiveTriggerHandler.isFirstTime = false;
         Constant_AC  constant = new Constant_AC();
         Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
         Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
@@ -234,16 +235,30 @@ public class ContactTriggerHandler{
         for(User currRecUser:[SELECT id,ContactId,FirstName,LastName,Email,Phone FROM User WHERE contactId IN:contactDetails.keyset()]){
             updateUser=new User();
             updateUser.id=currRecUser.id;
-            if(contactDetails.get(currRecUser.ContactId).FirstName != oldMap.get(currRecUser.ContactId).FirstName)
+            Boolean flag = false;
+            if(contactDetails.get(currRecUser.ContactId).FirstName != oldMap.get(currRecUser.ContactId).FirstName && currRecUser.FirstName != contactDetails.get(currRecUser.ContactId).FirstName)
+            {
                 updateUser.FirstName=contactDetails.get(currRecUser.ContactId).FirstName;
-            if(contactDetails.get(currRecUser.ContactId).LastName != oldMap.get(currRecUser.ContactId).LastName)
+                flag = true;
+            }
+            if(contactDetails.get(currRecUser.ContactId).LastName != oldMap.get(currRecUser.ContactId).LastName && currRecUser.LastName != contactDetails.get(currRecUser.ContactId).LastName )
+            {
                 updateUser.LastName=contactDetails.get(currRecUser.ContactId).LastName;
-            if(contactDetails.get(currRecUser.ContactId).Email != oldMap.get(currRecUser.ContactId).Email)
+                flag = true;
+            }
+            if(contactDetails.get(currRecUser.ContactId).Email != oldMap.get(currRecUser.ContactId).Email && currRecUser.Email!= contactDetails.get(currRecUser.ContactId).Email)
+            {
                 updateUser.Email=contactDetails.get(currRecUser.ContactId).Email;
-            if(contactDetails.get(currRecUser.ContactId).MobilePhone!= oldMap.get(currRecUser.ContactId).MobilePhone)
+                flag = true;
+            }
+            if(contactDetails.get(currRecUser.ContactId).MobilePhone!= oldMap.get(currRecUser.ContactId).MobilePhone && currRecUser.Phone != contactDetails.get(currRecUser.ContactId).MobilePhone)
+            {
                 updateUser.Phone=contactDetails.get(currRecUser.ContactId).MobilePhone;
-            
-            updateUserList.add(updateUser);
+                flag = true;
+            }
+           
+          if(flag == true)  
+             updateUserList.add(updateUser);
         }
         
         if(updateUserList.size() > 0)

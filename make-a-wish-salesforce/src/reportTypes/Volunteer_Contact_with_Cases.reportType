@@ -140,12 +140,22 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Region_Code__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>RecordType</field>
             <table>Contact</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Phone</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>County__c</field>
             <table>Contact</table>
         </columns>
         <masterLabel>Volunteer Contacts</masterLabel>
@@ -161,6 +171,11 @@
             <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Household Account Name</displayNameOverride>
             <field>Wish__c.Account</field>
+            <table>Contact.Volunteer_Opportunities__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Role__c</field>
             <table>Contact.Volunteer_Opportunities__r</table>
         </columns>
         <masterLabel>Volunteer Opportunities (Volunteer Name)</masterLabel>

@@ -29,6 +29,7 @@
     <filter>
         <criteriaItems>
             <column>DocuSign_Status__c.Envelope_Status__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Completed</value>
         </criteriaItems>

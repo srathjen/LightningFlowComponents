@@ -50,13 +50,16 @@ public class WishJourneyController{
     public string contactFName{get;set;}
     public string contactLName{get;set;}
     public string contactId{get;set;}
+   
     
     public boolean blkGrantingOver{get;set;}
+    public boolean blkPlanningOver{get;set;}
+    public boolean blkImpactOver{get;set;}
     
     public WishJourneyController(ApexPages.StandardController stdController) 
     {
         currCase = (Case)stdController.getRecord();
-        currCase = [SELECT Id,RecordType.name,Contact.FirstName,Contact.LastName,status,Days_in_stage__c,Rush__c, 
+        currCase = [SELECT Id,RecordType.name,Contact.FirstName,Contact.LastName,Contact.Wish_Child_Photo__c,Parent.Contact.Wish_Child_Photo__c,status,Days_in_stage__c,Rush__c, 
                     End_Date__c, Parent.End_Date__c, Referral_Date__c, Parent.Referral_Date__c, parent.status,
                     Qualified_Date__c, Parent.Qualified_Date__c,Parent.ContactId,
                     parent.Contact.FirstName,Parent.Contact.LastName,Anticipated_Start_Date__c,Parent.Anticipated_Start_Date__c,
@@ -96,30 +99,48 @@ public class WishJourneyController{
            {
                rushWish = currCase.Rush__c;
                parentCaseID = currCase.id;
-               if(currCase.Referral_Date__c != Null)
-                   referredDays = (currCase.Referral_Date__c).daysBetween(currDate);
-               if(currCase.Qualified_Date__c!= Null)
-                   qualifiedDays =(currCase.Qualified_Date__c).daysBetween(currDate);
-               if(currCase.Wish_Determined_Date__c!= Null)
-                   determinationDays = (currCase.Wish_Determined_Date__c).daysBetween(currDate);
-               if(currCase.Anticipated_Start_Date__c!= Null)
-               {
-                   anticipationDays =(currCase.Anticipated_Start_Date__c).daysBetween(currDate);
-                   blkGrantingOver = true;
-               }
-               if(currCase.Anticipated_Start_Date__c == Null || currCase.Anticipated_Start_Date__c > Date.Today())
-               {
-                   blkGrantingOver = false;
-               }
              
-              if(currCase.End_Date__c!= Null)
-               effectDays =(currCase.End_Date__c).daysBetween(currDate);
+                if(currCase.Referral_Date__c != Null)
+                referredDays = (currCase.Referral_Date__c).daysBetween(currDate);
+                if(currCase.Qualified_Date__c!= Null)
+                qualifiedDays =(currCase.Qualified_Date__c).daysBetween(currDate);
+                
+                if(currCase.Wish_Determined_Date__c!= Null)
+                {
+                    determinationDays = (currCase.Wish_Determined_Date__c).daysBetween(currDate);
+                    blkPlanningOver = true;
+                }
+                if(currCase.Wish_Determined_Date__c== Null || currCase.Wish_Determined_Date__c > Date.Today())
+                {
+                    blkPlanningOver = false;
+                }
+                
+                if(currCase.Anticipated_Start_Date__c!= Null)
+                {
+                    anticipationDays =(currDate).daysBetween(currCase.Anticipated_Start_Date__c);
+                    blkGrantingOver = true;
+                }
+                if(currCase.Anticipated_Start_Date__c == Null || currCase.Anticipated_Start_Date__c < Date.Today())
+                {
+                    blkGrantingOver = false;
+                }
+                
+                if(currCase.End_Date__c!= Null)
+                {
+                    effectDays =(currCase.End_Date__c).daysBetween(currDate);
+                    blkImpactOver = true;
+                }
+                if(currCase.End_Date__c== Null || currCase.End_Date__c > Date.Today())
+                {
+                    blkImpactOver = false;
+                }
                
                if(currCase.ContactId != Null)
                {
                    contactFName = currCase.Contact.FirstName;
                    contactLName = currCase.Contact.LastName;
                    contactId = currCase.ContactId;
+                   
                }
                
            }
@@ -127,28 +148,45 @@ public class WishJourneyController{
            {
            
                rushWish = currCase.Parent.Rush__c;
-               
+           
             if(currCase.Parent.Referral_Date__c!= Null)
                referredDays = (currCase.Parent.Referral_Date__c).daysBetween(currDate);
                
-           if(currCase.Parent.Qualified_Date__c!= Null)
+            if(currCase.Parent.Qualified_Date__c!= Null)
                qualifiedDays =(currCase.Parent.Qualified_Date__c).daysBetween(currDate);
                
             if(currCase.Parent.Wish_Determined_Date__c!= Null)
+            {
                determinationDays = (currCase.Parent.Wish_Determined_Date__c).daysBetween(currDate);
-
+               blkPlanningOver = true;
+            }
+            if(currCase.Parent.Wish_Determined_Date__c == Null || currCase.Parent.Wish_Determined_Date__c > Date.Today())
+            {
+                blkPlanningOver = false;
+            }
             if(currCase.Parent.Anticipated_Start_Date__c!= Null)
             {
-               anticipationDays =(currCase.Parent.Anticipated_Start_Date__c).daysBetween(currDate);
+               anticipationDays =(currDate).daysBetween(currCase.Parent.Anticipated_Start_Date__c);
                blkGrantingOver = true;
             } 
-            if(currCase.Parent.Anticipated_Start_Date__c== Null || currCase.Parent.Anticipated_Start_Date__c> Date.Today())
+            if(currCase.Parent.Anticipated_Start_Date__c== Null || currCase.Parent.Anticipated_Start_Date__c< Date.Today())
             {
                    blkGrantingOver = false;
             }
                
             if(currCase.Parent.End_Date__c!= Null)
+            {
                effectDays =(currCase.Parent.End_Date__c).daysBetween(currDate);
+               blkImpactOver = true;
+            }
+             if(currCase.Parent.End_Date__c == Null || currCase.Parent.End_Date__c > Date.Today())
+              {
+                    blkImpactOver = false;
+              } 
+               
+               
+               
+               
                
                parentCaseID = currCase.ParentId;
                
@@ -157,6 +195,7 @@ public class WishJourneyController{
                    contactFName = currCase.Parent.Contact.FirstName;
                    contactLName = currCase.Parent.Contact.LastName;
                    contactId = currCase.Parent.ContactId;
+                   
                }
            }
                

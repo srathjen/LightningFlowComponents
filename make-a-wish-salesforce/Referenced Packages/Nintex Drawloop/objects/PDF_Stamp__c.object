@@ -25,10 +25,6 @@
         <type>Visualforce</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -148,96 +144,100 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Font</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Helvetica</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Helvetica Bold</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Helvetica Bold Oblique</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Helvetica Oblique</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Courier</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Courier Bold</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Courier Bold Oblique</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Courier Oblique</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Symbol</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Times</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Times Bold</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Times Bold Italic</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Times Italic</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Times Roman</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Zapf Dingbats</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Helvetica</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Helvetica Bold</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Helvetica Bold Oblique</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Helvetica Oblique</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Courier</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Courier Bold</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Courier Bold Oblique</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Courier Oblique</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Symbol</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Times</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Times Bold</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Times Bold Italic</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Times Italic</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Times Roman</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Zapf Dingbats</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>HAlign__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Horizontal Alignment</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Left</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Right</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Center</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Left</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Right</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Center</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Height__c</fullName>
@@ -317,20 +317,22 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Scale By</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Percent</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Pixel</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Percent</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Pixel</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Stamp_Text__c</fullName>
@@ -349,24 +351,26 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Style</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Bold</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Italic</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Underline</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bold</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Italic</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Underline</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
         <visibleLines>4</visibleLines>
     </fields>
     <fields>
@@ -374,48 +378,52 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Text</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Image</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rectangle</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Text</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>Image</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Rectangle</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>VAlign__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Vertical Alignment</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Bottom</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Top</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Middle</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Bottom</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Top</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Middle</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Width__c</fullName>

@@ -25,10 +25,6 @@
         <type>Visualforce</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -94,52 +90,54 @@
         <externalId>false</externalId>
         <inlineHelpText>Attachment will create a Salesforce attachment; LOOP Storage will create a document in the LOOP Storage interface; Content and Content - User Selected will create a Content document in the appropriate Workspace.</inlineHelpText>
         <label>Store As</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Attachment</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>LOOP Storage</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Box</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Content</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Content - User Selected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>FTP</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>SpringCM</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Veeva Vault</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Office 365</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>SFTP</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Attachment</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>LOOP Storage</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Box</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Content</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Content - User Selected</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>FTP</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>SpringCM</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Veeva Vault</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Office 365</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>SFTP</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Authoritative_Copy__c</fullName>
@@ -147,24 +145,26 @@
         <externalId>false</externalId>
         <inlineHelpText>None or Default will use the default Authoritative Copy setting specified in your DocuSign account configuration.</inlineHelpText>
         <label>Authoritative Copy</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Default</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Standard Copy</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Authoritative Copy</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Default</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Standard Copy</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Authoritative Copy</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Brand_Id__c</fullName>
@@ -416,96 +416,100 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Language</label>
-        <picklist>
-            <picklistValues>
-                <fullName>English (United States)</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>French (France)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>German (Germany)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Russian (Russia)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Italian (Italy)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Dutch (Netherlands)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Finnish (Finland)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Danish (Denmark)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Swedish (Sweden)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Spanish (Spain)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Norwegian (Norway)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Portuguese (Portugal)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Icelandic (Iceland)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Japanese (Japan)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Chinese Simplified (China)</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>English (United States)</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>French (France)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>German (Germany)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Russian (Russia)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Italian (Italy)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Dutch (Netherlands)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Finnish (Finland)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Danish (Denmark)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Swedish (Sweden)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Spanish (Spain)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Norwegian (Norway)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Portuguese (Portugal)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Icelandic (Iceland)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Japanese (Japan)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Chinese Simplified (China)</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Limit_Availability__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Limit Availability</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Non-Mass Only</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Mass Only</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Hidden</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Non-Mass Only</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Mass Only</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Hidden</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Location__c</fullName>
@@ -612,28 +616,30 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Document Output Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>PDF</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Separate PDFs</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Originals</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>PDF and Originals</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>PDF</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>Separate PDFs</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Originals</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>PDF and Originals</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>PDF_Option__c</fullName>
@@ -641,41 +647,55 @@
         <externalId>false</externalId>
         <inlineHelpText>If no option is selected, the default is Enhanced.</inlineHelpText>
         <label>PDF Option</label>
-        <picklist>
-            <controllingField>Output__c</controllingField>
-            <picklistValues>
-                <fullName>Enhanced</fullName>
-                <default>false</default>
-                <controllingFieldValues>PDF</controllingFieldValues>
-                <controllingFieldValues>PDF and Originals</controllingFieldValues>
-                <controllingFieldValues>Separate PDFs</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Basic</fullName>
-                <default>false</default>
-                <controllingFieldValues>PDF</controllingFieldValues>
-                <controllingFieldValues>PDF and Originals</controllingFieldValues>
-                <controllingFieldValues>Separate PDFs</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>PDF/A</fullName>
-                <default>false</default>
-                <controllingFieldValues>PDF</controllingFieldValues>
-                <controllingFieldValues>PDF and Originals</controllingFieldValues>
-                <controllingFieldValues>Separate PDFs</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>PDF/A Basic</fullName>
-                <default>false</default>
-                <controllingFieldValues>PDF</controllingFieldValues>
-                <controllingFieldValues>PDF and Originals</controllingFieldValues>
-                <controllingFieldValues>Separate PDFs</controllingFieldValues>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <controllingField>Output__c</controllingField>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Enhanced</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Basic</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>PDF/A</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>PDF/A Basic</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>PDF</controllingFieldValue>
+                <controllingFieldValue>Separate PDFs</controllingFieldValue>
+                <controllingFieldValue>PDF and Originals</controllingFieldValue>
+                <valueName>Enhanced</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>PDF</controllingFieldValue>
+                <controllingFieldValue>Separate PDFs</controllingFieldValue>
+                <controllingFieldValue>PDF and Originals</controllingFieldValue>
+                <valueName>Basic</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>PDF</controllingFieldValue>
+                <controllingFieldValue>Separate PDFs</controllingFieldValue>
+                <controllingFieldValue>PDF and Originals</controllingFieldValue>
+                <valueName>PDF/A</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>PDF</controllingFieldValue>
+                <controllingFieldValue>Separate PDFs</controllingFieldValue>
+                <controllingFieldValue>PDF and Originals</controllingFieldValue>
+                <valueName>PDF/A Basic</valueName>
+            </valueSettings>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Password__c</fullName>
@@ -755,24 +775,26 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Remind Recipient to Sign</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Never</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Every Day, Until Signed</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Every Week, Until Signed</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Never</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Every Day, Until Signed</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Every Week, Until Signed</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>RequireOutputAttachment__c</fullName>
@@ -841,48 +863,52 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Signature Order</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Recipient signs, then I sign</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>I sign, then the Recipient signs</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Recipient signs, then I sign</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>I sign, then the Recipient signs</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Signature_Type__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Signature Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>e-Signature</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Written Signature</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Print, Sign, Fax</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Both</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>e-Signature</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>Written Signature</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Print, Sign, Fax</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Both</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>SkipPreview__c</fullName>
@@ -981,28 +1007,30 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Letter</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Print</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Postcard</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Area Mail</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Letter</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Print</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Postcard</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Area Mail</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Wait__c</fullName>

@@ -21,7 +21,8 @@ This completely removes the user output until the form is complete and submitted
 <apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" controller="Application_AC" title="Make-A-Wish Communities | Application">
 <apex:include pageName="prospective_head" id="phead" />
 <style type="text/css">
- .pop-wrap, .pop-wrap-main-message {
+    .error{color: red;}
+    .pop-wrap, .pop-wrap-main-message {
             position:fixed;
             top: 20%;
             left: 50%;
@@ -213,7 +214,7 @@ p.saved{padding:1rem !important}
                                      <div class="form-group row">
                                           <label for="altphonenumber" class="col-sm-3" aria-labelledby="Alternate Phone Number">Home Phone</label>
                                           <div class="col-xs-8 col-sm-6">
-                                              <apex:inputText styleClass="form-control f-phone" maxlength="28" id="altphonenumber1" html-placeholder="(000) 000-0000" value="{!currentVolunteer.homePhone}" />
+                                              <apex:inputText styleClass="form-control f-phone dynamicCheck HomeCheck" maxlength="28" id="altphonenumber1" html-placeholder="(000) 000-0000" value="{!currentVolunteer.homePhone}" />
                                           </div>
 
                                         <!--  <div class="col-xs-4 col-sm-3">
@@ -227,7 +228,7 @@ p.saved{padding:1rem !important}
                                     <div class="form-group row">
                                           <label for="altphonenumber" class="col-sm-3" aria-labelledby="Other Phone Number">Other Phone</label>
                                           <div class="col-xs-8 col-sm-6">
-                                              <apex:inputText styleClass="form-control f-phone" maxlength="28" id="altphonenumber2" html-placeholder="(000) 000-0000" value="{!currentVolunteer.OtherPhone}" />
+                                              <apex:inputText styleClass="form-control f-phone dynamicCheck OtherCheck" maxlength="28" id="altphonenumber2" html-placeholder="(000) 000-0000" value="{!currentVolunteer.OtherPhone}" />
                                           </div>
 
                                         <!--  <div class="col-xs-4 col-sm-3">
@@ -241,7 +242,7 @@ p.saved{padding:1rem !important}
                                      <div class="form-group row">
                                         <label for="preferredphonetype" class="col-sm-3" aria-labelledby="Preferred Phone Type">Preferred Phone Type</label>
                                         <div class="col-xs-8 col-sm-6">
-                                             <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list required"  value="{!currentVolunteer.Preferred_Phone_Types__c}"  size="1" id="preferdPhone1" multiselect="false" >
+                                             <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select preferedType sm-list required"  value="{!currentVolunteer.Preferred_Phone_Types__c}"  size="1" id="preferdPhone1" multiselect="false" >
                                                 <apex:selectOptions value="{!PreferedPhoneType}" />
                                             </apex:selectList>
                                         </div>
@@ -484,11 +485,11 @@ p.saved{padding:1rem !important}
                             
                             <fieldset class="footer">
                                 <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-2 col-md-push-8">
-                                    <apex:commandbutton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-save" id="submit_signup" value="Save" action="{!saveRec}" rerender="formid" />
+                                    <apex:commandbutton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md btn-save" id="submit_signup" value="Save"  action="{!saveRec}" rerender="formid" />
                                 </div>
                                 <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-2 col-md-push-8">
                                      <!-- <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md submitSign" value="Submit & Sign" action="{!SubmitAndSign}" rendered="{!(showSubmitandSign == True)}" rerender="formid" /> -->
-                                    <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md submitSign btn-submit-sign" value="Submit & Sign" action="{!confirmSign}" rerender="formid"  rendered="{!(isSigned == false)}"/>
+                                    <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md submitSign"  value="Submit & Sign" action="{!confirmSign}" rerender="formid"  rendered="{!(isSigned == false)}"/>
                                     
                                    
                                     
@@ -879,19 +880,14 @@ p.saved{padding:1rem !important}
                     }
                 }
             });
+            
 
             // prof skills show/hide "other" textbox
             $('.prof-skills').on('change', function() {
-              if($(this).val() != null){
-                  if ($('this').val().indexOf('Other') != -1){
-                      $('.prof-skills-other').removeClass('sr-only');
-                  } else {
-                    $('.prof-skills-other').addClass('sr-only');
-                    $('.prof-skills-other').children('.col-sm-6').children('textarea').val('');
-                  }
-              }
+                checkProfSkill($(this));
             });
 
+            checkProfSkill($('.prof-skills'));
             // language fields
             $('.lang').on('change', function() {
                 if($(this).val() != null){
@@ -903,6 +899,18 @@ p.saved{padding:1rem !important}
                     }
                 }
             });
+
+            function checkProfSkill(cmp){
+                if($(cmp).val() != null){
+                  if ($(cmp).val().indexOf('Other') != -1){
+
+                      $('.prof-skills-other').removeClass('sr-only');
+                  } else {
+                    $('.prof-skills-other').addClass('sr-only');
+                    $('.prof-skills-other').children('.col-sm-6').children('textarea').val('');
+                  }
+               }
+            }
 
             // fire x amount of times
             function setIntervalX(callback, delay, repetitions) {
@@ -961,6 +969,7 @@ p.saved{padding:1rem !important}
             $('form').validate({
                 errorElement: "em",
                 errorPlacement: function ( error, element ) {
+               
                     // Add the `help-block` class to the error element
                     error.addClass( "help-block" );
                     // Add `has-feedback` class to the parent div.form-group in order to add icons to inputs
@@ -992,9 +1001,33 @@ p.saved{padding:1rem !important}
                     $(elementParents).children( ".help-block" ).remove();
                 }
             });
+            $('.btn-submit-sign').click(function(){
+                var x = $('.preferedType').val();
+                $('.dynamicCheck').each(function(){
+                    $(this).rules('remove'); 
+                }); 
+                var y = $('.'+x+'Check').val();
+                if(typeof y != 'undefined' && y.length<1)
+                {
+                    $('.'+x+'Check').rules("add", {
+                        required: true,
+                        phoneUS: true,
+                        minlength: 10,
+                        maxlength: 15,
+                        messages: {
+                            required: "Please enter the "+x+" Phone as you have selected the Preferred Phone Type as "+x,
+                            phoneUS: "Oops! Must be a valid US number",
+                            //number: "Only numbers are accepted",
+                            minlength: "Opps! Please enter at least 10 digits",
+                            maxlength: "We're sorry, you've reached the maximum allowed characters"
+                        }
+                    });
+                }
+            });
 
             // validation rules
             function formValidationRules() {
+
                 // add validation rules for common fields
                 $("input.firstname").each(function(){
                     $(this).rules("add", {

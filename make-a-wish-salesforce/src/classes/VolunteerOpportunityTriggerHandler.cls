@@ -217,17 +217,21 @@ system.debug('======' + newVolunteerRole.Volunteer_Name__c);*/
     
     /*This updateVolunteerRegisterdCount() is used to update count of the number of volunteer opportunities that are registered for the corresponding NonWish & Event .*/
     public static void UpdateVolunteerRegisterdCount(List<Volunteer_Opportunity__c> nonWishListtoupdatecount){
+         RecursiveTriggerHandler.isFirstTime = false;
         system.debug('@@@@@@@ UpdateVolunteerRegisterdCount CALLED  @@@@@@@@@'+nonWishListtoupdatecount);
         Set<Id> chapterRoleIdSet = new Set<Id>();
         Set<Id> NonWishEventIdSet = new Set<Id>();
         Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
+        Map<Id,Volunteer_Opportunity__c> volunteerMap = new Map<Id,Volunteer_Opportunity__c>();
         List<Volunteer_Count__c > updateVolunteerCountList = new List<Volunteer_Count__c>();
         for(Volunteer_Opportunity__c newVolOpp :nonWishListtoupdatecount){
             chapterRoleIdSet .add(newVolOpp.Chapter_Role_Opportunity__c);
             NonWishEventIdSet.add(newVolOpp.Non_Wish_Event__c);
+            volunteerMap.put(newVolOpp.HiddenVolunteer_Count_Description__c,newVolOpp);
+            system.debug('@@@@@@@ volunteerMap @@@@@@@@@'+volunteerMap);
         }
-        List<AggregateResult> groupedResults = [SELECT Chapter_Role_Opportunity__c nonwish, Count(Id)aver  FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c IN: NonWishEventIdSet  AND Volunteer_Name__c  != Null AND Reason_Inactive__c = Null AND Chapter_Role_Opportunity__c IN: chapterRoleIdSet GROUP BY Chapter_Role_Opportunity__c];
-        system.debug('@@@@@@@ groupedResults  @@@@@@@@@'+groupedResults );
+        List<AggregateResult> groupedResults = [SELECT Chapter_Role_Opportunity__c nonwish, Count(Id)aver FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c IN: NonWishEventIdSet  AND Volunteer_Name__c  != Null AND Reason_Inactive__c = Null AND Chapter_Role_Opportunity__c IN: chapterRoleIdSet AND HiddenVolunteer_Count_Description__c IN: volunteerMap.KeySet() GROUP BY Chapter_Role_Opportunity__c];
+        
         if(!groupedResults.isEmpty()){
             for(AggregateResult arr : groupedResults){
                 volunteercountMap.put((ID)arr.get('nonwish'),(integer)arr.get('aver'));
@@ -237,10 +241,14 @@ system.debug('======' + newVolunteerRole.Volunteer_Name__c);*/
         if(volunteercountMap.size() > 0){
             for(Volunteer_Count__c dbVolunteerCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__c,Registered__c From Volunteer_Count__c  WHERE Chapter_Role__c IN: volunteercountMap.Keyset()]){
                 if(NonWishEventIdSet.contains(dbVolunteerCount.Non_Wish_Events__c)){
+                 if(volunteerMap.containsKey(dbVolunteerCount.Id)){
+                 
                     if(volunteercountMap.containsKey(dbVolunteerCount.Chapter_Role__c)){
                         dbVolunteerCount.Registered__c  = volunteercountMap.get(dbVolunteerCount.Chapter_Role__c);
+                        system.debug('@@@@@@@ groupedResults  @@@@@@@@@'+dbVolunteerCount.Registered__c);
                         updateVolunteerCountList.add(dbVolunteerCount);
                     }
+                 }
                 }
             }
         }
@@ -261,10 +269,12 @@ system.debug('======' + newVolunteerRole.Volunteer_Name__c);*/
         Set<Id> NonWishEventIdSet = new Set<Id>();
         set<Id> volunteercountIdSet = new Set<Id>();
         Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
+        
         List<Volunteer_Count__c > updateVolunteerCountList = new List<Volunteer_Count__c>();
         for(Volunteer_Opportunity__c newVolOpp :nonWishListtoupdatecount){
             chapterRoleIdSet .add(newVolOpp.Chapter_Role_Opportunity__c);
             NonWishEventIdSet .add(newVolOpp.Non_Wish_Event__c);
+            
         }
         List<AggregateResult> groupedResults = [SELECT Chapter_Role_Opportunity__c nonwish, Count(Id)aver  FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c IN: NonWishEventIdSet AND Chapter_Role_Opportunity__c IN: chapterRoleIdSet GROUP BY Chapter_Role_Opportunity__c];
         if(!groupedResults.isEmpty()){
@@ -276,11 +286,11 @@ system.debug('======' + newVolunteerRole.Volunteer_Name__c);*/
         if(volunteercountMap.size() > 0){
             for(Volunteer_Count__c dbVolunteerCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__c,Registered__c From Volunteer_Count__c  WHERE Chapter_Role__c IN: volunteercountMap.Keyset()]){
                 if(NonWishEventIdSet .contains(dbVolunteerCount.Non_Wish_Events__c)){
-                    if(volunteercountMap.containsKey(dbVolunteerCount.Chapter_Role__c)){
+                   if(volunteercountMap.containsKey(dbVolunteerCount.Chapter_Role__c)){
                         dbVolunteerCount.Volunteer_Needed__c = volunteercountMap.get(dbVolunteerCount.Chapter_Role__c);
-                        
                         updateVolunteerCountList.add(dbVolunteerCount);
                     }
+                    
                 }
             }
             update updateVolunteerCountList;
@@ -534,7 +544,7 @@ update volunteerContactList;
             Volunteer_Opportunity__c updateVolOpp = new Volunteer_Opportunity__c();
             updateVolOpp.id = newVolOpp.Id;
             updateVolOpp.Inactive__c = true;
-            updateVolOpp.Reason_Inactive__c = 'Moved';
+            updateVolOpp.Reason_Inactive__c = 'Not Approved';
             updateList.add(updateVolOpp);
         }
         

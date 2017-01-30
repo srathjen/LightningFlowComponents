@@ -312,6 +312,31 @@
       });
       
  
+        var windw = this;        
+        $.fn.followTo = function ( pos ) {
+            var $this = this,
+            $window = $(windw);
+         $window.scroll(function(e){
+            if ($window.scrollTop() > pos) {
+                $this.css({
+                    position: 'absolute',
+                    top: pos
+                  });
+             }
+            else {
+                $this.css({
+                position: 'fixed',
+                top: 200
+               });
+             }
+           });
+         };
+        
+        $('.sticky').followTo($(".clearBoth").height()+350);
+        
+ 
+ 
+     
 
     });
     
@@ -356,15 +381,15 @@
       <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />
       <div style="width:60%;height:100px;margin-left:25%;margin-right:25%;"><apex:include pageName="active_header_progress_bar" id="pheaderprog" rendered="{!if($Profile.Name<>"Active Volunteer",true,true)}" /></div>
       <main role="main" class="container clearBoth">
-      <div class="sideNav">
+      <div class="sideNav sticky">
           <!--<a data-toggle="collapse" href="#childForm">
                 [+]                       
             </a>-->
             <a class="navMenu" href="{!wcfUtil.childForm}">Wish Child Form</a>
            <!-- <div id="childForm" class="panel-collapse collapse">
                 <a href="#mainSec">Main Section</a><br/> 
-                <a href="#myFav">My Favourites</a><br/> 
-                <a href="#otherFav">Other Favourites</a>                    
+                <a href="#myFav">My Favorites</a><br/> 
+                <a href="#otherFav">Other Favorites</a>                    
             </div>-->
             <br/>
            <!-- <a data-toggle="collapse" href="#familyForm">
@@ -409,7 +434,7 @@
          
          <div class="button-block">
                         <center> 
-                            <apex:Commandbutton value="Back"  action="{!BackToWFF}" styleClass="btn btn-default mg-rt" immediate="true"/>
+                            <apex:Commandbutton value="Back"  action="{!BackToWFF}" styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Save"  action="{!WishInfoSave}"  Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Submit for Approval" action="{!submitforApproval}"  Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
@@ -431,7 +456,7 @@
                     <div class="row top-space" id="schedule">
                         <div class="row">
                             <div class="col-lg-2 text-imp lineHeight">Wish Child's Name:</div>
-                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.FirstName__c}" html-placeholder="FirstName" styleClass="form-control readonly"/></div>
+                            <div class="col-lg-3"><apex:inputField value="{!currWishChild.FirstName__c}" html-placeholder="FirstName" styleClass="form-control readonly" style="border-left:5px solid red;"/></div>
                             <div class="col-lg-3"><apex:inputField value="{!currWishChild.Middle_Name__c}"  html-placeholder="MiddleName" styleClass="form-control readonly"/></div>
                             <div class="col-lg-3"><apex:inputField value="{!currWishChild.LastName__c}" styleClass="form-control required readonly" html-placeholder="LastName" style="border-left:5px solid red"/></div>
                         </div>                      
@@ -790,7 +815,7 @@
                     
                     <div class="button-block">
                         <center> 
-                            <apex:Commandbutton value="Back"  action="{!BackToWFF}" styleClass="btn btn-default mg-rt" immediate="true"/>
+                            <apex:Commandbutton value="Back"  action="{!BackToWFF}" styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Save"  action="{!WishInfoSave}"  Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>
                             <apex:Commandbutton value="Submit for Approval" action="{!submitforApproval}"  Onclick="return ClickToValidate();"  styleClass="btn btn-default mg-rt"/>

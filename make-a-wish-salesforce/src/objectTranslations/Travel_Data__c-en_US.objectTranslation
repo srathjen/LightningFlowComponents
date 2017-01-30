@@ -137,7 +137,7 @@
         <name>Notes__c</name>
     </fields>
     <fields>
-        <label><!-- Parent Wish --></label>
+        <label><!-- Case --></label>
         <name>Parent_Wish__c</name>
         <relationshipLabel><!-- Travel Data --></relationshipLabel>
     </fields>

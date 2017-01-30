@@ -30,6 +30,14 @@
                 <behavior>Edit</behavior>
                 <field>Inactive__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Event_URL__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Description__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -60,6 +68,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Date_Time__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Location__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -188,6 +200,7 @@
         <fields>NAME</fields>
         <fields>Hours_spent__c</fields>
         <fields>Date__c</fields>
+        <fields>Description__c</fields>
         <relatedList>Time_sheet__c.Volunteer_Opportunity__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>

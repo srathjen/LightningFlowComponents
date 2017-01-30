@@ -93,7 +93,8 @@ insert newTaskList;
                 
                 for(Task assignTaskOwner : birthdayTasksList) {
                     if(caseTeamMembersMap.containsKey(assignTaskOwner.whatId)) {
-                        assignTaskOwner.OwnerId=contactRelatedUsersIdsMap.get(caseTeamMembersMap.get(assignTaskOwner.whatId));
+                       if(contactRelatedUsersIdsMap.get(caseTeamMembersMap.get(assignTaskOwner.whatId))!=Null)
+                         assignTaskOwner.OwnerId=contactRelatedUsersIdsMap.get(caseTeamMembersMap.get(assignTaskOwner.whatId));
                     }
                     if(taskRelatedCaseIdsMap.containsKey(assignTaskOwner.whatId)) {
                         assignTaskOwner.whoId= taskRelatedCaseIdsMap.get(assignTaskOwner.whatId);
@@ -165,8 +166,9 @@ insert newTaskList;
                                         //if(String.valueOf(caseTeam.MemberId).startsWith('005')) {
                                         //Used the check whether Member is a user
                                         if(String.valueOf(caseTeam.MemberId).substring(0,3) == USER.sobjecttype.getDescribe().getKeyPrefix()) {
-                                            assignOwner.OwnerId = caseTeam.MemberId;
-                                        } else if(contactUsers.containsKey(caseTeam.MemberId)) {
+                                           if(caseTeam.MemberId != Null)
+                                              assignOwner.OwnerId = caseTeam.MemberId;
+                                        } else if(contactUsers.containsKey(caseTeam.MemberId) && caseTeam.MemberId != Null) {
                                             assignOwner.OwnerId = contactUsers.get(caseTeam.MemberId);
                                         }
                                     } 
@@ -334,7 +336,8 @@ corresponding task fields to merge with email template */
                 newSubTask.WhatId = recCheckinTask.WhatId;
                 newSubTask.WhoId = recCheckinTask.WhoId;
                 newSubTask.RecordTypeId = defaultRecordTypeId;
-                newSubTask.OwnerId = recCheckinTask.OwnerId;
+                if(recCheckinTask.OwnerId != Null)
+                    newSubTask.OwnerId = recCheckinTask.OwnerId;
                 newRecTaskList.add(newSubTask);
             }
         }

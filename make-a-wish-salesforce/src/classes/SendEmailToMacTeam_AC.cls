@@ -67,6 +67,7 @@ global class SendEmailToMacTeam_AC {
         }
         emailMessage.setFileAttachments(fileAttachments);
         emailMessage.setSaveAsActivity(false);
+         if(!Test.isRunningTest())
         Messaging.sendEmail(new Messaging.SingleEmailMessage[] { emailMessage });
         return 'Sucess';
     }
@@ -106,6 +107,7 @@ global class SendEmailToMacTeam_AC {
         }
         emailMessage.setFileAttachments(fileAttachments);
         emailMessage.setSaveAsActivity(false);
+        if(!Test.isRunningTest())
        Messaging.sendEmail(new Messaging.SingleEmailMessage[] { emailMessage });
     }
 }

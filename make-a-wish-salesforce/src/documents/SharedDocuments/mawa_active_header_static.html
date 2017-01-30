@@ -9,11 +9,14 @@
 	.calendarHeader {display:none !important}
     main {overflow-x:auto; min-height:40rem}
     #contentWrapper {min-width:100%}
+
     /* remove sidebar */
     .detailPage #sidebarCell, .detailPage #sidebarDiv .sidebarModule, .detailPage #sidebarDiv .nestedModule,
     /* remove header content */
-    h2.pageDescription, .pbTitle
+    h2.pageDescription, .Custom55Tab .pbTitle /* in-kind title*/, .bRelatedList .Custom25Block .relatedListIcon, .allTabTab .Custom25Block .relatedListIcon
     {display:none}
+    .bRelatedList .Custom25Block .pbTitle h3 {margin:0}
+    .vcpactivelogin form h3 {font-family:inherit;}
 
     /* resources */
     .knowledgeTab .dispatcher li.dispatcherItem a {height:auto}
@@ -56,6 +59,9 @@
     @media (min-width: 34em){
       body>span footer figure p, body #contentWrapper>span footer figure p {padding:inherit; padding-top:0}
     }
+    @media (max-width: 34em){
+        body>#contentWrapper>span header .active-user-main li {margin-left:0}
+    }
 
   </style>
     <noscript>For full functionality and the best experience possible of this site it is necessary to enable JavaScript. Here are the <a href="http://www.enable-javascript.com/" target="_blank">instructions how to enable JavaScript in your web browser</a>.</noscript>
@@ -73,10 +79,10 @@
           <nav class="navbar navbar-dark sub-nav">
               <button class="navbar-toggler hidden-md-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar">&#9776;</button>
               <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
-                  <ul class="active-user-main" style="width:53%">
-                    <li style="float:left;"><a href="/VolunteerAssignmentOpportunities_VF">Volunteer Opportunities</a></li>
-                    <li style="float:left;"><a href="/MyAssignment_VF" >My Assignments</a></li>
-                    <li style="margin-right:15px;"><a href="/VolunteerActivities_VF">My Tasks</a></li>
+                  <ul class="active-user-main">
+                    <li><a href="/VolunteerAssignmentOpportunities_VF">Volunteer Opportunities</a></li>
+                    <li><a href="/MyAssignment_VF" >My Assignments</a></li>
+                    <li><a href="/VolunteerActivities_VF">My Tasks</a></li>
                   </ul>
                   <ul class="active-user-subnav">
                       <li><a href="/VolunteerProfile_VF">Profile</a></li>

@@ -19,6 +19,6 @@
             <fieldName>npe01__HomeEmail__c</fieldName>
             <matchingMethod>Exact</matchingMethod>
         </matchingRuleItems>
-        <ruleStatus>ActivationFailed</ruleStatus>
+        <ruleStatus>Activating</ruleStatus>
     </matchingRules>
 </MatchingRules>

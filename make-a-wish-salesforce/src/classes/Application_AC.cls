@@ -333,6 +333,9 @@ public class Application_AC{
                 }
                 currentVolunteer.volunteer_role__c= roles.removeEnd(';');
             }
+            if(currentVolunteer.Preferred_Phone_Types__c == Null || currentVolunteer.Preferred_Phone_Types__c == ''){
+                currentVolunteer.Preferred_Phone_Types__c='Mobile';
+            }
             
         PageReference pr ;
        
@@ -396,6 +399,7 @@ public class Application_AC{
     }
     
     public pageReference confirmSign(){
+    System.debug('### ENTER INTO CONFIRM WINDOW'+displaySignNowPopup);
      List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentVolunteer.Id AND Status =: 'Pending' ];
           If(approvalIns.size() > 0){
              ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,' This record is already in approval process'));
@@ -403,6 +407,7 @@ public class Application_AC{
         }
         else{
         displaySignNowPopup = true;
+        System.debug('### ENTER INTO CONFIRM WINDOW1'+displaySignNowPopup);
         saveRec();
         }
         return null;
@@ -412,7 +417,7 @@ public class Application_AC{
      Once the user sign the document then it create new conflict of interest record and it will redirect to the application_VF page*/
    public Pagereference SubmitAndSign(){
       
-     
+     System.debug('###SubmitAndSign####'+displaySignNowPopup);
        
         String account;
         String UserName;
@@ -662,8 +667,8 @@ public class Application_AC{
         options.add(new SelectOption('', 'Select Type')); 
         for( Schema.PicklistEntry currVal : picklistValues)
         {      options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
-         
-        }  
+            
+         }  
         return options;
       }    
        /*To display IamOnLinkedIn values for current logged in volunteer contact in community.*/

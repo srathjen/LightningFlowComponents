@@ -2251,6 +2251,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <label>DDP Admin</label>
+    <license>Salesforce</license>
     <objectPermissions>
         <allowCreate>true</allowCreate>
         <allowDelete>true</allowDelete>
@@ -2731,7 +2732,6 @@
         <tab>Text_Snippet__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
-    <userLicense>Salesforce</userLicense>
     <userPermissions>
         <enabled>false</enabled>
         <name>AccessCMC</name>
@@ -2919,6 +2919,10 @@
     <userPermissions>
         <enabled>false</enabled>
         <name>EditActivatedOrders</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>false</enabled>
+        <name>EditBillingInfo</name>
     </userPermissions>
     <userPermissions>
         <enabled>false</enabled>
@@ -3175,6 +3179,10 @@
     <userPermissions>
         <enabled>false</enabled>
         <name>ManageRoles</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>false</enabled>
+        <name>ManageSandboxes</name>
     </userPermissions>
     <userPermissions>
         <enabled>false</enabled>

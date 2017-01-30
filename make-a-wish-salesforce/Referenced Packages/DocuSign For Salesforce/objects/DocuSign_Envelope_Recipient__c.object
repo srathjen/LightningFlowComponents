@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -182,28 +178,30 @@
         <externalId>false</externalId>
         <inlineHelpText>DOCUSIGN RECIPIENT ROLE</inlineHelpText>
         <label>DocuSign Signer Role</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Customer 1</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Customer 2</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Company 1</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Company 2</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Customer 1</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>Customer 2</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Company 1</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Company 2</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>DocuSign_Signature_Name__c</fullName>
@@ -225,36 +223,38 @@
         <externalId>false</externalId>
         <inlineHelpText>DOCUSIGN SIGNER TYPE</inlineHelpText>
         <label>DocuSign Signer Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Signer</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Carbon Copy</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Certified Delivery</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Sign in person</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Address recipients</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Manage envelope</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Signer</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>Carbon Copy</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Certified Delivery</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Sign in person</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Address recipients</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Manage envelope</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Email_Body__c</fullName>
@@ -391,24 +391,26 @@
         <externalId>false</externalId>
         <inlineHelpText>SALESFORCE RECIPIENT TYPE</inlineHelpText>
         <label>Salesforce Recipient Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Contact</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Lead</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>User</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Contact</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Lead</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>User</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>SignInPersonEmail__c</fullName>

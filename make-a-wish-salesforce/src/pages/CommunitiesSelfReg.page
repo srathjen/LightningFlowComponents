@@ -193,12 +193,14 @@
                 $( ".form-vcp-signup" ).validate({
                     rules: {
                         "communitiesSelfRegPage:theForm:firstname": {
-                            require_from_group: [1, ".name-group"],
+                            //require_from_group: [1, ".name-group"],
+                            required: true,
                             minlength: 2,
                             maxlength: 40
                         },
                         "communitiesSelfRegPage:theForm:lastname": {
-                            require_from_group: [2, ".name-group"],
+                            //require_from_group: [2, ".name-group"],
+                            required: true,
                             minlength: 2,
                             maxlength: 40
                         },
@@ -254,13 +256,13 @@
                     },
                     messages: {
                         "communitiesSelfRegPage:theForm:firstname": {
-                            require_from_group: "Oops! Both first name and last name must be entered",
+                            //require_from_group: "Oops! Both first name and last name must be entered",
                             required: "Oops! Please enter a first name",
                             minlength: "Oops! Your first name must have more than 2 letters",
                             maxlength: "We're sorry, you've reached the maximum allowed characters"
                         },
                         "communitiesSelfRegPage:theForm:lastname": {
-                            require_from_group: "Oops! Both first name and last name must be entered",
+                            //require_from_group: "Oops! Both first name and last name must be entered",
                             required: "Oops! Please enter a last name",
                             minlength: "Oops! Your last name must have more than 2 letters",
                             maxlength: "We're sorry, you've reached the maximum allowed characters"

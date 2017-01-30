@@ -101,6 +101,8 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         List<Lead> findduplicateList = new List<Lead>();
         List<Lead> leadQuestionList= new List<Lead>();
         Map<Id, Lead> leadRegionCodeValidationMap = new Map<Id, Lead>();
+        List<Lead> findDupConList = new List<Lead>();
+        
         Boolean flag;
         for(Lead newLead : Trigger.new)
         {  
@@ -133,9 +135,19 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                 }
                          
                 if((newLead.Status == 'Referred')
-                  && newLead.Override_Dupe_Check__c == false)
+                  && newLead.Sub_Status__c == 'Pending Diagnosis Verification'
+                  && newLead.Sub_Status__c != Trigger.oldMap.get(newLead.id).Sub_Status__c
+                  && newLead.Dup_Check__c != 'Block Lead Dup')
                 {
                     findduplicateList.add(newLead);
+                }
+                
+                if((newLead.Status == 'Referred')
+                  && newLead.Sub_Status__c == 'Pending Diagnosis Verification'
+                  && newLead.Sub_Status__c != Trigger.oldMap.get(newLead.id).Sub_Status__c
+                  && newLead.Dup_Check__c == 'Block Lead Dup' && newLead.Contact_Dup_Check__c != 'Block Contact Dup')
+                {
+                    findDupConList.add(newLead);
                 }
               
                 if(newLead.LastName != trigger.oldmap.get(newLead.id).LastName || newLead.DOB__c  != Trigger.oldMap.get(newLead.id).DOB__c 
@@ -202,7 +214,6 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         if(newUpdateLeadList.size() > 0){
         
             LeadTriggerHandler handlerIns = new LeadTriggerHandler();
-           
         }
         
         if(postalCodesSet.size() > 0)
@@ -223,9 +234,12 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         if(findduplicateList.size() > 0)
         {
         
-          // LeadTriggerHandler.findDuplicateRecords(findduplicateList);
+          LeadTriggerHandler.findDuplicateRecords(findduplicateList);
         }
-        
+        if(findDupConList.size() > 0)
+        {
+          LeadTriggerHandler.FindDupContacts(findDupConList);
+        }
         
       }
     
@@ -234,12 +248,15 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
     {
         List<Lead> newLeadList = new List<Lead>();
         List<Lead> approvalList = new List<Lead>();
-        
+      if(RecursiveTriggerHandler.isFirstTime == true)
+      {  
        for(Lead newLead : Trigger.new){
-       
-           if(newLead.Migrated_Record__c != True)
+          
+           if(newLead.Migrated_Record__c != True) 
            {
+               System.debug('Lead Entry111111111>>>>>>>>>>>');
             if(!newLead.isConverted && newLead.Status == 'Qualified' && Trigger.oldmap.get(newLead.id).Status != 'Qualified'){
+                System.debug('Lead status Changed>>>>>>>>>>>');
                 newLeadList.add(newLead);
             }
            }
@@ -247,9 +264,11 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         }
         if(newLeadList.size() > 0)
         {
+            System.debug('Qualified List>>>>>>>>>>>');
             LeadTriggerHandler handlerIns = new LeadTriggerHandler();
             handlerIns.onAfterUpdate(newLeadList);
         }
+      }
     } 
     
    if(Trigger.isAfter && Trigger.isInsert)

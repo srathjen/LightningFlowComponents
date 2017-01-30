@@ -25,10 +25,6 @@
         <type>Visualforce</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -83,32 +79,34 @@
         <externalId>false</externalId>
         <inlineHelpText>This field applies when using line items and determines whether rows, tables, or sections should be duplicated for each child record.</inlineHelpText>
         <label>Copy Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Row</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Table</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Group</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Hierarchy</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Section</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Row</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Table</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Group</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Hierarchy</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Section</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>DDP__c</fullName>

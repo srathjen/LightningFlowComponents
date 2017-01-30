@@ -25,6 +25,7 @@
     <enableNicknameDisplay>false</enableNicknameDisplay>
     <enablePrivateMessages>false</enablePrivateMessages>
     <enableReputation>false</enableReputation>
+    <enableSiteAsContainer>false</enableSiteAsContainer>
     <forgotPasswordTemplate>Automated_Volunteer_Templates/Communities_Volunteer_Forgot_Password_Email_Template</forgotPasswordTemplate>
     <navigationLinkSet>
         <navigationMenuItem>
@@ -37,21 +38,13 @@
     </navigationLinkSet>
     <networkMemberGroups>
         <profile>Admin</profile>
-        <profile>Customer Community Plus Login User</profile>
-        <profile>Customer Community Plus User</profile>
-        <profile>Active Volunteer</profile>
         <profile>Prospective Volunteer</profile>
-        <profile>Volunteer Staff</profile>
-        <profile>ReadOnly</profile>
-        <profile>Chapter Dev%2FFin Staff</profile>
-        <profile>Office Staff</profile>
-        <profile>Program Staff</profile>
-        <profile>Volunteer</profile>
-        <profile>Read Only National Staff</profile>
-        <profile>Full Access National Staff</profile>
+        <profile>Active Volunteer</profile>
+        <profile>Volunteer - Prospective</profile>
+        <profile>Volunteer - Active</profile>
     </networkMemberGroups>
     <picassoSite>Wish_Volunteer_Community_C</picassoSite>
-    <selfRegProfile>prospective volunteer</selfRegProfile>
+    <selfRegProfile>volunteer - prospective</selfRegProfile>
     <selfRegistration>true</selfRegistration>
     <sendWelcomeEmail>true</sendWelcomeEmail>
     <site>Wish_Volunteer_Community</site>

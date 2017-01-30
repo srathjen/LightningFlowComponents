@@ -13,6 +13,10 @@
         <name>Date__c</name>
     </fields>
     <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
         <label><!-- From Mulesoft --></label>
         <name>From_Mulesoft__c</name>
     </fields>

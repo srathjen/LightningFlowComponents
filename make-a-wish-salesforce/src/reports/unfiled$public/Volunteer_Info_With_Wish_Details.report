@@ -7,6 +7,9 @@
         <field>Contact.Volunteer_Opportunities__r$Wish__c.Status</field>
     </columns>
     <columns>
+        <field>Contact.Volunteer_Opportunities__r$Role__c</field>
+    </columns>
+    <columns>
         <field>Contact.Volunteer_Opportunities__r$Wish__c.Medical_Condition__c</field>
     </columns>
     <columns>
@@ -25,6 +28,12 @@
         <field>Contact.Volunteer_Opportunities__r$Zip__c</field>
     </columns>
     <columns>
+        <field>Contact$County__c</field>
+    </columns>
+    <columns>
+        <field>Contact$Region_Code__c</field>
+    </columns>
+    <columns>
         <field>Contact.Volunteer_Opportunities__r$Wish__c.Rush__c</field>
     </columns>
     <columns>
@@ -36,8 +45,15 @@
     <filter>
         <criteriaItems>
             <column>Contact$is_Active_Volunteer__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Volunteer_Opportunities__r$Wish__c.CaseNumber</column>
+            <isUnlocked>false</isUnlocked>
+            <operator>notEqual</operator>
+            <value></value>
         </criteriaItems>
     </filter>
     <format>Summary</format>

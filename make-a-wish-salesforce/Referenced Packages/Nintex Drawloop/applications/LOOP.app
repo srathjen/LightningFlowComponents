@@ -2,6 +2,7 @@
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <defaultLandingTab>DDP__c</defaultLandingTab>
     <description>Drawloop Document Generation powered by Nintex Drawloop</description>
+    <formFactors>Large</formFactors>
     <label>Drawloop Document Generation</label>
     <logo>LOOP_Files/LOOP_Logo_gif.png</logo>
     <tab>DDP_Admin</tab>

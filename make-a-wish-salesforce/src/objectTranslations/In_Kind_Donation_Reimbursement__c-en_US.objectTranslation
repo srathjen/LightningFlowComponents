@@ -45,6 +45,8 @@
         <name>Amount_5__c</name>
     </fields>
     <fields>
+        <help><!-- If this is a business donor, appeal should begin with CORP 
+If this is a volunteer donor, appeal should begin with DRPS --></help>
         <label><!-- Appeal --></label>
         <name>Appeal__c</name>
     </fields>
@@ -145,6 +147,11 @@
         </picklistValues>
     </fields>
     <fields>
+        <help><!-- A brief description of what the donation entailed --></help>
+        <label><!-- Donation Description --></label>
+        <name>DonationDsc__c</name>
+    </fields>
+    <fields>
         <label><!-- Email --></label>
         <name>Email__c</name>
     </fields>
@@ -173,6 +180,8 @@
         <name>Fund_ID__c</name>
     </fields>
     <fields>
+        <help><!-- If this is a business donor, gift subtype should begin with CORP 
+If this is a volunteer donor, gift subtype should begin with DRPS --></help>
         <label><!-- Gift Subtype --></label>
         <name>Gift_Subtype__c</name>
     </fields>
@@ -200,10 +209,6 @@
         </lookupFilter>
         <name>In_Kind_Donor_Name__c</name>
         <relationshipLabel><!-- In-Kind Donation &amp; Reimbursement --></relationshipLabel>
-    </fields>
-    <fields>
-        <label><!-- Is Attached --></label>
-        <name>Is_Attached__c</name>
     </fields>
     <fields>
         <label><!-- Letter Code --></label>
@@ -249,10 +254,6 @@
     <fields>
         <label><!-- Reason for Gift Value Change --></label>
         <name>Reason_for_Gift_Value_Change__c</name>
-    </fields>
-    <fields>
-        <label><!-- Reference --></label>
-        <name>Reference__c</name>
     </fields>
     <fields>
         <label><!-- Region Code --></label>
@@ -471,24 +472,17 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Status --></label>
-        <name>Status__c</name>
-        <picklistValues>
-            <masterLabel>Approved</masterLabel>
-            <translation><!-- Approved --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>In-Process</masterLabel>
-            <translation><!-- In-Process --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <label><!-- Street Name --></label>
         <name>Street__c</name>
     </fields>
     <fields>
         <label><!-- Total Reimbursement Amount --></label>
         <name>Total_Reimbursement_Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Expense Transaction Code --></label>
+        <name>Transaction_Code__c</name>
+        <relationshipLabel><!-- In-Kind Donation &amp; Reimbursement --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Unique Wish Identifier --></label>
@@ -835,6 +829,10 @@
         <sections>
             <label><!-- Attachments --></label>
             <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Chapter Staff Only --></label>
+            <section>Chapter Staff Only</section>
         </sections>
         <sections>
             <label><!-- Custom Links --></label>

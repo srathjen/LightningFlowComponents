@@ -72,7 +72,9 @@ Public class UserTriggerHandler{
                updateContact.MailingState = prospectiveUserMap.get(currRec.id).State;
                updateContact.MailingCity = prospectiveUserMap.get(currRec.id).City;
                updateContact.MailingPostalCode = prospectiveUserMap.get(currRec.id).PostalCode;
-               updateContact.HomePhone= prospectiveUserMap.get(currRec.id).Phone;
+               updateContact.mobilephone = prospectiveUserMap.get(currRec.id).Phone;
+               updateContact.homePhone = null;
+               updateContact.Preferred_Phone_Types__c='Mobile';
                if(currRec.Account.Volunteer_Manager__c != null) {
                    updateContact.OwnerId = currRec.Account.Volunteer_Manager__c;
                }

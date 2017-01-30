@@ -408,6 +408,10 @@
             <translation><!-- Child --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Family</masterLabel>
+            <translation><!-- Family --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Friend</masterLabel>
             <translation><!-- Friend --></translation>
         </picklistValues>
@@ -418,10 +422,6 @@
         <picklistValues>
             <masterLabel>Other</masterLabel>
             <translation><!-- Other --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Other Family</masterLabel>
-            <translation><!-- Other Family --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Parent</masterLabel>
@@ -569,6 +569,14 @@
         <name>Hidden_Street__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Use as Household Address --></label>
+        <name>Hidden_Use_as_Household_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Wish Child Id --></label>
+        <name>Hidden_Wish_Child_Id__c</name>
+    </fields>
+    <fields>
         <label><!-- Zip Code --></label>
         <name>Hidden_Zip_Code__c</name>
     </fields>
@@ -643,6 +651,30 @@ and the date it was or will be granted. --></help>
         <name>If_yes_Enter_Org_Name_Wish_Date_it_was__c</name>
     </fields>
     <fields>
+        <label><!-- Inquiry/Referral Method --></label>
+        <name>Inquiry_Referral_Method__c</name>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fax</masterLabel>
+            <translation><!-- Fax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Online</masterLabel>
+            <translation><!-- Online --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Would your company be interested MAW --></label>
         <name>Interested_involved_with_Make_A_Wish__c</name>
         <picklistValues>
@@ -685,6 +717,18 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- IsSigned --></label>
         <name>IsSigned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Family Aware of Referral? --></label>
+        <name>Is_Family_Aware_of_Referral__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Language Notes --></label>
@@ -765,29 +809,6 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Last Continuing Edu. Date --></label>
         <name>Last_Continuing_Edu_Date__c</name>
-    </fields>
-    <fields>
-        <name>LeadSource</name>
-        <picklistValues>
-            <masterLabel>Email</masterLabel>
-            <translation><!-- Email --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Fax</masterLabel>
-            <translation><!-- Fax --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Online</masterLabel>
-            <translation><!-- Online --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Other</masterLabel>
-            <translation><!-- Other --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Phone</masterLabel>
-            <translation><!-- Phone --></translation>
-        </picklistValues>
     </fields>
     <fields>
         <label><!-- Lead Created Date --></label>
@@ -977,10 +998,6 @@ and the date it was or will be granted. --></help>
             <translation><!-- Interior Decorating --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Language</masterLabel>
-            <translation><!-- Language --></translation>
-        </picklistValues>
-        <picklistValues>
             <masterLabel>Other</masterLabel>
             <translation><!-- Other --></translation>
         </picklistValues>
@@ -1005,6 +1022,14 @@ and the date it was or will be granted. --></help>
         <label><!-- Provider Type --></label>
         <name>Provider_Type__c</name>
         <picklistValues>
+            <masterLabel>Child Life Specialist</masterLabel>
+            <translation><!-- Child Life Specialist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nurse</masterLabel>
+            <translation><!-- Nurse --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Nurse Practitioner</masterLabel>
             <translation><!-- Nurse Practitioner --></translation>
         </picklistValues>
@@ -1016,8 +1041,17 @@ and the date it was or will be granted. --></help>
             <masterLabel>Physician Assistant</masterLabel>
             <translation><!-- Physician Assistant --></translation>
         </picklistValues>
+        <picklistValues>
+            <masterLabel>Social Worker</masterLabel>
+            <translation><!-- Social Worker --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Social Worker,Child Life Specialist,Nurse</masterLabel>
+            <translation><!-- Social Worker,Child Life Specialist,Nurse --></translation>
+        </picklistValues>
     </fields>
     <fields>
+        <help><!-- Check this box if you feel the wish child would be a good publicity candidate. --></help>
         <label><!-- Publicity Candidate --></label>
         <name>Publicity_Candidate__c</name>
     </fields>
@@ -1062,24 +1096,24 @@ and the date it was or will be granted. --></help>
             <translation><!-- Black or African American --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Hispanic, Latino or Spanish</masterLabel>
-            <translation><!-- Hispanic, Latino or Spanish --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Middle Eastern</masterLabel>
-            <translation><!-- Middle Eastern --></translation>
+            <masterLabel>Hispanic or Latino</masterLabel>
+            <translation><!-- Hispanic or Latino --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Native Hawaiian/Other Pacific Islander</masterLabel>
             <translation><!-- Native Hawaiian/Other Pacific Islander --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Not Reported</masterLabel>
+            <translation><!-- Not Reported --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Other</masterLabel>
             <translation><!-- Other --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>White or Caucasian</masterLabel>
-            <translation><!-- White or Caucasian --></translation>
+            <masterLabel>White</masterLabel>
+            <translation><!-- White --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -1155,6 +1189,7 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
+        <help><!-- Please add notes on why you feel this wish child would be a good publicity candidate. --></help>
         <label><!-- Reason for Publicity Candidate --></label>
         <name>Reason_for_Publicity_Candidate__c</name>
     </fields>
@@ -1175,7 +1210,31 @@ and the date it was or will be granted. --></help>
         <name>Referral_Age__c</name>
     </fields>
     <fields>
-        <label><!-- Region Chapter --></label>
+        <label><!-- Referrer City --></label>
+        <name>Referrer_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referrer Email --></label>
+        <name>Referrer_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referrer FirstName --></label>
+        <name>Referrer_FirstName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referrer Last Name --></label>
+        <name>Referrer_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referrer Phone --></label>
+        <name>Referrer_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referrer Zip --></label>
+        <name>Referrer_Zip__c</name>
+    </fields>
+    <fields>
+        <label><!-- Chapter Name --></label>
         <name>Region_Chapter__c</name>
         <relationshipLabel><!-- Contacts (Region Chapter) --></relationshipLabel>
     </fields>
@@ -1307,7 +1366,7 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Relationship to Wish Child --></label>
+        <label><!-- Relationship to Wish Child (Other) --></label>
         <name>Relationship_to_Wish_Child__c</name>
     </fields>
     <fields>
@@ -1906,6 +1965,10 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Use as Household Address --></label>
+        <name>Use_as_Household_Address__c</name>
+    </fields>
+    <fields>
         <label><!-- Valid D.L # --></label>
         <name>Valid_D_L__c</name>
     </fields>
@@ -2029,6 +2092,11 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Wish Child Id Hidden --></label>
         <name>Wish_Child_Id_Hidden__c</name>
         <relationshipLabel><!-- Contacts --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Optimized image size- width: 115px by height: 105px --></help>
+        <label><!-- Wish Child Photo --></label>
+        <name>Wish_Child_Photo__c</name>
     </fields>
     <fields>
         <label><!-- Wish Family Type --></label>
@@ -2679,10 +2747,6 @@ provide contact information for each site on which you are active. --></help>
             <section>Contact Details</section>
         </sections>
         <sections>
-            <label><!-- Dev &amp; QA Fields --></label>
-            <section>Dev &amp; QA Fields</section>
-        </sections>
-        <sections>
             <label><!-- Household Address --></label>
             <section>Household Address</section>
         </sections>
@@ -2703,10 +2767,6 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Contact Information --></label>
             <section>Contact Information</section>
-        </sections>
-        <sections>
-            <label><!-- Dev &amp; QA Fields --></label>
-            <section>Dev &amp; QA Fields</section>
         </sections>
         <sections>
             <label><!-- Emergency Contact Information --></label>
@@ -2744,16 +2804,16 @@ provide contact information for each site on which you are active. --></help>
     <layouts>
         <layout>Wish Child</layout>
         <sections>
+            <label><!-- Additional Info --></label>
+            <section>Additional Info</section>
+        </sections>
+        <sections>
             <label><!-- Attachments --></label>
             <section>Attachments</section>
         </sections>
         <sections>
             <label><!-- Contact Information --></label>
             <section>Contact Information</section>
-        </sections>
-        <sections>
-            <label><!-- Dev &amp; QA --></label>
-            <section>Dev &amp; QA</section>
         </sections>
         <sections>
             <label><!-- Household Address --></label>
@@ -2764,8 +2824,20 @@ provide contact information for each site on which you are active. --></help>
             <section>Medical Information Section</section>
         </sections>
         <sections>
+            <label><!-- My Wish --></label>
+            <section>My Wish</section>
+        </sections>
+        <sections>
+            <label><!-- Publicity --></label>
+            <section>Publicity</section>
+        </sections>
+        <sections>
             <label><!-- Race/Ethnicity --></label>
             <section>Race/Ethnicity</section>
+        </sections>
+        <sections>
+            <label><!-- Referral Source Information --></label>
+            <section>Referral Source Information</section>
         </sections>
         <sections>
             <label><!-- Treatment Subspeciality --></label>
@@ -2778,6 +2850,10 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- WIsh Child Details --></label>
             <section>WIsh Child Details</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Child Photo --></label>
+            <section>Wish Child Photo</section>
         </sections>
         <sections>
             <label><!-- Wish Child&apos;s Favorites --></label>
@@ -2793,10 +2869,6 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Contact Details --></label>
             <section>Contact Details</section>
-        </sections>
-        <sections>
-            <label><!-- Dev &amp; QA Fields --></label>
-            <section>Dev &amp; QA Fields</section>
         </sections>
         <sections>
             <label><!-- Employment Information --></label>

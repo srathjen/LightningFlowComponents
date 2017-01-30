@@ -42,7 +42,7 @@ Public Class Constant_AC {
     public String diagnosisRT;
     public String wishImapctRT;
     public String boardMemberRT;
-    
+    public String hospitalTreatment;
     public Constant_AC() {
         diagnosisRT = 'Diagnosis Verification Review';
         budgetingRt = 'Budgeting';
@@ -80,5 +80,6 @@ Public Class Constant_AC {
         Reimbursement = 'Reimbursement';
         wishImapctRT = 'Wish_Effect';
         boardMemberRT = 'Board Member';
+        hospitalTreatment = 'Hospital Treatment Facility';
     }
 }

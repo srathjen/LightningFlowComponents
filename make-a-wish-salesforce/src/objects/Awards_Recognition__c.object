@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -60,185 +56,276 @@
         <fullName>Award_Name__c</fullName>
         <externalId>false</externalId>
         <label>Award Name</label>
-        <picklist>
-            <controllingField>Award_Type__c</controllingField>
-            <picklistValues>
-                <fullName>Airport Greeter of the Year</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Behind the Scenes Award</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Estrella Award</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Helping Hand Award</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Make-A-Wish Value Awards</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Mentor of the Year</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Peer on the Spot Recognition</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rising Star Award</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Volunteer of the Month</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Volunteer of the Year</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Wish Granter of the Month</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Wish Granter of the Year</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Wishmaker Award</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Completion of Training</fullName>
-                <default>false</default>
-                <controllingFieldValues>Community Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>1st Assignment</fullName>
-                <default>false</default>
-                <controllingFieldValues>Community Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>5th Assignment</fullName>
-                <default>false</default>
-                <controllingFieldValues>Community Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>10th Assignment</fullName>
-                <default>false</default>
-                <controllingFieldValues>Community Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>15th Assignment</fullName>
-                <default>false</default>
-                <controllingFieldValues>Community Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>20th Assignment</fullName>
-                <default>false</default>
-                <controllingFieldValues>Community Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>25th Assignment</fullName>
-                <default>false</default>
-                <controllingFieldValues>Community Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>50th Assignment</fullName>
-                <default>false</default>
-                <controllingFieldValues>Community Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Collegiate Recognition</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Task Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Daily Points of Light Award</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Task Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Hometown Award</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Task Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Make-A-Wish America Volunteer of the Year</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Task Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>State Commission on Volunteerism Award</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Task Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Presidential Service Award – Bronze</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Task Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Presidential Service Award – Gold</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Task Recognition</controllingFieldValues>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Presidential Service Award – Silver</fullName>
-                <default>false</default>
-                <controllingFieldValues>Chapter Task Recognition</controllingFieldValues>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <controllingField>Award_Type__c</controllingField>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Airport Greeter of the Year</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Behind the Scenes Award</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Estrella Award</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Helping Hand Award</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Make-A-Wish Value Awards</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Mentor of the Year</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Peer on the Spot Recognition</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Rising Star Award</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Volunteer of the Month</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Volunteer of the Year</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Wish Granter of the Month</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Wish Granter of the Year</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Wishmaker Award</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Completion of Training</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>1st Assignment</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>5th Assignment</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>10th Assignment</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>15th Assignment</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>20th Assignment</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>25th Assignment</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>50th Assignment</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Collegiate Recognition</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Daily Points of Light Award</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Hometown Award</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Make-A-Wish America Volunteer of the Year</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>State Commission on Volunteerism Award</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Presidential Service Award – Bronze</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Presidential Service Award – Gold</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Presidential Service Award – Silver</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Airport Greeter of the Year</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Behind the Scenes Award</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Estrella Award</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Helping Hand Award</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Make-A-Wish Value Awards</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Mentor of the Year</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Peer on the Spot Recognition</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Rising Star Award</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Volunteer of the Month</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Volunteer of the Year</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Wish Granter of the Month</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Wish Granter of the Year</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Recognition</controllingFieldValue>
+                <valueName>Wishmaker Award</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Community Recognition</controllingFieldValue>
+                <valueName>Completion of Training</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Community Recognition</controllingFieldValue>
+                <valueName>1st Assignment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Community Recognition</controllingFieldValue>
+                <valueName>5th Assignment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Community Recognition</controllingFieldValue>
+                <valueName>10th Assignment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Community Recognition</controllingFieldValue>
+                <valueName>15th Assignment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Community Recognition</controllingFieldValue>
+                <valueName>20th Assignment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Community Recognition</controllingFieldValue>
+                <valueName>25th Assignment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Community Recognition</controllingFieldValue>
+                <valueName>50th Assignment</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Task Recognition</controllingFieldValue>
+                <valueName>Collegiate Recognition</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Task Recognition</controllingFieldValue>
+                <valueName>Daily Points of Light Award</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Task Recognition</controllingFieldValue>
+                <valueName>Hometown Award</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Task Recognition</controllingFieldValue>
+                <valueName>Make-A-Wish America Volunteer of the Year</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Task Recognition</controllingFieldValue>
+                <valueName>State Commission on Volunteerism Award</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Task Recognition</controllingFieldValue>
+                <valueName>Presidential Service Award – Bronze</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Task Recognition</controllingFieldValue>
+                <valueName>Presidential Service Award – Gold</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>Chapter Task Recognition</controllingFieldValue>
+                <valueName>Presidential Service Award – Silver</valueName>
+            </valueSettings>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Award_Type__c</fullName>
         <externalId>false</externalId>
         <label>Award Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Chapter Recognition</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Community Recognition</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Chapter Task Recognition</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Chapter Recognition</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Community Recognition</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Chapter Task Recognition</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Chapter_Name__c</fullName>

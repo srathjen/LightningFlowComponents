@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -72,20 +68,22 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Advanced Section</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Included If</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Excluded If</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Included If</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>Excluded If</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Bookmark__c</fullName>
@@ -114,52 +112,54 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Compare Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>equals</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>not equal</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>startswith</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>endswith</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>contains</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>does not contain</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>less</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>greater</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>less equal</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>greater equal</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>equals</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>not equal</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>startswith</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>endswith</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>contains</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>does not contain</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>less</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>greater</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>less equal</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>greater equal</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Compare_Value__c</fullName>
@@ -224,20 +224,22 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Excel Sheets Option</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Include</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Exclude</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Include</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Exclude</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Excel_Sheets__c</fullName>

@@ -1589,22 +1589,12 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Reference__c</field>
+            <field>DonationDsc__c</field>
             <table>Case.In_Kind_Donation_Reimbursement__r</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>State__c</field>
-            <table>Case.In_Kind_Donation_Reimbursement__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Is_Attached__c</field>
-            <table>Case.In_Kind_Donation_Reimbursement__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Status__c</field>
             <table>Case.In_Kind_Donation_Reimbursement__r</table>
         </columns>
         <columns>

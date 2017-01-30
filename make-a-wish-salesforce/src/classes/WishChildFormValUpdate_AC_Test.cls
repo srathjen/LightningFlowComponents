@@ -29,8 +29,8 @@ public class WishChildFormValUpdate_AC_Test {
         
     }
     public static testMethod void UpdateWishChildandWishFamily(){
-        Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
+       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact newCon = OrientationandTrainingUtil.CreateWishChild();
         Case parentCase = OrientationandTrainingUtil.createParentCase(newCon.Id);
         Case currentCase = OrientationandTrainingUtil.createParentCase(newCon.Id);

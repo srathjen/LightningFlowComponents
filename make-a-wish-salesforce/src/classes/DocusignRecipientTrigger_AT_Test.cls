@@ -15,8 +15,8 @@ public class    DocusignRecipientTrigger_AT_Test{
     static testMethod void dsfsStatusRec(){
     
     Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-    Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-    Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
+    /*Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+    Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
     Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
     Contact contactWishParent =  OrientationandTrainingUtil.CreateWishFamily();    
     Case caseRec = OrientationandTrainingUtil.CreateParentCase(contactWishChild.id);

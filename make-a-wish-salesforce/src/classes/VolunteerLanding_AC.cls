@@ -39,6 +39,25 @@ public class VolunteerLanding_AC {
     public String myId;
     public string trainingName{get;set;}
     
+    /*** Dynamic Content variables */
+    
+    public string featuredImage{get;set;}
+    public string featuredQuote{get;set;}
+    public string welcomeMsg{get;set;}
+    public string headingTitle1{get;set;}
+    public string headingText1{get;set;}
+    public string title1{get;set;}
+    public string image1{get;set;}
+    public string text1{get;set;}
+    public string title2{get;set;}
+    public string image2{get;set;}
+    public string text2{get;set;}
+    public string title3{get;set;}
+    public string image3{get;set;}
+    public string text3{get;set;}
+    
+    
+    
     public VolunteerLanding_AC() {
         myId = ApexPages.currentPage().getParameters().get('event');
         constant = new Constant_AC();
@@ -57,6 +76,27 @@ public class VolunteerLanding_AC {
                                               Heading_Highlight_Title_1__c, Heading_Highlight_Title_2__c,Heading_Text__c, Heading_Highlight_Title_3__c, Heading_Title__c, Welcome_Message__c FROM Dynamic_Content__c WHERE RecordTypeId =: activeVolunteerRecordTypeId AND Chapter_Name__r.Name =: primaryChapter.get(0).CurrentChapter__c AND Active__c = True LIMIT 1];
             
             System.debug('activeVolunteerLandingPageInfoList +++++++++++++++++= ' + activeVolunteerLandingPageInfoList);
+            
+            if(activeVolunteerLandingPageInfoList.size() > 0)
+            {
+                featuredImage = activeVolunteerLandingPageInfoList[0].Featured_Image__c;
+                featuredQuote = activeVolunteerLandingPageInfoList[0].Feature_Quote__c;
+                welcomeMsg = activeVolunteerLandingPageInfoList[0].Welcome_Message__c;
+                headingTitle1 = activeVolunteerLandingPageInfoList[0].Heading_Title__c;
+                headingText1 = activeVolunteerLandingPageInfoList[0].Heading_Text__c;
+                title1 = activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_1__c;
+                image1 = activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_1__c;
+                text1 = activeVolunteerLandingPageInfoList[0].Heading_Highlight_Text_1__c;
+                title2 = activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_2__c;
+                image2 = activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_2__c;
+                text2  = activeVolunteerLandingPageInfoList[0].Heading_Highlight_Text_2__c;
+                title3 = activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_3__c;
+                image3 = activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_3__c;
+                text3 = activeVolunteerLandingPageInfoList[0].Heading_Highlight_Text_3__c;
+                
+                
+            
+            }
         }                                  
     }
     

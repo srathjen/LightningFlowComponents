@@ -20,36 +20,21 @@ public class LeadTrigger_AT_Test{
      public testmethod static void UpdateStatusAsQualified(){ 
         
          Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-         Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-         Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
-         Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
-         Account alabamaAccountRec = OrientationandTrainingUtil.AlabamaAccount();
-         Office__c  officeRec = OrientationandTrainingUtil.createOffice(alabamaAccountRec .Id);
-         Zip_Code__c  zipRec = OrientationandTrainingUtil.createZipcode(officeRec.Id);
-         Condition_Description__c  newDesCription = OrientationandTrainingUtil.createConditionDesCription();
-         ICD_Codes__c  NewIcdCode = OrientationandTrainingUtil.createICDCode(newDesCription.Id);
+         
          Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
          newLead.Sibling_Detail__c = 'aa | bbb | 12 '+'<br/>'+' bb | - | 13' +'<br/>'+' -| cc | 13'+'<br/>'+' dd | dd |-'+'<br/>'+' -| ee |-'+'<br/>'+' -| ee |-'+'<br/>'+' ff| - |-';
          newLead.Child_Age__c = '4';
+         newLead.Sub_Status__c ='Pending Diagnosis Verification';
          insert newLead;
-          newLead.Status = 'Qualified';
-          Test.StartTest();
-          update newLead ;
-          Test.StopTest();
+         newLead.Status = 'Qualified';
+         update newLead ;
+         
       
      }
       /*This method is used to increase the code coverage for dupecheckonContact method when the lead status is updated as 'Qualified'. */ 
      public testmethod static void CreateNewSameContactRecord(){ 
         
          Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-         Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-         Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
-         Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
-         Account alabamaAccountRec = OrientationandTrainingUtil.AlabamaAccount();
-         Office__c  officeRec = OrientationandTrainingUtil.createOffice(alabamaAccountRec .Id);
-         Zip_Code__c  zipRec = OrientationandTrainingUtil.createZipcode(officeRec.Id);
-         Condition_Description__c  newDesCription = OrientationandTrainingUtil.createConditionDesCription();
-         ICD_Codes__c  NewIcdCode = OrientationandTrainingUtil.createICDCode(newDesCription.Id);
          Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
          newLead.Sibling_Detail__c = 'aa | bbb | 12 ';
          newLead.Medical_Professional_First_Name__c = 'Steve';
@@ -57,14 +42,14 @@ public class LeadTrigger_AT_Test{
          newLead.Medical_Professional_Phone__c =  '9600467557';
          newLead.Medical_Professional_Email__c = 'testmawa2@gmail.com';
          newLead.Hospital_Treatment_Facility__c =  'Steve Smith AC';
+         newLead.Sub_Status__c ='Pending Diagnosis Verification';
          newLead.Child_Age__c = '4';
          insert newLead;
          dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatus(newLead.Id); 
          Case partAWish = OrientationandTrainingUtil.CreatePartAWish(newLead.Id);
          newLead.Status = 'Qualified';
-         Test.StartTest();
          update newLead ;
-         Test.StopTest();
+         
       
      }
      
@@ -116,6 +101,7 @@ public class LeadTrigger_AT_Test{
          ICD_Codes__c  NewIcdCode = OrientationandTrainingUtil.createICDCode(newDesCription.Id);
          Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
          newLead.Child_Age__c = '4';
+         newLead.Sub_Status__c ='Pending Diagnosis Verification';
          insert newLead;
          newLead.Status = 'Eligibility Review';
          newLead.Treating_Medical_Professional_Email__c  = 'testmawa3@gmail.com';
@@ -139,6 +125,7 @@ public class LeadTrigger_AT_Test{
          ICD_Codes__c  NewIcdCode = OrientationandTrainingUtil.createICDCode(newDesCription.Id);
          Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
          newLead.Status = 'Referred';
+         newLead.Sub_Status__c ='Pending Diagnosis Verification';
          insert newLead;
          newLead.Status = 'Part A Pending';
          newLead.Treating_Medical_Professional_Email__c  = 'testmawa3@gmail.com';
@@ -154,8 +141,8 @@ public class LeadTrigger_AT_Test{
      public testmethod static void CreateRelationShipRecord(){ 
         
          Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-         Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-         Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+         Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
          Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
          Contact trateProfContact = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
          Contact medicalProfContact = OrientationandTrainingUtil.CreateMedicalProfContact();
@@ -166,13 +153,13 @@ public class LeadTrigger_AT_Test{
          newLead.Medical_Professional_ContactId__c = medicalProfContact.Id;
          newLead.Wish_Family_ContactId__c = wishFamily.Id;
          newLead.Sibling_Detail__c = 'aa | bbb | 12';
+         newLead.Sub_Status__c ='Pending Diagnosis Verification';
          insert newLead;
          dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatus(newLead.Id); 
          Case partAWish = OrientationandTrainingUtil.CreatePartAWish(newLead.Id);
          newLead.Status = 'Qualified';
-         Test.StartTest();
          update newLead ;
-         Test.StopTest();
+         
       
      }
 }

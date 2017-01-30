@@ -43,6 +43,7 @@ Public class TaskTrigger_Test
         Task newTask = new Task();
         newTask.whatId = currCase.id;
         newTask.subject = 'Wish Child Birthday Reminder';
+        newTask.OwnerId = userInfo.getUserId();
         insert newTask;
         
     }

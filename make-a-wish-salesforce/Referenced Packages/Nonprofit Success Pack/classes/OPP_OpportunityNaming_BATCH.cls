@@ -5,5 +5,5 @@ This read-only file shows the class's global constructors,
 methods, variables, and properties.
 To enable code to compile, all methods return null.
 */
-global class OPP_OpportunityNaming_BATCH implements Database.Batchable<SObject> {
+global class OPP_OpportunityNaming_BATCH implements Database.Batchable<SObject>, System.Schedulable {
 }

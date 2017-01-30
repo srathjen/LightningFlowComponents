@@ -1,1 +1,0 @@
-<aura:event type="Component" description="Fires event to Run DDP when the user is finished selecting documents." />

@@ -53,6 +53,7 @@
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Opportunity.Donation,Opportunity.Matching_Gift,Opportunity.MajorGift</value>
         </criteriaItems>

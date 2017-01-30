@@ -23,10 +23,6 @@
         <type>Visualforce</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -90,20 +86,22 @@
         <externalId>false</externalId>
         <inlineHelpText>When an Engagement Plan Task&apos;s Assigned To field is left blank, who should the Task be assigned to?</inlineHelpText>
         <label>Default Assignee</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Owner of Object for Engagement Plan</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>User Creating Engagement Plan</fullName>
-                <default>true</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Owner of Object for Engagement Plan</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>User Creating Engagement Plan</fullName>
+                    <default>true</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Description__c</fullName>
@@ -121,20 +119,22 @@
         <externalId>false</externalId>
         <inlineHelpText>Should Tasks with Due Dates on a weekend day be scheduled for the Friday before the weekend or the Monday after? This applies only if Skip Weekend is selected.</inlineHelpText>
         <label>Reschedule To</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Monday</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Friday</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Monday</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>Friday</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Skip_Weekends__c</fullName>

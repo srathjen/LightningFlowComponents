@@ -10,8 +10,8 @@ public class RelationshipsViewer_AC_Test{
     
     /*This EditContacts() is used to edit wish child and wish family contacts.*/
     public testmethod static void EditContacts(){
-        Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
+        /*Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon(); 
         Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c relationship = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,wishFamily.Id);
@@ -29,8 +29,8 @@ public class RelationshipsViewer_AC_Test{
     /*This UpdateWishChild() is used to update wish child  contact.*/
     public testmethod static void UpdateWishChild(){
         List<Contact> wishchildList = new List<Contact>();
-        Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
+      /*  Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon(); 
         Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c relationship = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,wishFamily.Id);
@@ -65,8 +65,8 @@ public class RelationshipsViewer_AC_Test{
     /*This UpdateWishChild() is used to update wish child  contact Email.*/
     public testmethod static void UpdateWishChildEmail(){
         List<Contact> wishchildList = new List<Contact>();
-        Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
+       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon(); 
         Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c relationship = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,wishFamily.Id);
@@ -97,8 +97,8 @@ public class RelationshipsViewer_AC_Test{
         List<Contact> wishFamilyList = new List<Contact>();
         PageReference pageRef = Page.RelationshipsViewer_VF; 
         Test.setCurrentPage(pageRef);
-        Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
+       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon(); 
         Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
         

@@ -41,7 +41,9 @@ public class WishBudgetForm_AC{
     public Boolean isbudgetApprovalExist{get; set;}
     public set<Id> participentSet;
     Id RecentApproverID;
+    
     public WishBudgetForm_AC(ApexPages.StandardController controller) {
+        
         RecentApproverID=null;
         UserIdentiy=false;
         isbudgetApprovalExist= false;
@@ -114,6 +116,7 @@ public class WishBudgetForm_AC{
         LoadData();
         summary();
         Totalsummary();
+        System.debug('Final Data is:'+ SumExpensewrappers );
         ORG_LNK = 'https://'+URL.getSalesforceBaseUrl().getHost();
         if(!String.isBlank(recordID)){
             aSW = new ApprovalList();
@@ -206,6 +209,8 @@ public class WishBudgetForm_AC{
             }
                        
         }
+        
+       
     }
     
    /* public string transCodeid {get;set;}
@@ -262,7 +267,9 @@ public class WishBudgetForm_AC{
         return Options;
     
     }
-    public Void addExpenseType() {
+    public PageReference addExpenseType() {
+        
+        WEtypeExpand=null;
         if(newExpenseType != null) {
             wishExpenseTypes.add(newExpenseType);
             System.debug('Test add expence 1:' + newExpenseType );
@@ -290,11 +297,12 @@ public class WishBudgetForm_AC{
             LoadData();
             summary();
             Totalsummary();
+            WEtypeExpand= wishExpensewrap.size() - 1 + 'collapsed';
         }
         
-        //PageReference pageRef = new PageReference('/apex/WishBudgetForm_VF?caseId='+caseId);
+        PageReference pageRef = new PageReference('/apex/WishBudgetForm_VF?caseId='+caseId);
         //pageRef.setRedirect(True);
-        //return pageRef;
+        return pageRef;
     }
     
     public void LoadTemplates()
@@ -321,13 +329,12 @@ public class WishBudgetForm_AC{
             transListT=null;  
             system.debug('Tansaction Code 1.11:' + curExpense); 
         } 
-        //saveWishExpenses();
-        
          system.debug('Tansaction Code 1.11:' + wishExpensewrap);
     }
     
     public PageReference addExpense() {
     //WEtypeExpand='1collapsed';
+    
     system.debug('Tansaction Code 1:' + TransCodesWrap);
     system.debug('Tansaction Code 1:' + expenseType);
         List<Wish_Expense_Transaction_Code__c> transListW= TransCodesWrap.get(expenseType);
@@ -370,7 +377,10 @@ public class WishBudgetForm_AC{
         
         PageReference pageRef = new PageReference('/apex/WishBudgetForm_VF?caseId='+caseId);
         //PageReference pageRef= SaveExpenses();
+        //pageRef.setRedirect(True);
         return pageRef ;
+        //return null;
+        
              
     }
  
@@ -386,9 +396,10 @@ public class WishBudgetForm_AC{
                     userIdsSet.add(getGroupUsers.UserOrGroupId);
                 }
             }
-            userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE ((Id IN : userIdsSet AND Profile.Name != 'Active Volunteer') OR UserRole.Name = 'National Staff' ) AND IsActive=true  ];
+            userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE ((Id IN : userIdsSet AND Profile.Name != 'Active Volunteer')) AND IsActive=true  ];
+            //userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE ((Id IN : userIdsSet AND Profile.Name != 'Active Volunteer') OR UserRole.Name = 'National Staff' ) AND IsActive=true  ];
         } else {
-            userList = [SELECT Id, Name, Profile.Name, UserRole.Name FROM User WHERE (UserRole.Name = 'National Staff' OR Profile.Name = 'System Administrator') AND IsActive=true];
+            //userList = [SELECT Id, Name, Profile.Name, UserRole.Name FROM User WHERE (UserRole.Name = 'National Staff' OR Profile.Name = 'System Administrator') AND IsActive=true];
         }
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Select Approver'));
@@ -410,6 +421,7 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
         Set<Id> approvedCaseIds = new Set<Id>();
         String budgetStatus='';
         String projectedStatus='';
+        System.debug('Save wrappers2:');
         saveWishExpenses();
         System.debug('>>>>>>>>>>approverId>>>>>>>>>>>>>>>'+approverId);
         List<Wish_Expense__c> recordApprovalStatusUpdateList = new List<Wish_Expense__c>();
@@ -481,11 +493,19 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
     }
     
     public PageReference SaveExpenses() {
+        System.debug('Save wrappers1:');
         saveWishExpenses();
         LoadData();
         summary();
         Totalsummary();
         
+        PageReference pageRef = new PageReference('/apex/WishBudgetForm_VF?caseId='+caseId);
+        pageRef.setRedirect(True);
+        return pageRef;
+    }
+    
+    public PageReference ReloadPage() {
+        System.debug('Save wrappers1:');
         PageReference pageRef = new PageReference('/apex/WishBudgetForm_VF?caseId='+caseId);
         pageRef.setRedirect(True);
         return pageRef;
@@ -498,6 +518,7 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
             wrappers.addall(wishExpensewrap.get(type));
         }
         List<Wish_Expense__c> wishexpenses = new List<Wish_Expense__c>();
+        System.debug('Save wrappers3:'+wishExpensewrap);
         for(Wish_Expense__c wrapper : wrappers){
             Wish_Expense__c expense = new Wish_Expense__c();
             if(wrapper.id != Null)
@@ -540,8 +561,11 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
         }
         
         if(wishexpenses.size()>0){
-            upsert wishexpenses;
+           upsert wishexpenses;
+           //insert wishexpenses;
         }
+        
+        
     }
     
     public void summary() {
@@ -554,6 +578,8 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
         Decimal totalBudInKind=0;
         Decimal totalProjInKind=0;
         Decimal totalActInKind=0;
+        Decimal totalFEPCash=0;
+        Decimal totalFEPInKind=0;
         Double Decrease;
         for (String type: wishExpensewrap.keySet()){
             expenseSummarywrapper sumWrap = new expenseSummarywrapper();
@@ -598,19 +624,22 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
             totalBudInKind=sumWrap.sumBudgetInKind;
             totalProjInKind=sumWrap.sumprojectedInkind;
             totalActInKind=sumWrap.sumActualInKind;
-            if(totalBudCash + totalBudInKind >0 &&  totalProjcash+ totalProjInKind>0 )
+            totalFEPCash=sumWrap.sumFEPostedCash;
+            totalFEPInKind=sumWrap.sumFEPostedInKind;
+            /*if(totalBudCash + totalBudInKind >0 &&  totalProjcash + totalProjInKind >0 )
             {
                 Decrease= (totalProjcash+ totalProjInKind) - (totalBudCash + totalBudInKind);
                 Decrease= (Decrease/ (totalBudCash + totalBudInKind))*100;
                 sumWrap.sumBtoPDiff=Decrease.round();
             }
-            if(totalProjcash+ totalProjInKind>0 && totalActCash+ totalActInKind >0)
+            if(totalProjcash+ totalProjInKind>0 && totalFEPCash+ totalFEPInKind>0)
             {
-               
-                Decrease=  (totalActCash+ totalActInKind) -(totalProjcash+ totalProjInKind) ;
-                Decrease= (Decrease/ (totalActCash+ totalActInKind))*100;
-                sumWrap.sumPtoADiff=Decrease.round();
-            }
+               Decrease=  (totalActCash+ totalActInKind) -(totalProjcash+ totalProjInKind) ;
+               Decrease= (Decrease/ (totalActCash+ totalActInKind))*100;
+               sumWrap.sumAtoFEPDiff=Decrease.round();
+            }*/
+            sumWrap.sumBtoPDiff = (totalBudCash + totalBudInKind) - (totalProjcash + totalProjInKind);
+            sumWrap.sumAtoFEPDiff=(totalActCash+ totalActInKind) - (totalFEPCash+ totalFEPInKind) ;
             SumExpensewrappers.put(type, sumWrap);
             
         }
@@ -618,6 +647,7 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
     }
     
     public PageReference removeExpense(){
+        WEtypeExpand=null;
         Integer indexVal = Integer.valueof(system.currentpagereference().getparameters().get('index'));
         System.debug('index>>>>>>>>'+indexVal);
         String expenType = system.currentpagereference().getparameters().get('expenType');
@@ -643,12 +673,14 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
     }   
     
     public void Totalsummary() {
-         Decimal totalBudCash=0;
+        Decimal totalBudCash=0;
         Decimal totalProjcash=0;
         Decimal totalActCash=0;
         Decimal totalBudInKind=0;
         Decimal totalProjInKind=0;
         Decimal totalActInKind=0;
+        Decimal totalFEPCash=0;
+        Decimal totalFEPInKind=0;
         Double Decrease;
         expenseSummarywrapper sumWrap = new expenseSummarywrapper();
         List<Wish_Expense__c> wrappers= new List<Wish_Expense__c>();
@@ -695,7 +727,9 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
         totalBudInKind=sumWrap.sumBudgetInKind;
         totalProjInKind=sumWrap.sumprojectedInkind;
         totalActInKind=sumWrap.sumActualInKind;
-        if(totalBudCash + totalBudInKind >0 &&  totalProjcash+ totalProjInKind>0 )
+        totalFEPCash=sumWrap.sumActualInKind;
+        totalFEPInKind=sumWrap.sumFEPostedInKind ;
+        /*if(totalBudCash + totalBudInKind >0 &&  totalProjcash+ totalProjInKind>0 )
         {
             Decrease= (totalProjcash+ totalProjInKind) - (totalBudCash + totalBudInKind);
             Decrease= (Decrease/ (totalBudCash + totalBudInKind))*100;
@@ -706,8 +740,10 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
            
             Decrease=  (totalActCash+ totalActInKind) -(totalProjcash+ totalProjInKind) ;
             Decrease= (Decrease/ (totalActCash+ totalActInKind))*100;
-            sumWrap.sumPtoADiff=Decrease.round();
-        }
+            sumWrap.sumAtoFEPDiff=Decrease.round();
+        }*/
+        sumWrap.sumBtoPDiff=(totalBudCash + totalBudInKind) - (totalProjcash+ totalProjInKind) ;
+        sumWrap.sumAtoFEPDiff=(totalActCash+ totalActInKind) -(totalFEPCash+ totalFEPInKind);
         TotalExpensewrappers=sumWrap;
      
     }
@@ -791,7 +827,7 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
         public Decimal sumFEPostedCash {get;set;}
         public Decimal sumFEPostedInKind {get;set;}
         public Decimal sumBtoPDiff {get;set;}
-        public Decimal sumPtoADiff{get;set;}            
+        public Decimal sumAtoFEPDiff{get;set;}            
         public expenseSummarywrapper() {
             sumBudgetCash= 0;
             sumBudgetInKind=0;
@@ -801,6 +837,8 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
             sumActualInKind=0;
             sumFEPostedCash = 0;
             sumFEPostedInKind =0;
+            sumBtoPDiff=0;
+            sumAtoFEPDiff=0;
                 
         }
     } 

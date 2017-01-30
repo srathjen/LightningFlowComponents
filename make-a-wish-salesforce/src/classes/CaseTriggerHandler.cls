@@ -30,7 +30,7 @@ public class CaseTriggerHandler {
         for(office__c currOffice : [SELECT Office_Id__c, Chapter__r.name,Chapter__c  FROM Office__c WHERE Chapter__c in : chapterIds]){
             accountOfficeMap.put(currOffice.Chapter__r.Name,currOffice );
         }
-        List<Case> lstParentWishes=[SELECT Id, RecordTypeId, Unique_Wish_Record_Identifier__c,Fund_Id__c, ChapterName__c,ChapterName__r.Name  FROM Case WHERE Id In: ParentIdsSet and RecordTypeId =: recTypeId Order BY CreatedDate desc];
+        List<Case> lstParentWishes=[SELECT Id, RecordTypeId, Subject, Unique_Wish_Record_Identifier__c,Fund_Id__c, ChapterName__c,ChapterName__r.Name  FROM Case WHERE Id In: ParentIdsSet and RecordTypeId =: recTypeId Order BY CreatedDate desc];
         List<Case> lstParentWisheRecordTypes = [SELECT Id, Unique_Wish_Record_Identifier__c, ChapterName__c,ChapterName__r.Name FROM Case WHERE RecordTypeId =: recTypeId and  Unique_Wish_Record_Identifier__c !=null and Is_Migrated_Record__c = false Order BY CreatedDate desc Limit 2];
         System.debug('Parent Wishes 1:' + lstParentWishes);
         System.debug('Parent Wishes 2:' + lstParentWisheRecordTypes );
@@ -60,10 +60,11 @@ public class CaseTriggerHandler {
                 }
             }
             increment=increment+1;
+            parentWishes.Subject = parentWishes.Subject+' - '+parentWishes.Unique_Wish_Record_Identifier__c;
         }
         System.debug('Parent Wishes 3:' + lstParentWishes);
-        if(lstParentWishes.size() > 0)
-            update lstParentWishes;
+         if(lstParentWishes.size() > 0)
+                   update lstParentWishes;
     } 
     
     /* Used to create action track for different stages based on Chapter and used to pull Case team members to child wishes*/
@@ -110,15 +111,19 @@ public class CaseTriggerHandler {
     }    
     
     //Used to create child wish for Parent wish
-    public static void createChildWish (List<Case> childCreationWishList, String wishType) {
+    public static void createChildWish (List<Case> childCreationWishList, String wishType, Set<Id> parentIdSet) {
         Constant_AC  constant = new Constant_Ac(); 
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Id wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         
         List<Case> newWishList = new List<Case>();
+        Map<Id, String> wishContactMap = new Map<Id, String>();
+        for(Case caseInfo : [SELECT Id, Contact.Name FROM Case WHERE Id IN : parentIdSet]) {
+            wishContactMap.put(caseInfo.Id, caseInfo.Contact.Name);
+        }
         for(Case wishDetails : childCreationWishList) {
             if(wishDetails.RecordTypeId == parentWishRecordTypeId) {
-                Case newWish = new Case(ChapterName__c = wishDetails.ChapterName__c, Wish_Type__c ='Standard', Subject = wishType.split('-')[0], ParentId = wishDetails.Id, AccountId=wishDetails.AccountId,ContactId=wishDetails.ContactId,Origin = 'Web',RecordTypeId=wishType.split('-')[1], OwnerId = wishDetails.OwnerId);
+                Case newWish = new Case(ChapterName__c = wishDetails.ChapterName__c, Wish_Type__c ='Standard', Subject = wishType.split('-')[0] +' - '+wishContactMap.get(wishDetails.Id), ParentId = wishDetails.Id, AccountId=wishDetails.AccountId,ContactId=wishDetails.ContactId,Origin = 'Web',RecordTypeId=wishType.split('-')[1], OwnerId = wishDetails.OwnerId);
                 newWishList.add(newWish);
             } else{
                 Case newWish = new Case(ChapterName__c = wishDetails.ChapterName__c, Wish_Type__c = wishDetails.Wish_type__c ,Subject = wishType.split('-')[0], ParentId = wishDetails.ParentId, AccountId=wishDetails.AccountId,ContactId=wishDetails.ContactId,Origin = 'Web',RecordTypeId=wishType.split('-')[1], OwnerId = wishDetails.OwnerId);
@@ -130,7 +135,7 @@ public class CaseTriggerHandler {
         }
     }
     
-   
+    
     // When the case status is updated the corresponding lead status should be update.
     public static void UpdateLeadStatus(List<Case> caseList){
         Map<Id,Case> caseMap = new Map<Id,Case>();
@@ -435,7 +440,7 @@ dbLeads.Status = 'DNQ';
             update casebudgetapprovals;
         }
     }
-   
+    
     
     //1.Used to create list of task for volunteers when the wish determination case is created.
     //2.Based on "Wish Planning" recordtype, we are pulling the list of task which are stored under Chapter Action Track" object.
@@ -944,9 +949,11 @@ dbLeads.Status = 'DNQ';
         }
         
         List<CaseTeamMember> updateTeamRole = new List<CaseTeamMember>();
+        List<Case> childCaseList = new List<Case>();
         Set<Id> childWishIdsSet = new Set<Id>();
-        for(Case childCase : [SELECT Id FROM Case WHERE ParentId IN : parentWishIds]) {
+        for(Case childCase : [SELECT Id FROM Case WHERE ParentId IN : parentWishIds AND RecordTypeId !=: parentWishRecordTypeId]) {
             childWishIdsSet.add(childCase.Id);
+            childCaseList.add(childCase);
         }
         Set<Id> memberIdSet = new Set<Id>();
         Set<Id> volunteerUsersSet = new Set<Id>();
@@ -985,6 +992,19 @@ dbLeads.Status = 'DNQ';
         if(removeContactShareList.size() > 0) {
             delete removeContactShareList;
         }
+        
+        //Used to close all Child Cases
+        List<Case> closeCaseList = new List<Case>();
+        if(childCaseList.size() > 0) {
+            for(Case closeChildCase : childCaseList) {
+                closeChildCase.status = 'Closed';
+                closeCaseList.add(closeChildCase);
+            }
+            if(closeCaseList.size() > 0) {
+                update closeCaseList;
+            }
+        }
+        
         
     }
     
@@ -1138,7 +1158,7 @@ dbLeads.Status = 'DNQ';
             
         }
     }
-
+    
     public static void updateChildCase(List<Case> parentCaseList){
         Map<Id,Case> parentCaseMap = new Map<Id,Case>();
         Map<Id,Case> updateChildCaseMap = new Map<Id,Case>();
@@ -1150,10 +1170,14 @@ dbLeads.Status = 'DNQ';
         String wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
         String wishEffectRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishEffectRT).getRecordTypeId();
         
+        Map<Id, String> parentCaseContactMap = new Map<Id, String>();
         for(Case processParentCase : parentCaseList){
             parentCaseMap.put(processParentCase.Id,processParentCase); 
         }
         
+        for(Case parentCaseInfo : [SELECT Id, Contact.Name, RecordTypeId FROM Case WHERE Id IN : parentCaseMap.keySet() AND RecordTypeId =: parentWishRecordTypeId]) {
+            parentCaseContactMap.put(parentCaseInfo.Id, parentCaseInfo.Contact.Name);
+        }
         for(Case dbParentCase : [SELECT Id,OwnerId,Status,ParentId,AccountId,RecordTypeId from Case WHERE ParentId =: parentCaseMap.keySet() AND RecordTypeId  =: wishDeterminationRecordTypeId AND isClosed = false]){
             if(parentCaseMap.containsKey(dbParentCase.ParentId)){
                 dbParentCase.OwnerId = parentCaseMap.get(dbParentCase.ParentId).OwnerId;
@@ -1165,11 +1189,11 @@ dbLeads.Status = 'DNQ';
             update updateChildCaseMap.values();
         
         for(Case ProcessChilldCaseId : updateChildCaseMap.values()){
-            Case newPlanningWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c,Wish_Type__c ='Standard', Subject = 'Wish Planning',ParentId = ProcessChilldCaseId.ParentId,AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishPlanningRecordTypeId,OwnerId = ProcessChilldCaseId.OwnerId);
+            Case newPlanningWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c,Wish_Type__c ='Standard', Subject = 'Wish Planning - '+parentCaseContactMap.get(ProcessChilldCaseId.ParentId),ParentId = ProcessChilldCaseId.ParentId,AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishPlanningRecordTypeId,OwnerId = ProcessChilldCaseId.OwnerId);
             insertchildCaseList.add(newPlanningWish); 
-            Case newGrantingWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Granting', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishGrantRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
+            Case newGrantingWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Granting - '+parentCaseContactMap.get(ProcessChilldCaseId.ParentId), ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishGrantRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
             insertchildCaseList.add(newGrantingWish); 
-            Case newImpactWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Impact', ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishEffectRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
+            Case newImpactWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Impact - '+parentCaseContactMap.get(ProcessChilldCaseId.ParentId), ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishEffectRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
             insertchildCaseList.add(newImpactWish); 
         }
         
@@ -1192,6 +1216,9 @@ dbLeads.Status = 'DNQ';
     }
     
     public static void grantedWishCount(set<Id> wishIdsSet){
+        Constant_AC  constant = new Constant_Ac();    
+        String wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+        
         string key;
         set<string> parentWishIdsSet = new set<string>();
         Map<Id,Integer> volunteerWithCount = new Map<id,Integer>();
@@ -1223,6 +1250,16 @@ dbLeads.Status = 'DNQ';
         }
         if(updateGrantedWishCount.size() > 0){
             Update updateGrantedWishCount;
+        }
+        
+        List<Case> closePlanningCaseList = new List<Case>();
+        for(Case anticipationCaseInfo : [SELECT Id, RecordTypeId, Status FROM Case WHERE isClosed = false AND RecordTypeId =: wishPlanningRecordTypeId AND ParentId IN : wishIdsSet]) {
+            anticipationCaseInfo.status = 'Closed';
+            closePlanningCaseList.add(anticipationCaseInfo);
+        }
+        
+        if(closePlanningCaseList.size() > 0) {
+            update closePlanningCaseList;
         }
     }
     
@@ -1318,18 +1355,37 @@ dbLeads.Status = 'DNQ';
         }
     }
     
-    public void createVolunteerOpportunity(Map<Id,Case> VolunteercaseMap){
-     RecursiveTriggerHandler.isFirstTime = false;
-     Id volunteerOppWishRecordTypeId = Schema.SObjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get('Wish').getRecordTypeId();
-     Map<Id,Chapter_Role__c> chapterRoleMap = new Map<Id,Chapter_Role__c>();
-     List<Volunteer_Opportunity__c> volunteerOppList = new List<Volunteer_Opportunity__c>();
-        for(Chapter_Role__c currentChapterRole :[SELECT ID,Chapter_Name__c,Chapter_Name__r.Name,Role_Name__r.Name FROM Chapter_Role__c WHERE Role_Name__r.Name =: 'Wish Granter' AND Chapter_Name__c IN: VolunteercaseMap.keySet()]){
-                chapterRoleMap.put(currentChapterRole.Chapter_Name__c,currentChapterRole);
+    //1.Used to create 2 volunteer oppotunity when the case status is changed to 'Ready to Assign'
+    //2.Used to add case related chapter volunteer manager into case team with role name "Volunteer manager"
+    public static void createVolunteerOpportunity(Map<Id,Case> readyToAssignParentCaseMap, Set<Id> readtToAssignChapterIdSet){
+        
+        Constant_AC cons = new Constant_AC();
+        Id chapterAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(cons.chapterRT).getRecordTypeId();
+        RecursiveTriggerHandler.isFirstTime = false;
+        Id volunteerOppWishRecordTypeId = Schema.SObjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get('Wish').getRecordTypeId();
+        Map<Id,Chapter_Role__c> chapterRoleMap = new Map<Id,Chapter_Role__c>();
+        List<Volunteer_Opportunity__c> volunteerOppList = new List<Volunteer_Opportunity__c>();
+        
+        for(Chapter_Role__c currentChapterRole :[SELECT ID, Chapter_Name__c, Chapter_Name__r.Name, Role_Name__r.Name FROM Chapter_Role__c WHERE Role_Name__r.Name =: 'Wish Granter' AND Chapter_Name__c IN : readtToAssignChapterIdSet]){
+            chapterRoleMap.put(currentChapterRole.Chapter_Name__c, currentChapterRole);
         }
+        
+        Map<Id, Id> accountVolunteerManagerMap = new Map<Id, Id>(); //Used to hold Chater Account Id & its Volunteer Manager Id
+        for(Account chaterAccountInfo : [SELECT Id, Name, Volunteer_Manager__c, RecordTypeId FROM Account WHERE RecordTypeId =: chapterAccountRTId AND Id IN : readtToAssignChapterIdSet AND Volunteer_Manager__c != NULL]) {
+            accountVolunteerManagerMap.put(chaterAccountInfo.Id, chaterAccountInfo.Volunteer_Manager__c);
+        }
+        
+        Map<Id, String> caseTeamRoleNameMap = new Map<Id, String>();
+        Map<String, Id> caseTeamRoleIdMap = new Map<String, Id>();
+        for(CaseTeamRole caseTeamRoleInfo : [SELECT Id, Name FROM CaseTeamRole]) {
+            caseTeamRoleNameMap.put(caseTeamRoleInfo.Id, caseTeamRoleInfo.Name);
+            caseTeamRoleIdMap.put(caseTeamRoleInfo.Name, caseTeamRoleInfo.Id);
+        }
+        
         if(chapterRoleMap.size() > 0){
-            for(Case currentCase : VolunteercaseMap.Values()){
-                    for(Integer i=0 ;i<=1;i++){
-                     if(chapterRoleMap.containsKey(currentCase.ChapterName__c)){
+            for(Case currentCase : readyToAssignParentCaseMap.Values()){
+                for(Integer i=0 ;i<=1;i++){
+                    if(chapterRoleMap.containsKey(currentCase.ChapterName__c)){
                         Volunteer_Opportunity__c volunteerOpp = new Volunteer_Opportunity__c();
                         volunteerOpp.Chapter_Role_Opportunity__c = chapterRoleMap.get(currentCase.ChapterName__c).Id;
                         volunteerOpp.Wish__c = currentCase.id;
@@ -1339,20 +1395,36 @@ dbLeads.Status = 'DNQ';
                         volunteerOppList.add(volunteerOpp);
                     }
                 }
-           }
+            }
             if(volunteerOppList.size()>0){
                 insert volunteerOppList;
             }
         }
+        
+        List<CaseTeamMember> readyToAssignCaseTeamMemberList = new List<CaseTeamMember>();
+        for(Case changeCaseOwner : readyToAssignParentCaseMap.values()) {
+            CaseTeamMember newCaseTeamMember = new CaseTeamMember();
+            newCaseTeamMember.ParentId = changeCaseOwner.Id;
+            if(caseTeamRoleIdMap.containsKey('Volunteer Manager')) {
+                newCaseTeamMember.TeamRoleId = caseTeamRoleIdMap.get('Volunteer Manager');
+            }
+            newCaseTeamMember.MemberId = changeCaseOwner.OwnerId;
+            readyToAssignCaseTeamMemberList.add(newCaseTeamMember);
+        }
+        if(readyToAssignCaseTeamMemberList.size() > 0) {
+            //insert readyToAssignCaseTeamMemberList;
+        }
     }
-	
-	//This method is used to create "Diagnosis Verification Review" Task for "Eligibility Review" Case Owner    
+    
+    //This method is used to create "Diagnosis Verification Review" Task for "Eligibility Review" Case Owner    
     public static void CreateDiagnosisVerificationReview(List<Case> eligibilityReviewCaseList) {
         List<Task> DiagnosisVerificationTaskList = new List<Task>();
         for(Case reviewCase : eligibilityReviewCaseList) {
             Task newDiagnosisVerificationTask = new Task();
             newDiagnosisVerificationTask.OwnerId = reviewCase.OwnerId;
-            newDiagnosisVerificationTask.WhatId = reviewCase.Id;
+            if(reviewCase.Lead__c != null) {
+                newDiagnosisVerificationTask.WhoId = reviewCase.Lead__c;
+            }
             newDiagnosisVerificationTask.Subject = 'Diagnosis Verification Review';
             newDiagnosisVerificationTask.ActivityDate = Date.today().addDays(1);
             DiagnosisVerificationTaskList.add(newDiagnosisVerificationTask);
@@ -1428,5 +1500,199 @@ dbLeads.Status = 'DNQ';
                 insert contactToShareList;
             }
         }
+    }
+    
+    //Used to update Case Team Role & to create new Case Team Member based on case Status
+    public static void CreateAndUpdateUserCaseTeamRole(Map<Id, Case> updateVolunteerManagerCaseTeamMap, Set<Id>volunteerManagerIdSet, Set<Id>wishCoordinatorIdSet) {
+        
+        Map<Id,String> teamRoleNameMap = new Map<Id, String>();
+        Map<String,Id> teamRoleIdMap = new Map<String, Id>();
+        Map<Id, Id> ownerManagerMap = new Map<Id, Id>();
+        Set<Id> caseOwnerIdSet = new Set<Id>();
+        for(Case getOwner: updateVolunteerManagerCaseTeamMap.values()) {
+            caseOwnerIdSet.add(getOwner.OwnerId);
+        }
+        for(User userManagerInfo : [SELECT Id, ManagerId FROM User WHERE Id IN : caseOwnerIdSet]) {
+            ownerManagerMap.put(userManagerInfo.Id, userManagerInfo.ManagerId);
+        }
+        for(CaseTeamRole caseTeamRoleInfo : [SELECT Id, Name FROM CaseTeamRole]) {
+            teamRoleNameMap.put(caseTeamRoleInfo.Id, caseTeamRoleInfo.Name);
+            teamRoleIdMap.put(caseTeamRoleInfo.Name, caseTeamRoleInfo.Id);
+        }
+        
+        if(updateVolunteerManagerCaseTeamMap.size() > 0) {
+            List<CaseTeamMember> inActiveAndActiveVMUpsertList = new List<CaseTeamMember>();
+            Map<Id, List<CaseTeamMember>> caseTeamMemberMap = new Map<Id, List<CaseTeamMember>>();
+            Map<Id,Set<String>> dbCaseTeamMemberMap = new Map<Id, Set<String>>();
+            Map<String, Id> activeCaseTeamMap = new Map<String, Id>();
+            Map<String, Id> inActiveCaseTeamMap = new Map<String, Id>();
+            Map<Id, Set<Id>> caseTeamMap = new Map<Id, Set<Id>>();
+            
+            for(CaseTeamMember caseTeamInfo : [SELECT Id, ParentId, MemberId, TeamRoleId, TeamRole.Name FROM CaseTeamMember WHERE (TeamRole.Name = 'Volunteer Manager' OR TeamRole.Name = 'Volunteer Manager (Inactive)' OR TeamRole.Name = 'Wish Coordinator (Inactive)' OR TeamRole.Name = 'Wish Coordinator' OR TeamRole.Name = 'Intake Manager') AND ParentId IN : updateVolunteerManagerCaseTeamMap.keySet()]) {
+                if(caseTeamInfo.TeamRole.Name == 'Volunteer Manager' || caseTeamInfo.TeamRole.Name == 'Wish Coordinator' ) {
+                    activeCaseTeamMap.put(caseTeamInfo.ParentId+'-'+caseTeamInfo.MemberId,caseTeamInfo.MemberId);
+                } else if(caseTeamInfo.TeamRole.Name == 'Volunteer Manager (Inactive)' || caseTeamInfo.TeamRole.Name == 'Wish Coordinator (Inactive)') {
+                    inActiveCaseTeamMap.put(caseTeamInfo.ParentId+'-'+caseTeamInfo.MemberId,caseTeamInfo.MemberId);
+                }
+                if(caseTeamMemberMap.containsKey(caseTeamInfo.ParentId)) {
+                    caseTeamMemberMap.get(caseTeamInfo.ParentId).add(caseTeamInfo);
+                    caseTeamMap.get(caseTeamInfo.ParentId).add(caseTeamInfo.MemberId);
+                } else {
+                    caseTeamMemberMap.put(caseTeamInfo.ParentId, new List<CaseTeamMember>{caseTeamInfo});
+                    caseTeamMap.put(caseTeamInfo.ParentId, new Set<Id>{caseTeamInfo.MemberId});
+                }
+            }
+            
+            for(Case updateTeamMember : updateVolunteerManagerCaseTeamMap.values()) {
+                if(caseTeamMemberMap.containsKey(updateTeamMember.Id)) {
+                    if(caseTeamMap.get(updateTeamMember.Id).contains(updateTeamMember.OwnerId)) {
+                        for(CaseTeamMember caseTeamMem : caseTeamMemberMap.get(updateTeamMember.Id)) {
+                            if(caseTeamMem.TeamRole.Name == 'Volunteer Manager' || caseTeamMem.TeamRole.Name == 'Wish Coordinator') {
+                                if(volunteerManagerIdSet.contains(caseTeamMem.ParentId) && caseTeamMem.TeamRole.Name == 'Volunteer Manager') {
+                                    caseTeamMem.TeamRoleId = teamRoleIdMap.get(caseTeamMem.TeamRole.Name+' (Inactive)');
+                                    inActiveAndActiveVMUpsertList.add(caseTeamMem);
+                                } else if(wishCoordinatorIdSet.contains(caseTeamMem.ParentId) && caseTeamMem.TeamRole.Name == 'Wish Coordinator') {
+                                    caseTeamMem.TeamRoleId = teamRoleIdMap.get(caseTeamMem.TeamRole.Name+' (Inactive)');
+                                    inActiveAndActiveVMUpsertList.add(caseTeamMem);
+                                }
+                            } else if(caseTeamMem.TeamRole.Name == 'Volunteer Manager (Inactive)' || caseTeamMem.TeamRole.Name == 'Wish Coordinator (Inactive)') {
+                                if(inActiveCaseTeamMap.get(caseTeamMem.ParentId+'-'+caseTeamMem.MemberId) == updateTeamMember.OwnerId) {
+                                    if(volunteerManagerIdSet.contains(caseTeamMem.ParentId) && caseTeamMem.TeamRole.Name == 'Volunteer Manager (Inactive)') {
+                                        caseTeamMem.TeamRoleId = teamRoleIdMap.get(caseTeamMem.TeamRole.Name.remove(' (Inactive)'));
+                                        inActiveAndActiveVMUpsertList.add(caseTeamMem);
+                                    } else if(wishCoordinatorIdSet.contains(caseTeamMem.ParentId) && caseTeamMem.TeamRole.Name == 'Wish Coordinator (Inactive)') {
+                                        caseTeamMem.TeamRoleId = teamRoleIdMap.get(caseTeamMem.TeamRole.Name.remove(' (Inactive)'));
+                                        inActiveAndActiveVMUpsertList.add(caseTeamMem);
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        System.debug('>>>>>>new>>>>>>');
+                        for(CaseTeamMember caseTeamMem : caseTeamMemberMap.get(updateTeamMember.Id)) {
+                            if(caseTeamMem.TeamRole.Name == 'Volunteer Manager' && volunteerManagerIdSet.contains(caseTeamMem.ParentId)) {
+                                caseTeamMem.TeamRoleId = teamRoleIdMap.get(caseTeamMem.TeamRole.Name+' (Inactive)');
+                                inActiveAndActiveVMUpsertList.add(caseTeamMem);
+                            } else if(caseTeamMem.TeamRole.Name == 'Wish Coordinator' && wishCoordinatorIdSet.contains(caseTeamMem.ParentId)) {
+                                
+                                caseTeamMem.TeamRoleId = teamRoleIdMap.get(caseTeamMem.TeamRole.Name+' (Inactive)');
+                                inActiveAndActiveVMUpsertList.add(caseTeamMem);
+                            }
+                        }
+                        CaseTeamMember newCaseTeamMember = new CaseTeamMember();
+                        newCaseTeamMember.ParentId = updateTeamMember.Id; 
+                        newCaseTeamMember.MemberId = updateTeamMember.OwnerId;
+                        
+                        if(volunteerManagerIdSet.contains(updateTeamMember.Id)) {
+                            if(teamRoleIdMap.containsKey('Volunteer Manager')) {
+                                newCaseTeamMember.TeamRoleId = teamRoleIdMap.get('Volunteer Manager');
+                                if(caseTeamMap.containsKey(updateTeamMember.Id) && !caseTeamMap.get(updateTeamMember.Id).contains(updateTeamMember.OwnerId)) {
+                                    inActiveAndActiveVMUpsertList.add(newCaseTeamMember);
+                                }
+                            }
+                        } else if(wishCoordinatorIdSet.contains(updateTeamMember.Id)) {
+                            if(teamRoleIdMap.containsKey('Wish Coordinator')) {
+                                System.debug('>>>>>>new Corrdinator>>>>>>1');
+                                newCaseTeamMember.TeamRoleId = teamRoleIdMap.get('Wish Coordinator');
+                                if(caseTeamMap.containsKey(updateTeamMember.Id) && !caseTeamMap.get(updateTeamMember.Id).contains(updateTeamMember.OwnerId)) {
+                                    System.debug('>>>>>>new Corrdinator>>>>>>1');
+                                    inActiveAndActiveVMUpsertList.add(newCaseTeamMember);
+                                }
+                                if(ownerManagerMap.containsKey(updateTeamMember.OwnerId) && !String.isEmpty(ownerManagerMap.get(updateTeamMember.OwnerId))) {
+                                    CaseTeamMember newCaseManagerTeamMember = new CaseTeamMember();
+                                    newCaseManagerTeamMember.ParentId = updateTeamMember.Id; 
+                                    newCaseManagerTeamMember.MemberId = ownerManagerMap.get(updateTeamMember.OwnerId);
+                                    newCaseManagerTeamMember.TeamRoleId = teamRoleIdMap.get('Wish Coordinator');
+                                    if(caseTeamMap.containsKey(updateTeamMember.Id) && !caseTeamMap.get(updateTeamMember.Id).contains(ownerManagerMap.get(updateTeamMember.OwnerId))) {
+                                        inActiveAndActiveVMUpsertList.add(newCaseManagerTeamMember);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                } else {
+                    CaseTeamMember newCaseTeamMember = new CaseTeamMember();
+                    newCaseTeamMember.ParentId = updateTeamMember.Id; 
+                    newCaseTeamMember.MemberId = updateTeamMember.OwnerId;
+                    if(volunteerManagerIdSet.contains(updateTeamMember.Id)) {
+                        if(teamRoleIdMap.containsKey('Volunteer Manager')) {
+                            newCaseTeamMember.TeamRoleId = teamRoleIdMap.get('Volunteer Manager');
+                            inActiveAndActiveVMUpsertList.add(newCaseTeamMember);
+                        }
+                    } else if(wishCoordinatorIdSet.contains(updateTeamMember.Id)) {
+                        if(teamRoleIdMap.containsKey('Wish Coordinator')) {
+                            newCaseTeamMember.TeamRoleId = teamRoleIdMap.get('Wish Coordinator');
+                            inActiveAndActiveVMUpsertList.add(newCaseTeamMember);
+                            if(ownerManagerMap.containsKey(updateTeamMember.OwnerId) && !String.isEmpty(ownerManagerMap.get(updateTeamMember.OwnerId))) {
+                                CaseTeamMember newCaseManagerTeamMember = new CaseTeamMember();
+                                newCaseManagerTeamMember.ParentId = updateTeamMember.Id; 
+                                newCaseManagerTeamMember.MemberId = ownerManagerMap.get(updateTeamMember.OwnerId);
+                                newCaseManagerTeamMember.TeamRoleId = teamRoleIdMap.get('Wish Coordinator');
+                                inActiveAndActiveVMUpsertList.add(newCaseManagerTeamMember);
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            if(inActiveAndActiveVMUpsertList.size() > 0) {
+                upsert inActiveAndActiveVMUpsertList;
+            }
+        }
+    }
+    
+    public static void CaseTeamInTakeManager(Map<Id, Case> parentCaseIntakeOwnerMap) {
+        System.debug('Intake Manager Insert>>>>>>>>>>>>>>');
+        Map<Id,String> teamRoleNameMap = new Map<Id, String>();
+        Map<String,Id> teamRoleIdMap = new Map<String, Id>();
+        Set<Id> chapterSet = new Set<Id>();
+        
+        List<Case> caseUpdateList = new List<Case>();
+        for(Case caseInfo : parentCaseIntakeOwnerMap.values()) {
+            chapterSet.add(caseInfo.chapterName__c);
+        }
+        System.debug('Chapter Set>>>>>>>>>>>>>>');
+        for(CaseTeamRole caseTeamRoleInfo : [SELECT Id, Name FROM CaseTeamRole]) {
+            teamRoleNameMap.put(caseTeamRoleInfo.Id, caseTeamRoleInfo.Name);
+            teamRoleIdMap.put(caseTeamRoleInfo.Name, caseTeamRoleInfo.Id);
+        }
+        System.debug('teamRoleNameMap>>>>>>>>>>>>>>'+teamRoleNameMap);
+        Map<Id, Set<Id>> checkMemMap = new map<Id, Set<Id>>();
+        for(CaseTeamMember caseInfo : [SELECT Id, MemberId, ParentId FROM CaseTeamMember WHERE ParentId IN : parentCaseIntakeOwnerMap.keySet()]) {
+            if(checkMemMap.containsKey(caseInfo.ParentId)) {
+                checkMemMap.get(caseInfo.ParentId).add(caseInfo.MemberId);
+            } else {
+                checkMemMap.put(caseInfo.ParentId,new Set<Id>{caseInfo.MemberId});
+            }
+        }
+        System.debug('CaseMemberCheck>>>>>>>>>>>>>>'+checkMemMap);
+        if(parentCaseIntakeOwnerMap.size() > 0) {
+            List<CaseTeamMember> memberList = new List<CaseTeamMember>();
+            for(Case caseteam : parentCaseIntakeOwnerMap.values()) {
+                System.debug('>>>INtake Manager>>>>>>Start>>>>>>');
+                if(checkMemMap.containsKey(caseteam.Id) && !checkMemMap.get(caseteam.Id).contains(caseteam.OwnerId)) {
+                    System.debug('>>>Owner Not in Exisiting Team>>>>>>');
+                    CaseTeamMember newCaseTeamMember = new CaseTeamMember();
+                    newCaseTeamMember.parentId = caseteam.Id;
+                    newCaseTeamMember.MemberId = caseteam.OwnerId;
+                    newCaseTeamMember.TeamRoleId = teamRoleIdMap.get('Intake Manager');
+                    memberList.add(newCaseTeamMember);
+                } else if(!checkMemMap.containsKey(caseteam.Id)) {
+                    System.debug('>>>Owner Not in Exisiting Team>>>>>>');
+                    CaseTeamMember newCaseTeamMember = new CaseTeamMember();
+                    newCaseTeamMember.parentId = caseteam.Id;
+                    newCaseTeamMember.MemberId = caseteam.OwnerId;
+                    newCaseTeamMember.TeamRoleId = teamRoleIdMap.get('Intake Manager');
+                    memberList.add(newCaseTeamMember);
+                }
+                
+            }
+            if(memberList.size() > 0) {
+                System.debug('Members Inserted>>>>>>>>>');
+                insert memberList;
+            }
+        }
+        
     }
 }

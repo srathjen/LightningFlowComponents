@@ -1,3 +1,0 @@
-<aura:event type="Component">
-    <aura:attribute name="recordId" type="String"/>
-</aura:event>

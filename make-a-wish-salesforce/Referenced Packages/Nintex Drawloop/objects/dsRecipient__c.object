@@ -25,10 +25,6 @@
         <type>Visualforce</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -126,20 +122,22 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Embedded Signer</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Routed via LOOPlus</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Routed via Client Code</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Routed via LOOPlus</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Routed via Client Code</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Host_Address__c</fullName>
@@ -361,64 +359,66 @@
         <externalId>false</externalId>
         <inlineHelpText>For an In Person Signer recipient, this is the person that will &quot;host&quot; the in person signing event (who the email is sent to).</inlineHelpText>
         <label>Specified Host</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Current User</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>User Selected Contact</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Selected Contact</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Selected User</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>User Lookup</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Contact Lookup</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Static Name-Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>User Selected Name-Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Dynamic Name-Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Roles or Groups</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Object Owner</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Object Creator</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Current User&apos;s Manager</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Current User</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>User Selected Contact</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Selected Contact</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Selected User</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>User Lookup</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Contact Lookup</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Static Name-Email</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>User Selected Name-Email</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Dynamic Name-Email</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Roles or Groups</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Object Owner</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Object Creator</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Current User&apos;s Manager</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>StaticEmail__c</fullName>
@@ -522,84 +522,86 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Sign Options</label>
-        <picklist>
-            <picklistValues>
-                <fullName>dl.signhere</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.signhereoptional</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.initialhere</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.initialhereoptional</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.fullname</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.company</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.title</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.datesign</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.envelopeid</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.signerattachment</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.firstname</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.lastname</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.emailaddress</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.approve</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.decline</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.capture</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.mobilecapture</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>dl.acceptance</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>dl.signhere</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.signhereoptional</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.initialhere</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.initialhereoptional</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.fullname</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.company</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.title</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.datesign</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.envelopeid</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.signerattachment</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.firstname</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.lastname</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.emailaddress</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.approve</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.decline</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.capture</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.mobilecapture</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>dl.acceptance</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
         <visibleLines>9</visibleLines>
     </fields>
     <fields>
@@ -608,96 +610,100 @@
         <externalId>false</externalId>
         <inlineHelpText>This changes which recipients the user can select from.</inlineHelpText>
         <label>Specified Recipient</label>
-        <picklist>
-            <picklistValues>
-                <fullName>User Selected Contact</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Current User</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Selected Contact</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Selected User</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>User Lookup</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Contact Lookup</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Static Name-Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>User Selected Name-Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Dynamic Name-Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Roles or Groups</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Object Owner</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Object Creator</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Current User&apos;s Manager</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>User Selected Contact</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Current User</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Selected Contact</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Selected User</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>User Lookup</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Contact Lookup</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Static Name-Email</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>User Selected Name-Email</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Dynamic Name-Email</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Roles or Groups</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Object Owner</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Object Creator</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Current User&apos;s Manager</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>dsType__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Signer</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Carbon Copy</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Certified Delivery</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>In Person Signer</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Agent</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Signer</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>Carbon Copy</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Certified Delivery</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>In Person Signer</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Agent</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>dsUser__c</fullName>

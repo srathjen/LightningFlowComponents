@@ -55,6 +55,10 @@
                 <behavior>Readonly</behavior>
                 <field>First_L_I__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Location__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -97,6 +101,7 @@
         <fields>NAME</fields>
         <fields>Hours_spent__c</fields>
         <fields>Date__c</fields>
+        <fields>Description__c</fields>
         <relatedList>Time_sheet__c.Volunteer_Opportunity__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>

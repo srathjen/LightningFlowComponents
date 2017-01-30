@@ -59,6 +59,10 @@
         <name>Date_Time__c</name>
     </fields>
     <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
         <label><!-- Event Date --></label>
         <name>Event_Date__c</name>
     </fields>
@@ -69,6 +73,10 @@
     <fields>
         <label><!-- Non-WIsh/Event Name --></label>
         <name>Event_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Event URL --></label>
+        <name>Event_URL__c</name>
     </fields>
     <fields>
         <label><!-- Event --></label>
@@ -90,6 +98,10 @@
     <fields>
         <label><!-- Gender --></label>
         <name>Gender__c</name>
+    </fields>
+    <fields>
+        <label><!-- HiddenVolunteer Count Description --></label>
+        <name>HiddenVolunteer_Count_Description__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Chapter Email --></label>
@@ -142,6 +154,10 @@
     <fields>
         <label><!-- Language --></label>
         <name>Language__c</name>
+    </fields>
+    <fields>
+        <label><!-- Location --></label>
+        <name>Location__c</name>
     </fields>
     <fields>
         <label><!-- Primary Diagnosis --></label>
@@ -214,6 +230,10 @@
         <picklistValues>
             <masterLabel>Non-responsive</masterLabel>
             <translation><!-- Non-responsive --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Approved</masterLabel>
+            <translation><!-- Not Approved --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Requested</masterLabel>

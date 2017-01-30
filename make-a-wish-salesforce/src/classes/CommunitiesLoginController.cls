@@ -17,7 +17,7 @@ global class CommunitiesLoginController {
         List<User> getUserDetails = [SELECT Id,Profile.name,ContactId from User WHERE Username = :username limit 1];
         if(getUserDetails.size() > 0){
             // If Prospective Volunteer, then they will be landed to Propective Volunteer Welcome Page.
-            if(getUserDetails[0].Profile.name == 'Prospective Volunteer') {
+            if(getUserDetails[0].Profile.name == 'Volunteer - Prospective') {
                 return Site.login(username, password, '/apex/VolunteerWelcomePage_VF');
             }
             else {

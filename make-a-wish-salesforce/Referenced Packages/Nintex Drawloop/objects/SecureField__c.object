@@ -25,10 +25,6 @@
         <type>Visualforce</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -80,60 +76,62 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Font</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Arial</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Arial Narrow</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Calibri</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Courier New</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Garamond</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Georgia</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Helvetica</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Lucida Console</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Tahoma</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Times New Roman</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Trebuchet</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Verdana</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Arial</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Arial Narrow</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Calibri</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Courier New</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Garamond</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Georgia</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Helvetica</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Lucida Console</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Tahoma</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Times New Roman</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Trebuchet</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Verdana</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>GroupName__c</fullName>
@@ -228,52 +226,54 @@
         <externalId>false</externalId>
         <inlineHelpText>This applies a standard validation pattern to the secure field.</inlineHelpText>
         <label>Type</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Plain Text</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Email</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Date</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Number</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>SSN</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Zip</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Zip-4</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Signer Attachment</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Approve Button</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Decline Button</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Plain Text</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Email</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Date</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Number</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>SSN</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Zip</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Zip-4</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Signer Attachment</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Approve Button</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Decline Button</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Update_Field__c</fullName>

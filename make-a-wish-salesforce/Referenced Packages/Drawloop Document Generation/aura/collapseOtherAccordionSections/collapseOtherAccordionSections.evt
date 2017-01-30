@@ -1,3 +1,0 @@
-<aura:event type="Component" description="Accordion section was selected. Collapse all other sections.">
-    <aura:attribute name="selectedAccordionSection" type="String" required="true"/>
-</aura:event>

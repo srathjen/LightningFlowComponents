@@ -6,7 +6,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Active Volunteer Profile</shortDescription>
-        <value>00e36000000HIwk</value>
+        <value>00e36000001CMlq</value>
     </labels>
     <labels>
         <fullName>B_C_No_of_days_for_expiration</fullName>
@@ -37,7 +37,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>ContactIdValue</shortDescription>
-        <value>003Q00000164SBK</value>
+        <value>0033600000Z3S0Z</value>
     </labels>
     <labels>
         <fullName>Instance_Url</fullName>
@@ -45,7 +45,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Instance Url</shortDescription>
-        <value>https://cs3.salesforce.com</value>
+        <value>https://na30.salesforce.com</value>
     </labels>
     <labels>
         <fullName>Local_Email_Template_ID</fullName>
@@ -76,7 +76,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Prospective Volunteer Profile</shortDescription>
-        <value>00e36000000HIwl</value>
+        <value>00e36000001CMlr</value>
     </labels>
     <labels>
         <fullName>Prospective_Volunteer_Profile</fullName>
@@ -91,7 +91,14 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Shopping_Spree_DDP</shortDescription>
-        <value>a1i5B000000bKzt</value>
+        <value>a1a360000023L5S</value>
+    </labels>
+    <labels>
+        <fullName>Sigle_Day_Volunteer</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SigleDayVolunteer</shortDescription>
+        <value>a1036000003GY8B</value>
     </labels>
     <labels>
         <fullName>Site_Url</fullName>
@@ -99,7 +106,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Site Url</shortDescription>
-        <value>https://qa-make-a-wish.cs3.force.com</value>
+        <value>http://make-a-wish.force.com/</value>
     </labels>
     <labels>
         <fullName>WishClearence</fullName>
@@ -114,6 +121,6 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Receipt DDP</shortDescription>
-        <value>a1i5B000000XrpY</value>
+        <value>a1a360000022UI9</value>
     </labels>
 </CustomLabels>

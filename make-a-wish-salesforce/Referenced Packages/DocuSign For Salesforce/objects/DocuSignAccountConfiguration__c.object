@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -447,32 +443,34 @@
         <description>The DocuSign environment that api calls will be sent to. Value should be prod for normal use, and can be set to demo or preview for testing purposes, or when running in a sandbox.</description>
         <externalId>false</externalId>
         <label>DocuSignEnvironment</label>
-        <picklist>
-            <picklistValues>
-                <fullName>production</fullName>
-                <default>true</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>demo</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>preview</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>test</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>stage</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>production</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>demo</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>preview</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>test</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>stage</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>EmailBody__c</fullName>

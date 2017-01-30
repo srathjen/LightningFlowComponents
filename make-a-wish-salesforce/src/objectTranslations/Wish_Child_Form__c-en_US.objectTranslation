@@ -290,6 +290,10 @@
         <name>Hidden_Contact_Name__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Same as Family --></label>
+        <name>Hidden_Same_as_Family__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Wish Fmaily Contact Email --></label>
         <name>Hidden_Wish_Fmaily_Contact_Email__c</name>
     </fields>

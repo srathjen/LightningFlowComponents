@@ -43,7 +43,7 @@ public class RelationshipsViewer_AC{
                 
                 
                 dbRelationshipList  = [SELECT Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__Type__c, npe4__RelatedContact__r.RecordTypeId,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.FirstName,npe4__RelatedContact__r.LastName,npe4__RelatedContact__r.Phone,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.MailingCity,npe4__RelatedContact__r.MailingStreet,npe4__RelatedContact__r.MailingState,
-                                       npe4__RelatedContact__r.MailingCountry,npe4__RelatedContact__r.MailingPostalCode FROM npe4__Relationship__c WHERE npe4__Contact__c =: contactList[0].Id AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId ];
+                                       npe4__RelatedContact__r.MailingCountry,npe4__RelatedContact__r.MailingPostalCode,npe4__RelatedContact__r.Use_as_Household_Address__c FROM npe4__Relationship__c WHERE npe4__Contact__c =: contactList[0].Id AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId ];
                 
              
              if(contactList.size() > 0)
@@ -87,11 +87,12 @@ public class RelationshipsViewer_AC{
                         relatedFamilyCon.MailingCountry= dbRelatedWishFamily.npe4__RelatedContact__r.MailingCountry;
                         relatedFamilyCon.MailingPostalCode = dbRelatedWishFamily.npe4__RelatedContact__r.MailingPostalCode;
                         relatedFamilyCon.Id = dbRelatedWishFamily.npe4__RelatedContact__c;
+                        relatedFamilyCon.Wish_Family_Type__c = dbRelatedWishFamily.npe4__Type__c;
+                        relatedFamilyCon.Use_as_Household_Address__c  = dbRelatedWishFamily.npe4__RelatedContact__r.Use_as_Household_Address__c ;
                         dbRelatedContactList.add(relatedFamilyCon);
                         
                     }
-                    
-                    
+                   
                 }
             }
             
@@ -102,9 +103,7 @@ public class RelationshipsViewer_AC{
         }
         
     }
-    
-    
-    
+ 
     public void UpdateContactInfo(){
         Constant_AC  constant = new Constant_AC();
         outPutMode = false;
@@ -156,7 +155,7 @@ public class RelationshipsViewer_AC{
         String newPostalCode;
         String oldPostalCode;
         string contactInfo = 'Following contact information(s) have been updated by the volunteer :' + '<Br/>';
-        
+        integer i = 0;
         Map<Id,Contact> updateContactMap = new Map<Id,Contact>();
         List<Task> demogarphicTaskList = new List<Task>();
         isSave = false;
@@ -309,8 +308,16 @@ public class RelationshipsViewer_AC{
         if(dbRelatedContactList != Null && dbRelatedContactList.size() > 0){
             for(Contact oldwishChildCon : clonedFamilyContactList){
                 
+                if(oldwishChildCon.Use_as_Household_Address__c  == true){
+                         i++;
+                   }
+                
+                if(i > 1){
+                         DisplayErrorMessage();
+                     }
+                
                 for(Contact newWishChildCon : dbRelatedContactList ){
-                    
+                     
                     if(oldwishChildCon.Id == newWishChildCon.Id){
                         
                         if((oldwishChildCon.Phone != newWishChildCon.Phone && oldwishChildCon.Phone !=''  ) || (oldwishChildCon.Email != newWishChildCon.Email && oldwishChildCon.Email != '') || (oldwishChildCon.MailingStreet != newWishChildCon.MailingStreet && oldwishChildCon.MailingStreet != '') ||
@@ -320,8 +327,12 @@ public class RelationshipsViewer_AC{
                             System.debug('@@@@@@@@@@@@Old'+oldwishChildCon.MailingCity+'@@@@@@New'+newWishChildCon.MailingCity);
                             contactInfo  += '<Br/>' + 'Name :'+' '+'  '+newWishChildCon.FirstName+'  '+'  '+newWishChildCon.LastName+'  '+' ; '+'<Br/>';
                         
+                        if(oldwishChildCon.Use_as_Household_Address__c != newWishChildCon.Use_as_Household_Address__c){ 
+                            newWishChildCon.Hidden_Use_as_Household_Address__c = oldwishChildCon.Use_as_Household_Address__c ;
+                            updateContactMap.put(newWishChildCon.Id,newWishChildCon);
+                        }
                         if(oldwishChildCon.Phone != newWishChildCon.Phone){
-                            newWishChildCon .Hidden_Phone__c  = oldwishChildCon.Phone;
+                            newWishChildCon.Hidden_Phone__c  = oldwishChildCon.Phone;
                             
                             if(newWishChildCon.Phone != Null)
                                 oldPhone = newWishChildCon.Phone;
@@ -433,10 +444,11 @@ public class RelationshipsViewer_AC{
             }
             
         }
-        
+     
         if(updateContactMap.size() > 0){
             
             update updateContactMap.Values();
+            system.debug('@@@@@@ ERROR@@@@@');
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Thank you for updating the contact information! Your changes have been recorded and sent to the Chapter Staff for approval.'));
             Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
             req.setComments('Review contact information updated by the volunteer');
@@ -463,15 +475,22 @@ public class RelationshipsViewer_AC{
             update contactList;
             
         }
-        
+       
         return null;     
     }
-    
-    
-    
-    
+   
     public void close(){
         outPutMode = true;
         inputMode = false;
     }
+    
+    public pageReference DisplayErrorMessage(){
+        inputMode = true;
+        outPutMode = false;
+         isSave = true;
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please Select one Use as household address.'));
+        system.debug('@@@@@@ ERROR@@@@@');
+        return null;
+    }
+    
 }

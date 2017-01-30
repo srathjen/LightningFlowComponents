@@ -753,21 +753,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Option2__c</name>
     </fields>
     <fields>
-        <name>Origin</name>
-        <picklistValues>
-            <masterLabel>Email</masterLabel>
-            <translation><!-- Email --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Phone</masterLabel>
-            <translation><!-- Phone --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Web</masterLabel>
-            <translation><!-- Web --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <label><!-- Pariticipant name havingWheelchair Power --></label>
         <name>Pariticipant_name_havingWheelchair_Power__c</name>
     </fields>
@@ -930,21 +915,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Presentation_Date__c</name>
     </fields>
     <fields>
-        <name>Priority</name>
-        <picklistValues>
-            <masterLabel>High</masterLabel>
-            <translation><!-- High --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Low</masterLabel>
-            <translation><!-- Low --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Medium</masterLabel>
-            <translation><!-- Medium --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <label><!-- Projected Status --></label>
         <name>Projected_Status__c</name>
         <picklistValues>
@@ -971,29 +941,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Ready to Assign Date --></label>
         <name>Ready_to_Assign_Date__c</name>
-    </fields>
-    <fields>
-        <name>Reason</name>
-        <picklistValues>
-            <masterLabel>Complex functionality</masterLabel>
-            <translation><!-- Complex functionality --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Existing problem</masterLabel>
-            <translation><!-- Existing problem --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Instructions not clear</masterLabel>
-            <translation><!-- Instructions not clear --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>New problem</masterLabel>
-            <translation><!-- New problem --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>User didn&apos;t attend training</masterLabel>
-            <translation><!-- User didn&apos;t attend training --></translation>
-        </picklistValues>
     </fields>
     <fields>
         <label><!-- Referral Date --></label>
@@ -1076,117 +1023,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Start_Date__c</name>
     </fields>
     <fields>
-        <name>Status</name>
-        <picklistValues>
-            <masterLabel>Approved - Chapter Medical Advisor</masterLabel>
-            <translation><!-- Approved - Chapter Medical Advisor --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Approved - Chapter Staff</masterLabel>
-            <translation><!-- Approved - Chapter Staff --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Approved - National Medical Council</masterLabel>
-            <translation><!-- Approved - National Medical Council --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Approved - National Staff</masterLabel>
-            <translation><!-- Approved - National Staff --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Budget Approval - Approved</masterLabel>
-            <translation><!-- Budget Approval - Approved --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Budget Approval - Submitted</masterLabel>
-            <translation><!-- Budget Approval - Submitted --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Closed</masterLabel>
-            <translation><!-- Closed --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Completed</masterLabel>
-            <translation><!-- Completed --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>DNQ - Chapter Medical Advisor</masterLabel>
-            <translation><!-- DNQ - Chapter Medical Advisor --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>DNQ - Chapter Staff</masterLabel>
-            <translation><!-- DNQ - Chapter Staff --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>DNQ - National Medical Council</masterLabel>
-            <translation><!-- DNQ - National Medical Council --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>DNQ - National Staff</masterLabel>
-            <translation><!-- DNQ - National Staff --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Denied</masterLabel>
-            <translation><!-- Denied --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Escalated</masterLabel>
-            <translation><!-- Escalated --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Granted</masterLabel>
-            <translation><!-- Granted --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>In Progress</masterLabel>
-            <translation><!-- In Progress --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Inactive</masterLabel>
-            <translation><!-- Inactive --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Medical Eligible</masterLabel>
-            <translation><!-- Medical Eligible --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>New</masterLabel>
-            <translation><!-- New --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>On Hold</masterLabel>
-            <translation><!-- On Hold --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Open</masterLabel>
-            <translation><!-- Open --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Qualified</masterLabel>
-            <translation><!-- Qualified --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Ready to Assign</masterLabel>
-            <translation><!-- Ready to Assign --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Ready to Interview</masterLabel>
-            <translation><!-- Ready to Interview --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Wish Design</masterLabel>
-            <translation><!-- Wish Design --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Wish Determined</masterLabel>
-            <translation><!-- Wish Determined --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Wish Scheduled</masterLabel>
-            <translation><!-- Wish Scheduled --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <label><!-- Status  Date --></label>
         <name>Status_Date__c</name>
     </fields>
@@ -1200,6 +1036,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <picklistValues>
             <masterLabel>Additional Interview</masterLabel>
             <translation><!-- Additional Interview --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Age</masterLabel>
+            <translation><!-- Age --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Age Expiration</masterLabel>
@@ -1246,12 +1086,20 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Need Clarification --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>No Response</masterLabel>
+            <translation><!-- No Response --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Non-Viewable</masterLabel>
             <translation><!-- Non-Viewable --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Pending</masterLabel>
             <translation><!-- Pending --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Previous Wish</masterLabel>
+            <translation><!-- Previous Wish --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Reassigned</masterLabel>
@@ -1289,21 +1137,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Total Hour Spent --></label>
         <name>Total_Hour_Spent__c</name>
-    </fields>
-    <fields>
-        <name>Type</name>
-        <picklistValues>
-            <masterLabel>Feature Request</masterLabel>
-            <translation><!-- Feature Request --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Problem</masterLabel>
-            <translation><!-- Problem --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Question</masterLabel>
-            <translation><!-- Question --></translation>
-        </picklistValues>
     </fields>
     <fields>
         <label><!-- Unique Wish Record Identifier --></label>
@@ -1503,6 +1336,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Wish_Presentation_Set__c</name>
     </fields>
     <fields>
+        <help><!-- Please include items to be added to system-generated Wish Receipt --></help>
         <label><!-- Wish Receipt Items --></label>
         <name>Wish_Receipt_Items__c</name>
     </fields>
@@ -1566,8 +1400,8 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Education --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Electronics International - Sports</masterLabel>
-            <translation><!-- Electronics International - Sports --></translation>
+            <masterLabel>Electronics</masterLabel>
+            <translation><!-- Electronics --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>I wish to be…</masterLabel>
@@ -1650,8 +1484,8 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Trailer/Camper --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Travel - Hawai</masterLabel>
-            <translation><!-- Travel - Hawai --></translation>
+            <masterLabel>Travel - Hawaii</masterLabel>
+            <translation><!-- Travel - Hawaii --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Travel - International</masterLabel>
@@ -1758,10 +1592,6 @@ arrangements/unique circumstances for any requested wish participant not residin
             <section>Attachments</section>
         </sections>
         <sections>
-            <label><!-- DEV &amp; QA --></label>
-            <section>DEV &amp; QA</section>
-        </sections>
-        <sections>
             <label><!-- Finance --></label>
             <section>Finance</section>
         </sections>
@@ -1785,16 +1615,8 @@ arrangements/unique circumstances for any requested wish participant not residin
             <section>Attachments</section>
         </sections>
         <sections>
-            <label><!-- DEV &amp; QA --></label>
-            <section>DEV &amp; QA</section>
-        </sections>
-        <sections>
             <label><!-- Important Date Section --></label>
             <section>Important Date Section</section>
-        </sections>
-        <sections>
-            <label><!-- To be removed --></label>
-            <section>To be removed</section>
         </sections>
         <sections>
             <label><!-- Wish Related Forms --></label>
@@ -1815,20 +1637,28 @@ arrangements/unique circumstances for any requested wish participant not residin
     <layouts>
         <layout>Wish Determination</layout>
         <sections>
-            <label><!-- Driver Details --></label>
-            <section>Driver Details</section>
+            <label><!-- Driver &amp; Car Information --></label>
+            <section>Driver &amp; Car Information</section>
         </sections>
         <sections>
-            <label><!-- Medical Information --></label>
-            <section>Medical Information</section>
+            <label><!-- Emergency Contact --></label>
+            <section>Emergency Contact</section>
+        </sections>
+        <sections>
+            <label><!-- Family Availability --></label>
+            <section>Family Availability</section>
+        </sections>
+        <sections>
+            <label><!-- Social media --></label>
+            <section>Social media</section>
         </sections>
         <sections>
             <label><!-- Travel Information --></label>
             <section>Travel Information</section>
         </sections>
         <sections>
-            <label><!-- Wish Details --></label>
-            <section>Wish Details</section>
+            <label><!-- Wish Information Form Medical Information --></label>
+            <section>Wish Information Form Medical Information</section>
         </sections>
         <sections>
             <label><!-- Wish Status Bar --></label>
@@ -1871,6 +1701,10 @@ arrangements/unique circumstances for any requested wish participant not residin
             <label><!-- Wish Presentation  Details --></label>
             <section>Wish Presentation  Details</section>
         </sections>
+        <sections>
+            <label><!-- Wish Receipt --></label>
+            <section>Wish Receipt</section>
+        </sections>
     </layouts>
     <layouts>
         <layout>Wish Impact</layout>
@@ -1912,10 +1746,6 @@ arrangements/unique circumstances for any requested wish participant not residin
             <section>Attachments</section>
         </sections>
         <sections>
-            <label><!-- Dev &amp; QA --></label>
-            <section>Dev &amp; QA</section>
-        </sections>
-        <sections>
             <label><!-- Finance --></label>
             <section>Finance</section>
         </sections>
@@ -1924,12 +1754,8 @@ arrangements/unique circumstances for any requested wish participant not residin
             <section>Important Date Section</section>
         </sections>
         <sections>
-            <label><!-- Medical Section --></label>
-            <section>Medical Section</section>
-        </sections>
-        <sections>
-            <label><!-- To be removed --></label>
-            <section>To be removed</section>
+            <label><!-- Wish Clearance Medical Information --></label>
+            <section>Wish Clearance Medical Information</section>
         </sections>
         <sections>
             <label><!-- Wish Related Forms --></label>
@@ -2171,6 +1997,10 @@ arrangements/unique circumstances for any requested wish participant not residin
     <workflowTasks>
         <name>Budget_needs_to_be_revised</name>
         <subject><!-- Budget needs to be revised --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Follow_up_on_wish_clearance</name>
+        <subject><!-- Follow-up on wish clearance --></subject>
     </workflowTasks>
     <workflowTasks>
         <name>Interview_date_not_set</name>

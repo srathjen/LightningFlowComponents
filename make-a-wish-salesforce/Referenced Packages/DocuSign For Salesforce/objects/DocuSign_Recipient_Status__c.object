@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -291,9 +287,9 @@
         <customTabListAdditionalFields>Date_Signed__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Date_Declined__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Decline_Reason__c</customTabListAdditionalFields>
+        <excludedStandardButtons>New</excludedStandardButtons>
         <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
         <excludedStandardButtons>Accept</excludedStandardButtons>
-        <excludedStandardButtons>New</excludedStandardButtons>
         <lookupDialogsAdditionalFields>DocuSign_Recipient_Email__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>Recipient_Status__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>Contact__c</lookupDialogsAdditionalFields>

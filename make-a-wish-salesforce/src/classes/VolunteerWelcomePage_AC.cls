@@ -239,10 +239,18 @@ public Class VolunteerWelcomePage_AC
     }
     
     // Fetching Top 4 Events of the volunteer chapter and display on the landing page. 
-    public list<Non_Wish_Events__c> getEvents() {
+    public list<NonWishEvents> getEvents() {
         eventsRTId = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.events).getRecordTypeId();
-        List<Non_Wish_Events__c> eventRecords = [SELECT id,Name,Event_Name__c, Priority__c,Event_Image__c,Event_Text__c,Event_Date__c
-                                                 FROM Non_Wish_Events__c  WHERE chapter__c = :chapterId AND Event_Date__c >= :Date.Today() AND RecordTypeId = :eventsRTId AND priority__c != Null order by priority__c ASC limit 4];
+        List<NonWishEvents> eventRecords = new List<NonWishEvents>();
+        for(Non_Wish_Events__c  currRec : [SELECT id,Name,Event_Name__c, Priority__c,Event_Image__c,Event_Text__c,Event_Date__c
+                                                 FROM Non_Wish_Events__c  WHERE chapter__c = :chapterId AND Event_Date__c >= :Date.Today() AND RecordTypeId = :eventsRTId AND priority__c != Null order by priority__c ASC limit 4])
+         
+        {
+        
+           eventRecords.add(new  NonWishEvents(currRec.Event_Image__c,currRec.Event_Name__c,currRec.Event_Date__c,currRec.Event_Text__c));
+        }                                        
+      
+      
         if(eventRecords.size() < 4)
         {
             for(Non_Wish_Events__c  currRec : [SELECT id,Name,Event_Name__c, Priority__c,Event_Image__c,Event_Text__c,Event_Date__c
@@ -250,7 +258,7 @@ public Class VolunteerWelcomePage_AC
             {
                 
                 if(eventRecords.size() < 4)
-                    eventRecords.add(currRec);
+                    eventRecords.add(new  NonWishEvents(currRec.Event_Image__c,currRec.Event_Name__c,currRec.Event_Date__c,currRec.Event_Text__c));
             }
         }
         return eventRecords;
@@ -262,5 +270,23 @@ public Class VolunteerWelcomePage_AC
         PageReference pageRef = new PageReference('/apex/'+gotoPage+'?bgRequired='+bgRequired+'&trainingRequired='+trainingRequired);
         pageRef.setRedirect(true);
         return pageRef;
+    }
+    
+    public class NonWishEvents
+    {
+       public string eventImage{get;set;}
+       public string eventName{get;set;}
+       public Date eventDate{get;set;}
+       public string eventText{get;set;}
+       
+       public NonWishEvents(string eImage, string eName, Date eDate, string eText)
+       {
+           eventImage = eImage;
+           eventName = eName;
+           eventDate = eDate;
+           eventText = eText;
+       }
+       
+    
     }
 }

@@ -41,6 +41,7 @@
     <filter>
         <criteriaItems>
             <column>Account.LastDonationDate__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>lessThan</operator>
             <value>THIS_YEAR</value>
         </criteriaItems>

@@ -2,6 +2,7 @@
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
     <defaultLandingTab>NPSP_Resources</defaultLandingTab>
     <description>The Nonprofit Starter Pack application</description>
+    <formFactors>Large</formFactors>
     <label>Nonprofit Starter Pack</label>
     <tab>standard-Account</tab>
     <tab>standard-Contact</tab>

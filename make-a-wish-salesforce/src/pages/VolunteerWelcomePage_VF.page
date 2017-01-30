@@ -68,19 +68,18 @@
                     <h4>Calendar of Events</h4>
                     <ul class="col-xs-12 col-sm-12 col-md-12">
                         
-                        <apex:repeat value="{!events}" var="ev">
+                       <apex:repeat value="{!events}" var="ev">
                             <li class="col-xs-12 col-sm-6 col-md-3">
                                 <figure class="col-xs-12 col-sm-12 col-md-12">
                                     <!-- <img class="col-xs-4 col-sm-4 col-md-4" src="https://wish.org/~/media/022-000/News%20and%20Events/Signature%20Events/WAM_Thumbnail.ashx" /> -->
-                                    <apex:outputText styleClass="col-xs-4 col-sm-4 col-md-4" value="{!ev.Event_Image__c}" escape="false"/>                                    
+                                    <apex:outputText styleClass="col-xs-4 col-sm-4 col-md-4" value="{!ev.eventImage}" escape="false"/>                                    
                                     <figcaption class="col-sm-8">
-                                        <h5><apex:outputText value="{!ev.Event_Name__c}" escape="false"/></h5>
+                                        <h5><apex:outputText value="{!ev.eventName}" escape="false"/></h5>
                                         <span class="date"><apex:outputText value="{0,date,MM/dd/yy}">
-                                            <apex:param value="{!ev.Event_Date__c}" /> 
+                                            <apex:param value="{!ev.eventDate}" /> 
                                             </apex:outputText></span>
-                                        <p><apex:outputText value="{!ev.Event_Text__c}" escape="false"/></p>
-                                    </figcaption>
-                                </figure>
+                                        <p><apex:outputText value="{!ev.eventText}" escape="false"/></p>
+                                    </figcaption></figure>
                             </li>
                         </apex:repeat>
 

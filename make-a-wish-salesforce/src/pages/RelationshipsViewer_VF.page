@@ -89,22 +89,24 @@
                                                 <th>State</th>
                                                 <th>Country</th>
                                                 <th>PostalCode</th>
-                                                <th>Type</th>           
+                                                <th>Type</th>   
+                                                <th>Use as Household Address</th>        
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <apex:repeat value="{!dbRelationshipList}" var="item">
+                                            <apex:repeat value="{!dbRelatedContactList}" var="item">
                                                 <tr>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.FirstName}" /></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.LastName}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.Phone}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.Email}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingStreet}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingCity}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingState}"/></td>
-                                                    <td><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingCountry}"/></td>
-                                                    <td ><apex:OutPutText value="{!item.npe4__RelatedContact__r.MailingPostalCode}"/></td>
-                                                    <td ><apex:OutPutText value="{!item.npe4__Type__c}"/></td>
+                                                 <td><apex:OutPutText value="{!item.FirstName}"/></td>
+                                                <td><apex:OutPutText value="{!item.LastName}"/></td>
+                                                <td><apex:outputText value="{!item.Phone}"/></td>
+                                                <td><apex:outputText value="{!item.Email}"/></td>
+                                                <td><apex:outputText value="{!item.MailingStreet}"/></td>
+                                                <td><apex:outputText value="{!item.MailingCity}"/></td>
+                                                <td><apex:outputText value="{!item.MailingState}"/></td>
+                                                <td><apex:outputText value="{!item.MailingCountry}"/></td>
+                                                <td ><apex:outputText value="{!item.MailingPostalCode}"/></td>
+                                                <td ><apex:outputText value="{!item.Wish_Family_Type__c}"/></td>
+                                                <td style = "text-align: center;"><apex:outputField value="{!item.Use_as_Household_Address__c }"/></td>
                                                 </tr>
                                             </apex:repeat>
                                         </tbody>
@@ -180,6 +182,7 @@
                                                         <th >State</th>
                                                         <th >Country</th>
                                                         <th >Zip Code</th>
+                                                        <th>Use as Household Address</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -192,11 +195,12 @@
                                                             <td><apex:InputText value="{!item.MailingStreet}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
                                                             <td><apex:InputText value="{!item.MailingCity}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
                                                             <td>
-                                                                <!--<apex:InputText list="{!States}" value="{!item.mailingstate}"/> -->
+                                                                
                                                                 <apex:selectList value="{!item.mailingstate}" multiselect="false" Size="1" styleClass="form-control" style="height: inherit;width: inherit;" ><apex:selectOptions value="{!States}" /></apex:selectList>
                                                             </td>
                                                             <td><apex:InputText value="{!item.MailingCountry}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
                                                             <td ><apex:InputText value="{!item.MailingPostalCode}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
+                                                            <td style = "text-align: center;"><apex:InputCheckbox value="{!item.Use_as_Household_Address__c }"/></td>
                                                         </tr>
                                                     </apex:repeat>
                                                 </tbody>
@@ -231,7 +235,7 @@
                 "searching": false,
                  responsive: true
             });
-            $('#dataTab1,dataTab2').stacktable({myClass:'mobile-table'});
+           // $('#dataTab1,dataTab2').stacktable({myClass:'mobile-table'});
             $('.sorting_asc, .sorting').removeAttr('style');
             $('table.mobile-table.dataTable').css('border-collapse','collapse');
             
@@ -251,7 +255,7 @@
                  responsive: true
             });
             
-       j$('#dataTab1,dataTab2').stacktable({myClass:'mobile-table'});
+       //j$('#dataTab1,dataTab2').stacktable({myClass:'mobile-table'});
        j$('.sorting_asc, .sorting').removeAttr('style');
        j$('table.mobile-table.dataTable').css('border-collapse','collapse');   
          

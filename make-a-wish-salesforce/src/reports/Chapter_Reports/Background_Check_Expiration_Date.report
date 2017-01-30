@@ -22,6 +22,7 @@
     <filter>
         <criteriaItems>
             <column>Background_check__c$Volunteer__c.is_Active_Volunteer__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

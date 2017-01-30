@@ -5,6 +5,7 @@ Public Class WishChildFormUtil
     public Case currCase{get;set;}
     public List<SelectOption> multiPickoptions {get;set;}
     String caseId {get;set;}
+    String Participants {get;set;}
     public List<Contact> wishFamilyContactList {get;set;}
     public List<Contact> wishParticipantsContactList {get;set;}
     public Id wishFamilyDT;
@@ -155,9 +156,10 @@ Public Class WishChildFormUtil
         SignNowList = new List<String>();
         listofSenderName = new List<String>();
         caseId = Apexpages.currentPage().getParameters().get('Id');
-        childForm = '/apex/WishChildForm_VF?id='+caseId;
-        familyForm = '/apex/WishFamilyForm_VF?id='+caseId;
-        infoForm = '/apex/WishInformationForm_VF?id='+caseId;
+        Participants = Apexpages.currentPage().getParameters().get('part');
+        childForm = '/apex/WishChildForm_VF?id='+caseId+'&part='+Participants;
+        familyForm = '/apex/WishFamilyForm_VF?id='+caseId+'&part='+Participants;
+        infoForm = '/apex/WishInformationForm_VF?id='+caseId+'&part='+Participants;
         Boolean isWishFamilyAvailable = false;
         signersKeyPairMap = new Map<String,String>();       
     
@@ -187,7 +189,7 @@ Public Class WishChildFormUtil
         public String medicalNeeds{get;set;}
         public String residingWishMedical{get;set;}
         public String relId{get;set;}
-        public boolean sameParentGuardianFlag {get;set;}
+        public boolean sameParentGuardianFlag  {get; set;}
         public boolean isChildParticipants {get; set;}
     }
  

@@ -16,11 +16,13 @@
     <filter>
         <criteriaItems>
             <column>DocuSign_Status__c.Envelope_Status__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
             <value>Completed,Voided,Deleted</value>
         </criteriaItems>
         <criteriaItems>
             <column>DocuSign_Status__c.Sent_Age__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>greaterOrEqual</operator>
             <value>3</value>
         </criteriaItems>

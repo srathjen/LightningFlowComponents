@@ -363,6 +363,29 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
+        <fullName>Case%3AFollow-up on wish clearance</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Wish_Clearance_Sent_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Wish_Clearance_Received_Date__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <description>Used to create a task to Chapter Staff if Wish Clearance received is null after 14 days the form sent</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Follow_up_on_wish_clearance</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Case.Wish_Clearance_Sent_Date__c</offsetFromField>
+            <timeLength>14</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
         <fullName>Send Email to National Team</fullName>
         <actions>
             <name>National_MAC_Team_Email_Alert</name>
@@ -541,6 +564,17 @@
         <protected>false</protected>
         <status>In Progress</status>
         <subject>Budget needs to be revised</subject>
+    </tasks>
+    <tasks>
+        <fullName>Follow_up_on_wish_clearance</fullName>
+        <assignedToType>owner</assignedToType>
+        <dueDateOffset>17</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Case.Wish_Clearance_Sent_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Follow-up on wish clearance</subject>
     </tasks>
     <tasks>
         <fullName>Interview_date_not_set</fullName>
