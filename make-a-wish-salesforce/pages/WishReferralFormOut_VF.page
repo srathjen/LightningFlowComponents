@@ -1,0 +1,237 @@
+<apex:page id="ReferralForm" renderAs="{!chooserender}" controller="WishReferralFormOut_AC" showHeader="false" applyBodyTag="false" sidebar="false" standardStylesheets="false" docType="html-5.0">
+<apex:stylesheet value="{!URLFOR($Resource.prospective_assets, 'web/css/chosen.min.css')}"/>
+<!-- <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script> -->
+<apex:includeScript value="https://code.jquery.com/jquery-2.2.4.min.js" />
+<script>
+        // prepend meta/link tags before VF head output
+        $('head').prepend('<meta http-equiv="x-ua-compatible" content="ie=edge" /><meta http-equiv="content-type" content="text/html; charset=utf-8" /><title>Wish Referral Form | Make-A-Wish \u00AE</title><meta name="HandheldFriendly" content="True" /><meta name="MobileOptimized" content="480" /><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" /><meta http-equiv="cleartype" content="on" />');
+        $('head').append('<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous"><link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css"/><link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.prospective_assets, "web/css/core.css")}" media="all">');
+        function printMyPartialPage(){
+        var printButton = document.getElementById("ReferralForm:frm:content:Print");
+        var pdfButton = document.getElementById("ReferralForm:frm:content:exportPDF");         
+        printButton.style.visibility = 'hidden';
+        pdfButton.style.visibility = 'hidden';       
+        window.print();        
+        printButton.style.visibility = 'visible';
+        pdfButton.style.visibility = 'visible';
+           
+    }
+</script>
+    <body>
+        <apex:form id="frm" styleClass="portal inquiry">
+            <apex:pagemessages id="msg"/>
+            <apex:outputPanel id="credentialDetails">
+                <div style="font-size:20px;text-align: center" > Make-A-Wish® Online Wish Referral  </div> <br/>
+                <apex:pageBlock rendered="{!!login}" >
+                        <legend>Login</legend>
+                        <div class="form-group row">
+                            <div class="col-sm-2"><label>Password</label></div>
+                            <div class="col-sm-2">
+                                <apex:inputText styleClass="form-control password" maxlength="10" id="loginpassword" html-placeholder="password" required="true" value="{!password}"/>
+                            </div>
+                            <apex:commandButton id="submit_password" value="View Form" action="{!submit}" />
+                        </div>
+                </apex:pageBlock>
+            </apex:outputPanel>
+            <apex:outputpanel id="details">
+                <apex:pageblock id="content" rendered="{!login}">
+                <div style="padding:30px;">
+                    
+                    <div> The following information was submitted via md.wish.org, Make-A-Wish’s online referral site for medical professionals. </div>
+                        <table style="width: 100%">
+                       <tr>
+                            <td colspan="2">
+                                Referrer Information 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Date Submitted: 
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                       <tr>
+                            <td>
+                                Name:
+                            </td>
+                            <td>
+                                {!currLead.Referrer_FirstName__c } {!currLead.Referrer_Last_Name__c}
+                            </td>
+                        </tr>
+                       <tr>
+                            <td>
+                               Title: 
+                            </td>
+                            <td>
+                                {!currLead.Title }
+                            </td>
+                        </tr>
+                       <tr>
+                            <td>
+                                Hospital/Treatment Facility:
+                            </td>
+                            <td>
+                                {!currLead.Hospital_Treatment_Facility_Treating__c }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Phone:
+                            </td>
+                            <td>
+                                {!currLead.Referrer_Phone__c }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Email:
+                            </td>
+                            <td>
+                                {!currLead.Referrer_Email__c }
+                            </td>
+                        </tr>
+                     <tr>
+                         <td colspan="2">
+                             <br/>
+                                 <div>Yes, I have discussed a referral to Make-A-Wish with this family/child and have received their permission to share the following information.</div>
+                             <br/>
+                         </td>
+                     </tr>
+                     
+                    
+                        <tr>
+                            <td colspan="2">
+                                Child Information 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Name:
+                            </td>
+                            <td>
+                                {!currLead.FirstName } {!currLead.Child_Middle_Initial__c} {!currLead.LastName}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                DOB: 
+                            </td>
+                            <td>
+                                {!currLead.DOB__c }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Zip Code:
+                            </td>
+                            <td>
+                                {!currLead.PostalCode }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Gender:
+                            </td>
+                            <td>
+                                {!currLead.Gender__c }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Parent/Guardian’s Name: 
+                            </td>
+                            <td>
+                                {!currLead.Parent_First_Name__c } {!currLead.Parent_Last_Name__c}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Family Phone: 
+                            </td>
+                            <td>
+                                {!currLead.Phone }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Child’s Qualifying Diagnosis:
+                            </td>
+                            <td>
+                                {!currLead.Childs_Qualifying_Diagnosis__c }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                ICD-10 Code:
+                            </td>
+                            <td>
+                                {!currLead.PD_ICD_Code__c }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Treating Medical Professional’s Name:
+    
+                            </td>
+                            <td>
+                                {!currLead.Treating_Medical_Professional_First_Name__c} {!currLead.Treating_Medical_Professional_Last_Name__c}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Treating Medical Professional’s Phone: 
+                            </td>
+                            <td>
+                                {!currLead.Medical_Professional_Phone__c }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Treating Medical Professional’s Fax:
+                            </td>
+                            <td>
+                                {!currLead.Treating_Medical_Professional_Fax__c }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Treating Medical Professional’s Email:
+                            </td>
+                            <td>
+                                {!currLead.Treating_Medical_Professional_Email__c  }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Other notes/comments about wish child: 
+                            </td>
+                            <td>
+                                
+                            </td>
+                        </tr>
+                       
+                    </table>
+                    <br/>
+                    <hr/>
+                    <br/>
+                    <div> The information contained herein is being provided to the Make-A-Wish Foundation for the sole purpose of determining whether the identified child is medically eligible for a wish. 
+                            Such information is strictly confidential and may not be shared with anyone other than authorized Make-A-Wish representatives. </div>
+                  </div>  
+                   <div class="form-group row" style="float: right;">
+                      <br/>
+                          <div style="margin: 10px;float: left;"> <apex:commandButton id="Print" value="Print" reRender="dummy" onclick="printMyPartialPage();" /> </div>
+                          <div style="margin: 10px;float: left;"> <apex:commandButton id="exportPDF" value="Export PDF" action="{!exportPDF}" /> </div>
+                      
+                      
+                      <br/>
+                      
+                  </div>                   <div>
+                  </div>
+                  </apex:pageBlock>        
+              </apex:outputpanel>
+            
+        </apex:form>
+    </body>
+</apex:page>

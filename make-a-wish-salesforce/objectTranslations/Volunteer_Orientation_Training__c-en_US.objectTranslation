@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Volunteer Orientation &amp; Training</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Volunteer Orientation &amp; Trainings</value>
+    </caseValues>
+    <fields>
+        <label><!-- Account Email --></label>
+        <name>Account_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Name --></label>
+        <name>Account_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account Phone --></label>
+        <name>Account_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Class Offering --></label>
+        <name>Class_Offering__c</name>
+        <relationshipLabel><!-- Volunteer Orientation &amp; Trainings --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Completed Date --></label>
+        <name>Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Cancelled --></label>
+        <name>Date_Cancelled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date --></label>
+        <name>Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Time --></label>
+        <name>End_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- External Id --></label>
+        <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- From Mulesoft --></label>
+        <name>From_Mulesoft__c</name>
+    </fields>
+    <fields>
+        <label><!-- LMS Enrollment Id --></label>
+        <name>LMS_Enrollment_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
+    </fields>
+    <fields>
+        <label><!-- Orientation &amp; Training Hidden --></label>
+        <name>Orientation_Training_Hidden__c</name>
+    </fields>
+    <fields>
+        <label><!-- Orientation/Training --></label>
+        <name>Orientation_Training__c</name>
+        <relationshipLabel><!-- Volunteer Orientation &amp; Trainings --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- RE Completed Date --></label>
+        <name>RE_Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Date --></label>
+        <name>RE_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE End Time --></label>
+        <name>RE_End_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE ID --></label>
+        <name>RE_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Import Id --></label>
+        <name>RE_Import_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Start Time --></label>
+        <name>RE_Start_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Registered Date --></label>
+        <name>Registered_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Time --></label>
+        <name>Start_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Orientation</masterLabel>
+            <translation><!-- Orientation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Training</masterLabel>
+            <translation><!-- Training --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- VolunteerHidden Email --></label>
+        <name>VolunteerHidden_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Attendance --></label>
+        <name>Volunteer_Attendance__c</name>
+        <picklistValues>
+            <masterLabel>Cancelled</masterLabel>
+            <translation><!-- Cancelled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Registered</masterLabel>
+            <translation><!-- Registered --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Volunteer --></label>
+        <name>Volunteer__c</name>
+        <relationshipLabel><!-- Volunteer Orientation &amp; Trainings --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Volunteer Orientation &amp; Training Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage><!-- There is no available seats for this training --></errorMessage>
+        <name>Restrict_no_available_seats</name>
+    </validationRules>
+</CustomObjectTranslation>
