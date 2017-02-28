@@ -1,3 +1,0 @@
-<aura:event type="component" description="Initiate the dockable composer to compose an email.">
-    <aura:attribute name="returnUri" type="string" default=""/>
-</aura:event>

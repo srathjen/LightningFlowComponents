@@ -1,3 +1,0 @@
-<aura:event type="Component" description="Disables Run DDP buttons.">
-    <aura:attribute name="disable" type="boolean" default="false"/>
-</aura:event>

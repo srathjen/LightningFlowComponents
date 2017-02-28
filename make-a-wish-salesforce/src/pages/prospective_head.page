@@ -1,4 +1,0 @@
-<apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
-  <apex:stylesheet value="{!URLFOR($Resource.prospective_assets, 'web/css/core.css')}"/>
-  <apex:stylesheet value="{!URLFOR($Resource.prospective_assets, 'web/css/chosen.min.css')}"/>
-</apex:page>
