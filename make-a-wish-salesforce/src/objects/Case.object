@@ -68,12 +68,12 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>New</fullName>
-            <default>true</default>
+            <fullName>Hold</fullName>
+            <default>false</default>
         </values>
         <values>
-            <fullName>On Hold</fullName>
-            <default>false</default>
+            <fullName>New</fullName>
+            <default>true</default>
         </values>
         <values>
             <fullName>Open</fullName>
@@ -125,12 +125,12 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>New</fullName>
-            <default>true</default>
+            <fullName>Hold</fullName>
+            <default>false</default>
         </values>
         <values>
-            <fullName>On Hold</fullName>
-            <default>false</default>
+            <fullName>New</fullName>
+            <default>true</default>
         </values>
     </businessProcesses>
     <businessProcesses>
@@ -166,11 +166,11 @@
             <default>false</default>
         </values>
         <values>
-            <fullName>Inactive</fullName>
+            <fullName>Hold</fullName>
             <default>false</default>
         </values>
         <values>
-            <fullName>On Hold</fullName>
+            <fullName>Inactive</fullName>
             <default>false</default>
         </values>
         <values>
@@ -233,6 +233,18 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Actual_Cash__c</fullName>
+        <description>This field contains sum of Actual cash from wish expense.</description>
+        <externalId>false</externalId>
+        <label>Actual Cash</label>
+        <summarizedField>Wish_Expense__c.Actual_Cash__c</summarizedField>
+        <summaryForeignKey>Wish_Expense__c.Case__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
         <fullName>Actual_Departure_Date__c</fullName>
         <description>This field is used to capture the actual departure date</description>
         <externalId>false</externalId>
@@ -244,6 +256,18 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Actual_Inkind__c</fullName>
+        <description>This field contains sum of actual inkin from wish expense.</description>
+        <externalId>false</externalId>
+        <label>Actual Inkind</label>
+        <summarizedField>Wish_Expense__c.Actual_In_Kind__c</summarizedField>
+        <summaryForeignKey>Wish_Expense__c.Case__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
         <fullName>Actual_Return_Date__c</fullName>
         <description>This field is used to capture the actual return date</description>
         <externalId>false</externalId>
@@ -253,6 +277,20 @@
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Actual_Total__c</fullName>
+        <description>Contains the actual cost of budget</description>
+        <externalId>false</externalId>
+        <formula>Actual_Cash__c +  Actual_Inkind__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Actual Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
     </fields>
     <fields>
         <fullName>Additional_Interview_Date1__c</fullName>
@@ -287,6 +325,55 @@
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Adoptable__c</fullName>
+        <description>Used to hold adaptable picklist values</description>
+        <externalId>false</externalId>
+        <label>Adoptable</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Adopted_By__c</fullName>
+        <description>Used to hold the name of adopted person</description>
+        <externalId>false</externalId>
+        <label>Adopted By</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Adopted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to define whether the wish is adopted</description>
+        <externalId>false</externalId>
+        <label>Adopted</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Age__c</fullName>
@@ -704,6 +791,18 @@ for fulfilment  the wish.</description>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Chapter_MACEmail__c</fullName>
+        <description>This field is used to store the MAC email address.</description>
+        <externalId>false</externalId>
+        <label>Chapter MACEmail</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Chapter_Medical_Advisor_Phone__c</fullName>
@@ -1457,7 +1556,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hidden_Chapter_Email__c</fullName>
         <description>This field is used to store the chapter email.</description>
         <externalId>false</externalId>
-        <formula>ChapterName__r.Email__c</formula>
+        <formula>IF(  RecordType.Name = &apos;Wish&apos;, ChapterName__r.Email__c,  Parent.ChapterName__r.Email__c)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Chapter Email</label>
         <required>false</required>
@@ -1470,7 +1569,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hidden_Chapter_Name__c</fullName>
         <description>This Hidden field is used to store the Chapter Name value.</description>
         <externalId>false</externalId>
-        <formula>ChapterName__r.Name</formula>
+        <formula>IF(  RecordType.Name = &apos;Wish&apos;, ChapterName__r.Name,  Parent.ChapterName__r.Name)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Chapter Name</label>
         <required>false</required>
@@ -1483,7 +1582,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hidden_Chapter_Phone__c</fullName>
         <description>This field is used to store the chapter phone value</description>
         <externalId>false</externalId>
-        <formula>ChapterName__r.Phone</formula>
+        <formula>IF(  RecordType.Name = &apos;Wish&apos;, ChapterName__r.Phone,  Parent.ChapterName__r.Phone )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Chapter Phone</label>
         <required>false</required>
@@ -1606,6 +1705,32 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Publicity_Notes__c</fullName>
+        <description>hold the value from contact and used to show in case file</description>
+        <externalId>false</externalId>
+        <label>Hidden Publicity Notes</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Publicity_OK__c</fullName>
+        <description>holds Publicity OK from contact and used to show in case file</description>
+        <externalId>false</externalId>
+        <label>Hidden Publicity OK</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_Referral_date__c</fullName>
         <description>It is used to capture referral date as hidden value for background process</description>
         <externalId>false</externalId>
@@ -1712,7 +1837,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hidden_Wish_Child_Full_Name__c</fullName>
         <description>This Hidden field is created for send an email when when the case sub status is &quot;Abandoned&quot;.</description>
         <externalId>false</externalId>
-        <formula>Contact.FirstName + &apos; &apos; +  Contact.LastName</formula>
+        <formula>IF( RecordType.Name=&apos;Wish&apos;, Contact.FirstName + &apos; &apos; +  Contact.LastName , Parent.Contact.FirstName + &apos; &apos; +  Parent.Contact.LastName )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Wish Child Full Name</label>
         <required>false</required>
@@ -1915,6 +2040,28 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>IsRushChildSummary__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to send rush alert to child medical summary template when the Rush is checked in parent cas</description>
+        <externalId>false</externalId>
+        <label>IsRushChildSummary</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsRushWishClearence_ChildSummary__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to send rush wish clearence and child medical summary template when the Rush is checked in parent case.</description>
+        <externalId>false</externalId>
+        <label>IsRushWishClearence&amp;ChildSummary</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Is_Migrated_Record__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This is a flag to be set by MuleSoft for records created as part of the migration process</description>
@@ -2088,6 +2235,15 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>This Field is Used to populate the Medical Contact values from Contact.</description>
         <externalId>false</externalId>
         <label>Chapter Medical Advisor</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Contact.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Medical Professional</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
         <referenceTo>Contact</referenceTo>
         <relationshipLabel>Cases</relationshipLabel>
         <relationshipName>Cases</relationshipName>
@@ -2112,7 +2268,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>MAC_Email__c</fullName>
         <description>This field is used to store the MAC email values from Account.</description>
         <externalId>false</externalId>
-        <label>Medical Advisor Email</label>
+        <label>Hidden Medical Advisor Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2130,6 +2286,19 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Medical_Advisor_Email__c</fullName>
+        <description>This field is used to store the medical adviser email address.</description>
+        <externalId>false</externalId>
+        <formula>Local_MCA_Team__r.npe01__HomeEmail__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Medical Advisor Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Medical_Condition__c</fullName>
@@ -2777,6 +2946,31 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>Qualifying_Medical_Professional_Email__c</fullName>
+        <description>It store the Qualifying Medical Professional Email.</description>
+        <externalId>false</externalId>
+        <label>Qualifying Medical Professional Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Qualifying_Medical_Professional_Name__c</fullName>
+        <description>It Store the medical professional Name.</description>
+        <externalId>false</externalId>
+        <label>Qualifying Medical Professional Name</label>
+        <length>150</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>RE_Account_ID__c</fullName>
         <description>ID</description>
         <externalId>false</externalId>
@@ -3173,7 +3367,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
-            <restricted>true</restricted>
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
@@ -3407,7 +3600,7 @@ on airplane</description>
             </valueSetDefinition>
             <valueSettings>
                 <controllingFieldValue>DNQ</controllingFieldValue>
-                <controllingFieldValue>On Hold</controllingFieldValue>
+                <controllingFieldValue>Hold</controllingFieldValue>
                 <valueName>Medical</valueName>
             </valueSettings>
             <valueSettings>
@@ -3451,7 +3644,7 @@ on airplane</description>
                 <valueName>Additional Interview</valueName>
             </valueSettings>
             <valueSettings>
-                <controllingFieldValue>On Hold</controllingFieldValue>
+                <controllingFieldValue>Hold</controllingFieldValue>
                 <valueName>Elective</valueName>
             </valueSettings>
             <valueSettings>
@@ -3960,7 +4153,7 @@ on airplane</description>
     </fields>
     <fields>
         <fullName>Wish_Family_Form__c</fullName>
-        <defaultValue>false</defaultValue>
+        <defaultValue>true</defaultValue>
         <description>Indicate that form is completed or not.</description>
         <externalId>false</externalId>
         <label>Wish Family Form</label>
@@ -4054,13 +4247,13 @@ on airplane</description>
         <fullName>Wish_Receipt_Items__c</fullName>
         <description>This field will capture the wish receipt items</description>
         <externalId>false</externalId>
-        <inlineHelpText>Please include items to be added to system-generated Wish Receipt</inlineHelpText>
         <label>Wish Receipt Items</label>
-        <required>false</required>
+        <length>1500</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
     </fields>
     <fields>
         <fullName>Wish_Safety_Authorization_Part_B_Form__c</fullName>
@@ -4371,6 +4564,17 @@ If yes,  # of hours, agency and phone number information</description>
         <description>It is used to identify is email or not</description>
         <externalId>false</externalId>
         <label>isEmail</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isNationalReply__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This check box is used to identify when the national MAC team reply the case comment.</description>
+        <externalId>false</externalId>
+        <label>isNationalReply</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -6947,6 +7151,14 @@ arrangements/unique circumstances for any requested wish participant not residin
         <errorMessage>There should be value on Date - Absent Parent Form when wish status is Completed.</errorMessage>
     </validationRules>
     <validationRules>
+        <fullName>Case_Adoptable_Validation</fullName>
+        <active>true</active>
+        <description>Used to check the adopted by field is empty when adopted checkbox is true</description>
+        <errorConditionFormula>ISBLANK( Adopted_By__c )  &amp;&amp;  Adopted__c  = true</errorConditionFormula>
+        <errorDisplayField>Adopted_By__c</errorDisplayField>
+        <errorMessage>Adopted By cannot be Blank when Adopted is checked.</errorMessage>
+    </validationRules>
+    <validationRules>
         <fullName>Case_Meet_PWL_Criteria_Validation</fullName>
         <active>true</active>
         <description>When Meet PWL Criteria field value is no then it force to enter the value for the &apos;Comment for PWL Not Met &apos; field</description>
@@ -7433,16 +7645,28 @@ window.location.reload();
 {!REQUIRESCRIPT(&quot;/soap/ajax/30.0/apex.js&quot;)}
 
 var caseStatus = &quot;{!Case.Status}&quot;
+var chapterMedicalAdvisar = &quot;{!Case.Local_MCA_Team__c}&quot;
+var chapterMedicalAdvisarEmail = &quot;{!Case.Medical_Advisor_Email__c}&quot;
+
+if(chapterMedicalAdvisar.lenth &lt; 1 || chapterMedicalAdvisar == &apos;&apos;){
+   alert(&apos;Please select Chapter Medical Advisor &apos;)
+}
+else if(chapterMedicalAdvisarEmail.lenth &lt; 1 || chapterMedicalAdvisarEmail == &apos;&apos;){
+   alert(&apos;Please select Chapter Medical Advisor email&apos;)
+}
+else{
 if(caseStatus == &quot;Escalated&quot;){
 alert(&apos;The case is transferred to National MAC team &apos;)
 } else{
 var record = new sforce.SObject(&quot;Case&quot;);
-var resultEmailProcess = sforce.apex.execute(&quot;SendEmailToMacTeam_AC&quot;,&quot;sendEmailToMac&quot;,{caseOwnerId:&quot;{!Case.Local_MCA_TeamId__c}&quot;, leadId:&quot;{!Case.LeadId__c}&quot;, caseId:&quot;{!Case.Id}&quot;, caseStatus:&quot;Local&quot;, Email:&quot;{!Case.MAC_Email__c}&quot;}); 
+var resultEmailProcess = sforce.apex.execute(&quot;SendEmailToMacTeam_AC&quot;,&quot;sendEmailToMac&quot;,{caseOwnerId:&quot;{!Case.Local_MCA_TeamId__c}&quot;, leadId:&quot;{!Case.LeadId__c}&quot;, caseId:&quot;{!Case.Id}&quot;, caseStatus:&quot;Local&quot;, Email:&quot;{!Case.Medical_Advisor_Email__c}&quot;}); 
 record.Id = &quot;{!Case.Id}&quot;
 record.Status = &apos;Open&apos;;
+record.isEmail__c = true
 var result = sforce.connection.update([record]);
 window.location.reload();
 alert(&apos;Email sucessfully sent&apos;);
+}
 }</url>
     </webLinks>
     <webLinks>

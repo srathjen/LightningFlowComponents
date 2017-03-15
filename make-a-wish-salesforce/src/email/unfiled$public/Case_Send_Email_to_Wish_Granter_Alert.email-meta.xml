@@ -6,7 +6,7 @@
     <letterhead>Make_a_Wish_America</letterhead>
     <name>Case : Send Email to Wish Granter Alert</name>
     <style>freeForm</style>
-    <subject>Wish Granter is InActive</subject>
+    <subject>Wish Granter is now Inactive</subject>
     <textOnly>Hi
 
 The following wish granter is inActive {!Case.InActiveWishGranter__c}</textOnly>

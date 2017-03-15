@@ -69,7 +69,7 @@ public class VolunteerLanding_AC {
         if(primaryChapter.size() > 0)
         {
             currentChapter = primaryChapter.get(0).CurrentChapter__c; 
-            volunteercon = [SELECT Id,FirstName,LastName,isApplication__c,Account.Volunteer_Manager__c,AccountId,
+            volunteercon = [SELECT Id,FirstName,LastName,Name,isApplication__c,Account.Volunteer_Manager__c,AccountId,
                             Email,Phone,Broadcast_Number__c,OwnerId FROM Contact WHERE Id =: currUser.ContactId Limit 1];
                             
             activeVolunteerLandingPageInfoList = [SELECT Id, Featured_Image__c, Feature_Quote__c, Heading_Highlight_Image_1__c, Heading_Highlight_Image_2__c, Heading_Highlight_Image_3__c, Heading_Highlight_Text_1__c, Heading_Highlight_Text_2__c, Heading_Highlight_Text_3__c,
@@ -256,7 +256,7 @@ public class VolunteerLanding_AC {
     {
          // It will fetch the new Broadcast message and display on the active volunteer portal.
         Set<String> broadCastsNameSet = new Set<String>();
-        volunteercon = [SELECT Id,FirstName,OwnerId,LastName,isApplication__c,AccountId,Account.Volunteer_Manager__c,Email,Phone,Broadcast_Number__c  FROM Contact WHERE Id =: currUser.ContactId Limit 1] ;
+        volunteercon = [SELECT Id,FirstName,OwnerId,Name,LastName,isApplication__c,AccountId,Account.Volunteer_Manager__c,Email,Phone,Broadcast_Number__c  FROM Contact WHERE Id =: currUser.ContactId Limit 1] ;
         npe5__Affiliation__c primaryChapter = [SELECT Id, npe5__Organization__c, npe5__Contact__c FROM npe5__Affiliation__c WHERE npe5__Primary__c = True AND npe5__Contact__c = :currUser.ContactId limit 1];
          displayBCMsg = false;
            if(volunteercon.Broadcast_Number__c != Null)
@@ -325,13 +325,9 @@ public class VolunteerLanding_AC {
                                                      Chapter_Role_O_T__r.Orientation_Training__r.RecordType.Name = 'Training' 
                                                      AND Chapter_Role_O_T__r.chapter_Role__c IN :chapterRoles limit 1];
        
-       if(registeredClassOff.size() > 0 && blockNewBG != True)
-       {
-           //displayTrainingAck = True;
+      
        
-       }
-       
-       else if(diplayClassOffRec.size() > 0 && blockNewBG != True)
+       if(diplayClassOffRec.size() > 0 && blockNewBG != True)
        {
            trainingName = diplayClassOffRec[0].Orientation_and_Training__c;
            displayTrainingDetails = True;
@@ -361,10 +357,7 @@ public class VolunteerLanding_AC {
         return pr;
     }
     
-    public void BackgroundCheck()
-    {
-    
-    }
+   
     
     // If user submits [ok] button for background rechecking, it will create new Background check for the volunteer.
     Public Void confirmBackGroundCheck()
@@ -466,7 +459,7 @@ public class VolunteerLanding_AC {
     {   
         displayPopupconflict = false;
         User currUser = [SELECT contactId FROM User WHERE Id = :userInfo.getUserId()];
-        volunteercon = [SELECT Id,FirstName,LastName,Email,Phone FROM Contact WHERE Id =: currUser.ContactId Limit 1] ;
+        volunteercon = [SELECT Id,FirstName,LastName,Name,Email,Phone FROM Contact WHERE Id =: currUser.ContactId Limit 1] ;
         String account;
         String UserName;
         String Password;
@@ -513,13 +506,13 @@ public class VolunteerLanding_AC {
             '"recipients": {'+
             '    "signers" : [{'+
             '      "email": "'+volunteercon.email+'",'+
-            '      "name": "'+volunteercon.LastName+'",'+
+            '      "name": "'+volunteercon.Name+'",'+
             '      "recipientId":"1",'+
             '      "clientUserId":"1",'+
             '      "tabs": {'+
             '                "signHereTabs": [{'+
             '                    "anchorString": "~s1",'+
-            '                    "anchorXOffset": "0.6",'+
+            '                    "anchorXOffset": "0.2",'+
             '                    "anchorYOffset": "0.1",'+
             '                    "anchorIgnoreIfNotPresent": "false",'+
             '                    "anchorUnits": "inches"'+
@@ -577,7 +570,7 @@ public class VolunteerLanding_AC {
             string jsonPayload;
             system.debug('URL.getSalesforceBaseUrl().toExternalForm()'+URL.getSalesforceBaseUrl().toExternalForm());
             jsonPayload = '{'+
-                '    "userName": "'+volunteercon.LastName+'",'+
+                '    "userName": "'+volunteercon.Name+'",'+
                 '    "email": "'+volunteercon.email+'",'+
                 '    "recipientId": "1",'+
                 '    "clientUserId": "1",'+

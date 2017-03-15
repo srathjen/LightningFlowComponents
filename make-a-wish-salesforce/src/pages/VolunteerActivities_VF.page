@@ -149,13 +149,10 @@ Description : This page is used to display volunteer Open and Closed task list
         
         <apex:stylesheet value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.css')}"/>
         <apex:includeScript value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.js')}"/>
-        <!-------------- Style and Script section starts -------------->
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <!-- fallback -->
-            <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, "web/js/jquery.dataTables.min.js")}"><\/script>')</script>
-        <script src="https://files-stackablejs.netdna-ssl.com/stacktable.min.js"></script>
-        <!-- fallback -->
-            <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, "web/js/stacktable.min.js")}"><\/script>')</script>
+            <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.dataTables.min.js')}">\x3C/script>')</script>
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/stacktable.min.js')}"></script>
         <script>
         $(document).ready(function() {
             $(".openTask").addClass('current');

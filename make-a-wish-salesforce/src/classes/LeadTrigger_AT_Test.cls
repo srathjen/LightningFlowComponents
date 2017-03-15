@@ -25,10 +25,12 @@ public class LeadTrigger_AT_Test{
          newLead.Sibling_Detail__c = 'aa | bbb | 12 '+'<br/>'+' bb | - | 13' +'<br/>'+' -| cc | 13'+'<br/>'+' dd | dd |-'+'<br/>'+' -| ee |-'+'<br/>'+' -| ee |-'+'<br/>'+' ff| - |-';
          newLead.Child_Age__c = '4';
        //  newLead.Sub_Status__c ='Pending Diagnosis Verification';
+         newLead.unique_wish_identifier__c = '123456';
          insert newLead;
          newLead.Sub_Status__c = 'Pending Diagnosis Verification';
          update newLead;
          newLead.Status = 'Qualified';
+         
          update newLead ;
          
       
@@ -46,13 +48,17 @@ public class LeadTrigger_AT_Test{
          newLead.Hospital_Treatment_Facility__c =  'Steve Smith AC';
         // newLead.Sub_Status__c ='Pending Diagnosis Verification';
          newLead.Child_Age__c = '4';
+         newLead.unique_wish_identifier__c = '123456';
          insert newLead;
          newLead.Sub_Status__c = 'Pending Diagnosis Verification';
          update newLead;
          dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatus(newLead.Id); 
          Case partAWish = OrientationandTrainingUtil.CreatePartAWish(newLead.Id);
          newLead.Status = 'Qualified';
+         newLead.unique_wish_identifier__c = '1234567';
+         Test.startTest();
          update newLead ;
+         Test.stopTest();
          
       
      }
@@ -64,9 +70,11 @@ public class LeadTrigger_AT_Test{
          Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
          Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
          newLead.Child_Age__c = '4';
+         newLead.unique_wish_identifier__c = '123456';
          insert newLead;
          try{
          Lead dupeLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
+         newLead.unique_wish_identifier__c = '1234567';
          insert dupeLead;  
          }
          catch(Exception ex){
@@ -84,6 +92,7 @@ public class LeadTrigger_AT_Test{
          ICD_Codes__c  NewIcdCode = OrientationandTrainingUtil.createICDCode(newDesCription.Id);
          Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
          newLead.Child_Age__c = '4';
+         newLead.unique_wish_identifier__c = '123456';
          insert newLead;
          newLead.LastName = 'Dravid';
          newLead.PD_ICD_Code__c  = '';
@@ -105,6 +114,7 @@ public class LeadTrigger_AT_Test{
          ICD_Codes__c  NewIcdCode = OrientationandTrainingUtil.createICDCode(newDesCription.Id);
          Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
          newLead.Child_Age__c = '4';
+         newLead.unique_wish_identifier__c = '123456';
         // newLead.Sub_Status__c ='Pending Diagnosis Verification';
          insert newLead;
          newLead.Sub_Status__c = 'Pending Diagnosis Verification';
@@ -117,6 +127,7 @@ public class LeadTrigger_AT_Test{
          newLead.PD_Condition_Description__c = 'Malignant Melanoma';
          newLead.Medical_Questions__c = 'YES Test Diagnosis';
          newLead.Dup_Check__c = 'Block Lead Dup';
+         newLead.unique_wish_identifier__c = '123455';
          update newLead ;
          
      }
@@ -133,6 +144,7 @@ public class LeadTrigger_AT_Test{
          ICD_Codes__c  NewIcdCode = OrientationandTrainingUtil.createICDCode(newDesCription.Id);
          Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
          newLead.Status = 'Referred';
+         newLead.unique_wish_identifier__c = '123456';
         // newLead.Sub_Status__c ='Pending Diagnosis Verification';
          insert newLead;
          newLead.Sub_Status__c ='Pending Diagnosis Verification';
@@ -142,6 +154,7 @@ public class LeadTrigger_AT_Test{
          newLead.PD_Condition_Description__c = 'Malignant Melanoma';
          newLead.Medical_Questions__c = 'YES Test Diagnosis';
          newLead.Dup_Check__c = 'Block Lead Dup';
+         newLead.unique_wish_identifier__c = '123455';
          update newLead ;
          
      }
@@ -158,6 +171,7 @@ public class LeadTrigger_AT_Test{
          Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
          Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
          newLead.Child_Age__c = '4';
+         newLead.unique_wish_identifier__c = '123456';
          newLead.Treating_Medical_Professional_Contact_Id__c = trateProfContact.Id;
          newLead.Medical_Professional_ContactId__c = medicalProfContact.Id;
          newLead.Wish_Family_ContactId__c = wishFamily.Id;
@@ -168,7 +182,9 @@ public class LeadTrigger_AT_Test{
          update newLead;
          dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatus(newLead.Id); 
          Case partAWish = OrientationandTrainingUtil.CreatePartAWish(newLead.Id);
+         Test.startTest();
          newLead.Status = 'Qualified';
+         Test.stopTest();
          update newLead ;
          
       
@@ -178,9 +194,11 @@ public class LeadTrigger_AT_Test{
      {
          Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
          Lead newLead1 = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
+         newLead1.unique_wish_identifier__c = '1234568';
          insert newLead1;
          Lead newLead2 = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
          newLead2.Status='Referred'; 
+         newLead2.unique_wish_identifier__c = '123456';
          insert newLead2;
          newLead2.Sub_Status__c = 'Pending Diagnosis Verification';
          Database.SaveResult result = Database.update(newLead2, false);

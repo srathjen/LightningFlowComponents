@@ -4,7 +4,7 @@ public class WishChildSummary_AC{
     
     public WishChildSummary_AC(ApexPages.StandardController controller){
     
-    currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
+    currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushChildSummary__c,Contact.Hidden_Medical_Physician_Email__c,wish_involves_air_travel__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
      
     }
    
@@ -12,10 +12,22 @@ public class WishChildSummary_AC{
         if(currentParentCase.Description == Null ){
             DisplayErrorMessage();
         }
+        
+        else if(currentParentCase.Rush__c == true){
+          
+           
+          case updatenewCase = new Case();
+          updatenewCase.Id = currentParentCase.Id;
+          updatenewCase.IsRushChildSummary__c = true;
+          update updatenewCase;
+          DisplayMessage();
+        }
+        
         else{
         case updatenewCase = new Case();
         updatenewCase.Id = currentParentCase.Id;
         updatenewCase.Child_s_Medical_Summary_sent__c = system.today();
+        updatenewCase.wish_involves_air_travel__c = currentParentCase.wish_involves_air_travel__c;
         updatenewCase.Emergency_Number__c = Null;
         updatenewCase.Date_of_last_visit_treatment__c = Null;
         updatenewCase.Child_s_Medical_Summary_received_date__c = Null;

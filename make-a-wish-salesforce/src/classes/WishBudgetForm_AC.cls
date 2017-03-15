@@ -396,7 +396,7 @@ public class WishBudgetForm_AC{
                     userIdsSet.add(getGroupUsers.UserOrGroupId);
                 }
             }
-            userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE ((Id IN : userIdsSet AND ContactId = null)) AND IsActive=true  ];
+            userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE ((Id IN : userIdsSet AND ContactId = null) OR UserRole.Name = 'National Staff' ) AND IsActive=true  ];
             //userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE ((Id IN : userIdsSet AND Profile.Name != 'Active Volunteer') OR UserRole.Name = 'National Staff' ) AND IsActive=true  ];
         } else {
             //userList = [SELECT Id, Name, Profile.Name, UserRole.Name FROM User WHERE (UserRole.Name = 'National Staff' OR Profile.Name = 'System Administrator') AND IsActive=true];

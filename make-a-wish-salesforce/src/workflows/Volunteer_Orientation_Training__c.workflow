@@ -72,6 +72,48 @@
         <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Training_Registered_Email_Template</template>
     </alerts>
+    <alerts>
+        <fullName>Volunteer_O_T_Registered_for_Virtual_Self_faced_Training</fullName>
+        <description>Volunteer O&amp;T : Registered for Virtual Self faced Training</description>
+        <protected>false</protected>
+        <recipients>
+            <field>VolunteerHidden_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Automated_Volunteer_Templates/Training_Virtual_Self_Paced_Registered_Email_Template</template>
+    </alerts>
+    <rules>
+        <fullName>O%26T%3A Self Faced Training Registered Workflow Rule</fullName>
+        <actions>
+            <name>Volunteer_O_T_Registered_for_Virtual_Self_faced_Training</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Training</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
+            <operation>equals</operation>
+            <value>Registered</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Class_Offering__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Virtual - Self Paced</value>
+        </criteriaItems>
+        <description>This workflow will fire when the training is registered</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
     <rules>
         <fullName>O%26T%3AOrientation Cancelled Workflow Rule</fullName>
         <actions>
@@ -213,6 +255,11 @@
             <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
             <operation>equals</operation>
             <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Class_Offering__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Virtual - Self Paced</value>
         </criteriaItems>
         <description>This workflow will fire when the training is registered</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

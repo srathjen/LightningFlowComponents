@@ -39,6 +39,14 @@ Relationship to child:
 
 {!Lead.Relationship_to_child__c}
 
+Primary ICD-10 Code
+
+{!Lead.PD_ICD_Code__c}
+
+Primary Diagnosis
+
+{!Lead.PD_Condition_Description__c}
+
 Form:
 
 Wish Referral Form

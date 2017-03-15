@@ -15,10 +15,20 @@ trigger Affiliation_AT on npe5__Affiliation__c (Before Insert,Before Update,Afte
     // Whenever first Affiliation record is fallon under contact, assigning that record as primary.
     if(Trigger.isBefore && Trigger.isInsert) 
     {
+        Constant_Ac  constant = new constant_Ac();
+        Map<Id,Contact> getContactRecType = new Map<Id,Contact>();
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+
         for(npe5__Affiliation__c currRec : Trigger.new) 
         {
             contactIds.add(currRec.npe5__Contact__c);
         }
+        
+        if(contactIds.size() > 0)
+        {
+           getContactRecType.putAll([SELECT id,RecordTypeId FROM Contact WHERE Id IN :contactIds]);
+        }
+       
         
         for(AggregateResult ar : [SELECT npe5__Contact__c, count(Id) cnt FROM npe5__Affiliation__c 
                                   WHERE npe5__Contact__c IN :contactIds 
@@ -31,6 +41,14 @@ trigger Affiliation_AT on npe5__Affiliation__c (Before Insert,Before Update,Afte
         {
             if(!(contactsMap.containsKey(currRec.npe5__Contact__c))) {
                 currRec.npe5__Primary__c = True;
+            }
+            
+            if(currRec.npe5__Contact__c != Null && getContactRecType.containsKey(currRec.npe5__Contact__c))
+            {
+               if(getContactRecType.get(currRec.npe5__Contact__c).RecordTypeId != volunteerRecordTypeId)
+                  currRec.npe5__Status__c = 'Active';
+               else
+                  currRec.npe5__Status__c = 'Prospective';
             }
         }
         

@@ -104,6 +104,10 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Update_Wish_Child_Form_Info__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>OwnerId</field>
             </layoutItems>
             <layoutItems>
@@ -125,10 +129,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Unique_Wish_Record_Identifier__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Wish_Family_Form__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -158,6 +158,18 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Out_of_Territory__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Adoptable__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Adopted__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Adopted_By__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -494,6 +506,12 @@
             <quickActionName>FeedItem.TextPost</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
+            <quickActionName>Case.LogACall</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
+            <quickActionName>Case.ChangeStatus</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
             <quickActionName>FeedItem.ContentPost</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
@@ -598,6 +616,9 @@
     </relatedLists>
     <relatedLists>
         <relatedList>RelatedCommentsList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <relatedList>RelatedAttachmentList</relatedList>
     </relatedLists>
     <relatedObjects>ContactId</relatedObjects>
     <relatedObjects>AccountId</relatedObjects>

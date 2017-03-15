@@ -104,6 +104,7 @@ public class WishJourneyController_Test {
         currLead.Part_A_Received__c = Date.today();
         currLead.Referred_Date__c = Date.today();
         currLead.Part_A_Received__c = Date.today();
+        currLead.unique_wish_identifier__c = '123456';
         insert currLead;
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Completed';

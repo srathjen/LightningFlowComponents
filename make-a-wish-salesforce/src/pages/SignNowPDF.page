@@ -44,7 +44,7 @@
           <div style="width:25% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Wish Child’s Diagnosis :</div>
           <div class="{!IF(currWishChild.Diagnosis__c==null,'newfont','oldfont')}" style="width:67%; float:left; margin:3% 0 0 0; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.Diagnosis__c==null,'-',currWishChild.Diagnosis__c)}</div>
           <div style="width:30% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Wish Child’s Primary Address :</div>
-          <div class="{!IF(currWishChild.Primary_Address__c==null,'newfont','oldfont')}" style="width:67%; float:left; margin:3% 20px 0 0 !important; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.Primary_Address__c==null,'-',currWishChild.Primary_Address__c)} </div>
+          <div class="{!IF(currWishChild.PrimaryAddreess__c==null,'newfont','oldfont')}" style="width:67%; float:left; margin:3% 20px 0 0 !important; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.PrimaryAddreess__c==null,'-',currWishChild.PrimaryAddreess__c)} </div>
           <!-- <div style="width:67%; float:left;margin:2% 10px 0 0 !important; border-bottom:1px solid #000 !important;padding-left:1.6em !important;border:none;">{!currWishChild.Diagnosis__c}</div>     -->     
           <div style="width:32% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Wish Child’s Mobile Telephone :</div>
           <div class="{!IF(currWishChild.mobilePhone__c==null,'newfont','oldfont')}" style="width:60%; float:left; margin:3% 0 0 0; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.mobilePhone__c==null,'-',currWishChild.mobilePhone__c)} </div>
@@ -220,10 +220,7 @@
           <div style="width:10%; float:left;border-bottom:1px solid #000 !important; border:none;">dummy</div>    -->
           <div style="width:8% !important; float:left; font-weight:normal;">DOB : </div>
           <div class="{!IF(wishFamilContact.dob==null,'newfont','oldfont')}" style="width:32%; float:left;border-bottom:1px solid #000 !important; margin:0 10px 0 0; border:none;"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}" ><apex:param value="{!if(wishFamilContact.dob==null,NOW(),wishFamilContact.dob)}" /></apex:outputText></div>  
-          <div style="width:20% !important; float:left;margin:0 10px 0 0; font-weight:normal;">Address :</div>
-          <div class="{!IF(wishFamilContact.dob==null,'newfont','oldfont')}" style="width:65%; float:left;border-bottom:1px solid #000 !important;margin-top:0% !important;border:none;">address value</div>  
-        </div>
-
+          </div>
       
         <div style="clear:both"></div>
         <div style="margin-top:5px;">
@@ -596,52 +593,61 @@ any other pertinent information if needed during travel.</p>
             <tr>
                 <td style="width:45%;background:#bfbfbf; padding:0 5px;text-align:center;border:1px solid #000;">Travel Questions</td>
                 <td style="width:6%;background:#bfbfbf; padding:0 5px;text-align:center;border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;">Yes/No</td>
+                <td style="width:30%;background:#bfbfbf; padding:0 5px;text-align:center;border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;">Details</td>
                 <td style="width:30%;background:#bfbfbf; padding:0 5px;text-align:center;border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;">Notes</td>
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Has your family flown before?</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Has_your_family_flown_before__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Has_your_family_flown__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Has_your_family_flown_before_Note__c}</td>
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Will an interpreter be needed?</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_an_interpreter_be_needed__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_an_interpreter_be_needed_Details__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_an_interpreter_be_needed_Note__c}</td>
               
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Will a rental car seat(s) be needed? If yes, please note how many/what type.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_a_rental_car_seat_s_be_needed__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_a_rental_car_seat_s_Details__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_a_rental_car_seat_s_be_needed_Note__c}</td>
                
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Are all requested participants able to sit up during takeoff/ landing on airplane? If no, please note who cannot.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Sit_up_takeoff_landing_on_airplane__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Are_all_requested_participants_Details__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Sit_up_takeoff_landing_on_airplane_Note__c}</td>
                 
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Will a rental stroller be needed? If yes, what type?</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_a_rental_stroller_be_needed__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_a_rental_stroller_Details__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_a_rental_stroller_be_needed_Note__c}</td>
                
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Will handicap accessible accommodations be required?</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Handicap_accommodations_be_required__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Will_handicap_accessible_Details__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Handicap_accommodations_be_required_No__c}</td>
                
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Does each requested participant have valid passports?</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_have_valid_passports__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Does_each_requested_participant_Details__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_have_valid_passports_Note__c}</td>
                
             </tr>
             <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Does each requested participant (18 and over) have a valid U.S. federal or state-issued photo ID? If yes, please provide a copy of a valid ID for each individual.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Does_participant_have_valid_photo_ID__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Does_each_requested_participan__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Participant_have_valid_photo_ID_Note__c}</td>
                 
             </tr>
@@ -649,6 +655,7 @@ any other pertinent information if needed during travel.</p>
              <tr>
                 <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Does your family have a valid major credit card? Typically, a hotel will request a credit card for incidentals that may occur during a stay. If you do not have a credit card, other arrangements can be made; however, Make-AWish does need to know ahead of time.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Does_your_family_have_a_credit_card__c}</td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Does_your_family_Details__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Does_your_family_have_a_credit_card_Note__c}</td>
                 
             </tr>

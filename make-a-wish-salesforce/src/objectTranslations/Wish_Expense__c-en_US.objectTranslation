@@ -118,8 +118,16 @@
         <name>FE_Posted_In_Kind__c</name>
     </fields>
     <fields>
+        <label><!-- Import ID --></label>
+        <name>Import_ID__c</name>
+    </fields>
+    <fields>
         <label><!-- Journal Reference --></label>
         <name>Journal_Reference__c</name>
+    </fields>
+    <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
     </fields>
     <fields>
         <label><!-- Post Date --></label>

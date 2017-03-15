@@ -6,7 +6,7 @@
     <letterhead>Make_a_Wish_America</letterhead>
     <name>Contact:Rush Wish Reminder &amp; Alerts</name>
     <style>freeForm</style>
-    <subject>Rush Wish Reminder</subject>
+    <subject>Rush Wish Notification</subject>
     <textOnly>Hi {!Contact.OwnerFullName}</textOnly>
     <type>html</type>
 </EmailTemplate>

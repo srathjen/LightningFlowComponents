@@ -30,7 +30,7 @@
                                     <div class="col-md-12">
                                         <h3 class="row col-xs-12 col-sm-12 col-md-12">Primary Details</h3>
                                     </div>
-                                   
+
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                          <div class="row">
                                             <label class="col-xs-6 col-sm-6">Title: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!contactInstance[0].Title}" /></span>
@@ -41,7 +41,7 @@
                                                     <apex:outputField value="{!contactInstance[0].FirstName}"/> &nbsp;
                                                     <apex:outputField value="{!contactInstance[0].Middle_Name__c}"/> &nbsp;
                                                     <apex:outputField value="{!contactInstance[0].LastName}"/>
-                                            
+
                                             </span>
                                         </div>
                                         <div class="row">
@@ -220,8 +220,8 @@
                                         <h3>Primary Details</h3>
                                     </div>
                                     <div class="col-xs-12 col-sm-12 col-md-6">
-                                    
-                                      
+
+
                                         <div class="form-group row">
                                             <div class="col-sm-3">
                                                 <label for="title">Title</label>
@@ -240,7 +240,7 @@
                                                 <apex:inputText styleClass="form-control name-group firstname" html-placeholder="FirstName" maxlength="50" value="{!contactInstance[0].FirstName}"/>
                                             </div>
                                         </div>
-                                        
+
                                        <div class="form-group row">
                                             <div class="col-sm-3">
                                                 <apex:outputLabel >Last Name</apex:outputLabel>
@@ -249,7 +249,7 @@
                                                 <apex:inputText styleClass="form-control name-group lastname" html-placeholder="LastName" maxlength="50" value="{!contactInstance[0].LastName}"/>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="form-group row">
                                             <div class="col-sm-3">
                                                 <apex:outputLabel >Middle Name</apex:outputLabel>
@@ -707,7 +707,7 @@
                                         </div>
                                         <div class="row">
                                             <apex:outputLabel styleClass="col-xs-6 col-sm-6">Zip: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Zip_emp__c}"/></span>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Zip_Employer__c}"/></span>
                                         </div>
                                         <div class="row">
                                             <apex:outputLabel styleClass="col-xs-6 col-sm-6">Phone: </apex:outputLabel>
@@ -790,7 +790,7 @@
                                     <div class="form-group row">
                                             <apex:outputLabel styleClass="col-sm-3" for="emppostalcode">Postal Code</apex:outputLabel>
                                         <div class="col-sm-6">
-                                            <apex:inputText styleClass="form-control f-emppostalcode numbers-only" maxlength="5" id="emppostalcode" html-placeholder="00000" value="{!contactInstance[0].Zip_emp__c}" />
+                                            <apex:inputText styleClass="form-control f-emppostalcode numbers-only" maxlength="5" id="emppostalcode" html-placeholder="00000" value="{!contactInstance[0].Zip_Employer__c}" />
                                         </div>
                                     </div>
                                 </div>
@@ -915,15 +915,14 @@
         </main>
 
         <apex:include pageName="prospective_footer" id="pfooter" />
-        <!-- <script src="https://files-stackablejs.netdna-ssl.com/stacktable.min.js"></script> -->
+        <!-- <script src="{!URLFOR($Resource.prospective_assets, ' web/js/stacktable.min.js ')}"></script> -->
         <!-- fallback -->
         <!-- <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/stacktable.min.js')}"><\/script>')</script> -->
         <script>
           $('head').prepend('<title>Profile - Communities | Make-A-Wish\u00AE America</title>');
         </script>
-        <!-- chosen select-->
-        <!-- <script src="{!URLFOR($Resource.ux_chosen,'chosen.jquery.min.js')}" type="text/javascript"></script> -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.6.2/chosen.jquery.min.js" integrity="sha256-sLYUdmo3eloR4ytzZ+7OJsswEB3fuvUGehbzGBOoy+8=" crossorigin="anonymous"></script>
+        <!-- chosen select -->
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
         <!-- masked input -->
         <script src="{!URLFOR($Resource.prospective_assets,'web/js/jq.maskedinput.min.js')}" type="text/javascript"></script>
         <!-- validate forms -->

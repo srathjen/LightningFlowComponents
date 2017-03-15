@@ -76,6 +76,7 @@
     </fields>
     <fields>
         <fullName>Account_Phone__c</fullName>
+        <description>It holds the value of Account Phone</description>
         <externalId>false</externalId>
         <label>Account Phone</label>
         <length>30</length>
@@ -105,6 +106,7 @@
     <fields>
         <fullName>External_Id__c</fullName>
         <caseSensitive>false</caseSensitive>
+        <description>It holds the Id of External System.</description>
         <externalId>true</externalId>
         <label>External Id</label>
         <length>50</length>
@@ -125,6 +127,7 @@
     </fields>
     <fields>
         <fullName>Import_Id__c</fullName>
+        <description>IMPORT ID</description>
         <externalId>false</externalId>
         <label>Import Id</label>
         <length>50</length>
@@ -132,6 +135,15 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>It will indicate that records created manually or imported from RE.</description>
+        <externalId>false</externalId>
+        <label>Migrated Record</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>RE_Import_Id__c</fullName>

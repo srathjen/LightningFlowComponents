@@ -295,7 +295,7 @@
                                                                     </div>
                                                                     <apex:outputPanel rendered="{!medicalQuestion.medicalQuestion.Data_Type__c == 'Picklist'}">
                                                                         <div class="col-md-6">
-                                                                            <apex:outputPanel rendered="{!diagnosisVerification.conditionDescription == 'Total Parenteral Nutrition' && medicalQuestion.epilepsyPickVals.size > 0}"><label>Please choose year</label></apex:outputPanel>
+                                                                            <apex:outputPanel rendered="{!diagnosisVerification.conditionDescription == 'Total Parenteral Nutrition' && medicalQuestion.epilepsyPickVals.size > 0}"><label>Please select number of years</label></apex:outputPanel>
                                                                             <apex:selectList size="1" value="{!medicalQuestion.selectedPickVal}" styleClass="{!rowNum} malignant{!diagnosisBlock} medicalPickList form-control c-select requiredField"  onChange="MedicalQuestionVisibility({!diagnosisBlock},{!rowNum},this.value,'malignant{!diagnosisBlock}')">
                                                                                 <apex:selectoptions value="{!medicalQuestion.pickVals}"></apex:selectoptions>
                                                                             </apex:selectList>
@@ -308,7 +308,7 @@
                                                                     </apex:outputPanel>
                                                                     <apex:outputPanel rendered="{!medicalQuestion.epilepsyPickVals.size > 0}">
                                                                         <div class="col-md-6 epilepsyRadio{!diagnosisBlock}">
-                                                                            <apex:outputPanel rendered="{!diagnosisVerification.conditionDescription == 'Total Parenteral Nutrition'}"><label>Please choose month</label></apex:outputPanel>
+                                                                            <apex:outputPanel rendered="{!diagnosisVerification.conditionDescription == 'Total Parenteral Nutrition'}"><label>Please select number of months</label></apex:outputPanel>
                                                                             <apex:selectList size="1" value="{!medicalQuestion.epilepsySelectedPickVal}" styleClass="epilepsyRadioPick{!diagnosisBlock} medicalPickList form-control c-select" onChange="MedicalQuestionVisibility({!diagnosisBlock},{!rowNum},this.value,'epilepsyRadioPick{!diagnosisBlock}')">
                                                                                 <apex:selectoptions value="{!medicalQuestion.epilepsyPickVals}"></apex:selectoptions>
                                                                             </apex:selectList>
@@ -411,7 +411,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row expedite-explain fadein-alert">
-                                                <div class="col-md-12"><label>Please explain</label></div>
+                                                <div class="col-md-12"><label>Please provide timeframe and details</label></div>
                                                 <div class="col-md-6"><apex:inputTextarea styleClass="form-control plz-Exp " html-maxlength="10000" value="{!wishChildWrapperIns.plzExplain}" /></div>
                                             </div>
 
@@ -466,33 +466,33 @@
                                                 <div class="col-md-12"><label>Does {!currLead.FirstName} {!currLead.LastName} have any of the following conditions?</label> <span class="text-muted">(Please select all that apply)</span></div>
                                             </div>
                                             <div class="form-group row">
-                                                <div class="col-md-12"><label class="form-check-label">
+                                                <div class="col-md-12"><label class="form-check-label jq-checkboxval">
                                                     <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.iamNotSure}" />I am not sure</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <div class="col-md-12"><label class="form-check-label">
+                                                <div class="col-md-12"><label class="form-check-label jq-checkboxval">
                                                     <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.infectious}"/>Infectious Tuberculosis</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.airborne}"/>Airborne Viral Infections of High Mortality</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.airborne}"/>Airborne Viral Infections of High Mortality</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.surgeryinTwoMonths}" />Surgery in the past 2 months</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.surgeryinTwoMonths}" />Surgery in the past 2 months</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.pneumothorax}"/>Pneumothorax</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.pneumothorax}"/>Pneumothorax</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.pleural}"/>Pleural Effusion</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.pleural}"/>Pleural Effusion</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -500,29 +500,29 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.lungDisease}"/>Severe Restrictive Lung Disease</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.lungDiseaseString}" styleClass="form-control multi" multiselect="true"  >
+                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.lungDiseaseString}" styleClass="form-control multi jq-pickVal" multiselect="true"  >
                                                         <apex:selectOptions value="{!travelAlgorithmWrapperIns.LungDiseaseList}" />
                                                     </apex:selectList>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.oxygen}"/>Oxygen dependence at sea level</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.oxygen}"/>Oxygen dependence at sea level</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.seaLevel}"/>Oxygen requirement >4L/min at sea level</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.seaLevel}"/>Oxygen requirement >4L/min at sea level</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.longTermOxygen}"/>Long-term oxygen within last 6 months</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.longTermOxygen}"/>Long-term oxygen within last 6 months</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.respiratoryIllness}"/>Hospitalization for acute respiratory illness in the past 6 weeks</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.respiratoryIllness}"/>Hospitalization for acute respiratory illness in the past 6 weeks</label>
                                                 </div>
                                             </div>
 
@@ -531,12 +531,12 @@
                                                     <label class="form-check-label"><apex:inputcheckbox />Pulmonary hypertension</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <select  class="form-control c-select">
-                                                        <option value="" disabled="disabled" selected="selected">Please select</option>
-                                                        <option value="Travel Restriction - No air travel or altitude destination - Very high risk of respiratory compromise or death even with supplemental oxygen">NYHA Class IV</option>
-                                                        <option value="Air travel, altitude destination - High risk of respiratory compromise without supplemental oxygen">NYHA Class III</option>
-                                                        <option value="This provider may not know the current status, requires a second opinion">I do not know</option>
-                                                        <option value="No restrictions">Not Applicable</option>
+                                                    <select  class="form-control c-select jq-pickVal">
+                                                        <option value="" disabled="disabled">Please Select</option>
+                                                        <option value="NYHA Class IV">NYHA Class IV</option>
+                                                        <option value="NYHA Class III">NYHA Class III</option>
+                                                        <option value="I do not know">I do not know</option>
+                                                        <option value="Not Applicable">Not Applicable</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -546,7 +546,7 @@
                                                     <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.ventilator}"/>Ventilator Dependence</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.ventilatorText}" multiselect="false" size="1" styleclass="form-control c-select">
+                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.ventilatorText}" multiselect="false" size="1" styleclass="form-control c-select jq-pickVal">
                                                         <apex:selectOptions value="{!travelAlgorithmWrapperIns.ventilatorList}" />
                                                     </apex:selectList>
                                                 </div>
@@ -557,7 +557,7 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.angina}" />Chest Pain/Angina</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.anginaString}" multiselect="true" size="4" styleclass="form-control multi">
+                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.anginaString}" multiselect="true" size="4" styleclass="form-control multi jq-pickVal">
                                                         <apex:selectOptions value="{!travelAlgorithmWrapperIns.anginaList}" />
                                                     </apex:selectList>
                                                 </div>
@@ -567,7 +567,7 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.arrhythmia}" />Arrhythmia</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.ArrhythmiaString}" styleclass="form-control multi" size="4" multiselect="true">
+                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.ArrhythmiaString}" styleclass="form-control multi jq-pickVal" size="4" multiselect="true">
                                                         <apex:selectOptions value="{!travelAlgorithmWrapperIns.ArrhythmiaList}" />
                                                     </apex:selectList>
                                                 </div>
@@ -577,7 +577,7 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.heartFailure}" />Acute Heart Failure</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.heartFailureString}" multiselect="true" size="4" styleclass="form-control multi">
+                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.heartFailureString}" multiselect="true" size="4" styleclass="form-control multi jq-pickVal">
                                                         <apex:selectoptions value="{!travelAlgorithmWrapperIns.heartFailureList}" />
                                                     </apex:selectList>
                                                 </div>
@@ -587,7 +587,7 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.chronicHeartFailure}" />Chronic Heart Failure</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.chronicHeartFailureString}" styleclass="form-control multi" size="4" multiselect="true">
+                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.chronicHeartFailureString}" styleclass="form-control multi jq-pickVal" size="4" multiselect="true">
                                                         <apex:selectOptions value="{!travelAlgorithmWrapperIns.chronicHeartFailureList}" />
                                                     </apex:selectList>
                                                 </div>
@@ -598,14 +598,14 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.congenitalHeartDisease}" />Cyanotic Congenital Heart Disease</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.congenitalHeartDiseaseString}"  styleClass="form-control multi" multiselect="true" size="4" >
+                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.congenitalHeartDiseaseString}"  styleClass="form-control multi jq-pickVal" multiselect="true" size="4" >
                                                         <apex:selectOptions value="{!travelAlgorithmWrapperIns.congenitalHeartDiseaseList}" />
                                                     </apex:selectList>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputCheckbox value="{!travelAlgorithmWrapperIns.uncontrolledHypertension}" />Severe Uncontrolled Hypertension</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputCheckbox value="{!travelAlgorithmWrapperIns.uncontrolledHypertension}" />Severe Uncontrolled Hypertension</label>
                                                 </div>
                                             </div>
 
@@ -614,37 +614,37 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.acuteoRChronicHepatitis}"/>Acute or Chronic Hepatitis</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.chronicHepatitisString}" multiselect="false"  styleclass="form-control c-select" size="1">
+                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.chronicHepatitisString}" multiselect="false"  styleclass="form-control c-select jq-pickVal" size="1">
                                                         <apex:selectOptions value="{!travelAlgorithmWrapperIns.HepatitisValues}" />
                                                     </apex:selectList>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.portalHypertension}"/>Portal Hypertension</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.portalHypertension}"/>Portal Hypertension</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.heptopulmonarySyndrome}"/>Heptopulmonary Syndrome</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox />Chronic liver disease</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.heptopulmonarySyndrome}"/>Heptopulmonary Syndrome</label>
                                                 </div>
                                             </div>
 
+                                            <div class="form-group row">
+                                                <div class="col-md-12">
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox />Chronic liver disease</label>
+                                                </div>
+                                            </div>
+
 
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.liverDisease}"/>End Stage Liver Disease</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.liverDisease}"/>End Stage Liver Disease</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.esophagealVarices}"/>Esophageal varices or history of</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.esophagealVarices}"/>Esophageal varices or history of</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -653,14 +653,14 @@
                                                         <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.portopulmonaryHypertension}"/>Portopulmonary Hypertension</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.pulmonaryHypertensionString}" styleclass="form-control c-select" size="1">
+                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.pulmonaryHypertensionString}" styleclass="form-control c-select jq-pickVal" size="1">
                                                         <apex:selectOptions value="{!travelAlgorithmWrapperIns.pulmonaryHypertensionValues}"/>
                                                     </apex:selectList>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.intracranialPressure}"/>Increased Intracranial Pressure</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.intracranialPressure}"/>Increased Intracranial Pressure</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -668,7 +668,7 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.strokes}"/>Transient Ischemic Attacks or Strokes</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.strokesType}"  styleclass="form-control c-select" size="1">
+                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.strokesType}"  styleclass="form-control c-select jq-pickVal" size="1">
                                                         <apex:selectOptions value="{!travelAlgorithmWrapperIns.StrokeValues}"/>
                                                     </apex:selectList>
                                                 </div>
@@ -679,33 +679,33 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.convulsiveDisorder}"/>Unstable or uncontrolled epilepsy, seizure disorder, convulsive disorder</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.convulsiveDisorders}" multiselect="true"  styleclass="form-control multi">
+                                                    <apex:selectList value="{!travelAlgorithmWrapperIns.convulsiveDisorders}" multiselect="true"  styleclass="form-control multi jq-pickVal">
                                                         <apex:selectOptions value="{!travelAlgorithmWrapperIns.convulsiveDisorderList}" />
                                                     </apex:selectList>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.panicDisorder}"/>Panic Disorder</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.panicDisorder}"/>Panic Disorder</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.majorbleeding}"/>Major bleeding</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.majorbleeding}"/>Major bleeding</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.symptomaticAnemia}" />Symptomatic Anemia</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.symptomaticAnemia}" />Symptomatic Anemia</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputCheckbox value="{!travelAlgorithmWrapperIns.sickleCellAnemia}" />Sickle Cell Anemia</label>
+                                                    <label class="form-check-label jq-checkboxval"><apex:inputCheckbox value="{!travelAlgorithmWrapperIns.sickleCellAnemia}" />Sickle Cell Anemia</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <div class="col-md-12"><label class="form-check-label">
+                                                <div class="col-md-12"><label class="form-check-label jq-checkboxval">
                                                     <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.noneApply}" />None Apply</label>
                                                 </div>
                                             </div>
@@ -716,10 +716,28 @@
 
                                     <fieldset class="footer row">
                                         <div class="col-md-12">
-                                            <apex:commandButton value="Save" style="border-right:1px solid #fff" styleClass="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md saveMedicalInfoBtn" action="{!SaveMedicalInformation}" rerender="diagonsisLoop,findAndReplace,notEligible" onComplete="ShowSuccessMsg();"/>
+                                            <apex:commandButton value="Save" style="border-right:1px solid #fff" styleClass="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md saveMedicalInfoBtn" action="{!SaveMedicalInformation}" rerender="diagonsisLoop,findAndReplace,notEligible" onClick="checkfunction();" onComplete="ShowSuccessMsg();"/>
                                             <input type="button" class="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md SS-btn" value="Submit & Sign"/>
                                         </div>
                                     </fieldset>
+                                    <script>
+                                    function checkfunction() {
+                                        var stringGet = '';
+                                        $('.jq-checkboxval').each(function() {
+                                            if($(this).children(':checkbox').prop('checked')) {
+                                                
+                                                stringGet += $(this).text()+';';
+                                            }
+                                        });
+                                        $( ".jq-pickVal option:selected" ).each(function() {
+                                            if($(this).val() != '' && $(this).val() != 'Please Select' && $(this).val() != 'Please select') {
+                                                
+                                                stringGet += $(this).val()+';';
+                                                }
+                                            
+                                        });
+                                    }
+                                    </script>
 
                                 </div>
                                 <!-------------------------- Button block Ends ---------------------------->
@@ -945,11 +963,11 @@
         <!-- bootstrap css fallback (appends to head) -->
         <script>$.each(document.styleSheets, function(i,sheet){ if(sheet.href=='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css') {var rules = sheet.rules ? sheet.rules : sheet.cssRules; if (rules.length == 0) { $('<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css" />').appendTo('head');} } });</script>
         <!-- chosen select -->
-            <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
         <!-- masked input -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jq.maskedinput.min.js')}"></script>
         <!-- validate forms -->
-            <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
         <!-- validate form (additional methods) -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
         <script>
@@ -1067,7 +1085,7 @@
                         },
                              function(isConfirm){
                                  if (isConfirm) {
-                                    
+
                                      swal.close();
                                      removeDiagnosisBlockAndSign(num);
                                  } else {
@@ -1083,8 +1101,8 @@
                 saveMedInfo();
             }
         }
-		
-        
+
+
         function FillPrimaryDiagnosis(blockFocus) {
             swal({
                 title: "",
@@ -1103,13 +1121,13 @@
                  });
             return false;
         }
-        
-        
+
+
         //Used to redirect to docusign page after saving the form when "Submit & Sign" button clicked
         function docusignPageRedirect() {
             docusign();
         }
-        
+
         function SaveAndSign() {
             saveMedInfo();
         }

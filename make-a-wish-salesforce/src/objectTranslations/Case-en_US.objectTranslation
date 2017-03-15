@@ -9,12 +9,24 @@
         <name>Active_Wish_Granter__c</name>
     </fields>
     <fields>
+        <label><!-- Actual Cash --></label>
+        <name>Actual_Cash__c</name>
+    </fields>
+    <fields>
         <label><!-- Actual Departure Date --></label>
         <name>Actual_Departure_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Actual Inkind --></label>
+        <name>Actual_Inkind__c</name>
+    </fields>
+    <fields>
         <label><!-- Actual Return Date --></label>
         <name>Actual_Return_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Actual Total --></label>
+        <name>Actual_Total__c</name>
     </fields>
     <fields>
         <label><!-- Additional Interview Date1 --></label>
@@ -27,6 +39,26 @@
     <fields>
         <label><!-- Additional Requests --></label>
         <name>Additional_Requests__c</name>
+    </fields>
+    <fields>
+        <label><!-- Adoptable --></label>
+        <name>Adoptable__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Adopted By --></label>
+        <name>Adopted_By__c</name>
+    </fields>
+    <fields>
+        <label><!-- Adopted --></label>
+        <name>Adopted__c</name>
     </fields>
     <fields>
         <label><!-- Age --></label>
@@ -193,6 +225,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <label><!-- Chapter Name --></label>
         <name>ChapterName__c</name>
         <relationshipLabel><!-- Cases --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Chapter MACEmail --></label>
+        <name>Chapter_MACEmail__c</name>
     </fields>
     <fields>
         <label><!-- Chapter Medical Advisor Phone --></label>
@@ -514,6 +550,14 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Hidden_Primary_Diagnosis_del__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Publicity Notes --></label>
+        <name>Hidden_Publicity_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Publicity OK --></label>
+        <name>Hidden_Publicity_OK__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Referral date --></label>
         <name>Hidden_Referral_date__c</name>
     </fields>
@@ -614,6 +658,14 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>IsLocked__c</name>
     </fields>
     <fields>
+        <label><!-- IsRushChildSummary --></label>
+        <name>IsRushChildSummary__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsRushWishClearence&amp;ChildSummary --></label>
+        <name>IsRushWishClearence_ChildSummary__c</name>
+    </fields>
+    <fields>
         <help><!-- Record was created by MuleSoft as part of the chapter on-boarding process --></help>
         <label><!-- Is Migrated Record --></label>
         <name>Is_Migrated_Record__c</name>
@@ -697,12 +749,16 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Location_Address__c</name>
     </fields>
     <fields>
-        <label><!-- Medical Advisor Email --></label>
+        <label><!-- Hidden Medical Advisor Email --></label>
         <name>MAC_Email__c</name>
     </fields>
     <fields>
         <label><!-- MY WISH IS TO… --></label>
         <name>MY_WISH_IS_TO__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medical Advisor Email --></label>
+        <name>Medical_Advisor_Email__c</name>
     </fields>
     <fields>
         <label><!-- Primary Diagnosis --></label>
@@ -957,6 +1013,14 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Qualified Date --></label>
         <name>Qualified_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Qualifying Medical Professional Email --></label>
+        <name>Qualifying_Medical_Professional_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Qualifying Medical Professional Name --></label>
+        <name>Qualifying_Medical_Professional_Name__c</name>
     </fields>
     <fields>
         <label><!-- RE Account ID --></label>
@@ -1454,7 +1518,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Wish_Presentation_Set__c</name>
     </fields>
     <fields>
-        <help><!-- Please include items to be added to system-generated Wish Receipt --></help>
         <label><!-- Wish Receipt Items --></label>
         <name>Wish_Receipt_Items__c</name>
     </fields>
@@ -1669,6 +1732,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- isEmail --></label>
         <name>isEmail__c</name>
+    </fields>
+    <fields>
+        <label><!-- isNationalReply --></label>
+        <name>isNationalReply__c</name>
     </fields>
     <fields>
         <label><!-- isNational --></label>
@@ -1927,6 +1994,10 @@ arrangements/unique circumstances for any requested wish participant not residin
     <validationRules>
         <errorMessage><!-- There should be value on Date - Absent Parent Form when wish status is Completed. --></errorMessage>
         <name>Absent_Parent_Form_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Adopted By cannot be Blank when Adopted is checked. --></errorMessage>
+        <name>Case_Adoptable_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Please enter an explanation why &apos;No&apos; is selected for &apos;Meet PWL Criteria&apos; --></errorMessage>

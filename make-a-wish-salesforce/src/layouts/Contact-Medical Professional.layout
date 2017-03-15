@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <customButtons>npe4__Relationships_Viewer</customButtons>
     <excludeButtons>Clone</excludeButtons>
     <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>DisableCustomerPortal</excludeButtons>
@@ -71,10 +70,6 @@
                 <behavior>Edit</behavior>
                 <field>Birthdate</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Suffix__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -140,7 +135,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>npsp__Do_Not_Contact__c</field>
+                <field>DoNotCall</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -225,19 +220,11 @@
                 <behavior>Edit</behavior>
                 <field>OwnerId</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>External_Id__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>LastModifiedById</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>LeadSource</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -333,7 +320,6 @@
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
         <fields>TASK.WHAT_NAME</fields>
-        <fields>TASK.STATUS</fields>
         <fields>TASK.DUE_DATE</fields>
         <fields>CORE.USERS.FULL_NAME</fields>
         <fields>TASK.LAST_UPDATE</fields>

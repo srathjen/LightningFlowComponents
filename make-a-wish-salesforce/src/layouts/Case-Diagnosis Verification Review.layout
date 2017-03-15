@@ -59,30 +59,30 @@
         <label>Case Information</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>AccountId</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Lead__c</field>
             </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>RecordTypeId</field>
+                <field>ContactId</field>
             </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>OwnerId</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Local_MCA_Team__c</field>
+                <field>RecordTypeId</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MAC_Email__c</field>
+                <field>Local_MCA_Team__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Medical_Advisor_Email__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -95,6 +95,10 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
+                <field>Origin</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Required</behavior>
                 <field>Status</field>
             </layoutItems>
             <layoutItems>
@@ -103,10 +107,23 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Medical_Summary_Attachments__c</field>
+                <field>Description</field>
             </layoutItems>
         </layoutColumns>
-        <layoutColumns/>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>SuppliedEmail</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Priority</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>CreatedDate</field>
+            </layoutItems>
+        </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
@@ -128,35 +145,11 @@
                 <behavior>Readonly</behavior>
                 <field>CreatedById</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Required</behavior>
-                <field>Origin</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Priority</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>ContactId</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>LastModifiedById</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Description</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>CreatedDate</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>SuppliedEmail</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -174,6 +167,12 @@
     <quickActionList>
         <quickActionListItems>
             <quickActionName>FeedItem.TextPost</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
+            <quickActionName>Case.LogACall</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
+            <quickActionName>Case.ChangeStatus</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>FeedItem.ContentPost</quickActionName>
@@ -225,7 +224,6 @@
         <relatedList>RelatedCommentsList</relatedList>
     </relatedLists>
     <relatedObjects>ContactId</relatedObjects>
-    <relatedObjects>AccountId</relatedObjects>
     <runAssignmentRulesDefault>false</runAssignmentRulesDefault>
     <showEmailCheckbox>true</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
@@ -237,11 +235,6 @@
         <masterLabel>00h36000004nDxh</masterLabel>
         <sizeX>3</sizeX>
         <sizeY>3</sizeY>
-        <summaryLayoutItems>
-            <field>AccountId</field>
-            <posX>0</posX>
-            <posY>0</posY>
-        </summaryLayoutItems>
         <summaryLayoutItems>
             <field>CaseNumber</field>
             <posX>1</posX>

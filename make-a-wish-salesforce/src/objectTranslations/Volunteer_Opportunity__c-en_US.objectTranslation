@@ -466,6 +466,32 @@
         </sections>
     </layouts>
     <layouts>
+        <layout>Registered Non Wish Volunteer</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Non-Wish &amp; Event Details --></label>
+            <section>Non-Wish &amp; Event Details</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Registered Wish Volunteer</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Volunteer Details --></label>
+            <section>Volunteer Details</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Child Details --></label>
+            <section>Wish Child Details</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Volunteer Opportunity Layout</layout>
         <sections>
             <label><!-- Custom Links --></label>
@@ -512,6 +538,14 @@
     <recordTypes>
         <label><!-- Non Wish &amp; Event --></label>
         <name>Non_Wish_Event</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Volunteer Registered Non Wish --></label>
+        <name>Volunteer_Registered_Non_Wish</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Volunteer Registered Wish --></label>
+        <name>Volunteer_Registered_Wish</name>
     </recordTypes>
     <recordTypes>
         <label><!-- Wish --></label>

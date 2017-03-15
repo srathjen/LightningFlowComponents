@@ -13,10 +13,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Chapter_Name__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Prompt_upon_Login__c</field>
             </layoutItems>
         </layoutColumns>

@@ -30,5 +30,36 @@ public class CreateVolunteerUser_ATTest
         insert volunteerCon;
     
     }
+    
+    static  testmethod void CreateVolunteerUserContatUpdated()
+    {
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountwithVolunteerManager();
+        Constant_AC  constant = new Constant_AC();
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+        
+        Contact wishCon = new Contact();
+        wishCon.Firstname = 'Test';
+        wishCon.LastName = 'Contact1';
+        wishCon.Middle_Name__c = 'TestCon';
+        wishCon.Email = 'TestVolunteerCon@con15.com';
+        wishCon.MailingStreet  = 'ThillaiNagar';
+        wishCon.MailingCity = 'Trichy';
+        wishCon.MailingCountrycode = 'US';
+        wishCon.MailingPostalCode = '35004';
+        wishCon.mailingstatecode = 'AZ';
+        wishCon.MobilePhone= '9003910426';
+        wishCon.Migrated_Record__c = True;
+        wishCon.RecordTypeId = wichChildRecordTypeId ;
+        wishCon.AccountId = chapterAccount.id;
+        insert wishCon;
+        
+        wishCon.RecordTypeId = volunteerRecordTypeId;
+        update wishCon;
+        
+    
+    }
+    
+
 
 }

@@ -38,7 +38,6 @@ global class SendEmailToMacTeam_AC {
          case dbcase = [SELECT Id,OwnerId,Owner.Email FROM Case WHERE Id =: caseId];
         string nationalTeamTemplateID = Label.National_Email_Template_ID;
         string localTeamTemplateId = Label.Local_Email_Template_ID;
-        String ContactId = Label.ContactIdValue;
         Set<String> emailSet = new Set<String>();
         List<String> emailList = new List<String>();
         emailSet.add(Email);
@@ -57,7 +56,7 @@ global class SendEmailToMacTeam_AC {
         }
         System.debug(emailSet+' - '+OrgId.id+' - '+caseOwnerId+ ' - caseId'+caseId);
         emailMessage.setOrgWideEmailAddressId(OrgId.id);
-        emailMessage.setTargetObjectId(ContactId);
+        emailMessage.setTargetObjectId(caseOwnerId);
         emailMessage.setTreatTargetObjectAsRecipient(False);
         emailMessage.setToAddresses(emailList); 
         emailMessage.setwhatId(caseId);
@@ -86,11 +85,17 @@ global class SendEmailToMacTeam_AC {
         //Id OrgId = '0D25B00000000cF';
          String organizationWideLabel=System.Label.OrganizationWideEmail;
          ORGWIDEEMAILADDRESS  OrgId = [SELECT id,Address FROM ORGWIDEEMAILADDRESS WHERE Address =: organizationWideLabel LIMIT 1]; 
-        
+         case dbcase = [SELECT Id,OwnerId,Owner.Email FROM Case WHERE Id =: caseId];
         string nationalTeamTemplateID = Label.National_Email_Template_ID;
         string localTeamTemplateId = Label.Local_Email_Template_ID;
-        list<String> emailSet = new list<String>();
+        Set<String> emailSet = new Set<String>();
+        List<String> emailList = new List<String>();
         emailSet.add(emailTo);
+        emailSet.add(dbcase.Owner.Email);
+         for(String emailString : emailSet )
+         {
+            emailList.add(emailString);
+        } 
        
         system.debug('@@@@@ EMAIL SET @@@@@'+emailSet);
         string emailTemplateId;
@@ -103,7 +108,7 @@ global class SendEmailToMacTeam_AC {
         }
         emailMessage.setTargetObjectId(targetObjectId);
         emailMessage.setTreatTargetObjectAsRecipient(False);
-        emailMessage.setToAddresses(emailSet);
+        emailMessage.setToAddresses(emailList);
         emailMessage.setOrgWideEmailAddressId(OrgId.id);
         emailMessage.setwhatId(caseId);
         List<Messaging.Emailfileattachment> fileAttachments = new List<Messaging.Emailfileattachment>();

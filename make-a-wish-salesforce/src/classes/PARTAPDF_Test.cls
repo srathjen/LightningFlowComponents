@@ -1,3 +1,9 @@
+/*****************************************************************************************************************
+Created By : MST Solutions
+Created Date : 11/27/2016
+Description : This test class used to perform unit testing for the 'Docusign Page (LeadPartA Output PDF)'. 
+*******************************************************************************************************************/
+
 @isTest
 public class PARTAPDF_Test {
     
@@ -23,12 +29,10 @@ public class PARTAPDF_Test {
         newLead.Current_Condition__c = 'Test1;Test2;Test3;';
         newLead.Current_Condition_Label__c = 'Test1;Test2;Test3;';
         newLead.PD_Condition_Description__c = 'Malignant Melanoma';  
+        newLead.unique_wish_identifier__c = '123456';
+       
+        insert newLead;    
         
-        try{
-            insert newLead;    
-        }Catch(Exception ex){
-            System.debug('Exception '+ex.getMessage());
-        }
         Lead_File__c newFile = new Lead_File__c();
         newFile.Parent__c = newLead.Id;
         newFile.Description__c = 'SampleDesc';
@@ -50,7 +54,7 @@ public class PARTAPDF_Test {
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);
         PARTAPDF partAPDF = new PARTAPDF();
-    	partAPDF.loadData();
+        partAPDF.loadData();
         Test.stopTest();
     }
 }

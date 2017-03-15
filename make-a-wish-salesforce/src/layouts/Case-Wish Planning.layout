@@ -106,6 +106,10 @@
                 <behavior>Edit</behavior>
                 <field>ChapterName__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Hidden_Chapter_Name__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
@@ -327,6 +331,12 @@
     <quickActionList>
         <quickActionListItems>
             <quickActionName>FeedItem.TextPost</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
+            <quickActionName>Case.LogACall</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
+            <quickActionName>Case.ChangeStatus</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>FeedItem.ContentPost</quickActionName>

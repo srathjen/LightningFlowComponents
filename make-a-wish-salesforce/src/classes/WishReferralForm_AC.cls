@@ -54,6 +54,7 @@ currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
         String label = '';
         Boolean flag = True;
         CurrLead.State = currState;
+        currLead.LeadSource = 'Online';
         
         
         System.debug('diagnosisFilter++++++++++++++++++++++ ' + diagnosisFilter); 

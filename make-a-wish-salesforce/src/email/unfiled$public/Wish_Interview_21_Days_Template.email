@@ -1,6 +1,13 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[Hi,<div><br></div><div>The interview date not yet set</div>]]></td>
+<![CDATA[<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;">Hi </span>{!Volunteer_Opportunity__c.Volunteer_Name__c}<span style="font-size: 12pt;">,<br></span></font><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"><br>Thank
+you for volunteering for </span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">{!Case.Contact}</span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">’s wish. Please take a moment
+to enter the initial interview date for this wish child into the <a href="https://make-a-wish.force.com/communitieslogin">Wish &amp;
+Volunteer Center</a>&nbsp;as soon as you are able. You can find this particular wish
+child’s record by visiting the Make-A-Wish Volunteer Center and looking under
+“My Assignments."<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>If
+you are experiencing difficulties contacting this family, please let me know.<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Thanks,<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>{!Case.OwnerFullName}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Case.OwnerTitle}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Case.Chapter_Name__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Case.OwnerPhone}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Case.OwnerEmail}</span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;">
+<!--[endif]--><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;"><o:p></o:p></span></font></p>]]></td>
 </tr>
 </table>

@@ -21,8 +21,10 @@
         <name>Assign_approval_to_users</name>
     </approvalStep>
     <description>This approval process is used to submit the wish for approval once the budget form is filled</description>
+    <emailTemplate>unfiled$public/Case_Budget_Approval_Template</emailTemplate>
     <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
     <entryCriteria>
+        <booleanFilter>1</booleanFilter>
         <criteriaItems>
             <field>Case.RecordType</field>
             <operation>equals</operation>

@@ -7,8 +7,6 @@
     <name>Send Reply Email Template</name>
     <style>freeForm</style>
     <subject>Make A wish America  [{!Case.Thread_Id}]</subject>
-    <textOnly>Hello
-
-{!Case.Case_Comment__c}</textOnly>
+    <textOnly>{!Case.Case_Comment__c}</textOnly>
     <type>html</type>
 </EmailTemplate>

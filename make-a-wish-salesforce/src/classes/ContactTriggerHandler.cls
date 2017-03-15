@@ -163,6 +163,8 @@ public class ContactTriggerHandler{
                    houseHoldAffiliation.npe5__StartDate__c = Date.Today();
                    houseHoldAffiliation.npe5__Status__c = 'Current';
                    houseHoldAffList.add(houseHoldAffiliation);
+                   
+                   system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
                  }
                    
                    
@@ -327,5 +329,19 @@ public class ContactTriggerHandler{
         
         if(updateFamilyContactList.size() > 0)
            update updateFamilyContactList;
+    }
+    
+    public static void updateRelationship(Map<Id,Contact> conMap){
+        Map<Id,npe4__Relationship__c> relationShipMap = new Map<Id,npe4__Relationship__c>();
+        for(npe4__Relationship__c  dbRelationShip : [SELECT Id,npe4__Contact__c ,npe4__RelatedContact__c,npe4__Type__c  From npe4__Relationship__c  WHERE npe4__RelatedContact__c IN: conMap.KeySet()]){
+            
+            if(conMap.containsKey(dbRelationShip.npe4__RelatedContact__c)){
+                dbRelationShip.npe4__Type__c  = conMap.get(dbRelationShip.npe4__RelatedContact__c).Relationship__c;
+                relationShipMap.put(dbRelationShip.Id,dbRelationShip);
+            }
+        }
+        
+        if(relationShipMap.size() > 0)
+        update relationShipMap.values();
     }
 }

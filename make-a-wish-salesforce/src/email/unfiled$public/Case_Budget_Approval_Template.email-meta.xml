@@ -6,9 +6,19 @@
     <letterhead>Make_a_Wish_America</letterhead>
     <name>Case : Budget Approval Template</name>
     <style>freeForm</style>
-    <subject>Budget form</subject>
-    <textOnly>Hi
+    <subject>Budget Approval Request</subject>
+    <textOnly>Hello,
 
-The following budget form has been assigned to you please review the form. https://c.cs52.visual.force.com/apex/WishBudgetForm_VF?CaseId={!Case.Id}</textOnly>
+The following budget has been assigned to you for approval. Please click the link below to review the submission.
+
+
+Wish Child: {!Case.Hidden_Wish_Child_Full_Name__c}
+Click Here to Review Budget
+
+Thanks,
+
+{!User.Name}
+{!User.Title}
+{!Case.Hidden_Chapter_Name__c}</textOnly>
     <type>html</type>
 </EmailTemplate>

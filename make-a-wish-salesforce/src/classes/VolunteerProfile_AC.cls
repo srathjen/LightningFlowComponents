@@ -588,7 +588,6 @@ public class VolunteerProfile_AC{
            
         if((contactInstance[0].Name== Null || contactInstance[0].Name == '') || (contactInstance[0].Email == Null || contactInstance[0].Email == '')
            || (contactInstance[0].Birth_Month__c == Null || contactInstance[0].Birth_Month__c == '') || (contactInstance[0].Birth_Day__c == '' || contactInstance[0].Birth_Day__c == '') ||
-           (contactInstance[0].HomePhone == Null || contactInstance[0].HomePhone == '')  ||
            (contactInstance[0].MailingStreet == NULL || contactInstance[0].MailingStreet == '') || (contactInstance[0].MailingCity == NULL || contactInstance[0].MailingCity == '') || 
            (contactInstance[0].MailingPostalCode== NULL || contactInstance[0].MailingPostalCode == '') ||  (contactInstance[0].County__c == NULL || contactInstance[0].County__c == '')
            || (contactInstance[0].mailingstate == NULL || contactInstance[0].mailingstate == '') || (contactInstance[0].Understand__c == NULL || contactInstance[0].Understand__c == '') ||

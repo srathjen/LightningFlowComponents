@@ -207,11 +207,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Chapter_Name__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Birthdate__c</field>
             <table>Case</table>
         </columns>
@@ -1378,6 +1373,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Budget_Inkind__c</field>
+            <table>Case</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Wish_Assist__c</field>
             <table>Case</table>
         </columns>
         <masterLabel>Cases</masterLabel>

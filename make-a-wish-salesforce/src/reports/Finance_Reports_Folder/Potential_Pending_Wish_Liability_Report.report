@@ -28,9 +28,6 @@
         <field>Case.End_Date__c</field>
     </columns>
     <columns>
-        <field>Case.Meet_PWL_Criteria__c</field>
-    </columns>
-    <columns>
         <field>Case.Comment_for_PWL_Not_Met__c</field>
     </columns>
     <columns>
@@ -43,7 +40,7 @@
             <column>STATUS</column>
             <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
-            <value>Closed,Qualified,Ready to Assign</value>
+            <value>Closed,Qualified,Ready to Assign,Ready to Interview,Inactive</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
@@ -85,10 +82,15 @@
             <column>Case.End_Date__c</column>
             <isUnlocked>false</isUnlocked>
             <operator>lessOrEqual</operator>
-            <value>LAST_N_DAYS:365</value>
+            <value>TODAY</value>
         </criteriaItems>
     </filter>
-    <format>Tabular</format>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case.Meet_PWL_Criteria__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
     <name>Potential Pending Wish Liability Report</name>
     <params>
         <name>units</name>

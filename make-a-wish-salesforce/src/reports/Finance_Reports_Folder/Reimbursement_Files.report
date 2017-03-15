@@ -13,15 +13,6 @@
         <field>Case.In_Kind_Donation_Reimbursement__r$Owner</field>
     </columns>
     <columns>
-        <field>Case.In_Kind_Donation_Reimbursement__r$Login_Users_City__c</field>
-    </columns>
-    <columns>
-        <field>Case.In_Kind_Donation_Reimbursement__r$login_users_State__c</field>
-    </columns>
-    <columns>
-        <field>Case.In_Kind_Donation_Reimbursement__r$Login_users_Zip__c</field>
-    </columns>
-    <columns>
         <field>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r$CreatedDate</field>
     </columns>
     <columns>
@@ -79,6 +70,9 @@
         <field>Case.In_Kind_Donation_Reimbursement__r$Total_Reimbursement_Amount__c</field>
     </columns>
     <columns>
+        <field>Case$Wish_Assist__c</field>
+    </columns>
+    <columns>
         <field>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r$File_Name__c</field>
     </columns>
     <columns>
@@ -120,6 +114,6 @@
     <showDetails>true</showDetails>
     <timeFrameFilter>
         <dateColumn>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r$CreatedDate</dateColumn>
-        <interval>INTERVAL_CURFY</interval>
+        <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

@@ -1174,6 +1174,15 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
+        <fullName>Language_Notes__c</fullName>
+        <description>It store the descriptions about the language.</description>
+        <externalId>false</externalId>
+        <label>Language Notes</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>MAC_Email__c</fullName>
         <description>This filed is used to store the value of MAC Email.</description>
         <externalId>false</externalId>
@@ -1295,6 +1304,90 @@
         <trackFeedHistory>false</trackFeedHistory>
         <type>Number</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PrimaryLanguage__c</fullName>
+        <description>It will capture the known language details it may be more than one language
+Help Text</description>
+        <externalId>false</externalId>
+        <label>Primary Language</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>English</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Spanish</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>American Sign Language</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Arabic</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Chinese</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>French and French Creole</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>German</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Hindi</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Italian</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Japanese</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Korean</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Polish</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Portuguese</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Russian</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Tagalog</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Vietnamese</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
     </fields>
     <fields>
         <fullName>Primary_Contact__c</fullName>
@@ -1929,7 +2022,7 @@
         <fullName>Wish_Co_ordinator_Hidden_Email__c</fullName>
         <description>This filed is used to get wish co-ordinator email</description>
         <externalId>false</externalId>
-        <label>Wish Co-ordinator Hidden Email</label>
+        <label>Wish Coordinator Hidden Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Email</type>
@@ -1940,7 +2033,7 @@
         <deleteConstraint>SetNull</deleteConstraint>
         <description>This field will look up to the wish coordinator(User)</description>
         <externalId>false</externalId>
-        <label>Wish Co-ordinator</label>
+        <label>Wish Coordinator</label>
         <referenceTo>User</referenceTo>
         <relationshipName>Accounts4</relationshipName>
         <required>false</required>

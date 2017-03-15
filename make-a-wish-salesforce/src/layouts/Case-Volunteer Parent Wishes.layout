@@ -156,6 +156,18 @@
                 <behavior>Edit</behavior>
                 <field>Out_of_Territory__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Adoptable__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Adopted__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Adopted_By__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -379,6 +391,12 @@
     <quickActionList>
         <quickActionListItems>
             <quickActionName>FeedItem.TextPost</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
+            <quickActionName>Case.LogACall</quickActionName>
+        </quickActionListItems>
+        <quickActionListItems>
+            <quickActionName>Case.ChangeStatus</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>FeedItem.ContentPost</quickActionName>

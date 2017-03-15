@@ -2258,6 +2258,368 @@ RECIP_RELATION_CODE&quot;</description>
         </picklistValues>
     </recordTypes>
     <recordTypes>
+        <fullName>Volunteer_Registered_Non_Wish</fullName>
+        <active>true</active>
+        <description>This Record type is assigned to volunteer.Who are all registered for the non wish.</description>
+        <label>Volunteer Registered Non Wish</label>
+        <picklistValues>
+            <picklist>Approval_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initiated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Assigned</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejection Notification</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reason_Inactive__c</picklist>
+            <values>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactivated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Moved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-responsive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Required_Forms_for_Volunteers__c</picklist>
+            <values>
+                <fullName>Annual Conflict of Interest %26 Ethics Assurance Statement Fact Sheet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Associates Database%3A How to Guide</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Advantage Fact Sheet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Single Day Event Volunteers Fact Sheet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Volunteer Application Fact Sheet</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Volunteer_Role_Name__c</picklist>
+            <values>
+                <fullName>Advisory Committee%2C non-voting Board Member</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Airport Greeter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Board Member</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Celebrity Host</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fundraising Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medical Advisor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medical Outreach Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Regional Champion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Single Day Event Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Speaker%27s Bureau</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Special Events - Committee Member</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Special Events - Day of Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Translator %26 Interpreter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Volunteer Manager</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wish Assist Phone Greeter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wish Assist Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wish Coordinator</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wish Granter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wish Granter Mentor</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Volunteer_Registered_Wish</fullName>
+        <active>true</active>
+        <description>This Record type is assigned to volunteer for who are all registered for the wish.</description>
+        <label>Volunteer Registered Wish</label>
+        <picklistValues>
+            <picklist>Approval_Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Initiated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Assigned</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Rejection Notification</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Reason_Inactive__c</picklist>
+            <values>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactivated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Moved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-responsive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Requested</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Required_Forms_for_Volunteers__c</picklist>
+            <values>
+                <fullName>Annual Conflict of Interest %26 Ethics Assurance Statement Fact Sheet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Associates Database%3A How to Guide</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>First Advantage Fact Sheet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Single Day Event Volunteers Fact Sheet</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Volunteer Application Fact Sheet</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Volunteer_Role_Name__c</picklist>
+            <values>
+                <fullName>Advisory Committee%2C non-voting Board Member</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Airport Greeter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Board Member</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Celebrity Host</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Fundraising Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medical Advisor</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medical Outreach Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Office Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Regional Champion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Single Day Event Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Speaker%27s Bureau</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Special Events - Committee Member</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Special Events - Day of Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Translator %26 Interpreter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Volunteer Manager</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wish Assist Phone Greeter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wish Assist Volunteer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wish Coordinator</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wish Granter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Wish Granter Mentor</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
         <fullName>Wish</fullName>
         <active>true</active>
         <description>This record type would associate the volunteer to the wish</description>
@@ -2445,6 +2807,7 @@ RECIP_RELATION_CODE&quot;</description>
         <searchResultsAdditionalFields>Event_Name__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Chapter_Name__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Chapter_Role_Opportunity__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Role__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Read</sharingModel>
     <validationRules>

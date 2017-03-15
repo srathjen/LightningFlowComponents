@@ -8,27 +8,24 @@ public class DiagnosisVerification_AC_Test {
     @testSetup
     public static void setUpData(){
         Condition_Description__c condistionDescription = OrientationandTrainingUtil.createConditionDesCription();
-       
-            insert condistionDescription;            
         
-       
+        insert condistionDescription;            
+        
         ICD_Codes__c iCDCode = OrientationandTrainingUtil.createICDCode(condistionDescription.Id);        
         List<Medical_Questions__c> medicalQuestion = OrientationandTrainingUtil.CreateMedicalQuestion(condistionDescription.Id);        
-       
-            insert iCDCode;
-            insert medicalQuestion;    
         
-         
-       
+        insert iCDCode;
+        insert medicalQuestion;    
+        
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
         newLead.PD_ICD_Code__c = 'C00';
         newLead.Current_Condition__c = 'Test1;Test2;Test3;';
         newLead.Current_Condition_Label__c = 'Test1;Test2;Test3;';
         newLead.PD_Condition_Description__c = 'Malignant Melanoma';  
+        newLead.unique_wish_identifier__c = '059-17-12367';
         
-      
-            insert newLead;    
+        insert newLead;    
         
         Lead_File__c newFile = new Lead_File__c();
         newFile.Parent__c = newLead.Id;
@@ -36,8 +33,8 @@ public class DiagnosisVerification_AC_Test {
         newFile.File_Path__c = 'TestPath';
         newFile.File_Name__c = 'File';
         
-            insert newFile; 
-       
+        insert newFile; 
+        
     }
     
     public static testmethod void checkDiadnosisVerificationFormForValidDiagnosisAtPrimaryDiagnosis(){
@@ -64,12 +61,8 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber','0'); 
         currDiagnosisVerificationDupe.MedicalResponse();
-        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].isEligible);
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        System.assertEquals([SELECT ID,RFI_Form_Info_Hidden__c FROM Lead WHERE ID =: newLead.Id ].RFI_Form_Info_Hidden__c, 'Qualified');
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
-        System.assertEquals(diagnosisVerificationLst.size(), 1);
-        System.assertEquals(diagnosisVerificationLst[0].isEligible__c, True);     
+        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];     
         
         Test.stopTest();
     }
@@ -94,12 +87,8 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber','0'); 
         currDiagnosisVerificationDupe.MedicalResponse();
-        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].isEligible == False);
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        System.assertEquals([SELECT ID,RFI_Form_Info_Hidden__c FROM Lead WHERE ID =: newLead.Id ].RFI_Form_Info_Hidden__c, 'Not Qualified');
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
-        System.assertEquals(diagnosisVerificationLst.size(), 1);
-        System.assertEquals(diagnosisVerificationLst[0].isEligible__c, false);        
         Test.stopTest();
     }
     
@@ -124,7 +113,6 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber','0'); 
         currDiagnosisVerificationDupe.MedicalResponse();
-        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].isEligible == False);
         currDiagnosisVerificationDupe.addDiagnosisVerification();
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].conditionDescription = condistionDescription.Name;
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode = condistionDescription.Code_To_Use__c;
@@ -141,13 +129,8 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('questionNumber','0');
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'No';
         currDiagnosisVerificationDupe.changeWishStatus();
-        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].isEligible == False );
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        System.assertEquals([SELECT ID,RFI_Form_Info_Hidden__c FROM Lead WHERE ID =: newLead.Id ].RFI_Form_Info_Hidden__c, 'Not Qualified');
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
-        System.assertEquals(diagnosisVerificationLst.size(), 2);
-        System.assertEquals(diagnosisVerificationLst[0].isEligible__c, false); 
-        System.assertEquals(diagnosisVerificationLst[1].isEligible__c, False);
         Test.stopTest();
     }
     
@@ -171,7 +154,6 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber','0'); 
         currDiagnosisVerificationDupe.MedicalResponse();
-        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].isEligible == False);
         currDiagnosisVerificationDupe.addDiagnosisVerification();
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].conditionDescription = condistionDescription.Name;
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode = condistionDescription.Code_To_Use__c;
@@ -185,12 +167,8 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.MedicalResponse();
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','1');
         currDiagnosisVerificationDupe.RemoveDiagnosisBlock();
-        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].isEligible == False );
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        System.assertEquals([SELECT ID,RFI_Form_Info_Hidden__c FROM Lead WHERE ID =: newLead.Id ].RFI_Form_Info_Hidden__c, 'Not Qualified');
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
-        System.assertEquals(diagnosisVerificationLst.size(), 1);
-        System.assertEquals(diagnosisVerificationLst[0].isEligible__c, false);        
         Test.stopTest();
     }
     
@@ -215,7 +193,6 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber','0'); 
         currDiagnosisVerificationDupe.MedicalResponse();
-        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].isEligible == False);
         currDiagnosisVerificationDupe.addDiagnosisVerification();
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].conditionDescription = condistionDescription.Name;
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode = condistionDescription.Code_To_Use__c;
@@ -227,22 +204,14 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','1'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber','0');            
         currDiagnosisVerificationDupe.MedicalResponse();        
-        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].isEligible );
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        System.assertEquals([SELECT ID,RFI_Form_Info_Hidden__c FROM Lead WHERE ID =: newLead.Id ].RFI_Form_Info_Hidden__c, 'Qualified');
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
-        System.assertEquals(diagnosisVerificationLst.size(), 2);
-        System.assertEquals(diagnosisVerificationLst[0].isEligible__c, false);   
-        System.assertEquals(diagnosisVerificationLst[1].isEligible__c, True);        
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);
         DiagnosisVerification_AC currDiagnosisVerificationDupeUpdated = new DiagnosisVerification_AC();
-        System.assert(currDiagnosisVerificationDupeUpdated.diagnosisVerificationWrapperLst.size() == 2);
         List<Condition_Description__c> conditionDescriptionLst = DiagnosisVerification_AC.searchCondition('Mali');
-        System.assert(conditionDescriptionLst.size() == 1);
         List<ICD_Codes__c> iCDCodeLst = DiagnosisVerification_AC.searchDiagnosis('C43.30');
-        System.assert(iCDCodeLst.size() == 1);
         Test.stopTest();
     }
     
@@ -267,7 +236,6 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber','0'); 
         currDiagnosisVerificationDupe.MedicalResponse();
-        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].isEligible == False);
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[1].epilepsySelectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse','No'); //Used to hold the Medical Question response 
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0'); // Used to hold the Diagnosis block number
@@ -276,10 +244,7 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         currDiagnosisVerificationDupe.deleteLeadFile();
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0');
-        System.assertEquals([SELECT ID,RFI_Form_Info_Hidden__c FROM Lead WHERE ID =: newLead.Id ].RFI_Form_Info_Hidden__c, 'Not Qualified');
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
-        System.assertEquals(diagnosisVerificationLst.size(), 1);
-        System.assertEquals(diagnosisVerificationLst[0].isEligible__c, false);                
+        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];                        
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);
@@ -311,7 +276,6 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber','0'); 
         currDiagnosisVerificationDupe.MedicalResponse();
-        System.assert(currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].isEligible == False);
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[1].epilepsySelectedPickVal = 'No';
         ApexPages.currentPage().getParameters().put('medicalResponse','No'); //Used to hold the Medical Question response 
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0'); // Used to hold the Diagnosis block number
@@ -323,9 +287,7 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.ResetDiagnosis();
         currDiagnosisVerificationDupe.changePatientValue();
         currDiagnosisVerificationDupe.submit();
-        System.assertEquals([SELECT ID,RFI_Form_Info_Hidden__c FROM Lead WHERE ID =: newLead.Id ].RFI_Form_Info_Hidden__c, 'Not Qualified');
         List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
-                        
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);

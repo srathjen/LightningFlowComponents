@@ -449,15 +449,15 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Country --></label>
+        <label><!-- Hidden Country --></label>
         <name>Hidden_Country__c</name>
     </fields>
     <fields>
-        <label><!-- Email --></label>
+        <label><!-- Hidden Email --></label>
         <name>Hidden_Email__c</name>
     </fields>
     <fields>
-        <label><!-- First Name --></label>
+        <label><!-- Hidden First Name --></label>
         <name>Hidden_First_Name__c</name>
     </fields>
     <fields>
@@ -473,7 +473,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Last Name --></label>
+        <label><!-- Hidden Last Name --></label>
         <name>Hidden_Last_Name__c</name>
     </fields>
     <fields>
@@ -489,7 +489,7 @@
         <name>Hidden_Minor_Participant__c</name>
     </fields>
     <fields>
-        <label><!-- Phone --></label>
+        <label><!-- Hidden Phone --></label>
         <name>Hidden_Phone__c</name>
     </fields>
     <fields>
@@ -497,7 +497,7 @@
         <name>Hidden_Same_Address__c</name>
     </fields>
     <fields>
-        <label><!-- State --></label>
+        <label><!-- Hidden State --></label>
         <name>Hidden_State__c</name>
     </fields>
     <fields>
@@ -533,7 +533,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Street --></label>
+        <label><!-- Hidden Street --></label>
         <name>Hidden_Street__c</name>
     </fields>
     <fields>
@@ -545,11 +545,11 @@
         <name>Hidden_Wish_Child_Id__c</name>
     </fields>
     <fields>
-        <label><!-- Zip Code --></label>
+        <label><!-- Hidden Zip Code --></label>
         <name>Hidden_Zip_Code__c</name>
     </fields>
     <fields>
-        <label><!-- City --></label>
+        <label><!-- Hidden City --></label>
         <name>Hidden_city__c</name>
     </fields>
     <fields>
@@ -617,6 +617,10 @@
 and the date it was or will be granted. --></help>
         <label><!-- If yes,Enter Org.Name,Wish&amp; Date it was --></label>
         <name>If_yes_Enter_Org_Name_Wish_Date_it_was__c</name>
+    </fields>
+    <fields>
+        <label><!-- Import Id --></label>
+        <name>Import_Id__c</name>
     </fields>
     <fields>
         <label><!-- Inquiry/Referral Method --></label>
@@ -1073,6 +1077,18 @@ and the date it was or will be granted. --></help>
         <name>RE_Business_Phone__c</name>
     </fields>
     <fields>
+        <label><!-- RE City Employer --></label>
+        <name>RE_City_Employer__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE City Referrer --></label>
+        <name>RE_City_Referrer__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Country --></label>
+        <name>RE_Country__c</name>
+    </fields>
+    <fields>
         <label><!-- RE County --></label>
         <name>RE_County__c</name>
     </fields>
@@ -1169,6 +1185,18 @@ and the date it was or will be granted. --></help>
         <name>RE_Mailing_City2__c</name>
     </fields>
     <fields>
+        <label><!-- RE Mailing City --></label>
+        <name>RE_Mailing_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Mailing Country --></label>
+        <name>RE_Mailing_Country__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Mailing State --></label>
+        <name>RE_Mailing_State1__c</name>
+    </fields>
+    <fields>
         <label><!-- RE Mailing State --></label>
         <name>RE_Mailing_State__c</name>
     </fields>
@@ -1179,6 +1207,14 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- RE Mailing Street --></label>
         <name>RE_Mailing_Street2__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Mailing Street --></label>
+        <name>RE_Mailing_Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Mailing ZIP --></label>
+        <name>RE_Mailing_ZIP__c</name>
     </fields>
     <fields>
         <label><!-- RE Mailing Zip --></label>
@@ -1234,11 +1270,19 @@ and the date it was or will be granted. --></help>
     </fields>
     <fields>
         <label><!-- RE Position --></label>
+        <name>RE_Position1__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Position --></label>
         <name>RE_Position__c</name>
     </fields>
     <fields>
         <label><!-- RE Preferred Name --></label>
         <name>RE_Preferred_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Preferred_Phone_Types__c --></label>
+        <name>RE_Preferred_Phone_Types_c__c</name>
     </fields>
     <fields>
         <label><!-- RE Preferred Phone --></label>
@@ -1275,6 +1319,30 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- RE_Record_Id --></label>
         <name>RE_Record_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Referrer City --></label>
+        <name>RE_Referrer_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Referrer Email --></label>
+        <name>RE_Referrer_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Referrer First Name --></label>
+        <name>RE_Referrer_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Referrer Last Name --></label>
+        <name>RE_Referrer_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Referrer Phone --></label>
+        <name>RE_Referrer_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Referrer Zip --></label>
+        <name>RE_Referrer_Zip__c</name>
     </fields>
     <fields>
         <label><!-- RE Region Chapter --></label>
@@ -1325,12 +1393,20 @@ and the date it was or will be granted. --></help>
         <name>RE_Work_Phone__c</name>
     </fields>
     <fields>
+        <label><!-- RE Work Phone --></label>
+        <name>RE_Work_Phone_c__c</name>
+    </fields>
+    <fields>
         <label><!-- RE Zip Employer --></label>
         <name>RE_Zip_Employer1__c</name>
     </fields>
     <fields>
         <label><!-- RE Zip Employer --></label>
         <name>RE_Zip_Employer__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Zip Referrer --></label>
+        <name>RE_Zip_Referrer__c</name>
     </fields>
     <fields>
         <label><!-- Race/Ethnicity Details --></label>
@@ -1949,6 +2025,10 @@ provide contact information for each site on which you are active. --></help>
         <picklistValues>
             <masterLabel>Georgia</masterLabel>
             <translation><!-- Georgia --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Guam</masterLabel>
+            <translation><!-- Guam --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Hawaii</masterLabel>

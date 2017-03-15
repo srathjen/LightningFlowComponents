@@ -14,6 +14,7 @@ public class DiagnosisVerficationRemainder_ACTest
         currLead.Referrer_Phone__c= '8220708920';
         currLead.Referrer_Email__c= 'mcavennila@gmail.com';
         currLead.Referrer_City__c= 'karur';
+        currLead.unique_wish_identifier__c='059-17-12367';
         currLead.Referrer_Zip__c= '35004';
         currLead.is_Family_Aware_of_Referral__c= 'yes';
         currLead.FirstName= 'Testing1';

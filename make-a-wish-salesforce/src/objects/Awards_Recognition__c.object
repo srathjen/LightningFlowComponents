@@ -399,6 +399,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>It indicates records are migrated one or not.</description>
+        <externalId>false</externalId>
+        <label>Migrated Record</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>RE_Award_Name__c</fullName>
         <description>AWARD_CODE</description>
         <externalId>false</externalId>

@@ -2,6 +2,7 @@
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>Send_Diagnosis_Verification</customButtons>
     <excludeButtons>Convert</excludeButtons>
+    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>FindDup</excludeButtons>
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
@@ -42,10 +43,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Has_this_child_ever_received_prior_wish__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>External_Id__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -127,6 +124,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Sibling_Detail__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Wish_Family_ContactId__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>

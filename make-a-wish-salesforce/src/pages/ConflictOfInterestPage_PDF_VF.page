@@ -109,7 +109,7 @@ I will refrain from using or appearing to use confidential information acquired 
  <tr><td colspan='2' class='splitRow'></td></tr>
 <tr> <td class='secEnd'></td></tr>
 <tr>
-<td >Print Name :<span style="color:white;text-decoration: underline;">~s1</span> </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date :<span style="color:white;text-decoration: underline;">~date</span> </td>
+<td >Print Name :<apex:outputField value="{!contact.Name}"/>&nbsp;&nbsp;&nbsp;Signature:<span style="color:white;text-decoration: underline;">~s1</span> </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date :<span style="color:white;text-decoration: underline;">~date</span> </td>
 </tr>
  </table>
     </apex:form>

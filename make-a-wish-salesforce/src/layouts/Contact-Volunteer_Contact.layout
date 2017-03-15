@@ -70,10 +70,6 @@
                 <behavior>Edit</behavior>
                 <field>Gender__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Suffix__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -99,6 +95,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Birthdate</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Migrated_Record__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -157,7 +157,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>npsp__Do_Not_Contact__c</field>
+                <field>DoNotCall</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -247,6 +247,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>State_Employer__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Zip_Employer__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -375,10 +379,6 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>CreatedById</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Volunteer_Role__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -544,7 +544,6 @@
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
         <fields>TASK.WHAT_NAME</fields>
-        <fields>TASK.STATUS</fields>
         <fields>TASK.DUE_DATE</fields>
         <fields>CORE.USERS.FULL_NAME</fields>
         <fields>TASK.LAST_UPDATE</fields>
@@ -553,7 +552,6 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>First_L_I__c</fields>
-        <fields>IsApproved__c</fields>
         <fields>Event__c</fields>
         <fields>RECORDTYPE</fields>
         <fields>Reason_Inactive__c</fields>

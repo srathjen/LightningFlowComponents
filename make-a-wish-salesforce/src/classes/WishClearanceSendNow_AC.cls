@@ -7,7 +7,7 @@ public class WishClearanceSendNow_AC{
     
     public WishClearanceSendNow_AC(ApexPages.StandardController controller){
         
-        currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
+        currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushWishClearence_ChildSummary__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
         
     }
     
@@ -15,6 +15,15 @@ public class WishClearanceSendNow_AC{
         
         if(currentParentCase.wish_involves_air_travel__c == Null ||currentParentCase.Description == Null ){
             DisplayErrorMessage();
+        }
+        else if(currentParentCase.Rush__c == true){
+          
+           
+          case updatenewCase = new Case();
+          updatenewCase.Id = currentParentCase.Id;
+          updatenewCase.IsRushWishClearence_ChildSummary__c = true;
+          update updatenewCase;
+          DisplayMessage();
         }
         else{
            case updatecase = new Case();
@@ -70,7 +79,7 @@ public class WishClearanceSendNow_AC{
             req.setHeader('Content-Disposition','form-data'); 
             String json='{'+ 
                 ' '+ 
-                ' "emailSubject": "Wish Clearance Form",'+ 
+                ' "emailSubject": "Wish Clearance",'+
                 ' "emailBlurb": "MAKE A WISH AMERICA",'+ 
                 ' "templateId": "'+templateID+'",'+ 
                 ' "envelopeIdStamping": "false",'+ 

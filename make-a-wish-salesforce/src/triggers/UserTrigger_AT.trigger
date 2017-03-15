@@ -13,6 +13,7 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
     if(Trigger.isAfter && Trigger.isInsert)
     {
         Map<Id, Id> newUserRoleIdMap = new Map<Id, Id>(); // Used to hold the new user role Id
+        Set<string> userIdsSet = new Set<string>(); // useed to holds unique rolename
         for(User newUser : Trigger.new){
            if(newUser.Migrated_User__c == false && newUser.created_from_portal__c == true)
            {
@@ -34,6 +35,10 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
                     newUserRoleIdMap.put(newUser.Id, newUser.UserRoleId);
                 }
              }
+            if(newUser.Migrated_User__c == false && newUser.UserRoleId != Null){
+                userIdsSet.add(newUser.Id);
+                
+            }
         }
        // UserTriggerHandler userHandlerIns = new UserTriggerHandler();
        // if(newUserList.size() > 0)
@@ -48,6 +53,11 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
             System.debug('newUserRoleIdMap>>>>>>>>>'+newUserRoleIdMap);
             UserTriggerHandler.AddInternalUserToChatterGroup(newUserRoleIdMap);
         }
+       
+   //Used to update chapter name in the user record based on the user role     
+       /* if(userIdsSet.size() > 0){
+            UserTriggerHandler.updateUserChapterName(userIdsSet);
+        }*/
     }
     
     if(Trigger.isAfter && Trigger.isUpdate)
@@ -56,7 +66,7 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
         Set<Id> inactiveUserSet=new Set<Id>();
         Map<Id, Id> newUserRoleIdMap = new Map<Id, Id>(); // Used to hold the new user role Id
         Map<Id, Id> oldUserRoleIdMap = new Map<Id, Id>(); // Used to hold the new user role Id
-
+        Set<string> userIdsSet = new Set<string>(); // useed to holds unique rolename
          for(User newUser : Trigger.new)
          {
              if(newUser.Migrated_User__c == false)
@@ -67,6 +77,10 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
                   if(newUser .ContactId != Null  && newUser .IsActive  == false && trigger.oldMap.get(newUser .id).IsActive == True){
                     inactiveUserSet.add(newUser .ContactId);
                   } 
+                 
+                 if(newUser.UserRoleId != Null && newUser.UserRoleId != trigger.oldMap.get(newUser.id).UserRoleId){
+                     userIdsSet.add(newUser.id);
+                 }
              }
 
             if(newUser.UserRoleId != null && Trigger.oldMap.get(newUser.Id).UserRoleId != newUser.UserRoleId) {
@@ -75,7 +89,10 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
             }
 
           }
-         
+   //Used to update chapter name in the user record based on the user role        
+       /* if(userIdsSet.size() > 0){
+             UserTriggerHandler.updateUserChapterName(userIdsSet);
+        }*/
         
         if(inActiveUserIdSet.size() > 0)
             UserTriggerHandler.updateUser(inActiveUserIdSet);

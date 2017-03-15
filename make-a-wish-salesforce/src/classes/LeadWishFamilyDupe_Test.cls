@@ -8,6 +8,7 @@ Public class LeadWishFamilyDupe_Test
      Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
      Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
      newLead.Child_Age__c = '4';
+     newLead.unique_wish_identifier__c = '123456';
      insert newLead;
      LeadWishFamilyDupe.FindFamilyContactDupe(newLead.id);
    
@@ -19,10 +20,12 @@ Public class LeadWishFamilyDupe_Test
          Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
          Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
          Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
+         newLead.unique_wish_identifier__c = '1234567';
          newLead.Child_Age__c = '4';
          insert newLead;
          Lead dupeLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
          dupeLead.Override_Dupe_Check__c = true;
+         dupeLead.unique_wish_identifier__c = '123456';
          insert dupeLead;  
          LeadWishFamilyDupe.FindLeadDupe(dupeLead.id);
         

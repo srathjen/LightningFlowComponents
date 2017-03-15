@@ -2,7 +2,6 @@
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>npe4__Relationships_Viewer</customButtons>
     <excludeButtons>Clone</excludeButtons>
-    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>DisableCustomerPortal</excludeButtons>
     <excludeButtons>DisablePartnerPortal</excludeButtons>
     <excludeButtons>DisablePrmSuperUser</excludeButtons>
@@ -10,6 +9,7 @@
     <excludeButtons>EnablePrmSuperUser</excludeButtons>
     <excludeButtons>EnableSelfService</excludeButtons>
     <excludeButtons>RequestUpdate</excludeButtons>
+    <excludeButtons>RequestUseSfdc</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <excludeButtons>ViewPartnerPortalUser</excludeButtons>
     <excludeButtons>ViewSelfService</excludeButtons>
@@ -59,10 +59,6 @@
                 <behavior>Edit</behavior>
                 <field>Deceased_Date__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Suffix__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -87,10 +83,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Medical_Condition__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Short_Description__c</field>
             </layoutItems>
         </layoutColumns>
@@ -108,11 +100,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>HomePhone</field>
+                <field>Phone</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>OtherPhone</field>
+                <field>HomePhone</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -146,11 +138,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>npe01__HomeEmail__c</field>
+                <field>Email</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>npe01__AlternateEmail__c</field>
+                <field>npe01__HomeEmail__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -625,7 +617,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hQ0000000Hcqc</masterLabel>
+        <masterLabel>00hQ0000000TFCD</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

@@ -41,6 +41,10 @@
         <name>Import_Id__c</name>
     </fields>
     <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
+    </fields>
+    <fields>
         <label><!-- RE Import Id --></label>
         <name>RE_Import_Id__c</name>
     </fields>

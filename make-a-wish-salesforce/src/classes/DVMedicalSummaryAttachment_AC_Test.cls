@@ -10,6 +10,7 @@ public class DVMedicalSummaryAttachment_AC_Test {
     public static void setUpData(){
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
+        newLead.unique_wish_identifier__c = '059-17-12367';
         Lead_File__c newLeadFile = OrientationandTrainingUtil.createLeadFileRecord(newLead.Id);
         try{
             insert newLead;

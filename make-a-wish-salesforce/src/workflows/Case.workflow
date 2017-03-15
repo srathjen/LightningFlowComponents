@@ -76,6 +76,41 @@
         <template>unfiled$public/Case_Budget_Submitted_Template</template>
     </alerts>
     <alerts>
+        <fullName>Case_Email_Alert_to_Qualifying_Medical_Professional_when_wish_is_determined</fullName>
+        <description>Case:Email Alert to Qualifying Medical Professional when wish is determined.</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Qualifying_Medical_Professional_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Medical_Professional_Email_Templates/Med_Professional_Your_patient_decided_on_a_wish</template>
+    </alerts>
+    <alerts>
+        <fullName>Case_Email_Alert_to_Qualifying_Medical_Professional_when_wish_is_granted</fullName>
+        <description>Case:Email Alert to Qualifying Medical Professional when wish is granted</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Qualifying_Medical_Professional_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Medical_Professional_Email_Templates/Med_Professional_Your_patient_s_wish_has_been_fulfilled</template>
+    </alerts>
+    <alerts>
+        <fullName>Case_Rush_Wish_Reminder_Alerts</fullName>
+        <description>Case:Rush Wish Reminder &amp; Alerts</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Contact_Rush_Wish_Reminder_Alerts</template>
+    </alerts>
+    <alerts>
         <fullName>Case_Send_Email_to_Wish_Granter_Alert</fullName>
         <description>Case : Send Email to Wish Granter Alert</description>
         <protected>false</protected>
@@ -112,6 +147,28 @@
         <template>unfiled$public/Case_Send_Email_to_National_MAC_Team</template>
     </alerts>
     <alerts>
+        <fullName>Rush_Wish_Child_Summary_Alert</fullName>
+        <description>Rush Wish Child Summary Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Qualifying_Medical_Professional_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/RUSH_Child_Medical_Summary</template>
+    </alerts>
+    <alerts>
+        <fullName>Rush_Wish_Clarence_Alert</fullName>
+        <description>Rush Wish Clarence Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Qualifying_Medical_Professional_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/RUSH_Wish_Clearance</template>
+    </alerts>
+    <alerts>
         <fullName>Send_Email_to_MAC_Team</fullName>
         <description>Send Email to MAC Team</description>
         <protected>false</protected>
@@ -127,11 +184,26 @@
         <template>unfiled$public/Send_Email_to_Loacl_MAC_Team_Template</template>
     </alerts>
     <alerts>
+        <fullName>Send_Reply_Emal_to_National_MAC_team_Alert</fullName>
+        <description>Send Reply Emal to National MAC team Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>MAC_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Send_Reply_Email_to_National_MAC_Team_Template</template>
+    </alerts>
+    <alerts>
         <fullName>Send_Reply_email_to_MAC_team</fullName>
         <description>Send Reply email to MAC team</description>
         <protected>false</protected>
         <recipients>
-            <field>MAC_Email__c</field>
+            <field>Chapter_MACEmail__c</field>
             <type>email</type>
         </recipients>
         <recipients>
@@ -232,6 +304,24 @@
         <operation>Literal</operation>
         <protected>false</protected>
         <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateIsRushWishChild</fullName>
+        <field>IsRushChildSummary__c</field>
+        <literalValue>0</literalValue>
+        <name>UpdateIsRushWishChild</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UpdateIsRushWishClearence</fullName>
+        <field>IsRushWishClearence_ChildSummary__c</field>
+        <literalValue>0</literalValue>
+        <name>UpdateIsRushWishClearence</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
     </fieldUpdates>
     <fieldUpdates>
         <fullName>UpdateStatusDate</fullName>
@@ -342,7 +432,7 @@
             <name>Update_isEmail</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <formula>AND(isEmail__c  = TRUE,ISCHANGED(isEmail__c), Migrated_Record__c = false)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
@@ -386,6 +476,118 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
+        <fullName>Case%3AQualifying Medical Professional when wish is determined</fullName>
+        <actions>
+            <name>Case_Email_Alert_to_Qualifying_Medical_Professional_when_wish_is_determined</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Wish Determined</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>It send a email notification to Qualifying Medical Professional when wish is determined.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Case%3AQualifying Medical Professional when wish is granted</fullName>
+        <actions>
+            <name>Case_Email_Alert_to_Qualifying_Medical_Professional_when_wish_is_granted</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Status</field>
+            <operation>equals</operation>
+            <value>Granted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Case%3ARush Wish Reminder %26 Alerts</fullName>
+        <actions>
+            <name>Case_Rush_Wish_Reminder_Alerts</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Rush__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>Used to send an alert for contact owner when the Rush field is checked</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Rush Wish Child Summary Rule</fullName>
+        <actions>
+            <name>Rush_Wish_Child_Summary_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>UpdateIsRushWishChild</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.IsRushChildSummary__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>This rule will fire when rush is checked and if admin send the email to medical professional from wish medical summary.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Rush Wish Clarence Rule</fullName>
+        <actions>
+            <name>Rush_Wish_Clarence_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>UpdateIsRushWishClearence</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.IsRushWishClearence_ChildSummary__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>This rule will fire when rush  is checked and if you send the email to medical professional  from wish clearence.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
         <fullName>Send Email to National Team</fullName>
         <actions>
             <name>National_MAC_Team_Email_Alert</name>
@@ -395,9 +597,20 @@
             <name>Update_is_National_in_Case</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <description>This rule will fire when the isNational check box is checked.</description>
         <formula>AND(isNational__c = TRUE,ISCHANGED(isNational__c), Migrated_Record__c = false)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send Reply Email to National MAC Team</fullName>
+        <actions>
+            <name>Send_Reply_Emal_to_National_MAC_team_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>This work flow will fire when the national mac team reply to the case comment.</description>
+        <formula>AND(NOT(ISNULL(MAC_Email__c)),ISCHANGED(Case_Comment__c),(isNational__c = true),(isNationalReply__c = true),( Migrated_Record__c = false),RecordType.DeveloperName =&apos;Diagnosis_Verification_Review&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -408,7 +621,7 @@
         </actions>
         <active>true</active>
         <description>This work flow rule is used to send replay email to MAC team.</description>
-        <formula>AND(ISCHANGED(Case_Comment__c),Migrated_Record__c = false)</formula>
+        <formula>AND(ISCHANGED(Case_Comment__c),isNational__c = false, isEmail__c = true,Migrated_Record__c = false, RecordType.DeveloperName =&apos;Diagnosis_Verification_Review&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -428,6 +641,7 @@
             <type>Alert</type>
         </actions>
         <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
         <criteriaItems>
             <field>Case.isEmailWishGranter__c</field>
             <operation>equals</operation>
@@ -437,6 +651,16 @@
             <field>Case.InActiveWishGranter__c</field>
             <operation>notEqual</operation>
             <value>null</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
         </criteriaItems>
         <description>This Email alert is used to send an email to wish granters</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -520,7 +744,7 @@
             <name>Interview_date_not_set</name>
             <type>Task</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Case.RecordTypeId</field>
             <operation>equals</operation>

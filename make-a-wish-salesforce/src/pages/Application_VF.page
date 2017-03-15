@@ -280,7 +280,7 @@ p.saved{padding:1rem !important}
                                             </apex:selectList>
                                         </div>
                                     </div>
-                                    <div class="form-group row sr-only mawdiscoveryother">
+                                    <div class="form-group sr-only row mawdiscoveryother">
                                         <div class="col-sm-3"><label for="mawdiscoveryother" aria-labelledby="Other">Other</label></div>
                                         <div class="col-sm-6">
                                             <apex:inputTextarea styleClass="form-control mawdisc-textarea" id="mawdiscoveryother" value="{!currentVolunteer.How_did_you_know_MAWA_Other_Notes__c}" html-placeholder="Please list the other ways you've heard about Make-A-Wish"  />
@@ -489,7 +489,7 @@ p.saved{padding:1rem !important}
                                 </div>
                                 <div class="col-xs-12 col-sm-4 col-md-2 col-sm-push-2 col-md-push-8">
                                      <!-- <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md submitSign" value="Submit & Sign" action="{!SubmitAndSign}" rendered="{!(showSubmitandSign == True)}" rerender="formid" /> -->
-                                    <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md submitSign btn-submit-sign" value="Submit & Sign" action="{!confirmSign}" rerender="formid"  rendered="{!(isSigned == false)}"/>
+                                     <apex:commandButton styleClass="col-xs-12 col-sm-12 col-md-12 btn-md submitSign btn-submit-sign" value="Submit & Sign" action="{!confirmSign}" rerender="formid"  rendered="{!(isSigned == false)}"/>
                                     
                                    
                                     
@@ -864,7 +864,6 @@ p.saved{padding:1rem !important}
                 if ($('.f-mawdiscovery').val().indexOf('Other, please specify') != -1){
                     $('.mawdiscoveryother').removeClass('sr-only');
                     $('.mawdisc-textarea').addClass('required');
-                    $('.mawdisc-textarea').valid()
                 }
             }
             // maw discovery show/hide "other" textbox
@@ -872,11 +871,11 @@ p.saved{padding:1rem !important}
                 if($(this).val() != null){
                     if ($(this).val().indexOf('Other, please specify') != -1){
                         $('.mawdiscoveryother').removeClass('sr-only');
-                        $('.mawdisc-textarea').addClass('required')
+                        $('.mawdisc-textarea').addClass('required');
                     } else {
                         $('.mawdiscoveryother').addClass('sr-only');
                         $('.mawdisc-textarea').val('').removeClass('required');
-                        $('.mawdisc-textarea').valid()
+                        $('.mawdisc-textarea').valid();
                     }
                 }
             });
@@ -969,7 +968,7 @@ p.saved{padding:1rem !important}
             $('form').validate({
                 errorElement: "em",
                 errorPlacement: function ( error, element ) {
-               
+              
                     // Add the `help-block` class to the error element
                     error.addClass( "help-block" );
                     // Add `has-feedback` class to the parent div.form-group in order to add icons to inputs
@@ -1023,6 +1022,7 @@ p.saved{padding:1rem !important}
                         }
                     });
                 }
+                
             });
 
             // validation rules

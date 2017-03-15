@@ -205,6 +205,7 @@
     </fields>
     <fields>
         <fullName>Heading_Highlight_Title_1__c</fullName>
+        <description>It holds the Heading Highlight Title1 for Active volunteer landing page</description>
         <externalId>false</externalId>
         <label>Heading Title 1</label>
         <length>255</length>

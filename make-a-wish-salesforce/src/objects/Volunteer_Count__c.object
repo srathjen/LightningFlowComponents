@@ -92,7 +92,7 @@
         <externalId>false</externalId>
         <formula>Chapter_Role__r.Role_Name__r.Name</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Chapter Name</label>
+        <label>Hidden Chapter Name</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>

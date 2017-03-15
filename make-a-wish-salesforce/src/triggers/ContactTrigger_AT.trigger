@@ -363,7 +363,10 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
     {
         List<Contact> conList = new List<Contact>();
         Map<Id,Contact> contactAccountIdMap = new Map<Id,Contact>();
-        for(Contact conCurrRec: trigger.new)
+        Map<String,List<Contact>> contactMapforSharing = new Map<String,List<Contact>>();
+        
+        for(Contact conCurrRec: [SELECT Id,migrated_record__c, AccountId,RecordTypeId,Region_Chapter__c, 
+                                Region_Chapter__r.Name FROM Contact WHERE Id IN :Trigger.newMap.keySet()])
         {
             
             if(conCurrRec.migrated_record__c != True)
@@ -379,7 +382,21 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 }
                 
             }
+            
+            if(conCurrRec.Region_Chapter__c!= Null)
+            {
+               if(contactMapforSharing.containsKey(conCurrRec.Region_Chapter__r.Name))
+                   contactMapforSharing.get(conCurrRec.Region_Chapter__r.Name).add(conCurrRec);
+               else
+                   contactMapforSharing.put(conCurrRec.Region_Chapter__r.Name, new List<contact>{conCurrRec});
+                  
+            }
+            
+            
         }
+        
+        //if(contactMapforSharing.size() > 0)
+          //ChapterStaffRecordSharing_AC.ContactSharing(contactMapforSharing);
         
         if(conList.size() > 0){
             ContactTriggerHandler.CreateAffliation(conList);
@@ -406,7 +423,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         Map<Id, Contact> contactOldMap = new Map<Id, Contact>();
         Set<Id>  MedicalProfContactSet = new Set<Id>();
         Set<Id> addressSet = new Set<Id>();
-        
+        Map<Id,Contact> wishFamilyContacMap = new Map<Id,Contact>();
         Contact updatedCon;
         for(Contact newContact : trigger.new)
         {
@@ -456,7 +473,12 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 updateUserInfo.put(newContact.id,newContact);
                 contactOldMap.put(newContact.id, Trigger.oldMap.get(newContact.id));
             }
+            
+            if(newContact.RecordTypeId == familyContactRecordTypeId && newContact.Relationship__c != trigger.oldMap.get(newContact.id).Relationship__c){
+                wishFamilyContacMap.put(newContact.Id,newContact);
+            }
         }
+        
         if(RecursiveTriggerHandler.isFirstTime){
             RecursiveTriggerHandler.isFirstTime = false;
             if(contactIdsForEmailChange.size()>0)
@@ -521,6 +543,8 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         if(addressSet.size() > 0){
             ContactTriggerHandler.updateHouseHoldAddress(addressSet);
         }
+        if(wishFamilyContacMap.size() > 0)
+        ContactTriggerHandler.updateRelationship(wishFamilyContacMap);
     }
   
 }

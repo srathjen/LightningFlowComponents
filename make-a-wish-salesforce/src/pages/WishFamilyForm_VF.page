@@ -338,7 +338,7 @@
             }
             else if($(this).val() == 'Yes' && ($('.Yes').val() == null || $('.Yes').val() == "")){                   
                 $('.Yes').addClass('required');
-                $('.Yes').css('border', '2px red solid');
+                $('.Yes').css('border', '2px #ccc solid');
                 
             }
     
@@ -373,33 +373,46 @@
     
     
     
-     function ClickToValidate(){       
-        
+     function ClickToValidate(){    
+     
            var runBool = true; 
+           if($('.Yes').val() == null || $('.Yes').val() == "" ){
+               if( $('.style1').val() == 'Yes'){                 
+                $('.Yes').css("border-color", "red");              
+               }
+           }
+           
+             if($('.Yes').val() == null || $('.Yes').val() == "" ){
+               if( $('.style1').val() == 'No'){ 
+                $('.Yes').css("border-color", "#ccc");              
+               }
+           }
            
            
+         
              if( $('.style1').val() == 'No'){                 
                 $('.Yes').removeClass('required');
                 $('.Yes').css('border', '1px #ccc solid');
                 runBool = true; 
                
             }
-            else if($('.style1').val() == null || $('.style1').val() == "" ){                
+            else if($('.style1').val() == null || $('.style1').val() == "" ){
                 $('.Yes').removeClass('required');
                 $('.Yes').css('border', '1px #ccc solid');
                 runBool = true; 
             
             }
-            else if($('.style1').val() == 'Yes' && ($('.Yes').val() == null || $('.Yes').val() == null)){                
+            else if($('.style1').val() == 'Yes' && ($('.Yes').val() == null || $('.Yes').val() == null)){   
+            
                 $('.Yes').addClass('required');
-                $('.Yes').css('border', '1px #ccc solid');
+                $('.Yes').css('border', '1px red solid');
                 runBool = false;
             
             }
             
            $('.required').each(function(){
                if($(this).val() == '' || $(this).val() == null ){
-                   $('.Yes').css('border', '1px #ccc solid');
+                  // $('.Yes').css('border', '1px #ccc solid');
                    runBool = false;
                    alert("Please fill all required fields");                   
                    return false;
@@ -410,7 +423,7 @@
            if(!runBool){
               validateEmail();  
               if($('.style1').val() == 'Yes'  && $('.Yes').val() == null )          
-                   $('.Yes').css('border', '1px #ccc solid');
+                   $('.Yes').css('border', '1px red solid');
 
             return false;
             }
@@ -459,8 +472,8 @@
             if(!n){
               return false;
             }
-            else{
-              $('.Yes').css('border', '1px #ccc solid');
+            else{            
+                  
               return true;
             }
           }
@@ -482,7 +495,10 @@
             if(!d){
             return false;
             }
-            else{          
+            else{ 
+             if($('.style1').val() == 'Yes' && ($('.Yes').val() == null || $('.Yes').val() == null)){
+                  $('.Yes').css('border', '1px red solid');
+             }         
            
           return true;
         }

@@ -121,6 +121,41 @@
             <field>Id</field>
             <table>Volunteer_Orientation_Training__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Migrated_Record__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RE_ID__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RE_Date__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RE_Import_Id__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RE_Completed_Date__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RE_End_Time__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RE_Start_Time__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
         <masterLabel>Volunteer Orientation &amp; Trainings</masterLabel>
     </sections>
     <sections>

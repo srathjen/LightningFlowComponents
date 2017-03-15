@@ -4,7 +4,7 @@ Date        : 10/15/2016
 Description : AccountTrigger_AT is used to assign the chapter account name for inkind account when volunteer creates inkind account.
 After insert In-Kind account it is automatically send for approval to wish co-ordinator of the associated chapter
 *****************************************************************************************************/
-trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
+trigger AccountTrigger_AT on Account (before insert,after insert,after update,before update) {
     //Before insert update wish co-ordinator email value to the hidden field to send emai alert
     if(trigger.isBefore && trigger.isInsert)
     {
@@ -29,6 +29,8 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
                     chapterAccountIdsSet.add(currentAccount.Chapter_Name__c);
                 } 
             }
+            
+           
         }
         if(chapterAccountIdsSet.size() > 0){
             for(Account chapterAccount : [SELECT Id,Wish_Co_ordinator__c,Wish_Co_ordinator__r.Email FROM Account WHERE Id IN: chapterAccountIdsSet AND Wish_Co_ordinator__c != Null]){
@@ -47,6 +49,40 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         
     }
     
+    if(trigger.isBefore && trigger.isUpdate){
+        Constant_AC cons = new Constant_AC();
+        Id housHoldAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(cons.HouseholdRT).getRecordTypeId();
+        Id wishChildRT = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(cons.contactWishChildRT).getRecordTypeId();
+        Set<Id> accountIdSet = new Set<Id>();
+        Map<Id,Id> wishChildMap = new Map<Id,Id>();
+        List<Account> primaryContactUpdateList = new List<Account>();
+        
+        for(Account newAccount : trigger.new){
+            if(newAccount.RecordTypeId == housHoldAccountRTId && !newAccount.Migrated_Record__c){
+                accountIdSet.add(newAccount.Id);
+            }
+        }
+        
+         if(accountIdSet.size() > 0){
+            for(contact dbWishChild : [SELECT Id,Name,AccountId,RecordTypeId FROM Contact WHERE AccountId IN :accountIdSet AND RecordTypeId =: wishChildRT Limit 1]){
+                wishChildMap.put(dbWishChild.AccountId,dbWishChild.Id);
+            }
+        }
+        
+        if(wishChildMap.size() > 0){
+            for(Account newAccount : trigger.new){
+            system.debug('Contins>>>>'+wishChildMap.containsKey(newAccount.Id));
+            system.debug('RecordType Id '+newAccount.RecordTypeId +'housHoldAccountRTId '+housHoldAccountRTId );
+                if(newAccount.RecordTypeId == housHoldAccountRTId && wishChildMap.containsKey(newAccount.Id) && newAccount.Migrated_Record__c != true){
+                    newAccount.npe01__One2OneContact__c = wishChildMap.get(newAccount.Id);
+                }
+            }
+            
+        }
+    }
+   
+    
+    
     //After insert trigger to fire the approval process once inkind donor account is created and sahre the record to group based on the chapter name
     if(trigger.isAfter && trigger.isInsert)
     {   
@@ -58,27 +94,64 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         Map<Id, String> chapterNameMap = new Map<Id, String>();
         Map<String,Id> publicGroupMap = new Map<String,Id>();
         List<AccountShare> accountShareList = New List<AccountShare>();
+        
         Id groupId;
         Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
         Id chapterAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(cons.chapterRT).getRecordTypeId();
+        Id housHoldAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(cons.HouseholdRT).getRecordTypeId();
+        Id wishChildRT = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(cons.contactWishChildRT).getRecordTypeId();
+        Map<String,List<Account>> accountMapforSharing = new Map<String, List<Account>>();
+        Set<String> chapterIds = new Set<String>();
+       
         for(Account inKindAccount : trigger.new)
         {
             if(inKindAccount.Migrated_Record__c != True)
             {    
-                if(inKindAccount.RecordTypeId == inKindDonorsAccountRTId && inKindAccount.Chapter_Name__c != Null){
+                if(inKindAccount.RecordTypeId == inKindDonorsAccountRTId && inKindAccount.Chapter_Name__c != Null)
+                {
                     chaptterAccountIdSet.add(inKindAccount.Chapter_Name__c);
                     inKindDonorAccountSet.add(inKindAccount.Id);
                 }
+                
+                
             }
+            
+            if(inKindAccount.RecordTypeId == chapterAccountRTId)
+                chapterIds.add(inKindAccount.id);
+            else
+                chapterIds.add(inKindAccount.Chapter_Name__c);
         }
         
-        if(chaptterAccountIdSet.size() > 0)
+        
+        
+        if(chaptterAccountIdSet.size() > 0 || chapterIds.size() > 0)
         {
-            for(Account daAccount : [SELECT Id,Name,Wish_Co_ordinator__c, Volunteer_Manager__c,RecordTypeId  FROM Account WHERE Id IN: chaptterAccountIdSet AND RecordTypeId =: chapterAccountRTId ]){
+            for(Account daAccount : [SELECT Id,Name,Wish_Co_ordinator__c, Volunteer_Manager__c,RecordTypeId,Chapter_Name__c,Chapter_Name__r.Name  FROM Account WHERE (Id IN: chaptterAccountIdSet OR (Chapter_Name__c IN :chapterIds AND Id IN :Trigger.newMap.keySet()))]){
+              
+              if(daAccount.RecordTypeId == chapterAccountRTId)
+              {
                 chaptterMap.put(daAccount.Id,daAccount.Wish_Co_ordinator__c);
                 volunteerManagersMap.put(daAccount.Id,daAccount.Volunteer_Manager__c);
                 String chapterNameTrim = daAccount.Name.removeStart('Make-A-Wish ');
                 chapterNameMap.put(daAccount.Id, chapterNameTrim);
+                
+              /*  if(accountMapforSharing.containsKey(daAccount.Name))
+                {
+                   accountMapforSharing.get(daAccount.Name).add(daAccount);
+                }
+                else
+                   accountMapforSharing.put(daAccount.Name, new List<Account>{daAccount}); */ 
+              }
+              
+              else
+              {
+                if(accountMapforSharing.containsKey(daAccount.Chapter_Name__r.Name))
+                {
+                   accountMapforSharing.get(daAccount.Chapter_Name__r.Name).add(daAccount);
+                }
+                else
+                   accountMapforSharing.put(daAccount.Chapter_Name__r.Name, new List<Account>{daAccount}); 
+              }
             }
         }
         
@@ -93,6 +166,9 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
             for(Account inKindAccount : trigger.new){
                 if(inKindAccount.Migrated_Record__c != True)
                 {   
+                  if(inKindAccount.RecordTypeId == inKindDonorsAccountRTId)
+                  {
+                   
                     if(chaptterMap.containsKey(inKindAccount.Chapter_Name__c) && !String.isEmpty(chaptterMap.get(inKindAccount.Chapter_Name__c))){
                         Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
                         req.setComments('Submitting request for approval');
@@ -122,7 +198,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
                             
                         }
                     }                    
-                    
+                  }  
                 }
             }
             
@@ -132,6 +208,11 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
             }
             
         }  
+        
+        
+       // if(accountMapforSharing.size() > 0)
+            //ChapterStaffRecordSharing_AC.AccountSharing(accountMapforSharing);
+        
     }
     
     //After update trigger is used to remove the access from the group if the record was rejected based on the chapter name
@@ -143,9 +224,12 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         Id chapterAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
         Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
         Id chapterId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('Chapter').getRecordTypeId();
-        
+        Id wishChildRT = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Id houseHoleRecordTypeId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.HouseholdRT).getRecordTypeId();
+        Constant_AC cons = new Constant_AC();
+        Id housHoldAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('Household Account').getRecordTypeId();
+       
         String groupName;
         id groupId;
         set<String> accountIdsSet = new set<String>();
@@ -156,6 +240,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         Map<Id, String> chapterNameMap = new Map<Id, String>();
         Map<Id,Account> accountMap = new Map<Id,Account>();
         Map<Id,Contact> contactMap = new Map<Id,Contact>();
+       
         
         //This for loop is used to remove inkind account from the public group based on updated chapter name          
         for(Account currentAccount : trigger.new)
@@ -178,6 +263,8 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
                        
                    }
             }
+            
+             
         }
         
         if(accWishCoorUpdateMap.size() > 0) {
@@ -190,6 +277,8 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
                 //update caseOwnerUpdateList;
             }
         }
+        
+       
         
         if(chapterIdsSet.size() > 0){
             for(Account getAccountName : [SELECT Id, Name FROM Account WHERE RecordTypeId =: chapterId]){
@@ -209,6 +298,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update) {
         if(accountShareList.size() > 0 ){
             delete accountShareList;
         }
+        
         
         //This for loop is used to add inkind account to the public group based on new updated chapter name          
         for(Account newInkind : trigger.new){

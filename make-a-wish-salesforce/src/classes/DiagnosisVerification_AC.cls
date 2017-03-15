@@ -281,10 +281,7 @@ public class DiagnosisVerification_AC {
     //Used to clear the diagnosis information for removed block 
     public void ResetDiagnosis() {
         diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum'));
-        List<Diagnosis_Verification__c> removeDiagnosisVerificationList = [SELECT Id, Order__c FROM Diagnosis_Verification__c WHERE Order__c =: diagnosisBlockNum];
-        if(removeDiagnosisVerificationList.size() > 0) {
-            delete removeDiagnosisVerificationList;
-        }
+        
         diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = Null;
         diagnosisVerificationWrapperLst[diagnosisBlockNum].pcdOrIcd = Null;
         diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = Null;
@@ -314,19 +311,16 @@ public class DiagnosisVerification_AC {
     public void RemoveDiagnosisBlock() {
         diagnosisBlockNum = Integer.valueOf(ApexPages.currentPage().getParameters().get('diagnosisBlockNum')); // Used to hold the Diagnosis block number
         List<Diagnosis_Verification__c> removeDiagnosisVerificationList = [SELECT Id, Order__c FROM Diagnosis_Verification__c WHERE Order__c =: diagnosisBlockNum];
-        if(removeDiagnosisVerificationList.size() > 0) {
-            delete removeDiagnosisVerificationList;
-        } else {
-            diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = Null;
-            diagnosisVerificationWrapperLst[diagnosisBlockNum].pcdOrIcd = Null;
-            diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = Null;
-            diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedPCD = Null;
-            diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = false;
-            if(diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.size() > 0){
-                diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.clear();
-            }
-            diagnosisVerificationWrapperLst.remove(diagnosisBlockNum);
+        
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = Null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].pcdOrIcd = Null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = Null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedPCD = Null;
+        diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = false;
+        if(diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.size() > 0){
+            diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList.clear();
         }
+        diagnosisVerificationWrapperLst.remove(diagnosisBlockNum);
         if(diagnosisVerificationWrapperLst.size() < 5 && (diagnosisVerificationWrapperLst[diagnosisBlockNum - 1].icdCode.length() > 0 || diagnosisVerificationWrapperLst[diagnosisBlockNum - 1].conditionDescription.length() > 0) ){
             showAddAnotherDiagnosisBtn = true;
         }
@@ -661,6 +655,16 @@ showAddAnotherDiagnosisBtn = true;
                 diagnosisVerificationItem.externalId = Math.random();
                 diagnosisVerification.Eternal_Id__c = string.valueof(diagnosisVerificationItem.externalId);
                 diagnosisVerificationLstForInsert.add(diagnosisVerification);
+                currLead.PD_Condition_Description__c = null;
+                currLead.PD_ICD_Code__c = null;
+                currLead.SD1_Condition_Description__c = null;
+                currLead.SD1_ICD_Code__c = null;
+                currLead.SD3_Condition_Description__c = null;
+                currLead.SD3_ICD_Code__c = null; 
+                currLead.SD2_Condition_Description__c = null;
+                currLead.SD2_ICD_Code__c = null;
+                currLead.SD4_Condition_Description__c = null;
+                currLead.SD4_ICD_Code__c = null;
                 if(order == 0){
                     currLead.PD_Condition_Description__c = diagnosisVerificationItem.conditionDescription;
                     currLead.PD_ICD_Code__c = diagnosisVerificationItem.iCDCode;                

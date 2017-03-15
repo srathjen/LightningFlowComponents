@@ -19,63 +19,71 @@ referral site.<br>
 <table width="720" style="margin: 0px; width: 7.5in;" border="0" cellpadding="0">
  <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes">
   <td nowrap="" style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); background-color: transparent;" colspan="2">
-  <p style="margin: 0px; line-height: normal;"><b><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Referrer Information</span></b></p>
-  <table style="margin: 0px; border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0">
-   <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;height:13.35pt">
-    <td width="177" valign="top" style="margin: 0px; padding: 0in 5.4pt; border: 1px solid rgb(0, 0, 0); border-image: none; width: 132.45pt; height: 13.35pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Date Submitted:</span></p>
-    </td>
-    <td width="492" valign="top" style="border-width: 1px 1px 1px 0px; border-style: solid solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 368.75pt; height: 13.35pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>{!Lead.CreatedDate}</span></p>
-    </td>
-   </tr>
-   <tr style="mso-yfti-irow:1;height:14.1pt">
-    <td width="177" valign="top" style="border-width: 0px 1px 1px; border-style: none solid solid; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 132.45pt; height: 14.1pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Name:</span></p>
-    </td>
-    <td width="492" valign="top" style="border-width: 0px 1px 1px 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; width: 368.75pt; height: 14.1pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>{!Lead.Referrer_FirstName__c}&nbsp;{!Lead.Referrer_Last_Name__c}</span></p>
-    </td>
-   </tr>
-   <tr style="mso-yfti-irow:2;height:13.35pt">
-    <td width="177" valign="top" style="border-width: 0px 1px 1px; border-style: none solid solid; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 132.45pt; height: 13.35pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Phone:</span></p>
-    </td>
-    <td width="492" valign="top" style="border-width: 0px 1px 1px 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; width: 368.75pt; height: 13.35pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>{!Lead.Referrer_Phone__c}</span></p>
-    </td>
-   </tr>
-   <tr style="mso-yfti-irow:3;height:14.1pt">
-    <td width="177" valign="top" style="border-width: 0px 1px 1px; border-style: none solid solid; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 132.45pt; height: 14.1pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Email:</span></p>
-    </td>
-    <td width="492" valign="top" style="border-width: 0px 1px 1px 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; width: 368.75pt; height: 14.1pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>{!Lead.Referrer_Email__c}</span></p>
-    </td>
-   </tr>
-   <tr style="mso-yfti-irow:4;height:13.35pt">
-    <td width="177" valign="top" style="border-width: 0px 1px 1px; border-style: none solid solid; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 132.45pt; height: 13.35pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Relationship to child:</span></p>
-    </td>
-    <td width="492" valign="top" style="border-width: 0px 1px 1px 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; width: 368.75pt; height: 13.35pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>{!Lead.Relationship_to_child__c}</span></p>
-    </td>
-   </tr>
-   <tr style="mso-yfti-irow:5;mso-yfti-lastrow:yes;height:13.35pt">
-    <td width="177" valign="top" style="border-width: 0px 1px 1px; border-style: none solid solid; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; border-image: none; width: 132.45pt; height: 13.35pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Form:</span></p>
-    </td>
-    <td width="492" valign="top" style="border-width: 0px 1px 1px 0px; border-style: none solid solid none; border-color: rgb(0, 0, 0); margin: 0px; padding: 0in 5.4pt; width: 368.75pt; height: 13.35pt; background-color: transparent;">
-    <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'><a href="http://wish.force.com/WishReferralFormOut_VF?LeadId={!Lead.Id}"><span style="margin: 0px; color: blue;">Wish Referral Form</span></a></span></p>
-    </td>
-   </tr>
-  </tbody></table>
+  <p style="margin: 0px; line-height: normal;"><b><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Referrer Information</span></b></p><table class="MsoNormalTable" style="border-collapse:collapse;mso-yfti-tbllook:1184;mso-padding-alt:0in 0in 0in 0in" border="0" cellspacing="0" cellpadding="0">
+ <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;height:13.35pt">
+  <td width="177" valign="top" style="width:132.45pt;border:solid black 1.0pt;&#10;  mso-border-alt:solid black .75pt;padding:0in 5.4pt 0in 5.4pt;height:13.35pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>Date Submitted:<o:p></o:p></span></p>
+  </td>
+  <td width="492" valign="top" style="width:368.75pt;border:solid black 1.0pt;&#10;  border-left:none;mso-border-top-alt:solid black .75pt;mso-border-bottom-alt:&#10;  solid black .75pt;mso-border-right-alt:solid black .75pt;padding:0in 5.4pt 0in 5.4pt;&#10;  height:13.35pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>{!Lead.CreatedDate}<o:p></o:p></span></p>
   </td>
  </tr>
- <tr style="mso-yfti-irow:1">
-  <td nowrap="" style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); background-color: transparent;"></td>
-  <td nowrap="" style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); background-color: transparent;"></td>
+ <tr style="mso-yfti-irow:1;height:14.1pt">
+  <td width="177" valign="top" style="width:132.45pt;border:solid black 1.0pt;&#10;  border-top:none;mso-border-left-alt:solid black .75pt;mso-border-bottom-alt:&#10;  solid black .75pt;mso-border-right-alt:solid black .75pt;padding:0in 5.4pt 0in 5.4pt;&#10;  height:14.1pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>Name:<o:p></o:p></span></p>
+  </td>
+  <td width="492" valign="top" style="width:368.75pt;border-top:none;border-left:&#10;  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;&#10;  mso-border-bottom-alt:solid black .75pt;mso-border-right-alt:solid black .75pt;&#10;  padding:0in 5.4pt 0in 5.4pt;height:14.1pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>{!Lead.Referrer_FirstName__c}&nbsp;{!Lead.Referrer_Last_Name__c}<o:p></o:p></span></p>
+  </td>
  </tr>
+ <tr style="mso-yfti-irow:2;height:13.35pt">
+  <td width="177" valign="top" style="width:132.45pt;border:solid black 1.0pt;&#10;  border-top:none;mso-border-left-alt:solid black .75pt;mso-border-bottom-alt:&#10;  solid black .75pt;mso-border-right-alt:solid black .75pt;padding:0in 5.4pt 0in 5.4pt;&#10;  height:13.35pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>Phone:<o:p></o:p></span></p>
+  </td>
+  <td width="492" valign="top" style="width:368.75pt;border-top:none;border-left:&#10;  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;&#10;  mso-border-bottom-alt:solid black .75pt;mso-border-right-alt:solid black .75pt;&#10;  padding:0in 5.4pt 0in 5.4pt;height:13.35pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>{!Lead.Referrer_Phone__c}<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:3;height:14.1pt">
+  <td width="177" valign="top" style="width:132.45pt;border:solid black 1.0pt;&#10;  border-top:none;mso-border-left-alt:solid black .75pt;mso-border-bottom-alt:&#10;  solid black .75pt;mso-border-right-alt:solid black .75pt;padding:0in 5.4pt 0in 5.4pt;&#10;  height:14.1pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>Email:<o:p></o:p></span></p>
+  </td>
+  <td width="492" valign="top" style="width:368.75pt;border-top:none;border-left:&#10;  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;&#10;  mso-border-bottom-alt:solid black .75pt;mso-border-right-alt:solid black .75pt;&#10;  padding:0in 5.4pt 0in 5.4pt;height:14.1pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>{!Lead.Referrer_Email__c}<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:4;height:13.35pt">
+  <td width="177" valign="top" style="width:132.45pt;border:solid black 1.0pt;&#10;  border-top:none;mso-border-left-alt:solid black .75pt;mso-border-bottom-alt:&#10;  solid black .75pt;mso-border-right-alt:solid black .75pt;padding:0in 5.4pt 0in 5.4pt;&#10;  height:13.35pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>Relationship to child:<o:p></o:p></span></p>
+  </td>
+  <td width="492" valign="top" style="width:368.75pt;border-top:none;border-left:&#10;  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;&#10;  mso-border-bottom-alt:solid black .75pt;mso-border-right-alt:solid black .75pt;&#10;  padding:0in 5.4pt 0in 5.4pt;height:13.35pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>{!Lead.Relationship_to_child__c}<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:5;height:13.35pt">
+  <td width="177" valign="top" style="width:132.45pt;border:solid black 1.0pt;&#10;  border-top:none;mso-border-left-alt:solid black .75pt;mso-border-bottom-alt:&#10;  solid black .75pt;mso-border-right-alt:solid black .75pt;padding:0in 5.4pt 0in 5.4pt;&#10;  height:13.35pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>Primary ICD-10 Code</span><o:p></o:p></p>
+  </td>
+  <td width="492" valign="top" style="width:368.75pt;border-top:none;border-left:&#10;  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;&#10;  mso-border-bottom-alt:solid black .75pt;mso-border-right-alt:solid black .75pt;&#10;  padding:0in 5.4pt 0in 5.4pt;height:13.35pt"><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><font color="#0000ff" face="Arial, sans-serif"><span style="font-size: 16px;">{!Lead.PD_ICD_Code__c}</span></font><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman";color:blue'>&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:6;height:13.35pt">
+  <td width="177" valign="top" style="width:132.45pt;border:solid black 1.0pt;&#10;  border-top:none;mso-border-left-alt:solid black .75pt;mso-border-bottom-alt:&#10;  solid black .75pt;mso-border-right-alt:solid black .75pt;padding:0in 5.4pt 0in 5.4pt;&#10;  height:13.35pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>Primary Diagnosis</span><o:p></o:p></p>
+  </td>
+  <td width="492" valign="top" style="width:368.75pt;border-top:none;border-left:&#10;  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;&#10;  mso-border-bottom-alt:solid black .75pt;mso-border-right-alt:solid black .75pt;&#10;  padding:0in 5.4pt 0in 5.4pt;height:13.35pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><font color="#0000ff" face="Arial, sans-serif"><span style="font-size: 16px;">{!Lead.PD_Condition_Description__c}</span></font></p>
+  </td>
+ </tr>
+ <tr style="mso-yfti-irow:7;mso-yfti-lastrow:yes;height:13.35pt">
+  <td width="177" valign="top" style="width:132.45pt;border:solid black 1.0pt;&#10;  border-top:none;mso-border-left-alt:solid black .75pt;mso-border-bottom-alt:&#10;  solid black .75pt;mso-border-right-alt:solid black .75pt;padding:0in 5.4pt 0in 5.4pt;&#10;  height:13.35pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman"'>Form:<o:p></o:p></span></p>
+  </td>
+  <td width="492" valign="top" style="width:368.75pt;border-top:none;border-left:&#10;  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;&#10;  mso-border-bottom-alt:solid black .75pt;mso-border-right-alt:solid black .75pt;&#10;  padding:0in 5.4pt 0in 5.4pt;height:13.35pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:&#10;  normal"><span style='font-size:12.0pt;font-family:"Arial",sans-serif;&#10;  mso-fareast-font-family:"Times New Roman";color:blue'><a href="http://qa-wish.cs3.force.com/WishReferralFormOut_VF?LeadId={!Lead.Id}"><span style="color:blue">Wish Referral Form</span></a></span><span style='font-size:12.0pt;font-family:"Arial",sans-serif;mso-fareast-font-family:&#10;  "Times New Roman"'><o:p></o:p></span></p>
+  </td>
+ </tr>
+</tbody></table></td></tr>
  <tr style="mso-yfti-irow:2">
   <td style="margin: 0px; padding: 0.75pt; border: 0px rgb(0, 0, 0); background-color: transparent;" colspan="2">
   <p style="margin: 0px; line-height: normal;"><span style='margin: 0px; font-family: "Arial",sans-serif; font-size: 12pt;'>Yes, I have discussed a referral

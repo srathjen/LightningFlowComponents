@@ -45,10 +45,6 @@
                 <behavior>Edit</behavior>
                 <field>Birth_Month__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Suffix__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

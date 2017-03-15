@@ -294,6 +294,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Import Id --></label>
+        <name>Import_Id__c</name>
+    </fields>
+    <fields>
         <help><!-- Wish Child has an irreversible but non-progressive condition with severe disability and is experiencing multiple health complications that increase the probability for premature death. (e.g., anoxic brain injury, severe cerebral palsy) --></help>
         <label><!-- Increased probability of premature death --></label>
         <name>Increased_probability_of_premature_death__c</name>
@@ -798,6 +802,10 @@
     <fields>
         <label><!-- RE Sub Status --></label>
         <name>RE_Sub_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE What is the familyâ€™s primary spoken --></label>
+        <name>RE_What_is_the_family_s_primary_spoken__c</name>
     </fields>
     <fields>
         <label><!-- RE Zip/Postal Code --></label>

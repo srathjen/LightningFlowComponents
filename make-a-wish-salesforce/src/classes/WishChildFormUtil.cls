@@ -52,8 +52,8 @@ Public Class WishChildFormUtil
     public List<String> leftOwnWheelChairList{get;set;}
     public List<String> rightOwnWheelChairList{get;set;}
     public List<String> currentOwnWheelChairList{get;set;}
-    public Set<String> ownWheelChairNamesSet  = new Set<String>();
-    
+    public Set<String> ownWheelChairNamesSet = new Set<String>();
+     
     public List<String> leftWCCollapsibleList{get;set;}
     public List<String> rightWCCollapsibleList{get;set;}
     public List<String> currentWCCollapsibleList{get;set;}
@@ -106,6 +106,7 @@ Public Class WishChildFormUtil
     public boolean sameParentGuardian{get;set;}
     public boolean isChildPart{get;set;}
     public boolean approvalError{get;set;}
+   
     
     
     public WishChildFormUtil()
@@ -115,6 +116,7 @@ Public Class WishChildFormUtil
         sameParentGuardian = false;
         isChildPart = false;
         isInformation = false;
+       
         driverNameList = new List<SelectOption>();
           /***********************************************************************/
         leftDietaryNameList = new List<String>();
@@ -162,7 +164,7 @@ Public Class WishChildFormUtil
         infoForm = '/apex/WishInformationForm_VF?id='+caseId+'&part='+Participants;
         Boolean isWishFamilyAvailable = false;
         signersKeyPairMap = new Map<String,String>();       
-    
+        
     }
     
     public class DriverWrapper

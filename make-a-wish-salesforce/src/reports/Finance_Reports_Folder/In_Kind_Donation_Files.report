@@ -61,6 +61,9 @@
         <field>Case.In_Kind_Donation_Reimbursement__r$DonationDsc__c</field>
     </columns>
     <columns>
+        <field>Case$Wish_Assist__c</field>
+    </columns>
+    <columns>
         <field>Case.In_Kind_Donation_Reimbursement__r$Wish_child_Name__c</field>
     </columns>
     <columns>
@@ -76,16 +79,13 @@
         <field>Case.In_Kind_Donation_Reimbursement__r$Region_Code__c</field>
     </columns>
     <columns>
-        <field>Case$Chapter_Name__c</field>
-    </columns>
-    <columns>
         <field>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r$File_Path__c</field>
     </columns>
     <description>In-Kind Donation Files</description>
     <filter>
         <criteriaItems>
             <column>Case.In_Kind_Donation_Reimbursement__r$RecordType</column>
-            <isUnlocked>true</isUnlocked>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>In_Kind_Donation_Reimbursement__c.In_Kind_Donation</value>
         </criteriaItems>

@@ -30,7 +30,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Child Medical Summary</shortDescription>
-        <value>94179D57-4235-4622-87CE-08BBD63151AD</value>
+        <value>DD8DDDBE-C331-4A95-BF45-22E896EC2CDF</value>
     </labels>
     <labels>
         <fullName>ContactIdValue</fullName>
@@ -128,7 +128,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Clearence</shortDescription>
-        <value>ECC3FACE-46C8-4174-9765-660797AAEA45</value>
+        <value>145DAE40-4A86-4F7B-A19D-FD7B34056563</value>
     </labels>
     <labels>
         <fullName>Wish_Receipt_DDP</fullName>

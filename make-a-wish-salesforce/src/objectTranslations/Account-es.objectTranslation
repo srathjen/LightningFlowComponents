@@ -97,6 +97,10 @@
         <name>Is_Approved__c</name>
     </fields>
     <fields>
+        <label><!-- Language Notes --></label>
+        <name>Language_Notes__c</name>
+    </fields>
+    <fields>
         <label><!-- MAC Email --></label>
         <name>MAC_Email__c</name>
     </fields>
@@ -124,6 +128,78 @@
     <fields>
         <label><!-- Pre-2012 Wishes --></label>
         <name>Pre_2012_Wishes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Primary Language --></label>
+        <name>PrimaryLanguage__c</name>
+        <picklistValues>
+            <masterLabel>American Sign Language</masterLabel>
+            <translation><!-- American Sign Language --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Arabic</masterLabel>
+            <translation><!-- Arabic --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Chinese</masterLabel>
+            <translation><!-- Chinese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English</masterLabel>
+            <translation><!-- English --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French and French Creole</masterLabel>
+            <translation><!-- French and French Creole --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>German</masterLabel>
+            <translation><!-- German --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hindi</masterLabel>
+            <translation><!-- Hindi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Italian</masterLabel>
+            <translation><!-- Italian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Japanese</masterLabel>
+            <translation><!-- Japanese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Korean</masterLabel>
+            <translation><!-- Korean --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Polish</masterLabel>
+            <translation><!-- Polish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Portuguese</masterLabel>
+            <translation><!-- Portuguese --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Russian</masterLabel>
+            <translation><!-- Russian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Spanish</masterLabel>
+            <translation><!-- Spanish --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tagalog</masterLabel>
+            <translation><!-- Tagalog --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vietnamese</masterLabel>
+            <translation><!-- Vietnamese --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Primary Contact --></label>
@@ -468,13 +544,13 @@
         <relationshipLabel><!-- Accounts (Volunteer Manager) --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Wish Co-ordinator Hidden Email --></label>
+        <label><!-- Wish Coordinator Hidden Email --></label>
         <name>Wish_Co_ordinator_Hidden_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Wish Co-ordinator --></label>
+        <label><!-- Wish Coordinator --></label>
         <name>Wish_Co_ordinator__c</name>
-        <relationshipLabel><!-- Accounts (Wish Co-ordinator) --></relationshipLabel>
+        <relationshipLabel><!-- Accounts (Wish Coordinator) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Wish Expense Type --></label>

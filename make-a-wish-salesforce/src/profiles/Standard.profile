@@ -267,10 +267,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>CustomApprovalProcessController</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>DVMedicalSummaryAttachment_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -340,10 +336,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>InKindDonationReimbursement_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>InKindDonorsAccount_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -631,10 +623,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>VolunteerInterviewRecurrenceTask_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>VolunteerInterviewTaskRest_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -672,6 +660,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>VolunteerOpportunitySelection_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VolunteerOpportunitySelection_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -844,18 +836,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>batch_FillPresentationDateSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_FillWishInterviewDate</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_FillWishInterviewDateSchedule_AC</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>batch_FillWishInterviewDate_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -1036,6 +1016,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Account.Language_Notes__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Account.MAC_Email__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -1088,6 +1073,11 @@
         <editable>false</editable>
         <field>Account.Pre_2012_Wishes__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Account.PrimaryLanguage__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -1706,6 +1696,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Awards_Recognition__c.Migrated_Record__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Awards_Recognition__c.RE_Award_Name__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -2085,14 +2080,29 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Actual_Cash__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Case.Actual_Departure_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Actual_Inkind__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Case.Actual_Return_Date__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Actual_Total__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -2107,6 +2117,21 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case.Additional_Requests__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Adoptable__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Adopted_By__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Adopted__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2237,6 +2262,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case.ChapterName__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Chapter_MACEmail__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2606,6 +2636,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Case.Hidden_Publicity_Notes__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Hidden_Publicity_OK__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Case.Hidden_Referral_date__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2730,6 +2770,16 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.IsRushChildSummary__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.IsRushWishClearence_ChildSummary__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Case.Is_Migrated_Record__c</field>
         <readable>false</readable>
@@ -2797,6 +2847,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Case.MY_WISH_IS_TO__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Medical_Advisor_Email__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3027,6 +3082,16 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Case.Qualified_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Qualifying_Medical_Professional_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Case.Qualifying_Medical_Professional_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3516,6 +3581,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case.isNationalReply__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.isNational__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -3805,14 +3875,19 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
-        <field>Conflict_Of_Interest__c.RE_Import_Id__c</field>
-        <readable>false</readable>
+        <editable>true</editable>
+        <field>Conflict_Of_Interest__c.Migrated_Record__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
+        <field>Conflict_Of_Interest__c.RE_Import_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Conflict_Of_Interest__c.RE_Signed_Date__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -4236,6 +4311,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.Import_Id__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Contact.Inquiry_Referral_Method__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -4536,6 +4616,21 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.RE_City_Employer__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_City_Referrer__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Country__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Contact.RE_County__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -4645,39 +4740,64 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.RE_Mailing_City1__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.RE_Mailing_City2__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Mailing_City__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.RE_Mailing_Country__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Mailing_State1__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.RE_Mailing_State__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.RE_Mailing_Street1__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.RE_Mailing_Street2__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Mailing_Street__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.RE_Mailing_ZIP__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.RE_Mailing_Zip1__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Contact.RE_Mailing_Zip2__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -4736,12 +4856,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.RE_Position1__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Contact.RE_Position__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.RE_Preferred_Name__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Preferred_Phone_Types_c__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -4787,6 +4917,36 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.RE_Record_Id__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Referrer_City__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Referrer_Email__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Referrer_First_Name__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Referrer_Last_Name__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Referrer_Phone__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Referrer_Zip__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -4851,12 +5011,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Contact.RE_Work_Phone_c__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Contact.RE_Zip_Employer1__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.RE_Zip_Employer__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.RE_Zip_Referrer__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -6150,19 +6320,19 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>FAQ__kav.Attachment__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>FAQ__kav.Description__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>FAQ__kav.Role__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -6850,6 +7020,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Import_Id__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Increased_probability_of_premature_death__c</field>
         <readable>true</readable>
@@ -7372,6 +7547,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Lead.RE_Sub_Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.RE_What_is_the_family_s_primary_spoken__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -8555,24 +8735,24 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Resource__kav.Attachment__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Resource__kav.Description__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Resource__kav.Role__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Resource__kav.Video__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -10131,6 +10311,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Volunteer_Roles__c.Migrated_Record__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Volunteer_Roles__c.RE_Created_Date__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -11020,9 +11205,19 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Wish_Expense__c.Import_ID__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Wish_Expense__c.Journal_Reference__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Wish_Expense__c.Migrated_Record__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -11197,6 +11392,10 @@
     <layoutAssignments>
         <layout>Account-Chapters</layout>
         <recordType>Account.Chapter</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Account-Hospital Treatment Facility</layout>
+        <recordType>Account.Hospital_Treatment_Facility</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Account-In Kind Donors</layout>
@@ -11561,6 +11760,14 @@
         <layout>Volunteer_Opportunity__c-Volunteer Opportunity Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Volunteer_Opportunity__c-Volunteer Opportunity Layout</layout>
+        <recordType>Volunteer_Opportunity__c.Volunteer_Registered_Non_Wish</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Volunteer_Opportunity__c-Volunteer Opportunity Layout</layout>
+        <recordType>Volunteer_Opportunity__c.Volunteer_Registered_Wish</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Volunteer_Opportunity__c-Wish</layout>
         <recordType>Volunteer_Opportunity__c.Wish</recordType>
     </layoutAssignments>
@@ -11847,10 +12054,6 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>IdeasHome</apexPage>
-        <enabled>false</enabled>
-    </pageAccesses>
-    <pageAccesses>
-        <apexPage>InKindDonorsAccount_VF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -12395,6 +12598,16 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>Volunteer_Opportunity__c.Non_Wish_Event</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Volunteer_Opportunity__c.Volunteer_Registered_Non_Wish</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Volunteer_Opportunity__c.Volunteer_Registered_Wish</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>

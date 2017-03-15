@@ -31,7 +31,7 @@ public class CaseTriggerHandler {
             accountOfficeMap.put(currOffice.Chapter__r.Name,currOffice );
         }
         List<Case> lstParentWishes=[SELECT Id, RecordTypeId, Subject, Unique_Wish_Record_Identifier__c,Fund_Id__c, ChapterName__c,ChapterName__r.Name  FROM Case WHERE Id In: ParentIdsSet and RecordTypeId =: recTypeId Order BY CreatedDate desc];
-        List<Case> lstParentWisheRecordTypes = [SELECT Id, Unique_Wish_Record_Identifier__c, ChapterName__c,ChapterName__r.Name FROM Case WHERE RecordTypeId =: recTypeId and  Unique_Wish_Record_Identifier__c !=null and Migrated_Record__c=false Order BY CreatedDate desc Limit 2];
+        List<Case> lstParentWisheRecordTypes = [SELECT Id, Unique_Wish_Record_Identifier__c, ChapterName__c,ChapterName__r.Name FROM Case WHERE RecordTypeId =: recTypeId and  Unique_Wish_Record_Identifier__c !=null and Migrated_Record__c=false and Lead__r.unique_wish_identifier__c =null Order BY CreatedDate desc Limit 2];
         System.debug('Parent Wishes 1:' + lstParentWishes);
         System.debug('Parent Wishes 2:' + lstParentWisheRecordTypes );
         if(IsFYChanged){
@@ -1300,11 +1300,11 @@ dbLeads.Status = 'DNQ';
                 for(Case parentCase : parentCaseMap.values()) {
                     if(wishChildMap.containsKey(parentCase.ContactId)) {
                         if(wishChildMap.get(parentCase.ContactId).Region_Code__c == null && wishChildMap.get(parentCase.ContactId).county__c == null)
-                            parentCase.addError('Please enter region and county for wish child');
+                            parentCase.addError('Please add region and county on the wish child\'s contact record.');
                         else if(wishChildMap.get(parentCase.ContactId).Region_Code__c == null)
-                            parentCase.addError('Please enter region for wish child');
+                            parentCase.addError('Please add region on the wish child\'s contact record.');
                         else if(wishChildMap.get(parentCase.ContactId).county__c == null)
-                            parentCase.addError('Please enter county for wish child');
+                            parentCase.addError('Please add county on the wish child\'s contact record.');
                         
                     }
                 }
@@ -1720,6 +1720,48 @@ dbLeads.Status = 'DNQ';
                 System.debug('Members Inserted>>>>>>>>>');
                 insert memberList;
             }
+        }
+        
+    }
+    //This method is used to update inkind donation record's wishowner and wish owner's manager field whenever parent case owner gets changed   
+    public static void updateInkindDonationWishOwner(Map<id,id> wishOwnerMap){
+        map<id,id> wishManagerMap = new map<id,id>();
+        list<In_Kind_Donation_Reimbursement__c> updateInkindList = new list<In_Kind_Donation_Reimbursement__c>();
+        if(wishOwnerMap.size() > 0){
+            for(User getManager: [Select Id,ManagerId FROM User Where Id IN:wishOwnerMap.values()]){
+                wishManagerMap.put(getManager.Id, getManager.ManagerId);
+            }
+            for(In_Kind_Donation_Reimbursement__c currentInkind : [SELECT ID,Wish_Owner__c,Wish_Owner_s_Manager__c,Wish__c,Approved_Date__c FROM In_Kind_Donation_Reimbursement__c WHERE Wish__c IN: wishOwnerMap.keySet() AND Approved_Date__c = Null]){
+                if(wishOwnerMap.containsKey(currentInkind.Wish__c)){
+                    currentInkind.Wish_Owner__c = wishOwnerMap.get(currentInkind.Wish__c);
+                    if(wishManagerMap.containsKey(currentInkind.Wish_Owner__c))
+                        currentInkind.Wish_Owner_s_Manager__c = wishManagerMap.get(currentInkind.Wish_Owner__c);
+                    updateInkindList.add(currentInkind);
+                }
+                
+            }
+        }
+        if(updateInkindList.size() > 0){
+            update updateInkindList;
+        }
+        
+    }
+ //This method is used to update interviewdate not set checkbox in determination case based on the parent case interview date field   
+    public static void updateWishDeterminationInterviewDateNotSet(set<id> wishInterviewDateSet){
+        Constant_AC  constant = new Constant_Ac();    
+        list<Case> updateInterviewDateNotSetCaseList = new list<Case>();
+        Id wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        for(Case currentCase : [SELECT ID,Interview_Date_Not_Set__c,ParentId,RecordTypeId,Parent.Interview_date__c  
+                                FROM Case WHERE ParentId IN: wishInterviewDateSet AND RecordTypeId =: wishDeterminationRecordTypeId]){
+                                    if(currentCase.Parent.Interview_date__c != Null)
+                                        currentCase.Interview_Date_Not_Set__c = true;
+                                    if(currentCase.Parent.Interview_date__c == Null)
+                                        currentCase.Interview_Date_Not_Set__c = false;  
+                                    updateInterviewDateNotSetCaseList.add(currentCase);
+                                }
+        
+        if(updateInterviewDateNotSetCaseList.size() > 0){
+            update updateInterviewDateNotSetCaseList;
         }
         
     }

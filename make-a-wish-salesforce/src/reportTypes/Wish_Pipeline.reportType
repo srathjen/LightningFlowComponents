@@ -96,6 +96,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Actual_Total__c</field>
+            <table>Case</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Concept Approved</displayNameOverride>
             <field>Concept_Approval_Date__c</field>
             <table>Case</table>
@@ -104,6 +109,16 @@
             <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Wish Description</displayNameOverride>
             <field>Description</field>
+            <table>Case</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Actual_Cash__c</field>
+            <table>Case</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Actual_Inkind__c</field>
             <table>Case</table>
         </columns>
         <masterLabel>Cases</masterLabel>

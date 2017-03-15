@@ -136,6 +136,7 @@
     <fields>
         <fullName>External_Id__c</fullName>
         <caseSensitive>false</caseSensitive>
+        <description>It will hold the value of external Id for updating records from external system.</description>
         <externalId>true</externalId>
         <label>External Id</label>
         <length>50</length>
@@ -168,6 +169,7 @@
     </fields>
     <fields>
         <fullName>Import_Id__c</fullName>
+        <description>It will hold the import id.</description>
         <externalId>false</externalId>
         <label>Import Id</label>
         <length>50</length>

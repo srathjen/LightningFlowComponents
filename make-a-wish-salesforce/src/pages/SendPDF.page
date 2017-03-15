@@ -223,8 +223,7 @@
           <div style="width:10%; float:left;border-bottom:1px solid #000 !important; border:none;">dummy</div>    -->
           <div style="width:8% !important; float:left; font-weight:normal;">DOB : </div>
           <div class="{!IF(wishFamilContact.dob==null,'newfont','oldfont')}" style="width:32%; float:left;border-bottom:1px solid #000 !important; margin:0 10px 0 0; border:none;"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}" ><apex:param value="{!if(wishFamilContact.dob==null,NOW(),wishFamilContact.dob)}" /></apex:outputText></div>  
-          
-        </div>
+          </div>
 
       
         <div style="clear:both"></div>

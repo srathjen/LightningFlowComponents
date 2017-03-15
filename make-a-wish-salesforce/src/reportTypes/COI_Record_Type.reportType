@@ -76,6 +76,16 @@
             <field>Signed_Date__c</field>
             <table>Conflict_Of_Interest__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RE_Import_Id__c</field>
+            <table>Conflict_Of_Interest__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>RE_Signed_Date__c</field>
+            <table>Conflict_Of_Interest__c</table>
+        </columns>
         <masterLabel>Conflict Of Interest</masterLabel>
     </sections>
     <sections>
@@ -146,12 +156,27 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Import_Id__c</field>
+            <table>Conflict_Of_Interest__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Volunteer_Contact__c.OtherPhone</field>
             <table>Conflict_Of_Interest__c</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Volunteer_Contact__c.is_Active_Volunteer__c</field>
+            <table>Conflict_Of_Interest__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>External_Id__c</field>
+            <table>Conflict_Of_Interest__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Migrated_Record__c</field>
             <table>Conflict_Of_Interest__c</table>
         </columns>
         <masterLabel>Volunteer Info</masterLabel>

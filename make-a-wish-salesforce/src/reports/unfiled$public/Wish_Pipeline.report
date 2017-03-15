@@ -46,6 +46,15 @@
         <field>Case$Budget_Total__c</field>
     </columns>
     <columns>
+        <field>Case$Actual_Cash__c</field>
+    </columns>
+    <columns>
+        <field>Case$Actual_Inkind__c</field>
+    </columns>
+    <columns>
+        <field>Case$Actual_Total__c</field>
+    </columns>
+    <columns>
         <field>Case$Description</field>
     </columns>
     <description>Wish Pipeline</description>
@@ -74,8 +83,6 @@
     <showDetails>true</showDetails>
     <timeFrameFilter>
         <dateColumn>Case$Qualified_Date__c</dateColumn>
-        <endDate>2017-02-28</endDate>
         <interval>INTERVAL_CUSTOM</interval>
-        <startDate>2015-12-01</startDate>
     </timeFrameFilter>
 </Report>

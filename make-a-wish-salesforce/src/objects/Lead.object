@@ -1299,6 +1299,7 @@
     </fields>
     <fields>
         <fullName>Current_Condition_Label__c</fullName>
+        <description>Wish Current Condition Label</description>
         <externalId>false</externalId>
         <label>Current Condition Label</label>
         <length>131000</length>
@@ -1389,6 +1390,7 @@
     <fields>
         <fullName>External_Id__c</fullName>
         <caseSensitive>false</caseSensitive>
+        <description>It holds the value of External Id</description>
         <externalId>true</externalId>
         <label>External Id</label>
         <length>50</length>
@@ -1472,8 +1474,9 @@
     </fields>
     <fields>
         <fullName>Hidden_Medical_Professional_Name__c</fullName>
+        <description>holding Medical Professional Name.</description>
         <externalId>false</externalId>
-        <formula>Treating_Medical_Professional_First_Name__c  +  Treating_Medical_Professional_Last_Name__c</formula>
+        <formula>Treating_Medical_Professional_First_Name__c +  Treating_Medical_Professional_Last_Name__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Medical Professional Name</label>
         <required>false</required>
@@ -1579,6 +1582,17 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>Import_Id__c</fullName>
+        <description>Import Id</description>
+        <externalId>false</externalId>
+        <label>Import Id</label>
+        <length>50</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Increased_probability_of_premature_death__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Wish Child has an irreversible but non-progressive condition with severe disability and is experiencing multiple health complications that increase the probability for premature death.</description>
@@ -1605,6 +1619,7 @@
     <fields>
         <fullName>Is_Chapter_Active__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>It will check, chapter is active chapter or not.</description>
         <externalId>false</externalId>
         <label>Is Chapter Active</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2803,6 +2818,17 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>RE_What_is_the_family_s_primary_spoken__c</fullName>
+        <description>PRIMARY_LANGUAGE</description>
+        <externalId>false</externalId>
+        <label>RE What is the familyâ€™s primary spoken</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>RE_Zip_Postal_Code__c</fullName>
         <description>POST_CODE</description>
         <externalId>false</externalId>
@@ -3786,6 +3812,7 @@
     </fields>
     <fields>
         <fullName>unique_wish_identifier__c</fullName>
+        <caseSensitive>false</caseSensitive>
         <description>To store the unique wish identifier</description>
         <externalId>false</externalId>
         <label>unique wish identifier</label>
@@ -3793,7 +3820,7 @@
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
-        <unique>false</unique>
+        <unique>true</unique>
     </fields>
     <listViews>
         <fullName>Alabama_Lead</fullName>

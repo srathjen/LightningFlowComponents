@@ -140,7 +140,6 @@
         <fields>Chapter_Role_Opportunity__c</fields>
         <fields>Role__c</fields>
         <fields>Volunteer_Name__c</fields>
-        <fields>IsApproved__c</fields>
         <fields>Inactive__c</fields>
         <fields>Reason_Inactive__c</fields>
         <relatedList>Volunteer_Opportunity__c.Non_Wish_Event__c</relatedList>

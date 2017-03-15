@@ -10,7 +10,7 @@ Description :
 
 trigger CaseTrigger_AT on Case (after insert, after update,before update, after delete,before insert) {
     
-    Constant_AC  constant = new Constant_Ac();    
+    Constant_AC  constant = new Constant_Ac();   
     public static String wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
     public static String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
     public static String wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
@@ -33,10 +33,12 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         Set<Id> wishOwnerIdSet = new Set<Id>();
         Map<Id,User> wishOwnerMap = new Map<Id,User>();
         Set<Id> caseIdSet = new Set<Id>();
+        Set<Id> medicalprofContactdSet = new Set<Id>();
         String nationalRec;
         String email;
         if(Trigger.isInsert)
         {
+            
             //  WishesTriggerHelperClass.updateDateReceived(null,trigger.new);
             Map<Id, Id> intakeManagerMap = new Map<Id, Id>();
             Set<Id> chapterSet = new Set<Id>();
@@ -48,8 +50,10 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 if(newCase.RecordTypeId == parentWishRecordTypeId) {
                     chapterSet.add(newCase.ChapterName__c);
                 }
-                if(newCase.RecordTypeId == partARecordTypeId ) {
-                    wishOwnerIdSet.add(newCase.OwnerId);
+                
+                if(!newCase.Rush__c){
+                    newCase.Rush_Timeframe__c=Null;
+                    newCase.Rush_Explanation__c=Null;
                 }
             }
             
@@ -57,23 +61,21 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 intakeManagerMap.put(accInfo.Id, accInfo.Intake_Manager__c);
             }
             
+            
+            
             if(wishOwnerIdSet.size() > 0){
                 for(User wishOwner : [SELECT Id,ManagerId,Manager.Name,Manager.Email From User WHERE Id IN: wishOwnerIdSet AND ManagerId != Null ]){
                     wishOwnerMap.put(wishOwner.id,wishOwner);
                 }
                 
-               
+                
             }
             
-            if(caseIdSet.size() > 0){
-                 for(User wishOwner : [SELECT Id,Email From User WHERE Id IN: caseIdSet ]){
-                    wishOwnerMap.put(wishOwner.id,wishOwner);
-                }
-            }
+            
             
             for(Case newCase : trigger.new){
                 if(intakeManagerMap.containsKey(newCase.chapterName__c) && intakeManagerMap.get(newCase.chapterName__c) != null ) {
-                  //  newCase.OwnerId = intakeManagerMap.get(newCase.chapterName__c);
+                    //  newCase.OwnerId = intakeManagerMap.get(newCase.chapterName__c);
                 }
                 if(wishOwnerMap.containsKey(newCase.OwnerId)){
                     if(wishOwnerMap.get(newCase.OwnerId).ManagerId != Null)
@@ -81,8 +83,9 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                         newCase.Hidden_Wish_Owner_Manager__c  = wishOwnerMap.get(newCase.OwnerId).Manager.Name;
                         newCase.Hidden_Wish_Owner_Email__c = wishOwnerMap.get(newCase.OwnerId).Manager.Email;
                     }
-                   
+                    
                 }
+                
             }
             
         }
@@ -105,11 +108,13 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
             {  
                 if(currentCase.Migrated_Record__c == false)
                 {
+                    
+                    
                     if(currentCase.ownerId == null)
                         currentCase.Ownerid = Userinfo.getUserId();
-                     wishOwnerIdSet.add(currentCase.OwnerId);
                     
-                  
+                    wishOwnerIdSet.add(currentCase.OwnerId);
+                    
                     if((currentCase.Status == 'Ready to Assign') && trigger.oldmap.get(currentCase.id).Status !=  'Ready to Assign' && currentCase.RecordTypeId == parentWishRecordTypeId){
                         caseMap.Put(currentCase.ChapterName__c,currentCase);
                         currentCase.Ready_to_Assign_Date__c = Date.Today();
@@ -120,6 +125,20 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                     if((currentCase.Appropriate_Comments__c != trigger.oldMap.get(currentCase.Id).Appropriate_Comments__c ||  currentCase.Please_Explain__c != trigger.oldMap.get(currentCase.Id).Please_Explain__c) && currentCase.RecordTypeId == parentWishRecordTypeId){
                         currentCase.Wish_Clearance_Received_Date__c = system.today();
                     }
+                    
+                    if((!currentCase.Rush__c) && trigger.oldMap.get(currentCase.Id).Rush__c==True){
+                        currentCase.Rush_Timeframe__c=Null;
+                        currentCase.Rush_Explanation__c=Null;
+                    }
+                    
+                    if(currentCase.RecordTypeId == partARecordTypeId && currentCase.Local_MCA_Team__c != trigger.oldMap.get(currentCase.Id).Local_MCA_Team__c) {
+                        currentCase.Chapter_MACEmail__c = currentCase.Medical_Advisor_Email__c;
+                    }
+                    
+                    if(currentCase.RecordTypeId == partARecordTypeId && currentCase.status == 'Escalated' && trigger.oldMap.get(currentCase.Id).Status ==  'Escalated' && currentCase.Case_Comment__c != trigger.oldMap.get(currentCase.Id).Case_Comment__c){
+                        currentCase.isNationalReply__c = true;
+                    }
+                    
                     
                     if(currentCase.Comments__c != trigger.oldMap.get(currentCase.Id).Comments__c)
                         currentCase.Air_Travel_Details__c = 'This wish does not involve air trave';
@@ -248,8 +267,9 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 }
             }
             
-             if(caseIdSet.size() > 0){
-                 for(User wishOwner : [SELECT Id,Email From User WHERE Id IN: caseIdSet ]){
+            
+            if(caseIdSet.size() > 0){
+                for(User wishOwner : [SELECT Id,Email From User WHERE Id IN: caseIdSet ]){
                     wishOwnerMap.put(wishOwner.id,wishOwner);
                 }
             }
@@ -259,22 +279,21 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
             }
             
             if(wishOwnerIdSet.size() > 0){
-                for(User wishOwner : [SELECT Id,ManagerId,Manager.Name,Manager.Email From User WHERE Id IN: wishOwnerIdSet AND ManagerId != Null ]){
+                for(User wishOwner : [SELECT Id,ManagerId,Manager.Name,Manager.Email,Email From User WHERE Id IN: wishOwnerIdSet AND ManagerId != Null ]){
                     wishOwnerMap.put(wishOwner.id,wishOwner);
                 }
             }
             for(Case newCase : trigger.new){
                 if(wishOwnerMap.containsKey(newCase.OwnerId)){
-                    if(wishOwnerMap.get(newCase.OwnerId).ManagerId != Null)
+                    if(wishOwnerMap.get(newCase.OwnerId).ManagerId != Null && newCase.RecordTypeId == parentWishRecordTypeId )
                     {
                         newCase.Hidden_Wish_Owner_Manager__c  = wishOwnerMap.get(newCase.OwnerId).Manager.Name;
                         newCase.Hidden_Wish_Owner_Email__c = wishOwnerMap.get(newCase.OwnerId).Manager.Email;
                     }
                     
-                   
                 }
                 
-               
+                
             }
             
             //Case Owner Old Logic
@@ -315,6 +334,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                     contactIds.add(currWish.contactId); 
                 }
                 
+                
             }
             
             if(contactIds.size() > 0) {
@@ -351,6 +371,22 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         List<Case> eligibilityReviewCaseList = new List<Case>();
         List<Case> caseParentList = new List<Case>();
         Map<Id, Case> parentCaseIntakeOwnerMap = new Map<Id, Case>();
+        Map<String, List<Case>> caseSharingMap = new Map<String, List<Case>>();
+        
+        for(Case newCase : [SELECT Id,ChapterName__c, ChapterName__r.Name FROM Case WHERE Id IN : Trigger.newMap.keySet()])
+        {
+            if(newCase.ChapterName__c != Null)
+            {
+                if(caseSharingMap.containsKey(newCase.ChapterName__r.Name))
+                    caseSharingMap.get(newCase.ChapterName__r.Name).add(newCase);
+                else
+                    caseSharingMap.put(newCase.ChapterName__r.Name, new List<Case>{newCase});
+                
+                
+            }
+        }
+        
+        
         for(Case newWish : Trigger.New) {
             System.debug('<<<<<<<<<<CaseInSert>>>>>>>>>');
             
@@ -487,6 +523,11 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         if(parentCaseIntakeOwnerMap.size() > 0 ) {
             CaseTriggerHandler.CaseTeamInTakeManager(parentCaseIntakeOwnerMap);
         }
+        
+        if(caseSharingMap.size() > 0){
+             // ChapterStaffRecordSharing_AC.CaseSharing(caseSharingMap);
+        }
+          
     }
     //Used to create child wish for Parent wish
     //Used to submit parent wish for approval once the required volunteer assigend to Wish
@@ -779,6 +820,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         }
         if(newCaseOwnerMap.size() > 0) {
             CaseTriggerHandler.changeChildCasesOwner(newCaseOwnerMap);
+            CaseTriggerHandler.updateInkindDonationWishOwner(newCaseOwnerMap);
         }
         
         if(wishClearanceMap.size() > 0 && (newWishClearanceSet.Size() > 0 || newMedicalSummarySet.Size() > 0 || newMedicalWishClearanceSet.Size() > 0)) {
@@ -871,6 +913,14 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         }
         if((interViewCloseTaskIdsSet.size() > 0 || interViewOpenTaskIdsSet.size() > 0) && interviewTaskParentIdMap.size() > 0) {
             CaseTriggerHandler.inTerviewTask(interViewCloseTaskIdsSet, interViewOpenTaskIdsSet, interviewTaskParentIdMap);
+        }
+        
+        if(interViewCloseTaskIdsSet.size() > 0){
+            CaseTriggerHandler.updateWishDeterminationInterviewDateNotSet(interViewCloseTaskIdsSet);
+        }
+        
+        if(interViewOpenTaskIdsSet.size() > 0){
+            CaseTriggerHandler.updateWishDeterminationInterviewDateNotSet(interViewOpenTaskIdsSet);
         }
         
         //Wish Granted Task

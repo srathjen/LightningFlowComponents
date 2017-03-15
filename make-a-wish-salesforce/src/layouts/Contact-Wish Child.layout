@@ -2,6 +2,7 @@
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>npe4__Relationships_Viewer</customButtons>
     <excludeButtons>Clone</excludeButtons>
+    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>DisableCustomerPortal</excludeButtons>
     <excludeButtons>DisablePartnerPortal</excludeButtons>
     <excludeButtons>DisablePrmSuperUser</excludeButtons>
@@ -9,7 +10,6 @@
     <excludeButtons>EnablePrmSuperUser</excludeButtons>
     <excludeButtons>EnableSelfService</excludeButtons>
     <excludeButtons>RequestUpdate</excludeButtons>
-    <excludeButtons>RequestUseSfdc</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <excludeButtons>ViewPartnerPortalUser</excludeButtons>
     <excludeButtons>ViewSelfService</excludeButtons>
@@ -90,10 +90,6 @@
                 <behavior>Edit</behavior>
                 <field>Deceased_Date__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Suffix__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -118,11 +114,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Medical_Condition__c</field>
+                <field>RE_Record_Id__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>RE_Record_Id__c</field>
+                <field>Migrated_Record__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -139,11 +135,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>HomePhone</field>
+                <field>Phone</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>OtherPhone</field>
+                <field>HomePhone</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -177,11 +173,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>npe01__HomeEmail__c</field>
+                <field>Email</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>npe01__AlternateEmail__c</field>
+                <field>npe01__HomeEmail__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -278,11 +274,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Referrer_Last_Name__c</field>
+                <field>Referrer_Email__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Referrer_Email__c</field>
+                <field>Referrer_Last_Name__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -300,11 +296,11 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Relationship__c</field>
+                <field>Relationship_to_Wish_Child__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Relationship_to_Wish_Child__c</field>
+                <field>Relationship__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -517,6 +513,10 @@
                 <behavior>Edit</behavior>
                 <field>SD4_Condition_Description__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Hidden_Medical_Physician_Email__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
@@ -668,7 +668,6 @@
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
         <fields>TASK.WHAT_NAME</fields>
-        <fields>TASK.STATUS</fields>
         <fields>TASK.DUE_DATE</fields>
         <fields>CORE.USERS.FULL_NAME</fields>
         <fields>TASK.LAST_UPDATE</fields>

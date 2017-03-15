@@ -291,7 +291,7 @@ OtherPhone
             <name>Contact_Rush_Wish_Reminder_Alerts</name>
             <type>Alert</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Contact.Hidden_Is_We_Need_To_Expedite_The_Proces__c</field>
             <operation>equals</operation>

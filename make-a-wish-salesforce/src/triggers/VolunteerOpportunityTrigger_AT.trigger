@@ -5,7 +5,12 @@ Description : TBD
 *************************************************************************************************/
 
 trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Insert,Before Update,After Insert,After Update,After delete) {
+     Constant_AC  constant = new Constant_AC();
     
+    Id registeredWishRecordTypeId = Schema.SobjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.registeredWish).getRecordTypeId();
+    Id registeredNonWishRecordTypeId = Schema.SobjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.registeredNonWish).getRecordTypeId();
+    Id wishRecordTypeId = Schema.SobjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
+    Id nonWishRecordTypeId = Schema.SobjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
     if(Trigger.isBefore && Trigger.isUpdate){
         
         Set<Id> volunteerContactIdSet = new set<Id>();
@@ -21,6 +26,13 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
                 }
                 if(currRec.Reason_Inactive__c != Null){
                     currRec.Inactive__c = True;
+                }
+                
+                if(currRec.RecordTypeId == wishRecordTypeId  && currRec.IsApproved__c == true){
+                    currRec.RecordTypeId = registeredWishRecordTypeId;
+                }
+                if(currRec.RecordTypeId == nonWishRecordTypeId && currRec.IsApproved__c == true){
+                    currRec.RecordTypeId = registeredNonWishRecordTypeId;
                 }
              /*   if(currRec.IsApproved__c == True && currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Reason_Inactive__c == Null  && currRec.Reason_Inactive__c != Null){
                     volunteerOpportunityList.add(currRec);
@@ -118,12 +130,6 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
                     recordsForCreatingCaseTeams.add(currRec); 
                 }
                 
-                /*if((currRec.IsApproved__c == True && Trigger.oldMap.get(currRec.id).isApproved__c == False)  &&  (currRec.Volunteer_Name__c!= Null) && (currRec.Wish__c != Null && currRec.Reason_Inactive__c == Null))
-                {
-                    
-                    recordsForCreatingCaseTeams.add(currRec); 
-                }*/
-                
                 
                 
                 if((currRec.Volunteer_Name__c != Null) &&(currRec.Wish__c != Null))
@@ -191,7 +197,7 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
         }
         
         
-        if(nonWishListtoupdatecount.Size() > 0){
+        if(nonWishListtoupdatecount.Size() > 0 && RecursiveTriggerHandler.isFirstTime == true  ){
             system.debug('@@@@@@@ ENTER INTO IF  @@@@@@@@@'+nonWishListtoupdatecount);
             VolunteerOpportunityTriggerHandler.UpdateVolunteerRegisterdCount(nonWishListtoupdatecount);
             
@@ -202,6 +208,7 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
         if(VolunteerwishIdSet.size() > 0){
             // VolunteerOpportunityTriggerHandler.updateVolunteerWishAssignedCount(VolunteerwishIdSet);
         }
+        
         if(volOpportunitySharingList.size() > 0)
         VolunteerOpportunityTriggerHandler.shareolunteerOpportunityRecord(volOpportunitySharingList);
         

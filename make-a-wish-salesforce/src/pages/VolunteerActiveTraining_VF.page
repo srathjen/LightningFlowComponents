@@ -46,8 +46,7 @@
                         <apex:pageBlock >
                             <apex:outputPanel rendered="{!(isTrainingExist == True)}">
                                 <h3>Success</h3>
-                                <p>You have successfully registered for a volunteer training. Once you have completed the training you will receive an email and will be able to move forward to complete your application. If you need to change your training day/time please cancel
-                                    your existing and register for a new training.</p>
+                                <p>You have successfully registered for a volunteer training. If you need to change your training day/time please cancel your existing training and register for a new training.</p>
                             </apex:outputPanel>
                             <apex:outputPanel rendered="{!(isCancelled == True)}">
                                 <h3>Cancelled</h3>
@@ -88,7 +87,7 @@
                                                     <td>{!training.location}</td>
                                                     <td>{!training.maxCapacity}</td>
                                                     <td>{!training.avilableSheets}</td>
-                                                    
+
                                                     <td>
                                                         <apex:commandLink action="{!Cancel}">Cancel
                                                             <apex:param name="trainingId" value="{!training.recordId}" assignTo="{!trainingId}"/>
@@ -120,7 +119,7 @@
                                             <th>Location</th>
                                             <th>Max Capacity</th>
                                             <th>Available Seats</th>
-                                            
+
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -142,7 +141,7 @@
                                                     <td>{!training.location}</td>
                                                     <td>{!training.maxCapacity}</td>
                                                     <td>{!training.avilableSheets}</td>
-                                                    
+
                                                     <td>
                                                         <apex:commandLink action="{!Register}">Register
                                                             <apex:param name="trainingId" value="{!training.recordId}" assignTo="{!trainingId}"/>
@@ -168,14 +167,7 @@
         </main>
         <apex:include pageName="prospective_footer" id="pfooter"/>
         <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-        <!-- fallback -->
-        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, ' web/js/jquery.dataTables.min.js ')}"><\/script>')</script>
-
-        <script src="https://files-stackablejs.netdna-ssl.com/stacktable.min.js"></script>
-        <!-- fallback -->
-        <script>
-            window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, ' web/js/stacktable.min.js ')}"><\/script>')
-        </script>
+        <script src="{!URLFOR($Resource.prospective_assets, ' web/js/stacktable.min.js ')}"></script>
 
         <script>
             $(document).ready(function () {

@@ -9,11 +9,13 @@ Public class LeadDuplicate_ACTest
      Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
      Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
      newLead.Child_Age__c = '4';
+     newLead.unique_wish_identifier__c = '1234567';
      insert newLead;
       
      Lead newdupLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
      newdupLead.Override_Dupe_Check__c = True;
      newdupLead.Child_Age__c = '4';
+     newdupLead.unique_wish_identifier__c = '123456';
      insert newdupLead;
       
      ApexPages.currentPage().getParameters().put('wishFamily','True');
@@ -38,11 +40,13 @@ Public class LeadDuplicate_ACTest
      Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
      Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
      newLead.Child_Age__c = '4';
+     newLead.unique_wish_identifier__c = '1234567';
      insert newLead;
       
      Lead newdupLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
      newdupLead.Override_Dupe_Check__c = True;
      newdupLead.Child_Age__c = '4';
+     newdupLead.unique_wish_identifier__c = '1234568';
      insert newdupLead;
       
      ApexPages.currentPage().getParameters().put('wishFamily','True');
@@ -73,10 +77,12 @@ Public class LeadDuplicate_ACTest
      newLead.Treating_Medical_Professional_Email__c = 'testmawa1@gmail.com';
      newLead.Hospital_Treatment_Facility__c = 'Moss Hart AC';
      newLead.Child_Age__c = '4';
+     newLead.unique_wish_identifier__c = '1234567';
      insert newLead;
      Lead newdupLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
      newdupLead.Override_Dupe_Check__c = True;
      newdupLead.Child_Age__c = '4';
+     newdupLead.unique_wish_identifier__c = '1234568';
      insert newduplead;
      
      

@@ -22,7 +22,7 @@
         <name>Event_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Chapter Name --></label>
+        <label><!-- Hidden Chapter Name --></label>
         <name>Hidden_Chapter_Name__c</name>
     </fields>
     <fields>

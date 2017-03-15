@@ -33,6 +33,8 @@ public class VolunteerWorkItems_AC {
     public Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
     public Id trainingRTId = Schema.Sobjecttype.Orientation_Training__c.getRecordTypeInfosByName().get(constant.trainingRT).getRecordTypeId();
     Public Id nonWishRT = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.nonWishRT).getRecordTypeId();
+    Public Id registeredWishRecordTypeId = Schema.SobjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.registeredWish).getRecordTypeId();
+    Public Id registeredNonWishRecordTypeId = Schema.SobjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.registeredNonWish).getRecordTypeId();
     //Used to get the current logged in user related contact and used to get all chapters of the volunteer user.
     public VolunteerWorkItems_AC() {
       isWishClosed = false;
@@ -76,7 +78,7 @@ public class VolunteerWorkItems_AC {
             assignedWishQueryString +=  nonWishEventField.getFieldPath()+',';
         }
         assignedWishQueryString = assignedWishQueryString.removeEnd(',');
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = False';
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredWishRecordTypeId OR RecordTypeId =:wishEvents) AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = False';
         volunteerWishEventsList = Database.query(assignedWishQueryString);
         if(volunteerWishEventsList.size() > 0) {
             for(Volunteer_Opportunity__c checkApprovalStatus : volunteerWishEventsList) {
@@ -97,7 +99,7 @@ public class VolunteerWorkItems_AC {
         }
         assignedWishQueryString = assignedWishQueryString.removeEnd(',');
         //assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.RecordTypeId =: nonWishRT AND Non_Wish_Event__r.Event_Date__c < today';
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.Event_Date__c >=: today';
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents ) AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.Event_Date__c >=: today';
         volunteerNonWishEventsList = Database.query(assignedWishQueryString );
         if(volunteerNonWishEventsList.size() > 0) {
             for(Volunteer_Opportunity__c checkApprovalStatus : volunteerNonWishEventsList) {
@@ -129,7 +131,7 @@ reqired volunteers and registered volunteers count.*/
         //nonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Non_Wish_Event__r.RecordTypeId =: nonWishRT ';
         //assignedQueryString +=  ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Non_Wish_Event__r.RecordTypeId =: nonWishRT ';
         nonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Inactive__c = False';
-        assignedQueryString +=  ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Inactive__c = False';
+        assignedQueryString +=  ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents )  AND Reason_Inactive__c = null AND Inactive__c = False';
         volunteerNonWishEventsList = Database.query(nonWishQueryString);
         for(Volunteer_Opportunity__c nonWishOpportunities : volunteerNonWishEventsList) {
             if(!nonWishOpportunitiesMap.containsKey(nonWishOpportunities.Non_Wish_Event__c + '-' + nonWishOpportunities.Chapter_Name__c + '-' + nonWishOpportunities.Role__c)) {
@@ -220,7 +222,7 @@ reqired volunteers and registered volunteers count.*/
         return wishOpportunitiesMap.values();
     }
     
-    // This method is used for volunteers to register on wish events if they have any one Non wish role and used to restrict volunteers to register on similar volunteer opportunities
+      // This method is used for volunteers to register on wish events if they have any one Non wish role and used to restrict volunteers to register on similar volunteer opportunities
     public void RegisterWishEvents() {
         
         isReferesh = true;
@@ -251,13 +253,16 @@ reqired volunteers and registered volunteers count.*/
             if(volunteerOpportunity.size()>0) {
                 for(Volunteer_Roles__c checkForMatchingRole : [SELECT Id, Chapter_Name__c, Role_Name__c, Status__c, Chapter_Role__c 
                                                                FROM Volunteer_Roles__c WHERE Volunteer_Name__c =: userRelatedContactId 
-                                                               AND Role_Name__c =: volunteerOpportunity.get(0).Role__c 
+                                                               AND (Role_Name__c =: volunteerOpportunity.get(0).Role__c OR Role_Name__c = 'Wish Granter Mentor')
                                                                AND Chapter_Name__c =: volunteerOpportunity.get(0).Chapter_Name__r.Name 
                                                                AND isWishRole__c = true]) 
                 {
+                   if(checkForMatchingRole.Role_Name__c == volunteerOpportunity.get(0).Role__c || (checkForMatchingRole.Role_Name__c == 'Wish Granter Mentor' && volunteerOpportunity.get(0).Role__c == 'Wish Granter'))
+                   {
                     updateRecord = true;
                     chatperRoleId = checkForMatchingRole.Chapter_Role__c;
-                    volunteerStatus = checkForMatchingRole.Status__c;                    
+                    volunteerStatus = checkForMatchingRole.Status__c;  
+                   }                  
                 }
                 
                 for(Chapter_Role_O_T__c currTrainig : [SELECT id, Required__c FROM Chapter_Role_O_T__c WHERE 
@@ -271,7 +276,7 @@ reqired volunteers and registered volunteers count.*/
                 {
                     allowRegister = true;
                 }
-                else if(updateRecord == true && isRequired == false && volunteerStatus == 'Trained')
+                else if(updateRecord == true && isRequired == false)
                 {
                     allowRegister = true;
                 }
@@ -308,6 +313,7 @@ reqired volunteers and registered volunteers count.*/
         String volunteerStatus;
         Boolean isRequired = false;
         Boolean allowRegister = false;
+        Boolean isWishGranter = false;
         List<Volunteer_Opportunity__c> volunteerOpportunitySameRoleList;
         List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordTypeId,Chapter_Role_Opportunity__r.Role_Name__c, OwnerId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId AND Reason_Inactive__c =: Null LIMIT 1];
         List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordtypeId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null ];
@@ -334,8 +340,8 @@ reqired volunteers and registered volunteers count.*/
             if(volunteerOpportunity.size()>0) 
             {
                 for(Volunteer_Roles__c checkForMatchingRole : [SELECT Id,Chapter_Name__c,Volunteer_Name__c,Role_Name__c,isWishRole__c, Chapter_Role__c, 
-                                                               Status__c FROM Volunteer_Roles__c WHERE Volunteer_Name__c =: userRelatedContactId 
-                                                               AND Chapter_Name__c =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Role_Name__c =: volunteerOpportunity.get(0).Role__c]) 
+                                                               Status__c,Chapter_Role__r.Role__c,Chapter_Role__r.Role_Name__r.isWishRole__c FROM Volunteer_Roles__c WHERE Volunteer_Name__c =: userRelatedContactId 
+                                                               AND Chapter_Name__c =: volunteerOpportunity.get(0).Chapter_Name__r.Name]) 
                     
                 {
                     if(checkForMatchingRole.Id != Null){
@@ -345,6 +351,11 @@ reqired volunteers and registered volunteers count.*/
                         system.debug('@@@@@ 1 @@@@@@'+volunteerStatus );
                         system.debug('@@@@@ 2 @@@@@@'+chatperRoleId );
                     }
+                    
+                    if((checkForMatchingRole.Chapter_Role__r.Role__c == 'Wish Granter' && checkForMatchingRole.Chapter_Role__r.Role_Name__r.isWishRole__c == true && checkForMatchingRole.Status__c == 'Trained') ||
+                       (checkForMatchingRole.Chapter_Role__r.Role__c == 'Wish Granter Mentor' && checkForMatchingRole.Chapter_Role__r.Role_Name__r.isWishRole__c == true && checkForMatchingRole.Status__c == 'Trained'))
+                       isWishGranter = true;
+                       system.debug('@@@@@ isWishGranter  @@@@@@'+isWishGranter );
                 }
                 for(Chapter_Role_O_T__c currTrainig : [SELECT id, Required__c FROM Chapter_Role_O_T__c WHERE 
                                                        Chapter_Role__c = :chatperRoleId AND Required__c = true 
@@ -358,16 +369,12 @@ reqired volunteers and registered volunteers count.*/
                     
                 }
                 
-                if(updateRecord == true && isRequired == true && volunteerStatus == 'Trained' )
+                if((updateRecord == true && isRequired == true && volunteerStatus == 'Trained') || (updateRecord == true && isWishGranter == true))
                 {
                     allowRegister = true;
                      system.debug('@@@@@ 4 @@@@@@'+allowRegister);
                 }
-                else if(updateRecord == true && isRequired == true && allowRegister == true)
-                {
-                    allowRegister = true;
-                    system.debug('@@@@@ 5 @@@@@@'+allowRegister);
-                }
+               
                 if(updateRecord == true) 
                 {
                     if(allowRegister == true)
