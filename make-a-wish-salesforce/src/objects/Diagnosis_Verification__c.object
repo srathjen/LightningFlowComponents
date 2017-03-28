@@ -125,6 +125,7 @@
     <fields>
         <fullName>Lead__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
+        <description>It holds the lead</description>
         <externalId>false</externalId>
         <label>Lead</label>
         <referenceTo>Lead</referenceTo>
@@ -172,7 +173,7 @@
         <fullName>PCD_ICD__c</fullName>
         <description>It is used to hold the block input value is from ICD Code or Condition Description</description>
         <externalId>false</externalId>
-        <label>PCD-ICD</label>
+        <label>Hidden PCD-ICD</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>TextArea</type>
@@ -190,6 +191,7 @@
     </fields>
     <fields>
         <fullName>Reason_for_Need__c</fullName>
+        <description>It holds the value for reason for wish need</description>
         <externalId>false</externalId>
         <label>Reason for Need</label>
         <length>32768</length>
@@ -213,7 +215,7 @@
         <defaultValue>false</defaultValue>
         <description>Determine whether the wish is eligible</description>
         <externalId>false</externalId>
-        <label>isEligible</label>
+        <label>Hidden isEligible</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

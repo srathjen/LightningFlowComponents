@@ -224,11 +224,14 @@ system.debug('======' + newVolunteerRole.Volunteer_Name__c);*/
         Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
         Map<Id,Volunteer_Opportunity__c> volunteerMap = new Map<Id,Volunteer_Opportunity__c>();
         List<Volunteer_Count__c > updateVolunteerCountList = new List<Volunteer_Count__c>();
+         boolean isRegistered = false;
         for(Volunteer_Opportunity__c newVolOpp :nonWishListtoupdatecount){
             chapterRoleIdSet .add(newVolOpp.Chapter_Role_Opportunity__c);
             NonWishEventIdSet.add(newVolOpp.Non_Wish_Event__c);
             volunteerMap.put(newVolOpp.HiddenVolunteer_Count_Description__c,newVolOpp);
             system.debug('@@@@@@@ volunteerMap @@@@@@@@@'+volunteerMap);
+            if(newVolOpp.isRejected__c == true)
+            isRegistered = true;
         }
         List<AggregateResult> groupedResults = [SELECT Chapter_Role_Opportunity__c nonwish, Count(Id)aver FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c IN: NonWishEventIdSet  AND Volunteer_Name__c  != Null AND Reason_Inactive__c = Null AND Chapter_Role_Opportunity__c IN: chapterRoleIdSet AND HiddenVolunteer_Count_Description__c IN: volunteerMap.KeySet() GROUP BY Chapter_Role_Opportunity__c];
         
@@ -246,6 +249,8 @@ system.debug('======' + newVolunteerRole.Volunteer_Name__c);*/
                     if(volunteercountMap.containsKey(dbVolunteerCount.Chapter_Role__c)){
                         dbVolunteerCount.Registered__c  = volunteercountMap.get(dbVolunteerCount.Chapter_Role__c);
                         system.debug('@@@@@@@ groupedResults  @@@@@@@@@'+dbVolunteerCount.Registered__c);
+                        if(dbVolunteerCount.Registered__c > 0 && isRegistered == true)
+                         dbVolunteerCount.Registered__c = dbVolunteerCount.Registered__c - 1;
                         updateVolunteerCountList.add(dbVolunteerCount);
                     }
                  }
@@ -256,6 +261,8 @@ system.debug('======' + newVolunteerRole.Volunteer_Name__c);*/
             for(Volunteer_Count__c dbVolunteerCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__c,Registered__c From Volunteer_Count__c  WHERE Chapter_Role__c IN: chapterRoleIdSet ]){
                 if(NonWishEventIdSet.contains(dbVolunteerCount.Non_Wish_Events__c)){
                     dbVolunteerCount.Registered__c  = 0;
+                     if(dbVolunteerCount.Registered__c > 0 && isRegistered == true)
+                    dbVolunteerCount.Registered__c = dbVolunteerCount.Registered__c - 1;
                     updateVolunteerCountList.add(dbVolunteerCount);
                 }
             }
@@ -268,13 +275,14 @@ system.debug('======' + newVolunteerRole.Volunteer_Name__c);*/
         Set<Id> chapterRoleIdSet = new Set<Id>();
         Set<Id> NonWishEventIdSet = new Set<Id>();
         set<Id> volunteercountIdSet = new Set<Id>();
+        boolean isRegistered = false;
         Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
         
         List<Volunteer_Count__c > updateVolunteerCountList = new List<Volunteer_Count__c>();
         for(Volunteer_Opportunity__c newVolOpp :nonWishListtoupdatecount){
             chapterRoleIdSet .add(newVolOpp.Chapter_Role_Opportunity__c);
             NonWishEventIdSet .add(newVolOpp.Non_Wish_Event__c);
-            
+           
         }
         List<AggregateResult> groupedResults = [SELECT Chapter_Role_Opportunity__c nonwish, Count(Id)aver  FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c IN: NonWishEventIdSet AND Chapter_Role_Opportunity__c IN: chapterRoleIdSet GROUP BY Chapter_Role_Opportunity__c];
         if(!groupedResults.isEmpty()){
@@ -538,6 +546,12 @@ update volunteerContactList;
             newOpp.Chapter_Role_Opportunity__c = newVolOpp.Chapter_Role_Opportunity__c;
             newOpp.Chapter_Name__c = newVolOpp.Chapter_Name__c;
             newOpp.RecordTypeId = newVolOpp.RecordTypeId;
+            if(newVolOpp.Wish__c != Null)
+            newOpp.Wish__c = newVolOpp.Wish__c;
+            if(newVolOpp.Non_Wish_Event__c != Null){
+            newOpp.Non_Wish_Event__c  = newVolOpp.Non_Wish_Event__c;
+            newOpp.HiddenVolunteer_Count_Description__c  = newVolOpp.HiddenVolunteer_Count_Description__c ;
+            }
             newVolOppList.add(newOpp);
             system.debug('@@@@@ newVolOppList @@@@@@@'+newVolOppList.Size());
             system.debug('@@@@@ newVolOppList @@@@@@@'+newVolOppList);

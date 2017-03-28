@@ -1,5 +1,5 @@
 public class WishRelatedLinks_AC {
-
+    
     public Case currentCaseRec{get;set;}
     public String WishFamilyForm{get;set;}
     public String WishReceipt{get;set;}
@@ -17,51 +17,79 @@ public class WishRelatedLinks_AC {
     public string welcomeLetter{get;set;}
     public string welcomeletterDDP{get;set;}
     public string MergedDocuments{get;set;}
+    public String recpCheck {get;set;}
     
     public WishRelatedLinks_AC(ApexPages.StandardController controller) {
-    
-     Constant_AC  constant = new Constant_Ac();    
-     String wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
-     String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
-     String wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
-     querychildCase = new List<Case>();
-     currentCaseRec= (Case)controller.getRecord();
-     //ddpId = 'a1k5B000000CgLU';
-     ddpId = Label.Wish_Receipt_DDP;
-     //welcomeletterDDP = 'a1a7A000000lCR6';
-     welcomeletterDDP = Label.Welcome_Letter_DDP;
-
-     List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentCaseRec.Id AND Status =: 'Pending' AND ProcessDefinition.Name =: 'Wish Child Form Approval Process']; 
-      
+        recpCheck = 'Allow';
+        Constant_AC  constant = new Constant_Ac();    
+        String wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        String wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+        querychildCase = new List<Case>();
+        currentCaseRec= (Case)controller.getRecord();
+        //ddpId = 'a1k5B000000CgLU';
+        ddpId = Label.Wish_Receipt_DDP;
+        //welcomeletterDDP = 'a1a7A000000lCR6';
+        welcomeletterDDP = Label.Welcome_Letter_DDP;
+        
+        List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentCaseRec.Id AND Status =: 'Pending' AND ProcessDefinition.Name =: 'Wish Child Form Approval Process']; 
+        
         system.debug('@@@@ currentCaseRec @@@@@@@'+currentCaseRec);
         if(currentCaseRec.RecordTypeId == parentWishRecordTypeId ){
-       
-        
-        WishFamilyForm = '/apex/WishChildForm_VF?id='+currentCaseRec.Id;
-        
-        contactInfo = '/apex/RelationshipsViewer_VF?recId='+currentCaseRec.Id;
-        LiabilityFrom = '/apex/WishLiabilityForm_VF?id='+currentCaseRec.Id;
-        miniorParticipant = '/apex/WishLiabilityMinorParticipant_VF?id='+currentCaseRec.Id;
-        absentParentForm = '/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
-        celebrityForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
-        singleForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
-        wishClearence = '/apex/WishClearanceSendNow_VF?id='+currentCaseRec.Id; 
-        ChildMedicalForm = '/apex/WishChildSummary_VF?id='+currentCaseRec.Id;
-        ShoppingSpree =  '/apex/Itinerary_VF?id='+currentCaseRec.Id;
-        MergedDocuments = '/apex/MergedDocuments_VF?id='+currentCaseRec.Id;
-        welcomeLetter = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+welcomeletterDDP;
-        
+            
+            
+            WishFamilyForm = '/apex/WishChildForm_VF?id='+currentCaseRec.Id;
+            
+            contactInfo = '/apex/RelationshipsViewer_VF?recId='+currentCaseRec.Id;
+            LiabilityFrom = '/apex/WishLiabilityForm_VF?id='+currentCaseRec.Id;
+            miniorParticipant = '/apex/WishLiabilityMinorParticipant_VF?id='+currentCaseRec.Id;
+            absentParentForm = '/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
+            celebrityForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
+            singleForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
+            wishClearence = '/apex/WishClearanceSendNow_VF?id='+currentCaseRec.Id; 
+            ChildMedicalForm = '/apex/WishChildSummary_VF?id='+currentCaseRec.Id;
+            ShoppingSpree =  '/apex/Itinerary_VF?id='+currentCaseRec.Id;
+            MergedDocuments = '/apex/MergedDocuments_VF?id='+currentCaseRec.Id;
+            welcomeLetter = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+welcomeletterDDP;
+            
         }
         
-       querychildCase = [SELECT Id,CaseNumber,ParentId,Parent.AccountId,Parent.ContactId FROM Case WHERE ParentId =:currentCaseRec.Id AND RecordTypeId =: wishGrantRecordTypeId AND ParentId != Null limit 1];
+        querychildCase = [SELECT Id,CaseNumber,ParentId,Parent.AccountId,Parent.ContactId FROM Case WHERE ParentId =:currentCaseRec.Id AND RecordTypeId =: wishGrantRecordTypeId AND ParentId != Null limit 1];
         if(!querychildCase.isEmpty() && querychildCase[0].Id != Null){
-        WishReceipt = '/apex/loop__looplus?eid='+querychildCase[0].ParentId+'&accountId='+querychildCase[0].Parent.AccountId+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+ddpId;
+            WishReceipt = '/apex/loop__looplus?eid='+querychildCase[0].ParentId+'&accountId='+querychildCase[0].Parent.AccountId+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+ddpId;
         }
-      
-  }     
-  
+        
+        
+    }     
+    
     public pageReference DisplayError(){
-      ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,' This record is already in approval process'));
-      return null;
-    }                                                    
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,' This record is already in approval process'));
+        return null;
+    }
+    
+    public void updateSenderInfo() {
+        List<Case> caseInfo = [SELECT Id, ContactId FROM Case WHERE Id = : currentCaseRec.Id];
+        List<Contact> contactList = [SELECT Id FROM Contact WHERE Id =: caseInfo[0].ContactId LIMIT 1];
+        contactList[0].Recipient_Email__c = '';
+        contactList[0].First_Recipient_Name__c = '';
+        contactList[0].Second_Recipient_Email__c = '';
+        contactList[0].Second_Recipient_Name__c = '';
+        
+        for(npe4__Relationship__c relationInfo : [SELECT Id, npe4__Contact__c, npe4__RelatedContact__c, npe4__RelatedContact__r.Name, npe4__RelatedContact__r.Email  FROM npe4__Relationship__c WHERE npe4__Contact__c =: contactList[0].Id AND Parent_Legal_Guardian__c = true AND npe4__RelatedContact__r.Email != Null]) {
+            if(String.isBlank(contactList[0].Recipient_Email__c) && String.isBlank(contactList[0].First_Recipient_Name__c)) {
+                contactList[0].Recipient_Email__c = relationInfo.npe4__RelatedContact__r.Email;
+                contactList[0].First_Recipient_Name__c = relationInfo.npe4__RelatedContact__r.Name;
+                
+            } else if ((String.isBlank(contactList[0].Second_Recipient_Email__c) && String.isBlank(contactList[0].Second_Recipient_Name__c))&& ((contactList[0].First_Recipient_Name__c != relationInfo.npe4__RelatedContact__r.Name)||(contactList[0].Recipient_Email__c != relationInfo.npe4__RelatedContact__r.Email))) {
+                contactList[0].Second_Recipient_Email__c = relationInfo.npe4__RelatedContact__r.Email;
+                contactList[0].Second_Recipient_Name__c = relationInfo.npe4__RelatedContact__r.Name;
+            }
+        }
+        if(contactList.size() > 0) {
+            update contactList;
+            if(String.isBlank(contactList[0].Recipient_Email__c) || String.isBlank(contactList[0].First_Recipient_Name__c) ||  String.isBlank(contactList[0].Second_Recipient_Email__c) ||  String.isBlank(contactList[0].Second_Recipient_Name__c)) {
+                recpCheck = 'Not Allow';
+            }
+        }
+    }
 }

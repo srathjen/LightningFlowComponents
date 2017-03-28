@@ -57,7 +57,7 @@
         <fullName>Account_Email__c</fullName>
         <description>It will used as a hidden field to store account email to merge in the email template</description>
         <externalId>false</externalId>
-        <label>Account Email</label>
+        <label>Hidden Account Email</label>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Email</type>
@@ -67,7 +67,7 @@
         <fullName>Account_Name__c</fullName>
         <description>This Field is used as hidden field in COI Email template</description>
         <externalId>false</externalId>
-        <label>Account Name</label>
+        <label>Hidden Account Name</label>
         <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -78,7 +78,7 @@
         <fullName>Account_Phone__c</fullName>
         <description>It holds the value of Account Phone</description>
         <externalId>false</externalId>
-        <label>Account Phone</label>
+        <label>Hidden Account Phone</label>
         <length>30</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -208,4 +208,8 @@
     <pluralLabel>Conflict Of Interest</pluralLabel>
     <searchLayouts/>
     <sharingModel>Private</sharingModel>
+    <sharingReasons>
+        <fullName>Chapter_Staff__c</fullName>
+        <label>Chapter_Staff</label>
+    </sharingReasons>
 </CustomObject>

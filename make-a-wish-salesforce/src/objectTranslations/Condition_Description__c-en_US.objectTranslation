@@ -34,7 +34,7 @@
         <name>Treatment_Subspecialty__c</name>
     </fields>
     <fields>
-        <label><!-- isEligible --></label>
+        <label><!-- Hidden isEligible --></label>
         <name>isEligible__c</name>
     </fields>
     <layouts>

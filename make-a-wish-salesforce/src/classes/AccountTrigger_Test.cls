@@ -87,7 +87,10 @@ public class AccountTrigger_Test {
     }
     
     static testmethod void AddFlagonHouseHoldAccount(){
-        Turnon_Household_Trigger__c  turnOnHouseHold = OrientationandTrainingUtil.insertTurnonHouseHoldAccountSetting();
+        Bypass_Triggers__c turnOnHouseHold = new Bypass_Triggers__c();
+        turnOnHouseHold.setupownerId = userinfo.getUserId();
+        insert turnOnHousehold;
+        
         Account chapterAccount = OrientationandTrainingUtil.HouseHoldAccount();
     }
     

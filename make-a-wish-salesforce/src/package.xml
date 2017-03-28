@@ -133,10 +133,6 @@
         <name>CustomTab</name>
     </types>
     <types>
-        <members>NPSP3_Grants_Management_Dashboard</members>
-        <members>NPSP3_Grants_Management_Dashboard/NPSP3_Grants_Management_Dashboard</members>
-        <members>Chapter_Dashboard_Sample</members>
-        <members>Chapter_Dashboard_Sample/Sample_Dashboard_1</members>
         <members>CompanyDashboards</members>
         <members>CompanyDashboards/AdoptionDashboard</members>
         <members>CompanyDashboards/CompanyPerformanceDashboard</members>
@@ -144,6 +140,10 @@
         <members>NPSP3_Donor_Management_Dashboard</members>
         <members>NPSP3_Donor_Management_Dashboard/NPSP3_Campaign_Metrics</members>
         <members>NPSP3_Donor_Management_Dashboard/NPSP3_Donation_Forecasting_Dashboard</members>
+        <members>NPSP3_Grants_Management_Dashboard</members>
+        <members>NPSP3_Grants_Management_Dashboard/NPSP3_Grants_Management_Dashboard</members>
+        <members>Chapter_Dashboard_Sample</members>
+        <members>Chapter_Dashboard_Sample/Sample_Dashboard_1</members>
         <members>NPSP3_Membership_Management_Dashboard</members>
         <members>NPSP3_Membership_Management_Dashboard/NPSP3_Membership_Dashboard</members>
         <name>Dashboard</name>
@@ -154,12 +154,12 @@
     </types>
     <types>
         <members>Salesforce1_Branding_Resources</members>
-        <members>Communities_Shared_Document_Folder1</members>
-        <members>Communities_Shared_Document_Folder1/maw_logo_blue_small_png.png</members>
-        <members>Communities_Shared_Document_Folder1/mawa_image_png1.png</members>
         <members>Communities_Shared_Document_Folder</members>
         <members>Communities_Shared_Document_Folder/make_a_wish_logo_png.png</members>
         <members>Communities_Shared_Document_Folder/mawa_image_png.png</members>
+        <members>Communities_Shared_Document_Folder1</members>
+        <members>Communities_Shared_Document_Folder1/maw_logo_blue_small_png.png</members>
+        <members>Communities_Shared_Document_Folder1/mawa_image_png1.png</members>
         <members>SharedDocuments</members>
         <members>SharedDocuments/Custom_Community_Header.html</members>
         <members>SharedDocuments/logo_maw_blue_png.png</members>
@@ -198,29 +198,6 @@
         <members>Medical_Professional_Email_Templates/Med_Professional_Your_patient_is_eligible_for_a_wish</members>
         <members>Medical_Professional_Email_Templates/Med_Professional_Your_patient_s_wish_has_been_fulfilled</members>
         <members>Medical_Professional_Email_Templates/Med_Professional_Your_patient_was_referred_for_a_wish</members>
-        <members>Automated_Volunteer_Templates</members>
-        <members>Automated_Volunteer_Templates/Bc_Completed_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Bc_Expired_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Bc_Expiring_30_Days_Email_Template</members>
-        <members>Automated_Volunteer_Templates/COI_Expired_Email_Template</members>
-        <members>Automated_Volunteer_Templates/COI_Expiring_30_Days_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Communities_New_Active_Volunteer_Welcome_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Communities_New_Prospective_Volunteer_Welcome_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Communities_Reset_Password_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Communities_Volunteer_Forgot_Password_Email_Template</members>
-        <members>Automated_Volunteer_Templates/CommunityChangePasswordEmailTemplate</members>
-        <members>Automated_Volunteer_Templates/CommunityForgotPasswordEmailTemplate</members>
-        <members>Automated_Volunteer_Templates/CommunityWelcomeEmailTemplate</members>
-        <members>Automated_Volunteer_Templates/Orientation_Cancelled_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Orientation_Completed_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Orientation_Registered_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Training_Cancelled_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Training_Completed_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Training_Registered_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Training_Virtual_Self_Paced_Registered_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Volunteer_Application_Approved_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Volunteer_Application_Completed_Email_Template</members>
-        <members>Automated_Volunteer_Templates/Volunteer_Application_Incompleted_Email_Template</members>
         <members>unfiled$public</members>
         <members>unfiled$public/Account_In_Kind_Donors_Approval_Email_Template</members>
         <members>unfiled$public/Case_Abandoned_Wish_Template</members>
@@ -259,6 +236,29 @@
         <members>unfiled$public/Volunteer_Opportunity_Wish_Rejected</members>
         <members>unfiled$public/Wish_Family_Form_Not_Submitted_Template</members>
         <members>unfiled$public/Wish_Interview_21_Days_Template</members>
+        <members>Automated_Volunteer_Templates</members>
+        <members>Automated_Volunteer_Templates/Bc_Completed_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Bc_Expired_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Bc_Expiring_30_Days_Email_Template</members>
+        <members>Automated_Volunteer_Templates/COI_Expired_Email_Template</members>
+        <members>Automated_Volunteer_Templates/COI_Expiring_30_Days_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Communities_New_Active_Volunteer_Welcome_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Communities_New_Prospective_Volunteer_Welcome_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Communities_Reset_Password_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Communities_Volunteer_Forgot_Password_Email_Template</members>
+        <members>Automated_Volunteer_Templates/CommunityChangePasswordEmailTemplate</members>
+        <members>Automated_Volunteer_Templates/CommunityForgotPasswordEmailTemplate</members>
+        <members>Automated_Volunteer_Templates/CommunityWelcomeEmailTemplate</members>
+        <members>Automated_Volunteer_Templates/Orientation_Cancelled_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Orientation_Completed_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Orientation_Registered_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Training_Cancelled_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Training_Completed_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Training_Registered_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Training_Virtual_Self_Paced_Registered_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Volunteer_Application_Approved_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Volunteer_Application_Completed_Email_Template</members>
+        <members>Automated_Volunteer_Templates/Volunteer_Application_Incompleted_Email_Template</members>
         <members>Volunteer_Accessible_Templates</members>
         <members>Volunteer_Accessible_Templates/Initial_Visit_Confirmation</members>
         <members>Volunteer_Accessible_Templates/Missing_Family_Info_Request</members>
@@ -325,12 +325,54 @@
         <name>RemoteSiteSetting</name>
     </types>
     <types>
+        <members>Volunteer_Community_Report_Folder</members>
+        <members>Volunteer_Community_Report_Folder/Inkind_Donation_Account_Report</members>
         <members>NPSP3_Membership_Management_Reports</members>
         <members>NPSP3_Membership_Management_Reports/NPSP3_Current_Membership</members>
         <members>NPSP3_Membership_Management_Reports/NPSP3_Lapsed_Membership_Report</members>
         <members>NPSP3_Membership_Management_Reports/NPSP3_Membership_End_Dates_by_Month</members>
         <members>NPSP3_Membership_Management_Reports/NPSP3_New_Members</members>
         <members>NPSP3_Membership_Management_Reports/NPSP3_Renewing_Members</members>
+        <members>Wish_Management</members>
+        <members>unfiled$public</members>
+        <members>unfiled$public/Address_History_Report</members>
+        <members>unfiled$public/New_Volunteers_This_Month_By_Chapter</members>
+        <members>unfiled$public/New_Wishes_This_Month</members>
+        <members>unfiled$public/SampleReportActiveUsers</members>
+        <members>unfiled$public/SampleReportCasesStatusbyRep</members>
+        <members>unfiled$public/SampleReportClosedSales</members>
+        <members>unfiled$public/SampleReportCompletedActivities</members>
+        <members>unfiled$public/SampleReportCustomReportsbyUser</members>
+        <members>unfiled$public/SampleReportDocumentLibrary</members>
+        <members>unfiled$public/SampleReportLastModifiedBy</members>
+        <members>unfiled$public/SampleReportLeadsbyLeadSource</members>
+        <members>unfiled$public/SampleReportLoginLeaderboard</members>
+        <members>unfiled$public/SampleReportLoginWallofShame</members>
+        <members>unfiled$public/SampleReportMonthtoDateTrending</members>
+        <members>unfiled$public/SampleReportofAccounts</members>
+        <members>unfiled$public/SampleReportofCases</members>
+        <members>unfiled$public/SampleReportofContacts</members>
+        <members>unfiled$public/SampleReportofDocuments</members>
+        <members>unfiled$public/SampleReportofLeads</members>
+        <members>unfiled$public/SampleReportofOpenTasks</members>
+        <members>unfiled$public/SampleReportofOpportunities</members>
+        <members>unfiled$public/SampleReportofReports</members>
+        <members>unfiled$public/SampleReportofSolutions</members>
+        <members>unfiled$public/SampleReportofTasksandActivities</members>
+        <members>unfiled$public/SampleReportOpenCasesByPriority</members>
+        <members>unfiled$public/SampleReportOpenDeals</members>
+        <members>unfiled$public/SampleReportPipelineByCloseMonth</members>
+        <members>unfiled$public/SampleReportPipelineHistory</members>
+        <members>unfiled$public/SampleReportSalesLeaderboard</members>
+        <members>unfiled$public/SampleReportSalesPipelinebyStage</members>
+        <members>unfiled$public/SampleReportsLeadsbyStatus</members>
+        <members>unfiled$public/SampleReportSolutionsAdded</members>
+        <members>unfiled$public/SampleReportTopAccounts</members>
+        <members>unfiled$public/SampleReportUsersLoggedIn</members>
+        <members>unfiled$public/Unassigned_Wish_Opportunities</members>
+        <members>unfiled$public/Volunteer_Info_With_Wish_Details</members>
+        <members>unfiled$public/Wish_Expense</members>
+        <members>unfiled$public/Wish_Pipeline</members>
         <members>National_Reports</members>
         <members>National_Reports/Active_Non_Wish_Granters</members>
         <members>National_Reports/Active_Wish_Granter</members>
@@ -342,17 +384,6 @@
         <members>National_Reports/Volunteer_Time_Contribution</members>
         <members>National_Reports/Volunteer_Training</members>
         <members>National_Reports/Volunteers_by_language_and_role</members>
-        <members>Volunteer_Reports</members>
-        <members>NPSP3_Grants_Management_Reports</members>
-        <members>NPSP3_Grants_Management_Reports/NPSP3_Grant_Pipeline_Planning</members>
-        <members>NPSP3_Grants_Management_Reports/NPSP3_Institutional_Fundraising_Goal_this_year</members>
-        <members>NPSP3_Grants_Management_Reports/NPSP3_Organizations_with_Grants</members>
-        <members>NPSP3_Grants_Management_Reports/NPSP3_Total_Grants_Received</members>
-        <members>NPSP3_Grants_Management_Reports/NPSP3_Total_Grants_Received_This_Year</members>
-        <members>Adjustment_Repor</members>
-        <members>Adjustment_Repor/Adjustment_Report</members>
-        <members>Volunteer_Community_Report_Folder</members>
-        <members>Volunteer_Community_Report_Folder/Inkind_Donation_Account_Report</members>
         <members>NPSP3_Donor_Management_Reports</members>
         <members>NPSP3_Donor_Management_Reports/NPSP3_Campaign_Metrics</members>
         <members>NPSP3_Donor_Management_Reports/NPSP3_Closed_Won_Opportunities_by_Household</members>
@@ -390,6 +421,38 @@
         <members>NPSP3_Donor_Management_Reports/NPSP3_TotalGifts_by_Household_State</members>
         <members>NPSP3_Donor_Management_Reports/NPSP3_TotalGifts_by_Household_Zip</members>
         <members>NPSP3_Donor_Management_Reports/NPSP3_TOTALGIFTS_by_Household_Zip_This_Year</members>
+        <members>Data_Validation</members>
+        <members>Data_Validation/All_Contacts_by_Type</members>
+        <members>Data_Validation/All_HTF_Accounts</members>
+        <members>Data_Validation/Wishes_by_Status</members>
+        <members>Finance_Reports_Folder</members>
+        <members>Finance_Reports_Folder/In_Kind_Donation_Files</members>
+        <members>Finance_Reports_Folder/Potential_Pending_Wish_Liability_Report</members>
+        <members>Finance_Reports_Folder/Reimbursement_Files</members>
+        <members>NPSP3_Grants_Management_Reports</members>
+        <members>NPSP3_Grants_Management_Reports/NPSP3_Grant_Pipeline_Planning</members>
+        <members>NPSP3_Grants_Management_Reports/NPSP3_Institutional_Fundraising_Goal_this_year</members>
+        <members>NPSP3_Grants_Management_Reports/NPSP3_Organizations_with_Grants</members>
+        <members>NPSP3_Grants_Management_Reports/NPSP3_Total_Grants_Received</members>
+        <members>NPSP3_Grants_Management_Reports/NPSP3_Total_Grants_Received_This_Year</members>
+        <members>Adjustment_Repor</members>
+        <members>Adjustment_Repor/Adjustment_Report</members>
+        <members>Chapter_Reports</members>
+        <members>Chapter_Reports/Background_Check_Expiration_Date</members>
+        <members>Chapter_Reports/COI_Expiration_Date</members>
+        <members>Chapter_Reports/Pending_Volunteers_Outstanding_Items</members>
+        <members>Chapter_Reports/Registration_into_Orientation_and_Traini</members>
+        <members>Chapter_Reports/Volunteer_Current_Assignments</members>
+        <members>Chapter_Reports/Volunteer_Engagement</members>
+        <members>Chapter_Reports/Volunteer_Lists</members>
+        <members>Chapter_Reports/Volunteer_Recognition</members>
+        <members>Chapter_Reports/Volunteer_Retention</members>
+        <members>Chapter_Reports/Volunteer_Time_Sheet_Chapter</members>
+        <members>Chapter_Reports/Volunteer_Time_Sheet_Individual</members>
+        <members>Chapter_Reports/Volunteer_Training_Record</members>
+        <members>Chapter_Reports/Volunteers_by_Chapter_Role_and_Status</members>
+        <members>Chapter_Reports/Volunteers_by_language</members>
+        <members>Chapter_Reports/Wish_Granters_No_Current_Assignments</members>
         <members>RE_Reports</members>
         <members>RE_Reports/RE_Account_Report</members>
         <members>RE_Reports/RE_Activities_Excursions_Travel_Data</members>
@@ -432,70 +495,7 @@
         <members>RE_Reports/RE_Wish_Planning_Report</members>
         <members>RE_Reports/RE_Wish_Report</members>
         <members>RE_Reports/RE_Wish_Volunteer_Opportunity</members>
-        <members>unfiled$public</members>
-        <members>unfiled$public/Address_History_Report</members>
-        <members>unfiled$public/New_Volunteers_This_Month_By_Chapter</members>
-        <members>unfiled$public/New_Wishes_This_Month</members>
-        <members>unfiled$public/SampleReportActiveUsers</members>
-        <members>unfiled$public/SampleReportCasesStatusbyRep</members>
-        <members>unfiled$public/SampleReportClosedSales</members>
-        <members>unfiled$public/SampleReportCompletedActivities</members>
-        <members>unfiled$public/SampleReportCustomReportsbyUser</members>
-        <members>unfiled$public/SampleReportDocumentLibrary</members>
-        <members>unfiled$public/SampleReportLastModifiedBy</members>
-        <members>unfiled$public/SampleReportLeadsbyLeadSource</members>
-        <members>unfiled$public/SampleReportLoginLeaderboard</members>
-        <members>unfiled$public/SampleReportLoginWallofShame</members>
-        <members>unfiled$public/SampleReportMonthtoDateTrending</members>
-        <members>unfiled$public/SampleReportofAccounts</members>
-        <members>unfiled$public/SampleReportofCases</members>
-        <members>unfiled$public/SampleReportofContacts</members>
-        <members>unfiled$public/SampleReportofDocuments</members>
-        <members>unfiled$public/SampleReportofLeads</members>
-        <members>unfiled$public/SampleReportofOpenTasks</members>
-        <members>unfiled$public/SampleReportofOpportunities</members>
-        <members>unfiled$public/SampleReportofReports</members>
-        <members>unfiled$public/SampleReportofSolutions</members>
-        <members>unfiled$public/SampleReportofTasksandActivities</members>
-        <members>unfiled$public/SampleReportOpenCasesByPriority</members>
-        <members>unfiled$public/SampleReportOpenDeals</members>
-        <members>unfiled$public/SampleReportPipelineByCloseMonth</members>
-        <members>unfiled$public/SampleReportPipelineHistory</members>
-        <members>unfiled$public/SampleReportSalesLeaderboard</members>
-        <members>unfiled$public/SampleReportSalesPipelinebyStage</members>
-        <members>unfiled$public/SampleReportsLeadsbyStatus</members>
-        <members>unfiled$public/SampleReportSolutionsAdded</members>
-        <members>unfiled$public/SampleReportTopAccounts</members>
-        <members>unfiled$public/SampleReportUsersLoggedIn</members>
-        <members>unfiled$public/Unassigned_Wish_Opportunities</members>
-        <members>unfiled$public/Volunteer_Info_With_Wish_Details</members>
-        <members>unfiled$public/Wish_Expense</members>
-        <members>unfiled$public/Wish_Pipeline</members>
-        <members>Finance_Reports_Folder</members>
-        <members>Finance_Reports_Folder/In_Kind_Donation_Files</members>
-        <members>Finance_Reports_Folder/Potential_Pending_Wish_Liability_Report</members>
-        <members>Finance_Reports_Folder/Reimbursement_Files</members>
-        <members>Data_Validation</members>
-        <members>Data_Validation/All_Contacts_by_Type</members>
-        <members>Data_Validation/All_HTF_Accounts</members>
-        <members>Data_Validation/Wishes_by_Status</members>
-        <members>Wish_Management</members>
-        <members>Chapter_Reports</members>
-        <members>Chapter_Reports/Background_Check_Expiration_Date</members>
-        <members>Chapter_Reports/COI_Expiration_Date</members>
-        <members>Chapter_Reports/Pending_Volunteers_Outstanding_Items</members>
-        <members>Chapter_Reports/Registration_into_Orientation_and_Traini</members>
-        <members>Chapter_Reports/Volunteer_Current_Assignments</members>
-        <members>Chapter_Reports/Volunteer_Engagement</members>
-        <members>Chapter_Reports/Volunteer_Lists</members>
-        <members>Chapter_Reports/Volunteer_Recognition</members>
-        <members>Chapter_Reports/Volunteer_Retention</members>
-        <members>Chapter_Reports/Volunteer_Time_Sheet_Chapter</members>
-        <members>Chapter_Reports/Volunteer_Time_Sheet_Individual</members>
-        <members>Chapter_Reports/Volunteer_Training_Record</members>
-        <members>Chapter_Reports/Volunteers_by_Chapter_Role_and_Status</members>
-        <members>Chapter_Reports/Volunteers_by_language</members>
-        <members>Chapter_Reports/Wish_Granters_No_Current_Assignments</members>
+        <members>Volunteer_Reports</members>
         <name>Report</name>
     </types>
     <types>

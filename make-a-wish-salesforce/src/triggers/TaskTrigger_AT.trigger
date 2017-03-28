@@ -123,6 +123,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         if(flightBookTaskMap.size() > 0 || budgetBookTaskMap.size() > 0 || passportRequestMap.size() > 0) {
             TaskHandler.sneakPeekTask(flightBookTaskMap,budgetBookTaskMap, passportRequestMap);
         }
+        
         if(uploadParentTaskIdMap.size() > 0) {
             TaskHandler.createUploadTaskForWishOwner(uploadParentTaskIdMap);
         }
@@ -134,6 +135,9 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
     
     // Task Assign to Volunteer and Email Merge Fields update.
     if(Trigger.isBefore && Trigger.isInsert){
+        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+        Id planningTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+        Id determinationTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         List<Task> birthdayTasksList = new List<Task>();
         Set<Id> taskRelatedContactIdsSet = new Set<Id>();
         List<Task> actionTrackTasksList = new List<Task>();
@@ -141,9 +145,17 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         set<ID> contactIdset = new set<ID>();
         Map<Id,Contact> contactInfoMap = new Map<Id,Contact>();
         List<Task> updateTaskList = new List<Task>();
+        Id grantTask = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId(); 
+        Id planingTask = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId(); 
+        Id determinationTask = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId(); 
         
         for(Task updatedTask : Trigger.New) {
             string contactId = updatedTask.WhoId;
+            
+            if(updatedTask.RecordTypeId == wishGrantTaskRT || updatedTask.RecordTypeId == planningTaskRT || updatedTask.RecordTypeId == determinationTaskRT) {
+                updatedTask.IsVisibleInSelfService = true;
+            }
+            
             if(updatedTask.Subject == 'Wish Child Birthday Reminder') {
                 birthdayTasksList.add(updatedTask);
                 taskRelatedContactIdsSet.add(updatedTask.whatId);

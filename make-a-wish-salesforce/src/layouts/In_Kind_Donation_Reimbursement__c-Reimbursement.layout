@@ -196,10 +196,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Wish_Owner__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Wish_Owner_s_Manager__c</field>
             </layoutItems>
             <layoutItems>

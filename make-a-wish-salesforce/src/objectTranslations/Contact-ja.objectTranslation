@@ -5,11 +5,11 @@
         <name>About_Me__c</name>
     </fields>
     <fields>
-        <label><!-- Account Email --></label>
+        <label><!-- Hidden Account Email --></label>
         <name>Account_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Account Phone --></label>
+        <label><!-- Hidden Account Phone --></label>
         <name>Account_Phone__c</name>
     </fields>
     <fields>
@@ -253,7 +253,7 @@
         <name>Book_Story__c</name>
     </fields>
     <fields>
-        <label><!-- Broadcast Number --></label>
+        <label><!-- Hidden Broadcast Number --></label>
         <name>Broadcast_Number__c</name>
     </fields>
     <fields>
@@ -305,7 +305,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Account Name --></label>
+        <label><!-- Hidden Account Name --></label>
         <name>Contact_Account_Name__c</name>
     </fields>
     <fields>
@@ -380,8 +380,8 @@
             <translation><!-- Friend --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Neighbour</masterLabel>
-            <translation><!-- Neighbour --></translation>
+            <masterLabel>Neighbor</masterLabel>
+            <translation><!-- Neighbor --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Other</masterLabel>
@@ -390,6 +390,10 @@
         <picklistValues>
             <masterLabel>Parent</masterLabel>
             <translation><!-- Parent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partner</masterLabel>
+            <translation><!-- Partner --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Spouse</masterLabel>
@@ -417,7 +421,7 @@
         <name>First_Last_Initial__c</name>
     </fields>
     <fields>
-        <label><!-- First Recipient Name --></label>
+        <label><!-- Hidden First Recipient Name --></label>
         <name>First_Recipient_Name__c</name>
     </fields>
     <fields>
@@ -447,6 +451,14 @@
             <masterLabel>Male</masterLabel>
             <translation><!-- Male --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hidden Mobile Phone --></label>
+        <name>HiddenMobilePhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Other Phone --></label>
+        <name>HiddenOtherPhone__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Country --></label>
@@ -659,15 +671,15 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- IsContactInfoUpdated --></label>
+        <label><!-- Hidden IsContactInfoUpdated --></label>
         <name>IsContactInfoUpdated__c</name>
     </fields>
     <fields>
-        <label><!-- IsFirstParentGuardian --></label>
+        <label><!-- Hidden IsFirstParentGuardian --></label>
         <name>IsFirstParentGuardian__c</name>
     </fields>
     <fields>
-        <label><!-- IsParentGuardian --></label>
+        <label><!-- Hidden IsParentGuardian --></label>
         <name>IsParentGuardian__c</name>
         <picklistValues>
             <masterLabel>ParentGuardian</masterLabel>
@@ -679,15 +691,15 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- IsRecall Contact Info --></label>
+        <label><!-- Hidden IsRecall Contact Info --></label>
         <name>IsRecall_Contact_Info__c</name>
     </fields>
     <fields>
-        <label><!-- IsRejected Contact Info --></label>
+        <label><!-- Hidden IsRejected Contact Info --></label>
         <name>IsRejected_Contact_Info__c</name>
     </fields>
     <fields>
-        <label><!-- IsSigned --></label>
+        <label><!-- Hidden IsSigned --></label>
         <name>IsSigned__c</name>
     </fields>
     <fields>
@@ -895,7 +907,7 @@ and the date it was or will be granted. --></help>
         <name>Parent_Guardian_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Parent/Legal Guardian --></label>
+        <label><!-- Hidden Parent/Legal Guardian --></label>
         <name>Parent_Legal_Guardian__c</name>
     </fields>
     <fields>
@@ -1393,7 +1405,7 @@ and the date it was or will be granted. --></help>
         <name>RE_Work_Phone__c</name>
     </fields>
     <fields>
-        <label><!-- RE Work Phone --></label>
+        <label><!-- RE Work Phone_c --></label>
         <name>RE_Work_Phone_c__c</name>
     </fields>
     <fields>
@@ -1444,8 +1456,8 @@ and the date it was or will be granted. --></help>
             <translation><!-- Other --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>White</masterLabel>
-            <translation><!-- White --></translation>
+            <masterLabel>White or Caucasian</masterLabel>
+            <translation><!-- White or Caucasian --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -1534,7 +1546,7 @@ and the date it was or will be granted. --></help>
         <name>Recently_Completed_Training_Date__c</name>
     </fields>
     <fields>
-        <label><!-- First Recipient Email --></label>
+        <label><!-- Hidden First Recipient Email --></label>
         <name>Recipient_Email__c</name>
     </fields>
     <fields>
@@ -1754,11 +1766,11 @@ and the date it was or will be granted. --></help>
         <name>Same_as_Household_Address__c</name>
     </fields>
     <fields>
-        <label><!-- Second Recipient Email --></label>
+        <label><!-- Hidden Second Recipient Email --></label>
         <name>Second_Recipient_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Second Recipient Name --></label>
+        <label><!-- Hidden Second Recipient Name --></label>
         <name>Second_Recipient_Name__c</name>
     </fields>
     <fields>
@@ -2192,7 +2204,7 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- State --></label>
+        <label><!-- Hidden State --></label>
         <name>State__c</name>
     </fields>
     <fields>
@@ -2206,6 +2218,30 @@ provide contact information for each site on which you are active. --></help>
     <fields>
         <label><!-- Suffix --></label>
         <name>Suffix__c</name>
+        <picklistValues>
+            <masterLabel>II</masterLabel>
+            <translation><!-- II --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>III</masterLabel>
+            <translation><!-- III --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IV</masterLabel>
+            <translation><!-- IV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jr.</masterLabel>
+            <translation><!-- Jr. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sr.</masterLabel>
+            <translation><!-- Sr. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>V</masterLabel>
+            <translation><!-- V --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- TV Show --></label>
@@ -2539,19 +2575,19 @@ provide contact information for each site on which you are active. --></help>
         <name>Zip_Employer__c</name>
     </fields>
     <fields>
-        <label><!-- isApplication --></label>
+        <label><!-- Hidden isApplication --></label>
         <name>isApplication__c</name>
     </fields>
     <fields>
-        <label><!-- isApproved --></label>
+        <label><!-- Hidden isApproved --></label>
         <name>isApproved__c</name>
     </fields>
     <fields>
-        <label><!-- is Active Volunteer --></label>
+        <label><!-- Hidden is Active Volunteer --></label>
         <name>is_Active_Volunteer__c</name>
     </fields>
     <fields>
-        <label><!-- is Application --></label>
+        <label><!-- Hidden is Application --></label>
         <name>is_Application__c</name>
         <picklistValues>
             <masterLabel>Approved</masterLabel>
@@ -2692,7 +2728,7 @@ provide contact information for each site on which you are active. --></help>
     </fields>
     <fields>
         <help>個人 (バケット) モデルと 1 対 1 モデルのどちらで団体リレーションが動作するかを示します</help>
-        <label><!-- _SYSTEM: ACCOUNT PROCESSOR --></label>
+        <label><!-- DEPRECATED - _SYSTEM: ACCOUNT PROCESSOR --></label>
         <name>npe01__SystemAccountProcessor__c</name>
         <picklistValues>
             <masterLabel>Individual</masterLabel>
@@ -3048,10 +3084,6 @@ provide contact information for each site on which you are active. --></help>
             <section>Additional Info</section>
         </sections>
         <sections>
-            <label><!-- Board Member Details --></label>
-            <section>Board Member Details</section>
-        </sections>
-        <sections>
             <label><!-- Contact Information --></label>
             <section>Contact Information</section>
         </sections>
@@ -3182,10 +3214,6 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Referral Source Information --></label>
             <section>Referral Source Information</section>
-        </sections>
-        <sections>
-            <label><!-- Treatment Subspeciality --></label>
-            <section>Treatment Subspeciality</section>
         </sections>
         <sections>
             <label><!-- WIsh Child Details --></label>

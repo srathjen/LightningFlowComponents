@@ -96,7 +96,7 @@
         <fullName>Role__c</fullName>
         <description>It holds the Role Name</description>
         <externalId>false</externalId>
-        <label>Role</label>
+        <label>Hidden Role</label>
         <length>30</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -112,11 +112,6 @@
         <columns>Role_Name__c</columns>
         <columns>Background_Check_Required__c</columns>
         <filterScope>Everything</filterScope>
-        <filters>
-            <field>Chapter_Name__c</field>
-            <operation>equals</operation>
-            <value>Make-A-Wish Arizona</value>
-        </filters>
         <label>All</label>
     </listViews>
     <nameField>
@@ -130,15 +125,16 @@
         <customTabListAdditionalFields>Chapter_Name__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Role_Name__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Background_Check_Required__c</customTabListAdditionalFields>
-        <lookupDialogsAdditionalFields>Role__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Role_Name__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>Chapter_Name__c</lookupDialogsAdditionalFields>
-        <lookupPhoneDialogsAdditionalFields>Role__c</lookupPhoneDialogsAdditionalFields>
+        <lookupFilterFields>Chapter_Name__c</lookupFilterFields>
+        <lookupFilterFields>Role_Name__c</lookupFilterFields>
+        <lookupPhoneDialogsAdditionalFields>Role_Name__c</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>Chapter_Name__c</lookupPhoneDialogsAdditionalFields>
-        <searchFilterFields>NAME</searchFilterFields>
         <searchFilterFields>Chapter_Name__c</searchFilterFields>
-        <searchFilterFields>Role__c</searchFilterFields>
+        <searchFilterFields>Role_Name__c</searchFilterFields>
+        <searchResultsAdditionalFields>Role_Name__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Chapter_Name__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Role__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Read</sharingModel>
 </CustomObject>

@@ -71,7 +71,7 @@
     <body>
         <!--<div class="header"></div>-->
         <div class="content">
-            <h1 class="stationName"><apex:image url="{!URLFOR($Resource.mawaactivetemplate,'img/global/logo_maw_blue.png')}"/></h1>
+            <h1 class="stationName"><apex:image url="{!URLFOR($Resource.logo)}"/></h1>
             <apex:pageBlock >
                 <table>
                     <tr>
@@ -211,13 +211,28 @@
                                     <div class="left-col"> {!currLead.Is_in_a_Comatose_Vegetative_State__c}</div>
                                 </div>
                                 
-                                
-                                <apex:outputpanel rendered="{!currentCondition != Null}">
+                                <!--<apex:outputpanel rendered="{!currentCondition != Null}">
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Does {!currLead.FirstName} {!currLead.LastName} have any of the following conditions? (please select all that apply):</div>
                                         <div class="left-col"> {!currentCondition}</div>
                                     </div>
-                                </apex:outputpanel>
+                                </apex:outputpanel>-->
+                                
+                                <apex:outputPanel rendered="{!currentConditionList.size != 0}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Does {!currLead.FirstName} {!currLead.LastName} have any of the following conditions? (please select all that apply):</div>
+                                        <div class="left-col"> 
+                                            <table>
+                                                <apex:repeat value="{!currentConditionList}" var="currentCondition" >
+                                                    <tr>
+                                                        <td>{!currentCondition}</td>
+                                                    </tr>
+                                                </apex:repeat>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </apex:outputPanel>
+                                
                                 
                                 <apex:outputpanel rendered="{!currLead.Communication__c != Null}">
                                     <div class="container" style="width:100%;">
@@ -253,6 +268,14 @@
                                         <div class="left-col"> {!currLead.Please_Explain_Deteriorate__c}</div>
                                     </div>
                                 </apex:outputpanel>
+                               
+                                
+                                <!--<div class="container" style="width:100%;">
+                                    <div class="left-col"> Travel Algorithm :</div>
+                                    <div class="left-col"><apex:outputText value="{!currLead.Travel_algorithm__c}" escape="false"/></div>
+                                    <!--<div class="left-col"> {!currLead.Travel_algorithm__c}</div>
+                                </div>-->
+                                
                                 
                             </div>
                         </td>

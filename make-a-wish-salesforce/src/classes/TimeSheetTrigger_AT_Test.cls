@@ -64,5 +64,31 @@ public class TimeSheetTrigger_AT_Test {
         
         delete updateTimeSheetList;
       }
+    public testmethod static void updateNonWishTimeSheet(){
+          Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();   
+        Contact volunteerCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        Non_Wish_Events__c nonWishEventId = OrientationandTrainingUtil.CreateEvent(chapterAccount.Id);
+        Role__c  roleName = OrientationandTrainingUtil.createRole();
+        Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
+        List<Volunteer_Opportunity__c> nonWishVolunteerOpportunityList =OrientationandTrainingUtil.NewnonWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,nonWishEventId.id,1);
+        //Time_sheet__c newTimeSheet = OrientationandTrainingUtil.updateWishTimeSheet(nonWishVolunteerOpportunityList[0].Id);
+        //newTimeSheet.Hours_spent__c = 11.50;
+        //update newTimeSheet;
+        //set<id>timeSheetIdsSet = new set<id>();
+        //timeSheetIdsSet.add(newTimeSheet.id);
+        //TimeSheetTriggerHandler.findRecentTimeSheetDate(timeSheetIdsSet);
+    }
+    
+    public testmethod static void deleteNonWishTimeSheet(){
+          Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();   
+        Contact volunteerCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        Non_Wish_Events__c nonWishEventId = OrientationandTrainingUtil.CreateEvent(chapterAccount.Id);
+        Role__c  roleName = OrientationandTrainingUtil.createRole();
+        Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
+        List<Volunteer_Opportunity__c> nonWishVolunteerOpportunityList =OrientationandTrainingUtil.NewnonWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,nonWishEventId.id,1);
+        //Time_sheet__c newTimeSheet = OrientationandTrainingUtil.updateWishTimeSheet(nonWishVolunteerOpportunityList[0].Id);
+        //delete newTimeSheet;
+    }
+    
      
    }

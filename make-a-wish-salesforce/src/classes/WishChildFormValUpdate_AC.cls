@@ -292,6 +292,11 @@ public static void UpdateWishChildandWishFamily(Map<Id,Case> newWishMap)
                 newContact.BirthDate = (currRec.dob!=Null)?Date.valueOf(currRec.dob):currRec.dob;
                 newContact.IsParentGuardian__c = 'ParentGuardian';
                 newContact.Region_Chapter__c = ChapterAccId;
+                newContact.MailingStreet = (currRec.Street!=Null)?currRec.Street:'';
+                newContact.MailingCity = (currRec.City!=Null)?currRec.City:'';
+                newContact.MailingState = (currRec.State!=Null)?currRec.State:'';
+                newContact.MailingPostalCode = (currRec.PostalCode!=Null)?currRec.PostalCode:'';
+                
                 newContact.AccountId = currWishChildForm.Case__r.Contact.AccountId;
                 newContact.Language__c  = currWishChildForm.case__r.contact.Language__c;
                 if(currRec.relId != Null)

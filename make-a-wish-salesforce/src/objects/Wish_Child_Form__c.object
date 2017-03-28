@@ -88,12 +88,7 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Has_your_family_flown_before__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Are_all_requested_participants_Details__c</field>
+            <field>PrimaryAddreess__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -108,42 +103,7 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Has_your_family_flown_before_Note__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Will_handicap_accessible_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Has_your_family_flown__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
             <field>Preferred_Name__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Will_a_rental_stroller_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Does_each_requested_participant_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Will_a_rental_car_seat_s_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Will_an_interpreter_be_needed_Details__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -154,16 +114,6 @@
         </displayedFields>
         <displayedFields>
             <field>Gender__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Does_your_family_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Does_each_requested_participan__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -209,6 +159,11 @@
         </displayedFields>
         <displayedFields>
             <field>Hobby__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Participant_require_a_wheelchair_Details__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -298,6 +253,11 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>oxygen_Details__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Wish_Family_Contact__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
@@ -309,11 +269,6 @@
         </displayedFields>
         <displayedFields>
             <field>Already_wish_granted_by_MAW_Other_Org__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Primary_Address__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -372,11 +327,6 @@
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
-        <displayedFields>
-            <field>PrimaryAddreess__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
         <label>Wish Child Contact Map</label>
     </fieldSets>
     <fieldSets>
@@ -388,7 +338,32 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>Does_each_requested_participant_Details__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Name_of_wheelchair_collapsible__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Does_your_family_Details__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Will_a_rental_car_seat_s_Details__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Will_a_rental_stroller_Details__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Has_your_family_flown__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -399,6 +374,21 @@
         </displayedFields>
         <displayedFields>
             <field>State__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Will_handicap_accessible_Details__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Does_each_requested_participan__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Are_all_requested_participants_Details__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -428,57 +418,12 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Has_your_family_flown__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
             <field>Wish_Determination_Case_Id__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Does_each_requested_participan__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Does_each_requested_participant_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Will_an_interpreter_be_needed_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
             <field>City__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Will_a_rental_stroller_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Are_all_requested_participants_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Will_a_rental_car_seat_s_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Will_handicap_accessible_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Does_your_family_Details__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -709,6 +654,11 @@
         </displayedFields>
         <displayedFields>
             <field>Is_the_wheelchair_collapsible_Note__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>PrimaryAddreess__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -1118,7 +1068,7 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>PrimaryAddreess__c</field>
+            <field>Will_an_interpreter_be_needed_Details__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -1579,7 +1529,7 @@
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>Neighbour</fullName>
+                    <fullName>Neighbor</fullName>
                     <default>false</default>
                 </value>
                 <value>
@@ -1919,9 +1869,10 @@ and the date it was or will be granted.</inlineHelpText>
         <fullName>MY_WISH_IS_TO__c</fullName>
         <externalId>false</externalId>
         <label>MY WISH IS TO</label>
-        <required>false</required>
+        <length>1500</length>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
     </fields>
     <fields>
         <fullName>Medication_require_refrigeration_Note__c</fullName>
@@ -2620,17 +2571,19 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <fullName>This_is_my_wish_because__c</fullName>
         <externalId>false</externalId>
         <label>This is my wish because</label>
-        <required>false</required>
+        <length>1500</length>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
     </fields>
     <fields>
         <fullName>To_me_the_most_important_part_of_my_wish__c</fullName>
         <externalId>false</externalId>
         <label>To me,the most important part of my wish</label>
-        <required>false</required>
+        <length>1500</length>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
     </fields>
     <fields>
         <fullName>When_I_m_inside_I_like_to__c</fullName>
@@ -2672,23 +2625,25 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <fullName>When_I_think_about_my_wish_I_imagine__c</fullName>
         <externalId>false</externalId>
         <label>When I think about my wish, I imagine….</label>
-        <required>false</required>
+        <length>1500</length>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
     </fields>
     <fields>
         <fullName>When_thinking_some_of_my_wish_ideas_were__c</fullName>
         <externalId>false</externalId>
         <label>When thinking,some of my wish ideas were</label>
-        <required>false</required>
+        <length>1500</length>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
     </fields>
     <fields>
         <fullName>Will_a_rental_car_seat_s_Details__c</fullName>
         <description>Wish Family form Travel question3</description>
         <externalId>false</externalId>
-        <label>Will a rental car seat(s) Details</label>
+        <label>Will a rental car seat(s)  Details</label>
         <length>32768</length>
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
@@ -2878,9 +2833,10 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <fullName>Wish_Notes__c</fullName>
         <externalId>false</externalId>
         <label>Wish Notes…</label>
-        <required>false</required>
+        <length>1500</length>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
     </fields>
     <fields>
         <fullName>Wish_child_receive_nursing_care_Note__c</fullName>

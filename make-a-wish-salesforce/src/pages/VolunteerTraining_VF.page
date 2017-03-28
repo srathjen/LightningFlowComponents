@@ -139,9 +139,8 @@
 
                                         <tbody>
                                             <apex:repeat value="{!TrainingRecordList}" var="training">
-                                                    <apex:outputPanel rendered="{!OR(AND(training.volOppSize == 0),AND(training.volOppSize > 0,training.status == 'Cancelled'))}">
-                                                <!--<apex:outputPanel rendered="{!OR(AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}">-->
-                                               <!-- <apex:outputPanel rendered="{!OR(AND(training.avilableSheets == 0, training.volOppSize == 0),AND(training.avilableSheets < 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize == 0),AND(training.avilableSheets > 0, training.volOppSize > 0,training.status == 'Cancelled'))}"> -->
+                                                   <!-- <apex:outputPanel rendered="{!OR(AND(training.volOppSize == 0),AND(training.volOppSize > 0,training.status == 'Cancelled'))}"> -->
+                                                  <apex:outputpanel rendered="{!training.displayRec==True}">
                                                     <tr>
 
                                                         <td>{!training.orientationName}</td>

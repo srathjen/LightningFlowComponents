@@ -123,6 +123,28 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     }
+                    if(newContact.HiddenOtherPhone__c!= Null){
+                        newContact.OtherPhone =   newContact.HiddenOtherPhone__c; 
+                        newContact.HiddenOtherPhone__c = Null;
+                        newContact.IsContactInfoUpdated__c = false;
+                        
+                        
+                    }
+                    else{
+                        wishChildIdSet.add(newContact.Id);
+                        newContact.IsContactInfoUpdated__c = false;
+                    }
+                    if(newContact.HiddenMobilePhone__c!= Null){
+                        newContact.MobilePhone =   newContact.HiddenMobilePhone__c; 
+                        newContact.HiddenMobilePhone__c= Null;
+                        newContact.IsContactInfoUpdated__c = false;
+                        
+                        
+                    }
+                    else{
+                        wishChildIdSet.add(newContact.Id);
+                        newContact.IsContactInfoUpdated__c = false;
+                    }
                     if(newContact.Hidden_Email__c != Null){
                         newContact.Email  =   newContact.Hidden_Email__c;
                         newContact.Hidden_Email__c = Null;
@@ -222,14 +244,21 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
             
             for(Contact dbWishFamily : [SELECT Id,Name,FirstName,LastName,Phone,Email,MailingStreet,MailingCity,AccountId,Account.npe01__SYSTEM_AccountType__c,Hidden_Use_as_Household_Address__c,Use_as_Household_Address__c,MailingState,MailingCountry,MailingPostalCode,Hidden_First_Name__c,
                                         Hidden_Last_Name__c,Hidden_Street__c,Hidden_Phone__c ,Hidden_Email__c,Hidden_city__c,
-                                        Hidden_State__c,Hidden_Country__c,Hidden_Zip_Code__c,Same_as_Household_Address__c,Hidden_Same_Address__c From Contact WHERE Id IN: wishFamliySet])
+                                        Hidden_State__c,Hidden_Country__c,Hidden_Zip_Code__c,Same_as_Household_Address__c,Hidden_Same_Address__c,OtherPhone,MobilePhone,HiddenMobilePhone__c,HiddenOtherPhone__c From Contact WHERE Id IN: wishFamliySet])
             {
                
-               if(dbWishFamily.Hidden_Use_as_Household_Address__c == false){
+              
+               if(dbWishFamily.Hidden_Use_as_Household_Address__c == false &&  dbWishFamily.Use_as_Household_Address__c == true){
                    dbWishFamily.Use_as_Household_Address__c = false;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                }
                 
+               
+                if(dbWishFamily.Hidden_Use_as_Household_Address__c == true){
+                   dbWishFamily.Use_as_Household_Address__c = true;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+               }
+               
                 if(dbWishFamily.Hidden_First_Name__c != Null){
                     dbWishFamily .FirstName =  dbWishFamily.Hidden_First_Name__c;
                     
@@ -244,6 +273,16 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 if(dbWishFamily.Hidden_Phone__c != Null){
                     dbWishFamily.Phone =   dbWishFamily.Hidden_Phone__c; 
                     dbWishFamily.Hidden_Phone__c = Null;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
+                if(dbWishFamily.HiddenMobilePhone__c != Null){
+                    dbWishFamily.MobilePhone=   dbWishFamily.HiddenMobilePhone__c; 
+                    dbWishFamily.HiddenMobilePhone__c = Null;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
+                if(dbWishFamily.HiddenOtherPhone__c != Null){
+                    dbWishFamily.otherPhone =   dbWishFamily.HiddenOtherPhone__c; 
+                    dbWishFamily.HiddenOtherPhone__c = Null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
                 if(dbWishFamily.Hidden_Email__c != Null){
@@ -296,12 +335,20 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                      wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                      houseHoldAccountMap.put(newAcc.Id,newAcc);
                 }
+                
+                
+                 if(dbWishFamily.Hidden_Same_Address__c == false && dbWishFamily.Same_as_Household_Address__c == true){
+                     dbWishFamily.Same_as_Household_Address__c  = false;
+                    
+                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
                 if(dbWishFamily.Hidden_Same_Address__c == true){
                      dbWishFamily.Same_as_Household_Address__c  = true;
                      dbWishFamily.Hidden_Same_Address__c = false;
                      wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
                 
+               
               
             }
            

@@ -108,13 +108,13 @@ public class VolunteerOrientation_AC{
         if(chapterIds.size() > 0)
         {
             classOfferingMap.putAll([SELECT id,Name,Chapter__c,Date__c,Course_ID__c,End_Time__c,recordtypeid,recordtype.name,Chapter_Role_O_T__c,Chapter_Role_O_T__r.Orientation_Training__r.Name,
-                                     Location__c,max_capacity__c,Start_Time__c,Type__c,Orientation_and_Training__c, AvailableSeats__c, Chapter_Role_O_T__r.Orientation_Training__c,
+                                     Location__c,max_capacity__c,Start_Time__c,Type__c,Orientation_and_Training__c,Registered_Seats__c, AvailableSeats__c, Chapter_Role_O_T__r.Orientation_Training__c,
                                      (SELECT Id, Name, Volunteer_Attendance__c FROM Volunteer_Orientation_Trainings__r WHERE Volunteer__c =: getUserRelatedContact.get(0).ContactId)  FROM 
                                      Class_Offering__c WHERE Chapter_Role_O_T__r.Required__c = True AND 
-                                     Chapter_Role_O_T__r.Chapter_Role__r.Chapter_Name__c IN :chapterIds AND Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId =: orientationRecordTypeId AND  Chapter_Role_O_T__c NOT IN :completedTrainingsSet AND (Date__c = NEXT_N_DAYS:180 OR Date__c = Null OR Date__c = :Date.Today()) ORDER BY Date__c Nulls Last limit :list_size offset :counter]);
+                                     Chapter_Role_O_T__r.Chapter_Role__r.Chapter_Name__c IN :chapterIds AND Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId =: orientationRecordTypeId AND  Chapter_Role_O_T__c NOT IN :completedTrainingsSet AND ((Date__c >= :Date.Today() AND Date__c <= :Date.today().addMonths(6)) OR Date__c = Null) ORDER BY Date__c Nulls Last limit :list_size offset :counter]);
             
             List<AggregateResult> countAgg = [SELECT count(Id) FROM Class_Offering__c  WHERE Chapter_Role_O_T__r.Required__c = True AND 
-                                              Chapter_Role_O_T__r.Chapter_Role__r.Chapter_Name__c IN :chapterIds AND Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId =: orientationRecordTypeId AND Id NOT IN :completedTrainingsSet AND (Date__c = NEXT_N_DAYS:180 OR Date__c = :Date.Today())];                 
+                                              Chapter_Role_O_T__r.Chapter_Role__r.Chapter_Name__c IN :chapterIds AND Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId =: orientationRecordTypeId AND Id NOT IN :completedTrainingsSet AND ((Date__c >= :Date.Today() AND Date__c <= :Date.today().addMonths(6)) OR Date__c = Null)];                 
             
             total_size = (countAgg != null && countAgg.size() > 0) ? (Integer) countAgg[0].get('expr0') : 0;                     
         }
@@ -122,23 +122,31 @@ public class VolunteerOrientation_AC{
         List<classOfferingWrapper> classOfferingList = new List<classOfferingWrapper>();
         for(Class_Offering__c currRec : classOfferingMap.values())
         {
-           classOfferingWrapper newWrapper = new classOfferingWrapper();
-           newWrapper.orientationName = currRec.Orientation_and_Training__c;
-           newWrapper.chapterName = currRec.Chapter__c;
-           newWrapper.orientationDate = currRec.Date__c;
-           newWrapper.startTime = currRec.Start_Time__c;
-           newWrapper.endTime= currRec.End_Time__c;
-           newWrapper.location = currRec.Location__c;
-           newWrapper.maxCapacity = integer.valueOf(currRec.max_capacity__c);
-           newWrapper.avilableSheets = integer.valueOf(currRec.AvailableSeats__c);
-           newWrapper.recordType = currRec.recordType.name;
-           newWrapper.recordId = currRec.id;
-           newWrapper.volOppSize = currRec.Volunteer_Orientation_Trainings__r.size();
-           newWrapper.courseId = currRec.course_Id__c;
-           newWrapper.recordTypeId = currRec.RecordTypeid;
-           if( currRec.Volunteer_Orientation_Trainings__r.size() > 0)
-               newWrapper.status= currRec.Volunteer_Orientation_Trainings__r[0].Volunteer_Attendance__c;
-           classOfferingList.add(newWrapper);
+        
+          
+               classOfferingWrapper newWrapper = new classOfferingWrapper();
+               newWrapper.orientationName = currRec.Orientation_and_Training__c;
+               newWrapper.chapterName = currRec.Chapter__c;
+               newWrapper.orientationDate = currRec.Date__c;
+               newWrapper.startTime = currRec.Start_Time__c;
+               newWrapper.endTime= currRec.End_Time__c;
+               newWrapper.location = currRec.Location__c;
+               newWrapper.maxCapacity = integer.valueOf(currRec.max_capacity__c);
+               newWrapper.avilableSheets = integer.valueOf(currRec.AvailableSeats__c);
+               newWrapper.recordType = currRec.recordType.name;
+               newWrapper.recordId = currRec.id;
+               newWrapper.volOppSize = currRec.Volunteer_Orientation_Trainings__r.size();
+               newWrapper.courseId = currRec.course_Id__c;
+               newWrapper.recordTypeId = currRec.RecordTypeid;
+               if( currRec.Volunteer_Orientation_Trainings__r.size() > 0)
+                   newWrapper.status= currRec.Volunteer_Orientation_Trainings__r[0].Volunteer_Attendance__c;
+               if(((currRec.max_capacity__c == Null) || (currRec.max_capacity__c >0 && currRec.max_capacity__c > currRec.Registered_Seats__c))
+                  && ((newWrapper.volOppSize > 0 && newWrapper.status == 'Cancelled') || newWrapper.volOppSize == 0))
+                   newWrapper.displayRec = true;
+               else
+                   newWrapper.displayRec = false;
+               classOfferingList.add(newWrapper);
+           
         }
         
         isOrientationExist = false;
@@ -467,5 +475,6 @@ public class VolunteerOrientation_AC{
      public string recordId{get;set;}
      public string courseId{get;set;}
      public string recordTypeId{get;set;}
+     public boolean displayRec{get;set;}
   }  
 }

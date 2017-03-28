@@ -9,15 +9,15 @@
         <value>Background Checks</value>
     </caseValues>
     <fields>
-        <label><!-- Account Email --></label>
+        <label><!-- Hidden Account Email --></label>
         <name>Account_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Account Name --></label>
+        <label><!-- Hidden Account Name --></label>
         <name>Account_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Account Phone --></label>
+        <label><!-- Hidden Account Phone --></label>
         <name>Account_Phone__c</name>
     </fields>
     <fields>
@@ -120,6 +120,10 @@
             <section>Custom Links</section>
         </sections>
     </layouts>
+    <sharingReasons>
+        <label><!-- Chapter_Staff --></label>
+        <name>Chapter_Staff</name>
+    </sharingReasons>
     <startsWith>Consonant</startsWith>
     <validationRules>
         <errorMessage><!-- Please enter the value for Date Completed. --></errorMessage>

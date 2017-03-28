@@ -23,7 +23,7 @@
         <relationshipLabel><!-- Chapter Roles --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Role --></label>
+        <label><!-- Hidden Role --></label>
         <name>Role__c</name>
     </fields>
     <layouts>

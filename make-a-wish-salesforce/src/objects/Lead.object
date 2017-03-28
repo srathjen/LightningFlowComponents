@@ -1000,7 +1000,7 @@
         <fullName>Angina__c</fullName>
         <description>It will hold the value of angina travel algorithm.</description>
         <externalId>false</externalId>
-        <label>Angina</label>
+        <label>Hidden Angina</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
@@ -1036,7 +1036,7 @@
         <fullName>Arrhythmia__c</fullName>
         <description>it will hold the value of Arrhythmia Travel Algorithm.</description>
         <externalId>false</externalId>
-        <label>Arrhythmia</label>
+        <label>Hidden Arrhythmia</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
@@ -1192,7 +1192,7 @@
         <fullName>Chronic_Heart_Failure__c</fullName>
         <description>It will hold the value of Chronic Heart Failure Travel Algorithm value.</description>
         <externalId>false</externalId>
-        <label>Chronic Heart Failure</label>
+        <label>Hidden Chronic Heart Failure</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
@@ -1202,12 +1202,21 @@
         <fullName>Chronic_Hepatitis__c</fullName>
         <description>It will hold the Travel Algorithm additional question values.</description>
         <externalId>false</externalId>
-        <label>Chronic Hepatitis</label>
+        <label>Hidden Chronic Hepatitis</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Closed_Date__c</fullName>
+        <description>When DNQ-Task has been closed, this field will be entered by chapter staff manually.</description>
+        <externalId>false</externalId>
+        <label>Closed Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>Communication__c</fullName>
@@ -1262,7 +1271,7 @@
         <fullName>Congenital_Heart_Disease__c</fullName>
         <description>It will hold the value of Travel Algorithm&apos;s Congenital_Heart_Disease value.</description>
         <externalId>false</externalId>
-        <label>Congenita Heart Disease</label>
+        <label>Hidden Congenita Heart Disease</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
@@ -1272,7 +1281,7 @@
         <fullName>Contact_Dup_Check__c</fullName>
         <description>Hidden field for checking contact dup</description>
         <externalId>false</externalId>
-        <label>Contact Dup Check</label>
+        <label>Hidden Contact Dup Check</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
@@ -1291,7 +1300,7 @@
         <fullName>Convulsive_Disorders__c</fullName>
         <description>It will hold the value of Conclusive Disorder&apos;s Travel Algorithm.</description>
         <externalId>false</externalId>
-        <label>Convulsive Disorders</label>
+        <label>Hidden Convulsive Disorders</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
@@ -1368,7 +1377,7 @@
         <fullName>Dup_Check__c</fullName>
         <description>This hidden field used in lead duplicate page.</description>
         <externalId>false</externalId>
-        <label>Dup Check</label>
+        <label>Hidden Dup Check</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
@@ -1466,7 +1475,7 @@
         <fullName>Heart_Failure__c</fullName>
         <description>It will hold the value of Heart_Failure travel algorithm.</description>
         <externalId>false</externalId>
-        <label>Heart Failure</label>
+        <label>Hidden Heart Failure</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
@@ -1621,7 +1630,7 @@
         <defaultValue>false</defaultValue>
         <description>It will check, chapter is active chapter or not.</description>
         <externalId>false</externalId>
-        <label>Is Chapter Active</label>
+        <label>Hidden Is Chapter Active</label>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Checkbox</type>
     </fields>
@@ -1701,7 +1710,7 @@
         <fullName>Lung_Disease__c</fullName>
         <description>It Hold the Lung Disease Details.</description>
         <externalId>false</externalId>
-        <label>Lung Disease</label>
+        <label>Hidden Lung Disease</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
@@ -1722,7 +1731,7 @@
         <fullName>Medical_Professional_ContactId__c</fullName>
         <description>It is an hidden field. Storing the original Medical Professional Contact Id. So while converting the lead, we can create a relationship under this Record instead of creating dup medical professional contact. we are capturing value for this field on Find Duplicate page.</description>
         <externalId>false</externalId>
-        <label>Medical Professional ContactId</label>
+        <label>Hidden Medical Professional ContactId</label>
         <length>20</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2039,7 +2048,7 @@
         <defaultValue>false</defaultValue>
         <description>This field is used to bypass the duplicate validation.</description>
         <externalId>false</externalId>
-        <label>No Duplicate Found</label>
+        <label>Hidden No Duplicate Found</label>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Checkbox</type>
     </fields>
@@ -2052,7 +2061,7 @@
         <fullName>PCD_ICD__c</fullName>
         <description>Used to hold the input value entered by user is ICD Code or Condition Description</description>
         <externalId>false</externalId>
-        <label>PCD-ICD</label>
+        <label>Hidden PCD-ICD</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2193,7 +2202,7 @@
         <fullName>Pulmonary_Hypertension__c</fullName>
         <description>It hold the value of Travel Algorithm additional questions.</description>
         <externalId>false</externalId>
-        <label>Pulmonary Hypertension</label>
+        <label>Hidden Pulmonary Hypertension</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3143,7 +3152,7 @@
         <fullName>State_Picklist__c</fullName>
         <description>It holds the States Picklist</description>
         <externalId>false</externalId>
-        <label>State</label>
+        <label>Hidden State</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
@@ -3154,6 +3163,7 @@
     </fields>
     <fields>
         <fullName>Status</fullName>
+        <inlineHelpText>Update from inquiry to referral after confirming all required referral information.</inlineHelpText>
         <trackFeedHistory>true</trackFeedHistory>
         <type>Picklist</type>
     </fields>
@@ -3161,7 +3171,7 @@
         <fullName>Strokes__c</fullName>
         <description>It will hold the value of Travel Algorithm additional questions. Hidden field.</description>
         <externalId>false</externalId>
-        <label>Strokes</label>
+        <label>Hidden Strokes</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3343,7 +3353,7 @@
         <fullName>Travel_algorithm__c</fullName>
         <description>Used to store travel checklists</description>
         <externalId>false</externalId>
-        <label>Travel algorithm</label>
+        <label>Hidden Travel algorithm</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
@@ -3353,7 +3363,7 @@
         <fullName>Treating_Medical_Professional_Contact_Id__c</fullName>
         <description>It is an hidden field. Storing the original Treating Medical Professional Contact Id. So while converting the lead, we can create a relationship under this Record instead of creating dup Treating  medical professional contact. we are capturing value for this field on Find Duplicate page.</description>
         <externalId>false</externalId>
-        <label>Treating Medical Professional Contact Id</label>
+        <label>Hidden Treating Med Prof Contact Id</label>
         <length>20</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3447,7 +3457,7 @@
         <fullName>Ventilator__c</fullName>
         <description>It will hold the value of Ventilator travel algorithm.</description>
         <externalId>false</externalId>
-        <label>Ventilator</label>
+        <label>Hidden Ventilator</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
@@ -3456,6 +3466,17 @@
     <fields>
         <fullName>Website</fullName>
         <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>What_is_the_family_s_primary_spoken_la__c</fullName>
+        <description>PRIMARY_LANGUAGE</description>
+        <externalId>false</externalId>
+        <label>What is the familyâ€™s primary spoken la</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>What_is_the_family_s_primary_spoken_lang__c</fullName>
@@ -3578,7 +3599,7 @@
         <fullName>Wish_Family_ContactId__c</fullName>
         <description>It is an hidden field. Storing the original Wish Family Contact Id. So while converting the lead, we can create a relationship under this wish Family Record instead of creating dup wish family. we are capturing value for this field on Find Duplicate page.</description>
         <externalId>false</externalId>
-        <label>Wish Family ContactId</label>
+        <label>Hidden Wish Family ContactId</label>
         <length>20</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3590,7 +3611,7 @@
         <defaultValue>false</defaultValue>
         <description>This field will allow the duplicate lead</description>
         <externalId>false</externalId>
-        <label>isApprove</label>
+        <label>Hidden isApprove</label>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Checkbox</type>
     </fields>
@@ -3599,7 +3620,7 @@
         <defaultValue>false</defaultValue>
         <description>This field is used to verify the document is signed or not from docusign.</description>
         <externalId>false</externalId>
-        <label>isSign</label>
+        <label>Hidden isSign</label>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Checkbox</type>
     </fields>
@@ -3890,6 +3911,28 @@
         <label>All Open Leads</label>
     </listViews>
     <listViews>
+        <fullName>America_Lead</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.COMPANY</columns>
+        <columns>LEAD.STATE_CODE</columns>
+        <columns>LEAD.EMAIL</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>LEAD.UNREAD</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ChapterName__c</field>
+            <operation>equals</operation>
+            <value>Make-A-Wish America</value>
+        </filters>
+        <label>America</label>
+        <sharedTo>
+            <group>America</group>
+            <group>National_Office</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
         <fullName>Arizona_Lead</fullName>
         <columns>FULL_NAME</columns>
         <columns>LEAD.CREATED_DATE</columns>
@@ -3904,6 +3947,11 @@
             <field>ChapterName__c</field>
             <operation>contains</operation>
             <value>Make-A-Wish Arizona</value>
+        </filters>
+        <filters>
+            <field>LEAD.CREATED_DATE</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
         </filters>
         <label>Arizona</label>
         <sharedTo>
@@ -4436,6 +4484,28 @@
         <label>Medical UAT Leads</label>
     </listViews>
     <listViews>
+        <fullName>Metro_New_York_Western_New_York_Lead</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>LEAD.CREATED_DATE</columns>
+        <columns>LEAD.STATUS</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>LEAD.STATE_CODE</columns>
+        <columns>LEAD.ZIP</columns>
+        <columns>ChapterName__c</columns>
+        <columns>Any_medical_reason_for_moving_quickly__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ChapterName__c</field>
+            <operation>equals</operation>
+            <value>Make-A-Wish Metro New York &amp; West New York</value>
+        </filters>
+        <label>Metro New York &amp; Western New York</label>
+        <sharedTo>
+            <group>Metro_New_York_Western_New_York</group>
+            <group>National_Office</group>
+        </sharedTo>
+    </listViews>
+    <listViews>
         <fullName>Metro_New_York_Western_New_York_Lead1</fullName>
         <columns>FULL_NAME</columns>
         <columns>LEAD.CREATED_DATE</columns>
@@ -4592,10 +4662,10 @@
         <fullName>Missouri_Lead1</fullName>
         <columns>FULL_NAME</columns>
         <columns>LEAD.CREATED_DATE</columns>
+        <columns>Sub_Status__c</columns>
+        <columns>LEAD.STATUS</columns>
         <columns>LEAD.STATE_CODE</columns>
         <columns>LEAD.ZIP</columns>
-        <columns>LEAD.STATUS</columns>
-        <columns>Sub_Status__c</columns>
         <columns>ChapterName__c</columns>
         <columns>Any_medical_reason_for_moving_quickly__c</columns>
         <filterScope>Everything</filterScope>
@@ -5180,8 +5250,10 @@
     </listViews>
     <listViews>
         <fullName>Today_Leads</fullName>
-        <columns>FULL_NAME</columns>
-        <columns>LEAD.COMPANY</columns>
+        <columns>Part_A_Form_Password__c</columns>
+        <columns>LEAD.LAST_NAME</columns>
+        <columns>LEAD.FIRST_NAME</columns>
+        <columns>Relationship_to_child__c</columns>
         <columns>LEAD.STATE_CODE</columns>
         <columns>LEAD.EMAIL</columns>
         <columns>LEAD.STATUS</columns>
@@ -5351,7 +5423,7 @@
         <fullName>Lead_Chapter_Validation</fullName>
         <active>true</active>
         <description>if users chapter !=chapter of lead make unique wish identifier required</description>
-        <errorConditionFormula>($User.Account_Name__c != ChapterName__r.Name) &amp;&amp; (unique_wish_identifier__c ==null) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
+        <errorConditionFormula>($User.Account_Name__c !=  ChapterName__r.Name) &amp;&amp; (unique_wish_identifier__c ==null || Len(unique_wish_identifier__c )&lt;1)  &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false &amp;&amp;  $Profile.Name != &apos;Wish Referral Form Profile&apos;</errorConditionFormula>
         <errorDisplayField>unique_wish_identifier__c</errorDisplayField>
         <errorMessage>if users chapter and chapter of lead is not equal then unique wish identifier is required.</errorMessage>
     </validationRules>
@@ -5446,7 +5518,8 @@
     <validationRules>
         <fullName>Lead_Phone_Number_Validation</fullName>
         <active>false</active>
-        <errorConditionFormula>OR(NOT(REGEX(Medical_Professional_Phone__c,&quot;(\\D?[0-9]{3}\\D?)[\\s][0-9]{3}-[0-9]{4}&quot;)),NOT(REGEX(Treating_Medical_Professional_Phone__c,&quot;(\\D?[0-9]{3}\\D?)[\\s][0-9]{3}-[0-9]{4}&quot;)))</errorConditionFormula>
+        <description>Lead_Phone_Number_Validation</description>
+        <errorConditionFormula>(OR(NOT(REGEX(Medical_Professional_Phone__c,&quot;(\\D?[0-9]{3}\\D?)[\\s][0-9]{3}-[0-9]{4}&quot;)),NOT(REGEX(Treating_Medical_Professional_Phone__c,&quot;(\\D?[0-9]{3}\\D?)[\\s][0-9]{3}-[0-9]{4}&quot;)))) &amp;&amp;  Migrated_Record__c = false</errorConditionFormula>
         <errorMessage>Phone numbers should be in this format: (999) 999-9999.</errorMessage>
     </validationRules>
     <validationRules>
@@ -5459,7 +5532,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Primary_Diagnosis_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Referred status, Primary Diagnosis is mandatory</description>
         <errorConditionFormula>PD_Condition_Description__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorMessage>Please Enter Primary Diagnosis</errorMessage>

@@ -6,18 +6,18 @@
     <letterhead>Make_a_Wish_America</letterhead>
     <name>Communities: New Prospective Volunteer Welcome Email Template</name>
     <style>freeForm</style>
-    <subject>Welcome to {!Community_Name}</subject>
-    <textOnly>Hi {!Receiving_User.FirstName},
+    <subject>Welcome to Wish Volunteer Community</subject>
+    <textOnly>Hi {!Target_User.FirstName},
 
 
 
-Welcome to {!Community_Name}! To complete the volunteer registration process, please sign in with your username by visiting
+Welcome to Wish Volunteer Community! To complete the volunteer registration process, please sign in with your username by visiting
 
 Make-A-Wish® Volunteer Community.
 
 
 
-Username: {!Receiving_User.Username}
+Username: {!Target_User.Username}
 
 
 
@@ -27,10 +27,10 @@ Should you have any questions please contact chapter staff at the number below.
 
 Thanks,
 
-{!Receiving_User.Account_Name__c}
+{!Target_User.Account_Name__c}
 
-{!Receiving_User.Account_Phone__c}
+{!Target_User.Account_Phone__c}
 
-{!Receiving_User.Account_Email__c}</textOnly>
+{!Target_User.Account_Email__c}</textOnly>
     <type>html</type>
 </EmailTemplate>

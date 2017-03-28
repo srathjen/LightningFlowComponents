@@ -68,6 +68,10 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Suffix__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Gender__c</field>
             </layoutItems>
             <layoutItems>
@@ -89,6 +93,12 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Deceased_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <page>Deceased_Popup</page>
+                <showLabel>false</showLabel>
+                <showScrollbars>false</showScrollbars>
+                <width>0</width>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -135,10 +145,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Phone</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>HomePhone</field>
             </layoutItems>
             <layoutItems>
@@ -161,6 +167,10 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>npe01__HomeEmail__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>npsp__Do_Not_Contact__c</field>
             </layoutItems>
             <layoutItems>
@@ -170,14 +180,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Social_Media_Link__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Email</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>npe01__HomeEmail__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -312,14 +314,6 @@
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>true</customLabel>
-        <detailHeading>true</detailHeading>
-        <editHeading>true</editHeading>
-        <label>Treatment Subspeciality</label>
-        <layoutColumns/>
-        <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -478,11 +472,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>SD4_ICD_Code__c</field>
+                <field>SD3_ICD_Code__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>SD3_ICD_Code__c</field>
+                <field>SD4_ICD_Code__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -493,9 +487,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Short_Description__c</field>
-            </layoutItems>
-            <layoutItems>
-                <emptySpace>true</emptySpace>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -512,10 +503,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>SD4_Condition_Description__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Hidden_Medical_Physician_Email__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -632,6 +619,7 @@
         <fields>npe4__Type__c</fields>
         <fields>npe4__Status__c</fields>
         <fields>Wish_Participant__c</fields>
+        <fields>Parent_Legal_Guardian__c</fields>
         <relatedList>npe4__Relationship__c.npe4__Contact__c</relatedList>
     </relatedLists>
     <relatedLists>

@@ -182,6 +182,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Budget_Inkind__c</name>
     </fields>
     <fields>
+        <label><!-- Budget Notes --></label>
+        <name>Budget_Notes__c</name>
+    </fields>
+    <fields>
         <label><!-- Budget Status --></label>
         <name>Budget_Status__c</name>
         <picklistValues>
@@ -210,15 +214,15 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Budget_Total__c</name>
     </fields>
     <fields>
-        <label><!-- Case Comment --></label>
+        <label><!-- Hidden Case Comment --></label>
         <name>Case_Comment__c</name>
     </fields>
     <fields>
-        <label><!-- Case Member Count --></label>
+        <label><!-- Hidden Case Member Count --></label>
         <name>Case_Member_Count__c</name>
     </fields>
     <fields>
-        <label><!-- Case ThreadId --></label>
+        <label><!-- Hidden Case ThreadId --></label>
         <name>Case_ThreadId__c</name>
     </fields>
     <fields>
@@ -227,7 +231,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <relationshipLabel><!-- Cases --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Chapter MACEmail --></label>
+        <label><!-- Hidden Chapter MACEmail --></label>
         <name>Chapter_MACEmail__c</name>
     </fields>
     <fields>
@@ -416,7 +420,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Entertainment_Sports_Wish_LOU__c</name>
     </fields>
     <fields>
-        <label><!-- Envelop Id --></label>
+        <label><!-- Hidden Envelop Id --></label>
         <name>Envelop_Id__c</name>
     </fields>
     <fields>
@@ -622,7 +626,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Import_Id__c</name>
     </fields>
     <fields>
-        <label><!-- InActiveWishGranter --></label>
+        <label><!-- Hidden InActiveWishGranter --></label>
         <name>InActiveWishGranter__c</name>
     </fields>
     <fields>
@@ -646,7 +650,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Interview Date Not Set --></label>
+        <label><!-- Hidden Interview Date Not Set --></label>
         <name>Interview_Date_Not_Set__c</name>
     </fields>
     <fields>
@@ -654,7 +658,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Interview_date__c</name>
     </fields>
     <fields>
-        <label><!-- IsLocked --></label>
+        <label><!-- Hidden IsLocked --></label>
         <name>IsLocked__c</name>
     </fields>
     <fields>
@@ -662,7 +666,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>IsRushChildSummary__c</name>
     </fields>
     <fields>
-        <label><!-- IsRushWishClearence&amp;ChildSummary --></label>
+        <label><!-- IsRushWishClearence&amp;ChildSummary Hidden --></label>
         <name>IsRushWishClearence_ChildSummary__c</name>
     </fields>
     <fields>
@@ -671,7 +675,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Is_Migrated_Record__c</name>
     </fields>
     <fields>
-        <label><!-- Is a wheelchair accessible vehicle neede --></label>
+        <label><!-- Wheelchair accessible vehicle needed? --></label>
         <name>Is_a_wheelchair_accessible_vehicle_neede__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -732,7 +736,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <relationshipLabel><!-- Cases --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- LiabilitySignerMapKeyPair --></label>
+        <label><!-- Hidden LiabilitySignerMapKeyPair --></label>
         <name>LiabilitySignerMapKeyPair__c</name>
     </fields>
     <fields>
@@ -817,11 +821,11 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Names_for_receiving_nursing_care__c</name>
     </fields>
     <fields>
-        <label><!-- Option1 --></label>
+        <label><!-- Hidden Option1 --></label>
         <name>Option1__c</name>
     </fields>
     <fields>
-        <label><!-- Option2 --></label>
+        <label><!-- Hidden Option2 --></label>
         <name>Option2__c</name>
     </fields>
     <fields>
@@ -1119,7 +1123,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Referral_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Add region to the child&apos;s contact record and it will be displayed here. --></help>
         <label><!-- Region --></label>
         <name>Region__c</name>
     </fields>
@@ -1168,7 +1171,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Rush__c</name>
     </fields>
     <fields>
-        <label><!-- SignerMapKeyPair --></label>
+        <label><!-- Hidden SignerMapKeyPair --></label>
         <name>SignerMapKeyPair__c</name>
     </fields>
     <fields>
@@ -1321,7 +1324,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Unique_Wish_Record_Identifier__c</name>
     </fields>
     <fields>
-        <label><!-- Update Wish Child Form Info --></label>
+        <label><!-- Hidden Update Wish Child Form Info --></label>
         <name>Update_Wish_Child_Form_Info__c</name>
     </fields>
     <fields>
@@ -1425,6 +1428,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Wish_Clearance_Sent_Date__c</name>
     </fields>
     <fields>
+        <help><!-- Is this wish appropriate? --></help>
         <label><!-- Wish Clearance --></label>
         <name>Wish_Clearance__c</name>
         <picklistValues>
@@ -1486,19 +1490,23 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Wish_Family_Experience__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Wish Family Form Submitted --></label>
+        <name>Wish_Family_Form_Submitted__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish Family Form --></label>
         <name>Wish_Family_Form__c</name>
     </fields>
     <fields>
-        <label><!-- Wish Granter 1 Cell --></label>
+        <label><!-- Hidden Wish Granter 1 Cell --></label>
         <name>Wish_Granter_1_Cell__c</name>
     </fields>
     <fields>
-        <label><!-- Wish Granter 1 --></label>
+        <label><!-- Hidden Wish Granter 1 --></label>
         <name>Wish_Granter_1__c</name>
     </fields>
     <fields>
-        <label><!-- Wish Granter 2 Cell --></label>
+        <label><!-- Hidden Wish Granter 2 Cell --></label>
         <name>Wish_Granter_2_Cell__c</name>
     </fields>
     <fields>
@@ -1506,7 +1514,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Wish_Information_Form__c</name>
     </fields>
     <fields>
-        <label><!-- Wish Liability Envolep --></label>
+        <label><!-- Hidden Wish Liability Envolep --></label>
         <name>Wish_Liability_Envolep__c</name>
     </fields>
     <fields>
@@ -1581,8 +1589,8 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Education --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Electronics</masterLabel>
-            <translation><!-- Electronics --></translation>
+            <masterLabel>Electronics International - Sports</masterLabel>
+            <translation><!-- Electronics International - Sports --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>I wish to be…</masterLabel>
@@ -1665,8 +1673,8 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Trailer/Camper --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Travel - Hawaii</masterLabel>
-            <translation><!-- Travel - Hawaii --></translation>
+            <masterLabel>Travel - Hawai</masterLabel>
+            <translation><!-- Travel - Hawai --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Travel - International</masterLabel>
@@ -1694,7 +1702,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Wish granter 2 --></label>
+        <label><!-- Hidden Wish granter 2 --></label>
         <name>Wish_granter_2__c</name>
     </fields>
     <fields>
@@ -1722,23 +1730,23 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>hidden_medical_physician__c</name>
     </fields>
     <fields>
-        <label><!-- isApprove --></label>
+        <label><!-- Hidden isApprove --></label>
         <name>isApprove__c</name>
     </fields>
     <fields>
-        <label><!-- isEmailWishGranter --></label>
+        <label><!-- Hidden isEmailWishGranter --></label>
         <name>isEmailWishGranter__c</name>
     </fields>
     <fields>
-        <label><!-- isEmail --></label>
+        <label><!-- Hidden isEmail --></label>
         <name>isEmail__c</name>
     </fields>
     <fields>
-        <label><!-- isNationalReply --></label>
+        <label><!-- Hidden isNationalReply --></label>
         <name>isNationalReply__c</name>
     </fields>
     <fields>
-        <label><!-- isNational --></label>
+        <label><!-- Hidden isNational --></label>
         <name>isNational__c</name>
     </fields>
     <fields>
@@ -1752,6 +1760,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>living_arrangements_unique_circumstances__c</name>
     </fields>
     <fields>
+        <help><!-- Does this wish involve air travel? --></help>
         <label><!-- Wish Involves Air Travel --></label>
         <name>wish_involves_air_travel__c</name>
         <picklistValues>
@@ -1802,6 +1811,10 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sections>
             <label><!-- Important Date Section --></label>
             <section>Important Date Section</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Information --></label>
+            <section>Wish Information</section>
         </sections>
         <sections>
             <label><!-- Wish Related Forms --></label>
@@ -2012,6 +2025,10 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Rush_Validation</name>
     </validationRules>
     <validationRules>
+        <errorMessage><!-- Please select valid timeframe --></errorMessage>
+        <name>Case_Timeframe_Validation</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- Meet PWL Criteria needs to be present when wish status is Wish Determined --></errorMessage>
         <name>Case_Wish_Determined_Status_Validation</name>
     </validationRules>
@@ -2038,6 +2055,10 @@ arrangements/unique circumstances for any requested wish participant not residin
     <validationRules>
         <errorMessage><!-- There should be value on Date - Liability Release and Authorization when wish status is Completed. --></errorMessage>
         <name>Liability_Release_and_Authorization_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please reach out to your supervisor to change the wish type and open a new case. --></errorMessage>
+        <name>National_type_editable</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- There should be value on Date - Passports when wish status is Completed. --></errorMessage>

@@ -665,6 +665,16 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Migrated_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to identify Record is migrated or not.</description>
+        <externalId>false</externalId>
+        <label>Migrated Record</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Pay_Method__c</fullName>
         <description>This filed is used to capture the Pay Method</description>
         <externalId>false</externalId>
@@ -1094,7 +1104,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <deleteConstraint>SetNull</deleteConstraint>
         <description>This field is used to capture the wish owner to send approval</description>
         <externalId>false</externalId>
-        <label>Wish Owner</label>
+        <label>Hidden Wish Owner</label>
         <referenceTo>User</referenceTo>
         <relationshipName>In_Kind_Donation_Reimbursement</relationshipName>
         <required>false</required>
@@ -1468,6 +1478,23 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <type>Lookup</type>
     </fields>
     <label>In-Kind Donation &amp; Reimbursement</label>
+    <listViews>
+        <fullName>Inkind_All</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <label>Inkind All</label>
+    </listViews>
+    <listViews>
+        <fullName>Reimbursment</fullName>
+        <columns>NAME</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>In_Kind_Donation_Reimbursement__c.Reimbursement</value>
+        </filters>
+        <label>Reimbursment</label>
+    </listViews>
     <nameField>
         <displayFormat>IKR-{0000}</displayFormat>
         <label>In-Kind Donation &amp; Reimbursement Name</label>
@@ -2528,7 +2555,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <fullName>IKR_AccountName_VolunteerName_Validation</fullName>
         <active>true</active>
         <description>This validation will fire if user enter values for both In-Kind Donor Name and Volunteer Name</description>
-        <errorConditionFormula>AND(!ISBLANK( In_Kind_Donor_Name__c ), !ISBLANK(vounteer_Name__c))</errorConditionFormula>
+        <errorConditionFormula>AND(!ISBLANK( In_Kind_Donor_Name__c ), !ISBLANK(vounteer_Name__c),Migrated_Record__c=false)</errorConditionFormula>
         <errorDisplayField>In_Kind_Donor_Name__c</errorDisplayField>
         <errorMessage>Please enter either the Business Donor or Volunteer Donor.</errorMessage>
     </validationRules>
@@ -2536,7 +2563,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <fullName>IKR_Editing_Approved_Record_Validation</fullName>
         <active>true</active>
         <description>This validation will fire after the record is approved and try to edit the record</description>
-        <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ),!ISBLANK( Approved_Date__c))</errorConditionFormula>
+        <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ),!ISBLANK( Approved_Date__c),Migrated_Record__c=false)</errorConditionFormula>
         <errorMessage>You do not have access to edit the approved record</errorMessage>
     </validationRules>
     <validationRules>

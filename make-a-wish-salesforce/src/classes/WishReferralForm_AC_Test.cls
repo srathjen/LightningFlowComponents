@@ -10,6 +10,8 @@ public class WishReferralForm_AC_Test {
         WishReferralForm_AC  controller = new WishReferralForm_AC();
         controller.currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
         controller.currLead.Any_medical_reason_for_moving_quickly__c  = 'Yes';
+        controller.warningMsg = 'test';
+        controller.displayWarningPopup = true;
         controller.CreateLead();
         controller.currLead.Child_Age__c = 'Under 2.5';
        

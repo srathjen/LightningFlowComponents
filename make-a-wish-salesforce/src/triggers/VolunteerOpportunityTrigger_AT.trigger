@@ -114,7 +114,7 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
                     chapterIdsSet.add(currRec.Chapter_Name__c);
                 } 
                 
-                if(currRec.IsApproved__c == True && currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Reason_Inactive__c == Null  && currRec.Reason_Inactive__c != Null){
+                if(currRec.IsApproved__c == true && currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Reason_Inactive__c == Null  && currRec.Reason_Inactive__c != Null){
                     volunteerOpportunityList.add(currRec);
                     System.debug('>>>>>>>1111111>>>>>'+currRec.Hidden_Volunteer_Contact_Email__c);
                 }
@@ -145,7 +145,7 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
                     }
                 }
                 
-                if((currRec.Volunteer_Name__c != Null && currRec.Non_Wish_Event__c != Null && currRec.IsApproved__c == false) || (currRec.Volunteer_Name__c == Null && trigger.oldMap.get(currRec.Id).Volunteer_Name__c != Null && currRec.Non_Wish_Event__c != Null && (currRec.IsApproved__c == false || currRec.IsApproved__c == true) && currRec.Reason_Inactive__c == Null)){
+                if((currRec.Volunteer_Name__c != Null && currRec.Non_Wish_Event__c != Null && currRec.IsApproved__c == false && currRec.isRejected__c == true) || (currRec.Volunteer_Name__c == Null && trigger.oldMap.get(currRec.Id).Volunteer_Name__c != Null && currRec.Non_Wish_Event__c != Null && (currRec.IsApproved__c == false || currRec.IsApproved__c == true) && currRec.Reason_Inactive__c == Null)){
                     
                     nonWishListtoupdatecount.add(currRec);
                 }

@@ -120,7 +120,7 @@
         <defaultValue>false</defaultValue>
         <description>Used to identify whether ICD is eligible and no need for medical question</description>
         <externalId>false</externalId>
-        <label>isEligible</label>
+        <label>Hidden isEligible</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>

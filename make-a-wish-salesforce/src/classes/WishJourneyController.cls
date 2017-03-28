@@ -17,6 +17,7 @@ public class WishJourneyController{
     public string anticipationId{get;set;}
     public string determinationId{get;set;}
     public string effectId{get;set;}
+    public string deceased{get;set;}
     
     public boolean inActive{get;set;}
     public boolean escalated{get;set;}
@@ -60,7 +61,8 @@ public class WishJourneyController{
     {
         currCase = (Case)stdController.getRecord();
         currCase = [SELECT Id,RecordType.name,Contact.FirstName,Contact.LastName,Contact.Wish_Child_Photo__c,Parent.Contact.Wish_Child_Photo__c,status,Days_in_stage__c,Rush__c, 
-                    End_Date__c, Parent.End_Date__c, Referral_Date__c, Parent.Referral_Date__c, parent.status,
+                    End_Date__c, Parent.End_Date__c, Referral_Date__c, Parent.Referral_Date__c, 
+                    parent.status, sub_status__c, parent.sub_status__c,Parent.Contact.npsp__Deceased__c,Contact.npsp__Deceased__c,
                     Qualified_Date__c, Parent.Qualified_Date__c,Parent.ContactId,
                     parent.Contact.FirstName,Parent.Contact.LastName,Anticipated_Start_Date__c,Parent.Anticipated_Start_Date__c,
                     Wish_Determined_Date__c, Parent.Wish_Determined_Date__c,
@@ -99,7 +101,10 @@ public class WishJourneyController{
            {
                rushWish = currCase.Rush__c;
                parentCaseID = currCase.id;
-             
+                if(currCase.Contact.npsp__Deceased__c == True)
+                   deceased = 'Deceased' ;
+               
+               
                 if(currCase.Referral_Date__c != Null)
                 referredDays = (currCase.Referral_Date__c).daysBetween(currDate);
                 if(currCase.Qualified_Date__c!= Null)
@@ -148,6 +153,8 @@ public class WishJourneyController{
            {
            
                rushWish = currCase.Parent.Rush__c;
+               if(currCase.Parent.Contact.npsp__Deceased__c == True)
+                   deceased = 'Deceased' ;
            
             if(currCase.Parent.Referral_Date__c!= Null)
                referredDays = (currCase.Parent.Referral_Date__c).daysBetween(currDate);

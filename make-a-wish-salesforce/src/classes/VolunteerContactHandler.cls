@@ -36,7 +36,7 @@ public class VolunteerContactHandler{
          timeZoneMap.put('(GMT-09:00) Alaska Standard Time (America/Anchorage)','America/Anchorage');
          
          String profileId = label.Active_Volunteer_Profile;
-         for(Contact currContact:[SELECT FirstName,Id,LastName,Account.Timezone__c,email,Middle_Name__c FROM Contact WHERE Id IN :contactIds]){
+         for(Contact currContact:[SELECT FirstName,Id,LastName,Account.Timezone__c,email,Middle_Name__c FROM Contact WHERE Id IN :contactIds AND email != Null]){
             
                newUser=new User();
                newUser.FirstName=currContact.FirstName;
@@ -46,10 +46,20 @@ public class VolunteerContactHandler{
                newUser.ProfileId=profileId;
                newUser.Email=currContact.Email;
                newUser.Username=currContact.email;
-               if(currContact.Middle_Name__c.length() > 7)
-                   newUser.Alias=(currContact.Middle_Name__c).subString(0,7);
-               else
-                   newUser.Alias=(currContact.Middle_Name__c);
+                if(currContact.LastName != Null)
+                { 
+                   if(currContact.LastName.length() > 7)
+                       newUser.Alias=(currContact.LastName).subString(0,7);
+                   else
+                       newUser.Alias=(currContact.LastName);
+                }
+                  if(currContact.Middle_Name__c != Null)
+                  { 
+                   if(currContact.Middle_Name__c.length() > 7)
+                       newUser.Alias=(currContact.Middle_Name__c).subString(0,7);
+                   else
+                       newUser.Alias=(currContact.Middle_Name__c);
+                  }
              //  newUser.TimeZoneSidKey='America/Los_Angeles';
                if(timeZoneMap.containsKey(currContact.account.Timezone__c))
                    newUser.TimeZoneSidKey = timeZoneMap.get(currContact.account.Timezone__c);
@@ -66,7 +76,7 @@ public class VolunteerContactHandler{
         }
         
         if(userList.Size() > 0){
-           Insert userList;
+           Database.insert(userList,false);
         }    
             
       }

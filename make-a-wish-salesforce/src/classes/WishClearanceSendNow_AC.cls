@@ -126,7 +126,7 @@ public class WishClearanceSendNow_AC{
     }
     
     public pagereference DisplayMessage(){
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The wish clearence form has been successfully sent.'));
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The wish clearance form has been sent successfully.'));
         return null;
     }
     

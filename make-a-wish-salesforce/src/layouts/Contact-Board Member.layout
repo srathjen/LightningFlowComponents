@@ -37,6 +37,10 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Suffix__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Gender__c</field>
             </layoutItems>
         </layoutColumns>
@@ -66,28 +70,6 @@
                 <field>Birthdate</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>true</customLabel>
-        <detailHeading>true</detailHeading>
-        <editHeading>true</editHeading>
-        <label>Board Member Details</label>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Board_Member__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Board_Term_Start_Date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Board_Term_End_Date__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns/>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
@@ -208,6 +190,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Work_Phone__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>npe01__WorkEmail__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -433,6 +419,7 @@
         <fields>npe4__Type__c</fields>
         <fields>npe4__Status__c</fields>
         <fields>Wish_Participant__c</fields>
+        <fields>Parent_Legal_Guardian__c</fields>
         <relatedList>npe4__Relationship__c.npe4__Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -484,8 +471,8 @@
         <fields>Role__c</fields>
         <fields>Name__c</fields>
         <fields>Reason_Inactive__c</fields>
-        <fields>Inactive__c</fields>
-        <fields>Event_Date__c</fields>
+        <fields>Status__c</fields>
+        <fields>Chapter_Name__c</fields>
         <relatedList>Volunteer_Opportunity__c.Volunteer_Name__c</relatedList>
     </relatedLists>
     <relatedLists>

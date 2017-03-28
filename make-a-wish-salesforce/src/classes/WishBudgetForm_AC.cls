@@ -41,6 +41,7 @@ public class WishBudgetForm_AC{
     public Boolean isbudgetApprovalExist{get; set;}
     public set<Id> participentSet;
     Id RecentApproverID;
+    public String budgetNotes{get; set;}
     
     public WishBudgetForm_AC(ApexPages.StandardController controller) {
         
@@ -68,7 +69,7 @@ public class WishBudgetForm_AC{
         }
         
         //To check whether budget approval form is approved
-        List<Case> caseList = [SELECT Id,Contact.FirstName,Contact.LastName, Contact.Middle_Name__c, Anticipated_Start_Date__c, isApprove__c,ChapterName__r.Name,Wish_Type__c FROM Case WHERE Id =: caseId];
+        List<Case> caseList = [SELECT Id,Contact.FirstName,Contact.LastName, Contact.Middle_Name__c, Anticipated_Start_Date__c, isApprove__c,ChapterName__r.Name,Wish_Type__c, Budget_Notes__c FROM Case WHERE Id =: caseId];
         
         if(caseList.size() > 0) {
             wishChapterName = caseList.get(0).ChapterName__r.Name;
@@ -78,6 +79,7 @@ public class WishBudgetForm_AC{
             childName = caseList.get(0).Contact.FirstName + ' ' + (caseList.get(0).Contact.Middle_Name__c !=null ? caseList.get(0).Contact.Middle_Name__c : '') + ' ' + caseList.get(0).Contact.LastName;
             List<Account> accountList = [SELECT ID,Department_Division__c FROM Account WHERE Name =: wishChapterName];
             DeptDiv=accountList.get(0).Department_Division__c;
+            budgetNotes=caseList.get(0).Budget_Notes__c;
            
         }
         
@@ -413,6 +415,8 @@ public class WishBudgetForm_AC{
         return options;
     }
     
+    
+    
     /* This method is used to submit wish budget form for approval to Wish Coordinator. If Projected Cash and Projected Inkind are blank then we will
 assign Budget Cash and Budget InKind to Projected Cash and Projected InKind before records goes for approval. Once the form is submitted for approval 
 them we will make all fields as Read Only except T-Code and Projected fields.*/
@@ -459,6 +463,12 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
         if(approverId != null && getPlanningAnticipationCase.get(0).Id != null) {
            
             Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
+            /*if(budgetNotes.length()>0){
+                req.setComments(budgetNotes);
+            }
+            else{
+                req.setComments('Approval for Wish Budget form');
+            }*/
             req.setComments('Approval for Wish Budget form');
             req.setObjectId(getPlanningAnticipationCase.get(0).Id);
             req.setProcessDefinitionNameOrId('Case_Budget_Approval_Form');
@@ -519,6 +529,12 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
         }
         List<Wish_Expense__c> wishexpenses = new List<Wish_Expense__c>();
         System.debug('Save wrappers3:'+wishExpensewrap);
+        
+        case caseNotes=  new Case();
+        caseNotes.Id=caseId;
+        caseNotes.Budget_Notes__c= budgetNotes;
+        update caseNotes;
+        
         for(Wish_Expense__c wrapper : wrappers){
             Wish_Expense__c expense = new Wish_Expense__c();
             if(wrapper.id != Null)
@@ -790,8 +806,8 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
         return new Map<Id,ProcessInstance>([SELECT Id, (SELECT ID, ProcessNodeId,
                                                         StepStatus,Comments,TargetObjectId,ActorId,CreatedById,IsDeleted,IsPending
                                                         ,OriginalActorId,ProcessInstanceId,RemindersSent,CreatedDate, Actor.Name,
-                                                        OriginalActor.Name , ProcessNode.Name FROM StepsAndWorkitems order by CreatedDate DESC ) 
-                                            FROM ProcessInstance where TargetObjectId =:objectId order by CreatedDate DESC]);
+                                                        OriginalActor.Name , ProcessNode.Name FROM StepsAndWorkitems order by CreatedDate DESC, StepStatus) 
+                                            FROM ProcessInstance where TargetObjectId =:objectId order by CreatedDate desc  ]);
     }
     public class ApprovalStepWrapper{
         public String workItemApproveOrRejectLink {get;set;}

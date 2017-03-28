@@ -315,8 +315,8 @@ public class VolunteerLanding_AC {
                            FROM Class_Offering__c WHERE Chapter_Role_O_T__r.Orientation_Training__c NOT IN :orientationIds 
                            AND Chapter_Role_O_T__r.Orientation_Training__r.Prompt_upon_Login__c = True 
                            AND Chapter_Role_O_T__r.Orientation_Training__r.RecordType.Name = 'Training' 
-                           AND Chapter_Role_O_T__r.chapter_Role__c IN :chapterRoles AND Date__c > :Date.Today() AND 
-                           max_capacity__c > 0 limit 1];
+                           AND Chapter_Role_O_T__r.chapter_Role__c IN :chapterRoles AND ((Date__c >= :Date.Today() AND Date__c <= :Date.today().addMonths(6)) OR Date__c = Null) AND 
+                           (max_capacity__c = null OR (max_capacity__c > 0 AND AvailableSeats__c>0)) limit 1];
        
        List<Class_Offering__c> registeredClassOff = [SELECT id,Orientation_and_Training__c,Date__c,Chapter_Role_O_T__c,Chapter_Role_O_T__r.Orientation_Training__c,
                                                      Start_Time__c,End_Time__c FROM Class_Offering__c WHERE 
@@ -512,7 +512,7 @@ public class VolunteerLanding_AC {
             '      "tabs": {'+
             '                "signHereTabs": [{'+
             '                    "anchorString": "~s1",'+
-            '                    "anchorXOffset": "0.2",'+
+            '                    "anchorXOffset": "0.1",'+
             '                    "anchorYOffset": "0.1",'+
             '                    "anchorIgnoreIfNotPresent": "false",'+
             '                    "anchorUnits": "inches"'+

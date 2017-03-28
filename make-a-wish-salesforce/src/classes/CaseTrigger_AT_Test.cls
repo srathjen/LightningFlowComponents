@@ -128,8 +128,9 @@ public class CaseTrigger_AT_Test {
         Constant_AC constant = new Constant_AC();
         Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
         createTask('Schedule Wish Presentation (add date, time, location name and address)',parentCase.id,wishGrantTaskRT);
-        parentCase.Presentation_Date__c = Date.Today().addDays(5);
-        update parentCase;
+        Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
+        wishGrantedCase.Presentation_Date__c = Date.Today().addDays(5);
+        update wishGrantedCase;
     }
     
     static testmethod void UpdatePresentationDate1()
@@ -149,8 +150,13 @@ public class CaseTrigger_AT_Test {
         Constant_AC constant = new Constant_AC();
         Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
         createTask('Test',parentCase.id,wishGrantTaskRT);
-        parentCase.Presentation_Date__c = Date.Today().addDays(5);
-        update parentCase;
+        Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
+        wishGrantedCase.Presentation_Date__c = Date.Today().addDays(5);
+        update wishGrantedCase;
+        case setNullPresentation = new Case();
+        setNullPresentation.Presentation_Date__c = null;
+        setNullPresentation.Id = wishGrantedCase.Id;
+        update setNullPresentation;
     }
     
     static testmethod void UpdatePresentationDateNull()
@@ -406,6 +412,7 @@ public class CaseTrigger_AT_Test {
         Account acc = OrientationandTrainingUtil.MakeAWishAmericaAcc();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
         newLead.Child_Age__c = '4';
+        newLead.unique_wish_identifier__c = '059-17-12367';
         insert newLead;
         Contact dbMedicalCon = OrientationandTrainingUtil.CreateMedicalProfContact();
         Case PartACase = OrientationandTrainingUtil.CreatePartAWishRec();
@@ -462,6 +469,7 @@ public class CaseTrigger_AT_Test {
         Account acc = OrientationandTrainingUtil.MakeAWishAmericaAcc();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
         newLead.Child_Age__c = '4';
+        newLead.unique_wish_identifier__c = '059-17-12367';
         insert newLead;
         Contact dbMedicalCon = OrientationandTrainingUtil.CreateMedicalProfContact();
         Case PartACase = OrientationandTrainingUtil.CreatePartAWishRec();

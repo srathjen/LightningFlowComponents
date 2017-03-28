@@ -209,8 +209,8 @@
             <translation><!-- Grandparent --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Neighbour</masterLabel>
-            <translation><!-- Neighbour --></translation>
+            <masterLabel>Neighbor</masterLabel>
+            <translation><!-- Neighbor --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Other</masterLabel>
@@ -758,7 +758,7 @@ provide contact information for each site on which you are active. --></help>
         <name>When_thinking_some_of_my_wish_ideas_were__c</name>
     </fields>
     <fields>
-        <label><!-- Will a rental car seat(s) Details --></label>
+        <label><!-- Will a rental car seat(s)  Details --></label>
         <name>Will_a_rental_car_seat_s_Details__c</name>
     </fields>
     <fields>

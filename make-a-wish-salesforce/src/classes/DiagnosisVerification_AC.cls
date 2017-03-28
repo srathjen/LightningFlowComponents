@@ -10,9 +10,10 @@ public class DiagnosisVerification_AC {
     public TravelAlgorithmWrapper travelAlgorithmWrapperIns{get;set;}
     public WishChildWrapper wishChildWrapperIns{get;set;}
     private transient Map<Id,Medical_Questions__c> medicalQuestionMap;
-    public String currentCondition {get; set;}
+    //public String currentCondition {get; set;}
     public Lead currlead{get;set;} 
     private String leadId;
+    private Set<String> uniqueCurrentConditionSet;
     public DiagnosisWrapper wrapCls {get; set;}    
     private String icdOrPcd;
     private Integer diagnosisBlockNum;
@@ -27,6 +28,7 @@ public class DiagnosisVerification_AC {
     private Map<String,String> travelAlgorithmMap;  
     public DiagnosisVerification_AC(){
         wishChildWrapperIns = new WishChildWrapper();
+        uniqueCurrentConditionSet = new Set<String>();
         wishChildWrapperIns.login = false;
         wishStatus = null;
         wrapCls = new DiagnosisWrapper();
@@ -56,7 +58,7 @@ public class DiagnosisVerification_AC {
         query=query.removeEnd(',');
         query+=' FROM Lead WHERE Id =:leadId';
         currLead = Database.query(query); 
-        
+        currLead.Current_Condition_Label__c = currLead.Travel_algorithm__c;
         wishChildWrapperIns.stillEligibile = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
         wishChildWrapperIns.treatingFName = currLead.Treating_Medical_Professional_First_Name__c;
         wishChildWrapperIns.treatingLName = currLead.Treating_Medical_Professional_Last_Name__c;
@@ -94,16 +96,18 @@ public class DiagnosisVerification_AC {
                 wishChildWrapperIns.communicationList.add(com);
             }
         }
-        if((!String.isEmpty(currLead.Current_Condition_Label__c)) && currLead.Current_Condition_Label__c.contains(';')) {
+        
+        /*if((!String.isEmpty(currLead.Travel_algorithm__c)) && currLead.Travel_algorithm__c.contains(';')) {
             Integer i = 0;
             currentCondition = '';
-            for(String currentSplitString : currLead.Current_Condition_Label__c.split(';')) {
+            for(String currentSplitString : currLead.Travel_algorithm__c.split(';')) {
                 if(!String.isEmpty(currentSplitString)) {
                     currentCondition += i+1 +'. '+ currentSplitString + '\n';
                     i++;
                 }
             }
-        }
+        }*/
+        
         //Loading all the Medicial Questions.
         for(Medical_Questions__c medicalQuestions : [SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c FROM Medical_Questions__c order by Sort_Order__c]){
             if(medicalQuestions.Question__c != null) {
@@ -206,7 +210,7 @@ public class DiagnosisVerification_AC {
                                                 if(currRec.Current_Condition__c!= Null)
                                                     travelMap.put(currRec.Current_Condition__c,currRec.Wrapper_Variable__c);
                                             }
-        if(currLead.Travel_algorithm__c != null) {
+        /*if(currLead.Travel_algorithm__c != null) {
             travelAlgorithmWrapperIns.algList = currLead.Travel_algorithm__c.removeEnd(';');            
             if(travelAlgorithmWrapperIns.algList.contains(';')) {
                 for(String travel : travelAlgorithmWrapperIns.algList.split(';')) {
@@ -215,12 +219,12 @@ public class DiagnosisVerification_AC {
             } else {
                 travelAlgorithmWrapperIns.travelSet.add(travelAlgorithmWrapperIns.algList);
             }
-        }
+        }*/
         String jsonString = json.serialize(travelAlgorithmWrapperIns);
         Map<String,Object> wrapClsMap = new Map<String,Object>();
         wrapClsMap = (Map<String,Object>)json.deserializeuntyped(jsonString);            
-        if(currLead.Current_Condition_Label__c != Null){
-            for(String currVal : (currLead.Current_Condition_Label__c.split(';'))){
+        if(currLead.Travel_algorithm__c != Null){
+            for(String currVal : (currLead.Travel_algorithm__c.split(';'))){
                 if(travelMap.containsKey(currVal)){
                     String fieldName = travelMap.get(currVal);
                     if(fieldName != null) {
@@ -407,7 +411,7 @@ public class DiagnosisVerification_AC {
                 diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = icdCodeInfo[0].Short_Description__c;
                 //Condition Description categories like Epilepsy, Cardiomyopathy with group 1 records are considered as eligible without asking Medical Questions
                 //Those questions are identified by using isEligible__c field
-                if(!String.isEmpty(icdCodeInfo[0].Condition_Description__r.Name) && icdCodeInfo[0].Condition_Description__r.Name == 'Total Parenteral Nutrition') {
+                if(!String.isEmpty(icdCodeInfo[0].Condition_Description__r.Name) && icdCodeInfo[0].Condition_Description__r.Name == 'Total Parenteral Nutrition (TPN)') {
                     showAddAnotherDiagnosisBtn = true;
                 }
                 /*if(icdCodeInfo[0].Condition_Description__r.isEligible__c == true) { 
@@ -423,7 +427,7 @@ showAddAnotherDiagnosisBtn = true;
             //Conition Description
         } else if(icdOrPcd == 'PCD') {  
             //diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode = Null;            
-            if(diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription == 'Total Parenteral Nutrition') {
+            if(diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription == 'Total Parenteral Nutrition (TPN)') {
                 showAddAnotherDiagnosisBtn = true;
             }
             List<Condition_Description__c> conditionDescriptionInfo = [SELECT Id, Name, isEligible__c, Group1__c, Code_To_Use__c FROM Condition_Description__c WHERE Name =: diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription];
@@ -579,7 +583,6 @@ showAddAnotherDiagnosisBtn = true;
         String attachmentId = ApexPages.currentPage().getParameters().get('attachmentId'); // Used to hold the Diagnosis block number
         try{
             Delete [SELECT Id FROM Lead_File__c WHERE ID = : attachmentId];
-            
         }Catch(Exception ex){
             System.debug('Exception'+ex.getMessage());
         }
@@ -589,7 +592,9 @@ showAddAnotherDiagnosisBtn = true;
     
     //Used to save information given by MedicalProfessional
     public void SaveMedicalInformation() {
-        System.debug('Save Medical Info Method>>>>>>>>');
+        String currentConditionFormattedString = ApexPages.currentPage().getParameters().get('travelString');
+        String currentConditionChosenString = ApexPages.currentPage().getParameters().get('collectedConditionValue');
+        
         currLead.Treating_Medical_Professional_First_Name__c =  wishChildWrapperIns.treatingFName ;
         currLead.Treating_Medical_Professional_Last_Name__c = wishChildWrapperIns.treatingLName;
         currLead.Treating_Medical_Professional_Phone__c = wishChildWrapperIns.treatingPhone;
@@ -724,100 +729,101 @@ showAddAnotherDiagnosisBtn = true;
         for(String currVal : travelValuesLabel){
             currLead.Current_Condition_label__c+=currVal+';';
         } 
-        travelValuesSet.clear();
+        
         if(travelAlgorithmWrapperIns.chronicHepatitisString != Null){
             currLead.Chronic_Hepatitis__c = travelAlgorithmWrapperIns.chronicHepatitisString;
-            if(travelAlgorithmMap.containsKey(travelAlgorithmWrapperIns.chronicHepatitisString)) {
-                travelValuesSet.add(travelAlgorithmMap.get(travelAlgorithmWrapperIns.chronicHepatitisString));
-            }
         }
         
         if(travelAlgorithmWrapperIns.pulmonaryHypertensionString != Null){
             currLead.Pulmonary_Hypertension__c = travelAlgorithmWrapperIns.pulmonaryHypertensionString;
-            if(travelAlgorithmMap.containsKey(travelAlgorithmWrapperIns.pulmonaryHypertensionString)) {
-                travelValuesSet.add(travelAlgorithmMap.get(travelAlgorithmWrapperIns.pulmonaryHypertensionString));
-            }
         }
         
         if(travelAlgorithmWrapperIns.strokesType != Null){
             currLead.Strokes__c = travelAlgorithmWrapperIns.strokesType ;
-            if(travelAlgorithmMap.containsKey(travelAlgorithmWrapperIns.strokesType)) {
-                travelValuesSet.add(travelAlgorithmMap.get(travelAlgorithmWrapperIns.strokesType));
-            }
         }
+        
         currLead.Convulsive_Disorders__c = '';
         if(travelAlgorithmWrapperIns.convulsiveDisorders != Null) {
             for(String currVal : travelAlgorithmWrapperIns.convulsiveDisorders){
                 currLead.Convulsive_Disorders__c+=currVal+';';
-                if(travelAlgorithmMap.containsKey(currVal)) {
-                    travelValuesSet.add(travelAlgorithmMap.get(currVal));
-                }
             }
         }
+        
         currLead.Congenital_Heart_Disease__c = '';
         if(travelAlgorithmWrapperIns.congenitalHeartDiseaseString != Null){
             for(String currVal : travelAlgorithmWrapperIns.congenitalHeartDiseaseString ){
                 currLead.Congenital_Heart_Disease__c+=currVal+';';
-                if(travelAlgorithmMap.containsKey(currVal)) {
-                    travelValuesSet.add(travelAlgorithmMap.get(currVal));
-                }
             }
         }
+        
         currLead.Chronic_Heart_Failure__c = '';
         if(travelAlgorithmWrapperIns.chronicHeartFailureString != Null){
             for(String currVal : travelAlgorithmWrapperIns.chronicHeartFailureString){
                 currLead.Chronic_Heart_Failure__c+=currVal+';';
-                if(travelAlgorithmMap.containsKey(currVal)) {
-                    travelValuesSet.add(travelAlgorithmMap.get(currVal));
-                }
             }
         }
+        
         currLead.Heart_Failure__c = '';
         if(travelAlgorithmWrapperIns.heartFailureString!= Null){
             for(String currVal : travelAlgorithmWrapperIns.heartFailureString){
                 currLead.Heart_Failure__c+=currVal+';';
-                if(travelAlgorithmMap.containsKey(currVal)) {
-                    travelValuesSet.add(travelAlgorithmMap.get(currVal));
-                }
             }
         }
+        
         currLead.Arrhythmia__c = '';
         if(travelAlgorithmWrapperIns.ArrhythmiaString!= Null){
             for(String currVal : travelAlgorithmWrapperIns.ArrhythmiaString){
                 currLead.Arrhythmia__c+=currVal+';';
-                if(travelAlgorithmMap.containsKey(currVal)) {
-                    travelValuesSet.add(travelAlgorithmMap.get(currVal));
-                }
             }
         }
+        
         currLead.Angina__c = '';
         if(travelAlgorithmWrapperIns.anginaString!= Null){
             for(String currVal : travelAlgorithmWrapperIns.anginaString){
                 currLead.Angina__c+=currVal+';';
-                if(travelAlgorithmMap.containsKey(currVal)) {
-                    travelValuesSet.add(travelAlgorithmMap.get(currVal));
-                }
             }
         }
+        
         currLead.Ventilator__c = travelAlgorithmWrapperIns.ventilatorText;
-        if(travelAlgorithmWrapperIns.ventilatorText != null) {
-            travelValuesSet.add(travelAlgorithmWrapperIns.ventilatorText);
-        }
+        
         currLead.lung_disease__c='';
         if(travelAlgorithmWrapperIns.lungDiseaseString!= Null){
             for(String currVal : travelAlgorithmWrapperIns.lungDiseaseString){
                 currLead.lung_disease__c+=currVal+';';
-                if(travelAlgorithmMap.containsKey(currVal)) {
-                    travelValuesSet.add(travelAlgorithmMap.get(currVal));
-                }
-            }
-        } 
-        currLead.Current_Condition__c = '';
-        for(String currVal : travelValuesSet){
-            if(!String.isEmpty(currVal)) {
-                currLead.Current_Condition__c+=currVal+';';
             }
         }
+        
+        System.debug('currentConditionChosenString'+currentConditionChosenString);
+        uniqueCurrentConditionSet.clear();
+        currLead.Current_Condition__c = '';
+        if(!String.isEmpty(currentConditionChosenString)) {
+            for(String currCon : currentConditionChosenString.split(';')) {
+                if(travelAlgorithmMap.containsKey(currCon)) {
+                    if(!uniqueCurrentConditionSet.contains(currCon)) {
+                        if(!String.isEmpty(travelAlgorithmMap.get(currCon))) {
+                            uniqueCurrentConditionSet.add(travelAlgorithmMap.get(currCon));
+                        }
+                    }
+                }
+            }
+        }
+        
+        currLead.Current_Condition__c = '';
+        if(uniqueCurrentConditionSet.size() > 0) {
+            Integer i = 1;
+            for(String condition : uniqueCurrentConditionSet) {
+                currLead.Current_Condition__c += i+'. '+condition + ';'+'\n';
+                i++;
+            }
+        }
+        
+        currLead.Travel_algorithm__c = currLead.Current_Condition_Label__c;
+        
+        currLead.Current_Condition_Label__c = '';
+        if(!String.isEmpty(currentConditionFormattedString)) {
+            currLead.Current_Condition_Label__c = currentConditionFormattedString;
+        }
+       
         try{
             update currLead;
             insert diagnosisVerificationLstForInsert;
@@ -842,7 +848,7 @@ showAddAnotherDiagnosisBtn = true;
         String IntegratorKey;
         String endPointURL;
         Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
-        String currentRequestURL =   'http://mstdevenv-wish.cs61.force.com';
+        String currentRequestURL =   'http://wish.force.com/';
         
         for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
             UserName = credentialIns.name;

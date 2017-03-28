@@ -18,6 +18,10 @@
         <relationshipLabel><!-- Volunteer Roles --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- End Date --></label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- External Id --></label>
         <name>External_Id__c</name>
     </fields>
@@ -56,6 +60,10 @@
     <fields>
         <label><!-- Role Name --></label>
         <name>Role_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
     </fields>
     <fields>
         <label><!-- Status --></label>

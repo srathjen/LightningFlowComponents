@@ -6,7 +6,7 @@
     <letterhead>Make_a_Wish_America</letterhead>
     <name>Send Reply Email to National MAC Team Template</name>
     <style>freeForm</style>
-    <subject>Make A wish America [{!Case.Thread_Id}]</subject>
+    <subject>Make-A-Wish [{!Case.Thread_Id}]</subject>
     <textOnly>{!Case.Case_Comment__c}</textOnly>
     <type>html</type>
 </EmailTemplate>

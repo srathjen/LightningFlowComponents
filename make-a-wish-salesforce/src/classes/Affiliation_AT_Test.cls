@@ -53,5 +53,32 @@ public class Affiliation_AT_Test{
         update volunteerAffiliation;
       
     }
+
+    //Remove volunteer from public group when affilaition deleted.
+     static testmethod void affiliationDelete(){
+        Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.id);
+        Group alabamaGroup = new Group();
+        alabamaGroup.Name = 'Make-A-Wish Alabama';
+        alabamaGroup.DeveloperName = 'ABC';
+        insert alabamaGroup;
+        OrientationandTrainingUtil.CreateAffiliation(volunteerContact.Id);
+        npe5__Affiliation__c volunteerAffiliation =  [SELECT Id, npe5__Status__c FROM npe5__Affiliation__c LIMIT 1];
+        volunteerAffiliation.npe5__Status__c = 'InActive';
+        delete volunteerAffiliation;
+        
+    }
+    
+    static testmethod void updateConatct(){ 
+        Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.id);
+        npe5__Affiliation__c currentAffiliation = OrientationandTrainingUtil.CreateAffiliation(volunteerContact.Id);
+        Map<id,npe5__Affiliation__c> affiliationMap = new Map<id,npe5__Affiliation__c>();
+        Set<Id> affiliationIds = new Set<Id>();
+        affiliationMap.put(currentAffiliation.npe5__Contact__c, currentAffiliation);
+        affiliationIds.add(currentAffiliation.npe5__Organization__c);
+        AffiliationTriggerHandler.updateContact(affiliationMap,affiliationIds);
+        
+    }
     
 }

@@ -1,280 +1,369 @@
-<apex:page controller="RelationshipsViewer_AC" sidebar="false" standardStylesheets="false" title="Make-A-Wish Communities | Relationships Viewer" applyBodyTag="false" docType="html-5.0" >
-   
-<apex:form Id="bb">
-        <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-        <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
-        <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap.min.js')}"/>
-        <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap.min.js')}"/>
-        
-        <apex:stylesheet value="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>
-        <apex:includeScript value="//code.jquery.com/jquery-2.1.4.js"/>
-        <apex:includeScript value="//code.jquery.com/ui/1.11.4/jquery-ui.js"/>
-        
-        
-        <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/page.css')}" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
-        <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap-theme.min.css')}" />
-        
-        <head>
-            <apex:include pageName="prospective_head" id="phead" />
-             <apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
-            <style type="text/css">
-                body > main {margin-bottom:4em; margin-bottom:4rem;}
-                .vcpactivelogin .table-maw td {vertical-align:middle}
-                .pad {overflow-x:auto}
-                table.dataTable thead .sorting, table.table thead th {padding-right:1rem}
-                .messageCell h4{color:#066cb6};
-                
-            </style>
-            
-           
-        </head>
-        <body class="vcp vcpactivelogin full registered profile">
-            <main role="main" class="container" style="margin-left:3%;">
-            
-            <!--apex:form Id="bb" -->
-            
-                <div class="container">
-                    <div class="row">
-                        <section class="col-md-12">  
-                             
-                            <apex:OutputPanel rendered="{!outPutMode}">   
-                            <apex:pagemessages />      
-                                <h2>Wish Child Contacts</h2>
-                                <table id="dataTab1" class="display table table-maw table-hover" style="border:1px solid rgba(128, 128, 128, 0.5);">
-                                    <thead class="thead-default">
-                                        <tr>
-                                            <th>FirstName</th>
-                                            <th>LastName</th>
-                                            <th>Phone</th>
-                                            <th>Email</th>
-                                            <th>Street</th>
-                                            <th>City</th>
-                                            <th>State</th>
-                                            <th>Country</th>
-                                            <th>PostalCode</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <apex:repeat value="{!contactList}" var="item">
-                                            <tr>
-                                                <td><apex:OutPutText value="{!item.FirstName}"/></td>
-                                                <td><apex:OutPutText value="{!item.LastName}"/></td>
-                                                <td><apex:outputText value="{!item.Phone}"/></td>
-                                                <td><apex:outputText value="{!item.Email}"/></td>
-                                                <td><apex:outputText value="{!item.MailingStreet}"/></td>
-                                                <td><apex:outputText value="{!item.MailingCity}"/></td>
-                                                <td><apex:outputText value="{!item.MailingState}"/></td>
-                                                <td><apex:outputText value="{!item.MailingCountry}"/></td>
-                                                <td ><apex:outputText value="{!item.MailingPostalCode}"/></td>
-                                            </tr>        
-                                        </apex:repeat>
-                                    </tbody>
-                                </table>
-                                <br/><br/><br/>
-                                <apex:outputPanel rendered="{!isWishFamily}" >
-                                    <div class='pageHead'>
-                                        
-                                        <h2>Related Contacts</h2>
-                                    </div>
-                                    <table id="dataTab1" class="display table table-maw table-hover" >
-                                        <thead class="thead-default">
-                                            <tr>
-                                                <th>FirstName</th>
-                                                <th>LastName</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Use as Household Address</th>  
-                                                <th>Same as Household Address</th>  
-                                                <th>Street</th>
-                                                <th>City</th>
-                                                <th>State</th>
-                                                <th>Country</th>
-                                                <th>PostalCode</th>
-                                                <th>Type</th>   
-                                                      
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <apex:repeat value="{!dbRelatedContactList}" var="item">
-                                                <tr>
-                                                 <td><apex:OutPutText value="{!item.FirstName}"/></td>
-                                                <td><apex:OutPutText value="{!item.LastName}"/></td>
-                                                <td><apex:outputText value="{!item.Phone}"/></td>
-                                                <td><apex:outputText value="{!item.Email}"/></td>
-                                                <td style = "text-align: center;"><apex:outputField value="{!item.Use_as_Household_Address__c }"/></td>
-                                                <td style = "text-align: center;"><apex:outputField value="{!item.Same_as_Household_Address__c}"/></td>
-                                                <td><apex:outputText value="{!item.MailingStreet}"/></td>
-                                                <td><apex:outputText value="{!item.MailingCity}"/></td>
-                                                <td><apex:outputText value="{!item.MailingState}"/></td>
-                                                <td><apex:outputText value="{!item.MailingCountry}"/></td>
-                                                <td ><apex:outputText value="{!item.MailingPostalCode}"/></td>
-                                                <td ><apex:outputText value="{!item.Wish_Family_Type__c}"/></td>
-                                                
-                                                </tr>
-                                            </apex:repeat>
-                                        </tbody>
-                                    </table>
-                                    
-                                    
-                                    
-                                    
-                                </apex:OutputPanel>
-                              
-                                <center> <apex:commandButton value="Update"   action="{!UpdateContactInfo}" style="width:120px;height:30px;" reRender="bb"/></center>
-                                
-                            </apex:OutputPanel>
-                            
-                            <apex:outputPanel rendered="{!inputMode}">
-                                <apex:pageMessages ></apex:pageMessages>
-                                <apex:outputPanel >
-                                    <div class='pageHead'>
-                                        <div>
-                                            <h2>Wish Child Contacts</h2>
-                                        </div>  
-                                        <div>
-                                            <table id="dataTab1" class="display table table-maw table-hover" >
-                                                <thead class="thead-default">
-                                                    
-                                                    <tr>
-                                                        <th> FirstName </th>
-                                                        <th> LastName </th>
-                                                        <th>Phone</th>
-                                                        <th>Email</th>
-                                                        <th>Street</th>
-                                                        <th>City</th>
-                                                        <th>State</th>
-                                                        <th>Country</th>
-                                                        <th>Zip Code</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <apex:repeat value="{!wishChildContactList}" var="item">
-                                                        <tr>
-                                                            <td><apex:OutPutText value="{!item.FirstName}" /></td>
-                                                            <td><apex:OutPutText value="{!item.LastName}"/></td>
-                                                            <td><apex:InputText value="{!item.Phone}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:InputText value="{!item.Email}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:InputText value="{!item.MailingStreet}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:InputText value="{!item.MailingCity}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:selectList value="{!item.mailingstate}" multiselect="false" styleClass="form-control" Size="1" style="height: inherit;width: inherit;"><apex:selectOptions value="{!States}" /></apex:selectList></td>
-                                                            <td><apex:InputText value="{!item.MailingCountry}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td ><apex:InputText value="{!item.MailingPostalCode}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                        </tr>
-                                                    </apex:repeat>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </apex:outputPanel>
-                                <br/>
-                                <apex:outputPanel rendered="{!isWishFamily}" >
-                                    <div class='pageHead'>
-                                        <div>
-                                            <h2>Related Contacts</h2>
-                                        </div>  
-                                        <div>
-                                            <table id="dataTab1" class="display table table-maw table-hover" >
-                                                <thead class="thead-default">
-                                                    <tr>
-                                                        <th> FirstName </th>
-                                                        <th> LastName </th>
-                                                        <th >Phone</th>
-                                                        <th >Email</th>
-                                                        <th>Use as Household Address</th>
-                                                        <th>Same as Household Address</th>
-                                                        <th >Street</th>
-                                                        <th >City</th>
-                                                        <th >State</th>
-                                                        <th >Country</th>
-                                                        <th >Zip Code</th>
-                                                       
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <apex:repeat value="{!clonedFamilyContactList}" var="item">
-                                                        <tr>
-                                                            <td><apex:OutPutText value="{!item.FirstName}"/></td>
-                                                            <td><apex:OutPutText value="{!item.LastName}"/></td>
-                                                            <td><apex:InputText value="{!item.Phone}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:InputText value="{!item.Email}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td style = "text-align: center;"><apex:InputCheckbox value="{!item.Use_as_Household_Address__c }"/></td>
-                                                            <td style = "text-align: center;"><apex:InputCheckbox value="{!item.Same_as_Household_Address__c}"/></td>
-                                                            <td><apex:InputText value="{!item.MailingStreet}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td><apex:InputText value="{!item.MailingCity}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td>
-                                                                
-                                                                <apex:selectList value="{!item.mailingstate}" multiselect="false" Size="1" styleClass="form-control" style="height: inherit;width: inherit;" ><apex:selectOptions value="{!States}" /></apex:selectList>
-                                                            </td>
-                                                            <td><apex:InputText value="{!item.MailingCountry}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            <td ><apex:InputText value="{!item.MailingPostalCode}" styleClass="form-control" style="height: inherit;width: inherit;"/></td>
-                                                            
-                                                        </tr>
-                                                    </apex:repeat>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </apex:outputPanel>
-                                <br/>
-                                <center><apex:commandButton value="Save" rendered="{!isSave}" action="{!SaveUpdatedContact}" style="width:120px;height:30px;" reRender="bb" oncomplete="tableSort();"/>
-                                    <apex:commandButton value="Cancel" action="{!close}" style="width:120px;height:30px;"  reRender="bb" oncomplete="tableSort();"/></center>
-                                
-                            </apex:outputPanel>
-                        </section>
-                    </div>
-                </div>
-                 <!--/apex:form-->
-            </main>
-        </body>
-      <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-        <!-- fallback -->
-        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.dataTables.min.js')}"><\/script>')</script>
-        
-        <script src="https://files-stackablejs.netdna-ssl.com/stacktable.min.js"></script>
-        <!-- fallback -->
-        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/stacktable.min.js')}"><\/script>')</script>
-        
-        <script>        
-        $.noConflict();
-        jQuery( document ).ready(function( $ ) {
-            $('#dataTab1,dataTab2').DataTable({
-                "paging": false,
-                "searching": false,
-                 responsive: true
-            });
-           // $('#dataTab1,dataTab2').stacktable({myClass:'mobile-table'});
-            $('.sorting_asc, .sorting').removeAttr('style');
-            $('table.mobile-table.dataTable').css('border-collapse','collapse');
-            
-        });
-        
-        
-       
-        j$ = jQuery.noConflict();
-        
-        
-        function tableSort(){
-
-       
-        j$('#dataTab1,dataTab2').DataTable({
-                "paging": false,
-                "searching": false,
-                 responsive: true
-            });
-            
-       //j$('#dataTab1,dataTab2').stacktable({myClass:'mobile-table'});
-       j$('.sorting_asc, .sorting').removeAttr('style');
-       j$('table.mobile-table.dataTable').css('border-collapse','collapse');   
-         
-        }
-        
-        
-       
-        
-        </script>
- 
-   
+<apex:page controller="RelationshipsViewer_AC" standardStylesheets="false" sidebar="false">
     
-                 </apex:form>    
+    
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <apex:stylesheet value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"/>
+        <apex:includeScript value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"/>
+        <style>
+            .input-xs {
+            height: 22px;
+            padding: 2px 5px;
+            font-size: 12px;
+            line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
+            border-radius: 3px;
+            }
+            .lb-xs {font-size:12px !important; padding-top:-4px !important}
+            .notification {position:fixed; top:1rem; left:50%;}
+            .notification div {position:relative; left:-50%; background:#1797c0; border-radius:.5rem; padding:1rem; color:#fff; text-align:center;}
+            .notification h6 {margin:0; text-transform:none !important}
+            .notification p {padding:0; margin:0; font-size:.8rem; font-family:arial,helvetica;}
+        </style>
+    </head>
+    <body>
+        
+        
+        <div class="container">
+            <apex:form styleclass="form-horizontal" id="bb">
+            <apex:pagemessages />
+                <div class="page-header">
+                    <h4>Wish Child Contact</h4>      
+                </div>
+                <apex:outputPanel rendered="{!outPutMode}">
+                    
+                    <apex:repeat value="{!contactList}" var="item">
+                        <div class="panel panel-default">
+                            <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b></div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Phone</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.phone}" styleclass="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Other Phone</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.OtherPhone}" styleclass="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Mobile Phone</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.MobilePhone}" styleclass="form-control"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Email</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.Email}" styleclass="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Street</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.MailingStreet}" styleclass="form-control" style="height:30px"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">City</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.MailingCity}" styleclass="form-control"/>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">State</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.MailingState}" styleclass="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Country</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.MailingCountry}" styleclass="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Postal</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </apex:repeat>
+                    
+                    <div class="page-header">
+                        <h4>Wish Child Related Contacts</h4>      
+                    </div>
+                    <apex:outputPanel rendered="{!isWishFamily}" >
+                        <apex:repeat value="{!dbRelatedContactList}" var="item">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b></div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Phone</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.phone}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Other Phone</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.OtherPhone}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Mobile Phone</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.MobilePhone}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Email</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.Email}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Use as Household Address</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.Use_as_Household_Address__c}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Same as Household Address</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.Same_as_Household_Address__c}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Street</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.MailingStreet}" styleclass="form-control" style="height:30px"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">City</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.MailingCity}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">State</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.MailingState}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Country</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.MailingCountry}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Postal</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </apex:repeat>
+                    </apex:outputPanel>
+                    <center> <apex:commandButton value="Update"   action="{!UpdateContactInfo}" style="width:120px;height:30px;" reRender="bb" status="status"/></center>
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{!inputMode}">
+                    <apex:repeat value="{!wishChildContactList}" var="item">
+                        <div class="panel panel-default">
+                           <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b></div>
+                              <div class="panel-body">
+                        <div class="row">
+                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                <label class="col-sm-6 control-label" for="formGroupInputSmall">Phone</label>
+                                <div class="col-sm-6">
+                                    <apex:inputField value="{!item.phone}" styleclass="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                <label class="col-sm-6 control-label" for="formGroupInputSmall">Other Phone</label>
+                                <div class="col-sm-6">
+                                    <apex:inputField value="{!item.OtherPhone}" styleclass="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                <label class="col-sm-6 control-label" for="formGroupInputSmall">Mobile Phone</label>
+                                <div class="col-sm-6">
+                                    <apex:inputField value="{!item.MobilePhone}" styleclass="form-control"/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                <label class="col-sm-6 control-label" for="formGroupInputSmall">Email</label>
+                                <div class="col-sm-6">
+                                    <apex:inputField value="{!item.Email}" styleclass="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                <label class="col-sm-6 control-label" for="formGroupInputSmall">Street</label>
+                                <div class="col-sm-6">
+                                    <apex:inputField value="{!item.MailingStreet}" styleclass="form-control" style="height:30px"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                <label class="col-sm-6 control-label" for="formGroupInputSmall">City</label>
+                                <div class="col-sm-6">
+                                    <apex:inputField value="{!item.MailingCity}" styleclass="form-control"/>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                <label class="col-sm-6 control-label" for="formGroupInputSmall">State</label>
+                                <div class="col-sm-6">
+                                    <apex:selectList value="{!item.mailingstate}" multiselect="false" styleClass="form-control" Size="1" style="height: inherit;width: inherit; width:100%"><apex:selectOptions value="{!States}"/></apex:selectList>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                <label class="col-sm-6 control-label" for="formGroupInputSmall">Country</label>
+                                <div class="col-sm-6">
+                                    <apex:inputField value="{!item.MailingCountry}" styleclass="form-control"/>
+                                </div>
+                            </div>
+                            <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                <label class="col-sm-6 control-label" for="formGroupInputSmall">Postal</label>
+                                <div class="col-sm-6">
+                                    <apex:inputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                         </div>
+                            </div>
+                    </apex:repeat>
+                    <div class="page-header">
+                        <h4>Wish Child Related Contacts</h4>      
+                    </div>
+                    <apex:outputPanel rendered="{!isWishFamily}" >
+                        <apex:repeat value="{!clonedFamilyContactList}" var="item">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b></div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Phone</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.phone}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Other Phone</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.OtherPhone}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Mobile Phone</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.MobilePhone}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Email</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.Email}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Use as Household Address</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.Use_as_Household_Address__c}" styleclass="checkbox"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Same as Household Address</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.Same_as_Household_Address__c}" styleclass="checkbox"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Street</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.MailingStreet}" styleclass="form-control" style="height:30px"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">City</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.MailingCity}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">State</label>
+                                            <div class="col-sm-6">
+                                                <apex:selectList value="{!item.mailingstate}" multiselect="false" styleClass="form-control" Size="1" style="width:100%"><apex:selectOptions value="{!States}"/></apex:selectList>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Country</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.MailingCountry}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-4 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Postal</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </apex:repeat>
+                    </apex:outputPanel>
+                    <center>
+                        <apex:commandButton value="Save" rendered="{!isSave}" action="{!SaveUpdatedContact}" style="width:120px;height:30px;" reRender="bb"  status="status"/>
+                        <apex:commandButton value="Cancel" action="{!close}" style="width:120px;height:30px;"  reRender="bb" status="status"/>
+                    </center>
+                </apex:outputPanel>
+                
+            </apex:form>
+        </div>
+        
+        <apex:outputPanel id="LoadBlock">
+            <apex:actionStatus id="status">
+                <apex:facet name="start">
+                    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.50; z-index: 1000; background-color: black;">
+                        &nbsp;
+                    </div>
+                    <div style="position: fixed; left: 45%; top: 35%; bottom: 0; right: 0; z-index: 1001;">
+                        <img src="{!URLFOR($Resource.WishReferralStyle, 'WishReferralStyle/img/loader-circle-blue.gif')}" />
+                    </div>
+                </apex:facet>
+            </apex:actionStatus>
+        </apex:outputPanel>
+        
+        <script>
+        function ShowSuccessMsg() {
+            $('body').append('<div class="notification"><div><h6>Thank you for updating the contact information! Your changes have been recorded and sent to the Chapter Staff for approval.</h6></div></div>').fadeIn();
+            $('.notification').delay(4000).fadeOut();
+            delay(function() {
+                $('.notification').remove();
+            }, 4500);
+        }
+        </script>
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"/>
+    </body>
 </apex:page>

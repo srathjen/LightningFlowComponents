@@ -58,9 +58,9 @@
         <fullName>Account_Email__c</fullName>
         <description>It will be used to store the account email</description>
         <externalId>false</externalId>
-        <formula>Volunteer__r.Account.Email__c</formula>
+        <formula>Volunteer__r.Region_Chapter__r.Email__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Account Email</label>
+        <label>Hidden Account Email</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -71,9 +71,9 @@
         <fullName>Account_Name__c</fullName>
         <description>It will be used to store the account  name</description>
         <externalId>false</externalId>
-        <formula>Volunteer__r.Account.Name</formula>
+        <formula>Volunteer__r.Region_Chapter__r.Name</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Account Name</label>
+        <label>Hidden Account Name</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -84,9 +84,9 @@
         <fullName>Account_Phone__c</fullName>
         <description>It will be used to store the account phone</description>
         <externalId>false</externalId>
-        <formula>Volunteer__r.Account.Phone</formula>
+        <formula>Volunteer__r.Region_Chapter__r.Phone</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Account Phone</label>
+        <label>Hidden Account Phone</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -346,18 +346,22 @@
         <customTabListAdditionalFields>Active__c</customTabListAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
+    <sharingReasons>
+        <fullName>Chapter_Staff__c</fullName>
+        <label>Chapter_Staff</label>
+    </sharingReasons>
     <validationRules>
         <fullName>BC_Date_Of_Completed_validation</fullName>
         <active>true</active>
         <description>Date of Completed should be mandatory while entering Status .</description>
-        <errorConditionFormula>(Text(Status__c) != null || NOT(ISBLANK( Date__c ))) &amp;&amp; (ISBLANK(Date_Completed__c))</errorConditionFormula>
+        <errorConditionFormula>(Text(Status__c) != null || NOT(ISBLANK( Date__c ))) &amp;&amp; (ISBLANK(Date_Completed__c))&amp;&amp; Migrated_Record__c = false</errorConditionFormula>
         <errorMessage>Please enter the value for Date Completed.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>BC_Status_validation</fullName>
         <active>true</active>
         <description>Status should be mandatory while entering Date of Completed.</description>
-        <errorConditionFormula>Text(Status__c) = null &amp;&amp;  Not(ISBLANK(Date_Completed__c))</errorConditionFormula>
+        <errorConditionFormula>Text(Status__c) = null &amp;&amp;  Not(ISBLANK(Date_Completed__c)) &amp;&amp; Migrated_Record__c = false</errorConditionFormula>
         <errorMessage>Please enter the value for status</errorMessage>
     </validationRules>
 </CustomObject>

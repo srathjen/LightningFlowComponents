@@ -993,7 +993,7 @@
         <description>It shows Do Not Contact Notes or related contacts</description>
         <externalId>false</externalId>
         <label>Do Not Contact Notes</label>
-        <length>100</length>
+        <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
@@ -1087,6 +1087,48 @@
         <unique>true</unique>
     </fields>
     <fields>
+        <fullName>Family_Dynamics__c</fullName>
+        <externalId>false</externalId>
+        <label>Family Dynamics</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Two Parent Household</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Divided/Multiple Household</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Single Parent Household</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Legal Guardian(s)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Foster Parent(s)</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Group Home</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Other</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Fax</fullName>
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
@@ -1113,7 +1155,7 @@
         <fullName>In_Kind_Approval_Status__c</fullName>
         <description>Picklist state status of in-kind approval</description>
         <externalId>false</externalId>
-        <label>In-Kind Approval Status</label>
+        <label>Hidden In-Kind Approval Status</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
@@ -1165,7 +1207,7 @@
         <defaultValue>false</defaultValue>
         <description>This field is used to identify the whether the in kind donors account approved or not.</description>
         <externalId>false</externalId>
-        <label>Is Approved</label>
+        <label>Hidden Is Approved</label>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Checkbox</type>
     </fields>
@@ -1186,7 +1228,7 @@
         <fullName>MAC_Email__c</fullName>
         <description>This filed is used to store the value of MAC Email.</description>
         <externalId>false</externalId>
-        <label>MAC Email</label>
+        <label>Hidden MAC Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Email</type>
@@ -2022,7 +2064,7 @@ Help Text</description>
         <fullName>Wish_Co_ordinator_Hidden_Email__c</fullName>
         <description>This filed is used to get wish co-ordinator email</description>
         <externalId>false</externalId>
-        <label>Wish Coordinator Hidden Email</label>
+        <label>Wish Co-ordinator Hidden Email</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Email</type>
@@ -2033,7 +2075,7 @@ Help Text</description>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>This field will look up to the wish coordinator(User)</description>
         <externalId>false</externalId>
-        <label>Wish Coordinator</label>
+        <label>Wish Co-ordinator</label>
         <referenceTo>User</referenceTo>
         <relationshipName>Accounts4</relationshipName>
         <required>false</required>
@@ -3617,7 +3659,8 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
     <listViews>
         <fullName>Chapter_Accounts</fullName>
         <columns>ACCOUNT.NAME</columns>
-        <columns>ACCOUNT.SITE</columns>
+        <columns>Email__c</columns>
+        <columns>Referral_Form_Password__c</columns>
         <columns>ACCOUNT.ADDRESS1_STATE_CODE</columns>
         <columns>ACCOUNT.PHONE1</columns>
         <columns>ACCOUNT.TYPE</columns>
@@ -4792,6 +4835,89 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Timezone__c</picklist>
+            <values>
+                <fullName>%28GMT-02%3A00%29 Brasilia Summer Time %28America%2FSao_Paulo%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-03%3A00%29 Argentina Time %28America%2FArgentina%2FBuenos_Aires%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-03%3A00%29 Chile Summer Time %28America%2FSantiago%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-03%3A30%29 Newfoundland Standard Time %28America%2FSt_Johns%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-04%3A00%29 Atlantic Standard Time %28America%2FHalifax%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-04%3A00%29 Atlantic Standard Time %28America%2FPuerto_Rico%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-04%3A30%29 Venezuela Time %28America%2FCaracas%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-05%3A00%29 Colombia Time %28America%2FBogota%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-05%3A00%29 Eastern Standard Time %28America%2FIndiana%2FIndianapolis%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-05%3A00%29 Eastern Standard Time %28America%2FNew_York%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-05%3A00%29 Eastern Standard Time %28America%2FPanama%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-05%3A00%29 Peru Time %28America%2FLima%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-06%3A00%29 Central Standard Time %28America%2FChicago%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-06%3A00%29 Central Standard Time %28America%2FEl_Salvador%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-06%3A00%29 Central Standard Time %28America%2FMexico_City%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-07%3A00%29 Mountain Standard Time %28America%2FDenver%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-07%3A00%29 Mountain Standard Time %28America%2FPhoenix%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-08%3A00%29 Pacific Standard Time %28America%2FLos_Angeles%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-08%3A00%29 Pacific Standard Time %28America%2FTijuana%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>%28GMT-09%3A00%29 Alaska Standard Time %28America%2FAnchorage%29</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Type</picklist>
             <values>
                 <fullName>Corporate</fullName>
@@ -4877,6 +5003,37 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Family_Dynamics__c</picklist>
+            <values>
+                <fullName>Divided%2FMultiple Household</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Foster Parent%28s%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Group Home</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legal Guardian%28s%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Single Parent Household</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Two Parent Household</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -5027,6 +5184,77 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             </values>
             <values>
                 <fullName>Subsidiary</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>PrimaryLanguage__c</picklist>
+            <values>
+                <fullName>American Sign Language</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Arabic</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Chinese</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>English</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>French and French Creole</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>German</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hindi</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Italian</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Japanese</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Korean</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Polish</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Portuguese</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Russian</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Spanish</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Tagalog</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Vietnamese</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

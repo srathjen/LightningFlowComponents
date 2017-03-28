@@ -311,6 +311,29 @@ Public Class LeadDuplicate_AC
       displayPartASuccess = True;
       
    }
+   //Completing dupcheck
+   public PageReference CompleteDupeCheck()
+   {
+   
+      Lead updateLead = new Lead();
+      updateLead.id = currLead.Id;
+         
+      updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
+      updateLead.Override_Dupe_Check__c = True;
+      updateLead.Medical_Professional_ContactId__c = medicalConId;
+      if(hideTreatingSection == false && (treatingContactId != Null && treatingContactId !=''))
+         updateLead.Treating_Medical_Professional_Contact_Id__c = treatingContactId;
+      else if(hideTreatingSection == True)
+          updateLead.Treating_Medical_Professional_Contact_Id__c = medicalConId;
+      updateLead.Wish_Family_ContactId__c = contactId;
+      updateLead.Contact_Dup_Check__c = 'Block Contact Dup';
+      updateLead.Dup_Check__c = 'Block Lead Dup';
+      Update updateLead;
+     PageReference reference=new PageReference('/'+currLead.id);
+     reference.setRedirect(true);
+     return reference;
+      
+   }
    
    // Redirecting to Lead Detail page.
    public pagereference GoToLeadViewPage()

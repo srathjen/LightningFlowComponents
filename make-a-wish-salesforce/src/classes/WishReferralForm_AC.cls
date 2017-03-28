@@ -48,7 +48,7 @@ currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
         currLead.PD_ICD_Code__c = diagnosisFilter;
         currLead.PD_Condition_Description__c = selectedDiagnosis;
         
-        currLead.Company = 'Make A Wish America';
+        currLead.Company = 'Make-A-Wish';
         currLead.LastName = lastName;
         String zipCode='';
         String label = '';

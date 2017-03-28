@@ -5,11 +5,11 @@
         <name>About_Me__c</name>
     </fields>
     <fields>
-        <label><!-- Account Email --></label>
+        <label><!-- Hidden Account Email --></label>
         <name>Account_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Account Phone --></label>
+        <label><!-- Hidden Account Phone --></label>
         <name>Account_Phone__c</name>
     </fields>
     <fields>
@@ -253,7 +253,7 @@
         <name>Book_Story__c</name>
     </fields>
     <fields>
-        <label><!-- Broadcast Number --></label>
+        <label><!-- Hidden Broadcast Number --></label>
         <name>Broadcast_Number__c</name>
     </fields>
     <fields>
@@ -305,7 +305,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Account Name --></label>
+        <label><!-- Hidden Account Name --></label>
         <name>Contact_Account_Name__c</name>
     </fields>
     <fields>
@@ -380,8 +380,8 @@
             <translation><!-- Friend --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Neighbour</masterLabel>
-            <translation><!-- Neighbour --></translation>
+            <masterLabel>Neighbor</masterLabel>
+            <translation><!-- Neighbor --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Other</masterLabel>
@@ -390,6 +390,10 @@
         <picklistValues>
             <masterLabel>Parent</masterLabel>
             <translation><!-- Parent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partner</masterLabel>
+            <translation><!-- Partner --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Spouse</masterLabel>
@@ -417,7 +421,7 @@
         <name>First_Last_Initial__c</name>
     </fields>
     <fields>
-        <label><!-- First Recipient Name --></label>
+        <label><!-- Hidden First Recipient Name --></label>
         <name>First_Recipient_Name__c</name>
     </fields>
     <fields>
@@ -447,6 +451,14 @@
             <masterLabel>Male</masterLabel>
             <translation><!-- Male --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hidden Mobile Phone --></label>
+        <name>HiddenMobilePhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Other Phone --></label>
+        <name>HiddenOtherPhone__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Country --></label>
@@ -659,15 +671,15 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- IsContactInfoUpdated --></label>
+        <label><!-- Hidden IsContactInfoUpdated --></label>
         <name>IsContactInfoUpdated__c</name>
     </fields>
     <fields>
-        <label><!-- IsFirstParentGuardian --></label>
+        <label><!-- Hidden IsFirstParentGuardian --></label>
         <name>IsFirstParentGuardian__c</name>
     </fields>
     <fields>
-        <label><!-- IsParentGuardian --></label>
+        <label><!-- Hidden IsParentGuardian --></label>
         <name>IsParentGuardian__c</name>
         <picklistValues>
             <masterLabel>ParentGuardian</masterLabel>
@@ -679,15 +691,15 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- IsRecall Contact Info --></label>
+        <label><!-- Hidden IsRecall Contact Info --></label>
         <name>IsRecall_Contact_Info__c</name>
     </fields>
     <fields>
-        <label><!-- IsRejected Contact Info --></label>
+        <label><!-- Hidden IsRejected Contact Info --></label>
         <name>IsRejected_Contact_Info__c</name>
     </fields>
     <fields>
-        <label><!-- IsSigned --></label>
+        <label><!-- Hidden IsSigned --></label>
         <name>IsSigned__c</name>
     </fields>
     <fields>
@@ -895,7 +907,7 @@ and the date it was or will be granted. --></help>
         <name>Parent_Guardian_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Parent/Legal Guardian --></label>
+        <label><!-- Hidden Parent/Legal Guardian --></label>
         <name>Parent_Legal_Guardian__c</name>
     </fields>
     <fields>
@@ -1393,7 +1405,7 @@ and the date it was or will be granted. --></help>
         <name>RE_Work_Phone__c</name>
     </fields>
     <fields>
-        <label><!-- RE Work Phone --></label>
+        <label><!-- RE Work Phone_c --></label>
         <name>RE_Work_Phone_c__c</name>
     </fields>
     <fields>
@@ -1444,8 +1456,8 @@ and the date it was or will be granted. --></help>
             <translation><!-- Other --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>White</masterLabel>
-            <translation><!-- White --></translation>
+            <masterLabel>White or Caucasian</masterLabel>
+            <translation><!-- White or Caucasian --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -1534,7 +1546,7 @@ and the date it was or will be granted. --></help>
         <name>Recently_Completed_Training_Date__c</name>
     </fields>
     <fields>
-        <label><!-- First Recipient Email --></label>
+        <label><!-- Hidden First Recipient Email --></label>
         <name>Recipient_Email__c</name>
     </fields>
     <fields>
@@ -1754,11 +1766,11 @@ and the date it was or will be granted. --></help>
         <name>Same_as_Household_Address__c</name>
     </fields>
     <fields>
-        <label><!-- Second Recipient Email --></label>
+        <label><!-- Hidden Second Recipient Email --></label>
         <name>Second_Recipient_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Second Recipient Name --></label>
+        <label><!-- Hidden Second Recipient Name --></label>
         <name>Second_Recipient_Name__c</name>
     </fields>
     <fields>
@@ -2192,7 +2204,7 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- State --></label>
+        <label><!-- Hidden State --></label>
         <name>State__c</name>
     </fields>
     <fields>
@@ -2206,6 +2218,30 @@ provide contact information for each site on which you are active. --></help>
     <fields>
         <label><!-- Suffix --></label>
         <name>Suffix__c</name>
+        <picklistValues>
+            <masterLabel>II</masterLabel>
+            <translation><!-- II --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>III</masterLabel>
+            <translation><!-- III --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IV</masterLabel>
+            <translation><!-- IV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jr.</masterLabel>
+            <translation><!-- Jr. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sr.</masterLabel>
+            <translation><!-- Sr. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>V</masterLabel>
+            <translation><!-- V --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- TV Show --></label>
@@ -2539,19 +2575,19 @@ provide contact information for each site on which you are active. --></help>
         <name>Zip_Employer__c</name>
     </fields>
     <fields>
-        <label><!-- isApplication --></label>
+        <label><!-- Hidden isApplication --></label>
         <name>isApplication__c</name>
     </fields>
     <fields>
-        <label><!-- isApproved --></label>
+        <label><!-- Hidden isApproved --></label>
         <name>isApproved__c</name>
     </fields>
     <fields>
-        <label><!-- is Active Volunteer --></label>
+        <label><!-- Hidden is Active Volunteer --></label>
         <name>is_Active_Volunteer__c</name>
     </fields>
     <fields>
-        <label><!-- is Application --></label>
+        <label><!-- Hidden is Application --></label>
         <name>is_Application__c</name>
         <picklistValues>
             <masterLabel>Approved</masterLabel>
@@ -2579,17 +2615,17 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Alternate Email is an optional fourth email: Not personal, preferred, or work email. --></help>
+        <help>L’e-mail secondaire est un quatrième e-mail optionnel : en plus du personnel, préféré ou professionnel.</help>
         <label><!-- Alternate Email --></label>
         <name>npe01__AlternateEmail__c</name>
     </fields>
     <fields>
-        <help><!-- See Preferred Email field. --></help>
+        <help>Voir le champ d’e-mail préféré.</help>
         <label><!-- Personal Email --></label>
         <name>npe01__HomeEmail__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: Uses primary address type field to determine Home Address from Mailing or Other address. --></help>
+        <help>Formule : Utilise le champ de type d’adresse principale pour déterminer l’adresse de domicile à partir de l’adresse postale ou d’une autre adresse.</help>
         <label><!-- Home Address --></label>
         <name>npe01__Home_Address__c</name>
     </fields>
@@ -2604,17 +2640,17 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__Lifetime_Giving_History_Amount__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: In order of preference, the SYSTEM_AccountType field, the Account Type field, and &quot;Organization&quot;. --></help>
+        <help>Formule : Par ordre de préférence, le champ SYSTEM_AccountType, le champ type de compte, et « Organisation ».</help>
         <label><!-- Organization Type --></label>
         <name>npe01__Organization_Type__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: If the Primary Address Type is Other, the Mailing Address.  If the Secondary Address Type is Other, the Other Address. --></help>
+        <help>Formule : Si le type d’adresse principale est Autre, l’adresse postale.  Si le type d’adresse secondaire est Autre, l’autre adresse.</help>
         <label><!-- Other Address --></label>
         <name>npe01__Other_Address__c</name>
     </fields>
     <fields>
-        <help><!-- Which phone number should be used for most communications involving this Contact? --></help>
+        <help>Quel numéro de téléphone doit être utilisé pour la plupart des communications impliquant ce contact ?</help>
         <label><!-- Preferred Phone --></label>
         <name>npe01__PreferredPhone__c</name>
         <picklistValues>
@@ -2635,7 +2671,7 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Which email should be used for most communications involving this Contact? --></help>
+        <help>Quel e-mail doit être utilisé pour la plupart des communications impliquant ce contact ?</help>
         <label><!-- Preferred Email --></label>
         <name>npe01__Preferred_Email__c</name>
         <picklistValues>
@@ -2652,51 +2688,51 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Which type of address is the mailing address? --></help>
+        <help>Quel est le type de l’adresse postale ?</help>
         <label><!-- Primary Address Type --></label>
         <name>npe01__Primary_Address_Type__c</name>
         <picklistValues>
             <masterLabel>Home</masterLabel>
-            <translation><!-- Home --></translation>
+            <translation>Domicile</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Other</masterLabel>
-            <translation><!-- Other --></translation>
+            <translation>Autre</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Work</masterLabel>
-            <translation><!-- Work --></translation>
+            <translation>Travail</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Excludes this Contact from One to One or Bucket account processing. --></help>
+        <help>Exclut ce contact du traitement de comptes autocréés ou de comptes de panier.</help>
         <label><!-- Private --></label>
         <name>npe01__Private__c</name>
     </fields>
     <fields>
-        <help><!-- What type of address is the other address? --></help>
+        <help>Quel est le type de l’autre adresse ?</help>
         <label><!-- Secondary Address Type --></label>
         <name>npe01__Secondary_Address_Type__c</name>
         <picklistValues>
             <masterLabel>Home</masterLabel>
-            <translation><!-- Home --></translation>
+            <translation>Domicile</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Other</masterLabel>
-            <translation><!-- Other --></translation>
+            <translation>Autre</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Work</masterLabel>
-            <translation><!-- Work --></translation>
+            <translation>Travail</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Indicates which model drives Account relationship behavior: Individual (Bucket) or One-to-One --></help>
-        <label><!-- _SYSTEM: ACCOUNT PROCESSOR --></label>
+        <help>Indique le modèle qui définit la relation du compte : Individus (panier) ou autocréé</help>
+        <label><!-- DEPRECATED - _SYSTEM: ACCOUNT PROCESSOR --></label>
         <name>npe01__SystemAccountProcessor__c</name>
         <picklistValues>
             <masterLabel>Individual</masterLabel>
-            <translation><!-- Individual --></translation>
+            <translation>Individu</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>One-to-One</masterLabel>
@@ -2714,17 +2750,17 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__Type_of_Account__c</name>
     </fields>
     <fields>
-        <help><!-- See Preferred Email field. --></help>
+        <help>Voir le champ d’e-mail préféré.</help>
         <label><!-- Work Email --></label>
         <name>npe01__WorkEmail__c</name>
     </fields>
     <fields>
-        <help><!-- See &apos;Preferred Phone&apos; field. --></help>
+        <help>Voir le champ de téléphone préféré.</help>
         <label><!-- Work Phone --></label>
         <name>npe01__WorkPhone__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: If the Primary Address Type is Work, the Mailing Address.  If the Secondary Address Type is Work, the Other Address. --></help>
+        <help>Formule : Si le type d’adresse principale est Professionnel, l’adresse postale.  Si le type d’adresse secondaire est Professionnel, l’autre adresse.</help>
         <label><!-- Work Address --></label>
         <name>npe01__Work_Address__c</name>
     </fields>
@@ -2802,7 +2838,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npo02__MembershipJoinDate__c</name>
     </fields>
     <fields>
-        <help><!-- Determines which household names this contact is NOT included as part of. --></help>
+        <help>Détermine de quels noms de foyer ce contact ne fait PAS partie.</help>
         <label><!-- Naming Exclusions --></label>
         <name>npo02__Naming_Exclusions__c</name>
         <picklistValues>
@@ -2871,22 +2907,22 @@ provide contact information for each site on which you are active. --></help>
         <name>npo02__SmallestAmount__c</name>
     </fields>
     <fields>
-        <help><!-- Total soft credit amount last year. --></help>
+        <help>Montant total de crédit de groupe de l’année dernière.</help>
         <label><!-- Soft Credit Last Year --></label>
         <name>npo02__Soft_Credit_Last_Year__c</name>
     </fields>
     <fields>
-        <help><!-- Total soft credit amount this year --></help>
+        <help>Montant total de crédit de groupe cette année</help>
         <label><!-- Soft Credit This Year --></label>
         <name>npo02__Soft_Credit_This_Year__c</name>
     </fields>
     <fields>
-        <help><!-- Total amount in soft credits for this Contact&apos;s lifetime. Defined in the Household Settings tab. --></help>
+        <help>Montant total en crédits de groupe sur la durée de vie de ce contact. Défini dans l’onglet de configuration de foyer.</help>
         <label><!-- Soft Credit Total --></label>
         <name>npo02__Soft_Credit_Total__c</name>
     </fields>
     <fields>
-        <help><!-- Total soft credit amount two years ago. --></help>
+        <help>Montant total de crédit de groupe il y a deux ans.</help>
         <label><!-- Soft Credit Two Years Ago --></label>
         <name>npo02__Soft_Credit_Two_Years_Ago__c</name>
     </fields>
@@ -3048,10 +3084,6 @@ provide contact information for each site on which you are active. --></help>
             <section>Additional Info</section>
         </sections>
         <sections>
-            <label><!-- Board Member Details --></label>
-            <section>Board Member Details</section>
-        </sections>
-        <sections>
             <label><!-- Contact Information --></label>
             <section>Contact Information</section>
         </sections>
@@ -3182,10 +3214,6 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Referral Source Information --></label>
             <section>Referral Source Information</section>
-        </sections>
-        <sections>
-            <label><!-- Treatment Subspeciality --></label>
-            <section>Treatment Subspeciality</section>
         </sections>
         <sections>
             <label><!-- WIsh Child Details --></label>

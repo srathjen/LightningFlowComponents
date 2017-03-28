@@ -13,16 +13,17 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
                 volContactIdSet.add(newCOI.Volunteer_Contact__c);
         }
         
-        for(Contact VoluContact : [SELECT Id,Email,AccountId,Account.Name,Account.Phone,Account.Email__c FROM Contact WHERE Id IN : volContactIdSet]){
+        for(Contact VoluContact : [SELECT Id,Email,AccountId,OwnerId,Region_Chapter__r.Name,Region_Chapter__r.Phone,Region_Chapter__r.Email__c,Region_Chapter__c FROM Contact WHERE Id IN : volContactIdSet]){
             conMap.put(VoluContact.Id,VoluContact);
         }
         
         for(Conflict_Of_Interest__c newCOI : Trigger.new){
             if(conMap.containsKey(newCOI.Volunteer_Contact__c)){
-                newCOI.Account_Name__c = conMap.get(newCOI.Volunteer_Contact__c).Account.Name;
-                newCOI.Account_Phone__c= conMap.get(newCOI.Volunteer_Contact__c).Account.Phone;
+                newCOI.Account_Name__c = conMap.get(newCOI.Volunteer_Contact__c).Region_Chapter__r.Name;
+                newCOI.Account_Phone__c= conMap.get(newCOI.Volunteer_Contact__c).Region_Chapter__r.Phone;
                 newCOI.Hidden_Volunteer_Contact_Email__c = conMap.get(newCOI.Volunteer_Contact__c).Email;
-                newCOI.Account_Email__c = conMap.get(newCOI.Volunteer_Contact__c).Account.Email__c;
+                newCOI.Account_Email__c = conMap.get(newCOI.Volunteer_Contact__c).Region_Chapter__r.Email__c;
+                newCOI.ownerId = conMap.get(newCOI.Volunteer_Contact__c).OwnerId;
             }
             
             if(newCOI.Signed_Date__c != Null && (Trigger.isInsert || (Trigger.isUpdate && newCOI.Signed_Date__c != Trigger.oldMap.get(newCOI.id).Signed_Date__c)))
@@ -38,7 +39,7 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
      {
          Set<Id> recordIds = new Set<Id>();
          Set<Id> volunteerIds = new Set<Id>();
-         
+         Map<String,List<Conflict_Of_Interest__c>> coiMap = new Map<String,List<Conflict_Of_Interest__c>>();
          for(Conflict_Of_Interest__c  currCOI : Trigger.new)
          {
             if(currCOI.Active__c == True)
@@ -46,12 +47,20 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
                 recordIds.add(currCOI.Id);
                 volunteerIds.add(currCOI.Volunteer_Contact__c);
             }
+            
+            if(coiMap.containsKey(currCOI.Account_Name__c))
+                  coiMap.get(currCOI.Account_Name__c).add(currCOI);
+            else
+                  coiMap.put(currCOI.Account_Name__c,new List<Conflict_Of_Interest__c>{currCOI});
          }
          
         if(volunteerIds.size() > 0 && recordIds.size() > 0)
         {
           UpdateExistingRecords(recordIds,volunteerIds);
         }
+        
+        if(coiMap.size() > 0)
+          ChapterStaffRecordSharing_AC.COIRecordSharing(coiMap);
      }
      
      // Updating COI Expiration Date on Volunteer Contact.

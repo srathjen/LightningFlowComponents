@@ -60,6 +60,7 @@ Public class LeadDuplicate_ACTest
     
      controller.nextStep();
      controller.ContinuePartAForm();
+     controller.CompleteDupeCheck();
   
   }
   

@@ -190,6 +190,11 @@ Public Class WishChildFormUtil
         public String tshirtSize{get;set;}
         public String medicalNeeds{get;set;}
         public String residingWishMedical{get;set;}
+        public String City{get;set;}
+        public String Street{get;set;}
+        public String State{get;set;}
+        public String PostalCode{get;set;}
+        
         public String relId{get;set;}
         public boolean sameParentGuardianFlag = false;
         public boolean isChildParticipants {get; set;}
@@ -266,10 +271,10 @@ Public Class WishChildFormUtil
             if(!SelectedNameList.isEmpty()) {           
                 for(String Str : SelectedNameList) {
                 if(Start) {
-                    currString = Str+';';
+                    currString = Str;
                     Start = false;
                 } else {               
-                    currString = currString + ';' + Str;
+                    currString = currString +','+' ' + Str;
                 }
                 }
                

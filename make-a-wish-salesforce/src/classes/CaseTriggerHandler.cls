@@ -31,7 +31,7 @@ public class CaseTriggerHandler {
             accountOfficeMap.put(currOffice.Chapter__r.Name,currOffice );
         }
         List<Case> lstParentWishes=[SELECT Id, RecordTypeId, Subject, Unique_Wish_Record_Identifier__c,Fund_Id__c, ChapterName__c,ChapterName__r.Name  FROM Case WHERE Id In: ParentIdsSet and RecordTypeId =: recTypeId Order BY CreatedDate desc];
-        List<Case> lstParentWisheRecordTypes = [SELECT Id, Unique_Wish_Record_Identifier__c, ChapterName__c,ChapterName__r.Name FROM Case WHERE RecordTypeId =: recTypeId and  Unique_Wish_Record_Identifier__c !=null and Migrated_Record__c=false and Lead__r.unique_wish_identifier__c =null Order BY CreatedDate desc Limit 2];
+        List<Case> lstParentWisheRecordTypes = [SELECT Id, Unique_Wish_Record_Identifier__c, ChapterName__c,ChapterName__r.Name FROM Case WHERE RecordTypeId =: recTypeId and  Unique_Wish_Record_Identifier__c !=null and Migrated_Record__c=false and Lead__r.unique_wish_identifier__c=null Order BY CreatedDate desc Limit 2];
         System.debug('Parent Wishes 1:' + lstParentWishes);
         System.debug('Parent Wishes 2:' + lstParentWisheRecordTypes );
         if(IsFYChanged){
@@ -129,7 +129,7 @@ public class CaseTriggerHandler {
                 Case newWish = new Case(ChapterName__c = wishDetails.ChapterName__c, Wish_Type__c ='Standard', Subject = wishType.split('-')[0] +' - '+wishContactMap.get(wishDetails.Id), ParentId = wishDetails.Id, AccountId=wishDetails.AccountId,ContactId=wishDetails.ContactId,Origin = 'Web',RecordTypeId=wishType.split('-')[1], OwnerId = wishDetails.OwnerId);
                 newWishList.add(newWish);
             } else{
-                Case newWish = new Case(ChapterName__c = wishDetails.ChapterName__c, Wish_Type__c = wishDetails.Wish_type__c ,Subject = wishType.split('-')[0], ParentId = wishDetails.ParentId, AccountId=wishDetails.AccountId,ContactId=wishDetails.ContactId,Origin = 'Web',RecordTypeId=wishType.split('-')[1], OwnerId = wishDetails.OwnerId);
+                Case newWish = new Case(ChapterName__c = wishDetails.ChapterName__c, Wish_Type__c = wishDetails.Wish_type__c ,Subject = wishType.split('-')[0], ParentId = wishDetails.ParentId ,Origin = 'Web',RecordTypeId=wishType.split('-')[1], OwnerId = wishDetails.OwnerId);
                 newWishList.add(newWish);
             }
         }
@@ -467,7 +467,7 @@ dbLeads.Status = 'DNQ';
     public static void wishDeterminationSubCaseTaskCreation(List<Case> caseList, Set<Id> caseIds) {
         
         Constant_AC  constant = new Constant_Ac();    
-        Id defaultRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
+        Id defaultRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         Id determinationChapterActionRT = Schema.Sobjecttype.Chapter_Action_Track__c.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         
         Map<Id, Id> caseTeamMemberMap = new Map<Id, Id>();
@@ -480,6 +480,17 @@ dbLeads.Status = 'DNQ';
             } 
         }
         
+        List<Task> birthDayTaskList = new List<Task>();
+        for(Task birthdayTaskInfo : [SELECT Id, WhatId, Subject, OwnerId FROM Task WHERE Subject = 'Wish Child Birthday Reminder' AND WhatId IN : caseIds AND isClosed = false]) {
+            if(caseTeamMemberMap.containsKey(birthdayTaskInfo.WhatId)) {
+                birthdayTaskInfo.OwnerId = caseTeamMemberMap.get(birthdayTaskInfo.WhatId);
+                birthDayTaskList.add(birthdayTaskInfo);
+            }
+            
+        }   
+        if(birthDayTaskList.size() > 0) {
+            update birthDayTaskList;
+        }
         //Used get all chapter action track for wish determination case
         List<Chapter_Action_Track__c> subTaskList = [SELECT Id, Task_Name__c, Description__c, Due_Days__c, Sort_Order__c FROM Chapter_Action_Track__c WHERE RecordtypeId =: determinationChapterActionRT];
         if(subTaskList.size() > 0) {
@@ -492,7 +503,7 @@ dbLeads.Status = 'DNQ';
                     }
                     newSubTask.WhatId = createTasks.ParentId;
                     newSubTask.RecordTypeId = defaultRecordTypeId;
-                    newSubTask.WhoId = createTasks.ContactId;
+                    //newSubTask.WhoId = createTasks.ContactId;
                     newSubTask.Description = createSubTask.Description__c;
                     if(caseTeamMemberMap.containsKey(createTasks.ParentId)) {
                         newSubTask.OwnerId = caseTeamMemberMap.get(createTasks.ParentId);
@@ -510,6 +521,8 @@ dbLeads.Status = 'DNQ';
     public static void inTerviewTask(Set<Id> interViewCloseTaskIdsSet, Set<Id> interViewOpenTaskIdsSet, Map<Id, Case> interviewTaskParentIdMap) {
         Constant_AC  constant = new Constant_Ac();    
         Id defaultRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
+        Id determinationRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+            
         Map<Id, Id> caseTeamMemberMap = new Map<Id, Id>();
         //Used to get case and its case team members
         for(CaseTeamMember caseTeamMem : [SELECT Id, ParentId, MemberId, TeamRoleId  FROM CaseTeamMember WHERE ParentId IN : interviewTaskParentIdMap.keySet() AND TeamRole.Name = 'Wish Granter' ORDER BY CreatedDate DESC]) {
@@ -532,7 +545,7 @@ dbLeads.Status = 'DNQ';
                 newSubTask.Subject = 'Enter interview date';
                 newSubTask.ActivityDate = System.Today() + 7;
                 newSubTask.WhatId = parentId;
-                newSubTask.RecordTypeId = defaultRecordTypeId;
+                newSubTask.RecordTypeId = determinationRT;
                 if(interviewTaskParentIdMap.containsKey(parentId))  {
                     newSubTask.WhoId = interviewTaskParentIdMap.get(parentId).contactId;
                 }
@@ -688,11 +701,17 @@ dbLeads.Status = 'DNQ';
     {
         Constant_AC  constant = new Constant_Ac();    
         Id taskPlanningRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+        Id chapterRecordTypeId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
         String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Date todayDate;
         List<Task> planingAnticipationTaskList = new List<Task>();
         Integer monthCount = 0;
         Map<String, List<Chapter_Action_Track__c>> chapterActionMap = new Map<String, List<Chapter_Action_Track__c>>();
+        Map<Id,Id> chapterCoordinatorMap = new Map<Id, Id>();
+        
+        for(Account chapterInfo : [SELECT Id, Wish_Co_ordinator__c FROM Account WHERE RecordTypeId =: chapterRecordTypeId]) {
+            chapterCoordinatorMap.put(chapterInfo.Id, chapterInfo.Wish_Co_ordinator__c);
+        }
         for(Chapter_Action_Track__c getTask : [SELECT Id, Task_Name__c, Chapter_Name__c, Weeks__c, Months__c ,Wish_type__c, Sort_Order__c 
                                                FROM Chapter_Action_Track__c 
                                                ORDER BY Sort_Order__c ASC]) 
@@ -718,7 +737,13 @@ dbLeads.Status = 'DNQ';
                         newTask.WhatId = currCase.ParentId;
                         newTask.Subject = currActionTrack.Task_Name__c;
                         //newTask.OwnerId = currCase.OwnerId;
-                        newTask.OwnerId = currCase.Parent.OwnerId;
+                        
+                        if(chapterCoordinatorMap.size() > 0 && chapterCoordinatorMap.containsKey(currCase.Parent.ChapterName__c) && chapterCoordinatorMap.get(currCase.Parent.ChapterName__c) != null) {
+                            newTask.OwnerId = chapterCoordinatorMap.get(currCase.Parent.ChapterName__c);
+                        } else {
+                            newTask.OwnerId = currCase.Parent.OwnerId;
+                        }
+                        
                         newTask.RecordTypeId = taskPlanningRecordTypeId;
                         Integer months = Integer.valueOf(currActionTrack.Months__c);
                         Integer Weeks = Integer.valueOf(currActionTrack.Weeks__c);
@@ -776,7 +801,11 @@ dbLeads.Status = 'DNQ';
                         newTask.WhatId = currCase.ParentId;
                         newTask.Subject = currActionTrack.Task_Name__c;
                         //newTask.OwnerId = currCase.OwnerId;
-                        newTask.OwnerId = currCase.Parent.OwnerId;
+                         if(chapterCoordinatorMap.size() > 0 && chapterCoordinatorMap.containsKey(currCase.Parent.ChapterName__c) && chapterCoordinatorMap.get(currCase.Parent.ChapterName__c) != null) {
+                            newTask.OwnerId = chapterCoordinatorMap.get(currCase.Parent.ChapterName__c);
+                        } else {
+                            newTask.OwnerId = currCase.Parent.OwnerId;
+                        }
                         newTask.RecordTypeId = taskPlanningRecordTypeId;
                         Integer months = Integer.valueOf(currActionTrack.Months__c);
                         Integer Weeks = Integer.valueOf(currActionTrack.Weeks__c);
@@ -1093,7 +1122,7 @@ dbLeads.Status = 'DNQ';
                     newSubTask.Description = createSubTask.Description__c;
                     newSubTask.WhatId = createTasks.ParentId;
                     newSubTask.RecordTypeId = wishGrantTaskRT;
-                    newSubTask.WhoId = createTasks.ContactId;
+                    //newSubTask.WhoId = createTasks.ContactId;
                     if(caseTeamMemberMap.containsKey(createTasks.ParentId)) {
                         newSubTask.OwnerId = caseTeamMemberMap.get(createTasks.ParentId);
                     }

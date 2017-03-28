@@ -666,6 +666,18 @@ for fulfilment  the wish.</description>
         <type>Summary</type>
     </fields>
     <fields>
+        <fullName>Budget_Notes__c</fullName>
+        <description>Use for storing budget notes.</description>
+        <externalId>false</externalId>
+        <label>Budget Notes</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
         <fullName>Budget_Status__c</fullName>
         <description>This will indicate whether budget is approved or pending.</description>
         <externalId>false</externalId>
@@ -734,7 +746,7 @@ for fulfilment  the wish.</description>
         <fullName>Case_Comment__c</fullName>
         <description>This field update is used to update case comment field on case when ever the case comment is created</description>
         <externalId>false</externalId>
-        <label>Case Comment</label>
+        <label>Hidden Case Comment</label>
         <length>131072</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -746,7 +758,7 @@ for fulfilment  the wish.</description>
         <fullName>Case_Member_Count__c</fullName>
         <description>It  displays the total number of case team member added to the case.</description>
         <externalId>false</externalId>
-        <label>Case Member Count</label>
+        <label>Hidden Case Member Count</label>
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
@@ -761,7 +773,7 @@ for fulfilment  the wish.</description>
         <externalId>false</externalId>
         <formula>&quot;ref:_&quot; &amp; LEFT($Organization.Id,5) &amp; SUBSTITUTE(RIGHT($Organization.Id,10), &quot;0&quot;, &quot;&quot; )&amp; &quot;._&quot; &amp; LEFT(Id,5) &amp; SUBSTITUTE(Left(RIGHT(Id,10), 5), &quot;0&quot;, &quot;&quot;) &amp; RIGHT(Id,5) &amp; &quot;:ref&quot;</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Case ThreadId</label>
+        <label>Hidden Case ThreadId</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -796,7 +808,7 @@ for fulfilment  the wish.</description>
         <fullName>Chapter_MACEmail__c</fullName>
         <description>This field is used to store the MAC email address.</description>
         <externalId>false</externalId>
-        <label>Chapter MACEmail</label>
+        <label>Hidden Chapter MACEmail</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1344,7 +1356,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Envelop_Id__c</fullName>
         <description>It store the docusign envelop Id.</description>
         <externalId>false</externalId>
-        <label>Envelop Id</label>
+        <label>Hidden Envelop Id</label>
         <length>200</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1622,6 +1634,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It is used to capture DV received date as hidden value for background process</description>
         <externalId>false</externalId>
         <formula>Lead__r.Part_A_Received__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Diagn Verifi Received Date</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -1694,9 +1707,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Hidden_Primary_Diagnosis_del__c</fullName>
-        <description>It is a hidden field used to hold the primary diagnosis value from the lead during conversion</description>
+        <description>It is used to capture the primary diagnosis as hidden value</description>
         <externalId>false</externalId>
         <formula>Lead__r.PD_Condition_Description__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Primary Diagnosis.</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -1938,7 +1952,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>InActiveWishGranter__c</fullName>
         <description>It is used to capture the inactivewishgranter</description>
         <externalId>false</externalId>
-        <label>InActiveWishGranter</label>
+        <label>Hidden InActiveWishGranter</label>
         <length>50</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1999,7 +2013,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <defaultValue>false</defaultValue>
         <description>This field is used to check interview date set or not</description>
         <externalId>false</externalId>
-        <label>Interview Date Not Set</label>
+        <label>Hidden Interview Date Not Set</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -2033,7 +2047,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <defaultValue>false</defaultValue>
         <description>This check box is used to lock the record when the sub status is &quot;Abandoned&quot;.</description>
         <externalId>false</externalId>
-        <label>IsLocked</label>
+        <label>Hidden IsLocked</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -2055,7 +2069,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <defaultValue>false</defaultValue>
         <description>This field is used to send rush wish clearence and child medical summary template when the Rush is checked in parent case.</description>
         <externalId>false</externalId>
-        <label>IsRushWishClearence&amp;ChildSummary</label>
+        <label>IsRushWishClearence&amp;ChildSummary Hidden</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -2077,7 +2091,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Is_a_wheelchair_accessible_vehicle_neede__c</fullName>
         <description>It  display the details about  wheelchair accessible vehicle needed or not</description>
         <externalId>false</externalId>
-        <label>Is a wheelchair accessible vehicle neede</label>
+        <label>Wheelchair accessible vehicle needed?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2210,7 +2224,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>LiabilitySignerMapKeyPair__c</fullName>
         <description>This field is used to store the Name and their pair when docusign call out is sent.</description>
         <externalId>false</externalId>
-        <label>LiabilitySignerMapKeyPair</label>
+        <label>Hidden LiabilitySignerMapKeyPair</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2398,6 +2412,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <fullName>Migrated_Record__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>Identity whether the record is migrated record or not</description>
         <externalId>false</externalId>
         <label>Migrated Record</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2445,7 +2460,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <defaultValue>false</defaultValue>
         <description>This field used in wish liability form</description>
         <externalId>false</externalId>
-        <label>Option1</label>
+        <label>Hidden Option1</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -2456,7 +2471,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <defaultValue>false</defaultValue>
         <description>This field used in wish liability form</description>
         <externalId>false</externalId>
-        <label>Option2</label>
+        <label>Hidden Option2</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -3102,6 +3117,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>RE_FE_Description__c</fullName>
+        <description>RE-FE Description</description>
         <externalId>false</externalId>
         <formula>Contact.LastName + &apos; &apos; +Contact.FirstName + &apos; &apos; + IF(!ISNULL(Contact.Birthdate),(TEXT(MONTH(Contact.Birthdate)) &amp; &quot;-&quot; &amp; TEXT(DAY(Contact.Birthdate)) &amp; &quot;-&quot; &amp; TEXT(YEAR(Contact.Birthdate))), &apos;&apos;)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
@@ -3291,7 +3307,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <externalId>false</externalId>
         <formula>Contact.Region_Code__r.Name</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>Add region to the child&apos;s contact record and it will be displayed here.</inlineHelpText>
         <label>Region</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -3403,7 +3418,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>SignerMapKeyPair__c</fullName>
         <description>It will hold the signer name for who are going to sign the docusign.</description>
         <externalId>false</externalId>
-        <label>SignerMapKeyPair</label>
+        <label>Hidden SignerMapKeyPair</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -3807,7 +3822,7 @@ on airplane</description>
         <defaultValue>false</defaultValue>
         <description>Once the wish is approved, we can update Wish child form details on Wish child and Wish record..</description>
         <externalId>false</externalId>
-        <label>Update Wish Child Form Info</label>
+        <label>Hidden Update Wish Child Form Info</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -4036,6 +4051,7 @@ on airplane</description>
     </fields>
     <fields>
         <fullName>Wish_Clearance_Received_Date__c</fullName>
+        <description>It is used to capture the wish clearance received date</description>
         <externalId>false</externalId>
         <label>Wish Clearance Received Date</label>
         <required>false</required>
@@ -4046,6 +4062,7 @@ on airplane</description>
     </fields>
     <fields>
         <fullName>Wish_Clearance_Sent_Date__c</fullName>
+        <description>It is used to capture the wish clearance sent date</description>
         <externalId>false</externalId>
         <label>Wish Clearance Sent Date</label>
         <required>false</required>
@@ -4056,7 +4073,9 @@ on airplane</description>
     </fields>
     <fields>
         <fullName>Wish_Clearance__c</fullName>
+        <description>It will holds wish clearance</description>
         <externalId>false</externalId>
+        <inlineHelpText>Is this wish appropriate?</inlineHelpText>
         <label>Wish Clearance</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4132,6 +4151,7 @@ on airplane</description>
     </fields>
     <fields>
         <fullName>Wish_Determined_Date__c</fullName>
+        <description>It will holds wish determined date</description>
         <externalId>false</externalId>
         <label>Wish Determined Date</label>
         <required>false</required>
@@ -4152,6 +4172,17 @@ on airplane</description>
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Wish_Family_Form_Submitted__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to identify whether wish family for submitted or not</description>
+        <externalId>false</externalId>
+        <label>Hidden Wish Family Form Submitted</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Wish_Family_Form__c</fullName>
         <defaultValue>true</defaultValue>
         <description>Indicate that form is completed or not.</description>
@@ -4166,7 +4197,7 @@ on airplane</description>
         <fullName>Wish_Granter_1_Cell__c</fullName>
         <description>This field is used to get wish granter 1 cell</description>
         <externalId>false</externalId>
-        <label>Wish Granter 1 Cell</label>
+        <label>Hidden Wish Granter 1 Cell</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -4177,7 +4208,7 @@ on airplane</description>
         <fullName>Wish_Granter_1__c</fullName>
         <description>This field is used to get wish granter 1</description>
         <externalId>false</externalId>
-        <label>Wish Granter 1</label>
+        <label>Hidden Wish Granter 1</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4190,7 +4221,7 @@ on airplane</description>
         <fullName>Wish_Granter_2_Cell__c</fullName>
         <description>This field is used to get wish granter 2 cell</description>
         <externalId>false</externalId>
-        <label>Wish Granter 2 Cell</label>
+        <label>Hidden Wish Granter 2 Cell</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -4212,7 +4243,7 @@ on airplane</description>
         <fullName>Wish_Liability_Envolep__c</fullName>
         <description>This field is used to store the the Wish liability envolep from docusign.</description>
         <externalId>false</externalId>
-        <label>Wish Liability Envolep</label>
+        <label>Hidden Wish Liability Envolep</label>
         <length>40</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4236,6 +4267,7 @@ on airplane</description>
     <fields>
         <fullName>Wish_Presentation_Set__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>Wish presentation</description>
         <externalId>false</externalId>
         <label>Wish Presentation Set</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4258,6 +4290,7 @@ on airplane</description>
     <fields>
         <fullName>Wish_Safety_Authorization_Part_B_Form__c</fullName>
         <defaultValue>false</defaultValue>
+        <description>Wish safety authorization</description>
         <externalId>false</externalId>
         <label>Wish Safety Auth Wish Clearance Form</label>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4267,6 +4300,7 @@ on airplane</description>
     </fields>
     <fields>
         <fullName>Wish_Type__c</fullName>
+        <description>Wish type</description>
         <externalId>false</externalId>
         <label>Wish National Type</label>
         <required>false</required>
@@ -4330,7 +4364,7 @@ on airplane</description>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>Electronics</fullName>
+                    <fullName>Electronics International - Sports</fullName>
                     <default>false</default>
                 </value>
                 <value>
@@ -4414,7 +4448,7 @@ on airplane</description>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>Travel - Hawaii</fullName>
+                    <fullName>Travel - Hawai</fullName>
                     <default>false</default>
                 </value>
                 <value>
@@ -4468,7 +4502,7 @@ If yes,  # of hours, agency and phone number information</description>
         <fullName>Wish_granter_2__c</fullName>
         <description>This field is used to get wish granter 2</description>
         <externalId>false</externalId>
-        <label>Wish granter 2</label>
+        <label>Hidden Wish granter 2</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4541,7 +4575,7 @@ If yes,  # of hours, agency and phone number information</description>
         <defaultValue>false</defaultValue>
         <description>It is used to identify whether the wish is approved or not</description>
         <externalId>false</externalId>
-        <label>isApprove</label>
+        <label>Hidden isApprove</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -4552,7 +4586,7 @@ If yes,  # of hours, agency and phone number information</description>
         <defaultValue>false</defaultValue>
         <description>It is used to identify email wishgranter</description>
         <externalId>false</externalId>
-        <label>isEmailWishGranter</label>
+        <label>Hidden isEmailWishGranter</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -4563,7 +4597,7 @@ If yes,  # of hours, agency and phone number information</description>
         <defaultValue>false</defaultValue>
         <description>It is used to identify is email or not</description>
         <externalId>false</externalId>
-        <label>isEmail</label>
+        <label>Hidden isEmail</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -4574,7 +4608,7 @@ If yes,  # of hours, agency and phone number information</description>
         <defaultValue>false</defaultValue>
         <description>This check box is used to identify when the national MAC team reply the case comment.</description>
         <externalId>false</externalId>
-        <label>isNationalReply</label>
+        <label>Hidden isNationalReply</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -4585,7 +4619,7 @@ If yes,  # of hours, agency and phone number information</description>
         <defaultValue>false</defaultValue>
         <description>This field is used to verify weather the email has been set to National team or not.</description>
         <externalId>false</externalId>
-        <label>isNational</label>
+        <label>Hidden isNational</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -4619,7 +4653,9 @@ arrangements/unique circumstances for any requested wish participant not residin
     </fields>
     <fields>
         <fullName>wish_involves_air_travel__c</fullName>
+        <description>It will holds air travel detail</description>
         <externalId>false</externalId>
+        <inlineHelpText>Does this wish involve air travel?</inlineHelpText>
         <label>Wish Involves Air Travel</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4662,6 +4698,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <fullName>AllOpenCases</fullName>
         <columns>Anticipated_Start_Date__c</columns>
         <columns>CASES.CASE_NUMBER</columns>
+        <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
         <columns>ACCOUNT.NAME</columns>
         <columns>NAME</columns>
         <columns>CASES.RECORDTYPE</columns>
@@ -5049,7 +5086,6 @@ arrangements/unique circumstances for any requested wish participant not residin
         <columns>CREATEDBY_USER.ALIAS</columns>
         <columns>Fund_Id__c</columns>
         <columns>Migrated_Record__c</columns>
-        <columns>From_Mulesoft__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CREATEDBY_USER.ALIAS</field>
@@ -5216,6 +5252,23 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Parent_Wish</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>CASES.PRIORITY</columns>
+        <columns>CASES.CREATED_DATE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.Wish</value>
+        </filters>
+        <label>Parent Wish</label>
     </listViews>
     <listViews>
         <fullName>Philadelphia_N_Delaware_Susquehanna_Case</fullName>
@@ -5437,23 +5490,6 @@ arrangements/unique circumstances for any requested wish participant not residin
             <allInternalUsers></allInternalUsers>
         </sharedTo>
     </listViews>
-    <listViews>
-        <fullName>parent_Wish</fullName>
-        <columns>CASES.CASE_NUMBER</columns>
-        <columns>NAME</columns>
-        <columns>CASES.SUBJECT</columns>
-        <columns>CASES.STATUS</columns>
-        <columns>CASES.PRIORITY</columns>
-        <columns>CASES.CREATED_DATE</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>CASES.RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Case.Wish</value>
-        </filters>
-        <label>parent Wish</label>
-    </listViews>
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
     <recordTypeTrackHistory>true</recordTypeTrackHistory>
     <recordTypes>
@@ -5632,6 +5668,17 @@ arrangements/unique circumstances for any requested wish participant not residin
         <businessProcess>Parent Wish Support process</businessProcess>
         <description>It will display the child and  parent related information.</description>
         <label>Wish</label>
+        <picklistValues>
+            <picklist>Adoptable__c</picklist>
+            <values>
+                <fullName>No</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
         <picklistValues>
             <picklist>Air_Travel_Details__c</picklist>
             <values>
@@ -5996,7 +6043,7 @@ arrangements/unique circumstances for any requested wish participant not residin
                 <default>false</default>
             </values>
             <values>
-                <fullName>Electronics</fullName>
+                <fullName>Electronics International - Sports</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -6080,7 +6127,7 @@ arrangements/unique circumstances for any requested wish participant not residin
                 <default>false</default>
             </values>
             <values>
-                <fullName>Travel - Hawaii</fullName>
+                <fullName>Travel - Hawai</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -6494,7 +6541,7 @@ arrangements/unique circumstances for any requested wish participant not residin
                 <default>false</default>
             </values>
             <values>
-                <fullName>Electronics</fullName>
+                <fullName>Electronics International - Sports</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -6574,7 +6621,7 @@ arrangements/unique circumstances for any requested wish participant not residin
                 <default>false</default>
             </values>
             <values>
-                <fullName>Travel - Hawaii</fullName>
+                <fullName>Travel - Hawai</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -7141,12 +7188,12 @@ arrangements/unique circumstances for any requested wish participant not residin
         <searchResultsAdditionalFields>CASES.CREATED_DATE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Read</sharingModel>
+    <sharingModel>Private</sharingModel>
     <validationRules>
         <fullName>Absent_Parent_Form_Validation</fullName>
         <active>false</active>
         <description>There should be a value for Date - Absent Parent Form when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Absent_Parent_Form__c = true, ISBLANK(  Date_Received_for_Absent_Parent_Form__c  ) )</errorConditionFormula>
+        <errorConditionFormula>AND(Absent_Parent_Form__c = true, ISBLANK(  Date_Received_for_Absent_Parent_Form__c),Migrated_Record__c = false )</errorConditionFormula>
         <errorDisplayField>Date_Received_for_Absent_Parent_Form__c</errorDisplayField>
         <errorMessage>There should be value on Date - Absent Parent Form when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7162,7 +7209,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <fullName>Case_Meet_PWL_Criteria_Validation</fullName>
         <active>true</active>
         <description>When Meet PWL Criteria field value is no then it force to enter the value for the &apos;Comment for PWL Not Met &apos; field</description>
-        <errorConditionFormula>AND(ISPICKVAL(Meet_PWL_Criteria__c ,&apos;No&apos;), ISBLANK(Comment_for_PWL_Not_Met__c))</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL(Meet_PWL_Criteria__c ,&apos;No&apos;), ISBLANK(Comment_for_PWL_Not_Met__c),Migrated_Record__c=false)</errorConditionFormula>
         <errorDisplayField>Comment_for_PWL_Not_Met__c</errorDisplayField>
         <errorMessage>Please enter an explanation why &apos;No&apos; is selected for &apos;Meet PWL Criteria&apos;</errorMessage>
     </validationRules>
@@ -7185,6 +7232,13 @@ arrangements/unique circumstances for any requested wish participant not residin
         <errorMessage>Please enter values to &apos;Rush Explanation &amp; Rush Timeframe&apos;  fields in order  to check Rush.</errorMessage>
     </validationRules>
     <validationRules>
+        <fullName>Case_Timeframe_Validation</fullName>
+        <active>false</active>
+        <description>To check for valid timeframe</description>
+        <errorConditionFormula>AND( ISPICKVAL(Status, &quot;Ready to Assign&quot;), Rush__c = TRUE, NOT Migrated_Record__c, OR(OR(Text(Rush_Timeframe__c) == Null,Text(Rush_Timeframe__c) == &apos;Select timeframe&apos;), ISBLANK(Rush_Explanation__c)) )</errorConditionFormula>
+        <errorMessage>Please select valid timeframe</errorMessage>
+    </validationRules>
+    <validationRules>
         <fullName>Case_Wish_Determined_Status_Validation</fullName>
         <active>true</active>
         <description>This validation will fire when the case status is wish determined and Meet PWL Criteria is empty</description>
@@ -7197,7 +7251,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <fullName>Childs_Medical_Summary_Form_Validation</fullName>
         <active>false</active>
         <description>There should be a value for Date - Child’s Medical Summary Form when wish status is Completed.</description>
-        <errorConditionFormula>AND( Child_s_Medical_Summary_Form__c  = true, ISBLANK(  Date_Received_for_Child_s_Medical_Summar__c  ) )</errorConditionFormula>
+        <errorConditionFormula>AND( Child_s_Medical_Summary_Form__c  = true, ISBLANK(  Date_Received_for_Child_s_Medical_Summar__c  ),Migrated_Record__c = false )</errorConditionFormula>
         <errorDisplayField>Date_Received_for_Child_s_Medical_Summar__c</errorDisplayField>
         <errorMessage>There should be value on Date - Child’s Medical Summary Form when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7205,7 +7259,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <fullName>Communication_Profile_Validation</fullName>
         <active>false</active>
         <description>There should be a value for Date - Communication Profile when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Communication_Profile__c  = true, ISBLANK(  Date_Received_for_Communication_Profile__c ) )</errorConditionFormula>
+        <errorConditionFormula>AND(  Communication_Profile__c  = true, ISBLANK(  Date_Received_for_Communication_Profile__c ),Migrated_Record__c=false )</errorConditionFormula>
         <errorDisplayField>Date_Received_for_Communication_Profile__c</errorDisplayField>
         <errorMessage>There should be value on Date - Communication Profile when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7220,7 +7274,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <fullName>Entertainment_Sports_Wish_LOValidation</fullName>
         <active>false</active>
         <description>There should be a value for Date - Entertainment &amp; Sports Wish LOU when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Entertainment_Sports_Wish_LOU__c   = true, ISBLANK(  Date_Received_for_Entertainment_Sports__c  ) )</errorConditionFormula>
+        <errorConditionFormula>AND(  Entertainment_Sports_Wish_LOU__c   = true, ISBLANK(  Date_Received_for_Entertainment_Sports__c),Migrated_Record__c=false )</errorConditionFormula>
         <errorDisplayField>Date_Received_for_Entertainment_Sports__c</errorDisplayField>
         <errorMessage>There should be value on Date - Entertainment &amp; Sports when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7228,7 +7282,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <fullName>Guardianship_Document_Validation</fullName>
         <active>false</active>
         <description>There should be a value for Date - Guardianship Document when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Guardianship_Document__c = true, ISBLANK(  Date_Received_for_Guardianship_Document__c ) )</errorConditionFormula>
+        <errorConditionFormula>AND(  Guardianship_Document__c = true, ISBLANK(  Date_Received_for_Guardianship_Document__c ),Migrated_Record__c=false )</errorConditionFormula>
         <errorDisplayField>Date_Received_for_Guardianship_Document__c</errorDisplayField>
         <errorMessage>There should be value on Date - Guardianship Document when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7236,15 +7290,21 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <fullName>Liability_Release_and_Authorization_Date</fullName>
         <active>false</active>
         <description>There should be a value for Date - Liability Release and Authorization when wish status is Completed.</description>
-        <errorConditionFormula>AND( Liability_Release_and_Authorization__c = true, ISBLANK(  Date_Liability_Release_Authorization__c ) )</errorConditionFormula>
+        <errorConditionFormula>AND( Liability_Release_and_Authorization__c = true, ISBLANK(  Date_Liability_Release_Authorization__c ),Migrated_Record__c = false )</errorConditionFormula>
         <errorDisplayField>Date_Liability_Release_Authorization__c</errorDisplayField>
         <errorMessage>There should be value on Date - Liability Release and Authorization when wish status is Completed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>National_type_editable</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(ISPICKVAL( Status , &apos;Wish Determined&apos;) , ISCHANGED( Wish_Type__c ), NOT($Permission.National_Type_editable),NOT Migrated_Record__c, NOT(ISCHANGED(Status)))</errorConditionFormula>
+        <errorMessage>Please reach out to your supervisor to change the wish type and open a new case.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Passports_Validation</fullName>
         <active>false</active>
         <description>There should be a value for Date - Passports when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Passports__c = true, ISBLANK(  Date_Received_for_Passports__c  ) )</errorConditionFormula>
+        <errorConditionFormula>AND(Passports__c = true, ISBLANK(  Date_Received_for_Passports__c),Migrated_Record__c = false)</errorConditionFormula>
         <errorDisplayField>Date_Received_for_Passports__c</errorDisplayField>
         <errorMessage>There should be value on Date - Passports when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7265,7 +7325,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <fullName>Single_Parent_Form_Validation</fullName>
         <active>false</active>
         <description>There should be a value for Date - Single Parent Form when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Single_Parent_Form__c = true, ISBLANK(  Date_Received_for_Single_Parent_Form__c  ) )</errorConditionFormula>
+        <errorConditionFormula>AND(Single_Parent_Form__c = true, ISBLANK(  Date_Received_for_Single_Parent_Form__c),Migrated_Record__c = false )</errorConditionFormula>
         <errorDisplayField>Date_Received_for_Single_Parent_Form__c</errorDisplayField>
         <errorMessage>There should be value on Date - Single Parent Form when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7273,7 +7333,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <fullName>Visas_Validation</fullName>
         <active>false</active>
         <description>There should be a value for Date - Visas when wish status is Completed.</description>
-        <errorConditionFormula>AND(   Visas__c = true, ISBLANK(  Date_Received_for_Visas__c ) )</errorConditionFormula>
+        <errorConditionFormula>AND(   Visas__c = true, ISBLANK(  Date_Received_for_Visas__c ) ,Migrated_Record__c=false)</errorConditionFormula>
         <errorDisplayField>Date_Received_for_Visas__c</errorDisplayField>
         <errorMessage>There should be value on Date - Visas when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7281,7 +7341,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <fullName>Wish_Child_Form_Receive_Date_Validation</fullName>
         <active>false</active>
         <description>There should be a value for Date - Wish Child Form when wish status is Completed.</description>
-        <errorConditionFormula>AND( Wish_Child_Form__c = true, ISBLANK( Date_Wish_Child_Form__c ) )</errorConditionFormula>
+        <errorConditionFormula>AND( Wish_Child_Form__c = true, ISBLANK( Date_Wish_Child_Form__c ),Migrated_Record__c=false )</errorConditionFormula>
         <errorDisplayField>Date_Wish_Child_Form__c</errorDisplayField>
         <errorMessage>There should be value on Date - Wish Child Form when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7297,7 +7357,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <fullName>Wish_Family_Form_Receive_Date_Validation</fullName>
         <active>false</active>
         <description>There should be a value for Date - Wish Child Form when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Wish_Family_Form__c = true, ISBLANK(  Date_Wish_Family_Form__c ) )</errorConditionFormula>
+        <errorConditionFormula>AND(  Wish_Family_Form__c = true, ISBLANK(  Date_Wish_Family_Form__c),Migrated_Record__c=false )</errorConditionFormula>
         <errorDisplayField>Date_Wish_Family_Form__c</errorDisplayField>
         <errorMessage>There should be value on Date - Wish Family Form when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7305,7 +7365,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <fullName>Wish_Information_Form_Rece_Date_Validat</fullName>
         <active>false</active>
         <description>There should be a value for Date - Wish Information Form when wish status is Completed.</description>
-        <errorConditionFormula>AND(Wish_Information_Form__c = true, ISBLANK( Date_Wish_Information_Form__c ) )</errorConditionFormula>
+        <errorConditionFormula>AND(Wish_Information_Form__c = true, ISBLANK( Date_Wish_Information_Form__c),Migrated_Record__c=false )</errorConditionFormula>
         <errorDisplayField>Date_Wish_Information_Form__c</errorDisplayField>
         <errorMessage>There should be value on Date - Wish Information Form when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7313,7 +7373,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <fullName>Wish_Safety_Authorization_PartB_Form</fullName>
         <active>false</active>
         <description>There should be a value for Date - Wish Safety Authorization Part B Form when wish status is Completed.</description>
-        <errorConditionFormula>AND(  Wish_Safety_Authorization_Part_B_Form__c = true, ISBLANK(  Date_Received_for_Wish_Safety_Authorizat__c ) )</errorConditionFormula>
+        <errorConditionFormula>AND(  Wish_Safety_Authorization_Part_B_Form__c = true, ISBLANK(  Date_Received_for_Wish_Safety_Authorizat__c),Migrated_Record__c=false )</errorConditionFormula>
         <errorDisplayField>Date_Received_for_Wish_Safety_Authorizat__c</errorDisplayField>
         <errorMessage>There should be value on Date - Wish Safety Authorization Part B Form when wish status is Completed.</errorMessage>
     </validationRules>
@@ -7375,7 +7435,7 @@ var permissionResult =
     sforce.connection.query(
         &quot;SELECT Id &quot; +
         &quot;FROM PermissionSetAssignment &quot; +
-        &quot;WHERE PermissionSetId = &apos;0PSQ00000004fhj&apos;&quot; +
+        &quot;WHERE PermissionSetId = &apos;0PS360000014hEq&apos;&quot; +
         &quot;AND AssigneeId = &apos;{!$User.Id}&apos;&quot;
     );
 
@@ -7470,7 +7530,7 @@ else
         <masterLabel>InKind Donation Report</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>window.open(&apos;/00O5B000000OCcn&apos;,&apos;_blank&apos;);</url>
+        <url>window.open(&apos;/00O36000006aUmV&apos;,&apos;_blank&apos;);</url>
     </webLinks>
     <webLinks>
         <fullName>InKind_Donors_Report</fullName>
@@ -7611,7 +7671,7 @@ window.location.reload();
         <masterLabel>New Time Sheet</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>window.open(&apos;https://make-a-wish.force.com/VolunteerOpportunitySelection_VF?caseRecId={!Case.Id}&apos;,&apos;_blank&apos;);</url>
+        <url>window.open(&apos;https://qa-make-a-wish.cs3.force.com/VolunteerOpportunitySelection_VF?caseRecId={!Case.Id}&apos;,&apos;_blank&apos;);</url>
     </webLinks>
     <webLinks>
         <fullName>Publicity_Form</fullName>

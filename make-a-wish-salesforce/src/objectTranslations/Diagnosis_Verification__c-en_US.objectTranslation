@@ -53,7 +53,7 @@
         <name>Order__c</name>
     </fields>
     <fields>
-        <label><!-- PCD-ICD --></label>
+        <label><!-- Hidden PCD-ICD --></label>
         <name>PCD_ICD__c</name>
     </fields>
     <fields>
@@ -69,7 +69,7 @@
         <name>Short_Description__c</name>
     </fields>
     <fields>
-        <label><!-- isEligible --></label>
+        <label><!-- Hidden isEligible --></label>
         <name>isEligible__c</name>
     </fields>
     <layouts>

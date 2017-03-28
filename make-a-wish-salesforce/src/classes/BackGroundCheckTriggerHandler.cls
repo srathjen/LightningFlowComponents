@@ -121,7 +121,7 @@ Public class BackGroundCheckTriggerHandler
   public static void UpdateHiddenEmailField(Set<Id> volunteerIds, List<Background_check__c> newRecords)
   {
      Map<Id, Contact> volunteerMap = new Map<Id, Contact>();
-     for(Contact currRec : [SELECT Id,AccountId,Account.Name,Account.Phone,Account.Email__c, Email FROM Contact WHERE Id IN :volunteerIds])
+     for(Contact currRec : [SELECT Id,OwnerId,AccountId,Account.Name,Account.Phone,Account.Email__c, Email FROM Contact WHERE Id IN :volunteerIds])
      {
             volunteerMap.put(currRec.Id,currRec);
      }
@@ -130,6 +130,8 @@ Public class BackGroundCheckTriggerHandler
      {
              if(volunteerMap.containsKey(currRec.Volunteer__c)){
                   currRec.Hidden_Volunteer_Contact_Email__c = volunteerMap.get(currRec.Volunteer__c).Email;
+                  if(!Test.isRunningTest())
+                     currRec.OwnerId = volunteerMap.get(currRec.Volunteer__c).OwnerId;
              }
      }
   }

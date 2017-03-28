@@ -14,18 +14,17 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
         {
           if(currRec.Migrated_record__c == false)
           {
-           if(!Test.isRunningTest())
-           {
-                if(currRec.Date_Completed__c != null && (currRec.Status__c != Null))
-                 currRec.Active__c = True;
-           }
-           volunteerIds.add(currRec.Volunteer__c);
+               if(!Test.isRunningTest())
+               {
+                    if(currRec.Date_Completed__c != null && (currRec.Status__c != Null))
+                        currRec.Active__c = True;
+               }
+               volunteerIds.add(currRec.Volunteer__c);
           }
           if(currRec.Date_Completed__c != null)
           {
-                currRec.Date__c = currRec.Date_Completed__c.addYears(3);
+               currRec.Date__c = currRec.Date_Completed__c.addYears(3);
           }
-
         }
        
         if(volunteerIds.size() > 0)
@@ -40,6 +39,7 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
     {
         Set<Id> newRecordIds = new Set<Id>();
         Set<Id> volunteerIds = new Set<Id>();
+        Map<String,List<Background_check__c>> bgcMap = new Map<String,List<Background_check__c>>();
         for(Background_check__c  currRec : Trigger.new)
         {
           if(currRec.Migrated_Record__c == false)
@@ -49,11 +49,26 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
                 newRecordIds.add(currRec.id);
                 volunteerIds.add(currRec.Volunteer__c);
             }
+            
+            if(bgcMap.containsKey(currRec.Account_Name__c))
+            {
+                bgcMap.get(currRec.Account_Name__c).add(currRec);
+            }
+            else
+                bgcMap.put(currRec.Account_Name__c,new List<Background_check__c>{currRec});
+            
           }
+          
+          
         }
         if(newRecordIds.size() > 0 && volunteerIds.size() > 0)
         {
             BackGroundCheckTriggerHandler.DeactivateExistingRecords(newRecordIds,volunteerIds);
+        }
+        
+        if(bgcMap.size() > 0)
+        {
+            ChapterStaffRecordSharing_AC.BGCRecordSharing(bgcMap);
         }
         
     }

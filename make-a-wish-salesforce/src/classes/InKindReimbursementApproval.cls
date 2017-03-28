@@ -48,7 +48,7 @@ global class InKindReimbursementApproval{
             Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
             req.setComments('Submitting request for approval');
             req.setObjectId(inKindId);
-            req.setProcessDefinitionNameOrId('Reimbursement_Approval');
+            req.setProcessDefinitionNameOrId('Reimbursement_Approval_To_Wish_Owner');
             req.setNextApproverIds(Null);
             req.setSkipEntryCriteria(true);
             if(!Test.IsRunningTest())

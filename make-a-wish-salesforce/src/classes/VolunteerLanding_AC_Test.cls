@@ -96,6 +96,7 @@ public class VolunteerLanding_AC_Test {
             currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.id);
         }
         VolunteerLanding_AC controller;
+        Conflict_Of_Interest__c currCOI;
         System.RunAs(currUser)
         {
             
@@ -107,10 +108,14 @@ public class VolunteerLanding_AC_Test {
             
             Background_check__c currBG = OrientationandTrainingUtil.createBackgroundCheck(con.id);
             
-            Conflict_Of_Interest__c currCOI = OrientationandTrainingUtil.createCOI(con.id);
+            currCOI = OrientationandTrainingUtil.createCOI(con.id);
+          }
             currCOI.Expiration_Date__c  = System.Today()+5;
             update currCOI;
             
+           
+        System.RunAs(currUser)
+        {
             Broadcast__c currBroad = new Broadcast__c();
             currBroad.Broadcast_Message__c = 'Test';
             currBroad.Date__c = Date.Today() + 5;
@@ -135,7 +140,7 @@ public class VolunteerLanding_AC_Test {
             controller.BackgroundCheck(false);
             controller.DisplayTraining(false);
             controller.register();
-            controller.confirmBackGroundCheck();
+           // controller.confirmBackGroundCheck();
             controller.cancel();
             controller.cancelConflict();
             OrientationandTrainingUtil.insertDocusignSetting();
@@ -214,6 +219,7 @@ public class VolunteerLanding_AC_Test {
             currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.id);
         }
         VolunteerLanding_AC controller;
+        Conflict_Of_Interest__c currCOI;
         System.RunAs(currUser)
         {
             
@@ -223,10 +229,13 @@ public class VolunteerLanding_AC_Test {
             currVal.CurrentChapter__c = acc.Name;
             insert currVal;
             
-            Conflict_Of_Interest__c currCOI = OrientationandTrainingUtil.createCOI(con.id);
+            currCOI = OrientationandTrainingUtil.createCOI(con.id);
+         }
             currCOI.Expiration_Date__c  = System.Today()+5;
             update currCOI;
             
+       System.RunAs(currUser)
+        {   
             Broadcast__c currBroad = new Broadcast__c();
             currBroad.Broadcast_Message__c = 'Test';
             currBroad.Date__c = Date.Today() + 5;
@@ -268,6 +277,8 @@ public class VolunteerLanding_AC_Test {
             currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.id);
         }
         VolunteerLanding_AC controller;
+        Conflict_Of_Interest__c currCOI;
+        
         System.RunAs(currUser)
         {
             
@@ -277,11 +288,13 @@ public class VolunteerLanding_AC_Test {
             currVal.CurrentChapter__c = acc.Name;
             insert currVal;
             
-            Conflict_Of_Interest__c currCOI = OrientationandTrainingUtil.createCOI(con.id);
+           currCOI = OrientationandTrainingUtil.createCOI(con.id);
+        }
             currCOI.Expiration_Date__c  = System.Today()-5;
             update currCOI;
             
-            
+         System.RunAs(currUser)
+        {   
             
             controller = new VolunteerLanding_AC();
             controller.getChapterList();
@@ -316,7 +329,7 @@ public class VolunteerLanding_AC_Test {
             
             Background_check__c currBG = OrientationandTrainingUtil.createBackgroundCheck(con.id);
             currBG.Date__c = Date.Today()-5;
-            update currBG;
+          //  update currBG;
             
             controller = new VolunteerLanding_AC();
             controller.getChapterList();
@@ -353,8 +366,8 @@ public class VolunteerLanding_AC_Test {
             Background_check__c currBG1 = OrientationandTrainingUtil.createBackgroundCheck(con.id);
             currBG.Date__c = Date.Today().addYears(3);
             
-            update currBG;
-            
+           // update currBG;
+           
             controller = new VolunteerLanding_AC();
             controller.getChapterList();
             controller.EnterchapterPage();

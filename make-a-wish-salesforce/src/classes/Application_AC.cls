@@ -469,7 +469,7 @@ public class Application_AC{
             '      "tabs": {'+
             '                "signHereTabs": [{'+
             '                    "anchorString": "~s1",'+
-            '                    "anchorXOffset": "0.6",'+
+            '                    "anchorXOffset": "0.1",'+
             '                    "anchorYOffset": "0.1",'+
             '                    "anchorIgnoreIfNotPresent": "false",'+
             '                    "anchorUnits": "inches"'+

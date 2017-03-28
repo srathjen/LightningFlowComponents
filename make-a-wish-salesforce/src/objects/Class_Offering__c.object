@@ -475,8 +475,9 @@
         <fullName>max_capacity__c</fullName>
         <description>It will capture,number of members can participate to the training.</description>
         <externalId>false</externalId>
+        <inlineHelpText>If Virtual Self Paced class offering, leave max capacity blank. Courses will not be displayed for volunteers if max capacity is reached or if capacity is set as zero.</inlineHelpText>
         <label>Max Capacity</label>
-        <precision>3</precision>
+        <precision>10</precision>
         <required>false</required>
         <scale>0</scale>
         <trackTrending>false</trackTrending>
@@ -495,6 +496,7 @@
         <columns>max_capacity__c</columns>
         <columns>Registered_Seats__c</columns>
         <columns>Location__c</columns>
+        <columns>Chapter__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

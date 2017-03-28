@@ -105,10 +105,6 @@
                 <behavior>Edit</behavior>
                 <field>ChapterName__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Interview_Date_Not_Set__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>

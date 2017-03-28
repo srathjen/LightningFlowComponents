@@ -21,6 +21,14 @@ public class WishJourneyController_Test {
         obj.closed = true;
         obj.readytoAssign = true;
         obj.wishDetermined = true;
+        obj.isSubmitted = true; 
+        obj.determined = true; 
+        obj.approved = true;
+        obj.qualified = true;
+        obj.design = true;
+        obj.scheduled = true; 
+        obj.interview = true;
+        obj.assign = true;
         obj.getCases();
     }
     
@@ -126,15 +134,38 @@ public class WishJourneyController_Test {
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
     }
     
+    public static testMethod void caseWitDeterminedDate() {
+        Case currentCase = OrientationandTrainingUtil.createParentCase();
+        currentCase.Status = 'Closed';
+        currentCase.Origin = 'Email';
+        currentCase.Wish_Determined_Date__c = system.today();
+        currentCase.Anticipated_Start_Date__c = system.today();
+        insert currentCase;
+        WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+    }
+    
+     public static testMethod void caseWitAnticipateddDate() {
+        Case currentCase = OrientationandTrainingUtil.createParentCase();
+        currentCase.Status = 'Closed';
+        currentCase.Origin = 'Email';
+        currentCase.Anticipated_Start_Date__c = system.today();
+        insert currentCase;
+        WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+    }
+    
     public static testMethod void caseWitWishChild() {
+        String wishRecTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get('Wish Assist').getRecordTypeId();
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithoutInterviewDate(wishChild.id);
         currentCase.Status = 'Closed';
         currentCase.Origin = 'Email';
         currentCase.ParentId = parentCase.Id;
+        currentCase.RecordTypeId = wishRecTypeId;
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
     }
+    
+    
     
 }

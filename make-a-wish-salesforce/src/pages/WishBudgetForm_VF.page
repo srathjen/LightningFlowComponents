@@ -432,7 +432,7 @@
                                             <td class="slds-text-align--right tdBudget" style="width:40px"><apex:outputField value="{!expense.Actual_In_Kind__c}" /></td>    
                                             <td class="slds-text-align--right tdProjected" style="width:40px"><apex:outputField value="{!expense.FE_Posted_Cash__c}"  /></td>
                                             <td class="slds-text-align--right tdProjected" style="width:40px" ><apex:outputField value="{!expense.FE_Posted_In_Kind__c}" /></td>
-                                            <td class="slds-cell-wrap slds-text-align--right" style="width:40px"><apex:OutPuttext value="" style="width:40px"/></td>
+                                            <td class="slds-cell-wrap slds-text-align--right" style="width:40px"><apex:outputtext value="" style="width:40px"/></td>
                                             <td class="slds-cell-wrap" style="width:40px"><apex:OutPutText value="" /></td>
                                         </apex:outputPanel>
                                         
@@ -522,19 +522,19 @@
                                             
                                              <!-- Projected Cash -->
                                              
-                                            <apex:outputPanel rendered="{!If(((isbudgetApprovalExist == true && expense.Budget_Approval_Status__c == 'Submitted') && expense.Projected_Approval_Status__c != 'Approved'),true,false)}">
+                                            <apex:outputPanel rendered="{!If((isbudgetApprovalExist == true && expense.Budget_Approval_Status__c == 'Submitted'),true,false)}">
                                                 <td class="slds-text-align--right tdProjected" style="width:40px">
                                                     <apex:inputtext styleClass="Cash" id="PCash1" value="{!expense.Projected_Cash__c}"  onfocus="this.select();"/>
                                                 </td>       
                                             </apex:outputPanel>
-                                            <apex:outputPanel rendered="{!If((isbudgetApprovalExist == false || (expense.Budget_Approval_Status__c == 'Approved' && expense.Projected_Approval_Status__c == 'Approved')),true,false)}">
+                                            <apex:outputPanel rendered="{!If((isbudgetApprovalExist == false ),true,false)}">
                                                 <td class="slds-cell-wrap slds-text-align--right tdProjected" style="width:40px">
                                                    <apex:outputPanel >
                                                             <apex:outputField value="{!expense.Projected_Cash__c}" />
                                                     </apex:outputPanel>
                                                 </td>       
                                             </apex:outputPanel>
-                                             <apex:outputPanel rendered="{!If((expense.Budget_Approval_Status__c == 'Approved' &&  expense.Projected_Approval_Status__c != 'Approved' ),true,false)}">
+                                             <apex:outputPanel rendered="{!If((expense.Budget_Approval_Status__c == 'Approved' ),true,false)}">
                                                 <td class="slds-cell-wrap slds-text-align--right tdProjected" style="width:40px">
                                                     <apex:outputPanel rendered="{!If(expense.Account_Description__c  == 'Direct Wish Cash Expense',true,false)}">
                                                         <apex:actionRegion >
@@ -550,19 +550,19 @@
                                             </apex:outputPanel>
                                             
                                              <!-- Projected Inkind -->
-                                             <apex:outputPanel rendered="{!If(((isbudgetApprovalExist == true && expense.Budget_Approval_Status__c == 'Submitted') && expense.Projected_Approval_Status__c != 'Approved'),true,false)}">
+                                             <apex:outputPanel rendered="{!If((isbudgetApprovalExist == true && expense.Budget_Approval_Status__c == 'Submitted'),true,false)}">
                                                 <td class="slds-text-align--right tdProjected" style="width:40px">
                                                     <apex:inputtext styleClass="Inkind" id="PInkind1" value="{!expense.Projected_In_Kind__c}"  onfocus="this.select();"/>
                                                 </td>       
                                             </apex:outputPanel>
-                                            <apex:outputPanel rendered="{!If((isbudgetApprovalExist == false || (expense.Budget_Approval_Status__c == 'Approved' && expense.Projected_Approval_Status__c == 'Approved')),true,false)}">
+                                            <apex:outputPanel rendered="{!If((isbudgetApprovalExist == false ),true,false)}">
                                                  <td class="slds-cell-wrap slds-text-align--right tdProjected" style="width:40px">
                                                     <apex:outputPanel >
                                                          <apex:outputField value="{!expense.Projected_In_Kind__c}" />  
                                                     </apex:outputPanel>
                                                  </td>       
                                             </apex:outputPanel>
-                                            <apex:outputPanel rendered="{!If((expense.Budget_Approval_Status__c == 'Approved' &&  expense.Projected_Approval_Status__c != 'Approved' ),true,false)}">
+                                            <apex:outputPanel rendered="{!If((expense.Budget_Approval_Status__c == 'Approved'),true,false)}">
                                                  <td class="slds-cell-wrap slds-text-align--right tdProjected" style="width:40px">
                                                     <apex:outputPanel rendered="{!If(expense.Account_Description__c  != 'Direct Wish Cash Expense',true,false)}">
                                                         <apex:actionRegion >
@@ -696,8 +696,8 @@
                                </apex:outputpanel>
                             </tr> 
                         </table>
-                        <apex:actionFunction name="submitForApproval" action="{!submitForApproval}" rerender="none" oncomplete="decisionWindow();"/>
-                        <apex:actionFunction name="ReloadPage" action="{!ReloadPage}" rerender="none" />
+                        <div style="float: left; vertical-align: middle; ">Budget Notes: </div>
+                        <div style="float: left;width: 600px;vertical-align: top;" ><apex:inputTextarea rows="3" value="{!budgetNotes}" style="width:600px"/> </div>
                         <div class="approval-Section">
                             <apex:outputPanel rendered="{!approvalBtnVisibility}">
                                 
@@ -714,6 +714,11 @@
                         <div class="pull-right" style="margin-right: 2%;margin-top: 2%; margin-bottom:1%">
                             <apex:commandButton value="Save" action="{!SaveExpenses}" styleclass="btn btn-info" /> 
                         </div>
+            
+                                
+                        <apex:actionFunction name="submitForApproval" action="{!submitForApproval}" rerender="none" oncomplete="decisionWindow();"/>
+                        <apex:actionFunction name="ReloadPage" action="{!ReloadPage}" rerender="none" />
+                                                
                     </apex:pageBlock>  
                 </div>
             </div>
@@ -731,6 +736,7 @@
                                     <apex:outputLink rendered="{! !aSW.isSubmitForApproval}" styleclass="btn btn-info btn-sm" title="Recall Budget Approval Request" target="_parent" value="{!aSW.recallApprovalProcessLink}">
                                         Recall Budget Approval Request
                                     </apex:outputLink>
+                                    
                                 </td>
                                 <td class="slds-cell-wrap"></td>
                                 <td class="slds-cell-wrap"></td>                                                        

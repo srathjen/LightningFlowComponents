@@ -1,4 +1,5 @@
-trigger ContactFile_AT on cg__ContactFile__c (before insert, After insert) {  
+trigger ContactFile_AT on cg__ContactFile__c (before insert, After insert) { 
+    
     if(Trigger.isInsert && Trigger.isBefore) {
         Map<Id, cg__ContactFile__c> newFileMap = new Map<Id, cg__ContactFile__c>();
         Map<Id, Id> contactFileMap = new Map<Id, Id>();

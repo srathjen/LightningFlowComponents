@@ -392,7 +392,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     if(LeadMap.get(convertLeads.getLeadId()).unique_wish_identifier__c!= null) {
                         newcase.Lead__c = LeadMap.get(convertLeads.getLeadId()).Id;
                         newcase.Unique_Wish_Record_Identifier__c= LeadMap.get(convertLeads.getLeadId()).unique_wish_identifier__c;
-                        //newcase.Fund_Id__c = LeadMap.get(convertLeads.getLeadId()).unique_wish_identifier__c;
+                        newcase.Fund_Id__c = LeadMap.get(convertLeads.getLeadId()).unique_wish_identifier__c;
                         newcase.Wish_Assist__c= true;
                     }
                     
@@ -707,7 +707,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newMedicalcon.AccountId = newAccountMap.get(processConvertedLead .Hospital_Treatment_Facility_Treating__c).Id;
                 newMedicalcon.Phone = processConvertedLead.Treating_Medical_Professional_Phone__c;
                 newMedicalcon.Email = processConvertedLead.Treating_Medical_Professional_Email__c;
-                newMedicalcon.Provider_Type__c  = processConvertedLead.I_am_Recognized_To_Practice_As_a__c;
+                newMedicalcon.Provider_Type__c  = processConvertedLead.Medical_Provider_Category__c;
                 newMedicalcon.RecordTypeId = medicalProfessionalRecordTypeId;
                 newMedicalcon.Region_Chapter__c = processConvertedLead.ChapterName__c;
                 
@@ -746,7 +746,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 newMedicalcon.AccountId = processConvertedLead.ChapterName__c;
                 newMedicalcon.Phone = processConvertedLead.Referrer_Phone__c;
                 newMedicalcon.Email = processConvertedLead.Referrer_Email__c;
-                newMedicalcon.Provider_Type__c  = processConvertedLead.I_am_Recognized_To_Practice_As_a__c;
+                newMedicalcon.Provider_Type__c  = processConvertedLead.Medical_Provider_Category__c;
                 newMedicalcon.RecordTypeId = medicalProfessionalRecordTypeId;
                 newMedicalcon.Region_Chapter__c = processConvertedLead.ChapterName__c;
                 

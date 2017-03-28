@@ -16,6 +16,7 @@ public class BackgroundCheck_AC_Test{
         currentVoulnteerUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(volunteerContact.Id);
         }
         OrientationandTrainingUtil.createBackgroundCheck(currentVoulnteerUser.ContactId);
+        
         OrientationandTrainingUtil.createDynamicContent();
     }
     //This method is used to test the functionality by using specific user    
@@ -35,7 +36,7 @@ public class BackgroundCheck_AC_Test{
         system.RunAs(dbUser){
             Test.StartTest();
             OrientationandTrainingUtil.createBackgroundCheck(dbUser.ContactId);
-            Background_check__c backgroundCheck = [SELECT ID,Resided_in_US_for_past_7_years__c FROM Background_check__c limit 1];
+            Background_check__c backgroundCheck = OrientationandTrainingUtil.createBackgroundCheck(dbUser.ContactId);
             backgroundCheck.Resided_in_US_for_past_7_years__c = 'Yes';
             ApexPages.currentPage().getParameters().put('trainingRequired','true');
             ApexPages.currentPage().getParameters().put('bgRequired','true');

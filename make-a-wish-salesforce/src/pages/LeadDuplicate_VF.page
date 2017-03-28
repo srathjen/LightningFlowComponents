@@ -240,7 +240,7 @@
                     <div class="slds-card__body">
                         <apex:outputText rendered="{!NOT(hasResults)}">
                         <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
-                            <apex:outputText value="{!$Label.npe01__Contact_Merge_Error_Confirm_Message_Nothing_Found}"/>
+                            <apex:outputText value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
                         </h3>
                         </apex:outputText>
                         <apex:outputText rendered="{!AND(hasResults,dupLeadList.size > 0)}">
@@ -316,7 +316,7 @@
                     <div class="slds-card__body">
                         <apex:outputText rendered="{!NOT(hasResults)}">
                         <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
-                            <apex:outputText value="{!$Label.npe01__Contact_Merge_Error_Confirm_Message_Nothing_Found}"/>
+                            <apex:outputText value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
                         </h3>
                         </apex:outputText>
                         <apex:outputText rendered="{!hasResults}">
@@ -389,7 +389,9 @@
                  
               
               
-                <Center> <apex:commandbutton value="Send Diagnosis Verification" action="{!ContinuePartAForm}" onClick="return validateRadio();" /> </center> <br/>
+                <Center> <apex:commandbutton value="Complete Dupe Check" action="{!CompleteDupeCheck}" onClick="return validateRadio();" /> &nbsp;&nbsp;
+                         <apex:commandbutton value="Send Diagnosis Verification" action="{!ContinuePartAForm}" onClick="return validateRadio();" />
+                 </center> <br/>
                
                 <apex:outputpanel rendered="{!dupParentContactList.size >0}" StyleClass="TotalBox is_family">                
                 
@@ -402,7 +404,7 @@
                       <apex:outputText rendered="{!dupParentContactList.size <0}" >
                         <!--apex:outputText rendered="{!NOT(hasResults)}"-->
                         <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
-                            <apex:outputText value="{!$Label.npe01__Contact_Merge_Error_Confirm_Message_Nothing_Found}"/>
+                            <apex:outputText value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
                         </h3>
                         </apex:outputText>
                         <apex:outputText rendered="{!dupParentContactList.size >0}">
@@ -491,7 +493,7 @@
                         <apex:outputText rendered="{!dupMedicalContactList.size < 0}" >
                         <!--apex:outputText rendered="{!NOT(hasResults)}"-->
                         <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
-                            <apex:outputText value="{!$Label.npe01__Contact_Merge_Error_Confirm_Message_Nothing_Found}"/>
+                            <apex:outputText value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
                         </h3>
                         </apex:outputText>
                         <apex:outputText rendered="{!dupMedicalContactList.size > 0}">
@@ -578,7 +580,7 @@
                         <!--apex:outputText rendered="{!NOT(hasResults)}"-->
                         <apex:outputText rendered="{!dupTreatingContactList.size < 0}">
                         <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
-                            <apex:outputText value="{!$Label.npe01__Contact_Merge_Error_Confirm_Message_Nothing_Found}"/>
+                            <apex:outputText value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
                         </h3>
                         </apex:outputText>
                         <apex:outputText rendered="{!OR(dupTreatingContactList.Size>0,hasResults)}">

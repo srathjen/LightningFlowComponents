@@ -1,13 +1,29 @@
 <apex:page standardController="Case" extensions="WishRelatedLinks_AC">
- <apex:form >
- 
- <div style="margin-left:40%; font-size: 40px; color:blue; margin-top: 2%;">Merged Documents</div>
- <apex:outputPanel rendered="{!$Profile.Name !='Active Volunteer (Member)' && $Profile.Name != 'Active Volunteer (Login)'}">
-  <apex:outputPanel rendered="{!WishReceipt != Null}">
-                      <div style="margin-left:10%; height:1%;margin-top: 2%;"><apex:outputLink target="_blank" value="{!WishReceipt }">Wish Receipt</apex:outputLink></div>
-                  </apex:outputPanel>
-                                <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!welcomeLetter}">Welcome Letter</apex:outputLink></div>
-
-                  </apex:outputPanel>
- </apex:form>                 
+    <apex:form id="frm">
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"/>
+        <div style="margin-left:40%; font-size: 40px; color:blue; margin-top: 2%;">Merged Documents</div>
+        <apex:outputPanel rendered="{!$Profile.Name !='Active Volunteer (Member)' && $Profile.Name != 'Active Volunteer (Login)'}">
+            <apex:outputPanel rendered="{!WishReceipt != Null}">
+                <div style="margin-left:10%; height:1%;margin-top: 2%;"><a href="#" class="sd">Wish Receipt</a></div>
+            </apex:outputPanel>
+            <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!welcomeLetter}">Welcome Letter</apex:outputLink></div>
+        </apex:outputPanel>
+        <apex:outputPanel id="getVal">
+            <input type="hidden" value="{!recpCheck}" class="hidenfld"/>
+            <input type="hidden" value="{!WishReceipt}" class="hidenfld1"/>        
+        </apex:outputPanel>
+        <apex:actionFunction name="RefreshPage" action="{!updateSenderInfo}" reRender="getVal" onComplete="validateForm();"/>
+        <script>
+        $(".sd").on('click', function() {
+            RefreshPage();
+        });
+        function validateForm() {
+            if($('.hidenfld').val() == 'Allow') {
+                window.open($('.hidenfld1').val());
+            } else if($('.hidenfld').val() == 'Not Allow') {
+                alert('There should be 2 receipent and email for the receipent should not be empty');
+            }
+        }
+        </script>
+    </apex:form>                 
 </apex:page>

@@ -168,20 +168,10 @@
           <div style="margin:5px 0 30px 0;">
             <div style="margin-bottom:5px !important; font-weight: bold;"><b>Wish Notes...</b></div>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.Wish_Notes__c}</div>
-            <!-- <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div>
-            <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
+           
             
           </div>
-           <div style="margin:5px 0 30px 0;">
-            <div style="margin-bottom:5px !important;"><b>Wish Type...</b></div>
-            <div style="width:100%;border-bottom:1px solid #000 !important; font-style:underline; border:none;">{!currWishChild.WishType__c}</div>
-           <!--  <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div>
-            <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
-          </div>
+           
       </div>
       <div style="clear:both"></div>
       </div>
@@ -240,13 +230,29 @@
           <div class="{!IF(wishFamilContact.mobileTelephone==null,'newfont','oldfont')}" style="width:15%; float:left;border-bottom:1px solid #000 !important;margin-top:0% !important;padding-left:1.6em !important;border:none;">{!if(wishFamilContact.mobileTelephone==null,'-',wishFamilContact.mobileTelephone)}</div>
           <div style="width:8% !important; float:left; font-weight:normal;">Email : </div>
           <div class="{!IF(wishFamilContact.Email==null,'newfont','oldfont')}" style="width:30%; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(wishFamilContact.Email==null,'-',wishFamilContact.Email)}</div>   
+         </div> 
+         
+         <div style="clear:both"></div>
+        <div style="margin-top:5px;">
+          <div style="width:20% !important; float:left; font-weight:normal;">Street:</div>
+          <div class="{!IF(wishFamilContact.Street==null,'newfont','oldfont')}" style="width:15%; float:left;border-bottom:1px solid #000 !important;margin-top:0% !important;padding-left:1.6em !important;border:none;">{!if(wishFamilContact.Street==null,'-',wishFamilContact.Street)}</div>
+          <div style="width:8% !important; float:left; font-weight:normal;">City: </div>
+          <div class="{!IF(wishFamilContact.City==null,'newfont','oldfont')}" style="width:30%; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(wishFamilContact.City==null,'-',wishFamilContact.City)}</div>   
+         </div> 
+         
+         <div style="clear:both"></div>
+        <div style="margin-top:5px;">
+          <div style="width:20% !important; float:left; font-weight:normal;">State :</div>
+          <div class="{!IF(wishFamilContact.State==null,'newfont','oldfont')}" style="width:15%; float:left;border-bottom:1px solid #000 !important;margin-top:0% !important;padding-left:1.6em !important;border:none;">{!if(wishFamilContact.State==null,'-',wishFamilContact.State)}</div>
+          <div style="width:8% !important; float:left; font-weight:normal;">Postal Code: </div>
+          <div class="{!IF(wishFamilContact.PostalCode==null,'newfont','oldfont')}" style="width:30%; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(wishFamilContact.PostalCode==null,'-',wishFamilContact.PostalCode)}</div>   
          </div>   
      
    </apex:repeat>
            <br/><br/>   
        <div style="clear:both"></div>
           <div style="margin:10px 0 0 0;"><strong>Prior Wish:</strong> Has your child ever had a wish granted or been considered by Make-A-Wish® or any other
-                wish-granting organization? <span style="border-bottom:1px solid #000; width:15%;">{!currWishChildContact.Already_wish_granted_by_MAW_Other_Org__c}</span> *If yes, please indicate the organization's name, the wish,
+                wish-granting organization? <span style="border-bottom:1px solid #000; width:15%;">{!currWishChild.Already_wish_granted_by_MAW_Other_Org__c}</span> *If yes, please indicate the organization's name, the wish,
                 and the date it was or will be granted.<br/><br/>
                  <div style="width:100%;border-bottom:1px solid #000 !important; font-style:underline; border:none;">{!currWishChild.If_yes_Enter_Org_Name_Wish_Date_it_wa__c}</div>
                 <span style="border-bottom:1px solid #000; width:100%;"></span>

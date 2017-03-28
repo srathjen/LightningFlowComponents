@@ -62,6 +62,7 @@
         }
         .onholdwrap {
         display: inline-table;
+        
         }
         .progressbarwrap {
         width: 100%;
@@ -104,18 +105,28 @@
         <div class="rush">
             <div class="cnamewrap">
                 <div class="fnamewrap">
-                    <apex:outputpanel rendered="{!parentCaseID != null}"><a href="/{!contactId}" target="_parent"><span class="fnamechildwrap">{!contactFName}</span> <span class="snamechildwrap">{!contactLName}</span></a> </apex:outputPanel>
-                    <apex:outputpanel rendered="{!parentCaseID == null}"><a href="/{!contactId}" target="_parent"><span class="fnamechildwrap">{!contactFName}</span> <span class="snamechildwrap">{!contactLName}</span></a> </apex:outputPanel>
-                    <apex:outputPanel rendered="{!rushwish == true}"><span class="rushwrap"></span></apex:outputPanel>
-                    
-                    <apex:outputPanel rendered="{!(currCase.RecordType.Name == 'Wish')}">
-                        <span class="onholdwrap">{!currCase.Status}</span>
-                    </apex:outputpanel>
-                    
-                    <apex:outputPanel rendered="{!(currCase.RecordTypeId != 'Wish')}">
-                        <span class="onholdwrap">{!currCase.Parent.Status}</span>
-                    </apex:outputpanel>
-                    
+                    <table>
+                        <tr>
+                            <td rowspan="2" valign="bottom">
+                                <apex:outputpanel rendered="{!parentCaseID != null}"><a href="/{!contactId}" target="_parent"><span class="fnamechildwrap">{!contactFName}</span> <span class="snamechildwrap">{!contactLName}</span></a> </apex:outputPanel>
+                                <apex:outputpanel rendered="{!parentCaseID == null}"><a href="/{!contactId}" target="_parent"><span class="fnamechildwrap">{!contactFName}</span> <span class="snamechildwrap">{!contactLName}</span></a> </apex:outputPanel>
+                            </td>
+                            <td colspan="2" valign="middle">
+                                <apex:outputPanel rendered="{!(deceased == 'Deceased')}">
+                                    <span class="onholdwrap" style="background:#696969">{!deceased}</span>
+                                </apex:outputpanel>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="middle">
+                                <apex:outputPanel rendered="{!rushwish == true}"><span class="rushwrap"></span></apex:outputPanel>
+                            </td>
+                            <td valign="middle">
+                                <apex:outputText value="{!currCase.Status}" rendered="{!(currCase.RecordType.Name == 'Wish')}" styleClass="onholdwrap"/>
+                                <apex:outputText value="{!currCase.Parent.Status}" rendered="{!(currCase.RecordType.Name != 'Wish')}" styleClass="onholdwrap"/>
+                            </td>
+                        </tr>
+                    </table>
                     <!--
 <apex:outputPanel rendered="{!onHold == true}"><span class="onholdwrap">On Hold</span></apex:outputPanel>              
 <apex:outputPanel rendered="{!escalated== true}"><span class="inactivewrap">Escalated</span></apex:outputPanel>

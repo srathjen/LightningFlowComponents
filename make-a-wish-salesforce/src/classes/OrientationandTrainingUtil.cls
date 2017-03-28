@@ -6,7 +6,7 @@ public class OrientationandTrainingUtil{
         Id ChapterRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
         
         Account newchapterAccount = new Account();
-        newchapterAccount .Name = 'Make-A-Wish Arizona';
+        newchapterAccount .Name = 'Make-A-Wish Alabama';
         newchapterAccount.RecordTypeId = ChapterRecordTypeId;
         insert newchapterAccount;
         return newchapterAccount;
@@ -466,6 +466,7 @@ insert newChapter;*/
         neworgAffiliation.npe5__Organization__c = TestClassUtil.createVolunteerAccount().Id;
         neworgAffiliation.npe5__Primary__c = true;
         neworgAffiliation.npe5__Status__c = 'Prospective';
+        neworgAffiliation.Constituent_code__c = 'Board Member';
         insert neworgAffiliation;
         return neworgAffiliation;
         
@@ -2135,6 +2136,18 @@ retrun newLeadFile;*/
         return newWishOpportunity;
     }
     
+    public static Volunteer_Opportunity__c  newVolunteerOpportunityWithCaseandVolunteer(id wishId , id VolunteerId){
+        Constant_AC  constant = new Constant_Ac();    
+        Id wishVolunteerOpportunityRecordTypeId = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
+        Volunteer_Opportunity__c newWishOpportunity =  new Volunteer_Opportunity__c();
+        newWishOpportunity.Wish__C=wishId;
+        newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
+        newWishOpportunity.Volunteer_Name__c=VolunteerId;
+        
+        insert newWishOpportunity;
+        return newWishOpportunity;
+    }
+    
     public static Regions__c createRegion(Id AccountId)
     {
         Regions__c newRegion = new Regions__c();
@@ -2143,14 +2156,7 @@ retrun newLeadFile;*/
         return newRegion;
     }
     
-    public Static Turnon_Household_Trigger__c insertTurnonHouseHoldAccountSetting(){
-        Turnon_Household_Trigger__c  turnOnHouseHold = new Turnon_Household_Trigger__c ();
-        turnOnHouseHold.Name = 'HouseHold Account';
-        turnOnHouseHold.Activate_AddFlagonHouseHoldAccount_Tgr__c = True;
-        insert turnOnHouseHold;
-        return turnOnHouseHold;
-        
-    }
+   
     public static npe4__Relationship__c CreateMedicalProfessionalRelationshipRec(Id wishChildId,Id medicalProfessionalId){
         npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
         newRelationShip.npe4__Contact__c = wishChildId;
@@ -2161,5 +2167,7 @@ retrun newLeadFile;*/
         insert newRelationShip;
         return newRelationShip;
     }
+    
+    
     
 }

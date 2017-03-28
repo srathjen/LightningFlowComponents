@@ -300,6 +300,7 @@
         <name>Webinar_URL__c</name>
     </fields>
     <fields>
+        <help><!-- If Virtual Self Paced class offering, leave max capacity blank. Courses will not be displayed for volunteers if max capacity is reached or if capacity is set as zero. --></help>
         <label><!-- Max Capacity --></label>
         <name>max_capacity__c</name>
     </fields>

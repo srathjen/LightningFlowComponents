@@ -64,6 +64,38 @@
         <name>External_Id__c</name>
     </fields>
     <fields>
+        <label><!-- Family Dynamics --></label>
+        <name>Family_Dynamics__c</name>
+        <picklistValues>
+            <masterLabel>Divided/Multiple Household</masterLabel>
+            <translation><!-- Divided/Multiple Household --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Parent(s)</masterLabel>
+            <translation><!-- Foster Parent(s) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Group Home</masterLabel>
+            <translation><!-- Group Home --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Legal Guardian(s)</masterLabel>
+            <translation><!-- Legal Guardian(s) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Single Parent Household</masterLabel>
+            <translation><!-- Single Parent Household --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Two Parent Household</masterLabel>
+            <translation><!-- Two Parent Household --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- From Mulesoft --></label>
         <name>From_Mulesoft__c</name>
     </fields>
@@ -72,7 +104,7 @@
         <name>Import_Id__c</name>
     </fields>
     <fields>
-        <label><!-- In-Kind Approval Status --></label>
+        <label><!-- Hidden In-Kind Approval Status --></label>
         <name>In_Kind_Approval_Status__c</name>
         <picklistValues>
             <masterLabel>Approved</masterLabel>
@@ -93,7 +125,7 @@
         <name>Is_Active__c</name>
     </fields>
     <fields>
-        <label><!-- Is Approved --></label>
+        <label><!-- Hidden Is Approved --></label>
         <name>Is_Approved__c</name>
     </fields>
     <fields>
@@ -101,7 +133,7 @@
         <name>Language_Notes__c</name>
     </fields>
     <fields>
-        <label><!-- MAC Email --></label>
+        <label><!-- Hidden MAC Email --></label>
         <name>MAC_Email__c</name>
     </fields>
     <fields>
@@ -544,13 +576,13 @@
         <relationshipLabel><!-- Accounts (Volunteer Manager) --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Wish Coordinator Hidden Email --></label>
+        <label><!-- Wish Co-ordinator Hidden Email --></label>
         <name>Wish_Co_ordinator_Hidden_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Wish Coordinator --></label>
+        <label><!-- Wish Co-ordinator --></label>
         <name>Wish_Co_ordinator__c</name>
-        <relationshipLabel><!-- Accounts (Wish Coordinator) --></relationshipLabel>
+        <relationshipLabel><!-- Accounts (Wish Co-ordinator) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Wish Expense Type --></label>
@@ -1380,7 +1412,7 @@
         <name>npo02__FirstCloseDate__c</name>
     </fields>
     <fields>
-        <help><!-- For Household Accounts, uses fields of non-excluded, ordered related Contacts. Generated automatically. --></help>
+        <help>Pour les comptes de foyer, utilise les champs de contacts associés non exclus, ordonnés. Généré automatiquement.</help>
         <label><!-- Formal Greeting --></label>
         <name>npo02__Formal_Greeting__c</name>
     </fields>
@@ -1389,7 +1421,7 @@
         <name>npo02__HouseholdPhone__c</name>
     </fields>
     <fields>
-        <help><!-- For Household Accounts, uses fields of non-excluded, ordered related Contacts. Generated automatically. --></help>
+        <help>Pour les comptes de foyer, utilise les champs de contacts associés non exclus, ordonnés. Généré automatiquement.</help>
         <label><!-- Informal Greeting --></label>
         <name>npo02__Informal_Greeting__c</name>
     </fields>
@@ -1470,7 +1502,7 @@
         <name>npo02__OppsClosedThisYear__c</name>
     </fields>
     <fields>
-        <help><!-- For Household Accounts, specifies which name related fields should not be automatically populated by the Householding code. --></help>
+        <help>Pour les comptes de foyer, indique quels champs associés au nom ne doivent pas être remplis automatiquement par le code de foyer.</help>
         <label><!-- _SYSTEM: CUSTOM NAMING --></label>
         <name>npo02__SYSTEM_CUSTOM_NAMING__c</name>
         <picklistValues>

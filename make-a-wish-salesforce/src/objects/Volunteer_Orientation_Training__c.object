@@ -58,7 +58,7 @@
         <fullName>Account_Email__c</fullName>
         <description>This field will be used as a hidden field to store account email and used in email template to merg</description>
         <externalId>false</externalId>
-        <label>Account Email</label>
+        <label>Hidden Account Email</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -69,7 +69,7 @@
         <fullName>Account_Name__c</fullName>
         <description>It will be used as hidden field to store the volunteer account</description>
         <externalId>false</externalId>
-        <label>Account Name</label>
+        <label>Hidden Account Name</label>
         <length>90</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
@@ -81,7 +81,7 @@
         <fullName>Account_Phone__c</fullName>
         <description>It will used as a hidden field to store the volunteer account phone</description>
         <externalId>false</externalId>
-        <label>Account Phone</label>
+        <label>Hiddent Account Phone</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>

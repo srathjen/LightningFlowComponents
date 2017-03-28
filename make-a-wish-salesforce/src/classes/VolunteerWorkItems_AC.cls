@@ -222,13 +222,147 @@ reqired volunteers and registered volunteers count.*/
         return wishOpportunitiesMap.values();
     }
     
+    
+    public boolean getChapterRoleOanTStatus(Id chapterRole)
+    {
+    
+       List<Chapter_Role_O_T__c> currTrainig = [SELECT id, Required__c FROM Chapter_Role_O_T__c WHERE 
+                                                       Chapter_Role__c = :chapterRole 
+                                                       AND Orientation_Training__r.RecordTypeId = :trainingRTId limit 1];
+       if(currTrainig.size() > 0)                                                
+           return currTrainig[0].Required__c;
+       else
+           return false;
+    
+    }
+    
+    
+    public boolean allowRegisteration(List<Volunteer_Opportunity__c> volunteerOpportunity)
+    {
+    
+    
+                Boolean updateRecord=false;
+                Boolean allowRegister = false;
+                boolean isWishRole = false;
+                Map<Id,Volunteer_Roles__c> WishTrainedMap = new Map<Id,Volunteer_Roles__c>();
+                Map<Id,Volunteer_Roles__c> WishNonTrainedMap = new Map<Id,Volunteer_Roles__c>();
+                Set<Id> TrainedNonWishRoles = new Set<Id>();
+                Set<Id> notTrainedNonWishRoles = new Set<Id>();
+                boolean isWishGranterMentor=false;
+                for(Role__c currRole : [SELECT id,Name,isWishRole__c FROM Role__c WHERE Id = :volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c])
+                { 
+                    if(currRole.isWishRole__c == True)
+                        isWishRole = True;
+                        
+                        System.debug('isWishRole++++++++++++++++++++++++++++++++++++ ' + isWishRole);
+                }
+                for(Volunteer_Roles__c checkForMatchingRole : [SELECT Id, Chapter_Name__c,Role_Name__c,isWishRole__c,Status__c, Chapter_Role__c,
+                                                               Chapter_Role__r.Role_Name__c 
+                                                               FROM Volunteer_Roles__c WHERE Volunteer_Name__c =: userRelatedContactId 
+                                                               AND Chapter_Name__c =: volunteerOpportunity.get(0).Chapter_Name__r.Name])
+                                                                
+                 {
+                     if(checkForMatchingRole.isWishRole__c == True && checkForMatchingRole.Status__c == 'Trained')
+                     {
+                          WishTrainedMap.put(checkForMatchingRole.Chapter_Role__c,checkForMatchingRole);
+                          
+                          if(checkForMatchingRole.Role_Name__c == 'Wish Granter Mentor')
+                              isWishGranterMentor = True;
+                     }
+                     else if(checkForMatchingRole.isWishRole__c == True && checkForMatchingRole.Status__c != 'Trained')
+                          WishNonTrainedMap.put(checkForMatchingRole.Chapter_Role__c,checkForMatchingRole);
+                     else if(checkForMatchingRole.isWishRole__c == false && checkForMatchingRole.Status__c == 'Trained')
+                          TrainedNonWishRoles.add(checkForMatchingRole.Chapter_Role__r.Role_Name__c);
+                     else if(checkForMatchingRole.isWishRole__c == false && checkForMatchingRole.Status__c != 'Trained')
+                          notTrainedNonWishRoles.add(checkForMatchingRole.Chapter_Role__r.Role_Name__c);
+                 } 
+                 
+                 // Allowing Non-Wish Role for registering VO.
+                 if(isWishRole == false)
+                 {
+                     if(WishTrainedMap.size() > 0)
+                     {  
+                         updateRecord = true;
+                         allowRegister = true;
+                         System.debug('Block1++++++++++++++++++++++++++++++++++++++++++++++++++== ');
+                     }
+                     else
+                     {
+                         if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == True)
+                         {
+                            if(TrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__c))
+                            {
+                               updateRecord = true;
+                               allowRegister = true;
+                               
+                               System.debug('Block1++++++++++++++++++++++++++++++++++++++++++++++++++== ');
+                            
+                            }
+                         
+                         } 
+                         else
+                         {
+                         
+                           if(TrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c) || 
+                              (notTrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c)))
+                              {
+                                updateRecord = true;
+                                allowRegister = true;
+                                System.debug('Block2++++++++++++++++++++++++++++++++++++++++++++++++++== ');
+                              }
+                          }
+                          
+                     
+                         }
+                    }   
+                 
+                 
+                  else if(isWishRole == True)
+                  {
+                  
+                         if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == True)
+                            {
+                               if(WishTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) || (isWishGranterMentor == True && volunteerOpportunity[0].Role__c == 'Wish Granter'))
+                               {
+                                 
+                                          updateRecord = true;
+                                          allowRegister = true;
+                                          System.debug('Block3++++++++++++++++++++++++++++++++++++++++++++++++++== ');
+                                     
+                               }
+                            
+                            }
+                            else if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == false)
+                            {
+                                  if(WishTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) ||
+                                     WishNonTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) ||
+                                     (isWishGranterMentor == True && volunteerOpportunity[0].Role__c == 'Wish Granter'))
+                                  {      
+                                          updateRecord = true;
+                                          allowRegister = true;
+                                          System.debug('Block4++++++++++++++++++++++++++++++++++++++++++++++++++== ');
+                                  }
+                            }
+                  
+                  
+                  }
+                 
+           if(updateRecord == True && allowRegister == True)
+             return True;
+           else 
+             return false;
+    }
+    
+    
+    
       // This method is used for volunteers to register on wish events if they have any one Non wish role and used to restrict volunteers to register on similar volunteer opportunities
     public void RegisterWishEvents() {
         
         isReferesh = true;
         wishTab = false;
         nonWishTab = false;
-        List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Wish__c, Role__c, Chapter_Name__r.Name,Chapter_Role_Opportunity__r.Role_Name__c, RecordTypeId, OwnerId, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId  AND Reason_Inactive__c =: Null LIMIT 1];
+        boolean isUpdate = false;
+        List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Wish__c, Role__c, Chapter_Name__r.Name,Volunteer_Name__c,Chapter_Role_Opportunity__r.Role_Name__c, RecordTypeId, OwnerId, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId  AND Reason_Inactive__c =: Null LIMIT 1 FOR UPDATE];
         system.debug('@@@@@@@@@@ volunteerOpportunity @@@@@@@@@@@@@@@'+volunteerOpportunity);
         List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Wish__c,Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Wish__c =: volunteerOpportunity.get(0).Wish__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null];
         List<Volunteer_Opportunity__c> volunteerOpportunitySameRoleList = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Wish__c,Reason_Inactive__c,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Wish__c =: volunteerOpportunity.get(0).Wish__c AND Volunteer_Name__c =: userRelatedContactId AND Inactive__c =: true AND 
@@ -245,59 +379,40 @@ reqired volunteers and registered volunteers count.*/
                ApexPages.addMessage(mymsg);
             }
         } else {
-            Boolean updateRecord;
+          
             String chatperRoleId;
             String volunteerStatus;
-            Boolean isRequired = false;
             Boolean allowRegister = false;
-            if(volunteerOpportunity.size()>0) {
-                for(Volunteer_Roles__c checkForMatchingRole : [SELECT Id, Chapter_Name__c, Role_Name__c, Status__c, Chapter_Role__c 
-                                                               FROM Volunteer_Roles__c WHERE Volunteer_Name__c =: userRelatedContactId 
-                                                               AND (Role_Name__c =: volunteerOpportunity.get(0).Role__c OR Role_Name__c = 'Wish Granter Mentor')
-                                                               AND Chapter_Name__c =: volunteerOpportunity.get(0).Chapter_Name__r.Name 
-                                                               AND isWishRole__c = true]) 
-                {
-                   if(checkForMatchingRole.Role_Name__c == volunteerOpportunity.get(0).Role__c || (checkForMatchingRole.Role_Name__c == 'Wish Granter Mentor' && volunteerOpportunity.get(0).Role__c == 'Wish Granter'))
-                   {
-                    updateRecord = true;
-                    chatperRoleId = checkForMatchingRole.Chapter_Role__c;
-                    volunteerStatus = checkForMatchingRole.Status__c;  
-                   }                  
-                }
-                
-                for(Chapter_Role_O_T__c currTrainig : [SELECT id, Required__c FROM Chapter_Role_O_T__c WHERE 
-                                                       Chapter_Role__c = :chatperRoleId AND Required__c = true 
-                                                       AND Orientation_Training__r.RecordTypeId = :trainingRTId])
-                {
-                    isRequired = true;
-                }
-                
-                if(updateRecord == true && isRequired == true && volunteerStatus == 'Trained')
-                {
-                    allowRegister = true;
-                }
-                else if(updateRecord == true && isRequired == false)
-                {
-                    allowRegister = true;
-                }
-                if(updateRecord == true) {
-                    
+           
+            if(volunteerOpportunity.size()>0) 
+            {
+                allowRegister = allowRegisteration(volunteerOpportunity);
+                                                         
+               
                     if(allowRegister == true)
                     {
+                       if( volunteerOpportunity.get(0).Volunteer_Name__c ==  Null){
                         volunteerOpportunity.get(0).Volunteer_Name__c = userRelatedContactId;
+                        isUpdate = true;
+                        
+                        }
+                        else{
+                        isUpdate = false;
+                        ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Please refresh the page and try again.');
+                        ApexPages.addMessage(mymsg);
+                        }
+                        
+                        if(isUpdate == true){
                         update volunteerOpportunity;
                         ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Confirm,'Thank you for requesting to volunteer for this opportunity. A notification has been sent to chapter staff to review your request and staff will respond with further details, as applicable.');
                         ApexPages.addMessage(mymsg);
+                        }
                     }
                     else
                     {
                         ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Thank you for your interest in this opportunity. This opportunity requires specialized training that you have not completed, contact chapter staff for more information about expanding your volunteer opportunities.');
                         ApexPages.addMessage(mymsg);
                     }
-                } else {
-                    ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Thank you for your interest in this opportunity. This opportunity requires specialized training that you have not completed, contact chapter staff for more information about expanding your volunteer opportunities.');
-                    ApexPages.addMessage(mymsg);
-                }
             }
         }
     }
@@ -308,14 +423,15 @@ reqired volunteers and registered volunteers count.*/
         isReferesh = true;
         wishTab = false;
         nonWishTab = false;
-        Boolean updateRecord;
+        
         String chatperRoleId;
         String volunteerStatus;
-        Boolean isRequired = false;
+        
         Boolean allowRegister = false;
         Boolean isWishGranter = false;
+         boolean isUpdate = false;
         List<Volunteer_Opportunity__c> volunteerOpportunitySameRoleList;
-        List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordTypeId,Chapter_Role_Opportunity__r.Role_Name__c, OwnerId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId AND Reason_Inactive__c =: Null LIMIT 1];
+        List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Role__c, Chapter_Name__r.Name,Volunteer_Name__c, RecordTypeId,Chapter_Role_Opportunity__r.Role_Name__c, OwnerId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId AND Reason_Inactive__c =: Null LIMIT 1 FOR UPDATE];
         List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordtypeId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null ];
         if(!Test.isRunningTest())
         volunteerOpportunitySameRoleList = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Non_Wish_Event__c,Reason_Inactive__c,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Inactive__c =: true AND 
@@ -339,64 +455,36 @@ reqired volunteers and registered volunteers count.*/
         else {
             if(volunteerOpportunity.size()>0) 
             {
-                for(Volunteer_Roles__c checkForMatchingRole : [SELECT Id,Chapter_Name__c,Volunteer_Name__c,Role_Name__c,isWishRole__c, Chapter_Role__c, 
-                                                               Status__c,Chapter_Role__r.Role__c,Chapter_Role__r.Role_Name__r.isWishRole__c FROM Volunteer_Roles__c WHERE Volunteer_Name__c =: userRelatedContactId 
-                                                               AND Chapter_Name__c =: volunteerOpportunity.get(0).Chapter_Name__r.Name]) 
-                    
-                {
-                    if(checkForMatchingRole.Id != Null){
-                        updateRecord = true;
-                        chatperRoleId = checkForMatchingRole.Chapter_Role__c;
-                        volunteerStatus = checkForMatchingRole.Status__c;  
-                        system.debug('@@@@@ 1 @@@@@@'+volunteerStatus );
-                        system.debug('@@@@@ 2 @@@@@@'+chatperRoleId );
-                    }
-                    
-                    if((checkForMatchingRole.Chapter_Role__r.Role__c == 'Wish Granter' && checkForMatchingRole.Chapter_Role__r.Role_Name__r.isWishRole__c == true && checkForMatchingRole.Status__c == 'Trained') ||
-                       (checkForMatchingRole.Chapter_Role__r.Role__c == 'Wish Granter Mentor' && checkForMatchingRole.Chapter_Role__r.Role_Name__r.isWishRole__c == true && checkForMatchingRole.Status__c == 'Trained'))
-                       isWishGranter = true;
-                       system.debug('@@@@@ isWishGranter  @@@@@@'+isWishGranter );
-                }
-                for(Chapter_Role_O_T__c currTrainig : [SELECT id, Required__c FROM Chapter_Role_O_T__c WHERE 
-                                                       Chapter_Role__c = :chatperRoleId AND Required__c = true 
-                                                       AND Orientation_Training__r.RecordTypeId = :trainingRTId])
-                {
-                    if(currTrainig.Id != Null){
-                    isRequired = true;
-                    system.debug('@@@@@ 3 @@@@@@'+isRequired);
-                    }
-                    
-                    
-                }
-                
-                if((updateRecord == true && isRequired == true && volunteerStatus == 'Trained') || (updateRecord == true && isWishGranter == true))
-                {
-                    allowRegister = true;
-                     system.debug('@@@@@ 4 @@@@@@'+allowRegister);
-                }
+               allowRegister = allowRegisteration(volunteerOpportunity);
+                                                         
                
-                if(updateRecord == true) 
-                {
                     if(allowRegister == true)
                     {
+                       if( volunteerOpportunity.get(0).Volunteer_Name__c ==  Null){
                         volunteerOpportunity.get(0).Volunteer_Name__c = userRelatedContactId;
-                        update volunteerOpportunity;
-                         ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Confirm,'Thank you for requesting to volunteer for this opportunity. A notification has been sent to chapter staff to review your request and staff will respond with further details, as applicable.');
+                        isUpdate = true;
+                        
+                        }
+                        else{
+                        isUpdate = false;
+                        ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Please refresh the page and try again.');
                         ApexPages.addMessage(mymsg);
+                        }
+                        
+                        if(isUpdate == true){
+                        update volunteerOpportunity;
+                        ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Confirm,'Thank you for requesting to volunteer for this opportunity. A notification has been sent to chapter staff to review your request and staff will respond with further details, as applicable.');
+                        ApexPages.addMessage(mymsg);
+                        }
                     }
                     else
                     {
                         ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Thank you for your interest in this opportunity. This opportunity requires specialized training that you have not completed, contact chapter staff for more information about expanding your volunteer opportunities.');
                         ApexPages.addMessage(mymsg);
                     }
-                } 
-                else 
-                {
-                    ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Thank you for your interest in this opportunity. This opportunity requires specialized training that you have not completed, contact chapter staff for more information about expanding your volunteer opportunities.');
-                    ApexPages.addMessage(mymsg);
-                }
-            }
-        }
+                    
+              }
+          }
     }  
     
     //Used for registration confirmation and redirect to volunteer assignment opportunities page

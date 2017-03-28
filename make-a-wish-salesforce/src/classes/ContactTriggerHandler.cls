@@ -161,7 +161,7 @@ public class ContactTriggerHandler{
                    houseHoldAffiliation.npe5__Organization__c=con.AccountId;
                    houseHoldAffiliation.npe5__Contact__c=con.id;
                    houseHoldAffiliation.npe5__StartDate__c = Date.Today();
-                   houseHoldAffiliation.npe5__Status__c = 'Current';
+                   houseHoldAffiliation.npe5__Status__c = 'Active';
                    houseHoldAffList.add(houseHoldAffiliation);
                    
                    system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
@@ -173,7 +173,7 @@ public class ContactTriggerHandler{
                        aff.npe5__Organization__c=con.Region_Chapter__c;
                        aff.npe5__Contact__c=con.id;
                        aff.npe5__StartDate__c = Date.Today();
-                       aff.npe5__Status__c = 'Current';
+                       aff.npe5__Status__c = 'Active';
                        if(con.RecordTypeId == familyContactRecordTypeId )
                         {
                            aff.Constituent_Code__c='Wish Family';
@@ -300,21 +300,23 @@ public class ContactTriggerHandler{
     @future
     public static void updateHouseHoldAddress(Set<Id> addressSet){
         
-        Map<Id,Contact> houseHoldContactMap= new Map<Id,Contact>();
+        List<Contact> dbFamilyContact = new List<Contact>();
+        Set<Id> dbFamilyAccountIdSet = new Set<Id>();
         List<Contact> updateFamilyContactList = new List<Contact>();
         Map<Id,Account> houseHoldAccountMap = new Map<Id,Account>();
         
         for(Contact familyContact :[SELECT Id,AccountId,Name,FirstName,LastName,Phone,Email,MailingStreet,MailingCity,MailingState,MailingCountry,MailingPostalCode,Same_as_Household_Address__c From Contact WHERE Id IN: addressSet]){
         if(familyContact.Same_as_Household_Address__c  == true){ 
-            houseHoldContactMap.put(familyContact.AccountId,familyContact );
+            dbFamilyAccountIdSet.add(familyContact.AccountId);
+            dbFamilyContact.add(familyContact);
             }
         }
-        if(houseHoldContactMap.size() > 0){
-            for(Account dbHouseHoldAccount :[SELECT Id,BillingStreet,BillingCity,BillingState,BillingCountry,BillingPostalCode FROM Account WHERE Id IN: houseHoldContactMap.KeySet()]){
+        if(dbFamilyAccountIdSet.size() > 0){
+            for(Account dbHouseHoldAccount :[SELECT Id,BillingStreet,BillingCity,BillingState,BillingCountry,BillingPostalCode FROM Account WHERE Id IN: dbFamilyAccountIdSet]){
                 houseHoldAccountMap.put(dbHouseHoldAccount.Id,dbHouseHoldAccount);
             }
           
-          for(Contact familyContact : houseHoldContactMap.Values()){
+          for(Contact familyContact : dbFamilyContact){
               if(houseHoldAccountMap.containsKey(familyContact.AccountId)){
                   familyContact.MailingStreet = houseHoldAccountMap.get(familyContact.AccountId).BillingStreet;
                   familyContact.MailingCity =  houseHoldAccountMap.get(familyContact.AccountId).BillingCity;

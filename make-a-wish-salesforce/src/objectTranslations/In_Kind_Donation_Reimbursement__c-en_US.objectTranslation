@@ -228,6 +228,10 @@ If this is a volunteer donor, gift subtype should begin with DRPS --></help>
         <name>Make_check_payable_to_me__c</name>
     </fields>
     <fields>
+        <label><!-- Migrated Record --></label>
+        <name>Migrated_Record__c</name>
+    </fields>
+    <fields>
         <label><!-- Pay Method --></label>
         <name>Pay_Method__c</name>
         <picklistValues>
@@ -509,9 +513,9 @@ If this is a volunteer donor, gift subtype should begin with DRPS --></help>
         <name>Volunteer_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Wish Owner --></label>
+        <label><!-- Hidden Wish Owner --></label>
         <name>Wish_Owner__c</name>
-        <relationshipLabel><!-- In-Kind Donation &amp; Reimbursement (Wish Owner) --></relationshipLabel>
+        <relationshipLabel><!-- In-Kind Donation &amp; Reimbursement (Hidden Wish Owner) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Wish Owner&apos;s Manager --></label>

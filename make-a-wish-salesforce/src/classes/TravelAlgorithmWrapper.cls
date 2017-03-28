@@ -138,7 +138,7 @@ public class TravelAlgorithmWrapper {
         options.add(new SelectOption('Internal Cardiac Defibrillator (ICD) – the device has delivered a shock, individual is unstable','Internal Cardiac Defibrillator (ICD) – the device has delivered a shock, individual is unstable'));
         options.add(new SelectOption('Internal Cardiac Defibrillator (ICD) – the device has delivered a shock, the individual has been stable for at least 6 weeks','Internal Cardiac Defibrillator (ICD) – the device has delivered a shock, the individual has been stable for at least 6 weeks'));
         options.add(new SelectOption('Valve disease of functional class IV or is experiencing chest pain or syncope','Valve disease of functional class IV or is experiencing chest pain or syncope'));
-        options.add(new SelectOption('Pacemaker placement more less than one week ago','Pacemaker placement more less than one week ago'));
+        options.add(new SelectOption('Pacemaker placement less than one week ago?','Pacemaker placement less than one week ago?'));
         options.add(new SelectOption('I do not know','I do not know'));
         options.add(new SelectOption('Not Applicable','Not Applicable'));
         return options;

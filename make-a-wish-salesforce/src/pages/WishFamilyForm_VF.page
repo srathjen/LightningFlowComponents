@@ -1,16 +1,16 @@
 <apex:page standardController="Case" extensions="WishChildForm_AC"  standardStylesheets="false" title="Make-A-Wish Communities | Wish Family Form" showHeader="false" sidebar="false" docType="html-5.0">
-   <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/> 
+   <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/>
 <!--<apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap.min.css')}" /> -->
     <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap-theme.min.css')}" />
     <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/ng_responsive_tables.css')}" />
     <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/page.css')}" />
     <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap.min.js')}"/>
     <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/ng_responsive_tables.js')}"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
     <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/datepicker.min.css')}" />
     <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap-datepicker.min.js')}"/>
     <apex:includeScript value="{!URLFOR($Resource.prospective_assets,'web/js/jq.maskedinput.min.js')}" />
-    <apex:include pageName="prospective_head" id="phead" />   
+    <apex:include pageName="prospective_head" id="phead" />
     <style>
         @media (max-width: 480px) {
         table.multiSelectPicklistTable {table-layout: fixed;width: 255px; margin-left:-5%;margin: auto;}
@@ -21,7 +21,7 @@
          @media (max-width: 768px) {
          .custMenu{width:100% !important;font-size:large !important;text-align:left !important};
       }
-      
+
         @media all and (max-width: 960px) and (min-width: 520px), (min-width: 480px) {
         table.responsive,
         table.responsive thead,
@@ -38,7 +38,7 @@
         table.responsive td.small-padding { padding-top: 5px; padding-bottom: 5px; }
         table.responsive td.medium-padding { padding-top: 15px; padding-bottom: 15px; }
         table.responsive td.large-padding { padding-top: 10px; padding-bottom: 25px; }
-        
+
         table.responsive td:nth-child(odd){
         background:#f9f9f9;
         }
@@ -48,7 +48,7 @@
         td.mobiltxt:before{width:100% !important;}
         .mobiltxt{
         display:block;
-        font-weight:bold; 
+        font-weight:bold;
         }
         table.responsive td {width:100%}
         }
@@ -59,7 +59,7 @@
         .messageText{
         padding:10px;
         }
-        
+
         form .form-control {
         border-radius: 0;
         font-family: "Arial", sans-serif;
@@ -67,17 +67,17 @@
         padding-top: .61rem;
         padding-bottom: .9em;
         }
-            
+
         .form-control {
         height:inherit; !important
         }
-        
+
         select {
         height:30px;
         line-height:30px;
         background:#f4f4f4;
-    } 
-    
+    }
+
         .container-body{
             border-bottom: 0px solid black !important;
             border-top: 0px solid black  !important;
@@ -93,7 +93,7 @@
             text-decoration : none !important;
         }
         header,main {max-width : 1000px !important;}
-      
+
     </style>
      <style type="text/css">
             .vfHelpText a            {position:relative;}
@@ -106,7 +106,7 @@
             background-color:#FEFDB9;
             color:black;
             }
-            
+
             .pop-wrap, .pop-wrap-main-message {
             position:fixed;
             top: 20%;
@@ -115,7 +115,7 @@
             width:90%;
             max-width:35rem;
             }
-            
+
             .custPopup, .custPopup-main-message{
             font-family:"arial", helvetica, sans-serif;
             position: relative;
@@ -129,10 +129,10 @@
             height: auto;
             padding: 5% 15% 15% 10%;
             }
-            
+
             .pop-wrap-main-message {top: 1%}
             .custPopup-main-message{top: 0; padding:0 1rem 0;}
-            
+
             .popupBackground{
             position: fixed;
             background: rgba(0,0,0,.4);
@@ -142,7 +142,7 @@
             left: 0;
             z-index: 9998;
             }
-            
+
             .labelCol{width:180px;}
             .sideNav {
             position: fixed;
@@ -154,48 +154,52 @@
         .sideNav a {
             text-decoration : none !important;
         }
-        
+
        .active {
             font-weight:600;
             font-size: 18px;
         }
-        
-        header,main {max-width : 1000px !important;}    
+
+        header,main {max-width : 1000px !important;}
         .bold { font-weight: bold;
-                font-size: 18px; }  
-                
-                
+                font-size: 18px; }
+
+
       .activeClassCommunity{background:#2184cc !important;color:#000000 !important;border:solid 1px #2184cc !important;}
       .custMenuCommunity{margin:1px;border:solid 1px #2184cc;float: left;width: 23%;color: #ffffff;font-size:small; background: #c7c7c7;padding: 6px;text-align: center;user-select: none;cursor: pointer;}
       .col-lg-3 { width: 25%;height: 38px; }
-                  
+
         </style>
     <script>
-     var listSize;    
+     var listSize;
     function formatDate(date) {
             var d = new Date(date),
             month = '' + (d.getUTCMonth() + 1),
             day = '' + d.getUTCDate(),
             year = d.getUTCFullYear();
-            
+
             if (month.length < 2) month = '0' + month;
             if (day.length < 2) day = '0' + day;
-            
+
             return [month,day,year].join('/');
             }
-    
-    $(document).ready(function(){ 
+
+    $(document).ready(function(){
          $(".f-phone").attr('type','tel'); // enhanced for html5 and mobile
-            $(".my-phon").mask("(999) 999-9999");   
+            //$(".my-phon").mask("(999) 999-9999");
+            $("[id$='frm']").on( "click", ".my-phon", function() {
+                $( this ).mask("(999) 999-9999");
+            }); 
+
         $(".readonly").attr('readonly', 'readonly');
-        
-        $('.collapse a').click(function() { 
+
+        $('.collapse a').click(function() {
                $('.active').removeClass('active');
-               $('.'+$(this).attr('class')).addClass('active');            
+               $('.'+$(this).attr('class')).addClass('active');
            });
-        
+
      /* $(".numeric").keypress(function(){
-           
+
             var x = $(".a").val();
             if(validate(x)){
                 alert('Please Enter Valid Home Telephone');
@@ -208,29 +212,29 @@
             if(validate(c)){
                 alert('Please Enter Valid Mobile Telephone');
             }
-            
+
             var d = $(".d").val();
             if(validate(d)){
                 alert('Please Enter Valid Telephone number');
             }
-   
+
         });*/
-        
-        
-         $('.date-input2').blur(function(){            
+
+
+         $('.date-input2').blur(function(){
             validateDate($(this).val());
         });
-        
-        
+
+
         $(".phonecheck").click(function(){
-            
+
             var x = $(".a").val();
-            
+
             if(validate(x)){
                 alert('Please Enter Valid Home Telephone');
                 return false;
              }
-             
+
             else if(x !='')
             {
                   x= x.replace("(", "");
@@ -243,14 +247,14 @@
                   return false;
                  }
             }
-            
+
             var b = $(".b").val();
-            
+
             if(validate(b)){
                 alert('Please Enter Valid Work Telephone');
                 return false;
              }
-             
+
             else if(b !='')
             {
                   b= b.replace("(", "");
@@ -263,14 +267,14 @@
                   return false;
                  }
             }
-            
+
             var c = $(".c").val();
-            
+
             if(validate(c)){
                 alert('Please Enter Valid Mobile Telephone');
                 return false;
              }
-             
+
             else if(c !='')
             {
                   c= c.replace("(", "");
@@ -283,14 +287,14 @@
                   return false;
                  }
             }
-            
+
             var d = $(".c").val();
-            
+
             if(validate(d)){
                 alert('Please Enter Valid Telephone Number');
                 return false;
              }
-             
+
             else if(d!='')
             {
                   d= d.replace("(", "");
@@ -303,50 +307,50 @@
                   return false;
                  }
             }
-            
-              
-        });      
-       
-        
+
+
+        });
+
+
         function validate(a)
         {
-        
+
             var x = a;
             x= x.replace("(", "");
             x= x.replace(")", "");
             x= x.replace("-", "");
             x= x.replace(" ", "");
-        
+
             if(x != '')
             {
                 if(!$.isNumeric(x))
                    return true;
             }
         }
-        
+
           $('.style1').change(function(){
-            
+
             if( $(this).val() == 'No'){
                 $('.Yes').removeClass('required');
                 $('.Yes').css('border', '1px #ccc solid');
-               
+
             }
             else if($(this).val() == null || $(this).val() == "" ){
                 $('.Yes').removeClass('required');
                 $('.Yes').css('border', '1px #ccc solid');
-            
+
             }
-            else if($(this).val() == 'Yes' && ($('.Yes').val() == null || $('.Yes').val() == "")){                   
+            else if($(this).val() == 'Yes' && ($('.Yes').val() == null || $('.Yes').val() == "")){
                 $('.Yes').addClass('required');
                 $('.Yes').css('border', '2px #ccc solid');
-                
+
             }
-    
-        });                
-        
-        
-        
-        var windw = this;        
+
+        });
+
+
+
+        var windw = this;
         $.fn.followTo = function ( pos ) {
             var $this = this,
             $window = $(windw);
@@ -365,69 +369,69 @@
              }
            });
          };
-        
-        $('.sticky').followTo($(".clearBoth").height());        
-            
-        
+
+        $('.sticky').followTo($(".clearBoth").height());
+
+
     });
-    
-    
-    
-     function ClickToValidate(){    
-     
-           var runBool = true; 
+
+
+
+     function ClickToValidate(){
+
+           var runBool = true;
            if($('.Yes').val() == null || $('.Yes').val() == "" ){
-               if( $('.style1').val() == 'Yes'){                 
-                $('.Yes').css("border-color", "red");              
+               if( $('.style1').val() == 'Yes'){
+                $('.Yes').css("border-color", "red");
                }
            }
-           
+
              if($('.Yes').val() == null || $('.Yes').val() == "" ){
-               if( $('.style1').val() == 'No'){ 
-                $('.Yes').css("border-color", "#ccc");              
+               if( $('.style1').val() == 'No'){
+                $('.Yes').css("border-color", "#ccc");
                }
            }
-           
-           
-         
-             if( $('.style1').val() == 'No'){                 
+
+
+
+             if( $('.style1').val() == 'No'){
                 $('.Yes').removeClass('required');
                 $('.Yes').css('border', '1px #ccc solid');
-                runBool = true; 
-               
+                runBool = true;
+
             }
             else if($('.style1').val() == null || $('.style1').val() == "" ){
                 $('.Yes').removeClass('required');
                 $('.Yes').css('border', '1px #ccc solid');
-                runBool = true; 
-            
+                runBool = true;
+
             }
-            else if($('.style1').val() == 'Yes' && ($('.Yes').val() == null || $('.Yes').val() == null)){   
-            
+            else if($('.style1').val() == 'Yes' && ($('.Yes').val() == null || $('.Yes').val() == null)){
+
                 $('.Yes').addClass('required');
                 $('.Yes').css('border', '1px red solid');
                 runBool = false;
-            
+
             }
-            
+
            $('.required').each(function(){
                if($(this).val() == '' || $(this).val() == null ){
                   // $('.Yes').css('border', '1px #ccc solid');
                    runBool = false;
-                   alert("Please fill all required fields");                   
+                   alert("Please fill all required fields");
                    return false;
                 }
-                  
+
            });
-           
+
            if(!runBool){
-              validateEmail();  
-              if($('.style1').val() == 'Yes'  && $('.Yes').val() == null )          
+              validateEmail();
+              if($('.style1').val() == 'Yes'  && $('.Yes').val() == null )
                    $('.Yes').css('border', '1px red solid');
 
             return false;
             }
-           else{               
+           else{
                var isEmail = validateEmail();
                 if(!isEmail){
                    return false
@@ -437,12 +441,12 @@
                  }
            }
         }
-    
-       
+
+
        function validateEmail() {
-       var isBool=true; 
-       var a = 0;      
-       $('.emailValue').each(function(){ 
+       var isBool=true;
+       var a = 0;
+       $('.emailValue').each(function(){
        var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
        var x = $(this).parent().find('.errorMsg');
             if($(this).val()!= '' && $(this).val()!= null){
@@ -451,7 +455,7 @@
                    x.show();
                    $('.RemoveCols').css({"margin-left":"1%"});
                    x.text("Invalid email address, please enter a valid email address or leave as blank").css('color', 'Red');
-                   $('.RemoveCols').css({"margin-left":"1%"});       
+                   $('.RemoveCols').css({"margin-left":"1%"});
                if($('.Yes').val() == "Yes" && $('.Yes').val() == null){
                   $('.Yes').css('border', '2px red solid');
                   }
@@ -462,50 +466,50 @@
              }
            }
               a++;
-        }); 
+        });
 
           if(!isBool ){
                 return false;
           }
           else{
-           var n = validatePhone();                
+           var n = validatePhone();
             if(!n){
               return false;
             }
-            else{            
-                  
+            else{
+
               return true;
             }
           }
        }
-     
+
      function validatePhone() {
-      
+
         var bool = false;
-        for(var i=0; i<=listSize; i++){            
+        for(var i=0; i<=listSize; i++){
             if($('.home'+i).val().length < 1 && $('.mobile'+i).val().length < 1 &&  $('.work'+i).val().length <1 && !bool)
                 bool = true;
-            }  
+            }
         if(bool){
             alert("Please fill any One of the Telephone Number");
             return false;
         }
-        
-        var d = DynamicSelect();        
+
+        var d = DynamicSelect();
             if(!d){
             return false;
             }
-            else{ 
+            else{
              if($('.style1').val() == 'Yes' && ($('.Yes').val() == null || $('.Yes').val() == null)){
                   $('.Yes').css('border', '1px red solid');
-             }         
-           
+             }
+
           return true;
         }
-        
+
      }
-     
-     
+
+
      function DynamicSelect(){
         var bool = true;
              $(".dynamicclass option:selected").each(function () {
@@ -515,19 +519,19 @@
                         selText = $this.text();
                         }
                         if($(".dynamicclass").val() != null){
-                            if(selText == 'Other' && $('.race').val().length<1){                         
-                                    bool = false;                                    
+                            if(selText == 'Other' && $('.race').val().length<1){
+                                    bool = false;
                             }
                            else{
-                            bool =true;                                              
+                            bool =true;
                             }
                     }
                     else{
-                    bool =true;   
+                    bool =true;
                     }
                 });
-                
-                if(!bool){                                       
+
+                if(!bool){
                  $('.race').addClass('required');
                  $('.race').css('border', '2px red solid');
                 return false;
@@ -537,34 +541,34 @@
                 $('.race').css('border', '2px #ccc solid');
                 return true;
                 }
-        
+
         }
-        
-        function isNumber(evt) {         
+
+        function isNumber(evt) {
             evt = (evt) ? evt : window.event;
             var charCode = (evt.which) ? evt.which : evt.keyCode;
             if(charCode > 31 && (charCode < 48 || charCode > 57)) {
                 return false;
-              }             
+              }
              return true;
         }
-        
-                    
+
+
         function validateDate(ddate) {
             var tempDate = $(ddate).val();
             var temp = tempDate.split('/');
             var d = new Date(temp[2] + '/' + temp[0] + '/' + temp[1]);
             return(d && (d.getMonth() + 1) == temp[0] && d.getDate() == Number(temp[1]) && d.getFullYear() == Number(temp[2]));
         }
-        
-        
 
-         
-        
+
+
+
+
     </script>
-    
-    <body class="vcp vcpactivelogin full registered profile"> 
-       
+
+    <body class="vcp vcpactivelogin full registered profile">
+
        <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
        <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />
        <div style="width:60%;height:100px;margin-left:25%;margin-right:25%;"><apex:include pageName="active_header_progress_bar" id="pheaderprog" rendered="{!if($Profile.Name<>"Active Volunteer",true,true)}" /></div>
@@ -573,41 +577,41 @@
        <main role="main" class="container clearBoth">
         <div class="sideNav sticky">
             <!--<a data-toggle="collapse" href="#childForm">
-                [+]                       
-            </a>--> 
+                [+]
+            </a>-->
           <apex:commandLink action="{!BackToWCF}" value="Wish Child Form" styleClass="mg-rt phonecheck" onclick="return ClickToValidate();"/>
           <!--<a class="navMenu" href="{!wcfUtil.childForm}">Wish Child Form</a>
             <div id="childForm" class="panel-collapse collapse">
-                <a href="#mainSec">Main Section</a><br/> 
-                <a href="#myFav">My Favorites</a><br/> 
-                <a href="#otherFav">Other Favorites</a>                    
+                <a href="#mainSec">Main Section</a><br/>
+                <a href="#myFav">My Favorites</a><br/>
+                <a href="#otherFav">Other Favorites</a>
             </div>-->
             <br/>
             <a data-toggle="collapse" href="#familyForm">
-                [+]                       
+                [+]
             </a>
              <apex:commandLink action="{!SaveAndRedirectInformationForm}" value="Wish Family Form"  />
            <!-- <a class="navMenu" id="navMenu1" href="{!wcfUtil.familyForm}">Wish Family Form</a> -->
             <div id="familyForm" class="panel-collapse collapse">
-           
-                <a href="#parentInfo" class='parentInfo'> Parent/Legal Guardian</a><br/> 
-                <a href="#reqSign" class='reqSign'>Prior Wish</a><br/> 
-                <a href="#participantsInfo" class='participantsInfo'>Participants Info</a>                     
+
+                <a href="#parentInfo" class='parentInfo'> Parent/Legal Guardian</a><br/>
+                <a href="#reqSign" class='reqSign'>Prior Wish</a><br/>
+                <a href="#participantsInfo" class='participantsInfo'>Participants Info</a>
             </div>
             <br/>
           <!--  <a data-toggle="collapse" href="#infoForm">
-                [+]                       
+                [+]
             </a>-->
             <apex:commandLink action="{!WFFNext}" value="Wish Information Form" styleClass="mg-rt phonecheck" onclick="return ClickToValidate();"/>
            <!-- <a class="navMenu" href="{!wcfUtil.infoForm}">Wish Information Form</a>
             <div id="infoForm" class="panel-collapse collapse">
-                <a href="#schedule">Scheduling</a><br/> 
-                <a href="#driverInfo">Driver Information</a><br/> 
-                <a href="#medInfo">Medical Information</a><br/> 
-                <a href="#travelInfo">Travel Information</a>                     
+                <a href="#schedule">Scheduling</a><br/>
+                <a href="#driverInfo">Driver Information</a><br/>
+                <a href="#medInfo">Medical Information</a><br/>
+                <a href="#travelInfo">Travel Information</a>
             </div>-->
-                </div>    
-           
+                </div>
+
         <apex:pageblock id="membAdd">
         <div class="row" style="margin-left: 25%;">
                         <div class="col-sm-12">
@@ -620,9 +624,9 @@
                         </div>
                 </div>
              <apex:pageMessages />
-            <div class="container"> 
+            <div class="container">
              <div class="alert alert-danger">
-                   
+
               </div>
                <!-- <div class="row header-padding">
                     <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/MakeAWishAmerica.PNG')}" styleClass="header-logo"/>
@@ -659,23 +663,21 @@
                                            <apex:selectOption itemlabel="Please Select" itemValue=""/>
                                            <apex:selectOptions value="{!wcfUtil.ParentGuardianRelationships}" />
                                         </apex:selectList>
-                                       
-                                    </div>
-                                    
-                                  
-                                   <div class="form-group col-sm-4">
-                                        <label for="email">Home Telephone:</label>
-                                        <apex:inputText value="{!wishFamilContact.homeTelephone}"  styleClass="form-control my-phon numeric a home{!cnt} homePhone" style="border-left:1px solid #dcdcdc" maxlength="13" onkeypress="return isNumber(event)"/>
+
                                     </div>
 
-                                    <div class="row"> 
+
+                                   <div class="form-group col-sm-4">
+                                        <label for="email">Home Telephone:</label>
+                                        <apex:inputText value="{!wishFamilContact.homeTelephone}"  styleClass="form-control my-phon numeric a home{!cnt} homePhone" style="border-left:1px solid #dcdcdc" maxlength="10" onkeypress="return isNumber(event)"/>
+                                    </div>
+
                                     <div class="form-group col-sm-4">
                                         <label for="email">Work Telephone:</label>
                                         <apex:inputText value="{!wishFamilContact.workTelephone}"  styleClass="form-control my-phon numeric b work{!cnt} workPhone" style="border-left:1px solid #dcdcdc" maxlength="10" onkeypress="return isNumber(event)"/>
                                     </div>
-                                    </div>
-                                    
-                                    <div class="form-group col-sm-4">
+                                </div><div class="row">
+                                     <div class="form-group col-sm-4">
                                         <label for="email">Mobile Telephone :</label>
                                         <apex:inputText value="{!wishFamilContact.mobileTelephone}" styleClass="form-control my-phon numeric c mobile{!cnt} mobilePhone" style="border-left:1px solid #dcdcdc" maxlength="10" onkeypress="return isNumber(event)" />
                                     </div>
@@ -693,63 +695,90 @@
                                                 </span>
                                             </label>
                                             <apex:inputText value="{!wishFamilContact.dob}" styleClass="form-control date-input dob{!cnt} required dobs" id="date-input" style="height:38px;border-left:5px solid red"/>
-                                        </div> 
+                                        </div>
                                     </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="email">Street:</label>
+                                        <apex:inputText value="{!wishFamilContact.Street}" styleClass="form-control required"  style="border-left:5px solid red" />
+                                        <span class="errorMsg"></span>
+                                    </div>
+                                    <div class="form-group col-sm-4">
+                                        <label for="email">City:</label>
+                                        <apex:inputText value="{!wishFamilContact.City}" styleClass="form-control required"  style="border-left:5px solid red" />
+                                        <span class="errorMsg"></span>
+                                    </div>
+                                 
+                                 <div class="form-group col-sm-4">
+                                <label for="State">State:</label>
+                                <apex:selectList value="{!wishFamilContact.State}" size="1" multiselect="false" styleClass="form-control required" style="border-left:5px solid red">
+                                                 <apex:selectoptions value="{!wcfUtil.states}" />
+                                </apex:selectList>
+                                  <span class="errorMsg"></span>
+                                  </div>
+                                    
+                                    
+                                </div>
+                                
+                                <div class="row">
+                                <div class="form-group col-sm-4">
+                                        <label for="email">PostalCode:</label>
+                                        <apex:inputText value="{!wishFamilContact.PostalCode}" styleClass="form-control required" style="border-left:5px solid red" />
+                                        <span class="errorMsg"></span>
+                                    </div>
+                                    </div><div class="row">
                                     <div class="form-group col-sm-4 RemoveCols" style="margin-top:27px;">
                                         <apex:commandlink immediate="true" action="{!removeFamily}" reRender="membAdd">
                                             <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/Remove.png')}" style="height:32px"></apex:image>Remove Contact
                                             <apex:param name="index" value="{!cnt}"/>
                                         </apex:commandlink>
-                                         <script type="text/javascript">
-                                            listSize = {!cnt};
-                                         </script>
+                                        <script type="text/javascript">
+                                        listSize = {!cnt};
+                                        </script>
                                         <apex:variable var="cnt" value="{!cnt+1}"/>
-                                    </div>
+                                    </div>                                        
                                 </div>
-                                
-                                <hr/>
                             </apex:repeat>
                         </div>
                       </apex:outputpanel>
-                          <apex:commandLink value="Add Family" action="{!addFamily}" reRender="membAdd"   styleClass="btn btn-default pull-left top-space"/>     
+                          <apex:commandLink value="Add Family" action="{!addFamily}" reRender="membAdd"   styleClass="btn btn-default pull-left top-space"/>
                     </div>
                      <div class="row top-space pad15" id="reqSign">
                      <div class="row pad-clear">
                             <p>
                                 <b>Prior Wish: </b>Has your child ever had a wish granted or been considered by Make-A-Wish® or any other
                                 wish-granting organization? <apex:inputField value="{!currWishChild.Already_wish_granted_by_MAW_Other_Org__c}" styleClass="form-control style1"/> <br/>
-                                *If yes, please indicate the organizations name, the wish, and the date it was or will be granted. 
+                                *If yes, please indicate the organizations name, the wish, and the date it was or will be granted.
                                 <apex:inputField value="{!currWishChild.If_yes_Enter_Org_Name_Wish_Date_it_wa__c}"   styleClass="form-control Yes required" /> <br/>
-                                
+
                                 <center><i>A wish with another organization may not be pursued prior to completion of a Make-A-Wish experience. </i></center>
                             </p>
                             <p>
                                 <b>Social Media:</b> Make-A-Wish would like to stay connected through social media. If interested, please
                                 provide contact information for each site on which you are active
                                 <apex:inputfield value="{!currWishChild.Social_Media_Link__c}"   styleClass="form-control" />
-                            </p>    
+                            </p>
                        </div>
                      </div>
-                       
+
                          <div class="row top-space pad15">
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <center><p class="assistance">Names of Make-A-Wish representatives assisting in the completion of this form.</p></center>
-                                    <U class="pull-left" style="font-size:19px"><apex:inputText value="{!wcfUtil.caseTeamMemberNo1}" /></U>  
-                                    <U class="pull-right" style="font-size:19px"><apex:inputText value="{!wcfUtil.caseTeamMemberNo2}" /></U> 
+                                    <U class="pull-left" style="font-size:19px"><apex:inputText value="{!wcfUtil.caseTeamMemberNo1}" /></U>
+                                    <U class="pull-right" style="font-size:19px"><apex:inputText value="{!wcfUtil.caseTeamMemberNo2}" /></U>
                                 </div>
                             </div>
                         </div>
-                        
-                        
+
+
                      <!--    Parent/Legal Guardian Signature : <apex:inputField value="{!currWishChild.Parent_Legal_Guardian_Signature__c}" styleClass="form-control"/> <br/> -->
                         Requested Wish Participants, as indicated by the wish child. Please list legal names of all requested
-                        wish participants and relevant information.<br/> 
+                        wish participants and relevant information.<br/>
                         <b>NOTE:</b> Make-A-Wish cannot guarantee the participation of any
                         individual(s) listed below. <br/>
 
-                    
-                                                
+
+
                        <div style="float:left;margin-right: 26%;margin-top: 10px;" >
                          <apex:inputCheckbox value="{!wcfUtil.sameParentGuardian}"  style="display:inline !important;position:relative;z-index:9999;" >
                               <apex:actionSupport action="{!SameAsFamily}" event="onchange" reRender="membAdd" />
@@ -757,7 +786,7 @@
                        </div>
 
                         <apex:pageBlock id="newPart">
-                                                   
+
                          <div class="row top-space pad15" id="participantsInfo">
                           <div style="float:right;margin-right: 62%;margin-top: 10px;">
                           </div>
@@ -776,9 +805,9 @@
                                         <th>Residing with Wish Child</th>
                                         <th>Remove</th>
                                     </tr>
-                                    <apex:variable value="{!0}" var="part"/>                                    
+                                    <apex:variable value="{!0}" var="part"/>
                                     <apex:repeat value="{!wcfUtil.wishParticipantList}" var="wishFamilContact" id="participant">
-                                        <tr>                                          
+                                        <tr>
                                             <td class="mobiltxt"></td>
                                             <td><apex:inputText value="{!wishFamilContact.FirstName}" styleClass="form-control partFName{!part} required" style="border-left:5px solid red"/></td>
                                             <td><apex:inputText value="{!wishFamilContact.MiddleName}" styleClass="form-control" /></td>
@@ -787,7 +816,7 @@
                                                 <apex:selectOption itemlabel="Please Select" itemValue=""/>
                                                 <apex:selectOptions value="{!wcfUtil.ParticipantRelationships}" />
                                                 </apex:selectList>
-                                            </td>                          
+                                            </td>
                                             <td>
                                                 <div class="input-group"><label class="input-group-addon btn" for="date"><span class="fa fa-calendar open-datetimepicker"></span></label>
                                                     <apex:inputText value="{!wishFamilContact.dob}" styleClass="form-control date-input required" id="date-input" onblur="return validateDate(this);" style="border-left:5px solid red;height: 38px;"/>
@@ -808,33 +837,33 @@
                                                     <apex:selectOption itemlabel="No" itemValue="No"/>
                                                 </apex:selectList>
                                             </td>
-                                          
+
                                           <!--  <td><apex:inputCheckbox value="{!wishFamilContact.medicalNeeds}" /></td>
                                             <td><apex:inputcheckbox value="{!wishFamilContact.residingWishMedical}" /></td>-->
-                                            
+
                                             <td><apex:commandLink id="link"  action="{!removeParticipants}" immediate="true" reRender="membAdd">
                                                 <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/Remove.png')}" style="height:32px"></apex:image>
                                                 <apex:param name="Participant" value="{!part}"/>
                                                 </apex:commandLink>
-                                                <apex:variable var="part" value="{!part+1}"/> 
+                                                <apex:variable var="part" value="{!part+1}"/>
                                             </td>
-                                        </tr>   
-                                        
+                                        </tr>
+
                                     </apex:repeat>
                                 </tbody>
                             </table>
-                            
+
                         </div>
                     </apex:pageblock>
-                         <apex:commandLink value="Add Participants"  action="{!addParticipants}" reRender="membAdd"  styleClass="btn btn-default pull-left"/> <br/> 
-             
+                         <apex:commandLink value="Add Participants"  action="{!addParticipants}" reRender="membAdd"  styleClass="btn btn-default pull-left"/> <br/>
+
                         <div class="row top-space1">
                         <p><label><b>Non-Participating Adult Emergency Contact</b></label></p>
                             <div class="form-group col-md-4">
                                 <label for="email">First Name</label>
                                 <apex:inputField value="{!currWishChild.Emergency_First_Name__c}" html-placeholder="First Name" styleClass="form-control required" style="border-left:5px solid red"/>
                             </div>
-                            
+
                             <div class="form-group col-md-4">
                                 <label for="email">Middle Name</label>
                                 <apex:inputField value="{!currWishChild.Emergency_Middle_Name__c}" html-placeholder="Middle Name" styleClass="form-control"/>
@@ -843,7 +872,7 @@
                                 <label for="email">Last Name</label>
                                 <apex:inputField value="{!currWishChild.Emergency_Last_Name__c}" html-placeholder="Last Name" styleClass="form-control required" style="border-left:5px solid red"/>
                             </div>
-                            
+
                             <div class="form-group col-md-4">
                                 <label for="email">Telephone :</label>
                                 <apex:inputtext value="{!currWishChild.Emergency_Mobilephone__c}" styleClass="form-control my-phon numeric d required" style="border-left:5px solid red" maxlength="10" onkeypress="return isNumber(event)"/>
@@ -854,7 +883,7 @@
                                            <apex:selectOption itemlabel="Please Select" itemValue=""/>
                                            <apex:selectOptions value="{!wcfUtil.Relationships}" />
                                  </apex:selectList>
-                              
+
                             </div>
                             <div class="form-group col-md-4">
                                 <label for="email">Email: </label>
@@ -870,9 +899,9 @@
                             If Other,
                              <apex:inputField value="{!currWishChild.Race_Ethnicity_Details__c}" styleClass="form-control dynamicclass race" />
                         </p>
-                   
-                
-                
+
+
+
                 <div class="row" style="margin-left: 25%;">
                         <div class="col-sm-12">
                             <div class="text-center">
@@ -884,42 +913,42 @@
                         </div>
                 </div>
             </div>
-          </div>  
+          </div>
             <script type="text/javascript">
-            
+
             $(function(){
-           
+
                 $('table.responsive').ngResponsiveTables({
                     smallPaddingCharNo: 13,
                     mediumPaddingCharNo: 18,
                     largePaddingCharNo: 30
                 });
             });
-            </script> 
+            </script>
           <script>
-       
+
              $(".date-input").datepicker({
                 autoclose: true,
                 endDate: '+0d'
             });
            $(".date-input").each(function(){
-           
+
              if($(this).val() != ""){
              var date = formatDate($(this).val());
                $(this).val(date);
             }
-            
+
             });
-           
-            </script> 
+
+            </script>
         </apex:pageblock>
-      
+
   <apex:outputPanel id="popup" styleClass="{!if((wcfUtil.displayExitPopup),'popupBackground','')}" layout="block">
    <apex:outputPanel rendered="{!wcfUtil.displayExitPopup}">
-       
+
     <div class="pop-wrap">
         <div class="custPopup">
-         <apex:pageMessages id="showmsg13"/> 
+         <apex:pageMessages id="showmsg13"/>
             <div class="container">
                 <div class="row">
                     <div class="row" style="padding:10px">
@@ -934,9 +963,9 @@
     </div>
 </apex:outputPanel>
 </apex:outputPanel>
-  
+
    </main></apex:form>
  </body>
-    
+
    <apex:include pageName="WishFamilyForm_footer" id="pfooter" />
 </apex:page>

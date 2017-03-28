@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <fields>
-        <label><!-- Angina --></label>
+        <label><!-- Hidden Angina --></label>
         <name>Angina__c</name>
     </fields>
     <fields>
@@ -14,7 +14,7 @@
         <name>Are_Other_Diagnosis_Eligible_For_Wish__c</name>
     </fields>
     <fields>
-        <label><!-- Arrhythmia --></label>
+        <label><!-- Hidden Arrhythmia --></label>
         <name>Arrhythmia__c</name>
     </fields>
     <fields>
@@ -116,12 +116,16 @@
         <name>Childs_Qualifying_Diagnosis__c</name>
     </fields>
     <fields>
-        <label><!-- Chronic Heart Failure --></label>
+        <label><!-- Hidden Chronic Heart Failure --></label>
         <name>Chronic_Heart_Failure__c</name>
     </fields>
     <fields>
-        <label><!-- Chronic Hepatitis --></label>
+        <label><!-- Hidden Chronic Hepatitis --></label>
         <name>Chronic_Hepatitis__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed Date --></label>
+        <name>Closed_Date__c</name>
     </fields>
     <fields>
         <label><!-- Communication --></label>
@@ -152,11 +156,11 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Congenita Heart Disease --></label>
+        <label><!-- Hidden Congenita Heart Disease --></label>
         <name>Congenital_Heart_Disease__c</name>
     </fields>
     <fields>
-        <label><!-- Contact Dup Check --></label>
+        <label><!-- Hidden Contact Dup Check --></label>
         <name>Contact_Dup_Check__c</name>
         <picklistValues>
             <masterLabel>Block Contact Dup</masterLabel>
@@ -164,7 +168,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Convulsive Disorders --></label>
+        <label><!-- Hidden Convulsive Disorders --></label>
         <name>Convulsive_Disorders__c</name>
     </fields>
     <fields>
@@ -193,7 +197,7 @@
         <name>Diagnosis_Pending_Days__c</name>
     </fields>
     <fields>
-        <label><!-- Dup Check --></label>
+        <label><!-- Hidden Dup Check --></label>
         <name>Dup_Check__c</name>
         <picklistValues>
             <masterLabel>Block Lead Dup</masterLabel>
@@ -230,7 +234,7 @@
         <name>Has_this_child_ever_received_prior_wish__c</name>
     </fields>
     <fields>
-        <label><!-- Heart Failure --></label>
+        <label><!-- Hidden Heart Failure --></label>
         <name>Heart_Failure__c</name>
     </fields>
     <fields>
@@ -307,7 +311,7 @@
         <name>Inquiry_Date__c</name>
     </fields>
     <fields>
-        <label><!-- Is Chapter Active --></label>
+        <label><!-- Hidden Is Chapter Active --></label>
         <name>Is_Chapter_Active__c</name>
     </fields>
     <fields>
@@ -343,7 +347,7 @@
         <name>Long_Description__c</name>
     </fields>
     <fields>
-        <label><!-- Lung Disease --></label>
+        <label><!-- Hidden Lung Disease --></label>
         <name>Lung_Disease__c</name>
     </fields>
     <fields>
@@ -351,7 +355,7 @@
         <name>MAW_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Medical Professional ContactId --></label>
+        <label><!-- Hidden Medical Professional ContactId --></label>
         <name>Medical_Professional_ContactId__c</name>
     </fields>
     <fields>
@@ -520,11 +524,11 @@
         <name>Other_Relationship_To_Child__c</name>
     </fields>
     <fields>
-        <label><!-- No Duplicate Found --></label>
+        <label><!-- Hidden No Duplicate Found --></label>
         <name>Override_Dupe_Check__c</name>
     </fields>
     <fields>
-        <label><!-- PCD-ICD --></label>
+        <label><!-- Hidden PCD-ICD --></label>
         <name>PCD_ICD__c</name>
     </fields>
     <fields>
@@ -576,7 +580,7 @@
         <name>Provider_Signature__c</name>
     </fields>
     <fields>
-        <label><!-- Pulmonary Hypertension --></label>
+        <label><!-- Hidden Pulmonary Hypertension --></label>
         <name>Pulmonary_Hypertension__c</name>
     </fields>
     <fields>
@@ -943,11 +947,11 @@
         <name>Sibling_Detail__c</name>
     </fields>
     <fields>
-        <label><!-- State --></label>
+        <label><!-- Hidden State --></label>
         <name>State_Picklist__c</name>
     </fields>
     <fields>
-        <label><!-- Strokes --></label>
+        <label><!-- Hidden Strokes --></label>
         <name>Strokes__c</name>
     </fields>
     <fields>
@@ -1063,11 +1067,11 @@
         <name>This_Statement_Describes_My_Patient__c</name>
     </fields>
     <fields>
-        <label><!-- Travel algorithm --></label>
+        <label><!-- Hidden Travel algorithm --></label>
         <name>Travel_algorithm__c</name>
     </fields>
     <fields>
-        <label><!-- Treating Medical Professional Contact Id --></label>
+        <label><!-- Hidden Treating Med Prof Contact Id --></label>
         <name>Treating_Medical_Professional_Contact_Id__c</name>
     </fields>
     <fields>
@@ -1106,8 +1110,12 @@
         <name>Treatment_may_prolong_normal_activities__c</name>
     </fields>
     <fields>
-        <label><!-- Ventilator --></label>
+        <label><!-- Hidden Ventilator --></label>
         <name>Ventilator__c</name>
+    </fields>
+    <fields>
+        <label><!-- What is the familyâ€™s primary spoken la --></label>
+        <name>What_is_the_family_s_primary_spoken_la__c</name>
     </fields>
     <fields>
         <label><!-- Family Primary Language --></label>
@@ -1202,15 +1210,15 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Wish Family ContactId --></label>
+        <label><!-- Hidden Wish Family ContactId --></label>
         <name>Wish_Family_ContactId__c</name>
     </fields>
     <fields>
-        <label><!-- isApprove --></label>
+        <label><!-- Hidden isApprove --></label>
         <name>isApprove__c</name>
     </fields>
     <fields>
-        <label><!-- isSign --></label>
+        <label><!-- Hidden isSign --></label>
         <name>isSign__c</name>
     </fields>
     <fields>
@@ -1230,15 +1238,15 @@
         <name>npe01__Preferred_Email__c</name>
         <picklistValues>
             <masterLabel>Alternate</masterLabel>
-            <translation><!-- Alternate --></translation>
+            <translation>Autre</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Personal</masterLabel>
-            <translation><!-- Personal --></translation>
+            <translation>Personnel</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Work</masterLabel>
-            <translation><!-- Work --></translation>
+            <translation>Travail</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -1246,7 +1254,7 @@
         <name>npe01__Preferred_Phone__c</name>
         <picklistValues>
             <masterLabel>Home</masterLabel>
-            <translation><!-- Home --></translation>
+            <translation>Domicile</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Mobile</masterLabel>
@@ -1254,11 +1262,11 @@
         </picklistValues>
         <picklistValues>
             <masterLabel>Other</masterLabel>
-            <translation><!-- Other --></translation>
+            <translation>Autre</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Work</masterLabel>
-            <translation><!-- Work --></translation>
+            <translation>Travail</translation>
         </picklistValues>
     </fields>
     <fields>
