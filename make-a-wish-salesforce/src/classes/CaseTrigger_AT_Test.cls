@@ -130,6 +130,10 @@ public class CaseTrigger_AT_Test {
         createTask('Schedule Wish Presentation (add date, time, location name and address)',parentCase.id,wishGrantTaskRT);
         Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
         wishGrantedCase.Presentation_Date__c = Date.Today().addDays(5);
+        wishGrantedCase.Time__c = '1:30';
+        wishGrantedCase.Location_Address__c = 'Sample';
+        wishGrantedCase.Name_of_Location__c = 'Sample';
+        wishGrantedCase.Wish_Presentation_Set__c  = True;
         update wishGrantedCase;
     }
     
@@ -152,9 +156,14 @@ public class CaseTrigger_AT_Test {
         createTask('Test',parentCase.id,wishGrantTaskRT);
         Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
         wishGrantedCase.Presentation_Date__c = Date.Today().addDays(5);
+        wishGrantedCase.Wish_Presentation_Set__c  = True;
+        wishGrantedCase.Time__c = '1:30';
+        wishGrantedCase.Location_Address__c = 'Sample';
+        wishGrantedCase.Name_of_Location__c = 'Sample';
         update wishGrantedCase;
         case setNullPresentation = new Case();
         setNullPresentation.Presentation_Date__c = null;
+        setNullPresentation.Wish_Presentation_Set__c  = false;
         setNullPresentation.Id = wishGrantedCase.Id;
         update setNullPresentation;
     }
@@ -610,5 +619,20 @@ public class CaseTrigger_AT_Test {
         
         update updateStatus;
     }
+    
+    /*static testMethod void volunteerOppInactive() {
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+         Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        Volunteer_Opportunity__c  newVolOpp = new Volunteer_Opportunity__c();
+        newVolOpp.Wish__c = parentCase.id;
+        newVolOpp.Volunteer_Name__c = volunterCon.id;
+        insert newVolOpp;
+        parentCase.Status = 'Completed';
+        parentCase.Diagnosis_Verification_Receive_Date__c = Date.Today();
+        update parentCase;
+        
+    }*/
     
 }

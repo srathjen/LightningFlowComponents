@@ -81,6 +81,21 @@
             <field>Volunteer_Name__c.County__c</field>
             <table>Volunteer_Roles__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>End_Date__c</field>
+            <table>Volunteer_Roles__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Start_Date__c</field>
+            <table>Volunteer_Roles__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Migrated_Record__c</field>
+            <table>Volunteer_Roles__c</table>
+        </columns>
         <masterLabel>Volunteer Roles</masterLabel>
     </sections>
     <sections>

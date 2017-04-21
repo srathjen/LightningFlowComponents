@@ -85,10 +85,10 @@ public class UserTrigger_AT_Test {
     
     public testmethod static void Test_RemoveInternalUserToChatterGroup() {
         system.RunAs( new user(ID = UserInfo.getUserID())){
-            //CollaborationGroup newGroup = OrientationandTrainingUtil.createCollaborationGroup('Colorado');
+            //CollaborationGroup newGroup = OrientationandTrainingUtil.createCollaborationGroup('Alabama');
             //CollaborationGroup newGroup1 = OrientationandTrainingUtil.createCollaborationGroup('Arizona');
             UserRole newUserRole = new UserRole();
-            newUserRole.Name  = 'Colorado - Chapter';
+            newUserRole.Name  = 'Alabama - Chapter';
             Insert newUserRole;
             UserRole newUserRole1 = new UserRole();
             newUserRole1.Name  = 'Arizona - Chapter';

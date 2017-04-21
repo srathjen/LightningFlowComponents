@@ -1,6 +1,6 @@
 <apex:page showHeader="false" sidebar="false" standardStylesheets="false"  applyBodyTag="false" docType="html-5.0" controller="VolunteerOrientation_AC" title="Make-A-Wish Communities | Training">
     <apex:include pageName="prospective_head" id="phead" />
-    <apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
+    <apex:stylesheet value="{!URLFOR($Resource.prospective_assets, 'web/css/lib/jquery.dataTables.min.css')}"/>
     <style type="text/css">
         body > main {margin-bottom:4em; margin-bottom:4rem;}
         .vcpactivelogin .table-maw {border:1px solid #e2e2e2; width:99%; margin:0}
@@ -11,13 +11,24 @@
         .dataTables_info {margin-bottom: 2rem; font-size: .75rem;}
         .messageCell h4 {color: #066cb6}
         .table-wrap {overflow-x: auto}
+        .modal-header,.modal-footer {border-top:none;}
+        h1.modal-title {text-align: center; padding-bottom: 0}
+        .modal-header .close {margin-top: -4rem}
+        .modal-footer, .modal-footer span {display: flex; justify-content: center;}
+        .modal-footer .btn-md, .nav-sub-inner .btn-md {max-width:10rem}
+        .modal-footer .btn-md {min-width:10rem}
     </style>
     <script type="text/javascript">
+
     function openLMS(ssoLink,courseLink) {
         if(courseLink.length <= 0){
             alert('No course registration found in LMS. Please contact the Chapter staff.');
         }else{
          newwindow = window.open( ssoLink ,'openLMS');
+         if ((newwindow == null || typeof(newwindow) == 'undefined')) {
+            $('#poppup-alert').modal({backdrop: 'static', keyboard: false});
+           // alert('Please select the radio option "Always allow pop-ups for this domain", in the URL bar(Pop up Blocker options) then click on the Orientation tab again.');
+        }
          setTimeout(
             function(){
                 window.newwindow.close();
@@ -27,6 +38,7 @@
                     }, 10);
             }, 2000);
         }
+
 
     }
     </script>
@@ -41,7 +53,7 @@
                         <h1 class="col-md-12">Orientation</h1>
                     </div>
 
-                    <nav>
+                   <!-- <nav>
                         <ul class="step">
                             <li class="current"><a href="/VolunteerOrientation_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Orientation</a></li>
                             <li><a href="/Application_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Application</a></li>
@@ -54,7 +66,7 @@
                                 <li><a href="/VolunteerTraining_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Training</a></li>
                             </apex:outputpanel>
                         </ul>
-                    </nav>
+                    </nav> -->
 
                     <apex:form id="frm1" styleClass="col-md-12">
                         <div class="messages"><apex:pagemessages /></div>
@@ -145,7 +157,7 @@
                                         <tbody>
                                             <apex:repeat value="{!OrientationRecordList}" var="training">
 
-                                              
+
                                                   <!--  <apex:outputPanel rendered="{!OR(AND(training.volOppSize == 0),AND(training.volOppSize > 0,training.status == 'Cancelled'))}">-->
                                                    <apex:outputpanel rendered="{!training.displayRec == True}" >
                                                     <tr>
@@ -181,13 +193,29 @@
                                 <apex:outputText value="{!orientationContent}" escape="false" />
                             </div>
                         </div>
-                    </apex:form>
 
+                        <div class="modal fade" id="poppup-alert" tabindex="-1" role="dialog" aria-labelledby="poppup-alert" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title">For a Better Experience</h1>
+                              </div>
+                              <div class="modal-body">
+                                <p class="text-muted">Please select the radio option "Always allow pop-ups for this domain", in the URL bar (Pop up Blocker options) then click start course again.</p>
+                              </div>
+                              <div class="modal-footer">
+                                <apex:commandButton html-data-dismiss="modal" html-aria-label="Close" styleClass="btn-md" value="Ok"/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    </apex:form>
                 </section>
             </div>
         </main>
+
         <apex:include pageName="prospective_footer" id="pfooter" />
-        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.dataTables.min.js')}"></script>
         <script src="{!URLFOR($Resource.prospective_assets, ' web/js/stacktable.min.js ')}"></script>
         <script>
           $(document).ready(function () {

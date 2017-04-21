@@ -56,17 +56,19 @@ public class WishLiabilityForm_AC
         WishChildId = currentCase.ContactId; 
         childForm = [SELECT Id,Hidden_Wish_Fmaily_Contact_Name__c,Case__c,Participant_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Participant_Details__c FROM Wish_Child_Form__c WHERE Case__c =: currentCase.Id];
         
-        if(currentCase .Hidden_Email_List__c != Null){
+        if(currentCase .Hidden_Name_List__c != Null){
             listofSenderName = new List<String>();
             
-            listofSenderName = currentCase .Hidden_Email_List__c.split(',');
+            listofSenderName = currentCase .Hidden_Name_List__c .split(',');
            
             
-            for(String emailSenderName : currentCase.Hidden_Email_List__c.split(',')){
-                emailSenderName = emailSenderName.trim();
-                holdEmailNameSet.add(emailSenderName);
+            for(String emailSenderName : currentCase.Hidden_Name_List__c.split(',')){
+                    
+                         
+                         holdEmailNameSet.add(emailSenderName.trim());
+                
             }
-            
+            system.debug('@@@@@ holdEmailNameSet @@@@@'+holdEmailNameSet);
              
         }
         if(childForm .Hidden_Wish_Fmaily_Contact_Name__c != Null || childForm.Participant_Name__c != Null){
@@ -79,11 +81,11 @@ public class WishLiabilityForm_AC
                     else
                     Name+=','+' '+processSignNowList;
                    
-                    if(!holdEmailNameSet.contains(processSignNowList )){
+                    if(!holdEmailNameSet.contains(processSignNowList.trim())){
                       
-                           signNowemailMap.put(processSignNowList,'abc@gmail.com');
+                           signNowemailMap.put(processSignNowList.trim(),'abc@gmail.com');
                            
-                           system.debug('@@@@@@  signNowemailMap @@@@@@@@'+ signNowemailMap);
+                          
                        }
                 }
             }
@@ -91,31 +93,27 @@ public class WishLiabilityForm_AC
             if(childForm.Participant_Name__c != Null){
                 
                 for(String processSignNowList : childForm.Participant_Name__c.split(',')){
-                       String displayname = processSignNowList.split('-')[0];
-                       String age = processSignNowList.split('-')[1];
+                       String displayname = processSignNowList.trim().split('-')[0];
+                       String age = processSignNowList.trim().split('-')[1];
                        
                        if(Name == Null || Name == '')
                         Name = displayname;
                         else
                         Name+=','+' '+displayname;
                         
-                    if(!holdEmailNameSet.contains(displayname)){ 
+                    if(!holdEmailNameSet.contains(displayname.trim())){ 
                        if(Integer.valueof(age) >= 18)
-                          signNowemailMap.put(displayname,'abc@gmail.com');
+                          signNowemailMap.put(displayname.trim(),'abc@gmail.com');
                           
                     }
-                
-               }
-            
+                }
+            system.debug('@@@@@@  signNowemailMap 2 @@@@@@@@'+ signNowemailMap.keySet());
             }
-            system.debug('@@@@@@  signNowemailMap @@@@@@@@'+ signNowemailMap.size());
-            system.debug('@@@@@@  signNowemailMap @@@@@@@@'+ signNowemailMap);
+           
                 for(String processEmailMap : signNowemailMap.Keyset()){
                     SignNowList.add(processEmailMap);
                 }
-              system.debug('@@@@@@  SignNowList@@@@@@@@'+ SignNowList);
-              system.debug('@@@@@@  SignNowList@@@@@@@@'+ SignNowList.size());
-            
+              
         }
         
         if(childForm.Hidden_Wish_Fmaily_Contact_Email__c != Null || childForm.Participant_Details__c != Null){
@@ -123,7 +121,7 @@ public class WishLiabilityForm_AC
                 for(String key : childForm.Hidden_Wish_Fmaily_Contact_Email__c.split(',')){
                     String keys = key.split('-')[0];
                     String value = key.split('-')[1];
-                    
+                    system.debug('@@@@@ debug @@@@@'+Keys);
                     if(!holdEmailNameSet.contains(keys)){
                         
                         emailSignatureMap.put(keys.trim(),value.trim());
@@ -136,7 +134,7 @@ public class WishLiabilityForm_AC
                     String keys = key.split('-')[0];
                     String value = key.split('-')[1];
                     String age = key.split('-')[2];
-                    system.debug('@@@@@@  age  @@@@@@@@'+ age  );
+                    
                     if(!holdEmailNameSet.contains(keys)){
                         if(Integer.valueof(age) >= 18)
                         emailSignatureMap.put(keys.trim(),value.trim());
@@ -154,8 +152,9 @@ public class WishLiabilityForm_AC
             multiPickoptions = new List<SelectOption>();
             for(String currString : emailSignatureMap.keySet()){
                    if(currString != Null){
+                    if(!holdEmailNameSet.contains(currString)){
                 system.debug('@@@@ currString @@@@@'+currString);
-                multiPickoptions.add(new SelectOption(currString,currString ));}
+                multiPickoptions.add(new SelectOption(currString,currString ));}}
             }
         }
         
@@ -305,8 +304,8 @@ public class WishLiabilityForm_AC
                 if (recipientsParticipants != '')
                     recipientsParticipants = recipientsParticipants + ',';
                 recipientsParticipants = recipientsParticipants + '{' +
-                    '      "email": "' + email + '",' +
-                    '      "name": "' + Name + '",' +
+                    '      "email": "' +email+ '",' +
+                    '      "name": "' + Name+ '",' +
                     '     "roleName": "Signer ' + i + '",' +
                     '     "routingOrder": "'+i+'",'+
                     '      "recipientId":"' + i + '",' + clientUserId +
@@ -426,8 +425,8 @@ public class WishLiabilityForm_AC
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailBlurb":"Test Email Body",'+
-            '  "emailSubject": "Liability And Publicity Release Form",'+
+            '  "emailBlurb":"Make-A-Wish Liability And Publicity Release Form",'+
+            '  "emailSubject": "Make-A-Wish Liability And Publicity Release Form",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+
             '      "name": "document.pdf",'+
@@ -545,7 +544,7 @@ public class WishLiabilityForm_AC
                                                         if(wishChildForm.Participant_Name__c!= Null){
                                                             for(String keys : wishChildForm.Participant_Name__c.split(',')){
                                                                  String key = keys.split('-')[0];
-                                                                 String values = keys.split('-')[0];
+                                                                 String values = keys.split('-')[1];
                                                                 recipientMap.put(key.trim(),'Participant');
                                                                 
                                                             } 
@@ -563,7 +562,7 @@ public class WishLiabilityForm_AC
                             recipients = recipients + ',';
                         recipients = recipients + '{'+
                             '      "email": "kanagaraj@mstsolutions.com",'+
-                            '      "name": "'+Name +'",'+
+                            '      "name": "'+Name+'",'+
                             '      "recipientId":"'+i+'",'+
                             '      "clientUserId":"'+i+'",'+
                             '      "tabs": {'+
@@ -638,7 +637,7 @@ public class WishLiabilityForm_AC
                         
                         if(!signersKeyPairMap.containsKey(Name))
                             signersKeyPairMap.put(Name,String.valueof(i));
-                        system.debug('@@@@@@@@ MAP SIGNER @@@@@@@'+signersKeyPairMap);
+                        system.debug('@@@@@@@@ First Signer @@@@@@@'+signersKeyPairMap);
                         isFirstParent = false;
                     }
                     else if(recipientMap.get(Name) == 'PARENT/LEGAL GUARDIAN' && isFirstParent == false){
@@ -674,6 +673,7 @@ public class WishLiabilityForm_AC
                         
                         if(!signersKeyPairMap.containsKey(Name))
                             signersKeyPairMap.put(Name,String.valueof(i));
+                            system.debug('@@@@@@@@ Second Signer @@@@@@@'+signersKeyPairMap);
                     }
                     else{
                         
@@ -681,7 +681,7 @@ public class WishLiabilityForm_AC
                             recipients = recipients + ',';
                         recipients = recipients + '{'+
                             '      "email": "kanagaraj@mstsolutions.com",'+
-                            '      "name": "'+Name +'",'+
+                            '      "name": "'+Name+'",'+
                             '      "recipientId":"'+i+'",'+
                             '      "clientUserId":"'+i+'",'+
                             '      "tabs": {'+
@@ -708,6 +708,7 @@ public class WishLiabilityForm_AC
                         
                         if(!signersKeyPairMap.containsKey(Name))
                             signersKeyPairMap.put(Name,String.valueof(i));
+                             system.debug('@@@@@@@@ Third Signer @@@@@@@'+signersKeyPairMap);
                     }
                     i++;
                 }
@@ -715,8 +716,8 @@ public class WishLiabilityForm_AC
                 String body =  '{'+
                     '  "status":"sent",'+
                     '  "enableWetSign": "false",'+
-                    '  "emailBlurb":"",'+
-                    '  "emailSubject": "Liability And Publicity Release Form",'+
+                    '  "emailBlurb":"Make-A-Wish Liability And Publicity Release Form",'+
+                    '  "emailSubject": "Make-A-Wish Liability And Publicity Release Form",'+
                     '  "enforceSignerVisibility":"True",'+
                     '  "documents": [{'+
                     '      "name": "document.pdf",'+
@@ -767,17 +768,17 @@ public class WishLiabilityForm_AC
                 }catch(Exception e){
                     
                 }
-                system.debug('%%%%%%%% envelopeId value %%%%%%%%%'+envelopeId);
+                
             }
             else
             {
                 envelopeId = dbcase.Wish_Liability_Envolep__c;
                 for(String key : dbcase.LiabilitySignerMapKeyPair__c.split(',')){
-                    String keys = key.split('-')[0];
-                    String value = key.split('-')[1];
+                    String keys = key.trim().split('-')[0];
+                    String value = key.trim().split('-')[1];
                     signersKeyPairMap.put(keys.trim(),value.trim());
                 } 
-                system.debug('%%%%%%%% ENTER INTO ELSE signersKeyPairMap %%%%%%%%%'+signersKeyPairMap);
+                
             }
         }
         return null;
@@ -790,6 +791,7 @@ public class WishLiabilityForm_AC
         String IntegratorKey;
         String endPointURL;
         List<Contact> relationShipList = new List<Contact>();
+        string timmedName = SingerName.trim();
         Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
         
         for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
@@ -816,13 +818,11 @@ public class WishLiabilityForm_AC
         string jsonPayload;
         system.debug('URL.getSalesforceBaseUrl().toExternalForm()'+URL.getSalesforceBaseUrl().toExternalForm());
         String baseUrl = URL.getSalesforceBaseUrl().toExternalForm();
-        system.debug('@@@@@@@@@@@@@@@ signersKeyPairMap @@@@@@@@@@@@'+signersKeyPairMap); 
-        system.debug('@@@@@@@@@@@@@@@ signersKeyPairMap @@@@@@@@@@@@'+SingerName); 
         jsonPayload = '{'+
             '    "userName": "'+SingerName+'",'+
             '    "email": "kanagaraj@mstsolutions.com",'+
-            '    "recipientId": "'+signersKeyPairMap.get(SingerName)+'",'+
-            '    "clientUserId": "'+signersKeyPairMap.get(SingerName)+'",'+
+            '    "recipientId": "'+signersKeyPairMap.get(timmedName)+'",'+
+            '    "clientUserId": "'+signersKeyPairMap.get(timmedName)+'",'+
             '    "authenticationMethod": "None",'+
             '   "returnUrl": "'+baseUrl +'/apex/WishLiabilityForm_VF?Id='+CaseId+'"'+   
             '}'; 
@@ -838,7 +838,7 @@ public class WishLiabilityForm_AC
             if(sign == '' || sign == Null)
                 sign= name +' - '+ signersKeyPairMap.get(name);
             else
-                sign = sign +','+ name + '- '+ signersKeyPairMap.get(name);
+                sign = sign+','+ name+' - '+ signersKeyPairMap.get(name);
         }
         case newCase = new case();
         newCase.Id = caseId;

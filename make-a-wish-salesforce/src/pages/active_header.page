@@ -1,6 +1,5 @@
 <apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
      <noscript>For full functionality and the best experience possible of this site it is necessary to enable JavaScript. Here are the <a href="http://www.enable-javascript.com/" target="_blank">instructions how to enable JavaScript in your web browser</a>.</noscript>
-<style>.vcpactivelogin .active-user-main{width:60%;float:right;}.sub-nav{padding:0px;}</style>
     <header role="main-header" class="container">
         <div class="row">
             <nav class="col-xs-3 col-xs-offset-9 pre-nav" role="top_menubar">
@@ -16,7 +15,7 @@
                 &#9776;
             </button>
             <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
-                <ul class="active-user-main" style="width:53%">
+                <ul class="active-user-main">
                     <li><a href="/VolunteerAssignmentOpportunities_VF">Volunteer Opportunities</a></li>
                     <li><a href="/MyAssignment_VF">My Assignments</a></li>
                     <li><a href="/VolunteerActivities_VF">My Tasks</a></li>

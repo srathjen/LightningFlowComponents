@@ -27,7 +27,7 @@ public class Application_AC_Test{
            conList = [select id from contact];
            system.assertEquals(currentVoulnteerUser.ContactId,volunteerContact.Id);
             PageReference pageRef = Page.Application_VF; 
-            Test.StartTest();
+          
             Test.setCurrentPage(pageRef);
             ApexPages.currentPage().getParameters().put('bgRequired','true');
             ApexPages.currentPage().getParameters().put('trainingRequired','true');
@@ -56,7 +56,7 @@ public class Application_AC_Test{
             applicationAcIns.applicationDynamicContent = 'test';
             applicationAcIns.submitdisable = true;
             applicationAcIns.isSigned = true;
-            Test.StopTest();
+           
             System.assertEquals(currentVoulnteerUser.UserName,'joathanedwards@gmail.com');
         }
     }

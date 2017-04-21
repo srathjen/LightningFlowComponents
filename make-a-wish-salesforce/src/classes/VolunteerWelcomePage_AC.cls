@@ -59,10 +59,13 @@ public Class VolunteerWelcomePage_AC
         trainingList = new List<Volunteer_Orientation_Training__c>();
         orientationList = new List<Volunteer_Orientation_Training__c>();
         User currentUser = [SELECT ID,ContactId FROM User WHERE Id = :userInfo.getUserId()];
-        for(Volunteer_Orientation_Training__c checkOrientationAndTraining : [SELECT Id, Volunteer_Attendance__c, Orientation_Training__r.RecordTypeId FROM Volunteer_Orientation_Training__c WHERE Volunteer_Attendance__c != 'Cancelled' AND Volunteer__c =: currentUser.ContactId]) {
-            if(checkOrientationAndTraining.Orientation_Training__r.RecordTypeId == orientationRecordTypeId) {
+        
+        for(Volunteer_Orientation_Training__c checkOrientationAndTraining : [SELECT Id, Volunteer_Attendance__c, Class_Offering__c, Class_Offering__r.Chapter_Role_O_T__c,
+                                                                             Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId 
+                                                                             FROM Volunteer_Orientation_Training__c WHERE Volunteer_Attendance__c != 'Cancelled' AND Volunteer__c =: currentUser.ContactId]) {
+            if(checkOrientationAndTraining.Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId == orientationRecordTypeId) {
                 orientationList.add(checkOrientationAndTraining);
-            } else if(checkOrientationAndTraining.Orientation_Training__r.RecordTypeId == trainingRecordTypeId) {
+            } else if(checkOrientationAndTraining.Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId == trainingRecordTypeId) {
                 trainingList.add(checkOrientationAndTraining);
             }
         }
@@ -133,7 +136,11 @@ public Class VolunteerWelcomePage_AC
         
         
         
-        for(Volunteer_Orientation_Training__c checkOrientationAndTraining : [SELECT Id,Volunteer_Attendance__c,Orientation_Training__r.RecordTypeId FROM Volunteer_Orientation_Training__c WHERE Volunteer_Attendance__c = 'Completed' AND Orientation_Training__c IN :requiredOrientationIds AND Volunteer__c =: currentUser.ContactId AND Orientation_Training__r.RecordTypeId = :orientationRecordTypeId]) 
+        for(Volunteer_Orientation_Training__c checkOrientationAndTraining : [SELECT Id,Volunteer_Attendance__c,Class_Offering__r.Chapter_Role_O_T__c,
+                                                                            Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId, 
+                                                                            Class_Offering__c FROM Volunteer_Orientation_Training__c WHERE 
+                                                                            Volunteer_Attendance__c = 'Completed' AND Hidden_O_T_Id__c IN :requiredOrientationIds 
+                                                                            AND Volunteer__c =: currentUser.ContactId AND Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId = :orientationRecordTypeId]) 
         {
             completedVolunteerTrainingIds.add(checkOrientationAndTraining.id);
         }
@@ -240,7 +247,7 @@ public Class VolunteerWelcomePage_AC
     }
     
     // Fetching Top 4 Events of the volunteer chapter and display on the landing page. 
-   /* public list<NonWishEvents> getEvents() {
+  /*  public list<NonWishEvents> getEvents() {
         eventsRTId = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.events).getRecordTypeId();
         List<NonWishEvents> eventRecords = new List<NonWishEvents>();
         for(Non_Wish_Events__c  currRec : [SELECT id,Name,Event_Name__c, Priority__c,Event_Image__c,Event_Text__c,Event_Date__c
@@ -265,7 +272,7 @@ public Class VolunteerWelcomePage_AC
         return eventRecords;
     } */
     
-    //This method is used to display top 4 events of that chapter.
+     //This method is used to display top 4 events of that chapter.
     public list<Non_Wish_Events__c> getEvents() {
         eventsRTId = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.events).getRecordTypeId();
         List<Non_Wish_Events__c> eventRecords = [SELECT id,Name,Event_Name__c, Priority__c,Event_Image__c,Event_Text__c,Event_Date__c

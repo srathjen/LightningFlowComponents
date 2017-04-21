@@ -26,6 +26,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
     Set<Id> contactIds = new Set<Id>();
     Map<Id,contact> contactMap = new Map<Id,Contact>();
     
+    
     // Mapping Birthdate from Contact to Wish.
     if((Trigger.isInsert || Trigger.isUpdate) && Trigger.isBefore) { 
         Set<Id> PartAwishContactSet = new Set<Id>();
@@ -42,10 +43,15 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
             //  WishesTriggerHelperClass.updateDateReceived(null,trigger.new);
             Map<Id, Id> intakeManagerMap = new Map<Id, Id>();
             Set<Id> chapterSet = new Set<Id>();
+            map<id,Case> parentChildCaseMap = new map<id,Case>();
             for(Case newCase : trigger.new){
                 
                 if(newCase.Migrated_Record__c == false) {
+                    
                     wishOwnerIdSet.add(newCase.OwnerId);
+                }
+                if(newCase.RecordTypeId == wishGrantRecordTypeId && newCase.ParentId != Null){
+                    parentChildCaseMap.put(newCase.ParentId,newCase);
                 }
                 if(newCase.RecordTypeId == parentWishRecordTypeId) {
                     chapterSet.add(newCase.ChapterName__c);
@@ -88,6 +94,10 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 
             }
             
+            if(parentChildCaseMap.size() > 0 ){
+                CaseTriggerHandler.updateGrantingCaseDevEmail(parentChildCaseMap);
+            }
+            
         }
         if(Trigger.isUpdate)
         {
@@ -106,8 +116,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
             Set<Id> parentWishIdsSet = new Set<Id>();
             for(Case currentCase : Trigger.new)
             {  
-                if(currentCase.Migrated_Record__c == false)
-                {
+               
                     
                     
                     if(currentCase.ownerId == null)
@@ -264,7 +273,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                         currentCase.Interview_date__c.addError('Interview Date should be in future');
                     }
                     
-                }
+              
             }
             
             
@@ -303,7 +312,6 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
             for(Case currentCase : Trigger.new){
                 if(managerUserMap.containsKey(currentCase.ChapterName__c) && currentCase.Status == 'Ready to Assign' && currentCase.Status != Trigger.oldMap.get(currentCase.Id).Status){
                     if(managerUserMap.get(currentCase.ChapterName__c).Volunteer_Manager__c != Null) {
-                        System.debug('22222222222');
                         currentCase.OwnerId = managerUserMap.get(currentCase.ChapterName__c).Volunteer_Manager__c;
                     }
                     
@@ -358,6 +366,8 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         Set<Id> newCaseIdsSet = new Set<Id>();
         Set<Id> parentIdsSet = new Set<Id>();
         Set<Id> chapterNames = new Set<Id>();
+        Map<Id, String> wishReceiptMap = new Map<Id, String>();
+        list<Case> wishReceiptCaseList = new list<Case>();
         List<Case> wishDeterminationSubCaseList = new List<Case>();
         List<Case> wishGrantedSubCaseList = new List<Case>();
         Map<Id, Case> wishPlaningAnticipationSubCaseMap = new Map<Id, Case>();
@@ -388,7 +398,6 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         
         
         for(Case newWish : Trigger.New) {
-            System.debug('<<<<<<<<<<CaseInSert>>>>>>>>>');
             
             
             if(newWish.RecordTypeId == partARecordTypeId && newWish.subject == 'Eligibility Review') {
@@ -425,10 +434,12 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 }
             } 
             else if(newWish.RecordTypeId == wishGrantRecordTypeId) {
+                if(newWish.Wish_Receipt_Items__c != Null && newWish.ParentId != Null){
+                    wishReceiptMap.put(newWish.ParentId, newWish.Wish_Receipt_Items__c);
+                }
                 
                 if(newWish.isClosed != True && newWish.Status != 'Completed')
                 {
-                    System.debug('Wish Granted Case>>>>>>>>>>>>>>>');
                     parentIdsSet.add(newWish.ParentId);
                     wishChapterIdsMap.put(newWish.Id, newWish);
                     wishType = constant.wishGrantRT;
@@ -449,7 +460,6 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
             else if(newWish.RecordTypeId == parentWishRecordTypeId ){
                 if(newWish.isClosed != True)
                 {
-                    System.debug('>>>>>>>>>>>>>>CaseParentRecord>>>>>>>');
                     parentCaseIntakeOwnerMap.put(newWish.Id, newWish);
                     parentIdsSet.add(newWish.Id);
                     chapterNames.add(newWish.ChapterName__c);
@@ -504,17 +514,14 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         }
         
         if(wishDeterminationSubCaseList.size() > 0 && wishDeterminationSubCaseIds.size() > 0) {
-            System.debug('>>>>>>>>>>Record Val>>>>>>');
             CaseTriggerHandler.wishDeterminationSubCaseTaskCreation(wishDeterminationSubCaseList, wishDeterminationSubCaseIds);
         }
         
         if(wishPlaningAnticipationSubCaseMap.size() > 0 && wishTypeSet.size() > 0) {
-            System.debug('WishPlanningInitiated>>>>>>');
             CaseTriggerHandler.wishPlaningAnticipationTaskCreation(wishPlaningAnticipationSubCaseMap);
         }
         
         if(wishGrantedSubCaseList.size() > 0 &&  wishGrantedSubCaseIdSet.size() > 0) {
-            System.debug('Case1111111>>>>>');
             CaseTriggerHandler.wishGrantedSubCaseTaskCreation(wishGrantedSubCaseList, wishGrantedSubCaseIdSet);
         }
         Map<Id, Case> nullMap = new Map<Id, Case>();
@@ -525,9 +532,22 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         }
         
         if(caseSharingMap.size() > 0){
-             // ChapterStaffRecordSharing_AC.CaseSharing(caseSharingMap);
+            // ChapterStaffRecordSharing_AC.CaseSharing(caseSharingMap);
         }
-          
+        
+        if(wishReceiptMap.size() > 0){
+            for(Case currentCase :[SELECT Id,Wish_Receipt_Items__c FROM Case WHERE ID IN: wishReceiptMap.keySet()]){
+                if(wishReceiptMap.containsKey(currentCase.id)){
+                    currentCase.Wish_Receipt_Items__c = wishReceiptMap.get(currentCase.id);
+                    wishReceiptCaseList.add(currentCase);
+                }
+            }
+        }
+        
+        if(wishReceiptCaseList.size() > 0){
+            update wishReceiptCaseList;
+        }
+        
     }
     //Used to create child wish for Parent wish
     //Used to submit parent wish for approval once the required volunteer assigend to Wish
@@ -594,7 +614,6 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         Set<Id> wishCoordinatorMemberUpdateSet = new Set<Id>();
         for(Case caseMemberCheck : Trigger.New) {
             if(caseMemberCheck.Status == 'Ready to Assign' && caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status) {
-                System.debug('111111111111');
                 updateVolunteerManagerCaseTeamMap.put(caseMemberCheck.Id, caseMemberCheck);
                 volunteerManagerIdSet.add(caseMemberCheck.Id);
             } else if((caseMemberCheck.Status == 'Ready to Assign' || caseMemberCheck.Status == 'Ready to Interview') && caseMemberCheck.OwnerId != Trigger.oldMap.get(caseMemberCheck.Id).OwnerId) {
@@ -619,11 +638,9 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 newCaseOwnerMap.put(caseMemberCheck.Id, caseMemberCheck.OwnerId);
             }
             
-            if(caseMemberCheck.Migrated_Record__c == false)
-            {
+          
                 
                 if(Trigger.oldMap.get(caseMemberCheck.Id).Wish_Type__c != caseMemberCheck.Wish_Type__c  && CaseMemberCheck.RecordTypeid == parentWishRecordTypeId) {
-                    System.debug('>>>>>>DelAnticipationRecInitiated>>>>>');
                     caseIdsMap.put(caseMemberCheck.Id, caseMemberCheck);
                     newWishTypeSet.add(caseMemberCheck.Wish_Type__c);
                 }
@@ -749,6 +766,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 
                 if(CaseMemberCheck.Case_Member_Count__c == 2 && CaseMemberCheck.Case_Member_Count__c != Trigger.oldMap.get(CaseMemberCheck.Id).Case_Member_Count__c) {
                     if(CaseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
+                        System.debug('>>>>>ChildCaseCreation>>>');
                         childCreationWishList.add(CaseMemberCheck);
                         parentCaseWishDeterminationSet.add(CaseMemberCheck.Id);
                         wishType = 'Wish Determination'+'-'+wishDeterminationRecordTypeId;
@@ -770,6 +788,24 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                     approvedBudgetIdsSet.add(caseMemberCheck.ParentId);
                     approvedBudgetStatus.put(caseMemberCheck.ParentId, caseMemberCheck.Budget_Approval_Status__c);
                 }
+                
+                //Budget recall 
+                /*if(caseMemberCheck.Is_Budget_Recalled__c==true  && caseMemberCheck.Is_Budget_Recalled__c != Trigger.oldMap.get(caseMemberCheck.Id).Is_Budget_Recalled__c && caseMemberCheck.RecordTypeId == wishPlanningRecordTypeId) {
+List<Case> toUnlockCases = new List<Case>();
+toUnlockCases.add(caseMemberCheck);
+ProcessInstanceWorkitem[] workItems = [
+SELECT Id
+FROM ProcessInstanceWorkitem 
+WHERE ProcessInstance.TargetObjectId =: caseMemberCheck.id
+AND ProcessInstance.Status = 'Pending'];
+System.debug('Budget Recall 1:' + workItems);
+Approval.UnlockResult[] lrList = Approval.unlock(toUnlockCases, false);
+Approval.ProcessWorkitemRequest pwr = new Approval.ProcessWorkitemRequest();
+pwr.setAction('Removed');
+pwr.setWorkItemId(workItems[0].id);
+System.debug('Budget Recall 2:' + pwr);
+Approval.ProcessResult result = Approval.process(pwr);
+}*/
                 
                 if(CaseMemberCheck.Status == 'Granted' && Trigger.oldMap.get(CaseMemberCheck.id).Status != 'Granted' && parentWishRecordTypeId == CaseMemberCheck.RecordTypeid)
                 {
@@ -799,7 +835,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                     wishTypes.add(caseMemberCheck.wish_type__c);
                 }
                 
-            }  
+           
             
             //For creating 2 volunteer opportunity record when the case status changed to "Ready to Assign"
             if((caseMemberCheck.Status == 'Ready to Assign') && trigger.oldmap.get(caseMemberCheck.id).Status !=  'Ready to Assign' && caseMemberCheck.RecordTypeId == parentWishRecordTypeId){
@@ -933,12 +969,16 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
             CaseTriggerHandler.autoCloseTask(conceptApprovalParentIdSet);
         }
         
-        
+        List<Id> closedCaseIdList = new List<Id>();
         List<Id> completedCaseIdList=new List<Id>();
         for(Case currRec:trigger.new){
             if( (currRec.Status == 'Completed' || currRec.Status == 'Closed') && (trigger.oldMap.get(currRec.id).Status != 'Completed' || trigger.oldMap.get(currRec.id).Status != 'Closed')){
                 completedCaseIdList.add(currRec.id);
+            
+                if(currRec.RecordTypeId == parentWishRecordTypeId)
+                    closedCaseIdList.add(currRec.Id);
             }
+            
         }
         if(completedCaseIdList.size() > 0 && completedCaseIdList != Null){
             CaseTriggerHandler.updateVolunteerOpportunityStatus(completedCaseIdList);
@@ -948,6 +988,12 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
         if(readyToAssignParentCaseMap.size()>0 && readtToAssignChapterIdSet.size() > 0){
             CaseTriggerHandler.createVolunteerOpportunity(readyToAssignParentCaseMap, readtToAssignChapterIdSet);
         }
+        
+        
+        //Update Open volunteer Opportunity as Inactive
+         
+        if(closedCaseIdList.Size() > 0) 
+           CaseTriggerHandler.updateVolunteerOpportunityasInactive(closedCaseIdList);
         
     }
     

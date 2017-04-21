@@ -25,6 +25,7 @@
         <name>Hours_Hidden__c</name>
     </fields>
     <fields>
+        <help><!-- Please enter two digits on decimal place. --></help>
         <label><!-- Hours spent --></label>
         <name>Hours_spent__c</name>
     </fields>

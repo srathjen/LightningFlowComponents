@@ -6,6 +6,7 @@ Description : BackGroundCheck_AT_Test is used to increase the code coverage for 
 *****************************************************************************************************/
 @isTest
 public class BackGroundCheck_AT_Test {
+     
     
      /*This method is used to update the background check record to approved*/
      
@@ -23,7 +24,7 @@ public class BackGroundCheck_AT_Test {
         
        
              backgroundcheck.Status__c = 'Approved';
-             backgroundcheck.Active__c = true;
+             backgroundcheck.current__c = true;
              backgroundcheck.Date_Completed__c = system.today();
              update backgroundcheck; 
         
@@ -58,7 +59,7 @@ public class BackGroundCheck_AT_Test {
          Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.Id);
          Background_check__c  backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.id);
          Background_check__c  backgroundcheckfalse = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.Id);
-         backgroundcheckfalse.active__c= true;
+         backgroundcheckfalse.current__c= true;
          backgroundcheckfalse.Date_Completed__c = system.today() + 9;
          Database.SaveResult result = Database.update(backgroundcheckfalse,false);
          //System.assertEquals('Active Background Check Already Exist',result.getErrors()[0].getMessage());
@@ -73,10 +74,42 @@ public class BackGroundCheck_AT_Test {
          Background_check__c  backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.id);
          Background_check__c  backgroundcheckActive = OrientationandTrainingUtil.createBackgroundCheckActiveRec(volunteerContact.id);
          Background_check__c  backgroundcheckfalse = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.Id);
-         backgroundcheckfalse.active__c= true;
+         backgroundcheckfalse.current__c= true;
          backgroundcheckfalse.Date_Completed__c = system.today() + 9;
          Database.SaveResult result = Database.update(backgroundcheckfalse,false);
          //System.assertEquals('Active Background Check Already Exist',result.getErrors()[0].getMessage());
          
      }
+     
+     
+     private testmethod static void createBackgroundCheckNationalStaff(){  
+         
+              
+        User currUser = [SELECT id from User where id = :Userinfo.getUserId() limit 1]; 
+         User nationalStaff;
+         System.RunAs(currUser)
+         {     
+             nationalStaff = OrientationandTrainingUtil.createUserWithRole([select Id from UserRole where Name='National Staff'].Id); 
+         }
+         System.runAs(nationalStaff) {
+         
+             
+             Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
+             Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.Id);
+              Background_check__c backCheck = new Background_check__c();
+              backCheck.Date__c = system.today() + 3;
+              backCheck.Volunteer__c = volunteerContact.Id;
+              backCheck.Status__c = 'test';
+              backCheck.current__c = true;
+              backCheck.Date_Completed__c = system.today() + 9;
+              backCheck.OwnerId=nationalStaff.Id;
+              insert backCheck;
+             
+         }
+         
+        
+         //System.assertEquals('Active Background Check Already Exist',result.getErrors()[0].getMessage());
+         
+     }
+     
    }

@@ -4,9 +4,10 @@ Description : This page is used to display the volunteer opportunity recordes wh
 <apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" controller="VolunteerWorkItems_AC" id="VolunteerWorkItems">
     <head>
         <apex:include pageName="prospective_head" id="phead" />
-        <apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
+        <apex:stylesheet value="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
+        <apex:stylesheet value="{!URLFOR($Resource.prospective_assets, 'web/css/lib/jquery.dataTables.min.css')}"/>
         <style type="text/css">
-         table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {width:20% !important}
+         /* table.dataTable.display tbody tr.odd>.sorting_1, table.dataTable.order-column.stripe tbody tr.odd>.sorting_1 {width:20% !important}
             body > main {margin-bottom:4em; margin-bottom:4rem;}
             body > span main section header {height:auto;}
             body > span main section header ul li {margin-left:auto;}
@@ -14,6 +15,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
             .vcpactivelogin .table-maw th {padding-right: 1rem;}
             .vcpactivelogin .table-maw td {vertical-align:middle}
             .messageCell h4{color:#066cb6}
+            */ 
         </style>
     </head>
     <body class="vcp vcpactivelogin full registered profile">
@@ -49,15 +51,15 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                 <tr>
                                                     <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}" var="fieldValue">
                                                         <apex:outputpanel rendered="{!fieldValue.label = 'Record ID' }">
-                                                            <td><div style='width:100px'><apex:outputLink style="text-decoration: underline;color: blue;" value="/{!con1.wishOpportunities[fieldValue]}" id="theLink">View</apex:outputLink>
-                                                              
+                                                            <td style="width:20%"><apex:outputLink style="text-decoration: underline;color: blue;" value="/{!con1.wishOpportunities[fieldValue]}" id="theLink">View</apex:outputLink>
+
                                                                   | &nbsp;
                                                                 <apex:commandLink value="Register" action="{!RegisterWishEvents}"  style="text-decoration: underline; color:blue;">
                                                                     <apex:param name="nickName" value="{!con1.wishOpportunities[fieldValue]}" assignTo="{!volunteerOpportunityRecordId}"/>
-                                                                </apex:commandLink></div>
-                                                                      
-                                                                    
-                                                              
+                                                                </apex:commandLink>
+
+
+
                                                             </td>
                                                         </apex:outputpanel>
                                                         <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label  != 'Waiting Since' }">
@@ -102,15 +104,15 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                     <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.NonWishEvents}" var="fieldValue">
                                                         <apex:outputpanel rendered="{!fieldValue.label = 'Record ID' }">
                                                             <td>
-                                                            
+
                                                             <apex:outputLink style="text-decoration: underline;color: blue;" value="/{!con.nonWishOpportunities[fieldValue]}" id="theLink">View</apex:outputLink>
-                                                                
+
                                                                  | &nbsp;
                                                                 <apex:commandLink value="Register" action="{!RegisterNonWishEvents}"  style="text-decoration: underline; color:blue;">
                                                                     <apex:param name="nickName" value="{!con.nonWishOpportunities[fieldValue]}" assignTo="{!volunteerOpportunityRecordId}"/>
                                                                 </apex:commandLink>
-                                                                
-                                                                
+
+
                                                             </td>
                                                         </apex:outputpanel>
                                                         <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'Event Date' }">
@@ -142,18 +144,15 @@ Description : This page is used to display the volunteer opportunity recordes wh
             </div>
         </main>
         <apex:include pageName="prospective_footer" id="pfooter" />
-
-        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-        <!-- fallback -->
-        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, "web/js/jquery.dataTables.min.js")}"><\/script>')</script>
-        <script src="https://files-stackablejs.netdna-ssl.com/stacktable.min.js"></script>
-        <!-- fallback -->
-        <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, "web/js/stacktable.min.js")}"><\/script>')</script>
+        
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.dataTables.min.js')}"></script>
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/stacktable.min.js')}"></script>
 
         <script>
-        $.noConflict();
-        jQuery( document ).ready(function( $ ) {
+         $j = jQuery.noConflict();
+        jQuery(document ).ready(function($) {
             $('head').prepend('<title>Volunteer Opportunities - Communities | Make-A-Wish\u00AE America</title>');
+          
             $('#dataTab1,#dataTab2').DataTable({
               "paging": false,
               "searching": false

@@ -10,16 +10,5 @@ trigger LeadFile_AT on Lead_File__c (after insert,after update) {
         AWSFilePath_AC.generateLeadFilePath(trigger.newMap.keySet());
     }
     
-    if(Trigger.isAfter && Trigger.isUpdate){
-        for(Lead_File__c currentLeadFile : trigger.new){
-            if(currentLeadFile.File_Path__c != Null && trigger.oldMap.get(currentLeadFile.id).File_Path__c != currentLeadFile.File_Path__c){
-                leadFileIdsSet.add(currentLeadFile.id);
-             }            
-        }
-        
-        if(leadFileIdsSet.Size() > 0) {
-            LeadTriggerHandler newLead = new LeadTriggerHandler();
-            newLead.updatecaseMedicalSummaryAttachments(leadFileIdsSet);
-        }
-    }
+    
 }

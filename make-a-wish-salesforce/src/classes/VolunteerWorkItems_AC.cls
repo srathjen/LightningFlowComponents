@@ -29,7 +29,9 @@ public class VolunteerWorkItems_AC {
     public boolean isWishNotClose{get;set;}
     //Used to get record type Id for wish and non wish events
     Constant_AC  constant = new Constant_Ac(); 
+    public Id wishEventsRegistered = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.registeredWish).getRecordTypeId();
     public Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
+    
     public Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
     public Id trainingRTId = Schema.Sobjecttype.Orientation_Training__c.getRecordTypeInfosByName().get(constant.trainingRT).getRecordTypeId();
     Public Id nonWishRT = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.nonWishRT).getRecordTypeId();
@@ -165,7 +167,8 @@ reqired volunteers and registered volunteers count.*/
               closedWishQueryString += closedWishField.getFieldPath()+',';
             } 
         closedWishQueryString = closedWishQueryString .removeEnd(',');
-        closedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND (Wish__r.isClosed = true OR Wish__r.Status = \'completed\')';
+         System.debug('>>volunteerChaptersSet>>'+volunteerChaptersSet);
+        closedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: wishEventsRegistered OR RecordTypeId =: wishEvents) AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND (Wish__r.isClosed = true OR Wish__r.Status = \'completed\')';
         closedVolunteerWishList =  Database.query(closedWishQueryString);
         return closedVolunteerWishList;
     }
@@ -196,7 +199,7 @@ reqired volunteers and registered volunteers count.*/
         wishQueryString = wishQueryString.removeEnd(',');
         assignedWishQueryString = wishQueryString.removeEnd(',');
          wishQueryString += ' FROM Volunteer_Opportunity__c WHERE ((Wish__r.Sub_Status__c!= \'Non-Viewable\') OR (Wish__r.Sub_Status__c= \'Non-Viewable\' AND Is_Non_Viewable__c!= true)) AND Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Inactive__c = False';
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Inactive__c = False ';
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: wishEvents OR RecordTypeId = :registeredWishRecordTypeId) AND Reason_Inactive__c = null AND Inactive__c = False ';
         volunteerWishEventsList = Database.query(wishQueryString);
         for(Volunteer_Opportunity__c wishOpportunities : volunteerWishEventsList) {
             if(!wishOpportunitiesMap.containsKey(wishOpportunities.Wish__c + '-' + wishOpportunities.Chapter_Name__c + '-' + wishOpportunities.Role__c)) {
@@ -223,7 +226,7 @@ reqired volunteers and registered volunteers count.*/
     }
     
     
-    public boolean getChapterRoleOanTStatus(Id chapterRole)
+     public boolean getChapterRoleOanTStatus(Id chapterRole)
     {
     
        List<Chapter_Role_O_T__c> currTrainig = [SELECT id, Required__c FROM Chapter_Role_O_T__c WHERE 
@@ -258,7 +261,7 @@ reqired volunteers and registered volunteers count.*/
                 }
                 for(Volunteer_Roles__c checkForMatchingRole : [SELECT Id, Chapter_Name__c,Role_Name__c,isWishRole__c,Status__c, Chapter_Role__c,
                                                                Chapter_Role__r.Role_Name__c 
-                                                               FROM Volunteer_Roles__c WHERE Volunteer_Name__c =: userRelatedContactId 
+                                                               FROM Volunteer_Roles__c WHERE Volunteer_Name__c =: userRelatedContactId
                                                                AND Chapter_Name__c =: volunteerOpportunity.get(0).Chapter_Name__r.Name])
                                                                 
                  {
@@ -290,7 +293,7 @@ reqired volunteers and registered volunteers count.*/
                      {
                          if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == True)
                          {
-                            if(TrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__c))
+                            if(TrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c))
                             {
                                updateRecord = true;
                                allowRegister = true;

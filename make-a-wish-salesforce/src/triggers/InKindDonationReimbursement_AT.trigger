@@ -2,9 +2,9 @@
 Author      : MST Solutions
 CreatedBy   : Chandrasekar
 Date        : 4/10/2016
-Description : This trigger us used to fetch the associated case owner,case owner's manager and current loged in user details
+Description : This trigger us used to fetch the associated case owner,case owner's manager 
 ****************************************************************************************************/
-trigger InKindDonationReimbursement_AT on In_Kind_Donation_Reimbursement__c (before insert,before update) {
+trigger InKindDonationReimbursement_AT on In_Kind_Donation_Reimbursement__c (before insert,before update,after insert,after update) {
     
     List<Contact> volunteerContactList = new List<Contact>();
     List<User> volunteerUserList = new List<User>();
@@ -35,9 +35,7 @@ trigger InKindDonationReimbursement_AT on In_Kind_Donation_Reimbursement__c (bef
             if(wishManagerMap.size()>0){
                 for(In_Kind_Donation_Reimbursement__c newReImburse : trigger.new){
                     if(newReImburse.Wish__c != Null && wishOwnerMap.containsKey(newReImburse.Wish__c)){
-                        newReImburse.Wish_Owner__c = wishOwnerMap.get(newReImburse.Wish__c);
-                        if(wishManagerMap.containsKey(newReImburse.Wish_Owner__c))
-                            newReImburse.Wish_Owner_s_Manager__c = wishManagerMap.get(newReImburse.Wish_Owner__c);
+                        
                     }
                 }
             }
@@ -67,14 +65,28 @@ trigger InKindDonationReimbursement_AT on In_Kind_Donation_Reimbursement__c (bef
             if(wishManagerMap.size()>0){
                 for(In_Kind_Donation_Reimbursement__c newReImburse : trigger.new){
                     if(newReImburse.Wish__c != Null && wishOwnerMap.containsKey(newReImburse.Wish__c)){
-                        newReImburse.Wish_Owner__c = wishOwnerMap.get(newReImburse.Wish__c);
-                        if(wishManagerMap.containsKey(newReImburse.Wish_Owner__c))
-                            newReImburse.Wish_Owner_s_Manager__c = wishManagerMap.get(newReImburse.Wish_Owner__c);
+                        
                     }
                 }
             }
             
         }
         
+    }
+    
+    if(Trigger.isAfter && (Trigger.isInsert || Trigger.isUpdate)){
+    
+        Map<String,List<In_Kind_Donation_Reimbursement__c >> inKindDonationMap = new Map<String,List<In_Kind_Donation_Reimbursement__c>>();
+        for(In_Kind_Donation_Reimbursement__c currRec : [SELECT id,Ownerid,owner.UserRole.Name,Wish__r.ChapterName__r.Name FROM In_Kind_Donation_Reimbursement__c WHERE Id IN :Trigger.newMap.Keyset()]){
+            if(currRec.Wish__c != Null && (Trigger.isInsert || currRec.OwnerId != Trigger.oldMap.get(currRec.Id).OwnerId) && currRec.Owner.UserRole.Name == 'National Staff' ){
+                if(inKindDonationMap.containsKey(currRec.Wish__r.ChapterName__r.Name))
+                    inKindDonationMap.get(currRec.Wish__r.ChapterName__r.Name).add(currRec);
+                else
+                    inKindDonationMap.put(currRec.Wish__r.ChapterName__r.Name, new List<In_Kind_Donation_Reimbursement__c>{currRec});
+            }
+        }
+        
+        if(inKindDonationMap.Size() > 0)
+           ChapterStaffRecordSharing_AC.inKindReimbursementSharing(inKindDonationMap);
     }
 }

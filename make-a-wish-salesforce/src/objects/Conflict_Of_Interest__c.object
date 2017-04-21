@@ -86,11 +86,11 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Active__c</fullName>
+        <fullName>Current__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field is used to check weather this conflict of interest is active or not.</description>
         <externalId>false</externalId>
-        <label>Active</label>
+        <label>Current</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -114,6 +114,15 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>HiddenConflictExpire__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is checked when the conflict of Interest record get expire.</description>
+        <externalId>false</externalId>
+        <label>Hidden Conflict Expire</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Hidden_Volunteer_Contact_Email__c</fullName>
@@ -195,7 +204,6 @@
         <columns>NAME</columns>
         <columns>Volunteer_Contact__c</columns>
         <columns>Signed_Date__c</columns>
-        <columns>Active__c</columns>
         <columns>Expiration_Date__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
@@ -207,7 +215,7 @@
     </nameField>
     <pluralLabel>Conflict Of Interest</pluralLabel>
     <searchLayouts/>
-    <sharingModel>Private</sharingModel>
+    <sharingModel>Read</sharingModel>
     <sharingReasons>
         <fullName>Chapter_Staff__c</fullName>
         <label>Chapter_Staff</label>

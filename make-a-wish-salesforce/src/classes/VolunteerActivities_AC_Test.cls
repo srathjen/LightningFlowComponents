@@ -117,8 +117,11 @@ public class VolunteerActivities_AC_Test {
         User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        parentCase.Presentation_Date__c = System.today();
-        update parentCase;
+        Case newCase = new Case();
+        newCase.Id = parentCase.Id;
+        newCase.Presentation_Date__c = System.today();
+        newCase.Wish_Presentation_Set__c  = True;
+        update newCase;
         Task newTask = OrientationandTrainingUtil.wishPresentationNotSet(parentCase.Id);
         newTask.OwnerId = volUser.Id;
         newTask.Status = 'Completed';

@@ -759,6 +759,13 @@
     </fields>
     <label>Wish Expense</label>
     <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
         <fullName>Migration</fullName>
         <columns>NAME</columns>
         <columns>Account_Number__c</columns>
@@ -1141,4 +1148,11 @@
     </recordTypes>
     <searchLayouts/>
     <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>WE_Do_not_update_case</fullName>
+        <active>true</active>
+        <description>Once wish expense record created, it should not be editable.</description>
+        <errorConditionFormula>IsChanged(Case__c)</errorConditionFormula>
+        <errorMessage>Wish Number cannot be updated.</errorMessage>
+    </validationRules>
 </CustomObject>

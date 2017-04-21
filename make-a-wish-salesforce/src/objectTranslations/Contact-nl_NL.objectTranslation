@@ -17,11 +17,11 @@
         <name>Actor_Actress__c</name>
     </fields>
     <fields>
-        <label><!-- is Adult Emergency Contact --></label>
+        <label><!-- Is Adult Emergency Contact --></label>
         <name>Adult_Emergency_Contact__c</name>
     </fields>
     <fields>
-        <label><!-- Already wish granted by MAW/Other Org --></label>
+        <label><!-- Already Wish Granted By MAW/Other Org --></label>
         <name>Already_wish_granted_by_MAW_Other_Org__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -269,7 +269,7 @@
         <name>City_Employer__c</name>
     </fields>
     <fields>
-        <label><!-- Class in School --></label>
+        <label><!-- Class In School --></label>
         <name>Class_in_School__c</name>
     </fields>
     <fields>
@@ -317,11 +317,15 @@
         <name>Current_Age__c</name>
     </fields>
     <fields>
-        <label><!-- Date of Wish Assigned --></label>
+        <label><!-- Current Conditions --></label>
+        <name>Current_Conditions__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Of Wish Assigned --></label>
         <name>Date_of_Wish_Assigned__c</name>
     </fields>
     <fields>
-        <label><!-- Date of last engagement --></label>
+        <label><!-- Date Of Last Engagement --></label>
         <name>Date_of_last_engagement__c</name>
     </fields>
     <fields>
@@ -357,7 +361,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Electronics/Games that I like to play --></label>
+        <label><!-- Electronics/Games That I Like To Play --></label>
         <name>Electronics_Games_that_I_like_to_play__c</name>
     </fields>
     <fields>
@@ -453,6 +457,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Hidden BirthDate --></label>
+        <name>HiddenBirthDate__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Mobile Phone --></label>
         <name>HiddenMobilePhone__c</name>
     </fields>
@@ -489,11 +497,11 @@
         <name>Hidden_Last_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Hidden Medical Physician Email --></label>
+        <label><!-- Wish Clearance Medical Physician Email --></label>
         <name>Hidden_Medical_Physician_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Hidden Medical Physician --></label>
+        <label><!-- Wish Clearance Medical Physician --></label>
         <name>Hidden_Medical_Physician__c</name>
     </fields>
     <fields>
@@ -569,7 +577,7 @@
         <name>Hobby__c</name>
     </fields>
     <fields>
-        <label><!-- How did you hear about Make-A-Wish? --></label>
+        <label><!-- How Did You Hear About Make-A-Wish? --></label>
         <name>How_did_you_hear_about_Make_A_Wish__c</name>
         <picklistValues>
             <masterLabel>Aware of a wish family who experienced a wish</masterLabel>
@@ -605,7 +613,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- How did you know MAWA (Other Notes) --></label>
+        <label><!-- How Did You Know MAWA (Other Notes) --></label>
         <name>How_did_you_know_MAWA_Other_Notes__c</name>
     </fields>
     <fields>
@@ -613,7 +621,7 @@
         <name>ICD_10_Code__c</name>
     </fields>
     <fields>
-        <label><!-- I’m on LinkedIn --></label>
+        <label><!-- I’m On LinkedIn --></label>
         <name>I_m_on_LinkedIn__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -627,7 +635,7 @@
     <fields>
         <help><!-- If already wish granted, please indicate the organization&apos;s name, the wish,
 and the date it was or will be granted. --></help>
-        <label><!-- If yes,Enter Org.Name,Wish&amp; Date it was --></label>
+        <label><!-- If Yes, Enter Org.Name,Wish&amp; Date It Was --></label>
         <name>If_yes_Enter_Org_Name_Wish_Date_it_was__c</name>
     </fields>
     <fields>
@@ -659,7 +667,7 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Would your company be interested MAW --></label>
+        <label><!-- Would Your Company Be Interested MAW --></label>
         <name>Interested_involved_with_Make_A_Wish__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -703,7 +711,7 @@ and the date it was or will be granted. --></help>
         <name>IsSigned__c</name>
     </fields>
     <fields>
-        <label><!-- Is Family Aware of Referral? --></label>
+        <label><!-- Is Family Aware Of Referral? --></label>
         <name>Is_Family_Aware_of_Referral__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -799,7 +807,7 @@ and the date it was or will be granted. --></help>
         <name>Lead_Created_Date__c</name>
     </fields>
     <fields>
-        <label><!-- May We Contact You at Work? --></label>
+        <label><!-- May We Contact You At Work? --></label>
         <name>May_We_Contact_You_at_Work__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -843,6 +851,10 @@ and the date it was or will be granted. --></help>
         <name>Music_Singer__c</name>
     </fields>
     <fields>
+        <label><!-- My Wish Is To --></label>
+        <name>MyWishIsTo__c</name>
+    </fields>
+    <fields>
         <label><!-- Nickname --></label>
         <name>Nickname__c</name>
     </fields>
@@ -859,15 +871,15 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Number of Assignments --></label>
+        <label><!-- Number Of Assignments --></label>
         <name>Number_of_Assignments__c</name>
     </fields>
     <fields>
-        <label><!-- Number of Active Wishes --></label>
+        <label><!-- Number Of Active Wishes --></label>
         <name>Number_of_wishes_active__c</name>
     </fields>
     <fields>
-        <label><!-- Number of wishes granted --></label>
+        <label><!-- Number Of Wishes Granted --></label>
         <name>Number_of_wishes_granted__c</name>
     </fields>
     <fields>
@@ -1393,7 +1405,7 @@ and the date it was or will be granted. --></help>
         <name>RE_Type__c</name>
     </fields>
     <fields>
-        <label><!-- RE What is your race/ethnicity? --></label>
+        <label><!-- RE What Is Your Race/Ethnicity? --></label>
         <name>RE_What_is_your_race_ethnicity__c</name>
     </fields>
     <fields>
@@ -1590,6 +1602,10 @@ and the date it was or will be granted. --></help>
         <relationshipLabel><!-- Contacts --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- Hidden Related Contacts --></label>
+        <name>RelatedContacts__c</name>
+    </fields>
+    <fields>
         <label><!-- Relationship --></label>
         <name>Relationship__c</name>
         <picklistValues>
@@ -1710,11 +1726,11 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Relationship to Wish Child (Other) --></label>
+        <label><!-- Relationship To Wish Child (Other) --></label>
         <name>Relationship_to_Wish_Child__c</name>
     </fields>
     <fields>
-        <label><!-- Residing with Wish child --></label>
+        <label><!-- Residing With Wish Child --></label>
         <name>Residing_with_Wish_child__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -1762,7 +1778,7 @@ and the date it was or will be granted. --></help>
         <name>SD4_ICD_Code__c</name>
     </fields>
     <fields>
-        <label><!-- Same as Household Address --></label>
+        <label><!-- Same As Household Address --></label>
         <name>Same_as_Household_Address__c</name>
     </fields>
     <fields>
@@ -2219,6 +2235,14 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Suffix --></label>
         <name>Suffix__c</name>
         <picklistValues>
+            <masterLabel>CLS</masterLabel>
+            <translation><!-- CLS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DO</masterLabel>
+            <translation><!-- DO --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>II</masterLabel>
             <translation><!-- II --></translation>
         </picklistValues>
@@ -2233,6 +2257,66 @@ provide contact information for each site on which you are active. --></help>
         <picklistValues>
             <masterLabel>Jr.</masterLabel>
             <translation><!-- Jr. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LPN</masterLabel>
+            <translation><!-- LPN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LSW</masterLabel>
+            <translation><!-- LSW --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LVN</masterLabel>
+            <translation><!-- LVN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MA</masterLabel>
+            <translation><!-- MA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MD</masterLabel>
+            <translation><!-- MD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MSW</masterLabel>
+            <translation><!-- MSW --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NP</masterLabel>
+            <translation><!-- NP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OD</masterLabel>
+            <translation><!-- OD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OT</masterLabel>
+            <translation><!-- OT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PA</masterLabel>
+            <translation><!-- PA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT</masterLabel>
+            <translation><!-- PT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PharmD</masterLabel>
+            <translation><!-- PharmD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>R.Ph.</masterLabel>
+            <translation><!-- R.Ph. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RN</masterLabel>
+            <translation><!-- RN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RRT</masterLabel>
+            <translation><!-- RRT --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Sr.</masterLabel>
@@ -2252,7 +2336,7 @@ provide contact information for each site on which you are active. --></help>
         <name>T_Shirt_Size__c</name>
     </fields>
     <fields>
-        <label><!-- This is my wish because… --></label>
+        <label><!-- This Is My Wish Because… --></label>
         <name>This_is_my_wish_because__c</name>
     </fields>
     <fields>
@@ -2260,7 +2344,7 @@ provide contact information for each site on which you are active. --></help>
         <name>Timesheet_Date__c</name>
     </fields>
     <fields>
-        <label><!-- To me,the most important part of my wish --></label>
+        <label><!-- To Me,The Most Important Part Of My Wish --></label>
         <name>To_me_the_most_important_part_of_my_wish__c</name>
     </fields>
     <fields>
@@ -2345,7 +2429,7 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Use as Household Address --></label>
+        <label><!-- Use As Household Address --></label>
         <name>Use_as_Household_Address__c</name>
     </fields>
     <fields>
@@ -2364,6 +2448,10 @@ provide contact information for each site on which you are active. --></help>
             <translation><!-- Celebrity Host --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Fundraising Volunteer</masterLabel>
+            <translation><!-- Fundraising Volunteer --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Fundraising – Assist</masterLabel>
             <translation><!-- Fundraising – Assist --></translation>
         </picklistValues>
@@ -2372,8 +2460,16 @@ provide contact information for each site on which you are active. --></help>
             <translation><!-- Medical Outreach Volunteer --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Office Volunteer</masterLabel>
+            <translation><!-- Office Volunteer --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Office – Assist</masterLabel>
             <translation><!-- Office – Assist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Skill Based Volunteer</masterLabel>
+            <translation><!-- Skill Based Volunteer --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Speaker’s Bureau</masterLabel>
@@ -2382,6 +2478,14 @@ provide contact information for each site on which you are active. --></help>
         <picklistValues>
             <masterLabel>Special Events</masterLabel>
             <translation><!-- Special Events --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Special Events - Committee Member</masterLabel>
+            <translation><!-- Special Events - Committee Member --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Translator &amp; Interpreter</masterLabel>
+            <translation><!-- Translator &amp; Interpreter --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Translator/Interpreter</masterLabel>
@@ -2394,6 +2498,14 @@ provide contact information for each site on which you are active. --></help>
         <picklistValues>
             <masterLabel>Wish Assist Phone Greeter</masterLabel>
             <translation><!-- Wish Assist Phone Greeter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Assist Volunteer</masterLabel>
+            <translation><!-- Wish Assist Volunteer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Family Welcome Volunteer</masterLabel>
+            <translation><!-- Wish Family Welcome Volunteer --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Wish Granter</masterLabel>
@@ -2409,7 +2521,7 @@ provide contact information for each site on which you are active. --></help>
         <name>Waiting_Since__c</name>
     </fields>
     <fields>
-        <label><!-- What is your race/ethnicity? --></label>
+        <label><!-- What Is Your Race/Ethnicity? --></label>
         <name>What_is_your_race_ethnicity__c</name>
         <picklistValues>
             <masterLabel>American Indian or Alaskan Native</masterLabel>
@@ -2445,27 +2557,27 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- When I’m inside, I like to… --></label>
+        <label><!-- When I’m Inside, I Like To… --></label>
         <name>When_I_m_inside_I_like_to__c</name>
     </fields>
     <fields>
-        <label><!-- When I’m outside, I like to... --></label>
+        <label><!-- When I’m Outside, I Like To... --></label>
         <name>When_I_m_outside_I_like_to__c</name>
     </fields>
     <fields>
-        <label><!-- When I’m with my family, I like to… --></label>
+        <label><!-- When I’m With My Family, I Like To… --></label>
         <name>When_I_m_with_my_family_I_like_to__c</name>
     </fields>
     <fields>
-        <label><!-- When I’m with my friends, I like to… --></label>
+        <label><!-- When I’m With My Friends, I Like To… --></label>
         <name>When_I_m_with_my_friends_I_like_to__c</name>
     </fields>
     <fields>
-        <label><!-- When I think about my wish, I imagine…. --></label>
+        <label><!-- When I Think About My Wish, I Imagine…. --></label>
         <name>When_I_think_about_my_wish_I_imagine__c</name>
     </fields>
     <fields>
-        <label><!-- When thinking,some of my wish ideas were --></label>
+        <label><!-- When Thinking,Some Of My Wish Ideas Were --></label>
         <name>When_thinking_some_of_my_wish_ideas_were__c</name>
     </fields>
     <fields>
@@ -2567,7 +2679,7 @@ provide contact information for each site on which you are active. --></help>
         <name>Year__c</name>
     </fields>
     <fields>
-        <label><!-- Year of Last Enagement --></label>
+        <label><!-- Year Of Last Enagement --></label>
         <name>Year_of_Last_Enagement__c</name>
     </fields>
     <fields>
@@ -2615,17 +2727,17 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Alternate Email is an optional fourth email: Not personal, preferred, or work email. --></help>
+        <help>Alternatieve E-mail is een optionele vierde E-mail: Niet persoonlijk, voorkeur, of werk E-mail</help>
         <label><!-- Alternate Email --></label>
         <name>npe01__AlternateEmail__c</name>
     </fields>
     <fields>
-        <help><!-- See Preferred Email field. --></help>
+        <help>Zie Voorkeur E-mail veld.</help>
         <label><!-- Personal Email --></label>
         <name>npe01__HomeEmail__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: Uses primary address type field to determine Home Address from Mailing or Other address. --></help>
+        <help>Formule: Gebruik het primaire adres type veld om het Thuis Adres van Verzenden of Anders Adres te bepalen.</help>
         <label><!-- Home Address --></label>
         <name>npe01__Home_Address__c</name>
     </fields>
@@ -2640,17 +2752,17 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__Lifetime_Giving_History_Amount__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: In order of preference, the SYSTEM_AccountType field, the Account Type field, and &quot;Organization&quot;. --></help>
+        <help>Formule: In volgorde van voorkeur, het SYSTEEM_AccountType veld, het Account Type veld, en &quot;Organisatie&quot;.</help>
         <label><!-- Organization Type --></label>
         <name>npe01__Organization_Type__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: If the Primary Address Type is Other, the Mailing Address.  If the Secondary Address Type is Other, the Other Address. --></help>
+        <help>Formule: Als het Primaire Adres gelijk is aan Anders, het Verzendadres. Als het Secundaire Adres type gelijk is aan Anders, het Anders Adres.</help>
         <label><!-- Other Address --></label>
         <name>npe01__Other_Address__c</name>
     </fields>
     <fields>
-        <help><!-- Which phone number should be used for most communications involving this Contact? --></help>
+        <help>Welk telefoonnummer moet er gebruikt worden met betrekking tot dit contactpersoon?</help>
         <label><!-- Preferred Phone --></label>
         <name>npe01__PreferredPhone__c</name>
         <picklistValues>
@@ -2671,7 +2783,7 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Which email should be used for most communications involving this Contact? --></help>
+        <help>Welk E-mailadres moet er gebruikt worden met betrekking tot dit contactpersoon?</help>
         <label><!-- Preferred Email --></label>
         <name>npe01__Preferred_Email__c</name>
         <picklistValues>
@@ -2688,51 +2800,51 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Which type of address is the mailing address? --></help>
+        <help>Welk type adres is het postadres?</help>
         <label><!-- Primary Address Type --></label>
         <name>npe01__Primary_Address_Type__c</name>
         <picklistValues>
             <masterLabel>Home</masterLabel>
-            <translation><!-- Home --></translation>
+            <translation>Thuis</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Other</masterLabel>
-            <translation><!-- Other --></translation>
+            <translation>Anders</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Work</masterLabel>
-            <translation><!-- Work --></translation>
+            <translation>Werk</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Excludes this Contact from One to One or Bucket account processing. --></help>
+        <help>Maakt één-op-één of bucket account processing niet mogelijk voor deze contactpersoon.</help>
         <label><!-- Private --></label>
         <name>npe01__Private__c</name>
     </fields>
     <fields>
-        <help><!-- What type of address is the other address? --></help>
+        <help>Welk type adres is het andere adres?</help>
         <label><!-- Secondary Address Type --></label>
         <name>npe01__Secondary_Address_Type__c</name>
         <picklistValues>
             <masterLabel>Home</masterLabel>
-            <translation><!-- Home --></translation>
+            <translation>Thuis</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Other</masterLabel>
-            <translation><!-- Other --></translation>
+            <translation>Anders</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Work</masterLabel>
-            <translation><!-- Work --></translation>
+            <translation>Werk</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Indicates which model drives Account relationship behavior: Individual (Bucket) or One-to-One --></help>
+        <help>Geeft aan welk model zorgt voor Account relatie gedrag. Individueel (Bucket) of één-op-één</help>
         <label><!-- DEPRECATED - _SYSTEM: ACCOUNT PROCESSOR --></label>
         <name>npe01__SystemAccountProcessor__c</name>
         <picklistValues>
             <masterLabel>Individual</masterLabel>
-            <translation><!-- Individual --></translation>
+            <translation>Individueel</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>One-to-One</masterLabel>
@@ -2745,22 +2857,22 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__SystemIsIndividual__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: &quot;Individual&quot; or &quot;Organization&quot; depending on Account setting. --></help>
+        <help>Formule: &quot;Individueel&quot; of &quot;Organisatie&quot; hangt af van Account instellingen.</help>
         <label><!-- Type of Account --></label>
         <name>npe01__Type_of_Account__c</name>
     </fields>
     <fields>
-        <help><!-- See Preferred Email field. --></help>
+        <help>Zie Voorkeur E-mail veld.</help>
         <label><!-- Work Email --></label>
         <name>npe01__WorkEmail__c</name>
     </fields>
     <fields>
-        <help><!-- See &apos;Preferred Phone&apos; field. --></help>
+        <help>Zie &apos;Voorkeur Telefoon&apos; veld.</help>
         <label><!-- Work Phone --></label>
         <name>npe01__WorkPhone__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: If the Primary Address Type is Work, the Mailing Address.  If the Secondary Address Type is Work, the Other Address. --></help>
+        <help>Formule: Als het Primaire Adres type gelijk is aan Werk, het Verzendadres. Als het Secundaire Adres type gelijk is aan Werk, het Anders Adres.</help>
         <label><!-- Work Address --></label>
         <name>npe01__Work_Address__c</name>
     </fields>
@@ -2838,20 +2950,20 @@ provide contact information for each site on which you are active. --></help>
         <name>npo02__MembershipJoinDate__c</name>
     </fields>
     <fields>
-        <help><!-- Determines which household names this contact is NOT included as part of. --></help>
+        <help>Bepaald welke namen van het huishouden deze Contactpersoon NIET bijhoort.</help>
         <label><!-- Naming Exclusions --></label>
         <name>npo02__Naming_Exclusions__c</name>
         <picklistValues>
             <masterLabel>Household__c.Formal_Greeting__c</masterLabel>
-            <translation><!-- Household__c.Formal_Greeting__c --></translation>
+            <translation>Huishouden__c.Formele_Begroeting__c</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Household__c.Informal_Greeting__c</masterLabel>
-            <translation><!-- Household__c.Informal_Greeting__c --></translation>
+            <translation>Huishouden__c.Informele_Begroeting__c</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Household__c.Name</masterLabel>
-            <translation><!-- Household__c.Name --></translation>
+            <translation>Huishouden__c.Naam</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -2907,22 +3019,22 @@ provide contact information for each site on which you are active. --></help>
         <name>npo02__SmallestAmount__c</name>
     </fields>
     <fields>
-        <help><!-- Total soft credit amount last year. --></help>
+        <help>Totale soft credit hoeveelheid vorig jaar.</help>
         <label><!-- Soft Credit Last Year --></label>
         <name>npo02__Soft_Credit_Last_Year__c</name>
     </fields>
     <fields>
-        <help><!-- Total soft credit amount this year --></help>
+        <help>Totale soft credit hoeveelheid dit jaar.</help>
         <label><!-- Soft Credit This Year --></label>
         <name>npo02__Soft_Credit_This_Year__c</name>
     </fields>
     <fields>
-        <help><!-- Total amount in soft credits for this Contact&apos;s lifetime. Defined in the Household Settings tab. --></help>
+        <help>Totaal hoeveelheid soft credits voor het leven van deze Contactpersoon. Gedefinieerd in de Huishouden Instellingen tab.</help>
         <label><!-- Soft Credit Total --></label>
         <name>npo02__Soft_Credit_Total__c</name>
     </fields>
     <fields>
-        <help><!-- Total soft credit amount two years ago. --></help>
+        <help>Totale soft credit hoeveelheid twee jaar geleden.</help>
         <label><!-- Soft Credit Two Years Ago --></label>
         <name>npo02__Soft_Credit_Two_Years_Ago__c</name>
     </fields>
@@ -2955,125 +3067,125 @@ provide contact information for each site on which you are active. --></help>
         <name>npo02__Total_Household_Gifts__c</name>
     </fields>
     <fields>
-        <help><!-- If this address requires verification, click the Verify Address button at the top of the Address page. Consult the Help documentation in the Power of Us Hub for more information. --></help>
+        <help>Als dit adres verificatie vereist, klik de Verifieer Adres knop bovenin de Adres pagina. Zie de Help documentatie in de &quot;Power of Us Hub&quot; voor meer informatie</help>
         <label><!-- Address Verification Status --></label>
         <name>npsp__Address_Verification_Status__c</name>
     </fields>
     <fields>
-        <help><!-- lookup to the Batch that this contact was created in. --></help>
+        <help>Opzoekrelatie naar de Batch waarin dit contact is gemaakt.</help>
         <label><!-- Batch --></label>
         <name>npsp__Batch__c</name>
         <relationshipLabel><!-- Contacts --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- The current Address that the Contact&apos;s mailing fields are filled with. --></help>
+        <help>Het huidige Postadres van de Contactpersoon.</help>
         <label><!-- Current Address --></label>
         <name>npsp__Current_Address__c</name>
         <relationshipLabel><!-- Contacts (Current Address) --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- When selected, this option marks the contact as deceased, and excludes them from household naming, emails, and phone calls. --></help>
+        <help>Indien aangevinkt, deze optie markeert het contact als overleden, en sluit deze persoon uit van huishoud benaming, e-mails, en telefoongesprekken</help>
         <label><!-- Deceased --></label>
         <name>npsp__Deceased__c</name>
     </fields>
     <fields>
-        <help><!-- When selected, this option excludes the contact from emails and phone calls. --></help>
+        <help>Indien aangevinkt wordt deze contactpersoon uitgesloten van e-mails en telefoongesprekken.</help>
         <label><!-- Do Not Contact --></label>
         <name>npsp__Do_Not_Contact__c</name>
     </fields>
     <fields>
-        <help><!-- Checking this box will exclude this contact from the Household Formal Greeting. --></help>
+        <help>Indien aangevinkt wordt de Contactpersoon uitgesloten van de Formele Begroeting.</help>
         <label><!-- Exclude from Household Formal Greeting --></label>
         <name>npsp__Exclude_from_Household_Formal_Greeting__c</name>
     </fields>
     <fields>
-        <help><!-- Checking this box will exclude this contact from the Household Informal Greeting. --></help>
+        <help>Indien aangevinkt wordt de Contactpersoon uitgesloten van de Informele Begroeting.</help>
         <label><!-- Exclude from Household Informal Greeting --></label>
         <name>npsp__Exclude_from_Household_Informal_Greeting__c</name>
     </fields>
     <fields>
-        <help><!-- Checking this box will exclude this contact from the Household Name. --></help>
+        <help>Indien aangevinkt wordt de Contactpersoon uitgesloten van de Naam van het Huishouden.</help>
         <label><!-- Exclude from Household Name --></label>
         <name>npsp__Exclude_from_Household_Name__c</name>
     </fields>
     <fields>
-        <help><!-- The amount of the earliest soft credit. --></help>
+        <help>De hoeveelheid van de eerste soft credit</help>
         <label><!-- First Soft Credit Amount --></label>
         <name>npsp__First_Soft_Credit_Amount__c</name>
     </fields>
     <fields>
-        <help><!-- The date of the earliest soft credit. --></help>
+        <help>De datum van de eerste soft credit.</help>
         <label><!-- First Soft Credit Date --></label>
         <name>npsp__First_Soft_Credit_Date__c</name>
     </fields>
     <fields>
-        <help><!-- holds the ID of the current household, whether it is a Household Account, or a Household Object. --></help>
+        <help>Houdt het ID van het huidige huishouden, of het nu een Huishoud Account is of een Huishoud Object.</help>
         <label><!-- HHId --></label>
         <name>npsp__HHId__c</name>
     </fields>
     <fields>
-        <help><!-- The amount of the largest soft credit. --></help>
+        <help>De hoeveelheid van de grootste soft credit.</help>
         <label><!-- Largest Soft Credit Amount --></label>
         <name>npsp__Largest_Soft_Credit_Amount__c</name>
     </fields>
     <fields>
-        <help><!-- The date of the largest soft credit. --></help>
+        <help>De datum van de grootste soft credit.</help>
         <label><!-- Largest Soft Credit Date --></label>
         <name>npsp__Largest_Soft_Credit_Date__c</name>
     </fields>
     <fields>
-        <help><!-- The amount of the most recent soft credit. --></help>
+        <help>De hoeveelheid van de meest recente soft credit.</help>
         <label><!-- Last Soft Credit Amount --></label>
         <name>npsp__Last_Soft_Credit_Amount__c</name>
     </fields>
     <fields>
-        <help><!-- The date of the most recent soft credit. --></help>
+        <help>De datum van de meest recente soft credit</help>
         <label><!-- Last Soft Credit Date --></label>
         <name>npsp__Last_Soft_Credit_Date__c</name>
     </fields>
     <fields>
-        <help><!-- The number of soft credits, closed in the last number of days defined in NPSP Settings. --></help>
+        <help>Het aantal soft credits, gesloten in de laatste nummer van dagen gedefinieerd in de NPSP Instellingen.</help>
         <label><!-- Number of Soft Credits Last N Days --></label>
         <name>npsp__Number_of_Soft_Credits_Last_N_Days__c</name>
     </fields>
     <fields>
-        <help><!-- The number of soft credits last year. --></help>
+        <help>Het aantal soft credits van vorig jaar.</help>
         <label><!-- Number of Soft Credits Last Year --></label>
         <name>npsp__Number_of_Soft_Credits_Last_Year__c</name>
     </fields>
     <fields>
-        <help><!-- The number of soft credits this year. --></help>
+        <help>Het aantal soft credits van dit jaar.</help>
         <label><!-- Number of Soft Credits This Year --></label>
         <name>npsp__Number_of_Soft_Credits_This_Year__c</name>
     </fields>
     <fields>
-        <help><!-- The number of soft credits 2 years ago. --></help>
+        <help>Het aantal soft credits van twee jaar geleden.</help>
         <label><!-- Number of Soft Credits Two Years Ago --></label>
         <name>npsp__Number_of_Soft_Credits_Two_Years_Ago__c</name>
     </fields>
     <fields>
-        <help><!-- The number of soft credits. --></help>
+        <help>Het aantal soft credits.</help>
         <label><!-- Number of Soft Credits --></label>
         <name>npsp__Number_of_Soft_Credits__c</name>
     </fields>
     <fields>
-        <help><!-- Used to track the account of the contact&apos;s Organization Affiliation record that is marked primary. --></help>
+        <help>Wordt gebruikt om het primaire verwante account te volgen van de desbetreffende contactpersoon.</help>
         <label><!-- Primary Affiliation --></label>
         <name>npsp__Primary_Affiliation__c</name>
         <relationshipLabel><!-- Do Not Use.  Use Organization Affiliations. --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- This is is checked if the user is the Primary Contact on their Account.  The Primary Contact can be edited on the Account. --></help>
+        <help>Deze is aangevinkt wanneer de gebruiker de primaire contact is op zijn Account. De primaire contactpersoon kan gewijzigd worden op de account.</help>
         <label><!-- Primary Contact --></label>
         <name>npsp__Primary_Contact__c</name>
     </fields>
     <fields>
-        <help><!-- The total amount of Soft Credit, closed in the last number of days defined in Household Settings. --></help>
+        <help>De totale hoeveelheid van soft credit, gesloten in het laatste nummer van dagen gedefinieerd in de Huishoud Instellingen.</help>
         <label><!-- Soft Credit Last N Days --></label>
         <name>npsp__Soft_Credit_Last_N_Days__c</name>
     </fields>
     <fields>
-        <help><!-- If checked, the Contact&apos;s Current Address lookup overrides the Household&apos;s default Address or seasonal Address. --></help>
+        <help>Indien aangevinkt, dan overschrijft het huidige adres opzoekrelatie van de contactpersoon het adres van het Huishouden of het seizoensgebonden adres.</help>
         <label><!-- Address Override --></label>
         <name>npsp__is_Address_Override__c</name>
     </fields>
@@ -3130,10 +3242,6 @@ provide contact information for each site on which you are active. --></help>
     <layouts>
         <layout>Volunteer info for volunteers</layout>
         <sections>
-            <label><!-- Engagement Details --></label>
-            <section>Engagement Details</section>
-        </sections>
-        <sections>
             <label><!-- Volunteer Details --></label>
             <section>Volunteer Details</section>
         </sections>
@@ -3179,6 +3287,10 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Volunteer Details --></label>
             <section>Volunteer Details</section>
+        </sections>
+        <sections>
+            <label><!-- Volunteer Role --></label>
+            <section>Volunteer Role</section>
         </sections>
     </layouts>
     <layouts>

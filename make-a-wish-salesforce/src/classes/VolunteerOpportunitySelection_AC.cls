@@ -1,3 +1,8 @@
+/*********************************************************************************
+Description : It will display volunteer opportunity list for enrolling time sheet for the wish.
+
+*********************************************************************************/
+
 Public Class VolunteerOpportunitySelection_AC{
 
     public List<volunteerWrapper> volunteerWrapperList{get;set;}
@@ -8,7 +13,8 @@ Public Class VolunteerOpportunitySelection_AC{
       caseId =  ApexPages.currentPage().getParameters().get('caseRecId') ;
       List<User>  currentUserContactId = [SELECT Id,ContactId From User WHERE Id =: UserInfo.getUserId() AND ContactId != Null Limit 1];
       for(Volunteer_Opportunity__c dbVolOppRec : [SELECT Id,Name,Wish__c,Volunteer_Name__c,Volunteer_Name__r.Name,Chapter_Name__c,Chapter_Name__R.Name,Role__c FROM Volunteer_Opportunity__c 
-                                    WHERE volunteer_Name__c != Null AND Volunteer_Name__c =: currentUserContactId[0].ContactId AND Wish__c =: caseId]){
+                                    WHERE volunteer_Name__c != Null AND Volunteer_Name__c =: currentUserContactId[0].ContactId 
+                                    AND Wish__c =: caseId AND IsApproved__c = True]){
           volunteerWrapper newWrapIns = new volunteerWrapper();
           newWrapIns.recordSelected = false;
           newWrapIns.volOpp = dbVolOppRec;
@@ -39,7 +45,8 @@ Public Class VolunteerOpportunitySelection_AC{
         }
         if(i > 0 && i == 1){
         String OpportunityFieldId= label.Volunteer_Opportunity_Id;
-        pageRef =  new PageReference('/a11/e?'+OpportunityFieldId+'='+OpportunityName+'&'+OpportunityFieldId+'_lkid='+OpportunityId+'&retURL='+CaseId);
+        String objectId = Time_Sheet__c.sobjecttype.getDescribe().getKeyPrefix();
+        pageRef =  new PageReference('/'+objectId+'/e?'+OpportunityFieldId+'='+OpportunityName+'&'+OpportunityFieldId+'_lkid='+OpportunityId+'&retURL='+CaseId);
         }
         if(i == 0){
             DisplayError();
@@ -68,7 +75,8 @@ Public Class VolunteerOpportunitySelection_AC{
                
         }
         String OpportunityFieldId= label.Volunteer_Opportunity_Id;
-        pageRef = new PageReference('/a11/e?'+OpportunityFieldId+'='+OpportunityName+'&'+OpportunityFieldId+'_lkid='+OpportunityId+'&retURL='+CaseId);
+        String objectId = Time_Sheet__c.sobjecttype.getDescribe().getKeyPrefix();
+        pageRef = new PageReference('/'+objectId+'/e?'+OpportunityFieldId+'='+OpportunityName+'&'+OpportunityFieldId+'_lkid='+OpportunityId+'&retURL='+CaseId);
         }
         
         return pageRef ;

@@ -242,103 +242,103 @@
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>7:00:AM</fullName>
+                    <fullName>7:00 AM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>7:30:AM</fullName>
+                    <fullName>7:30 AM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>8:00:AM</fullName>
+                    <fullName>8:00 AM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>8:30:AM</fullName>
+                    <fullName>8:30 AM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>9:00:AM</fullName>
+                    <fullName>9:00 AM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>9:30:AM</fullName>
+                    <fullName>9:30 AM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>10:00:AM</fullName>
+                    <fullName>10:00 AM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>10:30:AM</fullName>
+                    <fullName>10:30 AM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>11:00:AM</fullName>
+                    <fullName>11:00 AM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>11:30:AM</fullName>
+                    <fullName>11:30 AM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>12:00:PM</fullName>
+                    <fullName>12:00 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>12:30:PM</fullName>
+                    <fullName>12:30 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>1:00:PM</fullName>
+                    <fullName>1:00 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>1:30:PM</fullName>
+                    <fullName>1:30 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>2:00:PM</fullName>
+                    <fullName>2:00 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>2:30:PM</fullName>
+                    <fullName>2:30 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>3:00:PM</fullName>
+                    <fullName>3:00 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>3:30:PM</fullName>
+                    <fullName>3:30 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>4:00:PM</fullName>
+                    <fullName>4:00 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>4:30:PM</fullName>
+                    <fullName>4:30 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>5:00:PM</fullName>
+                    <fullName>5:00 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>5:30:PM</fullName>
+                    <fullName>5:30 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>6:00:PM</fullName>
+                    <fullName>6:00 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>6:30:PM</fullName>
+                    <fullName>6:30 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>7:00:PM</fullName>
+                    <fullName>7:00 PM</fullName>
                     <default>false</default>
                 </value>
                 <value>

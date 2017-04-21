@@ -27,7 +27,7 @@ global class UpdatAffiliationAsInactiveBatch_AC implements Database.Batchable<Ag
             String conId = String.valueof(currResult.get('con'));
             contactIdsSet.add(conId);
         }   
-        for(Background_check__c dbbackgroundCheckRec : [SELECT Id,Active__c,Date__c,Volunteer__c FROM Background_check__c  WHERE Volunteer__c IN: contactIdsSet AND Date__c >: Date.Today() ]) {
+        for(Background_check__c dbbackgroundCheckRec : [SELECT Id,current__c,Date__c,Volunteer__c FROM Background_check__c  WHERE Volunteer__c IN: contactIdsSet AND Date__c >: Date.Today() ]) {
             backGroundContactIdsSet.add(dbbackgroundCheckRec.Volunteer__c);
         }
         

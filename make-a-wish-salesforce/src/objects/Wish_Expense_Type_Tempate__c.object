@@ -59,7 +59,6 @@
         <externalId>false</externalId>
         <label>Wish Expense Type</label>
         <referenceTo>Wish_Expense_Type__c</referenceTo>
-        <relationshipLabel>Wish Expense Type Tempates</relationshipLabel>
         <relationshipName>Wish_Expense_Type_Tempates</relationshipName>
         <required>false</required>
         <trackTrending>false</trackTrending>
@@ -242,13 +241,13 @@
             </valueSetDefinition>
         </valueSet>
     </fields>
-    <label>Wish Expense Type Tempate</label>
+    <label>Wish Expense Type Template</label>
     <nameField>
         <displayFormat>{00000}</displayFormat>
         <label>Wish Expense Type Tempate Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Wish Expense Type Tempates</pluralLabel>
+    <pluralLabel>Wish Expense Type Templates</pluralLabel>
     <searchLayouts/>
     <sharingModel>Read</sharingModel>
 </CustomObject>

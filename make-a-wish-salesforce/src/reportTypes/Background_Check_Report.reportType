@@ -23,11 +23,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Active__c</field>
-            <table>Background_check__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Resided_in_US_for_past_7_years__c</field>
             <table>Background_check__c</table>
         </columns>

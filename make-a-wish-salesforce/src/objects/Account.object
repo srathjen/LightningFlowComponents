@@ -989,6 +989,16 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
+        <fullName>DevStaffEmail__c</fullName>
+        <description>This field will holds dev staff email</description>
+        <externalId>false</externalId>
+        <label>Dev Staff Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Do_Not_Contact_Notes__c</fullName>
         <description>It shows Do Not Contact Notes or related contacts</description>
         <externalId>false</externalId>
@@ -1085,6 +1095,294 @@
         <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
         <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>FY12_Q1__c</fullName>
+        <description>It capture the wish  assist number for FY12 Q1.</description>
+        <externalId>false</externalId>
+        <label>FY12 Q1</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY12_Q2__c</fullName>
+        <description>It capture the wish assist number for FY12 Q2.</description>
+        <externalId>false</externalId>
+        <label>FY12 Q2</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY12_Q3__c</fullName>
+        <description>It capture the wish assist number for FY12 Q3.</description>
+        <externalId>false</externalId>
+        <label>FY12 Q3</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY12_Q4__c</fullName>
+        <description>It capture the wish assist number for FY12 Q4.</description>
+        <externalId>false</externalId>
+        <label>FY12 Q4</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY13_Q1__c</fullName>
+        <description>It capture the wish assist number for FY13 Q1.</description>
+        <externalId>false</externalId>
+        <label>FY13 Q1</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY13_Q2__c</fullName>
+        <description>It capture the wish assist number for FY13 Q2.</description>
+        <externalId>false</externalId>
+        <label>FY13 Q2</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY13_Q3__c</fullName>
+        <description>It capture the wish assist number for FY13 Q3.</description>
+        <externalId>false</externalId>
+        <label>FY13 Q3</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY13_Q4__c</fullName>
+        <description>It capture the wish assist number for FY13 Q4.</description>
+        <externalId>false</externalId>
+        <label>FY13 Q4</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY14_Q1__c</fullName>
+        <description>It capture the wish assist number for FY14 Q1.</description>
+        <externalId>false</externalId>
+        <label>FY14 Q1</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY14_Q2__c</fullName>
+        <description>It capture the wish assist number for FY14 Q2.</description>
+        <externalId>false</externalId>
+        <label>FY14 Q2</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY14_Q3__c</fullName>
+        <description>It capture the wish assist number for FY14 Q3.</description>
+        <externalId>false</externalId>
+        <label>FY14 Q3</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY14_Q4__c</fullName>
+        <description>It capture the wish assist number for FY14 Q4.</description>
+        <externalId>false</externalId>
+        <label>FY14 Q4</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY15_Q1__c</fullName>
+        <description>It capture the wish assist number for FY15 Q1.</description>
+        <externalId>false</externalId>
+        <label>FY15 Q1</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY15_Q2__c</fullName>
+        <description>It capture the wish assist number for FY15 Q2.</description>
+        <externalId>false</externalId>
+        <label>FY15 Q2</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY15_Q3__c</fullName>
+        <description>It capture the wish assist number for FY15 Q3.</description>
+        <externalId>false</externalId>
+        <label>FY15 Q3</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY15_Q4__c</fullName>
+        <description>It capture the wish assist number for FY15 Q4.</description>
+        <externalId>false</externalId>
+        <label>FY15 Q4</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY16_Q1__c</fullName>
+        <description>It capture the wish assist number for FY16 Q1.</description>
+        <externalId>false</externalId>
+        <label>FY16 Q1</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY16_Q2__c</fullName>
+        <description>It capture Historic Wish assist Numbers for Chapter.</description>
+        <externalId>false</externalId>
+        <label>FY16 Q2</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY16_Q3__c</fullName>
+        <description>It capture Historic Wish assist Numbers for Chapter.</description>
+        <externalId>false</externalId>
+        <label>FY16 Q3</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY16_Q4__c</fullName>
+        <description>It capture the wish assist number for FY16 Q4.</description>
+        <externalId>false</externalId>
+        <label>FY16 Q4</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY17_Q1__c</fullName>
+        <description>It capture the wish assist number for FY17 Q2.</description>
+        <externalId>false</externalId>
+        <label>FY17 Q1</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY17_Q2__c</fullName>
+        <description>It capture the wish assist number for FY17 Q2.</description>
+        <externalId>false</externalId>
+        <label>FY17 Q2</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY17_Q3__c</fullName>
+        <description>It capture the wish assist number for FY17 Q3.</description>
+        <externalId>false</externalId>
+        <label>FY17 Q3</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FY17_Q4__c</fullName>
+        <description>It capture the wish assist number for FY17 Q4.</description>
+        <externalId>false</externalId>
+        <label>FY17 Q4</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Family_Dynamics__c</fullName>
@@ -1194,15 +1492,6 @@
         <fullName>IsCustomerPortal</fullName>
     </fields>
     <fields>
-        <fullName>Is_Active__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>It can show is this On Board on Salesforce active or not</description>
-        <externalId>false</externalId>
-        <label>Onboarded on SF</label>
-        <trackFeedHistory>false</trackFeedHistory>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>Is_Approved__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field is used to identify the whether the in kind donors account approved or not.</description>
@@ -1287,7 +1576,7 @@
         <defaultValue>false</defaultValue>
         <description>It can show On boarded details on Salesfroce</description>
         <externalId>false</externalId>
-        <label>Onboarded on SF</label>
+        <label>Onboarded On SF</label>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Checkbox</type>
     </fields>
@@ -1794,7 +2083,7 @@ Help Text</description>
         <fullName>Relationship_type__c</fullName>
         <description>It will capture the relationship information</description>
         <externalId>false</externalId>
-        <label>Relationship type</label>
+        <label>Relationship Type</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
@@ -8176,7 +8465,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <customTabListAdditionalFields>npe01__One2OneContact__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>ACCOUNT.ADDRESS1_CITY</customTabListAdditionalFields>
         <customTabListAdditionalFields>ACCOUNT.PHONE1</customTabListAdditionalFields>
-        <customTabListAdditionalFields>npo02__TotalOppAmount__c</customTabListAdditionalFields>
         <lookupDialogsAdditionalFields>ACCOUNT.NAME</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>ACCOUNT.RECORDTYPE</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>ACCOUNT.TYPE</lookupDialogsAdditionalFields>

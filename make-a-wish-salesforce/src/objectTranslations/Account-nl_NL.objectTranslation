@@ -23,6 +23,10 @@
         <name>Department_Division__c</name>
     </fields>
     <fields>
+        <label><!-- Dev Staff Email --></label>
+        <name>DevStaffEmail__c</name>
+    </fields>
+    <fields>
         <label><!-- Do Not Contact Notes --></label>
         <name>Do_Not_Contact_Notes__c</name>
     </fields>
@@ -62,6 +66,102 @@
         <help><!-- External RE record Id for upserting --></help>
         <label><!-- External Id --></label>
         <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY12 Q1 --></label>
+        <name>FY12_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY12 Q2 --></label>
+        <name>FY12_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY12 Q3 --></label>
+        <name>FY12_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY12 Q4 --></label>
+        <name>FY12_Q4__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY13 Q1 --></label>
+        <name>FY13_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY13 Q2 --></label>
+        <name>FY13_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY13 Q3 --></label>
+        <name>FY13_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY13 Q4 --></label>
+        <name>FY13_Q4__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY14 Q1 --></label>
+        <name>FY14_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY14 Q2 --></label>
+        <name>FY14_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY14 Q3 --></label>
+        <name>FY14_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY14 Q4 --></label>
+        <name>FY14_Q4__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY15 Q1 --></label>
+        <name>FY15_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY15 Q2 --></label>
+        <name>FY15_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY15 Q3 --></label>
+        <name>FY15_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY15 Q4 --></label>
+        <name>FY15_Q4__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY16 Q1 --></label>
+        <name>FY16_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY16 Q2 --></label>
+        <name>FY16_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY16 Q3 --></label>
+        <name>FY16_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY16 Q4 --></label>
+        <name>FY16_Q4__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY17 Q1 --></label>
+        <name>FY17_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY17 Q2 --></label>
+        <name>FY17_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY17 Q3 --></label>
+        <name>FY17_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY17 Q4 --></label>
+        <name>FY17_Q4__c</name>
     </fields>
     <fields>
         <label><!-- Family Dynamics --></label>
@@ -121,10 +221,6 @@
         <relationshipLabel><!-- Accounts (Intake Manager) --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Onboarded on SF --></label>
-        <name>Is_Active__c</name>
-    </fields>
-    <fields>
         <label><!-- Hidden Is Approved --></label>
         <name>Is_Approved__c</name>
     </fields>
@@ -154,7 +250,7 @@
         <name>Notes__c</name>
     </fields>
     <fields>
-        <label><!-- Onboarded on SF --></label>
+        <label><!-- Onboarded On SF --></label>
         <name>Onboarded_on_SF__c</name>
     </fields>
     <fields>
@@ -363,7 +459,7 @@
         <name>Referral_Form_Password__c</name>
     </fields>
     <fields>
-        <label><!-- Relationship type --></label>
+        <label><!-- Relationship Type --></label>
         <name>Relationship_type__c</name>
         <picklistValues>
             <masterLabel>Aunt</masterLabel>
@@ -1391,7 +1487,7 @@
         <name>npe01__SYSTEMIsIndividual__c</name>
     </fields>
     <fields>
-        <help><!-- System field: do not use or change. --></help>
+        <help>Systeem veld: gebruik of verander niet.</help>
         <label><!-- _SYSTEM: AccountType --></label>
         <name>npe01__SYSTEM_AccountType__c</name>
     </fields>
@@ -1412,7 +1508,7 @@
         <name>npo02__FirstCloseDate__c</name>
     </fields>
     <fields>
-        <help><!-- For Household Accounts, uses fields of non-excluded, ordered related Contacts. Generated automatically. --></help>
+        <help>Voor Huishoud Accounts, gebruikt velden van niet uitgesloten, gerangschikte gerelateerde contactpersonen. Automatisch gegenereerd.</help>
         <label><!-- Formal Greeting --></label>
         <name>npo02__Formal_Greeting__c</name>
     </fields>
@@ -1421,7 +1517,7 @@
         <name>npo02__HouseholdPhone__c</name>
     </fields>
     <fields>
-        <help><!-- For Household Accounts, uses fields of non-excluded, ordered related Contacts. Generated automatically. --></help>
+        <help>Voor Huishoud Accounts, gebruikt velden van niet uitgesloten, gerangschikte gerelateerde contactpersonen. Automatisch gegenereerd.</help>
         <label><!-- Informal Greeting --></label>
         <name>npo02__Informal_Greeting__c</name>
     </fields>
@@ -1502,16 +1598,16 @@
         <name>npo02__OppsClosedThisYear__c</name>
     </fields>
     <fields>
-        <help><!-- For Household Accounts, specifies which name related fields should not be automatically populated by the Householding code. --></help>
+        <help>Voor Huishoud Accounts, specificeer welke naam gerelateerde velden niet automatisch gevuld moeten worden door de Huishouden code</help>
         <label><!-- _SYSTEM: CUSTOM NAMING --></label>
         <name>npo02__SYSTEM_CUSTOM_NAMING__c</name>
         <picklistValues>
             <masterLabel>Formal_Greeting__c</masterLabel>
-            <translation><!-- Formal_Greeting__c --></translation>
+            <translation>Formele_Begroeting__c</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Informal_Greeting__c</masterLabel>
-            <translation><!-- Informal_Greeting__c --></translation>
+            <translation>Informele_Begroeting__c</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Name</masterLabel>
@@ -1531,116 +1627,116 @@
         <name>npo02__TotalOppAmount__c</name>
     </fields>
     <fields>
-        <help><!-- The batch this Account was created in. --></help>
+        <help>De batch waar deze Account is gemaakt.</help>
         <label><!-- Batch --></label>
         <name>npsp__Batch__c</name>
         <relationshipLabel><!-- Accounts --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- The general program area(s) that this organization funds. --></help>
+        <help>De standaard programma gebieden die deze organisatie financiert.</help>
         <label><!-- Funding Focus --></label>
         <name>npsp__Funding_Focus__c</name>
         <picklistValues>
             <masterLabel>Animal Welfare</masterLabel>
-            <translation><!-- Animal Welfare --></translation>
+            <translation>Dierenwelzijn</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Arts and Culture</masterLabel>
-            <translation><!-- Arts and Culture --></translation>
+            <translation>Kunst en Cultuur</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Capacity Building</masterLabel>
-            <translation><!-- Capacity Building --></translation>
+            <translation>Capaciteit Opbouwen</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Education</masterLabel>
-            <translation><!-- Education --></translation>
+            <translation>Onderwijs</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Environmental</masterLabel>
-            <translation><!-- Environmental --></translation>
+            <translation>Milieu</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Health Services</masterLabel>
-            <translation><!-- Health Services --></translation>
+            <translation>Gezondheidszorg</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Human Services</masterLabel>
-            <translation><!-- Human Services --></translation>
+            <translation>Menselijke Diensten</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Indicates that this organization is a grant making organization. Can apply to foundations, government agencies, corporations, etc. --></help>
+        <help>Geeft aan dat deze organisatie een schenking donateur  is. Is toepasbaar op instellingen, overheidsinstanties, corporaties, etc.</help>
         <label><!-- Grantmaker --></label>
         <name>npsp__Grantmaker__c</name>
     </fields>
     <fields>
-        <help><!-- The name of the company&apos;s matching gift administrator. --></help>
+        <help>De naam van het bedrijf&apos;s matching gift adminstrator</help>
         <label><!-- Matching Gift Administrator Name --></label>
         <name>npsp__Matching_Gift_Administrator_Name__c</name>
     </fields>
     <fields>
-        <help><!-- The maximum amount the company will match on any single gift. --></help>
+        <help>Het maximum bedrag dat het bedrijf wil matchen voor een enkele gift.</help>
         <label><!-- Matching Gift Amount Max --></label>
         <name>npsp__Matching_Gift_Amount_Max__c</name>
     </fields>
     <fields>
-        <help><!-- The smallest gift the company will match. --></help>
+        <help>De kleinste gift een bedrijf wil matchen.</help>
         <label><!-- Matching Gift Amount Min --></label>
         <name>npsp__Matching_Gift_Amount_Min__c</name>
     </fields>
     <fields>
-        <help><!-- The maximum amount the company will match each year for an employee. --></help>
+        <help>Het maximum bedrag dat het bedrijf elk jaar voor een werknemer zal matchen.</help>
         <label><!-- Matching Gift Annual Employee Max --></label>
         <name>npsp__Matching_Gift_Annual_Employee_Max__c</name>
     </fields>
     <fields>
-        <help><!-- Additional notes about the company&apos;s matching gift program. --></help>
+        <help>Extra notities over het bedrijf zijn matching gift programma.</help>
         <label><!-- Matching Gift Comments --></label>
         <name>npsp__Matching_Gift_Comments__c</name>
     </fields>
     <fields>
-        <help><!-- Is this a company that offers matching gifts? --></help>
+        <help>Is dit een bedrijf die matchende giften aanbiedt?</help>
         <label><!-- Matching Gift Company --></label>
         <name>npsp__Matching_Gift_Company__c</name>
     </fields>
     <fields>
-        <help><!-- Email of the company&apos;s matching gift administrator. --></help>
+        <help>E-mail van de matching gift adminstrator van het bedrijf.</help>
         <label><!-- Matching Gift Email --></label>
         <name>npsp__Matching_Gift_Email__c</name>
     </fields>
     <fields>
-        <help><!-- The date when the matching gift information was last updated. --></help>
+        <help>De datum wanneer de matching gift informatie voor het laatst is geüpdatet</help>
         <label><!-- Matching Gift Info Updated --></label>
         <name>npsp__Matching_Gift_Info_Updated__c</name>
     </fields>
     <fields>
-        <help><!-- The portion of a gift the company will match. --></help>
+        <help>Het deel van een gift die het bedrijf wil matchen.</help>
         <label><!-- Matching Gift Percent --></label>
         <name>npsp__Matching_Gift_Percent__c</name>
     </fields>
     <fields>
-        <help><!-- Phone for the matching gift administration office. --></help>
+        <help>Telefoon voor matching gift administratie kantoor.</help>
         <label><!-- Matching Gift Phone --></label>
         <name>npsp__Matching_Gift_Phone__c</name>
     </fields>
     <fields>
-        <help><!-- Any restrictions on how old gifts can be to be eligible for matching. --></help>
+        <help>Restricties over hoe oud giften mogen zijn om in aanmerking te komen voor matching.</help>
         <label><!-- Matching Gift Request Deadline --></label>
         <name>npsp__Matching_Gift_Request_Deadline__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: The number of years for which this Household has had a Member. --></help>
+        <help>Formule: Het aantal jaar hoe lang dit Huishouden al een Lid heeft.</help>
         <label><!-- Membership Span --></label>
         <name>npsp__Membership_Span__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: Current, expired, or grace period.  Default grace period set in Household Settings. --></help>
+        <help>Formule: Huidig, verlopen, of bedenk periode. Standaard bedenk periode wordt ingesteld in Huishoud Instellingen.</help>
         <label><!-- Membership Status --></label>
         <name>npsp__Membership_Status__c</name>
     </fields>
     <fields>
-        <help><!-- for Household Accounts, the number of Contacts in the Household. --></help>
+        <help>Voor Huishoud Accounts, het aantal Contacten in het Huishouden</help>
         <label><!-- Number of Household Members --></label>
         <name>npsp__Number_of_Household_Members__c</name>
     </fields>
@@ -1661,6 +1757,10 @@
         <sections>
             <label><!-- Fields --></label>
             <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Historic Wish Numbers --></label>
+            <section>Historic Wish Numbers</section>
         </sections>
     </layouts>
     <layouts>

@@ -59,13 +59,7 @@
         </action>
     </finalRejectionActions>
     <finalRejectionRecordLock>false</finalRejectionRecordLock>
-    <initialSubmissionActions>
-        <action>
-            <name>Account_In_Kind_Donor_Account_For_Approval_Email_Alert</name>
-            <type>Alert</type>
-        </action>
-    </initialSubmissionActions>
     <label>Account:In Kind Donors Approval</label>
-    <recordEditability>AdminOnly</recordEditability>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
     <showApprovalHistory>true</showApprovalHistory>
 </ApprovalProcess>

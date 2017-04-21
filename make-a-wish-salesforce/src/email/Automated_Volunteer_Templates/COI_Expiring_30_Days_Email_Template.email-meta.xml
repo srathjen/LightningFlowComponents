@@ -6,19 +6,6 @@
     <letterhead>Make_a_Wish_America</letterhead>
     <name>COI:Expiring 30 Days Email Template</name>
     <style>freeForm</style>
-    <subject>Conflict of Interest  Expiring</subject>
-    <textOnly>Hi {!Conflict_Of_Interest__c.Volunteer_Contact__c},
-
-Our records indicate it is time for you to renew your Annual Conflict of Interest and Ethics Statement. In order to keep your &quot;ACTIVE&quot; volunteer status, please log in to the Make-A-Wish Volunteer Center to electronically sign the form.
-
-Please ensure that you have completed the form by {!Conflict_Of_Interest__c.Expiration_Date__c} . After this date, your access to the Volunteer Center will be disabled and you will no longer be able to access your current assignments, future opportunities or valuable resources. If you prefer to be put on “INACTIVE” status now, please log in and change your status accordingly or email our team and we are happy to make this adjustment on your behalf.
-
-Thank you so much for your attention to this important matter. We are grateful for your continued support of our mission and the children we serve! Because of you, wishes come true!
-
-Thanks,
-
-{!Conflict_Of_Interest__c.Account_Name__c}
-{!Conflict_Of_Interest__c.Account_Phone__c}
-{!Conflict_Of_Interest__c.Account_Email__c}</textOnly>
+    <subject>Conflict of Interest Expiring</subject>
     <type>html</type>
 </EmailTemplate>

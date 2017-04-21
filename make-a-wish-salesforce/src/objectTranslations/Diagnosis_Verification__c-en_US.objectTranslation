@@ -31,6 +31,10 @@
         <name>Eternal_Id__c</name>
     </fields>
     <fields>
+        <label><!-- Group1 --></label>
+        <name>Group1__c</name>
+    </fields>
+    <fields>
         <label><!-- ICD Code --></label>
         <name>ICD_Code__c</name>
     </fields>

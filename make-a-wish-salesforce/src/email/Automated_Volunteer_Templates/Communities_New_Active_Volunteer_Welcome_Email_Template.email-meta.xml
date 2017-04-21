@@ -6,7 +6,7 @@
     <letterhead>Make_a_Wish_America</letterhead>
     <name>Communities:New Active Volunteer Welcome Email Template</name>
     <style>freeForm</style>
-    <subject>Welcome To Wish Volunteer Community</subject>
+    <subject>Welcome to the Make-A-Wish Volunteer Center</subject>
     <textOnly>Hi {!npe5__Affiliation__c.npe5__Contact__c},
 
 Congratulations, you have completed your volunteer on-boarding and have been granted access to the active volunteer community! We are excited to welcome you as a Make-A-Wish® volunteer. To get started, please visit the Make-A-Wish Volunteer Center with the username below.

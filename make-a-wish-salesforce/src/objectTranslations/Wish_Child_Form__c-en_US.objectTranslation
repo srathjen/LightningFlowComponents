@@ -332,6 +332,10 @@ and the date it was or will be granted. --></help>
         <name>If_yes_Enter_Org_Name_Wish_Date_it_wa__c</name>
     </fields>
     <fields>
+        <label><!-- Information Provided --></label>
+        <name>Information_Provided__c</name>
+    </fields>
+    <fields>
         <label><!-- Is a wheelchair accessible vehicle neede --></label>
         <name>Is_a_wheelchair_accessible_vehicle_neede__c</name>
         <picklistValues>
@@ -658,6 +662,10 @@ and the date it was or will be granted. --></help>
             <masterLabel>White or Caucasian</masterLabel>
             <translation><!-- White or Caucasian --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Related Contact --></label>
+        <name>RelatedContact__c</name>
     </fields>
     <fields>
         <label><!-- Requested_Participant_Name_forWheelchair --></label>

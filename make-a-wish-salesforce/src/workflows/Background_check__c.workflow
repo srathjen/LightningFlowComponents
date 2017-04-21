@@ -61,6 +61,17 @@
         <template>Automated_Volunteer_Templates/Bc_Expiring_30_Days_Email_Template</template>
     </alerts>
     <alerts>
+        <fullName>Bc_Expiring_Before_30_Days_Email_Alert</fullName>
+        <description>Bc:Expiring Before 30 Days Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Hidden_Volunteer_Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Automated_Volunteer_Templates/Bc_Expiring_30_Days_Email_Template</template>
+    </alerts>
+    <alerts>
         <fullName>Bc_Expiring_Before_9_Days_Email_Alert</fullName>
         <description>Bc:Expiring Before 9 Days Email Alert</description>
         <protected>false</protected>
@@ -72,6 +83,44 @@
         <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Bc_Expiring_30_Days_Email_Template</template>
     </alerts>
+    <fieldUpdates>
+        <fullName>Update_IsBackground_Expire</fullName>
+        <description>This field update is used to update the &quot;Hidden Background Expire&quot;  field. when the background check record get expire.</description>
+        <field>HiddenBackgroundExpire__c</field>
+        <literalValue>1</literalValue>
+        <name>Update IsBackground Expire</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>Bc%3A Volunteer Opportunity Status Update</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Background_check__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Date_Requested__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>This workflow will fire when the background record is expired.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Update_IsBackground_Expire</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Background_check__c.Date__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Hours</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
     <rules>
         <fullName>Bc%3ACompleted Workflow Rule</fullName>
         <actions>
@@ -96,12 +145,35 @@
         <fullName>Bc%3AExpiring 30 Days Workflow Rule</fullName>
         <active>true</active>
         <criteriaItems>
-            <field>Background_check__c.Active__c</field>
+            <field>Background_check__c.Current__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Status__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Status__c</field>
+            <operation>notEqual</operation>
+            <value>Rejected</value>
+        </criteriaItems>
         <description>This rule will fire when the background check is Expiring with in 30 days</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Bc_Expiring_Before_30_Days_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Background_check__c.Date__c</offsetFromField>
+            <timeLength>-30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
         <workflowTimeTriggers>
             <actions>
                 <name>Bc_Expiring_Before_2_Days_Email_Alert</name>

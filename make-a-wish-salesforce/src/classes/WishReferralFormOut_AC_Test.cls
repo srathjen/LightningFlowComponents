@@ -1,6 +1,6 @@
 @isTest
 public class WishReferralFormOut_AC_Test {
-
+    
     @TestSetup static void crateLead()
     {
         Lead currLead = new Lead();
@@ -14,6 +14,7 @@ public class WishReferralFormOut_AC_Test {
         currLead.Referrer_Email__c= 'mcavennila@gmail.com';
         currLead.Referrer_City__c= 'karur';
         currLead.Referrer_Zip__c= '35004';
+        currLead.Sibling_Detail__c = 'Sam | Jaba | 1 ';
         currLead.is_Family_Aware_of_Referral__c= 'yes';
         currLead.FirstName= 'Testing1';
         currLead.Child_Middle_Initial__c= 'Testing2';
@@ -39,9 +40,9 @@ public class WishReferralFormOut_AC_Test {
         currLead.Treating_Medical_Professional_Email__c= 'mcavennila@gmail.com';
         currLead.Any_medical_reason_for_moving_quickly__c= 'yes';
         Insert currLead;
-    
+        
     }
-
+    
     public static testMethod void TestWishReferralFormOut() 
     {
         Lead currLead = [SELECT id from Lead];
@@ -49,21 +50,12 @@ public class WishReferralFormOut_AC_Test {
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('LeadId',currLead.Id);
         WishReferralFormOut_AC wishreferral = new WishReferralFormOut_AC();
-     }
-     
-     public static testMethod void TestgetChooserender() 
-     {
-        Lead currLead = [SELECT id from Lead];
-        PageReference pageRef = Page.WishReferralFormOut_VF;
-        Test.setCurrentPage(pageRef);
-        ApexPages.currentPage().getParameters().put('LeadId',currLead.Id);
-        WishReferralFormOut_AC wishreferral = new WishReferralFormOut_AC();
-        ApexPages.currentPage().getParameters().put('p','df');
-        wishreferral.getChooserender();
-     }
-     
-     public static testMethod void TestexportPDF() 
-     {
+    }
+    
+   
+    
+    public static testMethod void TestexportPDF() 
+    {
         Lead currLead = [SELECT id from Lead];
         PageReference pageRef = Page.WishReferralFormOut_VF;
         Test.setCurrentPage(pageRef);
@@ -71,15 +63,36 @@ public class WishReferralFormOut_AC_Test {
         WishReferralFormOut_AC wishreferral = new WishReferralFormOut_AC();
         ApexPages.currentPage().getParameters().put('p','df');
         wishreferral.exportPDF();
-     }
-     
-     public static testMethod void Testsubmit() 
-     {
+    }
+    
+    public static testMethod void Testsubmit() 
+    {
         Lead currLead = [SELECT id from Lead];
         PageReference pageRef = Page.WishReferralFormOut_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('LeadId',currLead.Id);
         WishReferralFormOut_AC wishreferral = new WishReferralFormOut_AC();
+        wishreferral.login = true;
+        ApexPages.currentPage().getParameters().put('p','df');
+        
+        Account acc=new Account();
+        acc.Name='test Account';
+        acc.Referral_Form_Password__c='12345';
+        insert acc;
+        wishreferral.accontId = acc.Id;
+        wishreferral.password='12345';
+        wishreferral.submit();
+    }
+    
+    
+    public static testMethod void NonMatchPassword() 
+    {
+        Lead currLead = [SELECT id from Lead];
+        PageReference pageRef = Page.WishReferralFormOut_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('LeadId',currLead.Id);
+        WishReferralFormOut_AC wishreferral = new WishReferralFormOut_AC();
+        wishreferral.login = true;
         ApexPages.currentPage().getParameters().put('p','df');
         
         Account acc=new Account();
@@ -89,5 +102,5 @@ public class WishReferralFormOut_AC_Test {
         wishreferral.accontId = acc.Id;
         wishreferral.password='12345';
         wishreferral.submit();
-     }
+    }
 }

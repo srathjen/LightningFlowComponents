@@ -14,6 +14,12 @@ Description : This page is used to display the welcome message, open events , ch
         .popupBackground{ position: fixed; background: rgba(0,0,0,.4); width: 100%; height: 100%; top: 0; left: 0; z-index: 9998}
         .labelCol{width:180px;}
         .highlight h3 {text-align:center}
+        .modal-header,.modal-footer {border-top:none;}
+        h1.modal-title {text-align: center; padding-bottom: 0}
+        .modal-header .close {margin-top: -4rem}
+        .modal-footer, .modal-footer span {display: flex; justify-content: center;}
+        .modal-footer .btn-md, .nav-sub-inner .btn-md {max-width:10rem}
+        .modal-footer .btn-md {min-width:10rem}
         @media (min-width: 48em) {.feature{min-height: 15rem} }
     </style>
     <!-- Popup styling ends here -->
@@ -22,7 +28,7 @@ Description : This page is used to display the welcome message, open events , ch
         <main role="main" class="container">
             <div class="row">
                 <section>
-                    
+
                     <apex:form >
                         <apex:outputPanel rendered="{!activeVolunteerLandingPageInfoList.size > 0}">
                             <div class="row" style="margin:0 0 1rem 0">
@@ -33,7 +39,7 @@ Description : This page is used to display the welcome message, open events , ch
                                     </apex:selectList> -->
                                 </div>
                             </div>
-                          
+
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 feature">
                                     <apex:outputField styleClass="feature-img" value="{!activeVolunteerLandingPageInfoList[0].Featured_Image__c}"/>
@@ -42,15 +48,15 @@ Description : This page is used to display the welcome message, open events , ch
                                  <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="col-xs-12 col-sm-12 col-md-12">
                                         <h1>Welcome {!$User.FirstName} {!$User.LastName},</h1>
-                                        <p><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Welcome_Message__c}"/></p>
+                                        <apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Welcome_Message__c}" escape="false"/>
 
                                         <h3><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Title__c}"/></h3>
                                         <p><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Text__c}"/></p>
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+
+
                            <div class="row highlight" style="margin:1rem 0 2rem">
                                 <div class="col-xs-12 col-md-4">
                                     <h3 class="col-xs-12 col-sm-12 col-md-12"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_1__c}"/></h3>
@@ -71,13 +77,50 @@ Description : This page is used to display the welcome message, open events , ch
                                 </div>
                             </div>
                         </apex:outputPanel>
-                        
+
                         <!-- modals begin -->
                         <!-- resided -->
-                        <apex:outputPanel id="tstpopup">
+                        <apex:outputPanel layout="block" rendered="{!displayPopUp}">
+                          <script>
+                          document.addEventListener("DOMContentLoaded", function() {
+                            $('#bg-chk1').modal('show');
+                          })
+                          </script>
+                          <div class="modal fade" id="bg-chk1" tabindex="-1" role="dialog" aria-labelledby="bg-chk" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title">Background Check Notice</h1>
+                                </div>
+                                <div class="modal-body">
+                                  <p><apex:outputText value="Your criminal background check will expire within the next {!nBCDays} days. To remain an active volunteer, please click INITIATE to request the criminal background check." rendered="{!isExpired == false}" /></p>
+                                  <p><apex:outputText value="Your criminal background check has expired and access to the Volunteer Center has been suspended. To continue volunteering with Make-A-Wish, please click INITIATE to request the criminal background check." rendered="{!isExpired == true}" /></p>
+                                  <div class="form-group row">
+                                      <div class="col-xs-12 col-sm-6 col-md-8">
+                                          <p>I have resided in the United States for the last seven years.</p>
+                                      </div>
+                                      <div class="col-xs-12 col-sm-6 col-md-4">
+                                          <apex:selectList styleClass="form-control c-select" value="{!residingStatus}" size="1">
+                                              <apex:selectOption itemLabel="Please Select" itemValue="Please Select" itemDisabled="true" />
+                                              <apex:selectOption itemLabel="Yes" itemvalue="Yes" />
+                                              <apex:selectOption itemlabel="No" itemvalue="No"  />
+                                          </apex:selectList>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <apex:commandButton value="Initiate" styleClass="btn-md" action="{!confirmBackGroundCheck}"/>&nbsp;&nbsp;&nbsp;
+                                  <apex:commandButton value="Cancel" styleClass="btn-md" rendered="{!flagForCancel}" action="{!Cancel}"/>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </apex:outputPanel>
+
+                        <!-- <apex:outputPanel id="tstpopup">
                             <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
-                            <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}"> -->
-                                
+                            <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
+
                                 <div class="pop-wrap">
                                     <div class="custPopup">
                                         <div class="container">
@@ -99,7 +142,7 @@ Description : This page is used to display the welcome message, open events , ch
                                                             </apex:selectList>
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <apex:commandButton value="Initiate" styleClass="col-sm-offset-3 col-md-offset-4 col-xs-12 col-sm-6 col-md-4 btn-md" action="{!confirmBackGroundCheck}"/>
                                                     <apex:commandButton value="Cancel" styleClass="col-sm-offset-3 col-md-offset-4 col-xs-12 col-sm-6 col-md-4 btn-md" rendered="{!flagForCancel}" action="{!Cancel}"/>
                                                 </div>
@@ -108,14 +151,35 @@ Description : This page is used to display the welcome message, open events , ch
                                     </div>
                                 </div>
                             </apex:outputPanel>
-                        </apex:outputPanel>
+                        </apex:outputPanel> -->
                         <!-- end /resided -->
-                        
+
                         <!-- background check begin -->
-                        <apex:outputPanel id="backgroundblockpopup">
+                        <apex:outputPanel layout="block" rendered="{!blockNewBG}">
+                          <script>
+                          document.addEventListener("DOMContentLoaded", function() {
+                            $('#bg-chk2').modal({backdrop: 'static', keyboard: false})
+                          })
+                          </script>
+                          <div class="modal fade" id="bg-chk2" tabindex="-1" role="dialog" aria-labelledby="bg-chk" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title">Background Check Expired</h1>
+                                </div>
+                                <div class="modal-body">
+                                  <p class="text-muted">Your criminal background check has expired and access to the Volunteer Center has been suspended. Access will be restored after your background check has been completed and reviewed by chapter staff.</p>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </apex:outputPanel>
+                        <!-- <apex:outputPanel id="backgroundblockpopup">
                             <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!blockNewBG}"/>
                             <apex:outputPanel layout="block" rendered="{!blockNewBG}">
-                                
+
                                 <div class="pop-wrap-main-message">
                                     <div class="custPopup-main-message">
                                         <div class="container">
@@ -125,16 +189,43 @@ Description : This page is used to display the welcome message, open events , ch
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </apex:outputPanel>
-                        </apex:outputPanel>
+                        </apex:outputPanel> -->
                         <!-- end /background check -->
-                        
+
                         <!-- annual conflict begin -->
-                        <apex:outputPanel id="conflictpopup">
+                        <apex:outputPanel layout="block" rendered="{!displayPopupconflict}">
+                          <script>
+                          document.addEventListener("DOMContentLoaded", function() {
+                            $('#annual-conflict').modal('show');
+                          })
+                          </script>
+                          <div class="modal fade" id="annual-conflict" tabindex="-1" role="dialog" aria-labelledby="bc-msg" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title" id="exit-form">Annual Conflict of Interest</h1>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <p><apex:outputText value="Your Annual Conflict of Interest and Ethics Statement will expire within the next {!nCOIDays} days. To remain an active volunteer, please click SIGN NOW to electronically sign the form." rendered="{!isCOIExpired == false}" /></p>
+                                  <p><apex:outputText value="Your Annual Conflict of Interest and Ethics Statement has expired and access to the Volunteer Center has been suspended. To continue volunteering with Make-A-Wish, please click SIGN NOW to electronically sign the form." rendered="{!isCOIExpired == true}" /></p>
+                                </div>
+                                <div class="modal-footer">
+                                  <apex:commandButton styleClass="btn-md" value="Sign Now" action="{!confirmConflict}"/>&nbsp;&nbsp;&nbsp;
+                                  <apex:commandButton styleClass="btn-md" value="Cancel" rendered="{!flagForCOICancel}" action="{!cancelConflict}"/>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </apex:outputPanel>
+                        <!-- <apex:outputPanel id="conflictpopup">
                             <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopupconflict}"/>
                             <apex:outputPanel layout="block" rendered="{!displayPopupconflict}">
-                                
+
                                 <div class="pop-wrap">
                                     <div class="custPopup">
                                         <div class="container">
@@ -153,16 +244,42 @@ Description : This page is used to display the welcome message, open events , ch
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </apex:outputPanel>
-                        </apex:outputPanel>
+                        </apex:outputPanel> -->
                         <!-- end /annual conflict -->
-                        
+
                         <!-- broadcast msg begin -->
-                        <apex:outputPanel id="broadCastMsg">
-                            <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayBCMsg}"/>
+                        <!-- <apex:outputPanel id="broadCastMsg"> -->
+                        <apex:outputPanel layout="block" rendered="{!displayBCMsg}">
+                          <script>
+                          document.addEventListener("DOMContentLoaded", function() {
+                            $('#bc-msg').modal('show');
+                          })
+                          </script>
+                          <div class="modal fade" id="bc-msg" tabindex="-1" role="dialog" aria-labelledby="bc-msg" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title" id="exit-form">Chapter Message</h1>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <p class="text-muted col-xs-12" style="text-align:center"><apex:outputText value="{!broadCaseMsg}" /></p>
+                                </div>
+                                <div class="modal-footer">
+                                  <apex:commandButton action="{!broadCastCancel}" value="Close" styleClass="btn-md" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </apex:outputPanel>
+
+                            <!-- <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayBCMsg}"/>
                             <apex:outputPanel layout="block" rendered="{!displayBCMsg}">
-                                
+
                                 <div class="pop-wrap">
                                     <div class="custPopup">
                                         <div class="container">
@@ -175,16 +292,39 @@ Description : This page is used to display the welcome message, open events , ch
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </apex:outputPanel>
-                        </apex:outputPanel>
+                        </apex:outputPanel> -->
                         <!-- end /broadcast msg -->
-                        
+
                         <!-- training details begin -->
-                        <apex:outputPanel id="trainingPopup">
+                        <apex:outputPanel layout="block" rendered="{!displayTrainingDetails}">
+                          <script>
+                          document.addEventListener("DOMContentLoaded", function() {
+                            $('#training-details').modal({backdrop: 'static', keyboard: false})
+                          })
+                          </script>
+                          <div class="modal fade" id="training-details" tabindex="-1" role="dialog" aria-labelledby="bc-msg" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title" id="exit-form">Training Details</h1>
+                                </div>
+                                <div class="modal-body">
+                                  <p class="text-muted col-xs-12" style="text-align:center">A new training course has been assigned to you. To remain an active volunteer, please click REGISTER and sign up for the training date that works for your schedule.</p>
+                                  <div class="col-xs-12"> <strong>Training Name:</strong> <p class="text-muted" style="display:inline-block"><apex:outputText value=" {!trainingName}" /></p> </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <apex:commandButton action="{!Register}" value="Register" styleClass="btn-md" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </apex:outputPanel>
+                        <!-- <apex:outputPanel id="trainingPopup">
                             <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayTrainingDetails }"/>
                             <apex:outputPanel layout="block" rendered="{!displayTrainingDetails}">
-                                
+
                                 <div class="pop-wrap">
                                     <div class="custPopup">
                                         <div class="container">
@@ -204,16 +344,42 @@ Description : This page is used to display the welcome message, open events , ch
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </apex:outputPanel>
-                        </apex:outputPanel>
+                        </apex:outputPanel> -->
                         <!-- end /training details -->
-                        
+
                         <!-- registered training begin -->
-                        <apex:outputPanel id="trainingACK">
+                        <apex:outputPanel layout="block" rendered="{!displayTrainingAck}">
+                          <script>
+                          document.addEventListener("DOMContentLoaded", function() {
+                            $('#reg-training').modal('show');
+                          })
+                          </script>
+                          <div class="modal fade" id="reg-training" tabindex="-1" role="dialog" aria-labelledby="reg-training" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title" id="exit-form">Registered Training</h1>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <p class="text-muted col-xs-12" style="text-align:center">You have registered for Training. Please check your&nbsp;<apex:outputLink value="VolunteerProfile_VF">profile</apex:outputLink> to complete it.</p>
+                                </div>
+                                <div class="modal-footer">
+                                  <apex:commandButton action="{!TrainingAckCancel}" value="Close" styleClass="btn-md" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </apex:outputPanel>
+
+                        <!-- <apex:outputPanel id="trainingACK">
                             <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayTrainingAck}"/>
-                            <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayTrainingAck}"> -->
-                                
+                            <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayTrainingAck}">
+
                                 <div class="pop-wrap">
                                     <div class="custPopup">
                                         <div class="container">
@@ -230,25 +396,25 @@ Description : This page is used to display the welcome message, open events , ch
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </apex:outputPanel>
-                        </apex:outputPanel>
+                        </apex:outputPanel> -->
                         <!-- end /training details -->
-                        
+
                         <!-- end modals -->
-                        
+
                     </apex:form>
-                    
+
                 </section>
             </div>
         </main>
-        
+
         <div class="container-fluid calendar">
             <apex:form styleClass="container">
                 <div class="row">
                     <h4>Calendar of Events</h4>
                     <ul class="col-xs-12 col-sm-12 col-md-12">
-                        
+
                         <apex:repeat value="{!events}" var="ev">
                             <li class="col-xs-12 col-sm-6 col-md-3">
                                 <figure class="col-xs-12 col-sm-12 col-md-12">
@@ -264,12 +430,12 @@ Description : This page is used to display the welcome message, open events , ch
                                 </figure>
                             </li>
                         </apex:repeat>
-                        
+
                     </ul>
                 </div>
             </apex:form>
         </div>
-        
+
         <apex:include pageName="prospective_footer" id="pfooter" />
         <script>
         $( document ).ready(function() {
@@ -278,15 +444,15 @@ Description : This page is used to display the welcome message, open events , ch
             $(".feature").children('img').attr('style','').addClass('col-xs-12 col-sm-12 col-md-12');
             $(".feature").find('span:first').remove();
             $(".feature").children('.quote').css('z-index','1');
-            
+
             //if banner image doesn't exist
-            
-            
+
+
             // unwrap generated table/spans and apply responsive classes to highlight imgs directly
             //$('.highlight img').unwrap().unwrap().unwrap().unwrap().unwrap();
             $('.highlight img').unwrap();
             $(".highlight img").addClass("col-xs-12").removeAttr('style');
-            
+
             // apply responsive classes to calendar imgs directly
             $(".calendar").find('img').addClass('col-xs-4 col-sm-4 col-md-4');
         })

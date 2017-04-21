@@ -104,6 +104,10 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Migrated_Record__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>OwnerId</field>
             </layoutItems>
             <layoutItems>
@@ -123,8 +127,8 @@
                 <field>Rush_Explanation__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Unique_Wish_Record_Identifier__c</field>
+                <behavior>Readonly</behavior>
+                <field>UniqueWishRecordIdentifier__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -235,11 +239,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>diagnosis_verificaion_sent_date__c</field>
+                <field>Diagnosis_Verification_Sent_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>diagnosis_verificaion_receive_date__c</field>
+                <field>Diagnosis_Verification_Receive_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
@@ -440,7 +444,7 @@
                 <customLink>DailyWISH</customLink>
             </layoutItems>
             <layoutItems>
-                <customLink>GKTW_Wish_Granting_Orgs</customLink>
+                <customLink>Make_A_Wish_America</customLink>
             </layoutItems>
             <layoutItems>
                 <customLink>Wish_Bank</customLink>
@@ -448,24 +452,21 @@
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <customLink>Make_A_Wish</customLink>
+                <customLink>GKTW_WGO_s</customLink>
             </layoutItems>
-            <layoutItems>
-                <customLink>Smart_Travelers_Enrollment_Program</customLink>
-            </layoutItems>
-            <layoutItems>
-                <customLink>InKind_Donation_Report</customLink>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
             <layoutItems>
                 <customLink>GKTW_Reservations</customLink>
             </layoutItems>
             <layoutItems>
                 <customLink>Avis</customLink>
             </layoutItems>
+        </layoutColumns>
+        <layoutColumns>
             <layoutItems>
                 <customLink>State_Dep_t_Travel_Warning_List</customLink>
+            </layoutItems>
+            <layoutItems>
+                <customLink>Smart_Travelers_Enrollment_Program</customLink>
             </layoutItems>
         </layoutColumns>
         <style>CustomLinks</style>
@@ -476,6 +477,10 @@
         <editHeading>true</editHeading>
         <label>System Information</label>
         <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>CreatedById</field>
+            </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>LastModifiedById</field>
@@ -497,6 +502,16 @@
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
+    <miniLayout>
+        <fields>ContactId</fields>
+        <fields>Subject</fields>
+        <fields>Description</fields>
+        <fields>Status</fields>
+        <fields>OwnerId</fields>
+        <fields>Priority</fields>
+        <fields>SuppliedEmail</fields>
+        <fields>Origin</fields>
+    </miniLayout>
     <quickActionList>
         <quickActionListItems>
             <quickActionName>FeedItem.TextPost</quickActionName>
@@ -614,7 +629,8 @@
         <relatedList>RelatedCommentsList</relatedList>
     </relatedLists>
     <relatedLists>
-        <relatedList>RelatedAttachmentList</relatedList>
+        <fields>NAME</fields>
+        <relatedList>cg__CaseFile__c.cg__Case__c</relatedList>
     </relatedLists>
     <relatedObjects>ContactId</relatedObjects>
     <relatedObjects>AccountId</relatedObjects>
@@ -628,7 +644,7 @@
     <summaryLayout>
         <masterLabel>00h36000004nDxm</masterLabel>
         <sizeX>3</sizeX>
-        <sizeY>3</sizeY>
+        <sizeY>4</sizeY>
         <summaryLayoutItems>
             <field>ChapterName__c</field>
             <posX>0</posX>
@@ -663,6 +679,11 @@
             <field>OwnerId</field>
             <posX>2</posX>
             <posY>2</posY>
+        </summaryLayoutItems>
+        <summaryLayoutItems>
+            <field>Anticipated_Start_Date__c</field>
+            <posX>2</posX>
+            <posY>3</posY>
         </summaryLayoutItems>
         <summaryLayoutStyle>CaseInteraction</summaryLayoutStyle>
     </summaryLayout>

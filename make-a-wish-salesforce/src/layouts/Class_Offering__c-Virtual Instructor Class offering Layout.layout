@@ -99,6 +99,7 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Contact.NAME</fields>
         <fields>Volunteer__c</fields>
         <fields>Volunteer_Attendance__c</fields>
         <fields>Registered_Date__c</fields>

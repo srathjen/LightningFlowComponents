@@ -313,6 +313,13 @@
             <section>Custom Links</section>
         </sections>
     </layouts>
+    <layouts>
+        <layout>Wish Expense Layout - Admin</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
     <recordTypes>
         <label><!-- Budgeting --></label>
         <name>Budgeting</name>
@@ -326,4 +333,8 @@
         <name>Wish_Expense_Record_Type</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Wish Number cannot be updated. --></errorMessage>
+        <name>WE_Do_not_update_case</name>
+    </validationRules>
 </CustomObjectTranslation>

@@ -33,7 +33,7 @@
 
                                     <div class="col-xs-12 col-sm-6 col-md-6">
                                          <div class="row">
-                                            <label class="col-xs-6 col-sm-6">Title: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!contactInstance[0].Title}" /></span>
+                                            <label class="col-xs-6 col-sm-6">Title: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!contactInstance[0].Salutation}" /></span>
                                         </div>
                                         <div class="row">
                                             <apex:outputLabel styleClass="col-xs-6 col-sm-6">Name: </apex:outputLabel>
@@ -227,7 +227,7 @@
                                                 <label for="title">Title</label>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list" value="{!contactInstance[0].Title}" size="1" multiselect="false">
+                                                <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list" value="{!contactInstance[0].Salutation}" size="1" multiselect="false">
                                                     <apex:selectOptions value="{!Titles}" />
                                                 </apex:selectList>
                                             </div>
@@ -317,7 +317,7 @@
                                         <div class="form-group row">
                                                 <apex:outputLabel styleClass="col-sm-3" for="zipcode">Postal Code</apex:outputLabel>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control postalcode numbers-only" id="zipcode" html-placeholder="00000" maxlength="5" value="{!contactInstance[0].mailingpostalcode}"  />
+                                                <apex:inputText styleClass="form-control postalcode numbers-only" id="zipcode" html-placeholder="00000-0000" maxlength="10" html-minlength="5" value="{!contactInstance[0].mailingpostalcode}"  />
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -465,7 +465,7 @@
                                                 <apex:outputLabel for="postalcode2">Postal Code</apex:outputLabel>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control f-postalcode2 numbers-only" maxlength="5" id="postalcode2" html-placeholder="00000" value="{!contactInstance[0].OtherPostalCode}" />
+                                                <apex:inputText styleClass="form-control f-postalcode2 postalcode numbers-only" id="postalcode2" html-placeholder="00000-0000" maxlength="10" html-minlength="5" value="{!contactInstance[0].OtherPostalCode}" />
                                             </div>
                                         </div>
 
@@ -1259,19 +1259,16 @@
                     });
                 });
                 $("input.postalcode").each(function(){
-                    $(this).rules("add", {
-                        required: true,
-                        digits: true,
-                        minlength: 5,
-                        maxlength: 9,
-                        messages: {
-                            required: "Oops! Please enter a valid US postal code",
-                            digits: "Oops! Please only enter digits",
-                            minlength: "Oops! Please enter a minimum of 5 digits",
-                            maxlength: "We're sorry, you've reached the maximum allowed characters"
-                        }
-                    });
-                });
+              $(this).rules("add", {
+                  required: true,
+                  zipcode: true,
+                  messages: {
+                      //required: "Oops! Please enter a valid US postal code",
+                      minlength: "Oops! Please enter a minimum of 5 digits",
+                      maxlength: "We're sorry, you've reached the maximum allowed characters"
+                  }
+              });
+          });
                 $('.language').each(function(){
                   $(this).chosen().change(function(){
                       $(this).valid();
@@ -1295,6 +1292,17 @@
                         maxlength: "We're sorry, you've reached the maximum allowed characters"
                     }
                 });
+                // auto format postal code
+            $(".postalcode").keydown(function(e){
+              if (($(this).val().length == 5) && (e.keyCode != 8)){
+                // auto insert dash on 5th character keypress
+                $(this).val($(this).val() + "-");
+              }
+              if (($(this).val().length == 7) && (e.keyCode == 8)){
+                // remove dash if on 7th character backspace is used
+                $(this).val($(this).val().substring(0, $(this).val().length - 1));
+              }
+            });
                 $("select.f-state").on('change',function(){
                   $(this).chosen().change(function(){
                       $(this).valid();
@@ -1333,6 +1341,11 @@
             formValidationRules();
             // trigger validation
             // personal save btn
+
+    jQuery.validator.addMethod("zipcode", function(value, element) {
+          return this.optional(element) || /^\d{5}(?:-\d{1,4})?$/.test(value);
+        }, "Oops! Please enter a valid US postal code");
+
             $('.btn-p-save').on('click', function() {
               if ($('form').valid()){
                 $('form').submit();
@@ -1351,7 +1364,7 @@
                 }
               }
             });
-
+            
             // emergency save btn
             $('.btn-e-save').on('click', function() {
               if ($('form').valid()){

@@ -1510,11 +1510,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Orientation_Training__c</field>
-            <table>Contact.Volunteer_Orientation_Trainings__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Orientation_Training_Hidden__c</field>
             <table>Contact.Volunteer_Orientation_Trainings__r</table>
         </columns>

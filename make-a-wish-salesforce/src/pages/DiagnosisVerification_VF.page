@@ -1090,6 +1090,7 @@
                     isError_Free = false;
                 }
             });
+            
             if(isError_Free){
                 DiagnosisEmptyCheck();
             }
@@ -1156,7 +1157,21 @@
                         i++;
                     }
                 });
-                saveMedInfo(stringGet,travelString);
+                
+                if(travelString == '' || stringGet == '') {
+                    swal({
+                        title: "",
+                        text: "Please provide current conditions that impact travel",
+                        type: "error",
+                        showConfirmButton: true,
+                        confirmConfirmColor: "#006bb6",
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: true,
+                    });
+                } else {
+                    saveMedInfo(stringGet,travelString);
+                }
+                
             }
         }
 		

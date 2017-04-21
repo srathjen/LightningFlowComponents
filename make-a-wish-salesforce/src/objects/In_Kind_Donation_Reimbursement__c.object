@@ -52,7 +52,7 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>Read</externalSharingModel>
+    <externalSharingModel>Private</externalSharingModel>
     <fields>
         <fullName>Acknowledge__c</fullName>
         <defaultValue>false</defaultValue>
@@ -1098,32 +1098,6 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Wish_Owner__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <description>This field is used to capture the wish owner to send approval</description>
-        <externalId>false</externalId>
-        <label>Hidden Wish Owner</label>
-        <referenceTo>User</referenceTo>
-        <relationshipName>In_Kind_Donation_Reimbursement</relationshipName>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
-    </fields>
-    <fields>
-        <fullName>Wish_Owner_s_Manager__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <description>This field will capture the wish owner&apos;s manager to send for approval</description>
-        <externalId>false</externalId>
-        <label>Wish Owner&apos;s Manager</label>
-        <referenceTo>User</referenceTo>
-        <relationshipName>In_Kind_Donation_Reimbursement1</relationshipName>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Wish__c</fullName>

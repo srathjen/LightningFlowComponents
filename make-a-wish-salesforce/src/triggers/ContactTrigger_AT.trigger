@@ -40,6 +40,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
             {
                 if(newContact.RecordTypeId == volunteerRecordTypeId){
                     contactList.add(newContact );
+                    newContact.Region_Chapter__c = newContact.AccountId;
                 }
                 
                 if(newContact.birth_day__c != Null && newContact.birth_year__c != Null && newContact.birth_month__c != Null)
@@ -248,17 +249,16 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
             {
                
               
-               if(dbWishFamily.Hidden_Use_as_Household_Address__c == false &&  dbWishFamily.Use_as_Household_Address__c == true){
-                   dbWishFamily.Use_as_Household_Address__c = false;
-                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
-               }
-                
                
                 if(dbWishFamily.Hidden_Use_as_Household_Address__c == true){
                    dbWishFamily.Use_as_Household_Address__c = true;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                }
-               
+               if(dbWishFamily.Hidden_Use_as_Household_Address__c == false){
+                   dbWishFamily.Use_as_Household_Address__c = false;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+               }
+                
                 if(dbWishFamily.Hidden_First_Name__c != Null){
                     dbWishFamily .FirstName =  dbWishFamily.Hidden_First_Name__c;
                     
@@ -335,20 +335,17 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                      wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                      houseHoldAccountMap.put(newAcc.Id,newAcc);
                 }
-                
-                
-                 if(dbWishFamily.Hidden_Same_Address__c == false && dbWishFamily.Same_as_Household_Address__c == true){
-                     dbWishFamily.Same_as_Household_Address__c  = false;
-                    
-                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
-                }
                 if(dbWishFamily.Hidden_Same_Address__c == true){
                      dbWishFamily.Same_as_Household_Address__c  = true;
                      dbWishFamily.Hidden_Same_Address__c = false;
                      wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
                 
-               
+                if(dbWishFamily.Hidden_Same_Address__c == false){
+                     dbWishFamily.Same_as_Household_Address__c  = false;
+                    
+                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
               
             }
            
@@ -471,11 +468,15 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         Set<Id>  MedicalProfContactSet = new Set<Id>();
         Set<Id> addressSet = new Set<Id>();
         Map<Id,Contact> wishFamilyContacMap = new Map<Id,Contact>();
+        map<id,Contact> wishChilPhotoMap = new map<id,Contact>();
         Contact updatedCon;
         for(Contact newContact : trigger.new)
         {
-            if(newContact.migrated_record__c != True)
-            {
+           
+                
+              /*  if(newContact.Wish_Child_Photo__c != Null && trigger.oldmap.get(newContact.id).Wish_Child_Photo__c != newContact.Wish_Child_Photo__c){
+                    wishChilPhotoMap.put(newContact.id, newContact);
+                }*/
                 if(newContact.is_Application__c == 'Complete' && newContact.is_Application__c != trigger.oldmap.get(newContact.id).is_Application__c){
                     volunteercontactSet.add(newContact.Id);
                     
@@ -514,7 +515,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 if(newContact.Same_as_Household_Address__c != trigger.oldMap.get(newContact.Id).Same_as_Household_Address__c && newContact.Same_as_Household_Address__c == true){
                     addressSet.add(newContact.Id);
                 }
-            } 
+           
             if((newContact.RecordTypeId == volunteerRecordTypeId) && (newContact.FirstName != Null && trigger.oldMap.get(newContact.id).FirstName != newContact.FirstName) || (newContact.LastName != Null && trigger.oldMap.get(newContact.id).LastName != newContact.LastName) || (newContact.MobilePhone!= Null && trigger.oldMap.get(newContact.id).MobilePhone!= newContact.MobilePhone) || (newContact.Email != Null && trigger.oldMap.get(newContact.id).Email != newContact.Email)){
                 
                 updateUserInfo.put(newContact.id,newContact);
@@ -525,6 +526,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 wishFamilyContacMap.put(newContact.Id,newContact);
             }
         }
+        
         
         if(RecursiveTriggerHandler.isFirstTime){
             RecursiveTriggerHandler.isFirstTime = false;

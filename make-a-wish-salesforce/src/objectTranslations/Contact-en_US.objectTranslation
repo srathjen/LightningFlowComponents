@@ -57,11 +57,11 @@
         <name>Actor_Actress__c</name>
     </fields>
     <fields>
-        <label><!-- is Adult Emergency Contact --></label>
+        <label><!-- Is Adult Emergency Contact --></label>
         <name>Adult_Emergency_Contact__c</name>
     </fields>
     <fields>
-        <label><!-- Already wish granted by MAW/Other Org --></label>
+        <label><!-- Already Wish Granted By MAW/Other Org --></label>
         <name>Already_wish_granted_by_MAW_Other_Org__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -309,7 +309,7 @@
         <name>City_Employer__c</name>
     </fields>
     <fields>
-        <label><!-- Class in School --></label>
+        <label><!-- Class In School --></label>
         <name>Class_in_School__c</name>
     </fields>
     <fields>
@@ -357,11 +357,15 @@
         <name>Current_Age__c</name>
     </fields>
     <fields>
-        <label><!-- Date of Wish Assigned --></label>
+        <label><!-- Current Conditions --></label>
+        <name>Current_Conditions__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Of Wish Assigned --></label>
         <name>Date_of_Wish_Assigned__c</name>
     </fields>
     <fields>
-        <label><!-- Date of last engagement --></label>
+        <label><!-- Date Of Last Engagement --></label>
         <name>Date_of_last_engagement__c</name>
     </fields>
     <fields>
@@ -397,7 +401,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Electronics/Games that I like to play --></label>
+        <label><!-- Electronics/Games That I Like To Play --></label>
         <name>Electronics_Games_that_I_like_to_play__c</name>
     </fields>
     <fields>
@@ -493,6 +497,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Hidden BirthDate --></label>
+        <name>HiddenBirthDate__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Mobile Phone --></label>
         <name>HiddenMobilePhone__c</name>
     </fields>
@@ -529,11 +537,11 @@
         <name>Hidden_Last_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Hidden Medical Physician Email --></label>
+        <label><!-- Wish Clearance Medical Physician Email --></label>
         <name>Hidden_Medical_Physician_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Hidden Medical Physician --></label>
+        <label><!-- Wish Clearance Medical Physician --></label>
         <name>Hidden_Medical_Physician__c</name>
     </fields>
     <fields>
@@ -609,7 +617,7 @@
         <name>Hobby__c</name>
     </fields>
     <fields>
-        <label><!-- How did you hear about Make-A-Wish? --></label>
+        <label><!-- How Did You Hear About Make-A-Wish? --></label>
         <name>How_did_you_hear_about_Make_A_Wish__c</name>
         <picklistValues>
             <masterLabel>Aware of a wish family who experienced a wish</masterLabel>
@@ -645,7 +653,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- How did you know MAWA (Other Notes) --></label>
+        <label><!-- How Did You Know MAWA (Other Notes) --></label>
         <name>How_did_you_know_MAWA_Other_Notes__c</name>
     </fields>
     <fields>
@@ -653,7 +661,7 @@
         <name>ICD_10_Code__c</name>
     </fields>
     <fields>
-        <label><!-- I’m on LinkedIn --></label>
+        <label><!-- I’m On LinkedIn --></label>
         <name>I_m_on_LinkedIn__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -667,7 +675,7 @@
     <fields>
         <help><!-- If already wish granted, please indicate the organization&apos;s name, the wish,
 and the date it was or will be granted. --></help>
-        <label><!-- If yes,Enter Org.Name,Wish&amp; Date it was --></label>
+        <label><!-- If Yes, Enter Org.Name,Wish&amp; Date It Was --></label>
         <name>If_yes_Enter_Org_Name_Wish_Date_it_was__c</name>
     </fields>
     <fields>
@@ -699,7 +707,7 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Would your company be interested MAW --></label>
+        <label><!-- Would Your Company Be Interested MAW --></label>
         <name>Interested_involved_with_Make_A_Wish__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -743,7 +751,7 @@ and the date it was or will be granted. --></help>
         <name>IsSigned__c</name>
     </fields>
     <fields>
-        <label><!-- Is Family Aware of Referral? --></label>
+        <label><!-- Is Family Aware Of Referral? --></label>
         <name>Is_Family_Aware_of_Referral__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -839,7 +847,7 @@ and the date it was or will be granted. --></help>
         <name>Lead_Created_Date__c</name>
     </fields>
     <fields>
-        <label><!-- May We Contact You at Work? --></label>
+        <label><!-- May We Contact You At Work? --></label>
         <name>May_We_Contact_You_at_Work__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -883,6 +891,10 @@ and the date it was or will be granted. --></help>
         <name>Music_Singer__c</name>
     </fields>
     <fields>
+        <label><!-- My Wish Is To --></label>
+        <name>MyWishIsTo__c</name>
+    </fields>
+    <fields>
         <label><!-- Nickname --></label>
         <name>Nickname__c</name>
     </fields>
@@ -899,15 +911,15 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Number of Assignments --></label>
+        <label><!-- Number Of Assignments --></label>
         <name>Number_of_Assignments__c</name>
     </fields>
     <fields>
-        <label><!-- Number of Active Wishes --></label>
+        <label><!-- Number Of Active Wishes --></label>
         <name>Number_of_wishes_active__c</name>
     </fields>
     <fields>
-        <label><!-- Number of wishes granted --></label>
+        <label><!-- Number Of Wishes Granted --></label>
         <name>Number_of_wishes_granted__c</name>
     </fields>
     <fields>
@@ -1433,7 +1445,7 @@ and the date it was or will be granted. --></help>
         <name>RE_Type__c</name>
     </fields>
     <fields>
-        <label><!-- RE What is your race/ethnicity? --></label>
+        <label><!-- RE What Is Your Race/Ethnicity? --></label>
         <name>RE_What_is_your_race_ethnicity__c</name>
     </fields>
     <fields>
@@ -1630,6 +1642,10 @@ and the date it was or will be granted. --></help>
         <relationshipLabel><!-- Contacts --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- Hidden Related Contacts --></label>
+        <name>RelatedContacts__c</name>
+    </fields>
+    <fields>
         <label><!-- Relationship --></label>
         <name>Relationship__c</name>
         <picklistValues>
@@ -1750,11 +1766,11 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Relationship to Wish Child (Other) --></label>
+        <label><!-- Relationship To Wish Child (Other) --></label>
         <name>Relationship_to_Wish_Child__c</name>
     </fields>
     <fields>
-        <label><!-- Residing with Wish child --></label>
+        <label><!-- Residing With Wish Child --></label>
         <name>Residing_with_Wish_child__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -1802,7 +1818,7 @@ and the date it was or will be granted. --></help>
         <name>SD4_ICD_Code__c</name>
     </fields>
     <fields>
-        <label><!-- Same as Household Address --></label>
+        <label><!-- Same As Household Address --></label>
         <name>Same_as_Household_Address__c</name>
     </fields>
     <fields>
@@ -2259,6 +2275,14 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Suffix --></label>
         <name>Suffix__c</name>
         <picklistValues>
+            <masterLabel>CLS</masterLabel>
+            <translation><!-- CLS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DO</masterLabel>
+            <translation><!-- DO --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>II</masterLabel>
             <translation><!-- II --></translation>
         </picklistValues>
@@ -2273,6 +2297,66 @@ provide contact information for each site on which you are active. --></help>
         <picklistValues>
             <masterLabel>Jr.</masterLabel>
             <translation><!-- Jr. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LPN</masterLabel>
+            <translation><!-- LPN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LSW</masterLabel>
+            <translation><!-- LSW --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LVN</masterLabel>
+            <translation><!-- LVN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MA</masterLabel>
+            <translation><!-- MA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MD</masterLabel>
+            <translation><!-- MD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>MSW</masterLabel>
+            <translation><!-- MSW --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NP</masterLabel>
+            <translation><!-- NP --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OD</masterLabel>
+            <translation><!-- OD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>OT</masterLabel>
+            <translation><!-- OT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PA</masterLabel>
+            <translation><!-- PA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PT</masterLabel>
+            <translation><!-- PT --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>PharmD</masterLabel>
+            <translation><!-- PharmD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>R.Ph.</masterLabel>
+            <translation><!-- R.Ph. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RN</masterLabel>
+            <translation><!-- RN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>RRT</masterLabel>
+            <translation><!-- RRT --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Sr.</masterLabel>
@@ -2292,7 +2376,7 @@ provide contact information for each site on which you are active. --></help>
         <name>T_Shirt_Size__c</name>
     </fields>
     <fields>
-        <label><!-- This is my wish because… --></label>
+        <label><!-- This Is My Wish Because… --></label>
         <name>This_is_my_wish_because__c</name>
     </fields>
     <fields>
@@ -2300,7 +2384,7 @@ provide contact information for each site on which you are active. --></help>
         <name>Timesheet_Date__c</name>
     </fields>
     <fields>
-        <label><!-- To me,the most important part of my wish --></label>
+        <label><!-- To Me,The Most Important Part Of My Wish --></label>
         <name>To_me_the_most_important_part_of_my_wish__c</name>
     </fields>
     <fields>
@@ -2385,7 +2469,7 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Use as Household Address --></label>
+        <label><!-- Use As Household Address --></label>
         <name>Use_as_Household_Address__c</name>
     </fields>
     <fields>
@@ -2404,6 +2488,10 @@ provide contact information for each site on which you are active. --></help>
             <translation><!-- Celebrity Host --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Fundraising Volunteer</masterLabel>
+            <translation><!-- Fundraising Volunteer --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Fundraising – Assist</masterLabel>
             <translation><!-- Fundraising – Assist --></translation>
         </picklistValues>
@@ -2412,8 +2500,16 @@ provide contact information for each site on which you are active. --></help>
             <translation><!-- Medical Outreach Volunteer --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Office Volunteer</masterLabel>
+            <translation><!-- Office Volunteer --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Office – Assist</masterLabel>
             <translation><!-- Office – Assist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Skill Based Volunteer</masterLabel>
+            <translation><!-- Skill Based Volunteer --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Speaker’s Bureau</masterLabel>
@@ -2422,6 +2518,14 @@ provide contact information for each site on which you are active. --></help>
         <picklistValues>
             <masterLabel>Special Events</masterLabel>
             <translation><!-- Special Events --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Special Events - Committee Member</masterLabel>
+            <translation><!-- Special Events - Committee Member --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Translator &amp; Interpreter</masterLabel>
+            <translation><!-- Translator &amp; Interpreter --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Translator/Interpreter</masterLabel>
@@ -2434,6 +2538,14 @@ provide contact information for each site on which you are active. --></help>
         <picklistValues>
             <masterLabel>Wish Assist Phone Greeter</masterLabel>
             <translation><!-- Wish Assist Phone Greeter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Assist Volunteer</masterLabel>
+            <translation><!-- Wish Assist Volunteer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wish Family Welcome Volunteer</masterLabel>
+            <translation><!-- Wish Family Welcome Volunteer --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Wish Granter</masterLabel>
@@ -2449,7 +2561,7 @@ provide contact information for each site on which you are active. --></help>
         <name>Waiting_Since__c</name>
     </fields>
     <fields>
-        <label><!-- What is your race/ethnicity? --></label>
+        <label><!-- What Is Your Race/Ethnicity? --></label>
         <name>What_is_your_race_ethnicity__c</name>
         <picklistValues>
             <masterLabel>American Indian or Alaskan Native</masterLabel>
@@ -2485,27 +2597,27 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- When I’m inside, I like to… --></label>
+        <label><!-- When I’m Inside, I Like To… --></label>
         <name>When_I_m_inside_I_like_to__c</name>
     </fields>
     <fields>
-        <label><!-- When I’m outside, I like to... --></label>
+        <label><!-- When I’m Outside, I Like To... --></label>
         <name>When_I_m_outside_I_like_to__c</name>
     </fields>
     <fields>
-        <label><!-- When I’m with my family, I like to… --></label>
+        <label><!-- When I’m With My Family, I Like To… --></label>
         <name>When_I_m_with_my_family_I_like_to__c</name>
     </fields>
     <fields>
-        <label><!-- When I’m with my friends, I like to… --></label>
+        <label><!-- When I’m With My Friends, I Like To… --></label>
         <name>When_I_m_with_my_friends_I_like_to__c</name>
     </fields>
     <fields>
-        <label><!-- When I think about my wish, I imagine…. --></label>
+        <label><!-- When I Think About My Wish, I Imagine…. --></label>
         <name>When_I_think_about_my_wish_I_imagine__c</name>
     </fields>
     <fields>
-        <label><!-- When thinking,some of my wish ideas were --></label>
+        <label><!-- When Thinking,Some Of My Wish Ideas Were --></label>
         <name>When_thinking_some_of_my_wish_ideas_were__c</name>
     </fields>
     <fields>
@@ -2607,7 +2719,7 @@ provide contact information for each site on which you are active. --></help>
         <name>Year__c</name>
     </fields>
     <fields>
-        <label><!-- Year of Last Enagement --></label>
+        <label><!-- Year Of Last Enagement --></label>
         <name>Year_of_Last_Enagement__c</name>
     </fields>
     <fields>
@@ -3170,10 +3282,6 @@ provide contact information for each site on which you are active. --></help>
     <layouts>
         <layout>Volunteer info for volunteers</layout>
         <sections>
-            <label><!-- Engagement Details --></label>
-            <section>Engagement Details</section>
-        </sections>
-        <sections>
             <label><!-- Volunteer Details --></label>
             <section>Volunteer Details</section>
         </sections>
@@ -3219,6 +3327,10 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Volunteer Details --></label>
             <section>Volunteer Details</section>
+        </sections>
+        <sections>
+            <label><!-- Volunteer Role --></label>
+            <section>Volunteer Role</section>
         </sections>
     </layouts>
     <layouts>

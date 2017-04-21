@@ -74,6 +74,10 @@
         <name>Today_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Volunteer Active --></label>
+        <name>Volunteer_Active__c</name>
+    </fields>
+    <fields>
         <label><!-- Year of Inactive --></label>
         <name>Year_of_Inactive__c</name>
     </fields>

@@ -513,16 +513,6 @@ If this is a volunteer donor, gift subtype should begin with DRPS --></help>
         <name>Volunteer_Name__c</name>
     </fields>
     <fields>
-        <label><!-- Hidden Wish Owner --></label>
-        <name>Wish_Owner__c</name>
-        <relationshipLabel><!-- In-Kind Donation &amp; Reimbursement (Hidden Wish Owner) --></relationshipLabel>
-    </fields>
-    <fields>
-        <label><!-- Wish Owner&apos;s Manager --></label>
-        <name>Wish_Owner_s_Manager__c</name>
-        <relationshipLabel><!-- In-Kind Donation &amp; Reimbursement (Wish Owner&apos;s Manager) --></relationshipLabel>
-    </fields>
-    <fields>
         <label><!-- Wish --></label>
         <name>Wish__c</name>
         <relationshipLabel><!-- In-Kind Donation &amp; Reimbursement --></relationshipLabel>

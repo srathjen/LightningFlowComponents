@@ -28,7 +28,7 @@ Public class VolunteerOandTTriggerHandler
         Id trainingRecordTypeId = Schema.Sobjecttype.Orientation_Training__c.getRecordTypeInfosByName().get(constant.trainingRT).getRecordTypeId();
         Map<Id, List<Volunteer_Orientation_Training__c>> volunteerTrainingMap = new Map<Id, List<Volunteer_Orientation_Training__c>>();
         
-          for(Background_check__c dbbackgroundCheckRec : [SELECT Id,Active__c,Date__c,Volunteer__c FROM Background_check__c  WHERE Volunteer__c IN: volnteerContactIdSet AND Date__c >: Date.Today() ])
+          for(Background_check__c dbbackgroundCheckRec : [SELECT Id,current__c,Date__c,Volunteer__c FROM Background_check__c  WHERE Volunteer__c IN: volnteerContactIdSet AND Date__c >: Date.Today() ])
           {
                 backGroundContactIdsSet.add(dbbackgroundCheckRec.Volunteer__c);
           }
@@ -75,12 +75,12 @@ Public class VolunteerOandTTriggerHandler
                }
            } */
           
-           for(Volunteer_Orientation_Training__c currTraining : [SELECT id, Volunteer__c,Orientation_Training__c  FROM Volunteer_Orientation_Training__c WHERE Volunteer__c IN :volnteerContactIdSet AND Orientation_Training__c IN :orientationIds AND Type__c = 'Training' AND Volunteer_Attendance__c = 'Completed'])
+           for(Volunteer_Orientation_Training__c currTraining : [SELECT id, Volunteer__c,Hidden_O_T_Id__c FROM Volunteer_Orientation_Training__c WHERE Volunteer__c IN :volnteerContactIdSet AND Hidden_O_T_Id__c IN :orientationIds AND Type__c = 'Training' AND Volunteer_Attendance__c = 'Completed'])
            {
-              if(volunteerTrainingMap.containsKey(currTraining.Orientation_Training__c))
-                  volunteerTrainingMap.get(currTraining.Orientation_Training__c).add(currTraining);
+              if(volunteerTrainingMap.containsKey(currTraining.Hidden_O_T_Id__c))
+                  volunteerTrainingMap.get(currTraining.Hidden_O_T_Id__c).add(currTraining);
               else
-                  volunteerTrainingMap.put(currTraining.Orientation_Training__c, new List<Volunteer_Orientation_Training__c>{currTraining});
+                  volunteerTrainingMap.put(currTraining.Hidden_O_T_Id__c, new List<Volunteer_Orientation_Training__c>{currTraining});
            }
           
           

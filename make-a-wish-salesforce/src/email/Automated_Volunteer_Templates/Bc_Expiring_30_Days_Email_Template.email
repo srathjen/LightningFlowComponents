@@ -1,22 +1,25 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="margin-bottom: 0.0001pt; background-image: initial; background-attachment: initial; background-color: white; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="color: rgb(51, 51, 51); font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">Hi&nbsp;{!Background_check__c.Volunteer__c},<br></span><span style="color: rgb(51, 51, 51); font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"><br>Our records indicate your last criminal background check was
+<![CDATA[<p class="MsoNormal"><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Century Gothic&quot;, sans-serif;">Hi<span class="apple-converted-space">&nbsp;</span>{!Background_check__c.Volunteer__c},<br></span><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Century Gothic&quot;,sans-serif;
+color:#333333"><br>Our records indicate your last criminal background check was
 conducted three years ago. Our Governing Policies, Performance Standards and
 Guidelines require all staff, board members, and volunteers who “have either
 direct contact with children, access to confidential information, or access to
-chapter funds”&nbsp;to submit to a criminal background check every three years.&nbsp;In
-order to keep your "<b>ACTIVE"&nbsp;</b>volunteer status, please log
-in to the</span><span style="color: rgb(0, 0, 0); font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"> </span><u style="color: rgb(0, 0, 0);"><span style="font-size:12.0pt;font-family:&quot;Century Gothic&quot;,sans-serif;
-mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:Arial;
-color:blue"><a href="https://make-a-wish.force.com">Make-A-Wish Volunteer Center</a></span></u><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"><font color="#333333">&nbsp;to initiate your background check.</font><br></span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"><br><font color="#333333"><span style="line-height: 15pt;">Please ensure that you have completed the requested information
-by {!Background_check__c.Date__c}. After this date, your access to the
+chapter funds”&nbsp;to submit to a criminal background check every three
+years.&nbsp;In order to keep your "<b>ACTIVE"&nbsp;</b>volunteer
+status, please log in to the</span><span class="apple-converted-space"><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Century Gothic&quot;, sans-serif;">&nbsp;</span></span><u><span style="font-size:12.0pt;line-height:107%;font-family:
+&quot;Century Gothic&quot;,sans-serif;mso-bidi-font-family:Arial;color:blue"><a href="https://make-a-wish.force.com/communitieslogin">Make-A-Wish Volunteer Center</a></span></u><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Century Gothic&quot;,sans-serif;
+color:#333333">&nbsp;to initiate your background check.<br><br>Please ensure that you have completed the requested information by<span class="apple-converted-space">&nbsp;</span></span><span style="font-size:12.0pt;
+line-height:107%;font-family:&quot;Century Gothic&quot;,sans-serif;mso-bidi-font-family:
+Arial;color:#333333">{!Background_check__c.Date__c}</span><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Century Gothic&quot;, sans-serif;">. After this date, your access to the
 Volunteer Center will be disabled and you will no longer be able to access your
 current assignments, future opportunities or valuable resources. If you prefer
-to be put on “</span></font></span><b style="color: rgb(51, 51, 51); line-height: 15pt; font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">INACTIVE”</b><span style="color: rgb(51, 51, 51); line-height: 15pt; font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">&nbsp;status now, please log in and change your
-status accordingly or email our team and we are happy to make this adjustment
-on your behalf.<br></span><span style="color: rgb(51, 51, 51); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 15pt;"><br>Thank you so much for your attention to this important matter.
-We are grateful for your continued support of our mission and the children we
-serve! Because of you, wishes come true!<br></span><span style="color: rgb(51, 51, 51); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 15pt;"><br>Thanks,<br></span><span style="color: rgb(51, 51, 51); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 15pt;"><br>{!Background_check__c.Account_Name__c}<br></span><span style="color: rgb(51, 51, 51); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Background_check__c.Account_Phone__c}<br></span><span style="color: rgb(51, 51, 51); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Background_check__c.Account_Email__c}</span></p>]]></td>
+to be put on “</span><b><span style="font-size:12.0pt;line-height:107%;font-family:
+&quot;Century Gothic&quot;,sans-serif;color:#333333">INACTIVE”</span></b><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Century Gothic&quot;,sans-serif;
+color:#333333">&nbsp;status now, please email our team and we are happy to make this adjustment on your
+behalf.<br><br>Thank you so much for your attention to this important
+matter. We are grateful for your continued support of our mission and the
+children we serve! Because of you, wishes come true!<br><br>Thanks,<br><br>{!Background_check__c.Account_Name__c}<br>{!Background_check__c.Account_Phone__c}<br>{!Background_check__c.Account_Email__c}</span><span style="font-size:12.0pt;line-height:107%;font-family:&quot;Century Gothic&quot;,sans-serif"><o:p></o:p></span></p>]]></td>
 </tr>
 </table>

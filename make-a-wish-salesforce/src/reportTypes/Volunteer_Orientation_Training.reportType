@@ -78,11 +78,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Orientation_Training__c</field>
-            <table>Volunteer_Orientation_Training__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Orientation_Training_Hidden__c</field>
             <table>Volunteer_Orientation_Training__c</table>
         </columns>

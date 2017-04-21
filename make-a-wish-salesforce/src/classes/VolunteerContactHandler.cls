@@ -9,8 +9,8 @@ public class VolunteerContactHandler{
     { 
          User newUser;
          List<User> userList=new List<User>();
-         Database.DMLOptions dlo = new Database.DMLOptions();
-         dlo.EmailHeader.triggerUserEmail= true;
+        // Database.DMLOptions dlo = new Database.DMLOptions();
+        // dlo.EmailHeader.triggerUserEmail= true;
          
          Map<String,String> timeZoneMap = new Map<String,String>();
          timeZoneMap.put('(GMT-07:00) Mountain Standard Time (America/Phoenix)','America/Phoenix');
@@ -69,7 +69,7 @@ public class VolunteerContactHandler{
                newUser.EmailEncodingKey='ISO-8859-1';
                newUser.LanguageLocaleKey='en_US';
                newUser.IsActive=True;
-               newUser.setOptions(dlo);
+               //newUser.setOptions(dlo);
                newUser.migrated_user__c = True;
                userList.add(newUser);
       

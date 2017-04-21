@@ -44,6 +44,7 @@ public class Application_AC{
     public boolean bgTabPermission{get;set;}
     public boolean trainingTabVisible{get;set;}
     public Boolean displaySignNowPopup{get;set;}
+    public String contactName{get;set;}
     
     /*It will fetch the current volunteer details and display this information into Application_VF page. */ 
     public Application_AC(){
@@ -84,12 +85,12 @@ public class Application_AC{
             system.debug('@@@@@ Hi @@@@@'+contactId);
             
             system.debug('++++++++++' + [select id, recordTypeId from contact where id =: contactId]);
-            currentVolunteer= [SELECT id,Title,RecordTypeId,FirstName,Middle_Name__c,LastName,State_Employer__c,Preferred_Name__c,Birth_Month__c,Birth_Day__c,HomePhone,Alternate_Phone_Type__c,Preferred_Phone_Types__c,MobilePhone,
+            currentVolunteer= [SELECT id,Title, Salutation,RecordTypeId,FirstName,Middle_Name__c,LastName,State_Employer__c,Preferred_Name__c,Birth_Month__c,Birth_Day__c,HomePhone,Alternate_Phone_Type__c,Preferred_Phone_Types__c,MobilePhone,
                     OtherPhone,Email,I_m_on_LinkedIn__c,How_did_you_hear_about_Make_A_Wish__c,MailingStreet,MailingCity,mailingstatecode,MailingCountrycode,MailingPostalCode,
                    Employer__c,Position__c,Street_Employer__c,City_Employer__c,Zip_Employer__c,May_We_Contact_You_at_Work__c,Interested_involved_with_Make_A_Wish__c,
                    Emergency_Contact__c,Emergency_Contact_Phone__c,Professional_Skills__c,Language__c,Language_Notes__c,Read__c,Write__c,Speak__c,Understand__c,
                    Volunteer_Role__c,is_Application__c,work_phone__c,MailingState,Emergency_Contact_Relationship__c,county__c,Professional_Skills_Other_Notes__c,
-                   How_did_you_know_MAWA_Other_Notes__c FROM Contact WHERE (RecordTypeId =: volunteerRecordTypeId OR RecordTypeId =: boardMemberContactRecTyped) AND Id =:contactId];
+                   How_did_you_know_MAWA_Other_Notes__c FROM Contact WHERE (RecordTypeId =: volunteerRecordTypeId OR RecordTypeId =:boardMemberContactRecTyped) AND Id =:contactId];
             
             currentVolunteer.mailingState = currentVolunteer.MailingState;
             currentVolunteer.Emergency_Contact_Relationship__c = currentVolunteer.Emergency_Contact_Relationship__c;
@@ -97,11 +98,11 @@ public class Application_AC{
             currentVolunteer.I_m_on_LinkedIn__c = currentVolunteer.I_m_on_LinkedIn__c;
             currentVolunteer.May_We_Contact_You_at_Work__c = currentVolunteer.May_We_Contact_You_at_Work__c;
             currentVolunteer.Interested_involved_with_Make_A_Wish__c = currentVolunteer.Interested_involved_with_Make_A_Wish__c;
-            currentVolunteer.Title = currentVolunteer.Title;
+            currentVolunteer.Salutation = currentVolunteer.Salutation;
             currentVolunteer.Birth_Month__c = currentVolunteer.Birth_Month__c;
             if(currentVolunteer.Birth_Day__c  != Null)
             currentVolunteer.Birth_Day__c = currentVolunteer.Birth_Day__c;
-            
+            contactName = currentVolunteer.Name;
          /*   if(currentVolunteer.Preferred_Phone_Types__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
                 currentVolunteer.HomePhone =   currentVolunteer.HomePhone;
                 currentVolunteer.MobilePhone  = currentVolunteer.MobilePhone ;
@@ -342,20 +343,20 @@ public class Application_AC{
        
         try{
         
-            /* if(currentVolunteer.LastName == Null || currentVolunteer.Email == Null || currentVolunteer.Title == Null || currentVolunteer.FirstName == Null || currentVolunteer.Birth_Month__c == Null
+            if(currentVolunteer.LastName == Null || currentVolunteer.Email == Null || currentVolunteer.Title == Null || currentVolunteer.FirstName == Null || currentVolunteer.Birth_Month__c == Null
                || currentVolunteer.Birth_Day__c == Null || currentVolunteer.Preferred_Phone_Types__c == Null || currentVolunteer.HomePhone == Null || currentVolunteer.HomePhone == '' || currentVolunteer.I_m_on_LinkedIn__c == NULL || currentVolunteer.How_did_you_hear_about_Make_A_Wish__c == NULL || currentVolunteer.MailingStreet == NULL || currentVolunteer.MailingCity == NULL 
                || currentVolunteer.county__c == NULL || currentVolunteer.MailingPostalCode == NULL|| currentVolunteer.mailingstatecode == NULL || currentVolunteer.Emergency_Contact__c == NULL || currentVolunteer.Emergency_Contact_Relationship__c == NULL 
                || currentVolunteer.Emergency_Contact_Phone__c == NULL || currentVolunteer.Read__c == NULL || currentVolunteer.Write__c == NULL || currentVolunteer.Speak__c == NULL || currentVolunteer.Understand__c == NULL ||   
                currentVolunteer.Language__c == NULL || currentVolunteer.volunteer_role__c == Null){
-                  
+                   
                    currentVolunteer.is_Application__c = 'Partial Submit';
                }
             
             else{
-            
+                
                 currentVolunteer.is_Application__c = 'Fully Submit';
-               
-            }*/
+                
+            }
             
           /*  if(currentVolunteer.Preferred_Phone_Types__c == 'Home' && currentVolunteer.Alternate_Phone_Type__c == 'Mobile'){
                 currentVolunteer.HomePhone =   currentVolunteer.HomePhone;
@@ -451,8 +452,8 @@ public class Application_AC{
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailBlurb":"Test Email Body",'+
-            '  "emailSubject": "Test Email Subject",'+
+            '  "emailBlurb":"Volunteer Application Form",'+
+            '  "emailSubject": "Volunteer Application Form",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+
             '      "name": "document.pdf",'+
@@ -547,8 +548,6 @@ public class Application_AC{
                 reference.setRedirect(true);
                 return reference;
                
-                
-                
             }
         }
        return null;
@@ -639,12 +638,12 @@ public class Application_AC{
     public List<SelectOption> getRoles(){
         List<SelectOption> options = new List<SelectOption>();
         
-         for(Chapter_Role__c currRole : [SELECT ID,Role_Name__c,Role_Name__r.Name,Role_Name__r.Description__c,Role_Name__r.Exclude_from_Application__c FROM Chapter_Role__c WHERE Chapter_name__c IN: chaptersNameSet AND Role_Name__r.Exclude_from_Application__c = False])
+        for(Chapter_Role__c currRole : [SELECT ID,Role_Name__c,Role_Name__r.Name,Role_Name__r.Description__c,Role_Name__r.Exclude_from_Application__c FROM Chapter_Role__c WHERE Chapter_name__c IN: chaptersNameSet AND Role_Name__r.Exclude_from_Application__c = False])
         {
           if(currRole.Role_Name__c != Null)      
              options.add(new SelectOption(currRole.Role_Name__r.name, currRole.Role_Name__r.name)); 
                
-        }   
+        }  
         options.sort();
         return options;
     } 
@@ -708,17 +707,18 @@ public class Application_AC{
         }  
         return options;
     }   
-     /*To display title values for current logged in volunteer contact in community.*/
+      /*To display title values for current logged in volunteer contact in community.*/
     public List<SelectOption> getTitles(){
         List<SelectOption> options = new List<SelectOption>();
-        options.add(new SelectOption('','Please select Title')); 
+        options.add(new SelectOption('','Please Select Title')); 
         options.add(new SelectOption('Mr.','Mr.')); 
-        options.add(new SelectOption('Ms.','Ms.'));
         options.add(new SelectOption('Mrs.','Mrs.'));
+        options.add(new SelectOption('Miss','Miss'));
+        options.add(new SelectOption('Master','Master'));
         options.add(new SelectOption('Dr.','Dr.'));
         options.add(new SelectOption('Prof.','Prof.'));
         return options;
-    }     
+    }      
      /*To display Country values for current logged in volunteer contact in community.*/
     public List<SelectOption> getCountries(){
         List<SelectOption> options = new List<SelectOption>();

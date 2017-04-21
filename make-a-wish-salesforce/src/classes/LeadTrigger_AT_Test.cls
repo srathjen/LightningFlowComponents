@@ -206,4 +206,35 @@ public class LeadTrigger_AT_Test{
          String errorMessage = 'There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newLead2.id+'>here </a> to review the duplicates.';
          System.assertEquals(errorMessage,result.getErrors()[0].getMessage());
      }
+     
+     static testmethod void createLeadforNationalStaffAsOwner(){
+          User currUser = [SELECT id from User where id = :Userinfo.getUserId() limit 1];
+        User nationalStaff;
+        System.RunAs(currUser)
+        {   
+            nationalStaff = OrientationandTrainingUtil.createUserWithRole([select Id from UserRole where Name='National Staff'].Id);
+        }
+        
+         System.runAs(nationalStaff) {
+             Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+         Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+         Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
+         Contact trateProfContact = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
+         Contact medicalProfContact = OrientationandTrainingUtil.CreateMedicalProfContact();
+         Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
+         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
+         newLead.Child_Age__c = '4';
+         newLead.unique_wish_identifier__c = '123456';
+         newLead.Treating_Medical_Professional_Contact_Id__c = trateProfContact.Id;
+         newLead.Medical_Professional_ContactId__c = medicalProfContact.Id;
+         newLead.Wish_Family_ContactId__c = wishFamily.Id;
+         newLead.Sibling_Detail__c = 'aa | bbb | 12';
+         //newLead.Sub_Status__c ='Pending Diagnosis Verification';
+         insert newLead;
+         
+         }
+         
+         
+     }
 }

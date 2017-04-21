@@ -307,7 +307,7 @@
         <fullName>Additional_Interview_date2__c</fullName>
         <description>It holds the Additional Available Interview Date2</description>
         <externalId>false</externalId>
-        <label>Additional Interview date2</label>
+        <label>Additional Interview Date2</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -346,6 +346,18 @@
                 </value>
                 <value>
                     <fullName>No</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Check with Wish Manager</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Hold</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Dedicated</fullName>
                     <default>false</default>
                 </value>
             </valueSetDefinition>
@@ -426,7 +438,7 @@
         <fullName>All_requested_wish_participants_reside_w__c</fullName>
         <description>It describes whether all requested wish participants resides with wish child?</description>
         <externalId>false</externalId>
-        <label>All participants reside with wish child</label>
+        <label>All Participants Reside With Wish Child</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -463,7 +475,7 @@
         <externalId>false</externalId>
         <inlineHelpText>Is there anything on your family’s calendar (upcoming medical treatments, school or work commitments,
 planned vacations, etc.) that might impact your ability to participate in a wish?</inlineHelpText>
-        <label>Any impact your ability to join wish</label>
+        <label>Any Impact Your Ability To Join Wish</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -518,7 +530,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It capture details about automobile insurance coverage for a rental car</description>
         <externalId>false</externalId>
         <inlineHelpText>Does your automobile insurance provide coverage while using a rental car?</inlineHelpText>
-        <label>Automobile insurance provide coverage</label>
+        <label>Automobile Insurance Provide Coverage</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -732,8 +744,7 @@ for fulfilment  the wish.</description>
         <scale>2</scale>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Number</type>
-        <unique>false</unique>
+        <type>Currency</type>
     </fields>
     <fields>
         <fullName>BusinessHoursId</fullName>
@@ -828,19 +839,6 @@ for fulfilment  the wish.</description>
         <type>Phone</type>
     </fields>
     <fields>
-        <fullName>Chapter_Name__c</fullName>
-        <description>This field holds the state name</description>
-        <externalId>false</externalId>
-        <label>Chapter Name</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>CheckedInFamily__c</fullName>
         <description>Used to hold the value of checked In Date</description>
         <externalId>false</externalId>
@@ -899,7 +897,7 @@ for fulfilment  the wish.</description>
         <fullName>Child_s_Medical_Summary_sent__c</fullName>
         <description>Medical summary sent date</description>
         <externalId>false</externalId>
-        <label>Child&apos;s Medical Summary sent</label>
+        <label>Child&apos;s Medical Summary Sent</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1025,6 +1023,593 @@ for fulfilment  the wish.</description>
     <fields>
         <fullName>ContactPhone</fullName>
         <trackTrending>false</trackTrending>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Anticipated_Start_Date__c</fullName>
+        <description>Copy 1 of Anticipated Start Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Anticipated_Start_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Anticipated Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Assigned_Date__c</fullName>
+        <description>Copy 1 of Assigned Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Assigned_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Assigned Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Budget_Approved_Date__c</fullName>
+        <description>Copy 1 of Budget Approved Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Budget_Approved_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Budget Approved Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Closed_Date__c</fullName>
+        <description>Copy 1 of Closed Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Closed_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Closed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Completed_Date__c</fullName>
+        <description>Copy 1 of Completed Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Completed_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Completed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Concept_Approval_Date__c</fullName>
+        <description>Copy 1 of Concept Approval Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Concept_Approval_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Concept Approval Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Diagnosis_Ver_Rec_Date__c</fullName>
+        <description>Copy 1 of Diagnosis Verification Received Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Diagnosis_Verification_Receive_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Diagnosis Ver. Rec Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_End_Date__c</fullName>
+        <description>Copy 1 of End Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>End_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Hold_Date__c</fullName>
+        <description>Copy 1 of Hold Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Hold_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Hold Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Inactive_Date__c</fullName>
+        <description>Copy 1 of Inactive Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Inactive_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Inactive Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Interview_Date__c</fullName>
+        <description>Copy 1 of Interview Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Interview_date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Interview Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Qualified_Date__c</fullName>
+        <description>Copy 1 of Qualified Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Qualified_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Qualified Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Ready_to_Assign_Date__c</fullName>
+        <description>Copy 1 of Ready to Assign Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Ready_to_Assign_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Ready to Assign Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Referral_Date__c</fullName>
+        <description>Copy of Referral Date for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Referral_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Referral Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Start_Date__c</fullName>
+        <description>Copy 1 of Start Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Start_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Wish_Determined_Date__c</fullName>
+        <description>Copy 1 of Wish Determined Date Needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Wish_Determined_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Wish Determined Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Anticipated_Start_Date__c</fullName>
+        <description>Copy 2 of Anticipated Start Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Anticipated_Start_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Anticipated Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Assigned_Date__c</fullName>
+        <description>Copy 2 of Assigned Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Assigned_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Assigned Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Budget_Approved_Date__c</fullName>
+        <description>Copy 2 of Budget Approved Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Budget_Approved_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Budget Approved Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Closed_Date__c</fullName>
+        <description>Copy 2 of Closed Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Closed_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Closed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Completed_Date__c</fullName>
+        <description>Copy 2 of completed date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Completed_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Completed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Concept_Approval_Date__c</fullName>
+        <description>Copy 2 of Concept Approval Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Concept_Approval_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Concept Approval Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Diagnosis_Ver_Rec_Dat__c</fullName>
+        <description>Copy 2 of Diagnosis Verification Received Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Diagnosis_Verification_Receive_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Diagnosis Ver. Rec Dat</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_End_Date__c</fullName>
+        <description>Copy 2 of End Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>End_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Hold_Date__c</fullName>
+        <description>Copy 2 of Hold Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Hold_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Hold Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Inactive_Date__c</fullName>
+        <description>Copy 2 of Inactive Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Inactive_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Inactive Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Interview_Date__c</fullName>
+        <description>Copy 2 of Interview Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Interview_date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Interview Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Qualified_Date__c</fullName>
+        <description>Copy 2 of Qualified Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Qualified_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Qualified Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Ready_to_Assign_Date__c</fullName>
+        <description>Copy 2 of Ready to Assign Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Ready_to_Assign_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Ready to Assign Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Referral_Date__c</fullName>
+        <description>Copy of Referral Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Referral_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Referral Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Start_Date__c</fullName>
+        <description>Copy 2 of Start Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Start_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_2_Wish_Determined_Date__c</fullName>
+        <description>Copy 2 of Wish Determined Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Wish_Determined_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 2 - Wish Determined Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Anticipated_Start_Date__c</fullName>
+        <description>Copy 3 of Anticipated Start Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Anticipated_Start_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Anticipated Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Assigned_Date__c</fullName>
+        <description>Copy 3 of Assigned Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Assigned_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Assigned Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Budget_Approved_Date__c</fullName>
+        <description>Copy 3 of Budget Approved Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Budget_Approved_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Budget Approved Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Closed_Date__c</fullName>
+        <description>Copy 3 of Closed Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Closed_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Closed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Completed_Date__c</fullName>
+        <description>Copy 3 of Completed Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Completed_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Completed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Concept_Approval_Date__c</fullName>
+        <description>Copy 3 of Concept Approval Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Concept_Approval_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Concept Approval Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Diagnosis_Ver_Rec_Dat__c</fullName>
+        <description>Copy 3 of Diagnosis Verification Received Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Diagnosis_Verification_Receive_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Diagnosis Ver. Rec Dat</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_End_Date__c</fullName>
+        <description>Copy 3 of End Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>End_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - End Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Hold_Date__c</fullName>
+        <description>Copy 3 of Hold Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Hold_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Hold Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Inactive_Date__c</fullName>
+        <description>Copy 3 of Inactive Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Inactive_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Inactive Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Interview_Date__c</fullName>
+        <description>Copy 3 of Interview Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Interview_date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Interview Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Qualified_Date__c</fullName>
+        <description>Copy 3 of Qualified Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Qualified_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Qualified Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Ready_to_Assign_Date__c</fullName>
+        <description>Copy 3 of Ready to Assign needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Ready_to_Assign_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Ready to Assign Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Referral_Date__c</fullName>
+        <description>Copy of Referral Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Referral_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Referral Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Start_Date__c</fullName>
+        <description>Copy 3 of Start Date Needed for Reporting</description>
+        <externalId>false</externalId>
+        <formula>Start_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_3_Wish_Determined_Date__c</fullName>
+        <description>Copy 3 of Wish Determined Date needed for reporting</description>
+        <externalId>false</externalId>
+        <formula>Wish_Determined_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 3 - Wish Determined Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>CurrentDOB__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(DATE(YEAR(TODAY()),MONTH(Birthdate__c),DAY(Birthdate__c)) &lt;= TODAY(), DATE(YEAR(TODAY())+1,MONTH(Birthdate__c),DAY(Birthdate__c)), DATE(YEAR(TODAY()),MONTH(Birthdate__c),DAY(Birthdate__c)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current DOB</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>DNQ_Date__c</fullName>
@@ -1246,6 +1831,28 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackTrending>false</trackTrending>
         <type>Email</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Diagnosis_Verification_Receive_Date__c</fullName>
+        <description>It is used to capture the received date of dv</description>
+        <externalId>false</externalId>
+        <label>Diagnosis Verification Received Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Diagnosis_Verification_Sent_Date__c</fullName>
+        <description>It is used to capture the dv sent date</description>
+        <externalId>false</externalId>
+        <label>Diagnosis Verification Sent Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>Does_participant_have_valid_photo_ID__c</fullName>
@@ -1532,7 +2139,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It is used to  get the details about automobile insurance</description>
         <externalId>false</externalId>
         <inlineHelpText>Do you have current automobile insurance?</inlineHelpText>
-        <label>Have current automobile insurance</label>
+        <label>Have Current Automobile Insurance</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -1551,6 +2158,19 @@ planned vacations, etc.) that might impact your ability to participate in a wish
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>HiddenAnticipatedDate__c</fullName>
+        <description>This field is used for docusign purpose.</description>
+        <externalId>false</externalId>
+        <formula>text(MONTH(Anticipated_Start_Date__c)) +&apos;/&apos;+ text(DAY(Anticipated_Start_Date__c)) +&apos;/&apos;+ text(YEAR(Anticipated_Start_Date__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Anticipated Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Hidden_All_Primary__c</fullName>
@@ -1812,7 +2432,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hidden_Why_do_you_feel__c</fullName>
         <description>It is used to capture the why do you feel as hidden value</description>
         <externalId>false</externalId>
-        <formula>Lead__r.Why_do_you_feel_would_be_eligible_Wish__c</formula>
+        <formula>&apos;&apos;</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Why do you feel</label>
         <required>false</required>
@@ -1925,6 +2545,17 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Wish_Presentation_Not_Set__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to identify whether the wish presentation date is entered or not</description>
+        <externalId>false</externalId>
+        <label>Hidden Wish Presentation Not Set</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Hold_Date__c</fullName>
         <description>It is used to capture the hold date</description>
         <externalId>false</externalId>
@@ -1987,7 +2618,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Interested_in_Future_events__c</fullName>
         <description>It find out  if the wish child/family is interested to participate for the events.</description>
         <externalId>false</externalId>
-        <label>Interested in Future events</label>
+        <label>Interested In Future Events</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2023,7 +2654,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Interview_date__c</fullName>
         <description>This field will capture the interview date</description>
         <externalId>false</externalId>
-        <label>Interview date</label>
+        <label>Interview Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2076,22 +2707,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>Is_Migrated_Record__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>This is a flag to be set by MuleSoft for records created as part of the migration process</description>
-        <externalId>false</externalId>
-        <inlineHelpText>Record was created by MuleSoft as part of the chapter on-boarding process</inlineHelpText>
-        <label>Is Migrated Record</label>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>Is_a_wheelchair_accessible_vehicle_neede__c</fullName>
         <description>It  display the details about  wheelchair accessible vehicle needed or not</description>
         <externalId>false</externalId>
-        <label>Wheelchair accessible vehicle needed?</label>
+        <label>Wheelchair Accessible Vehicle Needed?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2126,7 +2745,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Is_the_wheelchair_collapsible__c</fullName>
         <description>It describes  whether the wheelchair is collapsible or not</description>
         <externalId>false</externalId>
-        <label>Is the wheelchair collapsible?</label>
+        <label>Is The Wheelchair Collapsible?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2161,7 +2780,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Is_the_wheelchair_power__c</fullName>
         <description>It describes whether the wheelchair has power or not</description>
         <externalId>false</externalId>
-        <label>Is the wheelchair power?</label>
+        <label>Is The Wheelchair Power?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2185,7 +2804,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Is_your_family_comfortable_in_rendal_car__c</fullName>
         <description>It  describes about wish families vehicle comfortable.</description>
         <externalId>false</externalId>
-        <label>Is your family comfortable in rental car</label>
+        <label>Is Your Family Comfortable In Rental Car</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2237,7 +2856,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <defaultValue>true</defaultValue>
         <description>Liability release authorization</description>
         <externalId>false</externalId>
-        <label>Liability Release and Authorization </label>
+        <label>Liability Release And Authorization </label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -2295,11 +2914,12 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It capture the details of  wish child, who wish would be.</description>
         <externalId>false</externalId>
         <label>MY WISH IS TO…</label>
-        <required>false</required>
+        <length>1500</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
     </fields>
     <fields>
         <fullName>Medical_Advisor_Email__c</fullName>
@@ -2524,7 +3144,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Part_B_received_date__c</fullName>
         <description>It is used to capture received date of part B</description>
         <externalId>false</externalId>
-        <label>Part B received date</label>
+        <label>Part B Received Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2535,7 +3155,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Part_B_sent_date__c</fullName>
         <description>It is used to capture sent date of the part B</description>
         <externalId>false</externalId>
-        <label>Part B sent date</label>
+        <label>Part B Sent Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2568,7 +3188,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Participant_dietary_restrictions__c</fullName>
         <description>It  describes the participant  has special dietary restrictions or not</description>
         <externalId>false</externalId>
-        <label>Participant  dietary restrictions?</label>
+        <label>Participant  Dietary Restrictions?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2603,7 +3223,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Participant_have_allergies_to_food__c</fullName>
         <description>It will capture information about  participant having  allergies to food or not</description>
         <externalId>false</externalId>
-        <label>Participant with allergy?</label>
+        <label>Participant With Allergy?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2684,7 +3304,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Participant_require_a_wheelchair__c</fullName>
         <description>It shows the choice , if the participant require a wheelchair or not</description>
         <externalId>false</externalId>
-        <label>Participant require a wheelchair?</label>
+        <label>Participant Require A Wheelchair?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2719,7 +3339,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Participant_require_medical_supplies__c</fullName>
         <description>It will capture, requested participant require medical supplies information</description>
         <externalId>false</externalId>
-        <label>Participant require medical supplies?</label>
+        <label>Participant Require Medical Supplies?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2754,7 +3374,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Participant_require_oxygen_how_often__c</fullName>
         <description>It will capture whether participant require oxygen or not</description>
         <externalId>false</externalId>
-        <label>Participant require oxygen?</label>
+        <label>Participant Require Oxygen?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2911,7 +3531,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Priority</fullName>
-        <trackFeedHistory>true</trackFeedHistory>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
@@ -3736,7 +4356,7 @@ on airplane</description>
         <fullName>This_is_my_wish_because__c</fullName>
         <description>It capture the Wish reason of a Wish Child.</description>
         <externalId>false</externalId>
-        <label>This is my wish because…</label>
+        <label>This Is My Wish Because…</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -3761,7 +4381,7 @@ on airplane</description>
         <fullName>To_me_the_most_important_part_of_my_wish__c</fullName>
         <description>It capture the most important part of wish of the Wish Child.</description>
         <externalId>false</externalId>
-        <label>To me,the most important part of my wish</label>
+        <label>To Me,The Most Important Part Of My Wish</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -3804,6 +4424,18 @@ on airplane</description>
         <type>Picklist</type>
     </fields>
     <fields>
+        <fullName>UniqueWishRecordIdentifier__c</fullName>
+        <externalId>false</externalId>
+        <formula>Unique_Wish_Record_Identifier__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Unique Wish Record Identifier</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Unique_Wish_Record_Identifier__c</fullName>
         <caseSensitive>false</caseSensitive>
         <description>Unique wish record identifier</description>
@@ -3812,7 +4444,7 @@ on airplane</description>
         <length>20</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
@@ -3868,7 +4500,7 @@ on airplane</description>
         <fullName>When_I_think_about_my_wish_I_imagine__c</fullName>
         <description>It capture the Imagination details of Wish, when the Wish Child think about it.</description>
         <externalId>false</externalId>
-        <label>When I think about my wish, I imagine….</label>
+        <label>When I Think About My Wish, I Imagine….</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -3880,12 +4512,13 @@ on airplane</description>
         <fullName>When_thinking_some_of_my_wish_ideas_were__c</fullName>
         <description>It capture the details of Wish Child  who thinks about some wish ideas.</description>
         <externalId>false</externalId>
-        <label>When thinking,some of my wish ideas were</label>
-        <required>false</required>
+        <label>When Thinking,Some Of My Wish Ideas Were</label>
+        <length>131072</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>TextArea</type>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
     </fields>
     <fields>
         <fullName>Will_a_rental_car_seat_s_be_needed_Note__c</fullName>
@@ -4007,7 +4640,7 @@ on airplane</description>
         <fullName>Will_your_family_bring_wheelchair__c</fullName>
         <description>It will capture information about whether family will bring wheelchair or not</description>
         <externalId>false</externalId>
-        <label>Family bringing own wheelchair?</label>
+        <label>Family Bringing Own Wheelchair?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -4478,7 +5111,7 @@ If yes,  # of hours, agency and phone number information</description>
         <fullName>Wish_child_receive_nursing_care__c</fullName>
         <description>It will capture information about wish child receiving nursing care or not</description>
         <externalId>false</externalId>
-        <label>Receiving nursing care?</label>
+        <label>Receiving Nursing Care?</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -4515,7 +5148,7 @@ If yes,  # of hours, agency and phone number information</description>
         <fullName>Wish_participant_have_medical_needs__c</fullName>
         <description>It will capture the &quot;Does a requested wish participant have medical needs?&quot; or not</description>
         <externalId>false</externalId>
-        <label>Wish participant have medical needs</label>
+        <label>Wish Participant Have Medical Needs</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -4534,28 +5167,6 @@ If yes,  # of hours, agency and phone number information</description>
                 </value>
             </valueSetDefinition>
         </valueSet>
-    </fields>
-    <fields>
-        <fullName>diagnosis_verificaion_receive_date__c</fullName>
-        <description>It is used to capture the received date of dv</description>
-        <externalId>false</externalId>
-        <label>Diagnosis Verification Received Date</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Date</type>
-    </fields>
-    <fields>
-        <fullName>diagnosis_verificaion_sent_date__c</fullName>
-        <description>It is used to capture the dv sent date</description>
-        <externalId>false</externalId>
-        <label>Diagnosis Verification Sent Date</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Date</type>
     </fields>
     <fields>
         <fullName>hidden_medical_physician__c</fullName>
@@ -4643,7 +5254,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <externalId>false</externalId>
         <inlineHelpText>list full name of any requested wish participant that does not reside with the wish child. Please detail living
 arrangements/unique circumstances for any requested wish participant not residing with the wish child.</inlineHelpText>
-        <label>living arrangements/unique circumstances</label>
+        <label>Living Arrangements/Unique Circumstances</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -4677,147 +5288,37 @@ arrangements/unique circumstances for any requested wish participant not residin
         </valueSet>
     </fields>
     <listViews>
-        <fullName>Alabama_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Alabama</label>
-        <queue>Alabama</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Alaska_Washington_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Alaska &amp; Washington</label>
-        <queue>Alaska_Washington</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
         <fullName>AllOpenCases</fullName>
         <columns>Anticipated_Start_Date__c</columns>
         <columns>CASES.CASE_NUMBER</columns>
-        <columns>CASES.CREATED_DATE_DATE_ONLY</columns>
-        <columns>ACCOUNT.NAME</columns>
+        <columns>CASES.SUBJECT</columns>
         <columns>NAME</columns>
-        <columns>CASES.RECORDTYPE</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>OWNER_NAME</columns>
+        <columns>ChapterName__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CASES.CLOSED</field>
             <operation>equals</operation>
             <value>0</value>
         </filters>
-        <label>All Open Wishes</label>
-    </listViews>
-    <listViews>
-        <fullName>Arizona_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Arizona</label>
-        <queue>Arizona</queue>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.Wish</value>
+        </filters>
+        <label>All Open Cases</label>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
     </listViews>
     <listViews>
-        <fullName>Budget_Pending_Wishes</fullName>
-        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <fullName>Arizona_Reassign_Wishes</fullName>
+        <columns>CONTACT.FIRST_NAME</columns>
+        <columns>CONTACT.LAST_NAME</columns>
         <columns>CASES.CASE_NUMBER</columns>
-        <columns>NAME</columns>
-        <columns>CASES.SUBJECT</columns>
-        <columns>CASES.STATUS</columns>
-        <columns>Budget_Status__c</columns>
-        <columns>Projected_Status__c</columns>
-        <columns>CASES.PRIORITY</columns>
-        <columns>CASES.CREATED_DATE</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>Budget_Status__c</field>
-            <operation>notEqual</operation>
-        </filters>
-        <filters>
-            <field>Budget_Status__c</field>
-            <operation>notEqual</operation>
-            <value>Approved</value>
-        </filters>
-        <filters>
-            <field>Projected_Status__c</field>
-            <operation>notEqual</operation>
-        </filters>
-        <filters>
-            <field>Projected_Status__c</field>
-            <operation>notEqual</operation>
-            <value>Approved</value>
-        </filters>
-        <label>Budget Pending Wishes</label>
-    </listViews>
-    <listViews>
-        <fullName>Central_California_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Central California</label>
-        <queue>Central_California</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Central_New_York_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Central New York</label>
-        <queue>Central_New_York</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Central_Northern_Florida_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Central &amp; Northern Florida</label>
-        <queue>Central_Northern_Florida</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Central_South_Texas_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Central &amp; South Texas</label>
-        <queue>Central_South_Texas</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Central_Western_North_Carolina_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Central &amp; Western North Carolina</label>
-        <queue>Central_Western_North_Carolina</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Colorado_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Colorado</label>
-        <queue>Colorado</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Connecticut_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Connecticut</label>
-        <queue>Connecticut</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Diagnosis_Verification_Review</fullName>
-        <columns>CASES.CASE_NUMBER</columns>
+        <columns>OWNER_NAME</columns>
         <columns>NAME</columns>
         <columns>CASES.SUBJECT</columns>
         <columns>CASES.STATUS</columns>
@@ -4828,117 +5329,150 @@ arrangements/unique circumstances for any requested wish participant not residin
         <filters>
             <field>CASES.RECORDTYPE</field>
             <operation>equals</operation>
-            <value>Case.Diagnosis_Verification_Review</value>
+            <value>Case.Wish</value>
         </filters>
-        <label>Diagnosis Verification Review</label>
+        <filters>
+            <field>ChapterName__c</field>
+            <operation>equals</operation>
+            <value>Make-A-Wish Arizona</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.LAST_NAME</field>
+            <operation>notContain</operation>
+            <value>Rosvall,Astrain,Snyder,Inostroza</value>
+        </filters>
+        <label>Arizona - Reassign Wishes</label>
     </listViews>
     <listViews>
-        <fullName>East_Tennessee_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>East Tennessee</label>
-        <queue>East_Tennessee</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Eastern_North_Carolina_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Eastern North Carolina</label>
-        <queue>Eastern_North_Carolina</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Georgia_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Georgia</label>
-        <queue>Georgia</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Greater_Bay_Area_Case</fullName>
+        <fullName>Arizona_Wishes_to_Reassign_Marissa</fullName>
+        <booleanFilter>1 AND 9 AND 10 AND 2 AND ((3 AND 4) OR (5 AND 6) OR (7 AND 8))</booleanFilter>
+        <columns>OWNER_NAME</columns>
+        <columns>CONTACT.FIRST_NAME</columns>
+        <columns>CONTACT.LAST_NAME</columns>
+        <columns>NAME</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>Wish_Type__c</columns>
+        <columns>Anticipated_Start_Date__c</columns>
+        <columns>Start_Date__c</columns>
+        <columns>End_Date__c</columns>
         <filterScope>Everything</filterScope>
-        <label>Greater Bay Area</label>
+        <filters>
+            <field>ChapterName__c</field>
+            <operation>equals</operation>
+            <value>Make-A-Wish Arizona</value>
+        </filters>
+        <filters>
+            <field>CASES.STATUS</field>
+            <operation>notEqual</operation>
+            <value>Qualified,Ready to Assign,Ready to Interview,Closed,DNQ</value>
+        </filters>
+        <filters>
+            <field>End_Date__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>9/1/2016</value>
+        </filters>
+        <filters>
+            <field>End_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>8/31/2017</value>
+        </filters>
+        <filters>
+            <field>Anticipated_Start_Date__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>9/1/2016</value>
+        </filters>
+        <filters>
+            <field>Anticipated_Start_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>8/31/2017</value>
+        </filters>
+        <filters>
+            <field>Start_Date__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>9/1/2016</value>
+        </filters>
+        <filters>
+            <field>Start_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>8/31/2017</value>
+        </filters>
+        <filters>
+            <field>Wish_Assist__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>CORE.USERS.FIRST_NAME</field>
+            <operation>equals</operation>
+            <value>Carlos</value>
+        </filters>
+        <label>Arizona - Wishes to Reassign - Marissa</label>
         <sharedTo>
-            <allInternalUsers></allInternalUsers>
-            <group>Greater_Bay_Area</group>
-            <group>National_Office</group>
+            <role>National_Staff</role>
         </sharedTo>
     </listViews>
     <listViews>
-        <fullName>Greater_Los_Angeles_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Greater Los Angeles</label>
-        <queue>Greater_Los_Angeles</queue>
+        <fullName>Arizona_YTD_WISHES</fullName>
+        <booleanFilter>1 AND ((2 AND 3 AND 4) OR (5 AND 6) OR (7 AND 8)) AND 9</booleanFilter>
+        <columns>OWNER_NAME</columns>
+        <columns>CONTACT.FIRST_NAME</columns>
+        <columns>CONTACT.LAST_NAME</columns>
+        <columns>NAME</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>Wish_Type__c</columns>
+        <columns>Anticipated_Start_Date__c</columns>
+        <columns>Start_Date__c</columns>
+        <columns>End_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ChapterName__c</field>
+            <operation>equals</operation>
+            <value>Make-A-Wish Arizona</value>
+        </filters>
+        <filters>
+            <field>CASES.STATUS</field>
+            <operation>notEqual</operation>
+            <value>Qualified,Ready to Assign,Ready to Interview,Closed,DNQ</value>
+        </filters>
+        <filters>
+            <field>End_Date__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>9/1/2016</value>
+        </filters>
+        <filters>
+            <field>End_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>8/31/2017</value>
+        </filters>
+        <filters>
+            <field>Anticipated_Start_Date__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>9/1/2016</value>
+        </filters>
+        <filters>
+            <field>Anticipated_Start_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>8/31/2017</value>
+        </filters>
+        <filters>
+            <field>Start_Date__c</field>
+            <operation>greaterOrEqual</operation>
+            <value>9/1/2016</value>
+        </filters>
+        <filters>
+            <field>Start_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>8/31/2017</value>
+        </filters>
+        <filters>
+            <field>Wish_Assist__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>Arizona - YTD WISHES</label>
         <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Greater_Pennsylvania_West_Virginia_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Greater Pennsylvania &amp; West Virginia</label>
-        <queue>Greater_Pennsylvania_West_Virginia</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Greater_Virginia_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Greater Virginia</label>
-        <queue>Greater_Virginia</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Guam_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Guam</label>
-        <queue>Guam</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Hawaii_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Hawaii</label>
-        <queue>Hawaii</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Hudson_Valley_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Hudson Valley</label>
-        <queue>Hudson_Valley</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Idaho_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Idaho</label>
-        <queue>Idaho</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Illinois_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Illinois</label>
-        <queue>Illinois</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
+            <group>Arizona</group>
+            <role>National_Staff</role>
         </sharedTo>
     </listViews>
     <listViews>
@@ -4968,113 +5502,6 @@ arrangements/unique circumstances for any requested wish participant not residin
         <label>Interview Date in Next 14 Days</label>
     </listViews>
     <listViews>
-        <fullName>Interview_date_past_No_paperwork</fullName>
-        <columns>CASES.CASE_NUMBER</columns>
-        <columns>NAME</columns>
-        <columns>CASES.STATUS</columns>
-        <columns>Interview_date__c</columns>
-        <columns>Qualified_Date__c</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>CASES.RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Case.Wish</value>
-        </filters>
-        <filters>
-            <field>Interview_date__c</field>
-            <operation>lessThan</operation>
-            <value>TODAY</value>
-        </filters>
-        <filters>
-            <field>Interview_date__c</field>
-            <operation>greaterOrEqual</operation>
-            <value>N_DAYS_AGO:5</value>
-        </filters>
-        <label>Interview date past - No paperwork</label>
-    </listViews>
-    <listViews>
-        <fullName>Iowa_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Iowa</label>
-        <queue>Iowa</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Kansas_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Kansas</label>
-        <queue>Kansas</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Maine_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Maine</label>
-        <queue>Maine</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Massachusetts_Rhode_Island_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Massachusetts &amp; Rhode Island</label>
-        <queue>Massachusetts_Rhode_Island</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Metro_New_York_Western_New_York_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Metro New York &amp; Western New York</label>
-        <queue>Metro_New_York_Western_New_York</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Michigan_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Michigan</label>
-        <queue>Michigan</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Mid_Atlantic_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Mid-Atlantic</label>
-        <queue>Mid_Atlantic</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Mid_South_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Mid-South</label>
-        <queue>Mid_South</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Middle_Tennessee_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Middle Tennessee</label>
-        <queue>Middle_Tennessee</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
         <fullName>Migration</fullName>
         <columns>CASES.CASE_NUMBER</columns>
         <columns>NAME</columns>
@@ -5093,305 +5520,82 @@ arrangements/unique circumstances for any requested wish participant not residin
             <value>iuser</value>
         </filters>
         <label>Migration</label>
-    </listViews>
-    <listViews>
-        <fullName>Minnesota_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Minnesota</label>
-        <queue>Minnesota</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Mississippi_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Mississippi</label>
-        <queue>Mississippi</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Missouri_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Missouri</label>
-        <queue>Missouri</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Montana_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Montana</label>
-        <queue>Montana</queue>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
     </listViews>
     <listViews>
         <fullName>MyCases</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>Wish_Complexity__c</columns>
+        <columns>Anticipated_Start_Date__c</columns>
         <filterScope>Mine</filterScope>
+        <filters>
+            <field>CASES.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Case.Wish</value>
+        </filters>
         <label>My Cases</label>
+        <sharedTo>
+            <allInternalUsers></allInternalUsers>
+        </sharedTo>
     </listViews>
     <listViews>
         <fullName>MyOpenCases</fullName>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>Anticipated_Start_Date__c</columns>
+        <columns>CASES.STATUS</columns>
+        <columns>Wish_Complexity__c</columns>
         <filterScope>Mine</filterScope>
         <filters>
             <field>CASES.CLOSED</field>
             <operation>equals</operation>
             <value>0</value>
         </filters>
-        <label>My Open Cases</label>
-    </listViews>
-    <listViews>
-        <fullName>NE_California_N_Nevada_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>NE California &amp; N Nevada</label>
-        <queue>NE_California_N_Nevada</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Nebraska_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Nebraska</label>
-        <queue>Nebraska</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>New_Hampshire_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>New Hampshire</label>
-        <queue>New_Hampshire</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>New_Jersey_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>New Jersey</label>
-        <queue>New_Jersey</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>New_Mexico_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>New Mexico</label>
-        <queue>New_Mexico</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>North_Dakota_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>North Dakota</label>
-        <queue>North_Dakota</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>North_Texas_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>North Texas</label>
-        <queue>North_Texas</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Northeast_New_York_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Northeast New York</label>
-        <queue>Northeast_New_York</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Ohio_Kentucky_Indiana_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Ohio, Kentucky &amp; Indiana</label>
-        <queue>Ohio_Kentucky_Indiana</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Oklahoma_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Oklahoma</label>
-        <queue>Oklahoma</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Orange_County_the_Inland_Empire_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Orange County &amp; the Inland Empire</label>
-        <queue>Orange_County_the_Inland_Empire</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Oregon_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Oregon</label>
-        <queue>Oregon</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Parent_Wish</fullName>
-        <columns>CASES.CASE_NUMBER</columns>
-        <columns>NAME</columns>
-        <columns>CASES.SUBJECT</columns>
-        <columns>CASES.STATUS</columns>
-        <columns>CASES.PRIORITY</columns>
-        <columns>CASES.CREATED_DATE</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <filterScope>Everything</filterScope>
         <filters>
             <field>CASES.RECORDTYPE</field>
             <operation>equals</operation>
             <value>Case.Wish</value>
         </filters>
-        <label>Parent Wish</label>
-    </listViews>
-    <listViews>
-        <fullName>Philadelphia_N_Delaware_Susquehanna_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Philadelphia, N Delaware &amp; Susquehanna</label>
-        <queue>Philadelphia_N_Delaware_Susquehanna</queue>
+        <label>My Open Cases</label>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
     </listViews>
     <listViews>
-        <fullName>Puerto_Rico_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Puerto Rico</label>
-        <queue>Puerto_Rico</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Rio_Grande_Valley_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Rio Grande Valley</label>
-        <queue>Rio_Grande_Valley</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>San_Diego_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>San Diego</label>
-        <queue>San_Diego</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>South_Carolina_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>South Carolina</label>
-        <queue>South_Carolina</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>South_Dakota_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>South Dakota</label>
-        <queue>South_Dakota</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Southern_Florida_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Southern Florida</label>
-        <queue>Southern_Florida</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Southern_Nevada_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Southern Nevada</label>
-        <queue>Southern_Nevada</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Suffolk_County_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Suffolk County</label>
-        <queue>Suffolk_County</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Texas_Gulf_Coast_Louisiana_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Texas Gulf Coast &amp; Louisiana</label>
-        <queue>Texas_Gulf_Coast_Louisiana</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Tri_Counties_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Tri-Counties</label>
-        <queue>Tri_Counties</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Utah_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Utah</label>
-        <queue>Utah</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Vermont_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Vermont</label>
-        <queue>Vermont</queue>
-        <sharedTo>
-            <allInternalUsers></allInternalUsers>
-        </sharedTo>
-    </listViews>
-    <listViews>
-        <fullName>Wisconsin_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Wisconsin</label>
-        <queue>Wisconsin</queue>
+        <fullName>My_Wishes_Budget_Pending</fullName>
+        <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
+        <columns>CASES.CASE_NUMBER</columns>
+        <columns>NAME</columns>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>CASES.SUBJECT</columns>
+        <columns>CASES.STATUS</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Budget_Status__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>Budget_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Approved</value>
+        </filters>
+        <filters>
+            <field>Projected_Status__c</field>
+            <operation>notEqual</operation>
+        </filters>
+        <filters>
+            <field>Projected_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Approved</value>
+        </filters>
+        <label>My Cases Budget Pending</label>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
@@ -5400,92 +5604,54 @@ arrangements/unique circumstances for any requested wish participant not residin
         <fullName>Wish_Assist</fullName>
         <columns>CASES.CASE_NUMBER</columns>
         <columns>NAME</columns>
+        <columns>Anticipated_Start_Date__c</columns>
         <columns>CASES.SUBJECT</columns>
         <columns>CASES.STATUS</columns>
-        <columns>CASES.PRIORITY</columns>
-        <columns>CASES.CREATED_DATE</columns>
         <columns>CORE.USERS.ALIAS</columns>
         <filterScope>Everything</filterScope>
         <filters>
-            <field>CASES.RECORDTYPE</field>
+            <field>Wish_Assist__c</field>
             <operation>equals</operation>
-            <value>Case.Wish_Assist</value>
+            <value>1</value>
         </filters>
         <label>Wish Assist</label>
     </listViews>
     <listViews>
-        <fullName>Wish_Determination</fullName>
+        <fullName>X30_days_to_Start_Date</fullName>
+        <booleanFilter>1 AND (2 OR 3) AND (4 OR 5)</booleanFilter>
         <columns>CASES.CASE_NUMBER</columns>
-        <columns>NAME</columns>
         <columns>CASES.SUBJECT</columns>
+        <columns>NAME</columns>
         <columns>CASES.STATUS</columns>
-        <columns>CASES.PRIORITY</columns>
-        <columns>CASES.CREATED_DATE</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <filterScope>Everything</filterScope>
+        <columns>Anticipated_Start_Date__c</columns>
+        <columns>Start_Date__c</columns>
+        <filterScope>Mine</filterScope>
         <filters>
             <field>CASES.RECORDTYPE</field>
             <operation>equals</operation>
-            <value>Case.Wish_Determination</value>
+            <value>Case.Wish</value>
         </filters>
-        <label>Wish Determination</label>
-    </listViews>
-    <listViews>
-        <fullName>Wish_Effect</fullName>
-        <columns>CASES.CASE_NUMBER</columns>
-        <columns>NAME</columns>
-        <columns>CASES.SUBJECT</columns>
-        <columns>CASES.STATUS</columns>
-        <columns>CASES.PRIORITY</columns>
-        <columns>CASES.CREATED_DATE</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <filterScope>Everything</filterScope>
         <filters>
-            <field>CASES.RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Case.Wish_Effect</value>
+            <field>Anticipated_Start_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>NEXT_N_DAYS:30</value>
         </filters>
-        <label>Wish Effect</label>
-    </listViews>
-    <listViews>
-        <fullName>Wish_Granted</fullName>
-        <columns>CASES.CASE_NUMBER</columns>
-        <columns>NAME</columns>
-        <columns>CASES.SUBJECT</columns>
-        <columns>CASES.STATUS</columns>
-        <columns>CASES.PRIORITY</columns>
-        <columns>CASES.CREATED_DATE</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <filterScope>Everything</filterScope>
         <filters>
-            <field>CASES.RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Case.Wish_Granted</value>
+            <field>Start_Date__c</field>
+            <operation>lessOrEqual</operation>
+            <value>NEXT_N_DAYS:30</value>
         </filters>
-        <label>Wish Granted</label>
-    </listViews>
-    <listViews>
-        <fullName>Wish_Planning</fullName>
-        <columns>CASES.CASE_NUMBER</columns>
-        <columns>NAME</columns>
-        <columns>CASES.SUBJECT</columns>
-        <columns>CASES.STATUS</columns>
-        <columns>CASES.PRIORITY</columns>
-        <columns>CASES.CREATED_DATE</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <filterScope>Everything</filterScope>
         <filters>
-            <field>CASES.RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Case.Wish_Planning_Anticipation</value>
+            <field>Anticipated_Start_Date__c</field>
+            <operation>greaterThan</operation>
+            <value>TOMORROW</value>
         </filters>
-        <label>Wish Planning</label>
-    </listViews>
-    <listViews>
-        <fullName>Wyoming_Case</fullName>
-        <filterScope>Queue</filterScope>
-        <label>Wyoming</label>
-        <queue>Wyoming</queue>
+        <filters>
+            <field>Start_Date__c</field>
+            <operation>greaterThan</operation>
+            <value>TOMORROW</value>
+        </filters>
+        <label>&lt;30 days to Start Date</label>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
@@ -5670,6 +5836,18 @@ arrangements/unique circumstances for any requested wish participant not residin
         <label>Wish</label>
         <picklistValues>
             <picklist>Adoptable__c</picklist>
+            <values>
+                <fullName>Check with Wish Manager</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Dedicated</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hold</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>No</fullName>
                 <default>false</default>
@@ -7188,7 +7366,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <searchResultsAdditionalFields>CASES.CREATED_DATE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Private</sharingModel>
+    <sharingModel>Read</sharingModel>
     <validationRules>
         <fullName>Absent_Parent_Form_Validation</fullName>
         <active>false</active>
@@ -7212,6 +7390,21 @@ arrangements/unique circumstances for any requested wish participant not residin
         <errorConditionFormula>AND(ISPICKVAL(Meet_PWL_Criteria__c ,&apos;No&apos;), ISBLANK(Comment_for_PWL_Not_Met__c),Migrated_Record__c=false)</errorConditionFormula>
         <errorDisplayField>Comment_for_PWL_Not_Met__c</errorDisplayField>
         <errorMessage>Please enter an explanation why &apos;No&apos; is selected for &apos;Meet PWL Criteria&apos;</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Presentation_Date_Validation</fullName>
+        <active>true</active>
+        <description>Used to check whether the give date is past</description>
+        <errorConditionFormula>ISCHANGED(Presentation_Date__c ) &amp;&amp;  Presentation_Date__c  &lt; Today()  &amp;&amp;  Migrated_Record__c = false</errorConditionFormula>
+        <errorDisplayField>Presentation_Date__c</errorDisplayField>
+        <errorMessage>Presentation date should not be lesser than today</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Presentation_Set_Validation</fullName>
+        <active>true</active>
+        <description>Used to check value for Presentation Date and Presentation set fields. Both are required we cannot left one as blank</description>
+        <errorConditionFormula>AND(OR(ISCHANGED( Presentation_Date__c ),Wish_Presentation_Set__c = true) ,Migrated_Record__c = false, OR(AND(NOT(ISBLANK(Presentation_Date__c )),Wish_Presentation_Set__c = false),AND(Wish_Presentation_Set__c = true, ISBLANK( Presentation_Date__c ))))</errorConditionFormula>
+        <errorMessage>Wish Presentation Set or Wish Presentation Date cannot be blank</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Ready_to_Assign_Validation</fullName>
@@ -7266,7 +7459,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
     <validationRules>
         <fullName>Diagnosis_Verification_Received_Date</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK( diagnosis_verificaion_receive_date__c ))</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Completed&apos;),ISBLANK(  Diagnosis_Verification_Receive_Date__c ))</errorConditionFormula>
         <errorDisplayField>Absent_Parent_Form__c</errorDisplayField>
         <errorMessage>Diagnosis Verification Received Date should not be Blank.</errorMessage>
     </validationRules>
@@ -7414,7 +7607,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <protected>false</protected>
         <showsLocation>false</showsLocation>
         <showsStatus>false</showsStatus>
-        <url>https://www.avis.com</url>
+        <url>https://www.avis.com/en/reservation/make-reservation</url>
     </webLinks>
     <webLinks>
         <fullName>Create_New_Case</fullName>
@@ -7503,7 +7696,7 @@ else
         <url>https://www.gktwresv.org:9000</url>
     </webLinks>
     <webLinks>
-        <fullName>GKTW_Wish_Granting_Orgs</fullName>
+        <fullName>GKTW_WGO_s</fullName>
         <availability>online</availability>
         <description>GKTW/ Wish Granting Orgs link.</description>
         <displayType>link</displayType>
@@ -7514,7 +7707,7 @@ else
         <height>600</height>
         <isResizable>true</isResizable>
         <linkType>url</linkType>
-        <masterLabel>GKTW/ Wish Granting Orgs</masterLabel>
+        <masterLabel>GKTW/WGO&apos;s</masterLabel>
         <openType>newWindow</openType>
         <position>none</position>
         <protected>false</protected>
@@ -7617,7 +7810,7 @@ else
 }</url>
     </webLinks>
     <webLinks>
-        <fullName>Make_A_Wish</fullName>
+        <fullName>Make_A_Wish_America</fullName>
         <availability>online</availability>
         <description>Make A Wish Link</description>
         <displayType>link</displayType>
@@ -7628,7 +7821,7 @@ else
         <height>600</height>
         <isResizable>true</isResizable>
         <linkType>url</linkType>
-        <masterLabel>Make-A-Wish</masterLabel>
+        <masterLabel>Make-A-Wish America</masterLabel>
         <openType>newWindow</openType>
         <position>none</position>
         <protected>false</protected>

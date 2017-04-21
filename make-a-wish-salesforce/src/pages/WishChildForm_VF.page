@@ -1,688 +1,452 @@
-<apex:page standardController="case" extensions="WishChildForm_AC"  standardStylesheets="false" title="Make-A-Wish Communities | Wish Child Form" showHeader="false" sidebar="false" docType="html-5.0">
-    
-    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" />
-    <apex:includeScript value="https://ajax.microsoft.com/ajax/jquery.validate/1.6/jquery.validate.min.js"/>
-    
-    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/> 
-   <!--<apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap.min.css')}" />-->
-    <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap-theme.min.css')}" />
-    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap.min.js')}"/>
-    <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign_Copy, 'css/page.css')}" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"/>
-    <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/datepicker.min.css')}" />
-    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap-datepicker.min.js')}"/>
-    <apex:includeScript value="{!URLFOR($Resource.prospective_assets,'web/js/jq.maskedinput.min.js')}" />
-    <apex:include pageName="prospective_head" id="phead" />  
-    <title>    </title>
-    <style>
-        .dateFormat{display:none !important}
-        @media (max-width: 480px) {
-        .header-logo{height:60px !important;margin-left:21% !important;}
-        }
-         @media (max-width: 768px) {
-         .custMenu{width:100% !important;font-size:large !important;text-align:left !important};
-      }
-      
-      .clearBoth{clear:both};
-        .alert {
-        padding: 0px!important;
-        border: 0px solid transparent!important;
-        }
-        .messageText{
-            padding:10px;
-        }
-        .form-control {
-        height:inherit; !important
-        }
-        .sideNav {
-            position: fixed;
-        font-weight:bold;
-            z-index: 99;
-            top: 140px;
-            left: 5px;
-        }
-        .sideNav .navMenu {font-weight : 900;color:#0076d2;text-decoration:none;}
-        .sideNav a {
-            text-decoration : none !important;
-        }
-        header,main {max-width : 1000px !important;}
-    </style>
-      <style type="text/css">
-           .vfHelpText a            {position:relative;}
-           .vfHelpText a span       {display: none;}
-           .vfHelpText a:hover span {display: block;
-            position:absolute;
-            right:-15em; width:15em;
-            z-index:100;
-            border:1px solid #006bb;
-            background-color:#FEFDB9;
-            color:black;
-            }
-            
-           .pop-wrap, .pop-wrap-main-message {
-            position:fixed;
-            top: 20%;
-            left: 50%;
-            z-index: 9999;
-            width:90%;
-            max-width:35rem;
-            }
-            
-           .custPopup, .custPopup-main-message{
-            font-family:"arial", helvetica, sans-serif;
-            position: relative;
-            background: white;
-            border: 1px solid #006bb6;
-            border-radius: .25rem;
-            top: -20%;
-            left: -50%;
-            padding:1rem;
-            width: 100%;
-            height: auto;
-            padding: 5% 15% 15% 10%;
-            }
-            
-           .pop-wrap-main-message {top: 1%}
-           .custPopup-main-message{top: 0; padding:0 1rem 0;}
-            
-           .popupBackground{
-            position: fixed;
-            background: rgba(0,0,0,.4);
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 9998;
-            }
-            
-            .labelCol{width:180px;}
-            .sideNav {
-            position: fixed;
-            z-index: 99;
-            top: 140px;
-            left: 5px;
-        }
-        .sideNav .navMenu {font-weight : 900;color:#0076d2;text-decoration:none;}
-        .sideNav a {
-            text-decoration : none !important;
-        }
-        header,main {max-width : 1000px !important;} 
-        
-        
-        .active {
-        font-weight:600;
-        font-size: 18px;
-       -webkit-animation:fade-in 1s infinite;
-       
-        }  
-      .activeClassCommunity{background:#2184cc !important;color:#000000 !important;border:solid 1px #2184cc !important;}
-      .custMenuCommunity{margin:1px;border:solid 1px #2184cc;float: left;width: 23%;color: #ffffff;font-size:small; background: #c7c7c7;padding: 6px;text-align: center;user-select: none;cursor: pointer;}
-      
-      /* .popupBackground{
-            background-color:black;
-            opacity: 0.20;
-            filter: alpha(opacity = 20);
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 9998;
-        }*/
-        
-        .custPopup1{
-            background-color: white;
-            border-width: 0px;
-            border-style: solid;
-            z-index: 9999;
-            left: 0%;
-            padding:10px;
-            position: absolute;
-            /* These are the 3 css properties you will need to change so the popup 
-            displays in the center of the screen. First set the width. Then set 
-            margin-left to negative half of what the width is. You can add 
-            the height property for a fixed size pop up if you want.*/
-            width: 500px;
-            margin-left: -250px;
-            top:100px;
-        }
-      
-          
-      </style>
-    
-    <script>
-    
-   $(document).ready(function(){ 
-       
-        $('.readonly').attr("readonly","readonly");
-        $(".numeric").keyup(function(){
-            var x = $(".a").val();
-            if(validate(x)){
-                alert('Please Enter Valid Phone Number');
-            }
-        });
-        $(".my-phon").mask("(999) 999-9999");
-        $(".readonly").attr('readonly', 'readonly');
+<apex:page standardController="case" extensions="WishChildForm_AC" id="wcf" title="Wish Child Form | Make-A-Wish Communities" standardStylesheets="false" showHeader="false" applyHtmlTag="false" sidebar="false" docType="html-5.0">
+    <apex:include pageName="prospective_head" id="phead" />
 
-        $('.collapse a').click(function() {
-               $('.active').removeClass('active');
-               $('.'+$(this).attr('class')).addClass('active');
-           });
-        
-         $('.collapse a').click(function() { 
-           $('.active').removeClass('active');
-           $('.'+$(this).attr('class')).addClass('active');                      
-       });
-        
-         $(".phonecheck").click(function(){
-            
-            var x = $(".a").val();
-            
-            if(validate(x)){
-                alert('Please Enter Valid Phone Number');
-                return false;
-             }
-             
-           else if(x !='')
-            {
-                  x= x.replace("(", "");
-                  x= x.replace(")", "");
-                  x= x.replace("-", "");
-                  x= x.replace(" ", "");
-                 if(x.length<10 || x.length>10)
-                 {
-                  alert('Please Enter 10 digit Phone number');
-                  return false;
-                 }
-            }
-            
-              
-        });
-        
-        function validate(a)
-        {
-        
-            var x = a;
-            x= x.replace("(", "");
-            x= x.replace(")", "");
-            x= x.replace("-", "");
-            x= x.replace(" ", "");
-        
-            if(x != '')
-            {
-                if(!$.isNumeric(x))
-                   return true;
-            }
-        }
-        
-        
-        
-        
-        var windw = this;        
-        $.fn.followTo = function ( pos ) {
-            var $this = this,
-            $window = $(windw);
-         $window.scroll(function(e){
-            if ($window.scrollTop() > pos) {
-                $this.css({
-                    position: 'absolute',
-                    top: pos
-                  });
-             }
-            else {
-                $this.css({
-                position: 'fixed',
-                top: 200
-               });
-             }
-           });
-         };
-        
-        $('.sticky').followTo($(".clearBoth").height()-250);
-                 
-       
-    });
-    
-   
-    function ClickToValidate(){       
-        
-           var runBool = true;
-           $('.required').each(function(){
-               if($(this).val() == '' || $(this).val() == null ){
-                   runBool = false;
-                   alert("Please fill all required fields");
-                   return false;
-               }
-                  
-           });
-           if(!runBool){
-              return false;
-              }
-           else{
-              var a = validateEmail();
-              if(a)
-                  return true;
-              else
-                  return false;
-              }
-        }
-        
-       function validateEmail() {
-       var isBool=true; 
-       $('.emailValue').each(function(){ 
-       var filter = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
-            if($(this).val()!= '' && $(this).val()!= null){
-                if (!filter.test($(this).val())){
-                  isBool = false;
-                  //alert('Invalid email address, please enter a valid email address or leave as blank');                   
-                    if($('.Yes').val() == "Yes" && $('.Yes').val() == null){
-                        $('.Yes').css('border', '2px red solid');
-                    }
-                }
-              }
-             
-        }); 
+    <body class="vcp vcpactivelogin" id="top">
+      <apex:include pageName="active_header" id="pheaderActive" rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
+      <apex:include pageName="wishFamilyForm_header_active" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />
+<input type="hidden" value="WishchildForm_VF_2" class="pageName"/>
+      <main role="main" class="container">
+        <div class="row">
+          <section class="col-md-12">
+            <div class="row">
+                <h1 class="col-md-12">Wish Child</h1>
+            </div>
+            <apex:form id="frm">
+            <apex:actionFunction action="{!SaveandWishChildExit}" name="callConfirmSave" reRender="test"/>
+             <apex:actionFunction action="{!withOutNavigate}" name="navigatWithoutSave"/>
+             <apex:actionFunction action="{!WCFtoWFF}" name="SaveWishChildtoWff" reRender="tesee"/>
+              <apex:actionFunction action="{!WCFtoWIF}" name="SaveWishChildtoWInfo"  reRender="tefsee"/>
+              <apex:actionFunction action="{!withOutSaveWCCF}" name="WithoutSaveChildFormToWFF" reRender="tefsee"/>
+              <apex:actionFunction action="{!withOutSavefromWCFtoWIF}" name="WithoutSaveChildFormToWIF" reRender="tefsee"/>
+              <apex:actionFunction action="{!RetrunToWish}" name="ReturnToWish" reRender="qquuqq"/>
+              <apex:actionFunction action="{!cancelfunction}" name="ReturnToWishWithOutSave" reRender="qqququu"/>
+              <div class="step-base">
+                <span class="step-tether nav-down">
+                  <nav>
+                      <ul class="step">
+                          <li> <apex:commandLink value="Wish Child" styleClass="disabled current" />
+                            <ul class="anchor-links"></ul>
+                          </li>
+                          <li><apex:commandLink value="Wish Family" onclick="preventDefault();"  html-data-toggle="modal" html-data-target="#wffsame-alert" /></li>
+                          <li><apex:commandLink value="Wish Information" onclick="preventDefault();" html-data-toggle="modal" html-data-target="#wifsame-alert" /></li>
+                      </ul>
+                      <div class="nav-sub-inner hidden-sm-down">
+                        <a href="#top" class="hidden-md-down">&uarr; Back to Top</a>
+                        <apex:commandbutton value="Save" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert"/>
+                        <apex:Commandbutton value="Next" styleClass="btn-md" html-data-toggle="modal" html-data-target="#wffsame-alert"/>
 
-          if(!isBool ){
-              $($('.errorMsg').text("Invalid email address, please enter a valid email address or leave as blank")).css('color', 'Red');           
-              return false;
-          }
-          else{
-             
-              return true;
-          }
-       }
-        
-      
-        
-    </script>
-    
-    <body class="vcp vcpactivelogin full registered profile">
+                      </div>
+                  </nav>
+                </span>
+              </div>
 
-       <apex:include pageName="active_header" id="pheaderActive"  rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
-       <apex:include pageName="active_header_Inside_Salesforce" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />
-       <div style="width:60%;height:100px;margin-left:25%;margin-right:25%;"><apex:include pageName="active_header_progress_bar" id="pheaderprog" rendered="{!if($Profile.Name<>"Active Volunteer",true,true)}" /></div>      
-       <apex:form id="ChildForm">
-                <main role="main" class="container clearBoth">
-                    <div class="sideNav sticky">
-                   <a data-toggle="collapse" href="#childForm">
-                       [+]      
-                    </a>
-                    
-                    <apex:commandLink action="{!SaveandRedirectChildForm}" value="Wish Child Form" />
-                    <!--<a class="navMenu" href="{!wcfUtil.childForm}" >Wish Child Form</a>-->
-                    <div id="childForm" class="panel-collapse collapse">
-                       <a href="#mainSec" class="mainSec">Main Section</a><br/> 
-                       <a href="#myFav" class="myFav">My Favorites</a><br/> 
-                       <a href="#otherFav" class="otherFav">Other Favorites</a><br/>  
-                       <a href="#MyWish" class="MyWish">My Wish</a> 
-                                          
-                   </div>
-                    <br/> 
-                   <!--<a data-toggle="collapse" href="#familyForm">
-                       [+]                     
-                    </a>-->
-                    <apex:commandLink action="{!WCFNext}" value="Wish Family Form"  Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="mg-rt phonecheck"  />
-                    <!--<a class="navMenu" href="{!wcfUtil.familyForm}">Wish Family Form</a>
-                     <div id="familyForm" class="panel-collapse collapse">
-                       <a href="#parentInfo">Gaurdian information</a><br/> 
-                       <a href="#reqSign">Required Signatures</a><br/> 
-                       <a href="#participantsInfo">Participants Info</a>                      
-                   </div>-->
-                    <br/>
-                    <!--<a data-toggle="collapse" href="#infoForm">
-                       [+]                       
-                    </a>-->
-                    <apex:commandLink action="{!WishInfoSave}" value="Wish Information Form" Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="mg-rt phonecheck" />
-                   <!-- <a class="navMenu" href="{!wcfUtil.infoForm}">Wish Information Form</a>
-                     <div id="infoForm" class="panel-collapse collapse">
-                       <a href="#schedule">Scheduling</a><br/> 
-                       <a href="#driverInfo">Driver Information</a><br/> 
-                       <a href="#medInfo">Medical Information</a><br/> 
-                       <a href="#travelInfo">Travel Information</a>                      
-                   </div>-->
-                </div>
-    
-        <!------------------ Wish Child Form Starts ------------------------>
-             
-        <apex:pageblock >
-        <div class="row" style="margin-left:25%;">
-                        <div class="col-sm-12">
-                            <div class="text-center">
-                                 <apex:Commandbutton value="Save" action="{!SaveandwishChildExit}" Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="btn btn-default mg-rt phonecheck" />
-                                 <apex:Commandbutton value="Next" action="{!WCFNext}" Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="btn btn-default mg-rt phonecheck" />
-                                  <apex:Commandbutton value="Exit" action="{!cancelfunction}" style="margin-left: 10px;" reRender="popup"  styleClass="btn btn-default" immediate="true"/>
-                               </div>
-                        </div>
-                    </div>
-            
-            <div class="container">
-                
-              <!--  <div class="row header-padding">
-                    <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/MakeAWishAmerica.PNG')}" styleClass="header-logo"/>
-                    <center><p class="header-text">WISH CHILD FORM</p></center>
-                </div> -->
-                <div class="container-body">
-                    <div class="row top-space" id="mainSec">
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label for="FirstName">Wish Child Name:</label>
-                                <apex:inputField value="{!currWishChild.FirstName__c}" id="fname" html-placeholder="FirstName" styleClass="form-control required" style="border-left:5px solid red"/>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="MiddleName">Middle Name:</label>
-                                <apex:inputField Value="{!currWishChild.Middle_Name__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="LastName">Last Name:</label>
-                                <apex:inputField Value="{!currWishChild.LastName__c}" styleClass="form-control required" style="border-left:5px solid red"/>
+              <div class="messages"><apex:pagemessages /></div>
+              <div class="row">
+                <!-- <apex:actionFunction name="uiLogic" rerender="membAdd" /> -->
+                <apex:pageBlock >
+                <div class="container">
+                  <!-- wish child info -->
+                  <fieldset id="wish-child-info">
+                    <legend>Wish Child Information</legend>
+                    <span class="info">Please fill the fields below.</span>
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3" for="wcf:frm:firstname" aria-labelledby="Child Name">Name</label>
+                            <div class="col-sm-6 text-muted">
+                                <apex:inputField value="{!currWishChild.FirstName__c}" id="firstname" styleClass="form-control firstname" html-maxlength="50" html-placeholder="First Name" />
                             </div>
                         </div>
-                        <div class="row top-space">
-                            <div class="form-group col-md-4">
-                                <label for="PreferredName">Preferred Name:</label>
-                                <apex:inputField value="{!currWishChild.Preferred_Name__c}" styleClass="form-control"/>
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:middlename" class="sr-only" aria-label="Middle Name">Middle Name</label></div>
+                            <div class="col-sm-6">
+                                <apex:inputField value="{!currWishChild.Middle_Name__c}" id="middlename" styleclass="form-control" html-maxlength="50" html-placeholder="Middle Name (Optional)" />
                             </div>
-                            
-                            <div class="form-group col-md-4">
-                                <label for="Gender">Gender:</label>
-                                <apex:inputField value="{!currWishChild.Gender__c}" styleClass="form-control required" style="border-left:5px solid red"/>
-                            </div>
-                            
-                            <div class="form-group col-sm-4">
-                                <label for="email">DOB:</label>
-                                <div class="form-group input-group">
-                                    <label class="input-group-btn" for="date-input" style="cursor:pointer">
-                                        <span class="btn btn-default">
-                                            <span class="fa fa-calendar"></span>
-                                        </span>
-                                    </label>
-                                    <apex:inputField value="{!currWishChild.BirthDate__c}" styleClass="form-control date-input required" id="date-input" style="height:38px;border-left:5px solid red" />
-                                </div> 
-                            </div>
-                          
+                            <div class="col-sm-3 sr-only"><i class="text-muted">Optional</i></div>
                         </div>
-                        <div class="row top-space">
-                            <div class="form-group col-md-6">
-                                <label for="Medical Condition">Wish Child’s Diagnosis:</label>
-                                <apex:inputField value="{!currWishChild.Diagnosis__c}" styleClass="form-control required readonly" style="border-left:5px solid red"/>
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:lastname" class="sr-only" aria-label="last_name">Last Name</label></div>
+                            <div class="col-sm-6 lastname">
+                                <apex:inputField value="{!currWishChild.LastName__c}" id="lastname" styleClass="form-control lastname" html-maxlength="50" html-placeholder="Last Name" />
                             </div>
-                         <!--   <div class="form-group col-md-6">
-                                <label for="Primary Address">Wish Child’s Primary Address:</label>
-                                <apex:inputField value="{!currWishChild.Primary_Address__c}" styleClass="form-control required" style="border-left:5px solid red"/>
-                            </div> -->
-                            <div class="form-group col-md-6">
-                                <label for="Mobile">Wish Child’s Mobile Telephone, if applicable:</label>
-                                <apex:inputField value="{!currWishChild.mobilePhone__c}" styleClass="form-control my-phon numeric c  mobilePhone"  onkeypress="return isNumber(event)" />
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:preferredname" class="sr-only" aria-label="last_name">Preferred Name</label></div>
+                            <div class="col-sm-6 lastname">
+                                <apex:inputField value="{!currWishChild.Preferred_Name__c}" id="preferredname" styleClass="form-control" html-maxlength="50" html-placeholder="Preferred Name" />
                             </div>
-                            <div class="form-group col-md-6">
-                                <label for="Email">Wish Child’s Email, if applicable:</label>
-                                <apex:inputField value="{!currWishChild.Email__c}" styleClass="form-control emailValue" />
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:dob" aria-label="Date of Birth">Date of Birth</label></div>
+                            <div class="col-sm-6">
+                                <apex:inputField value="{!currWishChild.BirthDate__c}" id="dob" styleClass="form-control date-input dob" html-maxlength="50" html-placeholder="mm/dd/yyyy" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:gender" aria-label="Gender">Gender</label></div>
+                            <div class="col-sm-6">
+                              <apex:inputField value="{!currWishChild.Gender__c}" id="gender" styleClass="form-control col-xs-12 col-sm-12 c-select required" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:childdiagnosis" aria-label="Wish Child's Diagnosis">Wish Child's Diagnosis</label></div>
+                            <div class="col-sm-6">
+                                <apex:inputField value="{!currWishChild.Diagnosis__c}" id="childdiagnosis" styleClass="form-control readonly" html-title="This field is not editable" html-maxlength="100" html-placeholder="example: Malignant Neoplasm" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:shirtsize" aria-label="Shirt Size">Shirt Size</label></div>
+                            <div class="col-sm-6">
+                                <apex:inputField value="{!currWishChild.T_Shirt_Size__c}" id="shirtsize" styleClass="form-control required" html-maxlength="50" html-placeholder="small, medium, large" />
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:street" aria-labelledby="street">Primary Address</label></div>
+                            <div class="col-sm-6">
+                                <apex:inputField value="{!currWishChild.Street__c}" id="street" styleClass="form-control address" html-maxlength="50" html-placeholder="0000 NE 00 Ave"  />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:city" class="sr-only" aria-labelledby="city">City</label></div>
+                            <div class="col-sm-6">
+                                <apex:inputField value="{!currWishChild.City__c}" id="city" styleClass="form-control city" html-maxlength="50" html-placeholder="City"  />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:state" class="sr-only" aria-labelledby="state">State</label></div>
+                            <div class="col-xs-12 col-sm-6">
+                                <apex:selectList value="{!currWishChild.State__c}" id="state" styleClass="form-control col-xs-12 col-sm-12 c-select state" size="1" >
+                                    <apex:selectOptions value="{!wcfUtil.states}" />
+                                </apex:selectList>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3">
+                                <label for="wcf:frm:postalcode" class="sr-only" aria-labelledby="postalcode">Postal Code</label>
+                            </div>
+                            <div class="col-sm-6">
+                                <apex:inputField value="{!currWishChild.Zip_Code__c}" id="postalcode" styleClass="form-control postalcode numbers-only" html-placeholder="00000-0000" html-maxlength="10" html-minlength="5" />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:mobilephone" aria-labelledby="Mobile Phone">Mobile</label></div>
+                            <div class="col-sm-6">
+                                 <apex:inputField value="{!currWishChild.mobilePhone__c}" id="mobilephone" styleClass="form-control numbers-only phone" html-maxlength="28" html-placeholder="(000) 000-0000 (optional)" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label for="wcf:frm:email" aria-labelledby="email_address">Email</label></div>
+                            <div class="col-sm-6">
+                                <apex:inputField value="{!currWishChild.Email__c}" id="email" styleClass="form-control" html-maxlength="50" html-placeholder="WishChild_email@domain.com (optional)" />
                                 <span class="errorMsg"></span>
                             </div>
-                              <div class="form-group col-md-4">
-                                <label for="Gender">Wish Child T-Shirt Size:</label>
-                                <apex:inputField value="{!currWishChild.T_Shirt_Size__c}" styleClass="form-control required" style="border-left:5px solid red"/>
-                            </div>
                         </div>
-                        
-                        
-                        
-                        <!-------------------------------Address Details ---------------------------------->
-                         <div class="row top-space" id="myFav">
-                            <div class="form-group">
-                                 <span class="text-imp fl col-lg-12">Primary Address:</span>
-                            </div>
-                        </div>
-                         <div class="row top-space">
-                         <div class="form-group col-sm-3">
-                                <label for="Street">Street:</label>
-                                <apex:inputField value="{!currWishChild.Street__c}" styleClass="form-control required" style="border-left:5px solid red"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="City">City:</label>
-                                <apex:inputField value="{!currWishChild.City__c}" styleClass="form-control required" style="border-left:5px solid red"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="State">State:</label>
-                                <apex:selectList value="{!currWishChild.State__c}" size="1" multiselect="false" styleClass="form-control required" style="border-left:5px solid red">
-                                                 <apex:selectoptions value="{!wcfUtil.states}" />
-                                </apex:selectList>
-                               
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Zip">Zip:</label>
-                                <apex:inputField value="{!currWishChild.Zip_Code__c}" styleClass="form-control required" style="border-left:5px solid red"/>
-                            </div>
-                        
-                         </div>
-                        
-                        <!------------------------------- FAVORITE DETAILS -------------------------------->
-                        <div class="row top-space" id="myFav">
-                            <div class="form-group">
-                                <span class="text-imp fl col-lg-12">My Favorites:</span>
-                            </div>
-                        </div>
-                        <div class="row top-space">
-                            <div class="form-group col-sm-3">
-                                <label for="Color">Color:</label>
-                                <apex:inputField value="{!currWishChild.Color__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Music">Music/Singer:</label>
-                                <apex:inputField value="{!currWishChild.Music_Singer__c }" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Story">Book/Story:</label>
-                                <apex:inputField value="{!currWishChild.Book_Story__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Hobby">Hobby:</label>
-                                <apex:inputField value="{!currWishChild.Hobby__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Game">Game:</label>
-                                <apex:inputField value="{!currWishChild.Game__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Movie">Movie:</label>
-                                <apex:inputField value="{!currWishChild.Movie__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Food">Food:</label>
-                                <apex:inputField value="{!currWishChild.Food__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Tv">TV Show:</label>
-                                <apex:inputField value="{!currWishChild.TVShow__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Restaurant">Restaurant:</label>
-                                <apex:inputField value="{!currWishChild.Restaurant__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Actor">Actor/Actress:</label>
-                                <apex:inputField value="{!currWishChild.Actor_Actress__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Cake">Cake/Candy:</label>
-                                <apex:inputField value="{!currWishChild.Cake_Candy__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Sport">Sport/Athlete:</label>
-                                <apex:inputField value="{!currWishChild.Sport_Athlete__c}" styleClass="form-control"/>
-                            </div>
-                            
-                            <div class="form-group col-sm-3">
-                                <label for="Snack">Snack Food:</label>
-                                <apex:inputField value="{!currWishChild.Snack_Food__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Pet">Pet/Animal:</label>
-                                <apex:inputField value="{!currWishChild.Pet_Animal__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="School">Class in School:</label>
-                                <apex:inputField value="{!currWishChild.ClassinSchool__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-3">
-                                <label for="Other">Other:</label>
-                                <apex:inputField value="{!currWishChild.Other__c}" styleClass="form-control"/>
-                            </div>
-                        </div>
-                        <!------------------------------- OTHER FAVORITE DETAILS -------------------------------->
-                        <div class="row top-space" id="otherFav">
-                            <div class="form-group">
-                                <span class="text-imp fl col-lg-12">Other Favorites:</span>
-                            </div>
-                        </div>
-                        <div class="row top-space">
-                            <div class="form-group col-sm-6">
-                                <label for="Outside">When I’m outside, I like to...</label>
-                                <apex:inputField value="{!currWishChild.When_I_m_outside_I_like_to__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="Inside">When I’m inside, I like to…</label>
-                                <apex:inputField value="{!currWishChild.When_I_m_inside_I_like_to__c}" styleClass="form-control" />
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="Electronic">Electronics / Games that I like to play with are…</label>
-                                <apex:inputField value="{!currWishChild.Electronics_Games_that_I_like_to_play__c}" styleClass="form-control"/>
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="Family">When I’m with my family, I like to…</label>
-                                <apex:inputField value="{!currWishChild.When_I_m_with_my_family_I_like_to__c}" styleClass="form-control" />
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="WithFriend">When I’m with my friends, I like to…</label>
-                                <apex:inputField value="{!currWishChild.When_I_m_with_my_friends_I_like_to__c}" styleClass="form-control" />
-                            </div>
-                           
-                        </div>  
-                           <!------------------------------- My Wish DETAILS -------------------------------->  
-                        <div class="row top-space" id="MyWish">
-                            <div class="form-group">
-                                <span class="text-imp fl col-lg-12">My Wish:</span>
-                            </div>
-                        </div>
-                        <div class="row top-space">    
-                            <div class="form-group col-sm-6">
-                                <label for="WishTo">MY WISH IS TO…</label>
-                                <apex:inputField value="{!currWishChild.MY_WISH_IS_TO__c}" styleClass="form-control" />
-                            </div>
-                           
-                            <div class="form-group col-sm-6">
-                                <label for="WishBecause">This is my wish because…</label>
-                                <apex:inputField value="{!currWishChild.This_is_my_wish_because__c}" styleClass="form-control" />
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="ImportantPart">To me, the most important parts of my wish will be…</label>
-                                <apex:inputField value="{!currWishChild.To_me_the_most_important_part_of_my_wish__c}" styleClass="form-control" />
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="AboutMyWish">When I think about my wish, I imagine….</label>
-                                <apex:inputField value="{!currWishChild.When_I_think_about_my_wish_I_imagine__c}" styleClass="form-control" />
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="ThinkingWish">When thinking about a wish, some of my wish ideas were…</label>
-                                <apex:inputField value="{!currWishChild.When_thinking_some_of_my_wish_ideas_were__c}" styleClass="form-control" />
-                            </div>
-                            <div class="form-group col-sm-6">
-                                <label for="WishNotes">Wish Notes…</label>
-                                <apex:inputField value="{!currWishChild.Wish_Notes__c}" styleClass="form-control" />
-                            </div>
-                             
-                        </div>
+                      </div>
+
+                  </fieldset>
+
+                  <fieldset id="favorites">
+                    <legend><apex:outputText value="{!currWishChild.FirstName__c}"/>'s Favorites</legend>
+                    <span class="info">Please ask&nbsp;<apex:outputText value="{!currWishChild.FirstName__c}"/> and provide a response for each of the questions below.</span>
+
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Color">Color:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Color__c}" styleClass="form-control" html-placeholder="example: Blue/Pink"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Music">Music/Singer:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Music_Singer__c }" styleClass="form-control" html-placeholder="example: Pop Rock/Justin Bieber"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Story">Book/Story:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Book_Story__c}" styleClass="form-control" html-placeholder="example: Green Eggs and Ham"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Hobby">Hobby:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Hobby__c}" styleClass="form-control" html-placeholder="example: Riding my bike"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Game">Game:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Game__c}" styleClass="form-control" html-placeholder="example: Minecraft"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Movie">Movie:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Movie__c}" styleClass="form-control" html-placeholder="example: Finding Nemo"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Food">Food:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Food__c}" styleClass="form-control" html-placeholder="example: Pizza"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Tv">TV Show:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.TVShow__c}" styleClass="form-control" html-placeholder="example: Mickey Mouse Clubhouse"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Restaurant">Restaurant:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Restaurant__c}" styleClass="form-control" html-placeholder="example: California Pizza Kitchen"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Actor">Actor/Actress:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Actor_Actress__c}" styleClass="form-control" html-placeholder="example: Selena Gomez"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Cake">Cake/Candy:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Cake_Candy__c}" styleClass="form-control" html-placeholder="example: Chocolate"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Sport">Sport/Athlete:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Sport_Athlete__c}" styleClass="form-control" html-placeholder="example: Basketball/Michael Jordan"/></div>
+                      </div>
+
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Snack">Snack Food:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Snack_Food__c}" styleClass="form-control" html-placeholder="example: Chips and Candy"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Pet">Pet/Animal:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Pet_Animal__c}" styleClass="form-control" html-placeholder="example: Dogs/Cats"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="School">Class in School:</label></div>
+                          <div class="col-md-6"><apex:inputField value="{!currWishChild.ClassinSchool__c}" styleClass="form-control" html-placeholder="example: Science Class"/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-3"><label for="Other">Other:</label></div>
+                          <div class="col-md-6"><apex:inputTextarea value="{!currWishChild.Other__c}" styleClass="form-control" html-placeholder="Please enter details here."/></div>
+                      </div>
                     </div>
-             
-                    <div class="row" style="margin-left:25%;">
-                        <div class="col-sm-12">
-                            <div class="text-center">
-                                 <apex:Commandbutton value="Save" action="{!SaveandwishChildExit}" Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="btn btn-default mg-rt phonecheck" />
-                                 <apex:Commandbutton value="Next" action="{!WCFNext}" Onclick="return ClickToValidate();" style="margin-left: 10px;" styleClass="btn btn-default mg-rt phonecheck" />
-                                  <apex:Commandbutton value="Exit" action="{!cancelfunction}" style="margin-left: 10px;" reRender="popup"  styleClass="btn btn-default" immediate="true"/>
-                               </div>
-                        </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                          <div class="col-md-12"><label for="Outside">When I’m outside, I like to...</label></div>
+                          <div class="col-md-12"><apex:inputField value="{!currWishChild.When_I_m_outside_I_like_to__c}" styleClass="form-control" html-placeholder="Please enter details here."/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-12"><label for="Inside">When I’m inside, I like to…</label></div>
+                          <div class="col-md-12"><apex:inputField value="{!currWishChild.When_I_m_inside_I_like_to__c}" styleClass="form-control"  html-placeholder="Please enter details here."/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-12"><label for="Electronic">Electronics / Games that I like to play with are…</label></div>
+                          <div class="col-md-12"><apex:inputField value="{!currWishChild.Electronics_Games_that_I_like_to_play__c}" styleClass="form-control" html-placeholder="Please enter details here."/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-12"><label for="Family">When I’m with my family, I like to…</label></div>
+                          <div class="col-md-12"><apex:inputField value="{!currWishChild.When_I_m_with_my_family_I_like_to__c}" styleClass="form-control"  html-placeholder="Please enter details here."/></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-md-12"><label for="WithFriend">When I’m with my friends, I like to…</label></div>
+                          <div class="col-md-12"><apex:inputField value="{!currWishChild.When_I_m_with_my_friends_I_like_to__c}" styleClass="form-control"  html-placeholder="Please enter details here."/></div>
+                      </div>
                     </div>
+                  </fieldset>
+
+                  <fieldset id="wish-childs-wish">
+                    <legend><apex:outputText value="{!currWishChild.FirstName__c}"/>'s Wish</legend>
+                    <span class="info">Please ask&nbsp;<apex:outputText value="{!currWishChild.FirstName__c}"/> and provide a response for each of the questions below.</span>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                          <div class="col-sm-12"><label for="WishTo">My wish is to…</label></div>
+                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.MY_WISH_IS_TO__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-sm-12"><label for="WishBecause">This is my wish because…</label></div>
+                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.This_is_my_wish_because__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-sm-12"><label for="ImportantPart">To me, the most important parts of my wish will be…</label></div>
+                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.To_me_the_most_important_part_of_my_wish__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group row">
+                          <div class="col-sm-12"><label for="AboutMyWish">When I think about my wish, I imagine….</label></div>
+                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.When_I_think_about_my_wish_I_imagine__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-sm-12"><label for="ThinkingWish">When thinking about a wish, some of my wish ideas were…</label></div>
+                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.When_thinking_some_of_my_wish_ideas_were__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-sm-12"><label for="WishNotes">Wish Notes…</label></div>
+                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.Wish_Notes__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                      </div>
+                    </div>
+                  </fieldset>
+
                 </div>
-            </div>
-            
-           <script>
-            $(".date-input").datepicker({
-                autoclose: true,
-                endDate: '+0d'
-            });
-            $('#childForm a').click(function(){
-                $('#childForm a').css('font-size','1rem');
-                $(this).css('font-size','1.2rem');
-            });
-            function formatDate(date) {
-            var d = new Date(date),
-            month = '' + (d.getUTCMonth() + 1),
-            day = '' + d.getUTCDate(),
-            year = d.getUTCFullYear();
-            
-            if (month.length < 2) month = '0' + month;
-            if (day.length < 2) day = '0' + day;
-            
-            return [month,day,year].join('/');
-            }
-            
-             if($(".date-input").val() != ""){
-               var date = formatDate($(".date-input").val());
-               $(".date-input").val(date);
-            }
-           
-          </script>
-        </apex:pageblock>
-        
-        
-<apex:outputPanel id="popup" styleClass="{!if((wcfUtil.displayExitPopup || wcfUtil.approvalError),'popupBackground','')}" layout="block">
-   <apex:outputPanel rendered="{!wcfUtil.displayExitPopup}">
-       
-    <div class="pop-wrap">
-        <div class="custPopup">
-         <apex:pageMessages id="showmsg13"/> 
-            <div class="container">
-                <div class="row">
-                    <div class="row" style="padding:10px">
-                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
-                        <apex:commandButton value="Save and Exit" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!SavewithExit}" style="height: 2.75rem;margin-top: 3% !important;width: 150px !important;"/>
-                        <apex:commandButton value="Exit without Saving" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!exitWithOutSave}"  style="height: 2.75rem; margin-left: 5%;margin-top: 3% !important;width: 185px !important;"/>
-                        </div>
-                    </div>
+                <!-- end /conatiner -->
+                  </apex:pageBlock>
+              </div>
+
+              <div class="row hidden-sm-up nav-btm">
+                <nav class="btm">
+                  <ul>
+                    <li><apex:commandbutton value="Save" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" /></li>
+                    <li><apex:Commandbutton value="Next" styleClass="btn-md" html-data-toggle="modal" html-data-target="exit-alert-page" /></li>
+                  </ul>
+                </nav>
+              </div>
+
+
+          <div class="modal fade" id="approvalalert" tabindex="-1" role="dialog" aria-labelledby="Send Email" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title" id="send-email">Error</h1>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
                 </div>
+                <div class="modal-body">
+                  <div class="form-group row">
+                    <div class="col-sm-12"><label><h2><center>The record is in approval process</center></h2></label></div>
+                    <div class="col-sm-6">
+
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <div class="row">
+                    <apex:commandButton action="{!submitforApproval}" value="OK" styleClass="btn-md" />
+
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
+          <!-- display error modal -->
+
+           <!-- wcf modal -->
+      <div class="modal fade" id="wffsame-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title" id="exit-form">Leaving Form</h1>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
+            </div>
+            <div class="modal-footer">
+              <apex:commandButton onclick="test2();" value="Save" styleClass="form-validate btn-md" reRender="yyyy"/>
+              <apex:commandButton action="{!withOutSaveWCCF}" value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="yyy"/>
+            </div>
+          </div>
         </div>
-    </div>
-</apex:outputPanel>
-</apex:outputPanel>
- 
- <apex:outputPanel id="popup1" rendered="{!wcfUtil.approvalError}">
-   <apex:outputPanel rendered="{!wcfUtil.approvalError}" styleClass="custPopup" layout="block">
-  
-    <div class="pop-wrap">
-        <div class="custPopup">
-         <apex:pageMessages /> 
-            <div class="container">
-                <div class="row">
-                    <div class="row" style="padding:10px">
-                      <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">                        
-                        <apex:commandButton value="OK" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!ExitwithApprovalError}"  style="height: 2.75rem; margin-left: 5%;margin-top: 3% !important;width: 185px !important;"/>
-                        </div>
-                    </div>
-                </div>
+      </div>
+      
+       <!-- wif modal -->
+      <div class="modal fade" id="wifsame-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title" id="exit-form">Leaving Form</h1>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+            <div class="modal-body">
+              <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
+            </div>
+            <div class="modal-footer">
+              <apex:commandButton onclick="test1();" value="Save" styleClass="btn-md" reRender="ssss"/>
+              <apex:commandButton action="{!withOutSavefromWCFtoWIF}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="iii" />
+            </div>
+          </div>
         </div>
-    </div>
- 
-</apex:outputPanel>
-</apex:outputPanel>
- 
-    
-       </main></apex:form>
+      </div>
+        
+
+            </apex:form>
+          </section>
+        </div>
+      </main>
+      <apex:include pageName="WishFamilyForm_footer" id="pfooter" />
+      <script>
+        function uiLogic(){
+          //show textarea fields on pageload if "Yes" was selected
+          if ($('.f-prior-wish').val() != null){
+            if ($('.f-prior-wish').val().indexOf('Yes') != -1){
+              $('.prior-details').removeClass('sr-only');
+              $('.prior-textarea').addClass('required');
+            }
+          }
+          // show/hide if "Yes" textbox
+          $('.f-prior-wish').on('change', function() {
+            if($(this).val() != null){
+              if ($(this).val().indexOf('Yes') != -1){
+                $('.prior-details').removeClass('sr-only');
+                $('.prior-textarea').addClass('required');
+              } else {
+                $('.prior-details').addClass('sr-only');
+                $('.prior-textarea').val('').removeClass('required');
+              }
+            }
+          });
+
+          //show textarea fields on pageload if "other" was selected
+          if ($('.race-select').val() != null){
+            if ($('.race-select').val().indexOf('Yes') != -1){
+              $('.other-race').removeClass('sr-only');
+              $('.other-race-textarea').addClass('required');
+            }
+          }
+          // show/hide "Other race" textbox
+          $('.race-select').on('change', function() {
+            if($(this).val() != null){
+              if ($(this).val().indexOf('Yes') != -1){
+                $('.other-race').removeClass('sr-only');
+                $('.other-race-textarea').addClass('required');
+              } else {
+                $('.other-race').addClass('sr-only');
+                $('.other-race-textarea').val('').removeClass('required');
+              }
+            }
+          });
+          $(".date-input").datepicker({
+            autoclose: true,
+            changeYear: true,
+            yearRange: "c-18:c",
+            endDate: '+0d',
+            onSelect: function() {
+              $(this).valid()
+            }
+          });
+        } uiLogic();
+        $(function(){
+         if({!wcfUtil.approvalError})
+            $("#approvalalert").modal('show');
+        });
+        
+         function test2(){
+            if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+            console.log('form submitted');
+            SaveWishChildtoWff();
+            
+          } else {
+         
+            $('#wffsame-alert').modal('hide');
+          }
+        }
+        
+         function test1(){
+            if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+            console.log('form submitted');
+            SaveWishChildtoWInfo();
+            
+          } else {
+          
+            $('#wifsame-alert').modal('hide');
+          }
+        }
+        
+      </script>
     </body>
-    <br/><br/>
-    <apex:include pageName="WishFamilyForm_footer" id="pfooter" />
-   <!--<apex:include pageName="prospective_footer" id="pfooter" />-->
 </apex:page>

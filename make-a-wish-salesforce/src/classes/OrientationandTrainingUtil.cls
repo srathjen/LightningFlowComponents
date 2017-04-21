@@ -8,6 +8,7 @@ public class OrientationandTrainingUtil{
         Account newchapterAccount = new Account();
         newchapterAccount .Name = 'Make-A-Wish Alabama';
         newchapterAccount.RecordTypeId = ChapterRecordTypeId;
+        newchapterAccount.MAC_Email_del__c = 'Test@gmail.com';
         insert newchapterAccount;
         return newchapterAccount;
     }
@@ -103,6 +104,7 @@ insert newChapter;*/
         Volunteer_Roles__c newVolRole = new Volunteer_Roles__c ();
         newVolRole.Chapter_Role__c = chapterRoleId;
         newVolRole.Volunteer_Name__c = contactId;
+        newVolRole.Status__c = 'Trained';
         insert newVolRole;
         return newVolRole;
         
@@ -146,8 +148,8 @@ insert newChapter;*/
         Constant_AC  constant = new Constant_AC();
         newOffering.Chapter_Role_O_T__c = chapRoleandId;
         newOffering.Date__c = System.Today() +10;
-        newOffering.Start_Time__c = '10:00:AM';
-        newOffering.End_Time__c = '11:00:AM';
+        newOffering.Start_Time__c = '10:00 AM';
+        newOffering.End_Time__c = '11:00 AM';
         newOffering.max_capacity__c= 100;
         newOffering.Location__c = 'Test';
         newOffering.RecordTypeId = Schema.SObjectType.Class_Offering__c.getRecordTypeInfosByName().get(constant.classOfferingRecordTypeId).getRecordTypeId();
@@ -159,8 +161,8 @@ insert newChapter;*/
         Class_Offering__c newOffering = new Class_Offering__c();
         newOffering.Chapter_Role_O_T__c = chapRoleandId;
         newOffering.Date__c = System.Today() +10;
-        newOffering.Start_Time__c = '12:00:AM';
-        newOffering.End_Time__c = '1:00:AM';
+        newOffering.Start_Time__c = '12:00 AM';
+        newOffering.End_Time__c = '1:00 AM';
         newOffering.max_capacity__c= 100;
         newOffering.Location__c = 'Test';
         insert newOffering;
@@ -220,6 +222,7 @@ insert newChapter;*/
         newAccount.Name = 'Make-A-Wish Alabama';
         newAccount.RecordTypeId = chapterRT;
         newAccount.Wish_Co_ordinator__c = wishCoordinator;
+        newAccount.DevStaffEmail__c = 'chandrasekar@mstsolutions.com';
         insert newAccount;
         return newAccount;
         
@@ -477,11 +480,12 @@ insert newChapter;*/
     {
         Volunteer_Orientation_Training__c createNewVol = new Volunteer_Orientation_Training__c();
         createNewVol.class_offering__c = ClassOfferingId;
-        createNewVol.Orientation_Training__c = OrienationId;
+        createNewVol.Hidden_O_T_Id__c= OrienationId;
         createNewVol.Registered_Date__c = Date.Today();
         createNewVol.Volunteer__c = volunteer;
         createNewVol.Volunteer_Attendance__c = status;
         createNewVol.Type__c = 'Training';
+        createNewVol.RE_Completed_Date__c=String.ValueOf(system.today());
         insert createNewVol;
         return createNewVol;
     }
@@ -489,7 +493,7 @@ insert newChapter;*/
     {
         Volunteer_Orientation_Training__c createNewVol = new Volunteer_Orientation_Training__c();
         createNewVol.class_offering__c = ClassOfferingId;
-        createNewVol.Orientation_Training__c = OrienationId;
+        createNewVol.Hidden_O_T_Id__c = OrienationId;
         createNewVol.Registered_Date__c = Date.Today();
         createNewVol.Volunteer__c = volunteer;
         createNewVol.Volunteer_Attendance__c = status;
@@ -599,7 +603,9 @@ insert newChapter;*/
         newParentWish.Start_Date__c = System.today();
         newParentWish.End_Date__c = System.today();
         newParentWish.ContactId = wishChildId;
+        newParentWish.Status = 'New';
         newParentWish.Anticipated_Start_Date__c = System.today();
+        newParentWish.LiabilitySignerMapKeyPair__c = 'Vennila';
         insert newParentWish;
         return newParentWish;
     }
@@ -617,7 +623,7 @@ insert newChapter;*/
         newParentWish.Start_Date__c = System.today();
         newParentWish.End_Date__c = System.today();
         newParentWish.Referral_Date__c = Date.today();
-        newParentWish.diagnosis_verificaion_receive_date__c = System.today();
+        newParentWish.Diagnosis_Verification_Receive_Date__c = System.today();
         newParentWish.Anticipated_Start_Date__c = System.today();
         return newParentWish;
     }
@@ -1128,7 +1134,7 @@ insert newChapter;*/
         backCheck.Volunteer__c = contactId;
         backCheck.Date_Completed__c = system.today() + 3;
         backCheck.Status__c = 'test';
-        backCheck.active__c = false;
+        backCheck.current__c = false;
         insert backCheck;
         return backCheck;
     }
@@ -1138,7 +1144,7 @@ insert newChapter;*/
         backCheck.Date__c = system.today() + 3;
         backCheck.Volunteer__c = contactId;
         backCheck.Status__c = 'test';
-        backCheck.Active__c = true;
+        backCheck.current__c = true;
         backCheck.Date_Completed__c = system.today() + 9;
         insert backCheck;
         return backCheck;
@@ -1149,7 +1155,7 @@ insert newChapter;*/
         backCheck.Date__c = system.today() + 3;
         backCheck.Volunteer__c = contactId;
         backCheck.Status__c = 'test';
-        backCheck.Active__c = true;
+        backCheck.current__c = true;
         backCheck.Date_Completed__c = system.today() + 9;
         insert backCheck;
         return backCheck;
@@ -1995,6 +2001,7 @@ retrun newLeadFile;*/
         dsfs.dsfs__Case__c = caseId;
         dsfs.isConflict__c = false;
         dsfs.dsfs__Envelope_Status__c  = 'Sent';
+        dsfs.dsfs__Subject__c = 'Make-A-Wish Liability And Publicity Release Form';
         insert dsfs;
         return dsfs;
     }
@@ -2003,9 +2010,10 @@ retrun newLeadFile;*/
         dsfs__DocuSign_Recipient_Status__c newdsfs = new dsfs__DocuSign_Recipient_Status__c();
         newdsfs.dsfs__Parent_Status_Record__c = dsfsStatusId;
         newdsfs.dsfs__DocuSign_Recipient_Email__c =  'testmawa@gmail.com';
-        newdsfs.Name = 'MAWAFirstName'+' '+'MAWALastName';
+        newdsfs.Name = 'vennila';
         newdsfs.dsfs__DocuSign_Recipient_Id__c = '98D97010-2A0B-4714-B9AE-494B74BD287F';
         newdsfs.dsfs__Envelope_Id__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
+        
         insert newdsfs;
         return newdsfs;
         
@@ -2155,9 +2163,9 @@ retrun newLeadFile;*/
         newRegion.Chapter_Name__c = AccountId;
         return newRegion;
     }
-    
-   
-    public static npe4__Relationship__c CreateMedicalProfessionalRelationshipRec(Id wishChildId,Id medicalProfessionalId){
+  
+    public static npe4__Relationship__c CreateMedicalProfessionalRelationshipRec(Id wishChildId,Id medicalProfessionalId)
+    {
         npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
         newRelationShip.npe4__Contact__c = wishChildId;
         newRelationShip.npe4__RelatedContact__c = medicalProfessionalId;
@@ -2168,6 +2176,20 @@ retrun newLeadFile;*/
         return newRelationShip;
     }
     
+    public static Chapter_Vs_Role__c createAlabamaChapter(){
+        Chapter_Vs_Role__c createRec = new Chapter_Vs_Role__c();
+          createRec.Chapter_Name__c = 'Make-A-Wish Alabama';
+          createRec.Role_Name__c = 'Alabama - Chapter';
+          createRec.Name='Make-A-Wish Alabama';
+          return createRec;
+    }
+    public static Chapter_Vs_Role__c createArizonaChapter(){
+        Chapter_Vs_Role__c createRec = new Chapter_Vs_Role__c();
+          createRec.Chapter_Name__c = 'Make-A-Wish Alabama';
+          createRec.Role_Name__c = 'Alabama - Chapter';
+          createRec.Name='Make-A-Wish Alabama';
+          return createRec;
+    }
     
     
 }

@@ -63,6 +63,11 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>RelatedContact__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>LastName__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
@@ -124,6 +129,11 @@
         </displayedFields>
         <displayedFields>
             <field>T_Shirt_Size__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Information_Provided__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -338,6 +348,11 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>RelatedContact__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Does_each_requested_participant_Details__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
@@ -414,6 +429,11 @@
         </displayedFields>
         <displayedFields>
             <field>Emergency_First_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Information_Provided__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -1755,6 +1775,15 @@ and the date it was or will be granted.</inlineHelpText>
         <visibleLines>3</visibleLines>
     </fields>
     <fields>
+        <fullName>Information_Provided__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to capture the Information provided from wish family form.</description>
+        <externalId>false</externalId>
+        <label>Information Provided</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Is_a_wheelchair_accessible_vehicle_neede__c</fullName>
         <externalId>false</externalId>
         <label>Is a wheelchair accessible vehicle neede</label>
@@ -2417,6 +2446,14 @@ and the date it was or will be granted.</inlineHelpText>
         <visibleLines>4</visibleLines>
     </fields>
     <fields>
+        <fullName>RelatedContact__c</fullName>
+        <externalId>false</externalId>
+        <label>Related Contact</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Requested_Participant_Name_forWheelchair__c</fullName>
         <externalId>false</externalId>
         <label>Requested_Participant_Name_forWheelchair</label>
@@ -2875,7 +2912,7 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <description>It will hold wish child zip code detail.</description>
         <externalId>false</externalId>
         <label>Zip Code</label>
-        <length>6</length>
+        <length>12</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>

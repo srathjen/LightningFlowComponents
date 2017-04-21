@@ -23,6 +23,21 @@
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <fields>
+        <fullName>Attachment__c</fullName>
+        <externalId>false</externalId>
+        <label>Attachment</label>
+        <required>false</required>
+        <type>File</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>32768</length>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
         <fullName>Role__c</fullName>
         <externalId>false</externalId>
         <label>Role</label>
@@ -56,6 +71,6 @@
         </valueSet>
         <visibleLines>4</visibleLines>
     </fields>
-    <label>Policy and Procedure</label>
-    <pluralLabel>Policies and Procedures</pluralLabel>
+    <label>Policy &amp; Procedure</label>
+    <pluralLabel>Policies &amp; Procedures</pluralLabel>
 </CustomObject>

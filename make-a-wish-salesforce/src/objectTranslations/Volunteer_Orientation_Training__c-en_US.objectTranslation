@@ -50,6 +50,14 @@
         <name>From_Mulesoft__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Completed Date --></label>
+        <name>Hidden_Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden O&amp;T Id --></label>
+        <name>Hidden_O_T_Id__c</name>
+    </fields>
+    <fields>
         <label><!-- LMS Enrollment Id --></label>
         <name>LMS_Enrollment_Id__c</name>
     </fields>
@@ -58,13 +66,8 @@
         <name>Migrated_Record__c</name>
     </fields>
     <fields>
-        <label><!-- Orientation &amp; Training Hidden --></label>
+        <label><!-- Orientation &amp; Training --></label>
         <name>Orientation_Training_Hidden__c</name>
-    </fields>
-    <fields>
-        <label><!-- Orientation/Training --></label>
-        <name>Orientation_Training__c</name>
-        <relationshipLabel><!-- Volunteer Orientation &amp; Trainings --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- RE Completed Date --></label>

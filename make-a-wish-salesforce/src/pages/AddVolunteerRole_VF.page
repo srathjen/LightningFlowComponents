@@ -80,7 +80,7 @@ It would create n number of Volunteer Opportunity records for that event.
          <!---------- Output Mode of the Record --------------------------------------->   
             <apex:outputPanel id="ss">
            
-                <apex:outputPanel rendered="{!((outputmode) && (LEFT($User.ProfileId,15) != activeVolunteer))}">
+                <apex:outputPanel rendered="{!((outputmode) && (isActiveVolunteer == false))}">
                     <table class='tetable1 list'>
                         <tr class='headerRow'>
                             <th> Name </th>
@@ -108,7 +108,8 @@ It would create n number of Volunteer Opportunity records for that event.
                     </table>
                     <br/>
                 </apex:outputPanel>
-                 <apex:outputPanel rendered="{!((outputmode) && (LEFT($User.ProfileId,15) == activeVolunteer))}">
+              
+                 <apex:outputPanel rendered="{!((outputmode) && (isActiveVolunteer == True))}">
                     <table class='tetable1 list'>
                         <tr class='headerRow'>
                             <th>Name</th>
@@ -121,6 +122,7 @@ It would create n number of Volunteer Opportunity records for that event.
                             <th></th></tr>
                         <apex:repeat value="{!volunteerCountWrapList}" var="memb">
                             <tr>
+                           
                                 <td><apex:outPutText value="{!memb.eventName }"/></td>
                                 <td><apex:outPutText value="{!memb.chapterRole}"/></td>
                                 <td><apex:outPutText value="{!memb.roleName}"/></td>
@@ -128,7 +130,7 @@ It would create n number of Volunteer Opportunity records for that event.
                                 <td><apex:outPutText value="{!memb.description}"/></td>
                                 <td><apex:outPutText value="{!memb.volunteerRegistration}"/></td>
                                 <td>
-                                    <apex:commandLink value="Register" action="{!register}" >
+                                    <apex:commandLink value="Register" action="{!register}">
                                         <apex:param name="recId" value="{!memb.recordId}" assignTo="{!ChapterRoleId}"/>
                                         <apex:param name="vcId" value="{!memb.volunteerCountId}" assignTo="{!CountId }"/>
                                     </apex:commandLink>

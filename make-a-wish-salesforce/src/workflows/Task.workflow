@@ -20,7 +20,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Task_Interview_Cancelled_Email_Template</template>
+        <template>Automated_Volunteer_Templates/Task_Interview_Cancelled_Email_Template</template>
     </alerts>
     <alerts>
         <fullName>Task_Interview_Completed_Email_Alert</fullName>
@@ -32,7 +32,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Task_Interview_Completed_Email_Template</template>
+        <template>Automated_Volunteer_Templates/Task_Interview_Completed_Email_Template</template>
     </alerts>
     <alerts>
         <fullName>Task_Interview_Scheduled_Email_Alert</fullName>
@@ -44,7 +44,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Task_Interview_Scheduled_Email_Template</template>
+        <template>Automated_Volunteer_Templates/Task_Interview_Scheduled_Email_Template</template>
     </alerts>
     <alerts>
         <fullName>Task_Interview_Task_Email_Notification</fullName>
@@ -78,6 +78,11 @@
             <operation>equals</operation>
             <value>Interview</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Task.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>When Interview task is created by Volunteer that time, It wil send an email notification to Interviewer.</description>
         <triggerType>onCreateOnly</triggerType>
     </rules>
@@ -98,6 +103,11 @@
             <operation>equals</operation>
             <value>Rescheduled</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Task.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This workflow will send email alert to task owner when the status is Rescheduled</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
@@ -109,7 +119,7 @@
         </actions>
         <active>true</active>
         <description>When Interviewer confirmed the interview date, it will send an email notification to volunteer.</description>
-        <formula>PRIORVALUE(Confirmed_Date__c) = Null &amp;&amp; (Confirmed_Date__c != Null)</formula>
+        <formula>PRIORVALUE(Confirmed_Date__c) = Null &amp;&amp; (Confirmed_Date__c != Null) &amp;&amp; Migrated_Record__c = false</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -128,6 +138,11 @@
             <field>Task.Status</field>
             <operation>equals</operation>
             <value>Rescheduled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Task.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
         </criteriaItems>
         <description>This workflow rule will fire when the interview is cancelled</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -149,6 +164,11 @@
             <operation>equals</operation>
             <value>Scheduled</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Task.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This workflow rule will fire when the interview is scheduled</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
@@ -168,6 +188,11 @@
             <field>Task.Status</field>
             <operation>equals</operation>
             <value>Approved</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Task.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
         </criteriaItems>
         <description>This workflow rule will fire when the interview is complete</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

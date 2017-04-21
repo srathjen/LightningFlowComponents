@@ -21,8 +21,8 @@
         <name>Account_Phone__c</name>
     </fields>
     <fields>
-        <label><!-- Active --></label>
-        <name>Active__c</name>
+        <label><!-- Current --></label>
+        <name>Current__c</name>
     </fields>
     <fields>
         <label><!-- Date Completed --></label>
@@ -43,6 +43,10 @@
     <fields>
         <label><!-- From Mulesoft --></label>
         <name>From_Mulesoft__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Background Expire --></label>
+        <name>HiddenBackgroundExpire__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Volunteer Contact Email --></label>

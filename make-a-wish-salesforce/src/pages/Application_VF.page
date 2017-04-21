@@ -65,7 +65,7 @@ p.saved{padding:1rem !important}
             <div class="row">
                 <h1 class="col-md-12">Volunteer Application</h1>
             </div>
-            <nav class="row">
+           <!-- <nav class="row">
                 <ul class="step">
                     <li><a href="/apex/VolunteerOrientation_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Orientation</a></li>
                     <li class="current"><a href="">Application</a></li>
@@ -77,7 +77,7 @@ p.saved{padding:1rem !important}
                              <li><a href="/VolunteerTraining_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Training</a></li>
                     </apex:outputpanel>
                 </ul>
-            </nav>
+            </nav> -->
 
              <!----------------------- Input Mode of application form --------------------------->
 
@@ -102,7 +102,7 @@ p.saved{padding:1rem !important}
                                             <label for="title">Title</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list" value="{!currentVolunteer.Title}" size="1" multiselect="false">
+                                            <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list" value="{!currentVolunteer.Salutation}" size="1" multiselect="false">
                                                 <apex:selectOptions value="{!Titles}" />
                                             </apex:selectList>
                                         </div>
@@ -193,7 +193,7 @@ p.saved{padding:1rem !important}
                                             <label for="postalcode" aria-labelledby="postalcode">Postal Code</label>
                                         </div>
                                         <div class="col-sm-6 postalcode">
-                                            <apex:inputText styleClass="form-control name-group postalcode numbers-only" maxlength="5" id="postalcode" html-placeholder="00000" value="{!currentVolunteer.MailingPostalCode}"  />
+                                            <apex:inputText styleClass="form-control name-group postalcode numbers-only"  id="postalcode" html-placeholder="00000-0000" maxlength="10" html-minlength="5" value="{!currentVolunteer.MailingPostalCode}"  />
                                         </div>
                                     </div>
                                     
@@ -325,10 +325,10 @@ p.saved{padding:1rem !important}
                                             </apex:selectList>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    <div class="form-group row postalcode">
                                         <div class="col-sm-3"><label for="employer-zip" aria-labelledby="Employer Zip">Zip</label></div>
-                                        <div class="col-sm-6">
-                                            <apex:inputfield styleClass="form-control numbers-only" id="employer-zip" value="{!currentVolunteer.Zip_Employer__c}" html-placeholder="00000"></apex:inputfield>
+                                        <div class="col-sm-6 ">
+                                            <apex:inputText styleClass="form-control numbers-only postalcode" id="zipcode" value="{!currentVolunteer.Zip_Employer__c}" html-placeholder="00000-0000" maxlength="10" html-minlength="5"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -508,7 +508,7 @@ p.saved{padding:1rem !important}
                                 <legend>Personal Information</legend>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Title: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Title}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Title: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Salutation}" /></span>
                                     </div>
                                     <div class="row">
                                         <label class="col-xs-6 col-sm-6">FirstName: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.FirstName}" /></span>
@@ -1091,19 +1091,16 @@ p.saved{padding:1rem !important}
                     });
                 });
                 $("input.postalcode").each(function(){
-                    $(this).rules("add", {
-                        required: true,
-                        digits: true,
-                        minlength: 5,
-                        maxlength: 9,
-                        messages: {
-                            required: "Oops! Please enter a valid US postal code",
-                            digits: "Oops! Please only enter digits",
-                            minlength: "Oops! Please enter a minimum of 5 digits",
-                            maxlength: "We're sorry, you've reached the maximum allowed characters"
-                        }
-                    });
-                });
+              $(this).rules("add", {
+                  required: true,
+                  zipcode: true,
+                  messages: {
+                      //required: "Oops! Please enter a valid US postal code",
+                      minlength: "Oops! Please enter a minimum of 5 digits",
+                      maxlength: "We're sorry, you've reached the maximum allowed characters"
+                  }
+              });
+          });
                 $("select.mawdisc").each(function(){
                   $(this).chosen().change(function(){
                       $(this).valid();
@@ -1138,6 +1135,18 @@ p.saved{padding:1rem !important}
                         maxlength: "We're sorry, you've reached the maximum allowed characters"
                     }
                 });
+                 // auto format postal code
+            $(".postalcode").keydown(function(e){
+              if (($(this).val().length == 5) && (e.keyCode != 8)){
+                // auto insert dash on 5th character keypress
+                $(this).val($(this).val() + "-");
+              }
+              if (($(this).val().length == 7) && (e.keyCode == 8)){
+                // remove dash if on 7th character backspace is used
+                $(this).val($(this).val().substring(0, $(this).val().length - 1));
+              }
+            });
+                
                 $("select.f-state").each(function(){
                   $(this).chosen().change(function(){
                       $(this).valid();
@@ -1173,6 +1182,10 @@ p.saved{padding:1rem !important}
                   }
               });
             } formValidationRules();
+            
+            jQuery.validator.addMethod("zipcode", function(value, element) {
+          return this.optional(element) || /^\d{5}(?:-\d{1,4})?$/.test(value);
+        }, "Oops! Please enter a valid US postal code");
         });
         </script>
         

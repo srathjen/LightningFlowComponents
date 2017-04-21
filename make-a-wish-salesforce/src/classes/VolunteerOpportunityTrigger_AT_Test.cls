@@ -28,6 +28,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
         return volunteerOpportunityList;
     }
     
+    
     public testmethod static void updateVolunteerOpportunity(){
         List<Volunteer_Opportunity__c> volOppList  = VolunteerOpportunityTrigger_AT_Test.SubmittoApproval();
          List<Volunteer_Opportunity__c> updateVOlOpportunity = new  List<Volunteer_Opportunity__c>();
@@ -158,6 +159,87 @@ public class VolunteerOpportunityTrigger_AT_Test {
         update volOpportunity;
         delete volOpportunity;
         
+    }
+    
+    public testmethod static void  createRecforNationalStaffasOwner(){   
+        Chapter_Vs_Role__c arizonaChap = OrientationandTrainingUtil.createArizonaChapter();
+        Chapter_Vs_Role__c alabamaChap = OrientationandTrainingUtil.createAlabamaChapter();
+        Insert alabamaChap;
+        Insert arizonaChap;
+        
+        User currUser = [SELECT id from User where id = :Userinfo.getUserId() limit 1];
+        User nationalStaff;
+        System.RunAs(currUser)
+        {   
+            nationalStaff = OrientationandTrainingUtil.createUserWithRole([select Id from UserRole where Name='National Staff'].Id);
+        }
+        
+        System.runAs(nationalStaff) {
+            Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+            Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
+            Role__c nonWishRole = OrientationandTrainingUtil.createRole();
+            Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.id,nonWishRole.Id);
+            Non_Wish_Events__c nonWishEvent = OrientationandTrainingUtil.CreateEventRec(chapterRole.Id,chapterAccount.Id);
+            OrientationandTrainingUtil.createVolunteerCount(nonWishEvent.Id,chapterRole.Id,3);
+            Volunteer_Opportunity__c volOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);     
+       }
+  }
+  
+  public testmethod static List<Volunteer_Opportunity__c>  RejectedWish(){   
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();   
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild(); 
+        Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Role__c  roleName = OrientationandTrainingUtil.createRole();
+        Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
+        List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,3);
+        List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
+        for(Volunteer_Opportunity__c processVolOpportunities : wishVolunteerOpportunityList){
+            processVolOpportunities.Volunteer_Name__c = VolunteerContact.Id;
+            processVolOpportunities.isRejected__c = true;
+            volunteerOpportunityList.add(processVolOpportunities);
+            
+        }
+        update volunteerOpportunityList;
+        return volunteerOpportunityList;
+    }
+    
+     public testmethod static void  RejectedNonWish(){   
+        
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
+        Role__c nonWishRole = OrientationandTrainingUtil.createRole();
+        Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.id,nonWishRole.Id);
+        Non_Wish_Events__c nonWishEvent = OrientationandTrainingUtil.CreateEventRec(chapterRole.Id,chapterAccount.Id);
+        OrientationandTrainingUtil.createVolunteerCount(nonWishEvent.Id,chapterRole.Id,3);
+        Volunteer_Opportunity__c volOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);     
+        volOpportunity.Volunteer_Name__c  = volunteerContact.Id;
+        volOpportunity.isRejected__c = true;
+        update volOpportunity;
+        delete volOpportunity;
+   }
+    
+     public testmethod static void  RemoveCaseTeamMember(){   
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();   
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild(); 
+        Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        Case parentCase = OrientationandTrainingUtil.ParentCasetoAddCaseMember(wishChild.Id);
+        Role__c  roleName = OrientationandTrainingUtil.createRole();
+        Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
+        System.RunAs(new User(Id = UserInfo.getUserId())){
+        
+            User currUser = OrientationandTrainingUtil.createActiveVolunteerUser(VolunteerContact.id);
+            CaseTeamRole dbRole = [SELECT Id,Name From CaseTeamRole WHERE Name =: 'Wish Granter' Limit 1];
+            CaseTeamMember caseMem = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,currUser.id,dbRole.Id);
+            List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,1);
+            Volunteer_Opportunity__c updateVolOpportunity = new Volunteer_Opportunity__c();
+            updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
+            updateVolOpportunity.IsApproved__c = true;
+            updateVolOpportunity.Reason_Inactive__c = 'Non-responsive';
+            updateVolOpportunity.Volunteer_Name__c = VolunteerContact.Id;
+            update updateVolOpportunity;
+            system.debug('@@@@@@ updateVolOpportunity @@@@@@@@@'+updateVolOpportunity);
+        }
     }
     
 }

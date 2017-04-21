@@ -85,6 +85,10 @@
             <translation><!-- Not Approved --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Out of Compliance</masterLabel>
+            <translation><!-- Out of Compliance --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Pending Training</masterLabel>
             <translation><!-- Pending Training --></translation>
         </picklistValues>

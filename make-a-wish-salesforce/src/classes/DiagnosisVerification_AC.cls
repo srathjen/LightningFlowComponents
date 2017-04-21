@@ -109,7 +109,7 @@ public class DiagnosisVerification_AC {
         }*/
         
         //Loading all the Medicial Questions.
-        for(Medical_Questions__c medicalQuestions : [SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c FROM Medical_Questions__c order by Sort_Order__c]){
+        for(Medical_Questions__c medicalQuestions : [SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c FROM Medical_Questions__c order by Sort_Order__c ASC]){
             if(medicalQuestions.Question__c != null) {
                 medicalQuestions.Question__c = medicalQuestions.Question__c.replace('[child\'s name]', ' ' +currLead.FirstName+ ' ' +currLead.LastName).replace(' (child\'s name) ', currLead.FirstName+' '+currLead.LastName).replace('[Insert child\'s name]', currLead.FirstName+' '+currLead.LastName);
             } else {
@@ -369,7 +369,7 @@ public class DiagnosisVerification_AC {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You cannot review this document');
             ApexPages.addMessage(myMsg);
         } else if(wishChildWrapperIns.password != currLead.Part_A_Form_Password__c) {
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Inccorect password');
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Incorrect password');
             ApexPages.addMessage(myMsg);
         } else if(wishChildWrapperIns.password == currLead.Part_A_Form_Password__c){
             wishChildWrapperIns.login = true;
@@ -406,9 +406,10 @@ public class DiagnosisVerification_AC {
             List<ICD_Codes__c> icdCodeInfo = [SELECT Id, Name, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Condition_Description__r.isEligible__c, Group1__c FROM ICD_Codes__c WHERE Name =: diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode];
             if(icdCodeInfo.size() > 0) {
                 List<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
-                medicalQuestionList =   [SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c FROM Medical_Questions__c  WHERE Condition_Description__c = :icdCodeInfo[0].Condition_Description__c order by Sort_Order__c];
+                medicalQuestionList =   [SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c FROM Medical_Questions__c  WHERE Condition_Description__c = :icdCodeInfo[0].Condition_Description__c order by Sort_Order__c ASC];
                 System.debug('inside the ICD Medical Question++'+medicalQuestionList);
                 diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = icdCodeInfo[0].Short_Description__c;
+                diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = icdCodeInfo[0].Group1__c;
                 //Condition Description categories like Epilepsy, Cardiomyopathy with group 1 records are considered as eligible without asking Medical Questions
                 //Those questions are identified by using isEligible__c field
                 if(!String.isEmpty(icdCodeInfo[0].Condition_Description__r.Name) && icdCodeInfo[0].Condition_Description__r.Name == 'Total Parenteral Nutrition (TPN)') {
@@ -432,8 +433,9 @@ showAddAnotherDiagnosisBtn = true;
             }
             List<Condition_Description__c> conditionDescriptionInfo = [SELECT Id, Name, isEligible__c, Group1__c, Code_To_Use__c FROM Condition_Description__c WHERE Name =: diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription];
             if(conditionDescriptionInfo.size() > 0) {
+                diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = conditionDescriptionInfo[0].Group1__c;
                 List<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
-                medicalQuestionList =   [SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c FROM Medical_Questions__c  WHERE Condition_Description__c = :conditionDescriptionInfo[0].id order by Sort_Order__c];
+                medicalQuestionList =   [SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c FROM Medical_Questions__c  WHERE Condition_Description__c = :conditionDescriptionInfo[0].id order by Sort_Order__c ASC];
                 //Condition Description categories like Epilepsy, Cardiomyopathy with group 1 records are considered as eligible without asking Medical Questions
                 //Those questions are identified by using isEligible__c field
                 if(conditionDescriptionInfo[0].isEligible__c == true) {
@@ -644,12 +646,23 @@ showAddAnotherDiagnosisBtn = true;
         }
         list<Diagnosis_Verification__c> diagnosisVerificationLstForInsert = new list<Diagnosis_Verification__c>();
         list<DiagnosisMedicalQuestions__c> diagnosisMedicalQuestionLst = new list<DiagnosisMedicalQuestions__c>();
-        integer order = 0;       
+        integer order = 0;   
+        currLead.PD_Condition_Description__c = null;
+        currLead.PD_ICD_Code__c = null;
+        currLead.SD1_Condition_Description__c = null;
+        currLead.SD1_ICD_Code__c = null;
+        currLead.SD3_Condition_Description__c = null;
+        currLead.SD3_ICD_Code__c = null; 
+        currLead.SD2_Condition_Description__c = null;
+        currLead.SD2_ICD_Code__c = null;
+        currLead.SD4_Condition_Description__c = null;
+        currLead.SD4_ICD_Code__c = null;    
         Set<Integer> orderSet = new Set<Integer>();
         for( DiagnosisWrapper diagnosisVerificationItem : diagnosisVerificationWrapperLst){
             if(!orderSet.contains(order) && (!String.isEmpty(diagnosisVerificationItem.iCDCode) || !String.isEmpty(diagnosisVerificationItem.conditionDescription))) {
                 Diagnosis_Verification__c diagnosisVerification = new Diagnosis_Verification__c();
                 diagnosisVerification.Order__c = order;
+                diagnosisVerification.Group1__c = diagnosisVerificationItem.isGroup1Rec;
                 diagnosisVerification.Lead__c = leadId;
                 diagnosisVerification.isEligible__c = diagnosisVerificationItem.isEligible;
                 diagnosisVerification.ICD_Code__c = diagnosisVerificationItem.iCDCode;
@@ -660,16 +673,7 @@ showAddAnotherDiagnosisBtn = true;
                 diagnosisVerificationItem.externalId = Math.random();
                 diagnosisVerification.Eternal_Id__c = string.valueof(diagnosisVerificationItem.externalId);
                 diagnosisVerificationLstForInsert.add(diagnosisVerification);
-                currLead.PD_Condition_Description__c = null;
-                currLead.PD_ICD_Code__c = null;
-                currLead.SD1_Condition_Description__c = null;
-                currLead.SD1_ICD_Code__c = null;
-                currLead.SD3_Condition_Description__c = null;
-                currLead.SD3_ICD_Code__c = null; 
-                currLead.SD2_Condition_Description__c = null;
-                currLead.SD2_ICD_Code__c = null;
-                currLead.SD4_Condition_Description__c = null;
-                currLead.SD4_ICD_Code__c = null;
+                
                 if(order == 0){
                     currLead.PD_Condition_Description__c = diagnosisVerificationItem.conditionDescription;
                     currLead.PD_ICD_Code__c = diagnosisVerificationItem.iCDCode;                
@@ -874,7 +878,7 @@ showAddAnotherDiagnosisBtn = true;
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailBlurb":"Test Email Body",'+
+            '  "emailBlurb":"",'+
             '  "emailSubject": "Diagnosis Verification Form",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+

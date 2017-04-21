@@ -133,7 +133,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- The date when the donor was specifically asked for the donation, as opposed to the Opportunity Close Date that the organization may set to either when the Opportunity was first created, or when the Opportunity was won. --></help>
+        <help>Das Datum, an dem der Spender ausdrücklich um die Spende gebeten wurde, im Gegensatz zum Opportunity-Schlusstermin, den die Organisation auf das Erstellungsdatum der Opportunity oder den Termin festlegt, an dem die Opportunity gewonnen wurde.</help>
         <label><!-- Ask Date --></label>
         <name>npsp__Ask_Date__c</name>
     </fields>
@@ -143,7 +143,7 @@
         <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Notes on why the donation ask was not successful. --></help>
+        <help>Gibt an, warum der Spendenaufruf nicht erfolgreich war.</help>
         <label><!-- Closed Lost Reason --></label>
         <name>npsp__Closed_Lost_Reason__c</name>
     </fields>
@@ -153,20 +153,20 @@
         <name>npsp__Fair_Market_Value__c</name>
     </fields>
     <fields>
-        <help><!-- Categorizes the type of ask for this opportunity. --></help>
+        <help>Kategorisiert den Typ des Aufrufs für diese Opportunity.</help>
         <label><!-- Gift Strategy --></label>
         <name>npsp__Gift_Strategy__c</name>
         <picklistValues>
             <masterLabel>New Donor</masterLabel>
-            <translation><!-- New Donor --></translation>
+            <translation>Neuer Spender</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Renewal</masterLabel>
-            <translation><!-- Renewal --></translation>
+            <translation>Erneuerung</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Upgrade</masterLabel>
-            <translation><!-- Upgrade --></translation>
+            <translation>Hochstufung</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -331,7 +331,7 @@
         <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- The date this donor was identified as qualifying for this donation. --></help>
+        <help>Das Datum, an dem dieser Spender als qualifizierter Spender dieser Spende identifiziert wurde.</help>
         <label><!-- Qualified Date --></label>
         <name>npsp__Qualified_Date__c</name>
     </fields>

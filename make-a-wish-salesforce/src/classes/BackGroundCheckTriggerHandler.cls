@@ -101,10 +101,10 @@ Public class BackGroundCheckTriggerHandler
    public static void DeactivateExistingRecords(Set<Id> newRecordIds, Set<Id> volunteerIds)
    {
        List<Background_check__c> deactivateExRecords = new List<Background_check__c>();
-        for(Background_check__c exRec : [SELECT id,Active__c FROM Background_check__c WHERE active__c = True AND Id NOT IN :newRecordIds AND Volunteer__c IN :volunteerIds])
+        for(Background_check__c exRec : [SELECT id,current__c FROM Background_check__c WHERE current__c = True AND Id NOT IN :newRecordIds AND Volunteer__c IN :volunteerIds])
         {
                 Background_check__c updateRec = new Background_check__c();
-                updateRec.Active__c = false;
+                updateRec.current__c = false;
                 updateRec.id = exRec.id;
                 deactivateExRecords.add(updateRec);
                 
@@ -129,9 +129,8 @@ Public class BackGroundCheckTriggerHandler
      for(Background_check__c currRec : newRecords)
      {
              if(volunteerMap.containsKey(currRec.Volunteer__c)){
-                  currRec.Hidden_Volunteer_Contact_Email__c = volunteerMap.get(currRec.Volunteer__c).Email;
-                  if(!Test.isRunningTest())
-                     currRec.OwnerId = volunteerMap.get(currRec.Volunteer__c).OwnerId;
+               currRec.Hidden_Volunteer_Contact_Email__c = volunteerMap.get(currRec.Volunteer__c).Email;
+                 currRec.OwnerId = volunteerMap.get(currRec.Volunteer__c).OwnerId;
              }
      }
   }
@@ -154,6 +153,38 @@ Public class BackGroundCheckTriggerHandler
       if(volunteerListToUpdate.size() > 0)
         update volunteerListToUpdate;
   
+   }
+   
+   //Update volunteer Opportunity and volunteer Role status.
+   Public static void UpdateVOppAndVRoleStatus(Set<Id> volunteerContactIdSet){
+       if(volunteerContactIdSet.size() > 0){
+       List<Volunteer_Opportunity__c> updateVolOpportunityList = new List<Volunteer_Opportunity__c>();
+       List<Volunteer_Roles__c> updateVolunteerRoleList = new List<Volunteer_Roles__c>();
+       for(Volunteer_Opportunity__c dbVolOpportunity : [SELECT Id,Volunteer_Name__c,Status__c FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c IN: volunteerContactIdSet]){
+           
+           Volunteer_Opportunity__c updateVolStatus = new Volunteer_Opportunity__c();
+           updateVolStatus.Id = dbVolOpportunity.Id;
+           updateVolStatus.Status__c  = 'Out of Compliance';
+           updateVolOpportunityList.add(updateVolStatus);
+          
+       }
+       
+       for(Volunteer_Roles__c dbVolRole : [SELECT Id,Volunteer_Name__c,Status__c FROM Volunteer_Roles__c Where Volunteer_Name__c IN: volunteerContactIdSet ]){
+           
+           Volunteer_Roles__c updateVolStatus = new Volunteer_Roles__c();
+           updateVolStatus.Id = dbVolRole.Id;
+           updateVolStatus.Status__c = 'Out of Compliance';
+           updateVolunteerRoleList .add(updateVolStatus);
+       }
+       
+       
+       
+       if(updateVolOpportunityList.size() > 0)
+       update updateVolOpportunityList;
+       
+       if(updateVolunteerRoleList.size() > 0)
+       update updateVolunteerRoleList;
+     }
    }
 
 }

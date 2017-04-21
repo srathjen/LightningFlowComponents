@@ -448,7 +448,7 @@ public class TestClassUtil{
         newContent.WelcomePage__c = 'Test';
         newContent.Welcome_Text__c = 'Test';
         newContent.Why_Need_Background_Check__c = 'Test';
-        
+        newContent.Chapter_Name__c = createArizonaChapter();
         insert newContent;
         return newContent;
         
@@ -723,8 +723,7 @@ public class TestClassUtil{
         Orientation_Training__c newOrientation = new Orientation_Training__c();
         newOrientation.Name = 'Test Orienatation';
         newOrientation.RecordTypeId = volunteerOrientationRecordTypeId;
-        newOrientation.Location__c = 'Arizona';
-        newOrientation.Max_Capacity__c = 4;
+      
         insert newOrientation;
         return newOrientation;
     }
@@ -741,7 +740,7 @@ public class TestClassUtil{
         
         
         Volunteer_Orientation_Training__c newVol = new Volunteer_Orientation_Training__c();
-        newVol.Orientation_Training__c = TestClassUtil.createTrainingForProfile().id;
+        newVol.Hidden_O_T_Id__c = TestClassUtil.createTrainingForProfile().id;
         newVol.Volunteer__c = ConId;
         newVol.Volunteer_Attendance__c = 'Registered';
         newVol.Type__c = 'Training';
@@ -751,7 +750,7 @@ public class TestClassUtil{
     
     public static void createVolOandOrientation(Id conId){
         Volunteer_Orientation_Training__c newVol = new Volunteer_Orientation_Training__c();
-        newVol.Orientation_Training__c = TestClassUtil.createTrainingForProfile().id;
+        newVol.Hidden_O_T_Id__c = TestClassUtil.createTrainingForProfile().id;
         newVol.Volunteer__c = conId;
         newVol.Volunteer_Attendance__c = 'Registered';
         newVol.Type__c = 'Orientation';
@@ -770,20 +769,12 @@ public class TestClassUtil{
             if(i<5) {
                 newOrientation.Name = 'Orienatation'+i;
                 newOrientation.RecordTypeId = volunteerOrientationRecordTypeId;
-                newOrientation.Location__c = 'Arizona';
-                // newOrientation.Volunteer__c = createVolunteerContact().id;
+               
             } else {
                 newOrientation.Name = 'Training'+i;
                 newOrientation.RecordTypeId = volunteerTrainingRecordTypeId; 
-                newOrientation.Location__c = 'Arizona';
-            }
-            newOrientation.Type__c = 'Online';
-            newOrientation.Max_Capacity__c = 10+i;
-            newOrientation.Volunteer_Type__c = 'Prospective';
-            newOrientation.Date__c = System.today()+i;
-            //newOrientation.Start_Time__c = i+':30:AM';
-            //newOrientation.End_Time__c = i+':30:PM';
-            newOrientation.Chapter_Name__c = chapterAccountList.get(0).id;
+                }
+           
             newOrientationTraining.add(newOrientation);
         }
         if(newOrientationTraining.size()>0) {
@@ -818,17 +809,14 @@ public class TestClassUtil{
         Id volunteerTrainingRecordTypeId = Schema.SObjectType.Orientation_Training__c.getRecordTypeInfosByName().get(constant.trainingRT).getRecordTypeId();
         Orientation_Training__c newOrientation = new Orientation_Training__c();
         newOrientation.Name = 'Training';
-        newOrientation.Date__c = Date.Today().addDays(7);
         newOrientation.RecordTypeId = volunteerTrainingRecordTypeId; 
-        newOrientation.Location__c = 'Arizona';
-        newOrientation.Max_Capacity__c = 7;
         insert newOrientation;
         return newOrientation;
     }
     
     public static void createVolunteerOrientationForProfile(){
         Volunteer_Orientation_Training__c newVol = new Volunteer_Orientation_Training__c();
-        newVol.Orientation_Training__c = createOrientationForProfile().id;
+        newVol.Hidden_O_T_Id__c = createOrientationForProfile().id;
         newVol.Volunteer__c = createVolunteerContact().id;
         newVol.Volunteer_Attendance__c = 'Registered';
         insert newVol;
@@ -836,7 +824,7 @@ public class TestClassUtil{
     
     public static void createVolunteerTrainingForProfile(){
         Volunteer_Orientation_Training__c newVol = new Volunteer_Orientation_Training__c();
-        newVol.Orientation_Training__c = createTrainingForProfile().id;
+        newVol.Hidden_O_T_Id__c = createTrainingForProfile().id;
         newVol.Volunteer__c = createVolunteerContact().id;
         newVol.Volunteer_Attendance__c = 'Completed';
         insert newVol;

@@ -311,6 +311,7 @@ public class CaseTriggerHandler_Test {
         Id wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();        
         Id taskPlanningRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
         Chapter_Action_Track__c newTrack = OrientationandTrainingUtil.createChapterActionTrack(); 
+        newTrack.Chapter_Name__c = chapterAccount.Id;
         newTrack.Task_name__c= 'Test';
         insert newTrack;
         Task newTask = new Task();
@@ -335,6 +336,7 @@ public class CaseTriggerHandler_Test {
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithAnticipatedStartDate(wishChild.Id);
         Chapter_Action_Track__c newTrack = OrientationandTrainingUtil.createChapterActionTrack(); 
         newTrack.Task_name__c = 'Test';
+         newTrack.Chapter_Name__c = chapterAccount.Id;
         insert newTrack;
         Id wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();        
         Id taskPlanningRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
@@ -360,6 +362,7 @@ public class CaseTriggerHandler_Test {
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
         parentCase.ContactId = wishChild.id;
+        ParentCase.Status = 'Qualified';
         insert parentCase;
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
@@ -367,9 +370,15 @@ public class CaseTriggerHandler_Test {
         
         Volunteer_Opportunity__c volOpp = new Volunteer_Opportunity__c();
         volOpp.Wish__c = parentCase.Id;
+        volOpp.Migrated_Record__c = true;
         volOpp.Volunteer_Name__c = volunterCon.Id;
-        volOpp.IsApproved__c = true;
         insert volOpp;
+        
+        Volunteer_Opportunity__c updateVolOpp = new Volunteer_Opportunity__c();
+        updateVolOpp.Id = volOpp.Id;
+        updateVolOpp.IsApproved__c = true;
+        update updateVolOpp;
+        
         
         parentCase.Status = 'Granted';
         update parentCase;
@@ -392,6 +401,7 @@ public class CaseTriggerHandler_Test {
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
         parentCase.ContactId = wishChild.Id;
+        parentCase.Diagnosis_Verification_Receive_Date__c = Date.today();
         insert parentCase;
         List<CaseTeamRole> caseTeamRole = [SELECT Id FROM CaseTeamRole WHERE Name = 'Wish Granter' LIMIT 1];
         
@@ -404,8 +414,11 @@ public class CaseTriggerHandler_Test {
         childCase.RecordTypeId = wishDeterminationRT;
         childCase.ParentId = parentCase.Id;
         insert childCase;
-        parentCase.OwnerId = volunterUser.Id;
-        update parentCase;
+        Case newChildUpdate = new Case();
+        newChildUpdate.Id = childCase.Id;
+        newChildUpdate.OwnerId = volunterUser.Id;
+        newChildUpdate.Diagnosis_Verification_Receive_Date__c = Date.today();
+        update newChildUpdate;
     }
 
     //Eligibility Review Case Creation
@@ -429,14 +442,19 @@ public class CaseTriggerHandler_Test {
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
         parentCase.ContactId = wishChild.Id;
+        parentCase.Diagnosis_Verification_Receive_Date__c = Date.today();
         insert parentCase;
         Case childCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
         childCase.RecordTypeId = wishDeterminationRT;
         childCase.ParentId = parentCase.Id;
+        childCase.Diagnosis_Verification_Receive_Date__c = Date.today();
         insert childCase;
-        parentCase.Status = 'Wish Determined';
-        parentCase.Sub_Status__c = 'Within Policy';
-        update parentCase;
+        Case newCase = new Case();
+        newCase.id = parentCase.Id;
+        newCase.Status = 'Wish Determined';
+        newCase.Sub_Status__c = 'Within Policy';
+        newCase.Wish_Type__c = 'Disneyland';
+        update newCase;
                
     }
     

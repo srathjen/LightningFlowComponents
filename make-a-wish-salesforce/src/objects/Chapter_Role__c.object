@@ -97,7 +97,7 @@
         <description>It holds the Role Name</description>
         <externalId>false</externalId>
         <label>Hidden Role</label>
-        <length>30</length>
+        <length>50</length>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>

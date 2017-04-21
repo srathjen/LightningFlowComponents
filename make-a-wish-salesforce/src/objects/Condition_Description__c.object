@@ -52,23 +52,13 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>Read</externalSharingModel>
+    <externalSharingModel>Private</externalSharingModel>
     <fields>
         <fullName>Code_To_Use__c</fullName>
         <description>It will hold the short cut code of Condition Description.</description>
         <externalId>false</externalId>
         <label>Code To Use</label>
         <length>50</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Dev_Id__c</fullName>
-        <externalId>false</externalId>
-        <label>Dev Id</label>
-        <length>255</length>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Text</type>
@@ -131,5 +121,5 @@
     </nameField>
     <pluralLabel>Condition Description</pluralLabel>
     <searchLayouts/>
-    <sharingModel>Read</sharingModel>
+    <sharingModel>Private</sharingModel>
 </CustomObject>

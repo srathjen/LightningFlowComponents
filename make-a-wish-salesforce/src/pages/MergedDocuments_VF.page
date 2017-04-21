@@ -21,7 +21,7 @@
             if($('.hidenfld').val() == 'Allow') {
                 window.open($('.hidenfld1').val());
             } else if($('.hidenfld').val() == 'Not Allow') {
-                alert('There should be 2 receipent and email for the receipent should not be empty');
+                alert('There should be atleast one recipient with valid email and name');
             }
         }
         </script>

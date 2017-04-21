@@ -4,7 +4,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
 <apex:page showHeader="false" sidebar="false" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" controller="VolunteerWorkItems_AC">
     <head>
         <apex:include pageName="prospective_head" id="phead" />
-        <apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
+        <apex:stylesheet value="{!URLFOR($Resource.prospective_assets, 'web/css/lib/jquery.dataTables.min.css')}"/>
         <style type="text/css">
 
             body > main {margin-bottom:4em; margin-bottom:4rem;}
@@ -73,7 +73,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                                     <apex:outputText id="rejected" rendered="{!rejectedOpportunitiesMap[con1[fieldValue]] == true}">Not Approved</apex:outputText>
                                                                     <apex:outputText id="pending" rendered="{!recordVisibilityMap[con1[fieldValue]] == false && rejectedOpportunitiesMap[con1[fieldValue]] == false}">Pending Approval</apex:outputText>
                                                                     <apex:outputLink value="/{!con1.Id}" id="approved" rendered="{!recordVisibilityMap[con1[fieldValue]] == true && rejectedOpportunitiesMap[con1[fieldValue]] == false && con1.Role__c != 'Wish Granter' && con1.Role__c != 'Wish Granter Mentor'}">View</apex:outputLink>
-                                                                    <apex:outputLink value="/{!con1.Wish__c}" id="approved1" rendered="{!recordVisibilityMap[con1[fieldValue]] == true && rejectedOpportunitiesMap[con1[fieldValue]] == false && con1.Role__c == 'Wish Granter' || con1.Role__c == 'Wish Granter Mentor' && con1.Approval_Status__c == 'Approved'}">View</apex:outputLink>
+                                                                    <apex:outputLink value="/{!con1.Wish__c}" id="approved1" rendered="{!recordVisibilityMap[con1[fieldValue]] == true && rejectedOpportunitiesMap[con1[fieldValue]] == false && con1.Role__c == 'Wish Granter' || con1.Role__c == 'Wish Granter Mentor'}">View</apex:outputLink>
                                                                 </td>
                                                             </apex:outputpanel>
                                                             <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label  != 'Waiting Since' }">
@@ -203,10 +203,8 @@ Description : This page is used to display the volunteer opportunity recordes wh
             </div>
         </main>
         <apex:include pageName="prospective_footer" id="pfooter" />
-        <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-        <!-- fallback -->
-            <script>window.jQuery || document.write('<script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.dataTables.min.js')}">\x3C/script>')</script>
-            <script src="{!URLFOR($Resource.prospective_assets, 'web/js/stacktable.min.js')}"></script>
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.dataTables.min.js')}"></script>
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/stacktable.min.js')}"></script>
 
         <script>
         $( document ).ready(function() {

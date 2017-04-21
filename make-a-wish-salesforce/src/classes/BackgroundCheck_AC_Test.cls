@@ -41,6 +41,7 @@ public class BackgroundCheck_AC_Test{
             ApexPages.currentPage().getParameters().put('trainingRequired','true');
             ApexPages.currentPage().getParameters().put('bgRequired','true');
             OrientationandTrainingUtil.createDynamicContent();
+            VolunteerLanding_AC_Test.BGCRecordSharing(dbUser.id,backgroundCheck.id);
             update backgroundCheck;
           
             BackgroundCheck_AC backCheck = new BackgroundCheck_AC();

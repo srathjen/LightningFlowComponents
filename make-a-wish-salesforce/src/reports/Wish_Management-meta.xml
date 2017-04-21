@@ -5,5 +5,15 @@
         <sharedTo>ccoode@wish.org</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
+    <folderShares>
+        <accessLevel>View</accessLevel>
+        <sharedTo>Arizona_Chapter</sharedTo>
+        <sharedToType>Role</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>National_Staff</sharedTo>
+        <sharedToType>Role</sharedToType>
+    </folderShares>
     <name>Wish Management</name>
 </ReportFolder>

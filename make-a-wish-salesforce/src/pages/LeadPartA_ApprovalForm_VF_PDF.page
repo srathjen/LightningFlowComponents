@@ -207,7 +207,7 @@
                                 </apex:outputpanel>
                                 
                                 <div class="container" style="width:100%;">
-                                    <div class="left-col"> Is QA 2607 QA2607 in a comatose or vegetative state? : </div>
+                                    <div class="left-col"> Is {!currLead.FirstName} {!currLead.LastName} in a comatose or vegetative state? : </div>
                                     <div class="left-col"> {!currLead.Is_in_a_Comatose_Vegetative_State__c}</div>
                                 </div>
                                 

@@ -21,8 +21,8 @@
         <name>Account_Phone__c</name>
     </fields>
     <fields>
-        <label><!-- Active --></label>
-        <name>Active__c</name>
+        <label><!-- Current --></label>
+        <name>Current__c</name>
     </fields>
     <fields>
         <label><!-- Expiration Date --></label>
@@ -31,6 +31,10 @@
     <fields>
         <label><!-- External Id --></label>
         <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Conflict Expire --></label>
+        <name>HiddenConflictExpire__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Volunteer Contact Email --></label>

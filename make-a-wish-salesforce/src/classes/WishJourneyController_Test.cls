@@ -43,7 +43,7 @@ public class WishJourneyController_Test {
         
     }
     
-    public static testMethod void caseWithOnhold() {
+   /* public static testMethod void caseWithOnhold() {
         String wishRecTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get('Wish Determination').getRecordTypeId();
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'On Hold';
@@ -52,7 +52,7 @@ public class WishJourneyController_Test {
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
         
-    }
+    }*/
     
     public static testMethod void caseWitEscalated() {
         Constant_AC newConstant = new Constant_AC();
@@ -117,7 +117,7 @@ public class WishJourneyController_Test {
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Completed';
         currentCase.Origin = 'Email';
-        currentCase.diagnosis_verificaion_receive_date__c = Date.today();
+        currentCase.Diagnosis_Verification_Receive_Date__c = Date.today();
         currentCase.Lead__c = currLead.Id;
         currentCase.End_Date__c = Date.today().addDays(6);
         currentCase.Referral_Date__c = Date.today().addDays(6);

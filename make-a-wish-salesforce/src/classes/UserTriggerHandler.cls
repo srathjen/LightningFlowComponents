@@ -111,46 +111,33 @@ insert groupMemberList ;
     
     @future
     public static void updateUser(Set<Id> inactiveUserIdSet){
-        system.debug('@@@@@@@@@@@@@@@@Inactive User ID '+ inactiveUserIdSet);
+        System.debug('Met Executed>>>>');
         List<Case> caseList = new List<Case>();
         List<Case> dbcaseList = new List<Case>();
         Constant_AC constantobj = new Constant_AC();
         string parentCaseRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get(constantobj.parentWishRT).getRecordTypeId();
         Map<Id,String> caseTeamMemberMap = new Map<Id,String>();
-        for(CaseTeamMember dbCaseTeamMember : [SELECT Id,MemberId,Member.FirstName,Member.LastName,ParentId,Parent.RecordTypeId, TeamRoleId,TeamRole.Name FROM CaseTeamMember  WHERE TeamRole.Name =: 'Wish Granter' AND MemberId IN: inactiveUserIdSet]){
-            
-            caseTeamMemberMap.put(dbCaseTeamMember.ParentId,dbCaseTeamMember.Member.FirstName+ ' '+' ' +dbCaseTeamMember.Member.LastName);
+        for(CaseTeamMember dbCaseTeamMember : [SELECT Id,MemberId,Member.FirstName,Member.LastName,ParentId,Parent.RecordTypeId,TeamRoleId,TeamRole.Name FROM CaseTeamMember  WHERE TeamRole.Name = 'Wish Granter' AND MemberId IN: inactiveUserIdSet]){
+            System.debug('Inactive CaseTeam Mem Found>>>>>>'+dbCaseTeamMember.MemberId);
+            caseTeamMemberMap.put(dbCaseTeamMember.ParentId,dbCaseTeamMember.Member.FirstName+ ' '+dbCaseTeamMember.Member.LastName);
         }
         
-        system.debug('@@@@@@@@@@@@@@@@ Parent Case Id + Inactive User Name'+ caseTeamMemberMap);
-        for(Case dbCase : [SELECT Id,isEmailWishGranter__c ,InActiveWishGranter__c  From Case WHERE Id IN:caseTeamMemberMap.KeySet()]){
-            if(dbCase.isEmailWishGranter__c  == True &&  dbCase.InActiveWishGranter__c != null){
-                case newCase = new case();
-                newCase.Id =dbCase.Id;
-                newcase.isEmailWishGranter__c = false;
-                newcase.InActiveWishGranter__c = null;
-                dbcaseList.add(newCase);
+        for(Case dbCase : [SELECT Id,isEmailWishGranter__c ,InActiveWishGranter__c  From Case WHERE Id IN:caseTeamMemberMap.KeySet() AND isClosed = false]){
+            System.debug('Relavent Case Update>>>>>>>>');
+            dbCase.isEmailWishGranter__c = true;
+            if(caseTeamMemberMap.containsKey(dbCase.Id)) {
+                System.debug('UpdateName>>>>>>');
+                dbCase.InActiveWishGranter__c = caseTeamMemberMap.get(dbCase.Id);
             }
+            dbcaseList.add(dbCase);
         }
-        system.debug('@@@@@@@@@@@@@@@@@dbcaseList' + dbcaseList);
+        
         if(dbcaseList.size() > 0 ){
+            System.debug('Rec Update>>>>>');
             update dbcaseList;
-            }
-        
-        for(Id caseIds : caseTeamMemberMap.KeySet()){
-            
-            case newCase = new case();
-            newCase.Id =caseIds;
-            newcase.isEmailWishGranter__c = true;
-            newcase.InActiveWishGranter__c = caseTeamMemberMap.get(caseIds);
-            caseList.add(newCase); 
         }
         
-        system.debug('@@@@@@@@@@@@@@@@@caseList' + caseList);
         
-        if(caseList.size() > 0){
-            update caseList;
-            }
     }
     
     //Used to add Salesforce internal user to chatter group based on their Role

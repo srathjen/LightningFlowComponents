@@ -15,12 +15,15 @@
         <script type="text/javascript">
             function openLMS(ssoLink, courseLink) {
                 newwindow = window.open(ssoLink, 'openLMS');
+                if ((newwindow == null || typeof(newwindow) == 'undefined')) {
+                    $('#poppup-alert').modal({backdrop: 'static', keyboard: false});
+                }
                 setTimeout(function () {
                     window.newwindow.close();
                     setTimeout(function () {
                         window.open(courseLink, '_blank');
-                    }, 1);
-                }, 10);
+                    }, 10);
+                }, 2000);
             }
         </script>
     <body class="vcp vcpactivelogin">
@@ -160,6 +163,23 @@
                                 <apex:outputText value="{!orientationContent}" escape="false"/>
                             </div>
                         </div>
+                        
+                         <div class="modal fade" id="poppup-alert" tabindex="-1" role="dialog" aria-labelledby="poppup-alert" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title">For a Better Experience</h1>
+                              </div>
+                              <div class="modal-body">
+                                <p class="text-muted">Please select the radio option "Always allow pop-ups for this domain", in the URL bar (Pop up Blocker options) then refresh the page.</p>
+                              </div>
+                              <div class="modal-footer">
+                                <apex:commandButton html-data-dismiss="modal" html-aria-label="Close" styleClass="btn-md" value="Ok"/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
                     </apex:form>
 
                 </section>

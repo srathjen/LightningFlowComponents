@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -106,7 +106,7 @@
         <fullName>Completed_Date__c</fullName>
         <description>It will display the training completed date.</description>
         <externalId>false</externalId>
-        <formula>IF(ISPICKVAL( Volunteer_Attendance__c ,&apos;Completed&apos;), TODAY(),null)</formula>
+        <formula>Hidden_Completed_Date__c</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Completed Date</label>
         <required>false</required>
@@ -174,6 +174,27 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Hidden_Completed_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Hidden Completed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Hidden_O_T_Id__c</fullName>
+        <description>Its holding Orientation and Training Id</description>
+        <externalId>false</externalId>
+        <label>Hidden O&amp;T Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>LMS_Enrollment_Id__c</fullName>
         <caseSensitive>false</caseSensitive>
         <description>This Field holds the enroll id from the LMS</description>
@@ -201,27 +222,12 @@
         <description>It will display the name of the orientation and training</description>
         <externalId>false</externalId>
         <formula>Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.Name</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Orientation &amp; Training Hidden</label>
+        <label>Orientation &amp; Training</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>Orientation_Training__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
-        <description>It will look up to Orientation &amp; Training object records</description>
-        <externalId>false</externalId>
-        <label>Orientation/Training</label>
-        <referenceTo>Orientation_Training__c</referenceTo>
-        <relationshipLabel>Volunteer Orientation &amp; Trainings</relationshipLabel>
-        <relationshipName>Volunteer_Orientation_Trainings</relationshipName>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>RE_Completed_Date__c</fullName>
@@ -383,7 +389,6 @@
     </fields>
     <fields>
         <fullName>Volunteer__c</fullName>
-        <deleteConstraint>SetNull</deleteConstraint>
         <description>It will look up to Volunteer Contact records</description>
         <externalId>false</externalId>
         <label>Volunteer</label>
@@ -399,17 +404,18 @@
         <referenceTo>Contact</referenceTo>
         <relationshipLabel>Volunteer Orientation &amp; Trainings</relationshipLabel>
         <relationshipName>Volunteer_Orientation_Trainings</relationshipName>
-        <required>false</required>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Lookup</type>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <label>Volunteer Orientation &amp; Training</label>
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
         <columns>Volunteer__c</columns>
-        <columns>Orientation_Training__c</columns>
         <columns>Registered_Date__c</columns>
         <columns>Start_Time__c</columns>
         <columns>End_Time__c</columns>
@@ -426,7 +432,7 @@
     </nameField>
     <pluralLabel>Volunteer Orientation &amp; Trainings</pluralLabel>
     <searchLayouts>
-        <customTabListAdditionalFields>Orientation_Training__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields xsi:nil="true"/>
         <customTabListAdditionalFields>Registered_Date__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Start_Time__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>End_Time__c</customTabListAdditionalFields>
@@ -438,7 +444,7 @@
     <validationRules>
         <fullName>Restrict_no_available_seats</fullName>
         <active>false</active>
-        <errorConditionFormula>OR(ISNEW() &amp;&amp; (Orientation_Training__r.Available_Seats__c &lt;= 0)  &amp;&amp; ISPICKVAL(Volunteer_Attendance__c ,&apos;Registered&apos;),( Orientation_Training__r.Available_Seats__c &lt;= 0)&amp;&amp; ISPICKVAL(Volunteer_Attendance__c ,&apos;Registered&apos;) )</errorConditionFormula>
+        <errorConditionFormula>OR(ISNEW() &amp;&amp; (00N3600000MqwNY.00N3600000MqwOw &lt;= 0)  &amp;&amp; ISPICKVAL(Volunteer_Attendance__c ,&apos;Registered&apos;),( 00N3600000MqwNY.00N3600000MqwOw &lt;= 0)&amp;&amp; ISPICKVAL(Volunteer_Attendance__c ,&apos;Registered&apos;) )</errorConditionFormula>
         <errorMessage>There is no available seats for this training</errorMessage>
     </validationRules>
 </CustomObject>

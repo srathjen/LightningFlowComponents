@@ -4,7 +4,7 @@
   <apex:form id="MedicalSummary">
   <apex:messages />
   <apex:pageBlock title="Medical Summary">
-      <apex:pageBlockSection title="Wish Child Summary From Details" columns="2">
+      <apex:pageBlockSection title="Wish Child Summary Form Details" columns="2">
      <apex:outputField label="Medical Professional Name" value="{!currentParentCase.Contact.Hidden_Medical_Physician__c}" />
      <apex:outputField label="Medical Professional Email" value="{!currentParentCase.Contact.Hidden_Medical_Physician_Email__c }" style="display:none" />
      <apex:InputField label="Wish Involves Air Travel" value="{!currentParentCase.wish_involves_air_travel__c}" rendered="{!currentParentCase.wish_involves_air_travel__c == Null}" />

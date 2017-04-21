@@ -96,7 +96,6 @@ public class VolunteerLanding_AC_Test {
             currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.id);
         }
         VolunteerLanding_AC controller;
-        Conflict_Of_Interest__c currCOI;
         System.RunAs(currUser)
         {
             
@@ -106,20 +105,21 @@ public class VolunteerLanding_AC_Test {
             currVal.CurrentChapter__c = acc.Name;
             insert currVal;
             
-            Background_check__c currBG = OrientationandTrainingUtil.createBackgroundCheck(con.id);
+            Background_check__c currBG = OrientationandTrainingUtil.createBackgroundCheck(currUser.contactId);
+            System.assert(currBg.id!=Null);
             
-            currCOI = OrientationandTrainingUtil.createCOI(con.id);
-          }
+            Conflict_Of_Interest__c currCOI = OrientationandTrainingUtil.createCOI(con.id);
             currCOI.Expiration_Date__c  = System.Today()+5;
+            COIRecordSharing(currUser.id,currCOI.id);
             update currCOI;
             
-           
-        System.RunAs(currUser)
-        {
+            
+            
             Broadcast__c currBroad = new Broadcast__c();
             currBroad.Broadcast_Message__c = 'Test';
             currBroad.Date__c = Date.Today() + 5;
             currBroad.Chapter_Name__c = acc.id;
+            currBroad.Active__c = true;
             insert currBroad;
             
             Role__c currRole = OrientationandTrainingUtil.createRole();
@@ -140,7 +140,21 @@ public class VolunteerLanding_AC_Test {
             controller.BackgroundCheck(false);
             controller.DisplayTraining(false);
             controller.register();
-           // controller.confirmBackGroundCheck();
+            controller.featuredImage = 'testImage';
+            controller.featuredQuote = 'testQuote';
+            controller.welcomeMsg = 'testWelcome';
+            controller.headingTitle1 = 'testTitle1';
+            controller.headingText1 = 'testText';
+            controller.text1 = 'testText1';
+            controller.text2 = 'testText2';
+            controller.text3 = 'testText3';
+            controller.title1 = 'testTitile1';
+            controller.title2 = 'testTitle2';
+            controller.title3 = 'testTitle3';
+            controller.image1 = 'testImage1'           ;
+            controller.image2 = 'testImage2';
+            controller.image3 = 'testImage3';
+            //controller.confirmBackGroundCheck();
             controller.cancel();
             controller.cancelConflict();
             OrientationandTrainingUtil.insertDocusignSetting();
@@ -181,6 +195,7 @@ public class VolunteerLanding_AC_Test {
             Broadcast__c currBroad = new Broadcast__c();
             currBroad.Broadcast_Message__c = 'Test';
             currBroad.Date__c = Date.Today() + 5;
+            currBroad.Active__c = true;
             currBroad.Chapter_Name__c = acc.id;
             insert currBroad;
             
@@ -219,7 +234,6 @@ public class VolunteerLanding_AC_Test {
             currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.id);
         }
         VolunteerLanding_AC controller;
-        Conflict_Of_Interest__c currCOI;
         System.RunAs(currUser)
         {
             
@@ -229,17 +243,16 @@ public class VolunteerLanding_AC_Test {
             currVal.CurrentChapter__c = acc.Name;
             insert currVal;
             
-            currCOI = OrientationandTrainingUtil.createCOI(con.id);
-         }
+            Conflict_Of_Interest__c currCOI = OrientationandTrainingUtil.createCOI(con.id);
             currCOI.Expiration_Date__c  = System.Today()+5;
+            COIRecordSharing(currUser.id,currCOI.id);
             update currCOI;
             
-       System.RunAs(currUser)
-        {   
             Broadcast__c currBroad = new Broadcast__c();
             currBroad.Broadcast_Message__c = 'Test';
             currBroad.Date__c = Date.Today() + 5;
             currBroad.Chapter_Name__c = acc.id;
+            currBroad.Active__c = true;
             insert currBroad;
             
             Role__c currRole = OrientationandTrainingUtil.createRole();
@@ -277,8 +290,6 @@ public class VolunteerLanding_AC_Test {
             currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.id);
         }
         VolunteerLanding_AC controller;
-        Conflict_Of_Interest__c currCOI;
-        
         System.RunAs(currUser)
         {
             
@@ -288,13 +299,12 @@ public class VolunteerLanding_AC_Test {
             currVal.CurrentChapter__c = acc.Name;
             insert currVal;
             
-           currCOI = OrientationandTrainingUtil.createCOI(con.id);
-        }
+            Conflict_Of_Interest__c currCOI = OrientationandTrainingUtil.createCOI(con.id);
             currCOI.Expiration_Date__c  = System.Today()-5;
+            COIRecordSharing(currUser.id,currCOI.id);
             update currCOI;
             
-         System.RunAs(currUser)
-        {   
+            
             
             controller = new VolunteerLanding_AC();
             controller.getChapterList();
@@ -329,7 +339,8 @@ public class VolunteerLanding_AC_Test {
             
             Background_check__c currBG = OrientationandTrainingUtil.createBackgroundCheck(con.id);
             currBG.Date__c = Date.Today()-5;
-          //  update currBG;
+            BGCRecordSharing(currUser.id,currBG.id);
+            update currBG;
             
             controller = new VolunteerLanding_AC();
             controller.getChapterList();
@@ -364,10 +375,12 @@ public class VolunteerLanding_AC_Test {
             
             Background_check__c currBG = OrientationandTrainingUtil.createBackgroundCheck(con.id);
             Background_check__c currBG1 = OrientationandTrainingUtil.createBackgroundCheck(con.id);
-            currBG.Date__c = Date.Today().addYears(3);
+            Background_check__Share BGSharing = BGCRecordSharing(currUser.id,currBG.id);
             
-           // update currBG;
-           
+            currBG.Date__c = Date.Today().addYears(3);
+            BGCRecordSharing(currUser.id,currBG.id);
+            update currBG;
+            
             controller = new VolunteerLanding_AC();
             controller.getChapterList();
             controller.EnterchapterPage();
@@ -383,12 +396,44 @@ public class VolunteerLanding_AC_Test {
     {
         Volunteer_Orientation_Training__c createNewVol = new Volunteer_Orientation_Training__c();
         createNewVol.class_offering__c = ClassOfferingId;
-        createNewVol.Orientation_Training__c = OrienationId;
+        createNewVol.Hidden_O_T_Id__c= OrienationId;
         createNewVol.Registered_Date__c = Date.Today();
         createNewVol.Volunteer__c = volunteer;
         createNewVol.Volunteer_Attendance__c = status;
         createNewVol.Type__c = 'Training';
         insert createNewVol;
         return createNewVol;
-    }     
+    }  
+    
+    
+    Public Static Background_check__Share BGCRecordSharing(id userId, id recordId)
+    {
+        Background_check__Share currSharing = new Background_check__Share();
+        User currUser = [SELECT id from User WHERE Profile.Name ='System Administrator' and isActive=True limit 1];
+        System.RunAs(currUser)
+        {
+            
+            currSharing.ParentId = recordId;
+            currSharing.UserOrGroupId = userId;
+            currSharing.AccessLevel = 'Edit';
+            currSharing.RowCause = Schema.Background_check__Share.RowCause.Manual;
+            insert currSharing;
+        }
+        return currSharing;
+    }
+    Public Static Conflict_Of_Interest__Share COIRecordSharing(id userId, id recordId)
+    {
+        Conflict_Of_Interest__Share currSharing = new Conflict_Of_Interest__Share();
+        User currUser = [SELECT id from User WHERE Profile.Name ='System Administrator' and isActive=True limit 1];
+        System.RunAs(currUser)
+        {
+            
+            currSharing.ParentId = recordId;
+            currSharing.UserOrGroupId = userId;
+            currSharing.AccessLevel = 'Edit';
+            currSharing.RowCause = Schema.Conflict_Of_Interest__Share.RowCause.Manual;
+            insert currSharing;
+        }
+        return currSharing;
+    }
 }

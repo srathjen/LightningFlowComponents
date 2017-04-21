@@ -12,7 +12,7 @@
             <div class="row">
                 <h1 class="col-md-12">Volunteer Interview</h1>
             </div>
-            <nav class="row">
+          <!--  <nav class="row">
                 <ul class="step">
                     <li><a href="/apex/VolunteerOrientation_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Orientation</a></li>
                     <li><a href="/apex/Application_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Application</a></li>
@@ -24,7 +24,7 @@
                          <li><a href="/apex/VolunteerTraining_VF?bgRequired={!bgTabPermission}&trainingRequired={!trainingTabVisible}">Training</a></li>
                      </apex:outputpanel>
                 </ul>
-            </nav>
+            </nav> -->
             
             <div class="row">
                 <section class="col-md-8">

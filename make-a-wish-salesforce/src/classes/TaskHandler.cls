@@ -105,7 +105,7 @@ insert newTaskList;
     }
     
     //This method is used to assign task to caseteammembers based on roles
-    public static void TaskAssignmentToVolunteer(List<Task> actionTrackTasksList, Set<Id> actionTracksRelatedCaseIdsSet) {
+   /* public static void TaskAssignmentToVolunteer(List<Task> actionTrackTasksList, Set<Id> actionTracksRelatedCaseIdsSet) {
         
         Constant_AC  constant = new Constant_Ac(); 
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
@@ -179,7 +179,7 @@ insert newTaskList;
                 }
             }
         }        
-    }
+    }*/
     
     
     public static void UpdateAffiliationStatus(Set<Id> volunteerContactSet)
@@ -394,16 +394,18 @@ corresponding task fields to merge with email template */
         List<Task> newRecTaskList = new List<Task>();
         
         Map<Id,String> wishContactIdMap = new Map<Id,String>();
-        
-        for(Case getChildInfo : [SELECT Id, Contact.Name FROM Case WHERE Id IN : createUploadTaskWishMap.keySet() AND RecordTypeId =:parentWishRecordTypeId]) {
+        Map<Id, Id> caseContactMap = new Map<Id, Id>();
+        for(Case getChildInfo : [SELECT Id, Contact.Name, ContactId FROM Case WHERE Id IN : createUploadTaskWishMap.keySet() AND RecordTypeId =:parentWishRecordTypeId]) {
             wishContactIdMap.put(getChildInfo.Id, getChildInfo.Contact.Name);
+            caseContactMap.put(getChildInfo.Id, getChildInfo.ContactId);
         }
         for(Id parentId : createUploadTaskWishMap.Keyset()) {
             Task newSubTask = new Task();
             newSubTask.Subject = 'Review Photos and Videos for '+wishContactIdMap.get(parentId);
+            if(caseContactMap.containsKey(parentId)) {
+                newSubTask.WhoId = caseContactMap.get(parentId);
+            }
             newSubTask.WhatId = parentId;
-            System.debug('WhatId>>>>'+parentId);
-            System.debug('createUploadTaskWishMap>>>>'+createUploadTaskWishMap);
             newSubTask.RecordTypeId = defaultRecordTypeId;
             newSubTask.ActivityDate = System.today() + 5;
             newSubTask.OwnerId = createUploadTaskWishMap.get(parentId);
@@ -630,16 +632,12 @@ communityUserIdSet.add(communityUser.Id);
             
             Set<Id> closeFolowupTaskIdSet = new Set<Id>();
             for(Id parentId : closeTaskParentIdsSet) {
-                System.debug('********');
-                System.debug('&&&&&&&&&>>>>'+taskCount);
                 if(!taskCount.containsKey(parentId)) {
-                    System.debug('%%%%%%%%%%%%>>>>>>>>');
                     closeFolowupTaskIdSet.add(parentId);
                 }
             }
             
             if(closeFolowupTaskIdSet.size() > 0) {
-                System.debug('<<<<<<<<<<<<<<<');
                 List<Task> closeFolowUpTaskList = new List<Task>();
                 for(Task closeFollowUpTask : [SELECT Id FROM Task WHERE WhatId IN : closeFolowupTaskIdSet AND Subject = 'Volunteer wish follow-up activities not complete']) {
                     closeFollowUpTask.Status = 'Completed';

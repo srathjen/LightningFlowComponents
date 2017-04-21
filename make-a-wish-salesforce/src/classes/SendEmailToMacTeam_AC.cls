@@ -32,10 +32,18 @@ global class SendEmailToMacTeam_AC {
     
     webservice static String sendEmailToMac(Id caseOwnerId, Id leadId, Id caseId, String caseStatus, string Email) {
         //Id OrgId = '0D25B00000000cF';
+       
         String organizationWideLabel=System.Label.OrganizationWideEmail;        
         ORGWIDEEMAILADDRESS  OrgId = [SELECT id,Address FROM ORGWIDEEMAILADDRESS WHERE Address =: organizationWideLabel LIMIT 1];       
       
-         case dbcase = [SELECT Id,OwnerId,Owner.Email FROM Case WHERE Id =: caseId];
+        case dbcase = [SELECT Id,OwnerId,Medical_Summary_Attachments__c,Owner.Email FROM Case WHERE Id =: caseId];
+        dbcase.Medical_Summary_Attachments__c = '';
+        //dbCase.Medical_Summary_Attachments__c = 'If the qualifying medical professional included a medical summary, it is attached below.'+'<br/>';
+        for(Lead_File__c curentLeadFile : [SELECT ID,File_Name__c,Parent__c,File_Path__c FROM Lead_File__c WHERE Parent__c =: leadId]){
+            dbcase.Medical_Summary_Attachments__c += '<a href=' + curentLeadFile.File_Path__c + '>' + curentLeadFile.File_Name__c + '</a> <br/>';
+        }
+        update dbcase;
+       
         string nationalTeamTemplateID = Label.National_Email_Template_ID;
         string localTeamTemplateId = Label.Local_Email_Template_ID;
         Set<String> emailSet = new Set<String>();
@@ -48,6 +56,7 @@ global class SendEmailToMacTeam_AC {
         } 
         string emailTemplateId;
         Messaging.SingleEmailMessage emailMessage = new Messaging.SingleEmailMessage();
+        
         if(caseStatus == 'Local') {
             emailMessage.setTemplateId(localTeamTemplateId); //Replace this using custom setting
         } else if(caseStatus == 'National') {

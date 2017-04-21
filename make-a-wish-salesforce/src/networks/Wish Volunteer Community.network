@@ -17,8 +17,8 @@
         <zeronaryComplementColor>#FFFFFF</zeronaryComplementColor>
     </branding>
     <changePasswordTemplate>Automated_Volunteer_Templates/Communities_Reset_Password_Email_Template</changePasswordTemplate>
-    <emailSenderAddress>vennila@mstsolutions.com</emailSenderAddress>
-    <emailSenderName>Volunteer Portal</emailSenderName>
+    <emailSenderAddress>wvcsupport@wish.org</emailSenderAddress>
+    <emailSenderName>Wish &amp; Volunteer Center</emailSenderName>
     <enableGuestChatter>false</enableGuestChatter>
     <enableInvitation>false</enableInvitation>
     <enableKnowledgeable>false</enableKnowledgeable>

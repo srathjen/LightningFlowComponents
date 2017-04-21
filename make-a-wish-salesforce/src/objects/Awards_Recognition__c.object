@@ -49,7 +49,7 @@
     <enableFeeds>false</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableReports>true</enableReports>
-    <enableSearch>true</enableSearch>
+    <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Private</externalSharingModel>
@@ -494,6 +494,10 @@
     <label>Awards &amp; Recognition</label>
     <listViews>
         <fullName>All</fullName>
+        <columns>Award_Name__c</columns>
+        <columns>Award_Type__c</columns>
+        <columns>OWNER.ALIAS</columns>
+        <columns>NAME</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -505,5 +509,5 @@
     </nameField>
     <pluralLabel>Awards &amp; Recognitions</pluralLabel>
     <searchLayouts/>
-    <sharingModel>Private</sharingModel>
+    <sharingModel>Read</sharingModel>
 </CustomObject>

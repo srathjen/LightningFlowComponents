@@ -64,4 +64,29 @@ public class InKindDonationReimbursement_AT_Test {
         }
     }
     
+    static testMethod void createInkindRecforNationalStaff(){
+        Chapter_Vs_Role__c arizonaChap = OrientationandTrainingUtil.createArizonaChapter();
+        Chapter_Vs_Role__c alabamaChap = OrientationandTrainingUtil.createAlabamaChapter();
+        Insert alabamaChap;
+        Insert arizonaChap;
+        
+        User currUser = [SELECT id from User where id = :Userinfo.getUserId() limit 1];
+        User nationalStaff;
+        System.RunAs(currUser)
+        {   
+            nationalStaff = OrientationandTrainingUtil.createUserWithRole([select Id from UserRole where Name='National Staff'].Id);
+        }
+        
+        System.runAs(nationalStaff) {
+            Test.startTest();
+            Account voluntterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+            Contact volunterrContct = OrientationandTrainingUtil.createVolunteerContact(voluntterAccount.id);
+            Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+            Case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+            In_Kind_Donation_Reimbursement__c  InkindRec = OrientationandTrainingUtil.CreateInkindRecord(wish.Id);
+            Test.stopTest();
+        }
+        
+    }
+    
 }

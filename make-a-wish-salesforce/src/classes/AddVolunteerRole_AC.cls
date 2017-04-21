@@ -35,15 +35,20 @@ public class AddVolunteerRole_AC{
     public Id trainingRTId = Schema.Sobjecttype.Orientation_Training__c.getRecordTypeInfosByName().get(constant.trainingRT).getRecordTypeId();
     public Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
     public boolean isReferesh{get;set;}
+    public boolean isActiveVolunteer{get;set;}
     /* It will display the volunteer opportunities grouped by role when the page is loaded */
     public AddVolunteerRole_AC(ApexPages.StandardController controller){
         this.controller = controller;
         nonWishEvent  = (Non_Wish_Events__c)controller.getRecord();
-        currUser = [SELECT Id,contactId,Hidden_Role_Name_Id__c  FROM User WHERE Id = :userInfo.getUserId()];
+        isActiveVolunteer = false;
+        currUser = [SELECT Id,contactId,Hidden_Role_Name_Id__c,Profile.Name  FROM User WHERE Id = :userInfo.getUserId()];
         volunteerCountWrapList = new List<VolunteerCountWrapper>();
         activeVolunteer = label.Active_Volunteer_Profile;
         profileId = userInfo.getProfileId();
         Set<String> nonWishIdSet = new Set<String>();
+        
+        if(currUser.Profile.Name == 'Active Volunteer (Member)' ||currUser.Profile.Name == 'Active Volunteer (Login)' )
+            isActiveVolunteer = True;
         
         if(currUser.ContactId != Null){
             isCommunity = true;
@@ -62,18 +67,23 @@ public class AddVolunteerRole_AC{
         eventRT= Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
         volunteerCountList = new List<Volunteer_Count__c>();
         addNewVolunteerRoleList = new List<Non_Wish_Events__c>();
-        for(Volunteer_Count__c dbCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__r.Name,Description__c,Hidden_Chapter_Name__c,Chapter_Role__c,Registered__c,Event_Name__c FROM Volunteer_Count__c WHERE Non_Wish_Events__c =: nonWishEvent.id AND Volunteer_Needed__c != 0 ]){
-            if(currUser.ContactId != Null){
+        for(Volunteer_Count__c dbCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__r.Name,Description__c,
+                                         Hidden_Chapter_Name__c,Chapter_Role__c,Registered__c,Event_Name__c 
+                                         FROM Volunteer_Count__c WHERE Non_Wish_Events__c =: nonWishEvent.id 
+                                         AND Volunteer_Needed__c != 0 ])
+         {
+           /* if(currUser.ContactId != Null){
                  
                  system.debug('@@@@@ chapterRoleString 2 @@@@@@'+dbCount.Hidden_Chapter_Name__c);
                  if(!nonWishIdSet.contains(dbCount.Non_Wish_Events__c+' '+dbCount.Hidden_Chapter_Name__c)){
                     system.debug('@@@@@ chapterRoleString 2 @@@@@@'+dbCount.Hidden_Chapter_Name__c);
                      volunteerCountList.add(dbCount);
                  }
-            }
-            else{
+           }
+            else{ 
                 volunteerCountList.add(dbCount);
-            }
+            }*/
+            volunteerCountList.add(dbCount);
         }
         
         system.debug('---- volunteerCountList ----'+volunteerCountList);
@@ -341,7 +351,7 @@ As well as it will update the volunteer opportunity.*/
                      {
                          if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == True)
                          {
-                            if(TrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__c))
+                            if(TrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c))
                             {
                                updateRecord = true;
                                allowRegister = true;
@@ -403,14 +413,13 @@ As well as it will update the volunteer opportunity.*/
            else 
              return false;
     }
-    
     /*This method is used when the volunteer contact can able to register for the particular volunteer opportunity*/
     public pageReference register(){
         try{
             boolean isUpdate = false;
-            isReferesh = true;
+           // isReferesh = true;
             inputmode = false;
-            outputmode = false;
+          //  outputmode = false;
             isnew = false;
             String chatperRoleId;
             String volunteerStatus; 
@@ -418,31 +427,71 @@ As well as it will update the volunteer opportunity.*/
             Chapter_Role__c dbRole;
             String roleId;
              Boolean allowRegister = false;
+             Id voulnteerCountId;
             Id trainingRTId = Schema.Sobjecttype.Orientation_Training__c.getRecordTypeInfosByName().get(constant.trainingRT).getRecordTypeId();
             pr = new PageReference('/'+nonWishEvent.Id);
             Map<Id,Volunteer_Count__c> volunteerCountMap = new Map<Id,Volunteer_Count__c>();
             system.debug('@@@@@@@ volunteerCountId  @@@@@@@@@'+CountId );
             Contact volunteerContact = [SELECT Id,LastName From Contact WHERE RecordTypeId = :volunteerRecordTypeId limit 1]; 
-            List<Volunteer_Opportunity__c>  dbVolOpporunity= [SELECT id,RecordTypeId,HiddenVolunteer_Count_Description__c,Role__c,Chapter_Name__r.Name,Chapter_Role_Opportunity__c,Chapter_Role_Opportunity__r.Role_Name__c,Chapter_Name__c,Volunteer_Name__c,Non_Wish_Event__c,Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Chapter_Role_Opportunity__c =: ChapterRoleId AND Volunteer_Name__c = Null AND Non_Wish_Event__c =: nonWishEvent.id  AND RecordTypeId =:eventRT AND IsApproved__c = False AND Reason_Inactive__c =: Null AND HiddenVolunteer_Count_Description__c =: CountId Limit 1];
+            
+            List<Volunteer_Opportunity__c>  dbVolOpporunity= [SELECT id,RecordTypeId,HiddenVolunteer_Count_Description__c,Role__c,Chapter_Name__r.Name,
+                                                              Chapter_Role_Opportunity__c,Chapter_Role_Opportunity__r.Role_Name__c,
+                                                              Chapter_Name__c,Volunteer_Name__c,Non_Wish_Event__c,Reason_Inactive__c 
+                                                              FROM Volunteer_Opportunity__c WHERE Chapter_Role_Opportunity__c =: ChapterRoleId 
+                                                              AND Volunteer_Name__c = Null AND Non_Wish_Event__c =: nonWishEvent.id  
+                                                              AND RecordTypeId =:eventRT AND IsApproved__c = False AND Reason_Inactive__c =: Null 
+                                                              AND HiddenVolunteer_Count_Description__c =: CountId  Limit 1];
+                                                              
+            dbRole = [SELECT Id,Name,Role_Name__c,Role_Name__r.Name From Chapter_Role__c  WHERE Id =: dbVolOpporunity[0].Chapter_Role_Opportunity__c];
+            
+            for(Volunteer_Opportunity__c dbVol : [Select id,RecordTypeId,HiddenVolunteer_Count_Description__c,Role__c,Chapter_Name__r.Name,
+                                                              Chapter_Role_Opportunity__c,Chapter_Role_Opportunity__r.Role_Name__c,
+                                                              Chapter_Name__c,Volunteer_Name__c,Non_Wish_Event__c,Reason_Inactive__c 
+                                                              FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c =: dbVolOpporunity[0].Non_Wish_Event__c  AND Chapter_Role_Opportunity__c =: dbVolOpporunity[0].Chapter_Role_Opportunity__c 
+                                                              AND Chapter_Role_Opportunity__r.Role_Name__c =: dbVolOpporunity[0].Chapter_Role_Opportunity__r.Role_Name__c AND isRejected__c =: true AND Volunteer_Name__c =: currUser.ContactId] ){
+                 
+                 if(curruser.contactId != Null && dbRole.Role_Name__r.Name != label.Sigle_Day_Volunteer){
+                  ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'You have been previously  declined for this opportunity. Please contact the chapter office with any questions.'));
+                  return null;
+                }
+            }
+               
+                
+              for(Volunteer_Opportunity__c dbVol : [Select id,RecordTypeId,HiddenVolunteer_Count_Description__c,Role__c,Chapter_Name__r.Name,
+                                                              Chapter_Role_Opportunity__c,Chapter_Role_Opportunity__r.Role_Name__c,
+                                                              Chapter_Name__c,Volunteer_Name__c,Non_Wish_Event__c,Reason_Inactive__c 
+                                                              FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c =: dbVolOpporunity[0].Non_Wish_Event__c  AND Chapter_Role_Opportunity__c =: dbVolOpporunity[0].Chapter_Role_Opportunity__c 
+                                                              AND Chapter_Role_Opportunity__r.Role_Name__c =: dbVolOpporunity[0].Chapter_Role_Opportunity__r.Role_Name__c AND (Status__c =: 'Pending' OR IsApproved__c =: true) AND Volunteer_Name__c =: currUser.ContactId] ){
+                 if(curruser.contactId != Null && dbRole.Role_Name__r.Name != label.Sigle_Day_Volunteer){
+                 
+                 ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,'You already registered for this event'));
+                 return null;
+                 }
+                }
             if(dbVolOpporunity.size() > 0)
-            allowRegister = allowRegisteration(dbVolOpporunity);
+                 allowRegister = allowRegisteration(dbVolOpporunity);
             
             if(dbVolOpporunity.size() > 0 && dbVolOpporunity != Null){ 
-                for(Volunteer_Count__c dbVolunteerCount : [Select Id,Name,Non_Wish_Events__c,Volunteer_Needed__c FROM Volunteer_Count__c WHERE Non_Wish_Events__c =:dbVolOpporunity[0].Non_Wish_Event__c AND Id =: dbVolOpporunity[0].HiddenVolunteer_Count_Description__c]){
+                for(Volunteer_Count__c dbVolunteerCount : [Select Id,Name,Non_Wish_Events__c,Registered__c,Volunteer_Needed__c FROM Volunteer_Count__c 
+                                                           WHERE Non_Wish_Events__c =:dbVolOpporunity[0].Non_Wish_Event__c AND 
+                                                           Id =: dbVolOpporunity[0].HiddenVolunteer_Count_Description__c])
+                {
+                     voulnteerCountId = dbVolunteerCount.Id;
                     volunteerCountMap.put(dbVolunteerCount.Id,dbVolunteerCount);
                 }
                 
             }
-            if(dbVolOpporunity.size() > 0 && dbVolOpporunity != Null && volunteerCountMap.Size() >0){
+            if(dbVolOpporunity.size() > 0 && dbVolOpporunity != Null && volunteerCountMap.Size() >0)
+            {
                 dbRole = [SELECT Id,Name,Role_Name__c,Role_Name__r.Name From Chapter_Role__c  WHERE Id =: dbVolOpporunity[0].Chapter_Role_Opportunity__c];
                 
                 roleId = dbRole.Role_Name__c+String.valueOf(dbVolOpporunity[0].Non_Wish_Event__c);
                 if(volunteerCountMap.containsKey(dbVolOpporunity[0].HiddenVolunteer_Count_Description__c)){
-                    system.debug('@@@@@@@ groupedResults  @@@@@@@@@'+dbVolOpporunity[0].HiddenVolunteer_Count_Description__c);
+                    
                     Volunteer_Opportunity__c  updateVolOpportunity = new Volunteer_Opportunity__c();
                     updateVolOpportunity.Id = dbVolOpporunity[0].Id;
-                    updateVolOpportunity .Chapter_Role_Opportunity__c = dbVolOpporunity[0].Chapter_Role_Opportunity__c;
-                    if(curruser.contactId != Null && dbRole.Role_Name__r.Name != label.Sigle_Day_Volunteer){
+                    updateVolOpportunity.Chapter_Role_Opportunity__c = dbVolOpporunity[0].Chapter_Role_Opportunity__c;
+                    /*if(curruser.contactId != Null && dbRole.Role_Name__r.Name != label.Sigle_Day_Volunteer){
                         if(communityUserString == '' || communityUserString == null){
                             curruser.Hidden_Role_Name_Id__c = dbRole.Role_Name__c+String.valueOf(dbVolOpporunity[0].Non_Wish_Event__c);
                             communityUserString  =dbRole.Role_Name__c;}
@@ -455,12 +504,23 @@ As well as it will update the volunteer opportunity.*/
                             curruser.Hidden_Role_Name_Id__c = curruser.Hidden_Role_Name_Id__c +'  '+roleId;
                         updateVolOpportunity.Volunteer_Name__c = curruser.contactId ;
                     }
-                    else
-                        updateVolOpportunity.Volunteer_Name__c = volunteerContact.Id;
+                    else{
+                    if(curruser.contactId != Null)
+                    updateVolOpportunity.Volunteer_Name__c = volunteerContact.Id;
+                    
+                    }*/
+                    if(curruser.contactId != Null){
+                    updateVolOpportunity.Volunteer_Name__c = curruser.contactId ;
+                    }
+                    else{
+                    updateVolOpportunity.Volunteer_Name__c = volunteerContact.Id;
+                    }
                     updateVolOpportunity.Chapter_Name__c = currNonWishRec.Chapter__c;
-                    if((curruser.Hidden_Role_Name_Id__c  != Null || curruser.Hidden_Role_Name_Id__c != '') && allowRegister == true){
-                        //update curruser;
                     update updateVolOpportunity;
+                    Volunteer_Count__c  updateRegiesterCount = new Volunteer_Count__c ();
+                    updateRegiesterCount.Id = voulnteerCountId;
+                    updateRegiesterCount.Registered__c = volunteerCountMap.get(voulnteerCountId).Registered__c + 1;
+                    update updateRegiesterCount;
                     ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Thank you for requesting to volunteer for this opportunity. A notification has been sent to chapter staff to review your request and staff will respond with further details, as applicable.'));
                     return null;
                     }
@@ -470,22 +530,25 @@ As well as it will update the volunteer opportunity.*/
                     }
                         
                 }
+                
+                 else{
+                    ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,'This volunteer opportunity has already been filled. Please register for another available volunteer opportunity'));
+                    return null;
+                }
             }
-            else{
-                ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,'This volunteer opportunity has already been filled. Please register for another available volunteer opportunity'));
-                return null;
-            }
-        }
-        catch(Exception e){
+            catch(Exception e){
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,e.getMessage()));
             system.debug('@@@@@@@@ eeeee @@@@@@'+e.getMessage());
+           }
+           
+           return null;
+
         }
-        return null;
-    }
-    
-    
-    public class VolunteerCountWrapper
-    {
+       
+           
+       
+    public class VolunteerCountWrapper{
+   
         public String chapterRole{get;set;}
         public string roleName{get;set;}
         public Decimal volunteerNeeded{get;set;}

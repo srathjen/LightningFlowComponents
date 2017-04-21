@@ -23,6 +23,10 @@
         <name>Department_Division__c</name>
     </fields>
     <fields>
+        <label><!-- Dev Staff Email --></label>
+        <name>DevStaffEmail__c</name>
+    </fields>
+    <fields>
         <label><!-- Do Not Contact Notes --></label>
         <name>Do_Not_Contact_Notes__c</name>
     </fields>
@@ -62,6 +66,102 @@
         <help><!-- External RE record Id for upserting --></help>
         <label><!-- External Id --></label>
         <name>External_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY12 Q1 --></label>
+        <name>FY12_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY12 Q2 --></label>
+        <name>FY12_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY12 Q3 --></label>
+        <name>FY12_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY12 Q4 --></label>
+        <name>FY12_Q4__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY13 Q1 --></label>
+        <name>FY13_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY13 Q2 --></label>
+        <name>FY13_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY13 Q3 --></label>
+        <name>FY13_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY13 Q4 --></label>
+        <name>FY13_Q4__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY14 Q1 --></label>
+        <name>FY14_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY14 Q2 --></label>
+        <name>FY14_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY14 Q3 --></label>
+        <name>FY14_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY14 Q4 --></label>
+        <name>FY14_Q4__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY15 Q1 --></label>
+        <name>FY15_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY15 Q2 --></label>
+        <name>FY15_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY15 Q3 --></label>
+        <name>FY15_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY15 Q4 --></label>
+        <name>FY15_Q4__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY16 Q1 --></label>
+        <name>FY16_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY16 Q2 --></label>
+        <name>FY16_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY16 Q3 --></label>
+        <name>FY16_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY16 Q4 --></label>
+        <name>FY16_Q4__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY17 Q1 --></label>
+        <name>FY17_Q1__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY17 Q2 --></label>
+        <name>FY17_Q2__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY17 Q3 --></label>
+        <name>FY17_Q3__c</name>
+    </fields>
+    <fields>
+        <label><!-- FY17 Q4 --></label>
+        <name>FY17_Q4__c</name>
     </fields>
     <fields>
         <label><!-- Family Dynamics --></label>
@@ -121,10 +221,6 @@
         <relationshipLabel><!-- Accounts (Intake Manager) --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Onboarded on SF --></label>
-        <name>Is_Active__c</name>
-    </fields>
-    <fields>
         <label><!-- Hidden Is Approved --></label>
         <name>Is_Approved__c</name>
     </fields>
@@ -154,7 +250,7 @@
         <name>Notes__c</name>
     </fields>
     <fields>
-        <label><!-- Onboarded on SF --></label>
+        <label><!-- Onboarded On SF --></label>
         <name>Onboarded_on_SF__c</name>
     </fields>
     <fields>
@@ -363,7 +459,7 @@
         <name>Referral_Form_Password__c</name>
     </fields>
     <fields>
-        <label><!-- Relationship type --></label>
+        <label><!-- Relationship Type --></label>
         <name>Relationship_type__c</name>
         <picklistValues>
             <masterLabel>Aunt</masterLabel>
@@ -1531,116 +1627,116 @@
         <name>npo02__TotalOppAmount__c</name>
     </fields>
     <fields>
-        <help><!-- The batch this Account was created in. --></help>
+        <help>Le lot dans lequel ce compte a été créé.</help>
         <label><!-- Batch --></label>
         <name>npsp__Batch__c</name>
         <relationshipLabel><!-- Accounts --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- The general program area(s) that this organization funds. --></help>
+        <help>Le ou les secteur(s) financé(s) par cette organisation.</help>
         <label><!-- Funding Focus --></label>
         <name>npsp__Funding_Focus__c</name>
         <picklistValues>
             <masterLabel>Animal Welfare</masterLabel>
-            <translation><!-- Animal Welfare --></translation>
+            <translation>Protection des animaux</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Arts and Culture</masterLabel>
-            <translation><!-- Arts and Culture --></translation>
+            <translation>Arts et culture</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Capacity Building</masterLabel>
-            <translation><!-- Capacity Building --></translation>
+            <translation>Développement de compétences</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Education</masterLabel>
-            <translation><!-- Education --></translation>
+            <translation>Éducation</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Environmental</masterLabel>
-            <translation><!-- Environmental --></translation>
+            <translation>Environnement</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Health Services</masterLabel>
-            <translation><!-- Health Services --></translation>
+            <translation>Services de santé</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Human Services</masterLabel>
-            <translation><!-- Human Services --></translation>
+            <translation>Services sociaux</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Indicates that this organization is a grant making organization. Can apply to foundations, government agencies, corporations, etc. --></help>
+        <help>Indique que cette organisation attribue des subventions. Peut s’appliquer à des fondations, des agences gouvernementales, des entreprises, etc.</help>
         <label><!-- Grantmaker --></label>
         <name>npsp__Grantmaker__c</name>
     </fields>
     <fields>
-        <help><!-- The name of the company&apos;s matching gift administrator. --></help>
+        <help>Le nom de l’administrateur de dons jumelés de l’entreprise.</help>
         <label><!-- Matching Gift Administrator Name --></label>
         <name>npsp__Matching_Gift_Administrator_Name__c</name>
     </fields>
     <fields>
-        <help><!-- The maximum amount the company will match on any single gift. --></help>
+        <help>Le montant maximal offert par l’entreprise pour un don jumelé.</help>
         <label><!-- Matching Gift Amount Max --></label>
         <name>npsp__Matching_Gift_Amount_Max__c</name>
     </fields>
     <fields>
-        <help><!-- The smallest gift the company will match. --></help>
+        <help>Le montant de don jumelé le plus faible accepté par l’entreprise.</help>
         <label><!-- Matching Gift Amount Min --></label>
         <name>npsp__Matching_Gift_Amount_Min__c</name>
     </fields>
     <fields>
-        <help><!-- The maximum amount the company will match each year for an employee. --></help>
+        <help>Le montant maximal offert par l’entreprise pour les dons jumelés d’un employé sur une année.</help>
         <label><!-- Matching Gift Annual Employee Max --></label>
         <name>npsp__Matching_Gift_Annual_Employee_Max__c</name>
     </fields>
     <fields>
-        <help><!-- Additional notes about the company&apos;s matching gift program. --></help>
+        <help>Notes supplémentaires sur le programme de dons jumelés de l’entreprise.</help>
         <label><!-- Matching Gift Comments --></label>
         <name>npsp__Matching_Gift_Comments__c</name>
     </fields>
     <fields>
-        <help><!-- Is this a company that offers matching gifts? --></help>
+        <help>Cette entreprise offre-t-elle des dons jumelés ?</help>
         <label><!-- Matching Gift Company --></label>
         <name>npsp__Matching_Gift_Company__c</name>
     </fields>
     <fields>
-        <help><!-- Email of the company&apos;s matching gift administrator. --></help>
+        <help>L’adresse e-mail de l’administrateur de dons jumelés de l’entreprise.</help>
         <label><!-- Matching Gift Email --></label>
         <name>npsp__Matching_Gift_Email__c</name>
     </fields>
     <fields>
-        <help><!-- The date when the matching gift information was last updated. --></help>
+        <help>La date à laquelle les informations de dons jumelés ont été mises à jour la dernière fois.</help>
         <label><!-- Matching Gift Info Updated --></label>
         <name>npsp__Matching_Gift_Info_Updated__c</name>
     </fields>
     <fields>
-        <help><!-- The portion of a gift the company will match. --></help>
+        <help>Le pourcentage du don d’origine offert par l’entreprise.</help>
         <label><!-- Matching Gift Percent --></label>
         <name>npsp__Matching_Gift_Percent__c</name>
     </fields>
     <fields>
-        <help><!-- Phone for the matching gift administration office. --></help>
+        <help>Numéro de téléphone du bureau d’administration des dons jumelés.</help>
         <label><!-- Matching Gift Phone --></label>
         <name>npsp__Matching_Gift_Phone__c</name>
     </fields>
     <fields>
-        <help><!-- Any restrictions on how old gifts can be to be eligible for matching. --></help>
+        <help>Toutes les restrictions sur l’éligibilité des dons passés pour le jumelage.</help>
         <label><!-- Matching Gift Request Deadline --></label>
         <name>npsp__Matching_Gift_Request_Deadline__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: The number of years for which this Household has had a Member. --></help>
+        <help>Formule : Le nombre d’années pour lesquelles ce foyer a contenu un membre.</help>
         <label><!-- Membership Span --></label>
         <name>npsp__Membership_Span__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: Current, expired, or grace period.  Default grace period set in Household Settings. --></help>
+        <help>Formule : Actuel, expiré ou en période de grâce.  Période de grâce par défaut définie dans les paramètres de foyer.</help>
         <label><!-- Membership Status --></label>
         <name>npsp__Membership_Status__c</name>
     </fields>
     <fields>
-        <help><!-- for Household Accounts, the number of Contacts in the Household. --></help>
+        <help>Pour les comptes de foyer, le nombre de contacts dans le foyer.</help>
         <label><!-- Number of Household Members --></label>
         <name>npsp__Number_of_Household_Members__c</name>
     </fields>
@@ -1661,6 +1757,10 @@
         <sections>
             <label><!-- Fields --></label>
             <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Historic Wish Numbers --></label>
+            <section>Historic Wish Numbers</section>
         </sections>
     </layouts>
     <layouts>

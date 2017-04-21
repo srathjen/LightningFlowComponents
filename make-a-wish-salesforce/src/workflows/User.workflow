@@ -35,6 +35,7 @@
             <operation>equals</operation>
             <value>Prospective Volunteer (Member)</value>
         </criteriaItems>
+        <description>Used to send welcome email for new prospective volunteer user</description>
         <triggerType>onCreateOnly</triggerType>
     </rules>
 </Workflow>

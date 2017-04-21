@@ -10,10 +10,6 @@ be supportive of wish eligibility, please contact us.</span><span style="color: 
 the country, we continue to come closer each year to our vision of making every
 eligible child’s wish come true.<br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Regards,</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal;">
 
-</p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal; background: white;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">{!User.Name}<br>
-{!User.Title}<br>
-{!Lead.ChapterName__c}<br>
-{!User.Email}<br>
-{!User.Phone}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p></div>]]></td>
+</p><p class="MsoNormal" style="margin-bottom: 0.0001pt; font-size: 12pt; line-height: normal; background: white;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">{!Lead.OwnerFullName}</span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; background: white;"><span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><font face="Century Gothic, sans-serif">{!Lead.OwnerTitle}</font><br><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;">{!Lead.ChapterName__c}</span></font><br><font face="Century Gothic, sans-serif">{!Lead.OwnerEmail}</font><br><font face="Century Gothic, sans-serif">{!Lead.OwnerPhone}</font></span></p></div>]]></td>
 </tr>
 </table>

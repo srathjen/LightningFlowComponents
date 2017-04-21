@@ -281,21 +281,7 @@
         <label>Custom Links</label>
         <layoutColumns>
             <layoutItems>
-                <customLink>Avis</customLink>
-            </layoutItems>
-            <layoutItems>
-                <customLink>DailyWISH</customLink>
-            </layoutItems>
-            <layoutItems>
                 <customLink>Smart_Travelers_Enrollment_Program</customLink>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <customLink>GKTW_Reservations</customLink>
-            </layoutItems>
-            <layoutItems>
-                <customLink>GKTW_Wish_Granting_Orgs</customLink>
             </layoutItems>
             <layoutItems>
                 <customLink>State_Dep_t_Travel_Warning_List</customLink>
@@ -303,15 +289,10 @@
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <customLink>Wish_Bank</customLink>
-            </layoutItems>
-            <layoutItems>
-                <customLink>Make_A_Wish</customLink>
-            </layoutItems>
-            <layoutItems>
-                <customLink>InKind_Donation_Report</customLink>
+                <customLink>Make_A_Wish_America</customLink>
             </layoutItems>
         </layoutColumns>
+        <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
     <layoutSections>
@@ -385,7 +366,13 @@
         </relatedContentItems>
     </relatedContent>
     <relatedLists>
-        <relatedList>RelatedTeamMemberList</relatedList>
+        <fields>Volunteer_Name__c</fields>
+        <fields>Role__c</fields>
+        <fields>Inactive__c</fields>
+        <fields>NAME</fields>
+        <relatedList>Volunteer_Opportunity__c.Wish__c</relatedList>
+        <sortField>Inactive__c</sortField>
+        <sortOrder>Asc</sortOrder>
     </relatedLists>
     <relatedLists>
         <fields>TASK.SUBJECT</fields>
@@ -404,14 +391,6 @@
         <relatedList>RelatedHistoryList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>NAME</fields>
-        <fields>CREATEDBY_USER</fields>
-        <fields>LAST_UPDATE</fields>
-        <relatedList>Wish_Child_Form__c.Case__c</relatedList>
-        <sortField>CREATEDBY_USER</sortField>
-        <sortOrder>Desc</sortOrder>
-    </relatedLists>
-    <relatedLists>
         <customButtons>Search_Add_In_Kind_Donor</customButtons>
         <fields>NAME</fields>
         <fields>RECORDTYPE</fields>
@@ -422,6 +401,9 @@
     </relatedLists>
     <relatedLists>
         <relatedList>RelatedCommentsList</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <relatedList>RelatedTeamMemberList</relatedList>
     </relatedLists>
     <relatedObjects>ContactId</relatedObjects>
     <relatedObjects>AccountId</relatedObjects>
@@ -435,7 +417,7 @@
     <summaryLayout>
         <masterLabel>00h36000004nDxi</masterLabel>
         <sizeX>3</sizeX>
-        <sizeY>4</sizeY>
+        <sizeY>3</sizeY>
         <summaryLayoutItems>
             <field>AccountId</field>
             <posX>0</posX>

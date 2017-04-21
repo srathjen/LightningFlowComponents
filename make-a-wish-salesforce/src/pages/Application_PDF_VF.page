@@ -40,7 +40,7 @@ and attached with the docusign under the volunteer conatct related list.
             <table>
                 <tr class='th'><td colspan='2' style='padding: 5px'>Personal Information</td></tr>
                 <tr>
-                    <td>Title : <apex:outputfield value="{!Contact.Title}" /></td><td></td>
+                    <td>Title : <apex:outputfield value="{!Contact.Salutation}" /></td><td></td>
                 </tr>
                 <tr>
                     <td>FirstName : <apex:outputfield value="{!Contact.FirstName}" /></td>
@@ -167,7 +167,7 @@ I have read and understood the various volunteer roles and am able to perform th
                 <tr> <td class='secEnd'></td></tr>
                 <tr> <td class='secEnd'></td></tr>
                 <tr>
-                  <td >Print Name:&nbsp;<apex:outputField value="{!contact.Name}"/>&nbsp;&nbsp;&nbsp;Signature:<span style="color:white;text-decoration: underline;">~s1</span> </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date: {!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}</td>
+                 <td >Print Name :&nbsp;<apex:outputField value="{!contact.Name}"/>&nbsp;&nbsp;&nbsp;Signature:&nbsp;<span style="color:white;text-decoration: underline;">~s1</span> </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date : {!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}</td>
                 </tr>
                  <tr> <td class='secEndto'></td></tr>
                  
@@ -248,7 +248,7 @@ I will refrain from using or appearing to use confidential information acquired 
  <tr><td colspan='2' class='splitRow'></td></tr>
 <tr> <td class='secEnd'></td></tr>
 <tr>
-<td >Print Name:&nbsp;<apex:outputField value="{!contact.Name}"/>&nbsp;&nbsp;&nbsp;Signature : <span style="color:white;text-decoration: underline;">~s1</span> </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date: {!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}</td>
+<td >Print Name :&nbsp;<apex:outputField value="{!contact.Name}"/>&nbsp;&nbsp;&nbsp;Signature:&nbsp;<span style="color:white;text-decoration: underline;">~s1</span> </td> <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date : {!MONTH(TODAY())}/{!DAY(TODAY())}/{!YEAR(TODAY())}</td>
 </tr>
  </table>
     </apex:form>

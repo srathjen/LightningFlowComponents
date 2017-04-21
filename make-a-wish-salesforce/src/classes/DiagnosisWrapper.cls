@@ -8,9 +8,11 @@ public class DiagnosisWrapper {
     public double externalId{get;set;}
     public String conditionDescriptionObject{get;set;}
     public boolean isEligible{get;set;}
+    public boolean isGroup1Rec{get;set;}
     public List<MedicalWrapper> medicalWrapperList{get;set;}
     public DiagnosisWrapper(){
         isEligible = false;
+        isGroup1Rec = false;
         medicalWrapperList = new  List<MedicalWrapper>(); 
     }
     public class MedicalWrapper{        

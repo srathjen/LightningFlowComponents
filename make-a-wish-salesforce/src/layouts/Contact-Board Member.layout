@@ -434,7 +434,7 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Orientation_Training__c</fields>
+        <fields>Orientation_Training_Hidden__c</fields>
         <fields>Registered_Date__c</fields>
         <fields>Completed_Date__c</fields>
         <fields>Type__c</fields>
@@ -442,7 +442,7 @@
         <fields>Date__c</fields>
         <fields>Start_Time__c</fields>
         <fields>End_Time__c</fields>
-        <fields>Class_Offering__c</fields>
+        <fields>Class_Offering__c.NAME</fields>
         <relatedList>Volunteer_Orientation_Training__c.Volunteer__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -480,14 +480,12 @@
         <fields>Date_Completed__c</fields>
         <fields>Date__c</fields>
         <fields>Status__c</fields>
-        <fields>Active__c</fields>
         <relatedList>Background_check__c.Volunteer__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
         <fields>Signed_Date__c</fields>
         <fields>Expiration_Date__c</fields>
-        <fields>Active__c</fields>
         <relatedList>Conflict_Of_Interest__c.Volunteer_Contact__c</relatedList>
         <sortField>NAME</sortField>
         <sortOrder>Desc</sortOrder>

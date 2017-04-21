@@ -322,6 +322,11 @@ OtherPhone
             <operation>equals</operation>
             <value>Approved</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Contact.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This workflow rule will fire when the application is approved</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
@@ -332,6 +337,7 @@ OtherPhone
             <type>Alert</type>
         </actions>
         <active>true</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
         <criteriaItems>
             <field>Contact.RecordTypeId</field>
             <operation>equals</operation>
@@ -342,12 +348,18 @@ OtherPhone
             <operation>equals</operation>
             <value>Complete</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Contact.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This workflow rule will fire when the application is complete</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
         <fullName>Volunteer %3A Application Incompleted Workflow Rule</fullName>
         <active>true</active>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
         <criteriaItems>
             <field>Contact.RecordTypeId</field>
             <operation>equals</operation>
@@ -357,6 +369,11 @@ OtherPhone
             <field>Contact.is_Application__c</field>
             <operation>equals</operation>
             <value>Partial Submit</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
         </criteriaItems>
         <description>This workflow rule will fire when the application is incomplete</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

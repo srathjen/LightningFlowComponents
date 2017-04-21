@@ -86,7 +86,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 
                 
             }
-           if(leadContactMap.size() > 0) {
+            if(leadContactMap.size() > 0) {
                 List<Diagnosis_Verification__c> diagnosisList = new List<Diagnosis_Verification__c>();
                 for(Diagnosis_Verification__c diagnosisInfo : [SELECT Id, Contact__c, Lead__c FROM Diagnosis_Verification__c WHERE Lead__c IN : leadContactMap.keySet()]) {
                     diagnosisInfo.Contact__c = leadContactMap.get(diagnosisInfo.Lead__c);
@@ -144,6 +144,8 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                                newRelationShip.npe4__Type__c = 'Family';
                                                newRelationShip.npe4__RelatedContact__c = convertedLeads.Wish_Family_ContactId__c;
                                                newRelationShip.npe4__Status__c = 'Active';
+                                               if(ConvertedLeads.Relationship_to_Child__c == 'Parent/Guardian')
+                                                   newRelationShip.Referring_Medical_Professional__c=True;
                                                relationShipList.add(newRelationShip);
                                            }
                                            
@@ -255,7 +257,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                         if((!newFamily.FirstName.containsOnly('-') && newFamily.FirstName != Null) && newFamily.LastName.containsOnly('-') && newFamily.Sibling_Age__c.isNumeric()){
                                             newFamily.LastName = 'Unknown';
                                             siblingList.add(newFamily);
-                                         }
+                                        }
                                         if(newFamily.FirstName.containsOnly('-') && (!newFamily.LastName.containsOnly('-') && newFamily.LastName != Null) && newFamily.Sibling_Age__c.isNumeric()){
                                             newFamily.FirstName = '';
                                             siblingList.add(newFamily);
@@ -263,7 +265,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                         if((!newFamily.FirstName.containsOnly('-') && newFamily.FirstName != Null) && (!newFamily.LastName.containsOnly('-') && newFamily.LastName != Null) && newFamily.Sibling_Age__c.containsOnly('-')){
                                             newFamily.Sibling_Age__c = Null;
                                             siblingList.add(newFamily);
-                                         }
+                                        }
                                         if(newFamily.FirstName.containsOnly('-') && (!newFamily.LastName.containsOnly('-') && newFamily.LastName != Null) && newFamily.Sibling_Age__c.containsOnly('-')){
                                             newFamily.FirstName = '';
                                             newFamily.Sibling_Age__c = Null;
@@ -274,8 +276,8 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                             newFamily.Sibling_Age__c = Null;
                                             siblingList.add(newFamily);
                                         }
-                                      }
-                                  }
+                                    }
+                                }
                             }
                             
                         }
@@ -293,36 +295,36 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                 newFamily.AccountId = convertLeads.getAccountId();
                                 newFamily.Region_Chapter__c = leadFamilyMap.get(convertLeads.getLeadId()).ChapterName__c;
                                 newFamily.Language__c = leadFamilyMap.get(convertLeads.getLeadId()).What_is_the_family_s_primary_spoken_lang__c;
-                                        if((!newFamily.FirstName.containsOnly('-') && newFamily.FirstName != Null) && (!newFamily.LastName.containsOnly('-') && newFamily.LastName != Null) && newFamily.Sibling_Age__c.isNumeric()){
-                                            siblingList.add(newFamily);
-                                        }
-                                        if((!newFamily.FirstName.containsOnly('-') && newFamily.FirstName != Null) && newFamily.LastName.containsOnly('-') && newFamily.Sibling_Age__c.isNumeric()){
-                                            newFamily.LastName = 'Unknown';
-                                            siblingList.add(newFamily);
-                                         }
-                                        if(newFamily.FirstName.containsOnly('-') && (!newFamily.LastName.containsOnly('-') && newFamily.LastName != Null) && newFamily.Sibling_Age__c.isNumeric()){
-                                            newFamily.FirstName = '';
-                                            siblingList.add(newFamily);
-                                        }
-                                        if((!newFamily.FirstName.containsOnly('-') && newFamily.FirstName != Null) && (!newFamily.LastName.containsOnly('-') && newFamily.LastName != Null) && newFamily.Sibling_Age__c.containsOnly('-')){
-                                            newFamily.Sibling_Age__c = Null;
-                                            siblingList.add(newFamily);
-                                         }
-                                        if(newFamily.FirstName.containsOnly('-') && (!newFamily.LastName.containsOnly('-') && newFamily.LastName != Null) && newFamily.Sibling_Age__c.containsOnly('-')){
-                                            newFamily.FirstName = '';
-                                            newFamily.Sibling_Age__c = Null;
-                                            siblingList.add(newFamily);
-                                        }
-                                        if((!newFamily.FirstName.containsOnly('-') && newFamily.FirstName != Null) && newFamily.LastName.containsOnly('-')  && newFamily.Sibling_Age__c.containsOnly('-')){
-                                            newFamily.LastName = 'Unknown';
-                                            newFamily.Sibling_Age__c = Null;
-                                            siblingList.add(newFamily);
-                                        }
+                                if((!newFamily.FirstName.containsOnly('-') && newFamily.FirstName != Null) && (!newFamily.LastName.containsOnly('-') && newFamily.LastName != Null) && newFamily.Sibling_Age__c.isNumeric()){
+                                    siblingList.add(newFamily);
+                                }
+                                if((!newFamily.FirstName.containsOnly('-') && newFamily.FirstName != Null) && newFamily.LastName.containsOnly('-') && newFamily.Sibling_Age__c.isNumeric()){
+                                    newFamily.LastName = 'Unknown';
+                                    siblingList.add(newFamily);
+                                }
+                                if(newFamily.FirstName.containsOnly('-') && (!newFamily.LastName.containsOnly('-') && newFamily.LastName != Null) && newFamily.Sibling_Age__c.isNumeric()){
+                                    newFamily.FirstName = '';
+                                    siblingList.add(newFamily);
+                                }
+                                if((!newFamily.FirstName.containsOnly('-') && newFamily.FirstName != Null) && (!newFamily.LastName.containsOnly('-') && newFamily.LastName != Null) && newFamily.Sibling_Age__c.containsOnly('-')){
+                                    newFamily.Sibling_Age__c = Null;
+                                    siblingList.add(newFamily);
+                                }
+                                if(newFamily.FirstName.containsOnly('-') && (!newFamily.LastName.containsOnly('-') && newFamily.LastName != Null) && newFamily.Sibling_Age__c.containsOnly('-')){
+                                    newFamily.FirstName = '';
+                                    newFamily.Sibling_Age__c = Null;
+                                    siblingList.add(newFamily);
+                                }
+                                if((!newFamily.FirstName.containsOnly('-') && newFamily.FirstName != Null) && newFamily.LastName.containsOnly('-')  && newFamily.Sibling_Age__c.containsOnly('-')){
+                                    newFamily.LastName = 'Unknown';
+                                    newFamily.Sibling_Age__c = Null;
+                                    siblingList.add(newFamily);
+                                }
                             }
                         }
                         
                     }
-                  }
+                }
                 
                 if(LeadMap.containsKey(convertLeads.getLeadId())) {
                     case newcase = new case();
@@ -339,7 +341,6 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                         System.debug('Parent Wishes 123' + LeadMap.get(convertLeads.getLeadId()).chapterName__c);
                     }
                     newcase.AccountId = convertLeads.getAccountId();
-                    newCase.lead__c = convertLeads.getLeadId();
                     
                     Date myDate = Date.ValueOf( LeadMap.get(convertLeads.getLeadId()).CreatedDate);
                     String dateval = String.valueof(myDate);
@@ -357,7 +358,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                         
                         if(chapterUserMap.get(ChapterId).Intake_Manager__c != Null)
                         { 
-                           newCase.OwnerId = chapterUserMap.get(ChapterId).Intake_Manager__c;
+                            newCase.OwnerId = chapterUserMap.get(ChapterId).Intake_Manager__c;
                         }
                     }
                     newcase.Status = 'Qualified';
@@ -371,8 +372,8 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                         newCase.Referral_Date__c = LeadMap.get(convertLeads.getLeadId()).Referred_Date__c;
                     if(LeadMap.get(convertLeads.getLeadId()).Inquiry_Date__c!= null)
                         newCase.Inquiry_Date__c= LeadMap.get(convertLeads.getLeadId()).Inquiry_Date__c;
-                    newCase.diagnosis_verificaion_receive_date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Received__c;
-                    newCase.diagnosis_verificaion_sent_date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Sent__c;
+                    newCase.Diagnosis_Verification_Receive_Date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Received__c;
+                    newCase.Diagnosis_Verification_Sent_Date__c = LeadMap.get(convertLeads.getLeadId()).Part_A_Sent__c;
                     
                     if(LeadMap.get(convertLeads.getLeadId()).PD_Condition_Description__c != null) {
                         newCase.Hidden_All_Primary__c  = LeadMap.get(convertLeads.getLeadId()).PD_Condition_Description__c +'\n';
@@ -401,7 +402,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             }
             
             for(Case dbPartAcase : [SELECT Id,CaseNumber,Lead__c,ContactId FROM Case WHERE Lead__c IN:convertedLeadIds]){
-                if(leadFamilyMap.containsKey(dbPartAcase.Lead__c)){
+                if(leadFamilyMap .containsKey(dbPartAcase.Lead__c)){
                     dbPartAcase.ContactId = leadFamilyMap.get(dbPartAcase.Lead__c).ConvertedContactId;
                     partACaseList.add(dbPartAcase);
                 }
@@ -503,7 +504,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                            Street,StateCode,City,PostalCode,Wish_Family_ContactId__c,ChapterName__c,Treating_Medical_Professional_Contact_Id__c,Medical_Professional_ContactId__c,What_is_the_family_s_primary_spoken_lang__c,
                                            Referrer_FirstName__c,Referrer_Last_Name__c,Referrer_Phone__c,Referrer_Email__c,Relationship_to_child__c FROM Lead WHERE Id IN:convertedLeadIds ]){
                                                
-                       convertedAccId = processconvertedLeads.ConvertedAccountId;
+                                               convertedAccId = processconvertedLeads.ConvertedAccountId;
                                                //medicalfacilytySet.add(processconvertedLeads.Hospital_Treatment_Facility__c);
                                                treatingfacilytySet.add(processconvertedLeads.Hospital_Treatment_Facility_Treating__c);
                                                convertedLeadList.add(processconvertedLeads);
@@ -516,17 +517,17 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         
         for(Lead  processconvertedLeads :  [SELECT ID,Name,Hospital_Treatment_Facility__c,Hospital_Treatment_Facility_Treating__c,ChapterName__c FROM Lead WHERE Id IN:convertedLeadIds]){
             
-                if(!medicalAccountMap.containsKey(processconvertedLeads.Hospital_Treatment_Facility_Treating__c)){
-                    if(processconvertedLeads.Hospital_Treatment_Facility_Treating__c != Null){
-                        Account newAccount = new Account();
-                        newAccount.Name = processconvertedLeads.Hospital_Treatment_Facility_Treating__c;
-                        newAccount.RecordTypeId = hospitalTreatMentRecordTypeId;
-                        newAccountMap.put(newAccount.Name,newAccount);
-                    }
+            if(!medicalAccountMap.containsKey(processconvertedLeads.Hospital_Treatment_Facility_Treating__c)){
+                if(processconvertedLeads.Hospital_Treatment_Facility_Treating__c != Null){
+                    Account newAccount = new Account();
+                    newAccount.Name = processconvertedLeads.Hospital_Treatment_Facility_Treating__c;
+                    newAccount.RecordTypeId = hospitalTreatMentRecordTypeId;
+                    newAccountMap.put(newAccount.Name,newAccount);
                 }
-               
             }
-          
+            
+        }
+        
         if(newAccountMap.Size() > 0){
             insert newAccountMap.Values();
             dupeCheckonContact(convertedLeadMap);
@@ -559,17 +560,17 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         List<npe5__Affiliation__c> affiliationList = new List<npe5__Affiliation__c>();
         Set<Id> WishFamilyContactIdSet = new Set<Id>();
         String WishFmailyConId;
-         List<npe5__Affiliation__c> updateaffiliationList = new List<npe5__Affiliation__c>();
+        List<npe5__Affiliation__c> updateaffiliationList = new List<npe5__Affiliation__c>();
         Id convertedConId;
         for(Lead processConvertedLead : convertedLeadMap.Values()){
             convertedConId = processConvertedLead.ConvertedContactId;
             if(processConvertedLead.Treating_Medical_Professional_First_Name__c == processConvertedLead.Referrer_FirstName__c && processConvertedLead.Treating_Medical_Professional_Last_Name__c == processConvertedLead.Referrer_Last_Name__c && 
                (processConvertedLead.Treating_Medical_Professional_Phone__c == processConvertedLead.Referrer_Phone__c ||processConvertedLead.Treating_Medical_Professional_Email__c == processConvertedLead.Referrer_Email__c)){
                    if(processConvertedLead.Relationship_to_child__c == 'Medical Professional'){
-                   sameReferringFirstNameSet.add(processConvertedLead.Treating_Medical_Professional_First_Name__c);
-                   sameReferringLastNameSet.add(processConvertedLead.Treating_Medical_Professional_Last_Name__c);
-                   sameReferringPhoneNameSet.add(processConvertedLead.Treating_Medical_Professional_Phone__c);
-                   sameReferringEmailNameSet.add(processConvertedLead.Treating_Medical_Professional_Email__c);
+                       sameReferringFirstNameSet.add(processConvertedLead.Treating_Medical_Professional_First_Name__c);
+                       sameReferringLastNameSet.add(processConvertedLead.Treating_Medical_Professional_Last_Name__c);
+                       sameReferringPhoneNameSet.add(processConvertedLead.Treating_Medical_Professional_Phone__c);
+                       sameReferringEmailNameSet.add(processConvertedLead.Treating_Medical_Professional_Email__c);
                    }
                }
             else{
@@ -594,33 +595,33 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 FamilyContactLastNameSet.add(processConvertedLead.Parent_Last_Name__c);
             }
             
-             if(processConvertedLead.Parent_Last_Name__c != Null && processConvertedLead.Wish_Family_ContactId__c != Null){
-                  
-                  
-                   WishFamilyContactIdSet.add(processConvertedLead.Wish_Family_ContactId__c);
-                    
+            if(processConvertedLead.Parent_Last_Name__c != Null && processConvertedLead.Wish_Family_ContactId__c != Null){
+                
+                
+                WishFamilyContactIdSet.add(processConvertedLead.Wish_Family_ContactId__c);
+                
             }
         }
         if (WishFamilyContactIdSet.Size() > 0){
-       
-        for(npe5__Affiliation__c dbFamilyContactAffiliation : [SELECT Id,npe5__Contact__c,npe5__Organization__c,npe5__Primary__c FROM npe5__Affiliation__c WHERE npe5__Contact__c =: WishFamilyContactIdSet AND npe5__Primary__c =: true]){
-           npe5__Affiliation__c updateAffliRec = new npe5__Affiliation__c();
-             updateAffliRec.Id = dbFamilyContactAffiliation.Id;
-             updateAffliRec.npe5__Primary__c = false;
-             updateaffiliationList.add(updateAffliRec);
-             
-             npe5__Affiliation__c newAff = new npe5__Affiliation__c();
-             newAff.npe5__Contact__c = dbFamilyContactAffiliation.npe5__Contact__c;
-             newAff.npe5__Organization__c = convertedAccId;
-             newAff.npe5__StartDate__c = Date.Today();
-             newAff.npe5__Status__c = 'Active';
-             newAff.npe5__Primary__c = true;
-             affiliationList.add(newAff);
-             
-             system.debug('@@@@@ affiliationList @@@@@@@'+affiliationList);
-             system.debug('@@@@@ affiliationList @@@@@@@'+affiliationList.size());
-        }
-      }  
+            
+            for(npe5__Affiliation__c dbFamilyContactAffiliation : [SELECT Id,npe5__Contact__c,npe5__Organization__c,npe5__Primary__c FROM npe5__Affiliation__c WHERE npe5__Contact__c =: WishFamilyContactIdSet AND npe5__Primary__c =: true]){
+                npe5__Affiliation__c updateAffliRec = new npe5__Affiliation__c();
+                updateAffliRec.Id = dbFamilyContactAffiliation.Id;
+                updateAffliRec.npe5__Primary__c = false;
+                updateaffiliationList.add(updateAffliRec);
+                
+                npe5__Affiliation__c newAff = new npe5__Affiliation__c();
+                newAff.npe5__Contact__c = dbFamilyContactAffiliation.npe5__Contact__c;
+                newAff.npe5__Organization__c = convertedAccId;
+                newAff.npe5__StartDate__c = Date.Today();
+                newAff.npe5__Status__c = 'Active';
+                newAff.npe5__Primary__c = true;
+                affiliationList.add(newAff);
+                
+                system.debug('@@@@@ affiliationList @@@@@@@'+affiliationList);
+                system.debug('@@@@@ affiliationList @@@@@@@'+affiliationList.size());
+            }
+        }  
         if(FamilyContactLastNameSet.size() > 0){
             for(Lead processConvertedLead : convertedLeadMap.Values()){
                 Contact newWishFamily = new Contact();
@@ -638,6 +639,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 newWishFamily.RecordTypeId = wishFamilyRecordTypeId;
                 newWishFamily.Region_Chapter__c = processConvertedLead.ChapterName__c;
                 newWishFamily.Language__c = processConvertedLead.What_is_the_family_s_primary_spoken_lang__c;
+                newWishFamily.Relationship__c = processConvertedLead.Relationship_to_child__c;
                 WishFamilyContactList.add(newWishFamily);
             }
             if(WishFamilyContactList.size() > 0){
@@ -646,10 +648,12 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 for(Contact processFamilyContact : WishFamilyContactList){
                     
                     npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
-                    newRelationShip.npe4__Contact__c = processFamilyContact .Id;
+                    newRelationShip.npe4__Contact__c = processFamilyContact.Wish_Child_Id_Hidden__c;
                     newRelationShip.npe4__Type__c = 'Family';
-                    newRelationShip.npe4__RelatedContact__c = processFamilyContact.Wish_Child_Id_Hidden__c;
+                    newRelationShip.npe4__RelatedContact__c = processFamilyContact.Id;
                     newRelationShip.npe4__Status__c = 'Active';
+                    if(processFamilyContact.Relationship__c == 'Parent/Guardian')
+                         newRelationShip.Referring_Medical_Professional__c = true;
                     relationList.add(newRelationShip);
                     
                 }
@@ -689,7 +693,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newRelationShip.npe4__RelatedContact__c = proccessSameContact.Id;
                     newRelationShip.npe4__Status__c = 'Active';
                     relationList.add(newRelationShip);
-                  
+                    
                     
                 }
                 
@@ -707,7 +711,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newMedicalcon.AccountId = newAccountMap.get(processConvertedLead .Hospital_Treatment_Facility_Treating__c).Id;
                 newMedicalcon.Phone = processConvertedLead.Treating_Medical_Professional_Phone__c;
                 newMedicalcon.Email = processConvertedLead.Treating_Medical_Professional_Email__c;
-                newMedicalcon.Provider_Type__c  = processConvertedLead.Medical_Provider_Category__c;
+                newMedicalcon.Provider_Type__c  = processConvertedLead.I_am_Recognized_To_Practice_As_a__c;
                 newMedicalcon.RecordTypeId = medicalProfessionalRecordTypeId;
                 newMedicalcon.Region_Chapter__c = processConvertedLead.ChapterName__c;
                 
@@ -728,7 +732,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newRelationShip.npe4__Status__c = 'Active';
                     relationList.add(newRelationShip);
                     
-                
+                    
                 }
                 
                 
@@ -765,7 +769,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newRelationShip.npe4__RelatedContact__c = proccessSameContact.Id;
                     newRelationShip.npe4__Status__c = 'Active';
                     relationList.add(newRelationShip);
-                   
+                    
                 }
                 
             }
@@ -946,114 +950,114 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             chaptersSet.add(currLead.chapterName__c);
             if(currLead.id != Null)    
                 leadIds.add(currLead.id);
-                
-                
+            
+            
             System.debug('lead Address++++++++++++++++++++++++' +currLead.FirstName+'-'+currLead.LastName+'-'+currLead.Phone+'-'+currLead.Email+'-'+ currLead.City+'-'+currLead.State+'-'+currLead.PostalCode);  
         }
         
         
         List<Lead> exLeads = [SELECT Id,LastName,Street,FirstName, Email, chapterName__c,Phone, DOB__c,
-                               City,State,PostalCode FROM Lead 
-                               WHERE (LastName IN :leadLNamesSet OR FirstName IN :leadFNamesSet OR DOB__c IN :leadbDaysSet
-                               OR Phone IN :phoneSet OR Email IN :emailsSet OR (State IN :stateSet AND Postalcode IN :zipCodesSet AND city IN :citySet)) 
-                               AND ChapterName__c IN :chaptersSet
-                               AND Id NOT IN :leadIds AND isConverted = false];
-                               
-                               
+                              City,State,PostalCode FROM Lead 
+                              WHERE (LastName IN :leadLNamesSet OR FirstName IN :leadFNamesSet OR DOB__c IN :leadbDaysSet
+                                     OR Phone IN :phoneSet OR Email IN :emailsSet OR (State IN :stateSet AND Postalcode IN :zipCodesSet AND city IN :citySet)) 
+                              AND ChapterName__c IN :chaptersSet
+                              AND Id NOT IN :leadIds AND isConverted = false];
+        
+        
         List<Contact> exContacts = [SELECT Id, LastName,AccountId,MailingStreet,FirstName, Email, Phone, BirthDate,Region_Chapter__r.Name,
-                                   MailingCity, MailingState, MailingPostalCode 
-                                   FROM Contact WHERE (LastName IN :leadLNamesSet OR FirstName IN :leadFNamesSet OR BirthDate IN :leadbDaysSet
-                                   OR ((MailingState IN :stateSet AND MailingPostalCode IN :zipCodesSet AND MailingCity IN :citySet) OR 
-                                   Phone IN :phoneSet OR Email IN :emailsSet)) AND Region_Chapter__c =: chaptersSet AND RecordTypeId = :wishChild]; 
-                                   
-                                   
-                                   
+                                    MailingCity, MailingState, MailingPostalCode 
+                                    FROM Contact WHERE (LastName IN :leadLNamesSet OR FirstName IN :leadFNamesSet OR BirthDate IN :leadbDaysSet
+                                                        OR ((MailingState IN :stateSet AND MailingPostalCode IN :zipCodesSet AND MailingCity IN :citySet) OR 
+                                                            Phone IN :phoneSet OR Email IN :emailsSet)) AND Region_Chapter__c =: chaptersSet AND RecordTypeId = :wishChild]; 
+        
+        
+        
         for(Lead currLead : leadList)
         {
-          boolean isDuplicate = false;
-           for(Lead exLead : exLeads)
-           {
-           
-             if(currLead.ChapterName__c == exLead.ChapterName__c)
-             {
-              if(currLead.FirstName == exLead.FirstName && currLead.LastName == exLead.LastName)
-              {
-                 isDuplicate = True;
-                 currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
-              } 
-              
-              else if((currLead.FirstName == exLead.FirstName || currLead.LastName == exLead.LastName) && 
-                 ((currLead.Street == exLead.Street && currLead.State == exLead.State && currLead.City == exLead.City && currLead.PostalCode == exLead.PostalCode) 
-                 || currLead.Phone == exLead.Phone || currLead.Email == exLead.Email))
-               {
-                 isDuplicate = True;
-                 currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
-               }
-               
-               else if((currLead.DOB__c == exLead.DOB__c) && 
-                 ((currLead.Street == exLead.Street && currLead.State == exLead.State && currLead.City == exLead.City && currLead.PostalCode == exLead.PostalCode) 
-                 || currLead.Phone == exLead.Phone || currLead.Email == exLead.Email))
-                  {
-                     isDuplicate = True;
-                     currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
-                  }
-                  
-               else if((currLead.DOB__c == exLead.DOB__c) && (currLead.FirstName == exLead.FirstName || currLead.LastName == exLead.LastName))
-               {
-                   isDuplicate = True;
-                   currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
-               }   
-                  
-               
-             }
-           }
-           
-           for(Contact exCon : exContacts)
-           {
-               if(currLead.ChapterName__c == exCon.Region_Chapter__c)
-                 {
-                  if(currLead.FirstName == exCon.FirstName && currLead.LastName == exCon.LastName)
-                  { 
-                     isDuplicate = True;
-                     currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
-                  } 
-                  
-                  else if((currLead.FirstName == exCon.FirstName || currLead.LastName == exCon.LastName) && 
-                     ((currLead.Street == exCon.MailingStreet && currLead.State == exCon.MailingState && currLead.City == exCon.MailingCity && currLead.PostalCode == exCon.MailingPostalCode) 
-                     || currLead.Phone == exCon.Phone || currLead.Email == exCon.Email))
-                   {
-                     isDuplicate = True;
-                     currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
-                   }
-                   
-                   else if((currLead.DOB__c == exCon.BirthDate) && 
-                     ((currLead.Street == exCon.MailingStreet && currLead.State == exCon.MailingState && currLead.City == exCon.MailingCity && currLead.PostalCode == exCon.MailingPostalCode) 
-                     || currLead.Phone == exCon.Phone || currLead.Email == exCon.Email))
-                      {
-                         isDuplicate = True;
-                         currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
-                      }
-                      
-                   else if((currLead.DOB__c == exCon.BirthDate) && (currLead.FirstName == exCon.FirstName || currLead.LastName == exCon.LastName))
-                   {
-                       isDuplicate = True;
-                       currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
-                   }   
-                      
-                   
-                 }
-              }
-        
+            boolean isDuplicate = false;
+            for(Lead exLead : exLeads)
+            {
+                
+                if(currLead.ChapterName__c == exLead.ChapterName__c)
+                {
+                    if(currLead.FirstName == exLead.FirstName && currLead.LastName == exLead.LastName)
+                    {
+                        isDuplicate = True;
+                        currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
+                    } 
+                    
+                    else if((currLead.FirstName == exLead.FirstName || currLead.LastName == exLead.LastName) && 
+                            ((currLead.Street == exLead.Street && currLead.State == exLead.State && currLead.City == exLead.City && currLead.PostalCode == exLead.PostalCode) 
+                             || currLead.Phone == exLead.Phone || currLead.Email == exLead.Email))
+                    {
+                        isDuplicate = True;
+                        currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
+                    }
+                    
+                    else if((currLead.DOB__c == exLead.DOB__c) && 
+                            ((currLead.Street == exLead.Street && currLead.State == exLead.State && currLead.City == exLead.City && currLead.PostalCode == exLead.PostalCode) 
+                             || currLead.Phone == exLead.Phone || currLead.Email == exLead.Email))
+                    {
+                        isDuplicate = True;
+                        currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
+                    }
+                    
+                    else if((currLead.DOB__c == exLead.DOB__c) && (currLead.FirstName == exLead.FirstName || currLead.LastName == exLead.LastName))
+                    {
+                        isDuplicate = True;
+                        currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
+                    }   
+                    
+                    
+                }
+            }
+            
+            for(Contact exCon : exContacts)
+            {
+                if(currLead.ChapterName__c == exCon.Region_Chapter__c)
+                {
+                    if(currLead.FirstName == exCon.FirstName && currLead.LastName == exCon.LastName)
+                    { 
+                        isDuplicate = True;
+                        currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
+                    } 
+                    
+                    else if((currLead.FirstName == exCon.FirstName || currLead.LastName == exCon.LastName) && 
+                            ((currLead.Street == exCon.MailingStreet && currLead.State == exCon.MailingState && currLead.City == exCon.MailingCity && currLead.PostalCode == exCon.MailingPostalCode) 
+                             || currLead.Phone == exCon.Phone || currLead.Email == exCon.Email))
+                    {
+                        isDuplicate = True;
+                        currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
+                    }
+                    
+                    else if((currLead.DOB__c == exCon.BirthDate) && 
+                            ((currLead.Street == exCon.MailingStreet && currLead.State == exCon.MailingState && currLead.City == exCon.MailingCity && currLead.PostalCode == exCon.MailingPostalCode) 
+                             || currLead.Phone == exCon.Phone || currLead.Email == exCon.Email))
+                    {
+                        isDuplicate = True;
+                        currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
+                    }
+                    
+                    else if((currLead.DOB__c == exCon.BirthDate) && (currLead.FirstName == exCon.FirstName || currLead.LastName == exCon.LastName))
+                    {
+                        isDuplicate = True;
+                        currLead.addError('There might be a duplicate Wish Child. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+currLead.id+'>here </a> to review the duplicates.',false); 
+                    }   
+                    
+                    
+                }
+            }
+            
             if(isDuplicate == false)
-              noDupLeadRec.add(currLead);
-           
-         }                           
-                                                           
+                noDupLeadRec.add(currLead);
+            
+        }                           
+        
         if(noDupLeadRec.size() > 0)
         {
-          FindDupContacts(noDupLeadRec);
+            FindDupContacts(noDupLeadRec);
         }                       
-                               
+        
     } 
     
     public static void FindDupContacts(List<Lead> leadRecords)
@@ -1113,100 +1117,100 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         }
         
         List<Contact> dupMedicalContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
-                         MailingState, MailingPostalCode FROM Contact
-                         WHERE (FirstName IN :mProfessionalFName AND LastName IN :mProfessionalLName 
-                         AND (Phone = :mProfessionalPhone Or Email IN :mProfessionalEmail) 
-                         AND RecordTypeId = :MedicalProfessionalRT)];
-                         
+                                            MailingState, MailingPostalCode FROM Contact
+                                            WHERE (FirstName IN :mProfessionalFName AND LastName IN :mProfessionalLName 
+                                                   AND (Phone = :mProfessionalPhone Or Email IN :mProfessionalEmail) 
+                                                   AND RecordTypeId = :MedicalProfessionalRT)];
+        
         List<Contact> dupTreatingContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
-                         MailingState, MailingPostalCode FROM Contact
-                         WHERE (FirstName IN :tProfessionalFName AND 
-                         LastName IN :tProfessionalLName
-                         AND (Phone = :tProfessionalPhone Or Email =: tProfessionalEmail) 
-                         AND RecordTypeId = :MedicalProfessionalRT)]; 
-                         
+                                             MailingState, MailingPostalCode FROM Contact
+                                             WHERE (FirstName IN :tProfessionalFName AND 
+                                                    LastName IN :tProfessionalLName
+                                                    AND (Phone = :tProfessionalPhone Or Email =: tProfessionalEmail) 
+                                                    AND RecordTypeId = :MedicalProfessionalRT)]; 
+        
         List<Contact> dupFamilyContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
-                         MailingState, MailingPostalCode,MailingStreet FROM Contact
-                         WHERE (FirstName IN :leadFNamesSet AND LastName IN :leadLNamesSet AND 
-                               (((Email IN :emailsSet OR Phone IN :phoneSet) 
-                               AND (MailingStreet IN :AddressSet AND MailingState IN :stateSet 
-                               AND MailingPostalCode IN :zipCodesSet 
-                               AND MailingCity IN :citySet))  
-                               OR ((Phone IN :phoneSet OR (MailingStreet IN :AddressSet AND MailingState = :stateSet 
-                               AND MailingPostalCode IN :zipCodesSet 
-                               AND MailingCity = :citySet))
-                               AND Email = :emailsSet)  OR (((MailingStreet = :AddressSet AND MailingState = :stateSet 
-                               AND MailingPostalCode = :zipCodesSet 
-                               AND MailingCity = :citySet) OR (Email = :emailsSet) )
-                               AND Phone = :phoneSet))) AND RecordTypeId = :wishFamilyRT];  
-                               
-                               
-                               
-       for(Lead newLead : leadRecords)
-       { 
-           Boolean medicalFlag = false;
-           boolean treatingFlag = false;
-           boolean familyFlag = false;
+                                           MailingState, MailingPostalCode,MailingStreet FROM Contact
+                                           WHERE (FirstName IN :leadFNamesSet AND LastName IN :leadLNamesSet AND 
+                                                  (((Email IN :emailsSet OR Phone IN :phoneSet) 
+                                                    AND (MailingStreet IN :AddressSet AND MailingState IN :stateSet 
+                                                         AND MailingPostalCode IN :zipCodesSet 
+                                                         AND MailingCity IN :citySet))  
+                                                   OR ((Phone IN :phoneSet OR (MailingStreet IN :AddressSet AND MailingState = :stateSet 
+                                                                               AND MailingPostalCode IN :zipCodesSet 
+                                                                               AND MailingCity = :citySet))
+                                                       AND Email = :emailsSet)  OR (((MailingStreet = :AddressSet AND MailingState = :stateSet 
+                                                                                      AND MailingPostalCode = :zipCodesSet 
+                                                                                      AND MailingCity = :citySet) OR (Email = :emailsSet) )
+                                                                                    AND Phone = :phoneSet))) AND RecordTypeId = :wishFamilyRT];  
+        
+        
+        
+        for(Lead newLead : leadRecords)
+        { 
+            Boolean medicalFlag = false;
+            boolean treatingFlag = false;
+            boolean familyFlag = false;
             for(Contact medicalCon : dupMedicalContacts)
             {
-               if(medicalCon.FirstName == newLead.Medical_Professional_First_Name__c && 
-                  medicalCon.LastName == newLead.Medical_Professional_Last_Name__c && 
-                  (medicalCon.Phone == newLead.Medical_Professional_Phone__c || medicalCon.Email == newLead.Medical_Professional_Email__c))
-            
-                 {
+                if(medicalCon.FirstName == newLead.Medical_Professional_First_Name__c && 
+                   medicalCon.LastName == newLead.Medical_Professional_Last_Name__c && 
+                   (medicalCon.Phone == newLead.Medical_Professional_Phone__c || medicalCon.Email == newLead.Medical_Professional_Email__c))
+                    
+                {
                     
                     medicalFlag = true;
-                 }
-                          
+                }
+                
             }  
             
             for(Contact treatingCon : dupTreatingContacts)
             {
-               if(treatingCon.FirstName == newLead.Treating_Medical_Professional_First_Name__c && 
-                  treatingCon.LastName == newLead.Treating_Medical_Professional_Last_Name__c && 
-                  (treatingCon.Phone == newLead.Treating_Medical_Professional_Phone__c || treatingCon.Email == newLead.Treating_Medical_Professional_Email__c))
-            
-                 {
+                if(treatingCon.FirstName == newLead.Treating_Medical_Professional_First_Name__c && 
+                   treatingCon.LastName == newLead.Treating_Medical_Professional_Last_Name__c && 
+                   (treatingCon.Phone == newLead.Treating_Medical_Professional_Phone__c || treatingCon.Email == newLead.Treating_Medical_Professional_Email__c))
+                    
+                {
                     
                     treatingFlag = true;
-                 }
-                          
+                }
+                
             }  
             
             for(Contact familyCon : dupFamilyContacts)
             {
-               if(familyCon.FirstName == newLead.Parent_First_Name__c && 
-                  familyCon.LastName == newLead.Parent_Last_Name__c && 
-                  (((familyCon.Phone == newLead.Phone || familyCon.Email == newLead.Email) && (familyCon.MailingStreet == newLead.Street
-                  && familyCon.MailingState == newLead.State && familyCon.MailingCity == newLead.City 
-                  && familyCon.MailingPostalCode == newLead.PostalCode)) || ((familyCon.Phone==newLead.Phone || (familyCon.MailingStreet == newLead.Street &&
-                  familyCon.MailingState == newLead.State 
-                  && familyCon.MailingPostalCode==newLead.PostalCode 
-                  && familyCon.MailingCity == newLead.City))
-                  && familyCon.Email == newLead.Email) || (((familyCon.MailingStreet == newLead.Street && familyCon.MailingState == newLead.State 
-                  && familyCon.MailingPostalCode == newLead.PostalCode 
-                  && familyCon.MailingCity == newLead.City) || (familyCon.Email == newLead.Email) )
-                  && familyCon.Phone == newLead.Phone)))
-            
-                 {
+                if(familyCon.FirstName == newLead.Parent_First_Name__c && 
+                   familyCon.LastName == newLead.Parent_Last_Name__c && 
+                   (((familyCon.Phone == newLead.Phone || familyCon.Email == newLead.Email) && (familyCon.MailingStreet == newLead.Street
+                                                                                                && familyCon.MailingState == newLead.State && familyCon.MailingCity == newLead.City 
+                                                                                                && familyCon.MailingPostalCode == newLead.PostalCode)) || ((familyCon.Phone==newLead.Phone || (familyCon.MailingStreet == newLead.Street &&
+                                                                                                                                                                                               familyCon.MailingState == newLead.State 
+                                                                                                                                                                                               && familyCon.MailingPostalCode==newLead.PostalCode 
+                                                                                                                                                                                               && familyCon.MailingCity == newLead.City))
+                                                                                                                                                           && familyCon.Email == newLead.Email) || (((familyCon.MailingStreet == newLead.Street && familyCon.MailingState == newLead.State 
+                                                                                                                                                                                                      && familyCon.MailingPostalCode == newLead.PostalCode 
+                                                                                                                                                                                                      && familyCon.MailingCity == newLead.City) || (familyCon.Email == newLead.Email) )
+                                                                                                                                                                                                    && familyCon.Phone == newLead.Phone)))
+                    
+                {
                     
                     familyFlag = true;
-                 }
-                          
+                }
+                
             }  
             
             
-          if((medicalFlag == True || treatingFlag == True) && familyFlag == True) 
-              newLead.addError('There might be an existing Wish Family and Medical Professional.Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'&wishFamily=true&manual=true'+'>here </a> to review the existing record.',false); 
-          else if(medicalFlag == True || treatingFlag == True)     
-             newLead.addError('There might be an existing Medical Professional. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'&wishFamily=true&manual=true'+'>here </a> to review the existing record.',false); 
-          else if(familyFlag == True)
-             newLead.addError('There might be an existing Wish Family.Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'&wishFamily=true&manual=true'+'>here </a> to review the existing record.',false); 
-                    
+            if((medicalFlag == True || treatingFlag == True) && familyFlag == True) 
+                newLead.addError('There might be an existing Wish Family and Medical Professional.Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'&wishFamily=true&manual=true'+'>here </a> to review the existing record.',false); 
+            else if(medicalFlag == True || treatingFlag == True)     
+                newLead.addError('There might be an existing Medical Professional. Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'&wishFamily=true&manual=true'+'>here </a> to review the existing record.',false); 
+            else if(familyFlag == True)
+                newLead.addError('There might be an existing Wish Family.Please click <a href='+instanceUrl+'/apex/LeadDuplicate_VF?id='+newlead.id+'&wishFamily=true&manual=true'+'>here </a> to review the existing record.',false); 
             
-       
-       }                        
-     
+            
+            
+        }                        
+        
     }
     
     
@@ -1257,61 +1261,25 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         return randStr;
     }
     
-  /*  public void updateLeadStatus(List<Lead> medicalList){
-        System.debug('MedicalList>>>>>>>>>');
-        List<Lead> updateLeadList = new List<Lead>();
-        Lead newLead = new Lead();
-        for(Lead processMedicalQuestion :medicalList){
-            String medicalQuestion = processMedicalQuestion.Medical_Questions__c;
-            if(medicalQuestion.contains('Yes')){
-                System.debug('Yes>>>>>>>>>');
-                processMedicalQuestion.RFI_Form_Info_Hidden__c = 'Qualified';
-                updateLeadList.add(processMedicalQuestion);
-            }
-            else{
-                System.debug('No>>>>>>>>>');
-                processMedicalQuestion.RFI_Form_Info_Hidden__c = 'Not Qualified';
-                updateLeadList.add(processMedicalQuestion);
-            }
-        }
-    }*/
-    //This method is used to update case with lead attachment file link in medical summary attchments field
-    public void updatecaseMedicalSummaryAttachments(set<id> leadFileIds){
-        Constant_AC  constant = new Constant_Ac();    
-        Id partARecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get(constant.partARecordTypeId).getRecordTypeId();
-        list<Lead_File__c> newLeadFileList = new list<Lead_File__c>();
-        list<case> updatedcaseList = new list<Case>();
-        Map<Id, List<Lead_File__c>> leadFileListMap = new Map<Id, List<Lead_File__c>>();
-        for(Lead_File__c currentLeadFile : [SELECT ID,File_Name__c,Parent__c,File_Path__c FROM Lead_File__c WHERE ID IN:leadFileIds]){
-            if(leadFileListMap.containsKey(currentLeadFile.Parent__c)) {
-                leadFileListMap.get(currentLeadFile.Parent__c).add(currentLeadFile);
-            } else {
-                leadFileListMap.put(currentLeadFile.Parent__c, new List<Lead_File__c>{currentLeadFile});
-            }
-        }
-        
-        System.debug('>>>>>>>>>>Sample Data Check>>>>>'+leadFileListMap);
-        
-        if(leadFileListMap.size() > 0 ){
-            for(Case currentCase : [SELECT ID,Lead__c,Medical_Summary_Attachments__c,RecordTypeId FROM Case WHERE RecordTypeId =:partARecordTypeId]){
-                if(leadFileListMap.containsKey(currentCase.Lead__c)){
-                    for(Lead_File__c getDownloadLink : leadFileListMap.get(currentCase.Lead__c)) {
-                        if(currentCase.Medical_Summary_Attachments__c == Null){
-                            system.debug('######## getDownloadLink.File_Path__c' +  getDownloadLink.File_Path__c);
-                            currentCase.Medical_Summary_Attachments__c =  '<a href=' + getDownloadLink.File_Path__c + '>' + getDownloadLink.File_Name__c + '</a> <br/>';
-                            updatedcaseList.add(currentCase);
-                        } else if(currentCase.Medical_Summary_Attachments__c != Null){
-                            currentCase.Medical_Summary_Attachments__c += '<a href=' + getDownloadLink.File_Path__c + '>' + getDownloadLink.File_Name__c + '</a> <br/>';
-                            updatedcaseList.add(currentCase);
-                        }
-                    }
-                }
-            }
-            if(updatedcaseList.size() > 0){
-                update updatedcaseList;
-            }
-        }
-    }
+    /*  public void updateLeadStatus(List<Lead> medicalList){
+System.debug('MedicalList>>>>>>>>>');
+List<Lead> updateLeadList = new List<Lead>();
+Lead newLead = new Lead();
+for(Lead processMedicalQuestion :medicalList){
+String medicalQuestion = processMedicalQuestion.Medical_Questions__c;
+if(medicalQuestion.contains('Yes')){
+System.debug('Yes>>>>>>>>>');
+processMedicalQuestion.RFI_Form_Info_Hidden__c = 'Qualified';
+updateLeadList.add(processMedicalQuestion);
+}
+else{
+System.debug('No>>>>>>>>>');
+processMedicalQuestion.RFI_Form_Info_Hidden__c = 'Not Qualified';
+updateLeadList.add(processMedicalQuestion);
+}
+}
+}*/
+   
     
     /*public static void LeadRegionValidation(Map<Id, Lead> leadRegionCodeValidationMap){
 
@@ -1374,30 +1342,30 @@ leadRegionCodeValidationMap.get(defaultRegionLeadMap.get(inValidRegion.ChapterNa
     }
     
     /*public static void CreateDiagnosisVerification(List<Lead> newLeadList, Set<String> conditionSescriptionSet) {
-        Map<String, Id> conditionDescriptionMap = new Map<String, Id>();
-        if(conditionSescriptionSet.size() > 0) {
-            for(Condition_Description__c condDes : [SELECT Id, Name FROM Condition_Description__c WHERE Name IN : conditionSescriptionSet]) {
-                conditionDescriptionMap.put(condDes.Name, condDes.Id);
-            } 
-        }
-        
-        Map<Id,Id> diagnosisConditionMap = new Map<Id, Id>();
-        List<Diagnosis_Verification__c> diagnosisVerificationList = new List<Diagnosis_Verification__c>();
-        for(Lead newLead : newLeadList) {
-            Diagnosis_Verification__c newDiagnosis = new Diagnosis_Verification__c();
-            newDiagnosis.ICD_Code__c = newLead.PD_ICD_Code__c;
-            newDiagnosis.Lead__c = newLead.Id;
-            newDiagnosis.Primary_Diagnosis__c = newLead.PD_Condition_Description__c;
-            newDiagnosis.PCD_ICD__c = newLead.PCD_ICD__c;
-            newDiagnosis.Order__c = 0;
-            if(conditionDescriptionMap.containsKey(newLead.PD_Condition_Description__c)) {
-                newDiagnosis.Condition_Description__c = conditionDescriptionMap.get(newLead.PD_Condition_Description__c);
-            }
-            diagnosisConditionMap.put(newDiagnosis.Id,newDiagnosis.Condition_Description__c);
-            diagnosisVerificationList.add(newDiagnosis);
-        }
-        if(diagnosisVerificationList.size() > 0) {
-            insert diagnosisVerificationList;
-        }
-    }*/
+Map<String, Id> conditionDescriptionMap = new Map<String, Id>();
+if(conditionSescriptionSet.size() > 0) {
+for(Condition_Description__c condDes : [SELECT Id, Name FROM Condition_Description__c WHERE Name IN : conditionSescriptionSet]) {
+conditionDescriptionMap.put(condDes.Name, condDes.Id);
+} 
+}
+
+Map<Id,Id> diagnosisConditionMap = new Map<Id, Id>();
+List<Diagnosis_Verification__c> diagnosisVerificationList = new List<Diagnosis_Verification__c>();
+for(Lead newLead : newLeadList) {
+Diagnosis_Verification__c newDiagnosis = new Diagnosis_Verification__c();
+newDiagnosis.ICD_Code__c = newLead.PD_ICD_Code__c;
+newDiagnosis.Lead__c = newLead.Id;
+newDiagnosis.Primary_Diagnosis__c = newLead.PD_Condition_Description__c;
+newDiagnosis.PCD_ICD__c = newLead.PCD_ICD__c;
+newDiagnosis.Order__c = 0;
+if(conditionDescriptionMap.containsKey(newLead.PD_Condition_Description__c)) {
+newDiagnosis.Condition_Description__c = conditionDescriptionMap.get(newLead.PD_Condition_Description__c);
+}
+diagnosisConditionMap.put(newDiagnosis.Id,newDiagnosis.Condition_Description__c);
+diagnosisVerificationList.add(newDiagnosis);
+}
+if(diagnosisVerificationList.size() > 0) {
+insert diagnosisVerificationList;
+}
+}*/
 }

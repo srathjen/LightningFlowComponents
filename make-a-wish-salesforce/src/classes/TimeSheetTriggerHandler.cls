@@ -13,10 +13,13 @@ public class TimeSheetTriggerHandler{
             List<String> timeList = String.valueOf(processtimesheetEntry.Hours_spent__c).split('\\.');
             integer hours = Integer.ValueOf(timeList [0]);
             integer minutes = Integer.ValueOf(timeList [1]);
-            if(minutes  > 59){
-                processtimesheetEntry.Hours_spent__c.addError('Minitues should be 59 or lessthan 59');
+            if(minutes  > 99){
+                processtimesheetEntry.Hours_spent__c.addError('Minutes should be 99 or less than 99');
             }
-            processtimesheetEntry.Hours_Hidden__c = (processtimesheetEntry.Hours_spent__c) * 60;
+            Integer hrs;
+            if(hours != Null )
+                hrs=hours*60;
+            processtimesheetEntry.Hours_Hidden__c = hrs+minutes;
         }
     }
     /* This calculateHourstoWish method is used to calculate the total hours spent by the volunteer to close the corresponding wish.*/
@@ -25,6 +28,8 @@ public class TimeSheetTriggerHandler{
         Map<Id,Decimal> volOpportunityMap = new Map<Id,Decimal>();
         Map<Id,Case> caseMap = New  Map<Id,Case>();
         Set<ID> wishIdSet = New  Set<ID>();
+        Decimal hrs=0,min=0;
+        String totalHours;
         List<Non_Wish_Events__c> nonWishList = new List <Non_Wish_Events__c>();
         for(Time_sheet__c processtimesheetEntry : timesheetList){
             if(processtimesheetEntry.Volunteer_Opportunity__c != Null )
@@ -49,24 +54,42 @@ public class TimeSheetTriggerHandler{
                     caseIns = New case();
                     caseIns.id = dbOpportunity.Wish__c;
                 }  
+                
                 if((caseIns.Total_Hour_Spent_Hidden__c  == NULL || caseIns.Total_Hour_Spent_Hidden__c == 0.00) && dbOpportunity.Wish__r.Total_Hour_Spent_Hidden__c != NULL && dbOpportunity.Wish__r.Total_Hour_Spent_Hidden__c > 0){
-                    caseIns.Total_Hour_Spent_Hidden__c = dbOpportunity.Wish__r.Total_Hour_Spent_Hidden__c / 60;}
+                    hrs = Math.floor(dbOpportunity.Wish__r.Total_Hour_Spent_Hidden__c / 60);
+                    min = Math.Mod(Integer.ValueOf(dbOpportunity.Wish__r.Total_Hour_Spent_Hidden__c),60);
+                    totalHours = hrs+'.'+min;
+                    caseIns.Total_Hour_Spent_Hidden__c = Decimal.ValueOF(totalHours);
+                    //caseIns.Total_Hour_Spent_Hidden__c = dbOpportunity.Wish__r.Total_Hour_Spent_Hidden__c / 60;
+                    }
                 
                 if(caseIns.Total_Hour_Spent_Hidden__c  == NULL || caseIns.Total_Hour_Spent_Hidden__c == 0.00){
-                    caseIns.Total_Hour_Spent_Hidden__c = volOpportunityMap.get(dbOpportunity.Wish__c) /60;}
+                    hrs = Math.floor(volOpportunityMap.get(dbOpportunity.Wish__c) / 60);
+                    min = Math.Mod(Integer.ValueOf(volOpportunityMap.get(dbOpportunity.Wish__c)),60);
+                    totalHours = hrs+'.'+min;
+                    caseIns.Total_Hour_Spent_Hidden__c = Decimal.ValueOF(totalHours);
+                    //caseIns.Total_Hour_Spent_Hidden__c = volOpportunityMap.get(dbOpportunity.Wish__c) /60;
+                    }
                 else{
-                    caseIns.Total_Hour_Spent_Hidden__c = volOpportunityMap.get(dbOpportunity.Wish__c) / 60;}
+                    hrs = Math.floor(volOpportunityMap.get(dbOpportunity.Wish__c) / 60);
+                    min = Math.Mod(Integer.ValueOf(volOpportunityMap.get(dbOpportunity.Wish__c)),60);
+                    totalHours = hrs+'.'+min;
+                    caseIns.Total_Hour_Spent_Hidden__c = Decimal.ValueOF(totalHours);
+                    //caseIns.Total_Hour_Spent_Hidden__c = volOpportunityMap.get(dbOpportunity.Wish__c) / 60;
+                    }
                 
                 if(caseIns.Total_Hour_Spent_Hidden__c > 0){
                     Decimal toround = caseIns.Total_Hour_Spent_Hidden__c;
+                     system.debug('@@@@@ rounded1 @@@@@'+toround );
                     Decimal rounded = toround.setScale(2);
+                    system.debug('@@@@@ rounded @@@@@'+rounded );
                     List<String> timeList = String.valueOf(rounded).split('\\.');
                     Integer hours  = Integer.ValueOf(timeList [0]);
                     Integer minutes  = Integer.ValueOf(timeList [1]);
                     if( hours   > 0){
                         if(minutes   > 59){
                             Integer divideMinutes = minutes  /60;
-                            Integer roundMinutes = math.mod(minutes  ,60);
+                            Integer roundMinutes = math.mod(minutes ,60);
                             if(divideMinutes  != Null){
                                 hours = hours + divideMinutes;
                                 if(roundMinutes <10){
@@ -105,6 +128,8 @@ public class TimeSheetTriggerHandler{
         Map<Id,Decimal> volOpportunityMap = new Map<Id,Decimal>();
         Map<Id,Non_Wish_Events__c> nonwishMap = New  Map<Id,Non_Wish_Events__c>();
         Set<ID> nonwishIdSet = New  Set<ID>();
+        Decimal hrs=0,min=0;
+        String totalHours;
         for(Time_sheet__c processtimesheetEntry : timesheetList){
             if(processtimesheetEntry.Volunteer_Opportunity__c != Null )
                 volOpportunityIdSet.add(processtimesheetEntry.Volunteer_Opportunity__c); 
@@ -132,11 +157,28 @@ public class TimeSheetTriggerHandler{
                     nonwishIns .id = dbOpportunity.Non_Wish_Event__c;
                 }  
                 if((nonwishIns.Total_Hour_Spent_Hidden__c == NULL || nonwishIns.Total_Hour_Spent_Hidden__c == 0.00) && dbOpportunity.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c != NULL && dbOpportunity.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c > 0)
-                    nonwishIns.Total_Hour_Spent_Hidden__c = dbOpportunity.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c / 60;
+                {
+                    hrs = Math.floor(dbOpportunity.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c / 60);
+                    min = Math.Mod(Integer.ValueOf(dbOpportunity.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c),60);
+                    totalHours = hrs+'.'+min;
+                    nonwishIns.Total_Hour_Spent_Hidden__c = Decimal.ValueOF(totalHours);
+                //    nonwishIns.Total_Hour_Spent_Hidden__c = dbOpportunity.Non_Wish_Event__r.Total_Hour_Spent_Hidden__c / 60;
+                }
                 if(nonwishIns .Total_Hour_Spent_Hidden__c == NULL || nonwishIns.Total_Hour_Spent_Hidden__c == 0.00)
-                    nonwishIns.Total_Hour_Spent_Hidden__c = volOpportunityMap.get(dbOpportunity.Non_Wish_Event__c) / 60;
-                else
-                    nonwishIns.Total_Hour_Spent_Hidden__c = volOpportunityMap.get(dbOpportunity.Non_Wish_Event__c) / 60;
+                {    
+                    hrs = Math.floor(volOpportunityMap.get(dbOpportunity.Non_Wish_Event__c)/ 60);
+                    min = Math.Mod(Integer.ValueOf(volOpportunityMap.get(dbOpportunity.Non_Wish_Event__c)),60);
+                    totalHours = hrs+'.'+min;
+                    nonwishIns.Total_Hour_Spent_Hidden__c = Decimal.ValueOF(totalHours);
+                   // nonwishIns.Total_Hour_Spent_Hidden__c = volOpportunityMap.get(dbOpportunity.Non_Wish_Event__c) / 60;
+                }
+                else{
+                    hrs = Math.floor(volOpportunityMap.get(dbOpportunity.Non_Wish_Event__c)/ 60);
+                    min = Math.Mod(Integer.ValueOf(volOpportunityMap.get(dbOpportunity.Non_Wish_Event__c)),60);
+                    totalHours = hrs+'.'+min;
+                    nonwishIns.Total_Hour_Spent_Hidden__c = Decimal.ValueOF(totalHours);
+                 //   nonwishIns.Total_Hour_Spent_Hidden__c = volOpportunityMap.get(dbOpportunity.Non_Wish_Event__c) / 60;
+                 }
                 if(nonwishIns.Total_Hour_Spent_Hidden__c > 0){
                     Decimal toround = nonwishIns .Total_Hour_Spent_Hidden__c ;
                     Decimal rounded = toround.setScale(2);

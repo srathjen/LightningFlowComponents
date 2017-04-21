@@ -112,6 +112,15 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Group1__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to identified whether the give ICD or Condition Description is Group1 record</description>
+        <externalId>false</externalId>
+        <label>Group1</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>ICD_Code__c</fullName>
         <description>It holds the ICD Code</description>
         <externalId>false</externalId>

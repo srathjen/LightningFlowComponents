@@ -9,6 +9,12 @@
             <layoutItems>
                 <field>Role__c</field>
             </layoutItems>
+            <layoutItems>
+                <field>Description__c</field>
+            </layoutItems>
+            <layoutItems>
+                <field>Attachment__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
     </layoutSections>

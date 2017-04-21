@@ -53,7 +53,7 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>Read</externalSharingModel>
+    <externalSharingModel>Private</externalSharingModel>
     <fields>
         <fullName>Assigned_To__c</fullName>
         <description>it holds case team role to which the task should assigned</description>
@@ -305,6 +305,9 @@
         <columns>Wish_type__c</columns>
         <columns>Months__c</columns>
         <columns>Weeks__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>OWNER.FIRST_NAME</columns>
+        <columns>OWNER.LAST_NAME</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -531,5 +534,5 @@
         <customTabListAdditionalFields>Recurring_Frequency__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Sort_Order__c</customTabListAdditionalFields>
     </searchLayouts>
-    <sharingModel>Read</sharingModel>
+    <sharingModel>Private</sharingModel>
 </CustomObject>

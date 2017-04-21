@@ -2,12 +2,20 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value>Policy and Procedure</value>
+        <value>Policy &amp; Procedure</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value>Policies and Procedures</value>
+        <value>Policies &amp; Procedures</value>
     </caseValues>
+    <fields>
+        <label><!-- Attachment --></label>
+        <name>Attachment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
     <fields>
         <label><!-- Role --></label>
         <name>Role__c</name>

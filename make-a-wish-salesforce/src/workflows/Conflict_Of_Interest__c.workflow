@@ -49,6 +49,17 @@
         <template>Automated_Volunteer_Templates/COI_Expiring_30_Days_Email_Template</template>
     </alerts>
     <alerts>
+        <fullName>COI_Expiring_Before_30_Days_Email_Alert</fullName>
+        <description>COI:Expiring Before 30 Days Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Hidden_Volunteer_Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Automated_Volunteer_Templates/COI_Expiring_30_Days_Email_Template</template>
+    </alerts>
+    <alerts>
         <fullName>COI_Expiring_Before_9_Days_Email_Alert</fullName>
         <description>COI:Expiring Before 9 Days Email Alert</description>
         <protected>false</protected>
@@ -72,16 +83,69 @@
         <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/COI_Expiring_30_Days_Email_Template</template>
     </alerts>
+    <fieldUpdates>
+        <fullName>Update_Hidden_Conflict_Expire</fullName>
+        <description>This record is used to update the &quot;Hidden Conflict Expire&quot;  in conflict of Interest record.</description>
+        <field>HiddenConflictExpire__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Hidden Conflict Expire</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>COI%3A Volunteer Status Update</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.Current__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.Expiration_Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>This workflow will fire when the background check record is expire.</description>
+        <triggerType>onCreateOnly</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Update_Hidden_Conflict_Expire</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
     <rules>
         <fullName>COI%3AExpiring 30 Days Workflow Rule</fullName>
         <active>true</active>
         <criteriaItems>
-            <field>Conflict_Of_Interest__c.Active__c</field>
+            <field>Conflict_Of_Interest__c.Current__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>We are sending email notification for volunteer reminding  COI  Expiring.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>COI_Expiring_Before_30_Days_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
+            <timeLength>-30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
         <workflowTimeTriggers>
             <actions>
                 <name>COI_Expiring_Before_9_Days_Email_Alert</name>

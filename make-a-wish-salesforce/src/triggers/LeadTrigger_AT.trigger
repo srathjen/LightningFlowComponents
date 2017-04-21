@@ -110,8 +110,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         Boolean flag;
         for(Lead newLead : Trigger.new)
         {  
-            if(newLead.Migrated_Record__c != True)
-            {
+           
                 if(newLead.Status == 'Referred' && Trigger.oldMap.get(newLead.id).status == 'Inquiry'){
                    if(!Test.isRunningTest())
                       newLead.Referred_Date__c = Date.today();
@@ -198,7 +197,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                     leadList.add(newLead);
                     system.debug('@@@@@ LeadList @@@@@'+leadList);
                 }
-            } 
+            
             //Regions for chapters
             //Default region value validation
             //Used to prevent the defualt selection of region code if there is other region exists for chapter
@@ -254,26 +253,33 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
     {
         List<Lead> newLeadList = new List<Lead>();
         List<Lead> approvalList = new List<Lead>();
+        Map<Lead,Id> lead_IntakUserIdMap = new Map<Lead,Id>();
         if(RecursiveTriggerHandler.isFirstTime == true)
         {  
             for(Lead newLead : Trigger.new){
                 
-                if(newLead.Migrated_Record__c != True) 
-                {
-                    System.debug('Lead Entry111111111>>>>>>>>>>>');
+               
+                    if(newLead.Status == 'DNQ' && Trigger.oldMap.get(newLead.Id).Status != newLead.Status && newLead.ChapterName__c != Null){
+                        lead_IntakUserIdMap.put(newLead,newLead.ChapterName__c);
+                        system.debug('Lead Intake UserId********'+newLead.ChapterName__c);
+                    }
+                    
                     if(!newLead.isConverted && newLead.Status == 'Qualified' && Trigger.oldmap.get(newLead.id).Status != 'Qualified'){
-                        System.debug('Lead status Changed>>>>>>>>>>>');
+                        
                         newLeadList.add(newLead);
                     }
-                }
+              
                 
             }
             if(newLeadList.size() > 0)
             {
-                System.debug('Qualified List>>>>>>>>>>>');
+                
                 LeadTriggerHandler handlerIns = new LeadTriggerHandler();
                 handlerIns.onAfterUpdate(newLeadList);
             }
+            //Create and assign the task to lead intake user when the lead status is updated with DNQ.
+           // if(lead_IntakUserIdMap.Size() > 0)
+            //    LeadTriggerHandler.createTaskforDNQLeads(lead_IntakUserIdMap);
         }
     } 
     
@@ -282,7 +288,10 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         List<Lead> newLeadList = new List<Lead>();
         Set<String> conditionSescriptionSet = new Set<String>();
         List<Task> newTaskList = new List<Task>();
-        for(Lead newLead : Trigger.new)
+        
+        Map<String, List<Lead>> leadMap = new Map<String,List<Lead>>();
+        
+        for(Lead newLead : [SELECT id,Migrated_Record__c, OwnerId,Owner.UserRole.Name,Status, ChapterName__c,ChapterName__r.Name,PD_Condition_Description__C FROM Lead WHERE Id IN : Trigger.newMap.keySet()])
         {
             if(newLead.Migrated_Record__c != True)
             {
@@ -303,6 +312,14 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                 newTaskList.add(newTask);
             }
             
+            if(newLead.ChapterName__c!= Null && newLead.Owner.UserRole.Name == 'National Staff')
+            {
+                if(leadMap.containsKey(newLead.ChapterName__r.Name))
+                   leadMap.get(newLead.ChapterName__r.Name).add(newLead);
+                else
+                   leadMap.put(newLead.ChapterName__r.Name, new List<Lead>{newLead});
+            }
+            
         }
         
         if(newTaskList.size() > 0)
@@ -312,6 +329,9 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         if(newLeadList.size() > 0) {
             //LeadTriggerHandler.CreateDiagnosisVerification(newLeadList, conditionSescriptionSet);
         }
+        
+        if(leadMap.size() > 0)
+            ChapterStaffRecordSharing_AC.LeadSharing(leadMap);
     }
     
     

@@ -4301,7 +4301,7 @@
                 <isoCode>AA</isoCode>
                 <label>Armed Forces Americas</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>
@@ -4309,7 +4309,7 @@
                 <isoCode>AE</isoCode>
                 <label>Armed Forces Europe</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>
@@ -4333,7 +4333,7 @@
                 <isoCode>AP</isoCode>
                 <label>Armed Forces Pacific</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>
@@ -4349,7 +4349,7 @@
                 <isoCode>AS</isoCode>
                 <label>American Samoa</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>
@@ -4413,7 +4413,7 @@
                 <isoCode>FM</isoCode>
                 <label>Federated Micronesia</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>
@@ -4429,7 +4429,7 @@
                 <isoCode>GU</isoCode>
                 <label>Guam</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>
@@ -4525,7 +4525,7 @@
                 <isoCode>MH</isoCode>
                 <label>Marshall Islands</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>
@@ -4557,7 +4557,7 @@
                 <isoCode>MP</isoCode>
                 <label>Northern Mariana Islands</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>
@@ -4677,7 +4677,7 @@
                 <isoCode>PR</isoCode>
                 <label>Puerto Rico</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>
@@ -4685,7 +4685,7 @@
                 <isoCode>PW</isoCode>
                 <label>Palau</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>
@@ -4733,7 +4733,7 @@
                 <isoCode>UM</isoCode>
                 <label>United States Minor Outlying Islands</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>
@@ -4757,7 +4757,7 @@
                 <isoCode>VI</isoCode>
                 <label>US Virgin Islands</label>
                 <standard>true</standard>
-                <visible>false</visible>
+                <visible>true</visible>
             </states>
             <states>
                 <active>true</active>

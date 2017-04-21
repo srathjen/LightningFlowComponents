@@ -6,6 +6,6 @@
     <letterhead>Make_a_Wish_America</letterhead>
     <name>Case: Email alert to wish granters</name>
     <style>freeForm</style>
-    <subject>Wish Grant Task Not Closed</subject>
+    <subject>Wish Granting Task Reminder</subject>
     <type>html</type>
 </EmailTemplate>

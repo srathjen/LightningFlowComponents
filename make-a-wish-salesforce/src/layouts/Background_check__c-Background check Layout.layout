@@ -33,7 +33,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Active__c</field>
+                <field>Current__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

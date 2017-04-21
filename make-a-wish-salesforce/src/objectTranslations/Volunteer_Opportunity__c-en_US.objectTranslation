@@ -308,6 +308,10 @@
             <translation><!-- Inactive --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Out of Compliance</masterLabel>
+            <translation><!-- Out of Compliance --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Pending</masterLabel>
             <translation><!-- Pending --></translation>
         </picklistValues>
@@ -552,6 +556,10 @@
         <name>Wish</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- You cannot create volunteer opportunity for closed wish. --></errorMessage>
+        <name>Vol_Opp_Do_Not_Create_for_Closed_Wish</name>
+    </validationRules>
     <validationRules>
         <errorMessage><!-- Please enter the value for Reason Inactive --></errorMessage>
         <name>Volunteer_Opp_Reason_Inactive</name>

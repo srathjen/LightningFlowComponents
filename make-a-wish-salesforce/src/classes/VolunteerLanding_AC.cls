@@ -38,6 +38,7 @@ public class VolunteerLanding_AC {
     public boolean displayTrainingAck{get;set;}
     public String myId;
     public string trainingName{get;set;}
+    public boolean isTrained{get;set;}
     
     /*** Dynamic Content variables */
     
@@ -65,15 +66,23 @@ public class VolunteerLanding_AC {
         Id activeVolunteerRecordTypeId = Schema.Sobjecttype.Dynamic_Content__c.getRecordTypeInfosByName().get(constant.activeVolRT).getRecordTypeId();
         currentUserId = userInfo.getUserId();
         currUser = [SELECT contactId FROM User WHERE Id = :userInfo.getUserId()];
-        List<HoldCurrentChapter__c > primaryChapter = [SELECT Name,CurrentChapter__c FROM HoldCurrentChapter__c  WHERE Name =: currentUserId];
+        //List<HoldCurrentChapter__c > primaryChapter = [SELECT Name,CurrentChapter__c FROM HoldCurrentChapter__c  WHERE Name =: currentUserId];
+        List<npe5__Affiliation__c> primaryChapter = [SELECT Id, npe5__Organization__c, npe5__Organization__r.Name FROM npe5__Affiliation__c WHERE npe5__Contact__c =: currUser.contactId  LIMIT 1 ];
+        isTrained  = false;
+        for(Volunteer_Roles__c currRole : [SELECT Id FROM Volunteer_Roles__c WHERE Volunteer_Name__c  =: currUser.contactId AND Status__c = 'Trained'])
+        {
+         isTrained = True;
+        }
+       
+       
         if(primaryChapter.size() > 0)
         {
-            currentChapter = primaryChapter.get(0).CurrentChapter__c; 
+            currentChapter = primaryChapter.get(0).npe5__Organization__r.Name; 
             volunteercon = [SELECT Id,FirstName,LastName,Name,isApplication__c,Account.Volunteer_Manager__c,AccountId,
                             Email,Phone,Broadcast_Number__c,OwnerId FROM Contact WHERE Id =: currUser.ContactId Limit 1];
                             
             activeVolunteerLandingPageInfoList = [SELECT Id, Featured_Image__c, Feature_Quote__c, Heading_Highlight_Image_1__c, Heading_Highlight_Image_2__c, Heading_Highlight_Image_3__c, Heading_Highlight_Text_1__c, Heading_Highlight_Text_2__c, Heading_Highlight_Text_3__c,
-                                              Heading_Highlight_Title_1__c, Heading_Highlight_Title_2__c,Heading_Text__c, Heading_Highlight_Title_3__c, Heading_Title__c, Welcome_Message__c FROM Dynamic_Content__c WHERE RecordTypeId =: activeVolunteerRecordTypeId AND Chapter_Name__r.Name =: primaryChapter.get(0).CurrentChapter__c AND Active__c = True LIMIT 1];
+                                              Heading_Highlight_Title_1__c, Heading_Highlight_Title_2__c,Heading_Text__c, Heading_Highlight_Title_3__c, Heading_Title__c, Welcome_Message__c FROM Dynamic_Content__c WHERE RecordTypeId =: activeVolunteerRecordTypeId AND Chapter_Name__c =: primaryChapter.get(0).npe5__Organization__c AND Active__c = True LIMIT 1];
             
             System.debug('activeVolunteerLandingPageInfoList +++++++++++++++++= ' + activeVolunteerLandingPageInfoList);
             
@@ -171,7 +180,7 @@ public class VolunteerLanding_AC {
           }*/
        integer coiDays = Integer.valueOf(label.COI_no_of_expiration_days);
        displayPopupconflict = false;
-       List<Conflict_Of_Interest__c> conflictIns = [SELECT Id,Name,Expiration_Date__c,Signed_Date__c,Active__c,Volunteer_Contact__c FROM  Conflict_Of_Interest__c WHERE Volunteer_Contact__c  =: currUser.ContactId AND Expiration_Date__c != Null  Order by CreatedDate DESC Limit 1];
+       List<Conflict_Of_Interest__c> conflictIns = [SELECT Id,Name,Expiration_Date__c,Signed_Date__c,current__c,Volunteer_Contact__c FROM  Conflict_Of_Interest__c WHERE Volunteer_Contact__c  =: currUser.ContactId AND Expiration_Date__c != Null  Order by CreatedDate DESC Limit 1];
       // isExpired = false;
        isCOIExpired  =false;
        if(conflictIns.size() > 0)
@@ -180,7 +189,7 @@ public class VolunteerLanding_AC {
           System.debug('nCOIDays +++++++++++++++++++++ ' + nCOIDays);
         }
         
-        if(conflictIns.size() > 0 && myId == Null)
+        if(conflictIns.size() > 0 && myId == Null && isTrained==True)
         {
         
             If(conflictIns[0].Expiration_Date__c >= Date.Today()  && conflictIns[0].Expiration_Date__c < Date.Today().addDays(coiDays) && myId == Null){
@@ -219,7 +228,7 @@ public class VolunteerLanding_AC {
                 System.debug('nBCDays  +++++++++++++++++++++ ' + nBCDays);
             }
             
-        if(currVolBGCheck.size() > 0 && displayPopupconflict != True)
+        if(currVolBGCheck.size() > 0 && displayPopupconflict != True && isTrained==True)
         {
         
            if(currVolBGCheck[0].Date__c >= Date.Today()  && currVolBGCheck[0].Date__c < Date.Today().addDays(bcDays))
@@ -267,7 +276,7 @@ public class VolunteerLanding_AC {
             }
            }
         
-        List<Broadcast__c> recentBroadCastList = [SELECT id,Name, Broadcast_Message__c FROM Broadcast__c WHERE Name NOT IN :broadCastsNameSet AND (Date__c < :Date.Today().addDays(30)) AND Chapter_Name__c = :primaryChapter.npe5__Organization__c limit 1];
+        List<Broadcast__c> recentBroadCastList = [SELECT id,Name, Broadcast_Message__c,Active__c FROM Broadcast__c WHERE Name NOT IN :broadCastsNameSet AND (Date__c < :Date.Today().addDays(30)) AND Chapter_Name__c = :primaryChapter.npe5__Organization__c AND Active__c = true limit 1];
        
         if(recentBroadCastList.size() > 0 && displayPopup != true)
         {
@@ -298,15 +307,15 @@ public class VolunteerLanding_AC {
        {
          chapterRoles.add(currRec.id);
        }
-       for(Volunteer_Orientation_Training__c currRec : [SELECT Id,Volunteer_Attendance__c,Orientation_Training__c  
+       for(Volunteer_Orientation_Training__c currRec : [SELECT Id,Volunteer_Attendance__c,Hidden_O_T_Id__c
                                                         FROM Volunteer_Orientation_Training__c  Where 
                                                         Volunteer__c = :currUser.ContactId AND 
                                                         Volunteer_Attendance__c != 'Cancelled' AND Type__c = 'Training'])
        {
-           orientationIds.add(currRec.Orientation_Training__c);
+           orientationIds.add(currRec.Hidden_O_T_Id__c);
            
            if(currRec.Volunteer_Attendance__c == 'Registered')
-               registeredIds.add(currRec.Orientation_Training__c);
+               registeredIds.add(currRec.Hidden_O_T_Id__c);
            
        }
        
@@ -434,7 +443,7 @@ public class VolunteerLanding_AC {
          
           contact updateContact = new Contact();
           updateContact.id = currUser.contactId;
-              if(volunteercon.Broadcast_Number__c != Null)
+              if(volunteercon != NULL && volunteercon.Broadcast_Number__c != Null)
               {
                 updateContact.Broadcast_Number__c = volunteercon.Broadcast_Number__c +','+broadCastName;
               }
@@ -494,8 +503,8 @@ public class VolunteerLanding_AC {
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailBlurb":"Test Email Body",'+
-            '  "emailSubject": "Test Email Subject",'+
+            '  "emailBlurb":"",'+
+            '  "emailSubject": "Please review & act on these document",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+
             '      "name": "document.pdf",'+

@@ -47,14 +47,15 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
                 if(currRec.Volunteer__c != Null){
                     volOTSet.add(currRec.Volunteer__c);
                 }
-                if(currRec.Orientation_Training__c != Null){
+                if(currRec.Hidden_O_T_Id__c!= Null){
                     oriandTrainingSet.add(currRec.Id);
                 }
             }
         }
         
         
-        for(Contact getContactInfo : [SELECT ID, Name, Account.Name, Account.Phone,Email,Account.Email__c FROM contact where id IN:volOTSet]) 
+        for(Contact getContactInfo : [SELECT ID, Name, Account.Name, Account.Phone,Email,Account.Email__c FROM contact 
+                                      where id IN:volOTSet]) 
         {
             if(!contactInfoMap.containsKey(getContactInfo.Id)) {
                 contactInfoMap.put(getContactInfo.Id, getContactInfo);

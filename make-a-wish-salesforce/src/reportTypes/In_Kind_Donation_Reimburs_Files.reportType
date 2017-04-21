@@ -1227,16 +1227,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>diagnosis_verificaion_receive_date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>diagnosis_verificaion_sent_date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Child_Wish_Clearance_Last_Modified_Date__c</field>
             <table>Case</table>
         </columns>
@@ -1308,11 +1298,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>wish_involves_air_travel__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Is_Migrated_Record__c</field>
             <table>Case</table>
         </columns>
         <columns>
@@ -1605,16 +1590,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Volunteer_Name__c</field>
-            <table>Case.In_Kind_Donation_Reimbursement__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Wish_Owner__c</field>
-            <table>Case.In_Kind_Donation_Reimbursement__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Wish_Owner_s_Manager__c</field>
             <table>Case.In_Kind_Donation_Reimbursement__r</table>
         </columns>
         <columns>

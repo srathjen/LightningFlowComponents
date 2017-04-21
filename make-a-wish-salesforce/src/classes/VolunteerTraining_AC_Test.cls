@@ -224,7 +224,7 @@ Public class VolunteerTraining_AC_Test {
     {
         Volunteer_Orientation_Training__c createNewVol = new Volunteer_Orientation_Training__c();
         createNewVol.class_offering__c = ClassOfferingId;
-        createNewVol.Orientation_Training__c = OrienationId;
+        createNewVol.Hidden_O_T_Id__c = OrienationId;
         createNewVol.Registered_Date__c = Date.Today();
         createNewVol.Volunteer__c = volunteer;
         createNewVol.Volunteer_Attendance__c = status;

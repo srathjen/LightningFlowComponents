@@ -1,4 +1,4 @@
-<apex:page renderAs="pdf" standardController="Case" extensions="WishChildForm_AC" standardStylesheets="false" showHeader="false" sidebar="false"  applyBodyTag="false" applyHtmlTag="false">
+<apex:page renderAs="pdf" standardController="Case" extensions="SignNow_AC" standardStylesheets="false" showHeader="false" sidebar="false"  applyBodyTag="false" applyHtmlTag="false">
 
 <head>
  <style> 

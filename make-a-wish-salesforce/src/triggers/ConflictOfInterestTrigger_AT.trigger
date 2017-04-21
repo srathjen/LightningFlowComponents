@@ -29,8 +29,8 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
             if(newCOI.Signed_Date__c != Null && (Trigger.isInsert || (Trigger.isUpdate && newCOI.Signed_Date__c != Trigger.oldMap.get(newCOI.id).Signed_Date__c)))
             {
                 newCOI.Expiration_Date__c = newCOI.Signed_Date__c.addYears(1);
-                if(newCOI.Active__c == False)
-                   newCOI.Active__c = True;
+                if(newCOI.current__c == False)
+                   newCOI.current__c = True;
             }
         }
      }
@@ -39,19 +39,18 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
      {
          Set<Id> recordIds = new Set<Id>();
          Set<Id> volunteerIds = new Set<Id>();
-         Map<String,List<Conflict_Of_Interest__c>> coiMap = new Map<String,List<Conflict_Of_Interest__c>>();
+         Set<Id> ownerIds = new Set<Id>();
+         
          for(Conflict_Of_Interest__c  currCOI : Trigger.new)
          {
-            if(currCOI.Active__c == True)
+            if(currCOI.current__c == True)
             {
                 recordIds.add(currCOI.Id);
                 volunteerIds.add(currCOI.Volunteer_Contact__c);
             }
             
-            if(coiMap.containsKey(currCOI.Account_Name__c))
-                  coiMap.get(currCOI.Account_Name__c).add(currCOI);
-            else
-                  coiMap.put(currCOI.Account_Name__c,new List<Conflict_Of_Interest__c>{currCOI});
+             ownerIds.add(currCOI.ownerId);
+        
          }
          
         if(volunteerIds.size() > 0 && recordIds.size() > 0)
@@ -59,8 +58,9 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
           UpdateExistingRecords(recordIds,volunteerIds);
         }
         
-        if(coiMap.size() > 0)
-          ChapterStaffRecordSharing_AC.COIRecordSharing(coiMap);
+        if(ownerIds.size() > 0)
+            COIRecordSharing(ownerIds,Trigger.new);
+     
      }
      
      // Updating COI Expiration Date on Volunteer Contact.
@@ -69,6 +69,8 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
        List<Contact> updateVolunteerContact = new List<Contact>();
        Set<Id> recordIds = new Set<Id>();
        Set<Id> volunteerIds = new Set<Id>();
+       Set<Id> ownerIds = new Set<Id>();
+       Set<Id> volunteerContactIdSet = new Set<Id>();
         for(Conflict_Of_Interest__c  currCOI : Trigger.new)
         {
            if(currCOI.Expiration_Date__c  != Trigger.oldMap.get(currCOI.id).Expiration_Date__c && currCOI.Expiration_Date__c != Null)
@@ -82,34 +84,78 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
                 }
            }
            
-           if(currCOI.Active__c == True && Trigger.oldMap.get(currCOI.id).Active__c == False)
+           if(currCOI.HiddenConflictExpire__c == true && trigger.oldMap.get(currCOI.Id).HiddenConflictExpire__c  == false){
+               volunteerContactIdSet.add(currCOI.Volunteer_Contact__c);
+           }
+           
+           if(currCOI.current__c == True && Trigger.oldMap.get(currCOI.id).current__c == False)
             {
                 recordIds.add(currCOI.Id);
                 volunteerIds.add(currCOI.Volunteer_Contact__c);
                 
             }
+            
+            if(currCOI.ownerId != Trigger.oldMap.get(currCOI.id).OwnerId)
+                ownerIds.add(currCOI.ownerId);
+                
+              
         }
         
         
         if(updateVolunteerContact.size() > 0)
           update updateVolunteerContact;
           
+        if(ownerIds.size() > 0)
+            COIRecordSharing(ownerIds,Trigger.new);  
+          
         if(volunteerIds.size() > 0 && recordIds.size() > 0)
         {
           UpdateExistingRecords(recordIds,volunteerIds);
         }
+        
+        if(volunteerContactIdSet.size() > 0)
+         BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(volunteerContactIdSet);
      }
+     
+     
+     Static Void COIRecordSharing(Set<Id> ownerIds, List<Conflict_Of_Interest__c> coiList)
+     {
+         Map<Id,String> userRoleMap = UserRoleUtility.getUserRole(ownerIds);
+         Map<String, List<Conflict_Of_Interest__c>> coiMap = new Map<String, List<Conflict_Of_Interest__c>>();
+         
+         for(Conflict_Of_Interest__c currCOI : coiList)
+         {
+             if(currCOI.Account_Name__c != Null && userRoleMap.get(currCOI.OwnerId) == 'National Staff')
+              {
+                   if(coiMap.containsKey(currCOI.Account_Name__c))
+                    {
+                        coiMap.get(currCOI.Account_Name__c).add(currCOI);
+                    }
+                    else
+                        coiMap.put(currCOI.Account_Name__c, new List<Conflict_Of_Interest__c>{currCOI});
+                            
+                 
+              }
+         }
+         
+         if(coiMap.size() > 0)
+             ChapterStaffRecordSharing_AC.COIRecordSharing(coiMap);
+     
+     
+     }
+     
+      
      
      
      
      Static void UpdateExistingRecords(Set<Id> recordIds, Set<Id> volunteerIds)
      {
          List<Conflict_Of_Interest__c>  recordsToUpdate = new List<Conflict_Of_Interest__c>();
-         for(Conflict_Of_Interest__c currRec : [SELECT id from Conflict_Of_Interest__c WHERE Volunteer_Contact__c IN :volunteerIds AND Id NOT IN :recordIds AND Active__c = True])
+         for(Conflict_Of_Interest__c currRec : [SELECT id from Conflict_Of_Interest__c WHERE Volunteer_Contact__c IN :volunteerIds AND Id NOT IN :recordIds AND current__c = True])
          {
              Conflict_Of_Interest__c newRec = new Conflict_Of_Interest__c();
              newRec.id = currRec.id;
-             newRec.Active__c = false;
+             newRec.current__c = false;
              recordsToUpdate.add(newRec);
              
          }

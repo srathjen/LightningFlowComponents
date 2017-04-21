@@ -10,7 +10,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Part_A_Form_Email_Template</template>
+        <template>Medical_Eligibility_Emails/Part_A_Form_Email_Template</template>
     </alerts>
     <alerts>
         <fullName>Lead_Email_Alert_for_Lead_Owner_Regarding_Chapter_Update</fullName>
@@ -52,14 +52,11 @@
         <description>Send Email to Office Referrar email with Wish Referral Form</description>
         <protected>false</protected>
         <recipients>
-            <recipient>sailappa_maw@mstsolutions.com</recipient>
-            <type>user</type>
+            <field>Office_Referral_Email__c</field>
+            <type>email</type>
         </recipients>
-        <recipients>
-            <recipient>sathiskumar.s_maw@mstsolutions.com</recipient>
-            <type>user</type>
-        </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Send_Wish_Referral_Form_to_Non_Active_Chapter_Office</template>
     </alerts>
     <rules>
@@ -70,7 +67,7 @@
         </actions>
         <active>true</active>
         <description>Whenever chapter updates based on the Postal Code, It will send an email notification to Lead Owner.</description>
-        <formula>ISCHANGED( ChapterName__c)</formula>
+        <formula>ISCHANGED( ChapterName__c) &amp;&amp;  Migrated_Record__c = false</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>

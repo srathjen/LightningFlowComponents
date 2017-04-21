@@ -133,7 +133,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- The date when the donor was specifically asked for the donation, as opposed to the Opportunity Close Date that the organization may set to either when the Opportunity was first created, or when the Opportunity was won. --></help>
+        <help>団体が設定する支援完了日 (支援が最初に作成された日、または支援が成立した日) に対して、支援者が支援について具体的に質問された日付。</help>
         <label><!-- Ask Date --></label>
         <name>npsp__Ask_Date__c</name>
     </fields>
@@ -143,7 +143,7 @@
         <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Notes on why the donation ask was not successful. --></help>
+        <help>支援の質問が成功しなかった理由に関するメモ。</help>
         <label><!-- Closed Lost Reason --></label>
         <name>npsp__Closed_Lost_Reason__c</name>
     </fields>
@@ -153,20 +153,20 @@
         <name>npsp__Fair_Market_Value__c</name>
     </fields>
     <fields>
-        <help><!-- Categorizes the type of ask for this opportunity. --></help>
+        <help>この支援の質問種別を分類します。</help>
         <label><!-- Gift Strategy --></label>
         <name>npsp__Gift_Strategy__c</name>
         <picklistValues>
             <masterLabel>New Donor</masterLabel>
-            <translation><!-- New Donor --></translation>
+            <translation>新規支援者</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Renewal</masterLabel>
-            <translation><!-- Renewal --></translation>
+            <translation>更新</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Upgrade</masterLabel>
-            <translation><!-- Upgrade --></translation>
+            <translation>アップグレード</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -331,7 +331,7 @@
         <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- The date this donor was identified as qualifying for this donation. --></help>
+        <help>この支援者がこの支援の資格があると認定された日付。</help>
         <label><!-- Qualified Date --></label>
         <name>npsp__Qualified_Date__c</name>
     </fields>

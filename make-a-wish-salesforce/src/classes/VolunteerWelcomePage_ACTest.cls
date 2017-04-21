@@ -319,15 +319,14 @@ Public Class VolunteerWelcomePage_ACTest
             confirmationTask.Status = 'Approved';
             confirmationTask.whoId = con.id;
             insert confirmationTask;
-         }   
+            
             // Backgroud check creationn.
             Background_check__c currBC = OrientationandTrainingUtil.createBackgroundCheck(con.id);
+            VolunteerLanding_AC_Test.BGCRecordSharing(currUser.id,currBc.id);
             currBC.Date_Completed__C = Date.Today();
             currBC.status__c = 'Approved';
             update currBC;
             
-        System.RunAs(currUser)
-        {   
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.getEvents();
             controller.becomeAVolunteer();
@@ -385,22 +384,18 @@ Public Class VolunteerWelcomePage_ACTest
             confirmationTask.whoId = con.id;
             insert confirmationTask;
             
-          }
-          // Backgroud check creationn.
+            // Backgroud check creationn.
             Background_check__c currBC = OrientationandTrainingUtil.createBackgroundCheck(con.id);
+            VolunteerLanding_AC_Test.BGCRecordSharing(currUser.id,currBc.id);
             currBC.Date_Completed__C = Date.Today();
             currBC.status__c = 'Approved';
             update currBC;
-              
-        System.RunAs(currUser)
-        {  
+            
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.getEvents();
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
-            
         }
-        
         
     }
     

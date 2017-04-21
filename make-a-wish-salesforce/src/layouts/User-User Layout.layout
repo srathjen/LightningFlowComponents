@@ -22,6 +22,10 @@
                 <behavior>Edit</behavior>
                 <field>Hidden_Role_Name_Id__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Volunteer_Active__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

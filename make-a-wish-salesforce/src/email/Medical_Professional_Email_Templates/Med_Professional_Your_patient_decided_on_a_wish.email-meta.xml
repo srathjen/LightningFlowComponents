@@ -13,8 +13,7 @@ We are excited your patient has chosen their wish!  If you have any questions, c
 
 Wish Child Name: {!Contact.Name}
 Primary Diagnosis: {!Contact.Diagnosis__c}
-Wish:  {!Case.Description}
-Anticipated Start Date:  {!Case.Anticipated_Start_Date__c}
+Wish: {!Case.Wish_Type__c}
 
 Thanks to the support of you and other medical professionals around the country, we continue to come closer each year to our vision of making every eligible child’s wish come true.
 
@@ -24,7 +23,7 @@ Warmly,
 
 {!User.Name}
 {!User.Title}
-{!Case.ChapterName__c}
+{!Case.Hidden_Chapter_Name__c}
 {!User.Email}
 {!User.Phone}</textOnly>
     <type>html</type>

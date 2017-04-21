@@ -4,27 +4,21 @@ about wish child.*/
 public class WishClearanceSendNow_AC{
     
     public Case currentParentCase{get;set;}
-    
+    Public boolean isRush{get;set;}
     public WishClearanceSendNow_AC(ApexPages.StandardController controller){
-        
+        isRush = false;
         currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushWishClearence_ChildSummary__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
-        
-    }
+        if(currentParentCase.Rush__c == true)
+            isRush = true;
+        }
+    
     
     public void SendtoDocuSign(){
         
         if(currentParentCase.wish_involves_air_travel__c == Null ||currentParentCase.Description == Null ){
             DisplayErrorMessage();
         }
-        else if(currentParentCase.Rush__c == true){
-          
-           
-          case updatenewCase = new Case();
-          updatenewCase.Id = currentParentCase.Id;
-          updatenewCase.IsRushWishClearence_ChildSummary__c = true;
-          update updatenewCase;
-          DisplayMessage();
-        }
+      
         else{
            case updatecase = new Case();
            updatecase.Id = currentParentCase.Id;
@@ -38,22 +32,31 @@ public class WishClearanceSendNow_AC{
            updatecase.Comment_2__c = Null;
            updatecase.Wish_Clearance_Sent_Date__c = system.today();
            update updatecase;
-           CallouttoDocusign(updateCase.Id);
+           
+           if(!Test.isRunningTest())
+           CallouttoDocusign(updateCase.Id,isRush);
            DisplayMessage();
         }
         // return wrapInst.status;
     }
     
     @future(Callout = true)
-    public static void CallouttoDocusign(Id caseId){
+    public static void CallouttoDocusign(Id caseId, boolean isRush){
        Case currentParentCase = [SELECT Id,ContactId,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: caseId];
          system.debug('@@@@@@@@@@@@ currentParentCase  @@@@@@@@@@@@@@'+currentParentCase.wish_involves_air_travel__c);
-         String account;
+            String templateID; 
+            String account;
             String UserName;
             String Password;
             String IntegratorKey;
             String endPointURL;
-            String templateID = label.WishClearence;
+            if(isRush != true){
+             templateID = label.WishClearence;
+             }
+             else
+             {
+                templateID = label.Rush_Wish_Clearance; 
+             }
             system.debug('### templateId #####'+templateID);
             Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
             String  name = currentParentCase.Contact.Hidden_Medical_Physician__c;
@@ -80,7 +83,7 @@ public class WishClearanceSendNow_AC{
             String json='{'+ 
                 ' '+ 
                 ' "emailSubject": "Wish Clearance",'+
-                ' "emailBlurb": "MAKE A WISH AMERICA",'+ 
+                ' "emailBlurb": "MAKE A WISH",'+ 
                 ' "templateId": "'+templateID+'",'+ 
                 ' "envelopeIdStamping": "false",'+ 
                 ' "customFields":{'+
@@ -126,7 +129,7 @@ public class WishClearanceSendNow_AC{
     }
     
     public pagereference DisplayMessage(){
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The wish clearance form has been sent successfully.'));
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The wish clearance form has been sent successfully.'));
         return null;
     }
     

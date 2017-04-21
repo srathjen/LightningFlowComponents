@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
     <labels>
+        <fullName>AbsentForm</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>AbsentForm</shortDescription>
+        <value>059E0CA8-67AC-46FC-B920-F5E8208B010F</value>
+    </labels>
+    <labels>
         <fullName>Active_Volunteer_Profile</fullName>
         <categories>It holds the Id of Active Volunteer Profile</categories>
         <language>en_US</language>
@@ -30,7 +37,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Child Medical Summary</shortDescription>
-        <value>DD8DDDBE-C331-4A95-BF45-22E896EC2CDF</value>
+        <value>8937F5DD-D14B-4F57-88F5-6A22455731A9</value>
     </labels>
     <labels>
         <fullName>ContactIdValue</fullName>
@@ -87,6 +94,20 @@
         <value>00e36000000HVbO</value>
     </labels>
     <labels>
+        <fullName>Rush_Child_Summary</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Rush Child Summary</shortDescription>
+        <value>E8A2FCDB-4A45-40B5-8C3A-83AFC7729948</value>
+    </labels>
+    <labels>
+        <fullName>Rush_Wish_Clearance</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Rush Wish Clearance</shortDescription>
+        <value>20C0778C-FFA8-44BF-9883-77158C76395F</value>
+    </labels>
+    <labels>
         <fullName>Shopping_Spree_DDP</fullName>
         <language>en_US</language>
         <protected>false</protected>
@@ -99,6 +120,13 @@
         <protected>false</protected>
         <shortDescription>SigleDayVolunteer</shortDescription>
         <value>a1036000003GY8B</value>
+    </labels>
+    <labels>
+        <fullName>SingleForm</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>SingleForm</shortDescription>
+        <value>D20FEED4-DEF3-4958-AB43-2FF2C8FF4781</value>
     </labels>
     <labels>
         <fullName>Site_Url</fullName>
@@ -128,7 +156,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Clearence</shortDescription>
-        <value>145DAE40-4A86-4F7B-A19D-FD7B34056563</value>
+        <value>F2EE9917-FC0C-48AB-8BC2-C98E11F6D034</value>
     </labels>
     <labels>
         <fullName>Wish_Receipt_DDP</fullName>

@@ -25,6 +25,10 @@
             <type>caseTeam</type>
         </recipients>
         <recipients>
+            <recipient>Intake Manager</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
             <recipient>Translator &amp; Interpreter</recipient>
             <type>caseTeam</type>
         </recipients>
@@ -50,7 +54,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Abandoned_Wish_Template</template>
+        <template>Wish_Granting_Templates/Case_Abandoned_Wish_Template</template>
     </alerts>
     <alerts>
         <fullName>Case_Approval</fullName>
@@ -135,6 +139,33 @@
         <template>unfiled$public/Case_Unassigned_Email_Template</template>
     </alerts>
     <alerts>
+        <fullName>Case_Wish_Presentation_Not_Set</fullName>
+        <description>Case : Wish Presentation Not Set</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Wish Granter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Granter Mentor</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>unfiled$public/Case_Send_Email_to_Volunteer_for_Blank_Presentation_date</template>
+    </alerts>
+    <alerts>
+        <fullName>Granting_Case_Development_team_regarding_wish_presentation_alert</fullName>
+        <description>Granting Case: Development team regarding wish presentation alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Dev_Staff_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>unfiled$public/Case_Send_Email_to_Development_for_Presentation_Party</template>
+    </alerts>
+    <alerts>
         <fullName>National_MAC_Team_Email_Alert</fullName>
         <description>National MAC Team Email Alert.</description>
         <protected>false</protected>
@@ -142,9 +173,12 @@
             <field>MAC_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>mawamericaprod@gmail.com</senderAddress>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Send_Email_to_National_MAC_Team</template>
+        <template>Medical_Eligibility_Emails/Case_Send_Email_to_National_MAC_Team</template>
     </alerts>
     <alerts>
         <fullName>Rush_Wish_Child_Summary_Alert</fullName>
@@ -179,9 +213,9 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Send_Email_to_Loacl_MAC_Team_Template</template>
+        <template>Medical_Eligibility_Emails/Send_Email_to_Loacl_MAC_Team_Template</template>
     </alerts>
     <alerts>
         <fullName>Send_Reply_Emal_to_National_MAC_team_Alert</fullName>
@@ -194,8 +228,7 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderAddress>wvcsupport@wish.org</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
+        <senderType>CurrentUser</senderType>
         <template>unfiled$public/Send_Reply_Email_to_National_MAC_Team_Template</template>
     </alerts>
     <alerts>
@@ -226,33 +259,8 @@
     </alerts>
     <alerts>
         <fullName>Wish_Interview_Date_Not_Set_After_21_Days_Email_Alert</fullName>
-        <ccEmails>chandrasekar@mstsolutions.com</ccEmails>
         <description>Wish Interview Date Not Set After 21 Days Email Alert</description>
         <protected>false</protected>
-        <recipients>
-            <recipient>Airport Greeter</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Celebrity Host</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Translator &amp; Interpreter</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Volunteer Manager</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Assist Phone Greeter</recipient>
-            <type>caseTeam</type>
-        </recipients>
-        <recipients>
-            <recipient>Wish Coordinator</recipient>
-            <type>caseTeam</type>
-        </recipients>
         <recipients>
             <recipient>Wish Granter</recipient>
             <type>caseTeam</type>
@@ -304,6 +312,26 @@
         <operation>Literal</operation>
         <protected>false</protected>
         <reevaluateOnChange>true</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Uncheck_Presentation_Not_Set</fullName>
+        <description>Used to Un Check Presentation Not Check Field in Granting Case</description>
+        <field>Hidden_Wish_Presentation_Not_Set__c</field>
+        <literalValue>0</literalValue>
+        <name>Case : Uncheck Presentation Not Set</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Case_Uncheck_is_Email_Wish_Granter</fullName>
+        <description>Used to un check isEmail Wish Granter field</description>
+        <field>isEmailWishGranter__c</field>
+        <literalValue>0</literalValue>
+        <name>Case Uncheck is Email Wish Granter</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
     </fieldUpdates>
     <fieldUpdates>
         <fullName>UpdateIsRushWishChild</fullName>
@@ -389,7 +417,7 @@
         </actions>
         <active>true</active>
         <description>This rule will fire when the case sub status is changed as &quot;Abandoned&quot;.</description>
-        <formula>AND(ISCHANGED(Sub_Status__c),ISPICKVAL(Sub_Status__c, &apos;Abandoned&apos;))</formula>
+        <formula>AND(ISCHANGED(Sub_Status__c),ISPICKVAL(Sub_Status__c, &apos;Abandoned&apos;),Migrated_Record__c = false)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -399,7 +427,7 @@
             <type>Alert</type>
         </actions>
         <active>true</active>
-        <booleanFilter>1 AND (2 OR 3) AND 4</booleanFilter>
+        <booleanFilter>1 AND (2 OR 3) AND 4 AND 5</booleanFilter>
         <criteriaItems>
             <field>Case.RecordTypeId</field>
             <operation>equals</operation>
@@ -419,7 +447,41 @@
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This workflow will fire when the wish is not assigned for particular time period</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Case %3A Wish Presentation Not Set</fullName>
+        <actions>
+            <name>Case_Wish_Presentation_Not_Set</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Case_Uncheck_Presentation_Not_Set</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish Granting</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Hidden_Wish_Presentation_Not_Set__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>Send Email to Volunteer for Blank Presentation date</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -437,10 +499,21 @@
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
+        <fullName>Case%3A Wish Child Birthday</fullName>
+        <actions>
+            <name>Wish_Child_Birthday_Reminder</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <description>Used to create a birthday task when the birthday is lesser that 21 days</description>
+        <formula>AND(ISCHANGED(Birthdate__c),NOT(ISNULL(Birthdate__c)),CurrentDOB__c - Today()  &lt;=  21,Migrated_Record__c = false)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
         <fullName>Case%3ABirthday Task</fullName>
         <active>true</active>
         <description>This workflow will create Task to Volunteer for Wish Child Birthday</description>
-        <formula>If( Month(Birthdate__c)==2 &amp;&amp; Day(Birthdate__c)==29 ,  	If((MOD(YEAR(Today()), 400 ) = 0 || ( MOD(YEAR(Today()),4) = 0 &amp;&amp; MOD(YEAR(Today()), 100 ) != 0) ),  		(DATE(YEAR(Today()),Month(Birthdate__c),Day(Birthdate__c)) &gt; (Today()) ) &amp;&amp; (Text(Status) != &apos;Closed&apos;) &amp;&amp; (RecordType.DeveloperName = &apos;Wish&apos;) , 			(DATE(YEAR(Today()),Month(Birthdate__c),Day(Birthdate__c-1)) &gt; (Today()) ) &amp;&amp; (Text(Status) != &apos;Closed&apos;) &amp;&amp; (RecordType.DeveloperName = &apos;Wish&apos;) ) , 	(DATE(YEAR(Today()),Month(Birthdate__c),Day(Birthdate__c)) &gt; (Today()) ) &amp;&amp; (Text(Status) != &apos;Closed&apos;) &amp;&amp; (RecordType.DeveloperName = &apos;Wish&apos;))</formula>
+        <formula>AND(NOT(ISNULL(Birthdate__c)),CurrentDOB__c - Today() &gt; 21) &amp;&amp;  $Profile.Name != &apos;Integration&apos;</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
@@ -462,6 +535,11 @@
         <criteriaItems>
             <field>Case.Wish_Clearance_Received_Date__c</field>
             <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
         </criteriaItems>
         <description>Used to create a task to Chapter Staff if Wish Clearance received is null after 14 days the form sent</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -512,6 +590,7 @@
             <operation>equals</operation>
             <value>False</value>
         </criteriaItems>
+        <description>Email alert for qualifying medical professional when the wish is granted</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
@@ -540,6 +619,17 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
+        <fullName>Notification to Development Team Regarding Wish Presentation Rule</fullName>
+        <actions>
+            <name>Granting_Case_Development_team_regarding_wish_presentation_alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>This will fire for granting case to send an email alert to dev team when presentation date is set and presentation set check box true</description>
+        <formula>AND(RecordType.Name = &apos;Wish Granting&apos;,NOT(ISBLANK(Presentation_Date__c)),ISCHANGED(Presentation_Date__c),Wish_Presentation_Set__c = true, Migrated_Record__c = false)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
         <fullName>Rush Wish Child Summary Rule</fullName>
         <actions>
             <name>Rush_Wish_Child_Summary_Alert</name>
@@ -549,7 +639,7 @@
             <name>UpdateIsRushWishChild</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Case.IsRushChildSummary__c</field>
             <operation>equals</operation>
@@ -573,7 +663,7 @@
             <name>UpdateIsRushWishClearence</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Case.IsRushWishClearence_ChildSummary__c</field>
             <operation>equals</operation>
@@ -631,7 +721,7 @@
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
-        <formula>OR(ISCHANGED( Status ),ISNEW())</formula>
+        <formula>AND(OR(ISCHANGED( Status ),ISNEW()), Migrated_Record__c = false)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -640,27 +730,26 @@
             <name>Case_Send_Email_to_Wish_Granter_Alert</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>Case_Uncheck_is_Email_Wish_Granter</name>
+            <type>FieldUpdate</type>
+        </actions>
         <active>true</active>
-        <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
+        <booleanFilter>1 AND 2 AND 3</booleanFilter>
         <criteriaItems>
             <field>Case.isEmailWishGranter__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.InActiveWishGranter__c</field>
-            <operation>notEqual</operation>
-            <value>null</value>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
         </criteriaItems>
         <criteriaItems>
             <field>Case.RecordTypeId</field>
             <operation>equals</operation>
             <value>Wish</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
         </criteriaItems>
         <description>This Email alert is used to send an email to wish granters</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -682,6 +771,11 @@
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>Used update isApprove Field when the child case is closed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
@@ -694,9 +788,18 @@
             <value>Wish</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.Wish_Family_Form__c</field>
+            <field>Case.Wish_Family_Form_Submitted__c</field>
             <operation>equals</operation>
             <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Interview_date__c</field>
+            <operation>notEqual</operation>
         </criteriaItems>
         <description>This workflow will fire when there is no wish family form submitted for particular time period</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -706,7 +809,7 @@
                 <type>Alert</type>
             </actions>
             <offsetFromField>Case.Interview_date__c</offsetFromField>
-            <timeLength>1</timeLength>
+            <timeLength>5</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
     </rules>
@@ -719,10 +822,20 @@
             <value>Wish</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.Wish_Family_Form__c</field>
+            <field>Case.Wish_Family_Form_Submitted__c</field>
             <operation>equals</operation>
             <value>False</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.Interview_date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Used to create Task for wish owner if wish family form is not submitted after interview date entered</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
@@ -755,13 +868,17 @@
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Case.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This workflow will fire if the interview date is not yet set after 21 days from the case created date</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <tasks>
         <fullName>Birthday_Task</fullName>
-        <assignedTo>sailappa_maw@mstsolutions.com</assignedTo>
-        <assignedToType>user</assignedToType>
+        <assignedToType>owner</assignedToType>
         <dueDateOffset>21</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
         <priority>Normal</priority>
@@ -809,6 +926,17 @@
         <protected>false</protected>
         <status>Not Started</status>
         <subject>Interview date not set</subject>
+    </tasks>
+    <tasks>
+        <fullName>Wish_Child_Birthday_Reminder</fullName>
+        <assignedToType>owner</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Case.Birthdate__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Wish Child Birthday Reminder</subject>
     </tasks>
     <tasks>
         <fullName>Wish_Family_Packet_not_submitted</fullName>

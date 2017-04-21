@@ -55,10 +55,6 @@
     <finalRejectionRecordLock>false</finalRejectionRecordLock>
     <initialSubmissionActions>
         <action>
-            <name>Budget_Submitted_Alert</name>
-            <type>Alert</type>
-        </action>
-        <action>
             <name>Case_Budget_Submitted</name>
             <type>FieldUpdate</type>
         </action>

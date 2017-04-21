@@ -28,7 +28,7 @@ Public class TaskTrigger_Test
         {
             
             cr.accesslevel='edit';
-            cr.name='test';
+            cr.name='Test';
             cr.PreferencesVisibleInCSP=true;
             insert(cr);
         }
@@ -45,6 +45,7 @@ Public class TaskTrigger_Test
         newTask.subject = 'Wish Child Birthday Reminder';
         newTask.OwnerId = userInfo.getUserId();
         insert newTask;
+        
         
     }
     
@@ -95,7 +96,7 @@ Public class TaskTrigger_Test
         newTask.whatId = currCase.id;
         newTask.subject = 'Wish Determination';
         newTask.WhoId = wishChild.Id;
-        newTask.Sort_Order__c = 1;
+        
         insert newTask;
         
         newTask.Status = 'Completed';
@@ -248,4 +249,128 @@ Public class TaskTrigger_Test
         checkinTask.Status = 'Completed';
         update checkinTask;
     }
+    
+    //Used to create upload task for volunteer
+    static testMethod void createUploadTask() {
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
+        uploadTask.Subject = 'Review photos/videos';
+        uploadTask.Status = 'Completed';
+        update uploadTask;
+    }
+    
+    //Used to create Wish Granted Task
+    static testMethod void createWishGrantedTask() {
+        Constant_AC constant = new Constant_AC();
+        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
+        uploadTask.Subject = 'Wish Granted Task';
+        uploadTask.RecordTypeId = wishGrantTaskRT;
+        uploadTask.Status = 'Completed';
+        update uploadTask;
+    }
+    
+    //Used to create Wish Granted Task
+    static testMethod void createFollowupTask() {
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
+        uploadTask.Subject = 'Volunteer wish follow-up activities not complete';
+        uploadTask.Status = 'Completed';
+        update uploadTask;
+    }
+    
+    //Used to create Wish Granted Task
+    static testMethod void WishPresentationDateEntered() {
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
+        uploadTask.Subject = 'wish presentation date entered';
+        uploadTask.Status = 'Completed';
+        update uploadTask;
+    }
+    
+    static testMethod void closeTaskValidationMethod(){
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Case parentUpdate = new Case();
+        parentUpdate.Id = parentCase.Id;
+        parentUpdate.Presentation_Date__c = Date.today();
+        parentUpdate.Wish_Presentation_Set__c = true;
+        update parentUpdate;
+        Constant_AC constant = new Constant_AC();
+        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+         Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
+        wishGrantedCase.Presentation_Date__c = System.today();
+        wishGrantedCase.Wish_Presentation_Set__c = True;
+        wishGrantedCase.Time__c = '1:30';
+        wishGrantedCase.Location_Address__c = 'Sample';
+        wishGrantedCase.Name_of_Location__c = 'Sample';
+        update wishGrantedCase;
+        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
+        uploadTask.RecordTypeId = wishGrantTaskRT;
+        uploadTask.Subject = 'Wish Presentation not set';
+        uploadTask.Status = 'Completed';
+        update uploadTask;
+       
+       
+    }
+    
+    static testMethod void wishConceptApprovalTask(){
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Case parentUpdate = new Case();
+        parentUpdate.Id = parentCase.Id;
+        parentUpdate.Presentation_Date__c = Date.today();
+        parentUpdate.Wish_Presentation_Set__c = true;
+        parentUpdate.Status = 'Wish Determined';
+         parentUpdate.Sub_Status__c = 'Within Policy';
+        
+        update parentUpdate;
+        Constant_AC constant = new Constant_AC();
+        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+         Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
+        wishGrantedCase.Presentation_Date__c = System.today();
+        wishGrantedCase.Wish_Presentation_Set__c = True;
+        wishGrantedCase.Time__c = '1:30';
+        wishGrantedCase.Location_Address__c = 'Sample';
+        wishGrantedCase.Name_of_Location__c = 'Sample';
+        update wishGrantedCase;
+        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
+        uploadTask.RecordTypeId = wishGrantTaskRT;
+        uploadTask.Subject = 'Wish concept approval';
+        uploadTask.Status = 'Completed';
+        update uploadTask;
+       
+       
+    }
+    
+   /*static testMethod void wishNotClosed(){
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Case parentUpdate = new Case();
+        parentUpdate.Id = parentCase.Id;
+        parentUpdate.Presentation_Date__c = Date.today();
+        parentUpdate.Wish_Presentation_Set__c = true;
+       parentUpdate.Diagnosis_Verification_Receive_Date__c = Date.today();
+       parentUpdate.Referral_Date__c = Date.today();
+        parentUpdat.Status = 'Closed';
+        update parentUpdate;
+        Constant_AC constant = new Constant_AC();
+        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+         Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
+        wishGrantedCase.Presentation_Date__c = System.today();
+        wishGrantedCase.Wish_Presentation_Set__c = True;
+        update wishGrantedCase;
+        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
+        uploadTask.RecordTypeId = wishGrantTaskRT;
+        uploadTask.Subject = 'Wish not closed';
+        uploadTask.Status = 'Completed';
+        update uploadTask;
+       
+       
+    }*/
 }

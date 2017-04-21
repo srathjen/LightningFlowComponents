@@ -106,15 +106,15 @@ public class VolunteerProfile_AC{
         awardsList = new list<awardsWrapper>();
         
         userIns  = [SELECT Id,ContactId FROM User WHERE Id =: userInfo.getUserId() Limit 1];
-        for(Volunteer_Orientation_Training__c currentRecord : [SELECT Id,Volunteer__c,Volunteer_Attendance__c,Orientation_Training__c, Orientation_Training__r.Name, 
-                                                               Orientation_Training__r.RecordType.Name, Class_Offering__r.Type__c,Class_Offering__r.Location__c,
+        for(Volunteer_Orientation_Training__c currentRecord : [SELECT Id,Volunteer__c,Volunteer_Attendance__c,Hidden_O_T_Id__c, Orientation_Training_Hidden__c, 
+                                                               /*Orientation_Training__r.RecordType.Name,*/ Class_Offering__r.Type__c,Class_Offering__r.Location__c,
                                                                Class_Offering__r.Date__c,Class_Offering__r.Start_Time__c,Class_Offering__r.End_Time__c,Type__c,
                                                                Class_Offering__r.Chapter__c,class_Offering__r.RecordType.name
                                                                FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userIns.ContactId AND
                                                                (Volunteer_Attendance__c ='completed' OR Volunteer_Attendance__c = 'Registered')]){
             if(currentRecord.Type__c == 'Orientation'){
                classofferingwrapper orientation = new classofferingwrapper();
-               orientation.OrientationName = currentRecord.Orientation_Training__r.Name;
+               orientation.OrientationName = currentRecord.Orientation_Training_Hidden__c;
                orientation.chapterName = currentRecord.Class_Offering__r.Chapter__c;
                orientation.orientationDate = currentRecord.Class_Offering__r.Date__c;
                orientation.startTime = currentRecord.Class_Offering__r.Start_Time__c;
@@ -128,7 +128,7 @@ public class VolunteerProfile_AC{
             if(currentRecord.Type__c == 'Training'){
                
                 classofferingwrapper training = new classofferingwrapper();
-                training.OrientationName = currentRecord.Orientation_Training__r.Name;
+                training.OrientationName = currentRecord.Orientation_Training_Hidden__c;
                 training.chapterName = currentRecord.Class_Offering__r.Chapter__c;
                 training.orientationDate = currentRecord.Class_Offering__r.Date__c;
                 training.startTime = currentRecord.Class_Offering__r.Start_Time__c;
@@ -153,7 +153,7 @@ public class VolunteerProfile_AC{
         if(backgroundCheckList.size() > 0)
            bcExpirationDate = backgroundCheckList[0].date__c;
         
-        contactInstance = [SELECT id,Name,Gender__c,Birth_Day__c,County__c,Title,Birth_Month__c,Birth_Year__c,Birthdate,Current_Age__c,Work_Phone__c,Phone,HomePhone,MobilePhone,Preferred_Phone_Types__c,What_is_your_race_ethnicity__c,RecordTypeId,FirstName,Middle_Name__c,LastName,
+        contactInstance = [SELECT id,Name,Gender__c,Birth_Day__c,County__c,Salutation,Title,Birth_Month__c,Birth_Year__c,Birthdate,Current_Age__c,Work_Phone__c,Phone,HomePhone,MobilePhone,Preferred_Phone_Types__c,What_is_your_race_ethnicity__c,RecordTypeId,FirstName,Middle_Name__c,LastName,
                            Email,MailingStreet,MailingCity,mailingstatecode,mailingstate,MailingCountrycode,MailingPostalCode,Race_Ethnicity__c,Emergency_Contact_Relationship__c,
                            Employer__c,Street_Employer__c,City_Employer__c,npe01__HomeEmail__c,State_Employer__c,Fax,Professional_Skills__c,Language__c,npe01__AlternateEmail__c,npe01__PreferredPhone__c,npe01__Preferred_Email__c,Zip_Employer__c,May_We_Contact_You_at_Work__c,Interested_involved_with_Make_A_Wish__c,
                            Emergency_Contact__c,Emergency_Contact_Phone__c,npe01__Primary_Address_Type__c,Read__c, Write__c,Understand__c, Speak__c, Language_Notes__c,otherPhone,Alternate_Phone_Type__c,
@@ -769,10 +769,11 @@ public class VolunteerProfile_AC{
       /*To display title values for current logged in volunteer contact in community.*/
     public List<SelectOption> getTitles(){
         List<SelectOption> options = new List<SelectOption>();
-        options.add(new SelectOption('','Please select Title')); 
+        options.add(new SelectOption('','Please Select Title')); 
         options.add(new SelectOption('Mr.','Mr.')); 
-        options.add(new SelectOption('Ms.','Ms.'));
         options.add(new SelectOption('Mrs.','Mrs.'));
+        options.add(new SelectOption('Miss','Miss'));
+        options.add(new SelectOption('Master','Master'));
         options.add(new SelectOption('Dr.','Dr.'));
         options.add(new SelectOption('Prof.','Prof.'));
         return options;

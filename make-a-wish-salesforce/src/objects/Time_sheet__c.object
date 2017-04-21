@@ -98,6 +98,7 @@
         <fullName>Hours_spent__c</fullName>
         <description>This field is used to track how many hours the volunteer have spent for the volunteer opportunity.</description>
         <externalId>false</externalId>
+        <inlineHelpText>Please enter two digits on decimal place.</inlineHelpText>
         <label>Hours spent</label>
         <precision>4</precision>
         <required>false</required>

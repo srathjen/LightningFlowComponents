@@ -1,26 +1,18 @@
 public class WishChildSummary_AC{
     
     public Case currentParentCase{get;set;}
-    
+    Public boolean isRush{get;set;}
     public WishChildSummary_AC(ApexPages.StandardController controller){
+     isRush = false;
+     currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushChildSummary__c,Contact.Hidden_Medical_Physician_Email__c,wish_involves_air_travel__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
+      if(currentParentCase.Rush__c == true)
+            isRush = true;
+     }
     
-    currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushChildSummary__c,Contact.Hidden_Medical_Physician_Email__c,wish_involves_air_travel__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
-     
-    }
    
     public void SendtoDocuSign(){
-        if(currentParentCase.Description == Null ){
+        if(currentParentCase.wish_involves_air_travel__c == Null ||currentParentCase.Description == Null){
             DisplayErrorMessage();
-        }
-        
-        else if(currentParentCase.Rush__c == true){
-          
-           
-          case updatenewCase = new Case();
-          updatenewCase.Id = currentParentCase.Id;
-          updatenewCase.IsRushChildSummary__c = true;
-          update updatenewCase;
-          DisplayMessage();
         }
         
         else{
@@ -32,19 +24,26 @@ public class WishChildSummary_AC{
         updatenewCase.Date_of_last_visit_treatment__c = Null;
         updatenewCase.Child_s_Medical_Summary_received_date__c = Null;
         update updatenewCase;
-        CallOuttoDocusign(updatenewCase.Id);
+        if(!Test.isRunningTest())
+        CallOuttoDocusign(updatenewCase.Id,isRush);
         DisplayMessage();
       }
     }
     @future(Callout=true)
-    public static void CallOuttoDocusign(Id caseId){
+    public static void CallOuttoDocusign(Id caseId,boolean isRush){
        case currentParentCase = [SELECT Id,ContactId,Contact.Hidden_Medical_Physician__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: caseId];
+        String templateID;
         String account;
         String UserName;
         String Password;
         String IntegratorKey;
         String endPointURL;
-        String templateID = label.ChildMedicalSummary;
+         if(isRush != true){
+         templateID = label.ChildMedicalSummary;
+         }
+         else{
+         templateID = label.Rush_Child_Summary;
+         }
         system.debug('### templateId #####'+templateID);
         Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
         String  name = currentParentCase.Contact.Hidden_Medical_Physician__c;
@@ -122,6 +121,8 @@ public class WishChildSummary_AC{
     }
     
      public pagereference DisplayErrorMessage(){
+        if(currentParentCase.wish_involves_air_travel__c == Null)
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Please Select Wish Involves Air Travel'));
         if(currentParentCase.Description == Null )
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Please give the value to Description'));
         return null;

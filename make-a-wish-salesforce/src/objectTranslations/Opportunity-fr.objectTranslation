@@ -103,37 +103,37 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Date of acknowledgment --></help>
+        <help>Date de confirmation</help>
         <label><!-- Acknowledgment Date --></label>
         <name>npsp__Acknowledgment_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Status of Acknowledgment of this gift. --></help>
+        <help>Statut de la confirmation de ce don.</help>
         <label><!-- Acknowledgment Status --></label>
         <name>npsp__Acknowledgment_Status__c</name>
         <picklistValues>
             <masterLabel>Acknowledged</masterLabel>
-            <translation><!-- Acknowledged --></translation>
+            <translation>Confirmé</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Do Not Acknowledge</masterLabel>
-            <translation><!-- Do Not Acknowledge --></translation>
+            <translation>Ne pas confirmer</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Email Acknowledgment Not Sent</masterLabel>
-            <translation><!-- Email Acknowledgment Not Sent --></translation>
+            <translation>E-mail de confirmation non envoyé</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Email Acknowledgment Now</masterLabel>
-            <translation><!-- Email Acknowledgment Now --></translation>
+            <translation>E-mail de confirmation maintenant</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>To Be Acknowledged</masterLabel>
-            <translation><!-- To Be Acknowledged --></translation>
+            <translation>À confirmer</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- The date when the donor was specifically asked for the donation, as opposed to the Opportunity Close Date that the organization may set to either when the Opportunity was first created, or when the Opportunity was won. --></help>
+        <help>La date à laquelle ce don a été spécifiquement demandé à ce donateur, différente de la date de fermeture de l’opportunité qui peut avoir été définie soit lors de la création de l’opportunité soit lorsque l’opportunité a été gagnée.</help>
         <label><!-- Ask Date --></label>
         <name>npsp__Ask_Date__c</name>
     </fields>
@@ -143,39 +143,39 @@
         <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Notes on why the donation ask was not successful. --></help>
+        <help>Notes sur les raisons pour lesquelles la demande de don n’a pas eu de réponse positive.</help>
         <label><!-- Closed Lost Reason --></label>
         <name>npsp__Closed_Lost_Reason__c</name>
     </fields>
     <fields>
-        <help><!-- The Fair Market Value of an In-Kind gift. --></help>
+        <help>La valeur marchande d’un don en nature.</help>
         <label><!-- Fair Market Value --></label>
         <name>npsp__Fair_Market_Value__c</name>
     </fields>
     <fields>
-        <help><!-- Categorizes the type of ask for this opportunity. --></help>
+        <help>Catégorise le type de demande pour cette opportunité.</help>
         <label><!-- Gift Strategy --></label>
         <name>npsp__Gift_Strategy__c</name>
         <picklistValues>
             <masterLabel>New Donor</masterLabel>
-            <translation><!-- New Donor --></translation>
+            <translation>Nouveau donneur</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Renewal</masterLabel>
-            <translation><!-- Renewal --></translation>
+            <translation>Renouvellement</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Upgrade</masterLabel>
-            <translation><!-- Upgrade --></translation>
+            <translation>Mettre à niveau</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- The date of the grant&apos;s inception, according to the document or contract sent by the grant-making organization. --></help>
+        <help>La date de commencement de la subvention, selon le document ou contrat envoyé par l’organisation source de la subvention</help>
         <label><!-- Grant Contract Date --></label>
         <name>npsp__Grant_Contract_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Tracks unique numbers sometimes assigned by grant-making organizations. --></help>
+        <help>Enregistre les numéros uniques qui peuvent être attribués par les organisations octroyant des subventions.</help>
         <label><!-- Grant Contract Number --></label>
         <name>npsp__Grant_Contract_Number__c</name>
     </fields>
@@ -188,43 +188,43 @@
         <name>npsp__Grant_Period_Start_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Describes the funding areas for the grant. You can enter anything you want here. For example, you could enter the name of the program the grant applies to. --></help>
+        <help>Décrit les zones de financement pour la subvention. Vous pouvez saisir ce que vous souhaitez ici. Vous pouvez par exemple écrire le nom du programme auquel la subvention s’applique.</help>
         <label><!-- Program Areas --></label>
         <name>npsp__Grant_Program_Area_s__c</name>
     </fields>
     <fields>
-        <help><!-- A URL that points to the grant requirements on the grant-maker&apos;s website. --></help>
+        <help>Une URL pointant vers les exigences de subvention sur le site Web du pourvoyeur de la subvention.</help>
         <label><!-- Grant Requirements Website --></label>
         <name>npsp__Grant_Requirements_Website__c</name>
     </fields>
     <fields>
-        <help><!-- The existing Contact record of the honoree for this donation. --></help>
+        <help>L’enregistrement de contact honoraire existant pour ce don.</help>
         <label><!-- Honoree Contact --></label>
         <name>npsp__Honoree_Contact__c</name>
         <relationshipLabel><!-- Opportunities (Honoree Contact) --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- The honoree name as provided by the donor. If this field is left blank, and the Honoree Contact field contains a value, Salesforce automatically populates this field with that value. --></help>
+        <help>Le nom du représentant honoraire tel que fourni par le donateur. Si ce champ est laissé vide, et que le champ de contact honoraire contient une valeur, Salesforce remplit automatiquement ce champ avec cette valeur.</help>
         <label><!-- Honoree Name --></label>
         <name>npsp__Honoree_Name__c</name>
     </fields>
     <fields>
-        <help><!-- Holds any rich text description of the In-Kind Gift, including pictures. --></help>
+        <help>Contient une description en texte enrichi du don en nature, pouvant inclure des images.</help>
         <label><!-- In-Kind Description --></label>
         <name>npsp__In_Kind_Description__c</name>
     </fields>
     <fields>
-        <help><!-- Checked if the donor provided the Fair Market Value for this In-Kind gift. --></help>
+        <help>Coché si le donneur a fourni la valeur marchande pour ce don en nature.</help>
         <label><!-- In-Kind Donor Declared Value --></label>
         <name>npsp__In_Kind_Donor_Declared_Value__c</name>
     </fields>
     <fields>
-        <help><!-- The type of In-Kind gift. --></help>
+        <help>Le type de don en nature.</help>
         <label><!-- In-Kind Type --></label>
         <name>npsp__In_Kind_Type__c</name>
         <picklistValues>
             <masterLabel>Goods</masterLabel>
-            <translation><!-- Goods --></translation>
+            <translation>Biens</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Services</masterLabel>
@@ -232,7 +232,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- If selected, indicates that the grant is a renewal of a previous grant. --></help>
+        <help>Si sélectionné, indique que la subvention est un renouvellement d’une subvention antérieure.</help>
         <label><!-- Is Grant Renewal --></label>
         <name>npsp__Is_Grant_Renewal__c</name>
     </fields>
@@ -250,15 +250,15 @@
         <name>npsp__Matching_Gift_Status__c</name>
         <picklistValues>
             <masterLabel>Potential</masterLabel>
-            <translation><!-- Potential --></translation>
+            <translation>Potentiel</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Received</masterLabel>
-            <translation><!-- Received --></translation>
+            <translation>Reçu</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Submitted</masterLabel>
-            <translation><!-- Submitted --></translation>
+            <translation>Soumis</translation>
         </picklistValues>
     </fields>
     <fields>
@@ -267,100 +267,100 @@
         <relationshipLabel><!-- Matched Gifts --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- The NPSP updates this field automatically based on the next Grant Deadline record. --></help>
+        <help>NPSP met à jour ce champ automatiquement en fonction de l’enregistrement de prochaine échéance de subvention.</help>
         <label><!-- Next Deliverable Date --></label>
         <name>npsp__Next_Grant_Deadline_Due_Date__c</name>
     </fields>
     <fields>
-        <help><!-- A personalized message for the notification recipient. --></help>
+        <help>Un message personnalisé pour le destinataire de la notification.</help>
         <label><!-- Notification Message --></label>
         <name>npsp__Notification_Message__c</name>
     </fields>
     <fields>
-        <help><!-- How the notification recipient should be notified. --></help>
+        <help>Comment contacter le destinataire de la notification.</help>
         <label><!-- Notification Preference --></label>
         <name>npsp__Notification_Preference__c</name>
         <picklistValues>
             <masterLabel>Do Not Notify</masterLabel>
-            <translation><!-- Do Not Notify --></translation>
+            <translation>Ne pas notifier</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Email</masterLabel>
-            <translation><!-- Email --></translation>
+            <translation>E-mail</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Phone</masterLabel>
-            <translation><!-- Phone --></translation>
+            <translation>Téléphone</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Postal Mail</masterLabel>
-            <translation><!-- Postal Mail --></translation>
+            <translation>Courrier postal</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- The existing Contact record of the person to be notified for this donation. --></help>
+        <help>L’enregistrement de contact existant de la personne à notifier pour ce don.</help>
         <label><!-- Notification Recipient Contact --></label>
         <name>npsp__Notification_Recipient_Contact__c</name>
         <relationshipLabel><!-- Opportunities (Notification Recipient) --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- The contact information (as provided by the donor) for the notification recipient. --></help>
+        <help>Les informations sur le contact pour le destinataire de la notification, fournies par le donateur.</help>
         <label><!-- Notification Recipient Information --></label>
         <name>npsp__Notification_Recipient_Information__c</name>
     </fields>
     <fields>
-        <help><!-- The name (as provided by the donor) of the person who should be notified about this gift. If this field is left blank and the Notification Recipient Contact field contains a value, Salesforce automatically populates this field with that value. --></help>
+        <help>Le nom de la personne devant être notifiée à propos de ce don, fourni par le donneur. Si ce champ est laissé vide et que le champ du destinataire de la notification contient une valeur, Salesforce remplit automatiquement ce champ avec cette valeur.</help>
         <label><!-- Notification Recipient Name --></label>
         <name>npsp__Notification_Recipient_Name__c</name>
     </fields>
     <fields>
-        <help><!-- If this grant is a renewal of a previous grant, use this field to relate this record to the previous one. --></help>
+        <help>Si cette subvention est un renouvellement d’une subvention passée, utilisez ce champ pour relier cet enregistrement au précédent.</help>
         <label><!-- Previous Grant/Gift Opportunity --></label>
         <name>npsp__Previous_Grant_Opportunity__c</name>
         <relationshipLabel><!-- Related Grants/Gifts --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- The status to use when creating a campaign member for this opportunity&apos;s primary contact and primary campaign source. Leave blank to default to an responded status for closed/won opportunities, and a non-responded status for other opportunities. --></help>
+        <help>Statut utilisé lors de la création d’un membre de campagne pour le contact principal de cette opp. et la source principale de campagne. Si vide, utilise par défaut un statut répondu pour les opp. fermées gagnées et un statut non répondu pour les autres.</help>
         <label><!-- Primary Contact Campaign Member Status --></label>
         <name>npsp__Primary_Contact_Campaign_Member_Status__c</name>
     </fields>
     <fields>
-        <help><!-- The primary contact for this opportunity. The primary contact role is kept in sync with this field. For individual donations, this denotes attribution for this opportunity. --></help>
+        <help>Le contact principal pour cette opportunité. Le rôle de contact principal est synchronisé avec ce champ. Pour les dons individuels, ceci indique l’attribution pour cette opportunité.</help>
         <label><!-- Primary Contact --></label>
         <name>npsp__Primary_Contact__c</name>
         <relationshipLabel><!-- Opportunities --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- The date this donor was identified as qualifying for this donation. --></help>
+        <help>La date à laquelle ce donateur a été identifié comme valide pour ce don.</help>
         <label><!-- Qualified Date --></label>
         <name>npsp__Qualified_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Installment name for inclusion in Opportunity Naming. Shows the installment number in parenthesis for open ended recurring donations, or the installment number out of the total for recurring donations with a set number of installments. --></help>
+        <help>Nom de versement à inclure dans la dénomination de l’opp. Indique le numéro de versement entre parenthèses pour les dons réguliers sans date de fin, ou le numéro de versement par rapport au total pour les dons réguliers avec un nb de versements déterminé.</help>
         <label><!-- Recurring Donation Installment Name --></label>
         <name>npsp__Recurring_Donation_Installment_Name__c</name>
     </fields>
     <fields>
-        <help><!-- The installment number of this opportunity&apos;s recurring donation schedule. --></help>
+        <help>Le numéro de versement du calendrier du don régulier de cette opportunité.</help>
         <label><!-- Recurring Donation Installment Number --></label>
         <name>npsp__Recurring_Donation_Installment_Number__c</name>
     </fields>
     <fields>
-        <help><!-- The amount you are requesting. This number might be different from the final award amount. --></help>
+        <help>Le montant que vous demandez. Il peut être différent du montant final offert.</help>
         <label><!-- Requested Amount --></label>
         <name>npsp__Requested_Amount__c</name>
     </fields>
     <fields>
-        <help><!-- Indicates whether the gift is in honor or memory of an individual. --></help>
+        <help>Indique si le don est en l’honneur ou à la mémoire d’un individu.</help>
         <label><!-- Tribute Type --></label>
         <name>npsp__Tribute_Type__c</name>
         <picklistValues>
             <masterLabel>Honor</masterLabel>
-            <translation><!-- Honor --></translation>
+            <translation>Hommage</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Memorial</masterLabel>
-            <translation><!-- Memorial --></translation>
+            <translation>Commémoration</translation>
         </picklistValues>
     </fields>
     <recordTypes>

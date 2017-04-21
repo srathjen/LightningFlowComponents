@@ -11,7 +11,7 @@ private class Background_CheckBeforeDelete_Test{
         Background_check__c backCheck = new Background_check__c();
         backCheck.Date__c = system.today();
         backCheck.Volunteer__c = volunteerContact.id;
-        backCheck.active__c = True;
+        backCheck.current__c = True;
         backCheck.Status__c = 'Approved';
         backCheck.Date_Completed__c = Date.Today();
         insert backCheck;

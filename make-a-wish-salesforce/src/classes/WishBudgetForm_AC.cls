@@ -151,7 +151,8 @@ public class WishBudgetForm_AC{
         
         if(wishExpensewrap.size() > 0)
             wishExpensewrap.clear();
-        
+        if(TransCodeOptionsMap.size() > 0)
+            TransCodeOptionsMap.clear();
         for(Wish_Expense_Transaction_Code__c  currtransactionCode :  [SELECT Id, Name,Wish_Expense_Type__r.Name from Wish_Expense_Transaction_Code__c Where Is_Active__c =true order by Name]){
             if(!TransCodesWrap.containsKey(currtransactionCode.Wish_Expense_Type__r.Name )){
                 TransCodesWrap.put(currtransactionCode.Wish_Expense_Type__r.Name,new List<Wish_Expense_Transaction_Code__c >{currtransactionCode});    
@@ -398,7 +399,7 @@ public class WishBudgetForm_AC{
                     userIdsSet.add(getGroupUsers.UserOrGroupId);
                 }
             }
-            userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE ((Id IN : userIdsSet AND ContactId = null) OR UserRole.Name = 'National Staff' ) AND IsActive=true  ];
+            userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE Id IN : userIdsSet AND ContactId = null AND IsActive=true  ];
             //userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE ((Id IN : userIdsSet AND Profile.Name != 'Active Volunteer') OR UserRole.Name = 'National Staff' ) AND IsActive=true  ];
         } else {
             //userList = [SELECT Id, Name, Profile.Name, UserRole.Name FROM User WHERE (UserRole.Name = 'National Staff' OR Profile.Name = 'System Administrator') AND IsActive=true];

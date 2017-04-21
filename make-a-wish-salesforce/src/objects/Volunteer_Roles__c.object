@@ -223,11 +223,11 @@
     </fields>
     <fields>
         <fullName>Status__c</fullName>
-        <description>It will indicate the volunteer role that volunteer has completed the training for that chpater role or not.</description>
+        <description>It will indicate the volunteer role that volunteer has completed the training for that chapter role or not.</description>
         <externalId>false</externalId>
         <label>Status</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
@@ -255,6 +255,10 @@
                 </value>
                 <value>
                     <fullName>Not Approved</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Out of Compliance</fullName>
                     <default>false</default>
                 </value>
             </valueSetDefinition>
@@ -304,6 +308,7 @@
         <columns>Role_Name__c</columns>
         <columns>isWishRole__c</columns>
         <columns>Status__c</columns>
+        <columns>OWNER.ALIAS</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -322,5 +327,5 @@
         <customTabListAdditionalFields>Role_Name__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
     </searchLayouts>
-    <sharingModel>Read</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
 </CustomObject>

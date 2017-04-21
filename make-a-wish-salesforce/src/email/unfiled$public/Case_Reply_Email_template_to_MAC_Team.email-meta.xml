@@ -7,7 +7,6 @@
     <name>Case: Reply Email template to MAC Team</name>
     <style>freeForm</style>
     <subject>Email to MAC Team [{!Case.Thread_Id}]</subject>
-    <textOnly>Hello,
-{!Case.Case_Comment__c}</textOnly>
+    <textOnly>{!Case.Case_Comment__c}</textOnly>
     <type>html</type>
 </EmailTemplate>

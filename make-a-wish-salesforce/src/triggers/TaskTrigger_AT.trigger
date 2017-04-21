@@ -9,35 +9,27 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
     Constant_AC  constant = new Constant_Ac();
     //Affiliation status update.
     if(Trigger.isUpdate && Trigger.isAfter){
-
+        
         Id taskInterviewRecordType = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
         Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
-        List<Task> statusUpdatedTaskList = new List<Task>();
-        Set<Id> taskRelatedCaseIdsSet = new Set<Id>();
-        set<Id> volunteerContactSet = new Set<Id>();
         Set<Id> declinedTaskVolunteerIds = new Set<Id>();
         Set<Id> volunteerIdsSet = new Set<Id>();
+        Set<Id> completedTaskParentIdSet = new Set<Id>();
         Map<Id, Task> flightBookTaskMap = new Map<Id, Task>();
         Map<Id, Task> budgetBookTaskMap = new Map<Id, Task>();
         Map<Id, Task> passportRequestMap = new Map<Id, Task>();
         Map<Id,Id> uploadParentTaskIdMap = new Map<Id,Id>();
         Set<Id> wishGrantTaskWhatIdSet = new Set<Id>();
-        String chapterNameDetails;
         List<Task> createCheckinTaskList = new List<Task>();
         Set<Id> checkinTaskIdSet = new Set<Id>();
-        Set<Id> completedTaskParentIdSet = new Set<Id>();
         Map<Id,Task> taskMap = new Map<Id,Task>();
         Set<Id> taskOwnerIds = new Set<Id>();
         Set<Id> caseIds = new Set<Id>();
         Map<Id,Task> followUpTaskMap = new Map<Id,Task>();
         List<Task> validateTaskList = new List<Task>();
         Set<Id> followUpTaskOwnerIdSet = new Set<Id>();
+        
         for(Task updatedTask : Trigger.New) {
-            if(updatedTask.Status == 'Completed' && updatedTask.isRecurrenceTask__c == false) {
-                statusUpdatedTaskList.add(updatedTask);
-                taskRelatedCaseIdsSet.add(updatedTask.WhatId);
-            }
-            
             if(updatedTask.Status == 'Completed' && updatedTask.subject == 'Volunteer wish follow-up activities not complete') {
                 followUpTaskMap.put(updatedTask.WhatId, updatedTask);
                 followUpTaskOwnerIdSet.add(updatedTask.OwnerId);
@@ -86,8 +78,8 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             if((updatedTask.Status == 'Declined') && updatedTask.RecordTypeId ==taskInterviewRecordType ){
                 declinedTaskVolunteerIds.add(updatedTask.WhoId);
             }
-             if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Review photos/videos')) {
-                 
+            if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Review photos/videos')) {
+                
                 uploadParentTaskIdMap.put(updatedTask.WhatId,updatedTask.OwnerId);
             }
             
@@ -98,18 +90,14 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         }
         if(taskMap.size() > 0)
         {
-           TaskHandler.updateVolunteerRecord(taskMap,taskOwnerIds,caseIds);
+            TaskHandler.updateVolunteerRecord(taskMap,taskOwnerIds,caseIds);
         }
         //To check for wish Grant open task
         if(wishGrantTaskWhatIdSet.size() > 0) {
-            System.debug('wishGrantTaskWhatIdSet>>>>>>>');
             TaskHandler.checkWishGrantTask(wishGrantTaskWhatIdSet);
         }
         if(createCheckinTaskList.size() > 0 && checkinTaskIdSet.size() > 0) {
             TaskHandler.createCheckinRecurrenceTask(createCheckinTaskList, checkinTaskIdSet);
-        }
-        if(statusUpdatedTaskList.size()>0) {
-            //TaskHandler.CreateNextTask(statusUpdatedTaskList, taskRelatedCaseIdsSet);
         }
         
         if(declinedTaskVolunteerIds.size() > 0){
@@ -135,6 +123,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
     
     // Task Assign to Volunteer and Email Merge Fields update.
     if(Trigger.isBefore && Trigger.isInsert){
+        
         Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
         Id planningTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
         Id determinationTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
@@ -145,14 +134,12 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         set<ID> contactIdset = new set<ID>();
         Map<Id,Contact> contactInfoMap = new Map<Id,Contact>();
         List<Task> updateTaskList = new List<Task>();
-        Id grantTask = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId(); 
-        Id planingTask = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId(); 
-        Id determinationTask = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId(); 
+        
         
         for(Task updatedTask : Trigger.New) {
             string contactId = updatedTask.WhoId;
             
-            if(updatedTask.RecordTypeId == wishGrantTaskRT || updatedTask.RecordTypeId == planningTaskRT || updatedTask.RecordTypeId == determinationTaskRT) {
+            if(updatedTask.RecordTypeId == wishGrantTaskRT || updatedTask.RecordTypeId == determinationTaskRT) {
                 updatedTask.IsVisibleInSelfService = true;
             }
             
@@ -161,10 +148,6 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                 taskRelatedContactIdsSet.add(updatedTask.whatId);
             }
             
-            if(updatedTask.Sort_Order__c != null) {
-                actionTrackTasksList.add(updatedTask);
-                actionTracksRelatedCaseIdsSet.add(updatedTask.WhatId);
-            }
             //if(updatedTask.WhoId != null && contactId.startsWith('003') ){
             if(updatedTask.WhoId != null){
                 contactIdset.add(updatedTask.WhoId);
@@ -179,9 +162,6 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         
         if(birthdayTasksList.size()>0 && taskRelatedContactIdsSet.size()>0) {
             TaskHandler.BirthdayTaskPrimaryVolunteerAssign(birthdayTasksList,taskRelatedContactIdsSet);
-        }
-        if(actionTrackTasksList.size()>0 && actionTracksRelatedCaseIdsSet.size()>0) {
-            TaskHandler.TaskAssignmentToVolunteer(actionTrackTasksList,actionTracksRelatedCaseIdsSet);
         }
     }
     
@@ -228,8 +208,8 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                 updateTaskList.add(currRec);
             }
             /********** Closure Rules *********/
-             if(currRec.status=='completed' && currRec.subject=='wish presentation date entered'){
-                 caseInfoMap.put(currRec.id,currRec.whatid);
+            if(currRec.status=='completed' && currRec.subject=='wish presentation date entered'){
+                caseInfoMap.put(currRec.id,currRec.whatid);
             }
             
             if(currRec.status=='Completed') {
@@ -259,6 +239,6 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             }
         }
         
-       
+        
     }
 }

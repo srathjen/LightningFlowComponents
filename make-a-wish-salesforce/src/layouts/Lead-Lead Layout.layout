@@ -78,6 +78,10 @@
                 <behavior>Edit</behavior>
                 <field>unique_wish_identifier__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Office_Referral_Email__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
@@ -125,10 +129,6 @@
                 <behavior>Edit</behavior>
                 <field>Sibling_Detail__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Wish_Family_ContactId__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
@@ -175,6 +175,14 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>is_Family_Aware_of_Referral__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Medical_Provider_Category__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Other_Medical_Provider_Category__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -227,14 +235,6 @@
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>Treating_Medical_Professional_Last_Name__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Medical_Provider_Category__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Other_Medical_Provider_Category__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
@@ -352,18 +352,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Current_Condition__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Month__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>TPN_Year__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Reason_for_Need__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

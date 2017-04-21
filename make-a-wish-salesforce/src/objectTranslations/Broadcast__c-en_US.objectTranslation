@@ -9,6 +9,10 @@
         <value>Broadcast</value>
     </caseValues>
     <fields>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
         <label><!-- Broadcast Message --></label>
         <name>Broadcast_Message__c</name>
     </fields>

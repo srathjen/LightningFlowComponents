@@ -13,10 +13,6 @@
         <name>Code_To_Use__c</name>
     </fields>
     <fields>
-        <label><!-- Dev Id --></label>
-        <name>Dev_Id__c</name>
-    </fields>
-    <fields>
         <label><!-- Group1 --></label>
         <name>Group1__c</name>
     </fields>

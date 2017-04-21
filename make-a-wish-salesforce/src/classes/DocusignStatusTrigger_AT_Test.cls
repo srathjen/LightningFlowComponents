@@ -18,13 +18,13 @@ public class DocusignStatusTrigger_AT_Test{
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatuswithCon(VolunteerContact.Id);
         
         Conflict_Of_Interest__c coi = new Conflict_Of_Interest__c();
-        coi.Active__c = true;
+        coi.current__c = true;
         coi.Volunteer_Contact__c = VolunteerContact.id;
         insert coi;
         
         
         Conflict_Of_Interest__c conOfInt = new Conflict_Of_Interest__c();
-        conOfInt.Active__c = true;
+        conOfInt.current__c = true;
         conOfInt.Volunteer_Contact__c = VolunteerContact.id;
         insert conOfInt;
         
@@ -56,7 +56,7 @@ public class DocusignStatusTrigger_AT_Test{
         update dbdsfs;
         
         Conflict_Of_Interest__c coi = new Conflict_Of_Interest__c();
-        coi.Active__c = true;
+        coi.current__c = true;
         coi.Volunteer_Contact__c = VolunteerContact.id;
         insert coi;
         
@@ -69,6 +69,7 @@ public class DocusignStatusTrigger_AT_Test{
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
+        newLead.unique_wish_identifier__c = '123456';
         insert newLead;
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatus(newLead.Id);
         
@@ -94,6 +95,7 @@ public class DocusignStatusTrigger_AT_Test{
         
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
+        newLead.unique_wish_identifier__c = '123456';
         insert newLead;
         dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatus(newLead.Id);
         

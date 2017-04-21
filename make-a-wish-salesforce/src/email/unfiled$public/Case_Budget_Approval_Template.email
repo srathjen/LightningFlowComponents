@@ -8,8 +8,8 @@ link below to review the submission.</span></p>
 
 <p style="background: white; margin: 0px; line-height: normal;"><span style="margin: 0px; color: black; font-family: &quot;Arial&quot;,sans-serif; font-size: 12pt;"><br>
 </span><span style="margin: 0px; color: black; font-family: &quot;Century Gothic&quot;,sans-serif; font-size: 12pt;">Wish Child:&nbsp;{!Case.Hidden_Wish_Child_Full_Name__c}</span><span style="margin: 0px; color: black; font-family: &quot;Arial&quot;,sans-serif; font-size: 12pt;"><br>
-</span><span style="margin: 0px; color: black; font-family: &quot;Century Gothic&quot;,sans-serif; font-size: 12pt;"><span style="margin: 0px; color: blue;"><a href="https://c.na30.visual.force.com/apex/WishBudgetForm_VF?CaseId={!Case.ParentId}">Click Here to Review Budget</a></span>&nbsp;<br>
-<br>
+</span><span style="margin: 0px; color: black; font-family: &quot;Century Gothic&quot;,sans-serif; font-size: 12pt;"><span style="margin: 0px; color: blue;"><a href="https://na30.salesforce.com/apex/WishBudgetForm_VF?CaseId={!Case.ParentId}">Click Here to Review Budget</a></span><br>
+</span></p><p style="background: white; margin: 0px; line-height: normal;"><span style="margin: 0px; color: black; font-family: &quot;Century Gothic&quot;,sans-serif; font-size: 12pt;"><br>
 Thanks,<br>
 <br>
 {!User.Name}<br>

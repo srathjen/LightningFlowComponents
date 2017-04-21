@@ -10,7 +10,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Volunteer_Opportunity_Non_Wish_Approved</template>
+        <template>Automated_Volunteer_Templates/Volunteer_Opportunity_Non_Wish_Approved</template>
     </alerts>
     <alerts>
         <fullName>This_Email_Alert_will_send_when_the_Non_Wish_volunteer_opportunity_is_rejected_b</fullName>
@@ -22,7 +22,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Volunteer_Opportunity_Non_Wish_Rejected</template>
+        <template>Automated_Volunteer_Templates/Volunteer_Opportunity_Non_Wish_Rejected</template>
     </alerts>
     <alerts>
         <fullName>This_Email_Alert_will_send_when_the_Wish_volunteer_opportunity_is_Approved_by_th</fullName>
@@ -34,7 +34,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Volunteer_Opportunity_Wish_Approved</template>
+        <template>Automated_Volunteer_Templates/Volunteer_Opportunity_Wish_Approved</template>
     </alerts>
     <alerts>
         <fullName>This_Email_Alert_will_send_when_the_Wish_volunteer_opportunity_is_rejected_by_th</fullName>
@@ -46,7 +46,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Volunteer_Opportunity_Wish_Rejected</template>
+        <template>Automated_Volunteer_Templates/Volunteer_Opportunity_Wish_Rejected</template>
     </alerts>
     <fieldUpdates>
         <fullName>Uncheck_Rejected</fullName>
@@ -163,10 +163,16 @@
     <rules>
         <fullName>Volunteer Opportunity %3A MyAssignment Removal</fullName>
         <active>true</active>
+        <booleanFilter>1 AND 2</booleanFilter>
         <criteriaItems>
             <field>Volunteer_Opportunity__c.isRejected__c</field>
             <operation>equals</operation>
             <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Opportunity__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
         </criteriaItems>
         <description>Used to remove volunteer opportunities rejected record from Volunteer My Assignment after 30 days</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -187,7 +193,7 @@
         </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Non - Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null, IsApproved__c  = true, ISCHANGED(IsApproved__c ),isRejected__c = false)</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null, IsApproved__c  = true, ISCHANGED(IsApproved__c ),isRejected__c = false,  Migrated_Record__c = false)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -198,7 +204,7 @@
         </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Non - Wish is rejected by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null, IsApproved__c  = false, isRejected__c = true,ISCHANGED(isRejected__c) )</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null, IsApproved__c  = false, isRejected__c = true,ISCHANGED(isRejected__c), Migrated_Record__c = false )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -209,7 +215,7 @@
         </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null, IsApproved__c  = true, ISCHANGED(IsApproved__c),isRejected__c = false)</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null, IsApproved__c  = true, ISCHANGED(IsApproved__c),isRejected__c = false,  Migrated_Record__c = false)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -220,7 +226,7 @@
         </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null,IsApproved__c  = false, isRejected__c = true, ISCHANGED(isRejected__c))</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null,IsApproved__c  = false, isRejected__c = true, ISCHANGED(isRejected__c),  Migrated_Record__c = false)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -238,6 +244,11 @@
             <field>Volunteer_Opportunity__c.Inactive__c</field>
             <operation>equals</operation>
             <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Opportunity__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
         </criteriaItems>
         <description>This workflow rule fire when inactive check box is checked and user enter the reason for inactive.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

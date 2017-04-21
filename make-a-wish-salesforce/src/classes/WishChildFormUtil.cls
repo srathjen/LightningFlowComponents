@@ -27,52 +27,63 @@ Public Class WishChildFormUtil
     public List<String> leftDietaryNameList{get;set;}
     public List<String> righttDietaryNameList{get;set;}
     public List<String> currrentDietaryNameList{get;set;}
+    public String currrentDietaryName{get;set;}
     public Set<String> dietaryNamesSet  = new Set<String>();
+    
     
     public List<String> leftWCNamesList{get;set;}
     public List<String> rightWCNamesList{get;set;}
     public List<String> currentWCNamesList{get;set;}
     public Set<String> WCNamesSet  = new Set<String>();
+    public String currentWCName{get;set;}
     
     public List<String> leftOxygenNamesList{get;set;}
     public List<String> rightOxygenNamesList{get;set;}
     public List<String> currentOxygenNamesList{get;set;}
+    public String currentOxygenNames{get;set;}
     public Set<String> OxygenNamesSet  = new Set<String>();
     
     public List<String> leftAllergyNamesList{get;set;}
     public List<String> rightAllergyNamesList{get;set;}
     public List<String> currentAllergyNamesList{get;set;}
+    public String currentAllergyNames{get;set;}
     public Set<String> AllergyNamesSet  = new Set<String>();
     
     public List<String> leftOtherNeedsList{get;set;}
     public List<String> righttOtherNeedsList{get;set;}
     public List<String> currentOtherNeedsList{get;set;}
+    public String currentOtherNeeds{get;set;}
     public Set<String> OtherNeedsSet  = new Set<String>();
     
     public List<String> leftOwnWheelChairList{get;set;}
     public List<String> rightOwnWheelChairList{get;set;}
     public List<String> currentOwnWheelChairList{get;set;}
     public Set<String> ownWheelChairNamesSet = new Set<String>();
+    public String currentOwnWheelChair{get;set;}
      
     public List<String> leftWCCollapsibleList{get;set;}
     public List<String> rightWCCollapsibleList{get;set;}
     public List<String> currentWCCollapsibleList{get;set;}
+    public String currentWCCollapsible{get;set;}
     public Set<String> WCCollapsiblesSet  = new Set<String>();
     
     
     public List<String> leftWCPowerList{get;set;}
     public List<String> rightWCPowerList{get;set;}
     public List<String> currentWCPowerList{get;set;}
+    public String currentWCPower{get;set;}
     public Set<String> WCPowerNamesSet= new Set<String>();
     
     public List<String> leftMedicationList{get;set;}
     public List<String> rightMedicationList{get;set;}
     public List<String> currentMedicationList{get;set;}
+    public String currentMedication{get;set;}
     public Set<String> MedicationNamesSet  = new Set<String>();
     
     public List<String> leftNursingCareList{get;set;}
     public List<String> rightNursingCareList{get;set;}
     public List<String> currentNursingCareList{get;set;}
+    public String currentNursingCare{get;set;}
     public Set<String> nursingCaresSet  = new Set<String>();
     
     public String availableMonth1{get;set;}
@@ -157,7 +168,7 @@ Public Class WishChildFormUtil
         selectedMailMap = new Map<String,String>();
         SignNowList = new List<String>();
         listofSenderName = new List<String>();
-        caseId = Apexpages.currentPage().getParameters().get('Id');
+        caseId = Apexpages.currentPage().getParameters().get('id');
         Participants = Apexpages.currentPage().getParameters().get('part');
         childForm = '/apex/WishChildForm_VF?id='+caseId+'&part='+Participants;
         familyForm = '/apex/WishFamilyForm_VF?id='+caseId+'&part='+Participants;
@@ -264,22 +275,23 @@ Public Class WishChildFormUtil
         return SObjectType.Wish_Child_Form__c.FieldSets.Wish_Child_Form.getFields();
     }
     
-   Public String selectedNames(List<String> SelectedNameList)
+   Public String selectedNames(String selectedNames)
     {
             Boolean start=True;
-            String currString;
-            if(!SelectedNameList.isEmpty()) {           
-                for(String Str : SelectedNameList) {
-                if(Start) {
-                    currString = Str;
-                    Start = false;
-                } else {               
-                    currString = currString +','+' ' + Str;
+            String currString = '';
+            String returnName;
+            String returnSecondName;
+            if(selectedNames != Null) {           
+                for(String Str : selectedNames.split(';')) {
+                  if(currString == '')
+                  currString = str;
+                  else
+                  currString =+','+' '+str;
                 }
-                }
-               
+               returnName = currString.removeStart('[');
+               returnSecondName = returnName.removeEnd(']');
             }
-       return currString;
+       return returnSecondName;
     }
     
     

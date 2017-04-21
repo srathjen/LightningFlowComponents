@@ -17,7 +17,7 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
                if(!Test.isRunningTest())
                {
                     if(currRec.Date_Completed__c != null && (currRec.Status__c != Null))
-                        currRec.Active__c = True;
+                        currRec.current__c = True;
                }
                volunteerIds.add(currRec.Volunteer__c);
           }
@@ -39,26 +39,38 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
     {
         Set<Id> newRecordIds = new Set<Id>();
         Set<Id> volunteerIds = new Set<Id>();
+        Set<Id> ownerIds = new Set<Id>();
         Map<String,List<Background_check__c>> bgcMap = new Map<String,List<Background_check__c>>();
+        
+        for(Background_check__c currRec : Trigger.new)
+        {
+          ownerIds.add(currRec.OwnerId);
+        }
+        
+        Map<Id,String> userRoleMap = UserRoleUtility.getUserRole(ownerIds);
+       
+      //  Map<String,List<Background_check__c>> bgcMap = new Map<String,List<Background_check__c>>();
         for(Background_check__c  currRec : Trigger.new)
         {
           if(currRec.Migrated_Record__c == false)
           {
-            if(currRec.active__c == True)
+            if(currRec.current__c == True)
             {
                 newRecordIds.add(currRec.id);
                 volunteerIds.add(currRec.Volunteer__c);
             }
             
-            if(bgcMap.containsKey(currRec.Account_Name__c))
+          if(currRec.Account_Name__c != Null && userRoleMap.get(currRec.OwnerId) == 'National Staff')
+          {  
+           if(bgcMap.containsKey(currRec.Account_Name__c))
             {
                 bgcMap.get(currRec.Account_Name__c).add(currRec);
             }
             else
                 bgcMap.put(currRec.Account_Name__c,new List<Background_check__c>{currRec});
+           }
             
           }
-          
           
         }
         if(newRecordIds.size() > 0 && volunteerIds.size() > 0)
@@ -66,7 +78,7 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
             BackGroundCheckTriggerHandler.DeactivateExistingRecords(newRecordIds,volunteerIds);
         }
         
-        if(bgcMap.size() > 0)
+       if(bgcMap.size() > 0)
         {
             ChapterStaffRecordSharing_AC.BGCRecordSharing(bgcMap);
         }
@@ -92,11 +104,11 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
                 if((currRec.Date_Completed__c != null && CurrRec.Date_Completed__c != Trigger.oldMap.get(currRec.id).Date_Completed__c) 
                     && (currRec.Status__c != Null) && currRec.Status__c != Trigger.oldMap.get(currRec.id).status__c)
                 {
-                   currRec.Active__c = True;
+                   currRec.current__c = True;
                 }
               
               
-                if(currRec.active__c == True && Trigger.oldMap.get(currRec.id).active__c == false)
+                if(currRec.current__c == True && Trigger.oldMap.get(currRec.id).current__c == false)
                 { 
                     newRecordIds.add(currRec.id);
                     volContactIdSet.add(currRec.volunteer__c);
@@ -110,12 +122,12 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
           BackGroundCheckTriggerHandler.UpdateHiddenEmailField(volunteerIds,Trigger.new);
         }
     
-      /*  List<Background_check__c> exActiveRecList = [SELECT Id FROM Background_check__c WHERE Active__c = True AND ID NOT IN :newRecordIds];
+      /*  List<Background_check__c> exActiveRecList = [SELECT Id FROM Background_check__c WHERE current__c = True AND ID NOT IN :newRecordIds];
     
         for(Background_check__c currRec : Trigger.new)
         {
            
-            if(currRec.active__c == True && Trigger.oldMap.get(currRec.id).active__c == false)
+            if(currRec.current__c == True && Trigger.oldMap.get(currRec.id).current__c == false)
             {
                 if(exActiveRecList.size() > 0 && volContactIdSet.contains(currRec.volunteer__c))
                     currRec.addError('Active Background Check Already Exist'); 
@@ -135,6 +147,10 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
         Map<Id,Background_check__c>   expirationDateMap = new Map<Id,Background_check__c>(); 
         Set<Id> newRecordIds = new Set<Id>();
         Set<Id> volunteerIds = new Set<Id>();
+        Set<Id> ownerIds = new Set<Id>();
+        Set<Id> volunteerContactIdSet = new Set<Id>();
+        Map<String,List<Background_check__c>> bgcMap = new Map<String,List<Background_check__c>>();
+        
         for(Background_check__c dbBackgroundCheckRec : trigger.new)
         {
             if(dbBackgroundCheckRec.Status__c == 'Approved' && dbBackgroundCheckRec.Status__c != Null && trigger.oldmap.get(dbBackgroundCheckRec.Id).Status__c != 'Approved')
@@ -151,12 +167,41 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
                  expirationDateMap.put(dbBackgroundCheckRec.Volunteer__c,dbBackgroundCheckRec);
             }
             
-            if(dbBackgroundCheckRec.active__c == True && Trigger.oldMap.get(dbBackgroundCheckRec.id).active__c == false)
+            if(dbBackgroundCheckRec.current__c == True && Trigger.oldMap.get(dbBackgroundCheckRec.id).current__c == false)
             {
                 newRecordIds.add(dbBackgroundCheckRec.id);
                 volunteerIds.add(dbBackgroundCheckRec.volunteer__c);
             }
+            
+            if(dbBackgroundCheckRec.HiddenBackgroundExpire__c == true && trigger.oldMap.get(dbBackgroundCheckRec.Id).HiddenBackgroundExpire__c == false)
+            {
+                volunteerContactIdSet.add(dbBackgroundCheckRec.Volunteer__c);
+            }
+            if(dbBackgroundCheckRec.ownerId != Trigger.oldMap.get(dbBackgroundCheckRec.id).ownerId)
+                ownerIds.add(dbBackgroundCheckRec.ownerId);
         }
+        
+        Map<id, String> userRoleMap = UserRoleUtility.getUserRole(ownerIds);
+        
+        
+        for(Background_check__c currRec : Trigger.new)
+        {
+          if(currRec.Account_Name__c != Null && userRoleMap.get(currRec.OwnerId) == 'National Staff' 
+                  && currRec.OwnerId != Trigger.oldMap.get(currRec.id).ownerId)
+          {  
+           if(bgcMap.containsKey(currRec.Account_Name__c))
+            {
+                bgcMap.get(currRec.Account_Name__c).add(currRec);
+            }
+            else
+                bgcMap.put(currRec.Account_Name__c,new List<Background_check__c>{currRec});
+           }
+        }
+        
+       /* if(volunteerIds.size() > 0)
+        {
+          BackGroundCheckTriggerHandler.UpdateHiddenEmailField(volunteerIds,Trigger.new);
+        }*/
         
         if(newRecordIds.size() > 0 && volunteerIds.size() > 0)
         {
@@ -176,6 +221,9 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
         {
             BackGroundCheckTriggerHandler.UpdateVolunteerExpirationDate(expirationDateMap);
         }
+        
+        if(volunteerContactIdSet.size() > 0)
+        BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(volunteerContactIdSet);
 
     }
 }

@@ -39,6 +39,7 @@ public class VolunteerWorkItems_AC_Test {
         Case dbCase = [SELECT Id,Status,Wish_Type__c FROM Case WHERE Wish_Type__c =: 'Disney World'];
         Volunteer_Opportunity__c dbOpp = [SELECT Id,Wish__c FROM Volunteer_Opportunity__c WHERE Wish__c =:dbCase.id Limit 1];
         System.RunAs(currUser) {
+            test.startTest();
             PageReference pageref = Page.MyAssignment_VF;
             Test.setCurrentPageReference(pageref);
             VolunteerWorkItems_AC volunteerWorkitems = new VolunteerWorkItems_AC();
@@ -51,10 +52,11 @@ public class VolunteerWorkItems_AC_Test {
             volunteerWorkitems.getNonWishEvents();
             volunteerWorkitems.RegisterWishEvents();
             volunteerWorkitems.registrationConfirmation();
+            test.stopTest();
         }
     }     
     public static testMethod void volunteerClosedWish() {
-        
+        Test.startTest();
         user currUser = [SELECT Id,UserName FROM User WHERE UserName =:'joathanedwards@gmail.com'];
         
         Case closedCase = [SELECT Id,Status,Wish_Type__c FROM Case WHERE Wish_Type__c =: 'Disney World'];
@@ -62,6 +64,7 @@ public class VolunteerWorkItems_AC_Test {
         update closedCase;
         
         System.RunAs(currUser) {
+            
             PageReference pageref = Page.MyAssignment_VF;
             Test.setCurrentPageReference(pageref);
             VolunteerWorkItems_AC volunteerWorkitems = new VolunteerWorkItems_AC();
@@ -69,7 +72,9 @@ public class VolunteerWorkItems_AC_Test {
             volunteerWorkitems.HistoricalWish();
             volunteerWorkitems.getClosedWish();
             
+            
         }
+        test.stopTest();
     }
     public static testMethod void volunteerClosedNonWish() {
         

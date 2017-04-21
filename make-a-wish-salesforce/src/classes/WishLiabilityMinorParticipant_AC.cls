@@ -82,9 +82,14 @@ public class WishLiabilityMinorParticipant_AC{
         updateWishChild.Id = currentParentCase.ContactId;
         updateWishChild.Hidden_Minor_Participant__c = emailString;
         update updateWishChild;
-        
+        if(currentParentCase.contact.Publicity_OK__c != Null){
         callouttoDocusing(emailMap,currentParentCase.Id,currentParentCase.contact.Publicity_OK__c);
         DisplayMessage();
+        }
+        else{
+         DisplayMessage();
+        }
+        
     }
     
     @Future(callout=true)
@@ -167,8 +172,8 @@ public class WishLiabilityMinorParticipant_AC{
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailBlurb":"Test Email Body",'+
-            '  "emailSubject": "Test Email Subject",'+
+            '  "emailBlurb":"Make-A-Wish Liability And Publicity Release Form – Minor Participants",'+
+            '  "emailSubject": "Make-A-Wish Liability And Publicity Release Form – Minor Participants",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+
             '      "name": "document.pdf",'+
@@ -243,10 +248,12 @@ public class WishLiabilityMinorParticipant_AC{
     }  
     
     public pagereference DisplayMessage(){
-        if(currentParentCase.contact.Publicity_OK__c == Null)
+        if(currentParentCase.contact.Publicity_OK__c == Null){
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'The publicity liability is not selected'));
-        if(currentParentCase.contact.Publicity_OK__c != Null)
+            }
+        else{
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The Email has been successfully Sent.'));
+            }
         return null;
     }
     public pagereference DisplayErrorMessage(){

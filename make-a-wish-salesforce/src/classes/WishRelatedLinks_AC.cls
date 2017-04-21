@@ -43,9 +43,9 @@ public class WishRelatedLinks_AC {
             contactInfo = '/apex/RelationshipsViewer_VF?recId='+currentCaseRec.Id;
             LiabilityFrom = '/apex/WishLiabilityForm_VF?id='+currentCaseRec.Id;
             miniorParticipant = '/apex/WishLiabilityMinorParticipant_VF?id='+currentCaseRec.Id;
-            absentParentForm = '/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
+            absentParentForm = '/apex/AbsentForm_VF?id='+currentCaseRec.Id; 
             celebrityForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
-            singleForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
+            singleForm = '/apex/SingleForm_VF?id='+currentCaseRec.Id;
             wishClearence = '/apex/WishClearanceSendNow_VF?id='+currentCaseRec.Id; 
             ChildMedicalForm = '/apex/WishChildSummary_VF?id='+currentCaseRec.Id;
             ShoppingSpree =  '/apex/Itinerary_VF?id='+currentCaseRec.Id;
@@ -67,7 +67,7 @@ public class WishRelatedLinks_AC {
         return null;
     }
     
-    public void updateSenderInfo() {
+      public void updateSenderInfo() {
         List<Case> caseInfo = [SELECT Id, ContactId FROM Case WHERE Id = : currentCaseRec.Id];
         List<Contact> contactList = [SELECT Id FROM Contact WHERE Id =: caseInfo[0].ContactId LIMIT 1];
         contactList[0].Recipient_Email__c = '';
@@ -87,9 +87,13 @@ public class WishRelatedLinks_AC {
         }
         if(contactList.size() > 0) {
             update contactList;
-            if(String.isBlank(contactList[0].Recipient_Email__c) || String.isBlank(contactList[0].First_Recipient_Name__c) ||  String.isBlank(contactList[0].Second_Recipient_Email__c) ||  String.isBlank(contactList[0].Second_Recipient_Name__c)) {
+            if((!String.isBlank(contactList[0].Recipient_Email__c) && !String.isBlank(contactList[0].First_Recipient_Name__c)) || (!String.isBlank(contactList[0].Second_Recipient_Email__c) &&  !String.isBlank(contactList[0].Second_Recipient_Name__c))){
+                recpCheck = 'Allow';
+            }
+            else{
                 recpCheck = 'Not Allow';
             }
+            
         }
     }
 }

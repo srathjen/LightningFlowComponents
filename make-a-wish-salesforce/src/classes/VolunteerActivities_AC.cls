@@ -4,7 +4,7 @@ Date        : 11/10/2016
 Description : This class is used to display open and closed activities for volunteers
 *******************************************************************************************************************/
 
-public class VolunteerActivities_AC {
+public with sharing class VolunteerActivities_AC {
     
     public Id taskId {get;set;}
     private Id volunteerUserId;
@@ -29,11 +29,11 @@ public class VolunteerActivities_AC {
         Set<Id> volunteerOpportunityIdSet = new Set<Id>();
         
         Map<Id,String> eventTypeMap = new Map<Id, String>();
-       
+        
         Map<Id, String> eventNameMap = new Map<Id, String>();
         Map<Id, String> wishNameMap = new Map<Id, String>();
-        List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status != \'Completed\' AND OwnerId =:volunteerUserId ORDER BY CreatedDate DESC');
-        
+        //List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status != \'Completed\' AND OwnerId =:volunteerUserId ORDER BY CreatedDate DESC');
+        List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status != \'Completed\' ORDER BY CreatedDate DESC');
         if(openActivities.size() > 0) {
             for(Task checkType : openActivities) {
                 if(checkType.what.Type == 'Case') {
@@ -85,15 +85,11 @@ public class VolunteerActivities_AC {
                 mergeInfoWithTask.volunteerTask = taskTypeNameMerge;
                 if(taskTypeNameMerge.WhatId != null) {
                     if(eventTypeMap.containsKey(taskTypeNameMerge.WhatId)) {
-                        if(taskTypeNameMerge.Subject == '111111') {
-                        }
                         if(eventNameMap.containsKey(taskTypeNameMerge.WhatId)) {
                             mergeInfoWithTask.wishType = eventTypeMap.get(taskTypeNameMerge.WhatId);
-                            System.debug('WishType>>>>>>>>>>>>>'+eventTypeMap.get(taskTypeNameMerge.WhatId));
                             mergeInfoWithTask.nameField = eventNameMap.get(taskTypeNameMerge.WhatId);
-                            System.debug('WishName>>>>>>>>>>>>>'+eventNameMap.get(taskTypeNameMerge.WhatId));
                         }
-                         
+                        
                     } else if(wishNameMap.containsKey(taskTypeNameMerge.WhatId)) {
                         mergeInfoWithTask.wishType = 'Wish';
                         mergeInfoWithTask.nameField = wishNameMap.get(taskTypeNameMerge.WhatId);
@@ -110,11 +106,6 @@ public class VolunteerActivities_AC {
     }
     
     
-    
-    
-    
-    
-    
     //Used to pull all open activities for volunteer
     public List<CloseActivitiesWrapper> getCloseActivities() {
         
@@ -124,11 +115,11 @@ public class VolunteerActivities_AC {
         Set<Id> volunteerOpportunityIdSet = new Set<Id>();
         
         Map<Id,String> eventTypeMap = new Map<Id, String>();
-       
+        
         Map<Id, String> eventNameMap = new Map<Id, String>();
         Map<Id, String> wishNameMap = new Map<Id, String>();
-        List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status = \'Completed\' AND OwnerId =:volunteerUserId');
-        
+        //List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status = \'Completed\' AND OwnerId =:volunteerUserId');
+        List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status = \'Completed\' ORDER BY LastModifiedDate DESC'); 
         if(openActivities.size() > 0) {
             for(Task checkType : openActivities) {
                 if(checkType.what.Type == 'Case') {
@@ -180,15 +171,11 @@ public class VolunteerActivities_AC {
                 mergeInfoWithTask.volunteerTask = taskTypeNameMerge;
                 if(taskTypeNameMerge.WhatId != null) {
                     if(eventTypeMap.containsKey(taskTypeNameMerge.WhatId)) {
-                        if(taskTypeNameMerge.Subject == '111111') {
-                        }
                         if(eventNameMap.containsKey(taskTypeNameMerge.WhatId)) {
                             mergeInfoWithTask.wishType = eventTypeMap.get(taskTypeNameMerge.WhatId);
-                            System.debug('WishType>>>>>>>>>>>>>'+eventTypeMap.get(taskTypeNameMerge.WhatId));
                             mergeInfoWithTask.nameField = eventNameMap.get(taskTypeNameMerge.WhatId);
-                            System.debug('WishName>>>>>>>>>>>>>'+eventNameMap.get(taskTypeNameMerge.WhatId));
                         }
-                         
+                        
                     } else if(wishNameMap.containsKey(taskTypeNameMerge.WhatId)) {
                         mergeInfoWithTask.wishType = 'Wish';
                         mergeInfoWithTask.nameField = wishNameMap.get(taskTypeNameMerge.WhatId);
@@ -200,18 +187,9 @@ public class VolunteerActivities_AC {
                 closedActivitiesList.add(mergeInfoWithTask);
             }
         }
-        
         return closedActivitiesList;
     }
     
-    
-    
-    
-    //Used to pull all closed activities for volunteer
-    /*public List<Task> getCloseActivities() {
-        List<Task> closeActivities = Database.Query('SELECT Id, Subject, ActivityDate, Status FROM Task WHERE Status = \'Completed\' AND OwnerId =:volunteerUserId');
-        return closeActivities;
-    }*/
     
     public PageReference closeTask() {
         List<Task> taskList = [SELECT Id FROM Task WHERE Id =: taskId];

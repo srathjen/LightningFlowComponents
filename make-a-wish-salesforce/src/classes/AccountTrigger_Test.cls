@@ -8,7 +8,9 @@ public class AccountTrigger_Test {
     
     @testSetup static void createRecords(){
         OrientationandTrainingUtil.createrSystemAdminUser();
+        
     }
+    
     
     static testmethod void inKindDonor() {
         User sysAdmin = [SELECT Id,userName,Email FROM User WHERE Email =: 'testmawa@gmail.com' limit 1];
@@ -81,8 +83,6 @@ public class AccountTrigger_Test {
         System.RunAs(volunteerUser) {
             Account inkindAccount = OrientationandTrainingUtil.inKindAccount();
             insert inkindAccount;
-            
-            
         }
     }
     
@@ -90,8 +90,18 @@ public class AccountTrigger_Test {
         Bypass_Triggers__c turnOnHouseHold = new Bypass_Triggers__c();
         turnOnHouseHold.setupownerId = userinfo.getUserId();
         insert turnOnHousehold;
-        
         Account chapterAccount = OrientationandTrainingUtil.HouseHoldAccount();
     }
     
+    static testmethod void updateChapterAccountDevEmail() {
+         User sysAdmin = [SELECT Id,userName,Email FROM User WHERE Email =: 'testmawa@gmail.com' limit 1];
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountWithWishCoordinatior(sysAdmin.Id);
+        Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
+        parentCase.ChapterName__c = chapterAccount.id;
+        insert parentCase;
+        Contact wishChildCon = OrientationandTrainingUtil.CreateWishChildCon();
+        Case wishGranting = OrientationandTrainingUtil.createWishGrantCase(wishChildCon.id,parentCase.id);
+        chapterAccount.DevStaffEmail__c = 'chandru.406@gmail.com';
+        update chapterAccount;
+        }
 }

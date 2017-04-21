@@ -30,7 +30,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
                 } 
             }
             
-           
+            
         }
         if(chapterAccountIdsSet.size() > 0){
             for(Account chapterAccount : [SELECT Id,Wish_Co_ordinator__c,Wish_Co_ordinator__r.Email FROM Account WHERE Id IN: chapterAccountIdsSet AND Wish_Co_ordinator__c != Null]){
@@ -63,7 +63,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
             }
         }
         
-         if(accountIdSet.size() > 0){
+        if(accountIdSet.size() > 0){
             for(contact dbWishChild : [SELECT Id,Name,AccountId,RecordTypeId FROM Contact WHERE AccountId IN :accountIdSet AND RecordTypeId =: wishChildRT Limit 1]){
                 wishChildMap.put(dbWishChild.AccountId,dbWishChild.Id);
             }
@@ -71,8 +71,8 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         
         if(wishChildMap.size() > 0){
             for(Account newAccount : trigger.new){
-            system.debug('Contins>>>>'+wishChildMap.containsKey(newAccount.Id));
-            system.debug('RecordType Id '+newAccount.RecordTypeId +'housHoldAccountRTId '+housHoldAccountRTId );
+                system.debug('Contins>>>>'+wishChildMap.containsKey(newAccount.Id));
+                system.debug('RecordType Id '+newAccount.RecordTypeId +'housHoldAccountRTId '+housHoldAccountRTId );
                 if(newAccount.RecordTypeId == housHoldAccountRTId && wishChildMap.containsKey(newAccount.Id) && newAccount.Migrated_Record__c != true){
                     newAccount.npe01__One2OneContact__c = wishChildMap.get(newAccount.Id);
                 }
@@ -80,7 +80,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
             
         }
     }
-   
+    
     
     
     //After insert trigger to fire the approval process once inkind donor account is created and sahre the record to group based on the chapter name
@@ -102,8 +102,18 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         Id wishChildRT = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(cons.contactWishChildRT).getRecordTypeId();
         Map<String,List<Account>> accountMapforSharing = new Map<String, List<Account>>();
         Set<String> chapterIds = new Set<String>();
-       
-        for(Account inKindAccount : trigger.new)
+        Set<Id> ownerIds = new Set<Id>();
+        Map<Id, String> userRoleMap = new Map<Id, String>();
+        
+      /*  for(Account currAccount : Trigger.new)
+        {
+            ownerIds.add(currAccount.OwnerId);
+        }
+        
+        if(ownerIds.size() > 0)
+            userRoleMap = UserRoleUtility.getUserRole(ownerIds);*/
+        
+        for(Account inKindAccount : Trigger.new)
         {
             if(inKindAccount.Migrated_Record__c != True)
             {    
@@ -126,32 +136,38 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         
         if(chaptterAccountIdSet.size() > 0 || chapterIds.size() > 0)
         {
-            for(Account daAccount : [SELECT Id,Name,Wish_Co_ordinator__c, Volunteer_Manager__c,RecordTypeId,Chapter_Name__c,Chapter_Name__r.Name  FROM Account WHERE (Id IN: chaptterAccountIdSet OR (Chapter_Name__c IN :chapterIds AND Id IN :Trigger.newMap.keySet()))]){
-              
-              if(daAccount.RecordTypeId == chapterAccountRTId)
-              {
-                chaptterMap.put(daAccount.Id,daAccount.Wish_Co_ordinator__c);
-                volunteerManagersMap.put(daAccount.Id,daAccount.Volunteer_Manager__c);
-                String chapterNameTrim = daAccount.Name.removeStart('Make-A-Wish ');
-                chapterNameMap.put(daAccount.Id, chapterNameTrim);
+            for(Account daAccount : [SELECT Id,Name,Wish_Co_ordinator__c, OwnerId,Owner.UserRole.Name, Volunteer_Manager__c,RecordTypeId,Chapter_Name__c,
+                                    Chapter_Name__r.Name  FROM Account WHERE (Id IN: chaptterAccountIdSet OR 
+                                    (Chapter_Name__c IN :chapterIds AND Id IN :Trigger.newMap.keySet()))])
+            {
                 
-              /*  if(accountMapforSharing.containsKey(daAccount.Name))
+                if(daAccount.RecordTypeId == chapterAccountRTId)
                 {
-                   accountMapforSharing.get(daAccount.Name).add(daAccount);
+                    chaptterMap.put(daAccount.Id,daAccount.Wish_Co_ordinator__c);
+                    volunteerManagersMap.put(daAccount.Id,daAccount.Volunteer_Manager__c);
+                    String chapterNameTrim = daAccount.Name.removeStart('Make-A-Wish ');
+                    chapterNameMap.put(daAccount.Id, chapterNameTrim);
+                    
+                  /*  if(accountMapforSharing.containsKey(daAccount.Name))
+                    {
+                    accountMapforSharing.get(daAccount.Name).add(daAccount);
+                    }
+                    else
+                    accountMapforSharing.put(daAccount.Name, new List<Account>{daAccount});*/ 
                 }
+                
                 else
-                   accountMapforSharing.put(daAccount.Name, new List<Account>{daAccount}); */ 
-              }
-              
-              else
-              {
-                if(accountMapforSharing.containsKey(daAccount.Chapter_Name__r.Name))
                 {
-                   accountMapforSharing.get(daAccount.Chapter_Name__r.Name).add(daAccount);
+                   if(daAccount.Owner.userRole.Name == 'National Staff')
+                   {
+                        if(accountMapforSharing.containsKey(daAccount.Chapter_Name__r.Name))
+                        {
+                            accountMapforSharing.get(daAccount.Chapter_Name__r.Name).add(daAccount);
+                        }
+                        else
+                            accountMapforSharing.put(daAccount.Chapter_Name__r.Name, new List<Account>{daAccount}); 
+                   }
                 }
-                else
-                   accountMapforSharing.put(daAccount.Chapter_Name__r.Name, new List<Account>{daAccount}); 
-              }
             }
         }
         
@@ -166,39 +182,39 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
             for(Account inKindAccount : trigger.new){
                 if(inKindAccount.Migrated_Record__c != True)
                 {   
-                  if(inKindAccount.RecordTypeId == inKindDonorsAccountRTId)
-                  {
-                   
-                    if(chaptterMap.containsKey(inKindAccount.Chapter_Name__c) && !String.isEmpty(chaptterMap.get(inKindAccount.Chapter_Name__c))){
-                        Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
-                        req.setComments('Submitting request for approval');
-                        req.setObjectId(inKindAccount.id);
-                        req.setProcessDefinitionNameOrId('Account_In_Kind_Donors_Approval');
-                        req.setNextApproverIds(new Id[]{chaptterMap.get(inKindAccount.Chapter_Name__c)});
-                        req.setSkipEntryCriteria(true);
-                        Approval.ProcessResult result = Approval.process(req);
-                    }
-                    else{
-                        inKindAccount.addError('There is no Wis Co-ordinator to approve this record');
-                    }
-                    
-                    if(chapterNameMap.containsKey(inkindAccount.Chapter_Name__c)) 
-                    {    
-                        if( publicGroupMap.containsKey(chapterNameMap.get(inkindAccount.Chapter_Name__c)))
-                        {    
-                            groupId = publicGroupMap.get(chapterNameMap.get(inkindAccount.Chapter_Name__c));
-                            AccountShare dynamicAccountShare  = new AccountShare();
-                            dynamicAccountShare.AccountId = inkindAccount.Id;
-                            dynamicAccountShare.Accountaccesslevel = 'Read';
-                            dynamicAccountShare.CaseAccessLevel = 'Read';
-                            dynamicAccountShare.ContactAccessLevel = 'Read';
-                            dynamicAccountShare.OpportunityAccessLevel = 'Read';
-                            dynamicAccountShare.UserOrGroupId = groupId;
-                            accountShareList.add(dynamicAccountShare); 
-                            
+                    if(inKindAccount.RecordTypeId == inKindDonorsAccountRTId)
+                    {
+                        
+                        if(chaptterMap.containsKey(inKindAccount.Chapter_Name__c) && !String.isEmpty(chaptterMap.get(inKindAccount.Chapter_Name__c))){
+                            Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
+                            req.setComments('Submitting request for approval');
+                            req.setObjectId(inKindAccount.id);
+                            req.setProcessDefinitionNameOrId('Account_In_Kind_Donors_Approval');
+                            req.setNextApproverIds(new Id[]{chaptterMap.get(inKindAccount.Chapter_Name__c)});
+                            req.setSkipEntryCriteria(true);
+                            Approval.ProcessResult result = Approval.process(req);
                         }
-                    }                    
-                  }  
+                        else{
+                            inKindAccount.addError('There is no Wis Co-ordinator to approve this record');
+                        }
+                        
+                        if(chapterNameMap.containsKey(inkindAccount.Chapter_Name__c)) 
+                        {    
+                            if( publicGroupMap.containsKey(chapterNameMap.get(inkindAccount.Chapter_Name__c)))
+                            {    
+                                groupId = publicGroupMap.get(chapterNameMap.get(inkindAccount.Chapter_Name__c));
+                                AccountShare dynamicAccountShare  = new AccountShare();
+                                dynamicAccountShare.AccountId = inkindAccount.Id;
+                                dynamicAccountShare.Accountaccesslevel = 'Read';
+                                dynamicAccountShare.CaseAccessLevel = 'Read';
+                                dynamicAccountShare.ContactAccessLevel = 'Read';
+                                dynamicAccountShare.OpportunityAccessLevel = 'Read';
+                                dynamicAccountShare.UserOrGroupId = groupId;
+                                accountShareList.add(dynamicAccountShare); 
+                                
+                            }
+                        }                    
+                    }  
                 }
             }
             
@@ -210,8 +226,8 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         }  
         
         
-       // if(accountMapforSharing.size() > 0)
-            //ChapterStaffRecordSharing_AC.AccountSharing(accountMapforSharing);
+        if(accountMapforSharing.size() > 0)
+           ChapterStaffRecordSharing_AC.AccountSharing(accountMapforSharing);
         
     }
     
@@ -229,7 +245,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         Id houseHoleRecordTypeId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.HouseholdRT).getRecordTypeId();
         Constant_AC cons = new Constant_AC();
         Id housHoldAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('Household Account').getRecordTypeId();
-       
+        
         String groupName;
         id groupId;
         set<String> accountIdsSet = new set<String>();
@@ -240,12 +256,13 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         Map<Id, String> chapterNameMap = new Map<Id, String>();
         Map<Id,Account> accountMap = new Map<Id,Account>();
         Map<Id,Contact> contactMap = new Map<Id,Contact>();
-       
+        map<id,string> chapterEmailmap = new map<id,string>();
+        
         
         //This for loop is used to remove inkind account from the public group based on updated chapter name          
         for(Account currentAccount : trigger.new)
         {
-           
+            
             if(currentAccount.Wish_Co_ordinator__c != null && currentAccount.Wish_Co_ordinator__c != Trigger.oldMap.get(currentAccount.Id).Wish_Co_ordinator__c) {
                 accWishCoorUpdateMap.put(currentAccount.Id, currentAccount.Wish_Co_ordinator__c);
             }
@@ -264,7 +281,14 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
                    }
             }
             
-             
+            if(currentAccount.RecordTypeId == chapterAccountRTId && currentAccount.DevStaffEmail__c != Null && 
+               currentAccount.DevStaffEmail__c != trigger.oldmap.get(currentAccount.id).DevStaffEmail__c){
+                   chapterEmailmap.put(currentAccount.id, currentAccount.DevStaffEmail__c);
+               }
+        }
+        // This is used to update wisgrantingcase devstaff email field     
+        if(chapterEmailmap.size() > 0){
+            AccountTriggerHandler.updateGrantingCaseDevStaffEmai(chapterEmailmap);
         }
         
         if(accWishCoorUpdateMap.size() > 0) {
@@ -278,7 +302,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
             }
         }
         
-       
+        
         
         if(chapterIdsSet.size() > 0){
             for(Account getAccountName : [SELECT Id, Name FROM Account WHERE RecordTypeId =: chapterId]){
@@ -327,7 +351,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
             
             Insert updateAccountShareList;
         }
-       
+        
     }
     
 }

@@ -71,10 +71,11 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
          {
              if(newUser.Migrated_User__c == false)
              {
-                 if(newUser.IsActive == false && trigger.oldMap.get(newUser.Id).IsActive == TRue){
+                 if(newUser.IsActive == false && trigger.oldMap.get(newUser.Id).IsActive != newUser.IsActive){
+                     System.debug('RecMatch>>>>>');
                      inActiveUserIdSet.add(newUser.Id);
                  }
-                  if(newUser .ContactId != Null  && newUser .IsActive  == false && trigger.oldMap.get(newUser .id).IsActive == True){
+                  if(newUser.ContactId != Null  && newUser.IsActive  == false && trigger.oldMap.get(newUser .id).IsActive == True){
                     inactiveUserSet.add(newUser .ContactId);
                   } 
                  
@@ -94,8 +95,11 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
              UserTriggerHandler.updateUserChapterName(userIdsSet);
         }*/
         
-        if(inActiveUserIdSet.size() > 0)
+        if(inActiveUserIdSet.size() > 0) {
+            System.debug('CallMet>>>>>');
             UserTriggerHandler.updateUser(inActiveUserIdSet);
+        }
+            
         
          if(inactiveUserSet.size() > 0 && inactiveUserSet != Null){
             InactiveVolunteerHandler.createTaskforVolunteerManager(inactiveUserSet);

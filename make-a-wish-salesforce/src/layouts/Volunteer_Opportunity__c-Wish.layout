@@ -37,6 +37,14 @@
                 <behavior>Readonly</behavior>
                 <field>Total_Hours__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Migrated_Record__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>IsApproved__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
@@ -83,7 +91,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Name__c</field>
+                <field>First_L_I__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>

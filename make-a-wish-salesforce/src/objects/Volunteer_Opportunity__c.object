@@ -437,7 +437,7 @@
         <externalId>false</externalId>
         <label>Approval Status</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
@@ -789,7 +789,7 @@
         <description>This field is used when the to identify whether the volunteer opportunity is active or not.</description>
         <externalId>false</externalId>
         <label>Inactive</label>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -1119,7 +1119,7 @@ RECIP_RELATION_CODE&quot;</description>
         <externalId>false</externalId>
         <label>Reason Inactive</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
@@ -1206,11 +1206,10 @@ RECIP_RELATION_CODE&quot;</description>
         <externalId>false</externalId>
         <label>Status</label>
         <required>false</required>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
-            <restricted>true</restricted>
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
@@ -1227,6 +1226,10 @@ RECIP_RELATION_CODE&quot;</description>
                 </value>
                 <value>
                     <fullName>Completed</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Out of Compliance</fullName>
                     <default>false</default>
                 </value>
             </valueSetDefinition>
@@ -1495,9 +1498,17 @@ RECIP_RELATION_CODE&quot;</description>
     </listViews>
     <listViews>
         <fullName>Arizona_Volunteer_Opportunity</fullName>
-        <filterScope>Queue</filterScope>
+        <columns>OWNER.FIRST_NAME</columns>
+        <columns>OWNER.LAST_NAME</columns>
+        <columns>NAME</columns>
+        <columns>IsApproved__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Chapter_Name__c</field>
+            <operation>equals</operation>
+            <value>Make-A-Wish Arizona</value>
+        </filters>
         <label>Arizona</label>
-        <queue>Arizona</queue>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>
@@ -2177,6 +2188,10 @@ RECIP_RELATION_CODE&quot;</description>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Out of Compliance</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Pending</fullName>
                 <default>false</default>
             </values>
@@ -2347,6 +2362,10 @@ RECIP_RELATION_CODE&quot;</description>
             </values>
             <values>
                 <fullName>Inactive</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Out of Compliance</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -2531,6 +2550,10 @@ RECIP_RELATION_CODE&quot;</description>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Out of Compliance</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Pending</fullName>
                 <default>false</default>
             </values>
@@ -2712,6 +2735,10 @@ RECIP_RELATION_CODE&quot;</description>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Out of Compliance</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Pending</fullName>
                 <default>false</default>
             </values>
@@ -2810,6 +2837,13 @@ RECIP_RELATION_CODE&quot;</description>
         <searchResultsAdditionalFields>Role__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Read</sharingModel>
+    <validationRules>
+        <fullName>Vol_Opp_Do_Not_Create_for_Closed_Wish</fullName>
+        <active>true</active>
+        <description>Should not create volunteer opportunity for Closed Wish.</description>
+        <errorConditionFormula>Wish__r.IsClosed=True &amp;&amp; ISNEW() &amp;&amp; Migrated_Record__c = false &amp;&amp; Wish__r.Migrated_Record__c = false</errorConditionFormula>
+        <errorMessage>You cannot create volunteer opportunity for closed wish.</errorMessage>
+    </validationRules>
     <validationRules>
         <fullName>Volunteer_Opp_Reason_Inactive</fullName>
         <active>true</active>

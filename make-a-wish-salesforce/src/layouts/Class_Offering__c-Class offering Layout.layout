@@ -28,15 +28,15 @@
                 <field>Chapter__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Date__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>Start_Time__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Required</behavior>
                 <field>End_Time__c</field>
             </layoutItems>
             <layoutItems>
@@ -95,7 +95,7 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Volunteer__c</fields>
+        <fields>Contact.NAME</fields>
         <fields>Volunteer_Attendance__c</fields>
         <fields>Registered_Date__c</fields>
         <fields>Completed_Date__c</fields>

@@ -6,7 +6,7 @@
     </fields>
     <fields>
         <help><!-- Is there a medical reason why we need to move quickly? --></help>
-        <label><!-- Any medical reason for moving quickly? --></label>
+        <label><!-- Any Medical Reason For Moving Quickly? --></label>
         <name>Any_medical_reason_for_moving_quickly__c</name>
     </fields>
     <fields>
@@ -108,7 +108,7 @@
     </fields>
     <fields>
         <help><!-- Wish Child has a condition for which there is no reasonable hope of cure and from which children or young people will ultimately die prematurely. (e.g., Duchenne muscular dystrophy or neurodegenerative disease) --></help>
-        <label><!-- Child will ultimately die prematurely --></label>
+        <label><!-- Child Will Ultimately Die Prematurely --></label>
         <name>Child_will_ultimately_die_prematurely__c</name>
     </fields>
     <fields>
@@ -172,6 +172,10 @@
         <name>Convulsive_Disorders__c</name>
     </fields>
     <fields>
+        <label><!-- Created Date/Time --></label>
+        <name>Created_Date_Time__c</name>
+    </fields>
+    <fields>
         <label><!-- Current Condition Label --></label>
         <name>Current_Condition_Label__c</name>
     </fields>
@@ -189,7 +193,7 @@
     </fields>
     <fields>
         <help><!-- Wish Child has a progressive condition without curative treatment options in which debilitation may extend over many years. (e.g., neurodegenerative, severe treatment resistant epilepsy, metabolic disease) --></help>
-        <label><!-- Debilitation may extend over many years --></label>
+        <label><!-- Debilitation May Extend Over Many Years --></label>
         <name>Debilitation_may_extend_over_many_years__c</name>
     </fields>
     <fields>
@@ -230,7 +234,7 @@
     </fields>
     <fields>
         <help><!-- Has this child ever received a prior wish from MAW or any other wish granting organization? --></help>
-        <label><!-- Has this child ever received prior wish? --></label>
+        <label><!-- Has This Child Ever Received Prior Wish? --></label>
         <name>Has_this_child_ever_received_prior_wish__c</name>
     </fields>
     <fields>
@@ -254,7 +258,7 @@
         <name>Hospital_Treatment_Facility__c</name>
     </fields>
     <fields>
-        <label><!-- I am Recognized To Practice As a --></label>
+        <label><!-- I Am Recognized To Practice As A --></label>
         <name>I_am_Recognized_To_Practice_As_a__c</name>
         <picklistValues>
             <masterLabel>Child Life Specialist</masterLabel>
@@ -286,7 +290,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- I&apos;m Part of The Treating HealthCare Team --></label>
+        <label><!-- I&apos;m Part Of The Treating HealthCare Team --></label>
         <name>I_m_Part_of_The_Treating_HealthCare_Team__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -303,7 +307,7 @@
     </fields>
     <fields>
         <help><!-- Wish Child has an irreversible but non-progressive condition with severe disability and is experiencing multiple health complications that increase the probability for premature death. (e.g., anoxic brain injury, severe cerebral palsy) --></help>
-        <label><!-- Increased probability of premature death --></label>
+        <label><!-- Increased Probability Of Premature Death --></label>
         <name>Increased_probability_of_premature_death__c</name>
     </fields>
     <fields>
@@ -331,7 +335,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Is in a Comatose/Vegetative State? --></label>
+        <label><!-- Is In A Comatose/Vegetative State? --></label>
         <name>Is_in_a_Comatose_Vegetative_State__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -447,64 +451,12 @@
         <name>Migrated_Record__c</name>
     </fields>
     <fields>
-        <label><!-- TPNMonth --></label>
-        <name>Month__c</name>
-        <picklistValues>
-            <masterLabel>1</masterLabel>
-            <translation><!-- 1 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>10</masterLabel>
-            <translation><!-- 10 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>11</masterLabel>
-            <translation><!-- 11 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>12</masterLabel>
-            <translation><!-- 12 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>2</masterLabel>
-            <translation><!-- 2 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>3</masterLabel>
-            <translation><!-- 3 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>4</masterLabel>
-            <translation><!-- 4 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>5</masterLabel>
-            <translation><!-- 5 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>6</masterLabel>
-            <translation><!-- 6 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>7</masterLabel>
-            <translation><!-- 7 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>8</masterLabel>
-            <translation><!-- 8 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>9</masterLabel>
-            <translation><!-- 9 --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <label><!-- Non - Verbal --></label>
         <name>Non_Verbal__c</name>
     </fields>
     <fields>
         <help><!-- None of these statements describe Wish Child --></help>
-        <label><!-- None of these statements describes Child --></label>
+        <label><!-- None Of These Statements Describes Child --></label>
         <name>None_of_these_statements_describes_Child__c</name>
     </fields>
     <fields>
@@ -836,10 +788,6 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Reason for Need --></label>
-        <name>Reason_for_Need__c</name>
-    </fields>
-    <fields>
         <label><!-- Referred Date --></label>
         <name>Referred_Date__c</name>
     </fields>
@@ -852,7 +800,7 @@
         <name>Referrer_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Referrer FirstName --></label>
+        <label><!-- Referrer First Name --></label>
         <name>Referrer_FirstName__c</name>
     </fields>
     <fields>
@@ -873,7 +821,7 @@
         <relationshipLabel><!-- Leads --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Relationship to child --></label>
+        <label><!-- Relationship To Child --></label>
         <name>Relationship_to_child__c</name>
         <picklistValues>
             <masterLabel>Family Member/Relative</masterLabel>
@@ -898,12 +846,12 @@
     </fields>
     <fields>
         <help><!-- Wish Child responds to standard treatment which approximates normal health. --></help>
-        <label><!-- Responds to treatment with normal health --></label>
+        <label><!-- Responds To Treatment With Normal Health --></label>
         <name>Responds_to_treatment_with_normal_health__c</name>
     </fields>
     <fields>
         <help><!-- Wish Child has an non-progressive condition that may have a risk of complications and/or risk of premature death. --></help>
-        <label><!-- Risk of complications &amp; premature death --></label>
+        <label><!-- Risk Of Complications &amp; Premature Death --></label>
         <name>Risk_of_complications_premature_death__c</name>
     </fields>
     <fields>
@@ -987,82 +935,6 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- TPN Year --></label>
-        <name>TPN_Year__c</name>
-        <picklistValues>
-            <masterLabel>1</masterLabel>
-            <translation><!-- 1 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>10</masterLabel>
-            <translation><!-- 10 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>11</masterLabel>
-            <translation><!-- 11 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>12</masterLabel>
-            <translation><!-- 12 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>13</masterLabel>
-            <translation><!-- 13 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>14</masterLabel>
-            <translation><!-- 14 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>15</masterLabel>
-            <translation><!-- 15 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>16</masterLabel>
-            <translation><!-- 16 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>17</masterLabel>
-            <translation><!-- 17 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>18</masterLabel>
-            <translation><!-- 18 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>2</masterLabel>
-            <translation><!-- 2 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>3</masterLabel>
-            <translation><!-- 3 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>4</masterLabel>
-            <translation><!-- 4 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>5</masterLabel>
-            <translation><!-- 5 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>6</masterLabel>
-            <translation><!-- 6 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>7</masterLabel>
-            <translation><!-- 7 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>8</masterLabel>
-            <translation><!-- 8 --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>9</masterLabel>
-            <translation><!-- 9 --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <label><!-- This Statement Describes My Patient --></label>
         <name>This_Statement_Describes_My_Patient__c</name>
     </fields>
@@ -1101,12 +973,12 @@
     </fields>
     <fields>
         <help><!-- Wish Child has a condition for which curative treatment may be feasible but can fail (e.g., cancer, irreversible organ failure, treatment failure does not include non-compliance) --></help>
-        <label><!-- Treatment may be feasible but can fail --></label>
+        <label><!-- Treatment May Be Feasible But Can Fail --></label>
         <name>Treatment_may_be_feasible_but_can_fail__c</name>
     </fields>
     <fields>
         <help><!-- Wish Child has a progressive condition without curative treatment options in which debilitation may extend over many years. (e.g., neurodegenerative, severe treatment resistant epilepsy, metabolic disease) --></help>
-        <label><!-- Treatment may prolong-normal activities --></label>
+        <label><!-- Treatment May Prolong-Normal Activities --></label>
         <name>Treatment_may_prolong_normal_activities__c</name>
     </fields>
     <fields>
@@ -1222,7 +1094,7 @@
         <name>isSign__c</name>
     </fields>
     <fields>
-        <label><!-- Is Family Aware of Referral? --></label>
+        <label><!-- Is Family Aware Of Referral? --></label>
         <name>is_Family_Aware_of_Referral__c</name>
         <picklistValues>
             <masterLabel>No</masterLabel>
@@ -1270,7 +1142,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- The batch this lead was created from. --></help>
+        <help>Le lot dans lequel cette piste a été créée.</help>
         <label><!-- Batch --></label>
         <name>npsp__Batch__c</name>
         <relationshipLabel><!-- Leads --></relationshipLabel>
@@ -1348,7 +1220,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- unique wish identifier --></label>
+        <label><!-- Unique Wish Identifier --></label>
         <name>unique_wish_identifier__c</name>
     </fields>
     <layouts>

@@ -10,27 +10,19 @@
     <textOnly>Hi {!Target_User.FirstName},
 
 
-
 Welcome to Wish Volunteer Community! To complete the volunteer registration process, please sign in with your username by visiting
 
-Make-A-Wish® Volunteer Community.
 
-
+Make-A-Wish Volunteer Community.
 
 Username: {!Target_User.Username}
 
-
-
 Should you have any questions please contact chapter staff at the number below.
-
-
 
 Thanks,
 
 {!Target_User.Account_Name__c}
-
 {!Target_User.Account_Phone__c}
-
 {!Target_User.Account_Email__c}</textOnly>
     <type>html</type>
 </EmailTemplate>

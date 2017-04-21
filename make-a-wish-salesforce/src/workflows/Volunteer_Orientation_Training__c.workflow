@@ -73,6 +73,18 @@
         <template>Automated_Volunteer_Templates/Training_Registered_Email_Template</template>
     </alerts>
     <alerts>
+        <fullName>Volunteer_O_T_Orienation_Registered_for_Virtual_Self_faced_Training</fullName>
+        <description>Volunteer O&amp;T : Orienation Registered for Virtual Self faced Training</description>
+        <protected>false</protected>
+        <recipients>
+            <field>VolunteerHidden_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Automated_Volunteer_Templates/Orientation_Virtual_Self_Paced_Registered_Email_Template</template>
+    </alerts>
+    <alerts>
         <fullName>Volunteer_O_T_Registered_for_Virtual_Self_faced_Training</fullName>
         <description>Volunteer O&amp;T : Registered for Virtual Self faced Training</description>
         <protected>false</protected>
@@ -84,6 +96,46 @@
         <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Training_Virtual_Self_Paced_Registered_Email_Template</template>
     </alerts>
+    <fieldUpdates>
+        <fullName>VolunteerO_T_Completed_Date</fullName>
+        <description>It update the Hidden Completed Date Field: if record type as Virtual_Self_Paced then value is Today()  other wise Class Offering Date.</description>
+        <field>Hidden_Completed_Date__c</field>
+        <formula>IF((Class_Offering__r.RecordType.DeveloperName =&apos;Virtual_Self_Paced&apos;), Today(), Class_Offering__r.Date__c)</formula>
+        <name>VolunteerO&amp;T:Completed Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <rules>
+        <fullName>O%26T%3A Self Faced Orientation Registered Workflow Rule</fullName>
+        <actions>
+            <name>Volunteer_O_T_Orienation_Registered_for_Virtual_Self_faced_Training</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Orientation</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
+            <operation>equals</operation>
+            <value>Registered</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Class_Offering__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Virtual - Self Paced</value>
+        </criteriaItems>
+        <description>This workflow will fire when the orientation is registered</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
     <rules>
         <fullName>O%26T%3A Self Faced Training Registered Workflow Rule</fullName>
         <actions>
@@ -130,6 +182,11 @@
             <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
             <operation>equals</operation>
             <value>Cancelled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
         </criteriaItems>
         <description>This workflow will fire when the orientation is cancelled</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -180,6 +237,11 @@
             <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
             <operation>equals</operation>
             <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Class_Offering__c.RecordTypeId</field>
+            <operation>notEqual</operation>
+            <value>Virtual - Self Paced</value>
         </criteriaItems>
         <description>This workflow will fire when the orientation is registered</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -262,6 +324,26 @@
             <value>Virtual - Self Paced</value>
         </criteriaItems>
         <description>This workflow will fire when the training is registered</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>VolunteerO%26T%3AUpdatecompletedDate</fullName>
+        <actions>
+            <name>VolunteerO_T_Completed_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
+            <operation>equals</operation>
+            <value>Completed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>This Update the Hidden Completed  date when the Volunteer Attendance as Completed.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
 </Workflow>
