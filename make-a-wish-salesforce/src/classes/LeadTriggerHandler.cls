@@ -99,7 +99,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 updateDocusignStatus(leadContactMap);
             }
             
-            for(Lead convertedLeads : [SELECT Id,Name,DOB__c,FirstName,LastName,createdDate,I_am_Recognized_To_Practice_As_a__c,Sibling_Detail__c,Medical_Provider_Category__c,ChapterName__r.Name,ChapterName__c,Treating_Medical_Professional_First_Name__c,ConvertedContactId,ConvertedAccountId,
+            for(Lead convertedLeads : [SELECT Id,Name,Why_do_you_feel_would_be_eligible_Wish__c,DOB__c,FirstName,LastName,createdDate,I_am_Recognized_To_Practice_As_a__c,Sibling_Detail__c,Medical_Provider_Category__c,ChapterName__r.Name,ChapterName__c,Treating_Medical_Professional_First_Name__c,ConvertedContactId,ConvertedAccountId,
                                        Other_Relationship_To_Child__c,Relationship_to_child__c,LeadSource,is_Family_Aware_of_Referral__c,Treating_Medical_Professional_Last_Name__c,Referrer_City__c,Referrer_Email__c,Referrer_FirstName__c,Referrer_Last_Name__c,Referrer_Phone__c,Referrer_Zip__c,Parent_First_Name__c,What_is_the_family_s_primary_spoken_lang__c,Parent_Last_Name__c,Email,Phone,City,CountryCode,PostalCode,StateCode,Street,Treating_Medical_Professional_Contact_Id__c,Medical_Professional_ContactId__c,Wish_Family_ContactId__c FROM Lead WHERE Id IN: convertedLeadIds]){
                                            leadFamilyMap.put(convertedLeads.Id,convertedLeads);
                                            convertedLeadMap .put(convertedLeads.ConvertedContactId,convertedLeads);
@@ -328,8 +328,10 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 
                 if(LeadMap.containsKey(convertLeads.getLeadId())) {
                     case newcase = new case();
-                    newcase .RecordTypeId = parentwishRecTypeId;
+                    newcase.RecordTypeId = parentwishRecTypeId;
                     newcase.contactId = convertLeads.getcontactId();
+                    newCase.lead__c = LeadMap.get(convertLeads.getLeadId()).id;
+                    newCase.Migrated_Record__c = LeadMap.get(convertLeads.getLeadId()).Migrated_Record__c;
                     newCase.Qualifying_Medical_Professional_Name__c=LeadMap.get(convertLeads.getLeadId()).Treating_Medical_Professional_First_Name__c +' '+LeadMap.get(convertLeads.getLeadId()).Treating_Medical_Professional_Last_Name__c;
                     newcase.Qualifying_Medical_Professional_Email__c=LeadMap.get(convertLeads.getLeadId()).Treating_Medical_Professional_Email__c;
                     if(conMap.containsKey(convertLeads.getcontactId()))
@@ -362,6 +364,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                         }
                     }
                     newcase.Status = 'Qualified';
+                    newCase.Hidden_Why_do_you_feel__c = LeadMap.get(convertLeads.getLeadId()).Why_do_you_feel_would_be_eligible_Wish__c;
                     newcase.Origin = 'Web';
                     if(LeadMap.get(convertLeads.getLeadId()).Is_We_Need_To_Expedite_The_Process__c == 'Yes') {
                         newCase.Rush__c = true;
@@ -1341,6 +1344,28 @@ leadRegionCodeValidationMap.get(defaultRegionLeadMap.get(inValidRegion.ChapterNa
         }
     }
     
+     //Create and assign the task to lead intake user when the lead status is updated with DNQ.
+    public static void createTaskforDNQLeads(Map<Lead,Id> lead_ChapterIdMap){
+        Map<Id,Id> leadIntakeUserMap = new Map<Id,Id>();
+        for(Account currRec : [SELECT Id,Intake_Manager__c FROM Account WHERE Id IN :lead_ChapterIdMap.Values()]){
+            leadIntakeUserMap.put(currRec.Id,currRec.Intake_Manager__c);
+        }
+                
+        Task newTask;
+        List<Task> newTaskList = new List<Task>();
+        for(Lead currLead:lead_ChapterIdMap.keyset()){
+            newTask = new Task();
+            newTask.Subject='Referral DNQ';
+            newTask.ActivityDate=System.today().addDays(3);
+            newTask.OwnerId=leadIntakeUserMap.get(currLead.ChapterName__c);
+            newTask.WhoId=currLead.Id;
+            newTaskList.add(newTask);
+       }
+       if(newTaskList.Size() > 0){
+           Insert newTaskList;
+       }
+     
+    }
     /*public static void CreateDiagnosisVerification(List<Lead> newLeadList, Set<String> conditionSescriptionSet) {
 Map<String, Id> conditionDescriptionMap = new Map<String, Id>();
 if(conditionSescriptionSet.size() > 0) {

@@ -93,6 +93,12 @@
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>

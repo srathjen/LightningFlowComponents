@@ -3502,11 +3502,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Hidden_Why_do_you_feel__c</field>
-            <table>Contact.npe01__Organizations__r.Cases</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Chapter_Medical_Advisor_Phone__c</field>
             <table>Contact.npe01__Organizations__r.Cases</table>
         </columns>

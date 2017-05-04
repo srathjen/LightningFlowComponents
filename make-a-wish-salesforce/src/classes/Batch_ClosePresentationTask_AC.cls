@@ -1,9 +1,9 @@
 /*****************************************************************************************
- Created By  : MST
- CreatedDate : 2/1/2017
- Author : MST Solutions
- Description : This class is used to close task with subject "Obtain itinerary and/or wish packet"
- when the due date is passed
+Created By  : MST
+CreatedDate : 2/1/2017
+Author : MST Solutions
+Description : This class is used to close task with subject "Obtain itinerary and/or wish packet"
+when the due date is passed
 **********************************************************************************************/
 global class Batch_ClosePresentationTask_AC implements Database.Batchable<sObject> {
     

@@ -52,6 +52,7 @@ public class WishBudgetForm_AC{
         disableTcode = true;
         pageBlockMode ='detail';
         caseId = ApexPages.currentPage().getParameters().get('CaseId');
+        WEtypeExpand=ApexPages.currentPage().getParameters().get('exp');
         System.debug('The parameter value is++++++++++'+caseId );
         retURLRecordId = caseId;
         participentSet = new Set<Id>();
@@ -336,10 +337,12 @@ public class WishBudgetForm_AC{
     }
     
     public PageReference addExpense() {
-    //WEtypeExpand='1collapsed';
-    
-    system.debug('Tansaction Code 1:' + TransCodesWrap);
-    system.debug('Tansaction Code 1:' + expenseType);
+        //WEtypeExpand='1collapsed';
+        //expenseType= apexpages.currentpage().getParameters().get('expenseType');
+        //WEtypeExpand=apexpages.currentpage().getParameters().get('WEtypeExpand');
+        system.debug('Tansaction Code 1:' + TransCodesWrap);
+        system.debug('Tansaction Code 2:' + expenseType);
+        system.debug('Tansaction Code 3:' + WEtypeExpand);
         List<Wish_Expense_Transaction_Code__c> transListW= TransCodesWrap.get(expenseType);
         if(transListW == null){
              ApexPages.Message myMsg = new ApexPages.Message(ApexPages.severity.ERROR, 'There is no active transaction code is available for ' + expenseType + '.' );
@@ -377,10 +380,12 @@ public class WishBudgetForm_AC{
         LoadData();
         summary();
         Totalsummary();
-        
-        PageReference pageRef = new PageReference('/apex/WishBudgetForm_VF?caseId='+caseId);
+        //PageReference pageRef = new PageReference('/apex/WishBudgetForm_VF?caseId='+caseId + '&exp=' + WEtypeExpand);
+        PageReference pageRef = new PageReference('/apex/WishBudgetForm_VF');
         //PageReference pageRef= SaveExpenses();
-        //pageRef.setRedirect(True);
+        pageRef.setRedirect(True);
+        pageRef.getParameters().put('caseId',caseId);
+        pageRef.getParameters().put('exp',WEtypeExpand);
         return pageRef ;
         //return null;
         

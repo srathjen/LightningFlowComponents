@@ -13,7 +13,7 @@ Trigger TimeSheetTrigger_AT on Time_sheet__c (before insert,before update, After
     {
         for(Time_sheet__c  newTimeSheetEntry : Trigger.new)
         {
-          if(newTimeSheetEntry.migrated_record__c == false)
+         if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
           {
             if(newTimeSheetEntry.Hours_spent__c > 0){
                 timeSheetList.add(newTimeSheetEntry);
@@ -27,7 +27,7 @@ Trigger TimeSheetTrigger_AT on Time_sheet__c (before insert,before update, After
     }
     if(Trigger.isBefore && Trigger.isupdate){
         for(Time_sheet__c  newTimeSheetEntry : Trigger.new){
-           if(newTimeSheetEntry.Migrated_Record__c == false)
+           if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
            {
             if((newTimeSheetEntry.Hours_spent__c) >0 && (newTimeSheetEntry.Hours_spent__c != trigger.oldmap.get(newTimeSheetEntry.id).Hours_spent__c)){
                 timeSheetList.add(newTimeSheetEntry);
@@ -42,7 +42,7 @@ Trigger TimeSheetTrigger_AT on Time_sheet__c (before insert,before update, After
     if(Trigger.isAfter && Trigger.isInsert){
      
         for(Time_sheet__c  newTimeSheetEntry : Trigger.new){
-          if(newTimeSheetEntry.Migrated_Record__c == false)
+         if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
           {
             if(newTimeSheetEntry.Hours_spent__c > 0){
                 timeSheetList.add(newTimeSheetEntry);
@@ -63,7 +63,7 @@ Trigger TimeSheetTrigger_AT on Time_sheet__c (before insert,before update, After
     if(Trigger.isAfter && Trigger.isUpdate){
       
         for(Time_sheet__c  newTimeSheetEntry : Trigger.new){
-         if(newTimeSheetEntry.migrated_record__c == false)
+        if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
          {
             if(newTimeSheetEntry.Hours_Hidden__c!= trigger.oldmap.get(newTimeSheetEntry.Id).Hours_Hidden__c){
                 timeSheetList.add(newTimeSheetEntry);

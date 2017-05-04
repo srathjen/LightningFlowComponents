@@ -366,7 +366,7 @@
             });
             // auto format postal code
             $(".postalcode").keydown(function(e){
-              if (($(this).val().length == 5) && (e.keyCode != 8)){
+              if (($(this).val().length == 5) && (e.keyCode != 8) && (e.keyCode != 9)){
                 // auto insert dash on 5th character keypress
                 $(this).val($(this).val() + "-");
               }

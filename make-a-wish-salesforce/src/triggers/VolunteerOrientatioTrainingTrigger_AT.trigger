@@ -15,7 +15,7 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         Set<Id> volnteerContactIdSet = new Set<Id>();
         for(Volunteer_Orientation_Training__c newVOL : Trigger.new)
         {
-          if(newVol.Migrated_Record__c == false)
+          if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
           {
             if(newVOL.Volunteer_Attendance__c != Null && newVOL.Volunteer_Attendance__c == 'Completed' && newVol.Type__c == 'Training')
             {
@@ -42,7 +42,7 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         list<Contact> contacttList = new list<Contact>();
         for(Volunteer_Orientation_Training__c currRec : Trigger.new)
         {
-           if(currRec.Migrated_Record__c == false)
+           if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
            {
                 if(currRec.Volunteer__c != Null){
                     volOTSet.add(currRec.Volunteer__c);
@@ -64,7 +64,7 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         }
         
       for(Volunteer_Orientation_Training__c currRec : Trigger.new){
-          if(currRec.Migrated_Record__c == false)
+         if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
           {
             if(currRec.Volunteer__c != Null && contactInfoMap.containsKey(currRec.Volunteer__c)){
                 currRec.Account_Name__c = contactInfoMap.get(currRec.Volunteer__c).Account.Name;

@@ -2430,16 +2430,15 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Hidden_Why_do_you_feel__c</fullName>
-        <description>It is used to capture the why do you feel as hidden value</description>
+        <description>Used to hold why do you feel value from wish child record</description>
         <externalId>false</externalId>
-        <formula>&apos;&apos;</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Why do you feel</label>
-        <required>false</required>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
     </fields>
     <fields>
         <fullName>Hidden_Wish_Child_City__c</fullName>
@@ -7366,7 +7365,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <searchResultsAdditionalFields>CASES.CREATED_DATE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
     </searchLayouts>
-    <sharingModel>Read</sharingModel>
+    <sharingModel>Private</sharingModel>
     <validationRules>
         <fullName>Absent_Parent_Form_Validation</fullName>
         <active>false</active>
@@ -7433,10 +7432,10 @@ arrangements/unique circumstances for any requested wish participant not residin
     </validationRules>
     <validationRules>
         <fullName>Case_Wish_Determined_Status_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>This validation will fire when the case status is wish determined and Meet PWL Criteria is empty</description>
         <errorConditionFormula>AND(ISPICKVAL( Status ,&apos;Wish Determined&apos;), 
-ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
+ISBLANK(TEXT(Meet_PWL_Criteria__c)), ISPICKVAL(Sub_Status__c,&apos;Within Policy&apos;))</errorConditionFormula>
         <errorDisplayField>Meet_PWL_Criteria__c</errorDisplayField>
         <errorMessage>Meet PWL Criteria needs to be present when wish status is Wish Determined</errorMessage>
     </validationRules>
@@ -7490,7 +7489,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
     <validationRules>
         <fullName>National_type_editable</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(ISPICKVAL( Status , &apos;Wish Determined&apos;) , ISCHANGED( Wish_Type__c ), NOT($Permission.National_Type_editable),NOT Migrated_Record__c, NOT(ISCHANGED(Status)))</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL( Status , &apos;Wish Determined&apos;) ,ISCHANGED( Wish_Type__c ),NOT(ISBLANK(TEXT(PRIORVALUE(Wish_Type__c )))), ISPICKVAL(Sub_Status__c,&apos;Within Policy&apos;),  NOT($Permission.National_Type_editable),NOT(ISCHANGED(Status)))</errorConditionFormula>
         <errorMessage>Please reach out to your supervisor to change the wish type and open a new case.</errorMessage>
     </validationRules>
     <validationRules>
@@ -7500,6 +7499,13 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)))</errorConditionFormula>
         <errorConditionFormula>AND(Passports__c = true, ISBLANK(  Date_Received_for_Passports__c),Migrated_Record__c = false)</errorConditionFormula>
         <errorDisplayField>Date_Received_for_Passports__c</errorDisplayField>
         <errorMessage>There should be value on Date - Passports when wish status is Completed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Planing_Case_Form_Validation</fullName>
+        <active>true</active>
+        <description>This validation rule will fire when the required forms are checked and corresponding date value is null.</description>
+        <errorConditionFormula>AND($RecordType.Name = &quot;Wish Planning&quot;,ISPICKVAL(Status,&apos;Closed&apos;),OR(AND(Wish_Child_Form__c = True,ISNULL(Date_Wish_Child_Form__c )),AND(Wish_Family_Form__c = True,ISNULL(Date_Wish_Family_Form__c)),AND(Wish_Information_Form__c = True,ISNULL(Date_Wish_Information_Form__c)),AND(Liability_Release_and_Authorization__c = True,ISNULL(Date_Liability_Release_Authorization__c)),AND(Communication_Profile__c = True,ISNULL(Date_Received_for_Communication_Profile__c)),AND(Guardianship_Document__c = True,ISNULL(Date_Received_for_Guardianship_Document__c)),AND(Absent_Parent_Form__c = True,ISNULL(Date_Received_for_Absent_Parent_Form__c)),AND(Single_Parent_Form__c = True,ISNULL(Date_Received_for_Single_Parent_Form__c)),AND(Wish_Safety_Authorization_Part_B_Form__c = True,ISNULL(Date_Received_for_Wish_Safety_Authorizat__c)),AND(Child_s_Medical_Summary_Form__c = True,ISNULL(Date_Received_for_Child_s_Medical_Summar__c)),AND(Passports__c = True,ISNULL(Date_Received_for_Passports__c)),AND(Visas__c,True,ISNULL(Date_Received_for_Visas__c)),AND(Entertainment_Sports_Wish_LOU__c = True,ISNULL(Date_Received_for_Entertainment_Sports__c))))</errorConditionFormula>
+        <errorMessage>Please fill the value for  corresponding date fields.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Referral_date_Validation</fullName>

@@ -328,7 +328,7 @@ p.saved{padding:1rem !important}
                                     <div class="form-group row postalcode">
                                         <div class="col-sm-3"><label for="employer-zip" aria-labelledby="Employer Zip">Zip</label></div>
                                         <div class="col-sm-6 ">
-                                            <apex:inputText styleClass="form-control numbers-only postalcode" id="zipcode" value="{!currentVolunteer.Zip_Employer__c}" html-placeholder="00000-0000" maxlength="10" html-minlength="5"/>
+                                            <apex:inputText styleClass="form-control numbers-only postalcode1 notrquired" id="zipcode" value="{!currentVolunteer.Zip_Employer__c}" html-placeholder="00000-0000" maxlength="10" html-minlength="5"/>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -1089,8 +1089,9 @@ p.saved{padding:1rem !important}
                             maxlength: "We're sorry, you've reached the maximum allowed characters"
                         }
                     });
-                });
-                $("input.postalcode").each(function(){
+                }); 
+               
+            $("input.postalcode").each(function(){
               $(this).rules("add", {
                   required: true,
                   zipcode: true,
@@ -1136,8 +1137,8 @@ p.saved{padding:1rem !important}
                     }
                 });
                  // auto format postal code
-            $(".postalcode").keydown(function(e){
-              if (($(this).val().length == 5) && (e.keyCode != 8)){
+            $(".postalcode,.notrquired").keydown(function(e){
+              if (($(this).val().length == 5) && (e.keyCode != 8) && (e.keyCode != 9)){
                 // auto insert dash on 5th character keypress
                 $(this).val($(this).val() + "-");
               }
@@ -1146,6 +1147,9 @@ p.saved{padding:1rem !important}
                 $(this).val($(this).val().substring(0, $(this).val().length - 1));
               }
             });
+            
+            
+            
                 
                 $("select.f-state").each(function(){
                   $(this).chosen().change(function(){
@@ -1183,9 +1187,22 @@ p.saved{padding:1rem !important}
               });
             } formValidationRules();
             
-            jQuery.validator.addMethod("zipcode", function(value, element) {
-          return this.optional(element) || /^\d{5}(?:-\d{1,4})?$/.test(value);
+          $('.postalcode1').rules("add", {
+                  required: false,
+                  zipcode: true,
+                  messages: {
+                      //required: "Oops! Please enter a valid US postal code",
+                      minlength: "Oops! Please enter a minimum of 5 digits",
+                      maxlength: "We're sorry, you've reached the maximum allowed characters"
+                  }
+         });
+       
+        
+         jQuery.validator.addMethod("zipcode", function(value, element) {
+          return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
         }, "Oops! Please enter a valid US postal code");
+        
+        
         });
         </script>
         

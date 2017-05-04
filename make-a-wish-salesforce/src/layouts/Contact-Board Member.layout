@@ -477,9 +477,11 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Date_Requested__c</fields>
         <fields>Date_Completed__c</fields>
         <fields>Date__c</fields>
         <fields>Status__c</fields>
+        <fields>Current__c</fields>
         <relatedList>Background_check__c.Volunteer__c</relatedList>
     </relatedLists>
     <relatedLists>

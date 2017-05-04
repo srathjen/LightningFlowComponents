@@ -24,6 +24,13 @@
         <value>30</value>
     </labels>
     <labels>
+        <fullName>Bio_Sheet_DDP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Bio Sheet DDP</shortDescription>
+        <value>a1a360000033dtX</value>
+    </labels>
+    <labels>
         <fullName>COI_no_of_expiration_days</fullName>
         <categories>It holds the expiration duration for COI</categories>
         <language>en_US</language>
@@ -45,6 +52,20 @@
         <protected>false</protected>
         <shortDescription>ContactIdValue</shortDescription>
         <value>0033600000Z3S0Z</value>
+    </labels>
+    <labels>
+        <fullName>DNQ_Letter_DDP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DNQ Letter DDP</shortDescription>
+        <value>a1a360000033dtW</value>
+    </labels>
+    <labels>
+        <fullName>DNQ_Letter_Spanish_DDP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DNQ Letter Spanish DDP</shortDescription>
+        <value>a1a360000033dtY</value>
     </labels>
     <labels>
         <fullName>Instance_Url</fullName>
@@ -137,6 +158,13 @@
         <value>http://make-a-wish.force.com/</value>
     </labels>
     <labels>
+        <fullName>Sneak_Peek_DDP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Sneak Peek DDP</shortDescription>
+        <value>a1a360000033dtb</value>
+    </labels>
+    <labels>
         <fullName>Volunteer_Opportunity_Id</fullName>
         <language>en_US</language>
         <protected>false</protected>
@@ -149,6 +177,13 @@
         <protected>false</protected>
         <shortDescription>Welcome Letter DDP</shortDescription>
         <value>a1a360000024ayM</value>
+    </labels>
+    <labels>
+        <fullName>Welcome_Letter_Spanish_DDP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Welcome Letter Spanish DDP</shortDescription>
+        <value>a1a360000033dtZ</value>
     </labels>
     <labels>
         <fullName>WishClearence</fullName>
@@ -164,5 +199,12 @@
         <protected>false</protected>
         <shortDescription>Wish Receipt DDP</shortDescription>
         <value>a1a360000022UI9</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Receipt_Spanish</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Receipt Spanish DDP</shortDescription>
+        <value>a1a360000033dta</value>
     </labels>
 </CustomLabels>

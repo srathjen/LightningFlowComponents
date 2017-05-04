@@ -12,7 +12,7 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
         Map<Id,Contact> conMap = new Map<Id, Contact>();
         for(Background_check__c  currRec : Trigger.new)
         {
-          if(currRec.Migrated_record__c == false)
+           if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
           {
                if(!Test.isRunningTest())
                {
@@ -52,7 +52,7 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
       //  Map<String,List<Background_check__c>> bgcMap = new Map<String,List<Background_check__c>>();
         for(Background_check__c  currRec : Trigger.new)
         {
-          if(currRec.Migrated_Record__c == false)
+          if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
           {
             if(currRec.current__c == True)
             {

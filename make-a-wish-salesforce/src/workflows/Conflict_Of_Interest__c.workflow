@@ -56,7 +56,8 @@
             <field>Hidden_Volunteer_Contact_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/COI_Expiring_30_Days_Email_Template</template>
     </alerts>
     <alerts>

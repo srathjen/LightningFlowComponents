@@ -16,6 +16,9 @@
         <field>Contact.Diagnosis__c</field>
     </columns>
     <columns>
+        <field>Case.Wish_Assist__c</field>
+    </columns>
+    <columns>
         <field>Case.Wish_Type__c</field>
     </columns>
     <columns>

@@ -123,6 +123,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>AttachmentUploadController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>AttachmentUploadController_Test</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>AwardsRecognitionTrigger_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -156,6 +164,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>Batch_ClosePresentationTask_AC</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Batch_ClosePresentationTask_AC_Schedule</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -3189,7 +3201,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Case.Hidden_Why_do_you_feel__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7475,6 +7487,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Lead.Copy_1_DNQ_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Copy_1_Lead_Referred_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Lead.Created_Date_Time__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -10814,6 +10836,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Volunteer_Orientation_Training__c.Location__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
         <readable>true</readable>
@@ -13220,6 +13247,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishChildForm_VF</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>WishChildPhoto_VF</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

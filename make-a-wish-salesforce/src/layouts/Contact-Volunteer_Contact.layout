@@ -74,14 +74,6 @@
                 <behavior>Edit</behavior>
                 <field>Gender__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>is_Active_Volunteer__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>is_Application__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -588,6 +580,7 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Date_Requested__c</fields>
         <fields>Date_Completed__c</fields>
         <fields>Date__c</fields>
         <fields>Status__c</fields>

@@ -1,8 +1,11 @@
+/***************************************************************************************************
+Author      : MST Solutions
+Description : This class is used add all links to navigate to the particuar forms
+*****************************************************************************************************/
 public class WishRelatedLinks_AC {
     
     public Case currentCaseRec{get;set;}
     public String WishFamilyForm{get;set;}
-    public String WishReceipt{get;set;}
     public String LiabilityFrom{get;set;}
     public String contactInfo{get;set;}  
     public String miniorParticipant{get;set;} 
@@ -14,8 +17,21 @@ public class WishRelatedLinks_AC {
     public String ShoppingSpree{get;set;}
     public List<case> querychildCase;  
     Public string ddpId{get;set;}
-    public string welcomeLetter{get;set;}
+    public string dnqLetterDDP{get;set;}
     public string welcomeletterDDP{get;set;}
+    public string bioSheetDDP{get;set;}
+    public string sneakPeekDDP{get;set;}
+    public string dnqLetterSpanishDDP{get;set;}
+    public string welcomeLetterSpanishDDP{get;set;}
+    public string wishReceiptSpanishDDP{get;set;}
+    public String WishReceipt{get;set;}
+    public string welcomeLetter{get;set;}
+    public string dnqLetter{get;set;}
+    public string bioSheet{get;set;}
+    public string sneakPeek{get;set;}
+    public string wishReceiptSpanish{get;set;}
+    public string dnqLetterSpanish{get;set;}
+    public string welcomeLetterSpanish{get;set;}
     public string MergedDocuments{get;set;}
     public String recpCheck {get;set;}
     
@@ -27,30 +43,36 @@ public class WishRelatedLinks_AC {
         String wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
         querychildCase = new List<Case>();
         currentCaseRec= (Case)controller.getRecord();
-        //ddpId = 'a1k5B000000CgLU';
         ddpId = Label.Wish_Receipt_DDP;
-        //welcomeletterDDP = 'a1a7A000000lCR6';
         welcomeletterDDP = Label.Welcome_Letter_DDP;
-        
+        dnqLetterDDP = Label.DNQ_Letter_DDP;
+        bioSheetDDP = Label.Bio_Sheet_DDP;
+        sneakPeekDDP = Label.Sneak_Peek_DDP;
+        dnqLetterSpanishDDP = Label.DNQ_Letter_Spanish_DDP;
+        welcomeLetterSpanishDDP = Label.Welcome_Letter_Spanish_DDP;
+        wishReceiptSpanishDDP = Label.Wish_Receipt_Spanish; 
         List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentCaseRec.Id AND Status =: 'Pending' AND ProcessDefinition.Name =: 'Wish Child Form Approval Process']; 
         
         system.debug('@@@@ currentCaseRec @@@@@@@'+currentCaseRec);
         if(currentCaseRec.RecordTypeId == parentWishRecordTypeId ){
-            
-            
             WishFamilyForm = '/apex/WishChildForm_VF?id='+currentCaseRec.Id;
-            
             contactInfo = '/apex/RelationshipsViewer_VF?recId='+currentCaseRec.Id;
             LiabilityFrom = '/apex/WishLiabilityForm_VF?id='+currentCaseRec.Id;
             miniorParticipant = '/apex/WishLiabilityMinorParticipant_VF?id='+currentCaseRec.Id;
             absentParentForm = '/apex/AbsentForm_VF?id='+currentCaseRec.Id; 
             celebrityForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
-            singleForm = '/apex/SingleForm_VF?id='+currentCaseRec.Id;
+            singleForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
             wishClearence = '/apex/WishClearanceSendNow_VF?id='+currentCaseRec.Id; 
             ChildMedicalForm = '/apex/WishChildSummary_VF?id='+currentCaseRec.Id;
             ShoppingSpree =  '/apex/Itinerary_VF?id='+currentCaseRec.Id;
             MergedDocuments = '/apex/MergedDocuments_VF?id='+currentCaseRec.Id;
             welcomeLetter = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+welcomeletterDDP;
+            dnqLetter = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+dnqLetterDDP;
+            bioSheet = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+bioSheetDDP;
+            sneakPeek = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+sneakPeekDDP;
+            wishReceiptSpanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+wishReceiptSpanishDDP;
+            dnqLetterSpanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+dnqLetterSpanishDDP;
+            welcomeLetterSpanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+welcomeLetterSpanishDDP;
             
         }
         
@@ -58,16 +80,14 @@ public class WishRelatedLinks_AC {
         if(!querychildCase.isEmpty() && querychildCase[0].Id != Null){
             WishReceipt = '/apex/loop__looplus?eid='+querychildCase[0].ParentId+'&accountId='+querychildCase[0].Parent.AccountId+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+ddpId;
         }
-        
-        
     }     
     
     public pageReference DisplayError(){
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,' This record is already in approval process'));
         return null;
     }
-    
-      public void updateSenderInfo() {
+    //This method is used to update the receipient name and email in whish child contact from the relationship record whenever clicks the link.   
+    public void updateSenderInfo() {
         List<Case> caseInfo = [SELECT Id, ContactId FROM Case WHERE Id = : currentCaseRec.Id];
         List<Contact> contactList = [SELECT Id FROM Contact WHERE Id =: caseInfo[0].ContactId LIMIT 1];
         contactList[0].Recipient_Email__c = '';

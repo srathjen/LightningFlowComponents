@@ -1,27 +1,54 @@
+<!--/***************************************************************************************************
+Author      : MST Solutions
+Description : This vf page contains all the custom links in one section on the paren wish for each from
+***************************************************************************************************** -->
 <apex:page standardController="Case" extensions="WishRelatedLinks_AC">
     <apex:form id="frm">
         <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"/>
-        <div style="margin-left:40%; font-size: 40px; color:blue; margin-top: 2%;">Merged Documents</div>
+        <div style="margin-left:30%; font-size: 40px; color:blue; margin-top: 2%;">Merged Documents</div>
         <apex:outputPanel rendered="{!$Profile.Name !='Active Volunteer (Member)' && $Profile.Name != 'Active Volunteer (Login)'}">
             <apex:outputPanel rendered="{!WishReceipt != Null}">
-                <div style="margin-left:10%; height:1%;margin-top: 2%;"><a href="#" class="sd">Wish Receipt</a></div>
+                <div style="margin-left:50%; height:1%;margin-top: 5%;"><a href="#" class="sd">Wish Receipt</a></div>
+                <div style="margin-left:10%; margin-top: 0%;"><a href="#" class="sd1"> Wish Receipt Spanish</a></div> 
             </apex:outputPanel>
+            <div style="margin-left:50%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!welcomeLetterSpanish}"> Welcome Letter Spanish</apex:outputLink></div>
             <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!welcomeLetter}">Welcome Letter</apex:outputLink></div>
+            <div style="margin-left:50%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!dnqLetter}"> DNQ Letter</apex:outputLink></div>
+            <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!dnqLetterSpanish}"> DNQ Letter Spanish</apex:outputLink></div>
+           <!-- <div style="margin-left:50%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!sneakPeek}"> Sneak Peek</apex:outputLink></div> -->
+            <div style="margin-left:50%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!bioSheet}"> Bio Sheet</apex:outputLink></div>
+
+            
         </apex:outputPanel>
         <apex:outputPanel id="getVal">
             <input type="hidden" value="{!recpCheck}" class="hidenfld"/>
-            <input type="hidden" value="{!WishReceipt}" class="hidenfld1"/>        
+            <input type="hidden" value="{!WishReceipt}" class="hidenfld1"/>  
+             <input type="hidden" value="{!wishReceiptSpanish}" class="hidenfld2"/>    
         </apex:outputPanel>
         <apex:actionFunction name="RefreshPage" action="{!updateSenderInfo}" reRender="getVal" onComplete="validateForm();"/>
+        <apex:actionFunction name="RefreshPageSpanish" action="{!updateSenderInfo}" reRender="getVal" onComplete="validateSpanishForm();"/>
+
         <script>
         $(".sd").on('click', function() {
             RefreshPage();
         });
         function validateForm() {
-            if($('.hidenfld').val() == 'Allow') {
+             
+             if($('.hidenfld').val() == 'Allow') {
                 window.open($('.hidenfld1').val());
             } else if($('.hidenfld').val() == 'Not Allow') {
-                alert('There should be atleast one recipient with valid email and name');
+                 alert('There should be atleast one ecipient with valid email and name');
+            }
+        }
+        
+           $(".sd1").on('click', function() {
+            RefreshPageSpanish();
+        });
+        function validateSpanishForm() {
+            if($('.hidenfld').val() == 'Allow') {
+                window.open($('.hidenfld2').val());
+            } else if($('.hidenfld').val() == 'Not Allow') {
+                 alert('There should be atleast one recipient with valid email and name');
             }
         }
         </script>

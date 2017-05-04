@@ -651,9 +651,52 @@ communityUserIdSet.add(communityUser.Id);
             
         }
         
-        
-        
-        
     }
     
+     //Update the Lead Closed Date.
+    public static void updateLeadCloseDate(List<Id> leadIdList){
+        List<Lead> updateLeadList = new List<Lead>();
+        
+        for(Lead currLead : [SELECT Id,Closed_Date__C FROM Lead WHERE Id IN :leadIdList]){
+            currLead.Closed_Date__c = System.Today();
+            updateLeadList.add(currLead);
+        }
+        if(updateLeadList.Size() > 0)
+            Update updateLeadList;
+    }
+	
+	
+	//Used to update contact to the given task
+    public static void UpdateContactToTask(List<Task> matchContactTaskList, Set<Id> taskParentIdSet) {
+        
+        Constant_AC  constant = new Constant_Ac();
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        Id planningWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+        Map<Id, Id> caseContactInfoMap = new Map<Id, Id>();
+        Map<Id,Id> plainingParentInfoMap = new Map<Id, Id>();
+        for(Case parentCaseInfo : [SELECT Id, ContactId, parentId, parent.ContactId, RecordTypeId FROM Case WHERE Id IN : taskParentIdSet]) {
+            if(parentCaseInfo.RecordTypeId == parentWishRecordTypeId) {
+                caseContactInfoMap.put(parentCaseInfo.Id, parentCaseInfo.ContactId);
+            } else if(parentCaseInfo.RecordTypeId == planningWishRecordTypeId) {
+                caseContactInfoMap.put(parentCaseInfo.parentId, parentCaseInfo.parent.ContactId);
+                plainingParentInfoMap.put(parentCaseInfo.Id, parentCaseInfo.parentId);
+            }
+            
+        }
+        
+        for(Task mapContactInfo : matchContactTaskList) {
+            if(caseContactInfoMap.containsKey(mapContactInfo.WhatId) && mapContactInfo.Subject != 'Budget needs to be revised' && mapContactInfo.Subject != 'Budget is approved') {
+                mapContactInfo.WhoId = caseContactInfoMap.get(mapContactInfo.WhatId);
+            } else if(mapContactInfo.Subject == 'Budget needs to be revised' || mapContactInfo.Subject == 'Budget is approved') {
+                if(plainingParentInfoMap.containsKey(mapContactInfo.WhatId)) {
+                    if(caseContactInfoMap.containsKey(plainingParentInfoMap.get(mapContactInfo.WhatId))) {
+                        mapContactInfo.WhoId = caseContactInfoMap.get(plainingParentInfoMap.get(mapContactInfo.WhatId));
+                        mapContactInfo.WhatId = plainingParentInfoMap.get(mapContactInfo.WhatId);
+                    }
+                    
+                }
+            }
+        }
+        
+    }
 }

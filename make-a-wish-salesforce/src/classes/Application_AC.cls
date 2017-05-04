@@ -474,7 +474,18 @@ public class Application_AC{
             '                    "anchorYOffset": "0.1",'+
             '                    "anchorIgnoreIfNotPresent": "false",'+
             '                    "anchorUnits": "inches"'+
-            '                }]'+
+            '                }],'+
+            '                "dateSignedTabs": [{'+
+            '                      "anchorString": "~date",'+
+            '                       "anchorXOffset": "0",'+
+            '                       "fontSize":      "Size14",'+
+            '                       "fontColor":     "Black",'+
+            '                        "anchorYOffset": "0",'+
+            '                        "anchorIgnoreIfNotPresent": "false",'+
+            '                        "xPosition": "100",'+
+            '                        "yPosition": "72",'+
+            '                        "anchorUnits": "inches"'+
+            '                    }]'+
             '            }'+
             '    }]'+
             '  }'+

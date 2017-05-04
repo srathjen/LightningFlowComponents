@@ -62,6 +62,10 @@
         <name>LMS_Enrollment_Id__c</name>
     </fields>
     <fields>
+        <label><!-- Location --></label>
+        <name>Location__c</name>
+    </fields>
+    <fields>
         <label><!-- Migrated Record --></label>
         <name>Migrated_Record__c</name>
     </fields>

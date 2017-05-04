@@ -19,8 +19,8 @@
             </approver>
             <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
         </assignedApprover>
-        <label>Wish Child Form Approve Step</label>
-        <name>Wish_Child_Form_Approve_Step</name>
+        <label>Wish Paperwork Packet Approve Step</label>
+        <name>Wish_Paperwork_Packet_Approve_Step</name>
     </approvalStep>
     <description>If the user completed the Wish Child Form and Hit Save on Wish Information Section, then wish record would automatically assign to Case Owner for Approval Process.</description>
     <enableMobileDeviceAccess>true</enableMobileDeviceAccess>
@@ -32,7 +32,7 @@
     </finalApprovalActions>
     <finalApprovalRecordLock>false</finalApprovalRecordLock>
     <finalRejectionRecordLock>false</finalRejectionRecordLock>
-    <label>Wish Child Form Approval Process</label>
+    <label>Wish Paperwork Packet</label>
     <recordEditability>AdminOrCurrentApprover</recordEditability>
     <showApprovalHistory>true</showApprovalHistory>
 </ApprovalProcess>

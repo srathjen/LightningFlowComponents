@@ -184,6 +184,14 @@
         <name>Convulsive_Disorders__c</name>
     </fields>
     <fields>
+        <label><!-- Copy 1 - DNQ Date --></label>
+        <name>Copy_1_DNQ_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Copy 1 - Lead Referred Date --></label>
+        <name>Copy_1_Lead_Referred_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- Created Date/Time --></label>
         <name>Created_Date_Time__c</name>
     </fields>
@@ -1270,6 +1278,10 @@
             <section>Referral Source Information</section>
         </sections>
     </layouts>
+    <validationRules>
+        <errorMessage><!-- Please Enter Full Address (City, State, Street and Postal Code), Phone Number  and Gender. --></errorMessage>
+        <name>Lead_Address_Phone_and_Gender_Validation</name>
+    </validationRules>
     <validationRules>
         <errorMessage><!-- Please Enter Full Address (City, State, Street and Postal Code) --></errorMessage>
         <name>Lead_Address_Validation</name>

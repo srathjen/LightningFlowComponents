@@ -6,7 +6,7 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert)
         Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Wish Family').getRecordTypeId();
         for(npe4__Relationship__c newRecord :trigger.new)
         {
-            if(newRecord.Migrated_Record__c == false)
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
                 relatedContactId.add(newRecord.npe4__RelatedContact__c);
             }
@@ -40,7 +40,7 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert)
             List<npe4__Relationship__c > relationShipListtoDelete = new List<npe4__Relationship__c>();
             for(npe4__Relationship__c newRecord :trigger.new)
             {
-                if(newRecord.Migrated_Record__c == false)
+                if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
                 {
                     
                     if(newRecord.npe4__Contact__c != Null && newRecord.npe4__Type__c== 'Medical Professional' && newRecord.Qualifying_Medical_Professional__c == true && newRecord.npe4__Status__c == 'Active'){

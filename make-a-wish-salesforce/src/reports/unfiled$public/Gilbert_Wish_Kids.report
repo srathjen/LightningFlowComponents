@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>SUBJECT</field>
-    </columns>
-    <columns>
         <field>ACCOUNT.NAME</field>
     </columns>
     <columns>
         <field>CONTACT.NAME</field>
+    </columns>
+    <columns>
+        <field>Case.Age__c</field>
     </columns>
     <columns>
         <field>CONTACT2.CITY</field>
@@ -19,13 +19,22 @@
         <field>PHONE3</field>
     </columns>
     <columns>
+        <field>Contact.Preferred_Phone__c</field>
+    </columns>
+    <columns>
         <field>CONTACT.EMAIL</field>
+    </columns>
+    <columns>
+        <field>Case.Start_Date__c</field>
     </columns>
     <columns>
         <field>Case.End_Date__c</field>
     </columns>
     <columns>
-        <field>Case.Start_Date__c</field>
+        <field>Case.Wish_Type__c</field>
+    </columns>
+    <columns>
+        <field>DESCRIPTION</field>
     </columns>
     <filter>
         <criteriaItems>
@@ -39,6 +48,12 @@
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Yes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.npsp__Deceased__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>

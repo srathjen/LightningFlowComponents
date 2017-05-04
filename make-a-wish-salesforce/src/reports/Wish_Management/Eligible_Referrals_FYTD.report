@@ -28,7 +28,25 @@
         <field>CONTACT.NAME</field>
     </columns>
     <columns>
+        <field>Contact.Referral_Age__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Current_Age__c</field>
+    </columns>
+    <columns>
         <field>STATUS</field>
+    </columns>
+    <columns>
+        <field>Case.Sub_Status__c</field>
+    </columns>
+    <columns>
+        <field>Case.Copy_1_Referral_Date__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Part_A_Sent__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Part_A_Received__c</field>
     </columns>
     <columns>
         <field>Case.Qualified_Date__c</field>
@@ -46,7 +64,16 @@
         <field>Contact.Inquiry_Referral_Method__c</field>
     </columns>
     <columns>
+        <field>CONTACT2.CITY</field>
+    </columns>
+    <columns>
         <field>Case.Region__c</field>
+    </columns>
+    <columns>
+        <field>Account.PrimaryLanguage__c</field>
+    </columns>
+    <columns>
+        <field>Case.Rush__c</field>
     </columns>
     <description>Eligible Referrals received in current Fiscal Year.</description>
     <filter>
@@ -57,15 +84,15 @@
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
-            <column>CREATED_ALIAS</column>
+            <column>Case.Wish_Assist__c</column>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
-            <value>iuser</value>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
-        <dateGranularity>FiscalQuarter</dateGranularity>
+        <dateGranularity>Month</dateGranularity>
         <field>Case.Referral_Date__c</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>

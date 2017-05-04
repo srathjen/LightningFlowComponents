@@ -30,4 +30,10 @@ public class Batch_ClosePresentationTask_AC_Test {
             Test.stopTest();
         }
     }
+    public static testmethod void testschedule(){
+        String CRON_EXP = '0 0 1 * * ? *';
+        Test.startTest();
+        System.schedule('Batch_ClosePresentationTask_AC_Schedule', CRON_EXP, new Batch_ClosePresentationTask_AC_Schedule());
+        Test.stopTest();
+    }
 }

@@ -89,7 +89,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>NWE_Zip__c</field>
+                <field>Zip__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>

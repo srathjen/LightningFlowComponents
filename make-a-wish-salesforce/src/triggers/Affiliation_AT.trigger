@@ -92,7 +92,7 @@ trigger Affiliation_AT on npe5__Affiliation__c (Before Insert,Before Update,Afte
             Set<id> VolunteerOppIdSet=new Set<id>();
             Map<String,String> memberRemoveMap = new Map<String,String>();
             for(npe5__Affiliation__c modifiedAffiliation : Trigger.New) {
-               if(modifiedAffiliation.Migrated_Record__c == False ){
+                if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null){
                     if(modifiedAffiliation.npe5__Status__c == 'Active' && Trigger.oldMap.get(modifiedAffiliation.Id).npe5__Status__c != modifiedAffiliation.npe5__Status__c) {
                         volunteerContactIdsSet.add(modifiedAffiliation.npe5__Contact__c);
                         affilationsList.add(modifiedAffiliation);

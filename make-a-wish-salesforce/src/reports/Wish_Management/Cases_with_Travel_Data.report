@@ -4,6 +4,9 @@
         <field>Case$CaseNumber</field>
     </columns>
     <columns>
+        <field>Case$Wish_Type__c</field>
+    </columns>
+    <columns>
         <field>Case.Travel_Data__r$Name</field>
     </columns>
     <columns>
@@ -11,6 +14,12 @@
     </columns>
     <columns>
         <field>Case.Travel_Data__r$Reservation_Name__c</field>
+    </columns>
+    <columns>
+        <field>Case.Travel_Data__r$Airline__c</field>
+    </columns>
+    <columns>
+        <field>Case.Travel_Data__r$Flight__c</field>
     </columns>
     <columns>
         <field>Case.Travel_Data__r$Departure_Date__c</field>
@@ -31,17 +40,9 @@
         <field>Case.Travel_Data__r$Destination__c</field>
     </columns>
     <columns>
-        <field>Case.Travel_Data__r$Flight__c</field>
-    </columns>
-    <columns>
         <field>Case.Travel_Data__r$Confirmation__c</field>
     </columns>
     <format>Summary</format>
-    <groupingsDown>
-        <dateGranularity>Day</dateGranularity>
-        <field>Case.Travel_Data__r$Airline__c</field>
-        <sortOrder>Asc</sortOrder>
-    </groupingsDown>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>
         <field>Case$Hidden_Wish_Child_Full_Name__c</field>

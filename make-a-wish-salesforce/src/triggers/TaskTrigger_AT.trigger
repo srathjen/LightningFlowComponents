@@ -27,6 +27,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         Set<Id> caseIds = new Set<Id>();
         Map<Id,Task> followUpTaskMap = new Map<Id,Task>();
         List<Task> validateTaskList = new List<Task>();
+        List<Id> leadIdList = new List<Id>();
         Set<Id> followUpTaskOwnerIdSet = new Set<Id>();
         
         for(Task updatedTask : Trigger.New) {
@@ -53,6 +54,8 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                 completedTaskParentIdSet.add(updatedTask.WhatId);
                 
             }
+            
+            
             if(updatedTask.Status == 'Completed' && Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.RecordTypeId == wishGrantTaskRT) {
                 wishGrantTaskWhatIdSet.add(updatedTask.WhatId);
             }
@@ -81,6 +84,11 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Review photos/videos')) {
                 
                 uploadParentTaskIdMap.put(updatedTask.WhatId,updatedTask.OwnerId);
+            }
+            
+              //Update the Lead Closed Date.
+            if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Referral DNQ')){
+                leadIdList.add(updatedTask.whoId);
             }
             
             if(followUpTaskMap.size() > 0) {
@@ -119,6 +127,9 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         if(validateTaskList.size() > 0 && completedTaskParentIdSet.size() > 0) {
             TaskHandler.autoCloseTask(validateTaskList,completedTaskParentIdSet);
         }
+        if(leadIdList.Size() > 0){
+            TaskHandler.updateLeadCloseDate(leadIdList);
+        }
     }
     
     // Task Assign to Volunteer and Email Merge Fields update.
@@ -134,13 +145,19 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         set<ID> contactIdset = new set<ID>();
         Map<Id,Contact> contactInfoMap = new Map<Id,Contact>();
         List<Task> updateTaskList = new List<Task>();
-        
+        List<Task> matchContactTaskList = new List<Task>();
+        Set<Id> taskParentIdSet = new Set<Id>();
         
         for(Task updatedTask : Trigger.New) {
             string contactId = updatedTask.WhoId;
             
             if(updatedTask.RecordTypeId == wishGrantTaskRT || updatedTask.RecordTypeId == determinationTaskRT) {
                 updatedTask.IsVisibleInSelfService = true;
+            }
+            if(updatedTask.subject == 'Budget is approved' || updatedTask.subject == 'Budget needs to be revised' || updatedTask.subject == 'Follow-up on wish clearance' || updatedTask.subject == 'Interview date not set'
+               || updatedTask.subject == 'Wish Child Birthday Reminder' || updatedTask.subject == 'Wish Family Packet not submitted') {
+                   matchContactTaskList.add(updatedTask);
+                   taskParentIdSet.add(updatedTask.WhatId);
             }
             
             if(updatedTask.Subject == 'Wish Child Birthday Reminder') {
@@ -156,6 +173,9 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             
         }
         
+        if(matchContactTaskList.size() > 0 && taskParentIdSet.size() > 0) {
+            TaskHandler.UpdateContactToTask(matchContactTaskList,taskParentIdSet);
+        }
         if((contactIdset.size()>0) && (updateTaskList.size()>0)){
             TaskHandler.updateTaskEmailMergeFields(contactIdset,updateTaskList);
         }

@@ -20,7 +20,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         map<id,string> chapterMap = new map<id,string>();
         Id inKindDonorsAccountRecordTypeId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
         for(Account currentAccount : Trigger.new){
-            if(currentAccount.Migrated_Record__c != True)
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
                 if(contactId != Null){
                     currentAccount.Chapter_Name__c = contactList[0].AccountId;
@@ -39,7 +39,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         }
         
         for(Account inKindAccount : trigger.new){
-            if(inKindAccount.Migrated_Record__c != True)
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
                 if(inKindAccount.RecordTypeId == inKindDonorsAccountRecordTypeId && inKindAccount.Chapter_Name__c != Null && chapterMap.containsKey(inKindAccount.Chapter_Name__c)){
                     inKindAccount.Wish_Co_ordinator_Hidden_Email__c = chapterMap.get(inKindAccount.Chapter_Name__c);
@@ -58,7 +58,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         List<Account> primaryContactUpdateList = new List<Account>();
         
         for(Account newAccount : trigger.new){
-            if(newAccount.RecordTypeId == housHoldAccountRTId && !newAccount.Migrated_Record__c){
+            if(newAccount.RecordTypeId == housHoldAccountRTId && (Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)){
                 accountIdSet.add(newAccount.Id);
             }
         }
@@ -73,7 +73,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
             for(Account newAccount : trigger.new){
                 system.debug('Contins>>>>'+wishChildMap.containsKey(newAccount.Id));
                 system.debug('RecordType Id '+newAccount.RecordTypeId +'housHoldAccountRTId '+housHoldAccountRTId );
-                if(newAccount.RecordTypeId == housHoldAccountRTId && wishChildMap.containsKey(newAccount.Id) && newAccount.Migrated_Record__c != true){
+                if(newAccount.RecordTypeId == housHoldAccountRTId && wishChildMap.containsKey(newAccount.Id) &&  (Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)){
                     newAccount.npe01__One2OneContact__c = wishChildMap.get(newAccount.Id);
                 }
             }
@@ -115,7 +115,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         
         for(Account inKindAccount : Trigger.new)
         {
-            if(inKindAccount.Migrated_Record__c != True)
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {    
                 if(inKindAccount.RecordTypeId == inKindDonorsAccountRTId && inKindAccount.Chapter_Name__c != Null)
                 {
@@ -136,7 +136,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         
         if(chaptterAccountIdSet.size() > 0 || chapterIds.size() > 0)
         {
-            for(Account daAccount : [SELECT Id,Name,Wish_Co_ordinator__c, OwnerId,Owner.UserRole.Name, Volunteer_Manager__c,RecordTypeId,Chapter_Name__c,
+            for(Account daAccount : [SELECT Id,Name,Wish_Co_ordinator__c, OwnerId,Owner.UserRole.Name,Owner.ContactId,Volunteer_Manager__c,RecordTypeId,Chapter_Name__c,
                                     Chapter_Name__r.Name  FROM Account WHERE (Id IN: chaptterAccountIdSet OR 
                                     (Chapter_Name__c IN :chapterIds AND Id IN :Trigger.newMap.keySet()))])
             {
@@ -158,7 +158,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
                 
                 else
                 {
-                   if(daAccount.Owner.userRole.Name == 'National Staff')
+                   if(daAccount.Owner.userRole.Name == 'National Staff' ) //|| (daAccount.RecordTypeId == inKindDonorsAccountRTId && daAccount.Owner.ContactId != Null)
                    {
                         if(accountMapforSharing.containsKey(daAccount.Chapter_Name__r.Name))
                         {
@@ -180,7 +180,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         if(chaptterMap.size() > 0)
         {    
             for(Account inKindAccount : trigger.new){
-                if(inKindAccount.Migrated_Record__c != True)
+               if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
                 {   
                     if(inKindAccount.RecordTypeId == inKindDonorsAccountRTId)
                     {
@@ -267,7 +267,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
                 accWishCoorUpdateMap.put(currentAccount.Id, currentAccount.Wish_Co_ordinator__c);
             }
             
-            if(currentAccount.RecordTypeId == inKindDonorsAccountRTId && currentAccount.migrated_Record__c != True)
+            if(currentAccount.RecordTypeId == inKindDonorsAccountRTId)
             {
                 if(currentAccount.In_Kind_Approval_Status__c == 'Rejected' && Trigger.oldMap.get(currentAccount.id).In_Kind_Approval_Status__c != 'Rejected') {
                     accountIdsSet.add(currentAccount.id);

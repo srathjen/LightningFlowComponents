@@ -8,7 +8,7 @@
             <field>Hidden_Wish_Owner_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Case_Budget_Approval_Template</template>
     </alerts>
@@ -87,7 +87,7 @@
             <field>Qualifying_Medical_Professional_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Medical_Professional_Email_Templates/Med_Professional_Your_patient_decided_on_a_wish</template>
     </alerts>
@@ -162,7 +162,8 @@
             <field>Dev_Staff_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Case_Send_Email_to_Development_for_Presentation_Party</template>
     </alerts>
     <alerts>
@@ -176,7 +177,7 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderAddress>wvc@wish.org</senderAddress>
+        <senderAddress>wvcsupport@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Medical_Eligibility_Emails/Case_Send_Email_to_National_MAC_Team</template>
     </alerts>
@@ -188,7 +189,8 @@
             <field>Qualifying_Medical_Professional_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/RUSH_Child_Medical_Summary</template>
     </alerts>
     <alerts>
@@ -199,7 +201,8 @@
             <field>Qualifying_Medical_Professional_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/RUSH_Wish_Clearance</template>
     </alerts>
     <alerts>
@@ -228,7 +231,8 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Send_Reply_Email_to_National_MAC_Team_Template</template>
     </alerts>
     <alerts>
@@ -251,7 +255,12 @@
         <description>Wish Family Form Not Submitted Alert</description>
         <protected>false</protected>
         <recipients>
-            <type>accountOwner</type>
+            <recipient>Wish Granter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Granter Mentor</recipient>
+            <type>caseTeam</type>
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>

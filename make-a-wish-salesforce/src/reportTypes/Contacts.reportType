@@ -411,6 +411,11 @@
             <field>RE_Work_Phone_c__c</field>
             <table>Contact</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Region_Code__c</field>
+            <table>Contact</table>
+        </columns>
         <masterLabel>RE Contacts</masterLabel>
     </sections>
     <sections>
@@ -427,6 +432,21 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>RecordType.ModuleNamespace</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Id</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>FirstName</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>LastName</field>
             <table>Contact</table>
         </columns>
         <masterLabel>Contacts</masterLabel>

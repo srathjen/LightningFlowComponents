@@ -1327,6 +1327,26 @@
         <visibleLines>5</visibleLines>
     </fields>
     <fields>
+        <fullName>Copy_1_DNQ_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>DNQ_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - DNQ Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Copy_1_Lead_Referred_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Referred_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Copy 1 - Lead Referred Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Created_Date_Time__c</fullName>
         <description>It will hold the lead created date and time.</description>
         <externalId>false</externalId>
@@ -4680,6 +4700,7 @@
         <columns>LEAD.STATUS</columns>
         <columns>LEAD.CREATED_DATE</columns>
         <columns>CORE.USERS.ALIAS</columns>
+        <columns>unique_wish_identifier__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CREATEDBY_USER.ALIAS</field>
@@ -5492,8 +5513,15 @@
     </searchLayouts>
     <sharingModel>Read</sharingModel>
     <validationRules>
-        <fullName>Lead_Address_Validation</fullName>
+        <fullName>Lead_Address_Phone_and_Gender_Validation</fullName>
         <active>true</active>
+        <errorConditionFormula>AND(OR((Street == Null || City == Null || PostalCode == Null || State == Null  ),
+(Text(Gender__c) == Null),Phone== Null),Migrated_Record__c == false,(Text(Status) == &apos;Referred&apos;),(Text(RFI_Form_Info_Hidden__c) == Null || Id != Null))</errorConditionFormula>
+        <errorMessage>Please Enter Full Address (City, State, Street and Postal Code), Phone Number  and Gender.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Lead_Address_Validation</fullName>
+        <active>false</active>
         <description>Whenever lead is created/updated with Referred status,Address  is mandatory</description>
         <errorConditionFormula>(Street == Null || City == Null || PostalCode == Null || State == Null) &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorMessage>Please Enter Full Address (City, State, Street and Postal Code)</errorMessage>
@@ -5508,7 +5536,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Child_Age_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status, child age is mandatory.</description>
         <errorConditionFormula>Text(Child_Age__c) == Null &amp;&amp; Text(Status) == &apos;Inquiry&apos; &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp;  Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Child_Age__c</errorDisplayField>
@@ -5548,7 +5576,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Gender_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Referred status, Gender is mandatory</description>
         <errorConditionFormula>Text(Gender__c)  == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Gender__c</errorDisplayField>
@@ -5564,7 +5592,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Parent_FirstName_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status,Parent First Name is mandatory.</description>
         <errorConditionFormula>Parent_First_Name__c == Null &amp;&amp; (Text(Status) == &apos;Inquiry&apos;) &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Parent_First_Name__c</errorDisplayField>
@@ -5572,7 +5600,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Parent_FirstName_Validation_Referre</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status,Parent First Name is mandatory.</description>
         <errorConditionFormula>Parent_First_Name__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Parent_First_Name__c</errorDisplayField>
@@ -5580,7 +5608,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Parent_LastName_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status,Parent Last Name is mandatory.</description>
         <errorConditionFormula>Parent_Last_Name__c == Null &amp;&amp; (Text(Status) == &apos;Inquiry&apos;) &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Parent_Last_Name__c</errorDisplayField>
@@ -5588,7 +5616,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Parent_LastName_Validation_Referred</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status,Parent Last Name is mandatory.</description>
         <errorConditionFormula>Parent_Last_Name__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Parent_Last_Name__c</errorDisplayField>
@@ -5618,7 +5646,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Primary_Phone_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Referred status, Primary Phone is mandatory</description>
         <errorConditionFormula>Phone== Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Phone</errorDisplayField>
@@ -5626,7 +5654,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_City_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status, Referrer City is mandatory.</description>
         <errorConditionFormula>Referrer_City__c == Null &amp;&amp; Text(Status) == &apos;Inquiry&apos; &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Referrer_City__c</errorDisplayField>
@@ -5634,7 +5662,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_Email_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status, Referrer Email is mandatory.</description>
         <errorConditionFormula>Referrer_Email__c == Null &amp;&amp; (Text(Status) == &apos;Inquiry&apos;) &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Referrer_Email__c</errorDisplayField>
@@ -5642,7 +5670,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_Email_Validation_Referred</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status, Referrer Email is mandatory.</description>
         <errorConditionFormula>Referrer_Email__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Referrer_Email__c</errorDisplayField>
@@ -5650,7 +5678,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_First_Name_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status, Referrer First Name is mandatory.</description>
         <errorConditionFormula>Referrer_FirstName__c == Null &amp;&amp; (Text(Status) == &apos;Inquiry&apos;) &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Referrer_FirstName__c</errorDisplayField>
@@ -5658,7 +5686,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_First_Name_Validation_Ref</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status, Referrer First Name is mandatory.</description>
         <errorConditionFormula>Referrer_FirstName__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Referrer_FirstName__c</errorDisplayField>
@@ -5666,7 +5694,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_Last_Name_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status, Referrer First Name is mandatory.</description>
         <errorConditionFormula>Referrer_Last_Name__c == Null &amp;&amp; (Text(Status) == &apos;Inquiry&apos;) &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Referrer_Last_Name__c</errorDisplayField>
@@ -5674,7 +5702,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_Last_Name_Validation_Ref</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status, Referrer First Name is mandatory.</description>
         <errorConditionFormula>Referrer_Last_Name__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Referrer_Last_Name__c</errorDisplayField>
@@ -5682,7 +5710,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_Phone_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status, Referrer Phone is mandatory.</description>
         <errorConditionFormula>Referrer_Phone__c == Null &amp;&amp; (Text(Status) == &apos;Inquiry&apos;) &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Referrer_Phone__c</errorDisplayField>
@@ -5690,7 +5718,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_Phone_Validation_Ref</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status, Referrer Phone is mandatory.</description>
         <errorConditionFormula>Referrer_Phone__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Referrer_Phone__c</errorDisplayField>
@@ -5698,7 +5726,7 @@
     </validationRules>
     <validationRules>
         <fullName>Lead_Referrer_PostalCode_Validation</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>Whenever lead is created/updated with Inquiry status, Referrer City is mandatory.</description>
         <errorConditionFormula>Referrer_Zip__c== Null &amp;&amp; Text(Status) == &apos;Inquiry&apos; &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
         <errorDisplayField>Referrer_Zip__c</errorDisplayField>

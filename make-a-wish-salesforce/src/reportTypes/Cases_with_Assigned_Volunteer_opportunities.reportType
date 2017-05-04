@@ -377,11 +377,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Hidden_Why_do_you_feel__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Chapter_Medical_Advisor_Phone__c</field>
             <table>Case</table>
         </columns>

@@ -7,7 +7,8 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Task_Interview_Task_Rescheduled_Email_Template</template>
     </alerts>
     <alerts>
@@ -53,7 +54,8 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Task_Interview_Task_Email_Template</template>
     </alerts>
     <alerts>
@@ -63,7 +65,8 @@
         <recipients>
             <type>creator</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Task_Volunteer_Email_Notification_for_Confirmation_Date</template>
     </alerts>
     <rules>

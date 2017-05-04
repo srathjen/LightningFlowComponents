@@ -10,6 +10,7 @@
         <field>Owner</field>
         <field>Volunteer_Name__c</field>
         <field>Wish__c</field>
+        <field>Event_Name__c</field>
     </approvalPageFields>
     <approvalStep>
         <allowDelegate>false</allowDelegate>

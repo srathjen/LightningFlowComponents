@@ -31,7 +31,7 @@
             <field>Treating_Medical_Professional_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Medical_Professional_Email_Templates/Med_Professional_Your_patient_was_referred_for_a_wish</template>
     </alerts>
@@ -43,7 +43,7 @@
             <field>Treating_Medical_Professional_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Medical_Professional_Email_Templates/Med_Professional_Your_patient_is_eligible_for_a_wish</template>
     </alerts>
@@ -55,7 +55,7 @@
             <field>Office_Referral_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>unfiled$public/Send_Wish_Referral_Form_to_Non_Active_Chapter_Office</template>
     </alerts>
@@ -103,9 +103,9 @@
             <value>Qualified</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Lead.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>It send a email notification to  Qualifying Medical Professional when child is eligible</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

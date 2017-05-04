@@ -76,6 +76,12 @@
             <operator>equals</operator>
             <value>Budget Approval - Submitted,Budget Approval - Approved,Wish Determined,Wish Design,Wish Scheduled</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>
@@ -96,7 +102,7 @@
     <scope>organization</scope>
     <showDetails>true</showDetails>
     <timeFrameFilter>
-        <dateColumn>CREATED_DATEONLY</dateColumn>
-        <interval>INTERVAL_CUSTOM</interval>
+        <dateColumn>Case.Anticipated_Start_Date__c</dateColumn>
+        <interval>INTERVAL_CURNEXTFY</interval>
     </timeFrameFilter>
 </Report>

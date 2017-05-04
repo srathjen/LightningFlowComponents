@@ -2524,7 +2524,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         </picklistValues>
     </recordTypes>
     <searchLayouts/>
-    <sharingModel>Read</sharingModel>
+    <sharingModel>ReadWrite</sharingModel>
     <validationRules>
         <fullName>IKR_AccountName_VolunteerName_Validation</fullName>
         <active>true</active>

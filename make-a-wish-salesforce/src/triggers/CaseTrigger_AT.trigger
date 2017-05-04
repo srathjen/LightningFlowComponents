@@ -46,7 +46,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
             map<id,Case> parentChildCaseMap = new map<id,Case>();
             for(Case newCase : trigger.new){
                 
-                if(newCase.Migrated_Record__c == false) {
+                if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null) {
                     
                     wishOwnerIdSet.add(newCase.OwnerId);
                 }
@@ -111,6 +111,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
             List<Case> updateChildCasetocloseList = new List<Case>();
             
             List<Account> dbAccountList = [SELECT Id,MAC_Email_del__c,Name,RecordTypeId FROM Account WHERE Name =: 'Make-A-Wish America' AND RecordTypeId =: chapterecordTypeId Limit 1];
+           Profile dbprofile = [SELECT Id, Name FROM Profile WHERE Id=:userinfo.getProfileId()];
             //system.debug('National Email' + dbAccountList[0].MAC_Email_del__c);
             // WishesTriggerHelperClass.updateDateReceived(trigger.oldMap,trigger.newMap.values());
             Set<Id> parentWishIdsSet = new Set<Id>();
@@ -168,7 +169,7 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                         caseMap.Put(currentCase.ChapterName__c,currentCase);
                     }
                     /* Used to close the wish determine case and open the new planning and Granting and Impact sub cases will open. */
-                    if(currentCase.status == 'Wish Determined' && currentCase.Status != Trigger.oldMap.get(currentCase.id).Status && currentCase.Sub_Status__c == 'Within Policy' && currentCase.Wish_Type__c != Null && currentCase.RecordTypeid == parentWishRecordTypeId){
+                    if(currentCase.status == 'Wish Determined' && currentCase.Sub_Status__c != Trigger.oldMap.get(currentCase.id).Sub_Status__c && currentCase.Sub_Status__c == 'Within Policy' && currentCase.Wish_Type__c != Null && currentCase.RecordTypeid == parentWishRecordTypeId){
                         updateChildCaseList.add(currentCase);
                     }
                     
@@ -207,11 +208,11 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                     
                     
                     
-                    if((currentCase.Status == 'Wish Determined') && (trigger.oldmap.get(currentCase.id).Status != 'Wish Determined')){
+                    /*if((currentCase.Status == 'Wish Determined') && (trigger.oldmap.get(currentCase.id).Status != 'Wish Determined')){
                         currentCase.Meet_PWL_Criteria__c = 'Yes';
                         currentCase.Sub_Status__c = 'Within Policy';
                         currentCase.Concept_Approval_Date__c = Date.Today();
-                    }
+                    }*/
                     
                     if((currentCase.Status == 'Completed') && (trigger.oldmap.get(currentCase.id).Status != 'Completed') && currentCase.RecordTypeId == parentWishRecordTypeId){
                         //currentCase.status = 'Closed';
@@ -228,12 +229,15 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                     {  
                         RecursiveTriggerHandler.blockCaseLockRecursive = false;
                         if( currentCase.IsLocked__c == true && trigger.oldMap.get(currentCase.Id).IsLocked__c == true && usc != Null){
-                            if(usc.All_Closed_Cases_except_Abandoned__c == false && currentCase.Sub_Status__c != 'Abandoned' && currentCase.isClosed == True)
+                            if(usc.All_Closed_Cases_except_Abandoned__c == false && currentCase.Sub_Status__c != 'Abandoned' && currentCase.isClosed == True &&
+                            dbprofile.Name != 'System Administrator' && (currentCase.RecordTypeId != wishPlanningRecordTypeId || currentCase.RecordTypeId != wishDeterminationRecordTypeId))
                                 currentCase.addError('You have not Permission to edit this record.');
-                            if(usc.Edit_Abandoned_Cases__c== false && currentCase.Sub_Status__c == 'Abandoned' && currentCase.isClosed == True)
+                            if(usc.Edit_Abandoned_Cases__c== false && currentCase.Sub_Status__c == 'Abandoned' && currentCase.isClosed == True &&
+                            dbprofile.Name != 'System Administrator' && (currentCase.RecordTypeId != wishPlanningRecordTypeId || currentCase.RecordTypeId != wishDeterminationRecordTypeId))
                                 currentCase.addError('You have not Permission to edit this record.');
                         }
-                        else if( currentCase.IsLocked__c == true && trigger.oldMap.get(currentCase.Id).IsLocked__c == true && usc == Null){
+                        else if( currentCase.IsLocked__c == true && trigger.oldMap.get(currentCase.Id).IsLocked__c == true && usc == Null && 
+                        dbprofile.Name != 'System Administrator' && (currentCase.RecordTypeId != wishPlanningRecordTypeId || currentCase.RecordTypeId != wishDeterminationRecordTypeId)){
                             currentCase.addError('You have not Permission to edit this record.');
                         }
                         
@@ -978,8 +982,7 @@ Approval.ProcessResult result = Approval.process(pwr);
                 if(currRec.RecordTypeId == parentWishRecordTypeId)
                     closedCaseIdList.add(currRec.Id);
             }
-            
-        }
+         }
         if(completedCaseIdList.size() > 0 && completedCaseIdList != Null){
             CaseTriggerHandler.updateVolunteerOpportunityStatus(completedCaseIdList);
         }

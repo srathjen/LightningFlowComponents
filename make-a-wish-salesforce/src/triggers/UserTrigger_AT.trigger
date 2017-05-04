@@ -69,7 +69,7 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
         Set<string> userIdsSet = new Set<string>(); // useed to holds unique rolename
          for(User newUser : Trigger.new)
          {
-             if(newUser.Migrated_User__c == false)
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
              {
                  if(newUser.IsActive == false && trigger.oldMap.get(newUser.Id).IsActive != newUser.IsActive){
                      System.debug('RecMatch>>>>>');
@@ -124,7 +124,7 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
          Set<Id> inActiveCommunityUserIdSet = new Set<Id>();
          for(User newUser : Trigger.new)
          {
-             if(newUser.Migrated_User__c == false)
+             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
              {
                  if(newUser.IsActive == false && trigger.oldMap.get(newUser.Id).IsActive == True )
                  {

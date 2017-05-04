@@ -382,11 +382,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Hidden_Why_do_you_feel__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Actual_Departure_Date__c</field>
             <table>Case</table>
         </columns>

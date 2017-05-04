@@ -465,7 +465,7 @@
                                                 <apex:outputLabel for="postalcode2">Postal Code</apex:outputLabel>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control f-postalcode2 postalcode numbers-only" id="postalcode2" html-placeholder="00000-0000" maxlength="10" html-minlength="5" value="{!contactInstance[0].OtherPostalCode}" />
+                                                <apex:inputText styleClass="form-control f-postalcode2 postalcode1 notrequired numbers-only" id="postalcode2" html-placeholder="00000-0000" maxlength="10" html-minlength="5" value="{!contactInstance[0].OtherPostalCode}" />
                                             </div>
                                         </div>
 
@@ -1293,8 +1293,8 @@
                     }
                 });
                 // auto format postal code
-            $(".postalcode").keydown(function(e){
-              if (($(this).val().length == 5) && (e.keyCode != 8)){
+            $(".postalcode,.notrequired").keydown(function(e){
+              if (($(this).val().length == 5) && (e.keyCode != 8) && (e.keyCode != 9)){
                 // auto insert dash on 5th character keypress
                 $(this).val($(this).val() + "-");
               }
@@ -1341,11 +1341,18 @@
             formValidationRules();
             // trigger validation
             // personal save btn
-
+     $(".notrequired").rules("add", {
+        zipcode: true,
+        messages: {
+            zipcode: "Oops! Please enter a valid US postal code"
+        } 
+        //console.log($(this).val());
+    });
+    
     jQuery.validator.addMethod("zipcode", function(value, element) {
-          return this.optional(element) || /^\d{5}(?:-\d{1,4})?$/.test(value);
+          return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
         }, "Oops! Please enter a valid US postal code");
-
+        
             $('.btn-p-save').on('click', function() {
               if ($('form').valid()){
                 $('form').submit();

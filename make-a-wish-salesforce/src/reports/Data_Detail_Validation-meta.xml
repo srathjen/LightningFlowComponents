@@ -10,10 +10,5 @@
         <sharedTo>jwycoff@wish.org</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
-    <folderShares>
-        <accessLevel>Manage</accessLevel>
-        <sharedTo>tdavis@wish.org</sharedTo>
-        <sharedToType>User</sharedToType>
-    </folderShares>
     <name>Data Detail Validation</name>
 </ReportFolder>

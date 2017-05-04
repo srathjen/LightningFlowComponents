@@ -24,7 +24,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
             leadChapterSet.add(newLead.ChapterName__c);
             leadRegionMap.put(newLead.Id, newLead);
             newLead.Part_A_Form_Password__c= handlerIns.getRandom();
-            if(newLead.migrated_record__c != True)
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {   
                 if(newLead.Status == 'Inquiry')
                 { 
@@ -278,8 +278,8 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                 handlerIns.onAfterUpdate(newLeadList);
             }
             //Create and assign the task to lead intake user when the lead status is updated with DNQ.
-           // if(lead_IntakUserIdMap.Size() > 0)
-            //    LeadTriggerHandler.createTaskforDNQLeads(lead_IntakUserIdMap);
+            if(lead_IntakUserIdMap.Size() > 0)
+                LeadTriggerHandler.createTaskforDNQLeads(lead_IntakUserIdMap);
         }
     } 
     
@@ -288,12 +288,14 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         List<Lead> newLeadList = new List<Lead>();
         Set<String> conditionSescriptionSet = new Set<String>();
         List<Task> newTaskList = new List<Task>();
+        Constant_AC  constant = new Constant_Ac();    
+        //Id chapterRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
         
         Map<String, List<Lead>> leadMap = new Map<String,List<Lead>>();
         
         for(Lead newLead : [SELECT id,Migrated_Record__c, OwnerId,Owner.UserRole.Name,Status, ChapterName__c,ChapterName__r.Name,PD_Condition_Description__C FROM Lead WHERE Id IN : Trigger.newMap.keySet()])
         {
-            if(newLead.Migrated_Record__c != True)
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
                 newLeadList.add(newLead);
                 conditionSescriptionSet.add(newLead.PD_Condition_Description__c);
@@ -307,6 +309,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                     newTask.ActivityDate = Date.Today().addDays(10);
                 }
                 newTask.ownerId = newLead.OwnerId;
+                //newTask.RecordTypeId = chapterRT;
                 newTask.whoId = newLead.id;
                 newTask.priority = 'Normal';
                 newTaskList.add(newTask);
@@ -346,7 +349,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         List<Id> ids = new List<Id>();
         for(Lead obj : Trigger.old)
         {    
-            if(obj.Migrated_Record__c != True)        
+             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)        
                 ids.add(obj.Id);     
         }             
         Integer tempCount = [Select count() from Lead_File__c where Lead_File__c.WIP__c = false and Lead_File__c.Parent__c in:ids];

@@ -12,7 +12,6 @@ public class BackgroundCheck_AC{
     public Background_check__c backGroundCheck{get;set;}
     public boolean statusValue{get;set;}
     public User currUser;
-    public User sysAdmin;
     public String taskRecordTypeId;
     List<Background_check__c> existingBGCheckRecList{get;set;}
     public boolean isBGFinished{get;set;}
@@ -26,7 +25,7 @@ public class BackgroundCheck_AC{
     public BackgroundCheck_AC()
     {
         currUser=  [SELECT Id,ContactId,contact.account.volunteer_manager__c,Contact.OwnerId FROM User WHERE Id =: userInfo.getUserId() Limit 1];
-        sysAdmin = [SELECT Id,Name,Email FROM User WHERE Email =: 'furqan@mstsolutions.com' Limit 1];
+      //  sysAdmin = [SELECT Id,Name,Email FROM User WHERE Email =: 'furqan@mstsolutions.com' Limit 1];
         backGroundCheck = new Background_check__c();
         existingBGCheckRecList = [SELECT Id,Resided_in_US_for_past_7_years__c FROM Background_check__c WHERE VOLUNTEER__c = :currUser.contactId order by CreatedDate DESC];
         if(existingBGCheckRecList.size() > 0) {
@@ -53,7 +52,7 @@ public class BackgroundCheck_AC{
     {
         backGroundCheck.Date_Requested__c = system.today();
         backGroundCheck.Volunteer__c = currUser.ContactId; 
-        backGroundCheck.Requested_By__c = sysAdmin.Id;
+      //  backGroundCheck.Requested_By__c = sysAdmin.Id;
         backGroundCheck.Resided_in_US_for_past_7_years__c = areYouinUS7Yrs;
         backGroundCheck.OwnerId = currUser.contact.OwnerId;
         if(backGroundCheck.Resided_in_US_for_past_7_years__c == Null) {

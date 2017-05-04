@@ -582,14 +582,9 @@
                                             <td class="slds-cell-wrap slds-text-align--right" style="width:40px"><apex:OutPuttext value="" style="width:40px"/></td>
                                             
                                              <!-- Actual Cash -->
-                                             <apex:outputPanel rendered="{!If((isbudgetApprovalExist == true && expense.Budget_Approval_Status__c == 'Submitted') ,true,false)}">
+                                            <apex:outputPanel rendered="{!If(expense.Budget_Approval_Status__c != 'Approved',true,false)}">
                                                 <td class="slds-text-align--right tdBudget" style="width:40px">
                                                     <apex:inputtext styleClass="Cash" id="ACash1" value="{!expense.Actual_Cash__c}"  onfocus="this.select();"/>
-                                                </td>       
-                                            </apex:outputPanel>
-                                            <apex:outputPanel rendered="{!If(isbudgetApprovalExist == false,true,false)}">
-                                                <td class="slds-text-align--right tdBudget" style="width:40px">
-                                                    <apex:outputField value="{!expense.Actual_Cash__c}" />
                                                 </td>       
                                             </apex:outputPanel>
                                             <apex:outputPanel rendered="{!If(expense.Budget_Approval_Status__c == 'Approved',true,false)}">
@@ -605,17 +600,12 @@
                                                             <apex:outputField value="{!expense.Actual_Cash__c}" />
                                                     </apex:outputPanel>
                                                  </td>       
-                                            </apex:outputPanel>
+                                            </apex:outputPanel> 
                                             
-                                             <!-- Actual Inkind -->
-                                             <apex:outputPanel rendered="{!If((isbudgetApprovalExist == true && expense.Budget_Approval_Status__c == 'Submitted') ,true,false)}">
+                                            <!-- Actual Inkind -->
+                                            <apex:outputPanel rendered="{!If(expense.Budget_Approval_Status__c != 'Approved',true,false)}">
                                                 <td class="slds-text-align--right tdBudget" style="width:40px">
                                                    <apex:inputtext styleClass="Inkind" id="AInkind1" value="{!expense.Actual_In_Kind__c}"  onfocus="this.select();"/>
-                                                </td>       
-                                            </apex:outputPanel>
-                                            <apex:outputPanel rendered="{!If(isbudgetApprovalExist == false,true,false)}">
-                                                <td class="slds-text-align--right tdBudget" style="width:40px">
-                                                    <apex:outputField value="{!expense.Actual_In_Kind__c}" />
                                                 </td>       
                                             </apex:outputPanel>
                                             <apex:outputPanel rendered="{!If(expense.Budget_Approval_Status__c == 'Approved',true,false)}">
@@ -668,10 +658,10 @@
                                 </apex:repeat>
                                 <tr Class="collapse  budgets {!cntTemp}collapsed">
                                     <td colspan="18">
-                                        <apex:commandLink styleClass="addExpenseClass" action="{!addExpense}" ><apex:image value="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png" style="height:20px" title="Add New Transaction"/>
-                                            <apex:param name="expenseType" value="{!expenseType}" assignTo="{!expenseType}"/>
+                                        <apex:commandbutton styleClass="addExpenseClass" action="{!addExpense}" style="height:20px" reRender="newExpense" image="https://cdn4.iconfinder.com/data/icons/meBaze-Freebies/512/add.png">
+                                            <apex:param name="expenseType" value="{!expenseType}" assignTo="{!expenseType}" />
                                             <apex:param name="typeExpand" value="{!cntTemp}collapsed" assignTo="{!WEtypeExpand}"/>
-                                        </apex:commandLink>
+                                        </apex:commandbutton>
                                     </td>
                                 </tr> 
                                 <apex:variable var="cnt" value="{!0}"/>
@@ -714,16 +704,16 @@
                         <div class="pull-right" style="margin-right: 2%;margin-top: 2%; margin-bottom:1%">
                             <apex:commandButton value="Save" action="{!SaveExpenses}" styleclass="btn btn-info" /> 
                         </div>
-            
-                                
                         <apex:actionFunction name="submitForApproval" action="{!submitForApproval}" rerender="none" oncomplete="decisionWindow();"/>
                         <apex:actionFunction name="ReloadPage" action="{!ReloadPage}" rerender="none" />
+                        
                                                 
                     </apex:pageBlock>  
                 </div>
             </div>
-            </body>   
+            </body>
         </apex:form>
+        
         <div style="padding:20px !important">
             <apex:pageBlock title="Budget Approval History" id="ApprovalPageBlock">
                 <div class="pbBody" style="font-size: 11px !important">
@@ -791,8 +781,6 @@
     </div>
     
     <script>
-    
-    
     function validateNewExpenseType() {
         if($('.new-expType').val() == '') {
             alert('Please Select Expense Type');
@@ -838,38 +826,56 @@
     
     window.onload=function()
     {
-        
-        var frmctrls = document.getElementById("Pge:newExpense");
-        var cashctrls= frmctrls.getElementsByClassName("Cash");
-        var inkindctrls= frmctrls.getElementsByClassName("Inkind");
-        var acctrls= frmctrls.getElementsByClassName("AccountNo");
-        var accDesctrls= frmctrls.getElementsByClassName("AccountDesc");
-        var i;
-        for (i = 0; i < acctrls.length; i++) {
-            if(acctrls[i].value.length  > 0 & acctrls[i] !=null ){ 
-               acctrls[i].readOnly=false;
-            }
-            else{
-               acctrls[i].readOnly=true;
-            }
-            
-        }
-        for (i = 0; i < accDesctrls.length; i++) {
-            //alert(accDesctrls[i].value);
-            if(accDesctrls[i].value == 'Direct Wish Cash Expense'){ 
-               cashctrls[i].readOnly=false;
-               inkindctrls[i].readOnly=true;
-            }
-            else if(accDesctrls[i].value == 'Direct Wish In-Kind Goods' ||  accDesctrls[i].value == 'Direct Wish In-Kind Service'){
-               cashctrls[i].readOnly=true;
-               inkindctrls[i].readOnly=false;
-            }
-            else if(accDesctrls[i].value == '--None--' ){
-               cashctrls[i].readOnly=true;
-               inkindctrls[i].readOnly=true;
-            }
+        var rows = document.getElementsByTagName('tr');
+        for (var i=0; i<rows.length; i++) 
+        {
+            var cols = rows[i].getElementsByTagName('td')[1];
+            var acctrls= rows[i].getElementsByClassName("AccountNo");
+            if(acctrls.length>0){
+                 for (j = 0; j < acctrls.length; j++) {
+                    if(acctrls[j].value.length  > 0 & acctrls[j] !=null ){ 
+                       acctrls[j].readOnly=false;
+                    }
+                    else{
+                       acctrls[j].readOnly=true;
+                    }
+                }
+             }
+             var accDesctrls= rows[i].getElementsByClassName("AccountDesc");
+             var cashctrls= rows[i].getElementsByClassName("Cash");
+             var inkindctrls= rows[i].getElementsByClassName("Inkind");
+             
+             if(accDesctrls.length>0){
+                 for (k = 0; k < accDesctrls.length; k++) {
+                    if(accDesctrls[k].value == 'Direct Wish Cash Expense'){
+                        for(x=0;x<cashctrls.length;x++){
+                            cashctrls[x].readOnly=false; 
+                        }
+                        for(y=0;y<inkindctrls.length;y++){
+                            inkindctrls[y].readOnly=true;
+                        } 
+                    }
+                    else if(accDesctrls[k].value == 'Direct Wish In-Kind Goods' ||  accDesctrls[k].value == 'Direct Wish In-Kind Service'){
+                        for(x=0;x<cashctrls.length;x++){
+                            cashctrls[x].readOnly=true; 
+                        }
+                        for(y=0;y<inkindctrls.length;y++){
+                            inkindctrls[y].readOnly=false;
+                        } 
+                    }
+                    else {
+                        for(x=0;x<cashctrls.length;x++){
+                            cashctrls[x].readOnly=true;
+                        }
+                        for(y=0;y<inkindctrls.length;y++){
+                            inkindctrls[y].readOnly=true;
+                        } 
+                    }
+                 }
+             }
         }
     };
+
     
     </script>
     
