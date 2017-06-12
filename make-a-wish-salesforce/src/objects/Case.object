@@ -1797,18 +1797,6 @@ for fulfilment  the wish.</description>
         <trackTrending>false</trackTrending>
     </fields>
     <fields>
-        <fullName>Description__c</fullName>
-        <externalId>false</externalId>
-        <formula>Contact.LastName + &apos; &apos; +Contact.FirstName + &apos; &apos; + IF(!ISNULL(Contact.Birthdate),(TEXT(MONTH(Contact.Birthdate)) &amp; &quot;-&quot; &amp; TEXT(DAY(Contact.Birthdate)) &amp; &quot;-&quot; &amp; TEXT(YEAR(Contact.Birthdate))), &apos;&apos;)</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>RE-FE Description</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>Details_about_Impact__c</fullName>
         <description>Is there anything on your family’s calendar (upcoming medical treatments, school or work commitments,
 planned vacations, etc.) that might impact your ability to participate in a wish?</description>
@@ -4352,6 +4340,17 @@ on airplane</description>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Test_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to identify whether the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Test Record</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>This_is_my_wish_because__c</fullName>
         <description>It capture the Wish reason of a Wish Child.</description>
         <externalId>false</externalId>
@@ -4937,7 +4936,7 @@ on airplane</description>
         <label>Wish National Type</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
@@ -6005,7 +6004,7 @@ arrangements/unique circumstances for any requested wish participant not residin
                 <default>false</default>
             </values>
             <values>
-                <fullName>91%2B</fullName>
+                <fullName>91-180 days</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -6220,7 +6219,7 @@ arrangements/unique circumstances for any requested wish participant not residin
                 <default>false</default>
             </values>
             <values>
-                <fullName>Electronics International - Sports</fullName>
+                <fullName>Electronics</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -6497,6 +6496,13 @@ arrangements/unique circumstances for any requested wish participant not residin
                 <default>false</default>
             </values>
         </picklistValues>
+        <picklistValues>
+            <picklist>Wish_Type__c</picklist>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>Wish_Determination</fullName>
@@ -6718,7 +6724,11 @@ arrangements/unique circumstances for any requested wish participant not residin
                 <default>false</default>
             </values>
             <values>
-                <fullName>Electronics International - Sports</fullName>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>I wish to be%E2%80%A6</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -6991,6 +7001,13 @@ arrangements/unique circumstances for any requested wish participant not residin
                 <default>false</default>
             </values>
         </picklistValues>
+        <picklistValues>
+            <picklist>Wish_Type__c</picklist>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
     </recordTypes>
     <recordTypes>
         <fullName>Wish_Granted</fullName>
@@ -7158,6 +7175,13 @@ arrangements/unique circumstances for any requested wish participant not residin
             </values>
             <values>
                 <fullName>Question</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Wish_Type__c</picklist>
+            <values>
+                <fullName>Other</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -7339,6 +7363,13 @@ arrangements/unique circumstances for any requested wish participant not residin
             </values>
             <values>
                 <fullName>Question</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Wish_Type__c</picklist>
+            <values>
+                <fullName>Other</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -7634,7 +7665,7 @@ var permissionResult =
     sforce.connection.query(
         &quot;SELECT Id &quot; +
         &quot;FROM PermissionSetAssignment &quot; +
-        &quot;WHERE PermissionSetId = &apos;0PS360000014hEq&apos;&quot; +
+        &quot;WHERE PermissionSet.Name = &apos;Program_Supervisor&apos;&quot; +
         &quot;AND AssigneeId = &apos;{!$User.Id}&apos;&quot;
     );
 

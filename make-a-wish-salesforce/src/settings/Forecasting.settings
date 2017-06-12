@@ -262,6 +262,10 @@
             <label>Contact Id for Role</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N3600000RnNjt</field>
+            <label>DB Competitor</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N36000009dmty</field>
             <label>Do Not Automatically Create Payment</label>
         </opportunityListFieldsLabelMappings>
@@ -476,6 +480,7 @@
             <field>00N3600000Pl14K</field>
             <field>00N36000009dmwa</field>
             <field>00N36000009dmtx</field>
+            <field>00N3600000RnNjt</field>
             <field>00N36000009dmty</field>
             <field>00N36000009dn3i</field>
             <field>00N3600000Pl14L</field>
@@ -709,6 +714,10 @@
             <label>Contact Id for Role</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N3600000RnNjt</field>
+            <label>DB Competitor</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N36000009dmty</field>
             <label>Do Not Automatically Create Payment</label>
         </opportunityListFieldsLabelMappings>
@@ -923,6 +932,7 @@
             <field>00N3600000Pl14K</field>
             <field>00N36000009dmwa</field>
             <field>00N36000009dmtx</field>
+            <field>00N3600000RnNjt</field>
             <field>00N36000009dmty</field>
             <field>00N36000009dn3i</field>
             <field>00N3600000Pl14L</field>
@@ -1156,6 +1166,10 @@
             <label>Contact Id for Role</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N3600000RnNjt</field>
+            <label>DB Competitor</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N36000009dmty</field>
             <label>Do Not Automatically Create Payment</label>
         </opportunityListFieldsLabelMappings>
@@ -1370,6 +1384,7 @@
             <field>00N3600000Pl14K</field>
             <field>00N36000009dmwa</field>
             <field>00N36000009dmtx</field>
+            <field>00N3600000RnNjt</field>
             <field>00N36000009dmty</field>
             <field>00N36000009dn3i</field>
             <field>00N3600000Pl14L</field>
@@ -1603,6 +1618,10 @@
             <label>Contact Id for Role</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N3600000RnNjt</field>
+            <label>DB Competitor</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N36000009dmty</field>
             <label>Do Not Automatically Create Payment</label>
         </opportunityListFieldsLabelMappings>
@@ -1817,6 +1836,7 @@
             <field>00N3600000Pl14K</field>
             <field>00N36000009dmwa</field>
             <field>00N36000009dmtx</field>
+            <field>00N3600000RnNjt</field>
             <field>00N36000009dmty</field>
             <field>00N36000009dn3i</field>
             <field>00N3600000Pl14L</field>
@@ -2058,6 +2078,10 @@
             <label>Contact Id for Role</label>
         </opportunityListFieldsLabelMappings>
         <opportunityListFieldsLabelMappings>
+            <field>00N3600000RnNjt</field>
+            <label>DB Competitor</label>
+        </opportunityListFieldsLabelMappings>
+        <opportunityListFieldsLabelMappings>
             <field>00N36000009dmty</field>
             <label>Do Not Automatically Create Payment</label>
         </opportunityListFieldsLabelMappings>
@@ -2274,6 +2298,7 @@
             <field>00N3600000Pl14K</field>
             <field>00N36000009dmwa</field>
             <field>00N36000009dmtx</field>
+            <field>00N3600000RnNjt</field>
             <field>00N36000009dmty</field>
             <field>00N36000009dn3i</field>
             <field>00N3600000Pl14L</field>

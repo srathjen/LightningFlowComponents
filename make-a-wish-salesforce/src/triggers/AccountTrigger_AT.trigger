@@ -195,7 +195,7 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
                             Approval.ProcessResult result = Approval.process(req);
                         }
                         else{
-                            inKindAccount.addError('There is no Wis Co-ordinator to approve this record');
+                            inKindAccount.addError('There is no wish co-ordinator to approve this record');
                         }
                         
                         if(chapterNameMap.containsKey(inkindAccount.Chapter_Name__c)) 
@@ -352,6 +352,45 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
             Insert updateAccountShareList;
         }
         
+    }
+	
+	//Reset the address verification checkbox if the address has changed
+    if(trigger.isBefore && trigger.isUpdate)
+    {
+        for(Account newAccount : trigger.new){
+            // the billing address is already marked as verified
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null &&
+            // one of the shipping address fields changed
+            (newAccount.BillingStreet != Trigger.oldMap.get(newAccount.Id).BillingStreet ||
+            newAccount.BillingState != Trigger.oldMap.get(newAccount.Id).BillingState ||
+            newAccount.BillingStateCode != Trigger.oldMap.get(newAccount.Id).BillingStateCode ||
+            newAccount.BillingCity != Trigger.oldMap.get(newAccount.Id).BillingCity ||
+            newAccount.BillingPostalCode != Trigger.oldMap.get(newAccount.Id).BillingPostalCode
+            )
+            ){
+                system.debug('Update BillingAddressVerified__c>>>>'+newAccount.BillingAddressVerified__c);
+                newAccount.BillingAddressVerified__c = false;
+                newAccount.BillingAddressVerificationAttempted__c = null;
+                
+            }
+            
+            // the shipping address is already marked as verified
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null &&
+            // one of the shipping address fields changed
+            (newAccount.ShippingStreet != Trigger.oldMap.get(newAccount.Id).ShippingStreet ||
+            newAccount.ShippingState != Trigger.oldMap.get(newAccount.Id).ShippingState ||
+            newAccount.ShippingStateCode != Trigger.oldMap.get(newAccount.Id).ShippingStateCode ||
+            newAccount.ShippingCity != Trigger.oldMap.get(newAccount.Id).ShippingCity ||
+            newAccount.ShippingPostalCode != Trigger.oldMap.get(newAccount.Id).ShippingPostalCode
+            )
+            ){
+                system.debug('Update ShippingAddressVerified__c>>>>'+newAccount.ShippingAddressVerified__c);
+                newAccount.ShippingAddressVerified__c = false;
+                newAccount.ShippingAddressVerificationAttempted__c = null;
+                
+            }
+        }
+    
     }
     
 }

@@ -89,7 +89,7 @@ trigger InKindDonationReimbursement_AT on In_Kind_Donation_Reimbursement__c (bef
         if(inKindDonationMap.Size() > 0)
            ChapterStaffRecordSharing_AC.inKindReimbursementSharing(inKindDonationMap);
     }*/
-        List<User> currUser = [SELECT id,UserRole.Name,Profile.Name FROM User WHERE id = :userInfo.getUserId() limit 1];  
+        List<User> currUser = [SELECT id,UserRole.Name,Chapter_Name__c,Profile.Name FROM User WHERE id = :userInfo.getUserId() limit 1];  
         set<String> chapterNamesSet = new Set<String>();
         Map<Id,String> chapterNameMap = new Map<Id,String>();
         Map<String,String> chapterRoleMap = new Map<String,String>();
@@ -105,7 +105,8 @@ trigger InKindDonationReimbursement_AT on In_Kind_Donation_Reimbursement__c (bef
         
             for(In_Kind_Donation_Reimbursement__c currRec :Trigger.New){ 
                 system.debug('Chapter Name****************'+chapterNameMap.get(currRec.Id));
-                if(chapterRoleMap.get(chapterNameMap.get(currRec.Id)) != currUser[0].UserRole.Name && currUser[0].UserRole.Name != 'National Staff' && currUser[0].profile.Name != 'System Administrator')
+                if(chapterRoleMap.get(chapterNameMap.get(currRec.Id)) != currUser[0].UserRole.Name && currUser[0].UserRole.Name != 'National Staff' 
+                    && currUser[0].profile.Name != 'System Administrator' && currUser[0].Chapter_Name__c != (chapterNameMap.get(currRec.id)))
                {
                      currRec.addError('Insufficient previlege to update this record. Please contact system administrator.');        
                }

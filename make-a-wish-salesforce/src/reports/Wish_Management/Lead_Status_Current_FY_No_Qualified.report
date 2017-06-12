@@ -90,6 +90,12 @@
             <operator>notEqual</operator>
             <value>Qualified</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>LAST_NAME</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>clownfish</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>

@@ -42,6 +42,14 @@
     <columns>
         <field>Case.Travel_Data__r$Confirmation__c</field>
     </columns>
+    <filter>
+        <criteriaItems>
+            <column>Case$Hidden_Wish_Child_Full_Name__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Nemo Clownfish</value>
+        </criteriaItems>
+    </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Day</dateGranularity>

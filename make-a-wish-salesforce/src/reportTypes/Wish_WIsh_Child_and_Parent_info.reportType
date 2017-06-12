@@ -3162,11 +3162,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Source</field>
-            <table>Contact.npe01__Organizations__r.Cases</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>BusinessHours</field>
             <table>Contact.npe01__Organizations__r.Cases</table>
         </columns>
@@ -3648,11 +3643,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Days_In_Stage__c</field>
-            <table>Contact.npe01__Organizations__r.Cases</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Description__c</field>
             <table>Contact.npe01__Organizations__r.Cases</table>
         </columns>
         <columns>

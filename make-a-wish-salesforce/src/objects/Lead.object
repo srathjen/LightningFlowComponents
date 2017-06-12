@@ -998,6 +998,26 @@
         <trackHistory>false</trackHistory>
     </fields>
     <fields>
+        <fullName>AddressVerificationAttempted__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Last time USPS verification was attempted</inlineHelpText>
+        <label>Address Verification Attempted</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>AddressVerified__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>USPS Verified</inlineHelpText>
+        <label>Address Verified</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Angina__c</fullName>
         <description>It will hold the value of angina travel algorithm.</description>
         <externalId>false</externalId>
@@ -1347,6 +1367,18 @@
         <type>Date</type>
     </fields>
     <fields>
+        <fullName>County__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>County/Parish/Borough</inlineHelpText>
+        <label>County</label>
+        <length>80</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Created_Date_Time__c</fullName>
         <description>It will hold the lead created date and time.</description>
         <externalId>false</externalId>
@@ -1378,6 +1410,31 @@
         <trackHistory>false</trackHistory>
         <type>LongTextArea</type>
         <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DB_Created_Date_without_Time__c</fullName>
+        <description>This is a field that is installed by and used with the Adoption Dashboard AppExchange package. If your org already has a similar field, you can change the reports that are part of the Adoption Dashboard package to use your custom field and then delete this field.</description>
+        <externalId>false</externalId>
+        <formula>CreatedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>DB Created Date without Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>DB_Lead_Age__c</fullName>
+        <description>This is a field that is installed by and used with the Adoption Dashboard AppExchange package. If your org already has a similar field, you can change the reports that are part of the Adoption Dashboard package to use your custom field and then delete this field.</description>
+        <externalId>false</externalId>
+        <formula>NOW() - LastModifiedDate</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>DB Lead Age</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>DNQ_Date__c</fullName>
@@ -3322,7 +3379,7 @@
         <label>Sub Status</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <type>Picklist</type>
         <valueSet>
             <controllingField>Status</controllingField>
@@ -3386,6 +3443,16 @@
                 <valueName>No Response</valueName>
             </valueSettings>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>Test_Record__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Used to identify whether the record is a test record</description>
+        <externalId>false</externalId>
+        <label>Test Record</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>This_Statement_Describes_My_Patient__c</fullName>
@@ -3937,6 +4004,7 @@
         <columns>LEAD.ZIP</columns>
         <columns>ChapterName__c</columns>
         <columns>Any_medical_reason_for_moving_quickly__c</columns>
+        <columns>CORE.USERS.FIRST_NAME</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>ChapterName__c</field>

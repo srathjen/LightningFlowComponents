@@ -3,13 +3,28 @@
   
   <apex:form id="MedicalSummary">
   <apex:messages />
-  <apex:pageBlock title="Medical Summary">
-      <apex:pageBlockSection title="Wish Child Summary Form Details" columns="2">
-     <apex:outputField label="Medical Professional Name" value="{!currentParentCase.Contact.Hidden_Medical_Physician__c}" />
-     <apex:outputField label="Medical Professional Email" value="{!currentParentCase.Contact.Hidden_Medical_Physician_Email__c }" style="display:none" />
-     <apex:InputField label="Wish Involves Air Travel" value="{!currentParentCase.wish_involves_air_travel__c}" rendered="{!currentParentCase.wish_involves_air_travel__c == Null}" />
-     <apex:OutputField label="Wish Involves Air Travel" value="{!currentParentCase.wish_involves_air_travel__c}" rendered="{!currentParentCase.wish_involves_air_travel__c != Null}" />
-   </apex:pageBlockSection>
+  <apex:pageBlock title="Wish Child Medical Summary">
+    <apex:pageBlockSection title="Wish Child Medical Summary Form Details" columns="3">
+     <apex:outputPanel >
+      <apex:outputLabel style="padding: 2% 1%;color: #4a4a56;font-weight: bold;" value="Name:"/>
+        <apex:selectList value="{!medicalProfContactName}" multiselect="false" size="1" styleClass="form-control multi sign" html-placeholder="Please Select All That Apply">
+                                <apex:selectOption itemlabel="Please select an individual" itemValue="" />
+                                <apex:selectOptions value="{!MedicalProContact}" />
+                                 <apex:actionSupport event="onchange" action="{!displayEmail}" reRender="dd"/>
+                              </apex:selectList>        
+         </apex:outputPanel>                    
+      <apex:outputPanel rendered="{!dis}" id="dd">
+      
+     <apex:outputLabel style="padding: 2% 1%;color: #4a4a56;font-weight: bold;" value="Email:"/>
+     <apex:outputText value="{!email }" />
+     
+     </apex:outputPanel>
+     
+     
+     <apex:InputField label="Wish Involves Air Travel:" value="{!currentParentCase.wish_involves_air_travel__c}" rendered="{!currentParentCase.wish_involves_air_travel__c == Null}" />
+     <apex:OutputField label="Wish Involves Air Travel:" value="{!currentParentCase.wish_involves_air_travel__c}" rendered="{!currentParentCase.wish_involves_air_travel__c != Null}" />
+     
+    </apex:pageBlockSection>
   
   </apex:pageBlock>
   <center>

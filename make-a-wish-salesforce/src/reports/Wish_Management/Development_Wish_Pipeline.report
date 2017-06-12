@@ -72,7 +72,7 @@
             <column>STATUS</column>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
-            <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Wish Design,Wish Scheduled,Budget Approval - Submitted,Budget Approval - Approved,Hold,Inactive</value>
+            <value>Wish Determined,Wish Design,Wish Scheduled,Budget Approval - Submitted,Budget Approval - Approved</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
@@ -92,6 +92,12 @@
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>nemo clownfish</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <name>Development Wish Pipeline</name>
@@ -106,6 +112,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <sortColumn>STATUS</sortColumn>
+    <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
         <dateColumn>CREATED_DATEONLY</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

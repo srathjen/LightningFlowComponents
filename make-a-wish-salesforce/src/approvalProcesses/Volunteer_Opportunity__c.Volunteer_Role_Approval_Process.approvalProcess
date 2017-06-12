@@ -13,7 +13,7 @@
         <field>Event_Name__c</field>
     </approvalPageFields>
     <approvalStep>
-        <allowDelegate>false</allowDelegate>
+        <allowDelegate>true</allowDelegate>
         <assignedApprover>
             <approver>
                 <type>adhoc</type>
@@ -59,6 +59,6 @@
         </action>
     </initialSubmissionActions>
     <label>Volunteer Role Approval Process</label>
-    <recordEditability>AdminOnly</recordEditability>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
     <showApprovalHistory>true</showApprovalHistory>
 </ApprovalProcess>

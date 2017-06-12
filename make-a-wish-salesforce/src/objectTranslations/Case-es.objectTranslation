@@ -568,10 +568,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Days_In_Stage__c</name>
     </fields>
     <fields>
-        <label><!-- RE-FE Description --></label>
-        <name>Description__c</name>
-    </fields>
-    <fields>
         <label><!-- Details about Impact --></label>
         <name>Details_about_Impact__c</name>
     </fields>
@@ -1373,8 +1369,8 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- 31-90 days --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>91+</masterLabel>
-            <translation><!-- 91+ --></translation>
+            <masterLabel>91-180 days</masterLabel>
+            <translation><!-- 91-180 days --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>ASAP</masterLabel>
@@ -1513,6 +1509,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <help><!-- Add the email address that should be used for post wish evaluation survey. --></help>
         <label><!-- Survey Email --></label>
         <name>Survey_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Test Record --></label>
+        <name>Test_Record__c</name>
     </fields>
     <fields>
         <label><!-- This Is My Wish Because… --></label>
@@ -1808,8 +1808,8 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Education --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Electronics International - Sports</masterLabel>
-            <translation><!-- Electronics International - Sports --></translation>
+            <masterLabel>Electronics</masterLabel>
+            <translation><!-- Electronics --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>I wish to be…</masterLabel>
@@ -2025,6 +2025,10 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sections>
             <label><!-- Emergency Contact --></label>
             <section>Emergency Contact</section>
+        </sections>
+        <sections>
+            <label><!-- Family Availability --></label>
+            <section>Family Availability</section>
         </sections>
         <sections>
             <label><!-- My Wish --></label>

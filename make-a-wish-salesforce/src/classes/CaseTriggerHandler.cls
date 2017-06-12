@@ -511,6 +511,7 @@ dbLeads.Status = 'DNQ';
                     }
                     newSubTask.WhatId = createTasks.ParentId;
                     newSubTask.RecordTypeId = defaultRecordTypeId;
+		    newSubTask.IsVisibleInSelfService = true;
                     if(parentContactIdMap.containsKey(createTasks.ParentId)) {
                         newSubTask.WhoId = parentContactIdMap.get(createTasks.ParentId);
                     }
@@ -555,6 +556,7 @@ dbLeads.Status = 'DNQ';
                 newSubTask.Subject = 'Enter interview date';
                 newSubTask.ActivityDate = System.Today() + 7;
                 newSubTask.WhatId = parentId;
+		newSubTask.IsVisibleInSelfService = true;
                 newSubTask.RecordTypeId = determinationRT;
                 if(interviewTaskParentIdMap.containsKey(parentId))  {
                     newSubTask.WhoId = interviewTaskParentIdMap.get(parentId).contactId;
@@ -629,6 +631,7 @@ dbLeads.Status = 'DNQ';
                 
                 newSubTask.WhatId = parentId;
                 newSubTask.RecordTypeId = wishGrantTaskRT;
+		newSubTask.IsVisibleInSelfService = true;
                 if(interviewTaskParentIdMap.containsKey(parentId))  {
                     newSubTask.WhoId = interviewTaskParentIdMap.get(parentId).contactId;
                 }
@@ -1135,6 +1138,7 @@ dbLeads.Status = 'DNQ';
                     }
                     newSubTask.Description = createSubTask.Description__c;
                     newSubTask.WhatId = createTasks.ParentId;
+		    newSubTask.IsVisibleInSelfService = true;
                     newSubTask.RecordTypeId = wishGrantTaskRT;
                     if(parentContactIdMap.containsKey(createTasks.ParentId)) {
                         newSubTask.WhoId = parentContactIdMap.get(createTasks.ParentId);

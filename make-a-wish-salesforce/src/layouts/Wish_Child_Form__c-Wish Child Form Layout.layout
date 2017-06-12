@@ -35,6 +35,10 @@
                 <behavior>Edit</behavior>
                 <field>oxygen_Details__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Parent_Legal_Guardian_Signature__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

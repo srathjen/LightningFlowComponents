@@ -807,6 +807,16 @@ and the date it was or will be granted. --></help>
         <name>Lead_Created_Date__c</name>
     </fields>
     <fields>
+        <help><!-- Last time USPS verification was attempted --></help>
+        <label><!-- Mailing Address Verification Attempted --></label>
+        <name>MailingAddressVerificationAttempted__c</name>
+    </fields>
+    <fields>
+        <help><!-- USPS Verified --></help>
+        <label><!-- Mailing Address Verified --></label>
+        <name>MailingAddressVerified__c</name>
+    </fields>
+    <fields>
         <label><!-- May We Contact You At Work? --></label>
         <name>May_We_Contact_You_at_Work__c</name>
         <picklistValues>
@@ -909,6 +919,16 @@ and the date it was or will be granted. --></help>
             <masterLabel>Training</masterLabel>
             <translation><!-- Training --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Last time USPS verification was attempted --></help>
+        <label><!-- Other Address Verification Attempted --></label>
+        <name>OtherAddressVerificationAttempted__c</name>
+    </fields>
+    <fields>
+        <help><!-- USPS Verified --></help>
+        <label><!-- Other Address Verified --></label>
+        <name>OtherAddressVerified__c</name>
     </fields>
     <fields>
         <label><!-- Other Favorites --></label>
@@ -2336,6 +2356,10 @@ provide contact information for each site on which you are active. --></help>
         <name>T_Shirt_Size__c</name>
     </fields>
     <fields>
+        <label><!-- Test Record --></label>
+        <name>Test_Record__c</name>
+    </fields>
+    <fields>
         <label><!-- This Is My Wish Because… --></label>
         <name>This_is_my_wish_because__c</name>
     </fields>
@@ -3328,8 +3352,8 @@ provide contact information for each site on which you are active. --></help>
             <section>Referral Source Information</section>
         </sections>
         <sections>
-            <label><!-- WIsh Child Details --></label>
-            <section>WIsh Child Details</section>
+            <label><!-- Wish Child Details --></label>
+            <section>Wish Child Details</section>
         </sections>
         <sections>
             <label><!-- Wish Child Photo --></label>

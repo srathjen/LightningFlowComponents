@@ -234,35 +234,30 @@ It will update the file path to lead file record that created during attachment 
         update leadFileList;
     }
     
-    //This method is used to create a task for chapter staff to review attachments whenever file is uploaded by volunter for wish
-    @future(callout=true)
-    public static void  createAttachmentReviewTask(Set<Id> caseFileIdsSet){
+    
+    // Used to generate task when volunteer upload image or video
+    @Future(callout = true)
+    public static void  createAttachmentReviewTask(String jsontaskListString, Set<Id> caseIdsSet){
         Constant_AC  constant = new Constant_Ac();    
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
-        Set<Id> caseIdsSet = new Set<Id>();
-        Map<Id,Id> caseOwnerMap = new Map<Id, Id>();
+        List<cg__CaseFile__c> caseFileList = (List<cg__CaseFile__c>)Json.deserialize(jsontaskListString,List<cg__CaseFile__c>.class);
+        
         Id contactId;
-        List<cg__CaseFile__c> caseFileList = [SELECT Id,cg__Case__c, cg__Case__r.RecordTypeId FROM cg__CaseFile__c WHERE cg__Case__r.RecordTypeId =: parentWishRecordTypeId AND Id IN : caseFileIdsSet];
-        if(caseFileList.size() > 0) {
-            for(cg__CaseFile__c caseFile : caseFileList) {
-                contactId = caseFile.cg__Case__c;
-                caseIdsSet.add(caseFile.cg__Case__c);
-            }  
-        }
-        if(caseIdsSet.size() > 0) {
-            for(Case caseOwner : [SELECT Id, RecordTypeId, OwnerId FROM Case WHERE RecordTypeId =: parentWishRecordTypeId AND Id IN : caseIdsSet]) {
-                caseOwnerMap.put(caseOwner.Id, caseOwner.OwnerId);
-            }
+        Map<Id, Case> caseOwnerMap = new Map<Id, Case>();
+        for(Case caseOwner : [SELECT Id, ContactId, RecordTypeId, OwnerId FROM Case WHERE RecordTypeId =: parentWishRecordTypeId AND Id IN : caseIdsSet]) {
+            caseOwnerMap.put(caseOwner.Id, caseOwner);
+            contactId = caseOwner.Id;
         }
         Set<Id> reviewPhotosSet = new Set<Id>();
-        List<Task> tskList = new List<Task>();
+        Set<Id> dupCheck = new Set<Id>();
         if(contactId != null) {
-            String jsonbody = VolunteerInterviewTask_AC.getClassOfferingRecList(contactId);
+            String jsonbody = VolunteerInterviewTask_AC.getUploadReviewTask(contactId);
             List<Task> newTaskList;
-            if(!Test.isRunningTest())     
+            if(!Test.isRunningTest()) {
                 newTaskList =  (List<Task>) JSON.deserialize(jsonbody, List<Task>.class);
-            else
+            } else {
                 newTaskList = new list<task>();
+            }
             if(newTaskList.size() > 0 ) {
                 for(Task getTask : newTaskList) {
                     reviewPhotosSet.add(getTask.WhatId);
@@ -271,19 +266,22 @@ It will update the file path to lead file record that created during attachment 
         }
         List<Task> reviewTaskList = new List<Task>();
         for(cg__CaseFile__c createTask : caseFileList) {
-            if(!reviewPhotosSet.contains(createTask.cg__Case__c)) {
+            if(!reviewPhotosSet.contains(createTask.cg__Case__c) && !dupCheck.contains(createTask.cg__Case__c)) {
                 Task reviewTask = new Task();
-                reviewTask.Subject = 'Review photos/videos';
+                reviewTask.Subject = 'Review Volunteer Upload';
                 reviewTask.WhatId = createTask.cg__Case__c;
                 reviewTask.ActivityDate = System.today().addDays(10);
                 if(caseOwnerMap.containsKey(createTask.cg__Case__c)) {
-                    reviewTask.OwnerId = caseOwnerMap.get(createTask.cg__Case__c);
+                    reviewTask.OwnerId = caseOwnerMap.get(createTask.cg__Case__c).OwnerId;
+                    reviewTask.WhoId = caseOwnerMap.get(createTask.cg__Case__c).ContactId;
                 }
                 reviewTaskList.add(reviewTask);
+                dupCheck.add(createTask.cg__Case__c);
             }
         }
         if(reviewTaskList.size() > 0) {
             insert reviewTaskList;
-        }        
+        }   
+        
     }
 }

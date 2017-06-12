@@ -1455,7 +1455,18 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
     <listViews>
         <fullName>Inkind_All</fullName>
         <columns>NAME</columns>
+        <columns>Approved_Date__c</columns>
+        <columns>Date_of_Gift__c</columns>
+        <columns>Date_of_request__c</columns>
+        <columns>Date_of_Submission__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Export_File_Name__c</columns>
         <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>In_Kind_Donation_Reimbursement__c.In_Kind_Donation</value>
+        </filters>
         <label>Inkind All</label>
     </listViews>
     <listViews>
@@ -2523,7 +2534,12 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
             </values>
         </picklistValues>
     </recordTypes>
-    <searchLayouts/>
+    <searchLayouts>
+        <customTabListAdditionalFields>Approved_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Date_of_request__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Date_of_Gift__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Date_of_Submission__c</customTabListAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <validationRules>
         <fullName>IKR_AccountName_VolunteerName_Validation</fullName>

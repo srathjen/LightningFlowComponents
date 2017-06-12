@@ -15,16 +15,16 @@
     <description>Active volunteers with Annual Conflict of Interest and Ethics Statement expiring</description>
     <filter>
         <criteriaItems>
-            <column>Contact$CreatedBy</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>contains</operator>
-            <value>integration</value>
-        </criteriaItems>
-        <criteriaItems>
             <column>Contact$RecordType</column>
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact,Contact.Board_Member</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact.Conflict_Of_Interest__r$Current__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>1</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>

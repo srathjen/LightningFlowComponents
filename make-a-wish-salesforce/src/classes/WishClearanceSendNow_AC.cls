@@ -4,21 +4,58 @@ about wish child.*/
 public class WishClearanceSendNow_AC{
     
     public Case currentParentCase{get;set;}
-    Public boolean isRush{get;set;}
+    public List<SelectOption> multiPickoptions {get;set;}       
+    Public String medicalProfContactName{get;set;}
+    Constant_AC  constant = new Constant_AC();
+    public Map<String,String> medicalProfConMap; 
+    public String email{get;set;}
+    public boolean dis{get;set;}
+    Public Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
     public WishClearanceSendNow_AC(ApexPages.StandardController controller){
-        isRush = false;
+        dis = true;
         currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushWishClearence_ChildSummary__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
-        if(currentParentCase.Rush__c == true)
-            isRush = true;
-        }
+      
+          
+    }
     
+    public List<SelectOption> getMedicalProContact(){
+       medicalProfConMap = new Map<String,String>();
+       List<SelectOption> options = new List<SelectOption>();
+        for(npe4__Relationship__c dbRelationShip  : [Select Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,
+                                                     npe4__RelatedContact__r.RecordTypeId FROM npe4__Relationship__c WHERE npe4__Contact__c =:currentParentCase.ContactId AND npe4__RelatedContact__r.RecordTypeId =:MedicalProfContactRecordTypeId]){
+       
+           options.add(new SelectOption(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip.npe4__RelatedContact__r.Name));
+           medicalProfConMap.Put(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip.npe4__RelatedContact__r.Email); 
+       }
+    
+     return options;
+    }
+    
+    public void displayEmail(){
+        if(medicalProfConMap.get(medicalProfContactName) != Null){
+        dis = true;
+        email = medicalProfConMap.get(medicalProfContactName);
+        }
+        
+    }
     
     public void SendtoDocuSign(){
         
         if(currentParentCase.wish_involves_air_travel__c == Null ||currentParentCase.Description == Null ){
             DisplayErrorMessage();
         }
-      
+        else if(currentParentCase.Rush__c == true){
+          
+           
+          case updatenewCase = new Case();
+          updatenewCase.Id = currentParentCase.Id;
+          updatenewCase.IsRushWishClearence_ChildSummary__c = true;
+          update updatenewCase;
+          DisplayMessage();
+        }
+        else if(medicalProfConMap.get(medicalProfContactName) == Null){
+            DisplayErrorMessage();
+        }
         else{
            case updatecase = new Case();
            updatecase.Id = currentParentCase.Id;
@@ -32,35 +69,28 @@ public class WishClearanceSendNow_AC{
            updatecase.Comment_2__c = Null;
            updatecase.Wish_Clearance_Sent_Date__c = system.today();
            update updatecase;
-           
            if(!Test.isRunningTest())
-           CallouttoDocusign(updateCase.Id,isRush);
+           CallouttoDocusign(updateCase.Id,medicalProfContactName,email);
            DisplayMessage();
         }
         // return wrapInst.status;
     }
     
     @future(Callout = true)
-    public static void CallouttoDocusign(Id caseId, boolean isRush){
+    public static void CallouttoDocusign(Id caseId,String conName,String conEmail){
        Case currentParentCase = [SELECT Id,ContactId,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: caseId];
-         system.debug('@@@@@@@@@@@@ currentParentCase  @@@@@@@@@@@@@@'+currentParentCase.wish_involves_air_travel__c);
-            String templateID; 
-            String account;
+         system.debug('@@@@@@@@@@@@ Name @@@@@@@@@@@@@@'+conName);
+         system.debug('@@@@@@@@@@@@ Email@@@@@@@@@@@@@@'+conEmail);
+         String account;
             String UserName;
             String Password;
             String IntegratorKey;
             String endPointURL;
-            if(isRush != true){
-             templateID = label.WishClearence;
-             }
-             else
-             {
-                templateID = label.Rush_Wish_Clearance; 
-             }
+            String templateID = label.WishClearence;
             system.debug('### templateId #####'+templateID);
             Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
-            String  name = currentParentCase.Contact.Hidden_Medical_Physician__c;
-            String email = currentParentCase.Contact.Hidden_Medical_Physician_Email__c;
+            String  name = conName;
+            String  email = conEmail;
             for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
                 UserName = credentialIns.name;
                 account = credentialIns.account__c;
@@ -83,7 +113,7 @@ public class WishClearanceSendNow_AC{
             String json='{'+ 
                 ' '+ 
                 ' "emailSubject": "Wish Clearance",'+
-                ' "emailBlurb": "MAKE A WISH",'+ 
+                ' "emailBlurb": "MAKE A WISH AMERICA",'+ 
                 ' "templateId": "'+templateID+'",'+ 
                 ' "envelopeIdStamping": "false",'+ 
                 ' "customFields":{'+
@@ -135,9 +165,11 @@ public class WishClearanceSendNow_AC{
     
     public pagereference DisplayErrorMessage(){
         if(currentParentCase.wish_involves_air_travel__c == Null)
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Please Select Wish Involves Air Travel'));
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please Select Wish Involves Air Travel'));
         if(currentParentCase.Description == Null )
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Please give the value to Description'));
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please give the value to Description'));
+        if(medicalProfConMap.get(medicalProfContactName) == Null)
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'The selected user does not have email address.'));
         return null;
     }
 }

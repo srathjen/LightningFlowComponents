@@ -17,7 +17,7 @@
         <zeronaryComplementColor>#FFFFFF</zeronaryComplementColor>
     </branding>
     <changePasswordTemplate>Automated_Volunteer_Templates/Communities_Reset_Password_Email_Template</changePasswordTemplate>
-    <emailSenderAddress>wvcsupport@wish.org</emailSenderAddress>
+    <emailSenderAddress>wvc@wish.org</emailSenderAddress>
     <emailSenderName>Wish &amp; Volunteer Center</emailSenderName>
     <enableGuestChatter>false</enableGuestChatter>
     <enableInvitation>false</enableInvitation>

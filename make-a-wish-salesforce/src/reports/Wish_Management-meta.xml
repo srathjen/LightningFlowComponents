@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ReportFolder xmlns="http://soap.sforce.com/2006/04/metadata">
     <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>jgonzales@arizona.wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
         <accessLevel>Manage</accessLevel>
-        <sharedTo>ccoode@wish.org</sharedTo>
+        <sharedTo>jharding@wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>lbeedle@arizona.wish.org</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>Manage</accessLevel>
+        <sharedTo>ngillam@wish.org</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
     <folderShares>
@@ -11,9 +26,9 @@
         <sharedToType>Role</sharedToType>
     </folderShares>
     <folderShares>
-        <accessLevel>Manage</accessLevel>
+        <accessLevel>EditAllContents</accessLevel>
         <sharedTo>National_Staff</sharedTo>
         <sharedToType>Role</sharedToType>
     </folderShares>
-    <name>Wish Management</name>
+    <name>AZ - Wish Management</name>
 </ReportFolder>

@@ -145,6 +145,14 @@
                 <behavior>Edit</behavior>
                 <field>MailingAddress</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>MailingAddressVerified__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>MailingAddressVerificationAttempted__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -177,6 +185,14 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>OtherAddress</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>OtherAddressVerified__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>OtherAddressVerificationAttempted__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -522,6 +538,7 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Account.ACC_RECORDTYPE</fields>
         <fields>Account.NAME</fields>
         <fields>npe5__Primary__c</fields>
         <fields>Constituent_Code__c</fields>
@@ -573,6 +590,7 @@
         <fields>Chapter_Role_Opportunity__c</fields>
         <fields>Role__c</fields>
         <fields>Name__c</fields>
+        <fields>Wish__c</fields>
         <fields>Reason_Inactive__c</fields>
         <fields>Status__c</fields>
         <fields>Chapter_Name__c</fields>

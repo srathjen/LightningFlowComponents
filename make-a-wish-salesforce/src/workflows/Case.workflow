@@ -216,7 +216,7 @@
         <recipients>
             <type>owner</type>
         </recipients>
-        <senderAddress>wvc@wish.org</senderAddress>
+        <senderAddress>wvcsupport@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Medical_Eligibility_Emails/Send_Email_to_Loacl_MAC_Team_Template</template>
     </alerts>

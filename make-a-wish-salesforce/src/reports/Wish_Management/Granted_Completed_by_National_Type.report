@@ -96,6 +96,12 @@
             <operator>equals</operator>
             <value>Granted,Completed</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>nemo clownfish</value>
+        </criteriaItems>
     </filter>
     <format>Matrix</format>
     <groupingsAcross>

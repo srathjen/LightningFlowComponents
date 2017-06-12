@@ -357,5 +357,29 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         {          
             Trigger.old[0].addError('There are files attached to object. You need to first delete files manually and then delete the object!');
         }
-    }   
+    }
+
+   //Reset the address verification checkbox if the address has changed
+    if(trigger.isBefore && trigger.isUpdate)
+    {
+        for(Lead newLead: trigger.new){
+            // the address is already marked as verified
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null &&
+            // one of the shipping address fields changed
+            (newLead.Street != Trigger.oldMap.get(newLead.Id).Street ||
+            newLead.State != Trigger.oldMap.get(newLead.Id).State ||
+            newLead.StateCode != Trigger.oldMap.get(newLead.Id).StateCode ||
+            newLead.City != Trigger.oldMap.get(newLead.Id).City ||
+            newLead.PostalCode != Trigger.oldMap.get(newLead.Id).PostalCode
+            )
+            ){
+                system.debug('Update AddressVerified__c>>>>'+newLead.AddressVerified__c);
+                newLead.AddressVerified__c = false;
+                newLead.AddressVerificationAttempted__c = null;
+                newLead.County__c = null;
+                
+            }
+        }
+    
+    }  	
 }

@@ -80,7 +80,7 @@
             <field>VolunteerHidden_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderAddress>salesforce@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Orientation_Virtual_Self_Paced_Registered_Email_Template</template>
     </alerts>
@@ -92,7 +92,7 @@
             <field>VolunteerHidden_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>wvcsupport@wish.org</senderAddress>
+        <senderAddress>salesforce@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Training_Virtual_Self_Paced_Registered_Email_Template</template>
     </alerts>

@@ -76,6 +76,27 @@
         <value>https://na30.salesforce.com</value>
     </labels>
     <labels>
+        <fullName>Lead_DNQ_Letter</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead DNQ Letter</shortDescription>
+        <value>a1a3600000346jn</value>
+    </labels>
+    <labels>
+        <fullName>Lead_DNQ_Medical_Professional_DDP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead DNQ Medical Professional DDP</shortDescription>
+        <value>a1a3600000346jp</value>
+    </labels>
+    <labels>
+        <fullName>Lead_DNQ_Spanish_Letter</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Lead DNQ Spanish Letter</shortDescription>
+        <value>a1a3600000346jo</value>
+    </labels>
+    <labels>
         <fullName>Local_Email_Template_ID</fullName>
         <categories>Local MAC Team Email Template ID</categories>
         <language>en_US</language>

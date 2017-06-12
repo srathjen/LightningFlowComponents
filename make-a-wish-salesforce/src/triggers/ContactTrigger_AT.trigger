@@ -8,6 +8,7 @@ Updating Affiliation status based on the application status.
 
 trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,After update,After delete, Before delete) {
     
+    string userId = UserInfo.getUserId();
     Constant_AC  constant = new Constant_AC();
     Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
     Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
@@ -36,7 +37,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
     {
         for(Contact newContact : Trigger.new)
         {
-            if(newContact.Migrated_Record__c != True)  
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
                 if(newContact.RecordTypeId == volunteerRecordTypeId){
                     contactList.add(newContact );
@@ -50,11 +51,10 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 }
             }
             
-            if(newContact.Migrated_Record__c == True)
-            {
+           
                 newContact.MailingCountry = 'United States';
                 newContact.OtherCountry = 'United States';
-            }
+           
         }
     }
     // Birthdate concatenation at before update.
@@ -69,15 +69,17 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         for(Contact newContact : Trigger.new)
         { 
             
-            if(newContact.Migrated_Record__c == True)
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
                 newContact.MailingCountry = 'United States';
                 newContact.OtherCountry = 'United States';
             }
             
-            if(newContact.migrated_record__c != True)
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
-                
+                if(newContact.RecordTypeId == volunteerRecordTypeId && newContact.RecordTypeId != Trigger.oldMap.get(newContact.Id).RecordTypeId){
+                   newContact.AccountId = newContact.Region_Chapter__c;   
+                }
                 if(newContact.Birth_Month__c != Null && newContact.Birth_Day__c != Null && newContact.Birth_Year__c != Null)
                 {
                     if(newContact.Birth_Year__c != trigger.oldmap.get(newContact.Id).Birth_Year__c || newContact.Birth_Month__c != trigger.oldmap.get(newContact.Id).Birth_Month__c || newContact.Birth_Day__c != trigger.oldmap.get(newContact.Id).Birth_Day__c )
@@ -413,7 +415,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                                 Region_Chapter__r.Name FROM Contact WHERE Id IN :Trigger.newMap.keySet()])
         {
             
-            if(conCurrRec.migrated_record__c != True)
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
                 if(conCurrRec.RecordTypeId == volunteerRecordTypeId || conCurrRec.RecordTypeId == boardMemberRT)
                 {
@@ -528,7 +530,8 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         }
         
         
-        if(RecursiveTriggerHandler.isFirstTime){
+        if(RecursiveTriggerHandler.isFirstTime || Test.isRunningTest()){
+            system.debug('Recursive Trigger'+RecursiveTriggerHandler.isFirstTime);
             RecursiveTriggerHandler.isFirstTime = false;
             if(contactIdsForEmailChange.size()>0)
             {
@@ -594,6 +597,85 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         }
         if(wishFamilyContacMap.size() > 0)
         ContactTriggerHandler.updateRelationship(wishFamilyContacMap);
+    }
+    
+    /* //Reset the address verification checkbox if the address has changed
+    if(trigger.isBefore && trigger.isUpdate)
+    {
+        for(Contact newContact : trigger.new){
+            // the mailing address is already marked as verified
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null &&
+            // one of the mailing address fields changed
+            (newContact.MailingStreet != Trigger.oldMap.get(newContact.Id).MailingStreet ||
+            newContact.MailingState != Trigger.oldMap.get(newContact.Id).MailingState ||
+            newContact.MailingStateCode != Trigger.oldMap.get(newContact.Id).MailingStateCode ||
+            newContact.MailingCity != Trigger.oldMap.get(newContact.Id).MailingCity ||
+            newContact.MailingPostalCode != Trigger.oldMap.get(newContact.Id).MailingPostalCode
+            )
+            ){
+                system.debug('Update MailingAddressVerified__c>>>>'+newContact.MailingAddressVerified__c);
+                newContact.MailingAddressVerified__c = false;
+                newContact.MailingAddressVerificationAttempted__c = null;
+                
+            }
+            
+            // the other address is already marked as verified
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null &&
+            // one of the other address fields changed
+            (newContact.OtherStreet != Trigger.oldMap.get(newContact.Id).OtherStreet ||
+            newContact.OtherState != Trigger.oldMap.get(newContact.Id).OtherState ||
+            newContact.OtherStateCode != Trigger.oldMap.get(newContact.Id).OtherStateCode ||
+            newContact.OtherCity != Trigger.oldMap.get(newContact.Id).OtherCity ||
+            newContact.OtherPostalCode != Trigger.oldMap.get(newContact.Id).OtherPostalCode
+            )
+            ){
+                system.debug('Update OtherAddressVerified__c>>>>'+newContact.OtherAddressVerified__c);
+                newContact.OtherAddressVerified__c = false;
+                newContact.OtherAddressVerificationAttempted__c = null;
+                
+            }
+        }
+    
+    }*/
+	
+	 //Reset the address verification checkbox if the address has changed
+    if(trigger.isBefore && trigger.isUpdate)
+    {
+        for(Contact newContact : trigger.new){
+            // the mailing address is already marked as verified
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null &&
+            // one of the mailing address fields changed
+            (newContact.MailingStreet != Trigger.oldMap.get(newContact.Id).MailingStreet ||
+            newContact.MailingState != Trigger.oldMap.get(newContact.Id).MailingState ||
+            newContact.MailingStateCode != Trigger.oldMap.get(newContact.Id).MailingStateCode ||
+            newContact.MailingCity != Trigger.oldMap.get(newContact.Id).MailingCity ||
+            newContact.MailingPostalCode != Trigger.oldMap.get(newContact.Id).MailingPostalCode
+            )
+            ){
+                system.debug('Update MailingAddressVerified__c>>>>'+newContact.MailingAddressVerified__c);
+                newContact.MailingAddressVerified__c = false;
+                newContact.MailingAddressVerificationAttempted__c = null;
+                newContact.County__c = null;
+                
+            }
+            
+            // the other address is already marked as verified
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null &&
+            // one of the other address fields changed
+            (newContact.OtherStreet != Trigger.oldMap.get(newContact.Id).OtherStreet ||
+            newContact.OtherState != Trigger.oldMap.get(newContact.Id).OtherState ||
+            newContact.OtherStateCode != Trigger.oldMap.get(newContact.Id).OtherStateCode ||
+            newContact.OtherCity != Trigger.oldMap.get(newContact.Id).OtherCity ||
+            newContact.OtherPostalCode != Trigger.oldMap.get(newContact.Id).OtherPostalCode
+            )
+            ){
+                system.debug('Update OtherAddressVerified__c>>>>'+newContact.OtherAddressVerified__c);
+                newContact.OtherAddressVerified__c = false;
+                newContact.OtherAddressVerificationAttempted__c = null;
+                
+            }
+        }
+    
     }
   
 }

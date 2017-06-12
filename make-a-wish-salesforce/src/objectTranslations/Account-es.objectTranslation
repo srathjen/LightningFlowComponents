@@ -6,6 +6,16 @@
         <name>Alert_for_Unassigned_Wishes__c</name>
     </fields>
     <fields>
+        <help><!-- Last time USPS verification was attempted --></help>
+        <label><!-- Billing Address Verification Attempted --></label>
+        <name>BillingAddressVerificationAttempted__c</name>
+    </fields>
+    <fields>
+        <help><!-- USPS Verified --></help>
+        <label><!-- Billing Address Verified --></label>
+        <name>BillingAddressVerified__c</name>
+    </fields>
+    <fields>
         <label><!-- Chapter Id --></label>
         <name>Chapter_Id__c</name>
     </fields>
@@ -581,6 +591,16 @@
             <masterLabel>Wife</masterLabel>
             <translation><!-- Wife --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Last time USPS verification was attempted --></help>
+        <label><!-- Shipping Address Verification Attempted --></label>
+        <name>ShippingAddressVerificationAttempted__c</name>
+    </fields>
+    <fields>
+        <help><!-- USPS Verified --></help>
+        <label><!-- Shipping Address Verified --></label>
+        <name>ShippingAddressVerified__c</name>
     </fields>
     <fields>
         <label><!-- Timezone --></label>

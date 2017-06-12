@@ -206,6 +206,11 @@
         <columns>Signed_Date__c</columns>
         <columns>Expiration_Date__c</columns>
         <filterScope>Everything</filterScope>
+        <filters>
+            <field>Migrated_Record__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
         <label>All</label>
     </listViews>
     <nameField>

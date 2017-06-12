@@ -241,6 +241,10 @@
         <name>Contact_Name_Hidden__c</name>
     </fields>
     <fields>
+        <label><!-- DB Activity Type --></label>
+        <name>DB_Activity_Type__c</name>
+    </fields>
+    <fields>
         <label><!-- Migrated Record --></label>
         <name>Migrated_Record__c</name>
     </fields>

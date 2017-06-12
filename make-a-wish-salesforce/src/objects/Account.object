@@ -914,6 +914,25 @@
         <trackFeedHistory>false</trackFeedHistory>
     </fields>
     <fields>
+        <fullName>BillingAddressVerificationAttempted__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Last time USPS verification was attempted</inlineHelpText>
+        <label>Billing Address Verification Attempted</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>BillingAddressVerified__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Boolean flag that indicates that the billing address has been USPS verified</description>
+        <externalId>false</externalId>
+        <inlineHelpText>USPS Verified</inlineHelpText>
+        <label>Billing Address Verified</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Chapter_Id__c</fullName>
         <caseSensitive>false</caseSensitive>
         <description>Contains the unique chapter Id for chapter accounts. Used for upserting records via Mulesoft.</description>
@@ -2216,6 +2235,24 @@ Help Text</description>
     <fields>
         <fullName>ShippingAddress</fullName>
         <trackFeedHistory>false</trackFeedHistory>
+    </fields>
+    <fields>
+        <fullName>ShippingAddressVerificationAttempted__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Last time USPS verification was attempted</inlineHelpText>
+        <label>Shipping Address Verification Attempted</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>ShippingAddressVerified__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>USPS Verified</inlineHelpText>
+        <label>Shipping Address Verified</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Sic</fullName>
@@ -3926,9 +3963,9 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         </sharedTo>
     </listViews>
     <listViews>
-        <fullName>Chapter_Account</fullName>
+        <fullName>Chapter_Account_V2</fullName>
         <columns>ACCOUNT.NAME</columns>
-        <columns>ACCOUNT.SITE</columns>
+        <columns>Chapter_Id__c</columns>
         <columns>ACCOUNT.ADDRESS1_STATE_CODE</columns>
         <columns>ACCOUNT.PHONE1</columns>
         <columns>ACCOUNT.TYPE</columns>
@@ -3940,7 +3977,7 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             <operation>equals</operation>
             <value>Account.Chapter</value>
         </filters>
-        <label>Chapter Account</label>
+        <label>Chapter Account_V2</label>
         <sharedTo>
             <allInternalUsers></allInternalUsers>
         </sharedTo>

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Report xmlns="http://soap.sforce.com/2006/04/metadata">
     <columns>
-        <field>CONTACT.NAME</field>
-    </columns>
-    <columns>
         <field>BIRTHDATE</field>
     </columns>
     <columns>
         <field>Contact.Current_Age__c</field>
     </columns>
     <columns>
-        <field>Case.Wish_Type__c</field>
+        <field>CONTACT.NAME</field>
     </columns>
     <columns>
         <field>DESCRIPTION</field>
@@ -20,9 +17,6 @@
     </columns>
     <columns>
         <field>Case.Start_Date__c</field>
-    </columns>
-    <columns>
-        <field>CONTACT2.CITY</field>
     </columns>
     <columns>
         <field>Contact.County__c</field>
@@ -86,8 +80,24 @@
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>nemo clownfish</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Case.Wish_Type__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>CONTACT2.CITY</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
     <name>Wish Kids Publicity Friendly</name>
     <params>
         <name>units</name>

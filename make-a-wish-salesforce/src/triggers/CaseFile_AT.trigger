@@ -1,4 +1,5 @@
 trigger CaseFile_AT on cg__CaseFile__c (before insert,after insert) {
+    
     if(Trigger.isInsert && Trigger.isBefore) {
         Map<Id, cg__CaseFile__c > newFileMap = new Map<Id, cg__CaseFile__c >();
         Map<Id, Id> caseFileMap = new Map<Id, Id>();
@@ -31,13 +32,20 @@ trigger CaseFile_AT on cg__CaseFile__c (before insert,after insert) {
     if(Trigger.isAfter && Trigger.isInsert) {
         List<Id> CaseIds = new List<Id>();
         Set<Id> caseIdsSet = new Set<Id>();
+        List<cg__CaseFile__c> caseFileList = new List<cg__CaseFile__c>();
         for(cg__CaseFile__c acc: Trigger.new){
             CaseIds.add(acc.Id);
-            if(acc.cg__Content_Type__c != 'Folder') {
-                caseIdsSet.add(acc.Id);
+            if(acc.cg__Content_Type__c.contains('image') || acc.cg__Content_Type__c.contains('video')){
+                caseIdsSet.add(acc.cg__Case__c);
+                caseFileList.add(acc);
             }
         }
-        AWSFilePath_AC.UpdateCaseFilePath(CaseIds);
-        AWSFilePath_AC.createAttachmentReviewTask(caseIdsSet);
+        if(CaseIds.size() > 0) {
+            AWSFilePath_AC.UpdateCaseFilePath(CaseIds);
+        }
+        if(caseFileList.size() > 0) {
+            String jsontaskListString = json.serialize(caseFileList);
+            AWSFilePath_AC.createAttachmentReviewTask(jsontaskListString, caseIdsSet);
+        }
     }
 }

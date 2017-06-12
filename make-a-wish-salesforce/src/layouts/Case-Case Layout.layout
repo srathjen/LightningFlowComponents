@@ -105,10 +105,6 @@
                 <field>Qualified_Date__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Description__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Unique_Wish_Record_Identifier__c</field>
             </layoutItems>

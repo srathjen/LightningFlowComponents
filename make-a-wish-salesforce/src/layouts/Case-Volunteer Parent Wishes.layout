@@ -295,7 +295,7 @@
                 <field>Subject</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Readonly</behavior>
                 <field>Origin</field>
             </layoutItems>
         </layoutColumns>
@@ -408,7 +408,7 @@
         <sizeX>3</sizeX>
         <sizeY>3</sizeY>
         <summaryLayoutItems>
-            <field>AccountId</field>
+            <field>ContactId</field>
             <posX>0</posX>
             <posY>0</posY>
         </summaryLayoutItems>

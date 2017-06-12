@@ -88,6 +88,12 @@
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Nemo Clownfish</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>

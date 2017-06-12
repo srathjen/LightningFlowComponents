@@ -4,8 +4,8 @@ global class batch_FillWishPresentationDate  implements Database.Batchable<sObje
         Constant_AC  constant = new Constant_Ac();  
         Id parentWishRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Id wishGrantedRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
-        return Database.getQueryLocator([SELECT Id,ownerid,ParentId,Parent.Anticipated_Start_Date__c,Interview_Date_Not_Set__c, Hidden_Wish_Presentation_Not_Set__c FROM CASE WHERE Parent.RecordTypeId =: parentWishRT
-                                         AND RecordTypeId =: wishGrantedRecordTypeId AND Parent.Anticipated_Start_Date__c != Null AND Presentation_Date__c= null ]);
+        return Database.getQueryLocator([SELECT Id,ownerid,ParentId,Parent.Anticipated_Start_Date__c,Parent.ContactId,Interview_Date_Not_Set__c, Hidden_Wish_Presentation_Not_Set__c FROM CASE WHERE Parent.RecordTypeId =: parentWishRT
+                                         AND RecordTypeId =: wishGrantedRecordTypeId AND Parent.Anticipated_Start_Date__c!= Null AND Presentation_Date__c= null ]);
     }
     
     global void execute(Database.BatchableContext BC, List<Case> scope) 
@@ -16,10 +16,9 @@ global class batch_FillWishPresentationDate  implements Database.Batchable<sObje
         for(Case currCase : scope)
         {
             date wishPresentationDate = currCase.Parent.Anticipated_Start_Date__c-23;
-            date wishPresentationTaskDate=currCase.Parent.Anticipated_Start_Date__c + 15;
+            date wishPresentationTaskDate=currCase.Parent.Anticipated_Start_Date__c+ 15;
             if(wishPresentationDate == Date.Today())
             {
-                System.debug('111111');
                 Case toUpdate = new Case();
                 toupdate.id = currCase.Id;
                 toUpdate.Interview_Date_Not_Set__c = True;
@@ -31,6 +30,7 @@ global class batch_FillWishPresentationDate  implements Database.Batchable<sObje
                 newTask.subject='Wish Presentation not set';
                 newTask.ownerid=currCase.ownerid;
                 newTask.Whatid=currCase.Parent.id;
+                newTask.WhoId=currCase.Parent.ContactId;
                 newTask.ActivityDate=Date.Today()+1;
                 createTaskList.add(newTask);
                 

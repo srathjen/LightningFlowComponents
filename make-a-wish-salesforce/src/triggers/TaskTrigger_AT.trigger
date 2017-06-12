@@ -152,7 +152,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             string contactId = updatedTask.WhoId;
             
             if(updatedTask.RecordTypeId == wishGrantTaskRT || updatedTask.RecordTypeId == determinationTaskRT) {
-                updatedTask.IsVisibleInSelfService = true;
+                //updatedTask.IsVisibleInSelfService = true;
             }
             if(updatedTask.subject == 'Budget is approved' || updatedTask.subject == 'Budget needs to be revised' || updatedTask.subject == 'Follow-up on wish clearance' || updatedTask.subject == 'Interview date not set'
                || updatedTask.subject == 'Wish Child Birthday Reminder' || updatedTask.subject == 'Wish Family Packet not submitted') {

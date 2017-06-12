@@ -43,7 +43,7 @@
         <field>Case.Region__c</field>
     </columns>
     <filter>
-        <booleanFilter>1 AND 2 AND 3 AND (4 OR 5) AND 6 AND (7 OR 8)</booleanFilter>
+        <booleanFilter>(1 AND 2 AND 3 AND (4 OR 5) AND 6 AND (7 OR 8)) AND 9</booleanFilter>
         <criteriaItems>
             <column>RECORDTYPE</column>
             <isUnlocked>true</isUnlocked>
@@ -91,6 +91,12 @@
             <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>nemo clownfish</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>

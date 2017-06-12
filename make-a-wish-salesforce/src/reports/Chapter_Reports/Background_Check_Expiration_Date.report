@@ -19,14 +19,6 @@
         <field>Background_check__c$Date__c</field>
     </columns>
     <description>Expiration dates Background check - Name and contact info for volunteers who have background check expiring next 30 days</description>
-    <filter>
-        <criteriaItems>
-            <column>Background_check__c$Volunteer__c.is_Active_Volunteer__c</column>
-            <isUnlocked>false</isUnlocked>
-            <operator>equals</operator>
-            <value>1</value>
-        </criteriaItems>
-    </filter>
     <format>Tabular</format>
     <name>Background Check Expiration Date</name>
     <params>

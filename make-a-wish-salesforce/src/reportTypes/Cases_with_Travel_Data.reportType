@@ -41,11 +41,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Source</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>BusinessHours</field>
             <table>Case</table>
         </columns>
@@ -527,11 +522,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Days_In_Stage__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Description__c</field>
             <table>Case</table>
         </columns>
         <columns>
