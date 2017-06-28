@@ -298,7 +298,7 @@ benefits.</li>
               <div style="margin-bottom:30px; display:block;clear:both;"><div style="width:100%;border-bottom:1px solid #000 !important; border:none;" type="text"></div><div style="font-size:14px;font-style:italic;">Parent/Legal Guardian Signature : <span style="padding-left:70px;">Date</span></div></div>
           </div>
      </apex:repeat>  -->   
-          wcfUtil.listofSenderName
+         
             <table style="min-width:720px;hight:130px;border=5px solid red;style:width:100%;">
            
              <apex:variable var="i" value="{!1}"/> 

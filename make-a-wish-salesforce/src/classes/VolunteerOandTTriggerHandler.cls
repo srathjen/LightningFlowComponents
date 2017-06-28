@@ -171,7 +171,7 @@ Public class VolunteerOandTTriggerHandler
                {
                  if(activeContactIdsSet.contains(currContactId))
                  {
-                   updateCon.is_Active_Volunteer__c = True;
+                //   updateCon.is_Active_Volunteer__c = True;
                  }
                }
               updateContactList.add(updateCon);

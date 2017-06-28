@@ -25,6 +25,7 @@ public class WishChildSummary_AC_Test {
         wishCLear.DisplayErrorMessage();
         wishClear.displayEmail();
         wishClear.cancel();
+        
     }
     
     public static testMethod void createParentCaseWithRush(){
@@ -52,6 +53,10 @@ public class WishChildSummary_AC_Test {
         wishCLear.DisplayErrorMessage();
         wishClear.displayEmail();
         wishClear.cancel();
+        wishClear.ReturnToWish();
+        wishClear.ReturnToWishClearanceForm();
+        
+        
     }
     
     public static testMethod void createParentCaseWithAirTravel(){
@@ -65,7 +70,16 @@ public class WishChildSummary_AC_Test {
         updatecase.Id = caseId.Id;
         updatecase.Description = 'test';
         updatecase.Wish_Clearance_Sent_Date__c = system.today();
+        updatecase.Rush__c =true;
+        updatecase.Rush_Explanation__c ='test';
+        updatecase.Rush_Timeframe__c ='ASAP';
         update updatecase;
+        
+        case newCase = new case();
+        newCase.IsRushWishClearence_ChildSummary__c = true;
+        newCase.Id = caseId.id;
+        update newCase;
+        
         OrientationandTrainingUtil.insertDocusignSetting();
         ApexPAges.StandardController sc = new ApexPages.StandardController(updatecase);
         PageReference pageRef = Page.WishChildSummary_VF;
@@ -78,6 +92,10 @@ public class WishChildSummary_AC_Test {
         wishCLear.DisplayErrorMessage();
         wishClear.displayEmail();
         wishClear.cancel();
+        wishClear.ReturnToWish();
+        wishClear.ReturnToWishClearanceForm();
+        
+        
     }
        
     public static testMethod void createParentCaseWithTravel(){
@@ -94,6 +112,9 @@ public class WishChildSummary_AC_Test {
         updatecase.Appropriate_Comments__c = Null;
         updatecase.Please_Explain__c = Null;
         updatecase.Date_of_last_visit_treatment__c = Null;
+        updatecase.Rush__c =true;
+        updatecase.Rush_Explanation__c ='test';
+        updatecase.Rush_Timeframe__c ='ASAP';
         updatecase.Comments__c = Null;
         updatecase.Comment_1__c = Null;
         updatecase.Comment_2__c = Null;
@@ -108,13 +129,16 @@ public class WishChildSummary_AC_Test {
         Test.setCurrentPage(pageRef);
         WishChildSummary_AC wishClear = new WishChildSummary_AC(sc);
         wishClear.medicalProfContactName = contactMedicalProfessChild.Name;
+        wishClear.email = contactMedicalProfessChild.Email;
         wishClear.getMedicalProContact();
         wishClear.displayEmail();
         wishClear.SendtoDocuSign();
         Test.StartTest();
         boolean isRush = false;
-        Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
+        Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator());
         WishChildSummary_AC.CallouttoDocusign(caseId.id,contactMedicalProfessChild.Name,contactMedicalProfessChild.Email);
+        System.assertEquals(wishClear.medicalProfContactName,contactMedicalProfessChild.Name);
         Test.StopTest();
     }
+
 }

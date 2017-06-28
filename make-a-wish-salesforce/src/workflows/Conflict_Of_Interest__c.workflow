@@ -85,6 +85,15 @@
         <template>Automated_Volunteer_Templates/COI_Expiring_30_Days_Email_Template</template>
     </alerts>
     <fieldUpdates>
+        <fullName>Hidden_Conflict_Expire</fullName>
+        <field>HiddenConflictExpire__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Hidden Conflict Expire</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Update_Hidden_Conflict_Expire</fullName>
         <description>This record is used to update the &quot;Hidden Conflict Expire&quot;  in conflict of Interest record.</description>
         <field>HiddenConflictExpire__c</field>
@@ -98,9 +107,9 @@
         <fullName>COI%3A Volunteer Status Update</fullName>
         <active>true</active>
         <criteriaItems>
-            <field>Conflict_Of_Interest__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <criteriaItems>
             <field>Conflict_Of_Interest__c.Current__c</field>
@@ -115,7 +124,7 @@
         <triggerType>onCreateOnly</triggerType>
         <workflowTimeTriggers>
             <actions>
-                <name>Update_Hidden_Conflict_Expire</name>
+                <name>Hidden_Conflict_Expire</name>
                 <type>FieldUpdate</type>
             </actions>
             <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
@@ -193,4 +202,76 @@
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
     </rules>
+    <tasks>
+        <fullName>COI_ET_COI_Expired_7_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>COI ET : COI Expired (7 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>COI_ET_COI_Expiring_16_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>COI ET : COI Expiring (16 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>COI_ET_COI_Expiring_23_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>COI ET : COI Expiring (23 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>COI_ET_COI_Expiring_2_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>COI ET : COI Expiring (2 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>COI_ET_COI_Expiring_30_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>COI ET : COI Expiring (30 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>COI_ET_COI_Expiring_9_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>COI ET : COI Expiring (9 Days)</subject>
+    </tasks>
 </Workflow>

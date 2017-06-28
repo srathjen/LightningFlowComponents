@@ -1,5 +1,4 @@
 /************************************************************************************
-Created by : Vennila Paramasivam
 Created Date : 07/25/2016
 Author : Mst Solutions
 Description : Unit Test for TaskTrigger_AT and TaskTriggerHandler
@@ -7,370 +6,311 @@ Description : Unit Test for TaskTrigger_AT and TaskTriggerHandler
 
 @isTest
 
-Public class TaskTrigger_Test
-{
-    static testmethod void createBirthDayTask()
-    {
-        Case currCase = TestClassUtil.CreateParentCase();
-        String contactId;
-        caseteamrole cr=new caseteamrole();
-        System.RunAs(new User(Id = UserInfo.getUserId()))
-        {
-            TestClassUtil.createProspectiveVolunteerUser();
-        }
-        System.RunAs(TestClassUtil.newProspectiveVolunteerUser)
-        {
-            User currUser = [SELECT id, contactId FROM User WHERE Id = :userInfo.getUserId()];
-            contactId = currUser.contactId;
-            
-        }
-        System.RunAs(new User(Id = UserInfo.getUserId()))
-        {
-            
-            cr.accesslevel='edit';
-            cr.name='Test';
-            cr.PreferencesVisibleInCSP=true;
-            insert(cr);
-        }
-        CaseTeamMember currMember = new CaseTeamMember();
-        currMember.ParentId = currCase.id;
-        currMember.memberId = contactId;
-        currMember.TeamRoleId = cr.id;
-        insert currMember;
-        
-        
-        // Create Birthday Task
-        Task newTask = new Task();
-        newTask.whatId = currCase.id;
-        newTask.subject = 'Wish Child Birthday Reminder';
-        newTask.OwnerId = userInfo.getUserId();
-        insert newTask;
-        
-        
-    }
+Public class TaskTrigger_Test { 
     
-    static testmethod void createRecurranceTask()
-    {
-        Case currCase = TestClassUtil.CreateParentCase();
-        String contactId;
-        caseteamrole cr=new caseteamrole();
-        System.RunAs(new User(Id = UserInfo.getUserId()))
-        {
-            TestClassUtil.createProspectiveVolunteerUser();
-        }
-        System.RunAs(TestClassUtil.newProspectiveVolunteerUser)
-        {
-            User currUser = [SELECT id, contactId FROM User WHERE Id = :userInfo.getUserId()];
-            contactId = currUser.contactId;
-            
-        }
-        System.RunAs(new User(Id = UserInfo.getUserId()))
-        {
-            
-            cr.accesslevel='edit';
-            cr.name='test';
-            cr.PreferencesVisibleInCSP=true;
-            insert(cr);
-        }
-        CaseTeamMember currMember = new CaseTeamMember();
-        currMember.ParentId = currCase.id;
-        currMember.memberId = contactId;
-        currMember.TeamRoleId = cr.id;
-        insert currMember;
-        
-        Chapter_Action_Track__c currTrack = TestClassUtil.CreateChapterActionTrack();
-        currTrack.Chapter_Name__c = TestClassUtil.createVolunteerAccount().id;
-        currTrack.sort_order__c = 2;
-        insert currTrack;
-        
-        Case updateCase = new Case();
-        updateCase.id = currCase.id;
-        updateCase.wish_type__c = 'Standard';
-        updateCase.subject = 'Wish Determination';
-        updateCase.ChapterName__c =currTrack.Chapter_Name__c ;
-        update updateCase;
-        
-        // Create Birthday Task
+    //Used to create wishchild and parent case record
+    @testSetup static void setup() {
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Task newTask = new Task();
-        newTask.whatId = currCase.id;
-        newTask.subject = 'Wish Determination';
-        newTask.WhoId = wishChild.Id;
-        
-        insert newTask;
-        
-        newTask.Status = 'Completed';
-        update newTask;
-        
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id); 
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
     }
     
-    
-    static testMethod void createInterviewTask()
-    {
-        Task newTask = TaskTrigger_Test.createTask();
-        newTask.Confirmed_Date__c = Date.Today();
-        Database.saveResult result = Database.Update(newTask,false);
-        System.assertEquals('Please Enter Venue',result.getErrors()[0].getMessage());
-        
-    }
-    static testMethod void UpdateInterviewTask()
-    {
-        Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-        Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-        OrientationandTrainingUtil.createAffiliation(con.id);
-        Conflict_Of_Interest__c  createCOI = OrientationandTrainingUtil.createCOI(con.id);
-        Role__c currRole = OrientationandTrainingUtil.createRole();
-        Chapter_Role__c  currChapRole = OrientationandTrainingUtil.createChapter(acc.id,currRole.id);
-        Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id,currChapRole.id);
-        
-        Task newTask = TaskTrigger_Test.createTask();
-        newTask.Confirmed_Date__c = Date.Today().addDays(2);
-        newTask.Confirmed_Time__c = '2 PM';
-        newTask.Venue__c = 'Test';
-        Update newTask;
-        newTask.Status = 'Approved';
-        newTask.whoId = con.id;
-        update newTask;
-    }
-    
-    static testMethod void UpdateVolReoleStatus()
-    {
-        Account acc = OrientationandTrainingUtil.createVolunteerAccount();
-        Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-        OrientationandTrainingUtil.createAffiliation(con.id);
-        Conflict_Of_Interest__c  createCOI = OrientationandTrainingUtil.createCOI(con.id);
-        Role__c currRole = OrientationandTrainingUtil.createRole();
-        Chapter_Role__c  currChapRole = OrientationandTrainingUtil.createChapter(acc.id,currRole.id);
-        currChapRole.Background_Check_Required__c  = True;
-        update currChapRole;
-        Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id,currChapRole.id);
-        Orientation_Training__c  currOandT = OrientationandTrainingUtil.CreateVolunteerTrainingRecord();
-        Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id,currOandT.id);
-        Task newTask = TaskTrigger_Test.createTask();
-        newTask.Confirmed_Date__c = Date.Today().addDays(2);
-        newTask.Confirmed_Time__c = '2 PM';
-        newTask.Venue__c = 'Test';
-        Update newTask;
-        newTask.Status = 'Approved';
-        newTask.whoId = con.id;
-        update newTask;
-    }
-    static testMethod void UpdateToDeclineStatus()
-    {
-        String contactId;
-        System.RunAs(new User(Id = UserInfo.getUserId()))
-        {
-            TestClassUtil.createProspectiveVolunteerUser();
-        }
-        System.RunAs(TestClassUtil.newProspectiveVolunteerUser)
-        {
-            User currUser = [SELECT id, contactId FROM User WHERE Id = :userInfo.getUserId()];
-            contactId = currUser.contactId;
-            
-        }
-        TaskTrigger_Test.CreateAffiliation(contactId, 'active');
-        Task newTask = TaskTrigger_Test.createTask();
-        newTask.Confirmed_Date__c = Date.Today().addDays(2);
-        newTask.Confirmed_Time__c = '2 PM';
-        newTask.Venue__c = 'Test';
-        Update newTask;
-        newTask.Status = 'Declined';
-        newTask.whoId = contactId;
-        update newTask;
-        
-    }
-    
-    Static task createTask()
-    { 
-        Constant_AC  constant = new Constant_Ac();
-        Id interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-        Task currTask = new Task();
-        currTask.Available_Date2__c  = Date.Today().addDays(2);
-        currTask.Available_Time2__c  = '7 pm';
-        currTask.Available_Date1__c  = Date.Today().addDays(2);
-        currTask.Available_Time1__c  = '6pm';
-        currTask.RecordTypeId = interviewRT;
-        currTask.Subject = 'Interview Task';
-        currTask.Availability_Time_Other1__c = 'Hi';
-        currTask.Availability_Time_Other2__c = 'Hi';
-        currTask.Available_Date3__c  = Date.Today().addDays(3);
-        currTask.Available_Time1__c  = '6pm';
-        currTask.Availability_Time_Other3__c = 'Hi';
-        insert currTask;
-        return currTask;
-    }
-    
-    
-    
-    static npe5__Affiliation__c CreateAffiliation(Id contactId, String status)
-    {
-        
-        npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-        neworgAffiliation.npe5__Contact__c  = contactId;
-        neworgAffiliation.npe5__Organization__c = TestClassUtil.createVolunteerAccount().Id;
-        neworgAffiliation.npe5__Primary__c = true;
-        neworgAffiliation.npe5__Status__c = status;
-        insert neworgAffiliation;
-        return neworgAffiliation;
-        
-    }
-    //Used to create checkin task for wish child family
-    static testMethod void checkinTask() {
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        Task checkinTask = OrientationandTrainingUtil.createFamilyCheckinTask(parentCase.Id);
-        checkinTask.Status = 'Completed';
-        update checkinTask;
-    }
-    
-    //Used to create Flight booking task for wish child family
-    static testMethod void flightBookingTask() {
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        Task checkinTask = OrientationandTrainingUtil.createFightBookingTask(parentCase.Id);
-        checkinTask.Status = 'Completed';
-        update checkinTask;
-    }
-    
-    //Used to create Budget task for wish child family
-    static testMethod void budgetTask() {
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        Task checkinTask = OrientationandTrainingUtil.createBudgetTask(parentCase.Id);
-        checkinTask.Status = 'Completed';
-        update checkinTask;
-    }
-    
-    //Used to create Passport Request task for wish child family
-    static testMethod void passportRequestTask() {
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        Task checkinTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
-        checkinTask.Status = 'Completed';
-        update checkinTask;
-    }
-    
-    //Used to create upload task for volunteer
-    static testMethod void createUploadTask() {
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
-        uploadTask.Subject = 'Review photos/videos';
-        uploadTask.Status = 'Completed';
-        update uploadTask;
-    }
-    
-    //Used to create Wish Granted Task
-    static testMethod void createWishGrantedTask() {
+    //Wish Granting open task
+    static testMethod void CheckWishGrantTask(){
         Constant_AC constant = new Constant_AC();
-        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
-        uploadTask.Subject = 'Wish Granted Task';
-        uploadTask.RecordTypeId = wishGrantTaskRT;
-        uploadTask.Status = 'Completed';
-        update uploadTask;
-    }
-    
-    //Used to create Wish Granted Task
-    static testMethod void createFollowupTask() {
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
-        uploadTask.Subject = 'Volunteer wish follow-up activities not complete';
-        uploadTask.Status = 'Completed';
-        update uploadTask;
-    }
-    
-    //Used to create Wish Granted Task
-    static testMethod void WishPresentationDateEntered() {
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
-        uploadTask.Subject = 'wish presentation date entered';
-        uploadTask.Status = 'Completed';
-        update uploadTask;
-    }
-    
-    static testMethod void closeTaskValidationMethod(){
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        Case parentUpdate = new Case();
-        parentUpdate.Id = parentCase.Id;
-        parentUpdate.Presentation_Date__c = Date.today();
-        parentUpdate.Wish_Presentation_Set__c = true;
-        update parentUpdate;
-        Constant_AC constant = new Constant_AC();
-        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
-         Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
-        wishGrantedCase.Presentation_Date__c = System.today();
-        wishGrantedCase.Wish_Presentation_Set__c = True;
-        wishGrantedCase.Time__c = '1:30';
-        wishGrantedCase.Location_Address__c = 'Sample';
-        wishGrantedCase.Name_of_Location__c = 'Sample';
-        update wishGrantedCase;
-        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
-        uploadTask.RecordTypeId = wishGrantTaskRT;
-        uploadTask.Subject = 'Wish Presentation not set';
-        uploadTask.Status = 'Completed';
-        update uploadTask;
-       
-       
-    }
-    
-    static testMethod void wishConceptApprovalTask(){
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        Case parentUpdate = new Case();
-        parentUpdate.Id = parentCase.Id;
-        parentUpdate.Presentation_Date__c = Date.today();
-        parentUpdate.Wish_Presentation_Set__c = true;
-        parentUpdate.Status = 'Wish Determined';
-         parentUpdate.Sub_Status__c = 'Within Policy';
+        Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
+        Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId(); 
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Contact wishChildInfo = [SELECT Id FROM Contact WHERE RecordTypeId =: wishChildRecordTypeId LIMIT 1];
+        Task wishGrantingTask = new Task(Subject = 'Granting Task', Status = 'New', Task_Type__c = 'Wish Granting', RecordTypeId = volunteerTaskRT, WhoId = wishChildInfo.Id, WhatId = parentCaseInfo.Id);
+        insert wishGrantingTask;
+        System.assertEquals(parentCaseInfo.Id, wishGrantingTask.WhatId);
+        Task updateToCloseStatus = new Task();
+        updateToCloseStatus.Id = wishGrantingTask.Id;
+        updateToCloseStatus.Status = 'Completed';
+        Update updateToCloseStatus;
+        System.assertEquals('Completed', updateToCloseStatus.Status);
         
-        update parentUpdate;
-        Constant_AC constant = new Constant_AC();
-        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
-         Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
-        wishGrantedCase.Presentation_Date__c = System.today();
-        wishGrantedCase.Wish_Presentation_Set__c = True;
-        wishGrantedCase.Time__c = '1:30';
-        wishGrantedCase.Location_Address__c = 'Sample';
-        wishGrantedCase.Name_of_Location__c = 'Sample';
-        update wishGrantedCase;
-        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
-        uploadTask.RecordTypeId = wishGrantTaskRT;
-        uploadTask.Subject = 'Wish concept approval';
-        uploadTask.Status = 'Completed';
-        update uploadTask;
-       
-       
     }
     
-   /*static testMethod void wishNotClosed(){
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        Case parentUpdate = new Case();
-        parentUpdate.Id = parentCase.Id;
-        parentUpdate.Presentation_Date__c = Date.today();
-        parentUpdate.Wish_Presentation_Set__c = true;
-       parentUpdate.Diagnosis_Verification_Receive_Date__c = Date.today();
-       parentUpdate.Referral_Date__c = Date.today();
-        parentUpdat.Status = 'Closed';
-        update parentUpdate;
+    //Wish Granting open task
+    static testMethod void CheckWishGrantTaskWithOpenTask(){
         Constant_AC constant = new Constant_AC();
-        Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
-         Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
-        wishGrantedCase.Presentation_Date__c = System.today();
-        wishGrantedCase.Wish_Presentation_Set__c = True;
-        update wishGrantedCase;
-        Task uploadTask = OrientationandTrainingUtil.passportRequestTask(parentCase.Id);
-        uploadTask.RecordTypeId = wishGrantTaskRT;
-        uploadTask.Subject = 'Wish not closed';
-        uploadTask.Status = 'Completed';
-        update uploadTask;
-       
-       
-    }*/
+        Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
+        Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId(); 
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Contact wishChildInfo = [SELECT Id FROM Contact WHERE RecordTypeId =: wishChildRecordTypeId LIMIT 1];
+        Task wishGrantingNewTask = new Task(Subject = 'Granting Open Task', Status = 'New', Task_Type__c = 'Wish Granting', RecordTypeId = volunteerTaskRT, WhoId = wishChildInfo.Id, WhatId = parentCaseInfo.Id);
+        insert wishGrantingNewTask;
+        System.assertEquals('Granting Open Task', wishGrantingNewTask.Subject);
+        Task wishGrantingTask = new Task(Subject = 'Granting Close Task', Status = 'New', Task_Type__c = 'Wish Granting', RecordTypeId = volunteerTaskRT, WhoId = wishChildInfo.Id, WhatId = parentCaseInfo.Id);
+        insert wishGrantingTask;
+        System.assertEquals(parentCaseInfo.Id, wishGrantingTask.WhatId);
+        Task updateToCloseStatus = new Task(Id = wishGrantingTask.Id, Status = 'Completed');
+        update updateToCloseStatus;
+        System.assertEquals('Completed', updateToCloseStatus.Status);
+    }
+    
+    //Volunteer Followup Task
+    static testMethod void checkFollowUpTask() {
+        Constant_AC constant = new Constant_AC();
+        Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
+        Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId(); 
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Contact wishChildInfo = [SELECT Id FROM Contact WHERE RecordTypeId =: wishChildRecordTypeId LIMIT 1];
+        Contact volunteerContact = [SELECT Id FROM Contact WHERE RecordTypeId =: volunteerRecordTypeId LIMIT 1];
+        User currentVoulnteerUser;
+        CaseTeamRole caseTeamRoleInfo = [SELECT Id, Name FROM CaseTeamRole WHERE Name = 'Wish Granter'];
+        System.RunAs(new User(Id = UserInfo.getUserId())){
+            currentVoulnteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunteerContact.Id);
+        }
+        CaseTeamMember newCaseTeamMember = new CaseTeamMember (ParentId = parentCaseInfo.Id, TeamRoleId = caseTeamRoleInfo.Id, MemberId = currentVoulnteerUser.Id);
+        insert newCaseTeamMember;
+        Task volunteerFollowup = new Task(Subject = 'Volunteer wish follow-up activities not complete', Status = 'New', Task_Type__c = 'Wish Granting', RecordTypeId = volunteerTaskRT, WhoId = wishChildInfo.Id, WhatId = parentCaseInfo.Id, OwnerId = currentVoulnteerUser.Id);
+        insert volunteerFollowup;
+        Task updateToCloseStatus = new Task(Id = volunteerFollowup.Id, Status = 'Completed');
+        update updateToCloseStatus;
+    }
+    
+    //Volunteer Followup open task and BirthDayTask
+    static testMethod void checkFollowUpOpenTaskANDBirthdayTask() {
+        Constant_AC constant = new Constant_AC();
+        Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
+        Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId(); 
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Contact wishChildInfo = [SELECT Id FROM Contact WHERE RecordTypeId =: wishChildRecordTypeId LIMIT 1];
+        Contact volunteerContact = [SELECT Id FROM Contact WHERE RecordTypeId =: volunteerRecordTypeId LIMIT 1];
+        User currentVoulnteerUser;
+        CaseTeamRole caseTeamRoleInfo = [SELECT Id, Name FROM CaseTeamRole WHERE Name = 'Wish Granter'];
+        System.RunAs(new User(Id = UserInfo.getUserId())){
+            currentVoulnteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunteerContact.Id);
+        }
+        CaseTeamMember newCaseTeamMember = new CaseTeamMember (ParentId = parentCaseInfo.Id, TeamRoleId = caseTeamRoleInfo.Id, MemberId = currentVoulnteerUser.Id);
+        insert newCaseTeamMember;
+        Task wishChildBirthdayTask = new Task(Subject = 'Wish Child Birthday Reminder', Status = 'New', Task_Type__c = 'Wish Granting', RecordTypeId = volunteerTaskRT, WhoId = wishChildInfo.Id, WhatId = parentCaseInfo.Id, OwnerId = currentVoulnteerUser.Id);
+        insert wishChildBirthdayTask;
+        
+        Task volunteerFollowup = new Task(Subject = 'Volunteer wish follow-up activities not complete', Status = 'New', Task_Type__c = 'Wish Granting', RecordTypeId = volunteerTaskRT, WhoId = wishChildInfo.Id, WhatId = parentCaseInfo.Id, OwnerId = currentVoulnteerUser.Id);
+        insert volunteerFollowup;
+        Task updateToCloseStatus = new Task(Id = volunteerFollowup.Id, Status = 'Completed');
+        try {
+            update updateToCloseStatus;
+        } catch (Exception e) {
+            
+        }
+    }
+    
+    //Referral DNQ Lead Task
+    static testmethod void UpdateLeadCloseDate() {
+        Constant_AC constant = new Constant_AC();
+        Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
+        Account chapterAccount = [SELECT Id FROM Account LIMIT 1];
+        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
+        insert newLead;
+        Task referralDNQTask = new Task(Subject = 'Referral DNQ', Status = 'New', RecordTypeId = volunteerTaskRT, WhoId = newLead.Id);
+        insert referralDNQTask;
+        Task updateToCloseStatus = new Task(Id = referralDNQTask.Id, Status = 'Completed');
+        update updateToCloseStatus;
+    }
+    
+    //Affiliation Status Change
+    static testmethod void UpdateAffiliationStatusAsDeclined() {
+        Constant_AC constant = new Constant_AC();
+        Id taskInterviewRecordType = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Contact volunteerContact = [SELECT Id FROM Contact WHERE RecordTypeId =: volunteerRecordTypeId LIMIT 1];
+        npe5__Affiliation__c neworgAffiliation = OrientationandTrainingUtil.CreateAffiliation(volunteerContact.Id);
+        Task referralDNQTask = new Task(Subject = 'Background Check', Status = 'New', RecordTypeId = taskInterviewRecordType, WhoId = volunteerContact.Id);
+        insert referralDNQTask;
+        Task updateToCloseStatus = new Task(Id = referralDNQTask.Id, Status = 'Declined');
+        update updateToCloseStatus;
+    }
+    
+    //Udate familcheckin date
+    static testmethod void updateCheckinDate() {
+        Constant_AC constant = new Constant_AC();
+        Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
+        Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId(); 
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Contact wishChildInfo = [SELECT Id FROM Contact WHERE RecordTypeId =: wishChildRecordTypeId LIMIT 1];
+        Task checkInTask = new Task(Subject = 'Check in with the family every 30 days', Status = 'New', RecordTypeId = volunteerTaskRT, WhoId = wishChildInfo.Id, WhatId = parentCaseInfo.Id);
+        insert checkInTask;
+        System.assertEquals(parentCaseInfo.Id, checkInTask.WhatId);
+        Task updateToCloseStatus = new Task(Id = checkInTask.Id, Status = 'Completed');
+        update updateToCloseStatus;
+    }
+    
+    //Staff Review Task
+    static testmethod void CreateUploadTaskForWishOwner() {
+        Constant_AC constant = new Constant_AC();
+        Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
+        Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId(); 
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Contact wishChildInfo = [SELECT Id FROM Contact WHERE RecordTypeId =: wishChildRecordTypeId LIMIT 1];
+        Task checkInTask = new Task(Subject = 'Review photos/videos', Status = 'New', RecordTypeId = volunteerTaskRT, WhoId = wishChildInfo.Id, WhatId = parentCaseInfo.Id);
+        insert checkInTask;
+        System.assertEquals(parentCaseInfo.Id, checkInTask.WhatId);
+        Task updateToCloseStatus = new Task(Id = checkInTask.Id, Status = 'Completed');
+        update updateToCloseStatus;
+    }
+    //Used to create SneakPeek Task
+    static testMethod void SneakPeekTask() {
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Task sneakPeek = OrientationandTrainingUtil.createSneakPeek(parentCaseInfo.Id);
+        Task flightBookingTask = OrientationandTrainingUtil.createFightBookingTask(parentCaseInfo.Id);
+        flightBookingTask.Status = 'Completed';
+        update flightBookingTask;
+        Task passportTask = OrientationandTrainingUtil.passportRequestTask(parentCaseInfo.Id);
+        Task budgetTask = OrientationandTrainingUtil.createBudgetTask(parentCaseInfo.Id);
+        budgetTask.Status = 'Completed';
+        update budgetTask;
+    }  
+    
+    //Used to create SneakPeek Activity Date null
+    static testMethod void SneakPeekTaskActivityDateAsNull() {
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Task sneakPeek = OrientationandTrainingUtil.createSneakPeek(parentCaseInfo.Id);
+        sneakPeek.ActivityDate = null;
+        update sneakPeek;
+        Task flightBookingTask = OrientationandTrainingUtil.createFightBookingTask(parentCaseInfo.Id);
+        flightBookingTask.Status = 'Completed';
+        update flightBookingTask;
+        Task passportTask = OrientationandTrainingUtil.passportRequestTask(parentCaseInfo.Id);
+        passportTask.ActivityDate = null;
+        update passportTask;
+        Task budgetTask = OrientationandTrainingUtil.createBudgetTask(parentCaseInfo.Id);
+        budgetTask.Status = 'Completed';
+        update budgetTask;
+    }
+    
+    //Passport Request Task
+    static testMethod void PassPortRequest() {
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Task cruiseTask = new Task(Subject = 'Cruise request form', WhatId = parentCaseInfo.Id, ActivityDate = System.today());
+        insert cruiseTask;
+        Task passportTask = OrientationandTrainingUtil.passportRequestTask(parentCaseInfo.Id);
+        passportTask.Status = 'Completed';
+        update passportTask;
+        
+    }
+    
+    //Cruise request form Task
+    static testMethod void CruiseTaskActivityAsNull() {
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Task cruiseTask = new Task(Subject = 'Cruise request form', WhatId = parentCaseInfo.Id);
+        insert cruiseTask;
+        Task passportTask = OrientationandTrainingUtil.passportRequestTask(parentCaseInfo.Id);
+        passportTask.Status = 'Completed';
+        update passportTask;
+        
+    }
+    
+    //Affiliation Status as Approved
+    static testmethod void UpdateAffiliationStatusAsApproved() {
+        Constant_AC constant = new Constant_AC();
+        Id taskInterviewRecordType = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Account chapterAccount = [SELECT Id FROM Account LIMIT 1];
+        Contact volunteerContact = [SELECT Id FROM Contact WHERE RecordTypeId =: volunteerRecordTypeId LIMIT 1];
+        Role__c newRole = OrientationandTrainingUtil.createRole();
+        Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,newRole.Id);
+        chapterRole.Background_Check_Required__c = true;
+        update chapterRole;
+        Volunteer_Roles__c volunteerRole = OrientationandTrainingUtil.createVolRole(volunteerContact.Id,chapterRole.Id);
+        volunteerRole.Status__c  = 'Prospective';
+        update volunteerRole;
+        npe5__Affiliation__c neworgAffiliation = OrientationandTrainingUtil.CreateAffiliation(volunteerContact.Id);
+        Task referralDNQTask = new Task(Subject = 'Background Check', Status = 'New', RecordTypeId = taskInterviewRecordType, WhoId = volunteerContact.Id);
+        insert referralDNQTask;
+        Task updateToCloseStatus = new Task(Id = referralDNQTask.Id, Status = 'Approved');
+        //update updateToCloseStatus;
+    }
+    
+    //Wish Presentation Date Entered
+    static testmethod void WishPresentationDateEntered() {
+        Constant_AC constant = new Constant_AC();
+        Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Contact wishChildInfo = [SELECT Id FROM Contact WHERE RecordTypeId =: wishChildRecordTypeId LIMIT 1];
+        Case WishGrantCase = OrientationandTrainingUtil.createWishGrantCase(wishChildInfo.Id,parentCaseInfo.Id);
+        Task presentationDate = new Task(Subject = 'wish presentation date entered', Status = 'New', WhatId = WishGrantCase.Id);
+        insert presentationDate;
+        Task updateToCloseStatus = new Task(Id = presentationDate.Id, Status = 'Completed');
+        try {
+            update updateToCloseStatus;
+        } catch(Exception e) {
+        }
+    }
+    
+    //Availability Time Check
+    static testmethod void AvailabilityTimeCheck() {
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Task availabilityTask = new Task(Confirmed_Date__c = null, Availability_Time_Other1__c = 'Test', Available_Time1__c = 'Other1', WhatId = parentCaseInfo.Id, Availability_Time_Other2__c = 'Test', Available_Time2__c = 'Other1', Availability_Time_Other3__c = 'Test', Available_Time3__c = 'Other1');
+        insert availabilityTask;
+        Task updateTask = new Task(Id = availabilityTask.Id, Confirmed_Date__c = Date.today());
+        try {
+            update updateTask;
+        } catch(Exception e) {
+        }
+    }
+    
+    //Availability Time Check
+    static testmethod void ConfirmedDateAsNull() {
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Task availabilityTask = new Task(Confirmed_Date__c = Date.today(), Availability_Time_Other1__c = 'Test', Available_Time1__c = 'Other', WhatId = parentCaseInfo.Id, Availability_Time_Other2__c = 'Test', Available_Time2__c = 'Other', Availability_Time_Other3__c = 'Test', Available_Time3__c = 'Other');
+        insert availabilityTask;
+        Task updateTask = new Task(Id = availabilityTask.Id, Confirmed_Date__c = null, Confirmed_Time__c = '3:30');
+        try {
+            update updateTask;
+        } catch(Exception e) {
+        }
+    }
+    
+    //Availability Time Check
+    static testmethod void ConfirmedDateLesseThanToday() {
+        Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
+        Task availabilityTask = new Task(Confirmed_Date__c = Date.today(), Availability_Time_Other1__c = 'Test', Available_Time1__c = 'Other', WhatId = parentCaseInfo.Id, Availability_Time_Other2__c = 'Test', Available_Time2__c = 'Other', Availability_Time_Other3__c = 'Test', Available_Time3__c = 'Other');
+        insert availabilityTask;
+        Task updateTask = new Task(Id = availabilityTask.Id, Confirmed_Date__c = Date.today().addDays(-3), Confirmed_Time__c = '3:30');
+        try {
+            update updateTask;
+        } catch(Exception e) {
+        }
+    }
+    
+    //Wish Concept Approval
+    static testMethod void WishConceptApproval() {
+        Case parentCase = new Case(Subject = 'ParentCase', Origin = 'Web', Presentation_Date__c = Date.today());
+        Task conceptTask = new Task(Subject = 'Wish concept approval', WhatId = parentCase.Id);
+        insert conceptTask;
+        Task closeTask = new Task(Id = conceptTask.Id);
+        closeTask.Status = 'Completed';
+        update closeTask;
+    }
+    
+    //Wish presentation not set
+    static testMethod void WishPresentationNotSet() {
+        Case parentCase = new Case(Subject = 'ParentCase', Origin = 'Web', Presentation_Date__c = Date.today());
+        Task conceptTask = new Task(Subject = 'Wish Presentation not set', WhatId = parentCase.Id);
+        insert conceptTask;
+        Task closeTask = new Task(Id = conceptTask.Id);
+        closeTask.Status = 'Completed';
+        update closeTask;
+    }
+    
+    //Wish Concept Approval
+    static testMethod void WishNotClosed() {
+        Case parentCase = new Case(Subject = 'ParentCase', Origin = 'Web', Presentation_Date__c = Date.today());
+        Task conceptTask = new Task(Subject = 'Wish not closed', WhatId = parentCase.Id);
+        insert conceptTask;
+        Task closeTask = new Task(Id = conceptTask.Id);
+        closeTask.Status = 'Completed';
+        update closeTask;
+    }
 }

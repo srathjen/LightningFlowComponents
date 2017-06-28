@@ -10,7 +10,7 @@ public class WishLiabilityForm_AC
 {
     public Id caseId;
     public Case currentCase{get;set;}
-    public Wish_Child_Form__c childForm{get;set;}
+    public List<Wish_Child_Form__c> childForm{get;set;}
     public Map<String,String> emailSignatureMap{get;set;}
     public list<string> contactEmailList{get;set;}
     public Map<String,String> signNowemailMap{get;set;}
@@ -27,10 +27,12 @@ public class WishLiabilityForm_AC
     public List<String> WishTypeList{get;set;}
     public Set<String> emailSetString{get;set;}
     public List<String> receipent{get;set;}
-    public boolean displaySignNowPopup{get;set;} 
+    public boolean displaySignNowPopup{get;set;}
+    public boolean displayReturnToWish{get;set;} 
     public String SingerName{get;set;}
     public boolean isFirstParent {get;set;}
     public boolean displayError{get;set;}
+    public boolean displayAlert{get;set;}
     public String documentPDF;
     public String envelopeId;
     public Map<String,String> signersKeyPairMap{get;set;}
@@ -38,9 +40,9 @@ public class WishLiabilityForm_AC
     public boolean isFirstParentSendEmail{get;set;}
     public boolean SignNowdisplayError{get;set;}
     public Set<String> holdEmailNameSet;
+    public Integer j = 0;
+    public Integer k = 0;
     public WishLiabilityForm_AC(ApexPages.StandardController controller) {
-        
-        
         contactEmailList = new List<String>();
         signNowemailMap = new Map<String,String>();
         emailSignatureMap = new Map<String,String>();
@@ -54,115 +56,117 @@ public class WishLiabilityForm_AC
         signersKeyPairMap = new Map<String,String>();
         currentCase = [SELECT ID,ContactID,Contact.Name,Contact.Publicity_OK__c,LiabilitySignerMapKeyPair__c,Hidden_Email_List__c,Hidden_Name_List__c,ChapterName__c,ChapterName__r.Name  FROM Case WHERE ID =:caseId];
         WishChildId = currentCase.ContactId; 
-        childForm = [SELECT Id,Hidden_Wish_Fmaily_Contact_Name__c,Case__c,Participant_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Participant_Details__c FROM Wish_Child_Form__c WHERE Case__c =: currentCase.Id];
+        childForm = [SELECT Id,Hidden_Wish_Fmaily_Contact_Name__c,Case__c,Participant_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Participant_Details__c,Hidden_Email_List__c,
+                     Hidden_Name_List__c FROM Wish_Child_Form__c WHERE Case__c =: currentCase.Id];
         
-        if(currentCase .Hidden_Name_List__c != Null){
-            listofSenderName = new List<String>();
-            
-            listofSenderName = currentCase .Hidden_Name_List__c .split(',');
-           
-            
-            for(String emailSenderName : currentCase.Hidden_Name_List__c.split(',')){
-                    
-                         
-                         holdEmailNameSet.add(emailSenderName.trim());
-                
-            }
-            system.debug('@@@@@ holdEmailNameSet @@@@@'+holdEmailNameSet);
-             
-        }
-        if(childForm .Hidden_Wish_Fmaily_Contact_Name__c != Null || childForm.Participant_Name__c != Null){
-            SignNowList = new List<String>();
-            if(childForm.Hidden_Wish_Fmaily_Contact_Name__c != Null){
-                 
-                for(String processSignNowList : childForm.Hidden_Wish_Fmaily_Contact_Name__c.split(',')){
-                   if(Name == Null || Name == '')
-                    Name = processSignNowList;
-                    else
-                    Name+=','+' '+processSignNowList;
-                   
-                    if(!holdEmailNameSet.contains(processSignNowList.trim())){
-                      
-                           signNowemailMap.put(processSignNowList.trim(),'abc@gmail.com');
-                           
-                          
-                       }
+        if(childForm.size()>0){
+            displayAlert = true;
+            if(childForm[0].Hidden_Name_List__c != Null){
+                listofSenderName = new List<String>();
+                listofSenderName = childForm[0].Hidden_Name_List__c .split('#');
+                for(String emailSenderName : childForm[0].Hidden_Name_List__c.split('#')){
+                    holdEmailNameSet.add(emailSenderName.trim());
+                    system.debug('$ holdEmailNameSet $'+holdEmailNameSet);
                 }
             }
-            
-            if(childForm.Participant_Name__c != Null){
-                
-                for(String processSignNowList : childForm.Participant_Name__c.split(',')){
-                       String displayname = processSignNowList.trim().split('-')[0];
-                       String age = processSignNowList.trim().split('-')[1];
-                       
-                       if(Name == Null || Name == '')
-                        Name = displayname;
+            if(childForm[0].Hidden_Wish_Fmaily_Contact_Name__c != Null || childForm[0].Participant_Name__c != Null){
+                SignNowList = new List<String>();
+                if(childForm[0].Hidden_Wish_Fmaily_Contact_Name__c != Null){
+                    for(String processSignNowList : childForm[0].Hidden_Wish_Fmaily_Contact_Name__c.split('#')){
+                        if(Name == Null || Name == '')
+                            Name = processSignNowList;
                         else
-                        Name+=','+' '+displayname;
+                            Name+=','+' '+processSignNowList;
                         
-                    if(!holdEmailNameSet.contains(displayname.trim())){ 
-                       if(Integer.valueof(age) >= 18)
-                          signNowemailMap.put(displayname.trim(),'abc@gmail.com');
-                          
+                        if(!holdEmailNameSet.contains(processSignNowList.trim())){
+                            signNowemailMap.put(processSignNowList,'abc@gmail.com');
+                            system.debug('$ signNowemailMap $'+signNowemailMap);
+                        }
+                        SignNowList.add(processSignNowList);
                     }
                 }
-            system.debug('@@@@@@  signNowemailMap 2 @@@@@@@@'+ signNowemailMap.keySet());
-            }
-           
-                for(String processEmailMap : signNowemailMap.Keyset()){
-                    SignNowList.add(processEmailMap);
-                }
-              
-        }
-        
-        if(childForm.Hidden_Wish_Fmaily_Contact_Email__c != Null || childForm.Participant_Details__c != Null){
-            if(childForm.Hidden_Wish_Fmaily_Contact_Email__c != Null){
-                for(String key : childForm.Hidden_Wish_Fmaily_Contact_Email__c.split(',')){
-                    String keys = key.split('-')[0];
-                    String value = key.split('-')[1];
-                    system.debug('@@@@@ debug @@@@@'+Keys);
-                    if(!holdEmailNameSet.contains(keys)){
+                
+                if(childForm[0].Participant_Name__c != Null){
+                    for(String processSignNowList : childForm[0].Participant_Name__c.split('#')){
+                        String displayname = processSignNowList.trim().split('-')[0];
+                        String age = processSignNowList.trim().split('-')[1];
                         
-                        emailSignatureMap.put(keys.trim(),value.trim());
+                        if(Name == Null || Name == '')
+                            Name = displayname;
+                        else
+                            Name+=','+' '+displayname;
+                        
+                        if(!holdEmailNameSet.contains(displayname.trim())){ 
+                            if(Integer.valueof(age) >= 18)
+                                signNowemailMap.put(displayname.trim(),'abc@gmail.com');
+                                system.debug('$ signNowemailMap $'+signNowemailMap);
+                        }
+                        SignNowList.add(displayname);
                     }
-                } 
+                }
+                
             }
             
-            if(childForm.Participant_Details__c != Null){
-                for(String key : childForm.Participant_Details__c.split(',')){
-                    String keys = key.split('-')[0];
-                    String value = key.split('-')[1];
-                    String age = key.split('-')[2];
-                    
-                    if(!holdEmailNameSet.contains(keys)){
-                        if(Integer.valueof(age) >= 18)
-                        emailSignatureMap.put(keys.trim(),value.trim());
-                    }
-                } 
+            if(childForm[0].Hidden_Wish_Fmaily_Contact_Email__c != Null || childForm[0].Participant_Details__c != Null){
+                if(childForm[0].Hidden_Wish_Fmaily_Contact_Email__c != Null){
+                    for(String key : childForm[0].Hidden_Wish_Fmaily_Contact_Email__c.split('#')){
+                        String keys = key.split('-')[0];
+                        String value = key.split('-')[1];
+                        if(!holdEmailNameSet.contains(keys)){
+                            emailSignatureMap.put(keys.trim(),value.trim());
+                        }
+                    } 
+                }
+                
+                if(childForm[0].Participant_Details__c != Null){
+                    for(String key : childForm[0].Participant_Details__c.split('#')){
+                        String keys = key.split('-')[0];
+                        String value = key.split('-')[1];
+                        String age = key.split('-')[2];
+                        
+                        if(!holdEmailNameSet.contains(keys)){
+                            if(Integer.valueof(age) >= 18)
+                                emailSignatureMap.put(keys.trim(),value.trim());
+                        }
+                    } 
+                }
+                
             }
             
         }
-    
+       
     }
+    
     /*This method is used to fetch the multiple email address to send the liability form.*/
     public pageReference multiEmail(){
         if(emailSignatureMap.size()> 0 ){
             displayPopup = true;
             multiPickoptions = new List<SelectOption>();
             for(String currString : emailSignatureMap.keySet()){
-                   if(currString != Null){
-                    if(!holdEmailNameSet.contains(currString)){
-                system.debug('@@@@ currString @@@@@'+currString);
-                multiPickoptions.add(new SelectOption(currString,currString ));}}
+                if(currString != Null){
+                    if(!holdEmailNameSet.contains(currString.trim())){
+                        multiPickoptions.add(new SelectOption(currString.trim(),currString.trim()));}}
             }
         }
-        
         else{
             displayError = true;
-            
         }
         return null;
+    }
+    /*This method will take you back to the Case page */
+    public pageReference cancel(){
+        displayAlert = false;
+        PageReference reference=new PageReference('/'+currentCase.Id);
+        reference.setRedirect(true);     
+        return reference;
+    }
+    public void ReturnToWish(){
+        displayReturnToWish = true;
+    }
+    public pageReference ReturnToLiabilityForm(){
+        PageReference reference=new PageReference('/apex/WishLiabilityForm_VF?id='+currentCase.id);
+        reference.setRedirect(true);     
+        return reference;
     }
     
     /*This method is used to fetch the multiple email address to send the liability form.*/
@@ -173,65 +177,61 @@ public class WishLiabilityForm_AC
         Set<String> senderNameSet = new Set<String>();
         for(String processEmailList :emailList ){
             if(processEmailList != Null){
-            processEmailList = processEmailList.trim();
-            senderNameSet.add(processEmailList);
+                processEmailList = processEmailList.trim();
+                senderNameSet.add(processEmailList);
             }
         }
-        system.debug('####senderNameSet####'+senderNameSet);
         for(String currString : emailSignatureMap.keySet()){
             if(senderNameset.Contains(currString)){
-                 if(currString != Null)
-                sendEmailMap.put(currString.trim(),emailSignatureMap.get(currString).trim());
+                if(currString != Null)
+                    sendEmailMap.put(currString.trim(),emailSignatureMap.get(currString).trim());
                 
             }
-            
-            system.debug('####SendEmailMap####'+sendEmailMap);
         }
         
         if((!sendEmailMap.isEmpty()) && sendEmailMap.size() > 0 ){
-        system.debug('####SendEmailMap####'+sendEmailMap);
-        system.debug('querySignature b4' + querySignature);
             for(String currString : sendEmailMap.KeySet()){
-                    currString = currString.trim();
-                    system.debug('++++ cur +++' + currString);
-                    if(querySignature == '' || querySignature == Null){
+                currString = currString.trim();
+                
+                if(querySignature == '' || querySignature == Null){
                     querySignature = currString;
-                    
-                    }
-                    else{ 
-                    querySignature +=',' +currString;
-                    }
+                }
+                else{ 
+                    querySignature +='#' +currString;
+                }
             }
-            
-            system.debug('querySignature at' + querySignature);
             
             for(String currString : sendEmailMap.Values())
             {
-                 if(String.isBlank(queryName)){
-                 queryName = currString;
-                 }
-                 else {
-                 queryName += ', '+currString;
-                 }
+                if(String.isBlank(queryName)){
+                    queryName = currString;
+                }
+                else {
+                    queryName += '#'+currString;
+                }
             }
         }
         
-        for(Case dbCase : [SELECT Id,Hidden_Email_List__c,Hidden_Name_List__c From Case WHERE Id =:caseId]){
+        for(Wish_Child_Form__c dbCase : [SELECT Id,Hidden_Email_List__c,Hidden_Name_List__c From Wish_Child_Form__c WHERE Case__c =: caseId]){
             
-            case newCase = new case();
+            Wish_Child_Form__c newCase = new Wish_Child_Form__c();
             newCase.Id = dbCase.Id;
-            newCase.Hidden_Email_List__c = querySignature;
-            newCase.Hidden_Name_List__c = queryName;
+            if(dbCase.Hidden_Email_List__c == Null && dbCase.Hidden_Name_List__c == Null){
+                newCase.Hidden_Email_List__c = queryName;
+                newCase.Hidden_Name_List__c = querySignature;
+            }
+            else{
+                newCase.Hidden_Email_List__c = dbCase.Hidden_Email_List__c+'#'+queryName;
+                newCase.Hidden_Name_List__c = dbCase.Hidden_Name_List__c+'#'+querySignature;
+            }
+            
             try{
                 update newCase;
             }
             catch(Exception e){
             }
-            
         }
-        system.debug('querySignature value'+querySignature);
         CallOuttoDocusign(sendEmailMap,caseId);
-         system.debug('####method calling ####'+sendEmailMap);
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'An email has been sent successfully'));
         isRedriect = true;
         return null;
@@ -245,7 +245,6 @@ public class WishLiabilityForm_AC
     /*This method is used to send the document to the selected email address*/
     @future(Callout = true)   
     public Static void CallOuttoDocusign(Map<String,String>emailMap,String caseId){
-    system.debug('####Future Method ####'+emailMap);
         boolean isParent;
         List<Contact> contactList = new List<Contact>(); 
         Wish_Child_Form__c  childFormInstance;
@@ -253,7 +252,7 @@ public class WishLiabilityForm_AC
         Set<String> parentGardienSet = new Set<String>();
         childFormInstance = [SELECT Id,Hidden_Wish_Fmaily_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Case__c,Participant_Name__c FROM Wish_Child_Form__c WHERE Case__c =: caseId];
         
-        for(String key : childFormInstance.Hidden_Wish_Fmaily_Contact_Email__c.split(',')){
+        for(String key : childFormInstance.Hidden_Wish_Fmaily_Contact_Email__c.split('#')){
             String keys = key.split('-')[0];
             String value = key.split('-')[1];
             isParent = true;
@@ -293,7 +292,6 @@ public class WishLiabilityForm_AC
         String email;
         
         //Fetching related contacts that has email address and forming recipients with signature location.
-        
         String recipientsParticipants = '';
         for (String currString: emailMap.KeySet()) {
             if (parentGardienSet.Contains(currString) && isParent == true) {
@@ -420,7 +418,6 @@ public class WishLiabilityForm_AC
         if(recipientsParticipants != '')
             recipients = recipientsParticipants +','+ recipients; 
         
-        
         //forming payload with the document and recipients.
         String body =  '{'+
             '  "status":"sent",'+
@@ -474,13 +471,9 @@ public class WishLiabilityForm_AC
                 
             }
             
-            
         }catch(Exception e){
-            
-            
         }
     }
-    
     
     /*This method is used to Identify the users who are all going to sign the document*/
     public pageReference SignNowmultiEmail(){
@@ -495,9 +488,7 @@ public class WishLiabilityForm_AC
         else{
             SignNowdisplayError = true;
         }
-        
         if(signNowemailMap.size() > 0){
-            system.debug('@@@@@@ rrrrrrrrrrrrrr @@@@@@@@'+ signNowemailMap);
             String account;
             String UserName;
             String Password;
@@ -530,255 +521,375 @@ public class WishLiabilityForm_AC
             }catch(Exception e) {
             }
             Map<String,String> recipientMap = new Map<String,String>();
-            
+            Set<String> signerSet = new Set<String>();
             for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Participant_Name__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
                                                     Case__c =: caseId]){
                                                         if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != Null) {                                     
-                                                            for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c .split(',')){
+                                                            for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c .split('#')){
                                                                 recipientMap.put(keys.trim(),'PARENT/LEGAL GUARDIAN');
                                                                 isFirstParent = true;
+                                                                signerSet.add(keys); 
                                                             } 
                                                             
                                                         }
                                                         
                                                         if(wishChildForm.Participant_Name__c!= Null){
-                                                            for(String keys : wishChildForm.Participant_Name__c.split(',')){
-                                                                 String key = keys.split('-')[0];
-                                                                 String values = keys.split('-')[1];
+                                                            for(String keys : wishChildForm.Participant_Name__c.split('#')){
+                                                                String key = keys.split('-')[0];
+                                                                String values = keys.split('-')[1];
+                                                                system.debug('Key $$$'+key);
+                                                                system.debug('values $$$'+values);
                                                                 recipientMap.put(key.trim(),'Participant');
-                                                                
+                                                                signerSet.add(key); 
                                                             } 
                                                         }
                                                     }
-            case dbcase = [SELECT Id,Wish_Liability_Envolep__c,LiabilitySignerMapKeyPair__c FROM Case WHERE Id =:caseId];
-             system.debug('@@@@@@ dddddddddddd @@@@@@@@'+ recipientMap);
-            if(dbcase.Wish_Liability_Envolep__c == Null){
+            Wish_Child_Form__c  dbcase = [SELECT Id,Wish_Liability_Envolep__c,LiabilitySignerMapKeyPair__c,Case__c,Hidden_Liability_Envelop_Id_1__c,
+                                          Hidden_Liability_Envelop_Id_2__c,Hidden_Liability_Envelop_Id_3__c,Hidden_Liability_SignerMap_Key_1__c,
+                                          Hidden_Liability_SignerMap_Key_2__c,Hidden_Liability_SignerMap_Key_3__c FROM Wish_Child_Form__c WHERE Case__c =: caseId];
+            
+            
+            set<String> processSet = new Set<String>();
+            if(dbcase.LiabilitySignerMapKeyPair__c != Null && dbcase.Wish_Liability_Envolep__c != Null && dbcase.Hidden_Liability_Envelop_Id_1__c == Null &&
+               dbcase.Hidden_Liability_SignerMap_Key_1__c == Null ){
+                   
+                   for(String processName : dbcase.LiabilitySignerMapKeyPair__c.split('#')){
+                       String keys = processName.split('-')[0];
+                       String value = processName.split('-')[1];
+                       String name = Keys.trim();
+                       processSet.add(name);
+                       
+                   }
+                   
+                   for(String signNowName : signerSet){
+                       if(!processSet.contains(signNowName)){
+                           j = 1;
+                           
+                       }
+                   }
+               }
+            
+            if(dbcase.Hidden_Liability_Envelop_Id_1__c != Null && dbcase.Hidden_Liability_SignerMap_Key_1__c != Null){
+                set<String> processSetOne = new Set<String>();
                 
-                for(String currString : recipientMap.Keyset()){
-                    String Name = currString;
-                    if(recipientMap.get(Name) == 'PARENT/LEGAL GUARDIAN' && isFirstParent == true){
-                        system.debug('@@@@@@@@@@@ isFirstParent @@@@@@@@@@@'+isFirstParent);
-                        if(recipients != '')
-                            recipients = recipients + ',';
-                        recipients = recipients + '{'+
-                            '      "email": "kanagaraj@mstsolutions.com",'+
-                            '      "name": "'+Name+'",'+
-                            '      "recipientId":"'+i+'",'+
-                            '      "clientUserId":"'+i+'",'+
-                            '      "tabs": {'+
-                            '                "signHereTabs": [{'+
-                            '                     "anchorString":"~s'+i+'",'+
-                            '                    "anchorXOffset": "0",'+
-                            '     "anchorYOffset": "0",'+
-                            '                    "anchorIgnoreIfNotPresent": "false",'+
-                            '                    "anchorUnits": "inches"'+
-                            '                }],'+
-                            '     "radioGroupTabs": [{'+
-                            '                    "groupName": "Radio Group 1",'+
-                            '                    "required": "true",'+
-                            '                    "radios": [{'+
-                            '                    "anchorString": "~FirstRadio",'+
-                            '                    "anchorXOffset": "0",'+
-                            '                    "anchorYOffset": "0",'+
-                            '                    "anchorIgnoreIfNotPresent": "false",' +
-                            '                    "anchorUnits": "inches",'+
-                            '                    "optional"   :"false",'+
-                            '                    "selected": "false",'+
-                            '                     "value": "one1Radio",'+
-                            '                    "xPosition": "7200",'+
-                            '                    "yPosition": "19020"},{'+
-                            '                    "anchorString": "~secondRadio",'+
-                            '                    "anchorXOffset": "0",'+
-                            '                    "anchorYOffset": "0",'+
-                            '                    "optional"   :"false",'+
-                            '                    "anchorIgnoreIfNotPresent": "false",' +
-                            '                    "anchorUnits": "inches",'+
-                            '                    "selected": "false",'+
-                            '                     "value": "twoRadio",'+
-                            '                    "xPosition": "7200",'+
-                            '                    "yPosition": "19020"'+
-                            '                    }]'+
-                            '                   }],'+
-                            '                "initialHereTabs": [{' +
-                            '                    "anchorString": "~123abcinitial",' +
-                            '                    "conditionalParentLabel":"Radio Group 1",'+
-                            '                    "conditionalParentValue" :"one1Radio",'+
-                            '                    "optional"    :  "false",' +
-                            '                    "anchorXOffset": "0",' +
-                            '                    "anchorYOffset": "0.2",' +
-                            '                    "name"       : "FirstInitial",'+
-                            '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option1__c","writeBack":"true","allowSenderToEdit":"true"},'+
-                            '                    "anchorIgnoreIfNotPresent": "false",' +
-                            '                    "anchorUnits": "inches"},{'+
-                            '                    "anchorString": "~initial2",' +
-                            '                    "optional"    :  "false",' +
-                            '                    "conditionalParentLabel":"Radio Group 1",'+
-                            '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option2__c","writeBack":"true","allowSenderToEdit":"true"},'+
-                            '                    "conditionalParentValue" :"twoRadio",'+
-                            '                    "name"       : "SecondInitial",'+
-                            '                    "anchorXOffset": "0",' +
-                            '                    "anchorYOffset": "0.2",' +
-                            '                    "anchorIgnoreIfNotPresent": "false",' +
-                            '                    "anchorUnits": "inches"'+
-                            '                }],' +
-                            '                "dateSignedTabs": [{'+
-                            '                      "anchorString": "~date'+i+'",'+
-                            '                       "anchorXOffset": "0",'+
-                            '                       "fontSize":      "Size14",'+
-                            '                       "fontColor":     "Black",'+
-                            '                        "anchorYOffset": "0",'+
-                            '                        "anchorIgnoreIfNotPresent": "false",'+
-                            '                        "xPosition": "100",'+
-                            '                        "yPosition": "72",'+
-                            '                        "anchorUnits": "inches"'+
-                            '                    }]'+
-                            '            }'+
-                            '    }';
-                        
-                        if(!signersKeyPairMap.containsKey(Name))
-                            signersKeyPairMap.put(Name,String.valueof(i));
-                        system.debug('@@@@@@@@ First Signer @@@@@@@'+signersKeyPairMap);
-                        isFirstParent = false;
-                    }
-                    else if(recipientMap.get(Name) == 'PARENT/LEGAL GUARDIAN' && isFirstParent == false){
-                        
-                        if(recipients != '')
-                            recipients = recipients + ',';
-                        recipients = recipients + '{'+
-                            '      "email": "kanagaraj@mstsolutions.com",'+
-                            '      "name": "'+Name +'",'+
-                            '      "recipientId":"'+i+'",'+
-                            '      "clientUserId":"'+i+'",'+
-                            '      "tabs": {'+
-                            '                "signHereTabs": [{'+
-                            '                     "anchorString":"~s'+i+'",'+
-                            '                    "anchorXOffset": "0",'+
-                            '     "anchorYOffset": "0",'+
-                            '                    "anchorIgnoreIfNotPresent": "false",'+
-                            '                    "anchorUnits": "inches"'+
-                            '                }],'+
-                            '                "dateSignedTabs": [{'+
-                            '                      "anchorString": "~date'+i+'",'+
-                            '                       "anchorXOffset": "0",'+
-                            '                       "fontSize":      "Size14",'+
-                            '                       "fontColor":     "Black",'+
-                            '                        "anchorYOffset": "0",'+
-                            '                        "anchorIgnoreIfNotPresent": "false",'+
-                            '                        "xPosition": "100",'+
-                            '                        "yPosition": "72",'+
-                            '                        "anchorUnits": "inches"'+
-                            '                    }]'+
-                            '            }'+
-                            '    }';
-                        
-                        if(!signersKeyPairMap.containsKey(Name))
-                            signersKeyPairMap.put(Name,String.valueof(i));
-                            system.debug('@@@@@@@@ Second Signer @@@@@@@'+signersKeyPairMap);
-                    }
-                    else{
-                        
-                        if(recipients != '')
-                            recipients = recipients + ',';
-                        recipients = recipients + '{'+
-                            '      "email": "kanagaraj@mstsolutions.com",'+
-                            '      "name": "'+Name+'",'+
-                            '      "recipientId":"'+i+'",'+
-                            '      "clientUserId":"'+i+'",'+
-                            '      "tabs": {'+
-                            '                "signHereTabs": [{'+
-                            '                     "anchorString":"~s'+i+'",'+
-                            '                    "anchorXOffset": "0",'+
-                            '     "anchorYOffset": "0",'+
-                            '                    "anchorIgnoreIfNotPresent": "false",'+
-                            '                    "anchorUnits": "inches"'+
-                            '                }],'+
-                            '                "dateSignedTabs": [{'+
-                            '                      "anchorString": "~date'+i+'",'+
-                            '                       "anchorXOffset": "0",'+
-                            '                       "fontSize":      "Size14",'+
-                            '                       "fontColor":     "Black",'+
-                            '                        "anchorYOffset": "0",'+
-                            '                        "anchorIgnoreIfNotPresent": "false",'+
-                            '                        "xPosition": "662",'+
-                            '                        "yPosition": "895",'+
-                            '                        "anchorUnits": "inches"'+
-                            '                    }]'+
-                            '            }'+
-                            '    }';
-                        
-                        if(!signersKeyPairMap.containsKey(Name))
-                            signersKeyPairMap.put(Name,String.valueof(i));
-                             system.debug('@@@@@@@@ Third Signer @@@@@@@'+signersKeyPairMap);
-                    }
-                    i++;
+                for(String processName : dbcase.Hidden_Liability_SignerMap_Key_1__c.split('#')){
+                    String keys = processName.split('-')[0];
+                    String value = processName.split('-')[1];
+                    String name = Keys.trim();
+                    processSetOne.add(name);
                 }
-                //forming payload with the document and recipients.
-                String body =  '{'+
-                    '  "status":"sent",'+
-                    '  "enableWetSign": "false",'+
-                    '  "emailBlurb":"Make-A-Wish Liability And Publicity Release Form",'+
-                    '  "emailSubject": "Make-A-Wish Liability And Publicity Release Form",'+
-                    '  "enforceSignerVisibility":"True",'+
-                    '  "documents": [{'+
-                    '      "name": "document.pdf",'+
-                    '      "documentId":"1",'+
-                    '      "order":"1",'+
-                    '      "documentBase64":"'+documentPDF+'"'+
-                    '  }],'+
-                    '"recipients": {'+
-                    '    "signers" : ['+recipients+']'+
-                    '  }'+
-                    '}';
-                String viewBody = '{'+
-                    '"returnUrl": "https://www.docusign.com/devcenter"'+
-                    '}';
-                String header = '--'+boundary+'\nContent-Type: application/json\nContent-Disposition: form-data';
-                String jsonBody = header +'\n\n'+body+'\n\n--'+boundary+'--';
-                system.debug('@@@@@JSONBODY@@@@@'+jsonBody);
-                //Callout to Docusign.
-                HttpRequest req = new HttpRequest();
-                req.setHeader('X-DocuSign-Authentication', authorizationHeader);
-                req.setHeader('Accept','application/json');
-                req.setHeader('Host','demo.docusign.net');
-                req.setHeader('Content-Length','162100');
-                req.setHeader('Content-Type','multipart/form-data; boundary='+boundary);
-                req.setEndpoint(endpoint);
-                req.setMethod('POST'); 
-                req.setBody(jsonBody);
-                Http http = new Http();
-                HTTPResponse res;
-                try{
-                    if(recipients != ''){
-                        res = http.send(req);
-                        system.debug('response 1'+res.getBody());
-                        //Docusign status record creation.
-                        Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
-                        if((String) results.get('envelopeId') != '')
-                            envelopeId = (String) results.get('envelopeId');
-                        if((String) results.get('status') == 'Sent'){
-                            status = 'Agreement sent to email.';
-                            dsfs__DocuSign_Status__c dsfs= NEW dsfs__DocuSign_Status__c();
-                            dsfs.dsfs__DocuSign_Envelope_ID__c = (String) results.get('envelopeId');
-                            dsfs.dsfs__Case__c= caseId;
-                            Insert dsfs;
-                        }else
-                            status = (String) results.get('errorCode');
-                        
-                    }
-                }catch(Exception e){
+                
+                for(String processName : dbcase.LiabilitySignerMapKeyPair__c.split('#')){
+                    String keys = processName.split('-')[0];
+                    String value = processName.split('-')[1];
+                    String name = Keys.trim();
+                    processSet.add(name);
                     
                 }
                 
+                for(String signNowName : signerSet){
+                    if(!processSet.contains(signNowName)){
+                        if(!processSetOne.contains(signNowName)){
+                            j = 2;
+                            k = 1;
+                        }
+                    }
+                }
             }
+            
+            if(dbcase.Hidden_Liability_Envelop_Id_2__c != Null && dbcase.Hidden_Liability_SignerMap_Key_2__c!= Null){
+                
+                set<String> processSetOne = new Set<String>();
+                Set<String> processSetTwo = new Set<String>();
+                
+                for(String processName : dbcase.Hidden_Liability_SignerMap_Key_2__c.split('#')){
+                    String keys = processName.split('-')[0];
+                    String value = processName.split('-')[1];
+                    String name = Keys.trim();
+                    processSetTwo.add(name);
+                }
+                
+                for(String processName : dbcase.Hidden_Liability_SignerMap_Key_1__c .split('#')){
+                    String keys = processName.split('-')[0];
+                    String value = processName.split('-')[1];
+                    String name = Keys.trim();
+                    processSetOne.add(name);
+                }
+                
+                for(String processName : dbcase.LiabilitySignerMapKeyPair__c.split('#')){
+                    String keys = processName.split('-')[0];
+                    String value = processName.split('-')[1];
+                    String name = Keys.trim();
+                    processSet.add(name);
+                    
+                }
+                
+                for(String signNowName : signerSet){
+                    if(!processSet.contains(signNowName)){
+                        if(!processSetOne.contains(signNowName)){
+                            if(!processSetTwo.contains(signNowName)){
+                                j = 3;
+                                k = 2;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if((dbcase.Wish_Liability_Envolep__c == Null && dbcase.LiabilitySignerMapKeyPair__c == Null && j == 0) || (dbcase.Hidden_Liability_Envelop_Id_1__c== Null && dbcase.Hidden_Liability_SignerMap_Key_1__c == Null && j == 1 && k == 0) || 
+               (dbcase.Hidden_Liability_Envelop_Id_2__c == Null && dbcase.Hidden_Liability_SignerMap_Key_2__c == Null && j == 2 && k == 1) || (dbcase.Hidden_Liability_Envelop_Id_3__c == Null && dbcase.Hidden_Liability_SignerMap_Key_3__c  == Null && j == 3 && k == 2)){
+                 system.debug('J VALE'+ j);
+                 system.debug('K VALE'+ k);
+                   
+                   for(String currString : recipientMap.Keyset()){
+                       String Name = currString;
+                       if(recipientMap.get(Name) == 'PARENT/LEGAL GUARDIAN' && isFirstParent == true){
+                           
+                           if(recipients != '')
+                               recipients = recipients + ',';
+                           recipients = recipients + '{'+
+                               '      "email": "NotSent@NoEmail.com",'+
+                               '      "name": "'+Name+'",'+
+                               '      "recipientId":"'+i+'",'+
+                               '      "clientUserId":"'+i+'",'+
+                               '      "tabs": {'+
+                               '                "signHereTabs": [{'+
+                               '                     "anchorString":"~s'+i+'",'+
+                               '                    "anchorXOffset": "0",'+
+                               '     "anchorYOffset": "0",'+
+                               '                    "anchorIgnoreIfNotPresent": "false",'+
+                               '                    "anchorUnits": "inches"'+
+                               '                }],'+
+                               '     "radioGroupTabs": [{'+
+                               '                    "groupName": "Radio Group 1",'+
+                               '                    "required": "true",'+
+                               '                    "radios": [{'+
+                               '                    "anchorString": "~FirstRadio",'+
+                               '                    "anchorXOffset": "0",'+
+                               '                    "anchorYOffset": "0",'+
+                               '                    "anchorIgnoreIfNotPresent": "false",' +
+                               '                    "anchorUnits": "inches",'+
+                               '                    "optional"   :"false",'+
+                               '                    "selected": "false",'+
+                               '                     "value": "one1Radio",'+
+                               '                    "xPosition": "7200",'+
+                               '                    "yPosition": "19020"},{'+
+                               '                    "anchorString": "~secondRadio",'+
+                               '                    "anchorXOffset": "0",'+
+                               '                    "anchorYOffset": "0",'+
+                               '                    "optional"   :"false",'+
+                               '                    "anchorIgnoreIfNotPresent": "false",' +
+                               '                    "anchorUnits": "inches",'+
+                               '                    "selected": "false",'+
+                               '                     "value": "twoRadio",'+
+                               '                    "xPosition": "7200",'+
+                               '                    "yPosition": "19020"'+
+                               '                    }]'+
+                               '                   }],'+
+                               '                "initialHereTabs": [{' +
+                               '                    "anchorString": "~123abcinitial",' +
+                               '                    "conditionalParentLabel":"Radio Group 1",'+
+                               '                    "conditionalParentValue" :"one1Radio",'+
+                               '                    "optional"    :  "false",' +
+                               '                    "anchorXOffset": "0",' +
+                               '                    "anchorYOffset": "0.2",' +
+                               '                    "name"       : "FirstInitial",'+
+                               '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option1__c","writeBack":"true","allowSenderToEdit":"true"},'+
+                               '                    "anchorIgnoreIfNotPresent": "false",' +
+                               '                    "anchorUnits": "inches"},{'+
+                               '                    "anchorString": "~initial2",' +
+                               '                    "optional"    :  "false",' +
+                               '                    "conditionalParentLabel":"Radio Group 1",'+
+                               '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option2__c","writeBack":"true","allowSenderToEdit":"true"},'+
+                               '                    "conditionalParentValue" :"twoRadio",'+
+                               '                    "name"       : "SecondInitial",'+
+                               '                    "anchorXOffset": "0",' +
+                               '                    "anchorYOffset": "0.2",' +
+                               '                    "anchorIgnoreIfNotPresent": "false",' +
+                               '                    "anchorUnits": "inches"'+
+                               '                }],' +
+                               '                "dateSignedTabs": [{'+
+                               '                      "anchorString": "~date'+i+'",'+
+                               '                       "anchorXOffset": "0",'+
+                               '                       "fontSize":      "Size14",'+
+                               '                       "fontColor":     "Black",'+
+                               '                        "anchorYOffset": "0",'+
+                               '                        "anchorIgnoreIfNotPresent": "false",'+
+                               '                        "xPosition": "100",'+
+                               '                        "yPosition": "72",'+
+                               '                        "anchorUnits": "inches"'+
+                               '                    }]'+
+                               '            }'+
+                               '    }';
+                           
+                           if(!signersKeyPairMap.containsKey(Name))
+                               signersKeyPairMap.put(Name,String.valueof(i));
+                           
+                           isFirstParent = false;
+                       }
+                       else if(recipientMap.get(Name) == 'PARENT/LEGAL GUARDIAN' && isFirstParent == false){
+                           
+                           if(recipients != '')
+                               recipients = recipients + ',';
+                           recipients = recipients + '{'+
+                               '      "email": "NotSent@NoEmail.com",'+
+                               '      "name": "'+Name +'",'+
+                               '      "recipientId":"'+i+'",'+
+                               '      "clientUserId":"'+i+'",'+
+                               '      "tabs": {'+
+                               '                "signHereTabs": [{'+
+                               '                     "anchorString":"~s'+i+'",'+
+                               '                    "anchorXOffset": "0",'+
+                               '     "anchorYOffset": "0",'+
+                               '                    "anchorIgnoreIfNotPresent": "false",'+
+                               '                    "anchorUnits": "inches"'+
+                               '                }],'+
+                               '                "dateSignedTabs": [{'+
+                               '                      "anchorString": "~date'+i+'",'+
+                               '                       "anchorXOffset": "0",'+
+                               '                       "fontSize":      "Size14",'+
+                               '                       "fontColor":     "Black",'+
+                               '                        "anchorYOffset": "0",'+
+                               '                        "anchorIgnoreIfNotPresent": "false",'+
+                               '                        "xPosition": "100",'+
+                               '                        "yPosition": "72",'+
+                               '                        "anchorUnits": "inches"'+
+                               '                    }]'+
+                               '            }'+
+                               '    }';
+                           
+                           if(!signersKeyPairMap.containsKey(Name))
+                               signersKeyPairMap.put(Name,String.valueof(i));
+                           
+                       }
+                       else{
+                           
+                           if(recipients != '')
+                               recipients = recipients + ',';
+                           recipients = recipients + '{'+
+                               '      "email": "NotSent@NoEmail.com",'+
+                               '      "name": "'+Name+'",'+
+                               '      "recipientId":"'+i+'",'+
+                               '      "clientUserId":"'+i+'",'+
+                               '      "tabs": {'+
+                               '                "signHereTabs": [{'+
+                               '                     "anchorString":"~s'+i+'",'+
+                               '                    "anchorXOffset": "0",'+
+                               '     "anchorYOffset": "0",'+
+                               '                    "anchorIgnoreIfNotPresent": "false",'+
+                               '                    "anchorUnits": "inches"'+
+                               '                }],'+
+                               '                "dateSignedTabs": [{'+
+                               '                      "anchorString": "~date'+i+'",'+
+                               '                       "anchorXOffset": "0",'+
+                               '                       "fontSize":      "Size14",'+
+                               '                       "fontColor":     "Black",'+
+                               '                        "anchorYOffset": "0",'+
+                               '                        "anchorIgnoreIfNotPresent": "false",'+
+                               '                        "xPosition": "662",'+
+                               '                        "yPosition": "895",'+
+                               '                        "anchorUnits": "inches"'+
+                               '                    }]'+
+                               '            }'+
+                               '    }';
+                           
+                           if(!signersKeyPairMap.containsKey(Name))
+                               signersKeyPairMap.put(Name,String.valueof(i));
+                           
+                       }
+                       i++;
+                   }
+                   //forming payload with the document and recipients.
+                   String body =  '{'+
+                       '  "status":"sent",'+
+                       '  "enableWetSign": "false",'+
+                       '  "emailBlurb":"Make-A-Wish Liability And Publicity Release Form",'+
+                       '  "emailSubject": "Make-A-Wish Liability And Publicity Release Form",'+
+                       '  "enforceSignerVisibility":"True",'+
+                       '  "documents": [{'+
+                       '      "name": "document.pdf",'+
+                       '      "documentId":"1",'+
+                       '      "order":"1",'+
+                       '      "documentBase64":"'+documentPDF+'"'+
+                       '  }],'+
+                       '"recipients": {'+
+                       '    "signers" : ['+recipients+']'+
+                       '  }'+
+                       '}';
+                   String viewBody = '{'+
+                       '"returnUrl": "https://www.docusign.com/devcenter"'+
+                       '}';
+                   String header = '--'+boundary+'\nContent-Type: application/json\nContent-Disposition: form-data';
+                   String jsonBody = header +'\n\n'+body+'\n\n--'+boundary+'--';
+                   system.debug('@@@@@JSONBODY@@@@@'+jsonBody);
+                   //Callout to Docusign.
+                   HttpRequest req = new HttpRequest();
+                   req.setHeader('X-DocuSign-Authentication', authorizationHeader);
+                   req.setHeader('Accept','application/json');
+                   req.setHeader('Host','demo.docusign.net');
+                   req.setHeader('Content-Length','162100');
+                   req.setHeader('Content-Type','multipart/form-data; boundary='+boundary);
+                   req.setEndpoint(endpoint);
+                   req.setMethod('POST'); 
+                   req.setBody(jsonBody);
+                   Http http = new Http();
+                   HTTPResponse res;
+                   try{
+                       if(recipients != ''){
+                           res = http.send(req);
+                           system.debug('response 1'+res.getBody());
+                           //Docusign status record creation.
+                           Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
+                           if((String) results.get('envelopeId') != '')
+                               envelopeId = (String) results.get('envelopeId');
+                           if((String) results.get('status') == 'Sent'){
+                               status = 'Agreement sent to email.';
+                               dsfs__DocuSign_Status__c dsfs= NEW dsfs__DocuSign_Status__c();
+                               dsfs.dsfs__DocuSign_Envelope_ID__c = (String) results.get('envelopeId');
+                               dsfs.dsfs__Case__c= caseId;
+                               Insert dsfs;
+                           }else
+                               status = (String) results.get('errorCode');
+                       }
+                   }catch(Exception e){
+                       
+                   }
+               }
             else
             {
-                envelopeId = dbcase.Wish_Liability_Envolep__c;
-                for(String key : dbcase.LiabilitySignerMapKeyPair__c.split(',')){
-                    String keys = key.trim().split('-')[0];
-                    String value = key.trim().split('-')[1];
-                    signersKeyPairMap.put(keys.trim(),value.trim());
-                } 
+                if(dbcase.Wish_Liability_Envolep__c != Null && dbcase.Hidden_Liability_Envelop_Id_1__c == Null && dbcase.Hidden_Liability_Envelop_Id_2__c == Null && j == 0){
+                    envelopeId = dbcase.Wish_Liability_Envolep__c ;
+                    for(String key : dbcase.LiabilitySignerMapKeyPair__c.split('#')){
+                        String keys = key.split('-')[0];
+                        String value = key.split('-')[1];
+                        signersKeyPairMap.put(keys.trim(),value.trim());
+                    } 
+                }
+                if(dbcase.Wish_Liability_Envolep__c != Null && dbcase.Hidden_Liability_Envelop_Id_1__c != Null && dbcase.Hidden_Liability_Envelop_Id_2__c== Null ){
+                    envelopeId = dbcase.Hidden_Liability_Envelop_Id_1__c ;
+                    for(String key : dbcase.Hidden_Liability_SignerMap_Key_1__c.split('#')){
+                        String keys = key.split('-')[0];
+                        String value = key.split('-')[1];
+                        signersKeyPairMap.put(keys.trim(),value.trim());
+                    } 
+                }
+                if(dbcase.Wish_Liability_Envolep__c != Null && dbcase.Hidden_Liability_Envelop_Id_1__c != Null && dbcase.Hidden_Liability_Envelop_Id_2__c != Null ){
+                    envelopeId = dbcase.Hidden_Liability_Envelop_Id_2__c ;
+                    for(String key : dbcase.Hidden_Liability_SignerMap_Key_2__c.split('#')){
+                        String keys = key.split('-')[0];
+                        String value = key.split('-')[1];
+                        signersKeyPairMap.put(keys.trim(),value.trim());
+                    }
+                }
                 
+                if(dbcase.Wish_Liability_Envolep__c != Null && dbcase.Hidden_Liability_Envelop_Id_1__c != Null && dbcase.Hidden_Liability_Envelop_Id_2__c != Null && dbcase.Hidden_Liability_Envelop_Id_3__c != Null){
+                    envelopeId = dbcase.Hidden_Liability_Envelop_Id_3__c ;
+                    for(String key : dbcase.Hidden_Liability_SignerMap_Key_3__c .split('#')){
+                        String keys = key.split('-')[0];
+                        String value = key.split('-')[1];
+                        signersKeyPairMap.put(keys.trim(),value.trim());
+                    }
+                }
             }
         }
         return null;
@@ -791,7 +902,14 @@ public class WishLiabilityForm_AC
         String IntegratorKey;
         String endPointURL;
         List<Contact> relationShipList = new List<Contact>();
+        Map<Id,Wish_Child_Form__c> wishChildFormMap = new Map<Id,Wish_Child_Form__c>();
+        
         string timmedName = SingerName.trim();
+        Wish_Child_Form__c  dbcase = [SELECT Id,Wish_Liability_Envolep__c,LiabilitySignerMapKeyPair__c,Case__c,Hidden_Liability_Envelop_Id_1__c,
+                                      Hidden_Liability_Envelop_Id_2__c,Hidden_Liability_Envelop_Id_3__c,Hidden_Liability_SignerMap_Key_1__c,
+                                      Hidden_Liability_SignerMap_Key_2__c,Hidden_Liability_SignerMap_Key_3__c,Hidden_Email_List__c,Hidden_Name_List__c FROM Wish_Child_Form__c WHERE Case__c =: caseId];
+        
+        system.debug('#### dbcase 1####'+dbcase);
         Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
         
         for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
@@ -820,17 +938,14 @@ public class WishLiabilityForm_AC
         String baseUrl = URL.getSalesforceBaseUrl().toExternalForm();
         jsonPayload = '{'+
             '    "userName": "'+SingerName+'",'+
-            '    "email": "kanagaraj@mstsolutions.com",'+
+            '    "email": "NotSent@NoEmail.com",'+
             '    "recipientId": "'+signersKeyPairMap.get(timmedName)+'",'+
             '    "clientUserId": "'+signersKeyPairMap.get(timmedName)+'",'+
             '    "authenticationMethod": "None",'+
             '   "returnUrl": "'+baseUrl +'/apex/WishLiabilityForm_VF?Id='+CaseId+'"'+   
             '}'; 
-        
-        system.debug('@@@@@@@@@@@@@@@ jsonPayload @@@@@@@@@@@@'+jsonPayload ); 
         request.setBody(jsonPayload);
         response = httprequest.send(request);  
-        system.debug('@@@@@@@@@@@@@@@ response @@@@@@@@@@@@'+response);
         Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
         //signersKeyPairMap.remove(SingerName);
         String sign;
@@ -838,14 +953,57 @@ public class WishLiabilityForm_AC
             if(sign == '' || sign == Null)
                 sign= name +' - '+ signersKeyPairMap.get(name);
             else
-                sign = sign+','+ name+' - '+ signersKeyPairMap.get(name);
+                sign = sign+'#'+ name+' - '+ signersKeyPairMap.get(name);
         }
-        case newCase = new case();
-        newCase.Id = caseId;
-        newCase.LiabilitySignerMapKeyPair__c = sign;
-        newCase.Wish_Liability_Envolep__c = envelopeId;
-        update newCase;
+        Wish_Child_Form__c updateChildForm = new Wish_Child_Form__c();
+        updateChildForm.Id = dbcase.id;
+        if(dbcase.LiabilitySignerMapKeyPair__c == Null && dbcase.Wish_Liability_Envolep__c == Null &&
+           dbcase.Hidden_Liability_SignerMap_Key_1__c == Null && dbcase.Hidden_Liability_Envelop_Id_1__c == Null && dbcase.Hidden_Liability_Envelop_Id_2__c == Null && dbcase.Hidden_Liability_SignerMap_Key_2__c == Null){
+            
+               updateChildForm.LiabilitySignerMapKeyPair__c = sign;
+               updateChildForm.Wish_Liability_Envolep__c = envelopeId;
+               wishChildFormMap.put(updateChildForm.Id,updateChildForm); 
+           }
         
+        if(dbcase.LiabilitySignerMapKeyPair__c != Null && dbcase.Wish_Liability_Envolep__c != Null && dbcase.Hidden_Liability_SignerMap_Key_1__c == Null && dbcase.Hidden_Liability_Envelop_Id_1__c == Null
+           && dbcase.Hidden_Liability_Envelop_Id_2__c == Null && dbcase.Hidden_Liability_SignerMap_Key_2__c == Null && j == 1 && k == 0){
+            
+               updateChildForm.Hidden_Liability_SignerMap_Key_1__c = sign;
+               updateChildForm.Hidden_Liability_Envelop_Id_1__c = envelopeId;
+               wishChildFormMap.put(updateChildForm.Id,updateChildForm); 
+           }
+        
+        if(dbcase.LiabilitySignerMapKeyPair__c != Null && dbcase.Wish_Liability_Envolep__c != Null && dbcase.Hidden_Liability_Envelop_Id_2__c == Null && dbcase.Hidden_Liability_SignerMap_Key_2__c == Null &&
+           dbcase.Hidden_Liability_SignerMap_Key_1__c != Null && dbcase.Hidden_Liability_Envelop_Id_1__c != Null && j == 2 && k == 1){
+           
+               updateChildForm.Hidden_Liability_SignerMap_Key_2__c = sign;
+               updateChildForm.Hidden_Liability_Envelop_Id_2__c = envelopeId;
+               wishChildFormMap.put(updateChildForm.Id,updateChildForm); 
+           }
+        
+        if(dbcase.LiabilitySignerMapKeyPair__c != Null && dbcase.Wish_Liability_Envolep__c != Null && dbcase.Hidden_Liability_Envelop_Id_2__c != Null && dbcase.Hidden_Liability_SignerMap_Key_2__c != Null &&
+           dbcase.Hidden_Liability_SignerMap_Key_1__c != Null && dbcase.Hidden_Liability_Envelop_Id_1__c  != Null && dbcase.Hidden_Liability_Envelop_Id_3__c != Null && dbcase.Hidden_Liability_SignerMap_Key_3__c != Null && j == 3 && k == 2){
+               
+               updateChildForm.Hidden_Liability_SignerMap_Key_3__c = sign;
+               updateChildForm.Hidden_Liability_Envelop_Id_3__c = envelopeId;
+               wishChildFormMap.put(updateChildForm.Id,updateChildForm); 
+               
+           }
+        
+           if(dbcase.Hidden_Name_List__c == null){
+          
+           updateChildForm.Hidden_Name_List__c  = SingerName;
+           wishChildFormMap.put(updateChildForm.Id,updateChildForm); 
+           }
+           else{
+           
+           updateChildForm.Hidden_Name_List__c  = dbcase.Hidden_Name_List__c+'#'+SingerName;
+           wishChildFormMap.put(updateChildForm.Id,updateChildForm); 
+           }
+        
+        if(wishChildFormMap.size() > 0){
+            update wishChildFormMap.Values();
+        }
         PageReference reference=new PageReference((String) results.get('url'));
         reference.setRedirect(true);
         return reference;

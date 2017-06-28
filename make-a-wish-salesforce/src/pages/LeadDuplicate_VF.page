@@ -51,7 +51,23 @@
      
       
      
-       $('.existingMedical').click(function() { 
+       $('.existingBestCon').click(function() { 
+      
+        if($(this).prop("checked") == true){
+                $('.bestConRadio').attr('disabled', true);
+                  $('.bestConRadio').each(function(){                
+                    $(this).prop('checked', false);                
+                    });
+                
+            }
+            else if($(this).prop("checked") == false){
+                $('.bestConRadio').attr('disabled', false);
+            }
+      
+  
+     });
+     
+      $('.existingMedical').click(function() { 
       
         if($(this).prop("checked") == true){
                 $('.existingRadio').attr('disabled', true);
@@ -62,6 +78,22 @@
             }
             else if($(this).prop("checked") == false){
                 $('.existingRadio').attr('disabled', false);
+            }
+      
+  
+     });
+     
+      $('.existingAddParentCon').click(function() { 
+      
+        if($(this).prop("checked") == true){
+                $('.additionalConRadio').attr('disabled', true);
+                  $('.additionalConRadio').each(function(){                
+                    $(this).prop('checked', false);                
+                    });
+                
+            }
+            else if($(this).prop("checked") == false){
+                $('.additionalConRadio').attr('disabled', false);
             }
       
   
@@ -482,6 +514,91 @@
                 </div>
                </apex:outputpanel>
            
+             
+              <apex:outputpanel rendered="{!AdditionalParentContactList.size > 0}" StyleClass ="TotalBox is_Existing">
+                
+                 <div class="slds-card slds-m-horizontal--large {!cardClass}">
+                    <div class="slds-card__header slds-grid slds-grid--align-spread">
+                        <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Additional Parent/Guardian Contact</h2>
+                       
+                    </div>
+                    <div class="slds-card__body">
+                        <!--apex:outputText rendered="{!NOT(hasResults)}"-->
+                       
+                        <apex:outputText rendered="{!AdditionalParentContactList.Size>0}">
+                         <!--apex:outputText rendered="{!hasResults}"-->
+
+                            <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal dupHasRes">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th class="slds-text-heading--label" scope="col">First Name</th>
+                                        <th class="slds-text-heading--label" scope="col">Last Name</th>
+                                        <th class="slds-text-heading--label" scope="col">Email</th>
+                                        <th class="slds-text-heading--label" scope="col">Select Contact</th>
+                                        <th class="slds-text-heading--label" scope="col" rowspan="4">Create New Record</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                 <tr style="border: 0.1px solid #c1c1c1;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><div style="float:left; margin-top: 1%;  position:absolute; margin-left: 6%;">
+                                                       <apex:inputCheckbox label="" onclick="" styleClass="existingAddParentCon Existing Existingmycheck additionalParentcheck overallcheck"/>
+                                                     </div>
+                                    </td>
+                                 </tr>
+                                          
+                                     <apex:repeat value="{!AdditionalParentContactList}" var="additionalParent">
+                                        <tr>
+                                              <td>
+                                                    <a href="{!URLFOR($Action.Contact.View, additionalParent.Id)}" class="slds-truncate">
+                                                      <apex:outputText value="View"/>
+                                                    </a>
+                                               
+                                              </td>
+                                               <td>
+                                                     <apex:outputText value="{!additionalParent.FirstName}"/>
+                                               
+                                               </td>
+                                               <td>
+                                               
+                                                    <apex:outputText value="{!additionalParent.LastName}"/>
+                                                
+                                               </td>
+                                             
+                                               <td>
+                                                    <apex:outputText value="{!additionalParent.Email}"/>
+                                                
+                                               </td>
+                                               <td style="border-right: 1px solid #d8dde6;">
+                                                    <input type="radio" name="additionalCon" class="additionalConRadio ExistingRadio  overallRadio" id="{!additionalParent.id}" VALUE="{!additionalParent.id}" onclick="additionalParentValue(this,'{!$Component.bestToConId}');"/>
+                                                    
+                                               </td>
+                                        </tr>
+                                    </apex:repeat>
+                                    <apex:inputhidden value="{!additionalParentId}" id="addtionalConId" />
+                                </tbody>
+                            </table>
+                            
+                            <div style="float:left; margin-top: -6%;  margin-right: 7%; position:absolute; margin-left: 87%;">
+                            
+                            </div>
+                            
+                        </apex:outputText>
+                    </div>
+                </div>
+              </apex:outputpanel> 
+           
+           
+             
+             
+             
                <apex:outputpanel rendered="{!dupMedicalContactList.size > 0}" StyleClass ="TotalBox is_medical">
                  <div class="slds-card slds-m-horizontal--large {!cardClass}">
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
@@ -608,7 +725,7 @@
                                     <td></td>
                                     <td></td>
                                     <td><div style="float:left; margin-top: 1%;  position:absolute; margin-left: 6%;">
-                                                       <apex:inputCheckbox label="" onclick="" styleClass="existingMedical treatingmycheck overallcheck"/>
+                                                       <apex:inputCheckbox label="" onclick="" styleClass="existingMedical treating treatingmycheck overallcheck"/>
                                                      </div>
                                     </td>
                                  </tr>
@@ -639,7 +756,7 @@
                                                 
                                                </td>
                                                <td style="border-right: 1px solid #d8dde6;">
-                                                    <input type="radio" name="treating" class="existingRadio treatingRadio  overallRadio" id="{!treatingContact.id}" VALUE="{!treatingContact.id}" onclick="treatingValue(this,'{!$Component.treatingValue}');"/>
+                                                    <input type="radio" name="treating" class="treatingRadio  overallRadio" id="{!treatingContact.id}" VALUE="{!treatingContact.id}" onclick="treatingValue(this,'{!$Component.treatingValue}');"/>
                                                     
                                                </td>
                                         </tr>
@@ -656,8 +773,91 @@
                     </div>
                 </div>
               </apex:outputpanel>  
-            </apex:outputpanel>
+           
+             
+             <br/>
+              <apex:outputpanel rendered="{!bestPhysicianContactList.size > 0}" StyleClass ="TotalBox is_best">
                 
+                 <div class="slds-card slds-m-horizontal--large {!cardClass}">
+                    <div class="slds-card__header slds-grid slds-grid--align-spread">
+                        <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Best Person in the Physician office to contact</h2>
+                       
+                    </div>
+                    <div class="slds-card__body">
+                        <!--apex:outputText rendered="{!NOT(hasResults)}"-->
+                       
+                        <apex:outputText rendered="{!bestPhysicianContactList.Size>0}">
+                         <!--apex:outputText rendered="{!hasResults}"-->
+
+                            <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal dupHasRes">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th class="slds-text-heading--label" scope="col">First Name</th>
+                                        <th class="slds-text-heading--label" scope="col">Last Name</th>
+                                        <th class="slds-text-heading--label" scope="col">Email</th>
+                                        <th class="slds-text-heading--label" scope="col">Select Contact</th>
+                                        <th class="slds-text-heading--label" scope="col" rowspan="4">Create New Record</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                
+                                 <tr style="border: 0.1px solid #c1c1c1;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><div style="float:left; margin-top: 1%;  position:absolute; margin-left: 6%;">
+                                                       <apex:inputCheckbox label="" onclick="" styleClass="existingBestCon best bestmycheck overallcheck"/>
+                                                     </div>
+                                    </td>
+                                 </tr>
+                                          
+                                     <apex:repeat value="{!bestPhysicianContactList}" var="bestContact">
+                                        <tr>
+                                              <td>
+                                                    <a href="{!URLFOR($Action.Contact.View, bestContact.Id)}" class="slds-truncate">
+                                                      <apex:outputText value="View"/>
+                                                    </a>
+                                               
+                                              </td>
+                                               <td>
+                                                     <apex:outputText value="{!bestContact.FirstName}"/>
+                                               
+                                               </td>
+                                               <td>
+                                               
+                                                    <apex:outputText value="{!bestContact.LastName}"/>
+                                                
+                                               </td>
+                                             
+                                               <td>
+                                                    <apex:outputText value="{!bestContact.Email}"/>
+                                                
+                                               </td>
+                                               <td style="border-right: 1px solid #d8dde6;">
+                                                    <input type="radio" name="bestCon" class="bestConRadio bestRadio  overallRadio" id="{!bestContact.id}" VALUE="{!bestContact.id}" onclick="bestPersonValue(this,'{!$Component.bestToConId}');"/>
+                                                    
+                                               </td>
+                                        </tr>
+                                    </apex:repeat>
+                                    <apex:inputhidden value="{!bestToConId}" id="bestToConId" />
+                                </tbody>
+                            </table>
+                            
+                            <div style="float:left; margin-top: -6%;  margin-right: 7%; position:absolute; margin-left: 87%;">
+                            
+                            </div>
+                            
+                        </apex:outputText>
+                    </div>
+                </div>
+              </apex:outputpanel>  
+              
+                </apex:outputpanel>
+               
                 
             </apex:form>
          </apex:outputText>
@@ -855,6 +1055,21 @@
      </script>
       <script>
                 function treatingValue(input, textid) {
+                    
+                        document.getElementById(textid).value = input.value;
+                } 
+               
+     </script>
+      <script>
+                function bestPersonValue(input, textid) {
+                    
+                        document.getElementById(textid).value = input.value;
+                } 
+              
+     </script>
+     
+      <script>
+                function additionalParentValue(input, textid) {
                     
                         document.getElementById(textid).value = input.value;
                 } 

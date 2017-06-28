@@ -24,13 +24,11 @@
     <filter>
         <criteriaItems>
             <column>CREATED</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>integration user</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>

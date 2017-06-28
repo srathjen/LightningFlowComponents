@@ -159,6 +159,10 @@
         <name>Wish_Determination</name>
     </recordTypes>
     <recordTypes>
+        <label><!-- Wish Granting --></label>
+        <name>Wish_Granting</name>
+    </recordTypes>
+    <recordTypes>
         <label><!-- Wish Planning --></label>
         <name>Wish_Planning</name>
     </recordTypes>

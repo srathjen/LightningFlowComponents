@@ -85,6 +85,33 @@
         <template>Automated_Volunteer_Templates/Bc_Expiring_30_Days_Email_Template</template>
     </alerts>
     <fieldUpdates>
+        <fullName>Hidden_Background_Expire</fullName>
+        <field>HiddenBackgroundExpire__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Hidden Background Expire</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Hidden_Background_Expire</fullName>
+        <field>HiddenBackgroundExpire__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Hidden Background Expire</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Hidden_Background_Rejected</fullName>
+        <field>Hidden_Background_Rejected__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Hidden Background Rejected</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Update_IsBackground_Expire</fullName>
         <description>This field update is used to update the &quot;Hidden Background Expire&quot;  field. when the background check record get expire.</description>
         <field>HiddenBackgroundExpire__c</field>
@@ -123,10 +150,76 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
+        <fullName>Bc%3A Volunteer Opportunity Status Update when BC Expired</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Date_Requested__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Date__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Current__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Volunteer_is_Inactive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>This workflow will fire when the background record is expired.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Hidden_Background_Expire</name>
+                <type>FieldUpdate</type>
+            </actions>
+            <offsetFromField>Background_check__c.Date__c</offsetFromField>
+            <timeLength>0</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Bc%3A Volunteer Opportunity Status Update when BC Rejected</fullName>
+        <actions>
+            <name>Update_Hidden_Background_Rejected</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Current__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Rejected</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
         <fullName>Bc%3ACompleted Workflow Rule</fullName>
         <actions>
             <name>Bc_Completed_Email_Alert</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>BC_ET_Background_Check_Completed</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <criteriaItems>
@@ -135,9 +228,9 @@
             <value>Approved,Approved w/ Conditions</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Background_check__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow will fire when the background check status is completed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -151,9 +244,9 @@
             <value>True</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Background_check__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <criteriaItems>
             <field>Background_check__c.Status__c</field>
@@ -164,12 +257,21 @@
             <operation>notEqual</operation>
             <value>Rejected</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Volunteer_is_Inactive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This rule will fire when the background check is Expiring with in 30 days</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
                 <name>Bc_Expiring_Before_30_Days_Email_Alert</name>
                 <type>Alert</type>
+            </actions>
+            <actions>
+                <name>BC_ET_Background_Check_Expiring_30_Days</name>
+                <type>Task</type>
             </actions>
             <offsetFromField>Background_check__c.Date__c</offsetFromField>
             <timeLength>-30</timeLength>
@@ -180,6 +282,10 @@
                 <name>Bc_Expiring_Before_2_Days_Email_Alert</name>
                 <type>Alert</type>
             </actions>
+            <actions>
+                <name>BC_ET_Background_Check_Expiring_2_Days</name>
+                <type>Task</type>
+            </actions>
             <offsetFromField>Background_check__c.Date__c</offsetFromField>
             <timeLength>-2</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
@@ -188,6 +294,10 @@
             <actions>
                 <name>Bc_Expiring_Before_9_Days_Email_Alert</name>
                 <type>Alert</type>
+            </actions>
+            <actions>
+                <name>BC_ET_Background_Check_Expiring_9_Days</name>
+                <type>Task</type>
             </actions>
             <offsetFromField>Background_check__c.Date__c</offsetFromField>
             <timeLength>-9</timeLength>
@@ -198,6 +308,10 @@
                 <name>Bc_Expiring_After_7_Days_Email_Alert</name>
                 <type>Alert</type>
             </actions>
+            <actions>
+                <name>BC_ET_Background_Check_Expired_7_Days</name>
+                <type>Task</type>
+            </actions>
             <offsetFromField>Background_check__c.Date__c</offsetFromField>
             <timeLength>7</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
@@ -206,6 +320,10 @@
             <actions>
                 <name>Bc_Expiring_Before_16_Days_Email_Alert</name>
                 <type>Alert</type>
+            </actions>
+            <actions>
+                <name>BC_ET_Background_Check_Expiring_16_Days</name>
+                <type>Task</type>
             </actions>
             <offsetFromField>Background_check__c.Date__c</offsetFromField>
             <timeLength>-16</timeLength>
@@ -216,9 +334,97 @@
                 <name>Bc_Expiring_Before_23_Days_Email_Alert</name>
                 <type>Alert</type>
             </actions>
+            <actions>
+                <name>BC_ET_Background_Check_Expiring_23_Days</name>
+                <type>Task</type>
+            </actions>
             <offsetFromField>Background_check__c.Date__c</offsetFromField>
             <timeLength>-23</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
     </rules>
+    <tasks>
+        <fullName>BC_ET_Background_Check_Completed</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>BC ET : Background Check Completed</subject>
+    </tasks>
+    <tasks>
+        <fullName>BC_ET_Background_Check_Expired_7_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>BC ET : Background Check Expired (7 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>BC_ET_Background_Check_Expiring_16_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>BC ET : Background Check Expiring (16 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>BC_ET_Background_Check_Expiring_23_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>BC ET : Background Check Expiring (23 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>BC_ET_Background_Check_Expiring_2_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>BC ET : Background Check Expiring (2 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>BC_ET_Background_Check_Expiring_30_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>BC ET : Background Check Expiring (30 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>BC_ET_Background_Check_Expiring_9_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>BC ET : Background Check Expiring (9 Days)</subject>
+    </tasks>
 </Workflow>

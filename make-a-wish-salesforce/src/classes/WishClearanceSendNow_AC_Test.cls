@@ -33,36 +33,11 @@ public class WishClearanceSendNow_AC_Test {
         npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRec(contactWishChild.Id,contactMedicalProfessChild.Id); 
         Case caseId = OrientationandTrainingUtil.CreateParentCase(contactWishChild.Id);
         case updatecase = new case();
+        updatecase.Rush__c = true;
         updatecase.Id = caseId.Id;
         updatecase.Rush_Explanation__c = 'test';
+        updatecase.IsRushWishClearence_ChildSummary__c = true;
         updatecase.Rush_Timeframe__c = '0-31';
-        updatecase.wish_involves_air_travel__c = 'Yes';
-        updatecase.Description = 'test';
-        updatecase.Rush__c = true;
-        update updatecase;
-        OrientationandTrainingUtil.insertDocusignSetting();
-        ApexPAges.StandardController sc = new ApexPages.StandardController(caseId);
-        PageReference pageRef = Page.WishClearanceSendNow_VF;
-        pageRef.getParameters().put('id',String.valueOf(updatecase.Id));
-        Test.setCurrentPage(pageRef);
-        WishClearanceSendNow_AC wishClear = new WishClearanceSendNow_AC(sc);
-        wishClear.getMedicalProContact();
-        wishClear.SendtoDocuSign();
-        wishClear.DisplayMessage();
-        wishClear.cancel();
-        wishClear.displayEmail();
-        
-    }
-    
-    public static testMethod void createParentCaseWithAirTravel(){
-        Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
-        Contact contactMedicalProfessChild = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
-        npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRec(contactWishChild.Id,contactMedicalProfessChild.Id);
-        Case caseId = OrientationandTrainingUtil.CreateParentCase(contactWishChild.Id);
-        case updatecase = new case();
-        updatecase.wish_involves_air_travel__c = 'Yes';
-        updatecase.Id = caseId.Id;
-        updatecase.Description = 'test';
         update updatecase;
         OrientationandTrainingUtil.insertDocusignSetting();
         ApexPAges.StandardController sc = new ApexPages.StandardController(updatecase);
@@ -75,6 +50,42 @@ public class WishClearanceSendNow_AC_Test {
         wishClear.DisplayMessage();
         wishClear.cancel();
         wishClear.displayEmail();
+        wishClear.ReturnToWish();
+        wishClear.ReturnToWishClearanceForm();
+        
+    }
+    
+    public static testMethod void createParentCaseWithAirTravel(){
+        Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
+        Contact contactMedicalProfessChild = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
+        npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRec(contactWishChild.Id,contactMedicalProfessChild.Id);
+        Case caseId = OrientationandTrainingUtil.CreateParentCase(contactWishChild.Id);
+        case updatecase = new case();
+        updatecase.wish_involves_air_travel__c = 'Yes';
+        updatecase.Id = caseId.Id;
+        updatecase.Description = 'test';
+        updatecase.Rush__c =true;
+         updatecase.Rush_Explanation__c ='test';
+        updatecase.Rush_Timeframe__c ='ASAP';
+        update updatecase;
+        
+        case newCase = new case();
+        newCase.IsRushWishClearence_ChildSummary__c = true;
+        newCase.Id = caseId.id;
+        update newCase;
+        OrientationandTrainingUtil.insertDocusignSetting();
+        ApexPAges.StandardController sc = new ApexPages.StandardController(updatecase);
+        PageReference pageRef = Page.WishClearanceSendNow_VF;
+        pageRef.getParameters().put('id',String.valueOf(updatecase.Id));
+        Test.setCurrentPage(pageRef);
+        WishClearanceSendNow_AC wishClear = new WishClearanceSendNow_AC(sc);
+        wishClear.getMedicalProContact();
+        wishClear.SendtoDocuSign();
+        wishClear.DisplayMessage();
+        wishClear.cancel();
+        wishClear.displayEmail();
+        wishClear.ReturnToWish();
+        wishClear.ReturnToWishClearanceForm();
         
     }
        
@@ -92,13 +103,18 @@ public class WishClearanceSendNow_AC_Test {
         updatecase.Appropriate_Comments__c = Null;
         updatecase.Please_Explain__c = Null;
         updatecase.Date_of_last_visit_treatment__c = Null;
+        updatecase.IsRushWishClearence_ChildSummary__c = true;
         updatecase.Comments__c = Null;
         updatecase.Comment_1__c = Null;
         updatecase.Comment_2__c = Null;
+        updatecase.Rush__c =true;
+        updatecase.Rush_Explanation__c ='test';
+        updatecase.Rush_Timeframe__c ='ASAP';
         updatecase.Wish_Clearance_Sent_Date__c = system.today();
         updatecase.Wish_Clearance_Sent_Date__c = system.today();
         update updatecase;
         
+       
         OrientationandTrainingUtil.insertDocusignSetting();
         ApexPAges.StandardController sc = new ApexPages.StandardController(caseId);
         PageReference pageRef = Page.WishClearanceSendNow_VF;
@@ -106,6 +122,7 @@ public class WishClearanceSendNow_AC_Test {
         Test.setCurrentPage(pageRef);
         WishClearanceSendNow_AC wishClear = new WishClearanceSendNow_AC(sc);
         wishClear.medicalProfContactName = contactMedicalProfessChild.Name;
+        wishClear.email = contactMedicalProfessChild.Email;
         wishClear.getMedicalProContact();
         wishClear.displayEmail();
         wishClear.SendtoDocuSign();

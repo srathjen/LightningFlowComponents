@@ -66,22 +66,20 @@
     <columns>
         <field>OWNER</field>
     </columns>
+    <description>Defaults to Current FY but timeframe can be adjusted</description>
     <filter>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Granted,Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
@@ -97,7 +95,7 @@
         <field>STATUS</field>
         <sortOrder>Asc</sortOrder>
     </groupingsDown>
-    <name>MAWA Completed Wishes FYTD</name>
+    <name>MAWA Completed Wishes</name>
     <params>
         <name>units</name>
         <value>h</value>

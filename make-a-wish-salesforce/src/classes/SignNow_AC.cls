@@ -27,7 +27,7 @@ public Class SignNow_AC{
         ethnicityList = new List<String>();
         
         currentPageId =  ApexPages.currentPage().getParameters().get('id');
-        system.debug('@@@@@@ current constructor @@@@@@@@'+currentPageId );
+        
         if(currentPageId != null){
             //List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentPageId AND Status =: 'Pending' AND ProcessDefinition.Name =: 'Wish Child Form Approval Process'];
             
@@ -79,7 +79,7 @@ public Class SignNow_AC{
                                                             
                                                             if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != null) {  
                                                                 
-                                                                for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c.split(',')){
+                                                                for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c.split('#')){
                                                                     wcfUtil.SignNowList.add(keys.trim());  
                                                                     wcfUtil.listofSenderName.add(keys.trim());                   
                                                                     

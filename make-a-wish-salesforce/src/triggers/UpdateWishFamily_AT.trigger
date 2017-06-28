@@ -1,4 +1,17 @@
-trigger UpdateWishFamily_AT on Wish_Child_Form__c (Before update, After update) {
+trigger UpdateWishFamily_AT on Wish_Child_Form__c (Before insert,Before update, After update) {
+
+    if(Trigger.isBefore && Trigger.isInsert){
+     for(Wish_Child_Form__c dbWishchildForm : trigger.new){
+           if(dbWishchildForm.Availability_Time_Period_1__c == 'null/null')
+            dbWishchildForm.Availability_Time_Period_1__c = '';
+            
+            if(dbWishchildForm.Availability_Time_Period_2__c == 'null/null')
+            dbWishchildForm.Availability_Time_Period_2__c = '';
+            
+            if(dbWishchildForm.Availability_Time_Period_3__c == 'null/null')
+            dbWishchildForm.Availability_Time_Period_3__c = '';
+     }
+    }
     
     if(Trigger.isBefore && Trigger.isUpdate){
         Map<Id,String> wishMap = new Map<Id,String>();
@@ -25,16 +38,28 @@ trigger UpdateWishFamily_AT on Wish_Child_Form__c (Before update, After update) 
             dbWishchildForm.Participant_Name_for_Dietary_Restriction__c = null;
             
             if(dbWishchildForm.Participant_have_allergies_to_food__c == 'No')
-            dbWishchildForm.Names_for_receiving_nursing_care__c = null;
+            dbWishchildForm.Participant_have_allergies_to_food_Note__c= null;
             
             if(dbWishchildForm.Medication_require_refrigeration__c == 'No')
             dbWishchildForm.Medication_require_refrigeration_name__c = null;
             
             if(dbWishchildForm.Wish_child_receive_nursing_care__c == 'No')
-            dbWishchildForm.Requested_Participant_Name_for_Allergies__c = null;
+            dbWishchildForm.Wish_child_receive_nursing_care_Note__c= null;
             
             if(dbWishchildForm.Participant_require_medical_supplies__c == 'No')
             dbWishchildForm.Requested_Participant_Name_for_OtherNeed__c  = null;
+            
+            if(dbWishchildForm.Availability_Time_Period_1__c == 'null/null')
+            dbWishchildForm.Availability_Time_Period_1__c = '';
+            
+            if(dbWishchildForm.Availability_Time_Period_2__c == 'null/null')
+            dbWishchildForm.Availability_Time_Period_2__c = '';
+            
+            if(dbWishchildForm.Availability_Time_Period_3__c == 'null/null')
+            dbWishchildForm.Availability_Time_Period_3__c = '';
+            
+            if(dbWishchildForm.Participant_Names__c == Null)
+            dbWishchildForm.Hidden_Same_as_Family__c = false;
         }
         
     }

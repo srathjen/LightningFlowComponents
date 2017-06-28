@@ -68,6 +68,14 @@
         <value>a1a360000033dtY</value>
     </labels>
     <labels>
+        <fullName>DSProSFUsername</fullName>
+        <categories>It holds the DSProSFUsername</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DocuSignUserName</shortDescription>
+        <value>2997e370-25da-4c02-aad3-e5c1a0fe663e</value>
+    </labels>
+    <labels>
         <fullName>Instance_Url</fullName>
         <categories>It will hold the instance url</categories>
         <language>en_US</language>
@@ -148,6 +156,14 @@
         <protected>false</protected>
         <shortDescription>Rush Wish Clearance</shortDescription>
         <value>20C0778C-FFA8-44BF-9883-77158C76395F</value>
+    </labels>
+    <labels>
+        <fullName>Salesforce_Support_User_Id</fullName>
+        <categories>It holds Salesforce Support User Id</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Salesforce Support User Id</shortDescription>
+        <value>00536000002PP9x</value>
     </labels>
     <labels>
         <fullName>Shopping_Spree_DDP</fullName>

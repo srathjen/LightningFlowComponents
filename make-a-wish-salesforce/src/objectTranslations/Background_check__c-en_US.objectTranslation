@@ -49,6 +49,10 @@
         <name>HiddenBackgroundExpire__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Background Rejected --></label>
+        <name>Hidden_Background_Rejected__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Volunteer Contact Email --></label>
         <name>Hidden_Volunteer_Contact_Email__c</name>
     </fields>
@@ -113,6 +117,10 @@
         <name>Volunteer__c</name>
         <relationshipLabel><!-- Background Checks --></relationshipLabel>
     </fields>
+    <fields>
+        <label><!-- Hidden Volunteer is Inactive --></label>
+        <name>Volunteer_is_Inactive__c</name>
+    </fields>
     <layouts>
         <layout>Background check Layout</layout>
         <sections>
@@ -137,4 +145,32 @@
         <errorMessage><!-- Please enter the value for status --></errorMessage>
         <name>BC_Status_validation</name>
     </validationRules>
+    <workflowTasks>
+        <name>BC_ET_Background_Check_Completed</name>
+        <subject><!-- BC ET : Background Check Completed --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>BC_ET_Background_Check_Expired_7_Days</name>
+        <subject><!-- BC ET : Background Check Expired (7 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>BC_ET_Background_Check_Expiring_16_Days</name>
+        <subject><!-- BC ET : Background Check Expiring (16 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>BC_ET_Background_Check_Expiring_23_Days</name>
+        <subject><!-- BC ET : Background Check Expiring (23 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>BC_ET_Background_Check_Expiring_2_Days</name>
+        <subject><!-- BC ET : Background Check Expiring (2 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>BC_ET_Background_Check_Expiring_30_Days</name>
+        <subject><!-- BC ET : Background Check Expiring (30 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>BC_ET_Background_Check_Expiring_9_Days</name>
+        <subject><!-- BC ET : Background Check Expiring (9 Days) --></subject>
+    </workflowTasks>
 </CustomObjectTranslation>

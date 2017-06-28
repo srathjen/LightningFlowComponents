@@ -103,28 +103,45 @@ public class ContactTriggerHandler{
         Map<String, String> zipCodeChapterMap = new Map<String, String>();
         List<Task> newTaskList = new List<Task>();
         Constant_AC constant = new Constant_AC();
-        Id taskRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
-        
+        Id taskRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
+        String mailingCode;
+        Map<Id, Set<Id>> taskIdsMap = new Map<Id, Set<Id>>();
+        for(Task addressTask : [SELECT Id FROM Task WHERE WhatId IN : contactMap.keySet() AND Subject = 'Volunteer Address Change' AND isClosed = false]) {
+            if(taskIdsMap.containsKey(addressTask.WhoId)) {
+                taskIdsMap.get(addressTask.WhoId).add(addressTask.WhatId);
+            } else {
+                taskIdsMap.put(addressTask.WhoId, new Set<Id>{addressTask.WhatId});
+            }
+        }
         for(Zip_Code__c currZip : [SELECT Id, Name, Office__c, Office__r.Chapter__c FROM Zip_Code__c WHERE Name IN :zipCodesSet])
         {
             if(currZip.Office__c != Null)
                 zipCodeChapterMap.put(currZip.Name, currZip.Office__r.Chapter__c);
         }
-        for(npe5__Affiliation__c  currAffiliation : [SELECT Id,npe5__Contact__c, npe5__Contact__r.MailingPostalcode, npe5__Organization__c,npe5__Contact__r.Volunteer_Role__c  FROM npe5__Affiliation__c WHERE npe5__Contact__c IN :contactMap.keySet() AND npe5__Primary__c = True])
+        for(npe5__Affiliation__c  currAffiliation : [SELECT Id,npe5__Contact__c, npe5__Contact__r.MailingPostalcode, npe5__Contact__r.OwnerId, npe5__Organization__c,npe5__Contact__r.Volunteer_Role__c  FROM npe5__Affiliation__c WHERE npe5__Contact__c IN :contactMap.keySet() AND npe5__Primary__c = True])
         {
-            if(zipCodeChapterMap.containsKey(currAffiliation.npe5__Contact__r.MailingPostalcode))
+            if(currAffiliation.npe5__Contact__r.MailingPostalcode != null && String.valueOf(currAffiliation.npe5__Contact__r.MailingPostalcode).length() > 5 && String.valueOf(currAffiliation.npe5__Contact__r.MailingPostalcode).contains('-')) {
+                mailingCode = String.valueOf(currAffiliation.npe5__Contact__r.MailingPostalcode).split('-')[0];
+            } else {
+                mailingCode = currAffiliation.npe5__Contact__r.MailingPostalcode;
+            }
+            
+            if(zipCodeChapterMap.containsKey(mailingCode))
             {
-                if(currAffiliation.npe5__Organization__c != zipCodeChapterMap.get(currAffiliation.npe5__Contact__r.MailingPostalcode))
+                if(currAffiliation.npe5__Organization__c != zipCodeChapterMap.get(mailingCode))
                 {
-                    Task newTask = new Task();
-                    newTask.Subject = 'Volunteer Address Change';
-                    newTask.whoId = currAffiliation.npe5__Contact__c;
-                    newTask.OwnerId = UserInfo.getUserId();
-                    newTask.Status = 'Not Started';
-                    newTask.activityDate = Date.Today() + 5;
-                    newTask.whatId = zipCodeChapterMap.get(currAffiliation.npe5__Contact__r.MailingPostalcode);
-                    newTask.RecordTypeId = taskRT;
-                    newTaskList.add(newTask);
+                    if(taskIdsMap.containsKey(currAffiliation.npe5__Contact__c) && !taskIdsMap.get(currAffiliation.npe5__Contact__c).contains(currAffiliation.npe5__Contact__c)) {
+                        Task newTask = new Task();
+                        newTask.Subject = 'Volunteer Address Change';
+                        newTask.whoId = currAffiliation.npe5__Contact__c;
+                        newTask.OwnerId = currAffiliation.npe5__Contact__r.OwnerId;
+                        newTask.Status = 'Not Started';
+                        newTask.activityDate = Date.Today() + 5;
+                        newTask.whatId = zipCodeChapterMap.get(mailingCode);
+                        newTask.RecordTypeId = taskRT;
+                        newTaskList.add(newTask);
+                    }
+                    
                     
                 }
                 
@@ -142,6 +159,7 @@ public class ContactTriggerHandler{
         Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
         Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
         Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
+        Id boardMemberRT = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.boardMemberRT).getRecordTypeId();
         Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
         List<npe5__Affiliation__c> affDbList=new List<npe5__Affiliation__c>();
         List<npe5__Affiliation__c> houseHoldAffList = new List<npe5__Affiliation__c>();
@@ -149,69 +167,79 @@ public class ContactTriggerHandler{
         List<npe5__Affiliation__c> UdateAff =new List<npe5__Affiliation__c>();
         set<Id> contactIds =new set<Id>();
         
-           for(Contact con:ContactList)
-           {
-               npe5__Affiliation__c houseHoldAffiliation = new npe5__Affiliation__c();
-              
-               if((con.RecordTypeId == MedicalProfContactRecordTypeId) || con.RecordTypeId == familyContactRecordTypeId || con.RecordTypeId == wichChildRecordTypeId){
-                   aff =new npe5__Affiliation__c();
-                 
-                 if(con.RecordTypeId != wichChildRecordTypeId)
-                 {
-                   houseHoldAffiliation.npe5__Organization__c=con.AccountId;
-                   houseHoldAffiliation.npe5__Contact__c=con.id;
-                   houseHoldAffiliation.npe5__StartDate__c = Date.Today();
-                   houseHoldAffiliation.npe5__Status__c = 'Active';
-                   houseHoldAffList.add(houseHoldAffiliation);
-                   
-                   system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
-                 }
-                   
-                   
-                  if(con.Region_Chapter__c != Null)
-                  {
-                       aff.npe5__Organization__c=con.Region_Chapter__c;
-                       aff.npe5__Contact__c=con.id;
-                       aff.npe5__StartDate__c = Date.Today();
-                       aff.npe5__Status__c = 'Active';
-                       if(con.RecordTypeId == familyContactRecordTypeId )
-                        {
-                           aff.Constituent_Code__c='Wish Family';
-                        }
-                       else if(con.RecordTypeId == wichChildRecordTypeId)
-                       {
-                           aff.Constituent_Code__c='Wish Child';
-                       }
-                       
-                       if(con.RecordTypeId == MedicalProfContactRecordTypeId  )
-                       {
-                           aff.Constituent_Code__c='Medical Professional';
-                       }
-                       affDbList.add(aff);
-                  }
-                 
-               
-               }
-               
-               if(con.recordtypeid == volunteerRecordTypeId)
-               {
-                  if(con.Region_Chapter__c == Null && con.AccountId != Null)
-                     con.Region_Chapter__c = con.AccountId;
-                  if(con.AccountId == Null && con.Region_Chapter__c != Null)
-                     con.AccountId = con.Region_Chapter__c;
-               }
-            }
-           
-           if(houseHoldAffList.size() > 0)
-           {
-               insert houseHoldAffList;
-           }
-           
-           if(affDbList.size() > 0)
+        for(Contact con:ContactList)
+        {
+            npe5__Affiliation__c houseHoldAffiliation = new npe5__Affiliation__c();
+            houseHoldAffiliation.npe5__Organization__c=con.AccountId;
+            houseHoldAffiliation.npe5__Contact__c=con.id;
+            houseHoldAffiliation.npe5__StartDate__c = Date.Today();
+            houseHoldAffiliation.npe5__Status__c = 'Active';
+            if(con.RecordTypeId == volunteerRecordTypeId)
+                houseHoldAffiliation.Constituent_Code__c='Volunteer';
+            else if(con.RecordTypeId == boardMemberRT)
+                houseHoldAffiliation.Constituent_Code__c='Board Member';
+            houseHoldAffList.add(houseHoldAffiliation);
+            
+            if((con.RecordTypeId == MedicalProfContactRecordTypeId) || con.RecordTypeId == familyContactRecordTypeId || con.RecordTypeId == wichChildRecordTypeId)
             {
-               Insert affDbList;
+                aff =new npe5__Affiliation__c();
+                
+                /* if(con.RecordTypeId != wichChildRecordTypeId)
+{
+houseHoldAffiliation.npe5__Organization__c=con.AccountId;
+houseHoldAffiliation.npe5__Contact__c=con.id;
+houseHoldAffiliation.npe5__StartDate__c = Date.Today();
+houseHoldAffiliation.npe5__Status__c = 'Active';
+houseHoldAffList.add(houseHoldAffiliation);
+
+system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
+}*/
+                
+                
+                if(con.Region_Chapter__c != Null)
+                {
+                    aff.npe5__Organization__c=con.Region_Chapter__c;
+                    aff.npe5__Contact__c=con.id;
+                    aff.npe5__StartDate__c = Date.Today();
+                    aff.npe5__Status__c = 'Active';
+                    if(con.RecordTypeId == familyContactRecordTypeId )
+                    {
+                        aff.Constituent_Code__c='Wish Family';
+                    }
+                    else if(con.RecordTypeId == wichChildRecordTypeId)
+                    {
+                        aff.Constituent_Code__c='Wish Child';
+                    }
+                    
+                    if(con.RecordTypeId == MedicalProfContactRecordTypeId  )
+                    {
+                        aff.Constituent_Code__c='Medical Professional';
+                    }
+                    affDbList.add(aff);
+                }
+                
+                
             }
-       
+            
+            if(con.recordtypeid == volunteerRecordTypeId)
+            {
+                if(con.Region_Chapter__c == Null && con.AccountId != Null)
+                    con.Region_Chapter__c = con.AccountId;
+                if(con.AccountId == Null && con.Region_Chapter__c != Null)
+                    con.AccountId = con.Region_Chapter__c;
+            }
+        }
+        
+        if(houseHoldAffList.size() > 0)
+        {
+            insert houseHoldAffList;
+        }
+        
+        if(affDbList.size() > 0)
+        {
+            Insert affDbList;
+        }
+        
     }
     
     public static void updateAffiliation(map<id,contact> contactMap){
@@ -220,7 +248,7 @@ public class ContactTriggerHandler{
         Constant_AC  constant = new Constant_AC();
         Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
         Id boardMemberRT = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.boardMemberRT).getRecordTypeId();
-       
+        
         for(npe5__Affiliation__c curraff:[SELECT id,Constituent_Code__c,npe5__Contact__c,npe5__Contact__r.recordtypeid FROM npe5__Affiliation__c  WHERE npe5__Contact__c in:contactMap.keyset()]){
             aff=new npe5__Affiliation__c();
             aff.id=curraff.id;
@@ -260,7 +288,7 @@ public class ContactTriggerHandler{
             Update updateChildContactList;
     }
     // Updating User information when volunteer contact details updated.
-   
+    
     
     public static void updateUserDetails(map<String,Contact> contactDetails, Map<Id,Contact> oldMap){
         User updateUser;
@@ -289,9 +317,9 @@ public class ContactTriggerHandler{
                 updateUser.Phone=contactDetails.get(currRecUser.ContactId).MobilePhone;
                 flag = true;
             }
-           
-          if(flag == true)  
-             updateUserList.add(updateUser);
+            
+            if(flag == true)  
+                updateUserList.add(updateUser);
         }
         
         if(updateUserList.size() > 0)
@@ -306,31 +334,31 @@ public class ContactTriggerHandler{
         Map<Id,Account> houseHoldAccountMap = new Map<Id,Account>();
         
         for(Contact familyContact :[SELECT Id,AccountId,Name,FirstName,LastName,Phone,Email,MailingStreet,MailingCity,MailingState,MailingCountry,MailingPostalCode,Same_as_Household_Address__c From Contact WHERE Id IN: addressSet]){
-        if(familyContact.Same_as_Household_Address__c  == true){ 
-            dbFamilyAccountIdSet.add(familyContact.AccountId);
-            dbFamilyContact.add(familyContact);
+            if(familyContact.Same_as_Household_Address__c  == true){ 
+                dbFamilyAccountIdSet.add(familyContact.AccountId);
+                dbFamilyContact.add(familyContact);
             }
         }
         if(dbFamilyAccountIdSet.size() > 0){
             for(Account dbHouseHoldAccount :[SELECT Id,BillingStreet,BillingCity,BillingState,BillingCountry,BillingPostalCode FROM Account WHERE Id IN: dbFamilyAccountIdSet]){
                 houseHoldAccountMap.put(dbHouseHoldAccount.Id,dbHouseHoldAccount);
             }
-          
-          for(Contact familyContact : dbFamilyContact){
-              if(houseHoldAccountMap.containsKey(familyContact.AccountId)){
-                  familyContact.MailingStreet = houseHoldAccountMap.get(familyContact.AccountId).BillingStreet;
-                  familyContact.MailingCity =  houseHoldAccountMap.get(familyContact.AccountId).BillingCity;
-                  familyContact.MailingState =  houseHoldAccountMap.get(familyContact.AccountId).BillingState;
-                  familyContact.MailingCountry =  houseHoldAccountMap.get(familyContact.AccountId).BillingCountry;
-                  familyContact.MailingPostalCode =  houseHoldAccountMap.get(familyContact.AccountId).BillingPostalCode ;
-                  updateFamilyContactList.add(familyContact);
-              }
-          }  
+            
+            for(Contact familyContact : dbFamilyContact){
+                if(houseHoldAccountMap.containsKey(familyContact.AccountId)){
+                    familyContact.MailingStreet = houseHoldAccountMap.get(familyContact.AccountId).BillingStreet;
+                    familyContact.MailingCity =  houseHoldAccountMap.get(familyContact.AccountId).BillingCity;
+                    familyContact.MailingState =  houseHoldAccountMap.get(familyContact.AccountId).BillingState;
+                    familyContact.MailingCountry =  houseHoldAccountMap.get(familyContact.AccountId).BillingCountry;
+                    familyContact.MailingPostalCode =  houseHoldAccountMap.get(familyContact.AccountId).BillingPostalCode ;
+                    updateFamilyContactList.add(familyContact);
+                }
+            }  
             
         }
         
         if(updateFamilyContactList.size() > 0)
-           update updateFamilyContactList;
+            update updateFamilyContactList;
     }
     
     public static void updateRelationship(Map<Id,Contact> conMap){
@@ -344,6 +372,23 @@ public class ContactTriggerHandler{
         }
         
         if(relationShipMap.size() > 0)
-        update relationShipMap.values();
+            update relationShipMap.values();
+    }
+    
+    Public Static Void UpdateAffiliationPrimaryStatus(Map<Id,Contact> conMap)
+    {
+        npe5__Affiliation__c aff; 
+        List<npe5__Affiliation__c> UdateAff =new List<npe5__Affiliation__c>();
+        
+        for(npe5__Affiliation__c curraff:[SELECT id,Constituent_Code__c,npe5__Contact__c,npe5__Contact__r.recordtypeid FROM npe5__Affiliation__c  WHERE npe5__Contact__c in: conMap.keyset()]){
+            aff=new npe5__Affiliation__c();
+            aff.id=curraff.id;
+            aff.npe5__Primary__c = false;
+            UdateAff.add(aff);
+        }
+        if(UdateAff.size() > 0){
+            update UdateAff;
+        }
+        
     }
 }

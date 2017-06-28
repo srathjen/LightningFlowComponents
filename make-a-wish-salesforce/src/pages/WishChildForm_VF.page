@@ -4,7 +4,7 @@
     <body class="vcp vcpactivelogin" id="top">
       <apex:include pageName="active_header" id="pheaderActive" rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
       <apex:include pageName="wishFamilyForm_header_active" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />
-<input type="hidden" value="WishchildForm_VF_2" class="pageName"/>
+      <input type="hidden" value="WishchildForm_VF_2" class="pageName"/>
       <main role="main" class="container">
         <div class="row">
           <section class="col-md-12">
@@ -12,9 +12,9 @@
                 <h1 class="col-md-12">Wish Child</h1>
             </div>
             <apex:form id="frm">
-            <apex:actionFunction action="{!SaveandWishChildExit}" name="callConfirmSave" reRender="test"/>
-             <apex:actionFunction action="{!withOutNavigate}" name="navigatWithoutSave"/>
-             <apex:actionFunction action="{!WCFtoWFF}" name="SaveWishChildtoWff" reRender="tesee"/>
+              <apex:actionFunction action="{!SaveandWishChildExit}" name="callConfirmSave" reRender="test"/>
+              <apex:actionFunction action="{!withOutNavigate}" name="navigatWithoutSave"/>
+              <apex:actionFunction action="{!WCFtoWFF}" name="SaveWishChildtoWff" reRender="tesee"/>
               <apex:actionFunction action="{!WCFtoWIF}" name="SaveWishChildtoWInfo"  reRender="tefsee"/>
               <apex:actionFunction action="{!withOutSaveWCCF}" name="WithoutSaveChildFormToWFF" reRender="tefsee"/>
               <apex:actionFunction action="{!withOutSavefromWCFtoWIF}" name="WithoutSaveChildFormToWIF" reRender="tefsee"/>
@@ -32,8 +32,8 @@
                       </ul>
                       <div class="nav-sub-inner hidden-sm-down">
                         <a href="#top" class="hidden-md-down">&uarr; Back to Top</a>
-                        <apex:commandbutton value="Save" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert"/>
-                        <apex:Commandbutton value="Next" styleClass="btn-md" html-data-toggle="modal" html-data-target="#wffsame-alert"/>
+                        <apex:commandbutton value="Save" onclick="return false;"  styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#save-alert"/>
+                        <apex:Commandbutton value="Next" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#wffsame-alert"/>
 
                       </div>
                   </nav>
@@ -49,75 +49,75 @@
                   <fieldset id="wish-child-info">
                     <legend>Wish Child Information</legend>
                     <span class="info">Please fill the fields below.</span>
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                         <div class="form-group row">
-                            <label class="col-sm-3" for="wcf:frm:firstname" aria-labelledby="Child Name">Name</label>
+                            <label class="col-xs-12 col-sm-4" for="wcf:frm:firstname" aria-labelledby="Child Name">Name</label>
                             <div class="col-sm-6 text-muted">
                                 <apex:inputField value="{!currWishChild.FirstName__c}" id="firstname" styleClass="form-control firstname" html-maxlength="50" html-placeholder="First Name" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:middlename" class="sr-only" aria-label="Middle Name">Middle Name</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:middlename" class="sr-only" aria-label="Middle Name">Middle Name</label></div>
                             <div class="col-sm-6">
                                 <apex:inputField value="{!currWishChild.Middle_Name__c}" id="middlename" styleclass="form-control" html-maxlength="50" html-placeholder="Middle Name (Optional)" />
                             </div>
-                            <div class="col-sm-3 sr-only"><i class="text-muted">Optional</i></div>
+                            <div class="col-xs-12 col-sm-5 sr-only"><i class="text-muted">Optional</i></div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:lastname" class="sr-only" aria-label="last_name">Last Name</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:lastname" class="sr-only" aria-label="last_name">Last Name</label></div>
                             <div class="col-sm-6 lastname">
                                 <apex:inputField value="{!currWishChild.LastName__c}" id="lastname" styleClass="form-control lastname" html-maxlength="50" html-placeholder="Last Name" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:preferredname" class="sr-only" aria-label="last_name">Preferred Name</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:preferredname" class="sr-only" aria-label="last_name">Preferred Name</label></div>
                             <div class="col-sm-6 lastname">
                                 <apex:inputField value="{!currWishChild.Preferred_Name__c}" id="preferredname" styleClass="form-control" html-maxlength="50" html-placeholder="Preferred Name" />
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:dob" aria-label="Date of Birth">Date of Birth</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:dob" aria-label="Date of Birth">Date of Birth</label></div>
                             <div class="col-sm-6">
-                                <apex:inputField value="{!currWishChild.BirthDate__c}" id="dob" styleClass="form-control date-input dob" html-maxlength="50" html-placeholder="mm/dd/yyyy" />
+                                <apex:inputField value="{!currWishChild.BirthDate__c}" id="dob" styleClass="form-control date-input dob" html-maxlength="10" html-placeholder="mm/dd/yyyy" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:gender" aria-label="Gender">Gender</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:gender" aria-label="Gender">Gender</label></div>
                             <div class="col-sm-6">
                               <apex:inputField value="{!currWishChild.Gender__c}" id="gender" styleClass="form-control col-xs-12 col-sm-12 c-select required" />
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:childdiagnosis" aria-label="Wish Child's Diagnosis">Wish Child's Diagnosis</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:childdiagnosis" aria-label="Wish Child's Diagnosis">Wish Child's Diagnosis</label></div>
                             <div class="col-sm-6">
-                                <apex:inputField value="{!currWishChild.Diagnosis__c}" id="childdiagnosis" styleClass="form-control readonly" html-title="This field is not editable" html-maxlength="100" html-placeholder="example: Malignant Neoplasm" />
+                                <apex:inputField value="{!currWishChild.Diagnosis__c}" id="childdiagnosis" styleClass="form-control readonly" html-title="This field is not editable" html-maxlength="100" html-placeholder="e.g. Malignant Neoplasm" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:shirtsize" aria-label="Shirt Size">Shirt Size</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:shirtsize" aria-label="Shirt Size">Shirt Size</label></div>
                             <div class="col-sm-6">
                                 <apex:inputField value="{!currWishChild.T_Shirt_Size__c}" id="shirtsize" styleClass="form-control required" html-maxlength="50" html-placeholder="small, medium, large" />
                             </div>
                         </div>
                       </div>
 
-                      <div class="col-md-6">
+                      <div class="col-lg-6">
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:street" aria-labelledby="street">Primary Address</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:street" aria-labelledby="street">Primary Address</label></div>
                             <div class="col-sm-6">
                                 <apex:inputField value="{!currWishChild.Street__c}" id="street" styleClass="form-control address" html-maxlength="50" html-placeholder="0000 NE 00 Ave"  />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:city" class="sr-only" aria-labelledby="city">City</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:city" class="sr-only" aria-labelledby="city">City</label></div>
                             <div class="col-sm-6">
                                 <apex:inputField value="{!currWishChild.City__c}" id="city" styleClass="form-control city" html-maxlength="50" html-placeholder="City"  />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:state" class="sr-only" aria-labelledby="state">State</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:state" class="sr-only" aria-labelledby="state">State</label></div>
                             <div class="col-xs-12 col-sm-6">
                                 <apex:selectList value="{!currWishChild.State__c}" id="state" styleClass="form-control col-xs-12 col-sm-12 c-select state" size="1" >
                                     <apex:selectOptions value="{!wcfUtil.states}" />
@@ -125,7 +125,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3">
+                            <div class="col-xs-12 col-sm-4">
                                 <label for="wcf:frm:postalcode" class="sr-only" aria-labelledby="postalcode">Postal Code</label>
                             </div>
                             <div class="col-sm-6">
@@ -134,13 +134,13 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:mobilephone" aria-labelledby="Mobile Phone">Mobile</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:mobilephone" aria-labelledby="Mobile Phone">Mobile</label></div>
                             <div class="col-sm-6">
-                                 <apex:inputField value="{!currWishChild.mobilePhone__c}" id="mobilephone" styleClass="form-control numbers-only phone" html-maxlength="28" html-placeholder="(000) 000-0000 (optional)" />
+                                 <apex:inputField value="{!currWishChild.mobilePhone__c}" id="mobilephone" styleClass="form-control numbers-only phone" html-maxlength="14" html-placeholder="(000) 000-0000 (optional)" />
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-sm-3"><label for="wcf:frm:email" aria-labelledby="email_address">Email</label></div>
+                            <div class="col-xs-12 col-sm-4"><label for="wcf:frm:email" aria-labelledby="email_address">Email</label></div>
                             <div class="col-sm-6">
                                 <apex:inputField value="{!currWishChild.Email__c}" id="email" styleClass="form-control" html-maxlength="50" html-placeholder="WishChild_email@domain.com (optional)" />
                                 <span class="errorMsg"></span>
@@ -154,93 +154,93 @@
                     <legend><apex:outputText value="{!currWishChild.FirstName__c}"/>'s Favorites</legend>
                     <span class="info">Please ask&nbsp;<apex:outputText value="{!currWishChild.FirstName__c}"/> and provide a response for each of the questions below.</span>
 
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Color">Color:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Color__c}" styleClass="form-control" html-placeholder="example: Blue/Pink"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Color">Color</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Color__c}" styleClass="form-control" html-placeholder="e.g. Blue/ Pink"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Music">Music/Singer:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Music_Singer__c }" styleClass="form-control" html-placeholder="example: Pop Rock/Justin Bieber"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Music">Music/ Singer</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Music_Singer__c }" styleClass="form-control" html-placeholder="e.g. Pop Rock/ Justin Bieber"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Story">Book/Story:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Book_Story__c}" styleClass="form-control" html-placeholder="example: Green Eggs and Ham"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Story">Book/ Story</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Book_Story__c}" styleClass="form-control" html-placeholder="e.g. Green Eggs and Ham"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Hobby">Hobby:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Hobby__c}" styleClass="form-control" html-placeholder="example: Riding my bike"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Hobby">Hobby</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Hobby__c}" styleClass="form-control" html-placeholder="e.g. Riding my bike"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Game">Game:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Game__c}" styleClass="form-control" html-placeholder="example: Minecraft"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Game">Game</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Game__c}" styleClass="form-control" html-placeholder="e.g. Minecraft"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Movie">Movie:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Movie__c}" styleClass="form-control" html-placeholder="example: Finding Nemo"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Movie">Movie</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Movie__c}" styleClass="form-control" html-placeholder="e.g. Finding Nemo"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Food">Food:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Food__c}" styleClass="form-control" html-placeholder="example: Pizza"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Food">Food</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Food__c}" styleClass="form-control" html-placeholder="e.g. Pizza"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Tv">TV Show:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.TVShow__c}" styleClass="form-control" html-placeholder="example: Mickey Mouse Clubhouse"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Tv">TV Show</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.TVShow__c}" styleClass="form-control" html-placeholder="e.g. Mickey Mouse Clubhouse"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Restaurant">Restaurant:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Restaurant__c}" styleClass="form-control" html-placeholder="example: California Pizza Kitchen"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Restaurant">Restaurant</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Restaurant__c}" styleClass="form-control" html-placeholder="e.g. California Pizza Kitchen"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Actor">Actor/Actress:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Actor_Actress__c}" styleClass="form-control" html-placeholder="example: Selena Gomez"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Actor">Actor/ Actress</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Actor_Actress__c}" styleClass="form-control" html-placeholder="e.g. Selena Gomez"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Cake">Cake/Candy:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Cake_Candy__c}" styleClass="form-control" html-placeholder="example: Chocolate"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Cake">Cake/ Candy</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Cake_Candy__c}" styleClass="form-control" html-placeholder="e.g. Chocolate"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Sport">Sport/Athlete:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Sport_Athlete__c}" styleClass="form-control" html-placeholder="example: Basketball/Michael Jordan"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Sport">Sport/ Athlete</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Sport_Athlete__c}" styleClass="form-control" html-placeholder="e.g. Basketball/ Michael Jordan"/></div>
                       </div>
 
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Snack">Snack Food:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Snack_Food__c}" styleClass="form-control" html-placeholder="example: Chips and Candy"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Snack">Snack Food</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Snack_Food__c}" styleClass="form-control" html-placeholder="e.g. Chips and Candy"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Pet">Pet/Animal:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.Pet_Animal__c}" styleClass="form-control" html-placeholder="example: Dogs/Cats"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Pet">Pet/ Animal</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.Pet_Animal__c}" styleClass="form-control" html-placeholder="e.g. Dogs/ Cats"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="School">Class in School:</label></div>
-                          <div class="col-md-6"><apex:inputField value="{!currWishChild.ClassinSchool__c}" styleClass="form-control" html-placeholder="example: Science Class"/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="School">Class in School</label></div>
+                          <div class="col-sm-6"><apex:inputField value="{!currWishChild.ClassinSchool__c}" styleClass="form-control" html-placeholder="e.g. Science Class"/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-3"><label for="Other">Other:</label></div>
-                          <div class="col-md-6"><apex:inputTextarea value="{!currWishChild.Other__c}" styleClass="form-control" html-placeholder="Please enter details here."/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Other">Other</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputTextarea value="{!currWishChild.Other__c}" styleClass="form-control" html-placeholder="Please enter details here."/></div>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                       <div class="form-group row">
-                          <div class="col-md-12"><label for="Outside">When I’m outside, I like to...</label></div>
-                          <div class="col-md-12"><apex:inputField value="{!currWishChild.When_I_m_outside_I_like_to__c}" styleClass="form-control" html-placeholder="Please enter details here."/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Outside">When I’m outside, I like to...</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputField value="{!currWishChild.When_I_m_outside_I_like_to__c}" styleClass="form-control" html-placeholder="Please enter details here."/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-12"><label for="Inside">When I’m inside, I like to…</label></div>
-                          <div class="col-md-12"><apex:inputField value="{!currWishChild.When_I_m_inside_I_like_to__c}" styleClass="form-control"  html-placeholder="Please enter details here."/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Inside">When I’m inside, I like to…</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputField value="{!currWishChild.When_I_m_inside_I_like_to__c}" styleClass="form-control"  html-placeholder="Please enter details here."/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-12"><label for="Electronic">Electronics / Games that I like to play with are…</label></div>
-                          <div class="col-md-12"><apex:inputField value="{!currWishChild.Electronics_Games_that_I_like_to_play__c}" styleClass="form-control" html-placeholder="Please enter details here."/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Electronic">Electronics / Games that I like to play with are…</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputField value="{!currWishChild.Electronics_Games_that_I_like_to_play__c}" styleClass="form-control" html-placeholder="Please enter details here."/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-12"><label for="Family">When I’m with my family, I like to…</label></div>
-                          <div class="col-md-12"><apex:inputField value="{!currWishChild.When_I_m_with_my_family_I_like_to__c}" styleClass="form-control"  html-placeholder="Please enter details here."/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="Family">When I’m with my family, I like to…</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputField value="{!currWishChild.When_I_m_with_my_family_I_like_to__c}" styleClass="form-control"  html-placeholder="Please enter details here."/></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-md-12"><label for="WithFriend">When I’m with my friends, I like to…</label></div>
-                          <div class="col-md-12"><apex:inputField value="{!currWishChild.When_I_m_with_my_friends_I_like_to__c}" styleClass="form-control"  html-placeholder="Please enter details here."/></div>
+                          <div class="col-xs-12 col-sm-4"><label for="WithFriend">When I’m with my friends, I like to…</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputField value="{!currWishChild.When_I_m_with_my_friends_I_like_to__c}" styleClass="form-control"  html-placeholder="Please enter details here."/></div>
                       </div>
                     </div>
                   </fieldset>
@@ -248,32 +248,31 @@
                   <fieldset id="wish-childs-wish">
                     <legend><apex:outputText value="{!currWishChild.FirstName__c}"/>'s Wish</legend>
                     <span class="info">Please ask&nbsp;<apex:outputText value="{!currWishChild.FirstName__c}"/> and provide a response for each of the questions below.</span>
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                       <div class="form-group row">
-                          <div class="col-sm-12"><label for="WishTo">My wish is to…</label></div>
-                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.MY_WISH_IS_TO__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                          <div class="col-xs-12 col-sm-4"><label for="WishTo">My wish is to…</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputField value="{!currWishChild.MY_WISH_IS_TO__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-sm-12"><label for="WishBecause">This is my wish because…</label></div>
-                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.This_is_my_wish_because__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                          <div class="col-xs-12 col-sm-4"><label for="WishBecause">This is my wish because…</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputField value="{!currWishChild.This_is_my_wish_because__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-sm-12"><label for="ImportantPart">To me, the most important parts of my wish will be…</label></div>
-                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.To_me_the_most_important_part_of_my_wish__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                          <div class="col-xs-12 col-sm-4"><label for="ImportantPart">To me, the most important parts of my wish will be…</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputField value="{!currWishChild.To_me_the_most_important_part_of_my_wish__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
                       </div>
-                    </div>
-                    <div class="col-md-6">
+
                       <div class="form-group row">
-                          <div class="col-sm-12"><label for="AboutMyWish">When I think about my wish, I imagine….</label></div>
-                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.When_I_think_about_my_wish_I_imagine__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
-                      </div>
-                      <div class="form-group row">
-                          <div class="col-sm-12"><label for="ThinkingWish">When thinking about a wish, some of my wish ideas were…</label></div>
-                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.When_thinking_some_of_my_wish_ideas_were__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                          <div class="col-xs-12 col-sm-4"><label for="AboutMyWish">When I think about my wish, I imagine….</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputField value="{!currWishChild.When_I_think_about_my_wish_I_imagine__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-sm-12"><label for="WishNotes">Wish Notes…</label></div>
-                          <div class="col-xs-12 col-sm-6 col-md-12"><apex:inputField value="{!currWishChild.Wish_Notes__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                          <div class="col-xs-12 col-sm-4"><label for="ThinkingWish">When thinking about a wish, some of my wish ideas were…</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputField value="{!currWishChild.When_thinking_some_of_my_wish_ideas_were__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                      </div>
+                      <div class="form-group row">
+                          <div class="col-xs-12 col-sm-4"><label for="WishNotes">Wish Notes…</label></div>
+                          <div class="col-xs-12 col-sm-8"><apex:inputField value="{!currWishChild.Wish_Notes__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
                       </div>
                     </div>
                   </fieldset>
@@ -286,83 +285,81 @@
               <div class="row hidden-sm-up nav-btm">
                 <nav class="btm">
                   <ul>
-                    <li><apex:commandbutton value="Save" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" /></li>
-                    <li><apex:Commandbutton value="Next" styleClass="btn-md" html-data-toggle="modal" html-data-target="exit-alert-page" /></li>
+                    <li><apex:commandbutton value="Save" onclick="return false;" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#save-alert" /></li>
+                    <li><apex:Commandbutton value="Next" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#wffsame-alert" /></li>
                   </ul>
                 </nav>
               </div>
 
+              <div class="modal fade" id="approvalalert" tabindex="-1" role="dialog" aria-labelledby="Send Email" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title" id="send-email">Error</h1>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group row">
+                        <div class="col-sm-12"><label><h2><center>The record is in approval process</center></h2></label></div>
+                        <div class="col-sm-6">
 
-          <div class="modal fade" id="approvalalert" tabindex="-1" role="dialog" aria-labelledby="Send Email" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h1 class="modal-title" id="send-email">Error</h1>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="form-group row">
-                    <div class="col-sm-12"><label><h2><center>The record is in approval process</center></h2></label></div>
-                    <div class="col-sm-6">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <div class="row">
+                        <apex:commandButton action="{!submitforApproval}" value="OK" styleClass="btn-md" />
 
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <div class="row">
-                    <apex:commandButton action="{!submitforApproval}" value="OK" styleClass="btn-md" />
+              </div>
+              <!-- display error modal -->
 
+              <!-- wcf modal -->
+              <div class="modal fade" id="wffsame-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title" id="exit-form">Leaving Form</h1>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <apex:commandButton onclick="test2();" value="Save" styleClass="form-validate btn-md" reRender="yyyy"/>
+                      <apex:commandButton action="{!withOutSaveWCCF}" value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="yyy"/>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <!-- display error modal -->
 
-           <!-- wcf modal -->
-      <div class="modal fade" id="wffsame-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title" id="exit-form">Leaving Form</h1>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
-            </div>
-            <div class="modal-footer">
-              <apex:commandButton onclick="test2();" value="Save" styleClass="form-validate btn-md" reRender="yyyy"/>
-              <apex:commandButton action="{!withOutSaveWCCF}" value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="yyy"/>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-       <!-- wif modal -->
-      <div class="modal fade" id="wifsame-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title" id="exit-form">Leaving Form</h1>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
-            </div>
-            <div class="modal-footer">
-              <apex:commandButton onclick="test1();" value="Save" styleClass="btn-md" reRender="ssss"/>
-              <apex:commandButton action="{!withOutSavefromWCFtoWIF}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="iii" />
-            </div>
-          </div>
-        </div>
-      </div>
-        
+               <!-- wif modal -->
+              <div class="modal fade" id="wifsame-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title" id="exit-form">Leaving Form</h1>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <apex:commandButton onclick="test1();" value="Save" styleClass="btn-md" reRender="ssss"/>
+                      <apex:commandButton action="{!withOutSavefromWCFtoWIF}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="iii" />
+                    </div>
+                  </div>
+                </div>
+              </div>
 
             </apex:form>
           </section>
@@ -424,29 +421,29 @@
          if({!wcfUtil.approvalError})
             $("#approvalalert").modal('show');
         });
-        
+
          function test2(){
-            if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+            if ($('#wcf\\:frm').valid()){
             console.log('form submitted');
             SaveWishChildtoWff();
-            
+
           } else {
-         
+
             $('#wffsame-alert').modal('hide');
           }
         }
-        
+
          function test1(){
-            if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+            if ($('#wcf\\:frm').valid()){
             console.log('form submitted');
             SaveWishChildtoWInfo();
-            
+
           } else {
-          
+
             $('#wifsame-alert').modal('hide');
           }
         }
-        
+
       </script>
     </body>
 </apex:page>

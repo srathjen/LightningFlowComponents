@@ -9,7 +9,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Contact_Rush_Wish_Reminder_Alerts</template>
+        <template>Automated_Wish_Granting_Email_Templates/Contact_Rush_Wish_Reminder_Alerts</template>
     </alerts>
     <alerts>
         <fullName>Volunteer_Application_Approved_Email_Alert</fullName>
@@ -311,6 +311,10 @@ OtherPhone
             <name>Volunteer_Application_Approved_Email_Alert</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>Contact_ET_Application_Approved</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Contact.RecordTypeId</field>
@@ -323,9 +327,9 @@ OtherPhone
             <value>Approved</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Contact.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow rule will fire when the application is approved</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -335,6 +339,10 @@ OtherPhone
         <actions>
             <name>Volunteer_Application_Completed_Email_Alert</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Contact_ET_Application_Completed</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <booleanFilter>1 AND 2 AND 3</booleanFilter>
@@ -349,9 +357,9 @@ OtherPhone
             <value>Complete</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Contact.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow rule will fire when the application is complete</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -371,9 +379,9 @@ OtherPhone
             <value>Partial Submit</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Contact.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow rule will fire when the application is incomplete</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -381,6 +389,10 @@ OtherPhone
             <actions>
                 <name>Volunteer_Application_Incompleted_Email_Alert</name>
                 <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Contact_ET_Application_Status_Incomplete</name>
+                <type>Task</type>
             </actions>
             <timeLength>7</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
@@ -558,4 +570,40 @@ OtherPhone
         <formula>1=2</formula>
         <triggerType>onCreateOnly</triggerType>
     </rules>
+    <tasks>
+        <fullName>Contact_ET_Application_Approved</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Contact ET : Application Approved</subject>
+    </tasks>
+    <tasks>
+        <fullName>Contact_ET_Application_Completed</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Contact ET : Application Completed</subject>
+    </tasks>
+    <tasks>
+        <fullName>Contact_ET_Application_Status_Incomplete</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Contact ET : Application Status Incomplete</subject>
+    </tasks>
 </Workflow>

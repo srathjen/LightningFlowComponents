@@ -8,7 +8,7 @@ global class CreateNewWish_AC
     webservice static String CreateCase(Id caseId)
     {
      
-        Case currCase = [SELECT id,Subject,Description,Priority,AccountId,ChapterName__r.Volunteer_Manager__c,ContactId,ContactMobile,
+        Case currCase = [SELECT id,Subject,Description,Priority,AccountId,RecordTypeId,ChapterName__r.Volunteer_Manager__c,ContactId,ContactMobile,
                          ContactPhone,Type,Birthdate__c,ChapterName__c
                         FROM Case WHERE Id = :caseId];
                         
@@ -17,6 +17,7 @@ global class CreateNewWish_AC
         newCase = currCase.clone();
         newCase.Status = 'Ready to Assign';
         newCase.Sub_Status__c = 'Non-Viewable';
+        newCase.RecordTypeId = currCase.RecordTypeId;
         if(currCase.ChapterName__c!= Null && currCase.ChapterName__r.Volunteer_Manager__c != Null)
            newCase.OwnerId = currCase.ChapterName__r.Volunteer_Manager__c;
         insert newCase;

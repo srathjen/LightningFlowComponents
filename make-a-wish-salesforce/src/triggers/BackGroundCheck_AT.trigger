@@ -41,7 +41,8 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
         Set<Id> volunteerIds = new Set<Id>();
         Set<Id> ownerIds = new Set<Id>();
         Map<String,List<Background_check__c>> bgcMap = new Map<String,List<Background_check__c>>();
-        
+        Map<Id,Background_check__c>   expirationDateMap = new Map<Id,Background_check__c>(); 
+       
         for(Background_check__c currRec : Trigger.new)
         {
           ownerIds.add(currRec.OwnerId);
@@ -69,6 +70,11 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
             else
                 bgcMap.put(currRec.Account_Name__c,new List<Background_check__c>{currRec});
            }
+           
+             if(currRec.Date__c != Null)
+             {
+                 expirationDateMap.put(currRec.id,currRec);
+             }
             
           }
           
@@ -82,6 +88,11 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
         {
             ChapterStaffRecordSharing_AC.BGCRecordSharing(bgcMap);
         }
+        
+       if(expirationDateMap.size() > 0)
+       {
+          BackGroundCheckTriggerHandler.UpdateVolunteerExpirationDate(expirationDateMap);
+       }
         
     }
     
@@ -149,8 +160,12 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
         Set<Id> volunteerIds = new Set<Id>();
         Set<Id> ownerIds = new Set<Id>();
         Set<Id> volunteerContactIdSet = new Set<Id>();
+        Set<Id> backgroundRejectedSet = new Set<Id>();
         Map<String,List<Background_check__c>> bgcMap = new Map<String,List<Background_check__c>>();
-        
+        Set<String> chapterNamesSet = new Set<String>();
+        Map<Id,String> chapterNameMap = new Map<Id,String>();
+        Map<String,String> chapterRoleMap = new Map<String,String>();
+        List<User> currUser = [SELECT Id,UserRole.Name,Profile.Name FROM User WHERE Id =: UserInfo.getUserID() Limit 1];
         for(Background_check__c dbBackgroundCheckRec : trigger.new)
         {
             if(dbBackgroundCheckRec.Status__c == 'Approved' && dbBackgroundCheckRec.Status__c != Null && trigger.oldmap.get(dbBackgroundCheckRec.Id).Status__c != 'Approved')
@@ -177,11 +192,31 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
             {
                 volunteerContactIdSet.add(dbBackgroundCheckRec.Volunteer__c);
             }
-            if(dbBackgroundCheckRec.ownerId != Trigger.oldMap.get(dbBackgroundCheckRec.id).ownerId)
-                ownerIds.add(dbBackgroundCheckRec.ownerId);
+            if(dbBackgroundCheckRec.Hidden_Background_Rejected__c == true && trigger.oldMap.get(dbBackgroundCheckRec.Id).Hidden_Background_Rejected__c == false)
+            {
+                backgroundRejectedSet.add(dbBackgroundCheckRec.Volunteer__c);
+            }
+           // if(dbBackgroundCheckRec.ownerId != Trigger.oldMap.get(dbBackgroundCheckRec.id).ownerId)
+              //  ownerIds.add(dbBackgroundCheckRec.ownerId);
+            if(dbBackgroundCheckRec.Account_Name__c != Null && currUser[0].UserRole.Name != 'National Staff' && currUser[0].profile.Name != 'System Administrator'){
+               chapterNamesSet.add(dbBackgroundCheckRec.Account_Name__c );
+               chapterNameMap.put(dbBackgroundCheckRec.Id,dbBackgroundCheckRec.Account_Name__c ); 
+            }
         }
         
-        Map<id, String> userRoleMap = UserRoleUtility.getUserRole(ownerIds);
+        if(chapterNamesSet.Size() > 0){
+            chapterRoleMap=ChapterStaffRecordSharing_AC.FindChapterRole(chapterNamesSet);
+        
+            for(Background_check__c currRec :Trigger.New){ 
+                system.debug('Chapter Name****************'+chapterNameMap.get(currRec.Id));
+                if((chapterRoleMap.get(chapterNameMap.get(currRec.Id)) != currUser[0].UserRole.Name || currRec.Account_Name__C != Trigger.oldMap.get(currRec.Id).Account_Name__C) && !Test.isRunningTest())
+               {
+                     currRec.addError('Insufficient previlege to update this record. Please contact system administrator.');        
+               }
+            }
+       } 
+        
+     /*   Map<id, String> userRoleMap = UserRoleUtility.getUserRole(ownerIds);
         
         
         for(Background_check__c currRec : Trigger.new)
@@ -196,7 +231,7 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
             else
                 bgcMap.put(currRec.Account_Name__c,new List<Background_check__c>{currRec});
            }
-        }
+        }*/
         
        /* if(volunteerIds.size() > 0)
         {
@@ -223,7 +258,12 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
         }
         
         if(volunteerContactIdSet.size() > 0)
-        BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(volunteerContactIdSet);
+        BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(volunteerContactIdSet,'backgroundCheck');
+        
+        if(backgroundRejectedSet.size() > 0)
+        BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(backgroundRejectedSet,'backgroundCheck');
 
     }
+    
+
 }

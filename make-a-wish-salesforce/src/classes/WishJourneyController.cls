@@ -120,12 +120,12 @@ public class WishJourneyController{
                     blkPlanningOver = false;
                 }
                 
-                if(currCase.Anticipated_Start_Date__c!= Null)
+                if(currCase.Anticipated_Start_Date__c != Null)
                 {
                     anticipationDays =(currDate).daysBetween(currCase.Anticipated_Start_Date__c);
                     blkGrantingOver = true;
                 }
-                if(currCase.Anticipated_Start_Date__c == Null || currCase.Anticipated_Start_Date__c < Date.Today())
+                if(currCase.Anticipated_Start_Date__c== Null || currCase.Anticipated_Start_Date__c < Date.Today())
                 {
                     blkGrantingOver = false;
                 }
@@ -171,12 +171,12 @@ public class WishJourneyController{
             {
                 blkPlanningOver = false;
             }
-            if(currCase.Parent.Anticipated_Start_Date__c!= Null)
+            if(currCase.Parent.Anticipated_Start_Date__c != Null)
             {
                anticipationDays =(currDate).daysBetween(currCase.Parent.Anticipated_Start_Date__c);
                blkGrantingOver = true;
             } 
-            if(currCase.Parent.Anticipated_Start_Date__c== Null || currCase.Parent.Anticipated_Start_Date__c< Date.Today())
+            if(currCase.Parent.Anticipated_Start_Date__c == Null || currCase.Parent.Anticipated_Start_Date__c < Date.Today())
             {
                    blkGrantingOver = false;
             }

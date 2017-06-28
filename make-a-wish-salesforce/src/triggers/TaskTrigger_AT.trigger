@@ -54,9 +54,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                 completedTaskParentIdSet.add(updatedTask.WhatId);
                 
             }
-            
-            
-            if(updatedTask.Status == 'Completed' && Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.RecordTypeId == wishGrantTaskRT) {
+            if(updatedTask.Status == 'Completed' && Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.Task_Type__c == 'Wish Granting') {
                 wishGrantTaskWhatIdSet.add(updatedTask.WhatId);
             }
             if(updatedTask.Status == 'Completed' && Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Check in with the family every 30 days') {
@@ -81,20 +79,19 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             if((updatedTask.Status == 'Declined') && updatedTask.RecordTypeId ==taskInterviewRecordType ){
                 declinedTaskVolunteerIds.add(updatedTask.WhoId);
             }
-            if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Review photos/videos')) {
+            /*if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Review photos/videos')) {
                 
                 uploadParentTaskIdMap.put(updatedTask.WhatId,updatedTask.OwnerId);
-            }
+            }*/
             
               //Update the Lead Closed Date.
             if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Referral DNQ')){
                 leadIdList.add(updatedTask.whoId);
             }
-            
-            if(followUpTaskMap.size() > 0) {
-                TaskHandler.checkFollowUpTask(followUpTaskMap, followUpTaskOwnerIdSet);
-            }
-            
+        }
+        
+        if(followUpTaskMap.size() > 0) {
+            TaskHandler.checkFollowUpTask(followUpTaskMap, followUpTaskOwnerIdSet);
         }
         if(taskMap.size() > 0)
         {
@@ -120,9 +117,9 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             TaskHandler.sneakPeekTask(flightBookTaskMap,budgetBookTaskMap, passportRequestMap);
         }
         
-        if(uploadParentTaskIdMap.size() > 0) {
+        /*if(uploadParentTaskIdMap.size() > 0) {
             TaskHandler.createUploadTaskForWishOwner(uploadParentTaskIdMap);
-        }
+        }*/
         
         if(validateTaskList.size() > 0 && completedTaskParentIdSet.size() > 0) {
             TaskHandler.autoCloseTask(validateTaskList,completedTaskParentIdSet);
@@ -138,6 +135,8 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
         Id planningTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
         Id determinationTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
+        Id chapterRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
         List<Task> birthdayTasksList = new List<Task>();
         Set<Id> taskRelatedContactIdsSet = new Set<Id>();
         List<Task> actionTrackTasksList = new List<Task>();
@@ -151,15 +150,15 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         for(Task updatedTask : Trigger.New) {
             string contactId = updatedTask.WhoId;
             
-            if(updatedTask.RecordTypeId == wishGrantTaskRT || updatedTask.RecordTypeId == determinationTaskRT) {
+            if(updatedTask.RecordTypeId == volunteerTaskRT) {
                 //updatedTask.IsVisibleInSelfService = true;
             }
-            if(updatedTask.subject == 'Budget is approved' || updatedTask.subject == 'Budget needs to be revised' || updatedTask.subject == 'Follow-up on wish clearance' || updatedTask.subject == 'Interview date not set'
+            if(updatedTask.subject == 'Budget is approved' || updatedTask.subject == 'Case ET : Budget Approval Request' ||  updatedTask.subject == 'Budget needs to be revised' || updatedTask.subject == 'Follow-up on wish clearance' || updatedTask.subject == 'Interview date not set'
                || updatedTask.subject == 'Wish Child Birthday Reminder' || updatedTask.subject == 'Wish Family Packet not submitted') {
+                   updatedTask.RecordTypeId = chapterRT;
                    matchContactTaskList.add(updatedTask);
                    taskParentIdSet.add(updatedTask.WhatId);
             }
-            
             if(updatedTask.Subject == 'Wish Child Birthday Reminder') {
                 birthdayTasksList.add(updatedTask);
                 taskRelatedContactIdsSet.add(updatedTask.whatId);
@@ -176,6 +175,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         if(matchContactTaskList.size() > 0 && taskParentIdSet.size() > 0) {
             TaskHandler.UpdateContactToTask(matchContactTaskList,taskParentIdSet);
         }
+        
         if((contactIdset.size()>0) && (updateTaskList.size()>0)){
             TaskHandler.updateTaskEmailMergeFields(contactIdset,updateTaskList);
         }
@@ -228,7 +228,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                 updateTaskList.add(currRec);
             }
             /********** Closure Rules *********/
-            if(currRec.status=='completed' && currRec.subject=='wish presentation date entered'){
+            if(currRec.status=='Completed' && currRec.subject=='wish presentation date entered'){
                 caseInfoMap.put(currRec.id,currRec.whatid);
             }
             

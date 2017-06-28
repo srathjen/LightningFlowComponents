@@ -23,9 +23,13 @@ public class CloseVolunteerActivities_AC_Test {
         newTask.OwnerId = volUser.Id;
         newTask.Status = 'Not Started';
         update newTask;
+        System.assertEquals('Not Started', newTask.Status);
         System.RunAs(volUser) {
             CloseVolunteerActivities_AC.CloseTask(newTask.Id);
         }
+        
+        //Used to check salesforce governor limits
+        OrientationandTrainingUtil.checkGovernorLimits();
     }
     
 }

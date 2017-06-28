@@ -19,7 +19,6 @@
     <filter>
         <criteriaItems>
             <column>User$Profile.UserLicense.Name</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Customer Community Plus</value>
         </criteriaItems>

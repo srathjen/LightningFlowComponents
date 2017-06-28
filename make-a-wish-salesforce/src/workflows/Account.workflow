@@ -10,7 +10,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Account_In_Kind_Donors_Approval_Email_Template</template>
+        <template>Automated_Wish_Granting_Email_Templates/Account_In_Kind_Donors_Approval_Email_Template</template>
     </alerts>
     <fieldUpdates>
         <fullName>In_Kind_Approval_Field_Status_Update</fullName>

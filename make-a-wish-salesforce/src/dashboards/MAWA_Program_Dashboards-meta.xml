@@ -2,12 +2,12 @@
 <DashboardFolder xmlns="http://soap.sforce.com/2006/04/metadata">
     <folderShares>
         <accessLevel>Manage</accessLevel>
-        <sharedTo>jharding@wish.org</sharedTo>
+        <sharedTo>ccoode@wish.org</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
     <folderShares>
         <accessLevel>Manage</accessLevel>
-        <sharedTo>ngillam@wish.org</sharedTo>
+        <sharedTo>jharding@wish.org</sharedTo>
         <sharedToType>User</sharedToType>
     </folderShares>
     <folderShares>

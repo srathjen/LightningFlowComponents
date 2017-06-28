@@ -72,7 +72,7 @@
         }
     </style>
     <body class="vcp">
-        
+
         <span>
             <header role="main-header" class="container">
                 <div class="row">
@@ -107,7 +107,7 @@
                                 </apex:facet>
                             </apex:actionStatus>
                         </apex:outputPanel>
-                        
+
                         <!-- Part A from verificaton section -->
                         <apex:outputPanel id="credentialDetails">
                             <apex:pageBlock rendered="{!!wishChildWrapperIns.login}" >
@@ -272,9 +272,9 @@
                                         <apex:actionFunction name="saveMedInfo" action="{!SaveMedicalInformation}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock" onComplete="docusignPageRedirect();" status="status">
                                         	<apex:param name="travelString" value="" />
                                             <apex:param name="collectedConditionValue" value="" />
-                                            
+
                                         </apex:actionFunction>
-                                        
+
                                         <apex:actionFunction name="tempSaveMedInfo" action="{!SaveMedicalInformation}" rerender="diagonsisLoop,findAndReplace,notEligible,LoadBlock" onComplete="ShowSuccessMsg();" status="status">
                                             <apex:param name="travelString" value="" />
                                             <apex:param name="collectedConditionValue" value="" />
@@ -482,6 +482,22 @@
                                                 </div>
                                             </apex:outputPanel>
                                         </apex:outputPanel>
+										
+                                        
+                                        <div class="form-group row">
+                                            <div class="col-md-12"><label>Is there additional information you would like to provide?</label></div>
+                                            <div class="col-md-6">
+                                                <apex:inputTextarea value="{!wishChildWrapperIns.additionalInfo}" styleClass="form-control requiredField" id="additonalinfo" html-placeholder="Please enter additional information here" />
+                                            </div>
+                                        </div>
+                                        
+                                        <!--<div class="form-group row">
+                                            <div class="col-md-6"><label>Is there additional information you would like to provide?</label></div>
+                                            <div class="col-md-6">
+                                                <apex:inputTextarea value="currLead.Provided_additional_information__c" rows="5" cols="10" styleClass="form-control" id="additonalinfo" maxlength="50" html-placeholder="Please enter additional information here" />
+                                                <apex:inputTextarea value="{!currLead.Provided_additional_information__c}" styleClass="form-control" id="additonalinfo" html-placeholder="Please enter additional information here" />
+                                            </div>
+                                        </div>-->
                                     </fieldset>
                                     <!-- Travel Algorithm Starts -->
                                     <fieldset>
@@ -1090,7 +1106,7 @@
                     isError_Free = false;
                 }
             });
-            
+
             if(isError_Free){
                 DiagnosisEmptyCheck();
             }
@@ -1157,7 +1173,7 @@
                         i++;
                     }
                 });
-                
+
                 if(travelString == '' || stringGet == '') {
                     swal({
                         title: "",
@@ -1171,10 +1187,10 @@
                 } else {
                     saveMedInfo(stringGet,travelString);
                 }
-                
+
             }
         }
-		
+
         function CollectCondition() {
             var stringGet = '';
             var travelString = ''

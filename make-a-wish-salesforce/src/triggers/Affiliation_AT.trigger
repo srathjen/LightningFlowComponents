@@ -90,6 +90,8 @@ trigger Affiliation_AT on npe5__Affiliation__c (Before Insert,Before Update,Afte
             Set<Id> affiliationsIdsSet = new Set<Id>();
             Set<Id> volunteerContactIdsSet = new Set<Id>();
             Set<id> VolunteerOppIdSet=new Set<id>();
+            Set<Id> volunteerContactIdSet = new Set<Id>();
+            Set<Id> activeVolunteerIdSet = new Set<Id>();
             Map<String,String> memberRemoveMap = new Map<String,String>();
             for(npe5__Affiliation__c modifiedAffiliation : Trigger.New) {
                 if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null){
@@ -101,7 +103,14 @@ trigger Affiliation_AT on npe5__Affiliation__c (Before Insert,Before Update,Afte
                     if(modifiedAffiliation.npe5__Status__c== 'Inactive' && trigger.oldMap.get(modifiedAffiliation.id).npe5__Status__c != 'Inactive'){
                         VolunteerOppIdSet.add(modifiedAffiliation.npe5__Contact__c);//npe5__Contact__c,currRec.npe5__Status__c);
                     }
+                    if(modifiedAffiliation.npe5__Status__c != 'Active' && trigger.oldMap.get(modifiedAffiliation.id).npe5__Status__c == 'Active'){
+                        volunteerContactIdSet.add(modifiedAffiliation.npe5__Contact__c);
+                    }
+                    if(modifiedAffiliation.npe5__Status__c == 'Active' && trigger.oldMap.get(modifiedAffiliation.id).npe5__Status__c != 'Active'){
+                        activeVolunteerIdSet.add(modifiedAffiliation.npe5__Contact__c);
+                    }
                 }
+                
             }
             
             if(affilationsList.size()>0 && volunteerContactIdsSet.size()>0 && affiliationsIdsSet.size()>0) {
@@ -114,8 +123,15 @@ trigger Affiliation_AT on npe5__Affiliation__c (Before Insert,Before Update,Afte
                 if(!Test.isRunningTest()) {
                     InactiveVolunteerHandler.createTaskforVolunteerManager(VolunteerOppIdSet);
                 }
-                
-                
+                               
+            }
+            
+            if(volunteerContactIdSet.Size() > 0 && volunteerContactIdSet != Null){
+                AffiliationTriggerHandler.inactiveAffiliations(volunteerContactIdSet);
+            }
+            
+            if(activeVolunteerIdSet.Size() > 0){
+                AffiliationTriggerHandler.activeAffiliations(activeVolunteerIdSet);
             }
             
         }

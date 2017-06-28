@@ -91,7 +91,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Postal</label>
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Zip</label>
                                         <div class="col-sm-6">
                                             <apex:outputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
                                         </div>
@@ -174,7 +174,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Postal</label>
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Zip</label>
                                             <div class="col-sm-6">
                                                 <apex:outputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
                                             </div>
@@ -253,7 +253,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Postal</label>
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Zip</label>
                                         <div class="col-sm-6">
                                             <apex:inputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
                                         </div>
@@ -335,7 +335,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Postal</label>
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Zip</label>
                                             <div class="col-sm-6">
                                                 <apex:inputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
                                             </div>

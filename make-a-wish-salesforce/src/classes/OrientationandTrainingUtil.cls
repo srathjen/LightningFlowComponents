@@ -38,6 +38,7 @@ public class OrientationandTrainingUtil{
         Account newchapterAccount = new Account();
         newchapterAccount.Name = 'Make-A-Wish America';
         newchapterAccount.RecordTypeId = ChapterRecordTypeId;
+        newchapterAccount.Wish_Co_ordinator__c = Userinfo.getUserId();
         insert newchapterAccount;
         return newchapterAccount;
     }
@@ -63,6 +64,15 @@ public class OrientationandTrainingUtil{
         return newchapterAccount;
     }
     
+    public static Account inKindAccountWithSChpater(Id chapterAccountId){
+        Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
+        Account newchapterAccount = new Account();
+        newchapterAccount .Name = 'InKind Account';
+        newchapterAccount.RecordTypeId = inKindDonorsAccountRTId;
+        newchapterAccount.Chapter_Name__c = chapterAccountId;
+        insert newchapterAccount;
+        return newchapterAccount;
+    }
     
     public static void createChapterList(){
         /* Chapter_List__c newChapter = new Chapter_List__c();
@@ -897,8 +907,9 @@ insert newChapter;*/
             newWishOpportunity.IsApproved__c = false;
             newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
             volunteerOpportunityList.add(newWishOpportunity);
-            insert newWishOpportunity;
+            
         }
+        insert volunteerOpportunityList;
         return volunteerOpportunityList;
         
     }
@@ -914,8 +925,9 @@ insert newChapter;*/
             newWishOpportunity.Chapter_Name__c = chapterId;
             newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
             volunteerOpportunityList.add(newWishOpportunity);
-            insert newWishOpportunity;
+           
         }
+         insert volunteerOpportunityList;
         return volunteerOpportunityList;
         
     }
@@ -1441,6 +1453,7 @@ return cc;
         wishChildCon.MailingPostalCode  = '6201717';
         wishChildCon.MailingCountryCode = 'US';
         wishChildCon.RecordTypeId = wishChildRecordTypeId;
+        wishChildCon.MobilePhone = '9900220022';
         insert wishChildCon;
         return wishChildCon;
         
@@ -2191,5 +2204,26 @@ retrun newLeadFile;*/
           return createRec;
     }
     
+    
+      public static Contact CreateWishChildwithAcc(Id accId){
+        Constant_AC  constant = new Constant_AC();
+        Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();            
+        Contact newWishChild = new Contact();
+        newWishChild.FirstName = 'Steven';
+        newWishChild.LastName = 'Smith';
+        newWishChild.Parent_Guardian_Name__c ='Jonathan Edwards'; 
+        newWishChild.RecordTypeId = wishChildRecordTypeId ;
+        newWishChild.AccountId = accId;
+        insert newWishChild;
+        return newWishChild;
+    }
+    
+    public static void checkGovernorLimits () {
+        System.assert(Limits.getDMLRows() * 100 / Limits.getLimitDMLRows() < 50);        
+        System.assert(Limits.getDMLStatements() * 100 / Limits.getLimitDMLStatements() < 50);
+        System.assert(Limits.getAggregateQueries() * 100 / Limits.getLimitAggregateQueries() < 50);
+        System.assert(Limits.getQueries() * 100 / Limits.getLimitQueries() < 70);
+        System.assert(Limits.getQueryRows() * 100 / Limits.getLimitQueryRows() < 50); 
+    }
     
 }

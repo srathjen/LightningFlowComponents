@@ -3,7 +3,6 @@ Author      : MST Solutions
 Description : This class is used add all links to navigate to the particuar forms
 *****************************************************************************************************/
 public class WishRelatedLinks_AC {
-    
     public Case currentCaseRec{get;set;}
     public String WishFamilyForm{get;set;}
     public String LiabilityFrom{get;set;}
@@ -15,7 +14,8 @@ public class WishRelatedLinks_AC {
     public String wishClearence{get;set;}
     public String ChildMedicalForm{get;set;}
     public String ShoppingSpree{get;set;}
-    public List<case> querychildCase;  
+    public List<case> querychildCase; 
+    public List<Wish_Child_Form__c> childFormList;
     Public string ddpId{get;set;}
     public string dnqLetterDDP{get;set;}
     public string welcomeletterDDP{get;set;}
@@ -34,10 +34,11 @@ public class WishRelatedLinks_AC {
     public string welcomeLetterSpanish{get;set;}
     public string MergedDocuments{get;set;}
     public String recpCheck {get;set;}
-    
+    Public boolean showPopup{get;set;}
     public WishRelatedLinks_AC(ApexPages.StandardController controller) {
         recpCheck = 'Allow';
-        Constant_AC  constant = new Constant_Ac();    
+        Constant_AC  constant = new Constant_Ac(); 
+        
         String wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         String wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
@@ -52,8 +53,20 @@ public class WishRelatedLinks_AC {
         welcomeLetterSpanishDDP = Label.Welcome_Letter_Spanish_DDP;
         wishReceiptSpanishDDP = Label.Wish_Receipt_Spanish; 
         List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentCaseRec.Id AND Status =: 'Pending' AND ProcessDefinition.Name =: 'Wish Child Form Approval Process']; 
+         List<Wish_Child_Form__c> childFormList = [SELECT Id,Hidden_Wish_Fmaily_Contact_Name__c,Case__c,Participant_Name__c,Hidden_Same_as_Family__c,Hidden_Wish_Fmaily_Contact_Email__c,Participant_Details__c,Hidden_Email_List__c,
+                     Hidden_Name_List__c FROM Wish_Child_Form__c WHERE Case__c =: currentCaseRec.Id];
         
-        system.debug('@@@@ currentCaseRec @@@@@@@'+currentCaseRec);
+         if(childFormList.size() > 0){
+            if((childFormList[0].Hidden_Wish_Fmaily_Contact_Name__c != Null && (childFormList[0].Participant_Name__c != Null || childFormList[0].Hidden_Same_as_Family__c == true) && childFormList[0].Hidden_Wish_Fmaily_Contact_Email__c != Null)){
+            
+                
+                   showPopup = true;
+               
+            
+            
+        }           
+       }
+       
         if(currentCaseRec.RecordTypeId == parentWishRecordTypeId ){
             WishFamilyForm = '/apex/WishChildForm_VF?id='+currentCaseRec.Id;
             contactInfo = '/apex/RelationshipsViewer_VF?recId='+currentCaseRec.Id;
@@ -73,15 +86,22 @@ public class WishRelatedLinks_AC {
             wishReceiptSpanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+wishReceiptSpanishDDP;
             dnqLetterSpanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+dnqLetterSpanishDDP;
             welcomeLetterSpanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+welcomeLetterSpanishDDP;
-            
-        }
+                    }
         
         querychildCase = [SELECT Id,CaseNumber,ParentId,Parent.AccountId,Parent.ContactId FROM Case WHERE ParentId =:currentCaseRec.Id AND RecordTypeId =: wishGrantRecordTypeId AND ParentId != Null limit 1];
         if(!querychildCase.isEmpty() && querychildCase[0].Id != Null){
             WishReceipt = '/apex/loop__looplus?eid='+querychildCase[0].ParentId+'&accountId='+querychildCase[0].Parent.AccountId+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+ddpId;
         }
-    }     
+    }
     
+    
+    public pageReference LiabilityFrom(){
+       
+        PageReference reference=new PageReference('/apex/WishLiabilityForm_VF?id='+currentCaseRec.Id);
+        reference.setRedirect(true);     
+        return reference;
+        
+    }
     public pageReference DisplayError(){
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,' This record is already in approval process'));
         return null;

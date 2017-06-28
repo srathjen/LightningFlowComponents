@@ -66,6 +66,7 @@ Description : This page is used to display volunteer Open and Closed task list
                                                     <th>Subject</th>
                                                     <th>Status</th>
                                                     <th>Due Date</th>
+                                                    <th>Assigned To</th>
                                                     <!--<th>Type</th>-->
                                                 </tr>
                                             </thead>
@@ -74,7 +75,7 @@ Description : This page is used to display volunteer Open and Closed task list
                                                     
                                                     <tr>
                                                         <td>
-                                                            <a href="/{!openAct.volunteerTask.Id}" target="_blank" style="color:#066cb6; text-decoration: underline;margin-right:3px">View</a>|
+                                                            <a href="/{!openAct.volunteerTask.Id}" style="color:#066cb6; text-decoration: underline;margin-right:3px">View</a>|
                                                             <!--<a href="/{!openAct.volunteerTask.Id}" target="_blank" style="color:#066cb6; text-decoration: underline; margin-left:2px">Close</a>-->
                                                             <!--<apex:commandLink style="color:#066cb6; text-decoration: underline; margin-left:2px" value="Close" action="{!closeTask}" onclick="return TaskCloseAlert();" reRender="None">
 <apex:param name="nickName" value="{!openAct.volunteerTask.Id}" assignTo="{!taskId}"/>
@@ -90,12 +91,13 @@ Description : This page is used to display volunteer Open and Closed task list
                                                                 <apex:param value="{!openAct.volunteerTask.ActivityDate}"/>
                                                             </apex:outputText>
                                                         </td>
+                                                        <td>{!openAct.volunteerTask.Owner.Name}</td>
                                                         <!--<td>{!openAct.wishType}</td>-->
                                                     </tr>
                                                 </apex:repeat>
                                             </tbody>
                                         </table>
-                                        <apex:actionFunction name="closeTask" action="{!closeTask}" reRender="None">
+                                        <apex:actionFunction name="closeTask" action="{!closeTask}" reRender="None" oncomplete="RedirectToPage();">
                                             <apex:param name="taskId1" value="{!taskId}" assignTo="{!taskId}"/>
                                         </apex:actionFunction>
                                     </apex:pageBlock>
@@ -115,6 +117,7 @@ Description : This page is used to display volunteer Open and Closed task list
                                                     <th>Subject</th>
                                                     <th>Status</th>
                                                     <th>Due Date</th>
+                                                    <th>Assigned To</th>
                                                     <!--<th>Type</th>-->
                                                 </tr>
                                             </thead>
@@ -129,6 +132,7 @@ Description : This page is used to display volunteer Open and Closed task list
                                                                 <apex:param value="{!closeAct.volunteerTask.ActivityDate}"/>
                                                             </apex:outputText>
                                                         </td>
+                                                        <td>{!closeAct.volunteerTask.Owner.Name}</td>
                                                         <!--<td>{!closeAct.wishType}</td>-->
                                                     </tr>
                                                 </apex:repeat>
@@ -196,7 +200,7 @@ Description : This page is used to display volunteer Open and Closed task list
             var da1 = $this.data('p1');
             swal({
                 title: "",
-                text: "Are you sure to close the task?",
+                text: "Are you sure you would like to close the task?",
                 showCancelButton: true,
                 type: 'info',
                 confirmButtonColor: "#006bb6",
@@ -214,6 +218,10 @@ Description : This page is used to display volunteer Open and Closed task list
                      }
                  });
         });
+        function RedirectToPage() {
+            swal.close();
+            location.reload();
+        }
         </script>
     </body>
 </apex:page>

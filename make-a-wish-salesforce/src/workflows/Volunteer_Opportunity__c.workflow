@@ -191,9 +191,13 @@
             <name>This_Email_Alert_will_send_when_the_Non_Wish_volunteer_opportunity_is_Approved_b</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>VO_ET_Volunteer_Opportunity_Approved_NW</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Non - Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null, IsApproved__c  = true, ISCHANGED(IsApproved__c ),isRejected__c = false,  Migrated_Record__c = false)</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null, IsApproved__c  = true, ISCHANGED(IsApproved__c ),isRejected__c = false,   $Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -202,9 +206,13 @@
             <name>This_Email_Alert_will_send_when_the_Non_Wish_volunteer_opportunity_is_rejected_b</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>VO_ET_Volunteer_Opportunity_Not_Approved_NW</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Non - Wish is rejected by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null, IsApproved__c  = false, isRejected__c = true,ISCHANGED(isRejected__c), Migrated_Record__c = false )</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null, IsApproved__c  = false, isRejected__c = true,ISCHANGED(isRejected__c),  $Profile.Name != &apos;Integration&apos; )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -213,9 +221,13 @@
             <name>This_Email_Alert_will_send_when_the_Wish_volunteer_opportunity_is_Approved_by_th</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>VO_ET_Volunteer_Opportunity_Wish_Approved</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null, IsApproved__c  = true, ISCHANGED(IsApproved__c),isRejected__c = false,  Migrated_Record__c = false)</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null, IsApproved__c  = true, ISCHANGED(IsApproved__c),isRejected__c = false,   $Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -224,9 +236,13 @@
             <name>This_Email_Alert_will_send_when_the_Wish_volunteer_opportunity_is_rejected_by_th</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>VO_ET_Volunteer_Opportunity_Not_Approved</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null,IsApproved__c  = false, isRejected__c = true, ISCHANGED(isRejected__c),  Migrated_Record__c = false)</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null,IsApproved__c  = false, isRejected__c = true, ISCHANGED(isRejected__c),   $Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -246,11 +262,59 @@
             <value>True</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Volunteer_Opportunity__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow rule fire when inactive check box is checked and user enter the reason for inactive.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
+    <tasks>
+        <fullName>VO_ET_Volunteer_Opportunity_Approved_NW</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>VO ET : Volunteer Opportunity Approved (NW)</subject>
+    </tasks>
+    <tasks>
+        <fullName>VO_ET_Volunteer_Opportunity_Not_Approved</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>VO ET : Volunteer Opportunity Not Approved</subject>
+    </tasks>
+    <tasks>
+        <fullName>VO_ET_Volunteer_Opportunity_Not_Approved_NW</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>VO ET : Volunteer Opportunity Not Approved (NW)</subject>
+    </tasks>
+    <tasks>
+        <fullName>VO_ET_Volunteer_Opportunity_Wish_Approved</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>VO ET : Volunteer Opportunity Wish Approved</subject>
+    </tasks>
 </Workflow>

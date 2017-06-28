@@ -19,6 +19,7 @@ global Class WishReferralForm_AC
     public boolean copyReferrerInfo{get;set;}
     public boolean copyReferrerInfoToWish{get;set;}
     public string currState{get;set;}
+    public string additionalParentState{get;set;}
     public static string icdOrPcd;
     public string refChildFormParent{get;set;}
     
@@ -38,6 +39,8 @@ global Class WishReferralForm_AC
     // Creating new Lead.
     Public PageReference CreateLead()
     {
+        Constant_AC  constant = new Constant_Ac();    
+        Id staffTaskRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
         currLead.PCD_ICD__c = icdOrPcd;
         if(currLead.Relationship_to_child__c != Null)
             currLead.Relationship_to_child__c = currLead.Relationship_to_child__c.trim();
@@ -55,7 +58,7 @@ currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
         Boolean flag = True;
         CurrLead.State = currState;
         currLead.LeadSource = 'Online';
-        
+        CurrLead.Additional_Parent_State__c = additionalParentState;
         
         System.debug('diagnosisFilter++++++++++++++++++++++ ' + diagnosisFilter); 
         System.debug('selectedDiagnosis++++++++++++++++++++++ ' + selectedDiagnosis);
@@ -240,24 +243,24 @@ return null;
                     updateLead.status = 'Duplicate';
                     update updateLead;
                     
-                    Task newTask = WishReferralForm_AC.createTask(contactDupCheck[0].id,contactDupCheck[0].ownerId,contactDupCheck[0].accountId, 'Duplicate Inquiry/Referral Submitted');
+                    Task newTask = WishReferralForm_AC.createTask(contactDupCheck[0].id,contactDupCheck[0].ownerId,contactDupCheck[0].accountId, 'Duplicate Inquiry/Referral Submitted',staffTaskRT);
                     if(newTask.id != Null)
                         redirection = true;
                 }
                 else if(contactDupCheck.size() > 0)
                 {
-                    Task newTask = WishReferralForm_AC.createTask(contactDupCheck[0].id,contactDupCheck[0].ownerId,contactDupCheck[0].accountId, 'Duplicate Inquiry/Referral Submitted');
+                    Task newTask = WishReferralForm_AC.createTask(contactDupCheck[0].id,contactDupCheck[0].ownerId,contactDupCheck[0].accountId, 'Duplicate Inquiry/Referral Submitted',staffTaskRT);
                     if(newTask.id != Null)
                         redirection = true;
                 }
                 else if(leadDupCheck.size() > 0)
                 {
                     if(leadDupCheck[0].Status == 'Referred') {
-                        Task newTask = WishReferralForm_AC.createTask(leadDupCheck[0].id,leadDupCheck[0].ownerId,leadDupCheck[0].ChapterName__c, 'Duplicate Referral Submitted');
+                        Task newTask = WishReferralForm_AC.createTask(leadDupCheck[0].id,leadDupCheck[0].ownerId,leadDupCheck[0].ChapterName__c, 'Duplicate Referral Submitted',staffTaskRT);
                         if(newTask.id != Null)
                             redirection = true;
                     } else if(leadDupCheck[0].Status == 'Inquiry') {
-                        Task newTask = WishReferralForm_AC.createTask(leadDupCheck[0].id,leadDupCheck[0].ownerId,leadDupCheck[0].ChapterName__c, 'Duplicate Inquiry Submitted');
+                        Task newTask = WishReferralForm_AC.createTask(leadDupCheck[0].id,leadDupCheck[0].ownerId,leadDupCheck[0].ChapterName__c, 'Duplicate Inquiry Submitted',staffTaskRT);
                         if(newTask.id != Null)
                             redirection = true;
                     }
@@ -297,7 +300,7 @@ return null;
                 }
                 if(redirection == true)
                 {
-                    PageReference reference=new PageReference('/apex/WishReferralForm_VF?isSuccess=True&chid='+refChildFormParent);
+                    PageReference reference=new PageReference('/apex/WishReferralForm_VF?isSuccess=True&chid='+refChildFormParent + '&rel=' + currLead.Relationship_to_child__c);
                     reference.setRedirect(true);
                     return reference;
                 }
@@ -446,6 +449,18 @@ return null;
         return options;
     }  
     
+     //Capturing State Picklist values.   
+    public List<SelectOption> getRelationshipsToChild() {
+        List<SelectOption> options = new List<SelectOption>();
+        Schema.DescribeFieldResult fieldResult =  Lead.Parent_Relationship_to_Child__c.getDescribe();
+        options.add(new SelectOption('', 'Select an option')); 
+        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
+        for( Schema.PicklistEntry currVal : picklistValues){
+            options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
+            
+        }  
+        return options;
+    }  
     
     //Capturing State Picklist values.   
     public List<SelectOption> getNoOfSiblings() {
@@ -476,12 +491,13 @@ return null;
     
     // Creating Task 
     
-    private static Task createTask(Id whoId,Id ownerId,Id whatId, String subject)
+    private static Task createTask(Id whoId,Id ownerId,Id whatId, String subject, Id recordTypeId)
     {  
         Constant_AC constant = new Constant_AC();
         Id taskRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
         Task newTask = new Task();
         newTask.Subject = subject;
+        newTask.RecordTypeId = recordTypeId;
         newTask.OwnerId = UserInfo.getUserId();
         newTask.whoId = whoId;
         newTask.Status = 'Not Started';

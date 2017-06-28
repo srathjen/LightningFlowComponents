@@ -92,8 +92,10 @@ public class WishJourneyController_Test {
     public static testMethod void caseWitWishDetermined() {
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Wish Determined';
+        currentCase.Sub_Status__c = 'Within Policy';
         currentCase.Origin = 'Email';
         currentCase.Meet_PWL_Criteria__c = 'Test';
+        currentCase.Wish_Type__c = 'Animal';
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
     }

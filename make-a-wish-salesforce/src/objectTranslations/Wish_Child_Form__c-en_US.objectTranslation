@@ -162,6 +162,10 @@
         <name>Driver_Details__c</name>
     </fields>
     <fields>
+        <label><!-- Driver Information --></label>
+        <name>Driver_Information__c</name>
+    </fields>
+    <fields>
         <label><!-- Driver Name --></label>
         <name>Driver_Name__c</name>
     </fields>
@@ -228,6 +232,10 @@
             <masterLabel>Spouse</masterLabel>
             <translation><!-- Spouse --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hidden Envelop Id --></label>
+        <name>Envelop_Id__c</name>
     </fields>
     <fields>
         <label><!-- First Name --></label>
@@ -310,8 +318,64 @@
         <name>Hidden_Contact_Name__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Email List --></label>
+        <name>Hidden_Email_List__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Envelop Id 1 --></label>
+        <name>Hidden_Envelop_Id_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Envelop Id 2 --></label>
+        <name>Hidden_Envelop_Id_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Envelop Id 3 --></label>
+        <name>Hidden_Envelop_Id_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Liability Envelop Id 1 --></label>
+        <name>Hidden_Liability_Envelop_Id_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Liability Envelop Id 2 --></label>
+        <name>Hidden_Liability_Envelop_Id_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Liability Envelop Id 3 --></label>
+        <name>Hidden_Liability_Envelop_Id_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Liability SignerMap Key 1 --></label>
+        <name>Hidden_Liability_SignerMap_Key_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Liability SignerMap Key 2 --></label>
+        <name>Hidden_Liability_SignerMap_Key_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Liability SignerMap Key 3 --></label>
+        <name>Hidden_Liability_SignerMap_Key_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Name List --></label>
+        <name>Hidden_Name_List__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Same as Family --></label>
         <name>Hidden_Same_as_Family__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden SignerMap Key 1 --></label>
+        <name>Hidden_SignerMap_Key_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden SignerMap Key 2 --></label>
+        <name>Hidden_SignerMap_Key_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden SignerMap Key 3 --></label>
+        <name>Hidden_SignerMap_Key_3__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Wish Fmaily Contact Email --></label>
@@ -394,6 +458,10 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Last Name --></label>
         <name>LastName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden LiabilitySignerMapKeyPair --></label>
+        <name>LiabilitySignerMapKeyPair__c</name>
     </fields>
     <fields>
         <label><!-- MY WISH IS TO --></label>
@@ -688,6 +756,14 @@ and the date it was or will be granted. --></help>
         <name>Restaurant__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden SignerMapKeyPair --></label>
+        <name>SignerMapKeyPair__c</name>
+    </fields>
+    <fields>
+        <label><!-- Signers --></label>
+        <name>Signers__c</name>
+    </fields>
+    <fields>
         <label><!-- Sit up takeoff/landing on airplane? Note --></label>
         <name>Sit_up_takeoff_landing_on_airplane_Note__c</name>
     </fields>
@@ -858,6 +934,10 @@ provide contact information for each site on which you are active. --></help>
         <name>Wish_Family_Contact__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Wish Liability Envolep --></label>
+        <name>Wish_Liability_Envolep__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish Notes… --></label>
         <name>Wish_Notes__c</name>
     </fields>
@@ -894,6 +974,10 @@ provide contact information for each site on which you are active. --></help>
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Hidden Section --></label>
+            <section>Hidden Section</section>
         </sections>
         <sections>
             <label><!-- Wish Child Form --></label>

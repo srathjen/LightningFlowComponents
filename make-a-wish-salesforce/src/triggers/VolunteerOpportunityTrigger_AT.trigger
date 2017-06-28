@@ -17,26 +17,22 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
         Map<Id,String> volunteerContactMap = new Map<Id,String>();
         for(Volunteer_Opportunity__c currRec : Trigger.new)
         {
-           
+            
+            
+            if(currRec.Volunteer_Name__c!= Null){
                 
-                if(currRec.Volunteer_Name__c!= Null){
-                    
-                    volunteerContactIdSet.add(currRec.Volunteer_Name__c);
-                }
-                if(currRec.Reason_Inactive__c != Null){
-                    currRec.Inactive__c = True;
-                }
-                
-                if(currRec.RecordTypeId == wishRecordTypeId  && currRec.IsApproved__c == true){
-                    currRec.RecordTypeId = registeredWishRecordTypeId;
-                }
-                if(currRec.RecordTypeId == nonWishRecordTypeId && currRec.IsApproved__c == true){
-                    currRec.RecordTypeId = registeredNonWishRecordTypeId;
-                }
-                /*   if(currRec.IsApproved__c == True && currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Reason_Inactive__c == Null  && currRec.Reason_Inactive__c != Null){
-volunteerOpportunityList.add(currRec);
-System.debug('>>>>>>>1111111>>>>>'+currRec.Hidden_Volunteer_Contact_Email__c);
-} */
+                volunteerContactIdSet.add(currRec.Volunteer_Name__c);
+            }
+            if(currRec.Reason_Inactive__c != Null){
+                currRec.Inactive__c = True;
+            }
+            
+            if(currRec.RecordTypeId == wishRecordTypeId  && currRec.IsApproved__c == true){
+                currRec.RecordTypeId = registeredWishRecordTypeId;
+            }
+            if(currRec.RecordTypeId == nonWishRecordTypeId && currRec.IsApproved__c == true){
+                currRec.RecordTypeId = registeredNonWishRecordTypeId;
+            }
             
         }
         
@@ -54,10 +50,7 @@ System.debug('>>>>>>>1111111>>>>>'+currRec.Hidden_Volunteer_Contact_Email__c);
                 }
             }
         }
-        /*  if(volunteerOpportunityList.size() > 0){
-system.debug('@@@@@@@@ createNewVolunteerOpportunityList @@@@@@@@'+volunteerOpportunityList);
-VolunteerOpportunityTriggerHandler.CreateNewVolunteerOpportunity(volunteerOpportunityList);
-} */
+        
     }
     
     
@@ -86,7 +79,6 @@ VolunteerOpportunityTriggerHandler.CreateNewVolunteerOpportunity(volunteerOpport
         Set<Id> chapterIdsSet = new Set<Id>();
         Set<Id> VolunteerwishIdSet = new Set<Id>();
         set<Id> volunteerIdsSet = new set<Id>();
-        //Map<id,set<id>> volunteerWishMap = new Map<id,set<id>>();
         List<Volunteer_Opportunity__c> recordsForApprovalProcess = new List<Volunteer_Opportunity__c>();
         List<Volunteer_Opportunity__c> recordsForCreatingCaseTeams = new List<Volunteer_Opportunity__c>();
         Map<Id,Volunteer_Opportunity__c> volunteerforApexSharing = new Map<Id,Volunteer_Opportunity__c>();
@@ -99,87 +91,101 @@ VolunteerOpportunityTriggerHandler.CreateNewVolunteerOpportunity(volunteerOpport
         List<Volunteer_Opportunity__c> rejectedVolunteerOpportunitiesList = new List<Volunteer_Opportunity__c>();
         List<Volunteer_Opportunity__c> volOpportunitySharingList = new List<Volunteer_Opportunity__c>();
         Set<Id> wishIds = new Set<Id>();
-        
+        Set<Id> caseIdSet = new Set<Id>();
+        set<Id> voluOppIdSet = new Set<Id>();
+        boolean isdelete;
+        Set<Id> volunteerOppIdSet = new Set<Id>();
         for(Volunteer_Opportunity__c currRec : Trigger.new)
         { 
-            if(currRec.isRejected__c == true && currRec.isRejected__c != Trigger.oldMap.get(currRec.Id).isRejected__c) {
-                if(RecursiveTriggerHandler.isFirstTime == true || Test.isRunningTest())
+            
+            if(currRec.IsApproved__c == False &&  (currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Volunteer_Name__c== Null)&& (currRec.Wish__c != Null && currRec.Reason_Inactive__c == Null))
+            {
+                
+                recordsForApprovalProcess.add(currRec); 
+                chapterIdsSet.add(currRec.Chapter_Name__c);
+            } 
+            
+            if((currRec.IsApproved__c == true && currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Reason_Inactive__c == Null  && currRec.Reason_Inactive__c != Null)||
+               (currRec.isRejected__c == true && currRec.isRejected__c != Trigger.oldMap.get(currRec.Id).isRejected__c) || (currRec.Inactive__c == true && currRec.Inactive__c != Trigger.oldMap.get(currRec.Id).Inactive__c && currRec.isApproved__c == false)){
+                   if(RecursiveTriggerHandler.isFirstTime == true || Test.isRunningTest())
+                   {
+                       volunteerOpportunityList.add(currRec);
+                       volunteerOppIdSet.add(currRec.Id);
+                       
+                   }
+                   
+               }
+            else if(currRec.IsApproved__c == False &&  (currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Volunteer_Name__c== Null)&& (currRec.Wish__c == Null) && (currRec.Non_Wish_Event__c != Null && currRec.Reason_Inactive__c == Null)){
+                
+                recordsForApprovalProcess.add(currRec); 
+                chapterIdsSet.add(currRec.Chapter_Name__c);
+            }
+            
+            if((currRec.IsApproved__c == True && Trigger.oldMap.get(currRec.id).isApproved__c == False)  &&  (currRec.Volunteer_Name__c!= Null) && ((currRec.Wish__c != Null || currRec.Non_Wish_Event__c != Null) && currRec.Reason_Inactive__c == Null))
+            {
+                volOpportunitySharingList.add(currRec); 
+                recordsForCreatingCaseTeams.add(currRec); 
+            }
+            
+            if((currRec.Volunteer_Name__c != Null) &&(currRec.Wish__c != Null))
+            {
+                volunteerforApexSharing.put(currRec.Id,currRec);
+                if(volunteerCaseMap.containsKey(currRec.Volunteer_Name__c))
                 {
-                    rejectedVolunteerOpportunitiesList.add(currRec);
-                    wishIds.add(currRec.wish__c);
+                    volunteerCaseMap.get(currRec.wish__c).add(currRec.Volunteer_Name__c);
+                }
+                else
+                {
+                    volunteerCaseMap.put(currRec.wish__c,new Set<String>{currRec.Volunteer_Name__c});
                 }
             }
-           
-                if(currRec.IsApproved__c == False &&  (currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Volunteer_Name__c== Null)&& (currRec.Wish__c != Null && currRec.Reason_Inactive__c == Null))
-                {
-                    
-                    recordsForApprovalProcess.add(currRec); 
-                    chapterIdsSet.add(currRec.Chapter_Name__c);
-                } 
-                
-                if(currRec.IsApproved__c == true && currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Reason_Inactive__c == Null  && currRec.Reason_Inactive__c != Null){
-                    if(RecursiveTriggerHandler.isFirstTime == true || Test.isRunningTest())
-                {
-                    volunteerOpportunityList.add(currRec);
-                 }
-                    System.debug('>>>>>>>1111111>>>>>'+currRec.Hidden_Volunteer_Contact_Email__c);
-                }
-                else if(currRec.IsApproved__c == False &&  (currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Volunteer_Name__c== Null)&& (currRec.Wish__c == Null) && (currRec.Non_Wish_Event__c != Null && currRec.Reason_Inactive__c == Null)){
-                    
-                    recordsForApprovalProcess.add(currRec); 
-                    chapterIdsSet.add(currRec.Chapter_Name__c);
-                }
-                
-                if((currRec.IsApproved__c == True && Trigger.oldMap.get(currRec.id).isApproved__c == False)  &&  (currRec.Volunteer_Name__c!= Null) && (currRec.Wish__c != Null && currRec.Reason_Inactive__c == Null))
-                {
-                    volOpportunitySharingList.add(currRec); 
-                    recordsForCreatingCaseTeams.add(currRec); 
-                }
-                
-                
-                
-                if((currRec.Volunteer_Name__c != Null) &&(currRec.Wish__c != Null))
-                {
-                    volunteerforApexSharing.put(currRec.Id,currRec);
-                    if(volunteerCaseMap.containsKey(currRec.Volunteer_Name__c))
-                    {
-                        volunteerCaseMap.get(currRec.wish__c).add(currRec.Volunteer_Name__c);
-                    }
-                    else
-                    {
-                        volunteerCaseMap.put(currRec.wish__c,new Set<String>{currRec.Volunteer_Name__c});
-                    }
-                }
-                
-                if((currRec.Volunteer_Name__c != Null && currRec.Non_Wish_Event__c != Null && currRec.IsApproved__c == false && currRec.isRejected__c == true) || (currRec.Volunteer_Name__c == Null && trigger.oldMap.get(currRec.Id).Volunteer_Name__c != Null && currRec.Non_Wish_Event__c != Null && (currRec.IsApproved__c == false || currRec.IsApproved__c == true) && currRec.Reason_Inactive__c == Null)){
-                    
+            
+            if(currRec.Volunteer_Name__c != Null && currRec.Non_Wish_Event__c != Null && currRec.IsApproved__c == false && currRec.Status__c == 'Pending' && currRec.Reason_Inactive__c == Null){
+                if(RecursiveTriggerHandler.isFirstTime == true){ 
                     nonWishListtoupdatecount.add(currRec);
+                    voluOppIdSet.add(currRec.Id); 
+                    isdelete = false;
                 }
-                
-                if(currRec.Volunteer_Name__c == Null && trigger.oldMap.get(currRec.Id).Volunteer_Name__c  != Null){
-                    updateUserSet.add(currRec.Id);
-                    volconId.add(trigger.oldMap.get(currRec.Id).Volunteer_Name__c);
-                }
-                if((currRec.Volunteer_Name__c != Null && currRec.Non_Wish_Event__c != Null && currRec.IsApproved__c == true && currRec.Reason_Inactive__c != Null) || (currRec.Volunteer_Name__c == Null && trigger.oldMap.get(currRec.Id).Volunteer_Name__c != Null && currRec.Non_Wish_Event__c != Null && currRec.IsApproved__c == false && currRec.Reason_Inactive__c == Null)){
-                    system.debug('@@@@@@@ currRec.Volunteer_Name__c @@@@@@@@@'+currRec.Volunteer_Name__c);
+            }
+            
+            if(currRec.Volunteer_Name__c == Null && trigger.oldMap.get(currRec.Id).Volunteer_Name__c  != Null){
+                updateUserSet.add(currRec.Id);
+                volconId.add(trigger.oldMap.get(currRec.Id).Volunteer_Name__c);
+            }
+            if((currRec.Volunteer_Name__c != Null && currRec.Non_Wish_Event__c != Null && currRec.IsApproved__c == true && currRec.Reason_Inactive__c != Null) || (currRec.Volunteer_Name__c != Null && currRec.Non_Wish_Event__c != Null && currRec.IsApproved__c == false && currRec.isRejected__c == true && currRec.Reason_Inactive__c != Null)){
+                if(RecursiveTriggerHandler.isFirstTime == true){ 
                     nonWishListtoupdatecount.add(currRec);
+                    voluOppIdSet.add(currRec.Id); 
+                    isdelete = false;
                 }
                 
-                if(currRec.Volunteer_Name__c != Null && currRec.Wish__c != Null && currRec.IsApproved__c == true && trigger.oldMap.get(currRec.Id).IsApproved__c  == false ){
-                    //VolunteerwishIdSet.add(currRec.Wish__c);
-                    volunteerIdsSet.add(currRec.Volunteer_Name__c);
-                }
-          
+            }
+            
+            if(currRec.Volunteer_Name__c != Null && currRec.Wish__c != Null && currRec.IsApproved__c == true && trigger.oldMap.get(currRec.Id).IsApproved__c  == false ){
+                
+                volunteerIdsSet.add(currRec.Volunteer_Name__c);
+            }
+            if(currRec.Volunteer_Name__c != Null && currRec.Wish__c != Null && (currRec.IsApproved__c == true || currRec.IsApproved__c == false) && currRec.Reason_Inactive__c != Null && currRec.inActive__c == true){
+                caseIdSet.add(currRec.Wish__c);
+                voluOppIdSet.add(currRec.Volunteer_Name__c );
+            }
+            
+        }
+        if(caseIdSet.size() > 0 && voluOppIdSet.size() > 0 ){
+            if(RecursiveTriggerHandler.isFirstTime == true){
+                VolunteerOpportunityTriggerHandler.updateCase(caseIdSet,voluOppIdSet);
+            }
+        }
+        if(volunteerOpportunityList.size() > 0){
+            //if(RecursiveTriggerHandler.isFirstTime == true || Test.isRunningTest()){
+                VolunteerOpportunityTriggerHandler.CreateNewVolunteerOpportunity(volunteerOpportunityList,volunteerOppIdSet);
+            //}
         }
         
-          if(volunteerOpportunityList.size() > 0){
-            if(RecursiveTriggerHandler.isFirstTime == true || Test.isRunningTest()){
-                VolunteerOpportunityTriggerHandler.CreateNewVolunteerOpportunity(volunteerOpportunityList);
-            }
-        }
+        
         
         if(rejectedVolunteerOpportunitiesList.size() > 0) {
-            VolunteerOpportunityTriggerHandler.CreateVolunteerOpportunityRecord(rejectedVolunteerOpportunitiesList,wishIds);
+            //VolunteerOpportunityTriggerHandler.CreateVolunteerOpportunityRecord(rejectedVolunteerOpportunitiesList,wishIds);
         }
         if(volunteerIdsSet.size() > 0){
             VolunteerOpportunityTriggerHandler.ActiveWishCount(volunteerIdsSet);
@@ -204,9 +210,9 @@ VolunteerOpportunityTriggerHandler.CreateNewVolunteerOpportunity(volunteerOpport
         }
         
         
-        if(nonWishListtoupdatecount.Size() > 0 && RecursiveTriggerHandler.isFirstTime == true  ){
+        if(nonWishListtoupdatecount.Size() > 0 ){
             system.debug('@@@@@@@ ENTER INTO IF  @@@@@@@@@'+nonWishListtoupdatecount);
-            VolunteerOpportunityTriggerHandler.UpdateVolunteerRegisterdCount(nonWishListtoupdatecount);
+            VolunteerOpportunityTriggerHandler.UpdateVolunteerRegisterdCount(nonWishListtoupdatecount,voluOppIdSet,isdelete);
             
         }
         if(updateWishGrantedList.size() > 0){
@@ -218,33 +224,35 @@ VolunteerOpportunityTriggerHandler.CreateNewVolunteerOpportunity(volunteerOpport
         
         if(volOpportunitySharingList.size() > 0)
             VolunteerOpportunityTriggerHandler.shareolunteerOpportunityRecord(volOpportunitySharingList);
-        
     }
     
     If(Trigger.isAfter && Trigger.isDelete){
+        
         List<Volunteer_Opportunity__c> nonWishListtoupdatecount = new List<Volunteer_Opportunity__c>();
         List<Volunteer_Opportunity__c> nonwishListRegisteredList = new List<Volunteer_Opportunity__c>();
-        
-        
+        Set<id> nonWishRegisteredUpdateSet = new Set<id>();
+        boolean isdelete;
         for(Volunteer_Opportunity__c oldDbRec : Trigger.old){
             
-            if(oldDbRec.Volunteer_Name__c == Null && oldDbRec .Non_Wish_Event__c != Null && (oldDbRec.IsApproved__c == false || oldDbRec.IsApproved__c == true) && oldDbRec.Chapter_Role_Opportunity__c != Null && oldDbRec.Reason_Inactive__c == Null || oldDbRec.Reason_Inactive__c != Null){
+            
+            if((oldDbRec.Volunteer_Name__c != Null && oldDbRec .Non_Wish_Event__c != Null && oldDbRec.IsApproved__c == true && oldDbRec.Reason_Inactive__c == Null) || (oldDbRec.Volunteer_Name__c != Null && oldDbRec .Non_Wish_Event__c != Null && oldDbRec.Status__c == 'Pending') || (oldDbRec.Volunteer_Name__c == Null)){
                 nonWishListtoupdatecount.add(oldDbRec);
+                isdelete = true;
             }
             
-            if(oldDbRec.Volunteer_Name__c != Null && oldDbRec .Non_Wish_Event__c != Null && (oldDbRec.IsApproved__c == false || oldDbRec.IsApproved__c == true) && oldDbRec.Chapter_Role_Opportunity__c != Null && oldDbRec.Reason_Inactive__c == Null){
+            if((oldDbRec.Volunteer_Name__c != Null && oldDbRec .Non_Wish_Event__c != Null && oldDbRec.IsApproved__c == true) || (oldDbRec.Volunteer_Name__c != Null && oldDbRec .Non_Wish_Event__c != Null && oldDbRec.Status__c == 'Pending')){
+                
                 nonwishListRegisteredList.add(oldDbRec);
+                nonWishRegisteredUpdateSet.add(oldDbRec.id);
+                isdelete = true;
             }
-            
         }
         if(nonWishListtoupdatecount.Size() > 0){
             VolunteerOpportunityTriggerHandler.updatevolunteerNeededCount(nonWishListtoupdatecount);
         }
-        
         if(nonwishListRegisteredList.size() > 0){
-            VolunteerOpportunityTriggerHandler.updateVolunteerRegisterdCount(nonwishListRegisteredList);
+            VolunteerOpportunityTriggerHandler.updateVolunteerRegisterdCount(nonwishListRegisteredList,nonWishRegisteredUpdateSet,isdelete);
         }
-        
     }
     if(trigger.isafter && (trigger.isinsert || trigger.isupdate))
     {
@@ -252,41 +260,40 @@ VolunteerOpportunityTriggerHandler.CreateNewVolunteerOpportunity(volunteerOpport
         List<Volunteer_Opportunity__c> volunteerOppList = new List<Volunteer_Opportunity__c>();
         for(Volunteer_Opportunity__c currRec:trigger.new){
             
-           
-                if(currRec.IsApproved__c==true && ((trigger.isinsert && currRec.Migrated_Record__c==false) || trigger.oldMap.get(currRec.id).IsApproved__c == false)){
-                    volunteerOppName.add(currRec.Volunteer_Name__c);
-                }
-           
             
-              
+            if(currRec.IsApproved__c==true && ((trigger.isinsert && currRec.Migrated_Record__c==false) || trigger.oldMap.get(currRec.id).IsApproved__c == false)){
+                volunteerOppName.add(currRec.Volunteer_Name__c);
+            }
+            
+            
+            
             if(currRec.Migrated_Record__c == True && Trigger.isInsert)
             {
-               volunteerOppList.add(currRec);
+                volunteerOppList.add(currRec);
             }
         }
         if(volunteerOppName.size() > 0){
             VolunteerOpportunityTriggerHandler.Updatecontacts(volunteerOppName);
         }
-        if(volunteerOppList.size() > 0)
-            VolunteerOpportunityTriggerHandler.CreateCaseTeamMembers(volunteerOppList);
+        //if(volunteerOppList.size() > 0)
+        // VolunteerOpportunityTriggerHandler.CreateCaseTeamMembers(volunteerOppList);
         
-   Map<String, List<Volunteer_Opportunity__c >> volunteerOppMap = new Map<String, List<Volunteer_Opportunity__c>>();
-    
-   for(Volunteer_Opportunity__c  currRec :[SELECT id, ownerId, owner.UserRoleId, Owner.UserRole.Name, Chapter_Name__c, 
-                                       Chapter_Name__r.Name FROM Volunteer_Opportunity__c WHERE Id IN :Trigger.newMap.keySet()])
-   {
-     if( (Trigger.isInsert || (Trigger.isUpdate && currRec.OwnerId != Trigger.oldMap.get(currRec.Id).OwnerId)) 
-           && currRec.Chapter_Name__c != Null && currRec.Owner.userRole.Name == 'National Staff') 
-         {
+        Map<String, List<Volunteer_Opportunity__c >> volunteerOppMap = new Map<String, List<Volunteer_Opportunity__c>>();
+        
+        for(Volunteer_Opportunity__c  currRec :[SELECT id, ownerId, owner.UserRoleId, Owner.UserRole.Name, Chapter_Name__c, 
+                                                Chapter_Name__r.Name FROM Volunteer_Opportunity__c WHERE Id IN :Trigger.newMap.keySet()])
+        {
+            if( (Trigger.isInsert || (Trigger.isUpdate && currRec.OwnerId != Trigger.oldMap.get(currRec.Id).OwnerId)) 
+               && currRec.Chapter_Name__c != Null && currRec.Owner.userRole.Name == 'National Staff') 
+            {
                 if(volunteerOppMap.containsKey(currRec.Chapter_Name__r.Name))
-                   volunteerOppMap.get(currRec.Chapter_Name__r.Name).add(currRec);
+                    volunteerOppMap.get(currRec.Chapter_Name__r.Name).add(currRec);
                 else
-                   volunteerOppMap.put(currRec.Chapter_Name__r.Name, new List<Volunteer_Opportunity__c>{currRec});
-         }
-   } 
-   
-   if(volunteerOppMap.size() > 0)
-           ChapterStaffRecordSharing_AC.volunteerOpportunitySharing(volunteerOppMap);
-  }
-
+                    volunteerOppMap.put(currRec.Chapter_Name__r.Name, new List<Volunteer_Opportunity__c>{currRec});
+            }
+        } 
+        if(volunteerOppMap.size() > 0)
+            ChapterStaffRecordSharing_AC.volunteerOpportunitySharing(volunteerOppMap);
+    }
+    
 }

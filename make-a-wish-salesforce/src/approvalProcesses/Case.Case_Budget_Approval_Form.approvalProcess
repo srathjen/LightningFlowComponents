@@ -21,7 +21,7 @@
         <name>Assign_approval_to_users</name>
     </approvalStep>
     <description>This approval process is used to submit the wish for approval once the budget form is filled</description>
-    <emailTemplate>unfiled$public/Case_Budget_Approval_Template</emailTemplate>
+    <emailTemplate>Automated_Wish_Granting_Email_Templates/Case_Budget_Approval_Template</emailTemplate>
     <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
     <entryCriteria>
         <booleanFilter>1</booleanFilter>
@@ -57,6 +57,10 @@
         <action>
             <name>Case_Budget_Submitted</name>
             <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Case_ET_Budget_Approval_Request</name>
+            <type>Task</type>
         </action>
     </initialSubmissionActions>
     <label>Case:Budget Approval Form</label>

@@ -25,7 +25,6 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$CreatedBy</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>integration user</value>
         </criteriaItems>

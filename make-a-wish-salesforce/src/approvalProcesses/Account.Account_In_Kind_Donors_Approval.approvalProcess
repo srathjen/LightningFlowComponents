@@ -36,7 +36,7 @@
         <name>In_Kind_Donors_Approved</name>
     </approvalStep>
     <description>This approval process used to send  In Kind Donors accounts for approval to the manager</description>
-    <emailTemplate>unfiled$public/Account_In_Kind_Donors_Approval_Email_Template</emailTemplate>
+    <emailTemplate>Automated_Wish_Granting_Email_Templates/Account_In_Kind_Donors_Approval_Email_Template</emailTemplate>
     <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
     <entryCriteria>
         <criteriaItems>

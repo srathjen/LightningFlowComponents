@@ -25,10 +25,12 @@ public class wifAttachment_AC{
     
     //Used to display medical summary attachment to diagnosis verification form
     public List<cg__CaseFile__c> getAttachments() {
-    
-         //List<cg__CaseFile__c> attachmentList = [select Id, cg__Case__c, File_Path__c, cg__Description__c, cg__File_Name__c from cg__CaseFile__c where cg__Case__c =: recId and cg__Parent_Folder_Id__c =: (SELECT Id, cg__Content_Type__c, cg__File_Name__c, cg__Case__c, cg__Parent_Folder_Id__c FROM cg__CaseFile__c WHERE cg__Case__c IN : recId AND cg__Content_Type__c = 'Folder' AND cg__File_Name__c = 'Documents')];
-                
-        List<cg__CaseFile__c> attachmentList = [select Id, cg__Case__c, File_Path__c, cg__Description__c, cg__File_Name__c from cg__CaseFile__c where cg__Case__c =: recId and cg__Content_Type__c != 'Folder'];
+        set<Id> folderIdSet = new Set<Id>();
+        for(cg__CaseFile__c caseFileFolders: [select Id from cg__CaseFile__c where cg__Case__c =: recId and cg__Content_Type__c = 'Folder' AND (cg__File_Name__c = 'Staff - Private' OR cg__File_Name__c = 'Financials')]){
+            folderIdSet.add(caseFileFolders.Id);
+        }
+        System.debug('+++++++++++++++++folderId'+ folderIdSet + '-RecId' + recId );
+        List<cg__CaseFile__c> attachmentList = [select Id, cg__Case__c, File_Path__c, cg__Description__c, cg__File_Name__c from cg__CaseFile__c where cg__Case__c =: recId and cg__Content_Type__c != 'Folder' and cg__Parent_Folder_Id__c NOT IN: folderIdSet];
         return attachmentList;
     }
     

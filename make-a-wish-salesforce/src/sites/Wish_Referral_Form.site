@@ -6,12 +6,12 @@
     <allowStandardIdeasPages>false</allowStandardIdeasPages>
     <allowStandardLookups>false</allowStandardLookups>
     <allowStandardSearch>false</allowStandardSearch>
-    <authorizationRequiredPage>Unauthorized</authorizationRequiredPage>
-    <bandwidthExceededPage>BandwidthExceeded</bandwidthExceededPage>
+    <authorizationRequiredPage>ContactChapter_VF</authorizationRequiredPage>
+    <bandwidthExceededPage>ContactChapter_VF</bandwidthExceededPage>
     <clickjackProtectionLevel>AllowAllFraming</clickjackProtectionLevel>
-    <fileNotFoundPage>FileNotFound</fileNotFoundPage>
-    <genericErrorPage>Exception</genericErrorPage>
-    <inMaintenancePage>InMaintenance</inMaintenancePage>
+    <fileNotFoundPage>ContactChapter_VF</fileNotFoundPage>
+    <genericErrorPage>ContactChapter_VF</genericErrorPage>
+    <inMaintenancePage>ContactChapter_VF</inMaintenancePage>
     <inactiveIndexPage>InMaintenance</inactiveIndexPage>
     <indexPage>WishReferralForm_VF</indexPage>
     <masterLabel>Wish Referral Form</masterLabel>

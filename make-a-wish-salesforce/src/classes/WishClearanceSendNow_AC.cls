@@ -10,6 +10,7 @@ public class WishClearanceSendNow_AC{
     public Map<String,String> medicalProfConMap; 
     public String email{get;set;}
     public boolean dis{get;set;}
+    public boolean displayReturnToWish{get;set;} 
     Public Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
     public WishClearanceSendNow_AC(ApexPages.StandardController controller){
         dis = true;
@@ -38,21 +39,21 @@ public class WishClearanceSendNow_AC{
         }
         
     }
+    public void ReturnToWish(){
+        displayReturnToWish = true;
+    }
+    public pageReference ReturnToWishClearanceForm(){
+     PageReference reference=new PageReference('/apex/WishClearanceSendNow_VF?id='+currentParentCase.id);
+        reference.setRedirect(true);     
+        return reference;
+    }
     
     public void SendtoDocuSign(){
         
         if(currentParentCase.wish_involves_air_travel__c == Null ||currentParentCase.Description == Null ){
             DisplayErrorMessage();
         }
-        else if(currentParentCase.Rush__c == true){
-          
-           
-          case updatenewCase = new Case();
-          updatenewCase.Id = currentParentCase.Id;
-          updatenewCase.IsRushWishClearence_ChildSummary__c = true;
-          update updatenewCase;
-          DisplayMessage();
-        }
+        
         else if(medicalProfConMap.get(medicalProfContactName) == Null){
             DisplayErrorMessage();
         }
@@ -78,19 +79,19 @@ public class WishClearanceSendNow_AC{
     
     @future(Callout = true)
     public static void CallouttoDocusign(Id caseId,String conName,String conEmail){
-       Case currentParentCase = [SELECT Id,ContactId,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: caseId];
-         system.debug('@@@@@@@@@@@@ Name @@@@@@@@@@@@@@'+conName);
-         system.debug('@@@@@@@@@@@@ Email@@@@@@@@@@@@@@'+conEmail);
-         String account;
+       Case currentParentCase = [SELECT Id,ContactId,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c,Rush__c  FROM Case WHERE Id =: caseId];
+         
+            String account;
             String UserName;
             String Password;
             String IntegratorKey;
             String endPointURL;
-            String templateID = label.WishClearence;
+            String templateID;
             system.debug('### templateId #####'+templateID);
             Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
             String  name = conName;
             String  email = conEmail;
+            String subject;
             for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
                 UserName = credentialIns.name;
                 account = credentialIns.account__c;
@@ -99,6 +100,15 @@ public class WishClearanceSendNow_AC{
                 endPointURL = credentialIns.end_Point__c;
             }
             
+           if(currentParentCase.Rush__c  != true){
+               templateID = label.WishClearence;
+               subject = 'Wish Clearance';
+           }
+            
+           if(currentParentCase.Rush__c  == true){
+               templateID = label.Rush_Wish_Clearance;
+               subject = 'RUSH Wish Clearance';
+           }
             String endpoint = endPointURL+'/accounts/'+account+'/envelopes';
             system.debug('### endpoint #####'+endpoint );
             String authorizationHeader = '<DocuSignCredentials><Username>'+UserName+'</Username><Password>'+Password+'</Password><IntegratorKey>'+IntegratorKey+'</IntegratorKey></DocuSignCredentials>';
@@ -112,7 +122,7 @@ public class WishClearanceSendNow_AC{
             req.setHeader('Content-Disposition','form-data'); 
             String json='{'+ 
                 ' '+ 
-                ' "emailSubject": "Wish Clearance",'+
+                ' "emailSubject": "'+subject+'",'+
                 ' "emailBlurb": "MAKE A WISH AMERICA",'+ 
                 ' "templateId": "'+templateID+'",'+ 
                 ' "envelopeIdStamping": "false",'+ 
@@ -167,7 +177,7 @@ public class WishClearanceSendNow_AC{
         if(currentParentCase.wish_involves_air_travel__c == Null)
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please Select Wish Involves Air Travel'));
         if(currentParentCase.Description == Null )
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please give the value to Description'));
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please add a value to Description on the case page.'));
         if(medicalProfConMap.get(medicalProfContactName) == Null)
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'The selected user does not have email address.'));
         return null;

@@ -19,12 +19,14 @@ Public Class LeadDuplicate_AC
    public Integer step {get; private set;}
    public boolean isFamilyInfo{get;set;}
    public string contactId{get;set;}
+   public string bestToConId{get;set;}
    public string treatingContactId{get;set;}
    public string medicalConId{get;set;}
    public boolean displayPartASuccess{get;set;}
    public boolean noDuplicate{Get;set;}
    public string masterLeadId;
    public boolean displayLeadDupPopup{get;set;}
+   public string additionalParentId{get;set;}
    
    Id wishFamilyRT;
    Id medicalProfessionalRT;
@@ -59,10 +61,15 @@ Public Class LeadDuplicate_AC
        {
         // Querying current lead info.
          currLead = [SELECT Id, FirstName,Name,Of_Times_Email_Sent__c,LastName,Parent_Last_Name__c,Parent_First_Name__c, 
-                     Email, DOB__c ,Phone,chapterName__c,chapterName__r.Name, 
+                     Email, DOB__c ,Phone,chapterName__c,chapterName__r.Name, Best_Contact_for_Physician_First_Name__c,
+                      Best_Contact_for_Physician_Last_Name__c, Best_contact_for_Physician_Email__c ,
                      City, State, Street, PostalCode, Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
                      Medical_Professional_Phone__c, Medical_Professional_Email__c, Treating_Medical_Professional_First_Name__c,
-                     Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Phone__c, Treating_Medical_Professional_Email__c FROM Lead
+                     Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Phone__c,  
+                     Additional_Parent_City__c,Additional_Parent_Email__c,Additional_Parent_First_Name__c,
+                     Additional_Parent_Last_Name__c,Additional_Parent_Phone__c,Additional_Parent_Postal_Code__c,
+                     Additional_Parent_State__c,Additional_Parent_Street__c,
+                     Treating_Medical_Professional_Email__c FROM Lead
                      WHERE id = :currId limit 1];
          masterLeadList = new List<Lead>();
          masterLeadList.add(currLead); 
@@ -186,6 +193,26 @@ Public Class LeadDuplicate_AC
         return dupContacts;
    }
   
+  
+  // Querying duplicate Best Contact Person in Physician hospital based on the current lead. 
+   public List<Contact> getbestPhysicianContactList()
+   {
+        List<Contact> dupContacts = new List<Contact>();
+     
+        if(currLead.id != Null)
+        {
+          dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
+                         MailingState, MailingPostalCode FROM Contact
+                         WHERE (FirstName = :currLead.Best_Contact_for_Physician_First_Name__c AND 
+                         LastName = :currLead.Best_Contact_for_Physician_Last_Name__c 
+                         AND  Email =: currLead.Best_contact_for_Physician_Email__c 
+                         AND RecordTypeId = :MedicalProfessionalRT)];
+                         
+        }
+        return dupContacts;
+   }
+   
+   
   // Querying duplicate Wish Family based on the current lead. 
    public List<Contact> getdupParentContactList()
    {
@@ -210,6 +237,34 @@ Public Class LeadDuplicate_AC
         }
         return dupContacts;
    }
+   
+   
+    // Querying duplicate Additional Wish Family based on the current lead. 
+   public List<Contact> getAdditionalParentContactList()
+   {
+        List<Contact> dupContacts = new List<Contact>();
+        if(currLead.id != Null)
+        {
+          dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
+                        
+                         MailingState, MailingPostalCode FROM Contact
+                         WHERE (FirstName = :currLead.Additional_Parent_First_Name__c AND LastName = :currLead.Additional_Parent_Last_Name__c AND 
+                               (((Email = :currLead.Additional_Parent_Email__c OR Phone = :currLead.Additional_Parent_Phone__c) 
+                               AND (MailingStreet = :currLead.Additional_Parent_Street__c AND MailingState = :currLead.Additional_Parent_State__c 
+                               AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c 
+                               AND MailingCity = :currLead.Additional_Parent_City__c))  
+                               OR ((Phone = :currLead.Additional_Parent_Phone__c OR (MailingStreet = :currLead.Additional_Parent_Street__c AND MailingState = :currLead.Additional_Parent_State__c
+                               AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c
+                               AND MailingCity = :currLead.Additional_Parent_City__c))
+                               AND Email = :currLead.Additional_Parent_Email__c)  OR (((MailingStreet = :currLead.Additional_Parent_Street__c AND MailingState = :currLead.Additional_Parent_State__c
+                               AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c
+                               AND MailingCity = :currLead.Additional_Parent_City__c) OR (Email = :currLead.Additional_Parent_Email__c) )
+                               AND Phone = :currLead.Additional_Parent_Phone__c))) AND RecordTypeId = :wishFamilyRT];
+                         
+        }
+        return dupContacts;
+   }
+   
    
    // Mark the Master record by default for merging. If user want to change, then can change it using radio button.
    public void selectDefaultRecord() {
@@ -287,7 +342,7 @@ Public Class LeadDuplicate_AC
    
   
   //Submitting for Diagnosis Verification. 
-   public void ContinuePartAForm()
+   public pageReference ContinuePartAForm()
    {
    
       Lead updateLead = new Lead();
@@ -305,10 +360,23 @@ Public Class LeadDuplicate_AC
       else if(hideTreatingSection == True)
           updateLead.Treating_Medical_Professional_Contact_Id__c = medicalConId;
       updateLead.Wish_Family_ContactId__c = contactId;
+      updateLead.Hidden_Best_Contact_Person_Id__c = bestToConId;
+      updateLead.Hidden_Additional_Parent_Id__c = additionalParentId;
       updateLead.Contact_Dup_Check__c = 'Block Contact Dup';
+      if(currLead.Best_contact_for_Physician_Email__c == Null)
+         updateLead.Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
       updateLead.Dup_Check__c = 'Block Lead Dup';
       Update updateLead;
-      displayPartASuccess = True;
+      if(currLead.Best_contact_for_Physician_Email__c == Null || currLead.Best_contact_for_Physician_Email__c == '' || currLead.Treating_Medical_Professional_Email__c == currLead.Best_contact_for_Physician_Email__c){
+          displayPartASuccess = True;
+          return null;
+      }
+      else{
+         PageReference reference = new PageReference('/apex/LeadSelectMedEmail_VF?id='+currLead.Id);
+         reference.setRedirect(true);
+         return reference;
+      }
+       return null;   
       
    }
    //Completing dupcheck
@@ -326,6 +394,8 @@ Public Class LeadDuplicate_AC
       else if(hideTreatingSection == True)
           updateLead.Treating_Medical_Professional_Contact_Id__c = medicalConId;
       updateLead.Wish_Family_ContactId__c = contactId;
+      updateLead.Hidden_Best_Contact_Person_Id__c = bestToConId;
+      updateLead.Hidden_Additional_Parent_Id__c = additionalParentId;
       updateLead.Contact_Dup_Check__c = 'Block Contact Dup';
       updateLead.Dup_Check__c = 'Block Lead Dup';
       Update updateLead;

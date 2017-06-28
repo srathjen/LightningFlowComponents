@@ -21,12 +21,19 @@ public class VolunteerActivities_AC_Test {
         newTask.OwnerId = volUser.Id;
         newTask.Status = 'Not Started';
         update newTask;
+        
+        System.assertEquals('Not Started', newTask.Status);
+        
         System.RunAs(volUser) {
             PageReference pageref = Page.VolunteerActivities_VF;
             Test.setCurrentPageReference(pageref);
             VolunteerActivities_AC volunteerWorkitems = new VolunteerActivities_AC();
             volunteerWorkitems.getOpenActivities();
         }
+        
+        //Used to check salesforce governor limits
+        OrientationandTrainingUtil.checkGovernorLimits();
+        
     }
     
     //Non Wish open activities
@@ -47,12 +54,17 @@ public class VolunteerActivities_AC_Test {
         newTask.Status = 'Not Started';
         update newTask;
         
+        System.assertEquals(newTask.WhatId, newWishOpportunity.Id);
+        
         System.RunAs(volUser) {
             PageReference pageref = Page.VolunteerActivities_VF;
             Test.setCurrentPageReference(pageref);
             VolunteerActivities_AC volunteerWorkitems = new VolunteerActivities_AC();
             volunteerWorkitems.getOpenActivities();
         }
+        
+        //Used to check salesforce governor limits
+        OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     //Non Wish open activities
@@ -83,6 +95,9 @@ public class VolunteerActivities_AC_Test {
             VolunteerActivities_AC volunteerWorkitems = new VolunteerActivities_AC();
             volunteerWorkitems.getOpenActivities();
         }
+        
+        //Used to check salesforce governor limits
+        OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     //Non Wish Event Activities
@@ -107,7 +122,12 @@ public class VolunteerActivities_AC_Test {
             Test.setCurrentPageReference(pageref);
             VolunteerActivities_AC volunteerWorkitems = new VolunteerActivities_AC();
             volunteerWorkitems.getOpenActivities();
+            volunteerWorkitems.taskId = newTask.Id;
+            volunteerWorkitems.closeTask();
         }
+        
+        //Used to check salesforce governor limits
+        OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     
@@ -120,6 +140,9 @@ public class VolunteerActivities_AC_Test {
         Case newCase = new Case();
         newCase.Id = parentCase.Id;
         newCase.Presentation_Date__c = System.today();
+        newCase.Time__c = '10.50pm';
+        newCase.Name_of_Location__c = 'testLocation';
+        newCase.Location_Address__c = 'test';
         newCase.Wish_Presentation_Set__c  = True;
         update newCase;
         Task newTask = OrientationandTrainingUtil.wishPresentationNotSet(parentCase.Id);
@@ -132,6 +155,9 @@ public class VolunteerActivities_AC_Test {
             VolunteerActivities_AC volunteerWorkitems = new VolunteerActivities_AC();
             volunteerWorkitems.getCloseActivities();
         }
+        
+        //Used to check salesforce governor limits
+        OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     //Non Wish open activities
@@ -158,6 +184,9 @@ public class VolunteerActivities_AC_Test {
             VolunteerActivities_AC volunteerWorkitems = new VolunteerActivities_AC();
             volunteerWorkitems.getCloseActivities();
         }
+        
+        //Used to check salesforce governor limits
+        OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     //Non Wish open activities
@@ -188,6 +217,9 @@ public class VolunteerActivities_AC_Test {
             VolunteerActivities_AC volunteerWorkitems = new VolunteerActivities_AC();
             volunteerWorkitems.getCloseActivities();
         }
+        
+        //Used to check salesforce governor limits
+        OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     //Non Wish Event Activities
@@ -213,8 +245,11 @@ public class VolunteerActivities_AC_Test {
             VolunteerActivities_AC volunteerWorkitems = new VolunteerActivities_AC();
             volunteerWorkitems.getCloseActivities();
         }
+        
+        //Used to check salesforce governor limits
+        OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     
-        
+    
 }

@@ -4,6 +4,9 @@
         <field>Account.Chapter_Id__c</field>
     </columns>
     <columns>
+        <field>CONTACT_ID</field>
+    </columns>
+    <columns>
         <field>USER_ID</field>
     </columns>
     <columns>
@@ -45,7 +48,6 @@
     <filter>
         <criteriaItems>
             <column>Contact.Region_Chapter__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>

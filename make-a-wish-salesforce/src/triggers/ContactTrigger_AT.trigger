@@ -50,11 +50,11 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                     newContact.BirthDate = dtConverted ;
                 }
             }
-            
+            system.debug('%BeforeInsert MailingCountry 1%'+newContact.MailingState);
            
-                newContact.MailingCountry = 'United States';
-                newContact.OtherCountry = 'United States';
-           
+                //newContact.MailingCountry = 'United States';
+                //newContact.OtherCountry = 'United States';
+           system.debug('%BeforeInsert MailingCountry 2%'+newContact.MailingState);
         }
     }
     // Birthdate concatenation at before update.
@@ -69,11 +69,10 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         for(Contact newContact : Trigger.new)
         { 
             
-            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
-            {
-                newContact.MailingCountry = 'United States';
-                newContact.OtherCountry = 'United States';
-            }
+             system.debug('%BeforeInsert MailingCountry 3%'+newContact.MailingState);
+                //newContact.MailingCountry = 'United States';
+                //newContact.OtherCountry = 'United States';
+           
             
             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
@@ -92,6 +91,24 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                         newContact.BirthDate = dtConverted ;
                     }
                 }
+                
+                
+                 if(newContact.RecordTypeId == volunteerRecordTypeId || newContact.RecordTypeId == boardMemberRT)
+                 {
+                 
+                    if(newContact.is_Active_Volunteer__c == false && (newContact.Active_Board_Member__c == True || newContact.Active_Non_Wish_Granter__c==True
+                            || newContact.Active_Single_Day_Event_Volunteer__c == True || newContact.Active_Wish_Granter__c == True))
+                    {
+                        newContact.is_Active_Volunteer__c = True;
+                    }  
+                    
+                    if(newContact.is_Active_Volunteer__c == True && (newContact.Active_Board_Member__c == false && newContact.Active_Non_Wish_Granter__c==false
+                            && newContact.Active_Single_Day_Event_Volunteer__c == false && newContact.Active_Wish_Granter__c == false))
+                    {
+                        newContact.is_Active_Volunteer__c = false;
+                    } 
+                 
+                 }
                 
                 if(newContact.RecordTypeId == wichChildRecordTypeId && newContact.IsContactInfoUpdated__c == true)
                 {
@@ -235,6 +252,8 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                     }
                 }
             } 
+            
+             system.debug('%BeforeInsert MailingCountry 4%'+newContact.MailingState);
         }
          
         if(wishChildIdSet.size() > 0 && RecursiveTriggerHandler.accountRecursive == true)
@@ -242,7 +261,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
           RecursiveTriggerHandler.accountRecursive = false;
             for(npe4__Relationship__c dbRelationShip : [SELECT Id,npe4__Contact__c,npe4__RelatedContact__c FROM npe4__Relationship__c WHERE npe4__Contact__c IN: wishChildIdSet AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId]){
                 wishFamliySet.add(dbRelationShip.npe4__RelatedContact__c);  
-                system.debug('@@@@@@@@@@@@@@ dbRelationShip  @@@@@@@@@@@@@@@'+dbRelationShip);                    
+                
             }
             
             for(Contact dbWishFamily : [SELECT Id,Name,FirstName,LastName,Phone,Email,MailingStreet,MailingCity,AccountId,Account.npe01__SYSTEM_AccountType__c,Hidden_Use_as_Household_Address__c,Use_as_Household_Address__c,MailingState,MailingCountry,MailingPostalCode,Hidden_First_Name__c,
@@ -412,12 +431,12 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         Map<String,List<Contact>> contactMapforSharing = new Map<String,List<Contact>>();
         
         for(Contact conCurrRec: [SELECT Id,migrated_record__c, AccountId,RecordTypeId,Region_Chapter__c, 
-                                Region_Chapter__r.Name FROM Contact WHERE Id IN :Trigger.newMap.keySet()])
+                                Region_Chapter__r.Name,MailingState FROM Contact WHERE Id IN :Trigger.newMap.keySet()])
         {
             
             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
-                if(conCurrRec.RecordTypeId == volunteerRecordTypeId || conCurrRec.RecordTypeId == boardMemberRT)
+               /* if(conCurrRec.RecordTypeId == volunteerRecordTypeId || conCurrRec.RecordTypeId == boardMemberRT)
                 {
                     contactAccountIdMap.put(conCurrRec.id,conCurrRec);
                 }
@@ -425,8 +444,8 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 {
                    // if(RecursiveTriggerHandler.isFirstTime == true ) 
                     conList.Add(conCurrRec);
-                }
-                
+                } */
+                 conList.Add(conCurrRec);
             }
             
             if(conCurrRec.Region_Chapter__c!= Null)
@@ -437,7 +456,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                    contactMapforSharing.put(conCurrRec.Region_Chapter__r.Name, new List<contact>{conCurrRec});
                   
             }
-            
+            system.debug('%BeforeInsert MailingCountry 5%'+conCurrRec.MailingState);
             
         }
         
@@ -447,9 +466,11 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         if(conList.size() > 0){
             ContactTriggerHandler.CreateAffliation(conList);
         }
-        if(contactAccountIdMap.size() > 0){
+      /*  if(contactAccountIdMap.size() > 0){
             ContactTriggerHandler.updateAffiliation(contactAccountIdMap);
-        }
+        }*/
+        
+        
         
     }
    
@@ -499,10 +520,15 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                     volunteerContactMap.put(newContact.id, newContact);
                 }
                 
-                if(newContact.MailingPostalCode != Trigger.oldMap.get(newContact.id).MailingPostalCode && newContact.RecordTypeId == volunteerRecordTypeId)
+                if(newContact.MailingPostalCode != Trigger.oldMap.get(newContact.id).MailingPostalCode && newContact.RecordTypeId == volunteerRecordTypeId && newContact.MailingAddressVerified__c == false)
                 {
                     contactMap.put(newContact.id, newContact);
-                    zipCodesSet.add(newContact.MailingPostalCode);
+                    if(newContact.MailingPostalCode != null && String.valueOf(newContact.MailingPostalCode).length() > 5 && String.valueOf(newContact.MailingPostalCode).contains('-')) {
+                        zipCodesSet.add(String.valueOf(newContact.MailingPostalCode).split('-')[0]);
+                    } else {
+                        zipCodesSet.add(newContact.MailingPostalCode);
+                    }
+                    
                 }
                 if(newContact.Email != Null && trigger.oldMap.get(newContact.id).Email != newContact.Email && trigger.oldMap.get(newContact.id).Email != Null){
                     
@@ -527,6 +553,8 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
             if(newContact.RecordTypeId == familyContactRecordTypeId && newContact.Relationship__c != trigger.oldMap.get(newContact.id).Relationship__c){
                 wishFamilyContacMap.put(newContact.Id,newContact);
             }
+            
+            system.debug('%BeforeInsert MailingCountry 6%'+newContact.MailingState);
         }
         
         
@@ -599,46 +627,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         ContactTriggerHandler.updateRelationship(wishFamilyContacMap);
     }
     
-    /* //Reset the address verification checkbox if the address has changed
-    if(trigger.isBefore && trigger.isUpdate)
-    {
-        for(Contact newContact : trigger.new){
-            // the mailing address is already marked as verified
-            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null &&
-            // one of the mailing address fields changed
-            (newContact.MailingStreet != Trigger.oldMap.get(newContact.Id).MailingStreet ||
-            newContact.MailingState != Trigger.oldMap.get(newContact.Id).MailingState ||
-            newContact.MailingStateCode != Trigger.oldMap.get(newContact.Id).MailingStateCode ||
-            newContact.MailingCity != Trigger.oldMap.get(newContact.Id).MailingCity ||
-            newContact.MailingPostalCode != Trigger.oldMap.get(newContact.Id).MailingPostalCode
-            )
-            ){
-                system.debug('Update MailingAddressVerified__c>>>>'+newContact.MailingAddressVerified__c);
-                newContact.MailingAddressVerified__c = false;
-                newContact.MailingAddressVerificationAttempted__c = null;
-                
-            }
-            
-            // the other address is already marked as verified
-            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null &&
-            // one of the other address fields changed
-            (newContact.OtherStreet != Trigger.oldMap.get(newContact.Id).OtherStreet ||
-            newContact.OtherState != Trigger.oldMap.get(newContact.Id).OtherState ||
-            newContact.OtherStateCode != Trigger.oldMap.get(newContact.Id).OtherStateCode ||
-            newContact.OtherCity != Trigger.oldMap.get(newContact.Id).OtherCity ||
-            newContact.OtherPostalCode != Trigger.oldMap.get(newContact.Id).OtherPostalCode
-            )
-            ){
-                system.debug('Update OtherAddressVerified__c>>>>'+newContact.OtherAddressVerified__c);
-                newContact.OtherAddressVerified__c = false;
-                newContact.OtherAddressVerificationAttempted__c = null;
-                
-            }
-        }
-    
-    }*/
-	
-	 //Reset the address verification checkbox if the address has changed
+     //Reset the address verification checkbox if the address has changed
     if(trigger.isBefore && trigger.isUpdate)
     {
         for(Contact newContact : trigger.new){
@@ -669,7 +658,6 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
             newContact.OtherPostalCode != Trigger.oldMap.get(newContact.Id).OtherPostalCode
             )
             ){
-                system.debug('Update OtherAddressVerified__c>>>>'+newContact.OtherAddressVerified__c);
                 newContact.OtherAddressVerified__c = false;
                 newContact.OtherAddressVerificationAttempted__c = null;
                 
@@ -677,5 +665,15 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         }
     
     }
-  
+    
+    if(Trigger.isBefore && Trigger.isDelete)
+    {
+       Map<Id,Contact> conMap = new Map<Id,Contact>();
+       for(Contact con : Trigger.old)
+       {
+           conMap.put(con.id,con);
+       }
+       if(conMap.size() > 0)
+          contactTriggerHandler.UpdateAffiliationPrimaryStatus(conMap);
+    }
 }

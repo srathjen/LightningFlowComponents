@@ -789,6 +789,7 @@ public class RelationshipsViewer_AC{
             update updateContactMap.Values();
             if(isChildSuccessMessage == true){
                 Id updateContactTaskRecordTypeId = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.updateContactRT).getRecordTypeId();
+                 Id staffRt = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
                 isMessage = false;
                 ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Thank you for updating the contact information! Your changes have been recorded and sent to the Chapter Staff for approval.'));
                 
@@ -805,7 +806,7 @@ public class RelationshipsViewer_AC{
                 newContactTask.WhoId = parentWish.ContactId;
                 newContactTask.OwnerId = parentWish.OwnerId;
                 newContactTask.ActivityDate = System.today() + 1;
-                newContactTask.RecordTypeId = updateContactTaskRecordTypeId;
+                newContactTask.RecordTypeId = staffRt;
                 //newContactTask.Description  = 'Review contact information updated by the volunteer';
                 newContactTask .Subject = 'Review contact information updated by the volunteer';
                 demogarphicTaskList.add(newContactTask );

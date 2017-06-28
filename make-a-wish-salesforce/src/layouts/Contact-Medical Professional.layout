@@ -96,10 +96,6 @@
                 <behavior>Edit</behavior>
                 <field>Department</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Migrated_Record__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
@@ -198,11 +194,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MailingAddressVerified__c</field>
+                <field>MailingAddressVerificationAttempted__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MailingAddressVerificationAttempted__c</field>
+                <field>MailingAddressVerified__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -216,11 +212,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>OtherAddressVerified__c</field>
+                <field>OtherAddressVerificationAttempted__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>OtherAddressVerificationAttempted__c</field>
+                <field>OtherAddressVerified__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -253,6 +249,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>LastModifiedById</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Test_Record__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -326,7 +326,6 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Account.ACC_RECORDTYPE</fields>
         <fields>Account.NAME</fields>
         <fields>npe5__Primary__c</fields>
         <fields>Constituent_Code__c</fields>

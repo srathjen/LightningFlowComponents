@@ -63,6 +63,10 @@
                 <showScrollbars>false</showScrollbars>
                 <width>100%</width>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Knowledge_Link__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
     </layoutSections>
@@ -99,6 +103,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Wish_Assist__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Hidden_Lead_Id__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -189,6 +197,14 @@
                 <behavior>Edit</behavior>
                 <field>Status_Date__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Non_Participant_Emergency_Number__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>CreatedDate</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
@@ -219,6 +235,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Comment_for_PWL_Not_Met__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>IsRushChildSummary__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -260,6 +280,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Interview_date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Additional_Interview_Date1__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -305,11 +329,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Anticipated_Start_Date__c</field>
+                <field>Start_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Start_Date__c</field>
+                <field>Anticipated_Start_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -472,6 +496,22 @@
         <style>CustomLinks</style>
     </layoutSections>
     <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Wish Participants</label>
+        <layoutColumns>
+            <layoutItems>
+                <height>200</height>
+                <page>WishParticipants_VF</page>
+                <showLabel>false</showLabel>
+                <showScrollbars>true</showScrollbars>
+                <width>100%</width>
+            </layoutItems>
+        </layoutColumns>
+        <style>OneColumn</style>
+    </layoutSections>
+    <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
@@ -501,7 +541,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Unique_Wish_Record_Identifier__c</field>
+                <field>Test_Record__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -629,8 +669,7 @@
         <relatedList>cg__CaseFile__c.cg__Case__c</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Wish_Child_Form__c.Case__c</relatedList>
+        <relatedList>RelatedAttachmentList</relatedList>
     </relatedLists>
     <relatedObjects>ContactId</relatedObjects>
     <relatedObjects>AccountId</relatedObjects>
@@ -644,16 +683,11 @@
     <summaryLayout>
         <masterLabel>00h36000004nDxm</masterLabel>
         <sizeX>3</sizeX>
-        <sizeY>4</sizeY>
+        <sizeY>3</sizeY>
         <summaryLayoutItems>
             <field>ChapterName__c</field>
             <posX>0</posX>
             <posY>0</posY>
-        </summaryLayoutItems>
-        <summaryLayoutItems>
-            <field>ContactId</field>
-            <posX>0</posX>
-            <posY>1</posY>
         </summaryLayoutItems>
         <summaryLayoutItems>
             <field>CaseNumber</field>
@@ -684,11 +718,6 @@
             <field>OwnerId</field>
             <posX>2</posX>
             <posY>2</posY>
-        </summaryLayoutItems>
-        <summaryLayoutItems>
-            <field>Anticipated_Start_Date__c</field>
-            <posX>2</posX>
-            <posY>3</posY>
         </summaryLayoutItems>
         <summaryLayoutStyle>CaseInteraction</summaryLayoutStyle>
     </summaryLayout>

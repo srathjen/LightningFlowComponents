@@ -353,8 +353,8 @@ trigger AccountTrigger_AT on Account (before insert,after insert,after update,be
         }
         
     }
-	
-	//Reset the address verification checkbox if the address has changed
+    
+    //Reset the address verification checkbox if the address has changed
     if(trigger.isBefore && trigger.isUpdate)
     {
         for(Account newAccount : trigger.new){

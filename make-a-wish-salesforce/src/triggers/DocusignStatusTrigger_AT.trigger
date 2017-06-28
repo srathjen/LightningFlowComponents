@@ -18,15 +18,19 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
         set<Id> volunteercontactIdSet = new Set<Id>();
         Set<Id> parentWishIdSet = new Set<Id>();
         Set<Id> dstsIds = new Set<Id>();
+        Set<Id> wishClearenceSetId = new Set<Id>();
         
         for(dsfs__DocuSign_Status__c dsts:Trigger.new)
         {
             if(dsts.dsfs__Envelope_Status__c == 'Completed' && Trigger.oldMap.get(dsts.id).dsfs__Envelope_Status__c  != 'Completed' && dsts.dsfs__Case__c != Null){
-                if(dsts.dsfs__Subject__c == 'Wish Child Summary Form'){
+                if(dsts.dsfs__Subject__c == 'Wish Child Medical Summary' ||dsts.dsfs__Subject__c == 'RUSH Child Medical Summary'){
                     parentWishIdSet.add(dsts.dsfs__Case__c);
                 }
+                if(dsts.dsfs__Subject__c == 'Wish Clearance' || dsts.dsfs__Subject__c == 'RUSH Wish Clearance'){
+                    wishClearenceSetId.add(dsts.dsfs__Case__c);
+                }
             }
-            system.debug('@@@@@@@@@@@ dsts @@@@@@@@@@@@@'+dsts);
+           
             if(dsts.dsfs__Envelope_Status__c == 'Completed' && Trigger.oldMap.get(dsts.id).dsfs__Envelope_Status__c  != 'Completed')
             {
                 dstsIds.add(dsts.id);
@@ -44,7 +48,7 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
             }
             if(dsts.dsfs__Envelope_Status__c == 'Completed' && Trigger.oldMap.get(dsts.id).dsfs__Envelope_Status__c  != 'Completed' && dsts.dsfs__Lead__c != Null)
             {
-                system.debug('@@@@@@@@@@@ Enter If @@@@@@@@@@@@@'+dsts);
+                
                 leadIdSet.add(dsts.dsfs__Lead__c);
             }
         }
@@ -100,6 +104,16 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
             Map<Id,Case> updatechildSummaryMap = new Map<Id,Case>();
             for(Case dbCase : [SELECT Id,Child_s_Medical_Summary_received_date__c FROM Case WHERE Id IN: parentWishIdSet]){
                 dbCase.Child_s_Medical_Summary_received_date__c = system.today();
+                updatechildSummaryMap.put(dbCase.Id,dbCase);
+            }
+            update updatechildSummaryMap.values();
+        }
+        
+        if(wishClearenceSetId.size() > 0){
+            
+             Map<Id,Case> updatechildSummaryMap = new Map<Id,Case>();
+            for(Case dbCase : [SELECT Id,Wish_Clearance_Received_Date__c FROM Case WHERE Id IN: parentWishIdSet]){
+                dbCase.Wish_Clearance_Received_Date__c = system.today();
                 updatechildSummaryMap.put(dbCase.Id,dbCase);
             }
             update updatechildSummaryMap.values();

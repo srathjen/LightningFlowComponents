@@ -154,4 +154,36 @@
         <errorMessage><!-- There is no available seats for this training --></errorMessage>
         <name>Restrict_no_available_seats</name>
     </validationRules>
+    <workflowTasks>
+        <name>O_T_ET_Orientation_Cancelled</name>
+        <subject><!-- O&amp;T ET : Orientation Cancelled --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>O_T_ET_Orientation_Completed</name>
+        <subject><!-- O&amp;T ET : Orientation Completed --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>O_T_ET_Successfully_Registered_for_Orientation</name>
+        <subject><!-- O&amp;T ET : Successfully Registered for Orientation --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>O_T_ET_Successfully_Registered_for_Orientation_VSF</name>
+        <subject><!-- O&amp;T ET : Successfully Registered for Orientation(VSF) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>O_T_ET_Successfully_Registered_for_Training</name>
+        <subject><!-- O&amp;T ET : Successfully Registered for Training --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>O_T_ET_Successfully_Registered_for_Training_VSF</name>
+        <subject><!-- O&amp;T ET : Successfully Registered for Training (VSF) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>O_T_ET_Training_Cancelled</name>
+        <subject><!-- O&amp;T ET : Training Cancelled --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>O_T_ET_Training_Completed</name>
+        <subject><!-- O&amp;T ET : Training Completed --></subject>
+    </workflowTasks>
 </CustomObjectTranslation>

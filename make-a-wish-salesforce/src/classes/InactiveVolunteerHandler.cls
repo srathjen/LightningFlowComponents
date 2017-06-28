@@ -18,9 +18,34 @@ Public class  InactiveVolunteerHandler{
                     newTask.Subject='Inactive Volunteer - review volunteer opportunities';
                     ActiveTask.add(newTask);
                     system.debug('@@@@@@@@@@@'+currRec+'*****');     
+            }
+            Insert ActiveTask;
         }
-         Insert ActiveTask;
+       // updateBCandCOIVolunteerInactive(userList,True);
     }
     
-}
+   
+     @future
+     public static void updateBCandCOIVolunteerInactive(Set<Id> inactiveVolunteerIdSet,Boolean isInactiveVolunteer){
+            List<Background_check__c> updateBCList = New List<Background_check__c>();
+            List<Conflict_Of_Interest__c> updateCOIList = New List<Conflict_Of_Interest__c>();
+            for(Background_check__c currBC : [SELECT Id,Volunteer_is_Inactive__c FROM Background_check__c WHERE Volunteer__c IN :inactiveVolunteerIdSet AND Volunteer_is_Inactive__c !=: isInactiveVolunteer]){
+                currBc.Volunteer_is_Inactive__c = isInactiveVolunteer;
+                updateBCList.add(currBc);
+            }
+            
+            if(updateBCList.Size() > 0){
+                 Update updateBCList;
+            }
+            for(Conflict_Of_Interest__c currCOI : [SELECT Id,Volunteer_is_Inactive__c FROM Conflict_Of_Interest__c WHERE Volunteer_Contact__c IN : inactiveVolunteerIdSet AND Volunteer_is_Inactive__c !=: isInactiveVolunteer]){
+                currCOI.Volunteer_is_Inactive__c = isInactiveVolunteer;
+                updateCOIList.add(currCOI);
+            }
+            if(updateCOIList.Size() > 0){
+                Update updateCOIList;
+            }
+        
+    }
+    
+    
 }

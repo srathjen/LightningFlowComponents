@@ -273,7 +273,7 @@ public class VolunteerProfile_AC{
         List<SelectOption> options = new List<SelectOption>();
         Schema.DescribeFieldResult fieldResult =  Contact.Gender__c.getDescribe();
         List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-        options.add(new SelectOption('', 'None',isDisabled));
+        options.add(new SelectOption('', 'None'));
         for( Schema.PicklistEntry currVal : picklistValues)
         {      options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
          

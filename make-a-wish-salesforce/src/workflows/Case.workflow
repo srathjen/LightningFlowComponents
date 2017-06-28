@@ -10,7 +10,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Budget_Approval_Template</template>
+        <template>Automated_Wish_Granting_Email_Templates/Case_Budget_Approval_Template</template>
     </alerts>
     <alerts>
         <fullName>Case_Abandoned_Wish_Alert</fullName>
@@ -65,7 +65,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Budget_Approval_Template</template>
+        <template>Automated_Wish_Granting_Email_Templates/Case_Budget_Approval_Template</template>
     </alerts>
     <alerts>
         <fullName>Case_Budget_Submitted_Alert</fullName>
@@ -77,7 +77,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Budget_Submitted_Template</template>
+        <template>Automated_Wish_Granting_Email_Templates/Case_Budget_Submitted_Template</template>
     </alerts>
     <alerts>
         <fullName>Case_Email_Alert_to_Qualifying_Medical_Professional_when_wish_is_determined</fullName>
@@ -112,7 +112,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Contact_Rush_Wish_Reminder_Alerts</template>
+        <template>Automated_Wish_Granting_Email_Templates/Contact_Rush_Wish_Reminder_Alerts</template>
     </alerts>
     <alerts>
         <fullName>Case_Send_Email_to_Wish_Granter_Alert</fullName>
@@ -124,7 +124,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Send_Email_to_Wish_Granter_Alert</template>
+        <template>Automated_Wish_Granting_Email_Templates/Case_Send_Email_to_Wish_Granter_Alert</template>
     </alerts>
     <alerts>
         <fullName>Case_Unassigned_Wish_Email_Alert</fullName>
@@ -136,7 +136,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Unassigned_Email_Template</template>
+        <template>Automated_Wish_Granting_Email_Templates/Case_Unassigned_Email_Template</template>
     </alerts>
     <alerts>
         <fullName>Case_Wish_Presentation_Not_Set</fullName>
@@ -152,7 +152,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Send_Email_to_Volunteer_for_Blank_Presentation_date</template>
+        <template>Automated_Wish_Granting_Email_Templates/Case_Send_Email_to_Volunteer_for_Blank_Presentation_date</template>
     </alerts>
     <alerts>
         <fullName>Granting_Case_Development_team_regarding_wish_presentation_alert</fullName>
@@ -164,7 +164,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Case_Send_Email_to_Development_for_Presentation_Party</template>
+        <template>Automated_Wish_Granting_Email_Templates/Case_Send_Email_to_Development_for_Presentation_Party</template>
     </alerts>
     <alerts>
         <fullName>National_MAC_Team_Email_Alert</fullName>
@@ -191,7 +191,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/RUSH_Child_Medical_Summary</template>
+        <template>Automated_Wish_Granting_Email_Templates/RUSH_Child_Medical_Summary</template>
     </alerts>
     <alerts>
         <fullName>Rush_Wish_Clarence_Alert</fullName>
@@ -203,7 +203,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/RUSH_Wish_Clearance</template>
+        <template>Automated_Wish_Granting_Email_Templates/RUSH_Wish_Clearance</template>
     </alerts>
     <alerts>
         <fullName>Send_Email_to_MAC_Team</fullName>
@@ -219,6 +219,50 @@
         <senderAddress>wvcsupport@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Medical_Eligibility_Emails/Send_Email_to_Loacl_MAC_Team_Template</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Email_when_VO_is_inactive</fullName>
+        <description>Send Email when VO is inactive</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Airport Greeter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Celebrity Host</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Intake Manager</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Translator &amp; Interpreter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Volunteer Manager</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Assist Phone Greeter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Coordinator</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Granter</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <recipients>
+            <recipient>Wish Granter Mentor</recipient>
+            <type>caseTeam</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Automated_Wish_Granting_Email_Templates/Case_Send_Email_to_Wish_Granter_Alert</template>
     </alerts>
     <alerts>
         <fullName>Send_Reply_Emal_to_National_MAC_team_Alert</fullName>
@@ -264,7 +308,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Wish_Family_Form_Not_Submitted_Template</template>
+        <template>Automated_Volunteer_Templates/Wish_Family_Form_Not_Submitted_Template</template>
     </alerts>
     <alerts>
         <fullName>Wish_Interview_Date_Not_Set_After_21_Days_Email_Alert</fullName>
@@ -280,7 +324,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Wish_Interview_21_Days_Template</template>
+        <template>Automated_Volunteer_Templates/Wish_Interview_21_Days_Template</template>
     </alerts>
     <fieldUpdates>
         <fullName>Case_Budget_Approved</fullName>
@@ -338,6 +382,15 @@
         <field>isEmailWishGranter__c</field>
         <literalValue>0</literalValue>
         <name>Case Uncheck is Email Wish Granter</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>UncheckVOInactive</fullName>
+        <field>Hidden_VOinactive__c</field>
+        <literalValue>0</literalValue>
+        <name>UncheckVOInactive</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
@@ -424,16 +477,46 @@
             <name>Case_Abandoned_Wish_Alert</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>Case_ET_Abandoned_Wish_Notification</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <description>This rule will fire when the case sub status is changed as &quot;Abandoned&quot;.</description>
-        <formula>AND(ISCHANGED(Sub_Status__c),ISPICKVAL(Sub_Status__c, &apos;Abandoned&apos;),Migrated_Record__c = false)</formula>
+        <formula>AND(ISCHANGED(Sub_Status__c),ISPICKVAL(Sub_Status__c, &apos;Abandoned&apos;), $Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Case %3A SendEmailToCaseMember</fullName>
+        <actions>
+            <name>Send_Email_when_VO_is_inactive</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>UncheckVOInactive</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Case_ET_Wish_Granter_is_now_Inactive</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Hidden_VOinactive__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
         <fullName>Case %3A Unassigned  Wish Workflow Rule</fullName>
         <actions>
             <name>Case_Unassigned_Wish_Email_Alert</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Case_ET_Wish_Unassigned_Alert</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <booleanFilter>1 AND (2 OR 3) AND 4 AND 5</booleanFilter>
@@ -457,9 +540,9 @@
             <value>True</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow will fire when the wish is not assigned for particular time period</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -474,6 +557,10 @@
             <name>Case_Uncheck_Presentation_Not_Set</name>
             <type>FieldUpdate</type>
         </actions>
+        <actions>
+            <name>Case_ET_Wish_Presentation_Date_Reminder</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Case.RecordTypeId</field>
@@ -486,9 +573,9 @@
             <value>True</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>Send Email to Volunteer for Blank Presentation date</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -568,6 +655,10 @@
             <name>Case_Email_Alert_to_Qualifying_Medical_Professional_when_wish_is_determined</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>Case_ET_Your_patient_decided_on_a_wish</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Case.Status</field>
@@ -575,9 +666,9 @@
             <value>Wish Determined</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>It send a email notification to Qualifying Medical Professional when wish is determined.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -588,6 +679,10 @@
             <name>Case_Email_Alert_to_Qualifying_Medical_Professional_when_wish_is_granted</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>Case_ET_Your_patient_s_wish_has_been_fulfilled</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Case.Status</field>
@@ -595,9 +690,9 @@
             <value>Granted</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>Email alert for qualifying medical professional when the wish is granted</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -607,6 +702,10 @@
         <actions>
             <name>Case_Rush_Wish_Reminder_Alerts</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Case_ET_Rush_Wish_Notification</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <criteriaItems>
@@ -620,9 +719,9 @@
             <value>Wish</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>Used to send an alert for contact owner when the Rush field is checked</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -633,9 +732,13 @@
             <name>Granting_Case_Development_team_regarding_wish_presentation_alert</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>Case_ET_Wish_Presentation_Details</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <description>This will fire for granting case to send an email alert to dev team when presentation date is set and presentation set check box true</description>
-        <formula>AND(RecordType.Name = &apos;Wish Granting&apos;,NOT(ISBLANK(Presentation_Date__c)),ISCHANGED(Presentation_Date__c),Wish_Presentation_Set__c = true, Migrated_Record__c = false)</formula>
+        <formula>AND(RecordType.Name = &apos;Wish Granting&apos;,NOT(ISBLANK(Presentation_Date__c)),ISCHANGED(Presentation_Date__c),Wish_Presentation_Set__c = true,  $Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -648,16 +751,11 @@
             <name>UpdateIsRushWishChild</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>false</active>
+        <active>true</active>
         <criteriaItems>
             <field>Case.IsRushChildSummary__c</field>
             <operation>equals</operation>
             <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
         </criteriaItems>
         <description>This rule will fire when rush is checked and if admin send the email to medical professional from wish medical summary.</description>
         <triggerType>onAllChanges</triggerType>
@@ -672,16 +770,11 @@
             <name>UpdateIsRushWishClearence</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>false</active>
+        <active>true</active>
         <criteriaItems>
             <field>Case.IsRushWishClearence_ChildSummary__c</field>
             <operation>equals</operation>
             <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
         </criteriaItems>
         <description>This rule will fire when rush  is checked and if you send the email to medical professional  from wish clearence.</description>
         <triggerType>onAllChanges</triggerType>
@@ -743,6 +836,10 @@
             <name>Case_Uncheck_is_Email_Wish_Granter</name>
             <type>FieldUpdate</type>
         </actions>
+        <actions>
+            <name>Case_ET_Wish_Granter_is_now_Inactive</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <booleanFilter>1 AND 2 AND 3</booleanFilter>
         <criteriaItems>
@@ -756,9 +853,9 @@
             <value>False</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.RecordTypeId</field>
-            <operation>equals</operation>
-            <value>Wish</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This Email alert is used to send an email to wish granters</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -802,9 +899,9 @@
             <value>False</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <criteriaItems>
             <field>Case.Interview_date__c</field>
@@ -816,6 +913,10 @@
             <actions>
                 <name>Wish_Family_Form_Not_Submitted_Alert</name>
                 <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Case_ET_Wish_Paperwork_Packet_Reminder</name>
+                <type>Task</type>
             </actions>
             <offsetFromField>Case.Interview_date__c</offsetFromField>
             <timeLength>5</timeLength>
@@ -903,7 +1004,7 @@
         <priority>Normal</priority>
         <protected>false</protected>
         <status>In Progress</status>
-        <subject>Budget is approved</subject>
+        <subject>Budget is approved: Acknowledge Receipt of Approval</subject>
     </tasks>
     <tasks>
         <fullName>Budget_needs_to_be_revised</fullName>
@@ -914,6 +1015,138 @@
         <protected>false</protected>
         <status>In Progress</status>
         <subject>Budget needs to be revised</subject>
+    </tasks>
+    <tasks>
+        <fullName>Case_ET_Abandoned_Wish_Notification</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Case ET : Abandoned Wish Notification</subject>
+    </tasks>
+    <tasks>
+        <fullName>Case_ET_Budget_Approval_Request</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Case ET : Budget Approval Request</subject>
+    </tasks>
+    <tasks>
+        <fullName>Case_ET_Interview_Date_Reminder</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Case ET : Interview Date Reminder</subject>
+    </tasks>
+    <tasks>
+        <fullName>Case_ET_Rush_Wish_Notification</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Case ET : Rush Wish Notification</subject>
+    </tasks>
+    <tasks>
+        <fullName>Case_ET_Wish_Granter_is_now_Inactive</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Case ET : Wish Granter is now Inactive</subject>
+    </tasks>
+    <tasks>
+        <fullName>Case_ET_Wish_Paperwork_Packet_Reminder</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Case ET : Wish Paperwork Packet Reminder</subject>
+    </tasks>
+    <tasks>
+        <fullName>Case_ET_Wish_Presentation_Date_Reminder</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Case ET : Wish Presentation Date Reminder</subject>
+    </tasks>
+    <tasks>
+        <fullName>Case_ET_Wish_Presentation_Details</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Case ET : Wish Presentation Details</subject>
+    </tasks>
+    <tasks>
+        <fullName>Case_ET_Wish_Unassigned_Alert</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Case ET : Wish Unassigned Alert</subject>
+    </tasks>
+    <tasks>
+        <fullName>Case_ET_Your_patient_decided_on_a_wish</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Case ET : Your patient decided on a wish!</subject>
+    </tasks>
+    <tasks>
+        <fullName>Case_ET_Your_patient_s_wish_has_been_fulfilled</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Case ET : Your patient&apos;s wish has been fulfilled!</subject>
     </tasks>
     <tasks>
         <fullName>Follow_up_on_wish_clearance</fullName>

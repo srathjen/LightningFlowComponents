@@ -33,7 +33,7 @@ public with sharing class VolunteerActivities_AC {
         Map<Id, String> eventNameMap = new Map<Id, String>();
         Map<Id, String> wishNameMap = new Map<Id, String>();
         //List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status != \'Completed\' AND OwnerId =:volunteerUserId ORDER BY CreatedDate DESC');
-        List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status != \'Completed\' ORDER BY CreatedDate DESC');
+        List<Task> openActivities = Database.Query('SELECT Id, WhatId, Owner.Name, What.Type, WhoId, Subject, ActivityDate, OwnerId, Status FROM Task WHERE Status != \'Completed\' ORDER BY CreatedDate DESC');
         if(openActivities.size() > 0) {
             for(Task checkType : openActivities) {
                 if(checkType.what.Type == 'Case') {
@@ -119,7 +119,7 @@ public with sharing class VolunteerActivities_AC {
         Map<Id, String> eventNameMap = new Map<Id, String>();
         Map<Id, String> wishNameMap = new Map<Id, String>();
         //List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status = \'Completed\' AND OwnerId =:volunteerUserId');
-        List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status = \'Completed\' ORDER BY LastModifiedDate DESC'); 
+        List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, Owner.Name, WhoId, Subject, OwnerId,ActivityDate, Status FROM Task WHERE Status = \'Completed\' ORDER BY LastModifiedDate DESC'); 
         if(openActivities.size() > 0) {
             for(Task checkType : openActivities) {
                 if(checkType.what.Type == 'Case') {
@@ -166,7 +166,6 @@ public with sharing class VolunteerActivities_AC {
             
             
             for(Task taskTypeNameMerge : openActivities) {
-                
                 CloseActivitiesWrapper mergeInfoWithTask = new CloseActivitiesWrapper();
                 mergeInfoWithTask.volunteerTask = taskTypeNameMerge;
                 if(taskTypeNameMerge.WhatId != null) {
@@ -175,7 +174,6 @@ public with sharing class VolunteerActivities_AC {
                             mergeInfoWithTask.wishType = eventTypeMap.get(taskTypeNameMerge.WhatId);
                             mergeInfoWithTask.nameField = eventNameMap.get(taskTypeNameMerge.WhatId);
                         }
-                        
                     } else if(wishNameMap.containsKey(taskTypeNameMerge.WhatId)) {
                         mergeInfoWithTask.wishType = 'Wish';
                         mergeInfoWithTask.nameField = wishNameMap.get(taskTypeNameMerge.WhatId);
@@ -190,22 +188,19 @@ public with sharing class VolunteerActivities_AC {
         return closedActivitiesList;
     }
     
-    
-    public PageReference closeTask() {
-        List<Task> taskList = [SELECT Id FROM Task WHERE Id =: taskId];
-        if(taskList.size() > 0) {
-            taskList[0].Status = 'Completed';
-            update taskList;
-        }
-        PageReference pg = new PageReference('/VolunteerActivities_VF');
-        return pg;
+    //This method is used to close the task when the volunteer try to close the task from the My Task page
+    public void closeTask() {
+        FutureHandler.UpdateTask(taskId);
     }
+    
+    //Wrapper class for open activities
     public class OpenActivitiesWrapper {
         public Task volunteerTask {get; set;}
         public string wishType {get;set;}
         public string nameField {get;set;}
-    }    
+    }
     
+    //Wrapper class for close activities
     public class CloseActivitiesWrapper {
         public Task volunteerTask {get; set;}
         public string wishType {get;set;}

@@ -6,7 +6,7 @@ Description : This UserTrigger_AT is used to create a public group and public gr
               user record is created.
 *************************************************************************************************/
 
-trigger UserTrigger_AT on User (after insert,after update,before update) {
+trigger UserTrigger_AT on User (after insert,after update,before update,before insert) {
     List<User> newUserList = new List<User>();
     Map<Id,User> prospectiveUserMap = new Map<Id,User>();
     
@@ -64,6 +64,7 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
     {
         Set<Id> inActiveUserIdSet = new Set<Id>();
         Set<Id> inactiveUserSet=new Set<Id>();
+        Set<Id> activeUserSet=new Set<Id>();
         Map<Id, Id> newUserRoleIdMap = new Map<Id, Id>(); // Used to hold the new user role Id
         Map<Id, Id> oldUserRoleIdMap = new Map<Id, Id>(); // Used to hold the new user role Id
         Set<string> userIdsSet = new Set<string>(); // useed to holds unique rolename
@@ -76,13 +77,17 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
                      inActiveUserIdSet.add(newUser.Id);
                  }
                   if(newUser.ContactId != Null  && newUser.IsActive  == false && trigger.oldMap.get(newUser .id).IsActive == True){
-                    inactiveUserSet.add(newUser .ContactId);
+                    inactiveUserSet.add(newUser.ContactId);
                   } 
-                 
+                  
+                  if(newUser.ContactId != Null  && newUser.IsActive  == True && trigger.oldMap.get(newUser .id).IsActive == False){
+                    activeUserSet.add(newUser.ContactId);
+                  } 
+                  
                  if(newUser.UserRoleId != Null && newUser.UserRoleId != trigger.oldMap.get(newUser.id).UserRoleId){
                      userIdsSet.add(newUser.id);
                  }
-             }
+                 }
 
             if(newUser.UserRoleId != null && Trigger.oldMap.get(newUser.Id).UserRoleId != newUser.UserRoleId) {
                 newUserRoleIdMap.put(newUser.Id, newUser.UserRoleId);
@@ -103,8 +108,21 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
         
          if(inactiveUserSet.size() > 0 && inactiveUserSet != Null){
             InactiveVolunteerHandler.createTaskforVolunteerManager(inactiveUserSet);
+            InactiveVolunteerHandler.updateBCandCOIVolunteerInactive(inactiveUserSet,True);
          }
-
+        if(activeUserSet.Size() > 0){
+            Set<Id> activeVolunteerIdSet = new Set<Id>();
+            for(npe5__Affiliation__c currAff : [SELECT id,npe5__Status__c,npe5__Contact__c  FROM npe5__Affiliation__c WHERE  npe5__Contact__c IN :activeUserSet]){
+                   
+                   if(currAff.npe5__Status__c == 'Active'){
+                       activeVolunteerIdSet.add(currAff.npe5__Contact__c); 
+                   }              
+            }
+            if(activeVolunteerIdSet.Size() > 0){
+                InactiveVolunteerHandler.updateBCandCOIVolunteerInactive(activeVolunteerIdSet,False);
+            }
+               
+        }
          //Used to add new user to chatter group based on their role name
         if(newUserRoleIdMap.size() > 0 ) {
             System.debug('newUserRoleIdMap>>>>>>>>>'+newUserRoleIdMap);
@@ -119,6 +137,16 @@ trigger UserTrigger_AT on User (after insert,after update,before update) {
     }
     
      Set<Id> UserIdSet=new Set<Id>();
+     if(Trigger.isbefore && Trigger.isInsert)
+     {
+      String DocuSignUserid = Label.DSProSFUsername;
+      for(User newUser : Trigger.new)
+      {
+       if(newUser.IsActive == true){
+        newUser.dsfs__DSProSFUsername__c = DocuSignUserid;
+        }
+       }
+     }
      if(Trigger.isbefore && Trigger.isUpdate)
      {
          Set<Id> inActiveCommunityUserIdSet = new Set<Id>();

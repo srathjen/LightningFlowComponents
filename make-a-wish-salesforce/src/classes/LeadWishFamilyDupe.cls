@@ -10,7 +10,10 @@ global class LeadWishFamilyDupe {
                              Email, DOB__c ,Phone,chapterName__c, 
                              City, State, Street, PostalCode, Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
                              Medical_Professional_Phone__c, Medical_Professional_Email__c, Treating_Medical_Professional_First_Name__c,
-                             Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Phone__c, Treating_Medical_Professional_Email__c FROM Lead
+                             Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Phone__c, Treating_Medical_Professional_Email__c , 
+                             Best_contact_for_Physician_Email__c,Best_Contact_for_Physician_Last_Name__c ,Best_Contact_for_Physician_First_Name__c,
+                             Additional_Parent_City__c,Additional_Parent_Email__c,Additional_Parent_First_Name__c,Additional_Parent_Last_Name__c,
+                             Additional_Parent_Phone__c,Additional_Parent_Postal_Code__c,Additional_Parent_State__c,Additional_Parent_Street__c FROM Lead
                              WHERE id = :leadId limit 1];
                              
                              
@@ -26,7 +29,11 @@ global class LeadWishFamilyDupe {
                          WHERE (FirstName = :currLead.Treating_Medical_Professional_First_Name__c AND 
                          LastName = :currLead.Treating_Medical_Professional_Last_Name__c 
                          AND (Phone = :currLead.Treating_Medical_Professional_Phone__c Or Email =: currLead.Treating_Medical_Professional_Email__c) 
-                         AND RecordTypeId = :MedicalProfessionalRT)]; 
+                         AND RecordTypeId = :MedicalProfessionalRT)];
+                         
+      List<Contact> dupBestContactPhysicians = [SELECT id,FirstName,LastName,Email FROM Contact 
+                         WHERE LastName =: currLead.Best_Contact_for_Physician_Last_Name__c AND FirstName=: currLead.Best_Contact_for_Physician_First_Name__c AND
+                         Email=: currLead.Best_contact_for_Physician_Email__c AND  RecordTypeId = :MedicalProfessionalRT ]; 
                          
         List<Contact> dupFamilyContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
                          MailingState, MailingPostalCode FROM Contact
@@ -42,14 +49,32 @@ global class LeadWishFamilyDupe {
                                AND MailingPostalCode = :currLead.PostalCode 
                                AND MailingCity = :currLead.City) OR (Email = :currLead.Email) )
                                AND Phone = :currLead.Phone))) AND RecordTypeId = :wishFamilyRT];  
+          List<Contact> dupAdditionalFamilyContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
+                         MailingState, MailingPostalCode FROM Contact
+                         WHERE (FirstName = :currLead.Additional_Parent_First_Name__c AND LastName = :currLead.Additional_Parent_Last_Name__c AND 
+                               (((Email = :currLead.Additional_Parent_Email__c OR Phone = :currLead.Additional_Parent_Phone__c) 
+                               AND (MailingStreet = :currLead.Additional_Parent_Street__c AND MailingState = :currLead.Additional_Parent_State__c
+                               AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c
+                               AND MailingCity = :currLead.Additional_Parent_City__c))  
+                               OR ((Phone = :currLead.Additional_Parent_Phone__c OR (MailingStreet = :currLead.Additional_Parent_Street__c  AND MailingState = :currLead.Additional_Parent_State__c
+                               AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c
+                               AND MailingCity = :currLead.Additional_Parent_City__c))
+                               AND Email = :currLead.Additional_Parent_Email__c )  OR (((MailingStreet = :currLead.Additional_Parent_Street__c AND MailingState = :currLead.Additional_Parent_State__c
+                               AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c
+                               AND MailingCity = :currLead.Additional_Parent_City__c) OR (Email = :currLead.Additional_Parent_Email__c ) )
+                               AND Phone = :currLead.Additional_Parent_Phone__c ))) AND RecordTypeId = :wishFamilyRT];  
            
                               
-          if((dupMedicalContacts.size() > 0 || dupTreatingContacts.size() >0) && dupFamilyContacts.size() > 0) 
+          if((dupMedicalContacts.size() > 0 || dupTreatingContacts.size() >0) && (dupFamilyContacts.size() > 0 || dupAdditionalFamilyContacts.Size() >0)) 
              return 'There might be an existing Wish Family and Medical Professional. Please click on [OK] to review the existing record.';                   
           else if(dupMedicalContacts.size() > 0 || dupTreatingContacts.size() >0)     
              return 'There might be an existing Medical Professional. Please click on [OK] to review the existing record.';
           else if(dupFamilyContacts.size() > 0)
              return 'There might be an existing Wish Family. Please click on [OK] to review the existing record.';
+          else if(dupAdditionalFamilyContacts.Size() > 0)
+             return 'There might be an existing Additional Parent/Guardian. Please click on [OK] to review the existing record.'; 
+          else if(dupBestContactPhysicians.Size() > 0)
+              return 'There might be an existing Best Physician Contact. Please click on [OK] to review the existing record.';
           else return null;
                          
                                                              

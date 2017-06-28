@@ -564,4 +564,20 @@
         <errorMessage><!-- Please enter the value for Reason Inactive --></errorMessage>
         <name>Volunteer_Opp_Reason_Inactive</name>
     </validationRules>
+    <workflowTasks>
+        <name>VO_ET_Volunteer_Opportunity_Approved_NW</name>
+        <subject><!-- VO ET : Volunteer Opportunity Approved (NW) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>VO_ET_Volunteer_Opportunity_Not_Approved</name>
+        <subject><!-- VO ET : Volunteer Opportunity Not Approved --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>VO_ET_Volunteer_Opportunity_Not_Approved_NW</name>
+        <subject><!-- VO ET : Volunteer Opportunity Not Approved (NW) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>VO_ET_Volunteer_Opportunity_Wish_Approved</name>
+        <subject><!-- VO ET : Volunteer Opportunity Wish Approved --></subject>
+    </workflowTasks>
 </CustomObjectTranslation>

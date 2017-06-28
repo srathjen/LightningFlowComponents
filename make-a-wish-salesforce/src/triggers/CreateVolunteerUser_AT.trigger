@@ -26,8 +26,8 @@ trigger CreateVolunteerUser_AT on Contact (After Insert, After Update) {
         {
             if(currContact.recordTypeid == volunteerRecordTypeId 
             && currContact.Do_Not_Create_User__c==False 
-            && currContact.Migrated_Record__c == True
-            && currContact.recordTypeid != trigger.oldmap.get(currContact.id).recordTypeid)
+            && currContact.recordTypeid != trigger.oldmap.get(currContact.id).recordTypeid) 
+              
             {
                conId.add(currContact.id);
             }

@@ -109,7 +109,10 @@ public class ContactTrigger_AT_Test{
          dbcontact.FirstName = 'Smith';
          dbcontact.MobilePhone='9003910427';
          dbcontact.Email ='Smith@gmail.com';
+         dbcontact.Same_as_Household_Address__c = True;
          update dbcontact;
+         
+            
          }
          
      }
@@ -291,19 +294,53 @@ public class ContactTrigger_AT_Test{
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);
-        
+        childFamily.Hidden_First_Name__c  = '';
+        Update childFamily;
         Contact updateCon = new Contact();
         updateCon.Hidden_First_Name__c  = 'Chandra';
         updateCon.Hidden_Last_Name__c  = 'Sekar';
         updateCon.Hidden_Phone__c = '8056913402';
         updateCon.Hidden_Email__c  = 'testmst@gmail.com';
         updateCon.Hidden_Street__c = 'North Street';
-        updateCon.Hidden_city__c = 'Chennai';
         updateCon.Hidden_State__c = 'Alabama';
         updateCon.Hidden_Country__c =  'United States';
         updateCon.Hidden_Zip_Code__c = '621010';
+        updateCon.HiddenOtherPhone__c = '9876543210';
+        updateCon.HiddenMobilePhone__c = '8907654321';
+        updateCon.Hidden_Use_as_Household_Address__c = True;
         updateCon.IsRejected_Contact_Info__c = true;
         updateCon.Id = childCon.Id;
         update updateCon;
+        updateCon.Hidden_city__c = 'Chennai';
+        Update updateCon;
+        
+        
+     }
+     
+     public testmethod static void  updateRelationship(){
+        Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
+        Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
+        npe4__Relationship__c  newRelationShip= OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id); 
+        childFamily.Relationship__c = 'Brother';
+        childFamily.Email = 'Test@msil.com';
+        Update childFamily;
+        
+        Contact wishchildCon = OrientationandTrainingUtil.CreateWishChildCon();
+        Contact wishchildFamily = OrientationandTrainingUtil.CreateWishFamily();
+        npe4__Relationship__c   relationship = new npe4__Relationship__c();
+        newRelationShip.Parent_Legal_Guardian__c = True;
+        relationship.npe4__Contact__c = wishchildCon.Id;
+        relationship.npe4__RelatedContact__c = wishchildFamily.Id;
+        relationship.npe4__Status__c = 'Active';
+        relationship.npe4__Type__c = 'Father';
+        Insert relationship;
+        
+     }
+     
+     public testmethod static void deleteContact()
+     {
+         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
+         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
+         Delete childFamily;
      }
 }

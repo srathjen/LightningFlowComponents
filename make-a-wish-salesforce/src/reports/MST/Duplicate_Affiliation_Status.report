@@ -6,7 +6,6 @@
     <filter>
         <criteriaItems>
             <column>ACCOUNT_RECORDTYPE</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Account.HH_Account</value>
         </criteriaItems>

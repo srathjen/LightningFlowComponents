@@ -26,7 +26,7 @@
         <titleSize>18</titleSize>
     </chart>
     <columns>
-        <field>OWNER</field>
+        <field>Case.UniqueWishRecordIdentifier__c</field>
     </columns>
     <columns>
         <field>CONTACT.NAME</field>
@@ -41,9 +41,6 @@
         <field>Case.Qualified_Date__c</field>
     </columns>
     <columns>
-        <field>Case.Copy_1_Qualified_Date__c</field>
-    </columns>
-    <columns>
         <field>Case.Ready_to_Assign_Date__c</field>
     </columns>
     <columns>
@@ -51,6 +48,9 @@
     </columns>
     <columns>
         <field>Case.Wish_Determined_Date__c</field>
+    </columns>
+    <columns>
+        <field>Case.Sub_Status__c</field>
     </columns>
     <columns>
         <field>Case.Wish_Type__c</field>
@@ -73,37 +73,40 @@
     <columns>
         <field>Case.End_Date__c</field>
     </columns>
+    <columns>
+        <field>OWNER</field>
+    </columns>
     <description>Complete Wish Pipeline</description>
     <filter>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Wish Design,Wish Scheduled,Budget Approval - Submitted,Budget Approval - Approved,Hold,Inactive</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Contact.Medical_Professional,Contact.Volunteer_Contact,Contact.Wish_Family,Contact.Board_Member</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Test_Record__c</column>
+            <operator>equals</operator>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
@@ -124,6 +127,8 @@
     <reportType>CaseList</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
+    <sortColumn>CONTACT.NAME</sortColumn>
+    <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
         <dateColumn>CREATED_DATEONLY</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

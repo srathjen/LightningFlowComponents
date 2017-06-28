@@ -10,6 +10,8 @@ global class batch_FillWishPresentationDate  implements Database.Batchable<sObje
     
     global void execute(Database.BatchableContext BC, List<Case> scope) 
     {
+        Constant_AC  constant = new Constant_Ac();
+        Id staffTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
         List<Task> createTaskList = new List<Task>();
         
         Map<Id,Case> updateGrantedCaseMap = new Map<Id,Case>();
@@ -30,6 +32,7 @@ global class batch_FillWishPresentationDate  implements Database.Batchable<sObje
                 newTask.subject='Wish Presentation not set';
                 newTask.ownerid=currCase.ownerid;
                 newTask.Whatid=currCase.Parent.id;
+                newTask.RecordTypeId = staffTaskRT;
                 newTask.WhoId=currCase.Parent.ContactId;
                 newTask.ActivityDate=Date.Today()+1;
                 createTaskList.add(newTask);

@@ -13,6 +13,22 @@
         <name>Account_Phone__c</name>
     </fields>
     <fields>
+        <label><!-- Active Board Member --></label>
+        <name>Active_Board_Member__c</name>
+    </fields>
+    <fields>
+        <label><!-- Active Non-Wish Granter --></label>
+        <name>Active_Non_Wish_Granter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Active Single Day Event Volunteer --></label>
+        <name>Active_Single_Day_Event_Volunteer__c</name>
+    </fields>
+    <fields>
+        <label><!-- Active Wish Granter --></label>
+        <name>Active_Wish_Granter__c</name>
+    </fields>
+    <fields>
         <label><!-- Actor/Actress --></label>
         <name>Actor_Actress__c</name>
     </fields>
@@ -457,6 +473,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Granted Age --></label>
+        <name>Granted_Age__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden BirthDate --></label>
         <name>HiddenBirthDate__c</name>
     </fields>
@@ -479,6 +499,10 @@
     <fields>
         <label><!-- Hidden First Name --></label>
         <name>Hidden_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Granted Date --></label>
+        <name>Hidden_Granted_Date__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Is We Need To Expedite The Proces --></label>
@@ -803,6 +827,29 @@ and the date it was or will be granted. --></help>
         <name>Last_Continuing_Edu_Date__c</name>
     </fields>
     <fields>
+        <name>LeadSource</name>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fax</masterLabel>
+            <translation><!-- Fax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Online</masterLabel>
+            <translation><!-- Online --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Lead Created Date --></label>
         <name>Lead_Created_Date__c</name>
     </fields>
@@ -1033,6 +1080,10 @@ and the date it was or will be granted. --></help>
             <masterLabel>Writing</masterLabel>
             <translation><!-- Writing --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Provided additional information --></label>
+        <name>Provided_additional_information__c</name>
     </fields>
     <fields>
         <label><!-- Provider Type --></label>
@@ -2381,6 +2432,26 @@ provide contact information for each site on which you are active. --></help>
         <relationshipLabel><!-- Contacts --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- Hidden Type of Contact --></label>
+        <name>Type_of_Contact__c</name>
+        <picklistValues>
+            <masterLabel>Both</masterLabel>
+            <translation><!-- Both --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Parent/Guardian</masterLabel>
+            <translation><!-- Parent/Guardian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Qualifing</masterLabel>
+            <translation><!-- Qualifing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Referring</masterLabel>
+            <translation><!-- Referring --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Understand --></label>
         <name>Understand__c</name>
         <picklistValues>
@@ -2623,6 +2694,10 @@ provide contact information for each site on which you are active. --></help>
         <name>Wish_Liability_IsSigned__c</name>
     </fields>
     <fields>
+        <label><!-- Wish Notes --></label>
+        <name>Wish_Notes__c</name>
+    </fields>
+    <fields>
         <label><!-- Work Phone --></label>
         <name>Work_Phone__c</name>
     </fields>
@@ -2719,7 +2794,7 @@ provide contact information for each site on which you are active. --></help>
         <name>isApproved__c</name>
     </fields>
     <fields>
-        <label><!-- Hidden is Active Volunteer --></label>
+        <label><!-- Active Volunteer --></label>
         <name>is_Active_Volunteer__c</name>
     </fields>
     <fields>
@@ -2751,17 +2826,17 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Alternate Email is an optional fourth email: Not personal, preferred, or work email. --></help>
+        <help>הדואר האלקטרוני החלופי הוא כתובת דואר אלקטרוני רביעית אופציונלית: דואר אלקטרוני שאינו אישי, מועדף או בעבודה.</help>
         <label><!-- Alternate Email --></label>
         <name>npe01__AlternateEmail__c</name>
     </fields>
     <fields>
-        <help><!-- See Preferred Email field. --></help>
+        <help>ראה שדה דואר אלקטרוני מועדף.</help>
         <label><!-- Personal Email --></label>
         <name>npe01__HomeEmail__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: Uses primary address type field to determine Home Address from Mailing or Other address. --></help>
+        <help>נוסחה: שימוש בשדה סוג הכתובת הראשית כדי לקבוע את הכתובת בבית לפי הכתובת למשלוח דואר או אחרת.</help>
         <label><!-- Home Address --></label>
         <name>npe01__Home_Address__c</name>
     </fields>
@@ -2776,17 +2851,17 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__Lifetime_Giving_History_Amount__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: In order of preference, the SYSTEM_AccountType field, the Account Type field, and &quot;Organization&quot;. --></help>
+        <help>נוסחה: לפי סדר העדפות, השדה SYSTEM_AccountType, השדה &apos;סוג חשבון&apos; ו&apos;ארגון&apos;.</help>
         <label><!-- Organization Type --></label>
         <name>npe01__Organization_Type__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: If the Primary Address Type is Other, the Mailing Address.  If the Secondary Address Type is Other, the Other Address. --></help>
+        <help>נוסחה: אם סוג הכתובת הראשית הוא &apos;אחר&apos;, הכתובת למשלוח דואר.  אם סוג הכתובת המשנית הוא &apos;אחר&apos;, הכתובת האחרת.</help>
         <label><!-- Other Address --></label>
         <name>npe01__Other_Address__c</name>
     </fields>
     <fields>
-        <help><!-- Which phone number should be used for most communications involving this Contact? --></help>
+        <help>באיזה מספר טלפון יש להשתמש עבור רוב ההתקשרויות עם איש קשר זה?</help>
         <label><!-- Preferred Phone --></label>
         <name>npe01__PreferredPhone__c</name>
         <picklistValues>
@@ -2807,7 +2882,7 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Which email should be used for most communications involving this Contact? --></help>
+        <help>באיזו כתובת דואר אלקטרוני יש להשתמש עבור רוב ההתקשרויות עם איש קשר זה?</help>
         <label><!-- Preferred Email --></label>
         <name>npe01__Preferred_Email__c</name>
         <picklistValues>
@@ -2824,51 +2899,51 @@ provide contact information for each site on which you are active. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Which type of address is the mailing address? --></help>
+        <help>מהו סוג הכתובת למשלוח דואר?</help>
         <label><!-- Primary Address Type --></label>
         <name>npe01__Primary_Address_Type__c</name>
         <picklistValues>
             <masterLabel>Home</masterLabel>
-            <translation><!-- Home --></translation>
+            <translation>בית</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Other</masterLabel>
-            <translation><!-- Other --></translation>
+            <translation>אחר</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Work</masterLabel>
-            <translation><!-- Work --></translation>
+            <translation>עבודה</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Excludes this Contact from One to One or Bucket account processing. --></help>
+        <help>מניעת הכללה של איש קשר זה בעיבוד חשבון &apos;אחד לאחד&apos; או Bucket.</help>
         <label><!-- Private --></label>
         <name>npe01__Private__c</name>
     </fields>
     <fields>
-        <help><!-- What type of address is the other address? --></help>
+        <help>מהו סוג הכתובת האחרת?</help>
         <label><!-- Secondary Address Type --></label>
         <name>npe01__Secondary_Address_Type__c</name>
         <picklistValues>
             <masterLabel>Home</masterLabel>
-            <translation><!-- Home --></translation>
+            <translation>בית</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Other</masterLabel>
-            <translation><!-- Other --></translation>
+            <translation>אחר</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Work</masterLabel>
-            <translation><!-- Work --></translation>
+            <translation>עבודה</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Indicates which model drives Account relationship behavior: Individual (Bucket) or One-to-One --></help>
+        <help>מציין איזה מודל קובע את ההתנהגות של קשרי חשבונות: אישי (Bucket) או &apos;אחד לאחד&apos;</help>
         <label><!-- DEPRECATED - _SYSTEM: ACCOUNT PROCESSOR --></label>
         <name>npe01__SystemAccountProcessor__c</name>
         <picklistValues>
             <masterLabel>Individual</masterLabel>
-            <translation><!-- Individual --></translation>
+            <translation>אישי</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>One-to-One</masterLabel>
@@ -2881,22 +2956,22 @@ provide contact information for each site on which you are active. --></help>
         <name>npe01__SystemIsIndividual__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: &quot;Individual&quot; or &quot;Organization&quot; depending on Account setting. --></help>
+        <help>נוסחה: &apos;אישי&apos; או &apos;ארגוני&apos; בהתאם להגדרת החשבון.</help>
         <label><!-- Type of Account --></label>
         <name>npe01__Type_of_Account__c</name>
     </fields>
     <fields>
-        <help><!-- See Preferred Email field. --></help>
+        <help>ראה שדה דואר אלקטרוני מועדף.</help>
         <label><!-- Work Email --></label>
         <name>npe01__WorkEmail__c</name>
     </fields>
     <fields>
-        <help><!-- See &apos;Preferred Phone&apos; field. --></help>
+        <help>ראה שדה טלפון מועדף.</help>
         <label><!-- Work Phone --></label>
         <name>npe01__WorkPhone__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: If the Primary Address Type is Work, the Mailing Address.  If the Secondary Address Type is Work, the Other Address. --></help>
+        <help>נוסחה: אם סוג הכתובת הראשית הוא &apos;עבודה&apos;, הכתובת למשלוח דואר.  אם סוג הכתובת המשנית הוא &apos;עבודה&apos;, הכתובת האחרת.</help>
         <label><!-- Work Address --></label>
         <name>npe01__Work_Address__c</name>
     </fields>
@@ -2974,7 +3049,7 @@ provide contact information for each site on which you are active. --></help>
         <name>npo02__MembershipJoinDate__c</name>
     </fields>
     <fields>
-        <help><!-- Determines which household names this contact is NOT included as part of. --></help>
+        <help>הגדרה זו קובעת באילו שמות של משקי בית איש קשר זה אינו נכלל.</help>
         <label><!-- Naming Exclusions --></label>
         <name>npo02__Naming_Exclusions__c</name>
         <picklistValues>
@@ -3043,22 +3118,22 @@ provide contact information for each site on which you are active. --></help>
         <name>npo02__SmallestAmount__c</name>
     </fields>
     <fields>
-        <help><!-- Total soft credit amount last year. --></help>
+        <help>סכום הקרדיט הכולל בשנה שעברה.</help>
         <label><!-- Soft Credit Last Year --></label>
         <name>npo02__Soft_Credit_Last_Year__c</name>
     </fields>
     <fields>
-        <help><!-- Total soft credit amount this year --></help>
+        <help>סכום הקרדיט הכולל בשנה הנוכחית</help>
         <label><!-- Soft Credit This Year --></label>
         <name>npo02__Soft_Credit_This_Year__c</name>
     </fields>
     <fields>
-        <help><!-- Total amount in soft credits for this Contact&apos;s lifetime. Defined in the Household Settings tab. --></help>
+        <help>סכום הקרדיט הכולל במחזור החיים של איש קשר זה. נקבע בכרטיסיית ההגדרות של משק הבית.</help>
         <label><!-- Soft Credit Total --></label>
         <name>npo02__Soft_Credit_Total__c</name>
     </fields>
     <fields>
-        <help><!-- Total soft credit amount two years ago. --></help>
+        <help>סכום הקרדיט הכולל לפני שנתיים.</help>
         <label><!-- Soft Credit Two Years Ago --></label>
         <name>npo02__Soft_Credit_Two_Years_Ago__c</name>
     </fields>
@@ -3430,6 +3505,10 @@ provide contact information for each site on which you are active. --></help>
             <section>Contact Details</section>
         </sections>
         <sections>
+            <label><!-- Driver Information Section --></label>
+            <section>Driver Information Section</section>
+        </sections>
+        <sections>
             <label><!-- Employment Information --></label>
             <section>Employment Information</section>
         </sections>
@@ -3518,4 +3597,16 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Merge_Contacts --></label>
         <name>npsp__Merge_Contacts</name>
     </webLinks>
+    <workflowTasks>
+        <name>Contact_ET_Application_Approved</name>
+        <subject><!-- Contact ET : Application Approved --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Contact_ET_Application_Completed</name>
+        <subject><!-- Contact ET : Application Completed --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Contact_ET_Application_Status_Incomplete</name>
+        <subject><!-- Contact ET : Application Status Incomplete --></subject>
+    </workflowTasks>
 </CustomObjectTranslation>

@@ -3,7 +3,7 @@ Description : This controller used to upload the wish child photo to the
 attachment and get public site image url from S-drive then update the contact
 filed.
 *****************************************************************************/
-public with sharing class AttachmentUploadController {
+public without sharing class AttachmentUploadController {
     public Id recId{get;set;}
     public string name;
     public boolean onComplete{get;set;}

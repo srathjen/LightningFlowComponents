@@ -239,7 +239,8 @@ It will update the file path to lead file record that created during attachment 
     @Future(callout = true)
     public static void  createAttachmentReviewTask(String jsontaskListString, Set<Id> caseIdsSet){
         Constant_AC  constant = new Constant_Ac();    
-        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId(); 
+        Id  staffTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
         List<cg__CaseFile__c> caseFileList = (List<cg__CaseFile__c>)Json.deserialize(jsontaskListString,List<cg__CaseFile__c>.class);
         
         Id contactId;
@@ -270,6 +271,7 @@ It will update the file path to lead file record that created during attachment 
                 Task reviewTask = new Task();
                 reviewTask.Subject = 'Review Volunteer Upload';
                 reviewTask.WhatId = createTask.cg__Case__c;
+                reviewTask.RecordTypeId = staffTaskRT;
                 reviewTask.ActivityDate = System.today().addDays(10);
                 if(caseOwnerMap.containsKey(createTask.cg__Case__c)) {
                     reviewTask.OwnerId = caseOwnerMap.get(createTask.cg__Case__c).OwnerId;

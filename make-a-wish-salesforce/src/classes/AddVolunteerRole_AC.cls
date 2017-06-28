@@ -198,6 +198,7 @@ As well as it will update the volunteer opportunity.*/
                             newVolOpp.RecordTypeId = eventRT;
                             newVolOpp.Chapter_Name__c = currNonWishRec.Chapter__c;
                             newVolOpp.Description__c = processnewVolCount.Description__c;
+                           // newVolOpp.isEventVolunteerOpportunity__c = true;
                             newVolOpportunityList.add(newVolOpp);
                         }
                     }
@@ -243,6 +244,7 @@ As well as it will update the volunteer opportunity.*/
                                 newVolOpp.HiddenVolunteer_Count_Description__c = processnewVolCount.Id;
                                 newVolOpp.Chapter_Name__c = currNonWishRec.Chapter__c;
                                 newVolOpp.Description__c = processnewVolCount.Description__c;
+                               // newVolOpp.isEventVolunteerOpportunity__c = true;
                                 newVolOpportunityList.add(newVolOpp);
                             }
                         }
@@ -417,9 +419,9 @@ As well as it will update the volunteer opportunity.*/
     public pageReference register(){
         try{
             boolean isUpdate = false;
-           // isReferesh = true;
+            isReferesh = true;
             inputmode = false;
-          //  outputmode = false;
+            outputmode = false;
             isnew = false;
             String chatperRoleId;
             String volunteerStatus; 
@@ -441,7 +443,7 @@ As well as it will update the volunteer opportunity.*/
                                                               AND Volunteer_Name__c = Null AND Non_Wish_Event__c =: nonWishEvent.id  
                                                               AND RecordTypeId =:eventRT AND IsApproved__c = False AND Reason_Inactive__c =: Null 
                                                               AND HiddenVolunteer_Count_Description__c =: CountId  Limit 1];
-                                                              
+             if(dbVolOpporunity.size() > 0){                                                 
             dbRole = [SELECT Id,Name,Role_Name__c,Role_Name__r.Name From Chapter_Role__c  WHERE Id =: dbVolOpporunity[0].Chapter_Role_Opportunity__c];
             
             for(Volunteer_Opportunity__c dbVol : [Select id,RecordTypeId,HiddenVolunteer_Count_Description__c,Role__c,Chapter_Name__r.Name,
@@ -461,7 +463,7 @@ As well as it will update the volunteer opportunity.*/
                                                               Chapter_Role_Opportunity__c,Chapter_Role_Opportunity__r.Role_Name__c,
                                                               Chapter_Name__c,Volunteer_Name__c,Non_Wish_Event__c,Reason_Inactive__c 
                                                               FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c =: dbVolOpporunity[0].Non_Wish_Event__c  AND Chapter_Role_Opportunity__c =: dbVolOpporunity[0].Chapter_Role_Opportunity__c 
-                                                              AND Chapter_Role_Opportunity__r.Role_Name__c =: dbVolOpporunity[0].Chapter_Role_Opportunity__r.Role_Name__c AND (Status__c =: 'Pending' OR IsApproved__c =: true) AND Volunteer_Name__c =: currUser.ContactId] ){
+                                                              AND Chapter_Role_Opportunity__r.Role_Name__c =: dbVolOpporunity[0].Chapter_Role_Opportunity__r.Role_Name__c AND (Status__c =: 'Pending' OR IsApproved__c =: true) AND Volunteer_Name__c =: currUser.ContactId AND HiddenVolunteer_Count_Description__c =:dbVolOpporunity[0].HiddenVolunteer_Count_Description__c] ){
                  if(curruser.contactId != Null && dbRole.Role_Name__r.Name != label.Sigle_Day_Volunteer){
                  
                  ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,'You already registered for this event'));
@@ -530,7 +532,7 @@ As well as it will update the volunteer opportunity.*/
                     }
                         
                 }
-                
+                }
                  else{
                     ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,'This volunteer opportunity has already been filled. Please register for another available volunteer opportunity'));
                     return null;

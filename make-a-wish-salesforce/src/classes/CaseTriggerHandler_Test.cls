@@ -309,7 +309,7 @@ public class CaseTriggerHandler_Test {
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithAnticipatedStartDate(wishChild.Id);
         Id wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();        
-        Id taskPlanningRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+        Id taskPlanningRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
         Chapter_Action_Track__c newTrack = OrientationandTrainingUtil.createChapterActionTrack(); 
         newTrack.Chapter_Name__c = chapterAccount.Id;
         newTrack.Task_name__c= 'Test';
@@ -339,7 +339,7 @@ public class CaseTriggerHandler_Test {
          newTrack.Chapter_Name__c = chapterAccount.Id;
         insert newTrack;
         Id wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();        
-        Id taskPlanningRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+        Id taskPlanningRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
         Task newTask = new Task();
         newTask.Subject = 'Test';
         newTask.ActivityDate = Date.Today();
@@ -444,6 +444,9 @@ public class CaseTriggerHandler_Test {
         parentCase.ContactId = wishChild.Id;
         parentCase.Diagnosis_Verification_Receive_Date__c = Date.today();
         insert parentCase;
+        
+        Task wishGrantingNewTask = new Task(Subject = 'Wish concept approval', Status = 'New', WhoId = wishChild.Id, WhatId = parentCase.Id);
+        insert wishGrantingNewTask;
         Case childCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
         childCase.RecordTypeId = wishDeterminationRT;
         childCase.ParentId = parentCase.Id;

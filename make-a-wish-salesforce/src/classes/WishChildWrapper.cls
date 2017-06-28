@@ -15,6 +15,7 @@ public class WishChildWrapper {
     public String plzExplain{get;set;}
     public String conditioDeteriorate{get;set;}
     public String stillEligibile {get;set;}
+    public String additionalInfo {get;set;}
     Public String wishChildEligibilityNotes {get;set;} 
     public List<String> communicationList {get;set;}
     public String selectedItemValue {get; set;}

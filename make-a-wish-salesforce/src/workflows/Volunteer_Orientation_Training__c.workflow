@@ -112,6 +112,10 @@
             <name>Volunteer_O_T_Orienation_Registered_for_Virtual_Self_faced_Training</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>O_T_ET_Successfully_Registered_for_Orientation_VSF</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
@@ -124,9 +128,9 @@
             <value>Registered</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <criteriaItems>
             <field>Class_Offering__c.RecordTypeId</field>
@@ -142,6 +146,10 @@
             <name>Volunteer_O_T_Registered_for_Virtual_Self_faced_Training</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>O_T_ET_Successfully_Registered_for_Training_VSF</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
@@ -154,9 +162,9 @@
             <value>Registered</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <criteriaItems>
             <field>Class_Offering__c.RecordTypeId</field>
@@ -172,6 +180,10 @@
             <name>O_T_Orientation_Cancelled_Email_Alert</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>O_T_ET_Orientation_Cancelled</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
@@ -184,9 +196,9 @@
             <value>Cancelled</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow will fire when the orientation is cancelled</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -196,6 +208,10 @@
         <actions>
             <name>O_T_Orientation_Completed_Email_Alert</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>O_T_ET_Orientation_Completed</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <criteriaItems>
@@ -209,9 +225,9 @@
             <value>Completed</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow will fire when the orientation is completed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -221,6 +237,10 @@
         <actions>
             <name>O_T_Orientation_Registered_Email_Alert</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>O_T_ET_Successfully_Registered_for_Orientation</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <criteriaItems>
@@ -234,9 +254,9 @@
             <value>Registered</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <criteriaItems>
             <field>Class_Offering__c.RecordTypeId</field>
@@ -252,6 +272,10 @@
             <name>O_T_Training_Cancelled_Email_Alert</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>O_T_ET_Training_Cancelled</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
@@ -264,9 +288,9 @@
             <value>Cancelled</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow will fire when the training is cancelled</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -276,6 +300,10 @@
         <actions>
             <name>O_T_Training_Completed_Email_Alert</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>O_T_ET_Training_Completed</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <criteriaItems>
@@ -289,9 +317,9 @@
             <value>Completed</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow will fire when the training is completed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -301,6 +329,10 @@
         <actions>
             <name>O_T_Training_Registered_Email_Alert</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>O_T_ET_Successfully_Registered_for_Training</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <criteriaItems>
@@ -314,9 +346,9 @@
             <value>Registered</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <criteriaItems>
             <field>Class_Offering__c.RecordTypeId</field>
@@ -346,4 +378,100 @@
         <description>This Update the Hidden Completed  date when the Volunteer Attendance as Completed.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
+    <tasks>
+        <fullName>O_T_ET_Orientation_Cancelled</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>O&amp;T ET : Orientation Cancelled</subject>
+    </tasks>
+    <tasks>
+        <fullName>O_T_ET_Orientation_Completed</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>O&amp;T ET : Orientation Completed</subject>
+    </tasks>
+    <tasks>
+        <fullName>O_T_ET_Successfully_Registered_for_Orientation</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>O&amp;T ET : Successfully Registered for Orientation</subject>
+    </tasks>
+    <tasks>
+        <fullName>O_T_ET_Successfully_Registered_for_Orientation_VSF</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>O&amp;T ET : Successfully Registered for Orientation(VSF)</subject>
+    </tasks>
+    <tasks>
+        <fullName>O_T_ET_Successfully_Registered_for_Training</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>O&amp;T ET : Successfully Registered for Training</subject>
+    </tasks>
+    <tasks>
+        <fullName>O_T_ET_Successfully_Registered_for_Training_VSF</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>O&amp;T ET : Successfully Registered for Training (VSF)</subject>
+    </tasks>
+    <tasks>
+        <fullName>O_T_ET_Training_Cancelled</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>O&amp;T ET : Training Cancelled</subject>
+    </tasks>
+    <tasks>
+        <fullName>O_T_ET_Training_Completed</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>O&amp;T ET : Training Completed</subject>
+    </tasks>
 </Workflow>

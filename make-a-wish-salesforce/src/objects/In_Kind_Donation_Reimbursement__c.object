@@ -21,6 +21,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -199,44 +203,42 @@ If this is a volunteer donor, appeal should begin with DRPS</inlineHelpText>
         <description>This field is used to identify the attachments available or not</description>
         <externalId>false</externalId>
         <label>Attachments</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes- Attached</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No- Not Available</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Attached</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Available</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes- Attached</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No- Not Available</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Attached</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-                <value>
-                    <fullName>Not Available</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Campaign__c</fullName>
@@ -293,20 +295,18 @@ If this is a volunteer donor, appeal should begin with DRPS</inlineHelpText>
         <description>This filed will capture current login  volunteer user&apos;s country</description>
         <externalId>false</externalId>
         <label>Country</label>
+        <picklist>
+            <picklistValues>
+                <fullName>United States</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>United States</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Date_of_Gift__c</fullName>
@@ -403,23 +403,21 @@ If this is a volunteer donor, appeal should begin with DRPS</inlineHelpText>
         <description>This field is used to identify whether the document is attached or not</description>
         <externalId>false</externalId>
         <label>Documentation</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Not Available</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Will Attach</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Not Available</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Will Attach</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>DonationDsc__c</fullName>
@@ -551,23 +549,21 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <description>This field is used to capture the Gift Type</description>
         <externalId>false</externalId>
         <label>Gift Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Goods</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Services</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Goods</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Services</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Gift_Value__c</fullName>
@@ -589,11 +585,27 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <label>Business Donor</label>
         <lookupFilter>
             <active>true</active>
+            <booleanFilter>(1 AND 2) OR (1 AND 3) OR 4</booleanFilter>
             <errorMessage>Please check that you have spelled the In Kind Donor name correctly and clicked the lookup magnifying glass to select from the approved list. If no match was found, please create new In Kind Donor account prior to submitting this form.</errorMessage>
             <filterItems>
                 <field>Account.RecordTypeId</field>
                 <operation>equals</operation>
                 <value>In Kind Donors</value>
+            </filterItems>
+            <filterItems>
+                <field>Account.Chapter_Name__r.In_Kind_Approval_Status__c</field>
+                <operation>equals</operation>
+                <value>Approved</value>
+            </filterItems>
+            <filterItems>
+                <field>Account.OwnerId</field>
+                <operation>equals</operation>
+                <valueField>$User.Id</valueField>
+            </filterItems>
+            <filterItems>
+                <field>$Profile.Name</field>
+                <operation>equals</operation>
+                <value>Integration</value>
             </filterItems>
             <isOptional>false</isOptional>
         </lookupFilter>
@@ -679,28 +691,26 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <description>This filed is used to capture the Pay Method</description>
         <externalId>false</externalId>
         <label>Pay Method</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Credit Card</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Debit Card</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Net Banking</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Credit Card</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Debit Card</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Net Banking</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Phone_Number__c</fullName>
@@ -758,220 +768,218 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <description>This filed is used to capture the state</description>
         <externalId>false</externalId>
         <label>State</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Alabama</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alaska</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arizona</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arkansas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>California</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Colorado</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Connecticut</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Delaware</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>District of Columbia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Florida</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Georgia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hawaii</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Idaho</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Illinois</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Indiana</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Iowa</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kansas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kentucky</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Louisiana</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Maine</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Maryland</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Massachusetts</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Michigan</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Minnesota</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mississippi</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Missouri</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Montana</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nebraska</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nevada</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Hampshire</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Jersey</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Mexico</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New York</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Carolina</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Dakota</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ohio</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Oklahoma</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Oregon</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pennsylvania</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rhode Island</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South Carolina</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South Dakota</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tennessee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Texas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Utah</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vermont</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Virginia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Washington</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West Virginia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wisconsin</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wyoming</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Alabama</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Alaska</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Arizona</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Arkansas</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>California</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Colorado</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Connecticut</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Delaware</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>District of Columbia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Florida</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Georgia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Hawaii</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Idaho</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Illinois</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Indiana</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Iowa</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Kansas</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Kentucky</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Louisiana</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Maine</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Maryland</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Massachusetts</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Michigan</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Minnesota</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Mississippi</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Missouri</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Montana</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Nebraska</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Nevada</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New Hampshire</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New Jersey</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New Mexico</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New York</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>North Carolina</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>North Dakota</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Ohio</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Oklahoma</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Oregon</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Pennsylvania</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Rhode Island</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>South Carolina</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>South Dakota</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Tennessee</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Texas</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Utah</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Vermont</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Virginia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Washington</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>West Virginia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Wisconsin</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Wyoming</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Street__c</fullName>
@@ -1165,268 +1173,266 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <description>This field will capture current current login volunteer user&apos;s state</description>
         <externalId>false</externalId>
         <label>State</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Alabama</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alaska</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>American Samoa</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arizona</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arkansas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Armed Forces Americas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Armed Forces Europe</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Armed Forces Pacific</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>California</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Colorado</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Connecticut</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Delaware</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>District of Columbia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Federated Micronesia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Florida</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Georgia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Guam</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hawaii</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Idaho</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Illinois</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Indiana</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Iowa</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kansas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kentucky</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Louisiana</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Maine</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Marshall Islands</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Maryland</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Massachusetts</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Michigan</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Minnesota</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mississippi</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Missouri</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Montana</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nebraska</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nevada</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Hampshire</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Jersey</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Mexico</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New York</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Carolina</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Dakota</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Northern Mariana Islands</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ohio</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Oklahoma</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Oregon</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Palau</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pennsylvania</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Puerto Rico</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rhode Island</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South Carolina</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South Dakota</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tennessee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Texas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>United States Minor Outlying Islands</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>US Virgin Islands</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Utah</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vermont</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Virginia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Washington</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West Virginia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wisconsin</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wyoming</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Alabama</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Alaska</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>American Samoa</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Arizona</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Arkansas</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Armed Forces Americas</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Armed Forces Europe</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Armed Forces Pacific</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>California</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Colorado</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Connecticut</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Delaware</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>District of Columbia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Federated Micronesia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Florida</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Georgia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Guam</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Hawaii</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Idaho</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Illinois</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Indiana</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Iowa</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Kansas</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Kentucky</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Louisiana</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Maine</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Marshall Islands</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Maryland</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Massachusetts</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Michigan</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Minnesota</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Mississippi</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Missouri</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Montana</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Nebraska</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Nevada</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New Hampshire</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New Jersey</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New Mexico</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New York</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>North Carolina</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>North Dakota</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Northern Mariana Islands</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Ohio</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Oklahoma</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Oregon</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Palau</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Pennsylvania</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Puerto Rico</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Rhode Island</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>South Carolina</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>South Dakota</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Tennessee</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Texas</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>United States Minor Outlying Islands</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>US Virgin Islands</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Utah</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Vermont</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Virginia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Washington</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>West Virginia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Wisconsin</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Wyoming</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>vounteer_Name__c</fullName>
@@ -2545,7 +2551,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <fullName>IKR_AccountName_VolunteerName_Validation</fullName>
         <active>true</active>
         <description>This validation will fire if user enter values for both In-Kind Donor Name and Volunteer Name</description>
-        <errorConditionFormula>AND(!ISBLANK( In_Kind_Donor_Name__c ), !ISBLANK(vounteer_Name__c),Migrated_Record__c=false)</errorConditionFormula>
+        <errorConditionFormula>AND(!ISBLANK( In_Kind_Donor_Name__c ), !ISBLANK(vounteer_Name__c),Migrated_Record__c=false, $Profile.Name &lt;&gt; &apos;Integration&apos; )</errorConditionFormula>
         <errorDisplayField>In_Kind_Donor_Name__c</errorDisplayField>
         <errorMessage>Please enter either the Business Donor or Volunteer Donor.</errorMessage>
     </validationRules>
@@ -2553,14 +2559,14 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <fullName>IKR_Editing_Approved_Record_Validation</fullName>
         <active>true</active>
         <description>This validation will fire after the record is approved and try to edit the record</description>
-        <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ),!ISBLANK( Approved_Date__c),Migrated_Record__c=false)</errorConditionFormula>
+        <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ),!ISBLANK( Approved_Date__c),Migrated_Record__c=false, $Profile.Name &lt;&gt; &apos;Integration&apos;)</errorConditionFormula>
         <errorMessage>You do not have access to edit the approved record</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>InKind_Gift_Value_Change_Validation</fullName>
         <active>true</active>
         <description>This validation used to force the enter for reason for changing the gift value</description>
-        <errorConditionFormula>AND(ISCHANGED( Gift_Value__c ), ISBLANK( Reason_for_Gift_Value_Change__c ))</errorConditionFormula>
+        <errorConditionFormula>AND(ISCHANGED( Gift_Value__c ), ISBLANK( Reason_for_Gift_Value_Change__c ), $Profile.Name &lt;&gt; &apos;Integration&apos;)</errorConditionFormula>
         <errorDisplayField>Reason_for_Gift_Value_Change__c</errorDisplayField>
         <errorMessage>You should enter the reason for changing the gift value</errorMessage>
     </validationRules>

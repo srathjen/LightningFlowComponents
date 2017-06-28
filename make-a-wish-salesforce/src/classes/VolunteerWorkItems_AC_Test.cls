@@ -31,6 +31,10 @@ public class VolunteerWorkItems_AC_Test {
         update nonWishVolunteerOpportunity;
         Volunteer_Opportunity__c duplicateNonWishVolunteerOpportunity = OrientationandTrainingUtil.CreateNonWishDuplicateVolunteerOpportunity(acc.Id,currChapRole.Id,nonWishEvent.Id);
         Volunteer_Opportunity__c nonWishVolunteerOpportunity1= OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(acc.Id,currChapRole.Id,nonWishEvent.Id);
+        /*Case ParentWish = OrientationandTrainingUtil.CreateParentCaseWithTravel(wishChild.Id);
+        Volunteer_Opportunity__c closewishVolunteerOpportunity = OrientationandTrainingUtil.CreateNewWishVolunteerOpportunity(acc.Id,currChapRole.Id,ParentWish.Id);
+        closewishVolunteerOpportunity.Volunteer_Name__c = con.Id;
+        update closewishVolunteerOpportunity;*/
     }
     
     public static testMethod void volunteerWishEvents() {
@@ -59,9 +63,9 @@ public class VolunteerWorkItems_AC_Test {
         Test.startTest();
         user currUser = [SELECT Id,UserName FROM User WHERE UserName =:'joathanedwards@gmail.com'];
         
-        Case closedCase = [SELECT Id,Status,Wish_Type__c FROM Case WHERE Wish_Type__c =: 'Disney World'];
-        closedCase.Status = 'Closed';
-        update closedCase;
+        Case dbCase = [SELECT Id,Status,Wish_Type__c FROM Case WHERE Wish_Type__c =: 'Disney World'];
+        dbCase.Status = 'Closed';
+        //update closedCase;
         
         System.RunAs(currUser) {
             
@@ -77,7 +81,7 @@ public class VolunteerWorkItems_AC_Test {
         test.stopTest();
     }
     public static testMethod void volunteerClosedNonWish() {
-        
+        Test.startTest();
         user currUser = [SELECT Id,UserName FROM User WHERE UserName =:'joathanedwards@gmail.com'];
         Non_Wish_Events__c closedNonWish = [SELECT Id,Event_Text__c  FROM Non_Wish_Events__c WHERE Event_Text__c = 'Sending Wish Child'];
         closedNonWish.Event_Date__c = system.today() - 3;
@@ -91,6 +95,7 @@ public class VolunteerWorkItems_AC_Test {
             volunteerWorkitems.getClosedNonWishEvents();
             
         }
+         test.stopTest();
     }
    
     public static testMethod void volunteerRegisteredNonWish() {

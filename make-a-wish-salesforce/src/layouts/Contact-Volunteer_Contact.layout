@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <excludeButtons>Clone</excludeButtons>
+    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>DisableCustomerPortal</excludeButtons>
     <excludeButtons>DisablePartnerPortal</excludeButtons>
     <excludeButtons>DisablePrmSuperUser</excludeButtons>
@@ -8,7 +9,6 @@
     <excludeButtons>EnablePrmSuperUser</excludeButtons>
     <excludeButtons>EnableSelfService</excludeButtons>
     <excludeButtons>RequestUpdate</excludeButtons>
-    <excludeButtons>RequestUseSfdc</excludeButtons>
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <excludeButtons>ViewPartnerPortalUser</excludeButtons>
@@ -147,11 +147,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MailingAddressVerified__c</field>
+                <field>MailingAddressVerificationAttempted__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MailingAddressVerificationAttempted__c</field>
+                <field>MailingAddressVerified__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -188,11 +188,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>OtherAddressVerified__c</field>
+                <field>OtherAddressVerificationAttempted__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>OtherAddressVerificationAttempted__c</field>
+                <field>OtherAddressVerified__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -359,6 +359,26 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>is_Active_Volunteer__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Active_Board_Member__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Active_Wish_Granter__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Active_Non_Wish_Granter__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Active_Single_Day_Event_Volunteer__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Number_of_wishes_active__c</field>
             </layoutItems>
             <layoutItems>
@@ -406,6 +426,10 @@
         <editHeading>true</editHeading>
         <label>System Information</label>
         <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Test_Record__c</field>
+            </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>External_Id__c</field>
@@ -538,7 +562,6 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Account.ACC_RECORDTYPE</fields>
         <fields>Account.NAME</fields>
         <fields>npe5__Primary__c</fields>
         <fields>Constituent_Code__c</fields>
@@ -590,7 +613,6 @@
         <fields>Chapter_Role_Opportunity__c</fields>
         <fields>Role__c</fields>
         <fields>Name__c</fields>
-        <fields>Wish__c</fields>
         <fields>Reason_Inactive__c</fields>
         <fields>Status__c</fields>
         <fields>Chapter_Name__c</fields>
@@ -598,12 +620,20 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Date_Requested__c</fields>
         <fields>Date_Completed__c</fields>
         <fields>Date__c</fields>
         <fields>Status__c</fields>
         <fields>Current__c</fields>
         <relatedList>Background_check__c.Volunteer__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>dsfs__Sender__c</fields>
+        <fields>dsfs__Subject__c</fields>
+        <fields>dsfs__Envelope_Status__c</fields>
+        <fields>dsfs__Hrs_Sent_to_Sign__c</fields>
+        <fields>dsfs__Sent_Date_Time__c</fields>
+        <relatedList>dsfs__DocuSign_Status__c.dsfs__Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>

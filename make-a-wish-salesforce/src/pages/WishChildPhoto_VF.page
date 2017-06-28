@@ -20,6 +20,9 @@ This VF page used to upload the wish child photo to attachment as a inline page 
         display: table-cell;
         padding: 3px 10px;
         }
+        .displayCSS{
+        display:none;
+        }
         .divTableHeading {
         background-color: #EEE;
         display: table-header-group;
@@ -52,7 +55,9 @@ This VF page used to upload the wish child photo to attachment as a inline page 
                     <div class="divTableCell">
                         <div class="upload-align">
                             <apex:inputFile value="{!attachment.body}" filename="{!attachment.name}" id="file" />
-                            <apex:commandButton action="{!upload}" value="Save" />
+                            <apex:commandButton action="{!upload}" value="Save"/>
+                            <apex:image value="/img/loading32.gif" styleClass="displayCSS" onclick="showImage();"/>
+                           
                         </div>
                     </div>
                 </div>
@@ -67,11 +72,17 @@ This VF page used to upload the wish child photo to attachment as a inline page 
             </script>
         </apex:outputPanel> 
     </apex:form>
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"/>
     <script>
-    if('{!onComplete}' == 'true'){
-        window.setTimeout(function() {
-            sayHello();
-        },3000);
+        if('{!onComplete}' == 'true'){
+            showImage();
+            window.setTimeout(function() {
+                sayHello();
+            },3000);
+        }
+    
+    function showImage(){
+        $('.displayCSS').show();
     }
     </script>
 </apex:page>

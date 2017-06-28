@@ -21,7 +21,7 @@ public class PARTAPDF {
     
     //Used to diaplay the medical information data into docusign page
     public void loadData() {
-        String  query = 'SELECT FirstName, RFI_Form_Info_Hidden__c, Override_Dupe_Check__c, isConverted, Please_Explain_Deteriorate__c, LastName ,Email, Phone, Name, id, ';
+        String  query = 'SELECT FirstName, Provided_additional_information__c, RFI_Form_Info_Hidden__c, Override_Dupe_Check__c, isConverted, Please_Explain_Deteriorate__c, LastName ,Email, Phone, Name, id, ';
         for(Schema.FieldSetMember currField :getPartAFields()) {
             query+=currField.getFieldPath()+',';
         }

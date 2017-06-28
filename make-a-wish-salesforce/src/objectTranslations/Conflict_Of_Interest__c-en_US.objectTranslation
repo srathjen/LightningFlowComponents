@@ -65,6 +65,10 @@
         <name>Volunteer_Contact__c</name>
         <relationshipLabel><!-- Conflict Of Interest --></relationshipLabel>
     </fields>
+    <fields>
+        <label><!-- Hidden Volunteer is Inactive --></label>
+        <name>Volunteer_is_Inactive__c</name>
+    </fields>
     <layouts>
         <layout>Conflict Of Interest Layout</layout>
         <sections>
@@ -77,4 +81,28 @@
         <name>Chapter_Staff</name>
     </sharingReasons>
     <startsWith>Consonant</startsWith>
+    <workflowTasks>
+        <name>COI_ET_COI_Expired_7_Days</name>
+        <subject><!-- COI ET : COI Expired (7 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>COI_ET_COI_Expiring_16_Days</name>
+        <subject><!-- COI ET : COI Expiring (16 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>COI_ET_COI_Expiring_23_Days</name>
+        <subject><!-- COI ET : COI Expiring (23 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>COI_ET_COI_Expiring_2_Days</name>
+        <subject><!-- COI ET : COI Expiring (2 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>COI_ET_COI_Expiring_30_Days</name>
+        <subject><!-- COI ET : COI Expiring (30 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>COI_ET_COI_Expiring_9_Days</name>
+        <subject><!-- COI ET : COI Expiring (9 Days) --></subject>
+    </workflowTasks>
 </CustomObjectTranslation>

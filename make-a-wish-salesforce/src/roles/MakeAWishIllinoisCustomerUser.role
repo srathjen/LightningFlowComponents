@@ -6,5 +6,5 @@
     <mayForecastManagerShare>false</mayForecastManagerShare>
     <name>Make-A-Wish Illinois Customer User</name>
     <opportunityAccessLevel>None</opportunityAccessLevel>
-    <parentRole>Arizona_Chapter</parentRole>
+    <parentRole>National_Staff</parentRole>
 </Role>

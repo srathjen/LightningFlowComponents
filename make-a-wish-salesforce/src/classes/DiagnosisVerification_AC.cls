@@ -51,13 +51,14 @@ public class DiagnosisVerification_AC {
         travelMap = new Map<String,String>();
         travelAlgorithmMap = new Map<String,String>();
         travelAlgorithmWrapperIns.travelSet = new Set<String>();
-        String  query = 'SELECT FirstName, RFI_Form_Info_Hidden__c, Override_Dupe_Check__c, isConverted, Please_Explain_Deteriorate__c, LastName ,Email, Phone, Name, id, ';
+        String  query = 'SELECT FirstName,Provided_additional_information__c, RFI_Form_Info_Hidden__c, Override_Dupe_Check__c, isConverted, Please_Explain_Deteriorate__c, LastName ,Email, Phone, Name, id, ';
         for(Schema.FieldSetMember currField :getPartAFields()) {
             query+=currField.getFieldPath()+',';
         }
         query=query.removeEnd(',');
         query+=' FROM Lead WHERE Id =:leadId';
         currLead = Database.query(query); 
+        wishChildWrapperIns.additionalInfo = currLead.Provided_additional_information__c;
         currLead.Current_Condition_Label__c = currLead.Travel_algorithm__c;
         wishChildWrapperIns.stillEligibile = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
         wishChildWrapperIns.treatingFName = currLead.Treating_Medical_Professional_First_Name__c;
@@ -612,6 +613,7 @@ showAddAnotherDiagnosisBtn = true;
         currLead.Will_Child_s_Condition_Deteriorate__c = wishChildWrapperIns.conditioDeteriorate;
         currLead.Why_do_you_feel_would_be_eligible_Wish__c = wishChildWrapperIns.wishChildEligibilityNotes;
         currLead.Why_do_you_feel_would_be_eligible_Wish__c = wishChildWrapperIns.stillEligibile;  
+        currLead.Provided_additional_information__c = wishChildWrapperIns.additionalInfo;
         currLead.Child_will_ultimately_die_prematurely__c = false;
         currLead.Treatment_may_be_feasible_but_can_fail__c = false;
         currLead.Treatment_may_prolong_normal_activities__c = false;

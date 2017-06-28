@@ -787,13 +787,18 @@ p.saved{padding:1rem !important}
                                             <div class="row">
                                                 <div class="row" style="padding:10px">                                                
                                                     <div class="col-xs-12 col-sm-12 col-md-12">                                                
-                                                        <center>Are you sure?                                           
-                                                         <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px;margin-left: 23%;">
+                                                        <center>Are you sure?    
+                                                        
+                                                         <div class="modal-footer"><center>
+                                                           <apex:commandButton value="Yes" styleClass="btn-md"  action="{!SubmitAndSign}" style="height: 2.75rem;margin-top: 3% !important;width: 90px !important;"/> &nbsp;&nbsp;&nbsp;
+                                                           <apex:commandButton value="No"  styleClass="btn-md"  action="{!hidePopup}" style="height: 2.75rem;margin-top: 3% !important;width: 90px !important;"/>
+                                                        </center> </div>                                       
+                                                        <!-- <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px;margin-left: 23%;">
                                                             <apex:commandButton value="Yes" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!SubmitAndSign}" style="height: 2.75rem;margin-top: 3% !important;width: 90px !important;"/>
                                                             </div>
                                                             <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:-14%;margin-left: 48%;">
                                                             <apex:commandButton value="No" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!hidePopup}" style="height: 2.75rem;margin-top: 3% !important;width: 90px !important;"/>
-                                                          </div>
+                                                          </div> -->
                                                          </center>
                                                     </div>
                                                 </div>

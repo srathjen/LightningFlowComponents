@@ -33,6 +33,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -121,6 +125,10 @@
             <default>false</default>
         </values>
         <values>
+            <fullName>Eligibility Review Pending</fullName>
+            <default>true</default>
+        </values>
+        <values>
             <fullName>Escalated</fullName>
             <default>false</default>
         </values>
@@ -130,7 +138,7 @@
         </values>
         <values>
             <fullName>New</fullName>
-            <default>true</default>
+            <default>false</default>
         </values>
     </businessProcesses>
     <businessProcesses>
@@ -331,37 +339,35 @@
         <description>Used to hold adaptable picklist values</description>
         <externalId>false</externalId>
         <label>Adoptable</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Check with Wish Manager</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Dedicated</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Check with Wish Manager</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Hold</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Dedicated</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Adopted_By__c</fullName>
@@ -411,56 +417,63 @@
         <externalId>false</externalId>
         <inlineHelpText>Select the statement that applies to this wish.</inlineHelpText>
         <label>Air Travel Details</label>
+        <picklist>
+            <picklistValues>
+                <fullName>This wish does not involve air travel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>I am fully aware of the medical research regarding air travel and feel it is appropriate for this child. I will make any necessary adjustments to the medical treatment plan prior to their travel dates</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>I do not support air travel for this child</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>This wish does not involve air travel</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>I am fully aware of the medical research regarding air travel and feel it is appropriate for this child. I will make any necessary adjustments to the medical treatment plan prior to their travel dates</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>I do not support air travel for this child</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>All_requested_wish_participants_reside_w__c</fullName>
         <description>It describes whether all requested wish participants resides with wish child?</description>
         <externalId>false</externalId>
         <label>All Participants Reside With Wish Child</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
+    </fields>
+    <fields>
+        <fullName>AnticipatedStart_Date__c</fullName>
+        <description>This field  will have the same value as it&apos;s Parent&apos;s Start date</description>
+        <externalId>false</externalId>
+        <formula>Parent.Start_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>Anticipated_Start_Date__c</fullName>
-        <description>This field will capture Anticipated start  date</description>
         <externalId>false</externalId>
         <label>Anticipated Start Date</label>
         <required>false</required>
@@ -476,24 +489,22 @@
         <inlineHelpText>Is there anything on your family’s calendar (upcoming medical treatments, school or work commitments,
 planned vacations, etc.) that might impact your ability to participate in a wish?</inlineHelpText>
         <label>Any Impact Your Ability To Join Wish</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Appropriate_Comments__c</fullName>
@@ -531,24 +542,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <externalId>false</externalId>
         <inlineHelpText>Does your automobile insurance provide coverage while using a rental car?</inlineHelpText>
         <label>Automobile Insurance Provide Coverage</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Availability2__c</fullName>
@@ -619,28 +628,26 @@ for fulfilment  the wish.</description>
         <description>This field is used to capture the status of the budget page</description>
         <externalId>false</externalId>
         <label>Budget Approval Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Submitted</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Approved</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Rejected</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Budget_Approved_Date__c</fullName>
@@ -694,32 +701,30 @@ for fulfilment  the wish.</description>
         <description>This will indicate whether budget is approved or pending.</description>
         <externalId>false</externalId>
         <label>Budget Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>None</fullName>
-                    <default>true</default>
-                </value>
-                <value>
-                    <fullName>Submitted</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Approved</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Rejected</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Budget_Submitted_Date__c</fullName>
@@ -1847,24 +1852,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It  captures the valid photo id issued by the U.S. federal or state</description>
         <externalId>false</externalId>
         <label>Over 18 Have Valid ID?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Does_your_family_have_a_credit_card_Note__c</fullName>
@@ -1882,24 +1885,34 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It  captures  whether your family have a credit card or not information</description>
         <externalId>false</externalId>
         <label>Family Have Credit Card?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Driver_Information__c</fullName>
+        <description>This field is used to display the driver information when the WPP is approved.</description>
+        <externalId>false</externalId>
+        <label>Driver Information</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
     </fields>
     <fields>
         <fullName>Driver_Names__c</fullName>
@@ -2068,24 +2081,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It captures the handicap accommodations information</description>
         <externalId>false</externalId>
         <label>Handicap Accommodations Required?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Has_your_family_flown_before_Note__c</fullName>
@@ -2103,24 +2114,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It captures the  information about  family  has already flown or not</description>
         <externalId>false</externalId>
         <label>Family Flown Before?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Have_current_automobile_insurance__c</fullName>
@@ -2128,24 +2137,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <externalId>false</externalId>
         <inlineHelpText>Do you have current automobile insurance?</inlineHelpText>
         <label>Have Current Automobile Insurance</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>HiddenAnticipatedDate__c</fullName>
@@ -2212,6 +2219,17 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Close_Sub_Case__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field will allow non-admin user to close sub case via code.</description>
+        <externalId>false</externalId>
+        <label>Hidden Close Sub Case</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Hidden_Contact_County__c</fullName>
         <description>County - from Wish child contact information</description>
         <externalId>false</externalId>
@@ -2266,7 +2284,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hidden_Lead_Id__c</fullName>
         <description>It is used to hold the lead id as hidden value</description>
         <externalId>false</externalId>
-        <label>Hidden Lead Id</label>
+        <label>Lead Id</label>
         <length>255</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2415,6 +2433,16 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_VOinactive__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Hidden VOinactive</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Hidden_Why_do_you_feel__c</fullName>
@@ -2606,25 +2634,23 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It find out  if the wish child/family is interested to participate for the events.</description>
         <externalId>false</externalId>
         <label>Interested In Future Events</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Interview_Date_Not_Set__c</fullName>
@@ -2689,7 +2715,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <externalId>false</externalId>
         <label>IsRushWishClearence&amp;ChildSummary Hidden</label>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -2698,24 +2724,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It  display the details about  wheelchair accessible vehicle needed or not</description>
         <externalId>false</externalId>
         <label>Wheelchair Accessible Vehicle Needed?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Is_the_wheelchair_collapsible_Note__c</fullName>
@@ -2733,24 +2757,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It describes  whether the wheelchair is collapsible or not</description>
         <externalId>false</externalId>
         <label>Is The Wheelchair Collapsible?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Is_the_wheelchair_power_Note__c</fullName>
@@ -2768,48 +2790,55 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It describes whether the wheelchair has power or not</description>
         <externalId>false</externalId>
         <label>Is The Wheelchair Power?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Is_your_family_comfortable_in_rendal_car__c</fullName>
         <description>It  describes about wish families vehicle comfortable.</description>
         <externalId>false</externalId>
         <label>Is Your Family Comfortable In Rental Car</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Knowledge_Link__c</fullName>
+        <externalId>false</externalId>
+        <label>Knowledge Link</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
     </fields>
     <fields>
         <fullName>Lead__c</fullName>
@@ -2962,24 +2991,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It  capture the information about whether the Medication require refrigeration or not</description>
         <externalId>false</externalId>
         <label>Refrigerated medication required?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Medication_require_refrigeration_name__c</fullName>
@@ -2997,24 +3024,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>This field is used to capture the meet pwl criteria</description>
         <externalId>false</externalId>
         <label>Meet PWL Criteria</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Migrated_Record__c</fullName>
@@ -3063,6 +3088,18 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>Non_Participant_Emergency_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>Account.Emergency_Contact_Phone__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Non-Participant Emergency Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Option1__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field used in wish liability form</description>
@@ -3086,6 +3123,21 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Origin</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Web</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
@@ -3176,24 +3228,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It  describes the participant  has special dietary restrictions or not</description>
         <externalId>false</externalId>
         <label>Participant  Dietary Restrictions?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Participant_have_allergies_to_food_Note__c</fullName>
@@ -3211,24 +3261,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It will capture information about  participant having  allergies to food or not</description>
         <externalId>false</externalId>
         <label>Participant With Allergy?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Participant_have_valid_passports_Note__c</fullName>
@@ -3246,24 +3294,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It will capture whether the Participant have valid passport or not</description>
         <externalId>false</externalId>
         <label>Participant Have Passports?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Participant_have_valid_photo_ID_Note__c</fullName>
@@ -3292,24 +3338,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It shows the choice , if the participant require a wheelchair or not</description>
         <externalId>false</externalId>
         <label>Participant Require A Wheelchair?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Participant_require_medical_suppliesNote__c</fullName>
@@ -3327,24 +3371,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It will capture, requested participant require medical supplies information</description>
         <externalId>false</externalId>
         <label>Participant Require Medical Supplies?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Participant_require_oxygen_Note__c</fullName>
@@ -3362,24 +3404,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>It will capture whether participant require oxygen or not</description>
         <externalId>false</externalId>
         <label>Participant Require Oxygen?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Passports__c</fullName>
@@ -3518,6 +3558,21 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Priority</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>High</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medium</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Low</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
@@ -3528,32 +3583,30 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>This will indicate whether projected is approved or pending.</description>
         <externalId>false</externalId>
         <label>Projected Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>None</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>None</fullName>
-                    <default>true</default>
-                </value>
-                <value>
-                    <fullName>Submitted</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Approved</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Rejected</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Qualified_Date__c</fullName>
@@ -3892,6 +3945,34 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Reason</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>User didn&apos;t attend training</fullName>
+                <default>false</default>
+                <cssExposed>false</cssExposed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Complex functionality</fullName>
+                <default>false</default>
+                <cssExposed>false</cssExposed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Existing problem</fullName>
+                <default>false</default>
+                <cssExposed>false</cssExposed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Instructions not clear</fullName>
+                <default>false</default>
+                <cssExposed>false</cssExposed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New problem</fullName>
+                <default>false</default>
+                <cssExposed>false</cssExposed>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
@@ -3983,32 +4064,30 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <description>This filed value indicates time line for the wish process</description>
         <externalId>false</externalId>
         <label>Rush Timeframe</label>
+        <picklist>
+            <picklistValues>
+                <fullName>ASAP</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>0-30 days</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>31-90 days</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>91+</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>ASAP</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>0-30 days</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>31-90 days</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>91+</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Rush__c</fullName>
@@ -4062,24 +4141,22 @@ on airplane? If no, note it who cannot to be able to sit on airplane</descriptio
 on airplane</description>
         <externalId>false</externalId>
         <label>Sit Up Take Off/Landing?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>SourceId</fullName>
@@ -4101,6 +4178,154 @@ on airplane</description>
     </fields>
     <fields>
         <fullName>Status</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Qualified</fullName>
+                <default>true</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ready to Assign</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ready to Interview</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wish Determined</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Budget Approval - Submitted</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Budget Approval - Approved</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wish Design</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wish Scheduled</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hold</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Inactive</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Granted</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed</fullName>
+                <default>false</default>
+                <closed>true</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed</fullName>
+                <default>false</default>
+                <closed>true</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DNQ</fullName>
+                <default>false</default>
+                <closed>true</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Denied</fullName>
+                <default>false</default>
+                <closed>true</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Escalated</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Progress</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medical</fullName>
+                <default>false</default>
+                <closed>true</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Open</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved - Chapter Staff</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved - Chapter Medical Advisor</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved - National Staff</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved - National Medical Council</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DNQ - Chapter Staff</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DNQ - Chapter Medical Advisor</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DNQ - National Staff</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DNQ - National Medical Council</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Eligibility Review Pending</fullName>
+                <default>false</default>
+                <closed>false</closed>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
@@ -4122,187 +4347,125 @@ on airplane</description>
         <description>This field will be used to know the progress(Current status) of the wish</description>
         <externalId>false</externalId>
         <label>Sub Status</label>
+        <picklist>
+            <controllingField>Status</controllingField>
+            <picklistValues>
+                <fullName>Abandoned</fullName>
+                <default>false</default>
+                <controllingFieldValues>Closed</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Age Expiration</fullName>
+                <default>false</default>
+                <controllingFieldValues>Closed</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assign in Portal</fullName>
+                <default>false</default>
+                <controllingFieldValues>Ready to Assign</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Deceased</fullName>
+                <default>false</default>
+                <controllingFieldValues>Closed</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Elective</fullName>
+                <default>false</default>
+                <controllingFieldValues>Hold</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family Delay</fullName>
+                <default>false</default>
+                <controllingFieldValues>Closed</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family Delay Closing</fullName>
+                <default>false</default>
+                <controllingFieldValues>Inactive</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Loss of Contact</fullName>
+                <default>false</default>
+                <controllingFieldValues>Closed</controllingFieldValues>
+                <controllingFieldValues>Inactive</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medical</fullName>
+                <default>false</default>
+                <controllingFieldValues>DNQ</controllingFieldValues>
+                <controllingFieldValues>Hold</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Moved</fullName>
+                <default>false</default>
+                <controllingFieldValues>Closed</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Non-Viewable</fullName>
+                <default>false</default>
+                <controllingFieldValues>Ready to Assign</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Refused</fullName>
+                <default>false</default>
+                <controllingFieldValues>Closed</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending</fullName>
+                <default>false</default>
+                <controllingFieldValues>Ready to Interview</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Reassigned</fullName>
+                <default>false</default>
+                <controllingFieldValues>Ready to Interview</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Additional Interview</fullName>
+                <default>false</default>
+                <controllingFieldValues>Ready to Interview</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Within Policy</fullName>
+                <default>false</default>
+                <controllingFieldValues>Wish Determined</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Need Clarification</fullName>
+                <default>false</default>
+                <controllingFieldValues>Wish Determined</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Submitted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Response</fullName>
+                <default>false</default>
+                <controllingFieldValues>DNQ</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Age</fullName>
+                <default>false</default>
+                <controllingFieldValues>DNQ</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Previous Wish</fullName>
+                <default>false</default>
+                <controllingFieldValues>DNQ</controllingFieldValues>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <controllingField>Status</controllingField>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Abandoned</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Age Expiration</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Assign in Portal</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Deceased</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Elective</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Family Delay</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Family Delay Closing</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Loss of Contact</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Medical</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Moved</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Non-Viewable</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Refused</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Pending</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Reassigned</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Additional Interview</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Within Policy</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Need Clarification</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Approved</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Submitted</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No Response</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Age</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Previous Wish</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-            <valueSettings>
-                <controllingFieldValue>DNQ</controllingFieldValue>
-                <controllingFieldValue>Hold</controllingFieldValue>
-                <valueName>Medical</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>DNQ</controllingFieldValue>
-                <valueName>No Response</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>DNQ</controllingFieldValue>
-                <valueName>Age</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>DNQ</controllingFieldValue>
-                <valueName>Previous Wish</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Ready to Assign</controllingFieldValue>
-                <valueName>Assign in Portal</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Ready to Assign</controllingFieldValue>
-                <valueName>Non-Viewable</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Wish Determined</controllingFieldValue>
-                <valueName>Within Policy</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Wish Determined</controllingFieldValue>
-                <valueName>Need Clarification</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Ready to Interview</controllingFieldValue>
-                <valueName>Pending</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Ready to Interview</controllingFieldValue>
-                <valueName>Reassigned</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Ready to Interview</controllingFieldValue>
-                <valueName>Additional Interview</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Hold</controllingFieldValue>
-                <valueName>Elective</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Closed</controllingFieldValue>
-                <valueName>Abandoned</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Closed</controllingFieldValue>
-                <valueName>Age Expiration</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Closed</controllingFieldValue>
-                <valueName>Deceased</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Closed</controllingFieldValue>
-                <valueName>Family Delay</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Closed</controllingFieldValue>
-                <controllingFieldValue>Inactive</controllingFieldValue>
-                <valueName>Loss of Contact</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Closed</controllingFieldValue>
-                <valueName>Moved</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Closed</controllingFieldValue>
-                <valueName>Refused</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Inactive</controllingFieldValue>
-                <valueName>Family Delay Closing</valueName>
-            </valueSettings>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Subject</fullName>
@@ -4416,6 +4579,21 @@ on airplane</description>
     </fields>
     <fields>
         <fullName>Type</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Problem</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Feature Request</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Question</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
@@ -4534,24 +4712,22 @@ on airplane</description>
         <description>It will capture, whether  the rental car is needed or not</description>
         <externalId>false</externalId>
         <label>Rental Car Seats Needed?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Will_a_rental_stroller_be_needed_Note__c</fullName>
@@ -4569,24 +4745,22 @@ on airplane</description>
         <description>It will capture informationnabout, whether stroller needed or not</description>
         <externalId>false</externalId>
         <label>Rental Stroller Needed?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Will_an_interpreter_be_needed_Note__c</fullName>
@@ -4604,24 +4778,22 @@ on airplane</description>
         <description>It will capture whether an interpreter be needed or  not</description>
         <externalId>false</externalId>
         <label>Interpreter Needed?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Will_your_family_bring_wheelchair_Note__c</fullName>
@@ -4639,24 +4811,22 @@ on airplane</description>
         <description>It will capture information about whether family will bring wheelchair or not</description>
         <externalId>false</externalId>
         <label>Family Bringing Own Wheelchair?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Wish_Assist__c</fullName>
@@ -4708,24 +4878,22 @@ on airplane</description>
         <externalId>false</externalId>
         <inlineHelpText>Is this wish appropriate?</inlineHelpText>
         <label>Wish Clearance</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Appropriate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Appropriate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Appropriate</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Not Appropriate</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Wish_Complexity__c</fullName>
@@ -4733,52 +4901,50 @@ on airplane</description>
         <externalId>false</externalId>
         <inlineHelpText>Wish Complexity should be rated on a scale of 1 to 9 (9 being the highest). Wish Type, Family Dynamics &amp; Medical Condition needs to be considered for determining the wish complexity.</inlineHelpText>
         <label>Wish Complexity</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>1</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Wish_Determined_Date__c</fullName>
@@ -4934,164 +5100,162 @@ on airplane</description>
         <description>Wish type</description>
         <externalId>false</externalId>
         <label>Wish National Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Animal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Celebrity - Domestic Travel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Celebrity - Local</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Celebrity-International Travel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Computer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cruise - Celebrity/Royal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cruise - Disney</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cruise - Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disney - Aulani</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disney World</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Disneyland</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Electronics International - Sports</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>I wish to be…</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medical Bed/Chair/Wheelchair</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Motor Vehicle Customization</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Motorized Vehicle</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Musical Instrument/Music Related</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Party</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Philanthropic</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Playhouse/Playset</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Room Redecoration/Furniture</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Shopping Spree - Local</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Shopping Spree - Travel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spa/Hot Tub</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sports/Camping Equipment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sports-Domestic Travel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sports-International Travel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sports-Local</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Swimming Pool</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Toys/Books</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Trailer/Camper</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Travel - Hawai</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Travel - International</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Travel - Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Animal</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Celebrity - Domestic Travel</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Celebrity - Local</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Celebrity-International Travel</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Computer</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Construction</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Cruise - Celebrity/Royal</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Cruise - Disney</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Cruise - Other</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Disney - Aulani</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Disney World</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Disneyland</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Education</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Electronics International - Sports</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>I wish to be…</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Medical Bed/Chair/Wheelchair</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Motor Vehicle Customization</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Motorized Vehicle</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Musical Instrument/Music Related</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Party</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Philanthropic</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Playhouse/Playset</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Room Redecoration/Furniture</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Shopping Spree - Local</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Shopping Spree - Travel</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Spa/Hot Tub</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Sports/Camping Equipment</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Sports-Domestic Travel</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Sports-International Travel</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Sports-Local</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Swimming Pool</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Toys/Books</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Trailer/Camper</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Travel - Hawai</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Travel - International</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Travel - Other</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Wish_child_receive_nursing_care_Note__c</fullName>
@@ -5110,24 +5274,22 @@ If yes,  # of hours, agency and phone number information</description>
         <description>It will capture information about wish child receiving nursing care or not</description>
         <externalId>false</externalId>
         <label>Receiving Nursing Care?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Wish_granter_2__c</fullName>
@@ -5147,24 +5309,22 @@ If yes,  # of hours, agency and phone number information</description>
         <description>It will capture the &quot;Does a requested wish participant have medical needs?&quot; or not</description>
         <externalId>false</externalId>
         <label>Wish Participant Have Medical Needs</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>hidden_medical_physician__c</fullName>
@@ -5266,24 +5426,22 @@ arrangements/unique circumstances for any requested wish participant not residin
         <externalId>false</externalId>
         <inlineHelpText>Does this wish involve air travel?</inlineHelpText>
         <label>Wish Involves Air Travel</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <listViews>
         <fullName>AllOpenCases</fullName>
@@ -7433,8 +7591,10 @@ arrangements/unique circumstances for any requested wish participant not residin
         <fullName>Case_Presentation_Set_Validation</fullName>
         <active>true</active>
         <description>Used to check value for Presentation Date and Presentation set fields. Both are required we cannot left one as blank</description>
-        <errorConditionFormula>AND(OR(ISCHANGED( Presentation_Date__c ),Wish_Presentation_Set__c = true) ,Migrated_Record__c = false, OR(AND(NOT(ISBLANK(Presentation_Date__c )),Wish_Presentation_Set__c = false),AND(Wish_Presentation_Set__c = true, ISBLANK( Presentation_Date__c ))))</errorConditionFormula>
-        <errorMessage>Wish Presentation Set or Wish Presentation Date cannot be blank</errorMessage>
+        <errorConditionFormula>AND(OR(ISCHANGED( Presentation_Date__c ),Wish_Presentation_Set__c = true) ,Migrated_Record__c = false, OR(AND(NOT(ISBLANK(Presentation_Date__c )),Wish_Presentation_Set__c = false),AND(Wish_Presentation_Set__c = true, OR(ISBLANK( Presentation_Date__c ),ISBLANK(Time__c),
+        ISBLANK(Location_Address__c),
+        ISBLANK(Name_of_Location__c)))))</errorConditionFormula>
+        <errorMessage>Wish Presentation Date, Time, Location Address and Name of Location cannot be blank when Wish Presentation Set is checked.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Ready_to_Assign_Validation</fullName>
@@ -7455,6 +7615,13 @@ arrangements/unique circumstances for any requested wish participant not residin
         <errorMessage>Please enter values to &apos;Rush Explanation &amp; Rush Timeframe&apos;  fields in order  to check Rush.</errorMessage>
     </validationRules>
     <validationRules>
+        <fullName>Case_Subcase_Status_Validation</fullName>
+        <active>true</active>
+        <description>Used to lock &quot;Status field&quot; for all profiles except System Admin for the subcases</description>
+        <errorConditionFormula>AND(ISCHANGED( Status ),RecordType.Name != &apos;Wish&apos;, RecordType.Name != &apos;Diagnosis Verification Review&apos;,$Profile.Name != &apos;System Administrator&apos;,Hidden_Close_Sub_Case__c=false )</errorConditionFormula>
+        <errorMessage>You do not have the level of access necessary to perform the operation you requested. Please contact the owner of the record or your administrator if access is necessary.</errorMessage>
+    </validationRules>
+    <validationRules>
         <fullName>Case_Timeframe_Validation</fullName>
         <active>false</active>
         <description>To check for valid timeframe</description>
@@ -7469,6 +7636,14 @@ arrangements/unique circumstances for any requested wish participant not residin
 ISBLANK(TEXT(Meet_PWL_Criteria__c)), ISPICKVAL(Sub_Status__c,&apos;Within Policy&apos;))</errorConditionFormula>
         <errorDisplayField>Meet_PWL_Criteria__c</errorDisplayField>
         <errorMessage>Meet PWL Criteria needs to be present when wish status is Wish Determined</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Wish_Determined_Validation</fullName>
+        <active>true</active>
+        <description>When the case status is Ready to Assign the sub status should have value</description>
+        <errorConditionFormula>Text(Status) == &apos;Wish Determined&apos; &amp;&amp; Text(Sub_Status__c) == Null</errorConditionFormula>
+        <errorDisplayField>Sub_Status__c</errorDisplayField>
+        <errorMessage>You should enter value for sub status when the status is Wish Determined.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Childs_Medical_Summary_Form_Validation</fullName>
@@ -7535,7 +7710,7 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)), ISPICKVAL(Sub_Status__c,&apos;Within Policy
         <fullName>Planing_Case_Form_Validation</fullName>
         <active>true</active>
         <description>This validation rule will fire when the required forms are checked and corresponding date value is null.</description>
-        <errorConditionFormula>AND($RecordType.Name = &quot;Wish Planning&quot;,ISPICKVAL(Status,&apos;Closed&apos;),OR(AND(Wish_Child_Form__c = True,ISNULL(Date_Wish_Child_Form__c )),AND(Wish_Family_Form__c = True,ISNULL(Date_Wish_Family_Form__c)),AND(Wish_Information_Form__c = True,ISNULL(Date_Wish_Information_Form__c)),AND(Liability_Release_and_Authorization__c = True,ISNULL(Date_Liability_Release_Authorization__c)),AND(Communication_Profile__c = True,ISNULL(Date_Received_for_Communication_Profile__c)),AND(Guardianship_Document__c = True,ISNULL(Date_Received_for_Guardianship_Document__c)),AND(Absent_Parent_Form__c = True,ISNULL(Date_Received_for_Absent_Parent_Form__c)),AND(Single_Parent_Form__c = True,ISNULL(Date_Received_for_Single_Parent_Form__c)),AND(Wish_Safety_Authorization_Part_B_Form__c = True,ISNULL(Date_Received_for_Wish_Safety_Authorizat__c)),AND(Child_s_Medical_Summary_Form__c = True,ISNULL(Date_Received_for_Child_s_Medical_Summar__c)),AND(Passports__c = True,ISNULL(Date_Received_for_Passports__c)),AND(Visas__c,True,ISNULL(Date_Received_for_Visas__c)),AND(Entertainment_Sports_Wish_LOU__c = True,ISNULL(Date_Received_for_Entertainment_Sports__c))))</errorConditionFormula>
+        <errorConditionFormula>AND($RecordType.Name = &quot;Wish Planning&quot;,Text(Parent.Sub_Status__c)!=&quot;Abandoned&quot;,ISPICKVAL(Status,&apos;Closed&apos;),OR(AND(Wish_Child_Form__c = True,ISNULL(Date_Wish_Child_Form__c )),AND(Wish_Family_Form__c = True,ISNULL(Date_Wish_Family_Form__c)),AND(Wish_Information_Form__c = True,ISNULL(Date_Wish_Information_Form__c)),AND(Liability_Release_and_Authorization__c = True,ISNULL(Date_Liability_Release_Authorization__c)),AND(Communication_Profile__c = True,ISNULL(Date_Received_for_Communication_Profile__c)),AND(Guardianship_Document__c = True,ISNULL(Date_Received_for_Guardianship_Document__c)),AND(Absent_Parent_Form__c = True,ISNULL(Date_Received_for_Absent_Parent_Form__c)),AND(Single_Parent_Form__c = True,ISNULL(Date_Received_for_Single_Parent_Form__c)),AND(Wish_Safety_Authorization_Part_B_Form__c = True,ISNULL(Date_Received_for_Wish_Safety_Authorizat__c)),AND(Child_s_Medical_Summary_Form__c = True,ISNULL(Date_Received_for_Child_s_Medical_Summar__c)),AND(Passports__c = True,ISNULL(Date_Received_for_Passports__c)),AND(Visas__c,True,ISNULL(Date_Received_for_Visas__c)),AND(Entertainment_Sports_Wish_LOU__c = True,ISNULL(Date_Received_for_Entertainment_Sports__c))))</errorConditionFormula>
         <errorMessage>Please fill the value for  corresponding date fields.</errorMessage>
     </validationRules>
     <validationRules>

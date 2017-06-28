@@ -9,7 +9,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Task_Interview_Task_Rescheduled_Email_Template</template>
+        <template>Automated_Volunteer_Templates/Task_Interview_Task_Rescheduled_Email_Template</template>
     </alerts>
     <alerts>
         <fullName>Task_Interview_Cancelled_Email_Alert</fullName>
@@ -56,7 +56,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Task_Interview_Task_Email_Template</template>
+        <template>Automated_Volunteer_Templates/Task_Interview_Task_Email_Template</template>
     </alerts>
     <alerts>
         <fullName>Task_Volunteer_Email_Notification_for_Interview</fullName>
@@ -67,13 +67,17 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Task_Volunteer_Email_Notification_for_Confirmation_Date</template>
+        <template>Automated_Volunteer_Templates/Task_Volunteer_Email_Notification_for_Confirmation_Date</template>
     </alerts>
     <rules>
         <fullName>Task%3A Email Notification for Interivew Task</fullName>
         <actions>
             <name>Task_Interview_Task_Email_Notification</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Task_ET_Task_ET_Interview_Task_Assigned_for_You</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <criteriaItems>
@@ -82,9 +86,9 @@
             <value>Interview</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Task.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>When Interview task is created by Volunteer that time, It wil send an email notification to Interviewer.</description>
         <triggerType>onCreateOnly</triggerType>
@@ -94,6 +98,10 @@
         <actions>
             <name>Rescheduled_Email_Alert</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Task_ET_Interview_Task_Rescheduled_for_You</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <criteriaItems>
@@ -107,9 +115,9 @@
             <value>Rescheduled</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Task.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow will send email alert to task owner when the status is Rescheduled</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -131,6 +139,10 @@
             <name>Task_Interview_Cancelled_Email_Alert</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>Task_ET_Interview_Cancelled</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Task.RecordTypeId</field>
@@ -143,9 +155,9 @@
             <value>Rescheduled</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Task.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow rule will fire when the interview is cancelled</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -155,6 +167,10 @@
         <actions>
             <name>Task_Interview_Scheduled_Email_Alert</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Task_ET_Interview_scheduled</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <criteriaItems>
@@ -168,9 +184,9 @@
             <value>Scheduled</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Task.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow rule will fire when the interview is scheduled</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -180,6 +196,10 @@
         <actions>
             <name>Task_Interview_Completed_Email_Alert</name>
             <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Task_ET_Interview_Completed</name>
+            <type>Task</type>
         </actions>
         <active>true</active>
         <criteriaItems>
@@ -193,11 +213,83 @@
             <value>Approved</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Task.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This workflow rule will fire when the interview is complete</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
+    <tasks>
+        <fullName>Task_ET_Interview_Cancelled</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Task ET : Interview Cancelled</subject>
+    </tasks>
+    <tasks>
+        <fullName>Task_ET_Interview_Completed</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Task ET : Interview Completed</subject>
+    </tasks>
+    <tasks>
+        <fullName>Task_ET_Interview_Confirmation_Date_and_Venue</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Task ET : Interview Confirmation Date and Venue</subject>
+    </tasks>
+    <tasks>
+        <fullName>Task_ET_Interview_Task_Rescheduled_for_You</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Task ET : Interview Task Rescheduled for You</subject>
+    </tasks>
+    <tasks>
+        <fullName>Task_ET_Interview_scheduled</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Task ET : Interview scheduled</subject>
+    </tasks>
+    <tasks>
+        <fullName>Task_ET_Task_ET_Interview_Task_Assigned_for_You</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Task ET : Task ET : Interview Task Assigned for You</subject>
+    </tasks>
 </Workflow>

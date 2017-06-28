@@ -1,13 +1,12 @@
-<apex:page sidebar="false" showHeader="false" standardController="Case" title="Make-A-Wish Communities | Wish Liability Form" extensions="WishLiabilityForm_AC">
+<apex:page standardController="Case" title="Make-A-Wish Communities | Wish Liability Form" extensions="WishLiabilityForm_AC" standardStylesheets="false" showHeader="false" applyHtmlTag="false" sidebar="false">
     <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/Liability.css')}" /> 
-    <!--<apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap.min.css')}" />
-    <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/bootstrap-theme.min.css')}" />
-    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/bootstrap.min.js')}"/>-->
     <style>
     .custPopup, .custPopup-main-message{
             left: -32% !important;
             padding: 2.5rem;
             width: 70% !important;
+            font-weight : bold;
+            font-size : 150%;
     
     }
     
@@ -15,9 +14,36 @@
         font-size: 18px;
     }
     </style>
+     <apex:form rendered="{!displayAlert}" >
+    <apex:pagemessages id="showmsg"/>
+    </apex:form>
     <apex:form >
-     <apex:pageMessages id="showmsg"/> 
-    <div class="container"> 
+     <apex:commandLink action="{!ReturnToWish}" value="Return to Wish" Style="float:right;padding:30px" html-data-toggle="modal" html-data-target="wffsame-alert"/>  
+     <apex:outputPanel id="ReturntoWish">
+        <apex:outputPanel rendered="{!displayReturnToWish}">
+    <div class="pop-wrap">
+        <div class="custPopup">
+            <div class="container">
+                <div class="row">
+                    <div class="row" style="padding:10px">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                     <center><bold> Are you sure you want to exit ? </bold></center>
+                    </div>
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
+                       <apex:commandButton value="Yes" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}" style="height: 2.75rem; margin-left: 5%;"/>
+                        <apex:commandButton value="No" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!ReturnToLiabilityForm}"  style="height: 2.75rem; margin-left: 5%;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</apex:outputPanel>
+</apex:outputPanel>
+     
+     
+     <div class="container"> 
       <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/MakeAWishAmerica.PNG')}" style="width:18%; height:60px; margin-left: 40%;margin-right: 40%;" styleClass="header-logo"/>
       <div class="row header-padding"> 
        <div style="font-size:20px; margin-bottom:1px;margin-top:3%; margin-right: auto;text-transform:uppercase; text-align:center; width:100%;"><span class="text-imp">LIABILITY RELEASE AND AUTHORIZATION RE:MEDICAL INFORMATION <br/> AND PUBLICITY</span></div>        
@@ -134,8 +160,9 @@
 
             </body>
     </div>
-   <center> <apex:commandButton value="Send For Signature" action="{!multiEmail}"/>
-            <apex:commandButton value="Sign Now" action="{!SignNowmultiEmail}"/></center>
+   <center> <apex:commandButton value="Send For Signature" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md" action="{!multiEmail}" style="height: 2.75rem; margin-left: 5%;"/>
+            <apex:commandButton value="Sign Now" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md" action="{!SignNowmultiEmail}" style="height: 2.75rem; margin-left: 5%;"/> </center>
+           
     <apex:outputPanel id="popup">
         <apex:outputPanel rendered="{!displayPopup }">
     <div class="pop-wrap">
@@ -199,7 +226,7 @@
     <div class="pop-wrap">
         <div class="custPopup">
          
-         <center> <span class="errorMessage"><b>Already an email sent to specified address</b></span></center>
+         <center> <span class="errorMessage"><b>All participants have already signed the form.</b></span></center>
            <apex:commandButton value="Ok" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}"  style="margin-left: 40%;margin-top: 3% !important; height:2.15rem !important;width:90px !important;"/>
          
           </div>
@@ -217,7 +244,7 @@
     <div class="pop-wrap">
         <div class="custPopup">
          
-       <center> <b><span class="errorMessage">There is no user to sign </span></b></center>
+       <center> <b><span class="errorMessage">All participants have already signed the form.</span></b></center>
            <apex:commandButton value="Ok" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}"  style="margin-left: 40%;margin-top: 3% !important; height:2.15rem !important;width:90px !important;"/>
          
           </div>
@@ -226,7 +253,7 @@
     </div>
 </apex:outputPanel>
 </apex:outputPanel>
-  
+ 
 </apex:form>
 
 </apex:page>

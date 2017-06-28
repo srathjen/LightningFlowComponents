@@ -1,7 +1,7 @@
 <apex:page standardController="Case" extensions="WishChildForm_AC" id="wff" title="Wish Family Form | Make-A-Wish Communities" standardStylesheets="false" showHeader="false" applyHtmlTag="false" sidebar="false" docType="html-5.0">
     <apex:include pageName="prospective_head" id="phead" />
-    <apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
-    
+    <!-- <apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/> -->
+
     <body class="vcp vcpactivelogin" id="top">
       <apex:include pageName="active_header" id="pheaderActive" rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
       <apex:include pageName="wishFamilyForm_header_active" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />
@@ -21,7 +21,7 @@
               <apex:actionFunction action="{!withOutSavefromWCFtoWIF}" name="WithoutSaveChildFormToWIF" reRender="gggkk"/>
               <apex:actionFunction action="{!RetrunToWish}" name="ReturnToWish" reRender="qquuqq"/>
               <apex:actionFunction action="{!cancelfunction}" name="ReturnToWishWithOutSave" reRender="qqqqyuu"/>
-              
+
               <div class="step-base">
                 <span class="step-tether nav-down">
                   <nav>
@@ -35,8 +35,8 @@
                       </ul>
                       <div class="nav-sub-inner hidden-sm-down">
                           <a href="#top" class="hidden-md-down">&uarr; Back to Top</a>
-                          <apex:commandbutton value="Save" action="{!SaveandwishFamilyExit}" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" />
-                          <apex:Commandbutton value="Next" action="{!WishFamilytoWishInfo}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#wifsame-alert" />
+                          <apex:commandbutton value="Save" onclick="return false;" action="{!SaveandwishFamilyExit}" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#save-alert" />
+                          <apex:Commandbutton value="Next" onclick="return false;" action="{!WishFamilytoWishInfo}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#wifsame-alert" />
                       </div>
                   </nav>
                 </span>
@@ -50,7 +50,7 @@
                 <div class="container" id="family-info">
                     <fieldset>
                       <legend>Wish Child</legend>
-                      <div class="col-md-6">
+                      <div class="col-lg-6">
                           <div class="form-group row">
                               <label class="col-sm-3" aria-labelledby="Child Name">Name</label>
                               <div class="col-sm-6 text-muted">
@@ -75,9 +75,9 @@
                         listSize = {!cnt};
                         </script>
                         <apex:variable var="cnt" value="{!cnt+1}"/>
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
                           <div class="form-group row">
-                              <div class="col-sm-3"><label for="wff:frm:relationship-fc" aria-label="relationship">Relationship</label></div>
+                              <div class="col-xs-12 col-sm-4"><label for="wff:frm:relationship-fc" aria-label="relationship">Relationship</label></div>
                               <div class="col-sm-6">
                                 <apex:selectList value="{!wishFamilContact.Relationship}" id="relationship-fc" multiselect="false" size="1" styleClass="form-control col-xs-12 col-sm-12 c-select relationship">
                                     <apex:selectOption itemlabel="Please Select" itemValue=""/>
@@ -86,13 +86,13 @@
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label class="firstname" aria-labelledby="first_name">Name</label></div>
+                              <div class="col-xs-12 col-sm-4"><label class="firstname" aria-labelledby="first_name">Name</label></div>
                               <div class="col-sm-6">
                                   <apex:inputText value="{!wishFamilContact.firstName}" styleClass="form-control firstname" html-placeholder="First Name" />
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label class="sr-only" aria-label="Middle Name">Middle Name</label></div>
+                              <div class="col-xs-12 col-sm-4"><label class="sr-only" aria-label="Middle Name">Middle Name</label></div>
                               <div class="col-sm-6">
                                   <apex:inputText value="{!wishFamilContact.MiddleName}" styleclass="form-control" html-placeholder="Middle Name (optional)" />
                               </div>
@@ -100,7 +100,7 @@
                           </div>
 
                           <div class="form-group row">
-                              <div class="col-sm-3">
+                              <div class="col-xs-12 col-sm-4">
                                   <label class="sr-only" aria-label="last_name">Last Name</label>
                               </div>
                               <div class="col-sm-6">
@@ -108,30 +108,28 @@
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3">
-                                  <label aria-label="Date of Birth">Date of Birth</label>
-                              </div>
+                              <div class="col-xs-12 col-sm-4"><label aria-label="Date of Birth">Date of Birth</label></div>
                               <div class="col-sm-6">
                                   <apex:inputText value="{!wishFamilContact.dob}" styleClass="form-control date-input numbers-only dob" html-placeholder="mm/dd/yyyy" />
                               </div>
                           </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
                           <div class="form-group row">
-                              <div class="col-sm-3"><label for="wcf:frm:street" aria-labelledby="street">Address</label></div>
+                              <div class="col-xs-12 col-sm-4"><label for="wcf:frm:street" aria-labelledby="street">Address</label></div>
                               <div class="col-sm-6">
                                   <apex:inputText value="{!wishFamilContact.Street}" styleClass="form-control name-group address" html-placeholder="0000 NE 00 Ave"  />
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label for="wcf:frm:city" class="sr-only" aria-labelledby="city">City</label></div>
+                              <div class="col-xs-12 col-sm-4"><label for="wcf:frm:city" class="sr-only" aria-labelledby="city">City</label></div>
                               <div class="col-sm-6">
                                   <apex:inputText value="{!wishFamilContact.City}" styleClass="form-control name-group city" html-placeholder="City"  />
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label for="wcf:frm:state" class="sr-only" aria-labelledby="state">State</label></div>
+                              <div class="col-xs-12 col-sm-4"><label for="wcf:frm:state" class="sr-only" aria-labelledby="state">State</label></div>
                               <div class="col-xs-12 col-sm-6">
                                   <apex:selectList value="{!wishFamilContact.State}" styleClass="form-control col-xs-12 col-sm-12 c-select state" size="1" >
                                       <apex:selectOptions value="{!wcfUtil.states}" />
@@ -140,7 +138,7 @@
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3">
+                              <div class="col-xs-12 col-sm-4">
                                   <label for="wcf:frm:postalcode" class="sr-only" aria-labelledby="postalcode">Postal Code</label>
                               </div>
                               <div class="col-sm-6">
@@ -149,28 +147,28 @@
                           </div>
 
                           <div class="form-group row">
-                              <div class="col-sm-3"><label aria-labelledby="email_address">Email</label></div>
+                              <div class="col-xs-12 col-sm-4"><label aria-labelledby="email_address">Email</label></div>
                               <div class="col-sm-6">
                                   <apex:inputText value="{!wishFamilContact.Email}" styleClass="form-control email" maxlength="50" html-placeholder="your_email@domain.com" />
                                   <span class="errorMsg"></span>
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label aria-labelledby="Home Phone">Home</label></div>
+                              <div class="col-xs-12 col-sm-4"><label aria-labelledby="Home Phone">Home</label></div>
                               <div class="col-sm-6">
-                                   <apex:inputText value="{!wishFamilContact.homeTelephone}" styleClass="form-control numbers-only phone phone-group" maxlength="28" html-placeholder="(000) 000-0000" html-type="tel" />
+                                   <apex:inputText value="{!wishFamilContact.homeTelephone}" styleClass="form-control numbers-only phone phone-group" maxlength="14" html-placeholder="(000) 000-0000" html-type="tel" />
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label aria-labelledby="Home Phone">Work</label></div>
+                              <div class="col-xs-12 col-sm-4"><label aria-labelledby="Home Phone">Work</label></div>
                               <div class="col-sm-6">
-                                   <apex:inputText value="{!wishFamilContact.workTelephone}" styleClass="form-control numbers-only phone phone-group" maxlength="28" html-placeholder="(000) 000-0000" html-type="tel" />
+                                   <apex:inputText value="{!wishFamilContact.workTelephone}" styleClass="form-control numbers-only phone phone-group" maxlength="14" html-placeholder="(000) 000-0000" html-type="tel" />
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label aria-labelledby="Home Phone">Mobile</label></div>
+                              <div class="col-xs-12 col-sm-4"><label aria-labelledby="Home Phone">Mobile</label></div>
                               <div class="col-sm-6">
-                                   <apex:inputText value="{!wishFamilContact.mobileTelephone}" styleClass="form-control numbers-only phone phone-group" maxlength="28" html-placeholder="(000) 000-0000" html-type="tel" />
+                                   <apex:inputText value="{!wishFamilContact.mobileTelephone}" styleClass="form-control numbers-only phone phone-group" maxlength="14" html-placeholder="(000) 000-0000" html-type="tel" />
                               </div>
                           </div>
                         </div>
@@ -189,8 +187,7 @@
                     <legend>Requested Wish Participants</legend>
                     <span class="info">As indicated by the wish child. Please list legal names of all requested wish participants and relevant information.
                       <br/><i>Note:</i> Make-A-Wish cannot guarantee the participation of any individual(s) listed below.</span>
-                    <div class="form-group row">
-                      <div class="col-md-6">
+                    <div class="form-group row" style="padding:0 1rem">
                         <label class="c-input c-checkbox" for="wff:frm:membAdd:same-pg" style="color:#747678">
                           <apex:inputCheckbox value="{!wcfUtil.sameParentGuardian}" id="same-pg">
                             <apex:actionSupport action="{!SameAsFamily}" event="onchange" reRender="membAdd,uiLogic" />
@@ -198,7 +195,6 @@
                             <span class="c-indicator" style="top:-.2rem; border:1px solid #ccc"></span>
                             Add all Parent/Guardians to participant list
                         </label>
-                      </div>
                     </div>
 
                     <apex:pageBlock id="newPart">
@@ -212,9 +208,9 @@
                           <apex:param name="Participant" value="{!part}"/>
                         </apex:commandlink>
                         <apex:variable var="part" value="{!part+1}"/>
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
                           <div class="form-group row">
-                              <div class="col-sm-3"><label aria-label="relationship">Relationship</label></div>
+                              <div class="col-xs-12 col-sm-4"><label aria-label="relationship">Relationship</label></div>
                               <div class="col-sm-6">
                                 <apex:selectList value="{!wishFamilContact.Relationship}" multiselect="false" size="1" styleClass="form-control col-xs-12 col-sm-12 c-select partRelation{!part} relationship">
                                     <apex:selectOption itemlabel="Please Select" itemValue=""/>
@@ -223,13 +219,13 @@
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label class="firstname" aria-labelledby="first_name">Name</label></div>
+                              <div class="col-xs-12 col-sm-4"><label class="firstname" aria-labelledby="first_name">Name</label></div>
                               <div class="col-sm-6">
                                   <apex:inputText value="{!wishFamilContact.FirstName}" styleClass="form-control firstname partFName{!part}" maxlength="50" html-placeholder="First Name" />
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label class="sr-only" aria-label="Middle Name">Middle Name</label></div>
+                              <div class="col-xs-12 col-sm-4"><label class="sr-only" aria-label="Middle Name">Middle Name</label></div>
                               <div class="col-sm-6">
                                   <apex:inputText value="{!wishFamilContact.MiddleName}" styleclass="form-control" maxlength="50" html-placeholder="Middle Name (optional)" />
                               </div>
@@ -237,40 +233,40 @@
                           </div>
 
                           <div class="form-group row">
-                              <div class="col-sm-3">
-                                  <label class="sr-only" aria-label="last_name">Last Name</label>
+                              <div class="col-xs-12 col-sm-4">
+                                  <label class="col-xs-12 col-sm-4 sr-only" aria-label="last_name">Last Name</label>
                               </div>
                               <div class="col-sm-6 lastname">
                                   <apex:inputText value="{!wishFamilContact.LastName}" styleClass="form-control lastname partLName{!part}" maxlength="50" html-placeholder="Last Name" />
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3">
+                              <div class="col-xs-12 col-sm-4">
                                   <label aria-label="Date of Birth">Date of Birth</label>
                               </div>
-                              <div class="col-sm-6 lastname">
+                              <div class="col-sm-6">
                                   <apex:inputText value="{!wishFamilContact.dob}" styleClass="form-control dob date-input" maxlength="50" html-placeholder="mm/dd/yyyy" />
                               </div>
                           </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-lg-6">
                           <div class="form-group row">
-                              <div class="col-sm-3"><label aria-labelledby="email_address">Email</label></div>
+                              <div class="col-xs-12 col-sm-4"><label aria-labelledby="email_address">Email</label></div>
                               <div class="col-sm-6">
                                   <apex:inputText value="{!wishFamilContact.Email}" styleClass="form-control emailValue" maxlength="50" html-placeholder="participant_email@domain.com" />
                                   <span class="errorMsg"></span>
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label aria-labelledby="Shirt Size">Shirt Size</label></div>
+                              <div class="col-xs-12 col-sm-4"><label aria-labelledby="Shirt Size">Shirt Size</label></div>
                               <div class="col-sm-6">
-                                    
+
                                    <apex:inputText value="{!wishFamilContact.tshirtSize}" styleClass="form-control" html-placeholder="small, medium, large" />
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label for="wff:frm:medicalneeds-part" aria-labelledby="Medical Needs">Medical Needs</label></div>
+                              <div class="col-xs-12 col-sm-4"><label for="wff:frm:medicalneeds-part" aria-labelledby="Medical Needs">Medical Needs</label></div>
                               <div class="col-sm-6">
                                 <apex:selectList value="{!wishFamilContact.medicalNeeds}" multiselect="false" size="1" styleClass="form-control c-select partRelation{!part} required" >
                                   <apex:selectOption itemlabel="Please Select" itemValue=""/>
@@ -280,7 +276,7 @@
                               </div>
                           </div>
                           <div class="form-group row">
-                              <div class="col-sm-3"><label for="wff:frm:mobile-phone-part" aria-labelledby="Residing with Wish Child">Residing with Wish Child</label></div>
+                              <div class="col-xs-12 col-sm-4"><label for="wff:frm:mobile-phone-part" aria-labelledby="Residing with Wish Child">Residing with Wish Child</label></div>
                               <div class="col-sm-6">
                                 <apex:selectList value="{!wishFamilContact.residingWishMedical}" multiselect="false" size="1" styleClass="form-control c-select partRelation{!part} required" >
                                 <apex:selectOption itemlabel="Please Select" itemValue=""/>
@@ -305,9 +301,9 @@
                   <fieldset id="emergency-contact">
                     <legend>Non-Participating Adult Emergency Contact</legend>
                     <span class="info">Please fill the fields below.</span>
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                       <div class="form-group row">
-                          <div class="col-sm-3"><label for="wff:frm:relationship-np-ec" aria-label="relationship">Relationship</label></div>
+                          <div class="col-xs-12 col-sm-4"><label for="wff:frm:relationship-np-ec" aria-label="relationship">Relationship</label></div>
                           <div class="col-sm-6">
                             <apex:selectList value="{!currWishChild.Emergency_Relationship__c}" id="relationship-np-ec" multiselect="false" size="1" styleClass="form-control col-xs-12 col-sm-12 c-select relationship">
                                 <apex:selectOption itemlabel="Please Select" itemValue=""/>
@@ -316,13 +312,13 @@
                           </div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-sm-3"><label for="wff:frm:firstname-np-ec" class="firstname" aria-labelledby="first_name">Name</label></div>
+                          <div class="col-xs-12 col-sm-4"><label for="wff:frm:firstname-np-ec" class="firstname" aria-labelledby="first_name">Name</label></div>
                           <div class="col-sm-6">
                               <apex:inputText value="{!currWishChild.Emergency_First_Name__c}" id="firstname-np-ec" styleClass="form-control firstname" maxlength="50" html-placeholder="First Name" />
                           </div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-sm-3"><label for="wff:frm:middleinitial-np-ec" class="sr-only" aria-label="Middle Name">Middle Name</label></div>
+                          <div class="col-xs-12 col-sm-4"><label for="wff:frm:middleinitial-np-ec" class="sr-only" aria-label="Middle Name">Middle Name</label></div>
                           <div class="col-sm-6">
                               <apex:inputText value="{!currWishChild.Emergency_Middle_Name__c}" id="middlename-np-ec" styleclass="form-control" maxlength="50" html-placeholder="Middle Name (optional)" />
                           </div>
@@ -330,7 +326,7 @@
                       </div>
 
                       <div class="form-group row">
-                          <div class="col-sm-3">
+                          <div class="col-xs-12 col-sm-4">
                               <label for="wff:frm:lastname-np-ec" class="sr-only" aria-label="last_name">Last Name</label>
                           </div>
                           <div class="col-sm-6 lastname">
@@ -339,18 +335,18 @@
                       </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                       <div class="form-group row">
-                          <div class="col-sm-3"><label for="wff:frm:emailaddress-fc" aria-labelledby="email_address">Email Address</label></div>
+                          <div class="col-xs-12 col-sm-4"><label for="wff:frm:emailaddress-fc" aria-labelledby="email_address">Email Address</label></div>
                           <div class="col-sm-6">
                               <apex:inputText value="{!currWishChild.Emergency_Email__c}" styleClass="form-control " maxlength="50" id="emailaddress-fc" html-placeholder="your_email@domain.com (optional)" />
                               <span class="errorMsg"></span>
                           </div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-sm-3"><label for="wff:frm:phone-np-ec" aria-labelledby="Phone">Phone</label></div>
+                          <div class="col-xs-12 col-sm-4"><label for="wff:frm:phone-np-ec" aria-labelledby="Phone">Phone</label></div>
                           <div class="col-sm-6">
-                               <apex:inputText value="{!currWishChild.Emergency_Mobilephone__c}" styleClass="form-control phone numbers-only phone-chk" maxlength="28" id="phone-np-ec" html-placeholder="(000) 000-0000" html-type="tel" />
+                               <apex:inputText value="{!currWishChild.Emergency_Mobilephone__c}" styleClass="form-control phone numbers-only phone-chk" maxlength="14" id="phone-np-ec" html-placeholder="(000) 000-0000" html-type="tel" />
                           </div>
                       </div>
                     </div>
@@ -359,24 +355,24 @@
                   <fieldset id="prior-wish">
                     <legend>Prior Wish Information</legend>
                     <span class="info">Please fill the fields below.</span>
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                       <div class="form-group row">
-                          <div class="col-sm-12"><label for="wff:frm:prior-wish" aria-labelledby="prior wish">Has your child ever had a wish granted or been considered by Make-A-Wish® or any other wish-granting organization?</label></div>
+                          <div class="col-xs-12"><label for="wff:frm:prior-wish" aria-labelledby="prior wish">Has your child ever had a wish granted or been considered by Make-A-Wish® or any other wish-granting organization?</label></div>
                           <div class="col-xs-12 col-sm-6">
                             <apex:inputField value="{!currWishChild.Already_wish_granted_by_MAW_Other_Org__c}" id="prior-wish" styleClass="form-control col-xs-12 col-sm-12 c-select f-prior-wish required"/>
                           </div>
                       </div>
                       <div class="form-group sr-only row prior-details">
-                          <div class="col-sm-12"><label for="wff:frm:prior-details" aria-labelledby="prior details">Please indicate the organizations name, the wish, and the date it was or will be granted.</label></div>
-                          <div class="col-md-12">
+                          <div class="col-xs-12"><label for="wff:frm:prior-details" aria-labelledby="prior details">Please indicate the organizations name, the wish, and the date it was or will be granted.</label></div>
+                          <div class="col-sm-10 col-lg-12">
                             <apex:inputTextarea styleClass="form-control prior-textarea Yes" id="prior-details" value="{!currWishChild.If_yes_Enter_Org_Name_Wish_Date_it_wa__c}" html-placeholder="Please enter prior wish details" />
                             <span class="text-muted" style="display:inline-block; line-height:1rem">A wish with another organization may not be pursued prior to completion of a Make-A-Wish experience.</span>
                           </div>
                       </div>
 
                       <div class="form-group row">
-                          <div class="col-sm-12"><label for="wff:frm:social-media" aria-labelledby="prior wish">Make-A-Wish would like to stay connected through social media. If interested, please provide contact information for each site on which you are active.</label></div>
-                          <div class="col-xs-12 col-sm-6 col-md-12">
+                          <div class="col-xs-12"><label for="wff:frm:social-media" aria-labelledby="prior wish">Make-A-Wish would like to stay connected through social media. If interested, please provide contact information for each site on which you are active.</label></div>
+                          <div class="col-sm-10 col-lg-12">
                             <apex:inputTextarea value="{!currWishChild.Social_Media_Link__c}" id="social-media" styleClass="form-control col-xs-12 col-sm-12 f-social-media" html-placeholder="twitter.com/user, facebook.com/user, instagram.com/user, etc." />
                           </div>
                       </div>
@@ -384,13 +380,13 @@
                   </fieldset>
 
                   <fieldset>
-                    <legend>Race/Ethnicity</legend>
+                    <legend>Race/ Ethnicity</legend>
                     <span class="info">The following information is <i>optional</i> and will be used for <i>statistical purposes only</i>.
                       <br/>The response should be provided by the child or his or her parent(s)/guardian(s) if they choose to do so.
                       <br/>Please select options that apply.</span>
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                       <div class="form-group row">
-                          <div class="col-sm-3"><label for="wff:frm:race">Race/Ethnicity</label></div>
+                          <div class="col-xs-12 col-sm-4"><label for="wff:frm:race">Race/ Ethnicity</label></div>
                           <div class="col-sm-6">
                             <apex:selectList value="{!ethnicityList}" id="race" multiselect="true" size="4" styleClass="form-control col-xs-12 col-sm-12 multi race-select">
                                 <apex:selectOption itemValue="" html-disabled="disabled"/>
@@ -411,15 +407,15 @@
                   <fieldset>
                     <legend>Wish Granter Information</legend>
                     <span class="info">Names of Make-A-Wish representatives assisting in the completion of this form.</span>
-                    <div class="col-md-6">
+                    <div class="col-lg-6">
                       <div class="form-group row">
-                          <div class="col-sm-3"><label for="wff:frm:wish-granter-1" aria-labelledby="Wish Granter's name">Wish Granter 1</label></div>
+                          <div class="col-xs-12 col-sm-4"><label for="wff:frm:wish-granter-1" aria-labelledby="Wish Granter's name">Wish Granter 1</label></div>
                           <div class="col-sm-6">
                             <apex:inputText value="{!wcfUtil.caseTeamMemberNo1}" id="wish-granter-1" styleClass="form-control granter" html-placeholder="Full Name" />
                           </div>
                       </div>
                       <div class="form-group row">
-                          <div class="col-sm-3"><label for="wff:frm:wish-granter-2" aria-labelledby="Wish Granter's name">Wish Granter 2</label></div>
+                          <div class="col-xs-12 col-sm-4"><label for="wff:frm:wish-granter-2" aria-labelledby="Wish Granter's name">Wish Granter 2</label></div>
                           <div class="col-sm-6">
                             <apex:inputText value="{!wcfUtil.caseTeamMemberNo2}" id="wish-granter-2" styleClass="form-control granter" html-placeholder="Full Name" />
                           </div>
@@ -433,7 +429,7 @@
 
                 <apex:outputPanel id="uiLogic">
                 <script>
-                
+
                 setIntervalX(function () {
                     commonjs();
                     uiLogic();
@@ -450,55 +446,53 @@
                 <nav class="btm">
                   <ul>
                     <!-- <li><apex:Commandbutton value="Prev" action="{!BackToWCF}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#page-exit-alert" /></li> -->
-                    <li><apex:commandbutton value="Save" action="{!SaveandwishFamilyExit}" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" /></li>
-                    <li><apex:Commandbutton value="Next" action="{!WFFNext}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#exit-alert-page" /></li>
+                    <li><apex:commandbutton value="Save" onclick="return false;" action="{!SaveandwishFamilyExit}" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#save-alert" /></li>
+                    <li><apex:Commandbutton value="Next" onclick="return false;" action="{!WishFamilytoWishInfo}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#wifsame-alert" /></li>
                   </ul>
                 </nav>
               </div>
-              
+
                <!-- wif modal -->
-      <div class="modal fade" id="wifsame-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title" id="exit-form">Leaving Form</h1>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
-            </div>
-            <div class="modal-footer">
-              <apex:commandButton onclick="test1();" value="Save" styleClass="btn-md" reRender="ssss"/>
-              <apex:commandButton action="{!withOutSavefromWCFtoWIF}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="jjj" />
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      
-            
+              <div class="modal fade" id="wifsame-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title" id="exit-form">Leaving Form</h1>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <apex:commandButton onclick="test1();" value="Save" styleClass="btn-md form-validate" reRender="ssss"/>
+                      <apex:commandButton action="{!withOutSavefromWCFtoWIF}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="jjj" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
                <!-- wcf modal -->
-      <div class="modal fade" id="wcfee-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title" id="exit-form">Leaving Form</h1>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
-            </div>
-            <div class="modal-footer">
-              <apex:commandButton onclick="test3();" value="Save" styleClass="btn-md" reRender="jjj" />
-              <apex:commandButton action="{!withOutSavetoChild}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="jjj"/>
-            </div>
-          </div>
-        </div>
-      </div>
+              <div class="modal fade" id="wcfee-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title" id="exit-form">Leaving Form</h1>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
+                    </div>
+                    <div class="modal-footer">
+                      <apex:commandButton onclick="test3();" value="Save" styleClass="btn-md form-validate" reRender="jjj" />
+                      <apex:commandButton action="{!withOutSavetoChild}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="jjj"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </apex:form>
           </section>
         </div>
@@ -507,6 +501,7 @@
       <script>
         function uiLogic(){
           $(".multi").chosen({placeholder_text_multiple: "Please select all that apply", width:"100%"});
+
           //show textarea fields on pageload if "Yes" was selected
           if ($('.f-prior-wish').val() != null){
             if ($('.f-prior-wish').val().indexOf('Yes') != -1){
@@ -530,7 +525,7 @@
           //show textarea fields on pageload if "other" was selected
           if ($('.race-select').val() != null){
             if ($('.race-select').val().indexOf('Other') != -1){
-             
+
               $('.other-race').removeClass('sr-only').addClass('required');
             }
           }
@@ -545,7 +540,7 @@
               }
             }
           });
-          
+
           $(".date-input").datepicker({
                     autoclose: true,
                     changeYear: true,
@@ -554,30 +549,30 @@
                     minDate: '-100Y',
                     onSelect: function() {$(this).valid()}
                   });
-          
+
         } uiLogic();
         function test1(){
-            if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+            if ($('#wff\\:frm').valid()){
             console.log('form submitted');
             SaveWishChildtoWInfo();
-            
+
           } else {
-          
+
             $('#wifsame-alert').modal('hide');
           }
         }
-        
+
         function test3(){
-            if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+            if ($('#wff\\:frm').valid()){
             console.log('form submitted');
            SaveWishFFtoWishChild();
-            
+
           } else {
-          
+
             $('#wcfee-alert').modal('hide');
           }
         }
-        
+
       </script>
     </body>
 </apex:page>

@@ -38,8 +38,6 @@
                     }, 10);
             }, 2000);
         }
-
-
     }
     </script>
 
@@ -88,17 +86,17 @@
                                     <table id="dataTab1" class="table table-maw table-hover">
                                         <thead class="thead-default">
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Chapter Name</th>
-                                                <th>Type</th>
-                                                <th>Date</th>
-                                                <th>Start Time</th>
-                                                <th>End Time</th>
-                                                <th>Location</th>
-                                                <th>Max Capacity</th>
-                                                <th>Available Seats</th>
-                                                <th>Action</th>
-                                                <th>Link</th>
+                                              <th title="Volunteer Name">Name</th>
+                                              <th title="Chapter Name">Chapter</th>
+                                              <th title="Orientation Type">Type</th>
+                                              <th title="Orientation Date">Date</th>
+                                              <th title="Start Time">Start</th>
+                                              <th title="End Time">End</th>
+                                              <th title="Orientation Location">Location</th>
+                                              <th title="Max Capacity">Capacity</th>
+                                              <th title="Available Seats">Seats</th>
+                                              <th title="Select Below">Action</th>
+                                              <th>Link</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -141,16 +139,16 @@
                                     <table id="dataTab2" class="table table-maw table-hover">
                                         <thead class="thead-default">
                                             <tr>
-                                                <th>Name</th>
-                                                <th>Chapter Name</th>
-                                                <th>Type</th>
-                                                <th>Date</th>
-                                                <th>Start Time</th>
-                                                <th>End Time</th>
-                                                <th>Location</th>
-                                                <th>Max Capacity</th>
-                                                <th>Available Seats</th>
-                                                <th>Action</th>
+                                                <th title="Volunteer Name">Name</th>
+                                                <th title="Chapter Name">Chapter</th>
+                                                <th title="Orientation Type">Type</th>
+                                                <th title="Orientation Date">Date</th>
+                                                <th title="Start Time">Start</th>
+                                                <th title="End Time">End</th>
+                                                <th title="Orientation Location">Location</th>
+                                                <th title="Max Capacity">Capacity</th>
+                                                <th title="Available Seats">Seats</th>
+                                                <th title="Select Below">Action</th>
                                             </tr>
                                         </thead>
 
@@ -172,9 +170,8 @@
                                                         <td>{!training.location}</td>
                                                         <td>{!training.maxCapacity}</td>
                                                         <td>{!training.avilableSheets}</td>
-
                                                         <td>
-                                                            <apex:commandLink action="{!Register}">Register
+                                                            <apex:commandLink title="Click to Register" action="{!Register}">Register
                                                                 <apex:param name="trainingId" value="{!training.recordId}" assignTo="{!trainingId}"/>
                                                             </apex:commandLink>
                                                         </td>
@@ -216,7 +213,7 @@
 
         <apex:include pageName="prospective_footer" id="pfooter" />
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.dataTables.min.js')}"></script>
-        <script src="{!URLFOR($Resource.prospective_assets, ' web/js/stacktable.min.js ')}"></script>
+        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/stacktable.min.js')}"></script>
         <script>
           $(document).ready(function () {
             $('head').prepend('<title>Volunteer Orientation | Make-A-Wish \u00AE</title>');

@@ -61,13 +61,11 @@
     <filter>
         <criteriaItems>
             <column>Case$Budget_Cash__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case$Budget_Inkind__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
             <value>0</value>
         </criteriaItems>

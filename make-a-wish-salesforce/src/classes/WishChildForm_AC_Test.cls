@@ -21,11 +21,9 @@ public class WishChildForm_AC_Test{
         PageReference pageRef = Page.WishChildForm_VF;
         pageRef.getParameters().put('id', String.valueOf(wish.Id));
         Test.setCurrentPage(pageRef);
-        
         WishChildForm_AC wishChildIns = new WishChildForm_AC(sc);
         WishChildFormUtil util = new WishChildFormUtil();
         wishChildIns.saveContact();
-        
         // wishChildIns.removeFamily();
         wishChildIns.SaveandwishFamilyExit();
         wishChildIns.SaveandwishChildExit();
@@ -73,13 +71,27 @@ public class WishChildForm_AC_Test{
         wishChildIns.getCurrentMedicationList();
         wishChildIns.getCurrentAllergyNamesList();
         wishChildIns.getCurrentOtherNeedsList();
+        wishChildIns.WCFtoWIF();
+        wishChildIns.WCFtoWFF();
+        wishChildIns.WishInfotoWishChild();
+        wishChildIns.WishInfotoWishFamily();
+        wishChildIns.NavigatetoWishChildForm();
+        wishChildIns.NavigatetoWishFamily();
+        wishChildIns.cancel();
+        wishChildIns.withOutSavefromWCFtoWIF();
+        wishChildIns.withOutSaveWCCF();
+        wishChildIns.CheckSameasParent();
+        wishChildIns.WishFamilytoWishInfo();
         util.getMonths();
         wishChildIns.CancelFunction();
         util.getYear();
         util.getWishChildFields();
         util.getRelationships();
         wishChildIns.generatePDF();
+        wishChildIns.withOutSavetoChild();
+        wishChildIns.ExitwithApprovalError();
         util.getStates();
+        
         wishChildIns.forceDownloadPDF();
         wishChildIns.submitforApproval();
         System.AssertEquals(wish.Id,wishChildFormIns.Case__c);
@@ -87,7 +99,6 @@ public class WishChildForm_AC_Test{
     
     /* This DocusignSignNow Method is used to cover the codecoverage SignNowmultiEmail() and SubmitAndSign().*/
     static testMethod void DocusignSignNow(){ 
-        
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
         case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -107,11 +118,9 @@ public class WishChildForm_AC_Test{
         wishChildIns.SubmitAndSign();
         Test.StopTest();
         System.AssertEquals(wish.Id,wishChildFormIns.Case__c);
-        
     }
     /* This DocusignSendEmail Method is used to cover the codecoverage sendpdftoEmail() and callouttoDocusing().*/
     static testMethod void DocusignSendEmail(){ 
-        
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
         case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -127,7 +136,6 @@ public class WishChildForm_AC_Test{
         WishChildForm_AC wishChildIns = new WishChildForm_AC(sc);
         WishChildFormUtil util = new WishChildFormUtil();
         util.emailList.add('Vennila Paramasivam');
-        
         wishChildIns.multiEmail();
         wishChildIns.sendpdftoEmail();
         Map<String,String> sendEmailMap = new Map<String,String>();
@@ -140,7 +148,6 @@ public class WishChildForm_AC_Test{
     }
     
     static testMethod void wishChildisEmpty(){
-        
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
         case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -152,5 +159,4 @@ public class WishChildForm_AC_Test{
         Test.setCurrentPage(pageRef);
         WishChildForm_AC wishChildIns = new WishChildForm_AC(sc);
     }
-    
 }

@@ -36,13 +36,11 @@
     <filter>
         <criteriaItems>
             <column>npe5__Affiliation__c$npe5__Status__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Active,Pending,Inactive</value>
         </criteriaItems>
         <criteriaItems>
             <column>npe5__Affiliation__c$npe5__Contact__c.RecordType</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact</value>
         </criteriaItems>

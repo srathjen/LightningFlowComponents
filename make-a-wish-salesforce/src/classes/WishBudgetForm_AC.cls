@@ -93,7 +93,7 @@ public class WishBudgetForm_AC{
              }
              
             if(participentSet.size() > 0){
-                NoOfWishParts = participentSet.size();
+                NoOfWishParts = participentSet.size() + 1;
             }
          
       }    
@@ -192,7 +192,7 @@ public class WishBudgetForm_AC{
                             FE_Posted_Cash__c,
                             FE_Posted_In_Kind__c,
                             Case__c
-                            FROM Wish_Expense__c WHERE Case__c =:caseId Order by RecordType.Name, CreatedDate];
+                            FROM Wish_Expense__c WHERE Case__c =:caseId Order by Wish_Expense_Transaction_Code__r.Wish_Expense_Type__r.Name,RecordType.Name, CreatedDate];
         
         System.debug('wishExpenseList Size 1:' + wishExpenseList.size());
         if(wishExpenseList.size() <= 0){
@@ -312,7 +312,7 @@ public class WishBudgetForm_AC{
     public void LoadTemplates()
     {
         List<Wish_Expense_Transaction_Code__c> transListT;
-        for(Wish_Expense_Type_Tempate__c template : [SELECT Id, Name, Wish_Expense_Type__r.Name from Wish_Expense_Type_Tempate__c where Wish_Type__c =: wishType]){
+        for(Wish_Expense_Type_Tempate__c template : [SELECT Id, Name, Wish_Expense_Type__r.Name from Wish_Expense_Type_Tempate__c where Wish_Type__c =: wishType order by Wish_Expense_Type__r.Name]){
         
             wishExpenseTypes.add(template.Wish_Expense_Type__r.Name);
             Wish_Expense__c curExpense = new Wish_Expense__c();

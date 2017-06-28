@@ -21,6 +21,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -108,44 +112,42 @@
         <description>It can contains more than one day value of the week</description>
         <externalId>false</externalId>
         <label>Day of The Week</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Sunday</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Monday</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tuesday</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wednesday</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Thursday</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Friday</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Saturday</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>MultiselectPicklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Sunday</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Monday</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Tuesday</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Wednesday</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Thursday</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Friday</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Saturday</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
         <visibleLines>4</visibleLines>
     </fields>
     <fields>
@@ -163,207 +165,205 @@
         <description>It will holds the end time value of the event</description>
         <externalId>false</externalId>
         <label>End Time</label>
+        <picklist>
+            <picklistValues>
+                <fullName>12:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>12:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>12:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>12:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>12:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:30 PM</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Event_Date__c</fullName>
@@ -456,239 +456,235 @@
         <description>It will define the priority of the event.</description>
         <externalId>false</externalId>
         <label>Priority</label>
+        <picklist>
+            <picklistValues>
+                <fullName>1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>1</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Start_Time__c</fullName>
         <description>It will holds the event start time</description>
         <externalId>false</externalId>
         <label>Start Time</label>
+        <picklist>
+            <picklistValues>
+                <fullName>12:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>12:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>12:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>12:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>12:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:30 PM</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Total_Hour_Spent_Hidden__c</fullName>

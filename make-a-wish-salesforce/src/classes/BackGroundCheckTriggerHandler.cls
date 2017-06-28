@@ -156,10 +156,11 @@ Public class BackGroundCheckTriggerHandler
    }
    
    //Update volunteer Opportunity and volunteer Role status.
-   Public static void UpdateVOppAndVRoleStatus(Set<Id> volunteerContactIdSet){
+   Public static void UpdateVOppAndVRoleStatus(Set<Id> volunteerContactIdSet,String objectName){
        if(volunteerContactIdSet.size() > 0){
        List<Volunteer_Opportunity__c> updateVolOpportunityList = new List<Volunteer_Opportunity__c>();
        List<Volunteer_Roles__c> updateVolunteerRoleList = new List<Volunteer_Roles__c>();
+       Map<Id,Volunteer_Roles__c> VolunteerRoleMap = new Map<Id,Volunteer_Roles__c>();
        for(Volunteer_Opportunity__c dbVolOpportunity : [SELECT Id,Volunteer_Name__c,Status__c FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c IN: volunteerContactIdSet]){
            
            Volunteer_Opportunity__c updateVolStatus = new Volunteer_Opportunity__c();
@@ -169,12 +170,18 @@ Public class BackGroundCheckTriggerHandler
           
        }
        
-       for(Volunteer_Roles__c dbVolRole : [SELECT Id,Volunteer_Name__c,Status__c FROM Volunteer_Roles__c Where Volunteer_Name__c IN: volunteerContactIdSet ]){
+       for(Volunteer_Roles__c dbVolRole : [SELECT Id,Volunteer_Name__c,Status__c,Chapter_Role__c,Chapter_Role__r.Background_Check_Required__c FROM Volunteer_Roles__c Where Volunteer_Name__c IN: volunteerContactIdSet ]){
            
            Volunteer_Roles__c updateVolStatus = new Volunteer_Roles__c();
            updateVolStatus.Id = dbVolRole.Id;
+           if(dbVolRole.Chapter_Role__r.Background_Check_Required__c == true && objectName == 'backgroundCheck'){
            updateVolStatus.Status__c = 'Out of Compliance';
-           updateVolunteerRoleList .add(updateVolStatus);
+           }
+           if(objectName == 'COI'){
+           updateVolStatus.Status__c = 'Out of Compliance';
+           }
+           
+           VolunteerRoleMap.put(updateVolStatus.Id,updateVolStatus);
        }
        
        
@@ -182,8 +189,8 @@ Public class BackGroundCheckTriggerHandler
        if(updateVolOpportunityList.size() > 0)
        update updateVolOpportunityList;
        
-       if(updateVolunteerRoleList.size() > 0)
-       update updateVolunteerRoleList;
+       if(VolunteerRoleMap.size() > 0)
+       update VolunteerRoleMap.values();
      }
    }
 

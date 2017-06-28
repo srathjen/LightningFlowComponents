@@ -83,7 +83,6 @@
     <filter>
         <criteriaItems>
             <column>Contact.npo02__OppAmountThisYear__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>greaterThan</operator>
             <value>0</value>
         </criteriaItems>

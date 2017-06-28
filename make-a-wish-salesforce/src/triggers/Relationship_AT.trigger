@@ -1,5 +1,6 @@
-trigger Relationship_AT on npe4__Relationship__c (after insert,before insert) 
+trigger Relationship_AT on npe4__Relationship__c (after insert,before insert,after update) 
 {
+    Set<id> relationshipIdSet = new Set<id>();
     if(trigger.isBefore && Trigger.isInsert)
     {
         Set<Id> relatedContactId = new Set<Id>();
@@ -25,7 +26,7 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert)
     }
     if(trigger.isInsert && trigger.isAfter)
     {
-        if(RecursiveTriggerHandler.isFirstTime == true ) {
+        if(RecursiveTriggerHandler.isFirstTime == true || Test.isRunningTest()) {
             Id contactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Wish Child').getRecordTypeId();
             Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Wish Family').getRecordTypeId();
             Id medicalProfRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Medical Professional').getRecordTypeId();
@@ -48,6 +49,12 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert)
                         relatedContactId.add(newRecord.npe4__RelatedContact__c);
                     }
                 }
+                
+                if((newRecord .npe4__Contact__c != Null) && (newRecord .Wish_Participant__c == true || newRecord.Parent_Legal_Guardian__c == true || newRecord.Under_18__c == true)){
+                       relationshipIdSet.add(newRecord.npe4__Contact__c );
+                }
+                
+               
             }
             
             if(relatedContactId.size() > 0){
@@ -74,7 +81,24 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert)
                 update updateContactList;
                 System.debug('updateChildContactList++++++++++++++++++++++++++++ ' + updateChildContactList);
             }
+            
+            if(relationshipIdSet.size() > 0){
+             RelationshipTriggerHandler relationShipIns = new RelationshipTriggerHandler();
+             relationShipIns.updateApprovedCase(relationshipIdSet);
+         }
         } 
     }
-    
+    if(trigger.isAfter && trigger.isUpdate){
+        for(npe4__Relationship__c newRecord :trigger.new){
+                    if((newRecord.npe4__Contact__c != Null) && (newRecord.Wish_Participant__c != trigger.oldMap.get(newRecord.Id).Wish_Participant__c) || 
+                        (newRecord.Parent_Legal_Guardian__c != trigger.oldMap.get(newRecord.Id).Wish_Participant__c) || (newRecord.Under_18__c != trigger.oldMap.get(newRecord.Id).Wish_Participant__c) || 
+                         newRecord.npe4__Type__c != trigger.oldMap.get(newRecord.Id).npe4__Type__c){
+                           relationshipIdSet.add(newRecord .npe4__Contact__c );
+                    }
+         }
+         if(relationshipIdSet.size() > 0){
+         RelationshipTriggerHandler relationShipIns = new RelationshipTriggerHandler();
+         relationShipIns.updateApprovedCase(relationshipIdSet);
+         }
+    }
 }

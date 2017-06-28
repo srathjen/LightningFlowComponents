@@ -90,7 +90,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                             <tr>
                                                 <th>Register</th>
                                                 <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.NonWishEvents}" var="fieldValue">
-                                                    <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                                    <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'HiddenVolunteer Count Description' }">
                                                         <th>{!fieldValue.label}</th>
                                                     </apex:outputpanel>
                                                 </apex:repeat>
@@ -105,7 +105,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                         <apex:outputpanel rendered="{!fieldValue.label = 'Record ID' }">
                                                             <td>
 
-                                                            <apex:outputLink style="text-decoration: underline;color: blue;" value="/{!con.nonWishOpportunities[fieldValue]}" id="theLink">View</apex:outputLink>
+                                                            <apex:outputLink style="text-decoration: underline;color: blue;" value="/{!con.nonWishOpportunities.Non_Wish_Event__c}" id="theLink">View</apex:outputLink>
 
                                                                  | &nbsp;
                                                                 <apex:commandLink value="Register" action="{!RegisterNonWishEvents}"  style="text-decoration: underline; color:blue;">
@@ -115,7 +115,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
 
                                                             </td>
                                                         </apex:outputpanel>
-                                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'Event Date' }">
+                                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'Event Date' && fieldValue.label != 'HiddenVolunteer Count Description' }">
                                                             <td>{!con.nonWishOpportunities[fieldValue]}</td>
                                                         </apex:outputpanel>
 

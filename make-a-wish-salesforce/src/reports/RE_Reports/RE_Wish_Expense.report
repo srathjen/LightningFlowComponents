@@ -75,7 +75,6 @@
     <filter>
         <criteriaItems>
             <column>Wish_Expense__c$Migrated_Record__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

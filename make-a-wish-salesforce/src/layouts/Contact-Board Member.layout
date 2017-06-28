@@ -112,11 +112,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MailingAddressVerified__c</field>
+                <field>MailingAddressVerificationAttempted__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MailingAddressVerificationAttempted__c</field>
+                <field>MailingAddressVerified__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -153,11 +153,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>OtherAddressVerified__c</field>
+                <field>OtherAddressVerificationAttempted__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>OtherAddressVerificationAttempted__c</field>
+                <field>OtherAddressVerified__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -350,6 +350,10 @@
         <label>System Information</label>
         <layoutColumns>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Test_Record__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>CreatedById</field>
             </layoutItems>
@@ -440,7 +444,6 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Account.ACC_RECORDTYPE</fields>
         <fields>Account.NAME</fields>
         <fields>npe5__Primary__c</fields>
         <fields>Constituent_Code__c</fields>
@@ -487,7 +490,6 @@
         <fields>Chapter_Role_Opportunity__c</fields>
         <fields>Role__c</fields>
         <fields>Name__c</fields>
-        <fields>Wish__c</fields>
         <fields>Reason_Inactive__c</fields>
         <fields>Status__c</fields>
         <fields>Chapter_Name__c</fields>
@@ -495,11 +497,9 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>Date_Requested__c</fields>
         <fields>Date_Completed__c</fields>
         <fields>Date__c</fields>
         <fields>Status__c</fields>
-        <fields>Current__c</fields>
         <relatedList>Background_check__c.Volunteer__c</relatedList>
     </relatedLists>
     <relatedLists>

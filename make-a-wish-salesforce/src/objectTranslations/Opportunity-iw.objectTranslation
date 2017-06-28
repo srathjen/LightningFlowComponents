@@ -17,32 +17,117 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Formula: The Amount of this Opportunity minus the Payment Writeoff Amount and Payment Amount Received. --></help>
+        <name>LeadSource</name>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fax</masterLabel>
+            <translation><!-- Fax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Online</masterLabel>
+            <translation><!-- Online --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <name>StageName</name>
+        <picklistValues>
+            <masterLabel>Application Submitted</masterLabel>
+            <translation><!-- Application Submitted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Awarded</masterLabel>
+            <translation><!-- Awarded --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed Lost</masterLabel>
+            <translation><!-- Closed Lost --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed Won</masterLabel>
+            <translation><!-- Closed Won --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cultivating</masterLabel>
+            <translation><!-- Cultivating --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In-Kind Not Yet Received</masterLabel>
+            <translation><!-- In-Kind Not Yet Received --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In-Kind Received</masterLabel>
+            <translation><!-- In-Kind Received --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LOI Submitted</masterLabel>
+            <translation><!-- LOI Submitted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pledged</masterLabel>
+            <translation><!-- Pledged --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Posted</masterLabel>
+            <translation><!-- Posted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Prospecting</masterLabel>
+            <translation><!-- Prospecting --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Withdrawn</masterLabel>
+            <translation><!-- Withdrawn --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <name>Type</name>
+        <picklistValues>
+            <masterLabel>Existing Funding</masterLabel>
+            <translation><!-- Existing Funding --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New Funding</masterLabel>
+            <translation><!-- New Funding --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help>נוסחה: הסכום של הזדמנות זו פחות סכום מחיקת התשלום וסכום התשלום שהתקבל.</help>
         <label><!-- Remaining Balance --></label>
         <name>npe01__Amount_Outstanding__c</name>
     </fields>
     <fields>
-        <help><!-- Total value of the Payments marked as written-off or noncollectable for this Opportunity. --></help>
+        <help>הערך הכולל של תשלומים שסומנו כמחוקים או בלתי ניתנים לגבייה עבור הזדמנות זו.</help>
         <label><!-- Payment Writeoff Amount --></label>
         <name>npe01__Amount_Written_Off__c</name>
     </fields>
     <fields>
-        <help><!-- Hidden field for passing a Contact Id for Contact Role creation. --></help>
+        <help>שדה מוסתר המשמש להעברת מזהה איש קשר לצורך יצירת תפקיד איש קשר.</help>
         <label><!-- Contact Id for Role --></label>
         <name>npe01__Contact_Id_for_Role__c</name>
     </fields>
     <fields>
-        <help><!-- If payments are active, and if checked, a new payment will not be automatically created for this Opportunity. --></help>
+        <help>אם התשלומים פעילים, ואם אפשרות זו מסומנת, תשלום חדש לא ייווצר באופן אוטומטי עבור הזדמנות זו.</help>
         <label><!-- Do Not Automatically Create Payment --></label>
         <name>npe01__Do_Not_Automatically_Create_Payment__c</name>
     </fields>
     <fields>
-        <help><!-- Formula: Whether or not the related Account is defined as an individual (SYSTEMIsIndividual__c) --></help>
+        <help>נוסחה: האם החשבון הקשור מוגדר כאישי (SYSTEMIsIndividual__c)</help>
         <label><!-- Is Opp From Individual --></label>
         <name>npe01__Is_Opp_From_Individual__c</name>
     </fields>
     <fields>
-        <help><!-- Determines the value on the Contact or Account of the Last Membership Level field. --></help>
+        <help>קובעת את הערך של איש הקשר או החשבון בשדה &apos;רמת חברות אחרונה&apos;.</help>
         <label><!-- Member Level --></label>
         <name>npe01__Member_Level__c</name>
         <picklistValues>
@@ -59,39 +144,39 @@
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Date membership period ends. --></help>
+        <help>תאריך סיום תקופת החברות.</help>
         <label><!-- Membership End Date --></label>
         <name>npe01__Membership_End_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Is this a renewal, a new membership, or a membership with someone who lapsed and has returned. --></help>
+        <help>אם מדובר בחידוש, חברות חדשה או חברות של מישהו שעזב או חזר.</help>
         <label><!-- Membership Origin --></label>
         <name>npe01__Membership_Origin__c</name>
         <picklistValues>
             <masterLabel>New</masterLabel>
-            <translation><!-- New --></translation>
+            <translation>חדש</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Reacquire</masterLabel>
-            <translation><!-- Reacquire --></translation>
+            <translation>רכוש מחדש</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Renewal</masterLabel>
-            <translation><!-- Renewal --></translation>
+            <translation>חידוש</translation>
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Date when membership period starts --></help>
+        <help>תאריך ההתחלה של תקופת החברות</help>
         <label><!-- Membership Start Date --></label>
         <name>npe01__Membership_Start_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Total number of payments for this Opportunity (Donation) --></help>
+        <help>מספר התשלומים הכולל עבור הזדמנות (תרומה) זו</help>
         <label><!-- Number of Payments --></label>
         <name>npe01__Number_of_Payments__c</name>
     </fields>
     <fields>
-        <help><!-- The total value of Payments marked as paid for this Opportunity. --></help>
+        <help>הערך הכולל של התשלומים המסומנים כתשלומים ששולמו עבור הזדמנות זו.</help>
         <label><!-- Payment Amount Received --></label>
         <name>npe01__Payments_Made__c</name>
     </fields>
@@ -101,7 +186,7 @@
         <relationshipLabel><!-- Donations --></relationshipLabel>
     </fields>
     <fields>
-        <help><!-- Concatenated fields used during rollups to locate the most recent opportunity. --></help>
+        <help>שדות משורשרים המשמשים במהלך סיכומים לאיתור ההזדמנות האחרונה.</help>
         <label><!-- Combined Rollup Fieldset --></label>
         <name>npo02__CombinedRollupFieldset__c</name>
     </fields>
@@ -111,11 +196,11 @@
         <name>npo02__systemHouseholdContactRoleProcessor__c</name>
         <picklistValues>
             <masterLabel>All Opportunities</masterLabel>
-            <translation><!-- All Opportunities --></translation>
+            <translation>כל ההזדמנויות</translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>No Opportunities</masterLabel>
-            <translation><!-- No Opportunities --></translation>
+            <translation>אין הזדמנויות</translation>
         </picklistValues>
     </fields>
     <fields>

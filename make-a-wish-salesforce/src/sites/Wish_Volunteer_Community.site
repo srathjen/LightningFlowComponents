@@ -6,14 +6,14 @@
     <allowStandardIdeasPages>false</allowStandardIdeasPages>
     <allowStandardLookups>false</allowStandardLookups>
     <allowStandardSearch>false</allowStandardSearch>
-    <authorizationRequiredPage>CommunitiesLogin</authorizationRequiredPage>
-    <bandwidthExceededPage>BandwidthExceeded</bandwidthExceededPage>
+    <authorizationRequiredPage>ContactChapter_VF</authorizationRequiredPage>
+    <bandwidthExceededPage>ContactChapter_VF</bandwidthExceededPage>
     <changePasswordPage>ChangePassword</changePasswordPage>
     <clickjackProtectionLevel>SameOriginOnly</clickjackProtectionLevel>
-    <fileNotFoundPage>FileNotFound</fileNotFoundPage>
+    <fileNotFoundPage>ContactChapter_VF</fileNotFoundPage>
     <forgotPasswordPage>ForgotPassword</forgotPasswordPage>
-    <genericErrorPage>Exception</genericErrorPage>
-    <inMaintenancePage>CommunitiesLogin</inMaintenancePage>
+    <genericErrorPage>ContactChapter_VF</genericErrorPage>
+    <inMaintenancePage>ContactChapter_VF</inMaintenancePage>
     <inactiveIndexPage>CommunitiesLogin</inactiveIndexPage>
     <indexPage>CommunitiesLanding</indexPage>
     <masterLabel>Wish Volunteer Community</masterLabel>

@@ -175,5 +175,60 @@ public class AffiliationTriggerHandler {
         
     }
     
+     public static void inactiveAffiliations(Set<Id> volunteerIdSet){
+        Set<Id> inactiveVolunteerIdSet = new set<Id>();
+        for(npe5__Affiliation__c currAff : [SELECT id,npe5__Status__c,npe5__Contact__c  FROM npe5__Affiliation__c WHERE  npe5__Contact__c IN :volunteerIdSet]){
+               
+               if(currAff.npe5__Status__c != 'Active'){
+                   inactiveVolunteerIdSet.add(currAff.npe5__Contact__c); 
+               }
+               else if(currAff.npe5__Status__c == 'Active' && inactiveVolunteerIdSet.Contains(currAff.npe5__Contact__c)){
+                   inactiveVolunteerIdSet.Remove(currAff.npe5__Contact__c);
+               }
+        }
+        if(inactiveVolunteerIdSet.Size() > 0){
+               updateBCandCOIVolunteerInactive(inactiveVolunteerIdSet,True);
+         }
+     }
+     
+     public static void activeAffiliations(Set<Id> volunteerIdsSet){
+        Set<Id> activeVolunteerIdSet = new set<Id>();
+        Set<Id> volunteerIdSet = new Set<Id>();
+        for(npe5__Affiliation__c currAff : [SELECT id,npe5__Status__c,npe5__Contact__c  FROM npe5__Affiliation__c WHERE  npe5__Contact__c IN :volunteerIdsSet]){
+               
+               if(currAff.npe5__Status__c == 'Active'){
+                   volunteerIdSet.add(currAff.npe5__Contact__c); 
+               }
+               
+        }
+        if(volunteerIdSet.Size() > 0){
+                For(User currUser : [SELECT Id,ContactId FROM User Where contactId IN :volunteerIdSet AND isActive = True]){
+                    activeVolunteerIdSet.add(currUser.ContactId);
+                }
+                if(activeVolunteerIdSet.Size() > 0){
+                    updateBCandCOIVolunteerInactive(activeVolunteerIdSet,False);
+                }
+         }
+     }
+      public static void updateBCandCOIVolunteerInactive(Set<Id> inactiveVolunteerIdSet,Boolean isInactiveVolunteer){
+            List<Background_check__c> updateBCList = New List<Background_check__c>();
+            List<Conflict_Of_Interest__c> updateCOIList = New List<Conflict_Of_Interest__c>();
+            for(Background_check__c currBC : [SELECT Id,Volunteer_is_Inactive__c FROM Background_check__c WHERE Volunteer__c IN :inactiveVolunteerIdSet AND Volunteer_is_Inactive__c !=: isInactiveVolunteer]){
+                currBc.Volunteer_is_Inactive__c = isInactiveVolunteer;
+                updateBCList.add(currBc);
+            }
+            
+            if(updateBCList.Size() > 0){
+                 Update updateBCList;
+            }
+            for(Conflict_Of_Interest__c currCOI : [SELECT Id,Volunteer_is_Inactive__c FROM Conflict_Of_Interest__c WHERE Volunteer_Contact__c IN : inactiveVolunteerIdSet AND Volunteer_is_Inactive__c !=: isInactiveVolunteer]){
+                currCOI.Volunteer_is_Inactive__c = isInactiveVolunteer;
+                updateCOIList.add(currCOI);
+            }
+            if(updateCOIList.Size() > 0){
+                Update updateCOIList;
+            }
+        
+    }
     
 }

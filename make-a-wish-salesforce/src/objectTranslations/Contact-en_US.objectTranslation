@@ -53,6 +53,22 @@
         <name>Account_Phone__c</name>
     </fields>
     <fields>
+        <label><!-- Active Board Member --></label>
+        <name>Active_Board_Member__c</name>
+    </fields>
+    <fields>
+        <label><!-- Active Non-Wish Granter --></label>
+        <name>Active_Non_Wish_Granter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Active Single Day Event Volunteer --></label>
+        <name>Active_Single_Day_Event_Volunteer__c</name>
+    </fields>
+    <fields>
+        <label><!-- Active Wish Granter --></label>
+        <name>Active_Wish_Granter__c</name>
+    </fields>
+    <fields>
         <label><!-- Actor/Actress --></label>
         <name>Actor_Actress__c</name>
     </fields>
@@ -497,6 +513,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Granted Age --></label>
+        <name>Granted_Age__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden BirthDate --></label>
         <name>HiddenBirthDate__c</name>
     </fields>
@@ -519,6 +539,10 @@
     <fields>
         <label><!-- Hidden First Name --></label>
         <name>Hidden_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Granted Date --></label>
+        <name>Hidden_Granted_Date__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Is We Need To Expedite The Proces --></label>
@@ -843,6 +867,29 @@ and the date it was or will be granted. --></help>
         <name>Last_Continuing_Edu_Date__c</name>
     </fields>
     <fields>
+        <name>LeadSource</name>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fax</masterLabel>
+            <translation><!-- Fax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Online</masterLabel>
+            <translation><!-- Online --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Lead Created Date --></label>
         <name>Lead_Created_Date__c</name>
     </fields>
@@ -1073,6 +1120,10 @@ and the date it was or will be granted. --></help>
             <masterLabel>Writing</masterLabel>
             <translation><!-- Writing --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Provided additional information --></label>
+        <name>Provided_additional_information__c</name>
     </fields>
     <fields>
         <label><!-- Provider Type --></label>
@@ -2421,6 +2472,26 @@ provide contact information for each site on which you are active. --></help>
         <relationshipLabel><!-- Contacts --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- Hidden Type of Contact --></label>
+        <name>Type_of_Contact__c</name>
+        <picklistValues>
+            <masterLabel>Both</masterLabel>
+            <translation><!-- Both --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Parent/Guardian</masterLabel>
+            <translation><!-- Parent/Guardian --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Qualifing</masterLabel>
+            <translation><!-- Qualifing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Referring</masterLabel>
+            <translation><!-- Referring --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Understand --></label>
         <name>Understand__c</name>
         <picklistValues>
@@ -2663,6 +2734,10 @@ provide contact information for each site on which you are active. --></help>
         <name>Wish_Liability_IsSigned__c</name>
     </fields>
     <fields>
+        <label><!-- Wish Notes --></label>
+        <name>Wish_Notes__c</name>
+    </fields>
+    <fields>
         <label><!-- Work Phone --></label>
         <name>Work_Phone__c</name>
     </fields>
@@ -2759,7 +2834,7 @@ provide contact information for each site on which you are active. --></help>
         <name>isApproved__c</name>
     </fields>
     <fields>
-        <label><!-- Hidden is Active Volunteer --></label>
+        <label><!-- Active Volunteer --></label>
         <name>is_Active_Volunteer__c</name>
     </fields>
     <fields>
@@ -3470,6 +3545,10 @@ provide contact information for each site on which you are active. --></help>
             <section>Contact Details</section>
         </sections>
         <sections>
+            <label><!-- Driver Information Section --></label>
+            <section>Driver Information Section</section>
+        </sections>
+        <sections>
             <label><!-- Employment Information --></label>
             <section>Employment Information</section>
         </sections>
@@ -3558,4 +3637,16 @@ provide contact information for each site on which you are active. --></help>
         <label><!-- Merge_Contacts --></label>
         <name>npsp__Merge_Contacts</name>
     </webLinks>
+    <workflowTasks>
+        <name>Contact_ET_Application_Approved</name>
+        <subject><!-- Contact ET : Application Approved --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Contact_ET_Application_Completed</name>
+        <subject><!-- Contact ET : Application Completed --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Contact_ET_Application_Status_Incomplete</name>
+        <subject><!-- Contact ET : Application Status Incomplete --></subject>
+    </workflowTasks>
 </CustomObjectTranslation>

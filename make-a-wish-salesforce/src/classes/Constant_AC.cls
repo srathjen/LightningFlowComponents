@@ -46,7 +46,11 @@ Public Class Constant_AC {
     public String updateContactRT;
     public String registeredWish;
     public String registeredNonWish;
+    public String volunteerTaskRT;
+    public String staffTaskRT;
     public Constant_AC() {
+        staffTaskRT = 'Staff';
+        volunteerTaskRT = 'Volunteer';
         diagnosisRT = 'Diagnosis Verification Review';
         budgetingRt = 'Budgeting';
         financeRt = 'Finance';

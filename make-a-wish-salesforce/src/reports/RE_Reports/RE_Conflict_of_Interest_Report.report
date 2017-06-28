@@ -10,7 +10,6 @@
     <filter>
         <criteriaItems>
             <column>Conflict_Of_Interest__c$Migrated_Record__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

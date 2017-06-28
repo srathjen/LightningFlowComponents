@@ -58,7 +58,7 @@ public class UpdatAffiliationAsInactiveBatch_Test
     }
     
   
-    static testmethod void UpdateActiveStatus()
+   static testmethod void UpdateActiveStatus()
     {
        TestClassUtil.createVolunteerContact();
        TestClassUtil.createVolunteerAccount();

@@ -158,6 +158,45 @@
                     
                     <tr>
                         <td>
+                            <!---- Medical Provider Information ------>
+                            <div class="wish-child-info" style="margin-top:1% !important">
+                                <div class="sectionHeader">About {!currLead.FirstName} {!currLead.LastName}</div>
+                                <div class="container" style="width:100%;">
+                                    <div class="left-col"> Please choose the one statement that best describes your patient: </div>
+                                    <div class="left-col"> 
+                                        <apex:outputPanel rendered="{!currLead.Responds_to_treatment_with_normal_health__c}">
+                                        	{!currLead.FirstName} {!currLead.LastName} responds to standard treatment which approximates normal health (e.g., diabetes, asthma, uncomplicated epilepsy)
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!currLead.Risk_of_complications_premature_death__c}">
+                                            	{!currLead.FirstName} {!currLead.LastName} has a non-progressive condition that may have a risk of complications and/or risk of a shortened life expectancy (e.g., cerebral palsy, quadriplegia, hemophilia)
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!currLead.Treatment_may_be_feasible_but_can_fail__c}">
+                                            	{!currLead.FirstName} {!currLead.LastName} has a condition for which curative treatment may be feasible but can fail; non-compliance is not included as a treatment failure. (e.g., cancer, irreversible organ failure)
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!currLead.Treatment_may_prolong_normal_activities__c}">
+                                            	{!currLead.FirstName} {!currLead.LastName} has a condition where a significantly shortened life expectancy is probable, but frequent and/or long periods of intensive treatment may prolong and allow participation in normal activities (e.g., cystic fibrosis, solid organ transplant)
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!currLead.Debilitation_may_extend_over_many_years__c}">
+                                            	{!currLead.FirstName} {!currLead.LastName} has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment resistant epilepsy, metabolic disease)
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!currLead.Increased_probability_of_premature_death__c}">
+                                            	{!currLead.FirstName} {!currLead.LastName} has an irreversible but non-progressive condition with severe disability and is experiencing multiple health complications that increase the probability of a significantly shortened life expectancy (e.g., anoxic brain injury, severe cerebral palsy)
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!currLead.Child_will_ultimately_die_prematurely__c}">
+                                            	{!currLead.FirstName} {!currLead.LastName} has a condition for which there is no reasonable hope of cure and from which children or young people will experience a significantly shortened life expectancy (e.g., Duchenne muscular dystrophy or neurodegenerative disease)
+                                        </apex:outputPanel>
+                                        <apex:outputPanel rendered="{!currLead.None_of_these_statements_describes_Child__c}">
+                                            	None of these statements describe {!currLead.FirstName} {!currLead.LastName}
+                                        </apex:outputPanel>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    
+                    <tr>
+                        <td>
                             <!---- Medical Question Information ------>        
                             <div class="wish-child-info" style="margin-top:1% !important">
                                 <div class="sectionHeader">Diagnosis Information</div>
@@ -197,6 +236,7 @@
                             <!---- Other Information ------>
                             <div class="wish-child-info" style="margin-top:1% !important">
                                 <div class="sectionHeader">Other Information</div>
+                                
                                 
                                 
                                 <apex:outputpanel rendered="{!currLead.Why_do_you_feel_would_be_eligible_Wish__c!=Null}">
@@ -266,6 +306,13 @@
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Please explain Deteriorate :</div>
                                         <div class="left-col"> {!currLead.Please_Explain_Deteriorate__c}</div>
+                                    </div>
+                                </apex:outputpanel>
+                                
+                                <apex:outputpanel rendered="{!currLead.Provided_additional_information__c!=Null}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Is there additional information you would like to provide?</div>
+                                        <div class="left-col"> {!currLead.Provided_additional_information__c}</div>
                                     </div>
                                 </apex:outputpanel>
                                

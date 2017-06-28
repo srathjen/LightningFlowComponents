@@ -119,15 +119,7 @@
       <hr style="border-width: 2px;margin-left: auto;display: block;margin-bottom: 0.5em;"></hr>
     
        -->    
-        <div style="margin-top:36px;">
-          <div style="margin:5px 0 30px 0;">
-            <div style="margin-bottom:5px !important;"><b>When thinking about a wish, some of my wish ideas were...</b></div>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.When_thinking_some_of_my_wish_ideas_were__c}</div>
-            <!-- <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div>
-            <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
-          </div>
+       
           
           <div style="font-weight:bold; margin-bottom:15px;"> Other Favorites:</div>
           <div style="margin:5px 0 30px 0;">
@@ -162,6 +154,18 @@
             <br/>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
           </div>
+          
+          
+           <div style="margin-top:36px;">
+          <div style="margin:5px 0 30px 0;">
+            <div style="margin-bottom:5px !important;"><b>When thinking about a wish, some of my wish ideas were...</b></div>
+            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.When_thinking_some_of_my_wish_ideas_were__c}</div>
+            <!-- <br/>
+            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div>
+            <br/>
+            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
+          </div>
+          
           <div style="margin:5px 0 30px 0;">
             <div style="margin-bottom:5px !important; font-weight: bold;"><b>Wish Notes...</b></div>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.Wish_Notes__c}</div>

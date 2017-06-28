@@ -6,64 +6,6 @@ of the 'Brithday Remainder Task' to the primary volunteer and assign tasks to ca
 *******************************************************************************************************************/
 public class TaskHandler {
     
-    // This method is used to create task after closing related task
-    /*public static void CreateNextTask(List<Task> statusUpdatedTaskList, Set<Id> taskRelatedCaseIdsSet) {
-Constant_AC  constant = new Constant_Ac(); 
-Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
-Id wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
-
-Set<String> taskParentDetailsSet = new  Set<String>();
-Map<Id,String> idsTaskNamesMap = new Map<Id,String>();
-
-Map<Id,Case> recurrenceTaskCasesMap = new Map<Id,Case>();
-
-for(Case getRelatedCase : [SELECT Id, RecordTypeId, ContactId, Wish_type__c, Chapter_Name__c,Subject, Status FROM Case WHERE isClosed = false AND Id IN : taskRelatedCaseIdsSet]) {
-recurrenceTaskCasesMap.put(getRelatedCase.Id, getRelatedCase);
-}
-
-Map<String,List<Task>> taskDetailsMap = new Map<String,List<Task>>();
-for(Task taskDetails : statusUpdatedTaskList) {
-if(taskDetails.WhatId != Null) {
-if(recurrenceTaskCasesMap.containsKey(taskDetails.WhatId)) {
-if(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c != null) {
-if(taskDetailsMap.containsKey(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c)) {
-taskDetailsMap.get(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c).add(taskDetails);
-} else {
-taskDetailsMap.put(recurrenceTaskCasesMap.get(taskDetails.WhatId).Wish_Type__c, new List<Task>{taskDetails});
-}
-} 
-}
-}
-} 
-List<Task> newTaskList = new List<Task>();
-Set<Id> newTaskCreatedWishesIdsSet = new Set<Id>();
-Map<String,Chapter_Action_Track__c> chapterDetailsMap = new Map<String,Chapter_Action_Track__c>();
-for(Chapter_Action_Track__c chapterActionList : [SELECT Id,Task_Name__c,Recurring_Frequency__c,Recurring__c,Wish_Type__c,Chapter_Name__r.Name,Sort_Order__c,Due_Date__c FROM Chapter_Action_Track__c WHERE Wish_Type__c IN :taskDetailsMap.keySet() ORDER BY Sort_Order__c ASC]) {
-for(String wishTypes : taskDetailsMap.keySet()) {
-if(taskDetailsMap.containsKey(wishTypes)) {
-for(Task createNextTask : taskDetailsMap.get(wishTypes)) {
-if(recurrenceTaskCasesMap.get(createNextTask.WhatId).Wish_type__c == wishTypes && recurrenceTaskCasesMap.get(createNextTask.WhatId).Subject == chapterActionList.Case_Type_Stage__c && recurrenceTaskCasesMap.get(createNextTask.WhatId).Chapter_Name__c == chapterActionList.Chapter_Name__r.Name) {
-if(createNextTask.Sort_Order__c < chapterActionList.Sort_Order__c && !newTaskCreatedWishesIdsSet.contains(createNextTask.WhatId)) {
-newTaskCreatedWishesIdsSet.add(createNextTask.WhatId);
-Task newTask = new Task();
-newTask.WhatId = createNextTask.WhatId;
-newTask.WhoId = createNextTask.WhoId;
-newTask.Subject = chapterActionList.Task_Name__c;
-newTask.ActivityDate = System.today() + Integer.valueOf(chapterActionList.Due_Date__c);
-newTask.Sort_Order__c = chapterActionList.Sort_Order__c;
-//newTask.TaskVolunteerRole__c = chapterActionList.Assigned_To__c;
-newTaskList.add(newTask);
-} 
-} 
-}
-}
-}
-}
-if(newTaskList.size()>0) {
-insert newTaskList;
-}
-}*/
-    
     // This method is used to assign the 'Birthday Remainder Task' to primary volunteer
     public static void BirthdayTaskPrimaryVolunteerAssign(List<Task> birthdayTasksList, Set<Id> taskRelatedContactIdsSet) {
         
@@ -103,83 +45,7 @@ insert newTaskList;
             }
         }
     }
-    
-    //This method is used to assign task to caseteammembers based on roles
-   /* public static void TaskAssignmentToVolunteer(List<Task> actionTrackTasksList, Set<Id> actionTracksRelatedCaseIdsSet) {
-        
-        Constant_AC  constant = new Constant_Ac(); 
-        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
-        Id wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
-        
-        Map<Id,Case> caseIdsMap = new Map<Id,Case>();
-        Set<String> wishTypesSet = new Set<String>();
-        Set<String> wishStagesSet = new Set<String>();
-        Set<String> wishChaptersSet = new Set<String>();
-        
-        for(Case getTaskDetails : [SELECT Id, ChapterName__c,ChapterName__r.Name,RecordType.Name,Wish_Type__c, RecordTypeId FROM Case WHERE Id IN : actionTracksRelatedCaseIdsSet]) {
-            if(getTaskDetails.ChapterName__c !=null && getTaskDetails.Wish_type__c != null) {
-                wishTypesSet.add(getTaskDetails.Wish_type__c);
-                wishStagesSet.add(getTaskDetails.RecordType.Name);
-                wishChaptersSet.add(getTaskDetails.ChapterName__r.Name);
-            }
-            caseIdsMap.put(getTaskDetails.Id,getTaskDetails);
-            
-        }
-        
-        Map<String, List<Chapter_Action_Track__c>> chapterActionsMap = new Map<String, List<Chapter_Action_Track__c>>();
-        
-        for(Chapter_Action_Track__c chapterActionTrack : [SELECT Id, Task_Name__c,Wish_Type__c,Chapter_Name__r.Name FROM Chapter_Action_Track__c WHERE Wish_Type__c IN : wishTypesSet AND Chapter_Name__r.Name IN : wishChaptersSet]) {
-            if(chapterActionsMap.containsKey(chapterActionTrack.Wish_type__c)) {
-                chapterActionsMap.get(chapterActionTrack.Wish_type__c).add(chapterActionTrack);
-            } else{
-                chapterActionsMap.put(chapterActionTrack.Wish_type__c, new List<Chapter_Action_Track__c>{chapterActionTrack});
-            }
-        }
-        Map<Id, List<CaseTeamMember>> wishTeamMembersMap = new Map<Id, List<CaseTeamMember>>();
-        Set<Id> contactIdsSet = new Set<Id>();
-        for(CaseTeamMember memberDetails : [SELECT Id, MemberId, ParentId, TeamRoleId, TeamRole.Name FROM CaseTeamMember WHERE ParentId IN : actionTracksRelatedCaseIdsSet]) {
-            contactIdsSet.add(memberDetails.MemberId);
-            
-            if(wishTeamMembersMap.containsKey(memberDetails.parentId)) {
-                wishTeamMembersMap.get(memberDetails.parentId).add(memberDetails);
-            } else {
-                wishTeamMembersMap.put(memberDetails.parentId, new List<CaseTeamMember>{memberDetails});
-            }
-        }
-        
-        Map<Id,Id> contactUsers = new Map<Id,Id>();
-        if(contactIdsSet.size()>0) {
-            for(User relatedUser : [SELECT Id, ContactId FROM User WHERE ContactId IN : contactIdsSet]) {
-                contactUsers.put(relatedUser.ContactId, relatedUser.Id);
-            }
-        }
-        
-        Set<Id> taskDuplicateCheck = new Set<id>();
-        for(Task assignOwner : actionTrackTasksList) {
-            for(String wishes : chapterActionsMap.keySet()) {
-                for(Chapter_Action_Track__c chapterAction : chapterActionsMap.get(wishes)) {
-                    if(caseIdsMap.containsKey(assignOwner.WhatId) && assignOwner.Subject == chapterAction.Task_Name__c && chapterAction.Chapter_Name__r.Name == caseIdsMap.get(assignOwner.WhatId).ChapterName__r.Name) {
-                        if(wishes==caseIdsMap.get(assignOwner.WhatId).Wish_Type__c) {
-                            if(wishTeamMembersMap.containsKey(assignOwner.WhatId)) {
-                                for(CaseTeamMember caseTeam : wishTeamMembersMap.get(assignOwner.WhatId)) {
-                                    if(assignOwner.TaskVolunteerRole__c == caseTeam.TeamRole.Name) {
-                                        //if(String.valueOf(caseTeam.MemberId).startsWith('005')) {
-                                        //Used the check whether Member is a user
-                                        if(String.valueOf(caseTeam.MemberId).substring(0,3) == USER.sobjecttype.getDescribe().getKeyPrefix()) {
-                                           if(caseTeam.MemberId != Null)
-                                              assignOwner.OwnerId = caseTeam.MemberId;
-                                        } else if(contactUsers.containsKey(caseTeam.MemberId) && caseTeam.MemberId != Null) {
-                                            assignOwner.OwnerId = contactUsers.get(caseTeam.MemberId);
-                                        }
-                                    } 
-                                }
-                            }
-                        }                         
-                    }
-                }
-            }
-        }        
-    }*/
+
     
     
     public static void UpdateAffiliationStatus(Set<Id> volunteerContactSet)
@@ -325,6 +191,7 @@ corresponding task fields to merge with email template */
         Constant_AC  constant = new Constant_Ac();    
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Id defaultRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
+        Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
         List<Task> newRecTaskList = new List<Task>();
         Map<Id,Case> parentCaseMap = new Map<Id,Case>([SELECT Id,Status,ParentId FROM Case WHERE RecordTypeId = :parentWishRecordTypeId AND Id IN :checkinTaskIdSet]);
         
@@ -334,8 +201,9 @@ corresponding task fields to merge with email template */
                 newSubTask.Subject = recCheckinTask.Subject;
                 newSubTask.ActivityDate = System.Today() + 30;
                 newSubTask.WhatId = recCheckinTask.WhatId;
+                newSubTask.Task_Type__c = recCheckinTask.Task_Type__c;
                 newSubTask.WhoId = recCheckinTask.WhoId;
-                newSubTask.RecordTypeId = defaultRecordTypeId;
+                newSubTask.RecordTypeId = volunteerTaskRT;
                 if(recCheckinTask.OwnerId != Null)
                     newSubTask.OwnerId = recCheckinTask.OwnerId;
                 newRecTaskList.add(newSubTask);
@@ -346,6 +214,7 @@ corresponding task fields to merge with email template */
         }
     }
     
+    //For creating sneakpeek task for chapter st
     public static void sneakPeekTask(Map<Id, Task> flightBookTaskMap,Map<Id, Task> budgetBookTaskMap, Map<Id, Task> passportRequestMap){
         
         List<Task> updateTaskList = new List<Task>();
@@ -386,13 +255,13 @@ corresponding task fields to merge with email template */
         }
     }
     
-    //Below method is for sprint 12
-    public static void createUploadTaskForWishOwner(Map<id,id> createUploadTaskWishMap){
+    //Create upload task for volunteer
+   /* public static void createUploadTaskForWishOwner(Map<id,id> createUploadTaskWishMap){
         Constant_AC  constant = new Constant_Ac();    
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Id defaultRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
         List<Task> newRecTaskList = new List<Task>();
-        
+        Id staffTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
         Map<Id,String> wishContactIdMap = new Map<Id,String>();
         Map<Id, Id> caseContactMap = new Map<Id, Id>();
         for(Case getChildInfo : [SELECT Id, Contact.Name, ContactId FROM Case WHERE Id IN : createUploadTaskWishMap.keySet() AND RecordTypeId =:parentWishRecordTypeId]) {
@@ -406,20 +275,19 @@ corresponding task fields to merge with email template */
                 newSubTask.WhoId = caseContactMap.get(parentId);
             }
             newSubTask.WhatId = parentId;
-            newSubTask.RecordTypeId = defaultRecordTypeId;
+            newSubTask.RecordTypeId = staffTaskRT;
             newSubTask.ActivityDate = System.today() + 5;
             newSubTask.OwnerId = createUploadTaskWishMap.get(parentId);
-            System.debug('>>>>createUploadTaskWishMap.get(parentId)'+createUploadTaskWishMap.get(parentId));
             newRecTaskList.add(newSubTask);
             
         }
         if(newRecTaskList.size() > 0) {
             insert newRecTaskList;
         }
-    }
-    //Below method is for sprint 12
+    }*/
+    
+    //Volunteer wish granted task check
     Public static void checkWishGrantTask(Set<Id> wishGrantTaskWhatIdSet) {
-        System.debug('checkWishGrantTask>>>>>>>');
         Constant_AC  constant = new Constant_Ac(); 
         Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
@@ -428,7 +296,6 @@ corresponding task fields to merge with email template */
         List<Task> wishGrantOpenTaskCheckList = [SELECT Id FROM Task WHERE IsClosed = FALSE AND RecordTypeId =: wishGrantTaskRT];
         Set<Id> childTaskExistParentIdSet = new Set<Id>();
         
-        System.debug('wishGrantTaskWhatIdSet>>>>>'+wishGrantTaskWhatIdSet);
         for(AggregateResult agg : [SELECT count(Id) recCount, WhatId parentWishId FROM Task WHERE WhatId IN : wishGrantTaskWhatIdSet  AND isClosed = FALSE GROUP BY WhatId]) {
             
             if(parentWishMap.containsKey((ID)agg.get('parentWishId'))) {
@@ -453,27 +320,19 @@ corresponding task fields to merge with email template */
         }
     }
     
-    //Below method is for sprint 12
+    //Check volunteer followup task
     public static void checkFollowUpTask(Map<Id, Task> followUpTaskMap, Set<Id> followUpTaskOwnerId) {
-        System.debug('>>>>followUpTaskMap'+followUpTaskMap);
         Set<Id> communityUserIdSet = new Set<Id>();
         Set<Id> openTaskIdSet = new Set<Id>();
-        
-        
-        /*for(User communityUser : [SELECT Id, ContactId FROM User WHERE ContactId != null AND Id IN :followUpTaskOwnerId]) {
-communityUserIdSet.add(communityUser.Id);
-}*/
         
         Set<Id> ownerIdSet = new Set<Id>();
         for(CaseTeamMember caseTeamMem : [SELECT ParentId, MemberId, TeamRoleId, TeamRole.Name FROM CaseTeamMember WHERE TeamRole.Name = 'Wish Granter' AND ParentId IN : followUpTaskMap.keySet()]) {
             ownerIdSet.add(caseTeamMem.MemberId);
         }
         
-        System.debug('ownerIdSet>>>>>>>>>'+ownerIdSet);
         for(Task existingTask : [SELECT Id, WhatId, OwnerId FROM Task WHERE WhatId IN : followUpTaskMap.keySet() AND isClosed = false AND OwnerId IN : ownerIdSet]) {
             openTaskIdSet.add(existingTask.WhatId);
         }
-        System.debug('openTaskIdSet>>>>>>>>>'+ownerIdSet);
         for(Task checkOpenTask : followUpTaskMap.values()) {
             if(openTaskIdSet.contains(checkOpenTask.WhatId)) {
                 checkOpenTask.addError('Please close other follow up task before closing this task');
@@ -582,8 +441,8 @@ communityUserIdSet.add(communityUser.Id);
         
         if(presentationParentIdSet.size() > 0) {
             Map<Id, Date> presentationCaseMap = new Map<Id, Date>();
-            for(Case parentCasePresentationDateCheck : [SELECT Id, Presentation_Date__c, RecordTypeId FROM Case WHERE Id IN : presentationParentIdSet AND Presentation_Date__c = null AND RecordTypeId =: parentWishRecordTypeId]) {
-                presentationCaseMap.put(parentCasePresentationDateCheck.Id, parentCasePresentationDateCheck.Presentation_Date__c);
+            for(Case parentCasePresentationDateCheck : [SELECT Id, Presentation_Date__c, RecordTypeId, ParentId FROM Case WHERE ParentId IN : presentationParentIdSet AND Presentation_Date__c = null AND RecordTypeId =: wishGrantTaskRT]) {
+                presentationCaseMap.put(parentCasePresentationDateCheck.ParentId, parentCasePresentationDateCheck.Presentation_Date__c);
             }
             
             if(presentationCaseMap.size() > 0) {
@@ -647,10 +506,7 @@ communityUserIdSet.add(communityUser.Id);
                     update closeFolowUpTaskList;
                 }
             }
-            
-            
-        }
-        
+        } 
     }
     
      //Update the Lead Closed Date.
@@ -664,9 +520,8 @@ communityUserIdSet.add(communityUser.Id);
         if(updateLeadList.Size() > 0)
             Update updateLeadList;
     }
-	
-	
-	//Used to update contact to the given task
+    
+    //Used to update contact to the given task
     public static void UpdateContactToTask(List<Task> matchContactTaskList, Set<Id> taskParentIdSet) {
         
         Constant_AC  constant = new Constant_Ac();
@@ -685,9 +540,9 @@ communityUserIdSet.add(communityUser.Id);
         }
         
         for(Task mapContactInfo : matchContactTaskList) {
-            if(caseContactInfoMap.containsKey(mapContactInfo.WhatId) && mapContactInfo.Subject != 'Budget needs to be revised' && mapContactInfo.Subject != 'Budget is approved') {
+            if(caseContactInfoMap.containsKey(mapContactInfo.WhatId) && mapContactInfo.Subject != 'Budget needs to be revised' && mapContactInfo.Subject != 'Budget is approved' && mapContactInfo.Subject != 'Case ET : Budget Approval Request') {
                 mapContactInfo.WhoId = caseContactInfoMap.get(mapContactInfo.WhatId);
-            } else if(mapContactInfo.Subject == 'Budget needs to be revised' || mapContactInfo.Subject == 'Budget is approved') {
+            } else if(mapContactInfo.Subject == 'Budget needs to be revised' || mapContactInfo.Subject == 'Budget is approved' || mapContactInfo.Subject == 'Case ET : Budget Approval Request') {
                 if(plainingParentInfoMap.containsKey(mapContactInfo.WhatId)) {
                     if(caseContactInfoMap.containsKey(plainingParentInfoMap.get(mapContactInfo.WhatId))) {
                         mapContactInfo.WhoId = caseContactInfoMap.get(plainingParentInfoMap.get(mapContactInfo.WhatId));

@@ -21,6 +21,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -197,6 +201,15 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Volunteer_is_Inactive__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>It activates when the volunteer becomes inactive or all affiliations records are inactive status.</description>
+        <externalId>false</externalId>
+        <label>Hidden Volunteer is Inactive</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <label>Conflict Of Interest</label>
     <listViews>

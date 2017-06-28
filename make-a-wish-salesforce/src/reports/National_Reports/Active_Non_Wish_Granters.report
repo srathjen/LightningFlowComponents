@@ -12,25 +12,21 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Volunteer_Opportunities1__r$RecordType</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Volunteer_Opportunity__c.Non_Wish_Event</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Volunteer_Opportunities1__r$Volunteer_Role_Name__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Wish Granter</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$is_Active_Volunteer__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

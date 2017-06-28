@@ -40,7 +40,8 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
          Set<Id> recordIds = new Set<Id>();
          Set<Id> volunteerIds = new Set<Id>();
          Set<Id> ownerIds = new Set<Id>();
-         
+         List<Contact> updateVolunteerContact = new List<Contact>();
+         Contact updateCon;
          for(Conflict_Of_Interest__c  currCOI : Trigger.new)
          {
             if(currCOI.current__c == True)
@@ -50,13 +51,25 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
             }
             
              ownerIds.add(currCOI.ownerId);
+             
+             if(currCOI.Expiration_Date__c != Null && currCOI.Volunteer_Contact__c  != Null){
+                 //updateVolunteerContact.add(curr);
+                  updateCon = new Contact();
+                  updateCon.Id = currCOI.Volunteer_Contact__c;
+                  updateCon.COI_Expiration_Date__c = currCOI.Expiration_Date__c;
+                  updateVolunteerContact.add(updateCon);
+             }
         
          }
+         
          
         if(volunteerIds.size() > 0 && recordIds.size() > 0)
         {
           UpdateExistingRecords(recordIds,volunteerIds);
         }
+        
+        if(updateVolunteerContact.Size() > 0)
+            Update updateVolunteerContact;
         
         if(ownerIds.size() > 0)
             COIRecordSharing(ownerIds,Trigger.new);
@@ -114,7 +127,7 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
         }
         
         if(volunteerContactIdSet.size() > 0)
-         BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(volunteerContactIdSet);
+         BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(volunteerContactIdSet,'COI');
      }
      
      

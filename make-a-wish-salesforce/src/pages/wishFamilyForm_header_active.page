@@ -76,6 +76,9 @@
         .notification div {position:relative; left:-50%; background:#00C069; border-radius:.5rem; padding:1rem; color:#fff; text-align:center;}
         .notification h6 {margin:0; text-transform:none !important}
         .notification p {padding:0; margin:0; font-size:.8rem; font-family:arial,helvetica;}
+        /* indent hidden fields */
+        .sel-wrap ~ div, .f-prior-wish {margin-left:1rem}
+        .form-group ~ .is-yes, .form-group ~ .prior-details {margin-left:.1rem}
         @media (min-width: 34em) {
           .tether-enabled {width:34.1rem; margin-left:0;padding-left:0}
           .nav-sub-inner {margin-top:0}

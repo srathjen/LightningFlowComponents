@@ -20,7 +20,19 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         Map<Id, Lead> leadRegionMap = new Map<Id, Lead>();
         Set<Id> leadChapterSet = new Set<Id>();
         for(Lead newLead : Trigger.new)
-        {
+        {    
+        
+            If(newLead.Additional_Parent_First_Name__c == newLead.Parent_First_Name__c && newLead.Additional_Parent_Last_Name__c == newLead.Parent_Last_Name__c && newLead.Additional_Parent_Phone__c == newLead.Phone
+                && newLead.Additional_Parent_Email__c == newLead.Email && newLead.Additional_Parent_City__c == newLead.City && newLead.Additional_Parent_Postal_Code__c == newLead.PostalCode){
+                
+                newLead.Additional_Parent_First_Name__c = '';
+                newLead.Additional_Parent_Last_Name__c = '';
+                newLead.Additional_Parent_Phone__c = '';
+                newLead.Additional_Parent_Email__c = '';
+                newLead.Additional_Parent_City__c = '';
+                newLead.Additional_Parent_Postal_Code__c = '';
+                
+            }
             leadChapterSet.add(newLead.ChapterName__c);
             leadRegionMap.put(newLead.Id, newLead);
             newLead.Part_A_Form_Password__c= handlerIns.getRandom();
@@ -30,7 +42,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                 { 
                     boolean referred = true;
                     if(!Test.isRunningTest())
-                        newLead.Inquiry_Date__c = Date.Today();
+                        newLead.Inquiry_Date__c = System.Today();
                     
                     if(newLead.City == Null || newLead.StateCode == Null || newLead.PostalCode == Null || newLead.Street == Null)
                         referred = false;
@@ -107,6 +119,9 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         Map<Id, Lead> leadRegionCodeValidationMap = new Map<Id, Lead>();
         List<Lead> findDupConList = new List<Lead>();
         
+    //    List<Lead> updateLeadOwnerList = new List<Lead>();
+        Set<String> newChaptersSet = new Set<String>();
+        
         Boolean flag;
         for(Lead newLead : Trigger.new)
         {  
@@ -115,6 +130,14 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                    if(!Test.isRunningTest())
                       newLead.Referred_Date__c = Date.today();
                 }
+                
+                if(newLead.ChapterName__c!= Trigger.oldMap.get(newLead.id).ChapterName__c)
+                {
+                    newChaptersSet.add(newLead.ChapterName__c);
+                    updateLeadOwnerList.add(newLead);
+                }
+                
+               
                 
                 if((newLead.Sub_Status__c == 'Pending Diagnosis Verification') && trigger.oldMap.get(newLead.id).Sub_Status__c != 'Pending Diagnosis Verification'){
                     if(!Test.isRunningTest())
@@ -162,9 +185,13 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                     newUpdateLeadList.add(newLead);
                 }
                 
-                if(newLead.PostalCode != Null && newLead.PostalCode != Trigger.oldMap.get(newLead.Id).postalCode)
+                if(newLead.PostalCode != Null && newLead.PostalCode != Trigger.oldMap.get(newLead.Id).postalCode && newLead.AddressVerified__c == false)
                 {
-                    postalCodesSet.add(newLead.PostalCode);
+                    if(newLead.PostalCode != null && String.valueOf(newLead.PostalCode).length() > 5 && String.valueOf(newLead.PostalCode).contains('-')) {
+                        postalCodesSet.add(String.valueOf(newLead.PostalCode).split('-')[0]);
+                    } else {
+                        postalCodesSet.add(newLead.PostalCode);
+                    }
                     updateChapterOnLeadList.add(newLead);
                 }
                 
@@ -211,6 +238,10 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
             //LeadTriggerHandler.LeadRegionValidation(leadRegionCodeValidationMap);
         }
         
+        
+         if(newChaptersSet.size() > 0)
+                LeadTriggerHandler.updateLeadOwner(updateLeadOwnerList,newChaptersSet);
+                   
         if(leadQuestionList.size() > 0){
             LeadTriggerHandler handlerIns = new LeadTriggerHandler();
             //handlerIns.updateLeadStatus(leadQuestionList);
@@ -223,7 +254,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         
         if(postalCodesSet.size() > 0)
         {
-            LeadTriggerHandler.UpdateChatperName(postalCodesSet,updateChapterOnLeadList);
+            //LeadTriggerHandler.UpdateChatperName(postalCodesSet,updateChapterOnLeadList);
         }
         
         if(leadUpdateToMedicalInfoList.size() > 0)
@@ -289,7 +320,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         Set<String> conditionSescriptionSet = new Set<String>();
         List<Task> newTaskList = new List<Task>();
         Constant_AC  constant = new Constant_Ac();    
-        //Id chapterRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
+        Id staffTaskRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
         
         Map<String, List<Lead>> leadMap = new Map<String,List<Lead>>();
         
@@ -309,7 +340,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                     newTask.ActivityDate = Date.Today().addDays(10);
                 }
                 newTask.ownerId = newLead.OwnerId;
-                //newTask.RecordTypeId = chapterRT;
+                newTask.RecordTypeId = staffTaskRT;
                 newTask.whoId = newLead.id;
                 newTask.priority = 'Normal';
                 newTaskList.add(newTask);
@@ -357,12 +388,14 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         {          
             Trigger.old[0].addError('There are files attached to object. You need to first delete files manually and then delete the object!');
         }
-    }
-
-   //Reset the address verification checkbox if the address has changed
+    } 
+    
+    //Reset the address verification checkbox if the address has changed
     if(trigger.isBefore && trigger.isUpdate)
     {
         for(Lead newLead: trigger.new){
+            System.debug('newLead.State++++++++++++++++ ' + newLead.State);
+            System.debug('newLead.State++++++++++++++++ ' + Trigger.oldMap.get(newLead.Id).State);
             // the address is already marked as verified
             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null &&
             // one of the shipping address fields changed
@@ -379,7 +412,10 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                 newLead.County__c = null;
                 
             }
+            if(newLead.status == 'Eligibility Review' && trigger.oldMap.get(newLead.Id).Status != 'Eligibility Review'){
+                newLead.Sub_Status__c = 'Chapter';
+            }
         }
     
-    }  	
+    }  
 }

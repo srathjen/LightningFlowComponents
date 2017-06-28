@@ -174,6 +174,7 @@ public class LeadTrigger_AT_Test{
          newLead.unique_wish_identifier__c = '123456';
          newLead.Treating_Medical_Professional_Contact_Id__c = trateProfContact.Id;
          newLead.Medical_Professional_ContactId__c = medicalProfContact.Id;
+         newLead.Relationship_to_child__c = 'Medical Professional';
          newLead.Wish_Family_ContactId__c = wishFamily.Id;
          newLead.Sibling_Detail__c = 'aa | bbb | 12';
          //newLead.Sub_Status__c ='Pending Diagnosis Verification';
@@ -237,4 +238,93 @@ public class LeadTrigger_AT_Test{
          
          
      }
+     
+       public testmethod static void UpdateStatusAsQualifiedWithAllConValues(){ 
+        
+        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+        Contact medicalProfessionalCon = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
+        Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
+        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
+        
+        newLead.Referrer_FirstName__c = 'Steve';
+        newLead.Referrer_Last_Name__c = 'Waugh';
+        newLead.Referrer_Email__c = 'testmawa2@gmail.com';
+        newLead.Referrer_Phone__c = '9600467557';
+        newLead.Additional_Parent_City__c = 'Test City';
+        newLead.Additional_Parent_Email__c = 'Test@mail.com';
+        newLead.Additional_Parent_First_Name__c = 'Test Parent2';
+        newLead.Additional_Parent_Last_Name__c = 'Last Name';
+        newLead.Additional_Parent_Phone__c = '9876543210';
+        newLead.Additional_Parent_Postal_Code__c = '35004';
+        newLead.Additional_Parent_Relationship_to_Child__c = 'Father';
+        newLead.Additional_Parent_State__c = 'Alabama';
+        newLead.Additional_Parent_Street__c = 'Test Str';
+        newLead.Best_contact_for_Physician_Email__c = 'best@mail.com';
+        newLead.Best_Contact_for_Physician_First_Name__c = 'best contact';
+        newLead.Best_Contact_for_Physician_Last_Name__c = 'Last name';
+        newLead.Relationship_to_child__c = 'Medical Professional';
+        
+        Test.startTest();
+         insert newLead;
+        newLead.Sub_Status__c = 'Pending Diagnosis Verification';    
+        newLead.Contact_Dup_Check__c = 'Block Contact Dup';
+        newLead.Dup_Check__c = 'Block Lead Dup';
+        newLead.Treating_Medical_Professional_Contact_Id__c = medicalProfessionalCon.Id;
+        newLead.Medical_Professional_ContactId__c = medicalProfessionalCon.Id;
+        newLead.Wish_Family_ContactId__c = wishFamily.Id;
+        newLead.Hidden_Additional_Parent_Id__c = wishFamily.Id;
+        newLead.Hidden_Best_Contact_Person_Id__c = medicalProfessionalCon.Id;
+        update newLead;
+        Test.stopTest();
+        newLead.Status = 'Qualified';
+        update newLead ;
+        String medCon = medicalProfessionalCon.Id;
+       system.assertEquals(medCon,[SELECT Medical_Professional_ContactId__c FROM Lead WHERE Id =:newLead.Id].Medical_Professional_ContactId__c);
+        
+    }
+    
+    public testmethod static void UpdateStatusDNQ(){ 
+        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+        Contact medicalProfessionalCon = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
+        Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
+        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
+        Insert newlead;
+        Lead updateLeadStatus = new Lead();
+        updateLeadStatus .Status= 'DNQ';
+        updateLeadStatus.Id = newlead.Id;
+        Update updateLeadStatus;
+        
+    }
+    
+    public testmethod static void UpdateStatusAsQualifiedWithAllConValueswithnull(){ 
+        
+        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+        Contact medicalProfessionalCon = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
+        Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
+        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
+        newLead.Additional_Parent_City__c = 'Test City';
+        newLead.Additional_Parent_Email__c = 'Test@mail.com';
+        newLead.Additional_Parent_First_Name__c = 'Test Parent2';
+        newLead.Additional_Parent_Last_Name__c = 'Last Name';
+        newLead.Additional_Parent_Phone__c = '9876543210';
+        newLead.Additional_Parent_Postal_Code__c = '35004';
+        newLead.Additional_Parent_Relationship_to_Child__c = 'Father';
+        newLead.Additional_Parent_State__c = 'Alabama';
+        newLead.Additional_Parent_Street__c = 'Test Str';
+        newLead.Best_contact_for_Physician_Email__c = 'best@mail.com';
+        newLead.Best_Contact_for_Physician_First_Name__c = 'best contact';
+        newLead.Best_Contact_for_Physician_Last_Name__c = 'Last name';
+        newLead.Relationship_to_child__c = 'Medical Professional';
+        insert newLead;
+        newLead.Status = 'Referred';
+        newLead.Sub_Status__c = 'Pending Diagnosis Verification';    
+        newLead.Contact_Dup_Check__c = 'Block Contact Dup';
+        newLead.Dup_Check__c = 'Block Lead Dup';
+        update newLead;
+        newLead.Status = 'Qualified';
+        update newLead ;
+        String medCon = medicalProfessionalCon.Id;
+       //system.assertEquals(medCon,[SELECT Medical_Professional_ContactId__c FROM Lead WHERE Id =:newLead.Id].Medical_Professional_ContactId__c);
+        
+    }
 }
