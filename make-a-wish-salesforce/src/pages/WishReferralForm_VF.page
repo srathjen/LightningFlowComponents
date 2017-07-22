@@ -10,22 +10,28 @@
       // create metatags and place after cleartype metatag
       //$('<meta name="ref-chid" content=""><meta name="ref-mawsite" content="salesforce">').insertAfter('#cleartype');
     </script>
-    <script type="text/javascript">
-      //prevent standalone
+    <script>
+      // dev/prod url check
       (function(){
-        var alphaNumReg = /^[a-z0-9]+$/i;
-            dev = "https://c."+alphaNumReg+".visual.force.com/apex/WishReferralForm_VF",
-            qa = "http://qa-wish."+alphaNumReg+".force.com/apex/WishReferralForm_VF",
-            fc = "http://fullcopy-wish."+alphaNumReg+".force.com/apex/WishReferralForm_VF",
-            ti = "http://wvctrn-wish."+alphaNumReg+".force.com/apex/WishReferralForm_VF";
-        if (top==self)
-        {
-          window.location = "https://wish.org/refer-a-child/referral-inquiry-form";
-        } else if (top == dev || top == qa || top == fc || top == ti){
-          // allow sf standalone dev instances
-          return true;
+        var topLoc = top.location.href,
+            prod = /^(http[s]?:\/\/wish\.secure\.force\.com)(.*)+$/i,
+            matchProd = prod.exec('http:\/\/wish.secure.force.com'),
+            matchedProdStr = matchProd[2],
+            isInvalidUrlProd = false;
+            console.log(topLoc);
+        // check if prod url has "/" in 2nd group of regex and if there are characters after "/"
+        if ((matchedProdStr != "/") && (matchedProdStr[0] != "/") && (matchedProdStr.length > 1)){
+            // rewrite variable url check
+            isInvalidUrlProd = true
         }
-      });
+        // allow only valid prod and dev urls
+        if ( isInvalidUrlProd ){
+          //prevent standalone
+          window.location = "https://wish.org/refer-a-child/referral-inquiry-form"
+        }
+      })();
+    </script>
+    <script>
       //script to pull chid argument from the URL
       function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
@@ -38,7 +44,6 @@
         }
         return (false);
       }
-
       //populate meta tags based on chid argument
       var refchid = getQueryVariable('chid');
       $('meta[name=ref-chid]').attr('content', refchid);

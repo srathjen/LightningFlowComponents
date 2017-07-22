@@ -257,14 +257,18 @@
                                     <div class="divTableCell">What is the family's primary spoken language?</div>
                                     <div class="divTableCell">{!currLead.What_is_the_family_s_primary_spoken_lang__c }</div>
                                 </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell">Number of Sibilings:</div>
-                                    <div class="divTableCell">{!currLead.of_Siblings__c }</div>
-                                </div>
-                              <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
-                                <div class="divTableRow">
-                                    <b class="hdr-bld">Sibiling Details</b>
-                                </div>
+                                <hr style="width:200%"/>
+                                
+                                <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Number of Sibilings:</div>
+                                        <div class="divTableCell">{!currLead.of_Siblings__c }</div>
+                                    </div>
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
+                                    <div class="divTableRow">
+                                        <b class="hdr-bld">Sibiling Details</b>
+                                    </div>
                                 </apex:outputPanel> 
                                 <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
                                     <apex:repeat value="{!sibList}" var="sb">
@@ -281,49 +285,51 @@
                                             <div class="divTableCell">{!sb.age}</div>
                                         </div>
                                     </apex:repeat>
+                                    <hr style="width:200%"/>
                                 </apex:outputPanel>
                                 
-                                <hr style="width:200%"/>
+                                
                                 
                                 <apex:outputPanel layout="none" rendered="{!if(currLead.Additional_Parent_First_Name__c!=null, True, false)}">
-                                <div class="divTableRow">
-                                    <b class="hdr-bld">Parent or Guardian 2</b>
-                                </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell">Relationship to Child:</div>
-                                    <div class="divTableCell">{!currLead.Additional_Parent_Relationship_to_Child__c }</div>
-                                </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell">Name:</div>
-                                    <div class="divTableCell">{!currLead.Additional_Parent_First_Name__c} {!currLead.Additional_Parent_Last_Name__c}</div>
-                                </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell">Address:</div>
-                                    <div class="divTableCell">{!currLead.Additional_Parent_Street__c}</div>
-                                </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell">City:</div>
-                                    <div class="divTableCell">{!currLead.Additional_Parent_City__c}</div>
-                                </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell">State:</div>
-                                    <div class="divTableCell">{!currLead.Additional_Parent_State__c}</div>
-                                </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell">Postal Code:</div>
-                                    <div class="divTableCell">{!currLead.Additional_Parent_Postal_Code__c}</div>
-                                </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell">Email Address :</div>
-                                    <div class="divTableCell">{!currLead.Additional_Parent_Email__c}</div>
-                                </div>
-                                <div class="divTableRow">
-                                    <div class="divTableCell">Primary Number:</div>
-                                    <div class="divTableCell">{!currLead.Additional_Parent_Phone__c}</div>
-                                </div>
+                                    <div class="divTableRow">
+                                        <b class="hdr-bld">Parent or Guardian 2</b>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Relationship to Child:</div>
+                                        <div class="divTableCell">{!currLead.Additional_Parent_Relationship_to_Child__c }</div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Name:</div>
+                                        <div class="divTableCell">{!currLead.Additional_Parent_First_Name__c} {!currLead.Additional_Parent_Last_Name__c}</div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Address:</div>
+                                        <div class="divTableCell">{!currLead.Additional_Parent_Street__c}</div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">City:</div>
+                                        <div class="divTableCell">{!currLead.Additional_Parent_City__c}</div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">State:</div>
+                                        <div class="divTableCell">{!currLead.Additional_Parent_State__c}</div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Postal Code:</div>
+                                        <div class="divTableCell">{!currLead.Additional_Parent_Postal_Code__c}</div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Email Address :</div>
+                                        <div class="divTableCell">{!currLead.Additional_Parent_Email__c}</div>
+                                    </div>
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Primary Number:</div>
+                                        <div class="divTableCell">{!currLead.Additional_Parent_Phone__c}</div>
+                                    </div>
+                                    <hr style="width:200%"/>
                                 </apex:outputPanel> 
                                 
-                                <hr style="width:200%"/>
+                                
                                 
                                 <div class="divTableRow">
                                     <b style="padding-left:1.5%; font-weight:bold">Medical Information</b>
@@ -365,6 +371,19 @@
                                     <div class="divTableCell">Hospital or Treatment Facility:</div>
                                     <div class="divTableCell">{!currLead.Hospital_Treatment_Facility_Treating__c }</div>
                                 </div>
+                                
+                                <div class="divTableRow">
+                                    <b class="hdr-bld">Best Physician Information</b>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">Name:</div>
+                                    <div class="divTableCell">{!currLead.Best_Contact_for_Physician_First_Name__c} {!currLead.Best_Contact_for_Physician_Last_Name__c}</div>
+                                </div>
+                                <div class="divTableRow">
+                                    <div class="divTableCell">Email:</div>
+                                    <div class="divTableCell">{!currLead.Best_contact_for_Physician_Email__c} </div>
+                                </div>
+                                
                             </div>
                         </div>
                         

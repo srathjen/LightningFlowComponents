@@ -47,12 +47,6 @@
         <rightComponents>
             <componentType>Topics</componentType>
         </rightComponents>
-        <rightComponents>
-            <componentType>CustomLinks</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>CustomButtons</componentType>
-        </rightComponents>
         <useInlineFiltersInConsole>false</useInlineFiltersInConsole>
     </feedLayout>
     <layoutSections>

@@ -10799,6 +10799,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Video__kav.Attachment__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Video__kav.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Volunteer_Count__c.Chapter_Role__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -12887,6 +12897,9 @@
         <layout>UserProvisioningRequest-User Provisioning Request Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Video__kav-Video Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Volunteer_Count__c-Volunteer Count Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -13392,6 +13405,15 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>Travel_Data__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>Video__kav</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>

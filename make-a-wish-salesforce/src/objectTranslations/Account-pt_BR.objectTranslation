@@ -2118,6 +2118,17 @@
         </sections>
     </layouts>
     <layouts>
+        <layout>Hospital Treatment Facility - Volunteer</layout>
+        <sections>
+            <label><!-- Address --></label>
+            <section>Address</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Household Layout - Volunteers</layout>
         <sections>
             <label><!-- Address --></label>

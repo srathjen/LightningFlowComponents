@@ -3379,6 +3379,17 @@ provide contact information for each site on which you are active. --></help>
         </sections>
     </layouts>
     <layouts>
+        <layout>Medical Professional - Volunteer</layout>
+        <sections>
+            <label><!-- Contact Details --></label>
+            <section>Contact Details</section>
+        </sections>
+        <sections>
+            <label><!-- Household Address --></label>
+            <section>Household Address</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Volunteer info for volunteers</layout>
         <sections>
             <label><!-- Volunteer Details --></label>

@@ -1475,7 +1475,7 @@
     <fields>
         <fullName>Address</fullName>
         <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
     </fields>
     <fields>
         <fullName>AddressVerificationAttempted__c</fullName>
@@ -4912,6 +4912,7 @@
         <columns>LEAD.STATUS</columns>
         <columns>LEAD.CREATED_DATE</columns>
         <columns>CORE.USERS.ALIAS</columns>
+        <columns>Test_Record__c</columns>
         <columns>LEAD.UNREAD</columns>
         <filterScope>Everything</filterScope>
         <filters>

@@ -2643,9 +2643,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Case.Case_Member_Count__c</field>
-        <readable>true</readable>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -10799,6 +10799,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Video__kav.Attachment__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Video__kav.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Volunteer_Count__c.Chapter_Role__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -12887,6 +12897,9 @@
         <layout>UserProvisioningRequest-User Provisioning Request Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Video__kav-Video Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Volunteer_Count__c-Volunteer Count Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -13112,7 +13125,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>AddVolunteerRole_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>AnswersHome</apexPage>
@@ -13240,7 +13253,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>LeadDuplicate_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>LeadFilePage</apexPage>
@@ -13256,7 +13269,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>LeadSelectMedEmail_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>MV_VF</apexPage>
@@ -13384,11 +13397,11 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishBudgetForm_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishChildForm_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishChildPhoto_VF</apexPage>
@@ -13400,23 +13413,23 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishClearanceSendNow_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishFamilyForm_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishFamilyForm_footer</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishFormDownloadPDF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishInformationForm_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishJourney</apexPage>
@@ -13424,7 +13437,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishLiabilityForm_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishLiabilityMiniorForm</apexPage>
@@ -13436,7 +13449,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishLiabilityMinorParticipant_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishLiabilitySendPDF</apexPage>
@@ -13448,7 +13461,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishParticipants_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishReferralFormOutCSV_VF</apexPage>
@@ -13464,7 +13477,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishRelatedLinks</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishRelatedLinks_VF</apexPage>

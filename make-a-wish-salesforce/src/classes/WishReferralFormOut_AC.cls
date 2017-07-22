@@ -29,7 +29,7 @@ Public Class WishReferralFormOut_AC {
                   Medical_Professional_Phone__c, Treating_Medical_Professional_Fax__c, Treating_Medical_Professional_Email__c, ChapterName__r.Id,is_Family_Aware_of_Referral__c,
                   Medical_Professional_First_Name__c,Medical_Professional_Last_Name__c,Medical_Professional_Email__c,Additional_Parent_Relationship_to_Child__c,Additional_Parent_First_Name__c,
                   Additional_Parent_Last_Name__c,Additional_Parent_Street__c,Additional_Parent_City__c,Additional_Parent_State__c,Additional_Parent_Postal_Code__c,Additional_Parent_Phone__c,
-                  Additional_Parent_Email__c,Parent_Relationship_to_Child__c
+                  Additional_Parent_Email__c,Parent_Relationship_to_Child__c,Best_Contact_for_Physician_First_Name__c,Best_Contact_for_Physician_Last_Name__c,Best_contact_for_Physician_Email__c
                   from Lead where Id =: leadId];
         if(leaddata[0].Any_medical_reason_for_moving_quickly__c != null) {
             leaddata[0].Any_medical_reason_for_moving_quickly__c = leaddata[0].Any_medical_reason_for_moving_quickly__c.replaceAll('<[^>]+>',' ');
@@ -41,13 +41,27 @@ Public Class WishReferralFormOut_AC {
         
         if(leaddata[0].Sibling_Detail__c != null) {
             String replaceString = '';
+            Integer splitCount = 0;
             for(String sibDet : leaddata[0].Sibling_Detail__c.split('<br>')) {
+                splitCount = sibDet.countMatches('|');
                 sibDet = sibDet.replace('|', ',');
                 SiblingInfo newSeb = new SiblingInfo();
-                newSeb.firstName = sibDet.split(',')[0];
-                newSeb.lastName = sibDet.split(',')[1];
-                newSeb.age = sibDet.split(',')[2];
-                sibList.add(newSeb);
+                if(splitCount != 0) {
+                    if(splitCount == 3) {
+                        newSeb.firstName = sibDet.split(',')[0];
+                        newSeb.lastName = sibDet.split(',')[1];
+                        newSeb.age = sibDet.split(',')[2];
+                    } else if(splitCount == 2) {
+                        newSeb.firstName = sibDet.split(',')[0];
+                        newSeb.lastName = sibDet.split(',')[1];
+                    } else if(splitCount == 1) {
+                        newSeb.firstName = sibDet.split(',')[0];
+                    }
+                    
+                    sibList.add(newSeb);
+                    splitCount = 0;
+                } 
+                
             }
         }
         accontId= leaddata[0].ChapterName__r.Id;                           
@@ -109,12 +123,12 @@ Public Class WishReferralFormOut_AC {
         
         csv='Date Submitted,Is Family Aware,Relationship to Child,Referrer name,Referrer Phone,Referrer Email,Referrer City,Referrer Zip,Primary Diagnosis,ICD Code,Rush,Medical Provider Name';
         csv += ',Medical Provider Email,Medical Provider Phone,Medical Provider Category,Hospital or Treatment Facility,Child Name,Child Gender,Child DOB,Previous Wish';
-        csv += ',Parent/Guardian Name,Address,City,State,Zip,Email,Phone,Primary Language,Relation Ship to Child,Number of Siblings';
+        csv += ',Parent/Guardian Name,Address,City,State,Zip,Email,Phone,Primary Language,Relation Ship to Child,Best Physician Name,Best Physician Email,Number of Siblings';
         //,Sibling Name 1,Sibling Age 1,Sibling Name 2,Sibling Age 2,Sibling Name 3,Sibling Age 3,Sibling Name 4,Sibling Age 4,Sibling Name 5,Sibling Age 5,Sibling Name 6,Sibling Age 6,Sibling Name 7,Sibling Age 7,Sibling Name 8,Sibling Age 8,Sibling Name 9,Sibling Age 9,Sibling Name 10,Sibling Age 10';
         String strSiblings='';
         String strSiblingsInfo='';
-        for( Integer i=1; i <= sibList.size(); i++){
-            strSiblings += ',Sibling Name '+i + ',Sibling Age ' + i ;
+        for( Integer i=0; i < sibList.size(); i++){
+            strSiblings += ',Sibling Name '+ i+1 + ',Sibling Age ' + i+1 ;
             strSiblingsInfo += ',' +  sibList[i].firstName + ' ' + sibList[i].lastName + ',' + sibList[i].age;
         
         }
@@ -135,7 +149,7 @@ Public Class WishReferralFormOut_AC {
         csv += ','+currLead.Treating_Medical_Professional_Email__c+','+currLead.Treating_Medical_Professional_Phone__c+','+currLead.Medical_Provider_Category__c+','+currLead.Hospital_Treatment_Facility_Treating__c;
         csv += ','+currLead.FirstName+' '+ currLead.Child_Middle_Initial__c+' '+currLead.LastName+','+currLead.Gender__c+','+currLead.DOB__c+','+ currLead.Has_this_child_ever_received_prior_wish__c;
         csv += ','+currLead.Parent_First_Name__c+' '+currLead.Parent_Last_Name__c+','+currLead.Street+','+currLead.City+','+currLead.State+','+currLead.PostalCode+','+currLead.Email;
-        csv += ','+currLead.Phone+','+currLead.What_is_the_family_s_primary_spoken_lang__c+','+currLead.Parent_Relationship_to_Child__c+','+currLead.of_Siblings__c;
+        csv += ','+currLead.Phone+','+currLead.What_is_the_family_s_primary_spoken_lang__c+','+currLead.Parent_Relationship_to_Child__c+','+currLead.Best_Contact_for_Physician_First_Name__c+' '+currLead.Best_Contact_for_Physician_Last_Name__c+','+currLead.Best_contact_for_Physician_Email__c+','+currLead.of_Siblings__c;
         if(strSiblingsInfo !=''){
             csv += strSiblingsInfo;
         }

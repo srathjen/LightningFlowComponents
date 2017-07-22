@@ -8076,7 +8076,7 @@ window.location.reload();
         <masterLabel>New Time Sheet</masterLabel>
         <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>window.open(&apos;https://qa-make-a-wish.cs3.force.com/VolunteerOpportunitySelection_VF?caseRecId={!Case.Id}&apos;,&apos;_blank&apos;);</url>
+        <url>window.open(&apos;{!$Site.BaseUrl}/VolunteerOpportunitySelection_VF?caseRecId={!Case.Id}&apos;,&apos;_blank&apos;);</url>
     </webLinks>
     <webLinks>
         <fullName>Publicity_Form</fullName>

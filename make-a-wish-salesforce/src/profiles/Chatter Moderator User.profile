@@ -10799,6 +10799,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Video__kav.Attachment__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Video__kav.Description__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Volunteer_Count__c.Chapter_Role__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -12860,6 +12870,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>UserProvisioningRequest-User Provisioning Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Video__kav-Video Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Volunteer_Count__c-Volunteer Count Layout</layout>

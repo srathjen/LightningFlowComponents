@@ -2061,8 +2061,8 @@
             <section>Medical Information</section>
         </sections>
         <sections>
-            <label><!-- Qualifying Medical Professional --></label>
-            <section>Qualifying Medical Professional</section>
+            <label><!-- Medical Professionals --></label>
+            <section>Medical Professionals</section>
         </sections>
         <sections>
             <label><!-- Referral Source Information --></label>

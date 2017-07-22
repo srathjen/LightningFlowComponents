@@ -10,7 +10,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>Medical_Eligibility_Emails/Part_A_Form_Email_Template</template>
+        <template>unfiled$public/Part_A_Form_Email_Template</template>
     </alerts>
     <alerts>
         <fullName>Diagnosis_Form_Email_Alert_for_Best_Physician_contact</fullName>
@@ -73,6 +73,7 @@
     </alerts>
     <alerts>
         <fullName>Send_Email_to_Office_Referrar_email_with_Wish_Referral_Form</fullName>
+        <ccEmails>missionresources@wish.org</ccEmails>
         <description>Send Email to Office Referrar email with Wish Referral Form</description>
         <protected>false</protected>
         <recipients>

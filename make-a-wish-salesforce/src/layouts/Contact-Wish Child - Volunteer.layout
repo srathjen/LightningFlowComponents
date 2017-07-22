@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <excludeButtons>Clone</excludeButtons>
+    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>DisableCustomerPortal</excludeButtons>
     <excludeButtons>DisablePartnerPortal</excludeButtons>
     <excludeButtons>DisablePrmSuperUser</excludeButtons>
@@ -8,7 +9,6 @@
     <excludeButtons>EnablePrmSuperUser</excludeButtons>
     <excludeButtons>EnableSelfService</excludeButtons>
     <excludeButtons>RequestUpdate</excludeButtons>
-    <excludeButtons>RequestUseSfdc</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <excludeButtons>ViewPartnerPortalUser</excludeButtons>
     <excludeButtons>ViewSelfService</excludeButtons>
@@ -21,10 +21,6 @@
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>Name</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>AccountId</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -513,6 +509,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>CreatedById</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>AccountId</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

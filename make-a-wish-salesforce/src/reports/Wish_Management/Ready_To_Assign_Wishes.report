@@ -30,6 +30,12 @@
     <columns>
         <field>CLOSED</field>
     </columns>
+    <columns>
+        <field>Contact.Non_Verbal__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Language__c</field>
+    </columns>
     <description>zip/city</description>
     <filter>
         <criteriaItems>

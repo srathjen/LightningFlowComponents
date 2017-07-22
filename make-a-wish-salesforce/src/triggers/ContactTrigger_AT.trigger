@@ -644,7 +644,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 system.debug('Update MailingAddressVerified__c>>>>'+newContact.MailingAddressVerified__c);
                 newContact.MailingAddressVerified__c = false;
                 newContact.MailingAddressVerificationAttempted__c = null;
-                newContact.County__c = null;
+                newContact.County__c = '';
                 
             }
             

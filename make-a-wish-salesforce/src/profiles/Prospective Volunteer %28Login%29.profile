@@ -2643,9 +2643,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Case.Case_Member_Count__c</field>
-        <readable>true</readable>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -10799,6 +10799,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Video__kav.Attachment__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Video__kav.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Volunteer_Count__c.Chapter_Role__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -12512,7 +12522,7 @@
         <recordType>Account.Chapter</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Account-Hospital Treatment Facility</layout>
+        <layout>Account-Hospital Treatment Facility - Volunteer</layout>
         <recordType>Account.Hospital_Treatment_Facility</recordType>
     </layoutAssignments>
     <layoutAssignments>
@@ -12625,7 +12635,7 @@
         <recordType>Contact.Board_Member</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Contact-Medical Professional</layout>
+        <layout>Contact-Medical Professional - Volunteer</layout>
         <recordType>Contact.Medical_Professional</recordType>
     </layoutAssignments>
     <layoutAssignments>
@@ -12889,6 +12899,9 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>UserProvisioningRequest-User Provisioning Request Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Video__kav-Video Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Volunteer_Count__c-Volunteer Count Layout</layout>

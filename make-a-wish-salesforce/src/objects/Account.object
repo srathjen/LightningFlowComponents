@@ -4356,29 +4356,6 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <label>In-Kind Donors - Airline</label>
     </listViews>
     <listViews>
-        <fullName>In_Kind_Donors_All</fullName>
-        <columns>ACCOUNT.NAME</columns>
-        <columns>ACCOUNT.ADDRESS1_STATE</columns>
-        <columns>ACCOUNT.PHONE1</columns>
-        <columns>ACCOUNT.TYPE</columns>
-        <columns>CORE.USERS.ALIAS</columns>
-        <columns>ACCOUNT.RECORDTYPE</columns>
-        <columns>No_Direct_Contact__c</columns>
-        <columns>Chapter_Name__c</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>ACCOUNT.RECORDTYPE</field>
-            <operation>equals</operation>
-            <value>Account.In_Kind_Donors</value>
-        </filters>
-        <filters>
-            <field>In_Kind_Approval_Status__c</field>
-            <operation>equals</operation>
-            <value>Approved</value>
-        </filters>
-        <label>In-Kind Donors - All</label>
-    </listViews>
-    <listViews>
         <fullName>In_Kind_Donors_Animal</fullName>
         <columns>ACCOUNT.NAME</columns>
         <columns>ACCOUNT.SITE</columns>

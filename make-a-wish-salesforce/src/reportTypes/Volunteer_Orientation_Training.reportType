@@ -151,6 +151,11 @@
             <field>RE_Start_Time__c</field>
             <table>Volunteer_Orientation_Training__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Hidden_O_T_Id__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
         <masterLabel>Volunteer Orientation &amp; Trainings</masterLabel>
     </sections>
     <sections>

@@ -2644,9 +2644,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Case.Case_Member_Count__c</field>
-        <readable>true</readable>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -10800,6 +10800,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Video__kav.Attachment__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Video__kav.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Volunteer_Count__c.Chapter_Role__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -12888,6 +12898,9 @@
         <layout>UserProvisioningRequest-User Provisioning Request Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>Video__kav-Video Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Volunteer_Count__c-Volunteer Count Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -13253,6 +13266,15 @@
     </objectPermissions>
     <objectPermissions>
         <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>false</modifyAllRecords>
+        <object>Video__kav</object>
+        <viewAllRecords>false</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
         <allowDelete>false</allowDelete>
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
@@ -13499,7 +13521,7 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>MergedDocuments_VF</apexPage>
-        <enabled>false</enabled>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>MobileBackgroundCheckFilePage</apexPage>

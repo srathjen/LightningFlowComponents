@@ -277,7 +277,7 @@
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
-        <label>Qualifying Medical Professional</label>
+        <label>Medical Professionals</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>

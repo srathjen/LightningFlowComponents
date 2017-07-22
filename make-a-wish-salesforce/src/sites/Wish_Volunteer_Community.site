@@ -6,7 +6,7 @@
     <allowStandardIdeasPages>false</allowStandardIdeasPages>
     <allowStandardLookups>false</allowStandardLookups>
     <allowStandardSearch>false</allowStandardSearch>
-    <authorizationRequiredPage>ContactChapter_VF</authorizationRequiredPage>
+    <authorizationRequiredPage>CommunitiesLogin</authorizationRequiredPage>
     <bandwidthExceededPage>ContactChapter_VF</bandwidthExceededPage>
     <changePasswordPage>ChangePassword</changePasswordPage>
     <clickjackProtectionLevel>SameOriginOnly</clickjackProtectionLevel>
