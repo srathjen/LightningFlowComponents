@@ -138,10 +138,6 @@
                 <behavior>Readonly</behavior>
                 <field>UniqueWishRecordIdentifier__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Case_Member_Count__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
@@ -262,16 +258,16 @@
                 <field>Referral_Date__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Required</behavior>
+                <field>Qualified_Date__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Diagnosis_Verification_Sent_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Diagnosis_Verification_Receive_Date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Qualified_Date__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

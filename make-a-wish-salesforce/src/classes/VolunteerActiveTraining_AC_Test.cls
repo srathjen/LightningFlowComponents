@@ -119,7 +119,7 @@ Public class VolunteerActiveTraining_AC_Test {
         Orientation_Training__c  currOandT = OrientationandTrainingUtil.CreateVolunteerTrainingRecord();
         Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id,currOandT.id);
         Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
-        Volunteer_Orientation_Training__c  createVolOrientation = VolunteerActiveTraining_AC_Test.createVolOrientation(currOandT.id,currOffering.id,con.id,'Cancelled');              
+        Volunteer_Orientation_Training__c  createVolOrientation = VolunteerActiveTraining_AC_Test.createVolOrientation(currOandT.id,currOffering.id,con.id,'Volunteer Cancelled');              
                               
          System.RunAs(new User(Id = UserInfo.getUserId()))
           {

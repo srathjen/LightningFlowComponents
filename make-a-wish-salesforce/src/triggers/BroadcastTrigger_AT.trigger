@@ -32,7 +32,7 @@ trigger BroadcastTrigger_AT on Broadcast__c (after Insert,before Insert,after Up
       }
       
        for(Broadcast__c currBroadcast : Trigger.new){
-           if(userRole != ChapterRoleMap.get(chapterNameMap.get(currBroadcast.Chapter_Name__c)) && !Test.isRunningTest()){
+           if(userRole != ChapterRoleMap.get(chapterNameMap.get(currBroadcast.Chapter_Name__c)) && Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null && !Test.isRunningTest()){
                currBroadcast.addError('You have no access to create broadcast records for other chapters');
            }
        }

@@ -22,7 +22,7 @@
                 </ul>
                 <ul class="active-user-subnav">
                     <li><a href="/VolunteerProfile_VF">Profile</a></li>
-                    <li><a href="/_ui/knowledge/ui/KnowledgeHome">Resources</a></li>
+                    <li><a href="/_ui/knowledge/ui/KnowledgeHome">Help</a></li>
                     <li><a href="/_ui/core/chatter/ui/ChatterPage">Chatter</a></li>
                 </ul>
             </div>

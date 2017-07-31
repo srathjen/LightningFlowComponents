@@ -881,11 +881,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Qualified_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Ready_to_Assign_Date__c</field>
             <table>Case</table>
         </columns>

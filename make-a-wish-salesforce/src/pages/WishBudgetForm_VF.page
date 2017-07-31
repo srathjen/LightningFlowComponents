@@ -1,4 +1,4 @@
-<apex:page standardController="Wish_Expense__c" extensions="WishBudgetForm_AC" standardStylesheets="false" id="Pge" sidebar="false" showHeader="false">
+<apex:page standardController="Wish_Expense__c" extensions="WishBudgetForm_AC" standardStylesheets="false" id="Pge" sidebar="false" showHeader="false" >
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
@@ -122,6 +122,21 @@
             color: Red;
             font-size:16px
         }
+    </style>
+    <style type="text/css">
+         @page 
+        {
+            margin-top: 0.1mm;
+            size: 457mm 329mm;                
+        }
+         @media print {            
+             table#tabid{
+                width:70%;
+                height:50%;
+    
+            }           
+    }
+body{margin: 0px 0px 0px 0px;}
     </style>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -688,6 +703,9 @@
                         </table>
                         <div style="float: left; vertical-align: middle; ">Budget Notes: </div>
                         <div style="float: left;width: 600px;vertical-align: top;" ><apex:inputTextarea rows="3" value="{!budgetNotes}" style="width:600px"/> </div>
+                        <div class="pull-right" style="margin-right: 2%;margin-top: 2%; margin-bottom:1%">
+                            <apex:commandButton value="Print" onclick="window.print();" styleclass="btn btn-info" />
+                        </div>
                         <div class="approval-Section">
                             <apex:outputPanel rendered="{!approvalBtnVisibility}">
                                 
@@ -702,11 +720,12 @@
                             </apex:outputPanel>
                         </div>
                         <div class="pull-right" style="margin-right: 2%;margin-top: 2%; margin-bottom:1%">
-                            <apex:commandButton value="Save" action="{!SaveExpenses}" styleclass="btn btn-info" /> 
+                            <apex:commandButton value="Save" action="{!SaveExpenses}" styleclass="btn btn-info" />
                         </div>
                         <apex:actionFunction name="submitForApproval" action="{!submitForApproval}" rerender="none" oncomplete="decisionWindow();"/>
                         <apex:actionFunction name="ReloadPage" action="{!ReloadPage}" rerender="none" />
                         
+                         
                                                 
                     </apex:pageBlock>  
                 </div>
@@ -780,6 +799,7 @@
         </div>
     </div>
     
+   
     <script>
     function validateNewExpenseType() {
         if($('.new-expType').val() == '') {

@@ -166,6 +166,7 @@ public class ContactTriggerHandler{
         npe5__Affiliation__c aff; 
         List<npe5__Affiliation__c> UdateAff =new List<npe5__Affiliation__c>();
         set<Id> contactIds =new set<Id>();
+        List<npe5__Affiliation__c> affList = new List<npe5__Affiliation__c>();
         
         for(Contact con:ContactList)
         {
@@ -174,8 +175,11 @@ public class ContactTriggerHandler{
             houseHoldAffiliation.npe5__Contact__c=con.id;
             houseHoldAffiliation.npe5__StartDate__c = Date.Today();
             houseHoldAffiliation.npe5__Status__c = 'Active';
-            if(con.RecordTypeId == volunteerRecordTypeId)
+            if(con.RecordTypeId == volunteerRecordTypeId){
                 houseHoldAffiliation.Constituent_Code__c='Volunteer';
+                houseHoldAffiliation.npe5__Primary__c = true;
+                contactIds.add(con.Id);
+             }
             else if(con.RecordTypeId == boardMemberRT)
                 houseHoldAffiliation.Constituent_Code__c='Board Member';
             houseHoldAffList.add(houseHoldAffiliation);
@@ -228,6 +232,16 @@ system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
                 if(con.AccountId == Null && con.Region_Chapter__c != Null)
                     con.AccountId = con.Region_Chapter__c;
             }
+        }
+        
+        if(contactIds.size() > 0){
+            For(npe5__Affiliation__c  currAff : [SELECT Id,npe5__Primary__c FROM npe5__Affiliation__c  WHERE npe5__Contact__c IN : contactIds AND npe5__Primary__c = True ]){
+                currAff.npe5__Primary__c = false;
+                affList.add(currAff);
+            }
+            
+            If(affList.Size() > 0)
+                Update affList;
         }
         
         if(houseHoldAffList.size() > 0)
@@ -390,5 +404,19 @@ system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
             update UdateAff;
         }
         
+    }
+    public static void validateContact(Map<Id,Contact> conMap)
+    {
+     Set<Id> contactSetId = new Set<id>();
+     for(Lead dblead : [SELECT id,Hidden_Best_Contact_Person_Id__c,Medical_Professional_ContactId__c,Treating_Medical_Professional_Contact_Id__c,Hidden_Additional_Parent_Id__c,Wish_Family_ContactId__c FROM Lead
+      WHERE Hidden_Best_Contact_Person_Id__c IN : conMap.keyset() OR Medical_Professional_ContactId__c IN : conMap.keyset() OR Treating_Medical_Professional_Contact_Id__c IN : conMap.keyset() OR Hidden_Additional_Parent_Id__c IN : conMap.keyset() OR Wish_Family_ContactId__c IN : conMap.keyset() ]){
+      contactSetId.add(dbLead.id);
+      }
+      for(Contact dbContact : conMap.values()){
+      if(contactSetId.size() > 0){
+       dbContact.addError('You cannot delete this Contact, as it is associated with Lead');}
+      }
+      
+     
     }
 }

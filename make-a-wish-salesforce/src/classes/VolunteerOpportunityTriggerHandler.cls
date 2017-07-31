@@ -122,6 +122,7 @@ volunteer opportunity record.*/
         for(User contactUser : [SELECT Id, ContactId FROM User WHERE ContactId IN : VoluteerNameSet]) {
             volunteerUserMap.put(contactUser.ContactId, contactUser.Id);
         }
+        System.debug('Volunteer User Map>>>: '+volunteerUserMap);
         for(CaseTeamRole  caseTem : [SELECT id,Name from CaseTeamRole]){
             teamMemberRoleMap.put(caseTem.Name,caseTem);
         }
@@ -142,37 +143,78 @@ volunteer opportunity record.*/
                 wishMembersMap.put(dbcaseTeamMember.parentId,new Set<String>{dbcaseTeamMember.MemberId});
         }
         
+        
+        Set<Id> userIdset = new Set<Id>();
+        Map<Id, List<Task>> taskMap = new Map<Id, List<Task>>();
+        for(Task checkExistingTaskOwner : [SELECT Id, OwnerId, WhatId, RecordType.Name FROM Task WHERE WhatId IN : volunteerMap.keySet() AND RecordType.Name = 'Volunteer' AND isClosed = false]) {
+            userIdset.add(checkExistingTaskOwner.OwnerId);
+            if(taskMap.containsKey(checkExistingTaskOwner.WhatId)) {
+                taskMap.get(checkExistingTaskOwner.WhatId).add(checkExistingTaskOwner);
+            } else {
+                taskMap.put(checkExistingTaskOwner.WhatId, new List<Task>{checkExistingTaskOwner});
+            }
+        }
+        Set<Id> internalUserIdSet = new Set<Id>();
+        for(User getUserInfo : [SELECT Id, ContactId FROM User WHERE Id IN : userIdset]) {
+            if(getUserInfo.ContactId == null) {
+                internalUserIdSet.add(getUserInfo.Id);
+            }
+        }
+        List<Task> updateOwnerList = new List<Task>();
         for(Volunteer_Opportunity__c newVolunteerRole : recordsForCreatingCaseTeams)
         {
+            if(newVolunteerRole.Role__c == 'Wish Granter' || newVolunteerRole.Role__c == 'Wish Granter Mentor') {
+                if(taskMap.containsKey(newVolunteerRole.Wish__c)) {
+                    for(Task checkOwner : taskMap.get(newVolunteerRole.Wish__c)) {
+                        if(internalUserIdSet.contains(checkOwner.OwnerId)) {
+                            if(contactUserInfoMap.containsKey(newVolunteerRole.Volunteer_Name__c)) {
+                                checkOwner.OwnerId = contactUserInfoMap.get(newVolunteerRole.Volunteer_Name__c);
+                                updateOwnerList.add(checkOwner);
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
             if(newVolunteerRole.Volunteer_Name__c != null && newVolunteerRole.wish__c != null){
                 
-                if(!wishMembersMap.containsKey(newVolunteerRole.wish__c) || (wishMembersMap.containsKey(newVolunteerRole.wish__c) && volunteerUserMap.containsKey(newVolunteerRole.Volunteer_Name__c) && !wishMembersMap.get(newVolunteerRole.wish__c).contains(volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c))))
+                if(!wishMembersMap.containsKey(newVolunteerRole.wish__c) || (wishMembersMap.containsKey(newVolunteerRole.wish__c) && volunteerUserMap.containsKey(newVolunteerRole.Volunteer_Name__c)))
                 {
                     
                     CaseTeamMember newCaseTeamMembers = new CaseTeamMember();
                     newCaseTeamMembers.ParentId = newVolunteerRole.Wish__c;
                     newCaseTeamMembers.MemberId = newVolunteerRole.Volunteer_Name__c;
                     if(volunteerUserMap.containsKey(newVolunteerRole.Volunteer_Name__c)) {
-                        
                         newCaseTeamMembers.MemberId = volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c);
                         wishAssignedSet.add(newCaseTeamMembers.MemberId);
                     }
-                    If(teamMemberRoleMap.containsKey(newVolunteerRole.Role__c)){
+                    System.debug('Volunteer Role: '+newVolunteerRole.Role__c);
+                    System.debug('Wish Member Map: '+wishMembersMap);
+                    System.debug('Volunteer User Map: '+volunteerUserMap);
+                    System.debug('wishMembersMap.get(newVolunteerRole.wish__c) '+wishMembersMap.get(newVolunteerRole.wish__c));
+                    If(teamMemberRoleMap.containsKey(newVolunteerRole.Role__c) && !wishMembersMap.get(newVolunteerRole.wish__c).contains(volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c))){
                         newCaseTeamMembers.TeamRoleId = teamMemberRoleMap.get(newVolunteerRole.Role__c).id;
+                        CaseTeamMemberList.add(newCaseTeamMembers);
                     }
-                    else{
-                        newCaseTeamMembers.TeamRoleId = caseRoleID.id;
-                    }
-                    
-                    CaseTeamMemberList.add(newCaseTeamMembers);
-                    
-                    
-                    if(updateCaseMemberCount.containsKey(newVolunteerRole.Wish__c)){
-                        updateCaseMemberCount.get(newVolunteerRole.Wish__c).add(newCaseTeamMembers);
-                    }
+                    else if(teamMemberRoleMap.containsKey(newVolunteerRole.Role__c) && wishMembersMap.get(newVolunteerRole.wish__c).contains(volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c)) && (newVolunteerRole.Role__c == 'Wish Granter' || newVolunteerRole.Role__c == 'Wish Granter Mentor')) {
+                        newCaseTeamMembers.TeamRoleId = teamMemberRoleMap.get(newVolunteerRole.Role__c).id;
+                        newCaseTeamMembers.Id = caseTeamMemberMap.get(volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c)).Id;
+                        CaseTeamMemberList.add(newCaseTeamMembers);
+                    } 
                     else {
-                        updateCaseMemberCount.put(newVolunteerRole.Wish__c, new Set<CaseTeamMember>{newCaseTeamMembers});
+                        //newCaseTeamMembers.TeamRoleId = caseRoleID.id;
                     }
+                    
+                    if(newVolunteerRole.Role__c == 'Wish Granter' || newVolunteerRole.Role__c == 'Wish Granter Mentor') {
+                        if(updateCaseMemberCount.containsKey(newVolunteerRole.Wish__c)){
+                            updateCaseMemberCount.get(newVolunteerRole.Wish__c).add(newCaseTeamMembers);
+                        }
+                        else {
+                            updateCaseMemberCount.put(newVolunteerRole.Wish__c, new Set<CaseTeamMember>{newCaseTeamMembers});
+                        }
+                    }
+                    
                 } else {
                     
                     
@@ -192,6 +234,9 @@ volunteer opportunity record.*/
             }
         }
         
+        if(updateOwnerList.size() > 0) {
+            update updateOwnerList; 
+        }
         List<Task> birthDayTaskList = new List<Task>();
         for(Task birthdayTaskInfo : [SELECT Id, WhatId, Subject, OwnerId FROM Task WHERE Subject = 'Wish Child Birthday Reminder' AND WhatId IN : volunteerMap.keySet() AND isClosed = false AND RecordType.Name = 'Staff']) {
             if(volunteerMap.containsKey(birthdayTaskInfo.WhatId)) {
@@ -216,7 +261,7 @@ volunteer opportunity record.*/
         
         if(CaseTeamMemberList.size() > 0)
         {//wishRelatedContactMap, wishUserMap
-            insert CaseTeamMemberList;
+            upsert CaseTeamMemberList;
             
             
             if(wishUserMap.size() > 0) {
@@ -409,6 +454,7 @@ vollOpActiveMap.put(volOppInfo.Wish__C, volOppInfo.Volunteer_Name__c);
         system.debug('@@@@@@@ UpdateVolunteerRegisterdCount CALLED  @@@@@@@@@'+nonWishListtoupdatecount);
         Set<Id> chapterRoleIdSet = new Set<Id>();
         Set<Id> NonWishEventIdSet = new Set<Id>();
+        Set<String> DescriptionSetId = new Set<String>();
         Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
         // Map<Id,Volunteer_Opportunity__c> volunteerMap = new Map<Id,Volunteer_Opportunity__c>();
         List<Volunteer_Count__c > updateVolunteerCountList = new List<Volunteer_Count__c>();
@@ -416,13 +462,14 @@ vollOpActiveMap.put(volOppInfo.Wish__C, volOppInfo.Volunteer_Name__c);
         boolean isPending = false;
         for(Volunteer_Opportunity__c newVolOpp :nonWishListtoupdatecount){
             chapterRoleIdSet .add(newVolOpp.Chapter_Role_Opportunity__c);
+            DescriptionSetId.add(newVolOpp.Hidden_VolunteerCount_Desc__c+''+newVolOpp.Date__c+''+newVolOpp.Start_Time__c+''+newVolOpp.End_Time__c);
             system.debug('chapterRoleIdSet '+chapterRoleIdSet);
             NonWishEventIdSet.add(newVolOpp.Non_Wish_Event__c);
             system.debug('NonWishEventIdSet'+NonWishEventIdSet);
             
             system.debug('newVolOpp.HiddenVolunteer_Count_Description__c'+newVolOpp.HiddenVolunteer_Count_Description__c);
             
-            if((newVolOpp.Inactive__c == true && newVolOpp.Reason_Inactive__c != Null && newVolOpp.isApproved__c == true) || (newVolOpp.Inactive__c == true && newVolOpp.Reason_Inactive__c != Null && newVolOpp.isRejected__c == true )){
+            if((newVolOpp.Inactive__c == true && newVolOpp.Reason_Inactive__c != Null && newVolOpp.Status__c == 'Approved') || (newVolOpp.Inactive__c == true && newVolOpp.Reason_Inactive__c != Null && newVolOpp.Reason_Inactive__c == 'Not Approved')){
                 isdelete = true;
                 if(isdelete == true)
                     isRegistered = true;
@@ -432,48 +479,48 @@ vollOpActiveMap.put(volOppInfo.Wish__C, volOppInfo.Volunteer_Name__c);
                 isPending = true;
             
         }
-        List<AggregateResult> groupedResults = [SELECT Chapter_Role_Opportunity__c nonwish, Count(Id)aver FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c IN: NonWishEventIdSet  AND Volunteer_Name__c  != Null AND Reason_Inactive__c = Null AND Chapter_Role_Opportunity__c IN: chapterRoleIdSet AND id IN : nonWishRegisteredUpdateSet GROUP BY Chapter_Role_Opportunity__c];
-        
+        List<AggregateResult> groupedResults = [SELECT Chapter_Role_Opportunity__c nonwish, Count(Id)aver,Hidden_VolunteerCount_Desc__c FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c IN: NonWishEventIdSet  AND Volunteer_Name__c  != Null AND (Reason_Inactive__c = Null OR Reason_Inactive__c != Null) AND Chapter_Role_Opportunity__c IN: chapterRoleIdSet AND id IN : nonWishRegisteredUpdateSet GROUP BY Chapter_Role_Opportunity__c,Hidden_VolunteerCount_Desc__c,Date__c,Start_Time__c,End_Time__c];
+        System.debug('**groupedResults**'+groupedResults);
         if(!groupedResults.isEmpty()){
             for(AggregateResult arr : groupedResults){
                 volunteercountMap.put((ID)arr.get('nonwish'),(integer)arr.get('aver'));
+                System.debug('!@volunteercountMap@!'+volunteercountMap);
             }
         }
         if(volunteercountMap.size() > 0){
-            for(Volunteer_Count__c dbVolunteerCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__c,Registered__c From Volunteer_Count__c  WHERE Chapter_Role__c IN: volunteercountMap.Keyset()]){
+            for(Volunteer_Count__c dbVolunteerCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__c,Registered__c,Description__c,Start_Time__c,End_Time__c,Date__c From Volunteer_Count__c  WHERE Chapter_Role__c IN: volunteercountMap.Keyset()]){
                 if(NonWishEventIdSet.contains(dbVolunteerCount.Non_Wish_Events__c)){
-                    if(volunteercountMap.containsKey(dbVolunteerCount.Chapter_Role__c)){
-                        dbVolunteerCount.Registered__c  = volunteercountMap.get(dbVolunteerCount.Chapter_Role__c);
-                        system.debug('groupedResults'+dbVolunteerCount.Registered__c);
-                        if(isPending == true){
-                            dbVolunteerCount.Registered__c = dbVolunteerCount.Registered__c + 1;
+                    if(DescriptionSetId.contains(dbVolunteerCount.Description__c+''+dbVolunteerCount.Date__c+''+dbVolunteerCount.Start_Time__c+''+dbVolunteerCount.End_Time__c)){
+                        if(volunteercountMap.containsKey(dbVolunteerCount.Chapter_Role__c)){
+                            dbVolunteerCount.Registered__c  = volunteercountMap.get(dbVolunteerCount.Chapter_Role__c);
+                            system.debug('groupedResults'+dbVolunteerCount.Registered__c);
+                            if(isPending == true){
+                                dbVolunteerCount.Registered__c = dbVolunteerCount.Registered__c + 1;
+                                System.debug('dbVolunteerCount.Registered__c'+dbVolunteerCount.Registered__c);
+                            }
+                            if(dbVolunteerCount.Registered__c > 0 && isRegistered == true)
+                                System.debug('dbVolunteerCount.Registered__c'+dbVolunteerCount.Registered__c);
+                            dbVolunteerCount.Registered__c = dbVolunteerCount.Registered__c - 1;
                             System.debug('dbVolunteerCount.Registered__c'+dbVolunteerCount.Registered__c);
+                            updateVolunteerCountList.add(dbVolunteerCount);
                         }
-                        if(dbVolunteerCount.Registered__c > 0 && isRegistered == true)
-                            System.debug('dbVolunteerCount.Registered__c'+dbVolunteerCount.Registered__c);
-                        dbVolunteerCount.Registered__c = dbVolunteerCount.Registered__c - 1;
-                        System.debug('dbVolunteerCount.Registered__c'+dbVolunteerCount.Registered__c);
-                        updateVolunteerCountList.add(dbVolunteerCount);
-                        
                     }
                 }
             }
             update updateVolunteerCountList;
         }
         else{
-            for(Volunteer_Count__c dbVolunteerCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__c,Registered__c From Volunteer_Count__c  WHERE Chapter_Role__c IN: chapterRoleIdSet ]){
+            for(Volunteer_Count__c dbVolunteerCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__c,Registered__c,Description__c,Start_Time__c,End_Time__c,Date__c From Volunteer_Count__c  WHERE Chapter_Role__c IN: chapterRoleIdSet ]){
                 if(NonWishEventIdSet.contains(dbVolunteerCount.Non_Wish_Events__c)){
-                    // dbVolunteerCount.Registered__c  = 0;
-                    if(dbVolunteerCount.Registered__c > 0 && isRegistered == true)
+                    if(DescriptionSetId.contains(dbVolunteerCount.Description__c+''+dbVolunteerCount.Date__c+''+dbVolunteerCount.Start_Time__c+''+dbVolunteerCount.End_Time__c)){
+                        // dbVolunteerCount.Registered__c  = 0;
+                        if(dbVolunteerCount.Registered__c > 0 && isRegistered == true)
+                         System.debug('dbVolunteerCount.Registered__c'+dbVolunteerCount.Registered__c);
+                        dbVolunteerCount.Registered__c = 0;
                         System.debug('dbVolunteerCount.Registered__c'+dbVolunteerCount.Registered__c);
-                    /* if(isPending == true){
-dbVolunteerCount.Registered__c = dbVolunteerCount.Registered__c + 1;
-}*/
-                    
-                    dbVolunteerCount.Registered__c = 0;
-                    System.debug('dbVolunteerCount.Registered__c'+dbVolunteerCount.Registered__c);
-                    updateVolunteerCountList.add(dbVolunteerCount);
-                    System.debug('updateVolunteerCountList'+updateVolunteerCountList);
+                        updateVolunteerCountList.add(dbVolunteerCount);
+                        System.debug('updateVolunteerCountList'+updateVolunteerCountList);
+                    }
                 }
             }
         }
@@ -484,7 +531,7 @@ dbVolunteerCount.Registered__c = dbVolunteerCount.Registered__c + 1;
     public static void UpdatevolunteerNeededCount(List<Volunteer_Opportunity__c> nonWishListtoupdatecount){
         Set<Id> chapterRoleIdSet = new Set<Id>();
         Set<Id> NonWishEventIdSet = new Set<Id>();
-        //set<Id> volunteercountIdSet = new Set<Id>();
+        set<String> volunteercountDescSet = new Set<String>();
         List<Volunteer_Count__c > volunteercountIdList = new List<Volunteer_Count__c>();
         boolean isRegistered = false;
         Map<Id,Integer> volunteercountMap = new Map<Id,Integer>();
@@ -492,34 +539,39 @@ dbVolunteerCount.Registered__c = dbVolunteerCount.Registered__c + 1;
         for(Volunteer_Opportunity__c newVolOpp :nonWishListtoupdatecount){
             chapterRoleIdSet .add(newVolOpp.Chapter_Role_Opportunity__c);
             NonWishEventIdSet .add(newVolOpp.Non_Wish_Event__c);
+            volunteercountDescSet.add(newVolOpp.Hidden_VolunteerCount_Desc__c+''+newVolOpp.Date__c+''+newVolOpp.Start_Time__c+''+newVolOpp.End_Time__c);
         }
-        List<AggregateResult> groupedResults = [SELECT Chapter_Role_Opportunity__c nonwish, Count(Id)aver  FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c IN: NonWishEventIdSet AND Reason_Inactive__c = Null AND Chapter_Role_Opportunity__c IN: chapterRoleIdSet GROUP BY Chapter_Role_Opportunity__c];
+        List<AggregateResult> groupedResults = [SELECT Chapter_Role_Opportunity__c nonwish, Count(Id)aver,Hidden_VolunteerCount_Desc__c   FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__c IN: NonWishEventIdSet AND Reason_Inactive__c = Null AND Chapter_Role_Opportunity__c IN: chapterRoleIdSet GROUP BY Chapter_Role_Opportunity__c,Hidden_VolunteerCount_Desc__c,Date__c,Start_Time__c,End_Time__c];
         if(!groupedResults.isEmpty()){
             for(AggregateResult arr : groupedResults){
                 volunteercountMap.put((ID)arr.get('nonwish'),(integer)arr.get('aver'));
             }
         }
         if(volunteercountMap.size() > 0){
-            for(Volunteer_Count__c dbVolunteerCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__c,Registered__c From Volunteer_Count__c  WHERE Chapter_Role__c IN: volunteercountMap.Keyset()]){
+            for(Volunteer_Count__c dbVolunteerCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__c,Registered__c,Description__c,Start_Time__c,End_Time__c,Date__c From Volunteer_Count__c  WHERE Chapter_Role__c IN: volunteercountMap.Keyset()]){
                 if(NonWishEventIdSet .contains(dbVolunteerCount.Non_Wish_Events__c)){
                     if(volunteercountMap.containsKey(dbVolunteerCount.Chapter_Role__c)){
-                        //dbVolunteerCount.Volunteer_Needed__c = volunteercountMap.get(dbVolunteerCount.Chapter_Role__c);
-                        if(dbVolunteerCount.Volunteer_Needed__c > 0)
-                            dbVolunteerCount.Volunteer_Needed__c = dbVolunteerCount.Volunteer_Needed__c - 1;
-                        updateVolunteerCountList.add(dbVolunteerCount);
+                        if(volunteercountDescSet.contains(dbVolunteerCount.Description__c+''+dbVolunteerCount.Date__c+''+dbVolunteerCount.Start_Time__c+''+dbVolunteerCount.End_Time__c)){
+                            //dbVolunteerCount.Volunteer_Needed__c = volunteercountMap.get(dbVolunteerCount.Chapter_Role__c);
+                            if(dbVolunteerCount.Volunteer_Needed__c > 0)
+                                dbVolunteerCount.Volunteer_Needed__c = dbVolunteerCount.Volunteer_Needed__c - 1;
+                            updateVolunteerCountList.add(dbVolunteerCount);
+                        }
                     }
                 }
             }
             update updateVolunteerCountList;
         }
         else{
-            for(Volunteer_Count__c dbVolunteerCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__c,Registered__c From Volunteer_Count__c  WHERE Chapter_Role__c IN: chapterRoleIdSet ]){
+            for(Volunteer_Count__c dbVolunteerCount : [SELECT Id,Name,Volunteer_Needed__c,Non_Wish_Events__c,Chapter_Role__c,Registered__c,Description__c,Start_Time__c,End_Time__c,Date__c From Volunteer_Count__c  WHERE Chapter_Role__c IN: chapterRoleIdSet ]){
                 if(NonWishEventIdSet.contains(dbVolunteerCount.Non_Wish_Events__c)){
-                    dbVolunteerCount.Volunteer_Needed__c = 0;
-                    updateVolunteerCountList.add(dbVolunteerCount);
-                    volunteercountIdList.add(dbVolunteerCount);
+                    if(volunteercountDescSet.contains(dbVolunteerCount.Description__c+''+dbVolunteerCount.Date__c+''+dbVolunteerCount.Start_Time__c+''+dbVolunteerCount.End_Time__c)){
+                        dbVolunteerCount.Volunteer_Needed__c = 0;
+                        updateVolunteerCountList.add(dbVolunteerCount);
+                        volunteercountIdList.add(dbVolunteerCount);
+                    }
                 }
-            }
+            } 
             update updateVolunteerCountList;
             //delete volunteercountIdList;
         }
@@ -580,7 +632,7 @@ volunteercountMap.put((ID)arr.get('volCount'),(integer)arr.get('aver'));
 
 } 
 }
-for(Volunteer_Opportunity__c  dbVoluOpportunity : [SELECT Id,Wish__c,Volunteer_Name__c,IsApproved__c From Volunteer_Opportunity__c WHERE Wish__c IN: volunteercountMap.KeySet() AND IsApproved__c =: TRUE]){
+for(Volunteer_Opportunity__c  dbVoluOpportunity : [SELECT Id,Wish__c,Volunteer_Name__c From Volunteer_Opportunity__c WHERE Wish__c IN: volunteercountMap.KeySet() AND Status__c = 'Approved']){
 sobjectMap.put(dbVoluOpportunity.Volunteer_Name__c,dbVoluOpportunity.Wish__c); 
 } 
 
@@ -625,6 +677,7 @@ update updateContactList;
         for(Volunteer_Opportunity__c  currRec : [SELECT Id,Wish__c,Wish__r.Status FROM Volunteer_Opportunity__c  WHERE Id IN :volunteerOppIdSet AND Wish__c != Null]){
             wishStatusMap.put(currRec.Wish__C,currRec.Wish__r.Status);
         }
+        
         for(CaseTeamRole caseTeamInfo : [Select Id, Name FROM CaseTeamRole]) {
             caseTeamIdMap.put(caseTeamInfo.Id, caseTeamInfo.Name);
             caseTeamNameMap.put(caseTeamInfo.Name, caseTeamInfo.Id);
@@ -635,6 +688,13 @@ update updateContactList;
             newVolOpportunity.Chapter_Name__c = processVolOpportunity.Chapter_Name__c;
             newVolOpportunity.Chapter_Role_Opportunity__c = processVolOpportunity.Chapter_Role_Opportunity__c;
             newVolOpportunity.Date_Time__c = processVolOpportunity.Date_Time__c;
+            newVolOpportunity.Hidden_VolunteerCount_Desc__c = processVolOpportunity.Hidden_VolunteerCount_Desc__c;
+            newVolOpportunity.Description__c = processVolOpportunity.Description__c;
+            newVolOpportunity.Start_Time__c = processVolOpportunity.Start_Time__c ;
+            newVolOpportunity.End_Time__c = processVolOpportunity.End_Time__c;
+            newVolOpportunity.Date__c = processVolOpportunity.Date__c;
+            newVolOpportunity.Location__c = processVolOpportunity.Location__c;
+            newVolOpportunity.HiddenVolunteer_Count_Description__c  = processVolOpportunity.HiddenVolunteer_Count_Description__c ;
             volunteerNamesSet.add(processVolOpportunity.Volunteer_Name__c);
             
             if(processVolOpportunity.Non_Wish_Event__c != null){
@@ -655,11 +715,10 @@ update updateContactList;
                 wishIdSet.add(processVolOpportunity.Wish__c );
                 parentIdset.add(processVolOpportunity.Wish__c);
             }
-            if(processVolOpportunity.isRejected__c == true){
+            if(processVolOpportunity.Reason_Inactive__c == 'Not Approved'){
                 Volunteer_Opportunity__c updateVolOpp = new Volunteer_Opportunity__c();
                 updateVolOpp.id = processVolOpportunity.Id;
                 updateVolOpp.Inactive__c = true;
-                updateVolOpp.Reason_Inactive__c = 'Not Approved';
                 updateList.add(updateVolOpp);
             } 
             createNewVolunteerOpportunityList.add(newVolOpportunity);
@@ -716,35 +775,50 @@ update updateContactList;
         if(deleteList.size() > 0) {
             delete deleteList;
         }
+        Map<Id,String> volunteerOppMap = new Map<Id, String>();
+        for(Volunteer_Opportunity__c getActiveVolOpp : [SELECT Id, Volunteer_Name__c, Wish__c, Role__c FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c IN : volunteerNamesSet AND Wish__c != NULL AND Status__c = 'Approved' AND Wish__c IN : wishStatusMap.keySet()]) {
+            System.debug('********'+getActiveVolOpp.Role__c);
+            if(!volunteerOppIdSet.contains(getActiveVolOpp.Id)) {
+                System.debug('&&&&&&&&&&&'+getActiveVolOpp.Role__c);
+                volunteerOppMap.put(getActiveVolOpp.Volunteer_Name__c,getActiveVolOpp.Role__c);
+            }
+        }
+        System.debug('volunteerOppMap: '+volunteerOppMap);
         List<Case> updateinactiveList = new List<Case>();
         Set<id> parentCaseId = new Set<id>();
         for(CaseTeamMember dbcaseTeamMember : [SELECT id,MemberId, ParentId, TeamRoleId, TeamRole.Name  FROM CaseTeamMember WHERE ParentId IN : parentIdset AND MemberId IN :userIds]){
             if(caseTeamIdMap.size() > 0 && caseTeamIdMap.containsKey(dbcaseTeamMember.TeamRoleId)) {
-                if(caseTeamNameMap.containsKey(dbcaseTeamMember.TeamRole.Name +' (Inactive)')) {
-                    dbcaseTeamMember.TeamRoleId = caseTeamNameMap.get(dbcaseTeamMember.TeamRole.Name +' (Inactive)');
-                    removeCaseTeamMemberList.add(dbcaseTeamMember);
-                    parentCaseId.add(dbcaseTeamMember.ParentId);
+                if(contactUserMap.containsKey(dbcaseTeamMember.MemberId)) {
+                    if(volunteerOppMap.containsKey(contactUserMap.get(dbcaseTeamMember.MemberId))) {
+                        dbcaseTeamMember.TeamRoleId = caseTeamNameMap.get(volunteerOppMap.get(contactUserMap.get(dbcaseTeamMember.MemberId)));
+                        removeCaseTeamMemberList.add(dbcaseTeamMember);
+                        parentCaseId.add(dbcaseTeamMember.ParentId);
+                    } else if(caseTeamNameMap.containsKey(dbcaseTeamMember.TeamRole.Name +' (Inactive)')) {
+                        dbcaseTeamMember.TeamRoleId = caseTeamNameMap.get(dbcaseTeamMember.TeamRole.Name +' (Inactive)');
+                        removeCaseTeamMemberList.add(dbcaseTeamMember);
+                        parentCaseId.add(dbcaseTeamMember.ParentId);
+                    }
                 }
             }
         }
         if(parentCaseId.size()>0){
-         Case parentCase = new Case();
-         for(Case newCase : [SELECT id,Hidden_VOinactive__c FROM Case WHERE Id IN : parentCaseId ]){
-            ParentCase.id = newCase.id;
-            ParentCase.Hidden_VOinactive__c = true;
-            //newCase.Hidden_VOinactive__c = true;
-                 updateinactiveList.add(ParentCase); 
-                   }
-                   
-           }
-                   
+            Case parentCase = new Case();
+            for(Case newCase : [SELECT id,Hidden_VOinactive__c FROM Case WHERE Id IN : parentCaseId ]){
+                ParentCase.id = newCase.id;
+                ParentCase.Hidden_VOinactive__c = true;
+                //newCase.Hidden_VOinactive__c = true;
+                updateinactiveList.add(ParentCase); 
+            }
+            
+        }
+        
         
         if(removeCaseTeamMemberList.size() > 0) {
             update removeCaseTeamMemberList;
         }
         if(updateinactiveList.size() > 0){
-                    update updateinactiveList;
-                   }
+            update updateinactiveList;
+        }
         if(createNewVolunteerOpportunityList.size() > 0)
             insert createNewVolunteerOpportunityList;
         if(updateList.size() > 0) {
@@ -806,8 +880,8 @@ update updateContactList;
         string key;
         list<Contact> updateActiveWishCount = new list<Contact>();
         Map<Id,Integer> volunteerWithCount = new Map<id,Integer>();
-        for(Volunteer_Opportunity__c currVolOpp : [SELECT ID,Wish__c,Wish__r.Status,Volunteer_Name__c,IsApproved__c FROM Volunteer_Opportunity__c WHERE 
-                                                   IsApproved__c = True AND (Wish__r.Status != 'Granted' AND Volunteer_Name__c IN: volunteerIdsSet AND Wish__r.Status != 'Completed')]){
+        for(Volunteer_Opportunity__c currVolOpp : [SELECT ID,Wish__c,Wish__r.Status,Volunteer_Name__c,Status__c FROM Volunteer_Opportunity__c WHERE 
+                                                   Status__c = 'Approved' AND (Wish__r.Status != 'Granted' AND Volunteer_Name__c IN: volunteerIdsSet AND Wish__r.Status != 'Completed')]){
                                                        key = currVolOpp.Wish__c + '_' + currVolOpp.Volunteer_Name__c;
                                                        system.debug('Inside if parentWishIdsSet**'+parentWishIdsSet);
                                                        
@@ -865,6 +939,7 @@ update updateContactList;
                 if(newVolOpp.Non_Wish_Event__c != Null){
                     newOpp.Non_Wish_Event__c  = newVolOpp.Non_Wish_Event__c;
                     newOpp.HiddenVolunteer_Count_Description__c  = newVolOpp.HiddenVolunteer_Count_Description__c ;
+                    newOpp.Hidden_VolunteerCount_Desc__c = newVolOpp.Hidden_VolunteerCount_Desc__c; 
                 }
                 newVolOppList.add(newOpp);
                 Volunteer_Opportunity__c updateVolOpp = new Volunteer_Opportunity__c();
@@ -872,7 +947,7 @@ update updateContactList;
                 updateVolOpp.Inactive__c = true;
                 updateVolOpp.Reason_Inactive__c = 'Not Approved';
                 updateList.add(updateVolOpp);
-                if(newVolOpp.isRejected__c == true){
+                if(newVolOpp.Status__c == 'Rejected'){
                     // UpdateVolunteerRegisterdCount(newVolOppList,null);
                 }
             }

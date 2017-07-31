@@ -259,37 +259,6 @@
                                 </div>
                                 <hr style="width:200%"/>
                                 
-                                <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
-                                    <div class="divTableRow">
-                                        <div class="divTableCell">Number of Sibilings:</div>
-                                        <div class="divTableCell">{!currLead.of_Siblings__c }</div>
-                                    </div>
-                                </apex:outputPanel>
-                                <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
-                                    <div class="divTableRow">
-                                        <b class="hdr-bld">Sibiling Details</b>
-                                    </div>
-                                </apex:outputPanel> 
-                                <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
-                                    <apex:repeat value="{!sibList}" var="sb">
-                                        <div class="divTableRow">
-                                            <div class="divTableCell">First Name:</div>
-                                            <div class="divTableCell">{!sb.firstName}</div>
-                                        </div>
-                                        <div class="divTableRow">
-                                            <div class="divTableCell">Last Name:</div>
-                                            <div class="divTableCell">{!sb.lastName}</div>
-                                        </div>
-                                        <div class="divTableRow">
-                                            <div class="divTableCell">Age:</div>
-                                            <div class="divTableCell">{!sb.age}</div>
-                                        </div>
-                                    </apex:repeat>
-                                    <hr style="width:200%"/>
-                                </apex:outputPanel>
-                                
-                                
-                                
                                 <apex:outputPanel layout="none" rendered="{!if(currLead.Additional_Parent_First_Name__c!=null, True, false)}">
                                     <div class="divTableRow">
                                         <b class="hdr-bld">Parent or Guardian 2</b>
@@ -329,8 +298,36 @@
                                     <hr style="width:200%"/>
                                 </apex:outputPanel> 
                                 
-                                
-                                
+                                <apex:outputPanel layout="none" rendered="{!if(currLead.of_Siblings__c != null, True, false)}">
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Number of Sibilings:</div>
+                                        <div class="divTableCell">{!currLead.of_Siblings__c }</div>
+                                    </div>
+                                    
+                                </apex:outputPanel>
+                                <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
+                                    <div class="divTableRow">
+                                        <b class="hdr-bld">Sibiling Details</b>
+                                    </div>
+                                </apex:outputPanel> 
+                                <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
+                                    <apex:repeat value="{!sibList}" var="sb">
+                                        <div class="divTableRow">
+                                            <div class="divTableCell">First Name:</div>
+                                            <div class="divTableCell"><apex:outputtext value="{!sb.firstName}" escape="false" /></div>
+                                        </div>
+                                        <div class="divTableRow">
+                                            <div class="divTableCell">Last Name:</div>
+                                            <div class="divTableCell"><apex:outputtext value="{!sb.lastName}" escape="false" /></div>
+                                        </div>
+                                        <div class="divTableRow">
+                                            <div class="divTableCell">Age:</div>
+                                            <div class="divTableCell">{!sb.age}</div>
+                                        </div>
+                                    </apex:repeat>
+                                    <hr style="width:200%"/>
+                                </apex:outputPanel>
+                              
                                 <div class="divTableRow">
                                     <b style="padding-left:1.5%; font-weight:bold">Medical Information</b>
                                 </div>

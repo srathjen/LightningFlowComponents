@@ -108,7 +108,7 @@ public class VolunteerWorkItems_AC_Test {
             Test.setCurrentPageReference(pageref);
             VolunteerWorkItems_AC volunteerWorkitems = new VolunteerWorkItems_AC();
              volunteerWorkitems.volunteerOpportunityRecordId = dbOpp.Id;
-            volunteerWorkitems.RegisterNonWishEvents();
+            
             
         }
     }

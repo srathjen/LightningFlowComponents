@@ -387,6 +387,15 @@
         <protected>false</protected>
     </fieldUpdates>
     <fieldUpdates>
+        <fullName>Case_Update_Status_to_Ready_to_Interview</fullName>
+        <field>Status</field>
+        <literalValue>Ready to Interview</literalValue>
+        <name>Case:Update Status to Ready to Interview</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>UncheckVOInactive</fullName>
         <field>Hidden_VOinactive__c</field>
         <literalValue>0</literalValue>
@@ -581,6 +590,25 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
+        <fullName>Case%3A Change Status to Ready to Interview</fullName>
+        <actions>
+            <name>Case_Update_Status_to_Ready_to_Interview</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Case.Case_Member_Count__c</field>
+            <operation>equals</operation>
+            <value>2</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Case.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Wish</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
         <fullName>Case%3A Email to MAC Team</fullName>
         <actions>
             <name>Send_Email_to_MAC_Team</name>
@@ -609,14 +637,14 @@
         <fullName>Case%3ABirthday Task</fullName>
         <active>true</active>
         <description>This workflow will create Task to Volunteer for Wish Child Birthday</description>
-        <formula>AND(NOT(ISNULL(Birthdate__c)),CurrentDOB__c - Today() &gt; 21) &amp;&amp;  $Profile.Name != &apos;Integration&apos;</formula>
+        <formula>AND(NOT(ISNULL(Birthdate__c)),((CurrentDOB__c - Today())&gt; 21)) &amp;&amp;  $Profile.Name != &apos;Integration&apos;</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
             <actions>
                 <name>Birthday_Task</name>
                 <type>Task</type>
             </actions>
-            <offsetFromField>Case.Birthdate__c</offsetFromField>
+            <offsetFromField>Case.CurrentDOB__c</offsetFromField>
             <timeLength>-21</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
@@ -633,9 +661,9 @@
             <operation>equals</operation>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>Used to create a task to Chapter Staff if Wish Clearance received is null after 14 days the form sent</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -802,7 +830,7 @@
         </actions>
         <active>true</active>
         <description>This work flow will fire when the national mac team reply to the case comment.</description>
-        <formula>AND(NOT(ISNULL(MAC_Email__c)),ISCHANGED(Case_Comment__c),(isNational__c = true),(isNationalReply__c = true),( Migrated_Record__c = false),RecordType.DeveloperName =&apos;Diagnosis_Verification_Review&apos;)</formula>
+        <formula>AND(NOT(ISNULL(MAC_Email__c)),ISCHANGED(Case_Comment__c),(isNational__c = true),(isNationalReply__c = true),(  $Profile.Name != &apos;Integration&apos;),RecordType.DeveloperName =&apos;Diagnosis_Verification_Review&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -813,7 +841,7 @@
         </actions>
         <active>true</active>
         <description>This work flow rule is used to send replay email to MAC team.</description>
-        <formula>AND(ISCHANGED(Case_Comment__c),isNational__c = false, isEmail__c = true,Migrated_Record__c = false, RecordType.DeveloperName =&apos;Diagnosis_Verification_Review&apos;)</formula>
+        <formula>AND(ISCHANGED(Case_Comment__c),isNational__c = false, isEmail__c = true, $Profile.Name != &apos;Integration&apos;, RecordType.DeveloperName =&apos;Diagnosis_Verification_Review&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -823,7 +851,7 @@
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
-        <formula>AND(OR(ISCHANGED( Status ),ISNEW()), Migrated_Record__c = false)</formula>
+        <formula>AND(OR(ISCHANGED( Status ),ISNEW()),  $Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -878,9 +906,9 @@
             <value>True</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>Used update isApprove Field when the child case is closed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -937,9 +965,9 @@
             <value>False</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Case.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <criteriaItems>
             <field>Case.Interview_date__c</field>

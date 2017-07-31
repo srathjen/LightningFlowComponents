@@ -158,7 +158,7 @@
         <label>Important Date Section</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Readonly</behavior>
+                <behavior>Edit</behavior>
                 <field>Qualified_Date__c</field>
             </layoutItems>
             <layoutItems>

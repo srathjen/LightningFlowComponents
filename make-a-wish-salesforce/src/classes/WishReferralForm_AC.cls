@@ -137,7 +137,7 @@ return null;
                 {
                     currLead.Short_Description__c = icdCodeRecList[0].Short_Description__c;
                     currLead.Long_Description__c= icdCodeRecList[0].Long_Description__c;
-                    currLead.Group_1__c= icdCodeRecList[0].Group1__c;
+                    //currLead.Group_1__c= icdCodeRecList[0].Group1__c;
                     currLead.Childs_Qualifying_Diagnosis__c = icdCodeRecList[0].Condition_Description__r.Code_to_Use__c;
                     
                 }                           
@@ -449,10 +449,23 @@ return null;
         return options;
     }  
     
-     //Capturing State Picklist values.   
+     //Capturing Parent Relationship to child Picklist values.   
     public List<SelectOption> getRelationshipsToChild() {
         List<SelectOption> options = new List<SelectOption>();
         Schema.DescribeFieldResult fieldResult =  Lead.Parent_Relationship_to_Child__c.getDescribe();
+        options.add(new SelectOption('', 'Select an option')); 
+        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
+        for( Schema.PicklistEntry currVal : picklistValues){
+            options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
+            
+        }  
+        return options;
+    }  
+    
+     //Capturing Parent Relationship to child Picklist values.   
+    public List<SelectOption> getHereAboutMAW() {
+        List<SelectOption> options = new List<SelectOption>();
+        Schema.DescribeFieldResult fieldResult =  Lead.How_Did_you_hear_about_Make_A_Wish__c.getDescribe();
         options.add(new SelectOption('', 'Select an option')); 
         List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
         for( Schema.PicklistEntry currVal : picklistValues){

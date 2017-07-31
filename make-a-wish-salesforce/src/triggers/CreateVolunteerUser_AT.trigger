@@ -37,7 +37,7 @@ trigger CreateVolunteerUser_AT on Contact (After Insert, After Update) {
     System.debug('Contact Info2:' + conId);
     if(conId.size()>0)
     {
-        VolunteerContactHandler.createUser(conId);
+       // VolunteerContactHandler.createUser(conId);
     }
 
 }

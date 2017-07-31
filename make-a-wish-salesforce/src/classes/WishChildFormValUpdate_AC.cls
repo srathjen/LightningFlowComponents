@@ -140,7 +140,7 @@ Public Class WishChildFormValUpdate_AC
                     currCase.Does_your_family_have_a_credit_card_Note__c = wishChildFormMap.get(currRec.id).Does_your_family_Details__c;
                     currCase.Bringing_Own_Wheel_Chair__c = wishChildFormMap.get(currRec.id).Bringing_Own_Wheel_Chair__c;
                     currCase.Requested_Participant_Name_forWheelchair__c = wishChildFormMap.get(currRec.id).Requested_Participant_Name_forWheelchair__c;
-                    currCase.Requested_Participant_Name_forWheelchair__c = wishChildFormMap.get(currRec.id).Name_of_wheelchair_collapsible__c;
+                    currCase.Name_of_wheelchair_collapsible__c = wishChildFormMap.get(currRec.id).Name_of_wheelchair_collapsible__c;
                     currCase.Pariticipant_name_havingWheelchair_Power__c = wishChildFormMap.get(currRec.id).Pariticipant_name_havingWheelchair_Power__c;
                     currCase.Requested_Participant_Name_for_Oxygen__c =  wishChildFormMap.get(currRec.id).Requested_Participant_Name_for_Oxygen__c;
                     currCase.Participant_Name_for_Dietary_Restriction__c = wishChildFormMap.get(currRec.id).Participant_Name_for_Dietary_Restriction__c;
@@ -251,7 +251,7 @@ Public Class WishChildFormValUpdate_AC
                 currContact.When_I_m_with_my_friends_I_like_to__c = currWishChildForm.When_I_m_with_my_friends_I_like_to__c;
                 currContact.Region_Chapter__c = currWishChildForm.Case__r.ChapterName__c;
                 ChapterAccId = currWishChildForm.Case__r.ChapterName__c;
-                currContact.Parent_Legal_Guardian__c = currWishChildForm.Hidden_Wish_Fmaily_Contact_Name__c;
+                currContact.Parent_Legal_Guardian__c = currWishChildForm.RelatedContact__c;
                 currContact.RelatedContacts__c = currWishChildForm.RelatedContact__c;
                 currContact.MyWishIsTo__c = currWishChildForm.MY_WISH_IS_TO__c;
                 currContact.When_I_think_about_my_wish_I_imagine__c = currWishChildForm.When_I_think_about_my_wish_I_imagine__c;
@@ -430,11 +430,33 @@ Public Class WishChildFormValUpdate_AC
                
                 newRelation.Parent_Legal_Guardian__c = true;
                 newRelation.Wish_Participant__c = true;
-                system.debug('###');
+                 if(newContact.Birthdate != Null){
+                        Date dt = Date.Valueof(newContact.Birthdate);
+                        Integer days = dt.daysBetween(Date.Today());
+                        Integer age = Integer.valueOf(days/365);
+                        if(age < 18){
+                            newRelation.Under_18__c = true;
+                        }
+                        else{
+                            newRelation.Under_18__c = false;
+                        }
+                    }
             }
             else{
                 if(newContact.IsParentGuardian__c == 'ParentGuardian'){
                     newRelation.Parent_Legal_Guardian__c = true;
+                    if(newContact.Birthdate != Null){
+                        Date dt = Date.Valueof(newContact.Birthdate);
+                        Integer days = dt.daysBetween(Date.Today());
+                        Integer age = Integer.valueOf(days/365);
+                        if(age < 18){
+                            newRelation.Under_18__c = true;
+                        }
+                        else{
+                            newRelation.Under_18__c = false;
+                        }
+                        
+                    }
                 }
                 if(newContact.IsParentGuardian__c == 'Participant'){
                     newRelation.Wish_Participant__c = true;
@@ -444,6 +466,9 @@ Public Class WishChildFormValUpdate_AC
                         Integer age = Integer.valueOf(days/365);
                         if(age < 18){
                             newRelation.Under_18__c = true;
+                        }
+                        else{
+                            newRelation.Under_18__c = false;
                         }
                     }
                 }

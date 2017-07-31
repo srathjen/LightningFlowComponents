@@ -193,7 +193,7 @@
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
             <operation>equals</operation>
-            <value>Cancelled</value>
+            <value>Volunteer Cancelled</value>
         </criteriaItems>
         <criteriaItems>
             <field>User.ProfileId</field>
@@ -285,7 +285,7 @@
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
             <operation>equals</operation>
-            <value>Cancelled</value>
+            <value>Volunteer Cancelled</value>
         </criteriaItems>
         <criteriaItems>
             <field>User.ProfileId</field>
@@ -371,9 +371,9 @@
             <value>Completed</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Volunteer_Orientation_Training__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>This Update the Hidden Completed  date when the Volunteer Attendance as Completed.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

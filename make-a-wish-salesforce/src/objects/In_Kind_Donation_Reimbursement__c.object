@@ -578,6 +578,16 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <type>Currency</type>
     </fields>
     <fields>
+        <fullName>HiddenIsSubmittedforApproval__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to identify whether this record is submitted for approval or not, in background process</description>
+        <externalId>false</externalId>
+        <label>Hidden IsSubmitted for Approval</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>In_Kind_Donor_Name__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -593,7 +603,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
                 <value>In Kind Donors</value>
             </filterItems>
             <filterItems>
-                <field>Account.Chapter_Name__r.In_Kind_Approval_Status__c</field>
+                <field>Account.In_Kind_Approval_Status__c</field>
                 <operation>equals</operation>
                 <value>Approved</value>
             </filterItems>
@@ -1467,6 +1477,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <columns>Date_of_Submission__c</columns>
         <columns>RECORDTYPE</columns>
         <columns>Export_File_Name__c</columns>
+        <columns>In_Kind_Donor_Name__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>
@@ -2551,7 +2562,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <fullName>IKR_AccountName_VolunteerName_Validation</fullName>
         <active>true</active>
         <description>This validation will fire if user enter values for both In-Kind Donor Name and Volunteer Name</description>
-        <errorConditionFormula>AND(!ISBLANK( In_Kind_Donor_Name__c ), !ISBLANK(vounteer_Name__c),Migrated_Record__c=false, $Profile.Name &lt;&gt; &apos;Integration&apos; )</errorConditionFormula>
+        <errorConditionFormula>AND(!ISBLANK( In_Kind_Donor_Name__c ), !ISBLANK(vounteer_Name__c),$Profile.Name &lt;&gt; &apos;Integration&apos; )</errorConditionFormula>
         <errorDisplayField>In_Kind_Donor_Name__c</errorDisplayField>
         <errorMessage>Please enter either the Business Donor or Volunteer Donor.</errorMessage>
     </validationRules>
@@ -2559,14 +2570,14 @@ If this is a volunteer donor, gift subtype should begin with DRPS</inlineHelpTex
         <fullName>IKR_Editing_Approved_Record_Validation</fullName>
         <active>true</active>
         <description>This validation will fire after the record is approved and try to edit the record</description>
-        <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ),!ISBLANK( Approved_Date__c),Migrated_Record__c=false, $Profile.Name &lt;&gt; &apos;Integration&apos;)</errorConditionFormula>
+        <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ),!ISBLANK( Approved_Date__c), $Profile.Name &lt;&gt; &apos;Integration&apos;)</errorConditionFormula>
         <errorMessage>You do not have access to edit the approved record</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>InKind_Gift_Value_Change_Validation</fullName>
         <active>true</active>
         <description>This validation used to force the enter for reason for changing the gift value</description>
-        <errorConditionFormula>AND(ISCHANGED( Gift_Value__c ), ISBLANK( Reason_for_Gift_Value_Change__c ), $Profile.Name &lt;&gt; &apos;Integration&apos;)</errorConditionFormula>
+        <errorConditionFormula>OR((AND(ISCHANGED( Gift_Value__c ), ISBLANK( Reason_for_Gift_Value_Change__c ), $Profile.Name &lt;&gt; &apos;Integration&apos;, HiddenIsSubmittedforApproval__c  = true)),( AND(ISBLANK( Reason_for_Gift_Value_Change__c ), NOT( ISBLANK( PRIORVALUE(Reason_for_Gift_Value_Change__c) )))))</errorConditionFormula>
         <errorDisplayField>Reason_for_Gift_Value_Change__c</errorDisplayField>
         <errorMessage>You should enter the reason for changing the gift value</errorMessage>
     </validationRules>

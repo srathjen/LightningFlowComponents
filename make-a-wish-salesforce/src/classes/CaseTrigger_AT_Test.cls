@@ -83,6 +83,14 @@ public class CaseTrigger_AT_Test {
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         parentCase.interview_date__c = null;
         update parentCase;
+        Task newTask = new Task();
+        newTask.Subject = 'Test';
+        newTask.Status = 'Completed';
+        newTask.ActivityDate = Date.Today();
+        newTask.Priority = '4';
+        newTask.WhatId = parentCase.id;
+        insert newTask;
+        
     }
     
     static testmethod void UpdateStatusGranted()
@@ -128,6 +136,7 @@ public class CaseTrigger_AT_Test {
         Constant_AC constant = new Constant_AC();
         Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.VolunteerTaskRT).getRecordTypeId();
         createTask('Schedule Wish Presentation (add date, time, location name and address)',parentCase.id,wishGrantTaskRT);
+        
         Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
         wishGrantedCase.Presentation_Date__c = Date.Today().addDays(5);
         wishGrantedCase.Time__c = '1:30';
@@ -154,6 +163,7 @@ public class CaseTrigger_AT_Test {
         Constant_AC constant = new Constant_AC();
         Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.VolunteerTaskRT).getRecordTypeId();
         createTask('Test',parentCase.id,wishGrantTaskRT);
+        
         Case wishGrantedCase = OrientationandTrainingUtil.createWishGrantCase(wishChild.id,parentCase.id);
         wishGrantedCase.Presentation_Date__c = Date.Today().addDays(5);
         wishGrantedCase.Wish_Presentation_Set__c  = True;
@@ -663,5 +673,6 @@ public class CaseTrigger_AT_Test {
         
         
     }
+    
     
 }

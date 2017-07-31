@@ -128,9 +128,13 @@
             <name>Task_Volunteer_Email_Notification_for_Interview</name>
             <type>Alert</type>
         </actions>
+        <actions>
+            <name>Task_ET_Interview_Confirmation_Date_and_Venue</name>
+            <type>Task</type>
+        </actions>
         <active>true</active>
         <description>When Interviewer confirmed the interview date, it will send an email notification to volunteer.</description>
-        <formula>PRIORVALUE(Confirmed_Date__c) = Null &amp;&amp; (Confirmed_Date__c != Null) &amp;&amp; Migrated_Record__c = false</formula>
+        <formula>PRIORVALUE(Confirmed_Date__c) = Null &amp;&amp; (Confirmed_Date__c != Null) &amp;&amp;  $Profile.Name != &apos;Integration&apos;</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>

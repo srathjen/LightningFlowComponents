@@ -388,8 +388,21 @@
                 <default>false</default>
             </picklistValues>
             <picklistValues>
+                <fullName>Volunteer Cancelled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chapter Cancelled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Show</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
                 <fullName>Cancelled</fullName>
                 <default>false</default>
+                <isActive>false</isActive>
             </picklistValues>
             <restrictedPicklist>true</restrictedPicklist>
             <sorted>false</sorted>

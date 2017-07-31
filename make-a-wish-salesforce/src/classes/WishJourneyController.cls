@@ -297,7 +297,7 @@ public class WishJourneyController{
              else if(currCase.Parent.Status == 'Wish Determined' && currCase.RecordTypeId != wishRecTypeId)
                  determined = True;   */                       
                  
-        }
+       }
         
         getCases();
      }

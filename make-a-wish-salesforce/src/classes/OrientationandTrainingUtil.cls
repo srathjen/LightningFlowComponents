@@ -519,6 +519,7 @@ insert newChapter;*/
         newWishChild.LastName = 'Smith';
         newWishChild.Parent_Guardian_Name__c ='Jonathan Edwards'; 
         newWishChild.RecordTypeId = wishChildRecordTypeId ;
+        newWishChild.ICD_10_Code__c = 'Q91.7';
         insert newWishChild;
         return newWishChild;
     }
@@ -613,9 +614,12 @@ insert newChapter;*/
         newParentWish.Start_Date__c = System.today();
         newParentWish.End_Date__c = System.today();
         newParentWish.ContactId = wishChildId;
+        newParentWish.Update_Wish_Child_Form_Info__c  = false;
         newParentWish.Status = 'New';
         newParentWish.Anticipated_Start_Date__c = System.today();
         newParentWish.LiabilitySignerMapKeyPair__c = 'Vennila';
+        newParentWish.Budget_Submitted_Date__c = system.today();
+        newParentWish.Budget_Approved_Date__c = system.today();
         insert newParentWish;
         return newParentWish;
     }
@@ -904,7 +908,6 @@ insert newChapter;*/
             newWishOpportunity.Chapter_Role_Opportunity__c = roleId;
             newWishOpportunity.Wish__c = wishId;
             newWishOpportunity.Chapter_Name__c = chapterId;
-            newWishOpportunity.IsApproved__c = false;
             newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
             volunteerOpportunityList.add(newWishOpportunity);
             
@@ -1258,6 +1261,7 @@ insert newChapter;*/
         newLead.DOB__c = System.today() - 1435;
         newLead.company = 'MAWA';
         newLead.Status = 'Inquiry';
+       // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         newLead.Gender__c = 'Male';
         newLead.ChapterName__c = chapterAccountId;
         newLead.Referrer_FirstName__c = 'Sudhar';
@@ -1295,7 +1299,7 @@ insert newChapter;*/
         newLead.Strokes__c = 'Test1;Test2';
         newLead.Chronic_Heart_Failure__c = 'Test1;Test2';
         newLead.isSign__c = true;
-        newLead.Communication__c = 'Non-Verbal';
+        //newLead.Communication__c = 'Non-Verbal';
         newLead.Travel_algorithm__c = 'Test1;Test2;';
         return newLead;
         
@@ -1454,6 +1458,8 @@ return cc;
         wishChildCon.MailingCountryCode = 'US';
         wishChildCon.RecordTypeId = wishChildRecordTypeId;
         wishChildCon.MobilePhone = '9900220022';
+        wishChildCon.Primary_Diagnosis_Condition_Description__c = 'Test';
+        wishChildCon.ICD_10_Code__c = 'c00';
         insert wishChildCon;
         return wishChildCon;
         

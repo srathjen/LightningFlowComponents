@@ -69,7 +69,7 @@ trigger DynamicContent_AT on Dynamic_Content__c (before insert,before update,aft
       }
       
        for(Dynamic_Content__c currRec : Trigger.new){
-           if(userRole != ChapterRoleMap.get(chapterNameMap.get(currRec.Chapter_Name__c)) && !Test.isRunningTest()){
+           if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null && userRole != ChapterRoleMap.get(chapterNameMap.get(currRec.Chapter_Name__c)) && !Test.isRunningTest()){
                currRec.addError('You have no access to create Dynamic Content records for other chapters');
            }
        }

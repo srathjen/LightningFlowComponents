@@ -74,6 +74,10 @@
                 <behavior>Edit</behavior>
                 <field>Gender__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>is_Application__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -321,6 +325,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Language_Notes__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Non_Verbal__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

@@ -70,14 +70,14 @@
       $('.existingMedical').click(function() { 
       
         if($(this).prop("checked") == true){
-                $('.existingRadio').attr('disabled', true);
-                  $('.existingRadio').each(function(){                
+                $('.treatingRadio').attr('disabled', true);
+                  $('.treatingRadio').each(function(){                
                     $(this).prop('checked', false);                
                     });
                 
             }
             else if($(this).prop("checked") == false){
-                $('.existingRadio').attr('disabled', false);
+                $('.treatingRadio').attr('disabled', false);
             }
       
   
@@ -577,7 +577,7 @@
                                                 
                                                </td>
                                                <td style="border-right: 1px solid #d8dde6;">
-                                                    <input type="radio" name="additionalCon" class="additionalConRadio ExistingRadio  overallRadio" id="{!additionalParent.id}" VALUE="{!additionalParent.id}" onclick="additionalParentValue(this,'{!$Component.bestToConId}');"/>
+                                                    <input type="radio" name="additionalCon" class="additionalConRadio ExistingRadio  overallRadio" id="{!additionalParent.id}" VALUE="{!additionalParent.id}" onclick="additionalParentValue(this,'{!$Component.addtionalConId}');"/>
                                                     
                                                </td>
                                         </tr>

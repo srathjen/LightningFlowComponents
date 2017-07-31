@@ -9,7 +9,20 @@
         .p-info-btn {font-family:'FuturaStd-Bold', Century Gothic, Arial, sans-serif; border: none; text-transform: uppercase; font-size: .85rem; border-bottom: 2px solid #333; color: #fff; height: 3.75rem;}
 
     </style>
-
+ <script type="text/javascript">
+            function openLMS(ssoLink, courseLink) {
+                newwindow = window.open(ssoLink, 'openLMS');
+                if ((newwindow == null || typeof(newwindow) == 'undefined')) {
+                    $('#poppup-alert').modal({backdrop: 'static', keyboard: false});
+                }
+                setTimeout(function () {
+                    window.newwindow.close();
+                    setTimeout(function () {
+                        window.open(courseLink, '_blank');
+                    }, 10);
+                }, 2000);
+            }
+        </script>
     <body class="vcp vcpactivelogin full registered profile">
         <apex:include pageName="active_header" id="pheader" />
         <main role="main" class="container">
@@ -645,7 +658,7 @@
                                                 <apex:column headervalue="End Time" value="{!a.endTime}"/>
                                                 <apex:column headervalue="Location" value="{!a.location}"/>
                                                 <apex:column headerValue="Record Type" value="{!a.recordTypeName}"/>
-                                                <apex:column headerValue="Action" value="{!a.attendance}"/>
+                                                <apex:column headerValue="Status" value="{!a.attendance}"/>
                                             </apex:pageblocktable>
                                             <apex:outputText rendered="{!orientationList.size ==0}"><span class="text-muted">No Orientation Records Found</span></apex:outputText>
                                         </div>
@@ -667,7 +680,10 @@
                                                 <apex:column headervalue="End Time"  value="{!a.endTime}"/>
                                                 <apex:column headervalue="Location"  value="{!a.location}"/>
                                                 <apex:column headerValue="Record Type" value="{!a.recordTypeName}"/>
-                                                <apex:column headerValue="Action" value="{!a.attendance}"/>
+                                                <apex:column headerValue="Status" value="{!a.attendance}"/>
+                                                <apex:column headerValue="LINK"><apex:commandLink action="{!viewLMS}" oncomplete="openLMS('{!ssoURL}','{!courseURL}');"  rendered="{!(a.recordTypeName == 'Virtual - Self Paced')}" >Start Course
+                                                            <apex:param name="lMSCourseId" value="{!a.courseId}" assignTo="{!lMSCourseId}"/>
+                                                        </apex:commandLink></apex:column>
                                             </apex:pageblocktable>
                                             <apex:outputText rendered="{!trainingList.size ==0}"><span class="text-muted">No training records found</span></apex:outputText>
                                         </div>

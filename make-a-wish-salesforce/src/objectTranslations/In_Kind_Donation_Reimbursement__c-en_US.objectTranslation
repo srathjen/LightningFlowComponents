@@ -198,6 +198,10 @@ If this is a volunteer donor, gift subtype should begin with DRPS --></help>
         <name>Gift_Value__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden IsSubmitted for Approval --></label>
+        <name>HiddenIsSubmittedforApproval__c</name>
+    </fields>
+    <fields>
         <help><!-- If donation made by a business, please add business name here. If this is a personal donation please add your name below in the &apos;Volunteer Donor&apos; field. --></help>
         <label><!-- Business Donor --></label>
         <lookupFilter>

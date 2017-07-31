@@ -139,11 +139,10 @@ trigger UserTrigger_AT on User (after insert,after update,before update,before i
      Set<Id> UserIdSet=new Set<Id>();
      if(Trigger.isbefore && Trigger.isInsert)
      {
-      String DocuSignUserid = Label.DSProSFUsername;
       for(User newUser : Trigger.new)
       {
        if(newUser.IsActive == true){
-        newUser.dsfs__DSProSFUsername__c = DocuSignUserid;
+        newUser.dsfs__DSProSFUsername__c = Label.DSProSFUsername;
         }
        }
      }

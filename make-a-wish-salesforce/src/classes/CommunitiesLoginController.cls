@@ -13,7 +13,7 @@ global class CommunitiesLoginController {
     global String password {get; set;}
     
     global PageReference login() {
-        
+        String startUrl = System.currentPageReference().getParameters().get('startURL');
         List<User> getUserDetails = [SELECT Id,Profile.name,ContactId from User WHERE Username = :username limit 1];
         if(getUserDetails.size() > 0){
             // If Prospective Volunteer, then they will be landed to Propective Volunteer Welcome Page.
@@ -42,7 +42,11 @@ global class CommunitiesLoginController {
                         }
                     }
                 }
-                return Site.login(username, password, '/apex/VolunteerLanding_VF');
+                if(!String.isEmpty(startUrl)) {
+                    return Site.login(username, password, startUrl);
+                } else {
+                    return Site.login(username, password, '/apex/VolunteerLanding_VF');
+                }
             }
         }
         else {

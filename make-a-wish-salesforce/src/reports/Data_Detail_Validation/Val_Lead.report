@@ -130,9 +130,6 @@
         <field>Lead.MAW_Name__c</field>
     </columns>
     <columns>
-        <field>Lead.Group_1__c</field>
-    </columns>
-    <columns>
         <field>Lead.Treating_Medical_Professional_First_Name__c</field>
     </columns>
     <columns>

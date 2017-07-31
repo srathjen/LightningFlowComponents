@@ -7,7 +7,7 @@
     <label>S_DriveAttachment_VF</label>
     <packageVersions>
         <majorNumber>1</majorNumber>
-        <minorNumber>27</minorNumber>
+        <minorNumber>28</minorNumber>
         <namespace>cg</namespace>
     </packageVersions>
 </ApexPage>

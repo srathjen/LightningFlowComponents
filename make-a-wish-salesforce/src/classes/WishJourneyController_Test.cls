@@ -37,7 +37,7 @@ public class WishJourneyController_Test {
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Inactive';
         currentCase.Origin = 'Email';
-        currentCase.RecordTypeId = wishRecTypeId;
+        //currentCase.RecordTypeId = wishRecTypeId;
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
         
@@ -95,7 +95,7 @@ public class WishJourneyController_Test {
         currentCase.Sub_Status__c = 'Within Policy';
         currentCase.Origin = 'Email';
         currentCase.Meet_PWL_Criteria__c = 'Test';
-        currentCase.Wish_Type__c = 'Animal';
+        currentCase.Wish_Type__c = 'Celebrity - Domestic Travel';
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
     }

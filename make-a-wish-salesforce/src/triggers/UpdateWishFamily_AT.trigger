@@ -64,14 +64,14 @@ trigger UpdateWishFamily_AT on Wish_Child_Form__c (Before insert,Before update, 
         
     }
     
-    if(Trigger.isAfter && Trigger.isUpdate){
+    /*if(Trigger.isAfter && Trigger.isUpdate){
         Map<Id,String> wishMap = new Map<Id,String>();
         List<Contact> updateContactList = new List<Contact>();
         for(Wish_Child_Form__c dbWishchildForm : trigger.new){
         
            if(trigger.oldMap.get(dbWishchildForm.Id).RelatedContact__c != dbWishchildForm.RelatedContact__c){
                 wishMap.Put(dbWishchildForm.Case__c,dbWishchildForm.RelatedContact__c);
-                system.debug('@@@@@@ wishMap @@@@@@'+wishMap);
+               
             }
          }
          
@@ -88,5 +88,5 @@ trigger UpdateWishFamily_AT on Wish_Child_Form__c (Before insert,Before update, 
         
         if(updateContactList.size() > 0)
         update updateContactList;
-    }
+    }*/
 }

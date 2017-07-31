@@ -49,43 +49,30 @@
         <template>Automated_Volunteer_Templates/Volunteer_Opportunity_Wish_Rejected</template>
     </alerts>
     <fieldUpdates>
-        <fullName>Uncheck_Rejected</fullName>
-        <description>Used to uncheck the rejected checkbox</description>
-        <field>isRejected__c</field>
-        <literalValue>0</literalValue>
-        <name>Uncheck Rejected</name>
+        <fullName>VO_ChangeRFIAsNotApproved</fullName>
+        <field>Reason_Inactive__c</field>
+        <literalValue>Not Approved</literalValue>
+        <name>VO:ChangeRFIAsNotApproved</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
     </fieldUpdates>
     <fieldUpdates>
-        <fullName>UpdateIsApprove</fullName>
-        <description>This field update is used to check the IsApproved field.</description>
-        <field>IsApproved__c</field>
+        <fullName>VO_ChangeStatusAsApproved</fullName>
+        <description>Used to change the status as approved once the record has been approved</description>
+        <field>Status__c</field>
+        <literalValue>Approved</literalValue>
+        <name>VO:ChangeStatusAsApproved</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>VO_EnableInactiveCheckbox</fullName>
+        <description>Used to enable Inactive checkbox once the Volunteer Opportunity is rejected</description>
+        <field>Inactive__c</field>
         <literalValue>1</literalValue>
-        <name>UpdateIsApprove</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Literal</operation>
-        <protected>false</protected>
-        <reevaluateOnChange>true</reevaluateOnChange>
-    </fieldUpdates>
-    <fieldUpdates>
-        <fullName>Update_Rejected_Field</fullName>
-        <description>Check the isRejected field when the user Reject the Volunteer Role Approval Process.</description>
-        <field>isRejected__c</field>
-        <literalValue>1</literalValue>
-        <name>Update Rejected Field</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Literal</operation>
-        <protected>false</protected>
-        <reevaluateOnChange>true</reevaluateOnChange>
-    </fieldUpdates>
-    <fieldUpdates>
-        <fullName>VolunteerOpportunity_Uncheck_IsApprove</fullName>
-        <description>It is used to uncheck the isApprove checkbox in volunteer Opportunity</description>
-        <field>IsApproved__c</field>
-        <literalValue>0</literalValue>
-        <name>VolunteerOpportunity:Uncheck IsApprove</name>
+        <name>VO:EnableInactiveCheckbox</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
@@ -139,16 +126,7 @@
         <notifyAssignee>false</notifyAssignee>
         <operation>Literal</operation>
         <protected>false</protected>
-    </fieldUpdates>
-    <fieldUpdates>
-        <fullName>Volunteer_Opportunity_MyAssignment_Rem</fullName>
-        <description>Used to remove the view access of rejected record under my assignment tab for volunteer</description>
-        <field>Approval_Status__c</field>
-        <literalValue>Rejected</literalValue>
-        <name>Volunteer Opportunity : MyAssignment Rem</name>
-        <notifyAssignee>false</notifyAssignee>
-        <operation>Literal</operation>
-        <protected>false</protected>
+        <reevaluateOnChange>true</reevaluateOnChange>
     </fieldUpdates>
     <fieldUpdates>
         <fullName>Volunteer_Opportunity_Rejection_Period</fullName>
@@ -161,31 +139,6 @@
         <protected>false</protected>
     </fieldUpdates>
     <rules>
-        <fullName>Volunteer Opportunity %3A MyAssignment Removal</fullName>
-        <active>true</active>
-        <booleanFilter>1 AND 2</booleanFilter>
-        <criteriaItems>
-            <field>Volunteer_Opportunity__c.isRejected__c</field>
-            <operation>equals</operation>
-            <value>True</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>Volunteer_Opportunity__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
-        </criteriaItems>
-        <description>Used to remove volunteer opportunities rejected record from Volunteer My Assignment after 30 days</description>
-        <triggerType>onCreateOrTriggeringUpdate</triggerType>
-        <workflowTimeTriggers>
-            <actions>
-                <name>Volunteer_Opportunity_MyAssignment_Rem</name>
-                <type>FieldUpdate</type>
-            </actions>
-            <timeLength>30</timeLength>
-            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
-        </workflowTimeTriggers>
-    </rules>
-    <rules>
         <fullName>Volunteer Opportunity %3A Non - Wish Approved</fullName>
         <actions>
             <name>This_Email_Alert_will_send_when_the_Non_Wish_volunteer_opportunity_is_Approved_b</name>
@@ -197,7 +150,7 @@
         </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Non - Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null, IsApproved__c  = true, ISCHANGED(IsApproved__c ),isRejected__c = false,   $Profile.Name != &apos;Integration&apos;)</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null,  TEXT( Status__c )  = &apos;Approved&apos; , ISCHANGED(Status__c), $Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -212,7 +165,7 @@
         </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Non - Wish is rejected by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null, IsApproved__c  = false, isRejected__c = true,ISCHANGED(isRejected__c),  $Profile.Name != &apos;Integration&apos; )</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null,  TEXT(  Reason_Inactive__c  )  = &apos;Not Approved&apos; ,ISCHANGED(  Reason_Inactive__c  ),  $Profile.Name != &apos;Integration&apos; )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -227,7 +180,7 @@
         </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null, IsApproved__c  = true, ISCHANGED(IsApproved__c),isRejected__c = false,   $Profile.Name != &apos;Integration&apos;)</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null,  TEXT( Status__c )  = &apos;Approved&apos; , ISCHANGED( Status__c ),$Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
@@ -242,7 +195,7 @@
         </actions>
         <active>true</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
-        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null,IsApproved__c  = false, isRejected__c = true, ISCHANGED(isRejected__c),   $Profile.Name != &apos;Integration&apos;)</formula>
+        <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null, TEXT(  Reason_Inactive__c  )  = &apos;Not Approved&apos; , ISCHANGED(  Reason_Inactive__c  ),   $Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>

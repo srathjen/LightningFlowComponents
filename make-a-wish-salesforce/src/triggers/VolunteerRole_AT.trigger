@@ -22,7 +22,7 @@ Trigger VolunteerRole_AT on Volunteer_Roles__c (before update,after update,after
             
             for(Volunteer_Roles__c currRec : Trigger.new)
             {
-                if(chapterRoleMap.get(currRec.Chapter_Name__c) != currUser[0].UserRole.Name && currUser[0].UserRole.Name != 'National Staff' && currUser[0].profile.Name != 'System Administrator')
+                if(chapterRoleMap.get(currRec.Chapter_Name__c) != currUser[0].UserRole.Name && currUser[0].UserRole.Name != 'National Staff' && currUser[0].profile.Name != 'System Administrator' && Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
                 {
                     currRec.addError('Insufficient previlege to update this record. Please contact system administrator.');
                     

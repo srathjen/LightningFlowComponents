@@ -26,7 +26,7 @@ public class VolunteerWorkItems_AC {
     public List<Volunteer_Opportunity__c> closedVolunteerNonWishList; 
     public boolean isWishClosed{get;set;}
     public boolean isWishNotClose{get;set;}
-    public Map<Id,Boolean> visibilityMap = new Map<Id, Boolean>();
+    public Map<Id,Boolean> visibilityMap {get;set;}
     //Used to get record type Id for wish and non wish events
     Constant_AC  constant = new Constant_Ac(); 
     public Id wishEventsRegistered = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.registeredWish).getRecordTypeId();
@@ -39,15 +39,16 @@ public class VolunteerWorkItems_AC {
     Public Id registeredNonWishRecordTypeId = Schema.SobjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.registeredNonWish).getRecordTypeId();
     //Used to get the current logged in user related contact and used to get all chapters of the volunteer user.
     public VolunteerWorkItems_AC() {
-      isWishClosed = false;
-      isWishNotClose = true;
+        visibilityMap = new Map<Id, Boolean>();
+        isWishClosed = false;
+        isWishNotClose = true;
         recordVisibilityMap = new Map<Id,Boolean>();
         rejectedOpportunitiesMap = new Map<Id,Boolean>();
         wishTab = true;
         nonWishTab = true;
         volunteerChaptersSet = new Set<Id>();
         Id currentUserId = userInfo.getUserId();
-       
+        
         List<User> getUserRelatedContact = [SELECT Id, ContactId FROM User WHERE Id =:currentUserId LIMIT 1];
         userRelatedContactId = getUserRelatedContact.get(0).ContactId;
         system.debug('@@@@@@ userRelatedContactId @@@@@@@'+userRelatedContactId);
@@ -61,45 +62,43 @@ public class VolunteerWorkItems_AC {
     }    
     
     public void CurrentWish(){
-      
-      isWishClosed = false;
-      isWishNotClose = true;
+        
+        isWishClosed = false;
+        isWishNotClose = true;
     }
     
     public void HistoricalWish(){
         isWishClosed = true;
         isWishNotClose = false;
         
-          
-    
+        
+        
     }
     // This method is used to display all wish events which are assigned to current logged in Volunteer    
     public List<Volunteer_Opportunity__c> getVolunteerAssignedWishEvents() {
         
-        assignedWishQueryString = 'SELECT Chapter_Name__c,Wish__c,IsApproved__c,isRejected__c,Wish__r.isClosed,Reason_Inactive__c,Inactive__c,Status__c,';
+        assignedWishQueryString = 'SELECT Chapter_Name__c,Inactivated_or_Rejected_Date__c, Wish__c,Wish__r.isClosed,Reason_Inactive__c,Inactive__c,Status__c,';
         for(Schema.FieldSetMember nonWishEventField :SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsWish.getFields()) {
             assignedWishQueryString +=  nonWishEventField.getFieldPath()+',';
         }
         assignedWishQueryString = assignedWishQueryString.removeEnd(',');
-         
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredWishRecordTypeId OR RecordTypeId =:wishEvents) AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = False ';
+        Date todaysDate = Date.today().addDays(-30);
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND Status__c != \'Out of Compliance\' AND (RecordTypeId =: registeredWishRecordTypeId OR RecordTypeId =:wishEvents) AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Wish__r.isClosed = False AND Reason_Inactive__c != \'Error\'';
         volunteerWishEventsList = Database.query(assignedWishQueryString);
         if(volunteerWishEventsList.size() > 0) {
             for(Volunteer_Opportunity__c checkApprovalStatus : volunteerWishEventsList) {
                 visibilityMap.put(checkApprovalStatus.Id, false);
-                recordVisibilityMap.put(checkApprovalStatus.Id, checkApprovalStatus.IsApproved__c);
-                rejectedOpportunitiesMap.put(checkApprovalStatus.Id, checkApprovalStatus.isRejected__c);
-            }
-            if(visibilityMap.size() > 0) {
-                for(ProcessInstance processInstanceStatusCheck : [SELECT Id, Status, TargetObjectId, CompletedDate FROM ProcessInstance WHERE Status = 'Rejected' AND TargetObjectId IN : visibilityMap.keySet() ORDER BY CompletedDate DESC]) {
-                    if(visibilityMap.containsKey(processInstanceStatusCheck.TargetObjectId) && visibilityMap.get(processInstanceStatusCheck.TargetObjectId) == false) {
-                        Date startDate = Date.valueOf(System.now());
-                        Date dueDate = Date.valueOf(processInstanceStatusCheck.CompletedDate);
-                        Integer numberDaysDue = dueDate.daysBetween(startDate);
-                        if(numberDaysDue < 29) {
-                            visibilityMap.put(processInstanceStatusCheck.TargetObjectId, true);
-                        }
-                    }
+                if(checkApprovalStatus.Status__c == 'Approved')  {
+                    System.debug('+++++');
+                    visibilityMap.put(checkApprovalStatus.Id, True);
+                } else if(checkApprovalStatus.Inactive__c == True && checkApprovalStatus.Inactivated_or_Rejected_Date__c != null && checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30) > Date.today()) {
+                    System.debug('checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30)++++++'+checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30));
+                    System.debug('Date.today()++++++++'+Date.today());
+                    visibilityMap.put(checkApprovalStatus.Id, True);
+                } else if(checkApprovalStatus.Status__c == 'Pending' && checkApprovalStatus.Inactivated_or_Rejected_Date__c != null && checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30) > Date.today()) {
+                    System.debug('checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30)-------'+checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30));
+                    System.debug('Date.today()------'+Date.today());
+                    visibilityMap.put(checkApprovalStatus.Id, True);
                 }
             }
         }
@@ -108,36 +107,30 @@ public class VolunteerWorkItems_AC {
     
     // This method is used to display all wish and non wish events which are assigned to current logged in Volunteer
     public List<Volunteer_Opportunity__c> getVolunteerAssignedNonWishEvents() {
-        assignedWishQueryString = 'SELECT Chapter_Name__c,IsApproved__c,isRejected__c,Reason_Inactive__c,Inactive__c,Status__c,';
+        assignedWishQueryString = 'SELECT Chapter_Name__c,Inactivated_or_Rejected_Date__c,Reason_Inactive__c,Inactive__c,Status__c,';
         Date today = Date.today();
         for(Schema.FieldSetMember nonWishEventField :SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsNonWish.getFields()) {
             assignedWishQueryString += nonWishEventField.getFieldPath()+',';
         }
         assignedWishQueryString = assignedWishQueryString.removeEnd(',');
         String VOStatus = 'Completed';
+        Date todaysDate = Date.today().addDays(-30); 
         //assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.RecordTypeId =: nonWishRT AND Non_Wish_Event__r.Event_Date__c < today';
         //assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents ) AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.Event_Date__c >=: today AND Inactive__c = False AND Reason_Inactive__c = Null';
-        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents ) AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND  Status__c !=: VOStatus';
+        assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND Status__c != \'Out of Compliance\' AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents ) AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Status__c !=: VOStatus AND Reason_Inactive__c != \'Error\'';
         volunteerNonWishEventsList = Database.query(assignedWishQueryString );
         if(volunteerNonWishEventsList.size() > 0) {
             for(Volunteer_Opportunity__c checkApprovalStatus : volunteerNonWishEventsList) {
                 visibilityMap.put(checkApprovalStatus.Id, false);
-                recordVisibilityMap.put(checkApprovalStatus.Id, checkApprovalStatus.IsApproved__c);
-                rejectedOpportunitiesMap.put(checkApprovalStatus.Id, checkApprovalStatus.isRejected__c);
-            }
-            if(visibilityMap.size() > 0) {
-                for(ProcessInstance processInstanceStatusCheck : [SELECT Id, Status, TargetObjectId, CompletedDate FROM ProcessInstance WHERE Status = 'Rejected' AND TargetObjectId IN : visibilityMap.keySet() ORDER BY CompletedDate DESC]) {
-                    if(visibilityMap.containsKey(processInstanceStatusCheck.TargetObjectId) && visibilityMap.get(processInstanceStatusCheck.TargetObjectId) == false) {
-                        Date startDate = Date.valueOf(System.now());
-                        Date dueDate = Date.valueOf(processInstanceStatusCheck.CompletedDate);
-                        Integer numberDaysDue = dueDate.daysBetween(startDate);
-                        if(numberDaysDue < 29) {
-                            visibilityMap.put(processInstanceStatusCheck.TargetObjectId, true);
-                        }
-                    }
+                
+                if(checkApprovalStatus.Status__c == 'Approved')  {
+                    visibilityMap.put(checkApprovalStatus.Id, True);
+                } else if(checkApprovalStatus.Inactive__c == True && checkApprovalStatus.Inactivated_or_Rejected_Date__c != null && checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30) > Date.today()) {
+                    visibilityMap.put(checkApprovalStatus.Id, True);
+                } else if(checkApprovalStatus.Status__c == 'Pending'  && checkApprovalStatus.Inactivated_or_Rejected_Date__c != null && checkApprovalStatus.Inactivated_or_Rejected_Date__c.addDays(30) > Date.today()) {
+                    visibilityMap.put(checkApprovalStatus.Id, True);
                 }
             }
-            
         }
         
         return volunteerNonWishEventsList;
@@ -156,19 +149,17 @@ reqired volunteers and registered volunteers count.*/
             nonWishQueryString += nonWishEventField.getFieldPath()+',';
             assignedQueryString += nonWishEventField.getFieldPath()+',';
         }
-        
-        
         nonWishQueryString = nonWishQueryString.removeEnd(',');
         assignedQueryString = assignedQueryString.removeEnd(',');
         //nonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Non_Wish_Event__r.RecordTypeId =: nonWishRT ';
         //assignedQueryString +=  ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Non_Wish_Event__r.RecordTypeId =: nonWishRT ';
-        nonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Inactive__c = False  AND Non_Wish_Event__r.Event_Date__c >= : today';
+        nonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Inactive__c = False  AND Non_Wish_Event__r.Event_Date__c >= : today ';
         System.debug('@@@@nonwish@@'+nonWishQueryString);
         assignedQueryString +=  ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents )  AND Reason_Inactive__c = null AND Inactive__c = False';
         volunteerNonWishEventsList = Database.query(nonWishQueryString);
         for(Volunteer_Opportunity__c nonWishOpportunities : volunteerNonWishEventsList) {
             if(!nonWishOpportunitiesMap.containsKey(nonWishOpportunities.Non_Wish_Event__c + '-' + nonWishOpportunities.Chapter_Name__c + '-' + nonWishOpportunities.Role__c+'-'+nonWishOpportunities.HiddenVolunteer_Count_Description__c)) {
-               WrapperClass nonwishWrapperInstance = new WrapperClass();
+                WrapperClass nonwishWrapperInstance = new WrapperClass();
                 nonwishWrapperInstance.nonWishOpportunities = nonWishOpportunities;
                 nonwishWrapperInstance.nonWishOpportunityCount = (nonwishWrapperInstance.nonWishOpportunityCount == null) ? 1 : nonwishWrapperInstance.nonWishOpportunityCount + 1;
                 nonWishOpportunitiesMap.put(nonWishOpportunities.Non_Wish_Event__c + '-' + nonWishOpportunities.Chapter_Name__c + '-'+ nonWishOpportunities.Role__c+'-'+nonWishOpportunities.HiddenVolunteer_Count_Description__c, nonwishWrapperInstance);
@@ -191,15 +182,15 @@ reqired volunteers and registered volunteers count.*/
     }
     
     //This method is used to display the current volunteer closed wish records.
-     public List<Volunteer_Opportunity__c> getClosedWish(){
+    public List<Volunteer_Opportunity__c> getClosedWish(){
         closedVolunteerWishList = new List<Volunteer_Opportunity__c>();
         String closedWishQueryString = 'SELECT Wish__r.isClosed,Wish__r.CaseNumber,';
-            for(Schema.FieldSetMember closedWishField : SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsClosedWish.getFields()){
-              closedWishQueryString += closedWishField.getFieldPath()+',';
-            } 
+        for(Schema.FieldSetMember closedWishField : SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsClosedWish.getFields()){
+            closedWishQueryString += closedWishField.getFieldPath()+',';
+        } 
         closedWishQueryString = closedWishQueryString .removeEnd(',');
-         System.debug('>>volunteerChaptersSet>>'+volunteerChaptersSet);
-        closedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: wishEventsRegistered OR RecordTypeId =: wishEvents) AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND (Wish__r.isClosed = true OR Wish__r.Status = \'completed\')';
+        System.debug('>>volunteerChaptersSet>>'+volunteerChaptersSet);
+        closedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: wishEventsRegistered OR RecordTypeId =: wishEvents) AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND (Wish__r.isClosed = true OR Wish__r.Status = \'completed\') AND Reason_Inactive__c != \'Error\'';
         closedVolunteerWishList =  Database.query(closedWishQueryString);
         return closedVolunteerWishList;
     }
@@ -208,13 +199,13 @@ reqired volunteers and registered volunteers count.*/
         Date today = Date.today();
         closedVolunteerNonWishList = new List<Volunteer_Opportunity__c>();
         String closedNonWishQueryString = 'SELECT Non_Wish_Event__r.Event_Date__c,Non_Wish_Event__r.Name,Status__c,';
-            for(Schema.FieldSetMember closedNonWishField : SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsClosedNonWish.getFields()){
-              closedNonWishQueryString += closedNonWishField.getFieldPath()+',';
-            } 
+        for(Schema.FieldSetMember closedNonWishField : SObjectType.Volunteer_Opportunity__c.FieldSets.MyAssignmentsClosedNonWish.getFields()){
+            closedNonWishQueryString += closedNonWishField.getFieldPath()+',';
+        } 
         closedNonWishQueryString = closedNonWishQueryString .removeEnd(',');
         String VOStatus = 'Completed';
         //closedNonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: nonWishEvents AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Non_Wish_Event__r.Event_Date__c <: today';
-        closedNonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents ) AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Status__c =: VOStatus';
+        closedNonWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: registeredNonWishRecordTypeId OR RecordTypeId =:nonWishEvents ) AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND Status__c =: VOStatus AND Reason_Inactive__c != \'Error\'';
         closedVolunteerNonWishList =  Database.query(closedNonWishQueryString );
         return closedVolunteerNonWishList ;
     }
@@ -223,7 +214,7 @@ reqired volunteers and registered volunteers count.*/
     //reqired volunteers and registered volunteers count.
     public List<WishWrapperClass> getWishEvents() {
         Map<String,WishWrapperClass> wishOpportunitiesMap = new Map<String,WishWrapperClass>();
-         wishQueryString = 'SELECT Chapter_Name__c, Wish__c,Wish__r.Status,Wish__r.Sub_Status__c, Is_Non_Viewable__c,';
+        wishQueryString = 'SELECT Chapter_Name__c, Wish__c,Wish__r.Status,Wish__r.Sub_Status__c, Is_Non_Viewable__c,';
         assignedWishQueryString = 'SELECT Chapter_Name__c, Wish__c,';
         for(Schema.FieldSetMember wishEventField :SObjectType.Volunteer_Opportunity__c.FieldSets.WishEvents.getFields()) {
             wishQueryString +=  wishEventField.getFieldPath()+',';
@@ -231,7 +222,7 @@ reqired volunteers and registered volunteers count.*/
         }
         wishQueryString = wishQueryString.removeEnd(',');
         assignedWishQueryString = wishQueryString.removeEnd(',');
-         wishQueryString += ' FROM Volunteer_Opportunity__c WHERE ((Wish__r.Sub_Status__c!= \'Non-Viewable\') OR (Wish__r.Sub_Status__c= \'Non-Viewable\' AND Is_Non_Viewable__c!= true)) AND Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Inactive__c = False ';
+        wishQueryString += ' FROM Volunteer_Opportunity__c WHERE ((Wish__r.Sub_Status__c!= \'Non-Viewable\') OR (Wish__r.Sub_Status__c= \'Non-Viewable\' AND Is_Non_Viewable__c!= true)) AND Volunteer_Name__c = null AND Chapter_Name__c IN : volunteerChaptersSet AND RecordTypeId =: wishEvents AND Reason_Inactive__c = null AND Inactive__c = False ';
         assignedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: wishEvents OR RecordTypeId = :registeredWishRecordTypeId) AND Reason_Inactive__c = null AND Inactive__c = False';
         volunteerWishEventsList = Database.query(wishQueryString);
         for(Volunteer_Opportunity__c wishOpportunities : volunteerWishEventsList) {
@@ -259,146 +250,146 @@ reqired volunteers and registered volunteers count.*/
     }
     
     
-     public boolean getChapterRoleOanTStatus(Id chapterRole)
+    public boolean getChapterRoleOanTStatus(Id chapterRole)
     {
-    
-       List<Chapter_Role_O_T__c> currTrainig = [SELECT id, Required__c FROM Chapter_Role_O_T__c WHERE 
-                                                       Chapter_Role__c = :chapterRole 
-                                                       AND Orientation_Training__r.RecordTypeId = :trainingRTId limit 1];
-       if(currTrainig.size() > 0)                                                
-           return currTrainig[0].Required__c;
-       else
-           return false;
-    
+        
+        List<Chapter_Role_O_T__c> currTrainig = [SELECT id, Required__c FROM Chapter_Role_O_T__c WHERE 
+                                                 Chapter_Role__c = :chapterRole 
+                                                 AND Orientation_Training__r.RecordTypeId = :trainingRTId limit 1];
+        if(currTrainig.size() > 0)                                                
+            return currTrainig[0].Required__c;
+        else
+            return false;
+        
     }
     
     
     public boolean allowRegisteration(List<Volunteer_Opportunity__c> volunteerOpportunity)
     {
-    
-    
-                Boolean updateRecord=false;
-                Boolean allowRegister = false;
-                boolean isWishRole = false;
-                Map<Id,Volunteer_Roles__c> WishTrainedMap = new Map<Id,Volunteer_Roles__c>();
-                Map<Id,Volunteer_Roles__c> WishNonTrainedMap = new Map<Id,Volunteer_Roles__c>();
-                Set<Id> TrainedNonWishRoles = new Set<Id>();
-                Set<Id> notTrainedNonWishRoles = new Set<Id>();
-                boolean isWishGranterMentor=false;
-                for(Role__c currRole : [SELECT id,Name,isWishRole__c FROM Role__c WHERE Id = :volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c])
-                { 
-                    if(currRole.isWishRole__c == True)
-                        isWishRole = True;
+        
+        
+        Boolean updateRecord=false;
+        Boolean allowRegister = false;
+        boolean isWishRole = false;
+        Map<Id,Volunteer_Roles__c> WishTrainedMap = new Map<Id,Volunteer_Roles__c>();
+        Map<Id,Volunteer_Roles__c> WishNonTrainedMap = new Map<Id,Volunteer_Roles__c>();
+        Set<Id> TrainedNonWishRoles = new Set<Id>();
+        Set<Id> notTrainedNonWishRoles = new Set<Id>();
+        boolean isWishGranterMentor=false;
+        for(Role__c currRole : [SELECT id,Name,isWishRole__c FROM Role__c WHERE Id = :volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c])
+        { 
+            if(currRole.isWishRole__c == True)
+                isWishRole = True;
+            
+            System.debug('isWishRole++++++++++++++++++++++++++++++++++++ ' + isWishRole);
+        }
+        for(Volunteer_Roles__c checkForMatchingRole : [SELECT Id, Chapter_Name__c,Role_Name__c,isWishRole__c,Status__c, Chapter_Role__c,
+                                                       Chapter_Role__r.Role_Name__c 
+                                                       FROM Volunteer_Roles__c WHERE Volunteer_Name__c =: userRelatedContactId
+                                                       AND Chapter_Name__c =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND (Status__c = 'Trained' OR Status__c = 'Pending Training')])
+            
+        {
+            if(checkForMatchingRole.isWishRole__c == True && checkForMatchingRole.Status__c == 'Trained')
+            {
+                WishTrainedMap.put(checkForMatchingRole.Chapter_Role__c,checkForMatchingRole);
+                
+                if(checkForMatchingRole.Role_Name__c == 'Wish Granter Mentor')
+                    isWishGranterMentor = True;
+            }
+            else if(checkForMatchingRole.isWishRole__c == True && checkForMatchingRole.Status__c != 'Trained')
+                WishNonTrainedMap.put(checkForMatchingRole.Chapter_Role__c,checkForMatchingRole);
+            else if(checkForMatchingRole.isWishRole__c == false && checkForMatchingRole.Status__c == 'Trained')
+                TrainedNonWishRoles.add(checkForMatchingRole.Chapter_Role__r.Role_Name__c);
+            else if(checkForMatchingRole.isWishRole__c == false && checkForMatchingRole.Status__c != 'Trained')
+                notTrainedNonWishRoles.add(checkForMatchingRole.Chapter_Role__r.Role_Name__c);
+        } 
+        
+        // Allowing Non-Wish Role for registering VO.
+        if(isWishRole == false)
+        {
+            if(WishTrainedMap.size() > 0)
+            {  
+                updateRecord = true;
+                allowRegister = true;
+                System.debug('Block1++++++++++++++++++++++++++++++++++++++++++++++++++== ');
+            }
+            else
+            {
+                if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == True)
+                {
+                    if(TrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c))
+                    {
+                        updateRecord = true;
+                        allowRegister = true;
                         
-                        System.debug('isWishRole++++++++++++++++++++++++++++++++++++ ' + isWishRole);
+                        System.debug('Block1++++++++++++++++++++++++++++++++++++++++++++++++++== ');
+                        
+                    }
+                    
+                } 
+                else
+                {
+                    
+                    if(TrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c) || 
+                       (notTrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c)))
+                    {
+                        updateRecord = true;
+                        allowRegister = true;
+                        System.debug('Block2++++++++++++++++++++++++++++++++++++++++++++++++++== ');
+                    }
                 }
-                for(Volunteer_Roles__c checkForMatchingRole : [SELECT Id, Chapter_Name__c,Role_Name__c,isWishRole__c,Status__c, Chapter_Role__c,
-                                                               Chapter_Role__r.Role_Name__c 
-                                                               FROM Volunteer_Roles__c WHERE Volunteer_Name__c =: userRelatedContactId
-                                                               AND Chapter_Name__c =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND (Status__c = 'Trained' OR Status__c = 'Pending Training')])
-                                                                
-                 {
-                     if(checkForMatchingRole.isWishRole__c == True && checkForMatchingRole.Status__c == 'Trained')
-                     {
-                          WishTrainedMap.put(checkForMatchingRole.Chapter_Role__c,checkForMatchingRole);
-                          
-                          if(checkForMatchingRole.Role_Name__c == 'Wish Granter Mentor')
-                              isWishGranterMentor = True;
-                     }
-                     else if(checkForMatchingRole.isWishRole__c == True && checkForMatchingRole.Status__c != 'Trained')
-                          WishNonTrainedMap.put(checkForMatchingRole.Chapter_Role__c,checkForMatchingRole);
-                     else if(checkForMatchingRole.isWishRole__c == false && checkForMatchingRole.Status__c == 'Trained')
-                          TrainedNonWishRoles.add(checkForMatchingRole.Chapter_Role__r.Role_Name__c);
-                     else if(checkForMatchingRole.isWishRole__c == false && checkForMatchingRole.Status__c != 'Trained')
-                          notTrainedNonWishRoles.add(checkForMatchingRole.Chapter_Role__r.Role_Name__c);
-                 } 
-                 
-                 // Allowing Non-Wish Role for registering VO.
-                 if(isWishRole == false)
-                 {
-                     if(WishTrainedMap.size() > 0)
-                     {  
-                         updateRecord = true;
-                         allowRegister = true;
-                         System.debug('Block1++++++++++++++++++++++++++++++++++++++++++++++++++== ');
-                     }
-                     else
-                     {
-                         if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == True)
-                         {
-                            if(TrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c))
-                            {
-                               updateRecord = true;
-                               allowRegister = true;
-                               
-                               System.debug('Block1++++++++++++++++++++++++++++++++++++++++++++++++++== ');
-                            
-                            }
-                         
-                         } 
-                         else
-                         {
-                         
-                           if(TrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c) || 
-                              (notTrainedNonWishRoles.contains(volunteerOpportunity[0].Chapter_Role_Opportunity__r.Role_Name__c)))
-                              {
-                                updateRecord = true;
-                                allowRegister = true;
-                                System.debug('Block2++++++++++++++++++++++++++++++++++++++++++++++++++== ');
-                              }
-                          }
-                          
-                     
-                         }
-                    }   
-                 
-                 
-                  else if(isWishRole == True)
-                  {
-                  
-                         if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == True)
-                            {
-                               if(WishTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) || (isWishGranterMentor == True && volunteerOpportunity[0].Role__c == 'Wish Granter'))
-                               {
-                                 
-                                          updateRecord = true;
-                                          allowRegister = true;
-                                          System.debug('Block3++++++++++++++++++++++++++++++++++++++++++++++++++== ');
-                                     
-                               }
-                            
-                            }
-                            else if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == false)
-                            {
-                                  if(WishTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) ||
-                                     WishNonTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) ||
-                                     (isWishGranterMentor == True && volunteerOpportunity[0].Role__c == 'Wish Granter'))
-                                  {      
-                                          updateRecord = true;
-                                          allowRegister = true;
-                                          System.debug('Block4++++++++++++++++++++++++++++++++++++++++++++++++++== ');
-                                  }
-                            }
-                  
-                  
-                  }
-                 
-           if(updateRecord == True && allowRegister == True)
-             return True;
-           else 
-             return false;
+                
+                
+            }
+        }   
+        
+        
+        else if(isWishRole == True)
+        {
+            
+            if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == True)
+            {
+                if(WishTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) || (isWishGranterMentor == True && volunteerOpportunity[0].Role__c == 'Wish Granter'))
+                {
+                    
+                    updateRecord = true;
+                    allowRegister = true;
+                    System.debug('Block3++++++++++++++++++++++++++++++++++++++++++++++++++== ');
+                    
+                }
+                
+            }
+            else if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == false)
+            {
+                if(WishTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) ||
+                   WishNonTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) ||
+                   (isWishGranterMentor == True && volunteerOpportunity[0].Role__c == 'Wish Granter'))
+                {      
+                    updateRecord = true;
+                    allowRegister = true;
+                    System.debug('Block4++++++++++++++++++++++++++++++++++++++++++++++++++== ');
+                }
+            }
+            
+            
+        }
+        
+        if(updateRecord == True && allowRegister == True)
+            return True;
+        else 
+            return false;
     }
     
     
     
-      // This method is used for volunteers to register on wish events if they have any one Non wish role and used to restrict volunteers to register on similar volunteer opportunities
+    // This method is used for volunteers to register on wish events if they have any one Non wish role and used to restrict volunteers to register on similar volunteer opportunities
     public void RegisterWishEvents() {
         
         isReferesh = true;
         wishTab = false;
         nonWishTab = false;
         boolean isUpdate = false;
-        List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Wish__c, Role__c, Chapter_Name__r.Name,Volunteer_Name__c,Chapter_Role_Opportunity__r.Role_Name__c, RecordTypeId, OwnerId, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId  AND Reason_Inactive__c =: Null LIMIT 1 FOR UPDATE];
+        List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Wish__c, Role__c, Chapter_Name__r.Name,Volunteer_Name__c,Chapter_Role_Opportunity__r.Role_Name__c, RecordTypeId, OwnerId, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId  AND Reason_Inactive__c =: Null ];
         system.debug('@@@@@@@@@@ volunteerOpportunity @@@@@@@@@@@@@@@'+volunteerOpportunity);
         List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Wish__c,Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Wish__c =: volunteerOpportunity.get(0).Wish__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null];
         List<Volunteer_Opportunity__c> volunteerOpportunitySameRoleList = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Wish__c,Reason_Inactive__c,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Wish__c =: volunteerOpportunity.get(0).Wish__c AND Volunteer_Name__c =: userRelatedContactId AND Inactive__c =: true AND 
@@ -412,50 +403,50 @@ reqired volunteers and registered volunteers count.*/
             }
             else if(volunteerOpportunityDuplicateLists.size()>0){
                 ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are already registered for this opportunity.');
-               ApexPages.addMessage(mymsg);
+                ApexPages.addMessage(mymsg);
             }
         } else {
-          
+            
             String chatperRoleId;
             String volunteerStatus;
             Boolean allowRegister = false;
-           
+            
             if(volunteerOpportunity.size()>0) 
             {
                 allowRegister = allowRegisteration(volunteerOpportunity);
-                                                         
-               
-                    if(allowRegister == true)
-                    {
-                       if( volunteerOpportunity.get(0).Volunteer_Name__c ==  Null){
+                
+                
+                if(allowRegister == true)
+                {
+                    if( volunteerOpportunity.get(0).Volunteer_Name__c ==  Null){
                         volunteerOpportunity.get(0).Volunteer_Name__c = userRelatedContactId;
                         isUpdate = true;
                         
-                        }
-                        else{
+                    }
+                    else{
                         isUpdate = false;
                         ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Please refresh the page and try again.');
                         ApexPages.addMessage(mymsg);
-                        }
-                        
-                        if(isUpdate == true){
+                    }
+                    
+                    if(isUpdate == true){
                         update volunteerOpportunity;
                         ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Confirm,'Thank you for requesting to volunteer for this opportunity. A notification has been sent to chapter staff to review your request and staff will respond with further details, as applicable.');
                         ApexPages.addMessage(mymsg);
-                        }
                     }
-                    else
-                    {
-                        ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Thank you for your interest in this opportunity. This opportunity requires specialized training that you have not completed, contact chapter staff for more information about expanding your volunteer opportunities.');
-                        ApexPages.addMessage(mymsg);
-                    }
+                }
+                else
+                {
+                    ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Thank you for your interest in this opportunity. This opportunity requires specialized training that you have not completed, contact chapter staff for more information about expanding your volunteer opportunities.');
+                    ApexPages.addMessage(mymsg);
+                }
             }
         }
     }
     
     // This method is used for volunteers to register on non wish events if they have any one Non wish role and used to restrict volunteers to register on similar volunteer opportunities
-    public void RegisterNonWishEvents() {
-    system.debug('@@@@@ ERROR @@@@@@');
+   /* public void RegisterNonWishEvents() {
+        system.debug('@@@@@ ERROR @@@@@@');
         isReferesh = true;
         wishTab = false;
         nonWishTab = false;
@@ -465,63 +456,63 @@ reqired volunteers and registered volunteers count.*/
         
         Boolean allowRegister = false;
         Boolean isWishGranter = false;
-         boolean isUpdate = false;
+        boolean isUpdate = false;
         List<Volunteer_Opportunity__c> volunteerOpportunitySameRoleList;
         List<Volunteer_Opportunity__c> volunteerOpportunity = [SELECT Id, Role__c, Chapter_Name__r.Name,Volunteer_Name__c,HiddenVolunteer_Count_Description__c, RecordTypeId,Chapter_Role_Opportunity__r.Role_Name__c, OwnerId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Id =: volunteerOpportunityRecordId AND Reason_Inactive__c =: Null LIMIT 1 FOR UPDATE];
         List<Volunteer_Opportunity__c> volunteerOpportunityDuplicateLists = [SELECT Id, Role__c, Chapter_Name__r.Name, RecordtypeId, Non_Wish_Event__c, Reason_Inactive__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Reason_Inactive__c =: Null AND HiddenVolunteer_Count_Description__c =: volunteerOpportunity.get(0).HiddenVolunteer_Count_Description__c ];
         if(!Test.isRunningTest())
-        volunteerOpportunitySameRoleList = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Non_Wish_Event__c,Reason_Inactive__c,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Inactive__c =: true AND 
-                                                                           Chapter_Role_Opportunity__r.Role_Name__c =: volunteerOpportunity.get(0).Chapter_Role_Opportunity__r.Role_Name__c ];
-       if(volunteerOpportunityDuplicateLists.size()>0 || volunteerOpportunitySameRoleList.size() > 0){
+            volunteerOpportunitySameRoleList = [SELECT Id,Role__c,Chapter_Name__r.Name,RecordtypeId,Non_Wish_Event__c,Reason_Inactive__c,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Role__c =: volunteerOpportunity.get(0).Role__c AND Chapter_Name__r.Name =: volunteerOpportunity.get(0).Chapter_Name__r.Name AND Non_Wish_Event__c =: volunteerOpportunity.get(0).Non_Wish_Event__c AND Volunteer_Name__c =: userRelatedContactId AND Inactive__c =: true AND 
+                                                Chapter_Role_Opportunity__r.Role_Name__c =: volunteerOpportunity.get(0).Chapter_Role_Opportunity__r.Role_Name__c ];
+        if(volunteerOpportunityDuplicateLists.size()>0 || volunteerOpportunitySameRoleList.size() > 0){
             /*Below three line changes are related to WVC-443 (11-09-2016)*/
             //ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are not currently eligible to sign up for this volunteer opportunity. Please contact your chapter for more information on how to become eligible.');
             
-            if(!Test.isRunningTest() && volunteerOpportunitySameRoleList.size() > 0){
+          /*  if(!Test.isRunningTest() && volunteerOpportunitySameRoleList.size() > 0){
                 ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You have been previously  declined for this opportunity. Please contact the chapter office with any questions.');
                 ApexPages.addMessage(mymsg);
             }
-           
+            
             else if(volunteerOpportunityDuplicateLists.size()>0){
-             
+                
                 ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'You are already registered for this opportunity.');
-             system.debug('@@@@@ ERROR @@@@@@'+mymsg );
-               ApexPages.addMessage(mymsg);
+                system.debug('@@@@@ ERROR @@@@@@'+mymsg );
+                ApexPages.addMessage(mymsg);
             }
         } 
         else {
             if(volunteerOpportunity.size()>0) 
             {
-               allowRegister = allowRegisteration(volunteerOpportunity);
-                                                         
-               
-                    if(allowRegister == true)
-                    {
-                       if( volunteerOpportunity.get(0).Volunteer_Name__c ==  Null){
+                allowRegister = allowRegisteration(volunteerOpportunity);
+                
+                
+                if(allowRegister == true)
+                {
+                    if( volunteerOpportunity.get(0).Volunteer_Name__c ==  Null){
                         volunteerOpportunity.get(0).Volunteer_Name__c = userRelatedContactId;
                         isUpdate = true;
                         
-                        }
-                        else{
+                    }
+                    else{
                         isUpdate = false;
                         ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Please refresh the page and try again.');
                         ApexPages.addMessage(mymsg);
-                        }
-                        
-                        if(isUpdate == true){
+                    }
+                    
+                    if(isUpdate == true){
                         update volunteerOpportunity;
                         ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Confirm,'Thank you for requesting to volunteer for this opportunity. A notification has been sent to chapter staff to review your request and staff will respond with further details, as applicable.');
                         ApexPages.addMessage(mymsg);
-                        }
                     }
-                    else
-                    {
-                        ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Thank you for your interest in this opportunity. This opportunity requires specialized training that you have not completed, contact chapter staff for more information about expanding your volunteer opportunities.');
-                        ApexPages.addMessage(mymsg);
-                    }
-                    
-              }
-          }
-    }  
+                }
+                else
+                {
+                    ApexPages.Message mymsg = new ApexPages.Message(ApexPages.Severity.Error,'Thank you for your interest in this opportunity. This opportunity requires specialized training that you have not completed, contact chapter staff for more information about expanding your volunteer opportunities.');
+                    ApexPages.addMessage(mymsg);
+                }
+                
+            }
+        }
+    } */ 
     
     //Used for registration confirmation and redirect to volunteer assignment opportunities page
     public pageReference registrationConfirmation()

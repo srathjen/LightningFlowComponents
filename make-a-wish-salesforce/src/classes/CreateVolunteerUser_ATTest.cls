@@ -33,7 +33,7 @@ public class CreateVolunteerUser_ATTest
     
     static  testmethod void CreateVolunteerUserContatUpdated()
     {
-        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountwithVolunteerManager();
+     /*   Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         Constant_AC  constant = new Constant_AC();
         Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
         Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
@@ -55,7 +55,7 @@ public class CreateVolunteerUser_ATTest
         insert wishCon;
         
         wishCon.RecordTypeId = volunteerRecordTypeId;
-        update wishCon;
+        update wishCon;*/
         
     
     }

@@ -118,6 +118,9 @@ public class CaseTriggerHandler {
         Constant_AC  constant = new Constant_Ac(); 
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Id wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        Id wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+        Id wishGrantRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+        Id wishEffectRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishEffectRT).getRecordTypeId();
         
         List<Case> newWishList = new List<Case>();
         Map<Id, String> wishContactMap = new Map<Id, String>();
@@ -133,13 +136,34 @@ public class CaseTriggerHandler {
                 //Case newWish = new Case(ChapterName__c = wishDetails.ChapterName__c, Wish_Type__c ='Standard', Subject = wishType.split('-')[0] +' - '+wishContactMap.get(wishDetails.Id), ParentId = wishDetails.Id, AccountId=wishDetails.AccountId,ContactId=wishDetails.ContactId,Origin = 'Web',RecordTypeId=wishType.split('-')[1], OwnerId = wishDetails.OwnerId);
                 Case newWish = new Case(Wish_Type__c ='Standard', Subject = wishType.split('-')[0] +' - '+wishContactMap.get(wishDetails.Id), ParentId = wishDetails.Id, Origin = 'Web',RecordTypeId=wishType.split('-')[1], OwnerId = wishDetails.OwnerId);
                 newWishList.add(newWish);
+                Case newPlanningWish = new Case(Wish_Type__c ='Standard', Subject = 'Wish Planning - '+ wishContactMap.get(wishDetails.Id),ParentId = wishDetails.Id,Origin = 'Web',RecordTypeId = wishPlanningRecordTypeId,OwnerId = wishDetails.OwnerId);
+                newWishList.add(newPlanningWish);
+                Case newGrantingWish = new Case(Wish_Type__c ='Standard', Subject = 'Wish Granting - '+ wishContactMap.get(wishDetails.Id), ParentId = wishDetails.Id, Start_Date__c = wishDetails.Anticipated_Start_Date__c,Origin = 'Web',RecordTypeId = wishGrantRecordTypeId, OwnerId = wishDetails.OwnerId);
+                newWishList.add(newGrantingWish);
+                Case newImpactWish = new Case(Wish_Type__c ='Standard', Subject = 'Wish Impact - '+ wishContactMap.get(wishDetails.Id), ParentId = wishDetails.Id,Origin = 'Web',RecordTypeId = wishEffectRecordTypeId, OwnerId = wishDetails.OwnerId);
+                newWishList.add(newImpactWish);
             }
         }
         if(newWishList.size()>0) {
             insert newWishList;
         }
+       // String parentJasonString = json.serialize(childCreationWishList);
+        //ChangeCaseStatusToInterview(parentJasonString);
     }
     
+   /* @future
+    public static void ChangeCaseStatusToInterview(String parentWishJasonString) {
+        List<Case> caseList = (List<Case>)Json.deserialize(parentWishJasonString,List<Case>.class);
+        List<Case> updateParentWishList = new List<Case>();
+        for(Case updateCaseStatus : caseList) {
+            updateCaseStatus.status = 'Ready to Interview';
+            updateCaseStatus.Sub_Status__c = 'Pending';
+            updateParentWishList.add(updateCaseStatus);
+        }
+        if(updateParentWishList.size() > 0) {
+            update updateParentWishList;
+        }
+    }*/
     
     // When the case status is updated the corresponding lead status should be update.
     public static void UpdateLeadStatus(List<Case> caseList){
@@ -270,12 +294,12 @@ dbLeads.Status = 'DNQ';
         system.debug('budget Info 5: ' + ActualsMatch);
         system.debug('P&A Case data 2 :'+ pandaCase);
         for(Case caseTemp : budgetCases){
-            if(ActualsMatch.contains(caseTemp.Id)){
+            if(ActualsMatch.contains(caseTemp.Id) && Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null){
                 caseTemp.addError('The Wish Budget Actuals and FE posted values should be match');
                 System.debug('caseerrormsg!!!'+caseTemp);
             }
             for(Id pandaItem : pandaCase.keySet()){
-                if(caseTemp.Id == pandaItem){
+                if(caseTemp.Id == pandaItem && Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null){
                     for(string str : pandaCase.get(pandaItem)){ 
                         System.debug('stringmsg!!!'+caseTemp);
                         caseTemp.addError(str);
@@ -412,7 +436,7 @@ dbLeads.Status = 'DNQ';
         if(!String.isBlank(message)){
             system.debug('@@@@@ budgetId @@@ 2'+message);
             for(Case caseTemp : caseDateList){
-                if(budgetIds.contains(caseTemp.Id)){
+                if(budgetIds.contains(caseTemp.Id) && Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null){
                     system.debug('@@@@@ budgetId @@@ 3'+budgetIds);
                     caseTemp.addError('Please enter the received date for the following forms -'+message);
                 }  
@@ -450,6 +474,7 @@ dbLeads.Status = 'DNQ';
                                                         updateCase.id = updateRecord.Case__c;
                                                         updateCase.Budget_Approved_Date__c = Date.Today();
                                                         updateCaseMap.put(updateRecord.Case__c,updateCase);
+                                                        System.debug('Budget Approved Date '+updateCase.Budget_Approved_Date__c);
                                                         
                                                     }
                                                     if(updateRecord.Projected_Approval_Status__c == 'Submitted'){
@@ -486,7 +511,7 @@ dbLeads.Status = 'DNQ';
     //1.Used to create list of task for volunteers when the wish determination case is created.
     //2.Based on "Wish Planning" recordtype, we are pulling the list of task which are stored under Chapter Action Track" object.
     //3.Task are assigned to the volunteer user who got initially approved for the case with the "Wish Granter" role.
-    public static void wishDeterminationSubCaseTaskCreation(List<Case> caseList, Set<Id> caseIds) {
+    public static void wishDeterminationSubCaseTaskCreation(Map<Id, Case> parentWishInfoMap) {
         
         Constant_AC  constant = new Constant_Ac();    
         Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
@@ -496,20 +521,22 @@ dbLeads.Status = 'DNQ';
         List<Task> wishDeterminationTaskList = new List<Task>();
         
         //Used to get case and its case team members
-        for(CaseTeamMember caseTeamMem : [SELECT Id, ParentId,Parent.ContactId, MemberId, TeamRoleId  FROM CaseTeamMember WHERE ParentId IN : caseIds AND TeamRole.Name = 'Wish Granter' ORDER BY CreatedDate ASC]) {
+        for(CaseTeamMember caseTeamMem : [SELECT Id, ParentId, MemberId, TeamRoleId  FROM CaseTeamMember WHERE ParentId IN : parentWishInfoMap.values() AND (TeamRole.Name = 'Wish Granter' OR TeamRole.Name = 'Wish Granter Mentor') ORDER BY CreatedDate ASC]) {
             if(!caseTeamMemberMap.containsKey(caseTeamMem.ParentId)) {
                 caseTeamMemberMap.put(caseTeamMem.ParentId,caseTeamMem.MemberId);
             } 
         }
         
+        System.debug('Parent Case Team Member:'+caseTeamMemberMap);
+        
         Map<Id, Id> parentContactIdMap = new map<Id, Id>();
-        for(Case parentCaseInfo : [SELECT Id, ContactId FROM Case WHERE Id IN : caseIds]) {
+        for(Case parentCaseInfo : parentWishInfoMap.values()) {
             parentContactIdMap.put(parentCaseInfo.Id, parentCaseInfo.ContactId);
         }
         
         
         List<Task> birthDayTaskList = new List<Task>();
-        for(Task birthdayTaskInfo : [SELECT Id, WhatId, Subject, OwnerId FROM Task WHERE Subject = 'Wish Child Birthday Reminder' AND WhatId IN : caseIds AND isClosed = false]) {
+        for(Task birthdayTaskInfo : [SELECT Id, WhatId, Subject, OwnerId FROM Task WHERE Subject = 'Wish Child Birthday Reminder' AND WhatId IN : parentWishInfoMap.keySet() AND isClosed = false]) {
             if(caseTeamMemberMap.containsKey(birthdayTaskInfo.WhatId)) {
                 birthdayTaskInfo.OwnerId = caseTeamMemberMap.get(birthdayTaskInfo.WhatId);
                 birthdayTaskInfo.RecordTypeId = volunteerTaskRT;
@@ -518,28 +545,27 @@ dbLeads.Status = 'DNQ';
             
         }   
         if(birthDayTaskList.size() > 0) {
-            //update birthDayTaskList;
+            update birthDayTaskList;
         }
         //Used get all chapter action track for wish determination case
         List<Chapter_Action_Track__c> subTaskList = [SELECT Id, Task_Name__c,RecordType.Name, Description__c, Due_Days__c, Sort_Order__c FROM Chapter_Action_Track__c WHERE RecordtypeId =: determinationChapterActionRT];
         if(subTaskList.size() > 0) {
-            for(Case createTasks : caseList) {
+            for(Case createTasks : parentWishInfoMap.values()) {
                 for(Chapter_Action_Track__c createSubTask : subTaskList) {
                     Task newSubTask = new Task();
                     newSubTask.Subject = createSubTask.Task_Name__c;
                     if(createSubTask.Due_Days__c != null) {
                         newSubTask.ActivityDate = Date.Today() + Integer.valueOf(createSubTask.Due_Days__c);
                     }
-                    newSubTask.WhatId = createTasks.ParentId;
+                    newSubTask.WhatId = createTasks.Id;
                     newSubTask.RecordTypeId = volunteerTaskRT;
                     newSubTask.IsVisibleInSelfService = true;
                     newSubTask.Task_Type__c = createSubTask.RecordType.Name;
-                    if(parentContactIdMap.containsKey(createTasks.ParentId)) {
-                        newSubTask.WhoId = parentContactIdMap.get(createTasks.ParentId);
-                    }
+                    newSubTask.WhoId = createTasks.ContactId;
                     newSubTask.Description = createSubTask.Description__c;
-                    if(caseTeamMemberMap.containsKey(createTasks.ParentId)) {
-                        newSubTask.OwnerId = caseTeamMemberMap.get(createTasks.ParentId);
+                    newSubTask.SystemGeneratedTask__c = true;
+                    if(caseTeamMemberMap.containsKey(createTasks.Id)) {
+                        newSubTask.OwnerId = caseTeamMemberMap.get(createTasks.Id);
                     }
                     wishDeterminationTaskList.add(newSubTask);
                 }
@@ -558,7 +584,7 @@ dbLeads.Status = 'DNQ';
         
         Map<Id, Id> caseTeamMemberMap = new Map<Id, Id>();
         //Used to get case and its case team members
-        for(CaseTeamMember caseTeamMem : [SELECT Id, ParentId, MemberId, TeamRoleId  FROM CaseTeamMember WHERE ParentId IN : interviewTaskParentIdMap.keySet() AND TeamRole.Name = 'Wish Granter' ORDER BY CreatedDate DESC]) {
+        for(CaseTeamMember caseTeamMem : [SELECT Id, ParentId, MemberId, TeamRoleId  FROM CaseTeamMember WHERE ParentId IN : interviewTaskParentIdMap.keySet() AND (TeamRole.Name = 'Wish Granter' OR TeamRole.Name = 'Wish Granter Mentor') ORDER BY CreatedDate DESC]) {
             if(!caseTeamMemberMap.containsKey(caseTeamMem.ParentId)) {
                 caseTeamMemberMap.put(caseTeamMem.ParentId,caseTeamMem.MemberId);
             } 
@@ -576,6 +602,7 @@ dbLeads.Status = 'DNQ';
             for(Id parentId : interViewOpenTaskIdsSet) {
                 Task newSubTask = new Task();
                 newSubTask.Subject = 'Enter interview date';
+                newSubTask.SystemGeneratedTask__c = true;
                 newSubTask.ActivityDate = System.Today() + 7;
                 newSubTask.WhatId = parentId;
                 newSubTask.IsVisibleInSelfService = true;
@@ -609,7 +636,7 @@ dbLeads.Status = 'DNQ';
             wishGrantedTaskDetailsMap.put(createSubTask.Task_Name__c, createSubTask);
         }
         
-        for(CaseTeamMember caseTeamMem : [SELECT Id, ParentId, MemberId, TeamRoleId  FROM CaseTeamMember WHERE ParentId IN : interviewTaskParentIdMap.keySet() AND TeamRole.Name = 'Wish Granter' ORDER BY CreatedDate DESC]) {
+        for(CaseTeamMember caseTeamMem : [SELECT Id, ParentId, MemberId, TeamRoleId  FROM CaseTeamMember WHERE ParentId IN : interviewTaskParentIdMap.keySet() AND (TeamRole.Name = 'Wish Granter' OR TeamRole.Name = 'Wish Granter Mentor') ORDER BY CreatedDate DESC]) {
             if(!caseTeamMemberMap.containsKey(caseTeamMem.ParentId)) {
                 caseTeamMemberMap.put(caseTeamMem.ParentId,caseTeamMem.MemberId);
             } 
@@ -657,6 +684,7 @@ dbLeads.Status = 'DNQ';
                 newSubTask.RecordTypeId = volunteerTaskRT;
                 newSubTask.IsVisibleInSelfService = true;
                 newSubTask.Task_Type__c = 'Wish Granting';
+                newSubTask.SystemGeneratedTask__c = true;
                 if(interviewTaskParentIdMap.containsKey(parentId))  {
                     newSubTask.WhoId = interviewTaskParentIdMap.get(parentId).contactId;
                 }
@@ -735,10 +763,12 @@ dbLeads.Status = 'DNQ';
     }
     
     //Used to create Activities for WishPlanning & Anticipation Wish
-    public static void wishPlaningAnticipationTaskCreation(Map<Id, Case> wishPlaningAnticipationSubCaseMap) 
+    public static void wishPlaningAnticipationTaskCreation(Map<Id, Case> wishPlanningAndGrantinTaskParentMap)
     {
+        System.debug('Wish Planning Task Creation Block');
         Constant_AC  constant = new Constant_Ac();    
         Id taskPlanningRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+        Id wishPlanningCaseRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
         Id chapterRecordTypeId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
         String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Id staffTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
@@ -747,6 +777,10 @@ dbLeads.Status = 'DNQ';
         Integer monthCount = 0;
         Map<String, List<Chapter_Action_Track__c>> chapterActionMap = new Map<String, List<Chapter_Action_Track__c>>();
         Map<Id,Id> chapterCoordinatorMap = new Map<Id, Id>();
+        Map<Id, Case> wishPlaningAnticipationSubCaseMap = new Map<id, Case>();
+        for(Case planningCaseInfo : [SELECT Id FROM Case WHERE ParentId IN : wishPlanningAndGrantinTaskParentMap.keySet() AND RecordTypeId =: wishPlanningCaseRecordTypeId]) {
+            wishPlaningAnticipationSubCaseMap.put(planningCaseInfo.Id, planningCaseInfo);
+        }
         
         for(Account chapterInfo : [SELECT Id, Wish_Co_ordinator__c FROM Account WHERE RecordTypeId =: chapterRecordTypeId]) {
             chapterCoordinatorMap.put(chapterInfo.Id, chapterInfo.Wish_Co_ordinator__c);
@@ -762,27 +796,25 @@ dbLeads.Status = 'DNQ';
             }
         }
         
-        for(Case currCase : [SELECT  id, Parent.Wish_type__c, Parent.ChapterName__c,Parent.ContactId, Parent.OwnerId, OwnerId, ParentId, Parent.Anticipated_Start_Date__c FROM Case
-                             WHERE Id IN :wishPlaningAnticipationSubCaseMap.keySet() AND ParentId != Null
-                             AND Parent.isClosed !=  True AND Parent.RecordTypeId = :parentWishRecordTypeId
-                             AND Parent.Wish_type__c != Null]) 
+        for(Case currCase : wishPlanningAndGrantinTaskParentMap.values()) 
         {
             
-            if(chapterActionMap.containsKey(currCase.Parent.Wish_type__c))
+            if(chapterActionMap.containsKey(currCase.Wish_type__c))
             {
-                for(Chapter_Action_Track__c currActionTrack : chapterActionMap.get(currCase.Parent.Wish_type__c))
+                for(Chapter_Action_Track__c currActionTrack : chapterActionMap.get(currCase.Wish_type__c))
                 { 
-                    if(currActionTrack.Chapter_Name__c == currCase.Parent.ChapterName__c) {
+                    if(currActionTrack.Chapter_Name__c == currCase.ChapterName__c) {
                         Task newTask = new Task();
-                        newTask.WhatId = currCase.ParentId;
+                        newTask.WhatId = currCase.Id;
                         newTask.Subject = currActionTrack.Task_Name__c;
-                        newTask.WhoId = currCase.Parent.ContactId;
+                        newTask.SystemGeneratedTask__c = true;
+                        newTask.WhoId = currCase.ContactId;
                         //newTask.OwnerId = currCase.OwnerId;
                         
-                        if(chapterCoordinatorMap.size() > 0 && chapterCoordinatorMap.containsKey(currCase.Parent.ChapterName__c) && chapterCoordinatorMap.get(currCase.Parent.ChapterName__c) != null) {
-                            newTask.OwnerId = chapterCoordinatorMap.get(currCase.Parent.ChapterName__c);
+                        if(chapterCoordinatorMap.size() > 0 && chapterCoordinatorMap.containsKey(currCase.ChapterName__c) && chapterCoordinatorMap.get(currCase.ChapterName__c) != null) {
+                            newTask.OwnerId = chapterCoordinatorMap.get(currCase.ChapterName__c);
                         } else {
-                            newTask.OwnerId = currCase.Parent.OwnerId;
+                            newTask.OwnerId = currCase.OwnerId;
                         }
                         
                         newTask.RecordTypeId = staffTaskRT;
@@ -800,29 +832,29 @@ dbLeads.Status = 'DNQ';
                             dayCalc = Weeks * 7;
                         }
                         
-                        if(currActionTrack.Months__c != null && currActionTrack.Months__c != 0 && currCase.Parent.Anticipated_Start_Date__c!= null) {
+                        if(currActionTrack.Months__c != null && currActionTrack.Months__c != 0 && currCase.Anticipated_Start_Date__c!= null) {
                             if(dayCalc != null) {
                                 todayDate = System.today().addDays(dayCalc);
                             } else {
                                 todayDate = System.today();  
                             }
-                            if(currCase.Parent.Anticipated_Start_Date__c> todayDate.addmonths(months))
+                            if(currCase.Anticipated_Start_Date__c> todayDate.addmonths(months))
                             {
-                                newTask.ActivityDate = currCase.Parent.Anticipated_Start_Date__c.addMonths(-months).addDays(dayCalc);
+                                newTask.ActivityDate = currCase.Anticipated_Start_Date__c.addMonths(-months).addDays(dayCalc);
                             }
                             else
                             {
                                 newTask.ActivityDate = Date.Today();
                             }
-                        } else if((currActionTrack.Months__c == null || currActionTrack.Months__c == 0) && (currCase.Parent.Anticipated_Start_Date__c!= null)) {
+                        } else if((currActionTrack.Months__c == null || currActionTrack.Months__c == 0) && (currCase.Anticipated_Start_Date__c!= null)) {
                             if(dayCalc != null) {
                                 todayDate = System.today().addDays(dayCalc);
                             }
-                            if(currCase.Parent.Anticipated_Start_Date__c> todayDate) {
+                            if(currCase.Anticipated_Start_Date__c> todayDate) {
                                 if(currActionTrack.Task_Name__c == 'Create Wish Receipt') {
-                                    newTask.ActivityDate = currCase.Parent.Anticipated_Start_Date__c.addDays(dayCalc);
+                                    newTask.ActivityDate = currCase.Anticipated_Start_Date__c.addDays(dayCalc);
                                 } else {
-                                    newTask.ActivityDate = currCase.Parent.Anticipated_Start_Date__c.addDays(-dayCalc);
+                                    newTask.ActivityDate = currCase.Anticipated_Start_Date__c.addDays(-dayCalc);
                                 }
                                 
                             } else {
@@ -838,16 +870,17 @@ dbLeads.Status = 'DNQ';
             } else if(chapterActionMap.containsKey('Other')) {
                 for(Chapter_Action_Track__c currActionTrack : chapterActionMap.get('Other'))
                 { 
-                    if(currActionTrack.Chapter_Name__c == currCase.Parent.ChapterName__c) {
+                    if(currActionTrack.Chapter_Name__c == currCase.ChapterName__c) {
                         Task newTask = new Task();
-                        newTask.WhatId = currCase.ParentId;
+                        newTask.WhatId = currCase.Id;
                         newTask.Subject = currActionTrack.Task_Name__c;
-                        newTask.WhoId = currCase.Parent.ContactId;
+                        newTask.SystemGeneratedTask__c = true;
+                        newTask.WhoId = currCase.ContactId;
                         //newTask.OwnerId = currCase.OwnerId;
-                        if(chapterCoordinatorMap.size() > 0 && chapterCoordinatorMap.containsKey(currCase.Parent.ChapterName__c) && chapterCoordinatorMap.get(currCase.Parent.ChapterName__c) != null) {
-                            newTask.OwnerId = chapterCoordinatorMap.get(currCase.Parent.ChapterName__c);
+                        if(chapterCoordinatorMap.size() > 0 && chapterCoordinatorMap.containsKey(currCase.ChapterName__c) && chapterCoordinatorMap.get(currCase.ChapterName__c) != null) {
+                            newTask.OwnerId = chapterCoordinatorMap.get(currCase.ChapterName__c);
                         } else {
-                            newTask.OwnerId = currCase.Parent.OwnerId;
+                            newTask.OwnerId = currCase.OwnerId;
                         }
                         newTask.RecordTypeId = staffTaskRT;
                         newTask.Task_Type__c = currActionTrack.RecordType.Name;
@@ -864,29 +897,29 @@ dbLeads.Status = 'DNQ';
                             dayCalc = Weeks * 7;
                         }
                         
-                        if(currActionTrack.Months__c != null && currActionTrack.Months__c != 0 && currCase.Parent.Anticipated_Start_Date__c!= null) {
+                        if(currActionTrack.Months__c != null && currActionTrack.Months__c != 0 && currCase.Anticipated_Start_Date__c!= null) {
                             if(dayCalc != null) {
                                 todayDate = System.today().addDays(dayCalc);
                             } else {
                                 todayDate = System.today();  
                             }
-                            if(currCase.Parent.Anticipated_Start_Date__c> todayDate.addmonths(months))
+                            if(currCase.Anticipated_Start_Date__c> todayDate.addmonths(months))
                             {
-                                newTask.ActivityDate = currCase.Parent.Anticipated_Start_Date__c.addMonths(-months).addDays(dayCalc);
+                                newTask.ActivityDate = currCase.Anticipated_Start_Date__c.addMonths(-months).addDays(dayCalc);
                             }
                             else
                             {
                                 newTask.ActivityDate = Date.Today();
                             }
-                        } else if((currActionTrack.Months__c == null || currActionTrack.Months__c == 0) && (currCase.Parent.Anticipated_Start_Date__c!= null)) {
+                        } else if((currActionTrack.Months__c == null || currActionTrack.Months__c == 0) && (currCase.Anticipated_Start_Date__c!= null)) {
                             if(dayCalc != null) {
                                 todayDate = System.today().addDays(dayCalc);
                             }
-                            if(currCase.Parent.Anticipated_Start_Date__c> todayDate) {
+                            if(currCase.Anticipated_Start_Date__c> todayDate) {
                                 if(currActionTrack.Task_Name__c == 'Create Wish Receipt') {
-                                    newTask.ActivityDate = currCase.Parent.Anticipated_Start_Date__c.addDays(dayCalc);
+                                    newTask.ActivityDate = currCase.Anticipated_Start_Date__c.addDays(dayCalc);
                                 } else {
-                                    newTask.ActivityDate = currCase.Parent.Anticipated_Start_Date__c.addDays(-dayCalc);
+                                    newTask.ActivityDate = currCase.Anticipated_Start_Date__c.addDays(-dayCalc);
                                 }
                             } else {
                                 newTask.ActivityDate = Date.Today();
@@ -903,6 +936,8 @@ dbLeads.Status = 'DNQ';
         if(planingAnticipationTaskList.size() > 0) {
             insert planingAnticipationTaskList;
         }
+        System.debug('Create Grantng Case>>>>>>>>>');
+        //wishGrantedSubCaseTaskCreation(wishPlanningAndGrantinTaskParentMap);
     }
     
     //Used to update WishPlanning & Anticipation Open activities due dates if the anticipated date is updated
@@ -1122,12 +1157,13 @@ dbLeads.Status = 'DNQ';
             planningCaseMap.put(getAnticipationCase.Id, getAnticipationCase);
         }
         if(planningCaseMap.size() > 0) {
-            wishPlaningAnticipationTaskCreation(planningCaseMap);
+            wishPlaningAnticipationTaskCreation(caseIdsMap);
         }
     }
     
     //To create Wish Granted volunteer task
-    public static void wishGrantedSubCaseTaskCreation(List<Case> caseList, Set<Id> caseIds) {        
+    public static void wishGrantedSubCaseTaskCreation(Map<Id, Case> parentWishMap) {      
+        System.debug('Wish Granted Task Creation Block');
         Constant_AC  constant = new Constant_Ac();  
         Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();  
         Id wishGrantTaskRT = Schema.Sobjecttype.Chapter_Action_Track__c.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
@@ -1135,7 +1171,7 @@ dbLeads.Status = 'DNQ';
         
         Map<Id, Date> parentMap = new Map<Id, Date>();
         Map<Id, Id> parentContactIdMap = new map<Id, Id>();
-        for(Case parentCaseDetail : [SELECT Id, Anticipated_Start_Date__c, ContactId FROM Case WHERE Id IN : caseIds AND RecordTypeId =: parentWishRecordTypeId]) {
+        for(Case parentCaseDetail : parentWishMap.values()) {
             parentMap.put(parentCaseDetail.Id, parentCaseDetail.Anticipated_Start_Date__c);
             parentContactIdMap.put(parentCaseDetail.Id, parentCaseDetail.ContactId);
         }
@@ -1144,7 +1180,7 @@ dbLeads.Status = 'DNQ';
         List<Task> wishGrantedTaskList = new List<Task>();
         
         //Used to get case and its case team members
-        for(CaseTeamMember caseTeamMem : [SELECT Id, ParentId, MemberId, TeamRoleId, TeamRole.Name  FROM CaseTeamMember WHERE ParentId IN : caseIds AND TeamRole.Name = 'Wish Granter' ORDER BY CreatedDate ASC]) {
+        for(CaseTeamMember caseTeamMem : [SELECT Id, ParentId, MemberId, TeamRoleId, TeamRole.Name  FROM CaseTeamMember WHERE ParentId IN : parentWishMap.keySet() AND (TeamRole.Name = 'Wish Granter' OR TeamRole.Name = 'Wish Granter Mentor') ORDER BY CreatedDate ASC]) {
             if(!caseTeamMemberMap.containsKey(caseTeamMem.ParentId)) {
                 caseTeamMemberMap.put(caseTeamMem.ParentId,caseTeamMem.MemberId);
             } 
@@ -1155,27 +1191,28 @@ dbLeads.Status = 'DNQ';
         List<Chapter_Action_Track__c> subTaskList = [SELECT Id, Task_Name__c, RecordType.Name, Due_Days__c, Sort_Order__c, Description__c FROM Chapter_Action_Track__c WHERE RecordTypeId =: wishGrantTaskRT];
         
         if(subTaskList.size() > 0) {
-            for(Case createTasks : caseList) {
+            for(Case createTasks : parentWishMap.values()) {
                 for(Chapter_Action_Track__c createSubTask : subTaskList) {
                     Task newSubTask = new Task();
                     newSubTask.Subject = createSubTask.Task_Name__c;
-                    if(parentMap.containsKey(createTasks.ParentId) && parentMap.get(createTasks.ParentId) != null) {
+                    if(parentMap.containsKey(createTasks.Id) && parentMap.get(createTasks.Id) != null) {
                         if(createSubTask.Task_Name__c == 'Schedule Wish Presentation (add date, time, location name and address)' || createSubTask.Task_Name__c == 'Secure in-kind donations for wish presentation') {
-                            newSubTask.ActivityDate = parentMap.get(createTasks.ParentId) + Integer.valueOf(createSubTask.Due_Days__c);
+                            newSubTask.ActivityDate = parentMap.get(createTasks.Id) + Integer.valueOf(createSubTask.Due_Days__c);
                         } else {
                             
                         }
                     }
                     newSubTask.Description = createSubTask.Description__c;
-                    newSubTask.WhatId = createTasks.ParentId;
+                    newSubTask.WhatId = createTasks.Id;
                     newSubTask.IsVisibleInSelfService = true;
+                    newSubTask.SystemGeneratedTask__c = true;
                     newSubTask.RecordTypeId = volunteerTaskRT;
                     newSubTask.Task_Type__c = createSubTask.RecordType.Name;
-                    if(parentContactIdMap.containsKey(createTasks.ParentId)) {
-                        newSubTask.WhoId = parentContactIdMap.get(createTasks.ParentId);
+                    if(parentContactIdMap.containsKey(createTasks.Id)) {
+                        newSubTask.WhoId = parentContactIdMap.get(createTasks.Id);
                     }
-                    if(caseTeamMemberMap.containsKey(createTasks.ParentId)) {
-                        newSubTask.OwnerId = caseTeamMemberMap.get(createTasks.ParentId);
+                    if(caseTeamMemberMap.containsKey(createTasks.Id)) {
+                        newSubTask.OwnerId = caseTeamMemberMap.get(createTasks.Id);
                     }
                     wishGrantedTaskList.add(newSubTask);
                 }
@@ -1285,8 +1322,8 @@ dbLeads.Status = 'DNQ';
         for(Case dbParentCase : [SELECT Id,OwnerId,Status,ParentId,AccountId,RecordTypeId from Case WHERE ParentId =: parentCaseMap.keySet() AND RecordTypeId  =: wishDeterminationRecordTypeId AND isClosed = false]){
             if(parentCaseMap.containsKey(dbParentCase.ParentId)){
                 dbParentCase.OwnerId = parentCaseMap.get(dbParentCase.ParentId).OwnerId;
-                dbParentCase.Status = 'Closed';
-                dbParentCase.Hidden_Close_Sub_Case__c = true;  
+                dbParentCase.Status = 'Closed'; 
+                dbParentCase.Hidden_Close_Sub_Case__c = true; 
                 updateChildCaseMap.put(dbParentCase.Id,dbParentCase);
             }
         }
@@ -1294,16 +1331,16 @@ dbLeads.Status = 'DNQ';
             update updateChildCaseMap.values();
         
         for(Case ProcessChilldCaseId : updateChildCaseMap.values()){
-            Case newPlanningWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c,Wish_Type__c ='Standard', Subject = 'Wish Planning - '+parentCaseContactMap.get(ProcessChilldCaseId.ParentId),ParentId = ProcessChilldCaseId.ParentId,AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishPlanningRecordTypeId,OwnerId = ProcessChilldCaseId.OwnerId);
-            insertchildCaseList.add(newPlanningWish); 
-            Case newGrantingWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Granting - '+parentCaseContactMap.get(ProcessChilldCaseId.ParentId), ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishGrantRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
-            insertchildCaseList.add(newGrantingWish); 
-            Case newImpactWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Impact - '+parentCaseContactMap.get(ProcessChilldCaseId.ParentId), ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishEffectRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
-            insertchildCaseList.add(newImpactWish); 
+            /*Case newPlanningWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c,Wish_Type__c ='Standard', Subject = 'Wish Planning - '+parentCaseContactMap.get(ProcessChilldCaseId.ParentId),ParentId = ProcessChilldCaseId.ParentId,AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishPlanningRecordTypeId,OwnerId = ProcessChilldCaseId.OwnerId);
+insertchildCaseList.add(newPlanningWish); 
+Case newGrantingWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Granting - '+parentCaseContactMap.get(ProcessChilldCaseId.ParentId), ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishGrantRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
+insertchildCaseList.add(newGrantingWish); 
+Case newImpactWish = new Case(ChapterName__c = ProcessChilldCaseId.ChapterName__c, Wish_Type__c ='Standard', Subject = 'Wish Impact - '+parentCaseContactMap.get(ProcessChilldCaseId.ParentId), ParentId = ProcessChilldCaseId.ParentId, AccountId=ProcessChilldCaseId.AccountId,ContactId = ProcessChilldCaseId.ContactId,Origin = 'Web',RecordTypeId = wishEffectRecordTypeId, OwnerId = ProcessChilldCaseId.OwnerId);
+insertchildCaseList.add(newImpactWish); */
         }
         
-        if(insertchildCaseList.size() > 0)
-            insert insertchildCaseList;
+        //if(insertchildCaseList.size() > 0)
+        //insert insertchildCaseList;
     }
     
     /***Change the Volunteer Opportunity Status as Completed when the wish wish status as completed or closed ********/
@@ -1330,7 +1367,7 @@ dbLeads.Status = 'DNQ';
         Map<Id,Integer> volunteerWithCount = new Map<id,Integer>();
         list<Contact> updateGrantedWishCount = new list<Contact>();
         set<Id> volunteerNameSet = new set<Id>();
-        for(Volunteer_Opportunity__c currentVolOpp : [SELECT ID,Wish__c,Wish__r.Status,Volunteer_Name__c,IsApproved__c FROM Volunteer_Opportunity__c WHERE IsApproved__c = True AND Wish__r.Status = 'Granted']){
+        for(Volunteer_Opportunity__c currentVolOpp : [SELECT ID,Wish__c,Wish__r.Status,Volunteer_Name__c,Status__c FROM Volunteer_Opportunity__c WHERE Status__c = 'Approved' AND Wish__r.Status = 'Granted']){
             key = currentVolOpp.Wish__c + '_' + currentVolOpp.Volunteer_Name__c; 
             if(!parentWishIdsSet.contains(key)){
                 parentWishIdsSet.add(key);
@@ -1386,11 +1423,11 @@ dbLeads.Status = 'DNQ';
             if(wishChildMap.size() > 0) {
                 for(Case parentCase : parentCaseMap.values()) {
                     if(wishChildMap.containsKey(parentCase.ContactId)) {
-                        if(wishChildMap.get(parentCase.ContactId).Region_Code__c == null && wishChildMap.get(parentCase.ContactId).county__c == null)
+                        if(wishChildMap.get(parentCase.ContactId).Region_Code__c == null && wishChildMap.get(parentCase.ContactId).county__c == null && Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
                             parentCase.addError('Please add region and county on the wish child\'s contact record.');
-                        else if(wishChildMap.get(parentCase.ContactId).Region_Code__c == null)
+                        else if(wishChildMap.get(parentCase.ContactId).Region_Code__c == null && Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
                             parentCase.addError('Please add region on the wish child\'s contact record.');
-                        else if(wishChildMap.get(parentCase.ContactId).county__c == null)
+                        else if(wishChildMap.get(parentCase.ContactId).county__c == null && Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
                             parentCase.addError('Please add county on the wish child\'s contact record.');
                         
                     }
@@ -1561,7 +1598,7 @@ dbLeads.Status = 'DNQ';
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         
         List<Case> childCaseList = new List<Case>();
-        for(Case childCase : [SELECT Id, OwnerId, ParentId FROM Case WHERE ParentId IN : newCaseOwnerMap.keySet() AND isClosed = false AND RecordTypeId !=: parentWishRecordTypeId]) {
+        for(Case childCase : [SELECT Id, OwnerId, ParentId FROM Case WHERE ParentId IN : newCaseOwnerMap.keySet() AND RecordTypeId !=: parentWishRecordTypeId]) {
             if(childCase.OwnerId != newCaseOwnerMap.get(childCase.ParentId)) {
                 childCase.OwnerId = newCaseOwnerMap.get(childCase.ParentId);
                 childCaseList.add(childCase);
@@ -1575,22 +1612,28 @@ dbLeads.Status = 'DNQ';
     
     //Used the change the access to case team member when their case team role is updated
     public static void chageAccessPermission(Map<Id, Id> caseContactMap) {
+        Constant_AC  constant = new Constant_Ac();    
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Map<Id, String> caseTeamRoleFilteredMap = new Map<Id, String>();
         Map<String, Id> caseTeamRoleMap = new Map<String, Id>();
         for(CaseTeamRole caseTeamRoleInfo : [SELECT Id, Name FROM CaseTeamRole]) {
             if(caseTeamRoleInfo.Name.contains(' (Wish Closed)')) {
                 caseTeamRoleFilteredMap.put(caseTeamRoleInfo.Id, caseTeamRoleInfo.Name.remove(' (Wish Closed)'));
+                
             } else {
                 caseTeamRoleMap.put(caseTeamRoleInfo.Name, caseTeamRoleInfo.Id);
+                
             }
         }
-        
+        Map<Id,Case> parentCaseMap = new Map<Id,Case>([SELECT Id,ParentId,RecordTypeId FROM Case WHERE ParentId =: Null AND RecordTypeId =: parentWishRecordTypeId AND Id IN: caseContactMap.KeySet()]);
         Map<Id, List<CaseTeamMember>> caseTeamMemberMap = new Map<Id, List<CaseTeamMember>>();
         for(CaseTeamMember caseTeamMemberInfo : [SELECT Id, MemberId, TeamRoleId, ParentId FROM CaseTeamMember WHERE ParentId IN : caseContactMap.keySet()]) {
             if(caseTeamMemberMap.containsKey(caseTeamMemberInfo.ParentId)) {
                 caseTeamMemberMap.get(caseTeamMemberInfo.ParentId).add(caseTeamMemberInfo);
+                
             } else {
                 caseTeamMemberMap.put(caseTeamMemberInfo.ParentId, new List<CaseTeamMember> {caseTeamMemberInfo});
+                
             }
         }
         
@@ -1598,31 +1641,38 @@ dbLeads.Status = 'DNQ';
             List<CaseTeamMember> updateRoleList = new List<CaseTeamMember>();
             List<ContactShare> contactToShareList = new List<ContactShare>();
             for(Id caseId : caseContactMap.keySet()) {
+             
                 if(caseTeamMemberMap.containsKey(caseId)) {
+                 
                     for(CaseTeamMember caseTeamRoleUpdate : caseTeamMemberMap.get(caseId)) {
                         if(caseTeamRoleFilteredMap.containsKey(caseTeamRoleUpdate.TeamRoleId)) {
+                        
                             if(caseTeamRoleMap.containsKey(caseTeamRoleFilteredMap.get(caseTeamRoleUpdate.TeamRoleId))) {
                                 caseTeamRoleUpdate.TeamRoleId = caseTeamRoleMap.get(caseTeamRoleFilteredMap.get(caseTeamRoleUpdate.TeamRoleId));
                                 updateRoleList.add(caseTeamRoleUpdate);
                                 //Contact Share
+                                if(parentCaseMap.containsKey(caseId)){
                                 ContactShare shareContact = new ContactShare();
                                 shareContact.ContactAccessLevel = 'Read';
                                 shareContact.ContactId = caseContactMap.get(caseId);
                                 shareContact.UserOrGroupId = caseTeamRoleUpdate.MemberId;
                                 contactToShareList.add(shareContact); 
+                                }
+                                
                             }
                         }
                     }
                 }
             }
-            if(updateRoleList.size() > 0) {
+            if(updateRoleList.size() > 0) 
                 update updateRoleList;
-            }
+            
             if(contactToShareList.size() > 0) {
                 insert contactToShareList;
+              }
             } 
         }
-    }
+    
     
     //Used to update Case Team Role & to create new Case Team Member based on case Status
     public static void CreateAndUpdateUserCaseTeamRole(Map<Id, Case> updateVolunteerManagerCaseTeamMap, Set<Id>volunteerManagerIdSet, Set<Id>wishCoordinatorIdSet) {
@@ -1855,41 +1905,41 @@ dbLeads.Status = 'DNQ';
         
         List<Contact> updateContactList = new List<Contact>();
         for(Case dbCase : wishGrantedIdList){
-         Contact dbCont = new Contact();
-         dbCont.id = dbCase.ContactId;
-         dbCont.Hidden_Granted_Date__c= System.Today();
-         updateContactList.add(dbCont);
+            Contact dbCont = new Contact();
+            dbCont.id = dbCase.ContactId;
+            dbCont.Hidden_Granted_Date__c= System.Today();
+            updateContactList.add(dbCont);
         }
-       /* Integer months;
-        Integer years;
-        Map<Id,Date> ContactMap = new Map<Id,Date>();
-        for(Case dbCase : wishGrantedIdList){
-            
-            ContactMap.put(dbCase.ContactId,dbCase.Inquiry_Date__c);
-        }
+        /* Integer months;
+Integer years;
+Map<Id,Date> ContactMap = new Map<Id,Date>();
+for(Case dbCase : wishGrantedIdList){
+
+ContactMap.put(dbCase.ContactId,dbCase.Inquiry_Date__c);
+}
+
+for(Contact updateContact : [SELECT id,Granted_Age__c FROM Contact WHERE id IN : ContactMap.KeySet()]){
+if(ContactMap.containsKey(updateContact.Id)){
+Date date1 = ContactMap.get(updateContact.Id);
+Date date2 = System.today();
+if(date1 != Null && date2!=Null)
+{
+months = Math.mod(date1.monthsBetween(date2), 12);
+years = date1.monthsBetween(date2) / 12;
+}
+if(years > 0){
+updateContact .Granted_Age__c = years+'.'+months;
+}
+else{
+updateContact.Granted_Age__c = '0.'+months;
+}
+
+updateContactList.add(updateContact);
+}
+}*/
         
-        for(Contact updateContact : [SELECT id,Granted_Age__c FROM Contact WHERE id IN : ContactMap.KeySet()]){
-            if(ContactMap.containsKey(updateContact.Id)){
-                Date date1 = ContactMap.get(updateContact.Id);
-                Date date2 = System.today();
-                if(date1 != Null && date2!=Null)
-                {
-                     months = Math.mod(date1.monthsBetween(date2), 12);
-                     years = date1.monthsBetween(date2) / 12;
-                }
-                if(years > 0){
-                    updateContact .Granted_Age__c = years+'.'+months;
-                }
-                else{
-                    updateContact.Granted_Age__c = '0.'+months;
-                }
-                
-                updateContactList.add(updateContact);
-                }
-            }*/
-            
-            if(updateContactList.size() > 0)
-                update updateContactList;
+        if(updateContactList.size() > 0)
+            update updateContactList;
         
     } 
     // Updating DEV Staff Email field for wishgarntingcase based on chatper account.
@@ -1907,4 +1957,51 @@ dbLeads.Status = 'DNQ';
             }
         }
     }
+    /*Close All System genareated open Task When the status is updtaed to "DNQ","Hold","Close","Inactive" '*/
+    Public static void closeAllOpenTask(Set<Id> parentWishIdSet){
+        
+        If(parentWishIdSet.size() > 0 ){
+            List<Task> updateTaskList = new List<Task>();
+            List<Case> caseList = new List<Case>();
+            
+            for(Case dbCase : [SELECT Id,ParentId,Status FROM Case WHERE ParentId IN:parentWishIdSet]){
+                    If(parentWishIdSet.contains(dbCase.ParentId)){
+                        dbCase.Hidden_Close_Sub_Case__c = true;
+                        dbCase.status = 'Closed';
+                        caseList.add(dbCase);
+                    }
+                }
+            for(Task dbOpenTask : [SELECT Id,WhatId,SystemGeneratedTask__c FROM Task WHERE WhatId IN: parentWishIdSet AND SystemGeneratedTask__c =: TRUE]){
+                dbOpenTask.Status = 'Closed';
+                updateTaskList.add(dbOpenTask);
+            }
+            
+            if(updateTaskList.size() > 0)
+            update updateTaskList;
+            
+            if(caseList.size() > 0)
+            update caseList;
+        }
+    }
+    
+    // Open all sub case when the status is changed from "DNQ" ,"Hold","Inactive" and "Closed".
+    
+    Public static void UpdateSubCaseStatus(set<Id> ParentIdSet){
+        
+        if(ParentIdSet.size() > 0){
+            List<Case> caseList = new List<Case>();
+             for(Case dbCase : [SELECT Id,ParentId,Status FROM Case WHERE ParentId IN:ParentIdSet]){
+                    If(ParentIdSet.contains(dbCase.ParentId)){
+                        dbCase.status = 'Open';
+                        dbCase.Hidden_Close_Sub_Case__c = true;
+                        caseList.add(dbCase);
+                    }
+                }
+             
+             if(caseList.size() > 0)
+             update caseList;
+        }
+    }
+        
+  
 }

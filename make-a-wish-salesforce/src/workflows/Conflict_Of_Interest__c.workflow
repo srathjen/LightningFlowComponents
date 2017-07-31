@@ -141,7 +141,12 @@
             <value>True</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Conflict_Of_Interest__c.Migrated_Record__c</field>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.Volunteer_is_Inactive__c</field>
             <operation>equals</operation>
             <value>False</value>
         </criteriaItems>
@@ -152,6 +157,10 @@
                 <name>COI_Expiring_Before_30_Days_Email_Alert</name>
                 <type>Alert</type>
             </actions>
+            <actions>
+                <name>COI_ET_COI_Expiring_30_Days</name>
+                <type>Task</type>
+            </actions>
             <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
             <timeLength>-30</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
@@ -160,6 +169,10 @@
             <actions>
                 <name>COI_Expiring_Before_9_Days_Email_Alert</name>
                 <type>Alert</type>
+            </actions>
+            <actions>
+                <name>COI_ET_COI_Expiring_9_Days</name>
+                <type>Task</type>
             </actions>
             <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
             <timeLength>-9</timeLength>
@@ -170,6 +183,10 @@
                 <name>COI_Expiring_Before_2_Days_Email_Alert</name>
                 <type>Alert</type>
             </actions>
+            <actions>
+                <name>COI_ET_COI_Expiring_2_Days</name>
+                <type>Task</type>
+            </actions>
             <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
             <timeLength>-2</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
@@ -178,6 +195,10 @@
             <actions>
                 <name>COI_Expiring_After_7_Days_Email_Alert</name>
                 <type>Alert</type>
+            </actions>
+            <actions>
+                <name>COI_ET_COI_Expired_7_Days</name>
+                <type>Task</type>
             </actions>
             <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
             <timeLength>7</timeLength>
@@ -188,6 +209,10 @@
                 <name>COI_Expiring_Before_16_Days_Email_Alert</name>
                 <type>Alert</type>
             </actions>
+            <actions>
+                <name>COI_ET_COI_Expiring_16_Days</name>
+                <type>Task</type>
+            </actions>
             <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
             <timeLength>-16</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
@@ -196,6 +221,10 @@
             <actions>
                 <name>COI_Expiring_Before_23_Days_Email_Alert</name>
                 <type>Alert</type>
+            </actions>
+            <actions>
+                <name>COI_ET_COI_Expiring_23_Days</name>
+                <type>Task</type>
             </actions>
             <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
             <timeLength>-23</timeLength>

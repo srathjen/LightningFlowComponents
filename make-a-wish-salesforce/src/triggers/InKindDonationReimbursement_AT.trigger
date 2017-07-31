@@ -105,7 +105,7 @@ trigger InKindDonationReimbursement_AT on In_Kind_Donation_Reimbursement__c (bef
         
             for(In_Kind_Donation_Reimbursement__c currRec :Trigger.New){ 
                 system.debug('Chapter Name****************'+chapterNameMap.get(currRec.Id));
-                if(chapterRoleMap.get(chapterNameMap.get(currRec.Id)) != currUser[0].UserRole.Name && currUser[0].UserRole.Name != 'National Staff' 
+                if(chapterRoleMap.get(chapterNameMap.get(currRec.Id)) != currUser[0].UserRole.Name && currUser[0].UserRole.Name != 'National Staff' && Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null
                     && currUser[0].profile.Name != 'System Administrator' && currUser[0].Chapter_Name__c != (chapterNameMap.get(currRec.id)))
                {
                      currRec.addError('Insufficient previlege to update this record. Please contact system administrator.');        

@@ -41,7 +41,7 @@
                 <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!miniorParticipant}" rendered="{!showPopup = true}">Liability And Publicity Release Form – Minor Participants</apex:outputLink></div> 
                 <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!absentParentForm}">Absent Parent Form</apex:outputLink></div>
                 <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!singleForm}">Single Parent Form</apex:outputLink></div>
-                <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!celebrityForm}">Entertainment And Sports Wish LOU</apex:outputLink></div> 
+                <!-- <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!celebrityForm}">Entertainment And Sports Wish LOU</apex:outputLink></div> -->
                 <div style="margin-left:57%; margin-top: -18%;"><apex:outputLink target="_blank" value="{!contactInfo}">View or Update Family Contact Info</apex:outputLink></div>
             </apex:outputPanel>
         </apex:outputPanel>

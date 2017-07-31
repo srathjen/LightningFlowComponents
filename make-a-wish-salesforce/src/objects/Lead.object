@@ -1062,6 +1062,88 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Additional_Parent_Primary__c</fullName>
+        <description>Primary language of the wish additional parent/guardian.</description>
+        <externalId>false</externalId>
+        <label>Additional Parent Primary Language</label>
+        <picklist>
+            <picklistValues>
+                <fullName>English</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>American Sign Language</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arabic</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chinese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>French and French Creole</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>German</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hindi</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Italian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Japanese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Korean</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Polish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Portuguese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Russian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tagalog</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vietnamese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
+    </fields>
+    <fields>
         <fullName>Additional_Parent_Relationship_to_Child__c</fullName>
         <externalId>false</externalId>
         <label>Additional Parent Relationship to Child</label>
@@ -1760,6 +1842,7 @@
         <fullName>Closed_Date__c</fullName>
         <description>When DNQ-Task has been closed, this field will be entered by chapter staff manually.</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the wish is financially closed out.</inlineHelpText>
         <label>Closed Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1773,27 +1856,31 @@
         <label>Communication</label>
         <picklist>
             <picklistValues>
-                <fullName>Non-Verbal</fullName>
+                <fullName>This child is non-verbal</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Appropriate for chronological age</fullName>
+                <fullName>This child is developmentally on target for chronological age</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Sensorimotor (0-2 year old) stage</fullName>
+                <fullName>This child functions at a 0-2 year old, Sensorimotor stage</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Preoperational (2-7 year old) stage</fullName>
+                <fullName>This child functions at a 2-7 year old, Preoperational stage</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Concrete Operational (7-11 year old) stage</fullName>
+                <fullName>This child functions at a 7-11 year old, Concrete Operational stage</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
-                <fullName>Formal Operational (11+ year old) stage</fullName>
+                <fullName>This child functions at an 11+ year old, Formal Operational stage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>I am not sure</fullName>
                 <default>false</default>
             </picklistValues>
             <picklistValues>
@@ -2071,16 +2158,6 @@
         <type>Picklist</type>
     </fields>
     <fields>
-        <fullName>Group_1__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>It hold the group 1 detail of ICD code.</description>
-        <externalId>false</externalId>
-        <label>Group 1</label>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>HasOptedOutOfEmail</fullName>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2184,6 +2261,17 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Wish_Child_Last_Initial__c</fullName>
+        <externalId>false</externalId>
+        <formula>LEFT( LastName , 1)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Wish Child Last Initial</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hospital_Treatment_Facility_Treating__c</fullName>
         <description>It holds the information about Hospital/Treatment Facility of the wish kid</description>
         <externalId>false</externalId>
@@ -2206,6 +2294,130 @@
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>How_Did_you_hear_about_Make_A_Wish__c</fullName>
+        <description>It hold the answer of How_Did_you_hear_about_Make_A_Wish? question from the referral form.</description>
+        <externalId>false</externalId>
+        <label>How Did you hear about Make-A-Wish?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Social Worker</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family Member</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nurse</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Physician</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Friend</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Brochure at the Doctor&apos;s Office</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Event</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Make-A-Wish Hospital Presence</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Make-A-Wish Staff/Volunteer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Newspaper</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Make-A-Wish Family</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Radio</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>School – Kids For Wish Kids</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>School – Nurse/Teacher</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Support Group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Television</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Web Search</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Brochure at doctor’s office</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Doctor</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Friends</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Media/PSA</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Wish Family</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Picklist</type>
     </fields>
     <fields>
         <fullName>I_am_Recognized_To_Practice_As_a__c</fullName>
@@ -2434,6 +2646,7 @@
         <fullName>Inquiry_Date__c</fullName>
         <description>It holds the Date of Inquriy form submitted.</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the Initial lead from a non-authorized referral source is received.</inlineHelpText>
         <label>Inquiry Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3076,6 +3289,7 @@
         <fullName>Part_A_Received__c</fullName>
         <description>This field will capture the date when the status is changed Part A Sent to Eligibility Review/Qualified</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the Diagnosis Verification is received from the child&apos;s medical professional.</inlineHelpText>
         <label>Diagnosis Verification Received</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3086,6 +3300,7 @@
         <fullName>Part_A_Sent__c</fullName>
         <description>This will capture the date when the lead status is changed from Referred to Part A Sent</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the Diagnosis Verification is sent to the child&apos;s medical professional</inlineHelpText>
         <label>Diagnosis Verification Sent</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3915,8 +4130,9 @@
     </fields>
     <fields>
         <fullName>Referred_Date__c</fullName>
-        <description>This field will capture the date value when the lead is is referred</description>
+        <description>This field will capture the date value when the lead is  referred</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the Initial lead from an authorized referral source is received.</inlineHelpText>
         <label>Referred Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -6428,7 +6644,7 @@
         <fullName>Lead_Address_Phone_and_Gender_Validation</fullName>
         <active>true</active>
         <errorConditionFormula>AND(OR((Street == Null || City == Null || PostalCode == Null || State == Null  ),
-(Text(Gender__c) == Null),Phone== Null),Migrated_Record__c == false,(Text(Status) == &apos;Referred&apos;),(Text(RFI_Form_Info_Hidden__c) == Null || Id != Null))</errorConditionFormula>
+(Text(Gender__c) == Null),Phone== Null),$Profile.Name != &apos;Integration&apos;,(Text(Status) == &apos;Referred&apos;),(Text(RFI_Form_Info_Hidden__c) == Null || Id != Null))</errorConditionFormula>
         <errorMessage>Please Enter Full Address (City, State, Street and Postal Code), Phone Number  and Gender.</errorMessage>
     </validationRules>
     <validationRules>
@@ -6458,7 +6674,7 @@
         <fullName>Lead_DOB_Referral_Validation</fullName>
         <active>true</active>
         <description>When lead is changed to Referred, DOB is mandatory.</description>
-        <errorConditionFormula>Text(Status) == &apos;Referred&apos; &amp;&amp;  DOB__c == Null &amp;&amp;   (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
+        <errorConditionFormula>Text(Status) == &apos;Referred&apos; &amp;&amp;  DOB__c == Null &amp;&amp;   (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorDisplayField>DOB__c</errorDisplayField>
         <errorMessage>Please Enter DOB</errorMessage>
     </validationRules>
@@ -6466,7 +6682,7 @@
         <fullName>Lead_Family_Referral_Validation</fullName>
         <active>true</active>
         <description>When lead is changed to Referred, is Family Aware of Referral is mandatory.</description>
-        <errorConditionFormula>Text(Status) == &apos;Referred&apos; &amp;&amp;  Text(is_Family_Aware_of_Referral__c) == Null &amp;&amp;    (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
+        <errorConditionFormula>Text(Status) == &apos;Referred&apos; &amp;&amp;  Text(is_Family_Aware_of_Referral__c) == Null &amp;&amp;    (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name != &apos;Integration&apos;</errorConditionFormula>
         <errorDisplayField>is_Family_Aware_of_Referral__c</errorDisplayField>
         <errorMessage>Please fill the is Famil Aware of Referral field.</errorMessage>
     </validationRules>
@@ -6474,7 +6690,7 @@
         <fullName>Lead_FirstName_Validation</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Inquiry status,First Name is mandatory.</description>
-        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == &apos;Inquiry&apos;) &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
+        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == &apos;Inquiry&apos;) &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp;  $Profile.Name != &apos;Integration&apos;</errorConditionFormula>
         <errorDisplayField>FirstName</errorDisplayField>
         <errorMessage>Please Enter First Name</errorMessage>
     </validationRules>
@@ -6482,7 +6698,7 @@
         <fullName>Lead_FirstName_Validation_Referred</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Inquiry status,First Name is mandatory.</description>
-        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
+        <errorConditionFormula>FirstName == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorDisplayField>FirstName</errorDisplayField>
         <errorMessage>Please Enter First Name</errorMessage>
     </validationRules>
@@ -6498,7 +6714,7 @@
         <fullName>Lead_Hospital_or_Treartment_Validation</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Referred status, Hospital or Treatment Facility is mandatory</description>
-        <errorConditionFormula>Hospital_Treatment_Facility_Treating__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
+        <errorConditionFormula>Hospital_Treatment_Facility_Treating__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp; (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorDisplayField>Hospital_Treatment_Facility_Treating__c</errorDisplayField>
         <errorMessage>Please Enter Hospital_Treatment_Facility</errorMessage>
     </validationRules>
@@ -6545,7 +6761,7 @@
         <fullName>Lead_Physician_LastName_Validation</fullName>
         <active>true</active>
         <description>Whenever lead is created/updated with Referred status, Physician Lastname  is mandatory</description>
-        <errorConditionFormula>Treating_Medical_Professional_Last_Name__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
+        <errorConditionFormula>Treating_Medical_Professional_Last_Name__c == Null &amp;&amp; (Text(Status) == &apos;Referred&apos;) &amp;&amp;  (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorDisplayField>Treating_Medical_Professional_Last_Name__c</errorDisplayField>
         <errorMessage>Please Enter Treating Medical Professional Last Name</errorMessage>
     </validationRules>
@@ -6647,21 +6863,21 @@
     <validationRules>
         <fullName>Lead_Status_QualifiedOrEligib_Validation</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(ISCHANGED(Status ),AND(NOT(ISPICKVAL(PRIORVALUE(Sub_Status__c),&apos;Pending Diagnosis Verification&apos;)),NOT(ISPICKVAL(PRIORVALUE(Status),&apos;Eligibility Review&apos;)),ISPICKVAL(Status ,&apos;Qualified&apos;))) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
+        <errorConditionFormula>AND(ISCHANGED(Status ),AND(NOT(ISPICKVAL(PRIORVALUE(Sub_Status__c),&apos;Pending Diagnosis Verification&apos;)),NOT(ISPICKVAL(PRIORVALUE(Status),&apos;Eligibility Review&apos;)),ISPICKVAL(Status ,&apos;Qualified&apos;))) &amp;&amp; $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorMessage>The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Wish_Aware_Validation</fullName>
         <active>true</active>
         <description>It will thrown an error when the is Family Aware of Referral? filed value is not yes at the time of lead creation</description>
-        <errorConditionFormula>Text(is_Family_Aware_of_Referral__c) != &apos;Yes&apos; &amp;&amp; Text(Status) == &apos;Inquiry&apos; &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
+        <errorConditionFormula>Text(is_Family_Aware_of_Referral__c) != &apos;Yes&apos; &amp;&amp; Text(Status) == &apos;Inquiry&apos; &amp;&amp; Text(RFI_Form_Info_Hidden__c) == Null &amp;&amp; $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorDisplayField>is_Family_Aware_of_Referral__c</errorDisplayField>
         <errorMessage>Please Enter is Family Aware of Referral? value as Yes</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_sub_Status_Validation</fullName>
         <active>true</active>
-        <errorConditionFormula>AND(ISNEW(), ISPICKVAL( Sub_Status__c , &apos;Pending Diagnosis Verification&apos;)) &amp;&amp; Migrated_Record__c == false</errorConditionFormula>
+        <errorConditionFormula>AND(ISNEW(), ISPICKVAL( Sub_Status__c , &apos;Pending Diagnosis Verification&apos;)) &amp;&amp; $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorDisplayField>Sub_Status__c</errorDisplayField>
         <errorMessage>Please save the record before updating the sub status as Pending Diagnosis Verification.</errorMessage>
     </validationRules>

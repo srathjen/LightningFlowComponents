@@ -49,8 +49,8 @@ Description : This page is used to display the welcome message, open events , ch
                                     <div class="col-xs-12 col-sm-12 col-md-12">
                                         <h1>Welcome {!$User.FirstName} {!$User.LastName},</h1>
                                         <apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Welcome_Message__c}" escape="false"/>
-
-                                        <h3><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Title__c}"/></h3>
+                                            <br/> <br/>                                  
+                                            <h3><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Title__c}"/></h3>
                                         <p><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Text__c}"/></p>
                                     </div>
                                 </div>

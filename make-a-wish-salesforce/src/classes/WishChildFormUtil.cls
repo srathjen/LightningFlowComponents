@@ -245,6 +245,37 @@ Public Class WishChildFormUtil
          options.add(new SelectOption('Father','Father')); 
          options.add(new SelectOption('Legal Guardian','Legal Guardian')); 
          options.add(new SelectOption('Other','Other')); 
+         options.add(new SelectOption('Parent','Parent')); 
+         options.add(new SelectOption('Guardian','Guardian')); 
+         options.add(new SelectOption('Sister','Sister')); 
+         options.add(new SelectOption('Self','Self')); 
+         options.add(new SelectOption('Brother','Brother')); 
+         options.add(new SelectOption('Sibling','Sibling')); 
+         options.add(new SelectOption('Grandmother','Grandmother')); 
+         options.add(new SelectOption('Grandfather','Grandfather')); 
+         options.add(new SelectOption('Stepmother','Stepmother')); 
+         options.add(new SelectOption('Stepfather','Stepfather')); 
+         options.add(new SelectOption('Step Sister','Step Sister')); 
+         options.add(new SelectOption('Step Brother','Step Brother')); 
+         options.add(new SelectOption('Half Sister','Half Sister')); 
+         options.add(new SelectOption('Half Brother','Half Brother'));
+         options.add(new SelectOption('Aunt','Aunt'));
+         options.add(new SelectOption('Uncle','Uncle'));
+         options.add(new SelectOption('Cousin','Cousin'));
+         options.add(new SelectOption('Husband','Husband'));
+         options.add(new SelectOption('Wife','Wife'));
+         options.add(new SelectOption('Partner','Partner'));
+         options.add(new SelectOption('Friend','Friend'));
+         options.add(new SelectOption('Neighbor','Neighbor'));
+         options.add(new SelectOption('Family','Family'));
+         options.add(new SelectOption('Coworker','Coworker'));
+         options.add(new SelectOption('Son','Son'));
+         options.add(new SelectOption('Daughter','Daughter'));
+         options.add(new SelectOption('Grandson','Grandson'));
+         options.add(new SelectOption('Granddaughter','Granddaughter'));
+         options.add(new SelectOption('Employer','Employer'));
+         options.add(new SelectOption('Employee','Employee'));
+         options.add(new SelectOption('Medical Professional','Medical Professional'));
          return options;
          
     }

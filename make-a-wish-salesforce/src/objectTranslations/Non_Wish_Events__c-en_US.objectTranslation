@@ -280,6 +280,14 @@
         <name>From_Mulesoft__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Date --></label>
+        <name>Hidden_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Location --></label>
+        <name>Hidden_Location__c</name>
+    </fields>
+    <fields>
         <label><!-- Migrated Record --></label>
         <name>Migrated_Record__c</name>
     </fields>
@@ -337,10 +345,6 @@
         <picklistValues>
             <masterLabel>11:30 AM</masterLabel>
             <translation><!-- 11:30 AM --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>11:30 PM</masterLabel>
-            <translation><!-- 11:30 PM --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>12:00 AM</masterLabel>

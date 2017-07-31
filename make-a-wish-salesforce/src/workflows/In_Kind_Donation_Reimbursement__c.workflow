@@ -21,6 +21,15 @@
         <protected>false</protected>
     </fieldUpdates>
     <fieldUpdates>
+        <fullName>Uncheck_isSubmitted_Approval_field</fullName>
+        <field>HiddenIsSubmittedforApproval__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck isSubmitted Approval field</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Update_Approved_By_on_Reimbursement</fullName>
         <field>Approved_By__c</field>
         <formula>$User.FirstName +  $User.LastName</formula>
@@ -36,6 +45,15 @@
         <name>Update Approved Date on Reimbursement</name>
         <notifyAssignee>false</notifyAssignee>
         <operation>Formula</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>isSubmitted_for_Approval_field_update</fullName>
+        <field>HiddenIsSubmittedforApproval__c</field>
+        <literalValue>1</literalValue>
+        <name>isSubmitted for Approval field update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
         <protected>false</protected>
     </fieldUpdates>
 </Workflow>

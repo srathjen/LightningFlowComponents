@@ -41,7 +41,7 @@ Trigger DocusignRecipientTrigger_AT on dsfs__DocuSign_Recipient_Status__c (After
                }
            }
            
-           if(NameList.Size() > 0 && subject == 'Make-A-Wish Liability And Publicity Release Form'){
+           if(NameList.Size() > 0 && subject == 'Signature Required - Liability And Publicity Release Form'){
            
                for(Case dbCase : [SELECT Id,Hidden_Name_List__c,ContactId,Contact.Name,Contact.Email FROM Case WHERE Id IN:wishIdSet]){
                recipentMap.put(dbCase.Contact.Name,dbCase.Contact.Email);
@@ -58,7 +58,7 @@ Trigger DocusignRecipientTrigger_AT on dsfs__DocuSign_Recipient_Status__c (After
                }
            }
            
-            if(NameList.Size() > 0 && subject == 'Wish Paperwork Packet'){
+            if(NameList.Size() > 0 && subject == 'Signature Required - Wish Paperwork Packet'){
            
                for(Wish_Child_Form__c dbWishChildForm : [SELECT Id,Case__c,Hidden_Contact_Name__c FROM Wish_Child_Form__c  WHERE Case__c IN:wishIdSet]){
                

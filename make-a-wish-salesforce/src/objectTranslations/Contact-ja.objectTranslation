@@ -296,28 +296,32 @@
         <label><!-- Communication --></label>
         <name>Communication__c</name>
         <picklistValues>
-            <masterLabel>Appropriate for chronological age</masterLabel>
-            <translation><!-- Appropriate for chronological age --></translation>
+            <masterLabel>I am not sure</masterLabel>
+            <translation><!-- I am not sure --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Concrete Operational (7-11 year old) stage</masterLabel>
-            <translation><!-- Concrete Operational (7-11 year old) stage --></translation>
+            <masterLabel>This child functions at a 0-2 year old, Sensorimotor stage</masterLabel>
+            <translation><!-- This child functions at a 0-2 year old, Sensorimotor stage --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Formal Operational (11+ year old) stage</masterLabel>
-            <translation><!-- Formal Operational (11+ year old) stage --></translation>
+            <masterLabel>This child functions at a 2-7 year old, Preoperational stage</masterLabel>
+            <translation><!-- This child functions at a 2-7 year old, Preoperational stage --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Non-Verbal</masterLabel>
-            <translation><!-- Non-Verbal --></translation>
+            <masterLabel>This child functions at a 7-11 year old, Concrete Operational stage</masterLabel>
+            <translation><!-- This child functions at a 7-11 year old, Concrete Operational stage --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Preoperational (2-7 year old) stage</masterLabel>
-            <translation><!-- Preoperational (2-7 year old) stage --></translation>
+            <masterLabel>This child functions at an 11+ year old, Formal Operational stage</masterLabel>
+            <translation><!-- This child functions at an 11+ year old, Formal Operational stage --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Sensorimotor (0-2 year old) stage</masterLabel>
-            <translation><!-- Sensorimotor (0-2 year old) stage --></translation>
+            <masterLabel>This child is developmentally on target for chronological age</masterLabel>
+            <translation><!-- This child is developmentally on target for chronological age --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>This child is non-verbal</masterLabel>
+            <translation><!-- This child is non-verbal --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -2688,6 +2692,90 @@ provide contact information for each site on which you are active. --></help>
     <fields>
         <label><!-- Wish Family Type --></label>
         <name>Wish_Family_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- How Did you hear about Make-A-Wish? --></label>
+        <name>Wish_How_Did_you_hear_about_Make_A_Wish__c</name>
+        <picklistValues>
+            <masterLabel>Brochure at the doctor&apos;s office</masterLabel>
+            <translation><!-- Brochure at the doctor&apos;s office --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Event</masterLabel>
+            <translation><!-- Event --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family member</masterLabel>
+            <translation><!-- Family member --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Friend</masterLabel>
+            <translation><!-- Friend --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Make-A-Wish Staff/Volunteer</masterLabel>
+            <translation><!-- Make-A-Wish Staff/Volunteer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Make-A-Wish hospital presence</masterLabel>
+            <translation><!-- Make-A-Wish hospital presence --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Newspaper</masterLabel>
+            <translation><!-- Newspaper --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nurse</masterLabel>
+            <translation><!-- Nurse --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other Make-A-Wish Family</masterLabel>
+            <translation><!-- Other Make-A-Wish Family --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physician</masterLabel>
+            <translation><!-- Physician --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Radio</masterLabel>
+            <translation><!-- Radio --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>School – Kids For Wish Kids</masterLabel>
+            <translation><!-- School – Kids For Wish Kids --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>School – Nurse/Teacher</masterLabel>
+            <translation><!-- School – Nurse/Teacher --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Social Media</masterLabel>
+            <translation><!-- Social Media --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Social Worker</masterLabel>
+            <translation><!-- Social Worker --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Support Group</masterLabel>
+            <translation><!-- Support Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Television</masterLabel>
+            <translation><!-- Television --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Web search</masterLabel>
+            <translation><!-- Web search --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Wish Liability IsSigned. --></label>

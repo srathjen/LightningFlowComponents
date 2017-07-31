@@ -26,6 +26,26 @@
                 }, 2000);
             }
         </script>
+        <!-- Popup styling starts here -->
+    <style type="text/css">
+        .vfHelpText a            {position:relative;}
+        .vfHelpText a span       {display: none;}
+        .vfHelpText a:hover span {display: block; position:absolute; right:-15em; width:15em; z-index:100; border:1px solid #006bb; background-color:#FEFDB9; color:black;}
+        .pop-wrap, .pop-wrap-main-message { position:fixed; top: 20%; left: 50%; z-index: 9999; width:90%; max-width:35rem;}
+        .custPopup, .custPopup-main-message{ font-family:"arial", helvetica, sans-serif; position: relative; background: white; border: 1px solid #006bb6; border-radius: .25rem; top: -20%; left: -50%; padding:1rem; width: 100%;}
+        .pop-wrap-main-message {top: 1%} .custPopup-main-message{top: 0; padding:0 1rem 0;}
+        .popupBackground{ position: fixed; background: rgba(0,0,0,.4); width: 100%; height: 100%; top: 0; left: 0; z-index: 9998}
+        .labelCol{width:180px;}
+        .highlight h3 {text-align:center}
+        .modal-header,.modal-footer {border-top:none;}
+        h1.modal-title {text-align: center; padding-bottom: 0}
+        .modal-header .close {margin-top: -4rem}
+        .modal-footer, .modal-footer span {display: flex; justify-content: center;}
+        .modal-footer .btn-md, .nav-sub-inner .btn-md {max-width:10rem}
+        .modal-footer .btn-md {min-width:10rem}
+        @media (min-width: 48em) {.feature{min-height: 15rem} }
+    </style>
+    <!-- Popup styling ends here -->
     <body class="vcp vcpactivelogin">
         <apex:include pageName="active_header" id="pheader"/>
 
@@ -69,6 +89,7 @@
                                             <th>Location</th>
                                             <th>Max Capacity</th>
                                             <th>Available Seats</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                             <th>Link</th>
                                         </tr>
@@ -76,10 +97,11 @@
 
                                     <tbody>
                                         <apex:repeat value="{!TrainingRecordList}" var="training">
-                                            <apex:outputPanel rendered="{!(AND(training.volOppSize>0,training.status == 'Registered'))}">
+                                            <apex:outputPanel rendered="{!(AND(training.volOppSize>0,OR(training.status == 'Registered',training.status == 'Completed')))}">
                                           <!--  <apex:outputPanel rendered="{!OR(AND(training.volOppSize>0,training.status == 'Registered'),AND(training.volOppSize < 0,training.status == 'Registered'),AND(training.volOppSize == 0,training.status == 'Registered'))}"> -->
+                                                <apex:outputPanel rendered="{!(training.status == 'Registered')}">
                                                 <tr>
-                                                    <td>{!training.orientationName}</td>
+                                                    <td>{!training.orientationName} </td>
                                                     <td>{!training.chapterName}</td>
                                                     <td>{!training.recordType}</td>
                                                     <td>
@@ -90,9 +112,10 @@
                                                     <td>{!training.location}</td>
                                                     <td>{!training.maxCapacity}</td>
                                                     <td>{!training.avilableSheets}</td>
+                                                    <td>{!training.Status}</td>
 
                                                     <td>
-                                                        <apex:commandLink action="{!Cancel}">Cancel
+                                                        <apex:commandLink action="{!Cancel}" rendered="{!(If(training.status == 'Registered',True,False))}">Cancel
                                                             <apex:param name="trainingId" value="{!training.recordId}" assignTo="{!trainingId}"/>
                                                         </apex:commandLink>
                                                     </td>
@@ -102,6 +125,7 @@
                                                         </apex:commandLink>
                                                     </td>
                                                 </tr>
+                                                </apex:outputPanel>
                                             </apex:outputPanel>
                                         </apex:repeat>
                                     </tbody>
@@ -134,8 +158,9 @@
                                               <apex:outputpanel rendered="{!training.displayRec==True}">
                                                 <tr>
                                                     <td>{!training.orientationName}</td>
-                                                    <td>{!training.recordType}</td>
                                                     <td>{!training.chapterName}</td>
+                                                    <td>{!training.recordType}</td>
+                                                   
                                                     <td>
                                                         <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!training.orientationDate}"/></apex:outputText>
                                                     </td>
@@ -179,6 +204,25 @@
                             </div>
                           </div>
                         </div>
+                         <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!isCompleted}"/>
+                            <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!isCompleted}">
+                        <div class="pop-wrap">
+                                    <div class="custPopup">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                                    <div class="row">
+                            Our records show you have already completed this training. Do you want to continue registering?<br/>
+                            </div><div class="col-sm-4">
+                            <apex:commandButton value="Yes" action="{!Register}" styleClass="col-sm-offset-3 col-md-offset-4 col-md-12 col-sm-6 col-md-4 btn-md"/>
+                            </div><div class="col-sm-4">
+                            <apex:CommandButton value="No" action="{!No}" styleClass="col-sm-offset-3 col-md-offset-4 col-md-12 col-sm-6 col-md-4 btn-md"/>
+                            </div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </apex:outputPanel>
                         
                     </apex:form>
 

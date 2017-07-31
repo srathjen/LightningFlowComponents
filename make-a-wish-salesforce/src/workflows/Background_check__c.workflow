@@ -123,11 +123,11 @@
     </fieldUpdates>
     <rules>
         <fullName>Bc%3A Volunteer Opportunity Status Update</fullName>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
-            <field>Background_check__c.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <criteriaItems>
             <field>Background_check__c.Date_Requested__c</field>

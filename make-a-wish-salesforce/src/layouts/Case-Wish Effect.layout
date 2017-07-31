@@ -96,10 +96,6 @@
                 <field>Total_Hour_Spent_Hidden__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Qualified_Date__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Unique_Wish_Record_Identifier__c</field>
             </layoutItems>
@@ -122,6 +118,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Hidden_Diagn_Verifi_Received_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Qualified_Date__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

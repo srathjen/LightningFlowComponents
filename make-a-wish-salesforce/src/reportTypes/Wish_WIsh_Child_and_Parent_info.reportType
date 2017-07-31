@@ -4002,11 +4002,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Qualified_Date__c</field>
-            <table>Contact.npe01__Organizations__r.Cases</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Ready_to_Assign_Date__c</field>
             <table>Contact.npe01__Organizations__r.Cases</table>
         </columns>

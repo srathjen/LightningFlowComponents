@@ -1425,6 +1425,15 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Family_Dynamics_Notes__c</fullName>
+        <description>Additional detail for Family Dynamics</description>
+        <externalId>false</externalId>
+        <label>Family Dynamics Notes</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Family_Dynamics__c</fullName>
         <externalId>false</externalId>
         <label>Family Dynamics</label>
@@ -4354,6 +4363,30 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
             <value>Approved</value>
         </filters>
         <label>In-Kind Donors - Airline</label>
+    </listViews>
+    <listViews>
+        <fullName>In_Kind_Donors_All</fullName>
+        <columns>ACCOUNT.NAME</columns>
+        <columns>ACCOUNT.ADDRESS1_STATE_CODE</columns>
+        <columns>ACCOUNT.PHONE1</columns>
+        <columns>ACCOUNT.TYPE</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>ACCOUNT.RECORDTYPE</columns>
+        <columns>No_Direct_Contact__c</columns>
+        <columns>ACCOUNT.SITE</columns>
+        <columns>Chapter_Name__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>ACCOUNT.RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Account.In_Kind_Donors</value>
+        </filters>
+        <filters>
+            <field>In_Kind_Approval_Status__c</field>
+            <operation>equals</operation>
+            <value>Approved</value>
+        </filters>
+        <label>In-Kind Donors - All</label>
     </listViews>
     <listViews>
         <fullName>In_Kind_Donors_Animal</fullName>
@@ -8960,6 +8993,14 @@ IF(NOT(ISNULL($Setup.npo02__Households_Settings__c.npo02__Membership_Grace_Perio
         <searchResultsAdditionalFields>npo02__TotalOppAmount__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Private</sharingModel>
+    <validationRules>
+        <fullName>Family_Dynamics_Validation</fullName>
+        <active>true</active>
+        <description>FamilyDynamicsNotes should not be blank when &apos;Other&apos; is selected on &quot;Family Dynamics&quot;</description>
+        <errorConditionFormula>AND(ISPICKVAL(Family_Dynamics__c, &apos;Other&apos;), Family_Dynamics_Notes__c = NULL,$RecordType.DeveloperName = &apos;HH_Account&apos;,$Profile.Name != &apos;Integration&apos;)</errorConditionFormula>
+        <errorDisplayField>Family_Dynamics_Notes__c</errorDisplayField>
+        <errorMessage>Please fill the Family Dynamics Notes</errorMessage>
+    </validationRules>
     <validationRules>
         <fullName>Program_NationalStaff_Account_Validation</fullName>
         <active>false</active>

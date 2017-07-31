@@ -45,12 +45,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <displayNameOverride>Qualified</displayNameOverride>
-            <field>Qualified_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <displayNameOverride>Actual</displayNameOverride>
             <field>Start_Date__c</field>
             <table>Case</table>

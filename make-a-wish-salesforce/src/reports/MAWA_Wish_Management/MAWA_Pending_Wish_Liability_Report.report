@@ -10,9 +10,6 @@
         <field>Contact.Lead_Created_Date__c</field>
     </columns>
     <columns>
-        <field>Case.Qualified_Date__c</field>
-    </columns>
-    <columns>
         <field>SUBJECT</field>
     </columns>
     <columns>

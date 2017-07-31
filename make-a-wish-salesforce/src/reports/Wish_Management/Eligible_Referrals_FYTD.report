@@ -49,9 +49,6 @@
         <field>Contact.Part_A_Received__c</field>
     </columns>
     <columns>
-        <field>Case.Qualified_Date__c</field>
-    </columns>
-    <columns>
         <field>Contact.ICD_10_Code__c</field>
     </columns>
     <columns>

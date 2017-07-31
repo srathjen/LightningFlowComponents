@@ -97,12 +97,12 @@
                 <field>Event_Description__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>NWE_Start_Time__c</field>
+                <behavior>Edit</behavior>
+                <field>Start_Time__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>NWE_End_Time__c</field>
+                <behavior>Edit</behavior>
+                <field>End_Time__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>

@@ -14,6 +14,8 @@ public class WishLiabilityMinorParticipant_AC{
     public Map<String,String> emailMap;
     public List<String> emailStringList{get;set;}
     public String Name{get;set;}
+    public boolean displayReturnToWish{get;set;} 
+
     public WishLiabilityMinorParticipant_AC(ApexPages.StandardController controller){
         inPutMode = true;
         outPutMode = false;
@@ -56,6 +58,7 @@ public class WishLiabilityMinorParticipant_AC{
     }
     
     public pageReference cancel(){
+    system.debug('cancelcalled');
         pageReference pg = new pageReference('/'+currentParentCase.Id);
         pg.setRedirect(true);
         return pg;
@@ -172,8 +175,8 @@ public class WishLiabilityMinorParticipant_AC{
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailBlurb":"Make-A-Wish Liability And Publicity Release Form – Minor Participants",'+
-            '  "emailSubject": "Make-A-Wish Liability And Publicity Release Form – Minor Participants",'+
+            '  "emailBlurb":"Please sign the attached Liability And Publicity Release Form – Minor Participants.\r\n\n Thank You,\r\n\nWish & Volunteer Center",'+
+            '  "emailSubject": "Signature Required - Liability And Publicity Release Form – Minor Participants",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+
             '      "name": "document.pdf",'+
@@ -260,5 +263,15 @@ public class WishLiabilityMinorParticipant_AC{
         
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please enter the name and Email'));
         return null;
+    }
+    
+    public void ReturnToWish(){
+        displayReturnToWish = true;
+    }
+    
+      public pageReference ReturnToLiabilityForm(){
+        PageReference reference=new PageReference('/apex/WishLiabilityMinorParticipant_VF?id='+currentParentCase.id);
+        reference.setRedirect(true);     
+        return reference;
     }
 }

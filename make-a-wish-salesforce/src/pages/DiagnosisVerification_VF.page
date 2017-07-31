@@ -1,3 +1,6 @@
+<!-- ******************************************************************************************************************************
+Description : This page is used to collect medical condition about wish child from the medical professional
+*********************************************************************************************************************************** -->
 <apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
     <script>
     function resizeIframe(obj) {
@@ -21,8 +24,8 @@
         .statement-desc-patient {padding-top:1rem;}
         .ui-autocomplete {overflow-y: scroll; max-height:270px;}
         .ui-autocomplete-loading {
-          background: transparent url("{!URLFOR($Resource.WishReferralStyle, 'WishReferralStyle/img/loader-circle-blue.gif')}") right .5rem center no-repeat !important;
-          background-size:1rem 1rem !important;}
+        background: transparent url("{!URLFOR($Resource.WishReferralStyle, 'WishReferralStyle/img/loader-circle-blue.gif')}") right .5rem center no-repeat !important;
+        background-size:1rem 1rem !important;}
         form label.form-check-label {display:block; cursor: pointer; font-family:"arial",helvetica, sans-serif; margin-bottom:1rem; padding-left:2rem; text-indent:-1.8rem; text-transform:none}
         form label.form-check-label input {margin-right:1rem}
         .travel-wrap > div > div > div, .travel-wrap select {margin-left:2rem; width:calc(100% - 2rem)}
@@ -58,7 +61,7 @@
         form .form-control ~ .diagnosis-link {display:none}
         form .form-control ~ .diagnosis-link.clearable {display:block}
         .loader {position:absolute; top:1.5rem; right:7.5rem; width:1rem}
-
+        
         /* remove block */
         .icd > .diagnosis-link {visibility:visible;position:absolute; right:1.5rem; top:2rem; color:#747678;}
         .icd > .diagnosis-link:hover {text-decoration:none; color:#0275d8}
@@ -72,7 +75,7 @@
         }
     </style>
     <body class="vcp">
-
+        
         <span>
             <header role="main-header" class="container">
                 <div class="row">
@@ -107,7 +110,7 @@
                                 </apex:facet>
                             </apex:actionStatus>
                         </apex:outputPanel>
-
+                        
                         <!-- Part A from verificaton section -->
                         <apex:outputPanel id="credentialDetails">
                             <apex:pageBlock rendered="{!!wishChildWrapperIns.login}" >
@@ -198,7 +201,7 @@
                                             </apex:selectList>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="form-group row">
                                         <label class="col-md-12">I have direct knowledge of this patient's condition and I am part of the treating healthcare team</label>
                                         <div class="col-md-6">
@@ -207,7 +210,7 @@
                                             </apex:selectList>
                                         </div>
                                     </div>
-
+                                    
                                 </fieldset>
                                 <!-- about -->
                                 <fieldset>
@@ -232,16 +235,16 @@
                                             </div>
                                         </div>
                                     </apex:outputPanel>
-
+                                    
                                 </fieldset>
                                 <div class="step-two fadein-alert">
                                     <fieldset >
-
+                                        
                                         <apex:actionfunction action="{!WishChildEligibilityCheck}" name="checkEligible" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
                                             <apex:param name="icdOrPcd" value="" />
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
-
+                                        
                                         <apex:actionfunction action="{!ResetDiagnosis}" name="resetDiagnosisBlock" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
@@ -254,8 +257,8 @@
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
                                         <!--<apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlockAndSign"  onComplete="SaveAndSign();" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
-                                            <apex:param name="diagnosisBlockNum" value="" />
-                                        </apex:actionfunction>-->
+<apex:param name="diagnosisBlockNum" value="" />
+</apex:actionfunction>-->
                                         <apex:actionfunction action="{!RemoveDiagnosisBlock}" name="removeDiagnosisBlockAndSign"  onComplete="CollectCondition();" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
                                             <apex:param name="diagnosisBlockNum" value="" />
                                         </apex:actionfunction>
@@ -270,18 +273,16 @@
                                         <apex:actionFunction name="refreshAttachmentSection"  reRender="attachmentSection">
                                         </apex:actionFunction>
                                         <apex:actionFunction name="saveMedInfo" action="{!SaveMedicalInformation}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock" onComplete="docusignPageRedirect();" status="status">
-                                        	<apex:param name="travelString" value="" />
+                                            <apex:param name="travelString" value="" />
                                             <apex:param name="collectedConditionValue" value="" />
-
                                         </apex:actionFunction>
-
                                         <apex:actionFunction name="tempSaveMedInfo" action="{!SaveMedicalInformation}" rerender="diagonsisLoop,findAndReplace,notEligible,LoadBlock" onComplete="ShowSuccessMsg();" status="status">
                                             <apex:param name="travelString" value="" />
                                             <apex:param name="collectedConditionValue" value="" />
                                         </apex:actionFunction>
-
+                                        
                                         <apex:outputPanel id="diagonsisLoop">
-
+                                            
                                             <apex:variable value="{!0}" var="diagnosisBlock"/>
                                             <apex:repeat value="{!diagnosisVerificationWrapperLst}" var="diagnosisVerification" >
                                                 <apex:variable value="{!diagnosisVerification.isEligible}" var="eligible"/>
@@ -377,7 +378,7 @@
                                                             $('.searchDiagnosisId'+num).prop('disabled',true)
                                                         }
                                                     });
-
+                                                    
                                                     </script>
                                                     <apex:variable var="diagnosisBlock" value="{!diagnosisBlock + 1}"/>
                                                 </div>
@@ -386,7 +387,7 @@
                                                     <div class="form-group form-control ques-complete fadein"> <span class="text-muted">You have provided enough diagnosis information for an eligibility decision to be made. <br/>Please complete the remaining questions prior to submitting. </span> </div>
                                                 </apex:outputPanel>
                                                 <!--</apex:outputPanel>-->
-
+                                                
                                             </apex:repeat>
                                             <apex:outputPanel rendered="{!showAddAnotherDiagnosisBtn == true && wishStatus != 'Qualified' }" id="qualifiedmsg" styleClass="text-warning">
                                                 <apex:outputtext >
@@ -397,9 +398,9 @@
                                                 <apex:commandLink value="+ Add another diagnosis" styleClass="diagnosis-link" action="{!addDiagnosisVerification}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace"   />
                                             </apex:outputPanel>
                                         </apex:outputPanel>
-
+                                        
                                         <div class="seperator-top" style="padding-top:1rem">
-
+                                            
                                             <apex:outputPanel id="notEligibleWishDesc">
                                                 <apex:outputPanel rendered="{!wishStatus != 'Qualified'}">
                                                     <div class="form-group row">
@@ -413,18 +414,19 @@
                                                     </div>
                                                 </apex:outputPanel>
                                             </apex:outputPanel>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Is {!currLead.FirstName} {!currLead.LastName} in a comatose or vegetative state?</label></div>
                                                 <div class="col-md-6 vegitative">
-                                                    <apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="comatose form-control c-select VegetativePick requiredField" >
+                                                    <!--<apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="comatose form-control c-select VegetativePick requiredField" >-->
+                                                    <apex:selectList value="{!wishChildWrapperIns.vegetativeState}" multiselect="false" size="1" styleClass="form-control c-select requiredField" >
                                                         <apex:selectOption itemlabel="Please Select" itemvalue=""/>
                                                         <apex:selectOption itemlabel="Yes" itemvalue="Yes" />
                                                         <apex:selectOption itemLabel="No" itemValue="No"/>
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Is there a medical reason we would need to expedite the process?</label></div>
                                                 <div class="col-md-6">
@@ -440,8 +442,8 @@
                                                 <div class="col-md-12"><label>Please provide timeframe and details</label></div>
                                                 <div class="col-md-6"><apex:inputTextarea styleClass="form-control plz-Exp " html-maxlength="10000" value="{!wishChildWrapperIns.plzExplain}" /></div>
                                             </div>
-
-
+                                            
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Do you expect this child's condition will significantly deteriorate in the next 3-6 months? </label></div>
                                                 <div class="col-md-6">
@@ -465,24 +467,24 @@
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                         </div>
                                         <!-------------------------- Wish Not Eligible Section Block Starts ---------------------------->
                                         <apex:outputPanel id="notEligible">
                                             <apex:outputPanel rendered="{!wishStatus != 'Qualified'}">
-
+                                                
                                                 <div class="form-group row">
                                                     <div class="col-md-12"><label>Medical Summary</label></div>
                                                     <apex:outputPanel id="attachmentSection">
                                                         <div class="col-xs-12">
                                                             <div class="upload-loader"></div>
-                                                            <iframe id="dvupload" width="100%" scrolling="no" onload="resizeIframe(this)" frameborder="0" src="/apex/DVMedicalSummaryAttachment_VF?id={!currlead.Id}"></iframe>
+                                                            <iframe id="dvupload" name='DVMFrame' width="100%" scrolling="no" onload="resizeIframe(this)" frameborder="0" src="/apex/DVMedicalSummaryAttachment_VF?id={!currlead.Id}"></iframe>
                                                         </div>
                                                     </apex:outputPanel>
                                                 </div>
                                             </apex:outputPanel>
                                         </apex:outputPanel>
-										
+                                        
                                         
                                         <div class="form-group row">
                                             <div class="col-md-12"><label>Is there additional information you would like to provide?</label></div>
@@ -492,12 +494,12 @@
                                         </div>
                                         
                                         <!--<div class="form-group row">
-                                            <div class="col-md-6"><label>Is there additional information you would like to provide?</label></div>
-                                            <div class="col-md-6">
-                                                <apex:inputTextarea value="currLead.Provided_additional_information__c" rows="5" cols="10" styleClass="form-control" id="additonalinfo" maxlength="50" html-placeholder="Please enter additional information here" />
-                                                <apex:inputTextarea value="{!currLead.Provided_additional_information__c}" styleClass="form-control" id="additonalinfo" html-placeholder="Please enter additional information here" />
-                                            </div>
-                                        </div>-->
+<div class="col-md-6"><label>Is there additional information you would like to provide?</label></div>
+<div class="col-md-6">
+<apex:inputTextarea value="currLead.Provided_additional_information__c" rows="5" cols="10" styleClass="form-control" id="additonalinfo" maxlength="50" html-placeholder="Please enter additional information here" />
+<apex:inputTextarea value="{!currLead.Provided_additional_information__c}" styleClass="form-control" id="additonalinfo" html-placeholder="Please enter additional information here" />
+</div>
+</div>-->
                                     </fieldset>
                                     <!-- Travel Algorithm Starts -->
                                     <fieldset>
@@ -567,7 +569,7 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.respiratoryIllness}" styleClass="check_checkbox"/>Hospitalization for acute respiratory illness in the past 6 weeks</label>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox styleClass="check_checkbox"/>Pulmonary hypertension</label>
@@ -582,7 +584,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12"><label class="form-check-label">
                                                     <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.ventilator}" styleClass="check_checkbox"/>Ventilator Dependence</label>
@@ -593,7 +595,7 @@
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.angina}" styleClass="check_checkbox"/>Chest Pain/Angina</label>
@@ -634,7 +636,7 @@
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.congenitalHeartDisease}" styleClass="check_checkbox"/>Cyanotic Congenital Heart Disease</label>
@@ -650,7 +652,7 @@
                                                     <label class="form-check-label"><apex:inputCheckbox value="{!travelAlgorithmWrapperIns.uncontrolledHypertension}" styleClass="check_checkbox"/>Severe Uncontrolled Hypertension</label>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.acuteoRChronicHepatitis}" styleClass="check_checkbox"/>Acute or Chronic Hepatitis</label>
@@ -671,14 +673,14 @@
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.heptopulmonarySyndrome}" styleClass="check_checkbox"/>Heptopulmonary Syndrome</label>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox styleClass="check_checkbox"/>Chronic liver disease</label>
                                                 </div>
                                             </div>
-
-
+                                            
+                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.liverDisease}" styleClass="check_checkbox"/>End Stage Liver Disease</label>
@@ -715,7 +717,7 @@
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row checkContainer checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.convulsiveDisorder}" styleClass="check_checkbox"/>Unstable or uncontrolled epilepsy, seizure disorder, convulsive disorder</label>
@@ -755,7 +757,7 @@
                                     </fieldset>
                                     <!-- Travel Algorithm Ends -->
                                     <!-------------------------- Button block Starts ---------------------------->
-
+                                    
                                     <fieldset class="footer row">
                                         <div class="col-md-12">
                                             <!--<apex:commandButton value="Save" style="border-right:1px solid #fff" styleClass="col-xs-12 col-sm-12 col-md-3 col-md-push-6 btn-md saveMedicalInfoBtn" action="{!SaveMedicalInformation}" rerender="diagonsisLoop,findAndReplace,notEligible" onClick="checkfunction();" onComplete="ShowSuccessMsg();"/>-->
@@ -765,6 +767,7 @@
                                     </fieldset>
                                     <script>
                                     function checkfunction() {
+                                        
                                         var stringGet = '';
                                         var travelString = ''
                                         var i = 1;
@@ -787,10 +790,32 @@
                                                 i++;
                                             }
                                         });
-                                        tempSaveMedInfo(stringGet,travelString);
+                                        
+                                        var myElem = document.getElementById('dvupload');
+                                        if (myElem === null) {
+                                            tempSaveMedInfo(stringGet,travelString);
+                                        } else {
+                                            var fileContent = $('iframe[name=DVMFrame]').contents().find('.upload').val();
+                                            var attachmentContent = $('iframe[name=DVMFrame]').contents().find('.medAtt-size').val();
+                                            if(fileContent.trim() != '') {
+                                                $('iframe[name=DVMFrame]').contents().find('.upload').css({ "border": '#FF0000 1px solid'});
+                                                swal({
+                                                    title: '',
+                                                    text: 'You have an attachment that has not been uploaded yet. Please click the UPLOAD button to complete process before saving.',
+                                                    type: "error",
+                                                    confirmButtonColor: '#006bb6',
+                                                    confirmButtonText: "Ok",
+                                                    closeOnConfirm: false
+                                                })
+                                                $('.upload').css({ "border": '#FF0000 1px solid'});
+                                            }else {
+                                                tempSaveMedInfo(stringGet,travelString);
+                                            } 
+                                        }
+                                        
                                     }
                                     </script>
-
+                                    
                                 </div>
                                 <!-------------------------- Button block Ends ---------------------------->
                                 <apex:outputPanel id="popup">
@@ -908,7 +933,7 @@
                                         }
                                         $('.multi-lvl-one').chosen({placeholder_text_multiple: "Please Select All That Apply", width:"100%"});
                                         $('.multi').chosen({placeholder_text_multiple: "Please Select All That Apply", width:"calc(100% - 2rem)"});
-
+                                        
                                         // hide/show step-two depending if input is checked
                                         if ($('.statement-desc-patient label input[type=radio]:checked').size() > 0){
                                             $('.step-two').prop('hidden', false);
@@ -930,7 +955,7 @@
                                                 $('.plz-Exp').val("");
                                                 $(".plz-Exp").removeClass("requiredField");
                                                 $('.expedite-explain').prop('hidden', true);
-
+                                                
                                             }
                                         });
                                         //display expedite explain if there is a value in expediteprocess on page load
@@ -960,13 +985,13 @@
                                         }
                                         // set required field for multiselect (chosen)
                                         function multiCom(){
-                                          var mc = $('.multiCom');
-                                          if ($(mc).val() != null && $(mc).val().length > 0){
-                                              $(mc).next('.chosen-container-multi').removeClass('requiredField');
-                                              $(mc).next('.chosen-container-multi').css('border','');
-                                          } else {
-                                              $(mc).next('.chosen-container-multi').addClass('requiredField');
-                                          }
+                                            var mc = $('.multiCom');
+                                            if ($(mc).val() != null && $(mc).val().length > 0){
+                                                $(mc).next('.chosen-container-multi').removeClass('requiredField');
+                                                $(mc).next('.chosen-container-multi').css('border','');
+                                            } else {
+                                                $(mc).next('.chosen-container-multi').addClass('requiredField');
+                                            }
                                         } multiCom();
                                         $('.multiCom').on('change', function(){
                                             multiCom();
@@ -1015,11 +1040,11 @@
         <!-- bootstrap css fallback (appends to head) -->
         <script>$.each(document.styleSheets, function(i,sheet){ if(sheet.href=='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css') {var rules = sheet.rules ? sheet.rules : sheet.cssRules; if (rules.length == 0) { $('<link rel="stylesheet" type="text/css" href="css/lib/bootstrap.min.css" />').appendTo('head');} } });</script>
         <!-- chosen select -->
-        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
+            <script src="{!URLFOR($Resource.prospective_assets, 'web/js/chosen.jquery.min.js')}"></script>
         <!-- masked input -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jq.maskedinput.min.js')}"></script>
         <!-- validate forms -->
-        <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
+            <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.validate.min.js')}"></script>
         <!-- validate form (additional methods) -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
         <script>
@@ -1037,7 +1062,7 @@
                 });
             })(jQuery);
         </script>
-
+        
         <apex:outputPanel id="findAndReplace">
             <script>
             //Find and Replace with Child Name
@@ -1057,8 +1082,8 @@
             }FindAndReplaceChildName();
             </script>
         </apex:outputPanel>
-
-
+        
+        
         <script>
         // delay plugin
         var delay = (function() {
@@ -1068,50 +1093,81 @@
                 timer = setTimeout(callback, ms);
             };
         })();
-
+        
         $(document).delegate('.inptBx','keypress',function(e){
             if (e.keyCode == 13) {
                 e.preventDefault();
                 return false;
             }
         });
-
+        
         //This function is used to validate whether Medical Professional filled out all Medical Qestions before they signing the document
         $(document).delegate('.SS-btn','click',function(){
             var isError_Free = true;
-            $('.requiredField').each(function() {
-                $(this).css('border','');
-                if($(this).val() == ''){
-                    $(this).css({ "border": '#FF0000 1px solid'});
+            var myElem = document.getElementById('dvupload');
+            if (myElem === null) {
+                $('.requiredField').each(function() {
+                    $(this).css('border','');
+                    if($(this).val() == ''){
+                        $(this).css({ "border": '#FF0000 1px solid'});
+                        swal({
+                            title: '',
+                            text: 'Please fill required fields',
+                            type: "error",
+                            confirmButtonColor: '#006bb6',
+                            timer: 3000
+                        })
+                        isError_Free = false;
+                    }
+                });
+                $('.multiCom').each(function() {
+                    if($(this).hasClass('requiredField')){
+                        swal({
+                            title: '',
+                            text: 'Please fill required fields',
+                            type: "error",
+                            confirmButtonColor: '#006bb6',
+                            timer: 3000
+                        })
+                        isError_Free = false;
+                    }
+                });
+            } else {
+                var fileContent = $('iframe[name=DVMFrame]').contents().find('.upload').val();
+                var attachmentContent = $('iframe[name=DVMFrame]').contents().find('.medAtt-size').val();
+                if(fileContent.trim() != '') {
+                    $('iframe[name=DVMFrame]').contents().find('.upload').css({ "border": '#FF0000 1px solid'});
                     swal({
                         title: '',
-                        text: 'Please fill required fields',
+                        text: 'You have an attachment that has not been uploaded yet. Please click the UPLOAD button to complete process before signing.',
                         type: "error",
                         confirmButtonColor: '#006bb6',
-                        timer: 3000
+                        confirmButtonText: "Ok",
+                        closeOnConfirm: false
                     })
+                    $('.upload').css({ "border": '#FF0000 1px solid'});
                     isError_Free = false;
+                }  else if(attachmentContent != undefined) {
+                    if(attachmentContent == 0) {
+                        $('iframe[name=DVMFrame]').contents().find('.upload').css({ "border": '#FF0000 1px solid'});
+                        swal({
+                            title: '',
+                            text: 'Please fill required fields',
+                            type: "error",
+                            confirmButtonColor: '#006bb6',
+                            timer: 3000
+                        })
+                        
+                        isError_Free = false;
+                    }
                 }
-            });
-
-            $('.multiCom').each(function() {
-                if($(this).hasClass('requiredField')){
-                    swal({
-                        title: '',
-                        text: 'Please fill required fields',
-                        type: "error",
-                        confirmButtonColor: '#006bb6',
-                        timer: 3000
-                    })
-                    isError_Free = false;
-                }
-            });
-
+            }
             if(isError_Free){
                 DiagnosisEmptyCheck();
             }
         });
-
+        
+        //Used to check whether diagnosis field is left as blank value
         function DiagnosisEmptyCheck() {
             var allToSign = true;
             $('.requiredField1').each(function() {
@@ -1138,7 +1194,7 @@
                         },
                              function(isConfirm){
                                  if (isConfirm) {
-
+                                     
                                      swal.close();
                                      removeDiagnosisBlockAndSign(num);
                                  } else {
@@ -1149,7 +1205,7 @@
                     }
                 }
             });
-
+            
             if(allToSign){
                 var stringGet = '';
                 var travelString = ''
@@ -1173,7 +1229,7 @@
                         i++;
                     }
                 });
-
+                
                 if(travelString == '' || stringGet == '') {
                     swal({
                         title: "",
@@ -1187,10 +1243,11 @@
                 } else {
                     saveMedInfo(stringGet,travelString);
                 }
-
+                
             }
         }
-
+        
+        //Used to get Travel recomendation selection
         function CollectCondition() {
             var stringGet = '';
             var travelString = ''
@@ -1216,7 +1273,8 @@
             });
             saveMedInfo(stringGet,travelString);
         }
-
+        
+        //Used to show error when primary diagnosis field is left as blank
         function FillPrimaryDiagnosis(blockFocus) {
             swal({
                 title: "",
@@ -1235,17 +1293,17 @@
                  });
             return false;
         }
-
-
+        
+        
         //Used to redirect to docusign page after saving the form when "Submit & Sign" button clicked
         function docusignPageRedirect() {
             docusign();
         }
-
+        
         function SaveAndSign() {
             saveMedInfo('Empty','Empty');
         }
-
+        
         //Used to display success message when the form is successfully saved
         function ShowSuccessMsg() {
             $('body').append('<div class="notification"><div><h6>Your form has been successfully saved. </br></br>Please note: Click \'Submit & Sign\' to complete Diagnosis Verification.</h6></div></div>').fadeIn();
@@ -1254,7 +1312,7 @@
                 $('.notification').remove();
             }, 4500);
         }
-
+        
         //ICD & Condition Description field disable & enable function
         function ClearFieldProperty(blockNum) {
             $('.searchDiagnosisId'+blockNum).prop('disabled',false);
@@ -1269,7 +1327,7 @@
             $('.shortTextId').hide();
             resetDiagnosisBlock(blockNum);
         }
-
+        
         //Used to remove diagnosis block
         function RemoveDiagnosis(blockNumber) {
             swal({
@@ -1286,10 +1344,10 @@
                      if (isConfirm) {
                          removeDiagnosisBlock(blockNumber);
                      }
-
+                     
                  });
         }
-
+        
         //Validation for HealthCareTeam picklist
         function HealthCareTeam(healthcareTeam1) {
             if(healthcareTeam1 == 'No') {
@@ -1312,7 +1370,7 @@
                      });
             }
         }
-
+        
         //Validation for comatose picklist
         function Comatose(comatose) {
             if(comatose == 'Yes') {
@@ -1335,7 +1393,7 @@
                      });
             }
         }
-
+        
         //Used to reload the page when medical summary attachment is uploaded by Medical Professional
         function refreshGrid() {
             refreshAttachmentSection();
@@ -1360,7 +1418,7 @@
         //     }, 3000);
         //
         // }
-
+        
         function warningBeforeClose(functionClassName) {
             swal({   title: "",
                   text: "Based on the responses provided, you are unable or ineligible to complete this form. Please contact chapter staff if you have any additional questions.",
@@ -1378,13 +1436,13 @@
                      }
                  });
         }
-
+        
         //Used to pass value Describe Patient function
         function doMore(Patient) {
             start(Patient);
         }
-
-
+        
+        
         /****************** Script for Condition Description (Diagnosis) Auto Complete ***************************/
         function ConditionDescription(diagnosisBlock) {
             //var PLACEHOLDER;
@@ -1392,7 +1450,7 @@
             var queryTerm;
             var pdi = ".searchDiagnosisId"+diagnosisBlock;
             var icd = ".diagnosisTextId"+diagnosisBlock;
-
+            
             $(pdi).autocomplete({
                 minLength: 2,
                 source: function(request, response) {
@@ -1435,7 +1493,7 @@
                 var entry = "<a>" + item.Name;
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
-
+                
                 if(item.value ==''){
                     return $('<li class="ui-state-disabled option-disabled">'+item.label+'</li>').prependTo(ul);
                 } else {
@@ -1445,7 +1503,7 @@
                     .appendTo( ul )
                 }
             };
-
+            
             $(pdi).keydown(function(e){
                 // has class 'value-selected' and if key is not tab
                 if (($(this).hasClass('value-selected') && e.keyCode != 9 && e.keyCode != 13) || $(this).val() == ''){
@@ -1498,7 +1556,7 @@
                 $(pdi).siblings('diagnosis-link.').removeClass('clearable')
             }
         }
-
+        
         /****************** Script for ICD Code Auto Complete ***************************/
         function PrimaryDiagnosis(diagnosisBlock) {
             //var PLACEHOLDER;
@@ -1506,7 +1564,7 @@
             var queryTerm;
             var pdi = ".searchDiagnosisId"+diagnosisBlock;
             var icd = ".diagnosisTextId"+diagnosisBlock;
-
+            
             $(icd).autocomplete({
                 minLength: 2,
                 source: function(request, response) {
@@ -1534,7 +1592,7 @@
                     $(pdi).addClass('value-selected');
                     $(icd).addClass('value-selected');
                     $(icd).val(ss1);
-
+                    
                     if(typeof descName != 'undefined'){
                         var ss = $(pdi).html(ui.item.Condition_Description__r.Name).text();
                         $(pdi).val( ui.item.Condition_Description__r.Name);
@@ -1546,13 +1604,13 @@
                     }
                     return false;
                 }
-
+                
             })
             .data( "ui-autocomplete" )._renderItem = function( ul, item ) {
                 var entry = "<a>" + item.Name;
                 entry = entry + "</a>";
                 entry = entry.replace(queryTerm, "<b>" + queryTerm + "</b>");
-
+                
                 if(item.value ==''){
                     return $('<li class="ui-state-disabled option-disabled">'+item.label+'</li>').prependTo(ul);
                 } else {
@@ -1562,7 +1620,7 @@
                     .appendTo( ul )
                 }
             };
-
+            
             $(icd).keydown(function(e){
                 // has class 'value-selected' and if key is not tab.  (Allow tab only) result: reset $(pdi).
                 if (($(this).hasClass('value-selected') || !$(pdi).hasClass('value-selected')) && e.keyCode != 9 && e.keyCode != 13){
@@ -1605,7 +1663,7 @@
                     $(icd).val('');
                     $(icd).prop('disabled',false);
                 }
-
+                
             });
             if ($(icd).hasClass('ICD')){
                 $(icd).siblings('.diagnosis-link').addClass('clearable');
@@ -1646,7 +1704,7 @@
                 }
             }
         }
-
+        
         </script>
     </body>
 </apex:page>

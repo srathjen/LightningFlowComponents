@@ -2,7 +2,7 @@
 Author      : MST Solutions
 Description : This vf page contains all the custom links in one section on the paren wish for each from
 ***************************************************************************************************** -->
-<apex:page standardController="Case" extensions="WishRelatedLinks_AC">
+<apex:page standardController="Case" extensions="WishRelatedLinks_AC" action="{!updateCaseTeamMember}">
     <style>
         table {
         border-collapse: collapse;
@@ -25,6 +25,7 @@ Description : This vf page contains all the custom links in one section on the p
         .tbl td, th { border: 1px solid #CCC; }
     </style>
     <apex:form id="frm">
+        <apex:messages />
         <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"/>
         
         <apex:outputPanel rendered="{!$Profile.Name !='Active Volunteer (Member)' && $Profile.Name != 'Active Volunteer (Login)'}" layout="block" style="margin-top:10px;">
@@ -48,52 +49,42 @@ Description : This vf page contains all the custom links in one section on the p
                 </tr>
                 <apex:outputPanel rendered="{!WishReceipt != Null}">
                     <tr style="width:100%">
-                        <td align="center"><div><a href="#" class="sd">Wish Receipt</a></div></td>
-                        <td align="center"><div><a href="#" class="sd1"> Wish Receipt Spanish</a></div> </td>
+                        <td align="center"><div><apex:commandLink action="{!updateSenderInfo}" value="Wish Receipt">
+                            <apex:param value="wishreceipt" name="wr" assignTo="{!recipitLink}" />
+                            </apex:commandLink></div></td>
+                        <td align="center"><div><apex:commandLink action="{!updateSenderInfo}" value="Wish Receipt Spanish">
+                            <apex:param value="wishreceiptSpanish" name="wrsp" assignTo="{!recipitLink}" />
+                            </apex:commandLink></div></td>
                     </tr>
                 </apex:outputPanel>
                 
+                <tr style="width:100%">
+                    <td align="center"><div><apex:outputLink target="_blank" value="{!WG_StepOne_90days}"> WG Step One 90days </apex:outputLink></div></td>
+                    <td align="center"><div><apex:outputLink target="_blank" value="{!WG_StepOne_90days_Spanish}"> WG Step One 90days Spanish </apex:outputLink></div></td>
+                </tr>
+                
+                 <tr style="width:100%">
+                    <td align="center"><div><apex:outputLink target="_blank" value="{!WG_StepTwo_60days}"> WG Step Two 60days </apex:outputLink></div></td>
+                    <td align="center"><div><apex:outputLink target="_blank" value="{!WG_StepTwo_60days_Spanish}"> WG Step Two 60days Spanish </apex:outputLink></div></td>
+                </tr>
                 
                 <tr style="width:100%">
+                    <td align="center"><div><apex:outputLink target="_blank" value="{!WG_StepThree_30days}"> WG Step Three 30days </apex:outputLink></div></td>
+                    <td align="center"><div><apex:outputLink target="_blank" value="{!WG_StepThree_30days_Spanish}"> WG Step Three 30days Spanish </apex:outputLink></div></td>
+                </tr>
+               
+               <tr style="width:100%">
+                    <td align="center"><div><apex:outputLink target="_blank" value="{!WG_FinalStep_FileClosed}"> WG Final Step File Closed </apex:outputLink></div></td>
+                    <td align="center"><div><apex:outputLink target="_blank" value="{!WG_FinalStep_FileClosed_Spanish}"> WG Final Step File Closed Spanish </apex:outputLink></div></td>
+                </tr>
+               
+                <tr style="width:100%">
                     <td align="center"><div><apex:outputLink target="_blank" value="{!sneakPeek}"> Sneak Peek</apex:outputLink></div></td>
-                    
                 </tr>
                 <tr style="width:100%">
                     <td align="center"><div><apex:outputLink target="_blank" value="{!bioSheet}"> Bio Sheet</apex:outputLink></div></td>
                 </tr>
             </table>
         </apex:outputPanel>
-        <apex:outputPanel id="getVal">
-            <input type="hidden" value="{!recpCheck}" class="hidenfld"/>
-            <input type="hidden" value="{!WishReceipt}" class="hidenfld1"/>  
-            <input type="hidden" value="{!wishReceiptSpanish}" class="hidenfld2"/>    
-        </apex:outputPanel>
-        <apex:actionFunction name="RefreshPage" action="{!updateSenderInfo}" reRender="getVal" onComplete="validateForm();"/>
-        <apex:actionFunction name="RefreshPageSpanish" action="{!updateSenderInfo}" reRender="getVal" onComplete="validateSpanishForm();"/>
-        
-        <script>
-        $(".sd").on('click', function() {
-            RefreshPage();
-        });
-        function validateForm() {
-            
-            if($('.hidenfld').val() == 'Allow') {
-                window.open($('.hidenfld1').val());
-            } else if($('.hidenfld').val() == 'Not Allow') {
-                alert('There should be atleast one recipient with valid email and name');
-            }
-        }
-        
-        $(".sd1").on('click', function() {
-            RefreshPageSpanish();
-        });
-        function validateSpanishForm() {
-            if($('.hidenfld').val() == 'Allow') {
-                window.open($('.hidenfld2').val());
-            } else if($('.hidenfld').val() == 'Not Allow') {
-                alert('There should be atleast one recipient with valid email and name');
-            }
-        }
-        </script>
     </apex:form>                 
 </apex:page>

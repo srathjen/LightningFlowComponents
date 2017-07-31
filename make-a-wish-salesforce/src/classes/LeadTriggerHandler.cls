@@ -101,7 +101,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             }
             
             for(Lead convertedLeads : [SELECT Id,Name,DOB__c,FirstName, Why_do_you_feel_would_be_eligible_Wish__c, LastName,createdDate,Migrated_Record__c,I_am_Recognized_To_Practice_As_a__c,Sibling_Detail__c,Medical_Provider_Category__c,ChapterName__r.Name,ChapterName__c,Treating_Medical_Professional_First_Name__c,ConvertedContactId,ConvertedAccountId,
-                                       Other_Relationship_To_Child__c,Relationship_to_child__c,LeadSource,
+                                       Other_Relationship_To_Child__c,Relationship_to_child__c,LeadSource,Treating_Medical_Professional_Phone__c,Treating_Medical_Professional_Email__c,
                                        is_Family_Aware_of_Referral__c,Treating_Medical_Professional_Last_Name__c,Referrer_City__c,
                                        Referrer_Email__c,Referrer_FirstName__c,Referrer_Last_Name__c,Referrer_Phone__c,Referrer_Zip__c,
                                        Parent_First_Name__c,What_is_the_family_s_primary_spoken_lang__c,Parent_Last_Name__c,Email,
@@ -112,7 +112,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                        Additional_Parent_Email__c,Additional_Parent_Phone__c,Additional_Parent_Postal_Code__c,
                                        Additional_Parent_State__c,Additional_Parent_Street__c,Hidden_Additional_Parent_Id__c,
                                        Hidden_Best_Contact_Person_Id__c,Parent_Relationship_to_Child__c,
-                                       Additional_Parent_Relationship_to_Child__c
+                                       Additional_Parent_Relationship_to_Child__c,How_Did_you_hear_about_Make_A_Wish__c
                                        FROM Lead WHERE Id IN: convertedLeadIds])
              {
                                            leadFamilyMap.put(convertedLeads.Id,convertedLeads);
@@ -129,7 +129,14 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                                npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
                                                newRelationShip.npe4__Contact__c = convertedLeads.ConvertedContactId;
                                                newRelationShip.npe4__Type__c = 'Medical Professional';
-                                               newRelationShip.Referring_Medical_Professional__c = true;
+                                               If(convertedLeads.Treating_Medical_Professional_First_Name__c == convertedLeads.Referrer_FirstName__c
+                                                    && convertedLeads.Treating_Medical_Professional_Last_Name__c == convertedLeads.Referrer_Last_Name__c && 
+                                                    (convertedLeads.Treating_Medical_Professional_Phone__c == convertedLeads.Referrer_Phone__c 
+                                                    || convertedLeads.Treating_Medical_Professional_Email__c == convertedLeads.Referrer_Email__c)){
+                                                                  
+                                                                   newRelationShip.Referring_Medical_Professional__c = true;
+                                               }
+                                               newRelationShip.Qualifying_Medical_Professional__c = True;
                                                newRelationShip.npe4__RelatedContact__c = convertedLeads.Treating_Medical_Professional_Contact_Id__c;
                                                newRelationShip.npe4__Status__c = 'Active';
                                                relationShipList.add(newRelationShip);
@@ -141,9 +148,17 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                            if(convertedLeads.Medical_Professional_ContactId__c != Null ){
                                                
                                                npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
-                                               newRelationShip.npe4__Contact__c = convertedLeads.ConvertedContactId;
+                                               newRelationShip.npe4__Contact__c = convertedLeads.ConvertedContactId;                                               
                                                newRelationShip.npe4__Type__c = 'Medical Professional';
-                                               newRelationShip.Qualifying_Medical_Professional__c = true;
+                                               newRelationShip.Referring_Medical_Professional__c = true;
+                                               If(convertedLeads.Treating_Medical_Professional_First_Name__c == convertedLeads.Referrer_FirstName__c
+                                                    && convertedLeads.Treating_Medical_Professional_Last_Name__c == convertedLeads.Referrer_Last_Name__c && 
+                                                    (convertedLeads.Treating_Medical_Professional_Phone__c == convertedLeads.Referrer_Phone__c 
+                                                    || convertedLeads.Treating_Medical_Professional_Email__c == convertedLeads.Referrer_Email__c)){
+                                                       
+                                                       newRelationShip.Qualifying_Medical_Professional__c = True; 
+                                                }
+                                                        
                                                newRelationShip.npe4__RelatedContact__c = convertedLeads.Medical_Professional_ContactId__c ;
                                                newRelationShip.npe4__Status__c = 'Active';
                                                relationShipList.add(newRelationShip);
@@ -157,6 +172,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                                newRelationShip.npe4__Contact__c = convertedLeads.ConvertedContactId;
                                                newRelationShip.npe4__Type__c = convertedLeads.Parent_Relationship_to_Child__c;
                                                //newRelationShip.npe4__Type__c = 'Family';
+                                               newRelationShip.Hidden_isparentFirst__c = True;
                                                newRelationShip.npe4__RelatedContact__c = convertedLeads.Wish_Family_ContactId__c;
                                                newRelationShip.npe4__Status__c = 'Active';
                                                if(ConvertedLeads.Relationship_to_Child__c == 'Parent/Guardian')
@@ -172,6 +188,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                                npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
                                                newRelationShip.npe4__Contact__c = convertedLeads.ConvertedContactId;
                                                //newRelationShip.npe4__Type__c = 'Family';
+                                                newRelationShip.Hidden_isparentFirst__c = False;
                                                newRelationShip.npe4__Type__c = convertedLeads.Additional_Parent_Relationship_to_Child__c;
                                                newRelationShip.npe4__RelatedContact__c = convertedLeads.Hidden_Additional_Parent_Id__c;
                                                newRelationShip.npe4__Status__c = 'Active';
@@ -190,6 +207,21 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                                newRelationShip.npe4__Type__c = 'Medical Professional';
                                                newRelationShip.npe4__RelatedContact__c = convertedLeads.Hidden_Best_Contact_Person_Id__c;
                                                newRelationShip.npe4__Status__c = 'Active';
+                                               if(convertedLeads.Best_Contact_for_Physician_First_Name__c == convertedLeads.Referrer_FirstName__c
+                                                    && convertedLeads.Best_Contact_for_Physician_Last_Name__c == convertedLeads.Referrer_Last_Name__c && 
+                                                    (convertedLeads.Best_contact_for_Physician_Email__c == convertedLeads.Referrer_Email__c))
+                                             {
+                                                               newRelationShip.Referring_Medical_Professional__c = true;
+                                                               //newRelationShip.Qualifying_Medical_Professional__c = True; 
+                                                }
+                                                
+                                                 if(convertedLeads.Treating_Medical_Professional_First_Name__c == convertedLeads.Best_Contact_for_Physician_First_Name__c
+                                                        && convertedLeads.Treating_Medical_Professional_Last_Name__c == convertedLeads.Best_Contact_for_Physician_Last_Name__c && 
+                                                       (convertedLeads.Treating_Medical_Professional_Email__c == convertedLeads.Best_contact_for_Physician_Email__c)){
+                                                       
+                                                       newRelationShip.Qualifying_Medical_Professional__c = True;
+                                                  }
+                                                
                                                relationShipList.add(newRelationShip);
                                            }
                                            
@@ -222,7 +254,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
             }
             
             List<cg__ContactFile__c> ContactFileFolders = new List<cg__ContactFile__c>();
-            for(contact con : [SELECT Id,FirstName,Birthdate,Language__c,Migrated_Record__C,Lead_Created_Date__c,Relationship_to_Wish_Child__c,Referrer_FirstName__c,Referrer_Last_Name__c,Referrer_Phone__c,Referrer_Email__c,Referrer_City__c,Referrer_Zip__c,Relationship__c,Inquiry_Referral_Method__c,Is_Family_Aware_of_Referral__c,Parent_Guardian_Name__c,RecordTypeId,AccountId,LastName,MailingCity,OwnerId,MailingState,MailingPostalCode FROM Contact WHERE Id in:conId]){
+            for(contact con : [SELECT Id,FirstName,Birthdate,Language__c,Migrated_Record__C,Lead_Created_Date__c,Relationship_to_Wish_Child__c,Referrer_FirstName__c,Referrer_Last_Name__c,Referrer_Phone__c,Referrer_Email__c,Referrer_City__c,Referrer_Zip__c,Relationship__c,Inquiry_Referral_Method__c,Is_Family_Aware_of_Referral__c,Parent_Guardian_Name__c,RecordTypeId,AccountId,LastName,MailingCity,OwnerId,MailingState,MailingPostalCode,Wish_How_Did_you_hear_about_Make_A_Wish__c  FROM Contact WHERE Id in:conId]){
                 IF(convertedLeadMap.containsKey(con.Id)){
                     
                     con.Lead_Created_Date__c = Date.valueOf(convertedLeadMap.get(con.Id).createdDate);
@@ -241,7 +273,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     con.Relationship_to_Wish_Child__c=convertedLeadMap.get(con.Id).Other_Relationship_To_Child__c;
                     con.Is_Family_Aware_of_Referral__c =convertedLeadMap.get(con.Id).Is_Family_Aware_of_Referral__c;
                     con.migrated_Record__c = convertedLeadMap.get(con.Id).migrated_record__c;
-                  //  con.Wish_How_Did_you_hear_about_Make_A_Wish__c = convertedLeadMap.get(con.Id).How_Did_you_hear_about_Make_A_Wish__c;
+                    con.Wish_How_Did_you_hear_about_Make_A_Wish__c = convertedLeadMap.get(con.Id).How_Did_you_hear_about_Make_A_Wish__c;
                     
                     con.Hidden_Medical_Physician__c = convertedLeadMap.get(con.Id).Treating_Medical_Professional_First_Name__c+' '+convertedLeadMap.get(con.Id).Treating_Medical_Professional_Last_Name__c;
                     conMap.put(con.Id,con);
@@ -380,6 +412,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newcase .RecordTypeId = parentwishRecTypeId;
                     newcase.contactId = convertLeads.getcontactId();
                     newCase.Hidden_Lead_Id__c = convertLeads.getLeadId();
+                    newCase.Qualified_Date__c = System.today();
                     newCase.Migrated_Record__c = LeadMap.get(convertLeads.getLeadId()).Migrated_Record__c; 
                     newCase.Qualifying_Medical_Professional_Name__c=LeadMap.get(convertLeads.getLeadId()).Treating_Medical_Professional_First_Name__c +' '+LeadMap.get(convertLeads.getLeadId()).Treating_Medical_Professional_Last_Name__c;
                     newcase.Qualifying_Medical_Professional_Email__c=LeadMap.get(convertLeads.getLeadId()).Treating_Medical_Professional_Email__c;
@@ -543,6 +576,14 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         if(leadIdSet.size() > 0){
             dupeCheckonAccount(convertedLeadIds);
         }
+        
+        List<npe5__Affiliation__c> affliationList = new List<npe5__Affiliation__c>();
+        for(npe5__Affiliation__c currAff : [SELECT Id,npe5__Contact__c,Constituent_Code__c FROM npe5__Affiliation__c WHERE npe5__Contact__c IN :conMap.Keyset() AND Constituent_Code__c ='Wish Family']){
+            currAff.Constituent_Code__c ='Wish Child';
+            affliationList.add(currAff);
+        }
+        if(affliationList.Size() > 0)
+            Update affliationList;
     } 
     
     
@@ -630,7 +671,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
         
         List<Contact> newContactList = new List<Contact>();
         Map<String,String> relationshipTypeMap = new Map<String,String>();
-        
+        Map<string,Boolean> firstParentMap = new Map<string,Boolean>();
         
         for(Lead processConvertedLead : convertedLeadMap.Values()){
             convertedConId = processConvertedLead.ConvertedContactId;
@@ -642,12 +683,13 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 && ((processConvertedLead.Treating_Medical_Professional_Last_Name__c == processConvertedLead.Referrer_Last_Name__c)
                 && (processConvertedLead.Referrer_Last_Name__c == processConvertedLead.Best_Contact_for_Physician_Last_Name__c) 
                 && (processConvertedLead.Treating_Medical_Professional_Last_Name__c == processConvertedLead.Best_Contact_for_Physician_Last_Name__c))
-                && (processConvertedLead.Treating_Medical_Professional_Phone__c == processConvertedLead.Referrer_Phone__c)
-                || ((processConvertedLead.Treating_Medical_Professional_Email__c == processConvertedLead.Referrer_Email__c) 
+                && ((processConvertedLead.Treating_Medical_Professional_Phone__c == processConvertedLead.Referrer_Phone__c)
+                || (processConvertedLead.Treating_Medical_Professional_Email__c == processConvertedLead.Referrer_Email__c)) 
                 && (processConvertedLead.Referrer_Email__c == processConvertedLead.Best_contact_for_Physician_Email__c)
-                && (processConvertedLead.Treating_Medical_Professional_Email__c  == processConvertedLead.Best_contact_for_Physician_Email__c)))
+                && (processConvertedLead.Treating_Medical_Professional_Email__c  == processConvertedLead.Best_contact_for_Physician_Email__c))
                {
-                   if(processConvertedLead.Relationship_to_child__c == 'Medical Professional'){
+                   if(processConvertedLead.Relationship_to_child__c == 'Medical Professional' && processConvertedLead.Medical_Professional_ContactId__c == Null &&
+                                   processConvertedLead.Treating_Medical_Professional_Contact_Id__c == Null && processConvertedLead.Hidden_Best_Contact_Person_Id__c == Null){
                        sameReferringFirstNameSet.add(processConvertedLead.Treating_Medical_Professional_First_Name__c);
                        sameReferringLastNameSet.add(processConvertedLead.Treating_Medical_Professional_Last_Name__c);
                        sameReferringPhoneNameSet.add(processConvertedLead.Treating_Medical_Professional_Phone__c);
@@ -662,7 +704,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     (processConvertedLead.Treating_Medical_Professional_Phone__c == processConvertedLead.Referrer_Phone__c 
                     || processConvertedLead.Treating_Medical_Professional_Email__c == processConvertedLead.Referrer_Email__c))
              {
-                   if(processConvertedLead.Relationship_to_child__c == 'Medical Professional')
+                   if(processConvertedLead.Relationship_to_child__c == 'Medical Professional' && (processConvertedLead.Medical_Professional_ContactId__c == Null && processConvertedLead.Treating_Medical_Professional_Contact_Id__c == Null ))
                    {
                        sameReferringFirstNameSet.add(processConvertedLead.Treating_Medical_Professional_First_Name__c);
                        sameReferringLastNameSet.add(processConvertedLead.Treating_Medical_Professional_Last_Name__c);
@@ -680,10 +722,10 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                
                
             else if(processConvertedLead.Treating_Medical_Professional_First_Name__c == processConvertedLead.Best_Contact_for_Physician_First_Name__c
-                    && processConvertedLead.Treating_Medical_Professional_Last_Name__c == processConvertedLead.Best_Contact_for_Physician_Last_Name__c && 
+                    && processConvertedLead.Treating_Medical_Professional_Last_Name__c == processConvertedLead.Best_Contact_for_Physician_Last_Name__c  &&
                    (processConvertedLead.Treating_Medical_Professional_Email__c == processConvertedLead.Best_contact_for_Physician_Email__c))
             {
-                   if(processConvertedLead.Relationship_to_child__c == 'Medical Professional')
+                   if(processConvertedLead.Relationship_to_child__c == 'Medical Professional' && processConvertedLead.Hidden_Best_Contact_Person_Id__c == Null &&  processConvertedLead.Treating_Medical_Professional_Contact_Id__c == Null)
                    {
                        sameReferringFirstNameSet.add(processConvertedLead.Treating_Medical_Professional_First_Name__c);
                        sameReferringLastNameSet.add(processConvertedLead.Treating_Medical_Professional_Last_Name__c);
@@ -704,14 +746,14 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     && processConvertedLead.Best_Contact_for_Physician_Last_Name__c == processConvertedLead.Referrer_Last_Name__c && 
                     (processConvertedLead.Best_contact_for_Physician_Email__c == processConvertedLead.Referrer_Email__c))
              {
-                   if(processConvertedLead.Relationship_to_child__c == 'Medical Professional')
+                   if(processConvertedLead.Relationship_to_child__c == 'Medical Professional' && processConvertedLead.Medical_Professional_ContactId__c == Null && processConvertedLead.Hidden_Best_Contact_Person_Id__c == Null)
                    {
                        sameReferringFirstNameSet.add(processConvertedLead.Referrer_FirstName__c);
                        sameReferringLastNameSet.add(processConvertedLead.Referrer_Last_Name__c );
                        sameReferringPhoneNameSet.add(processConvertedLead.Referrer_Phone__c);
                        sameReferringEmailNameSet.add(processConvertedLead.Referrer_Email__c);
                    }
-                    if(processConvertedLead.Treating_Medical_Professional_Last_Name__c != Null && processConvertedLead.Medical_Professional_ContactId__c == Null)
+                    if(processConvertedLead.Treating_Medical_Professional_Last_Name__c != Null && processConvertedLead.Treating_Medical_Professional_Contact_Id__c == Null)
                      {
                         referringFirstNameSet.add(processConvertedLead.Treating_Medical_Professional_First_Name__c);
                         referringLastNameSet.add(processConvertedLead.Treating_Medical_Professional_Last_Name__c);
@@ -812,6 +854,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                             newWishFamily.Type_Of_Contact__c = 'Parent/Guardian';
                             
                 newContactList.add(newWishFamily);
+                firstParentMap.put(newWishFamily.FirstName + '-' + newWishFamily.LastName + '-' + newWishFamily.Email+ '-' + newWishFamily.Phone,true);
                 relationshipTypeMap.put(newWishFamily.FirstName + '-' + newWishFamily.LastName + '-' + newWishFamily.Email+ '-' + newWishFamily.Phone,processConvertedLead.Parent_Relationship_to_Child__c);
             }
           /*  if(WishFamilyContactList.size() > 0){
@@ -855,6 +898,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 //newWishFamily.Relationship__c = processConvertedLead.Relationship_to_child__c;
                 newWishFamily.Migrated_Record__c = processConvertedLead.Migrated_Record__c;
                 //relationshipTypeMap.put();
+                firstParentMap.put(newWishFamily.FirstName + '-' + newWishFamily.LastName + '-' + newWishFamily.Email+ '-' + newWishFamily.Phone,false);
                relationshipTypeMap.put(newWishFamily.FirstName + '-' + newWishFamily.LastName + '-' + newWishFamily.Email+ '-' + newWishFamily.Phone,processConvertedLead.Additional_Parent_Relationship_to_Child__c);
                 newContactList.add(newWishFamily);
             }
@@ -1045,6 +1089,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                         }
                         else if(currContact.RecordTypeId == wishFamilyRecordTypeId)
                         {
+                          newRelationShip.Hidden_isparentFirst__c = firstParentMap.get(currContact.FirstName+ '-' + currContact.LastName + '-' + currContact.Email+ '-' +currContact.Phone);
                           newRelationShip.npe4__Type__c = relationshipTypeMap.get(currContact.FirstName+ '-' + currContact.LastName + '-' + currContact.Email+ '-' +currContact.Phone);
                         }
                         if(currContact.Type_Of_Contact__c == 'Referring' || currContact.Type_Of_Contact__c == 'Parent/Guardian')
@@ -1171,7 +1216,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 {
                     currLead.Short_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Short_Description__c;
                     currLead.Long_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Long_Description__c;
-                    currLead.Group_1__c  = icdCodesMap.get(currLead.PD_ICD_Code__c).Group1__c ;
+                    //currLead.Group_1__c  = icdCodesMap.get(currLead.PD_ICD_Code__c).Group1__c ;
                     if(icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__c != Null)
                     {
                         currLead.PD_Condition_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Name;

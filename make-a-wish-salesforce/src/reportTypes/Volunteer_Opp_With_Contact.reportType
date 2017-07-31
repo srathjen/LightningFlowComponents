@@ -1570,17 +1570,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>IsApproved__c</field>
-            <table>Contact.Volunteer_Opportunities1__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Is_Non_Viewable__c</field>
-            <table>Contact.Volunteer_Opportunities1__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>isRejected__c</field>
             <table>Contact.Volunteer_Opportunities1__r</table>
         </columns>
         <columns>

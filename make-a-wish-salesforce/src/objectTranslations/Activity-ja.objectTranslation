@@ -315,6 +315,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- System Generated Task --></label>
+        <name>SystemGeneratedTask__c</name>
+    </fields>
+    <fields>
         <label><!-- TaskVolunteerRole --></label>
         <name>TaskVolunteerRole__c</name>
     </fields>

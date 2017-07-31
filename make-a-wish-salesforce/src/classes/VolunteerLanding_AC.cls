@@ -146,12 +146,14 @@ public class VolunteerLanding_AC {
     public list<Non_Wish_Events__c> getEvents() {
         eventsRTId = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.events).getRecordTypeId();
         List<Non_Wish_Events__c> eventRecords = [SELECT id,Name,Event_Name__c, Priority__c,Event_Image__c,Event_Text__c,Event_Date__c
-                                                 FROM Non_Wish_Events__c  WHERE chapter__c = :currentChapter  AND Event_Date__c >= :Date.Today() AND RecordTypeId = :eventsRTId AND priority__c != Null order by priority__c ASC limit 4];
+                                                 //FROM Non_Wish_Events__c  WHERE chapter__c = :currentChapter  AND Event_Date__c >= :Date.Today() AND RecordTypeId = :eventsRTId AND priority__c != Null order by priority__c ASC limit 4];
+                                                 FROM Non_Wish_Events__c  WHERE chapter__c = :currentChapter  AND Event_Date__c >= :Date.Today() AND priority__c != Null order by priority__c ASC, Event_Date__c ASC limit 4];
         
         if(eventRecords.size() < 4)
         {
             for(Non_Wish_Events__c  currRec : [SELECT id,Name,Event_Name__c, Priority__c,Event_Image__c,Event_Text__c,Event_Date__c
-                                               FROM Non_Wish_Events__c  WHERE chapter__c = :currentChapter  AND Event_Date__c >= :Date.Today() AND RecordTypeId = :eventsRTId AND priority__c = Null limit 4])
+                                               //FROM Non_Wish_Events__c  WHERE chapter__c = :currentChapter  AND Event_Date__c >= :Date.Today() AND RecordTypeId = :eventsRTId AND priority__c = Null limit 4])
+                                               FROM Non_Wish_Events__c  WHERE chapter__c = :currentChapter  AND Event_Date__c >= :Date.Today() AND priority__c = Null ORDER BY Event_Date__c ASC limit 4])
             {
                 
                 if(eventRecords.size() < 4)
@@ -213,52 +215,55 @@ insert dynamicContentShare;
     
     
     public void BackgroundCheck(boolean displayPopupconflict)
-    {	
-        
-        
-            Integer bcDays = Integer.valueOf(label.B_C_No_of_days_for_expiration);
+    {   
+        System.debug('------------------');
+        Integer bcDays = Integer.valueOf(label.B_C_No_of_days_for_expiration);
         User currUser = [SELECT contactId FROM User WHERE Id = :userInfo.getUserId()];
-        //List<Background_check__c> currVolBGCheck = [SELECT Id,Volunteer__c, Date_Completed__c,Date__c,status__c FROM Background_check__c WHERE Volunteer__c = :currUser.contactId  Order by CreatedDate DESC limit 2];
-        List<Background_check__c> currVolBGCheck = [SELECT Id,Volunteer__c, Date_Completed__c,Date__c,status__c FROM Background_check__c WHERE Volunteer__c = :currUser.contactId AND Current__c = True limit 1];
+        List<Background_check__c> currVolBGCheck = [SELECT Id,Volunteer__c, Current__c, Date_Completed__c,Date__c,status__c FROM Background_check__c WHERE Volunteer__c = :currUser.contactId  Order by CreatedDate DESC limit 2];
+        //List<Background_check__c> currVolBGCheck = [SELECT Id,Volunteer__c, Date_Completed__c,Date__c,status__c FROM Background_check__c WHERE Volunteer__c = :currUser.contactId AND Current__c = True limit 1];
         List<Volunteer_Roles__c> DbVolRoleBGReqCheck = [SELECT Id, Chapter_Role__c, Volunteer_Name__c, Status__c, Chapter_Role__r.Background_Check_Required__c 
-                                                        FROM Volunteer_Roles__c WHERE (Status__c != 'Not Approved' AND Status__c != 'Former - Chapter' AND Status__c != 'Former - Volunteer' AND Status__c != 'Out of Compliance') AND Chapter_Role__r.Background_Check_Required__c =: true
+                                                        FROM Volunteer_Roles__c WHERE (Status__c != 'Not Approved' AND Status__c != 'Former - Chapter' AND Status__c != 'Former - Volunteer') AND Chapter_Role__r.Background_Check_Required__c =: true
                                                            AND Volunteer_Name__c  =: currUser.contactId];
         isExpired = false;
         blockNewBG = false;
         displayPopup = false;
-        if(currVolBGCheck.size() > 0)
-        {
-            if(currVolBGCheck[0].Date__c != Null)
-                nBCDays  = (Date.Today()).daysBetween(currVolBGCheck[0].Date__c); 
-            else
-                blockNewBG = True; 
-            System.debug('nBCDays  +++++++++++++++++++++ ' + nBCDays);
-        }
         
-        if(currVolBGCheck.size() > 0 && displayPopupconflict != True && isTrained==True)
-        {
-            
-            if(currVolBGCheck[0].Date__c >= Date.Today()  && currVolBGCheck[0].Date__c < Date.Today().addDays(bcDays) && DbVolRoleBGReqCheck.size() > 0)
-            {
+        
+        If(currVolBGCheck.size() == 1) {
+            if(currVolBGCheck[0].Date__c >= Date.Today() && Date.Today().daysBetween(currVolBGCheck[0].Date__c) < 30 && currVolBGCheck[0].Status__c != 'Rejected' && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[0].Current__c == true) {
+                nBCDays  = (Date.Today()).daysBetween(currVolBGCheck[0].Date__c); 
+                displayPopup = True;
+                flagForCancel = true;
+            } else if(currVolBGCheck[0].Date__c < Date.Today() && currVolBGCheck[0].Status__c != 'Rejected' && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[0].Current__c == true) {
+                displayPopUp = True;
+                flagForCancel = false;
+                isExpired = true;
+            } else if(currVolBGCheck[0].Status__c == 'Rejected' && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[0].Current__c == true) {
+                isExpired = true;
+            }
+        } else if(currVolBGCheck.size() == 2) {
+            if(currVolBGCheck[0].Date__c == null && currVolBGCheck[1].Date__c > Date.Today() && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[1].Current__c == true) {
+                if(currVolBGCheck[1].Status__c == 'Rejected') {
+                    blockNewBG = true;
+                }
+            } else if(currVolBGCheck[0].Date__c == null && currVolBGCheck[1].Date__c < Date.Today() && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[1].Current__c == true) {
+                if(currVolBGCheck[1].Status__c != 'Rejected') {
+                    blockNewBG = true;
+                }
+            } else if(currVolBGCheck[0].Date__c > Date.Today() && Date.Today().daysBetween(currVolBGCheck[0].Date__c) < 30 && currVolBGCheck[0].Status__c != 'Rejected' && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[0].Current__c == true) {
+                nBCDays  = (Date.Today()).daysBetween(currVolBGCheck[0].Date__c);
                 displayPopup = True;
                 flagForCancel = true;
                 
-            }
-            else if(currVolBGCheck[0].Date__c < Date.Today() && DbVolRoleBGReqCheck.size() > 0)
-            {
-                displayPopup = True;
+            } else if(currVolBGCheck[0].Date__c <= Date.Today() && currVolBGCheck[0].Status__c != 'Rejected' && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[0].Current__c == true) {
+                nBCDays  = (Date.Today()).daysBetween(currVolBGCheck[0].Date__c);
+                displayPopUp = True;
                 flagForCancel = false;
-                isExpired  = true;
-            }
-        }
-        
-        /*if(currVolBGCheck.size() > 1 && displayPopupconflict != True && displayPopup != True)
-        {
-            if(currVolBGCheck[0].status__c != 'Approved' && (currVolBGCheck[1].date__c < Date.Today()))
-            {
+                isExpired = true;
+            } else if(currVolBGCheck[0].Status__c == 'Rejected' && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[0].Current__c == true) {
                 blockNewBG = true;
             }
-        }*/
+        }
         
         if(displayPopup == false && blockNewBG == false)
         {

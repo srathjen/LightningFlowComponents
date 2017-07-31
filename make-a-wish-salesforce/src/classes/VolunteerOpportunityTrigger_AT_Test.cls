@@ -2,7 +2,7 @@
 Author      : MST Solutions
 CreatedBy   : Kanagaraj
 Date        : 28/06/2016
-Description : VolunteerOpportunityTrigger_AT_Test is used to increase the code coverage for contact_AT trigger and contactTriggerHandler.
+Description : VolunteerOpportunityTrigger_AT_Test is used to increase the code coverage for VolunteerOpportunityTrigger_AT trigger and VolunteerOpportunityTriggerHandler.
 *****************************************************************************************************/
 @isTest
 public class VolunteerOpportunityTrigger_AT_Test {
@@ -20,9 +20,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
         List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
         for(Volunteer_Opportunity__c processVolOpportunities : wishVolunteerOpportunityList){
             processVolOpportunities.Volunteer_Name__c = VolunteerContact.Id;
-            processVolOpportunities.IsApproved__c = false;
             volunteerOpportunityList.add(processVolOpportunities);
-            
         }
         update volunteerOpportunityList;
         return volunteerOpportunityList;
@@ -31,9 +29,8 @@ public class VolunteerOpportunityTrigger_AT_Test {
     
     public testmethod static void updateVolunteerOpportunity(){
         List<Volunteer_Opportunity__c> volOppList  = VolunteerOpportunityTrigger_AT_Test.SubmittoApproval();
-         List<Volunteer_Opportunity__c> updateVOlOpportunity = new  List<Volunteer_Opportunity__c>();
+        List<Volunteer_Opportunity__c> updateVOlOpportunity = new  List<Volunteer_Opportunity__c>();
         for(Volunteer_Opportunity__c currOpp : volOppList){
-            currOpp.IsApproved__c = False;
             updateVOlOpportunity.add(currOpp);
         }
         update updateVOlOpportunity;
@@ -52,7 +49,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
             List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,1);
             Volunteer_Opportunity__c updateVolOpportunity = new Volunteer_Opportunity__c();
             updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
-            updateVolOpportunity.IsApproved__c = true;
+            updateVolOpportunity.Status__c = 'Approved';
             updateVolOpportunity.Volunteer_Name__c = VolunteerContact.Id;
             update updateVolOpportunity;
             system.debug('@@@@@@ updateVolOpportunity @@@@@@@@@'+updateVolOpportunity);
@@ -71,12 +68,10 @@ public class VolunteerOpportunityTrigger_AT_Test {
         OrientationandTrainingUtil.createVolunteerCount(nonWishEvent.Id,chapterRole.Id,3);
         Volunteer_Opportunity__c volOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);     
         volOpportunity.Volunteer_Name__c  = volunteerContact.Id;
-        volOpportunity.IsApproved__c = true;
         update volOpportunity;
         Volunteer_Opportunity__c  deleteOpportunity = new Volunteer_Opportunity__c ();
         deleteOpportunity.Id = volOpportunity.Id;
         deleteOpportunity.Volunteer_Name__c  = Null;
-        deleteOpportunity.IsApproved__c = true;
         update deleteOpportunity;
         delete deleteOpportunity;
     }
@@ -95,7 +90,6 @@ public class VolunteerOpportunityTrigger_AT_Test {
             List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,1);
             Volunteer_Opportunity__c updateVolOpportunity = new Volunteer_Opportunity__c();
             updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
-            updateVolOpportunity.IsApproved__c = true;
             updateVolOpportunity.Volunteer_Name__c = VolunteerContact.Id;
             updateVolOpportunity.Reason_Inactive__c = 'Moved';
             update updateVolOpportunity;
@@ -115,7 +109,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
         OrientationandTrainingUtil.createVolunteerCount(nonWishEvent.Id,chapterRole.Id,3);
         Volunteer_Opportunity__c volOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);     
         volOpportunity.Volunteer_Name__c  = volunteerContact.Id;
-        volOpportunity.IsApproved__c = true;
+        volOpportunity.Status__c = 'Approved';
         volOpportunity.Reason_Inactive__c = 'Moved';
         update volOpportunity;
         
@@ -134,12 +128,12 @@ public class VolunteerOpportunityTrigger_AT_Test {
         Volunteer_Opportunity__c volOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);     
         Volunteer_Opportunity__c nonWishvolOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);     
         volOpportunity.Volunteer_Name__c  = volunteerContact.Id;
-        volOpportunity.IsApproved__c = true;
+        volOpportunity.Status__c = 'Approved';
         update volOpportunity;
         Volunteer_Opportunity__c  deleteOpportunity = new Volunteer_Opportunity__c ();
         deleteOpportunity.Id = volOpportunity.Id;
         deleteOpportunity.Volunteer_Name__c  = Null;
-        deleteOpportunity.IsApproved__c = true;
+        deleteOpportunity.Status__c = 'Approved';
         update deleteOpportunity;
         delete deleteOpportunity;
     }
@@ -154,10 +148,19 @@ public class VolunteerOpportunityTrigger_AT_Test {
         Non_Wish_Events__c nonWishEvent = OrientationandTrainingUtil.CreateEventRec(chapterRole.Id,chapterAccount.Id);
         OrientationandTrainingUtil.createVolunteerCount(nonWishEvent.Id,chapterRole.Id,3);
         Volunteer_Opportunity__c volOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);     
+        Volunteer_Opportunity__c nonWishvolOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);   
         volOpportunity.Volunteer_Name__c  = volunteerContact.Id;
-        volOpportunity.IsApproved__c = false;
+        volOpportunity.Status__c = 'Approved';
+        volOpportunity.Chapter_Role_Opportunity__c = chapterRole.id;
+        volOpportunity.Reason_Inactive__c = Null;
         update volOpportunity;
-        delete volOpportunity;
+        Volunteer_Opportunity__c  deleteOpportunity = new Volunteer_Opportunity__c ();
+        deleteOpportunity.Id = volOpportunity.Id;
+        deleteOpportunity.Volunteer_Name__c  = volunteerContact.id;
+        deleteOpportunity.Chapter_Role_Opportunity__c = chapterRole.id;
+        deleteOpportunity.Reason_Inactive__c = Null;
+        update deleteOpportunity;
+        delete deleteOpportunity;
         
     }
     
@@ -182,10 +185,10 @@ public class VolunteerOpportunityTrigger_AT_Test {
             Non_Wish_Events__c nonWishEvent = OrientationandTrainingUtil.CreateEventRec(chapterRole.Id,chapterAccount.Id);
             OrientationandTrainingUtil.createVolunteerCount(nonWishEvent.Id,chapterRole.Id,3);
             Volunteer_Opportunity__c volOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);     
-       }
-  }
-  
-  public testmethod static List<Volunteer_Opportunity__c>  RejectedWish(){   
+        }
+    }
+    
+    public testmethod static List<Volunteer_Opportunity__c>  RejectedWish(){   
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();   
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild(); 
         Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
@@ -196,7 +199,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
         List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
         for(Volunteer_Opportunity__c processVolOpportunities : wishVolunteerOpportunityList){
             processVolOpportunities.Volunteer_Name__c = VolunteerContact.Id;
-            processVolOpportunities.isRejected__c = true;
+            processVolOpportunities.Reason_Inactive__c = 'Not Approved';
             volunteerOpportunityList.add(processVolOpportunities);
             
         }
@@ -204,7 +207,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
         return volunteerOpportunityList;
     }
     
-     public testmethod static void  RejectedNonWish(){   
+    public testmethod static void  RejectedNonWish(){   
         
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
@@ -214,12 +217,11 @@ public class VolunteerOpportunityTrigger_AT_Test {
         OrientationandTrainingUtil.createVolunteerCount(nonWishEvent.Id,chapterRole.Id,3);
         Volunteer_Opportunity__c volOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);     
         volOpportunity.Volunteer_Name__c  = volunteerContact.Id;
-        volOpportunity.isRejected__c = true;
         update volOpportunity;
         delete volOpportunity;
-   }
+    }
     
-     public testmethod static void  RemoveCaseTeamMember(){   
+    public testmethod static void  RemoveCaseTeamMember(){   
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();   
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild(); 
         Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
@@ -227,14 +229,13 @@ public class VolunteerOpportunityTrigger_AT_Test {
         Role__c  roleName = OrientationandTrainingUtil.createRole();
         Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
         System.RunAs(new User(Id = UserInfo.getUserId())){
-        
+            
             User currUser = OrientationandTrainingUtil.createActiveVolunteerUser(VolunteerContact.id);
             CaseTeamRole dbRole = [SELECT Id,Name From CaseTeamRole WHERE Name =: 'Wish Granter' Limit 1];
             CaseTeamMember caseMem = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,currUser.id,dbRole.Id);
             List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,1);
             Volunteer_Opportunity__c updateVolOpportunity = new Volunteer_Opportunity__c();
             updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
-            updateVolOpportunity.IsApproved__c = true;
             updateVolOpportunity.Reason_Inactive__c = 'Non-responsive';
             updateVolOpportunity.Volunteer_Name__c = VolunteerContact.Id;
             update updateVolOpportunity;

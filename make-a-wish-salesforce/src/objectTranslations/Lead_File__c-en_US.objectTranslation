@@ -50,8 +50,24 @@
         <relationshipLabel><!-- Lead Files --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- Preview Key --></label>
+        <name>Preview_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Preview Version Id --></label>
+        <name>Preview_Version_Id__c</name>
+    </fields>
+    <fields>
         <label><!-- Private --></label>
         <name>Private__c</name>
+    </fields>
+    <fields>
+        <label><!-- Thumbnail Key --></label>
+        <name>Thumbnail_Key__c</name>
+    </fields>
+    <fields>
+        <label><!-- Thumbnail Version Id --></label>
+        <name>Thumbnail_Version_Id__c</name>
     </fields>
     <fields>
         <label><!-- Version Description --></label>

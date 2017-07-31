@@ -877,11 +877,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Qualified_Date__c</field>
-            <table>Case</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Ready_to_Assign_Date__c</field>
             <table>Case</table>
         </columns>
@@ -1655,11 +1650,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>IsApproved__c</field>
-            <table>Case.Volunteer_Roles__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Required_Forms_for_Volunteers__c</field>
             <table>Case.Volunteer_Roles__r</table>
         </columns>
@@ -1831,11 +1821,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Zip__c</field>
-            <table>Case.Volunteer_Roles__r</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>isRejected__c</field>
             <table>Case.Volunteer_Roles__r</table>
         </columns>
         <columns>

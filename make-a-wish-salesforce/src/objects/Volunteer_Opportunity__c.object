@@ -82,12 +82,17 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>NWE_Start_Time__c</field>
+            <field>Start_Time__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>NWE_End_Time__c</field>
+            <field>End_Time__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Date__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -102,7 +107,12 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Description__c</field>
+            <field>Location__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Hidden_VolunteerCount_Desc__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -202,12 +212,17 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>NWE_Start_Time__c</field>
+            <field>Start_Time__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>NWE_End_Time__c</field>
+            <field>End_Time__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Date__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -222,7 +237,12 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Description__c</field>
+            <field>Location__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Hidden_VolunteerCount_Desc__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -322,12 +342,17 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>NWE_Start_Time__c</field>
+            <field>Start_Time__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>NWE_End_Time__c</field>
+            <field>End_Time__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Date__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -342,12 +367,22 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Description__c</field>
+            <field>Location__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Hidden_VolunteerCount_Desc__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
             <field>HiddenVolunteer_Count_Description__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>NWE_Volunteer_Opportunity_Notes__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -544,6 +579,15 @@
         <type>DateTime</type>
     </fields>
     <fields>
+        <fullName>Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Description__c</fullName>
         <description>This field is used to store the description value entered from Add voulnteer role vf page</description>
         <externalId>false</externalId>
@@ -553,6 +597,210 @@
         <trackTrending>false</trackTrending>
         <type>Html</type>
         <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>End_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>End Time</label>
+        <picklist>
+            <picklistValues>
+                <fullName>12:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
     </fields>
     <fields>
         <fullName>Event_Date__c</fullName>
@@ -754,6 +1002,17 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_VolunteerCount_Desc__c</fullName>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <length>250</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_Volunteer_Contact_Email__c</fullName>
         <description>This field is used to store the value of Volunteer contact email for email purpose.</description>
         <externalId>false</externalId>
@@ -791,22 +1050,22 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Inactivated_or_Rejected_Date__c</fullName>
+        <description>Used to hold rejected or inactivated date</description>
+        <externalId>false</externalId>
+        <label>Hidden Inactivated or Rejected Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
         <fullName>Inactive__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field is used when the to identify whether the volunteer opportunity is active or not.</description>
         <externalId>false</externalId>
         <label>Inactive</label>
         <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
-        <fullName>IsApproved__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>This field will define that  record is approved by approver or not</description>
-        <externalId>false</externalId>
-        <label>IsApproved</label>
-        <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
@@ -1150,6 +1409,10 @@ RECIP_RELATION_CODE&quot;</description>
                 <fullName>Not Approved</fullName>
                 <default>false</default>
             </picklistValues>
+            <picklistValues>
+                <fullName>Error</fullName>
+                <default>false</default>
+            </picklistValues>
             <sorted>false</sorted>
         </picklist>
         <required>false</required>
@@ -1202,6 +1465,210 @@ RECIP_RELATION_CODE&quot;</description>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Start_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Time</label>
+        <picklist>
+            <picklistValues>
+                <fullName>12:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
     </fields>
     <fields>
         <fullName>Status__c</fullName>
@@ -1466,16 +1933,6 @@ RECIP_RELATION_CODE&quot;</description>
         <type>Text</type>
         <unique>false</unique>
     </fields>
-    <fields>
-        <fullName>isRejected__c</fullName>
-        <defaultValue>false</defaultValue>
-        <description>check after rejecting the record</description>
-        <externalId>false</externalId>
-        <label>isRejected</label>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
     <label>Volunteer Opportunity</label>
     <listViews>
         <fullName>Alabama_Volunteer_Opportunity</fullName>
@@ -1500,7 +1957,6 @@ RECIP_RELATION_CODE&quot;</description>
         <columns>OWNER.FIRST_NAME</columns>
         <columns>OWNER.LAST_NAME</columns>
         <columns>NAME</columns>
-        <columns>IsApproved__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>Chapter_Name__c</field>
@@ -2129,6 +2585,10 @@ RECIP_RELATION_CODE&quot;</description>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Error</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Inactivated</fullName>
                 <default>false</default>
             </values>
@@ -2300,9 +2760,208 @@ RECIP_RELATION_CODE&quot;</description>
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>End_Time__c</picklist>
+            <values>
+                <fullName>1%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Reason_Inactive__c</picklist>
             <values>
                 <fullName>Deceased</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Error</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -2346,6 +3005,201 @@ RECIP_RELATION_CODE&quot;</description>
             </values>
             <values>
                 <fullName>Volunteer Application Fact Sheet</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Start_Time__c</picklist>
+            <values>
+                <fullName>1%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>1%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>10%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>11%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>12%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>2%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>3%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>4%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>5%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>6%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>7%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>8%3A30 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A00 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A00 PM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A30 AM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>9%3A30 PM</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -2488,6 +3342,10 @@ RECIP_RELATION_CODE&quot;</description>
             <picklist>Reason_Inactive__c</picklist>
             <values>
                 <fullName>Deceased</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Error</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -2676,6 +3534,10 @@ RECIP_RELATION_CODE&quot;</description>
                 <default>false</default>
             </values>
             <values>
+                <fullName>Error</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Inactivated</fullName>
                 <default>false</default>
             </values>
@@ -2840,7 +3702,7 @@ RECIP_RELATION_CODE&quot;</description>
         <fullName>Vol_Opp_Do_Not_Create_for_Closed_Wish</fullName>
         <active>true</active>
         <description>Should not create volunteer opportunity for Closed Wish.</description>
-        <errorConditionFormula>Wish__r.IsClosed=True &amp;&amp; ISNEW() &amp;&amp; Migrated_Record__c = false &amp;&amp; Wish__r.Migrated_Record__c = false</errorConditionFormula>
+        <errorConditionFormula>Wish__r.IsClosed=True &amp;&amp; ISNEW() &amp;&amp; $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorMessage>You cannot create volunteer opportunity for closed wish.</errorMessage>
     </validationRules>
     <validationRules>

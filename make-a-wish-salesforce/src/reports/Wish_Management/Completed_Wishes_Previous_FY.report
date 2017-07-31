@@ -34,9 +34,6 @@
         <field>Case.Referral_Date__c</field>
     </columns>
     <columns>
-        <field>Case.Qualified_Date__c</field>
-    </columns>
-    <columns>
         <field>Case.Ready_to_Assign_Date__c</field>
     </columns>
     <columns>

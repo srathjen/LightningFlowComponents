@@ -29,7 +29,7 @@ trigger ChapterActionTrackTrigger_AT on Chapter_Action_Track__c (after Insert,be
           }
           
            for(Chapter_Action_Track__c currRec : Trigger.new){
-               if(userRole != ChapterRoleMap.get(chapterNameMap.get(currRec.Chapter_Name__c)) && !Test.isRunningTest()){
+               if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null && userRole != ChapterRoleMap.get(chapterNameMap.get(currRec.Chapter_Name__c)) && !Test.isRunningTest()){
                    currRec.addError('You have no access to create Chapter Action Track records for other chapters');
                }
            }

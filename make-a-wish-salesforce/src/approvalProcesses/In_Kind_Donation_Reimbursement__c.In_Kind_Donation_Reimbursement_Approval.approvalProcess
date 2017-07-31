@@ -17,7 +17,7 @@
         <field>Documentation__c</field>
     </approvalPageFields>
     <approvalStep>
-        <allowDelegate>true</allowDelegate>
+        <allowDelegate>false</allowDelegate>
         <assignedApprover>
             <approver>
                 <type>adhoc</type>
@@ -54,7 +54,19 @@
         </action>
     </finalApprovalActions>
     <finalApprovalRecordLock>true</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Uncheck_isSubmitted_Approval_field</name>
+            <type>FieldUpdate</type>
+        </action>
+    </finalRejectionActions>
     <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>isSubmitted_for_Approval_field_update</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
     <label>In Kind Donation&amp;Reimbursement Approval</label>
     <recordEditability>AdminOrCurrentApprover</recordEditability>
     <showApprovalHistory>false</showApprovalHistory>

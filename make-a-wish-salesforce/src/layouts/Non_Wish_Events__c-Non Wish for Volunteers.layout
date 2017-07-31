@@ -56,7 +56,7 @@
         <label>Volunteer Role</label>
         <layoutColumns>
             <layoutItems>
-                <height>200</height>
+                <height>400</height>
                 <page>AddVolunteerRole_VF</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>true</showScrollbars>

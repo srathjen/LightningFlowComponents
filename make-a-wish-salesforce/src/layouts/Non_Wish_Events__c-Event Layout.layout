@@ -106,7 +106,7 @@
         <label>Add Volunteer Role</label>
         <layoutColumns>
             <layoutItems>
-                <height>200</height>
+                <height>400</height>
                 <page>AddVolunteerRole_VF</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>true</showScrollbars>
@@ -146,11 +146,11 @@
     </layoutSections>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Role__c</fields>
         <fields>Chapter_Role_Opportunity__c</fields>
         <fields>Event_Name__c</fields>
         <fields>Wish__c</fields>
         <fields>Volunteer_Name__c</fields>
-        <fields>IsApproved__c</fields>
         <fields>Inactive__c</fields>
         <fields>Reason_Inactive__c</fields>
         <relatedList>Volunteer_Opportunity__c.Non_Wish_Event__c</relatedList>

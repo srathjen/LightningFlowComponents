@@ -381,14 +381,14 @@
         <fullName>BC_Date_Of_Completed_validation</fullName>
         <active>true</active>
         <description>Date of Completed should be mandatory while entering Status .</description>
-        <errorConditionFormula>(Text(Status__c) != null || NOT(ISBLANK( Date__c ))) &amp;&amp; (ISBLANK(Date_Completed__c))&amp;&amp; Migrated_Record__c = false</errorConditionFormula>
+        <errorConditionFormula>(Text(Status__c) != null || NOT(ISBLANK( Date__c ))) &amp;&amp; (ISBLANK(Date_Completed__c))&amp;&amp; $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorMessage>Please enter the value for Date Completed.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>BC_Status_validation</fullName>
         <active>true</active>
         <description>Status should be mandatory while entering Date of Completed.</description>
-        <errorConditionFormula>Text(Status__c) = null &amp;&amp;  Not(ISBLANK(Date_Completed__c)) &amp;&amp; Migrated_Record__c = false</errorConditionFormula>
+        <errorConditionFormula>Text(Status__c) = null &amp;&amp;  Not(ISBLANK(Date_Completed__c)) &amp;&amp; $Profile.Name != &apos;Integration&apos;</errorConditionFormula>
         <errorMessage>Please enter the value for status</errorMessage>
     </validationRules>
 </CustomObject>

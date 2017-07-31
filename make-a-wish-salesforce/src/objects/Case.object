@@ -315,6 +315,7 @@
         <fullName>Additional_Interview_date2__c</fullName>
         <description>It holds the Additional Available Interview Date2</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the wish child is interviewed an additional time, if needed</inlineHelpText>
         <label>Additional Interview Date2</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -475,6 +476,7 @@
     <fields>
         <fullName>Anticipated_Start_Date__c</fullName>
         <externalId>false</externalId>
+        <inlineHelpText>Approximate date when the wish might occur  (flexible)</inlineHelpText>
         <label>Anticipated Start Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -529,6 +531,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Assigned_Date__c</fullName>
         <description>This field is used to capture the wish assigned date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date that the volunteers were assigned to the wish child&apos;s file</inlineHelpText>
         <label>Assigned Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -653,6 +656,7 @@ for fulfilment  the wish.</description>
         <fullName>Budget_Approved_Date__c</fullName>
         <description>It is used to capture the approved date of the budget</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the submitted budget is approved</inlineHelpText>
         <label>Budget Approved Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -730,6 +734,7 @@ for fulfilment  the wish.</description>
         <fullName>Budget_Submitted_Date__c</fullName>
         <description>It is used to capture the submitted date of the budget</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the staff submits the budget for approval</inlineHelpText>
         <label>Budget Submitted Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -772,6 +777,7 @@ for fulfilment  the wish.</description>
     </fields>
     <fields>
         <fullName>Case_Member_Count__c</fullName>
+        <defaultValue>0</defaultValue>
         <description>It  displays the total number of case team member added to the case.</description>
         <externalId>false</externalId>
         <label>Hidden Case Member Count</label>
@@ -891,6 +897,7 @@ for fulfilment  the wish.</description>
         <fullName>Child_s_Medical_Summary_received_date__c</fullName>
         <description>It is used to capture the medical summary received date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the staff receives the Child&apos;s Medical Summary from the medical professional</inlineHelpText>
         <label>Child&apos;s Medical Summary Received Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -902,6 +909,7 @@ for fulfilment  the wish.</description>
         <fullName>Child_s_Medical_Summary_sent__c</fullName>
         <description>Medical summary sent date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the staff submits the Child&apos;s Medical Summary to the medical professional</inlineHelpText>
         <label>Child&apos;s Medical Summary Sent</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -917,6 +925,7 @@ for fulfilment  the wish.</description>
         <fullName>Closed_Date__c</fullName>
         <description>This field is used to capture the closed date of case</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the wish is financially closed out</inlineHelpText>
         <label>Closed Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -988,6 +997,7 @@ for fulfilment  the wish.</description>
         <fullName>Completed_Date__c</fullName>
         <description>It is used to capture the wish completed date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the wish is considered granted</inlineHelpText>
         <label>Completed Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -999,6 +1009,7 @@ for fulfilment  the wish.</description>
         <fullName>Concept_Approval_Date__c</fullName>
         <description>It is used to capture the concept approval date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the chapter reviews and approves the wish concept</inlineHelpText>
         <label>Concept Approval Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1608,7 +1619,19 @@ for fulfilment  the wish.</description>
     <fields>
         <fullName>CurrentDOB__c</fullName>
         <externalId>false</externalId>
-        <formula>IF(DATE(YEAR(TODAY()),MONTH(Birthdate__c),DAY(Birthdate__c)) &lt;= TODAY(), DATE(YEAR(TODAY())+1,MONTH(Birthdate__c),DAY(Birthdate__c)), DATE(YEAR(TODAY()),MONTH(Birthdate__c),DAY(Birthdate__c)))</formula>
+        <formula>IF (
+    MONTH (Birthdate__c)=2 &amp;&amp; DAY (Birthdate__c)=29, 
+    IF (
+        (DATE (YEAR(TODAY()),1,1) + 59) &gt; TODAY(),
+        (DATE (YEAR(TODAY()),1,1)) + 59,
+        (DATE (YEAR(TODAY())+1,1,1)) + 59
+    ),
+    IF (
+        DATE (YEAR(TODAY()),MONTH(Birthdate__c),DAY(Birthdate__c)) &gt; TODAY(),
+        DATE (YEAR(TODAY()),MONTH(Birthdate__c),DAY(Birthdate__c)),
+        DATE (YEAR(TODAY())+1,MONTH(Birthdate__c),DAY(Birthdate__c))
+    )
+)</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Current DOB</label>
         <required>false</required>
@@ -1829,6 +1852,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Diagnosis_Verification_Receive_Date__c</fullName>
         <description>It is used to capture the received date of dv</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the Diagosis Verification is received from the child&apos;s medical professional</inlineHelpText>
         <label>Diagnosis Verification Received Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1840,6 +1864,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Diagnosis_Verification_Sent_Date__c</fullName>
         <description>It is used to capture the dv sent date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the Diagosis Verification is sent to child&apos;s medical professional</inlineHelpText>
         <label>Diagnosis Verification Sent Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1942,6 +1967,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>End_Date__c</fullName>
         <description>This field will capture end date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Confirmed date when the wish is completed (arrive home) or revealed</inlineHelpText>
         <label>End Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1977,6 +2003,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Extended_End_Date__c</fullName>
         <description>It capture the Extended End Date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the family returns home (on their own) after the completion of the wish</inlineHelpText>
         <label>Extended End Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1988,6 +2015,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Extended_Start_Date__c</fullName>
         <description>It Capture the Extended Start Date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the family leaves early prior to the beginning of the wish</inlineHelpText>
         <label>Extended Start Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2047,6 +2075,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>GKTW_Confirmation_Date__c</fullName>
         <description>It is used to capture the confirmation date of GKTW</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date that GKTW confirms the reservation dates (on confirmation form)</inlineHelpText>
         <label>GKTW Confirmation Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2273,6 +2302,19 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <externalId>false</externalId>
         <label>Hidden Email List</label>
         <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Hidden_Hold_Status_Value__c</fullName>
+        <description>This field is used to store the previous value when the status is Inactive or Hold.</description>
+        <externalId>false</externalId>
+        <label>Hidden Hold Status Value</label>
+        <length>30</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -2574,6 +2616,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hold_Date__c</fullName>
         <description>It is used to capture the hold date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the wish is put on hold for medical or elective reasons</inlineHelpText>
         <label>Hold Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2611,6 +2654,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Inactive_Date__c</fullName>
         <description>It is used to capture the wish inactive date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the wish is determined inactive and closing procedures begin</inlineHelpText>
         <label>Inactive Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2622,6 +2666,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Inquiry_Date__c</fullName>
         <description>It holds the Date of Inquiry form submitted.</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the Initial lead from a non-authorized referral source is received</inlineHelpText>
         <label>Inquiry Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2667,6 +2712,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Interview_date__c</fullName>
         <description>This field will capture the interview date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the volunteers met with the wish child and family</inlineHelpText>
         <label>Interview Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3610,12 +3656,12 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Qualified_Date__c</fullName>
-        <description>Lead conversion date</description>
+        <description>It will hold Case created date.</description>
         <externalId>false</externalId>
-        <formula>CreatedDate</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Date the Diagnosis Verification is reviewed and child&apos;s eligibility is confirmed</inlineHelpText>
         <label>Qualified Date</label>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Date</type>
@@ -3936,6 +3982,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Ready_to_Assign_Date__c</fullName>
         <description>Date will be captured When status is changed to Ready To Assign</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the welcome call/packet task is completed and the family is ready to be met by volunteers</inlineHelpText>
         <label>Ready to Assign Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3982,6 +4029,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Referral_Date__c</fullName>
         <description>It hods the Date of Wish Referral form submitted.</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the Initial lead from an authorized referral source is received</inlineHelpText>
         <label>Referral Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4169,6 +4217,7 @@ on airplane</description>
         <fullName>Start_Date__c</fullName>
         <description>This field will capture start date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Confirmed date that the wish will begin (departure)</inlineHelpText>
         <label>Start Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4854,6 +4903,7 @@ on airplane</description>
         <fullName>Wish_Clearance_Received_Date__c</fullName>
         <description>It is used to capture the wish clearance received date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the staff receives the Wish Clearance Form from the medical professional</inlineHelpText>
         <label>Wish Clearance Received Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4865,6 +4915,7 @@ on airplane</description>
         <fullName>Wish_Clearance_Sent_Date__c</fullName>
         <description>It is used to capture the wish clearance sent date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the staff submits the Wish Clearance Form to the medical professional</inlineHelpText>
         <label>Wish Clearance Sent Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4950,6 +5001,7 @@ on airplane</description>
         <fullName>Wish_Determined_Date__c</fullName>
         <description>It will holds wish determined date</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date the wish child identifies his wish</inlineHelpText>
         <label>Wish Determined Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -5453,6 +5505,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <columns>CASES.STATUS</columns>
         <columns>OWNER_NAME</columns>
         <columns>ChapterName__c</columns>
+        <columns>CASES.CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>CASES.CLOSED</field>
@@ -5637,7 +5690,6 @@ arrangements/unique circumstances for any requested wish participant not residin
         <columns>NAME</columns>
         <columns>CASES.STATUS</columns>
         <columns>Interview_date__c</columns>
-        <columns>Qualified_Date__c</columns>
         <columns>CORE.USERS.ALIAS</columns>
         <filterScope>Everything</filterScope>
         <filters>
@@ -7572,10 +7624,91 @@ arrangements/unique circumstances for any requested wish participant not residin
         <errorMessage>Adopted By cannot be Blank when Adopted is checked.</errorMessage>
     </validationRules>
     <validationRules>
+        <fullName>Case_Budget_Approval_Approved</fullName>
+        <active>true</active>
+        <description>1. Since Budget Approval-Approved is an automatic status update, users should not be allowed to update to this status manually.
+2. Once changed to Budget Approval-Approved, user can only go to Wish Design.
+3. Once changed to Budget Approval-Approve</description>
+        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,OR( 
+AND(NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),NOT($Permission.Program_Supervisor)), 
+AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),AND(NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),NOT(ISPICKVAL(Status,&apos;Ready to Interview&apos;))),ISCHANGED(Status),$Permission.Program_Supervisor)))</errorConditionFormula>
+        <errorDisplayField>Absent_Parent_Form__c</errorDisplayField>
+        <errorMessage>From Budget Approval - Approved, the status can only be changed to Wish Design, On-Hold, Inactive, DNQ or Closed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Budget_Approval_Submitted</fullName>
+        <active>true</active>
+        <description>1. Since BudgetApproval-Submitted is an automatic status update, users not  allowed to update to this status manually.
+2. Once changed to Budget Approval-Submitted, only  Program Supervisor permission set can change the status to ReadyToInterview/WishDet</description>
+        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,OR(AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Submitted&apos;),
+NOT($Permission.Program_Supervisor),OR(ISPICKVAL(Status,&apos;Ready to Interview&apos;), 
+ISPICKVAL(Status,&apos;Wish Determined&apos;)),ISCHANGED(Status)), 
+AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Submitted&apos;),NOT(ISNULL(Budget_Submitted_Date__c)), 
+ISCHANGED(Status),NOT(ISPICKVAL(Status,&apos;Ready to interview&apos;)),NOT(ISPICKVAL(Status,&apos;Budget Approval - approved&apos;)), 
+NOT(ISPICKVAL(Status,&apos;Wish Determined&apos;))),AND(ISPICKVAL(Status,&apos;Budget Approval - approved&apos;),ISNULL(Budget_Approved_Date__c),ISCHANGED(Status)),
+AND(ISPICKVAL(Status,&apos;Budget Approval - Submitted&apos;),ISNULL(Budget_Submitted_Date__c),ISCHANGED(Status))))</errorConditionFormula>
+        <errorMessage>The status cannot be changed manually from this status.  When the buget is approved, it will automatically update to Budget Approval - Approved status.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_ChildCaseOwnerChangeValidation</fullName>
+        <active>true</active>
+        <description>Used to restrict user to change the owner of the sub cases</description>
+        <errorConditionFormula>AND(OR(RecordType.Name == &apos;Wish Determination&apos;,RecordType.Name == &apos;Wish Planning&apos;,RecordType.Name == &apos;Wish Impact&apos;, RecordType.Name == &apos;Wish Granting&apos;, RecordType.Name == &apos;Wish Assist&apos;) , OwnerId  &lt;&gt;  Parent.OwnerId,$Profile.Name  != &apos;Integration&apos; )</errorConditionFormula>
+        <errorDisplayField>Absent_Parent_Form__c</errorDisplayField>
+        <errorMessage>You cannot change the owner of the subcase</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Closed_Status</fullName>
+        <active>true</active>
+        <description>Only Program Supervisor permission set can change from Closed to the previous status.</description>
+        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,OR(AND(ISPICKVAL(PRIORVALUE(Status),&quot;Granted&quot;), 
+ISPICKVAL(Status,&apos;Closed&apos;),NOT($Permission.Program_Supervisor),ISCHANGED(Status),NOT(ISNEW()),$RecordType.Name = &quot;Wish&quot;),AND(ISCHANGED(Status),NOT(ISNEW()), 
+NOT($Permission.Program_Supervisor),ISPICKVAL(PRIORVALUE(Status),&quot;Closed&quot;),$RecordType.Name = &quot;Wish&quot;)))</errorConditionFormula>
+        <errorMessage>Only Program Supervisor permission set can change from Closed to the previous status.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Completed</fullName>
+        <active>true</active>
+        <description>1. Once it&apos;s in Completed, it cannot be changed to any other status.</description>
+        <errorConditionFormula>AND(ISPICKVAL(PRIORVALUE(Status),&apos;Completed&apos;),ISCHANGED(Status),NOT(ISNEW()),$Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorMessage>The status cannot be changed after the wish is Completed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_DNQ_Status</fullName>
+        <active>true</active>
+        <description>Only Program Supervisor permission set can change from DNQ to the previous status.</description>
+        <errorConditionFormula>AND($Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,OR(AND(ISPICKVAL(PRIORVALUE(Status),&quot;Granted&quot;), 
+ISPICKVAL(Status,&apos;DNQ&apos;),NOT($Permission.Program_Supervisor),ISCHANGED(Status),NOT(ISNEW())),AND(ISCHANGED(Status),NOT(ISNEW()), 
+NOT($Permission.Program_Supervisor),ISPICKVAL(PRIORVALUE(Status),&quot;DNQ&quot;))))</errorConditionFormula>
+        <errorMessage>The status cannot be changed after the wish is Closed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Granted</fullName>
+        <active>true</active>
+        <description>1. Once changed to Granted, user can only change the status to Completed.</description>
+        <errorConditionFormula>AND(ISPICKVAL(PRIORVALUE(Status),&apos;Granted&apos;),NOT(ISPICKVAL(Status,&apos;Completed&apos;)),NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),
+ISCHANGED(Status),NOT(ISNEW()),$Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorMessage>From Granted, the status can only be changed to Completed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Hold_Rule</fullName>
+        <active>true</active>
+        <description>From Hold, they can only go back to the previous status.</description>
+        <errorConditionFormula>AND(ISPICKVAL(PRIORVALUE(Status),&quot;Hold&quot;),TEXT(Status) !=  Hidden_Hold_Status_Value__c,NOT(ISNEW()),ISCHANGED(Status),$Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorMessage>From Hold, they can only go back to the previous status.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Inactive_Rule</fullName>
+        <active>true</active>
+        <description>From Inactive, they can only go back to the previous status.</description>
+        <errorConditionFormula>AND(ISPICKVAL(PRIORVALUE(Status),&quot;Inactive&quot;),TEXT(Status) !=  Hidden_Hold_Status_Value__c,NOT(ISNEW()),ISCHANGED(Status),$Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorMessage>From Inactive, they can only go back to the previous status.</errorMessage>
+    </validationRules>
+    <validationRules>
         <fullName>Case_Meet_PWL_Criteria_Validation</fullName>
         <active>true</active>
         <description>When Meet PWL Criteria field value is no then it force to enter the value for the &apos;Comment for PWL Not Met &apos; field</description>
-        <errorConditionFormula>AND(ISPICKVAL(Meet_PWL_Criteria__c ,&apos;No&apos;), ISBLANK(Comment_for_PWL_Not_Met__c),Migrated_Record__c=false)</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL(Meet_PWL_Criteria__c ,&apos;No&apos;), ISBLANK(Comment_for_PWL_Not_Met__c),$Profile.Name  != &apos;Integration&apos;)</errorConditionFormula>
         <errorDisplayField>Comment_for_PWL_Not_Met__c</errorDisplayField>
         <errorMessage>Please enter an explanation why &apos;No&apos; is selected for &apos;Meet PWL Criteria&apos;</errorMessage>
     </validationRules>
@@ -7583,7 +7716,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <fullName>Case_Presentation_Date_Validation</fullName>
         <active>true</active>
         <description>Used to check whether the give date is past</description>
-        <errorConditionFormula>ISCHANGED(Presentation_Date__c ) &amp;&amp;  Presentation_Date__c  &lt; Today()  &amp;&amp;  Migrated_Record__c = false</errorConditionFormula>
+        <errorConditionFormula>ISCHANGED(Presentation_Date__c ) &amp;&amp;  Presentation_Date__c  &lt; Today()  &amp;&amp;  $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorDisplayField>Presentation_Date__c</errorDisplayField>
         <errorMessage>Presentation date should not be lesser than today</errorMessage>
     </validationRules>
@@ -7591,10 +7724,41 @@ arrangements/unique circumstances for any requested wish participant not residin
         <fullName>Case_Presentation_Set_Validation</fullName>
         <active>true</active>
         <description>Used to check value for Presentation Date and Presentation set fields. Both are required we cannot left one as blank</description>
-        <errorConditionFormula>AND(OR(ISCHANGED( Presentation_Date__c ),Wish_Presentation_Set__c = true) ,Migrated_Record__c = false, OR(AND(NOT(ISBLANK(Presentation_Date__c )),Wish_Presentation_Set__c = false),AND(Wish_Presentation_Set__c = true, OR(ISBLANK( Presentation_Date__c ),ISBLANK(Time__c),
-        ISBLANK(Location_Address__c),
-        ISBLANK(Name_of_Location__c)))))</errorConditionFormula>
+        <errorConditionFormula>AND(OR(ISCHANGED( Presentation_Date__c ),Wish_Presentation_Set__c = true) ,Migrated_Record__c = false, OR(AND(NOT(ISBLANK(Presentation_Date__c )),Wish_Presentation_Set__c = false),AND(Wish_Presentation_Set__c = true, OR(ISBLANK( Presentation_Date__c ),ISBLANK(Time__c), 
+ISBLANK(Location_Address__c), 
+ISBLANK(Name_of_Location__c)))),$Profile.Name  != &apos;Integration&apos;)</errorConditionFormula>
         <errorMessage>Wish Presentation Date, Time, Location Address and Name of Location cannot be blank when Wish Presentation Set is checked.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Prevent_Qualified_Status</fullName>
+        <active>true</active>
+        <description>All wishes from Qualified needs to go to Ready To Assign.</description>
+        <errorConditionFormula>AND(NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),
+NOT(ISPICKVAL(Status,&apos;Ready to Assign&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Qualified&apos;)),ISPICKVAL(PRIORVALUE(Status),&quot;Qualified&quot;),NOT(ISNEW()),NOT(ISNEW()),ISCHANGED(Status),$Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorMessage>From Qualified, the status can only be changed to Ready to Assign, On-Hold, Inactive, DNQ or Closed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Ready_To_Interview_Status</fullName>
+        <active>true</active>
+        <description>1. Once moved to Ready To Interview, the status cannot go back to Qualified or Ready to Assign
+2. All wishes in Ready To Interview needs to go to Wish Determined</description>
+        <errorConditionFormula>AND(NOT(ISPICKVAL(Status,&apos;Wish Determined&apos;)),NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),
+NOT(ISPICKVAL(Status,&apos;inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Budget Approval - Submitted&apos;)),
+NOT(ISPICKVAL(Status,&apos;Budget Approval - Approved&apos;)),
+ISPICKVAL(PRIORVALUE(Status),&quot;Ready to Interview&quot;),NOT(ISNEW()),ISCHANGED(Status),$Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorMessage>From Ready To Interview, the status can only be changed to Wish Determined, On-Hold, Inactive, DNQ or Closed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Ready_to_Assign_Status</fullName>
+        <active>true</active>
+        <description>1) Once changed to Ready To Assign, the status cannot go back to Qualified.
+2) When in Ready To Assign, the status cannot be updated manually. The update would happen automatically when both the Volunteer Opportunities are approved.</description>
+        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,OR(AND(ISPICKVAL(Status,&apos;Ready to Interview&apos;),ISPICKVAL(PRIORVALUE(Status),&quot;Ready to Assign&quot;),Case_Member_Count__c &lt;&gt; 2,
+ISCHANGED(Status),NOT(ISNEW())),AND(ISCHANGED(Status),
+OR(ISPICKVAL(Status,&apos;Qualified&apos;),ISPICKVAL(Status,&apos;Wish Design&apos;),ISPICKVAL(Status,&apos;Wish Determined&apos;),ISPICKVAL(Status,&apos;Wish Scheduled&apos;),
+ISPICKVAL(Status,&apos;Completed&apos;),ISPICKVAL(Status,&apos;Granted&apos;)),ISPICKVAL(PRIORVALUE(Status),&quot;Ready to Assign&quot;),
+NOT(ISNEW()))))</errorConditionFormula>
+        <errorMessage>The status cannot be changed manually from this status.  Once two wish granters are approved, it will automatically update to Ready to Interview status.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Ready_to_Assign_Validation</fullName>
@@ -7618,7 +7782,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <fullName>Case_Subcase_Status_Validation</fullName>
         <active>true</active>
         <description>Used to lock &quot;Status field&quot; for all profiles except System Admin for the subcases</description>
-        <errorConditionFormula>AND(ISCHANGED( Status ),RecordType.Name != &apos;Wish&apos;, RecordType.Name != &apos;Diagnosis Verification Review&apos;,$Profile.Name != &apos;System Administrator&apos;,Hidden_Close_Sub_Case__c=false )</errorConditionFormula>
+        <errorConditionFormula>AND(ISCHANGED( Status ),RecordType.Name != &apos;Wish&apos;, RecordType.Name != &apos;Diagnosis Verification Review&apos;,$Profile.Name != &apos;System Administrator&apos;,Hidden_Close_Sub_Case__c=false,$Profile.Name  != &apos;Integration&apos;,NOT($Permission.Program_Supervisor))</errorConditionFormula>
         <errorMessage>You do not have the level of access necessary to perform the operation you requested. Please contact the owner of the record or your administrator if access is necessary.</errorMessage>
     </validationRules>
     <validationRules>
@@ -7627,6 +7791,32 @@ arrangements/unique circumstances for any requested wish participant not residin
         <description>To check for valid timeframe</description>
         <errorConditionFormula>AND( ISPICKVAL(Status, &quot;Ready to Assign&quot;), Rush__c = TRUE, NOT Migrated_Record__c, OR(OR(Text(Rush_Timeframe__c) == Null,Text(Rush_Timeframe__c) == &apos;Select timeframe&apos;), ISBLANK(Rush_Explanation__c)) )</errorConditionFormula>
         <errorMessage>Please select valid timeframe</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Wish_Design</fullName>
+        <active>true</active>
+        <description>&quot;1. Once changed to Wish Design, only the Program Supervisor permission set can change the status to Ready To Interview or Wish Determined.
+2. Once changed to Wish Design, user can only change the status to Wish Scheduled.&quot;</description>
+        <errorConditionFormula>AND($Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,OR(AND($Permission.Program_Supervisor,ISPICKVAL(PRIORVALUE(Status),&quot;Wish Design&quot;),NOT(ISPICKVAL(Status,&apos;Ready to Interview&apos;)),
+NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Wish Determined&apos;)),
+NOT(ISPICKVAL(Status,&apos;Closed&apos;)),NOT(ISPICKVAL(Status,&apos;Wish Scheduled&apos;)),ISCHANGED(Status),NOT(ISNEW())),
+AND(ISPICKVAL(PRIORVALUE(Status),&quot;Wish Design&quot;),AND(NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),
+NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Wish Scheduled&apos;)),
+NOT(ISPICKVAL(Status,&apos;Closed&apos;))),ISCHANGED(Status),NOT(ISNEW()),NOT($Permission.Program_Supervisor))))</errorConditionFormula>
+        <errorMessage>From Wish Design, the status can only be changed to Wish Scheduled, On-Hold, Inactive, DNQ or Closed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Wish_Determined</fullName>
+        <active>true</active>
+        <description>&quot;1. Once changed to Wish Determined, only the Program Supervisor permission set can change the status to Ready To Interview.
+2. Once changed to Wish Determined, user can only go to Wish Design.&quot;</description>
+        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,OR(AND(NOT(ISPICKVAL(Status,&apos;Ready to Interview&apos;)),NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),
+NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),$Permission.Program_Supervisor,
+ISPICKVAL(PRIORVALUE(Status),&quot;Wish Determined&quot;)),AND(ISPICKVAL(PRIORVALUE(Status),&quot;Wish Determined&quot;),AND(NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),
+NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;))),
+ISCHANGED(Status),NOT(ISNEW()),NOT($Permission.Program_Supervisor))),ISCHANGED(Status),NOT(ISNEW()),
+ISPICKVAL(PRIORVALUE(Status),&quot;Wish Determined&quot;),NOT(ISPICKVAL(Status,&apos;Budget Approval - Submitted&apos;)))</errorConditionFormula>
+        <errorMessage>From Wish Determined, the status can only be changed to Wish Design, On-Hold, Inactive, DNQ or Closed.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Case_Wish_Determined_Status_Validation</fullName>
@@ -7641,9 +7831,22 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)), ISPICKVAL(Sub_Status__c,&apos;Within Policy
         <fullName>Case_Wish_Determined_Validation</fullName>
         <active>true</active>
         <description>When the case status is Ready to Assign the sub status should have value</description>
-        <errorConditionFormula>Text(Status) == &apos;Wish Determined&apos; &amp;&amp; Text(Sub_Status__c) == Null</errorConditionFormula>
+        <errorConditionFormula>Text(Status) == &apos;Wish Determined&apos; &amp;&amp; Text(Sub_Status__c) == Null &amp;&amp; $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorDisplayField>Sub_Status__c</errorDisplayField>
         <errorMessage>You should enter value for sub status when the status is Wish Determined.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Wish_Scheduled</fullName>
+        <active>true</active>
+        <description>1. Once changed to Wish Scheduled, user can only change the status to Wish Design or Granted.</description>
+        <errorConditionFormula>AND($Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,OR(AND(ISPICKVAL(PRIORVALUE(Status),&apos;Wish Scheduled&apos;),NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Granted&apos;)),NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),ISCHANGED(Status),NOT(ISNEW()))))</errorConditionFormula>
+        <errorMessage>From Wish Scheduled, the status can only be changed to Wish Design, Granted, On-Hold, Inactive, DNQ or Closed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Chapter_Medical_Advisor_Validation</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(ISPICKVAL(Status, &apos;Escalated&apos;),$RecordType.Name = &quot;Diagnosis Verification Review&quot;,Local_MCA_Team__c = NULL, ISCHANGED(Status))</errorConditionFormula>
+        <errorMessage>Please fill the Chapter Medical Advisor Name.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Childs_Medical_Summary_Form_Validation</fullName>
@@ -7710,8 +7913,41 @@ ISBLANK(TEXT(Meet_PWL_Criteria__c)), ISPICKVAL(Sub_Status__c,&apos;Within Policy
         <fullName>Planing_Case_Form_Validation</fullName>
         <active>true</active>
         <description>This validation rule will fire when the required forms are checked and corresponding date value is null.</description>
-        <errorConditionFormula>AND($RecordType.Name = &quot;Wish Planning&quot;,Text(Parent.Sub_Status__c)!=&quot;Abandoned&quot;,ISPICKVAL(Status,&apos;Closed&apos;),OR(AND(Wish_Child_Form__c = True,ISNULL(Date_Wish_Child_Form__c )),AND(Wish_Family_Form__c = True,ISNULL(Date_Wish_Family_Form__c)),AND(Wish_Information_Form__c = True,ISNULL(Date_Wish_Information_Form__c)),AND(Liability_Release_and_Authorization__c = True,ISNULL(Date_Liability_Release_Authorization__c)),AND(Communication_Profile__c = True,ISNULL(Date_Received_for_Communication_Profile__c)),AND(Guardianship_Document__c = True,ISNULL(Date_Received_for_Guardianship_Document__c)),AND(Absent_Parent_Form__c = True,ISNULL(Date_Received_for_Absent_Parent_Form__c)),AND(Single_Parent_Form__c = True,ISNULL(Date_Received_for_Single_Parent_Form__c)),AND(Wish_Safety_Authorization_Part_B_Form__c = True,ISNULL(Date_Received_for_Wish_Safety_Authorizat__c)),AND(Child_s_Medical_Summary_Form__c = True,ISNULL(Date_Received_for_Child_s_Medical_Summar__c)),AND(Passports__c = True,ISNULL(Date_Received_for_Passports__c)),AND(Visas__c,True,ISNULL(Date_Received_for_Visas__c)),AND(Entertainment_Sports_Wish_LOU__c = True,ISNULL(Date_Received_for_Entertainment_Sports__c))))</errorConditionFormula>
+        <errorConditionFormula>AND($RecordType.Name = &quot;Wish Planning&quot;,Text(Parent.Sub_Status__c)!=&quot;Abandoned&quot;,ISPICKVAL(Status,&apos;Closed&apos;),
+OR(AND(Wish_Child_Form__c = True,ISNULL(Date_Wish_Child_Form__c )),AND(Wish_Family_Form__c = True,
+ISNULL(Date_Wish_Family_Form__c)),AND(Wish_Information_Form__c = True,ISNULL(Date_Wish_Information_Form__c)),
+AND(Liability_Release_and_Authorization__c = True,ISNULL(Date_Liability_Release_Authorization__c)),
+AND(Communication_Profile__c = True,ISNULL(Date_Received_for_Communication_Profile__c)),
+AND(Guardianship_Document__c = True,ISNULL(Date_Received_for_Guardianship_Document__c)),
+AND(Absent_Parent_Form__c = True,ISNULL(Date_Received_for_Absent_Parent_Form__c)),
+AND(Single_Parent_Form__c = True,ISNULL(Date_Received_for_Single_Parent_Form__c)),
+AND(Wish_Safety_Authorization_Part_B_Form__c = True,ISNULL(Date_Received_for_Wish_Safety_Authorizat__c)),
+AND(Child_s_Medical_Summary_Form__c = True,ISNULL(Date_Received_for_Child_s_Medical_Summar__c)),
+AND(Passports__c = True,ISNULL(Date_Received_for_Passports__c)),AND(Visas__c,True,ISNULL(Date_Received_for_Visas__c))
+,AND(Entertainment_Sports_Wish_LOU__c = True,ISNULL(Date_Received_for_Entertainment_Sports__c))),ISCHANGED(Status))</errorConditionFormula>
         <errorMessage>Please fill the value for  corresponding date fields.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Prevent_Case_Budget_Approval_Approved</fullName>
+        <active>true</active>
+        <description>This validation will fire when the status is changed from DNQ,Hold,Inactive,Closed to Budget Approval Approved.</description>
+        <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,OR(AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),
+NOT($Permission.Program_Supervisor),NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),
+NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;))),
+
+AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),
+NOT(ISPICKVAL(Status,&apos;DNQ&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),NOT(ISPICKVAL(Status,&apos;Ready to interview&apos;)),
+NOT(ISPICKVAL(Status,&apos;Wish Determined&apos;)),$Permission.Program_Supervisor)),ISCHANGED(Status))</errorConditionFormula>
+        <errorMessage>The status cannot be changed manually from this statu</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Prevent_Case_Budget_Approval_Submitted</fullName>
+        <active>true</active>
+        <description>This validation will fire when the status is changed from DNQ,Hold,Inactive,Closed to Budget Approval Submitted.</description>
+        <errorConditionFormula>AND(ISPICKVAL(Status,&apos;Budget Approval - Submitted&apos;),ISCHANGED(Status),$Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,OR(ISPICKVAL(PRIORVALUE(Status),&apos;DNQ&apos;),
+ISPICKVAL(PRIORVALUE(Status),&apos;Hold&apos;),ISPICKVAL(PRIORVALUE(Status),&apos;Inactive&apos;),ISPICKVAL(PRIORVALUE(Status),&apos;Closed&apos;)),NOT(ISNEW()),
+NOT($Permission.Program_Supervisor))</errorConditionFormula>
+        <errorMessage>The status cannot be changed manually from this status.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Referral_date_Validation</fullName>
@@ -8223,20 +8459,25 @@ alert(&apos;Email sucessfully sent&apos;);
         <fullName>Wish_Expense</fullName>
         <availability>online</availability>
         <displayType>button</displayType>
-        <encodingKey>UTF-8</encodingKey>
-        <hasMenubar>false</hasMenubar>
-        <hasScrollbars>true</hasScrollbars>
-        <hasToolbar>false</hasToolbar>
-        <height>600</height>
-        <isResizable>true</isResizable>
-        <linkType>url</linkType>
+        <linkType>javascript</linkType>
         <masterLabel>Wish Expense</masterLabel>
-        <openType>newWindow</openType>
-        <position>none</position>
+        <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <showsLocation>false</showsLocation>
-        <showsStatus>false</showsStatus>
-        <url>/apex/WishBudgetForm_VF?CaseId={!Case.ParentId}</url>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/connection.js&quot;)}
+{!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)}
+var parentCase = sforce.connection.query(&quot;SELECT ID,ParentId,Parent.Wish_Type__c FROM Case WHERE ID = &apos;{!Case.Id}&apos; LIMIT 1&quot;);
+records = parentCase.getArray(&quot;records&quot;); 
+
+var accDate = records[0].Parent.Wish_Type__c; 
+
+if(accDate != null){
+window.open(&apos;/apex/WishBudgetForm_VF?CaseId={!Case.ParentId}&apos;);
+}
+else
+{
+alert(&apos;The budget page cannot be launched until the National Wish Type is selected&apos;);
+
+}</url>
     </webLinks>
     <webLinks>
         <fullName>Wish_Family_Packet</fullName>

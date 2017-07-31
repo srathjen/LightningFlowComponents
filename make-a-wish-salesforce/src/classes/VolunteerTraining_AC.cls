@@ -136,7 +136,7 @@ public class VolunteerTraining_AC {
             if( currRec.Volunteer_Orientation_Trainings__r.size() > 0)
                 newWrapper.status= currRec.Volunteer_Orientation_Trainings__r[0].Volunteer_Attendance__c;
             if(((currRec.max_capacity__c == Null) || (currRec.max_capacity__c >0 && currRec.max_capacity__c > currRec.Registered_Seats__c))
-               && ((newWrapper.volOppSize > 0 && newWrapper.status == 'Cancelled') || newWrapper.volOppSize == 0))
+               && ((newWrapper.volOppSize > 0 && newWrapper.status == 'Volunteer Cancelled') || newWrapper.volOppSize == 0))
                 newWrapper.displayRec = true;
             else
                 newWrapper.displayRec = false;
@@ -202,7 +202,7 @@ public class VolunteerTraining_AC {
             if(classOfferingDetails.size() > 0) {
                 Map<Id, List<Volunteer_Orientation_Training__c>> trainingMaps = new Map<Id, List<Volunteer_Orientation_Training__c>>();
                 checkExistingCanceledRecords = [SELECT Id, class_offering__c, class_offering__r.Start_Time__c, class_offering__r.recordtypeid, class_offering__r.End_Time__c,FORMAT(class_offering__r.Date__c),  class_offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c 
-                                                FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =: userRelatedContactId AND class_offering__c = :trainingId AND Hidden_O_T_Id__c=:classOfferingMap.get(trainingId).Chapter_Role_O_T__r.Orientation_Training__c AND Volunteer_Attendance__c = 'Cancelled'];
+                                                FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =: userRelatedContactId AND class_offering__c = :trainingId AND Hidden_O_T_Id__c=:classOfferingMap.get(trainingId).Chapter_Role_O_T__r.Orientation_Training__c AND Volunteer_Attendance__c = 'Volunteer Cancelled'];
                 if(checkExistingCanceledRecords.size()>0) {
                     if(checkExistingCanceledRecords.get(0).class_offering__r.recordtypeid == classOffereningRecordtypeId){
                         if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
@@ -215,7 +215,7 @@ public class VolunteerTraining_AC {
                     
                     List<Volunteer_Orientation_Training__c> updateList = new List<Volunteer_Orientation_Training__c>();
                     Set<String> c = new Set<String>();
-                    List<Volunteer_Orientation_Training__c> checkforExistingBeforeRegister = [SELECT Id, FORMAT(class_Offering__r.Date__c), class_Offering__c, class_Offering__r.Start_Time__c, class_Offering__r.End_Time__c, class_Offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c FROM Volunteer_Orientation_Training__c WHERE Type__c = 'Training'  AND Volunteer__c =:userRelatedContactId AND (class_offering__r.Date__c =: checkExistingCanceledRecords.get(0).class_offering__r.Date__c AND class_offering__r.Date__c !=Null) AND (Volunteer_Attendance__c != 'Cancelled' AND Volunteer_Attendance__c != 'Completed')];
+                    List<Volunteer_Orientation_Training__c> checkforExistingBeforeRegister = [SELECT Id, FORMAT(class_Offering__r.Date__c), class_Offering__c, class_Offering__r.Start_Time__c, class_Offering__r.End_Time__c, class_Offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c FROM Volunteer_Orientation_Training__c WHERE Type__c = 'Training'  AND Volunteer__c =:userRelatedContactId AND (class_offering__r.Date__c =: checkExistingCanceledRecords.get(0).class_offering__r.Date__c AND class_offering__r.Date__c !=Null) AND (Volunteer_Attendance__c != 'Volunteer Cancelled' AND Volunteer_Attendance__c != 'Completed')];
                     if(checkforExistingBeforeRegister.size()>0) {
                         for(Volunteer_Orientation_Training__c checkExistingTrainings : checkforExistingBeforeRegister) {
                             
@@ -251,7 +251,7 @@ public class VolunteerTraining_AC {
                 }                 
                 else  {
                     Set<String> existingTrainingSet = new Set<String>();
-                    for(Volunteer_Orientation_Training__c checkExistingTrainings : [SELECT Id, FORMAT(class_offering__r.Date__c), class_offering__c, class_offering__r.Start_Time__c, class_offering__r.End_Time__c, class_offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c FROM Volunteer_Orientation_Training__c WHERE Type__c = 'Training' AND class_offering__r.Date__c =: classOfferingDetails.get(0).Date__c AND (Volunteer_Attendance__c != 'Cancelled' AND Volunteer_Attendance__c != 'Completed') AND Volunteer__c =: userRelatedContactId]) {
+                    for(Volunteer_Orientation_Training__c checkExistingTrainings : [SELECT Id, FORMAT(class_offering__r.Date__c), class_offering__c, class_offering__r.Start_Time__c, class_offering__r.End_Time__c, class_offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c FROM Volunteer_Orientation_Training__c WHERE Type__c = 'Training' AND class_offering__r.Date__c =: classOfferingDetails.get(0).Date__c AND (Volunteer_Attendance__c != 'Volunteer Cancelled' AND Volunteer_Attendance__c != 'Completed') AND Volunteer__c =: userRelatedContactId]) {
                         if(!existingTrainingSet.contains(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)+'-'+endTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c))) {
                             existingTrainingSet.add(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)+'-'+endTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c));
                         }
@@ -327,7 +327,7 @@ public class VolunteerTraining_AC {
                 if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
                     
                     User currVolunteerUser = getUserRelatedContact.get(0);
-                    cancelRegistrationList.get(0).Volunteer_Attendance__c = 'Cancelled';
+                    cancelRegistrationList.get(0).Volunteer_Attendance__c = 'Volunteer Cancelled';
                     cancelRegistrationList.get(0).LMS_Enrollment_Id__c = '';
                     /*Added by Sailappa Vignesh PG
 Description : To Update the Course enrollment status to 'dropped' in LMS*/

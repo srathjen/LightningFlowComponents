@@ -492,10 +492,13 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         Set<Id> addressSet = new Set<Id>();
         Map<Id,Contact> wishFamilyContacMap = new Map<Id,Contact>();
         map<id,Contact> wishChilPhotoMap = new map<id,Contact>();
+        List<Contact> conList = new List<Contact>();
         Contact updatedCon;
         for(Contact newContact : trigger.new)
         {
-           
+               if(newContact.recordTypeId == volunteerRecordTypeId && trigger.oldMap.get(newContact.Id).recordTypeId != volunteerRecordTypeId){
+                   conList.add(newContact);    
+               }
                 
               /*  if(newContact.Wish_Child_Photo__c != Null && trigger.oldmap.get(newContact.id).Wish_Child_Photo__c != newContact.Wish_Child_Photo__c){
                     wishChilPhotoMap.put(newContact.id, newContact);
@@ -625,6 +628,10 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         }
         if(wishFamilyContacMap.size() > 0)
         ContactTriggerHandler.updateRelationship(wishFamilyContacMap);
+        
+        if(conList.Size() > 0){
+             ContactTriggerHandler.CreateAffliation(conList);
+        }
     }
     
      //Reset the address verification checkbox if the address has changed
@@ -644,7 +651,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 system.debug('Update MailingAddressVerified__c>>>>'+newContact.MailingAddressVerified__c);
                 newContact.MailingAddressVerified__c = false;
                 newContact.MailingAddressVerificationAttempted__c = null;
-                newContact.County__c = '';
+                newContact.County__c = ' ';
                 
             }
             
@@ -672,8 +679,14 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
        for(Contact con : Trigger.old)
        {
            conMap.put(con.id,con);
+           
        }
-       if(conMap.size() > 0)
+       if(conMap.size() > 0){
           contactTriggerHandler.UpdateAffiliationPrimaryStatus(conMap);
+          contactTriggerHandler.validateContact(conMap);
+          }
+       
+         
+         
     }
 }

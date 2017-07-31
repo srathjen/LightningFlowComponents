@@ -20,6 +20,7 @@ public class WishReferralFormOut_AC_Test {
         currLead.Child_Middle_Initial__c= 'Testing2';
         currLead.Gender__c= 'Male';
         currLead.Child_Age__c= '16';
+        currLead.PD_Condition_Description__c = 'Liver Transplant';
         currLead.DOB__c=Date.valueOf('2000-09-11');
         currLead.Parent_First_Name__c = 'Testing3';
         currLead.Parent_Last_Name__c = 'Testing3';
@@ -102,5 +103,6 @@ public class WishReferralFormOut_AC_Test {
         wishreferral.accontId = acc.Id;
         wishreferral.password='12345';
         wishreferral.submit();
+        wishreferral.exportCSV();
     }
 }

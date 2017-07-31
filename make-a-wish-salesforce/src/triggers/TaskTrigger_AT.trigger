@@ -153,8 +153,11 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             if(updatedTask.RecordTypeId == volunteerTaskRT) {
                 //updatedTask.IsVisibleInSelfService = true;
             }
-            if(updatedTask.subject == 'Budget is approved' || updatedTask.subject == 'Case ET : Budget Approval Request' ||  updatedTask.subject == 'Budget needs to be revised' || updatedTask.subject == 'Follow-up on wish clearance' || updatedTask.subject == 'Interview date not set'
+            
+            
+            if(updatedTask.subject == 'Budget is approved' || updatedTask.subject == 'Case ET : Budget Approval Request' || updatedTask.subject == 'Budget needs to be revised' || updatedTask.subject == 'Follow-up on wish clearance' || updatedTask.subject == 'Interview date not set'
                || updatedTask.subject == 'Wish Child Birthday Reminder' || updatedTask.subject == 'Wish Family Packet not submitted') {
+                   updatedTask.SystemGeneratedTask__c = True;
                    updatedTask.RecordTypeId = chapterRT;
                    matchContactTaskList.add(updatedTask);
                    taskParentIdSet.add(updatedTask.WhatId);

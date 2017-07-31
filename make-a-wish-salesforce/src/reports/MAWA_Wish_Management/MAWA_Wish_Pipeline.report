@@ -38,9 +38,6 @@
         <field>Case.Referral_Date__c</field>
     </columns>
     <columns>
-        <field>Case.Qualified_Date__c</field>
-    </columns>
-    <columns>
         <field>Case.Copy_1_Qualified_Date__c</field>
     </columns>
     <columns>

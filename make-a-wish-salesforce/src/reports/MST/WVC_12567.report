@@ -24,9 +24,6 @@
     <columns>
         <field>Case.Volunteer_Roles__r$Role__c</field>
     </columns>
-    <columns>
-        <field>Case.Volunteer_Roles__r$IsApproved__c</field>
-    </columns>
     <filter>
         <criteriaItems>
             <column>Case$RecordType</column>
@@ -42,11 +39,6 @@
             <column>Case.Volunteer_Roles__r$Role__c</column>
             <operator>equals</operator>
             <value>Wish Granter</value>
-        </criteriaItems>
-        <criteriaItems>
-            <column>Case.Volunteer_Roles__r$IsApproved__c</column>
-            <operator>equals</operator>
-            <value>1</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>

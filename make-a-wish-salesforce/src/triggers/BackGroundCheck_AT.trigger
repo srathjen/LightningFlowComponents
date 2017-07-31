@@ -71,7 +71,7 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
                 bgcMap.put(currRec.Account_Name__c,new List<Background_check__c>{currRec});
            }
            
-             if(currRec.Date__c != Null)
+             if(currRec.Date__c != Null && currRec.current__c == True)
              {
                  expirationDateMap.put(currRec.id,currRec);
              }
@@ -177,7 +177,7 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
                 rejectedIds.add(dbBackgroundCheckRec.Volunteer__c);
             }
             
-            if(dbBackgroundCheckRec.Date__c != Null && Trigger.oldMap.get(dbBackgroundCheckRec.id).Date__c <> dbBackgroundCheckRec.Date__c)
+            if(dbBackgroundCheckRec.Date__c != Null && Trigger.oldMap.get(dbBackgroundCheckRec.id).Date__c <> dbBackgroundCheckRec.Date__c && dbBackgroundCheckRec.current__c == True)
             {
                  expirationDateMap.put(dbBackgroundCheckRec.Volunteer__c,dbBackgroundCheckRec);
             }
@@ -198,7 +198,7 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
             }
            // if(dbBackgroundCheckRec.ownerId != Trigger.oldMap.get(dbBackgroundCheckRec.id).ownerId)
               //  ownerIds.add(dbBackgroundCheckRec.ownerId);
-            if(dbBackgroundCheckRec.Account_Name__c != Null && currUser[0].UserRole.Name != 'National Staff' && currUser[0].profile.Name != 'System Administrator'){
+            if(dbBackgroundCheckRec.Account_Name__c != Null && currUser[0].UserRole.Name != 'National Staff' && currUser[0].profile.Name != 'System Administrator' && currUser[0].profile.Name != 'Integration'  && currUser[0].profile.Name != 'Active Volunteer (Login)' && currUser[0].profile.Name != 'Active Volunteer (Member)'){
                chapterNamesSet.add(dbBackgroundCheckRec.Account_Name__c );
                chapterNameMap.put(dbBackgroundCheckRec.Id,dbBackgroundCheckRec.Account_Name__c ); 
             }
@@ -258,10 +258,10 @@ trigger BackGroundCheck_AT on Background_check__c (Before insert, Before update,
         }
         
         if(volunteerContactIdSet.size() > 0)
-        BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(volunteerContactIdSet,'backgroundCheck');
+        BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(volunteerContactIdSet,'backgroundcheck');
         
         if(backgroundRejectedSet.size() > 0)
-        BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(backgroundRejectedSet,'backgroundCheck');
+        BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(backgroundRejectedSet,'backgroundcheck');
 
     }
     

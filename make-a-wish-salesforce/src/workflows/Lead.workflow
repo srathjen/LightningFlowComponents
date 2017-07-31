@@ -64,6 +64,10 @@
         <description>Lead:Email Alert to Qualifying Medical Professional when child is eligible</description>
         <protected>false</protected>
         <recipients>
+            <field>Best_contact_for_Physician_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <recipients>
             <field>Treating_Medical_Professional_Email__c</field>
             <type>email</type>
         </recipients>
@@ -130,9 +134,9 @@
             <value>DNQ</value>
         </criteriaItems>
         <criteriaItems>
-            <field>Lead.Migrated_Record__c</field>
-            <operation>equals</operation>
-            <value>False</value>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
         </criteriaItems>
         <description>It send a email notification to Qualifying Medical Professional when child is NOT eligible.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

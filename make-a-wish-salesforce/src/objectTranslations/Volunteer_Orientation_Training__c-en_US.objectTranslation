@@ -125,16 +125,24 @@
         <label><!-- Volunteer Attendance --></label>
         <name>Volunteer_Attendance__c</name>
         <picklistValues>
-            <masterLabel>Cancelled</masterLabel>
-            <translation><!-- Cancelled --></translation>
+            <masterLabel>Chapter Cancelled</masterLabel>
+            <translation><!-- Chapter Cancelled --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Completed</masterLabel>
             <translation><!-- Completed --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>No Show</masterLabel>
+            <translation><!-- No Show --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Registered</masterLabel>
             <translation><!-- Registered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Volunteer Cancelled</masterLabel>
+            <translation><!-- Volunteer Cancelled --></translation>
         </picklistValues>
     </fields>
     <fields>

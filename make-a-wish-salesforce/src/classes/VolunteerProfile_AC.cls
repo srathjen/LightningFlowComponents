@@ -40,6 +40,13 @@ public class VolunteerProfile_AC{
     public Date bcExpirationDate{get;set;}  
           
     
+    public String lMSCourseId {get;set;}
+    public String sSOUrl{get;set;}
+    public String courseURL{get;set;}
+    private LMS_Credentials__c lMSCredential;
+    public LMSSSORespose lMSSSOResponse;
+    public Id userRelatedContactId;
+     List<User> getUserRelatedContact;
     // Initialyzing variables.
     public VolunteerProfile_AC(){
         PersonalInfoSave = true;
@@ -48,7 +55,17 @@ public class VolunteerProfile_AC{
         employeeInfoEdit = false;
         emergencyInfoSave = true;
         emergencyInfoEdit = false;
+        /*
+         getUserRelatedContact = [SELECT Id,contact.Region_Chapter__c,contact.Region_Chapter__r.Chapter_Id__c,Username, LMS_Login__c, LMS_Id__c, ContactId, LMS_User_Code__c,FirstName,LastName,Email FROM User WHERE Id=:currentUserId];
+        lMSCredential = LMS_Credentials__c.getValues('LMS Integration');
+        userRelatedContactId = getUserRelatedContact.get(0).ContactId;*/
         
+        userIns  = [SELECT Id,ContactId FROM User WHERE Id =: userInfo.getUserId() Limit 1];
+        getUserRelatedContact = [SELECT Id,contact.Region_Chapter__c,contact.Region_Chapter__r.Chapter_Id__c,Username, LMS_Login__c, LMS_Id__c, ContactId, LMS_User_Code__c,FirstName,LastName,Email FROM User WHERE Id=:userIns.Id];
+         lMSCredential = LMS_Credentials__c.getValues('LMS Integration');
+         
+          userRelatedContactId = getUserRelatedContact.get(0).ContactId;
+          
          if(ApexPages.currentPage().getParameters().get('PersonalInfo') != Null)
                 PersonalInfoSave= Boolean.valueOf(ApexPages.currentPage().getParameters().get('PersonalInfo'));
         
@@ -105,13 +122,13 @@ public class VolunteerProfile_AC{
         trainingList = new list<classofferingwrapper>();
         awardsList = new list<awardsWrapper>();
         
-        userIns  = [SELECT Id,ContactId FROM User WHERE Id =: userInfo.getUserId() Limit 1];
+        
         for(Volunteer_Orientation_Training__c currentRecord : [SELECT Id,Volunteer__c,Volunteer_Attendance__c,Hidden_O_T_Id__c, Orientation_Training_Hidden__c, 
                                                                /*Orientation_Training__r.RecordType.Name,*/ Class_Offering__r.Type__c,Class_Offering__r.Location__c,
                                                                Class_Offering__r.Date__c,Class_Offering__r.Start_Time__c,Class_Offering__r.End_Time__c,Type__c,
-                                                               Class_Offering__r.Chapter__c,class_Offering__r.RecordType.name
+                                                               Class_Offering__r.Chapter__c,class_Offering__r.RecordType.name,Class_Offering__r.course_Id__c
                                                                FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userIns.ContactId AND
-                                                               (Volunteer_Attendance__c ='completed' OR Volunteer_Attendance__c = 'Registered')]){
+                                                               (Volunteer_Attendance__c ='completed' )]){
             if(currentRecord.Type__c == 'Orientation'){
                classofferingwrapper orientation = new classofferingwrapper();
                orientation.OrientationName = currentRecord.Orientation_Training_Hidden__c;
@@ -122,6 +139,7 @@ public class VolunteerProfile_AC{
                orientation.location = currentRecord.Class_Offering__r.Location__c;
                orientation.recordTypeName = currentRecord.Class_Offering__r.RecordType.name;
                orientation.attendance = currentRecord.Volunteer_Attendance__c;
+               
                orientationList.add(orientation);
             }
             
@@ -136,6 +154,7 @@ public class VolunteerProfile_AC{
                 training.location = currentRecord.Class_Offering__r.Location__c;
                 training.recordTypeName = currentRecord.Class_Offering__r.RecordType.name;
                 training.attendance = currentRecord.Volunteer_Attendance__c;
+                training.courseId = currentRecord.Class_Offering__r.course_Id__c;
                 trainingList.add(training);
             }
         }
@@ -746,6 +765,7 @@ public class VolunteerProfile_AC{
         public string location{get;set;}
         public string recordTypeName{get;set;}
         public string attendance{get;set;}
+        public String courseId{get;set;}
     
     }
     
@@ -777,6 +797,27 @@ public class VolunteerProfile_AC{
         options.add(new SelectOption('Dr.','Dr.'));
         options.add(new SelectOption('Prof.','Prof.'));
         return options;
-    }     
+    }  
+    
+     // Its redirecting to LMS page.
+    public Void viewLMS() {
+        
+        LMSUserResponse currLMSUserResponse = new LMSUserResponse();        
+        if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
+            User currVolunteerUser = getUserRelatedContact.get(0);            
+            currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
+        }
+        
+        System.debug('The course id is'+lMSCourseId);
+        /*Description : To get a access URL from the LMS*/
+        if(currLMSUserResponse != Null && currLMSUserResponse.code != Null ){
+            lMSSSOResponse = LMSHttpRequest.getLMSSSODetails(lMSCredential,currLMSUserResponse.code,lMSCourseId); 
+            sSOUrl = lMSSSOResponse.login_url;
+            //courseURL = 'https://wish.exceedlms-staging.com/student/home/show_enrollment/50174731';  
+            courseURL =  lMSSSOResponse.enrollment_url;
+            
+        }
+        
+    }   
     
 }

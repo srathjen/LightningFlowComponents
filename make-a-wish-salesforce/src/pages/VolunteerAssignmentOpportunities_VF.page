@@ -107,15 +107,13 @@ Description : This page is used to display the volunteer opportunity recordes wh
 
                                                             <apex:outputLink style="text-decoration: underline;color: blue;" value="/{!con.nonWishOpportunities.Non_Wish_Event__c}" id="theLink">View</apex:outputLink>
 
-                                                                 | &nbsp;
-                                                                <apex:commandLink value="Register" action="{!RegisterNonWishEvents}"  style="text-decoration: underline; color:blue;">
+                                                                <!-- Commented for WVC-1412 -->
+                                                               <!-- <apex:commandLink value="Register" action="{!RegisterNonWishEvents}"  style="text-decoration: underline; color:blue;">
                                                                     <apex:param name="nickName" value="{!con.nonWishOpportunities[fieldValue]}" assignTo="{!volunteerOpportunityRecordId}"/>
-                                                                </apex:commandLink>
-
-
+                                                                </apex:commandLink> --->
                                                             </td>
                                                         </apex:outputpanel>
-                                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'Event Date' && fieldValue.label != 'HiddenVolunteer Count Description' }">
+                                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'Event Date' && fieldValue.label != 'HiddenVolunteer Count Description' && fieldValue.label != 'Date' }">
                                                             <td>{!con.nonWishOpportunities[fieldValue]}</td>
                                                         </apex:outputpanel>
 
@@ -126,6 +124,15 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                                 </apex:outputText>
                                                             </td>
                                                         </apex:outputpanel>
+                                                        
+                                                        <apex:outputpanel rendered="{!fieldValue.label  == 'Date'}">
+                                                            <td>
+                                                                 <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                                                    <apex:param value="{!con.nonWishOpportunities[fieldValue]}"/>
+                                                                </apex:outputText>
+                                                            </td>
+                                                        </apex:outputpanel>
+                                                        
                                                     </apex:repeat>
                                                     <td style='text-align: center;'>{!con.nonWishOpportunityCount}</td>
                                                     <td style='text-align: center;'>{!con.registeredNonWishOpportunityCount}</td>

@@ -197,6 +197,10 @@
         <name>FY17_Q4__c</name>
     </fields>
     <fields>
+        <label><!-- Family Dynamics Notes --></label>
+        <name>Family_Dynamics_Notes__c</name>
+    </fields>
+    <fields>
         <label><!-- Family Dynamics --></label>
         <name>Family_Dynamics__c</name>
         <picklistValues>
@@ -2231,6 +2235,10 @@
         <label><!-- Organization --></label>
         <name>Organization</name>
     </recordTypes>
+    <validationRules>
+        <errorMessage><!-- Please fill the Family Dynamics Notes --></errorMessage>
+        <name>Family_Dynamics_Validation</name>
+    </validationRules>
     <validationRules>
         <errorMessage><!-- You don&apos;t have access to create to this type of  account --></errorMessage>
         <name>Program_NationalStaff_Account_Validation</name>

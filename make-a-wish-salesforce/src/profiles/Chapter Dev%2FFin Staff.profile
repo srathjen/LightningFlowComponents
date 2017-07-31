@@ -175,6 +175,14 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>Batch_UpdateChildCaseOwner_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Batch_UpdateChildCaseOwner_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Batch_UpdateVolunteerStatusSchedule_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -521,6 +529,10 @@
     <classAccesses>
         <apexClass>LeadTriggerHandler</apexClass>
         <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>LeadTriggerHandler_Test</apexClass>
+        <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>LeadTrigger_AT_Test</apexClass>
@@ -1291,6 +1303,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Account.FY17_Q4__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Account.Family_Dynamics_Notes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2135,7 +2152,27 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Background_Check_File__c.Preview_Key__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Background_Check_File__c.Preview_Version_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Background_Check_File__c.Private__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Background_Check_File__c.Thumbnail_Key__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Background_Check_File__c.Thumbnail_Version_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2644,9 +2681,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Case.Case_Member_Count__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -3265,6 +3302,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Case.Hidden_Hold_Status_Value__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Case.Hidden_Lead_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -3749,7 +3791,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>Case.Qualified_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6155,6 +6197,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Wish_How_Did_you_hear_about_Make_A_Wish__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Wish_Liability_IsSigned__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7064,6 +7111,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Event.SystemGeneratedTask__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Event.TaskVolunteerRole__c</field>
         <readable>true</readable>
@@ -7260,7 +7312,27 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement_File__c.Preview_Key__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement_File__c.Preview_Version_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>In_Kind_Donation_Reimbursement_File__c.Private__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement_File__c.Thumbnail_Key__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement_File__c.Thumbnail_Version_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -7475,6 +7547,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>In_Kind_Donation_Reimbursement__c.HiddenIsSubmittedforApproval__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>In_Kind_Donation_Reimbursement__c.In_Kind_Donor_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7647,6 +7724,11 @@
         <editable>true</editable>
         <field>Lead.Additional_Parent_Postal_Code__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Additional_Parent_Primary__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -7884,11 +7966,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>Lead.Group_1__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>false</editable>
         <field>Lead.HasOptedOutOfEmail</field>
         <readable>false</readable>
@@ -7934,6 +8011,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Hidden_Wish_Child_Last_Initial__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Hospital_Treatment_Facility_Treating__c</field>
         <readable>true</readable>
@@ -7941,6 +8023,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Hospital_Treatment_Facility__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.How_Did_you_hear_about_Make_A_Wish__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -8845,7 +8932,27 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Lead_File__c.Preview_Key__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead_File__c.Preview_Version_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Lead_File__c.Private__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead_File__c.Thumbnail_Key__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead_File__c.Thumbnail_Version_Id__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -8967,6 +9074,16 @@
         <editable>false</editable>
         <field>Non_Wish_Events__c.From_Mulesoft__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Non_Wish_Events__c.Hidden_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Non_Wish_Events__c.Hidden_Location__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -10194,6 +10311,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Task.SystemGeneratedTask__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Task.TaskVolunteerRole__c</field>
         <readable>true</readable>
@@ -10815,7 +10937,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Volunteer_Count__c.Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Volunteer_Count__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Volunteer_Count__c.End_Time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -10830,12 +10962,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Volunteer_Count__c.Location__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Volunteer_Count__c.Non_Wish_Events__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
         <field>Volunteer_Count__c.Registered__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Volunteer_Count__c.Start_Time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -10880,7 +11022,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Volunteer_Opportunity__c.Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Volunteer_Opportunity__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Volunteer_Opportunity__c.End_Time__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -10965,6 +11117,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Volunteer_Opportunity__c.Hidden_VolunteerCount_Desc__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Volunteer_Opportunity__c.Hidden_Volunteer_Contact_Email__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -10980,12 +11137,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Volunteer_Opportunity__c.Inactive__c</field>
+        <field>Volunteer_Opportunity__c.Inactivated_or_Rejected_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Volunteer_Opportunity__c.IsApproved__c</field>
+        <field>Volunteer_Opportunity__c.Inactive__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -11115,6 +11272,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Volunteer_Opportunity__c.Start_Time__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Volunteer_Opportunity__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -11166,11 +11328,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Volunteer_Opportunity__c.Zip__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Volunteer_Opportunity__c.isRejected__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -13605,8 +13762,16 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>WishPaperPacketFieldMessage_VF</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>WishParticipants_VF</apexPage>
         <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>WishReceipt</apexPage>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishReferralFormOutCSV_VF</apexPage>

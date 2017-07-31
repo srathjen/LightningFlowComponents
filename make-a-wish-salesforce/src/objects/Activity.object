@@ -403,6 +403,14 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>SystemGeneratedTask__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to identify the system generated task</description>
+        <externalId>false</externalId>
+        <label>System Generated Task</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>TaskVolunteerRole__c</fullName>
         <description>It holds the volunteer Role</description>
         <externalId>false</externalId>

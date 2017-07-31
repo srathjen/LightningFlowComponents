@@ -422,8 +422,8 @@ public class WishLiabilityForm_AC
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailBlurb":"Make-A-Wish Liability And Publicity Release Form",'+
-            '  "emailSubject": "Make-A-Wish Liability And Publicity Release Form",'+
+            '  "emailBlurb":"Please sign the attached Liability And Publicity Release Form. \r\n\n Thank You,\r\n\n Wish & Volunteer Center",'+
+            '  "emailSubject": "Signature Required - Liability And Publicity Release Form",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+
             '      "name": "document.pdf",'+
@@ -803,8 +803,8 @@ public class WishLiabilityForm_AC
                    String body =  '{'+
                        '  "status":"sent",'+
                        '  "enableWetSign": "false",'+
-                       '  "emailBlurb":"Make-A-Wish Liability And Publicity Release Form",'+
-                       '  "emailSubject": "Make-A-Wish Liability And Publicity Release Form",'+
+                       '  "emailBlurb":"Please sign the attached Liability And Publicity Release Form.\r\n\n Thank You,\r\n\n Wish & Volunteer Center",'+
+                       '  "emailSubject": "Signature Required - Liability And Publicity Release Form",'+
                        '  "enforceSignerVisibility":"True",'+
                        '  "documents": [{'+
                        '      "name": "document.pdf",'+

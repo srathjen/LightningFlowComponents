@@ -99,15 +99,15 @@ public class DiagnosisVerification_AC {
         }
         
         /*if((!String.isEmpty(currLead.Travel_algorithm__c)) && currLead.Travel_algorithm__c.contains(';')) {
-            Integer i = 0;
-            currentCondition = '';
-            for(String currentSplitString : currLead.Travel_algorithm__c.split(';')) {
-                if(!String.isEmpty(currentSplitString)) {
-                    currentCondition += i+1 +'. '+ currentSplitString + '\n';
-                    i++;
-                }
-            }
-        }*/
+Integer i = 0;
+currentCondition = '';
+for(String currentSplitString : currLead.Travel_algorithm__c.split(';')) {
+if(!String.isEmpty(currentSplitString)) {
+currentCondition += i+1 +'. '+ currentSplitString + '\n';
+i++;
+}
+}
+}*/
         
         //Loading all the Medicial Questions.
         for(Medical_Questions__c medicalQuestions : [SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c FROM Medical_Questions__c order by Sort_Order__c ASC]){
@@ -212,15 +212,15 @@ public class DiagnosisVerification_AC {
                                                     travelMap.put(currRec.Current_Condition__c,currRec.Wrapper_Variable__c);
                                             }
         /*if(currLead.Travel_algorithm__c != null) {
-            travelAlgorithmWrapperIns.algList = currLead.Travel_algorithm__c.removeEnd(';');            
-            if(travelAlgorithmWrapperIns.algList.contains(';')) {
-                for(String travel : travelAlgorithmWrapperIns.algList.split(';')) {
-                    travelAlgorithmWrapperIns.travelSet.add(travel);
-                }
-            } else {
-                travelAlgorithmWrapperIns.travelSet.add(travelAlgorithmWrapperIns.algList);
-            }
-        }*/
+travelAlgorithmWrapperIns.algList = currLead.Travel_algorithm__c.removeEnd(';');            
+if(travelAlgorithmWrapperIns.algList.contains(';')) {
+for(String travel : travelAlgorithmWrapperIns.algList.split(';')) {
+travelAlgorithmWrapperIns.travelSet.add(travel);
+}
+} else {
+travelAlgorithmWrapperIns.travelSet.add(travelAlgorithmWrapperIns.algList);
+}
+}*/
         String jsonString = json.serialize(travelAlgorithmWrapperIns);
         Map<String,Object> wrapClsMap = new Map<String,Object>();
         wrapClsMap = (Map<String,Object>)json.deserializeuntyped(jsonString);            
@@ -453,7 +453,10 @@ showAddAnotherDiagnosisBtn = true;
                             diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = 'value-selected';
                             diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = icdCodeInfo[0].Short_Description__c;
                             MediacalQuestions(icdCodeInfo[0].Name, conditionDescriptionInfo[0].Id, icdCodeInfo[0].Group1__c,  icdOrPcd, diagnosisBlockNum,medicalQuestionList);
-                        } 
+                        } else {
+                            diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = 'value-selected';
+                            MediacalQuestions(conditionDescriptionInfo[0].Code_To_Use__c, conditionDescriptionInfo[0].Id, conditionDescriptionInfo[0].Group1__c,  icdOrPcd, diagnosisBlockNum,medicalQuestionList);
+                        }
                         //Medical question inputs for given Condition Description if the ICD Code is null
                     } else {
                         MediacalQuestions(conditionDescriptionInfo[0].Code_To_Use__c, conditionDescriptionInfo[0].Id, conditionDescriptionInfo[0].Group1__c,  icdOrPcd, diagnosisBlockNum,medicalQuestionList);
@@ -829,7 +832,7 @@ showAddAnotherDiagnosisBtn = true;
         if(!String.isEmpty(currentConditionFormattedString)) {
             currLead.Current_Condition_Label__c = currentConditionFormattedString;
         }
-       
+        
         try{
             update currLead;
             insert diagnosisVerificationLstForInsert;

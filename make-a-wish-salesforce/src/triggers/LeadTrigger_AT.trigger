@@ -33,6 +33,13 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                 newLead.Additional_Parent_Postal_Code__c = '';
                 
             }
+            If(newLead.Additional_Parent_First_Name__c == Null && newLead.Additional_Parent_Last_Name__c == Null && newLead.Additional_Parent_Phone__c == Null
+                && newLead.Additional_Parent_Email__c == Null && newLead.Additional_Parent_City__c == Null && newLead.Additional_Parent_Postal_Code__c == Null){
+                
+                newLead.Additional_Parent_State__c = '';
+                
+                
+            }
             leadChapterSet.add(newLead.ChapterName__c);
             leadRegionMap.put(newLead.Id, newLead);
             newLead.Part_A_Form_Password__c= handlerIns.getRandom();
@@ -205,7 +212,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                 {
                     newLead.Short_Description__c = '';
                     newLead.Long_Description__c = '';
-                    newLead.Group_1__c = false;
+                    //newLead.Group_1__c = false;
                     newLead.MAW_Name__c = '';
                 }
                 

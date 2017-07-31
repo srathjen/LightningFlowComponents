@@ -21,22 +21,27 @@ private static testmethod void createVolunterSelection(){
         System.RunAs(new User(Id = UserInfo.getUserId())) {
            
             currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.id);
-        }
-        Volunteer_Opportunity__c wishVolunteerOpportunity = OrientationandTrainingUtil.CreateNewWishVolunteerOpportunity(acc.Id,currChapRole.Id,newParentWish.Id);
-            wishVolunteerOpportunity.Volunteer_Name__c = con.Id;
-            update wishVolunteerOpportunity;
-        System.RunAs(currUser)
-        {
             
-            VolunteerOpportunitySelection_AC volunteeerController = new VolunteerOpportunitySelection_AC();
+        }
+         Volunteer_Opportunity__c wishVolunteerOpportunity = OrientationandTrainingUtil.CreateNewWishVolunteerOpportunity(acc.Id,currChapRole.Id,newParentWish.Id);
+            Volunteer_Opportunity__c dbVolOpp = new Volunteer_Opportunity__c();
+            dbVolOpp.Id = wishVolunteerOpportunity.Id;
+            dbVolOpp.Volunteer_Name__c = con.Id;
+            dbVolOpp.Status__c = 'Approved';
+            update dbVolOpp;
+            
+           system.RunAs(currUser){
+           VolunteerOpportunitySelection_AC volunteeerController = new VolunteerOpportunitySelection_AC();
             volunteeerController.createTimeSheet();
             volunteeerController.CreateNewTimeSheet();
             volunteeerController.DisplayError();
             VolunteerOpportunitySelection_AC.volunteerWrapper newWrapper = new VolunteerOpportunitySelection_AC.volunteerWrapper();
             newWrapper.recordSelected = false;
-            newWrapper.volOpp = wishVolunteerOpportunity;
-
-        }
+            newWrapper.volOpp = dbVolOpp;
+            }
+           
+           
+        
         //volunteeerController.volunteerWrapper();
       //volunteeerController.createTimeSheet();
         //volunteeerController.CreateNewTimeSheet();
