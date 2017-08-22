@@ -42,6 +42,7 @@ public Class WishChildForm_AC{
     Public Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
     Public Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
     Public String driverInfo = '';
+    public Set<String> relationShipSet = new Set<String>();
     public WishChildForm_AC(Apexpages.StandardController controller){
         currentPageId =  ApexPages.currentPage().getParameters().get('id');
         isChildPart = false ;
@@ -102,9 +103,9 @@ public Class WishChildForm_AC{
                                                         }
                                                         tshirt = wishChildForm.T_Shirt_Size__c;
                                                     }
-             system.debug('wishchildlistsizeoutsideif=0'+wcfUtil.wishChildList.size());
+            system.debug('wishchildlistsizeoutsideif=0'+wcfUtil.wishChildList.size());
             if(wcfUtil.wishChildList.size() == 0){ 
-            system.debug('wishchildlistsizeinsideif=0');         
+                system.debug('wishchildlistsizeinsideif=0');         
                 init(); 
             }
             else{
@@ -144,7 +145,6 @@ public Class WishChildForm_AC{
                     }
                 }
                 if(currWishChild.Driver_Details__c != null){
-                    
                     Integer i = 0;
                     String jsonString = currWishChild.Driver_Details__c;
                     JsonString = jsonString.replace('&quot;', '"');
@@ -157,24 +157,22 @@ public Class WishChildForm_AC{
                         wrapCls.state  = (currRec.state !=Null)?currRec.state :'';
                         wrapCls.expirationDate  = (currRec.expirationDate!=Null)?Date.valueOf(currRec.expirationDate):Null;
                         wrapCls.type =  (currRec.type!=Null)?currRec.type:'';
-                        
-                     if(driverInfo == '' && i == 0){
-                        system.debug('@@@@@ wrapCls.expirationDate @@@@@@@@@'+wrapCls.expirationDate);
-                         if(string.valueof(wrapCls.expirationDate) != null ){
-                         String S = String.valueof(wrapCls.expirationDate);
-                         String s1 = S.remove(' 00:00:00');
-                         driverInfo = wrapCls.driverName+' '+'|'+' '+wrapCls.licenseNum+' '+'|'+' '+wrapCls.state +' '+'|'+' '+ s1 +' '+'|'+' '+wrapCls.type;      
-                      }
-                    } 
-                     
-                     if(driverInfo != '' && i > 0){
-                         if(string.valueof(wrapCls.expirationDate) != null){
-                         String S = String.valueof(wrapCls.expirationDate);
-                         String s1 = S.remove(' 00:00:00');
-                         driverInfo = driverInfo + '<br/>'+wrapCls.driverName+' '+'|'+' '+wrapCls.licenseNum+' '+'|'+' '+wrapCls.state +' '+'|'+' '+s1+' '+'|'+' '+wrapCls.type;      
-                         }
-                     }
-                      i++;
+                        if(driverInfo == '' && i == 0){
+                            system.debug('@@@@@ wrapCls.expirationDate @@@@@@@@@'+wrapCls.expirationDate);
+                            if(string.valueof(wrapCls.expirationDate) != null ){
+                                String S = String.valueof(wrapCls.expirationDate);
+                                String s1 = S.remove(' 00:00:00');
+                                driverInfo = wrapCls.driverName+' '+'|'+' '+wrapCls.licenseNum+' '+'|'+' '+wrapCls.state +' '+'|'+' '+ s1 +' '+'|'+' '+wrapCls.type;      
+                            }
+                        } 
+                        if(driverInfo != '' && i > 0){
+                            if(string.valueof(wrapCls.expirationDate) != null){
+                                String S = String.valueof(wrapCls.expirationDate);
+                                String s1 = S.remove(' 00:00:00');
+                                driverInfo +=  '<br/>'+wrapCls.driverName+' '+'|'+' '+wrapCls.licenseNum+' '+'|'+' '+wrapCls.state +' '+'|'+' '+s1+' '+'|'+' '+wrapCls.type;      
+                            }
+                        }
+                        i++;
                         wcfUtil.driverWrapperCls.add(wrapCls);
                     }
                 }
@@ -207,13 +205,11 @@ public Class WishChildForm_AC{
                         else
                             name+=','+' '+s;
                     }
-                    
                     name =  name.removeEnd(';');
                     wcfUtil.righttDietaryNameList.add(name);
                     wcfUtil.currrentDietaryName = name;
                     wcfUtil.dietaryNamesSet.add(name);
                 }
-                
                 if(currWishChild.Requested_Participant_Name_for_OtherNeed__c!= null){
                     String name = '';
                     for(String s : (currWishChild.Requested_Participant_Name_for_OtherNeed__c).split(';')){
@@ -222,7 +218,6 @@ public Class WishChildForm_AC{
                         else
                             name+=','+' '+s;
                     }
-                    
                     name =  name.removeEnd(';');
                     wcfUtil.righttOtherNeedsList.add(name);
                     wcfUtil.currentOtherNeeds = name;
@@ -249,7 +244,6 @@ public Class WishChildForm_AC{
                         else
                             name+=','+' '+s;
                     }     
-                    
                     name =  name.removeEnd(';');
                     wcfUtil.rightAllergyNamesList.add(name);
                     wcfUtil.currentAllergyNames = name;
@@ -263,7 +257,6 @@ public Class WishChildForm_AC{
                         else
                             name+=','+' '+s;
                     }         
-                    
                     name =  name.removeEnd(';');
                     wcfUtil.rightOwnWheelChairList.add(name);
                     wcfUtil.currentOwnWheelChair = name;
@@ -335,8 +328,8 @@ public Class WishChildForm_AC{
                         if(childParticipantsWrap == null){
                             childParticipantsWrap  = new WishChildFormUtil.WrapperClass();
                         }
-                        childParticipantsWrap.firstName = childCase.Contact.FirstName;
-                        childParticipantsWrap.LastName = childCase.Contact.LastName;
+                        childParticipantsWrap.firstName = childCase.Contact.FirstName.trim();
+                        childParticipantsWrap.LastName = childCase.Contact.LastName.trim();
                         childParticipantsWrap.MiddleName = childCase.Contact.Middle_Name__c;               
                         childParticipantsWrap.Email = childCase.Contact.Email;  
                         if(childParticipantsWrap.Email == Null)
@@ -370,18 +363,15 @@ public Class WishChildForm_AC{
             If(approvalIns.size() > 0){           
                 wcfUtil.approvalError = true;
             }
-            
             if(currWishChild.FirstName__c == Null || currWishChild.LastName__c == Null || currWishChild.BirthDate__c == Null || currWishChild.Gender__c == Null || 
                currWishChild.T_Shirt_Size__c == Null || currWishChild.Street__c ==  Null || currWishChild.City__c == Null || currWishChild.State__c == Null ||
                currWishChild.Zip_Code__c ==  Null){
                    isWishchildFormRequired = true;
                }
-            
             if(currWishChild.Emergency_Relationship__c == Null || currWishChild.Emergency_First_Name__c == Null || currWishChild.Emergency_Last_Name__c == Null || currWishChild.Emergency_Mobilephone__c == Null || currWishChild.Wish_Family_Contact__c == Null  
-               || currWishChild.Participant_Contacts__c == Null || currWishChild.Already_wish_granted_by_MAW_Other_Org__c == Null){
+               || currWishChild.Participant_Contacts__c == Null || currWishChild.Already_wish_granted_by_MAW_Other_Org__c == Null || currWishChild.IsWishFamily__c == true || currWishChild.IsParticipant__c == true){
                    isWishfamilyFormRequired = true;
                }
-            
             if(currWishChild.Hidden_Contact_Name__c != Null && currWishChild.Hidden_Wish_Fmaily_Contact_Name__c != Null){
                 Set<String> nameset = new Set<String>();
                 Set<String> namesetOne = new Set<String>();
@@ -400,8 +390,8 @@ public Class WishChildForm_AC{
     }
     
     public void init(){
-    system.debug('init method called');
-    currWishChild.FirstName__c =  currCase.Contact.FirstName;
+        system.debug('init method called');
+        currWishChild.FirstName__c =  currCase.Contact.FirstName;
         currWishChild.LastName__c  =  currCase.Contact.LastName;
         currWishChild.Middle_Name__c =  CurrCase.Contact.Middle_Name__c;
         currWishChild.BirthDate__c = currCase.Contact.BirthDate;
@@ -418,30 +408,27 @@ public Class WishChildForm_AC{
         currWishChild.Zip_code__c = currCase.Contact.MailingPostalCode;
         currWishChild.Bringing_Own_Wheel_Chair__c = currWishChild.Bringing_Own_Wheel_Chair__c;
         for(npe4__Relationship__c currRel : [SELECT id,npe4__RelatedContact__c,npe4__RelatedContact__r.FirstName, npe4__RelatedContact__r.LastName,
-                                             npe4__RelatedContact__r.Email, npe4__RelatedContact__r.Phone, npe4__RelatedContact__r.Middle_Name__c,npe4__RelatedContact__r.Mailingcity,npe4__RelatedContact__r.Mailingstreet,npe4__RelatedContact__r.MailingState,npe4__RelatedContact__r.MailingPostalCode,npe4__Type__c 
-                                             FROM npe4__Relationship__c  
-                                             WHERE npe4__Contact__c  = :currCase.ContactId AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId AND (npe4__Type__c != 'Medical Professional' OR npe4__Type__c  != 'Employer' OR npe4__Type__c != 'Employee' OR npe4__Type__c != 'Coworker' OR npe4__Type__c != 'Sibling')])
+                                             npe4__RelatedContact__r.Email,Hidden_isparentFirst__c,npe4__RelatedContact__r.Phone, npe4__RelatedContact__r.Middle_Name__c,npe4__RelatedContact__r.Mailingcity,npe4__RelatedContact__r.Mailingstreet,
+                                             npe4__RelatedContact__r.MailingState,npe4__RelatedContact__r.MailingPostalCode,npe4__Type__c FROM npe4__Relationship__c WHERE npe4__Contact__c  = :currCase.ContactId AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId
+                                             AND Hidden_isparentFirst__c = true])
         {
-           if(currRel.npe4__Type__c != 'Sibling'){
-            WishChildFormUtil.WrapperClass wrapCls = new WishChildFormUtil.WrapperClass();
-            wrapCls.FirstName = currRel.npe4__RelatedContact__r.FirstName;
-            wrapCls.MiddleName = currRel.npe4__RelatedContact__r.Middle_Name__c;
-            wrapCls.lastName = currRel.npe4__RelatedContact__r.LastName;
-            wrapCls.mobileTelephone = currRel.npe4__RelatedContact__r.Phone;
-            wrapCls.Email =  currRel.npe4__RelatedContact__r.Email;
-            wrapCls.City = currRel.npe4__RelatedContact__r.Mailingcity; 
-            wrapCls.Street = currRel.npe4__RelatedContact__r.MailingStreet;
-            wrapCls.State = currRel.npe4__RelatedContact__r.MailingState;
-            wrapCls.PostalCode = currRel.npe4__RelatedContact__r.MailingPostalCode;
-            wrapCls.Relationship = currRel.npe4__Type__c;
-            wrapCls.homeTelephone =  null;
-            wrapCls.workTelephone =  null;
-            wrapCls.sameParentGuardianFlag = false;
-            wrapCls.relId = currRel.npe4__RelatedContact__c;
-            wcfUtil.wishFamilyWrapList.add(wrapCls); 
-            }
+                WishChildFormUtil.WrapperClass wrapCls = new WishChildFormUtil.WrapperClass();
+                wrapCls.FirstName = currRel.npe4__RelatedContact__r.FirstName;
+                wrapCls.MiddleName = currRel.npe4__RelatedContact__r.Middle_Name__c;
+                wrapCls.lastName = currRel.npe4__RelatedContact__r.LastName;
+                wrapCls.mobileTelephone = currRel.npe4__RelatedContact__r.Phone;
+                wrapCls.Email =  currRel.npe4__RelatedContact__r.Email;
+                wrapCls.City = currRel.npe4__RelatedContact__r.Mailingcity; 
+                wrapCls.Street = currRel.npe4__RelatedContact__r.MailingStreet;
+                wrapCls.State = currRel.npe4__RelatedContact__r.MailingState;
+                wrapCls.PostalCode = currRel.npe4__RelatedContact__r.MailingPostalCode;
+                wrapCls.Relationship = currRel.npe4__Type__c;
+                wrapCls.homeTelephone =  null;
+                wrapCls.workTelephone =  null;
+                wrapCls.sameParentGuardianFlag = false;
+                wrapCls.relId = currRel.npe4__RelatedContact__c;
+                wcfUtil.wishFamilyWrapList.add(wrapCls); 
         }   
-        
         if(wcfUtil.wishFamilyWrapList.size() > 0){
             String JSONString = JSON.serialize(wcfUtil.wishFamilyWrapList);
             currWishChild.Wish_Family_Contact__c = JSONString;  
@@ -454,11 +441,11 @@ public Class WishChildForm_AC{
         system.debug('childAsPartList'+childAsPartList.size());
         for( Case childCase:childAsPartList){
             if(count == 0){
-                    system.debug('countfirst'+count);
+                system.debug('countfirst'+count);
                 isChildPart = true;
                 WishChildFormUtil.WrapperClass childParticipantsWrap = new WishChildFormUtil.WrapperClass();
-                childParticipantsWrap.firstName = childCase.Contact.FirstName;
-                childParticipantsWrap.LastName = childCase.Contact.LastName;
+                childParticipantsWrap.firstName = childCase.Contact.FirstName.trim();
+                childParticipantsWrap.LastName = childCase.Contact.LastName.trim();
                 childParticipantsWrap.MiddleName = childCase.Contact.Middle_Name__c;               
                 childParticipantsWrap.Email = childCase.Contact.Email;   
                 childParticipantsWrap.dob = childCase.Contact.BirthDate;   
@@ -471,7 +458,7 @@ public Class WishChildForm_AC{
                 wrapParticipantsList.add(childParticipantsWrap);
             }
             count++;
-                    system.debug('countincrement'+count);
+            system.debug('countincrement'+count);
         }
         if(wrapParticipantsList.size() > 0)   
         {
@@ -485,23 +472,37 @@ public Class WishChildForm_AC{
         Constant_AC  constant = new Constant_Ac(); 
         Set<String> nameset = new Set<String>();   
         Set<String> namesetOne = new Set<String>();   
+        List<Wish_Child_Form__c> wishchildList = [Select Id,Case__c,CreatedDate From Wish_Child_Form__c Where case__c =:currCase.id ORDER BY CreatedDate ASC Limit 1];
+        
         Id wishDeterminationId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         List<Case> currWishDeterminationCaseId = [SELECT ID FROM CASE WHERE  ParentId = :currWishChild.Case__c AND RecordTypeId = :wishDeterminationId];
-        System.debug('342 - '+wcfUtil.wishFamilyWrapList);
+        
         if(currWishDeterminationCaseId.size() > 0)
             currWishChild.Wish_Determination_Case_Id__c = currWishDeterminationCaseId[0].id;
         
         try{
             System.debug('wcfUtil.wishFamilyWrapList - '+wcfUtil.wishFamilyWrapList);
+            System.debug('@@@@@@@@@ Size - '+wcfUtil.wishFamilyWrapList.size());
             if(wcfUtil.wishFamilyWrapList.size() > 0){
+            System.debug('@@@@@@@@@ Size 12- '+wcfUtil.wishFamilyWrapList.size());
                 String FamilyContactEmail = '';
                 String FamilyContactName = '';
                 String RelatedContact = '';
+                boolean isFamily = false;
                 if(currWishChild.Wish_Family_Contact__c == Null)
                     currWishChild.Wish_Family_Contact__c = '';
                 String JSONString = JSON.serialize(wcfUtil.wishFamilyWrapList);
                 currWishChild.Wish_Family_Contact__c = JSONString;
+                 system.debug('@@@@ IsFamily 3333 @@@@'+isFamily);
                 for(WishChildFormUtil.WrapperClass currRec : wcfUtil.wishFamilyWrapList){
+                 system.debug('@@@@ IsFamily 33445 @@@@'+isFamily);
+                  if(String.isEmpty(currRec.FirstName) || String.isEmpty(currRec.LastName) || String.isEmpty(currRec.Email) ||  String.isEmpty(currRec.Relationship)|| String.isEmpty(currRec.City)|| String.isEmpty(currRec.Street)|| String.isEmpty(currRec.State) || 
+                    String.isEmpty(currRec.PostalCode)|| currRec.dob == null|| (String.isEmpty(currRec.homeTelephone)  && String.isEmpty(currRec.workTelephone) && String.isEmpty(currRec.mobileTelephone)))
+                    {  
+                        isFamily = true;
+                        system.debug('@@@@ IsFamily @@@@'+isFamily);
+                    }
+                   
                     if(currRec.FirstName != Null && currRec.LastName != Null && currRec.LastName!= Null){
                         String name = currRec.FirstName+'-'+currRec.LastName+'-'+currRec.Email;
                         String nameone = currRec.FirstName+'-'+currRec.LastName;
@@ -509,12 +510,12 @@ public Class WishChildForm_AC{
                         nameset.add(name);
                         if(FamilyContactEmail != Null && FamilyContactEmail != '' && FamilyContactName != Null && FamilyContactName != ''){
                             if(currRec.dob != Null){
-                               Date dt = Date.Valueof(currRec.dob);
-                               Integer days = dt.daysBetween(Date.Today());
-                               Integer age = Integer.valueOf(days/365);
-                               if(age >=  18){
+                                Date dt = Date.Valueof(currRec.dob);
+                                Integer days = dt.daysBetween(Date.Today());
+                                Integer age = Integer.valueOf(days/365);
+                                if(age >=  18){
                                     FamilyContactEmail +='#'+currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email;
-                               }
+                                }
                             }
                         }
                         else{
@@ -526,8 +527,7 @@ public Class WishChildForm_AC{
                                     FamilyContactEmail = currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email;
                                 }
                             }
-                        
-                            }
+                         }
                         if(FamilyContactName != Null && FamilyContactName != ''){
                             if(currRec.dob != Null){
                                 Date dt = Date.Valueof(currRec.dob);
@@ -557,13 +557,18 @@ public Class WishChildForm_AC{
                                 RelatedContact = currRec.FirstName.trim()+' '+currRec.LastName.trim();
                         }
                     }
-                }                     
+                } 
                 
+                if(isFamily == false){
+                    isFamily = false;
+                }                    
                 currWishChild.Hidden_Wish_Fmaily_Contact_Email__c = FamilyContactEmail;
                 currWishChild.Hidden_Wish_Fmaily_Contact_Name__c = FamilyContactName;
                 currWishChild.RelatedContact__c = RelatedContact;
-            }
-            if(ethnicityList.size() > 0){
+                currWishChild.IsWishFamily__c = isFamily;
+                }
+            if(ethnicityList.size() > 0)
+            {
                 String ect = '';
                 for(String str : ethnicityList){
                     if(str != null){
@@ -596,6 +601,7 @@ public Class WishChildForm_AC{
                 String JSONString = JSON.serialize(wcfUtil.wishParticipantList);                   
                 currWishChild.Participant_Contacts__c= JSONString;
                 currWishChild.Participant_Names__c = '';
+                boolean isFamily = false;
                 Integer age;
                 System.debug('SAVE METHOD - '+wcfUtil.wishParticipantList);
                 for(WishChildFormUtil.WrapperClass currRec : wcfUtil.wishParticipantList){
@@ -607,8 +613,13 @@ public Class WishChildForm_AC{
                     if(currRec.FirstName != Null && currRec.LastName != Null && currRec.relationship != 'Self' )
                     {
                         currWishChild.Participant_Names__c +=+','+' '+currRec.FirstName.trim()+' '+currRec.LastName.trim();
+                    }
+                    if(String.isEmpty(currRec.FirstName) || String.isEmpty(currRec.LastName) || currRec.dob == null || String.isEmpty(currRec.residingWishMedical)|| String.isEmpty(currRec.medicalNeeds)  || String.isEmpty(currRec.relationship) && currRec.relationship != 'Self' ){
+                        isFamily = true;
                     } 
-                    
+                    if(age >= 18 && String.isEmpty(currRec.Email)){
+                       // isFamily = true;
+                    }
                     if(currRec.FirstName != Null && currRec.LastName != Null && currRec.Email != Null && age >= 18 && currRec.relationship != 'Self'){
                         String participantName = currRec.FirstName+'-'+currRec.LastName+'-'+currRec.Email;
                         if(!nameset.contains(participantName))
@@ -619,12 +630,15 @@ public Class WishChildForm_AC{
                         if(!namesetOne.contains(name))
                             currWishChild.Participant_Name__c +=currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+age+'#';
                     }
-                    
                     if(currRec.dob != Null){
                         Date dt = Date.Valueof(currRec.dob);
                         Integer days = dt.daysBetween(Date.Today());
                         age = Integer.valueOf(days/365);
                     }  
+                }
+                
+                if(isFamily == false){
+                     isFamily = false;
                 }
                 if(currWishChild.Participant_Names__c != Null)
                     currWishChild.Participant_Names__c = currWishChild.Participant_Names__c.removeEnd('#');
@@ -632,20 +646,18 @@ public Class WishChildForm_AC{
                     currWishChild.Participant_Details__c = currWishChild.Participant_Details__c.removeEnd('#');
                 currWishChild.Participant_Details__c = currWishChild.Participant_Details__c.removeEnd('-');
                 currWishChild.Participant_Name__c = currWishChild.Participant_Name__c.removeEnd('#');
+                currWishChild.IsParticipant__c = isFamily; 
             }
-            
             if(wcfUtil.driverWrapperCls.size() > 0 && wcfUtil.isInformation == True){
                 currWishChild.Driver_Details__c = '';
                 String JSONString = JSON.serialize(wcfUtil.driverWrapperCls);
                 currWishChild.Driver_Details__c = JSONString;
-                currWishChild.Driver_Information__c = driverInfo; 
-                CurrWishChild.Driver_name__c = ''; 
                 String driverInfo = '';
-                String driverName = '';
                 Integer i = 0;
-                 for(WishChildFormUtil.DriverWrapper currRec : wcfUtil.driverWrapperCls){
-                     if(currRec.driverName != '')
-                        {  
+                String driverName = '';
+                for(WishChildFormUtil.DriverWrapper currRec : wcfUtil.driverWrapperCls){
+                   if(currRec.driverName != '')
+                    {  
                        If(driverName == ''){
                         driverName = currRec.driverName;
                         }
@@ -670,18 +682,24 @@ public Class WishChildForm_AC{
                       }
                       
                       }
-                       system.debug('@@@ driverName  @@@@'+driverName );
-                       
-                    }   
+                   }   
                 } 
                  CurrWishChild.Driver_name__c = driverName; 
                  currWishChild.Driver_Information__c = driverInfo;
-                
-            }   
+            }  
+           
+           if(wcfUtil.driverWrapperCls.size() == 0 && wcfUtil.isInformation == True){
+              currWishChild.Driver_Information__c = null;
+              currWishChild.Driver_Details__c = null;
+            } 
+             currWishChild.Case_Team_Member1__c = wcfUtil.caseTeamMemberNo1;
+             currWishChild.Case_Team_Member2__c = wcfUtil.caseTeamMemberNo2;
+             
+             if(wishchildList.size() == 0)
+                insert currWishChild;
+             if(wishchildList.size() == 1)
+                update currWishChild;
             
-            currWishChild.Case_Team_Member1__c = wcfUtil.caseTeamMemberNo1;
-            currWishChild.Case_Team_Member2__c = wcfUtil.caseTeamMemberNo2;
-            upsert currWishChild;
         }
         catch(DMLException e){        
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
@@ -696,11 +714,9 @@ public Class WishChildForm_AC{
             if(pageName == 'WishChildForm_VF'){
                 saveContact();
             }
-            
             if(pageName == 'WishFamilyForm_VF'){
                 saveContact();
             }
-            
             if(pageName == 'WishInformationForm_VF'){
                 WishInfoSave();
             }
@@ -711,6 +727,7 @@ public Class WishChildForm_AC{
             ApexPages.addMessage(myMsg);
         }
     }
+    
     //This method used to navigate to the wishfamily form from child form
     public PageReference WCFNext(){ 
         try
@@ -728,6 +745,7 @@ public Class WishChildForm_AC{
         }
         return null;
     }
+    
     //This method is used to naviagte to the wish information form from the family form 
     public PageReference WCFtoWIF(){
         try
@@ -745,6 +763,7 @@ public Class WishChildForm_AC{
         }
         return null;
     }
+   
     //This method used to save the contact information and naviagte to the wishfamily form  
     public PageReference WCFtoWFF(){
         PageReference reference;
@@ -761,9 +780,9 @@ public Class WishChildForm_AC{
             ApexPages.addMessage(myMsg);
             //return null;
         }
-        
         return reference;
     }
+    
     //Naviage to the wish information form 
     public PageReference WishFamilytoWishInfo(){
         PageReference reference;
@@ -772,16 +791,15 @@ public Class WishChildForm_AC{
             saveContact();
             reference=new PageReference('/apex/WishInformationForm_VF?id='+this.currCase.id);
             reference.setRedirect(true);     
-            
-        }
+         }
         Catch(DMLException e)
         {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
             ApexPages.addMessage(myMsg);
-            
         }
         return reference;
     }
+    
     // Navigate to the wishchild form from information form   
     public PageReference WishInfotoWishChild(){
         PageReference reference;
@@ -791,16 +809,15 @@ public Class WishChildForm_AC{
             saveContact();
             reference=new PageReference('/apex/WishChildForm_VF?id='+this.currCase.id);
             reference.setRedirect(true);     
-           
         }
         Catch(DMLException e)
         {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
             ApexPages.addMessage(myMsg);
-            
         }
         return reference;
     }
+    
     //Navigate to the wishfamily form  
     public PageReference WishInfotoWishFamily(){
         PageReference reference;
@@ -810,16 +827,15 @@ public Class WishChildForm_AC{
             saveContact();
             reference=new PageReference('/apex/WishFamilyForm_VF?id='+this.currCase.id);
             reference.setRedirect(true);     
-           
-        }
+         }
         Catch(DMLException e)
         {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
             ApexPages.addMessage(myMsg);
-            
         }
         return reference;
     }
+    
     //Navigate to the wishchild form   
     public PageReference NavigatetoWishChildForm(){
         PageReference reference;
@@ -827,18 +843,17 @@ public Class WishChildForm_AC{
         {
             wcfUtil.isInformation = True;
             saveContact();
-            reference=new PageReference('/apex/WishChildForm_VF?id='+this.currCase.id);
+            reference=new PageReference('/apex/WishChildForm_VF?id='+this.currCase.id + '&required=true');
             reference.setRedirect(true);     
-            
         }
         Catch(DMLException e)
         {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
             ApexPages.addMessage(myMsg);
-            
         }
         return reference;
     }
+    
     //Navigate to the wishfamily form  
     public PageReference NavigatetoWishFamily(){
         PageReference reference;
@@ -846,15 +861,13 @@ public Class WishChildForm_AC{
         {
             wcfUtil.isInformation = True;
             SaveContact();  
-            reference=new PageReference('/apex/WishFamilyForm_VF?id='+this.currCase.id);
+            reference=new PageReference('/apex/WishFamilyForm_VF?id='+this.currCase.id + '&required=true');
             reference.setRedirect(true);     
-            
-        }
+         }
         Catch(DMLException e)
         {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
             ApexPages.addMessage(myMsg);
-            
         }
         return reference;
     }
@@ -866,12 +879,14 @@ public Class WishChildForm_AC{
         reference.setRedirect(true);     
         return reference;
     }
+    
     //Cancel with out saving the contact 
     public pageReference cancel(){
         PageReference reference=new PageReference('/apex/WishInformationForm_VF?id='+currCase.id);
         reference.setRedirect(true);     
         return reference;
     }
+    
     //Save and exit from the form 
     public PageReference SavewithExit(){
         try{
@@ -892,6 +907,7 @@ public Class WishChildForm_AC{
         }  
         return null; 
     }
+    
     //Used to remove the existing family details  
     public void removeFamily(){
         Integer indexVal = Integer.valueof(system.currentpagereference().getparameters().get('index'));
@@ -910,12 +926,14 @@ public Class WishChildForm_AC{
         //Remove the contact from the table    
         wcfUtil.driverWrapperCls.remove(indexVal);            
     }    
+   
     //Exit without saving the family details
     public PageReference ExitWithOutSave(){
         PageReference reference=new PageReference('/apex/WishFamilyForm_VF?id='+currCase.id);
         reference.setRedirect(true);     
         return reference;
     }
+    
     //With out saving exit from the wish information form  
     Public pageReference withOutSavefromWCFtoWIF(){
         //SaveContact();
@@ -923,6 +941,7 @@ public Class WishChildForm_AC{
         reference.setRedirect(true);     
         return reference;
     }
+    
     //With out saving wishchild details    
     Public pageReference withOutSavetoChild(){
         PageReference reference=new PageReference('/apex/WishChildForm_VF?id='+currCase.id);
@@ -942,6 +961,7 @@ public Class WishChildForm_AC{
         reference.setRedirect(true);     
         return reference;
     }
+    
     //Used to add the new family record    
     public void addFamily(){
         System.debug('Function called+++++++++++');
@@ -952,12 +972,14 @@ public Class WishChildForm_AC{
         // if(wcfUtil.driverWrapperCls.size() < wcfUtil.wishParticipantList.size())
         wcfUtil.driverWrapperCls.add(new WishChildFormUtil.DriverWrapper());
     }
+   
     //used to add new participants detail 
     public void addParticipants(){ 
         wcfUtil.wishParticipantList.add(new WishChildFormUtil.WrapperClass());
     }
     
-    public pageReference BackToWCF(){
+    public pageReference BackToWCF()
+    {
         SaveContact();
         System.debug('AFTER SAVE');
         if(wcfUtil.sameParentGuardian)
@@ -969,14 +991,18 @@ public Class WishChildForm_AC{
         reference.setRedirect(true);     
         return reference;
     }
+    
     //used to use same value from the parent details with out re-entering  
-    public pageReference CheckSameasParent(){
+    public pageReference CheckSameasParent()
+    {
         PageReference reference=new PageReference('/apex/WishFamilyForm_VF?id='+currCase.id+'&part='+isParticipants);
         reference.setRedirect(true);     
         return reference;
     }
+    
     //Save and exit from the family form    
-    public PageReference SaveandwishFamilyExit(){
+    public PageReference SaveandwishFamilyExit()
+    {
         try{
             if(wcfUtil.sameParentGuardian)
                 currWishChild.Hidden_Same_as_Family__c = true;
@@ -987,7 +1013,8 @@ public Class WishChildForm_AC{
             reference.setRedirect(true);  
             return reference;
         }      
-        catch(DMLException e){
+        catch(DMLException e)
+        {
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
             ApexPages.addMessage(myMsg);
             return null;
@@ -1017,7 +1044,8 @@ public Class WishChildForm_AC{
     }
     
     //Add Wish family as Wish participants
-    public void SameAsFamily(){
+    public void SameAsFamily()
+    {
         if(wcfUtil.sameParentGuardian){
             currWishChild.Hidden_Same_as_Family__c = true; 
             ParticipantsMapping(wcfUtil.wishFamilyWrapList,true);
@@ -1026,9 +1054,10 @@ public Class WishChildForm_AC{
             RemovesameParentGuardian();
         }  
     }
+    
     //Remove Wish family From Wish participants
-    public void RemovesameParentGuardian(){ 
-        System.debug(wcfUtil.wishParticipantList);
+    public void RemovesameParentGuardian()
+    { 
         Integer j = 0;
         while (j < wcfUtil.wishParticipantList.size()){
             if(wcfUtil.wishParticipantList.get(j).sameParentGuardianFlag){
@@ -1041,13 +1070,11 @@ public Class WishChildForm_AC{
     }
     
     public void ParticipantsMapping(List<WishChildFormUtil.WrapperClass> participantsList,Boolean isChecked){
-        System.debug(isChecked+' - participantsList - '+participantsList);
         for(WishChildFormUtil.WrapperClass  currRec : participantsList){
             WishChildFormUtil.WrapperClass wrapCls;
             if(wrapCls == null){
                 wrapCls = new WishChildFormUtil.WrapperClass();
             }
-            
             wrapCls.FirstName = (currRec.FirstName!=Null)?currRec.FirstName:'';
             wrapCls.MiddleName = (currRec.MiddleName!=Null)?currRec.MiddleName:'';
             wrapCls.lastName = (currRec.lastName!=Null)?currRec.lastName:'';
@@ -1062,17 +1089,19 @@ public Class WishChildForm_AC{
             else{
                 wrapCls.tshirtSize = tshirt;
             }
-            
             wrapCls.sameParentGuardianFlag = (isChecked == true) ? isChecked : currRec.sameParentGuardianFlag;
             wrapCls.isChildParticipants = isChildPart;
-             if(wrapCls.Relationship == 'self' && wcfUtil.wishParticipantList.size()==0){
-            wcfUtil.wishParticipantList.add(wrapCls); 
-           // relationShipSet.add('Self');
+            if(wrapCls.Relationship == 'self' && wcfUtil.wishParticipantList.size()==0){
+                wcfUtil.wishParticipantList.add(wrapCls); 
+                // relationShipSet.add('Self');
             }
             else if(wrapCls.Relationship != 'self' && wcfUtil.wishParticipantList.size()>0)
             {
-               wcfUtil.wishParticipantList.add(wrapCls);
+                wcfUtil.wishParticipantList.add(wrapCls);
             }
+            /*  else if(wrapCls.Relationship == 'self'){
+                wcfUtil.wishParticipantList.add(wrapCls); 
+            }*/
             System.debug(isChecked+'--+--'+wcfUtil.wishParticipantList);                       
             String Name = wrapCls.FirstName+' '+wrapCls.lastName;
             wcfUtil.driverNameList.add((new SelectOption(Name,Name)));
@@ -1108,7 +1137,6 @@ public Class WishChildForm_AC{
     }
     
     public PageReference SaveandRedirectChildForm(){
-        
         if(wcfUtil.sameParentGuardian)
             currWishChild.Hidden_Same_as_Family__c = true;
         else 
@@ -1129,9 +1157,9 @@ public Class WishChildForm_AC{
         reference.setRedirect(true);     
         return reference;
     }
+    
     //navigate to the wishfamily form   
     public PageReference SaveAndRedirectInformationForm(){
-        
         if(wcfUtil.sameParentGuardian)
             currWishChild.Hidden_Same_as_Family__c = true;
         else 
@@ -1141,8 +1169,10 @@ public Class WishChildForm_AC{
         reference.setRedirect(true);     
         return reference;
     }
+    
     //Save information detail and navigate to child form    
-    public PageReference SaveFromInformationToChildForm(){
+    public PageReference SaveFromInformationToChildForm()
+    {
         if(wcfUtil.sameParentGuardian)
             currWishChild.Hidden_Same_as_Family__c = true;
         else 
@@ -1154,39 +1184,44 @@ public Class WishChildForm_AC{
     }
     
     //Used to get sign  
-    public void confirmSignNow(){
+    public void confirmSignNow()
+    {
         wcfUtil.isInformation = True;
         SaveContact();        
         for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Same_as_Family__c,Race_Ethnicity__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
                                                 Case__c =: this.currCase.Id])
         {
             if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != null) {  
-                for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c.split('#')){
+                for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c.split('#'))
+                {
                     wcfUtil.SignNowList.add(keys.trim());                     
                 }                  
             }
         }
     }
     
-    
-    public PageReference SignNowmultiEmail(){
+   public PageReference SignNowmultiEmail(){
         Map<String,String> nameMap = new Map<String,String>();
         Set<String> signerSet = new Set<String>();
         for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Same_as_Family__c,Race_Ethnicity__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
                                                 Case__c =: this.currCase.Id])
         {
             
-            if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != null) {  
-                for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c.split('#')){
+            if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != null)
+            {  
+                for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c.split('#'))
+                {
                     wcfUtil.SignNowList.add(keys.trim());     
                 }                  
             }
         }
         wcfUtil.multiPickoptions = new List<SelectOption>();
-        if(wcfUtil.emailMap.size() > 0){
+        if(wcfUtil.emailMap.size() > 0)
+        {
             Map<String,String> processedNameMap = new Map<String,String>();
             for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
-                                                    Case__c =: currCase.id]){
+                                                    Case__c =: currCase.id])
+            {
                                                         if(wishChildForm.Hidden_Contact_Name__c != Null) {                                     
                                                             for(String keys : wishChildForm.Hidden_Contact_Name__c.split('#')){
                                                                 nameMap.put(keys.trim(),'abc');
@@ -1200,10 +1235,9 @@ public Class WishChildForm_AC{
                                                             
                                                         }
                                                     }
-            
-            
             for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
-                                                    Case__c =: currCase.id]){ 
+                                                    Case__c =: currCase.id])
+            { 
                                                         if(wishChildForm.Hidden_Wish_Fmaily_Contact_Email__c != Null){
                                                             for(String key : wishChildForm.Hidden_Wish_Fmaily_Contact_Email__c.split('#')){
                                                                 String keys = key.split('-')[0];
@@ -1212,27 +1246,29 @@ public Class WishChildForm_AC{
                                                             } 
                                                         }
                                                     }
-            if(processedNameMap.size() > 0){
-                for(String name : processedNameMap.KeySet()){
+            if(processedNameMap.size() > 0)
+            {
+                for(String name : processedNameMap.KeySet())
+                {
                     if(!nameMap.containsKey(name)){
                         wcfUtil.selectedMailMap.put(name,processedNameMap.get(name));
                     }
                 }
             }
         }
-        
-        if(wcfUtil.selectedMailMap.size() > 0){
+        if(wcfUtil.selectedMailMap.size() > 0)
+        {
             String account;
-            String UserName;
-            String Password;
-            String IntegratorKey;
+            String userName;
+            String password;
+            String integratorKey;
             String endPointURL;
             Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
             for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
-                UserName = credentialIns.name;
+                userName = credentialIns.name;
                 account = credentialIns.account__c;
-                Password = credentialIns.Password__c;
-                IntegratorKey  = credentialIns.IntegratorKey__c;
+                password = credentialIns.Password__c;
+                integratorKey  = credentialIns.IntegratorKey__c;
                 endPointURL = credentialIns.end_Point__c;
             }
             String endpoint = endPointURL+'/accounts/'+account+'/envelopes';
@@ -1250,28 +1286,25 @@ public Class WishChildForm_AC{
             }
             Wish_Child_Form__c dbcase = [SELECT Id,Envelop_Id__c,Case__c,SignerMapKeyPair__c,Hidden_Envelop_Id_1__c,Hidden_Envelop_Id_2__c,
                                          Hidden_SignerMap_Key_1__c,Hidden_SignerMap_Key_2__c,Hidden_Envelop_Id_3__c,Hidden_SignerMap_Key_3__c FROM Wish_Child_Form__c WHERE Case__c =:currCase.id];
-            set<String> processSet = new Set<String>();
+            Set<String> processSet = new Set<String>();
             if(dbcase.SignerMapKeyPair__c != Null && dbcase.Envelop_Id__c != Null && dbcase.Hidden_Envelop_Id_1__c == Null &&
                dbcase.Hidden_SignerMap_Key_1__c == Null ){
-                   
                    for(String processName : dbcase.SignerMapKeyPair__c.split('#')){
                        String keys = processName.split('-')[0];
                        String value = processName.split('-')[1];
                        String name = Keys.trim();
                        processSet.add(name);
                    }
-                   
                    for(String signNowName : signerSet){
                        if(!processSet.contains(signNowName)){
                            j = 1;
                        }
-                       
                        system.debug('J Value 1'+ j);
                        system.debug('K Value 1'+ k);
                    }
                }
-            
-            if(dbcase.Hidden_Envelop_Id_1__c != Null && dbcase.Hidden_SignerMap_Key_1__c != Null){
+            if(dbcase.Hidden_Envelop_Id_1__c != Null && dbcase.Hidden_SignerMap_Key_1__c != Null)
+            {
                 set<String> processSetOne = new Set<String>();
                 for(String processName : dbcase.Hidden_SignerMap_Key_1__c .split('#')){
                     String keys = processName.split('-')[0];
@@ -1279,73 +1312,71 @@ public Class WishChildForm_AC{
                     String name = Keys.trim();
                     processSetOne.add(name);
                 }
-                
-                for(String processName : dbcase.SignerMapKeyPair__c.split('#')){
+                for(String processName : dbcase.SignerMapKeyPair__c.split('#'))
+                {
                     String keys = processName.split('-')[0];
                     String value = processName.split('-')[1];
                     String name = Keys.trim();
                     processSet.add(name);
                 }
-                
-                for(String signNowName : signerSet){
+                for(String signNowName : signerSet)
+                {
                     if(!processSet.contains(signNowName)){
                         if(!processSetOne.contains(signNowName)){
                             j = 2;
                             k = 1;
                         }
                     }
-                    
-                     system.debug('J Value 2'+ j);
-                     system.debug('K Value 2'+ k);
+                    system.debug('J Value 2'+ j);
+                    system.debug('K Value 2'+ k);
                 }
             }
-            
-            
-            if(dbcase.Hidden_Envelop_Id_2__c != Null && dbcase.Hidden_SignerMap_Key_2__c != Null){
-                set<String> processSetOne = new Set<String>();
+            if(dbcase.Hidden_Envelop_Id_2__c != Null && dbcase.Hidden_SignerMap_Key_2__c != Null)
+            {
+                Set<String> processSetOne = new Set<String>();
                 Set<String> processSetTwo = new Set<String>();
-                for(String processName : dbcase.Hidden_SignerMap_Key_2__c .split('#')){
+                for(String processName : dbcase.Hidden_SignerMap_Key_2__c .split('#'))
+                {
                     String keys = processName.split('-')[0];
                     String value = processName.split('-')[1];
                     String name = Keys.trim();
                     processSetTwo.add(name);
                 }
-                
-                for(String processName : dbcase.Hidden_SignerMap_Key_1__c .split('#')){
+                for(String processName : dbcase.Hidden_SignerMap_Key_1__c .split('#'))
+                {
                     String keys = processName.split('-')[0];
                     String value = processName.split('-')[1];
                     String name = Keys.trim();
                     processSetOne.add(name);
                 }
-                
-                for(String processName : dbcase.SignerMapKeyPair__c.split('#')){
+                for(String processName : dbcase.SignerMapKeyPair__c.split('#'))
+                {
                     String keys = processName.split('-')[0];
                     String value = processName.split('-')[1];
                     String name = Keys.trim();
                     processSet.add(name);
                 }
-                
-                for(String signNowName : signerSet){
-                    if(!processSet.contains(signNowName)){
-                        if(!processSetOne.contains(signNowName)){
-                            if(!processSetTwo.contains(signNowName)){
+                for(String signNowName : signerSet)
+                {
+                    if(!processSet.contains(signNowName))
+                    {
+                        if(!processSetOne.contains(signNowName))
+                        {
+                            if(!processSetTwo.contains(signNowName))
+                            {
                                 j = 3;
                                 k = 2;
                             }
                         }
                     }
-                    
-                     system.debug('J Value 3'+ j);
-                     system.debug('K Value 3'+ k);
+                    system.debug('J Value 3'+ j);
+                    system.debug('K Value 3'+ k);
                 }
             }
-            
             if((dbcase.Envelop_Id__c  == Null && dbcase.SignerMapKeyPair__c == Null && j == 0) || (dbcase.Hidden_Envelop_Id_1__c == Null && dbcase.Hidden_SignerMap_Key_1__c == Null && j == 1 && k == 0) || 
                (dbcase.Hidden_Envelop_Id_2__c == Null && dbcase.Hidden_SignerMap_Key_2__c  == Null && j == 2 && k == 1) || (dbcase.Hidden_Envelop_Id_3__c == Null && dbcase.Hidden_SignerMap_Key_3__c == Null && j == 3 && k == 2)){
-                  
-                 system.debug('J VALE'+ j);
-                 system.debug('K VALE'+ k);
-                  
+                   system.debug('J VALE'+ j);
+                   system.debug('K VALE'+ k);
                    for(String currString : wcfUtil.selectedMailMap.keySet()){
                        String Name = currString;
                        email = wcfUtil.sendEmailMap.get(currString);
@@ -1385,8 +1416,8 @@ public Class WishChildForm_AC{
                    String body =  '{'+
                        '  "status":"sent",'+
                        '  "enableWetSign": "false",'+
-                       '  "emailSubject":"Signature Required - Wish Paper Packet",'+
-                       '  "emailBlurb":"Please sign the attached wish paperwork packet form.\r\n\n Thank You,\r\n\n Wish & Volunteer Center",'+
+                       '  "emailBlurb":"Wish Paperwork Packet",'+
+                       '  "emailSubject": "Wish Paperwork Packet",'+
                        '  "enforceSignerVisibility":"True",'+
                        '  "documents": [{'+
                        '      "name": "document.pdf",'+
@@ -1481,6 +1512,7 @@ public Class WishChildForm_AC{
         }
         return null;
     }
+    
     //Used to submit the form and get sign 
     public Pagereference SubmitAndSign(){
         String account;
@@ -1543,60 +1575,62 @@ public Class WishChildForm_AC{
                newCase.Id = dbcase.id;
                newCase.SignerMapKeyPair__c = sign;
                newCase.Envelop_Id__c = wcfUtil.envelopeId;
+               
                update newCase;
            }
-        
         if(dbcase.SignerMapKeyPair__c != Null && dbcase.Envelop_Id__c != Null && dbcase.Hidden_SignerMap_Key_1__c == Null && dbcase.Hidden_Envelop_Id_1__c == Null
            && dbcase.Hidden_Envelop_Id_2__c == Null && dbcase.Hidden_SignerMap_Key_2__c == Null && j == 1 && k == 0){
                Wish_Child_Form__c newCase = new Wish_Child_Form__c();
                newCase.Id = dbcase.id;
                newCase.Hidden_SignerMap_Key_1__c = sign;
                newCase.Hidden_Envelop_Id_1__c = wcfUtil.envelopeId;
+               
                update newCase;
            }
-        
         if(dbcase.SignerMapKeyPair__c != Null && dbcase.Envelop_Id__c != Null && dbcase.Hidden_Envelop_Id_2__c == Null && dbcase.Hidden_SignerMap_Key_2__c == Null &&
            dbcase.Hidden_SignerMap_Key_1__c != Null && dbcase.Hidden_Envelop_Id_1__c != Null && j == 2 && k == 1){
                Wish_Child_Form__c newCase = new Wish_Child_Form__c();
                newCase.Id = dbcase.id;
                newCase.Hidden_SignerMap_Key_2__c = sign;
                newCase.Hidden_Envelop_Id_2__c = wcfUtil.envelopeId;
+               
                update newCase;
            }
-        
         if(dbcase.SignerMapKeyPair__c != Null && dbcase.Envelop_Id__c != Null && dbcase.Hidden_Envelop_Id_2__c != Null && dbcase.Hidden_SignerMap_Key_2__c != Null &&
            dbcase.Hidden_SignerMap_Key_1__c != Null && dbcase.Hidden_Envelop_Id_1__c != Null && dbcase.Hidden_Envelop_Id_3__c != Null && dbcase.Hidden_SignerMap_Key_3__c != Null && j == 3 && k == 2){
                Wish_Child_Form__c newCase = new Wish_Child_Form__c();
                newCase.Id = dbcase.id;
                newCase.Hidden_SignerMap_Key_3__c = sign;
                newCase.Hidden_Envelop_Id_3__c = wcfUtil.envelopeId;
+               
                update newCase;
            }
-        
-        for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Signers__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
-                                                Case__c =: currCase.id]){
-                                                    currentSigner = wishChildForm.Signers__c;
-                                                    Wish_Child_Form__c  updateWishChild = new Wish_Child_Form__c ();
-                                                    updateWishChild.Id = wishChildForm.Id;
-                                                    wishPaperPocketId = wishChildForm.Id;
-                                                    if(wishChildForm.Hidden_Contact_Name__c != Null){
-                                                        updateWishChild.Hidden_Contact_Name__c = wishChildForm.Hidden_Contact_Name__c+'#'+ wcfUtil.SignNowName;}
-                                                    else{
-                                                        updateWishChild.Hidden_Contact_Name__c = wcfUtil.SignNowName;}
-                                                    if(wishChildForm.Signers__c == Null){
-                                                        updateWishChild.Signers__c =wcfUtil.SignNowName;
-                                                    }
-                                                    else{
-                                                        updateWishChild.Signers__c = wishChildForm.Signers__c +'#'+wcfUtil.SignNowName;
-                                                    }
-                                                    update updateWishChild ;
-                                                    
-                                                }
+        /*for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Signers__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
+              Case__c =: currCase.id])
+          {
+                currentSigner = wishChildForm.Signers__c;
+                Wish_Child_Form__c  updateWishChild = new Wish_Child_Form__c ();
+                updateWishChild.Id = wishChildForm.Id;
+                wishPaperPocketId = wishChildForm.Id;
+                if(wishChildForm.Hidden_Contact_Name__c != Null){
+                    updateWishChild.Hidden_Contact_Name__c = wishChildForm.Hidden_Contact_Name__c+'#'+ wcfUtil.SignNowName;}
+                else{
+                    updateWishChild.Hidden_Contact_Name__c = wcfUtil.SignNowName;}
+                if(wishChildForm.Signers__c == Null){
+                    updateWishChild.Signers__c =wcfUtil.SignNowName;
+                }
+                else{
+                    updateWishChild.Signers__c = wishChildForm.Signers__c +'#'+wcfUtil.SignNowName;
+                }
+                    
+                update updateWishChild ;
+         }*/
         
         PageReference reference=new PageReference((String) results.get('url'));
         reference.setRedirect(true);
         return reference;
     }
+    
     //Navigate to the wish family form 
     public pageReference BackToWFF() {
         WishInfoSave();
@@ -1604,6 +1638,7 @@ public Class WishChildForm_AC{
         reference.setRedirect(true);     
         return reference;
     } 
+    
     //This method used to save information form details  
     public PageReference WishInfoSave(){
         try
@@ -1621,6 +1656,7 @@ public Class WishChildForm_AC{
         }
         return null;
     }
+    
     //This method used to submit the record for approval  
     public pagereference submitforApproval(){
         boolean isApproval;
@@ -1635,7 +1671,9 @@ public Class WishChildForm_AC{
             case updateParentCase = new Case();
             updateParentCase.Id = currCase.id;
             updateParentCase.Wish_Family_Form_Submitted__c = true;
+            
             update updateParentCase ;
+            
             Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
             req.setComments('Submitting request for approval.');
             req.setObjectId(currCase.id);
@@ -1648,10 +1686,6 @@ public Class WishChildForm_AC{
         return reference;  
     }
     
-    public pagereference displayError(){
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,' This record is already in approval process'));
-        return null;
-    }
     //This method used to generate the form details as PDF  
     public pagereference generatePDF(){
         PageReference reference=new PageReference('/apex/WishFormDownloadPDF?Id='+currCase.id+'&force_download=true');
@@ -1663,7 +1697,8 @@ public Class WishChildForm_AC{
     public pageReference multiEmail(){
         wcfUtil.isInformation = True;
         saveContact();
-        if(currWishChild.Emergency_Relationship__c != Null && currWishChild.Emergency_First_Name__c != Null && currWishChild.Emergency_Last_Name__c != Null && currWishChild.Emergency_Mobilephone__c != Null && currWishChild.Hidden_Wish_Fmaily_Contact_Email__c != Null && currWishChild.Wish_Family_Contact__c != Null){
+        if(currWishChild.Emergency_Relationship__c != Null && currWishChild.Emergency_First_Name__c != Null && currWishChild.Emergency_Last_Name__c != Null && currWishChild.Emergency_Mobilephone__c != Null && currWishChild.Hidden_Wish_Fmaily_Contact_Email__c != Null && currWishChild.Wish_Family_Contact__c != Null)
+        {
             if(wcfUtil.emailMap.size() > 0){
                 wcfUtil.multiPickoptions = new List<SelectOption>();
                 Set<String> nameSet = new Set<String>();
@@ -1683,10 +1718,8 @@ public Class WishChildForm_AC{
                     String keys = key.split('-')[0];
                     String value = key.split('-')[1];
                     processedNameMap.put(keys.trim(),value);
-                    system.debug('@@@@@ ProcessedNameMap @@@@'+processedNameMap);
                 } 
-                
-                if(processedNameMap.size() > 0){
+               if(processedNameMap.size() > 0){
                     for(String name : processedNameMap.KeySet()){
                         if(!nameSet.contains(name)){
                             if(wcfUtil.selectedMailMap.containsKey(name)){
@@ -1704,7 +1737,6 @@ public Class WishChildForm_AC{
                     wcfUtil.displayPopup = true;
                 }         
             }
-            
             else{
                 wcfUtil.displayError = true;
                 ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'All participants have already signed the form.'));
@@ -1715,7 +1747,6 @@ public Class WishChildForm_AC{
     
     //This method used to send pdf to an email  
     public pageReference sendpdftoEmail (){
-        
         wcfUtil.displayPopup = false;
         Set<String> senderNameSet = new Set<String>();
         for(String processEmailList :wcfUtil.emailList ){
@@ -1731,7 +1762,6 @@ public Class WishChildForm_AC{
                 
             }
         }
-        
         if((!wcfUtil.sendEmailMap.isEmpty()) && wcfUtil.sendEmailMap.size() > 0 ){
             for(String currString : wcfUtil.sendEmailMap.KeySet()){
                 if(wcfUtil.querySignature==null)
@@ -1740,20 +1770,19 @@ public Class WishChildForm_AC{
                     wcfUtil.querySignature = wcfUtil.querySignature + '#' +currString;
             }
         }
-        
-        for(Wish_Child_Form__c dbCase : [SELECT Id,Hidden_Contact_Name__c From Wish_Child_Form__c WHERE Id =: currWishChild.Id]){
-            Wish_Child_Form__c newCase = new Wish_Child_Form__c();
-            newCase.Id = dbCase.Id;
-            if(dbCase.Hidden_Contact_Name__c  == Null)
+        /*for(Wish_Child_Form__c dbCase : [SELECT Id,Hidden_Contact_Name__c From Wish_Child_Form__c WHERE Id =: currWishChild.Id]){
+                Wish_Child_Form__c newCase = new Wish_Child_Form__c();
+                newCase.Id = dbCase.Id;
+                if(dbCase.Hidden_Contact_Name__c  == Null)
                 newCase.Hidden_Contact_Name__c = wcfUtil.querySignature;
-            else
+                else
                 newCase.Hidden_Contact_Name__c = dbCase.Hidden_Contact_Name__c+'#'+wcfUtil.querySignature;
-            try{
+                try{
                 update newCase;
-            }
-            catch(Exception e){
-            }
-        }
+                }
+                catch(Exception e){
+                }
+          }*/
         if(wcfUtil.sendEmailMap.size() > 0){    
             callouttoDocusing(wcfUtil.sendEmailMap,CurrCase.id,wcfUtil.wishChildId );
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'An email has been sent successfully'));
@@ -1787,7 +1816,6 @@ public Class WishChildForm_AC{
         String Password;
         String IntegratorKey;
         String endPointURL;
-        String emailbody = '\r\n\n Please sign wish paper pocket';
         Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
         
         for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
@@ -1844,8 +1872,8 @@ public Class WishChildForm_AC{
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailSubject": "Signature Required - Wish Paperwork Packet",'+
-            ' "emailBlurb": "Please sign the attached Wish Paperwork Packet form.\r\n\n Thank You, \r\n\n Wish & Volunteer Center",'+
+            '  "emailBlurb":"Wish Paperwork Packet",'+
+            '  "emailSubject": "Wish Paperwork Packet",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+
             '      "name": "document.pdf",'+
@@ -1876,38 +1904,37 @@ public Class WishChildForm_AC{
         Http http = new Http();
         HTTPResponse res;
         try{
-            if(recipients != ''){
+            if(recipients != '')
+            {
                 res = http.send(req);
                 system.debug(res.getBody());
                 //Docusign status record creation.
                 Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
-                
                 if((String) results.get('status') == 'Sent'){
-                    status = 'Agreement sent to email.';
-                    dsfs__DocuSign_Status__c dsfs= NEW dsfs__DocuSign_Status__c();
-                    dsfs.dsfs__DocuSign_Envelope_ID__c = (String) results.get('envelopeId');
-                    dsfs.dsfs__Case__c= caseId;
-                    Insert dsfs;
+                        status = 'Agreement sent to email.';
+                        dsfs__DocuSign_Status__c dsfs= NEW dsfs__DocuSign_Status__c();
+                        dsfs.dsfs__DocuSign_Envelope_ID__c = (String) results.get('envelopeId');
+                        dsfs.dsfs__Case__c= caseId;
+                        Insert dsfs;
                 }else
-                    status = (String) results.get('errorCode');
+                        status = (String) results.get('errorCode');
             }
             
-            for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
-                                                    Case__c =: caseId]){
-                                                        Wish_Child_Form__c  updateWishChild = new Wish_Child_Form__c ();
-                                                        updateWishChild.Id = wishChildForm.Id;
-                                                        if(wishChildForm.Hidden_Contact_Name__c != Null){
-                                                            updateWishChild.Hidden_Contact_Name__c=wishChildForm.Hidden_Contact_Name__c+'#'+ ContactName;}
-                                                        else{
-                                                            updateWishChild.Hidden_Contact_Name__c = ContactName;}
-                                                        if(wishChildForm.Signers__c == Null){
-                                                            updateWishChild.Signers__c = ContactName;}
-                                                        else{
-                                                            updateWishChild.Signers__c = wishChildForm.Signers__c +'#'+ContactName;
-                                                        }
-                                                        update updateWishChild ;
-                                                        
-                                                    }
+            /* for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
+                Case__c =: caseId]){
+                    Wish_Child_Form__c  updateWishChild = new Wish_Child_Form__c ();
+                    updateWishChild.Id = wishChildForm.Id;
+                    if(wishChildForm.Hidden_Contact_Name__c != Null){
+                    updateWishChild.Hidden_Contact_Name__c=wishChildForm.Hidden_Contact_Name__c+'#'+ ContactName;}
+                    else{
+                    updateWishChild.Hidden_Contact_Name__c = ContactName;}
+                    if(wishChildForm.Signers__c == Null){
+                    updateWishChild.Signers__c = ContactName;}
+                    else{
+                    updateWishChild.Signers__c = wishChildForm.Signers__c +'#'+ContactName;
+                    }
+                    update updateWishChild ;
+                }*/
         }
         catch(Exception e){
         }    
@@ -2132,7 +2159,6 @@ public Class WishChildForm_AC{
     
     Public list<String> getCurrentWCCollapsibleList(){
         if(currWishChild.Name_of_wheelchair_collapsible__c != Null){
-            //currentWCCollapsibleList = (currWishChild.Bringing_Own_Wheel_Chair__c).split(',');
             currentWCCollapsibleList = (currWishChild.Name_of_wheelchair_collapsible__c).split(',');
         }
         return currentWCCollapsibleList;
@@ -2196,6 +2222,7 @@ public Class WishChildForm_AC{
     public void setCurrentMedicationList(list<string> val){
         this.currentMedicationList = val;
     }
+    
     Public list<String> getCurrentAllergyNamesList(){
         if(currWishChild.Requested_Participant_Name_for_Allergies__c  != Null){
             currentAllergyNamesList = (currWishChild.Requested_Participant_Name_for_Allergies__c).split(',');
@@ -2206,6 +2233,7 @@ public Class WishChildForm_AC{
     public void setCurrentAllergyNamesList(list<string> val){
         this.currentAllergyNamesList = val;
     }
+    
     Public list<String> getCurrentOtherNeedsList(){
         if(currWishChild.Requested_Participant_Name_for_OtherNeed__c  != Null){
             currentOtherNeedsList = (currWishChild.Requested_Participant_Name_for_OtherNeed__c ).split(',');

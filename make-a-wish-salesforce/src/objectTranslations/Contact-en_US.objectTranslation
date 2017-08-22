@@ -687,6 +687,7 @@
     <fields>
         <label><!-- Primary ICD-10 Code --></label>
         <name>ICD_10_Code__c</name>
+        <relationshipLabel><!-- Contacts --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- I’m On LinkedIn --></label>
@@ -1867,6 +1868,7 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Secondary Diagnosis 1 ICD-10 Code --></label>
         <name>SD1_ICD_Code__c</name>
+        <relationshipLabel><!-- Contacts (Secondary Diagnosis 1 ICD-10 Code) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Secondary Diagnosis 2 Cond Description --></label>
@@ -1875,6 +1877,7 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Secondary Diagnosis 2 ICD-10 Code --></label>
         <name>SD2_ICD_Code__c</name>
+        <relationshipLabel><!-- Contacts (Secondary Diagnosis 2 ICD-10 Code) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Secondary Diagnosis 3 Cond Description --></label>
@@ -1883,6 +1886,7 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Secondary Diagnosis 3 ICD-10 Code --></label>
         <name>SD3_ICD_Code__c</name>
+        <relationshipLabel><!-- Contacts (Secondary Diagnosis 3 ICD-10 Code) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Secondary Diagnosis 4 Cond Description --></label>
@@ -1891,6 +1895,7 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Secondary Diagnosis 4 ICD-10 Code --></label>
         <name>SD4_ICD_Code__c</name>
+        <relationshipLabel><!-- Contacts (Secondary Diagnosis 4 ICD-10 Code) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Same As Household Address --></label>
@@ -3691,6 +3696,10 @@ provide contact information for each site on which you are active. --></help>
     <validationRules>
         <errorMessage><!-- Please select a Preferred Phone --></errorMessage>
         <name>Contact_Preferred_Phone</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please provide the ICD Code or Primary Diagnosis. --></errorMessage>
+        <name>Contact_Primary_Diagnosis_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Please enter value for Reason for Publicity Candidate in order to enter check Publicity Candidate --></errorMessage>

@@ -19,13 +19,19 @@ public class DiagnosisVerification_AC_Test {
         
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
-        newLead.PD_ICD_Code__c = 'C00';
+        newLead.PD_ICD_Code__c = iCDCode.Id;
         newLead.Current_Condition__c = 'Test1;Test2;Test3;';
         newLead.Current_Condition_Label__c = 'Test1;Test2;Test3;';
         newLead.PD_Condition_Description__c = 'Malignant Melanoma';  
         newLead.unique_wish_identifier__c = '059-17-12367';
         
         insert newLead;    
+        WishChildWrapper wc = new WishChildWrapper();
+        wc.describePatient = 'Yes';
+        wc.password = '123456';
+        wc.getStateRecognizationPicklistValues();
+        wc.getCommunications();
+        wc.getHealthCareWorks();
         
         Lead_File__c newFile = new Lead_File__c();
         newFile.Parent__c = newLead.Id;
@@ -45,10 +51,23 @@ public class DiagnosisVerification_AC_Test {
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);
         DiagnosisVerification_AC currDiagnosisVerificationDupe = new DiagnosisVerification_AC();
-        
+        PartAFormWrapper pw = new PartAFormWrapper();
+        pw.getchronicHeartFailureList();
+        pw.getcongenitalHeartDiseaseList();
+        pw.getconvulsiveDisorderList();
+        pw.getStrokeValues();
+        pw.getPulmonaryHypertensionValues();
+        pw.getHepatitisValues();
+        pw.getheartFailureList();
+        pw.getArrhythmiaList();
+        pw.getanginaList();
+        pw.getventilatorList();
+        pw.getLungDiseaseList();
+        pw.age = '23';
         Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
         currDiagnosisVerificationDupe.SubmitSign();
-        
+        DiagnosisWrapper dw = new DiagnosisWrapper();
+        dw.conditionDescription = 'ss';
         //Setting the Primary Diagnosis
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].conditionDescription = condistionDescription.Name;
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode = condistionDescription.Code_To_Use__c;
@@ -292,6 +311,18 @@ public class DiagnosisVerification_AC_Test {
         Test.setCurrentPage(pageRefUpdate);
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);
         DiagnosisVerification_AC currDiagnosisVerificationDupeUpdated = new DiagnosisVerification_AC();
+        TravelAlgorithmWrapper pw = new TravelAlgorithmWrapper();
+        pw.getchronicHeartFailureList();
+        pw.getcongenitalHeartDiseaseList();
+        pw.getconvulsiveDisorderList();
+        pw.getStrokeValues();
+        pw.getPulmonaryHypertensionValues();
+        pw.getHepatitisValues();
+        pw.getheartFailureList();
+        pw.getArrhythmiaList();
+        pw.getanginaList();
+        pw.getventilatorList();
+        pw.getLungDiseaseList();
         Test.stopTest();
     }
     

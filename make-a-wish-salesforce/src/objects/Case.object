@@ -7630,11 +7630,8 @@ arrangements/unique circumstances for any requested wish participant not residin
 2. Once changed to Budget Approval-Approved, user can only go to Wish Design.
 3. Once changed to Budget Approval-Approve</description>
         <errorConditionFormula>AND($Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,ISCHANGED(Status),OR( 
-AND(NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),
-ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),NOT($Permission.Program_Supervisor)), 
-AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),AND(NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),
-NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),NOT(ISPICKVAL(Status,&apos;Ready to Interview&apos;))),
-$Permission.Program_Supervisor)))</errorConditionFormula>
+AND(NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),NOT($Permission.Program_Supervisor)), 
+AND(ISPICKVAL(PRIORVALUE(Status),&apos;Budget Approval - Approved&apos;),AND(NOT(ISPICKVAL(Status,&apos;Wish Design&apos;)),NOT(ISPICKVAL(Status,&apos;Hold&apos;)),NOT(ISPICKVAL(Status,&apos;Inactive&apos;)),NOT(ISPICKVAL(Status,&apos;Closed&apos;)),NOT(ISPICKVAL(Status,&apos;Ready to Interview&apos;))),$Permission.Program_Supervisor)))</errorConditionFormula>
         <errorMessage>From Budget Approval - Approved, the status can only be changed to Wish Design, On-Hold, Inactive, DNQ or Closed.</errorMessage>
     </validationRules>
     <validationRules>

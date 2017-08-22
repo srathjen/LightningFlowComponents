@@ -32,7 +32,7 @@
                       </ul>
                       <div class="nav-sub-inner hidden-sm-down">
                         <a href="#top" class="hidden-md-down">&uarr; Back to Top</a>
-                        <apex:commandbutton value="Save" onclick="return false;"  styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#save-alert"/>
+                        <apex:commandbutton value="Save" onclick="return false;"  styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert"/>
                         <apex:Commandbutton value="Next" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#wffsame-alert"/>
 
                       </div>
@@ -285,7 +285,7 @@
               <div class="row hidden-sm-up nav-btm">
                 <nav class="btm">
                   <ul>
-                    <li><apex:commandbutton value="Save" onclick="return false;" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#save-alert" /></li>
+                    <li><apex:commandbutton value="Save" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" /></li>
                     <li><apex:Commandbutton value="Next" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#wffsame-alert" /></li>
                   </ul>
                 </nav>
@@ -333,7 +333,7 @@
                       <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
                     </div>
                     <div class="modal-footer">
-                      <apex:commandButton onclick="test2();" value="Save" styleClass="form-validate btn-md" reRender="yyyy"/>
+                      <apex:commandButton onclick="test2();" value="Save" styleClass="btn-md" reRender="yyyy"/>
                       <apex:commandButton action="{!withOutSaveWCCF}" value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="yyy"/>
                     </div>
                   </div>
@@ -423,25 +423,25 @@
         });
 
          function test2(){
-            if ($('#wcf\\:frm').valid()){
-            console.log('form submitted');
+            //if ($('#wcf\\:frm').valid()){
+            //console.log('form submitted');
             SaveWishChildtoWff();
 
-          } else {
-
-            $('#wffsame-alert').modal('hide');
-          }
+          // } else {
+          //
+          //   $('#wffsame-alert').modal('hide');
+          // }
         }
 
          function test1(){
-            if ($('#wcf\\:frm').valid()){
-            console.log('form submitted');
+            // if ($('#wcf\\:frm').valid()){
+            // console.log('form submitted');
             SaveWishChildtoWInfo();
 
-          } else {
-
-            $('#wifsame-alert').modal('hide');
-          }
+          // } else {
+          //
+          //   $('#wifsame-alert').modal('hide');
+          // }
         }
 
       </script>

@@ -419,4 +419,42 @@ system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
       
      
     }
+    
+   /* public Static void updateAffiliation(Set<Id> contactIdSet){
+        List<npe5__Affiliation__c> affliationList = new List<npe5__Affiliation__c>();
+        for(npe5__Affiliation__c currAff : [SELECT Id,npe5__Contact__c,Constituent_Code__c FROM npe5__Affiliation__c WHERE npe5__Contact__c IN :contactIdSet]){
+            currAff.Constituent_Code__c ='Wish Child';
+            affliationList.add(currAff);
+        }
+        if(affliationList.Size() > 0)
+            Update affliationList;
+    }*/
+    
+    //Used to populated Condition Description based on ICD Code values
+    public static void MatchConditionDescription(Map<Id, Set<Integer>> icdInfoMap, List<Contact> leadRecList, Set<Id> icdCodeRecSet) {
+        Map<Id, ICD_Codes__c> icdCodeDetails = new Map<Id, ICD_Codes__c>();
+        for(ICD_Codes__c icdInfo : [SELECT Id, Name, Group1__c,
+                                    Condition_Description__c, Condition_Description__r.Code_to_Use__c, Condition_Description__r.Name
+                                    FROM ICD_Codes__c WHERE Id IN : icdCodeRecSet]){
+                                        icdCodeDetails.put(icdInfo.Id, icdInfo);
+                                    }
+        
+        for(Contact updatePD : leadRecList) {
+            if(icdInfoMap.containsKey(updatePD.Id)) {
+                for(Integer icdField : icdInfoMap.get(updatePD.Id)) {
+                    if(icdField == 1 && icdCodeDetails.containsKey(updatePD.SD1_ICD_Code__c)) {
+                        updatePD.SD1_Condition_Description__c = icdCodeDetails.get(updatePD.SD1_ICD_Code__c).Condition_Description__r.Name;
+                    } if(icdField == 2 && icdCodeDetails.containsKey(updatePD.SD2_ICD_Code__c)) {
+                        updatePD.SD2_Condition_Description__c = icdCodeDetails.get(updatePD.SD2_ICD_Code__c).Condition_Description__r.Name;
+                    } if(icdField == 3 && icdCodeDetails.containsKey(updatePD.SD3_ICD_Code__c)) {
+                        updatePD.SD3_Condition_Description__c = icdCodeDetails.get(updatePD.SD3_ICD_Code__c).Condition_Description__r.Name;
+                    } if(icdField == 4 && icdCodeDetails.containsKey(updatePD.SD4_ICD_Code__c)) {
+                        updatePD.SD4_Condition_Description__c = icdCodeDetails.get(updatePD.SD4_ICD_Code__c).Condition_Description__r.Name;
+                    } if(icdField == 5 && icdCodeDetails.containsKey(updatePD.ICD_10_Code__c)) {
+                        updatePD.Diagnosis__c = icdCodeDetails.get(updatePD.ICD_10_Code__c).Condition_Description__r.Name;
+                    }
+                }
+            }
+        }
+    }
 }

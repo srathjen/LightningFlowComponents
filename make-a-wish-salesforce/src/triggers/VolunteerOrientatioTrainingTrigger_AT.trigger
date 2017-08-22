@@ -40,6 +40,8 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         Map<Id,Contact> contactInfoMap = new Map<Id,Contact>();
         Map<Id,Volunteer_Orientation_Training__c> volOriandTraingInfoMap = new Map<Id,Volunteer_Orientation_Training__c>();
         list<Contact> contacttList = new list<Contact>();
+        Set<String> classOfferingIdSet = new Set<String>();
+        Map<String,String> orientationIdMap = new Map<String,String>();
         for(Volunteer_Orientation_Training__c currRec : Trigger.new)
         {
            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
@@ -49,6 +51,10 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
                 }
                 if(currRec.Hidden_O_T_Id__c!= Null){
                     oriandTrainingSet.add(currRec.Id);
+                }
+                
+                if( currRec.Volunteer__c != Null && currRec.Class_Offering__c != Null && (Trigger.isInsert || Trigger.oldMap.get(currRec.Id).Class_Offering__c  != currRec.Class_Offering__c )){
+                    classOfferingIdSet.add(currRec.Class_Offering__c);
                 }
             }
         }
@@ -63,6 +69,12 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         
         }
         
+        if(classOfferingIdSet.Size() > 0){
+            for(Class_Offering__c currRec : [SELECT Id,Chapter_Role_O_T__r.Orientation_Training__c FROM Class_Offering__c WHERE Id IN : classOfferingIdSet]){
+                orientationIdMap.put(currRec.Id,currRec.Chapter_Role_O_T__r.Orientation_Training__c);
+            }
+        }
+        
       for(Volunteer_Orientation_Training__c currRec : Trigger.new){
          if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
           {
@@ -72,10 +84,16 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
                 currRec.VolunteerHidden_Email__c =  contactInfoMap.get(currRec.Volunteer__c).Email;
                 currRec.Account_Email__c =  contactInfoMap.get(currRec.Volunteer__c).Account.Email__c;
             }
+            
+            //Update the hidden O&T Id field with the orientation and training Id.
+            if(currRec.Class_Offering__c != Null && currRec.Class_Offering__c!= Null  && orientationIdMap.containsKey(currRec.Class_Offering__c)){
+                currRec.Hidden_O_T_Id__c = orientationIdMap.get(currRec.Class_Offering__c);
+            }
+            
           }
              
         }
         
-   }
+    }
     
 }

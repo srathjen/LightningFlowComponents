@@ -110,6 +110,14 @@
         <name>Color__c</name>
     </fields>
     <fields>
+        <label><!-- Delivered Hidden Envelop Id --></label>
+        <name>Delivered_Hidden_Envelop_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Delivered LiabilitySignerMapKeyPair --></label>
+        <name>Delivered_LiabilitySignerMapKeyPair__c</name>
+    </fields>
+    <fields>
         <label><!-- Details about Impact --></label>
         <name>Details_about_Impact__c</name>
     </fields>
@@ -398,6 +406,14 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Information Provided --></label>
         <name>Information_Provided__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsParticipant --></label>
+        <name>IsParticipant__c</name>
+    </fields>
+    <fields>
+        <label><!-- IsWishFamily --></label>
+        <name>IsWishFamily__c</name>
     </fields>
     <fields>
         <label><!-- Is a wheelchair accessible vehicle neede --></label>

@@ -1108,7 +1108,7 @@ Description : This page is used to collect medical condition about wish child fr
             if (myElem === null) {
                 $('.requiredField').each(function() {
                     $(this).css('border','');
-                    if($(this).val() == ''){
+                    if($(this).val() == '' && $(this).is(":visible")){
                         $(this).css({ "border": '#FF0000 1px solid'});
                         swal({
                             title: '',

@@ -36,6 +36,7 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert,aft
             set<id> relatedContactId = new set<id>();
             Map<Id,Contact> updateChildContactMap = new Map<Id,Contact>();
             list<Contact> updateContactList = new list<Contact>();
+            Map<Id,Contact> updateContactMap = new Map<Id,Contact>();
             List<contact> updateChildContactList = new List<contact>();
             Set<Id> wishChildRelationShipSet = new Set<Id>();
             List<npe4__Relationship__c > relationShipListtoDelete = new List<npe4__Relationship__c>();
@@ -70,16 +71,17 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert,aft
                         newContact.Id = newRecord.npe4__Contact__c;
                         newContact.Hidden_Medical_Physician__c = medicalProfContactMap.get(newRecord.npe4__RelatedContact__c).Name;
                         newContact.Hidden_Medical_Physician_Email__c = medicalProfContactMap.get(newRecord .npe4__RelatedContact__c).Email;
-                        updateContactList.add(newContact);
+                        //updateContactList.add(newContact);
+                        updateContactMap.put(newContact.Id,newContact); 
                     }
                 }
             }
             
-            if(updateContactList.size() > 0)
+            if(updateContactMap.size() > 0)
             {
                 RecursiveTriggerHandler.isFirstTime = false;
-                update updateContactList;
-                System.debug('updateChildContactList++++++++++++++++++++++++++++ ' + updateChildContactList);
+                //update updateContactList;
+               update  updateContactMap.Values();
             }
             
             if(relationshipIdSet.size() > 0){

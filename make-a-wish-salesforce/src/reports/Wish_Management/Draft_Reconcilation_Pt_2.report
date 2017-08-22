@@ -22,9 +22,6 @@
         <field>BIRTHDATE</field>
     </columns>
     <columns>
-        <field>Contact.ICD_10_Code__c</field>
-    </columns>
-    <columns>
         <field>Contact.Diagnosis__c</field>
     </columns>
     <columns>

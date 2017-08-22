@@ -100,11 +100,10 @@ public class WishRelatedLinks_AC {
         
         userDetailList = [SELECT Id , Name, contactId,contact.MobilePhone,contact.Name FROM USER WHERE Id IN: teamMemberSet];
         List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentCaseRec.Id AND Status =: 'Pending' AND ProcessDefinition.Name =: 'Wish Child Form Approval Process']; 
-        List<Wish_Child_Form__c> childFormList = [SELECT Id,Hidden_Wish_Fmaily_Contact_Name__c,Case__c,Participant_Name__c,Hidden_Same_as_Family__c,Hidden_Wish_Fmaily_Contact_Email__c,Participant_Details__c,Hidden_Email_List__c,
-                                                  Hidden_Name_List__c FROM Wish_Child_Form__c WHERE Case__c =: currentCaseRec.Id];
+        List<Wish_Child_Form__c> childFormList = [SELECT Id,IsWishFamily__c,IsParticipant__c FROM Wish_Child_Form__c WHERE Case__c =: currentCaseRec.Id];
         
         if(childFormList.size() > 0){
-            if((childFormList[0].Hidden_Wish_Fmaily_Contact_Name__c != Null && (childFormList[0].Participant_Name__c != Null || childFormList[0].Hidden_Same_as_Family__c == true) && childFormList[0].Hidden_Wish_Fmaily_Contact_Email__c != Null)){
+            if(childFormList[0].IsWishFamily__c  == false && childFormList[0].IsParticipant__c == false){
                 showPopup = true;
             }           
         }

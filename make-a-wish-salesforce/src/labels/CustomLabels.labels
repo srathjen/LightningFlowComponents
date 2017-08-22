@@ -47,6 +47,13 @@
         <value>8937F5DD-D14B-4F57-88F5-6A22455731A9</value>
     </labels>
     <labels>
+        <fullName>Combo_CMS_and_WC</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Combo CMS and WC</shortDescription>
+        <value>25f3ca74-2c06-4c46-b61e-ac4a8e4f0edc</value>
+    </labels>
+    <labels>
         <fullName>ContactIdValue</fullName>
         <language>en_US</language>
         <protected>false</protected>

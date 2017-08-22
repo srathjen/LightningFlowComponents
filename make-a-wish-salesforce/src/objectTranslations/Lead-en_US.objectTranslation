@@ -1289,6 +1289,7 @@
     <fields>
         <label><!-- Primary ICD-10 Code --></label>
         <name>PD_ICD_Code__c</name>
+        <relationshipLabel><!-- Leads --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Parent First Name --></label>
@@ -1806,6 +1807,7 @@
     <fields>
         <label><!-- Secondary Diagnosis 1 ICD-10 Code --></label>
         <name>SD1_ICD_Code__c</name>
+        <relationshipLabel><!-- Leads (Diagnosis 1 ICD-10 Code) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Secondary Diagnosis 2 Cond Description --></label>
@@ -1814,6 +1816,7 @@
     <fields>
         <label><!-- Secondary Diagnosis 2 ICD-10 Code --></label>
         <name>SD2_ICD_Code__c</name>
+        <relationshipLabel><!-- Leads (Secondary Diagnosis 2 ICD-10 Code) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Secondary Diagnosis 3 Cond Description --></label>
@@ -1822,6 +1825,7 @@
     <fields>
         <label><!-- Secondary Diagnosis 3 ICD-10 Code --></label>
         <name>SD3_ICD_Code__c</name>
+        <relationshipLabel><!-- Leads (Secondary Diagnosis 3 ICD-10 Code) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Secondary Diagnosis 4 Cond Description --></label>
@@ -1830,6 +1834,7 @@
     <fields>
         <label><!-- Secondary Diagnosis 4 ICD-10 Code --></label>
         <name>SD4_ICD_Code__c</name>
+        <relationshipLabel><!-- Leads (Secondary Diagnosis 4 ICD-10 Code) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- Short Description --></label>
@@ -2253,6 +2258,10 @@
     <validationRules>
         <errorMessage><!-- Please Enter DOB --></errorMessage>
         <name>Lead_DOB_Referral_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please provide the ICD Code or Primary Diagnosis. --></errorMessage>
+        <name>Lead_Diagnosis_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Please fill the is Famil Aware of Referral field. --></errorMessage>

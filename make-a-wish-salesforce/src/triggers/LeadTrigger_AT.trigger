@@ -21,25 +21,25 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         Set<Id> leadChapterSet = new Set<Id>();
         for(Lead newLead : Trigger.new)
         {    
-        
+            
             If(newLead.Additional_Parent_First_Name__c == newLead.Parent_First_Name__c && newLead.Additional_Parent_Last_Name__c == newLead.Parent_Last_Name__c && newLead.Additional_Parent_Phone__c == newLead.Phone
-                && newLead.Additional_Parent_Email__c == newLead.Email && newLead.Additional_Parent_City__c == newLead.City && newLead.Additional_Parent_Postal_Code__c == newLead.PostalCode){
-                
-                newLead.Additional_Parent_First_Name__c = '';
-                newLead.Additional_Parent_Last_Name__c = '';
-                newLead.Additional_Parent_Phone__c = '';
-                newLead.Additional_Parent_Email__c = '';
-                newLead.Additional_Parent_City__c = '';
-                newLead.Additional_Parent_Postal_Code__c = '';
-                
-            }
+               && newLead.Additional_Parent_Email__c == newLead.Email && newLead.Additional_Parent_City__c == newLead.City && newLead.Additional_Parent_Postal_Code__c == newLead.PostalCode){
+                   
+                   newLead.Additional_Parent_First_Name__c = '';
+                   newLead.Additional_Parent_Last_Name__c = '';
+                   newLead.Additional_Parent_Phone__c = '';
+                   newLead.Additional_Parent_Email__c = '';
+                   newLead.Additional_Parent_City__c = '';
+                   newLead.Additional_Parent_Postal_Code__c = '';
+                   
+               }
             If(newLead.Additional_Parent_First_Name__c == Null && newLead.Additional_Parent_Last_Name__c == Null && newLead.Additional_Parent_Phone__c == Null
-                && newLead.Additional_Parent_Email__c == Null && newLead.Additional_Parent_City__c == Null && newLead.Additional_Parent_Postal_Code__c == Null){
-                
-                newLead.Additional_Parent_State__c = '';
-                
-                
-            }
+               && newLead.Additional_Parent_Email__c == Null && newLead.Additional_Parent_City__c == Null && newLead.Additional_Parent_Postal_Code__c == Null){
+                   
+                   newLead.Additional_Parent_State__c = '';
+                   
+                   
+               }
             leadChapterSet.add(newLead.ChapterName__c);
             leadRegionMap.put(newLead.Id, newLead);
             newLead.Part_A_Form_Password__c= handlerIns.getRandom();
@@ -48,7 +48,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                 if(newLead.Status == 'Inquiry')
                 { 
                     boolean referred = true;
-                    if(!Test.isRunningTest())
+                    
                         newLead.Inquiry_Date__c = System.Today();
                     
                     if(newLead.City == Null || newLead.StateCode == Null || newLead.PostalCode == Null || newLead.Street == Null)
@@ -77,11 +77,10 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                 
                 if(newLead.Status == 'Referred')
                 {
-                     if(!Test.isRunningTest())
-                     {
+                   
                         newLead.Inquiry_Date__c = Date.Today();
                         newLead.Referred_Date__c= Date.Today();
-                     }
+                    
                 }
             }
             
@@ -125,112 +124,154 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         List<Lead> leadQuestionList= new List<Lead>();
         Map<Id, Lead> leadRegionCodeValidationMap = new Map<Id, Lead>();
         List<Lead> findDupConList = new List<Lead>();
-        
-    //    List<Lead> updateLeadOwnerList = new List<Lead>();
+        Set<Id> icdCodeInfoIdSet = new Set<Id>();
+        //List<Lead> updateLeadOwnerList = new List<Lead>();
         Set<String> newChaptersSet = new Set<String>();
-        
+        //Map<Integer, Id> icdInfoMap = new Map<Integer, Id>();
+        Map<Id, Set<Integer>> icdInfoMap = new Map<Id, Set<Integer>>();
+        List<Lead> leadRecList = new List<Lead>();
         Boolean flag;
         for(Lead newLead : Trigger.new)
         {  
-           
-                if(newLead.Status == 'Referred' && Trigger.oldMap.get(newLead.id).status == 'Inquiry'){
-                   if(!Test.isRunningTest())
-                      newLead.Referred_Date__c = Date.today();
+            //To update Secondary Diagnosis1 if ICD Code1 value is changed
+            if(newLead.SD1_ICD_Code__c != Trigger.oldMap.get(newLead.Id).SD1_ICD_Code__c && newLead.SD1_ICD_Code__c != null) {
+                icdCodeInfoIdSet.add(newLead.SD1_ICD_Code__c);
+                leadRecList.add(newLead);
+                if(icdInfoMap.containsKey(newLead.Id)) {
+                    icdInfoMap.get(newLead.Id).add(1);
+                } else {
+                    icdInfoMap.put(newLead.Id, new Set<Integer>{1});
                 }
+            }
+            //To update Secondary Diagnosis2 if ICD Code2 value is changed
+            if(newLead.SD2_ICD_Code__c != Trigger.oldMap.get(newLead.Id).SD2_ICD_Code__c && newLead.SD2_ICD_Code__c != null) {
+                icdCodeInfoIdSet.add(newLead.SD2_ICD_Code__c);
+                leadRecList.add(newLead);
+                if(icdInfoMap.containsKey(newLead.Id)) {
+                    icdInfoMap.get(newLead.Id).add(2);
+                } else {
+                    icdInfoMap.put(newLead.Id, new Set<Integer>{2});
+                }
+            }
+            //To update Secondary Diagnosis3 if ICD Code3 value is changed
+            if(newLead.SD3_ICD_Code__c != Trigger.oldMap.get(newLead.Id).SD3_ICD_Code__c && newLead.SD3_ICD_Code__c != null) {
+                icdCodeInfoIdSet.add(newLead.SD3_ICD_Code__c);
+                leadRecList.add(newLead);
+                if(icdInfoMap.containsKey(newLead.Id)) {
+                    icdInfoMap.get(newLead.Id).add(3);
+                } else {
+                    icdInfoMap.put(newLead.Id, new Set<Integer>{3});
+                }
+            }
+            //To update Secondary Diagnosis4  if ICD Code4 value is changed
+            if(newLead.SD4_ICD_Code__c != Trigger.oldMap.get(newLead.Id).SD4_ICD_Code__c && newLead.SD4_ICD_Code__c != null) {
+                icdCodeInfoIdSet.add(newLead.SD4_ICD_Code__c);
+                leadRecList.add(newLead);
+                if(icdInfoMap.containsKey(newLead.Id)) {
+                    icdInfoMap.get(newLead.Id).add(4);
+                } else {
+                    icdInfoMap.put(newLead.Id, new Set<Integer>{4});
+                }
+            }
+            
+            if(newLead.Status == 'Referred' && Trigger.oldMap.get(newLead.id).status == 'Inquiry'){
                 
-                if(newLead.ChapterName__c!= Trigger.oldMap.get(newLead.id).ChapterName__c)
-                {
-                    newChaptersSet.add(newLead.ChapterName__c);
-                    updateLeadOwnerList.add(newLead);
-                }
+                    newLead.Referred_Date__c = Date.today();
+            }
+            
+            if(newLead.ChapterName__c!= Trigger.oldMap.get(newLead.id).ChapterName__c)
+            {
+                newChaptersSet.add(newLead.ChapterName__c);
+                updateLeadOwnerList.add(newLead);
+            }
+            
+            
+            
+            if((newLead.Sub_Status__c == 'Pending Diagnosis Verification') && trigger.oldMap.get(newLead.id).Sub_Status__c != 'Pending Diagnosis Verification'){
                 
-               
+                    newLead.Part_A_Sent__c = Date.today();
+            }
+            
+            if((newLead.Status == 'Eligibility Review') || (newLead.Status == 'Qualified') && trigger.oldMap.get(newLead.id).Status == 'Referred'){
+                newLead.Part_A_Received__c = Date.today();
+            }
+            
+            if(newLead.Status == 'Eligibility Review' && newLead.Sub_Status__c == 'Pending Diagnosis Verification')
+                newLead.Sub_Status__c = Null;
+            
+            if(newLead.Treating_Medical_Professional_Email__c != trigger.oldmap.get(newLead.id).Treating_Medical_Professional_Email__c)
+            {
+                LeadTriggerHandler handlerIns = new LeadTriggerHandler();
+                newLead.Of_Times_Email_Sent__c = 0;
+                newLead.Part_A_Form_Password__c = handlerIns.getRandom();
                 
-                if((newLead.Sub_Status__c == 'Pending Diagnosis Verification') && trigger.oldMap.get(newLead.id).Sub_Status__c != 'Pending Diagnosis Verification'){
-                    if(!Test.isRunningTest())
-                      newLead.Part_A_Sent__c = Date.today();
+            }
+            if(newLead.Medical_Questions__c != trigger.oldMap.get(newLead.id).Medical_Questions__c && newLead.Medical_Questions__c  != Null ){
+                leadQuestionList.add(newLead);
+            }
+            
+            if((newLead.Status == 'Referred')
+               && newLead.Sub_Status__c == 'Pending Diagnosis Verification'
+               && newLead.Sub_Status__c != Trigger.oldMap.get(newLead.id).Sub_Status__c
+               && newLead.Dup_Check__c != 'Block Lead Dup')
+            {
+                findduplicateList.add(newLead);
+            }
+            
+            if((newLead.Status == 'Referred')
+               && newLead.Sub_Status__c == 'Pending Diagnosis Verification'
+               && newLead.Sub_Status__c != Trigger.oldMap.get(newLead.id).Sub_Status__c
+               && newLead.Dup_Check__c == 'Block Lead Dup' && newLead.Contact_Dup_Check__c != 'Block Contact Dup')
+            {
+                findDupConList.add(newLead);
+            }
+            
+            if(newLead.LastName != trigger.oldmap.get(newLead.id).LastName || newLead.DOB__c  != Trigger.oldMap.get(newLead.id).DOB__c 
+               || newLead.Parent_First_Name__c != trigger.oldMap.get(newLead.id).Parent_First_Name__c && newLead.Override_Dupe_Check__c == False)
+            {
+                flag = False;
+                newUpdateLeadList.add(newLead);
+            }
+            
+            if(newLead.PostalCode != Null && newLead.PostalCode != Trigger.oldMap.get(newLead.Id).postalCode && newLead.AddressVerified__c == false)
+            {
+                if(newLead.PostalCode != null && String.valueOf(newLead.PostalCode).length() > 5 && String.valueOf(newLead.PostalCode).contains('-')) {
+                    postalCodesSet.add(String.valueOf(newLead.PostalCode).split('-')[0]);
+                } else {
+                    postalCodesSet.add(newLead.PostalCode);
                 }
+                updateChapterOnLeadList.add(newLead);
+            }
+            
+            if(newLead.PD_ICD_Code__c != Null && newLead.PD_ICD_Code__c != Trigger.oldMap.get(newLead.id).PD_ICD_Code__c)
+            {
+                icdCodesSet.add(newLead.PD_ICD_Code__c);
+                leadUpdateToMedicalInfoList.add(newLead);
                 
-                if((newLead.Status == 'Eligibility Review') || (newLead.Status == 'Qualified') && trigger.oldMap.get(newLead.id).Status == 'Referred'){
-                    newLead.Part_A_Received__c = Date.today();
-                }
+            }
+            else if(newLead.PD_ICD_Code__c == Null)
+            {
+                //newLead.Short_Description__c = '';
+                //newLead.Long_Description__c = '';
+                //newLead.Group_1__c = false;
+                newLead.MAW_Name__c = '';
+            }
+            
+            if(newLead.PD_Condition_Description__c  != Null && newLead.PD_Condition_Description__c  != Trigger.oldMap.get(newLead.id).PD_Condition_Description__c )
+            {
+                conditionDescriptionsSet.add(newLead.PD_Condition_Description__c );
+                leadUpdateToMedicalInfoList.add(newLead);
                 
-                if(newLead.Status == 'Eligibility Review' && newLead.Sub_Status__c == 'Pending Diagnosis Verification')
-                    newLead.Sub_Status__c = Null;
-                
-                if(newLead.Treating_Medical_Professional_Email__c != trigger.oldmap.get(newLead.id).Treating_Medical_Professional_Email__c)
-                {
-                    LeadTriggerHandler handlerIns = new LeadTriggerHandler();
-                    newLead.Of_Times_Email_Sent__c = 0;
-                    newLead.Part_A_Form_Password__c = handlerIns.getRandom();
-                    
-                }
-                if(newLead.Medical_Questions__c != trigger.oldMap.get(newLead.id).Medical_Questions__c && newLead.Medical_Questions__c  != Null ){
-                    leadQuestionList.add(newLead);
-                }
-                
-                if((newLead.Status == 'Referred')
-                   && newLead.Sub_Status__c == 'Pending Diagnosis Verification'
-                   && newLead.Sub_Status__c != Trigger.oldMap.get(newLead.id).Sub_Status__c
-                   && newLead.Dup_Check__c != 'Block Lead Dup')
-                {
-                    findduplicateList.add(newLead);
-                }
-                
-                if((newLead.Status == 'Referred')
-                   && newLead.Sub_Status__c == 'Pending Diagnosis Verification'
-                   && newLead.Sub_Status__c != Trigger.oldMap.get(newLead.id).Sub_Status__c
-                   && newLead.Dup_Check__c == 'Block Lead Dup' && newLead.Contact_Dup_Check__c != 'Block Contact Dup')
-                {
-                    findDupConList.add(newLead);
-                }
-                
-                if(newLead.LastName != trigger.oldmap.get(newLead.id).LastName || newLead.DOB__c  != Trigger.oldMap.get(newLead.id).DOB__c 
-                   || newLead.Parent_First_Name__c != trigger.oldMap.get(newLead.id).Parent_First_Name__c && newLead.Override_Dupe_Check__c == False)
-                {
-                    flag = False;
-                    newUpdateLeadList.add(newLead);
-                }
-                
-                if(newLead.PostalCode != Null && newLead.PostalCode != Trigger.oldMap.get(newLead.Id).postalCode && newLead.AddressVerified__c == false)
-                {
-                    if(newLead.PostalCode != null && String.valueOf(newLead.PostalCode).length() > 5 && String.valueOf(newLead.PostalCode).contains('-')) {
-                        postalCodesSet.add(String.valueOf(newLead.PostalCode).split('-')[0]);
-                    } else {
-                        postalCodesSet.add(newLead.PostalCode);
-                    }
-                    updateChapterOnLeadList.add(newLead);
-                }
-                
-                if(newLead.PD_ICD_Code__c != Null && newLead.PD_ICD_Code__c != Trigger.oldMap.get(newLead.id).PD_ICD_Code__c)
-                {
-                    icdCodesSet.add(newLead.PD_ICD_Code__c);
-                    leadUpdateToMedicalInfoList.add(newLead);
-                    
-                }
-                else if(newLead.PD_ICD_Code__c == Null)
-                {
-                    newLead.Short_Description__c = '';
-                    newLead.Long_Description__c = '';
-                    //newLead.Group_1__c = false;
-                    newLead.MAW_Name__c = '';
-                }
-                
-                if(newLead.PD_Condition_Description__c  != Null && newLead.PD_Condition_Description__c  != Trigger.oldMap.get(newLead.id).PD_Condition_Description__c )
-                {
-                    conditionDescriptionsSet.add(newLead.PD_Condition_Description__c );
-                    leadUpdateToMedicalInfoList.add(newLead);
-                    
-                }
-                else if(newLead.PD_Condition_Description__c  == Null && newLead.PD_Condition_Description__c  != Trigger.oldMap.get(newLead.id).PD_Condition_Description__c )
-                {
-                    newLead.MAW_Name__c = '';
-                }
-                
-                if(newLead.Status == 'Eligibility Review' && trigger.oldMap.get(newLead.Id).Status != 'Eligibility Review'){
-                    leadList.add(newLead);
-                    system.debug('@@@@@ LeadList @@@@@'+leadList);
-                }
+            }
+            else if(newLead.PD_Condition_Description__c  == Null && newLead.PD_Condition_Description__c  != Trigger.oldMap.get(newLead.id).PD_Condition_Description__c )
+            {
+                newLead.MAW_Name__c = '';
+            }
+            
+            if(newLead.Status == 'Eligibility Review' && trigger.oldMap.get(newLead.Id).Status != 'Eligibility Review'){
+                leadList.add(newLead);
+                system.debug('@@@@@ LeadList @@@@@'+leadList);
+            }
             
             //Regions for chapters
             //Default region value validation
@@ -245,10 +286,14 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
             //LeadTriggerHandler.LeadRegionValidation(leadRegionCodeValidationMap);
         }
         
+        if(icdInfoMap.size() > 0) {
+            LeadTriggerHandler.MatchConditionDescription(icdInfoMap,leadRecList,icdCodeInfoIdSet);
+        }
         
-         if(newChaptersSet.size() > 0)
-                LeadTriggerHandler.updateLeadOwner(updateLeadOwnerList,newChaptersSet);
-                   
+        
+        if(newChaptersSet.size() > 0)
+            LeadTriggerHandler.updateLeadOwner(updateLeadOwnerList,newChaptersSet);
+        
         if(leadQuestionList.size() > 0){
             LeadTriggerHandler handlerIns = new LeadTriggerHandler();
             //handlerIns.updateLeadStatus(leadQuestionList);
@@ -296,17 +341,17 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         {  
             for(Lead newLead : Trigger.new){
                 
-               
-                    if(newLead.Status == 'DNQ' && Trigger.oldMap.get(newLead.Id).Status != newLead.Status && newLead.ChapterName__c != Null){
-                        lead_IntakUserIdMap.put(newLead,newLead.ChapterName__c);
-                        system.debug('Lead Intake UserId********'+newLead.ChapterName__c);
-                    }
+                
+                if(newLead.Status == 'DNQ' && Trigger.oldMap.get(newLead.Id).Status != newLead.Status && newLead.ChapterName__c != Null){
+                    lead_IntakUserIdMap.put(newLead,newLead.ChapterName__c);
+                    system.debug('Lead Intake UserId********'+newLead.ChapterName__c);
+                }
+                
+                if(!newLead.isConverted && newLead.Status == 'Qualified' && Trigger.oldmap.get(newLead.id).Status != 'Qualified'){
                     
-                    if(!newLead.isConverted && newLead.Status == 'Qualified' && Trigger.oldmap.get(newLead.id).Status != 'Qualified'){
-                        
-                        newLeadList.add(newLead);
-                    }
-              
+                    newLeadList.add(newLead);
+                }
+                
                 
             }
             if(newLeadList.size() > 0)
@@ -356,9 +401,9 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
             if(newLead.ChapterName__c!= Null && newLead.Owner.UserRole.Name == 'National Staff')
             {
                 if(leadMap.containsKey(newLead.ChapterName__r.Name))
-                   leadMap.get(newLead.ChapterName__r.Name).add(newLead);
+                    leadMap.get(newLead.ChapterName__r.Name).add(newLead);
                 else
-                   leadMap.put(newLead.ChapterName__r.Name, new List<Lead>{newLead});
+                    leadMap.put(newLead.ChapterName__r.Name, new List<Lead>{newLead});
             }
             
         }
@@ -387,7 +432,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         List<Id> ids = new List<Id>();
         for(Lead obj : Trigger.old)
         {    
-             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)        
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)        
                 ids.add(obj.Id);     
         }             
         Integer tempCount = [Select count() from Lead_File__c where Lead_File__c.WIP__c = false and Lead_File__c.Parent__c in:ids];
@@ -405,24 +450,24 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
             System.debug('newLead.State++++++++++++++++ ' + Trigger.oldMap.get(newLead.Id).State);
             // the address is already marked as verified
             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null &&
-            // one of the shipping address fields changed
-            (newLead.Street != Trigger.oldMap.get(newLead.Id).Street ||
-            newLead.State != Trigger.oldMap.get(newLead.Id).State ||
-            newLead.StateCode != Trigger.oldMap.get(newLead.Id).StateCode ||
-            newLead.City != Trigger.oldMap.get(newLead.Id).City ||
-            newLead.PostalCode != Trigger.oldMap.get(newLead.Id).PostalCode
-            )
-            ){
-                system.debug('Update AddressVerified__c>>>>'+newLead.AddressVerified__c);
-                newLead.AddressVerified__c = false;
-                newLead.AddressVerificationAttempted__c = null;
-                newLead.County__c = null;
-                
-            }
+               // one of the shipping address fields changed
+               (newLead.Street != Trigger.oldMap.get(newLead.Id).Street ||
+                newLead.State != Trigger.oldMap.get(newLead.Id).State ||
+                newLead.StateCode != Trigger.oldMap.get(newLead.Id).StateCode ||
+                newLead.City != Trigger.oldMap.get(newLead.Id).City ||
+                newLead.PostalCode != Trigger.oldMap.get(newLead.Id).PostalCode
+               )
+              ){
+                  system.debug('Update AddressVerified__c>>>>'+newLead.AddressVerified__c);
+                  newLead.AddressVerified__c = false;
+                  newLead.AddressVerificationAttempted__c = null;
+                  newLead.County__c = null;
+                  
+              }
             if(newLead.status == 'Eligibility Review' && trigger.oldMap.get(newLead.Id).Status != 'Eligibility Review'){
                 newLead.Sub_Status__c = 'Chapter';
             }
         }
-    
+        
     }  
 }

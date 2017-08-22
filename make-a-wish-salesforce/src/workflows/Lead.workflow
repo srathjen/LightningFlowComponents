@@ -10,7 +10,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>unfiled$public/Part_A_Form_Email_Template</template>
+        <template>Medical_Eligibility_Emails/Part_A_Form_Email_Template</template>
     </alerts>
     <alerts>
         <fullName>Diagnosis_Form_Email_Alert_for_Best_Physician_contact</fullName>

@@ -25,7 +25,7 @@ obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
       <apex:actionFunction action="{!WishInfotoWishFamily}" name="saveWishInfotoFamilyForm" reRender="ooukkuo"/>
       <apex:actionFunction action="{!withOutSaveWCCF}" name="WithOutsaveWishInfotoFamilyForm" reRender="ooulluo"/>
       <apex:actionFunction action="{!RetrunToWish}" name="ReturnToWish" reRender="qquuqq"/>
-      <apex:actionFunction action="{!cancelfunction}" name="ReturnToWishWithOutSave" reRender="qqququu"/> 
+      <apex:actionFunction action="{!cancelfunction}" name="ReturnToWishWithOutSave" reRender="qqququu"/>
       <apex:actionFunction action="{!SignNowmultiEmail}" name="SaveandSignNow" oncomplete="showMyModel();" reRender="popPickVal3" />
        <apex:actionFunction name="refreshAttachmentSection"  reRender="attachmentSection" />
       <div class="step-base">
@@ -44,11 +44,11 @@ obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
                   <!-- <apex:Commandbutton value="Prev" action="{!BackToWCF}" styleClass="col-xs-12 btn-md form-validate" html-data-toggle="modal" html-data-target="#page-exit-alert" /> -->
                   <apex:commandbutton value="Save" onclick="return false;"  styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" />
                   <!--<apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#signow-alert" reRender="dummyPanel"/>-->
-                  <apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md form-validate signModal" reRender="dummyPanel"/>
+                  <apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md signModal" reRender="dummyPanel"/>
                   <!--<apex:Commandbutton value="Send for Signature"  action="{!multiEmail}" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#sendemail-alert" reRender="dummyPanel,popPickVal1"/> -->
-                  <apex:Commandbutton value="Send for Signature"  action="{!multiEmail}" styleClass="btn-md form-validate sendforModal" reRender="dummyPanel,popPickVal1"/>
+                  <apex:Commandbutton value="Send for Signature"  action="{!multiEmail}" styleClass="btn-md  sendforModal" reRender="dummyPanel,popPickVal1"/>
                   <!--<apex:Commandbutton value="Generate PDF" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#download-alert"/> -->
-                  <apex:Commandbutton value="Generate PDF" action="{!confirmSignNow}" styleClass="btn-md form-validate generatePdf" reRender="dummyPanel,popPickVal1"/>
+                  <apex:Commandbutton value="Generate PDF" action="{!confirmSignNow}" styleClass="btn-md  generatePdf" reRender="dummyPanel,popPickVal1"/>
                  <!-- <apex:Commandbutton value="Submit for Approval" styleClass="btn-md form-validate"  html-data-toggle="modal" html-data-target="#submit-alert"/> -->
                  <apex:Commandbutton value="Submit for Approval" action="{!confirmSignNow}" styleClass="btn-md form-validate submitapproval" reRender="dummyPanel,popPickVal1" />
 
@@ -604,9 +604,9 @@ obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
           <ul>
             <!-- <li><apex:Commandbutton value="Prev" action="{!BackToWCF}" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#page-exit-alert" /></li> -->
             <li><apex:commandbutton value="Save" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" /></li>
-            <li><apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md form-validate signModal" reRender="dummyPanel"/></li>
-            <li><apex:Commandbutton value="Send for Signature" action="{!multiEmail}" styleClass="btn-md form-validate sendforModal" reRender="dummyPanel,popPickVal1"/></li>
-            <li><apex:Commandbutton value="Generate PDF" action="{!confirmSignNow}" styleClass="btn-md form-validate generatePdf" reRender="dummyPanel,popPickVal1"/></li>
+            <li><apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md  signModal" reRender="dummyPanel"/></li>
+            <li><apex:Commandbutton value="Send for Signature" action="{!multiEmail}" styleClass="btn-md  sendforModal" reRender="dummyPanel,popPickVal1"/></li>
+            <li><apex:Commandbutton value="Generate PDF" action="{!confirmSignNow}" styleClass="btn-md  generatePdf" reRender="dummyPanel,popPickVal1"/></li>
             <li><apex:Commandbutton value="Submit for Approval" action="{!confirmSignNow}" styleClass="btn-md form-validate submitapproval" reRender="dummyPanel,popPickVal1"/></li>
             <!-- <apex:Commandbutton value="Exit"  action="{!cancelfunction}" reRender="btpopup" styleClass="col-xs-12 btn-md" immediate="true"/> -->
           </ul>
@@ -642,7 +642,7 @@ obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
       $('#exit-alert').modal('hide');
       $('#signow-alert').modal('hide');
       if(!{!wcfUtil.displayError}){
-        
+
         $('#signow-alert2').modal('show');}
       else{
       $('#noUsertoSign-alert').modal('show');
@@ -856,7 +856,7 @@ obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
                 </button>
               </div>
               <div class="modal-body">
-                <p class="text-muted col-xs-12" style="text-align:center">Please fill the required fields in Wish child form.</p>
+                <p class="text-muted col-xs-12" style="text-align:center">Please fill the required fields in Wish Child form.</p>
               </div>
               <div class="modal-footer">
 
@@ -878,7 +878,7 @@ obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
               </button>
             </div>
             <div class="modal-body">
-              <p class="text-muted col-xs-12" style="text-align:center">Please fill the required fields in Wish family form.</p>
+              <p class="text-muted col-xs-12" style="text-align:center">Please fill the required fields in Wish Family form.</p>
             </div>
             <div class="modal-footer">
 
@@ -1210,26 +1210,26 @@ obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
   }
 
   function test4(){
-          if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
-          console.log('form submitted');
+          // if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+          // console.log('form submitted');
           saveWishInfotoChildForm();
 
-        } else {
-
+        // } else {
+        //
           $('#wcfooo-alert').modal('hide');
-        }
+        // }
       }
 
 
    function test5(){
-          if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
-          console.log('form submitted');
+          // if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+          // console.log('form submitted');
           saveWishInfotoFamilyForm();
 
-        } else {
-
+        // } else {
+        //
           $('#wffmmm-alert').modal('hide');
-        }
+        // }
       }
 
    function test7(){

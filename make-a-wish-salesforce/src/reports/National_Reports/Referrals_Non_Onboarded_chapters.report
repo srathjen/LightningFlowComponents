@@ -118,9 +118,6 @@
         <field>Lead.PD_Condition_Description__c</field>
     </columns>
     <columns>
-        <field>Lead.PD_ICD_Code__c</field>
-    </columns>
-    <columns>
         <field>Lead.Any_medical_reason_for_moving_quickly__c</field>
     </columns>
     <columns>

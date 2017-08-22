@@ -9,13 +9,14 @@ public class WishClearanceSendNow_AC{
     Constant_AC  constant = new Constant_AC();
     public Map<String,String> medicalProfConMap; 
     public String email{get;set;}
+    public String nameconcat;
     public boolean dis{get;set;}
     public boolean displayReturnToWish{get;set;} 
     Public Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
     public WishClearanceSendNow_AC(ApexPages.StandardController controller){
         dis = true;
-        currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushWishClearence_ChildSummary__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
-      
+        currentParentCase = [SELECT Id,ContactId,Contact.lastname,Contact.firstname,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushWishClearence_ChildSummary__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
+      nameconcat=currentParentCase.Contact.firstname+currentParentCase.Contact.lastname;
           
     }
     
@@ -69,6 +70,7 @@ public class WishClearanceSendNow_AC{
            updatecase.Comment_1__c = Null;
            updatecase.Comment_2__c = Null;
            updatecase.Wish_Clearance_Sent_Date__c = system.today();
+           updatecase.Wish_Clearance_Received_Date__c = Null;
            update updatecase;
            if(!Test.isRunningTest())
            CallouttoDocusign(updateCase.Id,medicalProfContactName,email);
@@ -79,7 +81,7 @@ public class WishClearanceSendNow_AC{
     
     @future(Callout = true)
     public static void CallouttoDocusign(Id caseId,String conName,String conEmail){
-       Case currentParentCase = [SELECT Id,ContactId,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c,Rush__c  FROM Case WHERE Id =: caseId];
+       Case currentParentCase = [SELECT Id,ContactId,Contact.Name,Contact.lastname,Contact.firstname,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c,Rush__c  FROM Case WHERE Id =: caseId];
          
             String account;
             String UserName;
@@ -91,7 +93,40 @@ public class WishClearanceSendNow_AC{
             Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
             String  name = conName;
             String  email = conEmail;
+             String  emailbody='Dear Healthcare Professional:'+'\r\n\r\n'+'Your patient has chosen a wish, please help us prepare and keep your patient safe on their wish!'+'\r\n\r\n\t'+
+            '    a. Open the attached form'+'\r\n\t'+
+            '    b. Fill it out to the best of your knowledge'+'\r\n\t'+
+            '    c. Electronic signature'+'\r\n\r\n'+
+            'If this email needs to be forwarded to the physician, nurse practitioner or physician assistant to sign, you can:'+'\r\n\r\n'+
+            
+            '1.Reassign it via email to that person by (this will change the signature to the new person, if you enter content into the original document, Docusign will not retain that information for the recipient)'+
+            '\r\n\r\n\t'+
+            
+            '    a. Click the Review Document button above'+'\r\n\t'+
+            '    b. Click Other Actions in the blue bar'+'\r\n\t'+
+            '    c. Select Assign to Someone Else from the drop down'+'\r\n\t'+
+            '    d. Enter the required information (New signer name & email)'+'\r\n\t'+
+            '    e. Click Assign to Someone Else'+'\r\n\r\n'+
+            
+            '2. Print the document, have the appropriate person sign and fax it back (if you enter information into the original document prior to “step b”, Docusign will retain the information and it will be printed on the paper form)'+'\r\n\r\n\t'+
+            
+            '    a. Click the Review Document button above'+'\r\n\t'+
+            '    b. Click Other Actions in blue bar'+'\r\n\t'+
+            '    c. Select Print & Sign from drop down'+'\r\n\t'+
+            '    d. Select radio button next to Fax'+'\r\n\t'+
+            '    e. Click Continue'+'\r\n\t'+
+            '    f. Click Download'+'\r\n\t'+
+            '    g. Click Finish once form downloads'+'\r\n\t'+
+            '    h. Then follow the directions on the cover sheet to fax it back'+'\r\n\r\n'+
+            
+            'Thanks to the support of you and other medical professionals around the country, we continue to come closer each year to our vision of making every eligible child’s wish come true. Thank you for taking the time to help us share the power of a wish®.'+
+            '\r\n\r\n'+
+            
+            'Thank You,'+'\r\n\r\n'+
+            'Make-A-Wish®'; 
             String subject;
+            String lastInitial = currentParentCase.Contact.lastname;
+            lastInitial = lastInitial.left(1);
             for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
                 UserName = credentialIns.name;
                 account = credentialIns.account__c;
@@ -102,12 +137,12 @@ public class WishClearanceSendNow_AC{
             
            if(currentParentCase.Rush__c  != true){
                templateID = label.WishClearence;
-               subject = 'Wish Clearance';
+               subject = 'Signature Required – Make-A-Wish Wish Clearance Form: '+currentParentCase.Contact.firstname+' '+lastInitial+'.';
            }
             
            if(currentParentCase.Rush__c  == true){
                templateID = label.Rush_Wish_Clearance;
-               subject = 'RUSH Wish Clearance';
+               subject = 'Signature Required – Make-A-Wish Rush Wish Clearance Form: '+currentParentCase.Contact.firstname+' '+lastInitial+'.';
            }
             String endpoint = endPointURL+'/accounts/'+account+'/envelopes';
             system.debug('### endpoint #####'+endpoint );
@@ -123,7 +158,7 @@ public class WishClearanceSendNow_AC{
             String json='{'+ 
                 ' '+ 
                 ' "emailSubject": "'+subject+'",'+
-                ' "emailBlurb": "MAKE A WISH AMERICA",'+ 
+                ' "emailBlurb": "This is emailblurb",'+ 
                 ' "templateId": "'+templateID+'",'+ 
                 ' "envelopeIdStamping": "false",'+ 
                 ' "customFields":{'+
@@ -140,9 +175,23 @@ public class WishClearanceSendNow_AC{
                 '{'+ 
                 '"roleName": "Signer 1",'+ 
                 '"name": "'+name+'",'+ 
-                '"email": "'+email+'",'+ 
-                '"recipientId": "1"'+ 
-                '}'+ 
+                '"email": "'+email+'",'+
+                 '"emailNotification": {'+
+              '"emailSubject": "'+subject+'",'+
+              '"emailBody": "'+emailbody+'",'+
+              '"supportedLanguage": "en"'+
+              '},'+
+                '},'+ 
+                 '{'+ 
+                '"roleName": "Signer 3",'+ 
+                '"name": "'+name+'",'+ 
+                '"email": "'+email+'",'+
+                 '"emailNotification": {'+
+              '"emailSubject": "'+subject+'",'+
+              '"emailBody": "'+emailbody+'",'+
+              '"supportedLanguage": "en"'+
+              '},'+
+                '},'+ 
                 ' ],'+ 
                 ' "status": "sent"'+ 
                 '}'; 
@@ -169,7 +218,7 @@ public class WishClearanceSendNow_AC{
     }
     
     public pagereference DisplayMessage(){
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The wish clearance form has been sent successfully.'));
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The Wish Clearance form has been sent successfully.'));
         return null;
     }
     

@@ -886,7 +886,7 @@
 
 
                             <fieldset>
-                                <legend>Emergency Contact Information<span>Please fill the fields below.</span></legend>
+                                <legend>Emergency Contact Information<span>Please fill the required fields below.</span></legend>
                                 <div class="col-md-6">
                                     <div class="form-group row">
                                         <div class="col-sm-3"><label for="e-contact" aria-labelledby="Emergency Contact Name">Contact Name</label></div>
@@ -1370,6 +1370,20 @@
         }, "Oops! Please enter a valid US postal code");
         
             $('.btn-p-save').on('click', function() {
+               
+               
+                  $("select.f-state").chosen().change(function(){
+                      $(this).valid();
+                  });
+                  $("select.f-state").rules("add", {
+                      required: true,
+                      messages: {
+                          required: "Oops! Please select a state"
+                      }
+                  });
+               
+                
+                
               if ($('form').valid()){
                 $('form').submit();
                 console.log('personal form submitted');
@@ -1390,6 +1404,19 @@
             
             // emergency save btn
             $('.btn-e-save').on('click', function() {
+            
+              
+                  $("select.relationship").chosen().change(function(){
+                      $("select.relationship").valid();
+                  });
+                  $("select.relationship").rules("add", {
+                      required: true,
+                      messages: {
+                          required: "Oops! Please select the relationship"
+                      }
+                  });
+               
+                
               if ($('form').valid()){
                 $('form').submit();
                 console.log('emergecy Form submitted');

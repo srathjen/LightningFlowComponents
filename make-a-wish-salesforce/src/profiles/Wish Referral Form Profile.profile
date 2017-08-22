@@ -207,6 +207,14 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>Batch_updateTaskToRelatedRec_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Batch_updateTaskToRelatedRec_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>BroadcastTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -272,6 +280,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>CloseVolunteerActivities_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ComboCMSWC_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ComboCMSWC_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -360,6 +376,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>DVMedicalSummaryAttachment_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DelegatedApproverController_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DelegatedApproverController_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -5075,7 +5099,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.ICD_10_Code__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -5950,42 +5974,42 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.SD1_Condition_Description__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.SD1_ICD_Code__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.SD2_Condition_Description__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.SD2_ICD_Code__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.SD3_Condition_Description__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.SD3_ICD_Code__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.SD4_Condition_Description__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.SD4_ICD_Code__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -6005,7 +6029,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Short_Description__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -6273,27 +6297,27 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Home_Address__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Last_Donation_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Lifetime_Giving_History_Amount__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Organization_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Other_Address__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6333,7 +6357,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Type_of_Account__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6348,7 +6372,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npe01__Work_Address__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6373,12 +6397,12 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npo02__Formula_HouseholdMailingAddress__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npo02__Formula_HouseholdPhone__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6398,7 +6422,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npo02__LastCloseDateHH__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6468,7 +6492,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npo02__OppAmountLastYearHH__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6478,7 +6502,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npo02__OppAmountThisYearHH__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6548,12 +6572,12 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npo02__Total_Household_Gifts__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npsp__Address_Verification_Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6603,7 +6627,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npsp__HHId__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6658,7 +6682,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.npsp__Primary_Contact__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7235,6 +7259,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>ICD_Codes__c.Group1__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ICD_Codes__c.Hidden_ICD_Code__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -8098,7 +8127,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Lead.Long_Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -8698,7 +8727,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Lead.Short_Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -11654,6 +11683,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Wish_Child_Form__c.Delivered_Hidden_Envelop_Id__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Wish_Child_Form__c.Delivered_LiabilitySignerMapKeyPair__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Wish_Child_Form__c.Details_about_Impact__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -11905,6 +11944,16 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Wish_Child_Form__c.Information_Provided__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Wish_Child_Form__c.IsParticipant__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Wish_Child_Form__c.IsWishFamily__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -13204,6 +13253,10 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>ComboCMSWC</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>CommunitiesChatter_VF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
@@ -13245,6 +13298,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Deceased_Popup</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DelegatedApprover_VF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>

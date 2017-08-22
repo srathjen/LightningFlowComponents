@@ -10,16 +10,31 @@ Trigger TimeSheetTrigger_AT on Time_sheet__c (before insert,before update, After
     Set<Id> timeSheetIds = new Set<Id>();
     
     if(Trigger.isBefore && Trigger.isInsert)
-    {
+    {   
+        Set<Id> volunteerIdSet = new Set<Id>();
+        
+       
+        
         for(Time_sheet__c  newTimeSheetEntry : Trigger.new)
         {
+         if(newTimeSheetEntry.Volunteer_Opportunity__c != Null)
+             volunteerIdSet.Add(newTimeSheetEntry.Volunteer_Opportunity__c);
          if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
           {
             if(newTimeSheetEntry.Hours_spent__c > 0){
                 timeSheetList.add(newTimeSheetEntry);
             }
+            
           }
         }
+        
+        if(volunteerIdSet.Size() > 0){
+              TimeSheetTriggerHandler.shareVolunteerOpportunity(volunteerIdSet);
+           
+      }
+            
+             
+        
         if(timeSheetList.size () > 0){
             TimeSheetTriggerHandler timesheetIns = new TimeSheetTriggerHandler();
             timesheetIns.SplitBefore(timeSheetList);

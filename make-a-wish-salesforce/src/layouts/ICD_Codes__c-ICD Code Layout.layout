@@ -40,6 +40,10 @@
                 <behavior>Edit</behavior>
                 <field>Valid_For_Wish__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Hidden_ICD_Code__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

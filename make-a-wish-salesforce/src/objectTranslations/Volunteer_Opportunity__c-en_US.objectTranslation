@@ -955,6 +955,10 @@
         <label><!-- Wish --></label>
         <name>Wish</name>
     </recordTypes>
+    <sharingReasons>
+        <label><!-- Grant Edit Access to assigned Volunteer --></label>
+        <name>Grant_Edit_Access_to_assigned_Volunteer</name>
+    </sharingReasons>
     <startsWith>Consonant</startsWith>
     <validationRules>
         <errorMessage><!-- You cannot create volunteer opportunity for closed wish. --></errorMessage>

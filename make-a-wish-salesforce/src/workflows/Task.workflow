@@ -294,6 +294,6 @@
         <priority>Normal</priority>
         <protected>false</protected>
         <status>Completed</status>
-        <subject>Task ET : Task ET : Interview Task Assigned for You</subject>
+        <subject>Task ET : Interview Task Assigned for You</subject>
     </tasks>
 </Workflow>

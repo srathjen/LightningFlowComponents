@@ -207,6 +207,14 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>Batch_updateTaskToRelatedRec_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Batch_updateTaskToRelatedRec_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>BroadcastTrigger_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -272,6 +280,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>CloseVolunteerActivities_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ComboCMSWC_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ComboCMSWC_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -360,6 +376,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>DVMedicalSummaryAttachment_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DelegatedApproverController_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>DelegatedApproverController_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -3602,7 +3626,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Case.Migrated_Record__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -6007,7 +6031,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Contact.Short_Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -7243,6 +7267,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>ICD_Codes__c.Hidden_ICD_Code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>ICD_Codes__c.ICD_Code_No_Period__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -8102,7 +8131,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Lead.Long_Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -8702,7 +8731,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Lead.Short_Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -11658,6 +11687,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Wish_Child_Form__c.Delivered_Hidden_Envelop_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Child_Form__c.Delivered_LiabilitySignerMapKeyPair__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Wish_Child_Form__c.Details_about_Impact__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -11909,6 +11948,16 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Wish_Child_Form__c.Information_Provided__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Child_Form__c.IsParticipant__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Child_Form__c.IsWishFamily__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -13717,6 +13766,10 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>ComboCMSWC</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>CommunitiesChatter_VF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
@@ -13758,6 +13811,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>Deceased_Popup</apexPage>
+        <enabled>true</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>DelegatedApprover_VF</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>

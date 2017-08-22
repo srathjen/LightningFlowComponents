@@ -2,9 +2,6 @@
     <apex:form style="border:none; padding:0; margin:0; min-height:auto">
       <!-- Global Modals -->
       <!-- exit modal -->
-       
-       
-
 
       <div class="modal fade" id="exit-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -25,7 +22,7 @@
           </div>
         </div>
       </div>
-     
+
       <!-- save modal -->
       <div class="modal" id="save-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -41,7 +38,7 @@
             <div class="modal-footer">
                 <!--action="{!SaveandWishChildExit}"-->
               <!-- <apex:commandButton value="Confirm Save" styleClass="btn-md" html-data-dismiss="modal" onclick="return callConfirmSave()" onComplete="saveMsg();"/> -->
-                <apex:commandButton value="Confirm Save" styleClass="btn-md" html-novalidate="novalidate" html-data-dismiss="modal" onClick="callConfirmSave(); saveMsg();"/>
+              <apex:commandButton value="Confirm Save" styleClass="btn-md" html-novalidate="novalidate" html-data-dismiss="modal" onClick="callConfirmSave(); saveMsg();"/>
               <apex:commandButton value="Cancel" styleClass="btn-md" html-data-dismiss="modal" style="margin-left:1px" />
             </div>
           </div>
@@ -166,6 +163,18 @@
           setIntervalX(function () {
             setWaypoint();
           }, 1000, 1);
+
+          // on final submit, run validation on pageload
+          setIntervalX(function () {
+            (function(){
+              var topLoc = top.location.href,
+                  urlWCFRequired = /^(http[s]?:\/\/.*\/WishChildForm_VF?).*(&required=true)$/i.test(topLoc),
+                  urlWFFRequired = /^(http[s]?:\/\/.*\/WishFamilyForm_VF?).*(&required=true)$/i.test(topLoc);
+              if (urlWCFRequired || urlWFFRequired){
+                $('#wcf\\:frm, #wff\\:frm').valid()
+              }
+            })()
+          }, 1250, 1)
         });
 
         function setWaypoint() {
@@ -226,59 +235,58 @@
         });
 
         function test1(){
-          if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
-            console.log('form submitted');
+          // if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+            //console.log('form submitted');
             SaveWishChildtoWInfo();
-            console.log();
-          } else {
+            //console.log();
+          // } else {
             $('#exit-alert-page').modal('hide');
-          }
+          // }
         }
         function test2(){
-          if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
-            console.log('form submitted');
+          // if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+            // console.log('form submitted');
             SaveWishChildtoWff();
-          } else {
+          // } else {
             $('#exit-alert-page').modal('hide');
-          }
+          // }
         }
         function test3(){
-          if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
-            console.log('form submitted');
+          // if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+          //   console.log('form submitted');
            SaveWishFFtoWishChild();
-          } else {
+          // } else {
             $('#exit-alert-page').modal('hide');
-          }
+          // }
         }
         function test4(){
-          if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
-            console.log('form submitted');
+          // if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+          //   console.log('form submitted');
             saveWishInfotoChildForm();
-          } else {
+          // } else {
             $('#exit-alert-page').modal('hide');
-          }
+          // }
         }
         function test5(){
-          if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
-            console.log('form submitted');
+          // if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+          //   console.log('form submitted');
             saveWishInfotoFamilyForm();
-          } else {
+          // } else {
             $('#exit-alert-page').modal('hide');
-          }
+          // }
         }
         function test6(){
-          if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
-            console.log('form submitted');
+          // if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+          //   console.log('form submitted');
             ReturnToWish();
-          } else {
-           console.log('form submitted');
+          // } else {
+          //  console.log('form submitted');
             $('#exit-alert').modal('hide');
-          }
+          // }
         }
-        
         function test8(){
-        console.log('form submitted');
-        ReturnToWishWithOutSave();
+          console.log('form submitted');
+          ReturnToWishWithOutSave();
         }
 
         function commonjs(){
@@ -302,11 +310,11 @@
           });
 
           // exiting form alert
-         // window.addEventListener("beforeunload", function (e) {
-           // var confirmationMessage = $('#exit-alert').modal('show');
-           // e.returnValue = confirmationMessage;
-          // return confirmationMessage;
-         // });
+          // window.addEventListener("beforeunload", function (e) {
+          //   var confirmationMessage = "You are leaving the page. Any unsaved changes will be lost.";
+          //   e.returnValue = confirmationMessage;
+          //   return confirmationMessage;
+          // });
 
           // Disables backspace key on any non-input element.
           $(function(){
@@ -319,6 +327,15 @@
               }
             })
           });
+          // check if inputted value is selected
+          function isTextSelected(input) {
+            if (typeof input.selectionStart == "number") {
+              return input.selectionStart == 0 && input.selectionEnd == input.value.length;
+            } else if (typeof document.selection != "undefined") {
+              input.focus();
+              return document.selection.createRange().text == input.value;
+            }
+          }
           formValidationRules();
           $(".numbers-only").keydown(function (e) {
             // Allow: backspace, delete, tab, escape and enter
@@ -363,7 +380,11 @@
             }
           });
           // auto format phone
+
           $(".phone").keydown(function(e){
+            if(isTextSelected(this)){
+              $(this).val('');
+            }
             if (($(this).val().length == 0) && (e.keyCode != 8)){
               $(this).val($(this).val() + "(");
             } else if(($(this).val().length == 4) && (e.keyCode != 8)){
@@ -492,11 +513,11 @@
 
         // display success message when the form is successfully saved
         function saveMsg() {
-            $('body').append('<div class="notification"><div><h6>Your form has been successfully saved.</h6></div></div>').fadeIn();
-            $('.notification').delay(4000).fadeOut();
-            setInterval(function() {
-                $('.notification').remove();
-            }, 4500);
+          $('body').append('<div class="notification"><div><h6>Your form has been successfully saved.</h6></div></div>').fadeIn();
+          $('.notification').delay(4000).fadeOut();
+          setInterval(function() {
+            $('.notification').remove();
+          }, 4500);
         }
 
         // validation rules and methods
@@ -525,9 +546,10 @@
                 } else {
                     error.insertAfter( element )
                 }
+
             },
             highlight: function ( element, errorClass, validClass ) {
-              var elementParents = $( element ).parents( "label, .col-sm-6, .col-sm-10, .col-md-4, .col-md-8, .col-lg-8, .col-sm-3, .col-md-9, .col-xs-6, .col-xs-12, .col-md-12, .col-lg-122" );
+              var elementParents = $( element ).parents( "label, .col-sm-6, .col-sm-10, .col-md-4, .col-md-8, .col-lg-8, .col-sm-3, .col-md-9, .col-xs-6, .col-xs-12, .col-md-12, .col-lg-12" );
               // non-div-wrapped label
               $(elementParents).removeClass( "has-success" ).addClass( "has-error" ).prev('label').css('color','red');
               // div wrapped label
@@ -588,54 +610,36 @@
           $("input.phone-chk").each(function(){
               $(this).rules("add", {
                   required: true,
-                  //phoneUS: true,
-                  minlength: 10,
-                  maxlength: 14,
-                  messages: {
-                      required: "Oops! Please enter a phone number",
-                      //phoneUS: "Oops! Must be a valid US number",
-                      number: "Only numbers are accepted",
-                      minlength: "Opps! Please enter at least 10 digits",
-                      maxlength: "We're sorry, you've reached the maximum allowed characters"
-                  }
-              });
-          });
-          $("input.phone").each(function(){
-              $(this).rules("add", {
-                  //phoneUS: true,
+                  phoneUS: true,
                   minlength: 14,
                   maxlength: 14,
                   messages: {
-                      //phoneUS: "Oops! Must be a valid US number",
+                      required: "Oops! Please enter a phone number",
+                      phoneUS: "Oops! A valid US number must be entered and also in the correct format",
                       number: "Only numbers are accepted",
                       minlength: "Oops! Please enter at least 10 digits",
                       maxlength: "We're sorry, you've reached the maximum allowed characters"
                   }
               });
           });
-          $("input.phone-group").each(function(){
+          $("input.phone").each(function(){
               $(this).rules("add", {
-                require_from_group: [1, ".phone-group"],
-                //phoneUS: true,
-                minlength: 14,
-                maxlength: 14,
-                messages: {
-                    require_from_group: "Oops! Please fill at least 1 of these fields",
-                    //phoneUS: "Oops! Must be a valid US number",
-                    number: "Only numbers are accepted",
-                    minlength: "Opps! Please enter at least 10 digits",
-                    maxlength: "We're sorry, you've reached the maximum allowed characters"
-                }
+                  phoneUS: true,
+                  minlength: 14,
+                  maxlength: 14,
+                  messages: {
+                      phoneUS: "Oops! A valid US number must be entered and also in the correct format",
+                      number: "Only numbers are accepted",
+                      minlength: "Oops! Please enter at least 10 digits",
+                      maxlength: "We're sorry, you've reached the maximum allowed characters"
+                  }
               });
           });
+
           $("input.email").each(function(){
               $(this).rules("add", {
                   required: true,
                   email: true,
-                  messages: {
-                      required: "Oops! Please enter a valid email address",
-                      email: "Oops! You've entered an invalid email address"
-                  }
               });
           });
           $("input.dob").each(function(){
@@ -701,16 +705,81 @@
                 }
             });
           });
+          // wishfamilyform_vf: getting unique number generated by SF in order for input grouping for validation rule that 1 field is required of the 3.
+          $('input.phone-group').each(function(){
+            // This and the next 4 lines are neccessary for proper validation of generated sections
+            var nameNum = $(this).attr('name').substring(27,28);
+            $(this).addClass('phone-group-'+nameNum); // attaching the unique number to the class and adding to input class
+            var phGroupStr = $(this).attr('class').substr($(this).length - 14); // filtering/getting last part of class
+            var phoneGroupClass = "."+phGroupStr; // connotate string to form new class name
+          });
+
+            $('input.phone-group-0').each(function(){
+              $(this).rules("add", {
+                require_from_group: [1, ".phone-group-0"]
+              });
+            });
+            $('input.phone-group-1').each(function(){
+              $(this).rules("add", {
+                require_from_group: [1, ".phone-group-1"]
+              });
+            });
+            $('input.phone-group-2').each(function(){
+              $(this).rules("add", {
+                require_from_group: [1, ".phone-group-2"]
+              });
+            });
+            $('input.phone-group-3').each(function(){
+              $(this).rules("add", {
+                require_from_group: [1, ".phone-group-3"]
+              });
+            });
+            $('input.phone-group-4').each(function(){
+              $(this).rules("add", {
+                require_from_group: [1, ".phone-group-4"]
+              });
+            });
+            $('input.phone-group-5').each(function(){
+              $(this).rules("add", {
+                require_from_group: [1, ".phone-group-5"]
+              });
+            });
+            $('input.phone-group-5').each(function(){
+              $(this).rules("add", {
+                require_from_group: [1, ".phone-group-5"]
+              });
+            });
+            $('input.phone-group-6').each(function(){
+              $(this).rules("add", {
+                require_from_group: [1, ".phone-group-6"]
+              });
+            });
+            $('input.phone-group-7').each(function(){
+              $(this).rules("add", {
+                require_from_group: [1, ".phone-group-7"]
+              });
+            });
+            $('input.phone-group-8').each(function(){
+              $(this).rules("add", {
+                require_from_group: [1, ".phone-group-8"]
+              });
+            });
+            $('input.phone-group-9').each(function(){
+              $(this).rules("add", {
+                require_from_group: [1, ".phone-group-9"]
+              });
+            });
         }
         formValidationRules();
 
         jQuery.extend(jQuery.validator.messages, {
-          required: "Oops! This field is required.",
-          email: "Oops! Please enter a valid email address.",
-          url: "Oops! Please enter a valid URL.",
-          date: "Oops! Please enter a valid date.",
-          number: "Oops! Please enter a valid number.",
-          digits: "Please enter only digits.",
+          required: "Oops! This field is required",
+          email: "Oops! Please enter a valid email address",
+          url: "Oops! Please enter a valid URL",
+          date: "Oops! Please enter a valid date",
+          number: "Oops! Please enter a valid number",
+          digits: "Please enter only digits",
+          require_from_group: "Oops! Please fill at least 1 of these phone fields"
         });
         jQuery.validator.addMethod("zipcode", function(value, element) {
           return this.optional(element) || /^\d{5}(?:-\d{4})?$/.test(value);
@@ -718,7 +787,7 @@
 
         // trigger validation
         $('.form-validate').on('click', function() {
-          if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
+          if ($('#wif\\:frm').valid()){
             console.log('form submitted');
             return true;
           } else {
@@ -726,7 +795,6 @@
             return false;
           }
         });
-
 
     </script>
 </apex:page>

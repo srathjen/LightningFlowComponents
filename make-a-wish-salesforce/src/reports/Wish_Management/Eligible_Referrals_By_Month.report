@@ -37,9 +37,6 @@
         <field>Case.Copy_1_Referral_Date__c</field>
     </columns>
     <columns>
-        <field>Contact.ICD_10_Code__c</field>
-    </columns>
-    <columns>
         <field>Case.Medical_Condition__c</field>
     </columns>
     <columns>

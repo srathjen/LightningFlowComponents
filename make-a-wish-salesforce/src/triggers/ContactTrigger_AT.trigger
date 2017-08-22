@@ -66,6 +66,9 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         set<Id> recallWishChild = new Set<Id>();
         List<Account> accList = new List<Account>();
         Map<Id,Account> houseHoldAccountMap = new Map<Id,Account>();
+        Set<Id> icdCodeInfoIdSet = new Set<Id>();
+        Map<Id, Set<Integer>> icdInfoMap = new Map<Id, Set<Integer>>();
+        List<Contact> conICDList = new List<Contact>();
         for(Contact newContact : Trigger.new)
         { 
             
@@ -76,6 +79,58 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
             
             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
+                if(newContact.SD1_ICD_Code__c != Trigger.oldMap.get(newContact.Id).SD1_ICD_Code__c && newContact.SD1_ICD_Code__c != null) {
+                    icdCodeInfoIdSet.add(newContact.SD1_ICD_Code__c);
+                    conICDList.add(newContact);
+                    if(icdInfoMap.containsKey(newContact.Id)) {
+                        icdInfoMap.get(newContact.Id).add(1);
+                    } else {
+                        icdInfoMap.put(newContact.Id, new Set<Integer>{1});
+                    }
+                }
+                //To update Secondary Diagnosis2 if ICD Code2 value is changed
+                if(newContact.SD2_ICD_Code__c != Trigger.oldMap.get(newContact.Id).SD2_ICD_Code__c && newContact.SD2_ICD_Code__c != null) {
+                    icdCodeInfoIdSet.add(newContact.SD2_ICD_Code__c);
+                    conICDList.add(newContact);
+                    if(icdInfoMap.containsKey(newContact.Id)) {
+                        icdInfoMap.get(newContact.Id).add(2);
+                    } else {
+                        icdInfoMap.put(newContact.Id, new Set<Integer>{2});
+                    }
+                }
+                //To update Secondary Diagnosis3 if ICD Code3 value is changed
+                if(newContact.SD3_ICD_Code__c != Trigger.oldMap.get(newContact.Id).SD3_ICD_Code__c && newContact.SD3_ICD_Code__c != null) {
+                    icdCodeInfoIdSet.add(newContact.SD3_ICD_Code__c);
+                    conICDList.add(newContact);
+                    if(icdInfoMap.containsKey(newContact.Id)) {
+                        icdInfoMap.get(newContact.Id).add(3);
+                    } else {
+                        icdInfoMap.put(newContact.Id, new Set<Integer>{3});
+                    }
+                }
+                //To update Secondary Diagnosis4  if ICD Code4 value is changed
+                if(newContact.SD4_ICD_Code__c != Trigger.oldMap.get(newContact.Id).SD4_ICD_Code__c && newContact.SD4_ICD_Code__c != null) {
+                    icdCodeInfoIdSet.add(newContact.SD4_ICD_Code__c);
+                    conICDList.add(newContact);
+                    if(icdInfoMap.containsKey(newContact.Id)) {
+                        icdInfoMap.get(newContact.Id).add(4);
+                    } else {
+                        icdInfoMap.put(newContact.Id, new Set<Integer>{4});
+                    }
+                }
+                
+                 //To update Secondary Diagnosis4  if ICD Code4 value is changed
+                if(newContact.ICD_10_Code__c != Trigger.oldMap.get(newContact.Id).ICD_10_Code__c && newContact.ICD_10_Code__c != null) {
+                    icdCodeInfoIdSet.add(newContact.ICD_10_Code__c);
+                    conICDList.add(newContact);
+                    if(icdInfoMap.containsKey(newContact.Id)) {
+                        icdInfoMap.get(newContact.Id).add(5);
+                    } else {
+                        icdInfoMap.put(newContact.Id, new Set<Integer>{5});
+                    }
+                }
+                
+                
                 if(newContact.RecordTypeId == volunteerRecordTypeId && newContact.RecordTypeId != Trigger.oldMap.get(newContact.Id).RecordTypeId){
                    newContact.AccountId = newContact.Region_Chapter__c;   
                 }
@@ -380,6 +435,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         }
         
         
+        
         if(recallWishChild.size() > 0)
         {
             for(npe4__Relationship__c dbRelationShip : [SELECT Id,npe4__Contact__c,npe4__RelatedContact__c FROM npe4__Relationship__c WHERE npe4__Contact__c IN: recallWishChild AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId]){
@@ -410,9 +466,14 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 
             }
             
+           
+            
             if(wishFamilyMap.size() > 0)
                 update wishFamilyMap.Values();
             
+        }
+        if(icdInfoMap.size() > 0) {
+            ContactTriggerHandler.MatchConditionDescription(icdInfoMap,conICDList,icdCodeInfoIdSet);
         }
         
     }
@@ -493,6 +554,8 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         Map<Id,Contact> wishFamilyContacMap = new Map<Id,Contact>();
         map<id,Contact> wishChilPhotoMap = new map<id,Contact>();
         List<Contact> conList = new List<Contact>();
+        Set<Id> contactIdSet = new Set<Id>();
+        
         Contact updatedCon;
         for(Contact newContact : trigger.new)
         {
@@ -500,6 +563,10 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                    conList.add(newContact);    
                }
                 
+                
+               /* if(newContact.recordTypeId == wichChildRecordTypeId && trigger.oldMap.get(newContact.Id).recordTypeId == familyContactRecordTypeId ){
+                    contactIdSet.add(newContact.Id);
+                }*/
               /*  if(newContact.Wish_Child_Photo__c != Null && trigger.oldmap.get(newContact.id).Wish_Child_Photo__c != newContact.Wish_Child_Photo__c){
                     wishChilPhotoMap.put(newContact.id, newContact);
                 }*/
@@ -632,6 +699,9 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         if(conList.Size() > 0){
              ContactTriggerHandler.CreateAffliation(conList);
         }
+        
+        //if(contactIdSet.Size() > 0)
+           // ContactTriggerHandler.updateAffiliation(contactIdSet);
     }
     
      //Reset the address verification checkbox if the address has changed

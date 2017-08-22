@@ -673,7 +673,7 @@ update updateContactList;
         Map<Id, Set<Id>> inActiveOwners = new Map<Id, Set<Id>>();
         Set<Id> contactIdSet = new Set<Id>();
         Map<Id,String> wishStatusMap = new Map<Id,String>();
-        
+                
         for(Volunteer_Opportunity__c  currRec : [SELECT Id,Wish__c,Wish__r.Status FROM Volunteer_Opportunity__c  WHERE Id IN :volunteerOppIdSet AND Wish__c != Null]){
             wishStatusMap.put(currRec.Wish__C,currRec.Wish__r.Status);
         }
@@ -682,6 +682,7 @@ update updateContactList;
             caseTeamIdMap.put(caseTeamInfo.Id, caseTeamInfo.Name);
             caseTeamNameMap.put(caseTeamInfo.Name, caseTeamInfo.Id);
         }
+       
         for(Volunteer_Opportunity__c  processVolOpportunity : volunteerOpportunityList)
         {
             Volunteer_Opportunity__c newVolOpportunity = new Volunteer_Opportunity__c();
@@ -729,19 +730,26 @@ update updateContactList;
             contactUserMap.put(userInfo.Id, userInfo.ContactId);
         }
         Map<Id,Id> activeVolunteerMap = new Map<Id,Id>();
-        for(CaseTeamMember caseTeamInfo : [SELECT Id, TeamRole.Name, ParentId, MemberId FROM CaseTeamMember WHERE TeamRole.Name = 'Wish Granter' AND ParentId IN : inActiveOwners.keySet() ORDER BY CreatedDate ASC]) {
-            if(!activeVolunteerMap.containsKey(caseTeamInfo.ParentId)) {
+        
+        for(CaseTeamMember caseTeamInfo : [SELECT Id, TeamRole.Name, ParentId, MemberId FROM CaseTeamMember WHERE (TeamRole.Name = 'Wish Granter' OR TeamRole.Name = 'Wish Granter Mentor') AND ParentId IN : inActiveOwners.keySet() ORDER BY CreatedDate ASC]) {
+            if(!activeVolunteerMap.containsKey(caseTeamInfo.ParentId) && !contactUserMap.containsKey(caseTeamInfo.MemberId)) {
                 activeVolunteerMap.put(caseTeamInfo.ParentId, caseTeamInfo.MemberId);
             }
         }
-        System.debug('>inActiveOwners>>>>'+inActiveOwners.values());
+        Map<Id, Id> caseOwnerMap = new Map<Id, Id>();
+        
+        for(Case ownerMap : [SELECT Id, OwnerId FROM Case WHERE Id IN : wishStatusMap.keySet()]) {
+            caseOwnerMap.put(ownerMap.Id, ownerMap.OwnerId);
+        }
         List<Task> taskOwnerUpdateList = new List<Task>();
-        for(Task getAllTask : [SELECT Id, OwnerId, WhatId FROM Task WHERE WhatId IN : inActiveOwners.keySet() AND isClosed = false]) {
+        for(Task getAllTask : [SELECT Id, OwnerId, Task_Type__c, WhatId FROM Task WHERE WhatId IN : inActiveOwners.keySet() AND isClosed = false]) {
             if(inActiveOwners.containsKey(getAllTask.WhatId)) {
-                
                 if(inActiveOwners.get(getAllTask.WhatId).contains(contactUserMap.get(getAllTask.OwnerId))) {
-                    if(activeVolunteerMap.containsKey(getAllTask.WhatId)) {
+                    if(activeVolunteerMap.containsKey(getAllTask.WhatId) && getAllTask.Task_Type__c != null) {
                         getAllTask.OwnerId = activeVolunteerMap.get(getAllTask.WhatId);
+                        taskOwnerUpdateList.add(getAllTask);
+                    } else {
+                        getAllTask.OwnerId = caseOwnerMap.get(getAllTask.WhatId);
                         taskOwnerUpdateList.add(getAllTask);
                     }
                 }
@@ -980,6 +988,7 @@ update updateContactList;
                 Volunteer_Opportunity__Share newVolOppShareRec = new Volunteer_Opportunity__Share();
                 newVolOppShareRec.ParentId = processVolOpportunityRec.Id;
                 newVolOppShareRec.AccessLevel ='Edit';
+                newVolOppShareRec.rowcause=Schema.Volunteer_Opportunity__Share.RowCause.Grant_Edit_Access_to_assigned_Volunteer__C;
                 newVolOppShareRec.UserOrGroupId = volunteerUserMap.get(processVolOpportunityRec.Volunteer_Name__c);
                 volOpportunitySharingList.add(newVolOppShareRec);
             }

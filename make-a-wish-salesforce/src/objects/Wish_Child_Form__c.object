@@ -77,17 +77,22 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>IsWishFamily__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Primary_Address__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>City__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
             <field>Street__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Driver_Information__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -102,17 +107,17 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>IsParticipant__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>PrimaryAddreess__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
             <field>State__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Primary_Address__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -402,17 +407,17 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>Primary_Address__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Name_of_wheelchair_collapsible__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
             <field>Does_your_family_Details__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Driver_Information__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -437,7 +442,17 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>IsParticipant__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Electronics_Games_that_I_like_to_play__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>IsWishFamily__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -548,11 +563,6 @@
         </displayedFields>
         <displayedFields>
             <field>Game__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>Primary_Address__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -1417,6 +1427,26 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Delivered_Hidden_Envelop_Id__c</fullName>
+        <externalId>false</externalId>
+        <label>Delivered Hidden Envelop Id</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Delivered_LiabilitySignerMapKeyPair__c</fullName>
+        <externalId>false</externalId>
+        <label>Delivered LiabilitySignerMapKeyPair</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Details_about_Impact__c</fullName>
         <externalId>false</externalId>
         <label>Details about Impact</label>
@@ -2059,6 +2089,25 @@ and the date it was or will be granted.</inlineHelpText>
         <description>This field is used to capture the Information provided from wish family form.</description>
         <externalId>false</externalId>
         <label>Information Provided</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsParticipant__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>IsParticipant</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsWishFamily__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>It indicate whether wish family form is completed or not</description>
+        <externalId>false</externalId>
+        <label>IsWishFamily</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>

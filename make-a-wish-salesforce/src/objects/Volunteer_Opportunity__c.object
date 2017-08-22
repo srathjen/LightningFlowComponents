@@ -3698,6 +3698,10 @@ RECIP_RELATION_CODE&quot;</description>
         <searchResultsAdditionalFields>Role__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>Read</sharingModel>
+    <sharingReasons>
+        <fullName>Grant_Edit_Access_to_assigned_Volunteer__c</fullName>
+        <label>Grant Edit Access to assigned Volunteer</label>
+    </sharingReasons>
     <validationRules>
         <fullName>Vol_Opp_Do_Not_Create_for_Closed_Wish</fullName>
         <active>true</active>

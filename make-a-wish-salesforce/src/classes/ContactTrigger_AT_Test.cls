@@ -7,180 +7,183 @@ Description : ContactTrigger_AT_Test is used to increase the code coverage for c
 
 @isTest
 public class ContactTrigger_AT_Test{
- /*This setup method is used to create a chapter user and systemAdmin users*/
+    /*This setup method is used to create a chapter user and systemAdmin users*/
     
-        @testSetup static void setup(){   
-         OrientationandTrainingUtil.createChapterUser();
-         OrientationandTrainingUtil.createrSystemAdminUser();
-         }
-     /*This setup method is used to create a community user records*/
-     
-         public testmethod static void createCommunityUser(){  
-         User chapterUser = [SELECT Id,UserName,ProfileId,Profile.Name,Email FROM User WHERE Email  =: 'test123@gmail.com'];
-         System.runAs(chapterUser){
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         try{
-         OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);}
-         catch(exception ex){
-         }
+    @testSetup static void setup(){   
+        OrientationandTrainingUtil.createChapterUser();
+        OrientationandTrainingUtil.createrSystemAdminUser();
+    }
+    /*This setup method is used to create a community user records*/
+    
+    public testmethod static void createCommunityUser(){  
+        User chapterUser = [SELECT Id,UserName,ProfileId,Profile.Name,Email FROM User WHERE Email  =: 'test123@gmail.com'];
+        System.runAs(chapterUser){
+            Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+            try{
+                OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);}
+            catch(exception ex){
+            }
         }
-     }
-     
-  
+    }
+    
+    
     /*This method is used to update the application status to complete*/
-     
-     public testmethod static void UpdateApplicationStatustoComplete(){ 
-         Constant_AC  constant = new Constant_AC(); 
-         Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
-         user systemAdmin = [select id from user where id =:userinfo.getuserid()];
-         system.runAs(systemAdmin){
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
-         OrientationandTrainingUtil.CreateAffiliation(VolunteerContact.Id);
-         Contact dbcontact = [SELECT Id,FirstName,LastName,AccountId,Birth_Month__c ,Birth_Day__c,is_Application__c, Birth_Year__c,RecordTypeId FROM Contact Where RecordTypeId =: volunteerRecordTypeId Limit 1];
-         dbcontact .Birth_Day__c = '21';
-         dbcontact .Birth_Month__c = 'March';
-         dbcontact .Birth_Year__c = '1986';
-         dbcontact .is_Application__c =  'Complete';
-         update dbcontact;
-         }
-     }
-     
-     /*This method is used to update the application status to reject*/
-     
-     public testmethod static void UpdateApplicationStatustoReject(){ 
-         Constant_AC  constant = new Constant_AC(); 
-         Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
-          user systemAdmin = [select id from user where id =:userinfo.getuserid()];
-         system.runAs(systemAdmin){
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
-         OrientationandTrainingUtil.CreateAffiliationwithAccount(VolunteerContact.Id,chapterAccount.id);
-         Role__c WishRole = OrientationandTrainingUtil.createRole();
-         Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.id,WishRole.Id);
-         Contact dbcontact = [SELECT Id,FirstName,LastName,AccountId,Birth_Month__c ,Birth_Day__c,is_Application__c, Birth_Year__c,RecordTypeId FROM Contact Where RecordTypeId =: volunteerRecordTypeId Limit 1];
-         dbcontact .Birth_Day__c = '21';
-         dbcontact .Birth_Month__c = 'March';
-         dbcontact .Birth_Year__c = '1986';
-         dbcontact .is_Application__c =  'Rejected';
-         dbcontact.Volunteer_Role__c = 'Wish Granter;Airport Greeter';
-         update dbcontact;
-         }
-     }
-     
-      /*This method is used to create a task record when zipcode is update*/
-     
-     public testmethod static void CreateZipcodeUpdateTask(){
-     user systemAdmin = [select id from user where id =:userinfo.getuserid()];
-         system.runAs(systemAdmin){
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Account chapterAccount1 = OrientationandTrainingUtil.createVolunteerAccount();
-         Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
-         Office__c  officeRec = OrientationandTrainingUtil.createOffice(chapterAccount1.Id);
-         officeRec.External_Id__c = 'R123';
-         insert officeRec;
-         Zip_Code__c  zipcodeRec = OrientationandTrainingUtil.createZipcode(officeRec.Id);
-         zipcodeRec.Name = '32401';
-         zipCodeRec.office__c = officeRec.id;
-         zipCodeRec.External_Id__c = 'R123';
-         insert zipCodeRec;
-         OrientationandTrainingUtil.CreateAffiliationwithAccount(VolunteerContact.Id,chapterAccount.id);
-         contact dbContact = [SELECT Id,MailingPostalCode  FROM Contact WHERE Id =:VolunteerContact.Id];
-         dbContact.MailingPostalCode  = '32401';
-         update dbContact;
-       }
-     }
-     
-      /* This Method is used to update the Volunteer LastName,FirstName,Email and Mobile Number */
-     public testmethod static void UpdateVolunteerDetails(){ 
-         Constant_AC  constant = new Constant_AC(); 
-         Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
-          user systemAdmin = [select id from user where id =:userinfo.getuserid()];
-         system.runAs(systemAdmin){
-
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
-         User volunteerUser=OrientationandTrainingUtil.createVolunteerUser(VolunteerContact.Id);
-         OrientationandTrainingUtil.CreateAffiliationwithAccount(VolunteerContact.Id,chapterAccount.id);
-         Role__c WishRole = OrientationandTrainingUtil.createRole();
-         Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.id,WishRole.Id);
-         Contact dbcontact = [SELECT Id,FirstName,LastName,MobilePhone,Email,RecordTypeId FROM Contact Where RecordTypeId =: volunteerRecordTypeId Limit 1];
-         dbcontact.LastName = 'moss';
-         dbcontact.FirstName = 'Smith';
-         dbcontact.MobilePhone='9003910427';
-         dbcontact.Email ='Smith@gmail.com';
-         dbcontact.Same_as_Household_Address__c = True;
-         update dbcontact;
-         
+    
+    public testmethod static void UpdateApplicationStatustoComplete(){ 
+        Constant_AC  constant = new Constant_AC(); 
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        user systemAdmin = [select id from user where id =:userinfo.getuserid()];
+        system.runAs(systemAdmin){
+            Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+            Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+            OrientationandTrainingUtil.CreateAffiliation(VolunteerContact.Id);
+            Contact dbcontact = [SELECT Id,FirstName,LastName,AccountId,Birth_Month__c ,Birth_Day__c,is_Application__c, Birth_Year__c,RecordTypeId FROM Contact Where RecordTypeId =: volunteerRecordTypeId Limit 1];
+            dbcontact .Birth_Day__c = '21';
+            dbcontact .Birth_Month__c = 'March';
+            dbcontact.RecordTypeId=volunteerRecordTypeId;
+            dbcontact .Birth_Year__c = '1986';
+            dbcontact .is_Application__c =  'Complete';
+            update dbcontact;
+        }
+    }
+    
+    /*This method is used to update the application status to reject*/
+    
+    public testmethod static void UpdateApplicationStatustoReject(){ 
+        Constant_AC  constant = new Constant_AC(); 
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        user systemAdmin = [select id from user where id =:userinfo.getuserid()];
+        system.runAs(systemAdmin){
+            Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+            Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+            OrientationandTrainingUtil.CreateAffiliationwithAccount(VolunteerContact.Id,chapterAccount.id);
+            Role__c WishRole = OrientationandTrainingUtil.createRole();
+            Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.id,WishRole.Id);
+            Contact dbcontact = [SELECT Id,FirstName,LastName,AccountId,Birth_Month__c ,Birth_Day__c,is_Application__c, Birth_Year__c,RecordTypeId FROM Contact Where RecordTypeId =: volunteerRecordTypeId Limit 1];
+            dbcontact .Birth_Day__c = '21';
+            dbcontact .Birth_Month__c = 'March';
+            dbcontact .Birth_Year__c = '1986';
+            dbcontact .is_Application__c =  'Rejected';
+            dbcontact.Volunteer_Role__c = 'Wish Granter;Airport Greeter';
+            update dbcontact;
+        }
+    }
+    
+    /*This method is used to create a task record when zipcode is update*/
+    
+    public testmethod static void CreateZipcodeUpdateTask(){
+        user systemAdmin = [select id from user where id =:userinfo.getuserid()];
+        system.runAs(systemAdmin){
+            Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+            Account chapterAccount1 = OrientationandTrainingUtil.createVolunteerAccount();
+            Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+            Office__c  officeRec = OrientationandTrainingUtil.createOffice(chapterAccount1.Id);
+            officeRec.External_Id__c = 'R123';
+            insert officeRec;
+            Zip_Code__c  zipcodeRec = OrientationandTrainingUtil.createZipcode(officeRec.Id);
+            zipcodeRec.Name = '32401';
+            zipCodeRec.office__c = officeRec.id;
+            zipCodeRec.External_Id__c = 'R123';
+            insert zipCodeRec;
+            OrientationandTrainingUtil.CreateAffiliationwithAccount(VolunteerContact.Id,chapterAccount.id);
+            contact dbContact = [SELECT Id,MailingPostalCode  FROM Contact WHERE Id =:VolunteerContact.Id];
+            dbContact.MailingPostalCode  = '32401';
+            update dbContact;
+        }
+    }
+    
+    /* This Method is used to update the Volunteer LastName,FirstName,Email and Mobile Number */
+    public testmethod static void UpdateVolunteerDetails(){ 
+        Constant_AC  constant = new Constant_AC(); 
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        user systemAdmin = [select id from user where id =:userinfo.getuserid()];
+        system.runAs(systemAdmin){
             
-         }
-         
-     }
-     
-     testmethod static void CreateWishChildContact()
-     {
-          Constant_ac constant = new Constant_ac();
-          Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
-           
-          Account newAcc = new Account();
-          newAcc.Name = 'Test';
-          insert newAcc; 
-          
-         Account chapterAcc=OrientationandTrainingUtil.createchapterAccount();
-           
-          Contact newCon = new Contact();
-          newCon.LastName = 'Test';
-          newCon.ICD_10_Code__c = 'c00';
-          newCon.Diagnosis__c  = 'Malignant Neoplasm';
-          newCon.Short_Description__c  = 'Test';
-          newCon.Non_Verbal__c  = 'No';
-          newCon.accountid = newAcc.id;
-          newCon.Region_Chapter__c=chapterAcc.Id;
-          newCon.recordTypeId = wichChildRecordTypeId;
-          insert newCon;
-     }
-     
-     testmethod static void CreateMedicalContact()
-     {
-          Constant_ac constant = new Constant_ac();
-          Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
-          Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId(); 
-          Account newAcc = new Account();
-          newAcc.Name = 'Test';
-          insert newAcc; 
-          
-         
-           
-          Contact newCon = new Contact();
-          newCon.LastName = 'Test';
-          newCon.ICD_10_Code__c = 'c00';
-          newCon.Diagnosis__c  = 'Malignant Neoplasm';
-          newCon.Short_Description__c  = 'Test';
-          newCon.Non_Verbal__c  = 'No';
-          newCon.accountid = newAcc.id;
-          newCon.recordTypeId = wichChildRecordTypeId;
-          insert newCon;
-          
-          Contact newMedCon = new Contact();
-          newMedCon.LastName = 'Test';
-         // newMedCon.accountid = newAcc.id;
-          newMedCon.recordTypeId = MedicalProfContactRecordTypeId;
-          insert newMedCon;
-          
-          npe4__Relationship__c newRel = new npe4__Relationship__c();
-          newRel.npe4__RelatedContact__c = newMedCon.id;
-          newRel.npe4__Contact__c =  newCon.id;
-          newRel.npe4__Status__c = 'Active';
-          newRel.Qualifying_Medical_Professional__c = true;
-          insert newRel;
-          
-          newMedCon.LastName = 'Test1';
-          newMedCon.Email = 'test@gmail.com';
-          update newMedCon;
-          
-     }
-     
-      public testmethod static void RecallWishFamilyContactInfo(){
+            Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+            Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+            User volunteerUser=OrientationandTrainingUtil.createVolunteerUser(VolunteerContact.Id);
+            OrientationandTrainingUtil.CreateAffiliationwithAccount(VolunteerContact.Id,chapterAccount.id);
+            Role__c WishRole = OrientationandTrainingUtil.createRole();
+            Chapter_Role__c chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.id,WishRole.Id);
+            Contact dbcontact = [SELECT Id,FirstName,LastName,MobilePhone,Email,RecordTypeId FROM Contact Where RecordTypeId =: volunteerRecordTypeId Limit 1];
+            dbcontact.LastName = 'moss';
+            dbcontact.FirstName = 'Smith';
+            dbcontact.MobilePhone='9003910427';
+            dbcontact.Email ='Smith@gmail.com';
+            dbcontact.Same_as_Household_Address__c = True;
+            update dbcontact;
+            
+            
+        }
+        
+    }
+    
+    testmethod static void CreateWishChildContact()
+    {
+        Constant_ac constant = new Constant_ac();
+        Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+        
+        Account newAcc = new Account();
+        newAcc.Name = 'Test';
+        insert newAcc; 
+        
+        Account chapterAcc=OrientationandTrainingUtil.createchapterAccount();
+         ICD_Codes__c  newICD = new ICD_Codes__c ();
+        newICD.Name = 'c00';
+        insert newICD;
+        Contact newCon = new Contact();
+        newCon.LastName = 'Test';
+        newCon.ICD_10_Code__c = newICD.Id;
+        newCon.Diagnosis__c  = 'Malignant Neoplasm';
+        //newCon.Short_Description__c  = 'Test';
+        newCon.Non_Verbal__c  = 'No';
+        newCon.accountid = newAcc.id;
+        newCon.Region_Chapter__c=chapterAcc.Id;
+        newCon.recordTypeId = wichChildRecordTypeId;
+        insert newCon;
+    }
+    
+    testmethod static void CreateMedicalContact()
+    {
+        Constant_ac constant = new Constant_ac();
+        Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+        Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId(); 
+        Account newAcc = new Account();
+        newAcc.Name = 'Test';
+        insert newAcc; 
+        ICD_Codes__c  newICD = new ICD_Codes__c ();
+        newICD.Name = 'c00';
+        insert newICD;
+        Contact newCon = new Contact();
+        newCon.LastName = 'Test';
+        newCon.ICD_10_Code__c = newICD.Id;
+        newCon.Diagnosis__c  = 'Malignant Neoplasm';
+        //newCon.Short_Description__c  = 'Test';
+        newCon.Non_Verbal__c  = 'No';
+        newCon.accountid = newAcc.id;
+        newCon.recordTypeId = wichChildRecordTypeId;
+        insert newCon;
+        
+        Contact newMedCon = new Contact();
+        newMedCon.LastName = 'Test';
+        // newMedCon.accountid = newAcc.id;
+        newMedCon.recordTypeId = MedicalProfContactRecordTypeId;
+        insert newMedCon;
+        
+        npe4__Relationship__c newRel = new npe4__Relationship__c();
+        newRel.npe4__RelatedContact__c = newMedCon.id;
+        newRel.npe4__Contact__c =  newCon.id;
+        newRel.npe4__Status__c = 'Active';
+        newRel.Qualifying_Medical_Professional__c = true;
+        insert newRel;
+        
+        newMedCon.LastName = 'Test1';
+        newMedCon.Email = 'test@gmail.com';
+        update newMedCon;
+        
+    }
+    
+    public testmethod static void RecallWishFamilyContactInfo(){
         
         
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
@@ -207,9 +210,9 @@ public class ContactTrigger_AT_Test{
         updateCon.IsRejected_Contact_Info__c = true;
         updateCon.Id = childCon.Id;
         update updateCon;
-     }
-      public testmethod static void updatewishChildContactInfo(){
-         
+    }
+    public testmethod static void updatewishChildContactInfo(){
+        
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
         
         Contact updateCon = new Contact();
@@ -225,43 +228,43 @@ public class ContactTrigger_AT_Test{
         updateCon.IsContactInfoUpdated__c = true;
         updateCon.Id = childCon.Id;
         update updateCon;
-     }
+    }
     
-      /*This method is used to update the application status to submit*/
-     
-     public testmethod static void UpdateApplicationStatustoSubmit(){ 
-         Constant_AC  constant = new Constant_AC(); 
-         Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
-         user systemAdmin = [select id from user where id =:userinfo.getuserid()];
-         system.runAs(systemAdmin){
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
-         OrientationandTrainingUtil.CreateAffiliation(VolunteerContact.Id);
-         Contact dbcontact = [SELECT Id,FirstName,LastName,AccountId,Birth_Month__c ,Birth_Day__c,is_Application__c, Birth_Year__c,RecordTypeId FROM Contact Where RecordTypeId =: volunteerRecordTypeId Limit 1];
-         dbcontact .Birth_Day__c = '21';
-         dbcontact .Birth_Month__c = 'March';
-         dbcontact .Birth_Year__c = '1986';
-         dbcontact .is_Application__c = 'Submit';
-         update dbcontact;
-         }
-     }
-     public testmethod static void updateMedicalProfContact(){
-          Constant_AC  constant = new Constant_AC(); 
-          Id medicalProfessionalRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
-          Contact medicalProfessionalcon=OrientationandTrainingUtil.createMedicalProfContact();
-          Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
-          npe4__Relationship__c relationship=OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRec(medicalProfessionalcon.Id,childCon.Id);
-          Contact UpdateMedicalProfessional=[SELECT id,FirstName FROM Contact WHERE RecordTypeId =:medicalProfessionalRecordTypeId Limit 1];
-          UpdateMedicalProfessional.FirstName='Smith';
-          update UpdateMedicalProfessional;
-     }
-     
-     public testmethod static void createwishfamilyContact(){
-         Contact wishChildFamily = OrientationandTrainingUtil.CreateWishFamily();
-     }
-     
-      public testmethod static void RecallWishChildContactInfo(){
-       
+    /*This method is used to update the application status to submit*/
+    
+    public testmethod static void UpdateApplicationStatustoSubmit(){ 
+        Constant_AC  constant = new Constant_AC(); 
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        user systemAdmin = [select id from user where id =:userinfo.getuserid()];
+        system.runAs(systemAdmin){
+            Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+            Contact VolunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+            OrientationandTrainingUtil.CreateAffiliation(VolunteerContact.Id);
+            Contact dbcontact = [SELECT Id,FirstName,LastName,AccountId,Birth_Month__c ,Birth_Day__c,is_Application__c, Birth_Year__c,RecordTypeId FROM Contact Where RecordTypeId =: volunteerRecordTypeId Limit 1];
+            dbcontact .Birth_Day__c = '21';
+            dbcontact .Birth_Month__c = 'March';
+            dbcontact .Birth_Year__c = '1986';
+            dbcontact .is_Application__c = 'Submit';
+            update dbcontact;
+        }
+    }
+    public testmethod static void updateMedicalProfContact(){
+        Constant_AC  constant = new Constant_AC(); 
+        Id medicalProfessionalRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
+        Contact medicalProfessionalcon=OrientationandTrainingUtil.createMedicalProfContact();
+        Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
+        npe4__Relationship__c relationship=OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRec(medicalProfessionalcon.Id,childCon.Id);
+        Contact UpdateMedicalProfessional=[SELECT id,FirstName FROM Contact WHERE RecordTypeId =:medicalProfessionalRecordTypeId Limit 1];
+        UpdateMedicalProfessional.FirstName='Smith';
+        update UpdateMedicalProfessional;
+    }
+    
+    public testmethod static void createwishfamilyContact(){
+        Contact wishChildFamily = OrientationandTrainingUtil.CreateWishFamily();
+    }
+    
+    public testmethod static void RecallWishChildContactInfo(){
+        
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);
@@ -286,11 +289,11 @@ public class ContactTrigger_AT_Test{
         updateCon.IsContactInfoUpdated__c = true;
         updateCon.Id = childCon.Id;
         update updateCon;
-     }
-     
-      public testmethod static void updatewishChildRecall(){
-         
-       
+    }
+    
+    public testmethod static void updatewishChildRecall(){
+        
+        
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id);
@@ -315,9 +318,9 @@ public class ContactTrigger_AT_Test{
         Update updateCon;
         
         
-     }
-     
-     public testmethod static void  updateRelationship(){
+    }
+    
+    public testmethod static void  updateRelationship(){
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c  newRelationShip= OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id); 
@@ -335,12 +338,12 @@ public class ContactTrigger_AT_Test{
         relationship.npe4__Type__c = 'Father';
         Insert relationship;
         
-     }
-     
-     public testmethod static void deleteContact()
-     {
-         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
-         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
-         Delete childFamily;
-     }
+    }
+    
+    public testmethod static void deleteContact()
+    {
+        Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
+        Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
+        Delete childFamily;
+    }
 }

@@ -1,5 +1,5 @@
 <apex:page standardController="Case" extensions="WishChildForm_AC" id="wff" title="Wish Family Form | Make-A-Wish Communities" standardStylesheets="false" showHeader="false" applyHtmlTag="false" sidebar="false" docType="html-5.0">
-    <apex:include pageName="prospective_head" id="phead" />
+   <apex:include pageName="prospective_head" id="phead" />
     <!-- <apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/> -->
 
     <body class="vcp vcpactivelogin" id="top">
@@ -35,7 +35,7 @@
                       </ul>
                       <div class="nav-sub-inner hidden-sm-down">
                           <a href="#top" class="hidden-md-down">&uarr; Back to Top</a>
-                          <apex:commandbutton value="Save" onclick="return false;" action="{!SaveandwishFamilyExit}" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#save-alert" />
+                          <apex:commandbutton value="Save" onclick="return false;" action="{!SaveandwishFamilyExit}" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" />
                           <apex:Commandbutton value="Next" onclick="return false;" action="{!WishFamilytoWishInfo}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#wifsame-alert" />
                       </div>
                   </nav>
@@ -203,9 +203,9 @@
                       <apex:repeat value="{!wcfUtil.wishParticipantList}" var="wishFamilContact" id="participant">
                        <fieldset class="connected-haslegend fadein-alert" style="border-bottom:none">
                         <legend>Participant {!part+1}</legend>
+                         <!-- - Remove Contact -->
                         <apex:commandlink id="link" value="- Remove" immediate="true" action="{!removeParticipants}" reRender="membAdd,uiLogic" styleClass="text-muted remove-block">
-                          <!-- - Remove Contact -->
-                          <apex:param name="Participant" value="{!part}"/>
+                        <apex:param name="Participant" value="{!part}"/>
                         </apex:commandlink>
                         <apex:variable var="part" value="{!part+1}"/>
                         <div class="col-lg-6">
@@ -446,7 +446,7 @@
                 <nav class="btm">
                   <ul>
                     <!-- <li><apex:Commandbutton value="Prev" action="{!BackToWCF}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#page-exit-alert" /></li> -->
-                    <li><apex:commandbutton value="Save" onclick="return false;" action="{!SaveandwishFamilyExit}" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#save-alert" /></li>
+                    <li><apex:commandbutton value="Save" onclick="return false;" action="{!SaveandwishFamilyExit}" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" /></li>
                     <li><apex:Commandbutton value="Next" onclick="return false;" action="{!WishFamilytoWishInfo}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#wifsame-alert" /></li>
                   </ul>
                 </nav>
@@ -466,7 +466,7 @@
                       <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
                     </div>
                     <div class="modal-footer">
-                      <apex:commandButton onclick="test1();" value="Save" styleClass="btn-md form-validate" reRender="ssss"/>
+                      <apex:commandButton onclick="test1();" value="Save" styleClass="btn-md" reRender="ssss"/>
                       <apex:commandButton action="{!withOutSavefromWCFtoWIF}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="jjj" />
                     </div>
                   </div>
@@ -487,7 +487,7 @@
                       <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
                     </div>
                     <div class="modal-footer">
-                      <apex:commandButton onclick="test3();" value="Save" styleClass="btn-md form-validate" reRender="jjj" />
+                      <apex:commandButton onclick="test3();" value="Save" styleClass="btn-md" reRender="jjj" />
                       <apex:commandButton action="{!withOutSavetoChild}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="jjj"/>
                     </div>
                   </div>
@@ -542,35 +542,34 @@
           });
 
           $(".date-input").datepicker({
-                    autoclose: true,
-                    changeYear: true,
-                    yearRange: "c-80:c",
-                    endDate: '+2d',
-                    minDate: '-100Y',
-                    onSelect: function() {$(this).valid()}
-                  });
-
+            autoclose: true,
+            changeYear: true,
+            yearRange: "c-80:c",
+            endDate: '+2d',
+            minDate: '-100Y',
+            onSelect: function() {$(this).valid()}
+          });
         } uiLogic();
         function test1(){
-            if ($('#wff\\:frm').valid()){
-            console.log('form submitted');
+            // if ($('#wff\\:frm').valid()){
+            // console.log('form submitted');
             SaveWishChildtoWInfo();
 
-          } else {
+          // } else {
 
             $('#wifsame-alert').modal('hide');
-          }
+          // }
         }
 
         function test3(){
-            if ($('#wff\\:frm').valid()){
-            console.log('form submitted');
+            // if ($('#wff\\:frm').valid()){
+            // console.log('form submitted');
            SaveWishFFtoWishChild();
 
-          } else {
+          // } else {
 
             $('#wcfee-alert').modal('hide');
-          }
+          // }
         }
 
       </script>

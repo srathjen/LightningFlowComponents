@@ -132,9 +132,9 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                     contactSet.add(currentCase.ContactId);
                     
                 }
-                if((currentCase.Appropriate_Comments__c != trigger.oldMap.get(currentCase.Id).Appropriate_Comments__c ||  currentCase.Please_Explain__c != trigger.oldMap.get(currentCase.Id).Please_Explain__c) && currentCase.RecordTypeId == parentWishRecordTypeId){
-                    currentCase.Wish_Clearance_Received_Date__c = system.today();
-                }
+                /* if((currentCase.Appropriate_Comments__c != trigger.oldMap.get(currentCase.Id).Appropriate_Comments__c ||  currentCase.Please_Explain__c != trigger.oldMap.get(currentCase.Id).Please_Explain__c) && currentCase.RecordTypeId == parentWishRecordTypeId){
+currentCase.Wish_Clearance_Received_Date__c = system.today();
+}*/
                 
                 if((!currentCase.Rush__c) && trigger.oldMap.get(currentCase.Id).Rush__c==True){
                     currentCase.Rush_Timeframe__c=Null;
@@ -142,23 +142,23 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                 }
                 
                 if(currentCase.status == 'Hold' && currentCase.status != trigger.oldMap.get(currentCase.Id).Status && (trigger.oldMap.get(currentCase.Id).Status != 'Hold' || 
-                   trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
+                                                                                                                       trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
+                                                                                                                           
+                                                                                                                           currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
+                                                                                                                       }
                 
-                    currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
-                }
-                
-                if(currentCase.status == 'Inactive' && currentCase.status != trigger.oldMap.get(currentCase.Id).Status && (trigger.oldMap.get(currentCase.Id).Status != 'Inactive' || 
-                   trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
-                    currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
-                }
-                 if(currentCase.status == 'Closed' && currentCase.status != trigger.oldMap.get(currentCase.Id).Status && (trigger.oldMap.get(currentCase.Id).Status != 'Closed' || 
-                   trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
-                    currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
-                }
-                 if(currentCase.status == 'DNQ' && currentCase.status != trigger.oldMap.get(currentCase.Id).Status && (trigger.oldMap.get(currentCase.Id).Status != 'DNQ' || 
-                   trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
-                    currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
-                }
+                if(currentCase.status == 'Inactive' &&  currentCase.status != trigger.oldMap.get(currentCase.Id).Status && (trigger.oldMap.get(currentCase.Id).Status != 'Inactive' || 
+                                                                                                                            trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
+                                                                                                                                currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
+                                                                                                                            }
+                if(currentCase.status == 'Closed' && currentCase.status != trigger.oldMap.get(currentCase.Id).Status && (trigger.oldMap.get(currentCase.Id).Status != 'Closed' || 
+                                                                                                                         trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
+                                                                                                                             currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
+                                                                                                                         }
+                if(currentCase.status == 'DNQ' && currentCase.status != trigger.oldMap.get(currentCase.Id).Status && (trigger.oldMap.get(currentCase.Id).Status != 'DNQ' || 
+                                                                                                                      trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
+                                                                                                                          currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
+                                                                                                                      }
                 
                 if(currentCase.status == 'Ready to Interview' && trigger.oldMap.get(currentCase.Id).Status == 'Ready to Assign'){
                     currentCase.Sub_Status__c = 'Pending';
@@ -243,10 +243,10 @@ currentCase.Concept_Approval_Date__c = Date.Today();
                     //system.debug('Parent Case Id 1 :'+currentCase.Id);
                     parentWishIdsSet.add(currentCase.Id);
                 }
-                if(currentCase.RecordTypeId == parentWishRecordTypeId && (((currentCase.Status == 'Granted') && (trigger.oldmap.get(currentCase.id).Status == 'Wish Scheduled')) || ((currentCase.Status == 'Completed') && (trigger.oldmap.get(currentCase.id).Status != 'Completed')) ||
-                 (currentCase.Status == 'DNQ' || currentCase.Status == 'Hold' || currentCase.Status == 'Inactive' || currentCase.Status == 'Closed'))){
-                    parentGrantedIdSet.add(currentCase.Id);
-                }
+                if(currentCase.RecordTypeId == parentWishRecordTypeId && currentCase.Status != Trigger.oldMap.get(currentCase.Id).Status && (((currentCase.Status == 'Granted') && (trigger.oldmap.get(currentCase.id).Status == 'Wish Scheduled')) || ((currentCase.Status == 'Completed') && (trigger.oldmap.get(currentCase.id).Status != 'Completed')) ||
+                                                                          (currentCase.Status == 'DNQ' || currentCase.Status == 'Hold' || currentCase.Status == 'Inactive' || currentCase.Status == 'Closed'))){
+                                                                              parentGrantedIdSet.add(currentCase.Id);
+                                                                          }
                 
                 if(currentCase.Sub_Status__c == 'Abandoned' || currentCase.isClosed == True){
                     
@@ -357,7 +357,7 @@ currentCase.Interview_date__c.addError('Interview Date should be in future');
                 CaseTriggerHandler.checkreceivedDates(Trigger.new);
             }
             //if(updateChildCaseList.size() > 0)
-                //CaseTriggerHandler.updateChildCase(updateChildCaseList);
+            //CaseTriggerHandler.updateChildCase(updateChildCaseList);
             
             if(wishChildInfoMap.size() > 0)
             {
@@ -660,46 +660,45 @@ currentCase.Interview_date__c.addError('Interview Date should be in future');
             
             //Used to create wish determination type tasks when the status is updated to "Ready to Interview"
             if((caseMemberCheck.Status == 'Ready to Interview' && Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Ready to Assign' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' 
-              || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed') && caseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
-                
-                  parentWishInfoMap.put(caseMemberCheck.Id, caseMemberCheck);
-            }
-            
+                || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed') && caseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
+                    
+                    parentWishInfoMap.put(caseMemberCheck.Id, caseMemberCheck);
+                }
             // Used to Open all sub cases when the status from "DNQ","Inactive","Hold" and "Closed".
             if((caseMemberCheck.Status == 'Ready to Interview' || caseMemberCheck.Status == 'Wish Determined' || caseMemberCheck.Status == 'Wish Design' || caseMemberCheck.Status == 'Wish Scheduled' || caseMemberCheck.Status == 'Granted') && 
-            (Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' 
-              || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed')){
-              
-                  caseParentIdSet.add(caseMemberCheck.id);
-              }
+               (Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' 
+                || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed')){
+                    
+                    caseParentIdSet.add(caseMemberCheck.id);
+                }
             
             if(((caseMemberCheck.Status == 'Ready to Interview') && Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Ready to Assign' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' 
-              || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed') && caseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
-                parentWishInfoMap.put(caseMemberCheck.Id, caseMemberCheck);
-            }
+                || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed') && caseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
+                    parentWishInfoMap.put(caseMemberCheck.Id, caseMemberCheck);
+                }
             
             //Used to close all the System genareated  task when the status is updated to "DNQ", "Closed", "Inactive" , "Hold".'
             if(caseMemberCheck.Status == 'DNQ' || caseMemberCheck.Status == 'Closed' || caseMemberCheck.Status == 'Hold' ||
-                 caseMemberCheck.Status == 'Inactive' && caseMemberCheck.RecordTypeId == parentWishRecordTypeId ) {
-                TaskParentIdSet.add(caseMemberCheck.Id);
-            } 
+               caseMemberCheck.Status == 'Inactive' && caseMemberCheck.RecordTypeId == parentWishRecordTypeId ) {
+                   TaskParentIdSet.add(caseMemberCheck.Id);
+               } 
             
             
             
             //Used to create wish planning and wish granting type tasks when the status is updated to "Wish Determined and within policy"
             /*if(caseMemberCheck.Status == 'Wish Determined' && (Trigger.oldMap.get(caseMemberCheck.Id).Status != caseMemberCheck.Status || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed') && caseMemberCheck.RecordTypeId == parentWishRecordTypeId && caseMemberCheck.Sub_Status__c == 'Within Policy') {
-                wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
-            } else if(caseMemberCheck.Sub_Status__c == 'Within Policy' && Trigger.oldMap.get(caseMemberCheck.Id).Sub_Status__c != caseMemberCheck.Sub_Status__c && caseMemberCheck.RecordTypeId == parentWishRecordTypeId && caseMemberCheck.Status == 'Wish Determined') {
-                wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
-            }*/
+wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
+} else if(caseMemberCheck.Sub_Status__c == 'Within Policy' && Trigger.oldMap.get(caseMemberCheck.Id).Sub_Status__c != caseMemberCheck.Sub_Status__c && caseMemberCheck.RecordTypeId == parentWishRecordTypeId && caseMemberCheck.Status == 'Wish Determined') {
+wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
+}*/
             
             if(((caseMemberCheck.Status == 'Wish Determined' && caseMemberCheck.Sub_Status__c == 'Within Policy') && (caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status || caseMemberCheck.Sub_Status__c != Trigger.oldMap.get(caseMemberCheck.Id).Sub_Status__c)) || (Trigger.oldMap.get(caseMemberCheck.Id).Status != caseMemberCheck.Status && (Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed')) && caseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
                 wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
             }
             
             /*if(((caseMemberCheck.Status == 'Wish Determined' || caseMemberCheck.Sub_Status__c == 'Within Policy') && (caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status || caseMemberCheck.Sub_Status__c != Trigger.oldMap.get(caseMemberCheck.Id).Sub_Status__c))) {
-                wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
-            }*/
+wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
+}*/
             
             if(caseMemberCheck.Status == 'Ready to Assign' && caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status) {
                 updateVolunteerManagerCaseTeamMap.put(caseMemberCheck.Id, caseMemberCheck);

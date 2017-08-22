@@ -118,15 +118,6 @@
         <field>Lead.PD_Condition_Description__c</field>
     </columns>
     <columns>
-        <field>Lead.PD_ICD_Code__c</field>
-    </columns>
-    <columns>
-        <field>Lead.Short_Description__c</field>
-    </columns>
-    <columns>
-        <field>Lead.Long_Description__c</field>
-    </columns>
-    <columns>
         <field>Lead.MAW_Name__c</field>
     </columns>
     <columns>
@@ -235,25 +226,13 @@
         <field>Lead.None_of_these_statements_describes_Child__c</field>
     </columns>
     <columns>
-        <field>Lead.SD1_ICD_Code__c</field>
-    </columns>
-    <columns>
         <field>Lead.SD1_Condition_Description__c</field>
-    </columns>
-    <columns>
-        <field>Lead.SD2_ICD_Code__c</field>
     </columns>
     <columns>
         <field>Lead.SD2_Condition_Description__c</field>
     </columns>
     <columns>
-        <field>Lead.SD3_ICD_Code__c</field>
-    </columns>
-    <columns>
         <field>Lead.SD3_Condition_Description__c</field>
-    </columns>
-    <columns>
-        <field>Lead.SD4_ICD_Code__c</field>
     </columns>
     <columns>
         <field>Lead.SD4_Condition_Description__c</field>

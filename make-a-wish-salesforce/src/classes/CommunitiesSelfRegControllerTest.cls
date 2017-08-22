@@ -185,7 +185,9 @@ public with sharing class CommunitiesSelfRegControllerTest
     // Sign up with valid details.
     public static testmethod void CreateDupUser() 
     {
-       TestClassUtil.createDynamicContent();
+        Constant_AC  constant = new Constant_AC(); 
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        TestClassUtil.createDynamicContent();
       
         Account chapterAccount = TestClassUtil.createChapter();
         Office__c newOffice = TestClassUtil.createOffice();
@@ -200,6 +202,7 @@ public with sharing class CommunitiesSelfRegControllerTest
         
         Contact con = new Contact();
         con.LastName = 'Test';
+        con.RecordTypeId = volunteerRecordTypeId;
         con.Email = 'test@gmail.com';
         con.accountId = chapterAccount.id;
         insert con;

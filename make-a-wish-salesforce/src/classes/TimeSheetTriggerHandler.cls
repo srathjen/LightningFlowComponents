@@ -275,6 +275,38 @@ public class TimeSheetTriggerHandler{
                   update volunteerInfoUpdateMap.Values();
       
     }
-    
-  
+    //share the volunteer opportunity record with Edit Access to the current Volunteer user.
+    public static void shareVolunteerOpportunity(Set<Id> volunteerOppIdSet){
+        Set<Id>volOppIdSet = new Set<Id>();
+        Set<Id> sharedIdSet = new Set<Id>();
+         List<Volunteer_Opportunity__Share> volOpportunitySharingList = new List<Volunteer_Opportunity__Share>();
+        List<user> currUser = [SELECT contactId,Id FROM User WHERE Id =: Userinfo.getUserId() AND contactId != Null];
+        if(currUser.Size() > 0){
+        for(Volunteer_Opportunity__C currRec : [SELECT Id FROM Volunteer_Opportunity__C WHERE Volunteer_Name__c != Null AND Volunteer_Name__c =:currUser[0].ContactId  AND Id IN: volunteerOppIdSet]){
+               volOppIdSet.add(currRec.Id);  
+              
+           }
+           
+           if(volOppIdSet.Size() > 0){
+               for(Volunteer_Opportunity__Share volOpp : [SELECT ParentId FROM Volunteer_Opportunity__Share WHERE ParentId IN:volOppIdSet]){
+                   sharedIdSet.add(volOpp.Id);
+                   
+               }
+               
+               for(Id volunteerOppId : volOppIdSet){
+                   if(!sharedIdSet.Contains(volunteerOppId)){
+                        Volunteer_Opportunity__Share newVolOppShareRec = new Volunteer_Opportunity__Share();
+                        newVolOppShareRec.ParentId = volunteerOppId;
+                        newVolOppShareRec.AccessLevel ='Edit';
+                        newVolOppShareRec.UserOrGroupId = currUser[0].Id;
+                        newVolOppShareRec.rowcause=Schema.Volunteer_Opportunity__Share.RowCause.Grant_Edit_Access_to_assigned_Volunteer__C;
+                        volOpportunitySharingList.add(newVolOppShareRec);
+                        
+                }
+            }
+            if(volOpportunitySharingList.size() > 0)
+                insert volOpportunitySharingList;
+        }
+        }
+   }
 }

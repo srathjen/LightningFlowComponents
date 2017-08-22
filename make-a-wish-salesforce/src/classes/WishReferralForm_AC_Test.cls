@@ -199,6 +199,15 @@ public class WishReferralForm_AC_Test {
         WishReferralForm_AC.searchCondition('Mali');
         controller.disPlayChildForm();
     }
+    public static testmethod void callmethods()
+    {
+        WishReferralForm_AC obj=new WishReferralForm_AC();
+        obj.getNonMedicalReqFields();
+        obj.getMedicalRequiredFields();
+        obj.getSelfRequiredFields();
+        obj.getRelationshipsToChild();
+        obj.getHereAboutMAW();
+    }
     
     static contact createContact()
     {
@@ -208,6 +217,7 @@ public class WishReferralForm_AC_Test {
       currCon.Birthdate = Date.valueOf('2000-09-11');
       currCon.Phone = '8220708920';
       currCon.Email = 'mcavennila@gmail.com';
+      currCon.Diagnosis__c = 'Test';
       insert currCon;
       return currCon;
     }

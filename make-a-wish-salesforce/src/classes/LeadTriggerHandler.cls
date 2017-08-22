@@ -187,8 +187,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                                            if(convertedLeads.Hidden_Additional_Parent_Id__c!= Null){
                                                npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
                                                newRelationShip.npe4__Contact__c = convertedLeads.ConvertedContactId;
-                                               //newRelationShip.npe4__Type__c = 'Family';
-                                                newRelationShip.Hidden_isparentFirst__c = False;
+                                               newRelationShip.Hidden_isparentFirst__c = true;
                                                newRelationShip.npe4__Type__c = convertedLeads.Additional_Parent_Relationship_to_Child__c;
                                                newRelationShip.npe4__RelatedContact__c = convertedLeads.Hidden_Additional_Parent_Id__c;
                                                newRelationShip.npe4__Status__c = 'Active';
@@ -412,7 +411,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                     newcase .RecordTypeId = parentwishRecTypeId;
                     newcase.contactId = convertLeads.getcontactId();
                     newCase.Hidden_Lead_Id__c = convertLeads.getLeadId();
-                    newCase.Qualified_Date__c = System.today();
+                    newCase.Qualified_Date__c= System.today();
                     newCase.Migrated_Record__c = LeadMap.get(convertLeads.getLeadId()).Migrated_Record__c; 
                     newCase.Qualifying_Medical_Professional_Name__c=LeadMap.get(convertLeads.getLeadId()).Treating_Medical_Professional_First_Name__c +' '+LeadMap.get(convertLeads.getLeadId()).Treating_Medical_Professional_Last_Name__c;
                     newcase.Qualifying_Medical_Professional_Email__c=LeadMap.get(convertLeads.getLeadId()).Treating_Medical_Professional_Email__c;
@@ -898,7 +897,7 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
                 //newWishFamily.Relationship__c = processConvertedLead.Relationship_to_child__c;
                 newWishFamily.Migrated_Record__c = processConvertedLead.Migrated_Record__c;
                 //relationshipTypeMap.put();
-                firstParentMap.put(newWishFamily.FirstName + '-' + newWishFamily.LastName + '-' + newWishFamily.Email+ '-' + newWishFamily.Phone,false);
+                firstParentMap.put(newWishFamily.FirstName + '-' + newWishFamily.LastName + '-' + newWishFamily.Email+ '-' + newWishFamily.Phone,true);
                relationshipTypeMap.put(newWishFamily.FirstName + '-' + newWishFamily.LastName + '-' + newWishFamily.Email+ '-' + newWishFamily.Phone,processConvertedLead.Additional_Parent_Relationship_to_Child__c);
                 newContactList.add(newWishFamily);
             }
@@ -1202,25 +1201,53 @@ And also Assign the case owner as a queue dynamically based on the lead state. *
     Public static void ToUpdateMedicalInfo(Set<String> conditionDescriptionsSet,Set<String> icdCodesSet,List<Lead> leadUpdateToMedicalInfoList)
     {
         if(icdCodesSet.size() > 0)
-        {
+        {   
+            Map<Id, String> conditionInfoMap = new Map<Id, String>();
+            Set<Id> conditionDescriptionIdSet = new Set<Id>();
             Map<String, ICD_Codes__c> icdCodesMap = new Map<String, ICD_Codes__c>();
-            for(ICD_Codes__c currRec : [SELECT Id,Name, Long_Description__c, Short_Description__c, Condition_Description__r.MAW_Name__c,Group1__c,
+            for(ICD_Codes__c currRec : [SELECT Id,Name, Condition_Description__r.MAW_Name__c,Group1__c,
                                         Condition_Description__c, Condition_Description__r.Code_to_Use__c,Condition_Description__r.Name
-                                        FROM ICD_Codes__c WHERE Name IN :icdCodesSet])
+                                        FROM ICD_Codes__c WHERE Id IN :icdCodesSet])
             {
-                icdCodesMap.put(currRec.Name,currRec);
+                icdCodesMap.put(currRec.Id,currRec);
+                if(currRec.Condition_Description__c != null) {
+                    conditionDescriptionIdSet.add(currRec.Condition_Description__c);
+                }
+                
+            }
+            Map<Id,Set<Id>> iCDforCondionDescMap = new Map<Id, Set<Id>>();
+            for(ICD_Codes__c icdInfo : [SELECT Id, Condition_Description__c FROM ICD_Codes__c WHERE Condition_Description__c IN :conditionDescriptionIdSet]) {
+                if(iCDforCondionDescMap.containsKey(icdInfo.Condition_Description__c)) {
+                    iCDforCondionDescMap.get(icdInfo.Condition_Description__c).add(icdInfo.Id);
+                } else {
+                    iCDforCondionDescMap.put(icdInfo.Condition_Description__c, new Set<Id>{icdInfo.Id});
+                }
             }
             for(Lead currLead : leadUpdateToMedicalInfoList)
             {
                 if(icdCodesMap.containsKey(currLead.PD_ICD_Code__c ))
                 {
-                    currLead.Short_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Short_Description__c;
-                    currLead.Long_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Long_Description__c;
+                    //currLead.Short_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Short_Description__c;
+                    //currLead.Long_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Long_Description__c;
                     //currLead.Group_1__c  = icdCodesMap.get(currLead.PD_ICD_Code__c).Group1__c ;
                     if(icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__c != Null)
                     {
                         currLead.PD_Condition_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Name;
                         currLead.Childs_Qualifying_Diagnosis__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Code_to_Use__c;
+                    } else {
+                        currLead.PD_Condition_Description__c = '';
+                        currLead.Childs_Qualifying_Diagnosis__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Code_to_Use__c;
+                    }
+                }
+                if(currLead.PD_ICD_Code__c != null) {
+                    if(icdCodesMap.containsKey(currLead.PD_ICD_Code__c) && icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__c != null) {
+                        currLead.Maw_Name__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.MAW_Name__c;
+                        if(iCDforCondionDescMap.containsKey(icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__c)) {
+                            if(iCDforCondionDescMap.get(icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__c).contains(currLead.PD_ICD_Code__c)) {
+                                currLead.PD_Condition_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Name;
+                                
+                            }
+                        }
                     }
                 }
             }
@@ -1755,6 +1782,33 @@ leadRegionCodeValidationMap.get(defaultRegionLeadMap.get(inValidRegion.ChapterNa
            Insert newTaskList;
        }
      
+    }
+    
+    
+    //Used to populated Condition Description based on ICD Code values
+    public static void MatchConditionDescription(Map<Id, Set<Integer>> icdInfoMap, List<Lead> leadRecList, Set<Id> icdCodeRecSet) {
+        Map<Id, ICD_Codes__c> icdCodeDetails = new Map<Id, ICD_Codes__c>();
+        for(ICD_Codes__c icdInfo : [SELECT Id, Name, Group1__c,
+                                    Condition_Description__c, Condition_Description__r.Code_to_Use__c, Condition_Description__r.Name
+                                    FROM ICD_Codes__c WHERE Id IN : icdCodeRecSet]){
+                                        icdCodeDetails.put(icdInfo.Id, icdInfo);
+                                    }
+        
+        for(Lead updatePD : leadRecList) {
+            if(icdInfoMap.containsKey(updatePD.Id)) {
+                for(Integer icdField : icdInfoMap.get(updatePD.Id)) {
+                    if(icdField == 1 && icdCodeDetails.containsKey(updatePD.SD1_ICD_Code__c)) {
+                        updatePD.SD1_Condition_Description__c = icdCodeDetails.get(updatePD.SD1_ICD_Code__c).Condition_Description__r.Name;
+                    } if(icdField == 2 && icdCodeDetails.containsKey(updatePD.SD2_ICD_Code__c)) {
+                        updatePD.SD2_Condition_Description__c = icdCodeDetails.get(updatePD.SD2_ICD_Code__c).Condition_Description__r.Name;
+                    } if(icdField == 3 && icdCodeDetails.containsKey(updatePD.SD3_ICD_Code__c)) {
+                        updatePD.SD3_Condition_Description__c = icdCodeDetails.get(updatePD.SD3_ICD_Code__c).Condition_Description__r.Name;
+                    } if(icdField == 4 && icdCodeDetails.containsKey(updatePD.SD4_ICD_Code__c)) {
+                        updatePD.SD4_Condition_Description__c = icdCodeDetails.get(updatePD.SD4_ICD_Code__c).Condition_Description__r.Name;
+                    }
+                }
+            }
+        }
     }
     /*public static void CreateDiagnosisVerification(List<Lead> newLeadList, Set<String> conditionSescriptionSet) {
 Map<String, Id> conditionDescriptionMap = new Map<String, Id>();

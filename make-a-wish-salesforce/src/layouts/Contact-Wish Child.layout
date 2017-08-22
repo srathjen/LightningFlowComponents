@@ -503,11 +503,11 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>ICD_10_Code__c</field>
+                <field>Diagnosis__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Diagnosis__c</field>
+                <field>ICD_10_Code__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -532,7 +532,7 @@
                 <field>Treatment_Subspecialty__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>Short_Description__c</field>
             </layoutItems>
             <layoutItems>

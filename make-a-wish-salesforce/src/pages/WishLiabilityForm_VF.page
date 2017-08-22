@@ -236,16 +236,17 @@
 </apex:outputPanel>
 </apex:outputPanel>
 
-<apex:outputPanel id="displayError2">
-   <apex:outputPanel rendered="{!SignNowdisplayError}">
+
+<apex:outputPanel id="displayError3">
+   <apex:outputPanel rendered="{!displaypopwindow}">
        
           <div class="row" style="padding:10px">
            <div class="col-xs-12 col-sm-12 col-md-12">
     <div class="pop-wrap">
         <div class="custPopup">
          
-       <center> <b><span class="errorMessage">All participants have already signed the form.</span></b></center>
-           <apex:commandButton value="Ok" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}"  style="margin-left: 40%;margin-top: 3% !important; height:2.15rem !important;width:90px !important;"/>
+         <center> <span class="errorMessage"><b>Parent/Legal Guardian will need to select the publicity option and place their signature first.</b></span></center>
+           <apex:commandButton value="Ok" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!ReturnToLiabilityForm}"  style="margin-left: 40%;margin-top: 3% !important; height:2.15rem !important;width:90px !important;"/>
          
           </div>
           </div>
@@ -253,6 +254,8 @@
     </div>
 </apex:outputPanel>
 </apex:outputPanel>
+
+
  
 </apex:form>
 

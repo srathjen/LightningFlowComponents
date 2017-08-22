@@ -1517,17 +1517,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>ICD_10_Code__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Migrated_Record__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Short_Description__c</field>
             <table>Contact</table>
         </columns>
         <columns>
@@ -1562,17 +1552,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>SD1_ICD_Code__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>SD2_Condition_Description__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>SD2_ICD_Code__c</field>
             <table>Contact</table>
         </columns>
         <columns>
@@ -1582,17 +1562,7 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>SD3_ICD_Code__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>SD4_Condition_Description__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>SD4_ICD_Code__c</field>
             <table>Contact</table>
         </columns>
         <columns>

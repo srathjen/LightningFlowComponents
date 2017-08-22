@@ -39,7 +39,11 @@ public class DiagnosisVerficationRemainder_ACTest
         currLead.Treating_Medical_Professional_Email__c= 'mcavennila@gmail.com';
         currLead.Any_medical_reason_for_moving_quickly__c= 'yes';
         currLead.PD_Condition_Description__c  = 'c00';
-        currLead.PD_ICD_Code__c = 'c00';
+        Condition_Description__c descrip = OrientationandTrainingUtil.createConditionDesCription(); 
+        insert descrip;
+        ICD_Codes__c icdCode = OrientationandTrainingUtil.createICDCode(descrip.Id);
+        insert icdCode;
+        currLead.PD_ICD_Code__c = icdCode.Id;
         currLead.RFI_Form_Info_Hidden__c = 'Referred';
         currLead.Company = 'MST';
         currLead.Status = 'Referred';

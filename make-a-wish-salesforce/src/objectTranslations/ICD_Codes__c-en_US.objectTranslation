@@ -18,6 +18,10 @@
         <name>Group1__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden ICD Code --></label>
+        <name>Hidden_ICD_Code__c</name>
+    </fields>
+    <fields>
         <label><!-- ICD_Code_No_Period --></label>
         <name>ICD_Code_No_Period__c</name>
     </fields>

@@ -3197,14 +3197,16 @@ null)</formula>
     </fields>
     <fields>
         <fullName>ICD_10_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <description>This field will hold the ICD-10 code.</description>
         <externalId>false</externalId>
         <label>Primary ICD-10 Code</label>
-        <length>255</length>
+        <referenceTo>ICD_Codes__c</referenceTo>
+        <relationshipLabel>Contacts</relationshipLabel>
+        <relationshipName>Contacts</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>I_m_on_LinkedIn__c</fullName>
@@ -5606,14 +5608,16 @@ null)</formula>
     </fields>
     <fields>
         <fullName>SD1_ICD_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <description>It holds Secondary Diagnosis value.</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 1 ICD-10 Code</label>
-        <length>255</length>
+        <referenceTo>ICD_Codes__c</referenceTo>
+        <relationshipLabel>Contacts (Secondary Diagnosis 1 ICD-10 Code)</relationshipLabel>
+        <relationshipName>Contacts1</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>SD2_Condition_Description__c</fullName>
@@ -5628,14 +5632,16 @@ null)</formula>
     </fields>
     <fields>
         <fullName>SD2_ICD_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <description>It contains ICD code for Secondary Diagnosis 2.</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 2 ICD-10 Code</label>
-        <length>255</length>
+        <referenceTo>ICD_Codes__c</referenceTo>
+        <relationshipLabel>Contacts (Secondary Diagnosis 2 ICD-10 Code)</relationshipLabel>
+        <relationshipName>Contacts2</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>SD3_Condition_Description__c</fullName>
@@ -5650,14 +5656,16 @@ null)</formula>
     </fields>
     <fields>
         <fullName>SD3_ICD_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <description>It contains ICD code for Secondary Diagnosis 3.</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 3 ICD-10 Code</label>
-        <length>255</length>
+        <referenceTo>ICD_Codes__c</referenceTo>
+        <relationshipLabel>Contacts (Secondary Diagnosis 3 ICD-10 Code)</relationshipLabel>
+        <relationshipName>Contacts3</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>SD4_Condition_Description__c</fullName>
@@ -5672,14 +5680,16 @@ null)</formula>
     </fields>
     <fields>
         <fullName>SD4_ICD_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <description>It contains ICD code for Secondary Diagnosis 4.</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 4 ICD-10 Code</label>
-        <length>255</length>
+        <referenceTo>ICD_Codes__c</referenceTo>
+        <relationshipLabel>Contacts (Secondary Diagnosis 4 ICD-10 Code)</relationshipLabel>
+        <relationshipName>Contacts4</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Same_as_Household_Address__c</fullName>
@@ -5715,10 +5725,10 @@ null)</formula>
         <fullName>Short_Description__c</fullName>
         <description>It holds the short description of ICD code.</description>
         <externalId>false</externalId>
+        <formula>ICD_10_Code__r.Short_Description__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Short Description</label>
-        <length>250</length>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -16342,6 +16352,13 @@ $Profile.Name  != &apos;Integration&apos;
 )</errorConditionFormula>
         <errorDisplayField>npe01__PreferredPhone__c</errorDisplayField>
         <errorMessage>Please select a Preferred Phone</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Contact_Primary_Diagnosis_Validation</fullName>
+        <active>true</active>
+        <description>Used to prevent wish child record when there is no Primary Diagnosis</description>
+        <errorConditionFormula>AND(RecordType.Name == &apos;Wish Child&apos;, ISBLANK(Diagnosis__c), ISBLANK( ICD_10_Code__c ), NOT( ISCHANGED(Hidden_Medical_Physician_Email__c) ), NOT( ISCHANGED(Hidden_Medical_Physician__c) ),$Profile.Name != &apos;Integration&apos;,NOT(ISNEW()))</errorConditionFormula>
+        <errorMessage>Please provide the ICD Code or Primary Diagnosis.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Contact_Publicity_Candidate_Validation</fullName>

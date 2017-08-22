@@ -261,27 +261,22 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>SD1_ICD_Code__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
             <field>SD1_Condition_Description__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>SD4_Condition_Description__c</field>
+            <field>SD1_ICD_Code__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>SD2_Condition_Description__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
             <field>SD2_ICD_Code__c</field>
-            <isFieldManaged>false</isFieldManaged>
-            <isRequired>false</isRequired>
-        </displayedFields>
-        <displayedFields>
-            <field>SD4_ICD_Code__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -296,7 +291,12 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>SD2_Condition_Description__c</field>
+            <field>SD4_Condition_Description__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>SD4_ICD_Code__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -2749,12 +2749,11 @@
     </fields>
     <fields>
         <fullName>Long_Description__c</fullName>
-        <description>It holds the long description of ICD Code.</description>
         <externalId>false</externalId>
+        <formula>PD_ICD_Code__r.Long_Description__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Long Description</label>
-        <length>200</length>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
@@ -3094,15 +3093,16 @@
     </fields>
     <fields>
         <fullName>PD_ICD_Code__c</fullName>
-        <description>This field is used to store the ICD code value from PartA form.</description>
+        <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
         <label>Primary ICD-10 Code</label>
-        <length>30</length>
+        <referenceTo>ICD_Codes__c</referenceTo>
+        <relationshipLabel>Leads</relationshipLabel>
+        <relationshipName>Leads</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Parent_First_Name__c</fullName>
@@ -4304,15 +4304,17 @@
     </fields>
     <fields>
         <fullName>SD1_ICD_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <description>It contains ICD code for Secondary Diagnosis 1</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 1 ICD-10 Code</label>
-        <length>255</length>
+        <referenceTo>ICD_Codes__c</referenceTo>
+        <relationshipLabel>Leads (Diagnosis 1 ICD-10 Code)</relationshipLabel>
+        <relationshipName>Leads1</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>SD2_Condition_Description__c</fullName>
@@ -4326,15 +4328,17 @@
     </fields>
     <fields>
         <fullName>SD2_ICD_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <description>It contains ICD code for Secondary Diagnosis 2</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 2 ICD-10 Code</label>
-        <length>255</length>
+        <referenceTo>ICD_Codes__c</referenceTo>
+        <relationshipLabel>Leads (Secondary Diagnosis 2 ICD-10 Code)</relationshipLabel>
+        <relationshipName>Leads2</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>SD3_Condition_Description__c</fullName>
@@ -4348,15 +4352,17 @@
     </fields>
     <fields>
         <fullName>SD3_ICD_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <description>It contains ICD code for Secondary Diagnosis 3</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 3 ICD-10 Code</label>
-        <length>255</length>
+        <referenceTo>ICD_Codes__c</referenceTo>
+        <relationshipLabel>Leads (Secondary Diagnosis 3 ICD-10 Code)</relationshipLabel>
+        <relationshipName>Leads3</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>SD4_Condition_Description__c</fullName>
@@ -4370,24 +4376,25 @@
     </fields>
     <fields>
         <fullName>SD4_ICD_Code__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
         <description>It contains ICD code for Secondary Diagnosis 4</description>
         <externalId>false</externalId>
         <label>Secondary Diagnosis 4 ICD-10 Code</label>
-        <length>255</length>
+        <referenceTo>ICD_Codes__c</referenceTo>
+        <relationshipLabel>Leads (Secondary Diagnosis 4 ICD-10 Code)</relationshipLabel>
+        <relationshipName>Leads4</relationshipName>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
-        <type>Text</type>
-        <unique>false</unique>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Short_Description__c</fullName>
-        <description>It holds the short description of ICD code.</description>
         <externalId>false</externalId>
+        <formula>PD_ICD_Code__r.Short_Description__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Short Description</label>
-        <length>250</length>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
         <unique>false</unique>
@@ -6677,6 +6684,13 @@
         <errorConditionFormula>Text(Status) == &apos;Referred&apos; &amp;&amp;  DOB__c == Null &amp;&amp;   (Text(RFI_Form_Info_Hidden__c) == Null || Id != Null) &amp;&amp;  $Profile.Name  != &apos;Integration&apos;</errorConditionFormula>
         <errorDisplayField>DOB__c</errorDisplayField>
         <errorMessage>Please Enter DOB</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Lead_Diagnosis_Validation</fullName>
+        <active>true</active>
+        <description>Used to prevent wish child record when there is no Primary Diagnosis</description>
+        <errorConditionFormula>AND(ISBLANK(PD_Condition_Description__c), ISBLANK( PD_ICD_Code__c ),$Profile.Name != &apos;Integration&apos;, $Profile.Name != &apos;Wish Referral Form&apos; )</errorConditionFormula>
+        <errorMessage>Please provide the ICD Code or Primary Diagnosis.</errorMessage>
     </validationRules>
     <validationRules>
         <fullName>Lead_Family_Referral_Validation</fullName>

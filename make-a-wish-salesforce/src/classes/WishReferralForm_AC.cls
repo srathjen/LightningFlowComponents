@@ -47,8 +47,12 @@ global Class WishReferralForm_AC
         currLead.Country = 'United States';
         /* currLead.ICD_10_Code__c = diagnosisFilter;
 currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
-        
-        currLead.PD_ICD_Code__c = diagnosisFilter;
+        List<ICD_Codes__c> icdCodeInfoList = [SELECT Id, Long_Description__c, Condition_Description__r.MAW_Name__c,Group1__c,
+                                                     Condition_Description__c, Condition_Description__r.Code_to_Use__c
+                                                     FROM ICD_Codes__c WHERE Name =: diagnosisFilter LIMIT 1];
+        if(icdCodeInfoList.size() > 0) {
+            currLead.PD_ICD_Code__c = icdCodeInfoList[0].Id;
+        }
         currLead.PD_Condition_Description__c = selectedDiagnosis;
         
         currLead.Company = 'Make-A-Wish';
@@ -129,16 +133,12 @@ return null;
             
             if(currLead.PD_ICD_Code__c != Null)
             {
-                List<ICD_Codes__c> icdCodeRecList = [SELECT Id, Long_Description__c, Short_Description__c, Condition_Description__r.MAW_Name__c,Group1__c,
-                                                     Condition_Description__c, Condition_Description__r.Code_to_Use__c
-                                                     FROM ICD_Codes__c WHERE Name = :currLead.PD_ICD_Code__c limit 1];
-                
-                if(icdCodeRecList.size() > 0)
+                if(icdCodeInfoList.size() > 0)
                 {
-                    currLead.Short_Description__c = icdCodeRecList[0].Short_Description__c;
-                    currLead.Long_Description__c= icdCodeRecList[0].Long_Description__c;
+                    //currLead.Short_Description__c = icdCodeInfoList[0].Short_Description__c;
+                    //currLead.Long_Description__c= icdCodeInfoList[0].Long_Description__c;
                     //currLead.Group_1__c= icdCodeRecList[0].Group1__c;
-                    currLead.Childs_Qualifying_Diagnosis__c = icdCodeRecList[0].Condition_Description__r.Code_to_Use__c;
+                    currLead.Childs_Qualifying_Diagnosis__c = icdCodeInfoList[0].Condition_Description__r.Code_to_Use__c;
                     
                 }                           
             }
@@ -320,7 +320,7 @@ return null;
     @RemoteAction
     global static List<ICD_Codes__c> searchDiagnosis(String searchTerm) {
         icdOrPcd = 'ICD';
-        List<ICD_Codes__c> icdCodes = Database.query('Select Id, Name,Condition_Description__c, Condition_Description__r.Name, Short_Description__c from ICD_Codes__c where Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\'');
+        List<ICD_Codes__c> icdCodes = Database.query('Select Id, Name,Condition_Description__c, Condition_Description__r.Name from ICD_Codes__c where Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\' AND Hidden_ICD_Code__c = false');
         return icdCodes;
     } 
     

@@ -41,7 +41,7 @@ Relationship to child:
 
 Primary ICD-10 Code
 
-{!Lead.PD_ICD_Code__c}
+{!Lead.00N3600000Pm8bB}
 
 Primary Diagnosis
 

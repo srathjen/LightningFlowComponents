@@ -21,16 +21,29 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
         Set<Id> wishClearenceSetId = new Set<Id>();
         
         for(dsfs__DocuSign_Status__c dsts:Trigger.new)
-        {
+        {    
             if(dsts.dsfs__Envelope_Status__c == 'Completed' && Trigger.oldMap.get(dsts.id).dsfs__Envelope_Status__c  != 'Completed' && dsts.dsfs__Case__c != Null){
-                if(dsts.dsfs__Subject__c == 'Wish Child Medical Summary' ||dsts.dsfs__Subject__c == 'RUSH Child Medical Summary'){
+                
+                string subject = dsts.dsfs__Subject__c.trim();
+                system.debug('@@@@ subject' +subject);
+                
+                if(subject.contains('Signature Required – Make-A-Wish Child'+'\'s'+' '+'Medical Summary Form:') || subject.contains('Signature Required – Make-A-Wish Rush Child'+'\'s'+' '+'Medical Summary Form:')){
                     parentWishIdSet.add(dsts.dsfs__Case__c);
                 }
-                if(dsts.dsfs__Subject__c == 'Wish Clearance' || dsts.dsfs__Subject__c == 'RUSH Wish Clearance'){
+                if(subject.contains('Signature Required – Make-A-Wish Wish Clearance Form') || subject.contains('Signature Required – Make-A-Wish Rush Wish Clearance Form')){
                     wishClearenceSetId.add(dsts.dsfs__Case__c);
                 }
+                
+                if(subject.contains('Signature Required – Make-A-Wish Wish Clearance and Child'+'\'s'+' '+ 'Medical Summary Form:') || subject.contains('Signature Required – Make-A-Wish Rush Wish Clearance and Child'+'\'s'+' '+ 'Medical Summary Form:') ){
+                    system.debug('@@@@@@@ Inside the Combo Documnet');
+                    parentWishIdSet.add(dsts.dsfs__Case__c);
+                    wishClearenceSetId.add(dsts.dsfs__Case__c);
+                    
+                }
+                
+                
             }
-           
+            
             if(dsts.dsfs__Envelope_Status__c == 'Completed' && Trigger.oldMap.get(dsts.id).dsfs__Envelope_Status__c  != 'Completed')
             {
                 dstsIds.add(dsts.id);
@@ -40,7 +53,7 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
                 newconflict.Volunteer_Contact__c = dsts.Docusign_Hidden_Contact__c ;
                 newconflict.Signed_Date__c = system.today();
                 newconflict.Expiration_Date__c = newconflict.Signed_Date__c.addYears(1);
-              //  newconflict.Active__c = true;
+                //  newconflict.Active__c = true;
                 conflictList.add(newconflict); 
                 volunteercontactIdSet.add(dsts.Docusign_Hidden_Contact__c);
                 system.debug('newconflict id'+dsts.Id+'||'+newconflict.Id
@@ -74,33 +87,34 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
         if(conflictList.size() > 0)
         {
             Insert conflictList;
-          /*  List<Conflict_Of_Interest__c> dbconflictRec = [SELECT Id,Name,Expiration_Date__c,Signed_Date__c,Volunteer_Contact__c,Active__c FROM  Conflict_Of_Interest__c WHERE Volunteer_Contact__c  IN: volunteercontactIdSet  AND Active__c = TRUE Order by CreatedDate DESC];
+            /*  List<Conflict_Of_Interest__c> dbconflictRec = [SELECT Id,Name,Expiration_Date__c,Signed_Date__c,Volunteer_Contact__c,Active__c FROM  Conflict_Of_Interest__c WHERE Volunteer_Contact__c  IN: volunteercontactIdSet  AND Active__c = TRUE Order by CreatedDate DESC];
+
+if(dbconflictRec[1].Id != Null){
+dbconflictRec[1].Active__c = FALSE;
+
+update dbconflictRec;
+} */
             
-            if(dbconflictRec[1].Id != Null){
-                dbconflictRec[1].Active__c = FALSE;
+            
+            
+            for(dsfs__DocuSign_Status__c dsts:Trigger.new){
+                Contact con = New Contact();
+                con.Id =  dsts.Docusign_Hidden_Contact__c;
+                con.isApplication__c= false;
+                confilictContactList.add(con);
                 
-                update dbconflictRec;
-            } */
+                dsts.Conflict_Of_Interest__c = conflictList[0].Id;
+                dsts.Docusign_Hidden_Contact__c = null;
+                
+                
+            }
             
-           
-               
-                    for(dsfs__DocuSign_Status__c dsts:Trigger.new){
-                        Contact con = New Contact();
-                        con.Id =  dsts.Docusign_Hidden_Contact__c;
-                        con.isApplication__c= false;
-                        confilictContactList.add(con);
-                        
-                        dsts.Conflict_Of_Interest__c = conflictList[0].Id;
-                        dsts.Docusign_Hidden_Contact__c = null;
-                        
-                        
-                    }
-                    
-                    update confilictContactList ;
-               
-           
+            update confilictContactList ;
+            
+            
         }
         if(parentWishIdSet.size() > 0){
+            system.debug('@@@@@@ inside the child\'s medical summary');
             Map<Id,Case> updatechildSummaryMap = new Map<Id,Case>();
             for(Case dbCase : [SELECT Id,Child_s_Medical_Summary_received_date__c FROM Case WHERE Id IN: parentWishIdSet]){
                 dbCase.Child_s_Medical_Summary_received_date__c = system.today();
@@ -110,9 +124,9 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
         }
         
         if(wishClearenceSetId.size() > 0){
-            
-             Map<Id,Case> updatechildSummaryMap = new Map<Id,Case>();
-            for(Case dbCase : [SELECT Id,Wish_Clearance_Received_Date__c FROM Case WHERE Id IN: parentWishIdSet]){
+            system.debug('@@@@@@ Wish CLearance');
+            Map<Id,Case> updatechildSummaryMap = new Map<Id,Case>();
+            for(Case dbCase : [SELECT Id,Wish_Clearance_Received_Date__c FROM Case WHERE Id IN: wishClearenceSetId]){
                 dbCase.Wish_Clearance_Received_Date__c = system.today();
                 updatechildSummaryMap.put(dbCase.Id,dbCase);
             }
@@ -164,7 +178,7 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
                 newconflict.Volunteer_Contact__c = cons.Id;
                 newconflict.Signed_Date__c = system.today();
                 newconflict.Expiration_Date__c = newconflict.Signed_Date__c.addYears(1);
-               // newconflict.Active__c = true;
+                // newconflict.Active__c = true;
                 conflictList.add(newconflict); 
                 volunteercontactSet.add(cons.Id);
             }
@@ -180,15 +194,15 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
                     dsts.Docusign_Hidden_Contact__c = null;
                 }
                 
-              /*  List<Conflict_Of_Interest__c> dbconflictRec = [SELECT Id,Name,Expiration_Date__c,Signed_Date__c,Volunteer_Contact__c,Active__c FROM  Conflict_Of_Interest__c WHERE Active__c = TRUE AND Volunteer_Contact__c IN: volunteercontactSet Order by CreatedDate DESC];
-                if(dbconflictRec.size() > 1){
-                    if(dbconflictRec[1].Id != Null){
-                        dbconflictRec[1].Active__c = FALSE;
-                        
-                        if(!Test.isRunningTest())
-                            update dbconflictRec;
-                    }
-                }*/
+                /*  List<Conflict_Of_Interest__c> dbconflictRec = [SELECT Id,Name,Expiration_Date__c,Signed_Date__c,Volunteer_Contact__c,Active__c FROM  Conflict_Of_Interest__c WHERE Active__c = TRUE AND Volunteer_Contact__c IN: volunteercontactSet Order by CreatedDate DESC];
+if(dbconflictRec.size() > 1){
+if(dbconflictRec[1].Id != Null){
+dbconflictRec[1].Active__c = FALSE;
+
+if(!Test.isRunningTest())
+update dbconflictRec;
+}
+}*/
             }
             
         }
