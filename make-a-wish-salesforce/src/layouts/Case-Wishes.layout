@@ -102,10 +102,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Wish_Assist__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Hidden_Lead_Id__c</field>
             </layoutItems>
         </layoutColumns>
@@ -137,6 +133,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>UniqueWishRecordIdentifier__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Wish_Assist__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -542,6 +542,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Test_Record__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Case_Member_Count__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>

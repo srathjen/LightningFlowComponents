@@ -778,10 +778,15 @@ dbLeads.Status = 'DNQ';
         Map<String, List<Chapter_Action_Track__c>> chapterActionMap = new Map<String, List<Chapter_Action_Track__c>>();
         Map<Id,Id> chapterCoordinatorMap = new Map<Id, Id>();
         Map<Id, Case> wishPlaningAnticipationSubCaseMap = new Map<id, Case>();
-        for(Case planningCaseInfo : [SELECT Id FROM Case WHERE ParentId IN : wishPlanningAndGrantinTaskParentMap.keySet() AND RecordTypeId =: wishPlanningCaseRecordTypeId]) {
+        Map<Id, Boolean> caseTaskMap = new Map<Id, Boolean>();
+        for(Case planningCaseInfo : [SELECT Id, ParentId FROM Case WHERE ParentId IN : wishPlanningAndGrantinTaskParentMap.keySet() AND RecordTypeId =: wishPlanningCaseRecordTypeId]) {
             wishPlaningAnticipationSubCaseMap.put(planningCaseInfo.Id, planningCaseInfo);
         }
-        
+         for(Task taskInfo : [SELECT Id, WhatId FROM Task WHERE Task_Type__c = 'Wish Planning' AND Status != 'Completed' AND SystemGeneratedTask__c = true AND WhatId IN : wishPlanningAndGrantinTaskParentMap.keySet()]) {
+            if(caseTaskMap.containsKey(taskInfo.WhatId) && caseTaskMap.get(taskInfo.WhatId) == false) {
+                caseTaskMap.put(taskInfo.WhatId,true);
+            }
+        }
         for(Account chapterInfo : [SELECT Id, Wish_Co_ordinator__c FROM Account WHERE RecordTypeId =: chapterRecordTypeId]) {
             chapterCoordinatorMap.put(chapterInfo.Id, chapterInfo.Wish_Co_ordinator__c);
         }
@@ -809,13 +814,13 @@ dbLeads.Status = 'DNQ';
                         newTask.Subject = currActionTrack.Task_Name__c;
                         newTask.SystemGeneratedTask__c = true;
                         newTask.WhoId = currCase.ContactId;
-                        //newTask.OwnerId = currCase.OwnerId;
+                        newTask.OwnerId = currCase.OwnerId;
                         
-                        if(chapterCoordinatorMap.size() > 0 && chapterCoordinatorMap.containsKey(currCase.ChapterName__c) && chapterCoordinatorMap.get(currCase.ChapterName__c) != null) {
+                        /*if(chapterCoordinatorMap.size() > 0 && chapterCoordinatorMap.containsKey(currCase.ChapterName__c) && chapterCoordinatorMap.get(currCase.ChapterName__c) != null) {
                             newTask.OwnerId = chapterCoordinatorMap.get(currCase.ChapterName__c);
                         } else {
                             newTask.OwnerId = currCase.OwnerId;
-                        }
+                        }*/
                         
                         newTask.RecordTypeId = staffTaskRT;
                         newTask.Task_Type__c = currActionTrack.RecordType.Name;
@@ -876,12 +881,12 @@ dbLeads.Status = 'DNQ';
                         newTask.Subject = currActionTrack.Task_Name__c;
                         newTask.SystemGeneratedTask__c = true;
                         newTask.WhoId = currCase.ContactId;
-                        //newTask.OwnerId = currCase.OwnerId;
-                        if(chapterCoordinatorMap.size() > 0 && chapterCoordinatorMap.containsKey(currCase.ChapterName__c) && chapterCoordinatorMap.get(currCase.ChapterName__c) != null) {
+                        newTask.OwnerId = currCase.OwnerId;
+                        /*if(chapterCoordinatorMap.size() > 0 && chapterCoordinatorMap.containsKey(currCase.ChapterName__c) && chapterCoordinatorMap.get(currCase.ChapterName__c) != null) {
                             newTask.OwnerId = chapterCoordinatorMap.get(currCase.ChapterName__c);
                         } else {
                             newTask.OwnerId = currCase.OwnerId;
-                        }
+                        }*/
                         newTask.RecordTypeId = staffTaskRT;
                         newTask.Task_Type__c = currActionTrack.RecordType.Name;
                         Integer months = Integer.valueOf(currActionTrack.Months__c);

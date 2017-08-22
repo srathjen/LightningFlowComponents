@@ -2002,16 +2002,16 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Animal --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Celebrity - Domestic Travel</masterLabel>
-            <translation><!-- Celebrity - Domestic Travel --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Celebrity - Local</masterLabel>
-            <translation><!-- Celebrity - Local --></translation>
+            <masterLabel>Celebrity-Domestic Travel</masterLabel>
+            <translation><!-- Celebrity-Domestic Travel --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Celebrity-International Travel</masterLabel>
             <translation><!-- Celebrity-International Travel --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Celebrity-Local</masterLabel>
+            <translation><!-- Celebrity-Local --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Computer</masterLabel>
@@ -2022,24 +2022,24 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Construction --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Cruise - Celebrity/Royal</masterLabel>
-            <translation><!-- Cruise - Celebrity/Royal --></translation>
+            <masterLabel>Cruise-Celebrity/Royal</masterLabel>
+            <translation><!-- Cruise-Celebrity/Royal --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Cruise - Disney</masterLabel>
-            <translation><!-- Cruise - Disney --></translation>
+            <masterLabel>Cruise-Disney</masterLabel>
+            <translation><!-- Cruise-Disney --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Cruise - Other</masterLabel>
-            <translation><!-- Cruise - Other --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Disney - Aulani</masterLabel>
-            <translation><!-- Disney - Aulani --></translation>
+            <masterLabel>Cruise-Other</masterLabel>
+            <translation><!-- Cruise-Other --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Disney World</masterLabel>
             <translation><!-- Disney World --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Disney-Aulani</masterLabel>
+            <translation><!-- Disney-Aulani --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Disneyland</masterLabel>
@@ -2094,12 +2094,12 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Room Redecoration/Furniture --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Shopping Spree - Local</masterLabel>
-            <translation><!-- Shopping Spree - Local --></translation>
+            <masterLabel>Shopping Spree-Local</masterLabel>
+            <translation><!-- Shopping Spree-Local --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Shopping Spree - Travel</masterLabel>
-            <translation><!-- Shopping Spree - Travel --></translation>
+            <masterLabel>Shopping Spree-Travel</masterLabel>
+            <translation><!-- Shopping Spree-Travel --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Spa/Hot Tub</masterLabel>
@@ -2134,16 +2134,16 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Trailer/Camper --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Travel - Hawai</masterLabel>
-            <translation><!-- Travel - Hawai --></translation>
+            <masterLabel>Travel-Hawaii</masterLabel>
+            <translation><!-- Travel-Hawaii --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Travel - International</masterLabel>
-            <translation><!-- Travel - International --></translation>
+            <masterLabel>Travel-International</masterLabel>
+            <translation><!-- Travel-International --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Travel - Other</masterLabel>
-            <translation><!-- Travel - Other --></translation>
+            <masterLabel>Travel-Other</masterLabel>
+            <translation><!-- Travel-Other --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -2453,7 +2453,7 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Completed</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- The status cannot be changed after the wish is Closed. --></errorMessage>
+        <errorMessage><!-- Only Program Supervisor permission set can change from &quot;DNQ&quot; to the previous status. --></errorMessage>
         <name>Case_DNQ_Status</name>
     </validationRules>
     <validationRules>

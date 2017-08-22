@@ -141,21 +141,21 @@ trigger CaseTrigger_AT on Case (after insert, after update,before update, after 
                     currentCase.Rush_Explanation__c=Null;
                 }
                 
-                if(currentCase.status == 'Hold' && (trigger.oldMap.get(currentCase.Id).Status != 'Hold' || 
+                if(currentCase.status == 'Hold' && currentCase.status != trigger.oldMap.get(currentCase.Id).Status && (trigger.oldMap.get(currentCase.Id).Status != 'Hold' || 
                    trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
                 
                     currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
                 }
                 
-                if(currentCase.status == 'Inactive' && (trigger.oldMap.get(currentCase.Id).Status != 'Inactive' || 
+                if(currentCase.status == 'Inactive' && currentCase.status != trigger.oldMap.get(currentCase.Id).Status && (trigger.oldMap.get(currentCase.Id).Status != 'Inactive' || 
                    trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
                     currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
                 }
-                 if(currentCase.status == 'Closed' && (trigger.oldMap.get(currentCase.Id).Status != 'Closed' || 
+                 if(currentCase.status == 'Closed' && currentCase.status != trigger.oldMap.get(currentCase.Id).Status && (trigger.oldMap.get(currentCase.Id).Status != 'Closed' || 
                    trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
                     currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
                 }
-                 if(currentCase.status == 'DNQ' && (trigger.oldMap.get(currentCase.Id).Status != 'DNQ' || 
+                 if(currentCase.status == 'DNQ' && currentCase.status != trigger.oldMap.get(currentCase.Id).Status && (trigger.oldMap.get(currentCase.Id).Status != 'DNQ' || 
                    trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Approved' || trigger.oldMap.get(currentCase.Id).Status != 'Budget Approval - Submitted')){
                     currentCase.Hidden_Hold_Status_Value__c = trigger.oldMap.get(currentCase.Id).Status;
                 }
@@ -673,7 +673,7 @@ currentCase.Interview_date__c.addError('Interview Date should be in future');
                   caseParentIdSet.add(caseMemberCheck.id);
               }
             
-            if((caseMemberCheck.Status == 'Ready to Interview' && Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Ready to Assign' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' 
+            if(((caseMemberCheck.Status == 'Ready to Interview') && Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Ready to Assign' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' 
               || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed') && caseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
                 parentWishInfoMap.put(caseMemberCheck.Id, caseMemberCheck);
             }
@@ -693,7 +693,7 @@ currentCase.Interview_date__c.addError('Interview Date should be in future');
                 wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
             }*/
             
-            if(((caseMemberCheck.Status == 'Wish Determined' || caseMemberCheck.Sub_Status__c == 'Within Policy') && (caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status || caseMemberCheck.Sub_Status__c != Trigger.oldMap.get(caseMemberCheck.Id).Sub_Status__c)) || (Trigger.oldMap.get(caseMemberCheck.Id).Status != caseMemberCheck.Status && (Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed')) && caseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
+            if(((caseMemberCheck.Status == 'Wish Determined' && caseMemberCheck.Sub_Status__c == 'Within Policy') && (caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status || caseMemberCheck.Sub_Status__c != Trigger.oldMap.get(caseMemberCheck.Id).Sub_Status__c)) || (Trigger.oldMap.get(caseMemberCheck.Id).Status != caseMemberCheck.Status && (Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed')) && caseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
                 wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
             }
             
@@ -907,8 +907,8 @@ currentCase.Interview_date__c.addError('Interview Date should be in future');
             
             
             
-            //For creating 2 volunteer opportunity record when the case status changed to "Ready to Assign"
-            if((caseMemberCheck.Status == 'Ready to Assign') && trigger.oldmap.get(caseMemberCheck.id).Status !=  'Ready to Assign' && caseMemberCheck.RecordTypeId == parentWishRecordTypeId){
+            //For creating 2 volunteer opportunity record when the case status changed to "Ready to Assign" from "Qualified".
+            if((caseMemberCheck.Status == 'Ready to Assign') && trigger.oldmap.get(caseMemberCheck.id).Status ==  'Qualified' && caseMemberCheck.RecordTypeId == parentWishRecordTypeId){
                 if(RecursiveTriggerHandler.isFirstTime == true ) {
                     readyToAssignParentCaseMap.put(caseMemberCheck.Id,caseMemberCheck);
                     readtToAssignChapterIdSet.add(caseMemberCheck.ChapterName__c);

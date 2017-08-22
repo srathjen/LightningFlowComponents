@@ -15,6 +15,9 @@
     <columns>
         <field>FK_$Contact.Region_Chapter__c</field>
     </columns>
+    <columns>
+        <field>Background_check__c.Status__c</field>
+    </columns>
     <format>Tabular</format>
     <name>Vol Background Check</name>
     <params>
@@ -26,7 +29,7 @@
     <showDetails>true</showDetails>
     <timeFrameFilter>
         <dateColumn>FK_CREATED_DATE</dateColumn>
-        <endDate>2017-06-27</endDate>
+        <endDate>2017-08-10</endDate>
         <interval>INTERVAL_CUSTOM</interval>
         <startDate>2017-04-10</startDate>
     </timeFrameFilter>

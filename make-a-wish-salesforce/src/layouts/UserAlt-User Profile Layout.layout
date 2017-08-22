@@ -18,6 +18,10 @@
                 <behavior>Edit</behavior>
                 <field>Volunteer_Active__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>User_License__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

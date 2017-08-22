@@ -2088,6 +2088,29 @@
         <name>npsp__Number_of_Household_Members__c</name>
     </fields>
     <layouts>
+        <layout>Chapter - Volunteer</layout>
+        <sections>
+            <label><!-- Address --></label>
+            <section>Address</section>
+        </sections>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Designated Users --></label>
+            <section>Designated Users</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Historic Wish Numbers --></label>
+            <section>Historic Wish Numbers</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Chapters</layout>
         <sections>
             <label><!-- Address --></label>

@@ -2021,7 +2021,7 @@
         <fullName>Hidden_Wish_Fmaily_Contact_Name__c</fullName>
         <description>This field is used to store the wish family contact name from wish child from.</description>
         <externalId>false</externalId>
-        <label>Hidden Wish Fmaily Contact Name</label>
+        <label>Hidden Wish Family Contact Name</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>

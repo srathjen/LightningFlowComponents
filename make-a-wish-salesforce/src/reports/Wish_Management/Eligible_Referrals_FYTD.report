@@ -89,6 +89,11 @@
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>
+        <criteriaItems>
+            <column>Case.Test_Record__c</column>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
     </filter>
     <format>Summary</format>
     <groupingsDown>

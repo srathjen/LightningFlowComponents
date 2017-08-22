@@ -262,6 +262,8 @@ TEXT(File_Size_in_Bytes__c) &amp; &quot; bytes&quot;)</formula>
     <label>In Kind Donation &amp; Reimbursement File</label>
     <listViews>
         <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>CREATEDBY_USER</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

@@ -48,6 +48,10 @@
                 <behavior>Readonly</behavior>
                 <field>Orientation_Training_Hidden__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Hidden_O_T_Id__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>

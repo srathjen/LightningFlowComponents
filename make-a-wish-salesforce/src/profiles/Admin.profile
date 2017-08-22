@@ -183,6 +183,14 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>Batch_UpdateChildCaseTeamMember_AC_Test</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Batch_UpdateChildWishCaseTeamMember_AC</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Batch_UpdateVolunteerStatusSchedule_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -2635,7 +2643,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Case.Budget_Approved_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -2660,7 +2668,7 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
+        <editable>false</editable>
         <field>Case.Budget_Submitted_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -10892,6 +10900,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>User.Today_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>User.User_License__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

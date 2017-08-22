@@ -7,7 +7,7 @@
         <field>Case.In_Kind_Donation_Reimbursement__r$Volunteer_Name__c</field>
     </columns>
     <columns>
-        <field>Case.In_Kind_Donation_Reimbursement__r$Street__c</field>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Login_users_Street__c</field>
     </columns>
     <columns>
         <field>Case.In_Kind_Donation_Reimbursement__r$Login_Users_City__c</field>
@@ -93,6 +93,9 @@
     <columns>
         <field>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r$File_Path__c</field>
     </columns>
+    <columns>
+        <field>Case.In_Kind_Donation_Reimbursement__r$Adjustment_Comments__c</field>
+    </columns>
     <description>Reimbursement Files</description>
     <filter>
         <criteriaItems>
@@ -102,7 +105,7 @@
         </criteriaItems>
         <criteriaItems>
             <column>Case.In_Kind_Donation_Reimbursement__r$Approved_Date__c</column>
-            <operator>equals</operator>
+            <operator>greaterOrEqual</operator>
             <value>LAST_N_DAYS:7</value>
         </criteriaItems>
     </filter>
@@ -115,7 +118,7 @@
     <reportType>In_Kind_Donation_Reimburs_Files__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
-    <sortColumn>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r$CreatedDate</sortColumn>
+    <sortColumn>Case.In_Kind_Donation_Reimbursement__r$Approved_Date__c</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
         <dateColumn>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r$CreatedDate</dateColumn>

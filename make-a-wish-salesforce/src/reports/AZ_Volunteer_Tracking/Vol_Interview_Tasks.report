@@ -67,7 +67,7 @@
     <showDetails>true</showDetails>
     <timeFrameFilter>
         <dateColumn>CONTACT_CREATED_DATE</dateColumn>
-        <endDate>2017-06-27</endDate>
+        <endDate>2017-08-10</endDate>
         <interval>INTERVAL_CUSTOM</interval>
         <startDate>2017-04-10</startDate>
     </timeFrameFilter>

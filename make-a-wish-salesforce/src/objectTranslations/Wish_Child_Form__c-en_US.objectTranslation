@@ -382,7 +382,7 @@
         <name>Hidden_Wish_Fmaily_Contact_Email__c</name>
     </fields>
     <fields>
-        <label><!-- Hidden Wish Fmaily Contact Name --></label>
+        <label><!-- Hidden Wish Family Contact Name --></label>
         <name>Hidden_Wish_Fmaily_Contact_Name__c</name>
     </fields>
     <fields>

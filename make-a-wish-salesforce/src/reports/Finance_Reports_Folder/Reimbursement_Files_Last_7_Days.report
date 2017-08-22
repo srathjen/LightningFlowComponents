@@ -93,6 +93,9 @@
     <columns>
         <field>In_Kind_Donation_Reimbursement_File__c.File_Path__c</field>
     </columns>
+    <columns>
+        <field>In_Kind_Donation_Reimbursement__c.Adjustment_Comments__c</field>
+    </columns>
     <filter>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c.Approved_Date__c</column>

@@ -1412,6 +1412,11 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Adjustment_Comments__c</field>
+            <table>Case.In_Kind_Donation_Reimbursement__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Address_Line_1_del__c</field>
             <table>Case.In_Kind_Donation_Reimbursement__r</table>
         </columns>
@@ -1715,6 +1720,11 @@
             <field>Street__c</field>
             <table>Case.In_Kind_Donation_Reimbursement__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Login_users_Street__c</field>
+            <table>Case.In_Kind_Donation_Reimbursement__r</table>
+        </columns>
         <masterLabel>In-Kind Donation &amp; Reimbursement</masterLabel>
     </sections>
     <sections>
@@ -1816,6 +1826,11 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>File_Path__c</field>
+            <table>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Parent__c</field>
             <table>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r</table>
         </columns>
         <masterLabel>In Kind Donation &amp; Reimbursement Files</masterLabel>

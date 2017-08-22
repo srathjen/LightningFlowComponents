@@ -169,6 +169,14 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>Batch_UpdateChildCaseTeamMember_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Batch_UpdateChildWishCaseTeamMember_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Batch_UpdateVolunteerStatusSchedule_AC</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -10878,6 +10886,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>User.Today_Date__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>User.User_License__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

@@ -46,7 +46,7 @@
         <criteriaItems>
             <column>Case.Wish_Type__c</column>
             <operator>equals</operator>
-            <value>Celebrity - Domestic Travel,Celebrity-International Travel,Shopping Spree - Travel,Sports-Domestic Travel,Sports-International Travel,Travel - Hawai,Travel - International,Travel - Other</value>
+            <value>Celebrity-International Travel,Sports-Domestic Travel,Sports-International Travel</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Current_Age__c</column>

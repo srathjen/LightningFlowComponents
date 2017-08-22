@@ -180,10 +180,12 @@ insert newChapter;*/
     }
     public static Account createVolunteerAccount(){
         Constant_AC constant = new Constant_AC();
+        User currUser = [SELECT id from User where id = :Userinfo.getUserId() limit 1];
         String chapterRT= Schema.Sobjecttype.Account.getRecordTypeInfosByName().get(constant.ChapterRT).getRecordTypeId();
         Account newAccount = new Account();
         newAccount.Name = 'Make-A-Wish Alabama';
         newAccount.RecordTypeId = chapterRT;
+        newAccount.Volunteer_Manager__c = currUser.Id;
         insert newAccount;
         return newAccount;
     }
@@ -512,6 +514,9 @@ insert newChapter;*/
         return createNewVol;
     }
     public static Contact CreateWishChild(){
+        ICD_Codes__c obj=new ICD_Codes__c();
+        obj.Name='Q917';
+        insert obj;
         Constant_AC  constant = new Constant_AC();
         Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();            
         Contact newWishChild = new Contact();
@@ -519,7 +524,7 @@ insert newChapter;*/
         newWishChild.LastName = 'Smith';
         newWishChild.Parent_Guardian_Name__c ='Jonathan Edwards'; 
         newWishChild.RecordTypeId = wishChildRecordTypeId ;
-        newWishChild.ICD_10_Code__c = 'Q91.7';
+        newWishChild.ICD_10_Code__c = obj.Id;
         insert newWishChild;
         return newWishChild;
     }
@@ -859,12 +864,14 @@ insert newChapter;*/
     public static Volunteer_Opportunity__c CreateNonWishVolunteerOpportunity(Id chapterId, Id roleId, Id eventId) {
         Constant_AC  constant = new Constant_Ac();    
         Id nonWishRT = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
-        
+        Volunteer_Count__c newVolCount = new Volunteer_Count__c ();
         Volunteer_Opportunity__c newNonWishOpportunity =  new Volunteer_Opportunity__c();
         newNonWishOpportunity.Chapter_Role_Opportunity__c = roleId;
         newNonWishOpportunity.Non_Wish_Event__c = eventId;
         newNonWishOpportunity.Chapter_Name__c = chapterId;
         newNonWishOpportunity.RecordTypeId = nonWishRT;
+        newNonWishOpportunity.Status__c = 'Pending';
+        newNonWishOpportunity.HiddenVolunteer_Count_Description__c = newVolCount.id;
         insert newNonWishOpportunity;
         return newNonWishOpportunity;
         
@@ -1272,21 +1279,24 @@ insert newChapter;*/
         newLead.Referrer_Zip__c = '6210';
         newLead.Sibling_Detail__c = 'aa | aaab | 14 bbb | bbbc | 15';
         newLead.PD_Condition_Description__c = 'Test Diagnosis';
-        newLead.Parent_First_Name__c = 'MAWAFirstName';
-        newLead.Parent_Last_Name__c = 'MAWALastName';
-        newLead.Medical_Professional_First_Name__c = 'moss';
-        newLead.Medical_Professional_Last_Name__c = 'hart';
-        newLead.Medical_Professional_Phone__c = '9600467558';
-        newLead.Medical_Professional_Email__c = 'testmawa1@gmail.com';
+        newLead.Parent_First_Name__c = 'MAWAFirstJune';
+        newLead.Parent_Last_Name__c = 'MAWALastJune';
+        newLead.Medical_Professional_First_Name__c = 'mossJune';
+        newLead.Medical_Professional_Last_Name__c = 'hartJune';
+        newLead.Medical_Professional_Phone__c = '9600467559';
+        newLead.Medical_Professional_Email__c = 'testmawa1s@gmail.com';
         newLead.Hospital_Treatment_Facility__c = 'Moss Hart AC';
-        newLead.Treating_Medical_Professional_First_Name__c = 'Steve';
-        newLead.Treating_Medical_Professional_Last_Name__c = 'Waugh';
-        newLead.Treating_Medical_Professional_Phone__c = '9600467557';
-        newLead.Treating_Medical_Professional_Email__c = 'testmawa2@gmail.com';
+        newLead.Treating_Medical_Professional_First_Name__c = 'SteveJune';
+        newLead.Treating_Medical_Professional_Last_Name__c = 'Waughone';
+        newLead.Treating_Medical_Professional_Phone__c = '9600467578';
+        newLead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
         newLead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
         newLead.is_Family_Aware_of_Referral__c = 'Yes';
         newLead.Medical_Questions__c = 'Test Diagnosis';
-        newLead.PD_ICD_Code__c  = 'C12.0';
+         ICD_Codes__c obj=new ICD_Codes__c();
+        obj.Name='C120';
+        insert obj;
+        newLead.PD_ICD_Code__c  = obj.id;
         newLead.Lung_Disease__c = 'Test1;Test2';
         newLead.Angina__c = 'Test1;Test2';
         newLead.Ventilator__c = 'Test1;Test2';
@@ -1351,10 +1361,10 @@ insert newChapter;*/
         Constant_AC  constant = new Constant_AC();
         Id medicalProfessionalRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
         Contact treatingProfContact = new Contact();
-        treatingProfContact.FirstName = 'Steve';
-        treatingProfContact.LastName = 'Waugh';
+        treatingProfContact.FirstName = 'Steveone';
+        treatingProfContact.LastName = 'Waughone';
         treatingProfContact.Email = 'testmawa2@gmail.com';
-        treatingProfContact.Phone =  '9600467557';
+        treatingProfContact.Phone =  '9600467554';
         treatingProfContact.MailingStreet ='KuttaiKarai Street';
         treatingProfContact.MailingCity = 'Trichy';
         treatingProfContact.MailingStateCode = 'AZ';
@@ -1372,10 +1382,10 @@ insert newChapter;*/
         Constant_AC  constant = new Constant_AC();
         Id medicalProfessionalRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
         Contact medicalProfContact = new Contact();
-        medicalProfContact .FirstName = 'moss';
-        medicalProfContact .LastName = 'hart';
+        medicalProfContact .FirstName = 'mosstest';
+        medicalProfContact .LastName = 'harttest';
         medicalProfContact .Email = 'testmawa1@gmail.com';
-        medicalProfContact .Phone =  '9600467558';
+        medicalProfContact .Phone =  '9600467554';
         medicalProfContact .MailingStreet ='KuttaiKarai Street';
         medicalProfContact .MailingCity = 'Trichy';
         medicalProfContact .MailingStateCode = 'AZ';
@@ -1459,7 +1469,7 @@ return cc;
         wishChildCon.RecordTypeId = wishChildRecordTypeId;
         wishChildCon.MobilePhone = '9900220022';
         wishChildCon.Primary_Diagnosis_Condition_Description__c = 'Test';
-        wishChildCon.ICD_10_Code__c = 'c00';
+        wishChildCon.Diagnosis__c = 'test';
         insert wishChildCon;
         return wishChildCon;
         
@@ -2020,7 +2030,7 @@ retrun newLeadFile;*/
         dsfs.dsfs__Case__c = caseId;
         dsfs.isConflict__c = false;
         dsfs.dsfs__Envelope_Status__c  = 'Sent';
-        dsfs.dsfs__Subject__c = 'Make-A-Wish Liability And Publicity Release Form';
+        dsfs.dsfs__Subject__c = 'Signature Required - Liability And Publicity Release Form';
         insert dsfs;
         return dsfs;
     }
@@ -2213,12 +2223,17 @@ retrun newLeadFile;*/
     
       public static Contact CreateWishChildwithAcc(Id accId){
         Constant_AC  constant = new Constant_AC();
+        ICD_Codes__c obj=new ICD_Codes__c();
+        obj.Name='Q917';
+        insert obj;
         Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();            
         Contact newWishChild = new Contact();
         newWishChild.FirstName = 'Steven';
         newWishChild.LastName = 'Smith';
         newWishChild.Parent_Guardian_Name__c ='Jonathan Edwards'; 
         newWishChild.RecordTypeId = wishChildRecordTypeId ;
+        newWishChild.Diagnosis__c = 'Test';
+        newWishChild.ICD_10_Code__c = obj.id;
         newWishChild.AccountId = accId;
         insert newWishChild;
         return newWishChild;
@@ -2232,4 +2247,255 @@ retrun newLeadFile;*/
         System.assert(Limits.getQueryRows() * 100 / Limits.getLimitQueryRows() < 50); 
     }
     
+    
+    public static contact CreateTreatingMedicalProfContactforMerge(){
+        Constant_AC  constant = new Constant_AC();
+        Id medicalProfessionalRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
+        Contact treatingProfContact = new Contact();
+        treatingProfContact.FirstName = 'Steveone';
+        treatingProfContact.LastName = 'Waughone';
+        treatingProfContact.Email = 'testmawa2@gmail.com';
+        treatingProfContact.Phone =  '9600467554';
+        treatingProfContact.MailingStreet ='KuttaiKarai Street';
+        treatingProfContact.MailingCity = 'Trichy';
+        treatingProfContact.MailingStateCode = 'AZ';
+        treatingProfContact.MailingPostalCode  = '6201717';
+        treatingProfContact.MailingCountryCode = 'US';
+        treatingProfContact.RecordTypeId = medicalProfessionalRecordTypeId;
+        
+        return treatingProfContact;
+        
+    }
+    
+    
+    public static Lead createTestLeadRecwithDupe(Id chapterAccountId){
+        
+        Lead newLead = new Lead();
+        newLead.FirstName = 'moss';
+        newLead.LastName = 'Smith Household';
+        newLead.Phone = '9600467559';
+        newLead.Email = 'testmawa@gmail.com';
+        newLead.Street = 'KuttaiKarai Street';
+        newLead.StateCode = 'AZ';
+        newLead.city = 'Trichy';
+        newLead.Postalcode = '6201717';
+        newLead.CountryCode = 'US';
+        newLead.DOB__c = System.today() - 1435;
+        newLead.company = 'MAWA';
+        newLead.Status = 'Inquiry';
+       // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        newLead.Gender__c = 'Male';
+        newLead.ChapterName__c = chapterAccountId;
+        newLead.Referrer_FirstName__c = 'SteveJune';
+        newLead.Referrer_Last_Name__c = 'Waughone';
+        newLead.Referrer_Email__c = 'testmawa2d@gmail.com';
+        newLead.Referrer_Phone__c =  '9600467578';
+        newLead.Referrer_City__c = 'Trichy';
+        newLead.Referrer_Zip__c = '6210';
+        newLead.Sibling_Detail__c = 'aa | aaab | 14 bbb | bbbc | 15';
+        newLead.PD_Condition_Description__c = 'Test Diagnosis';
+        newLead.Parent_First_Name__c = 'MAWAFirstJune';
+        newLead.Parent_Last_Name__c = 'MAWALastJune';
+        newLead.Medical_Professional_First_Name__c = 'SteveJune';
+        newLead.Medical_Professional_Last_Name__c = 'Waughone';
+        newLead.Medical_Professional_Phone__c = '9600467578';
+        newLead.Medical_Professional_Email__c = 'testmawa2d@gmail.com';
+        newLead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
+        newLead.Treating_Medical_Professional_First_Name__c = 'SteveJune';
+        newLead.Treating_Medical_Professional_Last_Name__c = 'Waughone';
+        newLead.Treating_Medical_Professional_Phone__c = '9600467578';
+        newLead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
+        newLead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
+        newLead.Best_Contact_for_Physician_First_Name__c = 'SteveJune';
+        newLead.Best_Contact_for_Physician_Last_Name__c ='Waughone';
+        newLead.Best_contact_for_Physician_Email__c = 'testmawa2d@gmail.com';
+        newLead.is_Family_Aware_of_Referral__c = 'Yes';
+        newLead.Medical_Questions__c = 'Test Diagnosis';
+        //newLead.PD_ICD_Code__c  = 'C12.0';
+        newLead.Lung_Disease__c = 'Test1;Test2';
+        newLead.Angina__c = 'Test1;Test2';
+        newLead.Ventilator__c = 'Test1;Test2';
+        newLead.Arrhythmia__c = 'Test1;Test2';
+        newLead.Heart_Failure__c = 'Test1;Test2';
+        newLead.Congenital_Heart_Disease__c = 'Test1;Test2';
+        newLead.Chronic_Hepatitis__c = 'Test1;Test2';
+        newLead.Convulsive_Disorders__c = 'Test1;Test2';
+        newLead.Pulmonary_Hypertension__c = 'Test1;Test2';
+        newLead.Strokes__c = 'Test1;Test2';
+        newLead.Chronic_Heart_Failure__c = 'Test1;Test2';
+        newLead.isSign__c = true;
+       
+        //newLead.Communication__c = 'Non-Verbal';
+        newLead.Travel_algorithm__c = 'Test1;Test2;';
+        return newLead;
+        
+    }
+    
+    public static case CreateParentCaseWithClosedStatus( Id wishChildId) {
+        Constant_AC  constant = new Constant_Ac();    
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        Case newParentWish = new Case();
+        newParentWish.RecordTypeId = parentWishRecordTypeId;
+        newParentWish.ChapterName__c = CreateAlabamaAccount();
+        newParentWish.Subject = 'Parent Wish';
+        newParentWish.Interview_date__c = System.today();
+        newParentWish.Wish_Type__c = 'Disney World';
+        newParentWish.Start_Date__c = System.today();
+        newParentWish.End_Date__c = System.today();
+        newParentWish.ContactId = wishChildId;
+        newParentWish.Update_Wish_Child_Form_Info__c  = false;
+        newParentWish.Status = 'Closed';
+        newParentWish.Anticipated_Start_Date__c = System.today();
+        newParentWish.LiabilitySignerMapKeyPair__c = 'Vennila';
+        newParentWish.Budget_Submitted_Date__c = system.today();
+        newParentWish.Budget_Approved_Date__c = system.today();
+        insert newParentWish;
+        return newParentWish;
+    }
+    
+     public static Lead createAdditionalParentLead(Id chapterAccountId){
+        
+         Lead newLead = new Lead();
+        newLead.FirstName = 'moss';
+        newLead.LastName = 'Smith Household';
+        newLead.Phone = '9600467559';
+        newLead.Email = 'testmawa@gmail.com';
+        newLead.Street = 'KuttaiKarai Street';
+        newLead.StateCode = 'AZ';
+        newLead.city = 'Trichy';
+        newLead.Postalcode = '6201717';
+        newLead.CountryCode = 'US';
+        newLead.DOB__c = System.today() - 1435;
+        newLead.company = 'MAWA';
+        newLead.Status = 'Inquiry';
+       // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        newLead.Gender__c = 'Male';
+        newLead.ChapterName__c = chapterAccountId;
+        newLead.Referrer_FirstName__c = 'SteveJune';
+        newLead.Referrer_Last_Name__c = 'Waughone';
+        newLead.Referrer_Email__c = 'testmawa2d@gmail.com';
+        newLead.Referrer_Phone__c =  '9600467578';
+        newLead.Referrer_City__c = 'Trichy';
+        newLead.Referrer_Zip__c = '6210';
+        newLead.Sibling_Detail__c = 'aa | aaab | 14 bbb | bbbc | 15';
+        newLead.PD_Condition_Description__c = 'Test Diagnosis';
+        newLead.Parent_First_Name__c = 'MAWAFirstJune';
+        newLead.Parent_Last_Name__c = 'MAWALastJune';
+        newLead.Medical_Professional_First_Name__c = 'SteveJune';
+        newLead.Medical_Professional_Last_Name__c = 'Waughone';
+        newLead.Medical_Professional_Phone__c = '9600467578';
+        newLead.Medical_Professional_Email__c = 'testmawa2d@gmail.com';
+        newLead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
+        newLead.Treating_Medical_Professional_First_Name__c = 'SteveJune';
+        newLead.Treating_Medical_Professional_Last_Name__c = 'Waughone';
+        newLead.Treating_Medical_Professional_Phone__c = '9600467578';
+        newLead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
+        newLead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
+        newLead.Best_Contact_for_Physician_First_Name__c = 'SteveJune';
+        newLead.Best_Contact_for_Physician_Last_Name__c ='Waughone';
+        newLead.Best_contact_for_Physician_Email__c = 'testmawa2d@gmail.com';
+        newLead.is_Family_Aware_of_Referral__c = 'Yes';
+        newLead.Medical_Questions__c = 'Test Diagnosis';
+        
+        newLead.Lung_Disease__c = 'Test1;Test2';
+        newLead.Angina__c = 'Test1;Test2';
+        newLead.Ventilator__c = 'Test1;Test2';
+        newLead.Arrhythmia__c = 'Test1;Test2';
+        newLead.Heart_Failure__c = 'Test1;Test2';
+        newLead.Congenital_Heart_Disease__c = 'Test1;Test2';
+        newLead.Chronic_Hepatitis__c = 'Test1;Test2';
+        newLead.Convulsive_Disorders__c = 'Test1;Test2';
+        newLead.Pulmonary_Hypertension__c = 'Test1;Test2';
+        newLead.Strokes__c = 'Test1;Test2';
+        newLead.Chronic_Heart_Failure__c = 'Test1;Test2';
+        newLead.isSign__c = true;
+        newLead.Travel_algorithm__c = 'Test1;Test2;';
+        newLead.Additional_Parent_First_Name__c = 'MAWAFirstJune';
+        newLead.Additional_Parent_Last_Name__c = 'MAWALastJune';
+        newLead.Additional_Parent_Phone__c =  '9600467559';
+        newLead.Additional_Parent_Email__c = 'testmawa@gmail.com';
+        newLead.Additional_Parent_City__c = 'Trichy';
+        newLead.Additional_Parent_Postal_Code__c = '6201717';
+        return newLead;
+    }
+    
+    
+    public static Lead createSameMedicalLead(Id chapterAccountId){
+        
+         Lead newLead = new Lead();
+        newLead.FirstName = 'moss';
+        newLead.LastName = 'Smith Household';
+        newLead.Phone = '9600467559';
+        newLead.Email = 'testmawa@gmail.com';
+        newLead.Street = 'KuttaiKarai Street';
+        newLead.StateCode = 'AZ';
+        newLead.city = 'Trichy';
+        newLead.Postalcode = '6201717';
+        newLead.CountryCode = 'US';
+        newLead.DOB__c = System.today() - 1435;
+        newLead.company = 'MAWA';
+        newLead.Status = 'Inquiry';
+       // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        newLead.Gender__c = 'Male';
+        newLead.ChapterName__c = chapterAccountId;
+        newLead.Referrer_FirstName__c = 'SteveJuneone';
+        newLead.Referrer_Last_Name__c = 'Waugh';
+        newLead.Referrer_Email__c = 'testmawa21d@gmail.com';
+        newLead.Referrer_Phone__c =  '9600467579';
+        newLead.Referrer_City__c = 'Trichy';
+        newLead.Referrer_Zip__c = '6210';
+        newLead.Sibling_Detail__c = 'aa | aaab | 14 bbb | bbbc | 15';
+        newLead.PD_Condition_Description__c = 'Test Diagnosis';
+        newLead.Parent_First_Name__c = 'MAWAFirstJune';
+        newLead.Parent_Last_Name__c = 'MAWALastJune';
+        newLead.Medical_Professional_First_Name__c = 'SteveJuneone';
+        newLead.Medical_Professional_Last_Name__c = 'Waugh';
+        newLead.Medical_Professional_Phone__c = '9600467579';
+        newLead.Medical_Professional_Email__c = 'testmawa21d@gmail.com';
+        newLead.Hospital_Treatment_Facility__c = 'Steve Smith AC';
+        newLead.Treating_Medical_Professional_First_Name__c = 'SteveJune';
+        newLead.Treating_Medical_Professional_Last_Name__c = 'Waughone';
+        newLead.Treating_Medical_Professional_Phone__c = '9600467578';
+        newLead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
+        newLead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
+        newLead.Best_Contact_for_Physician_First_Name__c = 'SteveJune';
+        newLead.Best_Contact_for_Physician_Last_Name__c ='Waughone';
+        newLead.Best_contact_for_Physician_Email__c = 'testmawa2d@gmail.com';
+        newLead.is_Family_Aware_of_Referral__c = 'Yes';
+        newLead.Medical_Questions__c = 'Test Diagnosis';
+        
+        newLead.Lung_Disease__c = 'Test1;Test2';
+        newLead.Angina__c = 'Test1;Test2';
+        newLead.Ventilator__c = 'Test1;Test2';
+        newLead.Arrhythmia__c = 'Test1;Test2';
+        newLead.Heart_Failure__c = 'Test1;Test2';
+        newLead.Congenital_Heart_Disease__c = 'Test1;Test2';
+        newLead.Chronic_Hepatitis__c = 'Test1;Test2';
+        newLead.Convulsive_Disorders__c = 'Test1;Test2';
+        newLead.Pulmonary_Hypertension__c = 'Test1;Test2';
+        newLead.Strokes__c = 'Test1;Test2';
+        newLead.Chronic_Heart_Failure__c = 'Test1;Test2';
+        newLead.isSign__c = true;
+        newLead.Travel_algorithm__c = 'Test1;Test2;';
+        newLead.Additional_Parent_First_Name__c = 'MAWAFirstJune';
+        newLead.Additional_Parent_Last_Name__c = 'MAWALastJune';
+        newLead.Additional_Parent_Phone__c =  '9600467559';
+        newLead.Additional_Parent_Email__c = 'testmawa@gmail.com';
+        newLead.Additional_Parent_City__c = 'Trichy';
+        newLead.Additional_Parent_Postal_Code__c = '6201717';
+        return newLead;
+    }
+    
+    public static User createAdminUser(){ 
+        
+        
+        Profile volunteerSystemAdministrator = [SELECT Id FROM Profile WHERE Name = 'System Administrator'];
+        
+        User newPvolunteerSystemAdministratorUser = new User(  firstname = 'Yohan',lastName = 'Blake',email = 'blake@yohan.com',Username = 'yohanblake@100m.com',
+                                                             EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
+                                                             LanguageLocaleKey = 'en_US',ProfileId = volunteerSystemAdministrator.Id,isActive = true,Statecode = 'AZ');
+        insert newPvolunteerSystemAdministratorUser ;
+        return newPvolunteerSystemAdministratorUser ;
+        
+    }
 }
