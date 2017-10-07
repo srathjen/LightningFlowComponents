@@ -43,7 +43,7 @@ trigger AwardsRecognition_AT on Awards_Recognition__c (after insert,after update
             for(Awards_Recognition__c  currRec :Trigger.New){ 
                 system.debug('Chapter Name****************'+chapterNameMap.get(currRec.Id));
                 if(currUser[0].UserRole.Name != 'National Staff' && currUser[0].profile.Name != 'System Administrator' && currUser[0].profile.Name != 'Integration'){
-                    if(chapterRoleMap.get(chapterNameMap.get(currRec.Id)) != currUser[0].UserRole.Name || currRec.Chapter_Name__C != Trigger.oldMap.get(currRec.Id).Chapter_Name__C){
+                    if(chapterRoleMap.get(chapterNameMap.get(currRec.Id)) != currUser[0].UserRole.Name || (Trigger.isUpdate && currRec.Chapter_Name__C != Trigger.oldMap.get(currRec.Id).Chapter_Name__C)){
                    {
                          currRec.addError('Insufficient previlege to update this record. Please contact system administrator.');        
                    }

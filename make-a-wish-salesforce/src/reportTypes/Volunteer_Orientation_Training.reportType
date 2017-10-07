@@ -156,6 +156,11 @@
             <field>Hidden_O_T_Id__c</field>
             <table>Volunteer_Orientation_Training__c</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Class_Offering__c.Chapter_Role_O_T__c.Orientation_Training__c</field>
+            <table>Volunteer_Orientation_Training__c</table>
+        </columns>
         <masterLabel>Volunteer Orientation &amp; Trainings</masterLabel>
     </sections>
     <sections>

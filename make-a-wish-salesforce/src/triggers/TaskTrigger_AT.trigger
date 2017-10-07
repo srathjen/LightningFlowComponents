@@ -153,7 +153,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             if(updatedTask.RecordTypeId == volunteerTaskRT) {
                 //updatedTask.IsVisibleInSelfService = true;
             }
-            if(updatedTask.Subject != null && updatedTask.Subject.contains(' ET : ') && updatedTask.status == 'Completed') {
+            if(updatedTask.Subject.contains(' ET : ') && updatedTask.status == 'Completed') {
                 updatedTask.ActivityDate = null;
             }
             
@@ -201,12 +201,12 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         List<Task> validateTaskList = new List<Task>();
         Set<Id> completedTaskParentIdSet = new Set<Id>();
         for(Task currRec : Trigger.new){ 
-            if(currRec.Subject != null && currRec.Subject.contains(' ET : ') && currRec.status == 'Completed') {
+            if(currRec.Subject.contains(' ET : ') && currRec.status == 'Completed') {
                 currRec.ActivityDate = null;
             }
-            if(currRec.Subject == 'Check in with the family every 30 days' && currRec.Status == 'Completed') {
+            /*if(currRec.Subject == 'Check in with the family every 30 days' && currRec.Status == 'Completed') {
                 checkInTaskParentIdsSet.add(currRec.WhatId);
-            }
+            }*/
             string id = currRec.WhoId;
             if(currRec.Confirmed_Date__c != Null && Trigger.oldMap.get(currRec.id).Confirmed_Date__c  == Null)
                 currRec.Status = 'Scheduled';
@@ -254,9 +254,9 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             TaskHandler.updateTaskEmailMergeFields(contactIdset,updateTaskList);
         }
         
-        if(checkInTaskParentIdsSet.size() > 0 ) {
-            TaskHandler.updateCheckinDate(checkInTaskParentIdsSet);
-        }
+        /*if(checkInTaskParentIdsSet.size() > 0 ) {
+            //TaskHandler.updateCheckinDate(checkInTaskParentIdsSet);
+        }*/
         if(caseInfoMap.size() >0){
             map<id,case> caseMap=new Map<id,case>([SELECT id from case where Presentation_Date__c=:Null and Id IN:caseInfoMap.values() and  RecordTypeId=:wishGrantedRecordTypeId]);
             
@@ -266,7 +266,17 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                 }
             }
         }
-        
-        
+    }
+    
+    if(Trigger.isAfter && Trigger.isUpdate){
+        Set<Id> checkInTaskParentIdsSet = new Set<Id>();
+        for(Task currRec : Trigger.new){ 
+             if(currRec.Subject == 'Check in with the family every 30 days' && currRec.Status == 'Completed') {
+                checkInTaskParentIdsSet.add(currRec.WhatId);
+            }
+        }
+       if(checkInTaskParentIdsSet.size() > 0 ) {
+            TaskHandler.updateCheckinDate(checkInTaskParentIdsSet);
+        }
     }
 }

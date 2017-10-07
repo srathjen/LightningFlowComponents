@@ -12,6 +12,7 @@
     <filter>
         <criteriaItems>
             <column>CASE_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>

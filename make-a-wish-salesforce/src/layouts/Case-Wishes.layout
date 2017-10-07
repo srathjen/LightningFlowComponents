@@ -104,6 +104,10 @@
                 <behavior>Edit</behavior>
                 <field>Hidden_Lead_Id__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Hidden_Hold_Status_Value__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -616,6 +620,8 @@
         <relatedList>Wish_Child_Form__c.Case__c</relatedList>
     </relatedLists>
     <relatedLists>
+        <excludeButtons>LogCall</excludeButtons>
+        <excludeButtons>MailMerge</excludeButtons>
         <fields>TASK.SUBJECT</fields>
         <fields>TASK.DUE_DATE</fields>
         <fields>CORE.USERS.FULL_NAME</fields>

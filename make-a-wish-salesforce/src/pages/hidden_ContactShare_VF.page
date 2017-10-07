@@ -1,0 +1,3 @@
+<apex:page standardController="Contact" showHeader="fasle" sidebar="false" extensions="Hidden_ContactShareController_AC" action="{!shareContact}">
+      
+</apex:page>

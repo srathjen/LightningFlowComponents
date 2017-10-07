@@ -198,8 +198,8 @@
                 <field>npe01__Secondary_Address_Type__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>npe01__Other_Address__c</field>
+                <behavior>Edit</behavior>
+                <field>OtherAddress</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -713,6 +713,8 @@
         <relatedList>RelatedActivityList</relatedList>
     </relatedLists>
     <relatedLists>
+        <excludeButtons>LogCall</excludeButtons>
+        <excludeButtons>MailMerge</excludeButtons>
         <fields>TASK.SUBJECT</fields>
         <fields>TASK.WHAT_NAME</fields>
         <fields>TASK.DUE_DATE</fields>

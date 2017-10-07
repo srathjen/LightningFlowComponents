@@ -40,35 +40,35 @@
                 </div>
                 <div class="form-group col-sm-12 col-md-2">
                     <label for="processName">Process Name:</label>
-                    <apex:selectList value="{!selectedprocessName}" multiselect="false" size="1" styleClass="form-control input-xs">
+                    <apex:selectList value="{!selectedprocessName}" id="selectProcessName" multiselect="false" size="1" styleClass="form-control input-xs">
                         <apex:actionSupport event="onchange" action="{!viewProcess}"/>
                         <apex:selectOptions value="{!processItems}"/>        
                     </apex:selectList>
                 </div>
                 <div class="form-group col-sm-12 col-md-2">
                     <label for="chaptername">Chapter Name:</label>
-                    <apex:selectList value="{!selectedChapter}" multiselect="false" size="1" styleClass="form-control input-xs">
+                    <apex:selectList value="{!selectedChapter}" id="selectChapter" multiselect="false" size="1" styleClass="form-control input-xs">
                         <apex:actionSupport event="onchange"   action="{!viewProcess}"/>
                         <apex:selectOptions value="{!chapterItems}"/>        
                     </apex:selectList>
                 </div>
                 <div class="form-group col-sm-12 col-md-2">
                     <label for="status">Status:</label>
-                    <apex:selectList value="{!selectedStatus}" multiselect="false" size="1" styleClass="form-control input-xs">
+                    <apex:selectList value="{!selectedStatus}" id="selectStatus" multiselect="false" size="1" styleClass="form-control input-xs">
                         <apex:actionSupport event="onchange"   action="{!viewProcess}"/>
                         <apex:selectOptions value="{!statusItems}"/>        
                     </apex:selectList>
                 </div>
                 <div class="form-group col-sm-12 col-md-2">
                     <label for="approvedby">Approved By:</label>
-                    <apex:selectList value="{!selectedApprover}" multiselect="false" size="1" styleClass="form-control input-xs">
+                    <apex:selectList value="{!selectedApprover}" id="selectApprover" multiselect="false" size="1" styleClass="form-control input-xs">
                         <apex:actionSupport event="onchange"   action="{!viewProcess}"/>
                         <apex:selectOptions value="{!approvedByItems}"/>        
                     </apex:selectList>
                 </div>
                 <div class="form-group col-sm-12 col-md-2">
                     <label for="assignedto">Assigned To:</label>
-                    <apex:selectList value="{!selectedCompltedBy}" multiselect="false" size="1" styleClass="form-control input-xs">
+                    <apex:selectList value="{!selectedCompltedBy}" id="selectComplte" multiselect="false" size="1" styleClass="form-control input-xs">
                         <apex:actionSupport event="onchange"   action="{!viewProcess}"/>
                         <apex:selectOptions value="{!approvedByItems}"/>        
                     </apex:selectList>
@@ -98,7 +98,7 @@
                                 <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
                             </tr>
                             <apex:repeat value="{!approvalMap[process]}" var="process2">
-                                <apex:outputPanel rendered="{!AND(OR(selectedChapter == Null,selectedChapter == '',selectedChapter == process2.SubmittedBy.UserRole.Name),OR(process2.Status == selectedStatus,selectedStatus == Null,selectedStatus == ''),OR(if((process2.StepsandWorkItems.Size >0 && process2.StepsandWorkItems[0].Actor.Name == selectedApprover),true,false),selectedApprover == '' ,selectedApprover ==Null),OR(if((process2.StepsandWorkItems.Size >0 && process2.StepsandWorkItems[0].OriginalActor.Name == selectedApprover),true,false),selectedCompltedBy == '' ,selectedCompltedBy == Null))}" layout="none">  
+                                <apex:outputPanel rendered="{!AND(OR(selectedChapter == Null,selectedChapter == '',selectedChapter == process2.SubmittedBy.UserRole.Name),OR(process2.Status == selectedStatus,selectedStatus == Null,selectedStatus == ''),OR(if((process2.StepsandWorkItems.Size >0 && process2.StepsandWorkItems[0].Actor.Name == selectedApprover),true,false),selectedApprover == '' ,selectedApprover ==Null),OR(if((process2.StepsandWorkItems.Size >0 && process2.StepsandWorkItems[0].OriginalActor.Name == selectedCompltedBy ),true,false),selectedCompltedBy == '' ,selectedCompltedBy == Null))}" layout="none">  
                                     <tr>   
                                         <td><label style="display:none">{!process}</label></td>
                                         <td>{!IF(CONTAINS(process2.SubmittedBy.UserRole.Name, 'Make'),LEFT(process2.SubmittedBy.UserRole.Name, LEN(process2.SubmittedBy.UserRole.Name)-13),'Make-A-Wish '+LEFT(process2.SubmittedBy.UserRole.Name,LEN(process2.SubmittedBy.UserRole.Name)-9))}</td>
@@ -111,16 +111,16 @@
                                             <td>{!step.OriginalActor.Name}</td>             
                                         </apex:repeat>  
                                         <td>
-                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date">
                                                 <apex:param value="{!process2.CreatedDate}"/>
                                             </apex:outputText>
                                         </td>                            
                                         <td>
-                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date1">
                                                 <apex:param value="{!process2.completedDate}"/>
                                             </apex:outputText>
                                         </td>                               
-                                        <td><apex:outputtext value="{!If(Contains(process2.TargetObject.type,'__c'),SUBSTITUTE(LEFT(process2.TargetObject.type, LEN(process2.TargetObject.type)-3),'_',' '),process2.TargetObject.type)}" /></td>
+                                        <td><apex:outputtext value="{!If(Contains(process2.TargetObject.type,'__c'),SUBSTITUTE(LEFT(process2.TargetObject.type, LEN(process2.TargetObject.type)-3),'_',' '),process2.TargetObject.type)}" id="process2targetobj" /></td>
                                     </tr>
                                 </apex:outputPanel>
                                 

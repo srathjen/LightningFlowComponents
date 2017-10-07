@@ -118,6 +118,9 @@
         <field>Lead.PD_Condition_Description__c</field>
     </columns>
     <columns>
+        <field>Lead.PD_ICD_Code__c</field>
+    </columns>
+    <columns>
         <field>Lead.Any_medical_reason_for_moving_quickly__c</field>
     </columns>
     <columns>
@@ -147,13 +150,15 @@
     <filter>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
-            <operator>notEqual</operator>
-            <value>arizona</value>
+            <isUnlocked>true</isUnlocked>
+            <operator>contains</operator>
+            <value>illinois</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
@@ -174,8 +179,6 @@
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
         <dateColumn>CREATED_DATE</dateColumn>
-        <endDate>2017-08-31</endDate>
         <interval>INTERVAL_CUSTOM</interval>
-        <startDate>2017-07-01</startDate>
     </timeFrameFilter>
 </Report>

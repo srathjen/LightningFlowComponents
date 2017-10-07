@@ -128,7 +128,7 @@ public class ContactTrigger_AT_Test{
         insert newAcc; 
         
         Account chapterAcc=OrientationandTrainingUtil.createchapterAccount();
-         ICD_Codes__c  newICD = new ICD_Codes__c ();
+        ICD_Codes__c  newICD = new ICD_Codes__c ();
         newICD.Name = 'c00';
         insert newICD;
         Contact newCon = new Contact();
@@ -321,14 +321,15 @@ public class ContactTrigger_AT_Test{
     }
     
     public testmethod static void  updateRelationship(){
+        Test.startTest();
         Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
+        Contact wishchildCon = OrientationandTrainingUtil.CreateWishChildCon();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c  newRelationShip= OrientationandTrainingUtil.CreateRelationshipRec(childCon.Id,childFamily.Id); 
         childFamily.Relationship__c = 'Brother';
         childFamily.Email = 'Test@msil.com';
         Update childFamily;
-        
-        Contact wishchildCon = OrientationandTrainingUtil.CreateWishChildCon();
+        Test.stopTest();
         Contact wishchildFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c   relationship = new npe4__Relationship__c();
         newRelationShip.Parent_Legal_Guardian__c = True;

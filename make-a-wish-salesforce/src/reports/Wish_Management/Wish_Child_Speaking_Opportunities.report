@@ -66,36 +66,43 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Granted,Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Contact.Medical_Professional,Contact.Volunteer_Contact,Contact.Wish_Family,Contact.Board_Member</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.End_Date__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>greaterOrEqual</operator>
             <value>1/1/2014</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Rush__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>

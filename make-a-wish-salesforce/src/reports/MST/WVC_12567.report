@@ -27,16 +27,19 @@
     <filter>
         <criteriaItems>
             <column>Case$RecordType</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case$Status</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Ready to Assign</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Volunteer_Roles__r$Role__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish Granter</value>
         </criteriaItems>

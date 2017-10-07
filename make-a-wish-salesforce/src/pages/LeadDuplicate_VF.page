@@ -113,7 +113,8 @@
      });
     
     if(!bool)
-       alert('Please select atleast one Wish Family/Medical Professional to Diagnosis Verification.');
+        alert('Please select at least one Wish Family/Medical Professional contact.');
+        //alert('Please select at least one Wish Family/Medical Professional to Diagnosis Verification.');
     
     
     return bool;     

@@ -12,7 +12,7 @@ global class InKindReimbursementApproval{
         list<In_Kind_Donation_Reimbursement_File__c> attchmentList = [SELECT ID,Name,Parent__c,Parent__r.Documentation__c from In_Kind_Donation_Reimbursement_File__c WHERE Parent__c =: inKindId Limit 1];
         string message;
         if(approvalList.size()>0){
-            message = 'This record already in approval process,you cannot submit once again';
+            message = 'This record has already been submitted for approval and cannot be submitted again.';
         }
         else if(( inkindList[0].Documentation__c == 'Will Attach' && attchmentList.size() >0 ) || (inkindList[0].Documentation__c == 'Not available' &&  attchmentList.size() >0) ||
            (inkindList[0].Documentation__c == 'Not available' &&  attchmentList.size() == 0) || ( inkindList[0].Documentation__c == 'Attached' && attchmentList.size() >0 ) )
@@ -25,7 +25,7 @@ global class InKindReimbursementApproval{
             req.setSkipEntryCriteria(true);
             if(!Test.IsRunningTest())
             Approval.ProcessResult result = Approval.process(req);
-            message = 'Record was successfully submited for approval';
+            message = 'Record was successfully submitted for approval';
         }
         else if((inkindList[0].Documentation__c == 'Will Attach' || inkindList[0].Documentation__c == 'Attached' ) && attchmentList.size() == 0){
             message = 'Please attach all In-kind receipts or documentation below or select Documentation as Not Available.';
@@ -40,7 +40,7 @@ global class InKindReimbursementApproval{
         list<In_Kind_Donation_Reimbursement_File__c> attchmentList = [SELECT ID,Name,Parent__c,Parent__r.Documentation__c from In_Kind_Donation_Reimbursement_File__c WHERE Parent__c =: inKindId Limit 1];
         string message;
         if(approvalList.size()>0){
-            message = 'This record already in approval process,you cannot submit once again';
+            message = 'This record has already been submitted for approval and cannot be submitted again.';
         }
         else if(( inkindList[0].Documentation__c == 'Will Attach' && attchmentList.size() >0 ) || (inkindList[0].Documentation__c == 'Not available' &&  attchmentList.size() >0) ||
            (inkindList[0].Documentation__c == 'Not available' &&  attchmentList.size() == 0) || ( inkindList[0].Documentation__c == 'Attached' && attchmentList.size() >0 ) )
@@ -53,7 +53,7 @@ global class InKindReimbursementApproval{
             req.setSkipEntryCriteria(true);
             if(!Test.IsRunningTest())
             Approval.ProcessResult result = Approval.process(req); 
-            message = 'Record was successfully submited for approval';
+            message = 'Record was successfully submitted for approval';
         }
         else if((inkindList[0].Documentation__c == 'Will Attach' || inkindList[0].Documentation__c == 'Attached' ) && attchmentList.size() == 0){
             message = 'Please attach all In-kind receipts or documentation below or select Documentation as Not Available.';

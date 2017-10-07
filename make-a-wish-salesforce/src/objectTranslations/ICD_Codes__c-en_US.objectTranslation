@@ -38,6 +38,10 @@
         <name>Short_Description__c</name>
     </fields>
     <fields>
+        <label><!-- Skip Medical Question --></label>
+        <name>Skip_Medical_Question__c</name>
+    </fields>
+    <fields>
         <label><!-- Valid For Wish --></label>
         <name>Valid_For_Wish__c</name>
     </fields>

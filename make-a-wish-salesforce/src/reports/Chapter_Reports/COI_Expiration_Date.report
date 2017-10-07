@@ -22,6 +22,7 @@
     <filter>
         <criteriaItems>
             <column>Conflict_Of_Interest__c$Volunteer_Contact__c.is_Active_Volunteer__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

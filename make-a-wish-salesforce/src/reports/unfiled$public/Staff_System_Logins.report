@@ -48,6 +48,7 @@
     <filter>
         <criteriaItems>
             <column>PROFILE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>program staff,volunteer staff</value>
         </criteriaItems>

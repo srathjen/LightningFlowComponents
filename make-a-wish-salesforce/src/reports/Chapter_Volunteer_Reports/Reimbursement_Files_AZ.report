@@ -99,11 +99,13 @@
     <filter>
         <criteriaItems>
             <column>Case.In_Kind_Donation_Reimbursement__r$RecordType</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>In_Kind_Donation_Reimbursement__c.Reimbursement</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.In_Kind_Donation_Reimbursement__r$Approved_Date__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>greaterOrEqual</operator>
             <value>LAST_N_DAYS:7</value>
         </criteriaItems>

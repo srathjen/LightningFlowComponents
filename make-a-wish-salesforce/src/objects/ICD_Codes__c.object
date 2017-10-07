@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -130,6 +126,15 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Skip_Medical_Question__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field determines whether the medical questions need to be asked</description>
+        <externalId>false</externalId>
+        <label>Skip Medical Question</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Valid_For_Wish__c</fullName>

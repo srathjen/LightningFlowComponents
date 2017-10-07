@@ -45,21 +45,25 @@
     <filter>
         <criteriaItems>
             <column>Case.Wish_Type__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Celebrity-International Travel,Sports-Domestic Travel,Sports-International Travel</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Current_Age__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>8,9,10</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Start_Date__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>greaterOrEqual</operator>
             <value>4/10/2015</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.npsp__Deceased__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>

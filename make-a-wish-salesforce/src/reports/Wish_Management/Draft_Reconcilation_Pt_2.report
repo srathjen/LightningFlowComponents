@@ -19,6 +19,12 @@
         <field>OWNER</field>
     </columns>
     <columns>
+        <field>Contact.Non_Verbal__c</field>
+    </columns>
+    <columns>
+        <field>Contact.Language__c</field>
+    </columns>
+    <columns>
         <field>BIRTHDATE</field>
     </columns>
     <columns>
@@ -26,9 +32,6 @@
     </columns>
     <columns>
         <field>Case.Wish_Assist__c</field>
-    </columns>
-    <columns>
-        <field>Contact.Language__c</field>
     </columns>
     <columns>
         <field>CONTACT2.CITY</field>
@@ -64,18 +67,33 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Granted,Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>Nemo Clownfish</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notEqual</operator>
+            <value>1</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>

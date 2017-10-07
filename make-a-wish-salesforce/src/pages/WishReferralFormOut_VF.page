@@ -338,7 +338,7 @@
                                 </div>
                                 <div class="divTableRow">
                                     <div class="divTableCell">ICD Code:</div>
-                                    <div class="divTableCell">{!currLead.PD_ICD_Code__c }</div>
+                                    <div class="divTableCell">{!currLead.PD_ICD_Code__r.Name }</div>
                                 </div>
                                 <div class="divTableRow">
                                     <div class="divTableCell">Is there a medical reason why we need to move quickly?</div>

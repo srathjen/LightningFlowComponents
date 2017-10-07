@@ -175,6 +175,7 @@
     <filter>
         <criteriaItems>
             <column>Lead.Migrated_Record__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

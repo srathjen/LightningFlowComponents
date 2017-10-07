@@ -29,10 +29,10 @@ public class DelegatedApproverController_AC{
        chapterItems.add(new SelectOption('','--Select--'));
        statusItems = new List<SelectOption>();
        statusItems.add(new SelectOption('','--Select--'));
-       statusItems.add(new SelectOption('Pending','Pending'));
        statusItems.add(new SelectOption('Approved','Approved'));
-       statusItems.add(new SelectOption('Rejected','Rejected'));
-       
+       statusItems.add(new SelectOption('Pending','Pending'));       
+       statusItems.add(new SelectOption('Rejected','Rejected'));   
+       statusItems.sort();    
        approvalMap = new Map<String,List<ProcessInstance>>();
        
        //This get all chapter name from custom setting.
@@ -43,7 +43,7 @@ public class DelegatedApproverController_AC{
        chapterItems.sort();
        
        for(ProcessInstance process : [SELECT Id,status,ProcessDefinition.Name,TargetObject.Name,SubmittedBy.userRole.Name,TargetObject.Type,CreatedBy.Name,SubmittedBy.Account.Name,SubmittedBy.Name,completedDate,CreatedDate
-                                            , (SELECT Id,Actor.Name,OriginalActor.Name,ActorId FROM StepsandWorkItems order by Id desc LIMIT 1)FROM ProcessInstance Order by CreatedDate Desc LIMIT 1000]){
+                                            , (SELECT Id,Actor.Name,OriginalActor.Name,ActorId FROM StepsandWorkItems order by Id desc LIMIT 1)FROM ProcessInstance WHERE ProcessDefinition.Name != 'KBWorkflow' Order by CreatedDate Desc LIMIT 10000]){
                  
             if(approvalMap.containsKey(process.ProcessDefinition.Name))
                 approvalMap.get(process.ProcessDefinition.Name).add(process);
@@ -65,11 +65,15 @@ public class DelegatedApproverController_AC{
              
              
         }
+        approvedByItems.sort();
+        processItems.Sort();
    
     }
     
     public void viewProcess(){
         
+        
+      
             
         /*    String Query ='SELECT Id,status,ProcessDefinition.Name,TargetObject.Name,SubmittedBy.userRole.Name,TargetObject.Type,CreatedBy.Name,SubmittedBy.Account.Name,SubmittedBy.Name,completedDate,CreatedDate,(SELECT Id,Actor.Name,ActorId FROM StepsandWorkItems)FROM ProcessInstance';
                                             

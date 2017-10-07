@@ -69,16 +69,19 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish Determined,Budget Approval - Submitted,Budget Approval - Approved,Wish Design,Wish Scheduled,Hold,Inactive</value>
         </criteriaItems>
         <criteriaItems>
             <column>CREATED_ALIAS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>iuser</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>

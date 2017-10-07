@@ -38,6 +38,9 @@
         <field>Case.Referral_Date__c</field>
     </columns>
     <columns>
+        <field>Case.Qualified_Date__c</field>
+    </columns>
+    <columns>
         <field>Case.Ready_to_Assign_Date__c</field>
     </columns>
     <columns>
@@ -77,31 +80,37 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Wish Design,Wish Scheduled,Budget Approval - Submitted,Budget Approval - Approved,Hold,Inactive</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Contact.Medical_Professional,Contact.Volunteer_Contact,Contact.Wish_Family,Contact.Board_Member</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>

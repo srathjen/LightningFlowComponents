@@ -7,6 +7,7 @@ Description : This util acts as a constant class for having record type values o
 
 Public Class Constant_AC {
     Public String contactWishChildRT;
+    Public String inKindAccount;
     Public String wishDeterminationRT;
     public String wishPlanningAnticipationRT;
     public string wishAssistRT;
@@ -48,6 +49,7 @@ Public Class Constant_AC {
     public String registeredNonWish;
     public String volunteerTaskRT;
     public String staffTaskRT;
+    public String selfBased;
     public Constant_AC() {
         staffTaskRT = 'Staff';
         volunteerTaskRT = 'Volunteer';
@@ -91,5 +93,7 @@ Public Class Constant_AC {
         updateContactRT = 'Contact Updates';
         registeredWish  = 'Volunteer Registered Wish';
         registeredNonWish = 'Volunteer Registered Non Wish';
+        selfBased ='Virtual - Self Paced';
+        inKindAccount = 'In Kind Donors';
     }
 }

@@ -45,11 +45,13 @@
     <filter>
         <criteriaItems>
             <column>Contact$is_Active_Volunteer__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Volunteer_Opportunities__r$Wish__c.CaseNumber</column>
+            <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>

@@ -251,7 +251,7 @@ Public class TaskTrigger_Test {
     //Availability Time Check
     static testmethod void AvailabilityTimeCheck() {
         Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
-        Task availabilityTask = new Task(Confirmed_Date__c = null, Availability_Time_Other1__c = 'Test', Available_Time1__c = 'Other1', WhatId = parentCaseInfo.Id, Availability_Time_Other2__c = 'Test', Available_Time2__c = 'Other1', Availability_Time_Other3__c = 'Test', Available_Time3__c = 'Other1');
+        Task availabilityTask = new Task(Confirmed_Date__c = null, Subject = 'Sample', Availability_Time_Other1__c = 'Test', Available_Time1__c = 'Other1', WhatId = parentCaseInfo.Id, Availability_Time_Other2__c = 'Test', Available_Time2__c = 'Other1', Availability_Time_Other3__c = 'Test', Available_Time3__c = 'Other1');
         insert availabilityTask;
         Task updateTask = new Task(Id = availabilityTask.Id, Confirmed_Date__c = Date.today());
         try {
@@ -263,7 +263,7 @@ Public class TaskTrigger_Test {
     //Availability Time Check
     static testmethod void ConfirmedDateAsNull() {
         Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
-        Task availabilityTask = new Task(Confirmed_Date__c = Date.today(), Availability_Time_Other1__c = 'Test', Available_Time1__c = 'Other', WhatId = parentCaseInfo.Id, Availability_Time_Other2__c = 'Test', Available_Time2__c = 'Other', Availability_Time_Other3__c = 'Test', Available_Time3__c = 'Other');
+        Task availabilityTask = new Task(Confirmed_Date__c = Date.today(), Availability_Time_Other1__c = 'Test', Subject = 'Sample',Available_Time1__c = 'Other', WhatId = parentCaseInfo.Id, Availability_Time_Other2__c = 'Test', Available_Time2__c = 'Other', Availability_Time_Other3__c = 'Test', Available_Time3__c = 'Other');
         insert availabilityTask;
         Task updateTask = new Task(Id = availabilityTask.Id, Confirmed_Date__c = null, Confirmed_Time__c = '3:30');
         try {
@@ -275,7 +275,7 @@ Public class TaskTrigger_Test {
     //Availability Time Check
     static testmethod void ConfirmedDateLesseThanToday() {
         Case parentCaseInfo = [SELECT Id FROM Case LIMIT 1];
-        Task availabilityTask = new Task(Confirmed_Date__c = Date.today(), Availability_Time_Other1__c = 'Test', Available_Time1__c = 'Other', WhatId = parentCaseInfo.Id, Availability_Time_Other2__c = 'Test', Available_Time2__c = 'Other', Availability_Time_Other3__c = 'Test', Available_Time3__c = 'Other');
+        Task availabilityTask = new Task(Confirmed_Date__c = Date.today(), Availability_Time_Other1__c = 'Test', Subject = 'Sample',Available_Time1__c = 'Other', WhatId = parentCaseInfo.Id, Availability_Time_Other2__c = 'Test', Available_Time2__c = 'Other', Availability_Time_Other3__c = 'Test', Available_Time3__c = 'Other');
         insert availabilityTask;
         Task updateTask = new Task(Id = availabilityTask.Id, Confirmed_Date__c = Date.today().addDays(-3), Confirmed_Time__c = '3:30');
         try {
@@ -312,5 +312,18 @@ Public class TaskTrigger_Test {
         Task closeTask = new Task(Id = conceptTask.Id);
         closeTask.Status = 'Completed';
         update closeTask;
+    }
+    
+    //Affiliation Status Change
+    static testmethod void UpdateAffiliationStatus() {
+        Constant_AC constant = new Constant_AC();
+        Id taskInterviewRecordType = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
+        Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        Contact volunteerContact = [SELECT Id FROM Contact WHERE RecordTypeId =: volunteerRecordTypeId LIMIT 1];
+        npe5__Affiliation__c neworgAffiliation = OrientationandTrainingUtil.CreateAffiliation(volunteerContact.Id);
+        Task referralDNQTask = new Task(Subject = 'Background Check', Status = 'New', RecordTypeId = taskInterviewRecordType, WhoId = volunteerContact.Id);
+        insert referralDNQTask;
+        Task updateToCloseStatus = new Task(Id = referralDNQTask.Id, Status = 'Approved');
+        update updateToCloseStatus;
     }
 }

@@ -38,17 +38,21 @@ public class VolunteerActivities_AC {
         Map<Id,Id> wishContactIdMap = new Map<Id, Id>();
         Set<Id> wishGranterIdSet = new Set<Id>();
         List<Task> openActivities = new List<Task>();
+        
         for(Volunteer_Opportunity__c vollOppInfo : [SELECT Id, Role__c, Wish__c, Volunteer_Name__c FROM Volunteer_Opportunity__c WHERE Status__c = 'Approved' AND Volunteer_Name__c =: currentUserRelatedContactId AND Wish__r.isClosed = false]) {
             if(vollOppInfo.Role__c == 'Wish Granter' || vollOppInfo.Role__c == 'Wish Granter Mentor') {
                 wishGranterIdSet.add(vollOppInfo.Wish__c);
             }
             wishContactIdMap.put(vollOppInfo.Volunteer_Name__c, vollOppInfo.Wish__c);
         }
-        for(Task getOpenTask : [SELECT Id, WhatId, Owner.Name, What.Type, WhoId, Subject, ActivityDate, OwnerId, Status FROM Task WHERE isClosed = false AND (WhatId IN : wishGranterIdSet OR OwnerId =: volunteerUserId ) ORDER BY CreatedDate DESC]) {
+        
+        for(Task getOpenTask : [SELECT Id, WhatId, Owner.Name, What.Type, WhoId, Subject, ActivityDate, OwnerId, Status FROM Task WHERE isClosed = false AND (WhatId IN : wishGranterIdSet OR OwnerId =: volunteerUserId ) AND ActivityDate != null ORDER BY CreatedDate DESC]) {
             openActivities.add(getOpenTask);
         }
+        
         //List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status != \'Completed\' AND OwnerId =:volunteerUserId ORDER BY CreatedDate DESC');
         //List<Task> openActivities = Database.Query('SELECT Id, WhatId, Owner.Name, What.Type, WhoId, Subject, ActivityDate, OwnerId, Status FROM Task WHERE Status != \'Completed\' ORDER BY CreatedDate DESC');
+        
         if(openActivities.size() > 0) {
             for(Task checkType : openActivities) {
                 if(checkType.what.Type == 'Case') {
@@ -61,6 +65,7 @@ public class VolunteerActivities_AC {
                     volunteerOpportunityIdSet.add(checkType.WhatId);
                 }
             }
+            
             Map<Id, Id> caseSubMap = new Map<Id, Id>();
             
             if(volunteerOpportunityIdSet.size() > 0) {
@@ -78,7 +83,6 @@ public class VolunteerActivities_AC {
                 }
             }
             
-            
             if(nonWishAndEvents.size() > 0) {
                 for(Non_Wish_Events__c getRecordType : [SELECT Id, Event_Name__c, RecordTypeId, RecordType.Name FROM Non_Wish_Events__c WHERE Id IN : nonWishAndEvents]) {
                     eventTypeMap.put(getRecordType.Id, getRecordType.RecordType.Name);
@@ -92,10 +96,7 @@ public class VolunteerActivities_AC {
                 }
             }
             
-            
-            
             for(Task taskTypeNameMerge : openActivities) {
-                
                 OpenActivitiesWrapper mergeInfoWithTask = new OpenActivitiesWrapper();
                 mergeInfoWithTask.volunteerTask = taskTypeNameMerge;
                 if(taskTypeNameMerge.WhatId != null) {
@@ -128,27 +129,27 @@ public class VolunteerActivities_AC {
         Set<Id> wishTypeTaskSet = new Set<Id>();
         Set<Id> nonWishAndEvents = new Set<Id>();
         Set<Id> volunteerOpportunityIdSet = new Set<Id>();
-        
         Map<Id,String> eventTypeMap = new Map<Id, String>();
-        
         Map<Id, String> eventNameMap = new Map<Id, String>();
         Map<Id, String> wishNameMap = new Map<Id, String>();
-        
         Map<Id,Id> wishContactIdMap = new Map<Id, Id>();
         Set<Id> wishGranterIdSet = new Set<Id>();
         List<Task> openActivities = new List<Task>();
+        
         for(Volunteer_Opportunity__c vollOppInfo : [SELECT Id, Role__c, Wish__c, Volunteer_Name__c FROM Volunteer_Opportunity__c WHERE Status__c = 'Approved' AND Volunteer_Name__c =: currentUserRelatedContactId]) {
             if(vollOppInfo.Role__c == 'Wish Granter' || vollOppInfo.Role__c == 'Wish Granter Mentor') {
                 wishGranterIdSet.add(vollOppInfo.Wish__c);
             }
             wishContactIdMap.put(vollOppInfo.Volunteer_Name__c, vollOppInfo.Wish__c);
         }
+        
         for(Task getOpenTask : [SELECT Id, WhatId, Owner.Name, What.Type, WhoId, Subject, ActivityDate, OwnerId, Status FROM Task WHERE isClosed = true AND (WhatId IN : wishGranterIdSet OR OwnerId =: volunteerUserId ) ORDER BY LastModifiedDate DESC]) {
             openActivities.add(getOpenTask);
         }
         
         //List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, WhoId, Subject, ActivityDate, Status FROM Task WHERE Status = \'Completed\' AND OwnerId =:volunteerUserId');
         //List<Task> openActivities = Database.Query('SELECT Id, WhatId, What.Type, Owner.Name, WhoId, Subject, OwnerId,ActivityDate, Status FROM Task WHERE Status = \'Completed\' ORDER BY LastModifiedDate DESC'); 
+        
         if(openActivities.size() > 0) {
             for(Task checkType : openActivities) {
                 if(checkType.what.Type == 'Case') {
@@ -161,6 +162,7 @@ public class VolunteerActivities_AC {
                     volunteerOpportunityIdSet.add(checkType.WhatId);
                 }
             }
+            
             Map<Id, Id> caseSubMap = new Map<Id, Id>();
             
             if(volunteerOpportunityIdSet.size() > 0) {
@@ -219,7 +221,14 @@ public class VolunteerActivities_AC {
     
     //This method is used to close the task when the volunteer try to close the task from the My Task page
     public void closeTask() {
-        FutureHandler.UpdateTask(taskId);
+        //FutureHandler.UpdateTask(taskId);
+        //long now = datetime.now().gettime();
+        //while(datetime.now().gettime()-now<60000); // Busy loop for 6000 ms
+        List<Task> taskList = [SELECT Id FROM Task WHERE Id =: taskId];
+        if(taskList.size() > 0) {
+            taskList[0].Status = 'Completed';
+            update taskList;
+        }
     }
     
     //Wrapper class for open activities

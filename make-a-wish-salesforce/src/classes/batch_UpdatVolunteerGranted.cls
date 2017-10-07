@@ -6,7 +6,7 @@ global class batch_UpdatVolunteerGranted implements Database.Batchable<Aggregate
      global Iterable<AggregateResult> start(Database.BatchableContext bc){ 
      
          list<AggregateResult> volunteerOppList = [SELECT Volunteer_Name__c FROM Volunteer_Opportunity__c
-                                 where Wish__c != Null and Volunteer_Name__c !=Null AND Migrated_Record__c = True 
+                                 where Wish__c != Null and Volunteer_Name__c !=Null 
                                  group by Volunteer_Name__c];
         
          return volunteerOppList;                      
@@ -27,7 +27,7 @@ global class batch_UpdatVolunteerGranted implements Database.Batchable<Aggregate
            Map<Id,integer> grantedCount = new Map<Id,integer>();
            Map<Id,integer> activeCount = new Map<Id,integer>();
            for(Volunteer_Opportunity__c currRec : [SELECT Id,Wish__c, Wish__r.Status,Wish__r.isClosed,Volunteer_Name__c FROM Volunteer_Opportunity__c
-                                                   WHERE Wish__c != Null AND Migrated_Record__c = True AND
+                                                   WHERE Wish__c != Null AND (Status__c= 'Approved' OR Status__c= 'Completed') AND
                                                    ((Wish__r.Status='Granted' OR wish__r.isClosed=True OR wish__r.status='Completed') OR (Wish__r.Status != 'Granted' 
                                                    AND Wish__r.isClosed=false 
                                                    AND Wish__r.Status != 'inActive'))

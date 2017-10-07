@@ -249,70 +249,12 @@
         <name>Migrated_Record__c</name>
     </fields>
     <fields>
-        <name>Priority</name>
-        <picklistValues>
-            <masterLabel>High</masterLabel>
-            <translation><!-- High --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Low</masterLabel>
-            <translation><!-- Low --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Normal</masterLabel>
-            <translation><!-- Normal --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <label><!-- Recurring Frequency --></label>
         <name>Recurring_Frequency__c</name>
     </fields>
     <fields>
         <label><!-- Sort Order --></label>
         <name>Sort_Order__c</name>
-    </fields>
-    <fields>
-        <name>Status</name>
-        <picklistValues>
-            <masterLabel>Abandoned</masterLabel>
-            <translation><!-- Abandoned --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Approved</masterLabel>
-            <translation><!-- Approved --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Completed</masterLabel>
-            <translation><!-- Completed --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Declined</masterLabel>
-            <translation><!-- Declined --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Deferred</masterLabel>
-            <translation><!-- Deferred --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>In Progress</masterLabel>
-            <translation><!-- In Progress --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Not Started</masterLabel>
-            <translation><!-- Not Started --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Rescheduled</masterLabel>
-            <translation><!-- Rescheduled --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Scheduled</masterLabel>
-            <translation><!-- Scheduled --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Waiting on someone else</masterLabel>
-            <translation><!-- Waiting on someone else --></translation>
-        </picklistValues>
     </fields>
     <fields>
         <label><!-- System Generated Task --></label>

@@ -25,7 +25,7 @@ Public Class WishReferralFormOut_AC {
                   Other_Medical_Provider_Category__c,Sibling_Detail__c, Any_medical_reason_for_moving_quickly__c ,What_is_the_family_s_primary_spoken_lang__c, Referrer_FirstName__c,
                   Street, Email, Has_this_child_ever_received_prior_wish__c, Referrer_City__c, Referrer_Zip__c, Referrer_Last_Name__c,Title, Hospital_Treatment_Facility_Treating__c,
                   Referrer_Phone__c, Referrer_Email__c,FirstName, City, State, Country, Child_Middle_Initial__c, LastName, DOB__c, PostalCode, Gender__c, Parent_First_Name__c,
-                  Parent_Last_Name__c, Phone, Childs_Qualifying_Diagnosis__c,PD_ICD_Code__c, Treating_Medical_Professional_First_Name__c, Treating_Medical_Professional_Last_Name__c,
+                  Parent_Last_Name__c, Phone, Childs_Qualifying_Diagnosis__c,PD_ICD_Code__c, PD_ICD_Code__r.Name,Treating_Medical_Professional_First_Name__c, Treating_Medical_Professional_Last_Name__c,
                   Medical_Professional_Phone__c, Treating_Medical_Professional_Fax__c, Treating_Medical_Professional_Email__c, ChapterName__r.Id,is_Family_Aware_of_Referral__c,
                   Medical_Professional_First_Name__c,Medical_Professional_Last_Name__c,Medical_Professional_Email__c,Additional_Parent_Relationship_to_Child__c,Additional_Parent_First_Name__c,
                   Additional_Parent_Last_Name__c,Additional_Parent_Street__c,Additional_Parent_City__c,Additional_Parent_State__c,Additional_Parent_Postal_Code__c,Additional_Parent_Phone__c,
@@ -122,7 +122,7 @@ Public Class WishReferralFormOut_AC {
         csv += ',' + currLead.Medical_Provider_Category__c+','+currLead.Referrer_FirstName__c+' '+currLead.Referrer_Last_Name__c+','+currLead.CreatedDate;
         csv += ',' + currLead.Referrer_Phone__c+','+currLead.Referrer_Email__c+','+currLead.Referrer_City__c+','+currLead.Referrer_Zip__c;
         csv += ',' + currLead.Parent_First_Name__c+' '+currLead.Parent_Last_Name__c+','+currLead.Street+','+currLead.City+','+currLead.State+','+currLead.PostalCode+','+currLead.Email;
-        csv += ',' + currLead.Phone+','+currLead.What_is_the_family_s_primary_spoken_lang__c+','+currLead.of_Siblings__c+','+currLead.PD_Condition_Description__c+','+currLead.PD_ICD_Code__c;
+        csv += ',' + currLead.Phone+','+currLead.What_is_the_family_s_primary_spoken_lang__c+','+currLead.of_Siblings__c+','+currLead.PD_Condition_Description__c+','+currLead.PD_ICD_Code__r.Name;
         csv += ',' + currLead.Any_medical_reason_for_moving_quickly__c+','+currLead.Treating_Medical_Professional_First_Name__c+' '+currLead.Treating_Medical_Professional_Last_Name__c;
         csv += ',' + currLead.Treating_Medical_Professional_Email__c+','+currLead.Treating_Medical_Professional_Phone__c+','+currLead.Hospital_Treatment_Facility_Treating__c; */
         
@@ -151,7 +151,7 @@ Public Class WishReferralFormOut_AC {
         csv += ','+currLead.Referrer_Phone__c+','+currLead.Referrer_Email__c+','+currLead.Referrer_City__c+','+currLead.Referrer_Zip__c;
         //csv += ','+currLead.PD_Condition_Description__c+','+currLead.PD_ICD_Code__c +',' + currLead.Any_medical_reason_for_moving_quickly__c+',' + currLead.Medical_Professional_First_Name__c+' '+currLead.Medical_Professional_Last_Name__c;
         //csv += ','+currLead.Medical_Professional_Email__c+','+currLead.Medical_Professional_Phone__c+','+currLead.Medical_Provider_Category__c+','+currLead.Hospital_Treatment_Facility_Treating__c;
-        csv += ','+currLead.PD_Condition_Description__c +','+currLead.PD_ICD_Code__c+',' + currLead.Any_medical_reason_for_moving_quickly__c+',' + currLead.Treating_Medical_Professional_First_Name__c+' '+currLead.Treating_Medical_Professional_Last_Name__c;
+        csv += ','+currLead.PD_Condition_Description__c +','+currLead.PD_ICD_Code__r.Name+',' + currLead.Any_medical_reason_for_moving_quickly__c+',' + currLead.Treating_Medical_Professional_First_Name__c+' '+currLead.Treating_Medical_Professional_Last_Name__c;
         csv += ','+currLead.Treating_Medical_Professional_Email__c+','+currLead.Treating_Medical_Professional_Phone__c+','+currLead.Medical_Provider_Category__c+','+currLead.Hospital_Treatment_Facility_Treating__c;
         csv += ','+currLead.FirstName+' '+ currLead.Child_Middle_Initial__c+' '+currLead.LastName+','+currLead.Gender__c+','+currLead.DOB__c+','+ currLead.Has_this_child_ever_received_prior_wish__c;
         csv += ','+currLead.Parent_First_Name__c+' '+currLead.Parent_Last_Name__c+','+currLead.Street+','+currLead.City+','+currLead.State+','+currLead.PostalCode+','+currLead.Email;

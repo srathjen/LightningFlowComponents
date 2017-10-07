@@ -1,7 +1,7 @@
 <!-- ************************************************************************************************************************************
 Description : This page is used to display volunteer Open and Closed task list
 ************************************************************************************************************************************** -->
-<apex:page controller="VolunteerActivities_AC" sidebar="false" showHeader="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="false" readOnly="true">
+<apex:page controller="VolunteerActivities_AC" sidebar="false" showHeader="false" applyBodyTag="false" docType="html-5.0" standardStylesheets="false" cache="false">
     <apex:stylesheet value="{!URLFOR($Resource.prospective_assets, 'web/css/lib/jquery.dataTables.min.css')}"/>
     <apex:include pageName="prospective_head" id="phead" />
     <style type="text/css">
@@ -87,7 +87,7 @@ Description : This page is used to display volunteer Open and Closed task list
                                                         <td>{!openAct.volunteerTask.Subject}</td>
                                                         <td>{!openAct.volunteerTask.Status}</td>
                                                         <td>
-                                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date1">
                                                                 <apex:param value="{!openAct.volunteerTask.ActivityDate}"/>
                                                             </apex:outputText>
                                                         </td>
@@ -97,12 +97,24 @@ Description : This page is used to display volunteer Open and Closed task list
                                                 </apex:repeat>
                                             </tbody>
                                         </table>
-                                        <apex:actionFunction name="closeTask" action="{!closeTask}" reRender="None" oncomplete="RedirectToPage();">
+                                        <apex:actionFunction name="closeTask" action="{!closeTask}" reRender="ssss" oncomplete="RedirectToPage();" status="status">
                                             <apex:param name="taskId1" value="{!taskId}" assignTo="{!taskId}"/>
                                         </apex:actionFunction>
                                     </apex:pageBlock>
                                 </div>
                                 
+                                <apex:outputPanel id="ssss">
+                                    <apex:actionStatus id="status">
+                                        <apex:facet name="start">
+                                            <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: black;">
+                                                &nbsp;
+                                            </div>
+                                            <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 30% 50%">
+                                                <img src="{!URLFOR($Resource.WishReferralStyle, 'WishReferralStyle/img/loader-circle-blue.gif')}" style="background-color: white; border-radius: 10px; height:45px; padding:10px"/>
+                                            </div>
+                                        </apex:facet>
+                                    </apex:actionStatus>
+                                </apex:outputPanel>
                                 <!-------------- Volunteer open activities block Ends -------------->
                                 
                                 <!-------------- Volunteer closed activities block Starts -------------->
@@ -128,7 +140,7 @@ Description : This page is used to display volunteer Open and Closed task list
                                                         <td>{!closeAct.volunteerTask.Subject}</td>
                                                         <td>{!closeAct.volunteerTask.Status}</td>
                                                         <td>
-                                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                                            <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date2">
                                                                 <apex:param value="{!closeAct.volunteerTask.ActivityDate}"/>
                                                             </apex:outputText>
                                                         </td>
@@ -212,6 +224,7 @@ Description : This page is used to display volunteer Open and Closed task list
             },
                  function(isConfirm) {
                      if (isConfirm) {
+                         swal.close();
                          closeTask(da1);
                      } else {
                          

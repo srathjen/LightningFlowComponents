@@ -88,7 +88,15 @@ public class VolunteerLanding_AC_Test {
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
         con.Broadcast_Number__c = '1234';
         update con;
-        OrientationandTrainingUtil.createAffiliation(con.id);
+        //OrientationandTrainingUtil.createAffiliation(con.id);
+     
+        npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
+        neworgAffiliation.npe5__Contact__c  = con.Id;
+        neworgAffiliation.npe5__Organization__c = acc.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = 'Active';
+        neworgAffiliation.Constituent_code__c = 'Board Member';
+        insert neworgAffiliation;
         
         User currUser;
         System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -173,7 +181,13 @@ public class VolunteerLanding_AC_Test {
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
         con.Broadcast_Number__c = '1234';
         update con;
-        OrientationandTrainingUtil.createAffiliation(con.id);
+        npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
+        neworgAffiliation.npe5__Contact__c  = con.Id;
+        neworgAffiliation.npe5__Organization__c = acc.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = 'Active';
+        neworgAffiliation.Constituent_code__c = 'Board Member';
+        insert neworgAffiliation;
         
         User currUser;
         System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -282,7 +296,13 @@ public class VolunteerLanding_AC_Test {
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-        OrientationandTrainingUtil.createAffiliation(con.id);
+        npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
+neworgAffiliation.npe5__Contact__c  = con.Id;
+neworgAffiliation.npe5__Organization__c = acc.Id;
+neworgAffiliation.npe5__Primary__c = true;
+neworgAffiliation.npe5__Status__c = 'Active';
+neworgAffiliation.Constituent_code__c = 'Board Member';
+insert neworgAffiliation;
         
         User currUser;
         System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -320,7 +340,13 @@ public class VolunteerLanding_AC_Test {
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-        OrientationandTrainingUtil.createAffiliation(con.id);
+        npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
+        neworgAffiliation.npe5__Contact__c  = con.Id;
+        neworgAffiliation.npe5__Organization__c = acc.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = 'Active';
+        neworgAffiliation.Constituent_code__c = 'Board Member';
+        insert neworgAffiliation;
         
         User currUser;
         System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -356,7 +382,15 @@ public class VolunteerLanding_AC_Test {
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-        OrientationandTrainingUtil.createAffiliation(con.id);
+        //OrientationandTrainingUtil.createAffiliation(con.id);
+        
+        npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
+        neworgAffiliation.npe5__Contact__c  = con.Id;
+        neworgAffiliation.npe5__Organization__c = acc.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = 'Active';
+        neworgAffiliation.Constituent_code__c = 'Board Member';
+        insert neworgAffiliation;
         
         User currUser;
         System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -372,7 +406,6 @@ public class VolunteerLanding_AC_Test {
             currVal.Name = currUser.id;
             currVal.CurrentChapter__c = acc.Name;
             insert currVal;
-            
             Background_check__c currBG = OrientationandTrainingUtil.createBackgroundCheck(con.id);
             Background_check__c currBG1 = OrientationandTrainingUtil.createBackgroundCheck(con.id);
             Background_check__Share BGSharing = BGCRecordSharing(currUser.id,currBG.id);

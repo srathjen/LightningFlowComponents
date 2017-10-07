@@ -22,11 +22,13 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Migrated_Record__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>CUST_RECORDTYPE</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Volunteer_Opportunity__c.Wish</value>
         </criteriaItems>

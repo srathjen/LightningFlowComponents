@@ -25,6 +25,7 @@
     <enableNicknameDisplay>false</enableNicknameDisplay>
     <enablePrivateMessages>false</enablePrivateMessages>
     <enableReputation>false</enableReputation>
+    <enableSiteAsContainer>false</enableSiteAsContainer>
     <forgotPasswordTemplate>Automated_Volunteer_Templates/Communities_Volunteer_Forgot_Password_Email_Template</forgotPasswordTemplate>
     <navigationLinkSet>
         <navigationMenuItem>

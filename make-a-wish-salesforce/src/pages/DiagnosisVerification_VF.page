@@ -471,18 +471,18 @@ Description : This page is used to collect medical condition about wish child fr
                                         </div>
                                         <!-------------------------- Wish Not Eligible Section Block Starts ---------------------------->
                                         <apex:outputPanel id="notEligible">
-                                            <apex:outputPanel rendered="{!wishStatus != 'Qualified'}">
-                                                
-                                                <div class="form-group row">
-                                                    <div class="col-md-12"><label>Medical Summary</label></div>
-                                                    <apex:outputPanel id="attachmentSection">
-                                                        <div class="col-xs-12">
-                                                            <div class="upload-loader"></div>
-                                                            <iframe id="dvupload" name='DVMFrame' width="100%" scrolling="no" onload="resizeIframe(this)" frameborder="0" src="/apex/DVMedicalSummaryAttachment_VF?id={!currlead.Id}"></iframe>
-                                                        </div>
-                                                    </apex:outputPanel>
-                                                </div>
-                                            </apex:outputPanel>
+                                            <!-- <apex:outputPanel rendered="{!wishStatus != 'Qualified'}">-->
+                                            
+                                            <div class="form-group row">
+                                                <div class="col-md-12"><label>Medical Summary</label></div>
+                                                <apex:outputPanel id="attachmentSection">
+                                                    <div class="col-xs-12">
+                                                        <div class="upload-loader"></div>
+                                                        <iframe id="dvupload" name='DVMFrame' width="100%" scrolling="no" onload="resizeIframe(this)" frameborder="0" src="/apex/DVMedicalSummaryAttachment_VF?id={!currlead.Id}"></iframe>
+                                                    </div>
+                                                </apex:outputPanel>
+                                            </div>
+                                            <!--</apex:outputPanel>-->
                                         </apex:outputPanel>
                                         
                                         
@@ -962,6 +962,7 @@ Description : This page is used to collect medical condition about wish child fr
                                         if ($('[id$=expediteprocess]').val() != null){
                                             if ($('[id$=expediteprocess]').val().indexOf('Yes') != -1){
                                                 $('.expedite-explain').prop('hidden', false);
+                                                $(".plz-Exp").addClass("requiredField");
                                             }
                                         }
                                         // hide condition deteriorate explain textbox onload
@@ -981,6 +982,7 @@ Description : This page is used to collect medical condition about wish child fr
                                         if ($('[id$=conditiondeteriorate]').val() != null){
                                             if ($('[id$=conditiondeteriorate]').val().indexOf('Yes') != -1){
                                                 $('.condition-deteriorate-explain').prop('hidden', false);
+                                                $(".detex").addClass("requiredField");
                                             }
                                         }
                                         // set required field for multiselect (chosen)
@@ -1105,33 +1107,34 @@ Description : This page is used to collect medical condition about wish child fr
         $(document).delegate('.SS-btn','click',function(){
             var isError_Free = true;
             var myElem = document.getElementById('dvupload');
+            $('.requiredField').each(function() {
+                $(this).css('border','');
+                if($(this).val() == '' && $(this).is(":visible")){
+                    $(this).css({ "border": '#FF0000 1px solid'});
+                    swal({
+                        title: '',
+                        text: 'Please fill required fields',
+                        type: "error",
+                        confirmButtonColor: '#006bb6',
+                        timer: 3000
+                    })
+                    isError_Free = false;
+                }
+            });
+            $('.multiCom').each(function() {
+                if($(this).hasClass('requiredField')){
+                    swal({
+                        title: '',
+                        text: 'Please fill required fields',
+                        type: "error",
+                        confirmButtonColor: '#006bb6',
+                        timer: 3000
+                    })
+                    isError_Free = false;
+                }
+            });
             if (myElem === null) {
-                $('.requiredField').each(function() {
-                    $(this).css('border','');
-                    if($(this).val() == '' && $(this).is(":visible")){
-                        $(this).css({ "border": '#FF0000 1px solid'});
-                        swal({
-                            title: '',
-                            text: 'Please fill required fields',
-                            type: "error",
-                            confirmButtonColor: '#006bb6',
-                            timer: 3000
-                        })
-                        isError_Free = false;
-                    }
-                });
-                $('.multiCom').each(function() {
-                    if($(this).hasClass('requiredField')){
-                        swal({
-                            title: '',
-                            text: 'Please fill required fields',
-                            type: "error",
-                            confirmButtonColor: '#006bb6',
-                            timer: 3000
-                        })
-                        isError_Free = false;
-                    }
-                });
+                
             } else {
                 var fileContent = $('iframe[name=DVMFrame]').contents().find('.upload').val();
                 var attachmentContent = $('iframe[name=DVMFrame]').contents().find('.medAtt-size').val();
@@ -1147,7 +1150,7 @@ Description : This page is used to collect medical condition about wish child fr
                     })
                     $('.upload').css({ "border": '#FF0000 1px solid'});
                     isError_Free = false;
-                }  else if(attachmentContent != undefined) {
+                }/*  else if(attachmentContent != undefined) {
                     if(attachmentContent == 0) {
                         $('iframe[name=DVMFrame]').contents().find('.upload').css({ "border": '#FF0000 1px solid'});
                         swal({
@@ -1160,7 +1163,7 @@ Description : This page is used to collect medical condition about wish child fr
                         
                         isError_Free = false;
                     }
-                }
+                }*/
             }
             if(isError_Free){
                 DiagnosisEmptyCheck();

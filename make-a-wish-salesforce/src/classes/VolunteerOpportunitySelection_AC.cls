@@ -14,7 +14,7 @@ Public Class VolunteerOpportunitySelection_AC{
       List<User>  currentUserContactId = [SELECT Id,ContactId From User WHERE Id =: UserInfo.getUserId() AND ContactId != Null Limit 1];
       for(Volunteer_Opportunity__c dbVolOppRec : [SELECT Id,Name,Wish__c,Volunteer_Name__c,Volunteer_Name__r.Name,Chapter_Name__c,Chapter_Name__R.Name,Role__c FROM Volunteer_Opportunity__c 
                                     WHERE volunteer_Name__c != Null AND Volunteer_Name__c =: currentUserContactId[0].ContactId 
-                                    AND Wish__c =: caseId AND Status__c = 'Approved']){
+                                    AND Wish__c =: caseId AND Status__c != 'Pending']){
           volunteerWrapper newWrapIns = new volunteerWrapper();
           newWrapIns.recordSelected = false;
           newWrapIns.volOpp = dbVolOppRec;

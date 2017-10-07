@@ -5,43 +5,73 @@ public class AbsentForm_AC{
     Public Map<Integer,String> parentEmailMap = new Map<Integer,String>();
     public Integer i;
     public String name{get;set;}
+    public boolean displayReturnToWish{get;set;} 
+    public String recpName {get;set;}
+    public Map<Id,npe4__Relationship__c> relationShipMap;
+    Public String recpEmail {get;set;}
+    Public String recpRelType {get;set;}
     public AbsentForm_AC(ApexPages.StandardController controller){
+        recpEmail = '';
+        recpRelType = '';
+        relationShipMap = new Map<Id,npe4__Relationship__c>();
         name = '';
         currentParentCase = [SELECT Id,ContactId FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
         i = 1;
-        for(npe4__Relationship__c dbParentRec : [SELECT Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__Type__c FROM npe4__Relationship__c WHERE npe4__Contact__c =: currentParentCase.ContactId
-                                                  AND (npe4__Type__c = 'Father' OR npe4__Type__c = 'Mother' OR npe4__Type__c = 'Legal Guardian')]){
-            if(name == '')
-            name = dbParentRec.npe4__RelatedContact__r.Name;
-            else
-            name = name+','+' '+dbParentRec.npe4__RelatedContact__r.Name;
-            
-            if(dbParentRec.npe4__Type__c == 'Father'){
-                parentEmailMap.put(i,dbParentRec.npe4__RelatedContact__r.Email);
-                parentNameMap.put(i,dbParentRec.npe4__RelatedContact__r.Name);
-            }
-           else if(dbParentRec.npe4__Type__c == 'Mother'){
-                parentEmailMap.put(i,dbParentRec.npe4__RelatedContact__r.Email);
-                parentNameMap.put(i,dbParentRec.npe4__RelatedContact__r.Name);
-            }
-            else{
-                parentEmailMap.put(i,dbParentRec.npe4__RelatedContact__r.Email);
-                parentNameMap.put(i,dbParentRec.npe4__RelatedContact__r.Name);
-            }
-            i++;
-         }
+        
     }
     
-   
+    //Used to retun to wish when "Ruturn to Link" link is clicked
+    public void ReturnToWish(){
+        displayReturnToWish = true;
+    }
+    //Redirect to Absent form
+    public pageReference ReturnToWishClearanceForm(){
+        PageReference reference=new PageReference('/apex/AbsentForm_VF?id='+currentParentCase.id);
+        reference.setRedirect(true);     
+        return reference;
+    }
+    
+    //Display the list of parent Legal Guardian
+    public List<SelectOption> getRecpList() {
+        List<SelectOption> options = new List<SelectOption>();
+        options.add(new SelectOption('','Please select an individual'));
+        for(npe4__Relationship__c dbParentRec : [SELECT Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__Type__c FROM npe4__Relationship__c WHERE npe4__Contact__c =: currentParentCase.ContactId
+                                                 AND (npe4__Type__c = 'Father' OR npe4__Type__c = 'Mother' OR npe4__Type__c = 'Legal Guardian')]){
+                                                     relationShipMap.put(dbParentRec.Id, dbParentRec);
+                                                     options.add(new SelectOption(dbParentRec.Id,dbParentRec.npe4__RelatedContact__r.Name));
+                                                 }
+        
+        
+        return options;
+    }
+    
+    //Used to update recepient name in the related contact
+    public void updateRelatedContact() {
+        if(String.isEmpty(recpName)) {
+            displayErrorMessage();
+        } else {
+            List<Contact> wishChildContact = [SELECT Id, RelatedContacts__c FROM Contact WHERE Id =: currentParentCase.ContactId];
+            if(wishChildContact.size() > 0) {
+                wishChildContact[0].RelatedContacts__c = relationShipMap.get(recpName).npe4__RelatedContact__r.Name;
+                update wishChildContact;
+            }
+        }
+    }
+    
+    //Docusign callout
     public  void CallouttoDocusign(){
-       
-         String account;
+        if(String.isEmpty(recpName) || String.isEmpty(recpEmail)) {
+            displayErrorMessage();
+        } else {
+            String account;
             String UserName;
             String Password;
             String IntegratorKey;
             String endPointURL;
             String templateID = label.AbsentForm;
-            system.debug('### templateId #####'+templateID);
+            String clientUserId;
+            String  emailbody='\n\n Please sign the attached Absent Parent Forms \r\n\n';
+            
             Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
             for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
                 UserName = credentialIns.name;
@@ -52,7 +82,7 @@ public class AbsentForm_AC{
             }
             
             String endpoint = endPointURL+'/accounts/'+account+'/envelopes';
-            system.debug('### endpoint #####'+endpoint );
+            
             String authorizationHeader = '<DocuSignCredentials><Username>'+UserName+'</Username><Password>'+Password+'</Password><IntegratorKey>'+IntegratorKey+'</IntegratorKey></DocuSignCredentials>';
             HttpRequest req = new HttpRequest(); 
             req.setEndpoint(endPoint); 
@@ -63,22 +93,24 @@ public class AbsentForm_AC{
             req.setHeader('Content-Type','application/json'); 
             req.setHeader('Content-Disposition','form-data'); 
             String recipient = '';
-            for(Integer j=1 ;j <= parentNameMap.size() ; j++){
-                recipient = recipient + '{'+ 
-                '"roleName": "'+'Signer'+j+'",'+ 
-                '"name": "'+parentNameMap.get(j)+'",'+ 
-                '"email": "'+parentEmailMap.get(j)+'",'+ 
-                '"routingOrder": "'+j+'",'+
-                '"recipientId": '+j+''+ 
+            
+            recipient = recipient + '{'+ 
+                '"roleName": "'+'Signer'+i+'",'+ 
+                '"name": "'+relationShipMap.get(recpName).npe4__RelatedContact__r.Name+'",'+ 
+                '"email": "'+relationShipMap.get(recpName).npe4__RelatedContact__r.Email+'",'+ 
+                '"emailSubject": "Signature Required - Absent Parent Form",'+
+                '"emailBody": "'+relationShipMap.get(recpName).npe4__RelatedContact__r.Name+emailbody+'",'+ 
+                '"supportedLanguage": "en",'+
+                '"recipientId": '+i+''+ 
                 '}';
-                if(j < parentNameMap.size())
-                recipient = recipient+',';
-                 }
+            
+            recipient = recipient+',';
+            
             system.debug('@@@@@@ recipient @@@@@@'+recipient);
             String json='{'+ 
                 ' '+ 
-                ' "emailSubject": "Absent Parent Form",'+
-                ' "emailBlurb": "MAKE A WISH",'+ 
+                ' "emailSubject": "Signature Required - Absent Parent Form",'+
+                '"emailBody": "'+emailbody+'",'+
                 ' "templateId": "'+templateID+'",'+ 
                 ' "envelopeIdStamping": "false",'+ 
                 ' "customFields":{'+
@@ -95,7 +127,7 @@ public class AbsentForm_AC{
                 ' ],'+ 
                 ' "status": "sent"'+ 
                 '}'; 
-                system.debug('@@@@@@ json @@@@@@'+json);
+            
             req.setBody(json); 
             Http http = new Http(); 
             HTTPResponse res; 
@@ -108,9 +140,13 @@ public class AbsentForm_AC{
                 ApexPages.addMessage( new ApexPages.Message(ApexPages.Severity.FATAL, e.getMessage())); 
             } 
             WrapperDocuSign wrapInst = WrapperDocuSign.parse(res.getBody()); 
-           
-        DisplayMessage();
+            
+            DisplayMessage();
+        }
+        
     }
+    
+    //Skip send for signature
     public pageReference cancel(){
         PageReference reference=new PageReference('/'+currentParentCase.Id);
         reference.setRedirect(true);     
@@ -118,9 +154,31 @@ public class AbsentForm_AC{
         
     }
     
+    //Display related contact info in the page
+    public void displayRelatedInfo() {
+        if(relationShipMap.containsKey(recpName)) {
+            recpRelType = relationShipMap.get(recpName).npe4__Type__c;
+            recpEmail = relationShipMap.get(recpName).npe4__RelatedContact__r.Email;
+        } else {
+            recpRelType = '';
+            recpEmail = '';
+        }
+    }
+    
+    //Success message
     public pagereference DisplayMessage(){
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The absent parent form has been sent successfully.'));
         return null;
     }
     
+    //Display error message
+    public pagereference displayErrorMessage(){
+        if(String.isEmpty(recpName)) {
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Recepient cannot be null.'));
+        } else if(String.isEmpty(recpEmail)) {
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The selected user does not have an email address.'));
+        }
+        return null;
     }
+    
+}

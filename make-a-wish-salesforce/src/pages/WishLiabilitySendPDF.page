@@ -209,7 +209,7 @@ body {
               <table style="min-width:720px;hight:130px;border=5px solid red;style:width:100%;">
            
              <apex:variable var="i" value="{!1}"/> 
-                   <apex:repeat value="{!listofSenderName}" var="name">
+                   <apex:repeat value="{!signNowList}" var="name">
                         
                         <tr style="width:80%;!important;border-bottom:1px solid black;">
                            

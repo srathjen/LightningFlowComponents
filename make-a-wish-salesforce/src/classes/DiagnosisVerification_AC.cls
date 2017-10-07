@@ -127,12 +127,13 @@ i++;
         } 
         //Wrapping the Diagnosis Verification records and Medical Questions of the lead to the DiagnosisWrapper       
         diagnosisVerificationLst = new List<Diagnosis_Verification__c>();
-        diagnosisVerificationLst = [SELECT id,ICD_Code__c,Lead__c,Primary_Diagnosis__c,PCD_ICD__c,Order__c,Short_Description__c,Condition_Description__c,isEligible__c,(SELECT  Medical_Question__c,Epilepsy_Value__c,Medical_Question_Answer__c,isEligible__c,Comment__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c = :leadId order by Order__c ];
+        diagnosisVerificationLst = [SELECT id,Group1__c,ICD_Code__c,Lead__c,Primary_Diagnosis__c,PCD_ICD__c,Order__c,Short_Description__c,Condition_Description__c,isEligible__c,(SELECT  Medical_Question__c,Epilepsy_Value__c,Medical_Question_Answer__c,isEligible__c,Comment__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c = :leadId order by Order__c ];
         if(diagnosisVerificationLst.size() > 0){  
             for(Diagnosis_Verification__c buildWrapper : diagnosisVerificationLst){
                 DiagnosisWrapper diagonsisWrapper = new DiagnosisWrapper();
                 diagonsisWrapper.icdCode = buildWrapper.ICD_Code__c;
                 diagonsisWrapper.pcdOrIcd = buildWrapper.PCD_ICD__c;
+                diagonsisWrapper.isGroup1Rec = buildWrapper.Group1__c;
                 if(buildWrapper.PCD_ICD__c == 'ICD'){
                     diagonsisWrapper.valueSelectedICD = 'value-selected'; 
                     // diagonsisWrapper.valueSelectedPCD = 'value-selected';            
@@ -404,7 +405,7 @@ travelAlgorithmWrapperIns.travelSet.add(travelAlgorithmWrapperIns.algList);
         //ICD code 
         if(icdOrPcd == 'ICD') {
             //diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription = Null;            
-            List<ICD_Codes__c> icdCodeInfo = [SELECT Id, Name, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Condition_Description__r.isEligible__c, Group1__c FROM ICD_Codes__c WHERE Name =: diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode AND Hidden_ICD_Code__c = false];
+            List<ICD_Codes__c> icdCodeInfo = [SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Condition_Description__r.isEligible__c, Group1__c FROM ICD_Codes__c WHERE Name =: diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode AND Hidden_ICD_Code__c = false];
             if(icdCodeInfo.size() > 0) {
                 List<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
                 medicalQuestionList =   [SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c FROM Medical_Questions__c  WHERE Condition_Description__c = :icdCodeInfo[0].Condition_Description__c order by Sort_Order__c ASC];
@@ -423,7 +424,7 @@ diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
 showAddAnotherDiagnosisBtn = true;    
 }
 } */else {
-    MediacalQuestions(icdCodeInfo[0].Name, icdCodeInfo[0].Condition_Description__c, icdCodeInfo[0].Group1__c,  icdOrPcd, diagnosisBlockNum,medicalQuestionList);
+    MediacalQuestions(icdCodeInfo[0].Name, icdCodeInfo[0].Condition_Description__c, icdCodeInfo[0].Group1__c,  icdOrPcd, diagnosisBlockNum,medicalQuestionList, icdCodeInfo[0].Skip_Medical_Question__c);
 }
             } 
             //Conition Description
@@ -434,6 +435,7 @@ showAddAnotherDiagnosisBtn = true;
             }
             List<Condition_Description__c> conditionDescriptionInfo = [SELECT Id, Name, isEligible__c, Group1__c, Code_To_Use__c FROM Condition_Description__c WHERE Name =: diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription];
             if(conditionDescriptionInfo.size() > 0) {
+                System.debug('Condition descritption is not empty');
                 diagnosisVerificationWrapperLst[diagnosisBlockNum].isGroup1Rec = conditionDescriptionInfo[0].Group1__c;
                 List<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
                 medicalQuestionList =   [SELECT ID,Condition_Description__c,Condition_Description__r.Name,Current_Condition__c,Data_Type__c,Epilepsy_picklist__c,Picklist_values__c,Question__c,Recommendation_to_Chapter__c,Sort_Order__c,Wrapper_Variable__c FROM Medical_Questions__c  WHERE Condition_Description__c = :conditionDescriptionInfo[0].id order by Sort_Order__c ASC];
@@ -446,20 +448,21 @@ showAddAnotherDiagnosisBtn = true;
                         showAddAnotherDiagnosisBtn = true;    
                     }
                 } else {
+                    System.debug('Condition descritption is empty');
                     //Medical question inputs for given Condition Description if the ICD Code is not null
                     if(!String.isEmpty(conditionDescriptionInfo[0].Code_To_Use__c)) {
-                        List<ICD_Codes__c> icdCodeInfo = [SELECT Id, Name, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Group1__c FROM ICD_Codes__c WHERE Name =: conditionDescriptionInfo[0].Code_To_Use__c AND Hidden_ICD_Code__c = false];
+                        List<ICD_Codes__c> icdCodeInfo = [SELECT Id, Name, Skip_Medical_Question__c, Condition_Description__c, Short_Description__c,Condition_Description__r.Name, Group1__c FROM ICD_Codes__c WHERE Name =: conditionDescriptionInfo[0].Code_To_Use__c AND Hidden_ICD_Code__c = false];
                         if(icdCodeInfo.size() > 0) {
                             diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = 'value-selected';
                             diagnosisVerificationWrapperLst[diagnosisBlockNum].shortDescription = icdCodeInfo[0].Short_Description__c;
-                            MediacalQuestions(icdCodeInfo[0].Name, conditionDescriptionInfo[0].Id, icdCodeInfo[0].Group1__c,  icdOrPcd, diagnosisBlockNum,medicalQuestionList);
+                            MediacalQuestions(icdCodeInfo[0].Name, conditionDescriptionInfo[0].Id, icdCodeInfo[0].Group1__c,  icdOrPcd, diagnosisBlockNum,medicalQuestionList, icdCodeInfo[0].Skip_Medical_Question__c);
                         } else {
                             diagnosisVerificationWrapperLst[diagnosisBlockNum].valueSelectedICD = 'value-selected';
-                            MediacalQuestions(conditionDescriptionInfo[0].Code_To_Use__c, conditionDescriptionInfo[0].Id, conditionDescriptionInfo[0].Group1__c,  icdOrPcd, diagnosisBlockNum,medicalQuestionList);
+                            MediacalQuestions(conditionDescriptionInfo[0].Code_To_Use__c, conditionDescriptionInfo[0].Id, conditionDescriptionInfo[0].Group1__c,  icdOrPcd, diagnosisBlockNum,medicalQuestionList, icdCodeInfo[0].Skip_Medical_Question__c);
                         }
                         //Medical question inputs for given Condition Description if the ICD Code is null
                     } else {
-                        MediacalQuestions(conditionDescriptionInfo[0].Code_To_Use__c, conditionDescriptionInfo[0].Id, conditionDescriptionInfo[0].Group1__c,  icdOrPcd, diagnosisBlockNum,medicalQuestionList);
+                        MediacalQuestions(conditionDescriptionInfo[0].Code_To_Use__c, conditionDescriptionInfo[0].Id, conditionDescriptionInfo[0].Group1__c,  icdOrPcd, diagnosisBlockNum,medicalQuestionList, false);
                     }
                 }
             }
@@ -482,14 +485,14 @@ showAddAnotherDiagnosisBtn = true;
     }
     
     //Getting Medical Question List based on ICD Code & Condition Description given by Medical Professional
-    public List<DiagnosisWrapper.MedicalWrapper> MediacalQuestions(String icdCode, String conditionDescription, Boolean isGroup1, String icdOrPcd, Integer diagnosisBlockNum,List<Medical_Questions__c> medicalQuestions) {
+    public List<DiagnosisWrapper.MedicalWrapper> MediacalQuestions(String icdCode, String conditionDescription, Boolean isGroup1, String icdOrPcd, Integer diagnosisBlockNum,List<Medical_Questions__c> medicalQuestions, Boolean skipMedQues) {
         diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescriptionObject = conditionDescription;
         //if(!String.isEmpty(conditionDescription) && condDesMedicalQuestionMap.containsKey(conditionDescription)) {
         //medicalQuestionList
         if(!String.isEmpty(conditionDescription) && medicalQuestions.size() > 0) {
             List<Medical_Questions__c> medicalQuestionList = new List<Medical_Questions__c>();
             medicalQuestionList.addAll(medicalQuestions);
-            if(medicalQuestionList.size() > 0) {               
+            if(medicalQuestionList.size() > 0 && skipMedQues == false) {               
                 for(Medical_Questions__c medicalQuestion : medicalQuestionList) {
                     DiagnosisWrapper.MedicalWrapper medicalWrapperItem = new DiagnosisWrapper.MedicalWrapper();
                     medicalWrapperItem.medicalQuestion = medicalQuestion;
@@ -673,12 +676,16 @@ showAddAnotherDiagnosisBtn = true;
         }
         for( DiagnosisWrapper diagnosisVerificationItem : diagnosisVerificationWrapperLst){
             if(!orderSet.contains(order) && (!String.isEmpty(diagnosisVerificationItem.iCDCode) || !String.isEmpty(diagnosisVerificationItem.conditionDescription))) {
+                System.debug('DV Iteration');
                 Diagnosis_Verification__c diagnosisVerification = new Diagnosis_Verification__c();
                 diagnosisVerification.Order__c = order;
+                System.debug('DV Iteration'+order);
                 diagnosisVerification.Group1__c = diagnosisVerificationItem.isGroup1Rec;
+                System.debug('DV Iteration'+diagnosisVerificationItem.isGroup1Rec);
                 diagnosisVerification.Lead__c = leadId;
                 diagnosisVerification.isEligible__c = diagnosisVerificationItem.isEligible;
                 diagnosisVerification.ICD_Code__c = diagnosisVerificationItem.iCDCode;
+                System.debug('DV Iteration'+diagnosisVerificationItem.iCDCode);
                 diagnosisVerification.PCD_ICD__c = diagnosisVerificationItem.pcdOrIcd;
                 diagnosisVerification.Primary_Diagnosis__c = diagnosisVerificationItem.conditionDescription;
                 diagnosisVerification.Condition_Description__c = diagnosisVerificationItem.conditionDescriptionObject;

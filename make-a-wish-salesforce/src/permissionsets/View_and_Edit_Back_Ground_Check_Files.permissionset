@@ -29,6 +29,10 @@
         <visible>false</visible>
     </applicationVisibilities>
     <applicationVisibilities>
+        <application>standard__LightningSales</application>
+        <visible>false</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
         <application>standard__LightningSalesConsole</application>
         <visible>false</visible>
     </applicationVisibilities>
@@ -430,6 +434,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>FutureHandler</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Hidden_ContactShareController_AC</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Hidden_ContactShareController_AC_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -7274,6 +7286,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ICD_Codes__c.Skip_Medical_Question__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ICD_Codes__c.Valid_For_Wish__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -12724,6 +12741,7 @@
     </fieldPermissions>
     <hasActivationRequired>false</hasActivationRequired>
     <label>View and Edit Back Ground Check Files</label>
+    <license>Salesforce</license>
     <objectPermissions>
         <allowCreate>false</allowCreate>
         <allowDelete>false</allowDelete>
@@ -13128,6 +13146,10 @@
     </pageAccesses>
     <pageAccesses>
         <apexPage>active_header_progress_bar</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>hidden_ContactShare_VF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
@@ -13575,6 +13597,10 @@
         <visibility>None</visibility>
     </tabSettings>
     <tabSettings>
+        <tab>standard-ActiveScratchOrg</tab>
+        <visibility>None</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>standard-Asset</tab>
         <visibility>None</visibility>
     </tabSettings>
@@ -13611,6 +13637,10 @@
         <visibility>None</visibility>
     </tabSettings>
     <tabSettings>
+        <tab>standard-NamespaceRegistry</tab>
+        <visibility>None</visibility>
+    </tabSettings>
+    <tabSettings>
         <tab>standard-Opportunity</tab>
         <visibility>None</visibility>
     </tabSettings>
@@ -13624,6 +13654,10 @@
     </tabSettings>
     <tabSettings>
         <tab>standard-Product2</tab>
+        <visibility>None</visibility>
+    </tabSettings>
+    <tabSettings>
+        <tab>standard-ScratchOrgInfo</tab>
         <visibility>None</visibility>
     </tabSettings>
     <tabSettings>
@@ -13646,7 +13680,6 @@
         <tab>standard-UserProvisioningRequest</tab>
         <visibility>None</visibility>
     </tabSettings>
-    <userLicense>Salesforce</userLicense>
     <userPermissions>
         <enabled>true</enabled>
         <name>EditOppLineItemUnitPrice</name>

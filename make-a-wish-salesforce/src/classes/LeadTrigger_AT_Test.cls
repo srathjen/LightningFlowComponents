@@ -94,10 +94,10 @@ public class LeadTrigger_AT_Test{
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         // Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
         //       Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
-        Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
-        Contact trateProfContact = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
-        Contact medicalProfContact = OrientationandTrainingUtil.CreateMedicalProfContact();
-        Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
+        //Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
+        //Contact trateProfContact = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
+        //Contact medicalProfContact = OrientationandTrainingUtil.CreateMedicalProfContact();
+        //Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
         newLead.Child_Age__c = '4';
         newLead.unique_wish_identifier__c = '123456';
@@ -131,7 +131,7 @@ public class LeadTrigger_AT_Test{
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         // Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
         //       Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
-        Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
+        //Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
         Contact trateProfContact = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
         Contact medicalProfContact = OrientationandTrainingUtil.CreateMedicalProfContact();
         Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();

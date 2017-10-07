@@ -48,11 +48,13 @@
     <filter>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Wish_Child</value>
         </criteriaItems>
         <criteriaItems>
             <column>cg__ContactFile__c.Parent_Folder_Name__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Photos</value>
         </criteriaItems>

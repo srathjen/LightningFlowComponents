@@ -248,9 +248,16 @@ currentCase.Concept_Approval_Date__c = Date.Today();
                                                                               parentGrantedIdSet.add(currentCase.Id);
                                                                           }
                 
-                if(currentCase.Sub_Status__c == 'Abandoned' || currentCase.isClosed == True){
+                /*if(currentCase.Sub_Status__c == 'Abandoned' || currentCase.isClosed == True){
                     
                     currentCase.IsLocked__c = true;
+                }*/
+                
+                if((currentCase.Status == 'DNQ' || currentCase.Status == 'Hold' || currentCase.Status == 'Inactive' || currentCase.Status == 'Closed') ){
+                    currentCase.IsLocked__c = true;
+                }
+                if((currentCase.Status != 'DNQ' && trigger.oldmap.get(currentCase.Id).Status == 'DNQ') || (currentCase.Status != 'Hold' && trigger.oldmap.get(currentCase.Id).Status == 'Hold') || (currentCase.Status != 'Inactive' && trigger.oldmap.get(currentCase.Id).Status == 'Inactive') || (currentCase.Status != 'Closed' && trigger.oldmap.get(currentCase.Id).Status == 'Closed')||  (currentCase.isClosed == false && trigger.oldmap.get(currentCase.Id).isClosed == true)){
+                    currentCase.IsLocked__c = false;
                 }
                 
                 if(RecursiveTriggerHandler.blockCaseLockRecursive == True)  
@@ -281,7 +288,7 @@ currentCase.Concept_Approval_Date__c = Date.Today();
                     }
                 }
                 
-                if(currentCase.Status == 'On Hold' && Trigger.oldMap.get(currentCase.id).Status != 'On Hold')
+                if(currentCase.Status == 'Hold' && Trigger.oldMap.get(currentCase.id).Status != 'Hold')
                 {
                     currentCase.Hold_Date__c = Date.Today();
                 }
@@ -333,9 +340,12 @@ currentCase.Interview_date__c.addError('Interview Date should be in future');
             }
             
             //Case Owner Old Logic
+           if(caseMap.size() > 0)
+           {
             for(Account currentAccount : [SELECT ID,Volunteer_Manager__c,Wish_Co_ordinator__c FROM Account Where ID IN: caseMap.keyset()] ){
                 managerUserMap.put(currentAccount.Id,currentAccount);
             }
+           }
             for(Case currentCase : Trigger.new){
                 if(managerUserMap.containsKey(currentCase.ChapterName__c) && currentCase.Status == 'Ready to Assign' && currentCase.Status != Trigger.oldMap.get(currentCase.Id).Status){
                     if(managerUserMap.get(currentCase.ChapterName__c).Volunteer_Manager__c != Null) {
@@ -660,26 +670,26 @@ currentCase.Interview_date__c.addError('Interview Date should be in future');
             
             //Used to create wish determination type tasks when the status is updated to "Ready to Interview"
             if((caseMemberCheck.Status == 'Ready to Interview' && Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Ready to Assign' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' 
-                || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed') && caseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
+                || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed') && caseMemberCheck.RecordTypeId == parentWishRecordTypeId && RecursiveTriggerHandler.blockCaseLockRecursive == true) {
                     
                     parentWishInfoMap.put(caseMemberCheck.Id, caseMemberCheck);
                 }
             // Used to Open all sub cases when the status from "DNQ","Inactive","Hold" and "Closed".
             if((caseMemberCheck.Status == 'Ready to Interview' || caseMemberCheck.Status == 'Wish Determined' || caseMemberCheck.Status == 'Wish Design' || caseMemberCheck.Status == 'Wish Scheduled' || caseMemberCheck.Status == 'Granted') && 
                (Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' 
-                || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed')){
+                || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed') && RecursiveTriggerHandler.blockCaseLockRecursive == true){
                     
                     caseParentIdSet.add(caseMemberCheck.id);
                 }
             
             if(((caseMemberCheck.Status == 'Ready to Interview') && Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Ready to Assign' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' 
-                || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed') && caseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
+                || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed') && caseMemberCheck.RecordTypeId == parentWishRecordTypeId && RecursiveTriggerHandler.blockCaseLockRecursive == true) {
                     parentWishInfoMap.put(caseMemberCheck.Id, caseMemberCheck);
                 }
             
             //Used to close all the System genareated  task when the status is updated to "DNQ", "Closed", "Inactive" , "Hold".'
-            if(caseMemberCheck.Status == 'DNQ' || caseMemberCheck.Status == 'Closed' || caseMemberCheck.Status == 'Hold' ||
-               caseMemberCheck.Status == 'Inactive' && caseMemberCheck.RecordTypeId == parentWishRecordTypeId ) {
+            if((caseMemberCheck.Status == 'DNQ' || caseMemberCheck.Status == 'Closed' || caseMemberCheck.Status == 'Hold' ||
+               caseMemberCheck.Status == 'Inactive') && (caseMemberCheck.RecordTypeId == parentWishRecordTypeId && RecursiveTriggerHandler.blockCaseLockRecursive == true && caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status)) {
                    TaskParentIdSet.add(caseMemberCheck.Id);
                } 
             
@@ -692,7 +702,7 @@ wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
 wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
 }*/
             
-            if(((caseMemberCheck.Status == 'Wish Determined' && caseMemberCheck.Sub_Status__c == 'Within Policy') && (caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status || caseMemberCheck.Sub_Status__c != Trigger.oldMap.get(caseMemberCheck.Id).Sub_Status__c)) || (Trigger.oldMap.get(caseMemberCheck.Id).Status != caseMemberCheck.Status && (Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed')) && caseMemberCheck.RecordTypeId == parentWishRecordTypeId) {
+            if(((caseMemberCheck.Status == 'Wish Determined' && caseMemberCheck.Sub_Status__c == 'Within Policy') && (caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status || caseMemberCheck.Sub_Status__c != Trigger.oldMap.get(caseMemberCheck.Id).Sub_Status__c)) || (Trigger.oldMap.get(caseMemberCheck.Id).Status != caseMemberCheck.Status && (Trigger.oldMap.get(caseMemberCheck.Id).Status == 'DNQ' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Hold' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Inactive' || Trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed')) && caseMemberCheck.RecordTypeId == parentWishRecordTypeId && RecursiveTriggerHandler.blockCaseLockRecursive == true) {
                 wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
             }
             
@@ -700,28 +710,28 @@ wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
 wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
 }*/
             
-            if(caseMemberCheck.Status == 'Ready to Assign' && caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status) {
+            if(caseMemberCheck.Status == 'Ready to Assign' && caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status &&  RecursiveTriggerHandler.blockCaseLockRecursive == true) {
                 updateVolunteerManagerCaseTeamMap.put(caseMemberCheck.Id, caseMemberCheck);
                 volunteerManagerIdSet.add(caseMemberCheck.Id);
-            } else if((caseMemberCheck.Status == 'Ready to Assign' || caseMemberCheck.Status == 'Ready to Interview') && caseMemberCheck.OwnerId != Trigger.oldMap.get(caseMemberCheck.Id).OwnerId) {
+            } else if((caseMemberCheck.Status == 'Ready to Assign' || caseMemberCheck.Status == 'Ready to Interview') && caseMemberCheck.OwnerId != Trigger.oldMap.get(caseMemberCheck.Id).OwnerId && RecursiveTriggerHandler.blockCaseLockRecursive == true) {
                 updateVolunteerManagerCaseTeamMap.put(caseMemberCheck.Id, caseMemberCheck);
                 volunteerManagerIdSet.add(caseMemberCheck.Id);
             }
             
-            if(caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status && caseMemberCheck.Status == 'Wish Determined') {
+            if(caseMemberCheck.Status != Trigger.oldMap.get(caseMemberCheck.Id).Status && caseMemberCheck.Status == 'Wish Determined' && RecursiveTriggerHandler.blockCaseLockRecursive == true) {
                 updateVolunteerManagerCaseTeamMap.put(caseMemberCheck.Id, caseMemberCheck);
                 wishCoordinatorIdSet.add(caseMemberCheck.Id);
-            } else if((caseMemberCheck.OwnerId != Trigger.oldMap.get(caseMemberCheck.Id).OwnerId) && (caseMemberCheck.Status == 'Wish Determined' || caseMemberCheck.Status == 'Wish Design' || caseMemberCheck.Status == 'Wish Scheduled' || caseMemberCheck.Status == 'Budget Approval - Approved' || caseMemberCheck.Status == 'Budget Approval - Submitted')) {
+            } else if((caseMemberCheck.OwnerId != Trigger.oldMap.get(caseMemberCheck.Id).OwnerId) && (caseMemberCheck.Status == 'Wish Determined' || caseMemberCheck.Status == 'Wish Design' || caseMemberCheck.Status == 'Wish Scheduled' || caseMemberCheck.Status == 'Budget Approval - Approved' || caseMemberCheck.Status == 'Budget Approval - Submitted') && RecursiveTriggerHandler.blockCaseLockRecursive == true) {
                 updateVolunteerManagerCaseTeamMap.put(caseMemberCheck.Id, caseMemberCheck);
                 wishCoordinatorIdSet.add(caseMemberCheck.Id);
             }
             
             
             
-            if((caseMemberCheck.Status != 'Closed' && caseMemberCheck.Status != 'Completed') && (trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed' || trigger.oldMap.get(caseMemberCheck.Id).Status == 'Completed')) {
+            if((caseMemberCheck.Status != 'Closed' && caseMemberCheck.Status != 'Completed') && (trigger.oldMap.get(caseMemberCheck.Id).Status == 'Closed' || trigger.oldMap.get(caseMemberCheck.Id).Status == 'Completed') && RecursiveTriggerHandler.blockCaseLockRecursive == true) {
                 caseContactMap.put(caseMemberCheck.Id, caseMemberCheck.ContactId);
             }
-            if(caseMemberCheck.OwnerId != Trigger.oldMap.get(caseMemberCheck.Id).OwnerId && caseMemberCheck.RecordTypeId == parentRecordTypeId) {
+            if(caseMemberCheck.OwnerId != Trigger.oldMap.get(caseMemberCheck.Id).OwnerId && caseMemberCheck.RecordTypeId == parentRecordTypeId && RecursiveTriggerHandler.blockCaseLockRecursive == true) {
                 newCaseOwnerMap.put(caseMemberCheck.Id, caseMemberCheck.OwnerId);
             }
             
@@ -1064,17 +1074,18 @@ wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
             CaseTriggerHandler.autoCloseTask(conceptApprovalParentIdSet);
         }
         
-        List<Id> closedCaseIdList = new List<Id>();
-        List<Id> completedCaseIdList=new List<Id>();
+        Set<Id> closedCaseIdSet = new Set<Id>();
+        Set<Id> completedCaseIdSet=new Set<Id>();
         for(Case currRec:trigger.new){
-            if( (currRec.Status == 'Completed' || currRec.Status == 'Closed') && (trigger.oldMap.get(currRec.id).Status != 'Completed' || trigger.oldMap.get(currRec.id).Status != 'Closed')){
-                completedCaseIdList.add(currRec.id);
-                if(currRec.RecordTypeId == parentWishRecordTypeId)
-                    closedCaseIdList.add(currRec.Id);
+            if(currRec.Status == 'Completed' && trigger.oldMap.get(currRec.id).Status != 'Completed' && currRec.RecordTypeId == parentWishRecordTypeId){
+                    completedCaseIdSet.add(currRec.id);
+                }
+            if(trigger.oldMap.get(currRec.id).Status != 'Closed' && currRec.Status == 'Closed' && currRec.RecordTypeId == parentWishRecordTypeId){
+                    closedCaseIdSet.add(currRec.Id);
             }
         }
-        if(completedCaseIdList.size() > 0 && completedCaseIdList != Null){
-            CaseTriggerHandler.updateVolunteerOpportunityStatus(completedCaseIdList);
+        if(completedCaseIdSet.size() > 0 && completedCaseIdSet != Null){
+            CaseTriggerHandler.updateVolunteerOpportunityStatus(completedCaseIdSet);
         }
         //Used to create 2 volunteer opportunity when wish status change to 'Ready to Assign'
         if(readyToAssignParentCaseMap.size()>0 && readtToAssignChapterIdSet.size() > 0){
@@ -1082,7 +1093,7 @@ wishPlanningAndGrantinTaskParentMap.put(caseMemberCheck.Id, caseMemberCheck);
         }
         //Update Open volunteer Opportunity as Inactive
         
-        if(closedCaseIdList.Size() > 0) 
-            CaseTriggerHandler.updateVolunteerOpportunityasInactive(closedCaseIdList);
+        if(closedCaseIdSet.Size() > 0) 
+            CaseTriggerHandler.updateVolunteerOpportunityasInactive(closedCaseIdSet);
     }
 }

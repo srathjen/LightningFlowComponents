@@ -14,16 +14,19 @@
         <filter>
             <criteriaItems>
                 <column>Contact$RecordType</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Contact.Wish_Child</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.Cases$RecordType</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Case.Wish</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.Cases$Sub_Status__c</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>notEqual</operator>
                 <value>Abandoned</value>
             </criteriaItems>
@@ -94,11 +97,13 @@
         <filter>
             <criteriaItems>
                 <column>Contact$RecordType</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Contact.Wish_Child</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.npe4__Relationships__r$npe4__RelatedContact__c.RecordType</column>
+                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Contact.Wish_Family</value>
             </criteriaItems>

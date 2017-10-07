@@ -698,6 +698,11 @@
             <operation>notEqual</operation>
             <value>Integration</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Case.Sub_Status__c</field>
+            <operation>equals</operation>
+            <value>Within Policy</value>
+        </criteriaItems>
         <description>It send a email notification to Qualifying Medical Professional when wish is determined.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>

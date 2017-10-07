@@ -872,29 +872,6 @@ and the date it was or will be granted. --></help>
         <name>Last_Continuing_Edu_Date__c</name>
     </fields>
     <fields>
-        <name>LeadSource</name>
-        <picklistValues>
-            <masterLabel>Email</masterLabel>
-            <translation><!-- Email --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Fax</masterLabel>
-            <translation><!-- Fax --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Online</masterLabel>
-            <translation><!-- Online --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Other</masterLabel>
-            <translation><!-- Other --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Phone</masterLabel>
-            <translation><!-- Phone --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <label><!-- Lead Created Date --></label>
         <name>Lead_Created_Date__c</name>
     </fields>
@@ -2721,7 +2698,7 @@ provide contact information for each site on which you are active. --></help>
         <name>When_I_think_about_my_wish_I_imagine__c</name>
     </fields>
     <fields>
-        <label><!-- When Thinking,Some Of My Wish Ideas Were --></label>
+        <label><!-- When Thinking About A Wish, Some of My --></label>
         <name>When_thinking_some_of_my_wish_ideas_were__c</name>
     </fields>
     <fields>

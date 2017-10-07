@@ -1088,21 +1088,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Option2__c</name>
     </fields>
     <fields>
-        <name>Origin</name>
-        <picklistValues>
-            <masterLabel>Email</masterLabel>
-            <translation><!-- Email --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Phone</masterLabel>
-            <translation><!-- Phone --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Web</masterLabel>
-            <translation><!-- Web --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <label><!-- Out of Territory --></label>
         <name>Out_of_Territory__c</name>
     </fields>
@@ -1269,21 +1254,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Presentation_Date__c</name>
     </fields>
     <fields>
-        <name>Priority</name>
-        <picklistValues>
-            <masterLabel>High</masterLabel>
-            <translation><!-- High --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Low</masterLabel>
-            <translation><!-- Low --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Medium</masterLabel>
-            <translation><!-- Medium --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <label><!-- Projected Status --></label>
         <name>Projected_Status__c</name>
         <picklistValues>
@@ -1410,29 +1380,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Ready_to_Assign_Date__c</name>
     </fields>
     <fields>
-        <name>Reason</name>
-        <picklistValues>
-            <masterLabel>Complex functionality</masterLabel>
-            <translation><!-- Complex functionality --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Existing problem</masterLabel>
-            <translation><!-- Existing problem --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Instructions not clear</masterLabel>
-            <translation><!-- Instructions not clear --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>New problem</masterLabel>
-            <translation><!-- New problem --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>User didn&apos;t attend training</masterLabel>
-            <translation><!-- User didn&apos;t attend training --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <help><!-- Date the Initial lead from an authorized referral source is received --></help>
         <label><!-- Referral Date --></label>
         <name>Referral_Date__c</name>
@@ -1513,125 +1460,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <help><!-- Confirmed date that the wish will begin (departure) --></help>
         <label><!-- Start Date --></label>
         <name>Start_Date__c</name>
-    </fields>
-    <fields>
-        <name>Status</name>
-        <picklistValues>
-            <masterLabel>Approved - Chapter Medical Advisor</masterLabel>
-            <translation><!-- Approved - Chapter Medical Advisor --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Approved - Chapter Staff</masterLabel>
-            <translation><!-- Approved - Chapter Staff --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Approved - National Medical Council</masterLabel>
-            <translation><!-- Approved - National Medical Council --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Approved - National Staff</masterLabel>
-            <translation><!-- Approved - National Staff --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Budget Approval - Approved</masterLabel>
-            <translation><!-- Budget Approval - Approved --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Budget Approval - Submitted</masterLabel>
-            <translation><!-- Budget Approval - Submitted --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Closed</masterLabel>
-            <translation><!-- Closed --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Completed</masterLabel>
-            <translation><!-- Completed --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>DNQ</masterLabel>
-            <translation><!-- DNQ --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>DNQ - Chapter Medical Advisor</masterLabel>
-            <translation><!-- DNQ - Chapter Medical Advisor --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>DNQ - Chapter Staff</masterLabel>
-            <translation><!-- DNQ - Chapter Staff --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>DNQ - National Medical Council</masterLabel>
-            <translation><!-- DNQ - National Medical Council --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>DNQ - National Staff</masterLabel>
-            <translation><!-- DNQ - National Staff --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Denied</masterLabel>
-            <translation><!-- Denied --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Eligibility Review Pending</masterLabel>
-            <translation><!-- Eligibility Review Pending --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Escalated</masterLabel>
-            <translation><!-- Escalated --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Granted</masterLabel>
-            <translation><!-- Granted --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Hold</masterLabel>
-            <translation><!-- Hold --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>In Progress</masterLabel>
-            <translation><!-- In Progress --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Inactive</masterLabel>
-            <translation><!-- Inactive --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Medical</masterLabel>
-            <translation><!-- Medical --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>New</masterLabel>
-            <translation><!-- New --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Open</masterLabel>
-            <translation><!-- Open --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Qualified</masterLabel>
-            <translation><!-- Qualified --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Ready to Assign</masterLabel>
-            <translation><!-- Ready to Assign --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Ready to Interview</masterLabel>
-            <translation><!-- Ready to Interview --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Wish Design</masterLabel>
-            <translation><!-- Wish Design --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Wish Determined</masterLabel>
-            <translation><!-- Wish Determined --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Wish Scheduled</masterLabel>
-            <translation><!-- Wish Scheduled --></translation>
-        </picklistValues>
     </fields>
     <fields>
         <label><!-- Status  Date --></label>
@@ -1757,21 +1585,6 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Total Hour Spent --></label>
         <name>Total_Hour_Spent__c</name>
-    </fields>
-    <fields>
-        <name>Type</name>
-        <picklistValues>
-            <masterLabel>Feature Request</masterLabel>
-            <translation><!-- Feature Request --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Problem</masterLabel>
-            <translation><!-- Problem --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Question</masterLabel>
-            <translation><!-- Question --></translation>
-        </picklistValues>
     </fields>
     <fields>
         <label><!-- Unique Wish Record Identifier --></label>

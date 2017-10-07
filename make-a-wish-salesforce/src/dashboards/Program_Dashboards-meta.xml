@@ -21,11 +21,6 @@
         <sharedToType>User</sharedToType>
     </folderShares>
     <folderShares>
-        <accessLevel>Manage</accessLevel>
-        <sharedTo>ngillam@wish.org</sharedTo>
-        <sharedToType>User</sharedToType>
-    </folderShares>
-    <folderShares>
         <accessLevel>View</accessLevel>
         <sharedTo>Arizona_Chapter</sharedTo>
         <sharedToType>Role</sharedToType>

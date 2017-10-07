@@ -6,7 +6,7 @@
     <label>LeadDuplicate_VF</label>
     <packageVersions>
         <majorNumber>3</majorNumber>
-        <minorNumber>3</minorNumber>
+        <minorNumber>7</minorNumber>
         <namespace>npe01</namespace>
     </packageVersions>
 </ApexPage>

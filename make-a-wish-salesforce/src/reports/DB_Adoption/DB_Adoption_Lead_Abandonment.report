@@ -37,11 +37,13 @@
     <filter>
         <criteriaItems>
             <column>LAST_ACTIVITY</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.DB_Lead_Age__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>greaterThan</operator>
             <value>7</value>
         </criteriaItems>

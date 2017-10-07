@@ -2325,6 +2325,21 @@
             <field>npe4__RelatedContact__c.Phone</field>
             <table>Contact.npe4__Relationships__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>npe4__ReciprocalRelationship__c.npe4__Type__c</field>
+            <table>Contact.npe4__Relationships__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>npe4__Type__c</field>
+            <table>Contact.npe4__Relationships__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>npe4__RelatedContact__c</field>
+            <table>Contact.npe4__Relationships__r</table>
+        </columns>
         <masterLabel>Relationships</masterLabel>
     </sections>
 </ReportType>

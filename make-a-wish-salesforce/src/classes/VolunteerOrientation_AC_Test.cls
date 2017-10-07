@@ -44,7 +44,16 @@ Public class VolunteerOrientation_AC_Test {
     {
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-         OrientationandTrainingUtil.createAffiliation(con.id);
+         //OrientationandTrainingUtil.createAffiliation(con.id);
+         
+        npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
+        neworgAffiliation.npe5__Contact__c  = con.Id;
+        neworgAffiliation.npe5__Organization__c = acc.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = 'Prospective';
+        neworgAffiliation.Constituent_code__c = 'Board Member';
+        insert neworgAffiliation;
+        
          User currUser;
          Role__c currRole = OrientationandTrainingUtil.createRole();
          Chapter_Role__c  currChapRole = OrientationandTrainingUtil.createChapter(acc.id,currRole.id);
@@ -80,7 +89,15 @@ Public class VolunteerOrientation_AC_Test {
          LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-         OrientationandTrainingUtil.createAffiliation(con.id);
+         //OrientationandTrainingUtil.createAffiliation(con.id);
+         npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
+        neworgAffiliation.npe5__Contact__c  = con.Id;
+        neworgAffiliation.npe5__Organization__c = acc.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = 'Prospective';
+        neworgAffiliation.Constituent_code__c = 'Board Member';
+        insert neworgAffiliation;
+        
          Role__c currRole = OrientationandTrainingUtil.createRole();
         Chapter_Role__c  currChapRole = OrientationandTrainingUtil.createChapter(acc.id,currRole.id);
         Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id,currChapRole.id);
@@ -114,7 +131,15 @@ Public class VolunteerOrientation_AC_Test {
          LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-         OrientationandTrainingUtil.createAffiliation(con.id);
+         //OrientationandTrainingUtil.createAffiliation(con.id);
+        npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
+        neworgAffiliation.npe5__Contact__c  = con.Id;
+        neworgAffiliation.npe5__Organization__c = acc.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = 'Prospective';
+        neworgAffiliation.Constituent_code__c = 'Board Member';
+        insert neworgAffiliation;
+        
          User currUser;
          Role__c currRole = OrientationandTrainingUtil.createRole();
         Chapter_Role__c  currChapRole = OrientationandTrainingUtil.createChapter(acc.id,currRole.id);
@@ -153,7 +178,15 @@ Public class VolunteerOrientation_AC_Test {
          LMS_Credentials__c currLMSCredential = testClassUtil.createLMSCredentials();
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-         OrientationandTrainingUtil.createAffiliation(con.id);
+         //OrientationandTrainingUtil.createAffiliation(con.id);
+         npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
+        neworgAffiliation.npe5__Contact__c  = con.Id;
+        neworgAffiliation.npe5__Organization__c = acc.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = 'Prospective';
+        neworgAffiliation.Constituent_code__c = 'Board Member';
+        insert neworgAffiliation;
+        
          User currUser;
          Role__c currRole = OrientationandTrainingUtil.createRole();
          Chapter_Role__c  currChapRole = OrientationandTrainingUtil.createChapter(acc.id,currRole.id);
@@ -175,6 +208,7 @@ Public class VolunteerOrientation_AC_Test {
                 
                 VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
                 controller.TimingInfo();
+                
                 controller.getOrientationRecordList();
                 controller.trainingId = currOffering.id;
                 controller.Cancel();         
@@ -186,7 +220,15 @@ Public class VolunteerOrientation_AC_Test {
     {
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-         OrientationandTrainingUtil.createAffiliation(con.id);
+         //OrientationandTrainingUtil.createAffiliation(con.id);
+         npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
+        neworgAffiliation.npe5__Contact__c  = con.Id;
+        neworgAffiliation.npe5__Organization__c = acc.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = 'Prospective';
+        neworgAffiliation.Constituent_code__c = 'Board Member';
+        insert neworgAffiliation;
+        
         Role__c currRole = OrientationandTrainingUtil.createRole();
         Chapter_Role__c  currChapRole = OrientationandTrainingUtil.createChapter(acc.id,currRole.id);
         Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id,currChapRole.id);
@@ -215,6 +257,7 @@ Public class VolunteerOrientation_AC_Test {
                 
                 VolunteerOrientation_AC controller = new VolunteerOrientation_AC();
                 controller.TimingInfo();
+                controller.userRelatedContactId = con.Id;
                 controller.getOrientationRecordList();
                 controller.trainingId = currOffering1.id;
                 controller.Register(); 

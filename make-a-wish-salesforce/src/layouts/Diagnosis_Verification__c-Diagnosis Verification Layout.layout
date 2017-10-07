@@ -83,6 +83,9 @@
         <style>CustomLinks</style>
     </layoutSections>
     <relatedLists>
+        <relatedList>RelatedFileList</relatedList>
+    </relatedLists>
+    <relatedLists>
         <fields>Medical_Question__c</fields>
         <fields>Medical_Question_Answer__c</fields>
         <fields>Epilepsy_Value__c</fields>
