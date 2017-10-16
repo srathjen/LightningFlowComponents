@@ -114,7 +114,8 @@ public class WishRelatedLinks_AC {
             LiabilityFrom = '/apex/WishLiabilityForm_VF?id='+currentCaseRec.Id;
             miniorParticipant = '/apex/WishLiabilityMinorParticipant_VF?id='+currentCaseRec.Id;
             absentParentForm = '/apex/AbsentForm_VF?id='+currentCaseRec.Id; 
-            celebrityForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
+            celebrityForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id+'&CES=Signature Required - Celebrity Wish';
+            
             // singleForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
             singleForm ='/apex/SingleForm_VF?id='+currentCaseRec.Id;
             wishClearence = '/apex/WishClearanceSendNow_VF?id='+currentCaseRec.Id; 

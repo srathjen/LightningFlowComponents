@@ -36,6 +36,8 @@ Trigger VolunteerRole_AT on Volunteer_Roles__c (before update,after update,after
         {
             map<id,list<Volunteer_Roles__c>> volunteerRoleMap = new map<id,list<Volunteer_Roles__c>>();
             map<id,list<Volunteer_Roles__c>> volunteerRoleStatusMap = new map<id,list<Volunteer_Roles__c>>();
+            Set<Id> volunteerRoleIdsSet = new Set<Id>();
+             Set<Id> volunteerIdsSet = new Set<Id>();
             for(Volunteer_Roles__c newVolRole : trigger.new)
             {
                 if(newVolRole.Status__c != trigger.oldMap.get(newVolRole.id).Status__c && (newVolRole.Status__c == 'Out of Compliance' || newVolRole.Status__c == 'Trained')){
@@ -46,20 +48,24 @@ Trigger VolunteerRole_AT on Volunteer_Roles__c (before update,after update,after
                     {
                         volunteerRoleMap.put(newVolRole.Volunteer_Name__c, new list<Volunteer_Roles__c> {newVolRole});
                     }
-                 }
-                  
-                 if((newVolRole.Status__c == 'Former - Chapter' || newVolRole.Status__c == 'Former - Volunteer' || newVolRole.Status__c == 'Not Approved' ||
-                         newVolRole.Status__c == 'Out of Compliance' || newVolRole.Status__c == 'Trained') && (newVolRole.Status__c != Trigger.oldMap.get(newVolRole.id).Status__c))
-                 {
-                       if(volunteerRoleStatusMap.containsKey(newVolRole.Volunteer_Name__c))
-                       {
-                            volunteerRoleStatusMap.get(newVolRole.Volunteer_Name__c).add(newVolRole);
-                       }
-                       else
-                       {
-                            volunteerRoleStatusMap.put(newVolRole.Volunteer_Name__c, new list<Volunteer_Roles__c>{newVolRole});
-                       }
-                 } 
+                }
+                
+                if((newVolRole.Status__c == 'Former - Chapter' || newVolRole.Status__c == 'Former - Volunteer' || newVolRole.Status__c == 'Not Approved' ||
+                    newVolRole.Status__c == 'Out of Compliance' || newVolRole.Status__c == 'Trained') && (newVolRole.Status__c != Trigger.oldMap.get(newVolRole.id).Status__c))
+                {
+                    if(volunteerRoleStatusMap.containsKey(newVolRole.Volunteer_Name__c))
+                    {
+                        volunteerRoleStatusMap.get(newVolRole.Volunteer_Name__c).add(newVolRole);
+                    }
+                    else
+                    {
+                        volunteerRoleStatusMap.put(newVolRole.Volunteer_Name__c, new list<Volunteer_Roles__c>{newVolRole});
+                    }
+                }
+                if(newVolRole.Status__c != trigger.oldMap.get(newVolRole.id).Status__c){
+                    volunteerRoleIdsSet.add(newVolRole.id);
+                    volunteerIdsSet.add(newVolRole.Volunteer_Name__c);
+                }
             }
             if(volunteerRoleMap.size() > 0)
             {
@@ -68,32 +74,46 @@ Trigger VolunteerRole_AT on Volunteer_Roles__c (before update,after update,after
             
             if(volunteerRoleStatusMap.size() > 0)
             {
-               VolunteerRoleTriggerHandler.updateVolunteerRoleStatus(volunteerRoleStatusMap,'Update');
+                VolunteerRoleTriggerHandler.updateVolunteerRoleStatus(volunteerRoleStatusMap,'Update');
+            }
+            if(volunteerRoleIdsSet.size() > 0 && volunteerIdsSet.size() > 0){
+                VolunteerRoleTriggerHandler.getVolunteerBasedOnVolunteerRoleStatus(volunteerRoleIdsSet, volunteerIdsSet);
+                
             }
             
             
         }
     }
     //Update Affiliation Status.
-    if(Trigger.isInsert)
+    if(Trigger.isInsert && trigger.isAfter)
     {
-         Map<id,list<Volunteer_Roles__c>> volunteerRoleStatusMap = new Map<id,list<Volunteer_Roles__c>>();
-         for(Volunteer_Roles__c newVolRole : trigger.new)
-         {
-                      if(volunteerRoleStatusMap.containsKey(newVolRole.Volunteer_Name__c))
-                       {
-                            volunteerRoleStatusMap.get(newVolRole.Volunteer_Name__c).add(newVolRole);
-                       }
-                       else
-                       {
-                            volunteerRoleStatusMap.put(newVolRole.Volunteer_Name__c, new list<Volunteer_Roles__c>{newVolRole});
-                       }
-         
-         }
-         
-         if(volunteerRoleStatusMap.size() > 0)
-         {
-               VolunteerRoleTriggerHandler.updateVolunteerRoleStatus(volunteerRoleStatusMap,'Insert');
-         }
+        Map<id,list<Volunteer_Roles__c>> volunteerRoleStatusMap = new Map<id,list<Volunteer_Roles__c>>();
+        Set<Id> volunteerRoleIdsSet = new Set<Id>();
+        Set<Id> volunteerIdsSet = new Set<Id>();
+        for(Volunteer_Roles__c newVolRole : trigger.new)
+        {
+            if(volunteerRoleStatusMap.containsKey(newVolRole.Volunteer_Name__c))
+            {
+                volunteerRoleStatusMap.get(newVolRole.Volunteer_Name__c).add(newVolRole);
+            }
+            else
+            {
+                volunteerRoleStatusMap.put(newVolRole.Volunteer_Name__c, new list<Volunteer_Roles__c>{newVolRole});
+            }
+            if(newVolRole.Status__c == 'Pending Training'){
+                volunteerRoleIdsSet.add(newVolRole.Id);
+                volunteerIdsSet.add(newVolRole.Volunteer_Name__c);
+            }
+            
+        }
+        
+        if(volunteerRoleStatusMap.size() > 0)
+        {
+            VolunteerRoleTriggerHandler.updateVolunteerRoleStatus(volunteerRoleStatusMap,'Insert');
+        }
+        if(volunteerRoleIdsSet.size() > 0 && volunteerIdsSet.size() > 0) 
+        {
+            VolunteerRoleTriggerHandler.getVolunteerBasedOnVolunteerRoleStatus(volunteerRoleIdsSet,volunteerIdsSet);
+        }
     }
 }

@@ -31,7 +31,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         Set<Id> followUpTaskOwnerIdSet = new Set<Id>();
         
         for(Task updatedTask : Trigger.New) {
-            if(updatedTask.Status == 'Completed' && updatedTask.subject == 'Volunteer wish follow-up activities not complete') {
+            if(updatedTask.Status == 'Completed' && Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Volunteer wish follow-up activities not complete') {
                 followUpTaskMap.put(updatedTask.WhatId, updatedTask);
                 followUpTaskOwnerIdSet.add(updatedTask.OwnerId);
             }
@@ -49,7 +49,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                 }
                 
             }
-            if(updatedTask.status=='Completed' && updatedTask.Subject != 'Volunteer wish follow-up activities not complete') {
+            if(updatedTask.status=='Completed' && Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.Subject != 'Volunteer wish follow-up activities not complete') {
                 validateTaskList.add(updatedTask);
                 completedTaskParentIdSet.add(updatedTask.WhatId);
                 
@@ -76,14 +76,10 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             {
                 volunteerIdsSet.add(updatedTask.WhoId);
             }
-            if((updatedTask.Status == 'Declined') && updatedTask.RecordTypeId ==taskInterviewRecordType ){
+            if((updatedTask.Status == 'Declined') && updatedTask.RecordTypeId ==taskInterviewRecordType && Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status){
                 declinedTaskVolunteerIds.add(updatedTask.WhoId);
             }
-            /*if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Review photos/videos')) {
-                
-                uploadParentTaskIdMap.put(updatedTask.WhatId,updatedTask.OwnerId);
-            }*/
-            
+          
               //Update the Lead Closed Date.
             if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Referral DNQ')){
                 leadIdList.add(updatedTask.whoId);
@@ -196,17 +192,13 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         set<ID> contactIdset = new set<ID>();
         Map<Id,Contact> contactInfoMap = new Map<Id,Contact>();
         List<Task> updateTaskList = new List<Task>();
-        Set<Id> checkInTaskParentIdsSet = new Set<Id>();
         Map<Id,id> caseInfoMap=new Map<Id,id>();
         List<Task> validateTaskList = new List<Task>();
         Set<Id> completedTaskParentIdSet = new Set<Id>();
         for(Task currRec : Trigger.new){ 
-            if(currRec.Subject.contains(' ET : ') && currRec.status == 'Completed') {
+            if(currRec.Subject.contains(' ET : ') && currRec.status == 'Completed' && Trigger.oldMap.get(currRec.Id).Status != currRec.Status) {
                 currRec.ActivityDate = null;
             }
-            /*if(currRec.Subject == 'Check in with the family every 30 days' && currRec.Status == 'Completed') {
-                checkInTaskParentIdsSet.add(currRec.WhatId);
-            }*/
             string id = currRec.WhoId;
             if(currRec.Confirmed_Date__c != Null && Trigger.oldMap.get(currRec.id).Confirmed_Date__c  == Null)
                 currRec.Status = 'Scheduled';
@@ -231,19 +223,17 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                 currRec.Availability_Time_Other3__c = '';
             }
             
-            if(currRec.WhoId != null && id.startsWith('003') ){
+            if(currRec.WhoId != null && id.startsWith('003') && Trigger.oldMap.get(currRec.Id).WhoId != currRec.WhoId){
                 contactIdset.add(currRec.WhoId);
                 updateTaskList.add(currRec);
             }
             /********** Closure Rules *********/
-            if(currRec.status=='Completed' && currRec.subject=='wish presentation date entered'){
+            if(currRec.status=='Completed' && Trigger.oldMap.get(currRec.Id).Status != currRec.Status && currRec.subject=='wish presentation date entered'){
                 caseInfoMap.put(currRec.id,currRec.whatid);
             }
             
-            if(currRec.status=='Completed') {
+            if(currRec.status=='Completed' && Trigger.oldMap.get(currRec.Id).Status != currRec.Status) {
                 validateTaskList.add(currRec);
-                
-                
             }
             
         }
@@ -254,9 +244,6 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             TaskHandler.updateTaskEmailMergeFields(contactIdset,updateTaskList);
         }
         
-        /*if(checkInTaskParentIdsSet.size() > 0 ) {
-            //TaskHandler.updateCheckinDate(checkInTaskParentIdsSet);
-        }*/
         if(caseInfoMap.size() >0){
             map<id,case> caseMap=new Map<id,case>([SELECT id from case where Presentation_Date__c=:Null and Id IN:caseInfoMap.values() and  RecordTypeId=:wishGrantedRecordTypeId]);
             
@@ -265,18 +252,6 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                     t.adderror('error');
                 }
             }
-        }
-    }
-    
-    if(Trigger.isAfter && Trigger.isUpdate){
-        Set<Id> checkInTaskParentIdsSet = new Set<Id>();
-        for(Task currRec : Trigger.new){ 
-             if(currRec.Subject == 'Check in with the family every 30 days' && currRec.Status == 'Completed') {
-                checkInTaskParentIdsSet.add(currRec.WhatId);
-            }
-        }
-       if(checkInTaskParentIdsSet.size() > 0 ) {
-            TaskHandler.updateCheckinDate(checkInTaskParentIdsSet);
         }
     }
 }

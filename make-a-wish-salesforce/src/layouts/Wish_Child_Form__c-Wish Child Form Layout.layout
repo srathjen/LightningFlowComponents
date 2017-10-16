@@ -45,6 +45,10 @@
                 <behavior>Edit</behavior>
                 <field>Case_Team_Member2__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Residing_With_Wish_Child__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>

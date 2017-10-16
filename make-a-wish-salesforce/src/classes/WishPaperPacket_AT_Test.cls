@@ -1,10 +1,10 @@
 /*****************************************************************************
 Author : MST Solutions
 CreateDate : 05/5/2017
-Description : UpdateWishFamily_AT_Test is used to increase the code coverage for UpdateWishFamily_AT.
+Description : WishPaperPacket_AT_Test is used to increase the code coverage for UpdateWishFamily_AT.
 ******************************************************************************/
 @isTest
-public class UpdateWishFamily_AT_Test{
+public class WishPaperPacket_AT_Test{
     
     public static testmethod void createWishPaperWork(){
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
@@ -28,6 +28,7 @@ public class UpdateWishFamily_AT_Test{
         updatewishChildForm.Requested_Participant_Name_forWheelchair__c ='';
         updatewishChildForm.Bringing_Own_Wheel_Chair__c ='';
         update wishChildForm ;
+        system.assertEquals(wishChildForm.Case__c,caseId.Id);
         
         
     }
@@ -50,6 +51,7 @@ public class UpdateWishFamily_AT_Test{
         cont.id = updatewishChildForm.RelatedContact__c;
         cont.RelatedContacts__c = updatewishChildForm.id;
         update cont;
+        system.assertEquals(wishChildForm.Case__c,caseId.Id);
         
     }
     

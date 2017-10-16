@@ -195,6 +195,46 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Volunteer_Training_Status__c</fullName>
+        <description>This field is update as cancel when the volunteer training is canceled.</description>
+        <externalId>false</externalId>
+        <label>Hidden Volunteer Training Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Volunteer Cancelled</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Registered</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Completed</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Hidden_Volunteer_User_Name__c</fullName>
+        <description>This field is used to hold the prospective volunteer user name.</description>
+        <externalId>false</externalId>
+        <label>Hidden Volunteer User Name</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>LMS_Enrollment_Id__c</fullName>
         <caseSensitive>false</caseSensitive>
         <description>This Field holds the enroll id from the LMS</description>
@@ -235,6 +275,34 @@
         <externalId>false</externalId>
         <formula>Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.Name</formula>
         <label>Orientation &amp; Training</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Orientation_Training_email_signature__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(Account_Name__c =&quot;&quot; &amp;&amp; Class_Offering__r.Owner:User.Email=&quot;&quot; &amp;&amp; Class_Offering__r.Owner:User.Phone=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName,
+
+IF(Account_Name__c =&quot;&quot; &amp;&amp; Class_Offering__r.Owner:User.Phone=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() + Class_Offering__r.Owner:User.Email,
+
+IF(Account_Name__c =&quot;&quot; &amp;&amp; Class_Offering__r.Owner:User.Email=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() + Class_Offering__r.Owner:User.Phone,
+
+IF(Class_Offering__r.Owner:User.Email=&quot;&quot; &amp;&amp; Class_Offering__r.Owner:User.Phone=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() + Account_Name__c ,
+
+IF(Account_Name__c =&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() +  Class_Offering__r.Owner:User.Phone + BR() + Class_Offering__r.Owner:User.Email,
+
+IF(Class_Offering__r.Owner:User.Phone=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() +  Account_Name__c   + BR() + Class_Offering__r.Owner:User.Email,
+
+IF(Class_Offering__r.Owner:User.Email=&quot;&quot;, Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() +  Account_Name__c   + BR() + Class_Offering__r.Owner:User.Phone,
+
+
+Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:User.LastName + BR() +  Account_Name__c   + BR() + Class_Offering__r.Owner:User.Phone + BR() + Class_Offering__r.Owner:User.Email
+)))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Orientation Training email signature</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>

@@ -1210,6 +1210,22 @@
                     <default>false</default>
                 </value>
                 <value>
+                    <fullName>Foster Mother</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Foster Father</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Foster Sister</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Foster Brother</fullName>
+                    <default>false</default>
+                </value>
+                <value>
                     <fullName>Aunt</fullName>
                     <default>false</default>
                 </value>
@@ -1238,7 +1254,7 @@
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>Neighbour</fullName>
+                    <fullName>Neighbor</fullName>
                     <default>false</default>
                 </value>
                 <value>
@@ -1262,7 +1278,7 @@
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>Grandaughter</fullName>
+                    <fullName>Granddaughter</fullName>
                     <default>false</default>
                 </value>
                 <value>
@@ -1276,6 +1292,16 @@
                 <value>
                     <fullName>Other</fullName>
                     <default>false</default>
+                </value>
+                <value>
+                    <fullName>Grandaughter</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
+                </value>
+                <value>
+                    <fullName>Neighbour</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -1612,6 +1638,17 @@
         <trackHistory>false</trackHistory>
         <type>Html</type>
         <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Approximate_Diagnosis_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Approximate Diagnosis Date</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Are_Other_Diagnosis_Eligible_For_Wish__c</fullName>
@@ -2539,7 +2576,7 @@
         <fullName>Inquiry_Date__c</fullName>
         <description>It holds the Date of Inquriy form submitted.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the Initial lead from a non-authorized referral source is received.</inlineHelpText>
+        <inlineHelpText>Date when Lead is received from non-authorized referral source</inlineHelpText>
         <label>Inquiry Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3083,6 +3120,22 @@
                     <default>false</default>
                 </value>
                 <value>
+                    <fullName>Foster Mother</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Foster Father</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Foster Sister</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Foster Brother</fullName>
+                    <default>false</default>
+                </value>
+                <value>
                     <fullName>Aunt</fullName>
                     <default>false</default>
                 </value>
@@ -3135,7 +3188,7 @@
                     <default>false</default>
                 </value>
                 <value>
-                    <fullName>Grandaughter</fullName>
+                    <fullName>Granddaughter</fullName>
                     <default>false</default>
                 </value>
                 <value>
@@ -3149,6 +3202,11 @@
                 <value>
                     <fullName>Other</fullName>
                     <default>false</default>
+                </value>
+                <value>
+                    <fullName>Grandaughter</fullName>
+                    <default>false</default>
+                    <isActive>false</isActive>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -3169,7 +3227,7 @@
         <fullName>Part_A_Received__c</fullName>
         <description>This field will capture the date when the status is changed Part A Sent to Eligibility Review/Qualified</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the Diagnosis Verification is received from the child&apos;s medical professional.</inlineHelpText>
+        <inlineHelpText>Date when DV is received from Medical Professional</inlineHelpText>
         <label>Diagnosis Verification Received</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3180,7 +3238,7 @@
         <fullName>Part_A_Sent__c</fullName>
         <description>This will capture the date when the lead status is changed from Referred to Part A Sent</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the Diagnosis Verification is sent to the child&apos;s medical professional</inlineHelpText>
+        <inlineHelpText>Date when DV is sent to Medical Professional</inlineHelpText>
         <label>Diagnosis Verification Sent</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -6553,7 +6611,7 @@
         <fullName>Lead_Diagnosis_Validation</fullName>
         <active>true</active>
         <description>Used to prevent wish child record when there is no Primary Diagnosis</description>
-        <errorConditionFormula>AND(ISBLANK(PD_Condition_Description__c), ISBLANK( PD_ICD_Code__c ),$Profile.Name != &apos;Integration&apos;, $Profile.Name != &apos;Wish Referral Form&apos; )</errorConditionFormula>
+        <errorConditionFormula>AND(ISBLANK(PD_Condition_Description__c), ISBLANK( PD_ICD_Code__c ),$Profile.Name != &apos;Integration&apos;, $Profile.Name != &apos;Wish Referral Form Profile&apos; )</errorConditionFormula>
         <errorMessage>Please provide the ICD Code or Primary Diagnosis.</errorMessage>
     </validationRules>
     <validationRules>

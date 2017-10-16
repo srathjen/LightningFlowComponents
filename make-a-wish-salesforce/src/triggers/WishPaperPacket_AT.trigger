@@ -1,4 +1,11 @@
-trigger UpdateWishFamily_AT on Wish_Child_Form__c (Before insert,Before update, After update) {
+/*****************************************************************************
+Author : MST Solutions
+CreateDate : 05/5/2017
+Description : This WishPaperPacket_AT is used to update the Hidden object fields as "null" 
+in Wish Information page if you select "No" for medical information section question.
+******************************************************************************/
+
+trigger WishPaperPacket_AT on Wish_Child_Form__c (Before insert,Before update, After update) {
 
     if(Trigger.isBefore && Trigger.isInsert){
      for(Wish_Child_Form__c dbWishchildForm : trigger.new){
@@ -63,30 +70,5 @@ trigger UpdateWishFamily_AT on Wish_Child_Form__c (Before insert,Before update, 
         }
         
     }
-    
-    /*if(Trigger.isAfter && Trigger.isUpdate){
-        Map<Id,String> wishMap = new Map<Id,String>();
-        List<Contact> updateContactList = new List<Contact>();
-        for(Wish_Child_Form__c dbWishchildForm : trigger.new){
-        
-           if(trigger.oldMap.get(dbWishchildForm.Id).RelatedContact__c != dbWishchildForm.RelatedContact__c){
-                wishMap.Put(dbWishchildForm.Case__c,dbWishchildForm.RelatedContact__c);
-               
-            }
-         }
-         
-         if(wishMap.size() > 0){
-         for(Case dbWishFamilyCase : [Select Id,ContactId from Case where Id IN: wishMap.KeySet()]){
-              if(wishMap.containsKey(dbWishFamilyCase.Id)){
-                 contact updateContact = new Contact();
-                 updateContact.Id = dbWishFamilyCase.ContactId;
-                 updateContact.RelatedContacts__c = wishMap.get(dbWishFamilyCase.Id); 
-                 updateContactList.add(updateContact);
-             }
-         }
-        }
-        
-        if(updateContactList.size() > 0)
-        update updateContactList;
-    }*/
+   
 }

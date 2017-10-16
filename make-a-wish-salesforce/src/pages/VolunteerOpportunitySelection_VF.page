@@ -29,7 +29,7 @@ table, th, td {
                <apex:repeat value="{!volunteerWrapperList}" var="vol" id="table">
                <tr></tr>
                    <tr>
-                       <td><apex:inputCheckbox value="{!vol.recordSelected}"/></td>
+                       <td><apex:inputCheckbox value="{!vol.recordSelected}" id="recordSelect"/></td>
                        <td>{!vol.volOpp.Name}</td>
                        <td>{!vol.volOpp.Volunteer_Name__r.Name}</td>
                        <td>{!vol.volOpp.Chapter_Name__r.Name}</td>

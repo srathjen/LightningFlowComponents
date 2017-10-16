@@ -756,10 +756,6 @@
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>UpdateWishFamily_AT_Test</apexClass>
-        <enabled>false</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>UserRoleUtility</apexClass>
         <enabled>false</enabled>
     </classAccesses>
@@ -977,6 +973,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>WishLiabilityMinorParticipant_AC_Test</apexClass>
+        <enabled>false</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WishPaperPacket_AT_Test</apexClass>
         <enabled>false</enabled>
     </classAccesses>
     <classAccesses>
@@ -2254,6 +2254,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Background_check__c.Background_Check_Email_signature__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Background_check__c.Current__c</field>
         <readable>true</readable>
@@ -2336,6 +2341,21 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Background_check__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Background_check__c.VolunteerRoleOutofCompliance__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Background_check__c.VolunteerRoleTrainedTpendChapReview__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Background_check__c.Volunteer_FirstName__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -2736,6 +2756,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Case.Case_ThreadId__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Case_email_signature__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -3214,6 +3239,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.EmergencyContactName__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Case.Emergency_Number__c</field>
         <readable>true</readable>
@@ -3431,6 +3461,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Case.Hidden_Wish_Child_Country_Code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.Hidden_Wish_Child_FirstName__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -4629,6 +4664,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Conflict_Of_Interest__c.Hidden_COI_Volunteer_FirstName__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Conflict_Of_Interest__c.Hidden_Volunteer_Contact_Email__c</field>
         <readable>true</readable>
@@ -4657,6 +4697,16 @@
         <editable>true</editable>
         <field>Conflict_Of_Interest__c.Signed_Date__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Conflict_Of_Interest__c.VolunteerRoleOutofCompliance__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Conflict_Of_Interest__c.VolunteerRoleTrainedTpendChapReview__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -5079,6 +5129,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Hidden_Volunteer_OT_Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Hidden_Wish_Child_Id__c</field>
         <readable>true</readable>
@@ -5135,6 +5190,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Contact.Important_Notes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Contact.Inquiry_Referral_Method__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -5142,6 +5202,11 @@
         <editable>true</editable>
         <field>Contact.Interested_involved_with_Make_A_Wish__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.InterviewDateSet__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -7831,6 +7896,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Any_medical_reason_for_moving_quickly__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Approximate_Diagnosis_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -10820,6 +10890,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Travel_Data__c.Share_w_Family__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Travel_Data__c.Start_Date__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -10890,8 +10965,18 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>User.Hidden_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>User.Hidden_Role_Name_Id__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>User.Hidden_Volunteer_Cancelled__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
@@ -10962,6 +11047,11 @@
         <editable>true</editable>
         <field>User.Volunteer_Active__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>User.Volunteer_Orientation_Status__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -11195,7 +11285,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>Volunteer_Opportunity__c.Hidden_Volunteer_FirstName__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>Volunteer_Opportunity__c.Hobbies__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Volunteer_Opportunity__c.In_Progress__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -11384,6 +11484,16 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Volunteer_Opportunity__c.Wish_National_Type__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Volunteer_Opportunity__c.Wish_Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Volunteer_Opportunity__c.Wish__c</field>
         <readable>true</readable>
@@ -11449,6 +11559,16 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Volunteer_Orientation_Training__c.Hidden_Volunteer_Training_Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Volunteer_Orientation_Training__c.Hidden_Volunteer_User_Name__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Volunteer_Orientation_Training__c.LMS_Enrollment_Id__c</field>
         <readable>true</readable>
@@ -11466,6 +11586,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Volunteer_Orientation_Training__c.Orientation_Training_Hidden__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -12070,7 +12195,22 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Wish_Child_Form__c.Parent_Gurdian_above_18_Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Child_Form__c.Parent_Gurdian_above_18__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Wish_Child_Form__c.Parent_Legal_Guardian_Signature__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Child_Form__c.ParentsParticipantsName__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -12266,6 +12406,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Wish_Child_Form__c.Requested_Participant_Name_for_Oxygen__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Wish_Child_Form__c.Residing_With_Wish_Child__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -14047,6 +14192,10 @@
         <enabled>false</enabled>
     </pageAccesses>
     <pageAccesses>
+        <apexPage>VolunteerRegisterPage_VF</apexPage>
+        <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
         <apexPage>VolunteerTaskTransfer_VF</apexPage>
         <enabled>false</enabled>
     </pageAccesses>
@@ -14057,6 +14206,10 @@
     <pageAccesses>
         <apexPage>VolunteerWelcomePage_VF</apexPage>
         <enabled>false</enabled>
+    </pageAccesses>
+    <pageAccesses>
+        <apexPage>WinformationAttachment_VF</apexPage>
+        <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
         <apexPage>WishBudgetForm_VF</apexPage>

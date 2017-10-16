@@ -57,7 +57,7 @@ public class VolunteerActiveTraining_AC {
         checkExistingTrainingRecords = new List<Volunteer_Orientation_Training__c>();
         currentUserId = userInfo.getUserId();
         classOffereningRecordtypeId = Schema.Sobjecttype.Class_Offering__c.getRecordTypeInfosByName().get(constant.classOfferingRecordTypeId).getRecordTypeId();
-        getUserRelatedContact = [SELECT Id,contact.Region_Chapter__c,contact.Region_Chapter__r.Chapter_Id__c,Username, LMS_Login__c, LMS_Id__c, ContactId, LMS_User_Code__c,FirstName,LastName,Email FROM User WHERE Id=:currentUserId];
+        getUserRelatedContact = [SELECT Id,contact.Region_Chapter__c,Hidden_Email__c,contact.Region_Chapter__r.Chapter_Id__c,Username, LMS_Login__c, LMS_Id__c, ContactId, LMS_User_Code__c,FirstName,LastName,Email FROM User WHERE Id=:currentUserId];
         lMSCredential = LMS_Credentials__c.getValues('LMS Integration');
         userRelatedContactId = getUserRelatedContact.get(0).ContactId;
         System.debug('VA Load Begin 2');
@@ -217,7 +217,7 @@ public class VolunteerActiveTraining_AC {
         else {
             if(classOfferingDetails.size() > 0) {
                 Map<Id, List<Volunteer_Orientation_Training__c>> trainingMaps = new Map<Id, List<Volunteer_Orientation_Training__c>>();
-                checkExistingCanceledRecords = [SELECT Id, class_offering__c, class_offering__r.Start_Time__c, class_offering__r.recordtypeid, class_offering__r.End_Time__c,FORMAT(class_offering__r.Date__c),  class_offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c 
+                checkExistingCanceledRecords = [SELECT Id, class_offering__c, class_offering__r.Start_Time__c, class_offering__r.recordtypeid, class_offering__r.End_Time__c,FORMAT(class_offering__r.Date__c),  class_offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c,LMS_Enrollment_Id__c 
                                                 FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =: userRelatedContactId AND class_offering__c = :trainingId AND Hidden_O_T_Id__c=:classOfferingMap.get(trainingId).Chapter_Role_O_T__r.Orientation_Training__c AND Volunteer_Attendance__c = 'Volunteer Cancelled'];
                 if(checkExistingCanceledRecords.size()>0) {
                     if(checkExistingCanceledRecords.get(0).class_offering__r.recordtypeid == classOffereningRecordtypeId){
@@ -227,6 +227,7 @@ public class VolunteerActiveTraining_AC {
                         }
                         LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
                         currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress');
+                        System.debug('currLMSOrientationRegistrationResponse'+currLMSOrientationRegistrationResponse);
                     }
                     
                     List<Volunteer_Orientation_Training__c> updateList = new List<Volunteer_Orientation_Training__c>();
@@ -239,6 +240,20 @@ public class VolunteerActiveTraining_AC {
                                || ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.End_Time__c))) <= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)))) && ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.End_Time__c))) <= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c))))) {
                                    checkExistingCanceledRecords.get(0).Volunteer_Attendance__c = 'Registered';
                                    checkExistingCanceledRecords.get(0).class_offering__c = trainingId;
+                                   
+                         if(checkExistingCanceledRecords.get(0).class_offering__r.recordtypeid == classOffereningRecordtypeId){
+                           
+                            if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
+                                User currVolunteerUser = getUserRelatedContact.get(0); 
+                                currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
+                            }
+                            LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
+                            currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress');
+                            checkExistingCanceledRecords.get(0).LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : Null;
+    
+                            System.debug('currLMSOrientationRegistrationResponse23'+currLMSOrientationRegistrationResponse);
+                        }
+                                   
                                    updateList.add(checkExistingCanceledRecords[0]);
                                    
                                    
@@ -259,6 +274,16 @@ public class VolunteerActiveTraining_AC {
                     } else {
                         checkExistingCanceledRecords.get(0).Volunteer_Attendance__c = 'Registered';
                         checkExistingCanceledRecords.get(0).class_offering__c = trainingId;
+                        if(checkExistingCanceledRecords.get(0).class_offering__r.recordtypeid == classOffereningRecordtypeId){
+                           if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
+                                User currVolunteerUser = getUserRelatedContact.get(0); 
+                                currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
+                           }
+                           LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
+                           currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress');
+                           checkExistingCanceledRecords.get(0).LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : Null;
+
+                       }
                         update checkExistingCanceledRecords;
                         isCancelled = false;
                         isCompleted = False;

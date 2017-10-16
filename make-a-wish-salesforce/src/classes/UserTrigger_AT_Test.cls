@@ -20,7 +20,9 @@ public class UserTrigger_AT_Test {
        Test.StartTest();
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
-        OrientationandTrainingUtil.createProspectiveVolunteerUser(volunteerContact.id);
+        User prospectiveUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(volunteerContact.id);
+       prospectiveUser.Email = 'TestEmail1234@mail.com';
+       Update prospectiveUser;
        Test.StopTest();
        }
      }
@@ -67,6 +69,8 @@ public class UserTrigger_AT_Test {
             updateUser.Id = queryAlabamaUser.Id;
             updateUser.IsActive = false;
             update updateUser;
+            updateUser.IsActive = True;
+            Update updateUser;
             }
            
            

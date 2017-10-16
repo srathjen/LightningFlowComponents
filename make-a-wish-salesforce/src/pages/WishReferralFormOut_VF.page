@@ -340,10 +340,18 @@
                                     <div class="divTableCell">ICD Code:</div>
                                     <div class="divTableCell">{!currLead.PD_ICD_Code__r.Name }</div>
                                 </div>
+                                
+                                <div class="divTableRow">
+                                    <div class="divTableCell">Approximate Diagnosis Date</div>
+                                    <div class="divTableCell">{!currLead.Approximate_Diagnosis_Date__c}</div>
+                                </div>
+                                
                                 <div class="divTableRow">
                                     <div class="divTableCell">Is there a medical reason why we need to move quickly?</div>
                                     <div class="divTableCell">{!currLead.Any_medical_reason_for_moving_quickly__c }</div>
                                 </div>
+                                
+                                
                                 
                                 <hr style="width:200%"/>
                                 

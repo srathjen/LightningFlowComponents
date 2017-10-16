@@ -35,28 +35,28 @@
                         </div>
                         
                         <!-- Form 3 (Interview Confirmation Details -->
-                        <apex:outputpanel rendered="{!displayConfirmTask}">
+                        <apex:outputpanel rendered="{!displayConfirmTask}" id="dispConfirm">
                             <fieldset>    
                                 <legend>Interview Details</legend> 
-                                 <p><apex:outputText value="Your confirmed interview date and time is below.If you need to reschedule, please click on the reschedule button and provide new days and times that you will be available." /></p>
+                                 <p><apex:outputText value="Your confirmed interview date and time is below.If you need to reschedule, please click on the reschedule button and provide new days and times that you will be available." id="interviewDateConfirm"/></p>
                                 <div class="form-group row">
                                      <label class="col-sm-3" aria-label="Confirmed Date">Confirmed Date:</label>
                                      <div class="col-sm-6">
-                                        <apex:outputText value="{0,date,MM/dd/yy}">
-                                            <apex:param value="{!volTask[0].Confirmed_Date__c}" /> 
+                                        <apex:outputText value="{0,date,MM/dd/yy}" id="dateFormate">
+                                            <apex:param value="{!volTask[0].Confirmed_Date__c}"/> 
                                         </apex:outputText>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3" aria-label="Confirmed Time">Confirmed Time:</label>
                                     <div class="col-sm-6">
-                                       <apex:outputText value="{!volTask[0].Confirmed_Time__c}" />
+                                       <apex:outputText value="{!volTask[0].Confirmed_Time__c}" id="confirmTime" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-3" aria-label="Location">Venue:</label>
                                     <div class="col-sm-6">
-                                        <apex:outputText value="{!volTask[0].venue__c}"/>
+                                        <apex:outputText value="{!volTask[0].venue__c}" id="venue"/>
                                     </div>
                                 </div>
                                 <apex:commandbutton styleClass="col-xs-12 col-sm-12 col-md-4 col-md-push-8 btn-md" value="Reschedule" action="{!confirmReschedule}" />
@@ -86,51 +86,51 @@
                         </apex:outputpanel>
 
                         <!-- Form 1 (Interview Form) -->
-                        <apex:outputpanel rendered="{!((isTaskCreated == false) && (displayConfirmTask == false)) }">
+                        <apex:outputpanel rendered="{!((isTaskCreated == false) && (displayConfirmTask == false)) }" >
                             <fieldset>
                                 <legend>Interview Availability<span>Please enter a date and choose a time.</span></legend>
                                 <div class="form-group row">
                                     <label class="col-sm-3" aria-label="Confirmed Date">Availability 1</label>
                                     <div class="col-sm-6">
-                                        <apex:inputField value="{!currTask.Available_Date1__c}" styleclass="form-control date1 jqdatepicker" html-placeholder="MM / DD / YYYY"/>
+                                        <apex:inputField value="{!currTask.Available_Date1__c}" styleclass="form-control date1 jqdatepicker" html-placeholder="MM / DD / YYYY" id="availDate1"/>
                                     </div>
 
                                     <label aria-label="Time Option 1" class="col-sm-3 sr-only">Available Time 1</label>
                                     <div class="col-sm-6 col-sm-push-3 radio time time1">
-                                        <apex:selectRadio value="{!currTask.Available_Time1__c}" layout="pageDirection">
-                                            <apex:selectOptions value="{!times}"  />
+                                        <apex:selectRadio value="{!currTask.Available_Time1__c}" layout="pageDirection" id="availTime1">
+                                            <apex:selectOptions value="{!times}" />
                                         </apex:selectRadio>
-                                        <apex:inputText styleClass="form-control col-xs-12 other other1" maxlength="50" value="{!currTask.Availability_Time_Other1__c}" html-placeholder="Please enter details here" />
+                                        <apex:inputText styleClass="form-control col-xs-12 other other1" maxlength="50" value="{!currTask.Availability_Time_Other1__c}" html-placeholder="Please enter details here" id="availTimeOther1"/>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group row">
                                     <label class="col-sm-3" aria-label="Confirmed Date">Availability 2</label>
                                     <div class="col-sm-6">
-                                        <apex:inputField value="{!currTask.Available_Date2__c}" styleclass="form-control date2 jqdatepicker" html-placeholder="MM / DD / YYYY"/>
+                                        <apex:inputField value="{!currTask.Available_Date2__c}" styleclass="form-control date2 jqdatepicker" html-placeholder="MM / DD / YYYY" id="availDate2"/>
                                     </div>
                                     
                                     <label aria-label="Time Option 2" class="col-sm-3 sr-only">Available Time 2</label>
                                     <div class="col-sm-6 col-sm-push-3 radio time time2">
-                                        <apex:selectRadio value="{!currTask.Available_Time2__c}" layout="pageDirection">
-                                            <apex:selectOptions value="{!times}"  />
+                                        <apex:selectRadio value="{!currTask.Available_Time2__c}" layout="pageDirection" id="availTime2">
+                                            <apex:selectOptions value="{!times}" />
                                         </apex:selectRadio>
-                                        <apex:inputText styleClass="form-control col-xs-12 other other2" maxlength="50" value="{!currTask.Availability_Time_Other2__c}" html-placeholder="Please enter details here" />
+                                        <apex:inputText styleClass="form-control col-xs-12 other other2" maxlength="50" value="{!currTask.Availability_Time_Other2__c}" html-placeholder="Please enter details here" id="availTimeOther2"/>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group row">
                                     <label class="col-sm-3" aria-label="Confirmed Date">Availability 3</label>
                                     <div class="col-sm-6">
-                                        <apex:inputField value="{!currTask.Available_Date3__c}" styleclass="form-control date3 jqdatepicker" html-placeholder="MM / DD / YYYY"/>
+                                        <apex:inputField value="{!currTask.Available_Date3__c}" styleclass="form-control date3 jqdatepicker" html-placeholder="MM / DD / YYYY" id="availDate3"/>
                                     </div>
 
                                     <label aria-label="Time Option 3" class="col-sm-3 sr-only">Available Time 3</label>
                                     <div class="col-sm-6 col-sm-push-3 radio time time3">
-                                        <apex:selectRadio value="{!currTask.Available_Time3__c}" layout="pageDirection">
+                                        <apex:selectRadio value="{!currTask.Available_Time3__c}" layout="pageDirection" id="availTime3">
                                             <apex:selectOptions value="{!times}" />
                                         </apex:selectRadio>
-                                        <apex:inputText styleClass="form-control col-xs-12 other other3" maxlength="50" value="{!currTask.Availability_Time_Other3__c}" html-placeholder="Please enter details here" />
+                                        <apex:inputText styleClass="form-control col-xs-12 other other3" maxlength="50" value="{!currTask.Availability_Time_Other3__c}" html-placeholder="Please enter details here" id="availTimeOther3"/>
                                     </div>
                                 </div>
                             </fieldset>
@@ -157,7 +157,7 @@
                 
                 <aside class="col-md-4 page-info" role="page-info">
                     <h2>Additional Information</h2>
-                    <p><apex:outputText value="{!interviewContent}" escape="false" /> </p>
+                    <p><apex:outputText value="{!interviewContent}" escape="false" id="intViewContent"/> </p>
                 </aside>
             </div>
         </main>

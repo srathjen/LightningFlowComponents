@@ -73,6 +73,17 @@
         <template>Automated_Volunteer_Templates/Training_Registered_Email_Template</template>
     </alerts>
     <alerts>
+        <fullName>Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Alert</fullName>
+        <description>Training: Pending Volunteer, Virtual Self Paced Registered Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>VolunteerHidden_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Automated_Volunteer_Templates/Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Template</template>
+    </alerts>
+    <alerts>
         <fullName>Volunteer_O_T_Orienation_Registered_for_Virtual_Self_faced_Training</fullName>
         <description>Volunteer O&amp;T : Orienation Registered for Virtual Self faced Training</description>
         <protected>false</protected>
@@ -137,8 +148,29 @@
             <operation>equals</operation>
             <value>Virtual - Self Paced</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
+            <operation>notEqual</operation>
+            <value>Completed</value>
+        </criteriaItems>
         <description>This workflow will fire when the orientation is registered</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Volunteer_O_T_Orienation_Registered_for_Virtual_Self_faced_Training</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Volunteer_O_T_Orienation_Registered_for_Virtual_Self_faced_Training</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
     </rules>
     <rules>
         <fullName>O%26T%3A Self Faced Training Registered Workflow Rule</fullName>
@@ -170,6 +202,11 @@
             <field>Class_Offering__c.RecordTypeId</field>
             <operation>equals</operation>
             <value>Virtual - Self Paced</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Contact.is_Active_Volunteer__c</field>
+            <operation>equals</operation>
+            <value>True</value>
         </criteriaItems>
         <description>This workflow will fire when the training is registered</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -321,6 +358,11 @@
             <operation>notEqual</operation>
             <value>Integration</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Contact.is_Active_Volunteer__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
         <description>This workflow will fire when the training is completed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
@@ -357,6 +399,91 @@
         </criteriaItems>
         <description>This workflow will fire when the training is registered</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Training%3A Pending Volunteer%2C Virtual Self Paced Cancelled  Workflow</fullName>
+        <actions>
+            <name>Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Training</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Hidden_Volunteer_Training_Status__c</field>
+            <operation>equals</operation>
+            <value>Volunteer Cancelled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Hidden_Volunteer_User_Name__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>This workflow will fire when the volunteer cancelled the training and if there is not registered training</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Training%3A Pending Volunteer%2C Virtual Self Paced Registered Workflow</fullName>
+        <actions>
+            <name>Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Type__c</field>
+            <operation>equals</operation>
+            <value>Training</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Class_Offering__c.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Virtual - Self Paced</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
+            <operation>equals</operation>
+            <value>Registered</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
+            <operation>notEqual</operation>
+            <value>Completed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Volunteer_Orientation_Training__c.Hidden_Volunteer_User_Name__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>This workflow will fired when the prospective volunteer registered for virtual self paced training and not completed  7 &amp; 30 days  after registered</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
     </rules>
     <rules>
         <fullName>VolunteerO%26T%3AUpdatecompletedDate</fullName>

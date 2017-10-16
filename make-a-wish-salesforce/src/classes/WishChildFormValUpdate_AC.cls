@@ -294,6 +294,8 @@ Public Class WishChildFormValUpdate_AC
                 
                 for(WishChildFormUtil.WrapperClass  currRec : wrapFamilyList)
                 {
+                    system.debug('@@@@Parent LastName @@@@'+currRec.lastName);
+                    If(currRec.lastName != null || currRec.lastName != '""' || currRec.lastName != ''){
                     String findDupe = currRec.FirstName+'-'+currRec.lastName;
                     Contact newContact = new Contact();
                     newContact.RecordTypeId = wishFamilyDT;
@@ -311,6 +313,9 @@ Public Class WishChildFormValUpdate_AC
                     newContact.MobilePhone = (currRec.mobileTelephone!=Null)?currRec.mobileTelephone:'';
                     newContact.Email =  (currRec.Email!=Null)?currRec.Email:'';
                     newContact.BirthDate = (currRec.dob!=Null)?Date.valueOf(currRec.dob):currRec.dob;
+                    if(currRec.sameParentGuardianFlag == true)
+                    newContact.IsParentGuardian__c = 'ParentGuardian/Participant';
+                    else
                     newContact.IsParentGuardian__c = 'ParentGuardian';
                     newContact.Region_Chapter__c = ChapterAccId;
                     newContact.MailingStreet = (currRec.Street!=Null)?currRec.Street:'';
@@ -319,9 +324,9 @@ Public Class WishChildFormValUpdate_AC
                     newContact.MailingPostalCode = (currRec.PostalCode!=Null)?currRec.PostalCode:'';
                     newContact.AccountId = currWishChildForm.Case__r.Contact.AccountId;
                     newContact.Language__c  = currWishChildForm.case__r.contact.Language__c;
-                    parentGurdianSet.add(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Email);
+                    newContact.Residing_with_Wish_child__c = currRec.residingWishMedical;
                     createNewWishFamily.put(newContact.FirstName+'-'+newContact.lastName,newContact);
-                    
+                    }
                 }
             }
             if(currWishChildForm.Driver_Details__c!= Null)
@@ -349,7 +354,9 @@ Public Class WishChildFormValUpdate_AC
                 List<WishChildFormUtil.WrapperClass> wrapParticipantsList = (List<WishChildFormUtil.WrapperClass>) System.JSON.deserialize(jsonString, List<WishChildFormUtil.WrapperClass>.class);
                 for(WishChildFormUtil.WrapperClass  currRec : wrapParticipantsList )
                 {
-                    if(currRec.Relationship != 'Self'){
+                    if(currRec.Relationship != 'Wish Child (self)' ){
+                     if(currRec.lastName!= null || currRec.lastName != '""' || currRec.lastName != ''){
+                     system.debug('@@@@Participant LastName @@@@'+currRec.lastName);
                         String siblingContact = currRec.FirstName+'-'+currRec.lastName;
                         
                             Contact newContact = new Contact();
@@ -374,10 +381,9 @@ Public Class WishChildFormValUpdate_AC
                             newContact.IsParentGuardian__c = 'Participant';
                             newContact.Region_Chapter__c = ChapterAccId;
                             newContact.Language__c  = currWishChildForm.case__r.contact.Language__c;
-                            
                             createNewWishFamily.put(newContact.FirstName+'-'+newContact.lastName,newContact);
-                            participantSet.add(newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Email);
-                       
+                            
+                       }
                      }
                 }
                 
@@ -426,7 +432,7 @@ Public Class WishChildFormValUpdate_AC
             newRelation.Residing_with_Wish_child__c = newContact.Residing_with_Wish_child__c;
             String name = newContact.FirstName+'-'+newContact.lastName+'-'+newContact.Email;
             
-            if(parentGurdianSet.contains(name) && participantSet.contains(name)){
+            if(newContact.IsParentGuardian__c == 'ParentGuardian/Participant'){
                
                 newRelation.Parent_Legal_Guardian__c = true;
                 newRelation.Wish_Participant__c = true;
@@ -445,6 +451,7 @@ Public Class WishChildFormValUpdate_AC
             else{
                 if(newContact.IsParentGuardian__c == 'ParentGuardian'){
                     newRelation.Parent_Legal_Guardian__c = true;
+                    newRelation.Wish_Participant__c = false;
                     if(newContact.Birthdate != Null){
                         Date dt = Date.Valueof(newContact.Birthdate);
                         Integer days = dt.daysBetween(Date.Today());
@@ -459,6 +466,7 @@ Public Class WishChildFormValUpdate_AC
                     }
                 }
                 if(newContact.IsParentGuardian__c == 'Participant'){
+                    newRelation.Parent_Legal_Guardian__c = false;
                     newRelation.Wish_Participant__c = true;
                     if(newContact.Birthdate != Null){
                         Date dt = Date.Valueof(newContact.Birthdate);

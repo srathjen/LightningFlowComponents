@@ -74,6 +74,9 @@
         <field>Case.End_Date__c</field>
     </columns>
     <columns>
+        <field>Case.Completed_Date__c</field>
+    </columns>
+    <columns>
         <field>OWNER</field>
     </columns>
     <filter>

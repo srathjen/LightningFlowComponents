@@ -522,7 +522,7 @@ If this is a volunteer donor, gift subtype should begin with DRPS --></help>
         <relationshipLabel><!-- In-Kind Donation &amp; Reimbursement --></relationshipLabel>
     </fields>
     <fields>
-        <label><!-- Wish child Name --></label>
+        <label><!-- Wish Child Name --></label>
         <name>Wish_child_Name__c</name>
     </fields>
     <fields>

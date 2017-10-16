@@ -346,6 +346,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Share w/ Family --></label>
+        <name>Share_w_Family__c</name>
+    </fields>
+    <fields>
         <label><!-- Start Date --></label>
         <name>Start_Date__c</name>
     </fields>

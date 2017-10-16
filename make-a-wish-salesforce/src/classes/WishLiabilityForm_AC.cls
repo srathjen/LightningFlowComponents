@@ -36,6 +36,7 @@ public class WishLiabilityForm_AC
     public Boolean isFirstParentSendEmail{get;set;}
     public Boolean SignNowdisplayError{get;set;}
     public Set<String> holdEmailNameSet;
+    public String participantsName{get;set;}
     public Integer j = 0;
     public Integer k = 0;
     public boolean displaypopwindow{get;set;}
@@ -49,27 +50,42 @@ public class WishLiabilityForm_AC
         typeString = new List<String>();
         receipent = new List<String>();
         signNowList = new List<String>();
+        listofSenderName = new List<String>();
         holdEmailNameSet = new Set<String>();
         envelopeId = '';
         signersKeyPairMap = new Map<String,String>();
         displaypopwindow = false;
         currentCase = [SELECT ID,ContactID,Contact.Name,Contact.Publicity_OK__c,LiabilitySignerMapKeyPair__c,Hidden_Email_List__c,Hidden_Name_List__c,ChapterName__c,ChapterName__r.Name  FROM Case WHERE ID =:caseId];
         WishChildId = currentCase.ContactId; 
-        childForm = [SELECT Id,Hidden_Wish_Fmaily_Contact_Name__c,Case__c,Participant_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Participant_Details__c,Hidden_Email_List__c,
+        childForm = [SELECT Id,Parent_Gurdian_above_18__c,Case__c,ParentsParticipantsName__c,Participant_Name__c,Participant_Names__c,Parent_Gurdian_above_18_Email__c,Participant_Details__c,Hidden_Email_List__c,
                      Hidden_Name_List__c FROM Wish_Child_Form__c WHERE Case__c =: currentCase.Id];
+        
         if(childForm.size()>0){
             displayAlert = true;
             if(childForm[0].Hidden_Name_List__c != Null){
-                listofSenderName = new List<String>();
-                listofSenderName = childForm[0].Hidden_Name_List__c .split('#');
+                
+                 
                 for(String emailSenderName : childForm[0].Hidden_Name_List__c.split('#')){
                     holdEmailNameSet.add(emailSenderName.trim());
                 }
             }
-            if(childForm[0].Hidden_Wish_Fmaily_Contact_Name__c != Null || childForm[0].Participant_Name__c != Null){
+            
+            if(childForm[0].ParentsParticipantsName__c != Null){
+                 participantsName = childForm[0].ParentsParticipantsName__c;
+                if(childForm[0].ParentsParticipantsName__c.startsWith(',')){
+                    participantsName = childForm[0].ParentsParticipantsName__c.removeStart(',');
+                }
+                
+                if(childForm[0].ParentsParticipantsName__c.startsWith('null')){
+                    participantsName = childForm[0].ParentsParticipantsName__c.removeStartIgnoreCase('null');
+                }
+            }
+            if(childForm[0].Parent_Gurdian_above_18__c != Null || childForm[0].Participant_Name__c != Null){
                 signNowList = new List<String>();
-                if(childForm[0].Hidden_Wish_Fmaily_Contact_Name__c != Null){
-                    for(String processSignNowList : childForm[0].Hidden_Wish_Fmaily_Contact_Name__c.split('#')){
+               
+                if(childForm[0].Parent_Gurdian_above_18__c != Null){
+                
+                    for(String processSignNowList : childForm[0].Parent_Gurdian_above_18__c.split('#')){
                         if(Name == Null || Name == '')
                             Name = processSignNowList;
                         else
@@ -78,6 +94,7 @@ public class WishLiabilityForm_AC
                             signNowemailMap.put(processSignNowList,'abc@gmail.com');
                         }
                         signNowList.add(processSignNowList);
+                        listofSenderName.add(processSignNowList);
                     }
                 }
                 if(childForm[0].Participant_Name__c != Null){
@@ -95,13 +112,14 @@ public class WishLiabilityForm_AC
                             
                         }
                         signNowList.add(displayname);
+                        listofSenderName.add(processSignNowList);
                     }
                 }
             }
             List<String> holdRecVal = new List<String>();
-            if(childForm[0].Hidden_Wish_Fmaily_Contact_Email__c != Null || childForm[0].Participant_Details__c != Null){
-                if(childForm[0].Hidden_Wish_Fmaily_Contact_Email__c != Null){
-                    for(String key : childForm[0].Hidden_Wish_Fmaily_Contact_Email__c.split('#')){
+            if(childForm[0].Parent_Gurdian_above_18_Email__c != Null || childForm[0].Participant_Details__c != Null){
+                if(childForm[0].Parent_Gurdian_above_18_Email__c != Null){
+                    for(String key : childForm[0].Parent_Gurdian_above_18_Email__c.split('#')){
                     String keys;
                     String value;
                         if(!String.isEmpty(key) && key.contains('-')) {
@@ -123,22 +141,33 @@ public class WishLiabilityForm_AC
                         }
                     } 
                     }
+                    system.debug('@@@@ emailSignatureMap @@@@'+emailSignatureMap);
                 }
                 if(childForm[0].Participant_Details__c != Null){
+                List<String> proceessList = new List<String>();
                     for(String key : childForm[0].Participant_Details__c.split('#')){
+                    proceessList.clear();
+                       if(key.contains('-')){
+                       for(String sla : key.split('-')) {
+                           proceessList.add(sla);
+                       }
+                       if(proceessList.size() == 3) {
                         String keys = key.split('-')[0];
                         String value = key.split('-')[1];
                         String age = key.split('-')[2];
-                        if(!holdEmailNameSet.contains(keys)){
-                            if(Integer.valueof(age) >= 18)
+                         if(!holdEmailNameSet.contains(keys)){
+                            if(Integer.valueof(age) >= 18 && proceessList.size() == 3)
                                 emailSignatureMap.put(keys.trim(),value.trim());
                         }
+                       } 
+                       
                     } 
                 }
+                system.debug('@@@@ emailSignatureMap @@@@'+emailSignatureMap);
             }
         }
     }
-    
+  }  
     /*This method is used to fetch the multiple email address to send the liability form.*/
     public pageReference multiEmail(){
         if(emailSignatureMap.size()> 0 ){
@@ -194,6 +223,7 @@ public class WishLiabilityForm_AC
                 
             }
         }
+        system.debug('@@@ sendEmailMap @@@'+sendEmailMap);
         if((!sendEmailMap.isEmpty()) && sendEmailMap.size() > 0 ){
             for(String currString : sendEmailMap.KeySet()){
                 currString = currString.trim();
@@ -215,25 +245,6 @@ public class WishLiabilityForm_AC
                 }
             }
         }
-        /*for(Wish_Child_Form__c dbCase : [SELECT Id,Hidden_Email_List__c,Hidden_Name_List__c From Wish_Child_Form__c WHERE Case__c =: caseId]){
-            
-            Wish_Child_Form__c newCase = new Wish_Child_Form__c();
-            newCase.Id = dbCase.Id;
-            if(dbCase.Hidden_Email_List__c == Null && dbCase.Hidden_Name_List__c == Null){
-                newCase.Hidden_Email_List__c = queryName;
-                newCase.Hidden_Name_List__c = querySignature;
-            }
-            else{
-                newCase.Hidden_Email_List__c = dbCase.Hidden_Email_List__c+'#'+queryName;
-                newCase.Hidden_Name_List__c = dbCase.Hidden_Name_List__c+'#'+querySignature;
-            }
-            
-            try{
-                update newCase;
-            }
-            catch(Exception e){
-            }
-        }*/
         
         CallOuttoDocusign(sendEmailMap,caseId);
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'An email has been sent successfully'));
@@ -243,14 +254,15 @@ public class WishLiabilityForm_AC
    
     @future(Callout = true)   
     public Static void CallOuttoDocusign(Map<String,String>emailMap,String caseId){
+    System.debug('### sendEmailMap ###'+emailMap);
         boolean isParent;
         List<Contact> contactList = new List<Contact>(); 
         Wish_Child_Form__c  childFormInstance;
         Map<String,npe4__Relationship__c> recipientMap = new Map<String,npe4__Relationship__c>();
         Set<String> parentGardienSet = new Set<String>();
-        childFormInstance = [SELECT Id,Hidden_Wish_Fmaily_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Case__c,Participant_Name__c FROM Wish_Child_Form__c WHERE Case__c =: caseId];
+        childFormInstance = [SELECT Id,Parent_Gurdian_above_18__c,Parent_Gurdian_above_18_Email__c,Case__c,Participant_Name__c FROM Wish_Child_Form__c WHERE Case__c =: caseId];
         
-        for(String key : childFormInstance.Hidden_Wish_Fmaily_Contact_Email__c.split('#')){
+        for(String key : childFormInstance.Parent_Gurdian_above_18_Email__c.split('#')){
             String keys = key.split('-')[0];
             String value = key.split('-')[1];
             isParent = true;
@@ -274,6 +286,9 @@ public class WishLiabilityForm_AC
         String Password;
         String IntegratorKey;
         String endPointURL;
+        String emaiBody = 'Please sign the attached - Liability And Publicity Release Form'+'\r\n\r\n'+
+                          'Thank You,'+'\r\n\r\n'+
+                          'Make-A-Wish®';
         Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
         
         for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
@@ -420,7 +435,7 @@ public class WishLiabilityForm_AC
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailBlurb":"Please sign the attached Liability And Publicity Release Form. \r\n\n Thank You,\r\n\n Wish & Volunteer Center",'+
+            '  "emailBlurb":"'+emaiBody+'",'+
             '  "emailSubject": "Signature Required - Liability And Publicity Release Form",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+
@@ -534,10 +549,10 @@ public class WishLiabilityForm_AC
             }
             Map<String,String> recipientMap = new Map<String,String>();
             Set<String> signerSet = new Set<String>();
-            for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Participant_Name__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
+            for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Participant_Name__c,Parent_Gurdian_above_18__c FROM Wish_Child_Form__c WHERE
                                                     Case__c =: caseId]){
-                                                        if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != Null) {                                     
-                                                            for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c .split('#')){
+                                                        if(wishChildForm.Parent_Gurdian_above_18__c != Null) {                                     
+                                                            for(String keys : wishChildForm.Parent_Gurdian_above_18__c .split('#')){
                                                                 recipientMap.put(keys.trim(),'PARENT/LEGAL GUARDIAN');
                                                                 isFirstParent = true;
                                                                 signerSet.add(keys); 
@@ -801,7 +816,6 @@ public class WishLiabilityForm_AC
                        String body =  '{'+
                            '  "status":"sent",'+
                            '  "enableWetSign": "false",'+
-                           '  "emailBlurb":"Please sign the attached Liability And Publicity Release Form. \r\n\n Thank You,\r\n\n Wish & Volunteer Center",'+
                            '  "emailSubject": "Signature Required - Liability And Publicity Release Form",'+
                            '  "enforceSignerVisibility":"True",'+
                            '  "documents": [{'+
@@ -875,7 +889,7 @@ public class WishLiabilityForm_AC
                         } 
                     }
                     
-                    if(dbcase.Delivered_Hidden_Envelop_Id__c != Null){
+                    else if(dbcase.Delivered_Hidden_Envelop_Id__c != Null){
                         for(String key : dbcase.Delivered_LiabilitySignerMapKeyPair__c.split('#')){
                             String keys = key.split('-')[0];
                             String value = key.split('-')[1];
@@ -992,16 +1006,7 @@ public class WishLiabilityForm_AC
                    wishChildFormMap.put(updateChildForm.Id,updateChildForm); 
                }
             
-            /* if(dbcase.Hidden_Name_List__c == null){
-
-updateChildForm.Hidden_Name_List__c  = SingerName;
-wishChildFormMap.put(updateChildForm.Id,updateChildForm); 
-}
-else{
-
-updateChildForm.Hidden_Name_List__c  = dbcase.Hidden_Name_List__c+'#'+SingerName;
-wishChildFormMap.put(updateChildForm.Id,updateChildForm); 
-}*/
+          
             if(dsfsList.size() > 0)
                 insert dsfsList;
             if(wishChildFormMap.size() > 0){

@@ -15,6 +15,7 @@ Public Class WishChildFormUtil
     
     public list<Wish_Child_Form__c > wishChildList {get;set;}
     public List<WrapperClass> wishFamilyWrapList{get;set;}
+    public List<WrapperClass> wishFamilyAsParticipantList{get;set;}
     public List<WrapperClass> wishParticipantList{get;set;}
     public List<DriverWrapper> driverWrapperCls{get;set;}
     public Map<String,String> emailMap{get;set;}
@@ -114,10 +115,10 @@ Public Class WishChildFormUtil
     public string childForm {get;set;}
     public string familyForm {get;set;}
     public string infoForm {get;set;}
-    public boolean sameParentGuardian{get;set;}
+    
     public boolean isChildPart{get;set;}
     public boolean approvalError{get;set;}
-   
+    public boolean sameParentGuardian{get;set;}
     
     
     public WishChildFormUtil()
@@ -166,6 +167,7 @@ Public Class WishChildFormUtil
         emailMap = new Map<String,String>();
         sendEmailMap = new Map<String,String>();
         selectedMailMap = new Map<String,String>();
+        wishFamilyAsParticipantList = new List<WrapperClass>();
         SignNowList = new List<String>();
         listofSenderName = new List<String>();
         caseId = Apexpages.currentPage().getParameters().get('id');
@@ -205,9 +207,9 @@ Public Class WishChildFormUtil
         public String Street{get;set;}
         public String State{get;set;}
         public String PostalCode{get;set;}
-        
+        //public boolean sameParentGuardian{get;set;}
         public String relId{get;set;}
-        public boolean sameParentGuardianFlag = false;
+        public boolean sameParentGuardianFlag{get;set;}
         public boolean isChildParticipants {get; set;}
     }
  
@@ -259,6 +261,10 @@ Public Class WishChildFormUtil
          options.add(new SelectOption('Step Brother','Step Brother')); 
          options.add(new SelectOption('Half Sister','Half Sister')); 
          options.add(new SelectOption('Half Brother','Half Brother'));
+         options.add(new SelectOption('Foster Mother','Foster Mother'));
+         options.add(new SelectOption('Foster Father','Foster Father'));
+         options.add(new SelectOption('Foster Sister','Foster Sister'));
+         options.add(new SelectOption('Foster Brother','Foster Brother'));
          options.add(new SelectOption('Aunt','Aunt'));
          options.add(new SelectOption('Uncle','Uncle'));
          options.add(new SelectOption('Cousin','Cousin'));
@@ -275,7 +281,8 @@ Public Class WishChildFormUtil
          options.add(new SelectOption('Granddaughter','Granddaughter'));
          options.add(new SelectOption('Employer','Employer'));
          options.add(new SelectOption('Employee','Employee'));
-         options.add(new SelectOption('Medical Professional','Medical Professional'));
+         
+         
          return options;
          
     }

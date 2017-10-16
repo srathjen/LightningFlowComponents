@@ -13,37 +13,6 @@
     <excludeButtons>Submit</excludeButtons>
     <excludeButtons>ViewPartnerPortalUser</excludeButtons>
     <excludeButtons>ViewSelfService</excludeButtons>
-    <feedLayout>
-        <autocollapsePublisher>true</autocollapsePublisher>
-        <compactFeed>true</compactFeed>
-        <feedFilterPosition>CenterDropDown</feedFilterPosition>
-        <feedFilters>
-            <feedFilterType>AllUpdates</feedFilterType>
-        </feedFilters>
-        <feedFilters>
-            <feedFilterType>FeedItemType</feedFilterType>
-            <feedItemType>TextPost</feedItemType>
-        </feedFilters>
-        <fullWidthFeed>true</fullWidthFeed>
-        <hideSidebar>false</hideSidebar>
-        <highlightExternalFeedItems>true</highlightExternalFeedItems>
-        <rightComponents>
-            <componentType>Following</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>Followers</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>Topics</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>CustomLinks</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>CustomButtons</componentType>
-        </rightComponents>
-        <useInlineFiltersInConsole>true</useInlineFiltersInConsole>
-    </feedLayout>
     <layoutSections>
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
@@ -53,6 +22,10 @@
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>Name</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>First_Last_Initial__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Required</behavior>
@@ -73,6 +46,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Gender__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Important_Notes__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -554,14 +531,12 @@
         </relatedContentItems>
     </relatedContent>
     <relatedLists>
-        <fields>NAME</fields>
         <fields>npe4__RelatedContact__c</fields>
-        <fields>Qualifying_Medical_Professional__c</fields>
-        <fields>Referring_Medical_Professional__c</fields>
         <fields>npe4__Type__c</fields>
-        <fields>npe4__Status__c</fields>
         <fields>Wish_Participant__c</fields>
         <fields>Parent_Legal_Guardian__c</fields>
+        <fields>Under_18__c</fields>
+        <fields>Residing_with_Wish_child__c</fields>
         <relatedList>npe4__Relationship__c.npe4__Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -651,6 +626,9 @@
         <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
+        <relatedList>RelatedNoteList</relatedList>
+    </relatedLists>
+    <relatedLists>
         <fields>NAME</fields>
         <fields>Chapter_Name__c</fields>
         <fields>Award_Type__c</fields>
@@ -681,7 +659,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h36000003nmFT</masterLabel>
+        <masterLabel>00h36000004sxvO</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

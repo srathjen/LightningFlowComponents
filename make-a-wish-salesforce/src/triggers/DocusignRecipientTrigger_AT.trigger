@@ -41,7 +41,7 @@ Trigger DocusignRecipientTrigger_AT on dsfs__DocuSign_Recipient_Status__c (After
         
         if(dsfsStatusSet.size() > 0){
             for(dsfs__DocuSign_Status__c dsfsStatusRec : [SELECT Id,dsfs__Case__c,dsfs__Subject__c,dsfs__Case__r.ContactId,dsfs__Case__r.LiabilitySignerMapKeyPair__c FROM dsfs__DocuSign_Status__c WHERE Id IN:dsfsStatusSet 
-                                                          AND dsfs__Case__c != Null AND (dsfs__Subject__c =: 'Signature Required - Liability And Publicity Release Form' OR dsfs__Subject__c =: 'Signature Required - Wish Paper Packet')]){
+                                                          AND dsfs__Case__c != Null AND (dsfs__Subject__c =: 'Signature Required - Liability And Publicity Release Form' OR dsfs__Subject__c =: 'Signature Required - Wish Forms')]){
                                                               
                                                               WishIdSet.add(dsfsStatusRec.dsfs__Case__c);
                                                               subject = dsfsStatusRec.dsfs__Subject__c;
@@ -130,10 +130,10 @@ Trigger DocusignRecipientTrigger_AT on dsfs__DocuSign_Recipient_Status__c (After
                     contactIdSet.add(dbWishPaperCase.Case__r.contactId);
                 }
                 
-                if(subject == 'Signature Required - Wish Paper Packet'){
+                if(subject == 'Signature Required - Wish Forms'){
                     
                     for(String processString : nameMap.keyset()){
-                        if(dbWishPaperCase.Hidden_Contact_Name__c == Null && dbWishPaperCase.Signers__c == Null){
+                        if(dbWishPaperCase.Hidden_Contact_Name__c == Null){
                             dbWishPaperCase.Hidden_Contact_Name__c = processString;
                             dbWishPaperCase.Signers__c = processString;
                             dbWishPaperCase.Id = dbWishPaperCase.Id;

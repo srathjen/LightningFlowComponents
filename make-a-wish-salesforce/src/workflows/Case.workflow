@@ -152,7 +152,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>Automated_Wish_Granting_Email_Templates/Case_Send_Email_to_Volunteer_for_Blank_Presentation_date</template>
+        <template>unfiled$public/Case_Send_Email_to_Volunteer_for_Blank_Presentation_date</template>
     </alerts>
     <alerts>
         <fullName>Granting_Case_Development_team_regarding_wish_presentation_alert</fullName>
@@ -308,7 +308,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>Automated_Volunteer_Templates/Wish_Family_Form_Not_Submitted_Template</template>
+        <template>unfiled$public/Wish_Family_Form_Not_Submitted_Template</template>
     </alerts>
     <alerts>
         <fullName>Wish_Interview_Date_Not_Set_After_21_Days_Email_Alert</fullName>
@@ -324,7 +324,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>Automated_Volunteer_Templates/Wish_Interview_21_Days_Template</template>
+        <template>unfiled$public/Wish_Interview_21_Days_Template</template>
     </alerts>
     <fieldUpdates>
         <fullName>Case_Budget_Approved</fullName>

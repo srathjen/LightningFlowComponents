@@ -57,7 +57,7 @@
             <value>0</value>
         </criteriaItems>
     </filter>
-    <format>Tabular</format>
+    <format>Summary</format>
     <name>Completed Application</name>
     <params>
         <name>co</name>

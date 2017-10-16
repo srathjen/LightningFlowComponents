@@ -46,10 +46,10 @@
 <apex:variable var="cnt" value="{!cnt+1}"/>              
 </apex:column>  -->
     <apex:column headerValue="Parent/Guardian of Minor participant">
-        <apex:inputField value="{!memb.FirstName}"/>
+        <apex:inputField value="{!memb.FirstName}" id="fname"/>
     </apex:column>
     <apex:column headerValue="Email">
-        <apex:inputField value="{!memb.Email}"/>
+        <apex:inputField value="{!memb.Email}" id="email"/>
     </apex:column>
  </apex:pageBlockTable> 
 <br/> <center><apex:commandButton value="Add Row" action="{!AddRow}" reRender="membAdd" rendered="{!inPutMode}"/> &nbsp;     
@@ -61,10 +61,10 @@
 <apex:pageBlockTable value="{!addContactEmailList}" var="memb" rendered="{!outPutMode}">
 
     <apex:column headerValue="Parent/Guardian of Minor participant">
-        <apex:outputField value="{!memb.FirstName}"/>
+        <apex:outputField value="{!memb.FirstName}" id="fName"/>
     </apex:column>
     <apex:column headerValue="Email">
-        <apex:outputField value="{!memb.Email}"/>
+        <apex:outputField value="{!memb.Email}" id="email1"/>
     </apex:column>
  </apex:pageBlockTable> 
 

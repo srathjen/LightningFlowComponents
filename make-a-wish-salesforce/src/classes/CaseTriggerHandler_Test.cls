@@ -4,9 +4,9 @@ Description : This class is used to increase the code coverage for CaseTrigger_A
 *************************************************************************************/
 @isTest
 public class CaseTriggerHandler_Test {
- 
-     Static testmethod void UpdateStatusasCompleted()
-     {
+    
+    Static testmethod void UpdateStatusasCompleted()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -25,12 +25,10 @@ public class CaseTriggerHandler_Test {
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
         //System.assertEquals('Please enter the received date for the following forms - Absent Parent Form.',result.getErrors()[0].getMessage());
-
-
-
-     }
-     Static testmethod void UpdateStatusasCompleted1()
-     {
+        
+    }
+    Static testmethod void UpdateStatusasCompleted1()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -48,11 +46,11 @@ public class CaseTriggerHandler_Test {
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volunterUser.id,roleRec.id);
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
-       // System.assertEquals('Please enter the received date for the following forms - Child’s Medical Summary Form.',result.getErrors()[0].getMessage());
-     }
-     
-     Static testmethod void UpdateStatusasCompleted2()
-     {
+        // System.assertEquals('Please enter the received date for the following forms - Child’s Medical Summary Form.',result.getErrors()[0].getMessage());
+    }
+    
+    Static testmethod void UpdateStatusasCompleted2()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -70,10 +68,10 @@ public class CaseTriggerHandler_Test {
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volunterUser.id,roleRec.id);
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
-       // System.assertEquals('Please enter the received date for the following forms - Communication Profile.',result.getErrors()[0].getMessage());
-     }
-     Static testmethod void UpdateStatusasCompleted3()
-     {
+        // System.assertEquals('Please enter the received date for the following forms - Communication Profile.',result.getErrors()[0].getMessage());
+    }
+    Static testmethod void UpdateStatusasCompleted3()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -91,10 +89,10 @@ public class CaseTriggerHandler_Test {
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volunterUser.id,roleRec.id);
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
-       // System.assertEquals('Please enter the received date for the following forms - Entertainment & Sports .',result.getErrors()[0].getMessage());
-     }
-     Static testmethod void UpdateStatusasCompleted4()
-     {
+        // System.assertEquals('Please enter the received date for the following forms - Entertainment & Sports .',result.getErrors()[0].getMessage());
+    }
+    Static testmethod void UpdateStatusasCompleted4()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -113,9 +111,9 @@ public class CaseTriggerHandler_Test {
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
         //System.assertEquals('Please enter the received date for the following forms - Guardianship Document.',result.getErrors()[0].getMessage());
-     }
-     Static testmethod void UpdateStatusasCompleted5()
-     {
+    }
+    Static testmethod void UpdateStatusasCompleted5()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -133,10 +131,10 @@ public class CaseTriggerHandler_Test {
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volunterUser.id,roleRec.id);
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
-       // System.assertEquals('Please enter the received date for the following forms - Liability Release and Authorization.',result.getErrors()[0].getMessage());
-     }
+        // System.assertEquals('Please enter the received date for the following forms - Liability Release and Authorization.',result.getErrors()[0].getMessage());
+    }
     Static testmethod void UpdateStatusasCompleted6()
-     {
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -154,10 +152,10 @@ public class CaseTriggerHandler_Test {
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volunterUser.id,roleRec.id);
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
-       // System.assertEquals('Please enter the received date for the following forms - Passports.',result.getErrors()[0].getMessage());
-     }
-     Static testmethod void UpdateStatusasCompleted7()
-     {
+        // System.assertEquals('Please enter the received date for the following forms - Passports.',result.getErrors()[0].getMessage());
+    }
+    Static testmethod void UpdateStatusasCompleted7()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -175,10 +173,10 @@ public class CaseTriggerHandler_Test {
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volunterUser.id,roleRec.id);
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
-       // System.assertEquals('Please enter the received date for the following forms - Single Parent Form.',result.getErrors()[0].getMessage());
-     }
-     Static testmethod void UpdateStatusasCompleted8()
-     {
+        // System.assertEquals('Please enter the received date for the following forms - Single Parent Form.',result.getErrors()[0].getMessage());
+    }
+    Static testmethod void UpdateStatusasCompleted8()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -196,10 +194,10 @@ public class CaseTriggerHandler_Test {
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volunterUser.id,roleRec.id);
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
-       // System.assertEquals('Please enter the received date for the following forms - Visas.',result.getErrors()[0].getMessage());
-     }
-      Static testmethod void UpdateStatusasCompleted9()
-     {
+        // System.assertEquals('Please enter the received date for the following forms - Visas.',result.getErrors()[0].getMessage());
+    }
+    Static testmethod void UpdateStatusasCompleted9()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -218,9 +216,9 @@ public class CaseTriggerHandler_Test {
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
         //System.assertEquals('Please enter the received date for the following forms - Wish Child Form.',result.getErrors()[0].getMessage());
-     }
-     Static testmethod void UpdateStatusasCompleted10()
-     {
+    }
+    Static testmethod void UpdateStatusasCompleted10()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -239,10 +237,10 @@ public class CaseTriggerHandler_Test {
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
         //System.assertEquals('Please enter the received date for the following forms - Wish Family Form.',result.getErrors()[0].getMessage());
-     }
-     
-     Static testmethod void UpdateStatusasCompleted11()
-     {
+    }
+    
+    Static testmethod void UpdateStatusasCompleted11()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -260,10 +258,10 @@ public class CaseTriggerHandler_Test {
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volunterUser.id,roleRec.id);
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
-       // System.assertEquals('Please enter the received date for the following forms - Wish Information Form.',result.getErrors()[0].getMessage());
-     }
-     Static testmethod void UpdateStatusasCompleted12()
-     {
+        // System.assertEquals('Please enter the received date for the following forms - Wish Information Form.',result.getErrors()[0].getMessage());
+    }
+    Static testmethod void UpdateStatusasCompleted12()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
@@ -297,10 +295,10 @@ public class CaseTriggerHandler_Test {
         parentCase.Status = 'Completed';
         database.saveResult result = Database.update(parentCase,false);
         //System.assertEquals('There should be value on Date - Wish Safety Authorization Part B Form when wish status is Completed.',result.getErrors()[0].getMessage());
-     }
-     
-      Static testmethod void UpdateAnticipationDate()
-     {
+    }
+    
+    Static testmethod void UpdateAnticipationDate()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Constant_AC constant = new Constant_AC();
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
@@ -323,10 +321,10 @@ public class CaseTriggerHandler_Test {
         insert newTask;
         parentCase.Anticipated_Start_Date__c = Date.Today().addDays(-10);
         update parentCase;
-     }
-     
-      Static testmethod void UpdateAnticipationDateasNull()
-     {
+    }
+    
+    Static testmethod void UpdateAnticipationDateasNull()
+    {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         Constant_AC constant = new Constant_AC();
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
@@ -336,7 +334,7 @@ public class CaseTriggerHandler_Test {
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithAnticipatedStartDate(wishChild.Id);
         Chapter_Action_Track__c newTrack = OrientationandTrainingUtil.createChapterActionTrack(); 
         newTrack.Task_name__c = 'Test';
-         newTrack.Chapter_Name__c = chapterAccount.Id;
+        newTrack.Chapter_Name__c = chapterAccount.Id;
         insert newTrack;
         Id wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();        
         Id taskPlanningRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
@@ -349,8 +347,8 @@ public class CaseTriggerHandler_Test {
         insert newTask;
         parentCase.Anticipated_Start_Date__c = Null;
         update parentCase;
-     }
-
+    }
+    
     Static testmethod void grantPermissionOnCase() {
         UserSetting__c settings = new UserSetting__c();
         settings.Name = 'Update Abandoned Wishes';
@@ -402,6 +400,7 @@ public class CaseTriggerHandler_Test {
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
         parentCase.ContactId = wishChild.Id;
         parentCase.Diagnosis_Verification_Receive_Date__c = Date.today();
+        parentCase.Closed_Date__c = System.Today();
         insert parentCase;
         List<CaseTeamRole> caseTeamRole = [SELECT Id FROM CaseTeamRole WHERE Name = 'Wish Granter' LIMIT 1];
         
@@ -420,7 +419,7 @@ public class CaseTriggerHandler_Test {
         newChildUpdate.Diagnosis_Verification_Receive_Date__c = Date.today();
         update newChildUpdate;
     }
-
+    
     //Eligibility Review Case Creation
     Static testmethod void EligibilityReviewCase() {
         Case parentCase = OrientationandTrainingUtil.createEligibilityReviewCase();
@@ -463,13 +462,13 @@ public class CaseTriggerHandler_Test {
         
         update newCase;
         
-       
-               
+        
+        
     }
     
     //Volunteer Opportunity Creation
-    Static testmethod void VolunteerOppCreation() {
-        RecursiveTriggerHandler.isFirstTime = true;
+    Static testmethod void VolunteerOppCreation() { 
+        
         Role__c newWishGranter = new Role__c();
         newWishGranter.Name = 'Wish Granter';
         insert newWishGranter;
@@ -477,10 +476,13 @@ public class CaseTriggerHandler_Test {
         newRegion.Name = 'Default';
         insert newRegion;
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        User managerId = OrientationandTrainingUtil.createUser();
+        chapterAccount.Volunteer_Manager__c = managerId.Id;
         Chapter_Role__c newRole = new Chapter_Role__c();
         newRole.Chapter_Name__c = chapterAccount.Id;
         newRole.Role_Name__c = newWishGranter.Id;
         insert newRole;
+        System.assertEquals(newRole.Chapter_Name__c,chapterAccount.Id);
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         wishChild.Region_Code__c = newRegion.Id;
         wishChild.county__c = 'Karur';
@@ -488,13 +490,28 @@ public class CaseTriggerHandler_Test {
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
         parentCase.ContactId = wishChild.Id;
         parentCase.AccountId = chapterAccount.Id;
+        parentCase.ChapterName__c = chapterAccount.Id;
         parentCase.Status = 'Qualified';
         insert parentCase;
+        User volMgr = OrientationandTrainingUtil.createAdminUser();
+        List<CaseTeamRole> caseTeamRoleInfo = [SELECT Id, Name FROM CaseTeamRole WHERE Name = 'Volunteer Manager'];
+        CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volMgr.id,caseTeamRoleInfo[0].id);
+        System.assertEquals(parentCase.Status,'Qualified');
+        System.assertEquals(parentCase.ChapterName__c,chapterAccount.Id);
+        RecursiveTriggerHandler.isFirstTime = true;
         Case updateParentCase = new Case();
         updateParentCase.Id = parentCase.Id;
         updateParentCase.Status = 'Ready to Assign';
+        updateParentCase.OwnerId  = managerId.Id;
         updateParentCase.Sub_Status__c = 'Assign in Portal';
+        Test.startTest();
         update updateParentCase;
+        Test.stopTest();
+        
+        
+        
+        System.assertEquals(updateParentCase.Status,'Ready to Assign');
+        //System.assertEquals(RecursiveTriggerHandler.isFirstTime,true);
     }
     
     //Presentation Task
@@ -509,7 +526,9 @@ public class CaseTriggerHandler_Test {
         Case updateParentCase = new Case();
         updateParentCase.Id = parentCase.Id;
         updateParentCase.End_Date__c = Date.today()+10;
+        Test.startTest();
         update updateParentCase;
+        Test.stopTest();
     }
     
     //Medical Summary Task
@@ -526,7 +545,9 @@ public class CaseTriggerHandler_Test {
         updateParentCase.Id = parentCase.Id;
         updateParentCase.Start_Date__c = null;
         updateParentCase.Wish_Type__c = 'Cruise - Celebrity/Royal';
+        Test.startTest();
         update updateParentCase;
+        Test.stopTest();
     }
     
     //Abondend Case
@@ -544,51 +565,147 @@ public class CaseTriggerHandler_Test {
         updateParentCase.Id = parentCase.Id;
         updateParentCase.Sub_Status__c = 'Abandoned';
         updateParentCase.Status = 'Closed';
+        updateParentCase.Closed_Date__c = System.Today();
+        Test.startTest();
         update updateParentCase;
-       
+        Test.stopTest();
+        
     }
     
     Static testmethod void WishReopenCase()
     {
+        
         Constant_AC  constant = new Constant_Ac();   
-        Chapter_Action_Track__c newChapterActtrack =  OrientationandTrainingUtil.createChapterActionTrack();
-        
+        //Chapter_Action_Track__c newChapterActtrack =  OrientationandTrainingUtil.createChapterActionTrack();
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-        
-        newChapterActtrack.RecordtypeId  = Schema.Sobjecttype.Chapter_Action_Track__c.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
-        newChapterActtrack.Chapter_Name__c = chapterAccount.Id;
-        Insert newChapterActtrack;
-        
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
         parentCase.ContactId = wishChild.Id;
         parentCase.AccountId = chapterAccount.Id;
         parentCase.Start_Date__c = System.today();
         parentCase.Status = 'Qualified';
         insert parentCase;
+        Test.startTest();
         Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
         volunterCon.Number_of_wishes_active__c = 0;
         update volunterCon;
         User volunterUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterCon.id);
-         CaseTeamRole roleRec = [SELECT Id FROM CaseTeamRole WHERE Name = 'Wish Granter'];       
+        CaseTeamRole roleRec = [SELECT Id FROM CaseTeamRole WHERE Name = 'Wish Granter'];       
         CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volunterUser.id,roleRec.id);
-         
-       Case wishDeter = OrientationandTrainingUtil.createWishDeterminationCase(wishChild.Id,parentCase.Id);
-       Test.StartTest();
-         Case updateParentCase = new Case();
+        
+        Case wishDeter = OrientationandTrainingUtil.createWishDeterminationCase(wishChild.Id,parentCase.Id);
+        
+        Case updateParentCase = new Case();
         updateParentCase.Id = parentCase.Id;
         updateParentCase.Sub_Status__c = 'Abandoned';
         updateParentCase.Status = 'Closed';
+        updateParentCase.Closed_Date__c = System.Today();
         update updateParentCase;
-         updateParentCase.Status = 'Ready to Interview';
+        updateParentCase.Status = 'Ready to Interview';
         //Update updateParentCase;
         Test.StopTest();
-       /* parentCase.Case_Member_Count__c = 1;
-        Update parentCase;
-        parentCase.Case_Member_Count__c = 2;
-        Update parentCase;*/
-        
+    }
+    
+    
+    Static testmethod void ChapterActionTrackAsNull()
+    {
+        Constant_Ac constant = new Constant_Ac();
+        Id planningRT = Schema.Sobjecttype.Chapter_Action_Track__c.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+        Id wishGrantTaskRT = Schema.Sobjecttype.Chapter_Action_Track__c.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
+        String wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Chapter_Action_Track__c newActionTrack = new Chapter_Action_Track__c();
+        newActionTrack.Task_Name__c ='Sample Task';
+        newActionTrack.Due_Days__c =10.0;
+        newActionTrack.Months__c = 1;
+        newActionTrack.Chapter_Name__c = chapterAccount.Id;
+        newActionTrack.Wish_type__c = 'Other';
+        newActionTrack.Description__c='sample';
+        newActionTrack.RecordTypeId = planningRT;
+        insert newActionTrack;
+        Chapter_Action_Track__c newActionTrack1 = new Chapter_Action_Track__c();
+        newActionTrack1.Task_Name__c ='Sample Task';
+        newActionTrack1.Due_Days__c =10.0;
+        newActionTrack1.Months__c = 1;
+        newActionTrack1.Chapter_Name__c = chapterAccount.Id;
+        newActionTrack1.Wish_type__c = 'Other';
+        newActionTrack1.Description__c='sample';
+        newActionTrack1.RecordTypeId = wishGrantTaskRT;
+        insert newActionTrack1;
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Case anticipationCase = parentCase.clone();
+        anticipationCase.RecordTypeId = wishDeterminationRecordTypeId;
+        anticipationCase.parentId = parentCase.id;
+        insert anticipationCase;
+        parentCase.ChapterName__c = chapterAccount.Id; 
+        parentCase.Status = 'Wish Determined';
+        parentCase.Wish_Type__c = 'Oth';
+        parentCase.Sub_Status__c = 'Within Policy';
+        Test.startTest();
+        update parentCase;
+        Test.stopTest();
         
     }
-     
- }
+    
+    static testmethod void interviewdateNotNull() {
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Constant_AC constant = new Constant_AC();
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        Case newParentWish = new Case(RecordTypeId = parentWishRecordTypeId,Subject = 'Parent Wish',Status = 'New',Interview_date__c = null);
+        insert newParentWish;
+        Task volunteerFollowup = new Task(Subject = 'Enter interview date', Status = 'New', WhoId = wishChild.Id, WhatId = newParentWish.Id, SystemGeneratedTask__c = true);
+        insert volunteerFollowup;
+        newParentWish.Interview_date__c = System.today();
+        Test.startTest();
+        update newParentWish;
+        Test.stopTest();
+    }
+    
+    static testmethod void InrerviewDateAsNull() {
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Constant_AC constant = new Constant_AC();
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        Case newParentWish = new Case(RecordTypeId = parentWishRecordTypeId,Subject = 'Parent Wish',Status = 'New',Interview_date__c = System.today());
+        insert newParentWish;
+        Task volunteerFollowup = new Task(Subject = 'Enter interview date', Status = 'New', WhoId = wishChild.Id, WhatId = newParentWish.Id, SystemGeneratedTask__c = true);
+        insert volunteerFollowup;
+        newParentWish.Interview_date__c = null;
+        Test.startTest();
+        update newParentWish;
+        Test.stopTest();
+    }
+    
+    static testmethod void CompletedParentCase() {
+        User currUser = OrientationandTrainingUtil.createrSystemAdminUserwithMgr();
+        PermissionSet permissionSetUser = [SELECT id, Name FROM PermissionSet where Name = 'Program_Supervisor'];
+        PermissionSetAssignment psa = new PermissionSetAssignment (PermissionSetId = permissionSetUser.Id, AssigneeId = currUser.Id);
+        insert psa; 
+        System.RunAs(currUser)
+        {
+            Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+            Constant_AC constant = new Constant_AC();
+            Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+            Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+            Case newParentWish = new Case(RecordTypeId = parentWishRecordTypeId,Subject = 'Parent Wish',Status = 'New',Interview_date__c = System.today(),Closed_Date__c = System.today().addDays(9));
+            insert newParentWish;
+            Case updateCaseAsCompleted = new Case();
+            updateCaseAsCompleted.Id = newParentWish.Id;
+            updateCaseAsCompleted.Interview_date__c = System.today();
+            updateCaseAsCompleted.Start_Date__c = System.today();
+            updateCaseAsCompleted.End_Date__c = System.today();
+            updateCaseAsCompleted.Anticipated_Start_Date__c = System.today();
+            updateCaseAsCompleted.Budget_Submitted_Date__c = system.today();
+            updateCaseAsCompleted.Budget_Approved_Date__c = system.today();
+            updateCaseAsCompleted.Closed_Date__c = System.today().addDays(10);
+            updateCaseAsCompleted.Status = 'Completed';
+            update updateCaseAsCompleted;
+        }
+        
+    }
+}

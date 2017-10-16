@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>New_Time_Sheet</customButtons>
+    <customButtons>Update_Contact_Info</customButtons>
     <emailDefault>false</emailDefault>
     <excludeButtons>ChangeOwnerOne</excludeButtons>
     <excludeButtons>ChangeRecordType</excludeButtons>
@@ -10,8 +11,8 @@
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <feedLayout>
-        <autocollapsePublisher>false</autocollapsePublisher>
-        <compactFeed>false</compactFeed>
+        <autocollapsePublisher>true</autocollapsePublisher>
+        <compactFeed>true</compactFeed>
         <feedFilterPosition>LeftFixed</feedFilterPosition>
         <feedFilters>
             <feedFilterType>AllUpdates</feedFilterType>
@@ -32,9 +33,9 @@
             <feedFilterType>FeedItemType</feedFilterType>
             <feedItemType>ActivityEvent</feedItemType>
         </feedFilters>
-        <fullWidthFeed>false</fullWidthFeed>
+        <fullWidthFeed>true</fullWidthFeed>
         <hideSidebar>true</hideSidebar>
-        <highlightExternalFeedItems>false</highlightExternalFeedItems>
+        <highlightExternalFeedItems>true</highlightExternalFeedItems>
         <rightComponents>
             <componentType>HelpAndToolLinks</componentType>
         </rightComponents>
@@ -47,7 +48,7 @@
         <rightComponents>
             <componentType>Topics</componentType>
         </rightComponents>
-        <useInlineFiltersInConsole>false</useInlineFiltersInConsole>
+        <useInlineFiltersInConsole>true</useInlineFiltersInConsole>
     </feedLayout>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -219,13 +220,27 @@
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
         <label>Additional Information</label>
+        <layoutColumns/>
+        <layoutColumns/>
+        <style>TwoColumnsLeftToRight</style>
+    </layoutSections>
+    <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Emergency Contact</label>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>EmergencyContactName__c</field>
+            </layoutItems>
+        </layoutColumns>
         <layoutColumns>
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Non_Participant_Emergency_Number__c</field>
             </layoutItems>
         </layoutColumns>
-        <layoutColumns/>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>

@@ -28,25 +28,25 @@ It would create n number of Volunteer Opportunity records for that event.
                             <apex:outputField value="{!memb.Event_Name__c}"/>
                         </apex:column>-->
                         <apex:column headerValue="Chapter Role">
-                            <apex:inputField value="{!memb.Chapter_Role__c}"/>
+                            <apex:inputField value="{!memb.Chapter_Role__c}" id="chapterRole"/>
                         </apex:column> 
                         <apex:column headerValue="Description" >
-                            <apex:inputField value="{!memb.Description__c}"/>
+                            <apex:inputField value="{!memb.Description__c}" id="desp"/>
                         </apex:column>
                           <apex:column headerValue="Date" >
-                            <apex:inputField value="{!memb.Hidden_Date__c}"/>
+                            <apex:inputField value="{!memb.Hidden_Date__c}" id="date"/>
                         </apex:column>
                        <apex:column headerValue="Start Time" >
-                            <apex:inputField value="{!memb.Start_Time__c}"/>
+                            <apex:inputField value="{!memb.Start_Time__c}" id="startTime"/>
                         </apex:column>
                         <apex:column headerValue="End Time" >
-                            <apex:inputField value="{!memb.End_Time__c}"/>
+                            <apex:inputField value="{!memb.End_Time__c}" id="endTime"/>
                         </apex:column>
                         <apex:column headerValue="Location" >
-                            <apex:inputField value="{!memb.Hidden_Location__c}"/>
+                            <apex:inputField value="{!memb.Hidden_Location__c}" id="hiddenLocation"/>
                         </apex:column>
                         <apex:column headerValue="#Needed">
-                            <apex:inputField style="width:100%;text-align:left;" value="{!memb.Volunteer_Need__c}"/>
+                            <apex:inputField style="width:100%;text-align:left;" value="{!memb.Volunteer_Need__c}" id="volNeed"/>
                         </apex:column>
                           
                     </apex:pageBlockTable> 
@@ -72,15 +72,15 @@ It would create n number of Volunteer Opportunity records for that event.
                     <apex:repeat value="{!volunteercountList}" var="memb">
                         <tr>
                           <!--  <td><apex:outPutField style="width:10%;text-align:right;" value="{!memb.Event_Name__c}"/></td> -->
-                            <td><apex:outPutField style="width:90%;text-align:right;" value="{!memb.Chapter_Role__c}"/></td> 
-                            <td><apex:outputField value="{!memb.Hidden_Chapter_Name__c}"/></td>
-                            <td><apex:outPutField value="{!memb.Description__c}"/></td>
-                            <td><apex:outPutField value="{!memb.Date__c}"/></td>
-                            <td><apex:outPutField value="{!memb.Start_Time__c}"/></td>
-                            <td><apex:outPutField value="{!memb.End_Time__c}"/></td>
-                            <td><apex:outPutField value="{!memb.Location__c}"/></td>
-                            <td><apex:outPutField value="{!memb.Volunteer_Needed__c}"/></td>
-                            <td><apex:outPutField value="{!memb.Registered__c}"/></td>
+                            <td><apex:outPutField style="width:90%;text-align:right;" value="{!memb.Chapter_Role__c}" id="chapterRole1"/></td> 
+                            <td><apex:outputField value="{!memb.Hidden_Chapter_Name__c}" id="chapterName"/></td>
+                            <td><apex:outPutField value="{!memb.Description__c}" id="desp1"/></td>
+                            <td><apex:outPutField value="{!memb.Date__c}" id="date1"/></td>
+                            <td><apex:outPutField value="{!memb.Start_Time__c}" id="sTime"/></td>
+                            <td><apex:outPutField value="{!memb.End_Time__c}" id="eTime"/></td>
+                            <td><apex:outPutField value="{!memb.Location__c}" id="location"/></td>
+                            <td><apex:outPutField value="{!memb.Volunteer_Needed__c}" id="volNeed1"/></td>
+                            <td><apex:outPutField value="{!memb.Registered__c}" id="reg"/></td>
                             
                         </tr>
                     </apex:repeat>
@@ -89,14 +89,14 @@ It would create n number of Volunteer Opportunity records for that event.
                         <tr>
                          
                          <!--  <td> <apex:outputField style="width:10%;text-align:right;" value="{!memb1.Event_Name__c}"/></td>-->
-                            <td><apex:inputField style="width:70%;text-align:right;" value="{!memb1.Chapter_Role__c}"/></td>
+                            <td><apex:inputField style="width:70%;text-align:right;" value="{!memb1.Chapter_Role__c}" id="chapterRole2"/></td>
                             <td></td>
-                            <td><apex:inputField value="{!memb1.Description__c}"/></td>
-                             <td><apex:inputField value="{!memb1.Hidden_Date__c}"/></td>
-                             <td><apex:inputField value="{!memb1.Start_Time__c}"/></td>
-                             <td><apex:inputField value="{!memb1.End_Time__c}"/></td>
-                             <td><apex:inputField value="{!memb1.Hidden_Location__c}"/></td>
-                            <td><apex:inputField style="width:100%;text-align:left;" value="{!memb1.Volunteer_Need__c}"/></td>
+                            <td><apex:inputField value="{!memb1.Description__c}" id="desp2"/></td>
+                             <td><apex:inputField value="{!memb1.Hidden_Date__c}" id="hDate"/></td>
+                             <td><apex:inputField value="{!memb1.Start_Time__c}" id="sTime1"/></td>
+                             <td><apex:inputField value="{!memb1.End_Time__c}" id="eTime1"/></td>
+                             <td><apex:inputField value="{!memb1.Hidden_Location__c}" id="hLocation"/></td>
+                            <td><apex:inputField style="width:100%;text-align:left;" value="{!memb1.Volunteer_Need__c}" id="volNeed2"/></td>
                             
                            
                         </tr>
@@ -125,14 +125,14 @@ It would create n number of Volunteer Opportunity records for that event.
                             <tr>
                               <!--  <td> <apex:outputField value="{!memb.Event_Name__c}"/></td>
                                 <td><apex:outPutField value="{!memb.Chapter_Role__c}"/></td> -->
-                                <td><apex:outputField value="{!memb.Hidden_Chapter_Name__c}"/></td> 
-                               <td><apex:outputField value="{!memb.Description__c}"/></td>
-                               <td><apex:outPutField value="{!memb.Date__c}"/></td>
-                               <td><apex:outPutField value="{!memb.Start_Time__c}"/></td>
-                               <td><apex:outPutField value="{!memb.End_Time__c}"/></td>
-                               <td><apex:outPutField value="{!memb.Location__c}"/></td>
-                                <td><apex:outPutField value="{!memb.Volunteer_Needed__c}"/></td>
-                                <td><apex:outPutField value="{!memb.Registered__c}"/></td>
+                                <td><apex:outputField value="{!memb.Hidden_Chapter_Name__c}" id="hChapterName"/></td> 
+                               <td><apex:outputField value="{!memb.Description__c}" id="desp3"/></td>
+                               <td><apex:outPutField value="{!memb.Date__c}" id="date3"/></td>
+                               <td><apex:outPutField value="{!memb.Start_Time__c}" id="sTime2"/></td>
+                               <td><apex:outPutField value="{!memb.End_Time__c}" id="eTime2"/></td>
+                               <td><apex:outPutField value="{!memb.Location__c}" id="locat1"/></td>
+                                <td><apex:outPutField value="{!memb.Volunteer_Needed__c}" id="volNeed3"/></td>
+                                <td><apex:outPutField value="{!memb.Registered__c}" id="reg1"/></td>
                                 
                                   <!--  <apex:commandLink value="Register" action="{!register}" > 
                                         <apex:param name="recId" value="{!memb.Chapter_Role__c}" assignTo="{!ChapterRoleId}"/>
@@ -164,20 +164,20 @@ It would create n number of Volunteer Opportunity records for that event.
                            
                                <!-- <td><apex:outPutText value="{!memb.eventName }"/></td>
                                 <td><apex:outPutText value="{!memb.chapterRole}"/></td> -->
-                                <td><apex:outPutText value="{!memb.roleName}"/></td>
-                               <td><apex:outPutText value="{!memb.voldescription }"/></td>
+                                <td><apex:outPutText value="{!memb.roleName}" id="roleName"/></td>
+                               <td><apex:outPutText value="{!memb.voldescription }" id="voldescription"/></td>
                               <!-- <td><apex:outPutText value="{!memb.Voldate}"/></td>-->
                               <td>
-                                <apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
+                                <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date4">
                                 <apex:param value="{!memb.Voldate}"/>
                                 </apex:outputText>
                                </td>
-                               <td><apex:outPutText value="{!memb.volStartTime}"/></td>
+                               <td><apex:outPutText value="{!memb.volStartTime}" id="volStartTime"/></td>
                                
-                               <td><apex:outPutText value="{!memb.volendTime}"/></td>
-                               <td><apex:outPutText value="{!memb.vollocation}"/></td>
-                                <td><apex:outPutText value="{!memb.volunteerNeeded}"/></td>
-                                <td><apex:outPutText value="{!memb.volunteerRegistration}"/></td>
+                               <td><apex:outPutText value="{!memb.volendTime}" id="volendTime"/></td>
+                               <td><apex:outPutText value="{!memb.vollocation}" id="vollocation"/></td>
+                                <td><apex:outPutText value="{!memb.volunteerNeeded}" id="volunteerNeeded"/></td>
+                                <td><apex:outPutText value="{!memb.volunteerRegistration}" id="volunteerRegistration"/></td>
                                 <td>
                                     <apex:commandLink value="Register" action="{!register}">
                                         <apex:param name="recId" value="{!memb.recordId}" assignTo="{!ChapterRoleId}"/>
@@ -195,25 +195,25 @@ It would create n number of Volunteer Opportunity records for that event.
                 <apex:outputPanel rendered="{!isEdit}">
                     <apex:pageBlockTable value="{!volunteerCountToUpdateList}" var="memb">
                         <apex:column headerValue="Chapter Role">
-                            <apex:inPutField value="{!memb.Chapter_Role__c}"/>
+                            <apex:inPutField value="{!memb.Chapter_Role__c}" id="cRole"/>
                         </apex:column>
                         <apex:column headerValue="Description">
-                            <apex:inPutField value="{!memb.Description__c}"/>
+                            <apex:inPutField value="{!memb.Description__c}" id="description"/>
                         </apex:column>
                          <apex:column headerValue="Date">
-                            <apex:inPutField value="{!memb.Date__c}"/>
+                            <apex:inPutField value="{!memb.Date__c}" id="date5"/>
                         </apex:column>
                          <apex:column headerValue="Start Time" >
-                            <apex:inputField value="{!memb.Start_Time__c}"/>
+                            <apex:inputField value="{!memb.Start_Time__c}" id="startTime"/>
                         </apex:column>
                         <apex:column headerValue="End Time" >
-                            <apex:inputField value="{!memb.End_Time__c}"/>
+                            <apex:inputField value="{!memb.End_Time__c}" id="endTime"/>
                         </apex:column>
                          <apex:column headerValue="Location">
-                            <apex:inPutField style="width:100%;text-align:left;" value="{!memb.Location__c}"/>
+                            <apex:inPutField style="width:100%;text-align:left;" value="{!memb.Location__c}" id="location2"/>
                         </apex:column>
                         <apex:column headerValue="# Needed">
-                            <apex:inPutField style="width:100%;text-align:left;" value="{!memb.Volunteer_Needed__c}"/>
+                            <apex:inPutField style="width:100%;text-align:left;" value="{!memb.Volunteer_Needed__c}" id="volunteerNeed"/>
                         </apex:column>
                     </apex:pageBlockTable> 
                     <br/>
@@ -228,7 +228,7 @@ It would create n number of Volunteer Opportunity records for that event.
         </apex:outputPanel>
         </apex:pageBlock>
         <apex:outputPanel id="redirectPanel" >
-            <apex:outputText rendered="{!shouldRedirect}">
+            <apex:outputText rendered="{!shouldRedirect}" id="shouldRedirect">
                 <script type="text/javascript">
                     window.top.location.href = '{!redirectUrl}';
                 </script>

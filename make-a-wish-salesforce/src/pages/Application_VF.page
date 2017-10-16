@@ -102,7 +102,7 @@ p.saved{padding:1rem !important}
                                             <label for="title">Title</label>
                                         </div>
                                         <div class="col-sm-6">
-                                            <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list" value="{!currentVolunteer.Salutation}" size="1" multiselect="false">
+                                            <apex:selectList styleclass="form-control col-xs-12 col-sm-12 c-select sm-list" value="{!currentVolunteer.Salutation}" id="salutation" size="1" multiselect="false">
                                                 <apex:selectOptions value="{!Titles}" />
                                             </apex:selectList>
                                         </div>
@@ -147,12 +147,12 @@ p.saved{padding:1rem !important}
                                             <label for="birthdate">Birth Date</label>
                                         </div>
                                         <div class="col-xs-6 col-sm-3">
-                                            <apex:inputfield styleclass="form-control col-xs-12 col-sm-12 c-select bmonth required" value="{!currentVolunteer.Birth_Month__c}" ></apex:inputfield>
+                                            <apex:inputfield styleclass="form-control col-xs-12 col-sm-12 c-select bmonth required" value="{!currentVolunteer.Birth_Month__c}" id="birthMonth" ></apex:inputfield>
                                         </div>
 
                                         <label for="birthday" class="col-sm-3 sr-only" aria-label="birthday">Birth Day</label>
                                         <div class="col-xs-6 col-sm-3 bday-wrap3">
-                                              <apex:inputfield value="{!currentVolunteer.Birth_Day__c}" styleClass="required" ></apex:inputfield>
+                                              <apex:inputfield value="{!currentVolunteer.Birth_Day__c}" styleClass="required"  id="bDay"></apex:inputfield>
                                         </div>
                                     </div>
                                 </div>
@@ -508,64 +508,64 @@ p.saved{padding:1rem !important}
                                 <legend>Personal Information</legend>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Title: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Salutation}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Title: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Salutation}" id="saluation" /></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">FirstName: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.FirstName}" /></span>
+                                        <label class="col-xs-6 col-sm-6">FirstName: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.FirstName}" id="fName"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Middle Name: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Middle_Name__c}"/></span>
+                                        <label class="col-xs-6 col-sm-6">Middle Name: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Middle_Name__c}" id="mName"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Last Name: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.LastName}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Last Name: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.LastName}" id="lname"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Nick Name: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Preferred_Name__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Nick Name: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Preferred_Name__c}" id="preferName" /></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Birth Month: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Birth_Month__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Birth Month: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Birth_Month__c}" id="bMonth"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Birth Day: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Birth_Day__c}"/></span>
+                                        <label class="col-xs-6 col-sm-6">Birth Day: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Birth_Day__c}" id="birthDay"/></span>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Mailing Street: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MailingStreet}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Mailing Street: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MailingStreet}" id="mailStreet" /></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Mailing City: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MailingCity}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Mailing City: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MailingCity}" id="mailCity" /></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Mailing State: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.mailingstatecode}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Mailing State: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.mailingstatecode}" id="mailState"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Mailing Zipcode: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MailingPostalCode}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Mailing Zipcode: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MailingPostalCode}" id="mailPost"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">County: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.County__c}" /></span>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Mobile Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MobilePhone}" /></span>
+                                        <label class="col-xs-6 col-sm-6">County: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.County__c}" id="count" /></span>
                                     </div>
                                     
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Home Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.HomePhone}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Mobile Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.MobilePhone}" id="mPhone"/></span>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <label class="col-xs-6 col-sm-6">Home Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.HomePhone}" id="hPhone"/></span>
                                     </div>
                                 
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Other Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.OtherPhone}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Other Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.OtherPhone}" id="otherPhone" /></span>
                                     </div>
                                     
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Preferred Phone Type: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Preferred_Phone_Types__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Preferred Phone Type: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Preferred_Phone_Types__c}" id="preferredPhone"/></span>
                                     </div>
                                     
                                     
                                   <!-- <apex:outputpanel rendered="{!(currentVolunteer.Preferred_Phone_Types__c =='Home') &&  (currentVolunteer.Alternate_Phone_Type__c == 'Mobile' || currentVolunteer.Alternate_Phone_Type__c == 'Home')}"> 
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Preferred Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.HomePhone}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Preferred Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.HomePhone}"  /></span>
                                     </div>
                                    </apex:outputpanel>
                                   
@@ -612,16 +612,16 @@ p.saved{padding:1rem !important}
 
                                     
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Email: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Email}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Email: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Email}" id="email"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">I am on linkedIn: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.I_m_on_LinkedIn__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">I am on linkedIn: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.I_m_on_LinkedIn__c}" id="linked"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">How did you hear about Make-A-Wish?: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.How_did_you_hear_about_Make_A_Wish__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">How did you hear about Make-A-Wish?: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.How_did_you_hear_about_Make_A_Wish__c}" id="hear-about-MAW"/></span>
                                     </div>
                                      <div class="row">
-                                        <label class="col-xs-6 col-sm-6">How did you hear about Make-A-Wish?(Other details): </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.How_did_you_know_MAWA_Other_Notes__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">How did you hear about Make-A-Wish?(Other details): </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.How_did_you_know_MAWA_Other_Notes__c}" id="you-know-MAWA" /></span>
                                     </div>
                                 </div>
                             </fieldset>
@@ -630,31 +630,31 @@ p.saved{padding:1rem !important}
                                 <legend>Employment Information</legend>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Employer: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Employer__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Employer: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Employer__c}" id="emp" /></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Position: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Position__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Position: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Position__c}" id="pos"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Street: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Street_Employer__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Street: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Street_Employer__c}" id="streetEmp"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">City: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.City_Employer__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">City: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.City_Employer__c}" id="cityEmp"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">State: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.State_Employer__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">State: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.State_Employer__c}" id="stateEmp" /></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Zip: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Zip_Employer__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Zip: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Zip_Employer__c}" id="zipEmp"/></span>
                                     </div>
                                      <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Work Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Work_Phone__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Work Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Work_Phone__c}" id="workPhone" /></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">May We Contact You at Work: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.May_We_Contact_You_at_Work__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">May We Contact You at Work: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.May_We_Contact_You_at_Work__c}" id="may-we-contact-work"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">WOULD YOU LIKE TO <i>SHARE THE POWER OF A WISH</i><sup>®</sup> AT WORK BY LEARNING MORE ABOUT OUR WISHMAKERS AT WORK<sup>®</sup> PROGRAM?: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Interested_involved_with_Make_A_Wish__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">WOULD YOU LIKE TO <i>SHARE THE POWER OF A WISH</i><sup>®</sup> AT WORK BY LEARNING MORE ABOUT OUR WISHMAKERS AT WORK<sup>®</sup> PROGRAM?: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Interested_involved_with_Make_A_Wish__c}" id="involvedMakeAWish"/></span>
                                     </div>
                                 </div>
                             </fieldset>
@@ -663,13 +663,13 @@ p.saved{padding:1rem !important}
                                 <legend>Emergency Contact Information</legend>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Emergency Contact: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Emergency_Contact__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Emergency Contact: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Emergency_Contact__c}" id="emergContact"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Relationship: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Emergency_Contact_Relationship__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Relationship: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Emergency_Contact_Relationship__c}" id="emergContactRelation" /></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Emergency Contact Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Emergency_Contact_Phone__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Emergency Contact Phone: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Emergency_Contact_Phone__c}" id="emergContactPhone"/></span>
                                     </div>
                                 </div>
                             </fieldset>
@@ -678,22 +678,22 @@ p.saved{padding:1rem !important}
                                 <legend>Language Skills</legend>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Language: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!currentVolunteer.Language__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Language: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!currentVolunteer.Language__c}" id="language"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Language Notes: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Language_Notes__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Language Notes: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Language_Notes__c}" id="lanquageNote"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Read: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Read__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Read: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Read__c}" id="read"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Write: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Write__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Write: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Write__c}" id="write" /></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Speak: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Speak__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Speak: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Speak__c}" id="speak"/></span>
                                     </div>
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Understand: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Understand__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Understand: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Understand__c}" id="understand" /></span>
                                     </div>
                                 </div>
                             </fieldset>
@@ -702,7 +702,7 @@ p.saved{padding:1rem !important}
                                 <legend>Professional Skills</legend>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="row">
-                                        <label class="col-xs-6 col-sm-6">Professional Skills: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Professional_Skills__c}" /></span>
+                                        <label class="col-xs-6 col-sm-6">Professional Skills: </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Professional_Skills__c}" id="pSkill" /></span>
                                         <label class="col-xs-6 col-sm-6">Professional Skills (Other details): </label><span class="col-xs-6 col-sm-6 text-muted"><apex:outputfield value="{!currentVolunteer.Professional_Skills_Other_Notes__c}" /></span>
                                     </div>
                                 </div>
@@ -734,7 +734,7 @@ p.saved{padding:1rem !important}
 
                         <apex:outputPanel >
                             <fieldset>
-                                <p><apex:outputText value="{!applicationDynamicContent}" escape="false"></apex:outputText></p>
+                                <p><apex:outputText value="{!applicationDynamicContent}" id="appDynamicContent" escape="false"></apex:outputText></p>
                             </fieldset>
                         </apex:outputPanel>
 
@@ -787,7 +787,7 @@ p.saved{padding:1rem !important}
                                             <div class="row">
                                                 <div class="row" style="padding:10px">                                                
                                                     <div class="col-xs-12 col-sm-12 col-md-12">                                                
-                                                        <center>Are you sure?    
+                                                        <center>Are you sure you want to submit and sign?
                                                         
                                                          <div class="modal-footer"><center>
                                                            <apex:commandButton value="Yes" styleClass="btn-md"  action="{!SubmitAndSign}" style="height: 2.75rem;margin-top: 3% !important;width: 90px !important;"/> &nbsp;&nbsp;&nbsp;

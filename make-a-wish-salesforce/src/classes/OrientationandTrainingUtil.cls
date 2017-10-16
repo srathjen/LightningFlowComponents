@@ -464,6 +464,15 @@ insert newChapter;*/
         system.debug('@@@@@@@@@@@@ backCheck  ############'+backCheck );
         return backCheck;
     }
+    public static Awards_Recognition__c CreateAwardRecognition(Id chapterAccountId,Id volContactId)
+    {
+        Awards_Recognition__c awdreg=new Awards_Recognition__c();
+        awdreg.Chapter_Name__c=chapterAccountId;
+        awdreg.Volunteer_Contact__c=volContactId;
+        awdreg.Award_Type__c='Chapter Recognition';
+        insert awdreg;
+        return awdreg;
+    }
     
     public static Conflict_Of_Interest__c createCOI(Id conId){
         Conflict_Of_Interest__c newCOI = new Conflict_Of_Interest__c();
@@ -933,6 +942,7 @@ insert newChapter;*/
             newWishOpportunity.Chapter_Role_Opportunity__c = roleId;
             newWishOpportunity.Non_Wish_Event__c = nonWishId;
             newWishOpportunity.Chapter_Name__c = chapterId;
+            
             newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
             volunteerOpportunityList.add(newWishOpportunity);
            
@@ -1049,7 +1059,6 @@ insert newChapter;*/
         return neworgAffiliation;
         
     }
-    
     public static npe5__Affiliation__c CreateAffiliationwithNullStatus(Id AccountId,Id contactId)
     {
         
@@ -1079,6 +1088,7 @@ insert newChapter;*/
         newParentWish.ChapterName__c = CreateAlabamaAccount();
         newParentWish.Subject = 'Parent Wish';
         newParentWish.ContactId = wishChildId;
+        newParentWish.status = 'Qualified';
         insert newParentWish;
         return newParentWish;
     }
@@ -1536,6 +1546,16 @@ return cc;
         insert newchapterAccount;
         return newchapterAccount;
     }
+    public static Account HospitalTreatment(){
+        Constant_AC  constant = new Constant_AC();
+        Id HospitalTreatmentrecordtypeid = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.hospitalTreatment).getRecordTypeId();
+        Account newchapterAccount = new Account();
+        newchapterAccount .Name = 'Make-A-Wish America';
+        newchapterAccount.RecordTypeId = HospitalTreatmentrecordtypeid;
+        newchapterAccount.MAC_Email_del__c = 'testMAC@gmail.com';
+        insert newchapterAccount;
+        return newchapterAccount;
+    }
     
     /* public static Lead_File__c createLeadFileRec(Id LeadId);
 
@@ -1864,7 +1884,7 @@ retrun newLeadFile;*/
         newChildForm.Availability_Time_Period_1__c =' Apr/2019';
         newChildForm.Hidden_Wish_Fmaily_Contact_Email__c = 'Vennila  Paramasivam - mcavennila@gmail.com, chandrasekar - chandru@mstsolutions.com';
         newChildForm.Hidden_Contact_Name__c = 'Vennila Paramasivam';
-        newChildForm.Hidden_Wish_Fmaily_Contact_Name__c = 'Vennila Paramasivam, chandrasekar ';
+        newChildForm.Hidden_Wish_Fmaily_Contact_Name__c = 'Vennila Paramasivam#chandrasekar ';
         newChildForm.Case__c = ParentWishId;
         newChildForm.Wish_Family_Contact__c = '[{"workTelephone":"","tshirtSize":null,"residingWishMedical":null,"relId":"0035B000004R9vwQAC","relationship":"Father","mobileTelephone":"(878) 787-8787","MiddleName":"","medicalNeeds":null,"lastName":"Test12","homeTelephone":"","firstName":"Test12","Email":"kanagaraj@mstsolutions.com","dob":"2016-11-29"},{"workTelephone":"","tshirtSize":null,"residingWishMedical":null,"relId":"0035B000004R9vuQAC","relationship":"Mother","mobileTelephone":"(878) 787-8787","MiddleName":"","medicalNeeds":null,"lastName":"TestPL1","homeTelephone":"","firstName":"TestPF1","Email":"kanagu431@gmail.com","dob":"2016-11-28"}]';
         newChildForm.Participant_Contacts__c = '[{"workTelephone":null,"tshirtSize":"","residingWishMedical":"Yes","relId":null,"relationship":"Father","mobileTelephone":null,"MiddleName":"","medicalNeeds":"Yes","lastName":"Test12","homeTelephone":null,"firstName":"Test12","Email":"kanagaraj@mstsolutions.com","dob":null},{"workTelephone":null,"tshirtSize":"","residingWishMedical":"Yes","relId":null,"relationship":"Mother","mobileTelephone":null,"MiddleName":"","medicalNeeds":"Yes","lastName":"TestPL1","homeTelephone":null,"firstName":"TestPF1","Email":"kanagu431@gmail.com","dob":null}]';
@@ -1887,7 +1907,7 @@ retrun newLeadFile;*/
         newChildForm.Names_for_receiving_nursing_care__c = 'test;test';
         newChildForm.Participant_Details__c  = 'Participant Participant2-joserathi@mstsolutions.com-26';
         newChildForm.Participant_Name__c = 'Participant Participant2-26';
-        newChildForm.Hidden_Wish_Fmaily_Contact_Name__c= 'Parent1 Parent2,parent3 parent4';
+        newChildForm.Hidden_Wish_Fmaily_Contact_Name__c= 'Parent1 Parent2#parent3 parent4';
         newChildForm.Hidden_Wish_Fmaily_Contact_Email__c = 'Parent1 Parent2-kanagu431@gmail.com,parent3 parent4-kanagaraj@mstsolutions.com';
         //Insert  newChildForm;
         return newChildForm;
@@ -2349,6 +2369,7 @@ retrun newLeadFile;*/
         newParentWish.LiabilitySignerMapKeyPair__c = 'Vennila';
         newParentWish.Budget_Submitted_Date__c = system.today();
         newParentWish.Budget_Approved_Date__c = system.today();
+        newParentWish.Closed_Date__c = System.Today();
         insert newParentWish;
         return newParentWish;
     }

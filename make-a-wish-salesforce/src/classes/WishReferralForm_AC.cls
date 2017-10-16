@@ -19,6 +19,8 @@ global Class WishReferralForm_AC
     public boolean copyReferrerInfo{get;set;}
     public boolean copyReferrerInfoToWish{get;set;}
     public string currState{get;set;}
+    public string diagnosisMonth{get;set;}
+    public string diagnosisYear{get;set;}
     public string additionalParentState{get;set;}
     public static string icdOrPcd;
     public string refChildFormParent{get;set;}
@@ -62,6 +64,7 @@ currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
         Boolean flag = True;
         CurrLead.State = currState;
         currLead.LeadSource = 'Online';
+        
         CurrLead.Additional_Parent_State__c = additionalParentState;
         
         System.debug('diagnosisFilter++++++++++++++++++++++ ' + diagnosisFilter); 
@@ -294,6 +297,15 @@ return null;
                         
                     }
                     
+                    if(!(string.isBlank(diagnosisYear)) ){
+                    system.debug('Dia Year'+diagnosisYear);
+                       if(String.isBlank(diagnosisMonth))
+                           currLead.Approximate_Diagnosis_Date__c = diagnosisYear;                            
+                       else
+                           currLead.Approximate_Diagnosis_Date__c = diagnosisMonth +'   '+diagnosisYear;
+                           
+                    }
+                    
                     insert currLead;
                     if(currLead.id != Null)
                         redirection = true;
@@ -307,8 +319,10 @@ return null;
             }
             Catch(DMLException e)
             {
+                system.debug('Lead'+currLead);
                 ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getmessage());
                 ApexPages.addMessage(msg);
+                
                 return null;
             }
         }
@@ -474,6 +488,22 @@ return null;
         }  
         return options;
     }  
+    
+    //diaYear
+    public List<SelectOption> getdiaYear() {
+        List<SelectOption> options = new List<SelectOption>();
+        //Schema.DescribeFieldResult fieldResult =  Lead.How_Did_you_hear_about_Make_A_Wish__c.getDescribe();
+        options.add(new SelectOption('', 'Year')); 
+        //List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
+        for( Integer i=Date.Today().Year(); i>=Date.Today().Year()-18; i--){
+            options.add(new SelectOption(String.valueOf(i),String.valueOf(i))); 
+            
+        }  
+        return options;
+    }  
+    
+    
+    
     
     //Capturing State Picklist values.   
     public List<SelectOption> getNoOfSiblings() {

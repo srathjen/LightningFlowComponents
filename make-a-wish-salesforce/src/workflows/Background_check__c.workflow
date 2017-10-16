@@ -222,6 +222,7 @@
             <type>Task</type>
         </actions>
         <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
         <criteriaItems>
             <field>Background_check__c.Status__c</field>
             <operation>equals</operation>
@@ -232,12 +233,23 @@
             <operation>notEqual</operation>
             <value>Integration</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Current__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Volunteer_is_Inactive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
         <description>This workflow will fire when the background check status is completed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Bc%3AExpiring 30 Days Workflow Rule</fullName>
+        <fullName>Bc%3AExpired 7 Days After Workflow Rule</fullName>
         <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
         <criteriaItems>
             <field>Background_check__c.Current__c</field>
             <operation>equals</operation>
@@ -261,6 +273,60 @@
             <field>Background_check__c.Volunteer_is_Inactive__c</field>
             <operation>equals</operation>
             <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.VolunteerRoleOutofCompliance__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>This workflow rule will be fires to send an email 7 days after background check is expired.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Bc_Expiring_After_7_Days_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>BC_ET_Background_Check_Expired_7_Days</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Background_check__c.Date__c</offsetFromField>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Bc%3AExpiring 30 Days Workflow Rule</fullName>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Background_check__c.Current__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Status__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Status__c</field>
+            <operation>notEqual</operation>
+            <value>Rejected</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.Volunteer_is_Inactive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Background_check__c.VolunteerRoleTrainedTpendChapReview__c</field>
+            <operation>equals</operation>
+            <value>True</value>
         </criteriaItems>
         <description>This rule will fire when the background check is Expiring with in 30 days</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -304,14 +370,6 @@
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
-            <actions>
-                <name>Bc_Expiring_After_7_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>BC_ET_Background_Check_Expired_7_Days</name>
-                <type>Task</type>
-            </actions>
             <offsetFromField>Background_check__c.Date__c</offsetFromField>
             <timeLength>7</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>

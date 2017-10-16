@@ -58,6 +58,26 @@
         <name>Hidden_O_T_Id__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Volunteer Training Status --></label>
+        <name>Hidden_Volunteer_Training_Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Registered</masterLabel>
+            <translation><!-- Registered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Volunteer Cancelled</masterLabel>
+            <translation><!-- Volunteer Cancelled --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Hidden Volunteer User Name --></label>
+        <name>Hidden_Volunteer_User_Name__c</name>
+    </fields>
+    <fields>
         <label><!-- LMS Enrollment Id --></label>
         <name>LMS_Enrollment_Id__c</name>
     </fields>
@@ -72,6 +92,10 @@
     <fields>
         <label><!-- Orientation &amp; Training --></label>
         <name>Orientation_Training_Hidden__c</name>
+    </fields>
+    <fields>
+        <label><!-- Orientation Training email signature --></label>
+        <name>Orientation_Training_email_signature__c</name>
     </fields>
     <fields>
         <label><!-- RE Completed Date --></label>

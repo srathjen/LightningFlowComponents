@@ -125,6 +125,17 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Hidden_COI_Volunteer_FirstName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Volunteer_Contact__r.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden COI Volunteer FirstName</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_Volunteer_Contact_Email__c</fullName>
         <description>This field is used as hidden field to store volunteer contact email in COI.</description>
         <externalId>false</externalId>
@@ -184,6 +195,24 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>VolunteerRoleOutofCompliance__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to identify whether the volunteer has at least one volunteer role with the status of out of compliance</description>
+        <externalId>false</externalId>
+        <label>Volunteer Role(Out of Compliance)</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>VolunteerRoleTrainedTpendChapReview__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to identify whether the volunteer has at least one volunteer role with the status of trained,trainning pending or chapter review</description>
+        <externalId>false</externalId>
+        <label>Volunteer Role(Trained,Tpend,ChapReview)</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>Volunteer_Contact__c</fullName>

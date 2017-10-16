@@ -2,11 +2,11 @@
 <CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseValues>
         <plural>false</plural>
-        <value>Wish Paperwork Packet</value>
+        <value>Wish Form</value>
     </caseValues>
     <caseValues>
         <plural>true</plural>
-        <value>Wish Paperwork Packets</value>
+        <value>Wish Forms</value>
     </caseValues>
     <fields>
         <label><!-- Actor/Actress --></label>
@@ -95,7 +95,7 @@
     <fields>
         <label><!-- Case --></label>
         <name>Case__c</name>
-        <relationshipLabel><!-- Wish Paperwork Packets --></relationshipLabel>
+        <relationshipLabel><!-- Wish Forms --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- City --></label>
@@ -528,8 +528,20 @@ and the date it was or will be granted. --></help>
         <name>Other__c</name>
     </fields>
     <fields>
+        <label><!-- Parent Gurdian above 18 Email --></label>
+        <name>Parent_Gurdian_above_18_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Gurdian above 18 --></label>
+        <name>Parent_Gurdian_above_18__c</name>
+    </fields>
+    <fields>
         <label><!-- Parent/Legal Guardian Signature --></label>
         <name>Parent_Legal_Guardian_Signature__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parents &amp; Participants Name --></label>
+        <name>ParentsParticipantsName__c</name>
     </fields>
     <fields>
         <label><!-- Pariticipant_name_havingWheelchair_Power --></label>
@@ -766,6 +778,18 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Requested_Participant_Name_for_Oxygen --></label>
         <name>Requested_Participant_Name_for_Oxygen__c</name>
+    </fields>
+    <fields>
+        <label><!-- Residing With Wish Child --></label>
+        <name>Residing_With_Wish_Child__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Restaurant --></label>

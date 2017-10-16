@@ -42,7 +42,7 @@ public class WishBudgetForm_AC{
     public set<Id> participentSet;
     Id RecentApproverID;
     public String budgetNotes{get; set;}
-    
+    Public Map<String,Id> wishExpenseTypeIds{get;set;}
     public WishBudgetForm_AC(ApexPages.StandardController controller) {
         
         RecentApproverID=null;
@@ -115,6 +115,7 @@ public class WishBudgetForm_AC{
         TransCodesWrap = new Map<String,List<Wish_Expense_Transaction_Code__c>>();
         TransCodeOptionsMap = new Map<String,List<SelectOption>>();
         wishExpenseTypes= new Set<String>();
+        wishExpenseTypeIds=new Map<String,Id>();
         
         LoadData();
         summary();
@@ -154,6 +155,11 @@ public class WishBudgetForm_AC{
             wishExpensewrap.clear();
         if(TransCodeOptionsMap.size() > 0)
             TransCodeOptionsMap.clear();
+        if(wishExpenseTypeIds.size()>0)
+            wishExpenseTypeIds.clear();
+        for(Wish_Expense_Type__c types: [select id,name from Wish_Expense_Type__c]){
+            wishExpenseTypeIds.put(types.name,types.Id);
+        }
         for(Wish_Expense_Transaction_Code__c  currtransactionCode :  [SELECT Id, Name,Wish_Expense_Type__r.Name from Wish_Expense_Transaction_Code__c Where Is_Active__c =true order by Name]){
             if(!TransCodesWrap.containsKey(currtransactionCode.Wish_Expense_Type__r.Name )){
                 TransCodesWrap.put(currtransactionCode.Wish_Expense_Type__r.Name,new List<Wish_Expense_Transaction_Code__c >{currtransactionCode});    
@@ -276,6 +282,7 @@ public class WishBudgetForm_AC{
         WEtypeExpand=null;
         if(newExpenseType != null) {
             wishExpenseTypes.add(newExpenseType);
+            
             System.debug('Test add expence 1:' + newExpenseType );
             List<Wish_Expense_Transaction_Code__c> transListType = TransCodesWrap.get(newExpenseType);
             System.debug('Test add expence 1:' + TransCodesWrap);
@@ -301,11 +308,14 @@ public class WishBudgetForm_AC{
             LoadData();
             summary();
             Totalsummary();
-            WEtypeExpand= wishExpensewrap.size() - 1 + 'collapsed';
+            //WEtypeExpand= wishExpensewrap.size() - 1 + 'collapsed';
+            
+            WEtypeExpand= wishExpenseTypeIds.get(newExpenseType) + 'collapsed';
         }
         
         PageReference pageRef = new PageReference('/apex/WishBudgetForm_VF?caseId='+caseId);
-        //pageRef.setRedirect(True);
+        pageRef.setRedirect(True);
+        pageRef.getParameters().put('exp',WEtypeExpand);
         return pageRef;
     }
     
@@ -481,6 +491,7 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
             req.setNextApproverIds(new Id[]{approverId});
             req.setSkipEntryCriteria(true);
             Approval.ProcessResult result = Approval.process(req);
+            Approval.UnlockResult urList = Approval.unlock(getPlanningAnticipationCase.get(0).Id, false);
             displayPopup = true;
            
             
@@ -884,6 +895,5 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
     public PageReference closePopup1() {        
         return new PageReference('javascript:window.close()');    
     }
-    
              
 }

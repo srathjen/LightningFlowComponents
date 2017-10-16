@@ -55,7 +55,14 @@ public class LMSHttpRequest {
                 System.debug('The FirstName ++'+currVolunteerUser.FirstName);
                 userRequestDetails.first_name = currVolunteerUser.FirstName;    
                 userRequestDetails.last_name = currVolunteerUser.LastName;  
-                userRequestDetails.email = currVolunteerUser.Email; 
+                if(currVolunteerUser.Hidden_Email__c == Null)
+                {
+                    userRequestDetails.email = currVolunteerUser.Email; 
+                }
+                else
+                {
+                    userRequestDetails.email = currVolunteerUser.Hidden_Email__c; 
+                }
                 userRequestDetails.password = currVolunteerUser.LastName;
                 userRequestDetails.chapter_id= currVolunteerUser.contact.Region_Chapter__r.Chapter_Id__c;
                 String requestPayLoad = JSON.serialize(userRequestDetails);
@@ -63,11 +70,12 @@ public class LMSHttpRequest {
                 Http http = new Http();
                 HTTPResponse response;
                 try{
+                    System.debug('request++++++++++++++++++++++++++ ' + requestPayLoad);
                     response = http.send(request); 
                     System.debug('The response is + '+response.getBody());
                     currLMSUserResponse = LMSUserResponse.parse(response.getBody());
                     System.debug('lMSSSOResponse+++++++++++'+currLMSUserResponse);
-                    /*if(currVolunteerUser.LMS_Id__c != String.valueOf(currLMSUserResponse.id) || currVolunteerUser.LMS_Login__c !=  String.valueOf(currLMSUserResponse.login) || currVolunteerUser.LMS_User_Code__c != String.valueOf(currLMSUserResponse.code) ){
+                 /*    if(currVolunteerUser.LMS_Id__c != String.valueOf(currLMSUserResponse.id) || currVolunteerUser.LMS_Login__c !=  String.valueOf(currLMSUserResponse.login) || currVolunteerUser.LMS_User_Code__c != String.valueOf(currLMSUserResponse.code) ){
                         currVolunteerUser.LMS_Id__c = String.valueOf(currLMSUserResponse.id);
                         currVolunteerUser.LMS_Login__c = String.valueOf(currLMSUserResponse.login);
                         currVolunteerUser.LMS_User_Code__c = String.valueOf(currLMSUserResponse.code);

@@ -288,7 +288,7 @@
         <name>External_Id__c</name>
     </fields>
     <fields>
-        <label><!-- First + L.I. --></label>
+        <label><!-- Name --></label>
         <name>First_L_I__c</name>
     </fields>
     <fields>
@@ -340,8 +340,16 @@
         <name>Hidden_Volunteer_Contact_Name__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Volunteer FirstName --></label>
+        <name>Hidden_Volunteer_FirstName__c</name>
+    </fields>
+    <fields>
         <label><!-- Hobbies --></label>
         <name>Hobbies__c</name>
+    </fields>
+    <fields>
+        <label><!-- In Progress --></label>
+        <name>In_Progress__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Inactivated or Rejected Date --></label>
@@ -835,6 +843,14 @@
         <name>Wish_Child__c</name>
     </fields>
     <fields>
+        <label><!-- Wish National Type --></label>
+        <name>Wish_National_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Status --></label>
+        <name>Wish_Status__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish --></label>
         <name>Wish__c</name>
         <relationshipLabel><!-- Volunteer Opportunities --></relationshipLabel>
@@ -968,6 +984,10 @@
         <errorMessage><!-- Please enter the value for Reason Inactive --></errorMessage>
         <name>Volunteer_Opp_Reason_Inactive</name>
     </validationRules>
+    <webLinks>
+        <label><!-- Register --></label>
+        <name>Register</name>
+    </webLinks>
     <workflowTasks>
         <name>VO_ET_Volunteer_Opportunity_Approved_NW</name>
         <subject><!-- VO ET : Volunteer Opportunity Approved (NW) --></subject>

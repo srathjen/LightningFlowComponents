@@ -144,6 +144,7 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Wish_child_Name__c</fields>
         <relatedList>In_Kind_Donation_Reimbursement__c.In_Kind_Donor_Name__c</relatedList>
     </relatedLists>
     <relatedLists>

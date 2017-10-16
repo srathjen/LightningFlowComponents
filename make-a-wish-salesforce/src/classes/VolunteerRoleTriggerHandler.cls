@@ -139,7 +139,6 @@ public class VolunteerRoleTriggerHandler {
         
         if(action == 'Insert')
         {
-            
             List<npe5__Affiliation__c> updateRecList = new List<npe5__Affiliation__c>();
             for(npe5__Affiliation__c currRec : [SELECT id, npe5__Contact__c FROM npe5__Affiliation__c  
                                                 WHERE npe5__Contact__c IN :volunteerRoleStatusMap.keySet() 
@@ -153,10 +152,141 @@ public class VolunteerRoleTriggerHandler {
             
             if(updateRecList.size() > 0)
                 update updateRecList;
-            
+        }
+    } 
+    //The purpose of this method is to get the volunteer details to update the volunteer BC & COI based on the volunteer role status   
+    public static void getVolunteerBasedOnVolunteerRoleStatus(Set<Id> volunteerRoleIdsSet, Set<id> volIdsSet){
+        Set<ID> trainingVolunteersIdsSet = new Set<ID>();
+        Set<ID> outOfComplianceVolunteersIdsSet = new Set<ID>();
+        Set<ID> coiTrainingVolunteerIdsSet = new Set<ID>();
+        Set<ID> coiOutOfComplianceVolunteerIdsSet = new Set<ID>();
+        Set<ID> coiVOlunteerIdsSet = new Set<ID>();
+        Set<ID> volunteerIdsSet = new Set<ID>();
+        system.debug('-----> inside getVolunteerBasedOnVolunteerRoleStatus');
+        for(Volunteer_Roles__c currVolunteerRole :[SELECT ID,Volunteer_Name__c,Chapter_Role__r.Background_Check_Required__c,Status__c FROM Volunteer_Roles__c WHERE Chapter_Role__c != Null AND Volunteer_Name__c IN: volIdsSet ]){
+            if(currVolunteerRole.Status__c == 'Trained' || currVolunteerRole.Status__c == 'Pending Training' || currVolunteerRole.Status__c == 'Chapter Review'){
+                system.debug('-----> inside Training' + currVolunteerRole.Status__c + currVolunteerRole.Chapter_Role__r.Background_Check_Required__c);
+                if(currVolunteerRole.Chapter_Role__r.Background_Check_Required__c == true){
+                    
+                    trainingVolunteersIdsSet.add(currVolunteerRole.Volunteer_Name__c);
+                    coiTrainingVolunteerIdsSet.add(currVolunteerRole.Volunteer_Name__c);
+                }
+                else{
+                    coiTrainingVolunteerIdsSet.add(currVolunteerRole.Volunteer_Name__c);
+                }
+                
+            }
+            else if(currVolunteerRole.Status__c == 'Out of Compliance'){
+                if(currVolunteerRole.Chapter_Role__r.Background_Check_Required__c == true){
+                    outOfComplianceVolunteersIdsSet.add(currVolunteerRole.Volunteer_Name__c);
+                    coiOutOfComplianceVolunteerIdsSet.add(currVolunteerRole.Volunteer_Name__c);
+                }
+                else{
+                    coiOutOfComplianceVolunteerIdsSet.add(currVolunteerRole.Volunteer_Name__c);
+                }
+                
+            }
+            else{
+                volunteerIdsSet.add(currVolunteerRole.Volunteer_Name__c);
+            }
         }
         
-    } 
+        if(trainingVolunteersIdsSet.size() > 0){
+            updateBackGroundCheck(trainingVolunteersIdsSet, 'training');
+        }
+        if(coiTrainingVolunteerIdsSet.size() > 0){
+            updateConflictOfInterest(coiTrainingVolunteerIdsSet, 'training');
+        }
+        
+        if(outOfComplianceVolunteersIdsSet.size() > 0){
+            updateBackGroundCheck(outOfComplianceVolunteersIdsSet, 'outOfCompliance');
+        }
+        
+        if(coiOutOfComplianceVolunteerIdsSet.size() > 0){
+            updateConflictOfInterest(coiOutOfComplianceVolunteerIdsSet, 'outOfCompliance');
+        }
+        if(volunteerIdsSet.size() > 0 && outOfComplianceVolunteersIdsSet.size() == 0 && trainingVolunteersIdsSet.size() == 0){
+            updateBackGroundCheck(volunteerIdsSet, 'none');
+        }
+        
+        if(volunteerIdsSet.size() > 0 && coiOutOfComplianceVolunteerIdsSet.size() == 0 && coiTrainingVolunteerIdsSet.size() == 0){
+            updateConflictOfInterest(volunteerIdsSet, 'none');
+        }
+        
+        if(outOfComplianceVolunteersIdsSet.size() > 0 && trainingVolunteersIdsSet.size() == 0){
+            updateBackGroundCheck(outOfComplianceVolunteersIdsSet, '1');
+        }
+        if(coiOutOfComplianceVolunteerIdsSet.size() > 0 && coiTrainingVolunteerIdsSet.size() == 0){
+            updateConflictOfInterest(coiOutOfComplianceVolunteerIdsSet, '1');
+        }
+        
+        if(trainingVolunteersIdsSet.size() > 0 && outOfComplianceVolunteersIdsSet.size() == 0 ){
+            updateBackGroundCheck(trainingVolunteersIdsSet, '2');
+        }
+        
+        if(coiTrainingVolunteerIdsSet.size() > 0 && coiOutOfComplianceVolunteerIdsSet.size() == 0 ){
+            updateConflictOfInterest(coiTrainingVolunteerIdsSet, '2');
+        }
+    }
     
+    // This method is used to update the BC record based on the volunteer role status 
+    public static void updateBackGroundCheck(Set<ID> volunteerIdsSet, String status){
+        List<Background_check__c> updatebackgroundCheckList = new List<Background_check__c>();
+        system.debug('-----> inside updateBackGroundCheck' + status);
+        for(Background_check__c currBack: [SELECT ID,Current__c,Volunteer__c FROM Background_check__c WHERE Volunteer__c IN:volunteerIdsSet AND Current__c = true]){
+            if(status == 'training' ){
+                currBack.VolunteerRoleTrainedTpendChapReview__c = true;
+                
+            }
+            else if(status == 'outOfCompliance' ){
+                currBack.VolunteerRoleOutofCompliance__c = true;
+            }
+            else if(status == 'none'){
+                currBack.VolunteerRoleTrainedTpendChapReview__c = false;
+                currBack.VolunteerRoleOutofCompliance__c = false;
+                
+            }
+            else if(status == '1'){
+                currBack.VolunteerRoleTrainedTpendChapReview__c = false;
+            }
+            else if(status == '2'){
+                currBack.VolunteerRoleOutofCompliance__c = false;
+            }
+            updatebackgroundCheckList.add(currBack);
+        }
+        system.debug('-----> inside updatebackgroundCheckList' + updatebackgroundCheckList);
+        if(updatebackgroundCheckList.size() > 0){
+            update updatebackgroundCheckList;
+        }
+    }
     
+    // This method is used to update the BC record based on the volunteer role status  
+    public static void updateConflictOfInterest(Set<ID> volunteerIdsSet, String status){
+        List<Conflict_Of_Interest__c> updateConflictList = new List<Conflict_Of_Interest__c>();
+        system.debug('-----> inside updateConflictOfInterest' + status);
+        for(Conflict_Of_Interest__c currCOI: [SELECT ID,Current__c,Volunteer_Contact__c FROM Conflict_Of_Interest__c WHERE Volunteer_Contact__c IN:volunteerIdsSet AND Current__c = true]){
+            system.debug('Inside COI Query'+ currCOI);
+            if(status == 'training' ){
+                currCOI.VolunteerRoleTrainedTpendChapReview__c = true;
+            }
+            else if(status == 'outOfCompliance' ){
+                currCOI.VolunteerRoleOutofCompliance__c = true;
+            }
+            else if(status == 'none'){
+                currCOI.VolunteerRoleTrainedTpendChapReview__c = false;
+                currCOI.VolunteerRoleOutofCompliance__c = false;
+            }
+            else if(status == '1'){
+                currCOI.VolunteerRoleTrainedTpendChapReview__c = false;
+            }
+            else if(status == '2'){
+                currCOI.VolunteerRoleOutofCompliance__c = false;
+            }
+            updateConflictList.add(currCOI);
+        }
+        system.debug('---> updateConflictList'+ updateConflictList);
+        if(updateConflictList.size() > 0){
+            update updateConflictList;
+        }
+    }
 }

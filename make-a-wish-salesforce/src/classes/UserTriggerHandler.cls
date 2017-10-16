@@ -209,6 +209,30 @@ insert groupMemberList ;
         }
         
     }
+    
+    //This Method is used to update the contact record when the user email address is changed.
+    @future
+    public static void updateConatcEmail(Map<Id,Id> contactIdMap){
+        Map<Id,User> contactUserMap = new Map<Id,User>();
+        for(User currUser : [SELECT Id,Email,ContactId FROM USER WHERE Id IN : contactIdMap.values()]){
+            contactUserMap.put(currUser.contactId,currUser);
+        }
+        List<Contact> updateContactList = new List<Contact>();
+        for(contact currRec : [SELECT Id,Email FROM Contact WHERE Id IN : contactIdMap.keySet() AND Email != Null]){
+            if(contactUserMap.Containskey(currRec.Id) && currRec.Email != contactUserMap.get(currRec.Id).Email){
+                currRec.Email = contactUserMap.get(currRec.Id).Email;
+                updateContactList.add(currRec);
+            }             
+        }
+        
+        if(updateContactList.Size() > 0 ){
+            Update updateContactList;
+        }
+    
+    }
+    
+    
+  
     //This method is used to update chaptername based on the user role after user insert or update user role 
     /* public static void updateUserChapterName(set<string> userIdsSet){
 set<string> userROleNamesSet = new set<string>();

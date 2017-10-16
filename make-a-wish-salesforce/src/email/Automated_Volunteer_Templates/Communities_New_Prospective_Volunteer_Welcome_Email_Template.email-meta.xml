@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
     <available>true</available>
-    <description>It will be used to send an email when a new prospective volunteer is added to prospective community.</description>
+    <description>This template will be used to send an email when a new prospective volunteer is added to prospective community. This template will be used to send an email when an orientation has not been registered for  7 days and 30 days after a prospective volunteer was added.</description>
     <encodingKey>ISO-8859-1</encodingKey>
     <letterhead>Make_a_Wish_America</letterhead>
     <name>Communities: New Prospective Volunteer Welcome Email Template</name>
     <style>freeForm</style>
-    <subject>Welcome to Wish Volunteer Community</subject>
+    <subject>Volunteer Information for Make-A-Wish</subject>
     <textOnly>Hi {!Target_User.FirstName},
 
 

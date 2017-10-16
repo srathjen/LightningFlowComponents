@@ -300,6 +300,7 @@
         <fullName>Additional_Interview_Date1__c</fullName>
         <description>It holds the Additional Available Interview Date1</description>
         <externalId>false</externalId>
+        <inlineHelpText>Date for an additional interview if necessary</inlineHelpText>
         <label>Additional Interview Date1</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -311,7 +312,7 @@
         <fullName>Additional_Interview_date2__c</fullName>
         <description>It holds the Additional Available Interview Date2</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the wish child is interviewed an additional time, if needed</inlineHelpText>
+        <inlineHelpText>Date for an additional interview if necessary</inlineHelpText>
         <label>Additional Interview Date2</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -478,7 +479,7 @@
     <fields>
         <fullName>Anticipated_Start_Date__c</fullName>
         <externalId>false</externalId>
-        <inlineHelpText>Approximate date when the wish might occur  (flexible)</inlineHelpText>
+        <inlineHelpText>Tentative date that the wish/trip might happen</inlineHelpText>
         <label>Anticipated Start Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -535,7 +536,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Assigned_Date__c</fullName>
         <description>This field is used to capture the wish assigned date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date that the volunteers were assigned to the wish child&apos;s file</inlineHelpText>
+        <inlineHelpText>Date when 2 volunteers have been assigned &amp; approved</inlineHelpText>
         <label>Assigned Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -664,7 +665,7 @@ for fulfilment  the wish.</description>
         <fullName>Budget_Approved_Date__c</fullName>
         <description>It is used to capture the approved date of the budget</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the submitted budget is approved</inlineHelpText>
+        <inlineHelpText>Date when the budget has been approved</inlineHelpText>
         <label>Budget Approved Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -744,7 +745,7 @@ for fulfilment  the wish.</description>
         <fullName>Budget_Submitted_Date__c</fullName>
         <description>It is used to capture the submitted date of the budget</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the staff submits the budget for approval</inlineHelpText>
+        <inlineHelpText>Date when the budget is submitted for approval</inlineHelpText>
         <label>Budget Submitted Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -806,6 +807,25 @@ for fulfilment  the wish.</description>
         <formula>&quot;ref:_&quot; &amp; LEFT($Organization.Id,5) &amp; SUBSTITUTE(RIGHT($Organization.Id,10), &quot;0&quot;, &quot;&quot; )&amp; &quot;._&quot; &amp; LEFT(Id,5) &amp; SUBSTITUTE(Left(RIGHT(Id,10), 5), &quot;0&quot;, &quot;&quot;) &amp; RIGHT(Id,5) &amp; &quot;:ref&quot;</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Hidden Case ThreadId</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Case_email_signature__c</fullName>
+        <description>This is Email template signature.</description>
+        <externalId>false</externalId>
+        <formula>IF(Owner:User.Account_Name__c=&quot;&quot;&amp;&amp;Owner:User.Phone=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Email,
+IF(Owner:User.Account_Name__c=&quot;&quot;&amp;&amp;Owner:User.Email=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Phone,
+IF(Owner:User.Phone=&quot;&quot;&amp;&amp;Owner:User.Email=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_Name__c,
+IF(Owner:User.Account_Name__c=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Phone+BR()+Owner:User.Email,
+IF(Owner:User.Phone=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_Name__c+BR()+Owner:User.Email ,
+IF(Owner:User.Email=&quot;&quot;,Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_Name__c+BR()+Owner:User.Phone,
+Owner:User.FirstName+&apos; &apos;+Owner:User.LastName+BR()+Owner:User.Account_Name__c+BR()+Owner:User.Phone+BR()+Owner:User.Email))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Case email signature</label>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -907,7 +927,7 @@ for fulfilment  the wish.</description>
         <fullName>Child_s_Medical_Summary_received_date__c</fullName>
         <description>It is used to capture the medical summary received date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the staff receives the Child&apos;s Medical Summary from the medical professional</inlineHelpText>
+        <inlineHelpText>Date when the CMS is received from the Medical Professional</inlineHelpText>
         <label>Child&apos;s Medical Summary Received Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -919,7 +939,7 @@ for fulfilment  the wish.</description>
         <fullName>Child_s_Medical_Summary_sent__c</fullName>
         <description>Medical summary sent date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the staff submits the Child&apos;s Medical Summary to the medical professional</inlineHelpText>
+        <inlineHelpText>Date when the CMS is sent to Medical Professional</inlineHelpText>
         <label>Child&apos;s Medical Summary Sent</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -935,7 +955,7 @@ for fulfilment  the wish.</description>
         <fullName>Closed_Date__c</fullName>
         <description>This field is used to capture the closed date of case</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the wish is financially closed out</inlineHelpText>
+        <inlineHelpText>Date when the uncompleted wish is closed  (refused, moved, etc.)</inlineHelpText>
         <label>Closed Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1007,7 +1027,7 @@ for fulfilment  the wish.</description>
         <fullName>Completed_Date__c</fullName>
         <description>It is used to capture the wish completed date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the wish is considered granted</inlineHelpText>
+        <inlineHelpText>Date when the wish is financially closed out</inlineHelpText>
         <label>Completed Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1019,7 +1039,7 @@ for fulfilment  the wish.</description>
         <fullName>Concept_Approval_Date__c</fullName>
         <description>It is used to capture the concept approval date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the chapter reviews and approves the wish concept</inlineHelpText>
+        <inlineHelpText>Date when the chapter staff approve the wish concept</inlineHelpText>
         <label>Concept Approval Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1862,7 +1882,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Diagnosis_Verification_Receive_Date__c</fullName>
         <description>It is used to capture the received date of dv</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the Diagosis Verification is received from the child&apos;s medical professional</inlineHelpText>
+        <inlineHelpText>Date when DV is received from Medical Professional</inlineHelpText>
         <label>Diagnosis Verification Received Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1874,7 +1894,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Diagnosis_Verification_Sent_Date__c</fullName>
         <description>It is used to capture the dv sent date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the Diagosis Verification is sent to child&apos;s medical professional</inlineHelpText>
+        <inlineHelpText>Date when DV is sent to Medical Professional</inlineHelpText>
         <label>Diagnosis Verification Sent Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -1968,6 +1988,19 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>EmergencyContactName__c</fullName>
+        <description>This field populate the emergency contact name from the household account</description>
+        <externalId>false</externalId>
+        <formula>Account.Emergency_Contact__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Emergency Contact Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Emergency_Number__c</fullName>
         <description>It is used to capture the emergency number</description>
         <externalId>false</externalId>
@@ -1982,7 +2015,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>End_Date__c</fullName>
         <description>This field will capture end date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Confirmed date when the wish is completed (arrive home) or revealed</inlineHelpText>
+        <inlineHelpText>Confirmed date the wish/trip is completed</inlineHelpText>
         <label>End Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2018,7 +2051,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Extended_End_Date__c</fullName>
         <description>It capture the Extended End Date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the family returns home (on their own) after the completion of the wish</inlineHelpText>
+        <inlineHelpText>Date when the family is returning after the scheduled wish end date</inlineHelpText>
         <label>Extended End Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2030,7 +2063,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Extended_Start_Date__c</fullName>
         <description>It Capture the Extended Start Date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the family leaves early prior to the beginning of the wish</inlineHelpText>
+        <inlineHelpText>Date when the family is leaving prior to scheduled start date</inlineHelpText>
         <label>Extended Start Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2090,7 +2123,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>GKTW_Confirmation_Date__c</fullName>
         <description>It is used to capture the confirmation date of GKTW</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date that GKTW confirms the reservation dates (on confirmation form)</inlineHelpText>
+        <inlineHelpText>Date when GKTW confirmed the reservation</inlineHelpText>
         <label>GKTW Confirmation Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2548,6 +2581,18 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Wish_Child_FirstName__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( RecordType.Name =&apos;Wish&apos;, Contact.FirstName,Parent.Contact.FirstName)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Hidden Wish Child FirstName</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_Wish_Child_Full_Name__c</fullName>
         <description>This Hidden field is created for send an email when when the case sub status is &quot;Abandoned&quot;.</description>
         <externalId>false</externalId>
@@ -2639,7 +2684,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Hold_Date__c</fullName>
         <description>It is used to capture the hold date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the wish is put on hold for medical or elective reasons</inlineHelpText>
+        <inlineHelpText>Date when the wish is put on Hold Status</inlineHelpText>
         <label>Hold Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2677,7 +2722,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Inactive_Date__c</fullName>
         <description>It is used to capture the wish inactive date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the wish is determined inactive and closing procedures begin</inlineHelpText>
+        <inlineHelpText>Date when the wish is put on Inactive Status</inlineHelpText>
         <label>Inactive Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2689,7 +2734,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Inquiry_Date__c</fullName>
         <description>It holds the Date of Inquiry form submitted.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the Initial lead from a non-authorized referral source is received</inlineHelpText>
+        <inlineHelpText>Date when Lead is received from non-authorized referral source.</inlineHelpText>
         <label>Inquiry Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -2737,7 +2782,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Interview_date__c</fullName>
         <description>This field will capture the interview date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the volunteers met with the wish child and family</inlineHelpText>
+        <inlineHelpText>Date when the interview has been scheduled/occurs with the family</inlineHelpText>
         <label>Interview Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -3679,9 +3724,8 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     </fields>
     <fields>
         <fullName>Qualified_Date__c</fullName>
-        <description>It will hold Case created date.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the Diagnosis Verification is reviewed and child&apos;s eligibility is confirmed</inlineHelpText>
+        <inlineHelpText>Date when qualifying diagnosis verification is received and confirmed</inlineHelpText>
         <label>Qualified Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4005,7 +4049,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Ready_to_Assign_Date__c</fullName>
         <description>Date will be captured When status is changed to Ready To Assign</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the welcome call/packet task is completed and the family is ready to be met by volunteers</inlineHelpText>
+        <inlineHelpText>Date when the file is ready for volunteers to be assigned</inlineHelpText>
         <label>Ready to Assign Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4024,7 +4068,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <fullName>Referral_Date__c</fullName>
         <description>It hods the Date of Wish Referral form submitted.</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the Initial lead from an authorized referral source is received</inlineHelpText>
+        <inlineHelpText>Date when Lead is received from authorized referral source or Inquiry is updated.</inlineHelpText>
         <label>Referral Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4217,7 +4261,7 @@ on airplane</description>
         <fullName>Start_Date__c</fullName>
         <description>This field will capture start date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Confirmed date that the wish will begin (departure)</inlineHelpText>
+        <inlineHelpText>Confirmed date that the wish/trip begins</inlineHelpText>
         <label>Start Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4813,7 +4857,7 @@ on airplane</description>
         <fullName>Wish_Clearance_Received_Date__c</fullName>
         <description>It is used to capture the wish clearance received date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the staff receives the Wish Clearance Form from the medical professional</inlineHelpText>
+        <inlineHelpText>Date when the Wish Clearance is received from the Medical Professional</inlineHelpText>
         <label>Wish Clearance Received Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4825,7 +4869,7 @@ on airplane</description>
         <fullName>Wish_Clearance_Sent_Date__c</fullName>
         <description>It is used to capture the wish clearance sent date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the staff submits the Wish Clearance Form to the medical professional</inlineHelpText>
+        <inlineHelpText>Date when the Wish Clearance is sent to Medical Professional</inlineHelpText>
         <label>Wish Clearance Sent Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -4915,7 +4959,7 @@ on airplane</description>
         <fullName>Wish_Determined_Date__c</fullName>
         <description>It will holds wish determined date</description>
         <externalId>false</externalId>
-        <inlineHelpText>Date the wish child identifies his wish</inlineHelpText>
+        <inlineHelpText>Date when wish child identifies a clear wish</inlineHelpText>
         <label>Wish Determined Date</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -7607,6 +7651,22 @@ AND(ISPICKVAL(Status,&apos;Budget Approval - Submitted&apos;),ISNULL(Budget_Subm
         <errorMessage>You cannot change the owner of the subcase</errorMessage>
     </validationRules>
     <validationRules>
+        <fullName>Case_Closed_Date_Change_Validation</fullName>
+        <active>true</active>
+        <description>When the case is closed, there must be entered a closed date value and program supervisor only able to edit the closed date value.</description>
+        <errorConditionFormula>AND(NOT($Permission.Program_Supervisor ), NOT(ISBLANK( PRIORVALUE(Closed_Date__c ))),$RecordType.Name = &quot;Wish&quot;,$Profile.Name != &apos;Integration&apos;,ISCHANGED(Closed_Date__c ) )</errorConditionFormula>
+        <errorDisplayField>Closed_Date__c</errorDisplayField>
+        <errorMessage>You do not have permission to edit this record. Please contact your program supervisor to edit the date</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Case_Closed_Date_Validation</fullName>
+        <active>true</active>
+        <description>When the case is closed, there must be entered a closed date value and program supervisor only able to edit the closed date value.</description>
+        <errorConditionFormula>AND(ISBLANK(Closed_Date__c ),$RecordType.Name = &quot;Wish&quot;,$Profile.Name != &apos;Integration&apos;,OR(ISPICKVAL( Status,&apos;DNQ&apos;),ISPICKVAL( Status,&apos;Closed&apos;),ISPICKVAL( Status,&apos;Denied&apos;),ISPICKVAL( Status,&apos;Medical&apos;)))</errorConditionFormula>
+        <errorDisplayField>Closed_Date__c</errorDisplayField>
+        <errorMessage>Before the case is closed, a closed date value must be entered.</errorMessage>
+    </validationRules>
+    <validationRules>
         <fullName>Case_Closed_Status</fullName>
         <active>true</active>
         <description>Only Program Supervisor permission set can change from Closed to the previous status.</description>
@@ -7623,7 +7683,7 @@ ISBLANK(Hidden_Hold_Status_Value__c))))</errorConditionFormula>
         <fullName>Case_Completed</fullName>
         <active>true</active>
         <description>1. Once it&apos;s in Completed, it cannot be changed to any other status.</description>
-        <errorConditionFormula>AND(ISPICKVAL(PRIORVALUE(Status),&apos;Completed&apos;),ISCHANGED(Status),NOT(ISNEW()),$Profile.Name  != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;)</errorConditionFormula>
+        <errorConditionFormula>AND(ISPICKVAL(PRIORVALUE(Status),&apos;Completed&apos;),ISCHANGED(Status),NOT(ISNEW()),$Profile.Name != &apos;Integration&apos;,$RecordType.Name = &quot;Wish&quot;,NOT($Permission.Program_Supervisor))</errorConditionFormula>
         <errorMessage>The status cannot be changed after the wish is Completed.</errorMessage>
     </validationRules>
     <validationRules>
@@ -7721,7 +7781,7 @@ ISPICKVAL(PRIORVALUE(Status),&quot;Ready to Interview&quot;),NOT(ISNEW()),ISCHAN
 ISCHANGED(Status),NOT(ISNEW())),AND(ISCHANGED(Status),
 OR(ISPICKVAL(Status,&apos;Qualified&apos;),ISPICKVAL(Status,&apos;Wish Design&apos;),ISPICKVAL(Status,&apos;Wish Determined&apos;),ISPICKVAL(Status,&apos;Wish Scheduled&apos;),
 ISPICKVAL(Status,&apos;Completed&apos;),ISPICKVAL(Status,&apos;Granted&apos;)),ISPICKVAL(PRIORVALUE(Status),&quot;Ready to Assign&quot;),
-NOT(ISNEW()))))</errorConditionFormula>
+NOT(ISNEW()))), Wish_Assist__c  = false)</errorConditionFormula>
         <errorMessage>The status cannot be changed manually from this status.  Once two wish granters are approved, it will automatically update to Ready to Interview status.</errorMessage>
     </validationRules>
     <validationRules>
@@ -8392,13 +8452,11 @@ alert(&apos;Email sucessfully sent&apos;);
         <availability>online</availability>
         <description>This button is used to update the demographic information of wish and wish family information</description>
         <displayType>button</displayType>
-        <encodingKey>UTF-8</encodingKey>
-        <height>600</height>
-        <linkType>url</linkType>
+        <linkType>javascript</linkType>
         <masterLabel>Update Contact Info</masterLabel>
-        <openType>sidebar</openType>
+        <openType>onClickJavaScript</openType>
         <protected>false</protected>
-        <url>/apex/RelationshipsViewer_VF?recId={!Case.Id}</url>
+        <url>window.open(&apos;/apex/RelationshipsViewer_VF?recId={!Case.Id}&apos;,&apos;_blank&apos;);</url>
     </webLinks>
     <webLinks>
         <fullName>Wish_Bank</fullName>

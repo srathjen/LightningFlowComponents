@@ -110,6 +110,21 @@
                                 <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b></div>
                                 <div class="panel-body">
                                     <div class="row">
+                                        
+                                        <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Relationship Type</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.Wish_Family_Type__c}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall" style="color:white">.</label>
+                                            <div class="col-sm-6" style="color:white">.</div>
+                                        </div>
+                                        
+                                        
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
                                             <label class="col-sm-6 control-label" for="formGroupInputSmall">Phone</label>
                                             <div class="col-sm-6">
@@ -179,6 +194,7 @@
                                                 <apex:outputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -202,6 +218,7 @@
                             <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b></div>
                             <div class="panel-body">
                                 <div class="row">
+                                    
                                     <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
                                         <label class="col-sm-6 control-label" for="formGroupInputSmall">Phone</label>
                                         <div class="col-sm-6">
@@ -258,6 +275,7 @@
                                             <apex:inputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
                                         </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -271,6 +289,18 @@
                                 <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b></div>
                                 <div class="panel-body">
                                     <div class="row">
+                                        <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Relationship Type</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.Wish_Family_Type__c}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall" style="color:white">.</label>
+                                            <div class="col-sm-6" style="color:white">.</div>
+                                        </div>
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
                                             <label class="col-sm-6 control-label" for="formGroupInputSmall">Phone</label>
                                             <div class="col-sm-6">
@@ -340,6 +370,7 @@
                                                 <apex:inputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
                                             </div>
                                         </div>
+                                        
                                     </div>
                                 </div>
                             </div>

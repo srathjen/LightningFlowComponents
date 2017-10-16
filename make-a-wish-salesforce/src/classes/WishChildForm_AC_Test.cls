@@ -8,6 +8,7 @@ public class WishChildForm_AC_Test{
     
     /* This CalltheConstructor Method is used to cover the codecoverage for constructor.*/
     static testMethod void CalltheConstructorMethod(){ 
+       
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
         case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -35,6 +36,7 @@ public class WishChildForm_AC_Test{
         wishChildIns.ExitwithApprovalError();
         wishChildIns.WCFNext();
         wishChildIns.WFFNext();
+        wishChildIns.init();
         wishChildIns.BackToWCF();
         wishChildIns.addFamily();
         wishChildIns.addDriver();
@@ -94,12 +96,15 @@ public class WishChildForm_AC_Test{
         wishChildIns.saveContact();
         Test.StopTest();
         System.AssertEquals(wish.Id,wishChildFormIns.Case__c);
+         
     }   
     
     /* This DocusignSignNow Method is used to cover the codecoverage SubmitAndSign() when Envelop_Id__c  &  Hidden_SignerMap_Key_1__c  are NOT NULL.*/
     static testMethod void DocusignSignNow1(){ 
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
+        Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
+        npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,childFamily.Id);
         case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Wish_Child_Form__c wishChildFormIns = OrientationandTrainingUtil.createWishChildForm(wish.Id);
         wishChildFormIns.SignerMapKeyPair__c = 'test eerwe - 1#Gmother mother - 2';
@@ -113,6 +118,7 @@ public class WishChildForm_AC_Test{
         pageRef.getParameters().put('id', String.valueOf(wish.Id));
         Test.setCurrentPage(pageRef);
         WishChildForm_AC wishChildIns = new WishChildForm_AC(sc);
+        wishChildIns.init();
         Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
         wishChildIns.SignNowmultiEmail();
         Test.StartTest();
@@ -125,6 +131,8 @@ public class WishChildForm_AC_Test{
     static testMethod void DocusignSignNow2(){ 
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
+        Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
+        npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,childFamily.Id);
         case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Wish_Child_Form__c wishChildFormIns = OrientationandTrainingUtil.createWishChildForm(wish.Id);
         wishChildFormIns.SignerMapKeyPair__c = 'test eerwe - 1#Gmother mother - 2';
@@ -151,6 +159,8 @@ public class WishChildForm_AC_Test{
     static testMethod void DocusignSignNow3(){ 
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
+        Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
+        npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,childFamily.Id);
         case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Wish_Child_Form__c wishChildFormIns = OrientationandTrainingUtil.createWishChildForm(wish.Id);
         wishChildFormIns.SignerMapKeyPair__c = 'test eerwe - 1#Gmother mother - 2';
@@ -176,6 +186,8 @@ public class WishChildForm_AC_Test{
     static testMethod void DocusignSendEmail(){ 
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
+        Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
+        npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,childFamily.Id);
         case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Wish_Child_Form__c wishChildFormIns = OrientationandTrainingUtil.createWishChildForm(wish.Id);
         wishChildFormIns.Emergency_Relationship__c = 'Employee';
@@ -196,8 +208,10 @@ public class WishChildForm_AC_Test{
         util.emailList.add('Vennila Paramasivam');
         util.emailList.add('Chandru');
         wishChildIns.sendpdftoEmail();
-        wishChildIns.SameAsFamily();
-        wishChildIns.RemovesameParentGuardian();
+        
+        Set<String> rmoveNameSet = new Set<String>();
+        rmoveNameSet.add('TestName@gmail.com');
+       
         //wishChildIns.removeDriver();
         Map<String,String> sendEmailMap = new Map<String,String>();
         sendEmailMap.put('Vennila Paramasivam','vennila@mstsolutions.com');
@@ -208,18 +222,4 @@ public class WishChildForm_AC_Test{
         System.AssertEquals(wish.Id,wishChildFormIns.Case__c);
     }
     
-    /*This method is to  SignNowmultiEmail()*/
-    static testMethod void wishChildisEmpty(){
-        Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
-        Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
-        case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        wish.Hidden_Email_List__c = 'Chandru,Kesav,Mariyappan';
-        update wish;
-        ApexPages.StandardController sc = new ApexPages.StandardController(wish);
-        PageReference pageRef = Page.WishChildForm_VF;
-        pageRef.getParameters().put('id', String.valueOf(wish.Id));
-        Test.setCurrentPage(pageRef);
-        WishChildForm_AC wishChildIns = new WishChildForm_AC(sc);
-        
-    }
 }

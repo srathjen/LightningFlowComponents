@@ -160,6 +160,16 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Hidden_Email__c</fullName>
+        <description>It will hold the very first email of the user for lms login purpose.</description>
+        <externalId>false</externalId>
+        <label>Hidden Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_Role_Name_Id__c</fullName>
         <description>This field is used to store the role name for back end purpose.</description>
         <externalId>false</externalId>
@@ -168,6 +178,14 @@
         <trackFeedHistory>false</trackFeedHistory>
         <type>LongTextArea</type>
         <visibleLines>18</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Hidden_Volunteer_Cancelled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Hidden Volunteer Cancelled</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>I_am_over_18_years_old__c</fullName>
@@ -308,6 +326,31 @@
         <label>Volunteer Active</label>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Volunteer_Orientation_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Volunteer Orientation Status</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Registered</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Cancelled</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>First Registeration</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Year_of_Inactive__c</fullName>

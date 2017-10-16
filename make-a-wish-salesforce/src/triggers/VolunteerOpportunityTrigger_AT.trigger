@@ -4,7 +4,7 @@ CreatedDate : 05/27/2015
 Description : TBD
 *************************************************************************************************/
 
-trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Insert,Before Update,After Insert,After Update,After delete) {
+trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Insert,Before Update,After Insert,After Update,After delete, Before delete) {
     Constant_AC  constant = new Constant_AC();
     
     Id registeredWishRecordTypeId = Schema.SobjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.registeredWish).getRecordTypeId();
@@ -140,7 +140,10 @@ currRec.isRejected__c = true;
             if((currRec.Status__c == 'Approved' && Trigger.oldMap.get(currRec.id).Status__c != 'Approved')  &&  (currRec.Volunteer_Name__c!= Null) && ((currRec.Wish__c != Null || currRec.Non_Wish_Event__c != Null) && currRec.Reason_Inactive__c == Null))
             {
                 volOpportunitySharingList.add(currRec); 
-                recordsForCreatingCaseTeams.add(currRec); 
+                if(currRec.Wish__c != Null){
+                    recordsForCreatingCaseTeams.add(currRec);
+                }
+                 
             }
             
             if((currRec.Volunteer_Name__c != Null) &&(currRec.Wish__c != Null))

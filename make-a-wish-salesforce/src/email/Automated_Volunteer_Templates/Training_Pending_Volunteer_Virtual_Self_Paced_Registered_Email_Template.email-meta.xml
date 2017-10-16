@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This template will be used to send an email alert when a volunteer registers for a virtual self-paced training.  This template will be used to send an email when a role specific training has been registered but not completed 7 days and 30 days after the registration date.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Make_a_Wish_America</letterhead>
+    <name>Training: Pending Volunteer, Virtual Self Paced Registered Email Template</name>
+    <style>freeForm</style>
+    <subject>Virtual Self-Paced Role-Specific Training Registered</subject>
+    <textOnly>{!Contact.FirstName},
+
+You have successfully registered for (Insert Training Name). Please log in to the Make-A-Wish Volunteer Center using your username listed below to complete this training.
+
+Username: (Insert User Name)
+
+Once you&apos;ve logged in, click &quot;Continue Process&quot; and then &quot;Start Course&quot; to watch the course at your own pace. After you&apos;ve clicked &quot;Start Course&quot;, a new tab will open and you will be able to watch the training. Once you&apos;ve completed the course, we will mark this training as complete. Please note that this process takes about 5 minutes to occur and you will need to refresh your browser to see these changes.
+
+If you need to cancel or change this training, please visit the Make-A-Wish Volunteer Center.
+
+Thanks,
+
+{!Contact.OwnerFullName}
+{!Contact.Region_Chapter__c}
+{!Contact.HomePhone}
+{!Contact.Email}</textOnly>
+    <type>html</type>
+</EmailTemplate>

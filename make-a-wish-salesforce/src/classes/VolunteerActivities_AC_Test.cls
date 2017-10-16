@@ -32,7 +32,7 @@ public class VolunteerActivities_AC_Test {
         }
         
         //Used to check salesforce governor limits
-        OrientationandTrainingUtil.checkGovernorLimits();
+        //OrientationandTrainingUtil.checkGovernorLimits();
         
     }
     
@@ -64,7 +64,7 @@ public class VolunteerActivities_AC_Test {
         }
         
         //Used to check salesforce governor limits
-        OrientationandTrainingUtil.checkGovernorLimits();
+        //OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     //Non Wish open activities
@@ -89,6 +89,8 @@ public class VolunteerActivities_AC_Test {
         newTask.Status = 'Not Started';
         update newTask;
         
+        System.assertEquals(newTask.OwnerId, volUser.Id);
+        
         System.RunAs(volUser) {
             PageReference pageref = Page.VolunteerActivities_VF;
             Test.setCurrentPageReference(pageref);
@@ -97,7 +99,7 @@ public class VolunteerActivities_AC_Test {
         }
         
         //Used to check salesforce governor limits
-        OrientationandTrainingUtil.checkGovernorLimits();
+        //OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     //Non Wish Event Activities
@@ -117,6 +119,8 @@ public class VolunteerActivities_AC_Test {
         newTask.Status = 'Not Started';
         update newTask;
         
+        System.assertEquals(newTask.OwnerId, volUser.Id);
+        
         System.RunAs(volUser) {
             PageReference pageref = Page.VolunteerActivities_VF;
             Test.setCurrentPageReference(pageref);
@@ -127,13 +131,13 @@ public class VolunteerActivities_AC_Test {
         }
         
         //Used to check salesforce governor limits
-        OrientationandTrainingUtil.checkGovernorLimits();
+        //OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     
     
     /* Completed Block */
-    static testMethod void openWishActivities1() {
+    static testMethod void closedWishActivities() {
         User volUser = [SELECT Id, ContactId FROM User WHERE ContactId != null AND isActive = true LIMIT 1];
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -149,6 +153,9 @@ public class VolunteerActivities_AC_Test {
         newTask.OwnerId = volUser.Id;
         newTask.Status = 'Completed';
         update newTask;
+        
+         System.assertEquals(newTask.Status, 'Completed');
+        
         System.RunAs(volUser) {
             PageReference pageref = Page.VolunteerActivities_VF;
             Test.setCurrentPageReference(pageref);
@@ -157,11 +164,11 @@ public class VolunteerActivities_AC_Test {
         }
         
         //Used to check salesforce governor limits
-        OrientationandTrainingUtil.checkGovernorLimits();
+        //OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     //Non Wish open activities
-    static testMethod void openNonActivities1() {
+    static testMethod void closedNonActivities() {
         Constant_AC  constant = new Constant_Ac(); 
         Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
         Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
@@ -178,6 +185,8 @@ public class VolunteerActivities_AC_Test {
         newTask.Status = 'Completed';
         update newTask;
         
+        System.assertEquals(newTask.Status, 'Completed');
+        
         System.RunAs(volUser) {
             PageReference pageref = Page.VolunteerActivities_VF;
             Test.setCurrentPageReference(pageref);
@@ -186,11 +195,11 @@ public class VolunteerActivities_AC_Test {
         }
         
         //Used to check salesforce governor limits
-        OrientationandTrainingUtil.checkGovernorLimits();
+        //OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     //Non Wish open activities
-    static testMethod void openNonWishActivities1() {
+    static testMethod void closedNonWishActivities() {
         Constant_AC  constant = new Constant_Ac(); 
         Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
         Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
@@ -211,6 +220,8 @@ public class VolunteerActivities_AC_Test {
         newTask.Status = 'Completed';
         update newTask;
         
+        System.assertEquals(newTask.Status, 'Completed');
+        
         System.RunAs(volUser) {
             PageReference pageref = Page.VolunteerActivities_VF;
             Test.setCurrentPageReference(pageref);
@@ -219,11 +230,11 @@ public class VolunteerActivities_AC_Test {
         }
         
         //Used to check salesforce governor limits
-        OrientationandTrainingUtil.checkGovernorLimits();
+        //OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     //Non Wish Event Activities
-    static testMethod void openNonWishEventActivities1() {
+    static testMethod void closedNonWishEventActivities() {
         Constant_AC  constant = new Constant_Ac(); 
         Id nonWishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
         Id wishEvents = Schema.Sobjecttype.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
@@ -239,6 +250,8 @@ public class VolunteerActivities_AC_Test {
         newTask.Status = 'Completed';
         update newTask;
         
+        System.assertEquals(newTask.Status, 'Completed');
+        
         System.RunAs(volUser) {
             PageReference pageref = Page.VolunteerActivities_VF;
             Test.setCurrentPageReference(pageref);
@@ -247,7 +260,7 @@ public class VolunteerActivities_AC_Test {
         }
         
         //Used to check salesforce governor limits
-        OrientationandTrainingUtil.checkGovernorLimits();
+        //OrientationandTrainingUtil.checkGovernorLimits();
     }
     
     

@@ -4,41 +4,15 @@ This VF page used to upload the wish child photo to attachment as a inline page 
 <apex:page standardController="Contact" extensions="AttachmentUploadController" standardStylesheets="false" showHeader="false" sidebar="false" applyHtmlTag="true">  
     <style>
         /* DivTable.com */
-        .divTable{
-        display: table;
-        width: 100%;
-        }
-        .divTableRow {
-        display: table-row;
-        }
-        .divTableHeading {
-        background-color: #EEE;
-        display: table-header-group;
-        }
-        .divTableCell, .divTableHead {
-        
-        display: table-cell;
-        padding: 3px 10px;
-        }
-        .displayCSS{
-        display:none;
-        }
-        .divTableHeading {
-        background-color: #EEE;
-        display: table-header-group;
-        font-weight: bold;
-        }
-        .divTableFoot {
-        background-color: #EEE;
-        display: table-footer-group;
-        font-weight: bold;
-        }
-        .divTableBody {
-        display: table-row-group;
-        }
-        .square {
-        height: 165px;
-        }
+        .divTable{ display: table; width: 100%; }
+        .divTableRow { display: table-row; }
+        .divTableHeading { background-color: #EEE; display: table-header-group; }
+        .divTableCell, .divTableHead { display: table-cell; padding: 3px 10px; }
+        .displayCSS{ display:none; }
+        .divTableHeading { background-color: #EEE; display: table-header-group; font-weight: bold; }
+        .divTableFoot { background-color: #EEE; display: table-footer-group; font-weight: bold; }
+        .divTableBody { display: table-row-group; }
+        .square { height: 165px; }
         .square img {height:100% !important}
     </style>
     <apex:form enctype="multipart/form-data">
@@ -49,7 +23,7 @@ This VF page used to upload the wish child photo to attachment as a inline page 
                 <div class="divTableRow">
                     <div class="divTableCell">
                         <div class="square">
-                            <apex:outputText label="Image" escape="false" value="{!Contact.Wish_Child_Photo__c}"/>
+                            <apex:outputText label="Image" escape="false" value="{!Contact.Wish_Child_Photo__c}" id="childPhto"/>
                         </div>
                     </div>
                     <div class="divTableCell">

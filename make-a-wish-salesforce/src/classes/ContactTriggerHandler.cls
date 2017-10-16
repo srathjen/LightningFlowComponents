@@ -13,6 +13,7 @@ public class ContactTriggerHandler{
     Id WishRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
     // Public 
     Id volunteerOpportunityWishRecTypeId = Schema.SObjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
+    
     public Map<string,integer> birthMonthMap = new Map<string,integer>();
     
     
@@ -182,6 +183,8 @@ public class ContactTriggerHandler{
              }
             else if(con.RecordTypeId == boardMemberRT)
                 houseHoldAffiliation.Constituent_Code__c='Board Member';
+            if(con.RecordTypeId == MedicalProfContactRecordTypeId)
+                houseHoldAffiliation.npe5__Primary__c = false;
             houseHoldAffList.add(houseHoldAffiliation);
             
             if((con.RecordTypeId == MedicalProfContactRecordTypeId) || con.RecordTypeId == familyContactRecordTypeId || con.RecordTypeId == wichChildRecordTypeId)
@@ -218,6 +221,7 @@ system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
                     if(con.RecordTypeId == MedicalProfContactRecordTypeId  )
                     {
                         aff.Constituent_Code__c='Medical Professional';
+                        aff.npe5__Primary__c = true;
                     }
                     affDbList.add(aff);
                 }
@@ -414,7 +418,7 @@ system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
       }
       for(Contact dbContact : conMap.values()){
       if(contactSetId.size() > 0){
-       dbContact.addError('You cannot delete this Contact, as it is associated with Lead');}
+       dbContact.addError('You cannot delete this Contact as it is associated with Lead');}
       }
       
      
@@ -455,6 +459,73 @@ system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
                     }
                 }
             }
+        }
+    }
+    
+    //Used to populated Condition Description based on ICD Code values
+    public static void updatePrimaryDiagnosis(Map<Id, Contact> primaryDiagnosisChangesMap) {
+        List<Wish_Child_Form__c> updateConInfoList = new List<Wish_Child_Form__c>();
+        for(Case updateWPPInfo : [SELECT Id, ContactId, (SELECT Id,FirstName__c,Middle_Name__c,Preferred_Name__c,mobilePhone__c, Email__c, LastName__c,Gender__c,BirthDate__c, Diagnosis__c, T_Shirt_Size__c FROM Wish_Child_Form__r ORDER BY CreatedDate DESC LIMIT 1) FROM Case WHERE ContactId IN : primaryDiagnosisChangesMap.keySet()]) {
+            if(updateWPPInfo.Wish_Child_Form__r.size() > 0) {
+                for(Wish_Child_Form__c checkDiagnosis : updateWPPInfo.Wish_Child_Form__r) {
+                    checkDiagnosis.Diagnosis__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).Diagnosis__c;
+                    checkDiagnosis.FirstName__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).FirstName;
+                    checkDiagnosis.Middle_Name__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).Middle_Name__c;
+                    checkDiagnosis.Preferred_Name__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).Preferred_Name__c;
+                    checkDiagnosis.mobilePhone__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).MobilePhone;
+                    checkDiagnosis.Email__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).npe01__HomeEmail__c;
+                    checkDiagnosis.LastName__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).LastName;
+                    checkDiagnosis.Gender__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).Gender__c;
+                    checkDiagnosis.BirthDate__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).Birthdate;
+                    checkDiagnosis.State__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).MailingState;
+                    checkDiagnosis.Zip_Code__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).MailingPostalCode;
+                    checkDiagnosis.Street__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).MailingStreet;
+                    checkDiagnosis.City__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).MailingCity;
+                    updateConInfoList.add(checkDiagnosis);
+                }
+            }
+        }
+       if(updateConInfoList.size() > 0) {
+            update updateConInfoList;
+            //String wPPInfoString = JSON.serialize(updateConInfoList);
+            //updateWishPaperPacketInfo(wPPInfoString);
+        }
+    }
+    
+    @future
+    public static void updateWishPaperPacketInfo(String wPPInfoString) {
+        List<Wish_Child_Form__c> wishChildInfoLists = (List<Wish_Child_Form__c>)JSON.deserialize(wPPInfoString, List<Wish_Child_Form__c>.class);
+        if(wishChildInfoLists.size() > 0) {
+            update wishChildInfoLists;
+        }
+        
+    }
+    // Used to update Hidden All Primary Diagnosis in Case Object
+    public static void updateCaseHiddenAllPrimary( Map<Id, Contact> diagnosisConMap) {
+        Constant_AC  constant = new Constant_AC();
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        List<Case> parentCaseList = new List<Case>();
+        for(Case parentInfo : [SELECT Id, Hidden_All_Primary__c, ContactId FROM Case WHERE RecordTypeId =: parentWishRecordTypeId AND ContactId IN : diagnosisConMap.keySet()]) {
+            parentInfo.Hidden_All_Primary__c = '';
+            if(!String.isEmpty(diagnosisConMap.get(parentInfo.ContactId).Diagnosis__c)) {
+                parentInfo.Hidden_All_Primary__c = diagnosisConMap.get(parentInfo.ContactId).Diagnosis__c;
+            }
+            if(!String.isEmpty(diagnosisConMap.get(parentInfo.ContactId).SD1_Condition_Description__c)) {
+                parentInfo.Hidden_All_Primary__c += '\n'+diagnosisConMap.get(parentInfo.ContactId).SD1_Condition_Description__c;
+            }
+            if(!String.isEmpty(diagnosisConMap.get(parentInfo.ContactId).SD2_Condition_Description__c)) {
+                parentInfo.Hidden_All_Primary__c += '\n'+diagnosisConMap.get(parentInfo.ContactId).SD2_Condition_Description__c;
+            }
+            if(!String.isEmpty(diagnosisConMap.get(parentInfo.ContactId).SD3_Condition_Description__c)) {
+                parentInfo.Hidden_All_Primary__c += '\n'+diagnosisConMap.get(parentInfo.ContactId).SD3_Condition_Description__c;
+            }
+            if(!String.isEmpty(diagnosisConMap.get(parentInfo.ContactId).SD4_Condition_Description__c)) {
+                parentInfo.Hidden_All_Primary__c += '\n'+diagnosisConMap.get(parentInfo.ContactId).SD4_Condition_Description__c;
+            }
+            parentCaseList.add(parentInfo);
+        }
+        if(parentCaseList.size() > 0) {
+           update parentCaseList; 
         }
     }
 }

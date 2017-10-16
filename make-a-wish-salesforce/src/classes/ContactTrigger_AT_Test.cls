@@ -347,4 +347,36 @@ public class ContactTrigger_AT_Test{
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
         Delete childFamily;
     }
+    
+    public testmethod static void diagnosisUpdate()
+    {
+        Constant_AC  constant = new Constant_AC();
+        Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+        Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(childCon.Id);
+        childCon.Diagnosis__c = 'Malignant';
+        childCon.SD1_Condition_Description__c = 'Malignant';
+        childCon.SD2_Condition_Description__c = 'Malignant';
+        childCon.SD3_Condition_Description__c = 'Malignant';
+        childCon.SD4_Condition_Description__c = 'Malignant';
+        childCon.RecordTypeId = wichChildRecordTypeId;
+        update childCon;
+    }
+    
+    public testmethod static void icdUpdates()
+    {
+        Constant_AC  constant = new Constant_AC();
+        Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+        Contact childCon = OrientationandTrainingUtil.CreateWishChildCon();
+        ICD_Codes__c newICD = new ICD_Codes__c(Name = 'C00');
+        insert newICD;
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(childCon.Id);
+        childCon.ICD_10_Code__c = newICD.Id;
+        childCon.SD1_ICD_Code__c = newICD.Id;
+        childCon.SD2_ICD_Code__c = newICD.Id;
+        childCon.SD3_ICD_Code__c = newICD.Id;
+        childCon.SD4_ICD_Code__c = newICD.Id;
+        childCon.RecordTypeId = wichChildRecordTypeId;
+        update childCon;
+    }
 }

@@ -29,11 +29,12 @@
         <name>Actual_Total__c</name>
     </fields>
     <fields>
+        <help><!-- Date for an additional interview if necessary --></help>
         <label><!-- Additional Interview Date1 --></label>
         <name>Additional_Interview_Date1__c</name>
     </fields>
     <fields>
-        <help><!-- Date the wish child is interviewed an additional time, if needed --></help>
+        <help><!-- Date for an additional interview if necessary --></help>
         <label><!-- Additional Interview Date2 --></label>
         <name>Additional_Interview_date2__c</name>
     </fields>
@@ -111,7 +112,7 @@
         <name>AnticipatedStart_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Approximate date when the wish might occur  (flexible) --></help>
+        <help><!-- Tentative date that the wish/trip might happen --></help>
         <label><!-- Anticipated Start Date --></label>
         <name>Anticipated_Start_Date__c</name>
     </fields>
@@ -135,7 +136,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Appropriate_Comments__c</name>
     </fields>
     <fields>
-        <help><!-- Date that the volunteers were assigned to the wish child&apos;s file --></help>
+        <help><!-- Date when 2 volunteers have been assigned &amp; approved --></help>
         <label><!-- Assigned Date --></label>
         <name>Assigned_Date__c</name>
     </fields>
@@ -189,7 +190,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Date the submitted budget is approved --></help>
+        <help><!-- Date when the budget has been approved --></help>
         <label><!-- Budget Approved Date --></label>
         <name>Budget_Approved_Date__c</name>
     </fields>
@@ -226,7 +227,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Date the staff submits the budget for approval --></help>
+        <help><!-- Date when the budget is submitted for approval --></help>
         <label><!-- Budget Submitted Date --></label>
         <name>Budget_Submitted_Date__c</name>
     </fields>
@@ -245,6 +246,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Hidden Case ThreadId --></label>
         <name>Case_ThreadId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Case email signature --></label>
+        <name>Case_email_signature__c</name>
     </fields>
     <fields>
         <label><!-- Chapter Name --></label>
@@ -276,17 +281,17 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Child_s_Medical_Summary_Form__c</name>
     </fields>
     <fields>
-        <help><!-- Date the staff receives the Child&apos;s Medical Summary from the medical professional --></help>
+        <help><!-- Date when the CMS is received from the Medical Professional --></help>
         <label><!-- Child&apos;s Medical Summary Received Date --></label>
         <name>Child_s_Medical_Summary_received_date__c</name>
     </fields>
     <fields>
-        <help><!-- Date the staff submits the Child&apos;s Medical Summary to the medical professional --></help>
+        <help><!-- Date when the CMS is sent to Medical Professional --></help>
         <label><!-- Child&apos;s Medical Summary Sent --></label>
         <name>Child_s_Medical_Summary_sent__c</name>
     </fields>
     <fields>
-        <help><!-- Date the wish is financially closed out --></help>
+        <help><!-- Date when the uncompleted wish is closed  (refused, moved, etc.) --></help>
         <label><!-- Closed Date --></label>
         <name>Closed_Date__c</name>
     </fields>
@@ -312,12 +317,12 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Communication_Profile__c</name>
     </fields>
     <fields>
-        <help><!-- Date the wish is considered granted --></help>
+        <help><!-- Date when the wish is financially closed out --></help>
         <label><!-- Completed Date --></label>
         <name>Completed_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Date the chapter reviews and approves the wish concept --></help>
+        <help><!-- Date when the chapter staff approve the wish concept --></help>
         <label><!-- Concept Approval Date --></label>
         <name>Concept_Approval_Date__c</name>
     </fields>
@@ -590,12 +595,12 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Dev_Staff_Email__c</name>
     </fields>
     <fields>
-        <help><!-- Date the Diagosis Verification is received from the child&apos;s medical professional --></help>
+        <help><!-- Date when DV is received from Medical Professional --></help>
         <label><!-- Diagnosis Verification Received Date --></label>
         <name>Diagnosis_Verification_Receive_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Date the Diagosis Verification is sent to child&apos;s medical professional --></help>
+        <help><!-- Date when DV is sent to Medical Professional --></help>
         <label><!-- Diagnosis Verification Sent Date --></label>
         <name>Diagnosis_Verification_Sent_Date__c</name>
     </fields>
@@ -636,11 +641,15 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Driver_Names__c</name>
     </fields>
     <fields>
+        <label><!-- Emergency Contact Name --></label>
+        <name>EmergencyContactName__c</name>
+    </fields>
+    <fields>
         <label><!-- Emergency Number --></label>
         <name>Emergency_Number__c</name>
     </fields>
     <fields>
-        <help><!-- Confirmed date when the wish is completed (arrive home) or revealed --></help>
+        <help><!-- Confirmed date the wish/trip is completed --></help>
         <label><!-- End Date --></label>
         <name>End_Date__c</name>
     </fields>
@@ -653,12 +662,12 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Envelop_Id__c</name>
     </fields>
     <fields>
-        <help><!-- Date the family returns home (on their own) after the completion of the wish --></help>
+        <help><!-- Date when the family is returning after the scheduled wish end date --></help>
         <label><!-- Extended End Date --></label>
         <name>Extended_End_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Date the family leaves early prior to the beginning of the wish --></help>
+        <help><!-- Date when the family is leaving prior to scheduled start date --></help>
         <label><!-- Extended Start Date --></label>
         <name>Extended_Start_Date__c</name>
     </fields>
@@ -680,7 +689,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Fund_Id__c</name>
     </fields>
     <fields>
-        <help><!-- Date that GKTW confirms the reservation dates (on confirmation form) --></help>
+        <help><!-- Date when GKTW confirmed the reservation --></help>
         <label><!-- GKTW Confirmation Date --></label>
         <name>GKTW_Confirmation_Date__c</name>
     </fields>
@@ -842,6 +851,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Hidden_Wish_Child_Country_Code__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Wish Child FirstName --></label>
+        <name>Hidden_Wish_Child_FirstName__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Wish Child Full Name --></label>
         <name>Hidden_Wish_Child_Full_Name__c</name>
     </fields>
@@ -870,7 +883,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Hidden_Wish_Presentation_Not_Set__c</name>
     </fields>
     <fields>
-        <help><!-- Date the wish is put on hold for medical or elective reasons --></help>
+        <help><!-- Date when the wish is put on Hold Status --></help>
         <label><!-- Hold Date --></label>
         <name>Hold_Date__c</name>
     </fields>
@@ -883,12 +896,12 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>InActiveWishGranter__c</name>
     </fields>
     <fields>
-        <help><!-- Date the wish is determined inactive and closing procedures begin --></help>
+        <help><!-- Date when the wish is put on Inactive Status --></help>
         <label><!-- Inactive Date --></label>
         <name>Inactive_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Date the Initial lead from a non-authorized referral source is received --></help>
+        <help><!-- Date when Lead is received from non-authorized referral source. --></help>
         <label><!-- Inquiry Date --></label>
         <name>Inquiry_Date__c</name>
     </fields>
@@ -909,7 +922,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Interview_Date_Not_Set__c</name>
     </fields>
     <fields>
-        <help><!-- Date the volunteers met with the wish child and family --></help>
+        <help><!-- Date when the interview has been scheduled/occurs with the family --></help>
         <label><!-- Interview Date --></label>
         <name>Interview_date__c</name>
     </fields>
@@ -1274,7 +1287,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Date the Diagnosis Verification is reviewed and child&apos;s eligibility is confirmed --></help>
+        <help><!-- Date when qualifying diagnosis verification is received and confirmed --></help>
         <label><!-- Qualified Date --></label>
         <name>Qualified_Date__c</name>
     </fields>
@@ -1375,12 +1388,12 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>RE_Wish_Type__c</name>
     </fields>
     <fields>
-        <help><!-- Date the welcome call/packet task is completed and the family is ready to be met by volunteers --></help>
+        <help><!-- Date when the file is ready for volunteers to be assigned --></help>
         <label><!-- Ready to Assign Date --></label>
         <name>Ready_to_Assign_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Date the Initial lead from an authorized referral source is received --></help>
+        <help><!-- Date when Lead is received from authorized referral source or Inquiry is updated. --></help>
         <label><!-- Referral Date --></label>
         <name>Referral_Date__c</name>
     </fields>
@@ -1457,7 +1470,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Confirmed date that the wish will begin (departure) --></help>
+        <help><!-- Confirmed date that the wish/trip begins --></help>
         <label><!-- Start Date --></label>
         <name>Start_Date__c</name>
     </fields>
@@ -1691,12 +1704,12 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Wish_Child_Form__c</name>
     </fields>
     <fields>
-        <help><!-- Date the staff receives the Wish Clearance Form from the medical professional --></help>
+        <help><!-- Date when the Wish Clearance is received from the Medical Professional --></help>
         <label><!-- Wish Clearance Received Date --></label>
         <name>Wish_Clearance_Received_Date__c</name>
     </fields>
     <fields>
-        <help><!-- Date the staff submits the Wish Clearance Form to the medical professional --></help>
+        <help><!-- Date when the Wish Clearance is sent to Medical Professional --></help>
         <label><!-- Wish Clearance Sent Date --></label>
         <name>Wish_Clearance_Sent_Date__c</name>
     </fields>
@@ -1755,7 +1768,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         </picklistValues>
     </fields>
     <fields>
-        <help><!-- Date the wish child identifies his wish --></help>
+        <help><!-- Date when wish child identifies a clear wish --></help>
         <label><!-- Wish Determined Date --></label>
         <name>Wish_Determined_Date__c</name>
     </fields>
@@ -2046,10 +2059,45 @@ arrangements/unique circumstances for any requested wish participant not residin
         </sections>
     </layouts>
     <layouts>
+        <layout>Qualification Case - Volunteer</layout>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Emergency Contact --></label>
+            <section>Emergency Contact</section>
+        </sections>
+        <sections>
+            <label><!-- Important Date Section --></label>
+            <section>Important Date Section</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Information --></label>
+            <section>Wish Information</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Participants --></label>
+            <section>Wish Participants</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Related Forms --></label>
+            <section>Wish Related Forms</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Status Bar --></label>
+            <section>Wish Status Bar</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Volunteer Parent Wishes</layout>
         <sections>
             <label><!-- Attachments --></label>
             <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Emergency Contact --></label>
+            <section>Emergency Contact</section>
         </sections>
         <sections>
             <label><!-- Important Date Section --></label>
@@ -2082,8 +2130,8 @@ arrangements/unique circumstances for any requested wish participant not residin
     <layouts>
         <layout>Wish Determination</layout>
         <sections>
-            <label><!-- Driver --></label>
-            <section>Driver</section>
+            <label><!-- Driver Section --></label>
+            <section>Driver Section</section>
         </sections>
         <sections>
             <label><!-- Emergency Contact --></label>
@@ -2106,27 +2154,16 @@ arrangements/unique circumstances for any requested wish participant not residin
             <section>Travel Information</section>
         </sections>
         <sections>
+            <label><!-- Wish Forms Details --></label>
+            <section>Wish Forms Details</section>
+        </sections>
+        <sections>
             <label><!-- Wish Information Form Medical Information --></label>
             <section>Wish Information Form Medical Information</section>
         </sections>
         <sections>
-            <label><!-- Wish Paperwork Packet Field Details --></label>
-            <section>Wish Paperwork Packet Field Details</section>
-        </sections>
-        <sections>
             <label><!-- Wish Status Bar --></label>
             <section>Wish Status Bar</section>
-        </sections>
-    </layouts>
-    <layouts>
-        <layout>Wish Effect</layout>
-        <sections>
-            <label><!-- Progress Bar --></label>
-            <section>Progress Bar</section>
-        </sections>
-        <sections>
-            <label><!-- Wish Summary --></label>
-            <section>Wish Summary</section>
         </sections>
     </layouts>
     <layouts>
@@ -2171,10 +2208,25 @@ arrangements/unique circumstances for any requested wish participant not residin
         </sections>
     </layouts>
     <layouts>
+        <layout>Wish Planning - Volunteer</layout>
+        <sections>
+            <label><!-- Required Forms --></label>
+            <section>Required Forms</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Status Bar --></label>
+            <section>Wish Status Bar</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Wishes</layout>
         <sections>
             <label><!-- Attachments --></label>
             <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Emergency Contact --></label>
+            <section>Emergency Contact</section>
         </sections>
         <sections>
             <label><!-- Finance --></label>
@@ -2256,6 +2308,14 @@ arrangements/unique circumstances for any requested wish participant not residin
     <validationRules>
         <errorMessage><!-- You cannot change the owner of the subcase --></errorMessage>
         <name>Case_ChildCaseOwnerChangeValidation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You do not have permission to edit this record. Please contact your program supervisor to edit the date --></errorMessage>
+        <name>Case_Closed_Date_Change_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Before the case is closed, a closed date value must be entered. --></errorMessage>
+        <name>Case_Closed_Date_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Only Program Supervisor permission set can change from Closed to the previous status. --></errorMessage>

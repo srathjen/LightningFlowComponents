@@ -2,7 +2,6 @@
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>Send_Diagnosis_Verification</customButtons>
     <excludeButtons>Convert</excludeButtons>
-    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>FindDup</excludeButtons>
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
@@ -260,6 +259,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>PD_ICD_Code__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Approximate_Diagnosis_Date__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

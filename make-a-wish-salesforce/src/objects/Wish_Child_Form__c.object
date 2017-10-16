@@ -73,12 +73,17 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>ParentsParticipantsName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>IsWishFamily__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Primary_Address__c</field>
+            <field>Hidden_Same_as_Family__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -94,6 +99,11 @@
         </displayedFields>
         <displayedFields>
             <field>Driver_Details__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Residing_With_Wish_Child__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -398,12 +408,12 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Does_each_requested_participant_Details__c</field>
+            <field>ParentsParticipantsName__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
-            <field>Primary_Address__c</field>
+            <field>Does_each_requested_participant_Details__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -428,12 +438,22 @@
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
+            <field>Hidden_Same_as_Family__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
             <field>Hidden_Wish_Fmaily_Contact_Name__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
         <displayedFields>
             <field>Has_your_family_flown__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Residing_With_Wish_Child__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -2012,7 +2032,7 @@
     </fields>
     <fields>
         <fullName>Hidden_Same_as_Family__c</fullName>
-        <defaultValue>false</defaultValue>
+        <defaultValue>true</defaultValue>
         <externalId>false</externalId>
         <label>Hidden Same as Family</label>
         <trackHistory>false</trackHistory>
@@ -2375,6 +2395,24 @@ and the date it was or will be granted.</inlineHelpText>
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Parent_Gurdian_above_18_Email__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent Gurdian above 18 Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Parent_Gurdian_above_18__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent Gurdian above 18</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
         <fullName>Parent_Legal_Guardian_Signature__c</fullName>
         <description>It will capture the Parent/Legal Guardian Signature</description>
         <externalId>false</externalId>
@@ -2385,6 +2423,16 @@ and the date it was or will be granted.</inlineHelpText>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ParentsParticipantsName__c</fullName>
+        <description>This field is used to hold a list of names of the parent/legal guardian and participants</description>
+        <externalId>false</externalId>
+        <label>Parents &amp; Participants Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
     </fields>
     <fields>
         <fullName>Pariticipant_name_havingWheelchair_Power__c</fullName>
@@ -2896,6 +2944,29 @@ and the date it was or will be granted.</inlineHelpText>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Residing_With_Wish_Child__c</fullName>
+        <externalId>false</externalId>
+        <label>Residing With Wish Child</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>true</default>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Restaurant__c</fullName>
@@ -3421,14 +3492,14 @@ provide contact information for each site on which you are active.</inlineHelpTe
         <trackTrending>false</trackTrending>
         <type>TextArea</type>
     </fields>
-    <label>Wish Paperwork Packet</label>
+    <label>Wish Form</label>
     <nameField>
         <displayFormat>WC-{00}</displayFormat>
         <label>Wish Child Form Name</label>
         <trackHistory>false</trackHistory>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Wish Paperwork Packets</pluralLabel>
+    <pluralLabel>Wish Forms</pluralLabel>
     <searchLayouts/>
     <sharingModel>ReadWrite</sharingModel>
 </CustomObject>

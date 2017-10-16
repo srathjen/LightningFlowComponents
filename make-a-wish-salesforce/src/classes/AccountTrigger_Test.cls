@@ -37,6 +37,18 @@ public class AccountTrigger_Test {
         
     }
     
+    static testmethod void inKindDonorUpdateNullChapterName() {
+        User sysAdmin = [SELECT Id,userName,Email FROM User WHERE Email =: 'testmawa@gmail.com' limit 1];
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountWithWishCoordinatior(sysAdmin.Id);
+        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
+        User volunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunteerContact.Id);
+        Account inkindAccount = OrientationandTrainingUtil.inKindAccountWithSChpater(chapterAccount.id);
+        inkindAccount.Chapter_Name__c = null;
+        inkindAccount.In_Kind_Approval_Status__c = 'Approved';
+        update inkindAccount;
+        
+    }
+    
     //Account with wishCoordinator Not Null
     static testmethod void wishCoordinatorNotNull() {
         User sysAdmin = [SELECT Id,userName,Email FROM User WHERE Email =: 'testmawa@gmail.com' limit 1];
@@ -61,6 +73,10 @@ public class AccountTrigger_Test {
         User sysAdmin = [SELECT Id,userName,Email FROM User WHERE Email =: 'testmawa@gmail.com' limit 1];
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountWithWishCoordinatior(sysAdmin.Id);
         chapterAccount.Wish_Co_ordinator__c = null;
+        update chapterAccount;
+        chapterAccount.Wish_Co_ordinator__c = userinfo.getUserId();
+        update chapterAccount;
+        chapterAccount.Wish_Co_ordinator__c = sysAdmin.id;
         update chapterAccount;
         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
         
@@ -98,6 +114,7 @@ public class AccountTrigger_Test {
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountWithWishCoordinatior(sysAdmin.Id);
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
         parentCase.ChapterName__c = chapterAccount.id;
+        parentCase.Closed_Date__c = system.today();
         insert parentCase;
         Contact wishChildCon = OrientationandTrainingUtil.CreateWishChildCon();
         Case wishGranting = OrientationandTrainingUtil.createWishGrantCase(wishChildCon.id,parentCase.id);

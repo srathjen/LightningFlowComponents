@@ -148,12 +148,28 @@
             <translation><!-- Father --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Foster Brother</masterLabel>
+            <translation><!-- Foster Brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Father</masterLabel>
+            <translation><!-- Foster Father --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Mother</masterLabel>
+            <translation><!-- Foster Mother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Sister</masterLabel>
+            <translation><!-- Foster Sister --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Friend</masterLabel>
             <translation><!-- Friend --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Grandaughter</masterLabel>
-            <translation><!-- Grandaughter --></translation>
+            <masterLabel>Granddaughter</masterLabel>
+            <translation><!-- Granddaughter --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Grandfather</masterLabel>
@@ -188,8 +204,8 @@
             <translation><!-- Mother --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Neighbour</masterLabel>
-            <translation><!-- Neighbour --></translation>
+            <masterLabel>Neighbor</masterLabel>
+            <translation><!-- Neighbor --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Other</masterLabel>
@@ -510,6 +526,10 @@
         <help><!-- Is there a medical reason why we need to move quickly? --></help>
         <label><!-- Any Medical Reason For Moving Quickly? --></label>
         <name>Any_medical_reason_for_moving_quickly__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approximate Diagnosis Date --></label>
+        <name>Approximate_Diagnosis_Date__c</name>
     </fields>
     <fields>
         <label><!-- Are Other Diagnosis Eligible For Wish? --></label>
@@ -955,7 +975,7 @@
         <name>Increased_probability_of_premature_death__c</name>
     </fields>
     <fields>
-        <help><!-- Date the Initial lead from a non-authorized referral source is received. --></help>
+        <help><!-- Date when Lead is received from non-authorized referral source --></help>
         <label><!-- Inquiry Date --></label>
         <name>Inquiry_Date__c</name>
     </fields>
@@ -1189,12 +1209,28 @@
             <translation><!-- Father --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Foster Brother</masterLabel>
+            <translation><!-- Foster Brother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Father</masterLabel>
+            <translation><!-- Foster Father --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Mother</masterLabel>
+            <translation><!-- Foster Mother --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Sister</masterLabel>
+            <translation><!-- Foster Sister --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Friend</masterLabel>
             <translation><!-- Friend --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Grandaughter</masterLabel>
-            <translation><!-- Grandaughter --></translation>
+            <masterLabel>Granddaughter</masterLabel>
+            <translation><!-- Granddaughter --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Grandfather</masterLabel>
@@ -1278,12 +1314,12 @@
         <name>Part_A_Form_Password__c</name>
     </fields>
     <fields>
-        <help><!-- Date the Diagnosis Verification is received from the child&apos;s medical professional. --></help>
+        <help><!-- Date when DV is received from Medical Professional --></help>
         <label><!-- Diagnosis Verification Received --></label>
         <name>Part_A_Received__c</name>
     </fields>
     <fields>
-        <help><!-- Date the Diagnosis Verification is sent to the child&apos;s medical professional --></help>
+        <help><!-- Date when DV is sent to Medical Professional --></help>
         <label><!-- Diagnosis Verification Sent --></label>
         <name>Part_A_Sent__c</name>
     </fields>

@@ -39,7 +39,7 @@
     <apex:pageBlockSection title="Wish Child Medical Summary Form Details" columns="3">
      <apex:outputPanel >
       <apex:outputLabel style="padding: 2% 1%;color: #4a4a56;font-weight: bold;" value="Name:"/>
-        <apex:selectList value="{!medicalProfContactName}" multiselect="false" size="1" styleClass="form-control multi sign" html-placeholder="Please Select All That Apply">
+        <apex:selectList value="{!medicalProfContactName}" multiselect="false" size="1" id="medicalProfContact" styleClass="form-control multi sign" html-placeholder="Please Select All That Apply">
                                 <apex:selectOption itemlabel="Please select an individual" itemValue="" />
                                 <apex:selectOptions value="{!MedicalProContact}" />
                                  <apex:actionSupport event="onchange" action="{!displayEmail}" reRender="dd"/>
@@ -48,13 +48,13 @@
       <apex:outputPanel rendered="{!dis}" id="dd">
       
      <apex:outputLabel style="padding: 2% 1%;color: #4a4a56;font-weight: bold;" value="Email:"/>
-     <apex:outputText value="{!email }" />
+     <apex:outputText value="{!email }" id="email"/>
      
      </apex:outputPanel>
      
      
-     <apex:InputField label="Wish Involves Air Travel:" value="{!currentParentCase.wish_involves_air_travel__c}" rendered="{!currentParentCase.wish_involves_air_travel__c == Null}" />
-     <apex:OutputField label="Wish Involves Air Travel:" value="{!currentParentCase.wish_involves_air_travel__c}" rendered="{!currentParentCase.wish_involves_air_travel__c != Null}" />
+     <apex:InputField label="Wish Involves Air Travel:" value="{!currentParentCase.wish_involves_air_travel__c}" id="wishInvolvesAirTravel"  rendered="{!currentParentCase.wish_involves_air_travel__c == Null}" />
+     <apex:OutputField label="Wish Involves Air Travel:" value="{!currentParentCase.wish_involves_air_travel__c}" id="wishInvolvesAirTravel1" rendered="{!currentParentCase.wish_involves_air_travel__c != Null}" />
      
     </apex:pageBlockSection>
   

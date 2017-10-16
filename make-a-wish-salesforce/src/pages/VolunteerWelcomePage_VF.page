@@ -13,9 +13,9 @@
     </head>
     <body class="vcp vcpactivelogin full">
         <apex:include pageName="prospective_header" id="pheader" />
-        
+
         <main role="main" class="container">
-            <div class="row">                
+            <div class="row">
                 <!--<div class="checkout-wrap" style="margin-bottom:180px">
                 <ul class="checkout-bar">
                 <li class="{!orientationClass}"><a href="#">ORIENTATION</a></li>
@@ -24,16 +24,16 @@
                 <li class="{!backgroundCheckClass}"><a href="#">BACKGROUND CHECK</a></li>
                 <li class="{!trainingClass}"><a href="#">TRAINING</a></li>
                 </ul>
-                </div>-->   
+                </div>-->
 
                 <apex:form >
                     <fieldset>
                         <h1>Welcome {!$User.FirstName},</h1><!-- {!$User.LastName} -->
-                        <p><apex:outputText value="{!welcomText}" escape="false" /></p>
-                        
+                        <p><apex:outputText value="{!welcomText}" escape="false" id="welText"/></p>
+
                         <h2>How do I become a Volunteer?</h2>
-                        <p><apex:outputText value="{!becomeAVolunteer}" escape="false" /></p>
-                        
+                        <p><apex:outputText value="{!becomeAVolunteer}" escape="false" id="becomeAVol"/></p>
+
                         <!--<div class="form-group row">
                             <div class="col-xs-12 col-sm-4 col-md-12">
                             <apex:commandbutton styleClass="col-xs-12 col-sm-12 col-md-3 btn-md" value="Become a Volunteer"  rendered="{!isBecomVolunteer}" action="{!becomeAVolunteer}"/>
@@ -50,35 +50,35 @@
                             </ul>
                         </nav>
                         <div class="form-group row">
-                            <div class="col-xs-12 col-sm-4 col-md-12">
-                                <apex:commandbutton value="BECOME A VOLUNTEER" styleClass="col-xs-12 col-sm-12 col-md-3 btn-md" rendered="{!isBecomVolunteer}" action="{!becomeAVolunteer}"/>
-                                <apex:commandbutton value="Continue Process" styleClass="col-xs-12 col-sm-12 col-md-3 btn-md" rendered="{!continueProcess}" action="{!becomeAVolunteer}"/>
+                            <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
+                                <apex:commandbutton value="Become a Volunteer" styleClass="col-xs-12 btn-md" rendered="{!isBecomVolunteer}" action="{!becomeAVolunteer}"/>
+                                <apex:commandbutton value="Continue Process" styleClass="col-xs-12 btn-md" rendered="{!continueProcess}" action="{!becomeAVolunteer}"/>
                             </div>
                         </div>
 
-                    </fieldset>                  
+                    </fieldset>
                 </apex:form>
-                
+
             </div>
         </main>
-        
+
         <div class="container-fluid calendar">
             <apex:form styleClass="container">
                 <div class="row">
                     <h4>Calendar of Events</h4>
                     <ul class="col-xs-12 col-sm-12 col-md-12">
-                        
+
                        <apex:repeat value="{!events}" var="ev">
                             <li class="col-xs-12 col-sm-6 col-md-3">
                                 <figure class="col-xs-12 col-sm-12 col-md-12">
                                     <!-- <img class="col-xs-4 col-sm-4 col-md-4" src="https://wish.org/~/media/022-000/News%20and%20Events/Signature%20Events/WAM_Thumbnail.ashx" /> -->
-                                    <apex:outputText value="{!ev.Event_Image__c}" escape="false"/>
+                                    <apex:outputText value="{!ev.Event_Image__c}" escape="false" id="eventImg"/>
                                     <figcaption class="col-sm-8">
-                                        <h5><apex:outputText value="{!ev.Event_Name__c}" escape="false"/></h5>
-                                        <span class="date"><apex:outputText value="{0,date,MM/dd/yy}">
+                                        <h5><apex:outputText value="{!ev.Event_Name__c}" escape="false" id="eventName"/></h5>
+                                        <span class="date"><apex:outputText value="{0,date,MM/dd/yy}" id="date">
                                             <apex:param value="{!ev.Event_Date__c}" />
                                             </apex:outputText></span>
-                                        <p><apex:outputText value="{!ev.Event_Text__c}" escape="false"/></p>
+                                        <p><apex:outputText value="{!ev.Event_Text__c}" escape="false" id="eventText"/></p>
                                     </figcaption>
                                 </figure>
                             </li>
@@ -88,7 +88,7 @@
                 </div>
             </apex:form>
         </div>
-        
+
         <apex:include pageName="prospective_footer" id="pfooter" />
     </body>
 </apex:page>

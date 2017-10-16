@@ -22,7 +22,7 @@ Description : This vf page used to download and send for signature of the wish r
         <table style="width:70%; font-size:12px" cellpadding="10" class="tbl">
             <apex:messages styleClass="error-msg"/>
             <tr style="width:100%">
-                <th align="center" colspan="3" style="padding:10px"><div style="font-size: 16px; color: #333;font-family: 'Times New Roman', Times, serif;">Please select Recipient</div></th>
+                <th align="center" colspan="3" style="padding:10px"><div style="font-size: 16px; color: #333;font-family: 'Times New Roman', Times, serif;">Please Select Recipient</div></th>
             </tr>
             <tr>
                 <td style="width:28px">Action</td>

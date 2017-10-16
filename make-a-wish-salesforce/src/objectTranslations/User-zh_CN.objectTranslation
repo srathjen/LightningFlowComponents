@@ -45,8 +45,16 @@
         <name>From_Mulesoft__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Email --></label>
+        <name>Hidden_Email__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Role Name Id --></label>
         <name>Hidden_Role_Name_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Volunteer Cancelled --></label>
+        <name>Hidden_Volunteer_Cancelled__c</name>
     </fields>
     <fields>
         <label><!-- I am over 18 years old --></label>
@@ -104,6 +112,22 @@
     <fields>
         <label><!-- Volunteer Active --></label>
         <name>Volunteer_Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Orientation Status --></label>
+        <name>Volunteer_Orientation_Status__c</name>
+        <picklistValues>
+            <masterLabel>Cancelled</masterLabel>
+            <translation><!-- Cancelled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>First Registeration</masterLabel>
+            <translation><!-- First Registeration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Registered</masterLabel>
+            <translation><!-- Registered --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Year of Inactive --></label>

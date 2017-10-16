@@ -8,6 +8,19 @@ public class DelegatedApproverController_Test{
         Contact volunteerCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
         Contact volunteerConOne = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
+        req.setComments('Approve.');
+        req.setNextApproverIds(new Id[] {UserInfo.getUserId()});
+        req.setObjectId(parentCase.Id);
+        //Submit the approval request
+        Approval.ProcessResult result = Approval.process(req);
+        
+        Approval.ProcessSubmitRequest req1 = new Approval.ProcessSubmitRequest();
+        req1.setComments('Approve.');
+        req1.setNextApproverIds(new Id[] {UserInfo.getUserId()});
+        req1.setObjectId(volunteerCon.Id);
+        //Submit the approval request
+        Approval.ProcessResult result1 = Approval.process(req1);
         
         Role__c  roleName = OrientationandTrainingUtil.createRole();
         Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
@@ -21,6 +34,8 @@ public class DelegatedApproverController_Test{
         america.name = 'Make-A-Wish America';
         america.Chapter_Name__c='Make-A-Wish America';
         Insert america;
+        
+        
         
         Chapter_Vs_Role__c arizona = OrientationandTrainingUtil.createArizonaChapter();
         DelegatedApproverController_AC newdelegatedApprovalReq = new DelegatedApproverController_AC();

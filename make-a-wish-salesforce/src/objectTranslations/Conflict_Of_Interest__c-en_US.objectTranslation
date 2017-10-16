@@ -37,6 +37,10 @@
         <name>HiddenConflictExpire__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden COI Volunteer FirstName --></label>
+        <name>Hidden_COI_Volunteer_FirstName__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Volunteer Contact Email --></label>
         <name>Hidden_Volunteer_Contact_Email__c</name>
     </fields>
@@ -59,6 +63,14 @@
     <fields>
         <label><!-- Signed Date --></label>
         <name>Signed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Role(Out of Compliance) --></label>
+        <name>VolunteerRoleOutofCompliance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Role(Trained,Tpend,ChapReview) --></label>
+        <name>VolunteerRoleTrainedTpendChapReview__c</name>
     </fields>
     <fields>
         <label><!-- Volunteer Contact --></label>

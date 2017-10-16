@@ -74,7 +74,14 @@ Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildCont
         
         Wish_Child_Form__c childForm  = OrientationandTrainingUtil.createWishChildForm(wish.Id);
         childForm.Hidden_Email_List__c = 'MAWAFirstName MAWALastName1,MAWAFirstName MAWALastName2';
-        childForm.Hidden_Name_List__c = '';
+        childForm.Hidden_Name_List__c = 'chandru, Kanagarj';
+        childForm.Parent_Gurdian_above_18_Email__c = 'Test Child Parent 1-test@mail.com#Test Chandrasekar-kanagaraj@mstsolutions.com';
+        childForm.ParentsParticipantsName__c = 'test, kanagarj, chandru';
+        childForm.Parent_Gurdian_above_18__c = 'Test Child Parent 1#Test Chandrasekar';
+        childForm.LiabilitySignerMapKeyPair__c = 'fffff rrrrr - 1#eee tttt - 2#grandmother participany1 - 3#Grandfather participant - 4';
+        childForm.Wish_Liability_Envolep__c = 'a6487c88-7414-485a-9477-d83e686db72b';
+        childForm.Hidden_Liability_SignerMap_Key_1__c = 'fffff rrrrr - 1#eee tttt - 2#grandmother participany1 - 3#Grandfather participant - 4';
+        childForm.Hidden_Liability_Envelop_Id_1__c = 'a6487c88-7414-485a-9477-d83e686db72b';
         insert childForm; 
         
         OrientationandTrainingUtil.insertDocusignSetting();
@@ -124,7 +131,16 @@ Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildCont
         Wish_Child_Form__c childForm  = OrientationandTrainingUtil.createWishChildForm(wish.Id);
         childForm.Hidden_Email_List__c = 'MAWAFirstName MAWALastName1,MAWAFirstName MAWALastName2'+','+childForm.Hidden_Email_List__c;
         childForm.Hidden_Name_List__c = 'kesavkumar@mstsolutions.com,kanagaraj@mstsolutions.com'+','+childForm.Hidden_Name_List__c;
+        childForm.Parent_Gurdian_above_18_Email__c = 'Test Child Parent 1-test@mail.com#Test Chandrasekar-kanagaraj@mstsolutions.com';
+    childForm.Case__c = wish.id;
+        childForm.ParentsParticipantsName__c = 'test, kanagarj, chandru';
+        childForm.Parent_Gurdian_above_18__c = 'Test Child Parent 1#Test Chandrasekar';
+        childForm.LiabilitySignerMapKeyPair__c = 'fffff rrrrr - 1#eee tttt - 2#grandmother participany1 - 3#Grandfather participant - 4';
+        childForm.Wish_Liability_Envolep__c = 'a6487c88-7414-485a-9477-d83e686db72b';
+        childForm.Hidden_Liability_SignerMap_Key_1__c = 'fffff rrrrr - 1#eee tttt - 2#grandmother participany1 - 3#Grandfather participant - 4';
+        childForm.Hidden_Liability_Envelop_Id_1__c = 'a6487c88-7414-485a-9477-d83e686db72b';
         insert childForm; 
+        
         OrientationandTrainingUtil.insertDocusignSetting();
         ApexPages.StandardController sc = new ApexPages.StandardController(wish);
         PageReference pageRef = Page.WishLiabilityForm_VF;

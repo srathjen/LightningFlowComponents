@@ -117,8 +117,9 @@ public class WishJourneyController_Test {
         currLead.unique_wish_identifier__c = '123456';
         insert currLead;
         Case currentCase = OrientationandTrainingUtil.createParentCase();
-        currentCase.Status = 'Completed';
+        currentCase.Status = 'Qualified';
         currentCase.Origin = 'Email';
+        currentCase.Closed_Date__c = system.today();
         currentCase.Diagnosis_Verification_Receive_Date__c = Date.today();
         currentCase.Lead__c = currLead.Id;
         currentCase.End_Date__c = Date.today().addDays(6);
@@ -130,8 +131,9 @@ public class WishJourneyController_Test {
     
     public static testMethod void caseWitWishClosed() {
         Case currentCase = OrientationandTrainingUtil.createParentCase();
-        currentCase.Status = 'Closed';
+        currentCase.Status = 'Qualified';
         currentCase.Origin = 'Email';
+        currentCase.Closed_Date__c = system.today();
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
     }
@@ -140,6 +142,7 @@ public class WishJourneyController_Test {
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Closed';
         currentCase.Origin = 'Email';
+        currentCase.Closed_Date__c = system.today();
         currentCase.Wish_Determined_Date__c = system.today();
         currentCase.Anticipated_Start_Date__c = system.today();
         insert currentCase;
@@ -150,6 +153,7 @@ public class WishJourneyController_Test {
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Closed';
         currentCase.Origin = 'Email';
+         currentCase.Closed_Date__c = system.today();
         currentCase.Anticipated_Start_Date__c = system.today();
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));

@@ -133,6 +133,45 @@
         </workflowTimeTriggers>
     </rules>
     <rules>
+        <fullName>COI%3AExpired 7 Days After  Workflow Rule</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.Current__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.Volunteer_is_Inactive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.VolunteerRoleOutofCompliance__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>This workflow rule will be fires to send an email 7 days after COI is expired.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>COI_Expiring_After_7_Days_Email_Alert</name>
+                <type>Alert</type>
+            </actions>
+            <actions>
+                <name>COI_ET_COI_Expired_7_Days</name>
+                <type>Task</type>
+            </actions>
+            <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
+            <timeLength>7</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
         <fullName>COI%3AExpiring 30 Days Workflow Rule</fullName>
         <active>true</active>
         <criteriaItems>
@@ -149,6 +188,11 @@
             <field>Conflict_Of_Interest__c.Volunteer_is_Inactive__c</field>
             <operation>equals</operation>
             <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.VolunteerRoleTrainedTpendChapReview__c</field>
+            <operation>equals</operation>
+            <value>True</value>
         </criteriaItems>
         <description>We are sending email notification for volunteer reminding  COI  Expiring.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -192,14 +236,6 @@
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
-            <actions>
-                <name>COI_Expiring_After_7_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>COI_ET_COI_Expired_7_Days</name>
-                <type>Task</type>
-            </actions>
             <offsetFromField>Conflict_Of_Interest__c.Expiration_Date__c</offsetFromField>
             <timeLength>7</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>

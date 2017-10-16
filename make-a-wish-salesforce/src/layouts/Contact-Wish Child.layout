@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>npe4__Relationships_Viewer</customButtons>
-    <excludeButtons>Clone</excludeButtons>
+    <excludeButtons>DataDotComClean</excludeButtons>
     <excludeButtons>DisableCustomerPortal</excludeButtons>
     <excludeButtons>DisablePartnerPortal</excludeButtons>
     <excludeButtons>DisablePrmSuperUser</excludeButtons>
@@ -9,41 +9,9 @@
     <excludeButtons>EnablePrmSuperUser</excludeButtons>
     <excludeButtons>EnableSelfService</excludeButtons>
     <excludeButtons>RequestUpdate</excludeButtons>
-    <excludeButtons>RequestUseSfdc</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
     <excludeButtons>ViewPartnerPortalUser</excludeButtons>
     <excludeButtons>ViewSelfService</excludeButtons>
-    <feedLayout>
-        <autocollapsePublisher>true</autocollapsePublisher>
-        <compactFeed>true</compactFeed>
-        <feedFilterPosition>CenterDropDown</feedFilterPosition>
-        <feedFilters>
-            <feedFilterType>AllUpdates</feedFilterType>
-        </feedFilters>
-        <feedFilters>
-            <feedFilterType>FeedItemType</feedFilterType>
-            <feedItemType>TextPost</feedItemType>
-        </feedFilters>
-        <fullWidthFeed>true</fullWidthFeed>
-        <hideSidebar>false</hideSidebar>
-        <highlightExternalFeedItems>true</highlightExternalFeedItems>
-        <rightComponents>
-            <componentType>Following</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>Followers</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>Topics</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>CustomLinks</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>CustomButtons</componentType>
-        </rightComponents>
-        <useInlineFiltersInConsole>true</useInlineFiltersInConsole>
-    </feedLayout>
     <layoutSections>
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
@@ -65,6 +33,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Middle_Name__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>First_Last_Initial__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -134,6 +106,14 @@
                 <behavior>Edit</behavior>
                 <field>Migrated_Record__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Hidden_Medical_Physician__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Hidden_Medical_Physician_Email__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
@@ -198,8 +178,8 @@
                 <field>npe01__Secondary_Address_Type__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>OtherAddress</field>
+                <behavior>Readonly</behavior>
+                <field>npe01__Other_Address__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -503,27 +483,11 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Diagnosis__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>ICD_10_Code__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>SD1_ICD_Code__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>SD2_ICD_Code__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>SD3_ICD_Code__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>SD4_ICD_Code__c</field>
+                <field>Diagnosis__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -537,7 +501,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>SD1_ICD_Code__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>SD1_Condition_Description__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>SD2_ICD_Code__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -545,7 +517,15 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>SD3_ICD_Code__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>SD3_Condition_Description__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>SD4_ICD_Code__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -671,23 +651,19 @@
         </relatedContentItems>
     </relatedContent>
     <relatedLists>
-        <fields>NAME</fields>
         <fields>npe4__RelatedContact__c</fields>
-        <fields>Qualifying_Medical_Professional__c</fields>
-        <fields>Referring_Medical_Professional__c</fields>
         <fields>npe4__Type__c</fields>
-        <fields>npe4__Status__c</fields>
         <fields>Wish_Participant__c</fields>
         <fields>Parent_Legal_Guardian__c</fields>
+        <fields>Under_18__c</fields>
+        <fields>Residing_with_Wish_child__c</fields>
         <relatedList>npe4__Relationship__c.npe4__Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>CASES.CASE_NUMBER</fields>
         <fields>CASES.SUBJECT</fields>
-        <fields>CASES.CREATED_DATE</fields>
         <fields>CASES.STATUS</fields>
         <fields>OWNER_NAME</fields>
-        <fields>CASES.RECORDTYPE</fields>
         <relatedList>RelatedCaseList</relatedList>
     </relatedLists>
     <relatedLists>
@@ -749,7 +725,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h36000003nmFU</masterLabel>
+        <masterLabel>00h36000004sxvT</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

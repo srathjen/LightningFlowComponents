@@ -35,7 +35,7 @@
             <column>npe4__Relationship__c$npe4__Type__c</column>
             <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
-            <value>Self,Medical Professional</value>
+            <value>Medical Professional</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>

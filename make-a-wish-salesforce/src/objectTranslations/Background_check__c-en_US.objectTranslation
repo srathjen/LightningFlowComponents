@@ -21,6 +21,10 @@
         <name>Account_Phone__c</name>
     </fields>
     <fields>
+        <label><!-- Background Check Email signature --></label>
+        <name>Background_Check_Email_signature__c</name>
+    </fields>
+    <fields>
         <label><!-- Current --></label>
         <name>Current__c</name>
     </fields>
@@ -108,6 +112,18 @@
             <masterLabel>Rejected</masterLabel>
             <translation><!-- Rejected --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Role(Out of Compliance) --></label>
+        <name>VolunteerRoleOutofCompliance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer Role(Trained,Tpend,ChapReview) --></label>
+        <name>VolunteerRoleTrainedTpendChapReview__c</name>
+    </fields>
+    <fields>
+        <label><!-- Volunteer FirstName --></label>
+        <name>Volunteer_FirstName__c</name>
     </fields>
     <fields>
         <label><!-- Volunteer --></label>

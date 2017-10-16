@@ -37,13 +37,15 @@ public class CaseTrigger_AT_Test {
         {
             Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
             /*Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-            Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
             Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
             Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
             Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
             createTask('Procure Icebreaker Gift',parentCase.id);
             parentCase.interview_Date__c = Date.Today().addDays(5);
+            Test.startTest();
             update parentCase;
+            Test.stopTest();
             
         }
     }
@@ -51,38 +53,44 @@ public class CaseTrigger_AT_Test {
     static testmethod void CreateInterviewDate()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         createTask('Complete/upload wish family packet',parentCase.id);
         parentCase.interview_Date__c = Date.Today().addDays(5);
+        Test.startTest();
         update parentCase;
+        Test.stopTest();
     }
     
     static testmethod void UpdateCaseTeamMember()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-      /*  Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /*  Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         parentCase.Case_Member_Count__c = 2;
+        Test.startTest();
         update parentCase;
+        Test.stopTest();
     }
     
     static testmethod void UpdateInterviewDate()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         /*Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         parentCase.interview_date__c = null;
+        Test.startTest();
         update parentCase;
+        Test.stopTest();
         Task newTask = new Task();
         newTask.Subject = 'Test';
         newTask.Status = 'Completed';
@@ -96,8 +104,8 @@ public class CaseTrigger_AT_Test {
     static testmethod void UpdateStatusGranted()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
@@ -116,14 +124,16 @@ public class CaseTrigger_AT_Test {
         insert newVolOpp;
         
         parentCase.Status = 'Granted';
+        Test.startTest();
         update parentCase;
+        Test.stopTest();
     }
     
     static testmethod void UpdatePresentationDate()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         WishGrantedSubCaseTaskList__c newRec = new WishGrantedSubCaseTaskList__c();
@@ -143,14 +153,16 @@ public class CaseTrigger_AT_Test {
         wishGrantedCase.Location_Address__c = 'Sample';
         wishGrantedCase.Name_of_Location__c = 'Sample';
         wishGrantedCase.Wish_Presentation_Set__c  = True;
+        Test.startTest();
         update wishGrantedCase;
+        Test.stopTest();
     }
     
     static testmethod void UpdatePresentationDate1()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         WishGrantedSubCaseTaskList__c newRec = new WishGrantedSubCaseTaskList__c();
@@ -181,8 +193,8 @@ public class CaseTrigger_AT_Test {
     static testmethod void UpdatePresentationDateNull()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         WishGrantedSubCaseTaskList__c newRec = new WishGrantedSubCaseTaskList__c();
@@ -238,8 +250,8 @@ public class CaseTrigger_AT_Test {
         Constant_AC constant = new Constant_AC();
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         update ChapterAccount;
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -265,8 +277,8 @@ public class CaseTrigger_AT_Test {
         Constant_AC constant = new Constant_AC();
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         update ChapterAccount;
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -295,8 +307,8 @@ public class CaseTrigger_AT_Test {
         newTask.Due_Date__c = 5;
         newTask.Task_Subject__c = 'Test';
         insert newTask;
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -314,7 +326,6 @@ public class CaseTrigger_AT_Test {
         insert anticipationCase;
         
         
-        
     }
     
     Static testmethod void UpdateWishType()
@@ -324,7 +335,7 @@ public class CaseTrigger_AT_Test {
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         update ChapterAccount;
         /*Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -344,19 +355,30 @@ public class CaseTrigger_AT_Test {
     }
     Static testmethod void UpdateStatusasWD()
     {
-        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
-        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
-        Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
-        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Constant_Ac constant = new Constant_Ac();
+        Id planningRT = Schema.Sobjecttype.Chapter_Action_Track__c.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
         String wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Chapter_Action_Track__c newActionTrack = new Chapter_Action_Track__c();
+        newActionTrack.Task_Name__c ='Sample Task';
+        newActionTrack.Due_Days__c =10.0;
+        newActionTrack.Chapter_Name__c = chapterAccount.Id;
+        newActionTrack.Wish_type__c = 'Disney World';
+        newActionTrack.Description__c='sample';
+        newActionTrack.Months__c = 1;
+        newActionTrack.RecordTypeId = planningRT;
+        insert newActionTrack;
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Case anticipationCase = parentCase.clone();
         anticipationCase.RecordTypeId = wishDeterminationRecordTypeId;
         anticipationCase.parentId = parentCase.id;
         insert anticipationCase;
+        parentCase.ChapterName__c = chapterAccount.Id; 
         parentCase.Status = 'Wish Determined';
+        parentCase.Wish_Type__c = 'Disney World';
         parentCase.Sub_Status__c = 'Within Policy';
         update parentCase;
         
@@ -366,7 +388,7 @@ public class CaseTrigger_AT_Test {
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         /*Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case eligiblityCase= OrientationandTrainingUtil.CreatePartAWishRec();
@@ -379,22 +401,25 @@ public class CaseTrigger_AT_Test {
     Static testmethod void UpdateStatusasAbandoned()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Volunteer_Opportunity__c volOpp = new Volunteer_Opportunity__c(Wish__c = parentCase.Id, Volunteer_Name__c = null, Inactive__c= false, Migrated_Record__c = false);
+        insert volOpp;
         createTask('Test',parentCase.id);
         parentCase.Status = 'Closed';
         parentCase.Sub_Status__c = 'Abandoned';
+        parentCase.Closed_Date__c = System.Today();
         update parentCase;
     }
     
     Static testmethod void UpdateStatusasHold()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -404,8 +429,8 @@ public class CaseTrigger_AT_Test {
     Static testmethod void UpdateStatusasinActive()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -416,8 +441,8 @@ public class CaseTrigger_AT_Test {
     Static testmethod void UpdateWishChildFormFlag()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         
@@ -457,30 +482,30 @@ public class CaseTrigger_AT_Test {
         
     }
     /*@isTest static void PartACasestatusAsApproved(){
-        
-        Constant_AC  constant = new Constant_Ac(); 
-        Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
-        Test.startTest();
-        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-        Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
-        Account acc = OrientationandTrainingUtil.MakeAWishAmericaAcc();
-        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
-        newLead.Child_Age__c = '4';
-        insert newLead;
-        Contact dbMedicalCon = OrientationandTrainingUtil.CreateMedicalProfContact();
-        Case PartACase = OrientationandTrainingUtil.CreatePartAWishRec();
-        PartACase.Local_MCA_Team__c = dbMedicalCon.Id;
-        PartACase.Lead__c = newLead.Id;
-        insert PartACase; 
-        Test.stopTest();
-        Test.startTest();
-        PartACase.Status = 'Approved - Chapter Staff';
-        update PartACase;
-        Test.stopTest();
-        
-        
-    }*/
+
+Constant_AC  constant = new Constant_Ac(); 
+Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+Test.startTest();
+Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
+Account acc = OrientationandTrainingUtil.MakeAWishAmericaAcc();
+Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
+newLead.Child_Age__c = '4';
+insert newLead;
+Contact dbMedicalCon = OrientationandTrainingUtil.CreateMedicalProfContact();
+Case PartACase = OrientationandTrainingUtil.CreatePartAWishRec();
+PartACase.Local_MCA_Team__c = dbMedicalCon.Id;
+PartACase.Lead__c = newLead.Id;
+insert PartACase; 
+Test.stopTest();
+Test.startTest();
+PartACase.Status = 'Approved - Chapter Staff';
+update PartACase;
+Test.stopTest();
+
+
+}*/
     
     
     @isTest static void PartACasestatusAsDNQ(){
@@ -511,7 +536,7 @@ public class CaseTrigger_AT_Test {
         Id wishGrantTaskRT = Schema.Sobjecttype.Chapter_Action_Track__c.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
         /*Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         
@@ -544,7 +569,7 @@ public class CaseTrigger_AT_Test {
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         update ChapterAccount;
         /*Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -569,17 +594,17 @@ public class CaseTrigger_AT_Test {
         update anticipationCase;
         
     }
-
-     Static testmethod void CreateDiagnosisVerificationReview()
-     {
+    
+    Static testmethod void CreateDiagnosisVerificationReview()
+    {
         Case caseDiagnosis = new Case();
         caseDiagnosis.subject = 'Test Eligibility Review';
         caseDiagnosis.RecordTypeId = '01236000000OJntAAG';
         caseDiagnosis.Status = 'New';
         caseDiagnosis.Origin = 'Email';
         insert caseDiagnosis;
-       
-     }
+        
+    }
     
     static testmethod void ChangeCaseOwner() {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
@@ -594,7 +619,9 @@ public class CaseTrigger_AT_Test {
         anticipationCase.parentId = parentCase.id;
         insert anticipationCase;
         parentCase.OwnerId = currUser[0].Id;
+        Test.startTest();
         update parentCase;
+        Test.stopTest();
     }
     
     static testMethod void caseTeamMemberFunc() {
@@ -604,11 +631,13 @@ public class CaseTrigger_AT_Test {
         CaseTeamRole volunteerManager = [SELECT Id FROM CaseTeamRole WHERE Name = 'Volunteer Manager'];   
         List<User> currUser = [SELECT Id FROM User WHERE email = 'testmawa@gmail.com'];
         //CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,userinfo.getUserid(),volunteerManager.id);
-       
+        
         Case updateCaseStat = new Case();
         updateCaseStat.OwnerId = currUser[0].Id;
         updateCaseStat.Id = parentCase.Id;
+        Test.startTest();
         update updateCaseStat;
+        Test.stopTest();
     }
     
     static testMethod void createVolOpp() {
@@ -631,7 +660,6 @@ public class CaseTrigger_AT_Test {
         newCon.Region_Chapter__c = ChapterAccount.Id;
         newCon.Region_Code__c =regionRec.Id;
         update newCon; 
-        
         RecursiveTriggerHandler.isFirstTime = true;
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         Case updateStatus = new Case();
@@ -639,8 +667,9 @@ public class CaseTrigger_AT_Test {
         updateStatus.ChapterName__c = chapterAccount.Id;
         updateStatus.Status = 'Ready to Assign';
         updateStatus.Sub_Status__c = 'Assign in Portal';
-        
+        Test.startTest();
         update updateStatus;
+        Test.stopTest();
     }
     
     Static testmethod void AnticipationAsNull()
@@ -649,8 +678,8 @@ public class CaseTrigger_AT_Test {
         Constant_AC constant = new Constant_AC();
         chapterAccount.Volunteer_Manager__c = userinfo.getUserId();
         update ChapterAccount;
-       /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
+        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
+Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
@@ -663,15 +692,73 @@ public class CaseTrigger_AT_Test {
         newParentWish.End_Date__c = System.today();
         newParentWish.ContactId = wishChild.Id;
         newParentWish.Status = 'New';
-       // newParentWish.Anticipated_Start_Date__c = System.today();
+        //newParentWish.Anticipated_Start_Date__c = System.today();
         newParentWish.LiabilitySignerMapKeyPair__c = 'Vennila';
         insert newParentWish;
+        Task newTask = new Task();
+        newTask.Subject = 'Test';
+        newTask.ActivityDate = Date.Today();
+        newTask.Priority = '4';
+        newTask.WhatId = newParentWish.id;
+        newTask.Task_Type__c = 'Wish Planning';
+        insert newTask;
         Case updateCase = new Case();
         updateCase.Id = newParentWish.Id;
+        updateCase.Anticipated_Start_Date__c = System.today();
         updateCase.Start_Date__c = System.today();
+        Test.startTest();
         update updateCase;
-        
-        
+        Test.stopTest();
+    }
+    
+    static testmethod void UpdateSubCaseStatus() {
+        Constant_AC constant = new Constant_AC();
+        Id wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Contact volunterCon = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.id);
+        User volunterUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunterCon.id);
+        CaseTeamRole roleRec = [SELECT Id FROM CaseTeamRole WHERE Name = 'Wish Granter'];       
+        Id determinationChapterActionRT = Schema.Sobjecttype.Chapter_Action_Track__c.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        Chapter_Action_Track__c newActionTrack = new Chapter_Action_Track__c();
+        newActionTrack.Task_Name__c ='Sample Task';
+        newActionTrack.Due_Days__c =10.0;
+        newActionTrack.Description__c='sample';
+        newActionTrack.RecordTypeId = determinationChapterActionRT;
+        Insert newActionTrack;
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithClosedStatus(wishChild.Id);
+        Task wishChildBirthdayTask = new Task(Subject = 'Wish Child Birthday Reminder', Status = 'New', Task_Type__c = 'Wish Granting', RecordTypeId = volunteerTaskRT, WhoId = wishChild.Id, WhatId = parentCase.Id);
+        insert wishChildBirthdayTask;
+        CaseTeamMember caseTeamMeber = OrientationandTrainingUtil.createCaseTeamMember(parentCase.id,volunterUser.id,roleRec.id);
+        System.assertEquals(parentCase.Status,'Closed');
+        Case anticipationCase = parentCase.clone();
+        anticipationCase.RecordTypeId = wishDeterminationRecordTypeId;
+        anticipationCase.parentId = parentCase.id;
+        insert anticipationCase;
+        System.assertEquals(anticipationCase.ParentId,parentCase.Id);
+        //parentCase.Status = 'Ready to Interview';
+        Test.startTest();
+        update parentCase;
+        Test.stopTest();
+        //System.assertEquals(parentCase.Status,'Ready to Interview');
+    }
+    
+    static testmethod void closeAllOpenTask() {
+        Constant_AC constant = new Constant_AC();
+        Id wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        System.assertEquals(parentCase.Status,'New');
+        Task volunteerFollowup = new Task(Subject = 'Volunteer wish follow-up activities not complete', Status = 'New', Task_Type__c = 'Wish Granting', WhoId = wishChild.Id, WhatId = parentCase.Id, SystemGeneratedTask__c = true);
+        insert volunteerFollowup;
+        parentCase.Status = 'Closed';
+        parentCase.Closed_Date__c = System.Today();
+        Test.startTest();
+        update parentCase;
+        Test.stopTest();
+        System.assertEquals(parentCase.Status,'Closed');
     }
     
     

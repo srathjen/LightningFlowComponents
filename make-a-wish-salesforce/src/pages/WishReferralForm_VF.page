@@ -12,14 +12,14 @@
       // dev/prod url check
       (function(){
         var topLoc = top.location.href,
-              prod = /^(http[s]?:\/\/wish\.secure\.force\.com)([\/].*)+$/i.test(topLoc);
+            prod = /^(http[s]?:\/\/wish\.secure\.force\.com)([\/].*)+$/i.test(topLoc);
         if (prod){
           //prevent standalone
           window.location = "https://wish.org/refer-a-child/referral-inquiry-form";
         }
       })();
-      </script>
-      <script>
+    </script>
+    <script>
       //script to pull chid argument from the URL
       function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
@@ -35,10 +35,18 @@
       //populate meta tags based on chid argument
       var refchid = getQueryVariable('chid');
       $('meta[name=ref-chid]').attr('content', refchid);
+      
+      
+      $(document).delegate( ".ApproximatediagnosisYear", "change", function() { 
+      console.log($(this).val());
+          $('.dgYear').val($(this).val());
+          console.log($('.dgYear').val());
+          //alert('diagnosisYear');
+});
     </script>
     <!-- maw satellite script -->
     <!-- <script src="//ssl.wish.org/satellite/staging/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205-staging.js"></script> -->
-    <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>     
+    <script src="//ssl.wish.org/satellite/edec8212b3b96d293794554858d0cc86077c139d/satelliteLib-1ec2b614cbc9d2632dabfb246ea08ebad993f205.js"></script>
     <script type="text/javascript" src="//ssl.wish.org/javascript/iframeResizer.contentWindow.min.js"></script>
     <style>.dateOnlyInput input {width:100% !important} #datePicker, .dateFormat {display:none! important} .date-input {background-color:initial} .ui-autocomplete {overflow-y: scroll;max-height: 270px} .displayNone, .medicalProvider, .other, .repeatMedProf, .shownOnSiblingsYes, .sibInfo {display: none} .shownOnYes {position: relative} .shownOnYes.fam-aware-overlay::after {content: ""; position: absolute; top: 0; left: 0; background: rgba(255,255,255, .8); min-width: 100%; min-height: 100%; z-index: 2} .shownOnYes.fam-aware-overlay: hover::after {content: "Please answer the required fields above to proceed"; position: absolute; top: 0; left: 0; color: #666; line-height: 5rem; text-align: center} .repeatMedProf label {padding-right: 10px} .displayBlock {display: block} .ui-autocomplete-loading {background: url(" {! URLFOR($Resource.WishReferralStyle, 'WishReferralStyle/img/loader-circle-blue.gif')} ") right .5rem center no-repeat! important; background-size: 1rem 1rem! important} .placeHolder {font-style: italic} .vfHelpText a {position: relative} .vfHelpText a span {display: none} .vfHelpText a: hover span {display: block; position: absolute; right: -15em; width: 15em; z-index: 100; border: 1px solid; background-color: #FEFDB9; color: #000} .pop-wrap {position: fixed; top: 20%; left: 50%; z-index: 9999; width: 90%; max-width: 35rem} .custPopup {font-family: arial,helvetica,sans-serif; position: relative; background: #fff; border: 1px solid #006bb6; border-radius: .25rem; top: -20%; left: -50%; padding: 1rem; width: 100%} .pop-wrap-main-message {top: 1%} .custPopup-main-message {top: 0; padding: 0 1rem} .popupBackground {position: fixed; background: rgba(0,0,0, .4); width: 100%; height: 100%; top: 0; left: 0; z-index: 9998} .labelCol {width: 180px} .field-word-seperator, .r2c {position: relative; width: 100%} .r2c {padding: 1rem} .r2c input {margin-right: 1rem} .r2c label {font-family: FuturaStd-Book,"Century Gothic",Arial,sans-serif; float: left; background: #fff; background: -moz-linear-gradient(top,rgba(255,255,255,1) 0,rgba(243,243,243,1) 100%); background: -webkit-linear-gradient(top,rgba(255,255,255,1) 0,rgba(243,243,243,1) 100%); background: linear-gradient(to bottom,rgba(255,255,255,1) 0,rgba(243,243,243,1) 100%); filter: progid:  DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f3f3f3', GradientType=0); border: .1rem solid #ccc; border-radius: .2rem; box-shadow: .05rem .05rem .1rem #ccc; height: 2rem; padding: .5rem; margin-bottom: .2rem; font-size: .7rem; text-transform: capitalize} .ui-widget-content li {padding-left: .5rem} input[id*=diagnosisTextId][disabled=""],input[id*=searchDiagnosisId][disabled=""] {background: #eee; color: #bbb; cursor: not-allowed} .field-word-seperator {font-family: arial; font-size: .7rem; display: block; border-top: 1px dotted #747678; color: #747678} .modal-footer, .modal-header, .table tr: nth-child(1) td {border-top: none} .field-word-seperator::after {content: "OR"; background: #fff; padding: 0 1rem; position: absolute; left: 43%; top: -.6rem; text-align: center; z-index: 1} .form-group-seperator {margin-bottom: 2rem} .age-text {position: absolute; bottom: .6rem; right: 2rem} .option-disabled {cursor: not-allowed! important; color: #bbb; opacity: 1! important; padding: .5rem 0! important; border-bottom: 1px dashed #bbb; margin-bottom: 1rem! important; margin-left: 1rem! important; font-size: .8rem; width: 50%} h1.modal-title {text-align: center; padding-bottom: 0} .modal-header .close {margin-top: -4rem} .modal-footer {display: flex; justify-content: center} .modal-footer .btn-md, .nav-sub-inner .btn-md {max-width: 10rem} .modal-footer .btn-md {min-width: 10rem} fieldset.connected, fieldset.connected-haslegend {background:#fff; border-top:1px dashed #ccc; margin-top:-1px; position: relative;} /* connected in relation to fieldset */ fieldset.connected-haslegend>legend {float:left; padding-top:0; padding-bottom:0; margin-bottom:0;} fieldset.connected-haslegend>.info {margin-top: 0} fieldset.connected a {font-size: .8rem} form a.text-muted {color:#006bb6 !important} form a.text-muted:hover {color:#0275d8 !important} .guardian-2 {border-top-style:dashed} a.remove-block {position:absolute; top:1rem; right:1rem; z-index:1}</style>
     <body>
@@ -46,12 +54,12 @@
             <apex:pagemessages id="msg"/>
             <apex:outputpanel rendered="{!displayAckMsg == false}" id="panel" >
                 <fieldset>
-                    <apex:inputText value="{!refChildFormParent}" styleClass="chid-value" style="display:none" />
+                    <apex:inputText value="{!refChildFormParent}" id="childToParent" styleClass="chid-value" style="display:none" />
                     <legend>Relationship to Child</legend>
                     <div class="row" style="margin-bottom:2rem">
                         <div class="form-group r2c mySelect23 radioClickable radioSection">
                             <!--<apex:actionRegion >-->
-                            <apex:selectRadio value="{!currLead.Relationship_to_child__c}" layout="pageDirection">
+                            <apex:selectRadio value="{!currLead.Relationship_to_child__c}" id="relationToChild" layout="pageDirection">
                                 <apex:selectOptions value="{!Relationships}"/>
                             </apex:selectRadio>
                             <!--  </apex:actionRegion>-->
@@ -60,7 +68,7 @@
                     <div class="form-group row" style="display: none;">
                         <label class="col-sm-3">Is Family Aware of Referral?</label>
                         <div class="col-sm-6">
-                            <apex:inputField value="{!currLead.is_Family_Aware_of_Referral__c}" styleClass="form-control col-xs-12 c-select familyAware" id="aware-of-referral">
+                            <apex:inputField value="{!currLead.is_Family_Aware_of_Referral__c}"  styleClass="form-control col-xs-12 c-select familyAware" id="aware-of-referral">
                                 <!-- <apex:actionSupport event="onchange" action="{!disPlayChildForm}" reRender="panel"/> -->
                             </apex:inputField>
                             <span class="familyAwareError text-muted"></span>
@@ -81,7 +89,7 @@
                     <div class="form-group row medprovcat-other-wrap">
                         <label class="col-sm-3">Other Medical Provider Category</label>
                         <div class="col-sm-6">
-                           <apex:inputField styleClass="form-control medprovcat-other" html-maxlength="100" html-placeholder="Please specify other medical provider category" value="{!currLead.Other_Medical_Provider_Category__c}" />
+                           <apex:inputField styleClass="form-control medprovcat-other" id="medprovcat" html-maxlength="100" html-placeholder="Please specify other medical provider category" value="{!currLead.Other_Medical_Provider_Category__c}" />
                         </div>
                     </div>
                     <div class="form-group row">
@@ -187,7 +195,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3">Has this child ever received a prior wish from Make-A-Wish or any other wish-granting organizations?</label>
                             <div class="col-sm-6">
-                                <apex:selectList value="{!currLead.Has_this_child_ever_received_prior_wish__c}" size="1" multiselect="false" styleClass="form-control col-xs-12 c-select chosen" >
+                                <apex:selectList value="{!currLead.Has_this_child_ever_received_prior_wish__c}" id="priorWish" size="1" multiselect="false" styleClass="form-control col-xs-12 c-select chosen" >
                                     <apex:selectOption itemLabel="--None--" itemValue="" />
                                     <apex:selectOption itemLabel="Yes" itemValue="Yes" />
                                     <apex:selectOption itemLabel="No" itemValue="No" />
@@ -393,7 +401,7 @@
                             <div class="col-sm-3"><label>Primary Diagnosis</label></div>
                             <div class="col-sm-6">
                                 <apex:inputText id="searchDiagnosisId" styleClass="placeHolder form-control" html-placeholder="example: Malignant Neoplasm" />
-                                <apex:inputText styleClass="searchDiagnosisId" value="{!selectedDiagnosis}" style="display:none"/>
+                                <apex:inputText styleClass="searchDiagnosisId" value="{!selectedDiagnosis}" id="sDiagnosisId" style="display:none"/>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -405,9 +413,37 @@
                             <div class="col-sm-6">
                                 <apex:inputText id="diagnosisTextId"  styleClass="diagnosisText placeHolder form-control" html-placeholder="example: C00" />
                                 <apex:outputText id="shortTextId" styleClass="shortTextId text-muted"/>
-                                <apex:inputText styleClass="diagnosisFilter" value="{!diagnosisFilter}" style="display:none"/>
+                                <apex:inputText styleClass="diagnosisFilter" value="{!diagnosisFilter}" id="dFilter" style="display:none"/>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-sm-3"><label>Approximate Diagnosis Date</label></div>
+                            <div class="col-sm-3">
+                                <apex:selectList size="1" multiselect="false" value="{!diagnosisMonth}" styleclass="form-control col-xs-12 c-select" id="diagnosisMonth">
+                                  <apex:selectoption itemValue="Month" itemLabel="Month" />
+                                  <apex:selectoption itemValue="January" itemLabel="January" />
+                                  <apex:selectoption itemValue="February" itemLabel="February" />
+                                  <apex:selectoption itemValue="March" itemLabel="March" />
+                                  <apex:selectoption itemValue="April" itemLabel="April" />
+                                  <apex:selectoption itemValue="May" itemLabel="May" />
+                                  <apex:selectoption itemValue="June" itemLabel="June" />
+                                  <apex:selectoption itemValue="July" itemLabel="July" />
+                                  <apex:selectoption itemValue="August" itemLabel="August" />
+                                  <apex:selectoption itemValue="September" itemLabel="September" />
+                                  <apex:selectoption itemValue="October" itemLabel="October" />
+                                  <apex:selectoption itemValue="November" itemLabel="November" />
+                                  <apex:selectoption itemValue="December" itemLabel="December" />
+                                  <apex:selectoption itemValue="Not Sure" itemLabel="Not Sure" />
+                                </apex:selectList>
+                            </div>
+                            <div class="col-sm-3">
+                                <apex:selectList size="1" multiselect="false" value="{!diagnosisYear}"  styleclass="form-control col-xs-12 c-select ApproximatediagnosisYear" id="diagnosisYear">
+                                      <apex:selectOptions value="{!diaYear}"></apex:selectOptions>
+                               </apex:selectList>
+                            </div>
+                           <!-- <apex:inputHidden value="{!diagnosisYear}" html-styleClass="dgYear"/> -->
+                        </div>
+
                         <div class="form-group row">
                             <label class="col-sm-3">Is there a medical reason why we need to move quickly?</label>
                             <div class="col-sm-6">
@@ -519,7 +555,7 @@
             </apex:outputpanel>
 
 
-            <apex:inputText value="{!currLead.Relationship_to_child__c}" styleClass="Relchild sr-only" />
+            <apex:inputText value="{!currLead.Relationship_to_child__c}" id="rToChild" styleClass="Relchild sr-only" />
         </apex:form>
 
         <div class="modal fade"  id="warningModal" data-target="#warningModal" tabindex="-1" data-backdrop="static" data-keyboard="false" role="dialog" aria-labelledby="Warning Modal" aria-hidden="true">
@@ -579,6 +615,7 @@
         <!-- validate form (additional methods) -->
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/additional-methods.min.js')}"></script>
         <!-- diagnosis/ICD, form validation, form ui interactions -->
+        
         <script src="{!URLFOR($Resource.wishreferralui_js)}"></script>
         <!-- Persist chid to receipt -->
         <script>$('.chid-value').val(getQueryVariable('chid'));</script>

@@ -52,7 +52,7 @@ public class VolunteerOrientation_AC{
         checkExistingTrainingRecords = new List<Volunteer_Orientation_Training__c>();
         currentUserId = userInfo.getUserId();
         classOffereningRecordtypeId = Schema.Sobjecttype.Class_Offering__c.getRecordTypeInfosByName().get(constant.classOfferingRecordTypeId).getRecordTypeId();
-        getUserRelatedContact = [SELECT Id,contact.Region_Chapter__c,contact.Region_Chapter__r.Chapter_Id__c,ContactId,Username,LMS_User_Code__c,LMS_Login__c,LMS_Id__c,FirstName,LastName,Email FROM User WHERE Id=:currentUserId];
+        getUserRelatedContact = [SELECT Id,Hidden_Email__c,contact.Region_Chapter__c,contact.Region_Chapter__r.Chapter_Id__c,ContactId,Username,LMS_User_Code__c,LMS_Login__c,LMS_Id__c,FirstName,LastName,Email FROM User WHERE Id=:currentUserId];
         lMSCredential = LMS_Credentials__c.getValues('LMS Integration');
         userRelatedContactId = getUserRelatedContact.get(0).ContactId;
         lMSSSOResponse = new LMSSSORespose();
@@ -268,6 +268,16 @@ Description : To change the status of the Course enrollment to  'In - Progress' 
                     {
                         checkExistingCanceledRecords.get(0).Volunteer_Attendance__c = 'Registered';
                         checkExistingCanceledRecords.get(0).class_offering__c = trainingId;
+                          if(checkExistingCanceledRecords.get(0).class_offering__r.recordtypeid == classOffereningRecordtypeId){
+                           if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
+                                User currVolunteerUser = getUserRelatedContact.get(0); 
+                                currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
+                           }
+                           LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
+                           currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress');
+                           checkExistingCanceledRecords.get(0).LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : Null;
+
+                       }
                         update checkExistingCanceledRecords;
                         
                         isCancelled = false;

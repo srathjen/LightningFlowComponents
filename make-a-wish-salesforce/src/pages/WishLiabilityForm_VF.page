@@ -62,7 +62,7 @@
                  participate in the Wish: (indicate names of potential wish participants)</p>
                  
                  <p>
-                                                {!Name}
+                                                {!participantsName}
                                                 <br/>
                                                 <br/>
                     Participants, and the parents or legal guardians of the Wish Child and any
@@ -160,8 +160,8 @@
 
             </body>
     </div>
-   <center> <apex:commandButton value="Send For Signature" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md" action="{!multiEmail}" style="height: 2.75rem; margin-left: 5%;"/>
-            <apex:commandButton value="Sign Now" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md" action="{!SignNowmultiEmail}" style="height: 2.75rem; margin-left: 5%;"/> </center>
+   <center> <apex:commandButton value="Send For Signature" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md" action="{!multiEmail}" style="height: 2.75rem; margin-left: 5%;" reRender="displayError1,popup"/>
+            <apex:commandButton value="Sign Now" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md" action="{!SignNowmultiEmail}" style="height: 2.75rem; margin-left: 5%;" reRender="displayError3,SignNowpopup,displayError1"/> </center>
            
     <apex:outputPanel id="popup">
         <apex:outputPanel rendered="{!displayPopup }">

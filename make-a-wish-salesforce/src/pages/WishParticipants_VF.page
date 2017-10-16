@@ -21,13 +21,14 @@
                         <td>{!Participant.npe4__RelatedContact__r.Middle_Name__c}</td>
                         <td>{!Participant.npe4__RelatedContact__r.LastName}</td>
                         <td><apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
-                                                                    <apex:param value="{!Participant.npe4__RelatedContact__r.Birthdate}"/>
-                                                                </apex:outputText></td>
+                             <apex:param value="{!Participant.npe4__RelatedContact__r.Birthdate}"/>
+                             </apex:outputText></td>
                         <td>{!Participant.npe4__Type__c}</td>
                         <td>{!Participant.npe4__RelatedContact__r.Current_Age__c}</td>
                         <td>{!Participant.Parent_Legal_Guardian__c}</td>
                         <td>{!Participant.Medical_Needs__c}</td>
-                        <td>{!Participant.Non_Comped__c }</td>
+                        <!-- <td>{!Participant.Non_Comped__c }</td> -->
+                        <td><apex:outputField value="{!Participant.Non_Comped__c }"/></td> 
                     </tr>
                 </apex:repeat>
             </table>       

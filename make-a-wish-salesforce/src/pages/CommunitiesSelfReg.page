@@ -16,7 +16,7 @@
                             <!--<apex:pagemessages ></apex:pagemessages>-->
                             <apex:messages />
                             <apex:outputPanel rendered="{!showErrorMsg}" styleclass="alert alert-danger fade in col-sm-12">
-                                <apex:outputText escape="false" value="{!errorMessage}"/>
+                                <apex:outputText escape="false" value="{!errorMessage}" id="errorMsg"/>
                             </apex:outputPanel>
                             <fieldset>
                                 <legend>Your Information<span>We value your privacy and will not share your personal information.</span></legend>
@@ -41,7 +41,7 @@
                                 <div class="form-group row">
                                     <div class="col-sm-3"><label for="communitiesSelfRegPage:theForm:phonenumber" aria-labelledby="phone_number">Phone Number</label></div>
                                     <div class="col-sm-6">
-                                        <apex:inputText styleClass="form-control f-phone" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="10" id="phonenumber" html-placeholder="(000) 000-0000" value="{!phone}" />
+                                        <apex:inputText styleClass="form-control f-phone" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="14" id="phonenumber" html-placeholder="(000) 000-0000" value="{!phone}" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -142,7 +142,7 @@
 
                     <aside class="col-md-4 page-info" role="page-info">
                         <h2 aria-labelledby="Volunteering">Volunteering</h2>
-                        <p><apex:outputText value="{!signUpNotes}" escape="false"/></p>
+                        <p><apex:outputText value="{!signUpNotes}" id="signupNote" escape="false"/></p>
                     </aside>
                 </div>
             </main>
@@ -156,8 +156,6 @@
             </script>
             <!-- chosen select -->
             <script src="{!URLFOR($Resource.prospective_assets,'web/js/chosen.jquery.min.js')}"></script>
-            <!-- masked input -->
-            <script src="{!URLFOR($Resource.prospective_assets,'web/js/jq.maskedinput.min.js')}"></script>
             <!-- validate forms -->
             <script src="{!URLFOR($Resource.prospective_assets,'web/js/jquery.validate.min.js')}"></script>
             <!-- validate form (additional methods) -->
@@ -171,11 +169,10 @@
                 submitHandler: function () {
                     // honeypot check
                     if($('#6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt').is(':checked') == true || $('#2-6Lci5yITAAAAAJPB5cxQOi7CFAS6d4W5W8okrnAt').val() !== '88hE!joP') {
-                        //alert("Hidden inputs were triggered. Form will not submit. Get out of here you dirty bot!");
                         onsubmit: false
                     } else {
-                        //alert("Dev message: Hidden inputs were NOT triggered. Form will now submit. This message will be removed before production deployment.");
-                        form.submit();
+                      $('#communitiesSelfRegPage\\:theForm\\:submit_signup').css({'opacity':'.5','cursor':'wait'}).prop('disabled',true).attr('title','Your form is submitting.');
+                      form.submit();
                     }
                 },
                 // required for chosen.js
@@ -359,27 +356,49 @@
                     $(stateParents).children(".chosen-container-single").children( ".chosen-single" ).css('border','');
                     $(stateParents).children( ".help-block" ).remove();
                 });
-                // format phone fields
-                $(".f-phone").mask("(999) 999-9999");
                 // inputs: numbers only
                 $(".numbers-only").keydown(function (e) {
-                    // Allow: backspace, delete, tab, escape, enter and .
-                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
-                        // Allow: Ctrl+A
-                        (e.keyCode == 65 && e.ctrlKey === true) ||
-                        // Allow: Ctrl+C
-                        (e.keyCode == 67 && e.ctrlKey === true) ||
-                        // Allow: Ctrl+X
-                        (e.keyCode == 88 && e.ctrlKey === true) ||
-                        // Allow: home, end, left, right
-                        (e.keyCode >= 35 && e.keyCode <= 39)) {
-                        // let it happen, don't do anything
-                        return;
-                    }
-                    // Ensure that it is a number and stop the keypress
-                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                        e.preventDefault();
-                    }
+                  // Allow: backspace, delete, tab, escape and enter
+                  if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+                      // Allow: Ctrl+A
+                      (e.keyCode == 65 && e.ctrlKey === true) ||
+                      // Allow: Ctrl+C
+                      (e.keyCode == 67 && e.ctrlKey === true) ||
+                      // Allow: Ctrl+X
+                      (e.keyCode == 88 && e.ctrlKey === true) ||
+                      // Allow: home, end, left, right
+                      (e.keyCode >= 35 && e.keyCode <= 39)) {
+                      // let it happen, don't do anything
+                      return;
+                  }
+                  // Ensure that it is a number and stop the keypress
+                  else if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105 || (e.keyCode == 191) )) {
+                    e.preventDefault();
+                  }
+                });
+                // auto format phone
+                $(".f-phone").keydown(function(e){
+                  if (($(this).val().length == 0) && (e.keyCode != 8)){
+                    $(this).val($(this).val() + "(");
+                  } else if(($(this).val().length == 4) && (e.keyCode != 8)){
+                    $(this).val($(this).val() + ") ");
+                  } else if (($(this).val().length == 9) && (e.keyCode != 8)){
+                    $(this).val($(this).val() + "-");
+                  }
+                  // if backspace or tab is pressed on certain lengths
+                  if ( (($(this).val().length == 2 || $(this).val().length == 11) && e.keyCode == 8) || (($(this).val().length == 2) && e.keyCode == 9) ){
+                    // remove dash or parenthesis
+                    $(this).val($(this).val().substring(0, $(this).val().length - 1));
+                  }
+                  // if backspace is pressed on deletion of digit before space
+                  if (($(this).val().length == 7) && (e.keyCode == 8)){
+                    // remove space and parenthesis
+                    $(this).val($(this).val().substring(0, $(this).val().length - 2));
+                  }
+                  // if full phone number isn't entered and tab is pressed
+                  if ( ($(this).val().length) != 14 && (e.keyCode == 9 ) ){
+                    $(this).val('')
+                  }
                 });
             });
             </script>

@@ -205,7 +205,7 @@
             <name>Task_ET_Interview_Completed</name>
             <type>Task</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Task.RecordTypeId</field>
             <operation>equals</operation>

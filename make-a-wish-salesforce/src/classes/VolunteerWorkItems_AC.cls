@@ -61,6 +61,30 @@ public class VolunteerWorkItems_AC {
         }
     }    
     
+    public VolunteerWorkItems_AC(ApexPages.StandardController controller) {
+        visibilityMap = new Map<Id, Boolean>();
+        isWishClosed = false;
+        isWishNotClose = true;
+        recordVisibilityMap = new Map<Id,Boolean>();
+        rejectedOpportunitiesMap = new Map<Id,Boolean>();
+        wishTab = true;
+        nonWishTab = true;
+        volunteerChaptersSet = new Set<Id>();
+        Id currentUserId = userInfo.getUserId();
+       Volunteer_Opportunity__c volRec = (Volunteer_Opportunity__c)controller.getRecord();
+        volunteerOpportunityRecordId = volRec.Id;
+        List<User> getUserRelatedContact = [SELECT Id, ContactId FROM User WHERE Id =:currentUserId LIMIT 1];
+        userRelatedContactId = getUserRelatedContact.get(0).ContactId;
+        system.debug('@@@@@@ userRelatedContactId @@@@@@@'+userRelatedContactId);
+        chaptersList = [SELECT Id,npe5__Primary__c, npe5__Organization__c, npe5__Contact__c FROM npe5__Affiliation__c WHERE npe5__Contact__c =: userRelatedContactId];
+        system.debug('@@@@@@ chaptersList @@@@@@@'+chaptersList);
+        if(chaptersList.size()>0) {
+            for(npe5__Affiliation__c getChapterName : chaptersList) {
+                volunteerChaptersSet.add(getChapterName.npe5__Organization__c);
+            }
+        }
+    }    
+    
     public void CurrentWish(){
         
         isWishClosed = false;

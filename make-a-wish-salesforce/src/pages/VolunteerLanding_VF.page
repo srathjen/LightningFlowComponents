@@ -30,11 +30,11 @@ Description : This page is used to display the welcome message, open events , ch
                 <section>
 
                     <apex:form >
-                        <apex:outputPanel rendered="{!activeVolunteerLandingPageInfoList.size > 0}">
+                        <apex:outputPanel rendered="{!activeVolunteerLandingPageInfoList.size > 0}" id="activeVolLandInfo">
                             <div class="row" style="margin:0 0 1rem 0">
                                 <div class="col-md-3 col-md-offset-9">
                                   <!--  <apex:actionFunction name="switchChapter" action="{!EnterchapterPage}"/>
-                                    <apex:selectList styleClass="form-control col-xs-12 col-sm-12 col-md-12 c-select" value="{!selectedChapter}" rendered="{!ChapterList.size > 1}" size="1" onchange="switchChapter();">
+                                    <apex:selectList styleClass="form-control col-xs-12 col-sm-12 col-md-12 c-select" id="select"value="{!selectedChapter}" rendered="{!ChapterList.size > 1}" size="1" onchange="switchChapter();">
                                         <apex:selectOptions value="{!ChapterList}" />
                                     </apex:selectList> -->
                                 </div>
@@ -42,16 +42,16 @@ Description : This page is used to display the welcome message, open events , ch
 
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12 feature">
-                                    <apex:outputField styleClass="feature-img" value="{!activeVolunteerLandingPageInfoList[0].Featured_Image__c}"/>
-                                    <span class="col-xs-6 col-sm-6 col-md-4 col-lg-4 quote"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Feature_Quote__c}"/></span>
+                                    <apex:outputField styleClass="feature-img" value="{!activeVolunteerLandingPageInfoList[0].Featured_Image__c}" id="featurImage"/>
+                                    <span class="col-xs-6 col-sm-6 col-md-4 col-lg-4 quote"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Feature_Quote__c}" id="featurQuote"/></span>
                                 </div>
                                  <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="col-xs-12 col-sm-12 col-md-12">
                                         <h1>Welcome {!$User.FirstName} {!$User.LastName},</h1>
-                                        <apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Welcome_Message__c}" escape="false"/>
+                                        <apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Welcome_Message__c}" escape="false" id="welMessage"/>
                                             <br/> <br/>                                  
-                                            <h3><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Title__c}"/></h3>
-                                        <p><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Text__c}"/></p>
+                                            <h3><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Title__c}" id="headTitle"/></h3>
+                                        <p><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Text__c}" id="headText" /></p>
                                     </div>
                                 </div>
                             </div>
@@ -59,20 +59,20 @@ Description : This page is used to display the welcome message, open events , ch
 
                            <div class="row highlight" style="margin:1rem 0 2rem">
                                 <div class="col-xs-12 col-md-4">
-                                    <h3 class="col-xs-12 col-sm-12 col-md-12"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_1__c}"/></h3>
-                                    <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_1__c}"/>
+                                    <h3 class="col-xs-12 col-sm-12 col-md-12"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_1__c}" id="headHighTitle1"/></h3>
+                                    <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_1__c}" id="headHighImage1"/>
                                     <p class="col-xs-12 col-sm-12 col-md-12">{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Text_1__c}</p>
                                 </div>
 
                                 <div class="col-xs-12 col-md-4">
-                                    <h3 class="col-xs-12 col-sm-12 col-md-12"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_2__c}"/></h3>
-                                    <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_2__c}"/>
+                                    <h3 class="col-xs-12 col-sm-12 col-md-12"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_2__c}" id="headHighTitle2"/></h3>
+                                    <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_2__c}" id="headHighImage2"/>
                                     <p class="col-xs-12 col-sm-12 col-md-12">{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Text_2__c}</p>
                                 </div>
 
                                 <div class="col-xs-12 col-md-4">
-                                    <h3 class="col-xs-12 col-sm-12 col-md-12"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_3__c}"/></h3>
-                                    <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_3__c}"/>
+                                    <h3 class="col-xs-12 col-sm-12 col-md-12"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_3__c}" id="headHighTitle3"/></h3>
+                                    <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_3__c}" id="headHighImage3"/>
                                     <p class="col-xs-12 col-sm-12 col-md-12">{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Text_3__c}</p>
                                 </div>
                             </div>
@@ -93,15 +93,15 @@ Description : This page is used to display the welcome message, open events , ch
                                   <h1 class="modal-title">Background Check Notice</h1>
                                 </div>
                                 <div class="modal-body">
-                                  <p><apex:outputText value="Your criminal background check will expire within the next {!nBCDays} days. To remain an active volunteer, please click INITIATE to request the criminal background check." rendered="{!isExpired == false}" /></p>
-                                  <p><apex:outputText value="Your criminal background check has expired and access to the Volunteer Center has been suspended. To continue volunteering with Make-A-Wish, please click INITIATE to request the criminal background check." rendered="{!isExpired == true}" /></p>
+                                  <p><apex:outputText value="Your criminal background check will expire within the next {!nBCDays} days. To remain an active volunteer, please click INITIATE to request the criminal background check." rendered="{!isExpired == false}" id="criminalBcheck"/></p>
+                                  <p><apex:outputText value="Your criminal background check has expired and access to the Volunteer Center has been suspended. To continue volunteering with Make-A-Wish, please click INITIATE to request the criminal background check." id="criminalBcheck1" rendered="{!isExpired == true}" /></p>
                                   <div class="form-group row">
                                       <div class="col-xs-12 col-sm-6 col-md-8">
                                           <p>I have resided in the United States for the last seven years.</p>
                                       </div>
                                       <div class="col-xs-12 col-sm-6 col-md-4">
-                                          <apex:selectList styleClass="form-control c-select" value="{!residingStatus}" size="1">
-                                              <apex:selectOption itemLabel="Please Select" itemValue="Please Select" itemDisabled="true" />
+                                          <apex:selectList styleClass="form-control c-select" value="{!residingStatus}" size="1" id="residStatus">
+                                              <apex:selectOption itemLabel="Please Select" itemValue="Please Select" itemDisabled="true"  />
                                               <apex:selectOption itemLabel="Yes" itemvalue="Yes" />
                                               <apex:selectOption itemlabel="No" itemvalue="No"  />
                                           </apex:selectList>
@@ -211,8 +211,8 @@ Description : This page is used to display the welcome message, open events , ch
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                  <p><apex:outputText value="Your Annual Conflict of Interest and Ethics Statement will expire within the next {!nCOIDays} days. To remain an active volunteer, please click SIGN NOW to electronically sign the form." rendered="{!isCOIExpired == false}" /></p>
-                                  <p><apex:outputText value="Your Annual Conflict of Interest and Ethics Statement has expired and access to the Volunteer Center has been suspended. To continue volunteering with Make-A-Wish, please click SIGN NOW to electronically sign the form." rendered="{!isCOIExpired == true}" /></p>
+                                  <p><apex:outputText value="Your Annual Conflict of Interest and Ethics Statement will expire within the next {!nCOIDays} days. To remain an active volunteer, please click SIGN NOW to electronically sign the form." rendered="{!isCOIExpired == false}" id="isCOIExpired1"/></p>
+                                  <p><apex:outputText value="Your Annual Conflict of Interest and Ethics Statement has expired and access to the Volunteer Center has been suspended. To continue volunteering with Make-A-Wish, please click SIGN NOW to electronically sign the form." rendered="{!isCOIExpired == true}" id="isCOIExpired2" /></p>
                                 </div>
                                 <div class="modal-footer">
                                   <apex:commandButton styleClass="btn-md" value="Sign Now" action="{!confirmConflict}"/>&nbsp;&nbsp;&nbsp;
@@ -267,7 +267,7 @@ Description : This page is used to display the welcome message, open events , ch
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                  <p class="text-muted col-xs-12" style="text-align:center"><apex:outputText value="{!broadCaseMsg}" /></p>
+                                  <p class="text-muted col-xs-12" style="text-align:center"><apex:outputText value="{!broadCaseMsg}" id="broadCaseMsg" /></p>
                                 </div>
                                 <div class="modal-footer">
                                   <apex:commandButton action="{!broadCastCancel}" value="Close" styleClass="btn-md" />
@@ -312,7 +312,7 @@ Description : This page is used to display the welcome message, open events , ch
                                 </div>
                                 <div class="modal-body">
                                   <p class="text-muted col-xs-12" style="text-align:center">A new training course has been assigned to you. To remain an active volunteer, please click REGISTER and sign up for the training date that works for your schedule.</p>
-                                  <div class="col-xs-12"> <strong>Training Name:</strong> <p class="text-muted" style="display:inline-block"><apex:outputText value=" {!trainingName}" /></p> </div>
+                                  <div class="col-xs-12"> <strong>Training Name:</strong> <p class="text-muted" style="display:inline-block"><apex:outputText value=" {!trainingName}" id="trainingName" /></p> </div>
                                 </div>
                                 <div class="modal-footer">
                                   <apex:commandButton action="{!Register}" value="Register" styleClass="btn-md" />
@@ -419,13 +419,13 @@ Description : This page is used to display the welcome message, open events , ch
                             <li class="col-xs-12 col-sm-6 col-md-3">
                                 <figure class="col-xs-12 col-sm-12 col-md-12">
                                     <!-- <img class="col-xs-4 col-sm-4 col-md-4" src="https://wish.org/~/media/022-000/News%20and%20Events/Signature%20Events/WAM_Thumbnail.ashx" /> -->
-                                    <apex:outputText value="{!ev.Event_Image__c}" escape="false"/>
+                                    <apex:outputText value="{!ev.Event_Image__c}" escape="false" id="eventImg"/>
                                     <figcaption class="col-sm-8">
-                                        <h5><a href="/{!ev.Id}"><apex:outputText value="{!ev.Event_Name__c}" escape="false"/></a></h5>
-                                        <span class="date"><apex:outputText value="{0,date,MM/dd/yy}">
+                                        <h5><a href="/{!ev.Id}"><apex:outputText value="{!ev.Event_Name__c}" escape="false" id="eventName"/></a></h5>
+                                        <span class="date"><apex:outputText value="{0,date,MM/dd/yy}" id="date">
                                             <apex:param value="{!ev.Event_Date__c}" />
                                             </apex:outputText></span>
-                                        <p><apex:outputText value="{!ev.Event_Text__c}" escape="false"/></p>
+                                        <p><apex:outputText value="{!ev.Event_Text__c}" escape="false" id="eventText"/></p>
                                     </figcaption>
                                 </figure>
                             </li>
@@ -458,4 +458,5 @@ Description : This page is used to display the welcome message, open events , ch
         })
         </script>
     </body>
+   <!--<script type="text/javascript">(function() {var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkme.com/users/e7b66ef96580420ba3deb5fdd4b8c555/walkme_e7b66ef96580420ba3deb5fdd4b8c555_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = {smartLoad:true}; })();</script>-->
 </apex:page>

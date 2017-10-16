@@ -50,9 +50,9 @@ Last Modified   : 07/11/2016
                         
                          <apex:outputpanel rendered="{!isBGFinished==true}">
                             <fieldset style="min-height:350px;">
-                                <p><apex:outputText value="Thank you for requesting your background check." /></p>
-                                <p><apex:outputText value="You will receive an email from First Advantage, our background check provider, with specific details on how to complete the criminal background check process." /></p>
-                                <p><apex:outputText value="Background checks can take several weeks to process. Once completed and reviewed by chapter staff, you will receive an email to confirm you are approved to complete your required volunteer training. If you have any questions, please contact the chapter office. Chapter contact information can be found on the home page." /></p>
+                                <p><apex:outputText value="Thank you for requesting your background check." id="thankYouForReqBcheck" /></p>
+                                <p><apex:outputText value="You will receive an email from First Advantage, our background check provider, with specific details on how to complete the criminal background check process." id="crimalBcheck"/></p>
+                                <p><apex:outputText value="Background checks can take several weeks to process. Once completed and reviewed by chapter staff, you will receive an email to confirm you are approved to complete your required volunteer training. If you have any questions, please contact the chapter office. Chapter contact information can be found on the home page." id="severalWeekProcess" /></p>
                             </fieldset>
                         </apex:outputpanel>
                         
@@ -79,7 +79,7 @@ Last Modified   : 07/11/2016
                                         <span class="text-muted">Answered:</span>
                                     </div>
                                     <div class="col-xs-3 col-sm-2">
-                                        <apex:outputText styleClass="form-control residency text-muted" title="You've answered Yes" value="{!residingInPast7Years}" rendered="{!isBGFinished==true}" />    
+                                        <apex:outputText styleClass="form-control residency text-muted" title="You've answered Yes" value="{!residingInPast7Years}" id="residingInPast7Years" rendered="{!isBGFinished==true}" />    
                                     </div>
                                 </apex:outputPanel>
                                 
@@ -96,7 +96,7 @@ Last Modified   : 07/11/2016
                 </section>
                 <aside class="col-md-4 page-info" role="page-info">
                     <h2 aria-labelledby="Volunteering">Why do I need a background check?</h2>
-                    <p><apex:outputText value="{!whyNeedBGCheck}" escape="false"/></p>
+                    <p><apex:outputText value="{!whyNeedBGCheck}" escape="false" id="whyNeedBGCheck"/></p>
                 </aside>
             </div>
         </main>

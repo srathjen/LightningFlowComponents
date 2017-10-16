@@ -724,6 +724,7 @@ public class Application_AC{
         options.add(new SelectOption('','Please Select Title')); 
         options.add(new SelectOption('Mr.','Mr.')); 
         options.add(new SelectOption('Mrs.','Mrs.'));
+        options.add(new SelectOption('Ms.','Ms.'));
         options.add(new SelectOption('Miss','Miss'));
         options.add(new SelectOption('Master','Master'));
         options.add(new SelectOption('Dr.','Dr.'));

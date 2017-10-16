@@ -68,6 +68,7 @@ trigger UserTrigger_AT on User (after insert,after update,before update,before i
         Map<Id, Id> newUserRoleIdMap = new Map<Id, Id>(); // Used to hold the new user role Id
         Map<Id, Id> oldUserRoleIdMap = new Map<Id, Id>(); // Used to hold the new user role Id
         Set<string> userIdsSet = new Set<string>(); // useed to holds unique rolename
+        Map<Id,Id> contactUSerIdMap = new Map<Id,Id>(); // used to hold the contact id and user id.
          for(User newUser : Trigger.new)
          {
             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
@@ -87,7 +88,11 @@ trigger UserTrigger_AT on User (after insert,after update,before update,before i
                  if(newUser.UserRoleId != Null && newUser.UserRoleId != trigger.oldMap.get(newUser.id).UserRoleId){
                      userIdsSet.add(newUser.id);
                  }
+                 
+                 if(newUser.Email != Trigger.oldMap.get(newUSer.Id).Email && newUser.ContactId != Null){
+                     contactUSerIdMap.put(newUser.ContactId,newUser.Id);
                  }
+             }
 
             if(newUser.UserRoleId != null && Trigger.oldMap.get(newUser.Id).UserRoleId != newUser.UserRoleId) {
                 newUserRoleIdMap.put(newUser.Id, newUser.UserRoleId);
@@ -133,18 +138,23 @@ trigger UserTrigger_AT on User (after insert,after update,before update,before i
             System.debug('oldUserRoleIdMap>>>>>>>>>'+oldUserRoleIdMap);
             UserTriggerHandler.RemoveInternalUserToChatterGroup(oldUserRoleIdMap);
         }
-         
+        if(contactUSerIdMap.size() > 0){
+            UserTriggerHandler.updateConatcEmail(contactUSerIdMap);
+        }
     }
     
      Set<Id> UserIdSet=new Set<Id>();
      if(Trigger.isbefore && Trigger.isInsert)
      {
+      List<PermissionSetAssignment> permissionSetList = new List<PermissionSetAssignment>();
+      String DocuSignUserid = Label.DSProSFUsername;
       for(User newUser : Trigger.new)
       {
        if(newUser.IsActive == true){
-        newUser.dsfs__DSProSFUsername__c = Label.DSProSFUsername;
+        newUser.dsfs__DSProSFUsername__c = DocuSignUserid;
         }
-       }
+        
+      }
      }
      if(Trigger.isbefore && Trigger.isUpdate)
      {
@@ -160,6 +170,11 @@ trigger UserTrigger_AT on User (after insert,after update,before update,before i
                  }
                  if(newUser.IsActive == true && trigger.oldMap.get(newUser.Id).IsActive == False ){
                       newUser.Inactive_Date__c=null;
+                 }
+                 if(newUser.Email != Null && newUser.Email != Trigger.oldMap.get(newUser.id).Email && newUser.Hidden_Email__c == Null)
+                 {
+                 
+                   newUser.Hidden_Email__c = Trigger.oldMap.get(newUser.id).Email;
                  }
               }
          }

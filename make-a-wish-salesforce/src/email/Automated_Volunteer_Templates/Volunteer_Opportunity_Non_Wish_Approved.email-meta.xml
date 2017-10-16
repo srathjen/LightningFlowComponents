@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
     <available>true</available>
-    <description>This template will send when the non wish volunteer opportunity is approved by the chapter staff</description>
+    <description>This template will send when the non-wish volunteer opportunity is approved by the chapter staff</description>
     <encodingKey>ISO-8859-1</encodingKey>
     <letterhead>Make_a_Wish_America</letterhead>
     <name>Volunteer Opportunity : Non-Wish Approved</name>

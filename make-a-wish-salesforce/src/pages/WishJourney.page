@@ -39,10 +39,10 @@
         <div class="titlewrap">
           <div class="wc-photowrap">
             <apex:outputpanel rendered="{!(currCase.RecordType.Name == 'Wish')}" >
-              <apex:outputField value="{!currCase.Contact.Wish_Child_Photo__c}"/>
+              <apex:outputField value="{!currCase.Contact.Wish_Child_Photo__c}" id="wishChildPhto1"/>
             </apex:outputPanel>
             <apex:outputpanel rendered="{!(currCase.RecordTypeId != 'Wish')}">
-              <apex:outputField value="{!currCase.Parent.Contact.Wish_Child_Photo__c}"/>
+              <apex:outputField value="{!currCase.Parent.Contact.Wish_Child_Photo__c}" id="wishChildPhto2"/>
             </apex:outputPanel>
           </div>
           <div class="rush">
@@ -84,8 +84,8 @@
             <span class="rushwrap">Rush</span>
             </apex:outputPanel>
 
-            <apex:outputText value="{!currCase.Status}" rendered="{!(currCase.RecordType.Name == 'Wish')}" styleClass="onholdwrap"/>
-            <apex:outputText value="{!currCase.Parent.Status}" rendered="{!(currCase.RecordType.Name != 'Wish')}" styleClass="onholdwrap"/>
+            <apex:outputText value="{!currCase.Status}" id="status" rendered="{!(currCase.RecordType.Name == 'Wish')}" styleClass="onholdwrap"/>
+            <apex:outputText value="{!currCase.Parent.Status}" id="parentStatus" rendered="{!(currCase.RecordType.Name != 'Wish')}" styleClass="onholdwrap"/>
           </div>
         </div>
 
@@ -96,8 +96,8 @@
                 <apex:outputPanel rendered="{!(caseWithStatusMap['Wish'] == 'Completed' || caseWithStatusMap['Wish'] == 'Closed' || caseWithStatusMap['Wish'] == 'DNQ')}">
                     <li class="completed completedReferral">
                         <div class="step">
-                            <span class="title"><apex:outputText value="Qualification"  style="color: #026cb7;" rendered="{!currCase.id == wishId}"/>
-                            <apex:outputText value="Qualification" rendered="{!currCase.id <> wishId}"/></span>
+                            <span class="title"><apex:outputText value="Qualification" id="qual" style="color: #026cb7;" rendered="{!currCase.id == wishId}"/>
+                            <apex:outputText value="Qualification" id="qual1" rendered="{!currCase.id <> wishId}"/></span>
                             <!--<apex:outputLink target="_top" value="/{!currCase.id}"></apex:outputLink>-->
                             <!--<span class="title">Case</span>-->
                             <apex:outputPanel rendered="{!wishId != null}">
@@ -123,8 +123,8 @@
                 <apex:outputPanel rendered="{!(caseWithStatusMap['Wish'] != 'Completed' && caseWithStatusMap['Wish'] != 'Closed' && caseWithStatusMap['Wish'] != 'Not Started' && caseWithStatusMap['Wish'] != 'DNQ')}">
                     <li class="in-progress referredDays">
                         <div class="step">
-                            <span class="title"><apex:outputText value="Qualification"  style="color: #026cb7;" rendered="{!currCase.id == wishId}"/>
-                            <apex:outputText value="Qualification"  rendered="{!currCase.id <> wishId}"/></span>
+                            <span class="title"><apex:outputText value="Qualification" id="qual2" style="color: #026cb7;" rendered="{!currCase.id == wishId}"/>
+                            <apex:outputText value="Qualification" id="qual3"  rendered="{!currCase.id <> wishId}"/></span>
                             <!--<apex:outputLink target="_top" value="/{!currCase.id}"></apex:outputLink>-->
                             <!--<span class="title">Case</span>-->
                             <apex:outputPanel rendered="{!wishId!= null}">
@@ -147,7 +147,7 @@
                 <apex:outputPanel rendered="{!(caseWithStatusMap['Wish'] == 'Not Started')}">
                     <li class="not-started">
                         <div class="step">
-                            <span class="title"><apex:outputText value="Qualification"/></span>
+                            <span class="title"><apex:outputText value="Qualification" id="qual4"/></span>
                             <!--  <apex:outputLink target="_top" value="/{!currCase.contactId}"><span class="title">Qualification</span></apex:outputLink> -->
                             <!--<span class="title">Case</span>-->
                             <apex:outputPanel rendered="{!wishId==null}">
@@ -163,8 +163,8 @@
                 <apex:outputPanel rendered="{!(caseWithStatusMap['Wish Determination'] == 'Completed' || caseWithStatusMap['Wish Determination'] == 'Closed' || caseWithStatusMap['Wish Determination'] == 'DNQ')}">
                     <li class="completed completedQualified">
                         <div class="step">
-                            <span class="title"><apex:outputText value="Determination"  style="color: #026cb7;" rendered="{!currCase.id == determinationId }"/>
-                            <apex:outputText value="Determination"  rendered="{!currCase.id <> determinationId }"/></span>
+                            <span class="title"><apex:outputText value="Determination" id="deter1" style="color: #026cb7;" rendered="{!currCase.id == determinationId }"/>
+                            <apex:outputText value="Determination" id="deter2"  rendered="{!currCase.id <> determinationId }"/></span>
                             <!--<apex:outputLink target="_top" value="/{!currCase.contactId}"><span class="title">Determination</span></apex:outputLink>-->
                             <!--<span class="title">Determination</span>-->
                             <apex:outputPanel rendered="{!determinationId != null}">
@@ -183,8 +183,8 @@
                 <apex:outputPanel rendered="{!(caseWithStatusMap['Wish Determination'] != 'Completed' && caseWithStatusMap['Wish Determination'] != 'Closed' && caseWithStatusMap['Wish Determination'] != 'Not Started' && caseWithStatusMap['Wish Determination'] != 'DNQ')}">
                     <li class="in-progress qualifiedDays">
                         <div class="step">
-                            <span class="title"><apex:outputText value="Determination"  style="color: #026cb7;" rendered="{!currCase.id == determinationId }"/>
-                            <apex:outputText value="Determination"  rendered="{!currCase.id <> determinationId }"/></span>
+                            <span class="title"><apex:outputText value="Determination" id="deter3" style="color: #026cb7;" rendered="{!currCase.id == determinationId }"/>
+                            <apex:outputText value="Determination" id="deter4" rendered="{!currCase.id <> determinationId }"/></span>
                             <!--<apex:outputLink target="_top" value="/{!currCase.contactId}"><span class="title">Determination</span></apex:outputLink>-->
                             <apex:outputPanel rendered="{!determinationId!= null}">
                                 <a href="/{!determinationId}" target="_parent">
@@ -219,8 +219,8 @@
                 <apex:outputPanel rendered="{!(caseWithStatusMap['Wish Planning'] == 'Completed' || caseWithStatusMap['Wish Planning'] == 'Closed' || caseWithStatusMap['Wish Planning'] == 'DNQ')}">
                     <li class="completed completedDetermined">
                         <div class="step">
-                            <span class="title"><apex:outputText value="Planning"  style="color: #026cb7;" rendered="{!currCase.id == anticipationId }"/>
-                            <apex:outputText value="Planning"  rendered="{!currCase.id <> anticipationId }"/></span>
+                            <span class="title"><apex:outputText value="Planning" id="plan1"  style="color: #026cb7;" rendered="{!currCase.id == anticipationId }"/>
+                            <apex:outputText value="Planning" id="plan2"  rendered="{!currCase.id <> anticipationId }"/></span>
                             <!--<apex:outputLink target="_top" value="/{!currCase.contactId}"><span class="title">Planning</span></apex:outputLink>-->
                             <!-- <span class="title">Anticipation</span>-->
                             <apex:outputPanel rendered="{!anticipationId != null}">
@@ -247,8 +247,8 @@
                 <apex:outputPanel rendered="{!(caseWithStatusMap['Wish Planning'] != 'Completed' && caseWithStatusMap['Wish Planning'] != 'Closed' && caseWithStatusMap['Wish Planning'] != 'Not Started' && caseWithStatusMap['Wish Planning'] != 'DNQ')}">
                     <li class="in-progress determinationDays ">
                         <div class="step">
-                            <span class="title"><apex:outputText value="Planning"  style="color: #026cb7;" rendered="{!currCase.id == anticipationId }"/>
-                            <apex:outputText value="Planning"   rendered="{!currCase.id <> anticipationId }"/> </span>
+                            <span class="title"><apex:outputText value="Planning" id="plan3" style="color: #026cb7;" rendered="{!currCase.id == anticipationId }"/>
+                            <apex:outputText value="Planning" id="plan4"  rendered="{!currCase.id <> anticipationId }"/> </span>
                             <!--<apex:outputLink target="_top" value="/{!currCase.contactId}"><span class="title">Planning</span></apex:outputLink>-->
                             <!-- <span class="title">Anticipation</span>-->
                             <apex:outputPanel rendered="{!anticipationId != null}">
@@ -354,8 +354,8 @@
                 <apex:outputPanel rendered="{!(caseWithStatusMap['Wish Granting'] == 'Completed' || caseWithStatusMap['Wish Granting'] == 'Closed' || caseWithStatusMap['Wish Granting'] == 'DNQ')}">
                     <li class="completed completedUntil">
                         <div class="step">
-                            <span class="title"><apex:outputText value="Granting"  style="color: #026cb7;" rendered="{!currCase.id == grantId}"/>
-                            <apex:outputText value="Granting"  rendered="{!currCase.id <> grantId}"/></span>
+                            <span class="title"><apex:outputText value="Granting" id="grant1"  style="color: #026cb7;" rendered="{!currCase.id == grantId}"/>
+                            <apex:outputText value="Granting" id="grant2" rendered="{!currCase.id <> grantId}"/></span>
                             <!--<apex:outputLink target="_top" value="/{!currCase.contactId}"><span class="title">Granting</span></apex:outputLink> -->
                             <!-- <span class="title">Granted</span>-->
 
@@ -385,7 +385,7 @@
                 <apex:outputPanel rendered="{!(caseWithStatusMap['Wish Granting'] != 'Completed' && caseWithStatusMap['Wish Granting'] != 'Closed' && caseWithStatusMap['Wish Granting'] != 'Not Started' && caseWithStatusMap['Wish Granting'] != 'DNQ')}">
                     <li class="in-progress anticipationDays">
                         <div class="step">
-                            <span class="title"><apex:outputText value="Granting"  style="color: #026cb7;" rendered="{!currCase.id == grantId}"/><apex:outputText value="Granting"  rendered="{!currCase.id <> grantId}"/></span>
+                            <span class="title"><apex:outputText value="Granting" id="grant3" style="color: #026cb7;" rendered="{!currCase.id == grantId}"/><apex:outputText value="Granting"  id="grant4" rendered="{!currCase.id <> grantId}"/></span>
                             <!--<apex:outputLink target="_top" value="/{!currCase.contactId}"><span class="title">Granting</span></apex:outputLink> -->
 
                             <apex:outputPanel rendered="{!(grantId!= null)}">
@@ -435,7 +435,7 @@
                     <li class="completed in-progress effectDays">
                         <div class="step">
                             <!--<apex:outputLink target="_top" value="/{!currCase.contactId}"><span class="title">Impact</span></apex:outputLink>-->
-                            <span class="title"><apex:outputText value="Impact"  style="color: #026cb7;" rendered="{!currCase.id == effectId}"/><apex:outputText value="Impact"  rendered="{!currCase.id <> effectId}"/></span>
+                            <span class="title"><apex:outputText value="Impact" id="impact1" style="color: #026cb7;" rendered="{!currCase.id == effectId}"/><apex:outputText value="Impact" id="impact2" rendered="{!currCase.id <> effectId}"/></span>
                             <apex:outputPanel rendered="{!effectId!= null}">
                                 <a href="/{!effectId}" target="_parent">
                                     <div class="bar" style="margin-right: 2% !important;">
@@ -459,7 +459,7 @@
                     <li class="in-progress effectDays">
                         <div class="step">
                             <!--<apex:outputLink target="_top" value="/{!currCase.contactId}"><span class="title">Impact</span></apex:outputLink>-->
-                            <span class="title"><apex:outputText value="Impact"  style="color: #026cb7;" rendered="{!currCase.id == effectId}"/><apex:outputText value="Impact"  rendered="{!currCase.id <> effectId}"/>
+                            <span class="title"><apex:outputText value="Impact" id="impact3" style="color: #026cb7;" rendered="{!currCase.id == effectId}"/><apex:outputText value="Impact" id="impact4" rendered="{!currCase.id <> effectId}"/>
                             </span>
 
                             <apex:outputPanel rendered="{!effectId != null}">

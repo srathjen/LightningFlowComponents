@@ -81,5 +81,12 @@
         <label><!-- WIP --></label>
         <name>WIP__c</name>
     </fields>
+    <layouts>
+        <layout>In Kind Donation &amp; Reimbursement File Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
     <startsWith>Vowel</startsWith>
 </CustomObjectTranslation>

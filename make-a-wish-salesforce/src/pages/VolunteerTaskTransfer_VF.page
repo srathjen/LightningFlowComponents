@@ -21,7 +21,7 @@
                         <form>
                             <div class="form-group">
                                 <label for="inputEmail">Assign task to volunteer:</label>
-                                <apex:selectList value="{!assignerId}"  multiselect="false" size="1" styleClass="form-control asigners">
+                                <apex:selectList value="{!assignerId}"  multiselect="false" size="1" styleClass="form-control asigners" id="assinId">
                                     <apex:selectOptions value="{!Assigners}"/>
                                 </apex:selectlist>
                             </div>

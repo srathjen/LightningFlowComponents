@@ -180,4 +180,103 @@ Public class VolunteerOandTTriggerHandler
       if(updateContactList.size() > 0)
           update updateContactList;
     }
+    
+    //This method is used to update the volunteer contact field to send an email to volunteer.
+    public static void UpdateContactRec(List<Volunteer_Orientation_Training__c >volunteerOrientationTrainingList)
+    {    
+        Map<Id,Id>volunteerOandTMap= new Map<Id,Id>();
+        Map<Id,Class_Offering__c> classOffringMap = new Map<Id,Class_Offering__c>();
+        Map<Id,Volunteer_Orientation_Training__c > volunteerTrainingMap = new Map<Id,Volunteer_Orientation_Training__c >();
+        Map<Id,User> UserMap = new Map<Id,User>();
+        Constant_Ac constant = new Constant_Ac();
+        boolean isCanceled = false;
+        Set<Id> dbSet = new Set<Id>();
+        String status;
+        Set<Id> volunteerIdSet = new Set<Id>();
+        Set<Id> currentId = new Set<Id>();
+        Id selfbasedRecType = Schema.Sobjecttype.Class_Offering__c .getRecordTypeInfosByName().get(constant.selfBased).getRecordTypeId();
+        Id VolunteerConRecType = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
+        for(Volunteer_Orientation_Training__c processVolunteerOpp : volunteerOrientationTrainingList){
+            volunteerOandTMap.put(processVolunteerOpp.Class_Offering__c,processVolunteerOpp.Volunteer__c);
+            volunteerIdSet.add(processVolunteerOpp.Volunteer__c);
+            status = processVolunteerOpp.Volunteer_Attendance__c;
+            IF(processVolunteerOpp.Id != Null){
+                currentId.add(processVolunteerOpp.Id);
+            }
+            
+        }
+        if(volunteerOandTMap.size() > 0){
+            for(Class_Offering__c dbClassOffering : [SELECT Id,Chapter_Role_O_T__c,RecordTypeId FROM Class_Offering__c  WHERE Id IN: volunteerOandTMap.KeySet() AND RecordTypeId =: selfbasedRecType]){
+                if(volunteerOandTMap.containsKey(dbClassOffering.Id)){
+                    classOffringMap.put(dbClassOffering.Id,dbClassOffering);
+                    
+                }
+            }
+            
+             
+        }    
+        if(classOffringMap.size() > 0){
+        
+            for(User dbUser : [SELECT Id,UserName,ContactId,ProfileId,Profile.Name FROM User WHERE ContactId IN:volunteerIdSet AND (Profile.Name =: 'Prospective Volunteer (Login)' OR Profile.Name =: 'Prospective Volunteer (Member)')]){
+                UserMap.put(dbUser.ContactId,dbUser);
+                
+            }
+           
+        }
+        
+        if(status == 'Volunteer Cancelled' && currentId.size() > 0){
+        for(Volunteer_Orientation_Training__c  dbVolunteerOrientation : [SELECT Id,Volunteer__c,Type__c,Volunteer_Attendance__c  FROM Volunteer_Orientation_Training__c  WHERE Volunteer__c IN:UserMap.KeySet() AND Type__c =: 'Training' AND Id NOT IN: currentId]){
+            if(dbVolunteerOrientation.Volunteer_Attendance__c == 'Registered'){
+                dbSet.add(dbVolunteerOrientation.Id);
+            }
+        }
+            
+            if(dbSet.size() == 0){
+                isCanceled = true;
+            }
+           
+        }
+        
+        if(UserMap.size() > 0){
+            
+          for(Volunteer_Orientation_Training__c processVolunteerOpp : volunteerOrientationTrainingList){
+         
+                if(classOffringMap.containsKey(processVolunteerOpp.Class_Offering__c)){
+                
+                    if(UserMap.containsKey(processVolunteerOpp.Volunteer__c)){
+                    
+                        if(processVolunteerOpp.Volunteer_Attendance__c != 'Volunteer Cancelled'){
+                        
+                        processVolunteerOpp.Hidden_Volunteer_Training_Status__c = processVolunteerOpp.Volunteer_Attendance__c;
+                        }
+                        if(processVolunteerOpp.Volunteer_Attendance__c == 'Volunteer Cancelled' && isCanceled == true){
+                        processVolunteerOpp.Hidden_Volunteer_Training_Status__c = processVolunteerOpp.Volunteer_Attendance__c;
+                        }
+                        processVolunteerOpp.Hidden_Volunteer_User_Name__c = UserMap.get(processVolunteerOpp.Volunteer__c).UserName;
+                        }
+                }
+          }
+        }
+     }
+     
+     
+    
+    Public static void updateVolunteerHiddenVolOTStatus(Set<Id> volIdsSet, String action){
+        List<Contact> updateContactList = new List<Contact>();
+        for(Contact currentCon:[SELECT Id,Hidden_Volunteer_OT_Status__c FROM Contact WHERE Id in:volIdsSet])
+        {
+            if(action=='training'){
+                currentCon.Hidden_Volunteer_OT_Status__c='Training Registered';
+            }
+            if(action=='Orientation'){
+                currentCon.Hidden_Volunteer_OT_Status__c='Orientation With Completed';
+            }
+            updateContactList.add(currentCon);
+        }
+        
+        if(updateContactList.size() > 0){
+            update updateContactList;
+        }
+    }
+
 }

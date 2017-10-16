@@ -94,6 +94,30 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Background_Check_Email_signature__c</fullName>
+        <description>This is Used in Background check email templates.</description>
+        <externalId>false</externalId>
+        <formula>IF( Volunteer__r.Account.Name=&quot;&quot; &amp;&amp; Owner:User.Phone=&quot;&quot; &amp;&amp; Owner:User.Email=&quot;&quot;, Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName, 
+
+IF( Volunteer__r.Account.Name=&quot;&quot; &amp;&amp; Owner:User.Phone=&quot;&quot;, Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Owner:User.Email, 
+IF( Volunteer__r.Account.Name=&quot;&quot; &amp;&amp; Owner:User.Email=&quot;&quot;, Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Owner:User.Phone, 
+IF(Owner:User.Phone=&quot;&quot; &amp;&amp; Owner:User.Email=&quot;&quot;, Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.Account.Name , 
+
+IF( Volunteer__r.Account.Name=&quot;&quot;, Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Owner:User.Phone + BR()+ Owner:User.Email, 
+IF(Owner:User.Phone=&quot;&quot;, Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.Account.Name  + BR() + Owner:User.Email , 
+IF(Owner:User.Email=&quot;&quot;, Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR()+ Volunteer__r.Account.Name  +BR() + Owner:User.Phone, 
+
+Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.Account.Name + BR()+ Owner:User.Phone+ BR()+ Owner:User.Email 
+)))))))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Background Check Email signature</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Current__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field will indicate that record is active record or not. And also active only apply for most recently created record.</description>
@@ -307,6 +331,38 @@
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>VolunteerRoleOutofCompliance__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to identify whether the volunteer has at least one volunteer role with the status of Out of Compliance.</description>
+        <externalId>false</externalId>
+        <label>Volunteer Role(Out of Compliance)</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>VolunteerRoleTrainedTpendChapReview__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to identify whether the volunteer has at least one volunteer role status as Trained, Traning Pending, Chapter Review</description>
+        <externalId>false</externalId>
+        <label>Volunteer Role(Trained,Tpend,ChapReview)</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Volunteer_FirstName__c</fullName>
+        <externalId>false</externalId>
+        <formula>Volunteer__r.FirstName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Volunteer FirstName</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Volunteer__c</fullName>

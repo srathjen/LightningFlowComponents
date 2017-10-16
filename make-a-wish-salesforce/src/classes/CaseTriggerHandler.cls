@@ -765,8 +765,7 @@ dbLeads.Status = 'DNQ';
     //Used to create Activities for WishPlanning & Anticipation Wish
     public static void wishPlaningAnticipationTaskCreation(Map<Id, Case> wishPlanningAndGrantinTaskParentMap)
     {
-         RecursiveTriggerHandler.blockCaseLockRecursive = false;
-        System.debug('Wish Planning Task Creation Block');
+        RecursiveTriggerHandler.blockCaseLockRecursive = false;
         Constant_AC  constant = new Constant_Ac();    
         Id taskPlanningRecordTypeId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
         Id wishPlanningCaseRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
@@ -1166,7 +1165,6 @@ dbLeads.Status = 'DNQ';
     //To create Wish Granted volunteer task
     public static void wishGrantedSubCaseTaskCreation(Map<Id, Case> parentWishMap) {      
         RecursiveTriggerHandler.blockCaseLockRecursive = false;
-        System.debug('Wish Granted Task Creation Block');
         Constant_AC  constant = new Constant_Ac();  
         Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();  
         Id wishGrantTaskRT = Schema.Sobjecttype.Chapter_Action_Track__c.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
@@ -1593,7 +1591,7 @@ insertchildCaseList.add(newImpactWish); */
     
     //Used the change the access to case team member when their case team role is updated
     public static void chageAccessPermission(Map<Id, Id> caseContactMap) {
-     RecursiveTriggerHandler.blockCaseLockRecursive = false;
+        RecursiveTriggerHandler.blockCaseLockRecursive = false;
         Constant_AC  constant = new Constant_Ac();    
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Map<Id, String> caseTeamRoleFilteredMap = new Map<Id, String>();
@@ -1970,7 +1968,6 @@ updateContactList.add(updateContact);
     // Open all sub case when the status is changed from "DNQ" ,"Hold","Inactive" and "Closed".
     
     Public static void UpdateSubCaseStatus(set<Id> ParentIdSet){
-        RecursiveTriggerHandler.blockCaseLockRecursive = false;
         if(ParentIdSet.size() > 0){
             List<Case> caseList = new List<Case>();
              for(Case dbCase : [SELECT Id,ParentId,Status FROM Case WHERE ParentId IN:ParentIdSet]){
@@ -1984,6 +1981,19 @@ updateContactList.add(updateContact);
              if(caseList.size() > 0)
              update caseList;
         }
+    }
+    //This method is used to update the volunteer Opportunity for In Progress check box is true.
+    public static void updateVolunteerOpp(Set<Id> volunteerOppCaseIdSet){
+        List<Volunteer_Opportunity__c> updateVolOppList = new List<Volunteer_Opportunity__c>();
+        for(Volunteer_Opportunity__c currRec : [SELECT Id,Wish__c FROM Volunteer_Opportunity__c  WHERE Wish__c IN :volunteerOppCaseIdSet AND In_Progress__c = False]){
+            currRec.In_Progress__c = True;
+            updateVolOppList.add(currRec);
+        }
+        if(updateVolOppList.Size() > 0){
+            Update updateVolOppList;
+        }
+        
+         
     }
         
   

@@ -38,14 +38,20 @@ public class VolunteerWorkItems_AC_Test {
     }
     
     public static testMethod void volunteerWishEvents() {
-        
+        Account acc = OrientationandTrainingUtil.createVolunteerAccount();
+        Role__c currRole = OrientationandTrainingUtil.createRole();
+         Role__c currNonWishRole = OrientationandTrainingUtil.createNonWishRole();
+         Chapter_Role__c  currNonWishChapRole = OrientationandTrainingUtil.createChapter(acc.id,currNonWishRole.Id);
         user currUser = [SELECT Id,UserName FROM User WHERE UserName =:'joathanedwards@gmail.com'];
         Case dbCase = [SELECT Id,Status,Wish_Type__c FROM Case WHERE Wish_Type__c =: 'Disney World'];
-        Volunteer_Opportunity__c dbOpp = [SELECT Id,Wish__c FROM Volunteer_Opportunity__c WHERE Wish__c =:dbCase.id Limit 1];
+       
+        Volunteer_Opportunity__c dbOpp = [SELECT Id,Wish__c,Non_Wish_Event__C,Hidden_VolunteerCount_Desc__c,Chapter_Role_Opportunity__c FROM Volunteer_Opportunity__c WHERE  Wish__c =:dbCase.id Limit 1];
+        List<Volunteer_Opportunity__c> voloppList = new List<Volunteer_Opportunity__c>([SELECT Id,Wish__c,Non_Wish_Event__C,Hidden_VolunteerCount_Desc__c,Role__c,Chapter_Role_Opportunity__r.Role_Name__c,Chapter_Name__r.Name  FROM Volunteer_Opportunity__c WHERE Role__c ='Wish Granter']);
         System.RunAs(currUser) {
             test.startTest();
             PageReference pageref = Page.MyAssignment_VF;
             Test.setCurrentPageReference(pageref);
+            VolunteerWorkItems_AC volunteerWorkitem = new VolunteerWorkItems_AC(new ApexPages.StandardController(dbOpp));
             VolunteerWorkItems_AC volunteerWorkitems = new VolunteerWorkItems_AC();
             volunteerWorkitems.volunteerOpportunityRecordId = dbOpp.Id;
             volunteerWorkitems.CurrentWish();
@@ -56,6 +62,8 @@ public class VolunteerWorkItems_AC_Test {
             volunteerWorkitems.getNonWishEvents();
             volunteerWorkitems.RegisterWishEvents();
             volunteerWorkitems.registrationConfirmation();
+            volunteerWorkitems.getChapterRoleOanTStatus(currNonWishChapRole.id);
+            volunteerWorkitems.allowRegisteration(voloppList);
             test.stopTest();
         }
     }     
@@ -75,6 +83,7 @@ public class VolunteerWorkItems_AC_Test {
             volunteerWorkitems.CurrentWish();
             volunteerWorkitems.HistoricalWish();
             volunteerWorkitems.getClosedWish();
+           // volunteerWorkitems.allowRegisteration();
             
             
         }
@@ -93,6 +102,7 @@ public class VolunteerWorkItems_AC_Test {
             volunteerWorkitems.CurrentWish();
             volunteerWorkitems.HistoricalWish();
             volunteerWorkitems.getClosedNonWishEvents();
+            //volunteerWorkitems.allowRegisteration();
             
         }
          test.stopTest();
@@ -108,7 +118,8 @@ public class VolunteerWorkItems_AC_Test {
             Test.setCurrentPageReference(pageref);
             VolunteerWorkItems_AC volunteerWorkitems = new VolunteerWorkItems_AC();
              volunteerWorkitems.volunteerOpportunityRecordId = dbOpp.Id;
-            
+             //volunteerWorkitems.allowRegisteration();
+           // volunteerWorkitems.RegisterNonWishEvents();
             
         }
     }

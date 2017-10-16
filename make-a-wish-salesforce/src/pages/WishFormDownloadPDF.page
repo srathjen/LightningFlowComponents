@@ -44,7 +44,7 @@
           <div style="width:25% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Wish Child’s Diagnosis :</div>
           <div class="{!IF(currWishChild.Diagnosis__c==null,'newfont','oldfont')}" style="width:67%; float:left; margin:3% 0 0 0; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.Diagnosis__c==null,'-',currWishChild.Diagnosis__c)}</div>
           <div style="width:30% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Wish Child’s Primary Address :</div>
-          <div class="{!IF(currWishChild.Primary_Address__c==null,'newfont','oldfont')}" style="width:67%; float:left; margin:3% 20px 0 0 !important; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.Primary_Address__c==null,'-',currWishChild.Primary_Address__c)} </div>
+          <div class="{!IF(currWishChild.PrimaryAddreess__c==null,'newfont','oldfont')}" style="width:67%; float:left; margin:3% 20px 0 0 !important; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.PrimaryAddreess__c==null,'-',currWishChild.PrimaryAddreess__c)} </div>
           <!-- <div style="width:67%; float:left;margin:2% 10px 0 0 !important; border-bottom:1px solid #000 !important;padding-left:1.6em !important;border:none;">{!currWishChild.Diagnosis__c}</div>     -->     
           <div style="width:32% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Wish Child’s Mobile Telephone :</div>
           <div class="{!IF(currWishChild.mobilePhone__c==null,'newfont','oldfont')}" style="width:60%; float:left; margin:3% 0 0 0; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.mobilePhone__c==null,'-',currWishChild.mobilePhone__c)} </div>
@@ -85,7 +85,20 @@
               <div style="margin-bottom:30px;display:block;clear:both;"><span style="width:32%; float:left;">Pet/Animal</span><div class="{!IF(currWishChild.Pet_Animal__c==null,'newfont','oldfont')}" style="width:65%; margin:3px 0 0 0; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.Pet_Animal__c==null,'-',currWishChild.Pet_Animal__c)}</div></div>
               <div style="margin-bottom:30px;display:block;clear:both;"><span style="width:32%; float:left;">Other</span><div class="{!IF(currWishChild.ClassinSchool__c==null,'newfont','oldfont')}" style="width:65%; margin:3px 0 0 0; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.ClassinSchool__c==null,'-',currWishChild.ClassinSchool__c)}</div></div>
           </div>
+          
+          
           <div style="clear:both"></div>
+          <div style="margin-top:36px;">
+          <div style="margin:5px 0 30px 0;">
+          <div style="font-weight:bold; margin-bottom:15px;"> Other Favorites:</div>
+            <div style="margin-bottom:5px !important;"><b>When thinking about a wish, some of my wish ideas were...</b></div>
+            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.When_thinking_some_of_my_wish_ideas_were__c}</div>
+            <!-- <br/>
+            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div>
+            <br/>
+            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
+          </div>
+          
           <div style="margin:5px 0 30px 0;">
             <div style="margin-bottom:5px !important;"><b>When I'm outside, I like to...</b></div>
             <div style="width:100%;border-bottom:1px solid #000 !important; margin:5px 0 0 0; border:none;">{!currWishChild.When_I_m_outside_I_like_to__c}</div>
@@ -117,18 +130,20 @@
       <br/>
       <hr style="border-width: 2px;margin-left: auto;display: block;margin-bottom: 0.5em;"></hr>
     
-       -->    
-        <div style="margin-top:36px;">
-          <div style="margin:5px 0 30px 0;">
-            <div style="margin-bottom:5px !important;"><b>When thinking about a wish, some of my wish ideas were...</b></div>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.When_thinking_some_of_my_wish_ideas_were__c}</div>
-            <!-- <br/>
+       --> 
+       
+       <div style="margin:5px 0 30px 0;">
+        <div style="margin-bottom:5px !important; font-weight: bold;"><b>When I think about my wish, I imagine...</b></div>
+            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.When_I_think_about_my_wish_I_imagine__c}</div>
+           <!--  <br/>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div>
             <br/>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
           </div>
+          
+        
           <div style="margin:5px 0 30px 0;">
-            <div style="margin-bottom:5px !important; font-weight: bold;"><b>MY WISH IS TO...</b></div>
+            <div style="margin-bottom:5px !important; font-weight: bold;"><b>My Wish is to...</b></div>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.MY_WISH_IS_TO__c}</div>
            <!--   <br/>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div>
@@ -151,14 +166,7 @@
             <br/>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
           </div>
-          <div style="margin:5px 0 30px 0;">
-            <div style="margin-bottom:5px !important; font-weight: bold;"><b>When I think about my wish, I imagine...</b></div>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.When_I_think_about_my_wish_I_imagine__c}</div>
-           <!--  <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div>
-            <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
-          </div>
+          
           <div style="margin:5px 0 30px 0;">
             <div style="margin-bottom:5px !important; font-weight: bold;"><b>Wish Notes...</b></div>
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;">{!currWishChild.Wish_Notes__c}</div>
@@ -168,14 +176,7 @@
             <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
             
           </div>
-           <div style="margin:5px 0 30px 0;">
-            <div style="margin-bottom:5px !important;"><b>Wish Type...</b></div>
-            <div style="width:100%;border-bottom:1px solid #000 !important; font-style:underline; border:none;">{!currWishChild.WishType__c}</div>
-           <!--  <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div>
-            <br/>
-            <div style="width:100%;border-bottom:1px solid #000 !important; border:none;"></div> -->
-          </div>
+          
       </div>
       <div style="clear:both"></div>
       </div>
@@ -218,10 +219,21 @@
           <div style="width:8% !important; float:left; font-weight:normal;">DOB : </div>
           <div class="{!IF(wishFamilContact.dob==null,'newfont','oldfont')}" style="width:32%; float:left;border-bottom:1px solid #000 !important; margin:0 10px 0 0; border:none;"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}" ><apex:param value="{!if(wishFamilContact.dob==null,NOW(),wishFamilContact.dob)}" /></apex:outputText></div>  
           <div style="width:20% !important; float:left;margin:0 10px 0 0; font-weight:normal;">Address :</div>
-          <div class="{!IF(wishFamilContact.dob==null,'newfont','oldfont')}" style="width:65%; float:left;border-bottom:1px solid #000 !important;margin-top:0% !important;border:none;">address value</div>  
+          <div class="{!IF(wishFamilContact.dob==null,'newfont','oldfont')}" style="width:65%; float:left;border-bottom:1px solid #000 !important;margin-top:0% !important;border:none;">{!if(wishFamilContact.Street==null,'-',wishFamilContact.Street)}, {!if(wishFamilContact.City ==null,'-',wishFamilContact.City)}, {!if(wishFamilContact.State ==null,'-',wishFamilContact.State)}, {!if(wishFamilContact.PostalCode ==null,'-',wishFamilContact.PostalCode)}</div>  
         </div>
-
-      
+        
+        <div style="clear:both"></div>
+        <div style="margin-top:5px;">
+          <div style="width:23% !important; float:left; font-weight:normal;">T-Shirt Size: :</div>
+          <div class="{!IF(wishFamilContact.tshirtSize ==null,'newfont','oldfont')}" style="width:15%; float:left;border-bottom:1px solid #000 !important;margin-top:0% !important;padding-left:1.6em !important;border:none;">{!if(wishFamilContact.tshirtSize==null,'-',wishFamilContact.tshirtSize)}</div>
+         <div style="width:25% !important; float:left; font-weight:normal;">Residing with Wish Child : </div> 
+         <div class="{!IF(wishFamilContact.residingWishMedical==null,'newfont','oldfont')}" style="width:15%; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(wishFamilContact.residingWishMedical ==null,'-',wishFamilContact.residingWishMedical)}</div>  
+        <div style="width:20% !important; float:left;margin:0 10px 0 0; font-weight:normal;">Participant:</div> 
+         <div class="{!IF(wishFamilContact.sameParentGuardianFlag == null,'newfont','oldfont')}" style="width:65%; float:left;border-bottom:1px solid #000 !important;margin-top:0% !important;border:none;">{!if(wishFamilContact.sameParentGuardianFlag ==null,'-',wishFamilContact.sameParentGuardianFlag)}</div>  
+       
+         </div>
+        
+       
         <div style="clear:both"></div>
         <div style="margin-top:5px;">
           <div style="width:17% !important; float:left; font-weight:normal;">Home Telephone :</div>
@@ -337,7 +349,6 @@ individual(s) listed below.</p>
                 <td style="width:14%;background:#bfbfbf; padding:0 5px;text-align:center;border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;">Relationship to Wish Child</td>
                 <td style="width:10%;background:#bfbfbf; padding:0 5px;text-align:center;border:1px solid #000;border-left:0;">Date of Birth</td>
                 <td style="width:10%;background:#bfbfbf; padding:0 5px;text-align:center;border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;">T-Shirt Size</td>
-                <td style="width:10%;background:#bfbfbf; padding:0 5px;text-align:center;border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;">Medical Needs</td>
                 <td style="width:10%;background:#bfbfbf; padding:0 5px;text-align:center;border-bottom:1px solid #000;border-top:1px solid #000;border-right:1px solid #000;">Residing With Wish Child</td>
             </tr>
        
@@ -350,7 +361,6 @@ individual(s) listed below.</p>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.relationship}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}" ><apex:param value="{!wishFamilContact.dob}" /></apex:outputText></td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.tshirtSize}</td>
-                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.medicalNeeds}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!wishFamilContact.residingWishMedical}</td>
               
             </tr>
@@ -539,7 +549,7 @@ individual(s) listed below.</p>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Medication_require_refrigeration_name__c}</td>
             </tr>
             <tr>
-                <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">Does the wish child currently receive nursing care? If yes, please list the # of hours, agency and phone number.</td>
+                <td style="padding:5px;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">DDoes Any Requested Participant Currently Receive Nursing Care? If yes, please list the # of hours, agency and phone number.</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Wish_child_receive_nursing_care__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Wish_child_receive_nursing_care_Note__c}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!currWishChild.Names_for_receiving_nursing_care__c}</td>

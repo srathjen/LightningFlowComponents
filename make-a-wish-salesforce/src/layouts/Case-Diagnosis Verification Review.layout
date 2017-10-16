@@ -6,52 +6,6 @@
     <excludeButtons>Clone</excludeButtons>
     <excludeButtons>CloseCase</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
-    <feedLayout>
-        <autocollapsePublisher>false</autocollapsePublisher>
-        <compactFeed>false</compactFeed>
-        <feedFilterPosition>LeftFixed</feedFilterPosition>
-        <feedFilters>
-            <feedFilterType>AllUpdates</feedFilterType>
-        </feedFilters>
-        <feedFilters>
-            <feedFilterType>FeedItemType</feedFilterType>
-            <feedItemType>CallLogPost</feedItemType>
-        </feedFilters>
-        <feedFilters>
-            <feedFilterType>FeedItemType</feedFilterType>
-            <feedItemType>TextPost</feedItemType>
-        </feedFilters>
-        <feedFilters>
-            <feedFilterType>FeedItemType</feedFilterType>
-            <feedItemType>ChangeStatusPost</feedItemType>
-        </feedFilters>
-        <feedFilters>
-            <feedFilterType>FeedItemType</feedFilterType>
-            <feedItemType>ActivityEvent</feedItemType>
-        </feedFilters>
-        <fullWidthFeed>false</fullWidthFeed>
-        <hideSidebar>true</hideSidebar>
-        <highlightExternalFeedItems>false</highlightExternalFeedItems>
-        <rightComponents>
-            <componentType>HelpAndToolLinks</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>Following</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>Followers</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>Topics</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>CustomLinks</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>CustomButtons</componentType>
-        </rightComponents>
-        <useInlineFiltersInConsole>false</useInlineFiltersInConsole>
-    </feedLayout>
     <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>false</detailHeading>
@@ -83,6 +37,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Medical_Advisor_Email__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>MAC_Email__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -169,12 +127,6 @@
             <quickActionName>FeedItem.TextPost</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
-            <quickActionName>Case.LogACall</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
-            <quickActionName>Case.ChangeStatus</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
             <quickActionName>FeedItem.ContentPost</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
@@ -234,29 +186,9 @@
     <showRunAssignmentRulesCheckbox>true</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>true</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h36000004nDxh</masterLabel>
-        <sizeX>3</sizeX>
-        <sizeY>3</sizeY>
-        <summaryLayoutItems>
-            <field>CaseNumber</field>
-            <posX>1</posX>
-            <posY>0</posY>
-        </summaryLayoutItems>
-        <summaryLayoutItems>
-            <field>CreatedDate</field>
-            <posX>1</posX>
-            <posY>1</posY>
-        </summaryLayoutItems>
-        <summaryLayoutItems>
-            <field>Subject</field>
-            <posX>1</posX>
-            <posY>2</posY>
-        </summaryLayoutItems>
-        <summaryLayoutItems>
-            <field>Status</field>
-            <posX>2</posX>
-            <posY>0</posY>
-        </summaryLayoutItems>
-        <summaryLayoutStyle>CaseInteraction</summaryLayoutStyle>
+        <masterLabel>00h36000004sxvd</masterLabel>
+        <sizeX>4</sizeX>
+        <sizeY>0</sizeY>
+        <summaryLayoutStyle>Default</summaryLayoutStyle>
     </summaryLayout>
 </Layout>

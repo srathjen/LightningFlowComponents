@@ -69,8 +69,8 @@ Public class VolunteerOpportunityTriggerHandler
         Map<Id,Set<Id>> wishUserMap = new Map<Id,Set<Id>>(); //Used to hold wish related contact and user for contact access to volunteers
         Map<Id,Id> wishRelatedContactMap = new Map<Id,Id>();
         Constant_AC  constant = new Constant_AC();
-        List<Contact> updateContactList = new List<Contact>();
-        List<CaseTeamMember> caseTeamMemberList = new List<CaseTeamMember>();
+        Map<ID,Contact> updateContactMap = new Map<ID,Contact>();
+        Map<Id,CaseTeamMember> caseMemberMap = new Map<Id,CaseTeamMember>();
         Set<Id> parentWishIdSet = new Set<Id>();
         Id volunteerRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.volunteerRT).getRecordTypeId();
         Id volunteerTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.volunteerTaskRT).getRecordTypeId();
@@ -97,7 +97,7 @@ Public class VolunteerOpportunityTriggerHandler
                 Contact updateContact = new Contact();
                 updateContact.id = newVolunteerRole.Volunteer_Name__c;
                 updateContact.Date_of_last_engagement__c  = Date.Today();
-                updateContactList.add(updateContact);
+                updateContactMap.put(updateContact.id, updateContact);
             }  
         }
         for(Case getRelatedContact : [SELECT Id, ContactId FROM Case WHERE Id IN : wishUserMap.keySet()]) {
@@ -146,7 +146,7 @@ Public class VolunteerOpportunityTriggerHandler
                 internalUserIdSet.add(getUserInfo.Id);
             }
         }
-        List<Task> updateOwnerList = new List<Task>();
+        Map<Id,Task> updateOwnerMap = new Map<Id,Task>();
         for(Volunteer_Opportunity__c newVolunteerRole : recordsForCreatingCaseTeams)
         {
             if(newVolunteerRole.Role__c == 'Wish Granter' || newVolunteerRole.Role__c == 'Wish Granter Mentor') {
@@ -155,7 +155,7 @@ Public class VolunteerOpportunityTriggerHandler
                         if(internalUserIdSet.contains(checkOwner.OwnerId)) {
                             if(contactUserInfoMap.containsKey(newVolunteerRole.Volunteer_Name__c)) {
                                 checkOwner.OwnerId = contactUserInfoMap.get(newVolunteerRole.Volunteer_Name__c);
-                                updateOwnerList.add(checkOwner);
+                                updateOwnerMap.put(checkOwner.id,checkOwner);
                             }
                         }
                     }
@@ -173,12 +173,12 @@ Public class VolunteerOpportunityTriggerHandler
                     }
                     if(teamMemberRoleMap.containsKey(newVolunteerRole.Role__c) && !wishMembersMap.get(newVolunteerRole.wish__c).contains(volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c))){
                         newCaseTeamMembers.TeamRoleId = teamMemberRoleMap.get(newVolunteerRole.Role__c).id;
-                        caseTeamMemberList.add(newCaseTeamMembers);
+                        caseMemberMap.put(newCaseTeamMembers.id, newCaseTeamMembers);
                     }
                     else if(teamMemberRoleMap.containsKey(newVolunteerRole.Role__c) && wishMembersMap.get(newVolunteerRole.wish__c).contains(volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c)) && (newVolunteerRole.Role__c == 'Wish Granter' || newVolunteerRole.Role__c == 'Wish Granter Mentor')) {
                         newCaseTeamMembers.TeamRoleId = teamMemberRoleMap.get(newVolunteerRole.Role__c).id;
                         newCaseTeamMembers.Id = caseTeamMemberMap.get(volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c)).Id;
-                        caseTeamMemberList.add(newCaseTeamMembers);
+                        caseMemberMap.put(newCaseTeamMembers.id, newCaseTeamMembers);
                     } 
                     else {
                         //newCaseTeamMembers.TeamRoleId = caseRoleID.id;
@@ -204,8 +204,8 @@ Public class VolunteerOpportunityTriggerHandler
                 }
             }
         }
-        if(updateOwnerList.size() > 0) {
-            update updateOwnerList; 
+        if(updateOwnerMap.size() > 0) {
+            update updateOwnerMap.Values(); 
         }
         List<Task> birthDayTaskList = new List<Task>();
         for(Task birthdayTaskInfo : [SELECT Id, WhatId, Subject, OwnerId FROM Task WHERE Subject = 'Wish Child Birthday Reminder' AND WhatId IN : volunteerMap.keySet() AND isClosed = false AND RecordType.Name = 'Staff']) {
@@ -223,11 +223,11 @@ Public class VolunteerOpportunityTriggerHandler
         if(updateRoleList.size() > 0) {
             update updateRoleList;
         }
-        if(updateContactList.size() > 0)
-            update updateContactList;
-        if(CaseTeamMemberList.size() > 0)
+        if(updateContactMap.size() > 0)
+            update updateContactMap.values();
+        if(caseMemberMap.size() > 0)
         {
-            upsert CaseTeamMemberList;
+            upsert caseMemberMap.values();
             if(wishUserMap.size() > 0) {
                 List<ContactShare> contactToShareList = new List<ContactShare>();
                 List<CaseShare> caseShareList= new List<CaseShare>();
@@ -236,10 +236,10 @@ Public class VolunteerOpportunityTriggerHandler
                         for(Id userId : wishUserMap.get(caseId)) {
                             ContactShare shareContact = new ContactShare();
                             shareContact.ContactAccessLevel = 'Read';
-                            if(wishRelatedContactMap.containsKey(caseId)) {
+                            if(wishRelatedContactMap.containsKey(caseId) && wishRelatedContactMap.get(caseId)!= Null ) {
                                 shareContact.ContactId = wishRelatedContactMap.get(caseId);
                             }
-                            if(volunteerUserMap.containsKey(userId)) {
+                            if(volunteerUserMap.containsKey(userId)&& volunteerUserMap.get(userId) != Null) {
                                 shareContact.UserOrGroupId = volunteerUserMap.get(userId);
                                 contactToShareList.add(shareContact);
                             }

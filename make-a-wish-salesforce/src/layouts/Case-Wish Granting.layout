@@ -7,52 +7,6 @@
     <excludeButtons>CloseCase</excludeButtons>
     <excludeButtons>Share</excludeButtons>
     <excludeButtons>Submit</excludeButtons>
-    <feedLayout>
-        <autocollapsePublisher>false</autocollapsePublisher>
-        <compactFeed>false</compactFeed>
-        <feedFilterPosition>LeftFixed</feedFilterPosition>
-        <feedFilters>
-            <feedFilterType>AllUpdates</feedFilterType>
-        </feedFilters>
-        <feedFilters>
-            <feedFilterType>FeedItemType</feedFilterType>
-            <feedItemType>CallLogPost</feedItemType>
-        </feedFilters>
-        <feedFilters>
-            <feedFilterType>FeedItemType</feedFilterType>
-            <feedItemType>TextPost</feedItemType>
-        </feedFilters>
-        <feedFilters>
-            <feedFilterType>FeedItemType</feedFilterType>
-            <feedItemType>ChangeStatusPost</feedItemType>
-        </feedFilters>
-        <feedFilters>
-            <feedFilterType>FeedItemType</feedFilterType>
-            <feedItemType>ActivityEvent</feedItemType>
-        </feedFilters>
-        <fullWidthFeed>false</fullWidthFeed>
-        <hideSidebar>true</hideSidebar>
-        <highlightExternalFeedItems>false</highlightExternalFeedItems>
-        <rightComponents>
-            <componentType>HelpAndToolLinks</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>Following</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>Followers</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>Topics</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>CustomLinks</componentType>
-        </rightComponents>
-        <rightComponents>
-            <componentType>CustomButtons</componentType>
-        </rightComponents>
-        <useInlineFiltersInConsole>false</useInlineFiltersInConsole>
-    </feedLayout>
     <layoutSections>
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
@@ -64,7 +18,7 @@
                 <page>WishJourney</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>false</showScrollbars>
-                <width>100%</width>
+                <width>70%</width>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
@@ -80,8 +34,8 @@
                 <field>OwnerId</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>AnticipatedStart_Date__c</field>
+                <behavior>Edit</behavior>
+                <field>Start_Date__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -144,10 +98,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Anticipated_Start_Date__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Time__c</field>
             </layoutItems>
             <layoutItems>
@@ -189,25 +139,25 @@
                 <field>Status</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>Status_Date__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>Subject</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>Description</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>ContactId</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>ParentId</field>
             </layoutItems>
             <layoutItems>
@@ -219,7 +169,7 @@
                 <field>SuppliedEmail</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>Priority</field>
             </layoutItems>
         </layoutColumns>
@@ -238,12 +188,6 @@
     <quickActionList>
         <quickActionListItems>
             <quickActionName>FeedItem.TextPost</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
-            <quickActionName>Case.LogACall</quickActionName>
-        </quickActionListItems>
-        <quickActionListItems>
-            <quickActionName>Case.ChangeStatus</quickActionName>
         </quickActionListItems>
         <quickActionListItems>
             <quickActionName>FeedItem.ContentPost</quickActionName>
@@ -276,25 +220,11 @@
         <fields>NAME</fields>
         <fields>RECORDTYPE</fields>
         <fields>Reservation_Name__c</fields>
-        <fields>Confirmation__c</fields>
         <fields>Company__c</fields>
         <fields>Airline__c</fields>
         <fields>Hotel_Name__c</fields>
+        <fields>Share_w_Family__c</fields>
         <relatedList>Travel_Data__c.Parent_Wish__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <relatedList>RelatedEntityHistoryList</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <excludeButtons>LogCall</excludeButtons>
-        <excludeButtons>MailMerge</excludeButtons>
-        <fields>TASK.SUBJECT</fields>
-        <fields>TASK.WHO_NAME</fields>
-        <fields>ACTIVITY.TASK</fields>
-        <fields>TASK.DUE_DATE</fields>
-        <fields>CORE.USERS.FULL_NAME</fields>
-        <fields>TASK.LAST_UPDATE</fields>
-        <relatedList>RelatedHistoryList</relatedList>
     </relatedLists>
     <relatedObjects>ContactId</relatedObjects>
     <runAssignmentRulesDefault>false</runAssignmentRulesDefault>
@@ -305,29 +235,9 @@
     <showRunAssignmentRulesCheckbox>true</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>true</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h36000004nDxj</masterLabel>
-        <sizeX>3</sizeX>
-        <sizeY>3</sizeY>
-        <summaryLayoutItems>
-            <field>CaseNumber</field>
-            <posX>1</posX>
-            <posY>0</posY>
-        </summaryLayoutItems>
-        <summaryLayoutItems>
-            <field>CreatedDate</field>
-            <posX>1</posX>
-            <posY>1</posY>
-        </summaryLayoutItems>
-        <summaryLayoutItems>
-            <field>Subject</field>
-            <posX>1</posX>
-            <posY>2</posY>
-        </summaryLayoutItems>
-        <summaryLayoutItems>
-            <field>OwnerId</field>
-            <posX>2</posX>
-            <posY>0</posY>
-        </summaryLayoutItems>
-        <summaryLayoutStyle>CaseInteraction</summaryLayoutStyle>
+        <masterLabel>00h36000004sxvx</masterLabel>
+        <sizeX>4</sizeX>
+        <sizeY>0</sizeY>
+        <summaryLayoutStyle>Default</summaryLayoutStyle>
     </summaryLayout>
 </Layout>
