@@ -118,9 +118,13 @@
     <filter>
         <criteriaItems>
             <column>Contact$Region_Chapter__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact$Test_Record__c</column>
+            <operator>equals</operator>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>

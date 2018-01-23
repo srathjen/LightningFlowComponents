@@ -96,13 +96,12 @@
     <crossFilters>
         <operation>without</operation>
         <primaryTableColumn>Case.In_Kind_Donation_Reimbursement__r$Id</primaryTableColumn>
-        <relatedTable>In_Kind_Donation_Reimbursement_File__c</relatedTable>
+        <relatedTable>InkindDon_reimburseFile__c</relatedTable>
         <relatedTableJoinColumn>Parent__c</relatedTableJoinColumn>
     </crossFilters>
     <filter>
         <criteriaItems>
             <column>Case.In_Kind_Donation_Reimbursement__r$RecordType</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>In_Kind_Donation_Reimbursement__c.Reimbursement</value>
         </criteriaItems>

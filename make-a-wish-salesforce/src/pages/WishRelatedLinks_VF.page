@@ -3,7 +3,7 @@
     function validateform(){
      if(!{!showPopup}){
       alert('Participant information must be completed and saved on wish forms before completing this form.');
-    return false;
+    return true;
     }
      }
     </script>
@@ -35,11 +35,11 @@
     <apex:pageBlockSection title="Essential Forms For All Wishes" rendered="{!WishFamilyForm != Null}" columns="2"  >
     <apex:outputpanel >
     <div style="position:relative;left:5px;"> 
-      <div style="margin-left:15%"><apex:outputLink target="_blank" value="{!WishFamilyForm}"> Wish Forms </apex:outputLink></div> 
-                <div style="margin-left:15%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!LiabilityFrom}" rendered="{!showPopup = true}">Liability And Publicity Release Form </apex:outputLink></div>
+      <div style="margin-left:10%"><apex:outputLink target="_blank" value="{!WishFamilyForm}"> Wish Forms </apex:outputLink></div> 
+                <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!LiabilityFrom}" rendered="{!showPopup = true}">Liability And Publicity Release Form </apex:outputLink></div>
                 <apex:outputpanel rendered="{!showPopup = false}" >
-                  <div style="margin-left:15%; margin-top: 2%;"> <apex:commandLink onclick="validateform()" value="Liability And Publicity Release Form "/></div> 
-                  <!-- <div style="margin-left:10%; margin-top: 2%; width:400px;"> <apex:commandLink onclick="validateform()" value="Liability And Publicity Release Form – Minor Participants"/></div> -->
+                  <div style="margin-left:10%; margin-top: 2%;"> <apex:commandLink onclick="validateform()" value="Liability And Publicity Release Form "/></div> 
+                   <div style="margin-left:10%; margin-top: 2%; width:400px;"> <apex:commandLink onclick="validateform()" value="Liability And Publicity Release Form – Minor Participants"/></div> 
                 </apex:outputpanel>
                 </div>
                 </apex:outputpanel>
@@ -47,19 +47,11 @@
      <apex:pageBlockSection title="Additional Forms If Needed" rendered="{!WishFamilyForm != Null}"  columns="2" >
      <apex:outputPanel >
      <div style="position:relative;left:5px;"> 
-      <div style="margin-left:15%; margin-top: 2%; width: 250%;"><apex:outputLink target="_blank" value="{!miniorParticipant}" rendered="{!showPopup = true}">Liability And Publicity Release Form - Minor Participants</apex:outputLink></div> 
-       <apex:outputpanel rendered="{!showPopup = false}" >
-              <div style="margin-left:10%; margin-top: 2%; width:400px;"> <apex:commandLink onclick="validateform()" value="Liability And Publicity Release Form – Minor Participants"/></div>
-              <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!absentParentForm}">Absent Parent Form</apex:outputLink></div>
+      <div style="margin-left:10%; margin-top: 2%; width: 250%;"><apex:outputLink target="_blank" value="{!miniorParticipant}" rendered="{!showPopup = true}">Liability And Publicity Release Form - Minor Participants</apex:outputLink></div> 
+                <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!absentParentForm}">Absent Parent Form</apex:outputLink></div>
                        <div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!singleForm}">Single Parent Form</apex:outputLink></div>
-                  <!-- <div style="margin-left:10%; margin-top: 2%; width:400px;"> <apex:commandLink onclick="validateform()" value="Liability And Publicity Release Form – Minor Participants"/></div> -->
-                </apex:outputpanel>
-                       <apex:outputpanel rendered="{!showPopup = true}" >
-                <div style="margin-left:15%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!absentParentForm}">Absent Parent Form</apex:outputLink></div>
-                       <div style="margin-left:15%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!singleForm}">Single Parent Form</apex:outputLink></div>
                 <!--<div style="margin-left:10%; margin-top: 2%;"><apex:outputLink target="_blank" value="{!celebrityForm}">Entertainment And Sports Wish LOU</apex:outputLink></div>--> 
                <!--  <div style="margin-left:57%; margin-top: -18%;"><apex:outputLink target="_blank" value="{!contactInfo}">View or Update Family Contact Info</apex:outputLink></div> -->
-               </apex:outputpanel>
               </div>
               </apex:outputPanel>
       </apex:pageBlockSection> 

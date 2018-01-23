@@ -7,8 +7,13 @@ is completed then it will create a new conflict of interest records.
 *****************************************************************************************************/
 
 Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, after update) {
-    
-    if(Trigger.isBefore && Trigger.isUpdate) {
+   
+    if((trigger.isBefore && trigger.isUpdate && RecursiveTriggerHandler.blockBeforeUpdate == true) || (trigger.isAfter && trigger.isUpdate && RecursiveTriggerHandler.blockAfterUpdate)){
+        system.debug('@@@ NOT EXECUTE @@@'+RecursiveTriggerHandler.blockBeforeUpdate);
+        system.debug('@@@ NOT EXECUTE @@@'+RecursiveTriggerHandler.blockAfterUpdate);
+     return; 
+    } 
+    if(Trigger.isBefore && Trigger.isUpdate && RecursiveTriggerHandler.blockBeforeUpdate == false) {
         List<Contact> contactList = New List<Contact>();
         List<Contact> confilictContactList = New List<Contact>(); 
         List<Conflict_Of_Interest__c> conflictList = New List<Conflict_Of_Interest__c>();
@@ -87,15 +92,6 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
         if(conflictList.size() > 0)
         {
             Insert conflictList;
-            /*  List<Conflict_Of_Interest__c> dbconflictRec = [SELECT Id,Name,Expiration_Date__c,Signed_Date__c,Volunteer_Contact__c,Active__c FROM  Conflict_Of_Interest__c WHERE Volunteer_Contact__c  IN: volunteercontactIdSet  AND Active__c = TRUE Order by CreatedDate DESC];
-
-if(dbconflictRec[1].Id != Null){
-dbconflictRec[1].Active__c = FALSE;
-
-update dbconflictRec;
-} */
-            
-            
             
             for(dsfs__DocuSign_Status__c dsts:Trigger.new){
                 Contact con = New Contact();
@@ -104,7 +100,7 @@ update dbconflictRec;
                 confilictContactList.add(con);
                 
                 dsts.Conflict_Of_Interest__c = conflictList[0].Id;
-                dsts.Docusign_Hidden_Contact__c = null;
+                //dsts.Docusign_Hidden_Contact__c = null;
                 
                 
             }
@@ -191,18 +187,9 @@ update dbconflictRec;
                 for(dsfs__DocuSign_Status__c dsts:Trigger.new)
                 {
                     dsts.Conflict_Of_Interest__c = conflictList[0].Id;
-                    dsts.Docusign_Hidden_Contact__c = null;
+                    //dsts.Docusign_Hidden_Contact__c = null;
                 }
                 
-                /*  List<Conflict_Of_Interest__c> dbconflictRec = [SELECT Id,Name,Expiration_Date__c,Signed_Date__c,Volunteer_Contact__c,Active__c FROM  Conflict_Of_Interest__c WHERE Active__c = TRUE AND Volunteer_Contact__c IN: volunteercontactSet Order by CreatedDate DESC];
-if(dbconflictRec.size() > 1){
-if(dbconflictRec[1].Id != Null){
-dbconflictRec[1].Active__c = FALSE;
-
-if(!Test.isRunningTest())
-update dbconflictRec;
-}
-}*/
             }
             
         }
@@ -213,7 +200,7 @@ update dbconflictRec;
         }
     }
     
-    if(Trigger.isAfter && Trigger.isUpdate) {
+    if(Trigger.isAfter && Trigger.isUpdate && RecursiveTriggerHandler.blockAfterUpdate == false) {
         
         Map<Id, Id> contactDocusignMap = new Map<Id, Id>(); // Holds Contact and its related Docusign Status record Id
         

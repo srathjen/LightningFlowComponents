@@ -9,7 +9,7 @@
     <tab>standard-Contact</tab>
     <tab>standard-report</tab>
     <tab>standard-Dashboard</tab>
-    <tab>In_Kind_Donation_Reimbursement_File__c</tab>
+    <tab>InkindDon_reimburseFile__c</tab>
     <tab>Travel_Data__c</tab>
     <tab>dsfs__DocuSignAccountConfiguration__c</tab>
     <tab>Awards_Recognition__c</tab>

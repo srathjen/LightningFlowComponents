@@ -1940,6 +1940,10 @@
         <name>Family_Dynamics_Validation</name>
     </validationRules>
     <validationRules>
+        <errorMessage><!-- Chapter Name should not be Blank. --></errorMessage>
+        <name>InkindAccount_Chapter_Validation</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- You don&apos;t have access to create to this type of  account --></errorMessage>
         <name>Program_NationalStaff_Account_Validation</name>
     </validationRules>

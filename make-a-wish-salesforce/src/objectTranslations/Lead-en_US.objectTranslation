@@ -519,6 +519,54 @@
         <name>AddressVerified__c</name>
     </fields>
     <fields>
+        <label><!-- Alternate 1 Hospital/Treatment Facility --></label>
+        <name>Alternate1HospitalTreatmentFacility__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate 1 Med Professional First Name --></label>
+        <name>Alternate1MedProfessionalFirstName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate 1 Med Professional Last Name --></label>
+        <name>Alternate1MedProfessionalLastName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate 1 Med Professional Phone --></label>
+        <name>Alternate1MedProfessionalPhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate 1 Med Professional Email --></label>
+        <name>Alternate1MedicalProfessionalEmail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate 1 Med Professional Fax --></label>
+        <name>Alternate1MedicalProfessionalFax__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate 2 Hospital/Treatment Facility --></label>
+        <name>Alternate2HospitalTreatmentFacility__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate 2 Med Professional Email --></label>
+        <name>Alternate2MedProfessionalEmail__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate 2 Med Professional First Name --></label>
+        <name>Alternate2MedProfessionalFirstName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate 2 Med Professional Last Name --></label>
+        <name>Alternate2MedProfessionalLastName__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate 2 Med Professional Phone --></label>
+        <name>Alternate2MedProfessionalPhone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Alternate 2 Med Professional Fax --></label>
+        <name>Alternate2MedicalProfessionalFax__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Angina --></label>
         <name>Angina__c</name>
     </fields>
@@ -757,6 +805,10 @@
         <name>Debilitation_may_extend_over_many_years__c</name>
     </fields>
     <fields>
+        <label><!-- Diagnosis Given By Referrer --></label>
+        <name>Diagnosis_Given_By_Referrer__c</name>
+    </fields>
+    <fields>
         <label><!-- Diagnosis Pending Days --></label>
         <name>Diagnosis_Pending_Days__c</name>
     </fields>
@@ -787,6 +839,10 @@
             <masterLabel>Male</masterLabel>
             <translation><!-- Male --></translation>
         </picklistValues>
+        <picklistValues>
+            <masterLabel>Self-describe</masterLabel>
+            <translation><!-- Self-describe --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <help><!-- Has this child ever received a prior wish from MAW or any other wish granting organization? --></help>
@@ -798,6 +854,18 @@
         <name>Heart_Failure__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Alternate 1 Med Professional Id --></label>
+        <name>HiddenAlternate1MedProfessionalId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Alternate 2 Med Professional Id --></label>
+        <name>HiddenAlternate2MedProfessionalId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Medical Professional Email --></label>
+        <name>HiddenMedicalProfessionalEmail__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Additional Parent Id --></label>
         <name>Hidden_Additional_Parent_Id__c</name>
     </fields>
@@ -806,8 +874,20 @@
         <name>Hidden_Best_Contact_Person_Id__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Chapter Name --></label>
+        <name>Hidden_Chapter_Name__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden DV form Medical professional Type --></label>
         <name>Hidden_DV_form_Medical_professional_Type__c</name>
+        <picklistValues>
+            <masterLabel>Alternate 1 Medical Professional</masterLabel>
+            <translation><!-- Alternate 1 Medical Professional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Alternate 2 Medical Professional</masterLabel>
+            <translation><!-- Alternate 2 Medical Professional --></translation>
+        </picklistValues>
         <picklistValues>
             <masterLabel>Best contact for Physician</masterLabel>
             <translation><!-- Best contact for Physician --></translation>
@@ -920,6 +1000,11 @@
             <masterLabel>Web Search</masterLabel>
             <translation><!-- Web Search --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- ICD Given By Referrer --></label>
+        <name>ICD_Given_By_Referrer__c</name>
+        <relationshipLabel><!-- Leads (ICD Given By Referrer) --></relationshipLabel>
     </fields>
     <fields>
         <label><!-- I Am Recognized To Practice As A --></label>
@@ -1075,8 +1160,8 @@
         <label><!-- Medical Provider Category --></label>
         <name>Medical_Provider_Category__c</name>
         <picklistValues>
-            <masterLabel>Child Life Specialist</masterLabel>
-            <translation><!-- Child Life Specialist --></translation>
+            <masterLabel>Child Life Professional</masterLabel>
+            <translation><!-- Child Life Professional --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Nurse</masterLabel>
@@ -1139,6 +1224,10 @@
     <fields>
         <label><!-- Other Relationship To Child --></label>
         <name>Other_Relationship_To_Child__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Diagnosis --></label>
+        <name>Other_diagnosis__c</name>
     </fields>
     <fields>
         <label><!-- Hidden No Duplicate Found --></label>
@@ -1600,6 +1689,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Referral Comment --></label>
+        <name>ReferralComment__c</name>
+    </fields>
+    <fields>
         <help><!-- Date the Initial lead from an authorized referral source is received. --></help>
         <label><!-- Referred Date --></label>
         <name>Referred_Date__c</name>
@@ -1702,6 +1795,10 @@
         <label><!-- Secondary Diagnosis 4 ICD-10 Code --></label>
         <name>SD4_ICD_Code__c</name>
         <relationshipLabel><!-- Leads (Secondary Diagnosis 4 ICD-10 Code) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Self-describe comment box --></label>
+        <name>Self_describe_comment_box__c</name>
     </fields>
     <fields>
         <label><!-- Short Description --></label>
@@ -2046,6 +2143,10 @@
     </fields>
     <layouts>
         <layout>Lead Layout</layout>
+        <sections>
+            <label><!-- Alternate Medical Professionals --></label>
+            <section>Alternate Medical Professionals</section>
+        </sections>
         <sections>
             <label><!-- Attachments --></label>
             <section>Attachments</section>

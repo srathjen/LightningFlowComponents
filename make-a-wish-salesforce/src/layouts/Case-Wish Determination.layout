@@ -14,11 +14,11 @@
         <label>Wish Status Bar</label>
         <layoutColumns>
             <layoutItems>
-                <height>200</height>
+                <height>230</height>
                 <page>WishJourney</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>false</showScrollbars>
-                <width>70%</width>
+                <width>98%</width>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>

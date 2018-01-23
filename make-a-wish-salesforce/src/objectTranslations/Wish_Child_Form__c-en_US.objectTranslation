@@ -265,12 +265,12 @@
             <translation><!-- Female --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>I choose not to self-identify</masterLabel>
-            <translation><!-- I choose not to self-identify --></translation>
-        </picklistValues>
-        <picklistValues>
             <masterLabel>Male</masterLabel>
             <translation><!-- Male --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Self-describe</masterLabel>
+            <translation><!-- Self-describe --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -856,6 +856,14 @@ provide contact information for each site on which you are active. --></help>
     <fields>
         <label><!-- To me,the most important part of my wish --></label>
         <name>To_me_the_most_important_part_of_my_wish__c</name>
+    </fields>
+    <fields>
+        <label><!-- WPP&amp;WLSendForSign --></label>
+        <name>WPP_WLSendForSign__c</name>
+    </fields>
+    <fields>
+        <label><!-- WPP&amp;WLSignNow --></label>
+        <name>WPP_WLSignNow__c</name>
     </fields>
     <fields>
         <label><!-- When I’m inside, I like to… --></label>

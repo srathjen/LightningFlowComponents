@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
     <alerts>
+        <fullName>COI_BGCExpAlertToVolunteer</fullName>
+        <description>COI : BGCExpAlertToVolunteer</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Hidden_Volunteer_Contact_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Automated_Volunteer_Templates/COI_Expiring_30_Days_Email_Template</template>
+    </alerts>
+    <alerts>
         <fullName>COI_Expiring_After_7_Days_Email_Alert</fullName>
         <description>COI:Expiring After 7 Days Email Alert</description>
         <protected>false</protected>
@@ -85,6 +97,16 @@
         <template>Automated_Volunteer_Templates/COI_Expiring_30_Days_Email_Template</template>
     </alerts>
     <fieldUpdates>
+        <fullName>COI_UpdateBGCExpReminder</fullName>
+        <description>Used to uncheck Hidden Trigger COI Exp Reminder in Background Check record</description>
+        <field>Hidden_Trigger_COI_Exp_Reminder__c</field>
+        <literalValue>0</literalValue>
+        <name>COI : UpdateBGCExpReminder</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
+    <fieldUpdates>
         <fullName>Hidden_Conflict_Expire</fullName>
         <field>HiddenConflictExpire__c</field>
         <literalValue>1</literalValue>
@@ -103,6 +125,50 @@
         <operation>Literal</operation>
         <protected>false</protected>
     </fieldUpdates>
+    <rules>
+        <fullName>COI %3A ExpirationNotificationToVolunteer</fullName>
+        <actions>
+            <name>COI_BGCExpAlertToVolunteer</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>COI_UpdateBGCExpReminder</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>COI_ET_COI_Expiring</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5</booleanFilter>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.Current__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.Expiration_Date__c</field>
+            <operation>greaterThan</operation>
+            <value>TODAY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.Volunteer_is_Inactive__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.VolunteerRoleTrainedTpendChapReview__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Conflict_Of_Interest__c.Hidden_Trigger_COI_Exp_Reminder__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>We are sending email notification for volunteer reminding  COI  Expiring.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
     <rules>
         <fullName>COI%3A Volunteer Status Update</fullName>
         <active>true</active>
@@ -173,16 +239,17 @@
     </rules>
     <rules>
         <fullName>COI%3AExpiring 30 Days Workflow Rule</fullName>
-        <active>true</active>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4</booleanFilter>
         <criteriaItems>
             <field>Conflict_Of_Interest__c.Current__c</field>
             <operation>equals</operation>
             <value>True</value>
         </criteriaItems>
         <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
+            <field>Conflict_Of_Interest__c.Expiration_Date__c</field>
+            <operation>greaterThan</operation>
+            <value>TODAY</value>
         </criteriaItems>
         <criteriaItems>
             <field>Conflict_Of_Interest__c.Volunteer_is_Inactive__c</field>
@@ -278,6 +345,17 @@
         <protected>false</protected>
         <status>Completed</status>
         <subject>COI ET : COI Expired (7 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>COI_ET_COI_Expiring</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>COI ET : COI Expiring</subject>
     </tasks>
     <tasks>
         <fullName>COI_ET_COI_Expiring_16_Days</fullName>

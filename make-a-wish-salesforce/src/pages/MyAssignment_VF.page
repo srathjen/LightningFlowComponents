@@ -46,8 +46,12 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                     <input type="button" class="col-xs-12 col-sm-12 closedTask btn-info btn" value="Historical" />
                                 </div>
                             </div>
+                            
+                            
+
                             <div class="tab-panel-wrap">
-                                <button type="button" class="btn btn-current w-event">Wish</button>
+                                <button type="button" class="btn btn-current w-event">Wish Granter</button>
+                                <button type="button" class="btn wr-event">Wish Related</button>
                                 <button type="button" class="btn n-event">Non-Wish and Events</button>
                                 <div class="openActivities">
                                     <div class="Curr-WishEvent">
@@ -67,7 +71,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                             <tbody>
                                                 <apex:repeat value="{!VolunteerAssignedWishEvents}" var="con1">
                                                     
-                                                    <apex:outputPanel rendered="{!visibilityMap[con1.Id]}">
+                                                    <apex:outputPanel rendered="{!AND(visibilityMap[con1.Id],OR(con1.Role__c == 'Wish Granter',con1.Role__c == 'Wish Granter Mentor'))}">
                                                         
                                                         <tr>
                                                             <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsWish}" var="fieldValue">
@@ -105,6 +109,64 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                             </tbody>
                                         </table>
                                     </div>
+                                    
+                                    <div class="Curr-WishRelatedEvent">
+                                        <table id="dataTab1" class="display table table-maw table-hover" width="100%">
+                                            <thead class="thead-default">
+                                                <tr>
+                                                    <th>Assignment</th>
+                                                    <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsWish}" var="fieldValue">
+                                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID'  && fieldValue.label != 'About Me' && fieldValue.label != 'Hobbies' && fieldValue.label != 'Waiting Since' }">
+                                                           <apex:outputPanel rendered="{!fieldValue.label != 'Wish National Type' && fieldValue.label != 'Wish Status'}"> <th>{!fieldValue.label}</th></apex:outputPanel>
+                                                            <apex:outputPanel rendered="{!fieldValue.label == 'Wish National Type'}"><th>Wish Type</th></apex:outputPanel>
+                                                            <apex:outputPanel rendered="{!fieldValue.label == 'Wish Status'}"><th>Status</th></apex:outputPanel>
+                                                        </apex:outputpanel>
+                                                    </apex:repeat>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <apex:repeat value="{!VolunteerAssignedWishEvents}" var="con1">
+                                                    <apex:outputPanel rendered=""></apex:outputPanel>
+                                                    <apex:outputPanel rendered="{!AND(visibilityMap[con1.Id],AND(con1.Role__c != 'Wish Granter',con1.Role__c != 'Wish Granter Mentor'))}">
+                                                        
+                                                        <tr>
+                                                            <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsWish}" var="fieldValue">
+                                                                
+                                                                <apex:outputpanel rendered="{!fieldValue.label = 'Record ID' }">
+                                                                    <td>
+                                                                        <!--<a href="/{!con1.Id}">View</a>-->
+                                                                        <apex:outputText id="rejected" rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c == 'Not Approved'}">Not Approved</apex:outputText>
+                                                                        <apex:outputText id="inactive" rendered="{!con1.Status__c == 'Inactive' && con1.Reason_Inactive__c != 'Not Approved'}">Inactive</apex:outputText>
+                                                                        <apex:outputText id="pending" rendered="{!con1.Status__c == 'Pending'}">Pending Approval</apex:outputText>
+                                                                        <apex:outputLink value="/{!con1.Id}" id="approved" rendered="{!con1.Status__c == 'Approved' && con1.Role__c != 'Wish Granter' && con1.Role__c != 'Wish Granter Mentor'}">View</apex:outputLink>
+                                                                        <apex:outputLink value="/{!con1.Wish__c}" id="approved1" rendered="{!con1.Status__c == 'Approved' && con1.Role__c == 'Wish Granter' || con1.Role__c == 'Wish Granter Mentor'}">View</apex:outputLink>
+                                                                    </td>
+                                                                </apex:outputpanel>
+                                                                <apex:outputpanel rendered="{!fieldValue.label != 'Record ID'  && fieldValue.label != 'About Me' && fieldValue.label != 'Hobbies' && fieldValue.label != 'Waiting Since' && fieldValue.label  != 'In Progress'}">
+                                                                    
+                                                                    <td>{!con1[fieldValue]}</td>
+                                                                    
+                                                                </apex:outputpanel>
+                                                                <!-- apex:outputpanel rendered="{!fieldValue.label  == 'In Progress' }">
+                                                            <td>{!if(!con1[fieldValue],"True","False")}</td>
+                                                        </apex:outputpanel -->
+                                                               <!-- <apex:outputpanel rendered="{!fieldValue.label  == 'Waiting Since'}">
+                                                                    <td>
+                                                                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date1">
+                                                                            <apex:param value="{!con1[fieldValue]}"/>
+                                                                        </apex:outputText>
+                                                                    </td>
+                                                                </apex:outputpanel> -->
+                                                                
+                                                            </apex:repeat>
+                                                        </tr>
+                                                    </apex:outputPanel>
+                                                </apex:repeat>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    
                                     <div class="Curr-NonWishEvent">
                                         <table id="dataTab2" class="display table table-maw table-hover" width="100%">
                                             <thead class="thead-default">
@@ -178,6 +240,53 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                             </thead>
                                             <tbody>
                                                 <apex:repeat value="{!ClosedWish}" var="con1">
+                                                <apex:outputpanel rendered="{!OR(con1.Role__c == 'Wish Granter',con1.Role__c == 'Wish Granter Mentor')}" >
+                                                    <tr>
+                                                        
+                                                        <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsClosedWish}" var="fieldValue">
+                                                            
+                                                            <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'About Me' && fieldValue.label != 'Hobbies' && fieldValue.label != 'Waiting Since'}">
+                                                               <!-- apex:outputpanel rendered="{!fieldValue.label != 'End Date' && fieldValue.label  == 'In Progress'}"> <td> <apex:outputField value="{!con1[fieldValue]}" id="con1"/></td></apex:outputpanel -->
+                                                               <apex:outputpanel rendered="{!fieldValue.label  == 'End Date'}">
+                                                                    <td>
+                                                                        <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date2">
+                                                                            <apex:param value="{!con1[fieldValue]}"/>
+                                                                        </apex:outputText>
+                                                                    </td>
+                                                                </apex:outputpanel>
+                                                                <!-- apex:outputpanel rendered="{!fieldValue.label  == 'In Progress' }">
+                                                            <td>{!if(!con1[fieldValue],"True","False")}</td>
+                                                        </apex:outputpanel --> 
+                                                        <apex:outputpanel rendered="{!fieldValue.label  != 'End Date'}">
+                                                        <td>{!con1[fieldValue]}</td></apex:outputpanel>
+                                                            </apex:outputpanel>
+                                                            
+                                                        </apex:repeat>
+                                                    </tr>
+                                                    </apex:outputpanel>
+                                                </apex:repeat>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
+                                    
+                                    <div class="Curr-WishRelatedEvent">
+                                        <table id="dataTab1" class="display table table-maw table-hover" width="100%">
+                                            <thead class="thead-default">
+                                                <tr>
+                                                    
+                                                    <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsClosedWish}" var="fieldValue">
+                                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label != 'About Me' && fieldValue.label != 'Hobbies' && fieldValue.label != 'Waiting Since'}">
+                                                           <apex:outputpanel rendered="{!fieldValue.label != 'Wish National Type'}"> <th>{!fieldValue.label}</th> </apex:outputpanel>
+                                                           <apex:outputpanel rendered="{!fieldValue.label == 'Wish National Type'}"> <th>Wish Type</th></apex:outputpanel>
+                                                        </apex:outputpanel>
+                                                    </apex:repeat>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <apex:repeat value="{!ClosedWish}" var="con1">
+                                                <apex:outputpanel rendered="{!AND(con1.Role__c != 'Wish Granter',con1.Role__c != 'Wish Granter Mentor')}" >
                                                     <tr>
                                                         
                                                         <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.MyAssignmentsClosedWish}" var="fieldValue">
@@ -196,15 +305,18 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                         </apex:outputpanel -->
                                                         <apex:outputpanel rendered="{!fieldValue.label  != 'End Date'}">
                                                         <td>{!con1[fieldValue]}</td></apex:outputpanel>
-                                                            
                                                             </apex:outputpanel>
                                                             
                                                         </apex:repeat>
                                                     </tr>
+                                                    </apex:outputpanel>
                                                 </apex:repeat>
                                             </tbody>
                                         </table>
                                     </div>
+                                    
+                                    
+                                    
                                     <div class="Curr-NonWishEvent">
                                         <table id="dataTab2" class="display table table-maw table-hover" width="100%">
                                             <thead class="thead-default">
@@ -247,6 +359,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
             $(".openTask").addClass('current');
             $('.closedActivities').hide();
             $('.Curr-NonWishEvent').hide();
+            $('.Curr-WishRelatedEvent').hide();
             $(".wish-opened-btn").addClass('current');
             $('.wish-closed').hide();
             $('head').prepend('<title>My Assignments - Communities | Make-A-Wish\u00AE America</title>');
@@ -286,8 +399,11 @@ Description : This page is used to display the volunteer opportunity recordes wh
                 $('.openActivities').show();
                 $('.Curr-NonWishEvent').hide();
                 $('.Curr-WishEvent').show();
+                $('.Curr-WishRelatedEvent').hide();
+                
                 $(".w-event").addClass('btn-current');
                 $(".n-event").removeClass('btn-current');
+                $(".wr-event").removeClass('btn-current');
             });
             
             /********** Used to hide open activities section & Open closed activities section **********/
@@ -299,25 +415,47 @@ Description : This page is used to display the volunteer opportunity recordes wh
                 $('.closedActivities').show();
                 $(".w-event").addClass('btn-current');
                 $(".n-event").removeClass('btn-current');
+                $(".wr-event").removeClass('btn-current');
+                
                 $('.Curr-NonWishEvent').hide();
                 $('.Curr-WishEvent').show();
+                $('.Curr-WishRelatedEvent').hide();
             });
             
             //Current Wish Event
             $('.w-event').on('click',function(){
                 $(".n-event").removeClass('btn-current');
                 $(".w-event").addClass('btn-current');
+                $(".wr-event").removeClass('btn-current');
                 
                 $('.Curr-NonWishEvent').hide();
                 $('.Curr-WishEvent').show();
+                $('.Curr-WishRelatedEvent').hide();
+                
+            });
+            
+             //Current Wish Related Event
+            $('.wr-event').on('click',function(){
+                $(".n-event").removeClass('btn-current');
+                $(".wr-event").addClass('btn-current');
+                $(".w-event").removeClass('btn-current');
+                
+                $('.Curr-NonWishEvent').hide();
+                $('.Curr-WishEvent').hide();
+                $('.Curr-WishRelatedEvent').show();
+                
             });
             
             //Current Non Wish Event
             $('.n-event').on('click',function(){
                 $(".w-event").removeClass('btn-current');
                 $(".n-event").addClass('btn-current');
+                $(".wr-event").removeClass('btn-current');
+                
                 $('.Curr-WishEvent').hide();
                 $('.Curr-NonWishEvent').show();
+                 $('.Curr-WishRelatedEvent').hide();
+                 
             });
             
             

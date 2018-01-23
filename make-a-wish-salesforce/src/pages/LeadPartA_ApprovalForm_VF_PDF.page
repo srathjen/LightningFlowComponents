@@ -71,7 +71,7 @@
     <body>
         <!--<div class="header"></div>-->
         <div class="content">
-            <h1 class="stationName"><apex:image url="{!URLFOR($Resource.logo)}"/></h1>
+            <h1 class="stationName"><apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/maw-logo.png')}"/></h1>
             <apex:pageBlock >
                 <table>
                     <tr>
@@ -116,6 +116,26 @@
                                     <div class="left-col"> Parent Last Name : </div>
                                     <div class="left-col"> {!currLead.Parent_Last_Name__c} </div>
                                 </div>
+                                
+                                <div class="container" style="width:100%;">
+                                    <div class="left-col"> Diagnosis Given By Referrer : </div>
+                                    <apex:outputPanel rendered="{!If(currLead.Diagnosis_Given_By_Referrer__c != null, true, false)}">
+                                        <div class="left-col">{!currLead.Diagnosis_Given_By_Referrer__c}</div>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!If(currLead.Diagnosis_Given_By_Referrer__c != null, false, true)}">
+                                        <div class="left-col">-</div>
+                                    </apex:outputPanel>
+                                </div>
+                                
+                                <div class="container" style="width:100%;">
+                                    <div class="left-col"> ICD Code Given By Referrer : </div>
+                                    <apex:outputPanel rendered="{!If(currLead.ICD_Given_By_Referrer__r.Name != null, true, false)}">
+                                        <div class="left-col">{!currLead.ICD_Given_By_Referrer__r.Name}</div>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!If(currLead.ICD_Given_By_Referrer__r.Name != null, false, true)}">
+                                        <div class="left-col">-</div>
+                                    </apex:outputPanel>
+                                </div>
                             </div>
                         </td>
                     </tr>
@@ -124,26 +144,102 @@
                             <!---- Medical Provider Information ------>
                             <div class="wish-child-info" style="margin-top:1% !important">
                                 <div class="sectionHeader">Medical Provider Information</div>
-                                <div class="container" style="width:100%;">
-                                    <div class="left-col"> Provider First Name : </div>
-                                    <div class="left-col"> {!currLead.Treating_Medical_Professional_First_Name__c}</div>
-                                </div>
-                                <div class="container" style="width:100%;">
-                                    <div class="left-col"> Provider Last Name : </div>
-                                    <div class="left-col"> {!currLead.Treating_Medical_Professional_Last_Name__c}</div>
-                                </div>
-                                <div class="container" style="width:100%;">
-                                    <div class="left-col"> Provider Phone : </div>
-                                    <div class="left-col"> {!currLead.Treating_Medical_Professional_Phone__c}</div>
-                                </div>
-                                <div class="container" style="width:100%;">
-                                    <div class="left-col"> Provider Email : </div>
-                                    <div class="left-col"> {!currLead.Treating_Medical_Professional_Email__c}</div>
-                                </div>
-                                <div class="container" style="width:100%;">
-                                    <div class="left-col"> Hospital or Treatment Facility : </div>
-                                    <div class="left-col"> {!currLead.Hospital_Treatment_Facility_Treating__c}</div>
-                                </div>
+                                
+                                
+                                <apex:outputPanel rendered="{!if(currLead.Hidden_DV_form_Medical_professional_Type__c == 'Treating Medical Professional', true, false)}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider First Name : </div>
+                                        <div class="left-col"> {!currLead.Treating_Medical_Professional_First_Name__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Last Name : </div>
+                                        <div class="left-col"> {!currLead.Treating_Medical_Professional_Last_Name__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Phone : </div>
+                                        <div class="left-col"> {!currLead.Treating_Medical_Professional_Phone__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Email : </div>
+                                        <div class="left-col"> {!currLead.Treating_Medical_Professional_Email__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Hospital or Treatment Facility : </div>
+                                        <div class="left-col"> {!currLead.Hospital_Treatment_Facility_Treating__c}</div>
+                                    </div>
+                                </apex:outputPanel>
+                                
+                                <apex:outputPanel rendered="{!if(currLead.Hidden_DV_form_Medical_professional_Type__c == 'Best contact for Physician', true, false)}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider First Name : </div>
+                                        <div class="left-col"> {!currLead.Best_Contact_for_Physician_First_Name__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Last Name : </div>
+                                        <div class="left-col"> {!currLead.Best_Contact_for_Physician_Last_Name__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Phone : </div>
+                                        <div class="left-col"> {!currLead.Treating_Medical_Professional_Phone__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Email : </div>
+                                        <div class="left-col"> {!currLead.Treating_Medical_Professional_Email__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Hospital or Treatment Facility : </div>
+                                        <div class="left-col"> {!currLead.Hospital_Treatment_Facility_Treating__c}</div>
+                                    </div>
+                                </apex:outputPanel>
+                                
+                                <apex:outputPanel rendered="{!if(currLead.Hidden_DV_form_Medical_professional_Type__c == 'Alternate 1 Medical Professional', true, false)}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider First Name : </div>
+                                        <div class="left-col"> {!currLead.Alternate1MedProfessionalFirstName__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Last Name : </div>
+                                        <div class="left-col"> {!currLead.Alternate1MedProfessionalLastName__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Phone : </div>
+                                        <div class="left-col"> {!currLead.Alternate1MedProfessionalPhone__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Email : </div>
+                                        <div class="left-col"> {!currLead.Alternate1MedicalProfessionalEmail__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Hospital or Treatment Facility : </div>
+                                        <div class="left-col"> {!currLead.Alternate1HospitalTreatmentFacility__c}</div>
+                                    </div>
+                                </apex:outputPanel>
+                                
+                                
+                                 <apex:outputPanel rendered="{!if(currLead.Hidden_DV_form_Medical_professional_Type__c == 'Alternate 2 Medical Professional', true, false)}">
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider First Name : </div>
+                                        <div class="left-col"> {!currLead.Alternate2MedProfessionalFirstName__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Last Name : </div>
+                                        <div class="left-col"> {!currLead.Alternate2MedProfessionalLastName__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Phone : </div>
+                                        <div class="left-col"> {!currLead.Alternate2MedProfessionalPhone__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Provider Email : </div>
+                                        <div class="left-col"> {!currLead.Alternate2MedProfessionalEmail__c}</div>
+                                    </div>
+                                    <div class="container" style="width:100%;">
+                                        <div class="left-col"> Hospital or Treatment Facility : </div>
+                                        <div class="left-col"> {!currLead.Alternate2HospitalTreatmentFacility__c}</div>
+                                    </div>
+                                </apex:outputPanel>
+                                
+                                
                                 <div class="container" style="width:100%;">
                                     <div class="left-col"> I am recognized by my state to practice as a : </div>
                                     <div class="left-col"> {!currLead.I_am_Recognized_To_Practice_As_a__c}</div>
@@ -165,28 +261,28 @@
                                     <div class="left-col"> Please choose the one statement that best describes your patient: </div>
                                     <div class="left-col"> 
                                         <apex:outputPanel rendered="{!currLead.Responds_to_treatment_with_normal_health__c}">
-                                        	{!currLead.FirstName} {!currLead.LastName} responds to standard treatment which approximates normal health (e.g., diabetes, asthma, uncomplicated epilepsy)
+                                            {!currLead.FirstName} {!currLead.LastName} responds to standard treatment which approximates normal health (e.g., diabetes, asthma, uncomplicated epilepsy)
                                         </apex:outputPanel>
                                         <apex:outputPanel rendered="{!currLead.Risk_of_complications_premature_death__c}">
-                                            	{!currLead.FirstName} {!currLead.LastName} has a non-progressive condition that may have a risk of complications and/or risk of a shortened life expectancy (e.g., cerebral palsy, quadriplegia, hemophilia)
+                                                {!currLead.FirstName} {!currLead.LastName} has a non-progressive condition that may have a risk of complications and/or risk of a shortened life expectancy (e.g., cerebral palsy, quadriplegia, hemophilia)
                                         </apex:outputPanel>
                                         <apex:outputPanel rendered="{!currLead.Treatment_may_be_feasible_but_can_fail__c}">
-                                            	{!currLead.FirstName} {!currLead.LastName} has a condition for which curative treatment may be feasible but can fail; non-compliance is not included as a treatment failure. (e.g., cancer, irreversible organ failure)
+                                                {!currLead.FirstName} {!currLead.LastName} has a condition for which curative treatment may be feasible but can fail; non-compliance is not included as a treatment failure. (e.g., cancer, irreversible organ failure)
                                         </apex:outputPanel>
                                         <apex:outputPanel rendered="{!currLead.Treatment_may_prolong_normal_activities__c}">
-                                            	{!currLead.FirstName} {!currLead.LastName} has a condition where a significantly shortened life expectancy is probable, but frequent and/or long periods of intensive treatment may prolong and allow participation in normal activities (e.g., cystic fibrosis, solid organ transplant)
+                                                {!currLead.FirstName} {!currLead.LastName} has a condition where a significantly shortened life expectancy is probable, but frequent and/or long periods of intensive treatment may prolong and allow participation in normal activities (e.g., cystic fibrosis, solid organ transplant)
                                         </apex:outputPanel>
                                         <apex:outputPanel rendered="{!currLead.Debilitation_may_extend_over_many_years__c}">
-                                            	{!currLead.FirstName} {!currLead.LastName} has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment resistant epilepsy, metabolic disease)
+                                                {!currLead.FirstName} {!currLead.LastName} has a condition without curative treatment options in which debilitation may extend over many years (e.g., severe treatment resistant epilepsy, metabolic disease)
                                         </apex:outputPanel>
                                         <apex:outputPanel rendered="{!currLead.Increased_probability_of_premature_death__c}">
-                                            	{!currLead.FirstName} {!currLead.LastName} has an irreversible but non-progressive condition with severe disability and is experiencing multiple health complications that increase the probability of a significantly shortened life expectancy (e.g., anoxic brain injury, severe cerebral palsy)
+                                                {!currLead.FirstName} {!currLead.LastName} has an irreversible but non-progressive condition with severe disability and is experiencing multiple health complications that increase the probability of a significantly shortened life expectancy (e.g., anoxic brain injury, severe cerebral palsy)
                                         </apex:outputPanel>
                                         <apex:outputPanel rendered="{!currLead.Child_will_ultimately_die_prematurely__c}">
-                                            	{!currLead.FirstName} {!currLead.LastName} has a condition for which there is no reasonable hope of cure and from which children or young people will experience a significantly shortened life expectancy (e.g., Duchenne muscular dystrophy or neurodegenerative disease)
+                                                {!currLead.FirstName} {!currLead.LastName} has a condition for which there is no reasonable hope of cure and from which children or young people will experience a significantly shortened life expectancy (e.g., Duchenne muscular dystrophy or neurodegenerative disease)
                                         </apex:outputPanel>
                                         <apex:outputPanel rendered="{!currLead.None_of_these_statements_describes_Child__c}">
-                                            	None of these statements describe {!currLead.FirstName} {!currLead.LastName}
+                                                None of these statements describe {!currLead.FirstName} {!currLead.LastName}
                                         </apex:outputPanel>
                                     </div>
                                 </div>

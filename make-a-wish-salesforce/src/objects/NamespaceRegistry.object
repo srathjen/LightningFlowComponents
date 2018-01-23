@@ -30,6 +30,10 @@
         <fullName>NamespacePrefix</fullName>
         <trackHistory>true</trackHistory>
     </fields>
-    <searchLayouts/>
+    <searchLayouts>
+        <searchResultsAdditionalFields>NamespacePrefix</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CreatedDate</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CreatedBy</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
 </CustomObject>

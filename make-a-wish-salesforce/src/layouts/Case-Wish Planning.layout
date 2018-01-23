@@ -15,11 +15,11 @@
         <label>Wish Status Bar</label>
         <layoutColumns>
             <layoutItems>
-                <height>200</height>
+                <height>230</height>
                 <page>WishJourney</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>false</showScrollbars>
-                <width>70%</width>
+                <width>98%</width>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
@@ -37,7 +37,7 @@
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>RecordTypeId</field>
             </layoutItems>
         </layoutColumns>
@@ -248,14 +248,6 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>SuppliedEmail</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>IsLocked__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Hidden_Close_Sub_Case__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>

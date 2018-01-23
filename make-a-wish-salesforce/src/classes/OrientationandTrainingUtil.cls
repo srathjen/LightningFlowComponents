@@ -104,6 +104,7 @@ insert newChapter;*/
         Chapter_Role__c newChapRole = new Chapter_Role__c();
         newChapRole.Chapter_Name__c = chapterId;
         newChapRole.Role_Name__c = roleId;
+        newChapRole.Background_Check_Required__c = true;
         insert newChapRole;
         return newChapRole;
         
@@ -522,6 +523,27 @@ insert newChapter;*/
         insert createNewVol;
         return createNewVol;
     }
+    public static Volunteer_Orientation_Training__c createVolWithoutOrientation(Id ClassOfferingId,Id volunteer,string status)
+    {
+        Volunteer_Orientation_Training__c createNewVol = new Volunteer_Orientation_Training__c();
+        createNewVol.class_offering__c = ClassOfferingId;
+        createNewVol.Registered_Date__c = Date.Today();
+        createNewVol.Volunteer__c = volunteer;
+        createNewVol.Volunteer_Attendance__c = status;
+        createNewVol.Type__c = 'Orientation';
+        insert createNewVol;
+        return createNewVol;
+    }
+    public static Volunteer_Orientation_Training__c updateVolWithoutOrientation(Id volOrientation,string status)
+    {
+        Volunteer_Orientation_Training__c createNewVol = new Volunteer_Orientation_Training__c();
+        createNewVol.Registered_Date__c = Date.Today();
+        createNewVol.Id=volOrientation;
+        createNewVol.Volunteer_Attendance__c = status;
+        createNewVol.Type__c = 'Orientation';
+        update createNewVol;
+        return createNewVol;
+    }
     public static Contact CreateWishChild(){
         ICD_Codes__c obj=new ICD_Codes__c();
         obj.Name='Q917';
@@ -534,6 +556,8 @@ insert newChapter;*/
         newWishChild.Parent_Guardian_Name__c ='Jonathan Edwards'; 
         newWishChild.RecordTypeId = wishChildRecordTypeId ;
         newWishChild.ICD_10_Code__c = obj.Id;
+        newWishChild.Birthdate = Date.today().addDays(+21);
+        newWishChild.Birthdate = newWishChild.Birthdate.addYears(-3);
         insert newWishChild;
         return newWishChild;
     }
@@ -628,12 +652,15 @@ insert newChapter;*/
         newParentWish.Start_Date__c = System.today();
         newParentWish.End_Date__c = System.today();
         newParentWish.ContactId = wishChildId;
-        newParentWish.Update_Wish_Child_Form_Info__c  = false;
+        // newParentWish.Update_Wish_Child_Form_Info__c  = false;
         newParentWish.Status = 'New';
         newParentWish.Anticipated_Start_Date__c = System.today();
         newParentWish.LiabilitySignerMapKeyPair__c = 'Vennila';
         newParentWish.Budget_Submitted_Date__c = system.today();
         newParentWish.Budget_Approved_Date__c = system.today();
+        newParentWish.Update_Wish_Child_Form_Info__c = true;
+        newParentWish.Birthdate__c = Date.today().addDays(+21);
+        newParentWish.Birthdate__c = newParentWish.Birthdate__c.addYears(-3);
         insert newParentWish;
         return newParentWish;
     }
@@ -945,9 +972,9 @@ insert newChapter;*/
             
             newWishOpportunity.RecordTypeId = wishVolunteerOpportunityRecordTypeId;
             volunteerOpportunityList.add(newWishOpportunity);
-           
+            
         }
-         insert volunteerOpportunityList;
+        insert volunteerOpportunityList;
         return volunteerOpportunityList;
         
     }
@@ -1101,7 +1128,7 @@ insert newChapter;*/
         newChapterAction.Task_Name__c = 'Planning';
         newChapterAction.Sort_Order__c = 1;
         newChapterAction.Wish_type__c = 'Standard';
-       // newChapterAction.Recurring__c = true;
+        // newChapterAction.Recurring__c = true;
         newChapterAction.Wish_Type__c = 'Disney World';
         //newChapterAction.Recurring_Frequency__c = 1;
         newChapterAction.Months__c = 2;
@@ -1118,9 +1145,9 @@ insert newChapter;*/
         newChapterAction.Task_Name__c = 'Planning';
         newChapterAction.Sort_Order__c = 1;
         newChapterAction.Wish_type__c = 'Standard';
-       // newChapterAction.Recurring__c = true;
+        // newChapterAction.Recurring__c = true;
         newChapterAction.Wish_Type__c = 'Other';
-       // newChapterAction.Recurring_Frequency__c = 1;
+        // newChapterAction.Recurring_Frequency__c = 1;
         newChapterAction.Months__c = 2;
         newChapterAction.Weeks__c = 2;
         return newChapterAction;
@@ -1278,7 +1305,7 @@ insert newChapter;*/
         newLead.DOB__c = System.today() - 1435;
         newLead.company = 'MAWA';
         newLead.Status = 'Inquiry';
-       // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         newLead.Gender__c = 'Male';
         newLead.ChapterName__c = chapterAccountId;
         newLead.Referrer_FirstName__c = 'Sudhar';
@@ -1303,7 +1330,7 @@ insert newChapter;*/
         newLead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
         newLead.is_Family_Aware_of_Referral__c = 'Yes';
         newLead.Medical_Questions__c = 'Test Diagnosis';
-         ICD_Codes__c obj=new ICD_Codes__c();
+        ICD_Codes__c obj=new ICD_Codes__c();
         obj.Name='C120';
         insert obj;
         newLead.PD_ICD_Code__c  = obj.id;
@@ -1365,7 +1392,7 @@ insert newChapter;*/
         return medicalQuestionList;
     }
     
-
+    
     
     public static contact CreateTreatingMedicalProfContact(){
         Constant_AC  constant = new Constant_AC();
@@ -1450,19 +1477,7 @@ insert newChapter;*/
         
     }
     
-    /*   public static Constituent_Code__c createWishChildContituentCode(){
-Constituent_Code__c  cc = new Constituent_Code__c ();
-cc.Name='Wish Child';
-Insert cc;
-return cc;
-}
-public static Constituent_Code__c createWishParentGuardiansContituentCode(){
-Constituent_Code__c  cc = new Constituent_Code__c ();
-cc.Name='Wish Parent/Guardians';
-Insert cc;
-return cc;
-}*/
-    //public static npe5__Affiliation__c 
+   
     public static contact CreateWishChildCon(){
         
         Constant_AC  constant = new Constant_AC();
@@ -1472,7 +1487,11 @@ return cc;
         wishChildCon.LastName = 'Smith Household';
         wishChildCon.Email = 'testmawa@gmail.com';
         wishChildCon.Phone = '9600467559';
+        wishChildCon.OtherPhone = '8056913402';
+        wishChildCon.MobilePhone = '9003910426';
+        wishChildCon.MailingStreet = 'East Street';
         wishChildCon.MailingCity = 'Trichy';
+        wishChildCon.MailingState =  'Arizona';
         wishChildCon.MailingStateCode = 'AZ';
         wishChildCon.MailingPostalCode  = '6201717';
         wishChildCon.MailingCountryCode = 'US';
@@ -1602,14 +1621,14 @@ retrun newLeadFile;*/
     //Used to create checkin task for wish child family.
     public static List<Task> CreateObtainitinerary(Id parentWishId) {
         List<Task> taskList = new List<Task>();
-            for(Integer i=0; i<10; i++) {
-                Task itinerary = new Task();
-                itinerary.ActivityDate = Date.today().addDays(i);
-                itinerary.Subject = 'Obtain itinerary and/or wish packet';
-                itinerary.Status = 'Not Started';
-                itinerary.WhatId = parentWishId;
-                taskList.add(itinerary);
-            }
+        for(Integer i=0; i<10; i++) {
+            Task itinerary = new Task();
+            itinerary.ActivityDate = Date.today().addDays(i);
+            itinerary.Subject = 'Obtain itinerary and/or wish packet';
+            itinerary.Status = 'Not Started';
+            itinerary.WhatId = parentWishId;
+            taskList.add(itinerary);
+        }
         
         return taskList;
     }
@@ -1722,7 +1741,15 @@ retrun newLeadFile;*/
         newRole.AccessLevel = 'Edit';
         insert newRole;
         return newRole;
-    }     
+    }    
+     public static CaseTeamRole CreateCaseTeamRoleChangeName(){
+        CaseTeamRole  newRole = new CaseTeamRole();
+        newRole.Name = 'Wish';
+        newRole.PreferencesVisibleInCSP = true;
+        newRole.AccessLevel = 'Edit';
+        insert newRole;
+        return newRole;
+    }    
     //This method is used to create test record with inkind record type
     public static In_Kind_Donation_Reimbursement__c CreateInkindRecord(Id ParentId){
         Constant_AC newConstant =  new Constant_AC();
@@ -1781,6 +1808,18 @@ retrun newLeadFile;*/
         return newReimbursement;
         
     } 
+    public static In_Kind_Donation_Reimbursement__c CreateReimbursRecordWithCase(Id caseid){
+        Constant_AC newConstant =  new Constant_AC();
+        Id reimbursementRecordTypeId = Schema.SObjectType.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get(newConstant.Reimbursement).getRecordTypeId();
+        In_Kind_Donation_Reimbursement__c newReimbursement = new In_Kind_Donation_Reimbursement__c();
+        newReimbursement.Documentation__c = 'Not available';
+        newReimbursement.RecordTypeId = reimbursementRecordTypeId;
+        newReimbursement.Make_check_payable_to_me__c = true;
+        newReimbursement.Wish__c=caseid;
+        insert newReimbursement;
+        return newReimbursement;
+        
+    } 
     //This method is used to create reimbursement record without any attachment 
     public static In_Kind_Donation_Reimbursement__c CreateReimbursRecordWithOutAttachment(){
         Constant_AC newConstant =  new Constant_AC();
@@ -1816,6 +1855,14 @@ retrun newLeadFile;*/
         insert caseMember;
         return caseMember;
     }
+    public static CaseTeamMember createWishTeamMemberwithTeamRole(Id parentId, Id wishId,Id roleId) {
+        CaseTeamMember caseMember = new CaseTeamMember();
+        caseMember.ParentId = parentId;
+        caseMember.memberId = wishId;
+        caseMember.TeamRoleId = roleId;
+        insert caseMember;
+        return caseMember;
+    }
     
     
     public static User createVolunteerUser(Id contactId){ 
@@ -1844,7 +1891,7 @@ retrun newLeadFile;*/
         cg__CaseFile__c newCaseFile = new cg__CaseFile__c();
         newCaseFile.cg__File_Name__c = 'MedicalSummary.txt';
         newCaseFile.cg__Case__c = caseId;
-        newCaseFile.cg__Content_Type__c = 'text/plain';
+        newCaseFile.cg__Content_Type__c = 'image';
         insert newCaseFile;
         return newCaseFile;
     }
@@ -1878,6 +1925,7 @@ retrun newLeadFile;*/
         Wish_Child_Form__c newChildForm = new Wish_Child_Form__c();
         newChildForm.Actor_Actress__c = 'James';
         newChildForm.Additional_Requests__c = 'test';
+        
         newChildForm.Already_wish_granted_by_MAW_Other_Org__c = 'Yes';
         newChildForm.Any_impact_your_ability_to_join_wish__c = 'Yes';
         newChildForm.Automobile_insurance_provide_coverage__c = 'Yes';
@@ -2127,14 +2175,17 @@ retrun newLeadFile;*/
         return newBackground;
     }
     
-    public static In_Kind_Donation_Reimbursement_File__c  createInkindDonaReimbFileRecord(Id ikdrId) {
-        In_Kind_Donation_Reimbursement_File__c  newikdrFile = new In_Kind_Donation_Reimbursement_File__c  ();
+  // public static In_Kind_Donation_Reimbursement_File__c  createInkindDonaReimbFileRecord(Id ikdrId) {
+   public static InkindDon_reimburseFile__c createInkindDonaReimbFileRecord(Id ikdrId) {
+        //In_Kind_Donation_Reimbursement_File__c  newikdrFile = new In_Kind_Donation_Reimbursement_File__c  ();
+        InkindDon_reimburseFile__c   newikdrFile = new InkindDon_reimburseFile__c();
         newikdrFile.Parent__c = ikdrId;
         newikdrFile.File_Name__c = 'MedicalSummary.txt';
         newikdrFile.Content_Type__c = 'text/plain';
         insert newikdrFile;
         return newikdrFile;
     }
+    
     
     public static  Wish_Expense_Type__c CreateWishExpenseTypeRecord(){
         
@@ -2158,6 +2209,7 @@ retrun newLeadFile;*/
         dsfs__DocuSign_Status__c newDocusign = new dsfs__DocuSign_Status__c();
         newDocusign.dsfs__Lead__c = newLead.Id;
         newDocusign.dsfs__Envelope_Status__c = 'Completed';
+        newDocusign.dsfs__Subject__c='Signature Required - Absent Parent Form';
         insert newDocusign;
         return newDocusign;
     }
@@ -2212,7 +2264,7 @@ retrun newLeadFile;*/
         newRegion.Chapter_Name__c = AccountId;
         return newRegion;
     }
-  
+    
     public static npe4__Relationship__c CreateMedicalProfessionalRelationshipRec(Id wishChildId,Id medicalProfessionalId)
     {
         npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
@@ -2227,21 +2279,21 @@ retrun newLeadFile;*/
     
     public static Chapter_Vs_Role__c createAlabamaChapter(){
         Chapter_Vs_Role__c createRec = new Chapter_Vs_Role__c();
-          createRec.Chapter_Name__c = 'Make-A-Wish Alabama';
-          createRec.Role_Name__c = 'Alabama - Chapter';
-          createRec.Name='Make-A-Wish Alabama';
-          return createRec;
+        createRec.Chapter_Name__c = 'Make-A-Wish Alabama';
+        createRec.Role_Name__c = 'Alabama - Chapter';
+        createRec.Name='Make-A-Wish Alabama';
+        return createRec;
     }
     public static Chapter_Vs_Role__c createArizonaChapter(){
         Chapter_Vs_Role__c createRec = new Chapter_Vs_Role__c();
-          createRec.Chapter_Name__c = 'Make-A-Wish Alabama';
-          createRec.Role_Name__c = 'Alabama - Chapter';
-          createRec.Name='Make-A-Wish Alabama';
-          return createRec;
+        createRec.Chapter_Name__c = 'Make-A-Wish Alabama';
+        createRec.Role_Name__c = 'Alabama - Chapter';
+        createRec.Name='Make-A-Wish Alabama';
+        return createRec;
     }
     
     
-      public static Contact CreateWishChildwithAcc(Id accId){
+    public static Contact CreateWishChildwithAcc(Id accId){
         Constant_AC  constant = new Constant_AC();
         ICD_Codes__c obj=new ICD_Codes__c();
         obj.Name='Q917';
@@ -2303,7 +2355,7 @@ retrun newLeadFile;*/
         newLead.DOB__c = System.today() - 1435;
         newLead.company = 'MAWA';
         newLead.Status = 'Inquiry';
-       // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         newLead.Gender__c = 'Male';
         newLead.ChapterName__c = chapterAccountId;
         newLead.Referrer_FirstName__c = 'SteveJune';
@@ -2344,7 +2396,7 @@ retrun newLeadFile;*/
         newLead.Strokes__c = 'Test1;Test2';
         newLead.Chronic_Heart_Failure__c = 'Test1;Test2';
         newLead.isSign__c = true;
-       
+        
         //newLead.Communication__c = 'Non-Verbal';
         newLead.Travel_algorithm__c = 'Test1;Test2;';
         return newLead;
@@ -2370,13 +2422,14 @@ retrun newLeadFile;*/
         newParentWish.Budget_Submitted_Date__c = system.today();
         newParentWish.Budget_Approved_Date__c = system.today();
         newParentWish.Closed_Date__c = System.Today();
+        newParentWish.Update_Wish_Child_Form_Info__c = true;
         insert newParentWish;
         return newParentWish;
     }
     
-     public static Lead createAdditionalParentLead(Id chapterAccountId){
+    public static Lead createAdditionalParentLead(Id chapterAccountId){
         
-         Lead newLead = new Lead();
+        Lead newLead = new Lead();
         newLead.FirstName = 'moss';
         newLead.LastName = 'Smith Household';
         newLead.Phone = '9600467559';
@@ -2389,7 +2442,7 @@ retrun newLeadFile;*/
         newLead.DOB__c = System.today() - 1435;
         newLead.company = 'MAWA';
         newLead.Status = 'Inquiry';
-       // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         newLead.Gender__c = 'Male';
         newLead.ChapterName__c = chapterAccountId;
         newLead.Referrer_FirstName__c = 'SteveJune';
@@ -2443,7 +2496,7 @@ retrun newLeadFile;*/
     
     public static Lead createSameMedicalLead(Id chapterAccountId){
         
-         Lead newLead = new Lead();
+        Lead newLead = new Lead();
         newLead.FirstName = 'moss';
         newLead.LastName = 'Smith Household';
         newLead.Phone = '9600467559';
@@ -2456,7 +2509,7 @@ retrun newLeadFile;*/
         newLead.DOB__c = System.today() - 1435;
         newLead.company = 'MAWA';
         newLead.Status = 'Inquiry';
-       // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         newLead.Gender__c = 'Male';
         newLead.ChapterName__c = chapterAccountId;
         newLead.Referrer_FirstName__c = 'SteveJuneone';
@@ -2519,4 +2572,90 @@ retrun newLeadFile;*/
         return newPvolunteerSystemAdministratorUser ;
         
     }
+    
+    public static Contact CreateWishChildContact(){
+        ICD_Codes__c obj = new ICD_Codes__c(Name='Q917');
+        insert obj;
+        Constant_AC  constant = new Constant_AC();
+        Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();            
+        Contact newWishChild = new Contact(FirstName = 'Chandrasekar',LastName = 'Nallusamy',Parent_Guardian_Name__c ='Jonathan Edwards',RecordTypeId = wishChildRecordTypeId,ICD_10_Code__c = obj.Id);
+        insert newWishChild;
+        return newWishChild;
+    }
+    
+    public static case parentWishWithConChapter(Id wishChildId, Id chapterAccId) {
+        Constant_AC  constant = new Constant_Ac();    
+        Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        Case newParentWish = new Case(RecordTypeId = parentWishRecordTypeId, ChapterName__c = chapterAccId, Subject = 'Parent Wish', ContactId = wishChildId, status = 'Qualified');
+        return newParentWish;
+    }
+    
+    public static case childWishWithConChapter(Id parentWishId) {
+        Constant_AC  constant = new Constant_Ac();    
+        Id wishDetRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
+        Case newParentWish = new Case(RecordTypeId = wishDetRT, Subject = 'Child Wish', ParentId = parentWishId);
+        return newParentWish;
+    }
+    
+    public static User createActVolunteerUser(Id contactId){ 
+        //Profile volunteerActiveProfile = [SELECT Id FROM Profile WHERE Name = 'Active Volunteer'];
+        
+        String activeProfileId = label.Active_Volunteer_Profile;
+        
+        User newActiveVolunteerUser = new User(  firstname = 'Jonathan',lastName = 'Edwards',email = 'jonathan@gmail.com',Username = 'joathanedwards@gmail.com',
+                                               EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
+                                               LanguageLocaleKey = 'en_US',created_from_portal__c = true,ProfileId = activeProfileId ,ContactId = contactId,isActive = true);
+        return newActiveVolunteerUser;
+    }
+    
+     public static contact CreateWishChildConwithNull(){
+        
+        Constant_AC  constant = new Constant_AC();
+        Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
+        Contact wishChildCon = new Contact();
+        wishChildCon.FirstName = 'moss';
+        wishChildCon.LastName = 'Smith Household';
+        wishChildCon.Email = Null;
+        wishChildCon.Phone = Null;
+        wishChildCon.OtherPhone = Null;
+        wishChildCon.MobilePhone = Null;
+        wishChildCon.MailingStreet = Null;
+        wishChildCon.MailingCity = Null;
+        wishChildCon.MailingState =  Null;
+        //wishChildCon.MailingStateCode = 'AZ';
+        wishChildCon.MailingPostalCode  = Null;
+        //wishChildCon.MailingCountryCode = 'US';
+        wishChildCon.RecordTypeId = wishChildRecordTypeId;
+        wishChildCon.MobilePhone = '9900220022';
+        wishChildCon.Primary_Diagnosis_Condition_Description__c = 'Test';
+        wishChildCon.Diagnosis__c = 'test';
+        insert wishChildCon;
+        return wishChildCon;
+        
+    }
+    
+     public static contact CreateWishFamilywithNull(){
+        Constant_AC  constant = new Constant_AC();
+        Id wishFamilyRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
+        Contact wishFamilyCon = new Contact();
+        wishFamilyCon.FirstName = 'MAWAFirstName';
+        wishFamilyCon.LastName = 'MAWALastName';
+        wishFamilyCon.Email = Null;
+        wishFamilyCon.Phone = Null;
+        wishFamilyCon.OtherPhone = Null;
+        wishFamilyCon.MobilePhone = Null;
+        wishFamilyCon.MailingStreet = Null;
+        wishFamilyCon.MailingCity = Null;
+        wishFamilyCon.MailingState =  Null;
+        //wishChildCon.MailingStateCode = 'AZ';
+        wishFamilyCon.MailingPostalCode  = Null;
+        //wishFamilyCon.MailingCountryCode = 'US';
+        wishFamilyCon.RecordTypeId = wishFamilyRecordTypeId;
+        wishFamilyCon.Region_Chapter__c=createchapterAccount().id;
+        insert wishFamilyCon ;
+        return wishFamilyCon ;
+        
+    }
+    
+    
 }

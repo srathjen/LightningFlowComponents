@@ -65,7 +65,7 @@ public class WishClearanceSendNow_AC_Test {
         updatecase.Id = caseId.Id;
         updatecase.Description = 'test';
         updatecase.Rush__c =true;
-         updatecase.Rush_Explanation__c ='test';
+        updatecase.Rush_Explanation__c ='test';
         updatecase.Rush_Timeframe__c ='ASAP';
         update updatecase;
         
@@ -88,7 +88,7 @@ public class WishClearanceSendNow_AC_Test {
         wishClear.ReturnToWishClearanceForm();
         
     }
-       
+    
     public static testMethod void createParentCaseWithTravel(){
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
         Contact contactMedicalProfessChild = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
@@ -114,7 +114,7 @@ public class WishClearanceSendNow_AC_Test {
         updatecase.Wish_Clearance_Sent_Date__c = system.today();
         update updatecase;
         
-       
+        
         OrientationandTrainingUtil.insertDocusignSetting();
         ApexPAges.StandardController sc = new ApexPages.StandardController(caseId);
         PageReference pageRef = Page.WishClearanceSendNow_VF;
@@ -127,7 +127,7 @@ public class WishClearanceSendNow_AC_Test {
         wishClear.displayEmail();
         wishClear.SendtoDocuSign();
         Test.StartTest();
-         boolean isRush = false;
+        boolean isRush = false;
         Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
         WishClearanceSendNow_AC.CallouttoDocusign(caseId.id,contactWishChild.Name,contactWishChild.Email);
         Test.StopTest();

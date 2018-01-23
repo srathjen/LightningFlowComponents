@@ -4,7 +4,7 @@
 Public Class VolunteerWelcomePage_ACTest
 {
     // Initializing  constructor.
-    static testmethod void testVolunteerWelcomePage_AC()
+    static testmethod void testVolunteerWelcomePage()
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -27,7 +27,7 @@ Public Class VolunteerWelcomePage_ACTest
     }
     
     // Testing negative case for orientation.
-    static testmethod void NegativeDataforOrientation()
+    static testmethod void negativeDataforOrientation()
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -92,7 +92,7 @@ Public Class VolunteerWelcomePage_ACTest
     }
     
     // Completing Orientation for updating Orientation status.
-    static testmethod void CompleteOrientation()
+    static testmethod void completeOrientation()
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -118,16 +118,17 @@ Public Class VolunteerWelcomePage_ACTest
             Chapter_Role_O_T__c currChapOrientation = OrientationandTrainingUtil.createChapterOandT(currChapRole.id,currOrientationTraining.id);
             Class_Offering__c currOrientationOffering = OrientationandTrainingUtil.createClassOffering(currChapOrientation.id);
             Volunteer_Orientation_Training__c  createVolOrientation = OrientationandTrainingUtil.createVolOrientation(currOrientationTraining.id,currOrientationOffering.id,con.id,'Completed');
-            
+            Test.startTest();
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.getEvents();
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
+            Test.stopTest();
         }
         
     }
     // Completing Applicaiton for updating Applicaiton status.
-    static testmethod void CompleteApplication()
+    static testmethod void completeApplication()
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -165,7 +166,7 @@ Public Class VolunteerWelcomePage_ACTest
         
     }
     // Completing Interview for updating Interview status.
-    static testmethod void CompleteInterviewTask()
+    static testmethod void completeInterviewTask()
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -261,11 +262,12 @@ Public Class VolunteerWelcomePage_ACTest
             
             // Backgroud check creationn.
             Background_check__c currBC = OrientationandTrainingUtil.createBackgroundCheck(con.id);
-            
+            Test.startTest();
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.getEvents();
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
+            Test.stopTest();
         }
         
     }
@@ -326,11 +328,12 @@ Public Class VolunteerWelcomePage_ACTest
             currBC.Date_Completed__C = Date.Today();
             currBC.status__c = 'Approved';
             update currBC;
-            
+            Test.startTest();
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.getEvents();
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
+            Test.stopTest();
         }
         
     }
@@ -390,11 +393,12 @@ Public Class VolunteerWelcomePage_ACTest
             currBC.Date_Completed__C = Date.Today();
             currBC.status__c = 'Approved';
             update currBC;
-            
+            Test.startTest();
             VolunteerWelcomePage_AC controller = new VolunteerWelcomePage_AC();
             controller.getEvents();
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
+            Test.stopTest();
         }
         
     }

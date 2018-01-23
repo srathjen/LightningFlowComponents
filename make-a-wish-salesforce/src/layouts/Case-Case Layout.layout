@@ -128,6 +128,10 @@
                 <behavior>Edit</behavior>
                 <field>Comment_2__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>IsparentCaseUp__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -139,7 +143,7 @@
                 <field>ContactEmail</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
+                <behavior>Readonly</behavior>
                 <field>RecordTypeId</field>
             </layoutItems>
             <layoutItems>
@@ -402,6 +406,7 @@
         <fields>dsfs__Subject__c</fields>
         <fields>dsfs__Envelope_Status__c</fields>
         <fields>dsfs__Sent_Date_Time__c</fields>
+        <fields>dsfs__Completed_Date_Time__c</fields>
         <relatedList>dsfs__DocuSign_Status__c.dsfs__Case__c</relatedList>
     </relatedLists>
     <relatedLists>

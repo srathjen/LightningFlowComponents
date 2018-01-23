@@ -5,7 +5,7 @@
         <description>Diagnosis Form Email Alert</description>
         <protected>false</protected>
         <recipients>
-            <field>Treating_Medical_Professional_Email__c</field>
+            <field>HiddenMedicalProfessionalEmail__c</field>
             <type>email</type>
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>

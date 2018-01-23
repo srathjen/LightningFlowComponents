@@ -26,9 +26,9 @@
         
         <div class="container">
             <apex:form styleclass="form-horizontal" id="bb">
-                <apex:pagemessages />
+               <apex:pagemessages />
                 
-                
+                <apex:commandLink action="{!ReturnToWish}" value="Return to Wish" Style="float:right;padding:30px" html-data-toggle="modal" html-data-target="wffsame-alert"/>   
                 <apex:outputPanel rendered="{!outPutMode}">
                     
                     <center> <apex:commandButton value="Update"   action="{!UpdateContactInfo}" style="width:120px;height:30px;" reRender="bb" status="status"/></center>

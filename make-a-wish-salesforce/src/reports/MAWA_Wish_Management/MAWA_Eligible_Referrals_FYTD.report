@@ -72,13 +72,11 @@
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>

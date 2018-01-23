@@ -3,6 +3,7 @@
   <link rel="stylesheet" href="{!URLFOR($Resource.prospective_assets, 'web/css/lib/jquery-ui.min.css')}"/>
      <noscript>For full functionality and the best experience possible of this site it is necessary to enable JavaScript. Here are the <a href="http://www.enable-javascript.com/" target="_blank">instructions how to enable JavaScript in your web browser</a>.</noscript>
       <style>
+        body{font-family: 'Lato', Arial, sans-serif;}
         .fadein-alert:last-child {-webkit-animation: fadein-alert .5s forwards; -moz-animation: fadein-alert .5s forwards; -o-animation: fadein-alert .5s forwards; animation: fadein-alert .5s forwards}
         .fadein {-webkit-animation: fadein .5s forwards; -moz-animation: fadein .5s forwards; -o-animation: fadein .5s forwards; animation: fadein .5s forwards}
         /* fadein-alert keyframes */
@@ -32,14 +33,14 @@
         fieldset.connected-haslegend>legend {float:left; padding-top:0; padding-bottom:0; margin-bottom:0;}
         fieldset.connected-haslegend>.info {margin-top: 0}
         fieldset.connected a {font-size: .8rem}
-        form a.text-muted {color:#006bb6 !important}
+        form a.text-muted {color:#0057B8 !important}
         form a.text-muted:hover {color:#0275d8 !important}
         .dataTables_info {margin-bottom: 2rem; font-size: .75rem;}
-        .btn-md {font-family: "FuturaStd-Bold", "Century Gothic", Arial, sans-serif; border: none; text-transform: uppercase; font-size: .85rem; border-bottom: 2px solid #333; color: #fff; height: 3.75rem; padding: 0 1rem; white-space: normal;}
+        .btn-md {font-family: 'Lato', Arial, sans-serif; border: none; text-transform: uppercase; font-size: .85rem; font-weight: 900; border-bottom: 2px solid #333; color: #fff; height: 3.75rem; padding: 0 1rem; white-space: normal;}
         .vcpactivelogin .table-maw th {cursor:help; padding-right:1rem}
         .vcpactivelogin ul.step {display:flex; justify-content:space-around; align-items:center; background:#fff; padding-top:0; padding-bottom:0; margin-bottom:0; height:3.5rem; border-bottom:1px solid #ccc; width:100%;}
         .vcpactivelogin ul.step li {flex-direction:row; width:31%; border-bottom:0; line-height:1rem; padding:0}
-        .step li a.current {color:#006bb6 !important; text-decoration:underline}
+        .step li a.current {color:#0057B8 !important; text-decoration:underline}
         /* drop down */
         .vcpactivelogin ul.step li li {text-align:left; width:100%; padding:.5rem;}
         .vcpactivelogin ul.step {padding-right:2rem}
@@ -56,7 +57,7 @@
         .step li:nth-child(3) ul li a.up:before {content: ""}
         .step li:nth-child(3) ul li a.down:after {content: " \2193\0000a0"}
         .step li:nth-child(3) ul li a.up:after {content: " \2191\0000a0"}
-        .step li ul li a.active {color:#006bb6 !important}
+        .step li ul li a.active {color:#0057B8 !important}
         .tether-enabled {width:calc(100% + .5rem); margin-left:-1rem; padding-left:1rem; z-index: 1;}
         .step-tether.active {box-shadow:0 6px 15px -9px rgba(0,0,0,1);margin-left: -1px;}
         .nav-sub-inner {float:right; width:50%; display:flex; justify-content:flex-end; align-items:center;}
@@ -64,7 +65,7 @@
         .nav-sub-inner input {width:4rem; font-size:.5rem; white-space:normal; text-align:center; margin-left:1px; padding:0 .5rem}
         .nav-up {top: -5.6rem !important;}
         a.remove-block {position:absolute; top:1rem; right:1rem; z-index:1}
-        span.info {font-family: "FuturaStd-Bold", "Century Gothic", Arial, sans-serif; font-size:.6rem; color:#747678; display:block; line-height:1.5; margin-top:-2.5rem; margin-bottom:2rem;}
+        span.info {font-family: 'Lato', Arial, sans-serif; font-size:.6rem; color:#747678; display:block; line-height:1.5; margin-top:-2.5rem; margin-bottom:2rem;}
         .modal-header,.modal-footer {border-top:none;}
         h1.modal-title {text-align: center; padding-bottom: 0}
         .modal-header .close {margin-top: -4rem}

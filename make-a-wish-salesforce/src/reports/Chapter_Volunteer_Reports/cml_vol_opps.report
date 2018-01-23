@@ -21,31 +21,26 @@
     <filter>
         <criteriaItems>
             <column>Case$RecordType</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Volunteer_Roles__r$Chapter_Name__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Volunteer_Roles__r$Status__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Approved</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case$Status</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Hold,Inactive,Granted,Completed,Closed,DNQ,Denied,Escalated</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Volunteer_Roles__r$Inactive__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>1</value>
         </criteriaItems>

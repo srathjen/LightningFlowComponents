@@ -21,6 +21,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -148,114 +152,112 @@
         <description>It will capture the starting time information, about the orientation and training program</description>
         <externalId>false</externalId>
         <label>End Time</label>
+        <picklist>
+            <picklistValues>
+                <fullName>7:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>7:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>12:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>12:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:00 PM</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Location__c</fullName>
@@ -300,166 +302,160 @@
         <description>It will capture the starting time information, about the orientation and training program</description>
         <externalId>false</externalId>
         <label>Start Time</label>
+        <picklist>
+            <picklistValues>
+                <fullName>7:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:00 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11:30 AM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6:30 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7:00 PM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>7:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:00 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11:30 AM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>12:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>12:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:00 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6:30 PM</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7:00 PM</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Type__c</fullName>
         <description>It will capture type value about the orientation and training,whether the training taken in online or in person</description>
         <externalId>false</externalId>
         <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Online</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>In Person</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Webinar</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Online</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>In Person</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Webinar</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Volunteer_Type__c</fullName>
         <description>It will capture the information about the type of volunteer.</description>
         <externalId>false</externalId>
         <label>Volunteer Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Prospective</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Active</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Both</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Prospective</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Active</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Both</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Webinar_URL__c</fullName>
@@ -1264,6 +1260,14 @@
         <customTabListAdditionalFields>Orientation_and_Training__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Date__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Orientation_and_Training__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Start_Time__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Chapter__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Orientation_and_Training__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Date__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Start_Time__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Chapter__c</lookupPhoneDialogsAdditionalFields>
     </searchLayouts>
     <sharingModel>Read</sharingModel>
     <webLinks>

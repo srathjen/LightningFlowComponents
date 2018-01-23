@@ -25,8 +25,6 @@
             <casePriority>Medium</casePriority>
             <createTask>false</createTask>
             <emailAddress>wvcsupport@wish.org</emailAddress>
-            <emailServicesAddress>wvcsupport@23brua1ejpjr3l7n4teber77l23hw7a6h439g8p3ttlo8my7be.36-orf0eai.na30.case.salesforce.com</emailServicesAddress>
-            <isVerified>true</isVerified>
             <routingName>Make-A-Wish</routingName>
             <saveEmailHeaders>false</saveEmailHeaders>
         </routingAddresses>
@@ -36,8 +34,6 @@
             <casePriority>Medium</casePriority>
             <createTask>true</createTask>
             <emailAddress>wvcsupport@wish.org.test</emailAddress>
-            <emailServicesAddress>wvcfullcopy@2af56ntdmo3e5mbmdgbvxb0j5owq8l41t0k5873rp7vi61496r.36-orf0eai.na30.case.salesforce.com</emailServicesAddress>
-            <isVerified>false</isVerified>
             <routingName>Make-A-Wish America</routingName>
             <saveEmailHeaders>false</saveEmailHeaders>
             <taskStatus>Not Started</taskStatus>

@@ -61,7 +61,7 @@ public class VolunteerProfile_AC{
         userRelatedContactId = getUserRelatedContact.get(0).ContactId;*/
         
         userIns  = [SELECT Id,ContactId FROM User WHERE Id =: userInfo.getUserId() Limit 1];
-        getUserRelatedContact = [SELECT Id,contact.Region_Chapter__c,contact.Region_Chapter__r.Chapter_Id__c,Username, LMS_Login__c, LMS_Id__c, ContactId, LMS_User_Code__c,FirstName,LastName,Email FROM User WHERE Id=:userIns.Id];
+        getUserRelatedContact = [SELECT Id,contact.Region_Chapter__c,contact.Region_Chapter__r.Chapter_Id__c,Username, LMS_Login__c, LMS_Id__c, ContactId, LMS_User_Code__c,FirstName,LastName,Email,Hidden_Email__c FROM User WHERE Id=:userIns.Id];
          lMSCredential = LMS_Credentials__c.getValues('LMS Integration');
          
           userRelatedContactId = getUserRelatedContact.get(0).ContactId;
@@ -175,7 +175,7 @@ public class VolunteerProfile_AC{
         contactInstance = [SELECT id,Name,Gender__c,Birth_Day__c,County__c,Salutation,Title,Birth_Month__c,Birth_Year__c,Birthdate,Current_Age__c,Work_Phone__c,Phone,HomePhone,MobilePhone,Preferred_Phone_Types__c,What_is_your_race_ethnicity__c,RecordTypeId,FirstName,Middle_Name__c,LastName,
                            Email,MailingStreet,MailingCity,mailingstatecode,mailingstate,MailingCountrycode,MailingPostalCode,Race_Ethnicity__c,Emergency_Contact_Relationship__c,
                            Employer__c,Street_Employer__c,City_Employer__c,npe01__HomeEmail__c,State_Employer__c,Fax,Professional_Skills__c,Language__c,npe01__AlternateEmail__c,npe01__PreferredPhone__c,npe01__Preferred_Email__c,Zip_Employer__c,May_We_Contact_You_at_Work__c,Interested_involved_with_Make_A_Wish__c,
-                           Emergency_Contact__c,Emergency_Contact_Phone__c,npe01__Primary_Address_Type__c,Read__c, Write__c,Understand__c, Speak__c, Language_Notes__c,otherPhone,Alternate_Phone_Type__c,
+                           Emergency_Contact__c,Emergency_Contact_Phone__c,npe01__Primary_Address_Type__c,Read__c, Write__c,Understand__c, Speak__c, Language_Notes__c,otherPhone,Alternate_Phone_Type__c,Self_describe_comment_box__c,
                            OtherCountryCode,OtherStateCode,OtherCity,Professional_Skills_Other_Notes__c,OtherCountry,OtherStreet,OtherPostalCode,OtherState FROM Contact WHERE Id =: userIns.ContactId];
       
           

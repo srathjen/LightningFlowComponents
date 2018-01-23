@@ -559,16 +559,8 @@
     <rules>
         <fullName>Case %3A Wish Presentation Not Set</fullName>
         <actions>
-            <name>Case_Wish_Presentation_Not_Set</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
             <name>Case_Uncheck_Presentation_Not_Set</name>
             <type>FieldUpdate</type>
-        </actions>
-        <actions>
-            <name>Case_ET_Wish_Presentation_Date_Reminder</name>
-            <type>Task</type>
         </actions>
         <active>true</active>
         <criteriaItems>
@@ -628,14 +620,14 @@
             <name>Wish_Child_Birthday_Reminder</name>
             <type>Task</type>
         </actions>
-        <active>false</active>
+        <active>true</active>
         <description>Used to create a birthday task when the birthday is lesser that 21 days</description>
-        <formula>AND(ISCHANGED(Birthdate__c),NOT(ISNULL(Birthdate__c)),CurrentDOB__c - Today()  &lt;=  21,Migrated_Record__c = false)</formula>
+        <formula>AND( OR( ISNEW() ,ISCHANGED(Birthdate__c)) , NOT(ISNULL(Birthdate__c)), CurrentDOB__c - Today()  &lt;  21, Migrated_Record__c = false, NOT(ISPICKVAL(Status, &apos;Completed&apos;)), NOT(ISPICKVAL(Status, &apos;Closed&apos;)), NOT(ISPICKVAL(Status, &apos;DNQ&apos;)), NOT(ISPICKVAL(Status, &apos;Granted&apos;)), Contact.npsp__Deceased__c  = false,  RecordType.Name  = &apos;Wish&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
         <fullName>Case%3ABirthday Task</fullName>
-        <active>true</active>
+        <active>false</active>
         <description>This workflow will create Task to Volunteer for Wish Child Birthday</description>
         <formula>AND(NOT(ISNULL(Birthdate__c)),((CurrentDOB__c - Today())&gt; 21)) &amp;&amp;  $Profile.Name != &apos;Integration&apos;</formula>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -761,15 +753,7 @@
     </rules>
     <rules>
         <fullName>Notification to Development Team Regarding Wish Presentation Rule</fullName>
-        <actions>
-            <name>Granting_Case_Development_team_regarding_wish_presentation_alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Case_ET_Wish_Presentation_Details</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <description>This will fire for granting case to send an email alert to dev team when presentation date is set and presentation set check box true</description>
         <formula>AND(RecordType.Name = &apos;Wish Granting&apos;,NOT(ISBLANK(Presentation_Date__c)),ISCHANGED(Presentation_Date__c),Wish_Presentation_Set__c = true,  $Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
@@ -920,7 +904,7 @@
     </rules>
     <rules>
         <fullName>Wish Family Form Not Submitted Alert Rule</fullName>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Case.RecordTypeId</field>
             <operation>equals</operation>
@@ -943,14 +927,6 @@
         <description>This workflow will fire when there is no wish family form submitted for particular time period</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
-            <actions>
-                <name>Wish_Family_Form_Not_Submitted_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>Case_ET_Wish_Paperwork_Packet_Reminder</name>
-                <type>Task</type>
-            </actions>
             <offsetFromField>Case.Interview_date__c</offsetFromField>
             <timeLength>5</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
@@ -992,14 +968,6 @@
     </rules>
     <rules>
         <fullName>Wish%3AInterview Date Not Set After 21 Days</fullName>
-        <actions>
-            <name>Wish_Interview_Date_Not_Set_After_21_Days_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Interview_date_not_set</name>
-            <type>Task</type>
-        </actions>
         <active>false</active>
         <criteriaItems>
             <field>Case.RecordTypeId</field>
@@ -1207,7 +1175,7 @@
         <assignedToType>owner</assignedToType>
         <dueDateOffset>0</dueDateOffset>
         <notifyAssignee>false</notifyAssignee>
-        <offsetFromField>Case.Birthdate__c</offsetFromField>
+        <offsetFromField>Case.CurrentDOB__c</offsetFromField>
         <priority>Normal</priority>
         <protected>false</protected>
         <status>Not Started</status>

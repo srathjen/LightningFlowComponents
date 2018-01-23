@@ -1,5 +1,11 @@
+/******************************************************************************************************************
+Created by: Kanagaraj
+Author : MST Solutions
+CreateDate : 06/01/2016
+Description : This SignNow_AC class is used to featch all the details given in the wish child form, 
+wish family form and wish information form to display when the user sign the document usign electronic signature.
+******************************************************************************************************************/
 public Class SignNow_AC{
-    
     public Contact currWishChildContact{get;set;}
     public WishChildFormUtil wcfUtil{get;set;}
     public Case currCase{get;set;}
@@ -12,12 +18,12 @@ public Class SignNow_AC{
     public Map<id,Wish_Child_Form__c> clonedMap{get;set;}
     public Map<id,Wish_Child_Form__c> objMap{get;set;}
     public List<String> ethnicityList{get;set;}
-    Public boolean isSignNowPopup{get;set;}
-    public boolean firstSign{get;set;}
-    public boolean secondSign{get;set;}
-    Constant_AC  constant = new Constant_AC();
-    Public Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
+    public String Name{get;set;}
+    public String participantsName{get;set;} 
     
+    /*********************************************************************************************************
+    SignNow_AC this is the construcotr method it will load when the user trying to get electronic signature.
+    **********************************************************************************************************/
     public SignNow_AC(Apexpages.StandardController controller){
      currentPageId =  ApexPages.currentPage().getParameters().get('id');
         isChildPart = false ;
@@ -25,37 +31,21 @@ public Class SignNow_AC{
         if(wcfUtil == null)   
             wcfUtil = new WishChildFormUtil();
         ethnicityList = new List<String>();
-        
+        Name = '';
         currentPageId =  ApexPages.currentPage().getParameters().get('id');
         
         if(currentPageId != null){
-            //List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentPageId AND Status =: 'Pending' AND ProcessDefinition.Name =: 'Wish Child Form Approval Process'];
-            
-            List<ProcessInstanceWorkitem> approvalIns = [SELECT Id,ActorId,OriginalActorId,ProcessInstanceId,ProcessInstance.TargetObjectId,ProcessInstance.Status,ProcessInstance.ProcessDefinition.Name FROM ProcessInstanceWorkitem WHERE ProcessInstance.TargetObjectId =: currentPageId AND ProcessInstance.Status =: 'Pending' AND ProcessInstance.ProcessDefinition.Name =: 'Wish Child Form Approval Process'
-                                                         AND ActorId !=: UserInfo.getUserId()];
-            
-            If(approvalIns.size() > 0){           
-                wcfUtil.approvalError = true;
-               // DisplayApprovalProcess();
-            }
-            else{
+          
                 this.currCase = (Case)controller.getRecord();
                 currWishChild = new Wish_Child_Form__c();  
                 
-                this.currCase = [SELECT id,Hidden_Email_List__c,ContactId,Contact.FirstName,Contact.LastName, Contact.Middle_Name__c,
+                this.currCase = [SELECT id,Hidden_Email_List__c,ContactId,Contact.FirstName,Contact.LastName,Contact.Name,Contact.Middle_Name__c,
                                  Contact.Diagnosis__c , Contact.Email, Contact.MobilePhone, Contact.Gender__C,
                                  Contact.BirthDate, Contact.T_Shirt_Size__c, Contact.MailingStreet,
                                  Contact.MailingCity, Contact.MailingState, Contact.MailingPostalCode
                                  FROM Case WHERE Id = :this.currCase.id limit 1];
-                
-                
-                
-                if(this.currCase.Hidden_Email_List__c != null){
-                   // wcfUtil.listofSenderName = currCase.Hidden_Email_List__c.split(',');
-                    
-                }
-                
-                List<CaseTeamMember> caseTeamMemberList = [SELECT id,Member.Name FROM CaseTeamMember WHERE ParentId =: this.currCase.id AND TeamRole.Name = 'Wish Granter' limit 2];
+                 
+             List<CaseTeamMember> caseTeamMemberList = [SELECT id,Member.Name FROM CaseTeamMember WHERE ParentId =: this.currCase.id AND TeamRole.Name = 'Wish Granter' limit 2];
                 if(caseTeamMemberList.size() > 0){
                     wcfUtil.caseTeamMemberNo1 = caseTeamMemberList[0].Member.Name;
                     if(caseTeamMemberList.size() > 1)
@@ -74,18 +64,57 @@ public Class SignNow_AC{
                     wcfUtil.wishChildList = Database.Query(wishChildQuery);
                 }  
                 //Build wishChild for SignNow List
-                for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Same_as_Family__c,Race_Ethnicity__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
+                for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Same_as_Family__c,ParentsParticipantsName__c ,Race_Ethnicity__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c,Participant_Name__c FROM Wish_Child_Form__c WHERE
                                                         Case__c =: currentPageId]){
                                                             
                                                             if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != null) {  
-                                                                
                                                                 for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c.split('#')){
-                                                                    wcfUtil.SignNowList.add(keys.trim());  
-                                                                    wcfUtil.listofSenderName.add(keys.trim());                   
-                                                                    
-                                                                }  
+                                                                    wcfUtil.SignNowList.add(keys.trim());
+                                                                   // wcfUtil.listofSenderName.add(keys.trim());
+                                                                    if(Name == '' || Name == Null)
+                                                                    Name = keys;
+                                                                    else
+                                                                    Name +=','+' '+Keys; 
+                                                                } 
+                                                                 
+                                                             }
+                                                             if(wishChildForm.ParentsParticipantsName__c != null) {  
+                                                                participantsName = wishChildForm.ParentsParticipantsName__c;
+                                                                if(wishChildForm.ParentsParticipantsName__c.startsWith(',')){
+                                                                    participantsName = wishChildForm.ParentsParticipantsName__c.removeStart(',');
+                                                                }
                                                                 
-                                                            }
+                                                                if(wishChildForm.ParentsParticipantsName__c.startsWith('null')){
+                                                                    participantsName = wishChildForm.ParentsParticipantsName__c.removeStartIgnoreCase('null');
+                                                                }
+                                                                 
+                                                             }
+                                                             if(wishChildForm.Participant_Name__c != Null){
+                                                                 for(String keys : wishChildForm.Participant_Name__c .split('#')){
+                                                                     if(Name == '' || Name == Null)
+                                                                    Name = keys;
+                                                                    else
+                                                                    Name +=','+' '+Keys; 
+                                                                 }
+                                                             }
+                                                             
+                                                         if(wishChildForm.Hidden_Wish_Fmaily_Contact_Email__c!= Null){
+                                                         List<String> proceessList = new List<String>();
+                                                             for(String key : wishChildForm.Hidden_Wish_Fmaily_Contact_Email__c.split('#')){
+                                                             proceessList.clear();
+                                                             if(key.contains('-')){
+                                                             for(String sla : key.split('-')) {
+                                                               proceessList.add(sla);
+                                                             }
+                                                             if(proceessList.size() == 2) {
+                                                                String name = key.split('-')[0];
+                                                                String email = key.split('-')[1];
+                                                                wcfUtil.listofSenderName.add(name.trim());
+                                                                 }
+                                                             }
+                                                           } 
+                                                         }  
+                                                              
                                                             system.debug('$$$$ SignNow List $$$$$'+wcfUtil.SignNowList);                
                                                             //setting same as family from table
                                                             if( wishChildForm.Hidden_Same_as_Family__c ){
@@ -138,7 +167,12 @@ public Class SignNow_AC{
                             wrapCls.Street= (currRec.Street!=Null)?currRec.Street:'';
                             wrapCls.State= (currRec.State!=Null)?currRec.State:'';
                             wrapCls.PostalCode= (currRec.PostalCode!=Null)?currRec.PostalCode:'';
-                            wrapCls.sameParentGuardianFlag = false;                         
+                            wrapCls.tshirtSize= (currRec.tshirtSize!=Null)?currRec.tshirtSize:'';
+                            if(currRec.sameParentGuardianFlag == true)
+                            wrapCls.sameParentGuardianFlag = true;
+                            else
+                            wrapCls.sameParentGuardianFlag = false;
+                            wrapCls.residingWishMedical = (currRec.residingWishMedical !=Null)?currRec.residingWishMedical:'';
                             wcfUtil.emailMap.put((wrapCls.FirstName+' '+wrapCls.LastName),wrapCls.Email);
                             wrapCls.dob=  (currRec.dob);
                             wrapCls.relId = currRec.relId;
@@ -262,8 +296,7 @@ public Class SignNow_AC{
                             wcfUtil.nursingCaresSet.add(s);
                         }                  
                     }
-                    
-                    // Wish Participants Parser---------------------------------------------  
+                  
                     if(currWishChild.Participant_Contacts__c != null){  
                         String jsonString = currWishChild.Participant_Contacts__c;
                         JsonString = jsonString.replace('&quot;', '"');
@@ -296,14 +329,8 @@ public Class SignNow_AC{
                             wrapCls.sameParentGuardianFlag = false;                         
                             wcfUtil.emailMap.put((wrapCls.FirstName+' '+wrapCls.LastName),wrapCls.Email);
                             wrapCls.dob=  (currRec.dob);
-                            //wrapCls.relId = currRec.relId;
                             wcfUtil.wishParticipantList.add(wrapCls);
                         }
-                            //wcfUtil.wishParticipantList.add(childParticipantsWrap);
-                            
-                        
-                                 
-                       //ParticipantsMapping(wrapParticipantsList,false);  
                     }                 
                 }
                 if(wcfUtil.wishFamilyWrapList.size() == 0)
@@ -312,7 +339,6 @@ public Class SignNow_AC{
                     wcfUtil.wishParticipantList.add(new WishChildFormUtil.WrapperClass()); 
                 if(wcfUtil.driverWrapperCls.size() == 0)
                     wcfUtil.driverWrapperCls.add(new WishChildFormUtil.DriverWrapper());  
-            }
-        }      
+            }      
     }
-    }
+}

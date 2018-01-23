@@ -333,7 +333,8 @@ body{margin: 0px 0px 0px 0px;}
     <div class="slds">
         <div id="wishexpense1" class="slds-card slds-m-horizontal--large " >
             <div style="float:left;width: 40%" >Wish Child Name : {!childName } </div>
-            <div style="float:left;width: 60%" >Chapter Name : {!wishChapterName }  </div>
+            <div style="float:left;width: 40%" >Chapter Name : {!wishChapterName }  </div>
+           <!-- <div style="float:left;width: 20%">Description : {!wishDescription}  </div> -->
             <br />
             <div style="float:left;width: 40%" >Number of wish participants : {!NoOfWishParts }  </div>
             <div style="float:left;width: 40%" >Anticipated Start Date :
@@ -427,7 +428,7 @@ body{margin: 0px 0px 0px 0px;}
                                             <td class="slds-cell-wrap slds-text-align--right" style="width:90px;"><apex:OutPuttext id="AccountNumber" value="{!expense.Account_Number__c}"/></td>
                                             <td class="slds-cell-wrap"><apex:OutPuttext value="{0,date,short}" id="expensePostCode" style="width:60px"><apex:param value="{!expense.Post_Date__c}"/></apex:OutPuttext></td>
                                             <td class="slds-cell-wrap"><apex:OutPuttext value="{!expense.Transaction__c}" id="expenseTransaction" style="width:60px" /></td>
-                                            <td class="slds-cell-wrap"><apex:OutPuttext value="{!expense.Journal_Reference__c}" id="expenseJournalRef" style="width:100px" /></td>
+                                            <td class="slds-cell-wrap"><apex:inputField value="{!expense.Journal_Reference__c}" id="expenseJournalRef" style="width:100px" /></td>
                                             <td class="slds-cell-wrap slds-text-align--right tdBudget" style="width:40px"><apex:outputField value="{!expense.Budget_Cash__c}"/></td>
                                             <td class="slds-cell-wrap slds-text-align--right tdBudget" style="width:40px"><apex:outputField value="{!expense.Budget_In_Kind__c}"/></td>
                                             <td class="slds-cell-wrap slds-text-align--right tdProjected" style="width:40px"><apex:outputField value="{!expense.Projected_Cash__c}" /></td>
@@ -503,7 +504,7 @@ body{margin: 0px 0px 0px 0px;}
                                             <td class="slds-cell-wrap"><apex:OutPuttext value="{!expense.Transaction__c}" id="Transaction" style="width:60px" /></td>       
                                             
                                             <!-- Journal Reference -->
-                                            <td class="slds-cell-wrap"><apex:OutPuttext value="{!expense.Journal_Reference__c}" id="journalRef"  style="width:100px" /></td>
+                                            <td class="slds-cell-wrap"><apex:inputField value="{!expense.Journal_Reference__c}" id="journalRef"  style="width:100px" /></td>
                                             
                                             <!-- Budget Cash -->
                                             <apex:outputPanel rendered="{!If(isbudgetApprovalExist == false,true,false)}">
@@ -874,5 +875,5 @@ body{margin: 0px 0px 0px 0px;}
         
         };
     </script>
-	<!--<script type="text/javascript">(function() {var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkme.com/users/3fd5e49168104198924d448242a11b91/walkme_3fd5e49168104198924d448242a11b91_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = {smartLoad:true}; })();</script>-->
+    <!--<script type="text/javascript">(function() {var walkme = document.createElement('script'); walkme.type = 'text/javascript'; walkme.async = true; walkme.src = 'https://cdn.walkme.com/users/3fd5e49168104198924d448242a11b91/walkme_3fd5e49168104198924d448242a11b91_https.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(walkme, s); window._walkmeConfig = {smartLoad:true}; })();</script>-->
 </apex:page>

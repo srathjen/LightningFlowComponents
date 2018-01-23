@@ -24,7 +24,7 @@ Public class AbsentForm_AC_Test{
         Test.setCurrentPage(pageRef);
         AbsentForm_AC absentIns = new AbsentForm_AC(sc);
         Test.StartTest();
-        System.assertEquals(relationShip.npe4__RelatedContact__c, caseId.ContactId);
+        System.assert(relationShip.npe4__RelatedContact__c.equals(caseId.ContactId),'Check RelatedContact equals to Contact in Case');
         Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
         absentIns.CallouttoDocusign();
         absentIns.cancel();
@@ -54,7 +54,7 @@ Public class AbsentForm_AC_Test{
         relMap.put(relationShip.Id, relationShip);
         absentIns.relationShipMap = relMap;
         absentIns.recpName = relationShip.Id;
-        System.assertEquals(relationShip.npe4__RelatedContact__c, caseId.ContactId);
+        System.assert(relationShip.npe4__RelatedContact__c.equals(caseId.ContactId),'Check RelatedContact equals to Contact in Case');
         Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
         absentIns.getRecpList();
         absentIns.displayReturnToWish = true;
@@ -87,7 +87,7 @@ Public class AbsentForm_AC_Test{
         Test.StartTest();
         absentIns.ReturnToWish();
         absentIns.displayRelatedInfo();
-        System.assertEquals(relationShip.npe4__RelatedContact__c, caseId.ContactId);
+        System.assert(relationShip.npe4__RelatedContact__c.equals(caseId.ContactId),'Check RelatedContact equals to Contact in Case');
         Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
         absentIns.CallouttoDocusign();
         absentIns.ReturnToWishClearanceForm();

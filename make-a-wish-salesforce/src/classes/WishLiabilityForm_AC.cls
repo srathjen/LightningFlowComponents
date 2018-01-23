@@ -40,38 +40,50 @@ public class WishLiabilityForm_AC
     public Integer j = 0;
     public Integer k = 0;
     public boolean displaypopwindow{get;set;}
-    
+    public Map<String,String> participantEmailMap{get;set;}
+    Public boolean showButton{get;set;}
+    Public set<String> parentLegalSet{get;set;}
+    public boolean displaymsgPop{get;set;}
+    public boolean isEmpty{get;set;}
     public WishLiabilityForm_AC(ApexPages.StandardController controller) {
         contactEmailList = new List<String>();
         signNowemailMap = new Map<String,String>();
         emailSignatureMap = new Map<String,String>();
         sendEmailMap = new Map<String,String>();
+        participantEmailMap = new Map<String,String>();
+        parentLegalSet = new Set<String>();
+        listofSenderName = new List<String>();
         caseId = Apexpages.currentPage().getParameters().get('Id');
+        if(Apexpages.currentPage().getParameters().get('option') == 'Three' || Apexpages.currentPage().getParameters().get('event') == 'signing_complete'){
+            showButton = true;
+        }
         typeString = new List<String>();
         receipent = new List<String>();
         signNowList = new List<String>();
-        listofSenderName = new List<String>();
         holdEmailNameSet = new Set<String>();
         envelopeId = '';
         signersKeyPairMap = new Map<String,String>();
         displaypopwindow = false;
         currentCase = [SELECT ID,ContactID,Contact.Name,Contact.Publicity_OK__c,LiabilitySignerMapKeyPair__c,Hidden_Email_List__c,Hidden_Name_List__c,ChapterName__c,ChapterName__r.Name  FROM Case WHERE ID =:caseId];
         WishChildId = currentCase.ContactId; 
-        childForm = [SELECT Id,Parent_Gurdian_above_18__c,Case__c,ParentsParticipantsName__c,Participant_Name__c,Participant_Names__c,Parent_Gurdian_above_18_Email__c,Participant_Details__c,Hidden_Email_List__c,
+        childForm = [SELECT Id,Parent_Gurdian_above_18__c,Case__c,Hidden_Contact_Name__c,ParentsParticipantsName__c,Participant_Name__c,Participant_Names__c,Parent_Gurdian_above_18_Email__c,Participant_Details__c,Hidden_Email_List__c,
                      Hidden_Name_List__c FROM Wish_Child_Form__c WHERE Case__c =: currentCase.Id];
         
         if(childForm.size()>0){
             displayAlert = true;
-            if(childForm[0].Hidden_Name_List__c != Null){
-                
-                 
-                for(String emailSenderName : childForm[0].Hidden_Name_List__c.split('#')){
-                    holdEmailNameSet.add(emailSenderName.trim());
+            if(childForm[0].Hidden_Name_List__c != Null || childForm[0].Hidden_Contact_Name__c != Null){
+               
+                if(childForm[0].Hidden_Name_List__c != Null){
+               
+                    for(String emailSenderName : childForm[0].Hidden_Name_List__c.split('#')){
+                        holdEmailNameSet.add(emailSenderName.trim());
+                    }
                 }
+                
             }
             
             if(childForm[0].ParentsParticipantsName__c != Null){
-                 participantsName = childForm[0].ParentsParticipantsName__c;
+                participantsName = childForm[0].ParentsParticipantsName__c;
                 if(childForm[0].ParentsParticipantsName__c.startsWith(',')){
                     participantsName = childForm[0].ParentsParticipantsName__c.removeStart(',');
                 }
@@ -82,19 +94,20 @@ public class WishLiabilityForm_AC
             }
             if(childForm[0].Parent_Gurdian_above_18__c != Null || childForm[0].Participant_Name__c != Null){
                 signNowList = new List<String>();
-               
-                if(childForm[0].Parent_Gurdian_above_18__c != Null){
                 
+                if(childForm[0].Parent_Gurdian_above_18__c != Null){
+                    
                     for(String processSignNowList : childForm[0].Parent_Gurdian_above_18__c.split('#')){
+                         String signname = processSignNowList.split('-')[0];
+                        // String email = processSignNowList.split('-')[1]; 
                         if(Name == Null || Name == '')
-                            Name = processSignNowList;
+                            Name = signname;
                         else
-                            Name+=','+' '+processSignNowList;
-                        if(!holdEmailNameSet.contains(processSignNowList.trim())){
-                            signNowemailMap.put(processSignNowList,'abc@gmail.com');
+                            Name+=','+' '+signname;
+                        if(!holdEmailNameSet.contains(signname)){
+                            signNowemailMap.put(signname,'abc@gmail.com');
                         }
-                        signNowList.add(processSignNowList);
-                        listofSenderName.add(processSignNowList);
+                        signNowList.add(signname);
                     }
                 }
                 if(childForm[0].Participant_Name__c != Null){
@@ -112,11 +125,10 @@ public class WishLiabilityForm_AC
                             
                         }
                         signNowList.add(displayname);
-                        listofSenderName.add(processSignNowList);
                     }
                 }
             }
-            List<String> holdRecVal = new List<String>();
+             List<String> holdRecVal = new List<String>();
             if(childForm[0].Parent_Gurdian_above_18_Email__c != Null || childForm[0].Participant_Details__c != Null){
                 if(childForm[0].Parent_Gurdian_above_18_Email__c != Null){
                     for(String key : childForm[0].Parent_Gurdian_above_18_Email__c.split('#')){
@@ -126,7 +138,7 @@ public class WishLiabilityForm_AC
                             holdRecVal = key.split('-');
                             if(holdRecVal.size() == 1) {
                              keys = key.split('-')[0];
-                            
+                             value = '';
                             } else if(holdRecVal.size() == 2) {
                                 keys = key.split('-')[0];
                              value = key.split('-')[1];
@@ -135,13 +147,12 @@ public class WishLiabilityForm_AC
                            }
                         
                         if(!holdEmailNameSet.contains(keys)){
-                         if(!String.IsEmpty(keys) && !String.IsEmpty(value)){
+                         if(!String.IsEmpty(keys)){
                             emailSignatureMap.put(keys.trim(),value.trim());
                             holdRecVal.clear();
                         }
                     } 
                     }
-                    system.debug('@@@@ emailSignatureMap @@@@'+emailSignatureMap);
                 }
                 if(childForm[0].Participant_Details__c != Null){
                 List<String> proceessList = new List<String>();
@@ -159,30 +170,17 @@ public class WishLiabilityForm_AC
                             if(Integer.valueof(age) >= 18 && proceessList.size() == 3)
                                 emailSignatureMap.put(keys.trim(),value.trim());
                         }
+                        if(!parentLegalSet.contains(keys)&& Integer.valueof(age) >= 18)
+                         participantEmailMap.put(keys.trim(),value.trim());
+                        
                        } 
                        
                     } 
                 }
-                system.debug('@@@@ emailSignatureMap @@@@'+emailSignatureMap);
             }
         }
-    }
-  }  
-    /*This method is used to fetch the multiple email address to send the liability form.*/
-    public pageReference multiEmail(){
-        if(emailSignatureMap.size()> 0 ){
-            displayPopup = true;
-            multiPickoptions = new List<SelectOption>();
-            for(String currString : emailSignatureMap.keySet()){
-                if(currString != Null){
-                    if(!holdEmailNameSet.contains(currString.trim())){
-                        multiPickoptions.add(new SelectOption(currString.trim(),currString.trim()));}}
-            }
         }
-        else{
-            displayError = true;
-        }
-        return null;
+        
     }
     
     /*This method will take you back to the Case page */
@@ -195,7 +193,9 @@ public class WishLiabilityForm_AC
     
     /*This method will take you back to Liabilityform*/
     public pageReference returnToLiabilityForm(){
-        PageReference reference=new PageReference('/apex/WishLiabilityForm_VF?id='+currentCase.id);
+        isRedriect = false;
+        string currPage = Apexpages.currentPage().getParameters().get('option'); 
+        PageReference reference = new PageReference('/apex/WishLiabilityForm_VF?id='+currentCase.id+'&option='+currPage);
         reference.setRedirect(true);     
         return reference;
     }
@@ -205,10 +205,49 @@ public class WishLiabilityForm_AC
         displayReturnToWish = true;
     }
     
-    public pagereference sendpdftoEmail (){
+    /*This method is used to fetch the multiple email address to send the liability form.*/
+    public pageReference multiEmail(){
+        if((Apexpages.currentPage().getParameters().get('option') == 'Three') || (Apexpages.currentPage().getParameters().get('event') == 'signing_complete')){
+        if(emailSignatureMap.size()> 0 ){
+            displayPopup = true;
+            multiPickoptions = new List<SelectOption>();
+            for(String currString : emailSignatureMap.keySet()){
+                if(currString != Null){
+                    if(!holdEmailNameSet.contains(currString.trim())){
+                        multiPickoptions.add(new SelectOption(currString.trim(),currString.trim()));}}
+            }
+           
+        }
+        else{
+        
+            displayError = true;
+            
+        }
+        }
+        else{
+            if(emailSignatureMap.size()> 0 ){
+            displayPopup = true;
+            multiPickoptions = new List<SelectOption>();
+            for(String currString : emailSignatureMap.keySet()){
+                if(currString != Null){
+                    multiPickoptions.add(new SelectOption(currString.trim(),currString.trim()));
+                }
+            }
+        }
+        else{
+        
+        displaymsgPop = true;
+        
+        }
+        }
+        return null;
+    }
+    
+   public pagereference sendpdftoEmail (){
         displayPopup = false;
         String queryName = '';
         String querySignature = '' ;
+        isEmpty = false;
         Set<String> senderNameSet = new Set<String>();
         for(String processEmailList :emailList ){
             if(processEmailList != Null){
@@ -218,58 +257,42 @@ public class WishLiabilityForm_AC
         }
         for(String currString : emailSignatureMap.keySet()){
             if(senderNameset.Contains(currString)){
-                if(currString != Null)
+            if((!(String.isEmpty(emailSignatureMap.get(currString)) || String.isBlank(emailSignatureMap.get(currString)))) && currString != Null){
                     sendEmailMap.put(currString.trim(),emailSignatureMap.get(currString).trim());
-                
+             }
+            else if(currString != Null && (String.isEmpty(emailSignatureMap.get(currString)) || String.isBlank(emailSignatureMap.get(currString)))){
+                    isEmpty = true;
+             }
             }
         }
-        system.debug('@@@ sendEmailMap @@@'+sendEmailMap);
-        if((!sendEmailMap.isEmpty()) && sendEmailMap.size() > 0 ){
-            for(String currString : sendEmailMap.KeySet()){
-                currString = currString.trim();
-                
-                if(querySignature == '' || querySignature == Null){
-                    querySignature = currString;
-                }
-                else{ 
-                    querySignature +='#' +currString;
-                }
-            }
-            for(String currString : sendEmailMap.Values())
-            {
-                if(String.isBlank(queryName)){
-                    queryName = currString;
-                }
-                else {
-                    queryName += '#'+currString;
-                }
-            }
-        }
-        
-        CallOuttoDocusign(sendEmailMap,caseId);
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'An email has been sent successfully'));
+        System.debug('@@@@@ sendEmailMap @@@@@'+sendEmailMap);
+        System.debug('@@@@@ sendEmailMap @@@@@'+isEmpty);
+       if(sendEmailMap.size() > 0 && isEmpty == false){
+        callOuttoDocusign(sendEmailMap,caseId,Apexpages.currentPage().getParameters().get('option'));
+        //ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'An email has been sent successfully'));
         isRedriect = true;
+        }
+       /* if(isEmpty == true){
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'The parent/legal guardian or participant you have selected has no email address available. Please add email on wish form and try to send form again.'));
+        }*/
         return null;
     }
-   
+    
     @future(Callout = true)   
-    public Static void CallOuttoDocusign(Map<String,String>emailMap,String caseId){
-    System.debug('### sendEmailMap ###'+emailMap);
+    public Static void callOuttoDocusign(Map<String,String>emailMap,String caseId,String currentParam){
         boolean isParent;
         List<Contact> contactList = new List<Contact>(); 
         Wish_Child_Form__c  childFormInstance;
         Map<String,npe4__Relationship__c> recipientMap = new Map<String,npe4__Relationship__c>();
         Set<String> parentGardienSet = new Set<String>();
         childFormInstance = [SELECT Id,Parent_Gurdian_above_18__c,Parent_Gurdian_above_18_Email__c,Case__c,Participant_Name__c FROM Wish_Child_Form__c WHERE Case__c =: caseId];
-        
-        for(String key : childFormInstance.Parent_Gurdian_above_18_Email__c.split('#')){
-            String keys = key.split('-')[0];
-            String value = key.split('-')[1];
-            isParent = true;
-            parentGardienSet.add(keys); 
-        } 
-        
-        Pagereference PDF = Page.WishLiabilitySendPDF;
+        Pagereference PDF;
+         if(currentParam == 'One')
+            PDF = Page.WishLiabilityOption1_VF;
+         else if(currentParam == 'Two')
+            PDF = Page.WishLiabilityOption2_VF;
+         else
+            PDF = Page.WishLiabilitySendPDF;
         String documentPDF;
         PDF.setRedirect(false);
         PDF.getParameters().put('Id',caseId);
@@ -286,9 +309,7 @@ public class WishLiabilityForm_AC
         String Password;
         String IntegratorKey;
         String endPointURL;
-        String emaiBody = 'Please sign the attached - Liability And Publicity Release Form'+'\r\n\r\n'+
-                          'Thank You,'+'\r\n\r\n'+
-                          'Make-A-Wish®';
+        boolean isFirstParent = true;
         Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
         
         for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
@@ -303,96 +324,12 @@ public class WishLiabilityForm_AC
         String authorizationHeader = '<DocuSignCredentials><Username>'+UserName+'</Username><Password>'+Password+'</Password><IntegratorKey>'+IntegratorKey+'</IntegratorKey></DocuSignCredentials>';
         String clientUserId = '';
         String email;
-        
+        String Name;
         //Fetching related contacts that has email address and forming recipients with signature location.
         String recipientsParticipants = '';
+        if(currentParam != 'Three'){
         for (String currString: emailMap.KeySet()) {
-            if (parentGardienSet.Contains(currString) && isParent == true) {
-                String Name = currString;
-                email = emailMap.get(Name);
-                clientUserId = '';
-                
-                if (recipientsParticipants != '')
-                    recipientsParticipants = recipientsParticipants + ',';
-                recipientsParticipants = recipientsParticipants + '{' +
-                    '      "email": "' +email+ '",' +
-                    '      "name": "' + Name+ '",' +
-                    '     "roleName": "Signer ' + i + '",' +
-                    '     "routingOrder": "'+i+'",'+
-                    '      "recipientId":"' + i + '",' + clientUserId +
-                    '      "tabs": {'+
-                    '                "signHereTabs": [{'+
-                    '                     "anchorString":"~s'+i+'",'+
-                    '                    "anchorXOffset": "0",'+
-                    '     "anchorYOffset": "0",'+
-                    '                    "anchorIgnoreIfNotPresent": "false",'+
-                    '                    "anchorUnits": "inches"'+
-                    '                }],'+
-                    '     "radioGroupTabs": [{'+
-                    '                    "groupName": "Radio Group 1",'+
-                    '                    "required": "true",'+
-                    '                    "radios": [{'+
-                    '                    "anchorString": "~FirstRadio",'+
-                    '                    "anchorXOffset": "0",'+
-                    '                    "anchorYOffset": "0",'+
-                    '                    "anchorIgnoreIfNotPresent": "false",' +
-                    '                    "anchorUnits": "inches",'+
-                    '                    "required": "true",'+
-                    '                    "selected": "false",'+
-                    '                     "value": "one1Radio",'+
-                    '                    "xPosition": "300",'+
-                    '                    "yPosition": "75"},{'+
-                    '                    "anchorString": "~secondRadio",'+
-                    '                    "anchorXOffset": "0",'+
-                    '                    "anchorYOffset": "0",'+
-                    '                    "anchorIgnoreIfNotPresent": "false",' +
-                    '                    "anchorUnits": "inches",'+
-                    '                    "required": "true",'+
-                    '                    "selected": "false",'+
-                    '                     "value": "twoRadio",'+
-                    '                    "xPosition": "350",'+
-                    '                    "yPosition": "75"'+
-                    '                    }]'+
-                    '                   }],'+
-                    '                "initialHereTabs": [{' +
-                    '                    "anchorString": "~123abcinitial",' +
-                    '                    "conditionalParentLabel":"Radio Group 1",'+
-                    '                    "conditionalParentValue" :"one1Radio",'+
-                    '                    "optional"    :  "false",' +
-                    '                    "anchorXOffset": "0",' +
-                    '                    "anchorYOffset": "0.2",' +
-                    '                    "name"       : "FirstInitial",'+
-                    '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option1__c","writeBack":"true","allowSenderToEdit":"true"},'+
-                    '                    "anchorIgnoreIfNotPresent": "false",' +
-                    '                    "anchorUnits": "inches"},{'+
-                    '                    "anchorString": "~initial2",' +
-                    '                    "optional"    :  "false",' +
-                    '                    "conditionalParentLabel":"Radio Group 1",'+
-                    '                    "conditionalParentValue" :"twoRadio",'+
-                    '                    "name"       : "SecondInitial",'+
-                    '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option2__c","writeBack":"true","allowSenderToEdit":"true"},'+
-                    '                    "anchorXOffset": "0",' +
-                    '                    "anchorYOffset": "0.2",' +
-                    '                    "anchorIgnoreIfNotPresent": "false",' +
-                    '                    "anchorUnits": "inches"'+
-                    '                }],' +
-                    '                "dateSignedTabs": [{'+
-                    '                      "anchorString": "~date'+i+'",'+
-                    '                       "anchorXOffset": "0",'+
-                    '                       "fontSize":      "Size14",'+
-                    '                       "fontColor":     "Black",'+
-                    '                        "anchorYOffset": "0",'+
-                    '                        "anchorIgnoreIfNotPresent": "false",'+
-                    '                        "xPosition": "100",'+
-                    '                        "yPosition": "72",'+
-                    '                        "anchorUnits": "inches"'+
-                    '                    }]'+
-                    '            }'+
-                    '    }';
-                isParent = false;
-            }      
-            else  {
-                String Name = currString;
+                Name = currString;
                 email = emailMap.get(Name);
                 clientUserId = '';
                 if (recipients != '')
@@ -424,10 +361,131 @@ public class WishLiabilityForm_AC
                     '                    }]'+
                     '            }' +
                     '    }';
-                
-            }
             i++;
         }
+       }
+       else{
+           for(String currString : emailMap.KeySet()){
+            Name = currString;
+            email = emailMap.get(currString);
+           
+               if(isFirstParent == true ){
+               
+                       if(recipients != '')
+                           recipients = recipients + ',';
+                       recipients = recipients + '{'+
+                           '      "email": "'+email+'",'+
+                           '      "name": "'+Name+'",'+
+                           '      "recipientId":"' + i + '",' + clientUserId +
+                           '      "tabs": {'+
+                           '                "signHereTabs": [{'+
+                           '                     "anchorString":"~s'+i+'",'+
+                           '                    "anchorXOffset": "0",'+
+                           '                   "anchorYOffset": "0",'+
+                           '                    "anchorIgnoreIfNotPresent": "false",'+
+                           '                    "anchorUnits": "inches"'+
+                           '                  }],'+
+                           '                 "radioGroupTabs": [{'+
+                           '                    "groupName": "Radio Group 1",'+
+                           '                    "required": "true",'+
+                           '                    "radios": [{'+
+                           '                    "anchorString": "~FirstRadio",'+
+                           '                    "anchorXOffset": "0",'+
+                           '                    "anchorYOffset": "0",'+
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches",'+
+                           '                    "optional"   :"false",'+
+                           '                    "selected": "false",'+
+                           '                     "value": "one1Radio",'+
+                           '                    "xPosition": "7200",'+
+                           '                    "yPosition": "19020"},{'+
+                           '                    "anchorString": "~secondRadio",'+
+                           '                    "anchorXOffset": "0",'+
+                           '                    "anchorYOffset": "0",'+
+                           '                    "optional"   :"false",'+
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches",'+
+                           '                    "selected": "false",'+
+                           '                     "value": "twoRadio",'+
+                           '                    "xPosition": "7200",'+
+                           '                    "yPosition": "19020"'+
+                           '                    }]'+
+                           '                   }],'+
+                           '                "initialHereTabs": [{' +
+                           '                    "anchorString": "~123abcinitial",' +
+                           '                    "conditionalParentLabel":"Radio Group 1",'+
+                           '                    "conditionalParentValue" :"one1Radio",'+
+                           '                    "optional"    :  "false",' +
+                           '                    "anchorXOffset": "0",' +
+                           '                    "anchorYOffset": "0.2",' +
+                           '                    "name"       : "FirstInitial",'+
+                           '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option1__c","writeBack":"true","allowSenderToEdit":"true"},'+
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches"},{'+
+                           '                    "anchorString": "~initial2",' +
+                           '                    "optional"    :  "false",' +
+                           '                    "conditionalParentLabel":"Radio Group 1",'+
+                           '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option2__c","writeBack":"true","allowSenderToEdit":"true"},'+
+                           '                    "conditionalParentValue" :"twoRadio",'+
+                           '                    "name"       : "SecondInitial",'+
+                           '                    "anchorXOffset": "0",' +
+                           '                    "anchorYOffset": "0.2",' +
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches"'+
+                           '                }],' +
+                           '                  "dateSignedTabs": [{'+
+                           '                      "anchorString": "~date'+i+'",'+
+                           '                       "anchorXOffset": "0",'+
+                           '                       "fontSize":      "Size14",'+
+                           '                       "fontColor":     "Black",'+
+                           '                        "anchorYOffset": "0",'+
+                           '                        "anchorIgnoreIfNotPresent": "false",'+
+                           '                        "xPosition": "100",'+
+                           '                         "yPosition": "72",'+
+                           '                         "anchorUnits": "inches"'+
+                           '                    }]'+
+                           '            }'+
+                           '    }';
+                               isFirstParent = false;
+                   }
+                        
+                        else{
+                        system.debug('@@@@ isFirstParent @@@@'+isFirstParent );
+                        system.debug('@@@@ Name @@@@'+Name);
+                        system.debug('@@@@ email @@@@'+email);
+                             if(recipients != '')
+                                   recipients = recipients + ',';
+                               recipients = recipients + '{'+
+                                   '      "email": "'+email+'",'+
+                                   '      "name": "'+Name+'",'+
+                                   '      "recipientId":"' + i + '",' + clientUserId +
+                                   '      "tabs": {'+
+                                   '                "signHereTabs": [{'+
+                                   '                     "anchorString":"~s'+i+'",'+
+                                   '                    "anchorXOffset": "0",'+
+                                   '     "anchorYOffset": "0",'+
+                                   '                    "anchorIgnoreIfNotPresent": "false",'+
+                                   '                    "anchorUnits": "inches"'+
+                                   '                }],'+
+                                   '                "dateSignedTabs": [{'+
+                                   '                      "anchorString": "~date'+i+'",'+
+                                   '                       "anchorXOffset": "0",'+
+                                   '                       "fontSize":      "Size14",'+
+                                   '                       "fontColor":     "Black",'+
+                                   '                        "anchorYOffset": "0",'+
+                                   '                        "anchorIgnoreIfNotPresent": "false",'+
+                                   '                        "xPosition": "100",'+
+                                   '                        "yPosition": "72",'+
+                                   '                        "anchorUnits": "inches"'+
+                                   '                    }]'+
+                                   '            }'+
+                                   '    }';
+                                   
+                             }
+                        i++;
+            
+        }
+       }
         if(recipientsParticipants != '')
             recipients = recipientsParticipants +','+ recipients; 
         
@@ -435,7 +493,7 @@ public class WishLiabilityForm_AC
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailBlurb":"'+emaiBody+'",'+
+            '  "emailBlurb":"'+Name+'\r\n\n Please sign the attached Liability And Publicity Release Form. \r\n\n Thank You,\r\n Wish & Volunteer Center",'+
             '  "emailSubject": "Signature Required - Liability And Publicity Release Form",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+
@@ -488,7 +546,7 @@ public class WishLiabilityForm_AC
         }
     }
     
-     public pageReference redirect(){
+    public pageReference redirect(){
         PageReference acctPage = new PageReference ('/'+caseId);
         acctPage.setRedirect(true);
         return acctPage;
@@ -502,16 +560,22 @@ public class WishLiabilityForm_AC
             displaySignNowPopup = true;
             multiPickoptions = new List<SelectOption>();
             for(String currString : signNowemailMap.keySet()){
+                if(!holdEmailNameSet.contains(currString )){
                 multiPickoptions.add(new SelectOption(currString,currString ));
+                }
             }
+            system.debug('@@@@@ graterThan now @@@'+signNowemailMap);
         }
         else{
+        
             displayError = true;
+            system.debug('@@@@@ lessthan @@@'+displayError );
         }
         return null;
     }          
-    /*This method is used Sign the document by the selected user. */
-    public Pagereference SubmitAndSign(){
+   
+   /*This method is used Sign the document by the selected user. */
+    public Pagereference submitAndSign(){
         String account;
         String userName;
         String password;
@@ -549,13 +613,15 @@ public class WishLiabilityForm_AC
             }
             Map<String,String> recipientMap = new Map<String,String>();
             Set<String> signerSet = new Set<String>();
-            for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Participant_Name__c,Parent_Gurdian_above_18__c FROM Wish_Child_Form__c WHERE
+            for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Participant_Name__c,Parent_Gurdian_above_18__c,Parent_Gurdian_above_18_Email__c FROM Wish_Child_Form__c WHERE
                                                     Case__c =: caseId]){
                                                         if(wishChildForm.Parent_Gurdian_above_18__c != Null) {                                     
                                                             for(String keys : wishChildForm.Parent_Gurdian_above_18__c .split('#')){
-                                                                recipientMap.put(keys.trim(),'PARENT/LEGAL GUARDIAN');
+                                                                String name = keys.split('-')[0];
+                                                                //String emailadd = keys.split('-')[1];
+                                                                recipientMap.put(name.trim(),'PARENT/LEGAL GUARDIAN');
                                                                 isFirstParent = true;
-                                                                signerSet.add(keys); 
+                                                                signerSet.add(name); 
                                                             } 
                                                         }
                                                         if(wishChildForm.Participant_Name__c!= Null){
@@ -567,7 +633,6 @@ public class WishLiabilityForm_AC
                                                             } 
                                                         }
                                                         
-                                                        system.debug('@@@@@ signerSet 1@@@@'+signerSet);
                                                     }
             Wish_Child_Form__c  dbcase = [SELECT Id,Wish_Liability_Envolep__c,LiabilitySignerMapKeyPair__c,Case__c,Hidden_Liability_Envelop_Id_1__c,
                                           Hidden_Liability_Envelop_Id_2__c,Hidden_Liability_Envelop_Id_3__c,Hidden_Liability_SignerMap_Key_1__c,
@@ -582,7 +647,7 @@ public class WishLiabilityForm_AC
                        String value = processName.split('-')[1];
                        String name = Keys.trim();
                        processSet.add(name);
-                       system.debug('@@@@@ ENTER INTO ELSE STATEMENT 1@@@@'+processSet);
+                       
                    }
                    for(String signNowName : signerSet){
                        if(!processSet.contains(signNowName)){
@@ -776,6 +841,7 @@ public class WishLiabilityForm_AC
                                    '    }';
                                if(!signersKeyPairMap.containsKey(Name))
                                    signersKeyPairMap.put(Name,String.valueof(i));
+                                   system.debug('### signersKeyPairMap ###'+signersKeyPairMap);
                            }
                            else{
                                if(recipients != '')
@@ -1006,7 +1072,6 @@ public class WishLiabilityForm_AC
                    wishChildFormMap.put(updateChildForm.Id,updateChildForm); 
                }
             
-          
             if(dsfsList.size() > 0)
                 insert dsfsList;
             if(wishChildFormMap.size() > 0){
@@ -1017,7 +1082,7 @@ public class WishLiabilityForm_AC
         }
         return reference;
     }
-    
+   
     /*This method will display popup messages*/
     public pageReference displayMessage(){
         displaySignNowPopup = false;

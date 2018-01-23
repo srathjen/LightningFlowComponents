@@ -3,6 +3,6 @@
  inline="true"
  enableAttachFromSDriveFolders="false" 
  customObjectName="In_Kind_Donation_Reimbursement__c"
- customObjectFileName="In_Kind_Donation_Reimbursement_File__c"
+ customObjectFileName="InkindDon_reimburseFile__c"
  objectId="{!In_Kind_Donation_Reimbursement__c.Id}" />
 </apex:page>

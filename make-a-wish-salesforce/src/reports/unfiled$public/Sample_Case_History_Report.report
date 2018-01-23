@@ -27,25 +27,21 @@
     <filter>
         <criteriaItems>
             <column>CASE_OWNER</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>marissa astrain</value>
         </criteriaItems>
         <criteriaItems>
             <column>field_key</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case Owner</value>
         </criteriaItems>
         <criteriaItems>
             <column>CREATED_DATE</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>LAST_N_DAYS:7</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>

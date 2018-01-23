@@ -24,6 +24,7 @@ global Class WishReferralForm_AC
     public string additionalParentState{get;set;}
     public static string icdOrPcd;
     public string refChildFormParent{get;set;}
+    public string referralComment{get;set;}
     
     public WishReferralForm_AC()
     {
@@ -54,8 +55,10 @@ currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
                                                      FROM ICD_Codes__c WHERE Name =: diagnosisFilter LIMIT 1];
         if(icdCodeInfoList.size() > 0) {
             currLead.PD_ICD_Code__c = icdCodeInfoList[0].Id;
+            currLead.ICD_Given_By_Referrer__c = icdCodeInfoList[0].Id;
         }
         currLead.PD_Condition_Description__c = selectedDiagnosis;
+        currLead.Diagnosis_Given_By_Referrer__c = selectedDiagnosis;
         
         currLead.Company = 'Make-A-Wish';
         currLead.LastName = lastName;
@@ -286,6 +289,14 @@ return null;
                         System.debug('currLead.RFI_Form_Info_Hidden__c ++++++++++++++++++++++ ' + currLead.RFI_Form_Info_Hidden__c);
                     }
                     
+                    if(currLead.Relationship_To_Child__c == 'Medical Professional'){
+                        System.debug('RefComment>>>>>>!!!!'+referralComment);
+                        currLead.ReferralComment__c = referralComment;
+                    } else {
+                        System.debug('RefComment>>>>>>!!!!>>>>>');
+                        currLead.ReferralComment__c = '';
+                    }
+                    
                     if(currLead.Relationship_To_Child__c == 'Medical Professional' && 
                        (currLead.Medical_Provider_Category__c  == 'Nurse Practitioner' || currLead.Medical_Provider_Category__c == 'Physician Assistant' || currLead.Medical_Provider_Category__c == 'Physician'))
                     {
@@ -294,6 +305,7 @@ return null;
                         currLead.Medical_Professional_Phone__c = currLead.Referrer_Phone__c;
                         currLead.Medical_Professional_Email__c = currLead.Referrer_Email__c;
                         currLead.Hospital_Treatment_Facility__c = currLead.Hospital_Treatment_Facility_Treating__c;
+                        
                         
                     }
                     
@@ -334,7 +346,7 @@ return null;
     @RemoteAction
     global static List<ICD_Codes__c> searchDiagnosis(String searchTerm) {
         icdOrPcd = 'ICD';
-        List<ICD_Codes__c> icdCodes = Database.query('Select Id, Name,Condition_Description__c, Condition_Description__r.Name from ICD_Codes__c where Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\' AND Hidden_ICD_Code__c = false');
+        List<ICD_Codes__c> icdCodes = Database.query('Select Id, Name,Condition_Description__c, Short_Description__c, Condition_Description__r.Name from ICD_Codes__c where Name like \'%' + String.escapeSingleQuotes(searchTerm) + '%\' AND Hidden_ICD_Code__c = false');
         return icdCodes;
     } 
     
@@ -540,6 +552,7 @@ return null;
         Id taskRT = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.taskRT).getRecordTypeId();
         Task newTask = new Task();
         newTask.Subject = subject;
+        newTask.SystemGeneratedTask__c = TRUE;
         newTask.RecordTypeId = recordTypeId;
         newTask.OwnerId = UserInfo.getUserId();
         newTask.whoId = whoId;

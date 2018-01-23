@@ -7,8 +7,11 @@ and used to change the ownership of the 'Brithday Remainder Task' to the primary
 *******************************************************************************************************************/
 trigger TaskTrigger_AT on Task (before insert, before update, after insert, after update) {
     Constant_AC  constant = new Constant_Ac();
+     if((trigger.isBefore && trigger.isUpdate && RecursiveTriggerHandler.blockBeforeUpdate == true) || (trigger.isAfter && trigger.isUpdate && RecursiveTriggerHandler.blockAfterUpdate)){
+     return; 
+    }
     //Affiliation status update.
-    if(Trigger.isUpdate && Trigger.isAfter){
+    if(Trigger.isUpdate && Trigger.isAfter && RecursiveTriggerHandler.blockAfterUpdate == false){
         
         Id taskInterviewRecordType = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
         Id wishGrantTaskRT = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId();
@@ -29,11 +32,22 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         List<Task> validateTaskList = new List<Task>();
         List<Id> leadIdList = new List<Id>();
         Set<Id> followUpTaskOwnerIdSet = new Set<Id>();
+        Set<Id> interviewTaskVolunteerIdsSet = new Set<Id>();
         
         for(Task updatedTask : Trigger.New) {
             if(updatedTask.Status == 'Completed' && Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Volunteer wish follow-up activities not complete') {
                 followUpTaskMap.put(updatedTask.WhatId, updatedTask);
                 followUpTaskOwnerIdSet.add(updatedTask.OwnerId);
+            }
+            
+            if(updatedTask.Status == 'Approved' && trigger.oldMap.get(updatedTask.id).Status != 'Approved'){
+                system.debug('Inside After update-------->');
+                if(updatedTask.Subject == 'Interview Task' && updatedTask.WhoId != Null && updatedTask.RecordTypeId == taskInterviewRecordType ){
+                    system.debug('Interview Task Subject-------->'+updatedTask.Subject);
+                    system.debug('Interview Task Whoid-------->'+updatedTask.WhoId);
+                    system.debug('Interview Task RecordType ID-------->'+updatedTask.RecordTypeId);
+                    interviewTaskVolunteerIdsSet.add(updatedTask.WhoId);
+                }
             }
             
             if(updatedTask.Status == 'Completed' && Trigger.oldMap.get(updatedTask.id).Status != 'Completed')
@@ -79,11 +93,15 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
             if((updatedTask.Status == 'Declined') && updatedTask.RecordTypeId ==taskInterviewRecordType && Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status){
                 declinedTaskVolunteerIds.add(updatedTask.WhoId);
             }
-          
-              //Update the Lead Closed Date.
+            
+            //Update the Lead Closed Date.
             if(updatedTask.Status == 'Completed' && (Trigger.oldMap.get(updatedTask.Id).Status != updatedTask.Status && updatedTask.subject == 'Referral DNQ')){
                 leadIdList.add(updatedTask.whoId);
             }
+        }
+        
+        if(interviewTaskVolunteerIdsSet.size() > 0){
+            TaskHandler.updateVolunteerInterviewDate(interviewTaskVolunteerIdsSet, 'update');
         }
         
         if(followUpTaskMap.size() > 0) {
@@ -114,8 +132,8 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         }
         
         /*if(uploadParentTaskIdMap.size() > 0) {
-            TaskHandler.createUploadTaskForWishOwner(uploadParentTaskIdMap);
-        }*/
+TaskHandler.createUploadTaskForWishOwner(uploadParentTaskIdMap);
+}*/
         
         if(validateTaskList.size() > 0 && completedTaskParentIdSet.size() > 0) {
             TaskHandler.autoCloseTask(validateTaskList,completedTaskParentIdSet);
@@ -142,7 +160,9 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
         List<Task> updateTaskList = new List<Task>();
         List<Task> matchContactTaskList = new List<Task>();
         Set<Id> taskParentIdSet = new Set<Id>();
-        
+        Map<Id, List<Task>> reparentChildCaseTaskMap = new Map<Id, List<Task>>();
+        Map<Id, Task> bgExpiringTaskMap = new Map<Id, Task>();
+        Map<Id, Task> coiExpiringTaskMap = new Map<Id, Task>();
         for(Task updatedTask : Trigger.New) {
             string contactId = updatedTask.WhoId;
             
@@ -153,24 +173,56 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                 updatedTask.ActivityDate = null;
             }
             
+            if(updatedTask.Subject == 'BC ET : Background Check Expiring') {
+                if(updatedTask.WhatId != NULL) {
+                    bgExpiringTaskMap.put(updatedTask.WhatId,updatedTask);
+                }
+            }
+            
+            if(updatedTask.Subject == 'COI ET : COI Expiring') {
+                if(updatedTask.WhatId != NULL) {
+                    coiExpiringTaskMap.put(updatedTask.WhatId,updatedTask);
+                }
+            }
             if(updatedTask.subject == 'Budget is approved' || updatedTask.subject == 'Case ET : Budget Approval Request' || updatedTask.subject == 'Budget needs to be revised' || updatedTask.subject == 'Follow-up on wish clearance' || updatedTask.subject == 'Interview date not set'
                || updatedTask.subject == 'Wish Child Birthday Reminder' || updatedTask.subject == 'Wish Family Packet not submitted') {
                    updatedTask.SystemGeneratedTask__c = True;
                    updatedTask.RecordTypeId = chapterRT;
                    matchContactTaskList.add(updatedTask);
                    taskParentIdSet.add(updatedTask.WhatId);
-            }
+               }
             if(updatedTask.Subject == 'Wish Child Birthday Reminder') {
                 birthdayTasksList.add(updatedTask);
                 taskRelatedContactIdsSet.add(updatedTask.whatId);
             }
             
-            //if(updatedTask.WhoId != null && contactId.startsWith('003') ){
+            //if(updatedTask.WhoId != null && contactId.startsWith('003') ){}
             if(updatedTask.WhoId != null){
                 contactIdset.add(updatedTask.WhoId);
                 updateTaskList.add(updatedTask);
             }
             
+            //Used to reparent child case task to parent wish
+            if(updatedTask.subject == 'Case ET : Wish Presentation Date Reminder' || updatedTask.subject == 'Case ET : Wish Presentation Details') {
+                if(reparentChildCaseTaskMap.containsKey(updatedTask.WhatId)) {
+                    reparentChildCaseTaskMap.get(updatedTask.WhatId).add(updatedTask);
+                } else {
+                    reparentChildCaseTaskMap.put(updatedTask.WhatId, new List<Task>{updatedTask});
+                }
+            }
+            
+        }
+        
+        if(reparentChildCaseTaskMap.size() > 0) {
+            TaskHandler.reparentChildCaseToParentCase(reparentChildCaseTaskMap);
+        }
+        
+        if(bgExpiringTaskMap.size() > 0) {
+            TaskHandler.updateBGCTaskSubjectDays(bgExpiringTaskMap);
+        }
+        
+        if(coiExpiringTaskMap.size() > 0) {
+            TaskHandler.updateCOITaskSubjectDays(coiExpiringTaskMap);
         }
         
         if(matchContactTaskList.size() > 0 && taskParentIdSet.size() > 0) {
@@ -187,7 +239,7 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
     }
     
     // Field validation and updating mail merge fields.
-    if(Trigger.isUpdate && Trigger.isBefore){
+    if(Trigger.isUpdate && Trigger.isBefore &&  RecursiveTriggerHandler.blockAfterUpdate == false){
         Id wishGrantedRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishGrantRT).getRecordTypeId(); 
         set<ID> contactIdset = new set<ID>();
         Map<Id,Contact> contactInfoMap = new Map<Id,Contact>();
@@ -252,6 +304,21 @@ trigger TaskTrigger_AT on Task (before insert, before update, after insert, afte
                     t.adderror('error');
                 }
             }
+        }
+    }
+    
+    if(trigger.isInsert && trigger.isAfter){
+        Constant_AC  constant = new Constant_Ac(); 
+        Id interviewTaskRTId = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
+        Set<Id> volunteerIdsSet = new Set<Id>();
+        for(Task newTask: trigger.new){
+            if(newTask.Subject == 'Interview Task' && newTask.WhoId != Null && newTask.RecordTypeId == interviewTaskRTId ){
+                volunteerIdsSet.add(newTask.WhoId);
+            }
+            
+        }
+        if(volunteerIdsSet.size() > 0){
+            TaskHandler.updateVolunteerInterviewDate(volunteerIdsSet, 'insert');
         }
     }
 }

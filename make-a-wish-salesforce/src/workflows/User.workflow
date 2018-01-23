@@ -27,7 +27,7 @@
     <rules>
         <fullName>Send Email After 7 Days and 30 Days If Volunteer Orientation Not Registered</fullName>
         <active>true</active>
-        <booleanFilter>1 AND( 2 OR 3)AND 4 AND 5 AND 6</booleanFilter>
+        <booleanFilter>1 AND( 2 OR 3)AND 4</booleanFilter>
         <criteriaItems>
             <field>User.Migrated_User__c</field>
             <operation>equals</operation>
@@ -47,16 +47,6 @@
             <field>User.Volunteer_Orientation_Status__c</field>
             <operation>notEqual</operation>
             <value>Registered</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.Volunteer_Orientation_Status__c</field>
-            <operation>notEqual</operation>
-            <value>First Registeration</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.Volunteer_Orientation_Status__c</field>
-            <operation>notEqual</operation>
-            <value>Cancelled</value>
         </criteriaItems>
         <description>Send Email After 7 Days and 30 Days If Volunteer Orientation Not Registered</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

@@ -11,6 +11,6 @@ public class InKindDonationReimbursementFile_AT_Test{
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
         In_Kind_Donation_Reimbursement__c  InkindRec = OrientationandTrainingUtil.CreateInkindRecord(wish.Id);
-        In_Kind_Donation_Reimbursement_File__c  newFileRecord = OrientationandTrainingUtil.createInkindDonaReimbFileRecord(InkindRec.Id);
+        InkindDon_reimburseFile__c newFileRecord = OrientationandTrainingUtil.createInkindDonaReimbFileRecord(InkindRec.Id);
     }
 }

@@ -69,30 +69,34 @@
     <columns>
         <field>In_Kind_Donation_Reimbursement__c$Description_5__c</field>
     </columns>
+    <columns>
+        <field>In_Kind_Donation_Reimbursement__c$Unique_Wish_Identifier__c</field>
+    </columns>
     <filter>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c$Wish_child_Name__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c$Wish_child_Name__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>test</value>
         </criteriaItems>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c$RecordType</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>In_Kind_Donation_Reimbursement__c.Reimbursement</value>
         </criteriaItems>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c$Approved_Date__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>In_Kind_Donation_Reimbursement__c$Unique_Wish_Identifier__c</column>
+            <operator>contains</operator>
+            <value>001</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>
@@ -104,7 +108,7 @@
     <reportType>In_Kind_Reimbursement__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
-    <sortColumn>In_Kind_Donation_Reimbursement__c$Approved_Date__c</sortColumn>
+    <sortColumn>In_Kind_Donation_Reimbursement__c$Name</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
         <dateColumn>In_Kind_Donation_Reimbursement__c$Approved_Date__c</dateColumn>

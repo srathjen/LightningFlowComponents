@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
-    <customButtons>Create_New_Case</customButtons>
     <customButtons>Update_Contact_Info</customButtons>
     <emailDefault>false</emailDefault>
     <excludeButtons>Clone</excludeButtons>
@@ -104,10 +103,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Hidden_Lead_Id__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Hidden_Hold_Status_Value__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -373,6 +368,10 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Est_Hold_End_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Inactive_Date__c</field>
             </layoutItems>
             <layoutItems>
@@ -563,10 +562,6 @@
                 <behavior>Edit</behavior>
                 <field>Test_Record__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Case_Member_Count__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
@@ -670,6 +665,7 @@
         <fields>dsfs__Subject__c</fields>
         <fields>dsfs__Envelope_Status__c</fields>
         <fields>dsfs__Sent_Date_Time__c</fields>
+        <fields>dsfs__Completed_Date_Time__c</fields>
         <relatedList>dsfs__DocuSign_Status__c.dsfs__Case__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -686,6 +682,7 @@
         <fields>CREATEDBY_USER</fields>
         <fields>Total_Reimbursement_Amount__c</fields>
         <fields>Gift_Value__c</fields>
+        <fields>Adjustment_Comments__c</fields>
         <relatedList>In_Kind_Donation_Reimbursement__c.Wish__c</relatedList>
     </relatedLists>
     <relatedLists>

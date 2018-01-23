@@ -1,0 +1,84 @@
+<apex:page sidebar="false" applyBodyTag="false" cache="false" standardController="case" extensions="Entertainment_AC">
+    <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/Liability.css')}" /> 
+    <style>
+        .custPopup, .custPopup-main-message{
+        left: -32% !important;
+        padding: 2.5rem;
+        width: 70% !important;
+        font-weight : bold;
+        font-size : 150%;
+        font-family:'Lato';
+        }
+        
+    </style>
+    
+    <apex:form id="AbsentForm">
+        <apex:commandLink Style="float:right;padding:30px;font-family:'Lato" action="{!ReturnToWish}" value="Return to Wish" html-data-toggle="modal" html-data-target="wffsame-alert"/>   
+        <apex:outputPanel id="ReturntoWish">
+            <apex:outputPanel rendered="{!displayReturnToWish}" layout="block">
+                <div class="pop-wrap">
+                    <div class="custPopup">
+                        <div class="container">
+                            <div class="row">
+                                <div class="row" style="padding:10px">
+                                    <div class="col-xs-12 col-sm-12 col-md-12" style="font-family:'Lato';">
+                                        <center> Are you sure you want to exit ? </center>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
+                                        <apex:commandButton value="Yes" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}" style="height: 2.75rem; margin-left: 5%;font-family:'Lato';"/>
+                                        <apex:commandButton value="No" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!ReturnToWishClearanceForm}"  style="height: 2.75rem; margin-left: 5%;font-family:'Lato';"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </apex:outputPanel>
+        </apex:outputPanel>
+        
+        <apex:messages style="font-family:'Lato';"/>
+        <apex:pageBlock mode="main">
+        <font family="Lato"><apex:facet name="header">
+         <span style="font-family:'Lato';font-size:20px">&nbsp;&nbsp;&nbsp;Entertainment And Sports Wish LOU Form </span>
+          </apex:facet></font>
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Name:"/>
+                    <apex:selectList style="font-family:'Lato';font-size:12px;" value="{!recpName}" multiselect="false" size="1" html-placeholder="Please Select All That Apply">
+                        <apex:selectOptions value="{!RecpList}" />
+                        <apex:actionSupport event="onchange" action="{!displayRelatedInfo}" reRender="AbsentForm"/>
+                    </apex:selectList> 
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!IF(recpName != '' ,true,false)}">
+                    <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Email:"/>
+                    <apex:outputText ><span style="font-family:'Lato';font-size:12px;">{!recpEmail}</span></apex:outputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!IF(recpRelType != '' ,true,false)}">
+                    <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Relationship Type:" />
+                    <apex:outputText ><span style="font-family:'Lato';font-size:12px;">{!recpRelType}</span></apex:outputText>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:actionstatus id="counterStatus">
+                <apex:facet name="start">
+                    <div class="waitingSearchDiv" id="el_loading" style="background-color: #fbfbfb; height:100%;opacity:0.65;width:100%;">
+                        <div class="waitingHolder" style="top: 100px; width: 91px;">
+                            <img class="waitingImage" src="/img/loading.gif" title="Please Wait..." />
+                            <span class="waitingDescription">Loading...</span>
+                        </div>
+                    </div>
+                </apex:facet>
+            </apex:actionstatus>
+            <apex:actionfunction action="{!CallouttoDocusign}" name="sendForSign" status="counterStatus" reRender="AbsentForm">
+            </apex:actionfunction>
+        </apex:pageBlock>
+        <center>
+            <apex:commandButton style="font-family:'Lato';" value="Send Now" action="{!updateRelatedContact}" oncomplete="sendForSignature();"/>
+            <apex:commandButton style="font-family:'Lato';" value="Cancel" action="{!Cancel}" />
+        </center>
+    </apex:form>
+    <script>
+    function sendForSignature() {
+        sendForSign();
+    }
+    </script>
+</apex:page>

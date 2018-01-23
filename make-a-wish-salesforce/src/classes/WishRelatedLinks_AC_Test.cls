@@ -18,7 +18,7 @@ public class WishRelatedLinks_AC_Test {
         testAccPlan.DisplayErrorMessage();
         //testAccPlan.recipitLink = 'wishreceipt';
         testAccPlan.updateWishChildContact();
-       // testAccPlan.downLoadWishReceipt();
+        // testAccPlan.downLoadWishReceipt();
         testAccPlan.LiabilityFrom();
         PageReference pageRef = Page.WishRelatedLinks_VF;
         //pageRef.getParameters().put('Id', String.valueOf(pay.Id));
@@ -38,5 +38,12 @@ public class WishRelatedLinks_AC_Test {
         PageReference pageRef = Page.WishRelatedLinks_VF;
         //pageRef.getParameters().put('Id', String.valueOf(pay.Id));
         Test.setCurrentPage(pageRef);
+    }
+    public static testmethod void Callmethods()
+    {
+        Case cse= new Case();
+        ApexPages.StandardController stdcase = new ApexPages.StandardController(cse);
+        WishRelatedLinks_AC  obj=new WishRelatedLinks_AC(stdcase);
+        obj.updateCaseTeamMember();
     }
 }

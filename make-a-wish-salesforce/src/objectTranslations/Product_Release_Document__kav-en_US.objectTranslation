@@ -9,7 +9,7 @@
         <value>Product Release Documents</value>
     </caseValues>
     <fields>
-        <label><!-- Attacment --></label>
+        <label><!-- Attachment --></label>
         <name>Attacment__c</name>
     </fields>
     <fields>

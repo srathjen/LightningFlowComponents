@@ -1,9 +1,16 @@
-/*****************************************************************************
-Created by: Vennila Paramasivam
+/************************************************************************************************************************************
+Created by: Vennila Paramasivam & Kanagaraj
 Author : MST Solutions
 CreateDate : 06/01/2016
-Description : Creating Wish Child Details from Wish Determination Case detail page.
-******************************************************************************/
+Description : This WishChildForm_AC class is used to update wish child contact and wish family contact details.
+              And aslo we can able to add additional parent legaual guardian and participant in wish family form and 
+              we can add dervier details,medical information and travel information in wish information form.
+              And we can able to electronic sign this form with details volunteer has filled using sing now and
+              send for signature options.And user can able to download this form. Once all the information hase been 
+              entered the volunteer is submit this record for approval. Once the chapter staff approved this record
+              the corresponding details are updated in wish child and wish family and wish record. It also create relationship
+              record.
+**************************************************************************************************************************************/
 
 public Class WishChildForm_AC{
     public Contact currWishChildContact{get;set;}
@@ -43,16 +50,26 @@ public Class WishChildForm_AC{
     Public Id wichChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
     Public String driverInfo = '';
     public Set<String> relationShipSet = new Set<String>();
+    public Map<String,String> processedNameMap;
+    public Map<String,String> nameMap;
+    public Set<String> signerSet;
+    public boolean displaypopwindow{get;set;}
     
-    //Consuctor method is display the wish child and family information when the page get loads.
+    /********************************************************************************************
+    This is the constructor method will call when the wishchild form is open and it display
+    all the wish child details and wish family details in wish child form and wish family form. 
+    **********************************************************************************************/
     public WishChildForm_AC(Apexpages.StandardController controller){
         currentPageId =  ApexPages.currentPage().getParameters().get('id');
         isChildPart = false ;
-        isParticipants  = false;    
+        isParticipants  = false; 
         if(wcfUtil == null)   
             wcfUtil = new WishChildFormUtil();
         ethnicityList = new List<String>();
-        //tempName = new List<String>();
+        processedNameMap = new Map<String,String>();
+        nameMap = new Map<String,String>();
+        signerSet = new Set<String>();
+        displaypopwindow = false;
         currentPageId =  ApexPages.currentPage().getParameters().get('id');
         if(currentPageId != null){
             List<ProcessInstanceWorkitem> approvalIns = [SELECT Id,ActorId,OriginalActorId,ProcessInstanceId,ProcessInstance.TargetObjectId,ProcessInstance.Status,ProcessInstance.ProcessDefinition.Name FROM ProcessInstanceWorkitem WHERE ProcessInstance.TargetObjectId =: currentPageId AND ProcessInstance.Status =: 'Pending' AND ProcessInstance.ProcessDefinition.Name =: 'Wish Paperwork Packet'
@@ -63,7 +80,7 @@ public Class WishChildForm_AC{
             this.currCase = [SELECT id,Hidden_Email_List__c,ContactId,Contact.FirstName,Contact.LastName, Contact.Middle_Name__c,
                              Contact.Diagnosis__c , Contact.Email, Contact.MobilePhone, Contact.Gender__C,
                              Contact.BirthDate, Contact.T_Shirt_Size__c, Contact.MailingStreet,
-                             Contact.MailingCity, Contact.MailingState, Contact.MailingPostalCode
+                             Contact.MailingCity, Contact.MailingState, Contact.MailingPostalCode,ChapterName__r.Name,Contact.Name
                              FROM Case WHERE Id = :this.currCase.id limit 1];
             List<CaseTeamMember> caseTeamMemberList = [SELECT id,Member.Name FROM CaseTeamMember WHERE ParentId =: this.currCase.id AND TeamRole.Name = 'Wish Granter' limit 2];
             if(caseTeamMemberList.size() > 0){
@@ -83,20 +100,39 @@ public Class WishChildForm_AC{
                 wcfUtil.wishChildList = Database.Query(wishChildQuery);
             }  
             //Build wishChild for SignNow List
-            for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Same_as_Family__c,T_Shirt_Size__c,Race_Ethnicity__c,Signers__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
+            for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Same_as_Family__c,T_Shirt_Size__c,Race_Ethnicity__c,Signers__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c,WPP_WLSignNow__c,WPP_WLSendForSign__c FROM Wish_Child_Form__c WHERE
                                                     Case__c =: currentPageId]){
+                                                        
+                                                        if(wishChildForm.Hidden_Contact_Name__c != Null) {                                     
+                                                            for(String keys : wishChildForm.Hidden_Contact_Name__c.split('#')){
+                                                                nameMap.put(keys.trim(),'abc');
+                                                            } 
+                                                        }
+                                                        
                                                         if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != null) {  
                                                             for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c.split('#')){
                                                                 wcfUtil.SignNowList.add(keys.trim());                     
                                                                 wcfUtil.listofSenderName.add(keys.trim());
+                                                                signerSet.add(keys.trim()); 
                                                             }  
                                                         }
-                                                        //setting same as family from table
-                                                        if( wishChildForm.Hidden_Same_as_Family__c ){
-                                                            wcfUtil.sameParentGuardian = true;
-                                                        }else{
-                                                            wcfUtil.sameParentGuardian = false;
-                                                        }
+                                                        if(wishChildForm.Hidden_Wish_Fmaily_Contact_Email__c!= Null){
+                                                        List<String> proceessList = new List<String>();
+                                                             for(String key : wishChildForm.Hidden_Wish_Fmaily_Contact_Email__c.split('#')){
+                                                             proceessList.clear();
+                                                             if(key.contains('-')){
+                                                             for(String sla : key.split('-')) {
+                                                               proceessList.add(sla);
+                                                             }
+                                                             if(proceessList.size() == 2) {
+                                                                String name = key.split('-')[0];
+                                                                String email = key.split('-')[1];
+                                                                processedNameMap.put(name,email);
+                                                                 }
+                                                             }
+                                                           } 
+                                                         }  
+                                                     
                                                         if(wishChildForm.Race_Ethnicity__c != Null){
                                                             for(String mwa: wishChildForm.Race_Ethnicity__c .split(';'))
                                                             {
@@ -105,19 +141,20 @@ public Class WishChildForm_AC{
                                                         }
                                                         tshirt = wishChildForm.T_Shirt_Size__c;
                                                     }
-            system.debug('wishchildlistsizeoutsideif=0'+wcfUtil.wishChildList.size());
+            
             if(wcfUtil.wishChildList.size() == 0){ 
-                system.debug('wishchildlistsizeinsideif=0');         
-                init(); 
+               init(); 
             }
             else{
                 currWishChild = wcfUtil.wishChildList[0]; 
+                if(currWishChild.Id != Null && currWishChild.Hidden_Same_as_Family__c == true){
+                    wishChildMap(currWishChild.FirstName__c,currWishChild.LastName__c);
+                }
                 if(currWishChild.Case_Team_Member1__c != null)
                     wcfUtil.caseTeamMemberNo1 =  currWishChild.Case_Team_Member1__c;
                 if(currWishChild.Case_Team_Member2__c != null)
                     wcfUtil.caseTeamMemberNo2 = currWishChild.Case_Team_Member2__c;  
-                // Wish Family Parser--------------------------------------------- 
-                if(currWishChild.Wish_Family_Contact__c != null){
+               if(currWishChild.Wish_Family_Contact__c != null){
                     String jsonString = currWishChild.Wish_Family_Contact__c;
                     JsonString = jsonString.replace('&quot;', '"');
                     List<WishChildFormUtil.WrapperClass> wrapFamilyList = (List<WishChildFormUtil.WrapperClass>) System.JSON.deserialize(jsonString, List<WishChildFormUtil.WrapperClass>.class);
@@ -147,6 +184,7 @@ public Class WishChildForm_AC{
                         wrapCls.residingWishMedical= currRec.residingWishMedical;
                         wcfUtil.wishFamilyWrapList.add(wrapCls);
                     }
+                    
                     ParentLegalMapping(wrapFamilyList,false); 
                 }
                 if(currWishChild.Driver_Details__c != null){
@@ -163,7 +201,7 @@ public Class WishChildForm_AC{
                         wrapCls.expirationDate  = (currRec.expirationDate!=Null)?Date.valueOf(currRec.expirationDate):Null;
                         wrapCls.type =  (currRec.type!=Null)?currRec.type:'';
                         if(driverInfo == '' && i == 0){
-                          if(string.valueof(wrapCls.expirationDate) != null ){
+                            if(string.valueof(wrapCls.expirationDate) != null ){
                                 String S = String.valueof(wrapCls.expirationDate);
                                 String s1 = S.remove(' 00:00:00');
                                 driverInfo = wrapCls.driverName+' '+'|'+' '+wrapCls.licenseNum+' '+'|'+' '+wrapCls.state +' '+'|'+' '+ s1 +' '+'|'+' '+wrapCls.type;      
@@ -318,19 +356,17 @@ public Class WishChildForm_AC{
                     wcfUtil.currentNursingCare = name;
                     wcfUtil.nursingCaresSet.add(name);       
                 }
-                
-              
                 // Wish Participants Parser---------------------------------------------  
                 if(currWishChild.Participant_Contacts__c != null){  
                     String jsonString = currWishChild.Participant_Contacts__c;
                     JsonString = jsonString.replace('&quot;', '"');
                     List<WishChildFormUtil.WrapperClass> wrapParticipantsList = (List<WishChildFormUtil.WrapperClass>) System.JSON.deserialize(jsonString, List<WishChildFormUtil.WrapperClass>.class);
-                    ParticipantsMapping(wrapParticipantsList,false); 
-                    
-                }                
+                    ParticipantsMapping(wrapParticipantsList,false);  
+                }                 
             }
             if(wcfUtil.wishFamilyWrapList.size() == 0)
                 wcfUtil.wishFamilyWrapList.add(new WishChildFormUtil.WrapperClass());
+            
             if(wcfUtil.driverWrapperCls.size() == 0)
                 wcfUtil.driverWrapperCls.add(new WishChildFormUtil.DriverWrapper());  
             If(approvalIns.size() > 0){           
@@ -345,26 +381,27 @@ public Class WishChildForm_AC{
                || currWishChild.Already_wish_granted_by_MAW_Other_Org__c == Null || currWishChild.IsWishFamily__c == true){
                    isWishfamilyFormRequired = true;
                }
-             
             if(currWishChild.Hidden_Contact_Name__c != Null && currWishChild.Hidden_Wish_Fmaily_Contact_Name__c != Null){
                 Set<String> nameset = new Set<String>();
                 Set<String> namesetOne = new Set<String>();
                 for(String processName : currWishChild.Hidden_Contact_Name__c .split('#')){
                     nameset.add(processName);
                 }
-                
                 for(String processName : currWishChild.Hidden_Wish_Fmaily_Contact_Name__c.split('#')){
-                    namesetOne.add(processName);
+                   namesetOne.add(processName);
                 }
-                
                 if(nameset.size() == namesetOne.size())
                     wcfUtil.displayError = true;
             }
-        }      
+        }  
+              
     }
     
-    public void init(){
-        
+    /********************************************************************************************
+    This is the init() method is used to query all the related contact details and this details are
+    displayed in wishfamily form.
+    **********************************************************************************************/
+     public void init(){
         currWishChild.FirstName__c =  currCase.Contact.FirstName;
         currWishChild.LastName__c  =  currCase.Contact.LastName;
         currWishChild.Middle_Name__c =  CurrCase.Contact.Middle_Name__c;
@@ -383,22 +420,22 @@ public Class WishChildForm_AC{
         currWishChild.Bringing_Own_Wheel_Chair__c = currWishChild.Bringing_Own_Wheel_Chair__c;
         for(npe4__Relationship__c currRel : [SELECT id,npe4__RelatedContact__c,npe4__RelatedContact__r.FirstName, npe4__RelatedContact__r.LastName,
                                              npe4__RelatedContact__r.Email,Hidden_isparentFirst__c,npe4__RelatedContact__r.Phone, npe4__RelatedContact__r.Middle_Name__c,npe4__RelatedContact__r.Mailingcity,npe4__RelatedContact__r.Mailingstreet,
-                                             npe4__RelatedContact__r.MailingState,npe4__RelatedContact__r.MailingPostalCode,npe4__Type__c FROM npe4__Relationship__c WHERE npe4__Contact__c  = :currCase.ContactId 
-                                             AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId AND npe4__Type__c != 'Sibling'])
+                                             npe4__RelatedContact__r.MailingState,npe4__RelatedContact__r.MailingPostalCode,npe4__Type__c,npe4__RelatedContact__r.HomePhone,npe4__RelatedContact__r.Work_Phone__c,npe4__RelatedContact__r.MobilePhone FROM npe4__Relationship__c WHERE npe4__Contact__c  = :currCase.ContactId AND 
+                                             npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId AND npe4__Type__c != 'Sibling' AND Parent_Legal_Guardian__c = true])
         {
                 WishChildFormUtil.WrapperClass wrapCls = new WishChildFormUtil.WrapperClass();
                 wrapCls.FirstName = currRel.npe4__RelatedContact__r.FirstName;
                 wrapCls.MiddleName = currRel.npe4__RelatedContact__r.Middle_Name__c;
                 wrapCls.lastName = currRel.npe4__RelatedContact__r.LastName;
-                wrapCls.mobileTelephone = currRel.npe4__RelatedContact__r.Phone;
+                wrapCls.mobileTelephone = currRel.npe4__RelatedContact__r.MobilePhone;
                 wrapCls.Email =  currRel.npe4__RelatedContact__r.Email;
                 wrapCls.City = currRel.npe4__RelatedContact__r.Mailingcity; 
                 wrapCls.Street = currRel.npe4__RelatedContact__r.MailingStreet;
                 wrapCls.State = currRel.npe4__RelatedContact__r.MailingState;
                 wrapCls.PostalCode = currRel.npe4__RelatedContact__r.MailingPostalCode;
                 wrapCls.Relationship = currRel.npe4__Type__c;
-                wrapCls.homeTelephone =  null;
-                wrapCls.workTelephone =  null;
+                wrapCls.homeTelephone =  currRel.npe4__RelatedContact__r.HomePhone;
+                wrapCls.workTelephone =  currRel.npe4__RelatedContact__r.Work_Phone__c;
                 wrapCls.sameParentGuardianFlag = false;
                 wrapCls.residingWishMedical = null;
                 wrapCls.relId = currRel.npe4__RelatedContact__c;
@@ -409,6 +446,7 @@ public Class WishChildForm_AC{
             currWishChild.Wish_Family_Contact__c = JSONString;  
         }              
         List<WishChildFormUtil.WrapperClass> wrapParticipantsList = new  List<WishChildFormUtil.WrapperClass>();
+        
         if(wrapParticipantsList.size() > 0)   
         {
             ParticipantsMapping(wrapParticipantsList,false);
@@ -416,7 +454,10 @@ public Class WishChildForm_AC{
         }
     }
     
-    //This method is used to save the updated wishchild and wish family information. And the informations are stored in the Wish Form Hidden object.
+    /********************************************************************************************
+    This is the SaveContact() method is used to all the details entered in wish child, wish family and 
+    Wish information form.
+    **********************************************************************************************/
     public void SaveContact(){
         currWishChild.Case__c = currCase.id;
         Constant_AC  constant = new Constant_Ac(); 
@@ -488,49 +529,36 @@ public Class WishChildForm_AC{
 
                         }
                         if(FamilyContactEmail != Null && FamilyContactEmail != '' && FamilyContactName != Null && FamilyContactName != ''){
-                            
-                               
-                                    if(currRec.FirstName != Null && currRec.LastName != Null && currRec.Email != Null){
+                            if(currRec.FirstName != Null && currRec.LastName != Null && currRec.Email != Null){
                                     FamilyContactEmail +='#'+currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email;
                                     String name = currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email;
                                     nameWithEmailSet.add(name);
-                                     if(age >=18){
+                                     
                                          if(ParentGurdianabove18Email != Null && ParentGurdianabove18 != '')
                                              ParentGurdianabove18Email +='#'+ currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email;
-                                      }
-                                    }
+                                     }
                                     if(currRec.FirstName != Null && currRec.LastName != Null){
                                     FamilyContactName +='#'+currRec.FirstName.trim()+' '+currRec.LastName.trim();
                                     String name = currRec.FirstName.trim()+' '+currRec.LastName.trim();
                                     nameSet.add(name);
-                                    
-                                    if(age >=18){
-                                      if(ParentGurdianabove18 != Null && ParentGurdianabove18 != '')
+                                    if(ParentGurdianabove18 != Null && ParentGurdianabove18 != '')
                                       ParentGurdianabove18 +='#'+ currRec.FirstName.trim()+' '+currRec.LastName.trim();
-                                    }
                                    }
                               }
                         else{
-                           
-                                    if(currRec.FirstName != Null && currRec.LastName != Null && currRec.Email != Null){
+                                  if(currRec.FirstName != Null && currRec.LastName != Null && currRec.Email != Null){
                                      FamilyContactEmail = currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email;
                                      String name = currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email;
                                      nameWithEmailSet.add(name);
-                                     if(age >=18){
-                                         ParentGurdianabove18Email = currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email;
+                                     ParentGurdianabove18Email = currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email;
                                      }
-                                    }
                                     if(currRec.FirstName != Null && currRec.LastName != Null){
                                      FamilyContactName = currRec.FirstName.trim()+' '+currRec.LastName.trim();
                                      String name = currRec.FirstName.trim()+' '+currRec.LastName.trim();
                                      nameSet.add(name);
-                                     if(age >=18){
                                      ParentGurdianabove18 = currRec.FirstName.trim()+' '+currRec.LastName.trim();
                                      }
-                                    }
-                                
-                         }
-                        
+                                }
                         if(RelatedContact != Null && RelatedContact != '' ){
                             if(currRec.Relationship != 'Other')
                                 RelatedContact =  RelatedContact+','+' '+ currRec.FirstName.trim()+' '+currRec.LastName.trim();
@@ -592,8 +620,7 @@ public Class WishChildForm_AC{
                     if(currRec.FirstName != Null && currRec.LastName != Null && currRec.Email != Null && age >= 18 && currRec.relationship != 'Wish Child (self)'){
                         String participantName = currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email;
                         if(!nameWithEmailSet.contains(participantName)){
-                            //currWishChild.Participant_Details__c +=  currRec.FirstName+' '+currRec.LastName+'-'+currRec.Email+'-'+age+'#';
-                            if(ParticipantConEmail == '' || ParticipantConEmail == Null)
+                           if(ParticipantConEmail == '' || ParticipantConEmail == Null)
                             ParticipantConEmail =  currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email+'-'+age;
                             else 
                             ParticipantConEmail +='#'+currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+currRec.Email+'-'+age;
@@ -603,7 +630,6 @@ public Class WishChildForm_AC{
                     if(currRec.FirstName != Null && currRec.LastName != Null && currRec.relationship != 'Wish Child (self)' && age >= 18){
                         String name = currRec.FirstName.trim()+' '+currRec.LastName.trim();
                         if(!nameSet.contains(name)){
-                            //currWishChild.Participant_Name__c +=currRec.FirstName.trim()+' '+currRec.LastName.trim();
                             if(ParticipantConName == Null || ParticipantConName == '')
                             ParticipantConName = currRec.FirstName.trim()+' '+currRec.LastName.trim()+'-'+age;
                             else
@@ -619,10 +645,9 @@ public Class WishChildForm_AC{
                 if(currWishChild.Participant_Names__c != Null)
                     currWishChild.Participant_Names__c = currWishChild.Participant_Names__c.removeEnd('#');
                
-            }
-                if(wcfUtil.wishParticipantList.size() == 0){
-                currWishChild.Participant_Contacts__c = null;
-                }
+            }   
+            if(wcfUtil.wishParticipantList.size() == 0){
+                currWishChild.Participant_Contacts__c = null;}
                 currWishChild.Hidden_Wish_Fmaily_Contact_Email__c = FamilyContactEmail;
                 currWishChild.Hidden_Wish_Fmaily_Contact_Name__c = FamilyContactName;
                 currWishChild.ParentsParticipantsName__c = ParentAndParticipantsNames;
@@ -637,7 +662,6 @@ public Class WishChildForm_AC{
                 currWishChild.Availability_Time_Period_2__c = wcfUtil.availableMonth2+'/'+wcfUtil.availableYear2;
                 currWishChild.Availability_Time_Period_3__c = wcfUtil.availableMonth3+'/'+wcfUtil.availableYear3;
                 currWishChild.Requested_Participant_Name_forWheelchair__c = selectedNamesss(tempName);
-                //currWishChild.Participant_Name_for_Dietary_Restriction__c =selectedNamesss(currrentDietaryList);
                 currWishChild.Participant_Name_for_Dietary_Restriction__c = selectedNamesss(currrentDietaryNameList);
                 currWishChild.Requested_Participant_Name_for_OtherNeed__c = selectedNamesss(currentOtherNeedsList);
                 currWishChild.Requested_Participant_Name_for_Oxygen__c = selectedNamesss(currentOxygenNamesList);
@@ -649,7 +673,7 @@ public Class WishChildForm_AC{
                 currWishChild.Names_for_receiving_nursing_care__c= selectedNamesss(currentNursingCareList);
             }
             
-            if(wcfUtil.driverWrapperCls.size() > 0 && wcfUtil.isInformation == True){
+            if(wcfUtil.driverWrapperCls.size() > 0 ){
                 currWishChild.Driver_Details__c = '';
                 String JSONString = JSON.serialize(wcfUtil.driverWrapperCls);
                 currWishChild.Driver_Details__c = JSONString;
@@ -700,8 +724,7 @@ public Class WishChildForm_AC{
                 insert currWishChild;
              if(wishchildList.size() == 1)
                 update currWishChild;
-            
-        }
+          }
         catch(DMLException e){        
             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
             ApexPages.addMessage(myMsg);
@@ -709,6 +732,12 @@ public Class WishChildForm_AC{
     }
     
     
+    /******************************************************************************************************
+    This is the SaveandWishChildExit() method is used nevigate the user to corresponding form like 
+    if the user in wish child form and if the user wants to go wishinformation form they can click 
+    the corresponding link then the user redirect to that form and information are saved in backend 
+    object.
+    *******************************************************************************************************/
     public void SaveandWishChildExit(){
         try
         { 
@@ -730,7 +759,9 @@ public Class WishChildForm_AC{
         }
     }
     
-    //This method used to navigate to the wishfamily form from child form
+    /******************************************************************************************************
+    This WCFNext() method is used to redirect the user from wish child form to wish family form.
+    *******************************************************************************************************/
     public PageReference WCFNext(){ 
         try
         {
@@ -748,8 +779,11 @@ public Class WishChildForm_AC{
         return null;
     }
     
-    //This method is used to naviagte to the wish information form from the family form 
-    public PageReference WCFtoWIF(){
+    
+    /******************************************************************************************************
+    This WCFtoWIF() method is used to redirect the user from wish family form to wish information form 
+    *******************************************************************************************************/    
+     public PageReference WCFtoWIF(){
         try
         {
             saveContact();
@@ -766,7 +800,9 @@ public Class WishChildForm_AC{
         return null;
     }
    
-    //This method used to save the contact information and naviagte to the wishfamily form  
+    /******************************************************************************************************
+    This WCFtoWFF() method is used to redirect the user from wish child form to wish information form 
+    *******************************************************************************************************/ 
     public PageReference WCFtoWFF(){
         PageReference reference;
         try
@@ -785,7 +821,9 @@ public Class WishChildForm_AC{
         return reference;
     }
     
-    //Naviage to the wish information form 
+     /******************************************************************************************************
+    This WCFtoWFF() method is used to redirect to wish information form 
+    *******************************************************************************************************/ 
     public PageReference WishFamilytoWishInfo(){
         PageReference reference;
         try
@@ -802,7 +840,9 @@ public Class WishChildForm_AC{
         return reference;
     }
     
-    // Navigate to the wishchild form from information form   
+    /******************************************************************************************************
+    This WCFtoWFF() method is used to redirect the user to wish child form
+    *******************************************************************************************************/ 
     public PageReference WishInfotoWishChild(){
         PageReference reference;
         try
@@ -820,7 +860,9 @@ public Class WishChildForm_AC{
         return reference;
     }
     
-    //Navigate to the wishfamily form  
+    /******************************************************************************************************
+    This WCFtoWFF() method is used to redirect the user to wish family form
+    *******************************************************************************************************/ 
     public PageReference WishInfotoWishFamily(){
         PageReference reference;
         try
@@ -838,7 +880,9 @@ public Class WishChildForm_AC{
         return reference;
     }
     
-    //Navigate to the wishchild form   
+    /******************************************************************************************************
+    This WCFtoWFF() method is used to redirect the user to wish child form
+    *******************************************************************************************************/ 
     public PageReference NavigatetoWishChildForm(){
         PageReference reference;
         try
@@ -856,7 +900,9 @@ public Class WishChildForm_AC{
         return reference;
     }
     
-    //Navigate to the wishfamily form  
+   /******************************************************************************************************
+    This WCFtoWFF() method is used to redirect the user to wish family form
+   *******************************************************************************************************/ 
     public PageReference NavigatetoWishFamily(){
         PageReference reference;
         try
@@ -874,28 +920,29 @@ public Class WishChildForm_AC{
         return reference;
     }
     
-    // Back to Case Detail page.
+    /******************************************************************************************************
+    This cancelfunction() method is used to redirect the user case details page
+    *******************************************************************************************************/ 
     public PageReference cancelfunction(){
-        
         PageReference reference=new PageReference('/'+currCase.id);
         reference.setRedirect(true);     
         return reference;
     }
     
-    //Cancel with out saving the contact 
+    /******************************************************************************************************
+    This WCFtoWFF() method is used to redirect the user to wish information form.
+    *******************************************************************************************************/ 
     public pageReference cancel(){
         PageReference reference=new PageReference('/apex/WishInformationForm_VF?id='+currCase.id);
         reference.setRedirect(true);     
         return reference;
     }
     
-    //Save and exit from the form 
+    /******************************************************************************************************
+    This SavewithExit() method is used save the current page details and redirect the user to case detail page.
+    *******************************************************************************************************/ 
     public PageReference SavewithExit(){
         try{
-            if(wcfUtil.sameParentGuardian)
-                currWishChild.Hidden_Same_as_Family__c = true; 
-            else
-                currWishChild.Hidden_Same_as_Family__c = false;
             saveContact();
             PageReference reference=new PageReference('/'+currCase.id);
             reference.setRedirect(true);     
@@ -910,106 +957,86 @@ public Class WishChildForm_AC{
         return null; 
     }
     
-    //Used to remove the existing family details  
+    /******************************************************************************************************
+    This removeFamily() method is used remove the parent legual guardian details from paren guardian sections..
+    *******************************************************************************************************/ 
     public void removeFamily(){
+        
         Integer indexVal = Integer.valueof(system.currentpagereference().getparameters().get('index'));
         //Remove the contact from the table    
         wcfUtil.wishFamilyWrapList.remove(indexVal);            
     }   
     
+    /******************************************************************************************************
+    This removeParticipants() method is used remove the participant details from participant sections..
+    *******************************************************************************************************/ 
     public void removeParticipants(){
         Integer indexVal = Integer.valueof(system.currentpagereference().getparameters().get('Participant'));
         //Remove the contact from the table    
         wcfUtil.wishParticipantList.remove(indexVal);            
     } 
     
+    /******************************************************************************************************
+    This removeDriver() method is used remove the driver details from driver information section.
+    *******************************************************************************************************/
     public void removeDriver(){
         Integer indexVal = Integer.valueof(system.currentpagereference().getparameters().get('driver'));
-        //Remove the contact from the table    
+        
         wcfUtil.driverWrapperCls.remove(indexVal);            
     }    
    
-    //Exit without saving the family details
-    public PageReference ExitWithOutSave(){
-        PageReference reference=new PageReference('/apex/WishFamilyForm_VF?id='+currCase.id);
-        reference.setRedirect(true);     
-        return reference;
-    }
-    
-    //With out saving exit from the wish information form  
-    Public pageReference withOutSavefromWCFtoWIF(){
-        //SaveContact();
-        PageReference reference=new PageReference('/apex/WishInformationForm_VF?id='+currCase.id);
-        reference.setRedirect(true);     
-        return reference;
-    }
-    
-    //With out saving wishchild details    
-    Public pageReference withOutSavetoChild(){
-        PageReference reference=new PageReference('/apex/WishChildForm_VF?id='+currCase.id);
-        reference.setRedirect(true);     
-        return reference;
-    }
-    
-    Public pageReference withOutSaveWCCF(){
-        system.debug('withOutSaveWCCF method');
-        PageReference reference=new PageReference('/apex/WishFamilyForm_VF?id='+currCase.id);
-        reference.setRedirect(true);     
-        return reference;
-    }
-    
+   /********************************************************************
+    This ExitwithApprovalError() redirect the user to case detail page.
+   *********************************************************************/
     public PageReference ExitwithApprovalError(){
         PageReference reference=new PageReference('/'+currentPageId);
         reference.setRedirect(true);     
         return reference;
     }
     
-    //Used to add the new family record    
+   /*************************************************************************************************
+    This addFamily() is used to initilaze the wishFamilyWrapList when the wish family form is loaded.
+   **************************************************************************************************/
     public void addFamily(){
         System.debug('Function called+++++++++++');
         (wcfUtil.wishFamilyWrapList).add(new WishChildFormUtil.WrapperClass());
     }
     
+   /*************************************************************************************************
+    This addDriver() is used to initilaze the driverWrapperCls when the wish information form is loaded.
+   **************************************************************************************************/
     public void addDriver(){
         // if(wcfUtil.driverWrapperCls.size() < wcfUtil.wishParticipantList.size())
         wcfUtil.driverWrapperCls.add(new WishChildFormUtil.DriverWrapper());
     }
    
-    //used to add new participants detail 
+    /*************************************************************************************************
+    This addParticipants() is used to initilaze the wishParticipantList when the wish family form is 
+    loaded.
+    **************************************************************************************************/
     public void addParticipants(){ 
         wcfUtil.wishParticipantList.add(new WishChildFormUtil.WrapperClass());
     }
     
+    /*************************************************************************************************
+    This BackToWCF() is used to redrict the user to wish child form and save the current page information.
+    **************************************************************************************************/
     public pageReference BackToWCF()
     {
         SaveContact();
         System.debug('AFTER SAVE');
-        if(wcfUtil.sameParentGuardian)
-            currWishChild.Hidden_Same_as_Family__c = true; 
-        else
-            currWishChild.Hidden_Same_as_Family__c = false;
-        //UPDATE currWishChild;
         PageReference reference=new PageReference('/apex/WishChildForm_VF?id='+this.currCase.id);
         reference.setRedirect(true);     
         return reference;
     }
     
-    //used to use same value from the parent details with out re-entering  
-    public pageReference CheckSameasParent()
-    {
-        PageReference reference=new PageReference('/apex/WishFamilyForm_VF?id='+currCase.id+'&part='+isParticipants);
-        reference.setRedirect(true);     
-        return reference;
-    }
     
-    //Save and exit from the family form    
+    /*************************************************************************************************
+    This SaveandwishFamilyExit() is used to redrict the user to wish family form and save the current page information.
+    **************************************************************************************************/
     public PageReference SaveandwishFamilyExit()
     {
         try{
-            if(wcfUtil.sameParentGuardian)
-                currWishChild.Hidden_Same_as_Family__c = true;
-            else 
-                currWishChild.Hidden_Same_as_Family__c = false;         
             saveContact();
             PageReference reference=new PageReference('/apex/WishFamilyForm_VF?id='+currCase.id+'&part='+isParticipants);
             reference.setRedirect(true);  
@@ -1024,14 +1051,13 @@ public Class WishChildForm_AC{
         return null;   
     }
     
-    // This method is used to navigate from current page to WishInformation_VF page.
+   
+    /*********************************************************************************************************
+    This WFFNext() is used to redrict the user to wish information form and save the current page information.
+    **********************************************************************************************************/
     public PageReference WFFNext(){ 
         try
         {
-            if(wcfUtil.sameParentGuardian)
-                currWishChild.Hidden_Same_as_Family__c = true;
-            else 
-                currWishChild.Hidden_Same_as_Family__c = false;  
             saveContact();
             PageReference reference=new PageReference('/apex/WishInformationForm_VF?id='+this.currCase.id);
             reference.setRedirect(true);     
@@ -1046,9 +1072,80 @@ public Class WishChildForm_AC{
         return null; 
     }
     
-       public void ParentLegalMapping(List<WishChildFormUtil.WrapperClass> wrapFamilyList,Boolean isChecked){
+    
+    /*****************************************************************************************************************
+    This withOutSavefromWCFtoWIF() is used to redrict the user to wish information form with out save the current page.
+    *******************************************************************************************************************/
+    Public pageReference withOutSavefromWCFtoWIF(){
+        //SaveContact();
+        PageReference reference=new PageReference('/apex/WishInformationForm_VF?id='+currCase.id);
+        reference.setRedirect(true);     
+        return reference;
+    }
+    
+   /*****************************************************************************************************************
+    This withOutSavetoChild() is used to redrict the user to wish child form with out save the current page.
+    *******************************************************************************************************************/
+    Public pageReference withOutSavetoChild(){
+        PageReference reference=new PageReference('/apex/WishChildForm_VF?id='+currCase.id);
+        reference.setRedirect(true);     
+        return reference;
+    }
+    
+   /*****************************************************************************************************************
+    This withOutSaveWCCF() is used to redrict the user to wish information form with out save the current page.
+    *******************************************************************************************************************/
+   Public pageReference withOutSaveWCCF(){
+        system.debug('withOutSaveWCCF method');
+        PageReference reference=new PageReference('/apex/WishFamilyForm_VF?id='+currCase.id);
+        reference.setRedirect(true);     
+        return reference;
+    }
+    
+    /*************************************************************************************************
+    This wishChildMap() is used to add the wish child name in medical information section. This method 
+    is called when wish information page is loded.
+    **************************************************************************************************/
+    Public void wishChildMap(String firstName,String lastName){
+        
+            if(firstName != Null && lastName != Null)
+                wcfUtil.leftDietaryNameList.add('Wish Child - '+firstName+' ' +lastName);
+            if(firstName != Null && lastName != Null)
+                wcfUtil.leftWCNamesList.add('Wish Child - '+firstName+' ' +lastName);
+            
+            if(firstName != Null && lastName != Null)
+                wcfUtil.leftOxygenNamesList.add('Wish Child - '+firstName+' ' +lastName);
+            
+            if(firstName != Null && lastName != Null)
+                wcfUtil.leftAllergyNamesList.add('Wish Child - '+firstName+' ' +lastName);
+            
+            if(firstName != Null && lastName != Null)
+                wcfUtil.leftOtherNeedsList.add('Wish Child - '+firstName+' ' +lastName);
+            
+            if(firstName != Null && lastName != Null)
+                wcfUtil.leftOwnWheelChairList.add('Wish Child - '+firstName+' ' +lastName);
+            
+            if(firstName != Null && lastName != Null)
+                wcfUtil.leftWCCollapsibleList.add('Wish Child - '+firstName+' ' +lastName);
+            
+            if(firstName != Null && lastName != Null)
+                wcfUtil.leftWCPowerList.add('Wish Child - '+firstName+' ' +lastName);
+            
+            if(firstName != Null && lastName != Null)
+                wcfUtil.leftMedicationList.add('Wish Child - '+firstName+' ' +lastName);
+            
+            if(firstName != Null && lastName != Null)
+             wcfUtil.leftNursingCareList.add('Wish Child - '+firstName+' ' +lastName);
+     }
+    
+   /*************************************************************************************************
+    This ParentLegalMapping() is used to add the parent legual guardian name in medical information section 
+    and drive details. This method is called when wish information page is loded.
+    **************************************************************************************************/
+    public void ParentLegalMapping(List<WishChildFormUtil.WrapperClass> wrapFamilyList,Boolean isChecked){
     
         for(WishChildFormUtil.WrapperClass  currRec : wrapFamilyList){
+            
             WishChildFormUtil.WrapperClass wrapCls = new WishChildFormUtil.WrapperClass();
             wrapCls.FirstName = (currRec.FirstName!=Null)?currRec.FirstName:'';
             wrapCls.MiddleName = (currRec.MiddleName!=Null)?currRec.MiddleName:'';
@@ -1064,19 +1161,52 @@ public Class WishChildForm_AC{
             //wcfUtil.wishParticipantList.add(wrapCls); 
             if(wrapCls.dob != null && wrapCls.Relationship != 'Wish Child (self)') {
                 if(Integer.valueOf(wrapCls.dob.daysBetween(Date.Today())/365) >= 18 && wrapCls.sameParentGuardianFlag == true) {
-                    String Name = wrapCls.FirstName+' '+wrapCls.lastName;
+                    String Name = wrapCls.Relationship+' - '+wrapCls.FirstName+' '+wrapCls.lastName;
                     wcfUtil.driverNameList.add((new SelectOption(Name,Name)));
                 }
             }
+            if(wrapCls.sameParentGuardianFlag == true){
+            if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
+                wcfUtil.leftDietaryNameList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
+            if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
+                wcfUtil.leftWCNamesList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
+            
+            if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
+                wcfUtil.leftOxygenNamesList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
+            
+            if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
+                wcfUtil.leftAllergyNamesList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
+            
+            if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
+                wcfUtil.leftOtherNeedsList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
+            
+            if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
+                wcfUtil.leftOwnWheelChairList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
+            
+            if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
+                wcfUtil.leftWCCollapsibleList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
+            
+            if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
+                wcfUtil.leftWCPowerList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
+            
+            if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
+                wcfUtil.leftMedicationList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
+            
+            if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
+                wcfUtil.leftNursingCareList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
+            }
+           
       }
-      
-     } 
-    
-    
-    //This method is used to store the participant information in the Wish Form Hidden object.
-    public void ParticipantsMapping(List<WishChildFormUtil.WrapperClass> participantsList,Boolean isChecked){
+   } 
+     
+   /*************************************************************************************************
+    This ParticipantsMapping() is used to add the participant name in medical information section 
+    and drive details. This method is called when wish information page is loded.
+    **************************************************************************************************/
+   public void ParticipantsMapping(List<WishChildFormUtil.WrapperClass> participantsList,Boolean isChecked){
     
         for(WishChildFormUtil.WrapperClass  currRec : participantsList){
+            
             WishChildFormUtil.WrapperClass wrapCls = new WishChildFormUtil.WrapperClass();
             wrapCls.FirstName = (currRec.FirstName!=Null)?currRec.FirstName:'';
             wrapCls.MiddleName = (currRec.MiddleName!=Null)?currRec.MiddleName:'';
@@ -1092,91 +1222,92 @@ public Class WishChildForm_AC{
             wcfUtil.wishParticipantList.add(wrapCls); 
             if(wrapCls.dob != null && wrapCls.Relationship != 'Wish Child (self)') {
                 if(Integer.valueOf(wrapCls.dob.daysBetween(Date.Today())/365) >= 18) {
-                    String Name = wrapCls.FirstName+' '+wrapCls.lastName;
+                    String Name = wrapCls.Relationship+' - '+wrapCls.FirstName+' '+wrapCls.lastName;
                     wcfUtil.driverNameList.add((new SelectOption(Name,Name)));
                 }
             }
             if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
-                wcfUtil.leftDietaryNameList.add(wrapCls.FirstName+' ' +wrapCls.lastName);
+                wcfUtil.leftDietaryNameList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
             if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
-                wcfUtil.leftWCNamesList.add(wrapCls.FirstName+' ' +wrapCls.lastName);
+                wcfUtil.leftWCNamesList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
             
             if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
-                wcfUtil.leftOxygenNamesList.add(wrapCls.FirstName+' ' +wrapCls.lastName);
+                wcfUtil.leftOxygenNamesList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
             
             if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
-                wcfUtil.leftAllergyNamesList.add(wrapCls.FirstName+' ' +wrapCls.lastName);
+                wcfUtil.leftAllergyNamesList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
             
             if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
-                wcfUtil.leftOtherNeedsList.add(wrapCls.FirstName+' ' +wrapCls.lastName);
+                wcfUtil.leftOtherNeedsList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
             
             if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
-                wcfUtil.leftOwnWheelChairList.add(wrapCls.FirstName+' ' +wrapCls.lastName);
+                wcfUtil.leftOwnWheelChairList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
             
             if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
-                wcfUtil.leftWCCollapsibleList.add(wrapCls.FirstName+' ' +wrapCls.lastName);
+                wcfUtil.leftWCCollapsibleList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
             
             if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
-                wcfUtil.leftWCPowerList.add(wrapCls.FirstName+' ' +wrapCls.lastName);
+                wcfUtil.leftWCPowerList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
             
             if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
-                wcfUtil.leftMedicationList.add(wrapCls.FirstName+' ' +wrapCls.lastName);
+                wcfUtil.leftMedicationList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
             
             if(wrapCls.FirstName != Null && wrapCls.lastName != Null)
-                wcfUtil.leftNursingCareList.add(wrapCls.FirstName+' ' +wrapCls.lastName);
+                wcfUtil.leftNursingCareList.add(wrapCls.Relationship+' - '+wrapCls.FirstName+' ' +wrapCls.lastName);
+             
         }
     }
     
-    // This method is used to navigate from current page to WishChildForm_VF page.
+    
+    /****************************************************************************************************
+    This SaveandRedirectChildForm() is used to redirect the user to wish child form and save the current.
+    page information
+    *****************************************************************************************************/
     public PageReference SaveandRedirectChildForm(){
-        if(wcfUtil.sameParentGuardian)
-            currWishChild.Hidden_Same_as_Family__c = true;
-        else 
-            currWishChild.Hidden_Same_as_Family__c = false; 
         saveContact();
         PageReference reference=new PageReference('/apex/WishChildForm_VF?id='+this.currCase.id);
         reference.setRedirect(true);     
         return reference;
     }
     
-    // This method is used to navigate from current page to WishChildForm_VF page.
+    /****************************************************************************************************
+    This SaveAndRedirectFamilyForm() is used to redirect the user to wish family form and save the current.
+    page information
+    *****************************************************************************************************/
     public PageReference SaveAndRedirectFamilyForm(){
-        if(wcfUtil.sameParentGuardian)
-            currWishChild.Hidden_Same_as_Family__c = true;
-        else 
-            currWishChild.Hidden_Same_as_Family__c = false; 
         saveContact();
         PageReference reference=new PageReference('/apex/WishFamilyForm_VF?id='+this.currCase.id);
         reference.setRedirect(true);     
         return reference;
     }
     
-    //navigate to the wishfamily form   
+    /****************************************************************************************************
+    This SaveAndRedirectInformationForm() is used to redirect the user to wish family form and save the current.
+    page information
+    *****************************************************************************************************/
     public PageReference SaveAndRedirectInformationForm(){
-        if(wcfUtil.sameParentGuardian)
-            currWishChild.Hidden_Same_as_Family__c = true;
-        else 
-            currWishChild.Hidden_Same_as_Family__c = false; 
         WishInfoSave();
         PageReference reference=new PageReference('/apex/WishFamilyForm_VF?id='+this.currCase.id);
         reference.setRedirect(true);     
         return reference;
     }
     
-    //Save information detail and navigate to child form    
+    /****************************************************************************************************
+    This SaveFromInformationToChildForm() is used to redirect the user to wish child form and save the current.
+    page information
+    *****************************************************************************************************/   
     public PageReference SaveFromInformationToChildForm()
     {
-        if(wcfUtil.sameParentGuardian)
-            currWishChild.Hidden_Same_as_Family__c = true;
-        else 
-            currWishChild.Hidden_Same_as_Family__c = false; 
-        WishInfoSave();
+       WishInfoSave();
         PageReference reference=new PageReference('/apex/WishChildForm_VF?id='+this.currCase.id);
         reference.setRedirect(true);     
         return reference;
     }
     
-   //Used to get sign  
+    /****************************************************************************************************
+    This confirmSignNow() is used to query the parent legual guardian who are all going to sign the
+    wish form.
+    *****************************************************************************************************/  
     public void confirmSignNow()
     {
         wcfUtil.isInformation = True;
@@ -1187,113 +1318,84 @@ public Class WishChildForm_AC{
             if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != null) {  
                 for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c.split('#'))
                 {
-                    wcfUtil.SignNowList.add(keys.trim());                     
+                 wcfUtil.SignNowList.add(keys .trim());                     
                 }                  
             }
         }
     }
     
-    //Used to check attachment uploaded for the wish child
-    @RemoteAction
-    public static Boolean searchCaseFile(String contId) {
-        List<cg__CaseFile__c> caseFileList = [SELECT id,cg__Case__c FROM cg__CaseFile__c WHERE cg__Case__c =:contId AND cg__Content_Type__c != 'Folder'];
-        if(caseFileList.size() > 0) {
-            return false;
-        } else {
-            return true;
-        }
-        
-    }
-    
-   public PageReference SignNowmultiEmail(){
-        if(currWishChild.IsParticipant__c != true){
-        Map<String,String> nameMap = new Map<String,String>();
-        Set<String> signerSet = new Set<String>();
-        for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Same_as_Family__c,Race_Ethnicity__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
-                                                Case__c =: this.currCase.Id])
+   /****************************************************************************************************
+    This SignNowmultiEmail() is used to display the parent legual guardian who are all going to sign the
+    wish form using the sign now option.
+    *****************************************************************************************************/  
+   public void SignNowmultiEmail(){
+       wcfUtil.multiPickoptions = new List<SelectOption>();
+       if(wcfUtil.emailMap.size() > 0)
         {
-            
-            if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != null)
-            {  
-                for(String keys : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c.split('#'))
-                {
-                    wcfUtil.SignNowList.add(keys.trim());     
-                }                  
-            }
-        }
-        wcfUtil.multiPickoptions = new List<SelectOption>();
-        if(wcfUtil.emailMap.size() > 0)
-        {
-            Map<String,String> processedNameMap = new Map<String,String>();
-            for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
-                                                    Case__c =: currCase.id])
-            {
-                                                        if(wishChildForm.Hidden_Contact_Name__c != Null) {                                     
-                                                            for(String keys : wishChildForm.Hidden_Contact_Name__c.split('#')){
-                                                                nameMap.put(keys.trim(),'abc');
-                                                            } 
-                                                        }
-                                                        if(wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c != Null){
-                                                            for(String processSignerString : wishChildForm.Hidden_Wish_Fmaily_Contact_Name__c.split('#')){
-                                                                String removeSpace = processSignerString.trim();
-                                                                signerSet.add(removeSpace); 
-                                                            }
-                                                            
-                                                        }
-                                                    }
-            for(Wish_Child_Form__c wishChildForm : [SELECT Id,Name,Case__c,Hidden_Contact_Name__c,Hidden_Wish_Fmaily_Contact_Email__c,Hidden_Wish_Fmaily_Contact_Name__c FROM Wish_Child_Form__c WHERE
-                                                    Case__c =: currCase.id])
-            { 
-                                                        if(wishChildForm.Hidden_Wish_Fmaily_Contact_Email__c != Null){
-                                                            for(String key : wishChildForm.Hidden_Wish_Fmaily_Contact_Email__c.split('#')){
-                                                                String keys = key.split('-')[0];
-                                                                String value = key.split('-')[1];
-                                                                processedNameMap.put(keys.trim(),value);
-                                                            } 
-                                                        }
-                                                    }
             if(processedNameMap.size() > 0)
             {
                 for(String name : processedNameMap.KeySet())
                 {
                     if(!nameMap.containsKey(name)){
-                        wcfUtil.selectedMailMap.put(name,processedNameMap.get(name));
+                       wcfUtil.selectedMailMap.put(name,processedNameMap.get(name));
                     }
                 }
             }
         }
         if(wcfUtil.selectedMailMap.size() > 0)
         {
-            String account;
-            String userName;
-            String password;
-            String integratorKey;
-            String endPointURL;
-            Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
-            for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
-                userName = credentialIns.name;
-                account = credentialIns.account__c;
-                password = credentialIns.Password__c;
-                integratorKey  = credentialIns.IntegratorKey__c;
-                endPointURL = credentialIns.end_Point__c;
+            for(String currString : wcfUtil.selectedMailMap.keySet()){           
+                wcfUtil.multiPickoptions.add(new SelectOption(currString,currString ));
             }
-            String endpoint = endPointURL+'/accounts/'+account+'/envelopes';
-            String authorizationHeader = '<DocuSignCredentials><Username>'+UserName+'</Username><Password>'+Password+'</Password><IntegratorKey>'+IntegratorKey+'</IntegratorKey></DocuSignCredentials>';
-            String status;
-            String email;
-            String recipients = '';
-            Integer i = 1;
-            String boundary = 'AAA';
+        }     
+        if(wcfUtil.selectedMailMap.size() == 0){
+            wcfUtil.displayError = true;
+        }
+    }
+    
+    /****************************************************************************************************
+    This SubmitAndSign() is used to initiate the callout to docusign to create an envelop and generate the 
+    recepient who are all going to sign the wish form.
+    *****************************************************************************************************/
+    public Pagereference SubmitAndSign(){
+        String account;
+        String UserName;
+        String Password;
+        String IntegratorKey;
+        String endPointURL;
+        String currentSigner;
+        Id wishPaperPocketId;
+        String authorizationHeader;
+        String endpoint; 
+        String status;
+        String email;
+        String recipients = '';
+        Integer i = 1;
+        String boundary = 'AAA';
+        boolean isFirstParent = true;
+        PageReference reference;
+        List<dsfs__DocuSign_Status__c> dsfsList = new List<dsfs__DocuSign_Status__c>();
+        Set<String> processSet = new Set<String>(); 
+        Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
+        Wish_Child_Form__c dbcase = [SELECT Id,Envelop_Id__c,Case__c,SignerMapKeyPair__c,Hidden_Envelop_Id_1__c,Hidden_Envelop_Id_2__c,Hidden_Wish_Fmaily_Contact_Name__c,
+                                     Hidden_SignerMap_Key_1__c,Hidden_SignerMap_Key_2__c,Hidden_Envelop_Id_3__c,Hidden_SignerMap_Key_3__c FROM Wish_Child_Form__c WHERE Case__c =:currCase.id];
+        for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
+            UserName = credentialIns.name;
+            account  = credentialIns.account__c;
+            Password = credentialIns.Password__c;
+            IntegratorKey  = credentialIns.IntegratorKey__c;
+            endPointURL = credentialIns.end_Point__c;
+        }
+        endpoint = endPointURL+'/accounts/'+account+'/envelopes';
+        authorizationHeader = '<DocuSignCredentials><Username>'+UserName+'</Username><Password>'+Password+'</Password><IntegratorKey>'+IntegratorKey+'</IntegratorKey></DocuSignCredentials>';
             Pagereference PDF = Page.SignNowPDF;
             PDF.getParameters().put('Id',currCase.id);
             try {
                 wcfUtil.documentPDF = EncodingUtil.base64Encode(PDF.getContentAsPDF());
             }catch(Exception e) {
             }
-            Wish_Child_Form__c dbcase = [SELECT Id,Envelop_Id__c,Case__c,SignerMapKeyPair__c,Hidden_Envelop_Id_1__c,Hidden_Envelop_Id_2__c,
-                                         Hidden_SignerMap_Key_1__c,Hidden_SignerMap_Key_2__c,Hidden_Envelop_Id_3__c,Hidden_SignerMap_Key_3__c FROM Wish_Child_Form__c WHERE Case__c =:currCase.id];
-            Set<String> processSet = new Set<String>();
-            if(dbcase.SignerMapKeyPair__c != Null && dbcase.Envelop_Id__c != Null && dbcase.Hidden_Envelop_Id_1__c == Null &&
+            
+        if(dbcase.SignerMapKeyPair__c != Null && dbcase.Envelop_Id__c != Null && dbcase.Hidden_Envelop_Id_1__c == Null &&
                dbcase.Hidden_SignerMap_Key_1__c == Null ){
                    for(String processName : dbcase.SignerMapKeyPair__c.split('#')){
                        String keys = processName.split('-')[0];
@@ -1305,8 +1407,6 @@ public Class WishChildForm_AC{
                        if(!processSet.contains(signNowName)){
                            j = 1;
                        }
-                       system.debug('J Value 1'+ j);
-                       system.debug('K Value 1'+ k);
                    }
                }
             if(dbcase.Hidden_Envelop_Id_1__c != Null && dbcase.Hidden_SignerMap_Key_1__c != Null)
@@ -1333,8 +1433,6 @@ public Class WishChildForm_AC{
                             k = 1;
                         }
                     }
-                    system.debug('J Value 2'+ j);
-                    system.debug('K Value 2'+ k);
                 }
             }
             if(dbcase.Hidden_Envelop_Id_2__c != Null && dbcase.Hidden_SignerMap_Key_2__c != Null)
@@ -1362,6 +1460,7 @@ public Class WishChildForm_AC{
                     String name = Keys.trim();
                     processSet.add(name);
                 }
+                
                 for(String signNowName : signerSet)
                 {
                     if(!processSet.contains(signNowName))
@@ -1375,22 +1474,19 @@ public Class WishChildForm_AC{
                             }
                         }
                     }
-                    system.debug('J Value 3'+ j);
-                    system.debug('K Value 3'+ k);
                 }
             }
             if((dbcase.Envelop_Id__c  == Null && dbcase.SignerMapKeyPair__c == Null && j == 0) || (dbcase.Hidden_Envelop_Id_1__c == Null && dbcase.Hidden_SignerMap_Key_1__c == Null && j == 1 && k == 0) || 
                (dbcase.Hidden_Envelop_Id_2__c == Null && dbcase.Hidden_SignerMap_Key_2__c  == Null && j == 2 && k == 1) || (dbcase.Hidden_Envelop_Id_3__c == Null && dbcase.Hidden_SignerMap_Key_3__c == Null && j == 3 && k == 2)){
-                   system.debug('J VALE'+ j);
-                   system.debug('K VALE'+ k);
-                   for(String currString : wcfUtil.selectedMailMap.keySet()){
-                       String Name = currString;
-                       email = wcfUtil.sendEmailMap.get(currString);
+                   Map<String,String> ParentGurdianMap = new Map<String,String>();
+                   for(String currString : dbcase.Hidden_Wish_Fmaily_Contact_Name__c.split('#')){
+                      
+                       if(wcfUtil.selectedMailMap.containsKey(currString) && isFirstParent == true && wcfUtil.SignNowName == currString ){
                        if(recipients != '')
                            recipients = recipients + ',';
                        recipients = recipients + '{'+
                            '      "email": "NotSent@NoEmail.com",'+
-                           '      "name": "'+Name+'",'+
+                           '      "name": "'+currString +'",'+
                            '      "recipientId":"'+i+'",'+
                            '      "clientUserId":"'+i+'",'+
                            '      "tabs": {'+
@@ -1400,7 +1496,55 @@ public Class WishChildForm_AC{
                            '                   "anchorYOffset": "0",'+
                            '                    "anchorIgnoreIfNotPresent": "false",'+
                            '                    "anchorUnits": "inches"'+
-                           '                }],'+
+                           '                  }],'+
+                           '                 "radioGroupTabs": [{'+
+                           '                    "groupName": "Radio Group 1",'+
+                           '                    "required": "true",'+
+                           '                    "radios": [{'+
+                           '                    "anchorString": "~FirstRadio",'+
+                           '                    "anchorXOffset": "0",'+
+                           '                    "anchorYOffset": "0",'+
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches",'+
+                           '                    "optional"   :"false",'+
+                           '                    "selected": "false",'+
+                           '                     "value": "one1Radio",'+
+                           '                    "xPosition": "7200",'+
+                           '                    "yPosition": "19020"},{'+
+                           '                    "anchorString": "~secondRadio",'+
+                           '                    "anchorXOffset": "0",'+
+                           '                    "anchorYOffset": "0",'+
+                           '                    "optional"   :"false",'+
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches",'+
+                           '                    "selected": "false",'+
+                           '                     "value": "twoRadio",'+
+                           '                    "xPosition": "7200",'+
+                           '                    "yPosition": "19020"'+
+                           '                    }]'+
+                           '                   }],'+
+                           '                "initialHereTabs": [{' +
+                           '                    "anchorString": "~123abcinitial",' +
+                           '                    "conditionalParentLabel":"Radio Group 1",'+
+                           '                    "conditionalParentValue" :"one1Radio",'+
+                           '                    "optional"    :  "false",' +
+                           '                    "anchorXOffset": "0",' +
+                           '                    "anchorYOffset": "0.2",' +
+                           '                    "name"       : "FirstInitial",'+
+                           '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option1__c","writeBack":"true","allowSenderToEdit":"true"},'+
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches"},{'+
+                           '                    "anchorString": "~initial2",' +
+                           '                    "optional"    :  "false",' +
+                           '                    "conditionalParentLabel":"Radio Group 1",'+
+                           '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option2__c","writeBack":"true","allowSenderToEdit":"true"},'+
+                           '                    "conditionalParentValue" :"twoRadio",'+
+                           '                    "name"       : "SecondInitial",'+
+                           '                    "anchorXOffset": "0",' +
+                           '                    "anchorYOffset": "0.2",' +
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches"'+
+                           '                }],' +
                            '                  "dateSignedTabs": [{'+
                            '                      "anchorString": "~date'+i+'",'+
                            '                       "anchorXOffset": "0",'+
@@ -1414,16 +1558,54 @@ public Class WishChildForm_AC{
                            '                    }]'+
                            '            }'+
                            '    }';
-                       if(!wcfUtil.signersKeyPairMap.containsKey(Name))
-                           wcfUtil.signersKeyPairMap.put(Name,String.valueof(i));
-                       i++;
+                           
+                           if(!wcfUtil.signersKeyPairMap.containsKey(currString ))
+                           wcfUtil.signersKeyPairMap.put(currString,String.valueof(i));
+                              isFirstParent = false;
+                           }
+                        
+                        else{
+                             if(recipients != '')
+                                   recipients = recipients + ',';
+                               recipients = recipients + '{'+
+                                   '      "email": "NotSent@NoEmail.com",'+
+                                   '      "name": "'+currString+'",'+
+                                   '      "recipientId":"'+i+'",'+
+                                   '      "clientUserId":"'+i+'",'+
+                                   '      "tabs": {'+
+                                   '                "signHereTabs": [{'+
+                                   '                     "anchorString":"~s'+i+'",'+
+                                   '                    "anchorXOffset": "0",'+
+                                   '     "anchorYOffset": "0",'+
+                                   '                    "anchorIgnoreIfNotPresent": "false",'+
+                                   '                    "anchorUnits": "inches"'+
+                                   '                }],'+
+                                   '                "dateSignedTabs": [{'+
+                                   '                      "anchorString": "~date'+i+'",'+
+                                   '                       "anchorXOffset": "0",'+
+                                   '                       "fontSize":      "Size14",'+
+                                   '                       "fontColor":     "Black",'+
+                                   '                        "anchorYOffset": "0",'+
+                                   '                        "anchorIgnoreIfNotPresent": "false",'+
+                                   '                        "xPosition": "100",'+
+                                   '                        "yPosition": "72",'+
+                                   '                        "anchorUnits": "inches"'+
+                                   '                    }]'+
+                                   '            }'+
+                                   '    }';
+                                   
+                                   if(!wcfUtil.signersKeyPairMap.containsKey(currString))
+                                   wcfUtil.signersKeyPairMap.put(currString,String.valueof(i));
+                        }
+                        i++;
                    }
+                   
                    //forming payload with the document and recipients.
                    String body =  '{'+
                        '  "status":"sent",'+
                        '  "enableWetSign": "false",'+
-                       '  "emailBlurb":"Wish Forms",'+
-                       '  "emailSubject": "Signature Required - Wish Forms",'+
+                       '  "emailBlurb":"Wish Form & Liability And Publicity Release Form",'+
+                       '  "emailSubject": "Signature Required - Wish Form & Liability And Publicity Release Form",'+
                        '  "enforceSignerVisibility":"True",'+
                        '  "documents": [{'+
                        '      "name": "document.pdf",'+
@@ -1438,6 +1620,7 @@ public Class WishChildForm_AC{
                    String viewBody = '{'+
                        '"returnUrl": "https://www.docusign.com/devcenter"'+
                        '}';
+                  
                    String header = '--'+boundary+'\nContent-Type: application/json\nContent-Disposition: form-data';
                    String jsonBody = header +'\n\n'+body+'\n\n--'+boundary+'--';
                    system.debug('@@@@@JSONBODY@@@@@'+jsonBody);
@@ -1461,17 +1644,19 @@ public Class WishChildForm_AC{
                            Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
                            if((String) results.get('envelopeId') != '')
                                wcfUtil.envelopeId = (String) results.get('envelopeId');
-                           if((String) results.get('status') == 'Sent'){
+                                if((String) results.get('status') == 'Sent'){
                                status = 'Agreement sent to email.';
                                dsfs__DocuSign_Status__c dsfs= NEW dsfs__DocuSign_Status__c();
                                dsfs.dsfs__DocuSign_Envelope_ID__c = (String) results.get('envelopeId');
                                dsfs.dsfs__Case__c= currCase.id;
-                               Insert dsfs;
+                               dsfsList.add(dsfs);
+                               
                            }else
                                status = (String) results.get('errorCode');
                        }
                    }catch(Exception e){
                    }
+               
                }
             else{
                 if(dbcase.Envelop_Id__c != Null && dbcase.Hidden_Envelop_Id_1__c  == Null && dbcase.Hidden_Envelop_Id_2__c == Null && j == 0){
@@ -1508,40 +1693,8 @@ public Class WishChildForm_AC{
                     }
                 }
             }
-            //wcfUtil.displaySignNowPopup = true;
-            for(String currString : wcfUtil.selectedMailMap.keySet()){           
-                wcfUtil.multiPickoptions.add(new SelectOption(currString,currString ));
-            }
-        }     
-        else{
-            wcfUtil.displayError = true;
-        }
-       }
-        return null;
-    }
-    
-    //Used to submit the form and get sign 
-    public Pagereference SubmitAndSign(){
-        String account;
-        String UserName;
-        String Password;
-        String IntegratorKey;
-        String endPointURL;
-        String currentSigner;
-        Id wishPaperPocketId;
-        Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
-        Wish_Child_Form__c dbcase = [SELECT Id,Envelop_Id__c,SignerMapKeyPair__c,Hidden_Envelop_Id_1__c,Hidden_Envelop_Id_2__c,
-                                     Hidden_SignerMap_Key_1__c,Hidden_SignerMap_Key_2__c,Case__c,Hidden_Envelop_Id_3__c,Hidden_SignerMap_Key_3__c FROM Wish_Child_Form__c WHERE Case__c =:currCase.id];
-        for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
-            UserName = credentialIns.name;
-            account  = credentialIns.account__c;
-            Password = credentialIns.Password__c;
-            IntegratorKey  = credentialIns.IntegratorKey__c;
-            endPointURL = credentialIns.end_Point__c;
-        }
-        string endpoint = endPointURL+'/accounts/'+account+'/envelopes';
-        String authorizationHeader = '<DocuSignCredentials><Username>'+UserName+'</Username><Password>'+Password+'</Password><IntegratorKey>'+IntegratorKey+'</IntegratorKey></DocuSignCredentials>';
-        string endpoint2 = endPointURL+'/accounts/'+account+'/envelopes/'+wcfUtil.envelopeId+'/views/recipient';
+        if(displaypopwindow == false){
+        endpoint += '/'+ wcfUtil.envelopeId+'/views/recipient';
         HttpRequest request = new HttpRequest();
         request.setHeader('X-DocuSign-Authentication', authorizationHeader);
         request.setHeader('Accept','application/json');
@@ -1551,7 +1704,7 @@ public Class WishChildForm_AC{
         request.setMethod('POST'); 
         Http httprequest = new Http();
         HTTPResponse response;
-        request.setEndpoint(endpoint2);
+        request.setEndpoint(endpoint);
         string jsonPayload;
         system.debug('URL.getSalesforceBaseUrl().toExternalForm()'+URL.getSalesforceBaseUrl().toExternalForm());
         String baseUrl = URL.getSalesforceBaseUrl().toExternalForm();
@@ -1567,6 +1720,7 @@ public Class WishChildForm_AC{
         response = httprequest.send(request);  
         system.debug(response.getBody());
         Map<String, Object> results = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
+        //signersKeyPairMap.remove(SignNowName);
         String sign;
         for(String name : wcfUtil.signersKeyPairMap.KeySet()){
             if(sign == '' || sign == Null)
@@ -1610,12 +1764,19 @@ public Class WishChildForm_AC{
                
                update newCase;
            }
-        PageReference reference=new PageReference((String) results.get('url'));
+        if(dsfsList.size() > 0){
+            Insert dsfsList;
+        }
+        reference=new PageReference((String) results.get('url'));
         reference.setRedirect(true);
+       }
         return reference;
+        
     }
     
-    //Navigate to the wish family form 
+    /****************************************************************************************************
+    This BackToWFF() is used to redirect the user into wishFamily form and save the current page details.
+    *****************************************************************************************************/
     public pageReference BackToWFF() {
         WishInfoSave();
         PageReference reference=new PageReference('/apex/WishFamilyForm_VF?id='+this.currCase.id);
@@ -1623,7 +1784,9 @@ public Class WishChildForm_AC{
         return reference;
     } 
     
-    //This method used to save information form details  
+   /****************************************************************************************************
+    This WishInfoSave() is used to redirect the user into wish information form and save the current page details.
+    *****************************************************************************************************/
     public PageReference WishInfoSave(){
         try
         {
@@ -1641,7 +1804,10 @@ public Class WishChildForm_AC{
         return null;
     }
     
-    //This method used to submit the record for approval  
+    /****************************************************************************************************
+    This submitforApproval() is used to send the wish form to approval process. Once chapter staff approved
+    the changes are updated into corresponding records.
+    *****************************************************************************************************/
     public pagereference submitforApproval(){
         boolean isApproval;
         PageReference reference;
@@ -1670,7 +1836,10 @@ public Class WishChildForm_AC{
         return reference;  
     }
     
-    //This method used to generate the form details as PDF  
+   /****************************************************************************************************
+    This generatePDF() is used to generate the pdf file which contains the wish child, wish family and wish
+    information form.
+   *****************************************************************************************************/ 
     public pagereference generatePDF(){
          String pageName = ApexPages.currentPage().getUrl().substringBetween('apex/', '?');
             if(pageName == 'WishChildForm_VF'){
@@ -1687,7 +1856,24 @@ public Class WishChildForm_AC{
         return reference;
     }
     
-    //This method used to send docusign to get signature
+   /****************************************************************************************************
+    This searchCaseFile() is used to query the case file and return the list of case file records.
+    information form.
+   *****************************************************************************************************/ 
+    @RemoteAction
+    public static Boolean searchCaseFile(String contId) {
+        List<cg__CaseFile__c> caseFileList = [SELECT id,cg__Case__c FROM cg__CaseFile__c WHERE cg__Case__c =:contId AND cg__Content_Type__c != 'Folder'];
+        if(caseFileList.size() > 0) {
+            return false;
+        } else {
+            return true;
+        }
+        
+    } 
+   /****************************************************************************************************
+    This multiEmail() is used query the list of parent legual gurdian name and email who are all going to
+    sign the wish form
+   *****************************************************************************************************/ 
     public pageReference multiEmail(){
         if(currWishChild.IsParticipant__c != true){
         wcfUtil.isInformation = True;
@@ -1741,7 +1927,11 @@ public Class WishChildForm_AC{
         return null;
     }
     
-    //This method used to send pdf to an email  
+    
+   /****************************************************************************************************
+    This multiEmail() is used display the list of parent legual gurdian name and email who are all going to
+    sign the wish form
+   *****************************************************************************************************/ 
     public pageReference sendpdftoEmail (){
         wcfUtil.displayPopup = false;
         Set<String> senderNameSet = new Set<String>();
@@ -1766,7 +1956,7 @@ public Class WishChildForm_AC{
                     wcfUtil.querySignature = wcfUtil.querySignature + '#' +currString;
             }
         }
-       if(wcfUtil.sendEmailMap.size() > 0){    
+        if(wcfUtil.sendEmailMap.size() > 0){    
             callouttoDocusing(wcfUtil.sendEmailMap,CurrCase.id,wcfUtil.wishChildId );
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'An email has been sent successfully'));
         }
@@ -1776,10 +1966,19 @@ public Class WishChildForm_AC{
         return acctPage;  
     }
     
+   /****************************************************************************************************
+    This callouttoDocusing() is used initiate the call out to docusign to send an email to sign the wish
+    form.
+   *****************************************************************************************************/ 
     @Future(callout=true)
     public static void callouttoDocusing(map<String,String> sendEmailMap,String caseId,Id wishChildId ){
         
         List<Contact> relationShipList = new List<Contact>();
+		List<Case> wishChildContact = [SELECT Id, Contact.FirstName FROM Case WHERE Id =: caseId];
+		String childFirstName = '';
+        if(wishChildContact.size() > 0) {
+            childFirstName = wishChildContact[0].Contact.FirstName;
+        }
         Pagereference PDF = Page.SendPDF;
         String documentPDF;
         PDF.setRedirect(false);
@@ -1799,9 +1998,7 @@ public Class WishChildForm_AC{
         String Password;
         String IntegratorKey;
         String endPointURL;
-        String emaiBody = 'Please sign the attached - Wish Form'+'\r\n\r\n'+
-                          'Thank You,'+'\r\n\r\n'+
-                          'Make-A-Wish®';
+        boolean isFirstParent = True;
         Map<String,DocuSignCredentialsSetting__c> credentialSetting = DocuSignCredentialsSetting__c.getAll();
         
         for(DocuSignCredentialsSetting__c credentialIns : credentialSetting.values()){
@@ -1816,50 +2013,131 @@ public Class WishChildForm_AC{
         String authorizationHeader = '<DocuSignCredentials><Username>'+UserName+'</Username><Password>'+Password+'</Password><IntegratorKey>'+IntegratorKey+'</IntegratorKey></DocuSignCredentials>';
         String clientUserId = '';
         String email;
+        String Name;
         //Fetching related contacts that has email address and forming recipients with signature location.
         for(String currString : sendEmailMap.KeySet()){
-            String Name = currString;
+            Name = currString;
             email = sendEmailMap.get(currString);
-            clientUserId = '';
-            if(ContactName == '')
-                ContactName = Name;
-            ContactName = ContactName +','+Name;
-            if(recipients != '')
-                recipients = recipients + ',';
-            recipients = recipients + '{'+
-                '      "email": "'+email+'",'+
-                '      "name": "'+Name+'",'+
-                '      "recipientId":"'+i+'",'+clientUserId+
-                '      "tabs": {'+
-                '                "signHereTabs": [{'+
-                '                     "anchorString":"~s'+i+'",'+
-                '                    "anchorXOffset": "0",'+
-                '                    "anchorYOffset": "0",'+
-                '                    "anchorIgnoreIfNotPresent": "false",'+
-                '                    "anchorUnits": "inches"'+
-                '                }],'+
-                '                    "dateSignedTabs": [{'+
-                '                      "anchorString": "~date'+i+'",'+
-                '                       "anchorXOffset": "0",'+
-                '                       "fontSize":      "Size14",'+
-                '                       "fontColor":     "Black",'+
-                '                        "anchorYOffset": "0",'+
-                '                        "anchorIgnoreIfNotPresent": "false",'+
-                '                        "xPosition": "100",'+
-                '                         "yPosition": "72",'+
-                '                         "anchorUnits": "inches"'+
-                '                    }]'+
-                '            }'+
-                '    }';
+            system.debug('@@@@ Name Send @@@@'+Name);
+            system.debug('@@@@ email Send @@@@'+email);
+               if(isFirstParent == true ){
+                       if(recipients != '')
+                           recipients = recipients + ',';
+                       recipients = recipients + '{'+
+                           '      "email": "'+email+'",'+
+                           '      "name": "'+Name+'",'+
+                           '      "recipientId":"' + i + '",' + clientUserId +
+                           '      "tabs": {'+
+                           '                "signHereTabs": [{'+
+                           '                     "anchorString":"~s'+i+'",'+
+                           '                    "anchorXOffset": "0",'+
+                           '                   "anchorYOffset": "0",'+
+                           '                    "anchorIgnoreIfNotPresent": "false",'+
+                           '                    "anchorUnits": "inches"'+
+                           '                  }],'+
+                           '                 "radioGroupTabs": [{'+
+                           '                    "groupName": "Radio Group 1",'+
+                           '                    "required": "true",'+
+                           '                    "radios": [{'+
+                           '                    "anchorString": "~FirstRadio",'+
+                           '                    "anchorXOffset": "0",'+
+                           '                    "anchorYOffset": "0",'+
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches",'+
+                           '                    "optional"   :"false",'+
+                           '                    "selected": "false",'+
+                           '                     "value": "one1Radio",'+
+                           '                    "xPosition": "7200",'+
+                           '                    "yPosition": "19020"},{'+
+                           '                    "anchorString": "~secondRadio",'+
+                           '                    "anchorXOffset": "0",'+
+                           '                    "anchorYOffset": "0",'+
+                           '                    "optional"   :"false",'+
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches",'+
+                           '                    "selected": "false",'+
+                           '                     "value": "twoRadio",'+
+                           '                    "xPosition": "7200",'+
+                           '                    "yPosition": "19020"'+
+                           '                    }]'+
+                           '                   }],'+
+                           '                "initialHereTabs": [{' +
+                           '                    "anchorString": "~123abcinitial",' +
+                           '                    "conditionalParentLabel":"Radio Group 1",'+
+                           '                    "conditionalParentValue" :"one1Radio",'+
+                           '                    "optional"    :  "false",' +
+                           '                    "anchorXOffset": "0",' +
+                           '                    "anchorYOffset": "0.2",' +
+                           '                    "name"       : "FirstInitial",'+
+                           '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option1__c","writeBack":"true","allowSenderToEdit":"true"},'+
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches"},{'+
+                           '                    "anchorString": "~initial2",' +
+                           '                    "optional"    :  "false",' +
+                           '                    "conditionalParentLabel":"Radio Group 1",'+
+                           '                    "mergeField" : {"configurationType":"Salesforce","path":"case.Option2__c","writeBack":"true","allowSenderToEdit":"true"},'+
+                           '                    "conditionalParentValue" :"twoRadio",'+
+                           '                    "name"       : "SecondInitial",'+
+                           '                    "anchorXOffset": "0",' +
+                           '                    "anchorYOffset": "0.2",' +
+                           '                    "anchorIgnoreIfNotPresent": "false",' +
+                           '                    "anchorUnits": "inches"'+
+                           '                }],' +
+                           '                  "dateSignedTabs": [{'+
+                           '                      "anchorString": "~date'+i+'",'+
+                           '                       "anchorXOffset": "0",'+
+                           '                       "fontSize":      "Size14",'+
+                           '                       "fontColor":     "Black",'+
+                           '                        "anchorYOffset": "0",'+
+                           '                        "anchorIgnoreIfNotPresent": "false",'+
+                           '                        "xPosition": "100",'+
+                           '                         "yPosition": "72",'+
+                           '                         "anchorUnits": "inches"'+
+                           '                    }]'+
+                           '            }'+
+                           '    }';
+                               isFirstParent = false;
+                   }
+                        
+                        else{
+                             if(recipients != '')
+                                   recipients = recipients + ',';
+                               recipients = recipients + '{'+
+                                   '      "email": "'+email+'",'+
+                                   '      "name": "'+Name+'",'+
+                                   '      "recipientId":"' + i + '",' + clientUserId +
+                                   '      "tabs": {'+
+                                   '                "signHereTabs": [{'+
+                                   '                     "anchorString":"~s'+i+'",'+
+                                   '                    "anchorXOffset": "0",'+
+                                   '     "anchorYOffset": "0",'+
+                                   '                    "anchorIgnoreIfNotPresent": "false",'+
+                                   '                    "anchorUnits": "inches"'+
+                                   '                }],'+
+                                   '                "dateSignedTabs": [{'+
+                                   '                      "anchorString": "~date'+i+'",'+
+                                   '                       "anchorXOffset": "0",'+
+                                   '                       "fontSize":      "Size14",'+
+                                   '                       "fontColor":     "Black",'+
+                                   '                        "anchorYOffset": "0",'+
+                                   '                        "anchorIgnoreIfNotPresent": "false",'+
+                                   '                        "xPosition": "100",'+
+                                   '                        "yPosition": "72",'+
+                                   '                        "anchorUnits": "inches"'+
+                                   '                    }]'+
+                                   '            }'+
+                                   '    }';
+                                   
+                             }
+                        i++;
             
-            i++;
         }
         //forming payload with the document and recipients.
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailBlurb":"'+emaiBody+'",'+
-            '  "emailSubject": "Signature Required - Wish Forms",'+
+            '  "emailBlurb":"Hello,'+'\r\n\n Please sign the attached Wish Form and Liability and Publicity Release Form necessary for '+ childFirstName +'\'s wish. \r\n\nThank You,\r\n Wish & Volunteer Center",'+
+            '  "emailSubject": "Signature Required - Wish Form & Liability And Publicity Release Form",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+
             '      "name": "document.pdf",'+
@@ -1909,7 +2187,10 @@ public Class WishChildForm_AC{
         catch(Exception e){
         }    
     }
-    //This method used to save information form details  
+   
+   /*********************************************************************
+    This WishInfoWithSave() is used to save the wish information form.
+   **********************************************************************/
     public void WishInfoWithSave(){
         try
         {
@@ -1922,7 +2203,10 @@ public Class WishChildForm_AC{
             ApexPages.addMessage(myMsg);
         }
     }
-    //used to download pdf   
+    
+    /****************************************************************************************************
+    This forceDownloadPDF() is used to save the current page and download the entire wish form
+   *****************************************************************************************************/   
     public void forceDownloadPDF(){
            String pageName = ApexPages.currentPage().getUrl().substringBetween('apex/', '?');
             if(pageName == 'WishChildForm_VF'){
@@ -1945,11 +2229,17 @@ public Class WishChildForm_AC{
         }   
     }
     
+   /**********************************************************************************************************
+    This DisplayApprovalProcess() is used to display the error message when the wish form is approval process
+   ***********************************************************************************************************/
     public pageReference DisplayApprovalProcess(){
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.FATAL,' This record is already in approval process'));
         return null;
     } 
-    
+   
+   /**********************************************************************************************************
+    This getRaceEthnicity() is used to get the raceethnicity details values and displayed in wish family form.
+   ***********************************************************************************************************/
     public List<SelectOption> getRaceEthnicity(){
         List<SelectOption> options = new List<SelectOption>();
         Schema.DescribeFieldResult fieldResult =  Wish_Child_Form__c.Race_Ethnicity__c.getDescribe();
@@ -1962,6 +2252,9 @@ public Class WishChildForm_AC{
         return options;
     }  
     
+   /**********************************************************************************************************
+    This getRaceEthnicity() is used to get the raceethnicity details values and displayed in wish family form.
+   ***********************************************************************************************************/
     public List<SelectOption> getDoesParticipantReqWheelchair(){
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','')); 
@@ -1971,6 +2264,9 @@ public Class WishChildForm_AC{
         return options;
     }  
     
+   /**********************************************************************************************************
+    This getWillYourFamilyBringWheelChair() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     public List<SelectOption>getWillYourFamilyBringWheelChair(){
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','')); 
@@ -1980,6 +2276,9 @@ public Class WishChildForm_AC{
         return options;
     } 
     
+   /**********************************************************************************************************
+    This getWheelChairColapsable() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     public List<SelectOption>getWheelChairColapsable(){
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', '')); 
@@ -1989,6 +2288,9 @@ public Class WishChildForm_AC{
         return options;
     } 
     
+   /**********************************************************************************************************
+    This getwheelChairPower() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     public List<SelectOption>getwheelChairPower(){
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', '')); 
@@ -1998,6 +2300,9 @@ public Class WishChildForm_AC{
         return options;
     } 
     
+   /**********************************************************************************************************
+    This getparticipantRequireOxygan() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     public List<SelectOption>getparticipantRequireOxygan(){
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', '')); 
@@ -2007,6 +2312,9 @@ public Class WishChildForm_AC{
         return options;
     } 
     
+   /**********************************************************************************************************
+    This getparticipantHaveSpecialRestrictaion() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     public List<SelectOption>getparticipantHaveSpecialRestrictaion(){
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', '')); 
@@ -2016,6 +2324,9 @@ public Class WishChildForm_AC{
         return options;
     } 
     
+   /**********************************************************************************************************
+    This getparticipantHaveSpecialRestrictaion() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     public List<SelectOption>getparticipantHaveSpecialallergies(){
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', '')); 
@@ -2025,6 +2336,9 @@ public Class WishChildForm_AC{
         return options;
     } 
     
+   /**********************************************************************************************************
+    This getmedicationRequireRefeigeration() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     public List<SelectOption>getmedicationRequireRefeigeration(){
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', '')); 
@@ -2034,6 +2348,9 @@ public Class WishChildForm_AC{
         return options;
     } 
     
+    /**********************************************************************************************************
+    This getcurrentlyReceiveNursingCare() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     public List<SelectOption>getcurrentlyReceiveNursingCare(){
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', '')); 
@@ -2043,6 +2360,9 @@ public Class WishChildForm_AC{
         return options;
     } 
     
+    /**********************************************************************************************************
+    This getanyOtherMedicalSupplies() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     public List<SelectOption>getanyOtherMedicalSupplies(){
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('', '')); 
@@ -2052,6 +2372,9 @@ public Class WishChildForm_AC{
         return options;
     } 
     
+   /************************************************************************
+    This withOutNavigate() is used nevegate the user to corresponding form.
+   **************************************************************************/
     Public pageReference withOutNavigate(){
         pageReference reference;
         String pageName = ApexPages.currentPage().getUrl().substringBetween('apex/', '?');
@@ -2071,6 +2394,9 @@ public Class WishChildForm_AC{
         return reference;
     }
     
+    /**********************************************************************************************************
+    This RetrunToWish() is used to is used nevegate the user to corresponding form.
+   ***********************************************************************************************************/
     public pageReference RetrunToWish(){
         pageReference reference;
         try
@@ -2096,6 +2422,9 @@ public Class WishChildForm_AC{
         return reference;
     }
     
+    /**********************************************************************************************************
+    This selectedNamesss() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     Public String selectedNamesss(List<String> selectedNames)
     {
         Boolean start=True;
@@ -2113,6 +2442,9 @@ public Class WishChildForm_AC{
         return currString ;
     }
     
+    /**********************************************************************************************************
+    This getTempName() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     public list<String> getTempName(){
         
         if(currWishChild.Requested_Participant_Name_forWheelchair__c != null){
@@ -2121,10 +2453,16 @@ public Class WishChildForm_AC{
         return tempName;
     }
     
+   /*******************************************************************************************
+    This setTempName() is used to display the participant name in medical information section.
+    ********************************************************************************************/
     public void setTempName(list<string> val){
         this.tempName = val;
     }
     
+    /**********************************************************************************************************
+    This getCurrentOwnWheelChairList() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     public list<String> getCurrentOwnWheelChairList(){
         
         if(currWishChild.Bringing_Own_Wheel_Chair__c != null){
@@ -2133,10 +2471,16 @@ public Class WishChildForm_AC{
         return currentOwnWheelChairList;
     }
     
+  /***************************************************************************************************************
+    This setCurrentOwnWheelChairList() is used to display the participant name in medical information section.
+   *****************************************************************************************************************/
     public void setCurrentOwnWheelChairList(list<string> val){
         this.currentOwnWheelChairList= val;
     }
     
+    /**********************************************************************************************************
+    This getCurrentWCCollapsibleList() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     Public list<String> getCurrentWCCollapsibleList(){
         if(currWishChild.Name_of_wheelchair_collapsible__c != Null){
             currentWCCollapsibleList = (currWishChild.Name_of_wheelchair_collapsible__c).split(',');
@@ -2144,10 +2488,16 @@ public Class WishChildForm_AC{
         return currentWCCollapsibleList;
     }
     
+   /**********************************************************************************************************
+   This setCurrentWCCollapsibleList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
     public void setCurrentWCCollapsibleList(list<string> val){
         this.currentWCCollapsibleList = val;
     }
     
+    /**********************************************************************************************************
+    This getCurrentWCPowerList() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     Public list<String> getCurrentWCPowerList(){
         if(currWishChild.Pariticipant_name_havingWheelchair_Power__c != Null){
             currentWCPowerList = (currWishChild.Pariticipant_name_havingWheelchair_Power__c).split(',');
@@ -2155,10 +2505,16 @@ public Class WishChildForm_AC{
         return currentWCPowerList;
     }
     
+   /**********************************************************************************************************
+     This setCurrentWCPowerList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
     public void setCurrentWCPowerList(list<string> val){
         this.currentWCPowerList = val;
     }
     
+   /**********************************************************************************************************
+    This getCurrentOxygenNamesList() is used to get the participant name from wish participant section
+   ***********************************************************************************************************/
     Public list<String> getCurrentOxygenNamesList(){
         if( currWishChild.Requested_Participant_Name_for_Oxygen__c != Null){
             currentOxygenNamesList = ( currWishChild.Requested_Participant_Name_for_Oxygen__c).split(',');
@@ -2166,10 +2522,17 @@ public Class WishChildForm_AC{
         return currentOxygenNamesList;
     }
     
+   /**********************************************************************************************************
+     This setCurrentOxygenNamesList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
     public void setCurrentOxygenNamesList(list<string> val){
         this.currentOxygenNamesList = val;
     }
     
+    
+   /**********************************************************************************************************
+     This getCurrrentDietaryNameList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
     Public list<String> getCurrrentDietaryNameList(){
         if(currWishChild.Participant_Name_for_Dietary_Restriction__c != Null){
             currrentDietaryNameList = (currWishChild.Participant_Name_for_Dietary_Restriction__c).split(',');
@@ -2177,10 +2540,17 @@ public Class WishChildForm_AC{
         return currrentDietaryNameList;
     }
     
+   /**********************************************************************************************************
+     This setCurrrentDietaryNameList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
     public void setCurrrentDietaryNameList(list<string> val){
         this.currrentDietaryNameList= val;
     }
     
+   /**********************************************************************************************************
+     This getCurrentNursingCareList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
+   
     Public list<String> getCurrentNursingCareList(){
         if(currWishChild.Names_for_receiving_nursing_care__c != Null){
             currentNursingCareList = (currWishChild.Names_for_receiving_nursing_care__c).split(',');
@@ -2188,10 +2558,16 @@ public Class WishChildForm_AC{
         return currentNursingCareList;
     }
     
+   /**********************************************************************************************************
+     This setCurrentNursingCareList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
     public void setCurrentNursingCareList(list<string> val){
         this.currentNursingCareList = val;
     }
     
+   /**********************************************************************************************************
+     This getCurrentMedicationList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
     Public list<String> getCurrentMedicationList(){
         if(currWishChild.Medication_require_refrigeration_name__c != Null){
             currentMedicationList = (currWishChild.Medication_require_refrigeration_name__c).split(',');
@@ -2199,10 +2575,16 @@ public Class WishChildForm_AC{
         return currentMedicationList;
     }
     
+   /**********************************************************************************************************
+     This setCurrentMedicationList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
     public void setCurrentMedicationList(list<string> val){
         this.currentMedicationList = val;
     }
     
+   /**********************************************************************************************************
+     This getCurrentAllergyNamesList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
     Public list<String> getCurrentAllergyNamesList(){
         if(currWishChild.Requested_Participant_Name_for_Allergies__c  != Null){
             currentAllergyNamesList = (currWishChild.Requested_Participant_Name_for_Allergies__c).split(',');
@@ -2210,10 +2592,18 @@ public Class WishChildForm_AC{
         return currentAllergyNamesList;
     }
     
+    
+   /**********************************************************************************************************
+     This setCurrentAllergyNamesList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
     public void setCurrentAllergyNamesList(list<string> val){
         this.currentAllergyNamesList = val;
     }
     
+   /**********************************************************************************************************
+     This getCurrentOtherNeedsList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
+ 
     Public list<String> getCurrentOtherNeedsList(){
         if(currWishChild.Requested_Participant_Name_for_OtherNeed__c  != Null){
             currentOtherNeedsList = (currWishChild.Requested_Participant_Name_for_OtherNeed__c ).split(',');
@@ -2221,6 +2611,9 @@ public Class WishChildForm_AC{
         return currentOtherNeedsList;
     }
     
+    /**********************************************************************************************************
+     This setCurrentOtherNeedsList() is used to display the participant name in medical information section.
+   ***********************************************************************************************************/
     public void setCurrentOtherNeedsList(list<string> val){
         this.CurrentOtherNeedsList = val;
     }

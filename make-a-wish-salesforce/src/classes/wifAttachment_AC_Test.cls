@@ -17,7 +17,7 @@ public class wifAttachment_AC_Test{
     }
     
     //Attachment for Diagnosis Verification
-    public static testMethod void GetAttachment() {
+    public static testMethod void getAttachment() {
         case newcase = [SELECT ID FROM case];        
         List<cg__CaseFile__c > caseFile = [SELECT Id FROM cg__CaseFile__c ];
         Test.startTest();

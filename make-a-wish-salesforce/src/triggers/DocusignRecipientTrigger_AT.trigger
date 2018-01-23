@@ -33,15 +33,17 @@ Trigger DocusignRecipientTrigger_AT on dsfs__DocuSign_Recipient_Status__c (After
                 
             }
             
-            if(dsfs.dsfs__Parent_Status_Record__c != Null && (dsfs.dsfs__Recipient_Status__c == 'Completed' && trigger.oldMap.get(dsfs.Id).dsfs__Recipient_Status__c == 'Delivered')){
-                completedIdSet.add(dsfs.dsfs__Parent_Status_Record__c);
-                completedNameString.add(dsfs.Name);
+           if(trigger.isAfter && trigger.isUpdate){
+                if(dsfs.dsfs__Parent_Status_Record__c != Null && (dsfs.dsfs__Recipient_Status__c == 'Completed' && trigger.oldMap.get(dsfs.Id).dsfs__Recipient_Status__c == 'Delivered')){
+                    completedIdSet.add(dsfs.dsfs__Parent_Status_Record__c);
+                    completedNameString.add(dsfs.Name);
+                }
             }
         } 
         
         if(dsfsStatusSet.size() > 0){
             for(dsfs__DocuSign_Status__c dsfsStatusRec : [SELECT Id,dsfs__Case__c,dsfs__Subject__c,dsfs__Case__r.ContactId,dsfs__Case__r.LiabilitySignerMapKeyPair__c FROM dsfs__DocuSign_Status__c WHERE Id IN:dsfsStatusSet 
-                                                          AND dsfs__Case__c != Null AND (dsfs__Subject__c =: 'Signature Required - Liability And Publicity Release Form' OR dsfs__Subject__c =: 'Signature Required - Wish Forms')]){
+                                                          AND dsfs__Case__c != Null AND (dsfs__Subject__c =: 'Signature Required - Liability And Publicity Release Form' OR dsfs__Subject__c =: 'Signature Required - Wish Form & Liability And Publicity Release Form')]){
                                                               
                                                               WishIdSet.add(dsfsStatusRec.dsfs__Case__c);
                                                               subject = dsfsStatusRec.dsfs__Subject__c;
@@ -55,9 +57,7 @@ Trigger DocusignRecipientTrigger_AT on dsfs__DocuSign_Recipient_Status__c (After
                                                               deliveredWishIdSet.add(dsfsStatusRec.dsfs__Case__c);
                                                               
                                                           }
-            
-            system.debug('@@@ deliveredWishIdSet@@@'+deliveredWishIdSet);
-            
+          
         }
         
         if(completedIdSet.size() > 0){
@@ -113,7 +113,7 @@ Trigger DocusignRecipientTrigger_AT on dsfs__DocuSign_Recipient_Status__c (After
                 
                 if(subject == 'Signature Required - Liability And Publicity Release Form'){
                     
-                    for(String processString : nameMap.keyset()){
+                   /* for(String processString : nameMap.keyset()){
                         if(dbWishPaperCase.Hidden_Name_List__c == Null && dbWishPaperCase.Hidden_Email_List__c == Null){
                             dbWishPaperCase.Hidden_Name_List__c = processString;
                             dbWishPaperCase.Hidden_Email_List__c = nameMap.get(processString);
@@ -124,13 +124,13 @@ Trigger DocusignRecipientTrigger_AT on dsfs__DocuSign_Recipient_Status__c (After
                             dbWishPaperCase.Hidden_Name_List__c  += '#'+processString;
                             dbWishPaperCase.Hidden_Email_List__c += '#'+nameMap.get(processString);
                             dbWishPaperCase.Id = dbWishPaperCase.Id;
-                            updateWishPaperMap.put(dbWishPaperCase.Id,dbWishPaperCase);
+                            //updateWishPaperMap.put(dbWishPaperCase.Id,dbWishPaperCase);
                         }
-                    }
+                    }*/
                     contactIdSet.add(dbWishPaperCase.Case__r.contactId);
                 }
                 
-                if(subject == 'Signature Required - Wish Forms'){
+                if(subject == 'Signature Required - Wish Form & Liability And Publicity Release Form'){
                     
                     for(String processString : nameMap.keyset()){
                         if(dbWishPaperCase.Hidden_Contact_Name__c == Null){

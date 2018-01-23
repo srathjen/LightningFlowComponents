@@ -79,6 +79,7 @@ public class DocusignStatusTrigger_AT_Test{
         updateLead.RFI_Form_Info_Hidden__c = 'Qualified';
         updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
         updateLead.Id = newLead.Id;
+        Test.startTest();
         update updateLead;
         
         dsfs__DocuSign_Status__c dbdsfs = new dsfs__DocuSign_Status__c ();
@@ -86,6 +87,7 @@ public class DocusignStatusTrigger_AT_Test{
         dbdsfs.Id = dsfs.Id;
         dbdsfs.dsfs__Lead__c = newLead.id;
         update dbdsfs;
+        Test.stopTest();
         
         
         
@@ -103,8 +105,10 @@ public class DocusignStatusTrigger_AT_Test{
         updateLead.Status = 'Referred';
         updateLead.RFI_Form_Info_Hidden__c = 'Not Qualified';
         updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        Test.startTest();
         updateLead.Id = newLead.Id;
         update updateLead;
+        Test.stopTest();
         
         dsfs__DocuSign_Status__c dbdsfs = new dsfs__DocuSign_Status__c ();
         dbdsfs.dsfs__Envelope_Status__c  = 'Completed';

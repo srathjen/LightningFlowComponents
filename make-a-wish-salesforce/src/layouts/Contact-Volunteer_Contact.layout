@@ -49,6 +49,10 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Self_describe_comment_box__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Important_Notes__c</field>
             </layoutItems>
         </layoutColumns>
@@ -384,6 +388,14 @@
                 <behavior>Edit</behavior>
                 <field>COI_Expiration_Date__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Activation_Date__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Inactivation_Date__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
@@ -597,6 +609,7 @@
         <fields>Reason_Inactive__c</fields>
         <fields>Status__c</fields>
         <fields>Chapter_Name__c</fields>
+        <fields>Wish_Status__c</fields>
         <relatedList>Volunteer_Opportunity__c.Volunteer_Name__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -614,7 +627,7 @@
         <fields>dsfs__Envelope_Status__c</fields>
         <fields>dsfs__Hrs_Sent_to_Sign__c</fields>
         <fields>dsfs__Sent_Date_Time__c</fields>
-        <relatedList>dsfs__DocuSign_Status__c.dsfs__Contact__c</relatedList>
+        <relatedList>dsfs__DocuSign_Status__c.Docusign_Hidden_Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
@@ -651,6 +664,9 @@
         <fields>Total_Reimbursement_Amount__c</fields>
         <fields>Gift_Value__c</fields>
         <relatedList>In_Kind_Donation_Reimbursement__c.vounteer_Name__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <relatedList>RelatedEntityHistoryList</relatedList>
     </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>

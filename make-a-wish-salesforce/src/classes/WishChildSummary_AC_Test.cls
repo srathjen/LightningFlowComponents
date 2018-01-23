@@ -137,7 +137,7 @@ public class WishChildSummary_AC_Test {
         boolean isRush = false;
         Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator());
         WishChildSummary_AC.CallouttoDocusign(caseId.id,contactMedicalProfessChild.Name,contactMedicalProfessChild.Email);
-        System.assertEquals(wishClear.medicalProfContactName,contactMedicalProfessChild.Name);
+        System.assertEquals(wishClear.medicalProfContactName,contactMedicalProfessChild.Name,'Compare MedicalProf Name in Contact and in WishChildSummary');
         Test.StopTest();
     }
 

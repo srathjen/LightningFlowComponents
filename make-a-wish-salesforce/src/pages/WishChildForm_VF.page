@@ -301,14 +301,14 @@
                             </nav>
                         </div>
 
-                        <div class="modal fade" id="approvalalert" tabindex="-1" role="dialog" aria-labelledby="Send Email" aria-hidden="true">
+                        <div class="modal fade" id="approvalalert" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="Send Email" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title" id="send-email">Warning</h1>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                       <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
-                                        </button>
+                                        </button> -->
                                     </div>
                                     <div class="modal-body">
                                         <div class="form-group row">

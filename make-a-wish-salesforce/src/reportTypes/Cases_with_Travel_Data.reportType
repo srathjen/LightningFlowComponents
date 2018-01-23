@@ -2122,11 +2122,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>EmailMessage</field>
-            <table>Case.Travel_Data__r.Activities</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>IsVisibleInSelfService</field>
             <table>Case.Travel_Data__r.Activities</table>
         </columns>

@@ -57,6 +57,10 @@
         <name>Hidden_Background_Rejected__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Trigger BGC Exp Reminder --></label>
+        <name>Hidden_Trigger_BGC_Exp_Reminder__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Volunteer Contact Email --></label>
         <name>Hidden_Volunteer_Contact_Email__c</name>
     </fields>
@@ -168,6 +172,10 @@
     <workflowTasks>
         <name>BC_ET_Background_Check_Expired_7_Days</name>
         <subject><!-- BC ET : Background Check Expired (7 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>BC_ET_Background_Check_Expiring</name>
+        <subject><!-- BC ET : Background Check Expiring --></subject>
     </workflowTasks>
     <workflowTasks>
         <name>BC_ET_Background_Check_Expiring_16_Days</name>

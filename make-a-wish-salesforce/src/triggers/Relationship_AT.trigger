@@ -1,7 +1,7 @@
 trigger Relationship_AT on npe4__Relationship__c (after insert,before insert,after update) 
 {
     Set<id> relationshipIdSet = new Set<id>();
-    if(trigger.isBefore && Trigger.isInsert)
+    /*if(trigger.isBefore && Trigger.isInsert)
     {
         Set<Id> relatedContactId = new Set<Id>();
         Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Wish Family').getRecordTypeId();
@@ -23,6 +23,9 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert,aft
                 newRecord.Wish_Participant__c = true;
             }
         }
+    }*/
+    if((trigger.isBefore && trigger.isUpdate && RecursiveTriggerHandler.blockBeforeUpdate == true) || (trigger.isAfter && trigger.isUpdate && RecursiveTriggerHandler.blockAfterUpdate)){
+     return; 
     }
     if(trigger.isInsert && trigger.isAfter)
     {
@@ -84,13 +87,13 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert,aft
                update  updateContactMap.Values();
             }
             
-            if(relationshipIdSet.size() > 0){
+            if(relationshipIdSet.size() > 0 && RecursiveTriggerHandler.relationShipRecursive == true){
              RelationshipTriggerHandler relationShipIns = new RelationshipTriggerHandler();
              relationShipIns.updateApprovedCase(relationshipIdSet);
          }
         } 
     }
-    if(trigger.isAfter && trigger.isUpdate){
+    if(trigger.isAfter && trigger.isUpdate && RecursiveTriggerHandler.blockAfterUpdate == false){
         for(npe4__Relationship__c newRecord :trigger.new){
                     if((newRecord.npe4__Contact__c != Null) && (newRecord.Wish_Participant__c != trigger.oldMap.get(newRecord.Id).Wish_Participant__c) || 
                         (newRecord.Parent_Legal_Guardian__c != trigger.oldMap.get(newRecord.Id).Wish_Participant__c) || (newRecord.Under_18__c != trigger.oldMap.get(newRecord.Id).Wish_Participant__c) || 
@@ -98,7 +101,7 @@ trigger Relationship_AT on npe4__Relationship__c (after insert,before insert,aft
                            relationshipIdSet.add(newRecord .npe4__Contact__c );
                     }
          }
-         if(relationshipIdSet.size() > 0){
+         if(relationshipIdSet.size() > 0 && RecursiveTriggerHandler.relationShipRecursive == true){
          RelationshipTriggerHandler relationShipIns = new RelationshipTriggerHandler();
          relationShipIns.updateApprovedCase(relationshipIdSet);
          }

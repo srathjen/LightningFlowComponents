@@ -171,7 +171,8 @@ Public class VolunteerOpportunityTriggerHandler
                         newCaseTeamMembers.MemberId = volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c);
                         wishAssignedSet.add(newCaseTeamMembers.MemberId);
                     }
-                    if(teamMemberRoleMap.containsKey(newVolunteerRole.Role__c) && !wishMembersMap.get(newVolunteerRole.wish__c).contains(volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c))){
+                    //if((teamMemberRoleMap.containsKey(newVolunteerRole.Role__c)) && (!wishMembersMap.get(newVolunteerRole.wish__c).contains(volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c)))){
+                    if((teamMemberRoleMap.containsKey(newVolunteerRole.Role__c)) && (wishMembersMap.size() == 0 || !wishMembersMap.get(newVolunteerRole.wish__c).contains(volunteerUserMap.get(newVolunteerRole.Volunteer_Name__c)))){
                         newCaseTeamMembers.TeamRoleId = teamMemberRoleMap.get(newVolunteerRole.Role__c).id;
                         caseMemberMap.put(newCaseTeamMembers.id, newCaseTeamMembers);
                     }
@@ -759,7 +760,7 @@ update updateContactList;
             update updateinactiveList;
         }
         if(createNewVolunteerOpportunityList.size() > 0)
-            insert createNewVolunteerOpportunityList;
+           // insert createNewVolunteerOpportunityList;
         if(updateList.size() > 0) {
             update updateList; 
         }
@@ -934,6 +935,7 @@ update updateContactList;
     
     public static void updateCase(Set<Id> caseIdSet,Set<Id> voluOppIdSet){
         RecursiveTriggerHandler.isFirstTime = false;
+		RecursiveTriggerHandler.allowToEditRecord = TRUE;
         List<Case> updateCaseList = new List<Case>();
         Case myParentCase = new Case(); 
         for (Case record : [SELECT id FROM Case WHERE Id IN : caseIdSet]){

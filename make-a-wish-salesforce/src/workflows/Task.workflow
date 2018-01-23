@@ -69,17 +69,34 @@
         <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Task_Volunteer_Email_Notification_for_Confirmation_Date</template>
     </alerts>
+    <fieldUpdates>
+        <fullName>Close_Task</fullName>
+        <description>Updates the task Status to Completed.</description>
+        <field>Status</field>
+        <literalValue>Completed</literalValue>
+        <name>Close Task</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+    </fieldUpdates>
     <rules>
-        <fullName>Task%3A Email Notification for Interivew Task</fullName>
+        <fullName>Close Task</fullName>
         <actions>
-            <name>Task_Interview_Task_Email_Notification</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Task_ET_Task_ET_Interview_Task_Assigned_for_You</name>
-            <type>Task</type>
+            <name>Close_Task</name>
+            <type>FieldUpdate</type>
         </actions>
         <active>true</active>
+        <criteriaItems>
+            <field>Task.Close_Task__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>Used to close multiple tasks from a list view.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Task%3A Email Notification for Interivew Task</fullName>
+        <active>false</active>
         <criteriaItems>
             <field>Task.RecordTypeId</field>
             <operation>equals</operation>
@@ -95,15 +112,7 @@
     </rules>
     <rules>
         <fullName>Task%3A Email Notification for InterviewTask Rescheduled Workflow Rule</fullName>
-        <actions>
-            <name>Rescheduled_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Task_ET_Interview_Task_Rescheduled_for_You</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Task.RecordTypeId</field>
             <operation>equals</operation>
@@ -123,31 +132,8 @@
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
     <rules>
-        <fullName>Task%3A Volunteer Email for Confirm Date</fullName>
-        <actions>
-            <name>Task_Volunteer_Email_Notification_for_Interview</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Task_ET_Interview_Confirmation_Date_and_Venue</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
-        <description>When Interviewer confirmed the interview date, it will send an email notification to volunteer.</description>
-        <formula>PRIORVALUE(Confirmed_Date__c) = Null &amp;&amp; (Confirmed_Date__c != Null) &amp;&amp;  $Profile.Name != &apos;Integration&apos;</formula>
-        <triggerType>onAllChanges</triggerType>
-    </rules>
-    <rules>
         <fullName>Task%3AInterview Cancelled Workflow Rule</fullName>
-        <actions>
-            <name>Task_Interview_Cancelled_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Task_ET_Interview_Cancelled</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Task.RecordTypeId</field>
             <operation>equals</operation>
@@ -168,15 +154,7 @@
     </rules>
     <rules>
         <fullName>Task%3AInterview Scheduled Workflow Rule</fullName>
-        <actions>
-            <name>Task_Interview_Scheduled_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Task_ET_Interview_scheduled</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Task.RecordTypeId</field>
             <operation>equals</operation>
@@ -197,14 +175,6 @@
     </rules>
     <rules>
         <fullName>Task%3AInterview completed Workflow Rule</fullName>
-        <actions>
-            <name>Task_Interview_Completed_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Task_ET_Interview_Completed</name>
-            <type>Task</type>
-        </actions>
         <active>false</active>
         <criteriaItems>
             <field>Task.RecordTypeId</field>

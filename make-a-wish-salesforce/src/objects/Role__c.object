@@ -21,6 +21,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -70,6 +74,16 @@
         <description>If this is checked then that Role wouldn&apos;t show on the Application.</description>
         <externalId>false</externalId>
         <label>Exclude from Application</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Moved_to_Historical_by_Volunteer__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This check box indicate if the role is moved to historical or not.</description>
+        <externalId>false</externalId>
+        <label>Move to Historical</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>

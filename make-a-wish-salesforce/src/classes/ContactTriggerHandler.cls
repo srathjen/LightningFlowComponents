@@ -171,21 +171,27 @@ public class ContactTriggerHandler{
         
         for(Contact con:ContactList)
         {
-            npe5__Affiliation__c houseHoldAffiliation = new npe5__Affiliation__c();
-            houseHoldAffiliation.npe5__Organization__c=con.AccountId;
-            houseHoldAffiliation.npe5__Contact__c=con.id;
-            houseHoldAffiliation.npe5__StartDate__c = Date.Today();
-            houseHoldAffiliation.npe5__Status__c = 'Active';
-            if(con.RecordTypeId == volunteerRecordTypeId){
-                houseHoldAffiliation.Constituent_Code__c='Volunteer';
-                houseHoldAffiliation.npe5__Primary__c = true;
-                contactIds.add(con.Id);
-             }
-            else if(con.RecordTypeId == boardMemberRT)
-                houseHoldAffiliation.Constituent_Code__c='Board Member';
-            if(con.RecordTypeId == MedicalProfContactRecordTypeId)
-                houseHoldAffiliation.npe5__Primary__c = false;
-            houseHoldAffList.add(houseHoldAffiliation);
+             if((con.RecordTypeId == MedicalProfContactRecordTypeId  && con.Hidden_Hospital_Account__c != Null) || (con.RecordTypeId != MedicalProfContactRecordTypeId)){
+                npe5__Affiliation__c houseHoldAffiliation = new npe5__Affiliation__c();
+                 if(con.RecordTypeId == MedicalProfContactRecordTypeId  && con.Hidden_Hospital_Account__c != Null)
+                      houseHoldAffiliation.npe5__Organization__c=con.Hidden_Hospital_Account__c;
+                else
+                    houseHoldAffiliation.npe5__Organization__c=con.AccountId;
+                    
+                houseHoldAffiliation.npe5__Contact__c=con.id;
+                houseHoldAffiliation.npe5__StartDate__c = Date.Today();
+                houseHoldAffiliation.npe5__Status__c = 'Active';
+                if(con.RecordTypeId == volunteerRecordTypeId){
+                    houseHoldAffiliation.Constituent_Code__c='Volunteer';
+                    houseHoldAffiliation.npe5__Primary__c = true;
+                    contactIds.add(con.Id);
+                 }
+                else if(con.RecordTypeId == boardMemberRT)
+                    houseHoldAffiliation.Constituent_Code__c='Board Member';
+                if(con.RecordTypeId == MedicalProfContactRecordTypeId)
+                    houseHoldAffiliation.npe5__Primary__c = false;
+                houseHoldAffList.add(houseHoldAffiliation);
+            }
             
             if((con.RecordTypeId == MedicalProfContactRecordTypeId) || con.RecordTypeId == familyContactRecordTypeId || con.RecordTypeId == wichChildRecordTypeId)
             {
@@ -462,10 +468,13 @@ system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
         }
     }
     
-    //Used to populated Condition Description based on ICD Code values
+     //Used to populated Condition Description based on ICD Code values
     public static void updatePrimaryDiagnosis(Map<Id, Contact> primaryDiagnosisChangesMap) {
+        List<Case> caseBdayUpdateList = new List<Case>();
         List<Wish_Child_Form__c> updateConInfoList = new List<Wish_Child_Form__c>();
-        for(Case updateWPPInfo : [SELECT Id, ContactId, (SELECT Id,FirstName__c,Middle_Name__c,Preferred_Name__c,mobilePhone__c, Email__c, LastName__c,Gender__c,BirthDate__c, Diagnosis__c, T_Shirt_Size__c FROM Wish_Child_Form__r ORDER BY CreatedDate DESC LIMIT 1) FROM Case WHERE ContactId IN : primaryDiagnosisChangesMap.keySet()]) {
+        Set<Id> conIdSet = new Set<Id>();
+        List<Task> bdayTaskList = new List<Task>();
+        for(Case updateWPPInfo : [SELECT Id, Birthdate__c, ContactId, (SELECT Id,FirstName__c,Middle_Name__c,Preferred_Name__c,mobilePhone__c, Email__c, LastName__c,Gender__c,BirthDate__c, Diagnosis__c, T_Shirt_Size__c FROM Wish_Child_Form__r ORDER BY CreatedDate DESC LIMIT 1) FROM Case WHERE ContactId IN : primaryDiagnosisChangesMap.keySet()]) {
             if(updateWPPInfo.Wish_Child_Form__r.size() > 0) {
                 for(Wish_Child_Form__c checkDiagnosis : updateWPPInfo.Wish_Child_Form__r) {
                     checkDiagnosis.Diagnosis__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).Diagnosis__c;
@@ -484,11 +493,25 @@ system.debug('@@@@@@ Contact Trigger @@@@@@'+houseHoldAffList);
                     updateConInfoList.add(checkDiagnosis);
                 }
             }
+            if(updateWPPInfo.Birthdate__c != primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).Birthdate) {
+                updateWPPInfo.Birthdate__c = primaryDiagnosisChangesMap.get(updateWPPInfo.ContactId).Birthdate;
+                conIdSet.add(updateWPPInfo.ContactId);
+                caseBdayUpdateList.add(updateWPPInfo);
+            }
+        }
+        for(Task bdayTask : [SELECT Id FROM Task WHERE WhoId IN : conIdSet AND Subject = 'Wish Child Birthday Reminder' AND status != 'Completed']) {
+            bdayTaskList.add(bdayTask);
+        }
+        if(bdayTaskList.size() > 0) {
+            Delete bdayTaskList;
         }
        if(updateConInfoList.size() > 0) {
             update updateConInfoList;
             //String wPPInfoString = JSON.serialize(updateConInfoList);
             //updateWishPaperPacketInfo(wPPInfoString);
+        }
+        if(caseBdayUpdateList.size() > 0) {
+           update caseBdayUpdateList; 
         }
     }
     

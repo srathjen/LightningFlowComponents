@@ -1,4 +1,4 @@
-<apex:page controller="DelegatedApproverController_AC" sidebar="false" showHeader="false" id="page" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" cache="false" readOnly="true">
+<apex:page controller="DelegatedApproverController_AC" sidebar="false" showHeader="false" id="page" standardStylesheets="false" applyBodyTag="false" docType="html-5.0" cache="false">
     <title>Approval Process</title>
     <apex:form >
         <apex:stylesheet value="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
@@ -89,6 +89,7 @@
                         <th>Process Name</th>  
                         <th>Chapter Name</th>
                         <th>Record Name</th>
+                        <th>Wish Child</th>
                         <th>Status</th>
                         <th>Created By</th>
                         <th>Submitted By</th>
@@ -104,12 +105,13 @@
                             <apex:outputPanel rendered="{!OR(selectedprocessName == Null,selectedprocessName == '',selectedprocessName == process )}" layout="none">
                                 
                                 <apex:repeat value="{!approvalMap[process]}" var="process2">
-                                    <apex:outputPanel rendered="{!AND(OR(selectedChapter == Null,selectedChapter == '',selectedChapter == chapterMap[process2.TargetObject.Id]),OR(process2.Status == selectedStatus,selectedStatus == Null,selectedStatus == ''),OR(if((process2.StepsandWorkItems.Size >0 && process2.StepsandWorkItems[0].Actor.Name == selectedApprover),true,false),selectedApprover == '' ,selectedApprover ==Null),OR(if((process2.StepsandWorkItems.Size >0 && process2.StepsandWorkItems[0].OriginalActor.Name == selectedCompltedBy ),true,false),selectedCompltedBy == '' ,selectedCompltedBy == Null))}" layout="none">
+                                    <apex:outputPanel rendered="{!AND(OR(selectedChapter == Null,selectedChapter == '',selectedChapter == chapterMap[process2.TargetObject.Id]),OR(process2.Status == selectedStatus,selectedStatus == Null,selectedStatus == ''),OR(if((process2.StepsandWorkItems.Size >0 && process2.StepsandWorkItems[0].Actor.Name == selectedApprover),true,false),selectedApprover == '' ,selectedApprover ==Null),OR(if((process2.StepsandWorkItems.Size >0 && process2.StepsandWorkItems[0].OriginalActor.Name == selectedCompltedBy ),true,false),selectedCompltedBy == '' ,selectedCompltedBy == Null),chapterMap[process2.TargetObject.Id] != 'Alabama')}" layout="none">
                                         <tr class="myDataRow">   
                                             <td><label style="display:none">{!process}</label></td>
                                             <!--<td>{!IF(CONTAINS(process2.SubmittedBy.UserRole.Name, 'Make'),LEFT(process2.SubmittedBy.UserRole.Name, LEN(process2.SubmittedBy.UserRole.Name)-13),'Make-A-Wish '+LEFT(process2.SubmittedBy.UserRole.Name,LEN(process2.SubmittedBy.UserRole.Name)-9))}</td>-->
                                             <td>{!chapterMap[process2.TargetObject.Id]}</td>
                                             <td><apex:outputLink value="/{!process2.TargetObject.Id}">{!process2.TargetObject.Name}</apex:outputLink></td>
+                                            <td>{!wishChildNameMap[process2.TargetObject.Id]}</td>
                                             <td>{!process2.Status}</td>
                                             <td>{!process2.CreatedBy.Name}</td>
                                             <td>{!process2.SubmittedBy.Name}</td>   

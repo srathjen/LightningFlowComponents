@@ -8,7 +8,8 @@
             <field>npe01__HomeEmail__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Bc_Completed_Email_Pending_Volunteer_Training_Required_Template</template>
     </alerts>
     <alerts>
@@ -90,7 +91,8 @@
             <field>npe01__HomeEmail__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Volunteer_Application_Approved_Email_Template</template>
     </alerts>
     <alerts>
@@ -101,7 +103,8 @@
             <field>npe01__HomeEmail__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Task_Interview_Completed_Email_Template</template>
     </alerts>
     <fieldUpdates>
@@ -396,15 +399,7 @@ OtherPhone
     </rules>
     <rules>
         <fullName>Volunteer %3A Application Approved Workflow Rule</fullName>
-        <actions>
-            <name>Volunteer_Application_Approved_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Contact_ET_Application_Approved</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Contact.RecordTypeId</field>
             <operation>equals</operation>
@@ -425,15 +420,7 @@ OtherPhone
     </rules>
     <rules>
         <fullName>Volunteer %3A Application Completed Workflow Rule</fullName>
-        <actions>
-            <name>Volunteer_Application_Completed_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Contact_ET_Application_Completed</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <booleanFilter>1 AND 2 AND 3</booleanFilter>
         <criteriaItems>
             <field>Contact.RecordTypeId</field>
@@ -455,7 +442,7 @@ OtherPhone
     </rules>
     <rules>
         <fullName>Volunteer %3A Application Incompleted Workflow Rule</fullName>
-        <active>true</active>
+        <active>false</active>
         <booleanFilter>1 AND 2 AND 3</booleanFilter>
         <criteriaItems>
             <field>Contact.RecordTypeId</field>
@@ -475,41 +462,17 @@ OtherPhone
         <description>This workflow rule will fire when the application is incomplete</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
-            <actions>
-                <name>Volunteer_Application_Incompleted_After_30_Days_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>Contact_ET_Application_Status_Incomplete_After_30_Days</name>
-                <type>Task</type>
-            </actions>
             <timeLength>30</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
-            <actions>
-                <name>Volunteer_Application_Incompleted_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
-            <actions>
-                <name>Contact_ET_Application_Status_Incomplete</name>
-                <type>Task</type>
-            </actions>
             <timeLength>7</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
     </rules>
     <rules>
         <fullName>Volunteer %3AInterview Task completed Workflow Rule</fullName>
-        <actions>
-            <name>Volunteer_Interview_Task_Completed_Email_ALert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>Task_ET_Interview_Completed</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Contact.RecordTypeId</field>
             <operation>equals</operation>
@@ -528,28 +491,16 @@ OtherPhone
         <description>This workflow will fire when the interview task has completed and if the BC is not submitted 7, 30 days after interview completed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
-            <actions>
-                <name>Volunteer_Interview_Task_Completed_Email_ALert</name>
-                <type>Alert</type>
-            </actions>
             <timeLength>30</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
-            <actions>
-                <name>Volunteer_Interview_Task_Completed_Email_ALert</name>
-                <type>Alert</type>
-            </actions>
             <timeLength>7</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
     </rules>
     <rules>
         <fullName>Volunteer%3A Interview Date Not Set After Application Completed 7_30_Days Workflow</fullName>
-        <actions>
-            <name>Volunteer_Interview_Date_Set_Remainder_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
         <active>true</active>
         <criteriaItems>
             <field>Contact.is_Application__c</field>
@@ -563,8 +514,7 @@ OtherPhone
         </criteriaItems>
         <criteriaItems>
             <field>Contact.InterviewDateSet__c</field>
-            <operation>notEqual</operation>
-            <value>Interview Task Created</value>
+            <operation>equals</operation>
         </criteriaItems>
         <description>This workflow will fire when the volunteer not submitted the interview date, 7 and 30 days after application completed</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
@@ -573,6 +523,10 @@ OtherPhone
                 <name>Volunteer_Interview_Date_Set_Remainder_Email_Alert</name>
                 <type>Alert</type>
             </actions>
+            <actions>
+                <name>Contact_ET_Volunteer_Interview_Date_Set_Remainder_30_Days</name>
+                <type>Task</type>
+            </actions>
             <timeLength>30</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
@@ -580,6 +534,10 @@ OtherPhone
             <actions>
                 <name>Volunteer_Interview_Date_Set_Remainder_Email_Alert</name>
                 <type>Alert</type>
+            </actions>
+            <actions>
+                <name>Contact_ET_Volunteer_Interview_Date_Set_Remainder_7_Days</name>
+                <type>Task</type>
             </actions>
             <timeLength>7</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
@@ -804,6 +762,28 @@ OtherPhone
         <protected>false</protected>
         <status>Completed</status>
         <subject>Contact ET : Application Status Incomplete After 30 Days</subject>
+    </tasks>
+    <tasks>
+        <fullName>Contact_ET_Volunteer_Interview_Date_Set_Remainder_30_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Contact ET : Volunteer Interview Date Set Remainder (30 Days)</subject>
+    </tasks>
+    <tasks>
+        <fullName>Contact_ET_Volunteer_Interview_Date_Set_Remainder_7_Days</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Contact ET : Volunteer Interview Date Set Remainder (7 Days)</subject>
     </tasks>
     <tasks>
         <fullName>Task_ET_Interview_Completed</fullName>

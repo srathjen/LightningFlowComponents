@@ -1,0 +1,25 @@
+<!--****************************************************************************************************************************************************************
+Created by: MST Solutions
+Author : MST Solutions
+CreateDate : 09/19/2017
+Description : This LiabilityForms_VF is used to display the list of liability forms 1.Publicity OK 2.Prefer no publicity 3.Publicity not selected .
+*************************************************************************************************************************************************************** -->
+<apex:page standardController="Case" extensions="LiabilityForms_AC">
+ <apex:pageBlock >
+ <font family="Lato"><apex:facet name="header">
+         <span style="font-family:'Lato';font-size:20px;">&nbsp;&nbsp;&nbsp;Choose any one of the following links</span>
+   </apex:facet></font>  
+ 
+ <apex:pageBlockSection >
+ <font family="Lato"><apex:facet name="header">
+         <span style="font-family:'Lato';font-size:15px;">Liability And Publicity Release Form</span>
+   </apex:facet></font>
+ <apex:outputLink target="_blank" value="{!LiabilityFrom}" style="font-family:'Lato';font-size:13px;"> Publicity OK </apex:outputLink>  
+   <apex:outputLink ></apex:outputLink>
+   <apex:outputLink target="_blank" value="{!Liability}" style="font-family:'Lato';font-size:13px;"> Prefer no publicity </apex:outputLink>
+   <apex:outputLink ></apex:outputLink>
+   <apex:outputLink target="_blank" value="{!publicity}" style="font-family:'Lato';font-size:13px;"> Publicity not selected </apex:outputLink>
+  </apex:pageBlockSection>  
+  </apex:pageBlock>
+ 
+ </apex:page>

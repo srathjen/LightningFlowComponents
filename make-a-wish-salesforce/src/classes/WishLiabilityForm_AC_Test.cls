@@ -7,7 +7,7 @@ Description : WishLiabilityForm_AC_Test is used to increase the code coverage fo
 public class WishLiabilityForm_AC_Test {
     
     /*This method is used to cover the code coverage of Constructor method*/
-    public static testMethod void CalltheConstructorMethod(){ 
+    public static testMethod void calltheConstructorMethod(){ 
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
 Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
@@ -28,13 +28,12 @@ Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildCont
         pageRef.getParameters().put('id',String.valueOf(wish.Id));
         Test.setCurrentPage(pageRef);
         WishLiabilityForm_AC wishLiabilityIns = new WishLiabilityForm_AC(sc);
-        system.AssertEquals(wishChild.Id,wish.ContactId);
-        
+        System.assertEquals(wishChild.Id,wish.ContactId,'Compare WishChild and Contact in Wish');
     }
     
     
     /*This method is used to cover the code coverage of Constructor else condition method*/
-    public static testMethod void CalltheConstructorMethodError(){ 
+    public static testMethod void calltheConstructorMethodError(){ 
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         /*Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
 Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
@@ -56,11 +55,11 @@ Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildCont
         pageRef.getParameters().put('id',String.valueOf(wish.Id));
         Test.setCurrentPage(pageRef);
         WishLiabilityForm_AC wishLiabilityIns = new WishLiabilityForm_AC(sc);
-        system.AssertEquals(wishChild.Id,wish.ContactId);
+        System.assertEquals(wishChild.Id,wish.ContactId,'Compare WishChild and Contact in Wish');
     }
     
     /*This method is used to cover the code coverage of multiEmail() and CallOuttoDocusign() method.*/
-    public static testMethod void SendDocusigntoEmail(){ 
+    public static testMethod void sendDocusigntoEmail(){ 
         
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
@@ -109,16 +108,17 @@ Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildCont
         sendEmailMap.put('MAWAFirstName MAWALastName2', 'kanagaraj@mstsolutions.com');
         
         Test.StartTest();
-        Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
-        WishLiabilityForm_AC.CallOuttoDocusign(sendEmailMap,wish.Id);
+        Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator());
+        String option = 'Three'; 
+        WishLiabilityForm_AC.CallOuttoDocusign(sendEmailMap,String.valueof(wish.Id),option);
         wishLiabilityIns.redirect();
         wishLiabilityIns.SignNowdisplayError = true;
         Test.StopTest();
-        system.AssertEquals(wishChild.Id,wish.ContactId);
+        System.assertEquals(wishChild.Id,wish.ContactId,'Compare WishChild and Contact in Wish');
     }
     
     /*This method is used to cover the code coverage of multiEmail() else condition.*/
-    public  static testMethod void SendDocusigntoEmailError(){ 
+    public  static testMethod void sendDocusigntoEmailError(){ 
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
 Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
@@ -132,7 +132,7 @@ Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildCont
         childForm.Hidden_Email_List__c = 'MAWAFirstName MAWALastName1,MAWAFirstName MAWALastName2'+','+childForm.Hidden_Email_List__c;
         childForm.Hidden_Name_List__c = 'kesavkumar@mstsolutions.com,kanagaraj@mstsolutions.com'+','+childForm.Hidden_Name_List__c;
         childForm.Parent_Gurdian_above_18_Email__c = 'Test Child Parent 1-test@mail.com#Test Chandrasekar-kanagaraj@mstsolutions.com';
-    childForm.Case__c = wish.id;
+        childForm.Case__c = wish.id;
         childForm.ParentsParticipantsName__c = 'test, kanagarj, chandru';
         childForm.Parent_Gurdian_above_18__c = 'Test Child Parent 1#Test Chandrasekar';
         childForm.LiabilitySignerMapKeyPair__c = 'fffff rrrrr - 1#eee tttt - 2#grandmother participany1 - 3#Grandfather participant - 4';
@@ -161,14 +161,15 @@ Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildCont
         
         Test.StartTest();
         Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
-        WishLiabilityForm_AC.CallOuttoDocusign(sendEmailMap,wish.Id);
+        String option = 'one';
+        WishLiabilityForm_AC.CallOuttoDocusign(sendEmailMap,wish.Id,option);
         wishLiabilityIns.redirect();
         Test.StopTest();
-        system.AssertEquals(wishChild.Id,wish.ContactId);
+        System.assertEquals(wishChild.Id,wish.ContactId,'Compare WishChild and Contact in Wish');
     }
     
     /*This method is used to cover the code coverage of SubmitAndSign() method when Hidden_Liability_Envelop_Id_1__c,Hidden_Liability_Envelop_Id_2__c & Hidden_Liability_SignerMap_Key_1__c are NOT NULL .*/
-    public static testMethod void SignDocusignNow1(){
+    public static testMethod void signDocusignNow1(){
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
         List<Contact> WishFamilyContactList = OrientationandTrainingUtil.CreateWishFamilyList(3);
@@ -209,11 +210,11 @@ Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildCont
         wishLiabilityIns.DisplayMessage();
         wishLiabilityIns.SubmitAndSign();
         Test.StopTest();
-        system.AssertEquals(wishChild.Id,wish.ContactId);
+        System.assertEquals(wishChild.Id,wish.ContactId,'Compare WishChild and Contact in Wish');
     }
     
     /*This method is used to cover the code coverage of SubmitAndSign() method when wishLiabilityIns.displaypopwindow = false .*/
-    public static testMethod void SignDocusignNow4(){
+    public static testMethod void signDocusignNow4(){
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
         List<Contact> WishFamilyContactList = OrientationandTrainingUtil.CreateWishFamilyList(3);
@@ -255,7 +256,7 @@ Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildCont
         wishLiabilityIns.SubmitAndSign();
         
         Test.StopTest();
-        system.AssertEquals(wishChild.Id,wish.ContactId);
+        System.assertEquals(wishChild.Id,wish.ContactId,'Compare WishChild and Contact in Wish');
     }
      
     

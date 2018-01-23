@@ -174,7 +174,7 @@ public class SingleParent_AC{
         if(String.isEmpty(recpName)) {
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Recepient cannot be null.'));
         } else if(String.isEmpty(recpEmail)) {
-            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The selected user does not have an email address.'));
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The contact you have selected has no email address available. Please add email on the contact record and try to send the form again.'));
         }
         return null;
     }

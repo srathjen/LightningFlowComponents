@@ -2238,6 +2238,16 @@
             <field>Current__c</field>
             <table>Contact.Background_Checks__r</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Volunteer_is_Inactive__c</field>
+            <table>Contact.Background_Checks__r</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>VolunteerRoleTrainedTpendChapReview__c</field>
+            <table>Contact.Background_Checks__r</table>
+        </columns>
         <masterLabel>Background Checks</masterLabel>
     </sections>
 </ReportType>

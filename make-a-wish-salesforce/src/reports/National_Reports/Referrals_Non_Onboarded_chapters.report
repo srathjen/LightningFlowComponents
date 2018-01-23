@@ -49,6 +49,9 @@
         <field>Lead.DOB__c</field>
     </columns>
     <columns>
+        <field>Lead.Gender__c</field>
+    </columns>
+    <columns>
         <field>Lead.Has_this_child_ever_received_prior_wish__c</field>
     </columns>
     <columns>
@@ -121,6 +124,9 @@
         <field>Lead.PD_ICD_Code__c</field>
     </columns>
     <columns>
+        <field>Lead.Approximate_Diagnosis_Date__c</field>
+    </columns>
+    <columns>
         <field>Lead.Any_medical_reason_for_moving_quickly__c</field>
     </columns>
     <columns>
@@ -150,15 +156,13 @@
     <filter>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
-            <value>illinois</value>
+            <value>america</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>

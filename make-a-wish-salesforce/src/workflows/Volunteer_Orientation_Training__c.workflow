@@ -80,7 +80,8 @@
             <field>VolunteerHidden_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderType>CurrentUser</senderType>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Template</template>
     </alerts>
     <alerts>
@@ -91,7 +92,7 @@
             <field>VolunteerHidden_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>salesforce@wish.org</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Orientation_Virtual_Self_Paced_Registered_Email_Template</template>
     </alerts>
@@ -103,7 +104,7 @@
             <field>VolunteerHidden_Email__c</field>
             <type>email</type>
         </recipients>
-        <senderAddress>salesforce@wish.org</senderAddress>
+        <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
         <template>Automated_Volunteer_Templates/Training_Virtual_Self_Paced_Registered_Email_Template</template>
     </alerts>
@@ -119,15 +120,7 @@
     </fieldUpdates>
     <rules>
         <fullName>O%26T%3A Self Faced Orientation Registered Workflow Rule</fullName>
-        <actions>
-            <name>Volunteer_O_T_Orienation_Registered_for_Virtual_Self_faced_Training</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>O_T_ET_Successfully_Registered_for_Orientation_VSF</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
             <operation>equals</operation>
@@ -156,33 +149,17 @@
         <description>This workflow will fire when the orientation is registered</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
-            <actions>
-                <name>Volunteer_O_T_Orienation_Registered_for_Virtual_Self_faced_Training</name>
-                <type>Alert</type>
-            </actions>
             <timeLength>7</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
-            <actions>
-                <name>Volunteer_O_T_Orienation_Registered_for_Virtual_Self_faced_Training</name>
-                <type>Alert</type>
-            </actions>
             <timeLength>30</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
     </rules>
     <rules>
         <fullName>O%26T%3A Self Faced Training Registered Workflow Rule</fullName>
-        <actions>
-            <name>Volunteer_O_T_Registered_for_Virtual_Self_faced_Training</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>O_T_ET_Successfully_Registered_for_Training_VSF</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
             <operation>equals</operation>
@@ -213,15 +190,7 @@
     </rules>
     <rules>
         <fullName>O%26T%3AOrientation Cancelled Workflow Rule</fullName>
-        <actions>
-            <name>O_T_Orientation_Cancelled_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>O_T_ET_Orientation_Cancelled</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
             <operation>equals</operation>
@@ -242,15 +211,7 @@
     </rules>
     <rules>
         <fullName>O%26T%3AOrientation Completed Workflow Rule</fullName>
-        <actions>
-            <name>O_T_Orientation_Completed_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>O_T_ET_Orientation_Completed</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
             <operation>equals</operation>
@@ -271,15 +232,7 @@
     </rules>
     <rules>
         <fullName>O%26T%3AOrientation Registered Workflow Rule</fullName>
-        <actions>
-            <name>O_T_Orientation_Registered_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>O_T_ET_Successfully_Registered_for_Orientation</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
             <operation>equals</operation>
@@ -305,15 +258,7 @@
     </rules>
     <rules>
         <fullName>O%26T%3ATraining Cancelled Workflow Rule</fullName>
-        <actions>
-            <name>O_T_Training_Cancelled_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>O_T_ET_Training_Cancelled</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
             <operation>equals</operation>
@@ -334,15 +279,7 @@
     </rules>
     <rules>
         <fullName>O%26T%3ATraining Completed Workflow Rule</fullName>
-        <actions>
-            <name>O_T_Training_Completed_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>O_T_ET_Training_Completed</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
             <operation>equals</operation>
@@ -368,15 +305,7 @@
     </rules>
     <rules>
         <fullName>O%26T%3ATraining Registered Workflow Rule</fullName>
-        <actions>
-            <name>O_T_Training_Registered_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>O_T_ET_Successfully_Registered_for_Training</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
             <operation>equals</operation>
@@ -402,11 +331,7 @@
     </rules>
     <rules>
         <fullName>Training%3A Pending Volunteer%2C Virtual Self Paced Cancelled  Workflow</fullName>
-        <actions>
-            <name>Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
             <operation>equals</operation>
@@ -431,11 +356,7 @@
     </rules>
     <rules>
         <fullName>Training%3A Pending Volunteer%2C Virtual Self Paced Registered Workflow</fullName>
-        <actions>
-            <name>Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Alert</name>
-            <type>Alert</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
         <criteriaItems>
             <field>Volunteer_Orientation_Training__c.Type__c</field>
@@ -469,18 +390,10 @@
         <description>This workflow will fired when the prospective volunteer registered for virtual self paced training and not completed  7 &amp; 30 days  after registered</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
         <workflowTimeTriggers>
-            <actions>
-                <name>Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
             <timeLength>7</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
         <workflowTimeTriggers>
-            <actions>
-                <name>Training_Pending_Volunteer_Virtual_Self_Paced_Registered_Email_Alert</name>
-                <type>Alert</type>
-            </actions>
             <timeLength>30</timeLength>
             <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
         </workflowTimeTriggers>
@@ -496,11 +409,6 @@
             <field>Volunteer_Orientation_Training__c.Volunteer_Attendance__c</field>
             <operation>equals</operation>
             <value>Completed</value>
-        </criteriaItems>
-        <criteriaItems>
-            <field>User.ProfileId</field>
-            <operation>notEqual</operation>
-            <value>Integration</value>
         </criteriaItems>
         <description>This Update the Hidden Completed  date when the Volunteer Attendance as Completed.</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>

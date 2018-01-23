@@ -12,25 +12,33 @@
     <columns>
         <field>Contact.Conflict_Of_Interest__r$Expiration_Date__c</field>
     </columns>
+    <columns>
+        <field>Contact.Conflict_Of_Interest__r$Current__c</field>
+    </columns>
+    <columns>
+        <field>Contact$Account</field>
+    </columns>
     <description>Active volunteers with Annual Conflict of Interest and Ethics Statement expiring</description>
     <filter>
         <criteriaItems>
             <column>Contact$RecordType</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact,Contact.Board_Member</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Conflict_Of_Interest__r$Current__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$is_Active_Volunteer__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Contact$Account</column>
+            <operator>equals</operator>
+            <value>Make-A-Wish Arizona</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>

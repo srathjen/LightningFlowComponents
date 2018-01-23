@@ -55,6 +55,7 @@ public class UserTrigger_AT_Test {
             updatecase.isEmailWishGranter__c = true;
             updatecase.InActiveWishGranter__c = 'test';
             updatecase.Id = parentCase.Id;
+            Test.startTest();
             update updateCase;
             
             //CaseTeamRole caseRole = OrientationandTrainingUtil.CreateCaseTeamRole();
@@ -68,9 +69,12 @@ public class UserTrigger_AT_Test {
             user updateUser = new User();
             updateUser.Id = queryAlabamaUser.Id;
             updateUser.IsActive = false;
+           
             update updateUser;
+             
             updateUser.IsActive = True;
             Update updateUser;
+            Test.stopTest();
             }
            
            
@@ -82,8 +86,10 @@ public class UserTrigger_AT_Test {
             CollaborationGroup newGroup = OrientationandTrainingUtil.createCollaborationGroup('America');
             UserRole newUserRole = new UserRole();
             newUserRole.Name  = 'America - Chapter';
+            test.startTest();
             Insert newUserRole;
             User newUser = OrientationandTrainingUtil.createUserWithRole(newUserRole.Id);
+            test.stopTest();
         }
     }
     
@@ -96,10 +102,12 @@ public class UserTrigger_AT_Test {
             Insert newUserRole;
             UserRole newUserRole1 = new UserRole();
             newUserRole1.Name  = 'Arizona - Chapter';
+            test.startTest();
             Insert newUserRole1;
             User newUser = OrientationandTrainingUtil.createUserWithRole(newUserRole.Id);
             newUser.UserRoleId = newUserRole1.Id;
             update newUser;
+            test.stopTest();
         }
     }
     

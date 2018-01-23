@@ -31,6 +31,10 @@
                 <behavior>Edit</behavior>
                 <field>Signers__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Parent_Gurdian_above_18__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -48,6 +52,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Residing_With_Wish_Child__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Parent_Gurdian_above_18_Email__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>

@@ -165,7 +165,7 @@
                                 </div>
                                 <div class="divTableRow">
                                     <div class="divTableCell">Date Submitted:</div>
-                                    <div class="divTableCell"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}"> <apex:param value="{!currLead.CreatedDate}" /> </apex:outputText></div>
+                                     <div class="divTableCell"><apex:outputText value="{!formatedDate}"/></div>
                                 </div>
                                 <div class="divTableRow">
                                     <div class="divTableCell">Name:</div>

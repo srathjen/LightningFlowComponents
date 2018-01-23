@@ -13,7 +13,7 @@ public class ContactFile_AT_Test {
         cg__ContactFile__c newFileRecord = OrientationandTrainingUtil.createContactFileRecord(wishChild.Id);
         
     }
-    /*static testmethod void createContactFile() {
+    static testmethod void createContactFile() {
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         cg__ContactFile__c newFileRecord = OrientationandTrainingUtil.createContactFileRecord(wishChild.Id);
@@ -23,9 +23,9 @@ public class ContactFile_AT_Test {
     static testmethod void createContactDocumentFile() {
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
-        cg__ContactFile__c newFileRecord = OrientationandTrainingUtil.createContactDocumentFileRecord(wishChild.Id);
-        cg__ContactFile__c newFileRecord1 = OrientationandTrainingUtil.createContactDocumentFileRecord(wishChild.Id);
+       // cg__ContactFile__c newFileRecord = OrientationandTrainingUtil.createContactDocumentFileRecord(wishChild.Id);
+        //cg__ContactFile__c newFileRecord1 = OrientationandTrainingUtil.createContactDocumentFileRecord(wishChild.Id);
 
-    }*/
+    }
     
 }

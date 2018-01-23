@@ -40,6 +40,18 @@
         <field>Background_check__c.Status__c</field>
     </columns>
     <description>Volunteers Background Check Initiated and/or Approved</description>
+    <filter>
+        <criteriaItems>
+            <column>FK_$Contact.Region_Chapter__c</column>
+            <operator>equals</operator>
+            <value>Make-A-Wish Arizona</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>FK_$Contact.Test_Record__c</column>
+            <operator>equals</operator>
+            <value>0</value>
+        </criteriaItems>
+    </filter>
     <format>Summary</format>
     <groupingsDown>
         <dateGranularity>Month</dateGranularity>

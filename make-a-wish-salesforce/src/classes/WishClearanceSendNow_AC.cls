@@ -228,7 +228,7 @@ public class WishClearanceSendNow_AC{
         if(currentParentCase.Description == Null )
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please add a value to Description on the case page.'));
         if(medicalProfConMap.get(medicalProfContactName) == Null)
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'The selected user does not have email address.'));
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'The contact you have selected has no email address available. Please add email on the contact record and try to send the form again.'));
         return null;
     }
 }

@@ -29,7 +29,7 @@ public class CloseVolunteerActivities_AC_Test {
         }
         
         //Used to check salesforce governor limits
-        OrientationandTrainingUtil.checkGovernorLimits();
+       // OrientationandTrainingUtil.checkGovernorLimits();
     }
     
 }

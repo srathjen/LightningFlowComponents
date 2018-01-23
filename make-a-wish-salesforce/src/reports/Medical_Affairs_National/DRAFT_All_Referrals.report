@@ -70,13 +70,11 @@
     <filter>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>

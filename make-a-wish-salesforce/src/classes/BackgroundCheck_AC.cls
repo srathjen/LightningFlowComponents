@@ -81,6 +81,7 @@ public class BackgroundCheck_AC{
             newBGTask.WhoId = currUser.ContactId; 
             newBGTask.whatId = backGroundCheck.id;
             newBGTask.Subject = 'Background Check';
+			newBGTask.SystemGeneratedTask__c = true;
             newBGTask.RecordTypeId = taskRecordTypeId;
             if(!Test.isRunningTest())
                insert newBGTask;

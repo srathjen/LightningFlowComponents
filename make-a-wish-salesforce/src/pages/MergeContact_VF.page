@@ -1,0 +1,557 @@
+<apex:page standardController="Contact" docType="html-5.0"  standardStylesheets="false"  extensions="ContactMergeController_AC"  title="Merge Contacts" id="contactMergePage">
+
+
+    <apex:includeScript value="{!URLFOR($Resource.CumulusStaticResources, '/npsp-slds/modal.js')}"/>
+    <apex:includeScript value="{!URLFOR($Resource.MakeAWishAmericaDesign,'js/jquery.min.js')}"/> 
+    <apex:stylesheet value="{!URLFOR($Resource.CumulusStaticResources, '/npsp-slds/npsp-common.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS, '/0_12_2/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .mergeTable{
+           border:1px solid #BFCFD4; 
+           width: 100%;
+        }
+        .mergeTable td{
+            background-color:white;
+            border-bottom:1px solid #BBBBBB;
+            vertical-align:top;
+            white-space:normal;
+            padding:2px 6px;
+        } 
+        .header td{
+            background-color: #D8F1F9;
+            font-weight: bold;
+        }
+        .separator td{
+            background-color: #56458C;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+  <div class="slds">
+  
+     <div class="slds-m-horizontal--large">
+     
+     <apex:outputPanel rendered="{!step == 2}" id="infoPanel">
+      <apex:sectionHeader title="">
+      <div class="panel panel-info slds-card slds-m-horizontal--large ">
+      <div class="panel-heading"><apex:image value="{!$Resource.ContactMergeInfoImage}" width="42" height="42"/>Merge Duplicate Contact Records</div>
+      <div class="panel-body">
+    
+            When merging two contacts of different record types, the hierarchy of which record type will remain is as follows:    
+                <li>Board Member</li>
+                <li>Volunteer</li>
+                <li>Medical Professional</li>
+                <li>Wish Child</li>
+                <li> Wish Family</li>  
+                
+           </div></div></apex:sectionHeader></apex:outputpanel>
+   
+    <apex:outputPanel rendered="{!step == 1}">
+        <apex:outputPanel id="searchformPanel" layout="block">
+            <apex:form id="searchForm"> 
+           
+            <script type="text/javascript">
+                function noenter(e){
+                   if(window.event){ 
+                          key = window.event.keyCode;     //IE
+                    } else{
+                          key = e.which;     //firefox
+                    }
+                     if(key == 13) {
+                        var ele=document.getElementById('contactMergePage:searchForm:searchButton');
+                                ele.click();
+                          return false;
+                     } else{
+                          return true;
+                    }
+                }
+            </script>
+            <br/>
+            <div class="slds-card slds-m-horizontal--large ">
+           <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal dupHasRes">
+                     <div class="slds-card__header slds-grid slds-grid--align-spread">
+                        <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Contact Information</h2>
+                 </div> 
+                     <tr>
+                    <th class="slds-text-heading--label">First Name:</th>
+                    <td class="slds-row-select"><apex:inputText value="{!con.FirstName}" id="searchText" onkeypress="return noenter(event);"/></td>
+                </tr>
+                <tr>
+                    <th class="slds-text-heading--label">Last Name:</th>
+                    <td class="slds-row-select"><apex:inputText value="{!con.lastName}" id="lastName" onkeypress="return noenter(event);"/></td>
+                </tr>
+                <tr>
+                    <th class="slds-text-heading--label">Email</th>
+                    <td class="slds-row-select"><apex:inputText value="{!con.Email}" id="email" onkeypress="return noenter(event);"/></td>
+                </tr>
+                <tr>
+                    <th class="slds-text-heading--label">DOB</th>
+                    <td class="slds-row-select"><apex:input type="date"  value="{!birthDate}"  id="dob" onkeypress="return noenter(event);"/></td>
+                </tr>
+                <tr>
+                    <th class="slds-text-heading--label">Street</th>
+                    <td class="slds-row-select"><apex:inputtext value="{!con.mailingstreet}" id="street" onkeypress="return noenter(event);"/></td>
+                </tr>
+                <tr>
+                    <th class="slds-text-heading--label">City</th>
+                    <td class="slds-row-select"><apex:inputText value="{!con.mailingcity}" id="city" onkeypress="return noenter(event);"/></td>
+                </tr>
+                <tr>
+                    <th class="slds-text-heading--label">State</th>
+                    <td class="slds-row-select"><apex:selectList value="{!con.mailingState}" id="state" onkeypress="return noenter(event);" size="1">
+                            <apex:selectOptions value="{!states}"></apex:selectOptions>
+                        </apex:selectList>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="slds-text-heading--label">Postal Code</th>
+                    <td class="slds-row-select"><apex:inputText value="{!con.mailingPostalCode}" id="postalcode" onkeypress="return noenter(event);"/></td>
+                </tr>
+                <tr>
+                    <th class="slds-text-heading--label" colspan="2" style="text-align: center;">
+                  <div align="Right">  <apex:commandButton id="searchButton" action="{!searchRecords}" styleClass="slds-button slds-button--neutral slds-button--align-center"  value="Search" status="searchStatus"> <apex:actionStatus startText="(searching...)" id="searchStatus" /> 
+                        <apex:param name="searchNewResult" value="True" assignTo="{!searchNewResult}"/>
+                      </apex:commandButton> </div>
+                    </th>
+                </tr>
+
+            </table>
+             </div>               
+                
+                <br/><br/>
+            </apex:form>
+        </apex:outputPanel>
+        
+        
+        <apex:pageMessages /> 
+        <apex:outputPanel id="searchresults" layout="block">
+           <apex:outputPanel id="nothingfound" layout="block" rendered="{!(!displaySearchResults) && (con.FirstName != '' || con.lastName != '' || con.Email != ''  || con.mailingstreet  != '' || con.mailingcity  != '' || con.mailingState  != '' || con.mailingPostalCode  != '') && searchResults.Size == 0 }">
+            No matching Contacts found, please search again.
+            </apex:outputPanel>
+            <apex:form >
+                <apex:pageBlock id="pbId" rendered="{!displaySearchResults && searchResults.Size > 0}"> 
+                
+                <div class="slds-card slds-m-horizontal--large ">
+                 
+                <div class="slds-card__header slds-grid slds-grid--align-spread">
+                        <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Found Contacts</h2>
+                 </div>
+                   
+                    <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal dupHasRes">
+                            <thead>
+                                
+                                <tr>
+                                        <th class="slds-text-heading--label" scope="col">Select</th>
+                                        <th class="slds-text-heading--label" scope="col">Name</th>
+                                        <th class="slds-text-heading--label" scope="col">Email</th>
+                                        <th class="slds-text-heading--label" scope="col">Phone</th>
+                                        <th class="slds-text-heading--label" scope="col">Title</th>
+                                        <th class="slds-text-heading--label" scope="col">Chapter Name</th>
+                                    </tr>
+                            </thead>
+                            <tbody>
+                            <apex:repeat value="{!searchResults}" var="item">
+                                <tr>
+                                    <td class="slds-row-select"><apex:inputCheckbox value="{!item.selected}" id="checkedone"/></td>
+                                    <td class="slds-row-select"> <apex:outputLink value="/{!item.con.Id}" target="_New"><apex:outputText >{!item.con.Name}</apex:outputText> </apex:outputLink></td>
+                                    <td class="slds-row-select"><apex:outputText value="{!item.con.email}"/></td>
+                                    <td class="slds-row-select"><apex:outputText value="{!item.con.phone}" /></td>
+                                    <td class="slds-row-select"><apex:outputText value="{!item.con.Title}"/></td>
+                                    <td class="slds-row-select"><apex:outputText value="{!item.con.Account.Name}"/></td>
+                                    
+                                </tr>
+                            </apex:repeat>                            
+                            </tbody>
+                        </table>
+                   
+                    <apex:pageBlockButtons id="nextStep">
+                       <div align="Right"> <apex:commandButton action="{!nextStep}" value="Next" styleClass="slds-button slds-button--neutral slds-button--align-center" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </div>
+                       
+                    </apex:pageBlockButtons>
+                    
+                    
+          <apex:outputPanel style="text-align:center;" layout="block">
+          <!-- div align="left">Show<apex:selectList value="{!setPageSize}" multiselect="false" size="1">
+                           <apex:selectOption itemLabel="10" itemvalue="10"/>
+                           <apex:selectOption itemLabel="25" itemvalue="25" />
+                           <apex:selectOption itemLabel="50" itemvalue="50" />
+                           <apex:selectOption itemLabel="100" itemvalue="100" />
+                           <apex:actionsupport event="onchange" action="{!first}" reRender="pbId" />
+                       </apex:selectList>entries
+                       </div -->
+          <apex:commandButton value="First" reRender="pbId" action="{!first}" disabled="{!NOT(hasPrevious)}" status="paginationStatus"/>&nbsp;&nbsp;
+          <apex:commandButton value="Previous" rerender="pbId" action="{!previous}" disabled="{!NOT(hasPrevious)}" status="paginationStatus"/>&nbsp;&nbsp;&nbsp;Page {!pageNumber} of {!totalPages}&nbsp;&nbsp;&nbsp;
+          <apex:commandButton value="Next" rerender="pbId" action="{!next}" disabled="{!NOT(hasNext)}" status="paginationStatus"/>&nbsp;&nbsp;
+          <apex:commandButton value="Last" rerender="pbId" action="{!last}" disabled="{!NOT(hasNext)}" status="paginationStatus"/>
+          <apex:actionStatus id="paginationStatus">
+             <apex:facet name="start">
+                 Please wait...<img src="/img/loading32.gif" style="width: 18px;"/>
+             </apex:facet>
+          </apex:actionStatus>
+       </apex:outputPanel>
+
+
+
+                    </div>
+                </apex:pageBlock>
+                
+            </apex:form>
+        </apex:outputPanel>
+    </apex:outputPanel>
+    
+    <apex:outputPanel id="contactMerge" rendered="{!step == 2}">
+        <script>
+            function updateHiddenInput(hiddenFieldId, value) {
+                
+                document.getElementById(hiddenFieldId).value = value;
+            }
+        </script>
+        <apex:pageMessages escape="false" /> 
+        <apex:outputPanel id="selectedContacts" layout="block">
+            <apex:form >
+                <apex:pageBlock title="Selected Contacts">
+                 <div class="slds-card slds-m-horizontal--large ">
+                    <apex:outputPanel id="fieldRows">
+                        <table class="mergeTable" cellspacing="0" cellpadding="0">
+                            <tbody>
+                            <apex:repeat var="row" value="{!fieldRows}">
+                                <apex:outputPanel rendered="{!row.showRadio || row.styleclass=='header' || row.fieldLabel =='RecordType' }">
+                                <tr class="{!row.styleclass}">
+                                   
+                                    <td width="20%" colspan="{!IF(row.styleClass == 'separator', selectedRecordsCount + 1, 1)}">
+                                        <apex:outputPanel rendered="{!row.showRadio}">
+                                            <apex:inputHidden id="winner" value="{!row.selectedValue}"/>
+                                        </apex:outputPanel>
+                                        {!row.fieldLabel}
+                                    </td> 
+                                    <apex:repeat var="col" value="{!row.values}">
+                                        <td width="{!IF (selectedRecordsCount == 2, '40%', '26%')}">
+                                            
+                                            <apex:outputPanel rendered="{!(row.showRadio && row.selectedValue == col.objId && row.fieldLabel != 'RecordType')   }">
+                                                <input type="radio" name="{!row.fieldName}" checked="true" onClick="updateHiddenInput('{!$Component.winner}', '{!col.objId}');" />
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!(row.showRadio && row.selectedValue != col.objId && row.fieldLabel != 'RecordType') }">
+                                                <input type="radio" name="{!row.fieldName}" onClick="updateHiddenInput('{!$Component.winner}', '{!col.objId}');"/>
+                                            </apex:outputPanel>
+                                           
+                                              {!col.value}
+                                            <!-- /apex:outputpanel -->
+                                            <apex:outputPanel rendered="{!row.styleClass == 'header'}">
+                                                [<apex:commandLink action="{!selectDefaultRecord}" value="Select All">
+                                                    <apex:param name="recordId" value="{!col.objId}"/>
+                                                </apex:commandLink>]
+                                            </apex:outputPanel>
+                                            
+                                        </td>
+                                    </apex:repeat>
+                                    
+                                </tr>  
+                                </apex:outputPanel>
+                            </apex:repeat>
+                            </tbody>
+                        </table>
+                       </apex:outputPanel>
+                      
+                       <br/><br/>
+                       <apex:outputPanel id="selectedContacts" layout="block">
+                       
+                       <!--  Affiliation Related Section -->                        
+                        <apex:outputPanel rendered="{!Affiliations.Size > 0}">   
+                                                   
+                            <table class="mergeTable" cellspacing="0" cellpadding="0">
+                                 <tr class= "header"><td colspan="6" >Affiliation Records</td></tr>
+                                  <tr>
+                                      <th>Select</th>                                               
+                                      <apex:repeat value="{!$ObjectType.npe5__Affiliation__c.fieldsets.AffiliationFieldSet}" var="fieldValue">
+                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                            <th>{!SUBSTITUTE(fieldValue.label,'Hidden','')}</th>
+                                        </apex:outputpanel>
+                                    </apex:repeat>
+                                  </tr>
+                                  <apex:repeat value="{!Affiliations}" var="currAff">
+                                  <tr>
+                                      <td><apex:inputCheckbox value="{!currAff.checkbox}"/></td>
+                                      <apex:repeat value="{!$ObjectType.npe5__Affiliation__c.fieldsets.AffiliationFieldSet}" var="fieldValue">
+                                           <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                                <td>
+                                                    {!currAff.aff[fieldValue]}
+                                                </td>
+                                            </apex:outputpanel>
+                                      </apex:repeat>
+                                  </tr>
+                              </apex:repeat>
+                        </table>
+                   </apex:outputPanel>                         
+                        <!-- Affiliation Section End -->
+                        
+                        <!-- Relationship Section Start -->
+                        <apex:outputPanel rendered="{!relationshipList.Size > 0}">  
+                            <br/><br/>
+                            <Table class="mergeTable" cellspacing="0" cellpadding="0">
+                                 <tr class= "header"><td colspan="8" >Relationship Records</td></tr>
+                                  <tr>
+                                      <th>Select</th>                                               
+                                      <apex:repeat value="{!$ObjectType.npe4__Relationship__c.fieldsets.Relationship_Field_Set}" var="fieldValue">
+                                        <apex:outputpanel rendered="{!AND(fieldValue.label != 'Record ID',fieldValue.label != 'Related Contact') }">
+                                            <th>{!SUBSTITUTE(fieldValue.label,'Hidden','')}</th>
+                                        </apex:outputpanel>
+                                    </apex:repeat>
+                                  </tr>
+                                  <apex:repeat value="{!relationshipList}" var="currRel">
+                                  <tr>
+                                      <td><apex:inputCheckbox value="{!currRel.checkbox}"/></td>
+                                      <apex:repeat value="{!$ObjectType.npe4__Relationship__c.fieldsets.Relationship_Field_Set}" var="fieldValue">
+                                           <apex:outputpanel rendered="{!AND(fieldValue.label != 'Record ID',fieldValue.label != 'Related Contact') }">
+                                                <td>
+                                                    {!currRel.relationship[fieldValue]}
+                                                </td>
+                                            </apex:outputpanel>
+                                      </apex:repeat><td></td>
+                                  </tr>
+                              </apex:repeat>
+                            </table>
+                        </apex:outputPanel> 
+                        <!-- Relationship Section End -->
+                      
+                      <!-- Volunteer O&T Section -->                    
+                       
+                    <apex:outputPanel rendered="{!volunteerOTList.Size > 0}">                         
+                         <br/><br/>                  
+                        <Table class="mergeTable" cellspacing="0" cellpadding="0">
+                        <tr class= "header"><td colspan="6" >Volunteer Orientation and Training Records</td></tr>
+                        
+                            <tr>
+                                      <th>Select</th>                                               
+                                      <apex:repeat value="{!$ObjectType.Volunteer_Orientation_Training__c.fieldsets.VolunteerO_T_Feld_set}" var="fieldValue">
+                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                            <th>{!SUBSTITUTE(fieldValue.label,'Hidden','')}</th>
+                                        </apex:outputpanel>
+                                    </apex:repeat>
+                                  </tr>
+                                  <apex:repeat value="{!volunteerOTList}" var="currVolunteerOT">
+                                  <tr>
+                                      <td><apex:inputCheckbox value="{!currVolunteerOT.checkbox}"/></td>
+                                      <apex:repeat value="{!$ObjectType.Volunteer_Orientation_Training__c.fieldsets.VolunteerO_T_Feld_set}" var="fieldValue">
+                                           <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                                <td>    <apex:outputpanel rendered="{!(fieldValue.label != 'Registered Date' && fieldValue.label != 'Completed Date') }" >
+                                                    {!currVolunteerOT.volunteerOT[fieldValue]}
+                                                    </apex:outputpanel>
+                                                    <apex:outputpanel rendered="{!(fieldValue.label == 'Registered Date' || fieldValue.label == 'Completed Date')}" >
+                                                         <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{!currVolunteerOT.volunteerOT[fieldValue]}" /></apex:outputText>
+                                                     </apex:outputpanel>
+                                                </td>
+                                            </apex:outputpanel>
+                                      </apex:repeat>
+                                  </tr>
+                              </apex:repeat>
+                        </table>
+                   </apex:outputPanel>
+                   <!-- Volunteer O&T Section End -->
+                   
+                   <!-- Volunteer Role -->
+                           <apex:outputPanel rendered="{!volunteerRoleList.Size > 0}">                         
+                         <br/><br/>                  
+                        <Table class="mergeTable" cellspacing="0" cellpadding="0">
+                        <tr class= "header"><td colspan="6" >Volunteer Role Records</td></tr>
+                            <tr>
+                                      <th>Select</th>                                               
+                                      <apex:repeat value="{!$ObjectType.Volunteer_Roles__c.fieldsets.Volunteer_Role_Field_Set}" var="fieldValue">
+                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                            <th>{!SUBSTITUTE(fieldValue.label,'Hidden','')}</th>
+                                        </apex:outputpanel>
+                                    </apex:repeat>
+                                  </tr>
+                                  <apex:repeat value="{!volunteerRoleList}" var="currVolunteerRole">
+                                  <tr>
+                                      <td><apex:inputCheckbox value="{!currVolunteerRole.checkbox}"/></td>
+                                      <apex:repeat value="{!$ObjectType.Volunteer_Roles__c.fieldsets.Volunteer_Role_Field_Set}" var="fieldValue">
+                                           <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                                <td>
+                                                    {!currVolunteerRole.volunteerRole[fieldValue]}
+                                                </td>
+                                            </apex:outputpanel>
+                                      </apex:repeat>
+                                  </tr>
+                              </apex:repeat>
+                        </table>
+                   </apex:outputPanel>
+                   <!-- Volunteer Role End -->
+                   
+                   <!--Volunteer Opportunity -->
+                   <apex:outputPanel rendered="{!volunteerOppList.Size > 0}">                         
+                         <br/><br/>                  
+                        <Table class="mergeTable" cellspacing="0" cellpadding="0">
+                        <tr class= "header"><td colspan="8" >Volunteer Opportunity Records</td></tr>
+                            <tr>
+                                      <th>Select</th>                                               
+                                      <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.VolunteerDetails}" var="fieldValue">
+                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                            <th>{!SUBSTITUTE(fieldValue.label,'Hidden','')}</th>
+                                        </apex:outputpanel>
+                                    </apex:repeat>
+                                  </tr>
+                                  <apex:repeat value="{!volunteerOppList}" var="currVolunteerOpp">
+                                  <tr>
+                                      <td><apex:inputCheckbox value="{!currVolunteerOpp.checkbox}"/></td>
+                                      <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.VolunteerDetails}" var="fieldValue">
+                                           <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                                <td>
+                                                    {!currVolunteerOpp.volunteerOpp[fieldValue]}
+                                                </td>
+                                            </apex:outputpanel>
+                                      </apex:repeat>
+                                  </tr>
+                              </apex:repeat>
+                        </table>
+                   </apex:outputPanel>
+                   <!--Volunteer Opportunity End -->
+                    
+                    <!-- Background Check -->
+                        <apex:outputPanel rendered="{!backgroundcheckList.Size > 0}">                         
+                         <br/><br/>                  
+                        <Table class="mergeTable" cellspacing="0" cellpadding="0">
+                        <tr class= "header"><td colspan="6" >BackgroundCheck  Records</td></tr>
+                            <tr>
+                                      <th>Select</th>                                               
+                                      <apex:repeat value="{!$ObjectType.Background_check__c.fieldsets.BackgroundCheck}" var="fieldValue">
+                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                            <th>{!SUBSTITUTE(fieldValue.label,'Hidden','')}</th>
+                                        </apex:outputpanel>
+                                    </apex:repeat>
+                                  </tr>
+                                  <apex:repeat value="{!backgroundcheckList}" var="currbackgroundCheck">
+                                  <tr>
+                                      <td><apex:inputCheckbox value="{!currbackgroundCheck.checkbox}"/></td>
+                                      <apex:repeat value="{!$ObjectType.Background_check__c.fieldsets.BackgroundCheck}" var="fieldValue">
+                                           <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                                <td>
+                                                   
+                                                    <apex:outputpanel rendered="{!(fieldValue.label != 'Expiration Date' && fieldValue.label != 'Date Completed') }" >
+                                                     {!currbackgroundCheck.backgroundCheck[fieldValue]}
+                                                    </apex:outputpanel>
+                                                    <apex:outputpanel rendered="{!(fieldValue.label == 'Expiration Date' || fieldValue.label == 'Date Completed')}">
+                                                         <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"> <apex:param value="{!currbackgroundCheck.backgroundCheck[fieldValue]}" /></apex:outputText>
+                                                     </apex:outputpanel>
+                                                </td>
+                                            </apex:outputpanel>
+                                      </apex:repeat>
+                                  </tr>
+                              </apex:repeat>
+                        </table>
+                   </apex:outputPanel>
+                    <!-- Background Check End -->
+                    
+                    <!-- Conflict Of Interest -->
+                    <apex:outputPanel rendered="{!conflictOfInterestList.Size > 0}">                         
+                         <br/><br/>                  
+                        <Table class="mergeTable" cellspacing="0" cellpadding="0">
+                        <tr class= "header"><td colspan="6" >Conflict Of Interest Records</td></tr>
+                            <tr>
+                                      <th>Select</th>                                               
+                                      <apex:repeat value="{!$ObjectType.Conflict_Of_Interest__c.fieldsets.ConflictOfIntrest}" var="fieldValue">
+                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                            <th>{!SUBSTITUTE(fieldValue.label,'Hidden','')}</th>
+                                        </apex:outputpanel>
+                                    </apex:repeat>
+                                  </tr>
+                                  <apex:repeat value="{!conflictOfInterestList}" var="currconflictOfInterest">
+                                  <tr>
+                                      <td><apex:inputCheckbox value="{!currconflictOfInterest.checkbox}"/></td>
+                                      <apex:repeat value="{!$ObjectType.Conflict_Of_Interest__c.fieldsets.ConflictOfIntrest}" var="fieldValue">
+                                           <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                                <td>
+                                                    <apex:outputpanel rendered="{!(fieldValue.label != 'Expiration Date') }" >
+                                                    {!currconflictOfInterest.conflictOfInterest[fieldValue]}
+                                                    </apex:outputpanel>
+                                                    <apex:outputpanel rendered="{!(fieldValue.label == 'Expiration Date')}">
+                                                         <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"> <apex:param value="{!currconflictOfInterest.conflictOfInterest[fieldValue]}" /></apex:outputText>
+                                                     </apex:outputpanel>
+                                                </td>
+                                            </apex:outputpanel>
+                                      </apex:repeat>
+                                  </tr>
+                              </apex:repeat>
+                        </table>
+                   </apex:outputPanel>                    
+                    <!-- conflict Of Interest End -->
+                    
+                    <!--Awards & Recognition Record -->
+                        <apex:outputPanel rendered="{!awardsRecognitionList.Size > 0}">                         
+                         <br/><br/>                  
+                        <Table class="mergeTable" cellspacing="0" cellpadding="0">
+                        <tr class= "header"><td colspan="6" >Awards and Recognition Records</td></tr>
+                            <tr>
+                                      <th>Select</th>                                               
+                                      <apex:repeat value="{!$ObjectType.Awards_Recognition__c.fieldsets.AwardsRecognitionFields}" var="fieldValue">
+                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                            <th>{!SUBSTITUTE(fieldValue.label,'Hidden','')}</th>
+                                        </apex:outputpanel>
+                                    </apex:repeat>
+                                  </tr>
+                                  <apex:repeat value="{!awardsRecognitionList}" var="currAwardsRec">
+                                  <tr>
+                                      <td><apex:inputCheckbox value="{!currAwardsRec.checkbox}"/></td>
+                                      <apex:repeat value="{!$ObjectType.Awards_Recognition__c.fieldsets.AwardsRecognitionFields}" var="fieldValue">
+                                           <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                                <td>
+                                                    
+                                                    <apex:outputpanel rendered="{!(fieldValue.label != 'Date Field') }" >
+                                                   {!currAwardsRec.awaredsRec[fieldValue]}
+                                                    </apex:outputpanel>
+                                                    <apex:outputpanel rendered="{!(fieldValue.label == 'Date Field')}">
+                                                         <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"> <apex:param value="{!currAwardsRec.awaredsRec[fieldValue]}" /></apex:outputText>
+                                                     </apex:outputpanel>
+
+                                                </td>
+                                            </apex:outputpanel>
+                                      </apex:repeat>
+                                  </tr>
+                              </apex:repeat>
+                        </table>
+                   </apex:outputPanel>   
+         <!--Awards & Recognition End -->
+         
+         <!--In-Kind Donation & Reimbursement  -->
+                        <apex:outputPanel rendered="{!inkindDonationList.Size > 0}">                         
+                         <br/><br/>                  
+                        <Table class="mergeTable" cellspacing="0" cellpadding="0">
+                        <tr class= "header"><td colspan="6" >In-Kind Donation and Reimbursement Records </td></tr>
+                            <tr>
+                                      <th>Select</th>                                               
+                                      <apex:repeat value="{!$ObjectType.In_Kind_Donation_Reimbursement__c.fieldsets.InkindDonationFieldSet}" var="fieldValue">
+                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                            <th>{!SUBSTITUTE(fieldValue.label,'Hidden','')}</th>
+                                        </apex:outputpanel>
+                                    </apex:repeat>
+                                  </tr>
+                                  <apex:repeat value="{!inkindDonationList}" var="currinkindRec">
+                                  <tr>
+                                      <td><apex:inputCheckbox value="{!currinkindRec.checkbox}"/></td>
+                                      <apex:repeat value="{!$ObjectType.In_Kind_Donation_Reimbursement__c.fieldsets.InkindDonationFieldSet}" var="fieldValue">
+                                           <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                                <td>
+                                                    {!currinkindRec.inkindRec[fieldValue]}
+                                                </td>
+                                            </apex:outputpanel>
+                                      </apex:repeat>
+                                  </tr>
+                              </apex:repeat>
+                        </table>
+                   </apex:outputPanel>   
+         <!--In-Kind Donation & Reimbursement  -->
+                   
+                    </apex:outputPanel>
+                    <apex:pageBlockButtons id="mergebutton">
+                       <div align="Right">  <apex:commandButton styleClass="slds-button slds-button--neutral slds-button--align-center" onClick="return confirm('Merging Contacts is an irreversible process.');" action="{!mergeContacts}" value="Merge"/> </div>
+                    </apex:pageBlockButtons>
+                    </div>
+                </apex:pageBlock> 
+            </apex:form>
+        </apex:outputPanel>
+    </apex:outputPanel>
+     </div> </div>
+     
+</apex:page>

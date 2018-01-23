@@ -1,7 +1,7 @@
 <apex:page standardController="case" extensions="WishChildForm_AC" id="wif" title="Wish Information Form | Make-A-Wish Communities" standardStylesheets="false" showHeader="false" applyHtmlTag="false" sidebar="false" docType="html-5.0" cache="false">
     <apex:include pageName="prospective_head" id="phead" />
     <!--<apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>-->
-    <style>label.radiowrap{font-family: "FuturaStd", 'Century Gothic', Arial, sans-serif; text-transform: capitalize; line-height: 2rem}.loader {position:absolute; top:1.4rem; right:40%; width:1rem} @media (min-width: 48em) {.loader{right:30%;} }.error-show{display:none!important;}</style>
+    <style>label.radiowrap{font-family: 'Lato', Arial, sans-serif; text-transform: capitalize; line-height: 2rem}.loader {position:absolute; top:1.4rem; right:40%; width:1rem} @media (min-width: 48em) {.loader{right:30%;} }.error-show{display:none!important;}</style>
     <apex:include pageName="active_header" id="pheaderActive" rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
     <apex:include pageName="wishFamilyForm_header_active" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />
 
@@ -675,8 +675,10 @@ function resizeIframe(obj) {
                             $('#exit-alert').modal('hide');
                             $('#signow-alert').modal('hide');
                             if(!{!wcfUtil.displayError}){
+                             if (!{!isWishfamilyFormRequired}){
                               if(!{!currWishChild.IsParticipant__c}){
                                 $('#signow-alert2').modal('show');}
+                                }
                                 }
                             else{
                                 $('#noUsertoSign-alert').modal('show');
@@ -861,7 +863,10 @@ function resizeIframe(obj) {
                                     </div>
                                     <div class="modal-footer">
                                         <!--<apex:commandButton value="Send" action="{!multiEmail}" styleClass="btn-md" style="margin-left:1px" reRender="popPickVal1" oncomplete="openSendForSignature();"/>-->
-                                        <apex:commandButton value="Ok" action="{!SaveandWishChildExit}" styleClass="btn-md" style="margin-left:1px" reRender="iii" oncomplete="closeAttachmentAlert();"/>
+                                        <apex:commandButton value="UPLOAD ATTACHMENTS" action="{!SaveandWishChildExit}" styleClass="btn-md" style="margin-left:1px" reRender="iii" oncomplete="closeAttachmentAlert();"/>
+                                        <!--<apex:commandButton action="{!sendpdftoEmail}" value="Send Email" styleClass="btn-md" />-->
+                                        <input type="button" value="CONTINUE WITHOUT UPLOADING" onclick="openSendForSignature();" class="btn-md" style="margin-left:1px" />
+
                                     </div>
                                 </div>
                             </div>
@@ -951,9 +956,8 @@ function resizeIframe(obj) {
                             </div>
                         </div>
                         <!-- Alert end -->
-                        
-                        
-                         <!--- Submit-Alert -->
+
+                       <!--- Submit-Alert -->
                         <div class="modal fade" id="Submitapp-Alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -967,13 +971,14 @@ function resizeIframe(obj) {
                                         <p class="text-muted col-xs-12" style="text-align:center">Please remember to go back to the wish to have any participants over 18 sign publicity form.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <apex:commandButton action="{!submitforApproval}" value="Ok" styleClass="btn-md" style="margin-left:1px" reRender="yyy"/>
+                                        <apex:commandButton action="{!submitforApproval}" value="Ok" styleClass="btn-md" style="margin-left:1px" />
+                                        <apex:commandButton value="Cancel" styleClass="btn-md" html-data-dismiss="modal" style="margin-left:1px" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Alert end -->
-                  
+
                     <!-- submitapproval  modal -->
                         <div class="modal fade" id="submit-alert" tabindex="-1" role="dialog" aria-labelledby="Submit Approval" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -990,12 +995,13 @@ function resizeIframe(obj) {
 
                                     <div class="modal-footer">
                                         <apex:commandButton value="Yes" styleClass="btn-md"  html-data-dismiss="modal" style="margin-left:1px" />
-                                        <apex:commandButton value="Cancel" styleClass="btn-md" html-data-dismiss="modal" style="margin-left:1px" />
+                                        <apex:commandButton value="Cancel" styleClass="btn-md" html-data-dismiss="modal-dialog" style="margin-left:1px" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-                  
+
+
                         <apex:outputPanel id="uiLogic">
                             <script>
                             setIntervalX(function () {
@@ -1401,8 +1407,6 @@ function resizeIframe(obj) {
                     $("#noUsertoSign-alert").modal()
                 } else if ({!currWishChild.IsParticipant__c}){
                     $("#emailSign-alert").modal()
-                } else {
-                    //$("#signow-alert").modal()
                 }
             }
         });
@@ -1439,7 +1443,7 @@ function resizeIframe(obj) {
 
         function closeAttachmentAlert() {
             $('#wishChildAttachmentAlert-alert').modal('hide');
-            $('#sendemail-alert').modal('hide');
+            //$('#sendemail-alert').modal();
         }
         function openSendForSignature() {
             $('#wishChildAttachmentAlert-alert').modal('hide');
@@ -1463,13 +1467,11 @@ function resizeIframe(obj) {
                 } else if ({!isWishfamilyFormRequired}){
                     $("#wishfamilyReqAlert-alert").modal()
                 } else {
-                    
                     $("#submit-alert").modal()
                     $("#Submitapp-Alert").modal()
-                  }
+                }
             }
         });
-
         </script>
     </body>
 </apex:page>

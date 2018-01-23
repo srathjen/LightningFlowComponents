@@ -73,7 +73,6 @@
     <filter>
         <criteriaItems>
             <column>Case.Migrated_Record__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

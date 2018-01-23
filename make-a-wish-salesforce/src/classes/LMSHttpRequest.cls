@@ -7,6 +7,7 @@ public class LMSHttpRequest {
         HttpRequest request = new HttpRequest();
         if(lMSCredential != Null && endPoint != Null && methodType != Null ){
             String endpointUrl = lMSCredential.End_Point_URL__c + endPoint;
+            //String endpointUrl = 'https://mawa-exceed-lms-api-dev.cloudhub.io/exceed_lms/api/enrollments?user_login=chandruvolunteer@gmail.com ';
             String userName = lMSCredential.User_Name__c;
             String password = lMSCredential.Password__c;        
             request.setEndpoint(endpointUrl);
@@ -14,6 +15,7 @@ public class LMSHttpRequest {
             Blob headerValue = Blob.valueOf(username + ':' + password);
             String authorizationHeader = 'Basic ' +EncodingUtil.base64Encode(headerValue);
             request.setHeader('authorization', authorizationHeader);
+            System.debug('The End Point URL'+endpointUrl);
         }
         return request;
     }
@@ -51,7 +53,10 @@ public class LMSHttpRequest {
                 request = createLMSHttpRequest(lMSCredential,lMSCredential.UserCreaationEndpoint__c,'POST');                
                 request.setHeader('Content-Type', 'application/json');
                 LMSUserRequest userRequestDetails = new LMSUserRequest();
-                userRequestDetails.login = currVolunteerUser.Username;
+                if(currVolunteerUser.LMS_Login__c != Null)
+                    userRequestDetails.login = currVolunteerUser.LMS_Login__c;  
+                else 
+                    userRequestDetails.login = currVolunteerUser.Username;
                 System.debug('The FirstName ++'+currVolunteerUser.FirstName);
                 userRequestDetails.first_name = currVolunteerUser.FirstName;    
                 userRequestDetails.last_name = currVolunteerUser.LastName;  
@@ -66,6 +71,7 @@ public class LMSHttpRequest {
                 userRequestDetails.password = currVolunteerUser.LastName;
                 userRequestDetails.chapter_id= currVolunteerUser.contact.Region_Chapter__r.Chapter_Id__c;
                 String requestPayLoad = JSON.serialize(userRequestDetails);
+                System.debug('userDetails'+userRequestDetails);
                 request.setBody(requestPayLoad);                     
                 Http http = new Http();
                 HTTPResponse response;
@@ -75,12 +81,13 @@ public class LMSHttpRequest {
                     System.debug('The response is + '+response.getBody());
                     currLMSUserResponse = LMSUserResponse.parse(response.getBody());
                     System.debug('lMSSSOResponse+++++++++++'+currLMSUserResponse);
-                 /*    if(currVolunteerUser.LMS_Id__c != String.valueOf(currLMSUserResponse.id) || currVolunteerUser.LMS_Login__c !=  String.valueOf(currLMSUserResponse.login) || currVolunteerUser.LMS_User_Code__c != String.valueOf(currLMSUserResponse.code) ){
-                        currVolunteerUser.LMS_Id__c = String.valueOf(currLMSUserResponse.id);
+                     if(currVolunteerUser.LMS_Id__c != String.valueOf(currLMSUserResponse.id) || currVolunteerUser.LMS_Login__c !=  String.valueOf(currLMSUserResponse.login) || currVolunteerUser.LMS_User_Code__c != String.valueOf(currLMSUserResponse.code) ){
+                        /*currVolunteerUser.LMS_Id__c = String.valueOf(currLMSUserResponse.id);
                         currVolunteerUser.LMS_Login__c = String.valueOf(currLMSUserResponse.login);
                         currVolunteerUser.LMS_User_Code__c = String.valueOf(currLMSUserResponse.code);
-                        Update currVolunteerUser;    
-                    }*/
+                        Update currVolunteerUser;  */ 
+                       // updateUser(String.valueOf(currLMSUserResponse.id),String.valueOf(currLMSUserResponse.login),String.valueOf(currLMSUserResponse.code),currVolunteerUser.Id);
+                    }
                     
                 }catch(Exception ex){
                     System.debug('ex'+ex.getmessage());
@@ -100,18 +107,21 @@ public class LMSHttpRequest {
             currLMSOrientationRegistrationRequest.course_code = courseId;
             currLMSOrientationRegistrationRequest.user_login = userLogin;
             currLMSOrientationRegistrationRequest.status = enrollmentStatus;
-            String requestPayLoad = JSON.serialize(currLMSOrientationRegistrationRequest);
+            String requestPayLoad = JSON.serialize(currLMSOrientationRegistrationRequest);            
             request.setBody(requestPayLoad);                     
             Http http = new Http();
             HTTPResponse response;
             try{
                 response = http.send(request); 
                 System.debug('The response is + '+response.getBody());
-                currLMSOrientationRegistrationResponse = LMSOrientationRegistrationResponse.parse(response.getBody());                       
+                
+                currLMSOrientationRegistrationResponse = LMSOrientationRegistrationResponse.parse(response.getBody()); 
+                                      
             }catch(Exception ex){
                 System.debug('ex'+ex.getmessage());                            
             }
         }
         return currLMSOrientationRegistrationResponse;
     }
+    
 }

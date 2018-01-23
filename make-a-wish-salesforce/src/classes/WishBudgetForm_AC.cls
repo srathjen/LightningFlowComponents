@@ -1,3 +1,10 @@
+/*****************************************************************************************************************
+Author      : MST Solutions
+
+Description :
+
+*******************************************************************************************************************/
+
 public class WishBudgetForm_AC{
     
     public List<Wish_Expense_Transaction_Code__c> transactionCodes {get;set;}
@@ -19,7 +26,8 @@ public class WishBudgetForm_AC{
     Public Map<String, expenseSummarywrapper> SumExpensewrappers{get;set;}
     public expenseSummarywrapper TotalExpensewrappers{get;set;}
     public Map<String,SelectOption[]> TransCodeOptionsMap {get;set;}
-    Public String wishChapterName {get; set;}   
+    Public String wishChapterName {get; set;}  
+    Public String wishDescription {get; set;} 
     public List<Wish_Expense_Type_Tempate__c> ExpenseTypeTempList {get;set;}
     Map <string, List<String>> ExpenseTypeTempWrap {get;set;}
     Public Boolean approvalBtnVisibility {get;set;}
@@ -70,10 +78,11 @@ public class WishBudgetForm_AC{
         }
         
         //To check whether budget approval form is approved
-        List<Case> caseList = [SELECT Id,Contact.FirstName,Contact.LastName, Contact.Middle_Name__c, Anticipated_Start_Date__c, isApprove__c,ChapterName__r.Name,Wish_Type__c, Budget_Notes__c FROM Case WHERE Id =: caseId];
+        List<Case> caseList = [SELECT Id,Contact.FirstName,Contact.LastName,Description, Contact.Middle_Name__c, Anticipated_Start_Date__c, isApprove__c,ChapterName__r.Name,Wish_Type__c, Budget_Notes__c FROM Case WHERE Id =: caseId];
         
         if(caseList.size() > 0) {
             wishChapterName = caseList.get(0).ChapterName__r.Name;
+            wishDescription = caseList.get(0).Description;
             antiWishType = caseList.get(0).Wish_Type__c;
             wishType= caseList.get(0).Wish_Type__c;
             AntWishDate=caseList.get(0).Anticipated_Start_Date__c;
@@ -497,11 +506,12 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
             
         }
         
-        if(getPlanningAnticipationCase.get(0).Parent.Budget_Submitted_Date__c == Null)
+        if(getPlanningAnticipationCase.size() > 0)
         {
                 Case updateCase = new Case();
                 updateCase.id = getPlanningAnticipationCase.get(0).ParentId;
                 updateCase.Budget_Submitted_Date__c = Date.Today();
+                updateCase.Status = 'Budget Approval - Submitted';
                 update updateCase;
         }
         

@@ -1975,11 +1975,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>EmailMessage</field>
-            <table>Case.Activities</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>IsVisibleInSelfService</field>
             <table>Case.Activities</table>
         </columns>

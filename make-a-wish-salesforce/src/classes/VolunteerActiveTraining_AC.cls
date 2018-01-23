@@ -281,7 +281,8 @@ public class VolunteerActiveTraining_AC {
                            }
                            LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
                            currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress');
-                           checkExistingCanceledRecords.get(0).LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : Null;
+                         /* WVC-    */
+                          // checkExistingCanceledRecords.get(0).LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : Null;
 
                        }
                         update checkExistingCanceledRecords;
@@ -329,10 +330,10 @@ public class VolunteerActiveTraining_AC {
                         newTrainingRegistration.Volunteer_Attendance__c = 'Registered';
                         newTrainingRegistration.Hidden_O_T_Id__c= classOfferingMap.get(trainingId).Chapter_Role_O_T__r.Orientation_Training__c;
                         
-                        
+                        User currVolunteerUser = getUserRelatedContact.get(0);
                         if(classOfferingMap.get(trainingId).recordtypeid == classOffereningRecordtypeId ){
                             if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
-                                User currVolunteerUser = getUserRelatedContact.get(0);
+                                
                                 currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
                             } 
                             LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
@@ -346,6 +347,9 @@ public class VolunteerActiveTraining_AC {
                         
                         try{
                             insert newTrainingRegistration;
+                            if(currVolunteerUser.LMS_Id__c != String.valueOf(currLMSUserResponse.id) || currVolunteerUser.LMS_Login__c !=  String.valueOf(currLMSUserResponse.login) || currVolunteerUser.LMS_User_Code__c != String.valueOf(currLMSUserResponse.code) ){
+                                updateUser(String.valueOf(currLMSUserResponse.id),String.valueOf(currLMSUserResponse.login),String.valueOf(currLMSUserResponse.code),currVolunteerUser.Id);
+                            } 
                             isCancelled = false;
                             isTrainingExist = true;
                             isCompleted = False;
@@ -374,13 +378,13 @@ public class VolunteerActiveTraining_AC {
                     
                     User currVolunteerUser = getUserRelatedContact.get(0);
                     cancelRegistrationList.get(0).Volunteer_Attendance__c = 'Volunteer Cancelled';
-                    cancelRegistrationList.get(0).LMS_Enrollment_Id__c = '';
+                    //cancelRegistrationList.get(0).LMS_Enrollment_Id__c = '';
                     /*Added by Sailappa Vignesh PG
 Description : To Update the Course enrollment status to 'dropped' in LMS*/
                     if(orientationDetails[0].recordtypeid == classOffereningRecordtypeId){                                  
-                        currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);  
-                        LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
-                        currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'dropped');
+                       // currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);  
+                        //LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
+                        //currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'dropped');
                     }   
                     try{
                         update cancelRegistrationList;
@@ -488,5 +492,15 @@ Description : To Update the Course enrollment status to 'dropped' in LMS*/
         public string courseId{get;set;}
         public string recordTypeId{get;set;}
         public boolean displayRec{get;set;}
+    } 
+     @future
+    public static void updateUser(String LMS_Id,String LMS_Login,String LMS_User_Code,String userId){
+        User currVolunteerUser = new User();
+        currVolunteerUser.Id = userId;
+        currVolunteerUser.LMS_Id__c = LMS_Id;
+        currVolunteerUser.LMS_Login__c = LMS_Login;
+        currVolunteerUser.LMS_User_Code__c = LMS_User_Code;
+        Update currVolunteerUser;
+        System.debug('@@@ Update User @@@'+currVolunteerUser);
     }  
 }

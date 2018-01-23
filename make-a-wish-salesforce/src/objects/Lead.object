@@ -47,6 +47,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -63,10 +67,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>SmsHighlightAction</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>Tab</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -80,6 +80,86 @@
     <fieldSets>
         <fullName>Diagnosis_Verfication_Fieldset</fullName>
         <description>It is used in the Diagnosis Verification Form</description>
+        <displayedFields>
+            <field>Hidden_Best_Contact_Person_Id__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Best_Contact_for_Physician_Last_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Best_Contact_for_Physician_First_Name__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Best_contact_for_Physician_Email__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Hidden_DV_form_Medical_professional_Type__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1MedicalProfessionalFax__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1MedProfessionalFirstName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1HospitalTreatmentFacility__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1MedProfessionalLastName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1MedProfessionalPhone__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2HospitalTreatmentFacility__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2MedProfessionalEmail__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2MedicalProfessionalFax__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2MedProfessionalFirstName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2MedProfessionalLastName__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate2MedProfessionalPhone__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
         <displayedFields>
             <field>PD_ICD_Code__c</field>
             <isFieldManaged>false</isFieldManaged>
@@ -387,6 +467,11 @@
         </displayedFields>
         <displayedFields>
             <field>Risk_of_complications_premature_death__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Alternate1MedicalProfessionalEmail__c</field>
             <isFieldManaged>false</isFieldManaged>
             <isRequired>false</isRequired>
         </displayedFields>
@@ -1066,513 +1151,505 @@
         <description>Primary language of the wish additional parent/guardian.</description>
         <externalId>false</externalId>
         <label>Additional Parent Primary Language</label>
+        <picklist>
+            <picklistValues>
+                <fullName>English</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>American Sign Language</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arabic</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chinese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>French and French Creole</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>German</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hindi</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Italian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Japanese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Korean</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Polish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Portuguese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Russian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tagalog</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vietnamese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>English</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Spanish</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>American Sign Language</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Arabic</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Chinese</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>French and French Creole</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>German</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Hindi</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Italian</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Japanese</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Korean</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Polish</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Portuguese</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Russian</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Tagalog</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Vietnamese</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Additional_Parent_Relationship_to_Child__c</fullName>
         <externalId>false</externalId>
         <label>Additional Parent Relationship to Child</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Father</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sister</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Brother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Guardian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandmother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandfather</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Stepmother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Stepfather</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Stepsister</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Stepbrother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Half Sister</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Half Brother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Mother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Father</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Sister</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Brother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Aunt</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Uncle</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cousin</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Husband</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wife</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Friend</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Neighbor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Coworker</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Son</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Daughter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandson</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Granddaughter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Employer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandaughter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Neighbour</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Father</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Mother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Sister</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Brother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Guardian</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Grandmother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Grandfather</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Stepmother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Stepfather</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Stepsister</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Stepbrother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Half Sister</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Half Brother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Foster Mother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Foster Father</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Foster Sister</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Foster Brother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Aunt</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Uncle</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Cousin</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Husband</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Wife</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Partner</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Friend</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Neighbor</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Family</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Coworker</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Son</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Daughter</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Grandson</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Granddaughter</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Employer</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Employee</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Grandaughter</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-                <value>
-                    <fullName>Neighbour</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Additional_Parent_State__c</fullName>
         <description>Additional parent/guardian state.</description>
         <externalId>false</externalId>
         <label>Additional Parent State</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Alabama</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alaska</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>American Samoa</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arizona</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arkansas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Armed Forces Americas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Armed Forces Europe</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Armed Forces Pacific</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>California</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Colorado</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Connecticut</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Delaware</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>District of Columbia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Federated Micronesia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Florida</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Georgia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Guam</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hawaii</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Idaho</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Illinois</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Indiana</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Iowa</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kansas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Kentucky</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Louisiana</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Maine</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Marshall Islands</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Maryland</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Massachusetts</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Michigan</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Minnesota</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mississippi</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Missouri</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Montana</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nebraska</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nevada</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Hampshire</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Jersey</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New Mexico</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>New York</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Carolina</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>North Dakota</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Northern Mariana Islands</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ohio</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Oklahoma</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Oregon</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Palau</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pennsylvania</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Puerto Rico</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rhode Island</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South Carolina</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>South Dakota</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tennessee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Texas</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>United States Minor Outlying Islands</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>US Virgin Islands</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Utah</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vermont</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Virginia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Washington</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>West Virginia</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wisconsin</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wyoming</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Alabama</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Alaska</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>American Samoa</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Arizona</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Arkansas</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Armed Forces Americas</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Armed Forces Europe</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Armed Forces Pacific</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>California</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Colorado</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Connecticut</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Delaware</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>District of Columbia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Federated Micronesia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Florida</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Georgia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Guam</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Hawaii</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Idaho</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Illinois</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Indiana</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Iowa</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Kansas</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Kentucky</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Louisiana</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Maine</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Marshall Islands</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Maryland</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Massachusetts</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Michigan</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Minnesota</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Mississippi</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Missouri</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Montana</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Nebraska</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Nevada</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New Hampshire</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New Jersey</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New Mexico</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>New York</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>North Carolina</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>North Dakota</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Northern Mariana Islands</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Ohio</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Oklahoma</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Oregon</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Palau</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Pennsylvania</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Puerto Rico</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Rhode Island</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>South Carolina</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>South Dakota</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Tennessee</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Texas</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>United States Minor Outlying Islands</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>US Virgin Islands</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Utah</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Vermont</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Virginia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Washington</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>West Virginia</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Wisconsin</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Wyoming</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Additional_Parent_Street__c</fullName>
@@ -1610,6 +1687,140 @@
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Alternate1HospitalTreatmentFacility__c</fullName>
+        <description>It will contains the alternate 1 hospital/treatment facility value</description>
+        <externalId>false</externalId>
+        <label>Alternate 1 Hospital/Treatment Facility</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Alternate1MedProfessionalFirstName__c</fullName>
+        <description>It contains alternate 1 Medical Professional First Name</description>
+        <externalId>false</externalId>
+        <label>Alternate 1 Med Professional First Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Alternate1MedProfessionalLastName__c</fullName>
+        <description>It contains alternate 1 medical professional last name</description>
+        <externalId>false</externalId>
+        <label>Alternate 1 Med Professional Last Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Alternate1MedProfessionalPhone__c</fullName>
+        <description>It contains alternate 1 medical professional phone</description>
+        <externalId>false</externalId>
+        <label>Alternate 1 Med Professional Phone</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Alternate1MedicalProfessionalEmail__c</fullName>
+        <description>It contains alternate 1 medical professional email</description>
+        <externalId>false</externalId>
+        <label>Alternate 1 Med Professional Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Alternate1MedicalProfessionalFax__c</fullName>
+        <description>It will contain the alternate 1 fax value</description>
+        <externalId>false</externalId>
+        <label>Alternate 1 Med Professional Fax</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Alternate2HospitalTreatmentFacility__c</fullName>
+        <description>It will contains alternate 2 hospital/treatment facility value</description>
+        <externalId>false</externalId>
+        <label>Alternate 2 Hospital/Treatment Facility</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Alternate2MedProfessionalEmail__c</fullName>
+        <description>it contains Alternate 2 Med Professional Email</description>
+        <externalId>false</externalId>
+        <label>Alternate 2 Med Professional Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Alternate2MedProfessionalFirstName__c</fullName>
+        <description>It contains alternate 2 Med professional first name</description>
+        <externalId>false</externalId>
+        <label>Alternate 2 Med Professional First Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Alternate2MedProfessionalLastName__c</fullName>
+        <description>It contains alternate 2 med professional last name</description>
+        <externalId>false</externalId>
+        <label>Alternate 2 Med Professional Last Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Alternate2MedProfessionalPhone__c</fullName>
+        <description>It contains alternate 2 med professional phone</description>
+        <externalId>false</externalId>
+        <label>Alternate 2 Med Professional Phone</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Alternate2MedicalProfessionalFax__c</fullName>
+        <description>It will contain the  alternate 2 medical professional fax value</description>
+        <externalId>false</externalId>
+        <label>Alternate 2 Med Professional Fax</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Phone</type>
     </fields>
     <fields>
         <fullName>Angina__c</fullName>
@@ -1743,87 +1954,85 @@
         <description>It would capture the child of the age.</description>
         <externalId>false</externalId>
         <label>Child Age</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Under 2.5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2.5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>11</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>12</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>13</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>14</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>15</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>16</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>17</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>18 &amp; Above</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Under 2.5</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2.5</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>11</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>12</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>13</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>14</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>15</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>16</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>17</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>18 &amp; Above</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Child_Middle_Initial__c</fullName>
@@ -1899,49 +2108,46 @@
         <description>It will hold which type of communication can understand by child</description>
         <externalId>false</externalId>
         <label>Communication</label>
+        <picklist>
+            <picklistValues>
+                <fullName>This child is non-verbal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>This child is developmentally on target for chronological age</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>This child functions at a 0-2 year old, Sensorimotor stage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>This child functions at a 2-7 year old, Preoperational stage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>This child functions at a 7-11 year old, Concrete Operational stage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>This child functions at an 11+ year old, Formal Operational stage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>I am not sure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chronological age</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>MultiselectPicklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>This child is non-verbal</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>This child is developmentally on target for chronological age</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>This child functions at a 0-2 year old, Sensorimotor stage</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>This child functions at a 2-7 year old, Preoperational stage</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>This child functions at a 7-11 year old, Concrete Operational stage</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>This child functions at an 11+ year old, Formal Operational stage</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>I am not sure</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Chronological age</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
         <visibleLines>4</visibleLines>
     </fields>
     <fields>
@@ -1965,20 +2171,18 @@
         <description>Hidden field for checking contact dup</description>
         <externalId>false</externalId>
         <label>Hidden Contact Dup Check</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Block Contact Dup</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Block Contact Dup</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Convulsive_Disorders__c</fullName>
@@ -2118,6 +2322,18 @@
         <trackHistory>false</trackHistory>
     </fields>
     <fields>
+        <fullName>Diagnosis_Given_By_Referrer__c</fullName>
+        <description>Used to hold the Diagnosis given by Referrer</description>
+        <externalId>false</externalId>
+        <label>Diagnosis Given By Referrer</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Diagnosis_Pending_Days__c</fullName>
         <description>It hold number of days still lead in diagnosis verification status.</description>
         <externalId>false</externalId>
@@ -2139,20 +2355,18 @@
         <description>This hidden field used in lead duplicate page.</description>
         <externalId>false</externalId>
         <label>Hidden Dup Check</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Block Lead Dup</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Block Lead Dup</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Email</fullName>
@@ -2192,23 +2406,25 @@
         <description>This field holds the Gender information of the Wish Kid</description>
         <externalId>false</externalId>
         <label>Gender</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Male</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Female</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Self-describe</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Male</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Female</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>HasOptedOutOfEmail</fullName>
@@ -2244,6 +2460,41 @@
         <visibleLines>3</visibleLines>
     </fields>
     <fields>
+        <fullName>HiddenAlternate1MedProfessionalId__c</fullName>
+        <description>It contains the existing alternate 1 med prof Id</description>
+        <externalId>false</externalId>
+        <label>Hidden Alternate 1 Med Professional Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HiddenAlternate2MedProfessionalId__c</fullName>
+        <description>It contains alternate 2 med prof Id</description>
+        <externalId>false</externalId>
+        <label>Hidden Alternate 2 Med Professional Id</label>
+        <length>20</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HiddenMedicalProfessionalEmail__c</fullName>
+        <description>It contains med professional email</description>
+        <externalId>false</externalId>
+        <label>Hidden Medical Professional Email</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_Additional_Parent_Id__c</fullName>
         <description>It will hold the value contact id of Wish Family.</description>
         <externalId>false</externalId>
@@ -2268,28 +2519,46 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Hidden_Chapter_Name__c</fullName>
+        <description>This is used to share the Test Alabama chapter to National staff User</description>
+        <externalId>false</externalId>
+        <label>Hidden Chapter Name</label>
+        <length>100</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Hidden_DV_form_Medical_professional_Type__c</fullName>
         <description>It hold the type of medical professional for receiving DV form.</description>
         <externalId>false</externalId>
         <label>Hidden DV form Medical professional Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Treating Medical Professional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Best contact for Physician</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alternate 1 Medical Professional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alternate 2 Medical Professional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Treating Medical Professional</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Best contact for Physician</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Hidden_Medical_Professional_Name__c</fullName>
@@ -2355,193 +2624,195 @@
         <description>It hold the answer of How_Did_you_hear_about_Make_A_Wish? question from the referral form.</description>
         <externalId>false</externalId>
         <label>How Did you hear about Make-A-Wish?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Social Worker</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family Member</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nurse</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Physician</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Friend</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Brochure at the Doctor&apos;s Office</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Event</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Make-A-Wish Hospital Presence</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Make-A-Wish Staff/Volunteer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Newspaper</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Make-A-Wish Family</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Radio</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>School – Kids For Wish Kids</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>School – Nurse/Teacher</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Support Group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Television</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Web Search</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Brochure at doctor’s office</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Doctor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Friends</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Media/PSA</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other Wish Family</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Social Worker</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Family Member</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Nurse</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Physician</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Friend</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Brochure at the Doctor&apos;s Office</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Email</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Event</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Make-A-Wish Hospital Presence</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Make-A-Wish Staff/Volunteer</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Newspaper</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Other Make-A-Wish Family</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Radio</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>School – Kids For Wish Kids</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>School – Nurse/Teacher</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Social Media</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Support Group</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Television</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Web Search</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Brochure at doctor’s office</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-                <value>
-                    <fullName>Doctor</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-                <value>
-                    <fullName>Family</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-                <value>
-                    <fullName>Friends</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-                <value>
-                    <fullName>Media/PSA</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-                <value>
-                    <fullName>Other Wish Family</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
+    </fields>
+    <fields>
+        <fullName>ICD_Given_By_Referrer__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Used to hold ICD Code give by referrer</description>
+        <externalId>false</externalId>
+        <label>ICD Given By Referrer</label>
+        <referenceTo>ICD_Codes__c</referenceTo>
+        <relationshipLabel>Leads (ICD Given By Referrer)</relationshipLabel>
+        <relationshipName>Leads5</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>I_am_Recognized_To_Practice_As_a__c</fullName>
         <description>It will hold which type of practice she/he is going to get</description>
         <externalId>false</externalId>
         <label>I Am Recognized To Practice As A</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Physician</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nurse Practitioner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Physician Assistant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nurse</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Social Worker</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Child Life Specialist</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Physician</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Nurse Practitioner</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Physician Assistant</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Nurse</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Social Worker</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Child Life Specialist</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>I_m_Part_of_The_Treating_HealthCare_Team__c</fullName>
         <description>This field will identify whether he/she is part of the treating health care team or not</description>
         <externalId>false</externalId>
         <label>I&apos;m Part Of The Treating HealthCare Team</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Import_Id__c</fullName>
@@ -2568,6 +2839,137 @@
     </fields>
     <fields>
         <fullName>Industry</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Agriculture</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Apparel</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Banking</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Biotechnology</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chemicals</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Communications</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Construction</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Consulting</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Education</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Electronics</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Energy</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Engineering</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Entertainment</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Environmental</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Finance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Food &amp; Beverage</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Government</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Healthcare</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hospitality</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Insurance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Machinery</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Manufacturing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Media</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not For Profit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Recreation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Retail</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Shipping</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Technology</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Telecommunications</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Utilities</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
@@ -2598,51 +3000,47 @@
         <description>It will hold detail about is there is any medical reason for expedite the process</description>
         <externalId>false</externalId>
         <label>Is We Need To Expedite The Process?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Sure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Not Sure</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Is_in_a_Comatose_Vegetative_State__c</fullName>
         <description>It will hold whether the child is comatose or vegetative state? or not</description>
         <externalId>false</externalId>
         <label>Is In A Comatose/Vegetative State?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Jigsaw</fullName>
@@ -2654,6 +3052,29 @@
     </fields>
     <fields>
         <fullName>LeadSource</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Fax</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Online</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
@@ -2766,31 +3187,29 @@
         <description>This field will hold the Medical Professional Title</description>
         <externalId>false</externalId>
         <label>Medical Professional Title</label>
+        <picklist>
+            <picklistValues>
+                <fullName>MS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MRS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DR</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>MS</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>MRS</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>MR</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>DR</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Medical_Professional_Titles__c</fullName>
@@ -2809,43 +3228,41 @@
         <description>It will hold the value of Medical Provider Category.</description>
         <externalId>false</externalId>
         <label>Medical Provider Category</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Social Worker</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Child Life Professional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nurse</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Nurse Practitioner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Physician Assistant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Physician</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Social Worker</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Child Life Specialist</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Nurse</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Nurse Practitioner</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Physician Assistant</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Physician</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Medical_Questions__c</fullName>
@@ -2967,6 +3384,18 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Other_diagnosis__c</fullName>
+        <description>Used to hold the other diagnosis values when &quot;other Diagnosis&quot; is selected</description>
+        <externalId>false</externalId>
+        <label>Other Diagnosis</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Override_Dupe_Check__c</fullName>
         <defaultValue>false</defaultValue>
         <description>This field is used to bypass the duplicate validation.</description>
@@ -3059,157 +3488,154 @@
         <fullName>Parent_Relationship_to_Child__c</fullName>
         <externalId>false</externalId>
         <label>Parent Relationship to Child</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Father</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sister</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Brother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Guardian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandmother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandfather</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Stepmother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Stepfather</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Stepsister</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Stepbrother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Half Sister</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Half Brother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Mother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Father</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Sister</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Brother</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Aunt</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Uncle</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cousin</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Husband</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Wife</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Partner</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Friend</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Neighbor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Coworker</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Son</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Daughter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandson</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Granddaughter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Employer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Employee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Grandaughter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Father</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Mother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Sister</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Brother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Guardian</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Grandmother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Grandfather</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Stepmother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Stepfather</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Stepsister</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Stepbrother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Half Sister</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Half Brother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Foster Mother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Foster Father</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Foster Sister</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Foster Brother</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Aunt</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Uncle</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Cousin</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Husband</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Wife</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Partner</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Friend</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Neighbor</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Family</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Coworker</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Son</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Daughter</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Grandson</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Granddaughter</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Employer</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Employee</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Grandaughter</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Part_A_Form_Password__c</fullName>
@@ -4021,37 +4447,62 @@
         <description>In hold the RFI form status level. And this field is hidden field for preventing dup criteria while creating new lead from RFI.</description>
         <externalId>false</externalId>
         <label>RFI Form Info Hidden</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Inquiry</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Referred</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Qualified</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Qualified</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Inquiry</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Referred</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Qualified</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Not Qualified</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Rating</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Hot</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Warm</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cold</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>ReferralComment__c</fullName>
+        <description>It will hold the details given by the medical professional</description>
+        <externalId>false</externalId>
+        <label>Referral Comment</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Referred_Date__c</fullName>
@@ -4167,35 +4618,33 @@
         <description>This field is used to store the relationship of the person who submits the Wish Kid details</description>
         <externalId>false</externalId>
         <label>Relationship To Child</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Self</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medical Professional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Parent/Guardian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family Member/Relative</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Self</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Medical Professional</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Parent/Guardian</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Family Member/Relative</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Responds_to_treatment_with_normal_health__c</fullName>
@@ -4316,6 +4765,17 @@
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>Self_describe_comment_box__c</fullName>
+        <description>This field is displayed when the gender field has selected the value as Self-Describe.</description>
+        <externalId>false</externalId>
+        <label>Self-describe comment box</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
         <fullName>Short_Description__c</fullName>
         <externalId>false</externalId>
         <formula>PD_ICD_Code__r.Short_Description__c</formula>
@@ -4341,19 +4801,49 @@
         <fullName>State_Picklist__c</fullName>
         <description>It holds the States Picklist</description>
         <externalId>false</externalId>
+        <globalPicklist>State_Picklist</globalPicklist>
         <label>Hidden State</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetName>State_Picklist</valueSetName>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Status</fullName>
         <inlineHelpText>Update from inquiry to referral after confirming all required referral information.</inlineHelpText>
+        <picklist>
+            <picklistValues>
+                <fullName>Inquiry</fullName>
+                <default>true</default>
+                <converted>false</converted>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Referred</fullName>
+                <default>false</default>
+                <converted>false</converted>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Eligibility Review</fullName>
+                <default>false</default>
+                <converted>false</converted>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Qualified</fullName>
+                <default>false</default>
+                <converted>true</converted>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DNQ</fullName>
+                <default>false</default>
+                <converted>false</converted>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Duplicate</fullName>
+                <default>false</default>
+                <converted>false</converted>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Picklist</type>
@@ -4375,72 +4865,49 @@
         <description>This field value is updated when the part A case status is In progress.</description>
         <externalId>false</externalId>
         <label>Sub Status</label>
+        <picklist>
+            <controllingField>Status</controllingField>
+            <picklistValues>
+                <fullName>Local</fullName>
+                <default>false</default>
+                <controllingFieldValues>Eligibility Review</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>National</fullName>
+                <default>false</default>
+                <controllingFieldValues>Eligibility Review</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medical</fullName>
+                <default>false</default>
+                <controllingFieldValues>DNQ</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Previous Wish</fullName>
+                <default>false</default>
+                <controllingFieldValues>DNQ</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Age</fullName>
+                <default>false</default>
+                <controllingFieldValues>DNQ</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Response</fullName>
+                <default>false</default>
+                <controllingFieldValues>DNQ</controllingFieldValues>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Diagnosis Verification</fullName>
+                <default>false</default>
+                <controllingFieldValues>Referred</controllingFieldValues>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <controllingField>Status</controllingField>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Local</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>National</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Medical</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Previous Wish</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Age</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No Response</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Pending Diagnosis Verification</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-            <valueSettings>
-                <controllingFieldValue>Eligibility Review</controllingFieldValue>
-                <valueName>Local</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Eligibility Review</controllingFieldValue>
-                <valueName>National</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>Referred</controllingFieldValue>
-                <valueName>Pending Diagnosis Verification</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>DNQ</controllingFieldValue>
-                <valueName>Medical</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>DNQ</controllingFieldValue>
-                <valueName>Previous Wish</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>DNQ</controllingFieldValue>
-                <valueName>Age</valueName>
-            </valueSettings>
-            <valueSettings>
-                <controllingFieldValue>DNQ</controllingFieldValue>
-                <valueName>No Response</valueName>
-            </valueSettings>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Test_Record__c</fullName>
@@ -4614,83 +5081,81 @@
         <description>Primary language of the wish family.</description>
         <externalId>false</externalId>
         <label>Family Primary Language</label>
+        <picklist>
+            <picklistValues>
+                <fullName>English</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Spanish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>American Sign Language</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Arabic</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chinese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>French and French Creole</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>German</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hindi</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Italian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Japanese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Korean</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Polish</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Portuguese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Russian</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Tagalog</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Vietnamese</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>English</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Spanish</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>American Sign Language</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Arabic</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Chinese</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>French and French Creole</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>German</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Hindi</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Italian</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Japanese</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Korean</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Polish</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Portuguese</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Russian</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Tagalog</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Vietnamese</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Why_do_you_feel_would_be_eligible_Wish__c</fullName>
@@ -4708,27 +5173,25 @@
         <description>It will hold detail about whether they expect this child&apos;s condition will significantly deteriorate in the next 3-6 months.</description>
         <externalId>false</externalId>
         <label>Will Child&apos;s Condition Deteriorate?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Sure</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Not Sure</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Wish_Family_ContactId__c</fullName>
@@ -4767,81 +5230,75 @@
         <description>This field indicate that Child Family aware of Referral at MAWA</description>
         <externalId>false</externalId>
         <label>Is Family Aware Of Referral?</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Yes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Yes</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>npe01__Preferred_Email__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Preferred Email</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Personal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Work</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Alternate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Personal</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Work</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Alternate</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>npe01__Preferred_Phone__c</fullName>
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Preferred Phone</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Home</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Work</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mobile</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Home</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Work</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Mobile</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Other</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>npsp__Batch__c</fullName>
@@ -4921,63 +5378,61 @@
         <description>It hold the count of siblings.</description>
         <externalId>false</externalId>
         <label># of Siblings</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Unknown</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>0</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>6</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>7</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>8</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>9</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>10</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Unknown</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>0</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>1</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>2</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>3</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>4</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>5</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>6</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>7</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>8</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>9</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>10</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>unique_wish_identifier__c</fullName>
@@ -6959,47 +7414,103 @@ else
 {!REQUIRESCRIPT(&quot;/soap/ajax/24.0/apex.js&quot;)} 
 
 // identify the record 
+var leadIdR = &quot;{!Lead.Id}&quot;; 
 var l = new sforce.SObject(&quot;Lead&quot;); 
 var priorWish=&quot;{!JSENCODE(Lead.Has_this_child_ever_received_prior_wish__c)}&quot;; 
+var hiddenMedEmail = &quot;{!Lead.Part_A_Sent__c}&quot;; 
 priorWish=priorWish.toLowerCase(); 
 var leadStatus = &quot;{! Lead.Status}&quot;; 
 var dupStatus = &quot;{!Lead.Dup_Check__c}&quot;; 
 var leadSubStatus = &quot;{!Lead.Sub_Status__c}&quot;; 
 var TretMedProfEmail = &quot;{! Lead.Treating_Medical_Professional_Email__c}&quot;; 
-var bestPhysicianEmail = &quot;{!Lead.Best_contact_for_Physician_Email__c}&quot;;
+var bestPhysicianEmail = &quot;{!Lead.Best_contact_for_Physician_Email__c}&quot;; 
+var alternate1MedEmail = &quot;{!Lead.Alternate1MedicalProfessionalEmail__c}&quot;; 
+var alternate2MedEmai = &quot;{!Lead.Alternate2MedProfessionalEmail__c}&quot;; 
 
 if(leadSubStatus == &apos;Pending Diagnosis Verification&apos;) 
 { 
 if (confirm(&quot;Are you sure you want to submit Diagnosis Verification?&quot;) == true) 
 { 
-if(bestPhysicianEmail == null || bestPhysicianEmail == &apos;&apos;  ||  TretMedProfEmail == bestPhysicianEmail){
-// make the fields change 
-l.Id = &quot;{! Lead.Id }&quot;; 
-l.Sub_Status__c=&quot;Pending Diagnosis Verification&quot;; 
+
+if(TretMedProfEmail != bestPhysicianEmail &amp;&amp; bestPhysicianEmail != &apos;&apos;) { 
+window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;; 
+} else if(alternate1MedEmail != &apos;&apos;) { 
+window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;; 
+} else if(alternate2MedEmai != &apos;&apos;) { 
+window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;; 
+} else if(TretMedProfEmail == bestPhysicianEmail &amp;&amp; bestPhysicianEmail != &apos;&apos;) { 
+l.Id = leadIdR; 
 l.Dup_Check__c= &apos;Block Lead Dup&apos;; 
-l.Hidden_DV_form_Medical_professional_Type__c = &quot;Treating Medical Professional&quot;;
+l.Sub_Status__c=&quot;Pending Diagnosis Verification&quot;; 
+l.Hidden_DV_form_Medical_professional_Type__c = &quot;Best contact for Physician&quot;; 
 l.Of_Times_Email_Sent__c= &quot;{! IF(ISBLANK(Lead.Of_Times_Email_Sent__c), 0, Lead.Of_Times_Email_Sent__c ) }&quot;; 
-l.Of_Times_Email_Sent__c= parseInt(l.Of_Times_Email_Sent__c)+1; ; 
-
-
+l.Of_Times_Email_Sent__c= parseInt(l.Of_Times_Email_Sent__c)+1; 
 // save the change 
+sforce.connection.update([l]); 
+alert(&quot;Diagnosis Verification sent successfully.&quot;); 
+window.location.reload(); 
+} else { 
+if (confirm(&quot;Are you sure you want to proceed? A Diagnosis Verification has already been sent and signed. Clicking Yes will reset all values in the DV form, and archive previous signed versions (in Docusign Status section) which cannot be undone.&quot;) == true) { 
+var leadDupe =&apos;&apos;; 
+
+leadDupe = sforce.apex.execute(&quot;LeadWishFamilyDupe&quot;,&quot;resetDVMedicalSummary&quot;, {leadId:&apos;{!Lead.Id}&apos;}); 
 sforce.connection.update([l]); 
 
 alert(&quot;Diagnosis Verification sent successfully.&quot;); 
 
 //refresh the page 
 window.location.reload(); 
-}
-else
-{
-window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;;
-}
+} else { 
+
+} 
+//refresh the page 
+window.location.reload(); 
+
+} 
 } 
 } 
 else if(leadSubStatus != &apos;Pending Diagnosis Verification&apos;) 
 { 
+if(leadStatus == &apos;Eligibility Review&apos;) { 
 
-if(leadStatus != &quot;Referred&quot;) 
+if(TretMedProfEmail != bestPhysicianEmail &amp;&amp; bestPhysicianEmail != &apos;&apos;) { 
+window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;; 
+} else if(alternate1MedEmail != &apos;&apos;) { 
+window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;; 
+} else if(alternate2MedEmai != &apos;&apos;) { 
+window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;; 
+} else if(TretMedProfEmail == bestPhysicianEmail &amp;&amp; bestPhysicianEmail != &apos;&apos;) { 
+l.Id = leadIdR; 
+l.Dup_Check__c= &apos;Block Lead Dup&apos;; 
+l.Sub_Status__c=&quot;Pending Diagnosis Verification&quot;; 
+l.Hidden_DV_form_Medical_professional_Type__c = &quot;Best contact for Physician&quot;; 
+l.Of_Times_Email_Sent__c= &quot;{! IF(ISBLANK(Lead.Of_Times_Email_Sent__c), 0, Lead.Of_Times_Email_Sent__c ) }&quot;; 
+l.Of_Times_Email_Sent__c= parseInt(l.Of_Times_Email_Sent__c)+1; 
+// save the change 
+sforce.connection.update([l]); 
+alert(&quot;Diagnosis Verification sent successfully.&quot;); 
+window.location.reload(); 
+} else { 
+
+if (confirm(&apos;Are you sure you want to proceed? A Diagnosis Verification has already been sent and signed. Clicking Yes will reset all values in the DV form, and archive previous signed versions (in Docusign Status section) which cannot be undone.&apos;) == true) { 
+var leadDupe =&apos;&apos;; 
+
+leadDupe = sforce.apex.execute(&quot;LeadWishFamilyDupe&quot;,&quot;resetDVMedicalSummary&quot;, {leadId:&apos;{!Lead.Id}&apos;}); 
+sforce.connection.update([l]); 
+
+alert(&apos;Diagnosis Verification sent successfully.&apos;); 
+
+//refresh the page 
+window.location.reload(); 
+} else { 
+
+} 
+//refresh the page 
+window.location.reload(); 
+
+} 
+
+} else if(leadStatus != &quot;Referred&quot;) 
 { 
 alert(&quot;Diagnosis verification cannot be sent when lead in &quot; + leadStatus + &quot; status.&quot;); 
 } 
@@ -7035,29 +7546,47 @@ window.location.href = &apos;/apex/LeadDuplicate_VF?id={!Lead.Id}&amp;wishFamily
 } 
 else if(dupe == null || dupe ==&apos;&apos;) 
 { 
-if (confirm(&quot;Are you sure you want to submit Diagnosis Verification?&quot;) == true) 
-{ 
-if(bestPhysicianEmail == null || bestPhysicianEmail == &apos;&apos; ||  TretMedProfEmail == bestPhysicianEmail){
-// make the fields change 
-l.Id = &quot;{! Lead.Id }&quot;; 
+if(TretMedProfEmail != bestPhysicianEmail &amp;&amp; bestPhysicianEmail != &apos;&apos;) { 
+window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;; 
+} else if(alternate1MedEmail != &apos;&apos;) { 
+window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;; 
+} else if(alternate2MedEmai != &apos;&apos;) { 
+window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;; 
+} else if(TretMedProfEmail == bestPhysicianEmail &amp;&amp; bestPhysicianEmail != &apos;&apos;) { 
+l.Id = leadIdR; 
 l.Dup_Check__c= &apos;Block Lead Dup&apos;; 
 l.Sub_Status__c=&quot;Pending Diagnosis Verification&quot;; 
-l.Hidden_DV_form_Medical_professional_Type__c = &quot;Treating Medical Professional&quot;;
+l.Hidden_DV_form_Medical_professional_Type__c = &quot;Best contact for Physician&quot;; 
 l.Of_Times_Email_Sent__c= &quot;{! IF(ISBLANK(Lead.Of_Times_Email_Sent__c), 0, Lead.Of_Times_Email_Sent__c ) }&quot;; 
-l.Of_Times_Email_Sent__c= parseInt(l.Of_Times_Email_Sent__c)+1; ; 
+l.Of_Times_Email_Sent__c= parseInt(l.Of_Times_Email_Sent__c)+1; 
+// save the change 
+var result = sforce.connection.update([l]); 
+alert(&quot;Diagnosis Verification sent successfully.&quot;); 
+window.location.reload(); 
+} 
+else { 
+
+if (confirm(&quot;Are you sure you want to submit Diagnosis Verification?&quot;) == true) 
+{ 
+l.Id = leadIdR; 
+l.Dup_Check__c= &apos;Block Lead Dup&apos;; 
+l.Sub_Status__c=&quot;Pending Diagnosis Verification&quot;; 
+l.Hidden_DV_form_Medical_professional_Type__c = &quot;Treating Medical Professional&quot;; 
+l.Of_Times_Email_Sent__c= &quot;{! IF(ISBLANK(Lead.Of_Times_Email_Sent__c), 0, Lead.Of_Times_Email_Sent__c ) }&quot;; 
+l.Of_Times_Email_Sent__c= parseInt(l.Of_Times_Email_Sent__c)+1; 
+//1.HiddenMedicalProfessionalEmail__c = TretMedProfEmail; 
 
 
 // save the change 
-sforce.connection.update([l]); 
+var result = sforce.connection.update([l]); 
 
 alert(&quot;Diagnosis Verification sent successfully.&quot;); 
-
-//refresh the page 
 window.location.reload(); 
-}
-else{
-window.location.href = &apos;/apex/LeadSelectMedEmail_VF?id={!Lead.Id}&apos;;
-}
+} else { 
+
+} 
+
+
 } 
 } 
 

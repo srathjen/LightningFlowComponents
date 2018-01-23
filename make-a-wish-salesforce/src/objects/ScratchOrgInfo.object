@@ -99,6 +99,10 @@
         <trackHistory>true</trackHistory>
     </fields>
     <fields>
+        <fullName>Name</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
         <fullName>Namespace</fullName>
         <trackHistory>true</trackHistory>
     </fields>

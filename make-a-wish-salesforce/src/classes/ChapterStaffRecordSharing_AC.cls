@@ -39,38 +39,44 @@ Public class ChapterStaffRecordSharing_AC
    
    }
    
-   public static void ContactSharing(Map<String,List<Contact>> contactMap)
-   {
-     /* Map<String, String> ChapterRoleMap = FindChapterRole(contactMap.keySet());
-      Map<String,List<User>> userMap = userRecMap(ChapterRoleMap.values());
-      List<ContactShare> contactsToShare = new List<ContactShare>();
-      for(String currChapter : contactMap.keySet())
-      {
-         if(ChapterRoleMap.containsKey(currChapter))
-         {
-             if(userMap.containsKey(ChapterRoleMap.get(currChapter)))
-             {
-               for(Contact currCon : contactMap.get(currChapter))
-               {
-                  for(User currUser : userMap.get(ChapterRoleMap.get(currChapter)))
-                  {
-                       ContactShare currSharing = new ContactShare();
-                       currSharing.contactId = currCon.id;
-                       currSharing.UserOrGroupId = currUser.id;
-                       currSharing.contactAccessLevel = 'Edit';
-                       currSharing.RowCause = Schema.ContactShare.RowCause.Manual;
-                       contactsToShare.add(currSharing);
-                  }
-               }
-             }
-         }
-      } */
-      
-     /* if(contactsToShare.size() > 0)
-          insert contactsToShare;*/
-      
-   
-   }
+  public static void ContactSharing(Map<String,List<Contact>> contactMap)
+    {
+        system.debug('inside ContactSharing ----> method'); 
+        Map<String, String> ChapterRoleMap = FindChapterRole(contactMap.keySet());
+        Map<String,List<User>> userMap = userRecMap(ChapterRoleMap.values());
+        List<ContactShare> contactsToShare = new List<ContactShare>();
+        for(String currChapter : contactMap.keySet())
+        {
+            system.debug('Current Chapter'+currChapter);
+            if(ChapterRoleMap.containsKey(currChapter))
+            {
+                system.debug('Current Chapter role'+ChapterRoleMap.get(currChapter));
+                if(userMap.containsKey(ChapterRoleMap.get(currChapter)))
+                {
+                    system.debug('Current user Role'+userMap.get(ChapterRoleMap.get(currChapter)));
+                    for(Contact currCon : contactMap.get(currChapter))
+                    {
+                        for(User currUser : userMap.get(ChapterRoleMap.get(currChapter)))
+                        {   if(currCon.OwnerId != currUser.id){
+                            
+                            ContactShare currSharing = new ContactShare();
+                            currSharing.contactId = currCon.id;
+                            currSharing.UserOrGroupId = currUser.id;
+                            currSharing.contactAccessLevel = 'Edit';
+                            currSharing.RowCause = Schema.ContactShare.RowCause.Manual;
+                            contactsToShare.add(currSharing);
+                            
+                        }
+                         
+                        }
+                    }
+                }
+            }
+        } 
+        
+        if(contactsToShare.size() > 0)
+            insert contactsToShare;
+     }
    
    public static void AccountSharing(Map<String,List<Account>> accountMap)
    {

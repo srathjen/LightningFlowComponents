@@ -9,265 +9,302 @@ Here, User can merge the records.
 
 Public Class LeadDuplicate_AC
 {
-   public string currId{get;set;}
-   public Lead currLead{get;set;}
-   public Integer selectedRecordsCount {get; private set;} {this.selectedRecordsCount = 0;}
-   public List<FieldRow> fieldRows {get; private set;}
-   private static final String MASTER_KEY = '$MASTER$';
-   public List<leadWrapper> wrapperList = new List<leadWrapper>();
-   private Map<String, Lead> selectedRecords;
-   public Integer step {get; private set;}
-   public boolean isFamilyInfo{get;set;}
-   public string contactId{get;set;}
-   public string bestToConId{get;set;}
-   public string treatingContactId{get;set;}
-   public string medicalConId{get;set;}
-   public boolean displayPartASuccess{get;set;}
-   public boolean noDuplicate{Get;set;}
-   public string masterLeadId;
-   public boolean displayLeadDupPopup{get;set;}
-   public string additionalParentId{get;set;}
-   
-   Id wishFamilyRT;
-   Id medicalProfessionalRT;
-   Id wishChild;
-   public boolean hideTreatingSection{get;set;}
-   
-   
-   public List<Lead> masterLeadList {get;set;}
-   
-   // Standard set controller for displaying matching duplicates.
-   public LeadDuplicate_AC(ApexPages.StandardSetController controller)
-   {
-       selectedRecords = new Map<String, Lead>();
-       fieldRows = new List<FieldRow>();
-       step = 2;
-       isFamilyInfo = false;
-       noDuplicate = false;
-       displayLeadDupPopup = false;
-       hideTreatingSection = false; 
+    public string currId{get;set;}
+    public Lead currLead{get;set;}
+    public Integer selectedRecordsCount {get; private set;} {this.selectedRecordsCount = 0;}
+    public List<FieldRow> fieldRows {get; private set;}
+    private static final String MASTER_KEY = '$MASTER$';
+    public List<leadWrapper> wrapperList = new List<leadWrapper>();
+    private Map<String, Lead> selectedRecords;
+    public Integer step {get; private set;}
+    public boolean isFamilyInfo{get;set;}
+    public string contactId{get;set;}
+    public string bestToConId{get;set;}
+    public string treatingContactId{get;set;}
+    public string medicalConId{get;set;}
+    public string alternate1ConId{get;set;}
+    public string alternate2ConId{get;set;}
+    public boolean displayPartASuccess{get;set;}
+    public boolean noDuplicate{Get;set;}
+    public string masterLeadId;
+    public boolean displayLeadDupPopup{get;set;}
+    public string additionalParentId{get;set;}
+    
+    Id wishFamilyRT;
+    Id medicalProfessionalRT;
+    Id wishChild;
+    public boolean hideTreatingSection{get;set;}
+    
+    
+    public List<Lead> masterLeadList {get;set;}
+    
+    // Standard set controller for displaying matching duplicates.
+    public LeadDuplicate_AC(ApexPages.StandardSetController controller)
+    {
+        selectedRecords = new Map<String, Lead>();
+        fieldRows = new List<FieldRow>();
+        step = 2;
+        isFamilyInfo = false;
+        noDuplicate = false;
+        displayLeadDupPopup = false;
+        hideTreatingSection = false; 
         Constant_AC  constant = new Constant_Ac(); 
         wishFamilyRT = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
         medicalProfessionalRT = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
         wishChild = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
         
-       if(ApexPages.currentPage().getParameters().get('wishFamily') != Null)
-          isFamilyInfo = Boolean.valueOf(ApexPages.currentPage().getParameters().get('wishFamily'));
-       
-       if(ApexPages.currentPage().getParameters().get('Id') != Null)
-                currId= ApexPages.currentPage().getParameters().get('Id');
+        if(ApexPages.currentPage().getParameters().get('wishFamily') != Null)
+            isFamilyInfo = Boolean.valueOf(ApexPages.currentPage().getParameters().get('wishFamily'));
+        
+        if(ApexPages.currentPage().getParameters().get('Id') != Null)
+            currId= ApexPages.currentPage().getParameters().get('Id');
+        
+        if(currId != Null)
+        {
+            // Querying current lead info.
+            currLead = [SELECT Id, FirstName,Name,Of_Times_Email_Sent__c, Hidden_DV_form_Medical_professional_Type__c, LastName,Parent_Last_Name__c,Parent_First_Name__c, 
+                        Email, DOB__c ,Phone,chapterName__c,chapterName__r.Name, Best_Contact_for_Physician_First_Name__c,
+                        Best_Contact_for_Physician_Last_Name__c, Best_contact_for_Physician_Email__c ,
+                        City, State, Street, PostalCode, Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
+                        Medical_Professional_Phone__c, Medical_Professional_Email__c, Treating_Medical_Professional_First_Name__c,
+                        Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Phone__c,  
+                        Additional_Parent_City__c,Additional_Parent_Email__c,Additional_Parent_First_Name__c,
+                        Additional_Parent_Last_Name__c,Additional_Parent_Phone__c,Additional_Parent_Postal_Code__c,
+                        Additional_Parent_State__c,Additional_Parent_Street__c,Alternate2MedProfessionalEmail__c,
+                        Alternate2MedProfessionalPhone__c,Alternate2MedProfessionalLastName__c,Alternate2MedProfessionalFirstName__c,
+                        Alternate1MedicalProfessionalEmail__c,Alternate1MedProfessionalPhone__c,Alternate1MedProfessionalLastName__c,
+                        Alternate1MedProfessionalFirstName__c,
+                        Treating_Medical_Professional_Email__c FROM Lead
+                        WHERE id = :currId limit 1];
+            masterLeadList = new List<Lead>();
+            masterLeadList.add(currLead); 
+        }
+        else
+        {
+            currLead = new Lead();
+        }
+        
+        // checking medical info and treating medical info is same or not. if it is same, then we are displaying duplicates on same table.
+        if(currLead.id != Null)
+        {
+            if(currLead.Medical_Professional_First_Name__c != Null && currLead.Medical_Professional_Last_Name__c != Null &&
+               (currLead.Medical_Professional_Phone__c != Null || currLead.Medical_Professional_Email__c != Null))
+            {
                 
-       if(currId != Null)
-       {
-        // Querying current lead info.
-         currLead = [SELECT Id, FirstName,Name,Of_Times_Email_Sent__c,LastName,Parent_Last_Name__c,Parent_First_Name__c, 
-                     Email, DOB__c ,Phone,chapterName__c,chapterName__r.Name, Best_Contact_for_Physician_First_Name__c,
-                      Best_Contact_for_Physician_Last_Name__c, Best_contact_for_Physician_Email__c ,
-                     City, State, Street, PostalCode, Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
-                     Medical_Professional_Phone__c, Medical_Professional_Email__c, Treating_Medical_Professional_First_Name__c,
-                     Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Phone__c,  
-                     Additional_Parent_City__c,Additional_Parent_Email__c,Additional_Parent_First_Name__c,
-                     Additional_Parent_Last_Name__c,Additional_Parent_Phone__c,Additional_Parent_Postal_Code__c,
-                     Additional_Parent_State__c,Additional_Parent_Street__c,
-                     Treating_Medical_Professional_Email__c FROM Lead
-                     WHERE id = :currId limit 1];
-         masterLeadList = new List<Lead>();
-         masterLeadList.add(currLead); 
-       }
-       else
-       {
-          currLead = new Lead();
-       }
-       
-      // checking medical info and treating medical info is same or not. if it is same, then we are displaying duplicates on same table.
-       if(currLead.id != Null)
-       {
-          if(currLead.Medical_Professional_First_Name__c != Null && currLead.Medical_Professional_Last_Name__c != Null &&
-             (currLead.Medical_Professional_Phone__c != Null || currLead.Medical_Professional_Email__c != Null))
-           {
-          
-            if(currLead.Medical_Professional_First_Name__c == currLead.Treating_Medical_Professional_First_Name__c && 
-               currLead.Treating_Medical_Professional_Last_Name__c == currLead.Medical_Professional_Last_Name__c && 
-               (currLead.Treating_Medical_Professional_Phone__c == currLead.Medical_Professional_Phone__c || 
-                currLead.Treating_Medical_Professional_Email__c  == currLead.Medical_Professional_Email__c))
+                if(currLead.Medical_Professional_First_Name__c == currLead.Treating_Medical_Professional_First_Name__c && 
+                   currLead.Treating_Medical_Professional_Last_Name__c == currLead.Medical_Professional_Last_Name__c && 
+                   (currLead.Treating_Medical_Professional_Phone__c == currLead.Medical_Professional_Phone__c || 
+                    currLead.Treating_Medical_Professional_Email__c  == currLead.Medical_Professional_Email__c))
                 {
-                   hideTreatingSection = True;
-                
+                    hideTreatingSection = True;
+                    
                 }
-             }
-       }
+            }
+        }
+        
+        
+    }
     
-   
-   }
-
-
-  // Fetching all duplicate lead records related with current lead id.
-   public List<leadWrapper> getdupLeadList()
-   {
+    
+    // Fetching all duplicate lead records related with current lead id.
+    public List<leadWrapper> getdupLeadList()
+    {
         List<Lead> dupLeads = new List<Lead>();
-       
-       
-          
+        
+        
+        
         if(currLead.id != Null)
         {
-          dupLeads = [SELECT id, FirstName,Name, LastName, Email, Phone, City, DOB__c,State, PostalCode,
-                      ChapterName__r.name,ChapterName__c  FROM Lead
-                      WHERE ((LastName = :currLead.LastName AND FirstName = :currLead.FirstName) OR
-                      (LastName = :currLead.LastName AND ((State = :currLead.State AND City = :currLead.City AND Street = :currLead.Street
-                      AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) 
-                      OR (FirstName = :currLead.FirstName
-                      AND ((State = :currLead.State AND City = :currLead.City AND Street = :currLead.Street
-                      AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND 
-                      ((State = :currLead.State AND City = :currLead.City  AND Street = :currLead.Street
-                      AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND
-                      (LastName = :currLead.LastName OR FirstName = :currLead.FirstName))) AND Id != :MasterLeadList[0].Id AND isConverted = false];
+            dupLeads = [SELECT id, FirstName,Name, LastName, Email, Phone, City, DOB__c,State, PostalCode,
+                        ChapterName__r.name,ChapterName__c  FROM Lead
+                        WHERE ((LastName = :currLead.LastName AND FirstName = :currLead.FirstName) OR
+                               (LastName = :currLead.LastName AND ((State = :currLead.State AND City = :currLead.City AND Street = :currLead.Street
+                                                                    AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) 
+                               OR (FirstName = :currLead.FirstName
+                                   AND ((State = :currLead.State AND City = :currLead.City AND Street = :currLead.Street
+                                         AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND 
+                                                                                                                                             ((State = :currLead.State AND City = :currLead.City  AND Street = :currLead.Street
+                                                                                                                                               AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND
+                                                                                                                                                                                                                                                   (LastName = :currLead.LastName OR FirstName = :currLead.FirstName))) AND Id != :MasterLeadList[0].Id AND isConverted = false];
         }
-       
-       if(wrapperList.size() <= 0)
-       {
-        if(dupLeads.size() > 0)
+        
+        if(wrapperList.size() <= 0)
         {
-         for(Lead currDup : dupLeads)
-         {
-           leadWrapper newWrapper = new LeadWrapper(currDup);
-          
-           wrapperList.add(newWrapper);
-         }
+            if(dupLeads.size() > 0)
+            {
+                for(Lead currDup : dupLeads)
+                {
+                    leadWrapper newWrapper = new LeadWrapper(currDup);
+                    
+                    wrapperList.add(newWrapper);
+                }
+            }
         }
-      }
-       return wrapperList;
-   }
-   
-   // Fetching Duplicate Wish Child based on the current lead.
-   public List<Contact> getdupContactList()
-   {
+        return wrapperList;
+    }
+    
+    // Fetching Duplicate Wish Child based on the current lead.
+    public List<Contact> getdupContactList()
+    {
         List<Contact> dupContacts = new List<Contact>();
         if(currLead.id != Null)
         {
-          dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
-                         MailingState, MailingPostalCode,Region_Chapter__r.Name FROM Contact
-                         WHERE ((LastName = :currLead.LastName AND FirstName = :currLead.FirstName) OR
-                         (LastName = :currLead.LastName AND ((MailingState = :currLead.State AND MailingCity = :currLead.City AND MailingStreet =: currLead.Street
-                         AND MailingPostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) 
-                         OR (FirstName = :currLead.FirstName
-                         AND ((MailingState = :currLead.State AND MailingCity = :currLead.City AND MailingStreet =: currLead.Street 
-                         AND MailingPostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email )) OR  (BirthDate = :currLead.DOB__c AND 
-                         ((MailingState = :currLead.State AND MailingCity = :currLead.City AND MailingStreet =: currLead.Street
-                         AND MailingPostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) 
-                         OR  (Birthdate = :currLead.DOB__c AND
-                         (LastName = :currLead.LastName OR FirstName = :currLead.FirstName))) AND RecordTypeId = :wishChild];
-                         
+            dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
+                           MailingState, MailingPostalCode,Region_Chapter__r.Name FROM Contact
+                           WHERE ((LastName = :currLead.LastName AND FirstName = :currLead.FirstName) OR
+                                  (LastName = :currLead.LastName AND ((MailingState = :currLead.State AND MailingCity = :currLead.City AND MailingStreet =: currLead.Street
+                                                                       AND MailingPostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) 
+                                  OR (FirstName = :currLead.FirstName
+                                      AND ((MailingState = :currLead.State AND MailingCity = :currLead.City AND MailingStreet =: currLead.Street 
+                                            AND MailingPostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email )) OR  (BirthDate = :currLead.DOB__c AND 
+                                                                                                                                                        ((MailingState = :currLead.State AND MailingCity = :currLead.City AND MailingStreet =: currLead.Street
+                                                                                                                                                          AND MailingPostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) 
+                                  OR  (Birthdate = :currLead.DOB__c AND
+                                       (LastName = :currLead.LastName OR FirstName = :currLead.FirstName))) AND RecordTypeId = :wishChild];
+            
         }
         return dupContacts;
-   }
-  // Querying duplicate Medical Professional based on the current lead. 
-  public List<Contact> getdupMedicalContactList()
-   {
+    }
+    // Querying duplicate Medical Professional based on the current lead. 
+    public List<Contact> getdupMedicalContactList()
+    {
         List<Contact> dupContacts = new List<Contact>();
         if(currLead.id != Null)
         {
-          dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
-                         MailingState, MailingPostalCode FROM Contact
-                         WHERE (FirstName = :currLead.Medical_Professional_First_Name__c AND LastName = :currLead.Medical_Professional_Last_Name__c 
-                         AND (Phone = :currLead.Medical_Professional_Phone__c Or Email =: currLead.Medical_Professional_Email__c) 
-                         AND RecordTypeId = :MedicalProfessionalRT)];
-                         
+            dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
+                           MailingState, MailingPostalCode FROM Contact
+                           WHERE (FirstName = :currLead.Medical_Professional_First_Name__c AND LastName = :currLead.Medical_Professional_Last_Name__c 
+                                  AND (Phone = :currLead.Medical_Professional_Phone__c Or Email =: currLead.Medical_Professional_Email__c) 
+                                  AND RecordTypeId = :MedicalProfessionalRT)];
+            
         }
         return dupContacts;
-   }
-  // Querying duplicate Treating Medical Professional based on the current lead. 
-   public List<Contact> getdupTreatingContactList()
-   {
-        List<Contact> dupContacts = new List<Contact>();
-     
-        if(currLead.id != Null)
-        {
-          dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
-                         MailingState, MailingPostalCode FROM Contact
-                         WHERE (FirstName = :currLead.Treating_Medical_Professional_First_Name__c AND 
-                         LastName = :currLead.Treating_Medical_Professional_Last_Name__c 
-                         AND (Phone = :currLead.Treating_Medical_Professional_Phone__c Or Email =: currLead.Treating_Medical_Professional_Email__c) 
-                         AND RecordTypeId = :MedicalProfessionalRT)];
-                         
-        }
-        return dupContacts;
-   }
-  
-  
-  // Querying duplicate Best Contact Person in Physician hospital based on the current lead. 
-   public List<Contact> getbestPhysicianContactList()
-   {
-        List<Contact> dupContacts = new List<Contact>();
-     
-        if(currLead.id != Null)
-        {
-          dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
-                         MailingState, MailingPostalCode FROM Contact
-                         WHERE (FirstName = :currLead.Best_Contact_for_Physician_First_Name__c AND 
-                         LastName = :currLead.Best_Contact_for_Physician_Last_Name__c 
-                         AND  Email =: currLead.Best_contact_for_Physician_Email__c 
-                         AND RecordTypeId = :MedicalProfessionalRT)];
-                         
-        }
-        return dupContacts;
-   }
-   
-   
-  // Querying duplicate Wish Family based on the current lead. 
-   public List<Contact> getdupParentContactList()
-   {
+    }
+    //   Querying duplicate Alternate 1 Medical Professional based on the current lead. 
+    public List<Contact> getdupAlternate1MedicalContactList()
+    {
         List<Contact> dupContacts = new List<Contact>();
         if(currLead.id != Null)
         {
-          dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
-                         MailingState, MailingPostalCode FROM Contact
-                         WHERE (FirstName = :currLead.Parent_First_Name__c AND LastName = :currLead.Parent_Last_Name__c AND 
-                               (((Email = :currLead.Email OR Phone = :currLead.Phone) 
-                               AND (MailingStreet = :currLead.Street AND MailingState = :currLead.State 
-                               AND MailingPostalCode = :currLead.PostalCode 
-                               AND MailingCity = :currLead.City))  
-                               OR ((Phone = :currLead.Phone OR (MailingStreet = :currLead.Street AND MailingState = :currLead.State 
-                               AND MailingPostalCode = :currLead.PostalCode 
-                               AND MailingCity = :currLead.City))
-                               AND Email = :currLead.Email)  OR (((MailingStreet = :currLead.Street AND MailingState = :currLead.State 
-                               AND MailingPostalCode = :currLead.PostalCode 
-                               AND MailingCity = :currLead.City) OR (Email = :currLead.Email) )
-                               AND Phone = :currLead.Email))) AND RecordTypeId = :wishFamilyRT];
-                         
+            dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
+                           MailingState, MailingPostalCode FROM Contact
+                           WHERE ((FirstName = :currLead.Alternate1MedProfessionalFirstName__c AND LastName = :currLead.Alternate1MedProfessionalLastName__c 
+                                   AND RecordTypeId = :MedicalProfessionalRT) AND (Phone = :currLead.Alternate1MedProfessionalPhone__c Or Email =: currLead.Alternate1MedicalProfessionalEmail__c) 
+                                 )];
+            
+        }
+        system.debug('--------------> dupContacts'+dupContacts);
+        return dupContacts;
+    }
+    
+    //   Querying duplicate Alternate 2 Medical Professional based on the current lead. 
+    public List<Contact> getdupAlternate2MedicalContactList()
+    {
+        List<Contact> dupContacts = new List<Contact>();
+        if(currLead.id != Null)
+        {
+            dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
+                           MailingState, MailingPostalCode FROM Contact
+                           WHERE (FirstName = :currLead.Alternate2MedProfessionalFirstName__c AND LastName = :currLead.Alternate2MedProfessionalLastName__c 
+                                  AND (Phone = :currLead.Alternate2MedProfessionalPhone__c Or Email =: currLead.Alternate2MedProfessionalEmail__c) 
+                                  AND RecordTypeId = :MedicalProfessionalRT)];
+            
         }
         return dupContacts;
-   }
-   
-   
+    }
+    // Querying duplicate Treating Medical Professional based on the current lead. 
+    public List<Contact> getdupTreatingContactList()
+    {
+        List<Contact> dupContacts = new List<Contact>();
+        
+        if(currLead.id != Null)
+        {
+            dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
+                           MailingState, MailingPostalCode FROM Contact
+                           WHERE (FirstName = :currLead.Treating_Medical_Professional_First_Name__c AND 
+                                  LastName = :currLead.Treating_Medical_Professional_Last_Name__c 
+                                  AND (Phone = :currLead.Treating_Medical_Professional_Phone__c Or Email =: currLead.Treating_Medical_Professional_Email__c) 
+                                  AND RecordTypeId = :MedicalProfessionalRT)];
+            
+        }
+        return dupContacts;
+    }
+    
+    
+    // Querying duplicate Best Contact Person in Physician hospital based on the current lead. 
+    public List<Contact> getbestPhysicianContactList()
+    {
+        List<Contact> dupContacts = new List<Contact>();
+        
+        if(currLead.id != Null)
+        {
+            dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
+                           MailingState, MailingPostalCode FROM Contact
+                           WHERE (FirstName = :currLead.Best_Contact_for_Physician_First_Name__c AND 
+                                  LastName = :currLead.Best_Contact_for_Physician_Last_Name__c 
+                                  AND  Email =: currLead.Best_contact_for_Physician_Email__c 
+                                  AND RecordTypeId = :MedicalProfessionalRT)];
+            
+        }
+        return dupContacts;
+    }
+    
+    
+    // Querying duplicate Wish Family based on the current lead. 
+    public List<Contact> getdupParentContactList()
+    {
+        List<Contact> dupContacts = new List<Contact>();
+        if(currLead.id != Null)
+        {
+            dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
+                           MailingState, MailingPostalCode FROM Contact
+                           WHERE (FirstName = :currLead.Parent_First_Name__c AND LastName = :currLead.Parent_Last_Name__c AND 
+                                  (((Email = :currLead.Email OR Phone = :currLead.Phone) 
+                                    AND (MailingStreet = :currLead.Street AND MailingState = :currLead.State 
+                                         AND MailingPostalCode = :currLead.PostalCode 
+                                         AND MailingCity = :currLead.City))  
+                                   OR ((Phone = :currLead.Phone OR (MailingStreet = :currLead.Street AND MailingState = :currLead.State 
+                                                                    AND MailingPostalCode = :currLead.PostalCode 
+                                                                    AND MailingCity = :currLead.City))
+                                       AND Email = :currLead.Email)  OR (((MailingStreet = :currLead.Street AND MailingState = :currLead.State 
+                                                                           AND MailingPostalCode = :currLead.PostalCode 
+                                                                           AND MailingCity = :currLead.City) OR (Email = :currLead.Email) )
+                                                                         AND Phone = :currLead.Email))) AND RecordTypeId = :wishFamilyRT];
+            
+        }
+        return dupContacts;
+    }
+    
+    
     // Querying duplicate Additional Wish Family based on the current lead. 
-   public List<Contact> getAdditionalParentContactList()
-   {
+    public List<Contact> getAdditionalParentContactList()
+    {
         List<Contact> dupContacts = new List<Contact>();
         if(currLead.id != Null)
         {
-          dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
-                        
-                         MailingState, MailingPostalCode FROM Contact
-                         WHERE (FirstName = :currLead.Additional_Parent_First_Name__c AND LastName = :currLead.Additional_Parent_Last_Name__c AND 
-                               (((Email = :currLead.Additional_Parent_Email__c OR Phone = :currLead.Additional_Parent_Phone__c) 
-                               AND (MailingStreet = :currLead.Additional_Parent_Street__c AND MailingState = :currLead.Additional_Parent_State__c 
-                               AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c 
-                               AND MailingCity = :currLead.Additional_Parent_City__c))  
-                               OR ((Phone = :currLead.Additional_Parent_Phone__c OR (MailingStreet = :currLead.Additional_Parent_Street__c AND MailingState = :currLead.Additional_Parent_State__c
-                               AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c
-                               AND MailingCity = :currLead.Additional_Parent_City__c))
-                               AND Email = :currLead.Additional_Parent_Email__c)  OR (((MailingStreet = :currLead.Additional_Parent_Street__c AND MailingState = :currLead.Additional_Parent_State__c
-                               AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c
-                               AND MailingCity = :currLead.Additional_Parent_City__c) OR (Email = :currLead.Additional_Parent_Email__c) )
-                               AND Phone = :currLead.Additional_Parent_Phone__c))) AND RecordTypeId = :wishFamilyRT];
-                         
+            dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
+                           
+                           MailingState, MailingPostalCode FROM Contact
+                           WHERE (FirstName = :currLead.Additional_Parent_First_Name__c AND LastName = :currLead.Additional_Parent_Last_Name__c AND 
+                                  (((Email = :currLead.Additional_Parent_Email__c OR Phone = :currLead.Additional_Parent_Phone__c) 
+                                    AND (MailingStreet = :currLead.Additional_Parent_Street__c AND MailingState = :currLead.Additional_Parent_State__c 
+                                         AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c 
+                                         AND MailingCity = :currLead.Additional_Parent_City__c))  
+                                   OR ((Phone = :currLead.Additional_Parent_Phone__c OR (MailingStreet = :currLead.Additional_Parent_Street__c AND MailingState = :currLead.Additional_Parent_State__c
+                                                                                         AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c
+                                                                                         AND MailingCity = :currLead.Additional_Parent_City__c))
+                                       AND Email = :currLead.Additional_Parent_Email__c)  OR (((MailingStreet = :currLead.Additional_Parent_Street__c AND MailingState = :currLead.Additional_Parent_State__c
+                                                                                                AND MailingPostalCode = :currLead.Additional_Parent_Postal_Code__c
+                                                                                                AND MailingCity = :currLead.Additional_Parent_City__c) OR (Email = :currLead.Additional_Parent_Email__c) )
+                                                                                              AND Phone = :currLead.Additional_Parent_Phone__c))) AND RecordTypeId = :wishFamilyRT];
+            
         }
         return dupContacts;
-   }
-   
-   
-   // Mark the Master record by default for merging. If user want to change, then can change it using radio button.
-   public void selectDefaultRecord() {
+    }
+    
+    
+    // Mark the Master record by default for merging. If user want to change, then can change it using radio button.
+    public void selectDefaultRecord() {
         String recordId = Apexpages.currentPage().getParameters().get('recordId');
         //UTIL_Debug.debug('Selected Record: ' + recordId);
         if (recordId != null && selectedRecords.keySet().contains(recordId)) {
@@ -278,12 +315,12 @@ Public Class LeadDuplicate_AC
             }
         }
     }
-   
-   // Its redirect the user to Merge page once they choosen duplicates.
-   // If user checks no duplicate checkbox , then it will update the record as No Duplicate Found and allowed as a duplicate record.
-   public pageReference nextStep() 
-   {
-   
+    
+    // Its redirect the user to Merge page once they choosen duplicates.
+    // If user checks no duplicate checkbox , then it will update the record as No Duplicate Found and allowed as a duplicate record.
+    public pageReference nextStep() 
+    {
+        
         set<Id> mergeIds = new set<Id>(); 
         for (leadWrapper c : wrapperList) 
         {
@@ -293,153 +330,170 @@ Public Class LeadDuplicate_AC
             }
         }
         
-      if(noDuplicate == True && mergeIds.size() > 0)
-      {
+        if(noDuplicate == True && mergeIds.size() > 0)
+        {
             ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'You can either choose "No duplicate Found" or any lead(s) under Select Existing Leads.'));
             return null;
-      }      
-            
-      else if(noDuplicate == True)
-      {
-         Lead updateLead = new Lead();
-         updateLead.id = currLead.id;
-         updateLead.Override_Dupe_Check__c = True;
-         updateLead.Dup_Check__c = 'Block Lead Dup';
-         update updateLead;
-         PageReference reference=new PageReference('/'+currLead.id);
-         reference.setRedirect(true);
-         return reference;
-      }
-      else
-      {
-        /*  set<Id> mergeIds = new set<Id>(); 
-            for (leadWrapper c : wrapperList) {
-            System.debug('c++++++++++++++++++++++++++++++++++++++ ' + c);
-                if (c.selected) {
-                    mergeIds.add(c.currentLead.Id);
-                }
-            } */
+        }      
+        
+        else if(noDuplicate == True)
+        {
+            Lead updateLead = new Lead();
+            updateLead.id = currLead.id;
+            updateLead.Override_Dupe_Check__c = True;
+            updateLead.Dup_Check__c = 'Block Lead Dup';
+            update updateLead;
+            PageReference reference=new PageReference('/'+currLead.id);
+            reference.setRedirect(true);
+            return reference;
+        }
+        else
+        {
+            /*  set<Id> mergeIds = new set<Id>(); 
+for (leadWrapper c : wrapperList) {
+System.debug('c++++++++++++++++++++++++++++++++++++++ ' + c);
+if (c.selected) {
+mergeIds.add(c.currentLead.Id);
+}
+} */
             
             System.debug('mergeIds+++++++++++++++++++++++++++++ ' + mergeIds);
             mergeIds.add(MasterLeadList[0].Id);
             System.debug('mergeIds1++++++++++++++++++++++++++++++++++++++ ' + mergeIds);
-       
+            
             loadMergeCandidates(mergeIds);
-      }
-      
-      return null;
-   }
-   
-  // Wrapper class 
-   public class leadWrapper {
-      public Lead currentLead{get; set;}
-      public Boolean selected {get; set;}
-       public leadWrapper(Lead currLead) {
+        }
+        
+        return null;
+    }
+    
+    // Wrapper class 
+    public class leadWrapper {
+        public Lead currentLead{get; set;}
+        public Boolean selected {get; set;}
+        public leadWrapper(Lead currLead) {
             currentLead = currLead;
             selected = false;
         }
-   }
-   
-  
-  //Submitting for Diagnosis Verification. 
-   public pageReference ContinuePartAForm()
-   {
-   
-      Lead updateLead = new Lead();
-      updateLead.id = currLead.Id;
-      if(currLead.Of_Times_Email_Sent__c != Null)
-        updateLead.Of_Times_Email_Sent__c = currLead.Of_Times_Email_Sent__c+1;
-      else
-        updateLead.Of_Times_Email_Sent__c = 1;
-     
-      updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
-      updateLead.Override_Dupe_Check__c = True;
-      updateLead.Medical_Professional_ContactId__c = medicalConId;
-      if(hideTreatingSection == false && (treatingContactId != Null && treatingContactId !=''))
-         updateLead.Treating_Medical_Professional_Contact_Id__c = treatingContactId;
-      else if(hideTreatingSection == True)
-          updateLead.Treating_Medical_Professional_Contact_Id__c = medicalConId;
-      updateLead.Wish_Family_ContactId__c = contactId;
-      updateLead.Hidden_Best_Contact_Person_Id__c = bestToConId;
-      updateLead.Hidden_Additional_Parent_Id__c = additionalParentId;
-      updateLead.Contact_Dup_Check__c = 'Block Contact Dup';
-      if(currLead.Best_contact_for_Physician_Email__c == Null)
-         updateLead.Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
-      updateLead.Dup_Check__c = 'Block Lead Dup';
-      Update updateLead;
-      if(currLead.Best_contact_for_Physician_Email__c == Null || currLead.Best_contact_for_Physician_Email__c == '' || currLead.Treating_Medical_Professional_Email__c == currLead.Best_contact_for_Physician_Email__c){
-          displayPartASuccess = True;
-          return null;
-      }
-      else{
-         PageReference reference = new PageReference('/apex/LeadSelectMedEmail_VF?id='+currLead.Id);
-         reference.setRedirect(true);
-         return reference;
-      }
-       return null;   
-      
-   }
-   //Completing dupcheck
-   public PageReference CompleteDupeCheck()
-   {
-   
-      Lead updateLead = new Lead();
-      updateLead.id = currLead.Id;
-         
-      updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
-      updateLead.Override_Dupe_Check__c = True;
-      updateLead.Medical_Professional_ContactId__c = medicalConId;
-      if(hideTreatingSection == false && (treatingContactId != Null && treatingContactId !=''))
-         updateLead.Treating_Medical_Professional_Contact_Id__c = treatingContactId;
-      else if(hideTreatingSection == True)
-          updateLead.Treating_Medical_Professional_Contact_Id__c = medicalConId;
-      updateLead.Wish_Family_ContactId__c = contactId;
-      updateLead.Hidden_Best_Contact_Person_Id__c = bestToConId;
-      updateLead.Hidden_Additional_Parent_Id__c = additionalParentId;
-      updateLead.Contact_Dup_Check__c = 'Block Contact Dup';
-      updateLead.Dup_Check__c = 'Block Lead Dup';
-      Update updateLead;
-     PageReference reference=new PageReference('/'+currLead.id);
-     reference.setRedirect(true);
-     return reference;
-      
-   }
-   
-   // Redirecting to Lead Detail page.
-   public pagereference GoToLeadViewPage()
-   {
-     displayPartASuccess = false;
-     PageReference reference=new PageReference('/'+currLead.id);
-     reference.setRedirect(true);
-     return reference;
-   
-   }
-   
-   
-  
-     /*******************************************************************************************************
-    * @description Shows the next step of the wizard where user can see the diff of the records before merge.
-    */
+    }
+    
+    
+    //Submitting for Diagnosis Verification. 
+    public pageReference ContinuePartAForm()
+    {
+        
+        Lead updateLead = new Lead();
+        updateLead.id = currLead.Id;
+        
+        updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        updateLead.Override_Dupe_Check__c = True;
+        updateLead.Medical_Professional_ContactId__c = medicalConId;
+        updateLead.HiddenAlternate1MedProfessionalId__c = alternate1ConId;
+        updateLead.HiddenAlternate2MedProfessionalId__c = alternate2ConId;
+        
+        if(hideTreatingSection == false && (treatingContactId != Null && treatingContactId !='')) {
+            updateLead.Treating_Medical_Professional_Contact_Id__c = treatingContactId;
+        } else if(hideTreatingSection == True) {
+            updateLead.Treating_Medical_Professional_Contact_Id__c = medicalConId;
+        }
+        
+        updateLead.Wish_Family_ContactId__c = contactId;
+        updateLead.Hidden_Best_Contact_Person_Id__c = bestToConId;
+        updateLead.Hidden_Additional_Parent_Id__c = additionalParentId;
+        updateLead.Contact_Dup_Check__c = 'Block Contact Dup';
+        updateLead.Dup_Check__c = 'Block Lead Dup';
+        /*if(currLead.Best_contact_for_Physician_Email__c == NULL || currLead.Alternate1MedicalProfessionalEmail__c == NULL || currLead.Alternate2MedProfessionalEmail__c == NULL) {
+
+System.debug('>>>>>>12'+currLead.Hidden_DV_form_Medical_professional_Type__c+'<<<<<'+updateLead.Of_Times_Email_Sent__c+'>>>'+updateLead.HiddenMedicalProfessionalEmail__c);
+updateLead.Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
+updateLead.HiddenMedicalProfessionalEmail__c = currLead.Treating_Medical_Professional_Email__c;
+
+}*/
+        
+        if(currLead.Best_contact_for_Physician_Email__c == NULL && currLead.Alternate1MedicalProfessionalEmail__c == NULL && currLead.Alternate2MedProfessionalEmail__c == NULL) {
+            updateLead.Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
+            updateLead.HiddenMedicalProfessionalEmail__c = currLead.Treating_Medical_Professional_Email__c;
+            if(currLead.Of_Times_Email_Sent__c != Null) {
+                updateLead.Of_Times_Email_Sent__c = currLead.Of_Times_Email_Sent__c+1;
+            } else {
+                updateLead.Of_Times_Email_Sent__c = 1;
+            }
+            System.debug('>>>>>>12'+currLead.Hidden_DV_form_Medical_professional_Type__c+'<<<<<'+updateLead.Of_Times_Email_Sent__c+'>>>'+updateLead.HiddenMedicalProfessionalEmail__c+'>>>'+updateLead.HiddenMedicalProfessionalEmail__c);
+            displayPartASuccess = True;
+            Update updateLead;
+        }
+        else{
+            Update updateLead;
+            PageReference reference = new PageReference('/apex/LeadSelectMedEmail_VF?id='+currLead.Id);
+            reference.setRedirect(true);
+            return reference;
+        }
+        
+        return null;   
+        
+    }
+    //Completing dupcheck
+    public PageReference CompleteDupeCheck()
+    {
+        
+        Lead updateLead = new Lead();
+        updateLead.id = currLead.Id;
+        updateLead.HiddenAlternate1MedProfessionalId__c = alternate1ConId;
+        updateLead.HiddenAlternate2MedProfessionalId__c = alternate2ConId;
+        //updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        updateLead.Override_Dupe_Check__c = True;
+        updateLead.Medical_Professional_ContactId__c = medicalConId;
+        if(hideTreatingSection == false && (treatingContactId != Null && treatingContactId !=''))
+            updateLead.Treating_Medical_Professional_Contact_Id__c = treatingContactId;
+        else if(hideTreatingSection == True)
+            updateLead.Treating_Medical_Professional_Contact_Id__c = medicalConId;
+        updateLead.Wish_Family_ContactId__c = contactId;
+        updateLead.Hidden_Best_Contact_Person_Id__c = bestToConId;
+        updateLead.Hidden_Additional_Parent_Id__c = additionalParentId;
+        updateLead.Contact_Dup_Check__c = 'Block Contact Dup';
+        updateLead.Dup_Check__c = 'Block Lead Dup';
+        Update updateLead;
+        PageReference reference=new PageReference('/'+currLead.id);
+        reference.setRedirect(true);
+        return reference;
+        
+    }
+    
+    // Redirecting to Lead Detail page.
+    public pagereference GoToLeadViewPage()
+    {
+        displayPartASuccess = false;
+        PageReference reference=new PageReference('/'+currLead.id);
+        reference.setRedirect(true);
+        return reference;
+        
+    }
+    
+    
+    
+    /*******************************************************************************************************
+* @description Shows the next step of the wizard where user can see the diff of the records before merge.
+*/
     private void loadMergeCandidates(set<Id> mergeCandidates) 
     {
-       
-       boolean flag=true; 
-       System.debug('mergeCandidates+++++++++++++++++++++++++++++ ' + mergeCandidates);
+        
+        boolean flag=true; 
+        System.debug('mergeCandidates+++++++++++++++++++++++++++++ ' + mergeCandidates);
         // Check we have atleast 2 and not more than 3 records selected for merge. If not throw an error. 
         if (mergeCandidates.size() <=1) {
             flag=false;
             ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'Please select an existing lead to merge or check "No Duplicate Found" if the leads displayed are not duplicates.'));
             return;
-          
+            
         }
         
         if (mergeCandidates.size() > 3 ) {
             flag=false;
             
             ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'Please select 2 leads for merging'));
-           //ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'You can not merge more than 3 leads at a time'));
+            //ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'You can not merge more than 3 leads at a time'));
             return;
-           
+            
         }
         
         if(flag == True)
@@ -447,12 +501,12 @@ Public Class LeadDuplicate_AC
             selectedRecordsCount = mergeCandidates.size();
             Set<String> fieldsSet = new Set<String>();
             
-             for(Schema.FieldSetMember f : getMergeFields())
-             {
+            for(Schema.FieldSetMember f : getMergeFields())
+            {
                 fieldsSet.add((f.getFieldPath()).tolowercase());
                 System.debug('f.getFieldPath()++++++++++++++++++++++++++++++++ ' +f.getFieldPath());
-             }
-                
+            }
+            
             Map<String, Schema.SObjectField> leadFields= Schema.SObjectType.Lead.fields.getMap();
             Map<String, Schema.DescribeFieldResult> standardFieldMap = new Map<String, Schema.DescribeFieldResult>();
             Map<String, Schema.DescribeFieldResult> customFieldMap = new Map<String, Schema.DescribeFieldResult>();
@@ -467,27 +521,27 @@ Public Class LeadDuplicate_AC
                 if (fResult.isUpdateable() && fResult.isAccessible()) {
                     // If the field is type lookup, select the parent name  
                     
-                        string relName = fResult.getRelationshipName();
-                        if (string.isBlank(relName)) {
-                            query += (fieldName + ',');
-                        } else {
-                            //find the Name field for the related object
-                            string nameField = getRelatedObjNameField(fResult);
-        
-                            if (nameField!=null) {
-                                query += (relName + '.' + nameField + ',');
-                            }
-                        }
-                        // Collect the standard and custom fields separately for sorting
-                        if(fResult.isCustom()) {
-                          System.debug('fieldName+++++++++++++++++++++++++++++++++++++++++++++ ' +fieldName);
-                          if(fieldsSet.contains(fieldName))
-                             customFieldMap.put(fieldName, fResult);
-                        } else {
-                            standardFieldMap.put(fieldName, fResult);
+                    string relName = fResult.getRelationshipName();
+                    if (string.isBlank(relName)) {
+                        query += (fieldName + ',');
+                    } else {
+                        //find the Name field for the related object
+                        string nameField = getRelatedObjNameField(fResult);
+                        
+                        if (nameField!=null) {
+                            query += (relName + '.' + nameField + ',');
                         }
                     }
-               
+                    // Collect the standard and custom fields separately for sorting
+                    if(fResult.isCustom()) {
+                        System.debug('fieldName+++++++++++++++++++++++++++++++++++++++++++++ ' +fieldName);
+                        if(fieldsSet.contains(fieldName))
+                            customFieldMap.put(fieldName, fResult);
+                    } else {
+                        standardFieldMap.put(fieldName, fResult);
+                    }
+                }
+                
             }
             // Adding some non-updateable system fields which we need to add to the record diff table.
             query +=  'createdby.name, createddate, LastModifiedBy.name, LastModifiedDate';
@@ -545,9 +599,9 @@ Public Class LeadDuplicate_AC
                     temp.values.add(new Cell(c.id, null));
                     if (lastModifiedDate == null || 
                         (lastModifiedDate != null && (DateTime)c.get('lastModifiedDate') > lastModifiedDate)) {
-                        temp.selectedValue = c.id;
-                        lastModifiedDate = (DateTime)c.get('lastModifiedDate');
-                    }   
+                            temp.selectedValue = c.id;
+                            lastModifiedDate = (DateTime)c.get('lastModifiedDate');
+                        }   
                 }
             }
             fieldRows.add(temp);
@@ -583,16 +637,16 @@ Public Class LeadDuplicate_AC
             fieldRows.add(createdByRow);
             fieldRows.add(lastModifiedByRow);
             this.step = 3;
-        // If everything looks good go to "choose winning contact" step
+            // If everything looks good go to "choose winning contact" step
         }
         
     }
-     
-      private string getRelatedObjNameField(Schema.DescribeFieldResult fieldDesc) 
-      {
+    
+    private string getRelatedObjNameField(Schema.DescribeFieldResult fieldDesc) 
+    {
         string nameField = 'Name';
         Map<String, Schema.SObjectField> mapRelatedObjectFields = fieldDesc.getReferenceTo()[0].getDescribe().fields.getMap();
-
+        
         //if Name isn't the correct name field, find it
         if (!mapRelatedObjectFields.containsKey(nameField)) {
             nameField = null;
@@ -602,11 +656,11 @@ Public Class LeadDuplicate_AC
             }
         }
         return nameField;
-     }
+    }
     
     // Wrapper class for displaying selected records for merge with radio button.
-      public class FieldRow {
-      
+    public class FieldRow {
+        
         public String fieldLabel {get; private set;}
         public String fieldName {get; private set;} 
         public boolean showRadio {get; private set;}
@@ -627,8 +681,8 @@ Public Class LeadDuplicate_AC
     }
     
     // Wrapper class for maintaining 
-      public class Cell {
-       
+    public class Cell {
+        
         public String objId {get; private set;} 
         public String value {get; private set;}
         public Cell(String objectId, String value) {
@@ -637,7 +691,7 @@ Public Class LeadDuplicate_AC
         }
     }
     
-      private void addFieldComparisonRows(String fieldName, Schema.DescribeFieldResult fieldDesc, List<SObject> objs) {
+    private void addFieldComparisonRows(String fieldName, Schema.DescribeFieldResult fieldDesc, List<SObject> objs) {
         // Create a new FieldRow item
         FieldRow row = new FieldRow();
         row.fieldName = fieldName;
@@ -683,21 +737,21 @@ Public Class LeadDuplicate_AC
                 String current = String.valueOf(c.get(fieldName));
                 if ((prev != null && !prev.equals(current)) || 
                     (current != null && !current.equals(prev))) {
-                    isDifferent = true;
-                }
+                        isDifferent = true;
+                    }
                 prev = current;
             }
             
             // Select the default value for the field. A non-null value on the latest modified record 
             if (c.get(fieldName) != null && (lastModifiedDate == null || 
-                (lastModifiedDate != null && (DateTime)c.get('lastModifiedDate') > lastModifiedDate))) {
-                row.selectedValue = c.id;
-                lastModifiedDate = (DateTime)c.get('lastModifiedDate');
-            }
+                                             (lastModifiedDate != null && (DateTime)c.get('lastModifiedDate') > lastModifiedDate))) {
+                                                 row.selectedValue = c.id;
+                                                 lastModifiedDate = (DateTime)c.get('lastModifiedDate');
+                                             }
             
             idx++;
         }
-
+        
         // If atleast one record has a non-null field value, then add it to the list of fieldRows.
         if (!isNull) {
             for (Integer i=0; i < values.size(); i++) {
@@ -714,20 +768,20 @@ Public Class LeadDuplicate_AC
         }
     }
     
-   /* private boolean isNPSPHiddenField(string strField) {
-        list<string> listStrField = new list<string>{
-            'npe01__SystemAccountProcessor__c',
-            'npo02__SystemHouseholdProcessor__c',
-            'npe01__SystemIsIndividual__c',
-            'Current_Address__c'
-        };
+    /* private boolean isNPSPHiddenField(string strField) {
+list<string> listStrField = new list<string>{
+'npe01__SystemAccountProcessor__c',
+'npo02__SystemHouseholdProcessor__c',
+'npe01__SystemIsIndividual__c',
+'Current_Address__c'
+};
 
-        for (string strF : listStrField) {
-           if (strField.equalsIgnoreCase(strF))
-               return true;
-        }
-        return false;
-    }*/
+for (string strF : listStrField) {
+if (strField.equalsIgnoreCase(strF))
+return true;
+}
+return false;
+}*/
     
     public PageReference mergeContacts() {
         SObject master;
@@ -769,9 +823,18 @@ Public Class LeadDuplicate_AC
                     losers.add(c);
                 }   
             }
-        
+            
+            List<Lead_File__c> leadFileList = new List<Lead_File__c>();
+            for(Lead_File__c currRec : [SELECT Id,Parent__c FROM Lead_File__c WHERE Parent__c =:losers[0].Id]){
+                currRec.Parent__c = master.id;
+                leadFileList.add(currRec);
+            }
+            if(leadFileList.Size() > 0){
+                Update leadFileList;
+            }
             // before proceeding further first lock the records for change
             List<Lead> allContacts = new List<Lead>();
+            
             allContacts.add((lead)master);
             allContacts.addAll(losers);
             List<lead> lock = [Select id from lead where id IN :allContacts for update];
@@ -785,7 +848,7 @@ Public Class LeadDuplicate_AC
             try {
                 Database.DMLOptions dml = new Database.DMLOptions();
                 dml.DuplicateRuleHeader.AllowSave = true;
-              
+                
                 Database.SaveResult sr = Database.update(master, dml);
                 if (!sr.isSuccess()) {
                     string strErr = label.npe01.Contact_Merge_Error_Merge_Failed + ' Error: ';
@@ -802,38 +865,39 @@ Public Class LeadDuplicate_AC
                 Lead currLead = [SELECT id,FirstName,Name, LastName, Email, Phone, City, DOB__c,State, PostalCode,Street,
                                  ChapterName__r.name,ChapterName__c FROM  Lead WHERE Id = :master.id limit 1];
                 // Checking duplicates again.
-             System.debug('currLead++++++++++++++++++++++++= ' + currLead);     
-             List<Lead>   duplicateLeadList = [SELECT id, FirstName,Name, LastName, Email, Phone, City, DOB__c,State, PostalCode,
-                                              ChapterName__r.name,ChapterName__c  FROM Lead
-                                              WHERE ((LastName = :currLead.LastName AND FirstName = :currLead.FirstName) OR
-                                              (LastName = :currLead.LastName AND ((State = :currLead.State AND City = :currLead.City AND Street = :currLead.Street
-                                              AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) 
-                                              OR (FirstName = :currLead.FirstName
-                                              AND ((State = :currLead.State AND City = :currLead.City AND Street = :currLead.Street
-                                              AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND 
-                                              ((State = :currLead.State AND City = :currLead.City AND Street = :currLead.Street
-                                              AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND
-                                              (LastName = :currLead.LastName OR FirstName = :currLead.FirstName))) AND Id != :currLead.Id AND isConverted = false
-                                              AND ChapterName__c =:currLead.ChapterName__c];
+                System.debug('currLead++++++++++++++++++++++++= ' + currLead);     
+                List<Lead>   duplicateLeadList = [SELECT id, FirstName,Name, LastName, Email, Phone, City, DOB__c,State, PostalCode,
+                                                  ChapterName__r.name,ChapterName__c  FROM Lead
+                                                  WHERE ((LastName = :currLead.LastName AND FirstName = :currLead.FirstName) OR
+                                                         (LastName = :currLead.LastName AND ((State = :currLead.State AND City = :currLead.City AND Street = :currLead.Street
+                                                                                              AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) 
+                                                         OR (FirstName = :currLead.FirstName
+                                                             AND ((State = :currLead.State AND City = :currLead.City AND Street = :currLead.Street
+                                                                   AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND 
+                                                                                                                                                                       ((State = :currLead.State AND City = :currLead.City AND Street = :currLead.Street
+                                                                                                                                                                         AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND
+                                                                                                                                                                                                                                                                             (LastName = :currLead.LastName OR FirstName = :currLead.FirstName))) AND Id != :currLead.Id AND isConverted = false
+                                                  AND ChapterName__c =:currLead.ChapterName__c];
                 
-             System.debug('duplicateLeadList++++++++++++++++++++++++= ' + duplicateLeadList);        
+                System.debug('duplicateLeadList++++++++++++++++++++++++= ' + duplicateLeadList);        
                 
-             if(duplicateLeadList.size() > 0)
-              {
-                displayLeadDupPopup = true;
-              }
-              else
-              {
-                   Lead updateLead = new Lead();
-                   updateLead.id = masterLeadId;
-                   updateLead.Dup_Check__c = 'Block Lead Dup';
-                   update updateLead;
-                   return new PageReference('/' + updateLead.id); 
-                 
-              }   
+                if(duplicateLeadList.size() > 0)
+                {
+                    displayLeadDupPopup = true;
+                }
+                else
+                {
+                    Lead updateLead = new Lead();
+                    updateLead.id = masterLeadId;
+                    updateLead.Dup_Check__c = 'Block Lead Dup';
+                    update updateLead;                               
+                    
+                    return new PageReference('/' + updateLead.id); 
+                    
+                }   
                 
                 // Update the master with the selected values
-               
+                
             } catch (Exception e) {
                 Database.rollback(sp);
                 ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, label.npe01.Contact_Merge_Error_Merge_Failed + ' Error: ' + e));
@@ -845,24 +909,24 @@ Public Class LeadDuplicate_AC
         return null;
     }
     
-     public List<Schema.FieldSetMember> getMergeFields() {
+    public List<Schema.FieldSetMember> getMergeFields() {
         return SObjectType.Lead.FieldSets.Merge_Fields.getFields();
     }
     
     
-   Public PageReference isYes()
-   {
-      PageReference pr = new PageReference('/apex/LeadDuplicate_VF?id='+masterLeadId);
-      pr.setRedirect(true); 
-      return pr;
-   }
-   
-   Public PageReference isNo()
-   {
-       Lead updateLead = new Lead();
-       updateLead.id = masterLeadId;
-       updateLead.Dup_Check__c = 'Block Lead Dup';
-       update updateLead;
-       return new PageReference('/' + updateLead.id);   
-   }
+    Public PageReference isYes()
+    {
+        PageReference pr = new PageReference('/apex/LeadDuplicate_VF?id='+masterLeadId);
+        pr.setRedirect(true); 
+        return pr;
+    }
+    
+    Public PageReference isNo()
+    {
+        Lead updateLead = new Lead();
+        updateLead.id = masterLeadId;
+        updateLead.Dup_Check__c = 'Block Lead Dup';
+        update updateLead;
+        return new PageReference('/' + updateLead.id);   
+    }
 }

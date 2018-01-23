@@ -57,9 +57,65 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
             system.debug('%BeforeInsert MailingCountry 2%'+newContact.MailingState);
         }
     }
-    // Birthdate concatenation at before update.
-    if(Trigger.isBefore && Trigger.isUpdate)
+    
+       
+    
+    // Affiliation Status update whenever Application status is changed.
+    // creating task for volunteer manager whenever zipcode has been changed.
+    // Whenever volunteer role has been changed on volunteer role field, volunteer rold record has created/deleted based on that.
+    // This after update trigger is used to update the wish child contact's recipient name and email if it is changed in related contact
+    
+    if(Trigger.isAfter && Trigger.isInsert)
     {
+        List<Contact> conList = new List<Contact>();
+        Map<Id,Contact> contactAccountIdMap = new Map<Id,Contact>();
+        Map<String,List<Contact>> contactMapforSharing = new Map<String,List<Contact>>();
+        
+        for(Contact conCurrRec: [SELECT Id,OwnerId,migrated_record__c, AccountId,RecordTypeId,Region_Chapter__c,Hidden_Hospital_Account__c, 
+                                 Region_Chapter__r.Name,MailingState FROM Contact WHERE Id IN :Trigger.newMap.keySet()])
+        {
+            
+            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
+            {
+                
+                conList.Add(conCurrRec);
+            }
+            
+            if(conCurrRec.Region_Chapter__c!= Null && conCurrRec.Region_Chapter__r.Name != 'Make-A-Wish America')
+            {   system.debug('currentContact------>'+conCurrRec);
+                if(contactMapforSharing.containsKey(conCurrRec.Region_Chapter__r.Name))
+                    contactMapforSharing.get(conCurrRec.Region_Chapter__r.Name).add(conCurrRec);
+                else
+                    contactMapforSharing.put(conCurrRec.Region_Chapter__r.Name, new List<contact>{conCurrRec});
+                
+            }
+            system.debug('%BeforeInsert MailingCountry 5%'+conCurrRec.MailingState);
+            
+        }
+        
+        if(contactMapforSharing.size() > 0){
+            system.debug('contactMapforSharing ----->'+ contactMapforSharing);
+             ChapterStaffRecordSharing_AC.ContactSharing(contactMapforSharing);
+        }
+       
+        
+        if(conList.size() > 0){
+            ContactTriggerHandler.CreateAffliation(conList);
+        }
+        
+    }
+    
+    if((trigger.isBefore && trigger.isUpdate && RecursiveTriggerHandler.blockBeforeUpdate == true) || (trigger.isAfter && trigger.isUpdate && RecursiveTriggerHandler.blockAfterUpdate)){
+     return; 
+     system.debug('@@@ NOT EXECUTE @@@'+RecursiveTriggerHandler.blockBeforeUpdate);
+     system.debug('@@@ NOT EXECUTE @@@'+RecursiveTriggerHandler.blockAfterUpdate);
+    }
+    
+    // Birthdate concatenation at before update.
+    if(Trigger.isBefore && Trigger.isUpdate && RecursiveTriggerHandler.blockBeforeUpdate == false)
+    {
+        system.debug('@@@ EXECUTE @@@'+RecursiveTriggerHandler.blockBeforeUpdate);
+        system.debug('@@@ EXECUTE @@@'+RecursiveTriggerHandler.blockAfterUpdate);
         Set<Id> wishChildIdSet = new Set<Id>();
         Map<Id,Contact> wishFamilyMap = new Map<Id,Contact>();
         Set<Id> wishFamliySet = new Set<Id>();
@@ -69,14 +125,11 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         Set<Id> icdCodeInfoIdSet = new Set<Id>();
         Map<Id, Set<Integer>> icdInfoMap = new Map<Id, Set<Integer>>();
         List<Contact> conICDList = new List<Contact>();
+        String dummyValue = Label.Dummy_Email;
+
         for(Contact newContact : Trigger.new)
         { 
-            
-            system.debug('%BeforeInsert MailingCountry 3%'+newContact.MailingState);
-            //newContact.MailingCountry = 'United States';
-            //newContact.OtherCountry = 'United States';
-            
-            
+         
             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {
                 if(newContact.SD1_ICD_Code__c != Trigger.oldMap.get(newContact.Id).SD1_ICD_Code__c && newContact.SD1_ICD_Code__c != null) {
@@ -174,6 +227,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                         newContact.IsContactInfoUpdated__c = false;
                     }
                     else{
+                       
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     }
@@ -184,21 +238,23 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                         newContact.IsContactInfoUpdated__c = false;
                     }
                     else{
+                       
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     }
-                    if(newContact.Hidden_Phone__c != Null){
+                    if(newContact.Hidden_Phone__c != Null && newContact.Hidden_Phone__c != '9912121313' ){
                         newContact.Phone =   newContact.Hidden_Phone__c; 
                         newContact.Hidden_Phone__c = Null;
                         newContact.IsContactInfoUpdated__c = false;
-                        
-                        
                     }
                     else{
+                        if(newContact.Hidden_Phone__c == '9912121313'){
+                            newContact.Phone = null; 
+                        }
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     }
-                    if(newContact.HiddenOtherPhone__c!= Null){
+                    if(newContact.HiddenOtherPhone__c!= Null && newContact.HiddenOtherPhone__c!= '9912121313' ){
                         newContact.OtherPhone =   newContact.HiddenOtherPhone__c; 
                         newContact.HiddenOtherPhone__c = Null;
                         newContact.IsContactInfoUpdated__c = false;
@@ -206,77 +262,107 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                         
                     }
                     else{
+                        if(newContact.HiddenOtherPhone__c == '9912121313'){
+                            newContact.OtherPhone = null;
+                        }
+                        
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     }
-                    if(newContact.HiddenMobilePhone__c!= Null){
+                    if(newContact.HiddenMobilePhone__c!= Null && newContact.HiddenMobilePhone__c != '9912121313'){
                         newContact.MobilePhone =   newContact.HiddenMobilePhone__c; 
                         newContact.HiddenMobilePhone__c= Null;
                         newContact.IsContactInfoUpdated__c = false;
-                        
-                        
                     }
                     else{
+                        
+                        if(newContact.HiddenMobilePhone__c == '9912121313'){
+                            newContact.MobilePhone = null;
+                        }
+                        
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     }
-                    if(newContact.Hidden_Email__c != Null){
+                    if(newContact.Hidden_Email__c != Null && newContact.Hidden_Email__c != dummyValue){
                         newContact.Email  =   newContact.Hidden_Email__c;
                         newContact.Hidden_Email__c = Null;
                         newContact.IsContactInfoUpdated__c = false;
                         
                     }
                     else{
+                        
+                        if(newContact.Hidden_Email__c == dummyValue){
+                            newContact.Email  = null;
+                        }
+                        
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     } 
-                    if(newContact.Hidden_Street__c != Null){
+                    if(newContact.Hidden_Street__c != Null && newContact.Hidden_Street__c != dummyValue){
                         newContact.MailingStreet =   newContact.Hidden_Street__c; 
                         newContact.Hidden_Street__c = Null;
                         newContact.IsContactInfoUpdated__c = false;
                         
                     }
                     else{
+                        if(newContact.Hidden_Street__c == dummyValue){
+                            newContact.MailingStreet = null; 
+                        }
+                        
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     }
-                    if(newContact.Hidden_city__c != Null){
+                    if(newContact.Hidden_city__c != Null && newContact.Hidden_city__c != dummyValue){
                         newContact.MailingCity =   newContact.Hidden_city__c;
                         newContact.Hidden_city__c = Null;
                         newContact.IsContactInfoUpdated__c = false;
                         
                     }
                     else{
+                        
+                        if(newContact.Hidden_city__c == dummyValue){
+                            newContact.MailingCity =  null; 
+                        }
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     }
-                    if(newContact.Hidden_State__c != Null){
+                    if(newContact.Hidden_State__c != Null && newContact.Hidden_State__c != dummyValue){
                         newContact.MailingState =   newContact.Hidden_State__c; 
                         newContact.Hidden_State__c = Null;
                         newContact.IsContactInfoUpdated__c = false;
                         
                     }
                     else{
+                        
+                        if(newContact.Hidden_State__c == dummyValue){
+                            newContact.MailingState = null;
+                        }
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     }
-                    if(newContact.Hidden_Country__c != Null){
+                    if(newContact.Hidden_Country__c != Null && newContact.Hidden_Country__c != dummyValue){
                         newContact.MailingCountry =   newContact.Hidden_Country__c;
                         newContact.Hidden_Country__c  = Null;
                         newContact.IsContactInfoUpdated__c = false;
                         
                     }
                     else{
+                        if(newContact.Hidden_Country__c == dummyValue){
+                            newContact.MailingCountry = null;
+                        }
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     }
-                    if(newContact.Hidden_Zip_Code__c != Null){
+                    if(newContact.Hidden_Zip_Code__c != Null && newContact.Hidden_Zip_Code__c != '11111'){
                         newContact.MailingPostalCode =   newContact.Hidden_Zip_Code__c; 
                         newContact.Hidden_Zip_Code__c = Null;
                         newContact.IsContactInfoUpdated__c = false;
                         
                     }
                     else{
+                        if(newContact.Hidden_Zip_Code__c == '11111'){
+                            newContact.MailingPostalCode =  null;
+                        }
                         wishChildIdSet.add(newContact.Id);
                         newContact.IsContactInfoUpdated__c = false;
                     }
@@ -314,11 +400,13 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         if(wishChildIdSet.size() > 0 && RecursiveTriggerHandler.accountRecursive == true)
         {
             RecursiveTriggerHandler.accountRecursive = false;
-            for(npe4__Relationship__c dbRelationShip : [SELECT Id,npe4__Contact__c,npe4__RelatedContact__c FROM npe4__Relationship__c WHERE npe4__Contact__c IN: wishChildIdSet AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId]){
-                wishFamliySet.add(dbRelationShip.npe4__RelatedContact__c);  
-                
+            if(wishChildIdSet.size() > 0){
+                for(npe4__Relationship__c dbRelationShip : [SELECT Id,npe4__Contact__c,npe4__RelatedContact__c FROM npe4__Relationship__c WHERE npe4__Contact__c IN: wishChildIdSet AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId]){
+                    wishFamliySet.add(dbRelationShip.npe4__RelatedContact__c);  
+                    
+                }
             }
-            
+            if(wishFamliySet.size() > 0){
             for(Contact dbWishFamily : [SELECT Id,Name,FirstName,LastName,Phone,Email,MailingStreet,MailingCity,AccountId,Account.npe01__SYSTEM_AccountType__c,Hidden_Use_as_Household_Address__c,Use_as_Household_Address__c,MailingState,MailingCountry,MailingPostalCode,Hidden_First_Name__c,
                                         Hidden_Last_Name__c,Hidden_Street__c,Hidden_Phone__c ,Hidden_Email__c,Hidden_city__c,
                                         Hidden_State__c,Hidden_Country__c,Hidden_Zip_Code__c,Same_as_Household_Address__c,Hidden_Same_Address__c,OtherPhone,MobilePhone,HiddenMobilePhone__c,HiddenOtherPhone__c From Contact WHERE Id IN: wishFamliySet])
@@ -341,14 +429,20 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                     dbWishFamily.Hidden_First_Name__c = Null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
+                
                 if(dbWishFamily.Hidden_Last_Name__c != Null){
                     dbWishFamily.LastName  =  dbWishFamily.Hidden_Last_Name__c;
                     dbWishFamily.Hidden_Last_Name__c = Null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
+                
                 if(dbWishFamily.Hidden_Phone__c != Null){
                     dbWishFamily.Phone =   dbWishFamily.Hidden_Phone__c; 
                     dbWishFamily.Hidden_Phone__c = Null;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
+                if(dbWishFamily.Hidden_Phone__c == '9912121313'){
+                    dbWishFamily.Phone =  null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
                 if(dbWishFamily.HiddenMobilePhone__c != Null){
@@ -356,14 +450,26 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                     dbWishFamily.HiddenMobilePhone__c = Null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
+                if(dbWishFamily.HiddenMobilePhone__c == '9912121313'){
+                    dbWishFamily.MobilePhone=  null;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
                 if(dbWishFamily.HiddenOtherPhone__c != Null){
                     dbWishFamily.otherPhone =   dbWishFamily.HiddenOtherPhone__c; 
                     dbWishFamily.HiddenOtherPhone__c = Null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
+                if(dbWishFamily.HiddenOtherPhone__c == '9912121313'){
+                    dbWishFamily.otherPhone =  null;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
                 if(dbWishFamily.Hidden_Email__c != Null){
                     dbWishFamily.Email  =   dbWishFamily.Hidden_Email__c;
                     dbWishFamily.Hidden_Email__c = Null;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
+                if(dbWishFamily.Hidden_Email__c == dummyValue){
+                    dbWishFamily.Email =  null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
                 if(dbWishFamily.Hidden_Street__c != Null){
@@ -372,16 +478,29 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                     dbWishFamily.Hidden_Street__c = Null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
+                if(dbWishFamily.Hidden_Street__c == dummyValue){
+                    dbWishFamily.MailingStreet =  null;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
                 if(dbWishFamily.Hidden_city__c != Null){
                     
                     dbWishFamily.MailingCity =   dbWishFamily.Hidden_city__c;
                     dbWishFamily.Hidden_city__c = Null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
+                if(dbWishFamily.Hidden_city__c == dummyValue){
+                    dbWishFamily.MailingCity =  null;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
                 if(dbWishFamily.Hidden_State__c != Null){
                     
                     dbWishFamily.MailingState =   dbWishFamily.Hidden_State__c; 
                     dbWishFamily.Hidden_State__c = Null;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                    system.debug('@@@@@ dbWishFamily.MailingState @@@@@@'+ dbWishFamily.MailingState);
+                }
+                if(dbWishFamily.Hidden_State__c == dummyValue){
+                    dbWishFamily.MailingState =  null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
                 if(dbWishFamily.Hidden_Country__c != Null ){
@@ -390,10 +509,19 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                     dbWishFamily.Hidden_Country__c  = Null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
+                
+                if(dbWishFamily.Hidden_Country__c == dummyValue){
+                    dbWishFamily.MailingCountry =  'United States';
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
                 if(dbWishFamily.Hidden_Zip_Code__c != Null){
                     
                     dbWishFamily.MailingPostalCode =   dbWishFamily.Hidden_Zip_Code__c; 
                     dbWishFamily.Hidden_Zip_Code__c = Null;
+                    wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
+                }
+                if(dbWishFamily.Hidden_Zip_Code__c == '11111'){
+                    dbWishFamily.MailingPostalCode =  null;
                     wishFamilyMap.put(dbWishFamily.Id,dbWishFamily);
                 }
                 
@@ -424,7 +552,7 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 }
                 
             }
-            
+            }
             
             if(wishFamilyMap.size() > 0)
                 update wishFamilyMap.Values();
@@ -433,8 +561,6 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
                 update houseHoldAccountMap.Values();
             
         }
-        
-        
         
         if(recallWishChild.size() > 0)
         {
@@ -478,70 +604,15 @@ trigger ContactTrigger_AT on Contact(Before Insert, after insert, Before Update,
         
     }
     
-    
-    
-    // Affiliation Status update whenever Application status is changed.
-    // creating task for volunteer manager whenever zipcode has been changed.
-    // Whenever volunteer role has been changed on volunteer role field, volunteer rold record has created/deleted based on that.
-    // This after update trigger is used to update the wish child contact's recipient name and email if it is changed in related contact
-    
-    if(Trigger.isAfter && Trigger.isInsert)
-    {
-        List<Contact> conList = new List<Contact>();
-        Map<Id,Contact> contactAccountIdMap = new Map<Id,Contact>();
-        Map<String,List<Contact>> contactMapforSharing = new Map<String,List<Contact>>();
-        
-        for(Contact conCurrRec: [SELECT Id,migrated_record__c, AccountId,RecordTypeId,Region_Chapter__c, 
-                                 Region_Chapter__r.Name,MailingState FROM Contact WHERE Id IN :Trigger.newMap.keySet()])
-        {
-            
-            if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
-            {
-                /* if(conCurrRec.RecordTypeId == volunteerRecordTypeId || conCurrRec.RecordTypeId == boardMemberRT)
-{
-contactAccountIdMap.put(conCurrRec.id,conCurrRec);
-}
-else
-{
-// if(RecursiveTriggerHandler.isFirstTime == true ) 
-conList.Add(conCurrRec);
-} */
-                conList.Add(conCurrRec);
-            }
-            
-            if(conCurrRec.Region_Chapter__c!= Null)
-            {
-                if(contactMapforSharing.containsKey(conCurrRec.Region_Chapter__r.Name))
-                    contactMapforSharing.get(conCurrRec.Region_Chapter__r.Name).add(conCurrRec);
-                else
-                    contactMapforSharing.put(conCurrRec.Region_Chapter__r.Name, new List<contact>{conCurrRec});
-                
-            }
-            system.debug('%BeforeInsert MailingCountry 5%'+conCurrRec.MailingState);
-            
-        }
-        
-        //if(contactMapforSharing.size() > 0)
-        //ChapterStaffRecordSharing_AC.ContactSharing(contactMapforSharing);
-        
-        if(conList.size() > 0){
-           ContactTriggerHandler.CreateAffliation(conList);
-        }
-        /*  if(contactAccountIdMap.size() > 0){
-ContactTriggerHandler.updateAffiliation(contactAccountIdMap);
-}*/
-        
-        
-        
-    }
-    
-    if(Trigger.isAfter && Trigger.isupdate)
-    {
+ 
+      if(Trigger.isAfter && Trigger.isupdate && RecursiveTriggerHandler.blockAfterUpdate == false)
+      {
         system.debug('************ Inside after update');
         set<Id> volunteercontactSet = new Set<Id>();
         Map<Id,Contact> volunteerContactMap = new Map<Id,Contact>();
         Set<Id> rejectedApplicationIds = new Set<Id>();
         Map<Id,Contact> updateEmailContactMap = new Map<Id,Contact>();
+        Map<String,List<Contact>> contactMapforSharing = new Map<String,List<Contact>>();
         //list<Contact> updateEmailContact = new list<Contact>();
         Set<String> zipCodesSet = new Set<String>();
         Map<Id,Contact> contactMap = new Map<Id, Contact>();
@@ -566,15 +637,11 @@ ContactTriggerHandler.updateAffiliation(contactAccountIdMap);
             
             if(newContact.Diagnosis__c != Trigger.oldMap.get(newContact.Id).Diagnosis__c || newContact.FirstName != Trigger.oldMap.get(newContact.Id).FirstName || newContact.LastName != Trigger.oldMap.get(newContact.Id).LastName || newContact.Preferred_Name__c != Trigger.oldMap.get(newContact.Id).Preferred_Name__c || newContact.Middle_Name__c != Trigger.oldMap.get(newContact.Id).Middle_Name__c || newContact.Gender__c != Trigger.oldMap.get(newContact.Id).Gender__c || newContact.Birthdate != Trigger.oldMap.get(newContact.Id).Birthdate
                || newContact.MobilePhone != Trigger.oldMap.get(newContact.Id).MobilePhone || newContact.npe01__HomeEmail__c != Trigger.oldMap.get(newContact.Id).npe01__HomeEmail__c || newContact.mailingstreet != Trigger.oldMap.get(newContact.Id).mailingstreet || newContact.mailingcity != Trigger.oldMap.get(newContact.Id).mailingcity || newContact.mailingstate != Trigger.oldMap.get(newContact.Id).mailingstate || newContact.mailingpostalcode != Trigger.oldMap.get(newContact.Id).mailingpostalcode || newContact.mailingcountry != Trigger.oldMap.get(newContact.Id).mailingcountry) {
-                primaryDiagnosisChangesMap.put(newContact.Id, newContact);
-            }
+                   System.debug('Sample>>>>>>>>>>');
+                   primaryDiagnosisChangesMap.put(newContact.Id, newContact);
+               }
             
-            /* if(newContact.recordTypeId == wichChildRecordTypeId && trigger.oldMap.get(newContact.Id).recordTypeId == familyContactRecordTypeId ){
-contactIdSet.add(newContact.Id);
-}*/
-            /*  if(newContact.Wish_Child_Photo__c != Null && trigger.oldmap.get(newContact.id).Wish_Child_Photo__c != newContact.Wish_Child_Photo__c){
-wishChilPhotoMap.put(newContact.id, newContact);
-}*/
+            
             if(newContact.is_Application__c == 'Complete' && newContact.is_Application__c != trigger.oldmap.get(newContact.id).is_Application__c){
                 volunteercontactSet.add(newContact.Id);
                 
@@ -585,9 +652,9 @@ wishChilPhotoMap.put(newContact.id, newContact);
             }
             
             if((newContact.Diagnosis__c != Trigger.oldMap.get(newContact.Id).Diagnosis__c || newContact.SD1_Condition_Description__c != Trigger.oldMap.get(newContact.Id).SD1_Condition_Description__c || newContact.SD2_Condition_Description__c != Trigger.oldMap.get(newContact.Id).SD2_Condition_Description__c
-              || newContact.SD3_Condition_Description__c != Trigger.oldMap.get(newContact.Id).SD3_Condition_Description__c || newContact.SD4_Condition_Description__c != Trigger.oldMap.get(newContact.Id).SD4_Condition_Description__c) && (newContact.RecordTypeId == wichChildRecordTypeId)) {
-                  diagnosisConMap.put(newContact.Id, newContact);
-            }
+                || newContact.SD3_Condition_Description__c != Trigger.oldMap.get(newContact.Id).SD3_Condition_Description__c || newContact.SD4_Condition_Description__c != Trigger.oldMap.get(newContact.Id).SD4_Condition_Description__c) && (newContact.RecordTypeId == wichChildRecordTypeId)) {
+                    diagnosisConMap.put(newContact.Id, newContact);
+                }
             if(newContact.recordTypeId == MedicalProfContactRecordTypeId  &&(newContact.Name != trigger.oldMap.get(newContact.Id).Name||
                                                                              newContact.Email!= trigger.oldMap.get(newContact.Id).Email)){
                                                                                  
@@ -634,6 +701,26 @@ wishChilPhotoMap.put(newContact.id, newContact);
             }
             
             system.debug('%BeforeInsert MailingCountry 6%'+newContact.MailingState);
+            //If record owner changed based on the chapter name in the contact we shared the record to the user - STT-10   
+               
+            
+        }
+        
+           for(Contact conCurrRec: [SELECT Id,OwnerId,migrated_record__c, AccountId,RecordTypeId,owner.UserRole.Name,Region_Chapter__c,Hidden_Hospital_Account__c, 
+                                     Region_Chapter__r.Name,MailingState FROM Contact WHERE Id IN :Trigger.newMap.keySet() AND owner.UserRole.Name = 'National Staff']){
+                                         
+                                         if(conCurrRec.OwnerId != trigger.oldMap.get(conCurrRec.id).OwnerId && conCurrRec.Region_Chapter__c != Null && conCurrRec.Region_Chapter__r.Name != 'Make-A-Wish America'){
+                                             
+                                             if(contactMapforSharing.containsKey(conCurrRec.Region_Chapter__r.Name))
+                                                 contactMapforSharing.get(conCurrRec.Region_Chapter__r.Name).add(conCurrRec);
+                                             else
+                                                 contactMapforSharing.put(conCurrRec.Region_Chapter__r.Name, new List<contact>{conCurrRec});
+                                         }
+                                         
+                                     } 
+        
+        if(contactMapforSharing.size() > 0){
+            ChapterStaffRecordSharing_AC.ContactSharing(contactMapforSharing);
         }
         
         

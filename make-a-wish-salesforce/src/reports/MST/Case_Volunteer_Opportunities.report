@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Opportunity__c.Status__c</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Opportunity__c.Hidden_Chapter_Role_Name__c</field>
+    </columns>
+    <columns>
+        <field>FK_CASE_STATUS</field>
+    </columns>
+    <columns>
+        <field>Volunteer_Opportunity__c.Volunteer_Name__c</field>
+    </columns>
+    <columns>
+        <field>FK_$Case.Case_Member_Count__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>FK_CASE_STATUS</column>
+            <operator>equals</operator>
+            <value>Ready to Assign</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>FK_NAME</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Case Volunteer Opportunities</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$Volunteer_Opportunity__c@Volunteer_Opportunity__c.Wish__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Volunteer_Opportunity__c.NWE_Date__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

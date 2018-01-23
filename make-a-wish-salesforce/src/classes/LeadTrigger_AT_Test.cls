@@ -45,6 +45,7 @@ public class LeadTrigger_AT_Test{
         newLead.Status = 'Qualified';
         Test.startTest();
         update newLead;
+        RecursiveTriggerHandler.isFirstTime = false; 
         Test.stopTest();
         
         System.assertEquals(newLead.Status,'Qualified');
@@ -83,6 +84,7 @@ public class LeadTrigger_AT_Test{
         
         Test.startTest();
         update newLead;
+         RecursiveTriggerHandler.isFirstTime = false; 
         Test.stopTest();
         System.assertEquals(newLead.Status,'Qualified');
         System.assertEquals(medicalProfessionalCon.Id,newLead.Medical_Professional_ContactId__c);
@@ -90,41 +92,33 @@ public class LeadTrigger_AT_Test{
     
     /*This method is used to increase the code coverage for dupecheckonContact method when the lead status is updated as 'Qualified'. */ 
     public testmethod static void CreateRelationShipRecord(){ 
-        RecursiveTriggerHandler.isFirstTime = true;
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
-        // Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
-        //       Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();
-        //Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
-        //Contact trateProfContact = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
-        //Contact medicalProfContact = OrientationandTrainingUtil.CreateMedicalProfContact();
-        //Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
         newLead.Child_Age__c = '4';
         newLead.unique_wish_identifier__c = '123456';
-        
         newLead.Relationship_to_child__c = 'Medical Professional';
-        
         newLead.Sibling_Detail__c = '- | bbb | 12';
-        //newLead.Sub_Status__c ='Pending Diagnosis Verification';
-        
         insert newLead;
-        RecursiveTriggerHandler.isFirstTime = true; 
-        newLead.Sub_Status__c = 'Pending Diagnosis Verification';
-        update newLead;
-        
-        
-        dsfs__DocuSign_Status__c dsfs = OrientationandTrainingUtil.createDocusignStatus(newLead.Id); 
-        Case partAWish = OrientationandTrainingUtil.CreatePartAWish(newLead.Id);
-        newLead.Status = 'Qualified';
-        Test.StartTest();
-        update newLead;
-        Test.StopTest();
-        
-        
-        
-        
+        Lead updatePending = new Lead();
+        updatePending.Id = newLead.Id;
+        updatePending.Sub_Status__c = 'Pending Diagnosis Verification';
+        update updatePending;
+       
     }
     
+    //Used to conver the lead
+    public static void convertLead() {
+        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
+        newLead.Child_Age__c = '4';
+        newLead.unique_wish_identifier__c = '123456';
+        newLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        newLead.Relationship_to_child__c = 'Medical Professional';
+        newLead.Sibling_Detail__c = '- | bbb | 12';
+        insert newLead;
+        Lead convertLead = new Lead(Id = newLead.Id, Status = 'Qualified');
+        update convertLead;
+    }
     /*This method is used to increase the code coverage for dupecheckonContact method when the lead status is updated as 'Qualified'. */ 
     public testmethod static void CreateRelationShipRecordwithExisitingContact(){ 
         RecursiveTriggerHandler.isFirstTime = true;
@@ -153,6 +147,7 @@ public class LeadTrigger_AT_Test{
         newLead.Status = 'Qualified';
         Test.StartTest();
         update newLead;
+         RecursiveTriggerHandler.isFirstTime = false; 
         Test.StopTest();
         
     }
@@ -182,6 +177,7 @@ public class LeadTrigger_AT_Test{
         newLead.Status = 'Qualified';
         Test.startTest();
         update newLead ;
+         RecursiveTriggerHandler.isFirstTime = false; 
         Test.stopTest();
         
         
@@ -220,6 +216,7 @@ public class LeadTrigger_AT_Test{
         newLead.Status = 'Qualified';
         Test.startTest();
         update newLead ;
+         RecursiveTriggerHandler.isFirstTime = false; 
         Test.stopTest();
         
         

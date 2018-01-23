@@ -55,6 +55,10 @@
         <fullName>LastLoginDate</fullName>
     </fields>
     <fields>
+        <fullName>Name</fullName>
+        <trackHistory>false</trackHistory>
+    </fields>
+    <fields>
         <fullName>Namespace</fullName>
     </fields>
     <fields>
@@ -80,9 +84,6 @@
     </fields>
     <fields>
         <fullName>SignupUsername</fullName>
-    </fields>
-    <fields>
-        <fullName>Template</fullName>
     </fields>
     <sharingModel>Private</sharingModel>
 </CustomObject>

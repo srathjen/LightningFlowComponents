@@ -168,10 +168,13 @@ public without sharing class AWSFilePath_AC{
         List<Id> fileParentIds=new List<Id>();
         List<Map<String,String>> requestParametersList = new  List<Map<String,String>>();
         
-        List<In_Kind_Donation_Reimbursement_File__c> drFiles = [Select Id, Parent__c, File_Name__c, File_Path__c from In_Kind_Donation_Reimbursement_File__c where In_Kind_Donation_Reimbursement_File__c.Content_Type__c !='Folder' and  In_Kind_Donation_Reimbursement_File__c.Id in: fileRecordIds];
+        //List<In_Kind_Donation_Reimbursement_File__c> drFiles = [Select Id, Parent__c, File_Name__c, File_Path__c from In_Kind_Donation_Reimbursement_File__c where In_Kind_Donation_Reimbursement_File__c.Content_Type__c !='Folder' and  In_Kind_Donation_Reimbursement_File__c.Id in: fileRecordIds];
+        
+        List<InkindDon_reimburseFile__c> drFiles = [Select Id, Parent__c, File_Name__c, File_Path__c from InkindDon_reimburseFile__c  where InkindDon_reimburseFile__c.Content_Type__c !='Folder' and  InkindDon_reimburseFile__c.Id in: fileRecordIds];
         
         if(drFiles.size() > 0){
-            for(In_Kind_Donation_Reimbursement_File__c dbdrFileRec : drFiles){
+           // for(In_Kind_Donation_Reimbursement_File__c dbdrFileRec : drFiles){
+           for(InkindDon_reimburseFile__c dbdrFileRec : drFiles){
                 fileParentIds.add(dbdrFileRec.Parent__c);
                 requestParametersList.add(new Map<String,String>{'response-content-disposition'=>'attachment;filename=' + dbdrFileRec.File_Name__c});
             }
@@ -190,7 +193,8 @@ public without sharing class AWSFilePath_AC{
                 System.debug('bcFilePaths>>>>'+drFilePaths);
         system.debug('S drive File Paths 1 : '+ drFilePaths);
         
-        for(In_Kind_Donation_Reimbursement_File__c drFileRec : drFiles){
+       // for(In_Kind_Donation_Reimbursement_File__c drFileRec : drFiles){
+       for(InkindDon_reimburseFile__c drFileRec : drFiles){
             for(String str : drFilePaths){
                 if(str.contains(drFileRec.Id)){
                     drFileRec.File_Path__c=str;
@@ -200,7 +204,8 @@ public without sharing class AWSFilePath_AC{
         system.debug('S drive File Paths 2 : '+ drFiles);
         update drFiles;
         system.debug('S drive File Paths 3 : '+ drFiles); 
-    }
+    } 
+    
     
     /*This method is used to create file path for the attachment that stored to SDrive from the Lead record.
 It will update the file path to lead file record that created during attachment upload*/
@@ -264,7 +269,7 @@ It will update the file path to lead file record that created during attachment 
                     reviewPhotosSet.add(getTask.WhatId);
                 }
             }
-        }
+      }
         List<Task> reviewTaskList = new List<Task>();
         for(cg__CaseFile__c createTask : caseFileList) {
             if(!reviewPhotosSet.contains(createTask.cg__Case__c) && !dupCheck.contains(createTask.cg__Case__c)) {

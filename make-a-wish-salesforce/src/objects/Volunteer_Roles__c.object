@@ -21,6 +21,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -54,6 +58,36 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <externalSharingModel>Read</externalSharingModel>
+    <fieldSets>
+        <fullName>Volunteer_Role_Field_Set</fullName>
+        <description>This has been used in the contact merge visual force page.</description>
+        <displayedFields>
+            <field>Chapter_Role__r.Role__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Status__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>isWishRole__c</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Volunteer_Name__r.LastName</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <displayedFields>
+            <field>Id</field>
+            <isFieldManaged>false</isFieldManaged>
+            <isRequired>false</isRequired>
+        </displayedFields>
+        <label>Volunteer Role Field Set</label>
+    </fieldSets>
     <fields>
         <fullName>Chapter_Name__c</fullName>
         <description>It store the chapter name.</description>
@@ -226,43 +260,41 @@
         <description>It will indicate the volunteer role that volunteer has completed the training for that chapter role or not.</description>
         <externalId>false</externalId>
         <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Trained</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Training</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chapter Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Former - Chapter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Former - Volunteer</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Out of Compliance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Trained</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Pending Training</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Chapter Review</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Former - Chapter</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Former - Volunteer</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Not Approved</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Out of Compliance</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Volunteer_Name__c</fullName>

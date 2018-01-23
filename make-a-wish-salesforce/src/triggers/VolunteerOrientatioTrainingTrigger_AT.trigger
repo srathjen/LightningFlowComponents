@@ -18,36 +18,24 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         List<Volunteer_Orientation_Training__c> volunteerOrientationTrainingList = new List<Volunteer_Orientation_Training__c>();
         for(Volunteer_Orientation_Training__c newVolInsert : Trigger.new)
         {
-            if(newVolInsert.Type__c=='Orientation')
+            if(newVolInsert.Type__c == 'Orientation' && newVolInsert.Volunteer_Attendance__c == 'Registered'){
                 contactId.add(newVolInsert.Volunteer__c);
+            }
+                
             if(newVolInsert.Type__c == 'Training' && newVolInsert.Volunteer_Attendance__c == 'Registered' ){
                 trainingRegisteredVolIdsSet.add(newVolInsert.Volunteer__c);
             }
-                       
         }
         
         if(trainingRegisteredVolIdsSet.size() > 0){
             VolunteerOandTTriggerHandler.updateVolunteerHiddenVolOTStatus(trainingRegisteredVolIdsSet, 'training');
         }
         
+        system.debug('contactId ----->'+ contactId);
         if(contactId.size() > 0){
             VolunteerOandTTriggerHandler.updateVolunteerHiddenVolOTStatus(contactId, 'Orientation');
+            VolunteerOandTTriggerHandler.updateUserVolunteerStatus(contactId, 'Registered');
         }
-        
-        //List<User> userQuery=[SELECT Id,Hidden_Volunteer_Cancelled__c FROM User where ContactId in:contactId and Profile.Name LIKE 'Prospective%' and Hidden_Volunteer_Cancelled__c=True];
-        for(User userupdate:[SELECT Id,Volunteer_Orientation_Status__c FROM User WHERE ContactId in:contactId and Profile.Name LIKE 'Prospective%' and Volunteer_Orientation_Status__c='Cancelled'])
-        {
-            User userUpdatebol=new User();
-            userUpdatebol.Volunteer_Orientation_Status__c='Registered';
-            // userUpdatebol.Hidden_Volunteer_Cancelled__c=False;
-            userUpdatebol.Id=userupdate.Id;
-            userUpdateList.add(userUpdatebol);
-        }
-        
-        if(userUpdateList.size() > 0){
-             update userUpdateList;
-        }
-       
     }
     
     if(trigger.isAfter && Trigger.isUpdate)
@@ -63,10 +51,10 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         List<Contact> updateContactList=new List<Contact>(); 
         Set<Id> completedContactSet=new Set<Id>();
         Set<Id> RegisteredVolunteer=new Set<Id>();
-        Set<Id> firstRegistration=new Set<Id>();
+        Set<Id> registeredVolunteerIds =new Set<Id>();
         Set<Id> notRegistered=new Set<Id>();
         List<Contact> contactCompletedUpdate=new List<Contact>();
-       
+        
         
         for(Volunteer_Orientation_Training__c newVOL : Trigger.new)
         {
@@ -76,55 +64,42 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
                 {
                     volnteerContactIdSet.add(newVOL.Volunteer__c);
                 }
-           }
+            }
             Volunteer_Orientation_Training__c oldVol = Trigger.oldMap.get(newVOL.Id);
             if(newVOL.Volunteer_Attendance__c == 'Completed' && newVol.Type__c == 'Orientation' && oldVol.Volunteer_Attendance__c!='Completed')
             {
                 completedContactSet.add(newVOL.Volunteer__c);
             }
-            else if(newVOL.Volunteer_Attendance__c == 'Registered' && newVol.Type__c == 'Orientation' && oldVol.Volunteer_Attendance__c!='Registered')
-            {
-                firstRegistration.add(newVOL.Volunteer__c);
+            if(newVOL.Volunteer_Attendance__c == 'Registered' && newVol.Type__c == 'Orientation' && oldVol.Volunteer_Attendance__c!='Registered')
+            {   system.debug('after update Registered'+ newVOL.Volunteer_Attendance__c);
+                registeredVolunteerIds.add(newVOL.Volunteer__c);
             }
-            system.debug('firstRegistration'+firstRegistration);
-        }
-        if(firstRegistration.size()>0)
-        {
-            for (AggregateResult ar : [SELECT Volunteer__c cntid, Count(id)cnt FROM Volunteer_Orientation_Training__c where Volunteer__c in:firstRegistration and Volunteer_Attendance__c!='Registered' GROUP BY Volunteer__c ])
-            {
-                notRegistered.add((Id)ar.get('cntid'));
+            
+            if(newVOL.Volunteer_Attendance__c=='Volunteer Cancelled' && newVOL.Type__c=='Orientation' && oldVol.Volunteer_Attendance__c!='Volunteer Cancelled')
+            {   system.debug('after update volunteer cancelled'+ newVOL.Volunteer_Attendance__c); 
+                cancelContactId.add(newVOL.Volunteer__c);
             }
-            system.debug('notreg'+notRegistered);
         }
-        for(Contact contactCompleted:[SELECT Id,Hidden_Volunteer_OT_Status__c FROM Contact WHERE Id in:completedContactSet])
-        {
-            Contact contactUpdate=new Contact();
-            contactUpdate.Id=contactCompleted.Id;
-            contactUpdate.Hidden_Volunteer_OT_Status__c='Orientation With Completed';
-            contactCompletedUpdate.add(contactUpdate);
+        
+        if(completedContactSet.size() > 0){
+            for(Contact contactCompleted:[SELECT Id,Hidden_Volunteer_OT_Status__c FROM Contact WHERE Id in:completedContactSet])
+            {
+                Contact contactUpdate=new Contact();
+                contactUpdate.Id=contactCompleted.Id;
+                contactUpdate.Hidden_Volunteer_OT_Status__c='Orientation With Completed';
+                contactCompletedUpdate.add(contactUpdate);
+            }
+        }
+        
+        
+        if(registeredVolunteerIds.size() > 0){
+            VolunteerOandTTriggerHandler.updateUserVolunteerStatus(registeredVolunteerIds, 'Registered');
         }
         
         If(volnteerContactIdSet.size() > 0){
             VolunteerOandTTriggerHandler.UpdateAffiliationStatusAsActive(volnteerContactIdSet);
         }
         
-        
-        for(Volunteer_Orientation_Training__c votcancel : Trigger.new)
-        { 
-            Volunteer_Orientation_Training__c oldVol = Trigger.oldMap.get(votcancel.Id);
-            system.debug('rectype'+votcancel.Class_Offering__r.Id);
-            if(votcancel.Volunteer_Attendance__c=='Volunteer Cancelled' && votcancel.Type__c=='Orientation' && oldVol.Volunteer_Attendance__c!='Volunteer Cancelled')
-            {
-                cancelContactId.add(votcancel.Volunteer__c);
-            }
-            else if(firstRegistration.contains(votcancel.Volunteer__c) && !notRegistered.contains(votcancel.Volunteer__c))
-            {
-                RegisteredVolunteer.add(votcancel.Volunteer__c);
-                
-            }
-            system.debug('RegisteredVolunteer'+RegisteredVolunteer);
-            
-        }
         
         // AggregateResult[] ARs=[SELECT Volunteer__c cntid, Count(id)cnt FROM Volunteer_Orientation_Training__c where Volunteer__c in:cancelContactId and Volunteer_Attendance__c='Registered' GROUP BY Volunteer__c ];
         for (AggregateResult ar : [SELECT Volunteer__c cntid, Count(id)cnt FROM Volunteer_Orientation_Training__c where Volunteer__c in:cancelContactId and Volunteer_Attendance__c='Registered' GROUP BY Volunteer__c ])
@@ -138,7 +113,7 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         }
         for(Volunteer_Orientation_Training__c votcancelupdate : Trigger.new)
         {
-            if(cancelContactId.contains(votcancelupdate.Volunteer__c) && !registerdCountId.contains(votcancelupdate.Volunteer__c))
+            if(cancelContactId.contains(votcancelupdate.Volunteer__c) && !registerdCountId.contains(votcancelupdate.Volunteer__c) && !completedCountId.contains(votcancelupdate.Volunteer__c))
             {
                 userUpdateContactId.add(votcancelupdate.Volunteer__c);
             }
@@ -159,38 +134,13 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
                 // userUpdation.Hidden_Volunteer_Cancelled__c=True;
                 updateContactList.add(contactUpdation);
             }
-            
         }
         if(userUpdateContactId.size()>0)
         {
-            // List<User> userQuery=[SELECT Id,Hidden_Volunteer_Cancelled__c FROM User where ContactId in:userUpdateContactId and Profile.Name LIKE 'Prospective%'];
-            for(User userUpdate:[SELECT Id,Volunteer_Orientation_Status__c FROM User where ContactId in:userUpdateContactId and Profile.Name LIKE 'Prospective%'])
-            {
-                User userUpdation=new User();
-                userUpdation.Id=userUpdate.Id;
-                userUpdation.Volunteer_Orientation_Status__c='Cancelled';
-                // userUpdation.Hidden_Volunteer_Cancelled__c=True;
-                updateUserList.add(userUpdation);
-            }
-            
-        }
-        if(RegisteredVolunteer.size()>0)
-        {
-            for(User userUpdateOnRegistration:[SELECT Id,Volunteer_Orientation_Status__c FROM User where ContactId in:RegisteredVolunteer and Profile.Name LIKE 'Prospective%' and Volunteer_Orientation_Status__c=NULL])
-            {
-                User userUpdation=new User();
-                userUpdation.Id=userUpdateOnRegistration.Id;
-                userUpdation.Volunteer_Orientation_Status__c='First Registeration';
-                // userUpdation.Hidden_Volunteer_Cancelled__c=True;
-                updateUserList.add(userUpdation);
-            }
+            VolunteerOandTTriggerHandler.updateUserVolunteerStatus(userUpdateContactId, 'Volunteer Cancelled');
         }
         
-        //if(volunteerOrientationTrainingList.size () > 0){
-        //VolunteerOandTTriggerHandler.UpdateContactRec(volunteerOrientationTrainingList);
-        //}
         system.debug('updateUserList'+updateUserList);
-        update updateUserList;
         update updateContactList;
         update contactCompletedUpdate;
     }
@@ -206,7 +156,7 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         list<Contact> contacttList = new list<Contact>();
         Set<String> classOfferingIdSet = new Set<String>();
         Map<String,String> orientationIdMap = new Map<String,String>();
-         List<Volunteer_Orientation_Training__c> volunteerOrientationTrainingList = new List<Volunteer_Orientation_Training__c>();  
+        List<Volunteer_Orientation_Training__c> volunteerOrientationTrainingList = new List<Volunteer_Orientation_Training__c>();  
         for(Volunteer_Orientation_Training__c currRec : Trigger.new)
         {
             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
@@ -223,7 +173,7 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
                 }
                 
                 if(currRec.Type__c == 'Training' && currRec.Volunteer_Attendance__c == 'Registered'){
-                volunteerOrientationTrainingList.add(currRec);
+                    volunteerOrientationTrainingList.add(currRec);
                 }
                 
                 if(currRec.Type__c == 'Training' && (currRec.Volunteer_Attendance__c == 'Completed' ||currRec.Volunteer_Attendance__c == 'Volunteer Cancelled')){
@@ -232,14 +182,12 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
             }
         }
         
-        
         for(Contact getContactInfo : [SELECT ID, Name, Account.Name, Account.Phone,Email,Account.Email__c FROM contact 
                                       where id IN:volOTSet]) 
         {
             if(!contactInfoMap.containsKey(getContactInfo.Id)) {
                 contactInfoMap.put(getContactInfo.Id, getContactInfo);
             }
-            
         }
         
         if(classOfferingIdSet.Size() > 0){
@@ -262,15 +210,11 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
                 if(currRec.Class_Offering__c != Null && currRec.Class_Offering__c!= Null  && orientationIdMap.containsKey(currRec.Class_Offering__c)){
                     currRec.Hidden_O_T_Id__c = orientationIdMap.get(currRec.Class_Offering__c);
                 }
-                
             }
-            
         }
         
         if(volunteerOrientationTrainingList.size() > 0){
             VolunteerOandTTriggerHandler.UpdateContactRec(volunteerOrientationTrainingList);
-         }
-        
+        }
     }
-    
 }

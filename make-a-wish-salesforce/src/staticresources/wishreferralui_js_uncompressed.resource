@@ -296,6 +296,20 @@ function formLogic() {
 		}
 	});
 
+	// Self-describe textarea
+	$('#j_id0\\:frm\\:wcgender').on('change', function() {
+		if($(this).val() != null){
+			if ($(this).val().indexOf('Self-describe') != -1){
+				$('.self-desc').prop('hidden',false);
+				$('.self-desc-field').addClass('selfdescreq');
+			} else {
+				$('.self-desc').prop('hidden',true);
+				$('.self-desc-field').removeClass('selfdescreq').val('');
+			}
+			formValidationRules();
+		}
+	});
+
 	// other relationship show/hide
 	$('.medprovcat-other-wrap').css('display', 'none'); // onload
 	$('[id$=medprov]').on('change', function() {
@@ -533,7 +547,7 @@ function formLogic() {
 		$('[id$=wcage]').parents('.form-group').addClass('sr-only');
 		$('.shownOnYes').addClass('fam-aware-overlay');
 		dateLogic();
-		$('.medprovcat-other-wrap, .other, .main-office-contact').css('display', 'none');
+		$('.medprovcat-other-wrap, .other, .main-office-contact, .medical-additional-info').css('display', 'none');
 
 		if (labelNameRadio != '') {
 			$('.Relchild').val(labelNameRadio);
@@ -563,6 +577,7 @@ function formLogic() {
 			$('.other').css('display', 'none');
 			$('[id$=aware-of-referral]').addClass('family-aware-chk');
 			$('[id$=medprov]').addClass('medprovider');
+			$('.medical-additional-info').show();
 			$('[id$=rfirstname],[id$=frm\\:pfirstname],[id$=frm\\:pfirstname2],[id$=wcfirstname],[id$=mplastname]').addClass('firstname');
 			$('[id$=rlastname],[id$=frm\\:plastname],[id$=frm\\:plastname2],[id$=wclastname],[id$=mplastname]').addClass('lastname');
 			if ($('[id$=rphone],[id$=pphonenumber],[id$=pphonenumber2],[id$=mpphone]').hasClass('phonechk-std')) {
@@ -826,10 +841,10 @@ function PrimaryDiagnosis() {
 	var PLACEHOLDER;
 	var eventObjects;
 	var queryTerm;
-	var dti = $('[id$=diagnosisTextId]');
-	var sdi = $('[id$=searchDiagnosisId]');
+	var pdi = $('[id$=searchDiagnosisId]'); // primary diagnosis
+	var icd = $('[id$=diagnosisTextId]'); // icd code
 
-	dti.autocomplete({
+	icd.autocomplete({
 		minLength: 2,
 		source: function(request, response) {
 			queryTerm = request.term;
@@ -850,24 +865,24 @@ function PrimaryDiagnosis() {
 		},
 		select: function(event, ui) {
 			var descName = ui.item.Condition_Description__c;
-			sdi.val('');
-			sdi.prop('disabled', true);
-			dti.addClass('value-selected');
-			sdi.addClass('value-selected');
-			dti.val(ui.item.Name);
+			pdi.val('');
+			pdi.prop('disabled', true);
+			icd.addClass('value-selected');
+			pdi.addClass('value-selected');
+			icd.val(ui.item.Name);
 			$('[id$=shortTextId]').html('Description: ' + ui.item.Short_Description__c).text();
+			$('.primary-diagnosis-other').prop('hidden',true);
+			$('.primary-diagnosis-other').find('textarea').val('');
 			// remove validation error styling and classes
-			//sdi.rules('remove');
-			sdi.css('border', '').removeAttr('aria-required aria-describedby');
-			sdi.parents().removeClass('has-error');
-			sdi.parents().parents().children('.col-md-3').children('label').css('color', '');
-			sdi.next('.error').remove();
+			//pdi.rules('remove');
+			pdiRemoveValidation();
 
 			if (typeof descName != 'undefined') {
-				sdi.val(ui.item.Condition_Description__r.Name);
+				pdi.val(ui.item.Condition_Description__r.Name);
 				var ss = $('.searchDiagnosisId').html(ui.item.Condition_Description__r.Name).text();
-				sdi.val(ss);
-				sdi.prop('disabled', true);
+				pdi.val(ss);
+				pdi.prop('disabled', true);
+				pdiRemoveValidation();
 			}
 			return false;
 		},
@@ -884,14 +899,20 @@ function PrimaryDiagnosis() {
 				.appendTo(ul)
 		}
 	};
+	function pdiRemoveValidation() {
+		pdi.css('border', '').removeAttr('aria-required aria-describedby');
+		pdi.parents().removeClass('has-error');
+		pdi.parents('.primaryDiagnosis').children('.col-sm-3').children('label').css('color', '');
+		pdi.next('.error').remove();
+	}
 
-	dti.keydown(function(e) {
-		// has class 'value-selected' and if key is not tab.  (Allow tab only) result: reset sdi.
-		if (($(this).hasClass('value-selected') || !sdi.hasClass('value-selected')) && e.keyCode != 9) {
+	icd.keydown(function(e) {
+		// has class 'value-selected' and if key is not tab.  (Allow tab only) result: reset pdi.
+		if (($(this).hasClass('value-selected') || !pdi.hasClass('value-selected')) && e.keyCode != 9) {
 			$(this).removeClass('value-selected');
-			sdi.removeClass('value-selected');
-			sdi.val('');
-			sdi.prop('disabled', false);
+			pdi.removeClass('value-selected');
+			pdi.val('');
+			pdi.prop('disabled', false);
 			$('[id$=shortTextId]').text('');
 		}
 		if (((e.keyCode == 9) && $(this).hasClass('value-selected')) || $(this).val() == '') {
@@ -902,32 +923,32 @@ function PrimaryDiagnosis() {
 			e.preventDefault();
 		}
 	});
-	dti.blur(function() {
-		if ((e.keyCode == 9) && $(this).hasClass('value-selected') || $(this).val() == '') {
-			// allow all keystrokes
-			return true;
-		} else if (e.keyCode == 9) {
-			// prevent tab
-			e.preventDefault();
-		} else if ($('input,select').focus() && dti.hasClass('value-selected') == false) {
-			$(this).removeClass('value-selected');
-		}
-		if ($(this).val() == '') {
-			sdi.val('');
-			sdi.prop('disabled', false);
-			sdi.removeClass('value-selected');
-			$('[id$=shortTextId]').text('');
-		}
-	});
+	// icd.blur(function() {
+	// 	if ((e.keyCode == 9) && $(this).hasClass('value-selected') || $(this).val() == '') {
+	// 		// allow all keystrokes
+	// 		return true;
+	// 	} else if (e.keyCode == 9) {
+	// 		// prevent tab
+	// 		e.preventDefault();
+	// 	} else if ($('input,select').focus() && icd.hasClass('value-selected') == false) {
+	// 		$(this).removeClass('value-selected');
+	// 	}
+	// 	if ($(this).val() == '') {
+	// 		pdi.val('');
+	// 		pdi.prop('disabled', false);
+	// 		pdi.removeClass('value-selected');
+	// 		$('[id$=shortTextId]').text('');
+	// 	}
+	// });
 
-	sdi.keydown(function(e) {
+	pdi.keydown(function(e) {
 		// has class 'value-selected' and if key is not tab
 		if (($(this).hasClass('value-selected') && e.keyCode != 9) || $(this).val() == '') {
 			$(this).removeClass('value-selected');
-			dti.removeClass('value-selected');
-			if (dti.hasClass('value-selected') == false) {
-				dti.val('');
-				dti.prop('disabled', false);
+			icd.removeClass('value-selected');
+			if (icd.hasClass('value-selected') == false) {
+				icd.val('');
+				icd.prop('disabled', false);
 				$('[id$=shortTextId]').text('');
 			}
 		}
@@ -939,37 +960,39 @@ function PrimaryDiagnosis() {
 			e.preventDefault();
 		}
 	});
-	sdi.blur(function() {
-		if ((e.keyCode == 9) && $(this).hasClass('value-selected') || $(this).val() == '') {
-			// allow all keystrokes
-			return true;
-		} else if (e.keyCode == 9) {
-			// prevent tab
-			e.preventDefault();
-		} else if ($('input,select').focus() && sdi.hasClass('value-selected') == false) {
-			$(this).removeClass('value-selected');
-		}
-		if ($(this).val() == '') {
-			dti.val('');
-			dti.prop('disabled', false);
-			dti.removeClass('value-selected');
-		}
-	});
+	// pdi.blur(function() {
+	// 	if ((e.keyCode == 9) && $(this).hasClass('value-selected') || $(this).val() == '') {
+	// 		// allow all keystrokes
+	// 		return true;
+	// 	} else if (e.keyCode == 9) {
+	// 		// prevent tab
+	// 		e.preventDefault();
+	// 	} else if ($('input,select').focus() && pdi.hasClass('value-selected') == false) {
+	// 		$(this).removeClass('value-selected');
+	// 	}
+	// 	if ($(this).val() == '') {
+	// 		icd.val('');
+	// 		icd.prop('disabled', false);
+	// 		icd.removeClass('value-selected');
+	// 	}
+	// });
 
 	$('body').change('click', function() {
-		if (!sdi.hasClass('value-selected')) {
-			sdi.val('');
-			sdi.prop('disabled', false);
+		if (!pdi.hasClass('value-selected')) {
+			pdi.val('');
+			pdi.prop('disabled', false);
+			$('.primary-diagnosis-other').prop('hidden',true);
+			$('.primary-diagnosis-other').find('textarea').val('');
 		}
-		if (!dti.hasClass('value-selected') && !sdi.hasClass('value-selected')) {
-			dti.val('');
-			dti.prop('disabled', false);
-		} else if (!dti.hasClass('value-selected') && sdi.hasClass('value-selected')) {
+		if (!icd.hasClass('value-selected')) {
+			icd.val('');
+			icd.prop('disabled', false);
+		} else if (!icd.hasClass('value-selected') && pdi.hasClass('value-selected')) {
 			return;
 		}
 	});
 
-	sdi.autocomplete({
+	pdi.autocomplete({
 			minLength: 2,
 			source: function(request, response) {
 				queryTerm = request.term;
@@ -990,18 +1013,26 @@ function PrimaryDiagnosis() {
 			},
 			select: function(event, ui) {
 				var descName = ui.item.Code_To_Use__c;
+				var otherDiagnosis = /^(Other )(.*)$/i.test(ui.item.Name);
+				var notlistedDiagnosis = /^(Not Listed)$/i.test(ui.item.Name);
 				var ss1 = $('.searchDiagnosisId').html(ui.item.Name).text();
 
-				dti.val('');
-				dti.prop('disabled', false);
-				sdi.val(ui.item.Name);
-				sdi.val(ss1);
-				sdi.addClass('value-selected');
-				dti.focus();
+				icd.val('');
+				icd.prop('disabled', false);
+				pdi.val(ui.item.Name);
+				pdi.val(ss1);
+				pdi.addClass('value-selected');
+				icd.focus();
 
 				if (typeof descName != 'undefined') {
-					dti.val(ui.item.Code_To_Use__c);
-					dti.prop('disabled', true);
+					icd.val(ui.item.Code_To_Use__c);
+					icd.prop('disabled', true);
+				}
+        if (otherDiagnosis || notlistedDiagnosis){
+          $('.primary-diagnosis-other').prop('hidden',false)
+        } else {
+					$('.primary-diagnosis-other').prop('hidden',true);
+					$('.primary-diagnosis-other').find('textarea').val('')
 				}
 				return false;
 			},
@@ -1073,7 +1104,7 @@ $.validator.addMethod("notEqual", function(value, element) {
 $("form[id$=frm]").validate({
 	//ignore: ":hidden:not(.c-select)",
 	ignore: ":hidden",
-	onkeyup: true,
+	// onkeyup: true,
 	errorElement: "em",
 	errorPlacement: function(error, element) {
 		// Add the `help-block` class to the error element
@@ -1105,7 +1136,7 @@ $("form[id$=frm]").validate({
 		$(elementParents).removeClass("has-success").addClass("has-error").prev('div').prev('label').css('color', 'red');
 
 		$(elementParents).children(".chosen-container-single").children(".chosen-single").css('border', '1px solid red');
-		$(elementParents).children("input, select").css('border', '1px solid red');
+		$(elementParents).children("input, select, textarea").css('border', '1px solid red');
 		$(elementParents).children('label').css('border', '1px solid red');
 	},
 	unhighlight: function(element, errorClass, validClass) {
@@ -1120,7 +1151,7 @@ $("form[id$=frm]").validate({
 		$(elementParents).removeClass("has-success").addClass("has-error").prev('div').prev('label').css('color', '');
 
 		$(elementParents).children(".chosen-container-single").children(".chosen-single").css('border', '');
-		$(elementParents).children("input, select").css('border', '');
+		$(elementParents).children("input, select, textarea").css('border', '');
 		$(elementParents).children(".help-block").remove();
 	},
 	submitHandler: function() {
@@ -1422,6 +1453,12 @@ function formValidationRules() {
 		required: true,
 		messages: {
 			required: "Oops! Please select a year"
+		}
+	});
+	$("textarea.selfdescreq").rules("add", {
+		required: true,
+		messages: {
+			required: "Oops! Please enter a description pertaining to 'Self-describe'"
 		}
 	});
 }

@@ -985,6 +985,10 @@
         <name>Volunteer_Opp_Reason_Inactive</name>
     </validationRules>
     <webLinks>
+        <label><!-- Move_to_Historical --></label>
+        <name>Move_to_Historical</name>
+    </webLinks>
+    <webLinks>
         <label><!-- Register --></label>
         <name>Register</name>
     </webLinks>

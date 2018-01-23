@@ -55,25 +55,21 @@
         <booleanFilter>(1 AND 2) OR (3 AND 4)</booleanFilter>
         <criteriaItems>
             <column>CLOSE_DATE</column>
-            <isUnlocked>false</isUnlocked>
             <operator>lessOrEqual</operator>
             <value>NEXT_N_DAYS:30</value>
         </criteriaItems>
         <criteriaItems>
             <column>Opportunity.npe03__Recurring_Donation__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>npe01__OppPayment__c.npe01__Scheduled_Date__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>lessOrEqual</operator>
             <value>NEXT_N_DAYS:30</value>
         </criteriaItems>
         <criteriaItems>
             <column>npe01__OppPayment__c.npe01__Paid__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>

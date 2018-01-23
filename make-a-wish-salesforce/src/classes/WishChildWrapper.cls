@@ -5,6 +5,26 @@ public class WishChildWrapper {
     public String healthCareWork {get;set;}
     public String treatingFName {get;set;}
     public String treatingLName {get;set;}
+    
+    
+    public String bestPhyFname {get;set;}
+    public String bestPhyLname {get;set;}
+    public String bestPhyEmail {get;set;}
+    
+    public String alt1MedFname {get;set;}
+    public String alt1MedLname {get;set;}
+    public String alt1MedEmail {get;set;}
+    public String alt1MedPhone {get;set;}
+    public String alt1MedHosp {get;set;}
+    
+    public String alt2MedFname {get;set;}
+    public String alt2MedLname {get;set;}
+    public String alt2MedEmail {get;set;}
+    public String alt2MedPhone {get;set;}
+    public String alt2MedHosp {get;set;}
+    
+    public String medProfTypeHid {get;set;}
+    
     public String treatingPhone {get;set;}
     public String treatingEmail {get;set;}
     public String treatingHospital {get;set;}

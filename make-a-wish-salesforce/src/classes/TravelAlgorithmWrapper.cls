@@ -10,6 +10,7 @@ public class TravelAlgorithmWrapper {
     public boolean seaLevel{get;set;}
     public boolean hypertension{get;set;}
     public boolean ventilator{get;set;}
+    public boolean pht{get;set;}
     public boolean uncontrolledHypertension{get;set;}
     public boolean surgeryinTwoMonths{get;set;}
     public boolean angina{get;set;}
@@ -46,6 +47,7 @@ public class TravelAlgorithmWrapper {
     public List<String> ventilatorString{get;set;}
     public List<String> lungDiseaseString{get;set;}
     public String ventilatorText{get;set;}
+    public String phtText{get;set;}
     public List<String> travelAgroithmList {get;set;}
     public Set<String> travelSet;
      public String algList;
@@ -61,6 +63,7 @@ public class TravelAlgorithmWrapper {
         seaLevel = false;
         hypertension = false;
         ventilator = false;
+        pht = false;
         uncontrolledHypertension = false;
         surgeryinTwoMonths = false;
         angina = false;
@@ -86,21 +89,23 @@ public class TravelAlgorithmWrapper {
         noneApply = false;
         iamNotSure = false;
         ventilatorText = '';
+        phtText = '';
+        pulmonaryHypertensionString = '';
         convulsiveDisorders = new List<String>();
-    	congenitalHeartDiseaseString = new List<String>();
+        congenitalHeartDiseaseString = new List<String>();
         chronicHeartFailureString = new List<String>(); 
-    	heartFailureString = new List<String>(); 
-    	ArrhythmiaString = new List<String>(); 
-    	anginaString = new List<String>(); 
-    	ventilatorString = new List<String>(); 
-    	lungDiseaseString = new List<String>(); 
+        heartFailureString = new List<String>(); 
+        ArrhythmiaString = new List<String>(); 
+        anginaString = new List<String>(); 
+        ventilatorString = new List<String>(); 
+        lungDiseaseString = new List<String>(); 
     }
       public List<SelectOption> getLungDiseaseList() {        
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Please Select That All Apply',true));
         options.add(new SelectOption('Vital capacity less than 1 liter or less than 20 ml/kg','Vital capacity less than 1 liter or less than 20 ml/kg'));
-        options.add(new SelectOption('current or frequent hypoxemia','current or frequent hypoxemia'));
-        options.add(new SelectOption('current or frequent hypercapnia','current or frequent hypercapnia'));
+        options.add(new SelectOption('Current or frequent hypoxemia','Current or frequent hypoxemia'));
+        options.add(new SelectOption('Current or frequent hypercapnia','Current or frequent hypercapnia'));
         options.add(new SelectOption('FEV1 less than 50% predicted','FEV1 less than 50% predicted'));
         options.add(new SelectOption('Required long-term oxygen in the past 6 months','Required long-term oxygen in the past 6 months'));
         options.add(new SelectOption('Oxygen dependence at sea level','Oxygen dependence at sea level'));
@@ -113,6 +118,15 @@ public class TravelAlgorithmWrapper {
         options.add(new SelectOption('','Please Select',true));
         options.add(new SelectOption('I am the treating provider for the ventilator','I am the treating provider for the ventilator'));
         options.add(new SelectOption('I am not the treating provider for the ventilator','I am not the treating provider for the ventilator'));
+        return options;
+    }
+    Public List<SelectOption> getphtList() {        
+        List<SelectOption> options = new List<SelectOption>();
+        options.add(new SelectOption('','Please Select',true));
+        options.add(new SelectOption('NYHA Class IV','NYHA Class IV'));
+        options.add(new SelectOption('NYHA Class III','NYHA Class III'));
+        options.add(new SelectOption('I do not know','I do not know'));
+        options.add(new SelectOption('Not Applicable','Not Applicable'));
         return options;
     }
     public List<SelectOption> getanginaList() {
@@ -138,7 +152,7 @@ public class TravelAlgorithmWrapper {
         options.add(new SelectOption('Internal Cardiac Defibrillator (ICD) – the device has delivered a shock, individual is unstable','Internal Cardiac Defibrillator (ICD) – the device has delivered a shock, individual is unstable'));
         options.add(new SelectOption('Internal Cardiac Defibrillator (ICD) – the device has delivered a shock, the individual has been stable for at least 6 weeks','Internal Cardiac Defibrillator (ICD) – the device has delivered a shock, the individual has been stable for at least 6 weeks'));
         options.add(new SelectOption('Valve disease of functional class IV or is experiencing chest pain or syncope','Valve disease of functional class IV or is experiencing chest pain or syncope'));
-        options.add(new SelectOption('Pacemaker placement less than one week ago','Pacemaker placement less than one week ago'));
+        options.add(new SelectOption('Pacemaker placement more less than one week ago','Pacemaker placement more less than one week ago'));
         options.add(new SelectOption('I do not know','I do not know'));
         options.add(new SelectOption('Not Applicable','Not Applicable'));
         return options;
@@ -157,13 +171,16 @@ public class TravelAlgorithmWrapper {
         options.add(new SelectOption('','Please Select'));
         options.add(new SelectOption('Impaired gas exchange', 'Impaired gas exchange')); 
         options.add(new SelectOption('Not Applicable', 'Not Applicable')); 
+        //options.add(new SelectOption('I do not know', 'I do not know')); 
         return options;
     }  
     public List<SelectOption> getPulmonaryHypertensionValues() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Please Select'));
-        options.add(new SelectOption('with intrapulmonary shunting', 'with intrapulmonary shunting')); 
-        options.add(new SelectOption('without intrapulmonary shunting', 'without intrapulmonary shunting')); 
+        options.add(new SelectOption('With intrapulmonary shunting', 'With intrapulmonary shunting')); 
+        options.add(new SelectOption('Without intrapulmonary shunting', 'Without intrapulmonary shunting'));
+        //options.add(new SelectOption('I do not know', 'I do not know')); 
+        //options.add(new SelectOption('Not Applicable','Not Applicable'));
         return options;
     }  
     public List<SelectOption> getStrokeValues() {
@@ -171,12 +188,13 @@ public class TravelAlgorithmWrapper {
         options.add(new SelectOption('','Please Select'));
         options.add(new SelectOption('Frequent or crescendo transient ischemic attacks or strokes', 'Frequent or crescendo transient ischemic attacks or strokes')); 
         options.add(new SelectOption('Not Applicable', 'Not Applicable')); 
+        //options.add(new SelectOption('I do not know', 'I do not know')); 
         return options;
     } 
     public List<SelectOption> getconvulsiveDisorderList() {
         List<SelectOption> options = new List<SelectOption>();
         options.add(new SelectOption('','Please Select That All Apply',true));
-        options.add(new SelectOption('Currently, frequent uncontrolled, prolonged, generalized seizures that last >5min without cessation after abortive seizure medication treatmentut cessation after abortive seizure medication treatment', 'Currently, frequent uncontrolled, prolonged, generalized seizures that last >5min without cessation after abortive seizure medication treatment')); 
+        options.add(new SelectOption('Has frequent, uncontrolled, prolonged, generalized seizures that last greater than five minutes without cessation after abortive seizure medication treatment', 'Has frequent, uncontrolled, prolonged, generalized seizures that last greater than five minutes without cessation after abortive seizure medication treatment')); 
         options.add(new SelectOption('Has had a seizure in the last 24 hours', 'Has had a seizure in the last 24 hours')); 
         options.add(new SelectOption('I do not know','I do not know'));
         options.add(new SelectOption('Not Applicable','Not Applicable')); 

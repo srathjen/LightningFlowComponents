@@ -59,6 +59,11 @@ public class WishRelatedLinks_AC {
     public String WG_StepThree_30days_Spanish{get;set;}
     public String WG_StepTwo_60days{get;set;}
     public String WG_StepTwo_60days_Spanish{get;set;}
+    
+    public String rushWishLetter{get;set;}
+    public String rushWishLetterDDP{get;set;}
+    public String familyHoldMessage{get;set;}
+    public String familyHoldMessageDDP{get;set;}
     list<User> userDetailList;
     public WishRelatedLinks_AC(ApexPages.StandardController controller) {
         recpCheck = 'Allow';
@@ -92,6 +97,9 @@ public class WishRelatedLinks_AC {
         wishReceiptSpanishDownloadDDP = Label.WishReceiptSpanishDownloadDeliverOption;
         wishReceiptDocuSigndDDP = Label.WishReceiptDocusingDeliverOption;
         wishReceiptSpanishDocuSigndDDP = Label.WishReceiptSpanishDocusingDeliverOption;
+        
+        rushWishLetterDDP = Label.Rush_Wish_Letter_DDP;
+        familyHoldMessageDDP = Label.Family_Hold_Message;
         userDetailList = new list<User>();
         Set<Id> teamMemberSet = new Set<Id>();
         for(CaseTeamMember currentMember : [SELECT ID,ParentId,TeamRole.Name,Member.Name,MemberId FROM CaseTeamMember WHERE ParentId =: currentCaseRec.Id AND (TeamRole.Name =: 'Wish Granter' OR TeamRole.Name =: 'Wish Granter Mentor') Limit 2] ){
@@ -103,7 +111,7 @@ public class WishRelatedLinks_AC {
         List<Wish_Child_Form__c> childFormList = [SELECT Id,IsWishFamily__c,IsParticipant__c FROM Wish_Child_Form__c WHERE Case__c =: currentCaseRec.Id];
         
         if(childFormList.size() > 0){
-            if(childFormList[0].IsWishFamily__c  == false && childFormList[0].IsParticipant__c == false){
+            if(childFormList[0].IsWishFamily__c  == false){
                 showPopup = true;
             }           
         }
@@ -111,11 +119,11 @@ public class WishRelatedLinks_AC {
         if(currentCaseRec.RecordTypeId == parentWishRecordTypeId ){
             WishFamilyForm = '/apex/WishChildForm_VF?id='+currentCaseRec.Id;
             contactInfo = '/apex/RelationshipsViewer_VF?recId='+currentCaseRec.Id;
-            LiabilityFrom = '/apex/WishLiabilityForm_VF?id='+currentCaseRec.Id;
+            LiabilityFrom = '/apex/LiabilityForms_VF?id='+currentCaseRec.Id;
             miniorParticipant = '/apex/WishLiabilityMinorParticipant_VF?id='+currentCaseRec.Id;
             absentParentForm = '/apex/AbsentForm_VF?id='+currentCaseRec.Id; 
-            celebrityForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id+'&CES=Signature Required - Celebrity Wish';
-            
+            //celebrityForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
+            celebrityForm ='/apex/Entertainment_VF?id='+currentCaseRec.Id; 
             // singleForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
             singleForm ='/apex/SingleForm_VF?id='+currentCaseRec.Id;
             wishClearence = '/apex/WishClearanceSendNow_VF?id='+currentCaseRec.Id; 
@@ -139,6 +147,9 @@ public class WishRelatedLinks_AC {
             WG_StepThree_30days_Spanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+WG_StepThree_30days_SpanishDDP;
             WG_StepTwo_60days = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+WG_StepTwo_60daysDDP;
             WG_StepTwo_60days_Spanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+WG_StepTwo_60days_SpanishDDP;
+            
+            rushWishLetter = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+rushWishLetterDDP;
+            familyHoldMessage = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+familyHoldMessageDDP;
         }
         
         querychildCase = [SELECT Id,CaseNumber,ParentId,Parent.AccountId,Parent.ContactId FROM Case WHERE ParentId =:currentCaseRec.Id AND RecordTypeId =: wishGrantRecordTypeId AND ParentId != Null limit 1];

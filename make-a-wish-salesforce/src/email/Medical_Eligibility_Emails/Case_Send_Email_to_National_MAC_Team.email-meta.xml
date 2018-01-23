@@ -6,7 +6,7 @@
     <letterhead>Make_a_Wish_America</letterhead>
     <name>Case: Send Email to National MAC Team</name>
     <style>freeForm</style>
-    <subject>National Eligibility Review [{!Case.Thread_Id}]</subject>
+    <subject>National Eligibility Review [{!Case.Thread_Id}] {!Case.Hidden_Lead_firstname_lastname_initial__c}</subject>
     <textOnly>Attn:  National Medical Advisory Council,
 
 

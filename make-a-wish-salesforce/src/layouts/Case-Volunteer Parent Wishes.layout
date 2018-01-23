@@ -88,6 +88,10 @@
                 <behavior>Readonly</behavior>
                 <field>ContactEmail</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>IsparentCaseUp__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -420,6 +424,7 @@
         <fields>CREATEDBY_USER</fields>
         <fields>Total_Reimbursement_Amount__c</fields>
         <fields>Gift_Value__c</fields>
+        <fields>Adjustment_Comments__c</fields>
         <relatedList>In_Kind_Donation_Reimbursement__c.Wish__c</relatedList>
     </relatedLists>
     <relatedLists>

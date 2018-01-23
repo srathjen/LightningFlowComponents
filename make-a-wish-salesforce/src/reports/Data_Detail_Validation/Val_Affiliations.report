@@ -43,7 +43,6 @@
     <filter>
         <criteriaItems>
             <column>Account.Migrated_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

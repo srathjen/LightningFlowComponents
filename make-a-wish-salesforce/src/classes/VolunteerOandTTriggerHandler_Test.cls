@@ -29,6 +29,7 @@ public class VolunteerOandTTriggerHandler_Test{
              Background_check__c currBC = OrientationandTrainingUtil.createBackgroundCheck(con.id);
              currBC.Date_Completed__C = Date.Today();
              currBC.status__c = 'Approved';
+        	test.startTest();
              update currBC;
              
              Conflict_Of_Interest__c  createCOI = OrientationandTrainingUtil.createCOI(con.id);
@@ -43,6 +44,7 @@ public class VolunteerOandTTriggerHandler_Test{
               
               createVolTraining.Volunteer_Attendance__c = 'Completed';
               update createVolTraining;
+             test.stopTest();
             
          //}
        }

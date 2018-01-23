@@ -39,19 +39,26 @@
         <value>30</value>
     </labels>
     <labels>
+        <fullName>Celebritywish</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Celebritywish</shortDescription>
+        <value>52086f1d-3690-4718-9df0-232e59a6b040</value>
+    </labels>
+    <labels>
         <fullName>ChildMedicalSummary</fullName>
         <categories>Docusign Medical Summary Template Id</categories>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Child Medical Summary</shortDescription>
-        <value>026C164A-BF26-4554-BE2C-3A94EED3CB09</value>
+        <value>19147ba2-329a-4f6b-90dd-a209d7bc1412</value>
     </labels>
     <labels>
         <fullName>Combo_CMS_and_WC</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Combo CMS and WC</shortDescription>
-        <value>307671F4-1026-4A83-A52A-9513DCD63ADA</value>
+        <value>7d720e44-22b7-4efd-a40b-38d0903cbe30</value>
     </labels>
     <labels>
         <fullName>ContactIdValue</fullName>
@@ -81,6 +88,28 @@
         <protected>false</protected>
         <shortDescription>DocuSignUserName</shortDescription>
         <value>5a81d5c0-fcaa-4dba-9712-5f206b7f7c13</value>
+    </labels>
+    <labels>
+        <fullName>Dummy_Email</fullName>
+        <categories>It holds the hiiden email value for the contact</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Dummy Email</shortDescription>
+        <value>kanagumca_jcet@hotmail.com</value>
+    </labels>
+    <labels>
+        <fullName>DvRetrunUrl</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DvRetrunUrl</shortDescription>
+        <value>http://wish.force.com/</value>
+    </labels>
+    <labels>
+        <fullName>Family_Hold_Message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Family Hold Message DDP</shortDescription>
+        <value>a1a0R000000LTHU</value>
     </labels>
     <labels>
         <fullName>Instance_Url</fullName>
@@ -155,14 +184,22 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Rush Child Summary</shortDescription>
-        <value>E8A2FCDB-4A45-40B5-8C3A-83AFC7729948</value>
+        <value>aded084e-6f2a-4754-89e5-0942134e41e7</value>
     </labels>
     <labels>
         <fullName>Rush_Wish_Clearance</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Rush Wish Clearance</shortDescription>
-        <value>20C0778C-FFA8-44BF-9883-77158C76395F</value>
+        <value>5e1ea420-569e-4d30-9b6b-2cac0e2d1dd9</value>
+    </labels>
+    <labels>
+        <fullName>Rush_Wish_Letter_DDP</fullName>
+        <categories>It will contain the rush wish letter DDP record Id</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Rush Wish Letter DDP</shortDescription>
+        <value>a1a36000004nyeI</value>
     </labels>
     <labels>
         <fullName>Salesforce_Support_User_Id</fullName>
@@ -291,7 +328,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Clearence</shortDescription>
-        <value>A14E3387-317F-44B7-8F76-96846F308C93</value>
+        <value>d447aed5-a5df-4f2e-81dd-689153bb2b5a</value>
     </labels>
     <labels>
         <fullName>WishReceiptDocusingDeliverOption</fullName>

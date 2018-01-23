@@ -22,8 +22,11 @@ public class VolunteerOpportunityTrigger_AT_Test {
             processVolOpportunities.Volunteer_Name__c = VolunteerContact.Id;
             volunteerOpportunityList.add(processVolOpportunities);
         }
+        test.startTest();
         update volunteerOpportunityList;
+        test.stopTest();
         return volunteerOpportunityList;
+        
     }
     
     
@@ -51,7 +54,9 @@ public class VolunteerOpportunityTrigger_AT_Test {
             updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
             updateVolOpportunity.Status__c = 'Approved';
             updateVolOpportunity.Volunteer_Name__c = VolunteerContact.Id;
+            test.startTest();
             update updateVolOpportunity;
+            test.stopTest();
             system.debug('@@@@@@ updateVolOpportunity @@@@@@@@@'+updateVolOpportunity);
         }
     }
@@ -72,8 +77,10 @@ public class VolunteerOpportunityTrigger_AT_Test {
         Volunteer_Opportunity__c  deleteOpportunity = new Volunteer_Opportunity__c ();
         deleteOpportunity.Id = volOpportunity.Id;
         deleteOpportunity.Volunteer_Name__c  = Null;
+        test.startTest();
         update deleteOpportunity;
         delete deleteOpportunity;
+        test.stopTest();
     }
     
     // Create new wishVolunteerOpportunity when the reason inactive is not equal to null 
@@ -92,7 +99,9 @@ public class VolunteerOpportunityTrigger_AT_Test {
             updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
             updateVolOpportunity.Volunteer_Name__c = VolunteerContact.Id;
             updateVolOpportunity.Reason_Inactive__c = 'Moved';
+            test.startTest();
             update updateVolOpportunity;
+            test.stopTest();
             
         }
     }
@@ -111,7 +120,9 @@ public class VolunteerOpportunityTrigger_AT_Test {
         volOpportunity.Volunteer_Name__c  = volunteerContact.Id;
         volOpportunity.Status__c = 'Approved';
         volOpportunity.Reason_Inactive__c = 'Moved';
+        test.startTest();
         update volOpportunity;
+        test.stopTest();
         
     }
     
@@ -129,6 +140,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
         Volunteer_Opportunity__c nonWishvolOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);     
         volOpportunity.Volunteer_Name__c  = volunteerContact.Id;
         volOpportunity.Status__c = 'Approved';
+        test.startTest();
         update volOpportunity;
         Volunteer_Opportunity__c  deleteOpportunity = new Volunteer_Opportunity__c ();
         deleteOpportunity.Id = volOpportunity.Id;
@@ -136,6 +148,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
         deleteOpportunity.Status__c = 'Approved';
         update deleteOpportunity;
         delete deleteOpportunity;
+        test.stopTest();
     }
     
     //Update the NonWish Volunteer Opportunity registered count 
@@ -153,6 +166,7 @@ public class VolunteerOpportunityTrigger_AT_Test {
         volOpportunity.Status__c = 'Approved';
         volOpportunity.Chapter_Role_Opportunity__c = chapterRole.id;
         volOpportunity.Reason_Inactive__c = Null;
+        test.startTest();
         update volOpportunity;
         Volunteer_Opportunity__c  deleteOpportunity = new Volunteer_Opportunity__c ();
         deleteOpportunity.Id = volOpportunity.Id;
@@ -161,14 +175,17 @@ public class VolunteerOpportunityTrigger_AT_Test {
         deleteOpportunity.Reason_Inactive__c = Null;
         update deleteOpportunity;
         delete deleteOpportunity;
+        test.stopTest();
         
     }
     
     public testmethod static void  createRecforNationalStaffasOwner(){   
         Chapter_Vs_Role__c arizonaChap = OrientationandTrainingUtil.createArizonaChapter();
         Chapter_Vs_Role__c alabamaChap = OrientationandTrainingUtil.createAlabamaChapter();
+        test.startTest();
         Insert alabamaChap;
         Insert arizonaChap;
+        test.stopTest();
         
         User currUser = [SELECT id from User where id = :Userinfo.getUserId() limit 1];
         User nationalStaff;
@@ -203,8 +220,11 @@ public class VolunteerOpportunityTrigger_AT_Test {
             volunteerOpportunityList.add(processVolOpportunities);
             
         }
+        test.startTest();
         update volunteerOpportunityList;
+         test.stopTest();
         return volunteerOpportunityList;
+       
     }
     
     public testmethod static void  RejectedNonWish(){   
@@ -217,8 +237,10 @@ public class VolunteerOpportunityTrigger_AT_Test {
         OrientationandTrainingUtil.createVolunteerCount(nonWishEvent.Id,chapterRole.Id,3);
         Volunteer_Opportunity__c volOpportunity = OrientationandTrainingUtil.CreateNonWishVolunteerOpportunity(chapterAccount.Id,chapterRole.Id,nonWishEvent.Id);     
         volOpportunity.Volunteer_Name__c  = volunteerContact.Id;
+        test.startTest();
         update volOpportunity;
         delete volOpportunity;
+        test.stopTest();
     }
     
     public testmethod static void  RemoveCaseTeamMember(){   
@@ -238,7 +260,9 @@ public class VolunteerOpportunityTrigger_AT_Test {
             updateVolOpportunity.Id = wishVolunteerOpportunityList.get(0).Id;
             updateVolOpportunity.Reason_Inactive__c = 'Non-responsive';
             updateVolOpportunity.Volunteer_Name__c = VolunteerContact.Id;
+            test.startTest();
             update updateVolOpportunity;
+            test.stopTest();
             system.debug('@@@@@@ updateVolOpportunity @@@@@@@@@'+updateVolOpportunity);
         }
     }

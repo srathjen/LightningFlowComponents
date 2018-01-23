@@ -28,7 +28,7 @@ public class WishChildFormValUpdate_AC_Test {
         WishChildFormValUpdate_AC.updateWishdetails(caseDetails);
         
     }
-    public static testMethod void UpdateWishChildandWishFamily(){
+    public static testMethod void updateWishChildandWishFamily(){
        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
         Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
         Account housholdAcc = OrientationandTrainingUtil.HouseHoldAccount();

@@ -1,3 +1,8 @@
+/*****************************************************************************
+Author : MST Solutions
+CreateDate : 03/25/2016
+Description : AbsentForm_AC is used send the Absent Form document to get the signature from parent legal guardian.
+******************************************************************************/
 public class AbsentForm_AC{
     
     public Case currentParentCase{get;set;}
@@ -176,7 +181,7 @@ public class AbsentForm_AC{
         if(String.isEmpty(recpName)) {
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Recepient cannot be null.'));
         } else if(String.isEmpty(recpEmail)) {
-            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The selected user does not have an email address.'));
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The contact you have selected has no email address available. Please add email on the contact record and try to send the form again.'));
         }
         return null;
     }

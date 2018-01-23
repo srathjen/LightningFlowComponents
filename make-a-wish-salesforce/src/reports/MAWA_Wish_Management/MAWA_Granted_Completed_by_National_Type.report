@@ -86,13 +86,11 @@
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Granted,Completed</value>
         </criteriaItems>

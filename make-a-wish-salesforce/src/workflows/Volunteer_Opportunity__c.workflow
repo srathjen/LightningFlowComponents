@@ -143,60 +143,28 @@
     </fieldUpdates>
     <rules>
         <fullName>Volunteer Opportunity %3A Non - Wish Approved</fullName>
-        <actions>
-            <name>This_Email_Alert_will_send_when_the_Non_Wish_volunteer_opportunity_is_Approved_b</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>VO_ET_Volunteer_Opportunity_Approved_NW</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Non - Wish is Approved by the chapter staff.</description>
         <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null,  TEXT( Status__c )  = &apos;Approved&apos; , ISCHANGED(Status__c), $Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
         <fullName>Volunteer Opportunity %3A Non - Wish Rejected</fullName>
-        <actions>
-            <name>This_Email_Alert_will_send_when_the_Non_Wish_volunteer_opportunity_is_rejected_b</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>VO_ET_Volunteer_Opportunity_Not_Approved_NW</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Non - Wish is rejected by the chapter staff.</description>
         <formula>AND( Volunteer_Name__c != Null, Wish__c  == Null, Non_Wish_Event__c != Null,  TEXT(  Reason_Inactive__c  )  = &apos;Not Approved&apos; ,ISCHANGED(  Reason_Inactive__c  ),  $Profile.Name != &apos;Integration&apos; )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
         <fullName>Volunteer Opportunity %3A Wish Approved</fullName>
-        <actions>
-            <name>This_Email_Alert_will_send_when_the_Wish_volunteer_opportunity_is_Approved_by_th</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>VO_ET_Volunteer_Opportunity_Wish_Approved</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
         <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null,  TEXT( Status__c )  = &apos;Approved&apos; , ISCHANGED( Status__c ),$Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
         <fullName>Volunteer Opportunity %3A Wish Rejected</fullName>
-        <actions>
-            <name>This_Email_Alert_will_send_when_the_Wish_volunteer_opportunity_is_rejected_by_th</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
-            <name>VO_ET_Volunteer_Opportunity_Not_Approved</name>
-            <type>Task</type>
-        </actions>
-        <active>true</active>
+        <active>false</active>
         <description>This Work flow rule will fire when the Volunteer opportunity Wish is Approved by the chapter staff.</description>
         <formula>AND( Volunteer_Name__c != Null, Wish__c  != Null, Non_Wish_Event__c == Null, TEXT(  Reason_Inactive__c  )  = &apos;Not Approved&apos; , ISCHANGED(  Reason_Inactive__c  ),   $Profile.Name != &apos;Integration&apos;)</formula>
         <triggerType>onAllChanges</triggerType>

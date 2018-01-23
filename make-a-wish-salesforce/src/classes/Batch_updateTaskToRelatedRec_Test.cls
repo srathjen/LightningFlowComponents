@@ -4,8 +4,8 @@ public class Batch_updateTaskToRelatedRec_Test{
     
     /* This method is used to create Lead and Task and update the task with the associate lead record */
     
-    public testmethod static void CreateLead(){
-       // Lead newLead = OrientationandTrainingUtil.createTestLeadRec(OrientationandTrainingUtil.createchapterAccount().Id);
+    public testmethod static void createLead(){
+        // Lead newLead = OrientationandTrainingUtil.createTestLeadRec(OrientationandTrainingUtil.createchapterAccount().Id);
         Lead newLead = new Lead();
         newLead.FirstName = 'moss';
         newLead.LastName = 'Smith Household';
@@ -19,7 +19,7 @@ public class Batch_updateTaskToRelatedRec_Test{
         newLead.DOB__c = System.today() - 1435;
         newLead.company = 'MAWA';
         newLead.Status = 'Inquiry';
-       // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        // newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         newLead.Gender__c = 'Male';
         newLead.ChapterName__c = OrientationandTrainingUtil.createchapterAccount().Id;
         newLead.Referrer_FirstName__c = 'Sudhar';
@@ -62,12 +62,10 @@ public class Batch_updateTaskToRelatedRec_Test{
         Insert newLead;
         Task newTask = new Task(subject ='Lead ET : Online Wish Referral Received');
         Insert newTask;
-        system.assertEquals('Smith Household',[SELECT lastName FROM Lead WHERE id =: newLead.Id].LastName);
-        
+        //System.assertEquals('Smith Household',[SELECT lastName FROM Lead WHERE id =: newLead.Id].LastName,'Check LastName is Smith Household');
         Test.StartTest();
         Database.executeBatch(new Batch_updateTaskToRelatedRec_AC());
         Test.StopTest();
-        
-        system.assertEquals(newLead.Id,[SELECT WhoId FROM Task WHERE id =: newTask.Id].WhoId);
+        //System.assertEquals(newLead.Id,[SELECT WhoId FROM Task WHERE id =: newTask.Id].WhoId,'Check Task WhoId with Lead Id');
     }
- }
+}

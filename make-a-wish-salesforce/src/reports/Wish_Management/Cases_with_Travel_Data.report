@@ -45,9 +45,13 @@
     <filter>
         <criteriaItems>
             <column>Case$Hidden_Wish_Child_Full_Name__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Nemo Clownfish</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case$Hidden_Chapter_Name__c</column>
+            <operator>equals</operator>
+            <value>make-a-wish arizona</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>

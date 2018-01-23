@@ -113,6 +113,11 @@
         <name>Chapter_Name__c</name>
     </fields>
     <fields>
+        <help><!-- Used in Task list views to fire a workflow and close all selected tasks. --></help>
+        <label><!-- Close Task --></label>
+        <name>Close_Task__c</name>
+    </fields>
+    <fields>
         <label><!-- Confirmed Date --></label>
         <name>Confirmed_Date__c</name>
     </fields>

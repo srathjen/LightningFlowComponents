@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>LEAD_ID</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>Lead.ChapterName__c</field>
+    </columns>
+    <columns>
+        <field>Lead.Test_Record__c</field>
+    </columns>
+    <columns>
+        <field>CREATED</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Lead.ChapterName__c</column>
+            <operator>notEqual</operator>
+            <value>Alabama</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>CREATED</column>
+            <operator>equals</operator>
+            <value>Chandrasekar Nallusamy,Kanagaraj Arjunan,Jose Rathi Francis,Sophiya George,Sudharsan Kumaravel,Furqan Maqbool,Vennila Paramasivam,ChennaReddy UmmaReddy,Kesavakumar Murugesan</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Lead Test Record</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

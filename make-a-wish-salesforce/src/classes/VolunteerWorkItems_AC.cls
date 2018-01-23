@@ -214,7 +214,7 @@ reqired volunteers and registered volunteers count.*/
         } 
         closedWishQueryString = closedWishQueryString .removeEnd(',');
         System.debug('>>volunteerChaptersSet>>'+volunteerChaptersSet);
-        closedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: wishEventsRegistered OR RecordTypeId =: wishEvents) AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND (Wish__r.isClosed = true OR Wish__r.Status = \'completed\') AND Reason_Inactive__c != \'Error\'';
+        closedWishQueryString += ' FROM Volunteer_Opportunity__c WHERE Volunteer_Name__c != null AND Chapter_Name__c IN : volunteerChaptersSet AND (RecordTypeId =: wishEventsRegistered OR RecordTypeId =: wishEvents) AND Reason_Inactive__c = null AND Name != null AND Volunteer_Name__c =: userRelatedContactId AND (Wish__r.isClosed = true OR Wish__r.Status = \'completed\' OR Status__c = \'Completed\' OR Status__c = \'Closed\') AND Reason_Inactive__c != \'Error\'';
         closedVolunteerWishList =  Database.query(closedWishQueryString);
         return closedVolunteerWishList;
     }
@@ -382,11 +382,8 @@ reqired volunteers and registered volunteers count.*/
                     
                 }
                 
-            }
-            else if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == false)
-            {
+            } else if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == false) {
                 if(WishTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) ||
-                   WishNonTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) ||
                    (isWishGranterMentor == True && volunteerOpportunity[0].Role__c == 'Wish Granter'))
                 {      
                     updateRecord = true;
@@ -394,6 +391,18 @@ reqired volunteers and registered volunteers count.*/
                     System.debug('Block4++++++++++++++++++++++++++++++++++++++++++++++++++== ');
                 }
             }
+            
+            /*else if(getChapterRoleOanTStatus(volunteerOpportunity[0].Chapter_Role_Opportunity__c) == false)
+            {
+            if(WishTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) ||
+            WishNonTrainedMap.containsKey(volunteerOpportunity[0].Chapter_Role_Opportunity__c) ||
+            (isWishGranterMentor == True && volunteerOpportunity[0].Role__c == 'Wish Granter'))
+            {      
+            updateRecord = true;
+            allowRegister = true;
+            System.debug('Block4++++++++++++++++++++++++++++++++++++++++++++++++++== ');
+            }
+            }*/
             
             
         }

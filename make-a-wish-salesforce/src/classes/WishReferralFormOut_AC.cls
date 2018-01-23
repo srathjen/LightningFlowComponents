@@ -15,13 +15,13 @@ Public Class WishReferralFormOut_AC {
     public Id accontId;
     public List<Lead> leaddata;
     public List<SiblingInfo> sibList {get;set;}
-    
+     public String formatedDate{get;set;}
     public WishReferralFormOut_AC() {
         sibList = new List<SiblingInfo>();
         renderpdf='';
         ID leadId = ApexPages.currentPage().getParameters().get('LeadId');
         currLead = new Lead();
-        leaddata=[Select Id,Name,Relationship_to_child__c,CreatedDate,Treating_Medical_Professional_Phone__c,PD_Condition_Description__c,Medical_Provider_Category__c,of_Siblings__c,
+        leaddata=[Select Id,Name,Relationship_to_child__c,CreatedDate,Referred_Date__c,Inquiry_Date__c,Treating_Medical_Professional_Phone__c,PD_Condition_Description__c,Medical_Provider_Category__c,of_Siblings__c,
                   Other_Medical_Provider_Category__c,Sibling_Detail__c, Any_medical_reason_for_moving_quickly__c ,What_is_the_family_s_primary_spoken_lang__c, Referrer_FirstName__c,
                   Street, Email, Has_this_child_ever_received_prior_wish__c, Referrer_City__c, Referrer_Zip__c, Referrer_Last_Name__c,Title, Hospital_Treatment_Facility_Treating__c,
                   Referrer_Phone__c, Referrer_Email__c,FirstName, City, State, Country, Child_Middle_Initial__c, LastName, DOB__c, PostalCode, Gender__c, Parent_First_Name__c,
@@ -37,6 +37,11 @@ Public Class WishReferralFormOut_AC {
         if(leaddata[0].Has_this_child_ever_received_prior_wish__c != null) {
             leaddata[0].Has_this_child_ever_received_prior_wish__c = leaddata[0].Has_this_child_ever_received_prior_wish__c.replaceAll('<[^>]+>',' ');
         }
+         
+            if(leaddata[0].Status == 'Inquiry')
+             formatedDate = leaddata[0].Inquiry_Date__c.format();
+          else
+            formatedDate = leaddata[0].Referred_Date__c.format();
         
         
         if(leaddata[0].Sibling_Detail__c != null) {

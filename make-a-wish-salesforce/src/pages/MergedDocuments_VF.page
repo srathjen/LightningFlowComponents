@@ -57,8 +57,7 @@ Description : This vf page contains all the custom links in one section on the p
                             </apex:commandLink></div></td>
                     </tr>
                 </apex:outputPanel>
-                
-                <tr style="width:100%">
+                               <tr style="width:100%">
                     <td align="center"><div><apex:outputLink target="_blank" value="{!WG_StepOne_90days}"> WG Step One 90days </apex:outputLink></div></td>
                     <td align="center"><div><apex:outputLink target="_blank" value="{!WG_StepOne_90days_Spanish}"> WG Step One 90days Spanish </apex:outputLink></div></td>
                 </tr>
@@ -72,8 +71,8 @@ Description : This vf page contains all the custom links in one section on the p
                     <td align="center"><div><apex:outputLink target="_blank" value="{!WG_StepThree_30days}"> WG Step Three 30days </apex:outputLink></div></td>
                     <td align="center"><div><apex:outputLink target="_blank" value="{!WG_StepThree_30days_Spanish}"> WG Step Three 30days Spanish </apex:outputLink></div></td>
                 </tr>
-               
-               <tr style="width:100%">
+                
+                 <tr style="width:100%">
                     <td align="center"><div><apex:outputLink target="_blank" value="{!WG_FinalStep_FileClosed}"> WG Final Step File Closed </apex:outputLink></div></td>
                     <td align="center"><div><apex:outputLink target="_blank" value="{!WG_FinalStep_FileClosed_Spanish}"> WG Final Step File Closed Spanish </apex:outputLink></div></td>
                 </tr>
@@ -84,6 +83,11 @@ Description : This vf page contains all the custom links in one section on the p
                 <tr style="width:100%">
                     <td align="center"><div><apex:outputLink target="_blank" value="{!bioSheet}"> Bio Sheet</apex:outputLink></div></td>
                 </tr>
+                
+                <tr style="width:100%">
+                    <td align="center"><div><apex:outputLink target="_blank" value="{!rushWishLetter}">Rush Wish Letter</apex:outputLink></div></td>
+                </tr>
+              
             </table>
         </apex:outputPanel>
     </apex:form>                 

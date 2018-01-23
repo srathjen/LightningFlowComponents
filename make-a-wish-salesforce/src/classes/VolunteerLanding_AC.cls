@@ -230,7 +230,7 @@ insert dynamicContentShare;
         
         
         If(currVolBGCheck.size() == 1) {
-            if(currVolBGCheck[0].Date__c >= Date.Today() && Date.Today().daysBetween(currVolBGCheck[0].Date__c) < 30 && currVolBGCheck[0].Status__c != 'Rejected' && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[0].Current__c == true) {
+            if(currVolBGCheck[0].Date__c >= Date.Today() && Date.Today().daysBetween(currVolBGCheck[0].Date__c) <= 30 && currVolBGCheck[0].Status__c != 'Rejected' && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[0].Current__c == true) {
                 nBCDays  = (Date.Today()).daysBetween(currVolBGCheck[0].Date__c); 
                 displayPopup = True;
                 flagForCancel = true;
@@ -250,7 +250,7 @@ insert dynamicContentShare;
                 if(currVolBGCheck[1].Status__c != 'Rejected') {
                     blockNewBG = true;
                 }
-            } else if(currVolBGCheck[0].Date__c > Date.Today() && Date.Today().daysBetween(currVolBGCheck[0].Date__c) < 30 && currVolBGCheck[0].Status__c != 'Rejected' && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[0].Current__c == true) {
+            } else if(currVolBGCheck[0].Date__c > Date.Today() && Date.Today().daysBetween(currVolBGCheck[0].Date__c) <= 30 && currVolBGCheck[0].Status__c != 'Rejected' && DbVolRoleBGReqCheck.size() >0 && currVolBGCheck[0].Current__c == true) {
                 nBCDays  = (Date.Today()).daysBetween(currVolBGCheck[0].Date__c);
                 displayPopup = True;
                 flagForCancel = true;

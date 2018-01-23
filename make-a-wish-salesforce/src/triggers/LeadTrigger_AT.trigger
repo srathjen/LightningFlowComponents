@@ -19,8 +19,12 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         Set<String> postalCodesSet = new Set<String>();
         Map<Id, Lead> leadRegionMap = new Map<Id, Lead>();
         Set<Id> leadChapterSet = new Set<Id>();
+        Set<Id> leadChapterNameSet = new Set<Id>();
         for(Lead newLead : Trigger.new)
         {    
+            newLead.Override_Dupe_Check__c = false;
+            newLead.Contact_Dup_Check__c = Null;
+            newLead.Dup_Check__c = Null;
             
             If(newLead.Additional_Parent_First_Name__c == newLead.Parent_First_Name__c && newLead.Additional_Parent_Last_Name__c == newLead.Parent_Last_Name__c && newLead.Additional_Parent_Phone__c == newLead.Phone
                && newLead.Additional_Parent_Email__c == newLead.Email && newLead.Additional_Parent_City__c == newLead.City && newLead.Additional_Parent_Postal_Code__c == newLead.PostalCode){
@@ -40,9 +44,11 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                    
                    
                }
+            
             leadChapterSet.add(newLead.ChapterName__c);
             leadRegionMap.put(newLead.Id, newLead);
-            newLead.Part_A_Form_Password__c= handlerIns.getRandom();
+            newLead.Part_A_Form_Password__c= handlerIns.getRandom();            
+            leadChapterNameSet.add(newLead.ChapterName__c);
             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
             {   
                 if(newLead.Status == 'Inquiry')
@@ -95,6 +101,8 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
             
         }
         
+        
+        
         if(leadRegionMap.size() > 0 && leadChapterSet.size() > 0) {
             LeadTriggerHandler.populateRegionCode(leadRegionMap, leadChapterSet);
         }
@@ -106,6 +114,9 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
         if(newLeadList.size() > 0){
             //  LeadTriggerHandler.findDuplicateRecords(newLeadList);
         }
+        
+        if(leadChapterNameSet.Size() > 0)
+            LeadTriggerHandler.updateHiddenchapterName(leadChapterNameSet,Trigger.new);
     }
     
     /*Initiate Approver process When the Lead record is created.*/
@@ -142,6 +153,9 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                 } else {
                     icdInfoMap.put(newLead.Id, new Set<Integer>{1});
                 }
+            }
+            if(newLead.Hidden_DV_form_Medical_professional_Type__c == 'Treating Medical Professional' && Trigger.oldMap.get(newLead.Id).Hidden_DV_form_Medical_professional_Type__c != newLead.Hidden_DV_form_Medical_professional_Type__c) {
+                newLead.HiddenMedicalProfessionalEmail__c = newLead.Treating_Medical_Professional_Email__c;
             }
             //To update Secondary Diagnosis2 if ICD Code2 value is changed
             if(newLead.SD2_ICD_Code__c != Trigger.oldMap.get(newLead.Id).SD2_ICD_Code__c && newLead.SD2_ICD_Code__c != null) {
@@ -186,8 +200,7 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
             }
             
             
-            
-            if((newLead.Sub_Status__c == 'Pending Diagnosis Verification') && trigger.oldMap.get(newLead.id).Sub_Status__c != 'Pending Diagnosis Verification'){
+            if(trigger.oldMap.get(newLead.id).Of_Times_Email_Sent__c != newLead.Of_Times_Email_Sent__c){
                 
                     newLead.Part_A_Sent__c = Date.today();
             }
@@ -199,7 +212,28 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
             if(newLead.Status == 'Eligibility Review' && newLead.Sub_Status__c == 'Pending Diagnosis Verification')
                 newLead.Sub_Status__c = Null;
             
-            if(newLead.Treating_Medical_Professional_Email__c != trigger.oldmap.get(newLead.id).Treating_Medical_Professional_Email__c)
+            if(newLead.Treating_Medical_Professional_Email__c != trigger.oldmap.get(newLead.id).Treating_Medical_Professional_Email__c && newLead.Hidden_DV_form_Medical_professional_Type__c ==  'Treating Medical Professional')
+            {
+                LeadTriggerHandler handlerIns = new LeadTriggerHandler();
+                newLead.Of_Times_Email_Sent__c = 0;
+                newLead.Part_A_Form_Password__c = handlerIns.getRandom();
+                
+            }
+            if(newLead.Best_contact_for_Physician_Email__c != trigger.oldmap.get(newLead.id).Best_contact_for_Physician_Email__c && newLead.Hidden_DV_form_Medical_professional_Type__c ==  'Best contact for Physician')
+            {
+                LeadTriggerHandler handlerIns = new LeadTriggerHandler();
+                newLead.Of_Times_Email_Sent__c = 0;
+                newLead.Part_A_Form_Password__c = handlerIns.getRandom();
+                
+            }
+            if(newLead.Alternate1MedicalProfessionalEmail__c != trigger.oldmap.get(newLead.id).Alternate1MedicalProfessionalEmail__c && newLead.Hidden_DV_form_Medical_professional_Type__c ==  'Alternate 1 Medical Professional')
+            {
+                LeadTriggerHandler handlerIns = new LeadTriggerHandler();
+                newLead.Of_Times_Email_Sent__c = 0;
+                newLead.Part_A_Form_Password__c = handlerIns.getRandom();
+                
+            }
+            if(newLead.Alternate2MedProfessionalEmail__c != trigger.oldmap.get(newLead.id).Alternate2MedProfessionalEmail__c && newLead.Hidden_DV_form_Medical_professional_Type__c ==  'Alternate 2 Medical Professional')
             {
                 LeadTriggerHandler handlerIns = new LeadTriggerHandler();
                 newLead.Of_Times_Email_Sent__c = 0;
@@ -333,7 +367,9 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
     
     /*Convert the lead records when it is approved.*/
     if(Trigger.isAfter && Trigger.isUpdate)
-    {
+    {   
+        Map<Id,Lead> qualifiedLeadMap = new Map<Id,Lead>();
+        
         List<Lead> newLeadList = new List<Lead>();
         List<Lead> approvalList = new List<Lead>();
         Map<Lead,Id> lead_IntakUserIdMap = new Map<Lead,Id>();
@@ -349,16 +385,16 @@ trigger LeadTrigger_AT on Lead (Before insert,Before Update,After insert,After U
                 
                 if(!newLead.isConverted && newLead.Status == 'Qualified' && Trigger.oldmap.get(newLead.id).Status != 'Qualified'){
                     
-                    newLeadList.add(newLead);
+                    qualifiedLeadMap.put(newLead.id,newLead);
                 }
                 
                 
             }
-            if(newLeadList.size() > 0)
+            if(qualifiedLeadMap.size() > 0)
             {
                 
                 LeadTriggerHandler handlerIns = new LeadTriggerHandler();
-                handlerIns.onAfterUpdate(newLeadList);
+                handlerIns.onAfterUpdate(qualifiedLeadMap);
             }
             //Create and assign the task to lead intake user when the lead status is updated with DNQ.
             if(lead_IntakUserIdMap.Size() > 0)

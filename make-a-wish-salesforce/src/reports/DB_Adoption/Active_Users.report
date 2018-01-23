@@ -31,7 +31,6 @@
     <filter>
         <criteriaItems>
             <column>ACTIVE</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

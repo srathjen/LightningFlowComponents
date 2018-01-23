@@ -45,7 +45,6 @@
     <filter>
         <criteriaItems>
             <column>FIRST_NAME</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Mannix</value>
         </criteriaItems>

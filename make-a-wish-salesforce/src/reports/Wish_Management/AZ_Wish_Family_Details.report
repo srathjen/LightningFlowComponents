@@ -14,21 +14,28 @@
         <filter>
             <criteriaItems>
                 <column>Contact$RecordType</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Contact.Wish_Child</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.Cases$RecordType</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Case.Wish</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.Cases$Sub_Status__c</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>notEqual</operator>
                 <value>Abandoned</value>
+            </criteriaItems>
+            <criteriaItems>
+                <column>Contact$Test_Record__c</column>
+                <operator>equals</operator>
+                <value>0</value>
+            </criteriaItems>
+            <criteriaItems>
+                <column>Contact$Region_Chapter__c</column>
+                <operator>equals</operator>
+                <value>make-a-wish arizona</value>
             </criteriaItems>
         </filter>
         <format>Summary</format>
@@ -97,13 +104,11 @@
         <filter>
             <criteriaItems>
                 <column>Contact$RecordType</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Contact.Wish_Child</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.npe4__Relationships__r$npe4__RelatedContact__c.RecordType</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Contact.Wish_Family</value>
             </criteriaItems>

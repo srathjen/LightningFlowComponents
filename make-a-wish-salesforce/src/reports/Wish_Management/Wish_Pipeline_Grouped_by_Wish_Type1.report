@@ -34,6 +34,9 @@
         <field>Contact.Current_Age__c</field>
     </columns>
     <columns>
+        <field>Case.ChapterName__c</field>
+    </columns>
+    <columns>
         <field>STATUS</field>
     </columns>
     <columns>
@@ -69,21 +72,18 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish Determined,Budget Approval - Submitted,Budget Approval - Approved,Wish Design,Wish Scheduled,Hold,Inactive</value>
         </criteriaItems>
         <criteriaItems>
-            <column>CREATED_ALIAS</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>iuser</value>
+            <column>Case.ChapterName__c</column>
+            <operator>contains</operator>
+            <value>Arizona</value>
         </criteriaItems>
         <criteriaItems>
-            <column>CONTACT.NAME</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>notEqual</operator>
-            <value>nemo clownfish</value>
+            <column>Case.Test_Record__c</column>
+            <operator>equals</operator>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>

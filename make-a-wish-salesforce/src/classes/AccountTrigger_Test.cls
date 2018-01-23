@@ -30,22 +30,26 @@ public class AccountTrigger_Test {
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountWithWishCoordinatior(sysAdmin.Id);
         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
         User volunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunteerContact.Id);
-        Account inkindAccount = OrientationandTrainingUtil.inKindAccountWithStatus();
-        inkindAccount.Chapter_Name__c = chapterAccount.Id;
-        inkindAccount.In_Kind_Approval_Status__c = 'Rejected';
-        update inkindAccount;
-        
+        Constant_AC  constant = new Constant_AC();
+        Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
+        Account newchapterAccount = new Account(Name = 'InKind Account', RecordTypeId = inKindDonorsAccountRTId,Chapter_Name__c = chapterAccount.Id);
+        insert newchapterAccount;
+        newchapterAccount.In_Kind_Approval_Status__c = 'Rejected';
+        update newchapterAccount;
+  
     }
     
     static testmethod void inKindDonorUpdateNullChapterName() {
+        Constant_AC  constant = new Constant_AC();
+        Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
         User sysAdmin = [SELECT Id,userName,Email FROM User WHERE Email =: 'testmawa@gmail.com' limit 1];
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccountWithWishCoordinatior(sysAdmin.Id);
         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
         User volunteerUser = OrientationandTrainingUtil.CreateActiveVolunteerUser(volunteerContact.Id);
-        Account inkindAccount = OrientationandTrainingUtil.inKindAccountWithSChpater(chapterAccount.id);
-        inkindAccount.Chapter_Name__c = null;
-        inkindAccount.In_Kind_Approval_Status__c = 'Approved';
-        update inkindAccount;
+        Account newchapterAccount = new Account(Name = 'InKind Account', RecordTypeId = inKindDonorsAccountRTId,Chapter_Name__c = chapterAccount.Id);
+        insert newchapterAccount;
+        newchapterAccount.In_Kind_Approval_Status__c = 'Approved';
+        update newchapterAccount;
         
     }
     

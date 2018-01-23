@@ -17,6 +17,10 @@
         <name>Exclude_from_Application__c</name>
     </fields>
     <fields>
+        <label><!-- Move to Historical --></label>
+        <name>Moved_to_Historical_by_Volunteer__c</name>
+    </fields>
+    <fields>
         <label><!-- isWishRole --></label>
         <name>isWishRole__c</name>
     </fields>

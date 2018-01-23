@@ -41,6 +41,10 @@
         <name>Hidden_COI_Volunteer_FirstName__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Trigger COI Exp Reminder --></label>
+        <name>Hidden_Trigger_COI_Exp_Reminder__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Volunteer Contact Email --></label>
         <name>Hidden_Volunteer_Contact_Email__c</name>
     </fields>
@@ -96,6 +100,10 @@
     <workflowTasks>
         <name>COI_ET_COI_Expired_7_Days</name>
         <subject><!-- COI ET : COI Expired (7 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>COI_ET_COI_Expiring</name>
+        <subject><!-- COI ET : COI Expiring --></subject>
     </workflowTasks>
     <workflowTasks>
         <name>COI_ET_COI_Expiring_16_Days</name>

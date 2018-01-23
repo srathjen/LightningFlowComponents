@@ -109,7 +109,7 @@ body {
                  participate in the Wish: (indicate names of potential wish participants)</p>
                  
                  <p>
-                     {!Name}
+                     {!participantsName}
                      <br/>
                      <br/>
                    Participants, and the parents or legal guardians of the Wish Child and any

@@ -42,7 +42,6 @@
     <filter>
         <criteriaItems>
             <column>CONTACT_CREATED</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Integration User</value>
         </criteriaItems>

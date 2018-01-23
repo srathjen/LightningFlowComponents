@@ -82,6 +82,34 @@
       
   
      });
+        
+        $('.alt1ChBox').click(function() { 
+            if($(this).prop("checked") == true){
+                $('.alt1ChBoxRadio').attr('disabled', true);
+                $('.alt1ChBoxRadio').each(function(){                
+                    $(this).prop('checked', false);                
+                });
+            }
+            else if($(this).prop("checked") == false){
+                $('.alt1ChBoxRadio').attr('disabled', false);
+            }
+        });
+        
+        $('.alt2ChBox').click(function() { 
+            if($(this).prop("checked") == true){
+                $('.alt2ChBoxRadio').attr('disabled', true);
+                $('.alt2ChBoxRadio').each(function(){                
+                    $(this).prop('checked', false);                
+                });
+                
+            }
+            else if($(this).prop("checked") == false){
+                $('.alt2ChBoxRadio').attr('disabled', false);
+            }
+        });
+        
+        
+        
      
       $('.existingAddParentCon').click(function() { 
       
@@ -103,22 +131,21 @@
   
   
     function validateRadio(){    
-     var clsName;
-     var bool = true;
-     $('.TotalBox').each(function(){
-      clsName = $(this).attr('class').split('_')[1];
-
-      if(!$('.'+clsName+'mycheck').is(':checked') && !$('.'+clsName+'Radio').is(':checked'))
-        bool = false;
-     });
-    
-    if(!bool)
-        alert('Please select at least one Wish Family/Medical Professional contact.');
-        //alert('Please select at least one Wish Family/Medical Professional to Diagnosis Verification.');
-    
-    
-    return bool;     
-     
+        var clsName;
+        var bool = true;
+        $('.TotalBox').each(function(){
+            clsName = $(this).attr('class').split('_')[1];
+            if(!$('.'+clsName+'mycheck').is(':checked') && !$('.'+clsName+'Radio').is(':checked')) {
+                bool = false;
+            }
+        });
+        
+        if(!bool) {
+            alert('Please select at least one Wish Family/Medical Professional contact.');
+        }
+        
+        return bool;     
+        
     }
         
   
@@ -686,7 +713,184 @@
                     </div>
                 </div>
               </apex:outputpanel>
+                  
+                  <apex:outputpanel rendered="{!dupAlternate1MedicalContactList.size > 0}" StyleClass ="TotalBox is_alt1ChBox">
+                 <div class="slds-card slds-m-horizontal--large {!cardClass}">
+                    <div class="slds-card__header slds-grid slds-grid--align-spread">
+                        <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Alternate 1 Medical Professional Contacts</h2>
+                       
+                    </div>
+                    <div class="slds-card__body">
+                     
+                        <apex:outputText rendered="{!dupAlternate1MedicalContactList.size < 0}" >
+                        <!--apex:outputText rendered="{!NOT(hasResults)}"-->
+                        <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
+                            <apex:outputText value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
+                        </h3>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!dupAlternate1MedicalContactList.size > 0}">
+
+                            <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal dupHasRes">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th class="slds-text-heading--label" scope="col">First Name</th>
+                                        <th class="slds-text-heading--label" scope="col">Last Name</th>
+                                        <th class="slds-text-heading--label" scope="col">Phone</th>
+                                        <th class="slds-text-heading--label" scope="col">Email</th>                                        
+                                       <th class="slds-text-heading--label" scope="col">Select Contact</th>
+                                       <th class="slds-text-heading--label" scope="col" rowspan="4">Create New Record</th>
+                                    </tr>
+                                </thead>
+                                <tbody>  
+                                
+                                 <tr style="border: 0.1px solid #c1c1c1;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td> <div style="float:left; margin-top: 1%;  position:absolute; margin-left: 6%;">
+                                                       <apex:inputCheckbox label="" onclick="" styleClass="alt1ChBox alt1ChBoxmycheck overallcheck" />
+                                                     </div>
+                                    </td>
+                               </tr>
+                                                                     
+                                    <apex:repeat value="{!dupAlternate1MedicalContactList}" var="con">
+                                        <tr>
+                                              <td>
+                                                    <a href="{!URLFOR($Action.Contact.View, con.Id)}" class="slds-truncate">
+                                                      <apex:outputText value="View"/>
+                                                    </a>
+                                               
+                                              </td>
+                                               <td>
+                                                     <apex:outputText value="{!con.FirstName}"/>
+                                               
+                                               </td>
+                                               <td>
+                                               
+                                                    <apex:outputText value="{!con.LastName}"/>
+                                                
+                                               </td>
+                                               <td>
+                                                    <apex:outputText value="{!con.Phone}"/>
+                                                
+                                               </td>
+                                               <td>
+                                                    <apex:outputText value="{!con.Email}"/>
+                                                
+                                               </td>
+                                             
+                                               <td style="border-right: 1px solid #d8dde6;">
+                                                   
+                                                    <input type="radio" name="alternate1" VALUE="{!con.id}" class="alt1ChBoxRadio overallRadio" id="alternateMed1"/>
+                                                   
+                                               </td>
+                                            
+                                           
+                                        </tr>
+                                    </apex:repeat>
+                                     <apex:inputText value="{!alternate1ConId}"  id="alternateMed1Id" style="display:none" styleClass="alternateMedProf1"/>
+                                     
+                                  </tbody>
+                            </table>
+                            <div style="float:left; margin-top: -6%;  margin-right: 7%; position:absolute; margin-left: 87%;">
+                            
+                            </div>
+                        </apex:outputText>
+                    </div>
+                </div>
+              </apex:outputpanel>
               
+                        <apex:outputpanel rendered="{!dupAlternate2MedicalContactList.size > 0}" StyleClass ="TotalBox is_alt2ChBox">
+                 <div class="slds-card slds-m-horizontal--large {!cardClass}">
+                    <div class="slds-card__header slds-grid slds-grid--align-spread">
+                        <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Alternate 2 Medical Professional Contacts</h2>
+                       
+                    </div>
+                    <div class="slds-card__body">
+                     
+                        <apex:outputText rendered="{!dupAlternate2MedicalContactList.size < 0}" >
+                        <!--apex:outputText rendered="{!NOT(hasResults)}"-->
+                        <h3 class="slds-text-heading--small slds-p-top--large slds-p-bottom--large">
+                            <apex:outputText value="{!$Label.npe01__contact_merge_error_confirm_message_nothing_found}"/>
+                        </h3>
+                        </apex:outputText>
+                        <apex:outputText rendered="{!dupAlternate2MedicalContactList.size > 0}">
+
+                            <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal dupHasRes">
+                                <thead>
+                                    <tr>
+                                        <th>Action</th>
+                                        <th class="slds-text-heading--label" scope="col">First Name</th>
+                                        <th class="slds-text-heading--label" scope="col">Last Name</th>
+                                        <th class="slds-text-heading--label" scope="col">Phone</th>
+                                        <th class="slds-text-heading--label" scope="col">Email</th>                                        
+                                       <th class="slds-text-heading--label" scope="col">Select Contact</th>
+                                       <th class="slds-text-heading--label" scope="col" rowspan="4">Create New Record</th>
+                                    </tr>
+                                </thead>
+                                <tbody>  
+                                
+                                 <tr style="border: 0.1px solid #c1c1c1;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td> <div style="float:left; margin-top: 1%;  position:absolute; margin-left: 6%;">
+                                                       <apex:inputCheckbox label="" onclick="" styleClass="alt2ChBox alt2ChBoxmycheck overallcheck" />
+                                                     </div>
+                                    </td>
+                               </tr>
+                                                                     
+                                    <apex:repeat value="{!dupAlternate2MedicalContactList}" var="con">
+                                        <tr>
+                                              <td>
+                                                    <a href="{!URLFOR($Action.Contact.View, con.Id)}" class="slds-truncate">
+                                                      <apex:outputText value="View"/>
+                                                    </a>
+                                               
+                                              </td>
+                                               <td>
+                                                     <apex:outputText value="{!con.FirstName}"/>
+                                               
+                                               </td>
+                                               <td>
+                                               
+                                                    <apex:outputText value="{!con.LastName}"/>
+                                                
+                                               </td>
+                                               <td>
+                                                    <apex:outputText value="{!con.Phone}"/>
+                                                
+                                               </td>
+                                               <td>
+                                                    <apex:outputText value="{!con.Email}"/>
+                                                
+                                               </td>
+                                             
+                                               <td style="border-right: 1px solid #d8dde6;">
+                                                    <input type="radio" name="medical" VALUE="{!con.id}" class="alt2ChBoxRadio overallRadio" id="alternateMed2"/>
+                                                   
+                                               </td>
+                                        </tr>
+                                    </apex:repeat>
+                                     <apex:inputhidden value="{!alternate2ConId}" id="medicalValue2" html-class="alternateMedProf2"/>
+                                     
+                                  </tbody>
+                            </table>
+                            <div style="float:left; margin-top: -6%;  margin-right: 7%; position:absolute; margin-left: 87%;">
+                            
+                            </div>
+                        </apex:outputText>
+                    </div>
+                </div>
+              </apex:outputpanel>
+                  
                 <apex:outputpanel rendered="{!(hideTreatingSection == false && dupTreatingContactList.size > 0)}" StyleClass ="TotalBox is_treating">
                 
                  <div class="slds-card slds-m-horizontal--large {!cardClass}">
@@ -1040,41 +1244,41 @@
         
 
     </div>
-     <script>
-                function changeValue(input, textid) {
-                    
-                        document.getElementById(textid).value = input.value;
-                } 
-               
-     </script>
-     <script>
-                function medicalValue(input, textid) {
-                       
-                        document.getElementById(textid).value = input.value;
-                } 
-              
-     </script>
-      <script>
-                function treatingValue(input, textid) {
-                    
-                        document.getElementById(textid).value = input.value;
-                } 
-               
-     </script>
-      <script>
-                function bestPersonValue(input, textid) {
-                    
-                        document.getElementById(textid).value = input.value;
-                } 
-              
-     </script>
-     
-      <script>
-                function additionalParentValue(input, textid) {
-                    
-                        document.getElementById(textid).value = input.value;
-                } 
-               
-     </script>
-     
+    
+    <script>
+    function changeValue(input, textid) {
+        
+        document.getElementById(textid).value = input.value;
+    } 
+    function additionalParentValue(input, textid) {
+        
+        document.getElementById(textid).value = input.value;
+    } 
+    function bestPersonValue(input, textid) {
+        
+        document.getElementById(textid).value = input.value;
+    } 
+    function treatingValue(input, textid) {
+        
+        document.getElementById(textid).value = input.value;
+    } 
+    function medicalValue(input, textid) {
+        
+        document.getElementById(textid).value = input.value;
+    } 
+    function mediVal(myEleId,value) {
+        document.getElementById(myEleId).value = value;
+    }
+    $(document).delegate( "#alternateMed1", "click", function() {
+        var conId = $(this).val();
+        $('.alternateMedProf1').val(conId);
+    });
+    
+    $(document).delegate( "#alternateMed2", "click", function() {
+        var conId = $(this).val();
+        $('.alternateMedProf2').val(conId);
+    });
+    
+    </script>
+    
 </apex:page>

@@ -3,16 +3,17 @@ Author      : MST Solutions
 Date        : 4/10/2016
 Description : This trigger is used to update the Documentation picklist value of the related inkind donation and reimbursement record
 ****************************************************************************************************/
-trigger InKindDonationReimbursementFile_AT on In_Kind_Donation_Reimbursement_File__c (After insert, After delete) {
+trigger InKindDonationReimbursementFile_AT on InkindDon_reimburseFile__c (After insert, After delete) {
     if(trigger.isAfter && trigger.isInsert){
         List<Id> drIds = new List<Id>();
         set<string> inkindIdsSet = new set<string>();
         list<In_Kind_Donation_Reimbursement__c> updatedInkindList = new List<In_Kind_Donation_Reimbursement__c>();
-        for(In_Kind_Donation_Reimbursement_File__c dr: Trigger.new){
+        for(InkindDon_reimburseFile__c dr: Trigger.new){
             drIds.add(dr.Id);
             if(dr.Parent__c !=Null)
                 inkindIdsSet.add(dr.Parent__c);
         }
+       
         AWSFilePath_AC.UpdateInKindDonReimburFilePath(drIds);
         if(inkindIdsSet.size() >0){
             for(In_Kind_Donation_Reimbursement__c currentInkind :[SELECT Id,Documentation__c FROm In_Kind_Donation_Reimbursement__c WHERE ID IN:inkindIdsSet]){
@@ -29,7 +30,7 @@ trigger InKindDonationReimbursementFile_AT on In_Kind_Donation_Reimbursement_Fil
     if(trigger.isAfter && trigger.isDelete){
         set<string> inkindIdsSet = new set<string>();
         list<In_Kind_Donation_Reimbursement__c> updateList = new list<In_Kind_Donation_Reimbursement__c>();
-        for(In_Kind_Donation_Reimbursement_File__c deleteRecord : trigger.old){
+        for(InkindDon_reimburseFile__c deleteRecord : trigger.old){
             if(deleteRecord.Parent__c != Null){
                 inkindIdsSet.add(deleteRecord.Parent__c);
                 system.debug('Parent Id !!!!!!!!!!!' + inkindIdsSet);
@@ -38,7 +39,7 @@ trigger InKindDonationReimbursementFile_AT on In_Kind_Donation_Reimbursement_Fil
         
         if(inkindIdsSet.size()>0){
             Set<string> AttachmentExistParentsSet = new Set<string>();
-            for(In_Kind_Donation_Reimbursement_File__c checkChild : [SELECT Id, Parent__c FROM In_Kind_Donation_Reimbursement_File__c WHERE Parent__c IN :inkindIdsSet]) {
+            for(InkindDon_reimburseFile__c checkChild : [SELECT Id, Parent__c FROM InkindDon_reimburseFile__c WHERE Parent__c IN :inkindIdsSet]) {
                 AttachmentExistParentsSet.add(checkChild.Parent__c);
             }
             list<string> updateIdsSet = new list<string>();

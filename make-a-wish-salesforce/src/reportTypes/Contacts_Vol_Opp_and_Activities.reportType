@@ -2467,11 +2467,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>EmailMessage</field>
-            <table>Contact.Volunteer_Orientation_Trainings__r.Activities</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>IsVisibleInSelfService</field>
             <table>Contact.Volunteer_Orientation_Trainings__r.Activities</table>
         </columns>

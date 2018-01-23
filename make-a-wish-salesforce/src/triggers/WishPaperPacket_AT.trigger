@@ -65,8 +65,8 @@ trigger WishPaperPacket_AT on Wish_Child_Form__c (Before insert,Before update, A
             if(dbWishchildForm.Availability_Time_Period_3__c == 'null/null')
             dbWishchildForm.Availability_Time_Period_3__c = '';
             
-            if(dbWishchildForm.Participant_Names__c == Null)
-            dbWishchildForm.Hidden_Same_as_Family__c = false;
+            /*if(dbWishchildForm.Participant_Names__c == Null)
+            dbWishchildForm.Hidden_Same_as_Family__c = false;*/
         }
         
     }

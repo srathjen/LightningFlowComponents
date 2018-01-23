@@ -6,13 +6,9 @@ Description : RelationshipsViewer_AC is used when the volunteer update the wish 
 wish contact are send to approval process once the volunteer manager approve the changes submitted by the volunteer
 then these updated values are reflected in the record.
 *****************************************************************************************************/
-
-
-
-
 public class RelationshipsViewer_AC{
-    public String sample {get;set;}
     public Id caseId {get;set;}
+    Public Id WishChildId{get;set;}
     Public Case parentWish{get;set;}
     public list<Contact> contactList {get;set;}
     Public list<Contact>wishChildContactList{get;set;}
@@ -20,7 +16,6 @@ public class RelationshipsViewer_AC{
     Public List<npe4__Relationship__c > dbRelationshipList {get;set;}
     public List<Contact> clonedFamilyContactList {get;set;}
     string contactId;
-    public List<String> options {get;set;}
     Public boolean outPutMode{get;set;}
     Public boolean inputMode{get;set;}
     public boolean isSave{get;set;}
@@ -28,11 +23,14 @@ public class RelationshipsViewer_AC{
     public boolean isMessage; 
     public boolean isChildSuccessMessage; 
     public List<contact> originalWishChildList{get;set;}
-    
+     
+    /***************************************************************************************
+     This is the constructor method it will call when ever the page is loaded. 
+     it query the wish child contact and related contact to the corresponding parent case.
+     ***************************************************************************************/
     public RelationshipsViewer_AC(){
         outPutMode = true;
         Constant_AC  constant = new Constant_AC();
-        
         Id familyContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
         caseId = Apexpages.currentPage().getParameters().get('recId');
         if(caseId != Null){
@@ -40,21 +38,19 @@ public class RelationshipsViewer_AC{
             dbRelationshipList = new List<npe4__Relationship__c>();
             parentWish = new Case();
             parentWish = [SELECT ID,ContactId,OwnerId FROM Case WHERE ID = : caseId];
+            WishChildId = parentWish.ContactId;
             if(parentWish.Id != Null ) {
-                
-                contactList = [SELECT ID,Old_Update_Contact_Values__c,FirstName,LastName,Name,MailingCity,MailingStreet,MailingState,MailingCountry,MailingPostalCode,Phone,OtherPhone,MobilePhone,Email FROM Contact WHERE ID = : parentWish.ContactId];
-                
+                contactList = [SELECT ID,Old_Update_Contact_Values__c,FirstName,LastName,Name,MailingCity,MailingStreet,MailingState,MailingCountry,MailingPostalCode,Phone,OtherPhone,MobilePhone,Email FROM Contact WHERE ID = : parentWish.ContactId Limit 1];
                 
                 dbRelationshipList  = [SELECT Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__Type__c, npe4__RelatedContact__r.RecordTypeId,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.FirstName,npe4__RelatedContact__r.LastName,npe4__RelatedContact__r.Phone,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.MailingCity,npe4__RelatedContact__r.MailingStreet,npe4__RelatedContact__r.MailingState,
-                                       npe4__RelatedContact__r.MailingCountry,npe4__RelatedContact__r.OtherPhone,npe4__RelatedContact__r.MobilePhone,npe4__RelatedContact__r.MailingPostalCode,npe4__RelatedContact__r.Use_as_Household_Address__c,npe4__RelatedContact__r.Same_as_Household_Address__c FROM npe4__Relationship__c WHERE npe4__Contact__c =: contactList[0].Id AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId ];
-                
+                                       npe4__RelatedContact__r.MailingCountry,npe4__RelatedContact__r.OtherPhone,npe4__RelatedContact__r.MobilePhone,npe4__RelatedContact__r.MailingPostalCode,npe4__RelatedContact__r.Use_as_Household_Address__c,npe4__RelatedContact__r.Same_as_Household_Address__c FROM npe4__Relationship__c WHERE 
+                                       npe4__Contact__c =: contactList[0].Id AND npe4__RelatedContact__r.RecordTypeId =: familyContactRecordTypeId Limit 10];
+                                       
                 
                 if(contactList.size() > 0)
                 {
                     originalWishChildList = new List<Contact>();
-                    
                     for(contact con : contactList){
-                        
                         Contact childContact = new Contact();
                         childContact.FirstName = con.FirstName;
                         childContact.LastName=  con.LastName;
@@ -69,18 +65,12 @@ public class RelationshipsViewer_AC{
                         childContact.MobilePhone = con.MobilePhone;
                         childContact.Id = con.id;
                         originalWishChildList.add(childContact);
-                        
                     }
                 }      
-                
-                
                 if(dbRelationshipList.size() > 0){
                     isWishFamily = true;
-                    
-                    
                     dbRelatedContactList = new List<Contact>();
                     for(npe4__Relationship__c  dbRelatedWishFamily : dbRelationshipList){
-                        
                         Contact relatedFamilyCon = new Contact();
                         relatedFamilyCon.FirstName = dbRelatedWishFamily.npe4__RelatedContact__r.FirstName;
                         relatedFamilyCon.LastName=  dbRelatedWishFamily.npe4__RelatedContact__r.LastName;
@@ -98,41 +88,35 @@ public class RelationshipsViewer_AC{
                         relatedFamilyCon.OtherPhone = dbRelatedWishFamily.npe4__RelatedContact__r.OtherPhone;
                         relatedFamilyCon.MobilePhone = dbRelatedWishFamily.npe4__RelatedContact__r.MobilePhone;
                         dbRelatedContactList.add(relatedFamilyCon);
-                        
                     }
-                    
-                    
                 }
             }
-            
         }
-        
     }
     
-    
-    
+    /******************************************************************************************
+     This UpdateContactInfo() is will call when the user click the update button on the page. 
+     It create a cloned list of contact for wish child and wish family contacts.
+    *****************************************************************************************/
     public void UpdateContactInfo(){
         Constant_AC  constant = new Constant_AC();
         outPutMode = false;
         inputMode = true;
         isSave = true;
-        
         wishChildContactList = new List<Contact>();
         wishChildContactList = originalWishChildList.deepClone(true,false,false);
-        
         if(dbRelatedContactList != Null  && dbRelatedContactList.size() > 0  ){
-            
             isWishFamily = true;
-            
             clonedFamilyContactList = new List<Contact>();
             clonedFamilyContactList = dbRelatedContactList.deepClone(true,false,false);
-            
         }
-        
     }
     
-    
-    public List<SelectOption> getStates(){
+    /******************************************************************************************
+     This getStates() is used to get the all the state values from US, and 
+     user can update the state value from list of displyed state values.
+    *****************************************************************************************/
+     public List<SelectOption> getStates(){
         List<SelectOption> options = new List<SelectOption>();
         Schema.DescribeFieldResult fieldResult =  Lead.State_Picklist__c.getDescribe();
         List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
@@ -144,7 +128,12 @@ public class RelationshipsViewer_AC{
         return options;
     }  
     
-    public pageReference SaveUpdatedContact(){
+    /******************************************************************************************************
+     This SaveUpdatedContact() will call when the user update theri information then that updated
+     information are stored in the back end fields and the wish child contact is going to approval process. 
+     Once chappter staff approved this chages then the updated chages are stored into corresponding fields.
+    ********************************************************************************************************/
+     public pageReference SaveUpdatedContact(){
         outPutMode = true;
         inputMode = false;
         String newPhone;
@@ -170,14 +159,11 @@ public class RelationshipsViewer_AC{
         integer k;
         List<Contact> firstUseAsAddressList = new List<Contact>();
         List<Contact> secondUseAsAddressList = new List<Contact>();
-        
         Constant_AC  constant = new Constant_AC();
         string contactInfo = 'Following contact information(s) have been updated by the volunteer :' + '<Br/>';
-        
         Map<Id,Contact> updateContactMap = new Map<Id,Contact>();
         List<Task> demogarphicTaskList = new List<Task>();
         isSave = false;
-        
         List<ProcessInstanceWorkitem> piwi = [SELECT Id, ProcessInstanceId,ProcessInstance.Status,ProcessInstance.TargetObjectId FROM ProcessInstanceWorkitem WHERE ProcessInstance.TargetObjectId =: parentWish.ContactId AND  ProcessInstance.Status =: 'Pending'];
         if(piwi.size() > 0){
             Approval.ProcessWorkitemRequest req1 = new Approval.ProcessWorkitemRequest();
@@ -185,41 +171,35 @@ public class RelationshipsViewer_AC{
             req1.setWorkitemId(piwi.get(0).Id);
             Approval.process(req1,false);
         }
-        
-        
         for(Contact oldwishChildCon : wishChildContactList){
-            
             for(Contact newWishChildCon : originalWishChildList){
-                
                 if(oldwishChildCon.Id == newWishChildCon.Id){
-                    
-                    System.debug('oldwishChildCon.Id+++++++++++++++++++++++++++++++++++ ' + originalWishChildList);
-                    System.debug('contactList+++++++++++++++++++++++++++++++++++ ' + contactList);
-                    System.debug('wishChildContactList+++++++++++++++++++++++++++++++++++ ' + wishChildContactList);
-                    
                     if((oldwishChildCon.Phone != newWishChildCon.Phone) || (oldwishChildCon.Email != newWishChildCon.Email) || (oldwishChildCon.MailingStreet !=newWishChildCon.MailingStreet) ||
                        (oldwishChildCon.MailingCity != newWishChildCon.MailingCity) ||  (oldwishChildCon.MailingState!= newWishChildCon.MailingState)  || (oldwishChildCon.MailingCountry!= newWishChildCon.MailingCountry) ||
                        (oldwishChildCon.MailingPostalCode != newWishChildCon.MailingPostalCode) || (oldwishChildCon.OtherPhone != newWishChildCon.OtherPhone) || (oldwishChildCon.MobilePhone != newWishChildCon.MobilePhone)){
-                           
-                           
                            contactInfo  =  contactInfo +'<Br/>' + 'Name :'+' '+ '  '+newWishChildCon.FirstName+' '+newWishChildCon.LastName+ '  '+' ; '+'<Br/><Br/>';
                            if( oldwishChildCon.Phone != newWishChildCon.Phone){
                                newWishChildCon .Hidden_Phone__c  = oldwishChildCon.Phone;
-                               
                                if(newWishChildCon.Phone != Null)
                                    oldPhone = newWishChildCon.Phone;
-                               if(newWishChildCon .Hidden_Phone__c != Null){
+                               if(newWishChildCon.Hidden_Phone__c != Null){
                                    newPhone = newWishChildCon .Hidden_Phone__c;
                                    isChildSuccessMessage = true;
                                }
-                               if(newWishChildCon.Phone != Null && newWishChildCon.Hidden_Phone__c != Null)
+                               if(newWishChildCon .Hidden_Phone__c == Null){
+                                   newPhone = newWishChildCon.Hidden_Phone__c;
+                                   newWishChildCon.Hidden_Phone__c = '9912121313';
+                                   isChildSuccessMessage = true;
+                               }
+                               if(newWishChildCon.Phone != Null && newWishChildCon.Hidden_Phone__c != Null && newWishChildCon.Hidden_Phone__c != '9912121313')
                                    contactInfo += '<Br/>' +'Old Phone Value :'+ ' '+oldphone +'<Br/>' +' New Phone Value :' +' '+newPhone + '; ' + '<Br/>';
                                else{
                                    if((!String.isBlank(newPhone )) && String.isBlank(oldphone))
                                        contactInfo += '<Br/>'+'New Phone Value :'+' '+ newPhone + '; '+'<Br/>';
+                                   if((String.isBlank(newPhone )) && (!String.isBlank(oldphone)))
+                                       contactInfo += '<Br/>'+'New Phone Value :'+' '+ newPhone + '; '+'<Br/>';
                                }
                                updateContactMap.put(newWishChildCon.Id,newWishChildCon);
-                               system.debug('@@@@@@@ updateContactMap@@@@@@@@@'+updateContactMap.Values());
                            }
                            if( oldwishChildCon.MobilePhone != newWishChildCon.MobilePhone){
                                newWishChildCon.HiddenMobilePhone__c= oldwishChildCon.MobilePhone;
@@ -230,16 +210,21 @@ public class RelationshipsViewer_AC{
                                    newMobilePhone= newWishChildCon.HiddenMobilePhone__c;
                                    isChildSuccessMessage = true;
                                }
-                               if(newWishChildCon.MobilePhone!= Null && newWishChildCon.HiddenMobilePhone__c!= Null)
+                               if(newWishChildCon .HiddenMobilePhone__c== Null){
+                                   newMobilePhone = newWishChildCon.HiddenMobilePhone__c;
+                                   newWishChildCon.HiddenMobilePhone__c = '9912121313';
+                                   isChildSuccessMessage = true;
+                               }
+                               if(newWishChildCon.MobilePhone!= Null && newWishChildCon.HiddenMobilePhone__c!= Null && newWishChildCon.HiddenMobilePhone__c != '9912121313')
                                    contactInfo += '<Br/>' +'Old Mobile Phone Value :'+ ' '+oldMobilePhone+'<Br/>' +' New Mobile Phone Value :' +' '+newMobilePhone+ '; ' + '<Br/>';
                                else{
                                    if((!String.isBlank(newMobilePhone)) && String.isBlank(oldMobilePhone))
                                        contactInfo += '<Br/>'+'New Mobile Phone Value :'+' '+ newMobilePhone+ '; '+'<Br/>';
+                                   if((String.isBlank(newMobilePhone)) && (!String.isBlank(oldMobilePhone)))
+                                       contactInfo += '<Br/>'+'New Mobile Phone Value :'+' '+ newMobilePhone+ '; '+'<Br/>';
                                }
                                updateContactMap.put(newWishChildCon.Id,newWishChildCon);
-                               system.debug('@@@@@@@ updateContactMap@@@@@@@@@'+updateContactMap.Values());
                            }
-                           
                            if( oldwishChildCon.otherPhone != newWishChildCon.otherPhone ){
                                newWishChildCon.HiddenOtherPhone__c = oldwishChildCon.otherPhone ;
                                
@@ -249,16 +234,21 @@ public class RelationshipsViewer_AC{
                                    newOtherPhone = newWishChildCon.HiddenOtherPhone__c;
                                    isChildSuccessMessage = true;
                                }
-                               if(newWishChildCon.otherPhone != Null && newWishChildCon.HiddenOtherPhone__c!= Null)
+                               if(newWishChildCon .HiddenOtherPhone__c == Null){
+                                   newOtherPhone = newWishChildCon .HiddenOtherPhone__c;
+                                   newWishChildCon.HiddenOtherPhone__c = '9912121313';
+                                   isChildSuccessMessage = true;
+                               }
+                               if(newWishChildCon.otherPhone != Null && newWishChildCon.HiddenOtherPhone__c!= Null && newWishChildCon.HiddenOtherPhone__c != '9912121313')
                                    contactInfo += '<Br/>' +'Old Other Phone Value :'+ ' '+oldOtherPhone+'<Br/>' +' New Other Phone Value :' +' '+newOtherPhone+ '; ' + '<Br/>';
                                else{
                                    if((!String.isBlank(newOtherPhone)) && String.isBlank(oldOtherPhone))
                                        contactInfo += '<Br/>'+'New Other Phone Value :'+' '+ newOtherPhone+ '; '+'<Br/>';
+                                   if((String.isBlank(newOtherPhone)) && (!String.isBlank(oldOtherPhone)))
+                                       contactInfo += '<Br/>'+'New Other Phone Value :'+' '+ newOtherPhone+ '; '+'<Br/>';
                                }
                                updateContactMap.put(newWishChildCon.Id,newWishChildCon);
-                               system.debug('@@@@@@@ updateContactMap@@@@@@@@@'+updateContactMap.Values());
                            }
-                           
                            if(oldwishChildCon.Email != newWishChildCon.Email){
                                newWishChildCon .Hidden_Email__c = oldwishChildCon.Email;
                                if(newWishChildCon.Email != Null)
@@ -267,10 +257,17 @@ public class RelationshipsViewer_AC{
                                    newEmail = newWishChildCon .Hidden_Email__c;
                                    isChildSuccessMessage = true;
                                }
-                               if(newWishChildCon.Email != Null && newWishChildCon .Hidden_Email__c != Null)
+                               if(newWishChildCon.Hidden_Email__c == Null){
+                                   newEmail = newWishChildCon .Hidden_Email__c;
+                                   newWishChildCon.Hidden_Email__c = Label.Dummy_Email;
+                                   isChildSuccessMessage = true;
+                               }
+                               if(newWishChildCon.Email != Null && newWishChildCon .Hidden_Email__c != Null && newWishChildCon.Hidden_Email__c != Label.Dummy_Email)
                                    contactInfo += '<Br/>'+ 'Old Email Value:'+ ' '+ oldEmail +'<Br/>' +' New Email Value:' + ' '+ newEmail+ '; '+'<Br/>';
                                else{
                                    if((!String.isBlank(newEmail)) && String.isBlank(oldEmail))
+                                       contactInfo  += '<Br/>' +'New Email Value :' +' '+ newEmail+';' + '<Br/>';
+                                   if((String.isBlank(newEmail)) && (!String.isBlank(oldEmail)))
                                        contactInfo  += '<Br/>' +'New Email Value :' +' '+ newEmail+';' + '<Br/>';
                                }
                                updateContactMap.put(newWishChildCon.Id,newWishChildCon);
@@ -284,17 +281,22 @@ public class RelationshipsViewer_AC{
                                    newStreet = newWishChildCon .Hidden_Street__c;
                                    isChildSuccessMessage = true;
                                }
-                               if(newWishChildCon.MailingStreet != Null && newWishChildCon .Hidden_Street__c != Null)
+                               if(newWishChildCon .Hidden_Street__c == Null){
+                                   newStreet = newWishChildCon .Hidden_Street__c;
+                                   newWishChildCon.Hidden_Street__c = Label.Dummy_Email;
+                                   isChildSuccessMessage = true;
+                               }
+                               if(newWishChildCon.MailingStreet != Null && newWishChildCon .Hidden_Street__c != Null && newWishChildCon.Hidden_Street__c != Label.Dummy_Email)
                                    contactInfo  +='<Br/>'+ 'Old Street Value:'+ ' '+ oldStreet +'<Br/>'+' New Street Value:' + ' '+ newStreet + '; ' + '<Br/>';
                                else{
                                    if((!String.isBlank(newStreet)) && String.isBlank(oldStreet))
                                        contactInfo  += '<Br/>'+'New Street Value:'+' '+ newStreet+';' + '<Br/>';
+                                   if((String.isBlank(newStreet)) && (!String.isBlank(oldStreet)))
+                                       contactInfo  += '<Br/>'+'New Street Value:'+' '+ newStreet+';' + '<Br/>';
                                }
                                updateContactMap.put(newWishChildCon.Id,newWishChildCon);
-                               System.debug('oldwishChildCon.Id+++++++++++++++++++++++++++++++++++ ' + newWishChildCon.Id);
                            } 
                            if(oldwishChildCon.MailingCity != newWishChildCon.MailingCity){
-                               
                                newWishChildCon .Hidden_city__c = oldwishChildCon.MailingCity;
                                if(newWishChildCon.MailingCity != Null)
                                    oldCity = newWishChildCon.MailingCity;
@@ -302,17 +304,24 @@ public class RelationshipsViewer_AC{
                                    newCity =newWishChildCon .Hidden_city__c;
                                    isChildSuccessMessage = true;
                                }
-                               if(newWishChildCon.MailingCity != Null && newWishChildCon .Hidden_city__c != Null)
+                               if(newWishChildCon.Hidden_city__c == Null){
+                                   newCity =newWishChildCon.Hidden_city__c;
+                                   newWishChildCon.Hidden_city__c = Label.Dummy_Email;
+                                   isChildSuccessMessage = true;
+                               }
+                               if(newWishChildCon.MailingCity != Null && newWishChildCon .Hidden_city__c != Null && newWishChildCon.Hidden_city__c != Label.Dummy_Email)
                                    contactInfo  += '<Br/>'+ 'Old City Value:'+' '+oldCity +'<Br/>' + 'New City Value:'+ ' '+newCity + '; ' + '<Br/>';
                                else{
                                    if((!String.isBlank(newCity)) && String.isBlank(oldCity)){
+                                       contactInfo  += '<Br/>'+'New City Value:'+' '+ newCity+';' + '<Br/>';
+                                   }
+                                   if((String.isBlank(newCity)) && (!String.isBlank(oldCity))){
                                        contactInfo  += '<Br/>'+'New City Value:'+' '+ newCity+';' + '<Br/>';
                                    }
                                }
                                updateContactMap.put(newWishChildCon.Id,newWishChildCon);
                            }  
                            if(oldwishChildCon.MailingState!= newWishChildCon.MailingState){
-                               
                                newWishChildCon .Hidden_State__c = oldwishChildCon.MailingState;
                                if(newWishChildCon.MailingState != Null)
                                    oldState = newWishChildCon.MailingState;
@@ -320,17 +329,22 @@ public class RelationshipsViewer_AC{
                                    newState = newWishChildCon .Hidden_State__c;
                                    isChildSuccessMessage = true;
                                }
-                               if(newWishChildCon .Hidden_State__c != Null )
+                               if(newWishChildCon.Hidden_State__c == Null){
+                                   newState = newWishChildCon .Hidden_State__c;
+                                   newWishChildCon.Hidden_State__c = Label.Dummy_Email;
+                                   isChildSuccessMessage = true;
+                               }
+                               if(newWishChildCon .Hidden_State__c != Null && newWishChildCon.Hidden_State__c != Label.Dummy_Email)
                                    contactInfo += '<Br/>' + 'Old State Value:'+' '+oldState +'<Br/>'+' New State Value:' +' '+'  '+newState + '; ' + '<Br/>';
                                else{
                                    if((!String.isBlank(newState)) &&  String.isBlank(oldState))
                                        contactInfo += '<Br/>'+'New State Value:'+' '+'  '+newState+';' + '<Br/>';
+                                   if((String.isBlank(newState)) &&  (!String.isBlank(oldState)))
+                                       contactInfo += '<Br/>'+'New State Value:'+' '+'  '+newState+';' + '<Br/>';
                                }
                                updateContactMap.put(newWishChildCon.Id,newWishChildCon);
-                               
                            }   
                            if(oldwishChildCon.MailingCountry!= newWishChildCon.MailingCountry){
-                               
                                newWishChildCon .Hidden_Country__c = oldwishChildCon.MailingCountry;
                                if(newWishChildCon.MailingCountry != Null)
                                    oldCountry = newWishChildCon.MailingCountry;
@@ -338,32 +352,40 @@ public class RelationshipsViewer_AC{
                                    newCountry = newWishChildCon .Hidden_Country__c; 
                                    isChildSuccessMessage = true;
                                }
-                               if(newWishChildCon.MailingCountry != Null)
+                               if(newWishChildCon.Hidden_Country__c == Null){
+                                   newCountry = newWishChildCon .Hidden_Country__c;
+                                  // newWishChildCon.Hidden_Country__c = 'United States'; 
+                                   isChildSuccessMessage = true;
+                               }
+                               if(newWishChildCon.MailingCountry != Null && newWishChildCon.Hidden_Country__c != Label.Dummy_Email)
                                    contactInfo  += '<Br/>' + 'Old Country Value:'+' '+'  '+oldCountry +'<Br/>'+' New Country Value:' +' '+ '  '+ newCountry + '; '+'<Br/>';
                                else{
-                                   
                                    if((!String.isBlank(newCountry )) && String.isBlank(oldCountry))
                                        contactInfo  += '<Br/>' + 'New Country Value:'+' '+ '  '+newCountry +';'+'<Br/>';
+                                   if((String.isBlank(newCountry )) && (!String.isBlank(oldCountry)))
+                                       contactInfo  += '<Br/>' + 'New Country Value:'+' '+ '  '+newCountry +';'+'<Br/>';
                                }
-                               
                                updateContactMap.put(newWishChildCon.Id,newWishChildCon);
-                               
                            }   
                            if(oldwishChildCon.MailingPostalCode != newWishChildCon.MailingPostalCode){
-                               
-                               
                                newWishChildCon .Hidden_Zip_Code__c  = oldwishChildCon.MailingPostalCode; 
-                               
                                if(newWishChildCon.MailingPostalCode != Null)
                                    oldPostalCode =  newWishChildCon.MailingPostalCode;
                                if(newWishChildCon .Hidden_Zip_Code__c != Null){
                                    newPostalCode = newWishChildCon .Hidden_Zip_Code__c ;
                                    isChildSuccessMessage = true;
                                }
-                               if(newWishChildCon.MailingPostalCode != Null)
+                               if(newWishChildCon.Hidden_Zip_Code__c == Null){
+                                   newPostalCode = newWishChildCon .Hidden_Zip_Code__c ;
+                                   newWishChildCon.Hidden_Zip_Code__c = '11111';
+                                   isChildSuccessMessage = true;
+                               }
+                               if(newWishChildCon.MailingPostalCode != Null && newWishChildCon.Hidden_Zip_Code__c != 'kanagumca_jcet@hotmail.com')
                                    contactInfo  += '<Br/>'+ 'Old Zip Code Value:'+' '+ '  '+oldPostalCode +'<Br/>'+' New Zip Code Value:' +' '+'  '+newPostalCode + '; '+'<Br/>';
                                else{
                                    if((!String.isBlank(newPostalCode )) && String.isBlank(oldPostalCode))
+                                       contactInfo += '<Br/>' +' New Zip Code Value:'+' '+newPostalCode +';'+'<Br/>';
+                                   if((String.isBlank(newPostalCode )) && (!String.isBlank(oldPostalCode)))
                                        contactInfo += '<Br/>' +' New Zip Code Value:'+' '+newPostalCode +';'+'<Br/>';
                                }
                                updateContactMap.put(newWishChildCon.Id,newWishChildCon);  
@@ -371,53 +393,36 @@ public class RelationshipsViewer_AC{
                        }
                 } 
             }
-            
         }
-        System.debug('updateContactMap++++++++++++++++++++++++++++++ ' + updateContactMap);
-        
         for(Contact orderUseAsAddressList : clonedFamilyContactList){
             if(orderUseAsAddressList.Use_as_Household_Address__c  == true)
-            firstUseAsAddressList.add(orderUseAsAddressList);
+                firstUseAsAddressList.add(orderUseAsAddressList);
             else
-            secondUseAsAddressList.add(orderUseAsAddressList);
-         }
-         
-         for(contact sortAddress :secondUseAsAddressList){
-             firstUseAsAddressList.add(sortAddress);
-         }
+                secondUseAsAddressList.add(orderUseAsAddressList);
+        }
+        for(contact sortAddress :secondUseAsAddressList){
+            firstUseAsAddressList.add(sortAddress);
+        }
         if(dbRelatedContactList != Null && dbRelatedContactList.size() > 0){
             for(Contact oldwishChildCon : firstUseAsAddressList){
                 if(oldwishChildCon.Use_as_Household_Address__c == true){
-                    
-                   
                     i++;
-                    
                 }
                 if(oldwishChildCon.Same_as_Household_Address__c == true){
-                    
                     j++;
-                    
                 }
                 if(oldwishChildCon.Use_as_Household_Address__c == true && oldwishChildCon.Same_as_Household_Address__c == true){
                     k =1;
-                    
                 }
                 for(Contact newWishChildCon : dbRelatedContactList ){
-                    
                     if(oldwishChildCon.Id == newWishChildCon.Id){
-                        
                         if((oldwishChildCon.Phone != newWishChildCon.Phone && oldwishChildCon.Phone !=''  ) || (oldwishChildCon.Email != newWishChildCon.Email && oldwishChildCon.Email != '') || (oldwishChildCon.MailingStreet != newWishChildCon.MailingStreet && oldwishChildCon.MailingStreet != '') ||
                            (oldwishChildCon.MailingCity != newWishChildCon.MailingCity && oldwishChildCon.MailingCity != '' ) ||  (oldwishChildCon.MailingState!= newWishChildCon.MailingState && oldwishChildCon.MailingState !='')  || (oldwishChildCon.MailingCountry!= newWishChildCon.MailingCountry && oldwishChildCon.MailingCountry!= '') ||
                            (oldwishChildCon.MailingPostalCode != newWishChildCon.MailingPostalCode && oldwishChildCon.MailingPostalCode != '') || (oldwishChildCon.Same_as_Household_Address__c != newWishChildCon.Same_as_Household_Address__c)|| (oldwishChildCon.Use_as_Household_Address__c  != newWishChildCon.Use_as_Household_Address__c) ||
                            (oldwishChildCon.MobilePhone != newWishChildCon.MobilePhone ) || (oldwishChildCon.OtherPhone != newWishChildCon.OtherPhone))
                         {
-                            
-                            System.debug('@@@@@@@@@@@@Old'+oldwishChildCon.MailingCity+'@@@@@@New'+newWishChildCon.MailingCity);
                             contactInfo  += '<Br/>' + 'Name :'+' '+'  '+newWishChildCon.FirstName+'  '+'  '+newWishChildCon.LastName+'  '+' ; '+'<Br/>';
-                            
-                            
                             if(oldwishChildCon.Use_as_Household_Address__c == true ){ 
-                                
                                 newWishChildCon.Hidden_Use_as_Household_Address__c = oldwishChildCon.Use_as_Household_Address__c ;
                                 if(oldwishChildCon.MailingStreet == newWishChildCon.MailingStreet && oldwishChildCon.MailingCity == newWishChildCon.MailingCity
                                    && oldwishChildCon.MailingState == newWishChildCon.MailingState && oldwishChildCon.MailingCountry == newWishChildCon.MailingCountry 
@@ -426,19 +431,15 @@ public class RelationshipsViewer_AC{
                                        newStreet = oldwishChildCon.MailingStreet;
                                        if((!String.isBlank(newStreet)) && String.isBlank(oldStreet ))
                                            contactInfo  +='<Br/>' +'New Street Value:'+newStreet+';'+'<Br/>';
-                                       
                                        newCity = oldwishChildCon.MailingCity;
                                        if((!String.isBlank(newCity)) && String.isBlank(oldCity))
                                            contactInfo  +='<Br/>' +'New City Value:'+newCity+';'+'<Br/>';
-                                       
                                        newState = oldwishChildCon.MailingState;
                                        if((!String.isBlank(newState)) && String.isBlank(oldState ))
                                            contactInfo  +='<Br/>' +'New State Value:'+newState+';'+'<Br/>';
-                                       
                                        newCountry = oldwishChildCon.MailingCountry;
                                        if((!String.isBlank(newCountry )) && String.isBlank(oldCountry))
                                            contactInfo  += '<Br/>'+ 'New Country Value:'+newCountry +';'+'<Br/>';
-                                       
                                        newPostalCode = newWishChildCon.MailingPostalCode;
                                        if((!String.isBlank(newPostalCode))  && String.isBlank(oldPostalCode))
                                            contactInfo += '<Br/>'+'New Zip Code Value:'+ '  '+ '  '+newPostalCode +';'+'<Br/>';
@@ -447,13 +448,11 @@ public class RelationshipsViewer_AC{
                                 updateContactMap.put(newWishChildCon.Id,newWishChildCon); 
                                 isChildSuccessMessage = true;
                             }
-                            
                             if(oldwishChildCon.Use_as_Household_Address__c == false){ 
                                 isChildSuccessMessage = true;
                                 newWishChildCon.Hidden_Use_as_Household_Address__c = oldwishChildCon.Use_as_Household_Address__c ;
                                 updateContactMap.put(newWishChildCon.Id,newWishChildCon);
                             }
-                            
                             if(oldwishChildCon.Use_as_Household_Address__c != newWishChildCon.Hidden_Use_as_Household_Address__c){ 
                                 if(oldwishChildCon.Use_as_Household_Address__c == true){
                                     isChildSuccessMessage = true;
@@ -466,7 +465,6 @@ public class RelationshipsViewer_AC{
                                     updateContactMap.put(newWishChildCon.Id,newWishChildCon);
                                 }
                             }
-                            
                             if(oldwishChildCon.Same_as_Household_Address__c == true){
                                 isChildSuccessMessage = true;
                                 newWishChildCon.Hidden_Same_Address__c = oldwishChildCon.Same_as_Household_Address__c ;
@@ -479,59 +477,59 @@ public class RelationshipsViewer_AC{
                                            contactInfo += '<Br/>' + 'Old Street Value:'+  ' '+ '  '+oldStreet +' ' +'<Br/>' +' New Street Value:' + ' '+ '  '+ newStreet + '; '+'<Br/>';
                                        
                                        else{
-                                        if((!String.isBlank(newStreet)) && String.isBlank(oldStreet))
-                                            contactInfo += '<Br/>' +'New Street Value:'+'  '+'  '+newStreet+';'+'<Br/>'+'Old Street Value:'+' '+' '+'Blank'+';'+'<Br/>';
-                                         }
+                                           if((!String.isBlank(newStreet)) && String.isBlank(oldStreet))
+                                               contactInfo += '<Br/>' +'New Street Value:'+'  '+'  '+newStreet+';'+'<Br/>'+'Old Street Value:'+' '+' '+'Blank'+';'+'<Br/>';
+                                            if(String.isBlank(newStreet) && (!String.isBlank(oldStreet)))
+                                               contactInfo += '<Br/>' +'New Street Value:'+'  '+'  '+newStreet+';'+'<Br/>'+'Old Street Value:'+' '+' '+'Blank'+';'+'<Br/>';
+                                       }
                                        
                                        oldCity = newWishChildCon.MailingCity;
                                        if((!String.isBlank(oldCity)) && (!String.isBlank(newCity)))
                                            contactInfo  += '<Br/>'+ 'Old City Value:'+ ' '+ '  '+ oldCity +'<Br/>' + 'New City Value:' +' '+'  '+newCity + '; '+'<Br/>';
-                                        
-                                        else{
-                                        if((!String.isBlank(newCity)) && String.isBlank(oldCity))
-                                            contactInfo += '<Br/>' +'New City Value:'+'  '+'  '+newCity+';'+'<Br/>'+'Old City Value:'+' '+' '+'Blank'+';'+'<Br/>';
-                                         }
-                                        
-                                        
+                                       
+                                       else{
+                                           if((!String.isBlank(newCity)) && String.isBlank(oldCity))
+                                               contactInfo += '<Br/>' +'New City Value:'+'  '+'  '+newCity+';'+'<Br/>'+'Old City Value:'+' '+' '+'Blank'+';'+'<Br/>';
+                                           if(String.isBlank(newCity) && (!String.isBlank(oldCity)))
+                                               contactInfo += '<Br/>' +'New City Value:'+'  '+'  '+newCity+';'+'<Br/>'+'Old City Value:'+' '+' '+'Blank'+';'+'<Br/>';
+                                       }
                                        oldState = newWishChildCon.MailingState;
                                        if((!String.isBlank(oldState)) && (!String.isBlank(newState )))
                                            contactInfo += '<Br/>'+'Old State Value:'+' '+'  '+ oldState +'<Br/>' +' New State Value:' +' '+ '  '+ newState + '; '+'<Br/>';
                                        
-                                        else{
-                                        if((!String.isBlank(newState)) && String.isBlank(oldState))
-                                            contactInfo += '<Br/>' +'New State Value:'+'  '+'  '+newState+';'+'<Br/>'+'Old State Value:'+' '+' '+'Blank'+';'+'<Br/>';
-                                         }
-                                      
-                                       
+                                       else{
+                                           if((!String.isBlank(newState)) && String.isBlank(oldState))
+                                               contactInfo += '<Br/>' +'New State Value:'+'  '+'  '+newState+';'+'<Br/>'+'Old State Value:'+' '+' '+'Blank'+';'+'<Br/>';
+                                           if(String.isBlank(newState) && (!String.isBlank(oldState)))
+                                               contactInfo += '<Br/>' +'New State Value:'+'  '+'  '+newState+';'+'<Br/>'+'Old State Value:'+' '+' '+'Blank'+';'+'<Br/>';
+                                       }
                                        oldCountry = newWishChildCon.MailingCountry;
                                        if((!String.isBlank(oldCountry )) && (!String.isBlank(newCountry)))
                                            contactInfo  += '<Br/>'+ 'Old Country Value:'+' ' + '  '+oldCountry +'<Br/>' +' New Country Value:' +' '+ '  '+ newCountry + '; '+'<Br/>';
                                        
-                                        else{
-                                        if((!String.isBlank(newCountry)) && String.isBlank(oldCountry))
-                                            contactInfo += '<Br/>' +'New Country Value:'+'  '+'  '+newCountry+';'+'<Br/>'+'Old Country Value:'+' '+' '+'Blank'+';'+'<Br/>';
-                                         }
-                                       
+                                       else{
+                                           if((!String.isBlank(newCountry)) && String.isBlank(oldCountry))
+                                               contactInfo += '<Br/>' +'New Country Value:'+'  '+'  '+newCountry+';'+'<Br/>'+'Old Country Value:'+' '+' '+'Blank'+';'+'<Br/>';
+                                           if(String.isBlank(newCountry) && (!String.isBlank(oldCountry)))
+                                               contactInfo += '<Br/>' +'New Country Value:'+'  '+'  '+newCountry+';'+'<Br/>'+'Old Country Value:'+' '+' '+'Blank'+';'+'<Br/>';
+                                       }
                                        oldPostalCode = newWishChildCon.MailingPostalCode;
                                        if((!String.isBlank(oldPostalCode))  && (!String.isBlank(newPostalCode)))
                                            contactInfo  += '<Br/>'  + 'Old Zip Code Value:'+' '+ '  '+ oldPostalCode +'<Br/> '+' New Zip Code Value:'+' '+ '  '+ newPostalCode + '; '+'<Br/>';
                                        
                                        else{
-                                        if((!String.isBlank(newPostalCode)) && String.isBlank(oldPostalCode))
-                                            contactInfo += '<Br/>' +'New Zip Code Value:'+'  '+'  '+newPostalCode+';'+'<Br/>'+'Old Zip Code Value:'+' '+' '+'Blank'+';'+'<Br/>';
-                                         }
+                                           if((!String.isBlank(newPostalCode)) && String.isBlank(oldPostalCode))
+                                               contactInfo += '<Br/>' +'New Zip Code Value:'+'  '+'  '+newPostalCode+';'+'<Br/>'+'Old Zip Code Value:'+' '+' '+'Blank'+';'+'<Br/>';
+                                           if(String.isBlank(newPostalCode) && (!String.isBlank(oldPostalCode)))
+                                               contactInfo += '<Br/>' +'New Zip Code Value:'+'  '+'  '+newPostalCode+';'+'<Br/>'+'Old Zip Code Value:'+' '+' '+'Blank'+';'+'<Br/>';
+                                       }
                                    }
                             }
-                            
-                            
-                            
                             if(oldwishChildCon.Same_as_Household_Address__c == false){
                                 isChildSuccessMessage = true;
                                 newWishChildCon.Hidden_Same_Address__c = oldwishChildCon.Same_as_Household_Address__c ;
                                 updateContactMap.put(newWishChildCon.Id,newWishChildCon);
-                                System.debug('@@@@@@@@@@@@Old'+updateContactMap+'@@@@@@New'+newWishChildCon.Hidden_Same_Address__c);
                             }
-                            
                             if(oldwishChildCon.Same_as_Household_Address__c != newWishChildCon.Same_as_Household_Address__c ){ 
                                 if(oldwishChildCon.Same_as_Household_Address__c  == true){
                                     isChildSuccessMessage = true;
@@ -543,17 +541,18 @@ public class RelationshipsViewer_AC{
                                     newWishChildCon.Hidden_Same_Address__c = oldwishChildCon.Same_as_Household_Address__c ;
                                     updateContactMap.put(newWishChildCon.Id,newWishChildCon);
                                 }
-                                System.debug('@@@@@@@@@@@@Old'+updateContactMap+'@@@@@@New'+newWishChildCon.Hidden_Same_Address__c);
                             }
-                            
                             if(oldwishChildCon.Phone != newWishChildCon.Phone){
-                                
                                 newWishChildCon.Hidden_Phone__c  = oldwishChildCon.Phone;
-                                
                                 if(newWishChildCon.Phone != Null)
                                     oldPhone = newWishChildCon.Phone;
                                 if(newWishChildCon .Hidden_Phone__c != Null){
-                                    newPhone = newWishChildCon .Hidden_Phone__c;
+                                    newPhone = newWishChildCon.Hidden_Phone__c;
+                                    isChildSuccessMessage = true;
+                                }
+                                if(newWishChildCon.Hidden_Phone__c == Null){
+                                    newPhone = newWishChildCon.Hidden_Phone__c;
+                                    newWishChildCon.Hidden_Phone__c = '9912121313';
                                     isChildSuccessMessage = true;
                                 }
                                 if(newWishChildCon.Phone != Null && oldphone != Null)
@@ -561,54 +560,76 @@ public class RelationshipsViewer_AC{
                                 else{
                                     if((!String.isBlank(newPhone)) && String.isBlank(oldphone))
                                         contactInfo  += '<Br/>'+'New Phone Value :' + '  '+ '  '+ newPhone + '; '+'<Br/>';
+                                    if(String.isBlank(newPhone) && (!String.isBlank(oldphone)))
+                                        contactInfo  += '<Br/>'+'New Phone Value :' + '  '+ '  '+ newPhone + '; '+'<Br/>';
                                 }
                                 updateContactMap.put(newWishChildCon.Id,newWishChildCon);
                             } 
-                            
                             if( oldwishChildCon.MobilePhone != newWishChildCon.MobilePhone){
                                 newWishChildCon.HiddenMobilePhone__c= oldwishChildCon.MobilePhone;
-                                
                                 if(newWishChildCon.MobilePhone!= Null)
                                     oldMobilePhone = newWishChildCon.MobilePhone;
-                                if(newWishChildCon .HiddenMobilePhone__c!= Null){
+                                if(newWishChildCon.HiddenMobilePhone__c != Null){
                                     newMobilePhone= newWishChildCon.HiddenMobilePhone__c;
                                     isChildSuccessMessage = true;
                                 }
+                                
+                                if(newWishChildCon.HiddenMobilePhone__c == Null){
+                                    newMobilePhone= newWishChildCon.HiddenMobilePhone__c;
+                                    newWishChildCon.HiddenMobilePhone__c = '9912121313';
+                                    isChildSuccessMessage = true;
+                                }
+                                
                                 if(newWishChildCon.MobilePhone!= Null && newWishChildCon.HiddenMobilePhone__c!= Null)
                                     contactInfo += '<Br/>' +'Old Mobile Phone Value :'+ ' '+oldMobilePhone+'<Br/>' +' New Mobile Phone Value :' +' '+newMobilePhone+ '; ' + '<Br/>';
                                 else{
                                     if((!String.isBlank(newMobilePhone)) && String.isBlank(oldMobilePhone))
                                         contactInfo += '<Br/>'+'New Mobile Phone Value :'+' '+ newMobilePhone+ '; '+'<Br/>';
+                                    if(String.isBlank(newMobilePhone) && (!String.isBlank(oldMobilePhone)))
+                                        contactInfo += '<Br/>'+'New Mobile Phone Value :'+' '+ newMobilePhone+ '; '+'<Br/>';
                                 }
                                 updateContactMap.put(newWishChildCon.Id,newWishChildCon);
-                                system.debug('@@@@@@@ updateContactMap@@@@@@@@@'+updateContactMap.Values());
+                                
                             }
                             
                             if( oldwishChildCon.otherPhone != newWishChildCon.otherPhone ){
                                 newWishChildCon.HiddenOtherPhone__c = oldwishChildCon.otherPhone ;
-                                
                                 if(newWishChildCon.otherPhone != Null)
                                     oldOtherPhone = newWishChildCon.otherPhone;
-                                if(newWishChildCon .HiddenOtherPhone__c!= Null){
+                                if(newWishChildCon.HiddenOtherPhone__c!= Null){
                                     newOtherPhone = newWishChildCon.HiddenOtherPhone__c;
                                     isChildSuccessMessage = true;
                                 }
+                                
+                                if(newWishChildCon.HiddenOtherPhone__c == Null ){
+                                    newOtherPhone = newWishChildCon.HiddenOtherPhone__c;
+                                    newWishChildCon.HiddenOtherPhone__c = '9912121313';
+                                    isChildSuccessMessage = true;
+                                }
+                                
                                 if(newWishChildCon.otherPhone != Null && newWishChildCon.HiddenOtherPhone__c!= Null)
                                     contactInfo += '<Br/>' +'Old Other Phone Value :'+ ' '+oldOtherPhone+'<Br/>' +' New Other Phone Value :' +' '+newOtherPhone+ '; ' + '<Br/>';
                                 else{
                                     if((!String.isBlank(newOtherPhone)) && String.isBlank(oldOtherPhone))
                                         contactInfo += '<Br/>'+'New Other Phone Value :'+' '+ newOtherPhone+ '; '+'<Br/>';
+                                    if(String.isBlank(newOtherPhone) && (!String.isBlank(oldOtherPhone)))
+                                        contactInfo += '<Br/>'+'New Other Phone Value :'+' '+ newOtherPhone+ '; '+'<Br/>';
                                 }
                                 updateContactMap.put(newWishChildCon.Id,newWishChildCon);
-                                system.debug('@@@@@@@ updateContactMap@@@@@@@@@'+updateContactMap.Values());
+                                
                             }
                             if(oldwishChildCon.Email != newWishChildCon.Email){
                                 
-                                newWishChildCon .Hidden_Email__c = oldwishChildCon.Email;
+                                newWishChildCon.Hidden_Email__c = oldwishChildCon.Email;
                                 if(newWishChildCon.Email != Null)
                                     oldEmail = newWishChildCon.Email;
                                 if(newWishChildCon .Hidden_Email__c != Null){
                                     newEmail = newWishChildCon .Hidden_Email__c;
+                                    isChildSuccessMessage = true;
+                                }
+                                if(newWishChildCon .Hidden_Email__c == Null){
+                                    newEmail = newWishChildCon .Hidden_Email__c;
+                                    newWishChildCon.Hidden_Email__c = Label.Dummy_Email;
                                     isChildSuccessMessage = true;
                                 }
                                 if(newWishChildCon.Email != Null && newWishChildCon .Hidden_Email__c != Null)
@@ -616,16 +637,22 @@ public class RelationshipsViewer_AC{
                                 else{
                                     if((!String.isBlank(newEmail)) && String.isBlank(oldEmail))
                                         contactInfo += '<Br/>'+'New Email Value :' + '  '+ '  '+newEmail+';'+'<Br/>';
+                                    if(String.isBlank(newEmail) && (!String.isBlank(oldEmail)))
+                                        contactInfo += '<Br/>'+'New Email Value :' + '  '+ '  '+newEmail+';'+'<Br/>';
                                 }
                                 updateContactMap.put(newWishChildCon.Id,newWishChildCon);
                             } 
                             if(oldwishChildCon.MailingStreet !=newWishChildCon.MailingStreet){
-                                
                                 newWishChildCon .Hidden_Street__c = oldwishChildCon.MailingStreet;
                                 if(newWishChildCon.MailingStreet != Null)
                                     oldStreet = newWishChildCon.MailingStreet;
-                                if(newWishChildCon .Hidden_Street__c != Null){
+                                if(newWishChildCon.Hidden_Street__c != Null){
                                     newStreet = newWishChildCon .Hidden_Street__c;
+                                    isChildSuccessMessage = true;
+                                }
+                                if(newWishChildCon.Hidden_Street__c == Null){
+                                    newStreet = newWishChildCon.Hidden_Street__c;
+                                    newWishChildCon.Hidden_Street__c = Label.Dummy_Email;
                                     isChildSuccessMessage = true;
                                 }
                                 if(oldwishChildCon.Use_as_Household_Address__c == true){
@@ -634,6 +661,8 @@ public class RelationshipsViewer_AC{
                                     else{
                                         if((!String.isBlank(newStreet)) && String.isBlank(oldStreet))
                                             contactInfo += '<Br/>' +'New Street Value:'+'  '+'  '+newStreet+';'+'<Br/>';
+                                         if(String.isBlank(newStreet) && (!String.isBlank(oldStreet)))
+                                            contactInfo += '<Br/>' +'New Street Value:'+'  '+'  '+newStreet+';'+'<Br/>';
                                     }
                                 }
                                 else{
@@ -641,6 +670,8 @@ public class RelationshipsViewer_AC{
                                         contactInfo += '<Br/>' + 'Old Street Value:'+  ' '+ '  '+oldStreet +' ' +'<Br/>' +' New Street Value:' + ' '+ '  '+ newStreet + '; '+'<Br/>';
                                     else{
                                         if((!String.isBlank(newStreet)) && String.isBlank(oldStreet))
+                                            contactInfo += '<Br/>' +'New Street Value:'+'  '+'  '+newStreet+';'+'<Br/>';
+                                         if(String.isBlank(newStreet) && (!String.isBlank(oldStreet)))
                                             contactInfo += '<Br/>' +'New Street Value:'+'  '+'  '+newStreet+';'+'<Br/>';
                                     }
                                 }
@@ -651,8 +682,13 @@ public class RelationshipsViewer_AC{
                                 newWishChildCon .Hidden_city__c = oldwishChildCon.MailingCity;
                                 if(newWishChildCon.MailingCity != Null)
                                     oldCity = newWishChildCon.MailingCity;
-                                if(newWishChildCon .Hidden_city__c != Null){
+                                if(newWishChildCon.Hidden_city__c != Null){
                                     newCity =newWishChildCon .Hidden_city__c;
+                                    isChildSuccessMessage = true;
+                                }
+                                 if(newWishChildCon.Hidden_city__c == Null){
+                                    newCity =newWishChildCon .Hidden_city__c;
+                                    newWishChildCon .Hidden_city__c = Label.Dummy_Email;
                                     isChildSuccessMessage = true;
                                 }
                                 if(oldwishChildCon.Use_as_Household_Address__c == true){
@@ -660,6 +696,9 @@ public class RelationshipsViewer_AC{
                                         contactInfo  += '<Br/>'+ 'Old City Value:'+ ' '+ '  '+ oldCity +'<Br/>' + 'New City Value:' +' '+'  '+newCity + '; '+'<Br/>';
                                     else{
                                         if((!String.isBlank(newCity))  && String.isBlank(oldCity)){
+                                            contactInfo  += '<Br/>' +'New City Value:'+ '  '+ '  '+newCity+';'+'<Br/>';
+                                        }
+                                        if(String.isBlank(newCity)  && (!String.isBlank(oldCity))){
                                             contactInfo  += '<Br/>' +'New City Value:'+ '  '+ '  '+newCity+';'+'<Br/>';
                                         }
                                     }
@@ -671,17 +710,24 @@ public class RelationshipsViewer_AC{
                                         if((!String.isBlank(newCity))  && String.isBlank(oldCity)){
                                             contactInfo  += '<Br/>' +'New City Value:'+ '  '+ '  '+newCity+';'+'<Br/>';
                                         }
+                                        if(String.isBlank(newCity)  && (!String.isBlank(oldCity))){
+                                            contactInfo  += '<Br/>' +'New City Value:'+ '  '+ '  '+newCity+';'+'<Br/>';
+                                        }
                                     }
                                 }
                                 updateContactMap.put(newWishChildCon.Id,newWishChildCon);
                             }  
                             if(oldwishChildCon.MailingState!= newWishChildCon.MailingState){
-                                
-                                newWishChildCon .Hidden_State__c = oldwishChildCon.MailingState;
+                                newWishChildCon.Hidden_State__c = oldwishChildCon.MailingState;
                                 if(newWishChildCon.MailingState != Null)
                                     oldState = newWishChildCon.MailingState;
-                                if(newWishChildCon .Hidden_State__c != Null){
+                                if(newWishChildCon .Hidden_State__c != Null || newWishChildCon.Hidden_State__c == Null){
                                     newState = newWishChildCon .Hidden_State__c;
+                                    isChildSuccessMessage = true;  
+                                }
+                                if(newWishChildCon.Hidden_State__c == Null){
+                                    newState = newWishChildCon .Hidden_State__c;
+                                    newWishChildCon .Hidden_State__c = Label.Dummy_Email;
                                     isChildSuccessMessage = true;  
                                 }
                                 if(oldwishChildCon.Use_as_Household_Address__c == true){
@@ -690,6 +736,8 @@ public class RelationshipsViewer_AC{
                                     else{
                                         if((!String.isBlank(newState)) && String.isBlank(oldState ))
                                             contactInfo  +='<Br/>' +'New State Value:'+newState+';'+'<Br/>';
+                                        if(String.isBlank(newState) && (!String.isBlank(oldState )))
+                                            contactInfo  +='<Br/>' +'New State Value:'+newState+';'+'<Br/>';
                                     }
                                 }
                                 else{
@@ -698,12 +746,13 @@ public class RelationshipsViewer_AC{
                                     else{
                                         if((!String.isBlank(newState)) && String.isBlank(oldState ))
                                             contactInfo  +='<Br/>' +'New State Value:'+newState+';'+'<Br/>';
+                                        if(String.isBlank(newState) && (!String.isBlank(oldState )))
+                                            contactInfo  +='<Br/>' +'New State Value:'+newState+';'+'<Br/>';
                                     }
                                 }
                                 updateContactMap.put(newWishChildCon.Id,newWishChildCon);
                             }   
                             if(oldwishChildCon.MailingCountry!= newWishChildCon.MailingCountry){
-                                
                                 newWishChildCon .Hidden_Country__c = oldwishChildCon.MailingCountry;
                                 if(newWishChildCon.MailingCountry != Null)
                                     oldCountry = newWishChildCon.MailingCountry;
@@ -711,12 +760,18 @@ public class RelationshipsViewer_AC{
                                     newCountry = newWishChildCon .Hidden_Country__c;
                                     isChildSuccessMessage = true;
                                 } 
+                                if(newWishChildCon .Hidden_Country__c == Null){
+                                    newCountry = newWishChildCon .Hidden_Country__c;
+                                    newWishChildCon.Hidden_Country__c = 'United States';
+                                    isChildSuccessMessage = true;
+                                } 
                                 if(oldwishChildCon.Use_as_Household_Address__c == true){
                                     if(newWishChildCon.MailingCountry != Null && newWishChildCon .Hidden_Country__c != Null)
                                         contactInfo  += '<Br/>'+ 'Old Country Value:'+' ' + '  '+oldCountry +'<Br/>' +' New Country Value:' +' '+ '  '+ newCountry + '; '+'<Br/>';
                                     else{
-                                        
                                         if((!String.isBlank(newCountry )) && String.isBlank(oldCountry))
+                                            contactInfo  += '<Br/>'+ 'New Country Value:'+newCountry +';'+'<Br/>';
+                                        if(String.isBlank(newCountry ) && (!String.isBlank(oldCountry)))
                                             contactInfo  += '<Br/>'+ 'New Country Value:'+newCountry +';'+'<Br/>';
                                     }
                                 }
@@ -727,19 +782,23 @@ public class RelationshipsViewer_AC{
                                         
                                         if((!String.isBlank(newCountry )) && String.isBlank(oldCountry))
                                             contactInfo  += '<Br/>'+ 'New Country Value:'+newCountry +';'+'<Br/>';
+                                        if(String.isBlank(newCountry ) && (!String.isBlank(oldCountry)))
+                                            contactInfo  += '<Br/>'+ 'New Country Value:'+newCountry +';'+'<Br/>';
                                     }
                                 }
                                 updateContactMap.put(newWishChildCon.Id,newWishChildCon);
-                                
                             }   
                             if(oldwishChildCon.MailingPostalCode != newWishChildCon.MailingPostalCode){
-                                
-                                newWishChildCon .Hidden_Zip_Code__c  = oldwishChildCon.MailingPostalCode; 
-                                
+                                newWishChildCon.Hidden_Zip_Code__c  = oldwishChildCon.MailingPostalCode; 
                                 if(newWishChildCon.MailingPostalCode != Null)
                                     oldPostalCode =  newWishChildCon.MailingPostalCode;
                                 if(newWishChildCon .Hidden_Zip_Code__c != Null){
                                     newPostalCode = newWishChildCon.Hidden_Zip_Code__c ;
+                                    isChildSuccessMessage = true;
+                                }
+                                if(newWishChildCon.Hidden_Zip_Code__c  == Null){
+                                    newPostalCode = newWishChildCon.Hidden_Zip_Code__c ;
+                                    newWishChildCon.Hidden_Zip_Code__c  = '11111'; 
                                     isChildSuccessMessage = true;
                                 }
                                 if(oldwishChildCon.Use_as_Household_Address__c == true){
@@ -748,13 +807,18 @@ public class RelationshipsViewer_AC{
                                     else{
                                         if((!String.isBlank(newPostalCode))  && String.isBlank(oldPostalCode))
                                             contactInfo += '<Br/>'+'New Zip Code Value:'+ '  '+ '  '+newPostalCode +';'+'<Br/>';
+                                         if(String.isBlank(newPostalCode)  && (!String.isBlank(oldPostalCode)))
+                                            contactInfo += '<Br/>'+'New Zip Code Value:'+ '  '+ '  '+newPostalCode +';'+'<Br/>';
                                     }
                                 }
+                                
                                 else{
                                     if(newWishChildCon.MailingPostalCode != Null && newWishChildCon .Hidden_Zip_Code__c != Null)
                                         contactInfo  += '<Br/>'  + 'Old Zip Code Value:'+' '+ '  '+ oldPostalCode +'<Br/> '+' New Zip Code Value:'+' '+ '  '+ newPostalCode + '; '+'<Br/>';
                                     else{
                                         if((!String.isBlank(newPostalCode))  && String.isBlank(oldPostalCode))
+                                            contactInfo += '<Br/>'+'New Zip Code Value:'+ '  '+ '  '+newPostalCode +';'+'<Br/>';
+                                         if(String.isBlank(newPostalCode)  && (!String.isBlank(oldPostalCode)))
                                             contactInfo += '<Br/>'+'New Zip Code Value:'+ '  '+ '  '+newPostalCode +';'+'<Br/>';
                                     }
                                 }
@@ -762,36 +826,30 @@ public class RelationshipsViewer_AC{
                             }
                         }
                     }
-                    
                 }
-                
             }
-                                        if(i > 1){
-                                         isMessage = false;
-                                         DisplayErrorMessage();
-                                        }
-                                  
-                                     if(i == 0 && j > 0){
-                                           isMessage = false;
-                                           ErrorMessage();
-                                      }
-                                      
-                                      if(k == 1){
-                                          isMessage = false;
-                                           SameErrorMessage();
-                                      }
-            
+            if(i > 1){
+                isMessage = false;
+                DisplayErrorMessage();
+            }
+            if(i == 0 && j > 0){
+                isMessage = false;
+                ErrorMessage();
+            }
+            if(k == 1){
+                isMessage = false;
+                SameErrorMessage();
+            }
         }
-        
-        
         if(updateContactMap.size() > 0){
-            
             update updateContactMap.Values();
             if(isChildSuccessMessage == true){
                 Id updateContactTaskRecordTypeId = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.updateContactRT).getRecordTypeId();
-                 Id staffRt = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
+                Id staffRt = Schema.SObjectType.Task.getRecordTypeInfosByName().get(constant.staffTaskRT).getRecordTypeId();
                 isMessage = false;
-                ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'Thank you for updating the contact information! Your changes have been recorded and sent to the Chapter Staff for approval.'));
+                String message = 'Thank you for updating the contact information! Your changes have been recorded and sent to the chapter staff for approval.'+'\r\n'+
+                    +'Please click on Return to Wish to navigate to the previous screen.';
+                ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,message));
                 
                 Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
                 req.setComments('Review contact information updated by the volunteer');
@@ -801,38 +859,37 @@ public class RelationshipsViewer_AC{
                 req.setNextApproverIds(new Id[]{parentWish.OwnerId});
                 Approval.ProcessResult result = Approval.process(req);
                 
-                
                 Task newContactTask = new Task();
                 newContactTask.WhoId = parentWish.ContactId;
                 newContactTask.OwnerId = parentWish.OwnerId;
                 newContactTask.ActivityDate = System.today() + 1;
                 newContactTask.RecordTypeId = staffRt;
-                //newContactTask.Description  = 'Review contact information updated by the volunteer';
                 newContactTask .Subject = 'Review contact information updated by the volunteer';
                 demogarphicTaskList.add(newContactTask );
-                
                 insert   demogarphicTaskList; 
-                
-                system.debug('######## demogarphicTaskList ##########'+demogarphicTaskList);    
             }
         }
-        
         if(contactList.size()>0){
             contactList[0].Old_Update_Contact_Values__c = contactInfo;
             update contactList;
-            
         }
-        
         return null;     
     }
     
-    
+    /******************************************************************************************************
+     close() will fire if the user click the cancle button on RelationShipViewer page.
+    ********************************************************************************************************/
     public void close(){
         outPutMode = true;
         inputMode = false;
     }
     
-    public pageReference DisplayErrorMessage(){
+    
+    /******************************************************************************************************
+     DisplayErrorMessage() will fire if the user update the address details and if they not select use as household 
+     address.
+    ********************************************************************************************************/
+     public pageReference DisplayErrorMessage(){
         inputMode = true;
         outPutMode = false;
         isSave = true;
@@ -843,7 +900,12 @@ public class RelationshipsViewer_AC{
         }
         return null;
     }
-    public pageReference ErrorMessage(){
+    
+    /******************************************************************************************************
+     ErrorMessage() will fire if the user update the address details and if they not select use as household 
+     address.
+    ********************************************************************************************************/
+     public pageReference ErrorMessage(){
         inputMode = true;
         outPutMode = false;
         isSave = true;
@@ -855,7 +917,11 @@ public class RelationshipsViewer_AC{
         return null;
     }
     
-    public pageReference SameErrorMessage(){
+    /******************************************************************************************************
+     SameErrorMessage() will fire if the user check the use as household and same as house hold check box on 
+     same record.
+    ********************************************************************************************************/
+     public pageReference SameErrorMessage(){
         inputMode = true;
         outPutMode = false;
         isSave = true;
@@ -865,5 +931,15 @@ public class RelationshipsViewer_AC{
             isChildSuccessMessage = false;
         }
         return null;
+    }
+    
+    /******************************************************************************************************
+     ReturnToWish() will fire when the user click Return to wish link in RelationshipViewer page.
+    ********************************************************************************************************/
+    public pageReference ReturnToWish(){
+        PageReference reference=new PageReference('/'+caseId);
+        reference.setRedirect(true);     
+        return reference;
+        
     }
 }

@@ -8,7 +8,6 @@ public class TaskHandler {
     
     // This method is used to assign the 'Birthday Remainder Task' to primary volunteer
     public static void BirthdayTaskPrimaryVolunteerAssign(List<Task> birthdayTasksList, Set<Id> taskRelatedContactIdsSet) {
-        
         Set<Id> caseIdsSet = new Set<Id>();
         Map<Id,Id> caseContactIdsMap = new map<Id,Id>();
         Map<Id,Id> taskRelatedCaseIdsMap = new Map<Id,Id>();
@@ -19,24 +18,15 @@ public class TaskHandler {
         }
         if(caseIdsSet.size()>0) {
             Map<Id,Id> caseTeamMembersMap = new Map<Id,Id>();
-            for(CaseTeamMember memberDetails : [SELECT Id, MemberId, ParentId FROM CaseTeamMember WHERE ParentId IN : caseIdsSet ORDER BY CreatedDate ASC]) {
-                
+            for(CaseTeamMember memberDetails : [SELECT Id, MemberId, ParentId FROM CaseTeamMember WHERE ParentId IN : caseIdsSet AND TeamRole.Name = 'Wish Granter' ORDER BY CreatedDate ASC]) {
                 if(!caseTeamMembersMap.containsKey(memberDetails.ParentId)) {
                     caseTeamMembersMap.put(memberDetails.ParentId,memberDetails.MemberId);
                 }
             }
             if(caseTeamMembersMap.size()>0) {
-                Map<Id,Id> contactRelatedUsersIdsMap = new Map<Id,Id>();
-                for(User getUserDetails : [SELECT Id, ContactId FROM User WHERE ContactId IN : caseTeamMembersMap.values()]) {
-                    if(!contactRelatedUsersIdsMap.containsKey(getUserDetails.ContactId)) {
-                        contactRelatedUsersIdsMap.put(getUserDetails.ContactId, getUserDetails.Id);
-                    }
-                }
-                
                 for(Task assignTaskOwner : birthdayTasksList) {
                     if(caseTeamMembersMap.containsKey(assignTaskOwner.whatId)) {
-                        if(contactRelatedUsersIdsMap.get(caseTeamMembersMap.get(assignTaskOwner.whatId))!=Null)
-                            assignTaskOwner.OwnerId=contactRelatedUsersIdsMap.get(caseTeamMembersMap.get(assignTaskOwner.whatId));
+                        assignTaskOwner.OwnerId= caseTeamMembersMap.get(assignTaskOwner.whatId);
                     }
                     if(taskRelatedCaseIdsMap.containsKey(assignTaskOwner.whatId)) {
                         assignTaskOwner.whoId= taskRelatedCaseIdsMap.get(assignTaskOwner.whatId);
@@ -159,10 +149,13 @@ public class TaskHandler {
     public static void updateTaskEmailMergeFields(Set<id> volunteerConatctIdsSet,list<Task> updatedTaskList){
         Map<Id,Contact> contactInfoMap = new Map<Id,Contact>();
         
-        for(Contact getContactInfo : [SELECT ID, Name, Account.Name, Account.Phone, Account.Email__c FROM contact where id IN:volunteerConatctIdsSet]) {
-            if(!contactInfoMap.containsKey(getContactInfo.Id)) {
-                contactInfoMap.put(getContactInfo.Id, getContactInfo);
+        if(volunteerConatctIdsSet.size() > 0 ){
+            for(Contact getContactInfo : [SELECT ID, Name, Account.Name, Account.Phone, Account.Email__c FROM contact where id IN:volunteerConatctIdsSet]) {
+                if(!contactInfoMap.containsKey(getContactInfo.Id)) {
+                    contactInfoMap.put(getContactInfo.Id, getContactInfo);
+                }
             }
+            
         }
         for(Task currRec : updatedTaskList){
             if(currRec.WhoId != Null && contactInfoMap.containsKey(currRec.WhoId)){
@@ -518,6 +511,96 @@ public class TaskHandler {
                     }
                     
                 }
+            }
+        }
+    }
+    
+    //Used to reparent child case task to parent case
+    public static void reparentChildCaseToParentCase(Map<Id, List<Task>> reparentChildCaseTaskMap) {
+        Id supUserId = Label.Salesforce_Support_User_Id;
+        Map<Id, Case> childParentMap = new Map<Id, Case>();
+        for(Case childCase : [SELECT Id, ParentId, Parent.ContactId FROM Case WHERE Id IN : reparentChildCaseTaskMap.keySet() AND ParentId != NULL]) {
+            childParentMap.put(childCase.Id, childCase);
+        }
+        
+        for(Id reparentId : reparentChildCaseTaskMap.keySet()) {
+            if(reparentChildCaseTaskMap.containsKey(reparentId)) {
+                for(Task reParentTask : reparentChildCaseTaskMap.get(reparentId)) {
+                    if(childParentMap.containsKey(reParentTask.WhatId)) {
+                        reParentTask.WhatId = childParentMap.get(reParentTask.WhatId).ParentId;
+                        reParentTask.OwnerId = supUserId;
+                    }
+                }
+            }
+        }
+    }
+    
+    public static void updateVolunteerInterviewDate(Set<Id> volunteerIdsSet, String action){
+        list<Contact> updateVolunteerContactList = new List<Contact>();
+        Set<Id> volunteerRoleBaseIdsSet = new Set<Id>();
+        if(action == 'insert'){
+            for(Contact currentContact:[Select ID from Contact WHERE ID IN:volunteerIdsSet AND RecordType.Name = 'Volunteer Contact']){
+                currentContact.InterviewDateSet__c = 'Interview Task Created';
+                updateVolunteerContactList.add(currentContact);
+            }
+        }
+        
+        if(action == 'update'){
+            
+            for(Volunteer_Roles__c newVolRole :[Select Id,Volunteer_Name__c FROM Volunteer_Roles__c WHERE Chapter_Role__r.Background_Check_Required__c = true AND Volunteer_Name__c IN:volunteerIdsSet ]){
+                volunteerRoleBaseIdsSet.add(newVolRole.Volunteer_Name__c);
+            }
+            if(volunteerRoleBaseIdsSet.size() > 0 ){
+                for(Contact newContact: [Select ID from Contact WHERE ID IN:volunteerRoleBaseIdsSet AND RecordType.Name = 'Volunteer Contact']){
+                    newContact.InterviewDateSet__c = 'Interview Task Completed';
+                    updateVolunteerContactList.add(newContact);
+                }
+            }
+            
+        }
+        
+        if(updateVolunteerContactList.size() > 0){
+            update updateVolunteerContactList;
+        }
+        
+    }
+    
+    //Used to update Background Check Subject based on day difference
+    public static void updateBGCTaskSubjectDays(Map<Id, Task> bgExpiringTaskMap) {
+        for(Background_check__c bgInfo : [SELECT id, Date__c, Current__c, Volunteer__c, Volunteer__r.Name FROM Background_check__c WHERE Current__c = True AND Date__c = NEXT_N_DAYS:30 AND Id IN : bgExpiringTaskMap.keySet()]) {
+            if(bgExpiringTaskMap.containsKey(bgInfo.Id)) {
+                if(bgInfo.Date__c.daysBetween(Date.today()) == -30) {
+                    bgExpiringTaskMap.get(bgInfo.Id).Subject += ' (30 Days)';
+                } else if(bgInfo.Date__c.daysBetween(Date.today()) == -23) {
+                    bgExpiringTaskMap.get(bgInfo.Id).Subject += ' (23 Days)';
+                } else if(bgInfo.Date__c.daysBetween(Date.today()) == -16) {
+                    bgExpiringTaskMap.get(bgInfo.Id).Subject += ' (16 Days)';
+                } else if(bgInfo.Date__c.daysBetween(Date.today()) == -9) {
+                    bgExpiringTaskMap.get(bgInfo.Id).Subject += ' (9 Days)';
+                } else if(bgInfo.Date__c.daysBetween(Date.today()) == -2) {
+                    bgExpiringTaskMap.get(bgInfo.Id).Subject += ' (2 Days)';
+                }
+                bgExpiringTaskMap.get(bgInfo.Id).ActivityDate = NULL;
+            }
+        }
+    }
+    
+    //Used to update COI Subject based on day difference
+    public static void updateCOITaskSubjectDays(Map<Id, Task> coiExpiringTaskMap) {
+        for(Conflict_Of_Interest__c coiInfo : [SELECT id, Expiration_Date__c, Current__c, Volunteer_Contact__c, Volunteer_Contact__r.Name FROM Conflict_Of_Interest__c WHERE Current__c = True AND Expiration_Date__c = NEXT_N_DAYS:30 AND Id IN : coiExpiringTaskMap.keySet()]) {
+            if(coiExpiringTaskMap.containsKey(coiInfo.Id)) {
+                if(coiInfo.Expiration_Date__c.daysBetween(Date.today()) == -30) {
+                    coiExpiringTaskMap.get(coiInfo.Id).Subject += ' (30 Days)';
+                } else if(coiInfo.Expiration_Date__c.daysBetween(Date.today()) == -23) {
+                    coiExpiringTaskMap.get(coiInfo.Id).Subject += ' (23 Days)';
+                } else if(coiInfo.Expiration_Date__c.daysBetween(Date.today()) == -16) {
+                    coiExpiringTaskMap.get(coiInfo.Id).Subject += ' (16 Days)';
+                } else if(coiInfo.Expiration_Date__c.daysBetween(Date.today()) == -9) {
+                    coiExpiringTaskMap.get(coiInfo.Id).Subject += ' (9 Days)';
+                } else if(coiInfo.Expiration_Date__c.daysBetween(Date.today()) == -2) {
+                    coiExpiringTaskMap.get(coiInfo.Id).Subject += ' (2 Days)';
+                }
+                coiExpiringTaskMap.get(coiInfo.Id).ActivityDate = NULL;
             }
         }
     }

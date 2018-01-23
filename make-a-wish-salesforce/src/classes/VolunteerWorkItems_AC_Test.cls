@@ -38,17 +38,18 @@ public class VolunteerWorkItems_AC_Test {
     }
     
     public static testMethod void volunteerWishEvents() {
+         test.startTest();
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Role__c currRole = OrientationandTrainingUtil.createRole();
-         Role__c currNonWishRole = OrientationandTrainingUtil.createNonWishRole();
-         Chapter_Role__c  currNonWishChapRole = OrientationandTrainingUtil.createChapter(acc.id,currNonWishRole.Id);
+        Role__c currNonWishRole = OrientationandTrainingUtil.createNonWishRole();
+        Chapter_Role__c  currNonWishChapRole = OrientationandTrainingUtil.createChapter(acc.id,currNonWishRole.Id);
         user currUser = [SELECT Id,UserName FROM User WHERE UserName =:'joathanedwards@gmail.com'];
         Case dbCase = [SELECT Id,Status,Wish_Type__c FROM Case WHERE Wish_Type__c =: 'Disney World'];
-       
+        
         Volunteer_Opportunity__c dbOpp = [SELECT Id,Wish__c,Non_Wish_Event__C,Hidden_VolunteerCount_Desc__c,Chapter_Role_Opportunity__c FROM Volunteer_Opportunity__c WHERE  Wish__c =:dbCase.id Limit 1];
         List<Volunteer_Opportunity__c> voloppList = new List<Volunteer_Opportunity__c>([SELECT Id,Wish__c,Non_Wish_Event__C,Hidden_VolunteerCount_Desc__c,Role__c,Chapter_Role_Opportunity__r.Role_Name__c,Chapter_Name__r.Name  FROM Volunteer_Opportunity__c WHERE Role__c ='Wish Granter']);
         System.RunAs(currUser) {
-            test.startTest();
+           
             PageReference pageref = Page.MyAssignment_VF;
             Test.setCurrentPageReference(pageref);
             VolunteerWorkItems_AC volunteerWorkitem = new VolunteerWorkItems_AC(new ApexPages.StandardController(dbOpp));
@@ -109,7 +110,7 @@ public class VolunteerWorkItems_AC_Test {
     }
    
     public static testMethod void volunteerRegisteredNonWish() {
-        
+        Test.startTest();
         user currUser = [SELECT Id,UserName FROM User WHERE UserName =:'joathanedwards@gmail.com'];
         Non_Wish_Events__c dbNonWish = [SELECT Id,Event_Text__c  FROM Non_Wish_Events__c WHERE Event_Text__c = 'Sending Wish Child'];
         Volunteer_Opportunity__c dbOpp = [SELECT Id,Chapter_Name__r.Name,Non_Wish_Event__C,Chapter_Role_Opportunity__r.Role_Name__c FROM Volunteer_Opportunity__c WHERE Non_Wish_Event__C =: dbNonWish.Id Limit 1];
@@ -122,6 +123,8 @@ public class VolunteerWorkItems_AC_Test {
            // volunteerWorkitems.RegisterNonWishEvents();
             
         }
+        Test.stopTest();
     }
+    
    
 }

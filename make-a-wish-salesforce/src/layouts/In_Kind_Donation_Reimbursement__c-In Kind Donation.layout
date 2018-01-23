@@ -208,7 +208,7 @@
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
-        <relatedList>In_Kind_Donation_Reimbursement_File__c.Parent__c</relatedList>
+        <relatedList>InkindDon_reimburseFile__c.Parent__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

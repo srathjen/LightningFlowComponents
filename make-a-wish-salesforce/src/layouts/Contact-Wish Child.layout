@@ -76,6 +76,10 @@
                 <showScrollbars>false</showScrollbars>
                 <width>0</width>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>FirstNameCharacterCount__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -105,14 +109,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Migrated_Record__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Hidden_Medical_Physician__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Hidden_Medical_Physician_Email__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
@@ -178,8 +174,8 @@
                 <field>npe01__Secondary_Address_Type__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>npe01__Other_Address__c</field>
+                <behavior>Edit</behavior>
+                <field>OtherAddress</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -199,14 +195,12 @@
         <label>Wish Child Photo</label>
         <layoutColumns>
             <layoutItems>
-                <height>200</height>
-                <page>WishChildPhoto_VF</page>
-                <showLabel>false</showLabel>
-                <showScrollbars>true</showScrollbars>
-                <width>100%</width>
+                <behavior>Edit</behavior>
+                <field>Wish_Child_Photo__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>OneColumn</style>
+        <layoutColumns/>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -291,11 +285,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Referrer_Email__c</field>
+                <field>Referrer_Last_Name__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Referrer_Last_Name__c</field>
+                <field>Referrer_Email__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -313,11 +307,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Relationship_to_Wish_Child__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Relationship__c</field>
+                <field>Wish_How_Did_you_hear_about_Make_A_Wish__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -325,11 +315,23 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Relationship__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Relationship_to_Wish_Child__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Is_Family_Aware_of_Referral__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Wish_How_Did_you_hear_about_Make_A_Wish__c</field>
+                <field>Provider_Type__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Other_Medical_Provider_Category__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>

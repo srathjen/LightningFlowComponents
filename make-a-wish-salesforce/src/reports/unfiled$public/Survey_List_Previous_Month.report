@@ -30,13 +30,11 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Granted,Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>

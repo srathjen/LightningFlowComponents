@@ -7,7 +7,7 @@ Description : WishChildForm_AC_Test is used to increase the code coverage for Wi
 public class WishChildForm_AC_Test{
     
     /* This CalltheConstructor Method is used to cover the codecoverage for constructor.*/
-    static testMethod void CalltheConstructorMethod(){ 
+    static testMethod void calltheConstructorMethod(){ 
        
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
@@ -18,6 +18,7 @@ public class WishChildForm_AC_Test{
         wishChildFormIns.Emergency_Last_Name__c = 'TestLastEmployee';
         wishChildFormIns.Emergency_Mobilephone__c = '9600467559';
         Insert  wishChildFormIns;
+        Test.startTest();
         ApexPages.StandardController sc = new ApexPages.StandardController(wish);
         PageReference pageRef = Page.WishChildForm_VF;
         pageRef.getParameters().put('id', String.valueOf(wish.Id));
@@ -26,7 +27,7 @@ public class WishChildForm_AC_Test{
         WishChildFormUtil util = new WishChildFormUtil();
         wishChildIns.SaveandwishFamilyExit();
         wishChildIns.SaveandwishChildExit();
-        wishChildIns.exitWithOutSave();
+        //wishChildIns.exitWithOutSave();
         wishChildIns.WishInfoWithSave();
         wishChildIns.SavewithExit();
         wishChildIns.WishInfoSave();
@@ -82,7 +83,7 @@ public class WishChildForm_AC_Test{
         wishChildIns.cancel();
         wishChildIns.withOutSavefromWCFtoWIF();
         wishChildIns.withOutSaveWCCF();
-        wishChildIns.CheckSameasParent();
+        //wishChildIns.CheckSameasParent();
         wishChildIns.WishFamilytoWishInfo();
         util.getMonths();
         wishChildIns.CancelFunction();
@@ -92,7 +93,7 @@ public class WishChildForm_AC_Test{
         wishChildIns.generatePDF();
         util.getStates();
         wishChildIns.submitforApproval();
-        Test.startTest();
+        
         wishChildIns.saveContact();
         Test.StopTest();
         System.AssertEquals(wish.Id,wishChildFormIns.Case__c);
@@ -100,7 +101,7 @@ public class WishChildForm_AC_Test{
     }   
     
     /* This DocusignSignNow Method is used to cover the codecoverage SubmitAndSign() when Envelop_Id__c  &  Hidden_SignerMap_Key_1__c  are NOT NULL.*/
-    static testMethod void DocusignSignNow1(){ 
+    static testMethod void docusignSignNow1(){ 
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -128,7 +129,7 @@ public class WishChildForm_AC_Test{
     }
     
     /* This DocusignSignNow Method is used to cover the codecoverage SubmitAndSign() when Hidden_Envelop_Id_2__c &  Hidden_SignerMap_Key_2__c  are NOT NULL.*/
-    static testMethod void DocusignSignNow2(){ 
+    static testMethod void docusignSignNow2(){ 
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -156,7 +157,7 @@ public class WishChildForm_AC_Test{
     }
     
     /* This DocusignSignNow Method is used to cover the codecoverage SubmitAndSign() when Hidden_Envelop_Id_1__c &  Hidden_SignerMap_Key_1__c are NULL.*/
-    static testMethod void DocusignSignNow3(){ 
+    static testMethod void docusignSignNow3(){ 
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -183,7 +184,7 @@ public class WishChildForm_AC_Test{
     }
     
     /* This DocusignSendEmail Method is used to cover the codecoverage sendpdftoEmail() and callouttoDocusing().*/
-    static testMethod void DocusignSendEmail(){ 
+    static testMethod void docusignSendEmail(){ 
         Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
         Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -221,5 +222,32 @@ public class WishChildForm_AC_Test{
         Test.StopTest();
         System.AssertEquals(wish.Id,wishChildFormIns.Case__c);
     }
+    
+    
+     /* This SignNow_AC Method is used to cover the codecoverage for constructor.*/
+    static testMethod void SignNowController(){ 
+       
+        Account chapterAcc = OrientationandTrainingUtil.createchapterAccount();
+        Contact wishChild =  OrientationandTrainingUtil.CreateWishChild();
+        case wish = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        Wish_Child_Form__c wishChildFormIns = OrientationandTrainingUtil.createWishChildForm(wish.Id);
+        wishChildFormIns.Emergency_Relationship__c = 'Employee';
+        wishChildFormIns.Emergency_First_Name__c = 'TestEmployee';
+        wishChildFormIns.Emergency_Last_Name__c = 'TestLastEmployee';
+        wishChildFormIns.Emergency_Mobilephone__c = '9600467559';
+        Insert  wishChildFormIns;
+        Test.startTest();
+        ApexPages.StandardController sc = new ApexPages.StandardController(wish);
+        PageReference pageRef = Page.SignNowPDF;
+        pageRef.getParameters().put('id', String.valueOf(wish.Id));
+        Test.setCurrentPage(pageRef);
+        SignNow_AC wishChildIns = new SignNow_AC(sc);
+        WishChildFormUtil util = new WishChildFormUtil();
+       
+        Test.StopTest();
+        System.AssertEquals(wish.Id,wishChildFormIns.Case__c);
+         
+    }   
+    
     
 }

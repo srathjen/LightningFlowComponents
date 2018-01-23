@@ -53,6 +53,10 @@
         <name>Account_Phone__c</name>
     </fields>
     <fields>
+        <label><!-- Activation Date --></label>
+        <name>Activation_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- Active Board Member --></label>
         <name>Active_Board_Member__c</name>
     </fields>
@@ -397,6 +401,10 @@
         <name>Department__c</name>
     </fields>
     <fields>
+        <label><!-- Diagnosis Given By Referrer --></label>
+        <name>Diagnosis_Given_By_Referrer__c</name>
+    </fields>
+    <fields>
         <label><!-- Primary Diagnosis --></label>
         <name>Diagnosis__c</name>
     </fields>
@@ -481,6 +489,10 @@
         <name>External_Id__c</name>
     </fields>
     <fields>
+        <label><!-- First Name Character Count --></label>
+        <name>FirstNameCharacterCount__c</name>
+    </fields>
+    <fields>
         <label><!-- First + Last Initial --></label>
         <name>First_Last_Initial__c</name>
     </fields>
@@ -508,12 +520,12 @@
             <translation><!-- Female --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>I choose not to self-identify</masterLabel>
-            <translation><!-- I choose not to self-identify --></translation>
-        </picklistValues>
-        <picklistValues>
             <masterLabel>Male</masterLabel>
             <translation><!-- Male --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Self-describe</masterLabel>
+            <translation><!-- Self-describe --></translation>
         </picklistValues>
     </fields>
     <fields>
@@ -547,6 +559,10 @@
     <fields>
         <label><!-- Hidden Granted Date --></label>
         <name>Hidden_Granted_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Hospital Account --></label>
+        <name>Hidden_Hospital_Account__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Is We Need To Expedite The Proces --></label>
@@ -710,6 +726,11 @@
         <relationshipLabel><!-- Contacts --></relationshipLabel>
     </fields>
     <fields>
+        <label><!-- ICD Given By Referrer --></label>
+        <name>ICD_Given_By_Referrer__c</name>
+        <relationshipLabel><!-- Contacts (ICD Given By Referrer) --></relationshipLabel>
+    </fields>
+    <fields>
         <label><!-- I’m On LinkedIn --></label>
         <name>I_m_on_LinkedIn__c</name>
         <picklistValues>
@@ -734,6 +755,10 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Important Notes --></label>
         <name>Important_Notes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Inactivation Date --></label>
+        <name>Inactivation_Date__c</name>
     </fields>
     <fields>
         <label><!-- Inquiry/Referral Method --></label>
@@ -772,7 +797,7 @@ and the date it was or will be granted. --></help>
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Interview Date Set --></label>
+        <label><!-- Hidden Interview Date Set --></label>
         <name>InterviewDateSet__c</name>
         <picklistValues>
             <masterLabel>BC Submitted</masterLabel>
@@ -1040,8 +1065,16 @@ and the date it was or will be granted. --></help>
         <name>OtherAddressVerified__c</name>
     </fields>
     <fields>
+        <label><!-- Other Medical Provider Category --></label>
+        <name>Other_Medical_Provider_Category__c</name>
+    </fields>
+    <fields>
         <label><!-- Other Favorites --></label>
         <name>Other__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other diagnosis --></label>
+        <name>Other_diagnosis__c</name>
     </fields>
     <fields>
         <label><!-- Parent/Guardian Name --></label>
@@ -1148,11 +1181,11 @@ and the date it was or will be granted. --></help>
         <name>Provided_additional_information__c</name>
     </fields>
     <fields>
-        <label><!-- Provider Type --></label>
+        <label><!-- Medical Provider Type --></label>
         <name>Provider_Type__c</name>
         <picklistValues>
-            <masterLabel>Child Life Specialist</masterLabel>
-            <translation><!-- Child Life Specialist --></translation>
+            <masterLabel>Child Life Professional</masterLabel>
+            <translation><!-- Child Life Professional --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Nurse</masterLabel>
@@ -1695,6 +1728,10 @@ and the date it was or will be granted. --></help>
         <name>Recipient_Email__c</name>
     </fields>
     <fields>
+        <label><!-- Referral Comment --></label>
+        <name>ReferralComment__c</name>
+    </fields>
+    <fields>
         <label><!-- Referral Age --></label>
         <name>Referral_Age__c</name>
     </fields>
@@ -1774,6 +1811,10 @@ and the date it was or will be granted. --></help>
             <translation><!-- Family --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Family Member/Relative</masterLabel>
+            <translation><!-- Family Member/Relative --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Father</masterLabel>
             <translation><!-- Father --></translation>
         </picklistValues>
@@ -1830,6 +1871,10 @@ and the date it was or will be granted. --></help>
             <translation><!-- Husband --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Medical Professional</masterLabel>
+            <translation><!-- Medical Professional --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Mother</masterLabel>
             <translation><!-- Mother --></translation>
         </picklistValues>
@@ -1838,8 +1883,20 @@ and the date it was or will be granted. --></help>
             <translation><!-- Neighbour --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Parent/Guardian</masterLabel>
+            <translation><!-- Parent/Guardian --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Partner</masterLabel>
             <translation><!-- Partner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Self</masterLabel>
+            <translation><!-- Self --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Sister</masterLabel>
@@ -1941,6 +1998,10 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Hidden Second Recipient Name --></label>
         <name>Second_Recipient_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Self describe comment box --></label>
+        <name>Self_describe_comment_box__c</name>
     </fields>
     <fields>
         <label><!-- Short Description --></label>
@@ -3788,6 +3849,14 @@ provide contact information for each site on which you are active. --></help>
     <workflowTasks>
         <name>Contact_ET_Application_Status_Incomplete_After_30_Days</name>
         <subject><!-- Contact ET : Application Status Incomplete After 30 Days --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Contact_ET_Volunteer_Interview_Date_Set_Remainder_30_Days</name>
+        <subject><!-- Contact ET : Volunteer Interview Date Set Remainder (30 Days) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Contact_ET_Volunteer_Interview_Date_Set_Remainder_7_Days</name>
+        <subject><!-- Contact ET : Volunteer Interview Date Set Remainder (7 Days) --></subject>
     </workflowTasks>
     <workflowTasks>
         <name>Task_ET_Interview_Completed</name>

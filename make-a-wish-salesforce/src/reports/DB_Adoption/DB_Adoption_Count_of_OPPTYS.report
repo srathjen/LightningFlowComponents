@@ -28,7 +28,6 @@
     <filter>
         <criteriaItems>
             <column>STAGE_NAME</column>
-            <isUnlocked>false</isUnlocked>
             <operator>notEqual</operator>
             <value>Closed Won,Closed Lost</value>
         </criteriaItems>

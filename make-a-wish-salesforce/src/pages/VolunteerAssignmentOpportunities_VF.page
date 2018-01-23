@@ -38,7 +38,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                             <apex:tabPanel switchType="client" selectedTab="MyAssignment" id="theTabPanel">
 
                                 <!-- This block used to  display all open wish volunteer opportunities -->
-                                <apex:tab label="Wishes" name="MyAssignment" id="tabOne" rendered="{!wishTab}">
+                                <apex:tab label="Wish Granter" name="MyAssignment" id="tabOne" rendered="{!wishTab}">
                                     <table id="dataTab1" class="display table table-maw table-hover">
                                         <thead class="thead-default">
                                             <tr>
@@ -56,6 +56,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
 
                                         <tbody>
                                             <apex:repeat value="{!WishEvents}" var="con1">
+                                             <apex:outputpanel rendered="{!(OR(con1.wishOpportunities.Role__c == 'Wish Granter',con1.wishOpportunities.Role__c == 'Wish Granter Mentor'))}">
                                                 <tr>
                                                     <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}" var="fieldValue">
                                                         <apex:outputpanel rendered="{!fieldValue.label = 'Record ID' }">
@@ -96,6 +97,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                     <td style='text-align: center;'>{!con1.wishOpportunitiesCount}</td>
                                                     <td style='text-align: center;'>{!con1.registeredWishOpportunitiesCount}</td>
                                                 </tr>
+                                                </apex:outputpanel>
                                             </apex:repeat>
                                             <script>
                                            
@@ -103,6 +105,76 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                         </tbody>
                                     </table>
                                 </apex:tab>
+                                
+                                <!-- This block used to display all open  wish Related  volunteer opportunities -->
+                                 <apex:tab label="Wish Related" name="wishrelatedRoles" id="tabtree" rendered="{!wishTab}">
+                                  <table id="dataTab1" class="display table table-maw table-hover">
+                                        <thead class="thead-default">
+                                            <tr>
+                                                <!-- th>Register</th --><!-- WVC-1575 -->
+                                                <th>SIGN UP</th>
+                                                <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}" var="fieldValue">
+                                                    <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                                                        <th>{!fieldValue.label}</th>
+                                                    </apex:outputpanel>
+                                                </apex:repeat>
+                                                <th># Needed</th>
+                                                <th># Registered</th> 
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <apex:repeat value="{!WishEvents}" var="con1">
+                                                <apex:outputpanel rendered="{!Not(OR(con1.wishOpportunities.Role__c == 'Wish Granter',con1.wishOpportunities.Role__c == 'Wish Granter Mentor'))}">
+                                                <tr>
+                                                    <apex:repeat value="{!$ObjectType.Volunteer_Opportunity__c.fieldsets.WishEvents}" var="fieldValue">
+                                                        <apex:outputpanel rendered="{!fieldValue.label = 'Record ID' }">
+                                                            <td style="width:10%"><apex:outputLink style="text-decoration: underline;color: blue;" value="/{!con1.wishOpportunities[fieldValue]}" id="theLink">View</apex:outputLink>
+
+                                                              
+                                                               <!-- Commented for WVC-1618 -->
+                                                               <!--   | &nbsp;
+                                                                <apex:commandLink value="Register" action="{!RegisterWishEvents}"  style="text-decoration: underline; color:blue;">
+                                                                    <apex:param name="nickName" value="{!con1.wishOpportunities[fieldValue]}" assignTo="{!volunteerOpportunityRecordId}"/>
+                                                                </apex:commandLink> -->
+
+
+
+                                                            </td> 
+                                                        </apex:outputpanel>
+                                                        <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' && fieldValue.label  != 'Waiting Since' && fieldValue.label  !='In Progress' }">
+                                                            <td>{!con1.wishOpportunities[fieldValue]}</td>
+                                                        </apex:outputpanel>
+                                                        <apex:outputpanel rendered="{!fieldValue.label  == 'In Progress' }">
+                                                            <td><!-- {!if(con1.wishOpportunities[fieldValue],"True","False")} -->
+                                                                <p style="display:none">
+                                                                    {!con1.wishOpportunities[fieldValue]}
+                                                                </p>
+                                                                <input type="checkbox" disabled="true" data-checkBoxVal="{!con1.wishOpportunities[fieldValue]}" class="inp-wish" readonly="true"/>
+                                                            </td>
+                                                            
+                                                        </apex:outputpanel>
+                                                        <apex:outputpanel rendered="{!fieldValue.label  == 'Waiting Since'}">
+                                                            <td>
+                                                                <apex:outputText value="{0,date,MM'/'dd'/'yyyy}" id="date1">
+                                                                    <apex:param value="{!con1.wishOpportunities[fieldValue]}"/>
+                                                                </apex:outputText>
+                                                            </td>
+                                                        </apex:outputpanel>
+
+                                                    </apex:repeat>
+                                                    <td style='text-align: center;'>{!con1.wishOpportunitiesCount}</td>
+                                                    <td style='text-align: center;'>{!con1.registeredWishOpportunitiesCount}</td>
+                                                </tr>
+                                                </apex:outputpanel>
+                                            </apex:repeat>
+                                            <script>
+                                           
+                                            </script>
+                                        </tbody>
+                                    </table>
+                                 
+                                 </apex:tab>
 
                                 <!-- This block used to display all open non wish volunteer opportunities -->
 
