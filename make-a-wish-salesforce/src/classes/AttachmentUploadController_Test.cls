@@ -3,7 +3,11 @@ Description : This test class used to cover the unit testing of the attachmentup
 ************************************************************************************************/
 @isTest
 public class AttachmentUploadController_Test {
+/*******************************************************************
+This method is attach the image to wish child record.
+********************************************************************/
     public static testmethod void insertAttachment(){
+        //Create the wish child contact record.
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Attachment newAttachment = new Attachment();
         newAttachment.Name = 'test';
@@ -18,7 +22,8 @@ public class AttachmentUploadController_Test {
         
         attchUpload.upload();
         attchUpload.updateWishChildPhoto();
-        
+        System.assertEquals(newAttachment.ParentId , wishChild.id,'Attachment does not have a Parent Id');
+        System.assert(newAttachment.ParentId == wishChild.id,'Attachment does not have a Parent Id');
     }
     
 }

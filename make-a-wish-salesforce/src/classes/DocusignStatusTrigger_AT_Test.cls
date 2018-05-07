@@ -76,6 +76,7 @@ public class DocusignStatusTrigger_AT_Test{
         
         Lead updateLead = new Lead();
         updateLead.Status = 'Referred';
+        updateLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
         updateLead.RFI_Form_Info_Hidden__c = 'Qualified';
         updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
         updateLead.Id = newLead.Id;

@@ -6,6 +6,7 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType.DeveloperName</column>
+            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Board_Member</value>
         </criteriaItems>

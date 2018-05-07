@@ -1,4 +1,10 @@
-/* This class is used to increase the code coverage of Batch_updateTaskToRelatedRec class*/
+/*****************************************************************************
+Created by: Kanagaraj
+Author : MST Solutions
+CreateDate : 10/05/2016
+Description : This class is used to increase the code coverage of Batch_updateTaskToRelatedRec_AC class.
+******************************************************************************/
+
 @isTest
 public class Batch_updateTaskToRelatedRec_Test{
     
@@ -30,6 +36,7 @@ public class Batch_updateTaskToRelatedRec_Test{
         newLead.Referrer_Zip__c = '6210';
         newLead.Sibling_Detail__c = 'aa | aaab | 14 bbb | bbbc | 15';
         newLead.PD_Condition_Description__c = 'Test Diagnosis';
+        newLead.Diagnosis_Given_By_Referrer__c = 'Sample';
         newLead.Parent_First_Name__c = 'MAWAFirstJune';
         newLead.Parent_Last_Name__c = 'MAWALastJune';
         newLead.Medical_Professional_First_Name__c = 'mossJune';
@@ -60,12 +67,14 @@ public class Batch_updateTaskToRelatedRec_Test{
         //newLead.Communication__c = 'Non-Verbal';
         newLead.Travel_algorithm__c = 'Test1;Test2;';
         Insert newLead;
-        Task newTask = new Task(subject ='Lead ET : Online Wish Referral Received');
+        Task newTask = new Task(subject ='Lead ET : Online Wish Referral Received', WhoId = newLead.Id );
         Insert newTask;
-        //System.assertEquals('Smith Household',[SELECT lastName FROM Lead WHERE id =: newLead.Id].LastName,'Check LastName is Smith Household');
+        System.assertEquals('Smith Household',[SELECT lastName FROM Lead WHERE id =: newLead.Id Limit 1].LastName,'Check LastName is Smith Household');
+        System.assertEquals(newLead.Id,newTask.WhoId,'Check Task WhoId with Lead Id');
+        system.assert(newLead.Travel_algorithm__c ==  'Test1;Test2;','Travel algorithm name is null');
         Test.StartTest();
         Database.executeBatch(new Batch_updateTaskToRelatedRec_AC());
         Test.StopTest();
-        //System.assertEquals(newLead.Id,[SELECT WhoId FROM Task WHERE id =: newTask.Id].WhoId,'Check Task WhoId with Lead Id');
+       
     }
 }

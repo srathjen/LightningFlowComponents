@@ -17,6 +17,8 @@ public class CaseCommentTrigger_AT_Test {
         newCaseComment.ParentId = currnetCase.Id;
         newCaseComment.CommentBody = 'Test comment';
         insert newCaseComment;
+         System.assertEquals(currnetCase.MAC_Email__c, 'Test@gmail.com', 'The email does not match');
+        System.assert(currnetCase.MAC_Email__c ==  'Test@gmail.com', 'The email does not match');
         test.stopTest();
         
         

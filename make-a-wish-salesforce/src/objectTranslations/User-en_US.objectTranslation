@@ -13,6 +13,14 @@
         <name>Account_Phone__c</name>
     </fields>
     <fields>
+        <label><!-- Address Latitude --></label>
+        <name>Address_Latitude__c</name>
+    </fields>
+    <fields>
+        <label><!-- Address Longitude --></label>
+        <name>Address_Longitude__c</name>
+    </fields>
+    <fields>
         <label><!-- Chapter Name --></label>
         <name>Chapter_Name__c</name>
     </fields>
@@ -82,7 +90,7 @@
     </fields>
     <fields>
         <help><!-- Checking this box will allow this user to run DDPs on a staging environment when testing is available. --></help>
-        <label><!-- DDP Tester --></label>
+        <label><!-- DocGen Next Release Test User --></label>
         <name>Loop__LOOPlus_Tester__c</name>
     </fields>
     <fields>

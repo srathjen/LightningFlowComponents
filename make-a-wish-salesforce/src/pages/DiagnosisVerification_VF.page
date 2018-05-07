@@ -1,5 +1,8 @@
 <!-- ******************************************************************************************************************************
 Description : This page is used to collect medical condition about wish child from the medical professional
+
+Modification Log:
+1. 06/04/2018 - Vignesh SM - IME 133 - Line no. 652
 *********************************************************************************************************************************** -->
 <apex:page controller="DiagnosisVerification_AC" applyBodyTag="false" sidebar="false" showHeader="false" docType="html-5.0" standardStylesheets="false" title="Make-A-Wish | Diagnosis Verification Form" cache="false">
     <script>
@@ -32,7 +35,10 @@ Description : This page is used to collect medical condition about wish child fr
         .travel-wrap > div > div > div, .travel-wrap select {margin-left:2rem; width:calc(100% - 2rem)}
         .travel-wrap .form-group, .travel-wrap .form-check-label {margin-bottom:.5rem;}
         .travel-wrap label {display:block}
-        .travel-wrap label + span {display:block; margin-bottom:1rem}
+        .travel-wrap label + span {margin-bottom:1rem;}
+        .travel-wrap .seperator-top {padding:1rem 0; margin:0}
+        .travel-wrap .disabled {color:#ccc; cursor:not-allowed;}
+        .travel-wrap .inline-block {display: inline-block;}
         /* autocomplete drop-down */
         .ui-widget-content li {padding-left:1rem}
         .option-disabled {cursor:not-allowed !important;color:#bbb;opacity:1 !important;padding:.5rem 0 !important;border-bottom:1px dashed #bbb;margin-bottom:1rem !important;margin-left:1rem !important;font-size:.8rem;}
@@ -40,15 +46,15 @@ Description : This page is used to collect medical condition about wish child fr
         .field-word-seperator {font-family:arial; font-size:.7rem; position:relative; display:block; border-top:1px dotted #55595c; color:#55595c; width:100%}
         .field-word-seperator::after {content:"OR"; background:#fff; padding:0 1rem; position:absolute; left:43%; top:-.6rem; text-align:center; z-index:1}
         .form-group-seperator {margin-bottom:2rem}
-        .no-diag {cursor:pointer; text-decoration: underline; color:#006bb6 !important}
+        .no-diag {cursor:pointer; text-decoration: underline; color:#0057B8 !important}
         .icd, .seperator-top {position:relative; border:#ccc dashed 1px; border-bottom:none; border-left:none; border-right:none}
         .icd legend {margin-top:1rem}
         .ques-complete {background:#e9f3f9; border:1px dotted #75b2d9;}
         .close-sd {position:absolute; top:1rem; right:1rem; color:#ccc; cursor:pointer}
         .close-sd:hover {color:#747678}
         .text-warning {display:block;border:1px solid #FFFA00; background:rgba(255, 250, 0, .1); padding:1rem; margin-bottom: 1.5rem}
-        .sweet-alert button.cancel {background:#006bb6}
-        .sweet-alert button.cancel:hover {background:#006bb6; opacity:.9}
+        .sweet-alert button.cancel {background:#0057B8}
+        .sweet-alert button.cancel:hover {background:#0057B8; opacity:.9}
         /* notification */
         .notification {position:fixed; top:1rem; left:50%;}
         .notification div {position:relative; left:-50%; background:#00C069; border-radius:.5rem; padding:1rem; color:#fff; text-align:center;}
@@ -73,13 +79,6 @@ Description : This page is used to collect medical condition about wish child fr
         .icd > .diagnosis-link:before {visibility:hidden;}
         .icd:hover > .diagnosis-link {visibility:visible}
         }
-        
-        form .text-muted {font-size:11px !important; font-family: "Lato", Arial, sans-serif !important;}
-        form .form-control {font-size:11px !important}
-		input {font-size:11px !important}
-        .chosen-container-multi {font-size:11px !important}
-        input.upload {font-size:11px !important}
-        .diagnosis-link{font-size:11px !important; font-family: "Lato", Arial, sans-serif !important;}
     </style>
     <body class="vcp">
         
@@ -103,8 +102,8 @@ Description : This page is used to collect medical condition about wish child fr
             </div>
             <div class="row">
                 <section class="col-md-8">
-                    <apex:pageMessages id="myMsg" />
                     <apex:form enctype="multipart/form-data" id="id1">
+                    <apex:pageMessages id="myMsg" />
                         <apex:outputPanel id="LoadBlock">
                             <apex:actionStatus id="status">
                                 <apex:facet name="start">
@@ -420,7 +419,7 @@ Description : This page is used to collect medical condition about wish child fr
                                         <apex:actionFunction name="deleteAttachment" action="{!deleteLeadFile}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace">
                                             <apex:param name="attachmentId" value="" />
                                         </apex:actionFunction>
-                                        <apex:actionFunction name="docusign" action="{!SubmitSign}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock" status="status"/>
+                                        <apex:actionFunction name="docusign" action="{!SubmitSign}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock,myMsg" status="status"/>
                                         <apex:actionFunction name="refreshAttachmentSection"  reRender="attachmentSection">
                                         </apex:actionFunction>
                                         <apex:actionFunction name="saveMedInfo" action="{!SaveMedicalInformation}" reRender="notEligibleWishDesc,diagonsisLoop,notEligible,findAndReplace,LoadBlock" onComplete="docusignPageRedirect();" status="status">
@@ -618,6 +617,9 @@ Description : This page is used to collect medical condition about wish child fr
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>In order to facilitate communication, please select all that apply to {!currLead.FirstName} {!currLead.LastName}</label></div>
+                                                 <div class="col-md-12">
+                                                            <span class="text-muted">(The following information was submitted by the person who referred the child. Please update as needed.) </span>
+                                                        </div>
                                                 <div class="col-md-6">
                                                     <apex:selectList value="{!wishChildWrapperIns.communicationList}" multiselect="true" size="5" styleClass="form-control multi-lvl-one chosen multiCom">
                                                         <apex:selectOptions value="{!wishChildWrapperIns.Communications}" />
@@ -646,7 +648,8 @@ Description : This page is used to collect medical condition about wish child fr
                                         <div class="form-group row">
                                             <div class="col-md-12"><label>Is there additional information you would like to provide?</label></div>
                                             <div class="col-md-6">
-                                                <apex:inputTextarea value="{!wishChildWrapperIns.additionalInfo}" styleClass="form-control requiredField" id="additonalinfo" html-placeholder="Please enter additional information here" />
+                                                <!-- Modified as per IME 133 -->
+                                                <apex:inputTextarea value="{!wishChildWrapperIns.additionalInfo}" styleClass="form-control" id="additonalinfo" html-placeholder="Please enter additional information here" />
                                             </div>
                                         </div>
                                         
@@ -659,17 +662,281 @@ Description : This page is used to collect medical condition about wish child fr
 </div>-->
                                     </fieldset>
                                     <!-- Travel Algorithm Starts -->
+                                    <!-- <fieldset>
+<legend>Current conditions that impact travel</legend> -->
+                                    <!-- Updated Part A Travel Algorith section -->
+                                    <!-- <div class="travel-wrap">
+<div class="form-group row">
+<div class="col-md-12"><label>Does {!currLead.FirstName} {!currLead.LastName} have any of the following conditions?</label> <span class="text-muted">(Please select all that apply)</span></div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12"><label class="form-check-label">
+<apex:inputCheckbox value="{!travelAlgorithmWrapperIns.iamNotSure}" styleClass="check_checkbox"/>I am not sure</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12"><label class="form-check-label">
+<apex:inputCheckbox value="{!travelAlgorithmWrapperIns.infectious}" styleClass="check_checkbox"/>Infectious Tuberculosis</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.airborne}" styleClass="check_checkbox"/>Airborne Viral Infections of High Mortality</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.surgeryinTwoMonths}" styleClass="check_checkbox"/>Surgery in the past 2 months</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.pneumothorax}" styleClass="check_checkbox"/>Pneumothorax</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.pleural}" styleClass="check_checkbox"/>Pleural Effusion</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.lungDisease}" styleClass="check_checkbox"/>Severe Restrictive Lung Disease</label>
+</div>
+<div class="col-md-6">
+<apex:selectList value="{!travelAlgorithmWrapperIns.lungDiseaseString}" styleClass="form-control multi pick_dependent" multiselect="true"  >
+<apex:selectOptions value="{!travelAlgorithmWrapperIns.LungDiseaseList}" />
+</apex:selectList>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.oxygen}" styleClass="check_checkbox"/>Oxygen dependence at sea level</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.seaLevel}" styleClass="check_checkbox"/>Oxygen requirement >4L/min at sea level</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.longTermOxygen}" styleClass="check_checkbox"/>Long-term oxygen within last 6 months</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.respiratoryIllness}" styleClass="check_checkbox"/>Hospitalization for acute respiratory illness in the past 6 weeks</label>
+</div>
+</div>
+
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox styleClass="check_checkbox"/>Pulmonary hypertension</label>
+</div>
+<div class="col-md-6">
+<select  class="form-control c-select pick_dependent">
+<option value="" disabled="disabled">Please Select</option>
+<option value="NYHA Class IV">NYHA Class IV</option>
+<option value="NYHA Class III">NYHA Class III</option>
+<option value="I do not know">I do not know</option>
+<option value="Not Applicable">Not Applicable</option>
+</select>
+</div>
+</div>
+
+<div class="form-group row checkContainer">
+<div class="col-md-12"><label class="form-check-label">
+<apex:inputcheckbox value="{!travelAlgorithmWrapperIns.ventilator}" styleClass="check_checkbox"/>Ventilator Dependence</label>
+</div>
+<div class="col-md-6">
+<apex:selectList value="{!travelAlgorithmWrapperIns.ventilatorText}" multiselect="false" size="1" styleclass="form-control c-select pick_dependent">
+<apex:selectOptions value="{!travelAlgorithmWrapperIns.ventilatorList}" />
+</apex:selectList>
+</div>
+</div>
+
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.angina}" styleClass="check_checkbox"/>Chest Pain/Angina</label>
+</div>
+<div class="col-md-6">
+<apex:selectList value="{!travelAlgorithmWrapperIns.anginaString}" multiselect="true" size="4" styleclass="form-control multi pick_dependent">
+<apex:selectOptions value="{!travelAlgorithmWrapperIns.anginaList}" />
+</apex:selectList>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.arrhythmia}" styleClass="check_checkbox"/>Arrhythmia</label>
+</div>
+<div class="col-md-6">
+<apex:selectList value="{!travelAlgorithmWrapperIns.ArrhythmiaString}" styleclass="form-control multi pick_dependent" size="4" multiselect="true">
+<apex:selectOptions value="{!travelAlgorithmWrapperIns.ArrhythmiaList}" />
+</apex:selectList>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.heartFailure}" styleClass="check_checkbox"/>Acute Heart Failure</label>
+</div>
+<div class="col-md-6">
+<apex:selectList value="{!travelAlgorithmWrapperIns.heartFailureString}" multiselect="true" size="4" styleclass="form-control multi pick_dependent">
+<apex:selectoptions value="{!travelAlgorithmWrapperIns.heartFailureList}" />
+</apex:selectList>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.chronicHeartFailure}" styleClass="check_checkbox"/>Chronic Heart Failure</label>
+</div>
+<div class="col-md-6">
+<apex:selectList value="{!travelAlgorithmWrapperIns.chronicHeartFailureString}" styleclass="form-control multi pick_dependent" size="4" multiselect="true">
+<apex:selectOptions value="{!travelAlgorithmWrapperIns.chronicHeartFailureList}" />
+</apex:selectList>
+</div>
+</div>
+
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.congenitalHeartDisease}" styleClass="check_checkbox"/>Cyanotic Congenital Heart Disease</label>
+</div>
+<div class="col-md-6">
+<apex:selectList value="{!travelAlgorithmWrapperIns.congenitalHeartDiseaseString}"  styleClass="form-control multi pick_dependent" multiselect="true" size="4" >
+<apex:selectOptions value="{!travelAlgorithmWrapperIns.congenitalHeartDiseaseList}" />
+</apex:selectList>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputCheckbox value="{!travelAlgorithmWrapperIns.uncontrolledHypertension}" styleClass="check_checkbox"/>Severe Uncontrolled Hypertension</label>
+</div>
+</div>
+
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.acuteoRChronicHepatitis}" styleClass="check_checkbox"/>Acute or Chronic Hepatitis</label>
+</div>
+<div class="col-md-6">
+<apex:selectList value="{!travelAlgorithmWrapperIns.chronicHepatitisString}" multiselect="false"  styleclass="form-control c-select pick_dependent" size="1">
+<apex:selectOptions value="{!travelAlgorithmWrapperIns.HepatitisValues}" />
+</apex:selectList>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.portalHypertension}" styleClass="check_checkbox"/>Portal Hypertension</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.heptopulmonarySyndrome}" styleClass="check_checkbox"/>Heptopulmonary Syndrome</label>
+</div>
+</div>
+
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox styleClass="check_checkbox"/>Chronic liver disease</label>
+</div>
+</div>
+
+
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.liverDisease}" styleClass="check_checkbox"/>End Stage Liver Disease</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.esophagealVarices}" styleClass="check_checkbox"/>Esophageal varices or history of</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label">
+<apex:inputcheckbox value="{!travelAlgorithmWrapperIns.portopulmonaryHypertension}" styleClass="check_checkbox"/>Portopulmonary Hypertension</label>
+</div>
+<div class="col-md-6">
+<apex:selectList value="{!travelAlgorithmWrapperIns.pulmonaryHypertensionString}" styleclass="form-control c-select pick_dependent" size="1">
+<apex:selectOptions value="{!travelAlgorithmWrapperIns.pulmonaryHypertensionValues}"/>
+</apex:selectList>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.intracranialPressure}" styleClass="check_checkbox"/>Increased Intracranial Pressure</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.strokes}" styleClass="check_checkbox"/>Transient Ischemic Attacks or Strokes</label>
+</div>
+<div class="col-md-6">
+<apex:selectList value="{!travelAlgorithmWrapperIns.strokesType}"  styleclass="form-control c-select pick_dependent" size="1">
+<apex:selectOptions value="{!travelAlgorithmWrapperIns.StrokeValues}"/>
+</apex:selectList>
+</div>
+</div>
+
+<div class="form-group row checkContainer checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.convulsiveDisorder}" styleClass="check_checkbox"/>Unstable or uncontrolled epilepsy, seizure disorder, convulsive disorder</label>
+</div>
+<div class="col-md-6">
+<apex:selectList value="{!travelAlgorithmWrapperIns.convulsiveDisorders}" multiselect="true"  styleclass="form-control multi pick_dependent">
+<apex:selectOptions value="{!travelAlgorithmWrapperIns.convulsiveDisorderList}" />
+</apex:selectList>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.panicDisorder}" styleClass="check_checkbox"/>Panic Disorder</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.majorbleeding}" styleClass="check_checkbox"/>Major bleeding</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.symptomaticAnemia}" styleClass="check_checkbox"/>Symptomatic Anemia</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12">
+<label class="form-check-label"><apex:inputCheckbox value="{!travelAlgorithmWrapperIns.sickleCellAnemia}" styleClass="check_checkbox"/>Sickle Cell Anemia</label>
+</div>
+</div>
+<div class="form-group row checkContainer">
+<div class="col-md-12"><label class="form-check-label">
+<apex:inputCheckbox value="{!travelAlgorithmWrapperIns.noneApply}" styleClass="check_checkbox"/>None Apply</label>
+</div>
+</div>
+</div>
+</fieldset> -->
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     <fieldset>
                                         <legend>Current conditions that impact travel</legend>
-                                        <!-- Updated Part A Travel Algorith section -->
+                                        <!-- Part A Travel Algorith section -->
                                         <div class="travel-wrap">
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Does {!currLead.FirstName} {!currLead.LastName} have any of the following conditions?</label> <span class="text-muted">(Please select all that apply)</span></div>
                                             </div>
                                             <div class="form-group row checkContainer">
-                                                <div class="col-md-12"><label class="form-check-label">
+                                                <div class="col-md-12"><label class="form-check-label inline-block">
                                                     <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.iamNotSure}" styleClass="check_checkbox"/>I am not sure</label>
                                                 </div>
+                                            </div>
+                                            
+                                            
+                                            <div class="form-group row seperator-top">
+                                                <label>Respiratory System</label>
                                             </div>
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12"><label class="form-check-label">
@@ -679,11 +946,6 @@ Description : This page is used to collect medical condition about wish child fr
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.airborne}" styleClass="check_checkbox"/>Airborne Viral Infections of High Mortality</label>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row checkContainer">
-                                                <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.surgeryinTwoMonths}" styleClass="check_checkbox"/>Surgery in the past 2 months</label>
                                                 </div>
                                             </div>
                                             <div class="form-group row checkContainer">
@@ -726,22 +988,17 @@ Description : This page is used to collect medical condition about wish child fr
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.respiratoryIllness}" styleClass="check_checkbox"/>Hospitalization for acute respiratory illness in the past 6 weeks</label>
                                                 </div>
                                             </div>
-                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
-                                                    <label class="form-check-label"><apex:inputcheckbox styleClass="check_checkbox"/>Pulmonary hypertension</label>
+                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.pht}"  styleClass="check_checkbox"/>Pulmonary hypertension</label>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <select  class="form-control c-select pick_dependent">
-                                                        <option value="" disabled="disabled">Please Select</option>
-                                                        <option value="NYHA Class IV">NYHA Class IV</option>
-                                                        <option value="NYHA Class III">NYHA Class III</option>
-                                                        <option value="I do not know">I do not know</option>
-                                                        <option value="Not Applicable">Not Applicable</option>
-                                                    </select>
+                                                    <apex:selectList value="{!pluHypTxt}" multiselect="false" size="1" styleclass="form-control c-select pick_dependent">
+                                                        <apex:selectOptions value="{!travelAlgorithmWrapperIns.phtList}" />
+                                                    </apex:selectList>
+                                                    
                                                 </div>
                                             </div>
-                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12"><label class="form-check-label">
                                                     <apex:inputcheckbox value="{!travelAlgorithmWrapperIns.ventilator}" styleClass="check_checkbox"/>Ventilator Dependence</label>
@@ -753,6 +1010,10 @@ Description : This page is used to collect medical condition about wish child fr
                                                 </div>
                                             </div>
                                             
+                                            
+                                            <div class="form-group row seperator-top">
+                                                <label>Circulatory System and Heart</label>
+                                            </div>
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.angina}" styleClass="check_checkbox"/>Chest Pain/Angina</label>
@@ -793,7 +1054,6 @@ Description : This page is used to collect medical condition about wish child fr
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.congenitalHeartDisease}" styleClass="check_checkbox"/>Cyanotic Congenital Heart Disease</label>
@@ -810,6 +1070,10 @@ Description : This page is used to collect medical condition about wish child fr
                                                 </div>
                                             </div>
                                             
+                                            
+                                            <div class="form-group row seperator-top">
+                                                <label>Gastrointestinal System/Liver</label>
+                                            </div>
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.acuteoRChronicHepatitis}" styleClass="check_checkbox"/>Acute or Chronic Hepatitis</label>
@@ -836,8 +1100,6 @@ Description : This page is used to collect medical condition about wish child fr
                                                     <label class="form-check-label"><apex:inputcheckbox styleClass="check_checkbox"/>Chronic liver disease</label>
                                                 </div>
                                             </div>
-                                            
-                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.liverDisease}" styleClass="check_checkbox"/>End Stage Liver Disease</label>
@@ -859,6 +1121,11 @@ Description : This page is used to collect medical condition about wish child fr
                                                     </apex:selectList>
                                                 </div>
                                             </div>
+                                            
+                                            
+                                            <div class="form-group row seperator-top">
+                                                <label>Nervous System</label>
+                                            </div>
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.intracranialPressure}" styleClass="check_checkbox"/>Increased Intracranial Pressure</label>
@@ -874,7 +1141,6 @@ Description : This page is used to collect medical condition about wish child fr
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-                                            
                                             <div class="form-group row checkContainer checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.convulsiveDisorder}" styleClass="check_checkbox"/>Unstable or uncontrolled epilepsy, seizure disorder, convulsive disorder</label>
@@ -890,6 +1156,12 @@ Description : This page is used to collect medical condition about wish child fr
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.panicDisorder}" styleClass="check_checkbox"/>Panic Disorder</label>
                                                 </div>
                                             </div>
+                                            
+                                            
+                                            <div class="form-group row seperator-top">
+                                                <label>Other</label>
+                                            </div>
+                                            
                                             <div class="form-group row checkContainer">
                                                 <div class="col-md-12">
                                                     <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.majorbleeding}" styleClass="check_checkbox"/>Major bleeding</label>
@@ -906,12 +1178,23 @@ Description : This page is used to collect medical condition about wish child fr
                                                 </div>
                                             </div>
                                             <div class="form-group row checkContainer">
-                                                <div class="col-md-12"><label class="form-check-label">
+                                                <div class="col-md-12">
+                                                    <label class="form-check-label"><apex:inputcheckbox value="{!travelAlgorithmWrapperIns.surgeryinTwoMonths}" styleClass="check_checkbox"/>Surgery in the past 2 months</label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group row checkContainer seperator-top">
+                                                <div class="col-md-12" style="padding:0"><label class="form-check-label inline-block">
                                                     <apex:inputCheckbox value="{!travelAlgorithmWrapperIns.noneApply}" styleClass="check_checkbox"/>None Apply</label>
                                                 </div>
                                             </div>
                                         </div>
                                     </fieldset>
+                                    
+                                    
+                                    
+                                    
+                                    
                                     <!-- Travel Algorithm Ends -->
                                     <!-------------------------- Button block Starts ---------------------------->
                                     
@@ -939,7 +1222,11 @@ Description : This page is used to collect medical condition about wish child fr
                                                     $(this).closest('.checkContainer').find('.pick_dependent option:selected').each(function() {
                                                         if($(this).val() != '' && $(this).val() != 'Please Select' && $(this).val() != 'Please select') {
                                                             multiString += $(this).val()+'; ';
-                                                            travelString += $(this).val()+';';
+                                                            if(parentString == 'Pulmonary hypertension' && $(this).val() == 'NYHA Class IV') {
+                                                                travelString += $(this).val()+'1;';
+                                                            } else {
+                                                                travelString += $(this).val()+';';
+                                                            }
                                                         }
                                                     });
                                                     stringGet += i+'.'+parentString+' : '+multiString + '\n';
@@ -960,7 +1247,7 @@ Description : This page is used to collect medical condition about wish child fr
                                                     title: '',
                                                     text: 'You have an attachment that has not been uploaded yet. Please click the UPLOAD button to complete process before saving.',
                                                     type: "error",
-                                                    confirmButtonColor: '#006bb6',
+                                                    confirmButtonColor: '#0057B8',
                                                     confirmButtonText: "Ok",
                                                     closeOnConfirm: false
                                                 })
@@ -984,7 +1271,7 @@ Description : This page is used to collect medical condition about wish child fr
                                             title: "Are you sure?",
                                             text: " All relevant diagnoses should be entered.",
                                             showCancelButton: true,
-                                            confirmButtonColor: '#006bb6',
+                                            confirmButtonColor: '#0057B8',
                                             confirmButtonText: 'Confirm',
                                             cancelButtonText: "Cancel",
                                             closeOnConfirm: true,
@@ -1031,8 +1318,8 @@ Description : This page is used to collect medical condition about wish child fr
                                                 var noneApplyMsg = $(noneApply).parent().parent().children('span');
                                                 function disabledMsg() {
                                                     $(notSure).add(noneApply).prop('disabled', true)
-                                                    .parent().css('color', '#ccc')
-                                                    .parent().append('<span class="text-muted">(Please uncheck current selections to enable this option)</span>');
+                                                    .parent().addClass('disabled')
+                                                    .parent().append('<span class="text-muted" style="margin-left:1rem">(Please uncheck current selections to enable this option)</span>');
                                                 }
                                                 // add/remove message for "not sure" checkbox if other checkboxes are checked/unchecked
                                                 if ($(allCb).is(':checked') && $(notSure).is(':checked') == false && $(noneApply).is(':checked') == false) {
@@ -1041,15 +1328,15 @@ Description : This page is used to collect medical condition about wish child fr
                                                     }
                                                 } else if ($(notSure).is(':checked')) {
                                                     // disable and apply disabled state color
-                                                    $(allCb).prop('disabled', true).parent().css('color', '#ccc');
-                                                    $(notSure).prop('disabled', false).parent().removeAttr('style');
+                                                    $(allCb).prop('disabled', true).parent().addClass('disabled');
+                                                    $(notSure).prop('disabled', false).parent().removeClass('disabled');
                                                 } else if ($(noneApply).is(':checked')) {
                                                     // disable and apply disabled state color
-                                                    $(allCb).prop('disabled', true).parent().css('color', '#ccc');
-                                                    $(noneApply).prop('disabled', false).parent().removeAttr('style');
+                                                    $(allCb).prop('disabled', true).parent().addClass('disabled');
+                                                    $(noneApply).prop('disabled', false).parent().removeClass('disabled');
                                                 } else if ($(allCb).is(':checked') == false) {
                                                     //reset
-                                                    $(allCb).prop('disabled', false).parent().removeAttr('style');
+                                                    $(allCb).prop('disabled', false).parent().removeClass('disabled');
                                                     $(notSureMsg).add(noneApplyMsg).remove();
                                                 }
                                             }
@@ -1272,7 +1559,7 @@ Description : This page is used to collect medical condition about wish child fr
                         title: '',
                         text: 'Please fill required fields',
                         type: "error",
-                        confirmButtonColor: '#006bb6',
+                        confirmButtonColor: '#0057B8',
                         timer: 3000
                     })
                     isError_Free = false;
@@ -1284,7 +1571,7 @@ Description : This page is used to collect medical condition about wish child fr
                         title: '',
                         text: 'Please fill required fields',
                         type: "error",
-                        confirmButtonColor: '#006bb6',
+                        confirmButtonColor: '#0057B8',
                         timer: 3000
                     })
                     isError_Free = false;
@@ -1301,7 +1588,7 @@ Description : This page is used to collect medical condition about wish child fr
                         title: '',
                         text: 'You have an attachment that has not been uploaded yet. Please click the UPLOAD button to complete process before signing.',
                         type: "error",
-                        confirmButtonColor: '#006bb6',
+                        confirmButtonColor: '#0057B8',
                         confirmButtonText: "Ok",
                         closeOnConfirm: false
                     })
@@ -1314,7 +1601,7 @@ Description : This page is used to collect medical condition about wish child fr
                             title: '',
                             text: 'Please fill required fields',
                             type: "error",
-                            confirmButtonColor: '#006bb6',
+                            confirmButtonColor: '#0057B8',
                             timer: 3000
                         })
 
@@ -1346,7 +1633,7 @@ Description : This page is used to collect medical condition about wish child fr
                             text: "Are there any additional relevant diagnoses?",
                             type: "warning",
                             showCancelButton: true,
-                            confirmButtonColor: "#006bb6",
+                            confirmButtonColor: "#0057B8",
                             confirmButtonText: "No",
                             cancelButtonText: "Yes",
                             closeOnConfirm: false,
@@ -1381,7 +1668,11 @@ Description : This page is used to collect medical condition about wish child fr
                             $(this).closest('.checkContainer').find('.pick_dependent option:selected').each(function() {
                                 if($(this).val() != '' && $(this).val() != 'Please Select' && $(this).val() != 'Please select') {
                                     multiString += $(this).val()+'; ';
-                                    travelString += $(this).val()+';';
+                                    if(parentString == 'Pulmonary hypertension' && $(this).val() == 'NYHA Class IV') {
+                                        travelString += $(this).val()+'1;';
+                                    } else {
+                                        travelString += $(this).val()+';';
+                                    }
                                 }
                             });
                             stringGet += i+'.'+parentString+' : '+multiString + '\n';
@@ -1396,11 +1687,12 @@ Description : This page is used to collect medical condition about wish child fr
                         text: "Please provide current conditions that impact travel",
                         type: "error",
                         showConfirmButton: true,
-                        confirmConfirmColor: "#006bb6",
+                        confirmConfirmColor: "#0057B8",
                         confirmButtonText: "Ok",
                         closeOnConfirm: true,
                     });
                 } else {
+                    
                     saveMedInfo(stringGet,travelString);
                 }
                 
@@ -1423,7 +1715,11 @@ Description : This page is used to collect medical condition about wish child fr
                         $(this).closest('.checkContainer').find('.pick_dependent option:selected').each(function() {
                             if($(this).val() != '' && $(this).val() != 'Please Select' && $(this).val() != 'Please select') {
                                 multiString += $(this).val()+'; ';
-                                travelString += $(this).val()+';';
+                                if(parentString == 'Pulmonary hypertension' && $(this).val() == 'NYHA Class IV') {
+                                    travelString += $(this).val()+'1;';
+                                } else {
+                                    travelString += $(this).val()+';';
+                                }
                             }
                         });
                         stringGet += i+'.'+parentString+' : '+multiString + '\n';
@@ -1431,6 +1727,7 @@ Description : This page is used to collect medical condition about wish child fr
                     i++;
                 }
             });
+            
             saveMedInfo(stringGet,travelString);
         }
         
@@ -1441,7 +1738,7 @@ Description : This page is used to collect medical condition about wish child fr
                 text: "Please fill primary diagnosis",
                 type: "warning",
                 showConfirmButton: true,
-                confirmConfirmColor: "#006bb6",
+                confirmConfirmColor: "#0057B8",
                 confirmButtonText: "Ok",
                 closeOnConfirm: false,
             },
@@ -1494,7 +1791,7 @@ Description : This page is used to collect medical condition about wish child fr
                 title: "Are you sure?",
                 text: "Do you want to remove this Diagnosis?",
                 showCancelButton: true,
-                confirmButtonColor: '#006bb6',
+                confirmButtonColor: '#0057B8',
                 confirmButtonText: 'Confirm',
                 cancelButtonText: "Cancel",
                 closeOnConfirm: true,

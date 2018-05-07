@@ -4,4 +4,9 @@
     <availableInTouch>false</availableInTouch>
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <label>Application_PDF_VF</label>
+    <packageVersions>
+        <majorNumber>3</majorNumber>
+        <minorNumber>9</minorNumber>
+        <namespace>npe01</namespace>
+    </packageVersions>
 </ApexPage>

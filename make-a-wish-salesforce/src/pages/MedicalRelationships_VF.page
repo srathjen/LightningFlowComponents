@@ -1,0 +1,51 @@
+<!-- ******************************************************************************************************************************
+Author      : MST Solutions
+Date        : 02/15/2018
+Description : This page is used to collect medical professional information and Displayed in Wish Page layout.
+*********************************************************************************************************************************** -->
+<apex:page standardController="Case" extensions="MedicalRelationships_AC">
+       <style type="text/css">
+          .fontcolor{
+               color: #00B0F0;
+            }
+          table {
+            border-spacing: 0px;     
+        }
+        tr.border_top td{
+          padding: 5px;
+          border-top:1pt Solid;
+          border-top-color: #ECECEC;
+          
+        }   
+       table td {width:100px; word-wrap:break-word;align:right; }
+     </style>
+
+   <apex:outputPanel rendered="{!medicalRelationshipsConList.Size > 0}">
+       <table  width="100%">
+            <tr>                    
+                <td><b>Action</b></td>
+                <apex:repeat value="{!$ObjectType.npe4__Relationship__c.fieldsets.MedicalRelationships}" var="fieldValue">
+                    <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                        <td><b>{!IF(Contains(fieldValue.label,'Best Contact'),'Best Contact for Treating Healthcare Provider',fieldValue.label)}</b></td>
+                    </apex:outputpanel>
+                </apex:repeat>
+            </tr>
+            <apex:repeat value="{!medicalRelationshipsConList}" var="Participant">
+                <tr class="border_top">
+                    <apex:repeat value="{!$ObjectType.npe4__Relationship__c.fieldsets.MedicalRelationships}" var="fieldValue">
+                       <apex:outputpanel rendered="{!fieldValue.label != 'Record ID' }">
+                            <td>
+                                <apex:outputField value="{!Participant[fieldValue]}" />
+                            </td>
+                        </apex:outputpanel> 
+                        <apex:outputpanel rendered="{!fieldValue.label == 'Record ID' }">
+                            <td>
+                                <div class = "fontcolor" ><a href="/{!Participant[fieldValue]}" target="_blank" class = "fontcolor" >View</a> / <a href="/{!Participant[fieldValue]}/e?retURL={!caseId}" target="_blank" class = "fontcolor">Edit</a></div>
+                            </td>
+                        </apex:outputpanel>                    
+                </apex:repeat>
+                </tr>
+            </apex:repeat>
+        </table>       
+   </apex:outputPanel>
+</apex:page>

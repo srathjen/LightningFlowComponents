@@ -543,6 +543,21 @@
         </sections>
     </layouts>
     <layouts>
+        <layout>Event Layout Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Add Volunteer Role --></label>
+            <section>Add Volunteer Role</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Volunteer Related Details --></label>
+            <section>Volunteer Related Details</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Event for Volunteers</layout>
         <sections>
             <label><!-- Custom Links --></label>
@@ -555,6 +570,13 @@
     </layouts>
     <layouts>
         <layout>Non Wish</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Non Wish Chapter Staff Layout</layout>
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>

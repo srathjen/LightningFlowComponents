@@ -1,6 +1,36 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: medium; background-color: rgb(255, 255, 255);">{!Contact.FirstName},<br></span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"><br></span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt;"><font face="Century Gothic, sans-serif">We've had the chance to review your application and are excited to learn more about you and your interest in Make-A-Wish.<br><br></font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt;"><font face="Century Gothic, sans-serif">Please take a moment to log in to the&nbsp;</font><a href="https://make-a-wish.force.com/" style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255);">Make-A-Wish Volunteer Center</a><font face="Century Gothic, sans-serif">&nbsp;and click <b>"Continue Process"</b> to schedule an interview with us.<br><br></font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt;"><font face="Century Gothic, sans-serif">We ask that you share up to three date/time options that you are available for an interview. If you have any questions, please let us know!<br><br></font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Thanks,<br></span><br></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; font-size: 12pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><font face="Century Gothic, sans-serif">{!Contact.OwnerFullName}</font><br><font face="Century Gothic, sans-serif">{!Contact.Contact_Account_Name__c}</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><font face="Century Gothic, sans-serif">{!Contact.OwnerPhone}</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><font face="Century Gothic, sans-serif" style="">{!Contact.OwnerEmail}</font></p>]]></td>
+<![CDATA[<p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">{!Contact.FirstName},</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">We've had the chance
+to review your application and are excited to learn more about you and your
+interest in Make-A-Wish.</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Please take a moment
+to log in to the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue;background:white">Make-A-Wish Volunteer Center</span></a>&nbsp;and
+click&nbsp;<b>"Continue Process"</b>&nbsp;to schedule an interview
+with us.</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">We ask that you share
+up to three date/time options that you are available for an interview. If you
+have any questions, please let us know!</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thanks,</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.OwnerFullName}<br>
+{!Contact.Contact_Account_Name__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.OwnerPhone}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.OwnerEmail}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal"><span style="font-size:12.0pt;line-height:107%">&nbsp;</span></p>]]></td>
 </tr>
 </table>

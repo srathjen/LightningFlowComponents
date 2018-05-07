@@ -48,11 +48,19 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Self_describe_comment_box__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Birthdate</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Current_Age__c</field>
+                <field>CurrentAge__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Signature_Obtained_wish_Child__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
@@ -71,14 +79,26 @@
                 <field>Deceased_Date__c</field>
             </layoutItems>
             <layoutItems>
-                <page>Deceased_Popup</page>
+                <behavior>Readonly</behavior>
+                <field>FirstNameCharacterCount__c</field>
+            </layoutItems>
+            <layoutItems>
+                <page>DeceasedPopupInsideSalesforce_VF</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>false</showScrollbars>
                 <width>0</width>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>FirstNameCharacterCount__c</field>
+                <field>Hidden_Contact_Full_Name__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Auto_Qualified__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>PR_Diagnosis__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -136,6 +156,24 @@
                 <field>County__c</field>
             </layoutItems>
             <layoutItems>
+                <emptySpace>true</emptySpace>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Preferred_Contact_Name__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Preferred_Contact_Number__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Preferred_Contact_Relationship__c</field>
+            </layoutItems>
+            <layoutItems>
+                <emptySpace>true</emptySpace>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Edit</behavior>
                 <field>npe01__Primary_Address_Type__c</field>
             </layoutItems>
@@ -168,6 +206,21 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Social_Media_Link__c</field>
+            </layoutItems>
+            <layoutItems>
+                <emptySpace>true</emptySpace>
+            </layoutItems>
+            <layoutItems>
+                <emptySpace>true</emptySpace>
+            </layoutItems>
+            <layoutItems>
+                <emptySpace>true</emptySpace>
+            </layoutItems>
+            <layoutItems>
+                <emptySpace>true</emptySpace>
+            </layoutItems>
+            <layoutItems>
+                <emptySpace>true</emptySpace>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -653,12 +706,15 @@
         </relatedContentItems>
     </relatedContent>
     <relatedLists>
+        <fields>NAME</fields>
         <fields>npe4__RelatedContact__c</fields>
+        <fields>Qualifying_Medical_Professional__c</fields>
+        <fields>Referring_Medical_Professional__c</fields>
         <fields>npe4__Type__c</fields>
+        <fields>npe4__Status__c</fields>
         <fields>Wish_Participant__c</fields>
         <fields>Parent_Legal_Guardian__c</fields>
-        <fields>Under_18__c</fields>
-        <fields>Residing_with_Wish_child__c</fields>
+        <fields>Decead__c</fields>
         <relatedList>npe4__Relationship__c.npe4__Contact__c</relatedList>
     </relatedLists>
     <relatedLists>

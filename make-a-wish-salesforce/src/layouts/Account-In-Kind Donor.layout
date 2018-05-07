@@ -143,11 +143,6 @@
         <relatedList>RelatedProcessHistoryList</relatedList>
     </relatedLists>
     <relatedLists>
-        <fields>NAME</fields>
-        <fields>Wish_child_Name__c</fields>
-        <relatedList>In_Kind_Donation_Reimbursement__c.In_Kind_Donor_Name__c</relatedList>
-    </relatedLists>
-    <relatedLists>
         <fields>ACCOUNT.NAME</fields>
         <fields>ACCOUNT.RECORDTYPE</fields>
         <fields>ACCOUNT.TYPE</fields>
@@ -174,7 +169,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00hQ0000000TCRF</masterLabel>
+        <masterLabel>00h36000004nXXm</masterLabel>
         <sizeX>1</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

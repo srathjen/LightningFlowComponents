@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -239,6 +235,15 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>Hidden_Display_Popup__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Hidden Display Popup</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Hidden_Trigger_BGC_Exp_Reminder__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Used to fire the background check expiration notification email to volunteers</description>
@@ -280,6 +285,28 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Post_Adverse_Action__c</fullName>
+        <description>It captures the what dates chapter staff mailed Post Adverse Action.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date when the post-adverse action letter was sent, if necessary.</inlineHelpText>
+        <label>Post-Adverse Action</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Pre_Adverse_Action__c</fullName>
+        <description>It captures the what dates chapter staff mailed pre Adverse Action.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date when the pre-adverse action letter was sent, if necessary.</inlineHelpText>
+        <label>Pre-Adverse Action</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
     </fields>
     <fields>
         <fullName>RE_Date_Completed__c</fullName>
@@ -335,47 +362,51 @@ Owner:User.FirstName +&apos; &apos;+ Owner:User.LastName + BR() + Volunteer__r.A
         <description>It will capture whether the Volunteer Resided US Past 7 Years or not.</description>
         <externalId>false</externalId>
         <label>Are you residing in US for past 7 years?</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Yes</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>No</fullName>
-                <default>false</default>
-            </picklistValues>
-            <restrictedPicklist>true</restrictedPicklist>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Yes</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>No</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Status__c</fullName>
         <description>It will tells the final result about the background check.</description>
         <externalId>false</externalId>
         <label>Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Approved</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Rejected</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Approved w/ Conditions</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Approved</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Rejected</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Approved w/ Conditions</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>VolunteerRoleOutofCompliance__c</fullName>

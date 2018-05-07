@@ -10,5 +10,10 @@
         <sharedTo>Arizona_Chapter</sharedTo>
         <sharedToType>Role</sharedToType>
     </folderShares>
+    <folderShares>
+        <accessLevel>EditAllContents</accessLevel>
+        <sharedTo>National_Staff</sharedTo>
+        <sharedToType>Role</sharedToType>
+    </folderShares>
     <name>AZ Volunteer Tracking</name>
 </ReportFolder>

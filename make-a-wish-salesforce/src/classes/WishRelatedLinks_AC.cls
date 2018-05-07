@@ -12,6 +12,7 @@ public class WishRelatedLinks_AC {
     public String celebrityForm{get;set;}
     public String singleForm{get;set;} 
     public String wishClearence{get;set;}
+    public String wishClearenceNoTravel{get;set;}
     public String ChildMedicalForm{get;set;}
     public String ComboCMSWC{get;set;}
     public String ShoppingSpree{get;set;}
@@ -28,6 +29,8 @@ public class WishRelatedLinks_AC {
     public string sneakPeekDDP{get;set;}
     public string dnqLetterSpanishDDP{get;set;}
     public string welcomeLetterSpanishDDP{get;set;}
+    public String wishAssistFormDDP{get;set;}
+    public String wishAssistForm{get;set;}
     public string wishReceiptSpanishDDP{get;set;}
     public String WishReceipt{get;set;}
     public string welcomeLetter{get;set;}
@@ -64,8 +67,15 @@ public class WishRelatedLinks_AC {
     public String rushWishLetterDDP{get;set;}
     public String familyHoldMessage{get;set;}
     public String familyHoldMessageDDP{get;set;}
+    public String salesforceWishAssistFormMessage{get;set;}
+    public String salesforceWishAssistFormDDP{get;set;}
+    PUBLIC String absentandsingleForm{get;set;}
+   
     list<User> userDetailList;
+    
     public WishRelatedLinks_AC(ApexPages.StandardController controller) {
+        String pagesName = 'Absent_Vf';
+        String page = 'Single_Vf';
         recpCheck = 'Allow';
         wraaperSize = true;
         Constant_AC  constant = new Constant_Ac(); 
@@ -79,7 +89,8 @@ public class WishRelatedLinks_AC {
         welcomeletterDDP = Label.Welcome_Letter_DDP;
         dnqLetterDDP = Label.DNQ_Letter_DDP;
         bioSheetDDP = Label.Bio_Sheet_DDP;
-        sneakPeekDDP = Label.Sneak_Peek_DDP;
+        sneakPeekDDP = Label.Sneak_Peek_DDP;        
+        wishAssistFormDDP = Label.Wish_Assist_Form_DDP;
         
         WG_FinalStep_FileClosedDDP = Label.WG_FinalStep_FileClosed;
         WG_FinalStep_FileClosed_SpanishDDP = Label.WG_FinalStep_FileClosed_Spanish;
@@ -100,6 +111,7 @@ public class WishRelatedLinks_AC {
         
         rushWishLetterDDP = Label.Rush_Wish_Letter_DDP;
         familyHoldMessageDDP = Label.Family_Hold_Message;
+        salesforceWishAssistFormDDP = Label.Salesforce_Wish_Assist_Form;
         userDetailList = new list<User>();
         Set<Id> teamMemberSet = new Set<Id>();
         for(CaseTeamMember currentMember : [SELECT ID,ParentId,TeamRole.Name,Member.Name,MemberId FROM CaseTeamMember WHERE ParentId =: currentCaseRec.Id AND (TeamRole.Name =: 'Wish Granter' OR TeamRole.Name =: 'Wish Granter Mentor') Limit 2] ){
@@ -109,27 +121,28 @@ public class WishRelatedLinks_AC {
         userDetailList = [SELECT Id , Name, contactId,contact.MobilePhone,contact.Name FROM USER WHERE Id IN: teamMemberSet];
         List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentCaseRec.Id AND Status =: 'Pending' AND ProcessDefinition.Name =: 'Wish Child Form Approval Process']; 
         List<Wish_Child_Form__c> childFormList = [SELECT Id,IsWishFamily__c,IsParticipant__c FROM Wish_Child_Form__c WHERE Case__c =: currentCaseRec.Id];
-        
-        if(childFormList.size() > 0){
-            if(childFormList[0].IsWishFamily__c  == false){
-                showPopup = true;
-            }           
+        if(childFormList.size() == 0){
+            showPopup = true;
         }
-        
+        if(childFormList.size() > 0){
+            if(childFormList[0].IsWishFamily__c  == true){
+                showPopup = true;
+            } 
+         }
         if(currentCaseRec.RecordTypeId == parentWishRecordTypeId ){
             WishFamilyForm = '/apex/WishChildForm_VF?id='+currentCaseRec.Id;
             contactInfo = '/apex/RelationshipsViewer_VF?recId='+currentCaseRec.Id;
             LiabilityFrom = '/apex/LiabilityForms_VF?id='+currentCaseRec.Id;
             miniorParticipant = '/apex/WishLiabilityMinorParticipant_VF?id='+currentCaseRec.Id;
-            absentParentForm = '/apex/AbsentForm_VF?id='+currentCaseRec.Id; 
-            //celebrityForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
+            absentParentForm = '/apex/AbsentForm_VF?id='+currentCaseRec.Id+'&'+'option='+pagesName; 
             celebrityForm ='/apex/Entertainment_VF?id='+currentCaseRec.Id; 
-            // singleForm ='/apex/dsfs__DocuSign_CreateEnvelope?DSEID=0&SourceID='+currentCaseRec.Id;
-            singleForm ='/apex/SingleForm_VF?id='+currentCaseRec.Id;
-            wishClearence = '/apex/WishClearanceSendNow_VF?id='+currentCaseRec.Id; 
+            singleForm ='/apex/SingleForm_VF?id='+currentCaseRec.Id+'&'+'option='+page;
+            wishClearence = '/apex/WishClearanceSendNow_VF?id='+currentCaseRec.Id;
+            wishClearenceNoTravel = '/apex/WishClearanceNoTravel_VF?id='+currentCaseRec.Id;
             ChildMedicalForm = '/apex/WishChildSummary_VF?id='+currentCaseRec.Id;
             ComboCMSWC = '/apex/ComboCMSWC?id='+currentCaseRec.Id;
             ShoppingSpree =  '/apex/Itinerary_VF?id='+currentCaseRec.Id;
+            absentandsingleForm = '/apex/AbsentParentSingleParentForm_VF?id='+currentCaseRec.Id;
             MergedDocuments = '/apex/MergedDocuments_VF?id='+currentCaseRec.Id;
             welcomeLetter = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+welcomeletterDDP;
             dnqLetter = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+dnqLetterDDP;
@@ -138,6 +151,7 @@ public class WishRelatedLinks_AC {
             wishReceiptSpanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+wishReceiptSpanishDDP;
             dnqLetterSpanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+dnqLetterSpanishDDP;
             welcomeLetterSpanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+welcomeLetterSpanishDDP;
+            wishAssistForm = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+wishAssistFormDDP;
             
             WG_FinalStep_FileClosed = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+WG_FinalStep_FileClosedDDP;
             WG_FinalStep_FileClosed_Spanish = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+WG_FinalStep_FileClosed_SpanishDDP;
@@ -150,6 +164,7 @@ public class WishRelatedLinks_AC {
             
             rushWishLetter = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+rushWishLetterDDP;
             familyHoldMessage = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+familyHoldMessageDDP;
+            salesforceWishAssistFormMessage = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+salesforceWishAssistFormDDP;
         }
         
         querychildCase = [SELECT Id,CaseNumber,ParentId,Parent.AccountId,Parent.ContactId FROM Case WHERE ParentId =:currentCaseRec.Id AND RecordTypeId =: wishGrantRecordTypeId AND ParentId != Null limit 1];
@@ -172,16 +187,23 @@ public class WishRelatedLinks_AC {
     }
     //This method is used to get the all related contact from relationship recod and redirect to WishReceipt page.   
     public PageReference updateSenderInfo() {
-        List<Case> caseInfo = [SELECT Id, ContactId FROM Case WHERE Id = : currentCaseRec.Id];
-        List<Contact> contactList = [SELECT Id FROM Contact WHERE Id =: caseInfo[0].ContactId LIMIT 1];
-        List<npe4__Relationship__c> reltaedContactList = new List<npe4__Relationship__c>();
-        
-        for(npe4__Relationship__c relationInfo : [SELECT Id, npe4__Contact__c, npe4__RelatedContact__c, npe4__RelatedContact__r.Name,Under_18__c,npe4__RelatedContact__r.Email  FROM npe4__Relationship__c WHERE npe4__Contact__c =: contactList[0].Id AND Parent_Legal_Guardian__c = true AND npe4__RelatedContact__r.Email != Null AND Under_18__c = false]) {
-            system.debug('@@@@@Related contact '+ relationInfo);
-            reltaedContactList.add(relationInfo);
-            WrapperClass wc = new WrapperClass(relationInfo);
+        set<Id> dbWishFamilyIdSet = new set<Id>();
+        List<contact> reltaedContactList = new List<contact>();
+        List<Case> caseInfo = [SELECT Id,ContactId FROM Case WHERE Id = : currentCaseRec.Id];
+        for(npe4__Relationship__c relationInfo : [SELECT Id, npe4__Contact__c, npe4__RelatedContact__c, npe4__RelatedContact__r.Name,Under_18__c,npe4__RelatedContact__r.Email  FROM npe4__Relationship__c WHERE npe4__Contact__c =: caseInfo[0].ContactId AND Parent_Legal_Guardian__c = true AND npe4__RelatedContact__r.Email != Null AND Under_18__c = false LIMIT 50000]) {
+           dbWishFamilyIdSet.add(relationInfo.npe4__RelatedContact__c);
+         }
+        for(Contact dbWishChildCon : [SELECT Id,Current_Age__c,Name,Email,Relationship_Type__c FROM Contact WHERE Id =: caseInfo[0].ContactId AND Current_Age__c >= 18 AND Email != Null LIMIT 50000]){
+            reltaedContactList.add(dbWishChildCon);
+            WrapperClass wc = new WrapperClass(dbWishChildCon);
             wrapperList.add(wc);
         }
+       
+        for(Contact dbFamilyContact : [SELECT Id,Name,Email,Relationship_Type__c FROM Contact WHERE Id In:dbWishFamilyIdSet LIMIT 50000]){
+             reltaedContactList.add(dbFamilyContact);
+             WrapperClass wc = new WrapperClass(dbFamilyContact);
+             wrapperList.add(wc);
+        } 
         
         if(reltaedContactList.size() == 0){
             DisplayErrorMessage(); 
@@ -200,16 +222,19 @@ public class WishRelatedLinks_AC {
     }
     
     public pageReference DisplayErr(){
-        system.debug('@@@ Inside Err method');
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.ERROR,' You should select atleast one recipient, maximum two.'));
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.ERROR,' You can select maximum three recipients below.'));
+        return Null;
+    }
+    public pageReference DisplayErrormsg(){
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.ERROR,' Please select maximum 2 parent/legal guardian and wish child (if 18 years or more).'));
         return Null;
     }
     
     public class WrapperClass{
         public boolean selected {get;set;}
-        public npe4__Relationship__c rel {get;set;}
+        public Contact rel {get;set;}
         
-        public WrapperClass(npe4__Relationship__c relationShip){
+        public WrapperClass(Contact relationShip){
             rel = relationShip;
             selected = false;
         }
@@ -217,52 +242,72 @@ public class WishRelatedLinks_AC {
     }
     //This method used to update the selected receipient name and email in whish child contact from the relationship record whenever clicks the link and run the draw loop.  
     public PageReference updateWishChildContact()
-    {
-        List<npe4__Relationship__c> updatelist=new List<npe4__Relationship__c>();
+    {    
+        integer i = 0;
+        List<contact> updatelist=new List<contact>();
         List<Case> ParentCase = [SELECT Id,ContactId,AccountID FROM Case WHERE Id = : currentCaseRec.Id];
-        List<Contact> wishChildCon = [SELECT Id FROM Contact WHERE Id =: ParentCase[0].ContactId LIMIT 1];
+        List<Contact> wishChildCon = [SELECT Id,Recipient_Email__c,First_Recipient_Name__c,Second_Recipient_Email__c,Second_Recipient_Name__c,Relationship_Type__c,Hidden_Third_Recipient_Name__c,Hidden_Third_Recipient_Email__c FROM Contact WHERE Id =: ParentCase[0].ContactId LIMIT 1];
         string URL;
-        wishChildCon[0].Recipient_Email__c = '';
-        wishChildCon[0].First_Recipient_Name__c = '';
-        wishChildCon[0].Second_Recipient_Email__c = '';
-        wishChildCon[0].Second_Recipient_Name__c = '';
-        
-        system.debug('@@@ Wish receipt URL'+ URL);
-        
+        wishChildCon[0].Recipient_Email__c = null;
+        wishChildCon[0].First_Recipient_Name__c = null;
+        wishChildCon[0].Second_Recipient_Email__c = null;
+        wishChildCon[0].Second_Recipient_Name__c = null;
+        wishChildCon[0].Hidden_Third_Recipient_Email__c = null;
+        wishChildCon[0].Hidden_Third_Recipient_Name__c = null;
         if(recipitLink == 'wishreceipt'){
             URL = '/apex/loop__looplus?eid='+querychildCase[0].ParentId+'&accountId='+querychildCase[0].Parent.AccountId+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+ddpId+'&autorun='+true+'&deploy='+wishReceiptDocuSigndDDP;
-            system.debug('@@@ Wish receipt URL'+ URL);
         }
         else if(recipitLink == 'wishreceiptSpanish'){
             URL = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+wishReceiptSpanishDDP+'&autorun='+true+'&deploy='+wishReceiptSpanishDocuSigndDDP;
-            system.debug('@@@ Wish receiptspanish URL'+ URL);
         }
-        
+        system.debug('@@@ wrapperList @@@'+wrapperList);
         for(wrapperclass wcc:wrapperList)
         {
             if(wcc.selected ==true)
-            { 
-                system.debug('@@@@@ Selected  list'+ wcc.rel);
+            {   
+                if(wcc.rel.Relationship_Type__c == 'Wish Child'){
+                    i = 1;
+                }
                 updatelist.add(wcc.rel);
-                if(String.isBlank(wishChildCon[0].Recipient_Email__c) && String.isBlank(wishChildCon[0].First_Recipient_Name__c)) {
-                    wishChildCon[0].Recipient_Email__c = wcc.rel.npe4__RelatedContact__r.Email;
-                    wishChildCon[0].First_Recipient_Name__c = wcc.rel.npe4__RelatedContact__r.Name;
+                system.debug('@@ updatelist @@'+updatelist);
+                if(wishChildCon[0].Recipient_Email__c == null && wishChildCon[0].First_Recipient_Name__c == null && wcc.rel.Relationship_Type__c ==  'Parent/Legal Guardian') {
+                    wishChildCon[0].Recipient_Email__c = wcc.rel.Email;
+                    wishChildCon[0].First_Recipient_Name__c = wcc.rel.Name;
                     
-                } else if ((String.isBlank(wishChildCon[0].Second_Recipient_Email__c) && String.isBlank(wishChildCon[0].Second_Recipient_Name__c))&& ((wishChildCon[0].First_Recipient_Name__c != wcc.rel.npe4__RelatedContact__r.Name)||(wishChildCon[0].Recipient_Email__c != wcc.rel.npe4__RelatedContact__r.Email))) {
-                    wishChildCon[0].Second_Recipient_Email__c = wcc.rel.npe4__RelatedContact__r.Email;
-                    wishChildCon[0].Second_Recipient_Name__c = wcc.rel.npe4__RelatedContact__r.Name;
+                } 
+                if (wcc.rel.Relationship_Type__c ==  'Parent/Legal Guardian' && wishChildCon[0].Second_Recipient_Email__c == null && wishChildCon[0].Second_Recipient_Name__c == null && (( wishChildCon[0].Recipient_Email__c != wcc.rel.Email) || (wishChildCon[0].First_Recipient_Name__c != wcc.rel.Name))) {
+                    wishChildCon[0].Second_Recipient_Email__c = wcc.rel.Email;
+                    wishChildCon[0].Second_Recipient_Name__c = wcc.rel.Name;
+                    
+                }
+               
+                if ((wcc.rel.Relationship_Type__c == 'Wish Child' && wcc.rel.Relationship_Type__c != 'Parent/Legal Guardian' && wishChildCon[0].Hidden_Third_Recipient_Email__c == null && wishChildCon[0].Hidden_Third_Recipient_Name__c == null)){
+                    
+                    wishChildCon[0].Hidden_Third_Recipient_Email__c  = wcc.rel.Email;
+                    wishChildCon[0].Hidden_Third_Recipient_Name__c = wcc.rel.Name;
+                    
                 }
             }
         }
         PageReference  pageRef;
-        if(wishChildCon.size() > 0 && updatelist.size() > 0 && updatelist.size() <= 2) {
-            system.debug('@@@ wishChildCon'+ wishChildCon);
-            system.debug('@@@ updatelist'+ updatelist);
+        if(wishChildCon.size() > 0 && updatelist.size() > 0 && updatelist.size() <= 3 && i == 1) {
+           system.debug('@@@ wishChildCon@@@'+wishChildCon);
+           update wishChildCon;
+            pageRef =  new PageReference(URL);
+        }
+        else{
+            if(i== 1){
+            DisplayErr(); 
+            }     
+        }
+        if(wishChildCon.size() > 0 && updatelist.size() > 0 && updatelist.size() <= 2 && i == 0){
             update wishChildCon;
             pageRef =  new PageReference(URL);
         }
         else{
-            DisplayErr();      
+            if(i == 0){
+            DisplayErrormsg();
+            }
         }
         return pageRef;
     }
@@ -272,19 +317,16 @@ public class WishRelatedLinks_AC {
         string dowloadURL;
         if(recipitLink == 'wishreceipt'){
             dowloadURL = '/apex/loop__looplus?eid='+querychildCase[0].ParentId+'&accountId='+querychildCase[0].Parent.AccountId+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+ddpId+'&autorun='+true+'&deploy='+wishReceiptDownloadDDP;
-            system.debug('@@@ Wish receipt URL'+ dowloadURL);
+            
         }
         else if(recipitLink == 'wishreceiptSpanish'){
             dowloadURL = '/apex/loop__looplus?eid='+currentCaseRec.Id+'&hidecontact='+true+'&hideddp='+true+'&sidebar='+false+'&ddpIds='+wishReceiptSpanishDDP+'&autorun='+true+'&deploy='+wishReceiptSpanishDownloadDDP;
-            system.debug('@@@ Wish receiptspanish URL'+ dowloadURL);
         }
         return new PageReference(dowloadURL);
     }
     
     public void updateCaseTeamMember(){
-        system.debug('@@@@@@@Inside Update case team');
         List<case> updateCaseList = new List<case>();
-        system.debug('@@@@@@@ userDetailList'+ userDetailList);
         If(userDetailList.SIZE() > 0){
             Case updCase = new Case(Id = currentCaseRec.Id);
             updCase.Wish_Granter_1__c = Null;
@@ -301,8 +343,6 @@ public class WishRelatedLinks_AC {
             }
             updateCaseList.add(updCase);
         }
-        system.debug('@@@@@@@ updateCaseList'+ updateCaseList);
-        
         if(updateCaseList.size() > 0)
             update updateCaseList;
     }

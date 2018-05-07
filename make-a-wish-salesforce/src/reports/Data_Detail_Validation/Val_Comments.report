@@ -22,6 +22,7 @@
     <filter>
         <criteriaItems>
             <column>Case.Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

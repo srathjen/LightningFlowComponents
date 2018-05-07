@@ -22,90 +22,102 @@ Public class VolunteerInterview_AC
    List<npe5__Affiliation__c> currAffliation{get;set;} 
    public VolunteerInterview_AC()
     {
-        currTask = new Task();
-        displayPopUp = false;
-        isTaskCreated = false;
-        displayConfirmTask = false;
-        Constant_AC  constant = new Constant_Ac();
-        interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
-        String chapterId;
-        
-        currUser = [SELECT id, contactId,contact.OwnerId FROM User WHERE Id = :userInfo.getUserId()];
-        
-        System.debug('currUser++++++++++++++++++++++ ' + currUser);
-        currAffliation = [SELECT id,npe5__Organization__c,npe5__Organization__r.Volunteer_Manager__c FROM npe5__Affiliation__c WHERE npe5__Contact__c = :currUser.contactId AND npe5__Primary__c = True limit 1];
+        List<string> LstLog = new List<string>();
+        string Logvalue;
+       // try
+        //{
+            currTask = new Task();
+            displayPopUp = false;
+            isTaskCreated = false;
+            displayConfirmTask = false;
+            Constant_AC  constant = new Constant_Ac();
+            interviewRT= Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
+            String chapterId;
+            
+            currUser = [SELECT id, contactId,contact.OwnerId FROM User WHERE Id = :userInfo.getUserId()];
+            LstLog.add(string.valueOf('currUser: '+currUser));
+            System.debug('currUser++++++++++++++++++++++ ' +currUser);
+            currAffliation = [SELECT id,npe5__Organization__c,npe5__Organization__r.Volunteer_Manager__c FROM npe5__Affiliation__c WHERE npe5__Contact__c = :currUser.contactId AND npe5__Primary__c = True limit 1];
+             
+             if(currAffliation.size() >0)
+             {
+                 chapterId = currAffliation[0].npe5__Organization__c;
+                 LstLog.add(string.valueOf('chapterId: '+chapterId));
+             }
          
-         if(currAffliation.size() >0)
-         {
-             chapterId = currAffliation[0].npe5__Organization__c;
-         }
-     
-        // Based on the parameter value, It would display Background tab.
-        if(ApexPages.currentPage().getParameters().get('bgRequired') != Null)
-                bgTabPermission = Boolean.valueOf(ApexPages.currentPage().getParameters().get('bgRequired'));
-        if(ApexPages.currentPage().getParameters().get('trainingRequired') != Null)
-                trainingTabVisible = Boolean.valueOf(ApexPages.currentPage().getParameters().get('trainingRequired'));
-      
-        String nationalRT = Schema.Sobjecttype.Dynamic_Content__c.getRecordTypeInfosByName().get(constant.nationalRT).getRecordTypeId();
-   
-        // Dynamic Content for displaying text on Portal.
-        for(Dynamic_Content__c currContent : [SELECT Id,Interview_Additional_Info__c  FROM Dynamic_Content__c 
-                                              WHERE RecordTypeId = :nationalRT  AND Active__c = True])
-        {
-         
-          if(currContent.Interview_Additional_Info__c != Null)
-              interviewContent = currContent.Interview_Additional_Info__c;
-         
-        
-        }
-         volTask  = new List<Task>();
-      /*  volTask = [SELECT id,Available_Date1__c, Available_Date2__c, Available_Date3__c,  Available_Time1__c,venue__c,
-                             Available_Time2__c, Available_Time3__c, Chapter_Name__c, Subject, Status,
-                             Confirmed_Time__c, Confirmed_Date__c, Availability_Time_Other1__c,Availability_Time_Other2__c,
-                             Availability_Time_Other3__c FROM Task 
-                             WHERE (Status = 'Scheduled') AND Confirmed_Date__c != Null AND Confirmed_Date__c > :Date.Today() AND
-                             whoId =:currUser.ContactId AND Subject = 'Interview Task' AND RecordTypeId = :interviewRT  Order by CreatedDate DESC limit 1]; */
+            // Based on the parameter value, It would display Background tab.
+            if(ApexPages.currentPage().getParameters().get('bgRequired') != Null)
+                    bgTabPermission = Boolean.valueOf(ApexPages.currentPage().getParameters().get('bgRequired'));
+            if(ApexPages.currentPage().getParameters().get('trainingRequired') != Null)
+                    trainingTabVisible = Boolean.valueOf(ApexPages.currentPage().getParameters().get('trainingRequired'));
+          
+            String nationalRT = Schema.Sobjecttype.Dynamic_Content__c.getRecordTypeInfosByName().get(constant.nationalRT).getRecordTypeId();
        
-         String jsonbody = VolunteerInterviewTask_AC.getClassOfferingRecList(currUser.ContactId);
-         System.debug('jsonBody+++++++++++++++++++ ' + jsonbody);
-         List<Task> newTask = new List<Task>();
-         List<Task> newTaskList;
-         if(!Test.isRunningTest())     
-         newTaskList =  (List<Task>) JSON.deserialize(jsonbody, List<Task>.class);
-         else
-             newTaskList = new list<task>();
-         for(Task currTask : newTaskList)
-         {
-            if(currTask.Status == 'Scheduled' && currTask.Confirmed_Date__c  != Null && currTask.Confirmed_Date__c >= system.Today())
-               volTask.add(currTask);
-            else if(currTask.Status == 'Not Started')
-                newTask.add(currTask);
-         }
-         System.debug('newTAsk+++++++++++++++++++++++'+ newTaskList);               
-      
-      // If Volunteer already registered and Interivew date confirmed by Chapter staff then
-      // Confirmation Date and Time would be displayed on the Portal.
-        if(volTask.size() > 0)
+            // Dynamic Content for displaying text on Portal.
+            for(Dynamic_Content__c currContent : [SELECT Id,Interview_Additional_Info__c  FROM Dynamic_Content__c 
+                                                  WHERE RecordTypeId = :nationalRT  AND Active__c = True])
+            {
+              LstLog.add(string.valueOf('currContent: '+currContent));
+              if(currContent.Interview_Additional_Info__c != Null)
+                  interviewContent = currContent.Interview_Additional_Info__c;       
+            }
+             volTask  = new List<Task>();
+          /*  volTask = [SELECT id,Available_Date1__c, Available_Date2__c, Available_Date3__c,  Available_Time1__c,venue__c,
+                                 Available_Time2__c, Available_Time3__c, Chapter_Name__c, Subject, Status,
+                                 Confirmed_Time__c, Confirmed_Date__c, Availability_Time_Other1__c,Availability_Time_Other2__c,
+                                 Availability_Time_Other3__c FROM Task 
+                                 WHERE (Status = 'Scheduled') AND Confirmed_Date__c != Null AND Confirmed_Date__c > :Date.Today() AND
+                                 whoId =:currUser.ContactId AND Subject = 'Interview Task' AND RecordTypeId = :interviewRT  Order by CreatedDate DESC limit 1]; */
+           
+             String jsonbody = VolunteerInterviewTask_AC.getClassOfferingRecList(currUser.ContactId);
+             System.debug('jsonBody+++++++++++++++++++ ' + jsonbody);
+             List<Task> newTask = new List<Task>();
+             List<Task> newTaskList;
+             if(!Test.isRunningTest())     
+             newTaskList =  (List<Task>) JSON.deserialize(jsonbody, List<Task>.class);
+             else
+                 newTaskList = new list<task>();
+             for(Task currTask : newTaskList)
+             {
+                if(currTask.Status == 'Scheduled' && currTask.Confirmed_Date__c  != Null && currTask.Confirmed_Date__c >= system.Today())
+                   volTask.add(currTask);
+                else if(currTask.Status == 'Not Started')
+                    newTask.add(currTask);
+             }
+             System.debug('newTAsk+++++++++++++++++++++++'+ newTaskList);               
+          
+          // If Volunteer already registered and Interivew date confirmed by Chapter staff then
+          // Confirmation Date and Time would be displayed on the Portal.
+            if(volTask.size() > 0)
+            {
+             
+              displayConfirmTask = True;
+              taskId = volTask[0].id;  
+            }
+            // If volunteer submitted their availability time but interview date not yet confirmed, Acknowlegement would be 
+            //display on Portal.
+            if(newTask.size() > 0)
+            {
+                isTaskCreated = True;
+            }
+       // }
+       /* catch(Exception ex)      
         {
-         
-          displayConfirmTask = True;
-          taskId = volTask[0].id;
-        
-        
-        }
-        // If volunteer submitted their availability time but interview date not yet confirmed, Acknowlegement would be 
-        //display on Portal.
-        if(newTask.size() > 0)
-        {
-            isTaskCreated = True;
-        } 
+            Logvalue = string.join(LstLog,', ');
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerInterview_AC','VolunteerInterview_AC',Null,ex,Logvalue));
+           //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);
+        }*/
     }
     
     public PageReference submit()
     {
+     List<string> LstLog = new List<string>();
+     String Logvalue;
+     String recId;
      try
-     {
-     
+     {  
       Boolean flag = true;
       // Each Volunteer should submit two Available Time and Date. Its mandatory for all. Else It will throw an error message to 
       // submit volunteer for two available Date and Time. And also it should not be conflict. 
@@ -203,23 +215,26 @@ Public class VolunteerInterview_AC
            currTask.subject = 'Interview Task';
            currTask.Priority = 'High';
            currTask.ActivityDate = system.today() + 3;
+           LstLog.add(string.valueOf('currTask: '+currTask));
+           recId = currTask.id;
            upsert currTask; // Creating Interview Task. 
            
-           isTaskCreated = True;
-          
-         }
-       
-     }
-     Catch(DMLException e)
-     {
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
-            ApexPages.addMessage(myMsg);
-            return null;
-     }
-        // Send the user back to current page.  
+           isTaskCreated = True;         
+         }       
+         // Send the user back to current page.  
         PageReference pageRef = new PageReference(ApexPages.currentPage().getUrl());
         pageRef.setRedirect(true);
         return pageRef;
+     }
+     catch(Exception ex)      
+     {
+            Logvalue = string.join(LstLog,', ');
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerInterview_AC','submit',recId,ex,Logvalue));
+            //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);
+            return null;
+      }
     }
     
      public void confirmReschedule()
@@ -236,37 +251,53 @@ Public class VolunteerInterview_AC
      // for capturing new Availability.
      public void Reschedule()
      {
-      
-      try
-      {
-        Task updateTask = new Task();
-        updateTask.id = taskId;
-        updateTask.status = 'Rescheduled';
-        update updateTask;
-        displayConfirmTask = false;
-        isTaskCreated = false;
-        displayPopUp = false;
-      }
-      Catch(DMLException e)
-      {
-            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, e.getMessage() +' >> '+ e.getLineNumber());
+        List<string> LstLog = new List<string>();
+        String Logvalue;
+        String recId;
+        try
+        {
+            Task updateTask = new Task();
+            updateTask.id = taskId;
+            updateTask.status = 'Rescheduled';
+            recId = updateTask.id;
+            LstLog.add(string.valueOf('updateTask: '+updateTask));
+            update updateTask;
+            displayConfirmTask = false;
+            isTaskCreated = false;
+            displayPopUp = false;
+        }
+        catch(Exception ex)      
+        {
+            Logvalue = string.join(LstLog,', ');
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerInterview_AC','Reschedule',recId,ex,Logvalue));
+            //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
             ApexPages.addMessage(myMsg);
-      
-      }
-     
+        }     
      }
      
      // Retrieving Availability Time value from Field and Display on Portal.
      public List<SelectOption> getTimes()
      {
-        List<SelectOption> options = new List<SelectOption>();
-        Schema.DescribeFieldResult fieldResult =  Task.Available_Time1__c.getDescribe();
-        List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
-        for( Schema.PicklistEntry currVal : picklistValues)
-        {      options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
-            
-        }  
-        return options;
-     }  
-     
+        String Logvalue; 
+       /* try
+        {*/
+            List<SelectOption> options = new List<SelectOption>();
+            Schema.DescribeFieldResult fieldResult =  Task.Available_Time1__c.getDescribe();
+            List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
+            for( Schema.PicklistEntry currVal : picklistValues)
+            {      
+                options.add(new SelectOption(currVal.getLabel(), currVal.getValue()));                 
+            } 
+            return options;
+      /*  }
+        catch(Exception ex)      
+        {
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerInterview_AC','getTimes',Null,ex,Logvalue));
+            //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);
+            return null;
+        }  */      
+     }       
 }

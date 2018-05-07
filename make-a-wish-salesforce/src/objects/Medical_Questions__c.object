@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -42,10 +38,21 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <type>Default</type>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Medical_Question_Page</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
     </actionOverrides>
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>medical_question_compact_layout</fullName>
+        <fields>Name</fields>
+        <fields>Sort_Order__c</fields>
+        <fields>Condition_Description__c</fields>
+        <label>medical question compact layout</label>
+    </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
     <description>It holds the medical questions for the diagnosis entered by the submitter.</description>
     <enableActivities>true</enableActivities>
@@ -190,6 +197,7 @@
     <recordTypes>
         <fullName>Medical_Questions</fullName>
         <active>true</active>
+        <compactLayoutAssignment>medical_question_compact_layout</compactLayoutAssignment>
         <description>It contains medical questions</description>
         <label>Medical Questions</label>
     </recordTypes>

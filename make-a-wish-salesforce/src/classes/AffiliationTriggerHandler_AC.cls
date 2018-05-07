@@ -45,10 +45,12 @@ public class AffiliationTriggerHandler_AC
             
             if(currRec.npe5__Contact__c != Null && getContactRecType.containsKey(currRec.npe5__Contact__c))
             {
-                if(getContactRecType.get(currRec.npe5__Contact__c).RecordTypeId != volunteerRecordTypeId)
+                if(getContactRecType.get(currRec.npe5__Contact__c).RecordTypeId != volunteerRecordTypeId) {
                     currRec.npe5__Status__c = 'Active';
-                else
+                } else {
                     currRec.npe5__Status__c = 'Prospective';
+                }
+                    
             }
         }
     }
@@ -111,6 +113,7 @@ public class AffiliationTriggerHandler_AC
                 {
                     VolunteerOppIdSet.add(modifiedAffiliation.npe5__Contact__c);//npe5__Contact__c,currRec.npe5__Status__c);
                 }
+                System.debug('@@@@@@@@@'+modifiedAffiliation.npe5__Status__c+'&&&&&&&&&&'+oldMapAfterUpdate.get(modifiedAffiliation.id).npe5__Status__c);
                 if(modifiedAffiliation.npe5__Status__c != 'Active' && oldMapAfterUpdate.get(modifiedAffiliation.id).npe5__Status__c == 'Active')
                 {
                     volunteerContactIdSet.add(modifiedAffiliation.npe5__Contact__c);
@@ -127,10 +130,9 @@ public class AffiliationTriggerHandler_AC
         }
         if(VolunteerOppIdSet.size() > 0 && VolunteerOppIdSet != Null)
         {
-            System.Debug('Trigger List @@@@@@@@@@*******');
             
-                createTaskforVolunteerManager(VolunteerOppIdSet);
-                          
+            createTaskforVolunteerManager(VolunteerOppIdSet);
+            
         }
         if(volunteerContactIdSet.Size() > 0 && volunteerContactIdSet != Null)
         {
@@ -157,8 +159,7 @@ public class AffiliationTriggerHandler_AC
         
         for(npe5__Affiliation__c currRec : upsertlist)
         {
-            if(trigger.isinsert || currRec.npe5__Status__c!=oldMapUpsert.get(currRec.id).npe5__Status__c 
-               || currRec.Constituent_code__c != oldMapUpsert.get(currRec.id).Constituent_code__c)
+            if(trigger.isinsert || currRec.npe5__Status__c!=oldMapUpsert.get(currRec.id).npe5__Status__c || currRec.Constituent_code__c != oldMapUpsert.get(currRec.id).Constituent_code__c)
             {
                 affiliationMap.put(currRec.npe5__Contact__c,currRec);
                 affiliationIds.add(currRec.npe5__Organization__c);
@@ -172,7 +173,7 @@ public class AffiliationTriggerHandler_AC
                 affiliationSet.add(currRec.id);
             }
         }
-        
+        System.debug('###########'+affiliationMap.size()+'&&&&&&&'+RecursiveTriggerHandler.isFirstTime);
         if(affiliationMap.size() >0 &&  RecursiveTriggerHandler.isFirstTime == true)
         {
             AffiliationTriggerHandler_AC.updateContact(affiliationMap,affiliationIds);
@@ -475,12 +476,15 @@ public class AffiliationTriggerHandler_AC
             List<Task> ActiveTask=new List<Task>();
             Task newTask;
             for(Id currRec:volunteerManagerId.keyset()){
-                    newTask=new Task();
+                newTask=new Task();
+                if(volunteerManagerId.containsKey(currRec) && volunteerManagerId.get(currRec) != null) {
                     newTask.OwnerId=volunteerManagerId.get(currRec);
-                    newTask.WhoId=currRec;
-                    newTask.Subject='Inactive Volunteer - review volunteer opportunities';
-                    ActiveTask.add(newTask);
-                    system.debug('@@@@@@@@@@@'+currRec+'*****');     
+                }                    
+                newTask.WhoId=currRec;
+                newTask.Subject='Inactive Volunteer - review volunteer opportunities';
+                newTask.SystemGeneratedTask__c = TRUE;
+                ActiveTask.add(newTask);
+                system.debug('@@@@@@@@@@@'+currRec+'*****');     
             }
             Insert ActiveTask;
         }

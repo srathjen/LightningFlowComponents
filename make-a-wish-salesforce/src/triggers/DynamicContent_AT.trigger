@@ -6,6 +6,12 @@ Description : Dynamic Content should be just 1 national record and 63 chapter pr
 So we can add an Active flag on the record. if we are creating a new national record or new chapter prospective record for Arizona 
 (or any other chapter), then the previous record needs to inactive and the new one would be active.
 2.Prevent outside chapter user cannot create dynamic content record for other chapter.
+
+
+                    Modification Log
+                    ----------------
+          SonarQube    Pavithra G 04/11/2018
+
 **********************************************************************************************/
 
 trigger DynamicContent_AT on Dynamic_Content__c (before insert,before update,after insert) {
@@ -58,18 +64,24 @@ trigger DynamicContent_AT on Dynamic_Content__c (before insert,before update,aft
                chapterIdSet.add(currRec.Chapter_Name__c);
        }
        if(chapterIdSet.Size() > 0){
-           for(Account currAcc : [SELECT Id,Name FROM Account WHERE Id IN :chapterIdSet]){
+          /* Commented for sonarqube Duplicate Rule (4/11/2018) */
+          /* for(Account currAcc : [SELECT Id,Name FROM Account WHERE Id IN :chapterIdSet]){
                chapterNameMap.put(currAcc.Id,currAcc.Name);
-           }
+           }*/
+           
+           //ChapterRoleMap = ChapterStaffRecordSharing_AC.FindChapterRole(chapterNameMap);
             
-            
-      for(Chapter_Vs_Role__c currChapterRole : [SELECT Chapter_Name__c, Role_Name__c FROM Chapter_Vs_Role__c WHERE Chapter_Name__c IN : chapterNameMap.values()])
+    /*  for(Chapter_Vs_Role__c currChapterRole : [SELECT Chapter_Name__c, Role_Name__c FROM Chapter_Vs_Role__c WHERE Chapter_Name__c IN : chapterNameMap.values()])
       {
           ChapterRoleMap.put(currChapterRole.Chapter_Name__c,currChapterRole.Role_Name__c);
-      }
+      }*/
       
+       //Added for sonarqube Duplicate Rule (4/11/2018) */
+       
+       chapterNameMap = ChapterStaffRecordSharing_AC.getChapterName(chapterIdSet);
+       
        for(Dynamic_Content__c currRec : Trigger.new){
-           if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null && userRole != ChapterRoleMap.get(chapterNameMap.get(currRec.Chapter_Name__c)) && !Test.isRunningTest()){
+           if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null && userRole != /*ChapterRoleMap.get(*/chapterNameMap.get(currRec.Chapter_Name__c)/*)*/ && !Test.isRunningTest()){
                currRec.addError('You have no access to create Dynamic Content records for other chapters');
            }
        }

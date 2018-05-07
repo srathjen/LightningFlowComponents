@@ -95,11 +95,13 @@ body {
 
     <apex:form style="margin: 10px;">
 
-      <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/maw-logo.png')}" style="width:35%;margin-left: 30%;margin-right: 40%;" styleClass="header-logo"/>
-      <div class="row header-padding">
-       <div style="font-size:20px; margin-bottom:2%;margin-top:3%; margin-right: auto;text-transform:uppercase; text-align:center; width:100%;"><span class="text-imp" style="font-family:'Lato';">LIABILITY RELEASE AND AUTHORIZATION RE:MEDICAL INFORMATION AND PUBLICITY</span></div>
-        </div>
-
+      <div style="text-align:center;">
+                 <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/maw-logo.png')}" style="width:35%;height:60px;" styleClass="header-logo"/>
+      </div><br/>
+      <div class="row header-padding" style="text-align:center;"> 
+            <div style="font-size:20px; margin-bottom:2%;margin-top:3%; margin-right: auto;text-transform:uppercase; width:100%;"><span class="text-imp">LIABILITY RELEASE AND AUTHORIZATION RE:MEDICAL INFORMATION AND PUBLICITY</span></div>        
+      </div>      
+        
         <hr style="border-width: 2px;margin-left: auto;display: block;margin-bottom: 0.5em;"></hr>
 
             <body>
@@ -159,7 +161,10 @@ body {
                     </p>
 
             </div>
-
+                
+            <div style="text-align:center;">
+                       <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/maw-logo.png')}" style="width:35%;height:60px;" styleClass="header-logo"/>
+       		</div><br/>
 
             <div class="paragraph">
 

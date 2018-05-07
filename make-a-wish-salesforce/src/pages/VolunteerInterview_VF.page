@@ -31,7 +31,7 @@
                     <apex:form id="frm1" styleClass="vcp-interview">
 
                         <div class="messages">
-                            <apex:pagemessages />
+                            <apex:pagemessages id="msg"/>
                         </div>
                         
                         <!-- Form 3 (Interview Confirmation Details -->
@@ -120,7 +120,7 @@
                                 </div>
                                 
                                 <div class="form-group row">
-                                    <label class="col-sm-3" aria-label="Confirmed Date">Availability 3</label>
+                                    <label class="col-sm-3" aria-label="Confirmed Date">Availability 3<br/><div styleclass = 'font-size:12px'>(Optional)</div></label>
                                     <div class="col-sm-6">
                                         <apex:inputField value="{!currTask.Available_Date3__c}" styleclass="form-control date3 jqdatepicker" html-placeholder="MM / DD / YYYY" id="availDate3"/>
                                     </div>

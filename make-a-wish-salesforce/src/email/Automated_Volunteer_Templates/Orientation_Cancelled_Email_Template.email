@@ -1,6 +1,16 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><font face="Century Gothic, sans-serif" style="">{!Contact.FirstName}</font><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">,<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>You have cancelled your registration for the Make-A-Wish Volunteer Orientation.<br></span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"><br>Please visit the&nbsp;</span><a href="https://make-a-wish.force.com/" style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255);">Make-A-Wish Volunteer Center</a><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">&nbsp;to register for an alternative orientation date to continue the process of becoming a Make-A-Wish volunteer.<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>As always, please let us know of any questions by contacting us directly.<br></span><span style="background-color: rgb(255, 255, 255); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}</span></p>]]></td>
+<![CDATA[<p class="MsoNormal"><span style="font-family: Lato, sans-serif;">{!Contact.FirstName},<br>
+<br>
+You have cancelled your registration for the Make-A-Wish Volunteer
+Orientation.<br>
+<br>
+Please visit the&nbsp;</span><span style="font-family:&quot;Lato&quot;,sans-serif"><a href="https://make-a-wish.force.com/"><span style="background:white">Make-A-Wish Volunteer Center</span></a>&nbsp;to register for an alternative orientation date to continue the
+process of becoming a Make-A-Wish volunteer.<br>
+<br>
+As always, please let us know of any questions by contacting us directly.<br>
+<span style="background:white"></span><br>
+{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}<o:p></o:p></span></p>]]></td>
 </tr>
 </table>

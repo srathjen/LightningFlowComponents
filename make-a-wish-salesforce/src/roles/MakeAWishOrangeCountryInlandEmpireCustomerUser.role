@@ -2,9 +2,9 @@
 <Role xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseAccessLevel>None</caseAccessLevel>
     <contactAccessLevel>None</contactAccessLevel>
-    <description>Make-A-Wish Orange Country &amp; Inland Empire Customer User</description>
+    <description>Make-A-Wish Orange County &amp; Inland Empire Customer User</description>
     <mayForecastManagerShare>false</mayForecastManagerShare>
-    <name>Make-A-Wish Orange Country &amp; Inland Empire Customer User</name>
+    <name>Make-A-Wish Orange County &amp; Inland Empire Customer User</name>
     <opportunityAccessLevel>None</opportunityAccessLevel>
     <parentRole>National_Staff</parentRole>
 </Role>

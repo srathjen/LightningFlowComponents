@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Notify the lead owner whenever a new RUSH lead is created</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>Make_a_Wish_America</letterhead>
+    <name>Lead: Notify owner new RUSH lead</name>
+    <style>freeForm</style>
+    <subject>New Rush Referral</subject>
+    <textOnly>Hello {!Lead.OwnerFullName},
+
+You have received a referral for a potential RUSH wish. {!Lead.Link}
+Thank you,
+
+{!Lead.Hidden_Chapter_Information__c}</textOnly>
+    <type>html</type>
+</EmailTemplate>

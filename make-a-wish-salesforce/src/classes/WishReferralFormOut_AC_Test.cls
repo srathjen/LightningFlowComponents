@@ -5,11 +5,11 @@ public class WishReferralFormOut_AC_Test {
     {
         Lead currLead = new Lead();
         currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
-		currLead.status = 'Inquiry';
         currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
         currLead.Any_medical_reason_for_moving_quickly__c  = 'Yes';
         currLead.Relationship_To_Child__c = 'Self';
         currLead.Referrer_FirstName__c = 'Testing';
+        currLead.Diagnosis_Given_By_Referrer__c = 'Malignant';
         currLead.Referrer_Last_Name__c = 'Testing';
         currLead.Referrer_Phone__c= '8220708920';
         currLead.Referrer_Email__c= 'mcavennila@gmail.com';
@@ -19,8 +19,6 @@ public class WishReferralFormOut_AC_Test {
         currLead.is_Family_Aware_of_Referral__c= 'yes';
         currLead.FirstName= 'Testing1';
         currLead.Child_Middle_Initial__c= 'Testing2';
-        currLead.Referred_Date__c = system.today() - 420;
-		currLead.Inquiry_Date__c = system.today() - 420;
         currLead.Gender__c= 'Male';
         currLead.Child_Age__c= '16';
         currLead.PD_Condition_Description__c = 'Liver Transplant';
@@ -49,7 +47,7 @@ public class WishReferralFormOut_AC_Test {
     
     public static testMethod void testWishReferralFormOut() 
     {
-        Lead currLead = [SELECT id,Referred_Date__c from Lead];
+        Lead currLead = [SELECT id from Lead];
         PageReference pageRef = Page.WishReferralFormOut_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('LeadId',currLead.Id);
@@ -60,7 +58,7 @@ public class WishReferralFormOut_AC_Test {
     
     public static testMethod void testexportPDF() 
     {
-        Lead currLead = [SELECT id,Referred_Date__c from Lead];
+        Lead currLead = [SELECT id from Lead];
         PageReference pageRef = Page.WishReferralFormOut_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('LeadId',currLead.Id);

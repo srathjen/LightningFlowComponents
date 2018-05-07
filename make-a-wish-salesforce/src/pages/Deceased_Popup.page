@@ -1,16 +1,21 @@
-<!--Whenever Wish Child Record has been loaded, 
+<!--Whenever Wish Child Record has been loaded,
 It will display "This child is deceased" if it is deceased.-->
 
-<apex:page standardController="Contact">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<apex:outputPanel rendered="{!(Contact.npsp__Deceased__c==True)}">
+<apex:page standardController="Contact"  showHeader="false" sidebar="false" standardStylesheets="false">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <apex:outputPanel rendered="{!(Contact.npsp__Deceased__c==True)}">
+  <script>
 
-    <script>
-    $(function(){
-        alert("This wish child is deceased." );    
-    });
-    
-    </script>
- </apex:outputPanel>
+  $( document ).ready(function() {
+      var delay = 3500;
+      setTimeout(function() {
+        // shown in community
+        top.deceasedModal();
+      }, delay);
+      console.log('alert deceased for contact 1');
+  });
+  console.log('alert deceased for contact 2');
 
+  </script>
+</apex:outputPanel>
 </apex:page>

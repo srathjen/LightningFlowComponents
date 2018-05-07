@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>Update_Contact_Info</customButtons>
+    <customButtons>In_Kind_Reimbursement</customButtons>
     <emailDefault>false</emailDefault>
     <excludeButtons>Clone</excludeButtons>
     <excludeButtons>CloseCase</excludeButtons>
@@ -57,7 +58,7 @@
         <label>Wish Status Bar</label>
         <layoutColumns>
             <layoutItems>
-                <height>200</height>
+                <height>250</height>
                 <page>WishJourney</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>false</showScrollbars>
@@ -95,6 +96,28 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Birthdate__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Current_Age__c</field>
+            </layoutItems>
+            <layoutItems>
+                <emptySpace>true</emptySpace>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Preferred_Contact_Name__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Preferred_Contact_Number__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Preferred_Contact_Relationship__c</field>
+            </layoutItems>
+            <layoutItems>
+                <emptySpace>true</emptySpace>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -201,6 +224,10 @@
                 <behavior>Readonly</behavior>
                 <field>CreatedDate</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Publicity_OK__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
@@ -213,6 +240,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>EmergencyContactName__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Emergency_Contact_Relationship__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -328,6 +359,10 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
+                <field>Wish_Clearance_Needed__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
                 <field>Wish_Clearance_Sent_Date__c</field>
             </layoutItems>
             <layoutItems>
@@ -412,7 +447,7 @@
                 <height>200</height>
                 <page>WishRelatedLinks_VF</page>
                 <showLabel>false</showLabel>
-                <showScrollbars>false</showScrollbars>
+                <showScrollbars>true</showScrollbars>
                 <width>100%</width>
             </layoutItems>
         </layoutColumns>
@@ -446,11 +481,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Air_Travel_Details__c</field>
+                <field>Comment__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Comment_1__c</field>
+                <field>Air_Travel_Details__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -463,6 +498,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Please_Explain__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>AllPrimaryDiagnosis__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -531,6 +570,22 @@
         <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
+        <customLabel>true</customLabel>
+        <detailHeading>true</detailHeading>
+        <editHeading>true</editHeading>
+        <label>Medical Relationships</label>
+        <layoutColumns>
+            <layoutItems>
+                <height>200</height>
+                <page>MedicalRelationships_VF</page>
+                <showLabel>false</showLabel>
+                <showScrollbars>true</showScrollbars>
+                <width>100%</width>
+            </layoutItems>
+        </layoutColumns>
+        <style>OneColumn</style>
+    </layoutSections>
+    <layoutSections>
         <customLabel>false</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
@@ -561,6 +616,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Test_Record__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Case_Member_Count__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -660,13 +719,26 @@
         <relatedList>RelatedChildCaseList</relatedList>
     </relatedLists>
     <relatedLists>
+        <excludeButtons>New</excludeButtons>
+        <fields>NAME</fields>
+        <fields>Approved_Date__c</fields>
+        <fields>Date_of_request__c</fields>
+        <fields>Date_of_Gift__c</fields>
+        <fields>Date_of_Submission__c</fields>
+        <relatedList>In_Kind_Donation_Reimbursement__c.Wish__c</relatedList>
+    </relatedLists>
+    <relatedLists>
         <fields>NAME</fields>
         <fields>dsfs__Sender__c</fields>
         <fields>dsfs__Subject__c</fields>
         <fields>dsfs__Envelope_Status__c</fields>
         <fields>dsfs__Sent_Date_Time__c</fields>
         <fields>dsfs__Completed_Date_Time__c</fields>
+        <fields>Recipient_names__c</fields>
+        <fields>Signatures__c</fields>
         <relatedList>dsfs__DocuSign_Status__c.dsfs__Case__c</relatedList>
+        <sortField>dsfs__Sent_Date_Time__c</sortField>
+        <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
         <fields>CreatedDate</fields>
@@ -675,15 +747,6 @@
         <fields>Actor</fields>
         <fields>Comments</fields>
         <relatedList>RelatedProcessHistoryList</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>RECORDTYPE</fields>
-        <fields>CREATEDBY_USER</fields>
-        <fields>Total_Reimbursement_Amount__c</fields>
-        <fields>Gift_Value__c</fields>
-        <fields>Adjustment_Comments__c</fields>
-        <relatedList>In_Kind_Donation_Reimbursement__c.Wish__c</relatedList>
     </relatedLists>
     <relatedLists>
         <relatedList>RelatedEntityHistoryList</relatedList>

@@ -96,6 +96,23 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Hidden All Primary Diagnosis --></label>
+        <name>AllPrimaryDiagnosis__c</name>
+    </fields>
+    <fields>
+        <help><!-- Have all required wish-granting forms been received? --></help>
+        <label><!-- All Paperwork Received --></label>
+        <name>All_Paperwork_Received__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- All Participants Reside With Wish Child --></label>
         <name>All_requested_wish_participants_reside_w__c</name>
         <picklistValues>
@@ -303,6 +320,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Comment --></label>
         <name>Comment_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Comment --></label>
+        <name>Comment__c</name>
     </fields>
     <fields>
         <label><!-- Comment for PWL Not Met --></label>
@@ -523,6 +544,11 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>CurrentDOB__c</name>
     </fields>
     <fields>
+        <help><!-- A &quot;!&quot; indicator will appear if (this wish participant / the wish child) turns 18- - additional signatures may be needed. Check the &quot;Signature obtained&quot; box on the contact record to turn this indicator off. --></help>
+        <label><!-- Current Age --></label>
+        <name>Current_Age__c</name>
+    </fields>
+    <fields>
         <label><!-- DNQ Date --></label>
         <name>DNQ_Date__c</name>
     </fields>
@@ -563,7 +589,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Date_Received_for_Visas__c</name>
     </fields>
     <fields>
-        <label><!-- Date - Safety Auth Wish Clearance Form --></label>
+        <label><!-- Date - Wish Clearance Form --></label>
         <name>Date_Received_for_Wish_Safety_Authorizat__c</name>
     </fields>
     <fields>
@@ -585,6 +611,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Days In Stage --></label>
         <name>Days_In_Stage__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
     </fields>
     <fields>
         <label><!-- Details about Impact --></label>
@@ -641,8 +671,14 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Driver_Names__c</name>
     </fields>
     <fields>
+        <help><!-- This field can be updated on the related Household Account record. --></help>
         <label><!-- Emergency Contact Name --></label>
         <name>EmergencyContactName__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field can be updated on the related Household Account record. --></help>
+        <label><!-- Emergency Contact Relationship --></label>
+        <name>Emergency_Contact_Relationship__c</name>
     </fields>
     <fields>
         <label><!-- Emergency Number --></label>
@@ -751,8 +787,32 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>HiddenAnticipatedDate__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Child Age Email Notification --></label>
+        <name>HiddenChildAgeEmailNotification__c</name>
+        <picklistValues>
+            <masterLabel>18 Age</masterLabel>
+            <translation><!-- 18 Age --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Before Month</masterLabel>
+            <translation><!-- Before Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Both</masterLabel>
+            <translation><!-- Both --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Hidden All Primary --></label>
         <name>Hidden_All_Primary__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Case Owner Phone --></label>
+        <name>Hidden_Case_Owner_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Case Owner Title --></label>
+        <name>Hidden_Case_Owner_Title__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Chapter Email --></label>
@@ -805,6 +865,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Hidden Name List --></label>
         <name>Hidden_Name_List__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Parent Name --></label>
+        <name>Hidden_Parent_Name__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Primary Diagnosis --></label>
@@ -889,6 +953,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Hidden Wish Presentation Not Set --></label>
         <name>Hidden_Wish_Presentation_Not_Set__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden already send rush wish --></label>
+        <name>Hidden_already_send_rush_wish__c</name>
     </fields>
     <fields>
         <help><!-- Date when the wish is put on Hold Status --></help>
@@ -1053,6 +1121,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Medical_Summary_Attachments__c</name>
     </fields>
     <fields>
+        <label><!-- Medical insurance note --></label>
+        <name>Medical_insurance_note__c</name>
+    </fields>
+    <fields>
+        <label><!-- Medical insurance out of state? --></label>
+        <name>Medical_insurance_out_of_state__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Refrigerated Medication Note --></label>
         <name>Medication_require_refrigeration_Note__c</name>
     </fields>
@@ -1101,6 +1185,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Names_for_receiving_nursing_care__c</name>
     </fields>
     <fields>
+        <help><!-- This field can be updated on the related Household Account record. --></help>
         <label><!-- Non-Participant Emergency Number --></label>
         <name>Non_Participant_Emergency_Number__c</name>
     </fields>
@@ -1258,6 +1343,21 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Potential_Valid_D_L__c</name>
     </fields>
     <fields>
+        <help><!-- If this is Blank, then please update on the Update Contact Info page on the case. --></help>
+        <label><!-- Preferred Contact: Name --></label>
+        <name>Preferred_Contact_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- If this is Blank, then please update on the Update Contact Info page on the case. --></help>
+        <label><!-- Preferred Contact: Number --></label>
+        <name>Preferred_Contact_Number__c</name>
+    </fields>
+    <fields>
+        <help><!-- If this is Blank, then please update on the Update Contact Info page on the case. --></help>
+        <label><!-- Preferred Contact: Relationship --></label>
+        <name>Preferred_Contact_Relationship__c</name>
+    </fields>
+    <fields>
         <label><!-- Preferred Driver Expiration Date --></label>
         <name>Preferred_Driver_Expiration_Date__c</name>
     </fields>
@@ -1279,6 +1379,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Presentation_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Primary Diagnosis --></label>
+        <name>Primary_Diagnosis__c</name>
+    </fields>
+    <fields>
         <label><!-- Projected Status --></label>
         <name>Projected_Status__c</name>
         <picklistValues>
@@ -1297,6 +1401,11 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <masterLabel>Submitted</masterLabel>
             <translation><!-- Submitted --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Changes to publicity preferences must be made in the publicity section of the child&apos;s contact record. --></help>
+        <label><!-- Publicity OK --></label>
+        <name>Publicity_OK__c</name>
     </fields>
     <fields>
         <help><!-- Date when qualifying diagnosis verification is received and confirmed --></help>
@@ -1558,6 +1667,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
             <translation><!-- Non-Viewable --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Out of Territory - International</masterLabel>
+            <translation><!-- Out of Territory - International --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Pending</masterLabel>
             <translation><!-- Pending --></translation>
         </picklistValues>
@@ -1614,6 +1727,18 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Total Hour Spent --></label>
         <name>Total_Hour_Spent__c</name>
+    </fields>
+    <fields>
+        <label><!-- UWI Source --></label>
+        <name>UWISource__c</name>
+        <picklistValues>
+            <masterLabel>Case</masterLabel>
+            <translation><!-- Case --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lead</masterLabel>
+            <translation><!-- Lead --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <label><!-- Unique Wish Record Identifier --></label>
@@ -1718,6 +1843,22 @@ planned vacations, etc.) that might impact your ability to participate in a wish
     <fields>
         <label><!-- Wish Child Form --></label>
         <name>Wish_Child_Form__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Clearance Needed --></label>
+        <name>Wish_Clearance_Needed__c</name>
+        <picklistValues>
+            <masterLabel>Depends</masterLabel>
+            <translation><!-- Depends --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
     </fields>
     <fields>
         <help><!-- Date when the Wish Clearance is received from the Medical Professional --></help>
@@ -1837,7 +1978,7 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>Wish_Receipt_Items__c</name>
     </fields>
     <fields>
-        <label><!-- Wish Safety Auth Wish Clearance Form --></label>
+        <label><!-- Wish Clearance Form --></label>
         <name>Wish_Safety_Authorization_Part_B_Form__c</name>
     </fields>
     <fields>
@@ -2148,7 +2289,53 @@ arrangements/unique circumstances for any requested wish participant not residin
         </sections>
     </layouts>
     <layouts>
+        <layout>Wish Assist Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Wish Status Bar --></label>
+            <section>Wish Status Bar</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Wish Determination</layout>
+        <sections>
+            <label><!-- Driver Section --></label>
+            <section>Driver Section</section>
+        </sections>
+        <sections>
+            <label><!-- Emergency Contact --></label>
+            <section>Emergency Contact</section>
+        </sections>
+        <sections>
+            <label><!-- Family Availability --></label>
+            <section>Family Availability</section>
+        </sections>
+        <sections>
+            <label><!-- My Wish --></label>
+            <section>My Wish</section>
+        </sections>
+        <sections>
+            <label><!-- Social media --></label>
+            <section>Social media</section>
+        </sections>
+        <sections>
+            <label><!-- Travel Information --></label>
+            <section>Travel Information</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Forms Details --></label>
+            <section>Wish Forms Details</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Information Form Medical Information --></label>
+            <section>Wish Information Form Medical Information</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Status Bar --></label>
+            <section>Wish Status Bar</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Determination Chapter Staff Layout</layout>
         <sections>
             <label><!-- Driver Section --></label>
             <section>Driver Section</section>
@@ -2202,7 +2389,37 @@ arrangements/unique circumstances for any requested wish participant not residin
         </sections>
     </layouts>
     <layouts>
+        <layout>Wish Granting Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Progress Bar --></label>
+            <section>Progress Bar</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Presentation  Details --></label>
+            <section>Wish Presentation  Details</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Receipt --></label>
+            <section>Wish Receipt</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Wish Impact</layout>
+        <sections>
+            <label><!-- Progress Bar --></label>
+            <section>Progress Bar</section>
+        </sections>
+        <sections>
+            <label><!-- Survey --></label>
+            <section>Survey</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Summary --></label>
+            <section>Wish Summary</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wish Impact Chapter Staff Layout</layout>
         <sections>
             <label><!-- Progress Bar --></label>
             <section>Progress Bar</section>
@@ -2239,6 +2456,17 @@ arrangements/unique circumstances for any requested wish participant not residin
         </sections>
     </layouts>
     <layouts>
+        <layout>Wish Planning Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Required Forms --></label>
+            <section>Required Forms</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Status Bar --></label>
+            <section>Wish Status Bar</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Wishes</layout>
         <sections>
             <label><!-- Attachments --></label>
@@ -2255,6 +2483,49 @@ arrangements/unique circumstances for any requested wish participant not residin
         <sections>
             <label><!-- Important Date Section --></label>
             <section>Important Date Section</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Relationships --></label>
+            <section>Medical Relationships</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Clearance Medical Information --></label>
+            <section>Wish Clearance Medical Information</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Participants --></label>
+            <section>Wish Participants</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Related Forms --></label>
+            <section>Wish Related Forms</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Status Bar --></label>
+            <section>Wish Status Bar</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Wishes Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Emergency Contact --></label>
+            <section>Emergency Contact</section>
+        </sections>
+        <sections>
+            <label><!-- Finance --></label>
+            <section>Finance</section>
+        </sections>
+        <sections>
+            <label><!-- Important Date Section --></label>
+            <section>Important Date Section</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Relationships --></label>
+            <section>Medical Relationships</section>
         </sections>
         <sections>
             <label><!-- Wish Clearance Medical Information --></label>
@@ -2474,8 +2745,16 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Prevent_Case_Budget_Approval_Submitted</name>
     </validationRules>
     <validationRules>
+        <errorMessage><!-- Please enter qualifying diagnosis --></errorMessage>
+        <name>Qualifying_Validation</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- Referral date should not be Blank. --></errorMessage>
         <name>Referral_date_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You do not have the access to edit the record. Please reach out to the National Medical Advisor. --></errorMessage>
+        <name>Restrict_Program_and_Volunteer_staff</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- You don&apos;t have access to close the wish --></errorMessage>
@@ -2544,6 +2823,10 @@ arrangements/unique circumstances for any requested wish participant not residin
     <webLinks>
         <label><!-- InKind_Donors_Report --></label>
         <name>InKind_Donors_Report</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- In_Kind_Reimbursement --></label>
+        <name>In_Kind_Reimbursement</name>
     </webLinks>
     <webLinks>
         <label><!-- LOOP --></label>
@@ -2680,6 +2963,10 @@ arrangements/unique circumstances for any requested wish participant not residin
     <workflowTasks>
         <name>Interview_date_not_set</name>
         <subject><!-- Interview date not set --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Pending_Clarification_Chapter_follow_up</name>
+        <subject><!-- Pending Clarification - Chapter follow-up --></subject>
     </workflowTasks>
     <workflowTasks>
         <name>Wish_Child_Birthday_Reminder</name>

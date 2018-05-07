@@ -7,8 +7,9 @@ public class ComboCMSWC_AC{
     public List<SelectOption> multiPickoptions {get;set;}       
     Public String medicalProfContactName{get;set;}
     Constant_AC  constant = new Constant_AC();
-    public Map<String,String> medicalProfConMap; 
+    public Map<String,npe4__Relationship__c> medicalProfConMap; 
     public String email{get;set;}
+    public String MedicalProviderType{get;set;}
     public String nameconcat;
     public boolean dis{get;set;}
     public boolean displayReturnToWish{get;set;} 
@@ -21,23 +22,37 @@ public class ComboCMSWC_AC{
     }
     //This method is used to display the medical professional contact   
     public List<SelectOption> getMedicalProContact(){
-        medicalProfConMap = new Map<String,String>();
-        List<SelectOption> options = new List<SelectOption>();
-        for(npe4__Relationship__c dbRelationShip  : [Select Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,
-                                                     npe4__RelatedContact__r.RecordTypeId FROM npe4__Relationship__c WHERE npe4__Contact__c =:currentParentCase.ContactId AND npe4__RelatedContact__r.RecordTypeId =:MedicalProfContactRecordTypeId]){
+        medicalProfConMap = new Map<String,npe4__Relationship__c>();
+        List<SelectOption> options = new List<SelectOption>();        
+        for(npe4__Relationship__c dbRelationShip  : [Select Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.Provider_Type__c,
+                                                     npe4__RelatedContact__r.RecordTypeId FROM npe4__Relationship__c WHERE npe4__Contact__c =:currentParentCase.ContactId AND npe4__RelatedContact__r.RecordTypeId =:MedicalProfContactRecordTypeId AND Send_Wish_Forms__c = True]){
                                                          
                                                          options.add(new SelectOption(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip.npe4__RelatedContact__r.Name));
-                                                         medicalProfConMap.Put(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip.npe4__RelatedContact__r.Email); 
+                                                         medicalProfConMap.Put(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip); 
                                                      }
-        
+        If(medicalProfConMap.isEmpty()){
+             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please select the medical professional to send the wish forms to by selecting \'Send Wish Forms To\' checkbox under the Medical Professional section on the Case record.'));
+        }
         return options;
     }
     //This method is uesd to check the conatct email   
     public void displayEmail(){
-        if(medicalProfConMap.get(medicalProfContactName) != Null){
+        if(medicalProfConMap.containskey(medicalProfContactName)){
+            if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email != Null){
             dis = true;
-            email = medicalProfConMap.get(medicalProfContactName);
-        }
+            email = medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email;
+            }
+            else{
+            email = Null;
+            }
+             if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Provider_Type__c!= Null){
+             dis = true;
+             MedicalProviderType = medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Provider_Type__c; 
+             }
+             else{
+              MedicalProviderType = Null;
+             }
+       }
         
     }
     public void ReturnToWish(){
@@ -52,11 +67,11 @@ public class ComboCMSWC_AC{
     //This method used to send the from to the contact based on the selection    
     public void SendtoDocuSign(){
         
-        if(currentParentCase.wish_involves_air_travel__c == Null ||currentParentCase.Description == Null ){
+        if(currentParentCase.wish_involves_air_travel__c == Null ||currentParentCase.Description == Null || medicalProfContactName == Null){
             DisplayErrorMessage();
         }
         
-        else if(medicalProfConMap.get(medicalProfContactName) == Null){
+        else if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email == Null){
             DisplayErrorMessage();
         }
         else{
@@ -143,12 +158,12 @@ public class ComboCMSWC_AC{
         
         if(currentParentCase.Rush__c  != true){
             templateID = label.Combo_CMS_and_WC;
-            subject = 'Signature Required – Make-A-Wish Wish Clearance and Child'+'\'s'+' '+'Medical Summary Form: '+currentParentCase.Contact.firstname +' '+lastInitial+'.';
+            subject = 'Signature Required – Make-A-Wish Wish Clearance, Child'+'\'s'+' '+'Medical Summary: '+currentParentCase.Contact.firstname +' '+lastInitial+'.';
         }
         
         if(currentParentCase.Rush__c  == true){
             templateID = label.Combo_CMS_and_WC;
-            subject = 'Signature Required – Make-A-Wish Rush Wish Clearance and Child'+'\'s'+' '+ 'Medical Summary Form: '+currentParentCase.Contact.firstname +' '+lastInitial+'.';
+            subject = 'Signature Required – Make-A-Wish Rush Wish Clearance, Child'+'\'s'+' '+ 'Medical Summary: '+currentParentCase.Contact.firstname +' '+lastInitial+'.';
         }
         String endpoint = endPointURL+'/accounts/'+account+'/envelopes';
         system.debug('### endpoint #####'+endpoint );
@@ -221,12 +236,18 @@ public class ComboCMSWC_AC{
     }
     //This method used to display the error message   
     public pagereference DisplayErrorMessage(){
+         if(medicalProfContactName == Null)
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please Select Recipient'));
         if(currentParentCase.wish_involves_air_travel__c == Null)
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please Select Wish Involves Air Travel'));
         if(currentParentCase.Description == Null )
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please add a value to Description on the case page.'));
-        if(medicalProfConMap.get(medicalProfContactName) == Null)
+        if(medicalProfConMap.containsKey(medicalProfContactName)){
+            if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email == Null)
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'The contact you have selected has no email address available. Please add email on the contact record and try to send the form again.'));
+         }
+        /*If(medicalProfConMap.isEmpty())
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please select the medical professional to send the wish forms by selecting \'Send Wish Forms To\' checkbox under the Medical Professional section on the Case record.'));*/
         return null;
     }
 }

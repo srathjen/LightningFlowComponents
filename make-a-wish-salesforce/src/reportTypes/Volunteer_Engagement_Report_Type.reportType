@@ -1317,11 +1317,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Preferred_Phone_Types__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>npe01__Type_of_Account__c</field>
             <table>Contact</table>
         </columns>
@@ -1413,11 +1408,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>npe01__WorkPhone__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Work_Phone__c</field>
             <table>Contact</table>
         </columns>
         <columns>

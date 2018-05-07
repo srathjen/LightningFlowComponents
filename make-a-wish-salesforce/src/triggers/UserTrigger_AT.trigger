@@ -69,6 +69,7 @@ trigger UserTrigger_AT on User (after insert,after update,before update,before i
         Map<Id, Id> oldUserRoleIdMap = new Map<Id, Id>(); // Used to hold the new user role Id
         Set<string> userIdsSet = new Set<string>(); // useed to holds unique rolename
         Map<Id,Id> contactUSerIdMap = new Map<Id,Id>(); // used to hold the contact id and user id.
+        
          for(User newUser : Trigger.new)
          {
             if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null)
@@ -89,9 +90,12 @@ trigger UserTrigger_AT on User (after insert,after update,before update,before i
                      userIdsSet.add(newUser.id);
                  }
                  
-                 if(newUser.Email != Trigger.oldMap.get(newUSer.Id).Email && newUser.ContactId != Null){
-                     contactUSerIdMap.put(newUser.ContactId,newUser.Id);
+                 if((newUser.ContactId != Null) && ((newUser.FirstName != Null && trigger.oldMap.get(newUser.id).FirstName != newUser.FirstName) || (newUser.LastName != Null && trigger.oldMap.get(newUser.id).LastName != newUser.LastName) || (newUser.mobilePhone!= Null && trigger.oldMap.get(newUser.id).mobilePhone != newUser.mobilePhone) || (newUser.Email != Null && trigger.oldMap.get(newUser.id).Email != newUser.Email) || 
+                (newUser.Street != Null && trigger.oldMap.get(newUser.id).Street != newUser.Street) || (newUser.City!= Null && trigger.oldMap.get(newUser.id).City != newUser.City) || (newUser.state != Null && trigger.oldMap.get(newUser.id).state != newUser.state) || (newUser.postalcode != Null && trigger.oldMap.get(newUser.id).postalcode != newUser.postalcode) ||
+                (newUser.Country != Null && trigger.oldMap.get(newUser.id).Country != newUser.Country) || (newUser.Fax != Null && trigger.oldMap.get(newUser.id).Fax != newUser.Fax ))){
+                     contactUSerIdMap.put(newUser.ContactId,newUser.Id);                     
                  }
+                 
              }
 
             if(newUser.UserRoleId != null && Trigger.oldMap.get(newUser.Id).UserRoleId != newUser.UserRoleId) {

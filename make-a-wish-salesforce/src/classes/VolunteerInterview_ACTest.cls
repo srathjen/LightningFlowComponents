@@ -69,7 +69,7 @@ Public class VolunteerInterview_ACTest
           
     }  
     // Entering Interview details with Blank AvailableDateandTime 1 Blank.
-    public testmethod static void AvailableDateandTime1Blank()
+    public testmethod static void availableDateandTime1Blank()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -95,12 +95,12 @@ Public class VolunteerInterview_ACTest
             controller.currTask.Available_Date3__c  = Date.Today().addDays(-2);
             controller.currTask.Available_Time3__c  = '8 pm';
             controller.submit();
-           
-        }
-        
+            System.assertEquals(controller.currTask.Available_Time3__c,'8 pm','Current task available time does not match');
+            System.assert(controller.currTask.Available_Time3__c == '8 pm','Current task available time does not match');
+        }    
     }
      // Entering Interview details with Blank AvailableDateandTime 2 Blank.
-    public testmethod static void AvailableDateandTime2Blank()
+    public testmethod static void availableDateandTime2Blank()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -125,12 +125,13 @@ Public class VolunteerInterview_ACTest
             controller.currTask.Available_Date3__c  = Date.Today().addDays(-2);
             controller.currTask.Available_Time3__c  = '8 pm';
             controller.submit();
-           
+            System.assertEquals(controller.currTask.Available_Time3__c,'8 pm','Current task available time does not match');
+            System.assert(controller.currTask.Available_Time3__c == '8 pm','Current task available time does not match');
         }
         
      }
       // Entering Interview details with Blank AvailableDateandTime 3 Blank.
-    public testmethod static void AvailableDateandTime3Blank()
+    public testmethod static void availableDateandTime3Blank()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -156,7 +157,8 @@ Public class VolunteerInterview_ACTest
             controller.currTask.Available_Time1__c  = '8 pm';
             controller.currTask.Available_Date3__c  = Date.Today().addDays(-2);
             controller.submit();
-           
+            System.assertEquals(controller.currTask.Available_Time2__c,'7 pm','Current task available time does not match');
+            System.assert(controller.currTask.Available_Time2__c == '7 pm','Current task available time does not match');
         }
         
      }  
@@ -188,12 +190,13 @@ Public class VolunteerInterview_ACTest
             controller.currTask.Available_Date3__c  = Date.Today().addDays(-2);
             controller.currTask.Available_Time3__c  = '8 pm';
             controller.submit();
-           
+            System.assertEquals(controller.currTask.Available_Time3__c,'8 pm','Current task available time does not match');
+            System.assert(controller.currTask.Available_Time3__c == '8 pm','Current task available time does not match');
         }
         
     }
     // Creating Interview Task with Same Date and Time for Availability.
-    public testmethod static void CreateTaskforSameAvailability()
+    public testmethod static void createTaskforSameAvailability()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -221,9 +224,9 @@ Public class VolunteerInterview_ACTest
             controller.currTask.Available_Date3__c  = Date.Today().addDays(2);
             controller.currTask.Available_Time3__c  = '7 pm';
             controller.submit();
-           
-        }
-        
+            System.assertEquals(controller.currTask.Available_Time3__c,'7 pm','Current task available time does not match');
+            System.assert(controller.currTask.Available_Time3__c == '7 pm','Current task available time does not match');
+        }      
     }
     // Entering Availability 1 and 2 Same
    public testmethod static void createInterviewTask3()
@@ -255,9 +258,9 @@ Public class VolunteerInterview_ACTest
             controller.currTask.Available_Date3__c  = Date.Today().addDays(2);
             controller.currTask.Available_Time3__c  = '8 pm';
             controller.submit();
-           
-        }
-        
+            System.assertEquals(controller.currTask.Available_Time3__c,'8 pm','Current task available time does not match');
+            System.assert(controller.currTask.Available_Time3__c == '8 pm','Current task available time does not match');  
+        }        
     }
      // Entering Availability 3 and 2 Same
     public testmethod static void createInterviewTask4()
@@ -288,7 +291,8 @@ Public class VolunteerInterview_ACTest
             controller.currTask.Available_Date3__c  = Date.Today().addDays(2);
             controller.currTask.Available_Time3__c  = '8 pm';
             controller.submit();
-           
+            System.assertEquals(controller.currTask.Available_Time3__c,'8 pm','Current task available time does not match');
+            System.assert(controller.currTask.Available_Time3__c == '8 pm','Current task available time does not match');
         }
         
     }
@@ -321,7 +325,8 @@ Public class VolunteerInterview_ACTest
             controller.currTask.Available_Date3__c  = Date.Today().addDays(2);
             controller.currTask.Available_Time3__c  = '7 pm';
             controller.submit();
-           
+            System.assertEquals(controller.currTask.Available_Time3__c,'7 pm','Current task available time does not match');
+            System.assert(controller.currTask.Available_Time3__c == '7 pm','Current task available time does not match');
         }
         
     }
@@ -352,12 +357,13 @@ Public class VolunteerInterview_ACTest
             controller.currTask.Available_Time1__c  = 'Other';
            
             controller.submit();
-           
+            System.assertEquals(controller.currTask.Available_Time2__c,'7 pm','Current task available time does not match');
+            System.assert(controller.currTask.Available_Time2__c == '7 pm','Current task available time does not match');
         }
         
     }  
     // Creating Task with Non Started status.
-    public testmethod static void CreateTask()
+    public testmethod static void createTask()
     {   
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
          Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
@@ -386,8 +392,8 @@ Public class VolunteerInterview_ACTest
            
             controller.submit();
             controller.Reschedule();
-           
-        }
-        
+            System.assertEquals(controller.currTask.Available_Time2__c,'7 pm','Current task available time does not match');
+            System.assert(controller.currTask.Available_Time2__c == '7 pm','Current task available time does not match');   
+        }        
     }  
 }

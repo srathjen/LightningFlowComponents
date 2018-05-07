@@ -1,6 +1,13 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[Hi &nbsp;{!Case.Hidden_Wish_Owner_Manager__c}<div><br></div><div><br></div>]]></td>
+<![CDATA[<div><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Hi &nbsp;{!Case.Hidden_Wish_Owner_Manager__c}</span><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,sans-serif;mso-fareast-font-family:
+&quot;Times New Roman&quot;;mso-bidi-font-family:&quot;Times New Roman&quot;"><o:p></o:p></span></p>
+
+<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span style="font-family:&quot;Lato&quot;,sans-serif">&nbsp;</span></p></div>]]></td>
 </tr>
 </table>

@@ -244,6 +244,7 @@
     <filter>
         <criteriaItems>
             <column>Lead.Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

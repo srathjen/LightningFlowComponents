@@ -1,7 +1,41 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif;">{!Contact.FirstName}</span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><span style="background-color: white;">,<br></span></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><span style="background-color: rgb(255, 255, 255);"><br>You have successfully registered for an orientation to learn more about volunteering with&nbsp;</span></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Make-A-Wish</span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><span style="background-color: rgb(255, 255, 255);">. Please log in to the&nbsp;</span></span><a href="https://make-a-wish.force.com/communitieslogin" style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 16px;">Make-A-Wish Volunteer Center</a><font face="Century Gothic, sans-serif" style="font-family: arial; font-size: 12pt;"><span style="font-size: 12pt;">&nbsp;</span></font><span style="background-color: rgb(255, 255, 255); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 16px;">using your username listed below to complete this orientation.<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; background-color: white;"><br>Username:&nbsp;</span><font face="Century Gothic, sans-serif">{!User.Username}</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255); font-size: 12pt;"><br>Once you've logged in, click <b>"Become A Volunteer"</b> and then <b>"Start Course"</b> to watch the orientation at your own pace. After you've clicked "Start </span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255); font-size: 12pt;">Course</span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255); font-size: 12pt;">", a new tab will open and you will need to watch both Volunteer </span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255); font-size: 12pt;">Orientation 1</span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255); font-size: 12pt;">&nbsp;and Volunteer Orientation 2, to complete the full Make-A-Wish Volunteer Orientation.<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255); font-size: 12pt;"><br>Once both courses have been </span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255); font-size: 12pt;">completed</span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255); font-size: 12pt;">, we will mark your orientation as </span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255); font-size: 12pt;">complete</span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255); font-size: 12pt;">. Please note that this process takes about 5 minutes to occur and you will need to refresh your browser to see these changes.</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><span style="background-color: rgb(255, 255, 255); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>If you need to cancel or change this orientation, please visit the Make-A-Wish Volunteer Center.<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br><span style="background-color: rgb(255, 255, 255);">As always, please let us know of any questions by contacting us directly using the information below.<br></span></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><span style="background-color: rgb(255, 255, 255);"><br></span>{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}</span></p><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><div><div id="_com_1" class="msocomtxt" language="JavaScript">
+<![CDATA[<p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName}<span style="background:white">,<br>
+<br>
+You have successfully registered for an orientation to learn more about
+volunteering with&nbsp;</span>Make-A-Wish<span style="background:white">.
+Please log in to the&nbsp;</span><a href="https://make-a-wish.force.com/communitieslogin"><span style="color:blue">Make-A-Wish
+Volunteer Center</span></a>&nbsp;<span style="background:white">using your
+username listed below to complete this orientation.</span><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">Username:&nbsp;</span><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!User.Email}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">Once
+you've logged in, click&nbsp;<b>"Become A Volunteer"</b>&nbsp;and
+then&nbsp;<b>"Start Course"</b>&nbsp;to watch the orientation at your
+own pace. After you've clicked "Start&nbsp;Course", a new tab will
+open and you will need to watch both Volunteer&nbsp;Orientation 1&nbsp;and
+Volunteer Orientation 2, to complete the full Make-A-Wish Volunteer
+Orientation.</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">Once
+both courses have been&nbsp;completed, we will mark your orientation
+as&nbsp;complete. Please note that this process takes about 5 minutes to occur
+and you will need to refresh your browser to see these changes.</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">If
+you need to cancel or change this orientation, please visit the Make-A-Wish
+Volunteer Center.</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">As
+always, please let us know of any questions by contacting us directly using the
+information below.</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}<o:p></o:p></span></p><p class="MsoNormal" style="font-size: 12pt; margin-bottom: 0.0001pt;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal"><span style="font-family:&quot;Lato&quot;,sans-serif">&nbsp;</span></p><div style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><div><div id="_com_1" class="msocomtxt" language="JavaScript">
 
 <!--[if !supportAnnotations]--></div>
 

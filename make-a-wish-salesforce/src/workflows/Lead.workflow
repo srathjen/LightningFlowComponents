@@ -22,19 +22,7 @@
         </recipients>
         <senderAddress>wvc@wish.org</senderAddress>
         <senderType>OrgWideEmailAddress</senderType>
-        <template>Medical_Eligibility_Emails/Diagnosis_Verification_Form_Email_Template_Best_Physician</template>
-    </alerts>
-    <alerts>
-        <fullName>Email_Notification_to_Referrer</fullName>
-        <description>Email Notification to Referrer</description>
-        <protected>false</protected>
-        <recipients>
-            <field>Referrer_Email__c</field>
-            <type>email</type>
-        </recipients>
-        <senderAddress>wvc@wish.org</senderAddress>
-        <senderType>OrgWideEmailAddress</senderType>
-        <template>Medical_Eligibility_Emails/Inquiry_Referral_Template</template>
+        <template>unfiled$public/Part_A_Form_Email_Template</template>
     </alerts>
     <alerts>
         <fullName>Lead_Email_Alert_for_Lead_Owner_Regarding_Chapter_Update</fullName>
@@ -76,6 +64,28 @@
         <template>Medical_Professional_Email_Templates/Med_Professional_Your_patient_is_eligible_for_a_wish</template>
     </alerts>
     <alerts>
+        <fullName>Lead_Notify_owner_Qualified_RUSH_lead</fullName>
+        <description>Lead: Notify owner Qualified RUSH lead</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Medical_Eligibility_Emails/Lead_Notify_owner_Qualified_RUSH_lead</template>
+    </alerts>
+    <alerts>
+        <fullName>Lead_Notify_owner_new_RUSH_lead</fullName>
+        <description>Lead: Notify owner new RUSH lead</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>wvc@wish.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Medical_Eligibility_Emails/Lead_Notify_owner_new_RUSH_lead</template>
+    </alerts>
+    <alerts>
         <fullName>Send_Email_to_Office_Referrar_email_with_Wish_Referral_Form</fullName>
         <ccEmails>missionresources@wish.org</ccEmails>
         <description>Send Email to Office Referrar email with Wish Referral Form</description>
@@ -91,17 +101,17 @@
     <rules>
         <fullName>Email Notification to Referrer</fullName>
         <actions>
-            <name>Email_Notification_to_Referrer</name>
-            <type>Alert</type>
-        </actions>
-        <actions>
             <name>Lead_ET_We_ve_Received_your_Referral_Inquiry</name>
             <type>Task</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Lead.Company</field>
             <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.unique_wish_identifier__c</field>
+            <operation>equals</operation>
         </criteriaItems>
         <description>Its sending acknowledge notification to referrer.</description>
         <triggerType>onCreateOnly</triggerType>
@@ -122,12 +132,61 @@
         <triggerType>onAllChanges</triggerType>
     </rules>
     <rules>
+        <fullName>Lead%3A Notify new RUSH lead</fullName>
+        <actions>
+            <name>Lead_Notify_owner_new_RUSH_lead</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Lead_ET_New_Rush_Referral</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.Any_medical_reason_for_moving_quickly__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
+        </criteriaItems>
+        <description>Notify the lead owner whenever a lead is created with Is there a medical reason to move quickly field equal to &apos;Yes&apos;</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Lead%3A Notify owner Qualified RUSH Lead</fullName>
+        <actions>
+            <name>Lead_Notify_owner_Qualified_RUSH_lead</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.Status</field>
+            <operation>equals</operation>
+            <value>Qualified</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Any_medical_reason_for_moving_quickly__c</field>
+            <operation>equals</operation>
+            <value>Yes</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>User.ProfileId</field>
+            <operation>notEqual</operation>
+            <value>Integration</value>
+        </criteriaItems>
+        <description>Notify the lead owner when a RUSH lead is qualified</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
         <fullName>Lead%3AQualifying Medical Professional when child is NOT eligible</fullName>
         <actions>
             <name>Send_DNQ_Notification_to_Qualifying_Medical_Professional</name>
             <type>Task</type>
         </actions>
-        <active>true</active>
+        <active>false</active>
         <criteriaItems>
             <field>Lead.Status</field>
             <operation>equals</operation>
@@ -162,6 +221,10 @@
             <operation>notEqual</operation>
             <value>Integration</value>
         </criteriaItems>
+        <criteriaItems>
+            <field>Lead.unique_wish_identifier__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
         <description>It send a email notification to  Qualifying Medical Professional when child is eligible</description>
         <triggerType>onCreateOrTriggeringUpdate</triggerType>
     </rules>
@@ -176,6 +239,19 @@
         <protected>false</protected>
         <status>Completed</status>
         <subject>Lead ET : Chapter has been changed</subject>
+    </tasks>
+    <tasks>
+        <fullName>Lead_ET_New_Rush_Referral</fullName>
+        <assignedTo>sathiskumar.s_maw@mstsolutions.com</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>New RUSH referral email alert has been sent</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>User.Today_Date__c</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Lead ET : New Rush Referral</subject>
     </tasks>
     <tasks>
         <fullName>Lead_ET_We_ve_Received_your_Referral_Inquiry</fullName>

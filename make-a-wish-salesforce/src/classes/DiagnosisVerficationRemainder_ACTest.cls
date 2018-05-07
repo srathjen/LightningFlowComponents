@@ -9,6 +9,7 @@ public class DiagnosisVerficationRemainder_ACTest
         currLead.Has_this_child_ever_received_prior_wish__c = 'Yes';
         currLead.Any_medical_reason_for_moving_quickly__c  = 'Yes';
         currLead.Relationship_To_Child__c = 'Self';
+        currLead.Diagnosis_Given_By_Referrer__c = 'Malignant';
         currLead.Referrer_FirstName__c = 'Testingzxzxz';
         currLead.Referrer_Last_Name__c = 'Testing';
         currLead.Referrer_Phone__c= '8220708920';
@@ -48,53 +49,25 @@ public class DiagnosisVerficationRemainder_ACTest
         currLead.Company = 'MST';
         currLead.Status = 'Referred';
         currLead.Referred_Date__c = Date.today().addDays(-3);
+        //currLead.Part_A_Sent__c = Date.today().addDays(-7);
         insert currLead;
-    }
-    static testmethod  void createLeadRecords()
-    {   
-        Lead currLead = [SELECT id from Lead];
-        
-        // Schedule the test job
-        String jobId = System.schedule('testJob',
-                                       CRON_EXP, 
-                                       new DiagnosisVerficationReminderSchedule_AC());
-        
-        // Get the information from the CronTrigger API object
-        CronTrigger ct = [SELECT Id, CronExpression, TimesTriggered, 
-                          NextFireTime
-                          FROM CronTrigger WHERE id = :jobId];
-        
-        // Verify the expressions are the same
-        System.assertEquals(CRON_EXP, 
-                            ct.CronExpression);
-        
-        // Verify the job has not run
-        System.assertEquals(0, ct.TimesTriggered);
-        
-        // Verify the next time the job will run
-        System.assertEquals('2022-03-15 00:00:00', 
-                            String.valueOf(ct.NextFireTime));
-        
-        
-        Test.startTest();
-        DiagnosisVerficationRemainder_AC batchAffiliation = new DiagnosisVerficationRemainder_AC();
-        Database.executeBatch(batchAffiliation, 200);
-        Test.stopTest();
-        
-        
-    }
+    } 
+   
     
-    static testmethod  void PartARemainderat7days()
+    static testmethod  void partARemainderat7days()
     {
         
        
-        Lead currLead = [SELECT id FROM Lead];
+        Lead currLead = [SELECT id FROM Lead limit 1];
         Lead updateLead = new Lead();
+        updateLead.Diagnosis_Given_By_Referrer__c = 'Malignant';
         updateLead.id = currLead.id;
+        updateLead.Status = 'Referred';
         updateLead.Part_A_Sent__c = Date.Today().addDays(-7);
         updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
         updateLead.Referred_Date__c = Date.today();
         updateLead.Dup_Check__c = 'Block Lead Dup';
+        update updateLead;
         update updateLead;
         
         // Schedule the test job
@@ -125,7 +98,7 @@ public class DiagnosisVerficationRemainder_ACTest
         
     }
     
-    static testmethod  void PartARemainderat14days()
+    static testmethod  void partARemainderat14days()
     {
         
        
@@ -134,10 +107,11 @@ public class DiagnosisVerficationRemainder_ACTest
         updateLead.id = currLead.id;
         updateLead.Part_A_Sent__c = Date.Today().addDays(-14);
         updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        updateLead.Diagnosis_Given_By_Referrer__c = 'Malignant';
         updateLead.Referred_Date__c = Date.today();
         updateLead.Dup_Check__c = 'Block Lead Dup';
         update updateLead;
-        
+         update updateLead;
         // Schedule the test job
         String jobId = System.schedule('testJob1',
                                        CRON_EXP, 
@@ -165,7 +139,7 @@ public class DiagnosisVerficationRemainder_ACTest
         Test.stopTest();
         
     }
-    static testmethod  void PartARemainderat21days()
+    static testmethod  void partARemainderat21days()
     {
         
        
@@ -173,8 +147,51 @@ public class DiagnosisVerficationRemainder_ACTest
         Lead updateLead = new Lead();
         updateLead.id = currLead.id;
         updateLead.Part_A_Sent__c = Date.Today().addDays(-21);
+        updateLead.Diagnosis_Given_By_Referrer__c = 'Malignant';
         updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
         updateLead.Referred_Date__c = Date.today();
+        updateLead.Dup_Check__c = 'Block Lead Dup';
+        update updateLead;
+        update updateLead;
+        // Schedule the test job
+        String jobId = System.schedule('testJob1',
+                                       CRON_EXP, 
+                                       new DiagnosisVerficationReminderSchedule_AC());
+        
+        // Get the information from the CronTrigger API object
+        CronTrigger ct = [SELECT Id, CronExpression, TimesTriggered, 
+                          NextFireTime
+                          FROM CronTrigger WHERE id = :jobId];
+        
+        // Verify the expressions are the same
+        System.assertEquals(CRON_EXP, 
+                            ct.CronExpression);
+        
+        // Verify the job has not run
+        System.assertEquals(0, ct.TimesTriggered);
+        
+        // Verify the next time the job will run
+        System.assertEquals('2022-03-15 00:00:00', 
+                            String.valueOf(ct.NextFireTime));
+        
+        Test.startTest();
+        DiagnosisVerficationRemainder_AC batchAffiliation = new DiagnosisVerficationRemainder_AC();
+        Database.executeBatch(batchAffiliation, 200);
+        Test.stopTest();
+        
+    }
+    
+    static testmethod  void referredDate3days()
+    {
+        
+       
+        Lead currLead = [SELECT id FROM Lead limit 1];
+        Lead updateLead = new Lead();
+        updateLead.id = currLead.id;
+        updateLead.Part_A_Sent__c = Date.Today();
+        updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        updateLead.Referred_Date__c = Date.today().addDays(-3);
+        updateLead.Diagnosis_Given_By_Referrer__c = 'Malignant';
         updateLead.Dup_Check__c = 'Block Lead Dup';
         update updateLead;
         
@@ -205,5 +222,6 @@ public class DiagnosisVerficationRemainder_ACTest
         Test.stopTest();
         
     }
+    
     
 }

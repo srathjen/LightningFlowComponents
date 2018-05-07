@@ -126,6 +126,22 @@
         <name>Diagnosis__c</name>
     </fields>
     <fields>
+        <label><!-- Does Your Medical Insurance Details --></label>
+        <name>Does_Your_Medical_Insurance_Details__c</name>
+    </fields>
+    <fields>
+        <label><!-- Does Your Medical Insurance Include --></label>
+        <name>Does_Your_Medical_Insurance_Include__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Does each requestedParticipant18Details --></label>
         <name>Does_each_requested_participan__c</name>
     </fields>
@@ -794,6 +810,10 @@ and the date it was or will be granted. --></help>
     <fields>
         <label><!-- Restaurant --></label>
         <name>Restaurant__c</name>
+    </fields>
+    <fields>
+        <label><!-- Self describe comment box --></label>
+        <name>Self_describe_comment_box__c</name>
     </fields>
     <fields>
         <label><!-- Hidden SignerMapKeyPair --></label>

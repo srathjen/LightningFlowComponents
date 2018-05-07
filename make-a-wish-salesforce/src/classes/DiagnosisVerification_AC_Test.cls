@@ -1,11 +1,14 @@
-/*
-Created By : MST Solutions
-Created Date : Jan - 16 - 2017
-Description : This test class used to perform unit testing for the 'Diagnosis Verficiation Form'. 
-*/
+/*****************************************************************************************************************
+Author      : MST Solutions
+Date        : 10/4/2016
+Description : This DiagnosisVerification_AC_Test is used to cover the unit testing for DiagnosisVerification_AC.
+Modification Log: 
+23/03/2018 - Sankar - WVC-1835
+*******************************************************************************************************************/
 @isTest
 public class DiagnosisVerification_AC_Test {
     @testSetup
+    //This method is used to update the wish child and wish family.
     public static void setUpData(){
         Condition_Description__c condistionDescription = OrientationandTrainingUtil.createConditionDesCription();
         
@@ -20,6 +23,7 @@ public class DiagnosisVerification_AC_Test {
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
         newLead.PD_ICD_Code__c = iCDCode.Id;
+        newLead.Communication__c = 'rec1;rec2';
         newLead.Current_Condition__c = 'Test1;Test2;Test3;';
         newLead.Current_Condition_Label__c = 'Test1;Test2;Test3;';
         newLead.PD_Condition_Description__c = 'Malignant Melanoma';  
@@ -41,11 +45,21 @@ public class DiagnosisVerification_AC_Test {
         
         insert newFile; 
         
+        DocuSignCredentialsSetting__c setting = new DocuSignCredentialsSetting__c();
+        setting.Name = 'Test Setting';
+        setting.account__c = 'TestAccount';
+        setting.Password__c = 'TestPassword';
+        insert setting;
+        
+        dsfs__DocuSign_Status__c newStatus = new dsfs__DocuSign_Status__c(dsfs__Lead__c = newLead.Id, dsfs__Subject__c = 'Diagnosis Verification Form');
+        insert newStatus;
+        System.assertEquals(newLead.Id, newFile.Parent__c);
+        System.assert(newLead.Id == newFile.Parent__c);
     }
-    
+    //This method is used to check the validate primary diagnosis in DV form.
     public static testmethod void checkDiadnosisVerificationFormForValidDiagnosisAtPrimaryDiagnosis(){
-        Lead newLead = [SELECT ID FROM Lead];        
-        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c];
+        Lead newLead = [SELECT ID FROM Lead LIMIT 50000];        
+        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c LIMIT 50000];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -81,14 +95,15 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('questionNumber','0'); 
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];     
-        
+        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id LIMIT 50000];             
         Test.stopTest();
+        System.assertEquals('23', pw.age);
+        System.assert(pw.age == '23');
     }
-    
+	//This method is used to check the invalidate primary diagnosis in DV form.
     public static testmethod void checkDiadnosisVerificationFormForInValidDiagnosisAtPrimaryDiagnosis(){
-        Lead newLead = [SELECT ID FROM Lead];        
-        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c];
+        Lead newLead = [SELECT ID FROM Lead LIMIT 50000];        
+        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c LIMIT 50000];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -106,15 +121,18 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0'); // Used to hold the Diagnosis block number
         ApexPages.currentPage().getParameters().put('questionNumber','0'); 
         currDiagnosisVerificationDupe.MedicalResponse();
+        ApexPages.currentPage().getParameters().put('collectedConditionValue','test1;test2');
+        ApexPages.currentPage().getParameters().put('uniqueCurrentConditionSet', 'test3');
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
+        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id LIMIT 50000];        
         Test.stopTest();
+        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
+        System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
     }
-    
-    public static testmethod void checkDiadnosisVerificationFormWithSecondaryDiagnosis(){
-        Lead newLead = [SELECT ID FROM Lead];
-        
-        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c];
+    //This method is used to check the validate secondary diagnosis in DV form.
+   	public static testmethod void checkDiadnosisVerificationFormWithSecondaryDiagnosis(){
+        Lead newLead = [SELECT ID FROM Lead LIMIT 50000];      
+        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c LIMIT 50000];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -149,13 +167,15 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].medicalWrapperList[0].selectedPickVal = 'No';
         currDiagnosisVerificationDupe.changeWishStatus();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
+        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id LIMIT 50000];        
         Test.stopTest();
+        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode);
+        System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode);
     }
-    
-    public static testmethod void checkDiadnosisVerificationFormRemoveDiagnosisFunction(){
-        Lead newLead = [SELECT ID FROM Lead];       
-        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c];
+    //This method is used to check the remove diagnosis in DV form.
+   	public static testmethod void checkDiadnosisVerificationFormRemoveDiagnosisFunction(){
+        Lead newLead = [SELECT ID FROM Lead LIMIT 50000];       
+        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c LIMIT 50000];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -187,14 +207,16 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','1');
         currDiagnosisVerificationDupe.RemoveDiagnosisBlock();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
+        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id LIMIT 50000];        
         Test.stopTest();
+        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
+        System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
     }
-    
-    public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationData(){
+    //This method is used to check the diagnosis verification in DV form.
+   	public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationData(){
         Lead newLead = [SELECT ID FROM Lead];
         newLead.Increased_probability_of_premature_death__c = true;
-        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c];
+        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c LIMIT 50000];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -224,20 +246,23 @@ public class DiagnosisVerification_AC_Test {
         ApexPages.currentPage().getParameters().put('questionNumber','0');            
         currDiagnosisVerificationDupe.MedicalResponse();        
         currDiagnosisVerificationDupe.SaveMedicalInformation();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
+        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id LIMIT 50000];        
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);
         DiagnosisVerification_AC currDiagnosisVerificationDupeUpdated = new DiagnosisVerification_AC();
         List<Condition_Description__c> conditionDescriptionLst = DiagnosisVerification_AC.searchCondition('Mali');
-        List<ICD_Codes__c> iCDCodeLst = DiagnosisVerification_AC.searchDiagnosis('C43.30');
+       	List<ICD_Codes__c> iCDCodeLst = DiagnosisVerification_AC.searchDiagnosis('C43.30');
+        List<ICD_Codes__c> iCDCodeLst1 = DiagnosisVerification_AC.searchDiagnosis(NULL);        
         Test.stopTest();
+        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode);
+        System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[1].iCDCode);
     }
-    
-    public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandMedicalQuestion(){
+    //This method is used to check the diagnosis verification with medical question in DV form.
+   	public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandMedicalQuestion(){
         Lead newLead = [SELECT ID FROM Lead];
         newLead.Increased_probability_of_premature_death__c = true;
-        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c];
+        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c LIMIT 50000];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -263,21 +288,22 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         currDiagnosisVerificationDupe.deleteLeadFile();
         ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0');
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];                        
+        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id LIMIT 50000];                        
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);
         DiagnosisVerification_AC currDiagnosisVerificationDupeUpdated = new DiagnosisVerification_AC();
         Test.stopTest();
+        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
+        System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
     }
-    
-    
-    public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandWithoutMedicalQuestion(){
-        List<Medical_Questions__c> medicalQuestion = [SELECT Id FROM Medical_Questions__c];
+    //This method is used to check the diagnosis verification without medical question in DV form.
+   	public static testmethod void checkDiadnosisVerificationFormWithDiagnosisVerficationDataandWithoutMedicalQuestion(){
+        List<Medical_Questions__c> medicalQuestion = [SELECT Id FROM Medical_Questions__c LIMIT 50000];
         medicalQuestion.clear();
         Lead newLead = [SELECT ID FROM Lead];
         newLead.Increased_probability_of_premature_death__c = true;
-        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c];
+        Condition_Description__c condistionDescription = [SELECT ID,Name,Code_To_Use__c FROM Condition_Description__c LIMIT 50000];
         Test.startTest();
         PageReference pageRef = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRef);
@@ -302,11 +328,11 @@ public class DiagnosisVerification_AC_Test {
         currDiagnosisVerificationDupe.MedicalResponse();
         currDiagnosisVerificationDupe.SaveMedicalInformation();
         currDiagnosisVerificationDupe.deleteLeadFile();
-        ApexPages.currentPage().getParameters().put('diagnosisBlockNum','0');
         currDiagnosisVerificationDupe.ResetDiagnosis();
         currDiagnosisVerificationDupe.changePatientValue();
         currDiagnosisVerificationDupe.submit();
-        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id ];        
+        currDiagnosisVerificationDupe.MediacalQuestions(null,null,false,null,0,null,false);
+        List<Diagnosis_Verification__c> diagnosisVerificationLst = [SELECT ID,isEligible__c,(SELECT isEligible__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c =: newLead.Id LIMIT 50000];        
         PageReference pageRefUpdate = Page.DiagnosisVerification_VF;
         Test.setCurrentPage(pageRefUpdate);
         ApexPages.currentPage().getParameters().put('leadId',newLead.Id);
@@ -324,7 +350,7 @@ public class DiagnosisVerification_AC_Test {
         pw.getventilatorList();
         pw.getLungDiseaseList();
         Test.stopTest();
+        System.assertEquals(condistionDescription.Code_To_Use__c, currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
+        System.assert(condistionDescription.Code_To_Use__c == currDiagnosisVerificationDupe.diagnosisVerificationWrapperLst[0].iCDCode);
     }
-    
-    
 }

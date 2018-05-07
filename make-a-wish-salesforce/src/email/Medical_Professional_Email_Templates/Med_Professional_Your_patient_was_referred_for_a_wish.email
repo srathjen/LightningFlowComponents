@@ -1,15 +1,50 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<div style="text-align: left;"><p class="MsoNormal" style="margin-bottom: 12pt; line-height: normal; background: white;"><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Hello {!Lead.Treating_Medical_Professional_First_Name__c}
-{!Lead.Treating_Medical_Professional_Last_Name__c},<br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>After reviewing the information that was submitted for evaluation of
-wish eligibility, we have concluded that your patient does not meet our
-eligibility criteria for a wish at this time.&nbsp;
-</span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">If you feel there is additional information you could provide that would
-be supportive of wish eligibility, please contact us.</span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">&nbsp; </span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">If in the future, medical conditions should change, we hope you will contact us again.<br></span><br><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;">Wish Child Name: </span>{!Lead.Name}</font><br><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;">Primary Diagnosis: </span>{!Lead.PD_Condition_Description__c}</font><br><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;">Additional Diagnosis (if applicable):</span></font><br><font face="Century Gothic, sans-serif">{!Lead.SD1_Condition_Description__c}</font><br><font face="Century Gothic, sans-serif">{!Lead.SD2_Condition_Description__c}</font><br><font face="Century Gothic, sans-serif">{!Lead.SD3_Condition_Description__c}</font><br><font face="Century Gothic, sans-serif">{!Lead.SD4_Condition_Description__c}</font><br><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Thanks to the support of you and other medical professionals around
-the country, we continue to come closer each year to our vision of making every
-eligible child’s wish come true.<br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Regards,</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal;">
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<div style="text-align: left;"><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal; background: white;"></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;background:white"><span style="font-size: 12pt; font-family: Lato, serif;">Wish child name:&nbsp;{!Lead.Name}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;background:white"><span style="font-size: 12pt; font-family: Lato, serif;">Primary diagnosis:&nbsp;{!Lead.PD_Condition_Description__c}</span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
+white"><span style="font-family: Lato, serif;">Additional diagnosis: N/A</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
+white"><span style="font-family: Lato, serif;">Dear&nbsp;{!Lead.Treating_Medical_Professional_First_Name__c}&nbsp;{!Lead.Treating_Medical_Professional_Last_Name__c},&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
+white"><span style="font-family: Lato, serif;">After reviewing the information
+submitted on the Diagnosis Verification Form, we have concluded your patient
+does not meet our medical eligibility criteria at this time. If you feel
+additional medical information can be provided to support wish eligibility,
+please
+contact&nbsp;{!Lead.OwnerFullName}&nbsp;at&nbsp;&nbsp;{!Lead.Phone}&nbsp;or
+at&nbsp;{!Lead.OwnerEmail}. Should&nbsp;{!Lead.FirstName}’s medical condition
+change in the future, please contact us again for a reevaluation.&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
+white"><span style="font-family: Lato, serif;">Thank you for your diligent care for
+this child and remaining a strong advocate for pediatric health. If you have
+any further questions regarding eligibility criteria or this decision, please
+contact us at the phone number or email provided above.&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
+white"><span style="font-family: Lato, serif;">Warmly,</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;background:white"><span style="font-family: Lato, serif;">{!Lead.OwnerFullName}</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal;background:white"><span style="font-family: Lato, serif;">{!Lead.OwnerTitle}<br>
+{!Lead.ChapterName__c}<br>
+{!Lead.OwnerEmail}<br>
+{!Lead.OwnerPhone}</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
+white"><span style="font-family: Lato, serif;">&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal;background:
+white">
 
-</p><p class="MsoNormal" style="margin-bottom: 0.0001pt; font-size: 12pt; line-height: normal; background: white;"><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">{!Lead.OwnerFullName}</span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal; background: white;"><span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><font face="Century Gothic, sans-serif">{!Lead.OwnerTitle}</font><br><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;">{!Lead.ChapterName__c}</span></font><br><font face="Century Gothic, sans-serif">{!Lead.OwnerEmail}</font><br><font face="Century Gothic, sans-serif">{!Lead.OwnerPhone}</font></span></p></div>]]></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal"><o:p>&nbsp;</o:p></p><p></p></div>]]></td>
 </tr>
 </table>

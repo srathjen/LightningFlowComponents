@@ -1,0 +1,110 @@
+<apex:page standardController="Case" extensions="InkindandReimbursement_AC" applyBodyTag="false" sidebar="false" docType="html-5.0" standardStylesheets="false">
+<link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.prospective_assets, 'web/css/lib/bootstrap.min.css')}" />
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet"/>
+<style>
+    /* client-side view (volunteer facing) */
+    body {font-size:.75rem}
+    .vcpactivelogin.full form h1+p {color:#222 !important; font-size: 1rem !important}
+    .pagewrap {font-family: "Lato", arial, san-serif !important; font-size:1rem !important; margin:0 0 4rem -1rem;}
+    .pagewrap .h1 {font-size:1.6rem; text-transform: capitalize; margin-left: 0}
+    .pagewrap .h2 {display:block; clear:both; border-top: 1px solid #0057B8; border-bottom: 1px solid #0057B8; padding:1rem 0 !important; margin:2rem 0; text-align: center; font-weight: 700}
+    .pagewrap .text-center {text-align: center !important;}
+    .pagewrap .ft-right {float:right; clear:both}
+    .pagewrap .ft-left {float:left; clear:both}
+    body .pagewrap .btn-md {background:#0057B8; padding:.375rem 1rem; color:#fff !important}
+    .p-1 {padding:1rem}
+
+    /* standard view (salesforce view)*/
+    .brandPrimaryBrd .pagewrap {font-family:'Lato',arial,sans-serif; margin:1rem auto !important; max-width:768px}
+    .brandPrimaryBrd .pagewrap.col-md-12 {float: none !important}
+    .brandPrimaryBrd .col-sf-8 {width:66.66%}
+    .brandPrimaryBrd .col-sf-lg-12 {width:100%}
+    .brandPrimaryBrd .h1 {font-size:1.6rem; text-transform: capitalize !important;}
+    .brandPrimaryBrd .pagewrap .h2 {font-size: 1.4rem}
+    .brandPrimaryBrd ol {padding:1rem !important}
+    .brandPrimaryBrd #tabBar {display:none}
+
+    @media only screen and (max-width: 768px) {
+      img {padding-bottom:2rem;}
+      .brandPrimaryBrd .col-sf-8 {width:100%}
+    }
+
+    @media print {
+      body {line-height: 26.4px; font-size: 12pt}
+      .vcpactivelogin.full form h1+p {font-size: 12pt !important}
+      .no-print {display:none}
+      img {width:560px; height:auto;}
+    }
+</style>
+<body class="inkind">
+  <apex:form id="inKindForm">
+      <div class="col-md-12 col-sf-8 pagewrap">
+        <div class="col-md-12">
+          <apex:commandLink action="{!ReturnToWish}" value="Return to Wish" styleClass="p-1 ft-right" html-data-toggle="modal" html-data-target="wffsame-alert"/>
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-6">
+            <h1 class="h1">In-Kind Donations<br/>and Reimbursements</h1>
+            <p>Thank you for your continued volunteer support! Please follow these simple steps to submit in-kind donations or request reimbursement for expenses incurred in your role as a volunteer for Make-A-Wish Arizona.</p>
+          </div>
+          <div class="col-md-6">
+            <apex:image url="{!$Resource.MAWAcommunityfooter}" styleClass="col-xs-12 ft-right"/>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <h2 class="h2 underline-text col-md-12">In-Kind Donations</h2>
+          <ol class="col-xs-12 col-sf-lg-12 col-lg-7">
+              <li>Download the Gift-In-Kind Donation Form PDF by clicking on the link below.</li>
+              <li>Complete the editable PDF form and save to your computer.</li>
+              <li>Scan or take photos of documentation of the donation value, (i.e. itemized receipts,invoices or documentation of donor stated value) to send to us along with your form.</li>
+              <li>Upload the form in case notes and tag your wish manager (case owner).</li>
+          </ol>
+          <div class="col-md-12 text-center">
+            <apex:commandButton value="In-Kind Form PDF" onclick="SaveToDisk('/servlet/servlet.FileDownload?file=01536000003GPPy','IK Form FY16 AZ');" reRender="inKindForm" styleClass="btn-md no-print"/>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <h2 class="h2 underline-text col-md-12">Reimbursement Requests</h2>
+          <ol class="col-xs-12 col-sf-lg-12 col-lg-7">
+              <li>Download the Check Request Form PDF by clicking on the link below.</li>
+              <li>Complete the editable PDF form and save to your computer.</li>
+              <li>Scan or take photos of purchase receipts to send to us along with your form.</li>
+              <li>Upload the form, along with the photos or scans of your receipts, in case notes and tag your wish manager (case owner).</li>
+              <li>Checks will be available for pickup at the chapter office unless you have indicated otherwise in Section 5 of the Check Request Form.</li>
+          </ol>
+          <div class="col-md-12 text-center">
+            <apex:commandButton value="Check Request PDF" onclick="SaveToDisk('/servlet/servlet.FileDownload?file=01536000003GPPx','CFS Check Request Form');" reRender="inKindForm" styleClass="btn-md no-print"/>
+          </div>
+        </div>
+      </div>
+    </apex:form>
+    <script>
+    function SaveToDisk(fileURL, fileName) {
+      // for non-IE
+      if (!window.ActiveXObject) {
+        var save = document.createElement('a');
+        save.href = fileURL;
+        save.target = '_blank';
+        save.download = fileName || 'unknown';
+
+        var evt = new MouseEvent('click', {
+          'view': window,
+          'bubbles': true,
+          'cancelable': false
+        });
+        save.dispatchEvent(evt);
+
+        (window.URL || window.webkitURL).revokeObjectURL(save.href);
+      }
+
+      // for IE < 11
+      else if ( !! window.ActiveXObject && document.execCommand)     {
+        var _window = window.open(fileURL, '_blank');
+        _window.document.close();
+        _window.document.execCommand('SaveAs', true, fileName || fileURL)
+        _window.close();
+      }
+    }
+    </script>
+  </body>
+</apex:page>

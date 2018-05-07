@@ -171,7 +171,7 @@ public class TravelAlgorithmWrapper {
         options.add(new SelectOption('','Please Select'));
         options.add(new SelectOption('Impaired gas exchange', 'Impaired gas exchange')); 
         options.add(new SelectOption('Not Applicable', 'Not Applicable')); 
-        //options.add(new SelectOption('I do not know', 'I do not know')); 
+        options.add(new SelectOption('I do not know', 'I do not know')); 
         return options;
     }  
     public List<SelectOption> getPulmonaryHypertensionValues() {
@@ -179,8 +179,8 @@ public class TravelAlgorithmWrapper {
         options.add(new SelectOption('','Please Select'));
         options.add(new SelectOption('With intrapulmonary shunting', 'With intrapulmonary shunting')); 
         options.add(new SelectOption('Without intrapulmonary shunting', 'Without intrapulmonary shunting'));
-        //options.add(new SelectOption('I do not know', 'I do not know')); 
-        //options.add(new SelectOption('Not Applicable','Not Applicable'));
+        options.add(new SelectOption('I do not know', 'I do not know')); 
+        options.add(new SelectOption('Not Applicable','Not Applicable'));
         return options;
     }  
     public List<SelectOption> getStrokeValues() {
@@ -188,7 +188,7 @@ public class TravelAlgorithmWrapper {
         options.add(new SelectOption('','Please Select'));
         options.add(new SelectOption('Frequent or crescendo transient ischemic attacks or strokes', 'Frequent or crescendo transient ischemic attacks or strokes')); 
         options.add(new SelectOption('Not Applicable', 'Not Applicable')); 
-        //options.add(new SelectOption('I do not know', 'I do not know')); 
+        options.add(new SelectOption('I do not know', 'I do not know')); 
         return options;
     } 
     public List<SelectOption> getconvulsiveDisorderList() {

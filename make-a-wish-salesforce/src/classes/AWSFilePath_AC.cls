@@ -269,12 +269,13 @@ It will update the file path to lead file record that created during attachment 
                     reviewPhotosSet.add(getTask.WhatId);
                 }
             }
-      }
+        }
         List<Task> reviewTaskList = new List<Task>();
         for(cg__CaseFile__c createTask : caseFileList) {
             if(!reviewPhotosSet.contains(createTask.cg__Case__c) && !dupCheck.contains(createTask.cg__Case__c)) {
                 Task reviewTask = new Task();
                 reviewTask.Subject = 'Review Volunteer Upload';
+                reviewTask.SystemGeneratedTask__c = TRUE;
                 reviewTask.WhatId = createTask.cg__Case__c;
                 reviewTask.RecordTypeId = staffTaskRT;
                 reviewTask.ActivityDate = System.today().addDays(10);

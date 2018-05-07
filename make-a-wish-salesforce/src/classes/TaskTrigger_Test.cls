@@ -375,9 +375,7 @@ Public class TaskTrigger_Test {
         interviewTask.Status = 'Approved';
         update interviewTask;
         volunteerRoleBaseIdsSet.add(volunteerContact.id);
-        TaskHandler.updateVolunteerInterviewDate(volunteerRoleBaseIdsSet,'update');
-        
-        
+        Task_OnAfterInsertHelper.updateVolunteerInterviewDate(volunteerRoleBaseIdsSet,'update');     
     }
     
     static testMethod void callInsertInterviewTaskStatus() {
@@ -389,6 +387,21 @@ Public class TaskTrigger_Test {
         Task interviewTask = new Task(Subject = 'Interview Task', WhoId = volunteerContact.Id,RecordTypeId = taskInterviewRecordType);
         insert interviewTask;
         volunteerRoleBaseIdsSet.add(volunteerContact.id);
-        TaskHandler.updateVolunteerInterviewDate(volunteerRoleBaseIdsSet,'insert');
+        Task_OnAfterInsertHelper.updateVolunteerInterviewDate(volunteerRoleBaseIdsSet,'insert');
+    }
+    
+    static testMethod void changeTaskRelatedRecord() {
+        Constant_AC  constant = new Constant_Ac();
+        Set<Id> volunteerRoleBaseIdsSet = new Set<Id>();
+        Id taskInterviewRecordType = Schema.Sobjecttype.Task.getRecordTypeInfosByName().get(constant.interviewRT).getRecordTypeId();
+        Account volunteerAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.id);
+        Contact volCon = OrientationandTrainingUtil.createVolunteerContact(volunteerAccount.id);
+        Task interviewTask = new Task(Subject = 'Interview Task', WhoId = volunteerContact.Id,RecordTypeId = taskInterviewRecordType);
+        insert interviewTask;
+        Task updateVolCon = new Task();
+        updateVolCon.Id = interviewTask.Id;
+        updateVolCon.WhoId = volCon.Id;
+        update updateVolCon;
     }
 }

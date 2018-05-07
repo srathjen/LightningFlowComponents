@@ -5,8 +5,10 @@
     <enableFeeds>false</enableFeeds>
     <fields>
         <fullName>Active__c</fullName>
-        <defaultValue>true</defaultValue>
+        <defaultValue>false</defaultValue>
+        <description>Legacy flag that controls the FE expense integration and RE project/fund export file creation for AZ chapter.</description>
         <externalId>false</externalId>
+        <inlineHelpText>Legacy flag that controls the FE expense integration and RE project/fund export file creation for AZ chapter.</inlineHelpText>
         <label>Active</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
@@ -32,6 +34,16 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Lead_Integration__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Determines whether the MuleSoft integration includes this chapter when creating IOM import files for DNQ and Qualified leads.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Determines whether the MuleSoft integration includes this chapter when creating IOM import files for DNQ and Qualified leads.</inlineHelpText>
+        <label>Lead Integration</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>RE_Database_Name__c</fullName>

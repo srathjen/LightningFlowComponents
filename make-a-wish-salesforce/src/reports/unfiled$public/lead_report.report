@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>OWNER</field>
+    </columns>
+    <columns>
+        <field>FIRST_NAME</field>
+    </columns>
+    <columns>
+        <field>LAST_NAME</field>
+    </columns>
+    <columns>
+        <field>Lead.ChapterName__c</field>
+    </columns>
+    <columns>
+        <field>LEAD_SOURCE</field>
+    </columns>
+    <columns>
+        <field>Lead.Created_Date_Time__c</field>
+    </columns>
+    <columns>
+        <field>STREET</field>
+    </columns>
+    <columns>
+        <field>EMAIL</field>
+    </columns>
+    <description>lead report after released 2.8 ( IME Track)</description>
+    <filter>
+        <criteriaItems>
+            <column>OWNER</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Wish Referral Form Site Guest User</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>notContain</operator>
+            <value>arizona</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>lead report after release</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>LeadList</reportType>
+    <scope>org</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Lead.Created_Date_Time__c</dateColumn>
+        <endDate>2018-05-02</endDate>
+        <interval>INTERVAL_CUSTOM</interval>
+        <startDate>2018-05-02</startDate>
+    </timeFrameFilter>
+</Report>

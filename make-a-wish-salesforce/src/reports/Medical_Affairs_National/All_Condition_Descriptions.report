@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Condition_Description__c$Name</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c$MAW_Name__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c$Code_To_Use__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c$Group1__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c$Treatment_Subspecialty__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c$Not_Listed__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c$Id</field>
+    </columns>
+    <format>Tabular</format>
+    <name>All Condition Descriptions</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Condition_Descriptions__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <sortColumn>Condition_Description__c$MAW_Name__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Condition_Description__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

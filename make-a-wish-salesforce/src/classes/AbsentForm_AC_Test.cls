@@ -3,11 +3,21 @@ Author : MST Solutions
 CreateDate : 03/25/2016
 Description : AbsentForm_AC_Test is used to increase the code coverage for AbsentForm_AC.
 ******************************************************************************/
+//
+//Created the method named createParentCase - Knagaraj
+//Created the method named createParentCaseWithWishChild - Kanagaraj
+//
+//Created the method named createParentCaseWithWishFamily - Kanagaraj
+//The class AbsentForm_AC_Test is used to do the unit testing for functionality
+//This class have the 3 methods
+//Last updated by kanagarj on 3/14/2018
 
 @isTest
 Public class AbsentForm_AC_Test{
     
-    //Relation ship record creation
+    //This method will create relationshiprecord
+    //This method will associate the contact with the relationship
+    //This methos used to updated the relationship record
     public static testMethod void createParentCase(){
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
         Contact contactWishParent =  OrientationandTrainingUtil.CreateWishFamily();
@@ -34,6 +44,8 @@ Public class AbsentForm_AC_Test{
         
     }
     //Email update for relation ship
+    //This method will create the parentcase record and associated with wishchild contact
+    //This method will update the relationship record
     public static testMethod void createParentCaseWithWishChild(){
         Map<Id, npe4__Relationship__c> relMap = new Map<Id, npe4__Relationship__c>();
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
@@ -69,6 +81,8 @@ Public class AbsentForm_AC_Test{
     }
     
     //Docusign callout
+    //This method will create the parent case wiah the wish family conatct
+    //The relationship record will gets updated
     public static testMethod void createParentCaseWithWishFamily(){
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
         Contact contactWishParent =  OrientationandTrainingUtil.CreateWishFamily();

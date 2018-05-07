@@ -3,21 +3,24 @@
     <apex:stylesheet value="{!URLFOR($Resource.SLDS, '/0_12_2/assets/styles/salesforce-lightning-design-system-vf.min.css')}"/>
     <apex:stylesheet value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.css')}"/>
     <apex:includeScript value="{!URLFOR($Resource.SweetAlert, 'sweet-alert.js')}"/>
+    <apex:includeScript value="/support/console/42.0/integration.js"/><!-- Added Includescript for IME-25-->
     <style type="text/css">
         th {font-weight:bold !important}
         .successMsg {color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; padding:10px; border-radius:5px}
         .alert-danger {display:none;border-radius: 5px;}
+        .alert-danger-email {display:none;border-radius: 5px;}<!-- Added per IME-59 -->        
         .alert-success {border-radius: 5px;}
         .btn-process {float: right; margin-top: 1%;}
         .slds {margin-top:3%}
         .sweet-alert button.cancel {background:#006bb6}
-        .sweet-alert button.cancel:hover {background:#006bb6; opacity:.9}
-        .confirm {background:#d33 !important}
+        .sweet-alert button.cancel:hover {background:#006bb6; opacity:.9}   
         .hideBlock {display:none}
+        .confirm {background: grey;}
     </style>
     <div class="slds">
         <apex:form id="frm">
-        <input type="hidden" value="{!URLToRedirect}" class="getUrl"/>
+            <apex:pagemessages id="msg" />
+            <input type="hidden" value="{!URLToRedirect}" class="getUrl"/>
             <div class="slds-card slds-m-horizontal--large">
                 <div class="slds-card__header slds-grid slds-grid--align-spread">
                     <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Contact to send the Diagnosis Verification</h2>
@@ -82,8 +85,12 @@
                     <div class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture alert-danger" style="float:left">
                         Please choose recipient
                     </div>
+                    <!-- Added per IME-59 -->
+                    <div class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture alert-danger-email" style="float:left">
+                        Please provide Treating Medical Professional Email or check the box for Using Paper Process for DV.
+                    </div>                    
                     <input type="button" value="Cancel" class="slds-button slds-button--neutral btn-process" onClick="Cancel();"/>
-                    <input type="button" value="Send Diagnosis Verification" onClick="PassEmailVal();" class="slds-button slds-button--neutral btn-process" style="margin-right:5px"/>
+                    <input type="button" value="Send Diagnosis Verification" onClick="PassEmailVal();" class="slds-button slds-button--brand btn-process" style="margin-right:5px"/>
                 </div>
             </div>
             <apex:actionFunction name="callupdateLead" action="{!updateLead}" reRender="frm,ChangeValue" oncomplete="GoToLeadPage()">
@@ -96,6 +103,8 @@
                 var emailTo = ''; 
                 var sendEmail = false; 
                 var email = '';
+                var paperDV = {!currLead.Using_Paper_Process_For_DV__c}//Added per IME-59
+
                 $('.selVal').each(function() { 
                     if($(this).is(':checked')) { 
                         emailTo = $(this).data( "type" ); 
@@ -105,36 +114,69 @@
                 }); 
                 if(sendEmail) { 
                     var hiddenMedEmail = '{!currLead.Part_A_Sent__c}';
-                    if(hiddenMedEmail.trim().length) {
-                        swal({
-                            title: "Are you sure you want to proceed?",
-                            text: "A Diagnosis Verification has already been sent and signed. Clicking Yes will reset all values in the DV form, and archive previous signed versions (in Docusign Status section) which cannot be undone.",
-                            showCancelButton: true,
-                            type: 'warning',
-                            confirmButtonText: '#d33',
-                            confirmButtonText: 'No',
-                            cancelButtonText: "Yes",
-                            closeOnConfirm: true,
-                            closeOnCancel: true
-                        },
-                             function(isConfirm) {
-                                 if (isConfirm) {
-                                 } else {
-                                     callupdateLead(emailTo,email,'Reset'); 
-                                 }
-                             });
-                        
-                    } else {
-                        callupdateLead(emailTo,email, 'Send');
+                    if(email.length > 1 && !paperDV){ //Added per IME-59
+                        if(hiddenMedEmail.trim().length) {
+                            swal({
+                                title: "Are you sure you want to proceed?",
+                                text: "A Diagnosis Verification has already been sent and signed. Clicking Yes will reset all values in the DV form, and archive previous signed versions (in Docusign Status section) which cannot be undone.",
+                                showCancelButton: true,
+                                type: 'warning',
+                                confirmButtonColor: '#d33',
+                                confirmButtonText: 'No',
+                                cancelButtonText: "Yes",
+                                closeOnConfirm: true,
+                                closeOnCancel: true
+                            },
+                                 function(isConfirm) {
+                                     if (isConfirm) {
+                                     } else {
+                                         callupdateLead(emailTo,email,'Reset');                                      
+                                     }
+                                 });                            
+                        } else {
+                            callupdateLead(emailTo,email, 'Send');                       
+                        }
+                    } else{
+                        //Added per IM-59
+                        $('.alert-danger-email').show();
+                        $('.alert-danger').hide();
                     }
                 } else { 
                     $('.alert-danger').show(); 
+                    $('.alert-danger-email').hide(); //Added per IME-59
                 }
             }
-            function GoToLeadPage() { 
-            
-            location.replace($('.getUrl').val());
-                //window.location.href = $('.getUrl').val(); 
+            function GoToLeadPage() {                
+                var leadId = '{!currLead.Id}';
+                if (typeof(sforce) != 'undefined' && sforce.one) {
+                    // Lightning
+                    swal({
+                        type: "success",                        
+                        icon: "success",
+                        title: "Success",
+                        confirmButtonColor: "#0070d2",
+                        text: "Diagnosis verification sent successfully.",         
+                        closeOnConfirm: true,
+                        closeOnCancel: true
+                    },
+                         function(isConfirm) {
+                             //IME-25 Check whether page is in console or not.
+                             if(sforce.console && sforce.console.isInConsole()){
+                                 var closeSubtab = function closeSubtab(result) {
+                                     //Getting current tab Id
+                                     var tabId = result.id;
+                                     sforce.console.closeTab(tabId);
+                                 };
+                                 sforce.console.getEnclosingTabId(closeSubtab);
+                             }
+                             sforce.one.navigateToSObject(leadId);
+                             
+                         });
+                    
+                }else{
+                    //classic
+                    window.location.href = '/' + leadId;                    
+                }                                               
             }
             function Cancel() {
                 window.history.back();

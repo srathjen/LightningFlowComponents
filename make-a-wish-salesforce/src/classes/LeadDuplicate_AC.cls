@@ -5,6 +5,10 @@ duplicate lead manually in Salesforce, system should not allow them to create/up
 error message along with duplicate page link. If the user clicks that link, it would redirect the user to 
 duplicate page and will display all the duplicate records related with current record. 
 Here, User can merge the records.
+
+Modification Log:
+1. 03/28/2018 - Yuvraj - IME-59 - LINE NO: 41, 56, 112-114
+2. 04/12/2018 - Yuvraj - IME-77 - LINE NO: 531
 ****************************************************************************************/
 
 Public Class LeadDuplicate_AC
@@ -26,15 +30,16 @@ Public Class LeadDuplicate_AC
     public string alternate2ConId{get;set;}
     public boolean displayPartASuccess{get;set;}
     public boolean noDuplicate{Get;set;}
+    public boolean noDuplicateBtm{Get;set;}
     public string masterLeadId;
     public boolean displayLeadDupPopup{get;set;}
     public string additionalParentId{get;set;}
-    
+    public String render{get;set;}
     Id wishFamilyRT;
     Id medicalProfessionalRT;
     Id wishChild;
     public boolean hideTreatingSection{get;set;}
-    
+    public boolean paperDVProcess{get;set;}    
     
     public List<Lead> masterLeadList {get;set;}
     
@@ -46,13 +51,17 @@ Public Class LeadDuplicate_AC
         step = 2;
         isFamilyInfo = false;
         noDuplicate = false;
+        noDuplicateBtm = false;
         displayLeadDupPopup = false;
-        hideTreatingSection = false; 
+        hideTreatingSection = false;
+        paperDVProcess = false;
         Constant_AC  constant = new Constant_Ac(); 
         wishFamilyRT = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
         medicalProfessionalRT = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
         wishChild = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
-        
+        String LogValue;
+        String recId;
+       // try{
         if(ApexPages.currentPage().getParameters().get('wishFamily') != Null)
             isFamilyInfo = Boolean.valueOf(ApexPages.currentPage().getParameters().get('wishFamily'));
         
@@ -73,7 +82,7 @@ Public Class LeadDuplicate_AC
                         Additional_Parent_State__c,Additional_Parent_Street__c,Alternate2MedProfessionalEmail__c,
                         Alternate2MedProfessionalPhone__c,Alternate2MedProfessionalLastName__c,Alternate2MedProfessionalFirstName__c,
                         Alternate1MedicalProfessionalEmail__c,Alternate1MedProfessionalPhone__c,Alternate1MedProfessionalLastName__c,
-                        Alternate1MedProfessionalFirstName__c,
+                        Alternate1MedProfessionalFirstName__c, Using_Paper_Process_For_DV__c,
                         Treating_Medical_Professional_Email__c FROM Lead
                         WHERE id = :currId limit 1];
             masterLeadList = new List<Lead>();
@@ -100,9 +109,21 @@ Public Class LeadDuplicate_AC
                     
                 }
             }
+            
+            if(currLead.Using_Paper_Process_For_DV__c){
+                paperDVProcess = true;
+            }
         }
         
+       // }
         
+       /* catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','LeadDuplicate_AC',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg);  
+        }*/
     }
     
     
@@ -110,9 +131,9 @@ Public Class LeadDuplicate_AC
     public List<leadWrapper> getdupLeadList()
     {
         List<Lead> dupLeads = new List<Lead>();
-        
-        
-        
+        String LogValue;
+        String recId;
+        //try{
         if(currLead.id != Null)
         {
             dupLeads = [SELECT id, FirstName,Name, LastName, Email, Phone, City, DOB__c,State, PostalCode,
@@ -126,7 +147,7 @@ Public Class LeadDuplicate_AC
                                                                                                                                              ((State = :currLead.State AND City = :currLead.City  AND Street = :currLead.Street
                                                                                                                                                AND PostalCode = :currLead.PostalCode) OR Phone = :currLead.Phone OR Email = :currLead.Email)) OR  (DOB__C = :currLead.DOB__c AND
                                                                                                                                                                                                                                                    (LastName = :currLead.LastName OR FirstName = :currLead.FirstName))) AND Id != :MasterLeadList[0].Id AND isConverted = false];
-        }
+       }
         
         if(wrapperList.size() <= 0)
         {
@@ -141,12 +162,25 @@ Public Class LeadDuplicate_AC
             }
         }
         return wrapperList;
+        //}
+        
+       /* catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','getdupLeadList',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg); 
+         return null; 
+        }*/
     }
     
     // Fetching Duplicate Wish Child based on the current lead.
     public List<Contact> getdupContactList()
     {
         List<Contact> dupContacts = new List<Contact>();
+        String LogValue;
+        String recId;
+        //try{
         if(currLead.id != Null)
         {
             dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
@@ -164,11 +198,23 @@ Public Class LeadDuplicate_AC
             
         }
         return dupContacts;
+       //}
+      /* catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','getdupContactList',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg); 
+         return null; 
+        }*/
     }
     // Querying duplicate Medical Professional based on the current lead. 
     public List<Contact> getdupMedicalContactList()
     {
         List<Contact> dupContacts = new List<Contact>();
+        String LogValue;
+        String recId;
+        //try{
         if(currLead.id != Null)
         {
             dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
@@ -179,11 +225,23 @@ Public Class LeadDuplicate_AC
             
         }
         return dupContacts;
+       //}
+      /* catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','getdupMedicalContactList',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg); 
+         return null; 
+        }*/
     }
     //   Querying duplicate Alternate 1 Medical Professional based on the current lead. 
     public List<Contact> getdupAlternate1MedicalContactList()
     {
         List<Contact> dupContacts = new List<Contact>();
+        String LogValue;
+        String recId;
+        //try{
         if(currLead.id != Null)
         {
             dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
@@ -193,14 +251,25 @@ Public Class LeadDuplicate_AC
                                  )];
             
         }
-        system.debug('--------------> dupContacts'+dupContacts);
         return dupContacts;
+        //}
+        /* catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','getdupAlternate1MedicalContactList',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg); 
+         return null; 
+        }*/
     }
     
     //   Querying duplicate Alternate 2 Medical Professional based on the current lead. 
     public List<Contact> getdupAlternate2MedicalContactList()
     {
         List<Contact> dupContacts = new List<Contact>();
+        String LogValue;
+        String recId;
+        //try{
         if(currLead.id != Null)
         {
             dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
@@ -211,12 +280,23 @@ Public Class LeadDuplicate_AC
             
         }
         return dupContacts;
+       // }
+        /*catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','getdupAlternate2MedicalContactList',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg); 
+         return null; 
+        }*/
     }
     // Querying duplicate Treating Medical Professional based on the current lead. 
     public List<Contact> getdupTreatingContactList()
     {
         List<Contact> dupContacts = new List<Contact>();
-        
+        String LogValue;
+        String recId;
+       // try{
         if(currLead.id != Null)
         {
             dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
@@ -228,6 +308,15 @@ Public Class LeadDuplicate_AC
             
         }
         return dupContacts;
+        //}
+       /* catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','getdupTreatingContactList',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg); 
+         return null; 
+        }*/
     }
     
     
@@ -235,7 +324,9 @@ Public Class LeadDuplicate_AC
     public List<Contact> getbestPhysicianContactList()
     {
         List<Contact> dupContacts = new List<Contact>();
-        
+        String LogValue;
+        String recId;
+        //try{
         if(currLead.id != Null)
         {
             dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
@@ -247,6 +338,15 @@ Public Class LeadDuplicate_AC
             
         }
         return dupContacts;
+       // }
+        /* catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','getbestPhysicianContactList',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg); 
+         return null; 
+        }*/
     }
     
     
@@ -254,6 +354,9 @@ Public Class LeadDuplicate_AC
     public List<Contact> getdupParentContactList()
     {
         List<Contact> dupContacts = new List<Contact>();
+        String LogValue;
+        String recId;
+       // try{
         if(currLead.id != Null)
         {
             dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
@@ -273,6 +376,16 @@ Public Class LeadDuplicate_AC
             
         }
         return dupContacts;
+       // }
+       /* catch(Exception ex){
+         
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','getdupParentContactList',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg); 
+         return null; 
+        }*/
     }
     
     
@@ -280,6 +393,9 @@ Public Class LeadDuplicate_AC
     public List<Contact> getAdditionalParentContactList()
     {
         List<Contact> dupContacts = new List<Contact>();
+        String LogValue;
+        String recId;
+        //try{
         if(currLead.id != Null)
         {
             dupContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
@@ -300,13 +416,25 @@ Public Class LeadDuplicate_AC
             
         }
         return dupContacts;
+       // }
+       /* catch(Exception ex){
+         
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','getAdditionalParentContactList',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg); 
+         return null; 
+        }*/
     }
     
     
     // Mark the Master record by default for merging. If user want to change, then can change it using radio button.
     public void selectDefaultRecord() {
+        String LogValue;
+        String recId;
         String recordId = Apexpages.currentPage().getParameters().get('recordId');
-        //UTIL_Debug.debug('Selected Record: ' + recordId);
+       //try{
         if (recordId != null && selectedRecords.keySet().contains(recordId)) {
             for (FieldRow row : fieldRows) {
                 if (row.showRadio) {
@@ -314,6 +442,16 @@ Public Class LeadDuplicate_AC
                 }
             }
         }
+       // }
+        /*catch(Exception ex){
+         
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','selectDefaultRecord',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg); 
+        
+        }*/
     }
     
     // Its redirect the user to Merge page once they choosen duplicates.
@@ -321,7 +459,11 @@ Public Class LeadDuplicate_AC
     public pageReference nextStep() 
     {
         
-        set<Id> mergeIds = new set<Id>(); 
+        set<Id> mergeIds = new set<Id>();
+        String LogValue;
+        String recId;
+        
+        try{
         for (leadWrapper c : wrapperList) 
         {
             System.debug('c++++++++++++++++++++++++++++++++++++++ ' + c);
@@ -330,13 +472,13 @@ Public Class LeadDuplicate_AC
             }
         }
         
-        if(noDuplicate == True && mergeIds.size() > 0)
+        if((noDuplicate == True || noDuplicateBtm == True) && mergeIds.size() > 0)
         {
             ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, 'You can either choose "No duplicate Found" or any lead(s) under Select Existing Leads.'));
             return null;
         }      
         
-        else if(noDuplicate == True)
+        else if(noDuplicate == True || noDuplicateBtm == True)
         {
             Lead updateLead = new Lead();
             updateLead.id = currLead.id;
@@ -349,25 +491,23 @@ Public Class LeadDuplicate_AC
         }
         else
         {
-            /*  set<Id> mergeIds = new set<Id>(); 
-for (leadWrapper c : wrapperList) {
-System.debug('c++++++++++++++++++++++++++++++++++++++ ' + c);
-if (c.selected) {
-mergeIds.add(c.currentLead.Id);
-}
-} */
-            
-            System.debug('mergeIds+++++++++++++++++++++++++++++ ' + mergeIds);
             mergeIds.add(MasterLeadList[0].Id);
-            System.debug('mergeIds1++++++++++++++++++++++++++++++++++++++ ' + mergeIds);
-            
             loadMergeCandidates(mergeIds);
         }
+       }
+       catch(Exception ex){
+         
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','nextStep',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg); 
         
+        }
         return null;
     }
     
-    // Wrapper class 
+    // Wrapper class -demp
     public class leadWrapper {
         public Lead currentLead{get; set;}
         public Boolean selected {get; set;}
@@ -381,11 +521,14 @@ mergeIds.add(c.currentLead.Id);
     //Submitting for Diagnosis Verification. 
     public pageReference ContinuePartAForm()
     {
-        
+        String LogValue;
+        String recId;
+        try{
         Lead updateLead = new Lead();
         updateLead.id = currLead.Id;
         
         updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        updateLead.Pending_Diagnosis_Date__c = Date.today();//IME-77
         updateLead.Override_Dupe_Check__c = True;
         updateLead.Medical_Professional_ContactId__c = medicalConId;
         updateLead.HiddenAlternate1MedProfessionalId__c = alternate1ConId;
@@ -402,13 +545,6 @@ mergeIds.add(c.currentLead.Id);
         updateLead.Hidden_Additional_Parent_Id__c = additionalParentId;
         updateLead.Contact_Dup_Check__c = 'Block Contact Dup';
         updateLead.Dup_Check__c = 'Block Lead Dup';
-        /*if(currLead.Best_contact_for_Physician_Email__c == NULL || currLead.Alternate1MedicalProfessionalEmail__c == NULL || currLead.Alternate2MedProfessionalEmail__c == NULL) {
-
-System.debug('>>>>>>12'+currLead.Hidden_DV_form_Medical_professional_Type__c+'<<<<<'+updateLead.Of_Times_Email_Sent__c+'>>>'+updateLead.HiddenMedicalProfessionalEmail__c);
-updateLead.Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
-updateLead.HiddenMedicalProfessionalEmail__c = currLead.Treating_Medical_Professional_Email__c;
-
-}*/
         
         if(currLead.Best_contact_for_Physician_Email__c == NULL && currLead.Alternate1MedicalProfessionalEmail__c == NULL && currLead.Alternate2MedProfessionalEmail__c == NULL) {
             updateLead.Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
@@ -428,14 +564,25 @@ updateLead.HiddenMedicalProfessionalEmail__c = currLead.Treating_Medical_Profess
             reference.setRedirect(true);
             return reference;
         }
-        
-        return null;   
-        
+      }
+      
+        catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','ContinuePartAForm',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg);
+         
+       }  
+        return null; 
     }
     //Completing dupcheck
     public PageReference CompleteDupeCheck()
     {
-        
+        String LogValue;
+        String recId;
+        try{
+        render = 'frm';
         Lead updateLead = new Lead();
         updateLead.id = currLead.Id;
         updateLead.HiddenAlternate1MedProfessionalId__c = alternate1ConId;
@@ -456,7 +603,17 @@ updateLead.HiddenMedicalProfessionalEmail__c = currLead.Treating_Medical_Profess
         PageReference reference=new PageReference('/'+currLead.id);
         reference.setRedirect(true);
         return reference;
+        }
         
+        catch(Exception ex){
+         render = 'msg';
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','CompleteDupeCheck',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg);
+         return null; 
+       }  
     }
     
     // Redirecting to Lead Detail page.
@@ -475,8 +632,10 @@ updateLead.HiddenMedicalProfessionalEmail__c = currLead.Treating_Medical_Profess
 * @description Shows the next step of the wizard where user can see the diff of the records before merge.
 */
     private void loadMergeCandidates(set<Id> mergeCandidates) 
-    {
-        
+    {    
+        String LogValue;
+        String recId;
+        try{
         boolean flag=true; 
         System.debug('mergeCandidates+++++++++++++++++++++++++++++ ' + mergeCandidates);
         // Check we have atleast 2 and not more than 3 records selected for merge. If not throw an error. 
@@ -639,15 +798,26 @@ updateLead.HiddenMedicalProfessionalEmail__c = currLead.Treating_Medical_Profess
             this.step = 3;
             // If everything looks good go to "choose winning contact" step
         }
-        
+        }
+        catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','loadMergeCandidates',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg);
+          
+       }  
     }
     
     private string getRelatedObjNameField(Schema.DescribeFieldResult fieldDesc) 
     {
         string nameField = 'Name';
+        String LogValue;
+        String recId;
         Map<String, Schema.SObjectField> mapRelatedObjectFields = fieldDesc.getReferenceTo()[0].getDescribe().fields.getMap();
         
         //if Name isn't the correct name field, find it
+       // try{
         if (!mapRelatedObjectFields.containsKey(nameField)) {
             nameField = null;
             for (String relatedFieldName : mapRelatedObjectFields.keySet()) {
@@ -656,6 +826,15 @@ updateLead.HiddenMedicalProfessionalEmail__c = currLead.Treating_Medical_Profess
             }
         }
         return nameField;
+       // }
+        /* catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','getRelatedObjNameField',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg);
+         return null; 
+       } */
     }
     
     // Wrapper class for displaying selected records for merge with radio button.
@@ -693,6 +872,9 @@ updateLead.HiddenMedicalProfessionalEmail__c = currLead.Treating_Medical_Profess
     
     private void addFieldComparisonRows(String fieldName, Schema.DescribeFieldResult fieldDesc, List<SObject> objs) {
         // Create a new FieldRow item
+        String LogValue;
+        String recId;
+        try{
         FieldRow row = new FieldRow();
         row.fieldName = fieldName;
         
@@ -766,26 +948,24 @@ updateLead.HiddenMedicalProfessionalEmail__c = currLead.Treating_Medical_Profess
             row.showRadio = (isDifferent && !fieldName.equalsIgnoreCase('accountId'));
             fieldRows.add(row);
         }
+       }
+        catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','addFieldComparisonRows',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg);
+          
+       } 
     }
     
-    /* private boolean isNPSPHiddenField(string strField) {
-list<string> listStrField = new list<string>{
-'npe01__SystemAccountProcessor__c',
-'npo02__SystemHouseholdProcessor__c',
-'npe01__SystemIsIndividual__c',
-'Current_Address__c'
-};
-
-for (string strF : listStrField) {
-if (strField.equalsIgnoreCase(strF))
-return true;
-}
-return false;
-}*/
-    
+   
     public PageReference mergeContacts() {
         SObject master;
+        String LogValue;
+        String recId;
         // Find the master record based the selected value of the Master FieldRow
+        try{
         for (FieldRow row : fieldRows) {
             if (row.showRadio && row.fieldName.equals(MASTER_KEY)) {
                 master = new Lead(id = row.selectedValue,Override_Dupe_Check__c=True);             
@@ -816,16 +996,17 @@ return false;
             
             // Group all the loosing records separately.
             List<Lead> losers = new List<Lead>();
-            
+            Set<Id> loserIdSet = new Set<Id>();
             for (Lead c : this.selectedRecords.values()) {
                 if (c.id != master.id) {
                     c.Override_Dupe_Check__c=True;
                     losers.add(c);
+                    loserIdSet.add(c.Id);
                 }   
             }
             
             List<Lead_File__c> leadFileList = new List<Lead_File__c>();
-            for(Lead_File__c currRec : [SELECT Id,Parent__c FROM Lead_File__c WHERE Parent__c =:losers[0].Id]){
+            for(Lead_File__c currRec : [SELECT Id,Parent__c FROM Lead_File__c WHERE Parent__c IN :loserIdSet]){
                 currRec.Parent__c = master.id;
                 leadFileList.add(currRec);
             }
@@ -884,6 +1065,7 @@ return false;
                 if(duplicateLeadList.size() > 0)
                 {
                     displayLeadDupPopup = true;
+                    render = 'mergeForm';
                 }
                 else
                 {
@@ -891,7 +1073,7 @@ return false;
                     updateLead.id = masterLeadId;
                     updateLead.Dup_Check__c = 'Block Lead Dup';
                     update updateLead;                               
-                    
+                    render = 'mergeForm';
                     return new PageReference('/' + updateLead.id); 
                     
                 }   
@@ -900,12 +1082,22 @@ return false;
                 
             } catch (Exception e) {
                 Database.rollback(sp);
+                render = 'msg';
                 ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, label.npe01.Contact_Merge_Error_Merge_Failed + ' Error: ' + e));
             }
         } else {
             ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.Error, label.npe01.Contact_Merge_Error_No_Master));
         }
-        
+        }
+        catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         render = 'msg';
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','mergeContacts',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg);
+          
+       } 
         return null;
     }
     
@@ -922,11 +1114,23 @@ return false;
     }
     
     Public PageReference isNo()
-    {
+    {   
+        String LogValue;
+        String recId;
+        try{
         Lead updateLead = new Lead();
         updateLead.id = masterLeadId;
         updateLead.Dup_Check__c = 'Block Lead Dup';
         update updateLead;
-        return new PageReference('/' + updateLead.id);   
+        return new PageReference('/' + updateLead.id);
+        }
+         catch(Exception ex){
+         Logvalue = string.valueof(currLead);
+         recId = ApexPages.currentPage().getParameters().get('Id');
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadDuplicate_AC','isNo',recId,ex,Logvalue));
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg);
+          return null;
+       }    
     }
 }

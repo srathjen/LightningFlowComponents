@@ -38,6 +38,7 @@ Description : This page is used to display volunteer Open and Closed task list
                     <h1>My Tasks</h1>
                     <apex:outputPanel id="refreshForm">
                         <apex:form >
+                      <div class="messages"><apex:pagemessages id="msg"/></div>
                             <div class="pad">
                                 
                                 <!-------------- Open & Close task button block Starts -------------->
@@ -97,7 +98,7 @@ Description : This page is used to display volunteer Open and Closed task list
                                                 </apex:repeat>
                                             </tbody>
                                         </table>
-                                        <apex:actionFunction name="closeTask" action="{!closeTask}" reRender="ssss" oncomplete="RedirectToPage();" status="status">
+                                        <apex:actionFunction name="closeTask" action="{!closeTask}" reRender="ssss,msg" oncomplete="RedirectToPage();" status="status">
                                             <apex:param name="taskId1" value="{!taskId}" assignTo="{!taskId}"/>
                                         </apex:actionFunction>
                                     </apex:pageBlock>

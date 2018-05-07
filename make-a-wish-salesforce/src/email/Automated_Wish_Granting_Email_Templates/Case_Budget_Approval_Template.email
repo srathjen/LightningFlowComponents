@@ -1,19 +1,24 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p style="background: white; margin: 0px; line-height: normal;"><span style="margin: 0px; color: black; font-family: &quot;Century Gothic&quot;,sans-serif; font-size: 12pt;">Hello,<br>
+<![CDATA[<p style="margin:0in;margin-bottom:.0001pt;background:white"><span style="font-family: Lato, sans-serif;">Hello,<br>
 <br>
 The following budget has been assigned to you for approval. Please click the
-link below to review the submission.</span></p>
-
-<p style="background: white; margin: 0px; line-height: normal;"><span style="margin: 0px; color: black; font-family: &quot;Arial&quot;,sans-serif; font-size: 12pt;"><br>
-</span><span style="margin: 0px; color: black; font-family: &quot;Century Gothic&quot;,sans-serif; font-size: 12pt;">Wish Child:&nbsp;{!Case.Hidden_Wish_Child_Full_Name__c}</span><span style="margin: 0px; color: black; font-family: &quot;Arial&quot;,sans-serif; font-size: 12pt;"><br>
-</span><span style="margin: 0px; color: black; font-family: &quot;Century Gothic&quot;,sans-serif; font-size: 12pt;"><span style="margin: 0px; color: blue;"><a href="https://na30.salesforce.com/apex/WishBudgetForm_VF?CaseId={!Case.ParentId}">Click Here to Review Budget</a></span><br>
-</span></p><p style="background: white; margin: 0px; line-height: normal;"><span style="margin: 0px; color: black; font-family: &quot;Century Gothic&quot;,sans-serif; font-size: 12pt;"><br>
+link below to review the submission.<o:p></o:p></span></p><p style="margin: 0in 0in 0.0001pt; background: white;"><span style="font-family: Lato, sans-serif;"><br>
+Wish Child:&nbsp;{!Case.Hidden_Wish_Child_Full_Name__c}<br>
+</span><span style="font-family:&quot;Lato&quot;,sans-serif;mso-bidi-font-family:Arial;
+color:blue"><a href="https://na30.salesforce.com/apex/WishBudgetForm_VF?CaseId=%7b!Case.ParentId%7d">Click
+Here to Review Budget</a></span><span style="font-family: Lato, sans-serif;"><o:p></o:p></span></p><p style="margin: 0in 0in 0.0001pt; background: white;"><span style="font-family: Lato, sans-serif;"><br>
 Thanks,<br>
 <br>
 {!User.Name}<br>
 {!User.Title}<br>
-{!Case.Hidden_Chapter_Name__c}</span></p>]]></td>
+{!Case.Hidden_Chapter_Name__c}<o:p></o:p></span></p><p style="background: white; margin-right: 0px; margin-left: 0px; line-height: normal;">
+
+
+
+
+
+</p><p class="MsoNormal"><span style="font-family:&quot;Lato&quot;,sans-serif">&nbsp;</span></p>]]></td>
 </tr>
 </table>

@@ -1,9 +1,25 @@
-<apex:page standardController="Case" extensions="WishParticipants_AC" tabStyle="Case" cache="false" standardStylesheets="false">
-    <apex:form >
-        <apex:outputPanel rendered="{!ParticipantsConList.Size > 0}">
+<apex:page standardController="Case" extensions="WishParticipants_AC" tabStyle="Case" cache="false" standardStylesheets="false">   
+     <style type="text/css">
+          .fontcolor{
+               color: #00B0F0;
+            }
+          table {
+            border-spacing: 0px;     
+        }
+        tr.border_top td{
+          //padding: 5px;
+          border-top:1pt Solid;
+          border-top-color: #ECECEC;
+          
+        }   
+       table td {width:100px; word-wrap:break-word;align:right; }
+     </style>
+    <apex:form >       
             <table style="width:100%" cellpadding="3%">
-                <tr style="height:30%" borderwidth="10%">
-                    <th></th>
+                <tr><td colspan="10" align="right"><b><apex:image value="{!$Resource.HelpText}" width="12" height="12" title="Total number of official wish participants, including the wish child."/>&nbsp;Total Approved Participants:&nbsp;{!totalParticipants}</b></td></tr>
+                <apex:outputPanel rendered="{!ParticipantsConList.Size > 0}">
+                <tr class="border_top">
+                    <th>Action</th>
                     <th>First Name</th>
                     <th>Middle Name</th>
                     <th>Last Name</th>
@@ -15,8 +31,8 @@
                     <th>Non-Comped</th>
                 </tr>
                 <apex:repeat value="{!ParticipantsConList}" var="Participant">
-                    <tr>
-                        <td><a href="/{!Participant.npe4__RelatedContact__c}" target="_blank">View</a></td>
+                    <tr class="border_top">
+                        <td><div class = "fontcolor" ><a href="/{!Participant.npe4__RelatedContact__c}" target="_blank" class = "fontcolor">View</a></div></td>
                         <td>{!Participant.npe4__RelatedContact__r.FirstName}</td>
                         <td>{!Participant.npe4__RelatedContact__r.Middle_Name__c}</td>
                         <td>{!Participant.npe4__RelatedContact__r.LastName}</td>
@@ -24,15 +40,18 @@
                              <apex:param value="{!Participant.npe4__RelatedContact__r.Birthdate}"/>
                              </apex:outputText></td>
                         <td>{!Participant.npe4__Type__c}</td>
-                        <td>{!Participant.npe4__RelatedContact__r.Current_Age__c}</td>
+                      <!--  <td>{!Participant.npe4__RelatedContact__r.CurrentAge__c}</td> -->
+                        <td>
+                            <apex:outputText value="{!Participant.npe4__RelatedContact__r.CurrentAge__c}" escape="false" rendered="{!(!Participant.Non_Comped__c)}"/>
+                            <apex:outputText value="{!Participant.npe4__RelatedContact__r.Current_Age__c}" escape="false" rendered="{!Participant.Non_Comped__c}"/>
+                        </td>
                         <td>{!Participant.Parent_Legal_Guardian__c}</td>
                         <td>{!Participant.Medical_Needs__c}</td>
                         <!-- <td>{!Participant.Non_Comped__c }</td> -->
                         <td><apex:outputField value="{!Participant.Non_Comped__c }"/></td> 
                     </tr>
                 </apex:repeat>
-            </table>       
-        </apex:outputPanel>
-        
+                </apex:outputPanel>
+            </table>    
     </apex:form>
 </apex:page>

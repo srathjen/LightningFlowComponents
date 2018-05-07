@@ -1,15 +1,40 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><font face="Century Gothic, sans-serif" style=""><span style="background-color: rgb(255, 255, 255);">Wish Granters,<br></span></font><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">&nbsp;</span></p>
-
-<p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Thank
-you for volunteering for&nbsp;</span><font face="Century Gothic, sans-serif">{!Case.Hidden_Wish_Child_FirstName__c}<span style="font-size: 12pt;">’s wish.<br></span></font><br></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size:12.0pt;font-family:&quot;Century Gothic&quot;,sans-serif">According to the wish
+<![CDATA[<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">Wish
+Granters,<br>
+</span><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thank you for
+volunteering for&nbsp;{!Case.Hidden_Wish_Child_FirstName__c}’s wish.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">According to the wish
 child’s record, the date for the initial interview has taken place. However, we
-have not received the completed wish forms for approval.<br><br></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">To submit the forms, please visit the&nbsp;</span><a href="https://make-a-wish.force.com/communitieslogin" style="font-size: 12pt; background-color: rgb(255, 255, 255); font-family: &quot;Century Gothic&quot;, sans-serif;">Make-A-Wish Volunteer Center</a><font face="arial"><span style="font-size: 12pt;">,</span></font><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">&nbsp;click<b> "My Assignments"</b>, and then click <b>"View"</b> to access the wish child's record.&nbsp;</span><font face="Century Gothic, sans-serif">You can access the forms by scrolling to the Wish Related Forms section and clicking on the form name to complete the necessary form.<br><br></font></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size:12.0pt;font-family:&quot;Century Gothic&quot;,sans-serif">If you are experiencing difficulties submitting the forms, we encourage you to search the<b> "Help"</b> section for step-by-step How-to Guides and videos that will walk you through the requirements of each form.<br><br></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;">If you continue to </span>experience<span style="font-size: 12pt;">&nbsp;difficulties submitting the forms, please let me know.<br><br></span></font></p>
+have not received the completed wish forms for approval.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">To submit the forms,
+please visit the&nbsp;<a href="https://make-a-wish.force.com/communitieslogin"><span style="color:blue;background:white">Make-A-Wish Volunteer Center</span></a>,&nbsp;click<b>&nbsp;"My
+Assignments"</b>, and then click&nbsp;<b>"View"</b>&nbsp;to
+access the wish child's record.&nbsp;You can access the forms by scrolling to
+the Wish Related Forms section and clicking on the form name to complete the
+necessary form.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">If you are
+experiencing difficulties submitting the forms, we encourage you to search the<b>&nbsp;"Help"</b>&nbsp;section
+for step-by-step How-to Guides and videos that will walk you through the
+requirements of each form.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">If you continue
+to&nbsp;experience&nbsp;difficulties submitting the forms, please let me know.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thanks,<br>
+&nbsp;<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Case.Case_email_signature__c}<o:p></o:p></span></p><p class="MsoNormal" style="font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;">
 
-<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size:12.0pt;font-family:&quot;Century Gothic&quot;,sans-serif">Thanks,<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">&nbsp;</span></p>
 
-<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><font face="Century Gothic, sans-serif">{!Case.Case_email_signature__c}</font></p>]]></td>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal"><span style="font-family:&quot;Lato&quot;,sans-serif">&nbsp;</span></p>]]></td>
 </tr>
 </table>

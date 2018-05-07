@@ -27,20 +27,20 @@
           <div style="width:24%;float:left;margin:0 10px 0 0;" type="text"><div class="{!IF(currWishChild.LastName__c==null,'newfont','oldfont')}" style="border-bottom:1px solid #000 !important; border:none;">{!currWishChild.LastName__c}</div><div style="font-size:14px;font-style:italic;">Last</div></div>
      </div>    
       
-      <div style="clear:both"></div>
+     <div style="clear:both"></div>
       <div style="margin-top:14px;">
           <div style="width:17% !important; float:left; font-weight:normal;">Preferred Name :</div>
           <div class="{!IF(currWishChild.Preferred_Name__c==null,'newfont','oldfont')}" style="width:15%; float:left;margin:0 10px 0 0; border-bottom:1px solid #000 !important;margin-top:0% !important;padding-left:1.6em !important;border:none;" >{!if((currWishChild.Preferred_Name__c)==null,"-",currWishChild.Preferred_Name__c)}</div>
-          <div style="width:10% !important; float:left; font-weight:normal;">Gender : </div>
-          <div class="{!IF(currWishChild.Gender__c==null,'newfont','oldfont')}" style="width:15%; float:left;margin:0 10px 0 0;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.Gender__c==null,"-",currWishChild.Gender__c)}</div>   
           <div style="width:7% !important; float:left; font-weight:normal;">DOB :</div>
           <div class="{!IF(currWishChild.BirthDate__c==null,'newfont','oldfont')}" style="width:15%; float:left;margin:0 10px 0 0;border-bottom:1px solid #000 !important; border:none;margin:0 20px 0 0;"><apex:outputField value="{!currWishChild.BirthDate__c}" /></div>
-         
-
-     </div>
+          <div style="width:10% !important; float:left; font-weight:normal;">Gender : </div>
+          <div class="{!IF(currWishChild.Gender__c==null,'newfont','oldfont')}" style="width:15%; float:left;margin:0 10px 0 0;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.Gender__c==null,"-",currWishChild.Gender__c)}</div>   
+       </div>
          
       <div style="clear:both"></div>
-      <div style="margin-top:14px;">
+      <div style="margin-top:5px;">
+          <div style="width:20% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Gender Description :</div>
+          <div class="{!IF(currWishChild.Self_describe_comment_box__c==null,'newfont','oldfont')}" style="width:75%; float:left; margin:3% 0 0 0; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.Self_describe_comment_box__c==null,'-',currWishChild.Self_describe_comment_box__c)}</div>
           <div style="width:25% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Wish Child’s Diagnosis :</div>
           <div class="{!IF(currWishChild.Diagnosis__c==null,'newfont','oldfont')}" style="width:67%; float:left; margin:3% 0 0 0; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.Diagnosis__c==null,'-',currWishChild.Diagnosis__c)}</div>
           <div style="width:30% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Wish Child’s Primary Address :</div>
@@ -83,7 +83,7 @@
               <div style="margin-bottom:30px;display:block;clear:both;"><span style="width:32%; float:left;">Actor/Actress</span><div class="{!IF(currWishChild.Actor_Actress__c==null,'newfont','oldfont')}" style="width:65%; margin:3px 0 0 0; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.Actor_Actress__c==null,'-',currWishChild.Actor_Actress__c)}</div></div>
               <div style="margin-bottom:30px;display:block;clear:both;"><span style="width:32%; float:left;">Sport/Athlete</span><div class="{!IF(currWishChild.Sport_Athlete__c==null,'newfont','oldfont')}" style="width:65%; margin:3px 0 0 0; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.Sport_Athlete__c==null,'-',currWishChild.Sport_Athlete__c)}</div></div>
               <div style="margin-bottom:30px;display:block;clear:both;"><span style="width:32%; float:left;">Pet/Animal</span><div class="{!IF(currWishChild.Pet_Animal__c==null,'newfont','oldfont')}" style="width:65%; margin:3px 0 0 0; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.Pet_Animal__c==null,'-',currWishChild.Pet_Animal__c)}</div></div>
-              <div style="margin-bottom:30px;display:block;clear:both;"><span style="width:32%; float:left;">Other</span><div class="{!IF(currWishChild.Other__c ==null,'newfont','oldfont')}" style="width:65%; margin:3px 0 0 0; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.Other__c ==null,'-',currWishChild.Other__c )}</div></div>
+              <div style="margin-bottom:30px;display:block;clear:both;"><span style="width:32%; float:left;">Other</span><div class="{!IF(currWishChild.Other__c==null,'newfont','oldfont')}" style="width:65%; margin:3px 0 0 0; float:left;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.ClassinSchool__c==null,'-',currWishChild.ClassinSchool__c)}</div></div>
           </div>
           
           <div style="clear:both"></div>
@@ -452,7 +452,7 @@ individual(s) listed below.</p>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">{!detail.driverName}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!detail.licenseNum}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!detail.state}</td>
-                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}" ><apex:param value="{!detail.expirationDate}" /></apex:outputText></td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!detail.expirationDate}</td>
                
               
             </tr>

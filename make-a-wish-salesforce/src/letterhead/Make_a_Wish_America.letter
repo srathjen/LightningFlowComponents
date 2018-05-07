@@ -8,17 +8,17 @@
         <height>0</height>
     </bottomLine>
     <footer>
-        <backgroundColor>#006db5</backgroundColor>
+        <backgroundColor>#0057b8</backgroundColor>
         <height>25</height>
         <horizontalAlignment>Left</horizontalAlignment>
         <verticalAlignment>Top</verticalAlignment>
     </footer>
     <header>
-        <backgroundColor>#006db5</backgroundColor>
+        <backgroundColor>#0057B8</backgroundColor>
         <height>100</height>
-        <horizontalAlignment>Right</horizontalAlignment>
+        <horizontalAlignment>Center</horizontalAlignment>
         <logo>SharedDocuments/MAWALogo.png</logo>
-        <verticalAlignment>Top</verticalAlignment>
+        <verticalAlignment>Middle</verticalAlignment>
     </header>
     <middleLine>
         <color>#006eb3</color>

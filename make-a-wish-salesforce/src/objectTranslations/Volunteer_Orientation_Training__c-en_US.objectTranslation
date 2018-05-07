@@ -175,6 +175,13 @@
         <relationshipLabel><!-- Volunteer Orientation &amp; Trainings --></relationshipLabel>
     </fields>
     <layouts>
+        <layout>Volunteer Orientation &amp; Training Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Volunteer Orientation &amp; Training Layout</layout>
         <sections>
             <label><!-- Custom Links --></label>

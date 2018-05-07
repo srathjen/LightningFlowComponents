@@ -10,11 +10,11 @@ Affiliation record status as Prospective.
 *************************************************************************************************/
 
 Public class UserTriggerHandler{
-    set<String> chapterNameSet = new Set<String>();
-    Map<String,Group> existingGroupMap = new Map<String,Group>();
-    Map<String,Group> newGroupMap = new Map<String,Group>();
-    List<Group> groupList = new List<Group>();
-    List<GroupMember> groupMemberList = new List<GroupMember>();
+    /*set<String> chapterNameSet = new Set<String>();
+Map<String,Group> existingGroupMap = new Map<String,Group>();
+Map<String,Group> newGroupMap = new Map<String,Group>();
+List<Group> groupList = new List<Group>();
+List<GroupMember> groupMemberList = new List<GroupMember>();*/
     
     /* Create a public group and group member.*/
     /*  public void createpublicGroup(List<User> userList){
@@ -74,7 +74,7 @@ insert groupMemberList ;
                 updateContact.MailingPostalCode = prospectiveUserMap.get(currRec.id).PostalCode;
                 updateContact.mobilephone = prospectiveUserMap.get(currRec.id).Phone;
                 updateContact.homePhone = null;
-                updateContact.Preferred_Phone_Types__c='Mobile';
+                updateContact.npe01__PreferredPhone__c = 'Mobile';
                 if(currRec.Account.Volunteer_Manager__c != null) {
                     updateContact.OwnerId = currRec.Account.Volunteer_Manager__c;
                 }
@@ -214,25 +214,44 @@ insert groupMemberList ;
     @future
     public static void updateConatcEmail(Map<Id,Id> contactIdMap){
         Map<Id,User> contactUserMap = new Map<Id,User>();
-        for(User currUser : [SELECT Id,Email,ContactId FROM USER WHERE Id IN : contactIdMap.values()]){
+        for(User currUser : [SELECT Id,FirstName,LastName,Email,MobilePhone,ContactId,Street,City,State,PostalCode,Country,Fax FROM USER WHERE Id IN : contactIdMap.values()]){
             contactUserMap.put(currUser.contactId,currUser);
         }
         List<Contact> updateContactList = new List<Contact>();
-        for(contact currRec : [SELECT Id,Email FROM Contact WHERE Id IN : contactIdMap.keySet() AND Email != Null]){
-            if(contactUserMap.Containskey(currRec.Id) && currRec.Email != contactUserMap.get(currRec.Id).Email){
+        for(contact currRec : [SELECT Id,FirstName,LastName,Email,MobilePhone,Mailingstreet,MailingCity,MailingState,MailingCountry,MailingPostalCode,Fax FROM Contact WHERE Id IN : contactIdMap.keySet() AND Email != Null]){
+            if(contactUserMap.Containskey(currRec.Id) && currRec.Email != contactUserMap.get(currRec.Id).Email)
                 currRec.Email = contactUserMap.get(currRec.Id).Email;
-                updateContactList.add(currRec);
-            }             
+            if(contactUserMap.Containskey(currRec.Id) && currRec.MobilePhone != contactUserMap.get(currRec.Id).MobilePhone)
+                currRec.MobilePhone = contactUserMap.get(currRec.Id).MobilePhone;           
+            if(contactUserMap.Containskey(currRec.Id) && currRec.FirstName!= contactUserMap.get(currRec.Id).FirstName)
+                currRec.FirstName = contactUserMap.get(currRec.Id).FirstName;
+            if(contactUserMap.Containskey(currRec.Id) && currRec.LastName != contactUserMap.get(currRec.Id).LastName)
+                currRec.LastName = contactUserMap.get(currRec.Id).LastName;
+            if(contactUserMap.Containskey(currRec.Id) && currRec.mailingStreet != contactUserMap.get(currRec.Id).Street)
+                currRec.mailingStreet  = contactUserMap.get(currRec.Id).Street;
+            if(contactUserMap.Containskey(currRec.Id) && currRec.mailingCity != contactUserMap.get(currRec.Id).City )
+                currRec.mailingCity = contactUserMap.get(currRec.Id).City;
+            if(contactUserMap.Containskey(currRec.Id) && currRec.mailingState != contactUserMap.get(currRec.Id).State)
+                currRec.mailingState = contactUserMap.get(currRec.Id).State;  
+            if(contactUserMap.Containskey(currRec.Id) && currRec.mailingCountry != contactUserMap.get(currRec.Id).Country)
+                currRec.mailingCountry = contactUserMap.get(currRec.Id).Country;
+            if(contactUserMap.Containskey(currRec.Id) && currRec.mailingPostalCode != contactUserMap.get(currRec.Id).PostalCode)
+                currRec.mailingPostalCode = contactUserMap.get(currRec.Id).PostalCode;
+            if(contactUserMap.Containskey(currRec.Id) && currRec.Fax != contactUserMap.get(currRec.Id).Fax)
+                currRec.Fax = contactUserMap.get(currRec.Id).Fax;
+               
+                
+            updateContactList.add(currRec);             
         }
         
         if(updateContactList.Size() > 0 ){
             Update updateContactList;
         }
-    
+        
     }
     
     
-  
+    
     //This method is used to update chaptername based on the user role after user insert or update user role 
     /* public static void updateUserChapterName(set<string> userIdsSet){
 set<string> userROleNamesSet = new set<string>();

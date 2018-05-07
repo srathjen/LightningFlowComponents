@@ -86,6 +86,13 @@
         <name>Volunteer_is_Inactive__c</name>
     </fields>
     <layouts>
+        <layout>Conflict Of Interest Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Conflict Of Interest Layout</layout>
         <sections>
             <label><!-- Custom Links --></label>

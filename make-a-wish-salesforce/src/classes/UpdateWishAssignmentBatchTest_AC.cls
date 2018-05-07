@@ -1,8 +1,15 @@
+/*****************************************************************************
+Author : MST Solutions
+CreateDate : 05/5/2017
+Description : This test class used for unit test and code coverage
+Modification Log: 
+28/03/2018 - Kanagaraj
+******************************************************************************/
 @isTest
 Public class UpdateWishAssignmentBatchTest_AC
 {
-
-    static testmethod void CreateVolunteerOpportunity()
+    // This test class used to create volunteer opportunity
+    static testmethod void createVolunteerOpportunity()
     {
         String CRON_EXP = '0 0 1 * * ? *';
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();   
@@ -15,12 +22,12 @@ Public class UpdateWishAssignmentBatchTest_AC
         parentCase.ChapterName__c = chapterAccount.id;
         update parentCase;
         Role__c  roleName = OrientationandTrainingUtil.createRole();
-      
+        
         Role__c newRole = new Role__c();
         newRole.Name = 'Wish Granter';
         newRole.isWishRole__c = true;
         insert newRole;
-       
+        
         Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,newRole.id);
         Non_Wish_Events__c nonWishEvent = OrientationandTrainingUtil.CreateEventRec(chapterRole.Id,chapterAccount.Id);
         nonWishEvent.Event_Date__c = Date.Today().addDays(-5);
@@ -35,18 +42,13 @@ Public class UpdateWishAssignmentBatchTest_AC
         newOpp.recordTypeId = wishVolunteerOpportunityRecordTypeId;
         insert newOpp;
         
-         Test.startTest();
-          
-            String jobId = System.schedule('lastWishAssignment',CRON_EXP, new UpdateWishAssignmentBatchSchedule_AC());
-            CronTrigger ct = [SELECT Id, CronExpression, TimesTriggered, NextFireTime FROM CronTrigger WHERE id = :jobId];
-            System.assertEquals(CRON_EXP, ct.CronExpression);
-            System.assertEquals(0, ct.TimesTriggered);
+        Test.startTest();
+        
+        String jobId = System.schedule('lastWishAssignment',CRON_EXP, new UpdateWishAssignmentBatchSchedule_AC());
+        CronTrigger ct = [SELECT Id, CronExpression, TimesTriggered, NextFireTime FROM CronTrigger WHERE id = :jobId LIMIT 50000];
+        System.assertEquals(CRON_EXP, 
+                            ct.CronExpression,'Compare Cron Expression');
+        System.assertEquals(0, ct.TimesTriggered,'Compare Time Trigger');
         Test.stopTest();
-        
-        
-    
-    
     }
-
-
 }

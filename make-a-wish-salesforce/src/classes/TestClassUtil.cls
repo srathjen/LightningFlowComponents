@@ -519,7 +519,7 @@ public class TestClassUtil{
         
         
         newContact.Alternate_Phone_Type__c = 'Home';
-        newContact.Preferred_Phone_Types__c = 'Mobile';
+        newContact.npe01__PreferredPhone__c = 'Mobile';
         newContact.Phone= '9003910426';
         newContact.I_m_on_LinkedIn__c ='Yes';
         newContact.How_did_you_hear_about_Make_A_Wish__c  = 'Family';
@@ -563,7 +563,7 @@ public class TestClassUtil{
         
        
         newContact.Alternate_Phone_Type__c = '';
-        newContact.Preferred_Phone_Types__c = '';
+        newContact.npe01__PreferredPhone__c = '';
         newContact.Phone= '';
         newContact.I_m_on_LinkedIn__c ='';
         newContact.How_did_you_hear_about_Make_A_Wish__c  = '';
@@ -758,7 +758,7 @@ public class TestClassUtil{
     }
     
     
-    public static void CreateVolunteerOrientationTraining(Integer recordCount){
+    public static void createVolunteerOrientationTraining(Integer recordCount){
         
         Constant_AC  constant = new Constant_AC();
         Id volunteerOrientationRecordTypeId = Schema.SObjectType.Orientation_Training__c.getRecordTypeInfosByName().get(constant.OrientationRT).getRecordTypeId();
@@ -992,7 +992,7 @@ public class TestClassUtil{
         return newChapterAction;
     }
     
-    public static Case CreateParentCase() {
+    public static Case createParentCase() {
         Constant_AC  constant = new Constant_Ac();    
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
         Case newParentWish = new Case();
@@ -1003,7 +1003,7 @@ public class TestClassUtil{
         return newParentWish;
     }   
     
-    public static Contact CreateWishChild() {
+    public static Contact createWishChild() {
         Constant_AC  constant = new Constant_AC();
         Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
         Contact newWishChild = new Contact();
@@ -1014,7 +1014,7 @@ public class TestClassUtil{
         return newWishChild;
     }
     
-    public static Case DeterminationCaseProcess() {
+    public static Case determinationCaseProcess() {
         Constant_AC  constant = new Constant_Ac();    
         Id wishDeterminationRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         Id parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
@@ -1026,14 +1026,14 @@ public class TestClassUtil{
         return newWishDeterminatonWish;
     }
     
-    public static Task CreateNewTask() {
+    public static Task createNewTask() {
         Task newTask = new Task();
         newTask.Subject = 'Planning';
         newTask.IsRecurrence = false;
         return newTask;
     }
     
-    public static List<Dynamic_Content__c> ChapterDynamicContent() {
+    public static List<Dynamic_Content__c> chapterDynamicContent() {
         List<Dynamic_Content__c> newChapterContentList = new List<Dynamic_Content__c>();
         Dynamic_Content__c newChapterContent = new Dynamic_Content__c();
         newChapterContent.Feature_Quote__c = 'Test Feature Quote';

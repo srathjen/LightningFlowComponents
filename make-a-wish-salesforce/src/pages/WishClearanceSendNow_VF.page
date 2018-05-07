@@ -10,6 +10,11 @@
             font-family:'Lato';
     
     }
+    table.exceptionText td {
+
+                 font-family:'Lato';
+                 font-size:13px;
+       }
     </style>
   
   <apex:form id="clearenceForm">
@@ -37,7 +42,8 @@
 </apex:outputPanel>
 </apex:outputPanel>
            
- <apex:messages style="font-family:'Lato';"/>
+ <apex:messages styleClass="exceptionText"  layout="table"/>
+  <apex:outputPanel rendered = "{!MedicalProContact.Size > 0}" >
   <apex:pageBlock >
    <font family="Lato"><apex:facet name="header">
          <span style="font-family:'Lato';font-size:20px;">&nbsp;&nbsp;&nbsp;Wish Clearance</span>
@@ -60,15 +66,19 @@
      <apex:outputLabel style="padding: 2% 1%;color: #4a4a56;font-weight:bold;font-family:'Lato';font-size:12px;" value="Email:"/>
      <apex:outputText ><span style="font-family:'Lato';font-size:12px;">{!email }</span></apex:outputText>
      </apex:pageBlockSectionItem> 
+      <apex:pageBlockSectionItem rendered="{!IF(medicalProfContactName!= '',true,false)}">          
+        <apex:outputLabel style="padding: 2% 1%;color: #4a4a56;font-weight:bold;font-family:'Lato';font-size:12px;" value="Medical Provider Type:"/>
+        <apex:outputText ><span style="font-family:'Lato';font-size:12px;">{!MedicalProviderType }</span></apex:outputText>
+    </apex:pageBlockSectionItem> 
     <apex:pageBlockSectionItem rendered="{!currentParentCase.wish_involves_air_travel__c == Null}"> 
     <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Wish Involves Air Travel:"/>
       <apex:InputField style="font-family:'Lato';font-size:12px;" value="{!currentParentCase.wish_involves_air_travel__c}"/>
-     </apex:pageBlockSectionItem> 
-     
+     </apex:pageBlockSectionItem>     
      <apex:pageBlockSectionItem rendered="{!IF(currentParentCase.wish_involves_air_travel__c != '',true,false)}"> 
      <apex:outputLabel style="padding: 1% 1%;color: #4a4a56;font-weight:bold;font-family:'Lato';font-size:12px;" value="Wish Involves Air Travel:"/>
      <apex:OutputField style="padding: 1% 1%;color: #4a4a56;font-family:'Lato';font-size:12px;" value="{!currentParentCase.wish_involves_air_travel__c}"/>
      </apex:pageBlockSectionItem> 
+     
      </apex:pageBlockSection>
   
   </apex:pageBlock>
@@ -76,6 +86,7 @@
     <apex:commandButton style="font-family:'Lato';" value="Send Now" action="{!SendtoDocuSign}"/>
     <apex:commandButton style="font-family:'Lato';" value="Cancel" action="{!Cancel}" />
   </center>
+  </apex:outputPanel>
   </apex:form>
  
 </apex:page>

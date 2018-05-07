@@ -22,6 +22,11 @@
             <start>162.248.184.1</start>
         </ipRanges>
         <ipRanges>
+            <description>Automation</description>
+            <end>103.219.207.45</end>
+            <start>103.219.207.45</start>
+        </ipRanges>
+        <ipRanges>
             <end>98.186.251.228</end>
             <start>98.186.251.228</start>
         </ipRanges>

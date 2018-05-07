@@ -2,7 +2,7 @@
 @isTest
 public class Batch_UpdateChildCaseOwner_AC_Test {
     
-    Static testmethod void CreateCase() {
+    Static testmethod void createCase() {
         Constant_AC  constant = new Constant_Ac();    
         Id wishDeterminationRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
@@ -13,6 +13,8 @@ public class Batch_UpdateChildCaseOwner_AC_Test {
         childCase.RecordTypeId = wishDeterminationRT;
         childCase.ParentId = parentCase.Id;
         insert childCase;
+        System.assertEquals(parentCase.Status, 'Qualified', 'The value does not match');
+        System.assert(parentCase.Status == 'Qualified', 'The value does not match');
         Test.startTest();
         Batch_UpdateChildCaseOwner_AC executeCls = new Batch_UpdateChildCaseOwner_AC();
         Database.executeBatch(executeCls);

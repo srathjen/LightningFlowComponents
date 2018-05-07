@@ -1,6 +1,27 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<span style="font-family: arial; font-size: 12pt; background-color: rgb(255, 255, 255);"><font face="Century Gothic, sans-serif" style="">{!Background_check__c.Volunteer_FirstName__c}<span style="font-size: 12pt;">,<br><br></span></font></span><div style="font-family: arial; font-size: 12pt;"><font face="Century Gothic, sans-serif" style=""><div style="">Thank you for renewing your criminal background check. We have reviewed the results and are excited to continue working with you!<br><br></div><div style="">To sign up for a new volunteer opportunity, review your current assignments, or connect with fellow volunteers and staff, please log in to the <a href="https://make-a-wish.force.com/">Make-A-Wish Volunteer Center</a>.<br><br></div><div style=""><span style="font-size: medium;">{!Background_check__c.Background_Check_Email_signature__c}</span></div></font></div>]]></td>
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">{!Background_check__c.Volunteer_FirstName__c},<br>
+<!--[endif]--></span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;"><br></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thank you for
+renewing your criminal background check. We have reviewed the results and are
+excited to continue working with you!</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">To sign up for a new
+volunteer opportunity, review your current assignments, or connect with fellow
+volunteers and staff, please log in to the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish
+Volunteer Center</span></a>.</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Background_check__c.Background_Check_Email_signature__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal">
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal"><span style="font-size:12.0pt;line-height:107%">&nbsp;</span></p>]]></td>
 </tr>
 </table>

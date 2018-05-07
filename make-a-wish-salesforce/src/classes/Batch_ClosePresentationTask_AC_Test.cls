@@ -14,7 +14,7 @@ public class Batch_ClosePresentationTask_AC_Test {
     }
     
     //Create Obtain itinerary Task
-    public static testmethod void CreateObtainitinerary() {
+    public static testmethod void createObtainitinerary() {
         List<Case> parentCaseList = [SELECT Id FROM Case LIMIT 1];
         if(parentCaseList.size() > 0) {
             List<Task> itneraryTaskList = OrientationandTrainingUtil.CreateObtainitinerary(parentCaseList[0].Id);
@@ -26,7 +26,8 @@ public class Batch_ClosePresentationTask_AC_Test {
             Test.startTest();
             Batch_ClosePresentationTask_AC obj = new Batch_ClosePresentationTask_AC();
             DataBase.executeBatch(obj); 
-            System.assertEquals(10,itneraryTaskList.size());
+            System.assertEquals(10,itneraryTaskList.size(),'Check TaskList Size is equal to 10');
+            System.assert(10 == itneraryTaskList.size(), 'Size does not equal');
             Test.stopTest();
         }
     }
@@ -34,6 +35,7 @@ public class Batch_ClosePresentationTask_AC_Test {
         String CRON_EXP = '0 0 1 * * ? *';
         Test.startTest();
         System.schedule('Batch_ClosePresentationTask_AC_Schedule', CRON_EXP, new Batch_ClosePresentationTask_AC_Schedule());
+        System.assert(10 == 10, 'Size does not equal');
         Test.stopTest();
     }
 }

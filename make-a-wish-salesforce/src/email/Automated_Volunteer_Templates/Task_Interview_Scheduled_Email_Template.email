@@ -1,7 +1,30 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><font face="Century Gothic, sans-serif" style="">{!Contact.FirstName},<br><br></font></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><font face="Century Gothic, sans-serif">We are excited to speak with you regarding your interest in becoming a Make-A-Wish volunteer. Details regarding your scheduled interview are listed below:<br><br></font></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Date: </span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; background: white;">{!Task.Confirmed_Date__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; background-color: white;">Time: {!Task.Confirmed_Time__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><span style="background-color: white;">Notes: {!Task.Venue__c}<br></span></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>If you need to cancel or change your interview date/time, please visit
-the&nbsp;</span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><a href="https://make-a-wish.force.com"><span style="font-size: 12pt;">Make-A-Wish Volunteer Center</span>.</a><br></span><br><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;">Should you have any questions, please feel free to reach out to us directly.<br><br></span></font></p><p class="MsoNormal" style="font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Thanks,<br><br></span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; font-size: 12pt;"><font face="Century Gothic, sans-serif">{!Contact.OwnerFullName}<br></font><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Contact.Region_Chapter__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Contact.OwnerPhone}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Contact.OwnerEmail}</span></p>]]></td>
+<![CDATA[<p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName},<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">We are excited to
+speak with you regarding your interest in becoming a Make-A-Wish volunteer.
+Details regarding your scheduled interview are listed below:<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Date:&nbsp;<span style="background:white">{!Task.Confirmed_Date__c}<br>
+Time: {!Task.Confirmed_Time__c}<br>
+Notes: {!Task.Venue__c}<br>
+</span><br>
+If you need to cancel or change your interview date/time, please visit
+the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish
+Volunteer Center.</span></a><br>
+<br>
+Should you have any questions, please feel free to reach out to us directly.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thanks,<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.OwnerFullName}<br>
+{!Contact.Region_Chapter__c}<br>
+{!Contact.OwnerPhone}<br>
+{!Contact.OwnerEmail}<o:p></o:p></span></p><p class="MsoNormal" style="font-size: 12pt; margin-bottom: 0.0001pt;">
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal"><span style="font-family:&quot;Lato&quot;,sans-serif">&nbsp;</span></p>]]></td>
 </tr>
 </table>

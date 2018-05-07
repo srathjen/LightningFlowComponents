@@ -8,8 +8,8 @@
 </head> 
 
 <apex:form > 
-     <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/maw-logo.png')}" style="width:22%;" styleClass="header-logo"/>
-      <div class="row header-padding">         
+           <apex:image url="{!URLFOR($Resource.MakeAWishAmericaDesign,'images/maw-logo.png')}" style="width:35%;margin-left: 30%;margin-right: 40%;" styleClass="header-logo"/>
+<div class="row header-padding">         
         <div style="font-size:20px; margin-bottom:1px; margin-right: auto;text-transform:uppercase; text-align:center; width:100%;">Wish Child Form</div>
         <div>
       </div>
@@ -31,16 +31,16 @@
       <div style="margin-top:14px;">
           <div style="width:17% !important; float:left; font-weight:normal;">Preferred Name :</div>
           <div class="{!IF(currWishChild.Preferred_Name__c==null,'newfont','oldfont')}" style="width:15%; float:left;margin:0 10px 0 0; border-bottom:1px solid #000 !important;margin-top:0% !important;padding-left:1.6em !important;border:none;" >{!if((currWishChild.Preferred_Name__c)==null,"-",currWishChild.Preferred_Name__c)}</div>
-          <div style="width:10% !important; float:left; font-weight:normal;">Gender : </div>
-          <div class="{!IF(currWishChild.Gender__c==null,'newfont','oldfont')}" style="width:15%; float:left;margin:0 10px 0 0;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.Gender__c==null,"-",currWishChild.Gender__c)}</div>   
           <div style="width:7% !important; float:left; font-weight:normal;">DOB :</div>
           <div class="{!IF(currWishChild.BirthDate__c==null,'newfont','oldfont')}" style="width:15%; float:left;margin:0 10px 0 0;border-bottom:1px solid #000 !important; border:none;margin:0 20px 0 0;"><apex:outputField value="{!currWishChild.BirthDate__c}" /></div>
-         
-
+          <div style="width:10% !important; float:left; font-weight:normal;">Gender : </div>
+          <div class="{!IF(currWishChild.Gender__c==null,'newfont','oldfont')}" style="width:15%; float:left;margin:0 10px 0 0;border-bottom:1px solid #000 !important; border:none;">{!if(currWishChild.Gender__c==null,"-",currWishChild.Gender__c)}</div>
      </div>
          
       <div style="clear:both"></div>
-      <div style="margin-top:14px;">
+      <div style="margin-top:5px;">
+          <div style="width:20% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Gender Description :</div>
+          <div class="{!IF(currWishChild.Self_describe_comment_box__c==null,'newfont','oldfont')}" style="width:75%; float:left; margin:3% 0 0 0; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.Self_describe_comment_box__c==null,'-',currWishChild.Self_describe_comment_box__c)}</div>
           <div style="width:25% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Wish Child’s Diagnosis :</div>
           <div class="{!IF(currWishChild.Diagnosis__c==null,'newfont','oldfont')}" style="width:67%; float:left; margin:3% 0 0 0; border-bottom:1px solid #000 !important; border:none;margin-top:0% !important;">{!if(currWishChild.Diagnosis__c==null,'-',currWishChild.Diagnosis__c)}</div>
           <div style="width:30% !important;margin:5px 0 0 0; float:left; font-weight:normal;">Wish Child’s Primary Address :</div>
@@ -452,7 +452,7 @@ individual(s) listed below.</p>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;border-left:1px solid #000">{!detail.driverName}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!detail.licenseNum}</td>
                 <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!detail.state}</td>
-                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}" ><apex:param value="{!detail.expirationDate}" /></apex:outputText></td>
+                <td style="padding:5px;text-align:center;border-bottom:1px solid #000;border-right:1px solid #000;">{!detail.expirationDate}</td>
                
               
             </tr>

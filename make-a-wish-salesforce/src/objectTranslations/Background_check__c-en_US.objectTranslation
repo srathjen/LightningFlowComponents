@@ -57,6 +57,10 @@
         <name>Hidden_Background_Rejected__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Display Popup --></label>
+        <name>Hidden_Display_Popup__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Trigger BGC Exp Reminder --></label>
         <name>Hidden_Trigger_BGC_Exp_Reminder__c</name>
     </fields>
@@ -71,6 +75,16 @@
     <fields>
         <label><!-- Migrated Record --></label>
         <name>Migrated_Record__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date when the post-adverse action letter was sent, if necessary. --></help>
+        <label><!-- Post-Adverse Action --></label>
+        <name>Post_Adverse_Action__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date when the pre-adverse action letter was sent, if necessary. --></help>
+        <label><!-- Pre-Adverse Action --></label>
+        <name>Pre_Adverse_Action__c</name>
     </fields>
     <fields>
         <label><!-- RE Date Completed --></label>
@@ -141,6 +155,17 @@
         <label><!-- Hidden Volunteer is Inactive --></label>
         <name>Volunteer_is_Inactive__c</name>
     </fields>
+    <layouts>
+        <layout>Background check Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
     <layouts>
         <layout>Background check Layout</layout>
         <sections>

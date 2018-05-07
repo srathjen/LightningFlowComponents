@@ -214,6 +214,14 @@ public class VolunteerOpportunityTrigger_AT_Test {
         Chapter_Role__c  chapterRole = OrientationandTrainingUtil.createChapter(chapterAccount.Id,roleName.id);
         List<Volunteer_Opportunity__c> wishVolunteerOpportunityList =OrientationandTrainingUtil.NewWishVolunteerOpportunityList(chapterAccount.id,chapterRole.id,parentCase.id,3);
         List<Volunteer_Opportunity__c> volunteerOpportunityList = new List<Volunteer_Opportunity__c>();
+        
+        Approval.ProcessSubmitRequest app = new Approval.ProcessSubmitRequest();
+        app.setObjectId(wishVolunteerOpportunityList[0].id);
+        app.setProcessDefinitionNameOrId('Volunteer_Role_Approval_Process');
+        app.setSkipEntryCriteria(true);
+        app.setNextApproverIds(new Id[] {userInfo.getUserId()});
+        Approval.ProcessResult result = Approval.process(app);
+        
         for(Volunteer_Opportunity__c processVolOpportunities : wishVolunteerOpportunityList){
             processVolOpportunities.Volunteer_Name__c = VolunteerContact.Id;
             processVolOpportunities.Reason_Inactive__c = 'Not Approved';

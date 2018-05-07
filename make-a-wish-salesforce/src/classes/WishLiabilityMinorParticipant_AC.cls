@@ -98,6 +98,11 @@ public class WishLiabilityMinorParticipant_AC{
     @Future(callout=true)
     public static void callouttoDocusing(map<String,String>sendEmailMap,Id caseId,String publicity){
         
+        String childFirstName = '';
+        List<Case> caseInfo = [SELECT Id, Contact.Name, Contact.FirstName FROM Case WHERE Id =: caseId];
+        if(caseInfo.size() > 0) {
+            childFirstName = caseInfo[0].Contact.FirstName;
+        }
         List<Contact> relationShipList = new List<Contact>();
         Pagereference PDF;
         if(publicity == 'Yes')
@@ -175,7 +180,7 @@ public class WishLiabilityMinorParticipant_AC{
         String body =  '{'+
             '  "status":"sent",'+
             '  "enableWetSign": "false",'+
-            '  "emailBlurb":"Please sign the attached Liability And Publicity Release Form – Minor Participants.\r\n\n Thank You,\r\n\nWish & Volunteer Center",'+
+            '  "emailBlurb":"Hello,\n'+'\r\n Please sign the attached Liability and Publicity Release Form – Minor Participants necessary for '+ childFirstName +'\'s wish.\r\n\n Thank You,\r\n Wish & Volunteer Center",'+
             '  "emailSubject": "Signature Required - Liability And Publicity Release Form – Minor Participants",'+
             '  "enforceSignerVisibility":"True",'+
             '  "documents": [{'+

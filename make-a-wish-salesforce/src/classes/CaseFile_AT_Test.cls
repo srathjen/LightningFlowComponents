@@ -10,5 +10,7 @@ public class CaseFile_AT_Test {
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildCon();
         Case newCase = OrientationandTrainingUtil.createParentCase(wishChild.Id);
         cg__CaseFile__c newFileRecord = OrientationandTrainingUtil.createCaseFileRecord(newCase.Id);
+        system.AssertEquals(newCase.contactId,wishChild.Id,'Contact Id does not match');
+        system.Assert(newCase.Id == newFileRecord.cg__Case__c,'Case Id does not match');
     }
 }

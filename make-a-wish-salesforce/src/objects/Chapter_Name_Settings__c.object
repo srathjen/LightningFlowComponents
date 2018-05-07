@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>This holds the chapter names whose Leads won&apos;t be converted when the lead status is updated Qualified.</description>
+    <enableFeeds>false</enableFeeds>
+    <label>Chapter Name Settings</label>
+    <visibility>Public</visibility>
+</CustomObject>

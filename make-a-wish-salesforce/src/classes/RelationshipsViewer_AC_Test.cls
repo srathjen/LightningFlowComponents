@@ -99,30 +99,38 @@ public class RelationshipsViewer_AC_Test{
      /*This method is used to increase for blank values to updated values for wish child contact record block*/
      public testmethod static void updateWishChildContactHouseHoldAdd(){
         List<Contact> wishchildList = new List<Contact>();
+        Map<Id,npe4__Relationship__c> preferredCon = new Map<Id,npe4__Relationship__c>();
         Contact wishChild = OrientationandTrainingUtil.CreateWishChildConwithNull(); 
         Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c relationship = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,wishFamily.Id);
         case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        relationship.Hidden_Preferred_Contact__c = True;
+        Update relationship;
         PageReference pageRef = Page.RelationshipsViewer_VF; 
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('recId', parentCase.Id);
         RelationshipsViewer_AC rlationshipIns = new RelationshipsViewer_AC();
         rlationshipIns.isWishFamily = false;
+        preferredCon.put(relationship.npe4__RelatedContact__c,relationship);
         rlationshipIns.UpdateContactInfo();
         Contact updateWishChild = new Contact();
         updateWishChild.Id = wishChild.id;
         updateWishChild.Email = 'test123@gmail.com';
         updateWishChild.Phone = '9962474790';
         updateWishChild.MobilePhone = '9962474791';
-        updateWishChild.OtherPhone = '9962474792';
+        updateWishChild.OtherPhone = '9962474792';         
         updateWishChild.MailingStreet = 'North Street';
         updateWishChild.MailingCity = 'Chennai';
         updateWishChild.MailingState = 'Alabama';
         updateWishChild.MailingPostalCode = '621010';
+        updateWishChild.Hidden_Current_Pref_Con_Rel_Id__c = relationship.Id;
         wishchildList.add(updateWishChild);
         Update wishchildList;
         Test.StartTest();
         rlationshipIns.getStates();
+        
+        rlationshipIns .preferredConMapClone = preferredCon;
+        //rlationshipIns.newPreferredCon = relationship.npe4__RelatedContact__c;
         rlationshipIns.wishChildContactList = wishchildList;
         rlationshipIns.SaveUpdatedContact();
         rlationshipIns.close();
@@ -132,7 +140,7 @@ public class RelationshipsViewer_AC_Test{
     
     /*This updateFamilyAddress() is used to update wish family contacts.*/
     public testmethod static void updateFamilyAddress(){
-        
+        Map<Id,npe4__Relationship__c> preferredCon = new Map<Id,npe4__Relationship__c>();
         List<Contact> wishFamilyList = new List<Contact>();
         List<Contact> wishFamilyList2 = new List<Contact>();
         PageReference pageRef = Page.RelationshipsViewer_VF; 
@@ -141,11 +149,12 @@ public class RelationshipsViewer_AC_Test{
         Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
         npe4__Relationship__c relationship = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,wishFamily.Id);
         case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        
+        relationship.Hidden_Preferred_Contact__c = True;
+        Update relationship;
         ApexPages.currentPage().getParameters().put('recId', parentCase.Id);
         RelationshipsViewer_AC rlationshipIns = new RelationshipsViewer_AC();
         
-        
+        preferredCon.put(relationship.npe4__RelatedContact__c,relationship);
         rlationshipIns.UpdateContactInfo();
         rlationshipIns.getStates();
         
@@ -161,12 +170,15 @@ public class RelationshipsViewer_AC_Test{
         updatewishFamily.otherPhone = '9876543211';
         updatewishFamily.HiddenOtherPhone__c = '965432189';
         updatewishFamily.MobilePhone = '9894563654';
+        updatewishFamily.npe01__WorkPhone__c = '9962474793';
+        updatewishFamily.npe01__PreferredPhone__c =  'other';
         updatewishFamily.Use_as_Household_Address__c = true;
         wishFamilyList .add(updatewishFamily);
         update wishFamilyList;
         rlationshipIns.clonedFamilyContactList = wishFamilyList;
         rlationshipIns.isMessage = false;
         Test.StartTest();
+        rlationshipIns .preferredConMapClone = preferredCon;
         rlationshipIns.SaveUpdatedContact();
         rlationshipIns.close();
         Test.StopTest();
@@ -176,7 +188,7 @@ public class RelationshipsViewer_AC_Test{
     
     /*This updateWishFamilyContactHouseHoldAdd() is used to update wish family contacts.*/
     public testmethod static void updateWishFamilyContactHouseHoldAdd(){
-        
+        Map<Id,npe4__Relationship__c> preferredCon = new Map<Id,npe4__Relationship__c>();
         List<Contact> wishFamilyList = new List<Contact>();
         List<Contact> wishFamilyList2 = new List<Contact>();
         PageReference pageRef = Page.RelationshipsViewer_VF; 
@@ -185,7 +197,8 @@ public class RelationshipsViewer_AC_Test{
         Contact wishFamily = OrientationandTrainingUtil.CreateWishFamilywithNull();
         npe4__Relationship__c relationship = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,wishFamily.Id);
         case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-        
+         relationship.Hidden_Preferred_Contact__c = True;
+        Update relationship;
         ApexPages.currentPage().getParameters().put('recId', parentCase.Id);
         RelationshipsViewer_AC rlationshipIns = new RelationshipsViewer_AC();
         
@@ -202,11 +215,13 @@ public class RelationshipsViewer_AC_Test{
         updatewishFamily.MailingState = 'Alabama';
         updatewishFamily.MailingCountryCode = 'US';
         updatewishFamily.MailingPostalCode = '621010';
-        updatewishFamily.otherPhone = '9876543211';
+        //updatewishFamily.otherPhone = '9876543211';
+        updatewishFamily.npe01__PreferredPhone__c =  'other';
         updatewishFamily.MobilePhone = '9894563654';
         updatewishFamily.Use_as_Household_Address__c = true;
         wishFamilyList .add(updatewishFamily);
         update wishFamilyList;
+        preferredCon.put(relationship.npe4__RelatedContact__c,relationship);
         rlationshipIns.clonedFamilyContactList = wishFamilyList;
         rlationshipIns.isMessage = false;
         Test.StartTest();
@@ -246,6 +261,8 @@ public class RelationshipsViewer_AC_Test{
         updatewishFamily.MailingPostalCode = Null;
         updatewishFamily.otherPhone = Null;
         updatewishFamily.MobilePhone = Null;
+        updatewishFamily.npe01__WorkPhone__c = Null;
+        updatewishFamily.npe01__PreferredPhone__c = Null;
         updatewishFamily.Use_as_Household_Address__c = true;
         wishFamilyList .add(updatewishFamily);
         update wishFamilyList;

@@ -3,12 +3,12 @@ public class OrientationandTrainingUtil{
     
     public static Account createchapterAccount(){
         Constant_AC  constant = new Constant_AC();
-        Id ChapterRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();
-        
+        Id ChapterRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.chapterRT).getRecordTypeId();        
         Account newchapterAccount = new Account();
         newchapterAccount .Name = 'Make-A-Wish Alabama';
         newchapterAccount.RecordTypeId = ChapterRecordTypeId;
         newchapterAccount.MAC_Email_del__c = 'Test@gmail.com';
+        newchapterAccount.Wish_Co_ordinator__c = createUser().Id;
         insert newchapterAccount;
         return newchapterAccount;
     }
@@ -50,7 +50,7 @@ public class OrientationandTrainingUtil{
         Account newchapterAccount = new Account();
         newchapterAccount .Name = 'InKind Account';
         newchapterAccount.RecordTypeId = inKindDonorsAccountRTId;
-        //insert newchapterAccount;
+        insert newchapterAccount;
         return newchapterAccount;
     }
     
@@ -58,8 +58,9 @@ public class OrientationandTrainingUtil{
         Constant_AC  constant = new Constant_AC();
         Id inKindDonorsAccountRTId = Schema.Sobjecttype.Account.getRecordTypeInfosByName().get('In Kind Donors').getRecordTypeId();
         Account newchapterAccount = new Account();
-        newchapterAccount .Name = 'InKind Account';
+        newchapterAccount.Name = 'InKind Account';
         newchapterAccount.RecordTypeId = inKindDonorsAccountRTId;
+        newchapterAccount.Chapter_Name__c = createchapterAccount().id;
         insert newchapterAccount;
         return newchapterAccount;
     }
@@ -202,16 +203,24 @@ insert newChapter;*/
     }
     
     public static User createUser(){ 
-        
-        
-        Profile volunteerSystemAdministrator = [SELECT Id FROM Profile WHERE Name = 'System Administrator'];
-        
-        User newPvolunteerSystemAdministratorUser = new User(  firstname = 'Jon',lastName = 'Edwards',email = 'jon@gmail.com',Username = 'joncena123p0@gmail.com',
-                                                             EmailEncodingKey = 'ISO-8859-1',Alias = 'jone',TimeZoneSidKey = 'America/Los_Angeles',LocaleSidKey = 'en_US',
-                                                             LanguageLocaleKey = 'en_US',ProfileId = volunteerSystemAdministrator.Id,isActive = true,Statecode = 'AZ');
-        insert newPvolunteerSystemAdministratorUser ;
-        return newPvolunteerSystemAdministratorUser ;
-        
+        Profile sysAdminProfile = [SELECT Id FROM Profile WHERE Name = 'System Administrator'];
+        String orgId = UserInfo.getOrganizationId();
+        String dateString = 
+        String.valueof(Datetime.now()).replace(' ','').replace(':','').replace('-','');
+        Integer randomInt = Integer.valueOf(math.rint(math.random()*1000000));
+        String uniqueName = orgId + dateString + randomInt;
+        User tuser = new User(  firstname = 'Jon Test',
+                            lastName = 'Edwards',
+                            email = uniqueName + '@test' + orgId + '.org',
+                            Username = uniqueName + '@test' + orgId + '.org',
+                            EmailEncodingKey = 'ISO-8859-1',
+                            Alias = uniqueName.substring(18, 23),
+                            TimeZoneSidKey = 'America/Los_Angeles',
+                            LocaleSidKey = 'en_US',
+                            LanguageLocaleKey = 'en_US',
+                            ProfileId = sysAdminProfile.id);
+        insert tuser;
+        return tuser; 
     }
     
     public static User createUserWithRole(Id roleId){ 
@@ -257,7 +266,7 @@ insert newChapter;*/
         newContact.Birth_Day__c = '12';
         newContact.Birth_Year__c = '1985';
         newContact.Alternate_Phone_Type__c = 'Home';
-        newContact.Preferred_Phone_Types__c = 'Mobile';
+        newContact.npe01__PreferredPhone__c = 'Mobile';
         newContact.OtherPhone = '3332211144';
         newContact.HomePhone= '9003910426';
         newContact.MobilePhone= '9003910426';
@@ -281,7 +290,7 @@ insert newChapter;*/
         newContact.is_Application__c ='Partial Submit';
         newContact.AccountId = AccountId;
         newContact.Volunteer_Role__c = 'Water Handler';
-        
+        newContact.npe01__Preferred_Email__c = 'test@gmail.com';
         insert newContact;
         return newContact;
     } 
@@ -300,7 +309,7 @@ insert newChapter;*/
         newContact.Birth_Day__c = '12';
         newContact.Birth_Year__c = '1985';
         newContact.Alternate_Phone_Type__c = 'Mobile';
-        newContact.Preferred_Phone_Types__c = 'Home';
+        newContact.npe01__PreferredPhone__c = 'Home';
         newContact.OtherPhone = '3332211144';
         newContact.HomePhone= '9003910426';
         newContact.MobilePhone= '9003910426';
@@ -344,7 +353,7 @@ insert newChapter;*/
         newContact.Birth_Day__c = '12';
         newContact.Birth_Year__c = '1985';
         newContact.Alternate_Phone_Type__c = 'Home';
-        newContact.Preferred_Phone_Types__c = 'Home';
+        newContact.npe01__PreferredPhone__c = 'Home';
         newContact.HomePhone= '9003910426';
         newContact.otherPhone= '9003910426';
         newContact.I_m_on_LinkedIn__c ='Yes';
@@ -386,7 +395,7 @@ insert newChapter;*/
         newContact.Birth_Day__c = '12';
         newContact.Birth_Year__c = '1985';
         newContact.Alternate_Phone_Type__c = 'Mobile';
-        newContact.Preferred_Phone_Types__c = 'Mobile';
+        newContact.npe01__PreferredPhone__c = 'Mobile';
         newContact.MobilePhone= '9003910426';
         newContact.otherPhone= '9003910426';
         newContact.I_m_on_LinkedIn__c ='Yes';
@@ -673,7 +682,7 @@ insert newChapter;*/
         newParentWish.ChapterName__c = CreateAlabamaAccount();
         newParentWish.Subject = 'Parent Wish';
         newParentWish.Interview_date__c = System.today();
-        newParentWish.Status = 'Completed';
+        newParentWish.Status = 'Qualified';
         newParentWish.Wish_Type__c = 'Disney World';
         newParentWish.Start_Date__c = System.today();
         newParentWish.End_Date__c = System.today();
@@ -705,6 +714,15 @@ insert newChapter;*/
         newParentWish.ContactId = wishChildId;
         newParentWish.wish_involves_air_travel__c = 'Yes';
         newParentWish.Start_Date__c = System.today();
+        newParentWish.Comments__c  = 'Test Comment';
+        newParentWish.Comment_1__c = 'Test Comment One';
+        newParentWish.Comment_2__c = 'Test Comment Two';
+        newParentWish.Appropriate_Comments__c = 'Appropriate Comment';
+        newParentWish.Please_Explain__c = 'Please Explain';
+        newParentWish.Rush__c  = true;
+        newParentWish.Rush_Explanation__c = 'Test Explanation';
+        newParentWish.Rush_Timeframe__c = 'ASAP';
+        newParentWish.status = 'Ready to Interview';
         insert newParentWish;
         return newParentWish;
     }
@@ -1328,6 +1346,7 @@ insert newChapter;*/
         newLead.Treating_Medical_Professional_Phone__c = '9600467578';
         newLead.Treating_Medical_Professional_Email__c = 'testmawa2d@gmail.com';
         newLead.Hospital_Treatment_Facility_Treating__c = 'Steve Smith AC';
+        newLead.Diagnosis_Given_By_Referrer__c = 'Test Diagnosis';
         newLead.is_Family_Aware_of_Referral__c = 'Yes';
         newLead.Medical_Questions__c = 'Test Diagnosis';
         ICD_Codes__c obj=new ICD_Codes__c();
@@ -1406,6 +1425,7 @@ insert newChapter;*/
         treatingProfContact.MailingCity = 'Trichy';
         treatingProfContact.MailingStateCode = 'AZ';
         treatingProfContact.MailingPostalCode  = '6201717';
+        treatingProfContact.Provider_Type__c = 'Nurse Practitioner';
         treatingProfContact.MailingCountryCode = 'US';
         treatingProfContact.RecordTypeId = medicalProfessionalRecordTypeId;
         insert treatingProfContact;
@@ -1477,7 +1497,7 @@ insert newChapter;*/
         
     }
     
-   
+    
     public static contact CreateWishChildCon(){
         
         Constant_AC  constant = new Constant_AC();
@@ -1742,7 +1762,7 @@ retrun newLeadFile;*/
         insert newRole;
         return newRole;
     }    
-     public static CaseTeamRole CreateCaseTeamRoleChangeName(){
+    public static CaseTeamRole CreateCaseTeamRoleChangeName(){
         CaseTeamRole  newRole = new CaseTeamRole();
         newRole.Name = 'Wish';
         newRole.PreferencesVisibleInCSP = true;
@@ -1957,6 +1977,9 @@ retrun newLeadFile;*/
         newChildForm.Participant_Name__c = 'Participant Participant2-26';
         newChildForm.Hidden_Wish_Fmaily_Contact_Name__c= 'Parent1 Parent2#parent3 parent4';
         newChildForm.Hidden_Wish_Fmaily_Contact_Email__c = 'Parent1 Parent2-kanagu431@gmail.com,parent3 parent4-kanagaraj@mstsolutions.com';
+         newChildForm.Participant_Name__c = 'Kanagaraj'+' '+'Arjunan'+'::'+30;
+        newChildForm.Parent_Gurdian_above_18_Email__c = 'Kanagaraj'+' '+'Arjunan'+'::'+'test@gmail.com';
+        newChildForm.Participant_Details__c = 'Kanagaraj'+' '+'Arjunan'+'::'+'test@gmail.com'+'::'+30;
         //Insert  newChildForm;
         return newChildForm;
         
@@ -1979,6 +2002,7 @@ retrun newLeadFile;*/
         newRelationForm.npe4__Type__c = 'Medical Professional';
         newRelationForm.Qualifying_Medical_Professional__c = true;
         newRelationForm.npe4__Status__c = 'Active';
+        newRelationForm.Parent_Legal_Guardian__c = true;
         Insert  newRelationForm;
         return newRelationForm;
     }
@@ -2107,10 +2131,49 @@ retrun newLeadFile;*/
         dsfs__DocuSign_Recipient_Status__c newdsfs = new dsfs__DocuSign_Recipient_Status__c();
         newdsfs.dsfs__Parent_Status_Record__c = dsfsStatusId;
         newdsfs.dsfs__DocuSign_Recipient_Email__c =  'testmawa@gmail.com';
-        newdsfs.Name = 'vennila';
+        newdsfs.Name = 'Vennila';
         newdsfs.dsfs__DocuSign_Recipient_Id__c = '98D97010-2A0B-4714-B9AE-494B74BD287F';
         newdsfs.dsfs__Envelope_Id__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
+        newdsfs.dsfs__Recipient_Status__c = 'Completed';
+        insert newdsfs;
+        return newdsfs;
         
+    }
+    
+     public Static dsfs__DocuSign_Recipient_Status__c CreatedsfsReccompleted(Id dsfsStatusId){
+        dsfs__DocuSign_Recipient_Status__c newdsfs = new dsfs__DocuSign_Recipient_Status__c();
+        newdsfs.dsfs__Parent_Status_Record__c = dsfsStatusId;
+        newdsfs.dsfs__DocuSign_Recipient_Email__c =  'testmawa@gmail.com';
+        newdsfs.Name = 'Sankar';
+        newdsfs.dsfs__DocuSign_Recipient_Id__c = '98D97010-2A0B-4714-B9AE-494B74BD287F';
+        newdsfs.dsfs__Envelope_Id__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
+        newdsfs.dsfs__Recipient_Status__c = 'Completed';
+        insert newdsfs;
+        return newdsfs;
+        
+    }
+    
+     public Static dsfs__DocuSign_Recipient_Status__c CreatedsfsRecAsDeliver(Id dsfsStatusId){
+        dsfs__DocuSign_Recipient_Status__c newdsfs = new dsfs__DocuSign_Recipient_Status__c();
+        newdsfs.dsfs__Parent_Status_Record__c = dsfsStatusId;
+        newdsfs.dsfs__DocuSign_Recipient_Email__c =  'testmawa@gmail.com';
+        newdsfs.Name = 'Vennila';
+        newdsfs.dsfs__DocuSign_Recipient_Id__c = '98D97010-2A0B-4714-B9AE-494B74BD287F';
+        newdsfs.dsfs__Envelope_Id__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
+        newdsfs.dsfs__Recipient_Status__c = 'Delivered';
+        insert newdsfs;
+        return newdsfs;
+        
+    }
+    
+    public Static dsfs__DocuSign_Recipient_Status__c CreatedsfsRecAsDeliverRecord(Id dsfsStatusId){
+        dsfs__DocuSign_Recipient_Status__c newdsfs = new dsfs__DocuSign_Recipient_Status__c();
+        newdsfs.dsfs__Parent_Status_Record__c = dsfsStatusId;
+        newdsfs.dsfs__DocuSign_Recipient_Email__c =  'testmawa@gmail.com';
+        newdsfs.Name = 'Sankar';
+        newdsfs.dsfs__DocuSign_Recipient_Id__c = '98D97010-2A0B-4714-B9AE-494B74BD287F';
+        newdsfs.dsfs__Envelope_Id__c = '0204C9DD-B8B3-4D7D-B9C5-F88B921E1511';
+        newdsfs.dsfs__Recipient_Status__c = 'Delivered';
         insert newdsfs;
         return newdsfs;
         
@@ -2175,8 +2238,8 @@ retrun newLeadFile;*/
         return newBackground;
     }
     
-  // public static In_Kind_Donation_Reimbursement_File__c  createInkindDonaReimbFileRecord(Id ikdrId) {
-   public static InkindDon_reimburseFile__c createInkindDonaReimbFileRecord(Id ikdrId) {
+    // public static In_Kind_Donation_Reimbursement_File__c  createInkindDonaReimbFileRecord(Id ikdrId) {
+    public static InkindDon_reimburseFile__c createInkindDonaReimbFileRecord(Id ikdrId) {
         //In_Kind_Donation_Reimbursement_File__c  newikdrFile = new In_Kind_Donation_Reimbursement_File__c  ();
         InkindDon_reimburseFile__c   newikdrFile = new InkindDon_reimburseFile__c();
         newikdrFile.Parent__c = ikdrId;
@@ -2273,6 +2336,7 @@ retrun newLeadFile;*/
         newRelationShip.npe4__Status__c = 'Active';
         newRelationShip.npe4__Type__c = 'Medical Professional';
         newRelationShip.Qualifying_Medical_Professional__c =TRUE; 
+        newRelationShip.Send_Wish_Forms__c = true;
         insert newRelationShip;
         return newRelationShip;
     }
@@ -2608,7 +2672,7 @@ retrun newLeadFile;*/
         return newActiveVolunteerUser;
     }
     
-     public static contact CreateWishChildConwithNull(){
+    public static contact CreateWishChildConwithNull(){
         
         Constant_AC  constant = new Constant_AC();
         Id wishChildRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
@@ -2634,7 +2698,7 @@ retrun newLeadFile;*/
         
     }
     
-     public static contact CreateWishFamilywithNull(){
+    public static contact CreateWishFamilywithNull(){
         Constant_AC  constant = new Constant_AC();
         Id wishFamilyRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
         Contact wishFamilyCon = new Contact();
@@ -2657,5 +2721,16 @@ retrun newLeadFile;*/
         
     }
     
-    
+       public static npe4__Relationship__c CreateMedicalProfessionalRelationshipRecord(Id wishChildId,Id medicalProfessionalId)
+    {
+        npe4__Relationship__c newRelationShip = new npe4__Relationship__c();
+        newRelationShip.npe4__Contact__c = wishChildId;
+        newRelationShip.npe4__RelatedContact__c = medicalProfessionalId;
+        newRelationShip.npe4__Status__c = 'Active';
+        newRelationShip.npe4__Type__c = 'Medical Professional';
+        //newRelationShip.Qualifying_Medical_Professional__c =TRUE; 
+        newRelationShip.Send_Wish_Forms__c = true;
+        insert newRelationShip;
+        return newRelationShip;
+    }
 }

@@ -46,6 +46,13 @@
         <name>Valid_For_Wish__c</name>
     </fields>
     <layouts>
+        <layout>ICD Code Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>ICD Code Layout</layout>
         <sections>
             <label><!-- Custom Links --></label>

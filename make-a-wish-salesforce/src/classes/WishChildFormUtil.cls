@@ -1,3 +1,7 @@
+/****************************************************************************************************************
+Author      : MST Solutions
+Description : This class is used to get and set the picklist and data's from wish child form. 
+*****************************************************************************************************************/
 Public Class WishChildFormUtil
 {
    
@@ -125,7 +129,7 @@ Public Class WishChildFormUtil
     {
          wishChildList = new list<Wish_Child_Form__c >();
         emailList = new List<String>();
-        sameParentGuardian = false;
+       // sameParentGuardian = false;
         isChildPart = false;
         isInformation = false;
        
@@ -186,7 +190,7 @@ Public Class WishChildFormUtil
        public String licenseNum{get;set;}
        public string state{get;set;}
        public string type{get;set;}
-       public Date expirationDate{get;set;}
+       public String expirationDate{get;set;}
     }
     
     public class WrapperClass 
@@ -250,7 +254,7 @@ Public Class WishChildFormUtil
          options.add(new SelectOption('Parent','Parent')); 
          options.add(new SelectOption('Guardian','Guardian')); 
          options.add(new SelectOption('Sister','Sister')); 
-         options.add(new SelectOption('Self','Self')); 
+         //options.add(new SelectOption('Self','Self')); 
          options.add(new SelectOption('Brother','Brother')); 
          options.add(new SelectOption('Sibling','Sibling')); 
          options.add(new SelectOption('Grandmother','Grandmother')); 
@@ -298,11 +302,13 @@ Public Class WishChildFormUtil
     }   
     public list<SelectOption> getParticipantRelationships()
     {
-         List<SelectOption> options = new List<SelectOption>();
+        List<SelectOption> options = new List<SelectOption>();
         Schema.DescribeFieldResult fieldResult =  npe4__Relationship__c.npe4__Type__c.getDescribe();
         List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
         for( Schema.PicklistEntry currVal : picklistValues)
-        {      options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
+        {      
+            If(currVal.getValue() != 'Wish Child(Self)')
+              options.add(new SelectOption(currVal.getLabel(), currVal.getValue())); 
          
         }  
         return options;

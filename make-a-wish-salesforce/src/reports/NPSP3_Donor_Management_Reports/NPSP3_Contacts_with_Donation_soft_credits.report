@@ -28,6 +28,7 @@
     <filter>
         <criteriaItems>
             <column>Contact.npo02__Soft_Credit_Total__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>greaterThan</operator>
             <value>0</value>
         </criteriaItems>

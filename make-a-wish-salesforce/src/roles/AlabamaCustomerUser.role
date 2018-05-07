@@ -2,9 +2,9 @@
 <Role xmlns="http://soap.sforce.com/2006/04/metadata">
     <caseAccessLevel>None</caseAccessLevel>
     <contactAccessLevel>None</contactAccessLevel>
-    <description>Alabama Customer User</description>
+    <description>Test Chapter Customer User</description>
     <mayForecastManagerShare>false</mayForecastManagerShare>
-    <name>Alabama Customer User</name>
+    <name>Test Chapter Customer User</name>
     <opportunityAccessLevel>None</opportunityAccessLevel>
-    <parentRole>Arizona_Chapter</parentRole>
+    <parentRole>Alabama_Chapter</parentRole>
 </Role>

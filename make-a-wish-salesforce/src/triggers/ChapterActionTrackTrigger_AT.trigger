@@ -1,5 +1,8 @@
 /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Description: Prevent outside chapter user cannot create chapter action track record for other chapter.
+ Modification Log
+                    ----------------
+          SonarQube    Pavithra G 04/11/2018
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 trigger ChapterActionTrackTrigger_AT on Chapter_Action_Track__c (after Insert,before Insert,after Update,before Update) {
@@ -10,7 +13,7 @@ trigger ChapterActionTrackTrigger_AT on Chapter_Action_Track__c (after Insert,be
        String userRole = [SELECT UserRole.Name FROM User WHERE id =:userInfo.getUserId() Limit 1].UserRole.Name;
        Set<Id> chapterIdSet = new Set<Id>();
        Map<String, String> ChapterRoleMap = new Map<String, String>();
-       Map<Id,String> chapterNameMap = New Map<Id,String>();
+       Map<Id,String> chapterIdNameMap = New Map<Id,String>();
        //Prevent the user to create Chapter Action Track records for other chapters.
        if(userRole != 'National Staff'){
            for(Chapter_Action_Track__c currRec : Trigger.new){
@@ -18,7 +21,10 @@ trigger ChapterActionTrackTrigger_AT on Chapter_Action_Track__c (after Insert,be
                    chapterIdSet.add(currRec.Chapter_Name__c);
            }
            if(chapterIdSet.Size() > 0){
-               for(Account currAcc : [SELECT Id,Name FROM Account WHERE Id IN :chapterIdSet]){
+              
+               /* Commented for sonarqube Duplicate Rule (4/11/2018) */
+               
+              /* for(Account currAcc : [SELECT Id,Name FROM Account WHERE Id IN :chapterIdSet]){
                    chapterNameMap.put(currAcc.Id,currAcc.Name);
                }
                 
@@ -26,10 +32,13 @@ trigger ChapterActionTrackTrigger_AT on Chapter_Action_Track__c (after Insert,be
           for(Chapter_Vs_Role__c currChapterRole : [SELECT Chapter_Name__c, Role_Name__c FROM Chapter_Vs_Role__c WHERE Chapter_Name__c IN : chapterNameMap.values()])
           {
               ChapterRoleMap.put(currChapterRole.Chapter_Name__c,currChapterRole.Role_Name__c);
-          }
+          }*/
+           //Added for sonarqube Duplicate Rule (4/11/2018) 
+           
+          chapterIdNameMap = ChapterStaffRecordSharing_AC.getChapterName(chapterIdSet);
           
            for(Chapter_Action_Track__c currRec : Trigger.new){
-               if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null && userRole != ChapterRoleMap.get(chapterNameMap.get(currRec.Chapter_Name__c)) && !Test.isRunningTest()){
+               if(Bypass_Triggers__c.getValues(userInfo.getUserId()) == Null && userRole != /*ChapterRoleMap.get(*/chapterIdNameMap.get(currRec.Chapter_Name__c)/*)*/ && !Test.isRunningTest()){
                    currRec.addError('You have no access to create Chapter Action Track records for other chapters');
                }
            }

@@ -168,11 +168,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Preferred_Phone_Types__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>npe01__PreferredPhone__c</field>
             <table>Contact</table>
         </columns>
@@ -184,11 +179,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>npe01__Preferred_Email__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Work_Phone__c</field>
             <table>Contact</table>
         </columns>
         <columns>
@@ -278,22 +268,42 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>Volunteer_Role__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Race_Ethnicity_Details__c</field>
             <table>Contact</table>
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
+            <field>isApplication__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>is_Application__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>true</checkedByDefault>
+            <field>Hidden_Volunteer_OT_Status__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Birth_Day__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Birth_Month__c</field>
+            <table>Contact</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
             <field>Test_Record__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>npsp__Deceased__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Deceased_Date__c</field>
             <table>Contact</table>
         </columns>
         <masterLabel>Contacts</masterLabel>

@@ -1,0 +1,18 @@
+<!--Whenever  Record has been loaded,
+It will display "This individual is deceased" if it is deceased.-->
+<!-- This page is used only inside the salesforce page -->
+
+<apex:page standardController="Case" showHeader="false" sidebar="false" standardStylesheets="false">
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"/>
+    <apex:outputPanel rendered="{!(Case.Contact.npsp__Deceased__c==True)}">
+    <script>
+    jQuery(document).ready(function ($) {
+        var delay = 3500;
+        setTimeout(function() {
+            // shown in community
+            top.deceasedModal();
+        }, delay);
+    });
+    </script> 
+    </apex:outputPanel>
+</apex:page>

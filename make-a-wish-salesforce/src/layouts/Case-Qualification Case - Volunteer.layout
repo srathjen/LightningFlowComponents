@@ -2,6 +2,7 @@
 <Layout xmlns="http://soap.sforce.com/2006/04/metadata">
     <customButtons>New_Time_Sheet</customButtons>
     <customButtons>Update_Contact_Info</customButtons>
+    <customButtons>In_Kind_Reimbursement</customButtons>
     <emailDefault>false</emailDefault>
     <excludeButtons>ChangeOwnerOne</excludeButtons>
     <excludeButtons>ChangeRecordType</excludeButtons>
@@ -57,7 +58,7 @@
         <label>Wish Status Bar</label>
         <layoutColumns>
             <layoutItems>
-                <height>200</height>
+                <height>250</height>
                 <page>WishJourney</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>false</showScrollbars>
@@ -84,6 +85,16 @@
                 <behavior>Readonly</behavior>
                 <field>ContactEmail</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Preferred_Contact_Relationship__c</field>
+            </layoutItems>
+            <layoutItems>
+                <page>CaseDeceasedPopUp_VF</page>
+                <showLabel>false</showLabel>
+                <showScrollbars>false</showScrollbars>
+                <width>0</width>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -97,6 +108,14 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Birthdate__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Preferred_Contact_Name__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Preferred_Contact_Number__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -217,6 +236,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>EmergencyContactName__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Emergency_Contact_Relationship__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
@@ -380,16 +403,6 @@
         <relatedList>Volunteer_Opportunity__c.Wish__c</relatedList>
         <sortField>Inactive__c</sortField>
         <sortOrder>Asc</sortOrder>
-    </relatedLists>
-    <relatedLists>
-        <customButtons>Search_Add_In_Kind_Donor</customButtons>
-        <fields>NAME</fields>
-        <fields>RECORDTYPE</fields>
-        <fields>CREATEDBY_USER</fields>
-        <fields>Total_Reimbursement_Amount__c</fields>
-        <fields>Gift_Value__c</fields>
-        <fields>Adjustment_Comments__c</fields>
-        <relatedList>In_Kind_Donation_Reimbursement__c.Wish__c</relatedList>
     </relatedLists>
     <relatedObjects>ContactId</relatedObjects>
     <runAssignmentRulesDefault>false</runAssignmentRulesDefault>

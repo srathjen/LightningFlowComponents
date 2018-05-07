@@ -33,7 +33,7 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         
         system.debug('contactId ----->'+ contactId);
         if(contactId.size() > 0){
-            VolunteerOandTTriggerHandler.updateVolunteerHiddenVolOTStatus(contactId, 'Orientation');
+          //  VolunteerOandTTriggerHandler.updateVolunteerHiddenVolOTStatus(contactId, 'Orientation');
             VolunteerOandTTriggerHandler.updateUserVolunteerStatus(contactId, 'Registered');
         }
     }
@@ -69,6 +69,7 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
             if(newVOL.Volunteer_Attendance__c == 'Completed' && newVol.Type__c == 'Orientation' && oldVol.Volunteer_Attendance__c!='Completed')
             {
                 completedContactSet.add(newVOL.Volunteer__c);
+                system.debug('after update volunteer Completed');
             }
             if(newVOL.Volunteer_Attendance__c == 'Registered' && newVol.Type__c == 'Orientation' && oldVol.Volunteer_Attendance__c!='Registered')
             {   system.debug('after update Registered'+ newVOL.Volunteer_Attendance__c);
@@ -82,6 +83,9 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         }
         
         if(completedContactSet.size() > 0){
+            // VolunteerOandTTriggerHandler.updateContact(completedContactSet); 
+             system.debug('after update volunteer Completed ****'); 
+             system.debug('after update volunteer Completed ****'+completedContactSet);
             for(Contact contactCompleted:[SELECT Id,Hidden_Volunteer_OT_Status__c FROM Contact WHERE Id in:completedContactSet])
             {
                 Contact contactUpdate=new Contact();
@@ -126,6 +130,7 @@ trigger VolunteerOrientatioTrainingTrigger_AT on Volunteer_Orientation_Training_
         
         if(contactUpdateContactId.size()>0)
         {
+           // VolunteerOandTTriggerHandler.updateContact(contactUpdateContactId);          
             for(Contact contactUpdate:[SELECT Id,Hidden_Volunteer_OT_Status__c FROM Contact where Id in:contactUpdateContactId ])
             {
                 Contact contactUpdation=new Contact();

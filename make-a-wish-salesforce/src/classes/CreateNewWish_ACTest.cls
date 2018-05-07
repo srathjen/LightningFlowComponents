@@ -2,7 +2,7 @@
 Public class CreateNewWish_ACTest
 {
 
-    Static testmethod void CreateParentWish()
+    Static testmethod void createParentWish()
     {
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();

@@ -8,7 +8,7 @@ and attached with the docusign under the volunteer conatct related list.
 
 <apex:page renderAs="pdf" showHeader="false" sidebar="false" applyHtmlTag="false" standardStylesheets="false" standardController="Contact" applyBodyTag="false">
      <html>
-        <head>
+        <head style="font-family:'Arial';">
             <style>
             @page {
                 size: letter;
@@ -25,7 +25,7 @@ and attached with the docusign under the volunteer conatct related list.
                 page-break-after:always;
             }
             table{width:100%}
-            .th{background: #5fafce;font-weight: bold;}
+            .th{background: #0057B8;font-weight: bold;}
             body{background:#f8f8f8}
             td{padding:3px}
             .splitRow{padding: 5px;border-bottom:solid 1px #a7a9ab;}
@@ -33,7 +33,7 @@ and attached with the docusign under the volunteer conatct related list.
             .secEndto{padding: 150px;}
             </style>
         </head>
-        <body>
+        <body style="font-family:'Arial';">
     <apex:form id="formid">
      <h2> Volunteer Application</h2>
 
@@ -70,7 +70,7 @@ and attached with the docusign under the volunteer conatct related list.
                 <tr><td colspan='2' class='splitRow'></td></tr>
                  <tr>
                     <td>Mobile Phone: <apex:outputfield value="{!Contact.MobilePhone}" ></apex:outputfield></td> 
-                    <td>Preferred Phone Type: <apex:outputfield value="{!Contact.Preferred_Phone_Types__c}" ></apex:outputfield></td>
+                    <td>Preferred Phone Type: <apex:outputfield value="{!Contact.npe01__PreferredPhone__c}" ></apex:outputfield></td>
                     </tr>
                     <tr>
                        <td>Home Phone:<apex:outputfield value="{!Contact.HomePhone}" ></apex:outputfield></td>

@@ -20,11 +20,13 @@ public class WishChildSummary_AC_Test {
         Test.setCurrentPage(pageRef);
         WishChildSummary_AC wishClear = new WishChildSummary_AC(sc);
         wishClear.getMedicalProContact();
+        wishClear.medicalProfContactName = contactMedicalProfessChild.FirstName+' '+contactMedicalProfessChild.LastName;
         wishClear.SendtoDocuSign();
         wishClear.DisplayMessage();
         wishCLear.DisplayErrorMessage();
         wishClear.displayEmail();
         wishClear.cancel();
+        System.assert( wishClear.getMedicalProContact().Size() != 0 ,'Please select the medical professional to send the wish forms to by selecting \'Send Wish Forms To\' checkbox under the Medical Professional section on the Case record.');
         
     }
     
@@ -48,6 +50,7 @@ public class WishChildSummary_AC_Test {
         Test.setCurrentPage(pageRef);
         WishChildSummary_AC wishClear = new WishChildSummary_AC(sc);
         wishClear.getMedicalProContact();
+        wishClear.medicalProfContactName = contactMedicalProfessChild.FirstName+' '+contactMedicalProfessChild.LastName;
         wishClear.SendtoDocuSign();
         wishClear.DisplayMessage();
         wishCLear.DisplayErrorMessage();
@@ -55,7 +58,7 @@ public class WishChildSummary_AC_Test {
         wishClear.cancel();
         wishClear.ReturnToWish();
         wishClear.ReturnToWishClearanceForm();
-        
+        System.assert(updatecase.Rush__c , 'The wish not a Rush');
         
     }
     
@@ -64,7 +67,8 @@ public class WishChildSummary_AC_Test {
         Contact contactMedicalProfessChild = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
         npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRec(contactWishChild.Id,contactMedicalProfessChild.Id);
         Case caseId = OrientationandTrainingUtil.CreateParentCase(contactWishChild.Id);
-        
+        createRelationShipRec.Send_Wish_Forms__c = True;
+        Update createRelationShipRec;
         case updatecase = new case();
         updatecase.wish_involves_air_travel__c = 'Yes' ;
         updatecase.Id = caseId.Id;
@@ -87,6 +91,7 @@ public class WishChildSummary_AC_Test {
         Test.setCurrentPage(pageRef);
         WishChildSummary_AC wishClear = new WishChildSummary_AC(sc);
         wishClear.getMedicalProContact();
+        wishClear.medicalProfContactName = contactMedicalProfessChild.FirstName+' '+contactMedicalProfessChild.LastName;
         wishClear.SendtoDocuSign();
         wishClear.DisplayMessage();
         wishCLear.DisplayErrorMessage();
@@ -94,7 +99,7 @@ public class WishChildSummary_AC_Test {
         wishClear.cancel();
         wishClear.ReturnToWish();
         wishClear.ReturnToWishClearanceForm();
-        
+        System.assert(updatecase.wish_involves_air_travel__c == 'Yes' , 'The particular Wish does not involve the Air travel');
         
     }
        
@@ -128,16 +133,16 @@ public class WishChildSummary_AC_Test {
         pageRef.getParameters().put('id',String.valueOf(caseId.Id));
         Test.setCurrentPage(pageRef);
         WishChildSummary_AC wishClear = new WishChildSummary_AC(sc);
-        wishClear.medicalProfContactName = contactMedicalProfessChild.Name;
-        wishClear.email = contactMedicalProfessChild.Email;
         wishClear.getMedicalProContact();
+        wishClear.medicalProfContactName = contactMedicalProfessChild.FirstName+' '+contactMedicalProfessChild.LastName;
+        wishClear.email = contactMedicalProfessChild.Email;
         wishClear.displayEmail();
         wishClear.SendtoDocuSign();
         Test.StartTest();
         boolean isRush = false;
         Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator());
         WishChildSummary_AC.CallouttoDocusign(caseId.id,contactMedicalProfessChild.Name,contactMedicalProfessChild.Email);
-        System.assertEquals(wishClear.medicalProfContactName,contactMedicalProfessChild.Name,'Compare MedicalProf Name in Contact and in WishChildSummary');
+        System.assertEquals(wishClear.medicalProfContactName,contactMedicalProfessChild.FirstName+' '+contactMedicalProfessChild.LastName,'Compare MedicalProf Name in Contact and in WishChildSummary');
         Test.StopTest();
     }
 

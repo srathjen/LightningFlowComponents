@@ -21,7 +21,7 @@ trigger CreateVolunteerUser_AT on Contact (After Insert, After Update) {
         }
     }
     
-    if(Trigger.isAfter && Trigger.isupdate){
+   /* if(Trigger.isAfter && Trigger.isupdate){
         for(Contact currContact:trigger.new)
         {
             if(currContact.recordTypeid == volunteerRecordTypeId 
@@ -29,15 +29,15 @@ trigger CreateVolunteerUser_AT on Contact (After Insert, After Update) {
             && currContact.recordTypeid != trigger.oldmap.get(currContact.id).recordTypeid) 
               
             {
-               conId.add(currContact.id);
+             //  conId.add(currContact.id);
             }
             System.debug('Contact Info1:' + currContact.Do_Not_Create_User__c + ' - ' + currContact.Migrated_Record__c + ' - ' + currContact.recordTypeid);
          }
     }
-    System.debug('Contact Info2:' + conId);
+    System.debug('Contact Info2:' + conId);*/
     if(conId.size()>0)
     {
-       // VolunteerContactHandler.createUser(conId);
+        VolunteerContactHandler.createUser(conId);
     }
 
 }

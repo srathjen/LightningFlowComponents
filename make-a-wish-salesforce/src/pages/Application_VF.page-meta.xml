@@ -5,4 +5,9 @@
     <confirmationTokenRequired>false</confirmationTokenRequired>
     <description>It will capture volunteer details from the volunteer</description>
     <label>Application_VF</label>
+    <packageVersions>
+        <majorNumber>3</majorNumber>
+        <minorNumber>9</minorNumber>
+        <namespace>npe01</namespace>
+    </packageVersions>
 </ApexPage>

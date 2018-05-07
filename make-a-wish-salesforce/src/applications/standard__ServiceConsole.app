@@ -4,6 +4,7 @@
     <detailPageRefreshMethod>none</detailPageRefreshMethod>
     <enableCustomizeMyTabs>false</enableCustomizeMyTabs>
     <enableKeyboardShortcuts>true</enableKeyboardShortcuts>
+    <enableListViewHover>true</enableListViewHover>
     <enableListViewReskin>true</enableListViewReskin>
     <enableMultiMonitorComponents>true</enableMultiMonitorComponents>
     <enablePinTabs>true</enablePinTabs>
@@ -177,7 +178,11 @@
     <tab>Travel_Data__c</tab>
     <tab>dsfs__DocuSignAccountConfiguration__c</tab>
     <tab>Awards_Recognition__c</tab>
+    <tab>Apex_Debug_Log__c</tab>
     <workspaceMappings>
+        <mapping>
+            <tab>Apex_Debug_Log__c</tab>
+        </mapping>
         <mapping>
             <tab>Awards_Recognition__c</tab>
         </mapping>

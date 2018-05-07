@@ -10,7 +10,7 @@
         <label>Wish Status Bar</label>
         <layoutColumns>
             <layoutItems>
-                <height>200</height>
+                <height>250</height>
                 <page>WishJourney</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>false</showScrollbars>
@@ -152,6 +152,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>ParentId</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Test_Record__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>

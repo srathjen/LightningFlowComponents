@@ -66,7 +66,7 @@ public class WishJourneyController{
                     Qualified_Date__c, Parent.Qualified_Date__c,Parent.ContactId,
                     parent.Contact.FirstName,Parent.Contact.LastName,Anticipated_Start_Date__c,Parent.Anticipated_Start_Date__c,
                     Wish_Determined_Date__c, Parent.Wish_Determined_Date__c,
-                    Parent.Rush__c,contactId FROM CASE WHERE Id = :currCase.id];
+                    Parent.Rush__c,contactId FROM CASE WHERE Id = :currCase.id LIMIT 1];
                     
                     
                     

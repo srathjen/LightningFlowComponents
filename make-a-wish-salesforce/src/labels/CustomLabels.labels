@@ -5,7 +5,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>AbsentForm</shortDescription>
-        <value>7FCCD6EF-69DF-4D30-8C6E-F3A17B849CEE</value>
+        <value>31f1dad6-3af9-4870-ad5b-aeeafe795f0f</value>
     </labels>
     <labels>
         <fullName>Active_Volunteer_Profile</fullName>
@@ -43,7 +43,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Celebritywish</shortDescription>
-        <value>52086f1d-3690-4718-9df0-232e59a6b040</value>
+        <value>358e76db-8f78-421e-b588-9b21a5089cf5</value>
     </labels>
     <labels>
         <fullName>ChildMedicalSummary</fullName>
@@ -51,14 +51,14 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Child Medical Summary</shortDescription>
-        <value>19147ba2-329a-4f6b-90dd-a209d7bc1412</value>
+        <value>f1452c5a-7c7b-48cc-b563-415a4bd3fd33</value>
     </labels>
     <labels>
         <fullName>Combo_CMS_and_WC</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Combo CMS and WC</shortDescription>
-        <value>7d720e44-22b7-4efd-a40b-38d0903cbe30</value>
+        <value>42258e2e-4eed-4fd2-b41e-9dafb2a5fc88</value>
     </labels>
     <labels>
         <fullName>ContactIdValue</fullName>
@@ -87,7 +87,28 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>DocuSignUserName</shortDescription>
-        <value>5a81d5c0-fcaa-4dba-9712-5f206b7f7c13</value>
+        <value>2997e370-25da-4c02-aad3-e5c1a0fe663e</value>
+    </labels>
+    <labels>
+        <fullName>DV_to_fax</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DV to fax</shortDescription>
+        <value>a1a36000004SPWW</value>
+    </labels>
+    <labels>
+        <fullName>DV_to_fax_w_fax_cover</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DV to fax w/ fax cover</shortDescription>
+        <value>a1a36000004SPWU</value>
+    </labels>
+    <labels>
+        <fullName>Debug_log_error_message</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Debug log error message</shortDescription>
+        <value>An unexpected error has occurred. The system administrator has been alerted.</value>
     </labels>
     <labels>
         <fullName>Dummy_Email</fullName>
@@ -109,7 +130,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Family Hold Message DDP</shortDescription>
-        <value>a1a0R000000LTHU</value>
+        <value>a1a36000004oufC</value>
     </labels>
     <labels>
         <fullName>Instance_Url</fullName>
@@ -117,7 +138,14 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Instance Url</shortDescription>
-        <value>https://na30.salesforce.com</value>
+        <value>https://make-a-wish.my.salesforce.com</value>
+    </labels>
+    <labels>
+        <fullName>Interation_User_Profile</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Integration User Profile</shortDescription>
+        <value>00e36000001CMIeAAO</value>
     </labels>
     <labels>
         <fullName>Lead_DNQ_Letter</fullName>
@@ -149,6 +177,13 @@
         <value>00X36000001Ilh9</value>
     </labels>
     <labels>
+        <fullName>MedicalAdviser</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>MedicalAdviser</shortDescription>
+        <value>National Medical Advisor</value>
+    </labels>
+    <labels>
         <fullName>National_Email_Template_ID</fullName>
         <categories>National Email template Id</categories>
         <language>en_US</language>
@@ -162,6 +197,13 @@
         <protected>false</protected>
         <shortDescription>OrganizationWideEmail</shortDescription>
         <value>wvcsupport@wish.org</value>
+    </labels>
+    <labels>
+        <fullName>Part_A_fax</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Part A fax</shortDescription>
+        <value>a1a36000004SPWV</value>
     </labels>
     <labels>
         <fullName>Prospective_Volunteer</fullName>
@@ -180,18 +222,32 @@
         <value>00e36000000HVbO</value>
     </labels>
     <labels>
+        <fullName>QualifyingDiagnosisHeaderLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>QualifyingDiagnosisHeaderLabel</shortDescription>
+        <value>Qualifying Diagnosis</value>
+    </labels>
+    <labels>
+        <fullName>QualifyingDiagnosisTitleLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>QualifyingDiagnosisTitleLabel</shortDescription>
+        <value>Select Qualifying Diagnosis</value>
+    </labels>
+    <labels>
         <fullName>Rush_Child_Summary</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Rush Child Summary</shortDescription>
-        <value>aded084e-6f2a-4754-89e5-0942134e41e7</value>
+        <value>de734a86-43ec-4736-8ba7-4cbb0551c227</value>
     </labels>
     <labels>
         <fullName>Rush_Wish_Clearance</fullName>
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Rush Wish Clearance</shortDescription>
-        <value>5e1ea420-569e-4d30-9b6b-2cac0e2d1dd9</value>
+        <value>a5cbf3cd-862b-4b13-adf9-f1d21e870364</value>
     </labels>
     <labels>
         <fullName>Rush_Wish_Letter_DDP</fullName>
@@ -208,6 +264,13 @@
         <protected>false</protected>
         <shortDescription>Salesforce Support User Id</shortDescription>
         <value>00536000002PP9x</value>
+    </labels>
+    <labels>
+        <fullName>Salesforce_Wish_Assist_Form</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Salesforce Wish Assist Form</shortDescription>
+        <value>a1a36000005VFfh</value>
     </labels>
     <labels>
         <fullName>Shopping_Spree_DDP</fullName>
@@ -228,7 +291,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>SingleForm</shortDescription>
-        <value>65971643-175D-4EB8-BD82-5E4ADE5C2BCF</value>
+        <value>d8eecefd-b34a-476d-afca-ebd9dd56bf98</value>
     </labels>
     <labels>
         <fullName>Site_Url</fullName>
@@ -328,7 +391,7 @@
         <language>en_US</language>
         <protected>false</protected>
         <shortDescription>Wish Clearence</shortDescription>
-        <value>d447aed5-a5df-4f2e-81dd-689153bb2b5a</value>
+        <value>d4f2a899-55d9-4902-82cb-b285085e4b86</value>
     </labels>
     <labels>
         <fullName>WishReceiptDocusingDeliverOption</fullName>
@@ -361,6 +424,42 @@
         <protected>false</protected>
         <shortDescription>WishReceiptSpanishDownloadDeliverOption</shortDescription>
         <value>a1Y36000002GOog</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Assist_Form_DDP</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Assist Form DDP</shortDescription>
+        <value>a1a36000005VFgp</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Clearance_No_Travel</fullName>
+        <categories>Docusign Wish Clearence No Travel Template Id</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Clearance No Travel</shortDescription>
+        <value>adffd346-70e2-4f5b-b127-b3a9003ae219</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Clearance_No_Travel_Form_Rush_Wish</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Clearance No Travel Form(Rush Wish)</shortDescription>
+        <value>f29da96c-a860-43ea-9543-030c428b7062</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Clearance_No_Travel_Form_Self_describe</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Clearance No Travel Form(Self describe)</shortDescription>
+        <value>0eeb3cfd-cada-4736-aa5e-bfec5c048005</value>
+    </labels>
+    <labels>
+        <fullName>Wish_Clearance_No_Travel_Rush_Wish_Form_Self_describe</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Wish Clearance No Travel Rush Wish Form(Self describe)</shortDescription>
+        <value>9f4de36d-5b70-464b-aa79-77b83ec1ffb1</value>
     </labels>
     <labels>
         <fullName>Wish_Receipt_DDP</fullName>

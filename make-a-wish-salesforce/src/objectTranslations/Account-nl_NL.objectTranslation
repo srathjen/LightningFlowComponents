@@ -16,6 +16,26 @@
         <name>BillingAddressVerified__c</name>
     </fields>
     <fields>
+        <label><!-- Category --></label>
+        <name>Category__c</name>
+        <picklistValues>
+            <masterLabel>1</masterLabel>
+            <translation><!-- 1 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2</masterLabel>
+            <translation><!-- 2 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3</masterLabel>
+            <translation><!-- 3 --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4</masterLabel>
+            <translation><!-- 4 --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
         <label><!-- Chapter Id --></label>
         <name>Chapter_Id__c</name>
     </fields>
@@ -1811,6 +1831,29 @@
         </sections>
     </layouts>
     <layouts>
+        <layout>Chapters Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Address --></label>
+            <section>Address</section>
+        </sections>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Designated Users --></label>
+            <section>Designated Users</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Historic Wish Numbers --></label>
+            <section>Historic Wish Numbers</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Hospital Treatment Facility</layout>
         <sections>
             <label><!-- Address --></label>
@@ -1826,6 +1869,36 @@
         <sections>
             <label><!-- Address --></label>
             <section>Address</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Hospital Treatment Facility Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Address --></label>
+            <section>Address</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Household Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Address --></label>
+            <section>Address</section>
+        </sections>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Emergency Contact --></label>
+            <section>Emergency Contact</section>
         </sections>
         <sections>
             <label><!-- Fields --></label>
@@ -1863,6 +1936,21 @@
         </sections>
     </layouts>
     <layouts>
+        <layout>In Kind Donors Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Chapter Staff only --></label>
+            <section>Chapter Staff only</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Location --></label>
+            <section>Location</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>In-Kind Donor</layout>
         <sections>
             <label><!-- Fields --></label>
@@ -1871,6 +1959,21 @@
     </layouts>
     <layouts>
         <layout>InKind</layout>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Organization Layout Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Address --></label>
+            <section>Address</section>
+        </sections>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
         <sections>
             <label><!-- Fields --></label>
             <section>Fields</section>

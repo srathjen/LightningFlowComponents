@@ -22,22 +22,24 @@ Description : This vf page used to download and send for signature of the wish r
         <table style="width:70%; font-size:12px" cellpadding="10" class="tbl">
             <apex:messages styleClass="error-msg"/>
             <tr style="width:100%">
-                <th align="center" colspan="3" style="padding:10px"><div style="font-size: 16px; color: #333;font-family: 'Times New Roman', Times, serif;">Please Select Recipient</div></th>
+                <th align="center" colspan="4" style="padding:10px"><div style="font-size: 16px; color: #333;font-family: 'Times New Roman', Times, serif;">Please Select Recipient</div></th>
             </tr>
             <tr>
-                <td style="width:28px">Action</td>
-                <td>Name</td>
-                <td>Email</td>
+               <td style="width:28px"><b>Action</b></td>
+                <td><b>Name</b></td>
+                <td><b>Email</b></td>
+                <td><b>Relationship Type</b></td>
             </tr>
             <apex:repeat value="{!wrapperList}" var="recList">
                 <tr>
                     <td><apex:inputCheckbox value="{!recList.selected}"/></td>
-                    <td>{!recList.rel.npe4__RelatedContact__r.Name}</td>
-                    <td>{!recList.rel.npe4__RelatedContact__r.Email}</td>
+                    <td>{!recList.rel.Name}</td>
+                    <td>{!recList.rel.Email}</td>
+                    <td>{!recList.rel.Relationship_Type__c}</td>
                 </tr>
             </apex:repeat>
             <tr style="width:100%">
-                <td align="center" colspan="3">
+                <td align="center" colspan="4">
                     <div style="background-color: #f2f2f2; color: white;font-size: 12px;float: right">
                     <apex:commandButton action="{!downLoadWishReceipt}" value="Download" styleclass="btn-style"/>
                     <apex:commandButton disabled="{!wraaperSize}" action="{!updateWishChildContact}" value="Send for Signature" styleclass="btn-style" />

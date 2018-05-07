@@ -96,11 +96,13 @@
     <filter>
         <criteriaItems>
             <column>Case.In_Kind_Donation_Reimbursement__r$RecordType</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>In_Kind_Donation_Reimbursement__c.Reimbursement</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.In_Kind_Donation_Reimbursement__r.In_Kind_Donation_Reimbursement_Files__r$File_Name__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>

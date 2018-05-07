@@ -3,6 +3,8 @@ Author      : MST Solutions
 CreatedBy   : Chandrasekar Nallusamy
 Date        : 7/18/2016
 Description : This test class used for unit test and code coverage
+Modification Log: 
+28/03/2018 - Kanagaraj
 *******************************************************************************************************************/
 @isTest
 public class VolunteerProfile_AC_Test{
@@ -77,7 +79,7 @@ public class VolunteerProfile_AC_Test{
      
     }
      // This test class used to cover all the picklist value retrieve function.
-    static testmethod void UpdateContactInfowithHomePhoneType()
+    static testmethod void updateContactInfowithHomePhoneType()
     {
     
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
@@ -103,7 +105,7 @@ public class VolunteerProfile_AC_Test{
    
     
     // This method is used to update the volunteer contact personal informations
-     static testmethod void UpdateContactInfo()
+     static testmethod void updateContactInfo()
     {
     
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
@@ -160,11 +162,12 @@ public class VolunteerProfile_AC_Test{
                  profileController.contactInstance[0].Write__c = 'English';
                  profileController.contactInstance[0].Language__c = 'English';
                  profileController.contactInstance[0].Speak__c = 'English';
-                 profileController.contactInstance[0].Preferred_Phone_Types__c = 'Home';
+                 profileController.contactInstance[0].npe01__PreferredPhone__c = 'Home';
                  profileController.contactInstance[0].Alternate_Phone_Type__c = 'Mobile';
                 
                 profileController.SavePersonalInfo();
-                 
+            System.assertEquals(profileController.contactInstance[0].Email,'Test@gmail.com','Volunteer profile email does not match');
+            System.assert(profileController.contactInstance[0].Email == 'Test@gmail.com','Volunteer profile email does not match');
          }
     
         
@@ -173,7 +176,7 @@ public class VolunteerProfile_AC_Test{
     
     
      // This test class used to Employee Update.
-    static testmethod void UpdateEmployeeContactInfo()
+    static testmethod void updateEmployeeContactInfo()
     {
     
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
@@ -194,10 +197,12 @@ public class VolunteerProfile_AC_Test{
          }
          profileController.SavePersonalInfo();
          profileController.SaveEmployeeInfo();
+        System.assertEquals(profileController.contactInstance[0].id,con.id,'Volunteer profile related contact does not match');
+        System.assert(profileController.contactInstance[0].id == con.id,'Volunteer profile related contact does not match');
     }
     
      // This test class used to Emergency Update.
-    static testmethod void UpdateEmergencyContactInfo()
+    static testmethod void updateEmergencyContactInfo()
     {
     
          Account acc = OrientationandTrainingUtil.createVolunteerAccount();
@@ -217,9 +222,9 @@ public class VolunteerProfile_AC_Test{
                 profileController.contactInstance[0].Emergency_Contact_Relationship__c = 'Friend';
                 profileController.contactInstance[0].Emergency_Contact__c = 'Friend';
                 profileController.contactInstance[0].Emergency_Contact_Phone__c = '8220708920';
-               
-         }
-         
-          profileController.SaveEmergencyInfo();
+            System.assertEquals(profileController.contactInstance[0].Emergency_Contact_Phone__c,'8220708920','Volunteer profile emergency contact does not match');
+        	System.assert(profileController.contactInstance[0].Emergency_Contact_Phone__c == '8220708920','Volunteer profile emergency contact does not match');
+       	}
+        profileController.SaveEmergencyInfo();
     }
 }

@@ -13,15 +13,15 @@
                         <h1 class="col-md-12">Wish Family</h1>
                     </div>
                     <apex:form id="frm">
-                        <apex:actionFunction action="{!SaveandWishChildExit}" name="callConfirmSave" reRender="test"/>
-                        <apex:actionFunction action="{!withOutNavigate}" name="navigatWithoutSave" reRender="yyy"/>
-                        <apex:actionFunction action="{!BackToWCF}" name="SaveWishFFtoWishChild" reRender="hhh"/>
-                        <apex:actionFunction action="{!withOutSavetoChild}" name="WithOutSaveWFFtoChildForm" reRender="ggg"/>
-                        <apex:actionFunction action="{!WishFamilytoWishInfo}" name="SaveWishChildtoWInfo" reRender="ggghj"/>
-                        <apex:actionFunction action="{!withOutSavefromWCFtoWIF}" name="WithoutSaveChildFormToWIF" reRender="gggkk"/>
-                        <apex:actionFunction action="{!RetrunToWish}" name="ReturnToWish" reRender="qquuqq"/>
-                        <apex:actionFunction action="{!cancelfunction}" name="ReturnToWishWithOutSave" reRender="qqqqyuu"/>
-                        <apex:actionFunction action="{!generatePDF}" name="generatePDF" reRender="genPDF"/>
+                        <apex:actionFunction action="{!SaveandWishChildExit}" name="callConfirmSave" reRender="test,msg"/>
+                        <apex:actionFunction action="{!withOutNavigate}" name="navigatWithoutSave" reRender="yyy,msg"/>
+                        <apex:actionFunction action="{!BackToWCF}" name="SaveWishFFtoWishChild" reRender="hhh,msg"/>
+                        <apex:actionFunction action="{!withOutSavetoChild}" name="WithOutSaveWFFtoChildForm" reRender="ggg,msg"/>
+                        <apex:actionFunction action="{!WishFamilytoWishInfo}" name="SaveWishChildtoWInfo" reRender="ggghj,msg"/>
+                        <apex:actionFunction action="{!withOutSavefromWCFtoWIF}" name="WithoutSaveChildFormToWIF" reRender="gggkk,msg"/>
+                        <apex:actionFunction action="{!RetrunToWish}" name="ReturnToWish" reRender="qquuqq,msg"/>
+                        <apex:actionFunction action="{!cancelfunction}" name="ReturnToWishWithOutSave" reRender="qqqqyuu,msg"/>
+                        <apex:actionFunction action="{!generatePDF}" name="generatePDF" reRender="genPDF,msg"/>
 
                         <div class="step-base">
                             <span class="step-tether nav-down">
@@ -38,8 +38,8 @@
                                     </ul>
                                     <div class="nav-sub-inner hidden-sm-down">
                                         <a href="#top" class="hidden-md-down">&uarr; Back to Top</a>
-                                        <apex:Commandbutton value="Generate PDF" onClick="generat();" styleClass="btn-md generatePdf" />
-                                        <apex:commandbutton value="Save" onclick="return false;" action="{!SaveandwishFamilyExit}" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" />
+                                        <apex:Commandbutton value="Generate PDF" onClick="generat();" styleClass="btn-md generatePdf" reRender="msg" />
+                                        <apex:commandbutton value="Save" onclick="return false;" action="{!SaveandwishFamilyExit}" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" reRender="msg"/>
                                         <!--<apex:Commandbutton value="Next" onclick="return false;" action="{!WishFamilytoWishInfo}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#wifsame-alert" />-->
                                         <apex:Commandbutton value="Next" onclick="return false;" styleClass="col-xs-12 btn-md wff-nxt-btn"/>
                                     </div>
@@ -47,13 +47,14 @@
                             </span>
                         </div>
 
-                        <div class="messages"><apex:pagemessages /></div>
+                        <div class="messages"></div>
                         <div class="row">
-                            <apex:actionFunction name="uiLogic" rerender="membAdd" />
+                            <apex:actionFunction name="uiLogic" rerender="membAdd"/>
                             <apex:pageblock id="membAdd">
 
                                 <div class="container" id="family-info">
                                   <fieldset>
+                                  <apex:pageMessages id="msg"/>
                                         <legend>Wish Child</legend>
                                         <span class="info"> Fields in grey must be updated on Wish Child form and saved.</span>
                                         <div class="form-group row col-lg-6">
@@ -521,9 +522,9 @@
                             <nav class="btm">
                                 <ul>
                                     <!-- <li><apex:Commandbutton value="Prev" action="{!BackToWCF}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#page-exit-alert" /></li> -->
-                                    <li><apex:commandbutton value="Save" onclick="return false;" action="{!SaveandwishFamilyExit}" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" /></li>
-                                    <li><apex:Commandbutton value="Generate PDF" styleClass="btn-md generatePdf" /></li>
-                                    <li><apex:Commandbutton value="Next" onclick="return false;" action="{!WishFamilytoWishInfo}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#wifsame-alert" /></li>
+                                    <li><apex:commandbutton value="Save" onclick="return false;" action="{!SaveandwishFamilyExit}" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" reRender="msg"/></li>
+                                    <li><apex:Commandbutton value="Generate PDF" styleClass="btn-md generatePdf" reRender="msg"/></li>
+                                    <li><apex:Commandbutton value="Next" onclick="return false;" action="{!WishFamilytoWishInfo}" styleClass="col-xs-12 btn-md" html-data-toggle="modal" html-data-target="#wifsame-alert" reRender="msg"/></li>
                                 </ul>
                             </nav>
                         </div>
@@ -543,7 +544,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <apex:commandButton onclick="test1();" value="Save" styleClass="btn-md" reRender="ssss"/>
-                                        <apex:commandButton action="{!withOutSavefromWCFtoWIF}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="jjj" />
+                                        <apex:commandButton action="{!withOutSavefromWCFtoWIF}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="jjj,msg" />
                                     </div>
                                 </div>
                             </div>
@@ -564,7 +565,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <apex:commandButton onclick="test3();" value="Save" styleClass="btn-md" reRender="jjj" />
-                                        <apex:commandButton action="{!withOutSavetoChild}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="jjj"/>
+                                        <apex:commandButton action="{!withOutSavetoChild}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="jjj,msg"/>
                                     </div>
                                 </div>
                             </div>

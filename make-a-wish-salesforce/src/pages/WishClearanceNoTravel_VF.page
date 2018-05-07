@@ -1,0 +1,97 @@
+<apex:page applyBodyTag="false" cache="false" standardController="case" extensions="WishClearanceSendNow_AC"  sidebar="false">
+  <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/Liability.css')}" /> 
+  <style>
+    .custPopup, .custPopup-main-message{
+            left: -32% !important;
+            padding: 2.5rem;
+            width: 70% !important;
+            font-weight : bold;
+            font-size : 150%;
+            font-family:'Lato';
+    
+    }
+    table.exceptionText td {
+
+                 font-family:'Lato';
+                 font-size:13px;
+       }
+    </style>
+  <apex:outputpanel id="all">
+  <apex:form id="clearenceForm">
+  <apex:commandLink Style="float:right;padding:30px;font-family:'Lato';" action="{!ReturnToWish}" value="Return to Wish" html-data-toggle="modal" html-data-target="wffsame-alert"/>   
+  <apex:outputPanel id="ReturntoWish">
+        <apex:outputPanel rendered="{!displayReturnToWish}" layout="block">
+    <div class="pop-wrap">
+        <div class="custPopup">
+            <div class="container">
+                <div class="row">
+                    <div class="row" style="padding:10px">
+                    <div class="col-xs-12 col-sm-12 col-md-12" style="font-family:'Lato';">
+                     <center> Are you sure you want to exit ? </center>
+                    </div>
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-12" style="margin-top:20px">
+                       <apex:commandButton value="Yes" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!Cancel}" style="height: 2.75rem; margin-left:5%;font-family:'Lato';"/>
+                        <apex:commandButton value="No" styleClass="col-xs-12 col-sm-6 col-md-4 btn-md"  action="{!ReturnToWishClearanceNoTravelForm}"  style="height: 2.75rem; margin-left: 5%;font-family:'Lato';"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</apex:outputPanel>
+</apex:outputPanel>
+           
+ <apex:messages styleClass="exceptionText"  layout="table"/>
+  <apex:outputPanel rendered = "{!MedicalProContact.Size > 0}" >
+  
+  <apex:pageBlock >  
+   <font family="Lato"><apex:facet name="header">
+         <span style="font-family:'Lato';font-size:20px;">&nbsp;&nbsp;&nbsp;Wish Clearance No Travel</span>
+          </apex:facet></font> 
+      <apex:pageBlockSection title="Wish Clearance No Travel Form Details" columns="1">
+       <font family="Lato"><apex:facet name="header">
+         <span style="font-family:'Lato';font-size:15px;font-weight:bold;">&nbsp;Wish Clearance No Travel Form Details</span>
+          </apex:facet></font>
+      <apex:pageBlockSectionItem >
+      
+      <apex:outputLabel style="color: #4a4a56;font-weight:bold;font-family:'Lato';font-size:12px;" value="Name:"/>
+        <apex:selectList style="font-family:'Lato';font-size:12px;" value="{!medicalProfContactName}" multiselect="false" size="1" styleClass="form-control multi sign" html-placeholder="Please Select All That Apply">
+                                <apex:selectOption itemlabel="Please select an individual" itemValue="" />
+                                <apex:selectOptions value="{!MedicalProContact}" />
+                                 <apex:actionSupport event="onchange" action="{!displayEmail}" reRender="clearenceForm"/>
+                              </apex:selectList>        
+         
+         </apex:pageBlockSectionItem> 
+     <apex:pageBlockSectionItem rendered="{!IF(medicalProfContactName!= '',true,false)}">                     
+     <apex:outputLabel style="padding: 2% 1%;color: #4a4a56;font-weight:bold;font-family:'Lato';font-size:12px;" value="Email:"/>
+     <apex:outputText ><span style="font-family:'Lato';font-size:12px;">{!email }</span></apex:outputText>
+     </apex:pageBlockSectionItem> 
+      <apex:pageBlockSectionItem rendered="{!IF(medicalProfContactName!= '',true,false)}">          
+        <apex:outputLabel style="padding: 2% 1%;color: #4a4a56;font-weight:bold;font-family:'Lato';font-size:12px;" value="Medical Provider Type:"/>
+        <apex:outputText ><span style="font-family:'Lato';font-size:12px;">{!MedicalProviderType }</span></apex:outputText>
+    </apex:pageBlockSectionItem> 
+   <!--  <apex:pageBlockSectionItem rendered="{!currentParentCase.wish_involves_air_travel__c == Null}"> 
+    <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Wish Involves Air Travel:"/>
+      <apex:InputField style="font-family:'Lato';font-size:12px;" value="{!currentParentCase.wish_involves_air_travel__c}"/>
+     </apex:pageBlockSectionItem>     
+    <apex:pageBlockSectionItem rendered="{!IF(currentParentCase.wish_involves_air_travel__c != '',true,false)}"> 
+     <apex:outputLabel style="padding: 1% 1%;color: #4a4a56;font-weight:bold;font-family:'Lato';font-size:12px;" value="Wish Involves Air Travel:"/>
+     <apex:OutputField style="padding: 1% 1%;color: #4a4a56;font-family:'Lato';font-size:12px;" value="{!currentParentCase.wish_involves_air_travel__c}"/>
+     </apex:pageBlockSectionItem> -->
+     
+     </apex:pageBlockSection>
+  
+  </apex:pageBlock>
+  <center>
+    
+    <apex:commandButton style="font-family:'Lato';" value="Send Now" action="{!SendtoDocuSign}" reRender="all"> <apex:param name="type" value="WishClearanceNoTravel" assignTo="{!type}"  /></apex:commandButton>
+    
+    <apex:commandButton style="font-family:'Lato';" value="Cancel" action="{!Cancel}" />
+  
+  </center>
+ 
+  </apex:outputPanel>
+  </apex:form>
+  </apex:outputPanel>
+</apex:page>

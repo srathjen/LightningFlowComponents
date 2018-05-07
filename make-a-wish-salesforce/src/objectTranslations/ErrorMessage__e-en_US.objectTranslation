@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ErrorMessage</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ErrorMessages</value>
+    </caseValues>
+    <fields>
+        <label><!-- Apex Class --></label>
+        <name>Apex_Class__c</name>
+    </fields>
+    <fields>
+        <label><!-- Developer Message --></label>
+        <name>Developer_Message__c</name>
+    </fields>
+    <fields>
+        <label><!-- Message --></label>
+        <name>Message__c</name>
+    </fields>
+    <fields>
+        <label><!-- Method --></label>
+        <name>Method__c</name>
+    </fields>
+    <fields>
+        <label><!-- Record Id --></label>
+        <name>Record_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Stack Trace --></label>
+        <name>Stack_Trace__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

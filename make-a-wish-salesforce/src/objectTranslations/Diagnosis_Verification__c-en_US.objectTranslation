@@ -77,6 +77,13 @@
         <name>isEligible__c</name>
     </fields>
     <layouts>
+        <layout>Diagnosis Verification Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Diagnosis Verification Layout</layout>
         <sections>
             <label><!-- Custom Links --></label>

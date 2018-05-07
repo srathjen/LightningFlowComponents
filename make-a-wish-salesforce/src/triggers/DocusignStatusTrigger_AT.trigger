@@ -4,6 +4,9 @@ CreatedBy   : Kanagaraj
 Date        : 12/07/2016
 Description : DocusignStatusTrigger_AT  is used when the docusign status record is created and its status
 is completed then it will create a new conflict of interest records.
+
+Modification Log:
+1. 26/03/2018 - Vignesh SM - IME 18 - Line No. 83
 *****************************************************************************************************/
 
 Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, after update) {
@@ -39,7 +42,7 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
                     wishClearenceSetId.add(dsts.dsfs__Case__c);
                 }
                 
-                if(subject.contains('Signature Required – Make-A-Wish Wish Clearance and Child'+'\'s'+' '+ 'Medical Summary Form:') || subject.contains('Signature Required – Make-A-Wish Rush Wish Clearance and Child'+'\'s'+' '+ 'Medical Summary Form:') ){
+                if(subject.contains('Signature Required – Make-A-Wish Wish Clearance, Child'+'\'s'+' '+ 'Medical Summary:') || subject.contains('Signature Required – Make-A-Wish Rush Wish Clearance, Child'+'\'s'+' '+ 'Medical Summary:') ){
                     system.debug('@@@@@@@ Inside the Combo Documnet');
                     parentWishIdSet.add(dsts.dsfs__Case__c);
                     wishClearenceSetId.add(dsts.dsfs__Case__c);
@@ -74,12 +77,15 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
         
         if(leadIdSet.size() > 0)
         {
-            for(Lead dbLead : [SELECT Id,isSign__c,Status,RFI_Form_Info_Hidden__c from Lead WHERE Id in:leadIdSet AND Status = :'Referred' AND Sub_Status__c = 'Pending Diagnosis Verification']){
+            for(Lead dbLead : [SELECT Id,isSign__c,Status,RFI_Form_Info_Hidden__c,Auto_Qualified__c from Lead WHERE Id in:leadIdSet AND Status = :'Referred' AND Sub_Status__c = 'Pending Diagnosis Verification']){
                 if(dbLead.RFI_Form_Info_Hidden__c  == 'Qualified'){
                     dbLead.Status = 'Qualified';
+                    dbLead.Auto_Qualified__c = true; //Added as per IME 18
+                    dbLead.Is_Required_Bypass__c = true;//Added as per IME-60
                 }
                 if(dbLead.RFI_Form_Info_Hidden__c  == 'Not Qualified'){
                     dbLead.Status = 'Eligibility Review';
+                    dbLead.Is_Required_Bypass__c = false;//Added as per IME-60
                 }
                 dbLead.isSign__c = true;
                 leadList.add(dbLead);

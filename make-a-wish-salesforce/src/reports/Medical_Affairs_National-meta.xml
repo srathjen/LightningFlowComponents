@@ -7,13 +7,8 @@
     </folderShares>
     <folderShares>
         <accessLevel>EditAllContents</accessLevel>
-        <sharedTo>kblakeley@wish.org</sharedTo>
-        <sharedToType>User</sharedToType>
-    </folderShares>
-    <folderShares>
-        <accessLevel>EditAllContents</accessLevel>
-        <sharedTo>rcooner@wish.org</sharedTo>
-        <sharedToType>User</sharedToType>
+        <sharedTo>National_Staff</sharedTo>
+        <sharedToType>Role</sharedToType>
     </folderShares>
     <name>Medical Affairs - National</name>
 </ReportFolder>

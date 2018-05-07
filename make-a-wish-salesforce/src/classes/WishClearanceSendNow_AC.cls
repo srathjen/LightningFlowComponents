@@ -7,39 +7,59 @@ public class WishClearanceSendNow_AC{
     public List<SelectOption> multiPickoptions {get;set;}       
     Public String medicalProfContactName{get;set;}
     Constant_AC  constant = new Constant_AC();
-    public Map<String,String> medicalProfConMap; 
+    public Map<String,npe4__Relationship__c> medicalProfConMap; 
     public String email{get;set;}
+    public String MedicalProviderType{get;set;}
     public String nameconcat;
     public boolean dis{get;set;}
     public boolean displayReturnToWish{get;set;} 
+    public String type{ get;set;}
+        
+
     Public Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
     public WishClearanceSendNow_AC(ApexPages.StandardController controller){
         dis = true;
-        currentParentCase = [SELECT Id,ContactId,Contact.lastname,Contact.firstname,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushWishClearence_ChildSummary__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
+        currentParentCase = [SELECT Id,ContactId,Contact.lastname,Contact.firstname,Contact.Gender__c,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushWishClearence_ChildSummary__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id') LIMIT 1];
       nameconcat=currentParentCase.Contact.firstname+currentParentCase.Contact.lastname;
           
     }
     
     public List<SelectOption> getMedicalProContact(){
-       medicalProfConMap = new Map<String,String>();
+       medicalProfConMap = new Map<String,npe4__Relationship__c>();
        List<SelectOption> options = new List<SelectOption>();
-        for(npe4__Relationship__c dbRelationShip  : [Select Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,
-                                                     npe4__RelatedContact__r.RecordTypeId FROM npe4__Relationship__c WHERE npe4__Contact__c =:currentParentCase.ContactId AND npe4__RelatedContact__r.RecordTypeId =:MedicalProfContactRecordTypeId]){
+        for(npe4__Relationship__c dbRelationShip  : [Select Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.Provider_Type__c,
+                                                     npe4__RelatedContact__r.RecordTypeId FROM npe4__Relationship__c WHERE npe4__Contact__c =:currentParentCase.ContactId AND npe4__RelatedContact__r.RecordTypeId =:MedicalProfContactRecordTypeId  AND Send_Wish_Forms__c = True]){
        
            options.add(new SelectOption(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip.npe4__RelatedContact__r.Name));
-           medicalProfConMap.Put(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip.npe4__RelatedContact__r.Email); 
+           medicalProfConMap.Put(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip); 
        }
+        If(medicalProfConMap.isEmpty()){
+             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please select the medical professional to send the wish forms to by selecting \'Send Wish Forms To\' checkbox under the Medical Professional section on the Case record.'));
+        }
     
      return options;
     }
     
     public void displayEmail(){
-        if(medicalProfConMap.get(medicalProfContactName) != Null){
-        dis = true;
-        email = medicalProfConMap.get(medicalProfContactName);
+       
+        if(medicalProfConMap.containskey(medicalProfContactName)){
+            if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email != Null){
+            dis = true;
+            email = medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email;
+            }
+            else{
+            email = Null;
+            }
+             if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Provider_Type__c!= Null){
+             dis = true;
+             MedicalProviderType = medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Provider_Type__c; 
+             }
+             else{
+              MedicalProviderType = Null;
+             }
+            }
         }
-        
-    }
+    
     public void ReturnToWish(){
         displayReturnToWish = true;
     }
@@ -49,16 +69,21 @@ public class WishClearanceSendNow_AC{
         return reference;
     }
     
+     public pageReference ReturnToWishClearanceNoTravelForm(){
+     PageReference reference=new PageReference('/apex/WishClearanceNoTravel_VF?id='+currentParentCase.id);
+        reference.setRedirect(true);     
+        return reference;
+    }
+    
     public void SendtoDocuSign(){
-        
-        if(currentParentCase.wish_involves_air_travel__c == Null ||currentParentCase.Description == Null ){
+        system.debug('@@@ medicalProfContactName @@@'+medicalProfContactName);
+        if((currentParentCase.wish_involves_air_travel__c == Null && type != 'WishClearanceNoTravel') ||currentParentCase.Description == Null || medicalProfContactName == Null){
             DisplayErrorMessage();
         }
-        
-        else if(medicalProfConMap.get(medicalProfContactName) == Null){
-            DisplayErrorMessage();
-        }
-        else{
+        else if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email == Null){
+                DisplayErrorMessage();
+            }
+      else{
            case updatecase = new Case();
            updatecase.Id = currentParentCase.Id;
            updatecase.wish_involves_air_travel__c = currentParentCase.wish_involves_air_travel__c;
@@ -72,16 +97,17 @@ public class WishClearanceSendNow_AC{
            updatecase.Wish_Clearance_Sent_Date__c = system.today();
            updatecase.Wish_Clearance_Received_Date__c = Null;
            update updatecase;
+           
            if(!Test.isRunningTest())
-           CallouttoDocusign(updateCase.Id,medicalProfContactName,email);
+           CallouttoDocusign(updateCase.Id,medicalProfContactName,email,type);
            DisplayMessage();
         }
         // return wrapInst.status;
     }
     
     @future(Callout = true)
-    public static void CallouttoDocusign(Id caseId,String conName,String conEmail){
-       Case currentParentCase = [SELECT Id,ContactId,Contact.Name,Contact.lastname,Contact.firstname,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c,Rush__c  FROM Case WHERE Id =: caseId];
+    public static void CallouttoDocusign(Id caseId,String conName,String conEmail,string type){
+       Case currentParentCase = [SELECT Id,ContactId,Contact.Name,Contact.lastname,Contact.Gender__c,Contact.firstname,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c,Rush__c  FROM Case WHERE Id =: caseId LIMIT 1];
          
             String account;
             String UserName;
@@ -136,13 +162,32 @@ public class WishClearanceSendNow_AC{
             }
             
            if(currentParentCase.Rush__c  != true){
-               templateID = label.WishClearence;
-               subject = 'Signature Required – Make-A-Wish Wish Clearance Form: '+currentParentCase.Contact.firstname+' '+lastInitial+'.';
+               //String type = apexpages.currentpage().getparameters().get('clearenceType');
+               System.debug('parameter'+type);
+               If( type == 'WishClearanceNoTravel'){
+                   If(currentParentCase.Contact.Gender__c != 'Self-describe' )
+                      templateID = label.Wish_Clearance_No_Travel;
+                    else
+                        templateID = label.Wish_Clearance_No_Travel_Form_Self_describe; 
+                   subject = 'Signature Required – Make-A-Wish Wish Clearance No Travel Form: '+currentParentCase.Contact.firstname+' '+lastInitial+'.';
+              } else{
+                   templateID = label.WishClearence;
+                   subject = 'Signature Required – Make-A-Wish Wish Clearance Form: '+currentParentCase.Contact.firstname+' '+lastInitial+'.';
+             }
            }
             
-           if(currentParentCase.Rush__c  == true){
-               templateID = label.Rush_Wish_Clearance;
-               subject = 'Signature Required – Make-A-Wish Rush Wish Clearance Form: '+currentParentCase.Contact.firstname+' '+lastInitial+'.';
+           if(currentParentCase.Rush__c  == true ){
+               If( type == 'WishClearanceNoTravel'){
+                   If(currentParentCase.Contact.Gender__c != 'Self-describe' )
+                      templateID = label.Wish_Clearance_No_Travel_Form_Rush_Wish;
+                    else
+                        templateID = label.Wish_Clearance_No_Travel_Rush_Wish_Form_Self_describe; 
+                   subject = 'Signature Required – Make-A-Wish Rush Wish Clearance No Travel Form: '+currentParentCase.Contact.firstname+' '+lastInitial+'.';
+               }
+               else{
+                   templateID = label.Rush_Wish_Clearance;
+                   subject = 'Signature Required – Make-A-Wish Rush Wish Clearance Form: '+currentParentCase.Contact.firstname+' '+lastInitial+'.';
+               }
            }
             String endpoint = endPointURL+'/accounts/'+account+'/envelopes';
             system.debug('### endpoint #####'+endpoint );
@@ -218,17 +263,26 @@ public class WishClearanceSendNow_AC{
     }
     
     public pagereference DisplayMessage(){
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The Wish Clearance form has been sent successfully.'));
-        return null;
+        If(type == 'WishClearanceNoTravel'){
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The Wish Clearance No Travel form has been sent successfully.'));
+        }
+       else
+       {
+           ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Confirm,'The Wish Clearance form has been sent successfully.'));
+       }return null;
     }
     
     public pagereference DisplayErrorMessage(){
-        if(currentParentCase.wish_involves_air_travel__c == Null)
+        if(medicalProfContactName == Null)
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please Select Recipient'));
+        if(currentParentCase.wish_involves_air_travel__c == Null && type != 'WishClearanceNoTravel')
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please Select Wish Involves Air Travel'));
         if(currentParentCase.Description == Null )
         ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please add a value to Description on the case page.'));
-        if(medicalProfConMap.get(medicalProfContactName) == Null)
-        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'The contact you have selected has no email address available. Please add email on the contact record and try to send the form again.'));
+        if(medicalProfConMap.containsKey(medicalProfContactName)){
+         if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email == Null)
+            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'The contact you have selected has no email address available. Please add email on the contact record and try to send the form again.'));
+        }
         return null;
     }
 }

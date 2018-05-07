@@ -1,6 +1,46 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="margin: 7.5pt 0in 0.0001pt; line-height: normal; background: white;"><font face="Century Gothic, sans-serif">{!Contact.FirstName}</font><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">,<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Congratulations on completing the process to become a Make-A-Wish volunteer! We are excited to welcome you!<br></span><font face="Century Gothic, sans-serif" style="font-size: 12pt;"><br>To get started in your role, please visit the&nbsp;</font><a href="https://make-a-wish.force.com/" style="font-family: &quot;Century Gothic&quot;, sans-serif;">Make-A-Wish Volunteer Center</a><font face="Century Gothic, sans-serif" style="font-size: 12pt;">&nbsp;with the username below.<br></font><font face="Century Gothic, sans-serif" style="font-size: 12pt;"><br>Username:&nbsp;</font><span style="font-family: &quot;Century Gothic&quot;, sans-serif;">{!npe5__Affiliation__c.User_Name_Hidden__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Once you've logged in, be sure to:</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin: 7.5pt 0in 0.0001pt; line-height: normal; background: white;"></p><ul style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><li><font face="Century Gothic, sans-serif">Review your profile. Add your demographic information, update any professional skills, and ensure all fluent languages are listed.</font></li><li><font face="Century Gothic, sans-serif">View and sign up for a volunteer opportunity.</font></li><li><font face="Century Gothic, sans-serif">Collaborate with other volunteers and staff inside Chatter.</font></li><li><font face="Century Gothic, sans-serif">Search for tools and resources.</font></li></ul><p style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin: 7.5pt 0in 0.0001pt; line-height: normal; background: white;"><font face="Century Gothic, sans-serif">In the future, you can access the site by saving make-a-wish.force.com to your browser Favorites. As always, please feel free to contact us with any questions, comments, concerns or ideas.<br></font><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>{!Contact.OwnerFullName}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!npe5__Affiliation__c.npe5__Organization__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Contact.OwnerPhone}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Contact.OwnerEmail}</span></p>]]></td>
+<![CDATA[<p class="MsoNormal" style="margin-top:7.5pt;margin-right:0in;margin-bottom:0in;
+margin-left:0in;margin-bottom:.0001pt;line-height:normal;background:white"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName},<br>
+<br>
+Congratulations on completing the process to become a Make-A-Wish volunteer! We
+are excited to welcome you!<br>
+<br>
+To get started in your role, please visit the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish
+Volunteer Center</span></a>&nbsp;with the username below.<br>
+<br>
+Username:&nbsp;{!npe5__Affiliation__c.User_Name_Hidden__c}<br>
+<br>
+Once you've logged in, be sure to:<o:p></o:p></span></p><ul type="disc">
+ <li class="MsoNormal" style="line-height: normal;"><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,sans-serif;mso-fareast-font-family:
+     &quot;Times New Roman&quot;;mso-bidi-font-family:Arial">Review your profile. Add your
+     demographic information, update any professional skills, and ensure all
+     fluent languages are listed.<o:p></o:p></span></li>
+ <li class="MsoNormal" style="line-height: normal;"><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,sans-serif;mso-fareast-font-family:
+     &quot;Times New Roman&quot;;mso-bidi-font-family:Arial">View and sign up for a
+     volunteer opportunity.<o:p></o:p></span></li>
+ <li class="MsoNormal" style="line-height: normal;"><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,sans-serif;mso-fareast-font-family:
+     &quot;Times New Roman&quot;;mso-bidi-font-family:Arial">Collaborate with other
+     volunteers and staff inside Chatter.<o:p></o:p></span></li>
+ <li class="MsoNormal" style="line-height: normal;"><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,sans-serif;mso-fareast-font-family:
+     &quot;Times New Roman&quot;;mso-bidi-font-family:Arial">Search for tools and
+     resources.<o:p></o:p></span></li>
+</ul><p class="MsoNormal" style="margin-top:7.5pt;margin-right:0in;margin-bottom:0in;
+margin-left:0in;margin-bottom:.0001pt;line-height:normal;background:white"><span style="font-size: 12pt; font-family: Lato, sans-serif;">In the future, you
+can access the site by saving make-a-wish.force.com to your browser Favorites.
+As always, please feel free to contact us with any questions, comments,
+concerns or ideas.<br>
+<br>
+{!Contact.OwnerFullName}<br>
+{!npe5__Affiliation__c.npe5__Organization__c}<br>
+{!Contact.OwnerPhone}<br>
+{!Contact.OwnerEmail}<o:p></o:p></span></p><p class="MsoNormal" style="margin: 7.5pt 0in 0.0001pt; line-height: normal; background: white;">
+
+
+
+
+
+</p><p class="MsoNormal"><span style="font-family:&quot;Lato&quot;,sans-serif">&nbsp;</span></p>]]></td>
 </tr>
 </table>

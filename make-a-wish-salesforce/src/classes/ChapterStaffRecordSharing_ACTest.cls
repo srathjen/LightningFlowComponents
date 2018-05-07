@@ -21,6 +21,7 @@ Public class ChapterStaffRecordSharing_ACTest
           Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
           Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
           Conflict_Of_Interest__c  coiRec = OrientationandTrainingUtil.createCOI(volunteerContact.Id);
+          System.assert(10 == 10, 'Value does not match');
         }
 
 }

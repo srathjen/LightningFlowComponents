@@ -18,4 +18,5 @@
     <tab>Awards_Recognition__c</tab>
     <tab>Background_Check_File__c</tab>
     <tab>Regions__c</tab>
+    <tab>Apex_Debug_Log__c</tab>
 </CustomApplication>

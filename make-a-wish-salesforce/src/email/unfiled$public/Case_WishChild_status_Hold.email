@@ -1,0 +1,49 @@
+<table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
+<tr valign="top" height="400" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<font face="Times New Roman">
+
+</font><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Dear
+{!Case.Hidden_Parent_FirstName__c},<br>
+<br>
+We are honored to be able to grant a wish for {!Case.Hidden_Wish_Child_FirstName__c},
+and look forward to working closely with your family through the remainder of
+the wish process. We understand, however, that life can be extremely busy,
+especially when a child with a life-threatening medical condition is involved.
+We want to be sensitive to your family’s needs and offer you the additional
+time you have requested before proceeding with
+{!Case.Hidden_Wish_Child_FirstName__c}’s wish.&nbsp;<br>
+<br>
+Per our national policies, we are able to place {!Case.Hidden_Wish_Child_FirstName__c}’s
+wish on hold for a period of up to one year. The one-year hold period began on
+the day of your request ({!Case.Hold_Date__c}) and will expire on
+{!Case.Est_Hold_End_Date__c}. At that time, we will contact you with details of
+the next steps in {!Case.Hidden_Wish_Child_FirstName__c}’s wish process. Please
+know that we will check in with your family in six months to ensure that you
+wish to continue the hold as planned.<br>
+<br>
+If you should change your mind, or for any reason want to resume the wish
+process again before the expiration of the hold period please contact me
+directly.&nbsp;</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">We consider it a
+privilege to grant a wish for {!Case.Hidden_Wish_Child_FirstName__c} and look
+forward to bringing your family unforgettable moments and memories when we
+resume the process in one year. We believe that a Make-A-Wish experience can
+give a child the optimism and strength to live with, or even overcome, a
+life-threatening medical condition. We look forward to delivering this joy to
+{!Case.Hidden_Wish_Child_FirstName__c} and inviting your entire family&nbsp;<b>share
+the power of a wish!</b><br>
+<br>
+{!Case.Case_email_signature__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p style="margin-top:0in;margin-right:0in;margin-bottom:12.0pt;margin-left:
+0in">
+
+
+
+
+
+</p><p class="MsoNormal"><span style="font-size:12.0pt;line-height:107%">&nbsp;</span></p><font face="Times New Roman">
+
+</font>]]></td>
+</tr>
+</table>

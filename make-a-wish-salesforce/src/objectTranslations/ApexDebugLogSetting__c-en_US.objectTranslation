@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ApexDebugLogSetting</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ApexDebugLogSetting</value>
+    </caseValues>
+    <fields>
+        <help><!-- Please enter the number of day the Debug log needs to exist --></help>
+        <label><!-- Interval to clear the debug log --></label>
+        <name>Interval_to_clear_the_debug_log__c</name>
+    </fields>
+    <fields>
+        <help><!-- Please enter number of that needs to preserve --></help>
+        <label><!-- Number of records needs to preserve --></label>
+        <name>Number_of_records_needs_to_preserve__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

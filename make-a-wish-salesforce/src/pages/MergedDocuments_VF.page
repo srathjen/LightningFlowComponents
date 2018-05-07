@@ -31,7 +31,7 @@ Description : This vf page contains all the custom links in one section on the p
         <apex:outputPanel rendered="{!$Profile.Name !='Active Volunteer (Member)' && $Profile.Name != 'Active Volunteer (Login)'}" layout="block" style="margin-top:10px;">
             <table style="width:70%; font-size:14px" cellpadding="10" class="tbl">
                 <tr style="width:100%">
-                    <th align="center" colspan="2"><div style="font-size: 20px; color: #333"><center>Merged Documents</center></div></th>
+                    <th align="center" colspan="3"><div style="font-size: 20px; color: #333"><center>Merged Documents</center></div></th>
                 </tr>
                 <tr>
                     <td><b>English</b></td>
@@ -40,12 +40,11 @@ Description : This vf page contains all the custom links in one section on the p
                 <tr style="width:100%">
                     <td align="center"><div><apex:outputLink target="_blank" value="{!dnqLetter}"> DNQ Letter</apex:outputLink></div></td>
                     <td align="center"><div><apex:outputLink target="_blank" value="{!dnqLetterSpanish}"> DNQ Letter Spanish</apex:outputLink></div></td>
-                    
                 </tr>
                 <tr style="width:100%">
                     <td align="center"><div><apex:outputLink target="_blank" value="{!welcomeLetter}">Welcome Letter</apex:outputLink></div></td>
                     <td align="center"><div><apex:outputLink target="_blank" value="{!welcomeLetterSpanish}"> Welcome Letter Spanish</apex:outputLink></div></td>
-                    
+                   
                 </tr>
                 <apex:outputPanel rendered="{!WishReceipt != Null}">
                     <tr style="width:100%">
@@ -87,7 +86,15 @@ Description : This vf page contains all the custom links in one section on the p
                 <tr style="width:100%">
                     <td align="center"><div><apex:outputLink target="_blank" value="{!rushWishLetter}">Rush Wish Letter</apex:outputLink></div></td>
                 </tr>
-              
+                <tr style="width:100%">
+                    <td align="center"><div><apex:outputLink target="_blank" value="{!familyHoldMessage}">Family Elective Hold</apex:outputLink></div></td>
+                </tr>
+                <tr style="width:100%">
+                    <td><div><apex:outputLink target="_blank" value="{!wishAssistForm}"> Wish Assist Request Form</apex:outputLink></div></td>
+                </tr>
+                <tr style="width:100%">
+                    <td><div><apex:outputLink target="_blank" value="{!salesforceWishAssistFormMessage}"> Salesforce Wish Assist Form</apex:outputLink></div></td>
+                </tr>
             </table>
         </apex:outputPanel>
     </apex:form>                 

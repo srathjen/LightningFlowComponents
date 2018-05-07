@@ -24,26 +24,31 @@
     <filter>
         <criteriaItems>
             <column>ACTIVE</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>PROFILE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Prospective Volunteer (Login),Active Volunteer (Login)</value>
         </criteriaItems>
         <criteriaItems>
             <column>ROLE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Arizona - Chapter</value>
         </criteriaItems>
         <criteriaItems>
             <column>EMAIL</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>mawoffshore@gmail.com</value>
         </criteriaItems>
         <criteriaItems>
             <column>PROFILE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>System Administrator</value>
         </criteriaItems>

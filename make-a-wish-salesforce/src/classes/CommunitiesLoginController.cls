@@ -50,7 +50,7 @@ global class CommunitiesLoginController {
             }
         }
         else {
-            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Username does not exist');
+            ApexPages.Message msg = new ApexPages.Message(ApexPages.Severity.ERROR, 'Username does not exist.');
             ApexPages.addMessage(msg);
             return null;
         }

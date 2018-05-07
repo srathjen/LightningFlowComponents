@@ -1,6 +1,31 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><font face="Century Gothic, sans-serif">{!Contact.FirstName}</font><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">,<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Thank you for interviewing with us and sharing your interests, passions, and skills.<br></span><font face="Century Gothic, sans-serif" style="font-size: 12pt;"><br>Your volunteer role requires the completion of a criminal background check every three years. To request your criminal background check, please log in to the&nbsp;</font><a href="https://make-a-wish.force.com/" style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">Make-A-Wish Volunteer Center</a><font face="Century Gothic, sans-serif" style="font-size: 12pt;">&nbsp;and click <b>"Continue Process"</b>.</font></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>We look forward to answering any questions you may have about this part of the volunteer application process.<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>{!Contact.OwnerFullName}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Contact.Region_Chapter__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Contact.OwnerPhone}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Contact.OwnerEmail}</span></p>]]></td>
+<![CDATA[<p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName},<br>
+<br>
+Thank you for interviewing with us and sharing your interests, passions, and
+skills.<br>
+<br>
+Your volunteer role requires the completion of a criminal background check
+every three years. To request your criminal background check, please log in to
+the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish
+Volunteer Center</span></a>&nbsp;and click&nbsp;<b>"Continue Process"</b>.</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;"><br>
+We look forward to answering any questions you may have about this part of the
+volunteer application process.<br>
+<br>
+{!Contact.OwnerFullName}<br>
+{!Contact.Region_Chapter__c}<br>
+{!Contact.OwnerPhone}<br>
+{!Contact.OwnerEmail}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal">
+
+
+
+
+
+</p><p class="MsoNormal"><o:p>&nbsp;</o:p></p>]]></td>
 </tr>
 </table>

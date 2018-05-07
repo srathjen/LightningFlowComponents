@@ -5,23 +5,34 @@ public class LMSHttpRequest {
     //To create LMSRequest 
     public static HttpRequest createLMSHttpRequest(LMS_Credentials__c lMSCredential,String endPoint,String methodType){
         HttpRequest request = new HttpRequest();
-        if(lMSCredential != Null && endPoint != Null && methodType != Null ){
-            String endpointUrl = lMSCredential.End_Point_URL__c + endPoint;
-            //String endpointUrl = 'https://mawa-exceed-lms-api-dev.cloudhub.io/exceed_lms/api/enrollments?user_login=chandruvolunteer@gmail.com ';
-            String userName = lMSCredential.User_Name__c;
-            String password = lMSCredential.Password__c;        
-            request.setEndpoint(endpointUrl);
-            request.setMethod(methodType);  
-            Blob headerValue = Blob.valueOf(username + ':' + password);
-            String authorizationHeader = 'Basic ' +EncodingUtil.base64Encode(headerValue);
-            request.setHeader('authorization', authorizationHeader);
-            System.debug('The End Point URL'+endpointUrl);
+        String Logvalue;
+        try{
+            if(lMSCredential != Null && endPoint != Null && methodType != Null ){
+                String endpointUrl = lMSCredential.End_Point_URL__c + endPoint;
+                //String endpointUrl = 'https://mawa-exceed-lms-api-dev.cloudhub.io/exceed_lms/api/enrollments?user_login=chandruvolunteer@gmail.com ';
+                String userName = lMSCredential.User_Name__c;
+                String password = lMSCredential.Password__c;        
+                request.setEndpoint(endpointUrl);
+                request.setMethod(methodType);  
+                Blob headerValue = Blob.valueOf(username + ':' + password);
+                String authorizationHeader = 'Basic ' +EncodingUtil.base64Encode(headerValue);
+                request.setHeader('authorization', authorizationHeader);
+                Logvalue = String.valueOf(request);
+                System.debug('The End Point URL'+endpointUrl);
+            }
+            return request;
         }
-        return request;
+        catch(Exception e){
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('LMSHttpRequest','createLMSHttpRequest',Null,e,Logvalue));
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);
+            return null;
+        }
     }
     // To get SSO details of the LMS User
     public static LMSSSORespose getLMSSSODetails(LMS_Credentials__c lMSCredential,String volunteerLMSId,String courseCode){
         LMSSSORespose lMSSSOResponse = new LMSSSORespose();
+        String Logvalue;
         if(lMSCredential != Null && volunteerLMSId != Null){ 
             String[] courseIds = courseCode.split(' ');
             String  courseParameter;          
@@ -36,10 +47,14 @@ public class LMSHttpRequest {
             Http http = new Http();
             HTTPResponse response;
             try{
+                Logvalue = String.valueOf(request);
                 response = http.send(request); 
                 lMSSSOResponse = LMSSSORespose.parse(response.getBody());
                 System.debug('lMSSSOResponse+++++++++++'+lMSSSOResponse);
             }catch(Exception ex){
+                new ApexDebugLog().createLog(new ApexDebugLog.Error('LMSHttpRequest','getLMSSSODetails',Null,ex,Logvalue));
+                ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+                ApexPages.addMessage(myMsg);
                 System.debug('ex'+ex.getmessage());                
             }
         } 
@@ -48,6 +63,7 @@ public class LMSHttpRequest {
     // To create or active users in LMS
     public static LMSUserResponse createOrActivateLMSUser(User currVolunteerUser,LMS_Credentials__c lMSCredential){
         LMSUserResponse currLMSUserResponse = new LMSUserResponse();
+            String Logvalue;
             if(lMSCredential != Null && currVolunteerUser != null){
                 HttpRequest request = new HttpRequest();
                 request = createLMSHttpRequest(lMSCredential,lMSCredential.UserCreaationEndpoint__c,'POST');                
@@ -71,12 +87,12 @@ public class LMSHttpRequest {
                 userRequestDetails.password = currVolunteerUser.LastName;
                 userRequestDetails.chapter_id= currVolunteerUser.contact.Region_Chapter__r.Chapter_Id__c;
                 String requestPayLoad = JSON.serialize(userRequestDetails);
-                System.debug('userDetails'+userRequestDetails);
                 request.setBody(requestPayLoad);                     
                 Http http = new Http();
                 HTTPResponse response;
                 try{
                     System.debug('request++++++++++++++++++++++++++ ' + requestPayLoad);
+                    Logvalue = String.valueOf(request);
                     response = http.send(request); 
                     System.debug('The response is + '+response.getBody());
                     currLMSUserResponse = LMSUserResponse.parse(response.getBody());
@@ -90,34 +106,50 @@ public class LMSHttpRequest {
                     }
                     
                 }catch(Exception ex){
+                    
+                    new ApexDebugLog().createLog(new ApexDebugLog.Error('LMSHttpRequest','createOrActivateLMSUser',Null,ex,Logvalue));
+                    ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+                    ApexPages.addMessage(myMsg);
                     System.debug('ex'+ex.getmessage());
                 }
             } 
             return currLMSUserResponse;
     }
     //To create or update Enrollment in LMS
-    public static LMSOrientationRegistrationResponse createOrUpdateEnrollment(LMS_Credentials__c lMSCredential,String courseId,String userLogin,String enrollmentStatus){
+    public static LMSOrientationRegistrationResponse createOrUpdateEnrollment(LMS_Credentials__c lMSCredential,String courseId,String userLogin,String enrollmentStatus,Integer endrollmentId){
         LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
+        String Logvalue;
         System.debug('The request paramenter are lMSCredential'+ lMSCredential + 'courseId+'+courseId + 'userLogin+'+userLogin+'enrollmentStatus+'+enrollmentStatus);
         if(lMSCredential != Null && courseId != Null && userLogin != Null && enrollmentStatus != Null ){
             HttpRequest request = new HttpRequest();
-            request = createLMSHttpRequest(lMSCredential,lMSCredential.EnrollmentEndPoint__c,'POST');                           
+            If(enrollmentStatus != 'dropped')
+                request = createLMSHttpRequest(lMSCredential,lMSCredential.EnrollmentEndPoint__c,'POST');                           
+            else
+                request = createLMSHttpRequest(lMSCredential,lMSCredential.EnrollmentEndPoint__c,'PUT'); 
             request.setHeader('Content-Type', 'application/json');
             LMSOrientationRegistrationRequest currLMSOrientationRegistrationRequest = new LMSOrientationRegistrationRequest();
             currLMSOrientationRegistrationRequest.course_code = courseId;
             currLMSOrientationRegistrationRequest.user_login = userLogin;
             currLMSOrientationRegistrationRequest.status = enrollmentStatus;
+            //Added by Pavi.
+            If(enrollmentStatus == 'dropped' && endrollmentId != Null)
+                currLMSOrientationRegistrationRequest.enrollment_id = endrollmentId;
+           //End.
             String requestPayLoad = JSON.serialize(currLMSOrientationRegistrationRequest);            
             request.setBody(requestPayLoad);                     
             Http http = new Http();
             HTTPResponse response;
             try{
+                Logvalue = String.valueOf(request);
                 response = http.send(request); 
                 System.debug('The response is + '+response.getBody());
                 
                 currLMSOrientationRegistrationResponse = LMSOrientationRegistrationResponse.parse(response.getBody()); 
                                       
             }catch(Exception ex){
+                new ApexDebugLog().createLog(new ApexDebugLog.Error('LMSHttpRequest','createOrUpdateEnrollment',Null,ex,Logvalue));                
+                ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+                ApexPages.addMessage(myMsg);
                 System.debug('ex'+ex.getmessage());                            
             }
         }

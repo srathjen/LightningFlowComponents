@@ -22,31 +22,37 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Roles__c.Role_Name__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Wish Granter</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_$Contact.Number_of_wishes_active__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_$Contact.is_Active_Volunteer__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_$Contact.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_$Contact.Active_Wish_Granter__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Roles__c.Chapter_Name__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>

@@ -28,11 +28,13 @@
     <filter>
         <criteriaItems>
             <column>STAGE_NAME</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Proposal/Price Quote,Negotiation/Review</value>
         </criteriaItems>
         <criteriaItems>
             <column>PRODUCT_NAME</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>

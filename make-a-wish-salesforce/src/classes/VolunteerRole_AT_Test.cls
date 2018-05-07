@@ -2,6 +2,8 @@
 Author      : MST Solutions
 Date        : 7/18/2016
 Description : This test class used for unit test and code coverage
+Modification Log: 
+28/03/2018 - Kanagaraj
 *******************************************************************************************************************/
 @isTest
 public class VolunteerRole_AT_Test{
@@ -18,9 +20,8 @@ public class VolunteerRole_AT_Test{
         Volunteer_Roles__c currVolRole = OrientationandTrainingUtil.createVolRole(con.id,currChapRole.id);
         currVolRole.Status__c = 'Pending Training';
         update currVolRole;
-        
-        
-        
+        system.AssertEquals(currVolRole.Status__c,'Pending Training','Volunteer role status does not match');
+        system.Assert(currVolRole.Status__c == 'Pending Training','Volunteer role status does not match');
     }
     // Update volunteer role status as Out of Compliance and Trained   
     static testmethod void updateVolunteerROle()
@@ -43,6 +44,8 @@ public class VolunteerRole_AT_Test{
         currVolRole.Status__c = 'Trained';
         update currVolRole;
         update newVolunteerRole;
+        system.AssertEquals(currVolRole.Status__c,'Trained','Volunteer role status does not match');
+        system.Assert(currVolRole.Status__c == 'Trained','Volunteer role status does not match');
     }
     
     static testmethod void updatbackgrounCheck(){
@@ -62,6 +65,8 @@ public class VolunteerRole_AT_Test{
         VolunteerRoleTriggerHandler.updateBackGroundCheck(volIdSet, 'none');
         VolunteerRoleTriggerHandler.updateBackGroundCheck(volIdSet, '1');
         VolunteerRoleTriggerHandler.updateBackGroundCheck(volIdSet, '2');
+        system.AssertEquals(newBack.Volunteer__c,con.id,'Background check volunteer does not match');
+        system.Assert(newBack.Volunteer__c == con.id,'Background check volunteer does not match');
     }
     
     static testmethod void updateConfilciOfInt(){
@@ -88,5 +93,7 @@ public class VolunteerRole_AT_Test{
         VolunteerRoleTriggerHandler.updateConflictOfInterest(volIdSet, 'none');
         VolunteerRoleTriggerHandler.updateConflictOfInterest(volIdSet, '1');
         VolunteerRoleTriggerHandler.updateConflictOfInterest(volIdSet, '2');
+        system.AssertEquals(newVolRole.Status__c,'Pending Training','Volunteer role status does not match');
+        system.Assert(newVolRole.Status__c == 'Pending Training','Volunteer role status does not match');
     }
 }

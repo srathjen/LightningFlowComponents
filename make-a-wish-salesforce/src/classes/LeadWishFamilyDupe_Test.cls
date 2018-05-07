@@ -15,7 +15,7 @@ Public class LeadWishFamilyDupe_Test
    }
    
     /*This method is used to increase the code coverage for findDuplicateRecords method */ 
-   public testmethod static void FindWishChildDupe(){ 
+   public testmethod static void findWishChildDupe(){ 
          
          Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
          Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
@@ -33,7 +33,7 @@ Public class LeadWishFamilyDupe_Test
    }
    
     /*This method is used to increase the code coverage for findDuplicateRecords method */ 
-   public testmethod static void FindLeadDupe(){ 
+   public testmethod static void findLeadDupe(){ 
          
          Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
          Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
@@ -56,7 +56,26 @@ Public class LeadWishFamilyDupe_Test
          dupeLead.unique_wish_identifier__c = '123456';
          insert dupeLead;  
          LeadWishFamilyDupe.FindLeadDupe(dupeLead.id);
+         LeadWishFamilyDupe.resetDVMedicalSummary(dupeLead.id);
         
+   }
+   public testmethod static void sendDVWithICDCode(){ 
+         
+         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+         Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
+         Lead dupeLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
+         dupeLead.LastName='John';
+         dupeLead.city = 'Karur';
+         dupeLead.State = 'Arizona';
+         dupeLead.PostalCode  = '35004';
+         dupeLead.street ='test';
+         dupeLead.Phone = '8220708920';
+         dupeLead.Override_Dupe_Check__c = true;
+         dupeLead.unique_wish_identifier__c = '123456';
+         dupeLead.ICD_Given_By_Referrer__c =  dupeLead.PD_ICD_Code__c;
+         insert dupeLead;  
+         //LeadWishFamilyDupe.FindLeadDupe(dupeLead.id);
+         LeadWishFamilyDupe.resetDVMedicalSummary(dupeLead.id);
         
    }
 

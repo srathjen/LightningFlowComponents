@@ -61,31 +61,37 @@
         <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Inquiry,Referred,Eligibility Review</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>LAST_NAME</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Inquiry_Date__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>greaterThan</operator>
             <value>9/1/2016</value>
         </criteriaItems>

@@ -1,6 +1,13 @@
+/*************************************************************************************************************************************************
+Created by: Pavithra
+Author : MST Solutions
+CreateDate : 10/05/2016
+Description :Batch_UpdateVolunteerStatus_Test is used to increase the code coverage for Batch_UpdateVolunteerStatus_AC class.
+*************************************************************************************************************************************************/
+
 @isTest
 public class Batch_UpdateVolunteerStatus_Test{
-    @isTest static void  updateVolunteerStatus(){
+     static testmethod void  updateVolunteerStatus(){
          Account chapterAc = OrientationandTrainingUtil.createchapterAccount();
          Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAc.Id);
          npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliation(volunteerContact.Id);
@@ -27,8 +34,11 @@ public class Batch_UpdateVolunteerStatus_Test{
          Volunteer_Roles__c boardMemberVolRole = OrientationandTrainingUtil.createVolRole(volunteerContact.Id,boardMemberChapterRole.Id);
          
          Database.executeBatch(new Batch_UpdateVolunteerStatus_AC());
+        
+        system.assertEquals(boardMemberRole.Name,'Board Member','Role is not board member');
+        system.assert(affiliation.npe5__Status__c == 'Active','status updated incorrectly' );
     }
-     @isTest static void  updateVolunteerSingleActiveStatus(){
+      static testmethod void  updateVolunteerSingleActiveStatus(){
         Account chapterAc = OrientationandTrainingUtil.createchapterAccount();
          Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAc.Id);
          npe5__Affiliation__c affiliation = OrientationandTrainingUtil.CreateAffiliation(volunteerContact.Id);
@@ -55,6 +65,9 @@ public class Batch_UpdateVolunteerStatus_Test{
         volOppList.add(nonWishVolOpp);
         Update volOppList;
         Database.executeBatch(new Batch_UpdateVolunteerStatus_AC());
+        
+        system.assertEquals(volOppList[0].Volunteer_Name__c ,volunteerContact.Id,'Contact id does not match');
+        system.assert(singleDayEventRole.Name == 'Single Day Event Volunteer','Role name does not match' );
      }
     
     

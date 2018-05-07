@@ -236,7 +236,7 @@ Public class VolunteerOpportunityTriggerHandler
                     if(wishUserMap.containsKey(caseId)) {
                         for(Id userId : wishUserMap.get(caseId)) {
                             ContactShare shareContact = new ContactShare();
-                            shareContact.ContactAccessLevel = 'Read';
+                            shareContact.ContactAccessLevel = 'Edit';
                             if(wishRelatedContactMap.containsKey(caseId) && wishRelatedContactMap.get(caseId)!= Null ) {
                                 shareContact.ContactId = wishRelatedContactMap.get(caseId);
                             }
@@ -935,7 +935,7 @@ update updateContactList;
     
     public static void updateCase(Set<Id> caseIdSet,Set<Id> voluOppIdSet){
         RecursiveTriggerHandler.isFirstTime = false;
-		RecursiveTriggerHandler.allowToEditRecord = TRUE;
+        RecursiveTriggerHandler.allowToEditRecord = TRUE;
         List<Case> updateCaseList = new List<Case>();
         Case myParentCase = new Case(); 
         for (Case record : [SELECT id FROM Case WHERE Id IN : caseIdSet]){
@@ -949,5 +949,31 @@ update updateContactList;
         updateCaseList.add(myParentCase);
         if(updateCaseList.size() > 0)
             update updateCaseList ;
-    }
+    } 
+    
+    /**********************************************************************************************
+    This method is used to populate "Wish Start Date" when the volunteer Opportunity gets approved.
+    ************************************************************************************************/
+    public static void populateStartDate(Map<Id,Volunteer_Opportunity__c> approvedVolunteerOppMap){
+        Constant_AC  constant = new Constant_AC();
+        String parentWishRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.parentWishRT).getRecordTypeId();
+        Set<Id> dbWishSet = new Set<Id>();
+        set<Id> dbCaseSet = new Set<Id>();
+        for(Volunteer_Opportunity__c procesVolunteerOppRec : approvedVolunteerOppMap.values()){
+            dbWishSet.add(procesVolunteerOppRec.Wish__c);
+        }
+        if(approvedVolunteerOppMap.size() > 0){
+            for(Case dbCase : [SELECT Id,Status,RecordTypeId,isclosed From Case WHERE status != 'Granted' AND RecordTypeId =: parentWishRecordTypeId AND Id IN: dbWishSet]){
+                if(dbCase.isclosed == false){
+                    dbCaseSet.add(dbCase.Id);
+                }
+            }
+            for(Volunteer_Opportunity__c procesVolunteerOppRec : approvedVolunteerOppMap.values()){
+                if(dbCaseSet.contains(procesVolunteerOppRec.Wish__c)){
+                    procesVolunteerOppRec.Wish_Start_Date__c = system.today();
+                }
+            }
+        }
+        
+    }   
 }

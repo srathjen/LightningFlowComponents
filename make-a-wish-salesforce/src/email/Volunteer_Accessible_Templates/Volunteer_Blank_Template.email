@@ -1,6 +1,26 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="margin-bottom: 0.0001pt;"><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 107%;">Hi {!Contact.Name},<br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><font color="#cc0000">{Insert Message}</font><br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Thanks,<br><br></span><span style="color: rgb(204, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; background-color: rgb(255, 255, 255);">{Insert Wish Granter 1 Name}<br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; background-color: rgb(255, 255, 255);"><font color="#cc0000">{Insert Wish Granter 2 Name}<br></font></span><span style="background-color: rgb(255, 255, 255);"><font face="Century Gothic, sans-serif">{!Case.Hidden_Chapter_Name__c}</font><br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; background-color: rgb(255, 255, 255);">{!Case.Hidden_Chapter_Phone__c}<br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; background-color: rgb(255, 255, 255);">{!Case.Hidden_Chapter_Email__c}</span></p>]]></td>
+<![CDATA[<table class="MsoNormalTable" border="0" cellspacing="5" cellpadding="0" width="550" style="width:412.5pt;mso-cellspacing:3.7pt;mso-yfti-tbllook:1184;mso-padding-alt:
+ 3.75pt 3.75pt 3.75pt 3.75pt">
+ <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes;
+  height:300.0pt">
+  <td valign="top" style="background:white;padding:3.75pt 3.75pt 3.75pt 3.75pt;
+  height:300.0pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">Hi {!Contact.Name},<br>
+  <br>
+  </span><span style="font-size: 12pt; font-family: Lato, sans-serif;">{Insert Message}<span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;"><br>
+  <br>
+  Thanks,<br>
+  <br>
+  {Insert Wish Granter 1 Name}<br>
+  {Insert Wish Granter 2 Name}<br>
+  {!Case.Hidden_Chapter_Name__c}<br>
+  {!Case.Hidden_Chapter_Phone__c}<br>
+  {!Case.Hidden_Chapter_Email__c}</span><o:p></o:p></span></p>
+  </td>
+ </tr>
+</tbody></table>]]></td>
 </tr>
 </table>

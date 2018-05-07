@@ -45,11 +45,13 @@
     <filter>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Contact.Wish_Child</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Inquiry_Referral_Method__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>

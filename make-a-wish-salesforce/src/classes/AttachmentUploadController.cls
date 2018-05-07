@@ -1,4 +1,7 @@
 /****************************************************************************
+Author      : MST Solutions
+CreatedBy   : 
+Date        : 
 Description : This controller used to upload the wish child photo to the 
 attachment and get public site image url from S-drive then update the contact
 filed.
@@ -15,10 +18,12 @@ public without sharing class AttachmentUploadController {
         refreshPage = false;
         recId = ApexPages.currentPage().getParameters().get('id');
         contactList = new List<Contact>();
-        contactList = [SELECT ID,Wish_Child_Photo__c FROM Contact WHERE ID =: recId];
+        contactList = [SELECT ID,Wish_Child_Photo__c FROM Contact WHERE ID =: recId LIMIT 1];
         system.debug('@@@@@@@@@@ contactList' + contactList);
     }
-    
+    /***********************************************************************
+    This method is used to reassign or release the Attachnent instance.
+    **************************************************************************/
     public Attachment attachment {
         get {
             if (attachment == null)
@@ -27,7 +32,9 @@ public without sharing class AttachmentUploadController {
         }
         set;
     }
- //This method used to upload the image to the attachment   
+ /***********************************************************************
+ This method used to upload the image to the attachment   
+ **************************************************************************/
     public void upload() {     
         if(attachment.Body != null && attachment.Name != null) {
             attachment.OwnerId = UserInfo.getUserId();
@@ -42,7 +49,10 @@ public without sharing class AttachmentUploadController {
             ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.ERROR, 'Please choose a file to upload'));
         }
     }
- //This method used to get the image url from S-drive and update the contact's wish child photo filed   
+ 
+ /**************************************************************************************************
+ This method used to get the image url from S-drive and update the contact's wish child photo filed 
+ ****************************************************************************************************/  
     public pagereference updateWishChildPhoto(){
         onComplete  =   False;
         list<cg__ContactFile__c> newCon = new list<cg__ContactFile__c >();

@@ -1,7 +1,7 @@
 /*****************************************************************************************************************
 Author      : MST Solutions
 
-Description :
+Description : This page is used to display budget details in wish expenses page.
 
 *******************************************************************************************************************/
 
@@ -59,6 +59,7 @@ public class WishBudgetForm_AC{
         caseApproverStatus = '';
         disableTcode = true;
         pageBlockMode ='detail';
+        NoOfWishParts = 1;
         caseId = ApexPages.currentPage().getParameters().get('CaseId');
         WEtypeExpand=ApexPages.currentPage().getParameters().get('exp');
         System.debug('The parameter value is++++++++++'+caseId );
@@ -67,7 +68,7 @@ public class WishBudgetForm_AC{
         Constant_AC  constant = new Constant_Ac();    
         Id wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
         system.debug('Wish P and A RecordTypeID :' + CaseId + '-' + wishPlanningRecordTypeId );
-        getPlanningAnticipationCase = [SELECT Id, ParentId,Parent.Budget_Submitted_Date__c, Budget_Approval_Status__c FROM Case WHERE ParentId =: CaseId AND RecordTypeId =: wishPlanningRecordTypeId order by Createddate desc];
+        getPlanningAnticipationCase = [SELECT Id, ParentId,Parent.Budget_Submitted_Date__c, Budget_Approval_Status__c FROM Case WHERE ParentId =: CaseId AND RecordTypeId =: wishPlanningRecordTypeId order by Createddate desc LIMIT 50000];
         system.debug('Wish P and A RecordTypeID 1:' + getPlanningAnticipationCase );
         recordId = getPlanningAnticipationCase.get(0).Id;
         caseApproverStatus = getPlanningAnticipationCase.get(0).Budget_Approval_Status__c;
@@ -78,7 +79,7 @@ public class WishBudgetForm_AC{
         }
         
         //To check whether budget approval form is approved
-        List<Case> caseList = [SELECT Id,Contact.FirstName,Contact.LastName,Description, Contact.Middle_Name__c, Anticipated_Start_Date__c, isApprove__c,ChapterName__r.Name,Wish_Type__c, Budget_Notes__c FROM Case WHERE Id =: caseId];
+        List<Case> caseList = [SELECT Id,Contact.FirstName,Contact.LastName,Description, Contact.Middle_Name__c, Anticipated_Start_Date__c, isApprove__c,ChapterName__r.Name,Wish_Type__c, Budget_Notes__c FROM Case WHERE Id =: caseId LIMIT 50000];
         
         if(caseList.size() > 0) {
             wishChapterName = caseList.get(0).ChapterName__r.Name;
@@ -102,7 +103,9 @@ public class WishBudgetForm_AC{
              }
              
             if(participentSet.size() > 0){
-                NoOfWishParts = participentSet.size() + 1;
+               //commented for WVC-1892
+                NoOfWishParts += participentSet.size();
+               //NoOfWishParts = participentSet.size();
             }
          
       }    
@@ -423,7 +426,7 @@ public class WishBudgetForm_AC{
                     userIdsSet.add(getGroupUsers.UserOrGroupId);
                 }
             }
-            userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE Id IN : userIdsSet AND ContactId = null AND IsActive=true  ];
+            userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE Id IN : userIdsSet AND ContactId = null AND IsActive=true  LIMIT 50000];
             //userList = [SELECT Id,Name, Profile.Name, UserRole.Name FROM User WHERE ((Id IN : userIdsSet AND Profile.Name != 'Active Volunteer') OR UserRole.Name = 'National Staff' ) AND IsActive=true  ];
         } else {
             //userList = [SELECT Id, Name, Profile.Name, UserRole.Name FROM User WHERE (UserRole.Name = 'National Staff' OR Profile.Name = 'System Administrator') AND IsActive=true];
@@ -834,7 +837,7 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
                                                         StepStatus,Comments,TargetObjectId,ActorId,CreatedById,IsDeleted,IsPending
                                                         ,OriginalActorId,ProcessInstanceId,RemindersSent,CreatedDate, Actor.Name,
                                                         OriginalActor.Name , ProcessNode.Name FROM StepsAndWorkitems order by CreatedDate DESC, StepStatus) 
-                                            FROM ProcessInstance where TargetObjectId =:objectId order by CreatedDate desc  ]);
+                                            FROM ProcessInstance where TargetObjectId =:objectId order by CreatedDate desc LIMIT 50000 ]);
     }
     public class ApprovalStepWrapper{
         public String workItemApproveOrRejectLink {get;set;}

@@ -4,35 +4,51 @@ public class WishChildSummary_AC{
     public List<SelectOption> multiPickoptions {get;set;}       
     Public String medicalProfContactName{get;set;}
     Constant_AC  constant = new Constant_AC();
-    public Map<String,String> medicalProfConMap; 
+    public Map<String,npe4__Relationship__c> medicalProfConMap; 
     public String email{get;set;}
+    public String MedicalProviderType{get;set;}
     public boolean dis{get;set;}
     public boolean displayReturnToWish{get;set;} 
     Public Id MedicalProfContactRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
     public WishChildSummary_AC(ApexPages.StandardController controller){
         dis = true;
-        currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushChildSummary__c,Contact.Hidden_Medical_Physician_Email__c,wish_involves_air_travel__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id')];
+        currentParentCase = [SELECT Id,ContactId,Description,Contact.Hidden_Medical_Physician__c,Rush__c,IsRushChildSummary__c,Contact.Hidden_Medical_Physician_Email__c,wish_involves_air_travel__c FROM Case WHERE Id =: ApexPages.currentPage().getParameters().get('id') LIMIT 1];
         
     }
     
     public List<SelectOption> getMedicalProContact(){
-        medicalProfConMap = new Map<String,String>();
+        medicalProfConMap = new Map<String,npe4__Relationship__c>();
         List<SelectOption> options = new List<SelectOption>();
-        for(npe4__Relationship__c dbRelationShip  : [Select Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,
-                                                     npe4__RelatedContact__r.RecordTypeId FROM npe4__Relationship__c WHERE npe4__Contact__c =:currentParentCase.ContactId AND npe4__RelatedContact__r.RecordTypeId =:MedicalProfContactRecordTypeId]){
+        for(npe4__Relationship__c dbRelationShip  : [Select Id,npe4__Contact__c,npe4__RelatedContact__c,npe4__RelatedContact__r.Name,npe4__RelatedContact__r.Email,npe4__RelatedContact__r.Provider_Type__c,
+                                                     npe4__RelatedContact__r.RecordTypeId FROM npe4__Relationship__c WHERE npe4__Contact__c =:currentParentCase.ContactId AND npe4__RelatedContact__r.RecordTypeId =:MedicalProfContactRecordTypeId  AND Send_Wish_Forms__c = True]){
                                                          
                                                          options.add(new SelectOption(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip.npe4__RelatedContact__r.Name));
-                                                         medicalProfConMap.Put(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip.npe4__RelatedContact__r.Email); 
+                                                         medicalProfConMap.Put(dbRelationShip.npe4__RelatedContact__r.Name,dbRelationShip); 
                                                      }
         
+         If(medicalProfConMap.isEmpty()){
+             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please select the medical professional to send the wish forms to by selecting \'Send Wish Forms To\' checkbox under the Medical Professional section on the Case record.'));
+        }
         return options;
     }
     
     public void displayEmail(){
-        if(medicalProfConMap.get(medicalProfContactName) != Null){
+         if(medicalProfConMap.containskey(medicalProfContactName)){
+            if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email != Null){
             dis = true;
-            email = medicalProfConMap.get(medicalProfContactName);
-        }
+            email = medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email;
+            }
+            else{
+            email = Null;
+            }
+             if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Provider_Type__c!= Null){
+             dis = true;
+             MedicalProviderType = medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Provider_Type__c; 
+             }
+             else{
+              MedicalProviderType = Null;
+             }
+            }
         
     }
     public void ReturnToWish(){
@@ -46,11 +62,11 @@ public class WishChildSummary_AC{
     
     public void SendtoDocuSign(){
         
-        if(currentParentCase.wish_involves_air_travel__c == Null ||currentParentCase.Description == Null ){
+        if(currentParentCase.wish_involves_air_travel__c == Null ||currentParentCase.Description == Null || medicalProfContactName == Null){
             DisplayErrorMessage();
         }
         
-        else if(medicalProfConMap.get(medicalProfContactName) == Null){
+        else if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email == Null){
             DisplayErrorMessage();
         }
         else{
@@ -76,7 +92,7 @@ public class WishChildSummary_AC{
     
     @future(Callout = true)
     public static void CallouttoDocusign(Id caseId,String conName,String conEmail){
-        Case currentParentCase = [SELECT Id,ContactId,Contact.lastname,Contact.firstname,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c,Rush__c FROM Case WHERE Id =: caseId];
+        Case currentParentCase = [SELECT Id,ContactId,Contact.lastname,Contact.firstname,Contact.Hidden_Medical_Physician__c,wish_involves_air_travel__c,Contact.Hidden_Medical_Physician_Email__c,Rush__c FROM Case WHERE Id =: caseId LIMIT 1];
         
         String account;
         String UserName;
@@ -209,12 +225,16 @@ public class WishChildSummary_AC{
     }
     
     public pagereference DisplayErrorMessage(){
+        if(medicalProfContactName == Null)
+        ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please Select Recipient'));
         if(currentParentCase.wish_involves_air_travel__c == Null)
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please Select Wish Involves Air Travel'));
         if(currentParentCase.Description == Null )
             ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'Please add a value to Description on the case page.'));
-        if(medicalProfConMap.get(medicalProfContactName) == Null)
-            ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'The contact you have selected has no email address available. Please add email on the contact record and try to send the form again.'));
+        if(medicalProfConMap.containsKey(medicalProfContactName)){
+        if(medicalProfConMap.get(medicalProfContactName).npe4__RelatedContact__r.Email == Null)
+           ApexPages.addmessage(new ApexPages.message(ApexPages.severity.Error,'The contact you have selected has no email address available. Please add email on the contact record and try to send the form again.'));
+         }
         return null;
     }
     

@@ -1,6 +1,35 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255);">{!Contact.FirstName}</span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255);">,<br><br></span><div style=""><p class="MsoNormal" style=""><font face="Century Gothic, sans-serif">You have successfully registered for&nbsp;{!Volunteer_Orientation_Training__c.Orientation_Training_Hidden__c}</font><span style="font-family: &quot;Century Gothic&quot;, sans-serif;">. Please log in to the Make-A-Wish Volunteer Center using your username listed below to complete this training.<br><br></span></p><p class="MsoNormal" style="font-size: medium;"><font face="Century Gothic, sans-serif">Username: {!Volunteer_Orientation_Training__c.Hidden_Volunteer_User_Name__c}<br><br></font></p><p class="MsoNormal" style=""><font face="Century Gothic, sans-serif">Once you've logged in, click <b>"Continue Process"</b> and then <b>"Start Course"</b> to watch the course at your own pace. After you've clicked <b>"Start Course"</b>, a new tab will open and you will be able to watch the training. Once you've completed the course, we will mark this training as complete. Please note that this process takes about 5 minutes to occur and you will need to refresh your browser to see these changes.<br><br></font></p><p class="MsoNormal" style="font-size: medium;"><font face="Century Gothic, sans-serif">If you need to cancel or change this training, please visit the&nbsp;</font><a href="https://make-a-wish.force.com/communitieslogin" style="font-size: 12pt; background-color: rgb(255, 255, 255); font-family: &quot;Century Gothic&quot;, sans-serif;">Make-A-Wish Volunteer Center</a><font face="Century Gothic, sans-serif">.<br><br></font></p><p class="MsoNormal" style="font-size: medium;"><font face="Century Gothic, sans-serif"><span style="background-color: rgb(255, 255, 255);"></span></font></p><p class="MsoNormal" style="font-size: medium;"><font face="Century Gothic, sans-serif">Thanks,<br><br></font></p><p class="MsoNormal" style=""><font face="Century Gothic, sans-serif" style="">{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}</font></p></div>]]></td>
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<p class="MsoNormal" style="font-family: arial; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">{!Contact.FirstName},<br><span style="font-size: 12pt;"><br></span></span></p><p class="MsoNormal" style="font-family: arial; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;"><span style="font-size: 12pt;">You have successfully
+registered
+for&nbsp;{!Volunteer_Orientation_Training__c.Orientation_Training_Hidden__c}.
+Please log in to the Make-A-Wish Volunteer Center using your username listed
+below to complete this training.</span></span></p><p class="MsoNormal" style="margin-bottom: 13.5pt; line-height: normal;"><span style="font-family: Lato, sans-serif; font-size: 12pt;">Username:
+{!Volunteer_Orientation_Training__c.Hidden_Volunteer_User_Name__c}</span></p><p class="MsoNormal" style="margin-bottom: 13.5pt; line-height: normal;"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Once you've logged
+in, click&nbsp;</span><b style="font-size: 12pt; font-family: Lato, sans-serif;">"Continue Process"</b><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;and then&nbsp;</span><b style="font-size: 12pt; font-family: Lato, sans-serif;">"Start
+Course"</b><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;to watch the course at your own pace. After you've
+clicked&nbsp;</span><b style="font-size: 12pt; font-family: Lato, sans-serif;">"Start Course"</b><span style="font-size: 12pt; font-family: Lato, sans-serif;">, a new tab will open and you will
+be able to watch the training. Once you've completed the course, we will mark
+this training as complete. Please note that this process takes about 5 minutes
+to occur and you will need to refresh your browser to see these changes.</span></p><p class="MsoNormal" style="font-family: arial; margin-bottom: 13.5pt; line-height: normal;"><span style="font-size: 12pt; font-family: Lato, sans-serif;">If you need to cancel
+or change this training, please visit the&nbsp;<a href="https://make-a-wish.force.com/communitieslogin"><span style="color:blue;
+background:white">Make-A-Wish Volunteer Center</span></a>.</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="font-family: arial; margin-bottom: 13.5pt; line-height: normal;"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thanks,</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="font-family: arial; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="font-family: arial; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="font-family: arial; margin-bottom: 0.0001pt; line-height: normal;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal" style="font-family: arial;"><span style="font-size:12.0pt;line-height:107%">&nbsp;</span></p>]]></td>
 </tr>
 </table>

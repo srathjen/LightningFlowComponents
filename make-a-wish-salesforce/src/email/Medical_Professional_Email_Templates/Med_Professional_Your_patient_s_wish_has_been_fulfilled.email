@@ -1,21 +1,74 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
-<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<div style="text-align: left;"><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="color: rgb(0, 0, 0); font-size: 12pt; line-height: 107%; font-family: &quot;Century Gothic&quot;, sans-serif;">Hello<span class="apple-converted-space">&nbsp;</span></span><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Century Gothic&quot;, sans-serif;">{!Case.Qualifying_Medical_Professional_Name__c}</span><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Century Gothic&quot;, sans-serif;">,<br><br>We are
-pleased to inform you that your patient has been granted a wish by Make-A-Wish<sup style="color: rgb(0, 0, 0);">®</sup>!&nbsp;<span class="apple-converted-space" style="color: rgb(0, 0, 0);">&nbsp;</span>Wishes impact patients by improving their positive emotions
-and decreasing their anxiety and depression (Shoshani, 2015).&nbsp;<span class="apple-converted-space" style="color: rgb(0, 0, 0);">&nbsp;</span>This same study found that wishes enabled children “…to dream
-about something that seemed unobtainable, out of reach, and thus created an
-experience of achieving the ‘impossible’.” Because of your referral, another
-child has experienced the therapeutic emotional healing of a wish.<br><br>Wish Child Name:<span class="apple-converted-space" style="color: rgb(0, 0, 0);">&nbsp;</span>{!Contact.Name}<br>Primary Diagnosis:<span class="apple-converted-space" style="color: rgb(0, 0, 0);">&nbsp;</span>{!Contact.Diagnosis__c}<br>Wish: &nbsp;</span><span style="font-size: 12pt; line-height: 107%; font-family: &quot;Century Gothic&quot;, sans-serif;">{!Case.Wish_Type__c}</span></p><p class="MsoNormal"><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 107%;">Wish
-Completed Date: &nbsp;{!Case.End_Date__c}<br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 107%;"><br>Thanks to
-the support of you and other medical professionals around the country, we
-continue to come closer each year to our vision of making every eligible
-child’s wish come true.<br><br>Thank you
-for taking the time to help us&nbsp;<i>share the power of a wish</i><sup>®</sup>.</span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 107%;">&nbsp;<br><br>Warmly,<br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 107%;"><br>{!User.Name}<br>{!User.Title}<br>{!Case.Hidden_Chapter_Name__c}<br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 107%;">{!User.Email}<br>{!User.Phone}</span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt; line-height: 107%;"><o:p></o:p></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 12pt; line-height: normal; background: white;"><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt;"><span style="font-size:9.0pt;line-height:107%;font-family:
-&quot;Century Gothic&quot;,sans-serif;mso-fareast-font-family:Calibri;mso-bidi-font-family:
-Calibri">Shoshani, A. Mifano, K. Czamanski-Cohen, J. (2015). The effects of the
-Make a Wish intervention on psychiatric symptoms and health-related quality of
-life of children with cancer: a randomized controlled trial. Quality of Life
-Research, 25(5), 1209-1218. doi 10.1007/s11136-015-1148-7</span><span style="font-size:9.0pt;line-height:107%;font-family:&quot;Century Gothic&quot;,sans-serif"><o:p></o:p></span></p></div>]]></td>
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<div style="text-align: left;"><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;"><br>
+Wish child name:&nbsp;{!Contact.First_Last_Initial__c}</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">Primary
+diagnosis:&nbsp;{!Contact.Diagnosis__c}</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;"><i>“There is an unsaid power these
+experiences can give these kids. They’re living longer, they're living better,
+they're having more fun in their life, and it all started with one experience.
+It was their wish"</i>.</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">Dear&nbsp;{!Case.Qualifying_Medical_Professional_Name__c},</span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">We are excited to inform you
+that&nbsp;{!Contact.FirstName}&nbsp;has been granted a wish! Thank you for the
+role you played in your patient’s wish experience. “The connection between
+imagination and coping is amazing” and because of the referral, another child
+has experienced hope, strength, joy, and the emotional healing of a wish.&nbsp;&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">Wish:&nbsp;{!Case.Wish_Type__c}</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">Wish completion
+date:&nbsp;{!Case.End_Date__c}</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">We are honored to have the opportunity
+to work with this family, and so thankful for the work you and your team do to
+care for children and their families. Your dedication to pediatric healthcare
+allows us to get closer to reaching our goal of making every eligible child’s
+wish come true together.</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">Warmly,</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">{!User.Name}<br>
+{!User.Title}<br>
+{!Case.Hidden_Chapter_Name__c}<br>
+{!User.Email}<br>
+{!User.Phone}</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-family: Lato, serif;">&nbsp;</span><span style="font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal"><o:p>&nbsp;</o:p></p><p></p></div>]]></td>
 </tr>
 </table>

@@ -1,5 +1,13 @@
+/*****************************************************************************
+Author : MST Solutions
+CreateDate : 03/25/2016
+Description :This WishChildFormValUpdate_AC_Test is used to cover the unit testing for WishChildFormValUpdate_AC.
+Modification Log: 
+23/03/2018 - Sankar - WVC-1835
+******************************************************************************/
 @isTest
 public class WishChildFormValUpdate_AC_Test {
+    //This method is used to create a case. 
     public static testMethod void createCase() {
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         map<string,Case> caseDetails = new map<string,Case>();
@@ -10,8 +18,10 @@ public class WishChildFormValUpdate_AC_Test {
         newWish.Case_Team_Member2__c = 'Member 2';
         insert newWish;
         WishChildFormValUpdate_AC.updateWishType(caseDetails);
+        System.assertEquals(newWish.Case_Team_Member1__c, 'Member 1','Team  member name is differ'); 
+        System.assert(currentCase.id == newWish.Case__c,'Parent case Id doest not match with wish child form case Id');
     }
-    
+    //This method is used to update the wish details. 
     public static testMethod void callUpdateWishdetails(){
         Contact newCon = OrientationandTrainingUtil.CreateWishChild();
         Case currentCase = OrientationandTrainingUtil.createParentCase(newCon.Id);
@@ -26,8 +36,11 @@ public class WishChildFormValUpdate_AC_Test {
         newWish.Wish_Determination_Case_Id__c = wihdetermination.id;
         insert newWish;
         WishChildFormValUpdate_AC.updateWishdetails(caseDetails);
-        
+        WishChildFormValUpdate_AC.updateWishdetails(null);
+        System.assertEquals(newWish.Wish_Determination_Case_Id__c, wihdetermination.id,'Team  member name is differ'); 
+        System.assert(currentCase.id == newWish.Case__c,'Parent case Id doest not match with wish child form case Id');
     }
+    //This method is used to update the wish child and wish family. 
     public static testMethod void updateWishChildandWishFamily(){
        /* Constituent_Code__c consTituent = OrientationandTrainingUtil.createWishParentGuardiansContituentCode();
         Constituent_Code__c  cinstChild = OrientationandTrainingUtil.createWishChildContituentCode();*/
@@ -50,9 +63,10 @@ public class WishChildFormValUpdate_AC_Test {
         insert newWish;
         Test.startTest();
         WishChildFormValUpdate_AC.UpdateWishChildandWishFamily(caseDetails);
+        WishChildFormValUpdate_AC.UpdateWishChildandWishFamily(null);
         Test.stopTest();
-        
-        
+        System.assertEquals(newWish.Case_Team_Member1__c, 'Member 1','Team  member name is differ'); 
+        System.assert(parentCase.id == newWish.Case__c,'Parent case Id doest not match with wish child form case Id');
     }
     
 }

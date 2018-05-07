@@ -17,6 +17,11 @@
     </folderShares>
     <folderShares>
         <accessLevel>View</accessLevel>
+        <sharedTo>joserathi@mstsolutions.com.prod</sharedTo>
+        <sharedToType>User</sharedToType>
+    </folderShares>
+    <folderShares>
+        <accessLevel>View</accessLevel>
         <sharedTo>Arizona_Chapter</sharedTo>
         <sharedToType>Role</sharedToType>
     </folderShares>

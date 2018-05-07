@@ -76,35 +76,47 @@
     <columns>
         <field>OWNER</field>
     </columns>
+    <columns>
+        <field>Case.Meet_PWL_Criteria__c</field>
+    </columns>
+    <columns>
+        <field>Case.Comment_for_PWL_Not_Met__c</field>
+    </columns>
     <description>Complete Wish Pipeline</description>
     <filter>
         <criteriaItems>
             <column>STATUS</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Wish Design,Wish Scheduled,Budget Approval - Submitted,Budget Approval - Approved,Hold,Inactive</value>
         </criteriaItems>
         <criteriaItems>
-            <column>CONTACT_RECORDTYPE</column>
-            <operator>notEqual</operator>
-            <value>Contact.Medical_Professional,Contact.Volunteer_Contact,Contact.Wish_Family,Contact.Board_Member</value>
+            <column>RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
+            <operator>equals</operator>
+            <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
@@ -130,7 +142,7 @@
     <sortColumn>CONTACT.NAME</sortColumn>
     <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
-        <dateColumn>CREATED_DATEONLY</dateColumn>
+        <dateColumn>Case.Qualified_Date__c</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>
     </timeFrameFilter>
 </Report>

@@ -5,6 +5,7 @@ public class LMSOrientationRegistrationRequest {
     public String course_code;  //wish101
     public String user_login;   //user@test.com
     public String status;   //dropped
+    public Integer enrollment_id;
     public static LMSOrientationRegistrationRequest parse(String json){
         return (LMSOrientationRegistrationRequest) System.JSON.deserialize(json, LMSOrientationRegistrationRequest.class);
     }    

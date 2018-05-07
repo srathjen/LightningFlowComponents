@@ -9,6 +9,7 @@
         <value>FE_Database_Chapter_Mapping</value>
     </caseValues>
     <fields>
+        <help><!-- Legacy flag that controls the FE expense integration and RE project/fund export file creation for AZ chapter. --></help>
         <label><!-- Active --></label>
         <name>Active__c</name>
     </fields>
@@ -19,6 +20,11 @@
     <fields>
         <label><!-- FE Database Name --></label>
         <name>FE_Database_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether the MuleSoft integration includes this chapter when creating IOM import files for DNQ and Qualified leads. --></help>
+        <label><!-- Lead Integration --></label>
+        <name>Lead_Integration__c</name>
     </fields>
     <fields>
         <label><!-- RE Database Name --></label>

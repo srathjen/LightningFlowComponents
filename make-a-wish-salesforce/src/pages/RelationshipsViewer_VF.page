@@ -13,7 +13,7 @@
             font-size: 12px;
             line-height: 1.5; /* If Placeholder of the input is moved up, rem/modify this. */
             border-radius: 3px;
-            }
+            }            
             .lb-xs {font-size:12px !important; padding-top:-4px !important}
             .notification {position:fixed; top:1rem; left:50%;}
             .notification div {position:relative; left:-50%; background:#1797c0; border-radius:.5rem; padding:1rem; color:#fff; text-align:center;}
@@ -25,37 +25,38 @@
         
         
         <div class="container">
-            <apex:form styleclass="form-horizontal" id="bb">
-               <apex:pagemessages />
+            <apex:form Style="font-family:'Lato';" styleclass="form-horizontal" id="bb">
+                <apex:messages style="font-family:'Lato';"/>
                 
-                <apex:commandLink action="{!ReturnToWish}" value="Return to Wish" Style="float:right;padding:30px" html-data-toggle="modal" html-data-target="wffsame-alert"/>   
+                <apex:commandLink action="{!ReturnToWish}" value="Return to Wish" Style="font-family:'Lato';float:right;padding:30px" html-data-toggle="modal" html-data-target="wffsame-alert"/>   
                 <apex:outputPanel rendered="{!outPutMode}">
                     
                     <center> <apex:commandButton value="Update"   action="{!UpdateContactInfo}" style="width:120px;height:30px;" reRender="bb" status="status"/></center>
+                    
                     <div class="page-header">
-                        <h4>Wish Child Contact</h4>      
+                        <h4 Style="font-family:'Lato';">Wish Child Contact</h4>      
                     </div>
                     <apex:repeat value="{!contactList}" var="item">
                         <div class="panel panel-default">
-                            <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b></div>
+                            <div class="panel-heading"><b><span Style="font-family:'Lato';">{!item.FirstName} {!item.LastName}</span></b></div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Phone</label>
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Home Phone</label>
                                         <div class="col-sm-6">
-                                            <apex:outputField value="{!item.phone}" styleclass="form-control"/>
-                                        </div>
-                                    </div>
-                                    <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Other Phone</label>
-                                        <div class="col-sm-6">
-                                            <apex:outputField value="{!item.OtherPhone}" styleclass="form-control"/>
+                                            <apex:outputField Style="font-family:'Arial';" value="{!item.Homephone}" styleclass="form-control"/>
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
                                         <label class="col-sm-6 control-label" for="formGroupInputSmall">Mobile Phone</label>
                                         <div class="col-sm-6">
                                             <apex:outputField value="{!item.MobilePhone}" styleclass="form-control"/>
+                                        </div>
+                                    </div>                                    
+                                    <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Other Phone</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.OtherPhone}" styleclass="form-control"/>
                                         </div>
                                     </div>
                                     
@@ -96,18 +97,26 @@
                                             <apex:outputField value="{!item.MailingPostalCode}" styleclass="form-control"/>
                                         </div>
                                     </div>
+                                    <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                        
+                                        <label class="col-sm-6 control-label" title="This field can be updated on the individual's Contact Record."  for="formGroupInputSmall">Deceased</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.npsp__Deceased__c}" styleclass="form-control" title="Test"/>
+                                        </div>
+                                        
+                                    </div> 
                                 </div>
                             </div>
                         </div>
                     </apex:repeat>
-                    
+                   
                     <div class="page-header">
-                        <h4>Wish Child Related Contacts</h4>      
+                        <h4 Style="font-family:'Lato';">Wish Child Related Contacts</h4>      
                     </div>
                     <apex:outputPanel rendered="{!isWishFamily}" >
                         <apex:repeat value="{!dbRelatedContactList}" var="item">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b></div>
+                                <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b> <div style='float:right;max-width:300px;'><apex:outputField value="{!preferredConMap[item.id].Hidden_Preferred_Contact__c}" styleclass="checkbox" style="Float:right;"/> Preferred Contact </div></div>
                                 <div class="panel-body">
                                     <div class="row">
                                         
@@ -120,21 +129,17 @@
                                         
                                         
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                            <label class="col-sm-6 control-label" for="formGroupInputSmall" style="color:white">.</label>
-                                            <div class="col-sm-6" style="color:white">.</div>
-                                        </div>
-                                        
-                                        
-                                        <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Phone</label>
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Preferred Phone Type</label>
                                             <div class="col-sm-6">
-                                                <apex:outputField value="{!item.phone}" styleclass="form-control"/>
+                                                <apex:outputField value="{!item.npe01__PreferredPhone__c}" styleclass="form-control"/>
                                             </div>
                                         </div>
+                                        
+                                        
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Other Phone</label>
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Home Phone</label>
                                             <div class="col-sm-6">
-                                                <apex:outputField value="{!item.OtherPhone}" styleclass="form-control"/>
+                                                <apex:outputField value="{!item.Homephone}" styleclass="form-control"/>
                                             </div>
                                         </div>
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
@@ -143,6 +148,18 @@
                                                 <apex:outputField value="{!item.MobilePhone}" styleclass="form-control"/>
                                             </div>
                                         </div>
+                                        <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Work Phone</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.npe01__WorkPhone__c}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Other Phone</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!item.OtherPhone}" styleclass="form-control"/>
+                                            </div>
+                                        </div> 
                                         
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
                                             <label class="col-sm-6 control-label" for="formGroupInputSmall">Email</label>
@@ -150,6 +167,16 @@
                                                 <apex:outputField value="{!item.Email}" styleclass="form-control"/>
                                             </div>
                                         </div>
+                                        <!--  <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+<label class="col-sm-6 control-label" for="formGroupInputSmall" style="color:white">.</label>
+<div class="col-sm-6" style="color:white">.</div>
+</div>-->
+                                       <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall" title="This field can be updated on the individual's Contact Record.">Deceased</label>
+                                            <div class="col-sm-6">
+                                                <apex:outputField value="{!preferredConMap[item.id].Decead__c}" styleclass="form-control"/>
+                                            </div>
+                                        </div> 
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
                                             <label class="col-sm-6 control-label" for="formGroupInputSmall">Use as Household Address</label>
                                             <div class="col-sm-6">
@@ -205,12 +232,12 @@
                 
                 <apex:outputPanel rendered="{!inputMode}">
                     <center>
-                        <apex:commandButton value="Save" rendered="{!isSave}" action="{!SaveUpdatedContact}" style="width:120px;height:30px;" reRender="bb"  status="status" onComplete="ScrollTop();"/>
-                        <apex:commandButton value="Cancel" action="{!close}" style="width:120px;height:30px;"  reRender="bb" status="status"/>
+                        <apex:commandButton value="Save" rendered="{!isSave}" action="{!SaveUpdatedContact}" style="font-family:'Lato';width:120px;height:30px;" reRender="bb"  status="status" onComplete="ScrollTop();"/>
+                        <apex:commandButton value="Cancel" action="{!close}" style="font-family:'Lato';width:120px;height:30px;"  reRender="bb" status="status"/>
                     </center>
                     
                     <div class="page-header">
-                        <h4>Wish Child Contact</h4>      
+                        <h4 Style="font-family:'Lato';">Wish Child Contact</h4>      
                     </div>
                     
                     <apex:repeat value="{!wishChildContactList}" var="item">
@@ -220,9 +247,15 @@
                                 <div class="row">
                                     
                                     <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Phone</label>
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Home Phone</label>
                                         <div class="col-sm-6">
-                                            <apex:inputField value="{!item.phone}" styleclass="form-control"/>
+                                            <apex:inputField value="{!item.Homephone}" styleclass="form-control"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Mobile Phone</label>
+                                        <div class="col-sm-6">
+                                            <apex:inputField value="{!item.MobilePhone}" styleclass="form-control"/>
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
@@ -232,17 +265,11 @@
                                         </div>
                                     </div>
                                     <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                        <label class="col-sm-6 control-label" for="formGroupInputSmall">Mobile Phone</label>
-                                        <div class="col-sm-6">
-                                            <apex:inputField value="{!item.MobilePhone}" styleclass="form-control"/>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
                                         <label class="col-sm-6 control-label" for="formGroupInputSmall">Email</label>
                                         <div class="col-sm-6">
                                             <apex:inputField value="{!item.Email}" styleclass="form-control"/>
                                         </div>
+                                        
                                     </div>
                                     <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
                                         <label class="col-sm-6 control-label" for="formGroupInputSmall">Street</label>
@@ -276,17 +303,24 @@
                                         </div>
                                     </div>
                                     
+                                     <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall" title="This field can be updated on the individual's Contact Record.">Deceased</label> 
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!item.npsp__Deceased__c}" styleclass="form-control"/>
+                                        </div>
+                                    </div> 
+                                    
                                 </div>
                             </div>
                         </div>
                     </apex:repeat>
                     <div class="page-header">
-                        <h4>Wish Child Related Contacts</h4>      
+                        <h4 Style="font-family:'Lato';">Wish Child Related Contacts</h4>      
                     </div>
                     <apex:outputPanel rendered="{!isWishFamily}" >
                         <apex:repeat value="{!clonedFamilyContactList}" var="item">
                             <div class="panel panel-default">
-                                <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b></div>
+                                <div class="panel-heading"><b>{!item.FirstName} {!item.LastName}</b><div style='float:right;min-width:130px;'><apex:inputField value="{!preferredConMapClone[item.id].Hidden_Preferred_Contact__c}"  style="float:left;"/><div style='float:right'> Preferred Contact </div>  </div></div>
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
@@ -298,13 +332,27 @@
                                         
                                         
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                            <label class="col-sm-6 control-label" for="formGroupInputSmall" style="color:white">.</label>
-                                            <div class="col-sm-6" style="color:white">.</div>
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall"> Preferred Phone Type</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.npe01__PreferredPhone__c}" styleclass="form-control"/>
+                                            </div>
                                         </div>
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Phone</label>
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Home Phone</label>
                                             <div class="col-sm-6">
-                                                <apex:inputField value="{!item.phone}" styleclass="form-control"/>
+                                                <apex:inputField value="{!item.Homephone}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Mobile Phone</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.MobilePhone}" styleclass="form-control"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Work Phone</label>
+                                            <div class="col-sm-6">
+                                                <apex:inputField value="{!item.npe01__WorkPhone__c}" styleclass="form-control"/>
                                             </div>
                                         </div>
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
@@ -314,24 +362,30 @@
                                             </div>
                                         </div>
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
-                                            <label class="col-sm-6 control-label" for="formGroupInputSmall">Mobile Phone</label>
-                                            <div class="col-sm-6">
-                                                <apex:inputField value="{!item.MobilePhone}" styleclass="form-control"/>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
                                             <label class="col-sm-6 control-label" for="formGroupInputSmall">Email</label>
                                             <div class="col-sm-6">
                                                 <apex:inputField value="{!item.Email}" styleclass="form-control"/>
                                             </div>
                                         </div>
+                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                        <label class="col-sm-6 control-label" for="formGroupInputSmall" title="This field can be updated on the individual's Contact Record.">Deceased</label>
+                                        <div class="col-sm-6">
+                                            <apex:outputField value="{!preferredConMap[item.id].Decead__c}" styleclass="form-control"/>
+                                        </div>
+                                    </div> 
+                                       <!-- <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
+                                            <label class="col-sm-6 control-label" for="formGroupInputSmall" style="color:white">.</label>
+                                            <div class="col-sm-6" style="color:white">.</div>
+                                        </div> -->
+                                        
+                                        
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
                                             <label class="col-sm-6 control-label" for="formGroupInputSmall">Use as Household Address</label>
                                             <div class="col-sm-6">
                                                 <apex:inputField value="{!item.Use_as_Household_Address__c}" styleclass="checkbox"/>
                                             </div>
                                         </div>
+                                        
                                         <div class="form-group form-group-sm col-lg-6 col-md-6 col-sm-6">
                                             <label class="col-sm-6 control-label" for="formGroupInputSmall">Same as Household Address</label>
                                             <div class="col-sm-6">
@@ -377,8 +431,8 @@
                         </apex:repeat>
                     </apex:outputPanel>
                     <center>
-                        <apex:commandButton value="Save" rendered="{!isSave}" action="{!SaveUpdatedContact}" style="width:120px;height:30px;" reRender="bb"  status="status" onComplete="ScrollTop();"/>
-                        <apex:commandButton value="Cancel" action="{!close}" style="width:120px;height:30px;"  reRender="bb" status="status"/>
+                        <apex:commandButton value="Save" rendered="{!isSave}" action="{!SaveUpdatedContact}" style="font-family:'Lato';width:120px;height:30px;" reRender="bb"  status="status" onComplete="ScrollTop();"/>
+                        <apex:commandButton value="Cancel" action="{!close}" style="font-family:'Lato';width:120px;height:30px;"  reRender="bb" status="status"/>
                     </center>
                 </apex:outputPanel>
                 

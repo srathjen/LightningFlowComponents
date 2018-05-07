@@ -1,6 +1,13 @@
+/*****************************************************************************************************************
+Author      : MST Solutions
+Date        : 7/25/2016
+Description : 
+*******************************************************************************************************************/
 trigger OrientationTraining_AT on Orientation_Training__c (before insert,before update) {
 
   Map<String, Decimal> timeConversion = new Map<String, Decimal>();
+
+  //Map the 24 hours and 12 hours time format.
   timeConversion.put('7:00:AM',7.00);
   timeConversion.put('7:30:AM',7.30);
   timeConversion.put('8:00:AM',8.00);
@@ -32,6 +39,8 @@ trigger OrientationTraining_AT on Orientation_Training__c (before insert,before 
   {
        Decimal startTime;
        Decimal endTime;
+       
+       //Show error message when the user enters the wrong start and end time.
        
         if(currRec.Start_Time__c == Null && currRec.End_Time__c != Null)
            currRec.addError('Please Enter Start Time ');

@@ -27,7 +27,9 @@
                 </div>-->
 
                 <apex:form >
+                    <div class="messages"></div>
                     <fieldset>
+                    <apex:pagemessages id="msg"/>
                         <h1>Welcome {!$User.FirstName},</h1><!-- {!$User.LastName} -->
                         <p><apex:outputText value="{!welcomText}" escape="false" id="welText"/></p>
 
@@ -51,8 +53,8 @@
                         </nav>
                         <div class="form-group row">
                             <div class="col-xs-12 col-sm-5 col-md-4 col-lg-3">
-                                <apex:commandbutton value="Become a Volunteer" styleClass="col-xs-12 btn-md" rendered="{!isBecomVolunteer}" action="{!becomeAVolunteer}"/>
-                                <apex:commandbutton value="Continue Process" styleClass="col-xs-12 btn-md" rendered="{!continueProcess}" action="{!becomeAVolunteer}"/>
+                                <apex:commandbutton value="Become a Volunteer" styleClass="col-xs-12 btn-md" rendered="{!isBecomVolunteer}" action="{!becomeAVolunteer}" reRender="msg"/>
+                                <apex:commandbutton value="Continue Process" styleClass="col-xs-12 btn-md" rendered="{!continueProcess}" action="{!becomeAVolunteer}" reRender="msg"/>
                             </div>
                         </div>
 

@@ -12,20 +12,19 @@ trigger VolunteerOpportunityTrigger_AT on Volunteer_Opportunity__c (Before Inser
     Id wishRecordTypeId = Schema.SobjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.wishVolunteerOpportunity).getRecordTypeId();
     Id nonWishRecordTypeId = Schema.SobjectType.Volunteer_Opportunity__c.getRecordTypeInfosByName().get(constant.nonWishEventRT).getRecordTypeId();
     if(Trigger.isBefore && Trigger.isUpdate){
-        
+        Map<Id,Volunteer_Opportunity__c> approvedVolunteerOppMap = new Map<Id,Volunteer_Opportunity__c>();
         Set<Id> volunteerContactIdSet = new set<Id>();
         Map<Id,String> volunteerContactMap = new Map<Id,String>();
         for(Volunteer_Opportunity__c currRec : Trigger.new)
         {
-            /*if(((currRec.Reason_Inactive__c == 'Not Approved' || currRec.Status__c == 'Pending') && currRec.Status__c != Trigger.oldMap.get(currRec.Id).Status__c) ||  (currRec.Inactive__c == true && currRec.Inactive__c != Trigger.oldMap.get(currRec.Id).Inactive__c && Trigger.oldMap.get(currRec.Id).Status__c != 'Pending')){
-currRec.Inactivated_or_Rejected_Date__c = Date.today();
-}*
-/*if(currRec.Status__c == 'Rejected' && Trigger.oldMap.get(currRec.Id).Status__c != currRec.Status__c) {
-currRec.isRejected__c = true;
-}*/ 
+            
             if(currRec.Inactive__c == true && Trigger.oldMap.get(currRec.Id).Inactive__c == False && currRec.Reason_Inactive__c != null) {
                 currRec.Status__c = 'Inactive';
                 currRec.Inactivated_or_Rejected_Date__c = Date.today();
+            }
+            
+            if(currRec.Inactive__c == true && currRec.Status__c == 'Inactive' && currRec.Wish__c != Null){
+                currRec.Wish_End_Date__c = Date.today();
             }
             
             if(currRec.Status__c == 'Pending' && currRec.Status__c != Trigger.oldMap.get(currRec.Id).Status__c) {
@@ -39,7 +38,8 @@ currRec.isRejected__c = true;
                 currRec.Inactive__c = True;
             }
             
-            if(currRec.RecordTypeId == wishRecordTypeId  && currRec.Status__c == 'Approved'){
+            if(currRec.RecordTypeId == wishRecordTypeId  && currRec.Status__c == 'Approved' && Trigger.oldMap.get(currRec.Id).Status__c != currRec.Status__c && currRec.Wish__c != Null){
+                approvedVolunteerOppMap.put(currRec.Id,currRec); 
                 currRec.RecordTypeId = registeredWishRecordTypeId;
                 
             }
@@ -63,9 +63,12 @@ currRec.isRejected__c = true;
             for(Volunteer_Opportunity__c currRec : Trigger.new){
                 if(currRec.Volunteer_Name__c!= Null && volunteerContactMap.containsKey(currRec.Volunteer_Name__c)){
                     currRec.Hidden_Volunteer_Contact_Email__c = volunteerContactMap.get(currRec.Volunteer_Name__c);
-                    System.debug('>>>>>>>222222>>>>>'+currRec.Hidden_Volunteer_Contact_Email__c);
                 }
             }
+        }
+        
+        if(approvedVolunteerOppMap.size() > 0){
+            VolunteerOpportunityTriggerHandler.populateStartDate(approvedVolunteerOppMap);
         }
         
     }
@@ -112,8 +115,13 @@ currRec.isRejected__c = true;
         set<Id> voluOppIdSet = new Set<Id>();
         boolean isdelete;
         Set<Id> volunteerOppIdSet = new Set<Id>();
+        Set<Id> recallApprovalIdSet = new Set<Id>();
         for(Volunteer_Opportunity__c currRec : Trigger.new)
         { 
+            
+            if(currRec.Status__c != Trigger.oldMap.get(currRec.Id).Status__c && Trigger.oldMap.get(currRec.Id).Status__c == 'Pending' && (currRec.Status__c == 'Inactive' || currRec.Status__c == 'Out of Compliance')) {
+                recallApprovalIdSet.add(currRec.Id);
+            }
             
             if(currRec.Status__c != 'Approved' &&  (currRec.Volunteer_Name__c!= Null && Trigger.oldMap.get(currRec.id).Volunteer_Name__c== Null)&& (currRec.Wish__c != Null && currRec.Reason_Inactive__c == Null))
             {
@@ -137,13 +145,13 @@ currRec.isRejected__c = true;
                 chapterIdsSet.add(currRec.Chapter_Name__c);
             }
             
-            if((currRec.Status__c == 'Approved' && Trigger.oldMap.get(currRec.id).Status__c != 'Approved')  &&  (currRec.Volunteer_Name__c!= Null) && ((currRec.Wish__c != Null || currRec.Non_Wish_Event__c != Null) && currRec.Reason_Inactive__c == Null))
+            if((currRec.Status__c == 'Approved' && Trigger.oldMap.get(currRec.id).Status__c == 'Pending')  &&  currRec.Volunteer_Name__c != NULL && (currRec.Wish__c != NULL || currRec.Non_Wish_Event__c != NULL) && currRec.Reason_Inactive__c == NULL)
             {
                 volOpportunitySharingList.add(currRec); 
                 if(currRec.Wish__c != Null){
                     recordsForCreatingCaseTeams.add(currRec);
                 }
-                 
+                
             }
             
             if((currRec.Volunteer_Name__c != Null) &&(currRec.Wish__c != Null))
@@ -184,11 +192,22 @@ currRec.isRejected__c = true;
                 
                 volunteerIdsSet.add(currRec.Volunteer_Name__c);
             }
+            
+            //Related to STT-62
+            /*if(currRec.Volunteer_Name__c != NULL && currRec.Wish__c != NULL && currRec.inActive__c == TRUE && Trigger.oldMap.get(currRec.Id).inActive__c == FALSE){
+caseIdSet.add(currRec.Wish__c);
+voluOppIdSet.add(currRec.Volunteer_Name__c );
+}*/
+            
             if(currRec.Volunteer_Name__c != Null && currRec.Wish__c != Null && (currRec.Status__c == 'Approved' || currRec.Status__c != 'Approved') && currRec.Reason_Inactive__c != Null && currRec.inActive__c == true){
                 caseIdSet.add(currRec.Wish__c);
                 voluOppIdSet.add(currRec.Volunteer_Name__c );
             }
             
+        }
+        
+        if(recallApprovalIdSet.size() > 0) {
+            Case_OnAfterUpdateTriggerHandlerHelper.recallVolOppApproval(recallApprovalIdSet);
         }
         if(caseIdSet.size() > 0 && voluOppIdSet.size() > 0 ){
             if(RecursiveTriggerHandler.isFirstTime == true){
@@ -253,9 +272,9 @@ currRec.isRejected__c = true;
         
         boolean isdelete;
         for(Volunteer_Opportunity__c oldDbRec : Trigger.old){
-           /* if(oldDbRec.Hidden_VolunteerCount_Desc__c != NULL){
-             
-            }*/
+            /* if(oldDbRec.Hidden_VolunteerCount_Desc__c != NULL){
+
+}*/
             
             if((oldDbRec.Volunteer_Name__c != Null && oldDbRec .Non_Wish_Event__c != Null && oldDbRec.Status__c == 'Approved' && oldDbRec.Reason_Inactive__c == Null && oldDbRec.Hidden_VolunteerCount_Desc__c != NULL) || (oldDbRec.Volunteer_Name__c != Null && oldDbRec .Non_Wish_Event__c != Null && oldDbRec.Status__c == 'Pending') || (oldDbRec.Volunteer_Name__c == Null && oldDbRec.Reason_Inactive__c == Null && oldDbRec .Non_Wish_Event__c != Null )){
                 nonWishListtoupdatecount.add(oldDbRec);

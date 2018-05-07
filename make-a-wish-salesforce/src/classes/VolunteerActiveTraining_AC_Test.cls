@@ -33,6 +33,7 @@ Public class VolunteerActiveTraining_AC_Test {
                 controller.TimingInfo();
                 controller.getTrainingRecordList();
                 controller.trainingId = currOffering.id;
+                VolunteerActiveTraining_AC.updateUser('volunteer@gmail.com','3409379','volunteer@gmail.com',currUser.id);       
          }
         
     }
@@ -68,7 +69,8 @@ Public class VolunteerActiveTraining_AC_Test {
                 controller.TimingInfo();
                 controller.getTrainingRecordList();
                 controller.trainingId = currOffering.id;
-                controller.Register();         
+                controller.Register(); 
+                VolunteerActiveTraining_AC.updateUser('volunteer@gmail.com','3409379','volunteer@gmail.com','0055B0000011r12');        
             }
     }
      // Register for new Training.

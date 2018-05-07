@@ -65,7 +65,7 @@
                     </nav>
 
                     <apex:form id="frm1" styleClass="col-md-12">
-                        <div class="messages"><!--<apex:pagemessages />--><apex:messages /></div>
+                        <div class="messages"><apex:pagemessages /></div>
                         <apex:pageBlock >
                             <apex:outputPanel rendered="{!(isTrainingExist == True)}">
                                 <h3>Success</h3>

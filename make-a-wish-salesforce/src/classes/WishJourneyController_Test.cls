@@ -30,6 +30,7 @@ public class WishJourneyController_Test {
         obj.interview = true;
         obj.assign = true;
         obj.getCases();
+        System.assert(parentCase.ContactId != Null , 'There is no case is available');
     }
     
     public static testMethod void caseWithInactive() {
@@ -40,7 +41,7 @@ public class WishJourneyController_Test {
         //currentCase.RecordTypeId = wishRecTypeId;
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
-        
+        System.assert(currentCase.Status == 'Inactive','Case status is not Inactive');
     }
     
    /* public static testMethod void caseWithOnhold() {
@@ -62,7 +63,7 @@ public class WishJourneyController_Test {
         currentCase.Origin = 'Email';
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
-        
+        System.assert(currentCase.Status == 'Escalated','Case status is not Escalated');
     }
     
     public static testMethod void caseWitGranted() {
@@ -71,6 +72,7 @@ public class WishJourneyController_Test {
         currentCase.Origin = 'Email';
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+        System.assert(currentCase.Status == 'Granted','Case status is not Granted');
     }
     public static testMethod void caseWitQualified() {
         Case currentCase = OrientationandTrainingUtil.createParentCase();
@@ -78,6 +80,7 @@ public class WishJourneyController_Test {
         currentCase.Origin = 'Email';
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+        System.assert(currentCase.Status == 'Qualified','Case status is not Qualified');
     }
     
     public static testMethod void caseWitReadytoAssign() {
@@ -87,6 +90,7 @@ public class WishJourneyController_Test {
         currentCase.Origin = 'Email';
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+        System.assert(currentCase.Status == 'Ready to Assign','Case status is not Ready to Assign');
     }
     
     public static testMethod void caseWitWishDetermined() {
@@ -98,6 +102,7 @@ public class WishJourneyController_Test {
         currentCase.Wish_Type__c = 'Celebrity - Domestic Travel';
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+        System.assert(currentCase.Status == 'Wish Determined','Case status is not Wish Determined');
     }
     
     public static testMethod void caseWitWishNew() {
@@ -106,6 +111,7 @@ public class WishJourneyController_Test {
         currentCase.Origin = 'Email';
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+        System.assert(currentCase.Status == 'New','Case status is not New');
     }
     
     public static testMethod void caseWitWishCompleted() {
@@ -126,6 +132,7 @@ public class WishJourneyController_Test {
         currentCase.Referral_Date__c = Date.today().addDays(6);
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+        System.assert(currentCase.Status == 'Qualified','Case status is not Qualified');
     }
 
     
@@ -136,6 +143,7 @@ public class WishJourneyController_Test {
         currentCase.Closed_Date__c = system.today();
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+        System.assert(currentCase.Closed_Date__c == system.today(),'Case status is not New');
     }
     
     public static testMethod void caseWitDeterminedDate() {
@@ -147,16 +155,18 @@ public class WishJourneyController_Test {
         currentCase.Anticipated_Start_Date__c = system.today();
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+        System.assert(currentCase.Status == 'Closed','Case status is not New');
     }
     
      public static testMethod void caseWitAnticipateddDate() {
         Case currentCase = OrientationandTrainingUtil.createParentCase();
         currentCase.Status = 'Closed';
         currentCase.Origin = 'Email';
-         currentCase.Closed_Date__c = system.today();
+        currentCase.Closed_Date__c = system.today();
         currentCase.Anticipated_Start_Date__c = system.today();
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+        System.assert(currentCase.Status == 'Closed','Case status is not Closed');
     }
     
     public static testMethod void caseWitWishChild() {
@@ -170,6 +180,7 @@ public class WishJourneyController_Test {
         currentCase.RecordTypeId = wishRecTypeId;
         insert currentCase;
         WishJourneyController obj = new WishJourneyController(new ApexPages.StandardController(currentCase));
+        System.assert(currentCase.Status == 'Closed','Case status is not Closed');
     }
     
     

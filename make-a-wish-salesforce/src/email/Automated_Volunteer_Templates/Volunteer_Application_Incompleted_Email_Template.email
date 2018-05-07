@@ -1,6 +1,32 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<div style="background-color: rgb(255, 255, 255);"><p class="MsoNormal" style="font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: medium;">{!Contact.FirstName},<br></span><br><font face="Century Gothic, sans-serif" style="">Thank you for recently starting your application to volunteer with Make-A-Wish. We look forward to receiving your application and learning more about your interest in supporting our mission.<br><br></font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial; font-size: 12pt; font-family: arial;"><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;">At your convenience, please log in to the&nbsp;</span></font><a href="https://make-a-wish.force.com/" style="font-family: &quot;Century Gothic&quot;, sans-serif;">Make-A-Wish Volunteer Center</a><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;">&nbsp;</span>and click <b>"Continue Process"</b> to finish your application.<br></font><br><font face="Century Gothic, sans-serif">Should you have any questions about becoming a volunteer, please contact us directly.<br></font><br><font face="Century Gothic, sans-serif">{!Contact.OwnerFullName}</font><br><font face="Century Gothic, sans-serif"><span style="font-size: 12pt;">{!Contact.Contact_Account_Name__c}</span></font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><font face="Century Gothic, sans-serif">{!Contact.OwnerPhone}</font></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; background-image: initial; background-attachment: initial; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><font face="Century Gothic, sans-serif">{!Contact.OwnerEmail}</font></p></div>]]></td>
+<![CDATA[<div style="background-color: rgb(255, 255, 255);"><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName},<br>
+<br>
+Thank you for recently starting your application to volunteer with Make-A-Wish.
+We look forward to receiving your application and learning more about your
+interest in supporting our mission.</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">At your convenience,
+please log in to the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish Volunteer Center</span></a>&nbsp;and click&nbsp;<b>"Continue
+Process"</b>&nbsp;to finish your application.<br>
+<br>
+Should you have any questions about becoming a volunteer, please contact us
+directly.<br>
+<br>
+{!Contact.OwnerFullName}<br>
+{!Contact.Contact_Account_Name__c}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.OwnerPhone}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.OwnerEmail}</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">&nbsp;</span><span style="font-size: 12pt; font-family: Arial, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal">
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal"><span style="font-size:12.0pt;line-height:107%">&nbsp;</span></p></div>]]></td>
 </tr>
 </table>

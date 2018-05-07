@@ -29,8 +29,7 @@
             <div class="row">
                 <section class="col-md-12">
                     <apex:form id="formId">
-                        <apex:pageMessages id="showmsg"/>
-
+                       
                         <h1>Profile</h1>
 
                         <apex:outputPanel rendered="{!PersonalInfoSave}" styleClass="p-info-btn-base">
@@ -38,6 +37,7 @@
 
 
                             <fieldset class="saved">
+                            <apex:pageMessages id="showmsg"/>
                                     <legend>Your Information</legend>
 
                                     <div class="col-md-12">
@@ -115,15 +115,23 @@
                                         </div>
                                         <div class="row">
                                             <apex:outputLabel styleClass="col-xs-6 col-sm-6">Preferred Phone Type: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Preferred_Phone_Types__c}" id="preferredPhType"/></span>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__PreferredPhone__c}" id="preferredPhType"/></span>
                                         </div>
                                         <div class="row">
                                             <apex:outputLabel styleClass="col-xs-6 col-sm-6">Fax: </apex:outputLabel>
                                             <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Fax}" id="fax"/></span>
                                         </div>
                                         <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Preferred Email Type: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__Preferred_Email__c}" id="preferEmailType"/></span>
+                                        </div>
+                                        <div class="row">
                                             <apex:outputLabel styleClass="col-xs-6 col-sm-6">Personal Email: </apex:outputLabel>
                                             <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__HomeEmail__c}" id="homeEmail"/></span>
+                                        </div>
+                                        <div class="row">
+                                            <apex:outputLabel styleClass="col-xs-6 col-sm-6">Work Email: </apex:outputLabel>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__WorkEmail__c}" id="workEmail"/></span>
                                         </div>
                                         <div class="row">
                                             <apex:outputLabel styleClass="col-xs-6 col-sm-6">Alternate Email: </apex:outputLabel>
@@ -285,7 +293,7 @@
                                             </div>
                                             <label for="preferredphone" class="sr-only">Preferred Phone Number Type</label>
                                            <!-- <div class="col-xs-4 col-sm-3">
-                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required" id="preferredphonetype" value="{!contactInstance[0].Preferred_Phone_Types__c}" />
+                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required" id="preferredphonetype" value="{!contactInstance[0].npe01__PreferredPhone__c}" />
                                             </div> -->
                                         </div>
 
@@ -415,7 +423,7 @@
                                         <div class="form-group row">
                                            <apex:outputLabel for="PreferredPhone" styleClass="col-sm-3">Preferred Phone Type</apex:outputLabel>
                                            <div class="col-sm-6">
-                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required" id="preferredphonetype" value="{!contactInstance[0].Preferred_Phone_Types__c}" />
+                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required" id="preferredphonetype" value="{!contactInstance[0].npe01__PreferredPhone__c}" />
                                            </div>
                                         </div>
                                         <div class="form-group row">
@@ -425,15 +433,27 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <apex:outputLabel for="preferemailtype" styleClass="col-sm-3">Preferred Email Type</apex:outputLabel>
+                                            <div class="col-sm-6">
+                                                <apex:inputField styleClass="form-control col-xs-12 col-sm-12 c-select sm-list required preferredemailtype" id="preferredemailtype" value="{!contactInstance[0].npe01__Preferred_Email__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <apex:outputLabel for="personalemailaddress" styleClass="col-sm-3">Personal Email Address</apex:outputLabel>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control f-homeemailaddress" maxlength="50" id="personalemailaddress" html-placeholder="personal_email@domain.com"  value="{!contactInstance[0].npe01__HomeEmail__c}" />
+                                                <apex:inputText styleClass="form-control f-homeemailaddress personalemailaddress" maxlength="50" id="personalemailaddress" html-placeholder="personal_email@domain.com"  value="{!contactInstance[0].npe01__HomeEmail__c}" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <apex:outputLabel for="workemailaddress" styleClass="col-sm-3">Work Email Address</apex:outputLabel>
+                                            <div class="col-sm-6">
+                                                <apex:inputText styleClass="form-control f-workemailaddress workemailaddress" maxlength="50" id="workemailaddress" html-placeholder="work_email@domain.com"  value="{!contactInstance[0].npe01__WorkEmail__c}" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <apex:outputLabel for="altemailaddress" styleClass="col-sm-3">Alternate Email Address</apex:outputLabel>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control f-emailaddress" maxlength="50" id="altemailaddress" html-placeholder="alternate_email@domain.com" value="{!contactInstance[0].npe01__AlternateEmail__c}" />
+                                                <apex:inputText styleClass="form-control f-emailaddress alternateemailaddress" maxlength="50" id="altemailaddress" html-placeholder="alternate_email@domain.com" value="{!contactInstance[0].npe01__AlternateEmail__c}" />
                                             </div>
                                         </div>
 
@@ -456,7 +476,7 @@
                                                 <apex:outputLabel for="street2">Street</apex:outputLabel>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control f-street2" maxlength="50" id="street2" html-placeholder="0000 NE Ave" value="{!contactInstance[0].OtherCity}" />
+                                                <apex:inputText styleClass="form-control f-street2" maxlength="50" id="street2" html-placeholder="0000 NE Ave" value="{!contactInstance[0].OtherStreet}" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -464,7 +484,7 @@
                                                 <apex:outputLabel for="city2">City</apex:outputLabel>
                                             </div>
                                             <div class="col-sm-6">
-                                                <apex:inputText styleClass="form-control f-city2" maxlength="23" id="city2" html-placeholder="City" value="{!contactInstance[0].OtherStreet}" />
+                                                <apex:inputText styleClass="form-control f-city2" maxlength="23" id="city2" html-placeholder="City" value="{!contactInstance[0].OtherCity}" />
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -737,7 +757,7 @@
                                         </div>
                                         <div class="row">
                                             <apex:outputLabel styleClass="col-xs-6 col-sm-6">Phone: </apex:outputLabel>
-                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].Work_Phone__c}" id="workPh"/></span>
+                                            <span class="col-xs-6 col-sm-6 text-muted"><apex:outputField value="{!contactInstance[0].npe01__WorkPhone__c}" id="workPh"/></span>
                                         </div>
                                     </div>
 
@@ -780,7 +800,7 @@
                                     <div class="form-group row">
                                             <apex:outputLabel styleClass="col-sm-3" for="empphonenumber">Phone Number</apex:outputLabel>
                                         <div class="col-sm-6">
-                                            <apex:inputText styleClass="form-control f-phone" id="empphonenumber" maxlength="10" html-placeholder="000-000-0000" value="{!contactInstance[0].Work_Phone__c}"/>
+                                            <apex:inputText styleClass="form-control f-phone" id="empphonenumber" maxlength="10" html-placeholder="000-000-0000" value="{!contactInstance[0].npe01__WorkPhone__c}"/>
                                         </div>
                                     </div>
 
@@ -1412,13 +1432,42 @@
               $("select.f-state").chosen().change(function(){
                 $(this).valid();
               });
+                
               $("select.f-state").rules("add", {
                 required: true,
                 messages: {
                   required: "Oops! Please select a state"
                 }
               });
-
+                              
+                var checkEmail;
+                if($(".preferredemailtype").val() != '' && $(".preferredemailtype").val() != 0)
+                {   
+                    varChangeLowerCase = $(".preferredemailtype").val();    
+                    checkEmail = varChangeLowerCase.toLowerCase()+'emailaddress';
+                }
+                
+                if($(".preferredemailtype").val() != '' && $("."+checkEmail).val() == '') 
+                {   
+                   $("."+checkEmail).rules("add", {
+                        required: true,
+                        messages: {
+                            required: "Oops! "+$(".preferredemailtype").val()+" email is required "
+                        }
+                   });
+                }
+                else
+                { 
+                  $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass( "has-feedback" );
+                  $(".personalemailaddress, .workemailaddress, .alternateemailaddress").parent().removeClass( "has-error" );
+                  $(".personalemailaddress, .workemailaddress, .alternateemailaddress").prev('div').children( "label" ).css("color","1px solid #ccc");
+                  $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("required");
+                  $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("describedby");
+                  $(".personalemailaddress, .workemailaddress, .alternateemailaddress").removeProp("invalid");  
+                  $(".personalemailaddress, .workemailaddress, .alternateemailaddress").css("border","1px solid #ccc");
+                  $(".personalemailaddress, .workemailaddress, .alternateemailaddress").children(".help-block").remove();              
+                }
+                              
               if ($('form').valid()){
                 $('form').submit();
                 console.log('personal form submitted');
@@ -1436,7 +1485,7 @@
                 }
               }
             });
-
+              
             // emergency save btn
             $('.btn-e-save').on('click', function() {
               $("select.relationship").chosen().change(function(){

@@ -24,7 +24,7 @@ $('.r2c > input').remove();
 $('.r2c label').addClass('col-xs-12 col-sm-6');
 $('.r2c label input').attr('name', 'r2c-radio');
 $('.r2c-radio').click(function() {
-	$('.familyAware').parent().parent().show()
+	$('.familyAware').parent().parent().show();
 });
 // set id dynamically for MAW GA
 // $('.r2c label:first').attr('id','rel-self');
@@ -32,6 +32,8 @@ $('.r2c-radio').click(function() {
 // $('.r2c label:nth-child(3)').attr('id','rel-parent');
 // $('.r2c label:nth-child(4)').attr('id','rel-family');
 // $('.r2c label:nth-child(5)').attr('id','rel-other');
+
+formLogic();
 
 // get radio selection
 function getRadioVal(form, name) {
@@ -50,7 +52,7 @@ function getRadioVal(form, name) {
 }
 
 // default select option
-$('select').not('.state').each(function() {
+$('select').not('.state,.multi').each(function() {
 	$(this).find('option:first').remove(); // remove first
 	if ( $(this).attr('id') == "j_id0:frm:diagnosisYear" ){
 		$('#j_id0\\:frm\\:diagnosisYear').prepend('<option value="">Year</option>');
@@ -217,7 +219,6 @@ $('.remove-block').on('click', function(e) {
 // chosen.js - state select
 function stateFunc() {
 	$('select.state option:first').remove(); // remove first
-	//$('.chosen').chosen({disable_search: true, placeholder_text_single: "Please Select", width:"100%"});
 	$('.state').prepend('<option disabled="disabled" selected="selected">Please select a State</option>');
 	//$('.state').chosen({disable_search:"true", placeholder_text_single: "Please Select a State", width:"100%"});
 }
@@ -239,6 +240,37 @@ stateFunc();
 // 	}
 // })();
 
+$('select.multi').chosen({disable_search: true, placeholder_text_multiple: "Please select all that apply", width:"100%"});
+$('select.multi').find('option:first').prop('disabled', true).trigger("chosen:updated");
+(function(){
+	var chosen = $("select.multi").chosen().data("chosen");
+	var autoClose = false;
+
+	//...
+	
+	if(chosen && chosen.hasOwnProperty('result_select')){
+		var chosen_resultSelect_fn = chosen.result_select;
+		chosen.result_select = function(evt) {
+			var resultHighlight = null;
+
+			if(autoClose == false)
+			{
+				evt["metaKey"] = true;
+				evt["ctrlKey"] = true;
+
+				resultHighlight = chosen.result_highlight;
+			}
+
+			var result = chosen_resultSelect_fn.call(chosen, evt);
+
+			if(autoClose == false && resultHighlight != null)
+				resultHighlight.addClass("result-selected");
+
+			return result;
+		};
+	}
+})();
+
 // reset select element
 function resetSelect() {
 	var options = document.querySelectorAll('select option');
@@ -250,14 +282,14 @@ function resetSelect() {
 // show/hide, field dupe, validation logic
 function formLogic() {
 	var link = '<a href="https://wish.org/local-chapters#sm.000001nnnt2f0tf0tux692bqfeli5">Click here for a local chapter directory</a>',
-		familyAwareError = 'You cannot proceed further unless the family is aware of this referral. If you have additional questions please reach out to your local chapter. ',
+		familyAwareError = 'Please make sure the family is aware of this referral before you proceed. If you have additional questions please reach out to your local chapter. ',
 		labels = [' Self', ' Medical Professional', ' Parent/Guardian', ' Family Member/Relative', ' Other'],
 		rerender = [' Self', ' Parent/Guardian', ' Family Member/Relative'],
 		medicalProviders = ["Nurse Practitioner", "Physician Assistant", "Physician"],
 		childAgesEligible = ['2.5', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'],
 		fieldClasses = ['firstname', 'lastname', 'phonechk', 'email', 'city', 'state-chk', 'address', 'postalcode', 'family-aware-chk', 'medprovider', 'r2c-manual-input', 'wcgender', 'wcage', 'wcdob', 'wcreceivedwish', 'language', 'siblings-chk', 'icd', 'pdiagnosis', 'facility', 'urgency', 'sibage'],
-		eligibleMsg = 'To be eligible, children must be older than 2 ½ years old and younger than 18 years old.',
-		guardianPermissionMsg = 'Please confirm that you have received your parent or guardian’s permission to complete this form.';
+		eligibleMsg = 'To be eligible, children must be older than 2½ years old and younger than 18 years old.',
+		guardianPermissionMsg = "Please confirm that you have received your parent or guardians permission to complete this form.";
 	// To display error message when no is selected in is family aware input field
 	$('.familyAware').on('change', function() {
 		if ($(this).val() == 'No') {
@@ -524,6 +556,8 @@ function formLogic() {
 		const stateParents = $('[id$=p-state],[id$=p-state2]').parents().parents();
 		$(stateParents).removeClass("has-error").children('.col-md-3').children('label').css('color', '');
 		$(stateParents).children('.col-md-6').children(".chosen-container-single").children(".chosen-single").css('border', '');
+		$(stateParents).children('.col-md-6').children(".single").children(".chosen-single").css('border', '');
+		$(stateParents).children('.col-md-6').children(".chosen-container-multi").children(".chosen-multi").css('border', '');
 		$(stateParents).children('.col-md-6').children(".help-block").remove();
 
 		//reset diagnosis month and year
@@ -546,6 +580,7 @@ function formLogic() {
 		// hidden but still validates based off birthdate selection
 		$('[id$=wcage]').parents('.form-group').addClass('sr-only');
 		$('.shownOnYes').addClass('fam-aware-overlay');
+		$('.familyAwareError').css('display', 'none');
 		dateLogic();
 		$('.medprovcat-other-wrap, .other, .main-office-contact, .medical-additional-info').css('display', 'none');
 
@@ -717,7 +752,7 @@ function formLogic() {
 				$(this).remove();
 			});
 			$("[id$=wcdob]").unmask();
-			$("[id$=wcdob]").mask("99/99/9999", {  
+			$("[id$=wcdob]").mask("99/99/9999", {
 				placeholder: "mm/dd/yyyy",
 			});
 		}
@@ -769,7 +804,7 @@ function formLogic() {
 					$('select.childAge option:last-child').remove();
 				}
 				function ageAlert() {
-					$('.alertMsg').text(eligibleMsg); 
+					$('.alertMsg').text(eligibleMsg);
 					$('#warningModal').modal('show');
 				}
 
@@ -780,12 +815,12 @@ function formLogic() {
 				// necessary for value to register with backend validation
 				// 912.5 = days, 365days*2(x = 730days) + 365days/2(y = 182.5)
 				// under 2.5 years
-				if (diffDays < 912.5) {   
+				if (diffDays < 912.5) {
 					$(wcAge).prop('selectedIndex', 1);
 					$('<span class="text-muted age-text">Under 2 1/2 years old</span>').insertAfter(wcDob);
 					ageAlert()
 					// 18 years or older
-				} else if (diffDays >= 6570) {      
+				} else if (diffDays >= 6570) {
 					$(wcAge).prop('selectedIndex', 18);
 					$('<span class="text-muted age-text">Over 18 years old</span>').insertAfter(wcDob);
 					ageAlert()
@@ -812,7 +847,7 @@ function formLogic() {
 							$(this).remove();
 						});
 						$("[id$=wcdob]").unmask();
-						$("[id$=wcdob]").mask("99/99/9999", {  
+						$("[id$=wcdob]").mask("99/99/9999", {
 							placeholder: "mm/dd/yyyy",
 						});
 						$(wcAge).prop('selectedIndex', 0);
@@ -826,9 +861,9 @@ function formLogic() {
 				letterFormat = wcDobVal.indexOf(letters, letterFormat + 1);
 			}
 			// Only run when mm/dd/yyyy format is cleared from input
-			if (count === 0) {   
+			if (count === 0) {
 				// console.log('ageValidate has run');
-				ageValidate();    
+				ageValidate();
 			}
 		}); //dateLogic on keyup end
 	}
@@ -977,7 +1012,7 @@ function PrimaryDiagnosis() {
 	// 	}
 	// });
 
-	$('body').change('click', function() {
+	$('body').change('click', function(event) {
 		if (!pdi.hasClass('value-selected')) {
 			pdi.val('');
 			pdi.prop('disabled', false);
@@ -985,8 +1020,12 @@ function PrimaryDiagnosis() {
 			$('.primary-diagnosis-other').find('textarea').val('');
 		}
 		if (!icd.hasClass('value-selected')) {
-			icd.val('');
-			icd.prop('disabled', false);
+			if(event.srcElement && event.srcElement.tagName){
+				if (event.srcElement.tagName != "INPUT" || event.srcElement.tagName != "SELECT") {
+					icd.val('');
+					icd.prop('disabled', false);
+				}
+			}
 		} else if (!icd.hasClass('value-selected') && pdi.hasClass('value-selected')) {
 			return;
 		}
@@ -1116,10 +1155,12 @@ $("form[id$=frm]").validate({
 			error.insertBefore(element.parents('.r2c'));
 		}
 		// uncomment if any selects have chosen enabled
-		//else if ( element.hasClass("c-select") ){
-		//var selectParent = $( element ).parents(".col-md-6").children(".chosen-container-single");
-		//error.insertAfter( selectParent );
-		//}
+		else if ( element.hasClass("c-select") && element.hasClass("multi")  ){
+			// var selectParent = $( element ).parents(".col-md-6").children(".chosen-container-single");
+			// var selectParent = $( element ).parents(".col-sm-6").children("select.single");
+			var selectParent = $( element ).parents(".col-sm-6").children(".multi");
+			error.insertAfter( selectParent );
+		}
 		else {
 			error.insertAfter(element);
 		}
@@ -1136,6 +1177,8 @@ $("form[id$=frm]").validate({
 		$(elementParents).removeClass("has-success").addClass("has-error").prev('div').prev('label').css('color', 'red');
 
 		$(elementParents).children(".chosen-container-single").children(".chosen-single").css('border', '1px solid red');
+		$(elementParents).children("select.single").css('border', '1px solid red');
+		$(elementParents).children(".chosen-container-multi").children(".chosen-multiple").css('border', '1px solid red');
 		$(elementParents).children("input, select, textarea").css('border', '1px solid red');
 		$(elementParents).children('label').css('border', '1px solid red');
 	},
@@ -1151,6 +1194,8 @@ $("form[id$=frm]").validate({
 		$(elementParents).removeClass("has-success").addClass("has-error").prev('div').prev('label').css('color', '');
 
 		$(elementParents).children(".chosen-container-single").children(".chosen-single").css('border', '');
+		$(elementParents).children("select.single").css('border', '');
+		$(elementParents).children(".chosen-container-multiple").children(".chosen-multiple").css('border', '');
 		$(elementParents).children("input, select, textarea").css('border', '');
 		$(elementParents).children(".help-block").remove();
 	},

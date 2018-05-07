@@ -1,7 +1,7 @@
 /*Contains unit test for Batch_UpdateChildCaseOwner_AC class */
 @isTest
 public class Batch_UpdateChildCaseTeamMember_AC_Test {
-    Static testmethod void CreateCase() {
+    Static testmethod void createCase() {
         Constant_AC  constant = new Constant_Ac();    
         Id wishDeterminationRT = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishDeterminationRT).getRecordTypeId();
         Case parentCase = OrientationandTrainingUtil.CreateParentCaseWithStatus();
@@ -12,6 +12,8 @@ public class Batch_UpdateChildCaseTeamMember_AC_Test {
         childCase.RecordTypeId = wishDeterminationRT;
         childCase.ParentId = parentCase.Id;
         insert childCase;
+        System.assertEquals(childCase.RecordTypeId,  wishDeterminationRT, 'The record type does not match');
+        System.assert(childCase.RecordTypeId ==  wishDeterminationRT, 'The record type does not match');
         Test.startTest();
         Batch_UpdateChildWishCaseTeamMember_AC executeCls = new Batch_UpdateChildWishCaseTeamMember_AC();
         Database.executeBatch(executeCls);

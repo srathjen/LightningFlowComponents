@@ -5,7 +5,9 @@ Description : This test class used to perform unit testing for the DV Medical Su
 *******************************************************************************************************************/
 @isTest
 public class wifAttachment_AC_Test{
-    
+    /************************************************************
+    Globally create a chapter account and Wish child.
+    **************************************************************/
     @testSetup
     public static void setUpData(){
         Account chapterAccount = OrientationandTrainingUtil.AlabamaAccount();
@@ -16,10 +18,13 @@ public class wifAttachment_AC_Test{
         
     }
     
-    //Attachment for Diagnosis Verification
+    /***************************************
+    Attachment for wish case from the controller.
+    ***************************************/
     public static testMethod void getAttachment() {
-        case newcase = [SELECT ID FROM case];        
-        List<cg__CaseFile__c > caseFile = [SELECT Id FROM cg__CaseFile__c ];
+        case newcase = [SELECT ID FROM case LIMIT 1];        
+        List<cg__CaseFile__c > caseFile = [SELECT Id,cg__Case__c FROM cg__CaseFile__c LIMIT 5000];
+        List<Case> caseList = [SELECT Id FROM Case LIMIT 1];
         Test.startTest();
         PageReference pageRef = Page.wifAttachment_VF;
         Test.setCurrentPage(pageRef);
@@ -37,5 +42,7 @@ public class wifAttachment_AC_Test{
         wishFile.attachmentId = caseFile [0].Id;
         wishFile.RemoveAttachment();
         Test.stopTest();
+       System.assertEquals(attach.Name,'Wish Family Form','Attachment does not have a matched file name');
+       System.assert(caseFile [0].cg__Case__c == caseList[0].Id,'A wish doest not have Attachment');
     }
 }

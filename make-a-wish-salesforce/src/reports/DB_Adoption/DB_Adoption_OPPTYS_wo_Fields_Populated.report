@@ -38,21 +38,25 @@
         <booleanFilter>1 AND (2 or 3 or 4)</booleanFilter>
         <criteriaItems>
             <column>STAGE_NAME</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Prospecting,Qualification,Needs Analysis,Value Proposition,Id. Decision Makers,Perception Analysis,Proposal/Price Quote,Negotiation/Review</value>
         </criteriaItems>
         <criteriaItems>
             <column>NEXT_STEP</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Opportunity.DB_Competitor__c</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>TYPE</column>
+            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>

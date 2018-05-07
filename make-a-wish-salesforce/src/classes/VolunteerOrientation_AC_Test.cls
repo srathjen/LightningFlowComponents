@@ -119,7 +119,8 @@ Public class VolunteerOrientation_AC_Test {
                 controller.TimingInfo();
                 controller.getOrientationRecordList();
                 controller.trainingId = currOffering.id;
-                controller.Register();         
+                controller.Register(); 
+                VolunteerOrientation_AC.updateUser('volunteer@gmail.com','3409379','volunteer@gmail.com',currUser.id);       
             }
     }
     
@@ -166,7 +167,7 @@ Public class VolunteerOrientation_AC_Test {
                 controller.TimingInfo();
                 controller.getOrientationRecordList();
                 controller.trainingId = currOffering.id;
-                       
+                 VolunteerOrientation_AC.updateUser('volunteer@gmail.com','3409379','volunteer@gmail.com','0055B0000011r12');              
             }
             
               //  
@@ -195,7 +196,10 @@ Public class VolunteerOrientation_AC_Test {
          Chapter_Role_O_T__c currChapOandT = OrientationandTrainingUtil.createChapterOandT(currChapRole.id,currOandT.id);
          Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
          Volunteer_Orientation_Training__c  createVolOrientation = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.id,currOffering.id,con.id,'Registered');              
-         System.RunAs(new User(Id = UserInfo.getUserId()))
+        createVolOrientation.Volunteer_Attendance__c = 'Volunteer Cancelled'; 
+        update createVolOrientation;
+        Volunteer_Orientation_Training__c  createVolOrientation2 = VolunteerOrientation_AC_Test.createVolOrientation(currOandT.id,currOffering.id,con.id,'Registered');              
+        System.RunAs(new User(Id = UserInfo.getUserId()))
           {
               currUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(con.id);
           }
@@ -211,8 +215,11 @@ Public class VolunteerOrientation_AC_Test {
                 
                 controller.getOrientationRecordList();
                 controller.trainingId = currOffering.id;
-                controller.Cancel();         
+                controller.Cancel();
+                system.assertEquals('Volunteer Cancelled',createVolOrientation.Volunteer_Attendance__c);
+                controller.Register();
             }
+        
     }
    
     // Duplicate Orientation time prevention.
@@ -298,7 +305,7 @@ Public class VolunteerOrientation_AC_Test {
         System.RunAs(new User(Id = UserInfo.getUserId()))
         {
             testClassUtil.createUser();   
-            testClassUtil.createUser(); 
+            //testClassUtil.createUser(); 
         }
         List<User> currUserLst = [SELECT ID FROM USER WHERE ID != : Userinfo.getUserId() AND isActive=True];
         System.RunAs(currUserLst[0]){            
@@ -327,7 +334,10 @@ Public class VolunteerOrientation_AC_Test {
                 Test.setCurrentPage(pageRef);
                 VolunteerOrientation_AC controller = new VolunteerOrientation_AC();                
                 controller.lMSCourseId = 'Test';
-                controller.viewLMS();                       
+                controller.viewLMS();  
+               // updateUser(); 
+               controller.Previous();
+               controller.getDisablePrevious();                    
             }
         Test.stopTest();
     }

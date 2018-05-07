@@ -1,5 +1,10 @@
-// Test class for VolunteerWelcomePage_AC.
-
+/*****************************************************************************************************************
+Author      : MST Solutions
+Date        : 12/01/2016
+Description : This class contains test method for CaseFile object
+Modification Log: 
+28/03/2018 - Kanagaraj
+*******************************************************************************************************************/
 @isTest
 Public Class VolunteerWelcomePage_ACTest
 {
@@ -87,6 +92,8 @@ Public Class VolunteerWelcomePage_ACTest
             controller.getEvents();
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
+            System.assertEquals(newEvent.Event_Name__c,'Send Off','Event name does not match');
+        	System.assert(newEvent.Event_Name__c == 'Send Off','Event name does not match');
         }
         
     }
@@ -100,7 +107,8 @@ Public Class VolunteerWelcomePage_ACTest
         updateContact.id = con.id;
         updateContact.is_Application__c = 'Submit';
         update updateContact;
-        
+        System.assertEquals(updateContact.is_Application__c,'Submit','Contact application status does not match');
+        System.assert(updateContact.is_Application__c == 'Submit','Contact application status does not match');
         OrientationandTrainingUtil.createAffiliation(con.id);
         User currUser;
         System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -159,11 +167,9 @@ Public Class VolunteerWelcomePage_ACTest
             controller.getEvents();
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
-        }
-        
-        
-           
-        
+        }  
+        System.assertEquals(updateContact.is_Application__c,'Approved','Contact application status does not match');
+        System.assert(updateContact.is_Application__c == 'Approved','Contact application status does not match');            
     }
     // Completing Interview for updating Interview status.
     static testmethod void completeInterviewTask()
@@ -213,8 +219,9 @@ Public Class VolunteerWelcomePage_ACTest
             controller.getEvents();
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
-        }
-        
+            System.assertEquals(confirmationTask.Status,'Approved','Task status does not match');
+        	System.assert(confirmationTask.Status == 'Approved','Task status does not match');           
+        }   
     }
     
     // Creating Background check.
@@ -268,8 +275,9 @@ Public Class VolunteerWelcomePage_ACTest
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
             Test.stopTest();
-        }
-        
+            System.assertEquals(confirmationTask.Status,'Approved','Task status does not match');
+        	System.assert(confirmationTask.Status == 'Approved','Task status does not match');
+        }        
     }
     
     // Completing Background check for updating background check status.
@@ -334,8 +342,9 @@ Public Class VolunteerWelcomePage_ACTest
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
             Test.stopTest();
-        }
-        
+            System.assertEquals(currBC.status__c,'Approved','Background check status does not match');
+        	System.assert(currBC.status__c == 'Approved','Background check status does not match');
+        }   
     }
     // Completing training.
     static testmethod void completeTraining()
@@ -399,8 +408,8 @@ Public Class VolunteerWelcomePage_ACTest
             controller.becomeAVolunteer();
             controller.findVolunteerStatus();
             Test.stopTest();
-        }
-        
-    }
-    
+            System.assertEquals(currBC.status__c,'Approved','Background check status does not match');
+        	System.assert(currBC.status__c == 'Approved','Background check status does not match');
+        }        
+    }    
 }

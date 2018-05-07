@@ -1,9 +1,15 @@
+/*****************************************************************************************************************
+Author      : MST Solutions
+Date        : 10/4/2016
+Description : This VolunteerInterviewTaskRest_AC is used to get the volunteer task list
+Modification Log: 
+28/03/2018 - Kanagaraj
+*******************************************************************************************************************/
 @RestResource (urlMapping='/orientation/*')
-global class VolunteerInterviewTaskRest_AC
-{
+global class VolunteerInterviewTaskRest_AC {	
+    //This method is used to get volunteer interview taks list
     @HttpGet
-    global static List<Task> getClassOffering()
-    {
+    global static List<Task> getClassOffering() {
         String[] uriKeys = RestContext.request.requestURI.split('/');
         String contactId = uriKeys.get(uriKeys.size()-1);
         List<Task> taskList = new List<Task>();

@@ -334,7 +334,7 @@ body{margin: 0px 0px 0px 0px;}
         <div id="wishexpense1" class="slds-card slds-m-horizontal--large " >
             <div style="float:left;width: 40%" >Wish Child Name : {!childName } </div>
             <div style="float:left;width: 40%" >Chapter Name : {!wishChapterName }  </div>
-           <!-- <div style="float:left;width: 20%">Description : {!wishDescription}  </div> -->
+            <div style="float:left;width: 20%">Description : {!wishDescription}  </div>
             <br />
             <div style="float:left;width: 40%" >Number of wish participants : {!NoOfWishParts }  </div>
             <div style="float:left;width: 40%" >Anticipated Start Date :

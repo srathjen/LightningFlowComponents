@@ -165,7 +165,8 @@
                                 </div>
                                 <div class="divTableRow">
                                     <div class="divTableCell">Date Submitted:</div>
-                                     <div class="divTableCell"><apex:outputText value="{!formatedDate}"/></div>
+                                    <div class="divTableCell"><apex:outputText value="{!formatedDate}"/></div>
+                                
                                 </div>
                                 <div class="divTableRow">
                                     <div class="divTableCell">Name:</div>
@@ -211,6 +212,16 @@
                                         <apex:param value="{!currLead.DOB__c }" />
                                         </apex:outputText></div>
                                 </div>
+                                
+                                <!-- WVC-1739 -->
+                                
+                                 <div class="divTableRow">
+                                    <div class="divTableCell">In order to facilitate communication:</div>
+                                    <div class="divTableCell"> {!currLead.Communication__c}</div>
+                                </div>                                
+                                                                 
+                                <!-- End WVC-1739 changes -->
+                                
                                 <div class="divTableRow">
                                     <div class="divTableCell">Has this child ever received a prior wish from Make-A-Wish or any other wish granting organization</div>
                                     <div class="divTableCell">{!currLead.Has_this_child_ever_received_prior_wish__c}</div>

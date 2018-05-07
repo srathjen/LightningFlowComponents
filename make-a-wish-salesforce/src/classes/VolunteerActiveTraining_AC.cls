@@ -53,109 +53,152 @@ public class VolunteerActiveTraining_AC {
     public VolunteerActiveTraining_AC() {  
         System.debug('VA Load Begin 1');
         isCompleted = False;
-        dupCheckList = new List<Volunteer_Orientation_Training__c>();
-        checkExistingTrainingRecords = new List<Volunteer_Orientation_Training__c>();
-        currentUserId = userInfo.getUserId();
-        classOffereningRecordtypeId = Schema.Sobjecttype.Class_Offering__c.getRecordTypeInfosByName().get(constant.classOfferingRecordTypeId).getRecordTypeId();
-        getUserRelatedContact = [SELECT Id,contact.Region_Chapter__c,Hidden_Email__c,contact.Region_Chapter__r.Chapter_Id__c,Username, LMS_Login__c, LMS_Id__c, ContactId, LMS_User_Code__c,FirstName,LastName,Email FROM User WHERE Id=:currentUserId];
-        lMSCredential = LMS_Credentials__c.getValues('LMS Integration');
-        userRelatedContactId = getUserRelatedContact.get(0).ContactId;
-        System.debug('VA Load Begin 2');
-        String nationalRT = Schema.Sobjecttype.Dynamic_Content__c.getRecordTypeInfosByName().get(constant.nationalRT).getRecordTypeId();
-        
-        // Displaying the Dynamic content on the portal.
-        List<Dynamic_Content__c> dynamicContent = [SELECT Id, Training_Additional_Info__c,Chapter_Name__c FROM Dynamic_Content__c WHERE  RecordTypeId = :nationalRT AND Active__c = True];
-        if(dynamicContent.size() >0) {
-            orientationContent = dynamicContent.get(0).Training_Additional_Info__c;
-        }
-        checkRegisteredProgram();
-        System.debug('VA Load Begin 3');
+        string Logvalue;
+       // try
+       // {
+            dupCheckList = new List<Volunteer_Orientation_Training__c>();
+            checkExistingTrainingRecords = new List<Volunteer_Orientation_Training__c>();
+            currentUserId = userInfo.getUserId();
+            classOffereningRecordtypeId = Schema.Sobjecttype.Class_Offering__c.getRecordTypeInfosByName().get(constant.classOfferingRecordTypeId).getRecordTypeId();
+            getUserRelatedContact = [SELECT Id,contact.Region_Chapter__c,Hidden_Email__c,contact.Region_Chapter__r.Chapter_Id__c,Username, LMS_Login__c, LMS_Id__c, ContactId, LMS_User_Code__c,FirstName,LastName,Email FROM User WHERE Id=:currentUserId];
+            lMSCredential = LMS_Credentials__c.getValues('LMS Integration');
+            userRelatedContactId = getUserRelatedContact.get(0).ContactId;
+            Logvalue = string.valueOf(userRelatedContactId);
+            System.debug('VA Load Begin 2');
+            String nationalRT = Schema.Sobjecttype.Dynamic_Content__c.getRecordTypeInfosByName().get(constant.nationalRT).getRecordTypeId();
+            
+            // Displaying the Dynamic content on the portal.
+            List<Dynamic_Content__c> dynamicContent = [SELECT Id, Training_Additional_Info__c,Chapter_Name__c FROM Dynamic_Content__c WHERE  RecordTypeId = :nationalRT AND Active__c = True];
+            if(dynamicContent.size() >0) {
+                orientationContent = dynamicContent.get(0).Training_Additional_Info__c;
+                Logvalue = string.valueOf(orientationContent);
+            }
+            checkRegisteredProgram();
+            System.debug('VA Load Begin 3');
+        // }
+       /*  catch(Exception ex)
+         {
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerActiveTraining_AC','VolunteerActiveTraining_AC',Null,ex,Logvalue));
+            //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);         
+         }*/
     }
     
     // It will check the registered program on Volunteer Orientatoin and Training, If training is available then it will display
     // the registered training in a separate block. 
     public Boolean checkRegisteredProgram() 
     {
-        List<Volunteer_Orientation_Training__c> exVolList = [SELECT Id, Hidden_O_T_Id__c, Volunteer__c, Volunteer_Attendance__c 
-                                                             FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId AND Type__c = 'Training' 
-                                                             AND (Volunteer_Attendance__c = 'Registered' OR Volunteer_Attendance__c = 'Completed')
-                                                            ];
-        if(exVolList.size() > 0) {
-            checkExistProgram = false;
-        } else {
-            checkExistProgram = true;
-        }
-        return checkExistProgram;
+        string Logvalue;
+      //  try
+       // {
+            List<Volunteer_Orientation_Training__c> exVolList = [SELECT Id, Hidden_O_T_Id__c, Volunteer__c, Volunteer_Attendance__c 
+                                                                 FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId AND Type__c = 'Training' 
+                                                                 AND (Volunteer_Attendance__c = 'Registered' OR Volunteer_Attendance__c = 'Completed')
+                                                                ];
+            Logvalue = string.valueOf(exVolList);
+            if(exVolList.size() > 0) {
+                checkExistProgram = false;
+            } else {
+                checkExistProgram = true;
+            }
+            Logvalue = string.valueOf(checkExistProgram);
+            return checkExistProgram;
+       /*  }
+         catch(Exception ex)
+         {
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerActiveTraining_AC','checkRegisteredProgram',Null,ex,Logvalue));
+            //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);        
+            return null;
+         }*/
     }
     
     // Fetching all the chapter role based training for the volunteer chapter and It will display on the Training page
     // If that training not done by Volunteer.
     public List<classOfferingWrapper> getTrainingRecordList() 
     {
-        
-        classOfferingMap = new Map<Id,Class_Offering__c>();
-        Set<Id> chapterIds = new Set<Id>();
-        userRelatedContactId = getUserRelatedContact.get(0).ContactId;
-        
-        for(Volunteer_Roles__c currRec : [SELECT id, Chapter_Role__c,Chapter_Role__r.Chapter_Name__c FROM Volunteer_Roles__c WHERE Volunteer_Name__c = :userRelatedContactId]) 
-        {
-            chapterIds.add(currRec.Chapter_Role__r.Chapter_Name__c);
-        }
-        
-        Set<Id> completedTrainingsSet = new Set<Id>();
-        for(Volunteer_Orientation_Training__c checkTrainingDetails : [SELECT Id, class_Offering__c, class_Offering__r.Chapter_Role_O_T__c, Volunteer__c, Volunteer_Attendance__c FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId AND Type__c = 'Training']) {
-            if(checkTrainingDetails.Volunteer_Attendance__c == 'Completed') {
-                completedTrainingsSet.add(checkTrainingDetails.class_Offering__r.Chapter_Role_O_T__c);
+        List<string> LstLog = new List<string>();
+        string Logvalue;
+       // try
+       // {
+            classOfferingMap = new Map<Id,Class_Offering__c>();
+            Set<Id> chapterIds = new Set<Id>();
+            userRelatedContactId = getUserRelatedContact.get(0).ContactId;
+            
+            for(Volunteer_Roles__c currRec : [SELECT id, Chapter_Role__c,Chapter_Role__r.Chapter_Name__c FROM Volunteer_Roles__c WHERE Volunteer_Name__c = :userRelatedContactId]) 
+            {
+                LstLog.add(string.valueOf(currRec));
+                chapterIds.add(currRec.Chapter_Role__r.Chapter_Name__c);
             }
-        }
-        
-        
-        if(chapterIds.size() > 0)
-        {
-            classOfferingMap.putAll([SELECT id,Name,Chapter__c,Date__c,End_Time__c,Course_ID__c,recordtypeid, recordtype.name,Chapter_Role_O_T__c,Chapter_Role_O_T__r.Orientation_Training__r.Name,
-                                     Location__c,max_capacity__c,Start_Time__c,Type__c,Orientation_and_Training__c,Registered_Seats__c, AvailableSeats__c, Chapter_Role_O_T__r.Orientation_Training__c,
-                                     (SELECT Id, Name, Volunteer_Attendance__c FROM Volunteer_Orientation_Trainings__r WHERE Volunteer__c =: getUserRelatedContact.get(0).ContactId)  FROM 
-                                     Class_Offering__c WHERE 
-                                     Chapter_Role_O_T__r.Chapter_Role__r.chapter_name__c IN :chapterIds AND Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId =: trainingRecordTypeId   AND  ((Date__c >= :Date.Today() AND Date__c <= :Date.today().addMonths(6)) OR Date__c = Null) ORDER BY Name limit :list_size offset :counter]);
             
-            List<AggregateResult> countAgg = [SELECT count(Id) FROM Class_Offering__c  WHERE Chapter_Role_O_T__r.Required__c = True AND 
-                                              Chapter_Role_O_T__r.Chapter_Role__r.chapter_name__c  IN :chapterIds AND Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId =: trainingRecordTypeId  AND Date__c = NEXT_N_DAYS:180];                 
+            Set<Id> completedTrainingsSet = new Set<Id>();
+            for(Volunteer_Orientation_Training__c checkTrainingDetails : [SELECT Id, class_Offering__c, class_Offering__r.Chapter_Role_O_T__c, Volunteer__c, Volunteer_Attendance__c FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId AND Type__c = 'Training']) {
+                LstLog.add(string.valueOf(checkTrainingDetails));
+                if(checkTrainingDetails.Volunteer_Attendance__c == 'Completed') {
+                    completedTrainingsSet.add(checkTrainingDetails.class_Offering__r.Chapter_Role_O_T__c);
+                }
+            }
             
-            total_size = (countAgg != null && countAgg.size() > 0) ? (Integer) countAgg[0].get('expr0') : 0;                     
-        }
-        List<classOfferingWrapper> classOfferingList = new List<classOfferingWrapper>();  
-        for(Class_Offering__c currRec : classOfferingMap.values())
+            
+            if(chapterIds.size() > 0)
+            {
+                classOfferingMap.putAll([SELECT id,Name,Chapter__c,Date__c,End_Time__c,Course_ID__c,recordtypeid, recordtype.name,Chapter_Role_O_T__c,Chapter_Role_O_T__r.Orientation_Training__r.Name,
+                                         Location__c,max_capacity__c,Start_Time__c,Type__c,Orientation_and_Training__c,Registered_Seats__c, AvailableSeats__c, Chapter_Role_O_T__r.Orientation_Training__c,
+                                         (SELECT Id, Name, Volunteer_Attendance__c FROM Volunteer_Orientation_Trainings__r WHERE Volunteer__c =: getUserRelatedContact.get(0).ContactId)  FROM 
+                                         Class_Offering__c WHERE 
+                                         Chapter_Role_O_T__r.Chapter_Role__r.chapter_name__c IN :chapterIds AND Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId =: trainingRecordTypeId   AND  ((Date__c >= :Date.Today() AND Date__c <= :Date.today().addMonths(6)) OR Date__c = Null) ORDER BY Name limit :list_size offset :counter]);
+                
+                List<AggregateResult> countAgg = [SELECT count(Id) FROM Class_Offering__c  WHERE Chapter_Role_O_T__r.Required__c = True AND 
+                                                  Chapter_Role_O_T__r.Chapter_Role__r.chapter_name__c  IN :chapterIds AND Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId =: trainingRecordTypeId  AND Date__c = NEXT_N_DAYS:180];                 
+                
+                total_size = (countAgg != null && countAgg.size() > 0) ? (Integer) countAgg[0].get('expr0') : 0;                     
+            }
+            List<classOfferingWrapper> classOfferingList = new List<classOfferingWrapper>();  
+            for(Class_Offering__c currRec : classOfferingMap.values())
+            {
+                classOfferingWrapper newWrapper = new classOfferingWrapper();
+                newWrapper.orientationName = currRec.Orientation_and_Training__c;
+                newWrapper.chapterName = currRec.Chapter__c;
+                newWrapper.orientationDate = currRec.Date__c;
+                newWrapper.startTime = currRec.Start_Time__c;
+                newWrapper.endTime= currRec.End_Time__c;
+                newWrapper.location = currRec.Location__c;
+                newWrapper.maxCapacity = integer.valueOf(currRec.max_capacity__c);
+                newWrapper.avilableSheets = integer.valueOf(currRec.AvailableSeats__c);
+                newWrapper.recordType = currRec.recordType.name;
+                newWrapper.recordId = currRec.id;
+                newWrapper.volOppSize = currRec.Volunteer_Orientation_Trainings__r.size();
+                newWrapper.courseId = currRec.course_Id__c;
+                newWrapper.recordTypeId = currRec.RecordTypeid;
+                if( currRec.Volunteer_Orientation_Trainings__r.size() > 0)
+                    newWrapper.status= currRec.Volunteer_Orientation_Trainings__r[0].Volunteer_Attendance__c;
+                if(((currRec.max_capacity__c == Null) || (currRec.max_capacity__c >0 && currRec.max_capacity__c > currRec.Registered_Seats__c))
+                   && ((newWrapper.volOppSize > 0 && newWrapper.status == 'Volunteer Cancelled') || newWrapper.volOppSize == 0))
+                    newWrapper.displayRec = true;
+                else
+                    newWrapper.displayRec = false;
+                LstLog.add(string.valueOf(newWrapper));
+                classOfferingList.add(newWrapper);
+            }   
+            
+            isTrainingExist = false;
+            isCancelled = false;
+            TimingInfo();
+            
+            checkRegisteredProgram();
+            return classOfferingList;           
+       /* }
+        catch(Exception ex)      
         {
-            classOfferingWrapper newWrapper = new classOfferingWrapper();
-            newWrapper.orientationName = currRec.Orientation_and_Training__c;
-            newWrapper.chapterName = currRec.Chapter__c;
-            newWrapper.orientationDate = currRec.Date__c;
-            newWrapper.startTime = currRec.Start_Time__c;
-            newWrapper.endTime= currRec.End_Time__c;
-            newWrapper.location = currRec.Location__c;
-            newWrapper.maxCapacity = integer.valueOf(currRec.max_capacity__c);
-            newWrapper.avilableSheets = integer.valueOf(currRec.AvailableSeats__c);
-            newWrapper.recordType = currRec.recordType.name;
-            newWrapper.recordId = currRec.id;
-            newWrapper.volOppSize = currRec.Volunteer_Orientation_Trainings__r.size();
-            newWrapper.courseId = currRec.course_Id__c;
-            newWrapper.recordTypeId = currRec.RecordTypeid;
-            if( currRec.Volunteer_Orientation_Trainings__r.size() > 0)
-                newWrapper.status= currRec.Volunteer_Orientation_Trainings__r[0].Volunteer_Attendance__c;
-            if(((currRec.max_capacity__c == Null) || (currRec.max_capacity__c >0 && currRec.max_capacity__c > currRec.Registered_Seats__c))
-               && ((newWrapper.volOppSize > 0 && newWrapper.status == 'Volunteer Cancelled') || newWrapper.volOppSize == 0))
-                newWrapper.displayRec = true;
-            else
-                newWrapper.displayRec = false;
-            classOfferingList.add(newWrapper);
-        }   
-        
-        isTrainingExist = false;
-        isCancelled = false;
-        TimingInfo();
-        
-        checkRegisteredProgram();
-        return classOfferingList;
+            Logvalue = string.join(LstLog,', ');
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerActiveTraining_AC','getTrainingRecordList',Null,ex,Logvalue));
+            //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);        
+            return null;
+        }*/
     }
     
     // Mapping some additional key value for Start and End Time. Using this value, we can prevent the volunteer training time conflict.
@@ -183,221 +226,246 @@ public class VolunteerActiveTraining_AC {
     // Then it will update the existing cancelled record status as Registered.
     // If the volunteer registered the training same time for two diferent training, then it will throw and error message.
     public void Register() {
-        
-        LMSUserResponse currLMSUserResponse = new LMSUserResponse();
-        Set<String> checkDupSets = new Set<String>();
-        List<Class_Offering__c> classOfferingDetails = new List<Class_Offering__c>();
-        
-        
-        if(classOfferingMap.containsKey(trainingId))
+        List<string> LstLog = new List<string>();
+        string Logvalue;
+        string recId;
+        try
         {
-            classOfferingDetails.add(classOfferingMap.get(trainingId));
-        }
-        
-        
-        List<Volunteer_Orientation_Training__c> existingRecList= [SELECT Id, class_offering__c, class_offering__r.Start_Time__c, class_offering__r.End_Time__c,FORMAT(class_offering__r.Date__c),  class_offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c 
-                                                                  FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId AND Hidden_O_T_Id__c=:classOfferingMap.get(trainingId).Chapter_Role_O_T__r.Orientation_Training__c AND  (Volunteer_Attendance__c = 'Completed' Or Volunteer_Attendance__c = 'Registered') AND Type__c = 'Training'];
-        
-        if(existingRecList.size() > 0 && !isCompleted)
-        {
-          
-           /* ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You have already registered for a training.');
-            ApexPages.addMessage(myMsg);*/
-             for(Volunteer_Orientation_Training__c currRec : existingRecList){
-                 if(currRec.Volunteer_Attendance__c == 'Completed'){
-                     isCompleted = True;
+            LMSUserResponse currLMSUserResponse = new LMSUserResponse();
+            Set<String> checkDupSets = new Set<String>();
+            List<Class_Offering__c> classOfferingDetails = new List<Class_Offering__c>();
+            
+            
+            if(classOfferingMap.containsKey(trainingId))
+            {
+                classOfferingDetails.add(classOfferingMap.get(trainingId));
+            }
+            
+            
+            List<Volunteer_Orientation_Training__c> existingRecList= [SELECT Id, class_offering__c, class_offering__r.Start_Time__c, class_offering__r.End_Time__c,FORMAT(class_offering__r.Date__c),  class_offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c 
+                                                                      FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =:userRelatedContactId AND Hidden_O_T_Id__c=:classOfferingMap.get(trainingId).Chapter_Role_O_T__r.Orientation_Training__c AND  (Volunteer_Attendance__c = 'Completed' Or Volunteer_Attendance__c = 'Registered') AND Type__c = 'Training'];
+            
+            if(existingRecList.size() > 0 && !isCompleted)
+            {
+              
+               /* ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You have already registered for a training.');
+                ApexPages.addMessage(myMsg);*/
+                 for(Volunteer_Orientation_Training__c currRec : existingRecList){
+                     LstLog.add(string.valueOf(currRec));
+                     if(currRec.Volunteer_Attendance__c == 'Completed'){
+                         isCompleted = True;
+                     }
                  }
-             }
-             if(!(isCompleted)){
-                 ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You have already registered for a training.');
-                 ApexPages.addMessage(myMsg);
-             }
-        }
-        
-        else {
-            if(classOfferingDetails.size() > 0) {
-                Map<Id, List<Volunteer_Orientation_Training__c>> trainingMaps = new Map<Id, List<Volunteer_Orientation_Training__c>>();
-                checkExistingCanceledRecords = [SELECT Id, class_offering__c, class_offering__r.Start_Time__c, class_offering__r.recordtypeid, class_offering__r.End_Time__c,FORMAT(class_offering__r.Date__c),  class_offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c,LMS_Enrollment_Id__c 
-                                                FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =: userRelatedContactId AND class_offering__c = :trainingId AND Hidden_O_T_Id__c=:classOfferingMap.get(trainingId).Chapter_Role_O_T__r.Orientation_Training__c AND Volunteer_Attendance__c = 'Volunteer Cancelled'];
-                if(checkExistingCanceledRecords.size()>0) {
-                    if(checkExistingCanceledRecords.get(0).class_offering__r.recordtypeid == classOffereningRecordtypeId){
-                        if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
-                            User currVolunteerUser = getUserRelatedContact.get(0); 
-                            currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
-                        }
-                        LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
-                        currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress');
-                        System.debug('currLMSOrientationRegistrationResponse'+currLMSOrientationRegistrationResponse);
-                    }
-                    
-                    List<Volunteer_Orientation_Training__c> updateList = new List<Volunteer_Orientation_Training__c>();
-                    Set<String> c = new Set<String>();
-                    List<Volunteer_Orientation_Training__c> checkforExistingBeforeRegister = [SELECT Id, FORMAT(class_Offering__r.Date__c), class_Offering__c, class_Offering__r.Start_Time__c, class_Offering__r.End_Time__c, class_Offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c FROM Volunteer_Orientation_Training__c WHERE Type__c = 'Training'  AND Volunteer__c =:userRelatedContactId AND class_offering__r.Date__c =: checkExistingCanceledRecords.get(0).class_offering__r.Date__c AND (Volunteer_Attendance__c != 'Volunteer Cancelled' AND Volunteer_Attendance__c != 'Completed')];
-                    if(checkforExistingBeforeRegister.size()>0) {
-                        for(Volunteer_Orientation_Training__c checkExistingTrainings : checkforExistingBeforeRegister) {
-                            
-                            if( ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.Start_Time__c))) >= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)))) && ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.Start_Time__c))) >= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c)))) 
-                               || ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.End_Time__c))) <= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)))) && ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.End_Time__c))) <= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c))))) {
-                                   checkExistingCanceledRecords.get(0).Volunteer_Attendance__c = 'Registered';
-                                   checkExistingCanceledRecords.get(0).class_offering__c = trainingId;
-                                   
-                         if(checkExistingCanceledRecords.get(0).class_offering__r.recordtypeid == classOffereningRecordtypeId){
-                           
+                 if(!(isCompleted)){
+                     ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You have already registered for a training.');
+                     ApexPages.addMessage(myMsg);
+                 }
+            }
+            
+            else {
+                if(classOfferingDetails.size() > 0) {
+                    Map<Id, List<Volunteer_Orientation_Training__c>> trainingMaps = new Map<Id, List<Volunteer_Orientation_Training__c>>();
+                    checkExistingCanceledRecords = [SELECT Id, class_offering__c, class_offering__r.Start_Time__c, class_offering__r.recordtypeid, class_offering__r.End_Time__c,FORMAT(class_offering__r.Date__c),  class_offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c,LMS_Enrollment_Id__c 
+                                                    FROM Volunteer_Orientation_Training__c WHERE Volunteer__c =: userRelatedContactId AND class_offering__c = :trainingId AND Hidden_O_T_Id__c=:classOfferingMap.get(trainingId).Chapter_Role_O_T__r.Orientation_Training__c AND Volunteer_Attendance__c = 'Volunteer Cancelled'];
+                    if(checkExistingCanceledRecords.size()>0) {
+                       /* if(checkExistingCanceledRecords.get(0).class_offering__r.recordtypeid == classOffereningRecordtypeId){
                             if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
                                 User currVolunteerUser = getUserRelatedContact.get(0); 
                                 currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
                             }
                             LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
-                            currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress');
-                            checkExistingCanceledRecords.get(0).LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : Null;
-    
-                            System.debug('currLMSOrientationRegistrationResponse23'+currLMSOrientationRegistrationResponse);
-                        }
-                                   
-                                   updateList.add(checkExistingCanceledRecords[0]);
-                                   
-                                   
-                               } else {
-                                   ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You have already registered for a training on the same day at this time');
-                                   ApexPages.addMessage(myMsg);
-                                   // return null;
+                            currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress',Null);
+                            System.debug('currLMSOrientationRegistrationResponse'+currLMSOrientationRegistrationResponse);
+                        }*/
+                        
+                        List<Volunteer_Orientation_Training__c> updateList = new List<Volunteer_Orientation_Training__c>();
+                        Set<String> c = new Set<String>();
+                        List<Volunteer_Orientation_Training__c> checkforExistingBeforeRegister = [SELECT Id, FORMAT(class_Offering__r.Date__c), class_Offering__c, class_Offering__r.Start_Time__c, class_Offering__r.End_Time__c, class_Offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c FROM Volunteer_Orientation_Training__c WHERE Type__c = 'Training'  AND Volunteer__c =:userRelatedContactId AND class_offering__r.Date__c =: checkExistingCanceledRecords.get(0).class_offering__r.Date__c AND (Volunteer_Attendance__c != 'Volunteer Cancelled' AND Volunteer_Attendance__c != 'Completed')];
+                        if(checkforExistingBeforeRegister.size()>0) {
+                            for(Volunteer_Orientation_Training__c checkExistingTrainings : checkforExistingBeforeRegister) {
+                                
+                                if( ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.Start_Time__c))) >= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)))) && ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.Start_Time__c))) >= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c)))) 
+                                   || ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.End_Time__c))) <= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)))) && ((Integer.valueOf(startTimeMap.get(checkExistingCanceledRecords.get(0).class_offering__r.End_Time__c))) <= (Integer.valueOf(startTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c))))) {
+                                       checkExistingCanceledRecords.get(0).Volunteer_Attendance__c = 'Registered';
+                                       checkExistingCanceledRecords.get(0).class_offering__c = trainingId;
+                                       
+                             if(checkExistingCanceledRecords.get(0).class_offering__r.recordtypeid == classOffereningRecordtypeId){
+                               
+                                if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
+                                    User currVolunteerUser = getUserRelatedContact.get(0); 
+                                    currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
+                                }
+                                LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
+                                currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress',Null);
+                                checkExistingCanceledRecords.get(0).LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : Null;
+        
+                                System.debug('currLMSOrientationRegistrationResponse23'+currLMSOrientationRegistrationResponse);
+                            }
+                                       
+                                       updateList.add(checkExistingCanceledRecords[0]);
+                                       
+                                       
+                                   } else {
+                                       ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You have already registered for a training on the same day at this time');
+                                       ApexPages.addMessage(myMsg);
+                                       // return null;
+                                   }
+                            }
+                            if(updateList.size()>0) {
+                                recId = checkExistingCanceledRecords[0].id;
+                                LstLog.add(string.valueOf(updateList));                                
+                                update updateList;
+                                isCancelled = false;
+                                isTrainingExist = true;
+                                isCompleted = False;
+                                checkRegisteredProgram();
+                            }
+                            
+                        } else {
+                            checkExistingCanceledRecords.get(0).Volunteer_Attendance__c = 'Registered';
+                            checkExistingCanceledRecords.get(0).class_offering__c = trainingId;
+                            if(checkExistingCanceledRecords.get(0).class_offering__r.recordtypeid == classOffereningRecordtypeId){
+                               if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
+                                    User currVolunteerUser = getUserRelatedContact.get(0); 
+                                    currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
                                }
-                        }
-                        if(updateList.size()>0) {
-                            update updateList;
+                               LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
+                               currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress',Null);
+                             /* WVC-    */
+                               checkExistingCanceledRecords.get(0).LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : Null;
+    
+                           }
+                            recId = checkExistingCanceledRecords[0].id;
+                            LstLog.add(string.valueOf(checkExistingCanceledRecords));
+                            update checkExistingCanceledRecords;
                             isCancelled = false;
-                            isTrainingExist = true;
                             isCompleted = False;
+                            isTrainingExist = true;
                             checkRegisteredProgram();
                         }
-                        
-                    } else {
-                        checkExistingCanceledRecords.get(0).Volunteer_Attendance__c = 'Registered';
-                        checkExistingCanceledRecords.get(0).class_offering__c = trainingId;
-                        if(checkExistingCanceledRecords.get(0).class_offering__r.recordtypeid == classOffereningRecordtypeId){
-                           if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
-                                User currVolunteerUser = getUserRelatedContact.get(0); 
-                                currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
-                           }
-                           LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
-                           currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress');
-                         /* WVC-    */
-                          // checkExistingCanceledRecords.get(0).LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : Null;
-
-                       }
-                        update checkExistingCanceledRecords;
-                        isCancelled = false;
-                        isCompleted = False;
-                        isTrainingExist = true;
-                        checkRegisteredProgram();
-                    }
-                }          
-                
-                else 
-                {
-                    Set<String> existingTrainingSet = new Set<String>();
-                    for(Volunteer_Orientation_Training__c checkExistingTrainings : [SELECT Id, FORMAT(class_offering__r.Date__c), class_offering__c, class_offering__r.Start_Time__c, class_offering__r.End_Time__c, class_offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c FROM Volunteer_Orientation_Training__c WHERE Type__c = 'Training' AND class_offering__r.Date__c =: classOfferingDetails.get(0).Date__c AND (Volunteer_Attendance__c != 'Volunteer Cancelled' AND Volunteer_Attendance__c != 'Completed') AND Volunteer__c =:userRelatedContactId]) {
-                        
-                        if(!existingTrainingSet.contains(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)+'-'+endTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c))) {
-                            existingTrainingSet.add(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)+'-'+endTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c));
-                        }
-                    }
-                    for(String iterateExistingValues : existingTrainingSet) {
-                        if(classOfferingDetails.get(0).Start_Time__c !=null  && classOfferingDetails.get(0).End_Time__c !=null ){  
-                            if((Integer.valueOf(startTimeMap.get(classOfferingDetails.get(0).Start_Time__c))>=Integer.valueOf(iterateExistingValues.split('-')[0])) && (Integer.valueOf(startTimeMap.get(classOfferingDetails.get(0).Start_Time__c))>=Integer.valueOf(iterateExistingValues.split('-')[1]))
-                               || (Integer.valueOf(startTimeMap.get(classOfferingDetails.get(0).End_Time__c))<=Integer.valueOf(iterateExistingValues.split('-')[0])) && (Integer.valueOf(startTimeMap.get(classOfferingDetails.get(0).End_Time__c))<=Integer.valueOf(iterateExistingValues.split('-')[1]))) {
-                                   
-                               } else {
-                                   checkDupSets.add(iterateExistingValues);
-                               }
-                        }      
-                    }
-                    if(checkDupSets.size()>0) {
-                        ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You have already registered for a training on the same day at this time');
-                        ApexPages.addMessage(myMsg);
-                        isCancelled = false;
-                        isTrainingExist = false;
-                        isCompleted = False;
-                    }  
+                    }          
                     
-                    else
+                    else 
                     {
-                        Volunteer_Orientation_Training__c newTrainingRegistration = new Volunteer_Orientation_Training__c();
-                        newTrainingRegistration.Class_Offering__c = trainingId;
-                        newTrainingRegistration.Volunteer__c = userRelatedContactId;
-                        newTrainingRegistration.Type__c = 'Training';
-                        newTrainingRegistration.Registered_Date__c = System.today();
-                        newTrainingRegistration.Volunteer_Attendance__c = 'Registered';
-                        newTrainingRegistration.Hidden_O_T_Id__c= classOfferingMap.get(trainingId).Chapter_Role_O_T__r.Orientation_Training__c;
-                        
-                        User currVolunteerUser = getUserRelatedContact.get(0);
-                        if(classOfferingMap.get(trainingId).recordtypeid == classOffereningRecordtypeId ){
-                            if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
-                                
-                                currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
-                            } 
-                            LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
+                        Set<String> existingTrainingSet = new Set<String>();
+                        for(Volunteer_Orientation_Training__c checkExistingTrainings : [SELECT Id, FORMAT(class_offering__r.Date__c), class_offering__c, class_offering__r.Start_Time__c, class_offering__r.End_Time__c, class_offering__r.Chapter__c, Volunteer__c, Volunteer_Attendance__c FROM Volunteer_Orientation_Training__c WHERE Type__c = 'Training' AND class_offering__r.Date__c =: classOfferingDetails.get(0).Date__c AND (Volunteer_Attendance__c != 'Volunteer Cancelled' AND Volunteer_Attendance__c != 'Completed') AND Volunteer__c =:userRelatedContactId]) {
                             
-                            currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress');
-                            if(currLMSOrientationRegistrationResponse.status != Null && currLMSOrientationRegistrationResponse.status.equalsIgnoreCase('in-progress')){
-                                newTrainingRegistration.LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : Null;
-                                
+                            if(!existingTrainingSet.contains(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)+'-'+endTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c))) {
+                                existingTrainingSet.add(startTimeMap.get(checkExistingTrainings.class_offering__r.Start_Time__c)+'-'+endTimeMap.get(checkExistingTrainings.class_offering__r.End_Time__c));
                             }
                         }
-                        
-                        try{
-                            insert newTrainingRegistration;
-                            if(currVolunteerUser.LMS_Id__c != String.valueOf(currLMSUserResponse.id) || currVolunteerUser.LMS_Login__c !=  String.valueOf(currLMSUserResponse.login) || currVolunteerUser.LMS_User_Code__c != String.valueOf(currLMSUserResponse.code) ){
-                                updateUser(String.valueOf(currLMSUserResponse.id),String.valueOf(currLMSUserResponse.login),String.valueOf(currLMSUserResponse.code),currVolunteerUser.Id);
-                            } 
-                            isCancelled = false;
-                            isTrainingExist = true;
-                            isCompleted = False;
-                        }catch(Exception ex){
-                            System.debug('ex'+ex.getmessage());
-                            //return 'Exception caused, Please retry again or contact System Adminstrator'; 
+                        for(String iterateExistingValues : existingTrainingSet) {
+                            if(classOfferingDetails.get(0).Start_Time__c !=null  && classOfferingDetails.get(0).End_Time__c !=null ){  
+                                if((Integer.valueOf(startTimeMap.get(classOfferingDetails.get(0).Start_Time__c))>=Integer.valueOf(iterateExistingValues.split('-')[0])) && (Integer.valueOf(startTimeMap.get(classOfferingDetails.get(0).Start_Time__c))>=Integer.valueOf(iterateExistingValues.split('-')[1]))
+                                   || (Integer.valueOf(startTimeMap.get(classOfferingDetails.get(0).End_Time__c))<=Integer.valueOf(iterateExistingValues.split('-')[0])) && (Integer.valueOf(startTimeMap.get(classOfferingDetails.get(0).End_Time__c))<=Integer.valueOf(iterateExistingValues.split('-')[1]))) {
+                                       
+                                   } else {
+                                       checkDupSets.add(iterateExistingValues);
+                                   }
+                            }      
                         }
-                        checkRegisteredProgram();
+                        if(checkDupSets.size()>0) {
+                            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, 'You have already registered for a training on the same day at this time');
+                            ApexPages.addMessage(myMsg);
+                            isCancelled = false;
+                            isTrainingExist = false;
+                            isCompleted = False;
+                        }  
+                        
+                        else
+                        {
+                            Volunteer_Orientation_Training__c newTrainingRegistration = new Volunteer_Orientation_Training__c();
+                            newTrainingRegistration.Class_Offering__c = trainingId;
+                            newTrainingRegistration.Volunteer__c = userRelatedContactId;
+                            newTrainingRegistration.Type__c = 'Training';
+                            newTrainingRegistration.Registered_Date__c = System.today();
+                            newTrainingRegistration.Volunteer_Attendance__c = 'Registered';
+                            newTrainingRegistration.Hidden_O_T_Id__c= classOfferingMap.get(trainingId).Chapter_Role_O_T__r.Orientation_Training__c;
+                            
+                            User currVolunteerUser = getUserRelatedContact.get(0);
+                            if(classOfferingMap.get(trainingId).recordtypeid == classOffereningRecordtypeId ){
+                                if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
+                                    
+                                    currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
+                                } 
+                                LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
+                                
+                                currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'in-progress',Null);
+                                if(currLMSOrientationRegistrationResponse.status != Null && currLMSOrientationRegistrationResponse.status.equalsIgnoreCase('in-progress')){
+                                    newTrainingRegistration.LMS_Enrollment_Id__c = (currLMSOrientationRegistrationResponse.id != null) ? String.valueOf(currLMSOrientationRegistrationResponse.id) : Null;
+                                    
+                                }
+                            }
+                            
+                                LstLog.add(string.valueOf(newTrainingRegistration));
+                                insert newTrainingRegistration;
+                                if(currVolunteerUser.LMS_Id__c != String.valueOf(currLMSUserResponse.id) || currVolunteerUser.LMS_Login__c !=  String.valueOf(currLMSUserResponse.login) || currVolunteerUser.LMS_User_Code__c != String.valueOf(currLMSUserResponse.code) ){
+                                    updateUser(String.valueOf(currLMSUserResponse.id),String.valueOf(currLMSUserResponse.login),String.valueOf(currLMSUserResponse.code),currVolunteerUser.Id);
+                                } 
+                                isCancelled = false;
+                                isTrainingExist = true;
+                                isCompleted = False;
+                            
+                            checkRegisteredProgram();
+                        }
                     }
                 }
             }
+            PageReference pg = new PageReference('/VolunteerTraining_VF');
+            // return pg;
+        }   
+        catch(Exception ex)      
+        {
+            Logvalue = string.join(LstLog,', ');
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerActiveTraining_AC','Register',recId,ex,Logvalue));
+            //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);        
         }
-        PageReference pg = new PageReference('/VolunteerTraining_VF');
-        // return pg;
     }
     
     
     // Volunteer have a option to cancel their registered trainig program in the Registered Training table.
     public Void Cancel() {
         LMSUserResponse currLMSUserResponse = new LMSUserResponse();
-        List<Class_Offering__c> orientationDetails = [SELECT Id, Course_ID__c, recordtypeid, Chapter__c FROM Class_Offering__c WHERE Id =:trainingId];
-        if(orientationDetails.size()>0) {
-            List<Volunteer_Orientation_Training__c> cancelRegistrationList = [SELECT Id, Class_Offering__c /*,Orientation_Training__r.Chapter_Name__c*/ FROM Volunteer_Orientation_Training__c WHERE Class_Offering__c =:trainingId AND Volunteer__c =: userRelatedContactId AND Class_Offering__r.Chapter__c =: orientationDetails.get(0).Chapter__c AND Type__c = 'Training'];
-            if(cancelRegistrationList.size()>0) {
-                if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
-                    
-                    User currVolunteerUser = getUserRelatedContact.get(0);
-                    cancelRegistrationList.get(0).Volunteer_Attendance__c = 'Volunteer Cancelled';
-                    //cancelRegistrationList.get(0).LMS_Enrollment_Id__c = '';
-                    /*Added by Sailappa Vignesh PG
-Description : To Update the Course enrollment status to 'dropped' in LMS*/
-                    if(orientationDetails[0].recordtypeid == classOffereningRecordtypeId){                                  
-                       // currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);  
-                        //LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
-                        //currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'dropped');
-                    }   
-                    try{
+        string Logvalue;
+        string recId;
+        try
+        {
+            List<Class_Offering__c> orientationDetails = [SELECT Id, Course_ID__c, recordtypeid, Chapter__c FROM Class_Offering__c WHERE Id =:trainingId];
+            if(orientationDetails.size()>0) {
+                List<Volunteer_Orientation_Training__c> cancelRegistrationList = [SELECT Id,LMS_Enrollment_Id__c ,Class_Offering__c /*,Orientation_Training__r.Chapter_Name__c*/ FROM Volunteer_Orientation_Training__c WHERE Class_Offering__c =:trainingId AND Volunteer__c =: userRelatedContactId AND Class_Offering__r.Chapter__c =: orientationDetails.get(0).Chapter__c AND Type__c = 'Training'];
+                if(cancelRegistrationList.size()>0) {
+                    if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
+                        
+                        User currVolunteerUser = getUserRelatedContact.get(0);
+                        cancelRegistrationList.get(0).Volunteer_Attendance__c = 'Volunteer Cancelled';
+                        //cancelRegistrationList.get(0).LMS_Enrollment_Id__c = '';
+                        /*Added by Sailappa Vignesh PG
+    Description : To Update the Course enrollment status to 'dropped' in LMS*/
+                        if(orientationDetails[0].recordtypeid == classOffereningRecordtypeId){                                  
+                            currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);  
+                            LMSOrientationRegistrationResponse currLMSOrientationRegistrationResponse = new LMSOrientationRegistrationResponse();
+                            currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(lMSCredential,classOfferingMap.get(trainingId).Course_ID__c,currLMSUserResponse.login,'dropped',Integer.valueOf(cancelRegistrationList.get(0).LMS_Enrollment_Id__c));
+                            cancelRegistrationList.get(0).LMS_Enrollment_Id__c = '';
+                        }   
+                        recId = cancelRegistrationList[0].id;
+                        Logvalue = string.valueOf(cancelRegistrationList);
                         update cancelRegistrationList;
                         isTrainingExist = false;
-                        isCancelled = true;
-                    }catch(Exception ex){
-                        System.debug('Canceled ex'+ex.getmessage());
-                        //return 'Exception caused, Please retry again or contact System Adminstrator'; 
+                        isCancelled = true;                       
                     }
+                    checkRegisteredProgram();
                 }
-                checkRegisteredProgram();
             }
-        }        
+        }
+        catch(Exception ex)
+        {
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerActiveTraining_AC','Cancel',recId,ex,Logvalue));
+            //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);        
+        }
     }
     
     //Pagination
@@ -457,20 +525,33 @@ Description : To Update the Course enrollment status to 'dropped' in LMS*/
     // Its redirecting to LMS page.
     public Void viewLMS() {
         
+        string recId;
+        String Logvalue;
+        try{
         LMSUserResponse currLMSUserResponse = new LMSUserResponse();        
         if(getUserRelatedContact.size() > 0 && lMSCredential != Null){
             User currVolunteerUser = getUserRelatedContact.get(0);            
+            recId = currVolunteerUser.id;
+            Logvalue = String.valueOf(currVolunteerUser);
             currLMSUserResponse = LMSHttpRequest.createOrActivateLMSUser(currVolunteerUser,lMSCredential);            
         }
         
         System.debug('The course id is'+lMSCourseId);
         /*Description : To get a access URL from the LMS*/
         if(currLMSUserResponse != Null && currLMSUserResponse.code != Null ){
+            Logvalue += String.ValueOf(currLMSUserResponse);
             lMSSSOResponse = LMSHttpRequest.getLMSSSODetails(lMSCredential,currLMSUserResponse.code,lMSCourseId); 
             sSOUrl = lMSSSOResponse.login_url;
             //courseURL = 'https://wish.exceedlms-staging.com/student/home/show_enrollment/50174731';  
             courseURL =  lMSSSOResponse.enrollment_url;
             
+        }
+        }
+        catch(Exception e){
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerActiveTraining_AC','viewLMS',recId,e,Logvalue));
+            //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);      
         }
         
     } 
@@ -495,12 +576,24 @@ Description : To Update the Course enrollment status to 'dropped' in LMS*/
     } 
      @future
     public static void updateUser(String LMS_Id,String LMS_Login,String LMS_User_Code,String userId){
-        User currVolunteerUser = new User();
-        currVolunteerUser.Id = userId;
-        currVolunteerUser.LMS_Id__c = LMS_Id;
-        currVolunteerUser.LMS_Login__c = LMS_Login;
-        currVolunteerUser.LMS_User_Code__c = LMS_User_Code;
-        Update currVolunteerUser;
-        System.debug('@@@ Update User @@@'+currVolunteerUser);
+        string Logvalue;
+        try
+        {
+            User currVolunteerUser = new User();
+            currVolunteerUser.Id = userId;
+            currVolunteerUser.LMS_Id__c = LMS_Id;
+            currVolunteerUser.LMS_Login__c = LMS_Login;
+            currVolunteerUser.LMS_User_Code__c = LMS_User_Code;
+            Logvalue = string.valueOf(currVolunteerUser);
+            Update currVolunteerUser;
+            System.debug('@@@ Update User @@@'+currVolunteerUser);
+         }
+         catch(Exception ex)
+         {
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerActiveTraining_AC','updateUser',userId,ex,Logvalue));
+            //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);        
+         }
     }  
 }

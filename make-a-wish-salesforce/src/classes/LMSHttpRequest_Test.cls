@@ -151,7 +151,7 @@ public class LMSHttpRequest_Test{
         system.runAs(currUserLst[1]){
             try{
             System.debug('The value is +'+currUserLst[0]);              
-            currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(currLMSCredential,'Test','Test','Test'); 
+            currLMSOrientationRegistrationResponse = LMSHttpRequest.createOrUpdateEnrollment(currLMSCredential,'Test','Test','Test',null); 
             System.assertEquals(currLMSOrientationRegistrationResponse.id,2369897);
             System.assertEquals(currLMSOrientationRegistrationResponse.user_id,2369897);
             System.assertEquals(currLMSOrientationRegistrationResponse.account_id,2369897);

@@ -180,6 +180,10 @@
             <translation><!-- Grandmother --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Grandparent</masterLabel>
+            <translation><!-- Grandparent --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Grandson</masterLabel>
             <translation><!-- Grandson --></translation>
         </picklistValues>
@@ -212,8 +216,20 @@
             <translation><!-- Other --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Parent</masterLabel>
+            <translation><!-- Parent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Parent/Guardian</masterLabel>
+            <translation><!-- Parent/Guardian --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Partner</masterLabel>
             <translation><!-- Partner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sibling</masterLabel>
+            <translation><!-- Sibling --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Sister</masterLabel>
@@ -567,25 +583,33 @@
         <name>Alternate2MedicalProfessionalFax__c</name>
     </fields>
     <fields>
+        <help><!-- Chest pain --></help>
         <label><!-- Hidden Angina --></label>
         <name>Angina__c</name>
     </fields>
     <fields>
-        <help><!-- Is there a medical reason why we need to move quickly? --></help>
+        <help><!-- Is this a rush wish? --></help>
         <label><!-- Any Medical Reason For Moving Quickly? --></label>
         <name>Any_medical_reason_for_moving_quickly__c</name>
     </fields>
     <fields>
+        <help><!-- Does not need to be exact --></help>
         <label><!-- Approximate Diagnosis Date --></label>
         <name>Approximate_Diagnosis_Date__c</name>
     </fields>
     <fields>
+        <help><!-- Are there additional diagnoses that would help determine the child&apos;s eligibility for a wish? --></help>
         <label><!-- Are Other Diagnosis Eligible For Wish? --></label>
         <name>Are_Other_Diagnosis_Eligible_For_Wish__c</name>
     </fields>
     <fields>
+        <help><!-- Heart palpitations --></help>
         <label><!-- Hidden Arrhythmia --></label>
         <name>Arrhythmia__c</name>
+    </fields>
+    <fields>
+        <label><!-- Auto Qualified --></label>
+        <name>Auto_Qualified__c</name>
     </fields>
     <fields>
         <label><!-- Best Contact for Physician First Name --></label>
@@ -596,6 +620,7 @@
         <name>Best_Contact_for_Physician_Last_Name__c</name>
     </fields>
     <fields>
+        <help><!-- Who is the best person to contact for this physician? --></help>
         <label><!-- Best contact for Physician Email --></label>
         <name>Best_contact_for_Physician_Email__c</name>
     </fields>
@@ -689,11 +714,12 @@
         <name>Child_Middle_Initial__c</name>
     </fields>
     <fields>
-        <help><!-- Wish Child has a condition for which there is no reasonable hope of cure and from which children or young people will ultimately die prematurely. (e.g., Duchenne muscular dystrophy or neurodegenerative disease) --></help>
+        <help><!-- Does the child have a condition that is likely to result in premature death (y/n) --></help>
         <label><!-- Child Will Ultimately Die Prematurely --></label>
         <name>Child_will_ultimately_die_prematurely__c</name>
     </fields>
     <fields>
+        <help><!-- Medical diagnosis that qualified the child for a wish. --></help>
         <label><!-- Child&apos;s Qualifying Diagnosis --></label>
         <name>Childs_Qualifying_Diagnosis__c</name>
     </fields>
@@ -711,6 +737,7 @@
         <name>Closed_Date__c</name>
     </fields>
     <fields>
+        <help><!-- Communication level of the referred child --></help>
         <label><!-- Communication --></label>
         <name>Communication__c</name>
         <picklistValues>
@@ -755,6 +782,7 @@
         </picklistValues>
     </fields>
     <fields>
+        <help><!-- Seizure disorder --></help>
         <label><!-- Hidden Convulsive Disorders --></label>
         <name>Convulsive_Disorders__c</name>
     </fields>
@@ -776,11 +804,13 @@
         <name>Created_Date_Time__c</name>
     </fields>
     <fields>
+        <help><!-- Selected condition related to travel recommendations on the DV --></help>
         <label><!-- Current Condition Label --></label>
         <name>Current_Condition_Label__c</name>
     </fields>
     <fields>
-        <label><!-- Travel Recommendation --></label>
+        <help><!-- Condition related to travel restrictions --></help>
+        <label><!-- Travel Restriction --></label>
         <name>Current_Condition__c</name>
     </fields>
     <fields>
@@ -796,6 +826,10 @@
         <name>DNQ_Date__c</name>
     </fields>
     <fields>
+        <label><!-- DNQ Export Filename --></label>
+        <name>DNQ_Export_Filename__c</name>
+    </fields>
+    <fields>
         <label><!-- DOB --></label>
         <name>DOB__c</name>
     </fields>
@@ -805,6 +839,11 @@
         <name>Debilitation_may_extend_over_many_years__c</name>
     </fields>
     <fields>
+        <label><!-- Department --></label>
+        <name>Department__c</name>
+    </fields>
+    <fields>
+        <help><!-- Diagnosis provided by referral source --></help>
         <label><!-- Diagnosis Given By Referrer --></label>
         <name>Diagnosis_Given_By_Referrer__c</name>
     </fields>
@@ -819,6 +858,18 @@
             <masterLabel>Block Lead Dup</masterLabel>
             <translation><!-- Block Lead Dup --></translation>
         </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Eligibility Review Date --></label>
+        <name>Eligibility_Review_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Eligibility to DNQ --></label>
+        <name>Eligibility_to_DNQ__c</name>
+    </fields>
+    <fields>
+        <label><!-- Eligibility to Qualified --></label>
+        <name>Eligibility_to_Qualified__c</name>
     </fields>
     <fields>
         <label><!-- External Id --></label>
@@ -874,8 +925,16 @@
         <name>Hidden_Best_Contact_Person_Id__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Chapter Information --></label>
+        <name>Hidden_Chapter_Information__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Chapter Name --></label>
         <name>Hidden_Chapter_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden DV Form Name --></label>
+        <name>Hidden_DV_Form_Name__c</name>
     </fields>
     <fields>
         <label><!-- Hidden DV form Medical professional Type --></label>
@@ -898,8 +957,16 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Hidden Field --></label>
+        <name>Hidden_Field__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Medical Professional Name --></label>
         <name>Hidden_Medical_Professional_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Proto Pulmonary Hypertension --></label>
+        <name>Hidden_Proto_Pulmonary_Hypertension__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Question1 --></label>
@@ -1065,8 +1132,16 @@
         <name>Inquiry_Date__c</name>
     </fields>
     <fields>
+        <label><!-- Inquiry to Referred --></label>
+        <name>Inquiry_to_Referred__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Is Chapter Active --></label>
         <name>Is_Chapter_Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Is Required Bypass --></label>
+        <name>Is_Required_Bypass__c</name>
     </fields>
     <fields>
         <label><!-- Is We Need To Expedite The Process? --></label>
@@ -1105,7 +1180,7 @@
         <name>Lung_Disease__c</name>
     </fields>
     <fields>
-        <label><!-- MAW Name --></label>
+        <label><!-- PR Diagnosis --></label>
         <name>MAW_Name__c</name>
     </fields>
     <fields>
@@ -1201,6 +1276,7 @@
         <name>Migrated_Record__c</name>
     </fields>
     <fields>
+        <help><!-- Field auto-populates based on selection made in Communication field. --></help>
         <label><!-- Non - Verbal --></label>
         <name>Non_Verbal__c</name>
     </fields>
@@ -1228,6 +1304,11 @@
     <fields>
         <label><!-- Other Diagnosis --></label>
         <name>Other_diagnosis__c</name>
+    </fields>
+    <fields>
+        <help><!-- Out-of-territory wish, being granted with the permission of the child&apos;s home chapter. --></help>
+        <label><!-- Out of Territory --></label>
+        <name>Out_of_Territory__c</name>
     </fields>
     <fields>
         <label><!-- Hidden No Duplicate Found --></label>
@@ -1330,6 +1411,10 @@
             <translation><!-- Grandmother --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Grandparent</masterLabel>
+            <translation><!-- Grandparent --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Grandson</masterLabel>
             <translation><!-- Grandson --></translation>
         </picklistValues>
@@ -1362,8 +1447,20 @@
             <translation><!-- Other --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Parent</masterLabel>
+            <translation><!-- Parent --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Parent/Guardian</masterLabel>
+            <translation><!-- Parent/Guardian --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Partner</masterLabel>
             <translation><!-- Partner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sibling</masterLabel>
+            <translation><!-- Sibling --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Sister</masterLabel>
@@ -1413,6 +1510,10 @@
         <name>Part_A_Sent__c</name>
     </fields>
     <fields>
+        <label><!-- Pending Diagnosis Date --></label>
+        <name>Pending_Diagnosis_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- Please Explain Condition Deteriorate --></label>
         <name>Please_Explain_Deteriorate__c</name>
     </fields>
@@ -1437,8 +1538,81 @@
         <name>Pulmonary_Hypertension__c</name>
     </fields>
     <fields>
+        <label><!-- Qualified Date --></label>
+        <name>Qualified_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Qualified Export Filename --></label>
+        <name>Qualified_Export_Filename__c</name>
+    </fields>
+    <fields>
+        <label><!-- Qualifying Diagnosis --></label>
+        <name>Qualifying_Diagnosis__c</name>
+    </fields>
+    <fields>
+        <label><!-- Qualifying ICD code --></label>
+        <name>Qualifying_ICD__c</name>
+        <relationshipLabel><!-- Leads (Qualifying ICD) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- RE Additional Parent Address ID --></label>
+        <name>RE_Additional_Parent_Address_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Additional Parent ID --></label>
+        <name>RE_Additional_Parent_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Additional Parent Relationship ID --></label>
+        <name>RE_Additional_Parent_Relationship_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Address ID --></label>
+        <name>RE_Address_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Alt 1 HTF ID --></label>
+        <name>RE_Alt_1_HTF_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Alt 1 HTF Relationship ID --></label>
+        <name>RE_Alt_1_HTF_Relationship_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Alt 1 MP ID --></label>
+        <name>RE_Alt_1_MP_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Alt 1 MP Relationship ID --></label>
+        <name>RE_Alt_1_MP_Relationship_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Alt 2 HTF ID --></label>
+        <name>RE_Alt_2_HTF_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Alt 2 HTF Relationship ID --></label>
+        <name>RE_Alt_2_HTF_Relationship_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Alt 2 MP ID --></label>
+        <name>RE_Alt_2_MP_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Alt 2 MP Relationship ID --></label>
+        <name>RE_Alt_2_MP_Relationship_ID__c</name>
+    </fields>
+    <fields>
         <label><!-- RE Any medical reason for moving quickly --></label>
         <name>RE_Any_medical_reason_for_moving_quickly__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Best Contact ID --></label>
+        <name>RE_Best_Contact_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Best Contact Relationship ID --></label>
+        <name>RE_Best_Contact_Relationship_ID__c</name>
     </fields>
     <fields>
         <label><!-- RE City --></label>
@@ -1487,6 +1661,10 @@
     <fields>
         <label><!-- RE Gender --></label>
         <name>RE_Gender__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE HTF ID --></label>
+        <name>RE_HTF_ID__c</name>
     </fields>
     <fields>
         <label><!-- RE Hospital/Treatment Facility --></label>
@@ -1573,8 +1751,16 @@
         <name>RE_Parent_First_Name__c</name>
     </fields>
     <fields>
+        <label><!-- RE Parent ID --></label>
+        <name>RE_Parent_ID__c</name>
+    </fields>
+    <fields>
         <label><!-- RE Parent Last Name --></label>
         <name>RE_Parent_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Parent Relationship ID --></label>
+        <name>RE_Parent_Relationship_ID__c</name>
     </fields>
     <fields>
         <label><!-- RE Phone --></label>
@@ -1613,8 +1799,16 @@
         <name>RE_Qualifying_Medical_Professional_Phone__c</name>
     </fields>
     <fields>
+        <label><!-- RE Referral Relationship ID --></label>
+        <name>RE_Referral_Relationship_ID__c</name>
+    </fields>
+    <fields>
         <label><!-- RE Referred Date --></label>
         <name>RE_Referred_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Referrer Address ID --></label>
+        <name>RE_Referrer_Address_ID__c</name>
     </fields>
     <fields>
         <label><!-- RE Referrer City --></label>
@@ -1661,8 +1855,24 @@
         <name>RE_Sub_Status__c</name>
     </fields>
     <fields>
+        <label><!-- RE Treating HTF Relationship ID --></label>
+        <name>RE_Treating_HTF_Relationship_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Treating MP ID --></label>
+        <name>RE_Treating_MP_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Treating MP Relationship ID --></label>
+        <name>RE_Treating_MP_Relationship_ID__c</name>
+    </fields>
+    <fields>
         <label><!-- RE What is the familyâ€™s primary spoken --></label>
         <name>RE_What_is_the_family_s_primary_spoken__c</name>
+    </fields>
+    <fields>
+        <label><!-- RE Wish Child ID --></label>
+        <name>RE_Wish_Child_ID__c</name>
     </fields>
     <fields>
         <label><!-- RE Zip/Postal Code --></label>
@@ -1696,6 +1906,10 @@
         <help><!-- Date the Initial lead from an authorized referral source is received. --></help>
         <label><!-- Referred Date --></label>
         <name>Referred_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Referred to Eligibility review --></label>
+        <name>Referred_to_Eligibility_review__c</name>
     </fields>
     <fields>
         <label><!-- Referrer City --></label>
@@ -1824,24 +2038,40 @@
             <translation><!-- Age --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>Local</masterLabel>
-            <translation><!-- Local --></translation>
-        </picklistValues>
-        <picklistValues>
             <masterLabel>Medical</masterLabel>
             <translation><!-- Medical --></translation>
         </picklistValues>
         <picklistValues>
-            <masterLabel>National</masterLabel>
-            <translation><!-- National --></translation>
+            <masterLabel>New</masterLabel>
+            <translation><!-- New --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>No Response</masterLabel>
             <translation><!-- No Response --></translation>
         </picklistValues>
         <picklistValues>
+            <masterLabel>Out of Territory - International</masterLabel>
+            <translation><!-- Out of Territory - International --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending Clarification - Chapter</masterLabel>
+            <translation><!-- Pending Clarification - Chapter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending Clarification - MAC</masterLabel>
+            <translation><!-- Pending Clarification - MAC --></translation>
+        </picklistValues>
+        <picklistValues>
             <masterLabel>Pending Diagnosis Verification</masterLabel>
             <translation><!-- Pending Diagnosis Verification --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending Paper DV</masterLabel>
+            <translation><!-- Pending Paper DV --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending Part A</masterLabel>
+            <translation><!-- Pending Part A --></translation>
         </picklistValues>
         <picklistValues>
             <masterLabel>Previous Wish</masterLabel>
@@ -1855,6 +2085,18 @@
     <fields>
         <label><!-- This Statement Describes My Patient --></label>
         <name>This_Statement_Describes_My_Patient__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time in Pending Diagnosis --></label>
+        <name>Time_in_Pending_Diagnosis__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Referral to DNQ --></label>
+        <name>Total_Referral_to_DNQ__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Referral to Qualified --></label>
+        <name>Total_Referral_to_Qualified__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Travel algorithm --></label>
@@ -1900,8 +2142,16 @@
         <name>Treatment_may_prolong_normal_activities__c</name>
     </fields>
     <fields>
+        <label><!-- Using Paper Process For DV --></label>
+        <name>Using_Paper_Process_For_DV__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Ventilator --></label>
         <name>Ventilator__c</name>
+    </fields>
+    <fields>
+        <label><!-- WalkMe Engagement Score --></label>
+        <name>WM4SF3__WalkMe_Engagement_Score__c</name>
     </fields>
     <fields>
         <label><!-- What is the familyâ€™s primary spoken la --></label>
@@ -2138,9 +2388,49 @@
         </picklistValues>
     </fields>
     <fields>
+        <help><!-- To be manually populated for Wish Assist only. --></help>
         <label><!-- Unique Wish Identifier --></label>
         <name>unique_wish_identifier__c</name>
     </fields>
+    <layouts>
+        <layout>Lead Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Alternate Medical Professionals --></label>
+            <section>Alternate Medical Professionals</section>
+        </sections>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Diagnosis Verification --></label>
+            <section>Diagnosis Verification</section>
+        </sections>
+        <sections>
+            <label><!-- Family Information --></label>
+            <section>Family Information</section>
+        </sections>
+        <sections>
+            <label><!-- Important Date --></label>
+            <section>Important Date</section>
+        </sections>
+        <sections>
+            <label><!-- Inquiry/Referral --></label>
+            <section>Inquiry/Referral</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Information --></label>
+            <section>Medical Information</section>
+        </sections>
+        <sections>
+            <label><!-- Medical Professionals --></label>
+            <section>Medical Professionals</section>
+        </sections>
+        <sections>
+            <label><!-- Referral Source Information --></label>
+            <section>Referral Source Information</section>
+        </sections>
+    </layouts>
     <layouts>
         <layout>Lead Layout</layout>
         <sections>
@@ -2180,6 +2470,10 @@
             <section>Referral Source Information</section>
         </sections>
     </layouts>
+    <quickActions>
+        <label><!-- Send Diagnosis Verification --></label>
+        <name>Send_Diagnosis_Verification</name>
+    </quickActions>
     <validationRules>
         <errorMessage><!-- Please Enter Full Address (City, State, Street and Postal Code), Phone Number  and Gender. --></errorMessage>
         <name>Lead_Address_Phone_and_Gender_Validation</name>
@@ -2191,6 +2485,10 @@
     <validationRules>
         <errorMessage><!-- if users chapter and chapter of lead is not equal then unique wish identifier is required. --></errorMessage>
         <name>Lead_Chapter_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please explain reason to expedite the process in Please Explain Expedite field. --></errorMessage>
+        <name>Lead_Check_Expedite_Explanation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Please Enter Child Age --></errorMessage>
@@ -2261,6 +2559,10 @@
         <name>Lead_Referrer_City_Validation</name>
     </validationRules>
     <validationRules>
+        <errorMessage><!-- Please provide the ICD or Diagnosis given by referrer. --></errorMessage>
+        <name>Lead_Referrer_Diagnosis_Validation</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- Please Enter Referrer Email --></errorMessage>
         <name>Lead_Referrer_Email_Validation</name>
     </validationRules>
@@ -2297,7 +2599,7 @@
         <name>Lead_Referrer_PostalCode_Validation</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification. --></errorMessage>
+        <errorMessage><!-- The status can be updated to Eligibility Review or Qualified only when the previous Sub Status is Pending Diagnosis Verification or Pending Part A or Pending Paper DV. --></errorMessage>
         <name>Lead_Status_QualifiedOrEligib_Validation</name>
     </validationRules>
     <validationRules>
@@ -2308,6 +2610,14 @@
         <errorMessage><!-- Please save the record before updating the sub status as Pending Diagnosis Verification. --></errorMessage>
         <name>Lead_sub_Status_Validation</name>
     </validationRules>
+    <webLinks>
+        <label><!-- DV_to_fax --></label>
+        <name>DV_to_fax</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- DV_to_fax_w_fax_cover --></label>
+        <name>DV_to_fax_w_fax_cover</name>
+    </webLinks>
     <webLinks>
         <label><!-- Lead_DNQ_Letter --></label>
         <name>Lead_DNQ_Letter</name>
@@ -2341,6 +2651,10 @@
         <name>Loop__Mass_LOOPlus</name>
     </webLinks>
     <webLinks>
+        <label><!-- Part_A_fax --></label>
+        <name>Part_A_fax</name>
+    </webLinks>
+    <webLinks>
         <label><!-- Send_Diagnosis_Verification --></label>
         <name>Send_Diagnosis_Verification</name>
     </webLinks>
@@ -2351,6 +2665,11 @@
     <workflowTasks>
         <name>Lead_ET_Chapter_has_been_changed</name>
         <subject><!-- Lead ET : Chapter has been changed --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- New RUSH referral email alert has been sent --></description>
+        <name>Lead_ET_New_Rush_Referral</name>
+        <subject><!-- Lead ET : New Rush Referral --></subject>
     </workflowTasks>
     <workflowTasks>
         <name>Lead_ET_We_ve_Received_your_Referral_Inquiry</name>

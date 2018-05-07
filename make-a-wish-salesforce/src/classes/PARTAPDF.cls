@@ -21,6 +21,9 @@ public class PARTAPDF {
     
     //Used to diaplay the medical information data into docusign page
     public void loadData() {
+        String LogValue;
+        List<String> recValueList = new List<String>();
+        try{
         String  query = 'SELECT FirstName, Provided_additional_information__c, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__r.Name, RFI_Form_Info_Hidden__c, Override_Dupe_Check__c, isConverted, Please_Explain_Deteriorate__c, LastName ,Email, Phone, Name, id, ';
         for(Schema.FieldSetMember currField :getPartAFields()) {
             query+=currField.getFieldPath()+',';
@@ -28,7 +31,7 @@ public class PARTAPDF {
         query=query.removeEnd(',');
         query+=' FROM Lead WHERE Id =:leadId';
         currLead = Database.query(query); 
-        
+        recValueList.add(string.valueof(currLead));
         if(currLead.Current_Condition_Label__c != null) {
             for(String splitCondition : currLead.Current_Condition_Label__c.split('\n')) {
                 currentConditionList.add(splitCondition);
@@ -37,7 +40,7 @@ public class PARTAPDF {
         }
         
         diagnosisVerificationList = [SELECT id,ICD_Code__c,Lead__c,Primary_Diagnosis__c,PCD_ICD__c,Order__c,Short_Description__c,Condition_Description__r.Name,isEligible__c,(SELECT Medical_Question__c,Epilepsy_Value__c,Medical_Question_Answer__c,isEligible__c,Comment__c FROM DiagnosisMedicalQuestions__r) FROM Diagnosis_Verification__c WHERE Lead__c = :leadId order by Order__c ];
-        
+         recValueList.add(string.valueof(diagnosisVerificationList ));
         if((!String.isEmpty(currLead.Current_Condition_Label__c)) && currLead.Current_Condition_Label__c.contains(';')) {
             Integer i = 0;
             currentCondition = '';
@@ -55,8 +58,14 @@ public class PARTAPDF {
                 medicalQuestions.Question__c = medicalQuestions.Question__c.replace('been on TPN?', 'been on TPN (years, months)?');
                 medicalQuestionMap.put(medicalQuestions.Id, medicalQuestions.Question__c);
             }
+        recValueList.add(string.valueof(medicalQuestions));
         } 
         
+      }
+      catch(Exception ex){
+            Logvalue = string.valueOf(recValueList);
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('PARTAPDF','loadData',leadId,ex,Logvalue));
+      }
         
     }
     //Self Fieldset, it holds the mandatory fields of Self relationship.

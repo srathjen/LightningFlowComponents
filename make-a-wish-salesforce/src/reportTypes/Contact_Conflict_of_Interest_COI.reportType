@@ -1027,11 +1027,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Preferred_Phone_Types__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Preferred_Phone__c</field>
             <table>Contact</table>
         </columns>
@@ -1103,11 +1098,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>What_is_your_race_ethnicity__c</field>
-            <table>Contact</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Work_Phone__c</field>
             <table>Contact</table>
         </columns>
         <columns>

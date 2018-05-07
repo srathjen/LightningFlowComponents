@@ -3,6 +3,8 @@ Author : MST Solutions
 CreateDate : 03/25/2016
 Description :This WishChildFormValUpdate_AC is used to update the parent case and create or update contacts when
 the wish family form is approved
+Modification Log: 
+23/03/2018 - Sankar - WVC-1835
 ******************************************************************************/
 Public Class WishChildFormValUpdate_AC
 {
@@ -14,7 +16,7 @@ Public Class WishChildFormValUpdate_AC
         Map<String,Wish_Child_Form__c> wishFormDetailsMap = new Map<String,Wish_Child_Form__c>();
         for(Wish_Child_Form__c currWishChildform : [SELECT id,WishType__c,Case_Team_Member1__c, Case_Team_Member2__c,
                                                     Driver_Name__c,case__c,Case__r.ChapterName__c,Case__r.Contact.Language__c FROM Wish_Child_Form__c WHERE 
-                                                    Case__c IN : newCaseDetails.keySet()])
+                                                    Case__c IN : newCaseDetails.keySet() LIMIT 50000])
         {
             wishFormDetailsMap.put(currWishChildform.case__c, currWishChildForm);
         }
@@ -46,120 +48,142 @@ Public Class WishChildFormValUpdate_AC
         
     }
     
+    //This method is used to update the wish child and wish family contact.
     public static List<Case> updateWishdetails(Map<Id,Case> caseToUpdateMap)
-    {
-        Map<String,Wish_Child_Form__c> wishChildFormMap = new Map<String,Wish_Child_Form__c>();
-        for(Wish_Child_Form__c currWishChildform :  [SELECT id,Case__c,Case__r.ChapterName__c,Case__r.Contact.Language__c,When_thinking_some_of_my_wish_ideas_were__c,MY_WISH_IS_TO__c,This_is_my_wish_because__c,
-                                                     To_me_the_most_important_part_of_my_wish__c, When_I_think_about_my_wish_I_imagine__c, Wish_Notes__c,
-                                                     Availability_Time_Period_1__c,Availability_Time_Period_2__c,Availability_Time_Period_3__c, 
-                                                     Any_impact_your_ability_to_join_wish__c,Details_about_Impact__c,Street__c,
-                                                     Have_current_automobile_insurance__c,Automobile_insurance_provide_coverage__c,Is_your_family_comfortable_in_rendal_car__c,
-                                                     Is_a_wheelchair_accessible_vehicle_neede__c,Participant_dietary_restrictions__c,Participant_dietary_restrictions_Note__c,
-                                                     Participant_require_a_wheelchair__c,Participant_require_a_wheelchair_Note__c,Will_your_family_bring_wheelchair__c,
-                                                     Will_your_family_bring_wheelchair_Note__c,Is_the_wheelchair_collapsible__c,Is_the_wheelchair_collapsible_Note__c,
-                                                     Is_the_wheelchair_power__c,Is_the_wheelchair_power_Note__c,Participant_require_oxygen_how_often__c,Participant_require_oxygen_Note__c,
-                                                     Medication_require_refrigeration__c,Medication_require_refrigeration_Note__c,Wish_child_receive_nursing_care__c,
-                                                     Wish_child_receive_nursing_care_Note__c,Participant_have_allergies_to_food__c,Participant_have_allergies_to_food_Note__c,
-                                                     Participant_require_medical_supplies__c,Participant_require_medical_suppliesNote__c,Additional_Requests__c,
-                                                     Has_your_family_flown_before__c,Has_your_family_flown_before_Note__c,Will_an_interpreter_be_needed__c,Will_an_interpreter_be_needed_Note__c,
-                                                     Will_a_rental_car_seat_s_be_needed__c,Will_a_rental_car_seat_s_be_needed_Note__c,
-                                                     Sit_up_takeoff_landing_on_airplane__c,Sit_up_takeoff_landing_on_airplane_Note__c,Will_a_rental_stroller_be_needed__c,
-                                                     Will_a_rental_stroller_be_needed_Note__c,Handicap_accommodations_be_required__c,Handicap_accommodations_be_required_No__c,
-                                                     Participant_have_valid_passports__c,Participant_have_valid_passports_Note__c,Does_participant_have_valid_photo_ID__c,
-                                                     Participant_have_valid_photo_ID_Note__c,Wish_Determination_Case_Id__c,Does_your_family_have_a_credit_card__c,Does_your_family_have_a_credit_card_Note__c,Bringing_Own_Wheel_Chair__c,RelatedContact__c,Requested_Participant_Name_forWheelchair__c,
-                                                     Participant_Name_for_Dietary_Restriction__c,Requested_Participant_Name_for_Allergies__c,Medication_require_refrigeration_name__c,Pariticipant_name_havingWheelchair_Power__c,
-                                                     Names_for_receiving_nursing_care__c,Requested_Participant_Name_for_Oxygen__c,Requested_Participant_Name_for_OtherNeed__c,Name_of_wheelchair_collapsible__c,Has_your_family_flown__c,Will_an_interpreter_be_needed_Details__c,
-                                                     Will_a_rental_car_seat_s_Details__c,Are_all_requested_participants_Details__c,Will_a_rental_stroller_Details__c,Will_handicap_accessible_Details__c,Does_each_requested_participant_Details__c,Does_each_requested_participan__c,Does_your_family_Details__c,Race_Ethnicity__c,Driver_Information__c
-                                                     FROM 
-                                                     Wish_Child_Form__c WHERE Case__c IN : caseToUpdateMap.keySet()])
-        {
-            wishChildFormMap.put(currWishChildform.case__c,currWishChildform);
-        }
-        
-        List<Case> updateCaseList = new List<Case>();
-        for(Case currRec : caseToUpdateMap.Values())
-        {
-            if(wishChildFormMap.containsKey(currRec.id))
+    {   
+        String LogValue;
+        String recId;
+        List<string> LstLog = new List<string>();
+        try {
+            Map<String,Wish_Child_Form__c> wishChildFormMap = new Map<String,Wish_Child_Form__c>();
+            for(Wish_Child_Form__c currWishChildform :  [SELECT id,Case__c,Case__r.ChapterName__c,Case__r.Contact.Language__c,When_thinking_some_of_my_wish_ideas_were__c,MY_WISH_IS_TO__c,This_is_my_wish_because__c,
+                                                         To_me_the_most_important_part_of_my_wish__c, When_I_think_about_my_wish_I_imagine__c, Wish_Notes__c,
+                                                         Availability_Time_Period_1__c,Availability_Time_Period_2__c,Availability_Time_Period_3__c, 
+                                                         Any_impact_your_ability_to_join_wish__c,Details_about_Impact__c,Street__c,
+                                                         Have_current_automobile_insurance__c,Automobile_insurance_provide_coverage__c,Is_your_family_comfortable_in_rendal_car__c,
+                                                         Is_a_wheelchair_accessible_vehicle_neede__c,Participant_dietary_restrictions__c,Participant_dietary_restrictions_Note__c,
+                                                         Participant_require_a_wheelchair__c,Participant_require_a_wheelchair_Note__c,Will_your_family_bring_wheelchair__c,
+                                                         Will_your_family_bring_wheelchair_Note__c,Is_the_wheelchair_collapsible__c,Is_the_wheelchair_collapsible_Note__c,
+                                                         Is_the_wheelchair_power__c,Is_the_wheelchair_power_Note__c,Participant_require_oxygen_how_often__c,Participant_require_oxygen_Note__c,
+                                                         Medication_require_refrigeration__c,Medication_require_refrigeration_Note__c,Wish_child_receive_nursing_care__c,
+                                                         Wish_child_receive_nursing_care_Note__c,Participant_have_allergies_to_food__c,Participant_have_allergies_to_food_Note__c,
+                                                         Participant_require_medical_supplies__c,Participant_require_medical_suppliesNote__c,Additional_Requests__c,
+                                                         Has_your_family_flown_before__c,Has_your_family_flown_before_Note__c,Will_an_interpreter_be_needed__c,Will_an_interpreter_be_needed_Note__c,
+                                                         Will_a_rental_car_seat_s_be_needed__c,Will_a_rental_car_seat_s_be_needed_Note__c,
+                                                         Sit_up_takeoff_landing_on_airplane__c,Sit_up_takeoff_landing_on_airplane_Note__c,Will_a_rental_stroller_be_needed__c,
+                                                         Will_a_rental_stroller_be_needed_Note__c,Handicap_accommodations_be_required__c,Handicap_accommodations_be_required_No__c,
+                                                         Participant_have_valid_passports__c,Participant_have_valid_passports_Note__c,Does_participant_have_valid_photo_ID__c,
+                                                         Participant_have_valid_photo_ID_Note__c,Wish_Determination_Case_Id__c,Does_your_family_have_a_credit_card__c,Does_your_family_have_a_credit_card_Note__c,Bringing_Own_Wheel_Chair__c,RelatedContact__c,Requested_Participant_Name_forWheelchair__c,
+                                                         Participant_Name_for_Dietary_Restriction__c,Requested_Participant_Name_for_Allergies__c,Medication_require_refrigeration_name__c,Pariticipant_name_havingWheelchair_Power__c,
+                                                         Names_for_receiving_nursing_care__c,Requested_Participant_Name_for_Oxygen__c,Requested_Participant_Name_for_OtherNeed__c,Name_of_wheelchair_collapsible__c,Has_your_family_flown__c,Will_an_interpreter_be_needed_Details__c,
+                                                         Will_a_rental_car_seat_s_Details__c,Are_all_requested_participants_Details__c,Will_a_rental_stroller_Details__c,Will_handicap_accessible_Details__c,Does_each_requested_participant_Details__c,Does_each_requested_participan__c,Does_your_family_Details__c,Race_Ethnicity__c,Driver_Information__c,
+                                                         Does_Your_Medical_Insurance_Include__c,Does_Your_Medical_Insurance_Details__c FROM 
+                                                         Wish_Child_Form__c WHERE Case__c IN : caseToUpdateMap.keySet() LIMIT 50000])
             {
-                Case currCase = new Case();
-                if(wishChildFormMap.get(currRec.id).Wish_Determination_Case_Id__c != Null)
+                wishChildFormMap.put(currWishChildform.case__c,currWishChildform);
+            }
+            
+            List<Case> updateCaseList = new List<Case>();
+            for(Case currRec : caseToUpdateMap.Values())
+            {
+                if(wishChildFormMap.containsKey(currRec.id))
                 {
-                    currCase.id = wishChildFormMap.get(currRec.id).Wish_Determination_Case_Id__c ;
-                    currCase.When_thinking_some_of_my_wish_ideas_were__c = wishChildFormMap.get(currRec.id).When_thinking_some_of_my_wish_ideas_were__c;
-                    currCase.MY_WISH_IS_TO__c = wishChildFormMap.get(currRec.id).MY_WISH_IS_TO__c;
-                    currCase.This_is_my_wish_because__c = wishChildFormMap.get(currRec.id).This_is_my_wish_because__c;
-                    currCase.To_me_the_most_important_part_of_my_wish__c = wishChildFormMap.get(currRec.id).To_me_the_most_important_part_of_my_wish__c;
-                    currCase.When_I_think_about_my_wish_I_imagine__c = wishChildFormMap.get(currRec.id).When_I_think_about_my_wish_I_imagine__c;
-                    currCase.Wish_Notes__c = wishChildFormMap.get(currRec.id).Wish_Notes__c;
-                    currCase.Availability_1__c = wishChildFormMap.get(currRec.id).Availability_Time_Period_1__c ;
-                    currCase.Availability2__c = wishChildFormMap.get(currRec.id).Availability_Time_Period_2__c ;
-                    currCase.Availability3__c = wishChildFormMap.get(currRec.id).Availability_Time_Period_3__c ;
-                    currCase.Any_impact_your_ability_to_join_wish__c = wishChildFormMap.get(currRec.id).Any_impact_your_ability_to_join_wish__c;
-                    currCase.Details_about_Impact__c = wishChildFormMap.get(currRec.id).Details_about_Impact__c;
-                    currCase.Have_current_automobile_insurance__c = wishChildFormMap.get(currRec.id).Have_current_automobile_insurance__c;
-                    currCase.Automobile_insurance_provide_coverage__c = wishChildFormMap.get(currRec.id).Automobile_insurance_provide_coverage__c;
-                    currCase.Is_your_family_comfortable_in_rendal_car__c = wishChildFormMap.get(currRec.id).Is_your_family_comfortable_in_rendal_car__c;
-                    currCase.Is_a_wheelchair_accessible_vehicle_neede__c = wishChildFormMap.get(currRec.id).Is_a_wheelchair_accessible_vehicle_neede__c;
-                    currCase.Participant_dietary_restrictions__c = wishChildFormMap.get(currRec.id).Participant_dietary_restrictions__c;
-                    currCase.Participant_dietary_restrictions_Note__c = wishChildFormMap.get(currRec.id).Participant_dietary_restrictions_Note__c;
-                    currCase.Participant_require_a_wheelchair__c = wishChildFormMap.get(currRec.id).Participant_require_a_wheelchair__c;
-                    currCase.Participant_require_a_wheelchair_Note__c = wishChildFormMap.get(currRec.id).Participant_require_a_wheelchair_Note__c;
-                    currCase.Will_your_family_bring_wheelchair__c = wishChildFormMap.get(currRec.id).Will_your_family_bring_wheelchair__c;
-                    currCase.Will_your_family_bring_wheelchair_Note__c = wishChildFormMap.get(currRec.id).Will_your_family_bring_wheelchair_Note__c;
-                    currCase.Is_the_wheelchair_collapsible__c = wishChildFormMap.get(currRec.id).Is_the_wheelchair_collapsible__c;
-                    currCase.Is_the_wheelchair_collapsible_Note__c = wishChildFormMap.get(currRec.id).Is_the_wheelchair_collapsible_Note__c;
-                    currCase.Is_the_wheelchair_power__c = wishChildFormMap.get(currRec.id).Is_the_wheelchair_power__c;
-                    currCase.Is_the_wheelchair_power_Note__c = wishChildFormMap.get(currRec.id).Is_the_wheelchair_power_Note__c;
-                    currCase.Participant_require_oxygen_Note__c = wishChildFormMap.get(currRec.id).Participant_require_oxygen_Note__c;
-                    currCase.Medication_require_refrigeration__c = wishChildFormMap.get(currRec.id).Medication_require_refrigeration__c;
-                    currCase.Medication_require_refrigeration_Note__c = wishChildFormMap.get(currRec.id).Medication_require_refrigeration_Note__c;
-                    currCase.Wish_child_receive_nursing_care__c = wishChildFormMap.get(currRec.id).Wish_child_receive_nursing_care__c;
-                    currCase.Wish_child_receive_nursing_care_Note__c = wishChildFormMap.get(currRec.id).Wish_child_receive_nursing_care_Note__c;
-                    currCase.Participant_have_allergies_to_food__c = wishChildFormMap.get(currRec.id).Participant_have_allergies_to_food__c;
-                    currCase.Participant_have_allergies_to_food_Note__c = wishChildFormMap.get(currRec.id).Participant_have_allergies_to_food_Note__c;
-                    currCase.Participant_require_medical_supplies__c = wishChildFormMap.get(currRec.id).Participant_require_medical_supplies__c;
-                    currCase.Participant_require_medical_suppliesNote__c = wishChildFormMap.get(currRec.id).Participant_require_medical_suppliesNote__c;
-                    currCase.Additional_Requests__c = wishChildFormMap.get(currRec.id).Additional_Requests__c;
-                    currCase.Has_your_family_flown_before__c = wishChildFormMap.get(currRec.id).Has_your_family_flown_before__c;
-                    currCase.Has_your_family_flown_before_Note__c = wishChildFormMap.get(currRec.id).Has_your_family_flown__c;
-                    currCase.Will_an_interpreter_be_needed__c = wishChildFormMap.get(currRec.id).Will_an_interpreter_be_needed__c;
-                    currCase.Will_an_interpreter_be_needed_Note__c = wishChildFormMap.get(currRec.id).Will_an_interpreter_be_needed_Details__c;
-                    currCase.Will_a_rental_car_seat_s_be_needed__c = wishChildFormMap.get(currRec.id).Will_a_rental_car_seat_s_be_needed__c;
-                    currCase.Will_a_rental_car_seat_s_be_needed_Note__c = wishChildFormMap.get(currRec.id).Will_a_rental_car_seat_s_Details__c;
-                    currCase.Sit_up_takeoff_landing_on_airplane__c = wishChildFormMap.get(currRec.id).Sit_up_takeoff_landing_on_airplane__c;
-                    currCase.Sit_up_takeoff_landing_on_airplane_Note__c = wishChildFormMap.get(currRec.id).Are_all_requested_participants_Details__c;
-                    currCase.Will_a_rental_stroller_be_needed__c = wishChildFormMap.get(currRec.id).Will_a_rental_stroller_be_needed__c;
-                    currCase.Will_a_rental_stroller_be_needed_Note__c = wishChildFormMap.get(currRec.id).Will_a_rental_stroller_Details__c;
-                    currCase.Handicap_accommodations_be_required__c = wishChildFormMap.get(currRec.id).Handicap_accommodations_be_required__c;
-                    currCase.Handicap_accommodations_be_required_Note__c = wishChildFormMap.get(currRec.id).Will_handicap_accessible_Details__c;
-                    currCase.Participant_have_valid_passports__c = wishChildFormMap.get(currRec.id).Participant_have_valid_passports__c;
-                    currCase.Participant_have_valid_passports_Note__c = wishChildFormMap.get(currRec.id).Does_each_requested_participant_Details__c;
-                    currCase.Does_participant_have_valid_photo_ID__c = wishChildFormMap.get(currRec.id).Does_participant_have_valid_photo_ID__c;
-                    currCase.Participant_have_valid_photo_ID_Note__c = wishChildFormMap.get(currRec.id).Does_each_requested_participan__c;
-                    currCase.Does_your_family_have_a_credit_card__c = wishChildFormMap.get(currRec.id).Does_your_family_have_a_credit_card__c;
-                    currCase.Does_your_family_have_a_credit_card_Note__c = wishChildFormMap.get(currRec.id).Does_your_family_Details__c;
-                    currCase.Bringing_Own_Wheel_Chair__c = wishChildFormMap.get(currRec.id).Bringing_Own_Wheel_Chair__c;
-                    currCase.Requested_Participant_Name_forWheelchair__c = wishChildFormMap.get(currRec.id).Requested_Participant_Name_forWheelchair__c;
-                    currCase.Name_of_wheelchair_collapsible__c = wishChildFormMap.get(currRec.id).Name_of_wheelchair_collapsible__c;
-                    currCase.Pariticipant_name_havingWheelchair_Power__c = wishChildFormMap.get(currRec.id).Pariticipant_name_havingWheelchair_Power__c;
-                    currCase.Requested_Participant_Name_for_Oxygen__c =  wishChildFormMap.get(currRec.id).Requested_Participant_Name_for_Oxygen__c;
-                    currCase.Participant_Name_for_Dietary_Restriction__c = wishChildFormMap.get(currRec.id).Participant_Name_for_Dietary_Restriction__c;
-                    currCase.Requested_Participant_Name_for_Allergies__c = wishChildFormMap.get(currRec.id).Requested_Participant_Name_for_Allergies__c;
-                    currCase.Medication_require_refrigeration_name__c = wishChildFormMap.get(currRec.id).Medication_require_refrigeration_name__c;
-                    currCase.Names_for_receiving_nursing_care__c = wishChildFormMap.get(currRec.id).Names_for_receiving_nursing_care__c;
-                    currCase.Requested_Participant_Name_for_OtherNeed__c = wishChildFormMap.get(currRec.id).Requested_Participant_Name_for_OtherNeed__c;
-                    currCase.Participant_require_oxygen_how_often__c   = wishChildFormMap.get(currRec.id).Participant_require_oxygen_how_often__c;
-                    currCase.Driver_Information__c = wishChildFormMap.get(currRec.id).Driver_Information__c;
-                    updateCaseList.add(currCase);
+                    Case currCase = new Case();
+                    if(wishChildFormMap.get(currRec.id).Wish_Determination_Case_Id__c != Null)
+                    {
+                        recId = wishChildFormMap.get(currRec.id).Wish_Determination_Case_Id__c ;
+                        currCase.id = wishChildFormMap.get(currRec.id).Wish_Determination_Case_Id__c ;
+                        currCase.When_thinking_some_of_my_wish_ideas_were__c = wishChildFormMap.get(currRec.id).When_thinking_some_of_my_wish_ideas_were__c;
+                        currCase.MY_WISH_IS_TO__c = wishChildFormMap.get(currRec.id).MY_WISH_IS_TO__c;
+                        currCase.This_is_my_wish_because__c = wishChildFormMap.get(currRec.id).This_is_my_wish_because__c;
+                        currCase.To_me_the_most_important_part_of_my_wish__c = wishChildFormMap.get(currRec.id).To_me_the_most_important_part_of_my_wish__c;
+                        currCase.When_I_think_about_my_wish_I_imagine__c = wishChildFormMap.get(currRec.id).When_I_think_about_my_wish_I_imagine__c;
+                        currCase.Wish_Notes__c = wishChildFormMap.get(currRec.id).Wish_Notes__c;
+                        currCase.Availability_1__c = wishChildFormMap.get(currRec.id).Availability_Time_Period_1__c ;
+                        currCase.Availability2__c = wishChildFormMap.get(currRec.id).Availability_Time_Period_2__c ;
+                        currCase.Availability3__c = wishChildFormMap.get(currRec.id).Availability_Time_Period_3__c ;
+                        currCase.Any_impact_your_ability_to_join_wish__c = wishChildFormMap.get(currRec.id).Any_impact_your_ability_to_join_wish__c;
+                        currCase.Details_about_Impact__c = wishChildFormMap.get(currRec.id).Details_about_Impact__c;
+                        currCase.Have_current_automobile_insurance__c = wishChildFormMap.get(currRec.id).Have_current_automobile_insurance__c;
+                        currCase.Automobile_insurance_provide_coverage__c = wishChildFormMap.get(currRec.id).Automobile_insurance_provide_coverage__c;
+                        currCase.Is_your_family_comfortable_in_rendal_car__c = wishChildFormMap.get(currRec.id).Is_your_family_comfortable_in_rendal_car__c;
+                        currCase.Is_a_wheelchair_accessible_vehicle_neede__c = wishChildFormMap.get(currRec.id).Is_a_wheelchair_accessible_vehicle_neede__c;
+                        currCase.Participant_dietary_restrictions__c = wishChildFormMap.get(currRec.id).Participant_dietary_restrictions__c;
+                        currCase.Participant_dietary_restrictions_Note__c = wishChildFormMap.get(currRec.id).Participant_dietary_restrictions_Note__c;
+                        currCase.Participant_require_a_wheelchair__c = wishChildFormMap.get(currRec.id).Participant_require_a_wheelchair__c;
+                        currCase.Participant_require_a_wheelchair_Note__c = wishChildFormMap.get(currRec.id).Participant_require_a_wheelchair_Note__c;
+                        currCase.Will_your_family_bring_wheelchair__c = wishChildFormMap.get(currRec.id).Will_your_family_bring_wheelchair__c;
+                        currCase.Will_your_family_bring_wheelchair_Note__c = wishChildFormMap.get(currRec.id).Will_your_family_bring_wheelchair_Note__c;
+                        currCase.Is_the_wheelchair_collapsible__c = wishChildFormMap.get(currRec.id).Is_the_wheelchair_collapsible__c;
+                        currCase.Is_the_wheelchair_collapsible_Note__c = wishChildFormMap.get(currRec.id).Is_the_wheelchair_collapsible_Note__c;
+                        currCase.Is_the_wheelchair_power__c = wishChildFormMap.get(currRec.id).Is_the_wheelchair_power__c;
+                        currCase.Is_the_wheelchair_power_Note__c = wishChildFormMap.get(currRec.id).Is_the_wheelchair_power_Note__c;
+                        currCase.Participant_require_oxygen_Note__c = wishChildFormMap.get(currRec.id).Participant_require_oxygen_Note__c;
+                        currCase.Medication_require_refrigeration__c = wishChildFormMap.get(currRec.id).Medication_require_refrigeration__c;
+                        currCase.Medication_require_refrigeration_Note__c = wishChildFormMap.get(currRec.id).Medication_require_refrigeration_Note__c;
+                        currCase.Wish_child_receive_nursing_care__c = wishChildFormMap.get(currRec.id).Wish_child_receive_nursing_care__c;
+                        currCase.Wish_child_receive_nursing_care_Note__c = wishChildFormMap.get(currRec.id).Wish_child_receive_nursing_care_Note__c;
+                        currCase.Participant_have_allergies_to_food__c = wishChildFormMap.get(currRec.id).Participant_have_allergies_to_food__c;
+                        currCase.Participant_have_allergies_to_food_Note__c = wishChildFormMap.get(currRec.id).Participant_have_allergies_to_food_Note__c;
+                        currCase.Participant_require_medical_supplies__c = wishChildFormMap.get(currRec.id).Participant_require_medical_supplies__c;
+                        currCase.Participant_require_medical_suppliesNote__c = wishChildFormMap.get(currRec.id).Participant_require_medical_suppliesNote__c;
+                        currCase.Additional_Requests__c = wishChildFormMap.get(currRec.id).Additional_Requests__c;
+                        currCase.Has_your_family_flown_before__c = wishChildFormMap.get(currRec.id).Has_your_family_flown_before__c;
+                        currCase.Has_your_family_flown_before_Note__c = wishChildFormMap.get(currRec.id).Has_your_family_flown__c;
+                        currCase.Will_an_interpreter_be_needed__c = wishChildFormMap.get(currRec.id).Will_an_interpreter_be_needed__c;
+                        currCase.Will_an_interpreter_be_needed_Note__c = wishChildFormMap.get(currRec.id).Will_an_interpreter_be_needed_Details__c;
+                        currCase.Will_a_rental_car_seat_s_be_needed__c = wishChildFormMap.get(currRec.id).Will_a_rental_car_seat_s_be_needed__c;
+                        currCase.Will_a_rental_car_seat_s_be_needed_Note__c = wishChildFormMap.get(currRec.id).Will_a_rental_car_seat_s_Details__c;
+                        currCase.Sit_up_takeoff_landing_on_airplane__c = wishChildFormMap.get(currRec.id).Sit_up_takeoff_landing_on_airplane__c;
+                        currCase.Sit_up_takeoff_landing_on_airplane_Note__c = wishChildFormMap.get(currRec.id).Are_all_requested_participants_Details__c;
+                        currCase.Will_a_rental_stroller_be_needed__c = wishChildFormMap.get(currRec.id).Will_a_rental_stroller_be_needed__c;
+                        currCase.Will_a_rental_stroller_be_needed_Note__c = wishChildFormMap.get(currRec.id).Will_a_rental_stroller_Details__c;
+                        currCase.Handicap_accommodations_be_required__c = wishChildFormMap.get(currRec.id).Handicap_accommodations_be_required__c;
+                        currCase.Handicap_accommodations_be_required_Note__c = wishChildFormMap.get(currRec.id).Will_handicap_accessible_Details__c;
+                        currCase.Participant_have_valid_passports__c = wishChildFormMap.get(currRec.id).Participant_have_valid_passports__c;
+                        currCase.Participant_have_valid_passports_Note__c = wishChildFormMap.get(currRec.id).Does_each_requested_participant_Details__c;
+                        currCase.Does_participant_have_valid_photo_ID__c = wishChildFormMap.get(currRec.id).Does_participant_have_valid_photo_ID__c;
+                        currCase.Participant_have_valid_photo_ID_Note__c = wishChildFormMap.get(currRec.id).Does_each_requested_participan__c;
+                        currCase.Does_your_family_have_a_credit_card__c = wishChildFormMap.get(currRec.id).Does_your_family_have_a_credit_card__c;
+                        currCase.Does_your_family_have_a_credit_card_Note__c = wishChildFormMap.get(currRec.id).Does_your_family_Details__c;
+                        currCase.Bringing_Own_Wheel_Chair__c = wishChildFormMap.get(currRec.id).Bringing_Own_Wheel_Chair__c;
+                        currCase.Requested_Participant_Name_forWheelchair__c = wishChildFormMap.get(currRec.id).Requested_Participant_Name_forWheelchair__c;
+                        currCase.Name_of_wheelchair_collapsible__c = wishChildFormMap.get(currRec.id).Name_of_wheelchair_collapsible__c;
+                        currCase.Pariticipant_name_havingWheelchair_Power__c = wishChildFormMap.get(currRec.id).Pariticipant_name_havingWheelchair_Power__c;
+                        currCase.Requested_Participant_Name_for_Oxygen__c =  wishChildFormMap.get(currRec.id).Requested_Participant_Name_for_Oxygen__c;
+                        currCase.Participant_Name_for_Dietary_Restriction__c = wishChildFormMap.get(currRec.id).Participant_Name_for_Dietary_Restriction__c;
+                        currCase.Requested_Participant_Name_for_Allergies__c = wishChildFormMap.get(currRec.id).Requested_Participant_Name_for_Allergies__c;
+                        currCase.Medication_require_refrigeration_name__c = wishChildFormMap.get(currRec.id).Medication_require_refrigeration_name__c;
+                        currCase.Names_for_receiving_nursing_care__c = wishChildFormMap.get(currRec.id).Names_for_receiving_nursing_care__c;
+                        currCase.Requested_Participant_Name_for_OtherNeed__c = wishChildFormMap.get(currRec.id).Requested_Participant_Name_for_OtherNeed__c;
+                        currCase.Participant_require_oxygen_how_often__c   = wishChildFormMap.get(currRec.id).Participant_require_oxygen_how_often__c;
+                        currCase.Driver_Information__c = wishChildFormMap.get(currRec.id).Driver_Information__c;
+                        currCase.Medical_insurance_out_of_state__c = wishChildFormMap.get(currRec.id).Does_Your_Medical_Insurance_Include__c;
+                        currCase.Medical_insurance_note__c = wishChildFormMap.get(currRec.id).Does_Your_Medical_Insurance_Details__c;
+                        LstLog.add('currCase: '+currCase);
+                        updateCaseList.add(currCase);
+                    }
                 }
             }
+            return updateCaseList;
         }
-        return updateCaseList;
+        Catch(Exception ex) {
+             Logvalue = string.join(LstLog,', ');
+             new ApexDebugLog().createLog(new ApexDebugLog.Error('WishChildFormValUpdate_AC','updateWishdetails',recId,ex,Logvalue));
+             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+             ApexPages.addMessage(myMsg);  
+        }
+        
+       return null; 
     }
     
     //This method is used to update or create parent case and wish child and wish family contact.
     public static void UpdateWishChildandWishFamily(Map<Id,Case> newWishMap)
     {  
+        String LogValue;
+        String recId;
+        List<string> LstLog = new List<string>();
+        try {
         Constant_AC  constant = new Constant_Ac();
         String wishFamilyDT = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
         Set<Id> caseIds = new Set<Id>();
@@ -170,6 +194,7 @@ Public Class WishChildFormValUpdate_AC
         Set<String> contactIds = new Set<String>();
         Set<String> parentGurdianSet = new Set<String>();
         Set<String> participantSet = new Set<String>();
+        Map<Id,Id> contactFileMap = new Map<Id,Id>();
         List<Case> updateWishDeterminationCaseList = WishChildFormValUpdate_AC.updateWishdetails(newWishMap);
         String relationShipString;
         Id wishChildId;
@@ -192,12 +217,15 @@ Public Class WishChildFormValUpdate_AC
         Set<String> relationshipsSet = new Set<String>();
         Set<Id> wishChildIds = new Set<Id>();
         Set<String> wishchildIdString = new Set<String>();
+        List<cg__CaseFile__c> caseFileList = new List<cg__CaseFile__c>();
         Map<String,WishChildFormUtil.DriverWrapper> driverWrapperClsMap = new Map<String,WishChildFormUtil.DriverWrapper>();
         for(Case dbParentWish : newWishMap.values()){
             wishChildIdSet.add(dbParentWish.ContactId);
+            contactFileMap.put(dbParentWish.ContactId,dbParentWish.Id);
         }
+        
         if(wishChildIdSet.size() > 0){
-            for(npe4__Relationship__c  dbRelationShip : [SELECT Id,npe4__Contact__c ,npe4__RelatedContact__c,npe4__RelatedContact__R.FirstName,npe4__RelatedContact__r.LastName,npe4__Type__c,npe4__RelatedContact__R.Email From npe4__Relationship__c  WHERE npe4__Contact__c IN: wishChildIdSet AND npe4__Type__c != 'Medical Professional']){
+            for(npe4__Relationship__c  dbRelationShip : [SELECT Id,npe4__Contact__c ,npe4__RelatedContact__c,npe4__RelatedContact__R.FirstName,npe4__RelatedContact__r.LastName,npe4__Type__c,npe4__RelatedContact__R.Email From npe4__Relationship__c  WHERE npe4__Contact__c IN: wishChildIdSet AND npe4__Type__c != 'Medical Professional' LIMIT 50000]){
                 siblingMap.put(dbRelationShip.npe4__RelatedContact__r.FirstName+'-'+dbRelationShip.npe4__RelatedContact__r.LastName,dbRelationShip);
             }
         }
@@ -212,6 +240,7 @@ Public Class WishChildFormValUpdate_AC
                 
                 wishChildIds.add(currWishChildForm.Case__r.ContactId);
                 wishChildId = currWishChildForm.Case__r.ContactId;
+                recId = currWishChildForm.Case__r.ContactId;
                 currContact.Id = currWishChildForm.Case__r.ContactId;
                 currContact.FirstName = currWishChildForm.FirstName__c;
                 currContact.LastName = currWishChildForm.LastName__c;
@@ -221,6 +250,7 @@ Public Class WishChildFormValUpdate_AC
                 currContact.If_yes_Enter_Org_Name_Wish_Date_it_was__c= currWishChildForm.If_yes_Enter_Org_Name_Wish_Date_it_wa__c;
                 currContact.Preferred_Name__c = currWishChildForm.Preferred_Name__c;
                 currContact.Gender__c= currWishChildForm.Gender__c;
+                currContact.Self_describe_comment_box__c= currWishChildForm.Self_describe_comment_box__c;
                 currContact.BirthDate = currWishChildForm.BirthDate__c;
                 currContact.T_Shirt_Size__c= currWishChildForm.T_Shirt_Size__c;
                 currContact.Diagnosis__c = currWishChildForm.Diagnosis__c;
@@ -268,7 +298,7 @@ Public Class WishChildFormValUpdate_AC
                     currContact.MailingState = currWishChildForm.State__c;
                 if(currWishChildForm.Zip_code__c != Null)
                     currContact.MailingPostalcode = currWishChildForm.Zip_code__c;
-                
+                LstLog.add('currContact: '+currContact);
                 updateWishChildContact.add(currContact);
             }
             
@@ -282,7 +312,8 @@ Public Class WishChildFormValUpdate_AC
                 updateAccount.Emergency_Contact_Phone__c = currWishChildForm.Emergency_Mobilephone__c;
                 updateAccount.Relationship_type__c = currWishChildForm.Emergency_Relationship__c;
                 updateAccount.Emergency_Contact_Middle_Name__c = currWishChildForm.Emergency_Middle_Name__c;
-                updateAccount.Emergency_Contact_Email__c = currWishChildForm.Emergency_Email__c; 
+                updateAccount.Emergency_Contact_Email__c = currWishChildForm.Emergency_Email__c;
+                LstLog.add('updateAccount: '+updateAccount);
                 updateWishFamilyAccount.add(updateAccount);
             }
             
@@ -309,7 +340,7 @@ Public Class WishChildFormValUpdate_AC
                     newContact.LastName =  (currRec.lastName!=Null)?currRec.lastName:'';
                     newContact.Relationship__c = (currRec.Relationship!=Null)?currRec.Relationship:'';
                     newContact.HomePhone = (currRec.homeTelephone!=Null)?currRec.homeTelephone:'';
-                    newContact.Work_Phone__c = (currRec.workTelephone!=Null)?currRec.workTelephone:'';
+                    newContact.npe01__WorkPhone__c = (currRec.workTelephone!=Null)?currRec.workTelephone:'';
                     newContact.MobilePhone = (currRec.mobileTelephone!=Null)?currRec.mobileTelephone:'';
                     newContact.Email =  (currRec.Email!=Null)?currRec.Email:'';
                     newContact.BirthDate = (currRec.dob!=Null)?Date.valueOf(currRec.dob):currRec.dob;
@@ -341,7 +372,8 @@ Public Class WishChildFormValUpdate_AC
                     wrapCls.driverName  = (currRec.driverName!=Null)?currRec.driverName :'';
                     wrapCls.licenseNum  = (currRec.licenseNum !=Null)?currRec.licenseNum :'';
                     wrapCls.state  = (currRec.state !=Null)?currRec.state :'';
-                    wrapCls.expirationDate  = (currRec.expirationDate!=Null)?Date.valueOf(currRec.expirationDate):Null;
+                    //wrapCls.expirationDate  = (currRec.expirationDate!=Null)?Date.valueOf(currRec.expirationDate):Null;
+                    wrapCls.expirationDate  = (currRec.expirationDate!=Null)?currRec.expirationDate:Null;
                     wrapCls.type =  (currRec.type!=Null)?currRec.type:'';
                     driverWrapperClsMap.put(wrapCls.driverName,wrapCls);
                 }
@@ -403,19 +435,31 @@ Public Class WishChildFormValUpdate_AC
             toUpdateContact.put(currCon.firstName+'-'+currCon.lastname+'-'+currCon.Relationship__c,currCon); 
         }
         if(updateWishDeterminationCaseList.size() > 0)
+        {
+            LstLog.add('updateWishDeterminationCaseList: '+updateWishDeterminationCaseList);
             update updateWishDeterminationCaseList;
+        }
+            
         if(toUpdateContact.size() > 0)
-        { if(!Test.isRunningTest())
+        { 
+            LstLog.add('toUpdateContact: '+toUpdateContact);
+            if(!Test.isRunningTest())
             Upsert toUpdateContact.values();
         
         }
         if(updateWishFamilyAccount.size() > 0)
+        {
+            LstLog.add('updateWishFamilyAccount: '+updateWishFamilyAccount);
             update updateWishFamilyAccount;
-        if(updateWishChildContact.size() > 0)  
+        }
+        if(updateWishChildContact.size() > 0)
+        {
+            LstLog.add('updateWishChildContact: '+updateWishChildContact);
             update updateWishChildContact;
-        
+        }
+            
         for(npe4__Relationship__c currRel : [SELECT Id,npe4__Contact__c,npe4__RelatedContact__c  FROM npe4__Relationship__c 
-                                             WHERE npe4__Contact__c  IN :wishChildIds] )
+                                             WHERE npe4__Contact__c  IN :wishChildIds LIMIT 50000] )
         {
             String name = currRel.npe4__Contact__c+'-'+currRel.npe4__RelatedContact__c;
             if(!wishchildIdString.contains(name )){
@@ -491,13 +535,23 @@ Public Class WishChildFormValUpdate_AC
                 newRelation.npe4__RelatedContact__c  = newContact.id;
             }
             relationshipList.add(newRelation);
+            
         }
         
-        if(relationshipList.size() > 0)
-        {   if(!Test.isRunningTest())
-            upsert relationshipList;
-            system.debug('###'+relationshipList);
-         
+            if(relationshipList.size() > 0)
+            {   
+                LstLog.add('relationshipList: '+relationshipList);    
+                if(!Test.isRunningTest())
+                upsert relationshipList;
+                system.debug('###'+relationshipList);
+             
+            }
+        }
+        Catch(Exception ex) {
+             Logvalue = string.join(LstLog,', ');
+             new ApexDebugLog().createLog(new ApexDebugLog.Error('WishChildFormValUpdate_AC','UpdateWishChildandWishFamily',recId,ex,Logvalue));
+             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
+             ApexPages.addMessage(myMsg);  
         }
     }
     

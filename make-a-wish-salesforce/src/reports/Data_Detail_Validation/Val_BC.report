@@ -25,6 +25,7 @@
     <filter>
         <criteriaItems>
             <column>CUST_CREATED_NAME</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>integration user</value>
         </criteriaItems>

@@ -43,6 +43,13 @@
         <name>Year__c</name>
     </fields>
     <layouts>
+        <layout>Time sheet Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Time sheet Layout</layout>
         <sections>
             <label><!-- Custom Links --></label>

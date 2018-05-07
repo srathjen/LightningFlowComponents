@@ -14,11 +14,11 @@
         <label>Wish Status Bar</label>
         <layoutColumns>
             <layoutItems>
-                <height>230</height>
+                <height>250</height>
                 <page>WishJourney</page>
                 <showLabel>false</showLabel>
                 <showScrollbars>false</showScrollbars>
-                <width>98%</width>
+                <width>100%</width>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
@@ -434,6 +434,17 @@
                 <emptySpace>true</emptySpace>
             </layoutItems>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Medical_insurance_out_of_state__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Medical_insurance_note__c</field>
+            </layoutItems>
+            <layoutItems>
+                <emptySpace>true</emptySpace>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Does_your_family_have_a_credit_card__c</field>
             </layoutItems>
@@ -495,6 +506,10 @@
             <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Subject</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Test_Record__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>

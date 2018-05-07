@@ -512,4 +512,12 @@
         <name>Rental_Car</name>
     </recordTypes>
     <startsWith>Consonant</startsWith>
+    <webLinks>
+        <label><!-- Add_More_Travel_Data --></label>
+        <name>Add_More_Travel_Data</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Return_to_Case --></label>
+        <name>Return_to_Case</name>
+    </webLinks>
 </CustomObjectTranslation>

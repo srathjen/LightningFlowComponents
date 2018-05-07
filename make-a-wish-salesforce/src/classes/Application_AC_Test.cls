@@ -7,27 +7,27 @@ Description : Application_AC_Test is used to increase the code coverage for Appl
 
 @isTest
 public class Application_AC_Test{
-   
-   /* This method is used to update the volunteer contact information*/
-   
-    public testmethod static void UpdateVolunteerContact(){ 
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
-         User currentVoulnteerUser;
-         System.RunAs(new User(Id = UserInfo.getUserId())){
+    
+    /* This method is used to update the volunteer contact information*/
+    
+    public testmethod static void updateVolunteerContact(){ 
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
+        User currentVoulnteerUser;
+        System.RunAs(new User(Id = UserInfo.getUserId())){
             currentVoulnteerUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(volunteerContact.Id);
             
         }
-            OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
-            OrientationandTrainingUtil.insertDocusignSetting();
-            OrientationandTrainingUtil.createDynamicContent();
-       
+        OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
+        OrientationandTrainingUtil.insertDocusignSetting();
+        OrientationandTrainingUtil.createDynamicContent();
+        
         system.RunAs(currentVoulnteerUser){
-           list<Contact> conList = new list<Contact>();
-           conList = [select id from contact];
-           system.assertEquals(currentVoulnteerUser.ContactId,volunteerContact.Id);
+            list<Contact> conList = new list<Contact>();
+            conList = [select id from contact Limit 50000];
+            System.assert(currentVoulnteerUser.ContactId.equals(volunteerContact.Id), 'Check Volunteer User Contact in equal to volunteerContact');
             PageReference pageRef = Page.Application_VF; 
-          
+            
             Test.setCurrentPage(pageRef);
             ApexPages.currentPage().getParameters().put('bgRequired','true');
             ApexPages.currentPage().getParameters().put('trainingRequired','true');
@@ -55,34 +55,34 @@ public class Application_AC_Test{
             applicationAcIns.dynamicName= 'test';
             applicationAcIns.applicationDynamicContent = 'test';
             applicationAcIns.submitdisable = true;
-            applicationAcIns.isSigned = true;
-           
-            System.assertEquals(currentVoulnteerUser.UserName,'joathanedwards@gmail.com');
+            applicationAcIns.isSigned = true;            
+            
         }
+        System.assertEquals(currentVoulnteerUser.Email,'jonathanEdwards@gmail.com','Email does not updated or Mismatched Email');
+        System.assert(currentVoulnteerUser.Email == 'jonathanEdwards@gmail.com','Email does not updated or Mismatched Email');
     }
-    
     /*This method is used to sign the docusign document when the application is completed*/
     
-    public testmethod static void SignDocument(){  
-           Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-           Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
-           User currentVoulnteerUser;
-           System.RunAs(new User(Id = UserInfo.getUserId())){
+    public testmethod static void signDocument(){  
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContact(chapterAccount.Id);
+        User currentVoulnteerUser;
+        System.RunAs(new User(Id = UserInfo.getUserId())){
             currentVoulnteerUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(volunteerContact.Id);
-           /* contactShare currContactSharing = new contactShare();
-            currContactSharing.ContactId = volunteerContact.Id;
-            currContactSharing.UserOrGroupId = currentVoulnteerUser.id;
-            currContactSharing.ContactAccessLevel = 'Read';
-            currContactSharing.RowCause = Schema.contactshare.RowCause.Manual;
-            insert currContactSharing;*/
+            /* contactShare currContactSharing = new contactShare();
+currContactSharing.ContactId = volunteerContact.Id;
+currContactSharing.UserOrGroupId = currentVoulnteerUser.id;
+currContactSharing.ContactAccessLevel = 'Read';
+currContactSharing.RowCause = Schema.contactshare.RowCause.Manual;
+insert currContactSharing;*/
         }
-            OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
-            OrientationandTrainingUtil.insertDocusignSetting();
-            OrientationandTrainingUtil.createDynamicContent();
-            
-           
-            
-          system.RunAs(currentVoulnteerUser){
+        OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
+        OrientationandTrainingUtil.insertDocusignSetting();
+        OrientationandTrainingUtil.createDynamicContent();
+        
+        
+        
+        system.RunAs(currentVoulnteerUser){
             PageReference pageRef = Page.Application_VF; 
             Test.setCurrentPage(pageRef);
             Application_AC applicationAcIns = new Application_AC();
@@ -92,25 +92,27 @@ public class Application_AC_Test{
             applicationAcIns.saveRec();
             applicationAcIns.DisplayDescription();
             Test.StopTest();
-            //System.assertEquals(currentVoulnteerUser.Email,'jonathan@gmail.com');
+            
         }
+        System.assertEquals(currentVoulnteerUser.Email,'jonathanEdwards@gmail.com','Email does not updated or Mismatched Email');
+        System.assert(currentVoulnteerUser.Email == 'jonathanEdwards@gmail.com','Email does not updated or Mismatched Email');
     }
     
-   /* This method is used to update the volunteer contact Alternate Phone type and prefered phone type with the value of Home*/
+    /* This method is used to update the volunteer contact Alternate Phone type and prefered phone type with the value of Home*/
     
-    public testmethod static void UpdateVolunteerContactwithHomePhone(){ 
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Contact volunteerContact = OrientationandTrainingUtil.VolunteerContactwithHomePhone(chapterAccount.Id);
-         User currentVoulnteerUser;
-         System.RunAs(new User(Id = UserInfo.getUserId())){
+    public testmethod static void updateVolunteerContactwithHomePhone(){ 
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunteerContact = OrientationandTrainingUtil.VolunteerContactwithHomePhone(chapterAccount.Id);
+        User currentVoulnteerUser;
+        System.RunAs(new User(Id = UserInfo.getUserId())){
             currentVoulnteerUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(volunteerContact.Id);
         }
-            OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
-            OrientationandTrainingUtil.insertDocusignSetting();
-            OrientationandTrainingUtil.createDynamicContent();
-       
+        OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
+        OrientationandTrainingUtil.insertDocusignSetting();
+        OrientationandTrainingUtil.createDynamicContent();
+        
         system.RunAs(currentVoulnteerUser){
-           
+            
             PageReference pageRef = Page.Application_VF; 
             Test.StartTest();
             Test.setCurrentPage(pageRef);
@@ -142,32 +144,34 @@ public class Application_AC_Test{
             applicationAcIns.submitdisable = true;
             applicationAcIns.isSigned = true;
             Test.StopTest();
-            System.assertEquals(currentVoulnteerUser.UserName,'joathanedwards@gmail.com');
         }
+        System.assertEquals(currentVoulnteerUser.Email,'jonathanEdwards@gmail.com','Email does not updated or Mismatched Email');
+        System.assert(currentVoulnteerUser.Email == 'jonathanEdwards@gmail.com','Email does not updated or Mismatched Email');
+        
     }
     
     /* This method is used to update the volunteer contact Alternate Phone type and prefered phone type with the value of Mobile*/
     
-    public testmethod static void UpdateVolunteerContactwithMobilePhone(){ 
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Contact volunteerContact = OrientationandTrainingUtil.VolunteerContactwithMobilePhone(chapterAccount.Id);
-         User currentVoulnteerUser;
-         System.RunAs(new User(Id = UserInfo.getUserId())){
+    public testmethod static void updateVolunteerContactwithMobilePhone(){ 
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunteerContact = OrientationandTrainingUtil.VolunteerContactwithMobilePhone(chapterAccount.Id);
+        User currentVoulnteerUser;
+        System.RunAs(new User(Id = UserInfo.getUserId())){
             currentVoulnteerUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(volunteerContact.Id);
         }
-            OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
-            OrientationandTrainingUtil.insertDocusignSetting();
-            OrientationandTrainingUtil.createDynamicContent();
-       
+        OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
+        OrientationandTrainingUtil.insertDocusignSetting();
+        OrientationandTrainingUtil.createDynamicContent();
+        
         system.RunAs(currentVoulnteerUser){
-           
+            
             PageReference pageRef = Page.Application_VF; 
             Test.StartTest();
             Test.setCurrentPage(pageRef);
             ApexPages.currentPage().getParameters().put('bgRequired','true');
             ApexPages.currentPage().getParameters().put('trainingRequired','true');
             Application_AC applicationAcIns = new Application_AC();
-             applicationAcIns.saveRec();
+            applicationAcIns.saveRec();
             applicationAcIns.EditRec();
             applicationAcIns.getStates();
             applicationAcIns.getDays();
@@ -192,32 +196,34 @@ public class Application_AC_Test{
             applicationAcIns.submitdisable = true;
             applicationAcIns.isSigned = true;
             Test.StopTest();
-            System.assertEquals(currentVoulnteerUser.UserName,'joathanedwards@gmail.com');
         }
+        System.assertEquals(currentVoulnteerUser.Email,'jonathanEdwards@gmail.com','Email does not updated or Mismatched Email');
+        System.assert(currentVoulnteerUser.Email == 'jonathanEdwards@gmail.com','Email does not updated or Mismatched Email');
+        
     }
     
     /* This method is used to update the volunteer contact Alternate Phone type and prefered phone type with the value of Home and Mobile*/
     
-    public testmethod static void UpdateVolunteerContactwithOtherPhone(){ 
-         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
-         Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContactwithOtherPhone(chapterAccount.Id);
-         User currentVoulnteerUser;
-         System.RunAs(new User(Id = UserInfo.getUserId())){
+    public testmethod static void updateVolunteerContactwithOtherPhone(){ 
+        Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
+        Contact volunteerContact = OrientationandTrainingUtil.createVolunteerContactwithOtherPhone(chapterAccount.Id);
+        User currentVoulnteerUser;
+        System.RunAs(new User(Id = UserInfo.getUserId())){
             currentVoulnteerUser = OrientationandTrainingUtil.createProspectiveVolunteerUser(volunteerContact.Id);
         }
-            OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
-            OrientationandTrainingUtil.insertDocusignSetting();
-            OrientationandTrainingUtil.createDynamicContent();
-       
+        OrientationandTrainingUtil.CreateAffiliation(currentVoulnteerUser.ContactId);
+        OrientationandTrainingUtil.insertDocusignSetting();
+        OrientationandTrainingUtil.createDynamicContent();
+        
         system.RunAs(currentVoulnteerUser){
-           
+            
             PageReference pageRef = Page.Application_VF; 
             Test.StartTest();
             Test.setCurrentPage(pageRef);
             ApexPages.currentPage().getParameters().put('bgRequired','true');
             ApexPages.currentPage().getParameters().put('trainingRequired','true');
             Application_AC applicationAcIns = new Application_AC();
-             applicationAcIns.saveRec();
+            applicationAcIns.saveRec();
             applicationAcIns.EditRec();
             applicationAcIns.getStates();
             applicationAcIns.getDays();
@@ -240,10 +246,14 @@ public class Application_AC_Test{
             applicationAcIns.dynamicName= 'test';
             applicationAcIns.applicationDynamicContent = 'test';
             applicationAcIns.submitdisable = true;
+            applicationAcIns.confirmSign();
             applicationAcIns.isSigned = true;
             Test.StopTest();
-            System.assertEquals(currentVoulnteerUser.UserName,'joathanedwards@gmail.com');
         }
+        System.assertEquals(currentVoulnteerUser.Email,'jonathanEdwards@gmail.com','Email does not updated or Mismatched Email');
+        System.assert(currentVoulnteerUser.Email == 'jonathanEdwards@gmail.com','Email does not updated or Mismatched Email');
+        
     }
-   
+    
+    
 }

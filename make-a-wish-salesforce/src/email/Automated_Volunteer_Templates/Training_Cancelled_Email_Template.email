@@ -1,6 +1,23 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<div style=""><p class="MsoNormal" style="margin-bottom: 0.0001pt;"><font face="Century Gothic, sans-serif">{!Contact.FirstName}</font><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">,<br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><font face="Century Gothic, sans-serif">You have cancelled your registration for the upcoming&nbsp;</font><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 16px;">{!Volunteer_Orientation_Training__c.Orientation_Training_Hidden__c}</span><font face="Century Gothic, sans-serif">&nbsp;scheduled on {!Volunteer_Orientation_Training__c.Date__c}.<br><br></font></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><font face="Century Gothic, sans-serif">Please visit the&nbsp;</font><a href="https://make-a-wish.force.com/" style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 16px;">Make-A-Wish Volunteer Center</a><font face="Century Gothic, sans-serif">&nbsp;to register for an alternative training date.<br><br></font></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><font face="Century Gothic, sans-serif">As always, please let us know of any questions by contacting us directly.<br><br></font></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255);">{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}</span></p></div>]]></td>
+<![CDATA[<div style=""><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Contact.FirstName},<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">You have cancelled
+your registration for the
+upcoming&nbsp;{!Volunteer_Orientation_Training__c.Orientation_Training_Hidden__c}&nbsp;scheduled
+on {!Volunteer_Orientation_Training__c.Date__c}.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Please visit
+the&nbsp;<a href="https://make-a-wish.force.com/"><span style="color:blue">Make-A-Wish
+Volunteer Center</span></a>&nbsp;to register for an alternative training date.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">As always, please let
+us know of any questions by contacting us directly.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">{!Volunteer_Orientation_Training__c.Orientation_Training_email_signature__c}</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt;">
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal"><span style="font-family:&quot;Lato&quot;,sans-serif">&nbsp;</span></p></div>]]></td>
 </tr>
 </table>

@@ -12,12 +12,13 @@ Public class  InactiveVolunteerHandler{
             List<Task> ActiveTask=new List<Task>();
             Task newTask;
             for(Id currRec:volunteerManagerId.keyset()){
-                    newTask=new Task();
-                    newTask.OwnerId=volunteerManagerId.get(currRec);
-                    newTask.WhoId=currRec;
-                    newTask.Subject='Inactive Volunteer - review volunteer opportunities';
-                    ActiveTask.add(newTask);
-                    system.debug('@@@@@@@@@@@'+currRec+'*****');     
+                newTask=new Task();
+                newTask.OwnerId=volunteerManagerId.get(currRec);
+                newTask.WhoId=currRec;
+                newTask.Subject='Inactive Volunteer - review volunteer opportunities';
+                newTask.SystemGeneratedTask__c = TRUE;
+                ActiveTask.add(newTask);
+                system.debug('@@@@@@@@@@@'+currRec+'*****');     
             }
             Insert ActiveTask;
         }

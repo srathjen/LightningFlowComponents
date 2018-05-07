@@ -11,7 +11,7 @@ global class Batch_ClosePresentationTask_AC implements Database.Batchable<sObjec
     global Database.QueryLocator start(Database.BatchableContext BC) {
         Date todayPassed = Date.today();
         String taskSubject = 'Obtain itinerary and/or wish packet';
-        String query = 'SELECT Id, isClosed, ActivityDate FROM Task WHERE isClosed = false AND ActivityDate =: todayPassed AND Subject =: taskSubject';
+        String query = 'SELECT Id, isClosed, ActivityDate FROM Task WHERE isClosed = false AND ActivityDate =: todayPassed AND Subject =: taskSubject'+ ' Limit '+ 50000;
         return Database.getQueryLocator(query);
     }
     

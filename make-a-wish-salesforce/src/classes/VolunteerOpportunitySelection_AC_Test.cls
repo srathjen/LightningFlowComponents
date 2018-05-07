@@ -1,7 +1,10 @@
-/************************************************************************************
-Author : Mst Solutions
+/***************************************************************************************************
+Author      : MST Solutions
+CreatedBy   : Kanagaraj
 Description : This class is used to increase the code coverage for VolunteerOpportunitySelection_AC
-*************************************************************************************/
+Modification Log: 
+28/03/2018 - Kanagaraj
+*****************************************************************************************************/
 @isTest(seeAllData=False)
 private class VolunteerOpportunitySelection_AC_Test{
 
@@ -46,10 +49,11 @@ private class VolunteerOpportunitySelection_AC_Test{
                     VolunteerOpportunitySelection_AC.volunteerWrapper newWrapper = new VolunteerOpportunitySelection_AC.volunteerWrapper();
                     newWrapper.recordSelected = false;
                     newWrapper.volOpp = dbVolOpp;
-                    System.Assert(!volunteeerController.volunteerWrapperList.get(0).recordSelected); 
-                }
-               
-               Test.stopTest();
+            System.assertEquals(newWrapper.volOpp,dbVolOpp,'Volunteer Oppurtunity value does not match');
+            System.assert(newWrapper.volOpp == dbVolOpp,'Volunteer Oppurtunity value  does not match');
+        }
+        
+        Test.stopTest();
     }
     
     /*Create a time Sheet with more than one volunteer opportunity */
@@ -97,9 +101,9 @@ private class VolunteerOpportunitySelection_AC_Test{
                    VolunteerOpportunitySelection_AC.volunteerWrapper newWrapper = new VolunteerOpportunitySelection_AC.volunteerWrapper();
                    volunteeerController.volunteerWrapperList[0].recordSelected =True;
                    volunteeerController.createTimeSheet();
-                   System.Assert(volunteeerController.volunteerWrapperList.get(0).recordSelected);
-                }
-               
-               Test.stopTest();
+            System.assertEquals(dbVolOpp2.Status__c,'Approved','Volunteer Opportunity status does not match');
+            System.assert(dbVolOpp2.Status__c == 'Approved','Volunteer Opportunity status does not match');
+        }               
+        Test.stopTest();
     }
 }

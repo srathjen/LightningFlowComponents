@@ -27,7 +27,7 @@ public class VolunteerActivities_AC {
     
     //Used to pull all open activities for volunteer
     public List<OpenActivitiesWrapper> getOpenActivities() {
-        
+       
         List<OpenActivitiesWrapper> openActivitiesList = new List<OpenActivitiesWrapper>();
         Set<Id> wishTypeTaskSet = new Set<Id>();
         Set<Id> nonWishAndEvents = new Set<Id>();
@@ -38,7 +38,8 @@ public class VolunteerActivities_AC {
         Map<Id,Id> wishContactIdMap = new Map<Id, Id>();
         Set<Id> wishGranterIdSet = new Set<Id>();
         List<Task> openActivities = new List<Task>();
-        
+        String Logvalue;
+        try{
         for(Volunteer_Opportunity__c vollOppInfo : [SELECT Id, Role__c, Wish__c, Volunteer_Name__c FROM Volunteer_Opportunity__c WHERE Status__c = 'Approved' AND Volunteer_Name__c =: currentUserRelatedContactId AND Wish__r.isClosed = false]) {
             if(vollOppInfo.Role__c == 'Wish Granter' || vollOppInfo.Role__c == 'Wish Granter Mentor') {
                 wishGranterIdSet.add(vollOppInfo.Wish__c);
@@ -114,11 +115,21 @@ public class VolunteerActivities_AC {
                         mergeInfoWithTask.nameField = wishNameMap.get(caseSubMap.get(taskTypeNameMerge.WhatId));
                     }
                 }
+                Logvalue = String.valueOf(openActivitiesList);
                 openActivitiesList.add(mergeInfoWithTask);
             }
+            
         }
+       return openActivitiesList;
+       }
+       
+       catch(Exception ex){
+           new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerActivities_AC','getOpenActivities',Null,ex,Logvalue));
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);
+            return null;
+       }
         
-        return openActivitiesList;
     }
     
     
@@ -135,7 +146,8 @@ public class VolunteerActivities_AC {
         Map<Id,Id> wishContactIdMap = new Map<Id, Id>();
         Set<Id> wishGranterIdSet = new Set<Id>();
         List<Task> openActivities = new List<Task>();
-        
+        String Logvalue;
+        try{
         for(Volunteer_Opportunity__c vollOppInfo : [SELECT Id, Role__c, Wish__c, Volunteer_Name__c FROM Volunteer_Opportunity__c WHERE Status__c = 'Approved' AND Volunteer_Name__c =: currentUserRelatedContactId]) {
             if(vollOppInfo.Role__c == 'Wish Granter' || vollOppInfo.Role__c == 'Wish Granter Mentor') {
                 wishGranterIdSet.add(vollOppInfo.Wish__c);
@@ -216,19 +228,37 @@ public class VolunteerActivities_AC {
                 closedActivitiesList.add(mergeInfoWithTask);
             }
         }
+        Logvalue = String.valueOf(closedActivitiesList);
         return closedActivitiesList;
+        }
+        
+         catch(Exception ex){
+           new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerActivities_AC','getCloseActivities',Null,ex,Logvalue));
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);
+            return null;
+       }
     }
     
     //This method is used to close the task when the volunteer try to close the task from the My Task page
     public void closeTask() {
-        //FutureHandler.UpdateTask(taskId);
-        //long now = datetime.now().gettime();
-        //while(datetime.now().gettime()-now<60000); // Busy loop for 6000 ms
-        List<Task> taskList = [SELECT Id FROM Task WHERE Id =: taskId];
+        String Logvalue;
+        String recId;
+        try{
+        List<Task> taskList = [SELECT Id,Status  FROM Task WHERE Id =: taskId];
         if(taskList.size() > 0) {
+            recId = taskList[0].Id;
+            Logvalue = taskList[0].Status;
             taskList[0].Status = 'Completed';
             update taskList;
         }
+        }
+       catch(Exception ex){
+           new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerActivities_AC','getCloseActivities',Null,ex,Logvalue));
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);
+           
+       }
     }
     
     //Wrapper class for open activities

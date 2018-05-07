@@ -5,7 +5,7 @@ Wish granters from the current wish and also it will create a task for Volunteer
 
 global class CreateNewWish_AC 
 {
-    webservice static String CreateCase(Id caseId)
+    webservice static String createCase(Id caseId)
     {
      
         Case currCase = [SELECT id,Subject,Description,Priority,AccountId,RecordTypeId,ChapterName__r.Volunteer_Manager__c,ContactId,ContactMobile,
@@ -37,7 +37,7 @@ global class CreateNewWish_AC
           
           Set<Id> accountIds = new Set<Id>();
           accountIds.add(currCase.ChapterName__c);
-          CaseTriggerHandler.createVolunteerOpportunity(newCaseMap,accountIds);
+          Case_OnAfterUpdateTriggerHandlerHelper.createVolunteerOpportunity(newCaseMap,accountIds);
         }
         
         

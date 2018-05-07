@@ -42,6 +42,11 @@ public Class VolunteerWelcomePage_AC
     
     
     public VolunteerWelcomePage_AC() {
+       
+        string Logvalue;
+        
+       // try
+        //{
         applicationStatus = null;
         interviewStatus = null;
         backgroundCheckStatus = null;
@@ -63,10 +68,15 @@ public Class VolunteerWelcomePage_AC
         for(Volunteer_Orientation_Training__c checkOrientationAndTraining : [SELECT Id, Volunteer_Attendance__c, Class_Offering__c, Class_Offering__r.Chapter_Role_O_T__c,
                                                                              Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId 
                                                                              FROM Volunteer_Orientation_Training__c WHERE Volunteer_Attendance__c != 'Cancelled' AND Volunteer__c =: currentUser.ContactId]) {
-            if(checkOrientationAndTraining.Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId == orientationRecordTypeId) {
+                                                                                 if(checkOrientationAndTraining.Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId == orientationRecordTypeId) {
+                
                 orientationList.add(checkOrientationAndTraining);
+                //Logvalue = String.valueOf(checkOrientationAndTraining);
+                Logvalue = Logvalue+ '|'+String.valueOf(checkOrientationAndTraining);
             } else if(checkOrientationAndTraining.Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId == trainingRecordTypeId) {
                 trainingList.add(checkOrientationAndTraining);
+                //Logvalue = String.valueOf(trainingList);
+                Logvalue = Logvalue+ '|'+String.valueOf(checkOrientationAndTraining);
             }
         }
         
@@ -143,9 +153,10 @@ public Class VolunteerWelcomePage_AC
                                                                             AND Volunteer__c =: currentUser.ContactId AND Class_Offering__r.Chapter_Role_O_T__r.Orientation_Training__r.RecordTypeId = :orientationRecordTypeId]) 
         {
             completedVolunteerTrainingIds.add(checkOrientationAndTraining.id);
+             Logvalue = Logvalue+ '|'+ String.valueOf(completedVolunteerTrainingIds);
+            
         }
-        
-        
+                
         String nationalRT = Schema.Sobjecttype.Dynamic_Content__c.getRecordTypeInfosByName().get(constant.nationalRT).getRecordTypeId();
         String ProspectiveRT = Schema.Sobjecttype.Dynamic_Content__c.getRecordTypeInfosByName().get(constant.prospectiveVolunteerRT).getRecordTypeId();
         
@@ -171,6 +182,14 @@ public Class VolunteerWelcomePage_AC
             isBecomVolunteer=false;
         }
         findVolunteerStatus();
+       /* }
+        catch(Exception ex)
+        {
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerWelcomePage_AC','VolunteerWelcomePage_AC',Null,ex,Logvalue));
+         //ex.setMessage(Label.Debug_log_error_message); 
+         ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+         ApexPages.addMessage(myMsg);
+        }*/
         
     }
     // It will redirect the volunteer based on the status. 
@@ -274,8 +293,13 @@ public Class VolunteerWelcomePage_AC
     
      //This method is used to display top 4 events of that chapter.
     public list<Non_Wish_Events__c> getEvents() {
-        eventsRTId = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.events).getRecordTypeId();
-        List<Non_Wish_Events__c> eventRecords = [SELECT id,Name,Event_Name__c, Priority__c,Event_Image__c,Event_Text__c,Event_Date__c
+        
+        List<string> LstLog = new List<string>();
+        string Logvalue;
+      //  try
+        //{
+          eventsRTId = Schema.Sobjecttype.Non_Wish_Events__c.getRecordTypeInfosByName().get(constant.events).getRecordTypeId();
+          List<Non_Wish_Events__c> eventRecords = [SELECT id,Name,Event_Name__c, Priority__c,Event_Image__c,Event_Text__c,Event_Date__c
                                                  FROM Non_Wish_Events__c  WHERE chapter__c = :chapterId AND Event_Date__c >= :Date.Today() AND RecordTypeId = :eventsRTId AND priority__c != Null order by priority__c ASC limit 4];
       
         if(eventRecords.size() < 4)
@@ -283,13 +307,30 @@ public Class VolunteerWelcomePage_AC
           for(Non_Wish_Events__c  currRec : [SELECT id,Name,Event_Name__c, Priority__c,Event_Image__c,Event_Text__c,Event_Date__c
                                                FROM Non_Wish_Events__c  WHERE chapter__c = :chapterId AND Event_Date__c >= :Date.Today() AND RecordTypeId = :eventsRTId AND priority__c = Null limit 4])
           {
+            //LstLog.add(string.valueOf(currRec));
+
            
             if(eventRecords.size() < 4)
                 eventRecords.add(currRec);
-           
+                LstLog.add(string.valueOf(eventRecords));
+              
           }
         }
+       
         return eventRecords;
+    
+      /*  }
+        catch(Exception ex)
+        
+        {
+            Logvalue = string.join(LstLog,', ');
+            new ApexDebugLog().createLog(new ApexDebugLog.Error('VolunteerWelcomePage_AC','getEvents',Null,ex,Logvalue));
+            //ex.setMessage(Label.Debug_log_error_message); 
+            ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR, Label.Debug_log_error_message);
+            ApexPages.addMessage(myMsg);
+            return null;
+    
+        }*/
         
     } 
     

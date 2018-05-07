@@ -1,41 +1,55 @@
 @isTest
 public class LeadSelectMedEmailController_Test{
-
+    
     //select best contact physician to receive DV Form. 
     public static testmethod  void sendDVFormToBestPhysician(){
         Account chapterAc = OrientationandTrainingUtil.createchapterAccount();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAc.Id);
-        newLead.Best_contact_for_Physician_Email__c = 'bestContact@mail.com';
+        newLead.Best_contact_for_Physician_Email__c = 'chandrasekar@mstsolutions.com';
         newLead.Best_Contact_for_Physician_First_Name__c = 'Testbest';
         newLead.Best_Contact_for_Physician_Last_Name__c = 'physician';
         Insert  newLead;
         PageReference pageRef = Page.LeadSelectMedEmail_VF;
         Test.setCurrentPage(pageRef);
-        ApexPages.currentPage().getParameters().put('id',newLead.Id);
-        ApexPages.currentPage().getParameters().put('Type','Best contact for Physician');
-        ApexPages.currentPage().getParameters().put('email','bestContact@mail.com');
-        ApexPages.currentPage().getParameters().put('sendOrRest','Send');
+        ApexPages.currentPage().getParameters().put('id',newLead.Id);        
         LeadSelectMedEmailController_AC selectLead = new LeadSelectMedEmailController_AC();
+        ApexPages.currentPage().getParameters().put('sendOrRest','Reset');
         selectLead.updateLead();
         selectLead.GoToLeadViewPage();
+        
+        
     }
-    
-    //select best contact physician to receive DV Form. 
-    public static testmethod  void sendDVFormToBestPhysicianReset(){
+    public static testmethod  void resetTheLeadValueswithNullICDCode(){
         Account chapterAc = OrientationandTrainingUtil.createchapterAccount();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAc.Id);
-        newLead.Best_contact_for_Physician_Email__c = 'bestContact@mail.com';
+        newLead.Best_contact_for_Physician_Email__c = 'chandrasekar@mstsolutions.com';
         newLead.Best_Contact_for_Physician_First_Name__c = 'Testbest';
         newLead.Best_Contact_for_Physician_Last_Name__c = 'physician';
         Insert  newLead;
         PageReference pageRef = Page.LeadSelectMedEmail_VF;
         Test.setCurrentPage(pageRef);
         ApexPages.currentPage().getParameters().put('id',newLead.Id);
-        ApexPages.currentPage().getParameters().put('Type','Best contact for Physician');
-        ApexPages.currentPage().getParameters().put('email','bestContact@mail.com');
-        ApexPages.currentPage().getParameters().put('sendOrRest','Reset');
         LeadSelectMedEmailController_AC selectLead = new LeadSelectMedEmailController_AC();
         selectLead.updateLead();
-        selectLead.GoToLeadViewPage();
+        selectLead.resetDVValues();
+        
+        
+    }
+    public static testmethod  void resetTheLeadValues(){
+        Account chapterAc = OrientationandTrainingUtil.createchapterAccount();        
+        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAc.Id);
+        newLead.Best_contact_for_Physician_Email__c = 'chandrasekar@mstsolutions.com';
+        newLead.Best_Contact_for_Physician_First_Name__c = 'Testbest';
+        newLead.Best_Contact_for_Physician_Last_Name__c = 'physician';
+        newLead.ICD_Given_By_Referrer__c = newLead.PD_ICD_Code__c  ;
+        Insert  newLead;
+        PageReference pageRef = Page.LeadSelectMedEmail_VF;
+        Test.setCurrentPage(pageRef);
+        ApexPages.currentPage().getParameters().put('id',newLead.Id);
+        LeadSelectMedEmailController_AC selectLead = new LeadSelectMedEmailController_AC();
+        selectLead.updateLead();
+        selectLead.resetDVValues();
+        
+        
     }
 }

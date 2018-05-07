@@ -67,6 +67,18 @@
         <name>Description__c</name>
     </fields>
     <fields>
+        <label><!-- Distance From Me --></label>
+        <name>Distance_From_Me__c</name>
+    </fields>
+    <fields>
+        <label><!-- Distance From Volunteer --></label>
+        <name>Distance_From_Volunteer__c</name>
+    </fields>
+    <fields>
+        <label><!-- Distance(Miles) --></label>
+        <name>Distance_Miles__c</name>
+    </fields>
+    <fields>
         <label><!-- End Time --></label>
         <name>End_Time__c</name>
         <picklistValues>
@@ -410,6 +422,10 @@
     <fields>
         <label><!-- Zip --></label>
         <name>NWE_Zip__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name --></label>
+        <name>NameLink__c</name>
     </fields>
     <fields>
         <label><!-- Name --></label>
@@ -843,8 +859,16 @@
         <name>Wish_Child__c</name>
     </fields>
     <fields>
+        <label><!-- Wish End Date --></label>
+        <name>Wish_End_Date__c</name>
+    </fields>
+    <fields>
         <label><!-- Wish National Type --></label>
         <name>Wish_National_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Wish Start Date --></label>
+        <name>Wish_Start_Date__c</name>
     </fields>
     <fields>
         <label><!-- Wish Status --></label>
@@ -861,6 +885,21 @@
     </fields>
     <layouts>
         <layout>Non Wish &amp; Event</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Non-Wish &amp; Event Details --></label>
+            <section>Non-Wish &amp; Event Details</section>
+        </sections>
+        <sections>
+            <label><!-- Volunteer Details --></label>
+            <section>Volunteer Details</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Non Wish &amp; Event Chapter Staff Layout</layout>
         <sections>
             <label><!-- Custom Links --></label>
             <section>Custom Links</section>
@@ -941,6 +980,21 @@
         </sections>
     </layouts>
     <layouts>
+        <layout>Wish Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Volunteer Details --></label>
+            <section>Volunteer Details</section>
+        </sections>
+        <sections>
+            <label><!-- Wish Child Details --></label>
+            <section>Wish Child Details</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Wish for Volunteer</layout>
         <sections>
             <label><!-- Custom Links --></label>
@@ -979,6 +1033,10 @@
     <validationRules>
         <errorMessage><!-- You cannot create volunteer opportunity for closed wish. --></errorMessage>
         <name>Vol_Opp_Do_Not_Create_for_Closed_Wish</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please check the Inactive check box. --></errorMessage>
+        <name>Volunteer_Opp_Inactive_Status</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Please enter the value for Reason Inactive --></errorMessage>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Question__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Sort_Order__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Picklist_values__c</field>
+    </columns>
+    <columns>
+        <field>Condition_Description__c.Medical_Questions__r$Epilepsy_picklist__c</field>
+    </columns>
+    <description>Summary report listing medical questions for condition descriptions</description>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Condition_Description__c$Name</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Condition Descriptions Medical Questions</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Condition_Description_with_Medical_Questions__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <sortColumn>Condition_Description__c.Medical_Questions__r$Sort_Order__c</sortColumn>
+    <sortOrder>Asc</sortOrder>
+    <timeFrameFilter>
+        <dateColumn>Condition_Description__c$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

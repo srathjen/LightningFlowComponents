@@ -17,4 +17,12 @@
     <showArticleSummariesInternalApp>false</showArticleSummariesInternalApp>
     <showArticleSummariesPartnerPortal>false</showArticleSummariesPartnerPortal>
     <showValidationStatusField>false</showValidationStatusField>
+    <suggestedArticles>
+        <caseFields>
+            <field>
+                <name>Subject</name>
+            </field>
+        </caseFields>
+        <useSuggestedArticlesForCase>false</useSuggestedArticlesForCase>
+    </suggestedArticles>
 </KnowledgeSettings>

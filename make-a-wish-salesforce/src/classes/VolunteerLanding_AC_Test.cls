@@ -6,6 +6,8 @@ public class VolunteerLanding_AC_Test {
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        con.BackGroundCheckUpdated__c = true;
+        update con;
         OrientationandTrainingUtil.createAffiliation(con.id);
         
         User currUser;
@@ -64,6 +66,8 @@ public class VolunteerLanding_AC_Test {
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        con.BackGroundCheckUpdated__c = true;
+        update con;
         OrientationandTrainingUtil.createAffiliation(con.id);
         User currUser;
         System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -86,10 +90,13 @@ public class VolunteerLanding_AC_Test {
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
-        con.Broadcast_Number__c = '1234';
-        update con;
+        Contact con1 = new Contact();
+        con1.Id = con.Id;
+        con1.Broadcast_Number__c = '1234';
+        con1.BackGroundCheckUpdated__c = true;
+        update con1;
         //OrientationandTrainingUtil.createAffiliation(con.id);
-     
+        
         npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
         neworgAffiliation.npe5__Contact__c  = con.Id;
         neworgAffiliation.npe5__Organization__c = acc.Id;
@@ -103,6 +110,7 @@ public class VolunteerLanding_AC_Test {
         {
             currUser = OrientationandTrainingUtil.createActiveVolunteerUser(con.id);
         }
+        Background_check__c currBG = OrientationandTrainingUtil.createBackgroundCheck(currUser.contactId);
         VolunteerLanding_AC controller;
         System.RunAs(currUser)
         {
@@ -113,7 +121,8 @@ public class VolunteerLanding_AC_Test {
             currVal.CurrentChapter__c = acc.Name;
             insert currVal;
             
-            Background_check__c currBG = OrientationandTrainingUtil.createBackgroundCheck(currUser.contactId);
+            
+            
             System.assert(currBg.id!=Null);
             
             Conflict_Of_Interest__c currCOI = OrientationandTrainingUtil.createCOI(con.id);
@@ -142,11 +151,13 @@ public class VolunteerLanding_AC_Test {
             Class_Offering__c currOffering = OrientationandTrainingUtil.createClassOffering(currChapOandT.id);
             
             controller = new VolunteerLanding_AC();
+            Test.StartTest();
             controller.getChapterList();
             controller.EnterchapterPage();
             controller.COICheck();
             controller.BackgroundCheck(false);
-            controller.DisplayTraining(false);
+            controller.volunteercon.BackGroundCheckUpdated__c = true;
+            //controller.broadCastCancel(false);
             controller.register();
             controller.featuredImage = 'testImage';
             controller.featuredQuote = 'testQuote';
@@ -162,13 +173,16 @@ public class VolunteerLanding_AC_Test {
             controller.image1 = 'testImage1'           ;
             controller.image2 = 'testImage2';
             controller.image3 = 'testImage3';
-            //controller.confirmBackGroundCheck();
+            controller.confirmBackGroundCheck();
+            //
             controller.cancel();
             controller.cancelConflict();
+            controller.displayEmail();
+            controller.hidePopup();
             OrientationandTrainingUtil.insertDocusignSetting();
             controller.TrainingAckCancel();
             Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
-            Test.StartTest();
+            controller.confirmBackGroundCheck();
             controller.confirmConflict();
             Test.StopTest();
         }
@@ -180,6 +194,7 @@ public class VolunteerLanding_AC_Test {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
         con.Broadcast_Number__c = '1234';
+        con.BackGroundCheckUpdated__c = true;
         update con;
         npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
         neworgAffiliation.npe5__Contact__c  = con.Id;
@@ -239,6 +254,7 @@ public class VolunteerLanding_AC_Test {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
         con.Broadcast_Number__c = '1234';
+        con.BackGroundCheckUpdated__c = true;
         update con;
         OrientationandTrainingUtil.createAffiliation(con.id);
         
@@ -296,13 +312,15 @@ public class VolunteerLanding_AC_Test {
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        con.BackGroundCheckUpdated__c = true;
+        update con;
         npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
-neworgAffiliation.npe5__Contact__c  = con.Id;
-neworgAffiliation.npe5__Organization__c = acc.Id;
-neworgAffiliation.npe5__Primary__c = true;
-neworgAffiliation.npe5__Status__c = 'Active';
-neworgAffiliation.Constituent_code__c = 'Board Member';
-insert neworgAffiliation;
+        neworgAffiliation.npe5__Contact__c  = con.Id;
+        neworgAffiliation.npe5__Organization__c = acc.Id;
+        neworgAffiliation.npe5__Primary__c = true;
+        neworgAffiliation.npe5__Status__c = 'Active';
+        neworgAffiliation.Constituent_code__c = 'Board Member';
+        insert neworgAffiliation;
         
         User currUser;
         System.RunAs(new User(Id = UserInfo.getUserId()))
@@ -340,6 +358,8 @@ insert neworgAffiliation;
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        con.BackGroundCheckUpdated__c = true;
+        update con;
         npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();
         neworgAffiliation.npe5__Contact__c  = con.Id;
         neworgAffiliation.npe5__Organization__c = acc.Id;
@@ -369,6 +389,7 @@ insert neworgAffiliation;
             update currBG;
             
             controller = new VolunteerLanding_AC();
+            controller.isBGRoleExpOOC = TRUE;
             controller.getChapterList();
             controller.EnterchapterPage();
             controller.COICheck();
@@ -382,6 +403,8 @@ insert neworgAffiliation;
     {
         Account acc = OrientationandTrainingUtil.createVolunteerAccount();
         Contact con = OrientationandTrainingUtil.createVolunteerContact(acc.id);
+        con.BackGroundCheckUpdated__c = true;
+        update con;
         //OrientationandTrainingUtil.createAffiliation(con.id);
         
         npe5__Affiliation__c neworgAffiliation = new npe5__Affiliation__c ();

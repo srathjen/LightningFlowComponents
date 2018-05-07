@@ -1,17 +1,30 @@
 <apex:page standardController="case" extensions="WishChildForm_AC" id="wif" title="Wish Information Form | Make-A-Wish Communities" standardStylesheets="false" showHeader="false" applyHtmlTag="false" sidebar="false" docType="html-5.0" cache="false">
+    <div id="load"></div>
     <apex:include pageName="prospective_head" id="phead" />
+    
     <!--<apex:stylesheet value="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>-->
-    <style>label.radiowrap{font-family: 'Lato', Arial, sans-serif; text-transform: capitalize; line-height: 2rem}.loader {position:absolute; top:1.4rem; right:40%; width:1rem} @media (min-width: 48em) {.loader{right:30%;} }.error-show{display:none!important;}</style>
+    <style>
+        label.radiowrap{font-family: 'Lato', Arial, sans-serif; text-transform: capitalize; line-height: 2rem}.loader {position:absolute; top:1.4rem; right:40%; width:1rem} @media (min-width: 48em) {.loader{right:30%;} }.error-show{display:none!important;} 
+        #load{
+        width:100%;
+        height:100%;
+        position:fixed;
+        z-index:9999;
+        background:url("{!URLFOR($Resource.WishReferralStyle, 'WishReferralStyle/img/loader-circle-blue.gif')}") no-repeat center center rgba(0,0,0,0.25)
+        }
+    </style>
     <apex:include pageName="active_header" id="pheaderActive" rendered="{!if($Profile.Name="Active Volunteer",true,false)}" />
     <apex:include pageName="wishFamilyForm_header_active" id="pheader" rendered="{!if($Profile.Name<>"Active Volunteer",true,false)}" />
-
+    
     <!-- <script>
 function resizeIframe(obj) {
     obj.style.height = 0;
     obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
 }
 </script> -->
+    
     <body class="vcp vcpactivelogin" id="top">
+        
         <main role="main" class="container wif">
             <div class="row">
                 <section class="col-md-12">
@@ -19,57 +32,60 @@ function resizeIframe(obj) {
                         <h1 class="col-md-12">Wish Information</h1>
                     </div>
                     <apex:form id="frm">
-                        <apex:actionFunction action="{!SaveandWishChildExit}" name="callConfirmSave" reRender="test"/>
+                        <apex:actionFunction action="{!SaveandWishChildExit}" name="callConfirmSave" reRender="test,msg"/>
                         <apex:actionFunction action="{!withOutNavigate}" name="navigatWithoutSave"/>
-                        <apex:actionFunction action="{!WishInfotoWishChild}" name="saveWishInfotoChildForm" reRender="ooo"/>
-                        <apex:actionFunction action="{!withOutSavetoChild}" name="WithOutsaveWishInfotoChildForm" reRender="oouuo"/>
-                        <apex:actionFunction action="{!WishInfotoWishFamily}" name="saveWishInfotoFamilyForm" reRender="ooukkuo"/>
-                        <apex:actionFunction action="{!withOutSaveWCCF}" name="WithOutsaveWishInfotoFamilyForm" reRender="ooulluo"/>
-                        <apex:actionFunction action="{!RetrunToWish}" name="ReturnToWish" reRender="qquuqq"/>
-                        <apex:actionFunction action="{!cancelfunction}" name="ReturnToWishWithOutSave" reRender="qqququu"/>
-                        <apex:actionFunction action="{!SignNowmultiEmail}" name="SaveandSignNow" oncomplete="showMyModel();" reRender="popPickVal3" />
-                        <apex:actionFunction name="refreshAttachmentSection"  reRender="attachmentSection" />
-                        <apex:actionFunction action="{!generatePDF}" name="generatePDF" reRender="genPDF"/>
-
+                        <apex:actionFunction action="{!WishInfotoWishChild}" name="saveWishInfotoChildForm" reRender="ooo,msg"/>
+                        <apex:actionFunction action="{!withOutSavetoChild}" name="WithOutsaveWishInfotoChildForm" reRender="oouuo,msg"/>
+                        <apex:actionFunction action="{!WishInfotoWishFamily}" name="saveWishInfotoFamilyForm" reRender="ooukkuo,msg"/>
+                        <apex:actionFunction action="{!withOutSaveWCCF}" name="WithOutsaveWishInfotoFamilyForm" reRender="ooulluo,msg"/>
+                        <apex:actionFunction action="{!RetrunToWish}" name="ReturnToWish" reRender="qquuqq,msg"/>
+                        <apex:actionFunction action="{!cancelfunction}" name="ReturnToWishWithOutSave" reRender="qqququu,msg"/>
+                        <apex:actionFunction action="{!SignNowmultiEmail}" name="SaveandSignNow" oncomplete="showMyModel();" reRender="popPickVal3,msg" />
+                        <apex:actionFunction name="refreshAttachmentSection"  reRender="attachmentSection,msg" />
+                        <apex:actionFunction action="{!generatePDF}" name="generatePDF" reRender="genPDF,msg"/>
+                        <apex:actionFunction reRender="membAdd,uiLogic" name="loadAllScriptData"/>
+                        
+                        
                         <div class="step-base">
                             <span class="step-tether nav-down">
                                 <nav>
                                     <ul class="step">
                                         <!--<li><apex:commandLink value="Wish Child" action="{!BackToWCF}" onclick="preventDefault();" html-data-toggle="modal" html-data-target="#wcfooo-alert" /></li>
 <li><apex:commandLink value="Wish Family" action="{!SaveAndRedirectInformationForm}" onclick="preventDefault();"  html-data-toggle="modal" html-data-target="#wffmmm-alert" /></li>-->
-                                        <li><apex:commandLink value="Wish Child" onclick="preventDefault();" styleClass="wif-nav-wclink"/></li>
-                                        <li><apex:commandLink value="Wish Family" onclick="preventDefault();" styleClass="wif-nav-wflink"/></li>
-                                        <li><apex:commandLink action="{!WFFNext}" value="Wish Information" styleClass="disabled current" />
+                                        <li><apex:commandLink value="Wish Child" onclick="preventDefault();" styleClass="wif-nav-wclink" reRender="msg" /></li>
+                                        <li><apex:commandLink value="Wish Family" onclick="preventDefault();" styleClass="wif-nav-wflink" reRender="msg"/></li>
+                                        <li><apex:commandLink action="{!WFFNext}" value="Wish Information" styleClass="disabled current" reRender="msg" />
                                             <ul class="anchor-links"></ul>
                                         </li>
                                     </ul>
-
+                                    
                                     <div class="nav-sub-inner hidden-sm-down">
                                         <a href="#top" class="hidden-md-down">&uarr; Back to Top</a>
                                         <!-- <apex:Commandbutton value="Prev" action="{!BackToWCF}" styleClass="col-xs-12 btn-md form-validate" html-data-toggle="modal" html-data-target="#page-exit-alert" /> -->
-                                        <apex:commandbutton value="Save" onclick="return false;"  styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" />
+                                        <apex:commandbutton reRender="msg" value="Save" onclick="return false;"  styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" />
                                         <!--<apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#signow-alert" />-->
                                         <!--<apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md signModal" />-->
-                                        <apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md signModal" reRender="popPickVal3" oncomplete="test7();"/>
+                                        <apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md signModal" reRender="popPickVal3,msg" oncomplete="test7();"/>
                                         <!--<apex:Commandbutton value="Send for Signature"  action="{!multiEmail}" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#sendemail-alert" reRender="popPickVal1"/> -->
-                                        <apex:Commandbutton value="Send for Signature"  action="{!multiEmail}" styleClass="btn-md sendforModal" reRender="popPickVal1"/>
+                                        <apex:Commandbutton value="Send for Signature"  action="{!multiEmail}" styleClass="btn-md sendforModal" reRender="popPickVal1,msg"/>
                                         <!--<apex:Commandbutton value="Generate PDF" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#download-alert"/> -->
-                                        <apex:Commandbutton value="Generate PDF" onClick="generat();" styleClass="btn-md generatePdf" reRender="popPickVal1"/>
+                                        <apex:Commandbutton value="Generate PDF" onClick="generat();" styleClass="btn-md generatePdf" reRender="popPickVal1,msg"/>
                                         <!-- <apex:Commandbutton value="Submit for Approval" styleClass="btn-md form-validate"  html-data-toggle="modal" html-data-target="#submit-alert"/> -->
-                                        <apex:Commandbutton value="Submit for Approval" action="{!confirmSignNow}" styleClass="btn-md form-validate submitapproval" reRender="popPickVal1" />
-
+                                        <apex:Commandbutton value="Submit for Approval" action="{!confirmSignNow}" styleClass="btn-md form-validate submitapproval" reRender="popPickVal1,msg" />
+                                        
                                     </div>
                                 </nav>
                             </span>
                         </div>
-
-                        <div class="messages"><apex:pagemessages /></div>
+                        
+                        <div class="messages"></div>
                         <div class="row">
                             <apex:actionFunction name="uiLogic" rerender="membAdd" />
                             <apex:pageblock id="membAdd">
                                 <div class="container" id="family-info">
                                     <!-- wish child -->
                                     <fieldset>
+                                    <apex:pageMessages id="msg"/>
                                         <legend>Wish Child</legend>
                                         <div class="col-md-6">
                                             <div class="form-group row">
@@ -103,7 +119,7 @@ function resizeIframe(obj) {
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row time-two">
                                                 <div class="col-sm-4"><label for="wif:frm:availability-month-two"  aria-label="availability-month-one">Time Period 2</label></div>
                                                 <div class="col-xs-6 col-sm-4">
@@ -117,7 +133,7 @@ function resizeIframe(obj) {
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row time-three">
                                                 <div class="col-sm-4"><label for="wif:frm:availability-month-three"  aria-label="availability-month-one">Time Period 3</label></div>
                                                 <div class="col-xs-6 col-sm-4">
@@ -132,7 +148,7 @@ function resizeIframe(obj) {
                                                 </div>
                                                 <em class="error-show"><center>The above time periods should be same</center></em>
                                             </div>
-
+                                            
                                             <!-- impact wish question -->
                                             <!-- impact wish question -->
                                             <div class="form-group row">
@@ -147,14 +163,14 @@ function resizeIframe(obj) {
                                     <fieldset class="driver-section">
                                         <legend>Driver Identification</legend>
                                         <span class="info">Many wishes involve the use of a rental vehicle. For this reason, please indicate a primary and additional driver(s) who may be driving during the course of the wish.</span>
-
+                                        
                                         <apex:outputpanel >
                                             <apex:variable value="{!0}" var="part"/>
                                             <apex:repeat value="{!wcfUtil.driverWrapperCls}" var="driverContact">
                                                 <fieldset class="connected-haslegend driver-id fadein-alert" style="border-bottom:none">
                                                     <legend>{!IF(part == 0,'Primary Driver', 'Potential Driver')} </legend>
-                                                   <span class="info">Please fill the fields below containing an asterisk (<span class="red" style="font-size:130%"> *</span>)</span>
-                                                    <apex:commandlink immediate="true" action="{!removeDriver}" reRender="membAdd,uiLogic" styleClass="text-muted remove-block">
+                                                    <span class="info">Please fill the fields below containing an asterisk (<span class="red" style="font-size:130%"> *</span>)</span>
+                                                    <apex:commandlink immediate="true" action="{!removeDriver}" reRender="membAdd,uiLogic,msg" styleClass="text-muted remove-block">
                                                         - Remove
                                                         <apex:param name="driver" value="{!part}"/>
                                                         <apex:variable var="part" value="{!part+1}"/>
@@ -187,7 +203,7 @@ function resizeIframe(obj) {
                                                                     <apex:selectOptions value="{!wcfUtil.states}" />
                                                                 </apex:selectList>
                                                             </div>
-                                                             </div>
+                                                        </div>
                                                         <div class="form-group row" hidden="hidden">
                                                             <div class="col-xs-12 col-sm-3"><label aria-label="Expiration Date">Expiration Date<span id="expiredate" style="font-size: 150%" class="red"> *</span> </label></div>
                                                             <div class="col-sm-6">
@@ -196,24 +212,24 @@ function resizeIframe(obj) {
                                                         </div>
                                                     </div>
                                                     <!-- <div class="col-lg-6">
-                                                    <div class="form-group row">
-                                                    <div class="col-xs-12 col-sm-3"><label aria-label="Type">Type</label></div>
-                                                    <div class="col-sm-6">
-                                                    <apex:selectList value="{!driverContact.type}" size="1" multiselect="false" styleClass="form-control col-xs-12 col-sm-12 c-select">
-                                                    <apex:selectOption itemlabel="Please Select" itemValue=""/>
-                                                    <apex:selectOption itemlabel="Potential" itemValue="Potential"/>
-                                                    <apex:selectOption itemlabel="Preferred" itemValue="Preferred"/>
-                                                    </apex:selectList>
-                                                    </div>
-                                                    </div>
-                                                    </div> -->
+<div class="form-group row">
+<div class="col-xs-12 col-sm-3"><label aria-label="Type">Type</label></div>
+<div class="col-sm-6">
+<apex:selectList value="{!driverContact.type}" size="1" multiselect="false" styleClass="form-control col-xs-12 col-sm-12 c-select">
+<apex:selectOption itemlabel="Please Select" itemValue=""/>
+<apex:selectOption itemlabel="Potential" itemValue="Potential"/>
+<apex:selectOption itemlabel="Preferred" itemValue="Preferred"/>
+</apex:selectList>
+</div>
+</div>
+</div> -->
                                                 </fieldset>
                                             </apex:repeat>
                                         </apex:outputpanel>
                                     </fieldset>
                                     <fieldset class="connected">
                                         <div class="form-group row">
-                                            <div class="col-md-12"><apex:commandLink value="+ Add Driver" action="{!addDriver}" styleClass="text-muted" reRender="membAdd,uiLogic" /></div>
+                                            <div class="col-md-12"><apex:commandLink value="+ Add Driver" action="{!addDriver}" styleClass="text-muted" reRender="membAdd,uiLogic,msg" /></div>
                                         </div>
                                     </fieldset>
                                     <!-- driver info -->
@@ -262,7 +278,7 @@ function resizeIframe(obj) {
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Does any requested participant have special dietary restrictions?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap"><apex:inputField value="{!currWishChild.Participant_dietary_restrictions__c}" styleClass="form-control col-xs-12 col-sm-12 c-select part-select" /></div>
@@ -280,7 +296,7 @@ function resizeIframe(obj) {
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Does any requested participant have allergies to food or materials?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap"><apex:inputField value="{!currWishChild.Participant_have_allergies_to_food__c}" styleClass="form-control col-xs-12 col-sm-12 c-select part-select" /></div>
@@ -298,7 +314,7 @@ function resizeIframe(obj) {
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Does any medication require refrigeration?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap"><apex:inputField value="{!currWishChild.Medication_require_refrigeration__c}" styleClass="form-control col-xs-12 col-sm-12 c-select part-select" /></div>
@@ -316,7 +332,7 @@ function resizeIframe(obj) {
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Does any requested participant currently receive nursing care?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap"><apex:inputField value="{!currWishChild.Wish_child_receive_nursing_care__c}" styleClass="form-control col-xs-12 col-sm-12 c-select part-select" /></div>
@@ -334,11 +350,11 @@ function resizeIframe(obj) {
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                         </div>
-
+                                        
                                         <div class="col-lg-6">
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Does any requested participant require any other medical supplies?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap"><apex:inputField value="{!currWishChild.Participant_require_medical_supplies__c}" styleClass="form-control col-xs-12 col-sm-12 c-select part-select" /></div>
@@ -356,7 +372,7 @@ function resizeIframe(obj) {
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Does any requested participant require a wheelchair?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap"><apex:inputField value="{!currWishChild.Participant_require_a_wheelchair__c}" styleClass="form-control col-xs-12 col-sm-12 c-select part-select wheelchair" /></div>
@@ -374,7 +390,7 @@ function resizeIframe(obj) {
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <span class="wheelchair-req">
                                                 <div class="form-group row">
                                                     <div class="col-md-12"><label>Will your family bring your own wheelchair?</label></div>
@@ -387,14 +403,14 @@ function resizeIframe(obj) {
                                                 <div class="form-group row is-yes sr-only">
                                                     <div class="col-xs-12"><label class="hidden-lg-up">Participant(s)</label></div>
                                                     <div class="col-xs-12 col-md-8">
-
+                                                        
                                                         <apex:selectList value="{!currentOwnWheelChairList}" multiselect="true" size="4" styleclass="form-control col-xs-12 col-sm-12 multi-part" html-data-placeholder="Select Participant(s)">
                                                             <apex:selectOption html-disabled="disabled"/>
                                                             <apex:selectOptions value="{!WillYourFamilyBringWheelChair}" />
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
-
+                                                
                                                 <div class="form-group row">
                                                     <div class="col-md-12"><label>Is the wheelchair collapsible?</label></div>
                                                     <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap"><apex:inputField value="{!currWishChild.Is_the_wheelchair_collapsible__c}" styleClass="form-control col-xs-12 col-sm-12 c-select part-select" /></div>
@@ -412,7 +428,7 @@ function resizeIframe(obj) {
                                                         </apex:selectList>
                                                     </div>
                                                 </div>
-
+                                                
                                                 <div class="form-group row">
                                                     <div class="col-md-12"><label>Is the wheelchair power?</label></div>
                                                     <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap"><apex:inputField value="{!currWishChild.Is_the_wheelchair_power__c}" styleClass="form-control col-xs-12 col-sm-12 c-select part-select" /></div>
@@ -431,7 +447,7 @@ function resizeIframe(obj) {
                                                     </div>
                                                 </div>
                                             </span>
-
+                                            
                                         </div>
                                     </fieldset>
                                     <!-- travel info -->
@@ -449,7 +465,7 @@ function resizeIframe(obj) {
                                                     <div class="col-xs-12 col-md-8"><apex:inputField value="{!currWishChild.Has_your_family_flown__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Will an interpreter be needed?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap">
@@ -460,7 +476,7 @@ function resizeIframe(obj) {
                                                     <div class="col-xs-12 col-md-8"><apex:inputField value="{!currWishChild.Will_an_interpreter_be_needed_Details__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Will a rental car seat(s) be needed?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap">
@@ -471,7 +487,7 @@ function resizeIframe(obj) {
                                                     <div class="col-xs-12 col-md-8"><apex:inputField value="{!currWishChild.Will_a_rental_car_seat_s_Details__c}" styleClass="form-control" html-placeholder="Please indicate how many/what type (Infant, Toddler, Booster)." /></div>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Are all requested participants able to sit up during takeoff/landing on airplane?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap">
@@ -482,7 +498,7 @@ function resizeIframe(obj) {
                                                     <div class="col-xs-12 col-md-8"><apex:inputField value="{!currWishChild.Are_all_requested_participants_Details__c}" styleClass="form-control" html-placeholder="Please note who cannot" /></div>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Will a rental stroller be needed?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap">
@@ -493,7 +509,7 @@ function resizeIframe(obj) {
                                                     <div class="col-xs-12 col-md-8"><apex:inputField value="{!currWishChild.Will_a_rental_stroller_Details__c}" styleClass="form-control" html-placeholder="Please indicate what type (single/double)." /></div>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Will handicap accessible accommodations be required?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap">
@@ -504,11 +520,11 @@ function resizeIframe(obj) {
                                                     <div class="col-xs-12 col-md-8"><apex:inputField value="{!currWishChild.Will_handicap_accessible_Details__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
                                                 </div>
                                             </div>
-
+                                            
                                         </div>
-
+                                        
                                         <div class="col-lg-6">
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Does each requested participant have valid passports?</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap">
@@ -519,7 +535,7 @@ function resizeIframe(obj) {
                                                     <div class="col-xs-12 col-md-8"><apex:inputField value="{!currWishChild.Does_each_requested_participant_Details__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Does each requested participant (18 and over) have a valid U.S. federal or state-issued photo ID? Please provide a copy/image.</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap">
@@ -530,7 +546,18 @@ function resizeIframe(obj) {
                                                     <div class="col-xs-12 col-md-8"><apex:inputField value="{!currWishChild.Does_each_requested_participan__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
                                                 </div>
                                             </div>
-
+                                            
+                                            <div class="form-group row">
+                                                <div class="col-md-12"><label>DOES YOUR MEDICAL INSURANCE INCLUDE COVERAGE IF TRAVELING OUT OF STATE?</label></div>
+                                                <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap">
+                                                    <apex:inputField value="{!currWishChild.Does_Your_Medical_Insurance_Include__c}" styleClass="form-control col-xs-12 col-sm-12 c-select travel-select-both participant-id" />
+                                                </div>
+                                                <div class="note sr-only">
+                                                    <div class="col-xs-12 hidden-lg-up"><label>Details</label></div>
+                                                    <div class="col-xs-12 col-md-8"><apex:inputField value="{!currWishChild.Does_Your_Medical_Insurance_Details__c}" styleClass="form-control" html-placeholder="Please enter details here." /></div>
+                                                </div>
+                                            </div>
+                                            
                                             <div class="form-group row">
                                                 <div class="col-md-12"><label>Does your family have a valid major credit card? Typically, a hotel will request a credit card for incidentals that may occur during a stay. If you do not have a creditcard, other arrangements can be made; however, Make-A-Wish does need to know ahead of time.</label></div>
                                                 <div class="col-xs-10 col-md-6 col-lg-8 sel-wrap">
@@ -541,19 +568,19 @@ function resizeIframe(obj) {
                                                     <div class="col-xs-12 col-md-8"><apex:inputField value="{!currWishChild.Does_your_family_Details__c}" styleClass="form-control" html-placeholder="Please enter any additional details here." /></div>
                                                 </div>
                                             </div>
-
+                                            
                                         </div>
                                     </fieldset>
                                     <!-- attach documents -->
                                     <fieldset>
                                         <legend>Attach Documents</legend>
                                         <span class="info">To upload any files you wish to have included for the wish child: <br/>
-                                                1)  Click on the respective folder to add a document, photo or video. <br/>
-                                                2)  Click Upload.<br/>
-                                                3)  Drag and drop the file(s). Add a description (up to 25 characters).<br/>
-                                                4)  Click Upload button on bottom of page.<br/>
-                                                5)  To finish process, click close.<br/>
-                                                6)  Click home to view all folders.<br/></span>
+                                            1)  Click on the respective folder to add a document, photo or video. <br/>
+                                            2)  Click Upload.<br/>
+                                            3)  Drag and drop the file(s). Add a description (up to 25 characters).<br/>
+                                            4)  Click Upload button on bottom of page.<br/>
+                                            5)  To finish process, click close.<br/>
+                                            6)  Click home to view all folders.<br/></span>
                                         <div class="col-md-12 req-attachments">
                                             <div class="form-group row">
                                                 <div class="col-md-12">
@@ -590,7 +617,7 @@ function resizeIframe(obj) {
                                                     </apex:selectList>
                                                 </div>
                                             </div>
-
+                                            
                                             <div class="form-group sr-only row other-race">
                                                 <div class="col-xs-12 col-sm-4"><label for="wif:frm:other-race" aria-labelledby="other race" class="sr-only">Other</label></div>
                                                 <div class="col-sm-6"><apex:inputText value="{!currWishChild.Race_Ethnicity_Details__c}" id="other-race" styleClass="form-control col-xs-12 other-race" html-placeholder="Please specify, other." /></div>
@@ -614,38 +641,38 @@ function resizeIframe(obj) {
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-xs-12">
-
+                                                    
                                                     <label class="c-input c-checkbox" style="color:#747678" arial-label="agree">
                                                         <apex:inputcheckbox value="{!currWishChild.Information_Provided__c}" styleClass="required" style="top:-.2rem; border:1px solid #ccc" />
                                                         <span class="c-indicator" style="top:-.2rem; border:1px solid #ccc"></span>
-
+                                                        
                                                         I promise that the information provided by me is true and complete to the best of my knowledge.
                                                     </label>
                                                 </div>
                                             </div>
                                         </div>
                                     </fieldset>
-
+                                    
                                 </div>
                                 <!-- end /conatiner -->
                             </apex:pageblock>
                         </div>
-
+                        
                         <div class="row hidden-md-up nav-btm">
                             <nav class="btm">
                                 <ul>
                                     <!-- <li><apex:Commandbutton value="Prev" action="{!BackToWCF}" styleClass="btn-md form-validate" html-data-toggle="modal" html-data-target="#page-exit-alert" /></li> -->
-                                    <li><apex:commandbutton value="Save" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" /></li>
+                                    <li><apex:commandbutton value="Save" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" reRender="msg" /></li>
                                     <!--<apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md signModal" />-->
-                                    <li><apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md signModal" reRender="popPickVal3" oncomplete="test7();"/></li>
-                                    <li><apex:Commandbutton value="Send for Signature" action="{!multiEmail}" styleClass="btn-md sendforModal" reRender="popPickVal1"/></li>
-                                    <li><apex:Commandbutton value="Generate PDF" styleClass="btn-md generatePdf" reRender="popPickVal1"/></li>
-                                    <li><apex:Commandbutton value="Submit for Approval" action="{!confirmSignNow}" styleClass="btn-md form-validate submitapproval" reRender="popPickVal1"/></li>
+                                    <li><apex:Commandbutton value="Sign Now" action="{!confirmSignNow}" styleClass="btn-md signModal" reRender="popPickVal3,msg" oncomplete="test7();"/></li>
+                                    <li><apex:Commandbutton value="Send for Signature" action="{!multiEmail}" styleClass="btn-md sendforModal" reRender="popPickVal1,msg"/></li>
+                                    <li><apex:Commandbutton value="Generate PDF" styleClass="btn-md generatePdf" reRender="popPickVal1,msg"/></li>
+                                    <li><apex:Commandbutton value="Submit for Approval" action="{!confirmSignNow}" styleClass="btn-md form-validate submitapproval" reRender="popPickVal1,msg"/></li>
                                     <!-- <apex:Commandbutton value="Exit"  action="{!cancelfunction}" reRender="btpopup" styleClass="col-xs-12 btn-md" immediate="true"/> -->
                                 </ul>
                             </nav>
                         </div>
-
+                        
                         <!-- sign now step 1 modal -->
                         <div class="modal fade" id="signow-alert" tabindex="-1" role="dialog" aria-labelledby="Sign Now" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -661,31 +688,31 @@ function resizeIframe(obj) {
                                             <div class="col-sm-12"><label><b>Are you finished completing the Wish Forms and ready to collect electronic signatures?</b></label><span class="text-muted">Please ensure you have uploaded any photos, documents, and IDs before submitting this paperwork for approval. </span></div>
                                         </div>
                                     </div>
-
+                                    
                                     <div class="modal-footer">
-                                        <apex:commandButton onclick="test7();" value="Sign" styleClass="btn-md" reRender="popPickVal3"/>
+                                        <apex:commandButton onclick="test7();" value="Sign" styleClass="btn-md" reRender="popPickVal3,msg"/>
                                         <apex:commandButton value="Cancel" styleClass="btn-md" html-data-dismiss="modal" style="margin-left:1px" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <script>
                         function showMyModel() {
                             $('#exit-alert').modal('hide');
                             $('#signow-alert').modal('hide');
                             if(!{!wcfUtil.displayError}){
-                             if (!{!isWishfamilyFormRequired}){
-                              if(!{!currWishChild.IsParticipant__c}){
-                                $('#signow-alert2').modal('show');}
+                                if (!{!isWishfamilyFormRequired}){
+                                    if(!{!currWishChild.IsParticipant__c}){
+                                        $('#signow-alert2').modal('show');}
                                 }
-                                }
+                            }
                             else{
                                 $('#noUsertoSign-alert').modal('show');
                             }
                         }
                         </script>
-
+                        
                         <!-- sign now step 2 modal -->
                         <div class="modal fade" id="signow-alert2" tabindex="-1" role="dialog" aria-labelledby="Sign Now2" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -720,13 +747,13 @@ function resizeIframe(obj) {
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <apex:commandButton action="{!SubmitAndSign}" value="Sign" styleClass="btn-md" />
+                                        <apex:commandButton action="{!SubmitAndSign}" value="Sign" styleClass="btn-md" reRender="msg"/>
                                         <apex:commandButton value="Cancel" styleClass="btn-md" html-data-dismiss="modal" style="margin-left:1px" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <!---- Error Message ---->
                         <div class="modal fade" id="errorMessage" tabindex="-1" role="dialog" aria-labelledby="Error Popup" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -743,13 +770,13 @@ function resizeIframe(obj) {
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <apex:commandButton action="{!cancelfunction}" value="Ok" styleClass="btn-md" />
+                                        <apex:commandButton action="{!cancelfunction}" value="Ok" styleClass="btn-md" reRender="msg" />
                                         <apex:commandButton value="Cancel" styleClass="btn-md" html-data-dismiss="modal" style="margin-left:1px" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <!-- send email modal -->
                         <div class="modal fade" id="sendemail-alert" tabindex="-1" role="dialog" aria-labelledby="Send Email" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -774,15 +801,15 @@ function resizeIframe(obj) {
                                     </div>
                                     <div class="modal-footer">
                                         <div class="row">
-                                            <apex:commandButton action="{!sendpdftoEmail}" value="Send Email" styleClass="btn-md" />
+                                            <apex:commandButton action="{!sendpdftoEmail}" value="Send Email" styleClass="btn-md" reRender="msg"/>
                                             <apex:commandButton value="Cancel" styleClass="btn-md" html-data-dismiss="modal" style="margin-left:1px" />
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                      <!-- wcf1 modal -->
+                        
+                        <!-- wcf1 modal -->
                         <div class="modal fade" id="wcfooo-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -796,15 +823,15 @@ function resizeIframe(obj) {
                                         <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <apex:commandButton value="Save" onclick="test4();"  styleClass="btn-md" reRender="hhh"/>
+                                        <apex:commandButton value="Save" onclick="test4();"  styleClass="btn-md" reRender="hhh,msg"/>
                                         <apex:commandButton action="{!withOutSavetoChild}" value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="oouuo" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <!-- wff modal -->
-
+                        
                         <!-- wcf1 modal -->
                         <div class="modal fade" id="wffmmm-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -819,13 +846,13 @@ function resizeIframe(obj) {
                                         <p class="text-muted col-xs-12" style="text-align:center">You may save your progress before leaving this form.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <apex:commandButton value="Save" onclick="test5();" styleClass="btn-md" reRender="ddd" />
-                                        <apex:commandButton action="{!withOutSaveWCCF}" value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="oouuo"/>
+                                        <apex:commandButton value="Save" onclick="test5();" styleClass="btn-md" reRender="ddd,msg" />
+                                        <apex:commandButton action="{!withOutSaveWCCF}" value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="oouuo,msg"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                        
                         <!--- Wish Child Form Required Alert -->
                         <div class="modal fade" id="wishChildReqAlert-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -840,15 +867,15 @@ function resizeIframe(obj) {
                                         <p class="text-muted col-xs-12" style="text-align:center">Please fill the required fields in Wish Child form.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <apex:commandButton action="{!NavigatetoWishChildForm}"  value="Ok" styleClass="btn-md" style="margin-left:1px" reRender="iii" />
+                                        <apex:commandButton action="{!NavigatetoWishChildForm}"  value="Ok" styleClass="btn-md" style="margin-left:1px" reRender="iii,msg" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Alert end -->
-
-
-                         <!--- Wish Child Form Attachment Alert -->
+                        
+                        
+                        <!--- Wish Child Form Attachment Alert -->
                         <div class="modal fade" id="wishChildAttachmentAlert-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -863,18 +890,18 @@ function resizeIframe(obj) {
                                     </div>
                                     <div class="modal-footer">
                                         <!--<apex:commandButton value="Send" action="{!multiEmail}" styleClass="btn-md" style="margin-left:1px" reRender="popPickVal1" oncomplete="openSendForSignature();"/>-->
-                                        <apex:commandButton value="UPLOAD ATTACHMENTS" action="{!SaveandWishChildExit}" styleClass="btn-md" style="margin-left:1px" reRender="iii" oncomplete="closeAttachmentAlert();"/>
+                                        <apex:commandButton value="UPLOAD ATTACHMENTS" action="{!SaveandWishChildExit}" styleClass="btn-md" style="margin-left:1px" reRender="iii,msg" oncomplete="closeAttachmentAlert();"/>
                                         <!--<apex:commandButton action="{!sendpdftoEmail}" value="Send Email" styleClass="btn-md" />-->
                                         <input type="button" value="CONTINUE WITHOUT UPLOADING" onclick="openSendForSignature();" class="btn-md" style="margin-left:1px" />
-
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Alert end -->
-
-
-
+                        
+                        
+                        
                         <!--- Wish family Form Required Alert -->
                         <div class="modal fade" id="wishfamilyReqAlert-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -889,13 +916,13 @@ function resizeIframe(obj) {
                                         <p class="text-muted col-xs-12" style="text-align:center">Please fill the required fields in Wish Family form.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <apex:commandButton action="{!NavigatetoWishFamily}" value="Ok" styleClass="btn-md" style="margin-left:1px" reRender="yyy"/>
+                                        <apex:commandButton action="{!NavigatetoWishFamily}" value="Ok" styleClass="btn-md" style="margin-left:1px" reRender="yyy,msg"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Alert end -->
-
+                        
                         <!--- No user to Sign alert -->
                         <div class="modal fade" id="noUsertoSign-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -910,14 +937,14 @@ function resizeIframe(obj) {
                                         <p class="text-muted col-xs-12" style="text-align:center">All participants have already signed the form.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <apex:commandButton action="{!withOutSavefromWCFtoWIF}" value="Ok" styleClass="btn-md" style="margin-left:1px" reRender="yyy"/>
+                                        <apex:commandButton action="{!withOutSavefromWCFtoWIF}" value="Ok" styleClass="btn-md" style="margin-left:1px" reRender="yyy,msg"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Alert end -->
                         <!-- Email Alert -->
-                         <div class="modal fade" id="emailSign-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
+                        <div class="modal fade" id="emailSign-alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -936,7 +963,7 @@ function resizeIframe(obj) {
                             </div>
                         </div>
                         <!-- Email Alert End -->
-                         <!--- No user to Sign alert -->
+                        <!--- No user to Sign alert -->
                         <div class="modal fade" id="parentGuridanAlert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -950,14 +977,14 @@ function resizeIframe(obj) {
                                         <p class="text-muted col-xs-12" style="text-align:center">Parent/Legal Guardian will need to select the publicity option and place their signature first.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <apex:commandButton action="{!withOutSavefromWCFtoWIF}" value="Ok" styleClass="btn-md" style="margin-left:1px" reRender="yyy"/>
+                                        <apex:commandButton action="{!withOutSavefromWCFtoWIF}" value="Ok" styleClass="btn-md" style="margin-left:1px" reRender="yyy,msg"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Alert end -->
-
-                       <!--- Submit-Alert -->
+                        
+                        <!--- Submit-Alert -->
                         <div class="modal fade" id="Submitapp-Alert" tabindex="-1" role="dialog" aria-labelledby="Exit Form" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -971,15 +998,15 @@ function resizeIframe(obj) {
                                         <p class="text-muted col-xs-12" style="text-align:center">Please remember to go back to the wish to have any participants over 18 sign publicity form.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <apex:commandButton action="{!submitforApproval}" value="Ok" styleClass="btn-md" style="margin-left:1px" />
+                                        <apex:commandButton action="{!submitforApproval}" value="Ok" styleClass="btn-md" style="margin-left:1px" reRender="msg"/>
                                         <apex:commandButton value="Cancel" styleClass="btn-md" html-data-dismiss="modal" style="margin-left:1px" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- Alert end -->
-
-                    <!-- submitapproval  modal -->
+                        
+                        <!-- submitapproval  modal -->
                         <div class="modal fade" id="submit-alert" tabindex="-1" role="dialog" aria-labelledby="Submit Approval" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -992,16 +1019,16 @@ function resizeIframe(obj) {
                                     <div class="modal-body">
                                         <p class="text-muted col-xs-12" style="text-align:center">Are you finished completing the Wish Forms and ready to send for approval?</p>
                                     </div>
-
+                                    
                                     <div class="modal-footer">
                                         <apex:commandButton value="Yes" styleClass="btn-md"  html-data-dismiss="modal" style="margin-left:1px" />
-                                        <apex:commandButton value="Cancel" styleClass="btn-md" html-data-dismiss="modal-dialog" style="margin-left:1px" />
+                                        <apex:commandButton value="Cancel"  styleClass="btn-md" html-data-dismiss="modal-dialog" style="margin-left:1px" />
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-
+                        
+                        
                         <apex:outputPanel id="uiLogic">
                             <script>
                             setIntervalX(function () {
@@ -1041,7 +1068,7 @@ function resizeIframe(obj) {
                     initialize();
                     var thisOptSel = $(this).children('option:selected'),
                         relatedMonthSel = $(this).parents('.form-group').find('.mo option:selected');
-
+                    
                     // if current year is selected, disable related past month(s)
                     if( $(this).val() == currYear ){
                         $(this).parents('.form-group').find('.mo option').each(function(){
@@ -1057,7 +1084,7 @@ function resizeIframe(obj) {
                     } else {
                         $(this).parents('.form-group').find('.mo option').prop('disabled',false)
                     }
-
+                    
                     // validate month
                     if( (thisOptSel.index() == 0) && (relatedMonthSel.index() == 0 ) ||
                        ( (thisOptSel.index() >= 0) && (relatedMonthSel.index() > 0  )) ){
@@ -1065,26 +1092,26 @@ function resizeIframe(obj) {
                     } else {
                         $(this).parents('.form-group').find('.mo').css('border','1px solid red').addClass('required')
                     }
-
+                    
                     // validate year
                     if( (thisOptSel.index() == 0) && (relatedMonthSel.index() > 0) ){
                         $(this).css('border','1px solid red').addClass('required')
                     } else {
                         $(this).attr('style','').removeClass('required')
                     }
-
+                    
                     //validate equal date
                     if((tOneMo == tTwoMo && tOneYr == tTwoYr && tOneMo != 0 ) || (tTwoMo == tThreeMo && tTwoYr == tThreeYr && tTwoMo != 0) || (tOneMo==tThreeMo && tOneYr == tThreeYr && tThreeMo != 0)){
                         $(this).parents('.form-group').find('.mo').prop('selectedIndex',0); // reset
                     }
-
+                    
                 }).change();
                 $('.mo').change(function(){
                     initialize();
                     var thisOptSel = $(this).children('option:selected'),
                         relatedYearOptArray = $(this).parents('.form-group').find('.yr option'),
                         relatedYearSel = $(this).parents('.form-group').find('.yr option:selected');
-
+                    
                     // if this reset and related year has selection, re-validate this
                     if ( ( thisOptSel.index() == 0) && (relatedYearSel.index() > 0 ) ){
                         $(this).css('border','1px solid red').addClass('required')
@@ -1102,12 +1129,12 @@ function resizeIframe(obj) {
                             if (yearsArray) return;
                             $(this).prop('disabled', true)
                         })
-
+                        
                         // $(this).parents('.form-group').find('.yr option').each(function(){
                         //   if ( relatedYearOptArray == yearsArray) return;
                         //   $(this).prop('disabled', true)
                         // })
-
+                        
                     } else {
                         // re-enable year options
                     }
@@ -1115,7 +1142,7 @@ function resizeIframe(obj) {
                     if((tOneMo == tTwoMo && tOneYr == tTwoYr && tOneMo != 0 ) || (tTwoMo == tThreeMo && tTwoYr == tThreeYr && tTwoMo != 0) || (tOneMo==tThreeMo && tOneYr == tThreeYr && tThreeMo != 0)){
                         $(this).parents('.form-group').find('.yr').prop('selectedIndex',0); // reset
                     }
-
+                    
                 }).change();
                 $('.wheelchair-req').prop('hidden',true);
                 jQuery(function($) {
@@ -1125,7 +1152,7 @@ function resizeIframe(obj) {
                         var wr = $('.wheelchair-req').find('.radiowrap').children('input'); // wheelchair required fields
                         formValidationRules();
                         $(this).children('option').first().text('Please Select');
-
+                        
                         // change functions
                         $(this).change(function () {
                             if($(this).val() != null) {
@@ -1176,7 +1203,7 @@ function resizeIframe(obj) {
                     });
                 });
             });
-
+            
             // --------------------------------------
             // Create radio inputs from selects
             // --------------------------------------
@@ -1199,7 +1226,7 @@ function resizeIframe(obj) {
                         $(this).parent(selectParents).find(':radio[value=""]').prop('checked', true)
                     }
                 });
-
+                
                 // generate radio id for setting group names based on first id of each radio group.
                 // Required so that each question can have a radio group.
                 // generate uniqueId
@@ -1208,7 +1235,7 @@ function resizeIframe(obj) {
                     var radioId = $(this).find(':radio').first().attr('id'); // grabs the first id of each question
                     $(this).find(':radio').attr('name',radioId); // sets radio name to group the radio for each question
                 });
-
+                
                 $('.sel-wrap input:radio').click(function(){
                     // Trigger original select change functions
                     if ( $(this).val().indexOf('Yes') != -1 ){
@@ -1223,7 +1250,7 @@ function resizeIframe(obj) {
             // --------------------------------------
             // End /Create radio inputs from selects
             // --------------------------------------
-
+            
             $('.f-impact-wish').children('option').first().text('Please Select');
             // has wrapper for showing hidden fields with values onload
             jQuery(function($) {
@@ -1240,7 +1267,7 @@ function resizeIframe(obj) {
                     }
                 }).change()
             });
-
+            
             $('.driver-info').find('select').each(function(){
                 $(this).children('option').first().text('Please Select');
             });
@@ -1266,11 +1293,11 @@ function resizeIframe(obj) {
                 // $('.driver-info select').removeClass('required');
                 $('.driver-info').prop('hidden',true);
             }
-
+            
             // Change first driver text to Primary Driver, replacing driver 0
             //$('.driver-section > span > fieldset:nth-child(1) legend').text('Primary Driver');
             $('.driver-section > span > fieldset:nth-child(1) legend ~ span.info').text('Please enter information below about the primary driver of the rental vehicle. If wish will not include a vehicle, you may click the Remove link to the right to delete this section. To add additional potential drivers, click Add Driver in the section below.');
-
+            
             $(".date-input").datepicker({
                 autoclose: true,
                 changeYear: true,
@@ -1278,7 +1305,7 @@ function resizeIframe(obj) {
                 endDate: '+0d',
                 onSelect: function() {$(this).valid()}
             });
-
+            
             function attachmentItemList(){
                 var hasDrivers = $('.has-drivers'), hasPassport = $('.has-passport'), hasPartId = $('.has-participant-id');
                 // show list items in attachments section
@@ -1286,15 +1313,42 @@ function resizeIframe(obj) {
                 hasPassport = ( $('.passport').val().indexOf('Yes') != -1 ) ? hasPassport.prop('hidden',false) : hasPassport.prop('hidden',true);
                 hasPartId = ( $('.participant-id').val().indexOf('Yes') != -1 ) ? hasPartId.prop('hidden',false) : hasPartId.prop('hidden',true);
             } attachmentItemList();
-
+            
             // render chosen multi selects
             $("select.multi").chosen({placeholder_text_multiple: "Please select all that apply", width:"100%"});
             $("select.multi-part").chosen({width:"100%"});
-
+            $('select.multi').chosen({disable_search: true, placeholder_text_multiple: "Please select all that apply", width:"100%"});
+            $('select.multi').find('option:first').prop('disabled', true).trigger("chosen:updated");
+            // keep chosen multi selects open when choosing until user focusout of input
+            (function(){
+                var chosen = $("select.multi").chosen().data("chosen");
+                var autoClose = false;
+                
+                var chosen_resultSelect_fn = chosen.result_select;
+                chosen.result_select = function(evt) {
+                    var resultHighlight = null;
+                    
+                    if(autoClose == false)
+                    {
+                        evt["metaKey"] = true;
+                        evt["ctrlKey"] = true;
+                        
+                        resultHighlight = chosen.result_highlight;
+                    }
+                    
+                    var result = chosen_resultSelect_fn.call(chosen, evt);
+                    
+                    if(autoClose == false && resultHighlight != null)
+                        resultHighlight.addClass("result-selected");
+                    
+                    return result;
+                };
+            })();
+            
             //show textarea fields on pageload if "other" was selected
             if ($('.race-select').val() != null){
                 if ($('.race-select').val().indexOf('Other') != -1){
-
+                    
                     $('.other-race').removeClass('sr-only').addClass('required');
                 }
             }
@@ -1309,46 +1363,46 @@ function resizeIframe(obj) {
                     }
                 }
             });
-
+            
             // jQuery(function($) {
-              // show driver fields if a driver is selected
-              var primaryDriver = $('.driver-section > span:nth-child(3) > fieldset:nth-child(1) .driver-name'),
-                  otherDrivers = $('.driver-section > span:nth-child(3) > fieldset .driver-name:not(.driver-section > span:nth-child(3) > fieldset:nth-child(1) .driver-name)');
-
-              primaryDriver.on('change', function(){
+            // show driver fields if a driver is selected
+            var primaryDriver = $('.driver-section > span:nth-child(3) > fieldset:nth-child(1) .driver-name'),
+                otherDrivers = $('.driver-section > span:nth-child(3) > fieldset .driver-name:not(.driver-section > span:nth-child(3) > fieldset:nth-child(1) .driver-name)');
+            
+            primaryDriver.on('change', function(){
                 if ($(this).val() != null){
-                  if ( $(this).val() != '' ){
-                    $('.driver-info').removeAttr('hidden');
-                    $(this).parents('.form-group').siblings().removeAttr('hidden');
-                    // $(this).parents('.form-group').siblings().find(':input').addClass('required');
-
-                    if (!$('.driver-info legend').length){
-                        $('.driver-info').prepend('<legend>Driver Vehicle Information</legend>');
+                    if ( $(this).val() != '' ){
+                        $('.driver-info').removeAttr('hidden');
+                        $(this).parents('.form-group').siblings().removeAttr('hidden');
+                        // $(this).parents('.form-group').siblings().find(':input').addClass('required');
+                        
+                        if (!$('.driver-info legend').length){
+                            $('.driver-info').prepend('<legend>Driver Vehicle Information</legend>');
+                        }
+                        $('.driver-info select').addClass('required');
+                    } else {
+                        $('.driver-info').prop('hidden',true);
+                        $(this).parents('.form-group').siblings().prop('hidden',true);
+                        // $(this).parents('.form-group').siblings().find(':input').removeClass('required');
+                        $('.driver-info').remove('legend');
+                        $('.driver-info select').removeClass('required');
                     }
-                    $('.driver-info select').addClass('required');
-                  } else {
-                    $('.driver-info').prop('hidden',true);
-                    $(this).parents('.form-group').siblings().prop('hidden',true);
-                    // $(this).parents('.form-group').siblings().find(':input').removeClass('required');
-                    $('.driver-info').remove('legend');
-                    $('.driver-info select').removeClass('required');
-                  }
                 }
-              }).change();
-
-              otherDrivers.on('change', function(){
+            }).change();
+            
+            otherDrivers.on('change', function(){
                 if ($(this).val() != null){
-                  if ( $(this).val() != '' ){
-                    $(this).parents('.form-group').siblings().removeAttr('hidden');
-                  } else {
-                    $(this).parents('.form-group').siblings().prop('hidden',true);
-                  }
+                    if ( $(this).val() != '' ){
+                        $(this).parents('.form-group').siblings().removeAttr('hidden');
+                    } else {
+                        $(this).parents('.form-group').siblings().prop('hidden',true);
+                    }
                 }
-              }).change();
+            }).change();
             // });
-
+            
         } uiLogic();
-
+        
         function loader(){
             $('.upload-loader').html('<img src="{!URLFOR($Resource.WishReferralStyle, "WishReferralStyle/img/loader-circle-blue.gif")}" class="loader">');
             setIntervalX(function () {
@@ -1363,12 +1417,12 @@ function resizeIframe(obj) {
         function refreshGrid() {
             refreshAttachmentSection();
         }
-
+        
         function test4(){
             // if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
             // console.log('form submitted');
             saveWishInfotoChildForm();
-
+            
             // } else {
             //
             $('#wcfooo-alert').modal('hide');
@@ -1378,7 +1432,7 @@ function resizeIframe(obj) {
             // if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
             // console.log('form submitted');
             saveWishInfotoFamilyForm();
-
+            
             // } else {
             //
             $('#wffmmm-alert').modal('hide');
@@ -1388,15 +1442,15 @@ function resizeIframe(obj) {
             if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
                 console.log('form submitted');
                 SaveandSignNow();
-
+                
             } else {
-
+                
                 $('#wffmmm-alert').modal('hide');
             }
         }
         function generat(){
             generatePDF();}
-
+        
         $('.signModal').click(function(){
             if ($('#wcf\\:frm, #wff\\:frm, #wif\\:frm').valid()){
                 if ({!isWishchildFormRequired}){
@@ -1426,7 +1480,7 @@ function resizeIframe(obj) {
                 }
             }
         });
-
+        
         function CheckForAttachment() {
             WishChildForm_AC.searchCaseFile('{!currCase.Id}', function(result, event){
                 if(event.type == 'exception') {
@@ -1440,7 +1494,7 @@ function resizeIframe(obj) {
                 }
             });
         }
-
+        
         function closeAttachmentAlert() {
             $('#wishChildAttachmentAlert-alert').modal('hide');
             //$('#sendemail-alert').modal();
@@ -1472,6 +1526,41 @@ function resizeIframe(obj) {
                 }
             }
         });
+        $(document).ready(function(){
+            loadAllScriptData();
+            if(navigator.userAgent.search("Firefox") >= 0) checkIframeLoaded();
+        });
+
+        function  checkIframeLoaded() {
+            // Get a handle to the iframe element
+            var iframe = document.getElementById('wifupload');
+            var iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            // Check if loading is complete
+            if (  iframeDoc.readyState  == 'complete' ) {
+                // The loading is complete, call the function we want executed once the iframe is loaded
+                afterLoading();
+                return;
+             } 
+            // If we are here, it is not loaded. Set things up so we check   the status again in 100 milliseconds
+            window.setTimeout(checkIframeLoaded, 100);
+        }
+
+        function afterLoading(){
+            document.getElementById('load').style.visibility="hidden";
+        }
+
+
+        /**** STT-85****/
+        document.onreadystatechange = function () {
+            var state = document.readyState
+            if (state == 'complete' && navigator.userAgent.search("Chrome") >= 0) {
+                afterLoading();
+            }
+        }
+
+       
+       
+       
         </script>
     </body>
 </apex:page>

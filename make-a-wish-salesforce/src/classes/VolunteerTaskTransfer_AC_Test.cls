@@ -2,10 +2,12 @@
 Author      : MST Solutions
 Date        : 12/01/2016
 Description : This class contains test method for CaseFile object
+Modification Log: 
+28/03/2018 - Kanagaraj
 *******************************************************************************************************************/
 @isTest
 public class VolunteerTaskTransfer_AC_Test {
-
+    //This method is used to transfer the task
     static testmethod void transferTask() {
         Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
         Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
@@ -25,5 +27,7 @@ public class VolunteerTaskTransfer_AC_Test {
         volunteerTask.getAssigners();
         volunteerTask.assignerId = volunterUser.Id;
         volunteerTask.transferTask();
+        System.assertEquals(newTask.Subject,'Conduct Interview','Task subject does not match');
+        System.assert(newTask.Subject == 'Conduct Interview','Task subject does not match');
     }
 }

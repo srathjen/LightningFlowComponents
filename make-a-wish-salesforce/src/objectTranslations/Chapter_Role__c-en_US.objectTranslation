@@ -27,6 +27,13 @@
         <name>Role__c</name>
     </fields>
     <layouts>
+        <layout>Chapter Role Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
         <layout>Chapter Role Layout</layout>
         <sections>
             <label><!-- Custom Links --></label>

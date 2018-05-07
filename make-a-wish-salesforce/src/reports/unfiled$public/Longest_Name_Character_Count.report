@@ -12,11 +12,13 @@
     <filter>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Wish_Child</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.FirstNameCharacterCount__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>greaterOrEqual</operator>
             <value>15</value>
         </criteriaItems>

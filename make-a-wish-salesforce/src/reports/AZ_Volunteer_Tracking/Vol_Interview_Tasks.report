@@ -50,31 +50,37 @@
     <filter>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Volunteer_Contact</value>
         </criteriaItems>
         <criteriaItems>
             <column>SUBJECT</column>
+            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>interview</value>
         </criteriaItems>
         <criteriaItems>
             <column>SUBJECT</column>
+            <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>email,et,call</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Migrated_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Test_Record__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Region_Chapter__c</column>
+            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>

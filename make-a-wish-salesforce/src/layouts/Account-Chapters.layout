@@ -95,6 +95,10 @@
                 <behavior>Edit</behavior>
                 <field>Timezone__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Category__c</field>
+            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
@@ -395,6 +399,10 @@
         <fields>General_Email_Address__c</fields>
         <fields>Referral_Email_Address__c</fields>
         <relatedList>Office__c.Chapter__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <relatedList>Regions__c.Chapter_Name__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>Award_Name__c</fields>

@@ -106,6 +106,7 @@ global class SendEmailToMacTeam_AC {
     
     
     public static void sendEmail (Map<Id, List<Attachment>> docusignAttachmentMap, String sendToTeam, Id targetObjectId, String emailTo, Id caseId) {
+        RecursiveTriggerHandler.nationalEmailRecurrence = TRUE;
         //Id OrgId = '0D25B00000000cF';
         String organizationWideLabel=System.Label.OrganizationWideEmail;
         ORGWIDEEMAILADDRESS  OrgId = [SELECT id,Address FROM ORGWIDEEMAILADDRESS WHERE Address =: organizationWideLabel LIMIT 1]; 

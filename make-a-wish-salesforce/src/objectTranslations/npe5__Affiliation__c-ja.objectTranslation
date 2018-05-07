@@ -4,5 +4,16 @@
         <plural>false</plural>
         <value>関係する団体</value>
     </caseValues>
+    <layouts>
+        <layout>Affiliation Chapter Staff Layout</layout>
+        <sections>
+            <label><!-- Affiliation Information --></label>
+            <section>Affiliation Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
     <nameFieldLabel>関係する団体名</nameFieldLabel>
 </CustomObjectTranslation>

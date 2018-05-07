@@ -12,15 +12,16 @@
                         <h1 class="col-md-12">Wish Child</h1>
                     </div>
                     <apex:form id="frm">
-                        <apex:actionFunction action="{!SaveandWishChildExit}" name="callConfirmSave" reRender="test"/>
-                        <apex:actionFunction action="{!withOutNavigate}" name="navigatWithoutSave"/>
-                        <apex:actionFunction action="{!WCFtoWFF}" name="SaveWishChildtoWff" reRender="tesee"/>
-                        <apex:actionFunction action="{!WCFtoWIF}" name="SaveWishChildtoWInfo"  reRender="tefsee"/>
-                        <apex:actionFunction action="{!withOutSaveWCCF}" name="WithoutSaveChildFormToWFF" reRender="tefsee"/>
-                        <apex:actionFunction action="{!withOutSavefromWCFtoWIF}" name="WithoutSaveChildFormToWIF" reRender="tefsee"/>
-                        <apex:actionFunction action="{!RetrunToWish}" name="ReturnToWish" reRender="qquuqq"/>
-                        <apex:actionFunction action="{!cancelfunction}" name="ReturnToWishWithOutSave" reRender="qqququu"/>
-                        <apex:actionFunction action="{!generatePDF}" name="generatePDF" reRender="genPDF"/>
+                        <apex:actionFunction action="{!SaveandWishChildExit}" name="callConfirmSave" reRender="test,msg"/>
+                        <apex:actionFunction action="{!withOutNavigate}" name="navigatWithoutSave,msg"/>
+                        <apex:actionFunction action="{!WCFtoWFF}" name="SaveWishChildtoWff" reRender="tesee,msg"/>
+                        <apex:actionFunction action="{!WCFtoWIF}" name="SaveWishChildtoWInfo"  reRender="tefsee,msg"/>
+                        <apex:actionFunction action="{!withOutSaveWCCF}" name="WithoutSaveChildFormToWFF" reRender="tefsee,msg"/>
+                        <apex:actionFunction action="{!withOutSavefromWCFtoWIF}" name="WithoutSaveChildFormToWIF" reRender="tefsee,msg"/>
+                        <apex:actionFunction action="{!RetrunToWish}" name="ReturnToWish" reRender="qquuqq.msg"/>
+                        <apex:actionFunction action="{!cancelfunction}" name="ReturnToWishWithOutSave" reRender="qqququu,msg"/>
+                        <apex:actionFunction action="{!generatePDF}" name="generatePDF" reRender="genPDF,msg"/>
+                        
                         <div class="step-base">
                             <span class="step-tether nav-down">
                                 <nav>
@@ -35,24 +36,27 @@
                                     </ul>
                                     <div class="nav-sub-inner hidden-sm-down">
                                         <a href="#top" class="hidden-md-down">&uarr; Back to Top</a>
-                                        <apex:Commandbutton value="Generate PDF" onClick="generat();" styleClass="btn-md generatePdf" />
-                                        <apex:commandbutton value="Save" onclick="return false;"  styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert"/>
+                                        <apex:Commandbutton value="Generate PDF" onClick="generat();" styleClass="btn-md generatePdf" reRender="msg" />
+                                        <apex:commandbutton value="Save" onclick="return false;"  styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" reRender="msg"/>
                                         <!--<apex:Commandbutton value="Next" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#wffsame-alert"/>-->
-                                        <apex:Commandbutton value="Next" onclick="return false;" styleClass="btn-md wcf-nxt-btn"/>
+                                        <apex:Commandbutton value="Next" onclick="return false;" styleClass="btn-md wcf-nxt-btn" reRender="msg"/>
 
                                     </div>
                                 </nav>
                             </span>
                         </div>
-
-                        <div class="messages"><apex:pagemessages /></div>
+                        
+                        <div class="messages"></div>
+                       
                         <div class="row">
                             <!-- <apex:actionFunction name="uiLogic" rerender="membAdd" /> -->
                             <apex:pageBlock >
                                 <div class="container">
+                                
                                     <!-- wish child info -->
                                     <fieldset id="wish-child-info">
-                                        <legend>Wish Child Information</legend>
+                                    <apex:pageMessages id="msg"/>
+                                    <legend>Wish Child Information</legend>
                                         <span class="info">Please fill the fields below.</span>
                                         <div class="col-lg-6">
                                             <div class="form-group row">
@@ -90,10 +94,18 @@
                                             <div class="form-group row">
                                                 <div class="col-xs-12 col-sm-4"><label for="wcf:frm:gender" aria-label="Gender">Gender<span style="color:red;font-size: 150%"> *</span></label></div>
                                                 <div class="col-sm-6">
-                                                    <apex:inputField value="{!currWishChild.Gender__c}" id="gender" styleClass="form-control col-xs-12 col-sm-12 c-select required" />
+                                                    <apex:inputField value="{!currWishChild.Gender__c}" id="gender" styleClass="form-control col-xs-12 col-sm-12 c-select required gender-dd" />
+                                                </div>
+                                            </div>                                            
+                                            <div class="form-group row">
+                                                <div class="col-xs-12 col-sm-4"><label for="wcf:frm:selfdesc" aria-label="Self Describe">Gender Description</label></div>
+                                                <div class="col-sm-6">
+                                                    <apex:inputTextarea value="{!currWishChild.Self_describe_comment_box__c}" id="selfdesc" style="margin-top: 0px; margin-bottom: 0px; height: 87px;" styleClass="form-control col-xs-12 col-sm-12 selfdesc" html-placeholder="Please enter a description pertaining to 'Self-describe'." />
                                                 </div>
                                             </div>
+                                        </div>
 
+                                        <div class="col-lg-6">
                                             <div class="form-group row">
                                                 <div class="col-xs-12 col-sm-4"><label for="wcf:frm:childdiagnosis" aria-label="Wish Child's Diagnosis">Wish Child's Diagnosis</label></div>
                                                 <div class="col-sm-6">
@@ -106,9 +118,6 @@
                                                     <apex:inputField value="{!currWishChild.T_Shirt_Size__c}" id="shirtsize" styleClass="form-control" html-maxlength="50" html-placeholder="small, medium, large" />
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="col-lg-6">
                                             <div class="form-group row">
                                                 <div class="col-xs-12 col-sm-4"><label for="wcf:frm:street" aria-labelledby="street">Primary Address<span style="color:red;font-size: 150%"> *</span></label></div>
                                                 <div class="col-sm-6">
@@ -162,7 +171,7 @@
                                         <div class="col-lg-6">
                                             <div class="form-group row">
                                                 <div class="col-xs-12 col-sm-4"><label for="Color">Color</label></div>
-                                                <div class="col-sm-6"><apex:inputField value="{!currWishChild.Color__c}" styleClass="form-control" html-placeholder="e.g. Blue/ Pink"/></div>
+                                                <div class="col-sm-6"><apex:inputField style="font-family:'Lato';" value="{!currWishChild.Color__c}" styleClass="form-control" html-placeholder="e.g. Blue/ Pink"/></div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="col-xs-12 col-sm-4"><label for="Music">Music/ Singer</label></div>
@@ -294,9 +303,9 @@
                         <div class="row hidden-sm-up nav-btm">
                             <nav class="btm">
                                 <ul>
-                                    <li><apex:commandbutton value="Save" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" /></li>
-                                    <li><apex:Commandbutton value="Generate PDF" onClick="test3();" styleClass="btn-md generatePdf" /></li>
-                                    <li><apex:Commandbutton value="Next" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#wffsame-alert" /></li>
+                                    <li><apex:commandbutton value="Save" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#save-alert" reRender="msg"/></li>
+                                    <li><apex:Commandbutton value="Generate PDF" onClick="test3();" styleClass="btn-md generatePdf" reRender="msg"/></li>
+                                    <li><apex:Commandbutton value="Next" onclick="return false;" styleClass="btn-md" html-data-toggle="modal" html-data-target="#wffsame-alert" reRender="msg"/></li>
                                 </ul>
                             </nav>
                         </div>
@@ -306,11 +315,11 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h1 class="modal-title" id="send-email">Warning</h1>
-                                       <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button> -->
                                     </div>
-                                    <div class="modal-body">
+                                   <div class="modal-body">
                                         <div class="form-group row">
                                             <div class="col-sm-12"><h2><center>The record is in approval process</center></h2></div>
                                             <div class="col-sm-6">
@@ -320,12 +329,12 @@
                                     </div>
                                     <div class="modal-footer">
                                         <div class="row">
-                                            <apex:commandButton action="{!submitforApproval}" value="OK" styleClass="btn-md" />
-
+                                            <div class="col-sm-6"><apex:commandButton action="{!submitforApproval}" value="OK" styleClass="btn-md" reRender="msg"/></div>
+                                            <apex:commandButton action="{!UploadFile}" value="Upload File" styleClass="btn-md" />
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
+                                    </div> 
+                                </div> 
+                            </div> 
                         </div>
                         <!-- display error modal -->
 
@@ -344,7 +353,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <apex:commandButton onclick="test2();" value="Save" styleClass="btn-md" />
-                                        <apex:commandButton action="{!withOutSaveWCCF}" value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" />
+                                        <apex:commandButton action="{!withOutSaveWCCF}" value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="msg"/>
                                     </div>
                                 </div>
                             </div>
@@ -365,18 +374,47 @@
                                     </div>
                                     <div class="modal-footer">
                                         <apex:commandButton onclick="test1();" value="Save" styleClass="btn-md"/>
-                                        <apex:commandButton action="{!withOutSavefromWCFtoWIF}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" />
+                                        <apex:commandButton action="{!withOutSavefromWCFtoWIF}"  value="Navigate without Saving" styleClass="btn-md" style="margin-left:1px" reRender="msg"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
+                       
                     </apex:form>
                 </section>
             </div>
         </main>
         <apex:include pageName="WishFamilyForm_footer" id="pfooter" />
         <script>
+        //Gender dropdown change action
+        $('.gender-dd').on('change', function() {
+               genderDesc();
+        });
+        $('.selfdesc').on('keydown', function() {
+               genderDesc();
+        });
+        //Default action
+        genderDesc();
+        
+        function genderDesc() {
+               $.trim($('.selfdesc').val());
+         	   if($('.gender-dd option:selected').val() == 'Self-describe') {
+                   	$('.selfdesc').addClass('required');
+                    $('.selfdesc').prop('readonly', false);
+                   	$('.selfdesc').attr("placeholder", "Please enter a description pertaining to 'Self-describe'."); 
+                    $('.selfdesc').rules("add", {
+                        	  messages: {
+                                   required: "Oops! Please enter the gender description"
+                              }
+                     });
+               }
+               else {
+               		$('.selfdesc').val('').removeClass('required');
+                    $('.selfdesc').prop('readonly', true);
+                    $('.selfdesc').attr("placeholder", "");
+               }                         	
+        }
+        
         function uiLogic(){
             //show textarea fields on pageload if "Yes" was selected
             if ($('.f-prior-wish').val() != null){
@@ -385,6 +423,7 @@
                     $('.prior-textarea').addClass('required');
                 }
             }
+			
             // show/hide if "Yes" textbox
             $('.f-prior-wish').on('change', function() {
                 if($(this).val() != null){

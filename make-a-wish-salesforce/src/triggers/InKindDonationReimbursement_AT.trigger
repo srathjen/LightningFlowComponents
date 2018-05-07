@@ -14,7 +14,8 @@ trigger InKindDonationReimbursement_AT on In_Kind_Donation_Reimbursement__c (bef
         map<id,id> wishOwnerMap = new map<id,id>();
         map<id,id> wishManagerMap = new map<id,id>();
         Id inKindRtId = Schema.Sobjecttype.In_Kind_Donation_Reimbursement__c.getRecordTypeInfosByName().get(newConstant.InKind).getRecordTypeId();
-        for(In_Kind_Donation_Reimbursement__c newRecord : trigger.new){
+        
+    /*    for(In_Kind_Donation_Reimbursement__c newRecord : trigger.new){
             if(newRecord.Wish__c != Null ){
                 wishIdsSet.add(newRecord.Wish__c);
             }
@@ -38,15 +39,15 @@ trigger InKindDonationReimbursement_AT on In_Kind_Donation_Reimbursement__c (bef
                     }
                 }
             }
-        }
+        }*/
     }
         //Before update trigger is used fetch the associated case owner,case owner's manager and update with In-Kind record
     if(trigger.isbefore && trigger.isUpdate){
         set<string> wishIdsSet = new set<string>();
         map<id,id> wishOwnerMap = new map<id,id>();
         map<id,id> wishManagerMap = new map<id,id>();
-        for(In_Kind_Donation_Reimbursement__c inkindReimburse : trigger.new){
-            if(inkindReimburse.Wish__c != Null && trigger.oldMap.get(inkindReimburse.id).Wish__c != inkindReimburse.Wish__c){
+       /*   for(In_Kind_Donation_Reimbursement__c inkindReimburse : trigger.new){
+          if(inkindReimburse.Wish__c != Null && trigger.oldMap.get(inkindReimburse.id).Wish__c != inkindReimburse.Wish__c){
                 wishIdsSet.add(inkindReimburse.Wish__c);
             }
             
@@ -69,7 +70,7 @@ trigger InKindDonationReimbursement_AT on In_Kind_Donation_Reimbursement__c (bef
                 }
             }
             
-        }
+        }*/
         
     }
     

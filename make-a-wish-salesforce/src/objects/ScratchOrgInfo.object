@@ -35,15 +35,7 @@
         <trackHistory>true</trackHistory>
     </fields>
     <fields>
-        <fullName>AlmReference</fullName>
-        <trackHistory>true</trackHistory>
-    </fields>
-    <fields>
         <fullName>AuthCode</fullName>
-        <trackHistory>true</trackHistory>
-    </fields>
-    <fields>
-        <fullName>CloneFromOrg</fullName>
         <trackHistory>true</trackHistory>
     </fields>
     <fields>

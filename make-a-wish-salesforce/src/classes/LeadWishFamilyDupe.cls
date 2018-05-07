@@ -1,3 +1,8 @@
+/******************************************************
+Modification Log:
+1. 12/04/2018 - Yuvraj - IME-77 Line No: 237
+
+*******************************************************/
 global class LeadWishFamilyDupe {
     
     webservice static String FindFamilyContactDupe(Id leadId){
@@ -5,7 +10,8 @@ global class LeadWishFamilyDupe {
         Id wishFamilyRecordTypeId = Schema.SObjectType.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
         Id wishFamilyRT = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.wishFamilyRT).getRecordTypeId();
         Id medicalProfessionalRT = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
-        
+        String Logvalue;
+       // try{
         Lead currLead =  [SELECT Id, FirstName,Name,Of_Times_Email_Sent__c,LastName,Parent_Last_Name__c,Parent_First_Name__c, 
                           Email, DOB__c ,Phone,chapterName__c, 
                           City, State, Street, PostalCode, Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
@@ -17,7 +23,7 @@ global class LeadWishFamilyDupe {
                           WHERE id = :leadId limit 1];
         
         
-        
+        Logvalue = String.valueof(currLead);
         List<Contact> dupMedicalContacts = [SELECT id, FirstName,Name, LastName, Email, Phone, MailingCity, BirthDate,
                                             MailingState, MailingPostalCode FROM Contact
                                             WHERE (FirstName = :currLead.Medical_Professional_First_Name__c AND LastName = :currLead.Medical_Professional_Last_Name__c 
@@ -84,11 +90,14 @@ global class LeadWishFamilyDupe {
         else if(dupBestContactPhysicians.Size() > 0)
             return 'There might be an existing Best Physician Contact. Please click on [OK] to review the existing record.';
         else return null;
-        
-        
-        
+    /* }
+     
+     catch(Exception ex){
+         String recId = leadId;
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadWishFamilyDupe','FindFamilyContactDupe',recId,ex,Logvalue)); 
+         return Label.Debug_log_error_message;
+     }*/
     }
-    
     webservice static String FindLeadDupe(Id leadId)
     {
         Set<String> leadFNamesSet = new Set<String>();
@@ -108,11 +117,12 @@ global class LeadWishFamilyDupe {
         Set<String> exAddressSet = new Set<String>();
         Set<String> exphoneSet = new Set<String>();
         Set<String> exemailsSet = new Set<String>();
-        
         String instanceUrl = label.Instance_Url;
+        String Logvalue;
         Constant_Ac constant = new Constant_AC();
         String wishChild = Schema.Sobjecttype.Contact.getRecordTypeInfosByName().get(constant.contactWishChildRT).getRecordTypeId();
         
+        try{
         List<Lead> leadList =  [SELECT Id, FirstName,Name,Of_Times_Email_Sent__c,LastName,Parent_Last_Name__c,Parent_First_Name__c, 
                                 Email, DOB__c ,Phone,chapterName__c,
                                 City, State, Street, PostalCode, Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
@@ -120,7 +130,7 @@ global class LeadWishFamilyDupe {
                                 Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Phone__c, Treating_Medical_Professional_Email__c FROM Lead
                                 WHERE id = :leadId AND isConverted = false limit 1];
         
-        
+        Logvalue = String.valueof(leadList);
         
         List<Lead> exLeads = [SELECT Id,LastName,Street,FirstName, Email, chapterName__c,Phone, DOB__c,
                               City,State,PostalCode FROM Lead 
@@ -205,33 +215,40 @@ global class LeadWishFamilyDupe {
                     
                 }
             }
-            
-            
         }                               
-        
+      }
+      catch(Exception ex){
+         String recId = leadId;
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadWishFamilyDupe','FindLeadDupe',recId,ex,Logvalue)); 
+         return Label.Debug_log_error_message;
+       }
         return null;
     } 
     
     webservice static String resetDVMedicalSummary(Id leadId) {
-        List<Lead> leadRec = [SELECT Id,Of_Times_Email_Sent__c,Part_A_Sent__c, Part_A_Received__c, Hidden_DV_form_Medical_professional_Type__c,  Sub_Status__c,Treating_Medical_Professional_Email__c,HiddenMedicalProfessionalEmail__c, Status, Part_A_Form_Password__c FROM Lead WHERE Id =: leadId LIMIT 1];
+        String Logvalue;
+        try{
+        List<Lead> leadRec = [SELECT Id,Of_Times_Email_Sent__c, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c, PD_Condition_Description__c, PD_ICD_Code__c, Part_A_Sent__c, Part_A_Received__c, Hidden_DV_form_Medical_professional_Type__c,  Sub_Status__c,Treating_Medical_Professional_Email__c,HiddenMedicalProfessionalEmail__c, Status, Part_A_Form_Password__c FROM Lead WHERE Id =: leadId LIMIT 1];
+        Logvalue = String.valueOf(leadRec);
         leadRec[0].Sub_Status__c='Pending Diagnosis Verification';
         if( leadRec[0].Of_Times_Email_Sent__c == Null ) {
             leadRec[0].Of_Times_Email_Sent__c =  0;
         }
+        leadRec[0].Pending_Diagnosis_Date__c = Date.today();//IME-77
+        leadRec[0].PD_ICD_Code__c = leadRec[0].ICD_Given_By_Referrer__c;
+        leadRec[0].PD_Condition_Description__c = leadRec[0].Diagnosis_Given_By_Referrer__c;
         leadRec[0].Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
         leadRec[0].HiddenMedicalProfessionalEmail__c = leadRec[0].Treating_Medical_Professional_Email__c;
         
-        LeadTriggerHandler handlerIns = new LeadTriggerHandler();
-        leadRec[0].Part_A_Form_Password__c = handlerIns.getRandom();
+        leadRec[0].Part_A_Form_Password__c = Lead_OnBeforeInsertTriggerHandler.getRandom();
         leadRec[0].Of_Times_Email_Sent__c= leadRec[0].Of_Times_Email_Sent__c + 1; 
-        leadRec[0].Dup_Check__c= 'Block Lead Dup';
         leadRec[0].MAW_Name__c = '';
         leadRec[0].Part_A_Received__c = null;
         leadRec[0].Part_A_Sent__c = Date.today();
         leadRec[0].I_am_Recognized_To_Practice_As_a__c = '';
         leadRec[0].I_m_Part_of_The_Treating_HealthCare_Team__c = '';
         leadRec[0].Is_in_a_Comatose_Vegetative_State__c = '';
-        leadRec[0].Communication__c = '';
+        //leadRec[0].Communication__c = '';
         leadRec[0].Why_do_you_feel_would_be_eligible_Wish__c = '';
         leadRec[0].Is_We_Need_To_Expedite_The_Process__c = '';
         leadRec[0].Please_Explain__c = '';
@@ -277,8 +294,7 @@ global class LeadWishFamilyDupe {
         leadRec[0].isSign__c = false;
         leadRec[0].Status = 'Referred';
         leadRec[0].RFI_Form_Info_Hidden__c = leadRec[0].Status;
-        leadRec[0].Hidden_DV_form_Medical_professional_Type__c = '';
-        
+        //leadRec[0].Hidden_DV_form_Medical_professional_Type__c = '';
         update leadRec;
         DELETE[SELECT Id FROM Diagnosis_Verification__c WHERE Lead__c =: leadId];
         Map<Id, dsfs__DocuSign_Status__c> docusignDeleteList = new Map<Id, dsfs__DocuSign_Status__c>();
@@ -306,6 +322,12 @@ global class LeadWishFamilyDupe {
         if(leadFileList.size() > 0) {
             Delete leadFileList; 
         }
+      }
+       catch(Exception ex){
+         String recId = leadId;
+         new ApexDebugLog().createLog(new ApexDebugLog.Error('LeadWishFamilyDupe','resetDVMedicalSummary',recId,ex,Logvalue)); 
+         return Label.Debug_log_error_message;
+       }
         return null;
     }
     

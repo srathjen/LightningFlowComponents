@@ -10,27 +10,28 @@ public class WishClearanceSendNow_AC_Test {
     public static testMethod void createParentCase(){
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
         Contact contactMedicalProfessChild = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
-        npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRec(contactWishChild.Id,contactMedicalProfessChild.Id);
+        npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRecord(contactWishChild.Id,contactMedicalProfessChild.Id);
         Case caseId = OrientationandTrainingUtil.CreateParentCase(contactWishChild.Id);
-        
         OrientationandTrainingUtil.insertDocusignSetting();
         ApexPAges.StandardController sc = new ApexPages.StandardController(caseId);
         PageReference pageRef = Page.WishClearanceSendNow_VF;
         pageRef.getParameters().put('id',String.valueOf(caseId.Id));
         Test.setCurrentPage(pageRef);
+        
         WishClearanceSendNow_AC wishClear = new WishClearanceSendNow_AC(sc);
         wishClear.getMedicalProContact();
+        wishClear.medicalProfContactName = contactMedicalProfessChild.FirstName+' '+contactMedicalProfessChild.LastName;
         wishClear.SendtoDocuSign();
         wishClear.DisplayMessage();
         wishClear.cancel();
         wishClear.displayEmail();
-        
+        System.assert(wishClear.currentParentCase.Id == caseId.Id ,'Wish Clearance does not match with parent Id.');
     }
     
     public static testMethod void createParentCaseWithRush(){
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild();
         Contact contactMedicalProfessChild = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
-        npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRec(contactWishChild.Id,contactMedicalProfessChild.Id); 
+        npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRecord(contactWishChild.Id,contactMedicalProfessChild.Id); 
         Case caseId = OrientationandTrainingUtil.CreateParentCase(contactWishChild.Id);
         case updatecase = new case();
         updatecase.Rush__c = true;
@@ -46,19 +47,21 @@ public class WishClearanceSendNow_AC_Test {
         Test.setCurrentPage(pageRef);
         WishClearanceSendNow_AC wishClear = new WishClearanceSendNow_AC(sc);
         wishClear.getMedicalProContact();
+        wishClear.medicalProfContactName = contactMedicalProfessChild.FirstName+' '+contactMedicalProfessChild.LastName;
         wishClear.SendtoDocuSign();
         wishClear.DisplayMessage();
         wishClear.cancel();
         wishClear.displayEmail();
         wishClear.ReturnToWish();
         wishClear.ReturnToWishClearanceForm();
+        System.assert(updatecase.Rush__c , 'The wish not a Rush');
         
     }
     
     public static testMethod void createParentCaseWithAirTravel(){
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
         Contact contactMedicalProfessChild = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
-        npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRec(contactWishChild.Id,contactMedicalProfessChild.Id);
+        npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRecord(contactWishChild.Id,contactMedicalProfessChild.Id);
         Case caseId = OrientationandTrainingUtil.CreateParentCase(contactWishChild.Id);
         case updatecase = new case();
         updatecase.wish_involves_air_travel__c = 'Yes';
@@ -80,20 +83,23 @@ public class WishClearanceSendNow_AC_Test {
         Test.setCurrentPage(pageRef);
         WishClearanceSendNow_AC wishClear = new WishClearanceSendNow_AC(sc);
         wishClear.getMedicalProContact();
+         wishClear.medicalProfContactName = contactMedicalProfessChild.FirstName+' '+contactMedicalProfessChild.LastName;
         wishClear.SendtoDocuSign();
         wishClear.DisplayMessage();
         wishClear.cancel();
         wishClear.displayEmail();
         wishClear.ReturnToWish();
         wishClear.ReturnToWishClearanceForm();
-        
+        System.assert(updatecase.wish_involves_air_travel__c == 'Yes' , 'The particular Wish does not involve the Air travel');
     }
     
     public static testMethod void createParentCaseWithTravel(){
         Contact contactWishChild =   OrientationandTrainingUtil.CreateWishChild(); 
         Contact contactMedicalProfessChild = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
-        npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRec(contactWishChild.Id,contactMedicalProfessChild.Id);
+        npe4__Relationship__c createRelationShipRec = OrientationandTrainingUtil.CreateMedicalProfessionalRelationshipRecord(contactWishChild.Id,contactMedicalProfessChild.Id);
         Case caseId = OrientationandTrainingUtil.CreateParentCaseWithTravel(contactWishChild.Id);
+        createRelationShipRec.Send_Wish_Forms__c = True;
+        Update createRelationShipRec;
         
         case updatecase = new case();
         updatecase.wish_involves_air_travel__c = 'Yes' ;
@@ -121,17 +127,17 @@ public class WishClearanceSendNow_AC_Test {
         pageRef.getParameters().put('id',String.valueOf(caseId.Id));
         Test.setCurrentPage(pageRef);
         WishClearanceSendNow_AC wishClear = new WishClearanceSendNow_AC(sc);
-        wishClear.medicalProfContactName = contactMedicalProfessChild.Name;
-        wishClear.email = contactMedicalProfessChild.Email;
         wishClear.getMedicalProContact();
+        wishClear.medicalProfContactName = contactMedicalProfessChild.FirstName+' '+contactMedicalProfessChild.LastName;
+        wishClear.email = contactMedicalProfessChild.Email;
         wishClear.displayEmail();
         wishClear.SendtoDocuSign();
         Test.StartTest();
         boolean isRush = false;
         Test.setMock(HttpCalloutMock.class, new Mock_ResponseGenerator()); 
-        WishClearanceSendNow_AC.CallouttoDocusign(caseId.id,contactWishChild.Name,contactWishChild.Email);
+        WishClearanceSendNow_AC.CallouttoDocusign(caseId.id,contactWishChild.Name,contactWishChild.Email,Null);
         Test.StopTest();
-        
+        System.assertEquals(wishClear.medicalProfContactName,contactMedicalProfessChild.FirstName+' '+contactMedicalProfessChild.LastName,'Compare MedicalProf Name in Contact and in WishChildSummary');
     }
     
 }

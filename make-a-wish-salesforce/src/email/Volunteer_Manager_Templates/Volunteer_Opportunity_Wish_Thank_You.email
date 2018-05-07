@@ -1,9 +1,32 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><span style="font-size: 12pt;"><font face="Century Gothic, sans-serif">Hi {!Volunteer_Opportunity__c.Hidden_Volunteer_Contact_Name__c},<br></font></span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;"><br>Thank you for working as a&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255);">{!Volunteer_Opportunity__c.Hidden_Chapter_Role_Name__c}&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">on&nbsp;</span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif; background-color: rgb(255, 255, 255);">{!Volunteer_Opportunity__c.Name__c}</span><span style="font-size: 12pt; font-family: &quot;Century Gothic&quot;, sans-serif;">’s wish. We hope you’ll consider
-signing up for another opportunity in the near future. You may do this by visiting
-the <a href="https://make-a-wish.force.com/communitieslogin">Make-A-Wish Volunteer Center</a> and reviewing “Volunteer Opportunities” to
-find an opportunity that may be of interest to you!<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>Thanks,<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br>{!User.Name}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Volunteer_Opportunity__c.Hidden_Chapter_Name__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Volunteer_Opportunity__c.Hidden_Chapter_Phone__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Volunteer_Opportunity__c.Hidden_Chapter_Email__c}</span></p>]]></td>
+<![CDATA[<table class="MsoNormalTable" border="0" cellspacing="5" cellpadding="0" width="550" style="width:412.5pt;mso-cellspacing:3.7pt;mso-yfti-tbllook:1184;mso-padding-alt:
+ 3.75pt 3.75pt 3.75pt 3.75pt">
+ <tbody><tr style="mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes;
+  height:300.0pt">
+  <td valign="top" style="background:white;padding:3.75pt 3.75pt 3.75pt 3.75pt;
+  height:300.0pt">
+  <p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">Hi
+  {!Volunteer_Opportunity__c.Hidden_Volunteer_Contact_Name__c},<br>
+  </span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><br>
+  <span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">Thank you for working as a
+  &nbsp;{!Volunteer_Opportunity__c.Hidden_Chapter_Role_Name__c}&nbsp;on&nbsp;{!Volunteer_Opportunity__c.Name__c}’s
+  wish. We hope you’ll consider signing up for another opportunity in the near
+  future. You may do this by visiting the&nbsp;<a href="https://make-a-wish.force.com/communitieslogin"><span style="color:
+  blue">Make-A-Wish Volunteer Center</span></a></span>&nbsp;and reviewing
+  “Volunteer Opportunities” to find an opportunity that may be of interest to
+  you!<br>
+  <br>
+  <span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">Thanks,</span><br>
+  <br>
+  <span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">{!User.Name}</span><br>
+  <span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">{!Volunteer_Opportunity__c.Hidden_Chapter_Name__c}</span><br>
+  <span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">{!Volunteer_Opportunity__c.Hidden_Chapter_Phone__c}</span><br>
+  <span style="background-image: initial; background-position: initial; background-size: initial; background-repeat: initial; background-attachment: initial; background-origin: initial; background-clip: initial;">{!Volunteer_Opportunity__c.Hidden_Chapter_Email__c}</span><o:p></o:p></span></p>
+  </td>
+ </tr>
+</tbody></table>]]></td>
 </tr>
 </table>

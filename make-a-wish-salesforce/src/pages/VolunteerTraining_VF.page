@@ -62,7 +62,7 @@
                     </nav> -->
 
                     <apex:form id="frm1" styleClass="col-md-12">
-                        <div class="messages"><apex:pagemessages /></div>
+                        <div class="messages"><apex:pagemessages id="msg"/></div>
 
                         <apex:pageBlock > <!-- title="Available Training Details" -->
                             <apex:outputPanel rendered="{!(isTrainingExist == True)}">
@@ -119,7 +119,7 @@
                                                             </apex:commandLink>
                                                         </td>
                                                         <td>
-                                                            <apex:commandLink action="{!viewLMS}" oncomplete="openLMS('{!ssoURL}','{!courseURL}');" rendered="{!(training.recordtypeId== classOffereningRecordtypeId)}">Start Course
+                                                            <apex:commandLink action="{!viewLMS}" oncomplete="openLMS('{!ssoURL}','{!courseURL}');" rendered="{!(training.recordtypeId== classOffereningRecordtypeId)}" reRender="msg">Start Course
                                                                 <apex:param name="lMSCourseId" value="{!training.courseId}" assignTo="{!lMSCourseId}"/>
                                                             </apex:commandLink>
                                                         </td>

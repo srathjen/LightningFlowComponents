@@ -21,10 +21,6 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
-        <actionName>Follow</actionName>
-        <type>Default</type>
-    </actionOverrides>
-    <actionOverrides>
         <actionName>FreezeUserAction</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -49,6 +45,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>SmsHighlightAction</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>UpdateBannerPhotoAction</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -56,7 +56,16 @@
         <actionName>UserActivationAction</actionName>
         <type>Default</type>
     </actionOverrides>
-    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayoutAssignment>User_layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>User_layout</fullName>
+        <fields>Name</fields>
+        <fields>Title</fields>
+        <fields>Phone</fields>
+        <fields>Email</fields>
+        <fields>CompanyName</fields>
+        <label>User layout</label>
+    </compactLayouts>
     <enableEnhancedLookup>true</enableEnhancedLookup>
     <enableFeeds>true</enableFeeds>
     <externalSharingModel>Private</externalSharingModel>
@@ -99,6 +108,30 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>Address_Latitude__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.Address_Latitude__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Address Latitude</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>5</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Address_Longitude__c</fullName>
+        <externalId>false</externalId>
+        <formula>Contact.Address_Longitude__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Address Longitude</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>5</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Chapter_Name__c</fullName>
         <externalId>false</externalId>
         <formula>Contact.Region_Chapter__r.Name</formula>
@@ -122,32 +155,34 @@
         <description>This is a field that is installed by and used with the Adoption Dashboard AppExchange package. If your org already has a similar field, you can change the reports that are part of the Adoption Dashboard package to use your custom field and then delete this field.</description>
         <externalId>false</externalId>
         <label>DB Region</label>
-        <picklist>
-            <picklistValues>
-                <fullName>NA</fullName>
-                <color>#009900</color>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>EMEA</fullName>
-                <color>#3333FF</color>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>APAC</fullName>
-                <color>#CC6600</color>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>LA</fullName>
-                <color>#990000</color>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>NA</fullName>
+                    <color>#009900</color>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>EMEA</fullName>
+                    <color>#3333FF</color>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>APAC</fullName>
+                    <color>#CC6600</color>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>LA</fullName>
+                    <color>#990000</color>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>From_Mulesoft__c</fullName>
@@ -249,7 +284,7 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <inlineHelpText>Checking this box will allow this user to run DDPs on a staging environment when testing is available.</inlineHelpText>
-        <label>DDP Tester</label>
+        <label>DocGen Next Release Test User</label>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Checkbox</type>
     </fields>
@@ -329,24 +364,26 @@
         <fullName>Volunteer_Orientation_Status__c</fullName>
         <externalId>false</externalId>
         <label>Volunteer Orientation Status</label>
-        <picklist>
-            <picklistValues>
-                <fullName>Registered</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>Cancelled</fullName>
-                <default>false</default>
-            </picklistValues>
-            <picklistValues>
-                <fullName>First Registeration</fullName>
-                <default>false</default>
-            </picklistValues>
-            <sorted>false</sorted>
-        </picklist>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Registered</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>Cancelled</fullName>
+                    <default>false</default>
+                </value>
+                <value>
+                    <fullName>First Registeration</fullName>
+                    <default>false</default>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
     </fields>
     <fields>
         <fullName>Year_of_Inactive__c</fullName>
@@ -492,6 +529,42 @@
             <value>Arizona - Chapter</value>
         </filters>
         <label>Arizona Users</label>
+    </listViews>
+    <listViews>
+        <fullName>National_Staff</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>contains</operation>
+            <value>National Staff</value>
+        </filters>
+        <label>National Staff</label>
+    </listViews>
+    <listViews>
+        <fullName>Program_staff_user</fullName>
+        <columns>FULL_NAME</columns>
+        <columns>CORE.USERS.ALIAS</columns>
+        <columns>CORE.USERS.USERNAME</columns>
+        <columns>CORE.USERS.LAST_LOGIN</columns>
+        <columns>CORE.USER_ROLE.NAME</columns>
+        <columns>CORE.USERS.ACTIVE</columns>
+        <columns>CORE.PROFILE.NAME</columns>
+        <columns>MANAGER</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>CORE.PROFILE.NAME</field>
+            <operation>equals</operation>
+            <value>program staff</value>
+        </filters>
+        <label>Program staff user</label>
     </listViews>
     <listViews>
         <fullName>dsfs__DocuSignActiveUsers</fullName>

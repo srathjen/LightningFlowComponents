@@ -1,7 +1,38 @@
 <table border="0" cellpadding="5" width="550" cellspacing="5" height="400" >
 <tr valign="top" height="400" >
 <td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
-<![CDATA[<p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;"><font face="Century Gothic, sans-serif">{!Volunteer_Opportunity__c.Hidden_Volunteer_FirstName__c}</font><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">,<br></span><span style="color: rgb(0, 0, 0); font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><br></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Thank you for requesting a new volunteer opportunity.&nbsp; You have been approved and this opportunity has been added to your current assignments:<br><br></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Wish Child: {!Volunteer_Opportunity__c.Name__c}<br></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Role: {!Volunteer_Opportunity__c.Hidden_Chapter_Role_Name__c}<br><br></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">Please visit the&nbsp;</span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;"><a href="https://make-a-wish.force.com/communitieslogin">Make-A-Wish
-Volunteer Center</a></span><span style="font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">&nbsp;to view additional details regarding this opportunity. Once logged in, click <b>“My Assignments”</b> and then <b>"View"</b> to access the wish child's information.<br><br></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><font face="Century Gothic, sans-serif">Should you have any questions or need to cancel your request to volunteer, please contact us directly.<br><br></font></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><font face="Century Gothic, sans-serif">{!Volunteer_Opportunity__c.OwnerFullName}</font></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="background-color: white; font-family: &quot;Century Gothic&quot;, sans-serif; font-size: 12pt;">{!Volunteer_Opportunity__c.Hidden_Chapter_Name__c}</span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="background-color: white;"><font face="Century Gothic, sans-serif">{!Volunteer_Opportunity__c.OwnerPhone}</font></span></p><p class="MsoNormal" style="color: rgb(0, 0, 0); font-family: arial; font-size: 12pt; margin-bottom: 0.0001pt; line-height: normal;"><span style="background-color: white;"><font face="Century Gothic, sans-serif">{!Volunteer_Opportunity__c.OwnerEmail}</font></span></p>]]></td>
+<![CDATA[<p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Volunteer_Opportunity__c.Hidden_Volunteer_FirstName__c},<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Thank you for
+requesting a new volunteer opportunity.&nbsp; You have been approved and this
+opportunity has been added to your current assignments:<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Wish Child:
+{!Volunteer_Opportunity__c.Name__c}<br>
+Role: {!Volunteer_Opportunity__c.Hidden_Chapter_Role_Name__c}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Please visit
+the&nbsp;<a href="https://make-a-wish.force.com/communitieslogin"><span style="color:blue">Make-A-Wish Volunteer Center</span></a>&nbsp;to view
+additional details regarding this opportunity. Once logged in, click&nbsp;<b>“My
+Assignments”</b>&nbsp;and then&nbsp;<b>"View"</b>&nbsp;to access the
+wish child's information.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:12.0pt;line-height:normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">Should you have any
+questions or need to cancel your request to volunteer, please contact us
+directly.<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif;">{!Volunteer_Opportunity__c.OwnerFullName}<o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">{!Volunteer_Opportunity__c.Hidden_Chapter_Name__c}</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">{!Volunteer_Opportunity__c.OwnerPhone}</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom:0in;margin-bottom:.0001pt;line-height:
+normal"><span style="font-size: 12pt; font-family: Lato, sans-serif; background: white;">{!Volunteer_Opportunity__c.OwnerEmail}</span><span style="font-size: 12pt; font-family: Lato, sans-serif;"><o:p></o:p></span></p><p class="MsoNormal" style="margin-bottom: 0.0001pt; line-height: normal;">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</p><p class="MsoNormal"><span style="font-family:&quot;Lato&quot;,sans-serif">&nbsp;</span></p>]]></td>
 </tr>
 </table>
