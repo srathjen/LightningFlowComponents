@@ -577,7 +577,7 @@
     </fields>
     <fields>
         <help><!-- Is this a rush wish? --></help>
-        <label><!-- Any Medical Reason For Moving Quickly? --></label>
+        <label><!-- Potential Rush --></label>
         <name>Any_medical_reason_for_moving_quickly__c</name>
     </fields>
     <fields>
@@ -707,11 +707,6 @@
         <name>Child_will_ultimately_die_prematurely__c</name>
     </fields>
     <fields>
-        <help><!-- Medical diagnosis that qualified the child for a wish. --></help>
-        <label><!-- Child&apos;s Qualifying Diagnosis --></label>
-        <name>Childs_Qualifying_Diagnosis__c</name>
-    </fields>
-    <fields>
         <label><!-- Hidden Chronic Heart Failure --></label>
         <name>Chronic_Heart_Failure__c</name>
     </fields>
@@ -795,11 +790,6 @@
         <help><!-- Selected condition related to travel recommendations on the DV --></help>
         <label><!-- Current Condition Label --></label>
         <name>Current_Condition_Label__c</name>
-    </fields>
-    <fields>
-        <help><!-- Condition related to travel restrictions --></help>
-        <label><!-- Travel Restriction --></label>
-        <name>Current_Condition__c</name>
     </fields>
     <fields>
         <label><!-- DB Created Date without Time --></label>
@@ -951,6 +941,10 @@
     <fields>
         <label><!-- Hidden Medical Professional Name --></label>
         <name>Hidden_Medical_Professional_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hidden Potential Rush --></label>
+        <name>Hidden_Potential_Rush__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Proto Pulmonary Hypertension --></label>
@@ -1132,22 +1126,6 @@
         <name>Is_Required_Bypass__c</name>
     </fields>
     <fields>
-        <label><!-- Is We Need To Expedite The Process? --></label>
-        <name>Is_We_Need_To_Expedite_The_Process__c</name>
-        <picklistValues>
-            <masterLabel>No</masterLabel>
-            <translation><!-- No --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Not Sure</masterLabel>
-            <translation><!-- Not Sure --></translation>
-        </picklistValues>
-        <picklistValues>
-            <masterLabel>Yes</masterLabel>
-            <translation><!-- Yes --></translation>
-        </picklistValues>
-    </fields>
-    <fields>
         <label><!-- Is In A Comatose/Vegetative State? --></label>
         <name>Is_in_a_Comatose_Vegetative_State__c</name>
         <picklistValues>
@@ -1166,10 +1144,6 @@
     <fields>
         <label><!-- Hidden Lung Disease --></label>
         <name>Lung_Disease__c</name>
-    </fields>
-    <fields>
-        <label><!-- PR Diagnosis --></label>
-        <name>MAW_Name__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Medical Professional ContactId --></label>
@@ -1314,6 +1288,10 @@
         <label><!-- Primary ICD-10 Code --></label>
         <name>PD_ICD_Code__c</name>
         <relationshipLabel><!-- Leads --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- PR Diagnosis --></label>
+        <name>PR_Diagnosis__c</name>
     </fields>
     <fields>
         <label><!-- Parent First Name --></label>
@@ -1963,6 +1941,10 @@
         <name>Risk_of_complications_premature_death__c</name>
     </fields>
     <fields>
+        <label><!-- Rush --></label>
+        <name>Rush__c</name>
+    </fields>
+    <fields>
         <label><!-- Secondary Diagnosis 1 Cond Description --></label>
         <name>SD1_Condition_Description__c</name>
     </fields>
@@ -2085,6 +2067,11 @@
     <fields>
         <label><!-- Total Referral to Qualified --></label>
         <name>Total_Referral_to_Qualified__c</name>
+    </fields>
+    <fields>
+        <help><!-- Condition related to travel restrictions --></help>
+        <label><!-- Travel Restriction --></label>
+        <name>Travel_Restriction__c</name>
     </fields>
     <fields>
         <label><!-- Hidden Travel algorithm --></label>
@@ -2218,7 +2205,7 @@
         </picklistValues>
     </fields>
     <fields>
-        <label><!-- Why do you feel  would be eligible Wish? --></label>
+        <label><!-- Why Do You Feel Would Be Eligible Wish? --></label>
         <name>Why_do_you_feel_would_be_eligible_Wish__c</name>
     </fields>
     <fields>
@@ -2399,8 +2386,8 @@
             <section>Family Information</section>
         </sections>
         <sections>
-            <label><!-- Important Date --></label>
-            <section>Important Date</section>
+            <label><!-- Important Dates --></label>
+            <section>Important Dates</section>
         </sections>
         <sections>
             <label><!-- Inquiry/Referral --></label>
@@ -2438,8 +2425,8 @@
             <section>Family Information</section>
         </sections>
         <sections>
-            <label><!-- Important Date --></label>
-            <section>Important Date</section>
+            <label><!-- Important Dates --></label>
+            <section>Important Dates</section>
         </sections>
         <sections>
             <label><!-- Inquiry/Referral --></label>
@@ -2469,6 +2456,10 @@
     <validationRules>
         <errorMessage><!-- Please Enter Full Address (City, State, Street and Postal Code) --></errorMessage>
         <name>Lead_Address_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The birthdate entered occurs in the future. Please re-enter the birthdate. --></errorMessage>
+        <name>Lead_BirthDay_Date_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- if users chapter and chapter of lead is not equal then unique wish identifier is required. --></errorMessage>
@@ -2511,6 +2502,14 @@
         <name>Lead_Hospital_or_Treartment_Validation</name>
     </validationRules>
     <validationRules>
+        <errorMessage><!-- The inquiry date entered occurs before the wish child&apos;s date of birth. Please enter a valid inquiry date, or re-enter the wish child&apos;s birthdate. --></errorMessage>
+        <name>Lead_Inquiry_and_Birth_Date_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The inquiry date must occur on or before the referral date. Please enter a valid inquiry date, or re-enter the date of referral. --></errorMessage>
+        <name>Lead_Inquiry_and_Referr_Date_Validation</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- Please Enter Parent First Name --></errorMessage>
         <name>Lead_Parent_FirstName_Validation</name>
     </validationRules>
@@ -2541,6 +2540,14 @@
     <validationRules>
         <errorMessage><!-- Please Enter Phone --></errorMessage>
         <name>Lead_Primary_Phone_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The qualified date cannot occur before the referral date. Please enter a valid qualified date, or re-enter the referral date. --></errorMessage>
+        <name>Lead_Qualified_Date_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The referral date must occur on or after the inquiry date. Please enter a valid referral date, or re-enter the inquiry date. --></errorMessage>
+        <name>Lead_Referral_Date_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Please Enter Referrer City --></errorMessage>

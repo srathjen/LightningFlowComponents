@@ -57,11 +57,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>MAW_Name__c</field>
-            <table>Condition_Description__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Not_Listed__c</field>
             <table>Condition_Description__c</table>
         </columns>

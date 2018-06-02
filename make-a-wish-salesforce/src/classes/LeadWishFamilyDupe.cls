@@ -1,7 +1,7 @@
 /******************************************************
 Modification Log:
 1. 12/04/2018 - Yuvraj - IME-77 Line No: 237
-
+2. 10/05/2018 - Yuvraj - IME-126 Line No: 290
 *******************************************************/
 global class LeadWishFamilyDupe {
     
@@ -13,7 +13,7 @@ global class LeadWishFamilyDupe {
         String Logvalue;
        // try{
         Lead currLead =  [SELECT Id, FirstName,Name,Of_Times_Email_Sent__c,LastName,Parent_Last_Name__c,Parent_First_Name__c, 
-                          Email, DOB__c ,Phone,chapterName__c, 
+                          Email, DOB__c ,Phone,chapterName__c, Using_Paper_Process_For_DV__c, 
                           City, State, Street, PostalCode, Medical_Professional_First_Name__c, Medical_Professional_Last_Name__c,
                           Medical_Professional_Phone__c, Medical_Professional_Email__c, Treating_Medical_Professional_First_Name__c,
                           Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Phone__c, Treating_Medical_Professional_Email__c , 
@@ -228,7 +228,7 @@ global class LeadWishFamilyDupe {
     webservice static String resetDVMedicalSummary(Id leadId) {
         String Logvalue;
         try{
-        List<Lead> leadRec = [SELECT Id,Of_Times_Email_Sent__c, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c, PD_Condition_Description__c, PD_ICD_Code__c, Part_A_Sent__c, Part_A_Received__c, Hidden_DV_form_Medical_professional_Type__c,  Sub_Status__c,Treating_Medical_Professional_Email__c,HiddenMedicalProfessionalEmail__c, Status, Part_A_Form_Password__c FROM Lead WHERE Id =: leadId LIMIT 1];
+        List<Lead> leadRec = [SELECT Id,Of_Times_Email_Sent__c,Qualifying_Diagnosis__c, Qualifying_ICD__c, Hidden_Potential_Rush__c, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c, PD_Condition_Description__c, PD_ICD_Code__c, Part_A_Sent__c, Part_A_Received__c, Hidden_DV_form_Medical_professional_Type__c, PR_Diagnosis__c, Sub_Status__c,Treating_Medical_Professional_Email__c,HiddenMedicalProfessionalEmail__c, Status, Part_A_Form_Password__c FROM Lead WHERE Id =: leadId LIMIT 1];
         Logvalue = String.valueOf(leadRec);
         leadRec[0].Sub_Status__c='Pending Diagnosis Verification';
         if( leadRec[0].Of_Times_Email_Sent__c == Null ) {
@@ -239,10 +239,9 @@ global class LeadWishFamilyDupe {
         leadRec[0].PD_Condition_Description__c = leadRec[0].Diagnosis_Given_By_Referrer__c;
         leadRec[0].Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
         leadRec[0].HiddenMedicalProfessionalEmail__c = leadRec[0].Treating_Medical_Professional_Email__c;
-        
         leadRec[0].Part_A_Form_Password__c = Lead_OnBeforeInsertTriggerHandler.getRandom();
         leadRec[0].Of_Times_Email_Sent__c= leadRec[0].Of_Times_Email_Sent__c + 1; 
-        leadRec[0].MAW_Name__c = '';
+        leadRec[0].PR_Diagnosis__c = '';
         leadRec[0].Part_A_Received__c = null;
         leadRec[0].Part_A_Sent__c = Date.today();
         leadRec[0].I_am_Recognized_To_Practice_As_a__c = '';
@@ -250,7 +249,9 @@ global class LeadWishFamilyDupe {
         leadRec[0].Is_in_a_Comatose_Vegetative_State__c = '';
         //leadRec[0].Communication__c = '';
         leadRec[0].Why_do_you_feel_would_be_eligible_Wish__c = '';
-        leadRec[0].Is_We_Need_To_Expedite_The_Process__c = '';
+        //leadRec[0].Is_We_Need_To_Expedite_The_Process__c = ''; //Commented out for IME-107
+        leadRec[0].Any_medical_reason_for_moving_quickly__c = leadRec[0].Hidden_Potential_Rush__c;
+        leadRec[0].Rush__c = false;
         leadRec[0].Please_Explain__c = '';
         leadRec[0].Will_Child_s_Condition_Deteriorate__c = '';
         leadRec[0].Please_Explain_Deteriorate__c = '';
@@ -258,7 +259,6 @@ global class LeadWishFamilyDupe {
         leadRec[0].Current_Condition_Label__c = '';
         //leadRec[0].Treatment_Subspecialty__c = '';
         leadRec[0].Provided_additional_information__c = '';
-        leadRec[0].Current_Condition__c = '';
         leadRec[0].This_Statement_Describes_My_Patient__c = '';
         leadRec[0].Child_will_ultimately_die_prematurely__c = false;
         leadRec[0].Treatment_may_be_feasible_but_can_fail__c = false;
@@ -288,7 +288,7 @@ global class LeadWishFamilyDupe {
         leadRec[0].Angina__c = '';
         leadRec[0].Ventilator__c = '';
         leadRec[0].lung_disease__c = '';
-        leadRec[0].Current_Condition__c = '';
+        leadRec[0].Travel_Restriction__c = '';
         leadRec[0].Travel_algorithm__c = '';
         leadRec[0].Current_Condition_Label__c = '';
         leadRec[0].isSign__c = false;

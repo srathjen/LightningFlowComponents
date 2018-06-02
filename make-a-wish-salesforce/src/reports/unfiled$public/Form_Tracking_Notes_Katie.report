@@ -18,25 +18,21 @@
     <filter>
         <criteriaItems>
             <column>Case$RecordType</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Case.Diagnosis_Verification_Review</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case$Parent</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Case$Form_Tracking_Notes__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Case$Parent.Owner</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>katie kopach</value>
         </criteriaItems>

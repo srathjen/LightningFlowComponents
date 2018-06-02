@@ -15,7 +15,6 @@
     <filter>
         <criteriaItems>
             <column>CREATED</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Chandrasekar Nallusamy,Kanagaraj Arjunan,Jose Rathi Francis,Sophiya George,Sudharsan Kumaravel,Furqan Maqbool,Vennila Paramasivam,ChennaReddy UmmaReddy,Kesavakumar Murugesan</value>
         </criteriaItems>

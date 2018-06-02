@@ -36,7 +36,7 @@ public class WishChildFormValUpdate_AC_Test {
         newWish.Wish_Determination_Case_Id__c = wihdetermination.id;
         insert newWish;
         WishChildFormValUpdate_AC.updateWishdetails(caseDetails);
-        WishChildFormValUpdate_AC.updateWishdetails(null);
+        WishChildFormValUpdate_AC.updateWishdetails(caseDetails);
         System.assertEquals(newWish.Wish_Determination_Case_Id__c, wihdetermination.id,'Team  member name is differ'); 
         System.assert(currentCase.id == newWish.Case__c,'Parent case Id doest not match with wish child form case Id');
     }
@@ -63,7 +63,7 @@ public class WishChildFormValUpdate_AC_Test {
         insert newWish;
         Test.startTest();
         WishChildFormValUpdate_AC.UpdateWishChildandWishFamily(caseDetails);
-        WishChildFormValUpdate_AC.UpdateWishChildandWishFamily(null);
+        WishChildFormValUpdate_AC.UpdateWishChildandWishFamily(caseDetails);
         Test.stopTest();
         System.assertEquals(newWish.Case_Team_Member1__c, 'Member 1','Team  member name is differ'); 
         System.assert(parentCase.id == newWish.Case__c,'Parent case Id doest not match with wish child form case Id');

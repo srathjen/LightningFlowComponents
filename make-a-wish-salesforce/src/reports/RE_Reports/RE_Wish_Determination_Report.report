@@ -73,13 +73,11 @@
     <filter>
         <criteriaItems>
             <column>Case.Migrated_Record__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish_Determination</value>
         </criteriaItems>

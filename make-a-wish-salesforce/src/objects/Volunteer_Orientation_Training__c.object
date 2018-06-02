@@ -21,6 +21,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -229,28 +233,26 @@
         <description>This field is update as cancel when the volunteer training is canceled.</description>
         <externalId>false</externalId>
         <label>Hidden Volunteer Training Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Volunteer Cancelled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Registered</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Volunteer Cancelled</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Registered</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Completed</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Hidden_Volunteer_User_Name__c</fullName>
@@ -439,24 +441,22 @@ Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:U
         <description>It will capture information about whether it is a orientation or training</description>
         <externalId>false</externalId>
         <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Orientation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Training</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Orientation</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Training</fullName>
-                    <default>false</default>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>VolunteerHidden_Email__c</fullName>
@@ -474,41 +474,38 @@ Class_Offering__r.Owner:User.FirstName +&apos; &apos;+ Class_Offering__r.Owner:U
         <description>It will capture whether the volunteer registered or completed the session</description>
         <externalId>false</externalId>
         <label>Volunteer Attendance</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Registered</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Volunteer Cancelled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Chapter Cancelled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>No Show</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
         <required>false</required>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
-        <valueSet>
-            <restricted>true</restricted>
-            <valueSetDefinition>
-                <sorted>false</sorted>
-                <value>
-                    <fullName>Registered</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Completed</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Volunteer Cancelled</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Chapter Cancelled</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>No Show</fullName>
-                    <default>false</default>
-                </value>
-                <value>
-                    <fullName>Cancelled</fullName>
-                    <default>false</default>
-                    <isActive>false</isActive>
-                </value>
-            </valueSetDefinition>
-        </valueSet>
     </fields>
     <fields>
         <fullName>Volunteer__c</fullName>

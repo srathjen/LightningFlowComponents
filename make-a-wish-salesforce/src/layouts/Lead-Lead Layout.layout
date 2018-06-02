@@ -56,6 +56,10 @@
                 <behavior>Edit</behavior>
                 <field>Qualified_Date__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>Rush__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
@@ -76,10 +80,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Childs_Qualifying_Diagnosis__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Part_A_Form_Password__c</field>
             </layoutItems>
             <layoutItems>
@@ -89,6 +89,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>unique_wish_identifier__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Please_Explain__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -107,7 +111,7 @@
                 <field>Using_Paper_Process_For_DV__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -206,7 +210,7 @@
                 <field>Additional_Parent_Postal_Code__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -269,7 +273,7 @@
                 <field>Other_Medical_Provider_Category__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -317,7 +321,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MAW_Name__c</field>
+                <field>PR_Diagnosis__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -328,7 +332,7 @@
                 <field>ReferralComment__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -385,7 +389,7 @@
                 <field>Best_contact_for_Physician_Email__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -444,13 +448,13 @@
                 <field>Alternate2MedicalProfessionalFax__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
-        <label>Important Date</label>
+        <label>Important Dates</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -479,7 +483,7 @@
                 <field>Pending_Diagnosis_Date__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -521,14 +525,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Is_We_Need_To_Expedite_The_Process__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Please_Explain__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Will_Child_s_Condition_Deteriorate__c</field>
             </layoutItems>
             <layoutItems>
@@ -546,10 +542,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Treatment_Subspecialty__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Current_Condition__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -626,7 +618,7 @@
                 <field>SD4_ICD_Code__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>false</customLabel>
@@ -659,6 +651,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Qualified_Export_Filename__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>RFI_Form_Info_Hidden__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -808,6 +804,16 @@
             <actionName>SendEmail</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>17</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>npe03__NewNote</actionName>
+            <actionType>QuickAction</actionType>
+            <sortOrder>18</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Loop__LOOP</actionName>
+            <actionType>CustomButton</actionType>
+            <sortOrder>19</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <quickActionList>

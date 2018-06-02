@@ -605,7 +605,7 @@ This method is increase the code coverage  when the parent case status is change
         Condition_Description__c newConDes = new Condition_Description__c();
         newConDes.Name = 'Malignant Neoplasm';
         newConDes.Code_To_Use__c = 'C00';
-        newConDes.MAW_Name__c = 'Malignant Neoplasm';
+        newConDes.PR_Diagnosis__c = 'Malignant Neoplasm';
         newConDes.Group1__c = true;
         insert newConDes;
         ICD_Codes__c newIcd = new ICD_Codes__c();
@@ -653,7 +653,7 @@ This method is increase the code coverage  when the Part A case status is change
         Condition_Description__c newConDes = new Condition_Description__c();
         newConDes.Name = 'Malignant Neoplasm';
         newConDes.Code_To_Use__c = 'C00';
-        newConDes.MAW_Name__c = 'Malignant Neoplasm';
+        //newConDes.PR_Diagnosis__c = 'Malignant Neoplasm';
         newConDes.Group1__c = true;
         insert newConDes;
         ICD_Codes__c newIcd = new ICD_Codes__c();
@@ -1132,5 +1132,24 @@ This method is increase the code coverage  when the wish Granted case is created
         System.assertEquals(updateRedaytoInterview.Case_Member_Count__c ,2,'Case_Member_Count__c  field should be 2');
         System.assert(updateParentcase.Sub_Status__c == 'Assign in Portal','Sub status should be Assign in portal');
     }
+    
+    static testMethod void medicalReview(){
+        Constant_AC constant = new Constant_AC(); 
+        Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
+        Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id); 
+        newLead.Child_Age__c = '4';
+        newLead.unique_wish_identifier__c = '059-17-12367';
+        newLead.PD_Condition_Description__c = 'Malignant Neoplasm';
+        newLead.Diagnosis_Given_By_Referrer__c = 'Malignant Neoplasm';
+        insert newLead;
+        
+        Id dvRecordTypeId = Schema.SObjectType.Case.getRecordTypeInfosByName().get(constant.diagnosisRT).getRecordTypeId();       
+        Contact wishChild = OrientationandTrainingUtil.CreateWishChild(); 
+        Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
+        parentCase.RecordTypeId = dvRecordTypeId;
+        parentCase.Lead__c = newLead.Id;
+        parentCase.status = 'DNQ - National Medical Review';
+        update parentCase;        
+      } 
       
 }

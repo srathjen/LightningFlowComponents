@@ -5,6 +5,8 @@ best contact for physicians Then the user must select who have received DV form.
 
 Modification logs:
 1. 12/4/2018 Yuvraj IME-77 Line No: 40,117
+2. 10/5/2018 Vignesh IME 122 
+3. 10/05/2018 Yuvraj IME-126 Line No: 113
 ****************************************************************************************/
 public class LeadSelectMedEmailController_AC{
     public boolean success {get;set;}
@@ -15,7 +17,7 @@ public class LeadSelectMedEmailController_AC{
     public LeadSelectMedEmailController_AC(){
        // try{
         currLead = [SELECT id, Part_A_Form_Password__c,Using_Paper_Process_For_DV__c, Part_A_Sent__c,Best_Contact_for_Physician_Last_Name__c , HiddenMedicalProfessionalEmail__c, Best_Contact_for_Physician_First_Name__C,Best_contact_for_Physician_Email__c,
-                    Treating_Medical_Professional_First_Name__c,Of_Times_Email_Sent__c,Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Email__c, Alternate1MedProfessionalFirstName__c,Alternate1MedProfessionalLastName__c, Alternate1MedProfessionalPhone__c, Alternate1MedicalProfessionalEmail__c, Alternate2MedProfessionalFirstName__c, Alternate2MedProfessionalLastName__c, Alternate2MedProfessionalPhone__c, Alternate2MedProfessionalEmail__c FROM Lead WHERE id =: ApexPages.currentPage().getParameters().get('id') LIMIT 1];
+                    Treating_Medical_Professional_First_Name__c,Of_Times_Email_Sent__c,Treating_Medical_Professional_Last_Name__c,Treating_Medical_Professional_Email__c, Alternate1MedProfessionalFirstName__c,Alternate1MedProfessionalLastName__c, Alternate1MedProfessionalPhone__c, Alternate1MedicalProfessionalEmail__c, Alternate2MedProfessionalFirstName__c, Alternate2MedProfessionalLastName__c, Alternate2MedProfessionalPhone__c, Alternate2MedProfessionalEmail__c, Part_A_Received__c FROM Lead WHERE id =: ApexPages.currentPage().getParameters().get('id') LIMIT 1];
       //  }
         
       /* catch(Exception ex){
@@ -41,6 +43,7 @@ public class LeadSelectMedEmailController_AC{
         if(Apexpages.currentPage().getParameters().get('sendOrRest') == 'Reset') {
             currLead.Part_A_Form_Password__c = Lead_OnBeforeInsertTriggerHandler.getRandom();
             resetDVValues();
+            currLead.Part_A_Received__c = null;
         }
         currLead.Of_Times_Email_Sent__c= currLead.Of_Times_Email_Sent__c + 1; 
         Update currLead;
@@ -59,8 +62,8 @@ public class LeadSelectMedEmailController_AC{
     
     public void resetDVValues() {
         try{
-        List<Lead> leadRec = [SELECT Id,Part_A_Received__c,Part_A_Sent__c, Status, Part_A_Form_Password__c, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c, PD_Condition_Description__c, PD_ICD_Code__c FROM Lead WHERE Id =: currLead.Id LIMIT 1];
-        leadRec[0].MAW_Name__c = '';
+        List<Lead> leadRec = [SELECT Id,Hidden_Potential_Rush__c, Part_A_Received__c,Part_A_Sent__c, Status, Part_A_Form_Password__c, Diagnosis_Given_By_Referrer__c, ICD_Given_By_Referrer__c, PD_Condition_Description__c, PD_ICD_Code__c FROM Lead WHERE Id =: currLead.Id LIMIT 1];
+        leadRec[0].PR_Diagnosis__c = '';
         leadRec[0].PD_ICD_Code__c = leadRec[0].ICD_Given_By_Referrer__c;
         leadRec[0].PD_Condition_Description__c = leadRec[0].Diagnosis_Given_By_Referrer__c;
         
@@ -68,10 +71,12 @@ public class LeadSelectMedEmailController_AC{
         leadRec[0].I_m_Part_of_The_Treating_HealthCare_Team__c = '';
         leadRec[0].Is_in_a_Comatose_Vegetative_State__c = '';
         //leadRec[0].Communication__c = '';
-        leadRec[0].Part_A_Received__c = null;
+        leadRec[0].Part_A_Received__c = Date.today();
         leadRec[0].Part_A_Sent__c = Date.today();
         leadRec[0].Why_do_you_feel_would_be_eligible_Wish__c = '';
-        leadRec[0].Is_We_Need_To_Expedite_The_Process__c = '';
+        //leadRec[0].Is_We_Need_To_Expedite_The_Process__c = '';//commented out for IME-107
+        leadRec[0].Any_medical_reason_for_moving_quickly__c = leadRec[0].Hidden_Potential_Rush__c;//IME-107
+        leadRec[0].Rush__c = false;
         leadRec[0].Please_Explain__c = '';
         leadRec[0].Will_Child_s_Condition_Deteriorate__c = '';
         leadRec[0].Please_Explain_Deteriorate__c = '';
@@ -79,7 +84,6 @@ public class LeadSelectMedEmailController_AC{
         leadRec[0].Current_Condition_Label__c = '';
         //leadRec[0].Treatment_Subspecialty__c = '';
         leadRec[0].Provided_additional_information__c = '';
-        leadRec[0].Current_Condition__c = '';
         leadRec[0].This_Statement_Describes_My_Patient__c = '';
         leadRec[0].Child_will_ultimately_die_prematurely__c = false;
         leadRec[0].Treatment_may_be_feasible_but_can_fail__c = false;
@@ -109,7 +113,7 @@ public class LeadSelectMedEmailController_AC{
         leadRec[0].Angina__c = '';
         leadRec[0].Ventilator__c = '';
         leadRec[0].lung_disease__c = '';
-        leadRec[0].Current_Condition__c = '';
+        leadRec[0].Travel_Restriction__c = ''; 
         leadRec[0].Travel_algorithm__c = '';
         leadRec[0].Current_Condition_Label__c = '';
         leadRec[0].isSign__c = false;

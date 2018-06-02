@@ -43,13 +43,11 @@
     <filter>
         <criteriaItems>
             <column>OWNER</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Katie Kopach</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Form_Tracking_Notes__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>

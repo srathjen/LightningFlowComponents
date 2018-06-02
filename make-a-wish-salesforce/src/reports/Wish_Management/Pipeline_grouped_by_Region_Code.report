@@ -71,31 +71,26 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Budget Approval - Submitted,Budget Approval - Approved,Wish Determined,Wish Design,Wish Scheduled</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>make-a-wish arizona</value>
         </criteriaItems>

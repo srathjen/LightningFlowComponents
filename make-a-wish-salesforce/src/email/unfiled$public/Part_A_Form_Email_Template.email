@@ -13,9 +13,9 @@ EN-IN"></span></p>
 <p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;text-align:
 justify;line-height:normal;vertical-align:baseline"><span style="font-size:
 12.0pt;font-family:&quot;Lato&quot;,sans-serif;mso-fareast-font-family:&quot;Times New Roman&quot;;
-mso-bidi-font-family:&quot;Segoe UI&quot;;mso-fareast-language:EN-IN">Link:&nbsp;<span style="color:blue"><span style="color:blue"><a href="http://wish.force.com/DiagnosisVerification_VF?LeadId={!Lead.Id}">&nbsp;Diagnosis Verification</a></span></span></span><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,sans-serif;mso-fareast-font-family:
+mso-bidi-font-family:&quot;Segoe UI&quot;;mso-fareast-language:EN-IN">Link:&nbsp;<span style="color:blue"><span style="color:blue"><a href="https://fullcopy-wish.cs94.force.com/DiagnosisVerification_VF?LeadId={!Lead.Id}">&nbsp;Diagnosis Verification</a></span></span></span><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,sans-serif;mso-fareast-font-family:
 &quot;Times New Roman&quot;;mso-bidi-font-family:Arial;color:black;mso-fareast-language:
-EN-IN"><a href="http://wish.force.com/DiagnosisVerification_VF?LeadId={!Lead.Id}"> </a><br></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;text-align:
+EN-IN"><a href="https://fullcopy-wish.cs94.force.com/DiagnosisVerification_VF?LeadId={!Lead.Id}"> </a><br></span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;text-align:
 justify;line-height:normal;vertical-align:baseline"><br><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,sans-serif;mso-fareast-font-family:
 &quot;Times New Roman&quot;;mso-bidi-font-family:Arial;color:black;mso-fareast-language:
 EN-IN"></span><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,sans-serif;
@@ -115,8 +115,9 @@ color:black;mso-fareast-language:EN-IN">Dear&nbsp;{!Lead.Hidden_DV_Form_Name__c}
 normal;background:white"><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,sans-serif;
 mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:Arial;
 color:black;mso-fareast-language:EN-IN">Thank you for your recent referral to
-Make-A-Wish<i><sup>®</sup></i>!&nbsp;</span><span style="font-family: Lato, sans-serif; font-size: 12pt;">Additional information is needed for your patient,&nbsp; {!Lead.FirstName}&nbsp;{!Lead.Child_Middle_Initial__c},&nbsp;</span><span style="font-family: Lato, sans-serif; font-size: 12pt;">to determine medical eligibility to receive a wish. Please use the link above
-to complete the&nbsp;</span><b style="font-family: Lato, sans-serif; font-size: 12pt;">Diagnosis Verification Form</b><span style="font-family: Lato, sans-serif; font-size: 12pt;">&nbsp;to ensure we have
+Make-A-Wish<i><sup>®</sup></i>! Additional information is needed for your
+patient,&nbsp;{!Lead.FirstName}&nbsp;{!Lead.Child_Middle_Initial__c},&nbsp;to determine medical eligibility to receive a wish. Please use the link above
+to complete the&nbsp;<b>Diagnosis Verification Form</b>&nbsp;to ensure we have
 sufficient information to make a final determination of eligibility.</span></p><p class="MsoNormal" style="margin-bottom:0cm;margin-bottom:.0001pt;line-height:
 normal;background:white"><br><span style="font-size:12.0pt;font-family:&quot;Lato&quot;,sans-serif;
 mso-fareast-font-family:&quot;Times New Roman&quot;;mso-bidi-font-family:Arial;

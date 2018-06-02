@@ -21,6 +21,11 @@
         <visible>true</visible>
     </applicationVisibilities>
     <applicationVisibilities>
+        <application>standard__AllTabSet</application>
+        <default>false</default>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <applicationVisibilities>
         <application>standard__AppLauncher</application>
         <default>false</default>
         <visible>true</visible>
@@ -80,11 +85,11 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>AbsentForm_AC</apexClass>
+        <apexClass>AbsentParentSingleParentForm_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>AbsentForm_AC_Test</apexClass>
+        <apexClass>AbsentParentSingleParentForm_AC_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -132,15 +137,35 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>AffiliationTriggerHandler_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
         <apexClass>AffiliationTrigger_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>Affiliation_AT_Test</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Affiliation_BeforeUpdateTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Affiliation_OnAfterDeleteTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Affiliation_OnAfterDeleteTriggerHelper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Affiliation_OnAfterUpdateTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Affiliation_OnAfterUpdateTriggerHelper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Affiliation_OnBeforeInsertTriggerHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -172,11 +197,35 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>BackGroundCheckTriggerHandler</apexClass>
+        <apexClass>BackGroundCheck_AT_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>BackGroundCheck_AT_Test</apexClass>
+        <apexClass>BackGroundCheck_OnAfterInsertHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>BackGroundCheck_OnAfterInsertHelper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>BackGroundCheck_OnAfterUpdateHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>BackGroundCheck_OnAfterUpdateHelper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>BackGroundCheck_OnBeforeInsertHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>BackGroundCheck_OnBeforeInsertHelper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>BackGroundCheck_OnBeforeUpdateHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -884,7 +933,15 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>RelationshipTriggerHandler</apexClass>
+        <apexClass>RelationshipOnAfterInsertTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>RelationshipOnAfterInsertTriggerHelper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>RelationshipOnAfterUpdateTriggerHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -929,14 +986,6 @@
     </classAccesses>
     <classAccesses>
         <apexClass>SignNow_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>SingleParent_AC</apexClass>
-        <enabled>true</enabled>
-    </classAccesses>
-    <classAccesses>
-        <apexClass>SingleParent_AC_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -1052,6 +1101,42 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>VolOpportunity_OnAfter_Delete_Handler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VolOpportunity_OnAfter_Delete_Hepler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VolOpportunity_OnAfter_Insert_Handler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VolOpportunity_OnAfter_Insert_Helper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VolOpportunity_OnAfter_Update_Handler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VolOpportunity_OnAfter_Update_Helper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VolOpportunity_OnBefore_Delete_Handler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VolOpportunity_OnBefore_Delete_Helper</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>VolOpportunity_OnBefore_Update_Handler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>VolunteerActiveTraining_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -1116,7 +1201,7 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>VolunteerOpportunityTriggerHandler</apexClass>
+        <apexClass>VolunteerOpportunityTriggerHandler_Test</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -1229,6 +1314,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>WishClearanceSendNow_AC_Test</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>WishExpenseHandler_AC</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -3765,6 +3854,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Case.GKTW_Inkind_Value__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Case.Guardianship_Document__c</field>
         <readable>true</readable>
@@ -5166,12 +5260,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Condition_Description__c.MAW_Name__c</field>
+        <field>Condition_Description__c.Not_Listed__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Condition_Description__c.Not_Listed__c</field>
+        <field>Condition_Description__c.PR_Diagnosis__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -5717,6 +5811,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Hidden_Minor_Participant__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Contact.Hidden_Participant_Under18__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -8806,11 +8905,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Lead.Childs_Qualifying_Diagnosis__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Lead.Chronic_Heart_Failure__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -8867,11 +8961,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Current_Condition_Label__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Lead.Current_Condition__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -9050,6 +9139,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Hidden_Potential_Rush__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Hidden_Proto_Pulmonary_Hypertension__c</field>
         <readable>true</readable>
@@ -9131,11 +9225,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Lead.Is_We_Need_To_Expedite_The_Process__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Lead.Is_in_a_Comatose_Vegetative_State__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -9162,11 +9251,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.Lung_Disease__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Lead.MAW_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -9297,6 +9381,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Lead.PD_ICD_Code__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.PR_Diagnosis__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -9875,6 +9964,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Lead.Rush__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Lead.SD1_Condition_Description__c</field>
         <readable>true</readable>
@@ -9972,6 +10066,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Lead.Total_Referral_to_Qualified__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Lead.Travel_Restriction__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -12355,6 +12454,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Volunteer_Opportunity__c.Case_Owner__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Volunteer_Opportunity__c.Chapter_Name__c</field>
         <readable>true</readable>
@@ -12592,7 +12696,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Volunteer_Opportunity__c.NameLink__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -13978,6 +14082,11 @@
         <editable>true</editable>
         <field>Wish_Expense__c.FE_Posted_In_Kind__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Wish_Expense__c.Hidden_Wish_Expense_Type__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -16208,10 +16317,6 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>cg__S3Config__c</tab>
-        <visibility>Hidden</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
         <tab>dsfs__DocuSignAccountConfiguration__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
@@ -16282,10 +16387,6 @@
     <tabVisibilities>
         <tab>standard-Product2</tab>
         <visibility>DefaultOn</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>standard-Scorecard</tab>
-        <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
         <tab>standard-ScratchOrgInfo</tab>

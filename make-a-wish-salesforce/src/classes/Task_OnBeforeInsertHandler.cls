@@ -79,9 +79,11 @@ then it will assign the values to the corresponding fields in task object.
                            taskRelatedContactIdsSet.add(updatedTask.whatId);
                        }
                        //IME 58
-                       if(updatedTask.Subject == 'Lead ET : New Rush Qualified' || updatedTask.Subject == 'Lead ET : New Rush Referral'){
+                       if(updatedTask.Subject == 'Lead ET : New Rush Qualified' || updatedTask.Subject == 'Lead ET : New Rush Referral' || 
+                          updatedTask.Subject == 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary'){
                            updatedTask.RecordTypeId = DefaultTask;
                        }
+                       
                        if(updatedTask.WhoId != null){
                            contactIdset.add(updatedTask.WhoId);
                            updateTaskList.add(updatedTask);

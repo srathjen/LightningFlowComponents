@@ -12,7 +12,6 @@
     <filter>
         <criteriaItems>
             <column>SUBJECT</column>
-            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Your patient has been referred for a wish!</value>
         </criteriaItems>

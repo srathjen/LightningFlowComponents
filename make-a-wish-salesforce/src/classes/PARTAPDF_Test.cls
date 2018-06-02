@@ -26,7 +26,7 @@ public class PARTAPDF_Test {
         Account chapterAccount = OrientationandTrainingUtil.createVolunteerAccount();
         Lead newLead = OrientationandTrainingUtil.createTestLeadRec(chapterAccount.Id);
        // newLead.PD_ICD_Code__c = 'C00';
-        newLead.Current_Condition__c = 'Test1;Test2;Test3;';
+        //newLead.Current_Condition__c = 'Test1;Test2;Test3;';
         newLead.Current_Condition_Label__c = 'Test1;Test2;Test3;';
         newLead.PD_Condition_Description__c = 'Malignant Melanoma';  
         newLead.unique_wish_identifier__c = '123456';

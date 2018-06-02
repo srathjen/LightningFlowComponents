@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>CUST_NAME</field>
+    </columns>
+    <columns>
+        <field>FK_NAME</field>
+    </columns>
+    <columns>
+        <field>dsfs__DocuSign_Status__c.dsfs__Subject__c</field>
+    </columns>
+    <columns>
+        <field>dsfs__DocuSign_Status__c.Recipient_names__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>dsfs__DocuSign_Status__c.dsfs__Subject__c</column>
+            <operator>contains</operator>
+            <value>Signature Required -</value>
+        </criteriaItems>
+    </filter>
+    <format>Tabular</format>
+    <name>Docusign Status with Recipient Name</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>CustomEntity$dsfs__DocuSign_Status__c@dsfs__DocuSign_Status__c.dsfs__Case__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>dsfs__DocuSign_Status__c.dsfs__Completed_Date_Time__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

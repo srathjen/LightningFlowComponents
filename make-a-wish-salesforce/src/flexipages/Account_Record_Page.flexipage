@@ -30,7 +30,7 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>runtime_sales_activities:activityPanel</componentName>
+            <componentName>sfa:activityPanel</componentName>
         </componentInstances>
         <name>facet-134c80c2-8f0b-4834-a8c5-df4726719292</name>
         <type>Facet</type>

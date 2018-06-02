@@ -35,6 +35,7 @@ It will call the corresponding methods in Case_OnAfterInsertTriggerHandlerHelper
         Map<Id, Case> parentCaseIntakeOwnerMap = new Map<Id, Case>();
         Set<Id> chapterNames = new Set<Id>();
         List<Case> newCaseFileList = new List<Case>();
+        List<Case> potentialRushList = new List<Case>();
         for(Case newWish : newCaseList) {
             if(newWish.RecordTypeId == diagnosisVerificationRT ||newWish.RecordTypeId == wishEffectRecordTypeId || newWish.RecordTypeId == wishDeterminationRecordTypeId || newWish.RecordTypeId == wishPlanningRecordTypeId
                || newWish.RecordTypeId == wishAssistRecordTypeId || newWish.RecordTypeId == parentWishRecordTypeId || newWish.RecordTypeId == wishGrantRecordTypeId){
@@ -102,6 +103,10 @@ It will call the corresponding methods in Case_OnAfterInsertTriggerHandlerHelper
                            parentIdsSet.add(newWish.Id);
                            chapterNames.add(newWish.ChapterName__c);
                        }
+                       //IME-107
+                       if(!newWish.Rush__c){
+                           potentialRushList.add(newWish);
+                       }
                    }
                }
             newCaseFileList.add(newWish);
@@ -124,5 +129,10 @@ It will call the corresponding methods in Case_OnAfterInsertTriggerHandlerHelper
         }*/
         if(newCaseFileList.size() > 0)
             Case_OnAfterInsertTriggerHandlerHelper.createCaseFile(newCaseFileList);
+        
+        //IME-107
+        if(potentialRushList.size() > 0){
+            Case_OnAfterInsertTriggerHandlerHelper.createPotentialRushTask(potentialRushList);
+        }
     } 
 }

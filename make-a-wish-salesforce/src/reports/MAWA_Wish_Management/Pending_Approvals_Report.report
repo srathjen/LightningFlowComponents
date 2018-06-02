@@ -24,7 +24,6 @@
     <filter>
         <criteriaItems>
             <column>ProcessInstance$Status</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>P</value>
         </criteriaItems>

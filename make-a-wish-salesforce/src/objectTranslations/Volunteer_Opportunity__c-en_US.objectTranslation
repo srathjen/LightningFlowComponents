@@ -41,6 +41,10 @@
         </picklistValues>
     </fields>
     <fields>
+        <label><!-- Case Owner --></label>
+        <name>Case_Owner__c</name>
+    </fields>
+    <fields>
         <label><!-- Chapter Name --></label>
         <name>Chapter_Name__c</name>
         <relationshipLabel><!-- Volunteer Opportunities --></relationshipLabel>

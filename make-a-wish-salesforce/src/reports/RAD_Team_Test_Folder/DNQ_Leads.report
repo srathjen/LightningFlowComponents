@@ -22,19 +22,16 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>DNQ</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>

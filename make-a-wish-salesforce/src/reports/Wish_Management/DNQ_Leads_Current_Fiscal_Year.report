@@ -72,32 +72,25 @@
     <columns>
         <field>Lead.Region_Code__c</field>
     </columns>
-    <columns>
-        <field>Lead.Is_We_Need_To_Expedite_The_Process__c</field>
-    </columns>
     <description>DNQ Leads in the Current Fiscal Year</description>
     <filter>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>DNQ</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>LAST_NAME</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>

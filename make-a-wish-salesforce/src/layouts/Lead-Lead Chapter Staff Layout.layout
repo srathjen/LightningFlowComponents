@@ -76,10 +76,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Childs_Qualifying_Diagnosis__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Part_A_Form_Password__c</field>
             </layoutItems>
             <layoutItems>
@@ -89,6 +85,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>unique_wish_identifier__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Please_Explain__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -103,7 +103,7 @@
                 <field>Using_Paper_Process_For_DV__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -202,7 +202,7 @@
                 <field>Additional_Parent_Postal_Code__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -269,7 +269,7 @@
                 <field>Other_Medical_Provider_Category__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -317,7 +317,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MAW_Name__c</field>
+                <field>PR_Diagnosis__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -328,7 +328,7 @@
                 <field>ReferralComment__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -385,7 +385,7 @@
                 <field>Best_contact_for_Physician_Email__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -444,13 +444,13 @@
                 <field>Alternate2MedicalProfessionalFax__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
         <detailHeading>true</detailHeading>
         <editHeading>true</editHeading>
-        <label>Important Date</label>
+        <label>Important Dates</label>
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -507,7 +507,7 @@
                 <field>Total_Referral_to_DNQ__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>true</customLabel>
@@ -549,14 +549,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Is_We_Need_To_Expedite_The_Process__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Please_Explain__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Will_Child_s_Condition_Deteriorate__c</field>
             </layoutItems>
             <layoutItems>
@@ -574,10 +566,6 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Treatment_Subspecialty__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Current_Condition__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
@@ -654,7 +642,7 @@
                 <field>SD4_ICD_Code__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>TwoColumnsLeftToRight</style>
+        <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
         <customLabel>false</customLabel>

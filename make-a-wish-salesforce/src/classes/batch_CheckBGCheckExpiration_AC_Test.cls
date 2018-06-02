@@ -16,7 +16,7 @@ public class batch_CheckBGCheckExpiration_AC_Test {
         Background_check__c createBackCheck = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.id);
         Conflict_Of_Interest__c createCOI = OrientationandTrainingUtil.createCOI(volunteerContact.id);
         createBackCheck.Current__c = true;
-        createBackCheck.Date__c = Date.today();
+        createBackCheck.Date__c = Date.today() - 1;
         update createBackCheck;
         
         Test.startTest();

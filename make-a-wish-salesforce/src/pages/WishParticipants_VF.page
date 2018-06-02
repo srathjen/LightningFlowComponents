@@ -14,10 +14,12 @@
         }   
        table td {width:100px; word-wrap:break-word;align:right; }
      </style>
-    <apex:form >       
+    <apex:form > 
+     <apex:outputPanel rendered="{!If(ParticipantsConList.Size > 0,true,false)}">      
             <table style="width:100%" cellpadding="3%">
+           
                 <tr><td colspan="10" align="right"><b><apex:image value="{!$Resource.HelpText}" width="12" height="12" title="Total number of official wish participants, including the wish child."/>&nbsp;Total Approved Participants:&nbsp;{!totalParticipants}</b></td></tr>
-                <apex:outputPanel rendered="{!ParticipantsConList.Size > 0}">
+                
                 <tr class="border_top">
                     <th>Action</th>
                     <th>First Name</th>
@@ -51,7 +53,8 @@
                         <td><apex:outputField value="{!Participant.Non_Comped__c }"/></td> 
                     </tr>
                 </apex:repeat>
-                </apex:outputPanel>
+                
             </table>    
+            </apex:outputPanel>
     </apex:form>
 </apex:page>

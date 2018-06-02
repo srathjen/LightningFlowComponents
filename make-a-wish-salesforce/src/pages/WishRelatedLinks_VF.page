@@ -7,6 +7,13 @@
             alert('Participant information must be completed and saved on wish forms before completing this form.');
             return false;
         }
+       
+    }
+    function validateFormTracker(){
+     if({!formTrackerVal}){
+            alert('Parent/Legal Guardian or Participant informations should be added in wish form.');
+            return false;
+        }
     }
     </script>
     
@@ -61,6 +68,14 @@
                           <td><apex:outputLink target="_blank" value="{!celebrityForm}">Entertainment and Sports Wish LOU</apex:outputLink></td>
                             <td><apex:outputLink target="_blank" value="{!MergedDocuments}">Merged Documents</apex:outputLink></td>
                         </tr>
+                        <!-- <tr>
+                       <apex:outputPanel rendered="{!formTrackerVal= false}">
+                        <td><apex:outputLink target="_blank" value="{!wishGranting }">Form Tracker Dashboard</apex:outputLink></td>
+                        </apex:outputPanel>
+                        <apex:outputPanel rendered="{!formTrackerVal = true}">
+                         <td><apex:commandLink onclick="validateFormTracker()" value="Form Tracker Dashboard" /></td>
+                        </apex:outputPanel>
+                        </tr> -->
                         
                     </tbody>
                 </table>

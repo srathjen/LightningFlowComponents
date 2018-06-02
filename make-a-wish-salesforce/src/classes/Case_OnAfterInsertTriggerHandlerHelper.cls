@@ -326,4 +326,23 @@ This method is used to update the wish receipt items velues in parent case when 
         }
     } */  
 
+     //IME-107
+    public static void createPotentialRushTask(List<Case> caseList){
+        List<Task> newTaskList = new List<Task>();
+
+        for(Case processCase: caseList){ 
+            System.debug('IME 107 in for loop');
+                Task newRushTask = new Task(Priority = 'Normal',
+                                            Status = 'Not Started',
+                                            Subject = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary', 
+                                            OwnerId =  processCase.OwnerId,
+                                            ActivityDate = System.today()+3,
+                                            SystemGeneratedTask__c = true,
+                                            WhatId = processCase.Id);
+                newTaskList.add(newRushTask);
+        }     
+        if(newTaskList.size() > 0){
+            insert newTaskList;
+        }
+    }
 }

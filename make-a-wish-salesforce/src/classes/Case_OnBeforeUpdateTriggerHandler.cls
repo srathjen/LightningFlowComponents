@@ -44,8 +44,13 @@ Public class Case_OnBeforeUpdateTriggerHandler{
         Profile dbprofile = [SELECT Id, Name FROM Profile WHERE Id=:userinfo.getProfileId() LIMIT 1];        
         List<Account> dbAccountList = [SELECT Id,MAC_Email_del__c,Name,RecordTypeId FROM Account WHERE Name =: 'Make-A-Wish America' AND RecordTypeId =: chapterecordTypeId Limit 1];
         
+        User currUser = [SELECT Id,UserRole.Name FROM User WHERE Id =: UserInfo.getUserId() LIMIT 1];
+        system.debug('currUser.UserRole.Name'+currUser.UserRole.Name);
+        List<Chapter_Vs_Role__c> currUserChapter = [SELECT Chapter_Name__c FROM Chapter_Vs_Role__c WHERE Role_Name__c =: currUser.UserRole.Name LIMIT 1];
+        //system.debug('currUserChapter[0].Chapter_Name__c'+currUserChapter[0].Chapter_Name__c);
+        
         for(Case currentCase : newCaseMap.values())
-        {  
+        {
             if(currentCase.RecordTypeId == parentWishRecordTypeId || currentCase.RecordTypeId == wishDeterminationRecordTypeId  || currentCase.RecordTypeId == wishPlanningRecordTypeId || currentCase.RecordTypeId == wishAssistRecordTypeId || 
                currentCase.RecordTypeId == wishGrantRecordTypeId || currentCase.RecordTypeId == diagnosisVerificationRT )
                 if(currentCase.RecordTypeId == parentWishRecordTypeId){
@@ -97,10 +102,10 @@ Public class Case_OnBeforeUpdateTriggerHandler{
             if(currentCase.RecordTypeId == diagnosisVerificationRT && currentCase.Local_MCA_Team__c != oldCaseMap.get(currentCase.Id).Local_MCA_Team__c) {
                 currentCase.Chapter_MACEmail__c = currentCase.Medical_Advisor_Email__c;
             }
-            /* Removing as per IME 4
+
             if(currentCase.RecordTypeId == diagnosisVerificationRT && currentCase.status == 'Escalated' && oldCaseMap.get(currentCase.Id).Status ==  'Escalated' && currentCase.Case_Comment__c != oldCaseMap.get(currentCase.Id).Case_Comment__c){
                 currentCase.isNationalReply__c = true;
-            }*/
+            }
             if(currentCase.Comments__c != oldCaseMap.get(currentCase.Id).Comments__c && currentCase.RecordTypeId == parentWishRecordTypeId)
                 currentCase.Air_Travel_Details__c = 'This wish does not involve air travel';
             if(currentCase.Comment_1__c != oldCaseMap.get(currentCase.Id).Comment_1__c && currentCase.RecordTypeId == parentWishRecordTypeId)  
@@ -133,21 +138,19 @@ Public class Case_OnBeforeUpdateTriggerHandler{
                 currentCase.Sub_Status__c = Null;
             }
 
-            /* Removing as per IME 4
             if(currentCase.Status == 'Escalated' && currentCase.RecordTypeId == diagnosisVerificationRT && oldCaseMap.get(currentCase.id).Status != 'Escalated'){
                 currentCase.isNational__c = True;
                 currentCase.MAC_Email__c = dbAccountList[0].MAC_Email_del__c;
-            }*/
-            //currentCase.Status == 'DNQ - Chapter Staff' || currentCase.Status == 'DNQ - Chapter Medical Advisor' || - Removing as per IME 4
-            if((currentCase.Status == 'DNQ - National Medical Review' || currentCase.Status == 'DNQ - National MAC Review') && currentCase.RecordTypeId == diagnosisVerificationRT)
+            }                                      
+            if((currentCase.Status == 'DNQ - National Staff' || currentCase.Status == 'DNQ - National Medical Council' || currentCase.Status == 'DNQ - Chapter Staff' || currentCase.Status == 'DNQ - Chapter Medical Advisor') && currentCase.RecordTypeId == diagnosisVerificationRT)
             {
                 currentCase.DNQ_Date__c = Date.Today();
             }
             if((currentCase.Status == 'Completed') && (oldCaseMap.get(currentCase.id).Status != 'Completed') && currentCase.RecordTypeId == parentWishRecordTypeId ){
                 budgetCaseList.add(currentCase);
             }
-            if(currentCase.RecordTypeId == parentWishRecordTypeId && currentCase.Status != oldCaseMap.get(currentCase.Id).Status && (((currentCase.Status == 'Granted') && (oldCaseMap.get(currentCase.id).Status == 'Wish Scheduled')) || ((currentCase.Status == 'Completed') && (oldCaseMap.get(currentCase.id).Status != 'Completed')) ||
-                                                                                                                                     (currentCase.Status == 'DNQ' || currentCase.Status == 'Closed'))){
+            if(currentCase.RecordTypeId == parentWishRecordTypeId && currentCase.Status != oldCaseMap.get(currentCase.Id).Status && (((currentCase.Status == 'Granted') && (oldCaseMap.get(currentCase.id).Status == 'Wish Scheduled')) || ((currentCase.Status == 'Completed') && (oldCaseMap.get(currentCase.id).Status != 'Completed')) /* ||
+                                                                                                                                     ( currentCase.Status == 'DNQ'  || currentCase.Status == 'Closed' ) */)){
                                                                                                                                          receiveDateCaseList.add(currentCase);
                                                                                                                                      }
             if((currentCase.Status == 'DNQ' || currentCase.Status == 'Completed' || currentCase.Status == 'Closed') && currentCase.RecordTypeId == parentWishRecordTypeId ){
@@ -202,7 +205,11 @@ Public class Case_OnBeforeUpdateTriggerHandler{
                 currentCase.Closed_Date__c = Date.Today();
             
             if(currentCase.Update_Wish_Child_Form_Info__c == True && oldCaseMap.get(currentCase.id).Update_Wish_Child_Form_Info__c != True && currentCase.RecordTypeId == parentWishRecordTypeId){
-                wishChildInfoMap.put(currentCase.id,currentCase);
+              //   If(currUserChapter[0].Chapter_Name__c != currentCase.Hidden_Chapter_Name__c){
+                         //  currentCase.addError('You don\'t have access to approve this record.Please contact your Administrator');
+              // }
+              // else
+                    wishChildInfoMap.put(currentCase.id,currentCase);
             }
             if(currentCase.contactId != Null && currentCase.birthdate__c == Null && currentCase.RecordTypeId == parentWishRecordTypeId){
                 contactIds.add(currentCase.contactId); 

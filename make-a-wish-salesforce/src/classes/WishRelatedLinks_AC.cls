@@ -62,15 +62,15 @@ public class WishRelatedLinks_AC {
     public String WG_StepThree_30days_Spanish{get;set;}
     public String WG_StepTwo_60days{get;set;}
     public String WG_StepTwo_60days_Spanish{get;set;}
-    
+    Public String wishGranting{get;set;}
     public String rushWishLetter{get;set;}
     public String rushWishLetterDDP{get;set;}
     public String familyHoldMessage{get;set;}
     public String familyHoldMessageDDP{get;set;}
     public String salesforceWishAssistFormMessage{get;set;}
     public String salesforceWishAssistFormDDP{get;set;}
-    PUBLIC String absentandsingleForm{get;set;}
-   
+    public String absentandsingleForm{get;set;}
+    public boolean formTrackerVal{get;set;}
     list<User> userDetailList;
     
     public WishRelatedLinks_AC(ApexPages.StandardController controller) {
@@ -120,16 +120,21 @@ public class WishRelatedLinks_AC {
         
         userDetailList = [SELECT Id , Name, contactId,contact.MobilePhone,contact.Name FROM USER WHERE Id IN: teamMemberSet];
         List<ProcessInstance> approvalIns =  [SELECT TargetObjectId,Status,ProcessDefinitionId,ProcessDefinition.Name FROM ProcessInstance WHERE TargetObjectId =: currentCaseRec.Id AND Status =: 'Pending' AND ProcessDefinition.Name =: 'Wish Child Form Approval Process']; 
-        List<Wish_Child_Form__c> childFormList = [SELECT Id,IsWishFamily__c,IsParticipant__c FROM Wish_Child_Form__c WHERE Case__c =: currentCaseRec.Id];
+        List<Wish_Child_Form__c> childFormList = [SELECT Id,IsWishFamily__c,IsParticipant__c,Participant_Contacts__c,Wish_Family_Contact__c FROM Wish_Child_Form__c WHERE Case__c =: currentCaseRec.Id];
         if(childFormList.size() == 0){
             showPopup = true;
+            formTrackerVal = true;
         }
         if(childFormList.size() > 0){
             if(childFormList[0].IsWishFamily__c  == true){
                 showPopup = true;
+            }
+            if(childFormList[0].Wish_Family_Contact__c == Null && childFormList[0].Participant_Contacts__c == Null){
+                formTrackerVal = true;
             } 
          }
         if(currentCaseRec.RecordTypeId == parentWishRecordTypeId ){
+            wishGranting = '/apex/WishGranting_VF?id='+currentCaseRec.Id;
             WishFamilyForm = '/apex/WishChildForm_VF?id='+currentCaseRec.Id;
             contactInfo = '/apex/RelationshipsViewer_VF?recId='+currentCaseRec.Id;
             LiabilityFrom = '/apex/LiabilityForms_VF?id='+currentCaseRec.Id;
@@ -270,12 +275,12 @@ public class WishRelatedLinks_AC {
                 }
                 updatelist.add(wcc.rel);
                 system.debug('@@ updatelist @@'+updatelist);
-                if(wishChildCon[0].Recipient_Email__c == null && wishChildCon[0].First_Recipient_Name__c == null && wcc.rel.Relationship_Type__c ==  'Parent/Legal Guardian') {
+                if(wishChildCon[0].Recipient_Email__c == null && wishChildCon[0].First_Recipient_Name__c == null && wcc.rel.Relationship_Type__c != Null && wcc.rel.Relationship_Type__c != 'Wish Child') {
                     wishChildCon[0].Recipient_Email__c = wcc.rel.Email;
                     wishChildCon[0].First_Recipient_Name__c = wcc.rel.Name;
                     
                 } 
-                if (wcc.rel.Relationship_Type__c ==  'Parent/Legal Guardian' && wishChildCon[0].Second_Recipient_Email__c == null && wishChildCon[0].Second_Recipient_Name__c == null && (( wishChildCon[0].Recipient_Email__c != wcc.rel.Email) || (wishChildCon[0].First_Recipient_Name__c != wcc.rel.Name))) {
+                if (wcc.rel.Relationship_Type__c != Null && wcc.rel.Relationship_Type__c != 'Wish Child'  && wishChildCon[0].Second_Recipient_Email__c == null && wishChildCon[0].Second_Recipient_Name__c == null && (( wishChildCon[0].Recipient_Email__c != wcc.rel.Email) || (wishChildCon[0].First_Recipient_Name__c != wcc.rel.Name))) {
                     wishChildCon[0].Second_Recipient_Email__c = wcc.rel.Email;
                     wishChildCon[0].Second_Recipient_Name__c = wcc.rel.Name;
                     

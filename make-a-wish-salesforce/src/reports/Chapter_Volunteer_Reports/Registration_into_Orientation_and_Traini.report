@@ -34,7 +34,6 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Class_Offering__c.Chapter__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>

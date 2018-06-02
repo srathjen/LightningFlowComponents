@@ -27,7 +27,6 @@
     <filter>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>

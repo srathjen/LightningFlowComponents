@@ -25,31 +25,22 @@
     <enableNicknameDisplay>false</enableNicknameDisplay>
     <enablePrivateMessages>false</enablePrivateMessages>
     <enableReputation>false</enableReputation>
-    <enableSiteAsContainer>false</enableSiteAsContainer>
     <forgotPasswordTemplate>Automated_Volunteer_Templates/Communities_Volunteer_Forgot_Password_Email_Template</forgotPasswordTemplate>
-    <navigationLinkSet>
-        <navigationMenuItem>
-            <label>Topics</label>
-            <position>1</position>
-            <publiclyAvailable>true</publiclyAvailable>
-            <target>ShowMoreTopics</target>
-            <type>NavigationalTopic</type>
-        </navigationMenuItem>
-    </navigationLinkSet>
     <networkMemberGroups>
+        <permissionSet>AZ_Intake_Manager</permissionSet>
         <profile>Admin</profile>
         <profile>Active Volunteer %28Member%29</profile>
         <profile>Prospective Volunteer %28Member%29</profile>
         <profile>Active Volunteer %28Login%29</profile>
         <profile>Prospective Volunteer %28Login%29</profile>
         <profile>Volunteer Staff</profile>
-        <profile>Chapter Dev%2FFin Staff</profile>
         <profile>Customer Community Plus Login User</profile>
-        <profile>Office Staff</profile>
         <profile>Program Staff</profile>
         <profile>Customer Community Plus User</profile>
         <profile>Read Only National Staff</profile>
         <profile>Full Access National Staff</profile>
+        <profile>Office Staff</profile>
+        <profile>Chapter Dev%2FFin Staff</profile>
     </networkMemberGroups>
     <picassoSite>Wish_Volunteer_Community_C</picassoSite>
     <selfRegProfile>prospective volunteer (login)</selfRegProfile>

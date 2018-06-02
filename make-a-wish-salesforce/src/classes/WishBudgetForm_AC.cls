@@ -59,7 +59,7 @@ public class WishBudgetForm_AC{
         caseApproverStatus = '';
         disableTcode = true;
         pageBlockMode ='detail';
-        NoOfWishParts = 1;
+        NoOfWishParts = 0;
         caseId = ApexPages.currentPage().getParameters().get('CaseId');
         WEtypeExpand=ApexPages.currentPage().getParameters().get('exp');
         System.debug('The parameter value is++++++++++'+caseId );
@@ -104,9 +104,15 @@ public class WishBudgetForm_AC{
              
             if(participentSet.size() > 0){
                //commented for WVC-1892
-                NoOfWishParts += participentSet.size();
+                NoOfWishParts = participentSet.size();
                //NoOfWishParts = participentSet.size();
+                                                      
             }
+            List<Wish_Child_Form__c> wishChild = [SELECT Id,Hidden_Same_as_Family__c FROM Wish_Child_Form__c WHERE Case__c =: caseList[0].Id LIMIT 1];
+         
+             If((wishChild.Size() > 0 && wishChild[0].Hidden_Same_as_Family__c == True)|| (wishChild.Size() == 0)){
+                 NoOfWishParts +=1;
+             }   
          
       }    
       
@@ -839,6 +845,7 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
                                                         OriginalActor.Name , ProcessNode.Name FROM StepsAndWorkitems order by CreatedDate DESC, StepStatus) 
                                             FROM ProcessInstance where TargetObjectId =:objectId order by CreatedDate desc LIMIT 50000 ]);
     }
+    
     public class ApprovalStepWrapper{
         public String workItemApproveOrRejectLink {get;set;}
         public String workItemReassignLink {get;set;}
@@ -904,9 +911,8 @@ them we will make all fields as Read Only except T-Code and Projected fields.*/
     
      public void closePopup() {        
         displayPopup = false;    
-    }
+    }    
     public PageReference closePopup1() {        
         return new PageReference('javascript:window.close()');    
     }
-             
-}
+ }

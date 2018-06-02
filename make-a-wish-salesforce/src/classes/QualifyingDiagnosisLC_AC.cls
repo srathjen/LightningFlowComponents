@@ -47,12 +47,12 @@ Get the neccessary lead information for further process of sending diagnosis ver
                      SD4_ICD_Code__r.Id,
                      Qualifying_Diagnosis__c,
                      Qualifying_ICD__c,
-                     MAW_Name__c
+                     PR_Diagnosis__c
                      FROM Lead WHERE Id = :leadId LIMIT 1];
         
         data.Qualifying_Diagnosis__c = Qualifying_Diagnosis;
         data.Qualifying_ICD__c= Qualifying_ICD;
-        data.MAW_Name__c = mawName;
+        data.PR_Diagnosis__c = mawName;
         System.debug('Result Data = ' + data);
         update data;
         result = 'UPDATED';
@@ -73,10 +73,10 @@ Get the neccessary condition description information for further process
 ***********************************************************************************************/
     @AuraEnabled
     public static String getConditionDescInfo(String qc_Diagnosis){
-            String mawName;
-            List<Condition_Description__c> descriptionList = [SELECT Id, Maw_Name__c
+        	String mawName;
+        	List<Condition_Description__c> descriptionList = [SELECT Id, PR_Diagnosis__c
                                                                           FROM Condition_Description__c WHERE Name = :qc_Diagnosis limit 1];
-           mawName = (descriptionList.size() > 0) ? descriptionList[0].MAW_Name__c : '';
+            mawName = (descriptionList.size() > 0) ? descriptionList[0].PR_Diagnosis__c : '';
            //System.debug('mawName = ' + mawName);
            return mawName;
           

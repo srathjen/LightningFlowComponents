@@ -626,6 +626,10 @@
         <name>Hidden_Minor_Participant__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Participant Under18 --></label>
+        <name>Hidden_Participant_Under18__c</name>
+    </fields>
+    <fields>
         <label><!-- Hidden Phone --></label>
         <name>Hidden_Phone__c</name>
     </fields>
@@ -4050,7 +4054,7 @@ provide contact information for each site on which you are active. --></help>
         <name>Contact_Account_Lookup_Validation</name>
     </validationRules>
     <validationRules>
-        <errorMessage><!-- Birthdate should not be greater than today --></errorMessage>
+        <errorMessage><!-- The birthdate entered occurs in the future. Please re-enter the birthdate. --></errorMessage>
         <name>Contact_Birthdate_Validation</name>
     </validationRules>
     <validationRules>
@@ -4112,6 +4116,10 @@ provide contact information for each site on which you are active. --></help>
     <webLinks>
         <label><!-- Merge_Contacts --></label>
         <name>npsp__Merge_Contacts</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Recalculate_Rollups --></label>
+        <name>npsp__Recalculate_Rollups</name>
     </webLinks>
     <workflowTasks>
         <name>Contact_ET_Application_Approved</name>

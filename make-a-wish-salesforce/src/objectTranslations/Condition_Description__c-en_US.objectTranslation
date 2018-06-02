@@ -17,13 +17,13 @@
         <name>Group1__c</name>
     </fields>
     <fields>
-        <label><!-- MAW Name --></label>
-        <name>MAW_Name__c</name>
-    </fields>
-    <fields>
         <help><!-- This would appear when the smart search does not match with the condition description. --></help>
         <label><!-- Not Listed --></label>
         <name>Not_Listed__c</name>
+    </fields>
+    <fields>
+        <label><!-- PR Diagnosis --></label>
+        <name>PR_Diagnosis__c</name>
     </fields>
     <fields>
         <label><!-- Treatment Subspecialty --></label>

@@ -48,10 +48,11 @@ trigger CaseFile_AT on cg__CaseFile__c (before insert,after insert) {
         Set<Id> caseIdsSet = new Set<Id>();
         Set<Id> ParentIdsSet = new Set<Id>();
         List<cg__CaseFile__c> caseFileList = new List<cg__CaseFile__c>();
-        
+        Map<Id,String> caseFileMap = new Map<Id,String>();
         
         for(cg__CaseFile__c cf: Trigger.new){
             CaseIds.add(cf.Id);
+             caseFileMap.put(cf.Id,String.valueOf(cf));
             if(cf.cg__Content_Type__c.contains('image') || cf.cg__Content_Type__c.contains('video')){
                 caseIdsSet.add(cf.cg__Case__c);
                 caseFileList.add(cf);
@@ -60,11 +61,11 @@ trigger CaseFile_AT on cg__CaseFile__c (before insert,after insert) {
         }
         
         if(CaseIds.size() > 0) {
-            AWSFilePath_AC.UpdateCaseFilePath(CaseIds);
+            AWSFilePath_AC.UpdateCaseFilePath(CaseIds,caseFileMap);
         }
         if(caseFileList.size() > 0) {
             String jsontaskListString = json.serialize(caseFileList);
-            AWSFilePath_AC.createAttachmentReviewTask(jsontaskListString, caseIdsSet);
+            AWSFilePath_AC.createAttachmentReviewTask(jsontaskListString, caseIdsSet,caseFileMap);
         }
     }
 }

@@ -78,7 +78,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                         </apex:outputpanel>
                                                         <apex:outputpanel rendered="{!fieldValue.label  == 'In Progress' }">
                                                             <td><!-- {!if(con1.wishOpportunities[fieldValue],"True","False")} -->
-                                                                <p style="display:none">
+                                                                  <p style="display:none">
                                                                     {!con1.wishOpportunities[fieldValue]}
                                                                 </p>
                                                                 <input type="checkbox" disabled="true" data-checkBoxVal="{!con1.wishOpportunities[fieldValue]}" class="inp-wish" readonly="true"/>
@@ -147,7 +147,7 @@ Description : This page is used to display the volunteer opportunity recordes wh
                                                         </apex:outputpanel>
                                                         <apex:outputpanel rendered="{!fieldValue.label  == 'In Progress' }">
                                                             <td><!-- {!if(con1.wishOpportunities[fieldValue],"True","False")} -->
-                                                                <p style="display:none">
+                                                                  <p style="display:none">
                                                                     {!con1.wishOpportunities[fieldValue]}
                                                                 </p>
                                                                 <input type="checkbox" disabled="true" data-checkBoxVal="{!con1.wishOpportunities[fieldValue]}" class="inp-wish" readonly="true"/>
@@ -251,11 +251,17 @@ Description : This page is used to display the volunteer opportunity recordes wh
 
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/jquery.dataTables.min.js')}"></script>
         <script src="{!URLFOR($Resource.prospective_assets, 'web/js/stacktable.min.js')}"></script>
-
+        
+        <!-- Date sorting Start -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"/>
+        <script src="https:////cdn.datatables.net/plug-ins/1.10.16/sorting/datetime-moment.js"/>
+        <!-- Date sorting End-->
         <script>
          $j = jQuery.noConflict();
         jQuery(document ).ready(function($) {
-   
+            
+            $.fn.dataTable.moment( 'MM/DD/YYYY' ); // Date sorting
+            
             $('head').prepend('<title>Volunteer Opportunities - Communities | Make-A-Wish\u00AE America</title>');
 
             $('#dataTab1,#dataTab2').DataTable({

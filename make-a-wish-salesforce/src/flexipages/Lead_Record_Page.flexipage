@@ -34,7 +34,7 @@
     </flexiPageRegions>
     <flexiPageRegions>
         <componentInstances>
-            <componentName>runtime_sales_activities:activityPanel</componentName>
+            <componentName>sfa:activityPanel</componentName>
         </componentInstances>
         <mode>Replace</mode>
         <name>activityTabContent</name>

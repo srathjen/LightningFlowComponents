@@ -15,6 +15,12 @@
             <field>CONTACT_RECORDTYPE</field>
         </columns>
         <columns>
+            <field>FIRST_NAME</field>
+        </columns>
+        <columns>
+            <field>LAST_NAME</field>
+        </columns>
+        <columns>
             <field>CONTACT_CREATED</field>
         </columns>
         <columns>
@@ -23,9 +29,8 @@
         <filter>
             <criteriaItems>
                 <column>CONTACT_CREATED</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
-                <value>Chandrasekar Nallusamy,Kanagaraj Arjunan,Jose Rathi Francis,Sophiya George,Sudharsan Kumaravel,Furqan Maqbool,Vennila Paramasivam,ChennaReddy UmmaReddy,Kesavakumar Murugesan</value>
+                <value>Chandrasekar Nallusamy,Kanagaraj Arjunan,Jose Rathi Francis,Sophiya George,Sudharsan Kumaravel,Furqan Maqbool,Vennila Paramasivam,ChennaReddy UmmaReddy,Kesavakumar Murugesan,Vinodhini Balraj</value>
             </criteriaItems>
         </filter>
         <format>Summary</format>
@@ -67,13 +72,11 @@
         <filter>
             <criteriaItems>
                 <column>Contact.Region_Chapter__c</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
-                <value>Make-A-Wish Alabama</value>
+                <value>Make-A-Wish Alabama,Test Chapter</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Contact.Test_Record__c</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>

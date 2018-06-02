@@ -55,7 +55,7 @@ global Class WishReferralForm_AC
          currLead.Country = 'United States';
          /* currLead.ICD_10_Code__c = diagnosisFilter;
 currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
-         List<ICD_Codes__c> icdCodeInfoList = [SELECT Id, Long_Description__c, Condition_Description__r.MAW_Name__c,Group1__c,
+         List<ICD_Codes__c> icdCodeInfoList = [SELECT Id, Long_Description__c, Condition_Description__r.PR_Diagnosis__c,Group1__c,
                                                Condition_Description__c, Condition_Description__r.Code_to_Use__c
                                                FROM ICD_Codes__c WHERE Name =: diagnosisFilter LIMIT 1];
          if(icdCodeInfoList.size() > 0) {
@@ -86,9 +86,11 @@ currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
          if(currLead.Any_medical_reason_for_moving_quickly__c == 'Yes')
          {
              currLead.Any_medical_reason_for_moving_quickly__c = '<font color="Red">'+currLead.Any_medical_reason_for_moving_quickly__c +'</font>';
-             
+             currLead.Rush__c = true;
          }
-         
+         if(currLead.Any_medical_reason_for_moving_quickly__c != null){
+             currLead.Hidden_Potential_Rush__c = currLead.Any_medical_reason_for_moving_quickly__c;
+         }
          if(currLead.Has_this_child_ever_received_prior_wish__c == 'Yes')
          {
              currLead.Has_this_child_ever_received_prior_wish__c = '<font color="Red">'+currLead.Has_this_child_ever_received_prior_wish__c+'</font>';
@@ -123,7 +125,7 @@ currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
              {
                  if(icdCodeInfoList.size() > 0)
                  {
-                    //Removed Childs_Qualifying_Diagnosis__c as per IME-120
+                     //Removed as per IME-120
                      //currLead.Childs_Qualifying_Diagnosis__c = icdCodeInfoList[0].Condition_Description__r.Code_to_Use__c;
                      
                  }                           
@@ -131,13 +133,13 @@ currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
              
              if(currLead.PD_Condition_Description__c != Null)
              {
-                 List<Condition_Description__c> descriptionList = [SELECT Id, Maw_Name__c
+                 List<Condition_Description__c> descriptionList = [SELECT Id, PR_Diagnosis__c
                                                                    FROM Condition_Description__c WHERE Name = :currLead.PD_Condition_Description__c limit 1];
                  
                  if(descriptionList.size() > 0)
                  {
-                     //commented as per IME-120
-                     //currLead.MAW_Name__c = descriptionList[0].MAW_Name__c;
+                      //commented as per IME-120
+                     //currLead.PR_Diagnosis__c = descriptionList[0].PR_Diagnosis__c;
                  }                           
              }
              
@@ -317,7 +319,7 @@ currLead.Primary_Diagnosis__c = selectedDiagnosis;*/
                  LstLog.add('Relationship to child: '+currLead.Relationship_to_child__c);
                  LstLog.add('Siblings count: '+currLead.of_Siblings__c);
                  LstLog.add('Siblings Detail: '+currLead.Sibling_Detail__c);
-                 LstLog.add('Condition Description: '+currLead.MAW_Name__c);
+                 LstLog.add('Condition Description: '+currLead.PR_Diagnosis__c);
                  LstLog.add('Chapter Name: '+currLead.ChapterName__c);
                  LstLog.add('Lead Status: '+currLead.Status);
                  LstLog.add('MedProf FirstName: '+currLead.Medical_Professional_First_Name__c);

@@ -18,7 +18,6 @@
     <filter>
         <criteriaItems>
             <column>Contact.npe01__WorkPhone__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>

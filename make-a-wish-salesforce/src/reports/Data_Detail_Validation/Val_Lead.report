@@ -37,9 +37,6 @@
         <field>Lead.Sub_Status__c</field>
     </columns>
     <columns>
-        <field>Lead.Childs_Qualifying_Diagnosis__c</field>
-    </columns>
-    <columns>
         <field>Lead.Migrated_Record__c</field>
     </columns>
     <columns>
@@ -118,9 +115,6 @@
         <field>Lead.PD_Condition_Description__c</field>
     </columns>
     <columns>
-        <field>Lead.MAW_Name__c</field>
-    </columns>
-    <columns>
         <field>Lead.Treating_Medical_Professional_First_Name__c</field>
     </columns>
     <columns>
@@ -175,9 +169,6 @@
         <field>Lead.Why_do_you_feel_would_be_eligible_Wish__c</field>
     </columns>
     <columns>
-        <field>Lead.Is_We_Need_To_Expedite_The_Process__c</field>
-    </columns>
-    <columns>
         <field>Lead.Please_Explain__c</field>
     </columns>
     <columns>
@@ -194,9 +185,6 @@
     </columns>
     <columns>
         <field>Lead.Treatment_Subspecialty__c</field>
-    </columns>
-    <columns>
-        <field>Lead.Current_Condition__c</field>
     </columns>
     <columns>
         <field>Lead.This_Statement_Describes_My_Patient__c</field>
@@ -244,7 +232,6 @@
     <filter>
         <criteriaItems>
             <column>Lead.Migrated_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

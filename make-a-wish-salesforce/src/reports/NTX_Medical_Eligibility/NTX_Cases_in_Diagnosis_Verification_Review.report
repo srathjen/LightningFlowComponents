@@ -51,13 +51,11 @@
     <filter>
         <criteriaItems>
             <column>Lead.Cases__r$RecordType</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Diagnosis_Verification_Review</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish North Texas</value>
         </criteriaItems>

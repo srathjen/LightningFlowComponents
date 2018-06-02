@@ -158,7 +158,7 @@ public class WishReferralForm_AC_Test {
         controller.currLead.Phone= '8220708920';
         controller.currLead.What_is_the_family_s_primary_spoken_lang__c= 'English';
         controller.diagnosisFilter= 'C00';
-        List<ICD_Codes__c> icdCodeInfoList = [SELECT Id, Long_Description__c, Condition_Description__r.MAW_Name__c,Group1__c,Condition_Description__c, Condition_Description__r.Code_to_Use__c FROM ICD_Codes__c WHERE Name =: controller.diagnosisFilter LIMIT 1];
+        List<ICD_Codes__c> icdCodeInfoList = [SELECT Id, Long_Description__c, Condition_Description__r.PR_Diagnosis__c, Group1__c,Condition_Description__c, Condition_Description__r.Code_to_Use__c FROM ICD_Codes__c WHERE Name =: controller.diagnosisFilter LIMIT 1];
         controller.selectedDiagnosis= 'Malignant Neoplasm';
         controller.currLead.Hospital_Treatment_Facility_Treating__c= 'Malignant Neoplasm';
         controller.currLead.Treating_Medical_Professional_First_Name__c = 'Treaing 1';

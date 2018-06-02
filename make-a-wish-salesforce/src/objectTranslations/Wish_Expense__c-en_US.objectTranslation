@@ -118,6 +118,10 @@
         <name>FE_Posted_In_Kind__c</name>
     </fields>
     <fields>
+        <label><!-- Hidden Wish Expense Type --></label>
+        <name>Hidden_Wish_Expense_Type__c</name>
+    </fields>
+    <fields>
         <label><!-- Import ID --></label>
         <name>Import_ID__c</name>
     </fields>

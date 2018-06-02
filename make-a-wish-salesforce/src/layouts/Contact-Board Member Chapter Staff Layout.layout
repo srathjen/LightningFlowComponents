@@ -522,10 +522,12 @@
         <fields>NAME</fields>
         <fields>Chapter_Role_Opportunity__c</fields>
         <fields>Role__c</fields>
-        <fields>Name__c</fields>
+        <fields>NameLink__c</fields>
         <fields>Reason_Inactive__c</fields>
         <fields>Status__c</fields>
         <fields>Chapter_Name__c</fields>
+        <fields>Wish_Status__c</fields>
+        <fields>Wish_End_Date__c</fields>
         <relatedList>Volunteer_Opportunity__c.Volunteer_Name__c</relatedList>
     </relatedLists>
     <relatedLists>

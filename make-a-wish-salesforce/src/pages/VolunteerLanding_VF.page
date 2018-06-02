@@ -58,28 +58,32 @@ Description : This page is used to display the welcome message, open events , ch
                                     <div class="col-xs-12 col-sm-12 col-md-12">
                                         <h1>Welcome {!$User.FirstName} {!$User.LastName},</h1>
                                         <apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Welcome_Message__c}" escape="false" id="welMessage"/>
-                                        <br/> <br/>
+                                       <!-- <br/> <br/>
                                         <h3><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Title__c}" id="headTitle"/></h3>
-                                        <p><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Text__c}" id="headText" /></p>
-                                    </div>
+                                        <p><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Text__c}" id="headText" /></p>   -->                                     
+                                    </div> 
                                 </div>
                             </div>
                             <div class="row highlight" style="margin:1rem 0 2rem">
                                 <div class="col-xs-12 col-md-4">
-                                    <h3 class="col-xs-12 col-sm-12 col-md-12"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_1__c}" id="headHighTitle1"/></h3>
-                                    <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_1__c}" id="headHighImage1"/>
+                                <apex:outputlink value="/VolunteerAssignmentOpportunities_VF">
+                                    <h3 class="col-xs-12 col-sm-12 col-md-12">                                    
+                                    <apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_1__c}" id="headHighTitle1"/></h3>
+                                    <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_1__c}" id="headHighImage1" /></apex:outputlink>
                                     <p class="col-xs-12 col-sm-12 col-md-12">{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Text_1__c}</p>
                                 </div>
 
                                 <div class="col-xs-12 col-md-4">
+                                    <apex:outputlink value="/_ui/knowledge/ui/KnowledgeHome">
                                     <h3 class="col-xs-12 col-sm-12 col-md-12"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_2__c}" id="headHighTitle2"/></h3>
-                                    <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_2__c}" id="headHighImage2"/>
+                                   <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_2__c}" id="headHighImage2"/></apex:outputlink>
                                     <p class="col-xs-12 col-sm-12 col-md-12">{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Text_2__c}</p>
                                 </div>
 
                                 <div class="col-xs-12 col-md-4">
+                                    <apex:outputlink value="/_ui/core/chatter/ui/ChatterPage">
                                     <h3 class="col-xs-12 col-sm-12 col-md-12"><apex:outputText value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Title_3__c}" id="headHighTitle3"/></h3>
-                                    <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_3__c}" id="headHighImage3"/>
+                                    <apex:outputField styleClass="col-xs-12 col-sm-12 col-md-12" value="{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Image_3__c}" id="headHighImage3"/></apex:outputlink>
                                     <p class="col-xs-12 col-sm-12 col-md-12">{!activeVolunteerLandingPageInfoList[0].Heading_Highlight_Text_3__c}</p>
                                 </div>
                             </div>
@@ -123,7 +127,7 @@ Description : This page is used to display the welcome message, open events , ch
                                               </label>
                                             </div>
                                           </div>
-										 <div class="row">
+                                         <div class="row">
                                               <div class="col-md-6">
                                                   <div class="form-group row">
                                                     <div class="col-xs-12 col-sm-4">
@@ -151,7 +155,7 @@ Description : This page is used to display the welcome message, open events , ch
                                                       <apex:inputField styleClass="form-control Work-Email" value="{!volunteercon.npe01__WorkEmail__c}" html-placeholder="work_email@domain.com" />
                                                     </div>
                                                   </div>
-                                               	  <div class="form-group row">
+                                                  <div class="form-group row">
                                                     <div class="col-xs-12 col-sm-4">
                                                       <label>Alternate Email</label>
                                                     </div>

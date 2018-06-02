@@ -193,11 +193,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Childs_Qualifying_Diagnosis__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Child_Age__c</field>
             <table>Lead</table>
         </columns>
@@ -693,11 +688,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Is_We_Need_To_Expedite_The_Process__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>LastActivityDate</field>
             <table>Lead</table>
         </columns>
@@ -754,11 +744,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Longitude</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>MAW_Name__c</field>
             <table>Lead</table>
         </columns>
         <columns>
@@ -1379,11 +1364,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Title</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Current_Condition__c</field>
             <table>Lead</table>
         </columns>
         <columns>

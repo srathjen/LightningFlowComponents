@@ -57,13 +57,11 @@
     <filter>
         <criteriaItems>
             <column>Lead$Status</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>DNQ</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead$ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish North Texas</value>
         </criteriaItems>

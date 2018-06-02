@@ -4,9 +4,6 @@
         <field>Condition_Description__c$Name</field>
     </columns>
     <columns>
-        <field>Condition_Description__c$MAW_Name__c</field>
-    </columns>
-    <columns>
         <field>Condition_Description__c$Code_To_Use__c</field>
     </columns>
     <columns>
@@ -30,8 +27,6 @@
     <reportType>Condition_Descriptions__c</reportType>
     <scope>organization</scope>
     <showDetails>true</showDetails>
-    <sortColumn>Condition_Description__c$MAW_Name__c</sortColumn>
-    <sortOrder>Asc</sortOrder>
     <timeFrameFilter>
         <dateColumn>Condition_Description__c$CreatedDate</dateColumn>
         <interval>INTERVAL_CUSTOM</interval>

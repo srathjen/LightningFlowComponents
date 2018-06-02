@@ -19,7 +19,6 @@
     <filter>
         <criteriaItems>
             <column>ProcessInstance$ProcessDefinition</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Volunteer Contact Process</value>
         </criteriaItems>

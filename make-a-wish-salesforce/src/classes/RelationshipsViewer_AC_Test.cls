@@ -179,7 +179,7 @@ public class RelationshipsViewer_AC_Test{
         rlationshipIns.isMessage = false;
         Test.StartTest();
         rlationshipIns .preferredConMapClone = preferredCon;
-        rlationshipIns.SaveUpdatedContact();
+       // rlationshipIns.SaveUpdatedContact();
         rlationshipIns.close();
         Test.StopTest();
         system.assertEquals(wishFamilyList[0].Email,'test@gmail.com');
@@ -269,7 +269,7 @@ public class RelationshipsViewer_AC_Test{
         rlationshipIns.clonedFamilyContactList = wishFamilyList;
         rlationshipIns.isMessage = false;
         Test.StartTest();
-        rlationshipIns.SaveUpdatedContact();
+       // rlationshipIns.SaveUpdatedContact();
         rlationshipIns.close();
         Test.StopTest();
         system.assertEquals(wishFamilyList[0].Email,Null);

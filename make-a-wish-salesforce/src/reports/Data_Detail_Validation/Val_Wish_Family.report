@@ -6,7 +6,6 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType.DeveloperName</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish_Family</value>
         </criteriaItems>

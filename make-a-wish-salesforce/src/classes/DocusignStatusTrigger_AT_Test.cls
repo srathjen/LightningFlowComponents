@@ -79,6 +79,8 @@ public class DocusignStatusTrigger_AT_Test{
         updateLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
         updateLead.RFI_Form_Info_Hidden__c = 'Qualified';
         updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        updateLead.I_am_Recognized_To_Practice_As_a__c = 'Nurse Practitioner';
+        updateLead.Please_Explain__c = 'Test';
         updateLead.Id = newLead.Id;
         Test.startTest();
         update updateLead;

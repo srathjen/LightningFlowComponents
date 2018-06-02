@@ -21,6 +21,10 @@
         <type>Default</type>
     </actionOverrides>
     <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
         <actionName>List</actionName>
         <type>Default</type>
     </actionOverrides>
@@ -49,7 +53,6 @@
     <compactLayouts>
         <fullName>Conditional_Description</fullName>
         <fields>Name</fields>
-        <fields>MAW_Name__c</fields>
         <fields>OwnerId</fields>
         <fields>Treatment_Subspecialty__c</fields>
         <label>Conditional Description</label>
@@ -86,17 +89,6 @@
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>MAW_Name__c</fullName>
-        <description>It will hold the MAW Name.</description>
-        <externalId>false</externalId>
-        <label>MAW Name</label>
-        <length>255</length>
-        <required>false</required>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>Not_Listed__c</fullName>
         <defaultValue>false</defaultValue>
         <description>Additional Conditional Description</description>
@@ -105,6 +97,17 @@
         <label>Not Listed</label>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>PR_Diagnosis__c</fullName>
+        <description>It will hold the MAW Name.</description>
+        <externalId>false</externalId>
+        <label>PR Diagnosis</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Treatment_Subspecialty__c</fullName>

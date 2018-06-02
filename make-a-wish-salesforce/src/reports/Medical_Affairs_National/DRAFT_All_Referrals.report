@@ -46,9 +46,6 @@
         <field>Lead.Gender__c</field>
     </columns>
     <columns>
-        <field>Lead.Childs_Qualifying_Diagnosis__c</field>
-    </columns>
-    <columns>
         <field>Lead.PD_Condition_Description__c</field>
     </columns>
     <columns>
@@ -70,13 +67,11 @@
     <filter>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>

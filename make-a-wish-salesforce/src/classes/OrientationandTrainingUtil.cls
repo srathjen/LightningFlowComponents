@@ -1530,7 +1530,7 @@ insert newChapter;*/
         newDesc.Name = 'Malignant Melanoma';
         newDesc.Treatment_Subspecialty__c = 'Oncology';
         newDesc.Code_To_Use__c = 'C43.30';
-        newDesc.MAW_Name__c = 'Malignant Melanoma';
+        newDesc.PR_Diagnosis__c = 'Malignant Melanoma';
         newDesc.Group1__c = true;        
         return newDesc;
     }

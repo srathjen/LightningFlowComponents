@@ -10,7 +10,7 @@ Modification Log:
 2. 04/12/2018 - Yuvraj - IME-77 - Line:No: 32
 *****************************************************************************************************/
 
-public class SendDiagnosisVerficationLC_AC {
+public without sharing class SendDiagnosisVerficationLC_AC {
     
     /********************************************************************************************
     Get the neccessary lead information for further process of sending diagnosis verfication    
@@ -32,7 +32,9 @@ public class SendDiagnosisVerficationLC_AC {
                      Pending_Diagnosis_Date__c,
                      PD_ICD_Code__c, 
                      PD_Condition_Description__c,
-                     Of_Times_Email_Sent__c                     
+                     Of_Times_Email_Sent__c,
+                     Part_A_Received__c,
+					 isSign__c                     
                      FROM Lead WHERE Id = :leadId LIMIT 1];
         
         return data;

@@ -28,7 +28,7 @@ public class Affiliation_AT_Test{
         insert neworgAffiliation;
         contactMap.put(neworgAffiliation.npe5__Contact__c,neworgAffiliation);
         affiliationIds.add(neworgAffiliation.npe5__Organization__c);
-        AffiliationTriggerHandler_AC.updateContact(contactMap,affiliationIds);
+        //AffiliationTriggerHandler_AC.updateContact(contactMap,affiliationIds);
         System.assertEquals('Active', neworgAffiliation.npe5__Status__c,'Incorrect Affiliation Status');        
         
         neworgAffiliation.Id = neworgAffiliation.Id;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReportType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <baseObject>Wish_Child_Form__c</baseObject>
+    <category>other</category>
+    <deployed>true</deployed>
+    <description>Test</description>
+    <label>Selected Recipient Report</label>
+    <sections>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Hidden_Same_as_Family__c</field>
+            <table>Wish_Child_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Case__c.CaseNumber</field>
+            <table>Wish_Child_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Case__c.Status</field>
+            <table>Wish_Child_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Case__c.Contact</field>
+            <table>Wish_Child_Form__c</table>
+        </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>CreatedDate</field>
+            <table>Wish_Child_Form__c</table>
+        </columns>
+        <masterLabel>Wish Forms</masterLabel>
+    </sections>
+</ReportType>

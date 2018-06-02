@@ -86,43 +86,36 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Wish Design,Wish Scheduled,Budget Approval - Submitted,Budget Approval - Approved,Hold,Inactive</value>
         </criteriaItems>
         <criteriaItems>
             <column>RECORDTYPE</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Qualified_Date__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>lessThan</operator>
             <value>3/1/2018</value>
         </criteriaItems>

@@ -33,7 +33,6 @@
     <filter>
         <criteriaItems>
             <column>CASE_NUMBER</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>00074464,00075020,00077190,00077344</value>
         </criteriaItems>

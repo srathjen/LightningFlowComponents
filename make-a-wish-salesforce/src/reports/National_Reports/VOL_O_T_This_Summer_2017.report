@@ -22,31 +22,26 @@
         <booleanFilter>((1 AND (2 OR 3)) AND 4) AND 5</booleanFilter>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Class_Offering__c.Chapter__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Class_Offering__c.Date__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>greaterThan</operator>
             <value>4/1/2017</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Class_Offering__c.RecordType</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Class_Offering__c.Virtual_Self_Paced</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Orientation_Training_Hidden__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>orientation,wish granter training</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Orientation_Training__c$Volunteer_Attendance__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Completed</value>
         </criteriaItems>

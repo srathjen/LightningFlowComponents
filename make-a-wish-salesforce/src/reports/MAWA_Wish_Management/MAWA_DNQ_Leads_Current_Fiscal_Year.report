@@ -72,19 +72,14 @@
     <columns>
         <field>Lead.Region_Code__c</field>
     </columns>
-    <columns>
-        <field>Lead.Is_We_Need_To_Expedite_The_Process__c</field>
-    </columns>
     <filter>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>DNQ</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>

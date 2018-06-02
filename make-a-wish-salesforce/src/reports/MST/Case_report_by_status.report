@@ -25,13 +25,11 @@
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Diagnosis_Verification_Review</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Hold,Closed,Eligibility Review Pending</value>
         </criteriaItems>

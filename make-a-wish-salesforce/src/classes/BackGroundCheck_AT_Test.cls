@@ -38,6 +38,7 @@ public class BackGroundCheck_AT_Test {
          Background_check__c  backgroundcheck = OrientationandTrainingUtil.createBackgroundCheckFasleRec(volunteerContact.id);
        
              backgroundcheck.Status__c = 'Rejected';
+            backgroundcheck.HiddenBackgroundExpire__c = true;
              update backgroundcheck; 
        
      }

@@ -48,31 +48,26 @@
     <filter>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c$RecordType</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>In_Kind_Donation_Reimbursement__c.In_Kind_Donation</value>
         </criteriaItems>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c$Wish_child_Name__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Nemo Clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c$Wish_child_Name__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notContain</operator>
             <value>test</value>
         </criteriaItems>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c$Approved_By__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>In_Kind_Donation_Reimbursement__c$Unique_Wish_Identifier__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>001</value>
         </criteriaItems>

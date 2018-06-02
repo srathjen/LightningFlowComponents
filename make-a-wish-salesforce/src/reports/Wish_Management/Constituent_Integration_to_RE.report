@@ -118,7 +118,6 @@
     <filter>
         <criteriaItems>
             <column>Contact$Region_Chapter__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>

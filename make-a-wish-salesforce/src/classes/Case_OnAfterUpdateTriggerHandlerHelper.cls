@@ -240,8 +240,8 @@ Update Lead status when diagnosis verification case status is updated.
         String message;
         Boolean showError;
         //try{
-            //Removed Childs_Qualifying_Diagnosis__c in query as per IME-120
-            for(Lead currentLead: [SELECT ID,Status,isConverted, FirstName, Qualifying_ICD__c, Qualifying_Diagnosis__c, I_am_Recognized_To_Practice_As_a__c,Part_A_Received__c,Any_medical_reason_for_moving_quickly__c,DOB__c FROm Lead Where (ID IN:updatedApprovedLeadInfoSet OR ID IN:updatedDnqLeadInfoSet) and isConverted =: False Limit 50000]){
+        //Removed Childs_Qualifying_Diagnosis__c in query as per IME-120
+            for(Lead currentLead: [SELECT ID,Status,isConverted, FirstName, Qualifying_ICD__c, Qualifying_Diagnosis__c, I_am_Recognized_To_Practice_As_a__c,Part_A_Received__c,Any_medical_reason_for_moving_quickly__c,DOB__c FROM Lead Where (ID IN:updatedApprovedLeadInfoSet OR ID IN:updatedDnqLeadInfoSet) and isConverted =: False Limit 50000]){
                 if(updatedApprovedLeadInfoSet.contains(currentLead.Id)){
                     if(currentLead.I_am_Recognized_To_Practice_As_a__c != Null && currentLead.Part_A_Received__c != Null && currentLead.Any_medical_reason_for_moving_quickly__c != Null && currentLead.DOB__c != Null){
                         currentLead.Status  = 'Qualified';
@@ -260,7 +260,7 @@ Update Lead status when diagnosis verification case status is updated.
                             else
                                 message = message+', '+'DOB';
                         }
-                         //Removed Childs_Qualifying_Diagnosis__c as per IME-120
+                        //Removed Childs_Qualifying_Diagnosis__c as per IME-120
                         /*if(currentLead.Childs_Qualifying_Diagnosis__c == null){
                             if(message == '' || message == Null)
                                 message = 'Child\'s Qualifying Diagnosis';
@@ -269,9 +269,9 @@ Update Lead status when diagnosis verification case status is updated.
                         }*/
                         if(currentLead.Any_medical_reason_for_moving_quickly__c == null){
                             if(message == '' || message == Null)
-                                message = 'Any Medical Reason For Moving Quickly?';
+                                message = 'Potential Rush';
                             else
-                                message= message+', '+'Any Medical Reason For Moving Quickly?'; 
+                                message= message+', '+'Potential Rush'; 
                         }
                         if(currentLead.Part_A_Received__c == null){
                             if(message == '' || message == Null)
@@ -285,8 +285,7 @@ Update Lead status when diagnosis verification case status is updated.
                             else
                                 message= message+', '+'I Am Recognized To Practice As A';
                         }
-                    }
-                    
+                    }                   
                 }
                 else if(updatedDnqLeadInfoSet.contains(currentLead.Id)){
                     currentLead.Status  = 'DNQ';
@@ -299,7 +298,7 @@ Update Lead status when diagnosis verification case status is updated.
                     for(case currCase : newCaseList){
                         currCase.addError('Please provide values for following fields in Lead: '+message+'.');
                     }
-                }
+                }                
                 UpadtedLeadListInfo.add(currentLead);
             }
             if(UpadtedLeadListInfo.size()>0 && showError == false){
@@ -1818,7 +1817,7 @@ This method is used to update the wish granted count in contact record.
         }
         
         if(volunteerIdsSet.size() > 0){
-            VolunteerOpportunityTriggerHandler.ActiveWishCount(volunteerIdsSet);
+            VolOpportunity_OnAfter_Update_Helper.ActiveWishCount(volunteerIdsSet);
         }
         
     }

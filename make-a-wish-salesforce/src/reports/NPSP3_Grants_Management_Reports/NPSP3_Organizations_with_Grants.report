@@ -52,7 +52,6 @@
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Opportunity.Grant</value>
         </criteriaItems>

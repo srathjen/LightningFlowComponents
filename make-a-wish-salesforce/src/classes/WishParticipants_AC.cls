@@ -13,7 +13,7 @@ Public class WishParticipants_AC
    {
      currCase = (Case)controller.getRecord();
      currCase = [SELECT id,ContactId FROM Case WHERE Id = :currCase.id limit 1];
-     totalParticipants = 1; 
+     totalParticipants = 0; 
    }
 
    public list<npe4__Relationship__c> getParticipantsConList()
@@ -31,9 +31,11 @@ Public class WishParticipants_AC
              npe4__Relationship__c rel = relationshipList.get(0);
              //relationshipList.add(rel);             
          } */
-         for(npe4__Relationship__c currRel : relationshipList){
-            If(!currRel.Non_Comped__c)
-                totalParticipants += 1;
+         If(relationshipList.Size() > 0){
+             for(npe4__Relationship__c currRel : relationshipList){
+                If(!currRel.Non_Comped__c)
+                    totalParticipants += 1;
+            }
         }
          npe4__Relationship__c childRel = [SELECT id,npe4__RelatedContact__c,npe4__RelatedContact__r.Id, npe4__RelatedContact__r.FirstName,
                                                         npe4__RelatedContact__r.LastName,npe4__RelatedContact__r.Middle_Name__c,
@@ -42,18 +44,24 @@ Public class WishParticipants_AC
                                                         Medical_Needs__c,Non_Comped__c FROM npe4__Relationship__c WHERE 
                                                         npe4__RelatedContact__c =: currCase.ContactId LIMIT 1];
          system.debug('Relatonship'+childRel);
-         childRel.npe4__Type__c = 'Wish Child';
-         childRel.Parent_Legal_Guardian__c = False;
-         childRel.Medical_Needs__c = '';
-         childRel.Non_Comped__c = False;
-         If(relationshipList.Size()  > 0)
-             relationshipList.add(0,childRel);  
-         else
-             relationshipList.add(childRel);                                           
+         List<Wish_Child_Form__c> wishChild = [SELECT Id,Hidden_Same_as_Family__c FROM Wish_Child_Form__c WHERE Case__c =: currCase.Id LIMIT 1];
+         
+         If((wishChild.Size() > 0 && wishChild[0].Hidden_Same_as_Family__c == True)|| (wishChild.Size() == 0)){
+             childRel.npe4__Type__c = 'Wish Child';
+             childRel.Parent_Legal_Guardian__c = False;
+             childRel.Medical_Needs__c = '';
+             childRel.Non_Comped__c = False;
+             totalParticipants += 1;
+             If(relationshipList.Size()  > 0)
+                 relationshipList.add(0,childRel);  
+             else
+                 relationshipList.add(childRel); 
+         }                                          
         
         // related to WVC-1804 count the number of participants include the wish child.
-         
-        return relationshipList;
+        //If(relationshipList.Size() > 0) 
+            return relationshipList;
+       // return Null;
    
    }
 }

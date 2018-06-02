@@ -7,6 +7,9 @@
         <field>Lead$Name</field>
     </columns>
     <columns>
+        <field>Lead$Any_medical_reason_for_moving_quickly__c</field>
+    </columns>
+    <columns>
         <field>Lead$LastActivityDate</field>
     </columns>
     <columns>

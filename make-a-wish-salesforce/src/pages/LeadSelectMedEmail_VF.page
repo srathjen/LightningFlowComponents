@@ -8,7 +8,7 @@
         th {font-weight:bold !important}
         .successMsg {color: #3c763d; background-color: #dff0d8; border-color: #d6e9c6; padding:10px; border-radius:5px}
         .alert-danger {display:none;border-radius: 5px;}
-        .alert-danger-email {display:none;border-radius: 5px;}<!-- Added per IME-59 -->        
+        .alert-danger-email {display:none;border-radius: 5px;}<!-- Added per IME-59 -->
         .alert-success {border-radius: 5px;}
         .btn-process {float: right; margin-top: 1%;}
         .slds {margin-top:3%}
@@ -19,8 +19,8 @@
     </style>
     <div class="slds">
         <apex:form id="frm">
-            <apex:pagemessages id="msg" />
-            <input type="hidden" value="{!URLToRedirect}" class="getUrl"/>
+        <apex:pagemessages id="msg" />
+        <input type="hidden" value="{!URLToRedirect}" class="getUrl"/>
             <div class="slds-card slds-m-horizontal--large">
                 <div class="slds-card__header slds-grid slds-grid--align-spread">
                     <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Contact to send the Diagnosis Verification</h2>
@@ -88,7 +88,7 @@
                     <!-- Added per IME-59 -->
                     <div class="slds-notify slds-notify--alert slds-theme--error slds-theme--alert-texture alert-danger-email" style="float:left">
                         Please provide Treating Medical Professional Email or check the box for Using Paper Process for DV.
-                    </div>                    
+                    </div>
                     <input type="button" value="Cancel" class="slds-button slds-button--neutral btn-process" onClick="Cancel();"/>
                     <input type="button" value="Send Diagnosis Verification" onClick="PassEmailVal();" class="slds-button slds-button--brand btn-process" style="margin-right:5px"/>
                 </div>
@@ -104,7 +104,6 @@
                 var sendEmail = false; 
                 var email = '';
                 var paperDV = {!currLead.Using_Paper_Process_For_DV__c}//Added per IME-59
-
                 $('.selVal').each(function() { 
                     if($(this).is(':checked')) { 
                         emailTo = $(this).data( "type" ); 
@@ -114,11 +113,13 @@
                 }); 
                 if(sendEmail) { 
                     var hiddenMedEmail = '{!currLead.Part_A_Sent__c}';
+		    var hiddenMedEmailRec = '{!currLead.Part_A_Received__c}';
+                    var confirmMsg = hiddenMedEmailRec? "A Diagnosis Verification has already been sent and signed. Clicking Yes will reset all values in the DV form, and archive previous signed versions (in Docusign Status section) which cannot be undone.":"Are you sure you want to proceed? A Diagnosis Verification has already been sent for this wish child.";
                     if(email.length > 1 && !paperDV){ //Added per IME-59
                         if(hiddenMedEmail.trim().length) {
                             swal({
                                 title: "Are you sure you want to proceed?",
-                                text: "A Diagnosis Verification has already been sent and signed. Clicking Yes will reset all values in the DV form, and archive previous signed versions (in Docusign Status section) which cannot be undone.",
+                                text: confirmMsg,
                                 showCancelButton: true,
                                 type: 'warning',
                                 confirmButtonColor: '#d33',
@@ -171,7 +172,7 @@
                              }
                              sforce.one.navigateToSObject(leadId);
                              
-                         });
+                     });
                     
                 }else{
                     //classic

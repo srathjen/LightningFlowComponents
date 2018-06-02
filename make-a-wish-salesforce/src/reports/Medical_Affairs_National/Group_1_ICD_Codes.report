@@ -20,13 +20,11 @@
         <booleanFilter>1 OR 2</booleanFilter>
         <criteriaItems>
             <column>ICD_Codes__c$Group1__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>
         <criteriaItems>
             <column>ICD_Codes__c$Hidden_ICD_Code__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

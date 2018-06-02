@@ -26,10 +26,16 @@ public class batch_sendAgeNotification_Test{
          Contact wishChild = OrientationandTrainingUtil.CreateWishChild();
          Account chapterAmericaAccount = OrientationandTrainingUtil.CreateAmericaAccount();
          Case parentCase = OrientationandTrainingUtil.CreateParentCase(wishChild.Id);
-         wishChild.Birthdate = Date.parse(String.valueOf(System.today().month()+1)+'/'+String.valueOf(System.today().day())+'/'+String.valueOf(System.today().year()-18));
+         If(System.today().month()+1 == 2 || System.today().month()+1 == 4 || System.today().month()+1 == 6 || System.today().month()+1 == 8 || System.today().month()+1 == 9 || System.today().month()+1 == 11 )
+             wishChild.Birthdate = Date.parse(String.valueOf(System.today().month()+1)+'/'+String.valueOf(System.today().day()-1)+'/'+String.valueOf(System.today().year()-18));
+         else 
+             wishChild.Birthdate = Date.parse(String.valueOf(System.today().month()+1)+'/'+String.valueOf(System.today().day())+'/'+String.valueOf(System.today().year()-18));
          Update wishChild;
          Contact childFamily = OrientationandTrainingUtil.CreateWishFamily();
-         childFamily.Birthdate = Date.parse(String.valueOf(System.today().month()+1)+'/'+String.valueOf(System.today().day())+'/'+String.valueOf(System.today().year()-18));
+          If(System.today().month()+1 == 2 || System.today().month()+1 == 4 || System.today().month()+1 == 6 || System.today().month()+1 == 8 || System.today().month()+1 == 9 || System.today().month()+1 == 11 )
+              childFamily.Birthdate = Date.parse(String.valueOf(System.today().month()+1)+'/'+String.valueOf(System.today().day()-1)+'/'+String.valueOf(System.today().year()-18));
+         else
+             childFamily.Birthdate = Date.parse(String.valueOf(System.today().month()+1)+'/'+String.valueOf(System.today().day())+'/'+String.valueOf(System.today().year()-18));
          Update childFamily;
          npe4__Relationship__c  npcr = OrientationandTrainingUtil.CreateRelationshipRec(wishChild.Id,childFamily.Id);
          Database.executeBatch(new batch_sendAgeNotificationToCaseOwner_AC());

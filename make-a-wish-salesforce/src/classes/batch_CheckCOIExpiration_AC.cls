@@ -19,7 +19,7 @@ global class batch_CheckCOIExpiration_AC implements Database.Batchable<sObject> 
         }
         
         if(volContactIdSet.size() > 0) {
-            BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(volContactIdSet, 'COI');
+            BackGroundCheck_OnAfterUpdateHelper.UpdateVOppAndVRoleStatus(volContactIdSet, 'COI',coiExpiredList);
         }
         
     }   

@@ -734,6 +734,10 @@ planned vacations, etc.) that might impact your ability to participate in a wish
         <name>GKTW_Confirmation_Date__c</name>
     </fields>
     <fields>
+        <label><!-- GKTW Inkind Value --></label>
+        <name>GKTW_Inkind_Value__c</name>
+    </fields>
+    <fields>
         <label><!-- Guardianship Document --></label>
         <name>Guardianship_Document__c</name>
     </fields>
@@ -2589,6 +2593,10 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Adoptable_Validation</name>
     </validationRules>
     <validationRules>
+        <errorMessage><!-- The birthdate entered occurs in the future. Please re-enter the birthdate. --></errorMessage>
+        <name>Case_BirthDate_Validation</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- From Budget Approval - Approved, the status can only be changed to Wish Design, On-Hold, Inactive, DNQ or Closed. --></errorMessage>
         <name>Case_Budget_Approval_Approved</name>
     </validationRules>
@@ -2597,8 +2605,16 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Budget_Approval_Submitted</name>
     </validationRules>
     <validationRules>
+        <errorMessage><!-- Please explain reason to expedite the process in Please Explain Expedite field in Lead. --></errorMessage>
+        <name>Case_Check_Expedite_Validation</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- You cannot change the owner of the subcase --></errorMessage>
         <name>Case_ChildCaseOwnerChangeValidation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The closed date cannot occur before the referral date. Please enter a valid closed date, or re-enter the referral date. --></errorMessage>
+        <name>Case_Close_Date_Referral_Date_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- You do not have permission to edit this record. Please contact your program supervisor to edit the date --></errorMessage>
@@ -2617,6 +2633,10 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Completed</name>
     </validationRules>
     <validationRules>
+        <errorMessage><!-- The completed date cannot occur before the referral date. Please enter a valid completed date, or re-enter the referral date. --></errorMessage>
+        <name>Case_Completed_Date_Validation</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- Only Program Supervisor permission set can change from &quot;DNQ&quot; to the previous status. --></errorMessage>
         <name>Case_DNQ_Status</name>
     </validationRules>
@@ -2633,8 +2653,20 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Hold_Rule</name>
     </validationRules>
     <validationRules>
+        <errorMessage><!-- The inactive date cannot occur before the referral date. Please enter a valid inactive date, or re-enter the referral date. --></errorMessage>
+        <name>Case_Inactive_Date_Validation</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- From Inactive, they can only go back to the previous status. --></errorMessage>
         <name>Case_Inactive_Rule</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The inquiry date entered occurs before the wish child&apos;s date of birth. Please enter a valid inquiry date, or re-enter the wish child&apos;s birthdate. --></errorMessage>
+        <name>Case_Inquiry_and_Birth_Date_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The inquiry date must occur on or before the referral date. Please enter a valid inquiry date, or re-enter the date of referral. --></errorMessage>
+        <name>Case_Inquiry_and_Referr_Date_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Please enter an explanation why &apos;No&apos; is selected for &apos;Meet PWL Criteria&apos; --></errorMessage>
@@ -2653,6 +2685,10 @@ arrangements/unique circumstances for any requested wish participant not residin
         <name>Case_Prevent_Qualified_Status</name>
     </validationRules>
     <validationRules>
+        <errorMessage><!-- The qualified date cannot occur before the referral date. Please enter a valid qualified date, or re-enter the referral date. --></errorMessage>
+        <name>Case_Qualified_Date_Validation</name>
+    </validationRules>
+    <validationRules>
         <errorMessage><!-- From Ready To Interview, the status can only be changed to Wish Determined, On-Hold, Inactive, DNQ or Closed. --></errorMessage>
         <name>Case_Ready_To_Interview_Status</name>
     </validationRules>
@@ -2663,6 +2699,10 @@ arrangements/unique circumstances for any requested wish participant not residin
     <validationRules>
         <errorMessage><!-- You should enter value for sub status when status having values as Ready to Assign --></errorMessage>
         <name>Case_Ready_to_Assign_Validation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The referral date must occur on or after the inquiry date. Please enter a valid referral date, or re-enter the inquiry date. --></errorMessage>
+        <name>Case_Referral_Date_Validation</name>
     </validationRules>
     <validationRules>
         <errorMessage><!-- Please enter values to &apos;Rush Explanation &amp; Rush Timeframe&apos;  fields in order  to check Rush. --></errorMessage>

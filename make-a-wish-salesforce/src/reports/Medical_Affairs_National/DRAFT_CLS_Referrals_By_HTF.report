@@ -46,9 +46,6 @@
         <field>Lead.Gender__c</field>
     </columns>
     <columns>
-        <field>Lead.Childs_Qualifying_Diagnosis__c</field>
-    </columns>
-    <columns>
         <field>Lead.PD_Condition_Description__c</field>
     </columns>
     <columns>
@@ -70,13 +67,11 @@
     <filter>
         <criteriaItems>
             <column>Lead.Relationship_to_child__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Medical Professional</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Medical_Provider_Category__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Child Life Specialist</value>
         </criteriaItems>

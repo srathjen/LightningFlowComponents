@@ -20,16 +20,22 @@ public class DelegatedApproverController_Test{
         update wishVolunteerOpportunityList;
         Chapter_Vs_Role__c alabama = OrientationandTrainingUtil.createAlabamaChapter();
         Chapter_Vs_Role__c america = new Chapter_Vs_Role__c();
-        america.name = 'Make-A-Wish America';
-        america.Chapter_Name__c='Make-A-Wish America';
+        america.name = 'Make-A-Wish Alabama';
+        america.Chapter_Name__c='Make-A-Wish Alabama';
         Insert america;
-        
+         
+         //Creating Queue based on the chapterName.
+         Group newGroup = new Group();
+         newGroup.Name = 'Make-A-Wish Alabama';
+         newGroup.Type =  'Queue';
+         insert newGroup; 
         //Submitting for Case Approval
         Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
         req.setComments('Submitting request for approval.');
         req.setObjectId(parentCase.id);
         req.setProcessDefinitionNameOrId('Wish_Child_Form_Approval_Process');
         req.setSkipEntryCriteria(true);
+         req.setNextApproverIds(new Id[]{newGroup.Id});
         Approval.ProcessResult result = Approval.process(req);
         
         DelegatedApproverController_AC.getAppList();

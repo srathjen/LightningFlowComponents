@@ -26,9 +26,7 @@ public class QualifyingDiagnosisLC_AC_TEST {
         insert DVCase;
         System.assertEquals(newLead.PD_ICD_Code__c, iCDCode.Id, 'ICD Code doesnot match');
         QualifyingDiagnosisLC_AC.getMedicalInformation(DVCase.Id);
-        QualifyingDiagnosisLC_AC.updateQualifyingDiagnosis(condistionDescription.Name, iCDCode.Id, newLead.Id,condistionDescription.MAW_Name__c);
-        QualifyingDiagnosisLC_AC.getIcdCodeInfo(iCDCode.Name);
-        QualifyingDiagnosisLC_AC.getConditionDescInfo(condistionDescription.Name);
+        QualifyingDiagnosisLC_AC.updateQualifyingDiagnosis(condistionDescription.Name, iCDCode.Id, newLead.Id,condistionDescription.PR_Diagnosis__c);
     }
     
 }

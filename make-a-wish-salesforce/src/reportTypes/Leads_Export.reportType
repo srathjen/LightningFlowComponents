@@ -273,11 +273,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Childs_Qualifying_Diagnosis__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>DOB__c</field>
             <table>Lead</table>
         </columns>
@@ -379,11 +374,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Alternate1HospitalTreatmentFacility__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>MAW_Name__c</field>
             <table>Lead</table>
         </columns>
         <columns>
@@ -628,11 +618,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Is_We_Need_To_Expedite_The_Process__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Referred_Date__c</field>
             <table>Lead</table>
         </columns>
@@ -709,11 +694,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Current_Condition_Label__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Current_Condition__c</field>
             <table>Lead</table>
         </columns>
         <columns>

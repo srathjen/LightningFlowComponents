@@ -377,10 +377,10 @@
                                     </div>
                                 </apex:outputpanel>
                                 
-                                <apex:outputpanel rendered="{!currLead.Is_We_Need_To_Expedite_The_Process__c!=Null}">
+                                <apex:outputpanel rendered="{!currLead.Any_medical_reason_for_moving_quickly__c!=Null}">
                                     <div class="container" style="width:100%;">
                                         <div class="left-col"> Is there a medical reason we would need to expedite the process?</div>
-                                        <div class="left-col"> {!currLead.Is_We_Need_To_Expedite_The_Process__c}</div>
+                                        <div class="left-col"> {!currLead.Any_medical_reason_for_moving_quickly__c}</div>
                                     </div>
                                 </apex:outputpanel>
                                 

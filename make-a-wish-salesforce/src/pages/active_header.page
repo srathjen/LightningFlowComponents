@@ -16,7 +16,7 @@
             </button>
             <div class="collapse navbar-toggleable-sm" id="exCollapsingNavbar">
                 <ul class="active-user-main">
-                    <li><a href="/VolunteerAssignmentOpportunities_VF">Volunteer Opportunities</a></li>
+                    <li><a href="/VolunteerAssignmentOpportunities_VF">Join a Wish Team</a></li>
                     <li><a href="/MyAssignment_VF">My Assignments</a></li>
                     <li><a href="/VolunteerActivities_VF">My Tasks</a></li>
                 </ul>

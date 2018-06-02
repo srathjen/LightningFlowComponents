@@ -5,6 +5,7 @@ Description : This form is for Medical Professionals to fill up the Medical Summ
 whom they are treating.
 Modification Log: 
 WVC-1835 : Sankar
+10/05/2018 - Yuvraj - IME-126 - Line No: 981,994,998,1066
 *******************************************************************************************************************/
 public class DiagnosisVerification_AC {  
     private transient Map<String, List<Medical_Questions__c>> condDesMedicalQuestionMap;
@@ -84,8 +85,9 @@ public class DiagnosisVerification_AC {
             wishChildWrapperIns.healthCareWork = currLead.I_m_Part_of_The_Treating_HealthCare_Team__c;
             wishChildWrapperIns.vegetativeState = currLead.Is_in_a_Comatose_Vegetative_State__c;       
             wishChildWrapperIns.explainDeteriorate = currLead.Please_Explain_Deteriorate__c;
-            wishChildWrapperIns.expediteTheProcess = currLead.Is_We_Need_To_Expedite_The_Process__c;
-            wishChildWrapperIns.conditioDeteriorate = currLead.Will_Child_s_Condition_Deteriorate__c;
+            //wishChildWrapperIns.expediteTheProcess = currLead.Is_We_Need_To_Expedite_The_Process__c;//Commented as per IME-107
+            wishChildWrapperIns.expediteTheProcess = currLead.Any_medical_reason_for_moving_quickly__c;//Added as per IME-107
+        	wishChildWrapperIns.conditioDeteriorate = currLead.Will_Child_s_Condition_Deteriorate__c;
             wishChildWrapperIns.wishChildEligibilityNotes = currLead.Why_do_you_feel_would_be_eligible_Wish__c;
             wishChildWrapperIns.plzExplain = currLead.Please_Explain__c;
             wishChildWrapperIns.bestPhyFname = currLead.Best_Contact_for_Physician_First_Name__c;
@@ -594,7 +596,8 @@ showAddAnotherDiagnosisBtn = true;
                     }
                 } else if(isGroup1 == true) {
                     if(wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6'){                
-                        diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;  
+                        diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
+                        diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode = icdCode;
                     }else{
                         showAddAnotherDiagnosisBtn = true;    
                     }
@@ -608,7 +611,8 @@ showAddAnotherDiagnosisBtn = true;
                 }
             } else if(isGroup1 == true) { 
                 if(wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6'){
-                    diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;  
+                    diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
+                    diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode = icdCode;
                 }else{
                     showAddAnotherDiagnosisBtn = true;    
                 }
@@ -645,14 +649,14 @@ showAddAnotherDiagnosisBtn = true;
                 if(wishChildWrapperIns.describePatient != '7' && wishChildWrapperIns.describePatient != '8' && wishChildWrapperIns.describePatient != '6'){
                     showAddAnotherDiagnosisBtn = false;
                     diagnosisVerificationWrapperLst[diagnosisBlockNum].isEligible = true;
-                    diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList[questionNumber].isEligible = true;     
+                    diagnosisVerificationWrapperLst[diagnosisBlockNum].medicalWrapperList[questionNumber].isEligible = true;
                     //IME-120
                     currLead.Qualifying_Diagnosis__c = diagnosisVerificationWrapperLst[diagnosisBlockNum].conditionDescription;
                     if(currLead.Qualifying_Diagnosis__c != Null)
                     {
-                        List<Condition_Description__c> descriptionList = [SELECT Id, Maw_Name__c
+                        List<Condition_Description__c> descriptionList = [SELECT Id, PR_Diagnosis__c
                                                                           FROM Condition_Description__c WHERE Name = :currLead.Qualifying_Diagnosis__c limit 1];
-                        currLead.MAW_Name__c = (descriptionList.size() > 0) ? descriptionList[0].MAW_Name__c : '';
+                        currLead.PR_Diagnosis__c = (descriptionList.size() > 0) ? descriptionList[0].PR_Diagnosis__c : '';
                     }
                     List<ICD_Codes__c> icdCodeInfo = [SELECT Id FROM ICD_Codes__c WHERE Name =: diagnosisVerificationWrapperLst[diagnosisBlockNum].iCDCode];
                     if(icdCodeInfo.size() > 0)
@@ -666,7 +670,7 @@ showAddAnotherDiagnosisBtn = true;
                     currLead.Qualifying_Diagnosis__c = '';
                     currLead.Qualifying_ICD__c = NULL;
                     currLead.Is_Required_Bypass__c = true;
-                    currLead.MAW_Name__c = '';                    
+                    currLead.PR_Diagnosis__c = '';
                 }
                 if(diagnosisVerificationWrapperLst.size() < 5 ){
                     system.debug('inside the condition');
@@ -680,7 +684,7 @@ showAddAnotherDiagnosisBtn = true;
                     currLead.Qualifying_Diagnosis__c = '';
                     currLead.Qualifying_ICD__c = NULL;
                     currLead.Is_Required_Bypass__c = true;
-                    currLead.MAW_Name__c = '';                    
+                    currLead.PR_Diagnosis__c = '';
                 }
             }
             setWishStatus();
@@ -754,7 +758,8 @@ showAddAnotherDiagnosisBtn = true;
             currLead.I_m_Part_of_The_Treating_HealthCare_Team__c = wishChildWrapperIns.healthCareWork;
             currLead.Is_in_a_Comatose_Vegetative_State__c = wishChildWrapperIns.vegetativeState;
             currLead.RFI_Form_Info_Hidden__c = wishStatus;
-            currLead.Is_We_Need_To_Expedite_The_Process__c = wishChildWrapperIns.expediteTheProcess;
+            //currLead.Is_We_Need_To_Expedite_The_Process__c = wishChildWrapperIns.expediteTheProcess;//Commented as per IME-107
+            currLead.Any_medical_reason_for_moving_quickly__c = wishChildWrapperIns.expediteTheProcess;//Added as per IME-107
             currLead.Please_Explain_Deteriorate__c = wishChildWrapperIns.explainDeteriorate;
             currLead.Please_Explain__c = wishChildWrapperIns.plzExplain;
             currLead.Will_Child_s_Condition_Deteriorate__c = wishChildWrapperIns.conditioDeteriorate;
@@ -978,7 +983,7 @@ showAddAnotherDiagnosisBtn = true;
             
             System.debug('currentConditionChosenString'+currentConditionChosenString);
             uniqueCurrentConditionSet.clear();
-            currLead.Current_Condition__c = '';
+            currLead.Travel_Restriction__c = '';
             if(!String.isEmpty(currentConditionChosenString)) {
                 for(String currCon : currentConditionChosenString.split(';')) {
                     if(travelAlgorithmMap.containsKey(currCon)) {
@@ -991,11 +996,11 @@ showAddAnotherDiagnosisBtn = true;
                 }
             }
             
-            currLead.Current_Condition__c = '';
+            currLead.Travel_Restriction__c = '';
             if(uniqueCurrentConditionSet.size() > 0) {
                 Integer i = 1;
                 for(String condition : uniqueCurrentConditionSet) {
-                    currLead.Current_Condition__c += i+'. '+condition + ';'+'\n';
+                    currLead.Travel_Restriction__c += i+'. '+condition + ';'+'\n';
                     i++;
                 }
             }
@@ -1030,7 +1035,7 @@ showAddAnotherDiagnosisBtn = true;
             LstLog.add('Medprof RecogToPracice: '+currLead.I_am_Recognized_To_Practice_As_a__c); 
             LstLog.add('Medprof PartofHealthCareTeam: '+currLead.I_m_Part_of_The_Treating_HealthCare_Team__c);
             LstLog.add('wishStatus: '+currLead.RFI_Form_Info_Hidden__c);
-            LstLog.add('Need to Expediate?: '+currLead.Is_We_Need_To_Expedite_The_Process__c);
+            LstLog.add('Need to Expediate?: '+currLead.Any_medical_reason_for_moving_quickly__c);
             LstLog.add('PlzExplainDetoriate: '+currLead.Please_Explain_Deteriorate__c);
             LstLog.add('Please Explain: '+currLead.Please_Explain__c);
             LstLog.add('why feel Eligible: '+currLead.Why_do_you_feel_would_be_eligible_Wish__c);
@@ -1063,7 +1068,7 @@ showAddAnotherDiagnosisBtn = true;
             LstLog.add('Angina: '+currLead.Angina__c);
             LstLog.add('Ventilator: '+currLead.Ventilator__c);
             LstLog.add('lung disease: '+currLead.lung_disease__c);
-            LstLog.add('Current Condition: '+currLead.Current_Condition__c);
+            LstLog.add('Current Condition: '+currLead.Travel_Restriction__c);
             LstLog.add('Best contact for phy FN: '+currLead.Best_Contact_for_Physician_First_Name__c);
             LstLog.add('Best contact for phy LN: '+currLead.Best_Contact_for_Physician_Last_Name__c);
             LstLog.add('Best contact for email: '+currLead.Best_contact_for_Physician_Email__c);
@@ -1240,7 +1245,7 @@ showAddAnotherDiagnosisBtn = true;
                     string jsonPayload;
                     system.debug('URL.getSalesforceBaseUrl().toExternalForm()'+URL.getSalesforceBaseUrl().toExternalForm());
                     jsonPayload = '{'+
-                        '    "userName": "'+mySenderName+'",'+	
+                        '    "userName": "'+mySenderName+'",'+  
                         '    "email": "'+myEmail+'",'+
                         '    "recipientId": "1",'+
                         '    "clientUserId": "1",'+

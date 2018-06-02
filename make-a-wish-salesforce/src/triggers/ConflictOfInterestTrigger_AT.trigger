@@ -84,6 +84,7 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
        Set<Id> volunteerIds = new Set<Id>();
        Set<Id> ownerIds = new Set<Id>();
        Set<Id> volunteerContactIdSet = new Set<Id>();
+       List<Conflict_Of_Interest__c> coiList = new List<Conflict_Of_Interest__c>();
         for(Conflict_Of_Interest__c  currCOI : Trigger.new)
         {
            if(currCOI.Expiration_Date__c  != Trigger.oldMap.get(currCOI.id).Expiration_Date__c && currCOI.Expiration_Date__c != Null)
@@ -96,7 +97,7 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
                    updateVolunteerContact.add(updateVolunteer);
                 }
            }
-           
+           coiList.add(currCOI);
            if(currCOI.HiddenConflictExpire__c == true && trigger.oldMap.get(currCOI.Id).HiddenConflictExpire__c  == false){
                volunteerContactIdSet.add(currCOI.Volunteer_Contact__c);
            }
@@ -127,7 +128,7 @@ trigger ConflictOfInterestTrigger_AT on Conflict_Of_Interest__c (before insert,b
         }
         
         if(volunteerContactIdSet.size() > 0)
-         BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(volunteerContactIdSet,'COI');
+         BackGroundCheck_OnAfterUpdateHelper.UpdateVOppAndVRoleStatus(volunteerContactIdSet,'COI',coiList);
      }
      
      

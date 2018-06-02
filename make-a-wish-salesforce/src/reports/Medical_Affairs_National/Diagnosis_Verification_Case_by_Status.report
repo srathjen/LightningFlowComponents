@@ -37,12 +37,17 @@
     <columns>
         <field>OWNER</field>
     </columns>
+    <description>Case by status for Current FY</description>
     <filter>
         <criteriaItems>
             <column>RECORDTYPE</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Diagnosis_Verification_Review</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Case.Test_Record__c</column>
+            <operator>equals</operator>
+            <value>0</value>
         </criteriaItems>
     </filter>
     <format>Summary</format>
@@ -65,6 +70,6 @@
     <showDetails>true</showDetails>
     <timeFrameFilter>
         <dateColumn>CREATED_DATEONLY</dateColumn>
-        <interval>INTERVAL_CUSTOM</interval>
+        <interval>INTERVAL_CURFY</interval>
     </timeFrameFilter>
 </Report>

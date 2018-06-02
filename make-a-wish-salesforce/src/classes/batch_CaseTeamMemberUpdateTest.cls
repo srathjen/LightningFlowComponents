@@ -36,8 +36,8 @@ Public class batch_CaseTeamMemberUpdateTest
             Case updateParentCase = new Case();
             updateParentCase.Id = parentCase.Id;
             updateParentCase.Sub_Status__c = 'Abandoned';
-            updateParentCase.Completed_Date__c = System.today();
-            updateParentCase.Closed_Date__c = System.today();
+            updateParentCase.Completed_Date__c = System.today()+5;
+            updateParentCase.Closed_Date__c = System.today()+5;
             updateParentCase.Status = 'Closed';
             update updateParentCase;
         }

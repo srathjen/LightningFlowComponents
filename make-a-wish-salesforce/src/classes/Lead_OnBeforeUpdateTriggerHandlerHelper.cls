@@ -126,7 +126,7 @@ if the zipcode value is updated.
             if(icdCodesSet.size() > 0)
             {   
                 
-                for(ICD_Codes__c currRec : [SELECT Id,Name, Condition_Description__r.MAW_Name__c,Group1__c,
+                for(ICD_Codes__c currRec : [SELECT Id,Name, Condition_Description__r.PR_Diagnosis__c,Group1__c,
                                             Condition_Description__c, Condition_Description__r.Code_to_Use__c,Condition_Description__r.Name
                                             FROM ICD_Codes__c WHERE Id IN :icdCodesSet])
                 {
@@ -145,42 +145,42 @@ if the zipcode value is updated.
                 }
                 for(Lead currLead : leadUpdateToMedicalInfoList)
                 {
-                    if(icdCodesMap.containsKey(currLead.PD_ICD_Code__c ))
-                    {
-                        if(icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__c != Null)
+                    if(icdCodesMap.containsKey(currLead.Qualifying_ICD__c ))
+                    {   //Removed Childs_Qualifying_Diagnosis__c as per IME-120
+                        if(icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__c != Null)
                         {
-                            //Removed Childs_Qualifying_Diagnosis__c  as per IME-120
-                            currLead.PD_Condition_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Name;
+                            currLead.Qualifying_Diagnosis__c = icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__r.Name;
                             //currLead.Childs_Qualifying_Diagnosis__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Code_to_Use__c;
                         } else {
-                            currLead.PD_Condition_Description__c = '';
-                           //currLead.Childs_Qualifying_Diagnosis__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Code_to_Use__c;
+                            currLead.Qualifying_Diagnosis__c = '';
+                            //currLead.Childs_Qualifying_Diagnosis__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Code_to_Use__c;
                         }
                     }
-                    if(currLead.PD_ICD_Code__c != null) {
-                        if(icdCodesMap.containsKey(currLead.PD_ICD_Code__c) && icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__c != null) {
-                            currLead.Maw_Name__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.MAW_Name__c;
-                            if(iCDforCondionDescMap.containsKey(icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__c)) {
-                                if(iCDforCondionDescMap.get(icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__c).contains(currLead.PD_ICD_Code__c)) {
-                                    currLead.PD_Condition_Description__c = icdCodesMap.get(currLead.PD_ICD_Code__c).Condition_Description__r.Name;
+                    if(currLead.Qualifying_ICD__c != null) {
+                        if(icdCodesMap.containsKey(currLead.Qualifying_ICD__c) && icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__c != null) {
+                            currLead.PR_Diagnosis__c = icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__r.PR_Diagnosis__c;
+                            if(iCDforCondionDescMap.containsKey(icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__c)) {
+                                if(iCDforCondionDescMap.get(icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__c).contains(currLead.Qualifying_ICD__c)) {
+                                    currLead.Qualifying_Diagnosis__c = icdCodesMap.get(currLead.Qualifying_ICD__c).Condition_Description__r.Name;
                                 }
                             }
                         }
                     }
                 }
             }
-            if(conditionDescriptionsSet.size() > 0)
-            {
+            if(conditionDescriptionsSet.size() > 0){
                 Map<String, Condition_Description__c> descriptionMap = new Map<String, Condition_Description__c>();
-                for(Condition_Description__c currRec : [SELECT Id, MAW_Name__c, Name FROM Condition_Description__C WHERE Name IN :conditionDescriptionsSet])
+                for(Condition_Description__c currRec : [SELECT Id, PR_Diagnosis__c, Name
+                                                        FROM Condition_Description__C
+                                                        WHERE Name IN :conditionDescriptionsSet])
                 {
                     descriptionMap.put(currRec.Name,currRec);
                 }
                 for(Lead currLead : leadUpdateToMedicalInfoList)
                 {
-                    if(descriptionMap.containsKey(currLead.PD_Condition_Description__c))
+                    if(descriptionMap.containsKey(currLead.Qualifying_Diagnosis__c))
                     {
-                        currLead.Maw_Name__c = descriptionMap.get(currLead.PD_Condition_Description__c).MAW_Name__c;
+                        currLead.PR_Diagnosis__c = descriptionMap.get(currLead.Qualifying_Diagnosis__c).PR_Diagnosis__c;
                     }
                 }
             }
@@ -222,6 +222,7 @@ as elegibility review.
                 }
             }
             for(Lead processLead : LeadList){
+                system.debug('@@@ processLead.Name @@@'+processLead);
                 case newcase = new case();
                 newCase.status = 'New'; //Modified as per IME 18 
                 newCase.origin = 'Email';
@@ -236,7 +237,8 @@ as elegibility review.
                 newCase.Lead__c = processLead.id;
                 newCase.AccountId = processLead.ChapterName__c;
                 newCase.ChapterName__c = processLead.ChapterName__c;
-                if(processLead.Is_We_Need_To_Expedite_The_Process__c == 'Yes') {
+                //IME-107 - Changed Is_We_Need_To_Expedite_The_Process__c to Any_medical_reason_for_moving_quickly__c
+                if(processLead.Any_medical_reason_for_moving_quickly__c == 'Yes') {
                     newCase.Rush__c = True;
                     newCase.Rush_Explanation__c = processLead.Please_Explain__c;
                     newCase.Rush_Timeframe__c = 'Select timeframe';
@@ -636,7 +638,7 @@ It will display error message if any duplicate wishchild or wish family or medic
                 else
                     message = message+', '+'DOB';
             }
-            //Removed Childs_Qualifying_Diagnosis__c  criteria as per IME-120
+            //Removed as per IME-120
             /*if(le.Childs_Qualifying_Diagnosis__c == null){
                 if(message == '' || message == Null)
                     message = 'Child\'s Qualifying Diagnosis';
@@ -645,9 +647,9 @@ It will display error message if any duplicate wishchild or wish family or medic
             }*/
             if(le.Any_medical_reason_for_moving_quickly__c == null){
                 if(message == '' || message == Null)
-                    message = 'Any Medical Reason For Moving Quickly?';
+                    message = 'Potential Rush';
                 else
-                    message= message+', '+'Any Medical Reason For Moving Quickly?'; 
+                    message= message+', '+'Potential Rush'; 
             }
             if(le.Part_A_Received__c == null){
                 if(message == '' || message == Null)
@@ -698,7 +700,7 @@ It will display error message if any duplicate wishchild or wish family or medic
         for(Chapter_Name_Settings__c chapter: chapterMap.values()){
             chapterName.add(chapter.Name);
         }        
-        for(Lead processLead: leadList){            
+        for(Lead processLead: leadList){   
             if(chapterName.contains(processLead.Hidden_Chapter_Name__c)){                
                 Task newRushTask = new Task(Description = 'New RUSH referral qualified',
                                             Priority = 'Normal', 
@@ -713,5 +715,37 @@ It will display error message if any duplicate wishchild or wish family or medic
         if(newTaskList.size() > 0){
             insert newTaskList;
         }        
+    }
+    
+    //IME-107
+    public static void createPotentialRushTask(List<Lead> leadList){
+        List<Task> newTaskList = new List<Task>();
+        for(Lead processLead: leadList){ 
+            System.debug('IME 107 in for loop');
+            Task newRushTask = new Task(Priority = 'Normal',
+                                        Status = 'Not Started',
+                                        Subject = 'Rush has been changed from Yes to No/ Not sure, reach out to family if necessary', 
+                                        OwnerId =  processLead.OwnerId,
+                                        ActivityDate = System.today()+3,
+                                        SystemGeneratedTask__c = true,
+                                        WhoId = processLead.Id);
+            newTaskList.add(newRushTask);
+        }     
+        if(newTaskList.size() > 0){
+            insert newTaskList;
+        }
+    }
+    //IME-120
+    public static void updateQualifingDiagnosis(String ICDCode, List<Lead> leadList){
+        List<ICD_Codes__c> icdCodeSet = [SELECT Id,Name,Condition_Description__r.Name,
+                                         Condition_Description__r.PR_Diagnosis__c 
+                                         FROM ICD_Codes__c WHERE Name =: ICDCode AND Group1__c = true LIMIT 1];
+        if(IcdCodeSet.size() > 0){
+            for(Lead newLead : leadList){
+                newLead.Qualifying_ICD__c = icdCodeSet[0].Id;
+                newLead.Qualifying_Diagnosis__c = icdCodeSet[0].Condition_Description__r.Name;
+                newLead.PR_Diagnosis__c = icdCodeSet[0].Condition_Description__r.PR_Diagnosis__c; 
+            }
+        }
     }
 }

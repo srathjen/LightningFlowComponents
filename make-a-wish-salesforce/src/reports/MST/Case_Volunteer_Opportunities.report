@@ -21,7 +21,6 @@
     <filter>
         <criteriaItems>
             <column>FK_CASE_STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Ready to Assign</value>
         </criteriaItems>

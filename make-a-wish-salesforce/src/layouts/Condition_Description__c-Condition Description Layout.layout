@@ -22,7 +22,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>MAW_Name__c</field>
+                <field>PR_Diagnosis__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>

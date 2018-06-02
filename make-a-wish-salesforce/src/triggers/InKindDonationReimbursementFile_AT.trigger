@@ -7,14 +7,16 @@ trigger InKindDonationReimbursementFile_AT on InkindDon_reimburseFile__c (After 
     if(trigger.isAfter && trigger.isInsert){
         List<Id> drIds = new List<Id>();
         set<string> inkindIdsSet = new set<string>();
+        MAp<Id,String> inkindFileMap = new Map<Id,String>();
         list<In_Kind_Donation_Reimbursement__c> updatedInkindList = new List<In_Kind_Donation_Reimbursement__c>();
         for(InkindDon_reimburseFile__c dr: Trigger.new){
             drIds.add(dr.Id);
+            inkindFileMap.put(dr.Id,String.valueOf(dr));
             if(dr.Parent__c !=Null)
-                inkindIdsSet.add(dr.Parent__c);
+                inkindIdsSet.add(dr.Parent__c);            
         }
        
-        AWSFilePath_AC.UpdateInKindDonReimburFilePath(drIds);
+        AWSFilePath_AC.UpdateInKindDonReimburFilePath(drIds,inkindFileMap);
         if(inkindIdsSet.size() >0){
             for(In_Kind_Donation_Reimbursement__c currentInkind :[SELECT Id,Documentation__c FROm In_Kind_Donation_Reimbursement__c WHERE ID IN:inkindIdsSet]){
                 currentInkind.Documentation__c = 'Attached';

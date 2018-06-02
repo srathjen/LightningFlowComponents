@@ -9,8 +9,8 @@ approve the record.
 Modification Log:
 1. Vignesh SM - IME 58 Line No 395-409
 1. 06/04/2018 - Vignesh SM - IME 9 - Line No. 1467-1480
-2. 06/04/2018 - Yuvraj - IME-81 - Line No: 558-560
-3. 12/04/2018 - Yuvraj - IME-86 - Line No: 134,327,764,783,1183-1185, 1120-1222, 1250-1252, 1287-1289, 1321-1323
+2. 04/06/2018 - Yuvraj - IME-81 - Line No: 558-560
+3. 04/12/2018 - Yuvraj - IME-86 - Line No: 134,327,764,783,1183-1185, 1120-1222, 1250-1252, 1287-1289, 1321-1323
 *******************************************************************************************************************/
 
 Public class Lead_OnAfterUpdateTriggerHandlerHelper{
@@ -543,10 +543,13 @@ aslo create new relationship record and it associate with wish child record.
                         newcase.Status = 'Qualified';
                         newcase.Hidden_Why_do_you_feel__c = LeadMap.get(convertLeads.getLeadId()).Why_do_you_feel_would_be_eligible_Wish__c;
                         newcase.Origin = 'Web';
-                        if(LeadMap.get(convertLeads.getLeadId()).Is_We_Need_To_Expedite_The_Process__c == 'Yes') {
+                        //IME- 107 - changed "Is_We_Need_To_Expedite_The_Process__c" to "Rush__c"
+                        if(LeadMap.get(convertLeads.getLeadId()).Rush__c == true) {
                             newCase.Rush__c = true;
                             newCase.Rush_Explanation__c = LeadMap.get(convertLeads.getLeadId()).Please_Explain__c;
                             newCase.Rush_Timeframe__c = 'Select timeframe';
+                        }else{
+                            newCase.Rush__c = false;
                         }
                         if(LeadMap.get(convertLeads.getLeadId()).Referred_Date__c != null)
                             newCase.Referral_Date__c = LeadMap.get(convertLeads.getLeadId()).Referred_Date__c;

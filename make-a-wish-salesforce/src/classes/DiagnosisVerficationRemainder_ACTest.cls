@@ -190,6 +190,7 @@ public class DiagnosisVerficationRemainder_ACTest
         updateLead.id = currLead.id;
         updateLead.Part_A_Sent__c = Date.Today();
         updateLead.Sub_Status__c = 'Pending Diagnosis Verification';
+        updateLead.Inquiry_Date__c = Date.today().addDays(-4);
         updateLead.Referred_Date__c = Date.today().addDays(-3);
         updateLead.Diagnosis_Given_By_Referrer__c = 'Malignant';
         updateLead.Dup_Check__c = 'Block Lead Dup';

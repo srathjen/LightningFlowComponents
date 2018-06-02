@@ -206,6 +206,15 @@
                                     <div class="divTableCell">Gender:</div>
                                     <div class="divTableCell">{!currLead.Gender__c }</div>
                                 </div>
+                                
+                                <apex:outputPanel layout="none" rendered="{!if(currLead.Gender__c == 'Self-describe', True, false)}">
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Self describe:</div>
+                                        <div class="divTableCell">{!currLead.Self_describe_comment_box__c }</div>
+                                    </div>
+                                    
+                                </apex:outputPanel>
+                                
                                 <div class="divTableRow">
                                     <div class="divTableCell">DOB:</div>
                                     <div class="divTableCell"><apex:outputText value="{0,date,MM'/'dd'/'yyyy}">
@@ -311,14 +320,14 @@
                                 
                                 <apex:outputPanel layout="none" rendered="{!if(currLead.of_Siblings__c != null, True, false)}">
                                     <div class="divTableRow">
-                                        <div class="divTableCell">Number of Sibilings:</div>
+                                        <div class="divTableCell">Number of Siblings:</div>
                                         <div class="divTableCell">{!currLead.of_Siblings__c }</div>
                                     </div>
                                     
                                 </apex:outputPanel>
                                 <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
                                     <div class="divTableRow">
-                                        <b class="hdr-bld">Sibiling Details</b>
+                                        <b class="hdr-bld">Sibling Details</b>
                                     </div>
                                 </apex:outputPanel> 
                                 <apex:outputPanel layout="none" rendered="{!if(sibList.size !=0, True, false)}">
@@ -351,6 +360,14 @@
                                     <div class="divTableCell">ICD Code:</div>
                                     <div class="divTableCell">{!currLead.PD_ICD_Code__r.Name }</div>
                                 </div>
+                                
+                                <apex:outputPanel layout="none" rendered="{!if(currLead.Other_diagnosis__c != '', True, false)}">
+                                    <div class="divTableRow">
+                                        <div class="divTableCell">Primary Diagnosis Description:</div>
+                                        <div class="divTableCell">{!currLead.Other_diagnosis__c }</div>
+                                    </div>
+                                    
+                                </apex:outputPanel>
                                 
                                 <div class="divTableRow">
                                     <div class="divTableCell">Approximate Diagnosis Date</div>

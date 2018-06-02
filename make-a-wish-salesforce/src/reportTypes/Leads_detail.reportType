@@ -109,11 +109,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>MAW_Name__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Other_diagnosis__c</field>
             <table>Lead</table>
         </columns>
@@ -296,11 +291,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Current_Condition__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Current_Condition_Label__c</field>
             <table>Lead</table>
         </columns>
@@ -327,11 +317,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Is_in_a_Comatose_Vegetative_State__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Is_We_Need_To_Expedite_The_Process__c</field>
             <table>Lead</table>
         </columns>
         <columns>
@@ -832,6 +817,11 @@
             <field>PostalCode</field>
             <table>Lead</table>
         </columns>
+        <columns>
+            <checkedByDefault>false</checkedByDefault>
+            <field>Rush__c</field>
+            <table>Lead</table>
+        </columns>
         <masterLabel>Leads</masterLabel>
     </sections>
     <sections>
@@ -843,11 +833,6 @@
         <columns>
             <checkedByDefault>false</checkedByDefault>
             <field>Child_Middle_Initial__c</field>
-            <table>Lead</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
-            <field>Childs_Qualifying_Diagnosis__c</field>
             <table>Lead</table>
         </columns>
         <columns>

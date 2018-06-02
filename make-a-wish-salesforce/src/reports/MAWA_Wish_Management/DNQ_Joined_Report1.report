@@ -29,13 +29,11 @@
         <filter>
             <criteriaItems>
                 <column>STATUS</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>DNQ</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Lead.Test_Record__c</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
@@ -84,19 +82,16 @@
         <filter>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
             <criteriaItems>
                 <column>STATUS</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>DNQ</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Sub_Status__c</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Previous Wish,Medical,Age,No Response</value>
             </criteriaItems>

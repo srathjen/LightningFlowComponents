@@ -13,23 +13,21 @@
         <field>Lead$Status</field>
     </columns>
     <columns>
-        <field>Lead$Is_We_Need_To_Expedite_The_Process__c</field>
+        <field>Lead$Any_medical_reason_for_moving_quickly__c</field>
     </columns>
     <columns>
         <field>Lead$Please_Explain__c</field>
     </columns>
     <filter>
         <criteriaItems>
-            <column>Lead$Is_We_Need_To_Expedite_The_Process__c</column>
-            <isUnlocked>true</isUnlocked>
-            <operator>equals</operator>
-            <value>Yes</value>
-        </criteriaItems>
-        <criteriaItems>
             <column>Lead$ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish North Texas</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Lead$Any_medical_reason_for_moving_quickly__c</column>
+            <operator>contains</operator>
+            <value>Yes</value>
         </criteriaItems>
     </filter>
     <format>Tabular</format>
@@ -43,6 +41,6 @@
     <showDetails>true</showDetails>
     <timeFrameFilter>
         <dateColumn>Lead$Referred_Date__c</dateColumn>
-        <interval>INTERVAL_PREV2FY</interval>
+        <interval>INTERVAL_CURFY</interval>
     </timeFrameFilter>
 </Report>

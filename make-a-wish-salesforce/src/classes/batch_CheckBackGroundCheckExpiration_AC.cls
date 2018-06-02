@@ -7,7 +7,7 @@ to "Out of Compliance" when the Background Check is expired
 global class batch_CheckBackGroundCheckExpiration_AC implements Database.Batchable<sObject>  {
     
     global Database.QueryLocator start(Database.BatchableContext BC)  {
-        return Database.getQueryLocator([SELECT id, Date__c, Current__c, Volunteer__c FROM Background_check__c WHERE Current__c = True AND Date__c <= TODAY ]);
+        return Database.getQueryLocator([SELECT id, Date__c, Current__c, Volunteer__c FROM Background_check__c WHERE Current__c = True AND Date__c < TODAY ]);
     }
     
     
@@ -19,7 +19,7 @@ global class batch_CheckBackGroundCheckExpiration_AC implements Database.Batchab
         }
         
         if(volContactIdSet.size() > 0) {
-            BackGroundCheckTriggerHandler.UpdateVOppAndVRoleStatus(volContactIdSet, 'backgroundcheck');
+            BackGroundCheck_OnAfterUpdateHelper.UpdateVOppAndVRoleStatus(volContactIdSet, 'backgroundcheck',backGroundCheckExpiredList);
         }
         
     }   

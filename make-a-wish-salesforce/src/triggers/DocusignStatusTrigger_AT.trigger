@@ -4,19 +4,18 @@ CreatedBy   : Kanagaraj
 Date        : 12/07/2016
 Description : DocusignStatusTrigger_AT  is used when the docusign status record is created and its status
 is completed then it will create a new conflict of interest records.
-
-Modification Log:
-1. 26/03/2018 - Vignesh SM - IME 18 - Line No. 83
 *****************************************************************************************************/
 
 Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, after update) {
    
     if((trigger.isBefore && trigger.isUpdate && RecursiveTriggerHandler.blockBeforeUpdate == true) || (trigger.isAfter && trigger.isUpdate && RecursiveTriggerHandler.blockAfterUpdate)){
-        system.debug('@@@ NOT EXECUTE @@@'+RecursiveTriggerHandler.blockBeforeUpdate);
-        system.debug('@@@ NOT EXECUTE @@@'+RecursiveTriggerHandler.blockAfterUpdate);
+        
      return; 
     } 
     if(Trigger.isBefore && Trigger.isUpdate && RecursiveTriggerHandler.blockBeforeUpdate == false) {
+        Constant_AC  constant = new Constant_Ac();   
+        String wishPlanningRecordTypeId = Schema.Sobjecttype.Case.getRecordTypeInfosByName().get(constant.wishPlanningAnticipationRT).getRecordTypeId();
+
         List<Contact> contactList = New List<Contact>();
         List<Contact> confilictContactList = New List<Contact>(); 
         List<Conflict_Of_Interest__c> conflictList = New List<Conflict_Of_Interest__c>();
@@ -27,9 +26,12 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
         Set<Id> parentWishIdSet = new Set<Id>();
         Set<Id> dstsIds = new Set<Id>();
         Set<Id> wishClearenceSetId = new Set<Id>();
-        
+        List<dsfs__DocuSign_Status__c> docuSignstatusList = new List<dsfs__DocuSign_Status__c>();
+        Set<Id> parentIdSet = new Set<Id>();
+        List<Case> updatePlanningCAseList = new List<Case>();
         for(dsfs__DocuSign_Status__c dsts:Trigger.new)
         {    
+        
             if(dsts.dsfs__Envelope_Status__c == 'Completed' && Trigger.oldMap.get(dsts.id).dsfs__Envelope_Status__c  != 'Completed' && dsts.dsfs__Case__c != Null){
                 
                 string subject = dsts.dsfs__Subject__c.trim();
@@ -40,17 +42,22 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
                 }
                 if(subject.contains('Signature Required – Make-A-Wish Wish Clearance Form') || subject.contains('Signature Required – Make-A-Wish Rush Wish Clearance Form')){
                     wishClearenceSetId.add(dsts.dsfs__Case__c);
+                    parentIdSet.add(dsts.dsfs__Case__c);
+                }
+                /* ****   WVC-2015  ***** */
+                if(subject.contains('Signature Required – Make-A-Wish Wish Clearance No Travel Form') || subject.contains('Signature Required – Make-A-Wish Rush Wish Clearance No Travel Form')){
+                    wishClearenceSetId.add(dsts.dsfs__Case__c);
+                    parentIdSet.add(dsts.dsfs__Case__c);
                 }
                 
+                /***** End WVC-2015 ****/
                 if(subject.contains('Signature Required – Make-A-Wish Wish Clearance, Child'+'\'s'+' '+ 'Medical Summary:') || subject.contains('Signature Required – Make-A-Wish Rush Wish Clearance, Child'+'\'s'+' '+ 'Medical Summary:') ){
                     system.debug('@@@@@@@ Inside the Combo Documnet');
                     parentWishIdSet.add(dsts.dsfs__Case__c);
                     wishClearenceSetId.add(dsts.dsfs__Case__c);
                     
                 }
-                
-                
-            }
+             }
             
             if(dsts.dsfs__Envelope_Status__c == 'Completed' && Trigger.oldMap.get(dsts.id).dsfs__Envelope_Status__c  != 'Completed')
             {
@@ -72,20 +79,18 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
                 
                 leadIdSet.add(dsts.dsfs__Lead__c);
             }
+            
         }
-        
         
         if(leadIdSet.size() > 0)
         {
-            for(Lead dbLead : [SELECT Id,isSign__c,Status,RFI_Form_Info_Hidden__c,Auto_Qualified__c from Lead WHERE Id in:leadIdSet AND Status = :'Referred' AND Sub_Status__c = 'Pending Diagnosis Verification']){
+            for(Lead dbLead : [SELECT Id,isSign__c,Status,RFI_Form_Info_Hidden__c, Auto_Qualified__c from Lead WHERE Id in:leadIdSet AND Status = :'Referred' AND Sub_Status__c = 'Pending Diagnosis Verification']){
                 if(dbLead.RFI_Form_Info_Hidden__c  == 'Qualified'){
                     dbLead.Status = 'Qualified';
-                    dbLead.Auto_Qualified__c = true; //Added as per IME 18
-                    dbLead.Is_Required_Bypass__c = true;//Added as per IME-60
+                    //dbLead.Auto_Qualified__c = true; Removed as per IME 39
                 }
                 if(dbLead.RFI_Form_Info_Hidden__c  == 'Not Qualified'){
                     dbLead.Status = 'Eligibility Review';
-                    dbLead.Is_Required_Bypass__c = false;//Added as per IME-60
                 }
                 dbLead.isSign__c = true;
                 leadList.add(dbLead);
@@ -133,6 +138,15 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
                 updatechildSummaryMap.put(dbCase.Id,dbCase);
             }
             update updatechildSummaryMap.values();
+        }
+        If(parentIdSet.Size() > 0){
+            for(Case planningCase : [SELECT Id,Date_Received_for_Wish_Safety_Authorizat__c,Wish_Safety_Authorization_Part_B_Form__c FROM Case WHERE ParentId IN :parentIdSet AND RecordTypeId =: wishPlanningRecordTypeId ]){
+                planningCase.Date_Received_for_Wish_Safety_Authorizat__c  = System.today();
+                planningCase.Wish_Safety_Authorization_Part_B_Form__c = True;
+                updatePlanningCaseList.add(planningCase);
+            }
+            If(updatePlanningCAseList.Size() > 0)
+                Update updatePlanningCAseList;
         }
         
         Map<Id,dsfs__DocuSign_Status__c> dstsStatusRecMap = new  Map<Id,dsfs__DocuSign_Status__c>();
@@ -215,11 +229,13 @@ Trigger DocusignStatusTrigger_AT  on dsfs__DocuSign_Status__c (before update, af
             if(newStatus.dsfs__Contact__c != null && newStatus.dsfs__Subject__c == 'Diagnosis Verification Form' && newStatus.dsfs__Contact__c != Trigger.oldMap.get(newStatus.Id).dsfs__Contact__c) {
                 contactDocusignMap.put(newStatus.dsfs__Contact__c, newStatus.Id);
             }
+            
         }
         
         if(contactDocusignMap.size() > 0) {
             DocusignStatusTriggerHandler.WishChildDVAttachment(contactDocusignMap);
         }
+        
     }
     
 }

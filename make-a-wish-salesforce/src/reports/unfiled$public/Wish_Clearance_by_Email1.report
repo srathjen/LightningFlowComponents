@@ -46,67 +46,56 @@
         <booleanFilter>(((1 AND 2 AND 3 AND (4 OR 5) AND 6 AND (7 OR 8)) AND 9) AND 10) AND 11</booleanFilter>
         <criteriaItems>
             <column>RECORDTYPE</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Wish</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Wish Determined,Wish Design,Wish Scheduled</value>
         </criteriaItems>
         <criteriaItems>
             <column>CLOSED</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Clearance_Received_Date__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>lessOrEqual</operator>
             <value>10/31/2016</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Clearance_Received_Date__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Child_s_Medical_Summary_received_date__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>lessOrEqual</operator>
             <value>10/31/2016</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Child_s_Medical_Summary_received_date__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT.NAME</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>nemo clownfish</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>make-a-wish arizona</value>
         </criteriaItems>

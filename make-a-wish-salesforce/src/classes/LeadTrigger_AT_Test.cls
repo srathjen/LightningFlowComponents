@@ -19,43 +19,49 @@ public class LeadTrigger_AT_Test{
     //This method is create the lead with addidional parent information.
     public testmethod static void sameAdditionalParent(){
         try{
-        Id chapterAccount = OrientationandTrainingUtil.CreateAlabamaAccount();
-        Condition_Description__c descrip = OrientationandTrainingUtil.createConditionDesCription(); 
-        insert descrip;
-        Account chapAcc = OrientationandTrainingUtil.MakeAWishAmericaAcc();
-        Contact medicalProfessionalCon = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
-        ICD_Codes__c icdCode = OrientationandTrainingUtil.createICDCode(descrip.Id);
-        insert icdCode;
-        Lead newLead = OrientationandTrainingUtil.createAdditionalParentLead(chapterAccount);
-        insert newLead;
-        Condition_Description__c conditionDesCription = OrientationandTrainingUtil.createConditionDesCription();
-        Insert conditionDesCription;
-        ICD_Codes__c obj=new ICD_Codes__c();
-        obj.Name='C120';
-        obj.Condition_Description__c = conditionDesCription.Id;
-        insert obj;
-        RecursiveTriggerHandler.isFirstTime = true; 
-        System.assertEquals( RecursiveTriggerHandler.isFirstTime,true);
-        newLead.SD1_ICD_Code__c = icdCode.Id;
-        newLead.SD2_ICD_Code__c = icdCode.Id;
-        newLead.SD3_ICD_Code__c = icdCode.Id;
-        newLead.SD4_ICD_Code__c = icdCode.Id;
-        newLead.Status = 'Referred';
-        newLead.ChapterName__c = chapAcc.Id;
-        newLead.Sub_Status__c = 'Pending Diagnosis Verification';
-        newLead.Treating_Medical_Professional_Contact_Id__c = medicalProfessionalCon.Id;
-        newLead.Medical_Professional_ContactId__c =  medicalProfessionalCon.Id;
-        newLead.Hidden_Best_Contact_Person_Id__c = medicalProfessionalCon.Id;
-        newLead.Relationship_to_child__c = 'Medical Professional'; 
-        newLead.Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
-        newLead.PD_ICD_Code__c = obj.Id;
-        update newLead;        
-        newLead.Status = 'Qualified';
-        Test.startTest();
-        update newLead;
-        Test.stopTest();
-        System.assertEquals(newLead.Status,'Qualified');
-        System.assertEquals(medicalProfessionalCon.Id,newLead.Treating_Medical_Professional_Contact_Id__c );
+            Id chapterAccount = OrientationandTrainingUtil.CreateAlabamaAccount();
+            Condition_Description__c descrip = OrientationandTrainingUtil.createConditionDesCription(); 
+            insert descrip;
+            Account chapAcc = OrientationandTrainingUtil.MakeAWishAmericaAcc();
+            Contact medicalProfessionalCon = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
+            ICD_Codes__c icdCode = OrientationandTrainingUtil.createICDCode(descrip.Id);
+            insert icdCode;
+            Lead newLead = OrientationandTrainingUtil.createAdditionalParentLead(chapterAccount);
+            insert newLead;
+            Condition_Description__c conditionDesCription = OrientationandTrainingUtil.createConditionDesCription();
+            Insert conditionDesCription;
+            ICD_Codes__c obj=new ICD_Codes__c();
+            obj.Name='C120';
+            obj.Condition_Description__c = conditionDesCription.Id;
+            insert obj;
+            ICD_Codes__c obj1=new ICD_Codes__c();
+            obj1.Name='C121';
+            obj1.Condition_Description__c = conditionDesCription.Id;
+            insert obj1;
+            RecursiveTriggerHandler.isFirstTime = true; 
+            System.assertEquals( RecursiveTriggerHandler.isFirstTime,true);
+            newLead.SD1_ICD_Code__c = icdCode.Id;
+            newLead.SD2_ICD_Code__c = icdCode.Id;
+            newLead.SD3_ICD_Code__c = icdCode.Id;
+            newLead.SD4_ICD_Code__c = icdCode.Id;
+            newLead.Status = 'Referred';
+            newLead.ChapterName__c = chapAcc.Id;
+            newLead.Sub_Status__c = 'Pending Diagnosis Verification';
+            newLead.Treating_Medical_Professional_Contact_Id__c = medicalProfessionalCon.Id;
+            newLead.Medical_Professional_ContactId__c =  medicalProfessionalCon.Id;
+            newLead.Hidden_Best_Contact_Person_Id__c = medicalProfessionalCon.Id;
+            newLead.Relationship_to_child__c = 'Medical Professional'; 
+            newLead.Hidden_DV_form_Medical_professional_Type__c = 'Treating Medical Professional';
+            newLead.PD_ICD_Code__c = obj.Id;
+            newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+            update newLead;        
+            newLead.Status = 'Qualified';
+            newLead.PD_ICD_Code__c = obj1.Id;
+            Test.startTest();
+            update newLead;
+            Test.stopTest();
+            System.assertEquals(newLead.Status,'Qualified');
+            System.assertEquals(medicalProfessionalCon.Id,newLead.Treating_Medical_Professional_Contact_Id__c );
         }
         
         catch(DMLException e) {
@@ -101,7 +107,8 @@ public class LeadTrigger_AT_Test{
         update newLead;
         Test.startTest();
         newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
-        newLead.Childs_Qualifying_Diagnosis__c = 'Testrr';
+        newLead.Please_Explain__c = 'Yes';
+        //newLead.Childs_Qualifying_Diagnosis__c = 'Testrr';
         newLead.I_am_Recognized_To_Practice_As_a__c = 'Nurse';
         newLead.Status = 'Qualified';
         update newLead;
@@ -122,13 +129,13 @@ public class LeadTrigger_AT_Test{
         ICD_Codes__c icdCode = OrientationandTrainingUtil.createICDCode(descrip.Id);
         insert icdCode;
         //Test.startTest();
-         Constant_AC  constant = new Constant_AC();
-         Id hospitalTreatMentRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.hospitalTreatment).getRecordTypeId();
-         Account newAccount = new Account();
-         newAccount.Name = 'TestReferrer';
-         newAccount.RecordTypeId = hospitalTreatMentRecordTypeId;
-         Insert newAccount;
-                    
+        Constant_AC  constant = new Constant_AC();
+        Id hospitalTreatMentRecordTypeId = Schema.SObjectType.Account.getRecordTypeInfosByName().get(constant.hospitalTreatment).getRecordTypeId();
+        Account newAccount = new Account();
+        newAccount.Name = 'TestReferrer';
+        newAccount.RecordTypeId = hospitalTreatMentRecordTypeId;
+        Insert newAccount;
+        
         Lead newLead = OrientationandTrainingUtil.createSameMedicalLead(chapterAccount);
         newLead.Sibling_Detail__c = 'aa | - | 12';
         newLead.PD_ICD_Code__c = icdCode.Id;
@@ -171,11 +178,13 @@ public class LeadTrigger_AT_Test{
         newLead.HiddenAlternate1MedProfessionalId__c =  medicalProfessionalCon.Id;
         newLead.HiddenAlternate2MedProfessionalId__c =  medicalProfessionalCon2.Id;
         newLead.Hidden_Additional_Parent_Id__c =  FamilyContact.Id;
+        newLead.Any_medical_reason_for_moving_quickly__c = 'No';
         //newLead.Hidden_Best_Contact_Person_Id__c = medicalProfessionalCon.Id;
         update newLead;
         Test.startTest();
         newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
-        newLead.Childs_Qualifying_Diagnosis__c = 'Testrr';
+        newLead.Please_Explain__c = 'Test';
+        //newLead.Childs_Qualifying_Diagnosis__c = 'Testrr';
         newLead.I_am_Recognized_To_Practice_As_a__c = 'Nurse';
         newLead.Status = 'Qualified';
         update newLead;
@@ -185,7 +194,7 @@ public class LeadTrigger_AT_Test{
     }
     
     /*The lead has contain the alternate medical provider details.
-    medical professional contact merged with existing contact*/
+medical professional contact merged with existing contact*/
     public testmethod static void updateLeadAsQualifiedAlternateMedCon(){
         Id chapterAccount = OrientationandTrainingUtil.CreateAlabamaAccount();
         Condition_Description__c descrip = OrientationandTrainingUtil.createConditionDesCription(); 
@@ -210,7 +219,7 @@ public class LeadTrigger_AT_Test{
         newLead.Alternate2MedProfessionalEmail__c = 'alternate@gmail.com';
         newLead.Referrer_Email__c = 'alternate@gmail.com';
         newLead.Alternate2MedProfessionalPhone__c = '9600467559';
-         newLead.Alternate2HospitalTreatmentFacility__c = 'TestAlternate2Hospital';
+        newLead.Alternate2HospitalTreatmentFacility__c = 'TestAlternate2Hospital';
         newLead.Referrer_Phone__c = '9600467559';
         newLead.PD_ICD_Code__c = icdCode.Id;
         newLead.Diagnosis_Given_By_Referrer__c  = 'Test';   
@@ -227,7 +236,7 @@ public class LeadTrigger_AT_Test{
         newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         newLead.Hidden_DV_form_Medical_professional_Type__c = 'Alternate 2 Medical Professional';
         newLead.Wish_Family_ContactId__c = FamilyContact.Id;
-       // newLead.HiddenAlternate2MedProfessionalId__c =  medicalProfessionalCon.Id;
+        // newLead.HiddenAlternate2MedProfessionalId__c =  medicalProfessionalCon.Id;
         newLead.Hidden_Additional_Parent_Id__c =  FamilyContact.Id;
         newLead.Hidden_Best_Contact_Person_Id__c = medicalProfessionalCon.Id;
         newLead.DOB__c = system.today() - 8543;
@@ -235,7 +244,8 @@ public class LeadTrigger_AT_Test{
         update newLead;
         Test.startTest();
         newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
-        newLead.Childs_Qualifying_Diagnosis__c = 'Testrr';
+        newLead.Please_Explain__c = 'Test';
+        //newLead.Childs_Qualifying_Diagnosis__c = 'Testrr';
         newLead.I_am_Recognized_To_Practice_As_a__c = 'Nurse';
         newLead.Status = 'Qualified';
         update newLead;
@@ -288,6 +298,7 @@ public class LeadTrigger_AT_Test{
         RecursiveTriggerHandler.isFirstTime = true; 
         update newLead;
         newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        newLead.Please_Explain__c = 'Yes';
         newLead.Status = 'Qualified';
         Test.StartTest();
         update newLead;
@@ -298,7 +309,7 @@ public class LeadTrigger_AT_Test{
     
     //This Method is used increase the code coverage when the lead is send to DV form and convert the lead with Qualified status.
     public testmethod static void UpdateStatusAsQualified(){    
-       
+        
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         Condition_Description__c descrip = OrientationandTrainingUtil.createConditionDesCription(); 
         insert descrip;
@@ -321,9 +332,10 @@ public class LeadTrigger_AT_Test{
         newLead.Is_Required_Bypass__c = true;
         RecursiveTriggerHandler.isFirstTime = true; 
         Test.startTest();       
-            
+        
         update newLead;
         newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        newLead.Please_Explain__c = 'Yes';
         newLead.Status = 'Qualified';        
         update newLead ;
         Test.stopTest();
@@ -362,6 +374,7 @@ public class LeadTrigger_AT_Test{
         update newLead;
         Test.startTest();
         newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        newLead.Please_Explain__c = 'Test';
         newLead.Status = 'Qualified';       
         update newLead ;
         Test.stopTest();
@@ -373,6 +386,9 @@ public class LeadTrigger_AT_Test{
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
         Contact wishChildContact = OrientationandTrainingUtil.CreateWishChildCon();
         Account alabamaAccountRec = OrientationandTrainingUtil.AlabamaAccount();
+        Chapter_Name_Settings__c newC = new Chapter_Name_Settings__c();
+        newC.Name = alabamaAccountRec.Name;
+        insert newC;
         Office__c  officeRec = OrientationandTrainingUtil.createOffice(alabamaAccountRec .Id);
         Insert officeRec;
         Zip_Code__c  zipRec = OrientationandTrainingUtil.createZipcode(officeRec.Id);
@@ -386,14 +402,15 @@ public class LeadTrigger_AT_Test{
         newLead.StateCode = 'AZ';
         newLead.city = 'Trichy';
         newLead.Postalcode = '32193';
+        newLead.Please_Explain__c = 'Test';
         newLead.Child_Age__c = '4';
         newLead.unique_wish_identifier__c = '123456';
-        newLead.Please_Explain__c = 'Yes';
-       // newLead.PostalCode = NewIcdCode.Id;
+        // newLead.PostalCode = NewIcdCode.Id;
         // newLead.Sub_Status__c ='Pending Diagnosis Verification';
         insert newLead;
         newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         newLead.Status = 'Referred';
+        newLead.Hidden_Chapter_Name__c = alabamaAccountRec.Name;
         newLead.Street = 'KuttaiKarai Street';
         newLead.StateCode = 'AZ';
         newLead.city = 'Trichy';
@@ -413,7 +430,7 @@ public class LeadTrigger_AT_Test{
         newLead.Medical_Questions__c = 'YES Test Diagnosis';
         newLead.Dup_Check__c = 'Block Lead Dup';
         newLead.unique_wish_identifier__c = '123455';
-        newLead.Is_We_Need_To_Expedite_The_Process__c = 'Yes';
+        newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
         Test.startTest();
         update newLead ;
         Test.stopTest();
@@ -432,7 +449,7 @@ public class LeadTrigger_AT_Test{
         Account chapterAc = [SELECT Id,Intake_Manager__c  FROM Account WHERE Id =:chapterAccount LIMIT 1];
         Condition_Description__c  newDesCription = OrientationandTrainingUtil.createConditionDesCription();
         ICD_Codes__c  icdCode = OrientationandTrainingUtil.createICDCode(newDesCription.Id);
-         insert icdCode;        
+        insert icdCode;        
         chapterAc.Intake_Manager__c = nationalStaff.Id;
         Contact medicalProfessionalCon = OrientationandTrainingUtil.CreateTreatingMedicalProfContact();
         Contact wishFamily = OrientationandTrainingUtil.CreateWishFamily();
@@ -440,7 +457,7 @@ public class LeadTrigger_AT_Test{
         Lead newLead = OrientationandTrainingUtil.createSameMedicalLead(chapterAccount);
         newLead.Relationship_to_child__c = 'Medical Professional';
         //newLead.ChapterName__c = OrientationandTrainingUtil.CreateAlabamaAccount();
-       // newLead.OwnerId =nationalStaff.Id;
+        // newLead.OwnerId =nationalStaff.Id;
         newLead.status = 'Referred';
         newLead.PD_ICD_Code__c = icdCode.Id;  
         newLead.Diagnosis_Given_By_Referrer__c  = 'Test'; 
@@ -483,6 +500,7 @@ public class LeadTrigger_AT_Test{
         RecursiveTriggerHandler.isFirstTime = true; 
         update newLead;
         newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        newLead.Please_Explain__c = 'Yes';
         newLead.Status = 'Qualified';
         Test.StartTest();
         update newLead;
@@ -494,7 +512,7 @@ public class LeadTrigger_AT_Test{
     //This method is used to ncrease the code coverage for the lead created with medical provider type.
     public testmethod static void duplicateLead(){ 
         RecursiveTriggerHandler.isFirstTime = true;
-         Constant_AC  constant = new Constant_AC();
+        Constant_AC  constant = new Constant_AC();
         Id medicalProfessionalRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
         Contact medicalProfContact = new Contact();
         medicalProfContact .FirstName = 'mosstest';
@@ -520,11 +538,11 @@ public class LeadTrigger_AT_Test{
         newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         RecursiveTriggerHandler.isFirstTime = true;         
         try {
-          update newLead; 
+            update newLead; 
         }
         catch (DmlException ex) {
-          System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
-          //System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
+            System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
+            //System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
         }
         
     }
@@ -545,11 +563,11 @@ public class LeadTrigger_AT_Test{
         newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         RecursiveTriggerHandler.isFirstTime = true;         
         try {
-          update newLead; 
+            update newLead; 
         }
         catch (DmlException ex) {
-          System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
-          //System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
+            System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
+            //System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
         }
         
     }
@@ -570,11 +588,11 @@ public class LeadTrigger_AT_Test{
         newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         RecursiveTriggerHandler.isFirstTime = true;         
         try {
-          update newLead; 
+            update newLead; 
         }
         catch (DmlException ex) {
-          System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
-          //System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
+            System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
+            //System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
         }
         
     }
@@ -596,18 +614,18 @@ public class LeadTrigger_AT_Test{
         newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         RecursiveTriggerHandler.isFirstTime = true;         
         try {
-          update newLead; 
+            update newLead; 
         }
         catch (DmlException ex) {
-          System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
-         // System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
+            System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
+            // System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
         }
         
     }
     //This method is used to increase the code coverage for the lead created with medical provider type.
     public testmethod static void duplicatemedicalProfList(){ 
         RecursiveTriggerHandler.isFirstTime = true;
-         Constant_AC  constant = new Constant_AC();
+        Constant_AC  constant = new Constant_AC();
         Id medicalProfessionalRecordTypeId = Schema.SobjectType.Contact.getRecordTypeInfosByName().get(constant.MedicalProfessionalRT).getRecordTypeId();
         Contact medicalProfContact = new Contact();
         medicalProfContact .FirstName = 'SteveJune';
@@ -631,11 +649,11 @@ public class LeadTrigger_AT_Test{
         newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         RecursiveTriggerHandler.isFirstTime = true;        
         try {
-          update newLead; 
+            update newLead; 
         }
         catch (DmlException ex) {
-          System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
-         // System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
+            System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
+            // System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
         }
         
     }
@@ -668,16 +686,16 @@ public class LeadTrigger_AT_Test{
         newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         RecursiveTriggerHandler.isFirstTime = true;         
         try {
-          update newLead; 
+            update newLead; 
         }
         catch (DmlException ex) {
-          System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
-         // System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
+            System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
+            // System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
         }
         
     }
     //This method is used to increase the code coverage for the lead created with duplicate best physician contact List.
-     public testmethod static void duplicateBestPhyList(){ 
+    public testmethod static void duplicateBestPhyList(){ 
         RecursiveTriggerHandler.isFirstTime = true;
         Constant_AC  constant = new Constant_AC();
         Account chapterAccount = OrientationandTrainingUtil.createchapterAccount();
@@ -706,11 +724,11 @@ public class LeadTrigger_AT_Test{
         newLead.Sub_Status__c = 'Pending Diagnosis Verification';
         RecursiveTriggerHandler.isFirstTime = true;         
         try {
-          update newLead; 
+            update newLead; 
         }
         catch (DmlException ex) {
-          System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
-         // System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
+            System.assertEquals(StatusCode.FIELD_CUSTOM_VALIDATION_EXCEPTION, ex.getDmlType(0));
+            // System.assertEquals(ex.getDmlMessage(0).Contains('There might be a duplicate Wish Child. Please click <a href=https://cs52.salesforce.com/apex/LeadDuplicate_VF?'),True);
         }
         
     }
@@ -758,6 +776,7 @@ public class LeadTrigger_AT_Test{
         update newLead;
         Test.startTest();
         newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        newLead.Please_Explain__c = 'Test';
         newLead.Status = 'Qualified';
         update newLead;
         Test.stopTest();
@@ -809,6 +828,7 @@ public class LeadTrigger_AT_Test{
         update newLead;
         Test.startTest();
         newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        newLead.Please_Explain__c = 'Test';
         newLead.Status = 'Qualified';
         update newLead;
         Test.stopTest();
@@ -855,10 +875,11 @@ public class LeadTrigger_AT_Test{
         newLead.Referrer_Phone__c = '2233445566';
         newLead.Referrer_Email__c = 'alter1@mail.com';
         newLead.Is_Required_Bypass__c = true;
-       // newLead.Hidden_DV_form_Medical_professional_Type__c = 'Alternate 1 Medical Professional';
+        // newLead.Hidden_DV_form_Medical_professional_Type__c = 'Alternate 1 Medical Professional';
         update newLead;
         Test.startTest();
         newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        newLead.Please_Explain__c = 'Test';
         newLead.Status = 'Qualified';
         update newLead;
         Test.stopTest();
@@ -923,14 +944,15 @@ public class LeadTrigger_AT_Test{
         newLead.Referrer_Phone__c = '2233445566';
         newLead.Referrer_Email__c = 'best@mail.com';
         newLead.Is_Required_Bypass__c = true;
-       // newLead.Hidden_DV_form_Medical_professional_Type__c = 'Alternate 2 Medical Professional';
+        // newLead.Hidden_DV_form_Medical_professional_Type__c = 'Alternate 2 Medical Professional';
         update newLead;
         Test.startTest();
         newLead.Any_medical_reason_for_moving_quickly__c = 'Yes';
+        newLead.Please_Explain__c = 'Yes';
         newLead.Status = 'Qualified';        
         update newLead;
         Test.stopTest();
         System.assertEquals(newLead.Status,'Qualified');
         System.assertEquals(medicalProfessionalCon.Id,newLead.Medical_Professional_ContactId__c);
     }    
-  }
+}

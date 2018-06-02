@@ -1994,16 +1994,16 @@ the changes are updated into corresponding records.
                 Logvalue = String.valueOf(updateParentCase);
                 update updateParentCase ;
                 
-                //String chapterName = currCase.ChapterName__r.Name;
-                //String queueName = chapterName.substringAfter('Make-A-Wish ');
-                //Group approvarQueue = [SELECT Id,Name FROM Group WHERE Type = 'Queue' AND Name =: queueName LIMIT 1];
+                String chapterName = currCase.ChapterName__r.Name;
+                String queueName = chapterName.substringAfter('Make-A-Wish ');
+                Group approvarQueue = [SELECT Id,Name FROM Group WHERE Type = 'Queue' AND Name =: queueName LIMIT 1];
                 
                 Approval.ProcessSubmitRequest req = new Approval.ProcessSubmitRequest();
                 req.setComments('Submitting request for approval.');
                 req.setObjectId(currCase.id);
                 req.setProcessDefinitionNameOrId('Wish_Child_Form_Approval_Process');
                 req.setSkipEntryCriteria(true);
-                //req.setNextApproverIds(new Id[]{approvarQueue.Id});
+                req.setNextApproverIds(new Id[]{approvarQueue.Id});
                 Logvalue = String.valueOf(req);
                 Approval.ProcessResult result = Approval.process(req);
             }

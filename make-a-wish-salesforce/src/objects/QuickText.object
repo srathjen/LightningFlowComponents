@@ -44,11 +44,45 @@
     <enableFeeds>false</enableFeeds>
     <fields>
         <fullName>Category</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Greetings</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>FAQ</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closings</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
     </fields>
     <fields>
         <fullName>Channel</fullName>
+        <picklist>
+            <picklistValues>
+                <fullName>Email</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Portal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Internal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
         <trackHistory>false</trackHistory>
         <type>Picklist</type>
     </fields>

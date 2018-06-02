@@ -45,25 +45,21 @@
     <filter>
         <criteriaItems>
             <column>Lead.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Lead.Hospital_Treatment_Facility_Treating__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Wish Assist</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Duplicate</value>
         </criteriaItems>

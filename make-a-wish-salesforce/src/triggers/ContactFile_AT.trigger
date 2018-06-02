@@ -39,11 +39,14 @@ trigger ContactFile_AT on cg__ContactFile__c (before insert, After insert) {
     }
     if(Trigger.isAfter && Trigger.isInsert) {
         List<Id> contactIds = new List<Id>();
+        Map<Id,String> contactFileMap = new Map<Id,String>();
+
         for(cg__ContactFile__c con: Trigger.new){
             contactIds.add(con.Id);
+             contactFileMap.put(con.Id,String.valueOf(con));
         }
         if(contactIds.size() >0) {
-            AWSFilePath_AC.updateContactFilePath(contactIds);
+            AWSFilePath_AC.updateContactFilePath(contactIds,contactFileMap);
         }
     }
 }

@@ -67,37 +67,31 @@
     <filter>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Qualified,Ready to Assign,Ready to Interview,Wish Determined,Wish Design,Wish Scheduled,Budget Approval - Submitted,Budget Approval - Approved,Hold,Inactive</value>
         </criteriaItems>
         <criteriaItems>
             <column>CONTACT_RECORDTYPE</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Contact.Wish_Child</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Wish_Assist__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Form_Tracking_Notes__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>

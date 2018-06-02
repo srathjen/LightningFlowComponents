@@ -43,11 +43,6 @@
         </columns>
         <columns>
             <checkedByDefault>false</checkedByDefault>
-            <field>Guardian__c</field>
-            <table>npe4__Relationship__c</table>
-        </columns>
-        <columns>
-            <checkedByDefault>false</checkedByDefault>
             <field>Hidden_isparentFirst__c</field>
             <table>npe4__Relationship__c</table>
         </columns>

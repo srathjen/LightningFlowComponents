@@ -40,9 +40,6 @@
         <field>npe4__Relationship__c.Parent_Legal_Guardian__c</field>
     </columns>
     <columns>
-        <field>npe4__Relationship__c.Guardian__c</field>
-    </columns>
-    <columns>
         <field>npe4__Relationship__c.Wish_Participant__c</field>
     </columns>
     <columns>
@@ -61,7 +58,6 @@
     <filter>
         <criteriaItems>
             <column>Contact.Migrated_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

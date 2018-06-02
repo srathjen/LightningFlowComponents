@@ -45,13 +45,11 @@
     <filter>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Chapter_Name__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Greater Bay Area</value>
         </criteriaItems>
         <criteriaItems>
             <column>Volunteer_Opportunity__c.Volunteer_Name__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value></value>
         </criteriaItems>

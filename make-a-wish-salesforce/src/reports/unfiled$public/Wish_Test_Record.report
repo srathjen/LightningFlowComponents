@@ -26,19 +26,16 @@
         <filter>
             <criteriaItems>
                 <column>CREATED</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>Chandrasekar Nallusamy,Kanagaraj Arjunan,Jose Rathi Francis,Sophiya George,Sudharsan Kumaravel,Furqan Maqbool,Vennila Paramasivam,ChennaReddy UmmaReddy,Kesavakumar Murugesan,Vinodhini Balraj</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.ChapterName__c</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>notEqual</operator>
-                <value>Alabama</value>
+                <value>Test Chapter</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
                 <value>0</value>
             </criteriaItems>
@@ -86,15 +83,13 @@
         <filter>
             <criteriaItems>
                 <column>Case.ChapterName__c</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
-                <value>Make-A-Wish Alabama</value>
+                <value>Make-A-Wish Alabama,Test Chapter</value>
             </criteriaItems>
             <criteriaItems>
                 <column>Case.Test_Record__c</column>
-                <isUnlocked>true</isUnlocked>
                 <operator>equals</operator>
-                <value>1</value>
+                <value>0</value>
             </criteriaItems>
         </filter>
         <format>Summary</format>

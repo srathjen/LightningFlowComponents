@@ -1,6 +1,7 @@
 <!--------------------------------------------------------------------
 Modification Log:
 1) 03/28/2018 - Yuvraj - IME-59 - Line No: 531,1154
+2) 23/05/2018 - Vignesh SM - IME 109 - Line No: 1193-1198, 313-318
 ----------------------------------------------------------------------->
 <apex:page standardController="lead" extensions="LeadDuplicate_AC"
     title="Duplicate Lead Check"
@@ -293,6 +294,9 @@ Modification Log:
              .messageCell h4 {
              	margin: 0;	
              }
+             .help h2{
+             	font-weight:bold;
+             }
     </style>
 
        
@@ -305,7 +309,13 @@ Modification Log:
             <apex:outputpanel rendered="{!isFamilyInfo == false}">
              <apex:actionRegion >
              <!----------------------------------------SELECTED LEADS------------------------------------------------------->
-              <div class="slds-card slds-m-horizontal--large {!cardClass}">
+                 <!--IME 109-->
+                 <div class="slds-notify slds-notify--alert slds-theme--inverse-text slds-theme--alert-texture help" role="alert" >
+                     <span class="slds-assistive-text">Info</span>
+                     <h2 >Please select the Existing Lead(s) you wish to merge with your Selected Lead. <br />
+                         If the Existing Lead(s) are not duplicates of your Selected Lead, check the "No Duplicate Found" box and no records will be merged.</h2>
+                 </div> 
+              <div class="slds-card slds-m-horizontal--large {!cardClass} slds-m-top--medium">
                 <div class="slds-card__header slds-grid slds-grid--align-spread">
                         <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Selected Lead</h2>
                  </div>
@@ -355,7 +365,9 @@ Modification Log:
                 <div class="slds-card slds-m-horizontal--large {!cardClass}">
                 
                     <apex:outputText rendered="{!AND(hasResults,dupLeadList.size > 0)}"> <div class="slds-card__header slds-grid slds-grid--align-spread">
-                      <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Select Existing Leads</h2>
+                        <h2 class="slds-text-heading--small slds-truncate slds-align-middle">
+                            Select Existing Leads                                                        
+                        </h2>
                      <!--   <p style="margin: 5px 0 0 60%;"><apex:inputCheckbox value="{!noDuplicate}" style="border:10px solid black;" styleClass="slds-checkbox" /> &nbsp;&nbsp;  No Duplicate Found </p> 
                      
                         <apex:commandButton action="{!nextStep}" rendered="{!hasResults}" value="Next" styleClass="slds-button slds-button--neutral" /> -->
@@ -1176,7 +1188,12 @@ Modification Log:
                         </div>
                     </div>                       
                 </apex:outputPanel>
-                <div class="slds-card slds-m-horizontal--large slds-m-bottom--large hide-when-modal-open">
+                <!--IME 109-->
+                  <div class="slds-notify slds-notify--alert slds-theme--inverse-text slds-theme--alert-texture help" role="alert" >
+                     <span class="slds-assistive-text">Info</span>
+                     <h2 >Select the Lead you would like to use as the "Master Record", then select the individual field values that you would like to save to the Master Record.</h2>
+                 </div> 
+                <div class="slds-card slds-m-horizontal--large slds-m-bottom--large hide-when-modal-open slds-m-top--medium">                   
                     <div class="slds-card__header slds-grid slds-grid--align-spread">
                         <h2 class="slds-text-heading--small slds-truncate slds-align-middle">Selected Leads</h2>
                         <button type="button" class="slds-button slds-button--brand" data-toggle="modal" data-target="merge_warning_modal">Merge</button>

@@ -66,9 +66,6 @@
         <field>Lead.What_is_the_family_s_primary_spoken_lang__c</field>
     </columns>
     <columns>
-        <field>Lead.Is_We_Need_To_Expedite_The_Process__c</field>
-    </columns>
-    <columns>
         <field>CITY</field>
     </columns>
     <columns>
@@ -77,13 +74,11 @@
     <filter>
         <criteriaItems>
             <column>Lead.ChapterName__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Qualified</value>
         </criteriaItems>

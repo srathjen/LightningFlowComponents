@@ -52,13 +52,11 @@
     <filter>
         <criteriaItems>
             <column>Contact.Region_Chapter__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>contains</operator>
             <value>Test</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>1</value>
         </criteriaItems>

@@ -59,13 +59,11 @@
     <filter>
         <criteriaItems>
             <column>Account.npo02__TotalOppAmount__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>greaterThan</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Account.npe01__SYSTEM_AccountType__c</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Household Account</value>
         </criteriaItems>

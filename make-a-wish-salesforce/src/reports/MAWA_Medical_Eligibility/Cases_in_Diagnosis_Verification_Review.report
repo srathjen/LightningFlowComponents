@@ -52,7 +52,6 @@
     <filter>
         <criteriaItems>
             <column>Lead.Cases__r$RecordType</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Case.Diagnosis_Verification_Review</value>
         </criteriaItems>

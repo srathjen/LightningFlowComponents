@@ -18,13 +18,13 @@
             <start>185.81.100.1</start>
         </ipRanges>
         <ipRanges>
-            <end>162.248.187.255</end>
-            <start>162.248.184.1</start>
+            <description>Automation</description>
+            <end>182.19.39.173</end>
+            <start>182.19.39.173</start>
         </ipRanges>
         <ipRanges>
-            <description>Automation</description>
-            <end>103.219.207.45</end>
-            <start>103.219.207.45</start>
+            <end>162.248.187.255</end>
+            <start>162.248.184.1</start>
         </ipRanges>
         <ipRanges>
             <end>98.186.251.228</end>

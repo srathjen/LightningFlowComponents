@@ -49,6 +49,7 @@ lead_IntakUserIdMap.put(newLead,newLead.ChapterName__c);
                     }else if(!medicalReason.contains('Yes') && (oldMedicalReason == null || oldMedicalReason.contains('Yes'))){
                         rushLeadMap.put(newLead.Id, false);
                     }
+                    
                 }
                 
             }   

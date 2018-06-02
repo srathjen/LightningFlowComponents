@@ -34,37 +34,31 @@
         <booleanFilter>(((2 AND( 1 OR 3)) AND 4) AND 5) AND 6</booleanFilter>
         <criteriaItems>
             <column>Contact$is_Application__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Partial Submit,Fully Submit</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$RecordType.DeveloperName</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Volunteer_Contact</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$Hidden_Volunteer_OT_Status__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Orientation With Completed</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$is_Application__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Approved,Rejected</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>Contact$Region_Chapter__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>

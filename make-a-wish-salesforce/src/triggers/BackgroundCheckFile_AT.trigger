@@ -6,8 +6,10 @@ Description: This trigger is used to update the background check file file path 
 **********************************************************************************************/
 trigger BackgroundCheckFile_AT on Background_Check_File__c (After insert) {
     List<Id> bcIds = new List<Id>();
+    Map<Id,String> BCFileMap = new Map<Id,String>();
     for(Background_Check_File__c bc: Trigger.new){
         bcIds.add(bc.Id);
+        BCFileMap.put(bc.Id,String.valueOf(bc));
     }
-    AWSFilePath_AC.UpdateBackgroundCheckFilePath(bcIds);
+    AWSFilePath_AC.UpdateBackgroundCheckFilePath(bcIds,BCFileMap);
 }

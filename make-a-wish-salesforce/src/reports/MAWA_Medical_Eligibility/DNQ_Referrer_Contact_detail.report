@@ -58,7 +58,6 @@
     <filter>
         <criteriaItems>
             <column>Lead$Status</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>DNQ</value>
         </criteriaItems>

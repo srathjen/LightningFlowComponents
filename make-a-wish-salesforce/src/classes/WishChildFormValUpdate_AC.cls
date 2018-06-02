@@ -168,13 +168,41 @@ Public Class WishChildFormValUpdate_AC
             return updateCaseList;
         }
         Catch(Exception ex) {
-             Logvalue = string.join(LstLog,', ');
-             new ApexDebugLog().createLog(new ApexDebugLog.Error('WishChildFormValUpdate_AC','updateWishdetails',recId,ex,Logvalue));
-             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-             ApexPages.addMessage(myMsg);  
+            Logvalue = string.join(LstLog,', ');
+            Set<Id> caseIdSet = new Set<Id>();
+            for(Wish_Child_Form__c currRec : [SELECT id,Case__c,Case__r.ChapterName__c,Case__r.Contact.Language__c,When_thinking_some_of_my_wish_ideas_were__c,MY_WISH_IS_TO__c,This_is_my_wish_because__c,
+                                              To_me_the_most_important_part_of_my_wish__c, When_I_think_about_my_wish_I_imagine__c, Wish_Notes__c,
+                                              Availability_Time_Period_1__c,Availability_Time_Period_2__c,Availability_Time_Period_3__c, 
+                                              Any_impact_your_ability_to_join_wish__c,Details_about_Impact__c,Street__c,
+                                              Have_current_automobile_insurance__c,Automobile_insurance_provide_coverage__c,Is_your_family_comfortable_in_rendal_car__c,
+                                              Is_a_wheelchair_accessible_vehicle_neede__c,Participant_dietary_restrictions__c,Participant_dietary_restrictions_Note__c,
+                                              Participant_require_a_wheelchair__c,Participant_require_a_wheelchair_Note__c,Will_your_family_bring_wheelchair__c,
+                                              Will_your_family_bring_wheelchair_Note__c,Is_the_wheelchair_collapsible__c,Is_the_wheelchair_collapsible_Note__c,
+                                              Is_the_wheelchair_power__c,Is_the_wheelchair_power_Note__c,Participant_require_oxygen_how_often__c,Participant_require_oxygen_Note__c,
+                                              Medication_require_refrigeration__c,Medication_require_refrigeration_Note__c,Wish_child_receive_nursing_care__c,
+                                              Wish_child_receive_nursing_care_Note__c,Participant_have_allergies_to_food__c,Participant_have_allergies_to_food_Note__c,
+                                              Participant_require_medical_supplies__c,Participant_require_medical_suppliesNote__c,Additional_Requests__c,
+                                              Has_your_family_flown_before__c,Has_your_family_flown_before_Note__c,Will_an_interpreter_be_needed__c,Will_an_interpreter_be_needed_Note__c,
+                                              Will_a_rental_car_seat_s_be_needed__c,Will_a_rental_car_seat_s_be_needed_Note__c,
+                                              Sit_up_takeoff_landing_on_airplane__c,Sit_up_takeoff_landing_on_airplane_Note__c,Will_a_rental_stroller_be_needed__c,
+                                              Will_a_rental_stroller_be_needed_Note__c,Handicap_accommodations_be_required__c,Handicap_accommodations_be_required_No__c,
+                                              Participant_have_valid_passports__c,Participant_have_valid_passports_Note__c,Does_participant_have_valid_photo_ID__c,
+                                              Participant_have_valid_photo_ID_Note__c,Wish_Determination_Case_Id__c,Does_your_family_have_a_credit_card__c,Does_your_family_have_a_credit_card_Note__c,Bringing_Own_Wheel_Chair__c,RelatedContact__c,Requested_Participant_Name_forWheelchair__c,
+                                              Participant_Name_for_Dietary_Restriction__c,Requested_Participant_Name_for_Allergies__c,Medication_require_refrigeration_name__c,Pariticipant_name_havingWheelchair_Power__c,
+                                              Names_for_receiving_nursing_care__c,Requested_Participant_Name_for_Oxygen__c,Requested_Participant_Name_for_OtherNeed__c,Name_of_wheelchair_collapsible__c,Has_your_family_flown__c,Will_an_interpreter_be_needed_Details__c,
+                                              Will_a_rental_car_seat_s_Details__c,Are_all_requested_participants_Details__c,Will_a_rental_stroller_Details__c,Will_handicap_accessible_Details__c,Does_each_requested_participant_Details__c,Does_each_requested_participan__c,Does_your_family_Details__c,Race_Ethnicity__c,Driver_Information__c,
+                                              Does_Your_Medical_Insurance_Include__c,Does_Your_Medical_Insurance_Details__c FROM 
+                                              Wish_Child_Form__c WHERE Case__c IN : caseToUpdateMap.keySet() LIMIT 50000]){
+                                                  caseIdSet.add(currRec.Case__c);
+                                                  ErrorMessage_AC.createdebugRec('WishChildFormValUpdate_AC',String.valueof(currRec),String.valueOf(ex.getMessage()),'UpdateWishChildandWishFamily',currRec.Case__c,ex.getStackTraceString(),'Error');
+                                              }
+            for(Case currRec : [SELECT Id FROM Case WHERE Id IN: caseIdSet Limit 50000]){
+                //currRec.addError(Label.Debug_log_error_message);
+            }
+            
         }
         
-       return null; 
+        return null; 
     }
     
     //This method is used to update or create parent case and wish child and wish family contact.
@@ -548,10 +576,37 @@ Public Class WishChildFormValUpdate_AC
             }
         }
         Catch(Exception ex) {
-             Logvalue = string.join(LstLog,', ');
-             new ApexDebugLog().createLog(new ApexDebugLog.Error('WishChildFormValUpdate_AC','UpdateWishChildandWishFamily',recId,ex,Logvalue));
-             ApexPages.Message myMsg = new ApexPages.Message(ApexPages.Severity.ERROR,Label.Debug_log_error_message);
-             ApexPages.addMessage(myMsg);  
+            Logvalue = string.join(LstLog,', ');
+            Set<Id> caseIdSet = new Set<Id>();
+            for(Wish_Child_Form__c currRec : [SELECT id,Case__c,Case__r.ChapterName__c,Case__r.Contact.Language__c,When_thinking_some_of_my_wish_ideas_were__c,MY_WISH_IS_TO__c,This_is_my_wish_because__c,
+                                              To_me_the_most_important_part_of_my_wish__c, When_I_think_about_my_wish_I_imagine__c, Wish_Notes__c,
+                                              Availability_Time_Period_1__c,Availability_Time_Period_2__c,Availability_Time_Period_3__c, 
+                                              Any_impact_your_ability_to_join_wish__c,Details_about_Impact__c,Street__c,
+                                              Have_current_automobile_insurance__c,Automobile_insurance_provide_coverage__c,Is_your_family_comfortable_in_rendal_car__c,
+                                              Is_a_wheelchair_accessible_vehicle_neede__c,Participant_dietary_restrictions__c,Participant_dietary_restrictions_Note__c,
+                                              Participant_require_a_wheelchair__c,Participant_require_a_wheelchair_Note__c,Will_your_family_bring_wheelchair__c,
+                                              Will_your_family_bring_wheelchair_Note__c,Is_the_wheelchair_collapsible__c,Is_the_wheelchair_collapsible_Note__c,
+                                              Is_the_wheelchair_power__c,Is_the_wheelchair_power_Note__c,Participant_require_oxygen_how_often__c,Participant_require_oxygen_Note__c,
+                                              Medication_require_refrigeration__c,Medication_require_refrigeration_Note__c,Wish_child_receive_nursing_care__c,
+                                              Wish_child_receive_nursing_care_Note__c,Participant_have_allergies_to_food__c,Participant_have_allergies_to_food_Note__c,
+                                              Participant_require_medical_supplies__c,Participant_require_medical_suppliesNote__c,Additional_Requests__c,
+                                              Has_your_family_flown_before__c,Has_your_family_flown_before_Note__c,Will_an_interpreter_be_needed__c,Will_an_interpreter_be_needed_Note__c,
+                                              Will_a_rental_car_seat_s_be_needed__c,Will_a_rental_car_seat_s_be_needed_Note__c,
+                                              Sit_up_takeoff_landing_on_airplane__c,Sit_up_takeoff_landing_on_airplane_Note__c,Will_a_rental_stroller_be_needed__c,
+                                              Will_a_rental_stroller_be_needed_Note__c,Handicap_accommodations_be_required__c,Handicap_accommodations_be_required_No__c,
+                                              Participant_have_valid_passports__c,Participant_have_valid_passports_Note__c,Does_participant_have_valid_photo_ID__c,
+                                              Participant_have_valid_photo_ID_Note__c,Wish_Determination_Case_Id__c,Does_your_family_have_a_credit_card__c,Does_your_family_have_a_credit_card_Note__c,Bringing_Own_Wheel_Chair__c,RelatedContact__c,Requested_Participant_Name_forWheelchair__c,
+                                              Participant_Name_for_Dietary_Restriction__c,Requested_Participant_Name_for_Allergies__c,Medication_require_refrigeration_name__c,Pariticipant_name_havingWheelchair_Power__c,
+                                              Names_for_receiving_nursing_care__c,Requested_Participant_Name_for_Oxygen__c,Requested_Participant_Name_for_OtherNeed__c,Name_of_wheelchair_collapsible__c,Has_your_family_flown__c,Will_an_interpreter_be_needed_Details__c,
+                                              Will_a_rental_car_seat_s_Details__c,Are_all_requested_participants_Details__c,Will_a_rental_stroller_Details__c,Will_handicap_accessible_Details__c,Does_each_requested_participant_Details__c,Does_each_requested_participan__c,Does_your_family_Details__c,Race_Ethnicity__c,Driver_Information__c,
+                                              Does_Your_Medical_Insurance_Include__c,Does_Your_Medical_Insurance_Details__c FROM 
+                                              Wish_Child_Form__c WHERE Case__c IN : newWishMap.keySet() LIMIT 50000]){
+                                                  caseIdSet.add(currRec.Case__c);
+                                                  ErrorMessage_AC.createdebugRec('WishChildFormValUpdate_AC',String.valueof(currRec),String.valueOf(ex.getMessage()),'UpdateWishChildandWishFamily',currRec.Case__c,ex.getStackTraceString(),'Error');
+                                              }
+            for(Case currRec : [SELECT Id FROM Case WHERE Id IN: caseIdSet Limit 50000]){
+                //currRec.addError(Label.Debug_log_error_message);
+            }
         }
     }
     

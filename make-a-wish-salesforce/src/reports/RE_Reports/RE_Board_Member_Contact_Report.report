@@ -4,7 +4,6 @@
     <filter>
         <criteriaItems>
             <column>Contact$RecordType.DeveloperName</column>
-            <isUnlocked>false</isUnlocked>
             <operator>equals</operator>
             <value>Board_Member</value>
         </criteriaItems>

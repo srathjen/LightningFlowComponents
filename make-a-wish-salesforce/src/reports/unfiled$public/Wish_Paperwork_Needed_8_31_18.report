@@ -24,61 +24,51 @@
     <filter>
         <criteriaItems>
             <column>Case.Form_Tracking_Notes__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value></value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Anticipated_Start_Date__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>lessOrEqual</operator>
             <value>8/31/2018</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Form_Tracking_Notes__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>all required signatures submitted</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Form_Tracking_Notes__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>All required paperwork submitted</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Form_Tracking_Notes__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>all required signatures received</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Form_Tracking_Notes__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>all required paperwork received</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Anticipated_Start_Date__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>greaterThan</operator>
             <value>4/2/2018</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Form_Tracking_Notes__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>All required signatures submitted.</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Form_Tracking_Notes__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>all signatures submitted</value>
         </criteriaItems>
         <criteriaItems>
             <column>Case.Form_Tracking_Notes__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>all signatures submitted.</value>
         </criteriaItems>

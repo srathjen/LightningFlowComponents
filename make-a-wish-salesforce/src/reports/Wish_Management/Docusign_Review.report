@@ -25,25 +25,21 @@
     <filter>
         <criteriaItems>
             <column>FK_$Case.Wish_Assist__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_$Case.Test_Record__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>0</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_$Contact.Region_Chapter__c</column>
-            <isUnlocked>true</isUnlocked>
             <operator>equals</operator>
             <value>Make-A-Wish Arizona</value>
         </criteriaItems>
         <criteriaItems>
             <column>FK_CASE_STATUS</column>
-            <isUnlocked>true</isUnlocked>
             <operator>notEqual</operator>
             <value>Granted,Completed,Closed,Wish Scheduled,Open</value>
         </criteriaItems>

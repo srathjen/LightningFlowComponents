@@ -1,4 +1,4 @@
-<apex:page sidebar="false" applyBodyTag="false" cache="false" standardController="case" extensions="AbsentForm_AC">
+<apex:page sidebar="false" applyBodyTag="false" cache="false" standardController="case" extensions="AbsentParentSingleParentForm_AC">
     <apex:stylesheet value="{!URLFOR($Resource.MakeAWishAmericaDesign, 'css/Liability.css')}" /> 
     <style>
         .custPopup, .custPopup-main-message{
@@ -38,10 +38,38 @@
         
         <apex:messages style="font-family:'Lato';"/>
         <apex:pageBlock mode="main">
-        <font family="Lato"><apex:facet name="header">
-         <span style="font-family:'Lato';font-size:20px">&nbsp;&nbsp;&nbsp;Absent Parent Form </span>
-          </apex:facet></font>  
-                <apex:pageBlockSection columns="1">
+         <font family="Lato"><apex:facet name="header">
+                <span style="font-family:'Lato';font-size:20px">&nbsp;&nbsp;&nbsp;Absent Parent Form</span>
+                </apex:facet></font>  
+           <center> <apex:pageBlockSection columns="1">
+               <apex:pageBlockSectionItem >
+               <apex:outputText > <b>Child's Detail </b> </apex:outputText>
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+               <apex:outputText ><p style="font-family:'Lato';font-size:12px;">Select all children that form should be sent for.</p></apex:outputText>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                 </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+                    <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Name:"/>
+                    <apex:selectList style="font-family:'Lato';font-size:12px;" value="{!participantNameList}" multiselect="true" html-placeholder="Please Select All That Apply" rendered="{!ParticipantList.size > 0}">
+                        <apex:selectOptions value="{!ParticipantList}" />
+                        <apex:actionSupport event="onchange" action="{!updateParticipantName}" reRender="AbsentForm"/>
+                    </apex:selectList> 
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+               
+                
+
+               <apex:pageBlockSectionItem >
+               <apex:outputText > <b>Parent's Detail</b> </apex:outputText>
+               </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem >
+               <apex:outputText ><p style="font-family:'Lato';font-size:12px;">Select Parent/Guardian below that you want to send the form to.</p></apex:outputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
                 <apex:pageBlockSectionItem >
                     <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Name:"/>
                     <apex:selectList style="font-family:'Lato';font-size:12px;" value="{!recpName}" multiselect="false" size="1" html-placeholder="Please Select All That Apply">
@@ -49,13 +77,51 @@
                         <apex:actionSupport event="onchange" action="{!displayRelatedInfo}" reRender="AbsentForm"/>
                     </apex:selectList> 
                 </apex:pageBlockSectionItem>
-                <apex:pageBlockSectionItem >
-                    <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Email:" rendered="{!IF(recpName != '' ,true,false)}"/>
+                
+                
+                
+                <apex:pageBlockSectionItem rendered="{!IF(recpName != '' ,true,false)}" >
+                    <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Email:"/>
                     <apex:outputText ><span style="font-family:'Lato';font-size:12px;">{!recpEmail}</span></apex:outputText>
                 </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!IF(recpName != '' ,false,true)}">
+                    <apex:outputLabel style="font-family:'Lato';font-size:12px;" value=""/>
+                    <apex:outputText ><span style="font-family:'Lato';font-size:12px;"></span></apex:outputText>
+                </apex:pageBlockSectionItem>
+                
                 <apex:pageBlockSectionItem rendered="{!IF(recpRelType != '',true,false)}">
                     <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Relationship Type:" />
                     <apex:outputText ><span style="font-family:'Lato';font-size:12px;">{!recpRelType}</span></apex:outputText>
+                </apex:pageBlockSectionItem>
+                
+                
+                
+                <apex:pageBlockSectionItem rendered="{!IF(recpRelType != '',false,true)}">
+                    <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="" />
+                    <apex:outputText ><span style="font-family:'Lato';font-size:12px;"></span></apex:outputText>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                 <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="-------------------------------------- OR--------------------------------------------"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                 <apex:outputText ><p style="font-family:'Lato';font-size:12px;">Parent not listed? Enter name and email below.</p></apex:outputText>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                </apex:pageBlockSection></center>
+                 <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Name:"/>
+                    <apex:inputText style="font-family:'Lato';font-size:12px;" value="{!individualName}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem > 
+                    <apex:outputLabel style="font-family:'Lato';font-size:12px;" value="Email:"/>
+                    <apex:inputText style="font-family:'Lato';font-size:12px;" value="{!individualEmail}" />
                 </apex:pageBlockSectionItem>
             </apex:pageBlockSection>
             <apex:actionstatus id="counterStatus">

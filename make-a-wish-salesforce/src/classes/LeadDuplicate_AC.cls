@@ -897,19 +897,28 @@ Public Class LeadDuplicate_AC
         
         // Iterate over all contacts to find the field values and add them to row values
         for (SObject c : objs) {
-            // For lookup fields set the name as the values
-            if (fieldDesc.getRelationshipName() != null) {
-                Sobject obj = c.getSObject(fieldDesc.getRelationshipName());
-                if (obj != null) {
-                    values.add(String.valueOf(obj.get(getRelatedObjNameField(fieldDesc))));
+                // For lookup fields set the name as the values
+                if (fieldDesc.getRelationshipName() != null) {
+                    Sobject obj = c.getSObject(fieldDesc.getRelationshipName());
+                    if (obj != null) {
+                        values.add(String.valueOf(obj.get(getRelatedObjNameField(fieldDesc))));
+                    } else {
+                        values.add(null);
+                    }   
                 } else {
-                    values.add(null);
-                }   
-            } else {
-                values.add(String.valueOf(c.get(fieldName)));
-            }
-            
-            isNull &= (c.get(fieldName) == null); // Check if the value is null
+                    if(fieldName != 'DOB__c'){
+                        values.add(String.valueOf(c.get(fieldName)));
+                    }
+                    else{
+                        if(!String.isBlank(String.valueOf(c.get(fieldName)))) {
+                            Date dt = Date.valueOf(c.get(fieldName));
+                            values.add(dt.month() + '/' + dt.day() + '/' + dt.year());
+                        }
+                        
+                    }
+                }
+                
+                isNull &= (c.get(fieldName) == null); // Check if the value is null
             
             if (idx == 0) {
                 prev = String.valueOf(c.get(fieldName));
